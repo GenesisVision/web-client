@@ -8,7 +8,6 @@ import { compose } from "redux";
 import DetailsDescriptionSection from "shared/components/details/details-description-section/details-description/details-description-section";
 import { DetailsLimitsAvatar } from "shared/components/details/details-description-section/details-description/details-limits-avatar.block";
 import { DetailsTags } from "shared/components/details/details-description-section/details-description/details-tags.block";
-import PerformanceData from "shared/components/details/details-description-section/details-description/performance-data";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
@@ -26,6 +25,7 @@ import {
 } from "shared/utils/compose-url";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
+import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
 import { IDescriptionSection } from "./program-details.types";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
