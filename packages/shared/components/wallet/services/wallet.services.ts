@@ -1,7 +1,7 @@
 import {
   CancelablePromise,
   CopyTradingAccountInfo,
-  MultiWalletExternalTransaction,
+  WalletMultiAvailable,
   WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
@@ -53,7 +53,7 @@ export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
   return walletApi
-    .getWalletMultiAvailable(currency, authorization)
+    .getWalletAvailable(currency, authorization)
     .then(res => res.wallets);
 };
 
@@ -91,7 +91,7 @@ export const fetchCopytradingAccounts = () =>
 export const fetchMultiTransactionsExternal = (
   currency?: string,
   filters?: FilteringType
-): CancelablePromise<TableItems<MultiWalletExternalTransaction>> => {
+): CancelablePromise<TableItems<WalletMultiAvailable>> => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,
@@ -99,5 +99,5 @@ export const fetchMultiTransactionsExternal = (
   };
   return walletApi
     .getWalletExternalTransactions(authorization, filtering)
-    .then(mapToTableItems<MultiWalletExternalTransaction>("transactions"));
+    .then(mapToTableItems<WalletMultiAvailable>("transactions"));
 };
