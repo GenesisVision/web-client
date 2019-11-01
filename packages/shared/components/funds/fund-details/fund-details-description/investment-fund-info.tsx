@@ -1,7 +1,8 @@
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatValue } from "shared/utils/formatter";
@@ -10,11 +11,12 @@ interface IInvestmentFundInfoProps {
   fundDescription: FundDetailsFull;
 }
 
-const InvestmentFundInfo: React.FC<
-  IInvestmentFundInfoProps & WithTranslation
-> = ({ t, fundDescription }) => {
+const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
+  fundDescription
+}) => {
+  const [t] = useTranslation();
   return (
-    <div className="asset-details-description__statistic-container">
+    <StatisticItemList>
       <StatisticItem
         className={"details-description__short-statistic-item"}
         label={
@@ -47,8 +49,9 @@ const InvestmentFundInfo: React.FC<
           suffix=" %"
         />
       </StatisticItem>
-    </div>
+    </StatisticItemList>
   );
 };
 
-export default translate()(React.memo(InvestmentFundInfo));
+const InvestmentFundInfo = React.memo(_InvestmentFundInfo);
+export default InvestmentFundInfo;

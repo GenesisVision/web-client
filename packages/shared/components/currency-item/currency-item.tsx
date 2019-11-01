@@ -51,7 +51,7 @@ const _CurrencyItem: React.FC<Props> = ({
     </div>
   );
   return (
-    (clickable && name && (
+    (clickable && (
       <>
         <a href="http://example.com" onClick={openPopup}>
           {renderItemContent()}

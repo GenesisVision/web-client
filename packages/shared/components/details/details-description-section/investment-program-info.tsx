@@ -4,12 +4,11 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
+import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-
-import { ILevelCalculatorProps } from "../program-details.types";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;

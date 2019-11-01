@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -12,12 +16,12 @@ import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
 } from "../../program-details.constants";
-import { financialStatisticTableSelector } from "../../reducers/program-history.reducer";
-import { getFinancialStatistics } from "../../services/program-details.service";
 import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
 import ProgramFinancialStatisticRow from "./program-financial-statistic-row";
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
+  getItems,
+  dataSelector,
   showCommissionRebateSometime,
   currency,
   id,
@@ -38,8 +42,8 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           title={title}
         />
       )}
-      getItems={getFinancialStatistics(id)}
-      dataSelector={financialStatisticTableSelector}
+      getItems={getItems}
+      dataSelector={dataSelector}
       isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
@@ -70,6 +74,8 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
 };
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   showCommissionRebateSometime: boolean;
   id: string;
   title: string;

@@ -1,12 +1,12 @@
 import "shared/components/details/details.scss";
 
+import { PerformanceDataLoader } from "components/details/details-description-section/details-description/performance-data";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import GVButton from "shared/components/gv-button";
 import Page from "shared/components/page/page";
-import { PerformanceDataLoader } from "shared/components/programs/program-details/program-details-description/performance-data";
 import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
 
 import DetailsBlock, { DETAILS_BLOCK_TYPE } from "./details-block";

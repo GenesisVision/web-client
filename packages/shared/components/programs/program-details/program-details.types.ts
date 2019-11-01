@@ -3,7 +3,15 @@ import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { CurrencyEnum } from "shared/utils/types";
 
-export interface IProgramControlsProps {
+import { WithBlurLoaderProps } from "../../../decorators/with-blur-loader";
+
+export interface IProgramControlsProps
+  extends WithBlurLoaderProps<LevelsParamsInfo> {
+  canCloseAsset?: boolean;
+  isOwnProgram?: boolean;
+  canWithdraw?: boolean;
+  canInvest?: boolean;
+  canMakeSignalProvider?: boolean;
   isAuthenticated: boolean;
   programDescription: ProgramDetailsFullOld;
   data: LevelsParamsInfo;
