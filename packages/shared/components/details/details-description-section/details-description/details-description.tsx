@@ -8,6 +8,8 @@ import * as React from "react";
 import { DetailsInfo } from "shared/components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "shared/components/details/details-description-section/details-description/details-settings-buttons.block";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
+import { ToType } from "shared/components/link/link";
 
 const _DetailsDescription: React.FC<Props> = ({
   personalDetails,
@@ -22,8 +24,9 @@ const _DetailsDescription: React.FC<Props> = ({
     <DetailsInfo
       title={description.title}
       to={{
-        pathname: composeManagerDetailsUrl(description.manager.url),
-        state: `/ ${description.title}`
+        as: composeManagerDetailsUrl(description.manager.url),
+        state: `/ ${description.title}`,
+        pathname: MANAGER_DETAILS_FOLDER_ROUTE
       }}
       username={description.manager.username}
       socialLinks={description.manager.socialLinks}
@@ -42,8 +45,8 @@ const _DetailsDescription: React.FC<Props> = ({
 );
 
 interface Props {
-  notificationsUrl: string;
-  settingsUrl: string;
+  notificationsUrl: ToType;
+  settingsUrl: ToType;
   AssetDetailsAvatar: React.ComponentType<any>;
   AssetDetailsExtraBlock: React.ComponentType<any>;
   description: FundDetailsFull | ProgramDetailsFullOld;

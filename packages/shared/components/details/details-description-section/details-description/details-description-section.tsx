@@ -8,6 +8,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import DetailsDescription from "shared/components/details/details-description-section/details-description/details-description";
+import { ToType } from "shared/components/link/link";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
   notificationsUrl,
@@ -38,8 +39,8 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
-  notificationsUrl: string;
-  settingsUrl: string;
+  notificationsUrl: ToType;
+  settingsUrl: ToType;
   personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
   description: FundDetailsFull | ProgramDetailsFullOld;
   AssetDetailsExtraBlock: React.ComponentType<any>;

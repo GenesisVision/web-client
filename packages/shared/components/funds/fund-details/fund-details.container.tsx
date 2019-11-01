@@ -31,6 +31,8 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { IDescriptionSection } from "./fund-details.types";
 import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
+import { FUND_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
+import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   descriptionSection,
@@ -44,8 +46,16 @@ const _FundDetailsContainer: React.FC<Props> = ({
       <DetailsDescriptionSection
         personalDetails={description.personalFundDetails}
         description={description}
-        notificationsUrl={composeFundNotificationsUrl(description.url)}
-        settingsUrl={composeFundSettingsUrl(description.url)}
+        notificationsUrl={{
+          as: composeFundNotificationsUrl(description.url),
+          pathname: FUND_NOTIFICATIONS_FOLDER_ROUTE,
+          state: `/ ${description.title}`
+        }}
+        settingsUrl={{
+          as: composeFundSettingsUrl(description.url),
+          pathname: FUND_SETTINGS_FOLDER_ROUTE,
+          state: `/ ${description.title}`
+        }}
         AssetDetailsExtraBlock={() => (
           <div className="details-description__info-block">
             <h4 className="details-description__subheading">

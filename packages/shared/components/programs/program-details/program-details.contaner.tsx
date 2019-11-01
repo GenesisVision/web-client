@@ -11,6 +11,7 @@ import { DetailsTags } from "shared/components/details/details-description-secti
 import PerformanceData from "shared/components/details/details-description-section/details-description/performance-data";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
+import { PROGRAM_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Page from "shared/components/page/page";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
@@ -20,6 +21,7 @@ import {
 } from "shared/decorators/with-blur-loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
+import { PROGRAM_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
 import {
   composeProgramNotificationsUrl,
   composeProgramSettingsUrl
@@ -51,8 +53,16 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsDescriptionSection
         personalDetails={description.personalProgramDetails}
         description={description}
-        notificationsUrl={composeProgramNotificationsUrl(description.url)}
-        settingsUrl={composeProgramSettingsUrl(description.url)}
+        notificationsUrl={{
+          pathname: PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
+          as: composeProgramNotificationsUrl(description.url),
+          state: `/ ${description.title}`
+        }}
+        settingsUrl={{
+          as: composeProgramSettingsUrl(description.url),
+          pathname: PROGRAM_SETTINGS_FOLDER_ROUTE,
+          state: `/ ${description.title}`
+        }}
         AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
         PerformanceData={() => (
           <PerformanceData

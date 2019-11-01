@@ -10,13 +10,14 @@ import { useTranslation } from "react-i18next";
 import DetailsFavorite from "./controls/details-favorite";
 import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
+import { ToType } from "shared/components/link/link";
 
 const _DetailsSettingsButtons: React.FC<{
   personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
   id: string;
   title: string;
-  notificationsUrl: string;
-  settingsUrl: string;
+  notificationsUrl: ToType;
+  settingsUrl: ToType;
 }> = ({ personalDetails, id, title, notificationsUrl, settingsUrl }) => {
   const [t] = useTranslation();
   return (
@@ -26,16 +27,14 @@ const _DetailsSettingsButtons: React.FC<{
         isFavorite={personalDetails && personalDetails.isFavorite}
       />
       <DetailsNotification
-        title={title}
-        url={notificationsUrl}
+        to={notificationsUrl}
         hasNotifications={personalDetails && personalDetails.hasNotifications}
       />
       {personalDetails &&
         personalDetails.isOwnProgram &&
         personalDetails.canCloseAsset && (
           <DetailsSettingControl
-            title={title}
-            url={settingsUrl}
+            to={settingsUrl}
             text={t("program-details-page.description.program-settings")}
           />
         )}

@@ -6,11 +6,11 @@ import Link, { ToType } from "shared/components/link/link";
 
 import DetailsDescriptionControl from "./details-description-control";
 
-const _DetailsSettingControl: React.FC<Props> = ({ url, title, text }) => {
+const _DetailsSettingControl: React.FC<Props> = ({ to, text }) => {
   return (
     <DetailsDescriptionControl
       tag={Link}
-      to={url}
+      to={to}
       className="details-description-control--button"
       text={text}
     >
@@ -20,8 +20,7 @@ const _DetailsSettingControl: React.FC<Props> = ({ url, title, text }) => {
 };
 
 export interface Props {
-  url: ToType;
-  title: string;
+  to: ToType;
   text: string;
 }
 

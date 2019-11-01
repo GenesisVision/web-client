@@ -6,6 +6,7 @@ import SocialLinksBlock from "shared/components/social-links-block/social-links-
 
 import { DetailsManager } from "./details-manager.block";
 import { DetailsStrategy } from "./details-strategy.block";
+import { TUrl } from "./details.constants";
 
 const _DetailsInfo: React.FC<Props> = ({
   title,
@@ -28,10 +29,7 @@ const _DetailsInfo: React.FC<Props> = ({
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  to: {
-    pathname: string;
-    state: string;
-  };
+  to: TUrl;
   username: string;
   socialLinks: SocialLinkViewModel[];
   description: string;
