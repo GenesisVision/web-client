@@ -25,13 +25,9 @@ export interface IProgramWithdrawalContainerProps extends IDialogProps {
 }
 
 export interface IDescriptionSection {
-  ProgramControls: React.ComponentType<IProgramControlsProps>;
-  ProgramWithdrawContainer: React.ComponentType<
-    IProgramWithdrawalContainerProps
-  >;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
+  Controls: React.ComponentType<IProgramControlsProps>;
+  WithdrawContainer: React.ComponentType<IProgramWithdrawalContainerProps>;
+  ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
 export type HistoryCountsType = {

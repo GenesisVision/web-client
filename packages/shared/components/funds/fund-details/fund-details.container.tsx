@@ -37,7 +37,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
   data: description
 }) => {
   const [t] = useTranslation();
-  const FundControls = descriptionSection.FundControls;
+  const FundControls = descriptionSection.Controls;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={description.title}>
@@ -98,7 +98,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         id={description.id}
         currency={"GVT" as CurrencyEnum}
         personalDetails={description.personalFundDetails as InvestmentDetails}
-        WithdrawContainer={descriptionSection.FundWithdrawalContainer}
+        WithdrawContainer={descriptionSection.WithdrawContainer}
       />
       <FundDetailsStatisticSection />
       <FundDetailsHistorySection id={description.id} />

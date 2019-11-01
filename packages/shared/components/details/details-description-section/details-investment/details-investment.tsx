@@ -49,7 +49,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   id,
   personalDetails,
   WithdrawContainer,
-  ProgramReinvestingWidget
+  ReinvestingWidget
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
@@ -97,7 +97,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           assetCurrency={currency}
           personalDetails={personalDetails}
           WithdrawContainer={WithdrawContainer}
-          ProgramReinvestingWidget={ProgramReinvestingWidget}
+          ReinvestingWidget={ReinvestingWidget}
         />
       )}
       {tab === TABS.EVENTS && (
@@ -129,9 +129,7 @@ interface OwnProps {
   id: string;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
+  ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
 const mapDispatchToProps = (

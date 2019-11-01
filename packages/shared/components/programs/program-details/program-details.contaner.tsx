@@ -44,7 +44,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = description.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
-  const ProgramControls = descriptionSection.ProgramControls;
+  const Controls = descriptionSection.Controls;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={description.title}>
@@ -73,7 +73,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           />
         )}
         Controls={() => (
-          <ProgramControls
+          <Controls
             loaderData={levelsParamsLoaderData}
             data={levelsParameters!}
             programDescription={description}
@@ -110,8 +110,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         personalDetails={
           description.personalProgramDetails as InvestmentDetails
         }
-        ProgramReinvestingWidget={descriptionSection.ProgramReinvestingWidget}
-        WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
+        ReinvestingWidget={descriptionSection.ReinvestingWidget}
+        WithdrawContainer={descriptionSection.WithdrawContainer}
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection

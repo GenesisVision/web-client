@@ -8,8 +8,8 @@ import InvestmentFundControls from "./components/investment-fund-controls";
 
 const _FundDetailsPage: React.FC = () => {
   const descriptionSection = {
-    FundWithdrawalContainer: FundWithdrawalContainer,
-    FundControls: InvestmentFundControls
+    WithdrawContainer: FundWithdrawalContainer,
+    Controls: InvestmentFundControls
   };
 
   return <FundDetailsPageCommon descriptionSection={descriptionSection} />;
