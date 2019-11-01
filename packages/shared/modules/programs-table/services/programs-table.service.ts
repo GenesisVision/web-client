@@ -205,7 +205,6 @@ export const getFiltersFromContext = ({
   const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
     asPath.slice(pathname.length + 1)
   );
-  const { currency } = reduxStore.getState().accountSettings;
   const skipAndTake = calculateSkipAndTake({
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
@@ -216,7 +215,6 @@ export const getFiltersFromContext = ({
       ...DEFAULT_PROGRAM_TABLE_FILTERS,
       ...other
     }),
-    currencySecondary: currency,
     sorting
   } as FetchProgramsFiltersType;
 };

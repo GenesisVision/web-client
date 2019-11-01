@@ -212,7 +212,7 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
   });
-  console.log(currency);
+
   return {
     ...composeFilters(FUNDS_TABLE_FILTERS, {
       ...DEFAULT_FUND_TABLE_FILTERS,

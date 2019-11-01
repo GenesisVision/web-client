@@ -14,7 +14,6 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import { STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
@@ -40,28 +39,26 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 }) => {
   const { t } = useTranslation();
   const {
-    // status,
-    // availableInvestmentInCurrency,
-    // statistic,
     logo,
     level,
     levelProgress,
     color,
-    currency: requestCurrency,
-    // periodStarts,
-    // periodEnds,
+    periodStarts,
+    periodEnds,
     chart,
     personalDetails,
     availableToInvest,
     id,
-    tags
+    tags,
+    balance,
+    investorsCount
   } = program;
   const programLinkProps = {
     state: `/ ${title}`,
     pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
     as: composeProgramDetailsUrl(program.url)
   };
-  //const requestCurrency = program.statistic.balance.currency;
+  const { currency, amount } = balance;
   return (
     <TableRow
       className={classNames({
@@ -99,33 +96,30 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
         <NumberFormat
-          value={formatCurrencyValue(
-            6,
-            requestCurrency
-          )} /*statistic.balance.amount*/
-          suffix={` ${requestCurrency}`}
+          value={formatCurrencyValue(amount, currency)}
+          suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      {/*<TableCell className="programs-table__cell programs-table__cell--currency">
-        {currency}
-      </TableCell>*/}
       <TableCell className="programs-table__cell programs-table__cell--investors">
-        {/*{statistic.investorsCount}*/ 1}
+        {investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatCurrencyValue(availableToInvest, requestCurrency)}{" "}
-        {requestCurrency}
+        <NumberFormat
+          value={formatCurrencyValue(availableToInvest, currency)}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {/*{periodStarts && (*/}
-        {/*  <ProgramPeriodPie*/}
-        {/*    condition={status !== STATUS.CLOSED}*/}
-        {/*    loader={t("program-period.program-closed")}*/}
-        {/*    start={periodStarts}*/}
-        {/*    end={periodEnds}*/}
-        {/*  />*/}
-        {/*)}*/}
+        {periodStarts && (
+          <ProgramPeriodPie
+            condition={true}
+            loader={t("program-period.program-closed")}
+            start={periodStarts}
+            end={periodEnds}
+          />
+        )}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
         {distanceDate(program.creationDate)}

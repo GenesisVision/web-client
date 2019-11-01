@@ -25,7 +25,7 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
 );
 
-export const currenciesSelector = apiFieldSelector(
+export const currenciesSelector = apiFieldSelector( // TODO currency-selector-container
   platformDataSelector,
   fieldSelector(
     state => state.assetInfo.programInfo.availableProgramCurrencies
@@ -43,20 +43,8 @@ export const programCurrenciesSelector = apiFieldSelector(
 
 export const platformCurrenciesSelector = apiFieldSelector(
   platformDataSelector,
-  fieldSelector(state => [
-    { name: "BTC", color: "#F7931A", rateToGvt: 1 },
-    { name: "ETH", color: "#627EEA", rateToGvt: 1 },
-    { name: "USDT", color: "#26A17B", rateToGvt: 1 },
-    { name: "USD", color: "#207137", rateToGvt: 1 },
-    { name: "GVT", color: "#16B9AD", rateToGvt: 1 }
-  ]), // state.platformCurrencies
-  [
-    { name: "BTC", color: "#F7931A", rateToGvt: 1 },
-    { name: "ETH", color: "#627EEA", rateToGvt: 1 },
-    { name: "USDT", color: "#26A17B", rateToGvt: 1 },
-    { name: "USD", color: "#207137", rateToGvt: 1 },
-    { name: "GVT", color: "#16B9AD", rateToGvt: 1 }
-  ]
+  fieldSelector(state => state.commonInfo.platformCurrencies),
+  []
 );
 
 export const programTagsSelector = apiFieldSelector(
