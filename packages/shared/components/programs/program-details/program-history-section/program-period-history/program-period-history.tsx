@@ -10,6 +10,10 @@ import { TableCell, TableRow } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import withLoader from "shared/decorators/with-loader";
 import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
@@ -19,11 +23,14 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
-import { periodHistoryTableSelector } from "../../reducers/program-history.reducer";
-import { getPeriodHistory } from "../../services/program-details.service";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
-const _ProgramPeriodHistory: React.FC<Props> = ({ currency, id }) => {
+const _ProgramPeriodHistory: React.FC<Props> = ({
+  getItems,
+  dataSelector,
+  currency,
+  id
+}) => {
   const [t] = useTranslation();
   return (
     <TableContainer
@@ -34,8 +41,8 @@ const _ProgramPeriodHistory: React.FC<Props> = ({ currency, id }) => {
           getExportFileUrl={filesService.getPeriodExportFileUrl}
         />
       )}
-      getItems={getPeriodHistory(id)}
-      dataSelector={periodHistoryTableSelector}
+      getItems={getItems}
+      dataSelector={dataSelector}
       isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
@@ -222,6 +229,8 @@ interface ProgramPeriodHistoryPopupProps extends ProgramPeriodHistoryRowProps {
 }
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   id: string;
   currency: CurrencyEnum;
 }

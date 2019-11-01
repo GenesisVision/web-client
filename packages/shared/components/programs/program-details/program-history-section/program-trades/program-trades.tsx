@@ -8,19 +8,21 @@ import { generateProgramTradesColumns } from "shared/components/programs/program
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import filesService from "shared/services/file-service";
 
-import {
-  tradesSelector,
-  tradesTableSelector
-} from "../../reducers/program-history.reducer";
-import { getTrades } from "../../services/program-details.service";
+import { tradesSelector } from "../../reducers/program-history.reducer";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  getItems,
+  dataSelector,
   showSwaps,
   showTickets,
   programId
@@ -46,8 +48,8 @@ const _ProgramTrades: React.FC<Props> = ({
           </div>
         </div>
       )}
-      getItems={getTrades(programId)}
-      dataSelector={tradesTableSelector}
+      getItems={getItems}
+      dataSelector={dataSelector}
       isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
@@ -78,6 +80,8 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   showSwaps: boolean;
   showTickets: boolean;
   programId: string;
