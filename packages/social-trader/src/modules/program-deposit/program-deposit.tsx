@@ -1,14 +1,12 @@
 import * as React from "react";
 import DepositContainer from "shared/components/deposit/components/deposit-container";
-import {
-  getProgramInfoCreator,
-  programInvestCreator
-} from "shared/components/deposit/services/program-deposit.service";
+import { programInvestCreator } from "shared/components/deposit/services/program-deposit.service";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
-import managerApi from "shared/services/api-client/manager-api";
 import { CurrencyEnum } from "shared/utils/types";
+
+import investmentsApi from "shared/services/api-client/investments-api";
 
 const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
@@ -19,8 +17,8 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
 }) => (
   <DepositContainer
     asset={ASSET.PROGRAM}
-    assetInvest={programInvestCreator(managerApi.investIntoProgram)}
-    fetchInfo={getProgramInfoCreator(managerApi.getProgramInvestInfo)}
+    assetInvest={programInvestCreator(investmentsApi.investIntoProgram)}
+    // fetchInfo={getProgramInfoCreator(managerApi.getProgramInvestInfo)}
     id={id}
     hasEntryFee
     currency={currency}

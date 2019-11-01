@@ -24,7 +24,7 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  fetchInfo,
+  // fetchInfo,
   onApply
 }) => {
   const dispatch = useDispatch<ReduxDispatch>();
@@ -32,7 +32,7 @@ const _DepositContainer: React.FC<Props> = ({
   const getDepositInfo = useCallback(
     () =>
       Promise.all([
-        fetchInfo(id, currency || stateCurrency),
+        // fetchInfo(id, currency || stateCurrency),
         dispatch(fetchBaseWallets())
       ]).then(([investInfo, wallets]) => ({ investInfo, wallets })),
     [id, currency, stateCurrency]
@@ -68,7 +68,7 @@ interface Props extends IDialogProps {
   asset: ASSET;
   id: string;
   onApply: () => void;
-  fetchInfo: ReturnType<TGetAssetInfoCreator>;
+  // fetchInfo: ReturnType<TGetAssetInfoCreator>;
   assetInvest: ReturnType<TAssetInvestCreator>;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
