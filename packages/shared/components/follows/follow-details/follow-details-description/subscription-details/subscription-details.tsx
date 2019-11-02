@@ -1,12 +1,8 @@
 import "./subscription-details.scss";
 
-import {
-  AttachToSignalProviderModeEnum,
-  PersonalProgramDetailsFull,
-  SignalSubscriptionModeEnum
-} from "gv-api-web";
+import { PersonalProgramDetailsFull, SubscriptionMode } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
@@ -16,7 +12,6 @@ import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _SubscriptionDetails: React.FC<Props> = ({
-  t,
   currency,
   personalDetails: {
     signalSubscription: {
@@ -29,128 +24,131 @@ const _SubscriptionDetails: React.FC<Props> = ({
   },
   openPopup,
   rate
-}) => (
-  <div className="details-investment__block details-investment__block--subscription">
-    <div className="details-investment__heading">
-      <h5>{t("subscription-details.title")}</h5>
-      <button
-        type="button"
-        onClick={openPopup}
-        className="subscription-details__edit-btn"
-      >
-        {t("subscription-details.edit")}
-      </button>
+}) => {
+  const [t] = useTranslation();
+  return (
+    <div className="details-investment__block details-investment__block--subscription">
+      <div className="details-investment__heading">
+        <h5>{t("subscription-details.title")}</h5>
+        <button
+          type="button"
+          onClick={openPopup}
+          className="subscription-details__edit-btn"
+        >
+          {t("subscription-details.edit")}
+        </button>
+      </div>
+      <StatisticItemList className="details-investment__short-statistic">
+        <StatisticItem
+          className="details-investment__statistic-item"
+          accent
+          label={t("fund-details-page.description.profit")}
+        >
+          <Profitability value={`${totalProfit}`}>
+            {roundPercents(totalProfit)}
+          </Profitability>
+        </StatisticItem>
+        <StatisticItem
+          className="details-investment__statistic-item"
+          accent
+          label={t("fund-details-page.description.status")}
+        >
+          {t("subscription-details.active")}
+        </StatisticItem>
+        <StatisticItem
+          accent
+          label={t("subscription-details.subscription-type")}
+          className="details-investment__statistic-item"
+        >
+          <SubscriptionTypeValue
+            currency={currency}
+            rate={rate}
+            mode={mode}
+            percent={percent}
+            fixedVolume={fixedVolume}
+          />
+        </StatisticItem>
+        <StatisticItem
+          className="details-investment__statistic-item"
+          accent
+          label={t(`subscription-details.tolerance-percentage`)}
+        >
+          <NumberFormat
+            value={openTolerancePercent}
+            suffix="%"
+            displayType="text"
+          />
+        </StatisticItem>
+      </StatisticItemList>
     </div>
-    <StatisticItemList className="details-investment__short-statistic">
-      <StatisticItem
-        className="details-investment__statistic-item"
-        accent
-        label={t("fund-details-page.description.profit")}
-      >
-        <Profitability value={`${totalProfit}`}>
-          {roundPercents(totalProfit)}
-        </Profitability>
-      </StatisticItem>
-      <StatisticItem
-        className="details-investment__statistic-item"
-        accent
-        label={t("fund-details-page.description.status")}
-      >
-        {t("subscription-details.active")}
-      </StatisticItem>
-      <StatisticItem
-        accent
-        label={t("subscription-details.subscription-type")}
-        className="details-investment__statistic-item"
-      >
-        <SubscriptionTypeValue
-          currency={currency}
-          rate={rate}
-          mode={mode}
-          percent={percent}
-          fixedVolume={fixedVolume}
-        />
-      </StatisticItem>
-      <StatisticItem
-        className="details-investment__statistic-item"
-        accent
-        label={t(`subscription-details.tolerance-percentage`)}
-      >
-        <NumberFormat
-          value={openTolerancePercent}
-          suffix="%"
-          displayType="text"
-        />
-      </StatisticItem>
-    </StatisticItemList>
-  </div>
-);
+  );
+};
 
 const _SubscriptionTypeValue: React.FC<ISubscriptionTypeValueProps> = ({
-  t,
   mode,
   percent,
   fixedVolume,
   rate,
   currency
-}) => (
-  <>
+}) => {
+  const [t] = useTranslation();
+  return (
     <>
-      {t(`subscription-details.modes.${mode}`)}
-      {mode === modes.percentage && (
-        <NumberFormat
-          value={percent}
-          prefix={`. ${t("subscription-details.volume")} `}
-          suffix="%"
-          displayType="text"
-        />
-      )}
+      <>
+        {t(`subscription-details.modes.${mode}`)}
+        {mode === modes.percentage && (
+          <NumberFormat
+            value={percent}
+            prefix={`. ${t("subscription-details.volume")} `}
+            suffix="%"
+            displayType="text"
+          />
+        )}
+        {mode === modes.fixed && (
+          <NumberFormat
+            value={formatCurrencyValue(fixedVolume, "USD")}
+            prefix=" "
+            suffix=" USD"
+            displayType="text"
+          />
+        )}
+      </>
       {mode === modes.fixed && (
         <NumberFormat
-          value={formatCurrencyValue(fixedVolume, "USD")}
-          prefix=" "
-          suffix=" USD"
+          value={formatCurrencyValue(
+            convertFromCurrency(fixedVolume, rate),
+            currency
+          )}
+          prefix=" (≈ "
+          suffix={` ${currency})`}
           displayType="text"
         />
       )}
     </>
-    {mode === modes.fixed && (
-      <NumberFormat
-        value={formatCurrencyValue(
-          convertFromCurrency(fixedVolume, rate),
-          currency
-        )}
-        prefix=" (≈ "
-        suffix={` ${currency})`}
-        displayType="text"
-      />
-    )}
-  </>
-);
-const SubscriptionTypeValue = translate()(React.memo(_SubscriptionTypeValue));
+  );
+};
+const SubscriptionTypeValue = React.memo(_SubscriptionTypeValue);
 
-interface ISubscriptionTypeValueProps extends WithTranslation {
-  mode: SignalSubscriptionModeEnum;
+interface ISubscriptionTypeValueProps {
+  mode: SubscriptionMode;
   percent: number;
   fixedVolume: number;
   rate: number;
   currency: CurrencyEnum;
 }
 
-const modes: { [key: string]: AttachToSignalProviderModeEnum } = {
+const modes: { [key: string]: SubscriptionMode } = {
   byBalance: "ByBalance",
   percentage: "Percent",
   fixed: "Fixed"
 };
 
-interface OwnProps {
+interface Props {
   currency: CurrencyEnum;
   personalDetails: PersonalProgramDetailsFull;
-  openPopup(): void;
+  openPopup: () => void;
   rate: number;
 }
 
-interface Props extends OwnProps, WithTranslation {}
-
-const SubscriptionDetails = translate()(React.memo(_SubscriptionDetails));
+const SubscriptionDetails = React.memo(_SubscriptionDetails);
 export default SubscriptionDetails;
