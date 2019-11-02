@@ -2,7 +2,6 @@ import { ChartSimple, FundAssetsState } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
-  CartesianGrid,
   ComposedChart,
   ContentRenderer,
   ResponsiveContainer,
@@ -11,14 +10,9 @@ import {
   YAxis
 } from "recharts";
 import GVColors from "shared/components/gv-styles/gv-colors";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import chartXAxis from "./chart-components/chart-xaxis";
-import {
-  ChartGradient,
-  getStrokeColor,
-  gradientOffset
-} from "./chart-gradient/chart-gradient";
+import { getStrokeColor } from "./chart-gradient/chart-gradient";
 
 const _ProfitChart: React.FC<Props> = ({
   tooltip,
@@ -32,7 +26,6 @@ const _ProfitChart: React.FC<Props> = ({
   const firstEquity = equities[0];
 
   const firstEquityValues = firstEquity.map(x => x.value);
-  const off = gradientOffset(firstEquityValues);
   const areaStrokeColor = getStrokeColor(firstEquityValues);
   return (
     <ResponsiveContainer>
