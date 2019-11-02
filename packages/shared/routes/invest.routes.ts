@@ -16,7 +16,7 @@ export const FOLLOW_FACET_ROUTE = `${GV_FOLLOW_ROUTE}/${FACETS}/:${SLUG_URL_PARA
 export const FOLLOW_FACET_FOLDER_ROUTE = `${GV_FOLLOW_ROUTE}/${FACETS}/[id]`;
 export const FOLLOW_TAB_ROUTE = `${GV_FOLLOW_ROUTE}/:tab`;
 
-export const FUND = "funds";
+export const FUND = "fund";
 export const FUNDS = `${FUND}s`;
 export const GV_FUNDS_ROUTE = `${INVEST_ROUTE}/${FUNDS}`;
 export const FUND_DETAILS_SLUG_ROUTE = `${GV_FUNDS_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
@@ -26,7 +26,7 @@ export const FUND_FACET_ROUTE = `${GV_FUNDS_ROUTE}/${FACETS}/:${SLUG_URL_PARAM_N
 export const FUND_FACET_FOLDER_ROUTE = `${GV_FUNDS_ROUTE}/${FACETS}/[id]`;
 export const FUND_TAB_ROUTE = `${GV_FUNDS_ROUTE}/:tab`;
 
-export const PROGRAM = "programs";
+export const PROGRAM = "program";
 export const PROGRAMS = `${PROGRAM}s`;
 export const GV_PROGRAMS_ROUTE = `${INVEST_ROUTE}/${PROGRAMS}`;
 export const PROGRAM_DETAILS_SLUG_ROUTE = `${GV_PROGRAMS_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
