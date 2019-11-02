@@ -18,14 +18,21 @@ import {
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { platformCurrenciesSelector, programTagsSelector } from "shared/reducers/platform-reducer";
+import {
+  platformCurrenciesSelector,
+  programTagsSelector
+} from "shared/reducers/platform-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
 
 import { toggleFavoriteFollowDispatchable } from "../../favorite-asset/services/favorite-follow.service";
 import { followsDataSelector } from "../reducers/follows-table.reducers";
-import FollowsTable from "./follows-table";
-import { DEFAULT_FOLLOW_TABLE_FILTERS, FOLLOW_TYPE_FILTER_NAME, FOLLOW_TYPES } from "./follows.constants";
 import { composeTypeFilter } from "./follow-table.helpers";
+import FollowsTable from "./follows-table";
+import {
+  DEFAULT_FOLLOW_TABLE_FILTERS,
+  FOLLOW_TYPE_FILTER_NAME,
+  FOLLOW_TYPES
+} from "./follows.constants";
 
 const ITEMS_ON_PAGE = 12;
 
@@ -80,7 +87,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
           />
           <SelectFilter
             name={FOLLOW_TYPE_FILTER_NAME}
-            label={t("follows-page.filters."+FOLLOW_TYPE_FILTER_NAME)}
+            label={t("follows-page.filters." + FOLLOW_TYPE_FILTER_NAME)}
             value={filtering[FOLLOW_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={composeTypeFilter(FOLLOW_TYPES)}
             onChange={updateFilter}
