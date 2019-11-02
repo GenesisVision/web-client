@@ -65,7 +65,9 @@ const _DetailsInvestment: React.FC<Props> = ({
     isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
   }, [isAuthenticated, events]);
   const haveInvestment =
-    haveActiveInvestment(personalDetails) || haveSubscription(personalDetails);
+    asset !== ASSET.FOLLOW &&
+    (haveActiveInvestment(personalDetails) ||
+      haveSubscription(personalDetails));
   const showInvestment = haveEvents || haveInvestment;
   useEffect(() => {
     if (haveEvents && !haveInvestment) setTab(null, TABS.EVENTS);
