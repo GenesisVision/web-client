@@ -7,7 +7,7 @@ import {
 import getParams from "shared/utils/get-params";
 import { MiddlewareDispatch, TGetState } from "shared/utils/types";
 
-export const getCurrentFacet = () => (
+/*export const getCurrentFacet = () => (
   dispatch: MiddlewareDispatch,
   getState: TGetState
 ): FacetDataType => {
@@ -22,4 +22,4 @@ export const getCurrentFacet = () => (
   const facet = programsFacets.find((x: ProgramFacet) => x.url === facetUrl);
   if (!facet) return { notFound: true };
   return { facet, isPending: false };
-};
+};*/
