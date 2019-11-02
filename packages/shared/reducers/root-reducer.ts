@@ -49,6 +49,7 @@ import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 
 import { FollowDetailsState } from "../components/follows/follow-details/reducers/follow-details.reducer";
+import followNotificationsReducer from "../modules/follow-notifications/reducers/follow-notifications.reducers";
 import followsReducer, {
   FollowsListState
 } from "../modules/follows-table/reducers/follows-table.reducers";
@@ -82,6 +83,7 @@ export const sharedRootReducers = {
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
+  followNotifications: followNotificationsReducer,
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
   manager: managerReducer,
@@ -105,6 +107,7 @@ export type RootState = Readonly<{
   programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
   emailPending: EmailPendingState;
+  followNotifications: ProgramNotificationsState;
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;
   authData: AuthState;
