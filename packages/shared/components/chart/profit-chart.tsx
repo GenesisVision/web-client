@@ -24,14 +24,10 @@ const _ProfitChart: React.FC<Props> = ({
   tooltip,
   equities,
   equityCharts,
-  chartCurrencies
+  colors
 }) => {
   const firstEquityChart = equityCharts[0];
-  if (
-    firstEquityChart.length === 0 ||
-    equityCharts.length === 0 ||
-    !chartCurrencies
-  )
+  if (firstEquityChart.length === 0 || equityCharts.length === 0 || !colors)
     return null;
   const firstEquity = equities[0];
 
@@ -41,15 +37,6 @@ const _ProfitChart: React.FC<Props> = ({
   return (
     <ResponsiveContainer>
       <ComposedChart data={firstEquity} margin={{ top: 20 }}>
-        <defs>
-          <ChartGradient
-            offset={off}
-            name="equityProgramChartFill"
-            color={areaStrokeColor}
-            startOpacity={0.1}
-            stopOpacity={0.01}
-          />
-        </defs>
         {chartXAxis(
           firstEquityChart[0].date,
           firstEquityChart[firstEquity.length - 1].date
@@ -64,7 +51,6 @@ const _ProfitChart: React.FC<Props> = ({
         />
 
         {tooltip && <Tooltip content={tooltip} />}
-        <CartesianGrid vertical={false} strokeWidth={0.1} />
         {equities.map((equity, i) => (
           // @ts-ignore
           <Area
@@ -73,13 +59,9 @@ const _ProfitChart: React.FC<Props> = ({
             type="monotone"
             data={equity}
             connectNulls={true}
-            stroke={
-              chartCurrencies && chartCurrencies[i]
-                ? chartCurrencies[i].color
-                : areaStrokeColor
-            }
+            stroke={colors && colors[i] ? colors[i].color : areaStrokeColor}
             fill={`url(#equityProgramChartFill)`}
-            strokeWidth={3}
+            strokeWidth={1}
             dot={false}
             unit=" %"
             isAnimationActive={false}
@@ -97,8 +79,13 @@ interface Props {
     | ContentRenderer<TooltipProps>;
   equityCharts: EquityChartType[];
   equities: EquityChartType[];
-  chartCurrencies?: TChartCurrency[];
+  colors?: TChartColor[];
 }
+
+export type TChartColor = {
+  name?: string;
+  color: string;
+};
 
 export type EquityChartElementType = ChartSimple & {
   assetsState?: FundAssetsState;

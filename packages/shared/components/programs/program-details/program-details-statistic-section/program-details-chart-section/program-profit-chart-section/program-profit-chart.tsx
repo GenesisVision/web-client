@@ -8,11 +8,8 @@ import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-cur
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
-const _ProgramProfitChart: React.FC<Props> = ({
-  profitChart,
-  chartCurrencies
-}) => {
-  const equityCharts = profitChart.map(({ equityChart }) => equityChart);
+const _ProgramProfitChart: React.FC<Props> = ({ charts, colors }) => {
+  const equityCharts = charts.map(({ equityChart }) => equityChart);
   const equities = equityCharts.map(equityChart =>
     (equityChart as EquityChartType).map(x => ({
       date: (x.date.getTime() as unknown) as Date,
@@ -24,14 +21,14 @@ const _ProgramProfitChart: React.FC<Props> = ({
       tooltip={ProgramProfitTooltip}
       equityCharts={equityCharts}
       equities={equities}
-      chartCurrencies={chartCurrencies}
+      colors={colors}
     />
   );
 };
 
 interface Props {
-  profitChart: ProfitChartDataType;
-  chartCurrencies?: TChartCurrency[];
+  charts: ProfitChartDataType;
+  colors?: TChartCurrency[];
 }
 
 const ProgramProfitChart = React.memo(_ProgramProfitChart);
