@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "shared/components/header/header.container";
 import NotificationsContainer from "shared/components/notifications/components/notifications-container";
+import useRole from "shared/hooks/use-role.hook";
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
 import {
   mobileMenuItems,
@@ -12,7 +13,6 @@ import {
   topMenuItems,
   topMenuItemsUnion
 } from "shared/routes/menu";
-import useRole from "shared/hooks/use-role.hook";
 
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   const dispatch = useDispatch();

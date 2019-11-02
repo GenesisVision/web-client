@@ -30,9 +30,6 @@ const _ProgramControls: React.FC<Props> = ({
         isAuthenticated={isAuthenticated}
         levelsParameters={levelsParameters}
       />
-      {isOwnProgram && programDescription.isSignalProgram && (
-        <SignalProviderControls programDescription={programDescription} />
-      )}
     </div>
   );
 };

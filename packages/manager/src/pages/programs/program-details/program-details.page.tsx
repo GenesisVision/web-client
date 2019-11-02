@@ -6,8 +6,8 @@ import ProgramControls from "./components/program-controls/program-controls";
 
 const _ProgramDetailsPage: React.FC = () => {
   const descriptionSection = {
-    ProgramControls: ProgramControls,
-    ProgramWithdrawContainer: ProgramWithdrawContainer
+    Controls: ProgramControls,
+    WithdrawContainer: ProgramWithdrawContainer
   };
 
   return <ProgramDetailsPageCommon descriptionSection={descriptionSection} />;

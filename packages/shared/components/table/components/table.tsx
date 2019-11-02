@@ -20,8 +20,8 @@ import {
 import { getCookie, setCookie } from "shared/utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
-import { RenderBodyItemFuncType } from "./table.types";
 import TableBodyContainer from "./table-body";
+import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
   loaderData,

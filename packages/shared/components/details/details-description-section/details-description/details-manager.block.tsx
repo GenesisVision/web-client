@@ -3,6 +3,7 @@ import "./details-description.scss";
 import * as React from "react";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
+
 import { TUrl } from "./details.constants";
 
 const _DetailsManager: React.FC<{

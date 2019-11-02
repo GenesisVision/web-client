@@ -10,8 +10,8 @@ import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
-import { PROGRAMS_COLUMNS } from "./programs.constants";
 import { programListLoaderData } from "./program-table.loader-data";
+import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 

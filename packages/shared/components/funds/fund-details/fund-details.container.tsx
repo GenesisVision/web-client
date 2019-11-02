@@ -11,6 +11,7 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Page from "shared/components/page/page";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { ASSET } from "shared/constants/constants";
@@ -20,6 +21,7 @@ import {
 } from "shared/decorators/with-blur-loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
+import { FUND_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
 import {
   composeFundNotificationsUrl,
   composeFundSettingsUrl
@@ -31,15 +33,13 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { IDescriptionSection } from "./fund-details.types";
 import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
-import { FUND_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
-import { FUND_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 
 const _FundDetailsContainer: React.FC<Props> = ({
   descriptionSection,
   data: description
 }) => {
   const [t] = useTranslation();
-  const FundControls = descriptionSection.FundControls;
+  const FundControls = descriptionSection.Controls;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={description.title}>
@@ -108,7 +108,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         id={description.id}
         currency={"GVT" as CurrencyEnum}
         personalDetails={description.personalFundDetails as InvestmentDetails}
-        WithdrawContainer={descriptionSection.FundWithdrawalContainer}
+        WithdrawContainer={descriptionSection.WithdrawContainer}
       />
       <FundDetailsStatisticSection />
       <FundDetailsHistorySection id={description.id} />

@@ -6,11 +6,11 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { ToType } from "shared/components/link/link";
 
 import DetailsFavorite from "./controls/details-favorite";
 import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
-import { ToType } from "shared/components/link/link";
 
 const _DetailsSettingsButtons: React.FC<{
   personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;

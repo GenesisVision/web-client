@@ -6,12 +6,12 @@ import {
 } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
 import { IComposeDefaultFilter } from "shared/components/table/components/table.types";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import {
   CURRENCY_MAP_VALUE,
   programsCurrencyMap,
   programsDateRangeFilter
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
-import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
 export const CURRENCY_MAP_NAME = "currency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";

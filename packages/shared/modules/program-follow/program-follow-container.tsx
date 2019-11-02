@@ -91,8 +91,8 @@ const _ProgramFollowContainer: React.FC<Props> = ({
 
 interface Props {
   open: boolean;
-  onClose(): void;
-  onApply(): void;
+  onClose: () => void;
+  onApply: () => void;
   currency: CurrencyEnum;
   id: string;
   signalSubscription: SignalSubscription;

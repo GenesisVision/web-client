@@ -34,7 +34,7 @@ const _Investment: React.FC<Props> = ({
   notice,
   personalDetails,
   WithdrawContainer,
-  ProgramReinvestingWidget
+  ReinvestingWidget
 }) => {
   const role = useRole();
   const isInvestor = role === ROLE.INVESTOR;
@@ -165,10 +165,10 @@ const _Investment: React.FC<Props> = ({
               displayType="text"
             />
           </StatisticItem>
-          {ProgramReinvestingWidget &&
+          {ReinvestingWidget &&
             personalDetails.isInvested &&
             personalDetails.canInvest && (
-              <ProgramReinvestingWidget
+              <ReinvestingWidget
                 programId={id}
                 isReinvesting={personalDetails.isReinvest}
               />
@@ -230,9 +230,7 @@ interface Props {
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ProgramReinvestingWidget?: React.ComponentType<
-    IProgramReinvestingContainerOwnProps
-  >;
+  ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
 const Investment = React.memo(_Investment);
