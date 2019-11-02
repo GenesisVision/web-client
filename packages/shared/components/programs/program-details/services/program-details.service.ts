@@ -96,6 +96,7 @@ export const getProgramStatistic = (
     dateTo: period.end,
     maxPointCount: 100
   };
+  // @ts-ignore
   return Promise.all([
     programsApi.getProgramProfitChart(programId, chartFilter),
     programsApi.getProgramBalanceChart(programId, chartFilter)
