@@ -13,12 +13,12 @@ import {
   SOCIAL_LINKS_ROUTE
 } from "shared/components/profile/profile.constants";
 import ProfilePage from "shared/components/profile/profile/profile.page";
+import ReferralProgramPage from "shared/components/profile/referral-program/referral-program.page";
 import SecurityPage from "shared/components/profile/security/security.page";
 import SettingsPage from "shared/components/profile/settings/settings.page";
 
 import ProfileEditPage from "./edit/edit.page";
 import SocialLinksPage from "./social-links/social-links.page";
-import ReferralProgramPage from "shared/components/profile/referral-program/referral-program.page";
 
 const ProfilePageContainer = () => <ProfilePage />;
 

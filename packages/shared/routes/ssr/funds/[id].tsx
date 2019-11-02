@@ -6,9 +6,9 @@ import {
   dispatchFundId
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import withDefaultLayout from "shared/decorators/with-default-layout";
-import { CurrencyEnum, NextPageWithRedux } from "shared/utils/types";
-import { getCookie } from "shared/utils/cookie";
 import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import { getCookie } from "shared/utils/cookie";
+import { CurrencyEnum, NextPageWithRedux } from "shared/utils/types";
 
 export const fundDetailsCreator = (Component: React.ComponentType) => {
   const Page: NextPageWithRedux<{}> = () => {

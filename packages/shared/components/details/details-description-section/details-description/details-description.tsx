@@ -7,9 +7,9 @@ import {
 import * as React from "react";
 import { DetailsInfo } from "shared/components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "shared/components/details/details-description-section/details-description/details-settings-buttons.block";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { ToType } from "shared/components/link/link";
+import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 
 const _DetailsDescription: React.FC<Props> = ({
   personalDetails,
