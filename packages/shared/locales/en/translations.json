@@ -1282,8 +1282,20 @@
         "label": "Amount"
       }
     },
+    "follows": "FOLLOWs",
     "programs": "PROGRAMS",
     "funds": "FUNDS",
+    "follow": {
+      "title": "Follow notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Follow news and updates",
+        "ProgramNewsAndUpdates": {
+          "enabled-alert": "Enabled follow news and updates notifications",
+          "disabled-alert": "Disabled follow news and updates notifications"
+        }
+      }
+    },
     "program": {
       "title": "Program notifications",
       "general": {
