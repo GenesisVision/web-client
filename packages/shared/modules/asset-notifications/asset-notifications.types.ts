@@ -33,6 +33,7 @@ export enum NOTIFICATIONS {
   PlatformEmergency = "PlatformEmergency",
   FundNewsAndUpdates = "FundNewsAndUpdates",
   FundRebalancing = "FundRebalancing",
+  FollowNewsAndUpdates = "ProgramNewsAndUpdates",
   ProgramNewsAndUpdates = "ProgramNewsAndUpdates",
   ProgramEndOfPeriod = "ProgramEndOfPeriod"
 }
