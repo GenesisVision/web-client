@@ -1,6 +1,5 @@
 import {
   InvestmentEventViewModels,
-  ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
@@ -19,29 +18,25 @@ import clearableReducer from "shared/reducers/clearable.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
 import {
-  PROGRAM_FINANCIAL_STATISTIC,
-  PROGRAM_OPEN_POSITIONS,
-  PROGRAM_PERIOD_HISTORY,
-  PROGRAM_SUBSCRIPTIONS,
-  PROGRAM_TRADES
-} from "../actions/follow-details.actions";
-import {
-  PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
-  PROGRAM_SUBSCRIBERS_FILTERS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
+  FOLLOW_OPEN_POSITIONS,
+  FOLLOW_SUBSCRIBERS_DEFAULT_FILTERS,
+  FOLLOW_SUBSCRIBERS_FILTERS,
+  FOLLOW_SUBSCRIPTIONS,
+  FOLLOW_TRADES,
+  FOLLOW_TRADES_DEFAULT_FILTERS,
+  FOLLOW_TRADES_FILTERS
 } from "../follow-details.constants";
 
-export const programEventsSelector = (state: RootState) =>
-  state.programDetails.programHistory.events;
+export const followEventsSelector = (state: RootState) =>
+  state.followDetails.followHistory.events;
 
-export const programEventsTableSelector = tableSelectorCreator<
+export const followEventsTableSelector = tableSelectorCreator<
   RootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
->(programEventsSelector, "events");
+>(followEventsSelector, "events");
 
-export const programEventsReducer = tableReducerFactory<
+export const followEventsReducer = tableReducerFactory<
   InvestmentEventViewModels
 >({
   clearable: true,
@@ -52,7 +47,7 @@ export const programEventsReducer = tableReducerFactory<
 });
 
 export const openPositionsSelector = (state: RootState) =>
-  state.programDetails.programHistory.openPositions;
+  state.followDetails.followHistory.openPositions;
 
 export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
@@ -61,12 +56,12 @@ export const openPositionsTableSelector = tableSelectorCreator<
 >(openPositionsSelector, "trades");
 
 export const openPositionsReducer = tableReducerFactory<TradesViewModel>({
-  type: PROGRAM_OPEN_POSITIONS,
+  type: FOLLOW_OPEN_POSITIONS,
   paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
 });
 
 export const tradesSelector = (state: RootState) =>
-  state.programDetails.programHistory.trades;
+  state.followDetails.followHistory.trades;
 
 export const tradesTableSelector = tableSelectorCreator<
   RootState,
@@ -75,50 +70,14 @@ export const tradesTableSelector = tableSelectorCreator<
 >(tradesSelector, "trades");
 
 export const tradesReducer = tableReducerFactory<TradesViewModel>({
-  type: PROGRAM_TRADES,
+  type: FOLLOW_TRADES,
   paging: DEFAULT_PAGING,
-  filtering: PROGRAM_TRADES_FILTERS,
-  defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-});
-
-const periodHistorySelector = (state: RootState) =>
-  state.programDetails.programHistory.periodHistory;
-
-export const periodHistoryTableSelector = tableSelectorCreator<
-  RootState,
-  ProgramPeriodsViewModel,
-  ProgramPeriodsViewModel
->(periodHistorySelector, "periods");
-
-export const periodHistoryReducer = tableReducerFactory<
-  ProgramPeriodsViewModel
->({
-  type: PROGRAM_PERIOD_HISTORY,
-  paging: DEFAULT_PAGING,
-  filtering: PROGRAM_TRADES_FILTERS,
-  defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-});
-
-const financialStatisticSelector = (state: RootState) =>
-  state.programDetails.programHistory.financialStatistic;
-
-export const financialStatisticTableSelector = tableSelectorCreator<
-  RootState,
-  ProgramPeriodsViewModel,
-  ProgramPeriodsViewModel
->(financialStatisticSelector, "periods");
-
-export const financialStatisticReducer = tableReducerFactory<
-  ProgramPeriodsViewModel
->({
-  type: PROGRAM_FINANCIAL_STATISTIC,
-  paging: DEFAULT_PAGING,
-  filtering: PROGRAM_TRADES_FILTERS,
-  defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+  filtering: FOLLOW_TRADES_FILTERS,
+  defaultFilters: FOLLOW_TRADES_DEFAULT_FILTERS
 });
 
 const subscriptionsSelector = (state: RootState) =>
-  state.programDetails.programHistory.subscriptions;
+  state.followDetails.followHistory.subscriptions;
 
 export const subscriptionsTableSelector = tableSelectorCreator<
   RootState,
@@ -129,28 +88,24 @@ export const subscriptionsTableSelector = tableSelectorCreator<
 export const subscriptionsReducer = tableReducerFactory<
   SignalProviderSubscribers
 >({
-  type: PROGRAM_SUBSCRIPTIONS,
+  type: FOLLOW_SUBSCRIPTIONS,
   paging: DEFAULT_PAGING,
-  filtering: PROGRAM_SUBSCRIBERS_FILTERS,
-  defaultFilters: PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS
+  filtering: FOLLOW_SUBSCRIBERS_FILTERS,
+  defaultFilters: FOLLOW_SUBSCRIBERS_DEFAULT_FILTERS
 });
 
-export type ProgramHistoryState = Readonly<{
+export type FollowHistoryState = Readonly<{
   events: ITableState<InvestmentEventViewModels>;
   openPositions: ITableState<TradesViewModel>;
   trades: ITableState<TradesViewModel>;
-  periodHistory: ITableState<ProgramPeriodsViewModel>;
-  financialStatistic: ITableState<ProgramPeriodsViewModel>;
   subscriptions: ITableState<SignalProviderSubscribers>;
 }>;
 
 const followHistoryReducer = clearableReducer(
-  combineReducers<ProgramHistoryState>({
-    events: programEventsReducer,
+  combineReducers<FollowHistoryState>({
+    events: followEventsReducer,
     openPositions: openPositionsReducer,
     trades: tradesReducer,
-    periodHistory: periodHistoryReducer,
-    financialStatistic: financialStatisticReducer,
     subscriptions: subscriptionsReducer
   })
 );

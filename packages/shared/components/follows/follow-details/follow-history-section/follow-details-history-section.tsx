@@ -6,66 +6,51 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import { ROLE } from "shared/constants/constants";
+import ProgramOpenPositions from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
+import ProgramSubscriptions from "shared/components/programs/program-details/program-history-section/program-subscriptions/program-subscriptions";
+import ProgramTrades from "shared/components/programs/program-details/program-history-section/program-trades/program-trades";
 import useTab from "shared/hooks/tab.hook";
-import useRole from "shared/hooks/use-role.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
-  financialStatisticTableSelector,
   openPositionsTableSelector,
-  periodHistoryTableSelector,
   subscriptionsTableSelector,
   tradesTableSelector
 } from "../reducers/follow-history.reducer";
 import {
-  getFinancialStatistics,
+  getFollowHistoryCounts,
   getOpenPositions,
-  getPeriodHistory,
-  getProgramHistoryCounts,
   getSubscriptions,
   getTrades
 } from "../services/follow-details.service";
-import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
-import ProgramOpenPositions from "./program-open-positions/program-open-positions";
-import ProgramPeriodHistory from "./program-period-history/program-period-history";
-import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
-import ProgramTrades from "./program-trades/program-trades";
 
-const _ProgramDetailsHistorySection: React.FC<Props> = ({
+const _FollowDetailsHistorySection: React.FC<Props> = ({
   showCommissionRebateSometime,
-  programId,
+  id,
   showSwaps,
   showTickets,
   programCurrency,
   isSignalProgram,
-  isOwnProgram,
-  title
+  isOwnProgram
 }) => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const role = useRole();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
 
   const dispatch = useDispatch();
   const openPositionsCount = useSelector(openPositionsTableSelector).itemsData
     .data.total;
-  const periodHistoryCount = useSelector(periodHistoryTableSelector).itemsData
-    .data.total;
   const subscriptionsCount = useSelector(subscriptionsTableSelector).itemsData
     .data.total;
-  const financialStatisticCount = useSelector(financialStatisticTableSelector)
-    .itemsData.data.total;
   const tradesCount = useSelector(tradesTableSelector).itemsData.data.total;
 
   useEffect(() => {
-    programId && dispatch(getProgramHistoryCounts(programId));
-  }, [dispatch, programId]);
+    id && dispatch(getFollowHistoryCounts(id));
+  }, [dispatch, id]);
 
-  const isManager = role === ROLE.MANAGER;
   return (
     <DetailsBlock table>
       <div className="details-history__header">
@@ -82,66 +67,37 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
               count={tradesCount}
             />
             <GVTab
-              value={TABS.PERIOD_HISTORY}
-              label={t("program-details-page.history.tabs.period-history")}
-              count={periodHistoryCount}
-            />
-            <GVTab
               value={TABS.SUBSCRIBERS}
               label={t("program-details-page.history.tabs.subscriptions")}
               count={subscriptionsCount}
               visible={isAuthenticated && isSignalProgram && isOwnProgram}
-            />
-            <GVTab
-              value={TABS.FINANCIAL_STATISTIC}
-              label={t("program-details-page.history.tabs.financial-statistic")}
-              count={financialStatisticCount}
-              visible={isAuthenticated && isManager && isOwnProgram}
             />
           </GVTabs>
         </div>
       </div>
       {tab === TABS.TRADES && (
         <ProgramTrades
-          getItems={getTrades(programId)}
+          getItems={getTrades(id)}
           dataSelector={tradesTableSelector}
           showSwaps={showSwaps}
           showTickets={showTickets}
-          programId={programId}
+          programId={id}
         />
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
-          getItems={getOpenPositions(programId)}
+          getItems={getOpenPositions(id)}
           dataSelector={openPositionsTableSelector}
-          programId={programId}
+          programId={id}
           currency={programCurrency}
         />
       )}
       {tab === TABS.SUBSCRIBERS && (
         <ProgramSubscriptions
-          getItems={getSubscriptions(programId)}
+          getItems={getSubscriptions(id)}
           dataSelector={subscriptionsTableSelector}
-          id={programId}
+          id={id}
           currency={currency}
-        />
-      )}
-      {tab === TABS.FINANCIAL_STATISTIC && (
-        <ProgramFinancialStatistic
-          getItems={getFinancialStatistics(programId)}
-          dataSelector={financialStatisticTableSelector}
-          showCommissionRebateSometime={showCommissionRebateSometime}
-          id={programId}
-          currency={programCurrency}
-          title={title}
-        />
-      )}
-      {tab === TABS.PERIOD_HISTORY && (
-        <ProgramPeriodHistory
-          getItems={getPeriodHistory(programId)}
-          dataSelector={periodHistoryTableSelector}
-          id={programId}
-          currency={programCurrency}
         />
       )}
     </DetailsBlock>
@@ -151,9 +107,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 enum TABS {
   TRADES = "trades",
   OPEN_POSITIONS = "openPositions",
-  SUBSCRIBERS = "subscribers",
-  FINANCIAL_STATISTIC = "financialStatistic",
-  PERIOD_HISTORY = "periodHistory"
+  SUBSCRIBERS = "subscribers"
 }
 
 interface Props {
@@ -161,11 +115,10 @@ interface Props {
   isSignalProgram: boolean;
   showSwaps: boolean;
   showTickets: boolean;
-  programId: string;
+  id: string;
   programCurrency: CurrencyEnum;
   isOwnProgram: boolean;
-  title: string;
 }
 
-const FollowDetailsHistorySection = React.memo(_ProgramDetailsHistorySection);
+const FollowDetailsHistorySection = React.memo(_FollowDetailsHistorySection);
 export default FollowDetailsHistorySection;

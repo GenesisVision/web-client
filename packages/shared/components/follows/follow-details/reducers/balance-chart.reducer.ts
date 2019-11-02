@@ -5,21 +5,21 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_BALANCE_CHART } from "../actions/follow-details.actions";
+import { FETCH_FOLLOW_BALANCE_CHART } from "../follow-details.constants";
 
-export type ProgramBalanceChartDataType = ProgramBalanceChart;
+export type FollowBalanceChartDataType = ProgramBalanceChart;
 
-export type ProgramBalanceChartState = IApiState<ProgramBalanceChartDataType>;
+export type FollowBalanceChartState = IApiState<FollowBalanceChartDataType>;
 
-export const programBalanceChartSelector = apiSelector<
-  ProgramBalanceChartDataType,
+export const followBalanceChartSelector = apiSelector<
+  FollowBalanceChartDataType,
   RootState
->(state => state.programDetails.balanceChart);
+>(state => state.followDetails.balanceChart);
 
-const programBalanceChartReducer = apiReducerFactory<
-  ProgramBalanceChartDataType
->({
-  apiType: FETCH_PROGRAM_BALANCE_CHART
-});
+const followBalanceChartReducer = apiReducerFactory<FollowBalanceChartDataType>(
+  {
+    apiType: FETCH_FOLLOW_BALANCE_CHART
+  }
+);
 
-export default programBalanceChartReducer;
+export default followBalanceChartReducer;

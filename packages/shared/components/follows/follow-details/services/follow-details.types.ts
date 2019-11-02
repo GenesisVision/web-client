@@ -5,7 +5,7 @@ import {
 } from "gv-api-web";
 import { CurrencyEnum } from "shared/utils/types";
 
-export type ProgramDetailsStatistic = {
+export type FollowDetailsStatistic = {
   trades: number;
   successTradesPercent: number;
   profitFactor: number;
@@ -18,7 +18,7 @@ export type ProgramDetailsStatistic = {
   tradingVolume: number;
 };
 
-export type ProgramDetailsProfitChart = {
+export type FollowDetailsProfitChart = {
   balance: number;
   timeFrameProgramCurrencyProfit: number;
   timeFrameGvtProfit: number;
@@ -27,8 +27,8 @@ export type ProgramDetailsProfitChart = {
   equityChart: ChartSimple[];
 };
 
-export type ProgramStatisticResult = {
-  statistic: ProgramDetailsStatistic;
+export type FollowStatisticResult = {
+  statistic: FollowDetailsStatistic;
   profitChart: ProgramProfitChart;
   balanceChart: ProgramBalanceChart;
 };

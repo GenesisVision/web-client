@@ -1,69 +1,33 @@
 import "shared/components/details/details.scss";
 
 import React, { useEffect } from "react";
-import { connect, ResolveThunks, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
-import {
-  dispatchPlatformLevelsParameters,
-  dispatchProgramDescription
-} from "shared/components/programs/program-details/services/program-details.service";
+import { useSelector } from "react-redux";
 
-import ProgramDetailsContainer from "./follow-details.contaner";
+import FollowDetailsContainer from "./follow-details.contaner";
 import { IDescriptionSection } from "./follow-details.types";
-import { programDescriptionSelector } from "./reducers/description.reducer";
+import {
+  followDescriptionSelector,
+  followIdSelector
+} from "./reducers/description.reducer";
+import { dispatchFollowDescription } from "./services/follow-details.service";
 
-const _ProgramDetailsPage: React.FC<Props> = ({
-  service: { dispatchProgramDescription, dispatchPlatformLevelsParameters },
-  descriptionSection
-}) => {
-  const description = useSelector(programDescriptionSelector);
+const _FollowDetailsPage: React.FC<Props> = ({ descriptionSection }) => {
+  const id = useSelector(followIdSelector);
+  const description = useSelector(followDescriptionSelector);
   useEffect(() => {
-    dispatchProgramDescription();
+    dispatchFollowDescription(id)();
   }, []);
-  useEffect(() => {
-    description && dispatchPlatformLevelsParameters(description.currency);
-  }, [description]);
   return (
-    <ProgramDetailsContainer
+    <FollowDetailsContainer
       descriptionSection={descriptionSection}
       data={description!}
     />
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchProgramDescription,
-      dispatchPlatformLevelsParameters
-    },
-    dispatch
-  )
-});
-
-interface OwnProps {
+interface Props {
   descriptionSection: IDescriptionSection;
 }
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchProgramDescription: typeof dispatchProgramDescription;
-  dispatchPlatformLevelsParameters: typeof dispatchPlatformLevelsParameters;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
 
-interface Props extends OwnProps, DispatchProps {}
-
-const FollowDetailsPage = compose<React.ComponentType<OwnProps>>(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ProgramDetailsPage);
+const FollowDetailsPage = React.memo(_FollowDetailsPage);
 export default FollowDetailsPage;

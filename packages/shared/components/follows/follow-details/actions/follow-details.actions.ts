@@ -1,10 +1,7 @@
 import {
   CancelablePromise,
   InvestmentEventViewModels,
-  LevelsParamsInfo,
   ProgramBalanceChart,
-  ProgramDetailsFullOld,
-  ProgramPeriodsViewModel,
   ProgramProfitChart,
   SignalProviderSubscribers,
   TradesViewModel
@@ -17,36 +14,34 @@ import { TStatisticCurrencyAction } from "shared/components/details/reducers/sta
 import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
-import { ProgramIdState } from "../reducers/id.reducer";
-import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
+import {
+  FETCH_FOLLOW_BALANCE_CHART,
+  FETCH_FOLLOW_DESCRIPTION,
+  FETCH_FOLLOW_PROFIT_CHART,
+  FOLLOW_OPEN_POSITIONS,
+  FOLLOW_SUBSCRIPTIONS,
+  FOLLOW_TRADES,
+  SET_FOLLOW_ID,
+  SET_FOLLOW_STATISTIC_CURRENCY,
+  SET_FOLLOW_STATISTIC_PERIOD
+} from "../follow-details.constants";
+import { FollowDetailsDataType } from "../follow-details.types";
+import { FollowIdState } from "../reducers/id.reducer";
+import { FollowProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
 } from "../services/follow-details.service";
 
-export const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
-export const SET_PROGRAM_STATISTIC_CURRENCY = "SET_PROGRAM_STATISTIC_CURRENCY";
-export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
-export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
-export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
-export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
-export const SET_PROGRAM_ID = "SET_PROGRAM_ID";
-
-export const PROGRAM_OPEN_POSITIONS = "PROGRAM_OPEN_POSITIONS";
-export const PROGRAM_TRADES = "PROGRAM_TRADES";
-export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
-export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
-export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
-
-const sendProgramChartRequest = (
+const sendFollowChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
 ): CancelablePromise<ProgramProfitChart> =>
+  // @ts-ignore
   programsApi.getProgramProfitChart(id, {
     dateFrom: start,
     dateTo: end,
@@ -57,14 +52,14 @@ const sendProgramChartRequest = (
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
 ): TStatisticCurrencyAction => ({
-  type: SET_PROGRAM_STATISTIC_CURRENCY,
+  type: SET_FOLLOW_STATISTIC_CURRENCY,
   payload: currency
 });
 
 export const statisticPeriodAction = (
   period: ChartDefaultPeriod
 ): TStatisticPeriodAction => ({
-  type: SET_PROGRAM_STATISTIC_PERIOD,
+  type: SET_FOLLOW_STATISTIC_PERIOD,
   payload: period
 });
 
@@ -80,23 +75,24 @@ export const fetchEventsAction = (
   })
 });
 
-export const fetchProgramProfitChartAction = (
+export const fetchFollowProfitChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currencies: CurrencyEnum[]
-): ApiAction<ProgramProfitChartDataType> => ({
-  type: FETCH_PROGRAM_PROFIT_CHART,
+): ApiAction<FollowProfitChartDataType> => ({
+  type: FETCH_FOLLOW_PROFIT_CHART,
   payload: Promise.all(
-    currencies.map(currency => sendProgramChartRequest(period, id, currency))
-  ) as CancelablePromise<ProgramProfitChartDataType>
+    currencies.map(currency => sendFollowChartRequest(period, id, currency))
+  ) as CancelablePromise<FollowProfitChartDataType>
 });
 
-export const fetchProgramBalanceChartAction = (
+export const fetchFollowBalanceChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currency: CurrencyEnum
 ): ApiAction<ProgramBalanceChart> => ({
-  type: FETCH_PROGRAM_BALANCE_CHART,
+  type: FETCH_FOLLOW_BALANCE_CHART,
+  // @ts-ignore
   payload: programsApi.getProgramBalanceChart(id, {
     currency,
     dateFrom: period.start,
@@ -105,26 +101,19 @@ export const fetchProgramBalanceChartAction = (
   })
 });
 
-export const fetchProgramDescriptionAction = (
+export const fetchFollowDescriptionAction = (
   id: string,
   authorization: string
-): ApiAction<ProgramDetailsFullOld> => ({
-  type: FETCH_PROGRAM_DESCRIPTION,
+): ApiAction<FollowDetailsDataType> => ({
+  type: FETCH_FOLLOW_DESCRIPTION,
   payload: programsApi.getProgramDetails(id, { authorization })
-});
-
-export const fetchLevelParametersAction = (
-  currency: CurrencyEnum
-): ApiAction<LevelsParamsInfo> => ({
-  type: FETCH_LEVEL_PARAMETERS,
-  payload: platformApi.getLevelsParams({ currency })
 });
 
 export const fetchOpenPositionsAction = (
   id: string,
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => ({
-  type: PROGRAM_OPEN_POSITIONS,
+  type: FOLLOW_OPEN_POSITIONS,
   payload: programsApi.getProgramOpenTrades(id, filters)
 });
 
@@ -132,24 +121,8 @@ export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => ({
-  type: PROGRAM_TRADES,
+  type: FOLLOW_TRADES,
   payload: programsApi.getProgramTrades(id, filters)
-});
-
-export const fetchPeriodHistoryAction = (
-  id: string,
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
-  type: PROGRAM_PERIOD_HISTORY,
-  payload: programsApi.getProgramPeriods(id, filters)
-});
-
-export const fetchFinancialStatisticAction = (
-  id: string,
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
-  type: PROGRAM_FINANCIAL_STATISTIC,
-  payload: programsApi.getProgramPeriods(id, filters)
 });
 
 export const fetchSubscriptionsAction = (
@@ -157,14 +130,14 @@ export const fetchSubscriptionsAction = (
   authorization: string,
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
-  type: PROGRAM_SUBSCRIPTIONS,
+  type: FOLLOW_SUBSCRIPTIONS,
   payload: programsApi.getProgramSubscribers(id, authorization, filters)
 });
 
-export interface SetProgramIdAction extends ActionType<ProgramIdState> {
-  type: typeof SET_PROGRAM_ID;
+export interface SetFollowIdAction extends ActionType<FollowIdState> {
+  type: typeof SET_FOLLOW_ID;
 }
-export const setProgramIdAction = (id: string): SetProgramIdAction => ({
-  type: SET_PROGRAM_ID,
+export const setFollowIdAction = (id: string): SetFollowIdAction => ({
+  type: SET_FOLLOW_ID,
   payload: id
 });

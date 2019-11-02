@@ -5,46 +5,41 @@ import statisticCurrencyReducer from "shared/components/programs/program-details
 import statisticPeriodReducer from "shared/components/programs/program-details/reducers/statistic-period.reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
-import programBalanceChartReducer, {
-  ProgramBalanceChartState
+import followBalanceChartReducer, {
+  FollowBalanceChartState
 } from "./balance-chart.reducer";
-import programDescriptionReducer, {
-  ProgramDescriptionState
+import followDescriptionReducer, {
+  FollowDescriptionState
 } from "./description.reducer";
 import followHistoryReducer, {
-  ProgramHistoryState
+  FollowHistoryState
 } from "./follow-history.reducer";
-import programIdReducer, { ProgramIdState } from "./id.reducer";
-import levelParametersReducer, {
-  LevelParametersState
-} from "./level-parameters.reducer";
-import programProfitChartReducer, {
-  ProgramProfitChartState
+import followIdReducer, { FollowIdState } from "./id.reducer";
+import followProfitChartReducer, {
+  FollowProfitChartState
 } from "./profit-chart.reducer";
 
-type ProgramDetailsDataType = Readonly<{
-  id: ProgramIdState;
+type FollowDetailsDataType = Readonly<{
+  id: FollowIdState;
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
-  profitChart: ProgramProfitChartState;
-  balanceChart: ProgramBalanceChartState;
-  description: ProgramDescriptionState;
-  levelParameters: LevelParametersState;
-  programHistory: ProgramHistoryState;
+  profitChart: FollowProfitChartState;
+  balanceChart: FollowBalanceChartState;
+  description: FollowDescriptionState;
+  followHistory: FollowHistoryState;
 }>;
 
-export type ProgramDetailsState = ProgramDetailsDataType;
+export type FollowDetailsState = FollowDetailsDataType;
 
 const followDetailsReducer = clearableReducer(
-  combineReducers<ProgramDetailsState>({
-    id: programIdReducer,
+  combineReducers<FollowDetailsState>({
+    id: followIdReducer,
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
-    levelParameters: levelParametersReducer,
-    description: programDescriptionReducer,
-    profitChart: programProfitChartReducer,
-    balanceChart: programBalanceChartReducer,
-    programHistory: followHistoryReducer
+    description: followDescriptionReducer,
+    profitChart: followProfitChartReducer,
+    balanceChart: followBalanceChartReducer,
+    followHistory: followHistoryReducer
   })
 );
 

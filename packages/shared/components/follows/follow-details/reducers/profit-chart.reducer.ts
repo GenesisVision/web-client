@@ -5,21 +5,19 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/follow-details.actions";
+import { FETCH_FOLLOW_PROFIT_CHART } from "../follow-details.constants";
 
-export type ProgramProfitChartDataType = Array<ProgramProfitChart>;
+export type FollowProfitChartDataType = Array<ProgramProfitChart>;
 
-export type ProgramProfitChartState = IApiState<ProgramProfitChartDataType>;
+export type FollowProfitChartState = IApiState<FollowProfitChartDataType>;
 
-export const programProfitChartSelector = apiSelector<
-  ProgramProfitChartDataType,
+export const followProfitChartSelector = apiSelector<
+  FollowProfitChartDataType,
   RootState
->(state => state.programDetails.profitChart);
+>(state => state.followDetails.profitChart);
 
-const programProfitChartReducer = apiReducerFactory<ProgramProfitChartDataType>(
-  {
-    apiType: FETCH_PROGRAM_PROFIT_CHART
-  }
-);
+const followProfitChartReducer = apiReducerFactory<FollowProfitChartDataType>({
+  apiType: FETCH_FOLLOW_PROFIT_CHART
+});
 
-export default programProfitChartReducer;
+export default followProfitChartReducer;

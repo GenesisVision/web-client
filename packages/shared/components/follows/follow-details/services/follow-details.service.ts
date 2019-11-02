@@ -1,8 +1,6 @@
 import {
   CancelablePromise,
   InvestmentEventViewModels,
-  LevelInfo,
-  ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
@@ -23,82 +21,61 @@ import { RootState } from "shared/reducers/root-reducer";
 import brokersApi from "shared/services/api-client/brokers-api";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
-import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import {
-  ActionType,
-  CurrencyEnum,
-  MiddlewareDispatch,
-  TGetState
-} from "shared/utils/types";
+import { ActionType, MiddlewareDispatch } from "shared/utils/types";
 
 import {
   fetchEventsAction,
-  fetchFinancialStatisticAction,
-  fetchLevelParametersAction,
+  fetchFollowBalanceChartAction,
+  fetchFollowDescriptionAction,
+  fetchFollowProfitChartAction,
   fetchOpenPositionsAction,
-  fetchPeriodHistoryAction,
-  fetchProgramBalanceChartAction,
-  fetchProgramDescriptionAction,
-  fetchProgramProfitChartAction,
   fetchSubscriptionsAction,
   fetchTradesAction,
-  setProgramIdAction
+  setFollowIdAction
 } from "../actions/follow-details.actions";
 import {
-  financialStatisticTableSelector,
-  periodHistoryTableSelector,
   subscriptionsTableSelector,
   tradesTableSelector
 } from "../reducers/follow-history.reducer";
-import { ProgramStatisticResult } from "./follow-details.types";
+import { FollowStatisticResult } from "./follow-details.types";
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
   fetchEventsAction(id, eventLocation, filters);
 
-export const getProgramBrokers = (id: string) =>
+export const getFollowBrokers = (id: string) =>
   brokersApi.getBrokersForProgram(id);
 
-export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
-  dispatch: Dispatch
-) => dispatch(fetchLevelParametersAction(currency));
-
-export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
-  dispatch: MiddlewareDispatch,
-  getState: TGetState
-) => {
-  const {
-    programDetails: { id: stateId }
-  } = getState();
+export const dispatchFollowDescription = (id: string) => (
+  ctx?: NextPageContext
+) => async (dispatch: MiddlewareDispatch) => {
   return await dispatch(
-    fetchProgramDescriptionAction(
-      ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx)
-    )
+    fetchFollowDescriptionAction(id, authService.getAuthArg(ctx))
   );
 };
 
-export const dispatchProgramId = (id: string) => async (
+export const dispatchFollowId = (id: string) => async (
   dispatch: MiddlewareDispatch
-) => await dispatch(setProgramIdAction(id));
+) => await dispatch(setFollowIdAction(id));
 
-export const getProgramStatistic = (
-  programId: string,
+export const getFollowStatistic = (
+  followId: string,
   currency = "",
   period = getDefaultPeriod()
-): Promise<ProgramStatisticResult> => {
+): Promise<FollowStatisticResult> => {
   const chartFilter = {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
     maxPointCount: 100
   };
+  // @ts-ignore
   return Promise.all([
-    programsApi.getProgramProfitChart(programId, chartFilter),
-    programsApi.getProgramBalanceChart(programId, chartFilter)
+    programsApi.getProgramProfitChart(followId, chartFilter),
+    programsApi.getProgramBalanceChart(followId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
       trades: profitChart.trades,
@@ -117,13 +94,13 @@ export const getProgramStatistic = (
 };
 
 export const closePeriod = (
-  programId: string,
+  followId: string,
   onSuccess: () => void,
   onError: () => void
 ) => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
   managerApi
-    .closeCurrentPeriod(programId, authorization)
+    .closeCurrentPeriod(followId, authorization)
     .then(() => {
       onSuccess();
       dispatch(
@@ -139,53 +116,30 @@ export const closePeriod = (
     });
 };
 
-export const getOpenPositions = (programId: string) => (
+export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => {
-  return fetchOpenPositionsAction(programId, filters);
+  return fetchOpenPositionsAction(id, filters);
 };
 
-export const getTrades = (programId: string) => (
+export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => {
-  return fetchTradesAction(programId, filters);
+  return fetchTradesAction(id, filters);
 };
 
-export const getPeriodHistory = (programId: string) => (
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
-};
-
-export const getFinancialStatistics = (programId: string) => (
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchFinancialStatisticAction(programId, {
-    authorization,
-    ...filters
-  });
-};
-
-export const getSubscriptions = (programId: string) => (
+export const getSubscriptions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
   const authorization = authService.getAuthArg();
-  return fetchSubscriptionsAction(programId, authorization, filters);
+  return fetchSubscriptionsAction(id, authorization, filters);
 };
 
-export const fetchInvestmentsLevels = (
-  currency: string
-): CancelablePromise<LevelInfo[]> =>
-  platformApi.getProgramsLevels({ currency }).then(({ levels }) => levels);
-
-export const getProgramHistoryCounts = (id: string) => (
+export const getFollowHistoryCounts = (id: string) => (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
   const isAuthenticated = authService.isAuthenticated();
-  const isManager = ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER; // TODO remove after union
 
   const commonFiltering = { take: 0 };
 
@@ -199,33 +153,13 @@ export const getProgramHistoryCounts = (id: string) => (
     })
   );
 
-  const periodHistoryFilters = composeRequestFiltersByTableState(
-    periodHistoryTableSelector(getState())
-  );
-  dispatch(
-    getPeriodHistory(id)({
-      ...periodHistoryFilters,
-      ...commonFiltering
-    })
-  );
-
-  if (isAuthenticated && isManager) {
+  if (isAuthenticated) {
     const subscriptionFilters = composeRequestFiltersByTableState(
       subscriptionsTableSelector(getState())
     );
     dispatch(
       getSubscriptions(id)({
         ...subscriptionFilters,
-        ...commonFiltering
-      })
-    );
-
-    const financialStatisticsFilters = composeRequestFiltersByTableState(
-      financialStatisticTableSelector(getState())
-    );
-    dispatch(
-      getFinancialStatistics(id)({
-        ...financialStatisticsFilters,
         ...commonFiltering
       })
     );
@@ -292,12 +226,12 @@ export const getProfitChart: TGetChartFunc = ({
   period,
   currencies
 }) => async dispatch =>
-  await dispatch(fetchProgramProfitChartAction(id, period, currencies));
+  await dispatch(fetchFollowProfitChartAction(id, period, currencies));
 
 export const getBalanceChart: TGetChartFunc = ({
   id,
   period,
   currencies
 }) => async dispatch => {
-  await dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
+  await dispatch(fetchFollowBalanceChartAction(id, period, currencies[0]));
 };

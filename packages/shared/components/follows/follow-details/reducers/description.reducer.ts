@@ -1,4 +1,3 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -8,32 +7,31 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_DESCRIPTION } from "../actions/follow-details.actions";
+import { FETCH_FOLLOW_DESCRIPTION } from "../follow-details.constants";
+import { FollowDetailsDataType } from "../follow-details.types";
 
-export type ProgramDescriptionDataType = ProgramDetailsFullOld;
+export type FollowDescriptionDataType = FollowDetailsDataType;
 
-export type ProgramDescriptionState = IApiState<ProgramDescriptionDataType>;
+export type FollowDescriptionState = IApiState<FollowDescriptionDataType>;
 
-export const programDescriptionSelector = apiSelector<
-  ProgramDescriptionDataType
->(state => state.programDetails.description);
+export const followDescriptionSelector = apiSelector<FollowDescriptionDataType>(
+  state => state.followDetails.description
+);
 
-export const programIdSelector = apiFieldSelector(
-  programDescriptionSelector,
+export const followIdSelector = apiFieldSelector(
+  followDescriptionSelector,
   fieldSelector(state => state.id),
   undefined
 );
 
-export const programStatusSelector = apiFieldSelector(
-  programDescriptionSelector,
+export const followStatusSelector = apiFieldSelector(
+  followDescriptionSelector,
   fieldSelector(state => state.status),
   undefined
 );
 
-const programDescriptionReducer = apiReducerFactory<ProgramDescriptionDataType>(
-  {
-    apiType: FETCH_PROGRAM_DESCRIPTION
-  }
-);
+const followDescriptionReducer = apiReducerFactory<FollowDescriptionDataType>({
+  apiType: FETCH_FOLLOW_DESCRIPTION
+});
 
-export default programDescriptionReducer;
+export default followDescriptionReducer;

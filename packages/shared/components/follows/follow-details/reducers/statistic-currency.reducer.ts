@@ -1,13 +1,13 @@
 import statisticCurrencyReducerCreator from "shared/components/details/reducers/statistic-currency.reducer";
 import { fieldSelector } from "shared/utils/selectors";
 
-import { SET_PROGRAM_STATISTIC_CURRENCY } from "../actions/follow-details.actions";
+import { SET_FOLLOW_STATISTIC_CURRENCY } from "../follow-details.constants";
 
 export const statisticCurrencySelector = fieldSelector(
-  state => state.programDetails.statisticCurrency
+  state => state.followDetails.statisticCurrency
 );
 
 const statisticCurrencyReducer = statisticCurrencyReducerCreator(
-  SET_PROGRAM_STATISTIC_CURRENCY
+  SET_FOLLOW_STATISTIC_CURRENCY
 );
 export default statisticCurrencyReducer;

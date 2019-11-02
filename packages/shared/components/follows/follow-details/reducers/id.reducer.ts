@@ -1,22 +1,24 @@
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
+import { RootState } from "shared/reducers/root-reducer";
 
-import {
-  SET_PROGRAM_ID,
-  SetProgramIdAction
-} from "../actions/follow-details.actions";
+import { SetFollowIdAction } from "../actions/follow-details.actions";
+import { SET_FOLLOW_ID } from "../follow-details.constants";
 
-export type ProgramIdState = string;
+export type FollowIdState = string;
 
 const initialState = "";
-const programIdReducer = (
-  state: ProgramIdState = initialState,
-  action: SetProgramIdAction
+
+const followIdSelector = (state: RootState) => state.followDetails.id;
+
+const followIdReducer = (
+  state: FollowIdState = initialState,
+  action: SetFollowIdAction
 ): string =>
-  defaultReducer<SetProgramIdAction, string>(
+  defaultReducer<SetFollowIdAction, string>(
     action,
     state,
     initialState,
-    SET_PROGRAM_ID
+    SET_FOLLOW_ID
   );
 
-export default programIdReducer;
+export default followIdReducer;

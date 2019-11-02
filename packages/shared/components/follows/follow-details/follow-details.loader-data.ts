@@ -4,7 +4,6 @@ import {
   LevelsParamsInfo,
   OrderModel,
   PersonalProgramDetailsFull,
-  ProgramDetailsFullOld,
   ProgramDetailsListStatistic,
   ProgramProfitChart,
   ProgramStatistic,
@@ -16,15 +15,10 @@ import {
   managerLoaderData,
   mockDate
 } from "shared/components/details/details.loader-data";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { periodsLoaderData } from "./periods.loader-data";
-
-export const selectedCurrenciesLoaderData: TChartCurrency[] = [
-  { name: "GVT", color: "#f0f0f0" }
-];
+import { FollowDetailsDataType } from "./follow-details.types";
 
 export const profitChartLoaderData: ProgramProfitChart = {
   equityChart: [],
@@ -34,7 +28,7 @@ export const profitChartLoaderData: ProgramProfitChart = {
   trades: 0,
   successTradesPercent: 0,
   profitFactor: 0,
-  periods: periodsLoaderData,
+  periods: [],
   lastPeriodStarts: ("2019-09-24T06:02:14.7974010+00:00" as unknown) as Date,
   lastPeriodEnds: ("2019-09-24T07:02:14.7974010+00:00" as unknown) as Date,
   tradingVolume: 0,
@@ -182,7 +176,7 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
   status: "Pending"
 };
 
-export const followDetailsLoaderData: ProgramDetailsFullOld = {
+export const followDetailsLoaderData: FollowDetailsDataType = {
   currency: "" as CurrencyEnum,
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),

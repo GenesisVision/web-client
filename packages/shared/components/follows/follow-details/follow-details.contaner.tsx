@@ -1,6 +1,5 @@
 import "shared/components/details/details.scss";
 
-import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,12 +7,10 @@ import { compose } from "redux";
 import DetailsDescriptionSection from "shared/components/details/details-description-section/details-description/details-description-section";
 import { DetailsLimitsAvatar } from "shared/components/details/details-description-section/details-description/details-limits-avatar.block";
 import { DetailsTags } from "shared/components/details/details-description-section/details-description/details-tags.block";
-import PerformanceData from "shared/components/details/details-description-section/details-description/performance-data";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
-import { PROGRAM_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
+import { FOLLOW_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Page from "shared/components/page/page";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
 import {
   withBlurLoader,
@@ -21,32 +18,36 @@ import {
 } from "shared/decorators/with-blur-loader";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
-import { PROGRAM_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
+import { FOLLOW_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
 import {
-  composeProgramNotificationsUrl,
-  composeProgramSettingsUrl
+  composeFollowNotificationsUrl,
+  composeFollowSettingsUrl
 } from "shared/utils/compose-url";
 
 import { statisticCurrencyAction } from "./actions/follow-details.actions";
-import { levelsParamsLoaderData } from "./follow-details.loader-data";
-import { IDescriptionSection } from "./follow-details.types";
+import PerformanceData from "./follow-details-description/performance-data";
+import FollowDetailsStatisticSection from "./follow-details-statistic-section/follow-details-statistic-section";
+import {
+  FollowDetailsDataType,
+  IDescriptionSection
+} from "./follow-details.types";
 import FollowDetailsHistorySection from "./follow-history-section/follow-details-history-section";
-import { programEventsTableSelector } from "./reducers/follow-history.reducer";
-import { levelParametersSelector } from "./reducers/level-parameters.reducer";
-import { dispatchProgramDescription } from "./services/follow-details.service";
+import { followIdSelector } from "./reducers/description.reducer";
+import { followEventsTableSelector } from "./reducers/follow-history.reducer";
+import { dispatchFollowDescription } from "./services/follow-details.service";
 
-const _ProgramDetailsContainer: React.FC<Props> = ({
+const _FollowDetailsContainer: React.FC<Props> = ({
   descriptionSection,
   data: description
 }) => {
   const dispatch = useDispatch();
+  const id = useSelector(followIdSelector);
   useEffect(() => {
     dispatch(statisticCurrencyAction(description.currency));
   }, [description]);
-  const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = description.personalProgramDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
-  const ProgramControls = descriptionSection.ProgramControls;
+  const { Controls } = descriptionSection;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={description.title}>
@@ -54,23 +55,17 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         personalDetails={description.personalProgramDetails}
         description={description}
         notificationsUrl={{
-          pathname: PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
-          as: composeProgramNotificationsUrl(description.url),
+          pathname: FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
+          as: composeFollowNotificationsUrl(description.url),
           state: `/ ${description.title}`
         }}
         settingsUrl={{
-          as: composeProgramSettingsUrl(description.url),
-          pathname: PROGRAM_SETTINGS_FOLDER_ROUTE,
+          as: composeFollowSettingsUrl(description.url),
+          pathname: FOLLOW_SETTINGS_FOLDER_ROUTE,
           state: `/ ${description.title}`
         }}
         AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
-        PerformanceData={() => (
-          <PerformanceData
-            loaderData={levelsParamsLoaderData}
-            data={levelsParameters!}
-            programDescription={description}
-          />
-        )}
+        PerformanceData={() => <PerformanceData description={description} />}
         AssetDetailsAvatar={() => (
           <DetailsLimitsAvatar
             logo={description.logo}
@@ -83,10 +78,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           />
         )}
         Controls={() => (
-          <ProgramControls
-            loaderData={levelsParamsLoaderData}
-            data={levelsParameters!}
-            programDescription={description}
+          <Controls
+            description={description}
             canCloseAsset={personalDetails && personalDetails.canCloseAsset}
             canMakeSignalProvider={
               personalDetails && personalDetails.canMakeSignalProvider
@@ -111,19 +104,18 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           entryFeeCurrent: description.entryFeeCurrent,
           entryFeeSelected: description.entryFeeSelected
         }}
-        dispatchDescription={dispatchProgramDescription}
+        dispatchDescription={dispatchFollowDescription(id)}
         eventTypesSelector={programEventsSelector}
-        asset={ASSET.PROGRAM}
-        selector={programEventsTableSelector}
+        asset={ASSET.FOLLOW}
+        selector={followEventsTableSelector}
         id={description.id}
         currency={description.currency}
         personalDetails={
           description.personalProgramDetails as InvestmentDetails
         }
-        ProgramReinvestingWidget={descriptionSection.ProgramReinvestingWidget}
-        WithdrawContainer={descriptionSection.ProgramWithdrawContainer}
+        WithdrawContainer={descriptionSection.WithdrawContainer}
       />
-      <ProgramDetailsStatisticSection />
+      <FollowDetailsStatisticSection />
       <FollowDetailsHistorySection
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime
@@ -136,9 +128,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         showSwaps={description.brokerDetails.showSwaps}
         showTickets={description.brokerDetails.showTickets}
         isSignalProgram={description.isSignalProgram}
-        programId={description.id}
+        id={description.id}
         programCurrency={description.currency}
-        title={description.title}
       />
     </Page>
   );
@@ -146,13 +137,13 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  data: ProgramDetailsFullOld;
+  data: FollowDetailsDataType;
 }
 
-const ProgramDetailsContainer = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFullOld>>
+const FollowDetailsContainer = compose<
+  React.ComponentType<Props & WithBlurLoaderProps<FollowDetailsDataType>>
 >(
   withBlurLoader,
   React.memo
-)(_ProgramDetailsContainer);
-export default ProgramDetailsContainer;
+)(_FollowDetailsContainer);
+export default FollowDetailsContainer;

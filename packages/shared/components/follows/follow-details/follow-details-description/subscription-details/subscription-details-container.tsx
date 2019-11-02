@@ -2,22 +2,21 @@ import "./subscription-details.scss";
 
 import { PersonalProgramDetailsFull } from "gv-api-web";
 import React, { useEffect, useState } from "react";
-import { connect, ResolveThunks } from "react-redux";
-import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
+import { useDispatch } from "react-redux";
 import useIsOpen from "shared/hooks/is-open.hook";
 import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { dispatchProgramDescription } from "../../services/follow-details.service";
+import { dispatchFollowDescription } from "../../services/follow-details.service";
 import SubscriptionDetails from "./subscription-details";
 
 const _SubscriptionDetailsContainer: React.FC<Props> = ({
-  service: { dispatchProgramDescription },
   id,
   currency,
   personalDetails
 }) => {
+  const dispatch = useDispatch();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [rate, setRate] = useState<number>(1);
   useEffect(() => {
@@ -39,36 +38,17 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
         currency={currency}
         signalSubscription={personalDetails.signalSubscription}
         onClose={setClosePopup}
-        onApply={dispatchProgramDescription}
+        onApply={() => dispatch(dispatchFollowDescription(id)())}
       />
     </>
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchProgramDescription
-    },
-    dispatch
-  )
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchProgramDescription: typeof dispatchProgramDescription;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends DispatchProps {
+interface Props {
   id: string;
   currency: CurrencyEnum;
   personalDetails: PersonalProgramDetailsFull;
 }
 
-const SubscriptionDetailsContainer = connect(
-  null,
-  mapDispatchToProps
-)(React.memo(_SubscriptionDetailsContainer));
+const SubscriptionDetailsContainer = React.memo(_SubscriptionDetailsContainer);
 export default SubscriptionDetailsContainer;

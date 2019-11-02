@@ -1,4 +1,3 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -6,13 +5,13 @@ import { StatisticItemList } from "shared/components/statistic-item-list/statist
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
+import { FollowDetailsDataType } from "../follow-details.types";
+
 interface ISignalProgramInfoProps {
-  programDescription: ProgramDetailsFullOld;
+  description: FollowDetailsDataType;
 }
 
-const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
-  programDescription
-}) => {
+const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({ description }) => {
   const [t] = useTranslation();
   return (
     <StatisticItemList>
@@ -29,7 +28,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
         accent
       >
         <NumberFormat
-          value={programDescription.signalSuccessFee}
+          value={description.signalSuccessFee}
           displayType="text"
           suffix=" %"
         />
@@ -45,7 +44,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
         accent
       >
         <NumberFormat
-          value={programDescription.signalVolumeFee}
+          value={description.signalVolumeFee}
           displayType="text"
           suffix=" %"
         />
@@ -54,5 +53,5 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
   );
 };
 
-const SignalProgramInfo = React.memo(_SignalProgramInfo);
-export default SignalProgramInfo; // TODO refactor
+const SignalInfo = React.memo(_SignalInfo);
+export default SignalInfo; // TODO refactor
