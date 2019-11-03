@@ -18,7 +18,7 @@ const _MultiChartContainer: React.FC<Props> = ({
     request: fetchAllAssets
   });
   useEffect(() => {
-    sendRequest();
+    sendRequest({ period });
   }, []);
   if (!data) return null;
   const [assets, selectedAssets] = data;
