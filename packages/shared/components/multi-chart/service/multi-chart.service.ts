@@ -17,7 +17,7 @@ export const fetchMultiChartData = ({
   ) as unknown) as CancelablePromise<ProfitChartDataType>;
 };
 
-export const fetchAssets = (): CancelablePromise<TChartAsset> => {
+export const fetchAssets = (): CancelablePromise<TChartAsset[]> => {
   return (Promise.resolve([
     { name: "Example1", logo: "", url: "", type: ASSET.FUND },
     { name: "Example2", logo: "", url: "", type: ASSET.PROGRAM },
@@ -35,8 +35,24 @@ export const fetchAssets = (): CancelablePromise<TChartAsset> => {
     { name: "Example15", logo: "", url: "", type: ASSET.PROGRAM },
     { name: "Example16", logo: "", url: "", type: ASSET.FUND },
     { name: "Example18", logo: "", url: "", type: ASSET.PROGRAM }
-  ]) as unknown) as CancelablePromise<TChartAsset>;
+  ]) as unknown) as CancelablePromise<TChartAsset[]>;
 };
+
+export const fetchSelectedAssets = (): CancelablePromise<TChartAsset[]> => {
+  return (Promise.resolve([
+    { name: "Example3", logo: "", url: "", type: ASSET.FUND },
+    { name: "Example10", logo: "", url: "", type: ASSET.FUND },
+    { name: "Example11", logo: "", url: "", type: ASSET.FUND },
+    { name: "Example14", logo: "", url: "", type: ASSET.FUND },
+    { name: "Example18", logo: "", url: "", type: ASSET.PROGRAM }
+  ]) as unknown) as CancelablePromise<TChartAsset[]>;
+};
+
+export const fetchAllAssets = (): CancelablePromise<TChartAsset[][]> =>
+  (Promise.all([
+    fetchAssets,
+    fetchSelectedAssets
+  ]) as unknown) as CancelablePromise<TChartAsset[][]>;
 
 export const isIncluded = (array: any[], val: string) =>
   !!array.find(({ name }) => name === val);
