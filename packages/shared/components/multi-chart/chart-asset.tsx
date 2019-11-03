@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Link from "shared/components/link/link";
 import SelectedMark from "shared/components/selected-mark/selected-mark";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
