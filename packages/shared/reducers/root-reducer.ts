@@ -79,7 +79,7 @@ export const sharedRootReducers = {
   // fundNotifications: fundNotificationsReducer,
   // manager: managerReducer,
   wallet: walletReducer,
-  // copyTradingAccounts: CopyTradingAccountsReducer,
+  // copyTradingAccounts: CopyTradingAccountsReducer, TODO
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 };

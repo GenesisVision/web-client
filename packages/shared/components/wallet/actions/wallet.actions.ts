@@ -5,7 +5,6 @@ import {
   WalletMultiSummary
 } from "gv-api-web";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ActionType, ApiAction } from "shared/utils/types";
@@ -52,13 +51,6 @@ export const fetchWalletsAction = (
 ): FetchWalletAction => ({
   type: WALLET_BALANCE,
   payload: walletApi.getWalletSummary(currency, authorization)
-});
-
-export const fetchAccountsAction = (
-  authorization: string
-): FetchAccountsAction => ({
-  type: COPYTRADING_ACCOUNTS,
-  payload: signalApi.getCopytradingAccounts(authorization)
 });
 
 export const fetchWalletsByCurrencyAvailableAction = (

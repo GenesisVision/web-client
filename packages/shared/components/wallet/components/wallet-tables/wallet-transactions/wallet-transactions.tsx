@@ -1,6 +1,6 @@
 import "./wallet-transactions.scss";
 
-import { PlatformInfo } from "gv-api-web";
+import { Currency, PlatformInfo } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -51,11 +51,14 @@ const _WalletTransactions: React.FC<Props> = ({
   currency
 }) => {
   const getMultiTransactions: GetItemsFuncType = useCallback(
-    filters => fetchMultiTransactions(currency, filters),
+    filters => {
+      console.info("filters");
+      return fetchMultiTransactions(currency);
+    },
     [currency]
   );
-  if (!platformData) return null;
-  const { transactionType } = platformData.enums.multiWallet;
+  //if (!platformData) return null; TODO fix filters
+  // const { transactionType } = platformData.enums.multiWallet;
   return (
     <div className="wallet-transactions">
       <TableModule
@@ -63,19 +66,19 @@ const _WalletTransactions: React.FC<Props> = ({
         timestamp={new Date(timestamp).getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
-        filtering={{ ...TRANSACTIONS_FILTERS, type: transactionType[0] }}
+        filtering={{ ...TRANSACTIONS_FILTERS }} //, type: transactionType[0]
         getItems={getMultiTransactions}
         renderFilters={(updateFilter, filtering) => (
           <>
-            <SelectFilter
-              name={"type"}
-              label="Type"
-              value={filtering["type"] as SelectFilterType}
-              values={
-                reduceFilters(transactionType) //TODO fix filtering types
-              }
-              onChange={updateFilter}
-            />
+            {/*<SelectFilter*/}
+            {/*  name={"type"}*/}
+            {/*  label="Type"*/}
+            {/*  value={filtering["type"] as SelectFilterType}*/}
+            {/*  values={*/}
+            {/*    reduceFilters(transactionType) //TODO fix filtering types*/}
+            {/*  }*/}
+            {/*  onChange={updateFilter}*/}
+            {/*/>*/}
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering["dateRange"]}
@@ -108,7 +111,7 @@ interface Props extends OwnProps, StateProps, WithTranslation {}
 interface OwnProps {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  currency?: CURRENCIES;
+  currency?: Currency;
 }
 
 interface StateProps extends WalletLastUpdateState {

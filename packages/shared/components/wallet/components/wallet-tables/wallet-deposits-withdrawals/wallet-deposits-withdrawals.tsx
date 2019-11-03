@@ -51,40 +51,40 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   currency
 }) => {
   const getMultiTransactionsExternal: GetItemsFuncType = useCallback(
-    filters => fetchMultiTransactionsExternal(currency, filters),
+    filters => fetchMultiTransactionsExternal(currency),
     [currency]
   );
-  if (!platformData) return null;
-  const { externalTransactionType } = platformData.enums.multiWallet;
+  if (!platformData) return null; // TODO fix filters
+  // const { externalTransactionType } = platformData.enums.multiWallet;
   return (
     <div className="wallet-deposits-withdrawals">
       <TableModule
         loaderData={walletDepositsWithdrawalsLoaderData}
         timestamp={timestamp.getMilliseconds()}
-        defaultFilters={DEFAULT_FILTERS}
+        // defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
-        filtering={{
-          ...TRANSACTIONS_FILTERS,
-          type: externalTransactionType[0]
-        }}
+        // filtering={{
+        //   ...TRANSACTIONS_FILTERS,
+        //   type: externalTransactionType[0]
+        // }}
         getItems={getMultiTransactionsExternal}
-        renderFilters={(updateFilter, filtering) => (
-          <>
-            <SelectFilter
-              name={"type"}
-              label="Type"
-              value={filtering["type"] as SelectFilterType} //TODO fix filtering types
-              values={reduceFilters(externalTransactionType)}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering["dateRange"]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.account-creation")}
-            />
-          </>
-        )}
+        // renderFilters={(updateFilter, filtering) => (
+        //   <>
+        //     <SelectFilter
+        //       name={"type"}
+        //       label="Type"
+        //       value={filtering["type"] as SelectFilterType} //TODO fix filtering types
+        //       values={reduceFilters(externalTransactionType)}
+        //       onChange={updateFilter}
+        //     />
+        //     <DateRangeFilter
+        //       name={DATE_RANGE_FILTER_NAME}
+        //       value={filtering["dateRange"]}
+        //       onChange={updateFilter}
+        //       startLabel={t("filters.date-range.account-creation")}
+        //     />
+        //   </>
+        // )}
         columns={columns}
         renderHeader={column => (
           <span

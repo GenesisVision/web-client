@@ -11,17 +11,9 @@ import WalletTotal from "./wallet-total";
 
 const _WalletTotalContainer: React.FC = () => {
   const wallet = useSelector(walletSelector);
-  const copyTradingAccounts = useSelector(copyTradingAccountsSelector);
-  const copyTradingAccountsPending = useSelector(
-    (state: RootState) => state.copyTradingAccounts.info.isPending
-  );
+
   return (
-    <WalletTotal
-      loaderData={walletMultiSummaryLoaderData}
-      data={wallet!}
-      copyTradingAccounts={copyTradingAccounts}
-      copyTradingAccountsPending={copyTradingAccountsPending}
-    />
+    <WalletTotal loaderData={walletMultiSummaryLoaderData} data={wallet!} />
   );
 };
 

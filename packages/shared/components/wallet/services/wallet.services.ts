@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
-  CopyTradingAccountInfo,
-  WalletMultiAvailable,
-  WalletBaseData
+  Currency,
+  WalletBaseData,
+  WalletMultiAvailable
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
@@ -10,8 +10,6 @@ import {
   mapToTableItems,
   TableItems
 } from "shared/components/table/helpers/mapper";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
-import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { CurrencyEnum, RootThunk } from "shared/utils/types";
@@ -41,9 +39,7 @@ export const fetchWallets = (
 export const fetchAccounts = (
   ctx?: NextPageContext
 ): RootThunk<void> => async dispatch => {
-  const authorization = authService.getAuthArg(ctx);
   await dispatch(actions.updateAccountTimestampAction());
-  await dispatch(actions.fetchAccountsAction(authorization));
 };
 
 export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
@@ -70,23 +66,17 @@ export const onPayFeesWithGvt = () =>
   walletApi.switchPayFeeInGvtOn(authService.getAuthArg());
 
 export const fetchMultiTransactions = (
-  currency?: CURRENCIES,
+  currency?: Currency,
   filters?: FilteringType
 ) => {
   const authorization = authService.getAuthArg();
   const filtering = {
-    ...filters,
-    currency
+    ...filters
   };
   return walletApi
-    .getMultiWalletTransactions(authorization, filtering)
+    .getTransactions(authorization, filtering)
     .then(mapToTableItems("transactions"));
 };
-
-export const fetchCopytradingAccounts = () =>
-  signalApi
-    .getCopytradingAccounts(authService.getAuthArg())
-    .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
 
 export const fetchMultiTransactionsExternal = (
   currency?: string,
@@ -94,10 +84,12 @@ export const fetchMultiTransactionsExternal = (
 ): CancelablePromise<TableItems<WalletMultiAvailable>> => {
   const authorization = authService.getAuthArg();
   const filtering = {
-    ...filters,
-    currency
+    ...filters
   };
   return walletApi
-    .getWalletExternalTransactions(authorization, filtering)
+    .getTransactions(authorization, {
+      ...filtering,
+      transactionFilterType: "Externals"
+    })
     .then(mapToTableItems<WalletMultiAvailable>("transactions"));
 };

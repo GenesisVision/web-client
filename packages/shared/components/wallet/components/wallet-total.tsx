@@ -1,27 +1,20 @@
-import { CopyTradingAccountInfo, WalletMultiSummary } from "gv-api-web";
+import { WalletMultiSummary } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
-import { ROLE } from "shared/constants/constants";
 import {
   withBlurLoader,
   WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
-import useRole from "shared/hooks/use-role.hook";
 
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
-const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
-  data: wallet,
-  copyTradingAccounts,
-  copyTradingAccountsPending
-}) => {
+const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
   const [t] = useTranslation();
-  const role = useRole();
   return (
     <Page title={t("wallet-page.title")}>
       <div className="wallet-balance">
@@ -36,12 +29,7 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
           invested={wallet.grandTotal.investedCcy}
           currency={wallet.grandTotal.currencyCcy}
         />
-        <WalletTablesTotal
-          copyTradingAccounts={copyTradingAccounts}
-          copyTradingAccountsPending={copyTradingAccountsPending}
-          wallets={wallet.wallets}
-          copytrading={role === ROLE.INVESTOR}
-        />
+        <WalletTablesTotal wallets={wallet.wallets} />
       </div>
     </Page>
   );
@@ -49,8 +37,6 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({
 
 interface Props {
   data: WalletMultiSummary;
-  copyTradingAccounts: CopyTradingAccountInfo[];
-  copyTradingAccountsPending: boolean;
 }
 
 const WalletTotal = compose<

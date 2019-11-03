@@ -1,6 +1,6 @@
 import "./wallet-tables.scss";
 
-import { CopyTradingAccountInfo, WalletData } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import { Location } from "history";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -14,7 +14,6 @@ import Tooltip from "shared/components/tooltip/tooltip";
 
 import useHashTab from "../../services/hashTab.hook";
 import { WALLET_TOTAL_PAGE_ROUTE } from "../../wallet.routes";
-import WalletCopytrading from "./wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "./wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
@@ -23,13 +22,7 @@ import TransactionsRow from "./wallet-transactions/transactions-row";
 import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
-const _WalletTablesTotal: React.FC<Props> = ({
-  t,
-  wallets,
-  copytrading,
-  copyTradingAccounts,
-  copyTradingAccountsPending
-}) => {
+const _WalletTablesTotal: React.FC<Props> = ({ t, wallets }) => {
   const { tab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
     <Surface className="wallet-container">
@@ -41,16 +34,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
               label={
                 <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
                   {t("wallet-page.tabs.wallets")}
-                </Link>
-              }
-            />
-            <GVTab
-              className={"gv-tab"}
-              visible={copytrading}
-              value={TABS.COPYTRADING_TAB}
-              label={
-                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.COPYTRADING_TAB}`}>
-                  {t("wallet-page.tabs.copytrading")}
                 </Link>
               }
             />
@@ -110,12 +93,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
         </div>
       </div>
       {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
-      {tab === TABS.COPYTRADING_TAB && (
-        <WalletCopytrading
-          copyTradingAccounts={copyTradingAccounts}
-          copyTradingAccountsPending={copyTradingAccountsPending}
-        />
-      )}
       {tab === TABS.TRANSACTIONS_TAB && (
         <WalletTransactions
           columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
@@ -141,7 +118,6 @@ const _WalletTablesTotal: React.FC<Props> = ({
 
 enum TABS {
   WALLETS_TAB = "",
-  COPYTRADING_TAB = "#copytrading",
   TRANSACTIONS_TAB = "#transactions",
   EXTERNAL_TAB = "#external"
 }
@@ -152,9 +128,6 @@ interface Props extends WithTranslation, OwnProps {
 
 interface OwnProps {
   wallets: WalletData[];
-  copytrading: boolean;
-  copyTradingAccounts: CopyTradingAccountInfo[];
-  copyTradingAccountsPending: boolean;
 }
 
 const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
