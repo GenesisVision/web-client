@@ -3,7 +3,6 @@ import { CancelablePromise } from "gv-api-web";
 import { ASSET } from "../../../constants/constants";
 import { ChartDefaultPeriod } from "../../chart/chart-period/chart-period.helpers";
 import { ProfitChartDataType } from "../../details/details-statistic-section/details.chart.helpers";
-import { getProfitChartLoaderDataWithEquity } from "../../programs/program-details/program-details.loader-data";
 import { TChartAsset } from "../multi-chart.types";
 
 export const fetchMultiChartData = ({
@@ -14,11 +13,7 @@ export const fetchMultiChartData = ({
   period: ChartDefaultPeriod;
 }): CancelablePromise<ProfitChartDataType> => {
   return (saveSelectedAssets(assets).then(() =>
-    Promise.resolve([
-      getProfitChartLoaderDataWithEquity(),
-      getProfitChartLoaderDataWithEquity(),
-      getProfitChartLoaderDataWithEquity()
-    ])
+    Promise.resolve([])
   ) as unknown) as CancelablePromise<ProfitChartDataType>;
 };
 
