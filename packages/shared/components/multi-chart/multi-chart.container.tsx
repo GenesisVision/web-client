@@ -8,23 +8,24 @@ import { HandlePeriodChangeType } from "shared/utils/types";
 
 import MultiChart from "./multi-chart";
 import { TChartAsset } from "./multi-chart.types";
-import { fetchAssets } from "./service/multi-chart.service";
+import { fetchAllAssets } from "./service/multi-chart.service";
 
 const _MultiChartContainer: React.FC<Props> = ({
   period,
   handleChangePeriod
 }) => {
-  const { data: assets, sendRequest } = useApiRequest<TChartAsset[]>({
-    request: fetchAssets
+  const { data, sendRequest } = useApiRequest<TChartAsset[][]>({
+    request: fetchAllAssets
   });
   useEffect(() => {
     sendRequest();
   }, []);
-  if (!assets) return null;
+  if (!data) return null;
+  const [assets, selectedAssets] = data;
   return (
     <MultiChart
       assets={assets}
-      selectedAssets={MockSelectedAssets}
+      selectedAssets={selectedAssets}
       period={period}
       handleChangePeriod={handleChangePeriod}
     />
