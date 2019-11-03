@@ -2537,6 +2537,33 @@
     }
   },
   "dashboard-page": {
+    "chart": "Chart",
+    "see-more": "See more",
+    "recommendations": {
+      "title": "Recommendations",
+      "fund": "Invest",
+      "program": "Invest",
+      "follow": "Follow"
+    },
+    "statistic": {
+      "AUM": "AUM",
+      "funds": "Funds",
+      "programs": "Programs",
+      "investing": "Investing",
+      "equity": "Your Equity",
+      "balance": "Balance",
+      "table": {
+        "data": "Data",
+        "description": "Description",
+        "amount": "Amount"
+      }
+    },
+    "total": {
+      "title": "Total",
+      "day": "Day",
+      "week": "Week",
+      "month": "Month"
+    },
     "fail-chart": "Error loading chart",
     "title": "Dashboard",
     "assets": {
@@ -2547,7 +2574,13 @@
     },
     "programs": "Programs",
     "pending-tooltip": "The program is being created.",
-    "portfolio": "Portfolio",
+    "portfolio": {
+      "title": "Portfolio",
+      "programs": "Programs",
+      "funds": "Funds",
+      "trading": "Trading",
+      "wallet": "Wallet"
+    },
     "favorite-programs": "Favourite programs",
     "create-program-text": "Do not have any programs yet",
     "create-fund-text": "Do not have any fund yet",
