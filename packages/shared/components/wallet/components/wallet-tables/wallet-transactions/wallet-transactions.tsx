@@ -52,7 +52,6 @@ const _WalletTransactions: React.FC<Props> = ({
 }) => {
   const getMultiTransactions: GetItemsFuncType = useCallback(
     filters => {
-      console.info("filters");
       return fetchMultiTransactions(currency);
     },
     [currency]
