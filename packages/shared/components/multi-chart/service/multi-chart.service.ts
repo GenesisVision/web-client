@@ -17,7 +17,9 @@ export const fetchMultiChartData = ({
   ) as unknown) as CancelablePromise<ProfitChartDataType>;
 };
 
-export const fetchAssets = (): CancelablePromise<TChartAsset[]> => {
+export const fetchAssets = (
+  period: ChartDefaultPeriod
+): CancelablePromise<TChartAsset[]> => {
   return (Promise.resolve([
     { name: "Example1", logo: "", url: "", type: ASSET.FUND },
     { name: "Example2", logo: "", url: "", type: ASSET.PROGRAM },
@@ -48,10 +50,14 @@ export const fetchSelectedAssets = (): CancelablePromise<TChartAsset[]> => {
   ]) as unknown) as CancelablePromise<TChartAsset[]>;
 };
 
-export const fetchAllAssets = (): CancelablePromise<TChartAsset[][]> =>
+export const fetchAllAssets = ({
+  period
+}: {
+  period: ChartDefaultPeriod;
+}): CancelablePromise<TChartAsset[][]> =>
   (Promise.all([
-    fetchAssets,
-    fetchSelectedAssets
+    fetchAssets(period),
+    fetchSelectedAssets()
   ]) as unknown) as CancelablePromise<TChartAsset[][]>;
 
 export const isIncluded = (array: any[], val: string) =>
