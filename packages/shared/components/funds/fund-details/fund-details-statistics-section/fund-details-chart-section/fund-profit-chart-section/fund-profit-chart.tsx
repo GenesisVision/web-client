@@ -35,7 +35,7 @@ const _FundProfitChart: React.FC<Props> = ({
       equityCharts={equityCharts}
       tooltip={FundProfitTooltip}
       equities={equities}
-      chartCurrencies={chartCurrencies}
+      colors={chartCurrencies}
     />
   );
 };

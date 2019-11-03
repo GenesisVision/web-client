@@ -3,6 +3,7 @@ import "./broker-card.scss";
 import classnames from "classnames";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
+import SelectedMark from "shared/components/selected-mark/selected-mark";
 import TagBrokerContainer from "shared/components/tags/tag-broker-container/tag-broker-container";
 import filesService from "shared/services/file-service";
 
@@ -38,7 +39,9 @@ const _BrokerCard: React.FC<Props> = ({
       onClick={isActive ? onSelect && onSelect(brokerName) : undefined}
     >
       {isSelected && (
-        <div className="broker-card__selected-mark"> &#10004;</div>
+        <div className="broker-card__selected-mark">
+          <SelectedMark selected />
+        </div>
       )}
       <BrokerCardAdornment
         condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}

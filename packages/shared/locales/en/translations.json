@@ -4,6 +4,7 @@
     "about": "About"
   },
   "dashboard-page": {
+    "title": "Dashboard",
     "fail-chart": "Error loading chart",
     "portfolio-events": {
       "types": {
