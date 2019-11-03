@@ -18,6 +18,7 @@ const ChartAssetList: React.FC<Props> = ({
     },
     [selectedAssets]
   );
+  if (!assets.length) return <ChartAssetEmptyMessage />;
   return (
     <div className="multi-chart__asset-list">
       <ChartAssetSubList
@@ -71,6 +72,17 @@ interface IChartAssetSubListProps {
 }
 
 const ChartAssetSubList = React.memo(_ChartAssetSubList);
+
+const ChartAssetEmptyMessage: React.FC = () => {
+  return (
+    <div className="multi-chart__asset-list">
+      <div className="multi-chart__sub-list">
+        <div className="multi-chart__separator">ASSETS</div>
+        You don't have assets.
+      </div>
+    </div>
+  );
+};
 
 interface Props {
   assets: TChartAsset[];
