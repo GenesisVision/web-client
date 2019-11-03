@@ -7,9 +7,10 @@ import { ProfitChartDataType } from "shared/components/details/details-statistic
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
+import { ProgramProfitCharts } from "gv-api-web";
 
 const _ProgramProfitChart: React.FC<Props> = ({ charts, colors }) => {
-  const equityCharts = charts.map(({ equityChart }) => equityChart);
+  const equityCharts = charts.map(({ ch }) => equityChart); //TODO data
   const equities = equityCharts.map(equityChart =>
     (equityChart as EquityChartType).map(x => ({
       date: (x.date.getTime() as unknown) as Date,
@@ -27,7 +28,7 @@ const _ProgramProfitChart: React.FC<Props> = ({ charts, colors }) => {
 };
 
 interface Props {
-  charts: ProfitChartDataType;
+  charts: Array<ProgramProfitCharts>;
   colors?: TChartCurrency[];
 }
 

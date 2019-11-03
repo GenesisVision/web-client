@@ -25,7 +25,8 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
 );
 
-export const currenciesSelector = apiFieldSelector( // TODO currency-selector-container
+export const currenciesSelector = apiFieldSelector(
+  // TODO currency-selector-container
   platformDataSelector,
   fieldSelector(
     state => state.assetInfo.programInfo.availableProgramCurrencies
@@ -107,16 +108,23 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
     state => platformDataSelector(state),
     data => {
       if (!data) return [];
-      // @ts-ignore
-      return data.enums.event[ROLE_ENV || ROLE.MANAGER][
-        `${asset.toLowerCase()}Details`
-      ].map(
+      return data.filters.events.map(
         // TODO remove after union
         ({ key, title }: FilterModel) => ({
           value: key,
           labelKey: title
         })
       );
+
+      //   .enums.event[ROLE_ENV || ROLE.MANAGER][
+      //   `${asset.toLowerCase()}Details`
+      // ].map(
+      //   // TODO remove after union
+      //   ({ key, title }: FilterModel) => ({
+      //     value: key,
+      //     labelKey: title
+      //   })
+      // );
     }
   );
 

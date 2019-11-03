@@ -1,13 +1,15 @@
-import { ProgramProfitChart } from "gv-api-web";
+import { ProfitChart } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/program-details.actions";
+// import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/program-details.actions"; TODO fix imports
 
-export type ProgramProfitChartDataType = Array<ProgramProfitChart>;
+const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
+
+export type ProgramProfitChartDataType = Array<ProfitChart>;
 
 export type ProgramProfitChartState = IApiState<ProgramProfitChartDataType>;
 

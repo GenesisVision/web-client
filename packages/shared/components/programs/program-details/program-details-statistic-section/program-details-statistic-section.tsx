@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import { ProgramBalanceChartElement } from "gv-api-web";
+import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -50,7 +50,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderBalanceChart={({ color, currency, balanceChart }) => (
         <ProgramBalanceChart
           color={color}
-          balanceChart={balanceChart as ProgramBalanceChartElement[]}
+          balanceChart={balanceChart as ProgramBalanceChartType[]}
           currency={currency}
         />
       )}

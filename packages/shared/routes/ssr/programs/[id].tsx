@@ -1,4 +1,4 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import React from "react";
 import { compose } from "redux";
 import { statisticCurrencyAction } from "shared/components/programs/program-details/actions/program-details.actions";
@@ -21,7 +21,7 @@ export const programDetailsCreator = (Component: React.ComponentType) => {
       ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
     ]).then(([_, descriptionResult]) => {
       const description = ((descriptionResult as unknown) as {
-        value: ProgramDetailsFullOld;
+        value: ProgramDetailsFull;
       }).value;
       ctx.reduxStore.dispatch(dispatch =>
         dispatch(statisticCurrencyAction(description.currency))

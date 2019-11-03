@@ -5,7 +5,8 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_BALANCE_CHART } from "../actions/program-details.actions";
+//import { FETCH_PROGRAM_BALANCE_CHART } from "../actions/program-details.actions"; todo fix imports
+const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
 
 export type ProgramBalanceChartDataType = ProgramBalanceChart;
 

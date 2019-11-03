@@ -1,11 +1,11 @@
 import {
-  BalanceChartElement,
+  BalanceChartPoint,
   FundBalanceChart,
-  FundProfitChart,
-  PlatformCurrency,
+  FundProfitCharts,
+  Currency,
   ProgramBalanceChart,
-  ProgramBalanceChartElement,
-  ProgramProfitChart
+  PlatformCurrencyInfo,
+  ProgramProfitCharts
 } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -114,14 +114,14 @@ export interface TGetChartArgs {
 }
 
 export type ProfitChartType =
-  | FundProfitChart
-  | ProgramProfitChart
+  | FundProfitCharts
+  | ProgramProfitCharts
   | IDashboardAssetChart;
 export type ProfitChartDataType = Array<ProfitChartType>;
 
-export type BalanceChartElementType = Array<
-  BalanceChartElement | ProgramBalanceChartElement
->;
+const r: ProfitChartDataType;
+
+export type BalanceChartElementType = Array<BalanceChartPoint>;
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
 export type BalanceChartDataType =
   | FundBalanceChartDataType
@@ -130,14 +130,14 @@ export type BalanceChartDataType =
 export const convertToChartCurrency = ({
   name,
   color
-}: PlatformCurrency): TChartCurrency => ({
+}: PlatformCurrencyInfo): TChartCurrency => ({
   name: name as CurrencyEnum,
   color
 });
 
 export const platformChartCurrenciesSelector = createSelector<
   RootState,
-  PlatformCurrency[],
+  PlatformCurrencyInfo[],
   TChartCurrency[]
 >(
   state => platformCurrenciesSelector(state),

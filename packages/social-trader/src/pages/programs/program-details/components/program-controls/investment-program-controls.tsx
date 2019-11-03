@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import * as React from "react";
@@ -46,8 +46,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       ? t("program-details-page.description.auth-manager-popup")
       : t("program-details-page.description.unauth-popup");
   const isDisabledInvestButton = isAuthenticated
-    ? !programDescription.personalProgramDetails ||
-      !programDescription.personalProgramDetails.canInvest
+    ? !programDescription.personalDetails ||
+      !programDescription.personalDetails!.canInvest
     : false;
 
   return (
@@ -109,7 +109,7 @@ interface OwnProps {
   isAuthenticated: boolean;
   canCloseAsset: boolean;
   isOwnProgram: boolean;
-  programDescription: ProgramDetailsFullOld;
+  programDescription: ProgramDetailsFull;
   levelsParameters: LevelsParamsInfo;
 }
 

@@ -1,6 +1,6 @@
 import "shared/components/details/details.scss";
 
-import { ProgramDetailsFullOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,14 +44,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     dispatch(statisticCurrencyAction(description.currency));
   }, [description]);
   const levelsParameters = useSelector(levelParametersSelector);
-  const personalDetails = description.personalProgramDetails;
-  const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
+  const personalDetails = description.personalDetails;
+  const isOwnProgram = personalDetails && personalDetails.isOwnAsset;
   const Controls = descriptionSection.Controls;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
-        personalDetails={description.personalProgramDetails}
+        personalDetails={description.personalDetails}
         description={description}
         notificationsUrl={{
           pathname: PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
@@ -87,7 +87,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             loaderData={levelsParamsLoaderData}
             data={levelsParameters!}
             programDescription={description}
-            canCloseAsset={personalDetails && personalDetails.canCloseAsset}
+            canCloseAsset={personalDetails && personalDetails.canClose}
             canMakeSignalProvider={
               personalDetails && personalDetails.canMakeSignalProvider
             }
@@ -103,8 +103,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         fees={{
           successFee: description.successFeeCurrent,
           successFeePersonal:
-            description.personalProgramDetails &&
-            description.personalProgramDetails.successFeePersonal,
+            description.personalDetails &&
+            description.personalDetails.successFeePersonal,
           successFeeCurrent: description.successFeeCurrent,
           successFeeSelected: description.successFeeSelected,
           entryFee: description.successFeeCurrent,
@@ -117,25 +117,23 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         selector={programEventsTableSelector}
         id={description.id}
         currency={description.currency}
-        personalDetails={
-          description.personalProgramDetails as InvestmentDetails
-        }
+        personalDetails={description.personalDetails as InvestmentDetails}
         ReinvestingWidget={descriptionSection.ReinvestingWidget}
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
-      <ProgramDetailsStatisticSection />
+      {/*<ProgramDetailsStatisticSection />*/}
       <ProgramDetailsHistorySection
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime
         }
         isOwnProgram={
-          description.personalProgramDetails
-            ? description.personalProgramDetails.isOwnProgram
+          description.personalDetails
+            ? description.personalDetails.isOwnAsset
             : false
         }
         showSwaps={description.brokerDetails.showSwaps}
         showTickets={description.brokerDetails.showTickets}
-        isSignalProgram={description.isSignalProgram}
+        isSignalProgram={false} //TODO description.isSignalProgram
         programId={description.id}
         programCurrency={description.currency}
         title={description.title}
@@ -146,11 +144,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
 interface Props {
   descriptionSection: IDescriptionSection;
-  data: ProgramDetailsFullOld;
+  data: ProgramDetailsFull;
 }
 
 const ProgramDetailsContainer = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFullOld>>
+  React.ComponentType<Props & WithBlurLoaderProps<ProgramDetailsFull>>
 >(
   withBlurLoader,
   React.memo

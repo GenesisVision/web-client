@@ -1,5 +1,6 @@
 import {
   CancelablePromise,
+  Currency,
   InvestmentEventViewModels,
   LevelInfo,
   ProgramPeriodsViewModel,
@@ -21,8 +22,8 @@ import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 import brokersApi from "shared/services/api-client/brokers-api";
-import investorApi from "shared/services/api-client/investor-api";
-import managerApi from "shared/services/api-client/manager-api";
+// import investorApi from "shared/services/api-client/investor-api";
+// import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
@@ -53,6 +54,8 @@ import {
   tradesTableSelector
 } from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
+import assetsApi from "../../../../services/api-client/assets-api";
+import eventsApi from "../../../../services/api-client/events-api";
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
@@ -87,7 +90,7 @@ export const dispatchProgramId = (id: string) => async (
 
 export const getProgramStatistic = (
   programId: string,
-  currency = "",
+  currency: Currency,
   period = getDefaultPeriod()
 ): Promise<ProgramStatisticResult> => {
   const chartFilter = {
@@ -102,16 +105,16 @@ export const getProgramStatistic = (
     programsApi.getProgramBalanceChart(programId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
-      trades: profitChart.trades,
-      successTradesPercent: profitChart.successTradesPercent,
-      profitFactor: profitChart.profitFactor,
-      investors: profitChart.investors,
-      sharpeRatio: profitChart.sharpeRatio,
-      sortinoRatio: profitChart.sortinoRatio,
-      maxDrawdown: profitChart.maxDrawdown,
-      periodStarts: profitChart.lastPeriodStarts,
-      periodEnds: profitChart.lastPeriodEnds,
-      tradingVolume: profitChart.tradingVolume
+      trades: profitChart.statistic.trades,
+      successTradesPercent: profitChart.statistic.successTradesPercent,
+      profitFactor: profitChart.statistic.profitFactor,
+      investors: profitChart.statistic.investors,
+      sharpeRatio: profitChart.statistic.sharpeRatio,
+      sortinoRatio: profitChart.statistic.sortinoRatio,
+      maxDrawdown: profitChart.statistic.maxDrawdown,
+      periodStarts: profitChart.statistic.lastPeriodStarts,
+      periodEnds: profitChart.statistic.lastPeriodEnds,
+      tradingVolume: profitChart.statistic.tradingVolume
     };
     return { statistic, profitChart, balanceChart };
   });
@@ -123,7 +126,7 @@ export const closePeriod = (
   onError: () => void
 ) => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
-  managerApi
+  assetsApi
     .closeCurrentPeriod(programId, authorization)
     .then(() => {
       onSuccess();
@@ -134,7 +137,7 @@ export const closePeriod = (
         )
       );
     })
-    .catch(error => {
+    .catch((error: { errorMessage: string }) => {
       onError();
       dispatch(alertMessageActions.error(error.errorMessage));
     });
@@ -177,9 +180,9 @@ export const getSubscriptions = (programId: string) => (
 };
 
 export const fetchInvestmentsLevels = (
-  currency: string
+  currency: Currency
 ): CancelablePromise<LevelInfo[]> =>
-  platformApi.getProgramsLevels({ currency }).then(({ levels }) => levels);
+  platformApi.getProgramLevels({ currency }).then(({ levels }) => levels);
 
 export const getProgramHistoryCounts = (id: string) => (
   dispatch: Dispatch,
@@ -244,22 +247,7 @@ export const fetchPortfolioEventsWithoutTable = (
   filters?: any
 ): CancelablePromise<InvestmentEventViewModels> => {
   const authorization = authService.getAuthArg();
-  let request: (
-    authorization: string,
-    opts?: Object
-  ) => CancelablePromise<InvestmentEventViewModels>;
-  switch (
-    ROLE_ENV || ROLE.MANAGER // TODO remove after union
-  ) {
-    case ROLE.INVESTOR:
-      request = investorApi.getEvents;
-      break;
-    case ROLE.MANAGER:
-    default:
-      request = managerApi.getEvents;
-      break;
-  }
-  return request(authorization, { ...filters, eventLocation });
+  return eventsApi.getEvents(authorization, { ...filters, eventLocation });
 };
 
 export const fetchPortfolioEvents = (
@@ -268,24 +256,9 @@ export const fetchPortfolioEvents = (
   filters?
 ): CancelablePromise<TableItems<InvestmentEventViewModels>> => {
   const authorization = authService.getAuthArg();
-  let request: (
-    authorization: string,
-    opts?: Object
-  ) => CancelablePromise<InvestmentEventViewModels>;
-  switch (
-    ROLE_ENV || ROLE.MANAGER // TODO remove after union
-  ) {
-    case ROLE.INVESTOR:
-      request = investorApi.getEvents;
-      break;
-    case ROLE.MANAGER:
-    default:
-      request = managerApi.getEvents;
-      break;
-  }
-  return request(authorization, { ...filters, eventLocation }).then(
-    mapToTableItems<InvestmentEventViewModels>("events")
-  );
+  return eventsApi
+    .getEvents(authorization, { ...filters, eventLocation })
+    .then(mapToTableItems<InvestmentEventViewModels>("events"));
 };
 
 export const getProfitChart: TGetChartFunc = ({

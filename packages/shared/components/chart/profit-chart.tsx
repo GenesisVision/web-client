@@ -1,4 +1,4 @@
-import { ChartSimple, FundAssetsState } from "gv-api-web";
+import { SimpleChartPoint, FundAssetsState } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -83,7 +83,7 @@ export type TChartColor = {
   color: string;
 };
 
-export type EquityChartElementType = ChartSimple & {
+export type EquityChartElementType = SimpleChartPoint & {
   assetsState?: FundAssetsState;
 };
 export type EquityChartType = Array<EquityChartElementType>;

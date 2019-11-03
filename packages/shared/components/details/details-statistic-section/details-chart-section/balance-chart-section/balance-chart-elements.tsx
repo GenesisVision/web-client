@@ -63,9 +63,9 @@ const _BalanceChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <div className="details-chart__profit">
-        {chartData.chart.balanceChart.length &&
+        {chartData.chart.chart.length &&
           renderBalanceChart({
-            balanceChart: chartData.chart.balanceChart,
+            balanceChart: chartData.chart.chart,
             currency: name,
             color
           })}

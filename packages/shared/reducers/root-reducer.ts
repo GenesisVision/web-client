@@ -60,7 +60,7 @@ import uiReducer from "./ui-reducer";
 export const sharedRootReducers = {
   // profile: profileReducer,
   // fundDetails: fundDetailsReducer,
-  // programDetails: programDetailsReducer,
+  programDetails: programDetailsReducer,
   // router: connectRouter(history),
   platformData: platformReducer,
   programsData: programsReducer,

@@ -2,9 +2,9 @@ import "shared/components/details/details-description-section/details-descriptio
 
 import {
   FundDetailsFull,
-  PersonalFundDetailsFull,
-  PersonalProgramDetailsFullOld,
-  ProgramDetailsFullOld
+  PersonalFundDetails,
+  PersonalProgramDetails,
+  ProgramDetailsFull
 } from "gv-api-web";
 import * as React from "react";
 import DetailsDescription from "shared/components/details/details-description-section/details-description/details-description";
@@ -41,8 +41,8 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 interface Props {
   notificationsUrl: ToType;
   settingsUrl: ToType;
-  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
-  description: FundDetailsFull | ProgramDetailsFullOld;
+  personalDetails: PersonalFundDetails | PersonalProgramDetails;
+  description: FundDetailsFull | ProgramDetailsFull;
   AssetDetailsExtraBlock: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
   AssetDetailsAvatar: React.ComponentType<any>;

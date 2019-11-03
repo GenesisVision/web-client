@@ -1,6 +1,7 @@
-import { LOCATION_CHANGE } from "connected-react-router";
 import { Reducer } from "redux";
 import { ActionType } from "shared/utils/types";
+
+const LOCATION_CHANGE = "LOCATION_CHANGE"; //TODO
 
 const clearableReducer = <S = {}>(
   reducer: Reducer<any, ActionType>,
