@@ -124,7 +124,7 @@ const _Table: React.FC<ITableProps> = ({
         )}
       </div>
       <TableFooter
-        condition={paging && !!(paging.totalPages && paging.totalPages >= 2)}
+        condition={!!paging && !!(paging.totalPages && paging.totalPages >= 2)}
         paging={paging}
         updatePaging={updatePaging}
         isPending={isPending}
