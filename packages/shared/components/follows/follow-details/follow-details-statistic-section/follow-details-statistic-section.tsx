@@ -58,10 +58,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
         />
       )}
       renderProfitChart={({ profitChart, chartCurrencies }) => (
-        <ProgramProfitChart
-          profitChart={profitChart}
-          chartCurrencies={chartCurrencies}
-        />
+        <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
       )}
       renderDetailsStatisticsElements={({ period, statisticData }) => (
         <FollowDetailsStatisticsElements
