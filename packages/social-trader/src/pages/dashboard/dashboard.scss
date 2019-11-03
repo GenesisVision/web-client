@@ -1,0 +1,13 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard {
+  &__statistic-block {
+    width: 100%;
+    display: flex;
+    & > div {
+      width: 50%;
+    }
+  }
+}
