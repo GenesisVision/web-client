@@ -23,8 +23,6 @@
   }
   &__title {
     @include adaptive-padding(bottom, $padding-xsmall);
-  }
-  &__title {
     text-transform: uppercase;
     color: $primary-color;
     font-size: $font-size-paragraph;

@@ -81,17 +81,7 @@ $arrow-font-size: $font-size-h4;
   }
 
   &__selected-mark {
-    display: inline-flex;
-    justify-content: center;
-    line-height: 34px;
     position: absolute;
-    width: 34px;
-    height: 34px;
-    border-radius: 17px;
-    background-color: $primary-color;
-    color: $text-light-color;
-    content: "&#10004;";
-    top: -8px;
     right: -8px;
   }
 
