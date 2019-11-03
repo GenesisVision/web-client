@@ -1,17 +1,16 @@
 import "./multi-chart.scss";
 
 import React, { useEffect, useState } from "react";
+import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { HandlePeriodChangeType } from "shared/utils/types";
 
-import { ASSET } from "../../constants/constants";
-import useApiRequest from "../../hooks/api-request.hook";
-import { HandlePeriodChangeType } from "../../utils/types";
-import ChartPeriod from "../chart/chart-period/chart-period";
-import { ChartDefaultPeriod } from "../chart/chart-period/chart-period.helpers";
-import { ProfitChartDataType } from "../details/details-statistic-section/details.chart.helpers";
-import ProgramProfitChart from "../programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import ChartAssetList from "./chart-asset-list";
 import { TChartAsset } from "./multi-chart.types";
-import { fetchAssets, fetchMultiChart } from "./service/multi-chart.service";
+import { fetchMultiChartData } from "./service/multi-chart.service";
 
 const _MultiChart: React.FC<Props> = ({
   assets,
@@ -22,8 +21,10 @@ const _MultiChart: React.FC<Props> = ({
   const [stateSelectedAssets, setSelectedAssets] = useState<TChartAsset[]>(
     selectedAssets
   );
-  const { data: multiChart, sendRequest } = useApiRequest<ProfitChartDataType>({
-    request: fetchMultiChart
+  const { data: multiChartData, sendRequest } = useApiRequest<
+    ProfitChartDataType
+  >({
+    request: fetchMultiChartData
   });
 
   useEffect(() => {
@@ -31,13 +32,13 @@ const _MultiChart: React.FC<Props> = ({
   }, [stateSelectedAssets, period]);
   return (
     <div className="multi-chart__block">
-      {multiChart && (
+      {multiChartData && (
         <div className="multi-chart__profit-chart-block">
           <div className="multi-chart__period">
             <ChartPeriod period={period} onChange={handleChangePeriod} />
           </div>
           <div className="multi-chart__profit-chart">
-            <ProgramProfitChart charts={multiChart} colors={mockColors} />
+            <ProgramProfitChart charts={multiChartData} colors={mockColors} />
           </div>
         </div>
       )}
@@ -50,39 +51,12 @@ const _MultiChart: React.FC<Props> = ({
   );
 };
 
-export const MultiChartContainer: React.FC<{
-  period: ChartDefaultPeriod;
-  handleChangePeriod: HandlePeriodChangeType;
-}> = ({ period, handleChangePeriod }) => {
-  const { data: assets, sendRequest } = useApiRequest<TChartAsset[]>({
-    request: fetchAssets
-  });
-  useEffect(() => {
-    sendRequest();
-  }, []);
-  if (!assets) return null;
-  return (
-    <MultiChart
-      assets={assets}
-      selectedAssets={MockSelectedAssets}
-      period={period}
-      handleChangePeriod={handleChangePeriod}
-    />
-  );
-};
-
 interface Props {
   period: ChartDefaultPeriod;
   handleChangePeriod: HandlePeriodChangeType;
   assets: TChartAsset[];
   selectedAssets: TChartAsset[];
 }
-
-const MockSelectedAssets = [
-  { name: "Example4", logo: "", type: ASSET.FUND },
-  { name: "Example5", logo: "", type: ASSET.PROGRAM },
-  { name: "Example6", logo: "", type: ASSET.FUND }
-];
 
 const mockColors = [
   { name: "", color: "#F7931A" },
