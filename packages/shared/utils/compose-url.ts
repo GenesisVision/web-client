@@ -1,4 +1,5 @@
 import {
+  FOLLOW_NOTIFICATIONS_ROUTE,
   FUND_NOTIFICATIONS_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "shared/components/notifications/notifications.routes";
@@ -11,6 +12,11 @@ import {
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
+import {
+  FOLLOW_DETAILS_SLUG_ROUTE,
+  SETTINGS,
+  SLUG_URL_PARAM_NAME
+} from "shared/routes/invest.routes";
 import {
   MANAGER_DETAILS_ROUTE,
   MANAGER_SLUG_URL_PARAM_NAME
@@ -45,6 +51,11 @@ export const composeAssetDetailsUrl = (
     ? composeProgramDetailsUrl(slugUrl)
     : composeFundsDetailsUrl(slugUrl);
 
+export const composeFollowDetailsUrl = (slugUrl: string): string =>
+  replaceParams(FOLLOW_DETAILS_SLUG_ROUTE, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
@@ -68,6 +79,16 @@ export const composeProgramNotificationsUrl = (slugUrl: string): string =>
 export const composeProgramSettingsUrl = (slugUrl: string): string =>
   replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_SETTINGS}`, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const composeFollowNotificationsUrl = (slugUrl: string): string =>
+  replaceParams(FOLLOW_NOTIFICATIONS_ROUTE, {
+    ":id": slugUrl
+  });
+
+export const composeFollowSettingsUrl = (slugUrl: string): string =>
+  replaceParams(`${FOLLOW_DETAILS_SLUG_ROUTE}/${SETTINGS}`, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeAssetNotificationsUrl = (

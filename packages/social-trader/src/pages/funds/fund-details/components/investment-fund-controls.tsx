@@ -13,9 +13,9 @@ import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
 import { InvestButtons } from "shared/components/details/details-description-section/details-investment/invest-buttons";
+import InvestmentUnauthPopup from "shared/components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
 import { dispatchFundDescription } from "shared/components/funds/fund-details/services/fund-details.service";
-import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 

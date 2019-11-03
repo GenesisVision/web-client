@@ -1,10 +1,20 @@
-import { NextPage } from "next";
-import OverviewPage from "pages/dashboard/overview.page";
+import DashboardPage from "pages/dashboard/dashboard.page";
+import { getAssets } from "pages/dashboard/services/dashboard.service";
 import React from "react";
+import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
+import withPrivateRoute from "shared/decorators/with-private-route";
+import { NextPageWithRedux } from "shared/utils/types";
 
-const Page: NextPage = () => {
-  return <OverviewPage />;
+const Page: NextPageWithRedux<void> = () => {
+  return <DashboardPage />;
 };
 
-export default withDefaultLayout(Page);
+Page.getInitialProps = async ctx => {
+  await ctx.reduxStore.dispatch(getAssets(ctx));
+};
+
+export default compose(
+  withDefaultLayout,
+  withPrivateRoute
+)(Page);

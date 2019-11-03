@@ -12,9 +12,9 @@ import {
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
+import InvestmentProgramInfo from "shared/components/details/details-description-section/investment-program-info";
+import InvestmentUnauthPopup from "shared/components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton from "shared/components/gv-button";
-import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
-import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";

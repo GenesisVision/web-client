@@ -20,7 +20,14 @@ import {
   subscriptionsTableSelector,
   tradesTableSelector
 } from "../reducers/program-history.reducer";
-import { getProgramHistoryCounts } from "../services/program-details.service";
+import {
+  getFinancialStatistics,
+  getOpenPositions,
+  getPeriodHistory,
+  getProgramHistoryCounts,
+  getSubscriptions,
+  getTrades
+} from "../services/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
@@ -96,6 +103,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </div>
       {tab === TABS.TRADES && (
         <ProgramTrades
+          getItems={getTrades(programId)}
+          dataSelector={tradesTableSelector}
           showSwaps={showSwaps}
           showTickets={showTickets}
           programId={programId}
@@ -103,15 +112,24 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          getItems={getOpenPositions(programId)}
+          dataSelector={openPositionsTableSelector}
           programId={programId}
           currency={programCurrency}
         />
       )}
       {tab === TABS.SUBSCRIBERS && (
-        <ProgramSubscriptions id={programId} currency={currency} />
+        <ProgramSubscriptions
+          getItems={getSubscriptions(programId)}
+          dataSelector={subscriptionsTableSelector}
+          id={programId}
+          currency={currency}
+        />
       )}
       {tab === TABS.FINANCIAL_STATISTIC && (
         <ProgramFinancialStatistic
+          getItems={getFinancialStatistics(programId)}
+          dataSelector={financialStatisticTableSelector}
           showCommissionRebateSometime={showCommissionRebateSometime}
           id={programId}
           currency={programCurrency}
@@ -119,7 +137,12 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
         />
       )}
       {tab === TABS.PERIOD_HISTORY && (
-        <ProgramPeriodHistory id={programId} currency={programCurrency} />
+        <ProgramPeriodHistory
+          getItems={getPeriodHistory(programId)}
+          dataSelector={periodHistoryTableSelector}
+          id={programId}
+          currency={programCurrency}
+        />
       )}
     </DetailsBlock>
   );

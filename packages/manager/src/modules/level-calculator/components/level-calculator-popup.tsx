@@ -58,9 +58,12 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
     getDefaultValues(programLevelInfo, levelsParameters)
   );
 
-  const handleSliderChange = useCallback((name: string, value: number) => {
-    setValues({ ...values, [name]: value });
-  }, []);
+  const handleSliderChange = useCallback(
+    (name: string, value: number) => {
+      setValues({ ...values, [name]: value });
+    },
+    [values]
+  );
   const handleResetForm = useCallback(() => {
     setValues(getDefaultValues(programLevelInfo, levelsParameters));
   }, [programLevelInfo, levelsParameters]);

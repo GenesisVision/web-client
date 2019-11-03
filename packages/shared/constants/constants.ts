@@ -41,6 +41,7 @@ export enum ROLE {
   MANAGER = "manager"
 }
 export enum ASSET {
+  FOLLOW = "FOLLOW",
   PROGRAM = "PROGRAM",
   FUND = "FUND"
 }

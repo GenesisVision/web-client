@@ -6,23 +6,30 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
-import { UpdateFilterFunc } from "shared/components/table/components/table.types";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType,
+  UpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { CurrencyEnum } from "shared/utils/types";
 
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
   SUBSCRIBERS_STATUS_TYPE
 } from "../../program-details.constants";
-import { subscriptionsTableSelector } from "../../reducers/program-history.reducer";
-import { getSubscriptions } from "../../services/program-details.service";
 import ProgramSubscriptionsRow from "./program-subscriptions-row";
 
-const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
+const _ProgramSubscriptions: React.FC<Props> = ({
+  getItems,
+  dataSelector,
+  id,
+  currency
+}) => {
   const [t] = useTranslation();
   return (
     <TableContainer
-      getItems={getSubscriptions(id)}
-      dataSelector={subscriptionsTableSelector}
+      getItems={getItems}
+      dataSelector={dataSelector}
       isFetchOnMount={true}
       columns={PROGRAM_SUBSCRIBERS_COLUMNS}
       renderFilters={(
@@ -55,6 +62,8 @@ const _ProgramSubscriptions: React.FC<Props> = ({ id, currency }) => {
 };
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   id: string;
   currency: CurrencyEnum;
 }

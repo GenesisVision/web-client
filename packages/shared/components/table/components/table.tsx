@@ -20,8 +20,8 @@ import {
 import { getCookie, setCookie } from "shared/utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
-import { RenderBodyItemFuncType } from "./table.types";
 import TableBodyContainer from "./table-body";
+import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
   loaderData,
@@ -57,7 +57,7 @@ const _Table: React.FC<ITableProps> = ({
     !!showSwitchView;
   useEffect(() => {
     if (isViewSwitchEnabled)
-      setView(getCookie(PROGRAMS_VIEW) as LIST_VIEW|| LIST_VIEW.TABLE);
+      setView((getCookie(PROGRAMS_VIEW) as LIST_VIEW) || LIST_VIEW.TABLE);
   }, [isViewSwitchEnabled]);
   const changeView = useCallback((view: LIST_VIEW) => {
     setCookie(PROGRAMS_VIEW, view);

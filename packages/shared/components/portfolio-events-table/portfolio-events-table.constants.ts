@@ -1,4 +1,3 @@
-import { InvestmentEventViewModelChangeStateEnum } from "gv-api-web";
 import { ASSET_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { composeDefaultAssetTypeFilter } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.helpers";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -116,3 +115,8 @@ export const EVENT_PROFITABILITY_VALUES: {
   NotChanged: "0",
   Increased: "1"
 };
+export enum InvestmentEventViewModelChangeStateEnum {
+  Decreased = "Decreased",
+  NotChanged = "NotChanged",
+  Increased = "Increased"
+}

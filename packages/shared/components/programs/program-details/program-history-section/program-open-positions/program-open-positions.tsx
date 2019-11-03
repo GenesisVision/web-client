@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import TableContainer from "shared/components/table/components/table-container";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  openPositionsSelector,
-  openPositionsTableSelector
-} from "../../reducers/program-history.reducer";
-import { getOpenPositions } from "../../services/program-details.service";
+import { openPositionsSelector } from "../../reducers/program-history.reducer";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramOpenPositionsRow from "./program-open-positions-row";
 
@@ -53,7 +53,12 @@ export const DELAYS: DelayType[] = [
   }
 ];
 
-const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
+const _ProgramOpenPositions: React.FC<Props> = ({
+  getItems,
+  dataSelector,
+  currency,
+  programId
+}) => {
   const [t] = useTranslation();
   const {
     itemsData: { data }
@@ -63,8 +68,8 @@ const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
   return (
     <TableContainer
       exportButtonToolbarRender={() => <TradesDelayHint delay={delay} />}
-      getItems={getOpenPositions(programId)}
-      dataSelector={openPositionsTableSelector}
+      getItems={getItems}
+      dataSelector={dataSelector}
       isFetchOnMount={true}
       columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
       renderHeader={column => (
@@ -82,6 +87,8 @@ const _ProgramOpenPositions: React.FC<Props> = ({ currency, programId }) => {
 };
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   currency: CurrencyEnum;
   programId: string;
 }

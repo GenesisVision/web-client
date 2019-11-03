@@ -34,7 +34,7 @@ export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
 export const CURRENCY_MAP_VALUE = undefined;
 
-const programsLevelFilter = {
+export const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
   type: FILTER_TYPE.RANGE,
   defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
@@ -48,7 +48,7 @@ const programsLevelFilter = {
   }
 };
 
-const programsCurrencyFilter = {
+export const programsCurrencyFilter = {
   name: PROGRAM_CURRENCY_FILTER_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_FILTER_VALUE

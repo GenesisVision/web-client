@@ -2,6 +2,7 @@ import { LevelsParamsInfo } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
 import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
+import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import {
   withBlurLoader,
@@ -22,7 +23,7 @@ const _ProgramControls: React.FC<Props> = ({
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
   return (
-    <div className="asset-details-description__controls">
+    <>
       <InvestmentProgramControls
         programDescription={programDescription}
         canCloseAsset={canCloseAsset}
@@ -31,9 +32,11 @@ const _ProgramControls: React.FC<Props> = ({
         levelsParameters={levelsParameters}
       />
       {isOwnProgram && programDescription.isSignalProgram && (
-        <SignalProviderControls programDescription={programDescription} />
+        <SignalProviderControls>
+          <SignalProgramInfo programDescription={programDescription} />
+        </SignalProviderControls>
       )}
-    </div>
+    </>
   );
 };
 
