@@ -1,13 +1,15 @@
 import classNames from "classnames";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import SelectedMark from "shared/components/selected-mark/selected-mark";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
-import { composeProgramDetailsUrl } from "../../utils/compose-url";
-import AssetAvatar from "../avatar/asset-avatar/asset-avatar";
-import SelectedMark from "../selected-mark/selected-mark";
 import { TChartAsset } from "./multi-chart.types";
 
 const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
+  const [t] = useTranslation();
   return (
     <div
       className={classNames("multi-chart__asset", {
@@ -21,8 +23,8 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
       />
       <Link
         to={{
-          pathname: composeProgramDetailsUrl(""),
-          state: `/ ${""}`
+          pathname: composeProgramDetailsUrl(asset.url),
+          state: `/ ${t("dashboard-page.title")}`
         }}
       >
         <div className="multi-chart__asset-name">
