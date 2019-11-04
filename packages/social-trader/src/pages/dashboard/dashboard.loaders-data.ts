@@ -5,6 +5,37 @@ import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 
+export const getTradingTotalLoaderData = () => ({
+  total: getRandomInteger(-1000, 1000),
+  equity: getRandomInteger(-1000, 1000),
+  AUM: getRandomInteger(-1000, 1000)
+});
+export const getTradingPublicLoaderData = () => {
+  const length = getRandomInteger(5, 15);
+  return {
+    items: tableLoaderCreator(getRecommendationLoaderData, length),
+    total: length
+  };
+};
+
+export const getTradingFollowLoaderData = () => {
+  const length = getRandomInteger(5, 15);
+  return {
+    items: tableLoaderCreator(
+      () => ({ ...getRecommendationLoaderData(), type: ASSET.FOLLOW }),
+      getRandomInteger(5, 15)
+    ),
+    total: length
+  };
+};
+
+export const getTradingLoaderData = () => ({
+  total: getTradingTotalLoaderData(),
+  public: getTradingPublicLoaderData(),
+  personal: getTradingPublicLoaderData(),
+  followThem: getTradingFollowLoaderData()
+});
+
 export const DashboardChartValueLoaderData: IDashboardAssetChart = {
   type: ASSETS_TYPES.Fund,
   id: "",
@@ -60,6 +91,7 @@ export const getProgramStatisticLoaderData = () => ({
   },
   events: tableLoaderCreator(getEventLoaderData, getRandomInteger(1, 10))
 });
+
 export const getInvestingStatisticLoaderData = () => ({
   balance: getRandomInteger(-10000, 10000),
   programs: getRandomInteger(-10000, 10000),
@@ -104,8 +136,11 @@ export const getRecommendationLoaderData = (): TRecommendation => ({
     url: faker.name.lastName()
   },
   currency: "GVT",
-  profit: getRandomInteger(-1000, 1000),
-  profitPercent: getRandomInteger(-1000, 1000),
+  statistic: {
+    balance: { amount: getRandomInteger(-1000, 1000) },
+    profit: getRandomInteger(-1000, 1000),
+    profitPercent: getRandomInteger(-1000, 1000)
+  },
   value: getRandomInteger(-1000, 1000),
   chart: getEquityChartLoaderData()
 });
