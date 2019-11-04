@@ -14,33 +14,32 @@ export const DashboardChartValueLoaderData: IDashboardAssetChart = {
   pnLChart: []
 };
 
-export const assetsLoaderData = () =>
-  tableLoaderCreator(
-    () => ({
+export const assetsLoaderData = () => {
+  let sum = 100;
+  return tableLoaderCreator((item, i, { length }) => {
+    const value = getRandomInteger(Math.round(sum / 4), Math.round(sum / 3));
+    sum -= value;
+    return {
       name: faker.finance.currencyCode(),
-      percent: getRandomInteger(0, 15)
-    }),
-    getRandomInteger(0, 15)
-  );
+      percent: i === length - 1 ? sum + value : value,
+      color: faker.internet.color()
+    };
+  }, getRandomInteger(4, 15));
+};
 
-export const portfolioLoaderData = () => [
-  {
-    name: "Funds",
-    percent: getRandomInteger(0, 25)
-  },
-  {
-    name: "Programs",
-    percent: getRandomInteger(0, 25)
-  },
-  {
-    name: "Trading",
-    percent: getRandomInteger(0, 25)
-  },
-  {
-    name: "Wallet",
-    percent: getRandomInteger(0, 25)
-  }
-];
+export const portfolioLoaderData = () => {
+  let sum = 100;
+  const names = ["Funds", "Programs", "Trading", "Wallet"];
+  return tableLoaderCreator((item, i, { length }) => {
+    const value = getRandomInteger(Math.round(sum / 4), Math.round(sum / 3));
+    sum -= value;
+    return {
+      name: names[i],
+      percent: i === length - 1 ? sum + value : value,
+      color: faker.internet.color()
+    };
+  }, 4);
+};
 
 export const getProgramStatisticLoaderData = () => ({
   equity: getRandomInteger(-10000, 10000),
