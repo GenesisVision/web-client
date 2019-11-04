@@ -3,7 +3,7 @@ import { useState } from "react";
 
 type TNullValue = undefined;
 export type TAnchor = EventTarget | TNullValue;
-type TEvent = React.MouseEvent<Element, Event>;
+export type TEvent = React.MouseEvent<Element, Event>;
 export const anchorNullValue: TNullValue = undefined;
 
 const useAnchor = (): {
