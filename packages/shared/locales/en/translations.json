@@ -2537,6 +2537,11 @@
     }
   },
   "dashboard-page": {
+    "trading": {
+      "total": "Total",
+      "private": "Private",
+      "public": "Public"
+    },
     "chart": "Chart",
     "see-more": "See more",
     "recommendations": {
@@ -2546,6 +2551,7 @@
       "follow": "Follow"
     },
     "statistic": {
+      "total": "Total",
       "AUM": "AUM",
       "funds": "Funds",
       "programs": "Programs",
