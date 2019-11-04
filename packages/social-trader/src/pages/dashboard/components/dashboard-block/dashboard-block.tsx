@@ -7,6 +7,7 @@ import DetailsBlock from "shared/components/details/details-block";
 import Link from "shared/components/link/link";
 
 const _DashboardBlock: React.FC<Props> = ({
+  seeAll = true,
   label,
   all,
   children,
@@ -18,20 +19,25 @@ const _DashboardBlock: React.FC<Props> = ({
       table
       className={classNames("dashboard-block__container", className)}
     >
-      <div className="dashboard-block__header">
-        <h3>{label}</h3>
-        <div className="dashboard-block__see-all">
-          <Link to={all}>{t("dashboard-page.see-more")}</Link>
+      {(label || seeAll) && (
+        <div className="dashboard-block__header">
+          {label && <h3>{label}</h3>}
+          {seeAll && (
+            <div className="dashboard-block__see-all">
+              <Link to={all}>{t("dashboard-page.see-more")}</Link>
+            </div>
+          )}
         </div>
-      </div>
+      )}
       {children}
     </DetailsBlock>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  label: string;
-  all: string;
+  seeAll?: boolean;
+  label?: string;
+  all?: string;
 }
 
 const DashboardBlock = React.memo(_DashboardBlock);
