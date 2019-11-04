@@ -1,4 +1,3 @@
-import * as faker from "faker";
 import {
   CancelablePromise,
   InvestmentEventViewModels,
@@ -12,16 +11,19 @@ import {
   getProgramStatisticLoaderData,
   getRecommendationLoaderData,
   getTotalLoaderData,
-  portfolioAssetsData,
+  getTradingLoaderData,
+  getTradingPublicLoaderData,
   portfolioLoaderData
 } from "pages/dashboard/dashboard.loaders-data";
 import {
+  TAsset,
   TAssets,
   TDashboardInvestingStatistic,
   TDashboardProgramsStatistic,
   TDashboardTotal,
   TPortfolio,
-  TRecommendation
+  TRecommendation,
+  TTrading
 } from "pages/dashboard/dashboard.types";
 import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
@@ -31,15 +33,31 @@ import { EVENT_LOCATION } from "shared/components/programs/program-details/servi
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
+import { IDataModel } from "shared/constants/constants";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
+import { tableLoaderCreator } from "shared/utils/helpers";
 import { ActionType } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 import { getDashboardFunds } from "./dashboard-funds.service";
+
+export const getPrivateAssets = (): CancelablePromise<IDataModel> =>
+  (Promise.resolve(
+    getTradingPublicLoaderData()
+  ) as unknown) as CancelablePromise<IDataModel>;
+
+export const getPublicAssets = (): CancelablePromise<IDataModel> =>
+  (Promise.resolve(
+    getTradingPublicLoaderData()
+  ) as unknown) as CancelablePromise<IDataModel>;
+
+export const getTradingData = (): CancelablePromise<TTrading> =>
+  (Promise.resolve(getTradingLoaderData()) as unknown) as CancelablePromise<
+    TTrading
+  >;
 
 export const getPortfolio = (): CancelablePromise<TPortfolio> =>
   (Promise.resolve(portfolioLoaderData()) as unknown) as CancelablePromise<
