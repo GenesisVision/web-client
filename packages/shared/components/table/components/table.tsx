@@ -24,6 +24,7 @@ import TableBodyContainer from "./table-body";
 import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
+  outerView = LIST_VIEW.TABLE,
   loaderData,
   exportButtonToolbarRender,
   updateItems,
@@ -50,7 +51,7 @@ const _Table: React.FC<ITableProps> = ({
   updateRow,
   showSwitchView
 }) => {
-  const [view, setView] = useState<LIST_VIEW>(LIST_VIEW.TABLE);
+  const [view, setView] = useState<LIST_VIEW>(outerView);
   const isViewSwitchEnabled =
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
@@ -138,6 +139,7 @@ export interface ITableProps
     ITableToolbarExternalProps,
     ITableBodyContainerExternalProps,
     ITableHeaderProps {
+  outerView?: LIST_VIEW;
   renderBodyCard?: RenderBodyItemFuncType;
   renderBodyRow?: RenderBodyItemFuncType;
   emptyMessage?: JSX.Element;
