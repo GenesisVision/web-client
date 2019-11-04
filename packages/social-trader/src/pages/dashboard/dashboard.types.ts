@@ -51,9 +51,12 @@ export interface TRecommendation {
   chart: any;
 }
 
-export type TPortfolio = {
-  name: "programs";
+export type TPieChartType = {
+  name: string;
+  color: string;
   percent: number;
-}[];
+};
 
-export type TAssets = { name: string; percent: number }[];
+export type TPortfolio = TPieChartType[];
+
+export type TAssets = TPieChartType[];
