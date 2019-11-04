@@ -34,7 +34,7 @@ export interface TDashboardEvent {
   amount: number;
 }
 
-export interface TRecommendation {
+export interface TAsset {
   type: ASSET;
   currency: CurrencyEnum;
   id: string;
@@ -45,11 +45,18 @@ export interface TRecommendation {
   level: number;
   color: string;
   manager: { url: string; username: string };
-  profit: number;
-  profitPercent: number;
+  statistic: {
+    profit: number;
+    profitPercent: number;
+    balance: {
+      amount: number;
+    };
+  };
+
   value: number;
   chart: any;
 }
+export interface TRecommendation extends TAsset {}
 
 export type TPieChartType = {
   name: string;
@@ -60,3 +67,16 @@ export type TPieChartType = {
 export type TPortfolio = TPieChartType[];
 
 export type TAssets = TPieChartType[];
+
+export interface TTradingTotal {
+  total: number;
+  equity: number;
+  AUM: number;
+}
+
+export interface TTrading {
+  total: TTradingTotal;
+  public: TAsset[];
+  personal: TAsset[];
+  followThem: TAsset[];
+}
