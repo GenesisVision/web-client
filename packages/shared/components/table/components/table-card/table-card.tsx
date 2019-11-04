@@ -6,6 +6,7 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import {
@@ -14,7 +15,6 @@ import {
 } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import useAnchor, { TAnchor, TEvent } from "shared/hooks/anchor.hook";
-import LevelTooltip from "shared/level-tooltip/level-tooltip";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
