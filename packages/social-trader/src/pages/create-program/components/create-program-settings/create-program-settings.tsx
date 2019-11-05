@@ -1,6 +1,7 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./create-program-settings.scss";
 
+import { CreateAssetFields } from "components/create-asset/create-asset-field/create-asset-field";
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
@@ -72,7 +73,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
           logoName={CREATE_PROGRAM_FIELDS.logo}
           description={description}
         />
-        <div className="create-program-settings__program-fields">
+        <CreateAssetFields>
           <BrokerAccount
             setAccountType={(value: string) =>
               setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
@@ -101,7 +102,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
           />
           <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
           <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
-        </div>
+        </CreateAssetFields>
         <InvestmentLimitField
           checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
           inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
@@ -118,17 +119,13 @@ const _CreateProgramSettings: React.FC<Props> = ({
         blockNumber={"02"}
       >
         <FeesSettings
-          title={t(
-            "create-program-page.settings.investment-program-fees"
-          )}
+          title={t("create-program-page.settings.investment-program-fees")}
           entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
           entryFeeDescription={t(
             "create-program-page.settings.hints.entry-fee-description"
           )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
-          secondFeeLabel={t(
-            "create-program-page.settings.fields.success-fee"
-          )}
+          secondFeeLabel={t("create-program-page.settings.fields.success-fee")}
           secondFeeUnderText={t(
             "create-program-page.settings.hints.success-fee"
           )}
