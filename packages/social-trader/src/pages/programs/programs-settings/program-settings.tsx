@@ -134,7 +134,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
         asset={ASSET.PROGRAM}
-        canCloseAsset={details.personalDetails.ownerActions.canCloseAsset}
+        canCloseAsset={details.personalDetails.ownerActions.canClose}
         id={details.id}
         closeAsset={closeProgram}
       />
