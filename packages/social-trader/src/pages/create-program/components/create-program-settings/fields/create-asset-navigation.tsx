@@ -20,7 +20,7 @@ const _CreateAssetNavigation: React.FC<Props> = ({ asset, isSubmitting }) => {
 };
 
 interface Props {
-  asset: ASSET;
+  asset: ASSET | string;
   isSubmitting?: boolean;
 }
 
