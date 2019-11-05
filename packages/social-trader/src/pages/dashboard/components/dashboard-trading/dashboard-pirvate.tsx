@@ -1,5 +1,8 @@
+import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card";
-import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
+import DashboardTradingTable, {
+  CreateButtonToolbar
+} from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
@@ -13,6 +16,18 @@ const _DashboardPrivate: React.FC<Props> = () => {
   const [t] = useTranslation();
   return (
     <DashboardTradingTable
+      createButtonToolbar={
+        <>
+          <CreateButtonToolbar
+            text={t("buttons.create-account")}
+            route={CREATE_FUND_PAGE_ROUTE}
+          />
+          <CreateButtonToolbar
+            text={t("buttons.attach-external-account")}
+            route={CREATE_FUND_PAGE_ROUTE}
+          />
+        </>
+      }
       getItems={getPrivateAssets}
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
