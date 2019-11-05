@@ -44,6 +44,11 @@ import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 import { getDashboardFunds } from "./dashboard-funds.service";
 
+export const getFollowThem = (): CancelablePromise<IDataModel> =>
+  (Promise.resolve(
+    getTradingPublicLoaderData()
+  ) as unknown) as CancelablePromise<IDataModel>;
+
 export const getPrivateAssets = (): CancelablePromise<IDataModel> =>
   (Promise.resolve(
     getTradingPublicLoaderData()
