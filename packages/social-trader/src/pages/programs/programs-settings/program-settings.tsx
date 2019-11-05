@@ -2,7 +2,7 @@ import "./program-settings.scss";
 
 import {
   BrokersProgramInfo,
-  ProgramDetailsFullOld,
+  ProgramDetailsFull,
   ProgramsInfo
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
@@ -39,34 +39,34 @@ const _ProgramSettings: React.FC<Props> = ({
   changeSignaling
 }) => {
   const [t] = useTranslation();
-  const signalSuccessFee = details.isSignalProgram
-    ? details.signalSuccessFee
+  const signalSuccessFee = details.signalSettings
+    ? details.signalSettings.signalSuccessFee
     : undefined;
-  const signalVolumeFee = details.isSignalProgram
-    ? details.signalVolumeFee
+  const signalVolumeFee = details.signalSettings
+    ? details.signalSettings.signalVolumeFee
     : undefined;
   return (
     <>
       <TwoFactorConfirm
-        condition={details.personalProgramDetails.showTwoFactorButton}
+        condition={details.personalDetails.showTwoFactorButton}
         id={details.id}
       />
       <ClosePeriodBlock
-        condition={!!details.personalProgramDetails.canClosePeriod}
+        condition={!!details.personalDetails.ownerActions.canClosePeriod}
         id={details.id}
         closePeriod={closePeriod}
       />
       <ChangePassword
         condition={
-          details.personalProgramDetails.canChangePassword &&
-          details.personalProgramDetails.canCloseAsset
+          details.personalDetails.ownerActions.canChangePassword &&
+          details.personalDetails.ownerActions.canClose
         }
         title={details.title}
         id={details.id}
       />
       <CancelChangeBroker
-        condition={!!details.personalProgramDetails.migration}
-        isSignalProgram={details.isSignalProgram}
+        condition={!!details.personalDetails.migration}
+        isSignalProgram={!!details.signalSettings}
         brokerFrom={
           brokersInfo.brokers.find(
             broker =>
@@ -76,17 +76,16 @@ const _ProgramSettings: React.FC<Props> = ({
               )
           )!
         }
-        migration={details.personalProgramDetails.migration}
+        migration={details.personalDetails.migration}
         onSubmit={cancelChangeBroker}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         leverage={details.leverageMax}
       />
       <ChangeBroker
         condition={
-          !!!details.personalProgramDetails.migration &&
-          brokersInfo.brokers.length > 1
+          !!!details.personalDetails.migration && brokersInfo.brokers.length > 1
         }
-        isSignalProgram={details.isSignalProgram}
+        isSignalProgram={!!details.signalSettings}
         onSubmit={changeBroker}
         id={details.id}
         brokers={brokersInfo.brokers}
@@ -101,7 +100,7 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <TradesUpdating
-        condition={!details.isSignalProgram}
+        condition={!details.signalSettings}
         tradesDelay={details.tradesDelay}
         onSubmit={editProgram}
       />
@@ -116,11 +115,12 @@ const _ProgramSettings: React.FC<Props> = ({
       />
       <SignalingEdit
         condition={
-          details.isSignalProgram ||
-          (!details.isSignalProgram &&
-            details.personalProgramDetails.canMakeSignalProvider)
+          !!details.signalSettings ||
+          (!details.signalSettings &&
+            details.personalDetails.ownerActions
+              .canMakeSignalProviderFromProgram)
         }
-        isSignalProgram={details.isSignalProgram}
+        isSignalProgram={!!details.signalSettings}
         onSubmit={changeSignaling}
         signalSuccessFee={signalSuccessFee}
         signalVolumeFee={signalVolumeFee}
@@ -134,7 +134,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
         asset={ASSET.PROGRAM}
-        canCloseAsset={details.personalProgramDetails.canCloseAsset}
+        canCloseAsset={details.personalDetails.ownerActions.canCloseAsset}
         id={details.id}
         closeAsset={closeProgram}
       />
@@ -144,7 +144,7 @@ const _ProgramSettings: React.FC<Props> = ({
 
 interface Props {
   programsInfo: ProgramsInfo;
-  details: ProgramDetailsFullOld;
+  details: ProgramDetailsFull;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (
     values: IProgramSignalFormValues,

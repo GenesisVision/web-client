@@ -1,4 +1,4 @@
-import { Broker, ProgramDetailsFullOld } from "gv-api-web";
+import { Broker, ProgramDetailsFull } from "gv-api-web";
 import FollowDetailsPage from "pages/follows/follow-details/follow-details.page";
 import React from "react";
 import { compose } from "redux";
@@ -21,7 +21,7 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchFollowDescription(id as string)(ctx))
   ]).then(([_, descriptionResult]) => {
     const description = ((descriptionResult as unknown) as {
-      value: ProgramDetailsFullOld;
+      value: ProgramDetailsFull;
     }).value;
     ctx.reduxStore.dispatch(dispatch =>
       dispatch(statisticCurrencyAction(description.currency))

@@ -2,8 +2,7 @@ import "./follow-settings.scss";
 
 import {
   BrokersProgramInfo,
-  ProgramDetailsFullOld,
-  ProgramsInfo
+  ProgramDetailsFull
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
@@ -33,25 +32,29 @@ const _FollowSettings: React.FC<Props> = ({
   changeSignaling
 }) => {
   const [t] = useTranslation();
-  const signalSuccessFee = details.isSignalProgram
-    ? details.signalSuccessFee
+  const signalSuccessFee = details.signalSettings
+    ? details.signalSettings.signalSuccessFee
     : undefined;
-  const signalVolumeFee = details.isSignalProgram
-    ? details.signalVolumeFee
+  const signalVolumeFee = details.signalSettings
+    ? details.signalSettings.signalVolumeFee
     : undefined;
   return (
     <>
-      <ChangePassword
-        condition={
-          details.personalProgramDetails.canChangePassword &&
-          details.personalProgramDetails.canCloseAsset
-        }
-        title={details.title}
-        id={details.id}
-      />
+      {details.personalDetails && details.personalDetails.ownerActions && (
+        <ChangePassword
+          condition={
+            details.personalDetails.ownerActions.canChangePassword &&
+            details.personalDetails.ownerActions.canClose
+          }
+          title={details.title}
+          id={details.id}
+        />
+      )}
       <CancelChangeBroker
-        condition={!!details.personalProgramDetails.migration}
-        isSignalProgram={details.isSignalProgram}
+        condition={
+          details.personalDetails && !!details.personalDetails.migration
+        }
+        isSignalProgram={!!details.signalSettings}
         brokerFrom={
           brokersInfo.brokers.find(
             broker =>
@@ -61,17 +64,16 @@ const _FollowSettings: React.FC<Props> = ({
               )
           )!
         }
-        migration={details.personalProgramDetails.migration}
+        migration={details.personalDetails.migration}
         onSubmit={cancelChangeBroker}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         leverage={details.leverageMax}
       />
       <ChangeBroker
         condition={
-          !!!details.personalProgramDetails.migration &&
-          brokersInfo.brokers.length > 1
+          !!!details.personalDetails.migration && brokersInfo.brokers.length > 1
         }
-        isSignalProgram={details.isSignalProgram}
+        isSignalProgram={!!details.signalSettings}
         onSubmit={changeBroker}
         id={details.id}
         brokers={brokersInfo.brokers}
@@ -92,7 +94,11 @@ const _FollowSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("asset-settings.close-follow.title")}
         asset={ASSET.FOLLOW}
-        canCloseAsset={details.personalProgramDetails.canCloseAsset}
+        canCloseAsset={
+          details.personalDetails &&
+          details.personalDetails.ownerActions &&
+          details.personalDetails.ownerActions.canClose
+        }
         id={details.id}
         closeAsset={closeFollow}
       />
@@ -101,8 +107,8 @@ const _FollowSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  followsInfo: ProgramsInfo;
-  details: ProgramDetailsFullOld;
+  followsInfo: any //TODO ProgramsInfo;
+  details: ProgramDetailsFull;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (
     values: IFollowSignalFormValues,

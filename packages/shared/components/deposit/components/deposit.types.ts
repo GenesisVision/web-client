@@ -1,7 +1,7 @@
 import {
-  FundInvestInfo,
-  ProgramInvestInfoOld,
-  WalletBaseData
+  WalletBaseData,
+  ProgramAssetPlatformInfo,
+  FundAssetPlatformInfo
 } from "gv-api-web";
 import { CurrencyEnum, RootThunk, SetSubmittingType } from "shared/utils/types";
 
@@ -10,7 +10,7 @@ export type TInvestInfoWithWallets = {
   wallets: WalletBaseData[];
 };
 
-export type TInvestInfo = FundInvestInfo | ProgramInvestInfoOld;
+export type TInvestInfo = FundAssetPlatformInfo | ProgramAssetPlatformInfo;
 
 export type TGetAssetInfoCreator = (
   getProgramInfoFn: (

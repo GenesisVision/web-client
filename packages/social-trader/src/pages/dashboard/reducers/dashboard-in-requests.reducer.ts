@@ -1,4 +1,4 @@
-import { ProgramRequestsOld } from "gv-api-web";
+import { ProgramRequests } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
