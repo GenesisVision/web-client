@@ -143,7 +143,7 @@ export const TableCardChartBlock: React.FC<
           />
         </Profitability>
       </div>
-      {profit && (
+      {!!profit && (
         <div className="table-card__profit-value">
           <NumberFormat
             value={formatValue(profit, 2)}
