@@ -15,7 +15,7 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
-import { getFundStructure } from "../../services/fund-details.service";
+//import { getFundStructure } from "../../services/fund-details.service";
 import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 const FundStructure: React.FC<Props> = ({ id }) => {
@@ -23,7 +23,7 @@ const FundStructure: React.FC<Props> = ({ id }) => {
   if (!id) return null;
   return (
     <TableContainer
-      getItems={getFundStructure(id)}
+      //getItems={getFundStructure(id)}
       dataSelector={fundStructureTableSelector}
       columns={FUND_STRUCTURE_COLUMNS}
       isFetchOnMount={true}

@@ -25,7 +25,7 @@ const mapDispatchToProps = (
   const { id, accountCurrency, onSubmit, onClose } = ownProps;
   const onSubmitWithdrawal = () => {
     onClose();
-    onSubmit();
+    onSubmit && onSubmit();
   };
   const service = bindActionCreators(
     {

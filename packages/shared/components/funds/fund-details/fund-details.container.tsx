@@ -44,7 +44,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
-        personalDetails={description.personalFundDetails}
+        personalDetails={description.personalDetails}
         description={description}
         notificationsUrl={{
           as: composeFundNotificationsUrl(description.url),
@@ -67,7 +67,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
             <div>
               <FundAssetContainer
                 type={FUND_ASSET_TYPE.LARGE}
-                assets={description.currentAssets}
+                assets={description.assetsStructure}
                 size={7}
               />
             </div>
@@ -95,10 +95,10 @@ const _FundDetailsContainer: React.FC<Props> = ({
       <div className="details__divider" />
       <DetailsInvestment
         fees={{
-          exitFee: description.exitFee,
-          entryFee: description.entryFee,
-          exitFeePersonal: description.personalFundDetails
-            ? description.personalFundDetails.exitFeePersonal
+          exitFee: description.exitFeeCurrent,
+          entryFee: description.entryFeeCurrent,
+          exitFeePersonal: description.personalDetails
+            ? description.personalDetails.exitFeePersonal
             : 0
         }}
         dispatchDescription={dispatchFundDescription}
@@ -107,10 +107,10 @@ const _FundDetailsContainer: React.FC<Props> = ({
         selector={fundEventsTableSelector}
         id={description.id}
         currency={"GVT" as CurrencyEnum}
-        personalDetails={description.personalFundDetails as InvestmentDetails}
+        personalDetails={description.personalDetails as InvestmentDetails}
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
-      <FundDetailsStatisticSection />
+      {/*<FundDetailsStatisticSection />*/}
       <FundDetailsHistorySection id={description.id} />
     </Page>
   );

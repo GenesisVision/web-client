@@ -13,7 +13,7 @@ import { TStatisticCurrencyAction } from "shared/components/details/reducers/sta
 import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
-import { ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { FundAssetsViewModel } from "../reducers/fund-history.reducer";
 import { FundIdState } from "../reducers/id.reducer";
@@ -71,7 +71,7 @@ export const fetchFundDescriptionAction = (
   authorization: string
 ): ApiAction<FundDetailsFull> => ({
   type: FETCH_FUND_DESCRIPTION,
-  payload: fundsApi.getFundDetails(id, { authorization })
+  payload: fundsApi.getFundDetails(id) // TODO auth
 });
 
 export const statisticCurrencyAction = (
@@ -96,14 +96,14 @@ export const fundReallocateHistoryAction = (
   payload: fundsApi.getReallocationsHistory(fundId, filters)
 });
 
-export const fundStructureAction = (
-  fundId: string
-): ApiAction<FundAssetsViewModel> => ({
-  type: FUND_STRUCTURE,
-  payload: fundsApi
-    .getFundAssets(fundId)
-    .then(data => ({ ...data, total: data.assets.length }))
-});
+// export const fundStructureAction = (
+//   fundId: string
+// ): ApiAction<FundAssetsViewModel> => ({
+//   type: FUND_STRUCTURE,
+//   payload: fundsApi
+//     .getFundAssets(fundId)
+//     .then(data => ({ ...data, total: data.assets.length }))
+// });
 
 export interface SetFundIdAction extends ActionType<FundIdState> {
   type: typeof SET_FUND_ID;

@@ -27,7 +27,7 @@ import {
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
   fundReallocateHistoryAction,
-  fundStructureAction,
+  // fundStructureAction,
   setFundIdAction
 } from "../actions/fund-details.actions";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
@@ -51,11 +51,11 @@ export const dispatchFundId = (id: string) => async (
   dispatch: MiddlewareDispatch
 ) => await dispatch(setFundIdAction(id));
 
-export const fetchFundStructure = (
-  fundId: string
-): Promise<FundAssetsListInfo> => {
-  return fundsApi.getFundAssets(fundId);
-};
+// export const fetchFundStructure = (
+//   fundId: string
+// ): Promise<FundAssetsListInfo> => {
+//   return fundsApi.getFundAssets(fundId);
+// };
 export const getDashboardHistoryDetailsCounts = (fundId: string) => (
   dispatch: Dispatch,
   getState: () => RootState

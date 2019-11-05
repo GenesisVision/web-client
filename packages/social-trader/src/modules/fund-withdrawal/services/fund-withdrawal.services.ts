@@ -5,17 +5,17 @@ import {
   FundWithdrawalInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import managerApi from "shared/services/api-client/manager-api";
+//import managerApi from "shared/services/api-client/manager-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import investmentsApi from "shared/services/api-client/investments-api";
 
 export const getFundWithdrawInfo = (
   id: string,
   currency: Currency
 ) => (): Promise<FundWithdrawalInfoResponse> => {
   return Promise.all([
-    managerApi.getFundWithdrawInfo(id, currency, authService.getAuthArg()),
-    walletApi.getWalletMultiAvailable(currency, authService.getAuthArg())
+    walletApi.getWalletAvailable(currency, authService.getAuthArg())
   ]).then(([withdrawalInfo, walletMulti]) => {
     return { withdrawalInfo, wallets: walletMulti.wallets };
   });
@@ -24,10 +24,8 @@ export const getFundWithdrawInfo = (
 export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
 ): any => (dispatch: Dispatch) => {
-  return managerApi
-    .withdrawFromFund(id, value.percent, authService.getAuthArg(), {
-      currency: value.currency
-    })
+  return investmentsApi
+    .withdrawFromFund(id, authService.getAuthArg(), value)
     .then(response => {
       onClose();
       dispatch(

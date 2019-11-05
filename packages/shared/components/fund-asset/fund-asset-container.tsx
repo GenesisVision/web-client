@@ -1,7 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import { FundAssetPercent } from "gv-api-web";
+import { Currency, FundAssetInfo, FundAssetPercent } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
@@ -46,8 +46,9 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         .filter((asset, idx) => idx < (size || assets.length))
         .map((asset, idx) => (
           <FundAsset
-            {...(asset as PlatformAssetFull)}
-            currency={asset.asset as CurrencyEnum} //TODO remove when api update
+            key={asset.asset}
+            {...asset}
+            currency={asset.asset as Currency}
             type={type}
             last={idx === assets.length - 1}
             removable={removable}
@@ -76,8 +77,9 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
                 .filter((asset, idx) => idx >= size)
                 .map((asset, idx) => (
                   <FundAsset
-                    {...(asset as PlatformAssetFull)}
-                    currency={asset.asset as CurrencyEnum} //TODO remove when api update
+                    key={asset.asset}
+                    {...asset}
+                    currency={asset.asset as Currency} //TODO remove when api update
                     type={type}
                     last={idx === assets.length - 1}
                     removable={removable}
@@ -107,7 +109,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: Array<PlatformAssetFull | FundAssetPercent>;
+  assets: Array<PlatformAssetFull | FundAssetInfo>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;

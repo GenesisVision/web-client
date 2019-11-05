@@ -7,8 +7,8 @@ import {
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import withLoader from "shared/decorators/with-loader";
-import managerApi from "shared/services/api-client/manager-api";
-
+//import managerApi from "shared/services/api-client/manager-api";
+import investmentsApi from "shared/services/api-client/investments-api";
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   onApply = () => {},
@@ -18,8 +18,8 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   <DepositContainer
     currency={FUND_CURRENCY}
     asset={ASSET.FUND}
-    assetInvest={fundInvestCreator(managerApi.investIntoFund)}
-    fetchInfo={getFundInfoCreator(managerApi.getFundInvestInfo)}
+    assetInvest={fundInvestCreator(investmentsApi.investIntoFund)}
+    //fetchInfo={getFundInfoCreator(managerApi.getFundInvestInfo)}
     id={id}
     hasEntryFee
     onApply={onApply}

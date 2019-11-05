@@ -1,6 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { FundProfitChart } from "gv-api-web";
+import { FundChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -101,8 +101,8 @@ const _FundDetailsStatisticsElements: React.FC<
             >
               <NumberFormat
                 value={
-                  statistic.profitChangePercent !== null
-                    ? statistic.profitChangePercent
+                  statistic.profitPercent !== null
+                    ? statistic.profitPercent
                     : "-"
                 }
                 displayType="text"
@@ -175,7 +175,7 @@ const _FundDetailsStatisticsElements: React.FC<
 
 export interface IFundStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: FundProfitChart;
+  statistic: FundChartStatistic;
 }
 
 export interface IFundDetailsStatisticsElementsProps {

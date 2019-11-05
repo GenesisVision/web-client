@@ -59,7 +59,7 @@ import uiReducer from "./ui-reducer";
 
 export const sharedRootReducers = {
   // profile: profileReducer,
-  // fundDetails: fundDetailsReducer,
+  fundDetails: fundDetailsReducer,
   programDetails: programDetailsReducer,
   // router: connectRouter(history),
   platformData: platformReducer,
@@ -86,7 +86,7 @@ export const sharedRootReducers = {
 
 export type RootState = Readonly<{
   // profile: ProfileState;
-  // fundDetails: FundDetailsState;
+  fundDetails: FundDetailsState;
   programDetails: ProgramDetailsState;
   // notifications: NotificationsState;
   profileHeader: HeaderState;
