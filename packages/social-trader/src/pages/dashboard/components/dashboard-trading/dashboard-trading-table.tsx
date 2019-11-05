@@ -5,6 +5,8 @@ import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import {
   FilteringType,
   TDefaultFilters
@@ -21,6 +23,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { LIST_VIEW } from "shared/components/table/table.constants";
 
 const _DashboardTradingTable: React.FC<Props> = ({
+  createButtonToolbar,
   filtering,
   defaultFilters,
   getItems,
@@ -31,6 +34,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
   return (
     <DashboardBlock seeAll={false}>
       <TableModule
+        createButtonToolbar={createButtonToolbar}
         title={title}
         loaderData={[]}
         getItems={getItems}
@@ -58,12 +62,24 @@ const _DashboardTradingTable: React.FC<Props> = ({
 };
 
 interface Props {
+  createButtonToolbar?: JSX.Element;
   getItems: GetItemsFuncType;
   defaultFilters?: TDefaultFilters;
-  filtering: FilteringType;
+  filtering?: FilteringType;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
 }
+
+export const CreateButtonToolbar: React.FC<{
+  text: string;
+  route: string;
+}> = React.memo(({ text, route }) => (
+  <Link to={route} className="dashboard__button">
+    <GVButton color="primary" variant="text">
+      {text}
+    </GVButton>
+  </Link>
+));
 
 const DashboardTradingTable = React.memo(_DashboardTradingTable);
 export default DashboardTradingTable;
