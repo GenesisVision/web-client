@@ -1,6 +1,8 @@
 import * as React from "react";
 
 const Pie: React.FC<Props> = ({
+  begin = 0,
+  withSubstrate = true,
   pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
   start = 0,
@@ -9,16 +11,23 @@ const Pie: React.FC<Props> = ({
 }) => {
   const valuePercent = calcPercent(value, start, end);
   return (
-    <svg width="100%" height="100%" viewBox="0 0 34 34">
-      <circle
-        cx="17"
-        cy="17"
-        r="15.91549430918954"
-        fill="transparent"
-        stroke={color}
-        strokeOpacity={0.2}
-        strokeWidth="2"
-      />
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 34 34"
+      transform={`rotate(${begin})`}
+    >
+      {withSubstrate && (
+        <circle
+          cx="17"
+          cy="17"
+          r="15.91549430918954"
+          fill="transparent"
+          stroke={color}
+          strokeOpacity={0.2}
+          strokeWidth="2"
+        />
+      )}
 
       <circle
         cx="17"
@@ -74,6 +83,8 @@ export enum PIE_DIRECTION {
 }
 
 export interface Props {
+  begin?: number;
+  withSubstrate?: boolean;
   color: string;
   end: Date | number;
   value: Date | number;

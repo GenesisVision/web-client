@@ -1,0 +1,32 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-pie-chart {
+  &__pie-chart {
+    box-sizing: border-box;
+    width: 140px;
+    height: 140px;
+    margin-right: $padding-big;
+  }
+  &__container {
+    @include details-block-horizontal-paddings;
+    display: flex;
+  }
+  &__name-container {
+    display: flex;
+    align-items: center;
+    padding-bottom: $padding-xsmall;
+    cursor: pointer;
+  }
+  &__bullet {
+    border-radius: 50%;
+    margin-right: $padding-xxsmall;
+    width: 8px;
+    height: 8px;
+  }
+  &__name {
+    font-size: $font-size-paragraph;
+    letter-spacing: 0.47px;
+  }
+}

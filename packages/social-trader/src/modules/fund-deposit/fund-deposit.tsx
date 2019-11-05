@@ -11,7 +11,7 @@ import managerApi from "shared/services/api-client/manager-api";
 
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
-  onApply,
+  onApply = () => {},
   open,
   onClose
 }) => (
@@ -33,5 +33,5 @@ export default FundDeposit;
 
 interface OwnProps {
   id: string;
-  onApply(): void;
+  onApply?: () => void;
 }

@@ -1,0 +1,9 @@
+
+@import "~shared/styles/_sizes.scss";
+.dashboard-block {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    @include details-block-horizontal-paddings();
+  }
+}

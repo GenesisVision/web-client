@@ -97,207 +97,207 @@ export const getProfitChartLoaderDataWithEquity = (): ProgramProfitChart => ({
 
 export const getEquityChartLoaderData = (): ChartSimple[] => [
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-20T11:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-20T19:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-21T02:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-21T10:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-21T17:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-22T01:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-22T08:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-22T16:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-22T23:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-23T07:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-23T14:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-23T22:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-24T05:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-24T13:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-24T20:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-25T04:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-25T11:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-25T19:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-26T02:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-26T10:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-26T17:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-27T01:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-27T08:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-27T16:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-27T23:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-28T07:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-28T14:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-28T22:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-29T05:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-29T13:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-29T20:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-30T04:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-30T11:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-30T19:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-31T02:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-31T10:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-08-31T17:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-01T01:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-01T08:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-01T16:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-01T23:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-02T07:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-02T14:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-02T22:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-03T05:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-03T13:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-03T20:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-04T04:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-04T11:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-04T19:00:00.0000000+00:00")
   },
   {
-    value: getRandomInteger(-10, 10),
+    value: getRandomInteger(-1000, 1000),
     date: new Date("2019-09-05T02:00:00.0000000+00:00")
   }
   /*{
