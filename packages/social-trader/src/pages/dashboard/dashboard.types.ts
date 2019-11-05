@@ -35,20 +35,26 @@ export interface TDashboardEvent {
 }
 
 export interface TAsset {
+  login?: string;
+  broker?: string;
   type: ASSET;
   currency: CurrencyEnum;
   id: string;
   url: string;
   title: string;
-  levelProgress: number;
+  levelProgress?: number;
   logo: string;
-  level: number;
+  level?: number;
   color: string;
   manager: { url: string; username: string };
   statistic: {
+    ddown: number;
+    age: number;
+    leverage: number;
     profit: number;
     profitPercent: number;
     balance: {
+      currency: CurrencyEnum;
       amount: number;
     };
   };
