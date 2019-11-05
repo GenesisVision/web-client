@@ -111,7 +111,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
       {/*<FundDetailsStatisticSection />*/}
-      <FundDetailsHistorySection id={description.id} />
+      {/*<FundDetailsHistorySection id={description.id} />*/}
     </Page>
   );
 };

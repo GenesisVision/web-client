@@ -35,8 +35,8 @@ const _InvestmentFundControls: React.FC<Props> = ({
     setIsOpenUnAuthInvestPopup,
     setIsCloseUnAuthInvestPopup
   ] = useIsOpen();
-  const { personalFundDetails } = fundDescription;
-  const isOwnProgram = personalFundDetails && personalFundDetails.isOwnProgram;
+  const { personalDetails } = fundDescription;
+  const isOwnProgram = personalDetails && personalDetails.isOwnAsset;
 
   const message =
     isAuthenticated && !isOwnProgram
@@ -44,7 +44,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       : t("fund-details-page.description.unauth-popup");
 
   const isDisabledInvestButton = isAuthenticated
-    ? !personalFundDetails || !personalFundDetails.canInvest
+    ? !personalDetails || !personalDetails.canInvest
     : false;
 
   return (
