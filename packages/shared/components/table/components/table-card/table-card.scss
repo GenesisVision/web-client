@@ -91,7 +91,7 @@ $card-height: 372px;
     cursor: pointer;
     padding-right: $padding-xsmall;
 
-    svg {
+    & .icon svg {
       width: 30px;
       height: 30px;
     }
