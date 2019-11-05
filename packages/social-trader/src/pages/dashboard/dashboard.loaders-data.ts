@@ -122,28 +122,36 @@ const getEventLoaderData = () => ({
 const getRandomAsset = () =>
   [ASSET.FUND, ASSET.PROGRAM, ASSET.FOLLOW][getRandomInteger(0, 2)];
 
-export const getRecommendationLoaderData = (): TRecommendation => ({
-  type: getRandomAsset(),
-  color: faker.internet.color(),
-  level: 0,
-  levelProgress: 0,
-  logo: "",
-  id: "",
-  url: "",
-  title: faker.name.lastName(),
-  manager: {
-    username: faker.name.lastName(),
-    url: faker.name.lastName()
-  },
-  currency: "GVT",
-  statistic: {
-    balance: { amount: getRandomInteger(-1000, 1000) },
-    profit: getRandomInteger(-1000, 1000),
-    profitPercent: getRandomInteger(-1000, 1000)
-  },
-  value: getRandomInteger(-1000, 1000),
-  chart: getEquityChartLoaderData()
-});
+export const getRecommendationLoaderData = (): TRecommendation => {
+  const type = getRandomAsset();
+  return {
+    type,
+    color: faker.internet.color(),
+    level: type === ASSET.PROGRAM ? getRandomInteger(1, 7) : undefined,
+    levelProgress: type === ASSET.PROGRAM ? getRandomInteger(1, 7) : undefined,
+    logo: "",
+    id: "",
+    url: "",
+    title: faker.name.lastName(),
+    manager: {
+      username: faker.name.lastName(),
+      url: faker.name.lastName()
+    },
+    currency: "GVT",
+    statistic: {
+      ddown: getRandomInteger(-1000, 1000),
+      leverage: getRandomInteger(-1000, 1000),
+      age: getRandomInteger(-1000, 1000),
+      balance: { amount: getRandomInteger(-1000, 1000), currency: "GVT" },
+      profit: getRandomInteger(-1000, 1000),
+      profitPercent: getRandomInteger(-1000, 1000)
+    },
+    value: getRandomInteger(-1000, 1000),
+    chart: getEquityChartLoaderData(),
+    login: type === ASSET.PROGRAM ? faker.name.lastName() : undefined,
+    broker: type === ASSET.PROGRAM ? faker.name.lastName() : undefined
+  };
+};
 
 export const getTotalLoaderData = () => ({
   day: {
