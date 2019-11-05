@@ -58,3 +58,6 @@ export interface IDashboardAssetChart {
   equityChart: ChartSimple[];
   pnLChart?: ChartSimple[];
 }
+
+export const DECIMAL_SCALE_SMALL_VALUE = 4;
+export const DECIMAL_SCALE_BIG_VALUE = 2;

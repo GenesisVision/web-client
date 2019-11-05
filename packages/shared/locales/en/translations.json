@@ -81,6 +81,11 @@
     "rejected": "Rejected"
   },
   "buttons": {
+    "create-account": "Create account",
+    "attach-external-account": "Attach external account",
+    "invest": "Invest",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
     "notify": "Notify",
     "generate": "Generate",
     "apply": "Apply",
@@ -221,6 +226,7 @@
     "Pending": "Pending"
   },
   "program-actions": {
+    "change-password": "Change password",
     "remove-from-favorites": "Remove from Favourites",
     "add-to-favorites": "Add to Favourites",
     "details": "Details",
@@ -2440,6 +2446,7 @@
       "title": "Avatar"
     },
     "buttons": {
+      "close-follow": "Close follow",
       "close-program": "Close program",
       "close-fund": "Close fund",
       "save": "Save"
@@ -2537,6 +2544,53 @@
     }
   },
   "dashboard-page": {
+    "trading": {
+      "follow-them": "Follow them",
+      "actions": {
+        "make-program": "Make program",
+        "make-signal-account": "Make signal account",
+        "settings": "Open settings",
+        "terminal": "Terminal",
+        "close-period": "Close period",
+        "change-password": "Change password"
+      },
+      "ddown": "D.down",
+      "login": "Login",
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "age": "Age",
+      "total": "Total",
+      "private": "Private",
+      "public": "Public"
+    },
+    "chart": "Chart",
+    "see-more": "See more",
+    "recommendations": {
+      "title": "Recommendations",
+      "fund": "Invest",
+      "program": "Invest",
+      "follow": "Follow"
+    },
+    "statistic": {
+      "total": "Total",
+      "AUM": "AUM",
+      "funds": "Funds",
+      "programs": "Programs",
+      "investing": "Investing",
+      "equity": "Your Equity",
+      "balance": "Balance",
+      "table": {
+        "data": "Data",
+        "description": "Description",
+        "amount": "Amount"
+      }
+    },
+    "total": {
+      "title": "Total",
+      "day": "Day",
+      "week": "Week",
+      "month": "Month"
+    },
     "fail-chart": "Error loading chart",
     "title": "Dashboard",
     "assets": {
@@ -2547,7 +2601,13 @@
     },
     "programs": "Programs",
     "pending-tooltip": "The program is being created.",
-    "portfolio": "Portfolio",
+    "portfolio": {
+      "title": "Portfolio",
+      "programs": "Programs",
+      "funds": "Funds",
+      "trading": "Trading",
+      "wallet": "Wallet"
+    },
     "favorite-programs": "Favourite programs",
     "create-program-text": "Do not have any programs yet",
     "create-fund-text": "Do not have any fund yet",

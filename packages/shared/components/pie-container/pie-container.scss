@@ -31,3 +31,18 @@
     align-items: center;
   }
 }
+.multi-pie-container {
+  position: relative;
+  height: 100%;
+  &__chart {
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.4;
+    &--over {
+      opacity: 1;
+    }
+  }
+}

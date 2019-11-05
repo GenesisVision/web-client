@@ -13,7 +13,7 @@ import { CurrencyEnum } from "shared/utils/types";
 const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   currency,
-  onApply,
+  onApply = () => {},
   open,
   onClose
 }) => (
@@ -36,5 +36,5 @@ export default ProgramDeposit;
 interface OwnProps {
   id: string;
   currency: CurrencyEnum;
-  onApply(): void;
+  onApply?: () => void;
 }

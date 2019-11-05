@@ -12,7 +12,7 @@ export interface IFundWithdrawalContainerProps extends IDialogProps {
   id: string;
   accountCurrency: CurrencyEnum;
   assetCurrency: CurrencyEnum;
-  onSubmit(): void;
+  onSubmit?: () => void;
 }
 
 export interface IFundControlsProps {

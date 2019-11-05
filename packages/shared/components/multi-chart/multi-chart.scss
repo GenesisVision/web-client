@@ -24,6 +24,7 @@
   }
   &__period {
     box-sizing: border-box;
+    @include details-block-horizontal-paddings();
     & .chart-period {
       width: 100%;
       box-sizing: border-box;
