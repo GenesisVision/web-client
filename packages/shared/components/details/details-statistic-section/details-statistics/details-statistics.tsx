@@ -1,15 +1,14 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { Currency, ProgramChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import DetailsBlock from "shared/components/details/details-block";
-import { CurrencyEnum } from "shared/utils/types";
 
 import {
-  ProfitChartType,
   TProfitChartSelector,
   TStatisticCurrencySelector,
   TUseChartPeriod
@@ -30,8 +29,8 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   >(undefined);
   useEffect(() => {
     statistic &&
-      statistic[0] &&
-      setStatisticData({ statisticCurrency, statistic: statistic[0] });
+      statistic.statistic &&
+      setStatisticData({ statisticCurrency, statistic: statistic.statistic });
   }, [statistic, statisticCurrency]);
   return (
     <DetailsBlock horizontalPaddings className="details-statistics">
@@ -45,8 +44,8 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
 };
 
 export interface IStatisticData {
-  statisticCurrency: CurrencyEnum;
-  statistic: ProfitChartType;
+  statisticCurrency: Currency;
+  statistic: ProgramChartStatistic;
 }
 
 export type TRenderDetailsStatisticsElementsProps = {

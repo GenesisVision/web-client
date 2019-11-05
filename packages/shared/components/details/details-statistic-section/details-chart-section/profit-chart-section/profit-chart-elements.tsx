@@ -17,11 +17,8 @@ import ChartCurrencySelector, {
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
-import {
-  ProfitChartDataType,
-  ProfitChartType,
-  useChartData
-} from "../../details.chart.helpers";
+import { ProfitChartType, useChartData } from "../../details.chart.helpers";
+import { ProgramProfitCharts } from "gv-api-web";
 
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,
@@ -35,14 +32,14 @@ const _ProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
-  const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
+  const chartData = useChartData<ProgramProfitCharts>(data);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
-  const chart = chartData.chart[0];
+  // const chart = chartData.chart
   return (
     <>
       <div className="details-chart__value">
         <StatisticItem big accent>
-          {renderProfitValue({ chart })}
+          {renderProfitValue({ chartData })}
         </StatisticItem>
       </div>
       <ChartPeriod onChange={setPeriod} period={period} />
@@ -75,7 +72,7 @@ export type TRenderProfitValue = (props: {
 }) => JSX.Element;
 
 export type TRenderProfitChart = (props: {
-  profitChart: ProfitChartDataType;
+  profitChart: ProgramProfitCharts;
   chartCurrencies?: TChartCurrency[];
 }) => JSX.Element;
 
@@ -84,7 +81,7 @@ interface OwnProps {
   renderProfitValue: TRenderProfitValue;
   period: ChartDefaultPeriod;
   setPeriod: HandlePeriodChangeType;
-  data: ProfitChartDataType;
+  data: ProgramProfitCharts;
   selectedCurrencies: TChartCurrency[];
   addCurrency: TAddChartCurrency;
   removeCurrency: TRemoveChartCurrency;
@@ -95,9 +92,9 @@ interface OwnProps {
 interface Props extends OwnProps {}
 
 const ProfitChartElements = compose<
-  React.ComponentType<OwnProps & WithBlurLoaderProps<ProfitChartDataType>>
+  React.ComponentType<OwnProps & WithBlurLoaderProps<ProgramProfitCharts>>
 >(
-  withBlurLoader,
+  // withBlurLoader,
   React.memo
 )(_ProfitChartElements);
 export default ProfitChartElements;

@@ -1,4 +1,4 @@
-import { ProfitChart } from "gv-api-web";
+import { ProgramProfitCharts } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
@@ -9,19 +9,15 @@ import { apiSelector } from "shared/utils/selectors";
 
 const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
 
-export type ProgramProfitChartDataType = Array<ProfitChart>;
-
-export type ProgramProfitChartState = IApiState<ProgramProfitChartDataType>;
+export type ProgramProfitChartState = IApiState<ProgramProfitCharts>;
 
 export const programProfitChartSelector = apiSelector<
-  ProgramProfitChartDataType,
+  ProgramProfitCharts,
   RootState
 >(state => state.programDetails.profitChart);
 
-const programProfitChartReducer = apiReducerFactory<ProgramProfitChartDataType>(
-  {
-    apiType: FETCH_PROGRAM_PROFIT_CHART
-  }
-);
+const programProfitChartReducer = apiReducerFactory<ProgramProfitCharts>({
+  apiType: FETCH_PROGRAM_PROFIT_CHART
+});
 
 export default programProfitChartReducer;

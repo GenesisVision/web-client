@@ -87,7 +87,7 @@ export const sharedRootReducers = {
 export type RootState = Readonly<{
   // profile: ProfileState;
   // fundDetails: FundDetailsState;
-  // programDetails: ProgramDetailsState;
+  programDetails: ProgramDetailsState;
   // notifications: NotificationsState;
   profileHeader: HeaderState;
   // notificationSettings: NotificationSettingsState;

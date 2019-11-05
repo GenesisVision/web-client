@@ -21,7 +21,9 @@ import { composeRequestFiltersByTableState } from "shared/components/table/servi
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
+import assetsApi from "shared/services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
+import eventsApi from "shared/services/api-client/events-api";
 // import investorApi from "shared/services/api-client/investor-api";
 // import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
@@ -54,8 +56,6 @@ import {
   tradesTableSelector
 } from "../reducers/program-history.reducer";
 import { ProgramStatisticResult } from "./program-details.types";
-import assetsApi from "../../../../services/api-client/assets-api";
-import eventsApi from "../../../../services/api-client/events-api";
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
@@ -99,7 +99,6 @@ export const getProgramStatistic = (
     dateTo: period.end,
     maxPointCount: 100
   };
-  // @ts-ignore
   return Promise.all([
     programsApi.getProgramProfitChart(programId, chartFilter),
     programsApi.getProgramBalanceChart(programId, chartFilter)

@@ -1,6 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ProgramDetailsFullStatusEnum, ProgramProfitChart } from "gv-api-web";
+import {
+  ProgramChartStatistic,
+  PeriodStatus,
+} from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -17,8 +20,11 @@ import { CurrencyEnum } from "shared/utils/types";
 
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps
-> = ({ data: { statistic, statisticCurrency }, period, status }) => {
+> = ({ data, period, status = "hello" }) => {
   const [t] = useTranslation();
+  if (!data) return null;
+  const { statistic, statisticCurrency } = data;
+  console.info(statistic, "ele");
   return (
     <DetailsStatisticsElements
       Current={() => (
@@ -151,12 +157,12 @@ const _ProgramDetailsStatisticsElements: React.FC<
                   statistic.tradingVolume !== undefined
                     ? formatCurrencyValue(
                         statistic.tradingVolume,
-                        statistic.programCurrency
+                        statisticCurrency //statistic.programCurrency
                       )
                     : "-"
                 }
                 displayType="text"
-                suffix={` ${statistic.programCurrency}`}
+                suffix={` ${statisticCurrency}`} //statistic.programCurrency
               />
             </StatisticItem>
           </div>
@@ -234,7 +240,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
 
 export interface IProgramStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: ProgramProfitChart;
+  statistic: ProgramChartStatistic;
 }
 
 export interface IProgramDetailsStatisticsElementsProps {

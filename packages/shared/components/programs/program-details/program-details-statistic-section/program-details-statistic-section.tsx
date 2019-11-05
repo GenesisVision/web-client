@@ -36,17 +36,20 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       statisticCurrencySelector={statisticCurrencySelector}
       useChartStateValues={useProgramChartStateValues}
       useChartPeriod={useChartPeriod}
-      renderProfitValue={({ chart }) => (
-        <NumberFormat
-          value={formatCurrencyValue(
-            "timeframeProfit" in chart ? chart.timeframeProfit : 0,
-            statisticCurrency
-          )}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={` ${statisticCurrency}`}
-        />
-      )}
+      renderProfitValue={chart => {
+        console.info(chart);
+        return (
+          <NumberFormat
+            value={formatCurrencyValue(
+              "timeframeProfit" in chart ? chart.timeframeProfit : 0,
+              statisticCurrency
+            )}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${statisticCurrency}`}
+          />
+        );
+      }}
       renderBalanceChart={({ color, currency, balanceChart }) => (
         <ProgramBalanceChart
           color={color}
@@ -57,14 +60,16 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderProfitChart={({ profitChart, chartCurrencies }) => (
         <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
       )}
-      renderDetailsStatisticsElements={({ period, statisticData }) => (
-        <ProgramDetailsStatisticsElements
-          loaderData={statisticDataLoaderData}
-          status={status}
-          data={statisticData! as IProgramStatisticData}
-          period={period}
-        />
-      )}
+      renderDetailsStatisticsElements={({ period, statisticData }) => {
+        return (
+          <ProgramDetailsStatisticsElements
+            loaderData={statisticDataLoaderData}
+            status={status}
+            data={statisticData! as IProgramStatisticData}
+            period={period}
+          />
+        );
+      }}
     />
   );
 };

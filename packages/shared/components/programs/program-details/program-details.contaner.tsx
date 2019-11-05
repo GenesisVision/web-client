@@ -121,7 +121,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         ReinvestingWidget={descriptionSection.ReinvestingWidget}
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
-      {/*<ProgramDetailsStatisticSection />*/}
+      <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime

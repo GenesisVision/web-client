@@ -22,7 +22,6 @@ import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import { ProgramIdState } from "../reducers/id.reducer";
-import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
@@ -84,11 +83,13 @@ export const fetchProgramProfitChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currencies: CurrencyEnum[]
-): ApiAction<ProgramProfitChartDataType> => ({
+): ApiAction<ProgramProfitCharts> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
-  payload: Promise.all(
-    currencies.map(currency => sendProgramChartRequest(period, id, currency))
-  ) as CancelablePromise<ProgramProfitChartDataType>
+  payload: programsApi.getProgramProfitChart(id, {
+    dateFrom: period.start,
+    dateTo: period.end,
+    currencies
+  })
 });
 
 export const fetchProgramBalanceChartAction = (
