@@ -1,5 +1,6 @@
 import "shared/components/dashboard/dashboard.scss";
 
+import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
 import DashboardPublic from "pages/dashboard/components/dashboard-trading/dashboard-public";
 import DashboardTradingTotalContainer from "pages/dashboard/components/dashboard-trading/dashboard-trading-total.container";
@@ -19,6 +20,9 @@ const _TradingPage: React.FC = () => {
       </div>
       <div>
         <DashboardPrivate />
+      </div>
+      <div>
+        <DashboardFollowThem />
       </div>
     </Page>
   );
