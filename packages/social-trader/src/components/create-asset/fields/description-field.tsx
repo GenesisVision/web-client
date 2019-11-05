@@ -1,3 +1,5 @@
+import "./fields.scss";
+
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -17,14 +19,12 @@ const _DescriptionField: React.FC<Props> = ({ name, description }) => {
         label={t("create-program-page.settings.fields.description")}
         component={GVTextField}
       />
-      <div className="create-program-settings__field-caption create-program-settings__description">
-        <span className="create-program-settings__description-requirements">
-          {t(
-            "create-program-page.settings.fields.description-requirements"
-          )}
+      <div className="create-asset-settings__field-caption create-asset-settings__description">
+        <span className="create-asset-settings__description-requirements">
+          {t("create-program-page.settings.fields.description-requirements")}
         </span>
         {descriptionTrimmedLength > 0 && (
-          <span className="create-program-settings__description-chars">
+          <span className="create-asset-settings__description-chars">
             {descriptionTrimmedLength}
             <GVProgramPeriod
               start={0}
