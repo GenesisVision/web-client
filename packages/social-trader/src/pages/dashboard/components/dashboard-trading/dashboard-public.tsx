@@ -1,5 +1,8 @@
+import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
-import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
+import DashboardTradingTable, {
+  CreateButtonToolbar
+} from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
@@ -13,6 +16,12 @@ const _DashboardPublic: React.FC<Props> = () => {
   const [t] = useTranslation();
   return (
     <DashboardTradingTable
+      createButtonToolbar={
+        <CreateButtonToolbar
+          text={t("buttons.create-fund")}
+          route={CREATE_FUND_PAGE_ROUTE}
+        />
+      }
       getItems={getPublicAssets}
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
