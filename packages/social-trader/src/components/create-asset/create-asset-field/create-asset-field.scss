@@ -2,6 +2,11 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
+.create-asset-fields {
+  max-width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+}
 .create-asset-field {
   position: relative;
   max-width: 230px;
