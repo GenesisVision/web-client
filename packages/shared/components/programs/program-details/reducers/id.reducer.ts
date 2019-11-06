@@ -1,9 +1,7 @@
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
-import {
-  SET_PROGRAM_ID,
-  SetProgramIdAction
-} from "../actions/program-details.actions";
+import { SetProgramIdAction } from "../actions/program-details.actions";
+import { SET_PROGRAM_ID } from "../program-details.constants";
 
 export type ProgramIdState = string;
 
