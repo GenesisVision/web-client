@@ -5,13 +5,13 @@ import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dash
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
 import DashboardInvestingStatistic from "pages/dashboard/components/dashboard-statistic/dashboard-investing-statistic";
-import DashboardProgramsStatistic from "pages/dashboard/components/dashboard-statistic/dashboard-programs-statistic";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import DashboardPortfolioChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
+import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
 
 const _DashboardPage: React.FC = () => {
   const [t] = useTranslation();
@@ -22,7 +22,7 @@ const _DashboardPage: React.FC = () => {
       </div>
       <div>{/*<DashboardPortfolioChartSection />*/}</div>
       <div className="dashboard__statistic-block">
-        {/*<DashboardProgramsStatistic />*/}
+        <DashboardTradingStatistic />
         {/*<DashboardInvestingStatistic />*/}
       </div>
       <div className="dashboard__statistic-block">
