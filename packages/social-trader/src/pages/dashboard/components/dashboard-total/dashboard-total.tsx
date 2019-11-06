@@ -17,13 +17,7 @@ import { TDashboardTotal } from "../../dashboard.types";
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
-  data: {
-    available,
-    invested,
-    pending,
-    profits: { dayProfit, monthProfit, weekProfit },
-    total
-  }
+  data: { available, invested, pending, profits, total }
 }) => {
   const [t] = useTranslation();
   return (
@@ -66,11 +60,7 @@ const _DashboardTotal: React.FC<Props> = ({
         />
       </StatisticItemList>
       <DashboardStatisticPeriods
-        data={{
-          day: dayProfit,
-          month: monthProfit,
-          week: weekProfit
-        }}
+        data={profits}
         currency={currency}
         withProfitability
       />

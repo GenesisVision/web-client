@@ -15,18 +15,12 @@ const _DashboardStatistic: React.FC<Props> = ({
   data,
   currency
 }) => {
-  const {
-    events,
-    profits: { dayProfit, weekProfit, monthProfit }
-  } = data;
+  const { events, profits } = data;
   return (
     <div>
       <div className="dashboard-statistic__values">
         <StatisticItemList>{renderValues(data)}</StatisticItemList>
-        <DashboardStatisticPeriods
-          currency={currency}
-          data={{ day: dayProfit, week: weekProfit, month: monthProfit }}
-        />
+        <DashboardStatisticPeriods currency={currency} data={profits} />
       </div>
       <DashboardStatisticTable currency={currency} data={events.items} />
     </div>
