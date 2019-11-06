@@ -3,6 +3,14 @@ import { NumberFormatValues } from "react-number-format";
 
 import { Nullable } from "./types";
 
+export const getPercentageValue = (
+  value: number,
+  totalValue: number
+): number => {
+  const percentage = Math.round((value / totalValue) * 100);
+  return isNaN(percentage) ? 0 : percentage;
+};
+
 const getType = (value: any): string =>
   Array.isArray(value) ? "array" : typeof value;
 
