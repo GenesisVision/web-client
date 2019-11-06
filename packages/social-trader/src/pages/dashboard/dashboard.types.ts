@@ -1,4 +1,9 @@
-import { DashboardSummary, DashboardTimeframeProfit } from "gv-api-web/dist";
+import {
+  DashboardSummary,
+  DashboardTimeframeProfit,
+  DashboardTradingDetails,
+  InvestmentEventViewModel
+} from "gv-api-web/dist";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -11,10 +16,7 @@ export interface TDashboardStatistic {
   events: TDashboardEvent[];
 }
 
-export interface TDashboardProgramsStatistic extends TDashboardStatistic {
-  equity: number;
-  AUM: number;
-}
+export type TDashboardTradingStatistic = DashboardTradingDetails;
 
 export interface TDashboardInvestingStatistic extends TDashboardStatistic {
   balance: number;
@@ -22,11 +24,7 @@ export interface TDashboardInvestingStatistic extends TDashboardStatistic {
   funds: number;
 }
 
-export interface TDashboardEvent {
-  data: Date;
-  description: string;
-  amount: number;
-}
+export type TDashboardEvent = InvestmentEventViewModel;
 
 export interface TAsset {
   login?: string;
