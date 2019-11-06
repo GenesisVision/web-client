@@ -8,10 +8,11 @@ import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { humanizeDate } from "shared/utils/dates";
+import { CurrencyEnum } from "shared/utils/types";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {
-    name: "data"
+    name: "date"
   },
   {
     name: "description"
@@ -21,7 +22,7 @@ const DASHBOARD_STATISTIC_COLUMNS = [
   }
 ];
 
-const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
+const _DashboardStatisticTable: React.FC<Props> = ({ data, currency }) => {
   const [t] = useTranslation();
   return (
     <div className="dashboard-statistic__table-block">
@@ -34,9 +35,9 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
         renderBodyRow={(event: TDashboardEvent) => (
           <TableRow stripy>
             <TableCell>
-              {humanizeDate(event.data.toString(), new Date().toString())}
+              {humanizeDate(event.date.toString(), new Date().toString())}
             </TableCell>
-            <TableCell>{event.description}</TableCell>
+            <TableCell>{event.title}</TableCell>
             <TableCell>
               <Profitability
                 value={event.amount}
@@ -45,7 +46,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
                 <NumberFormat
                   value={Math.abs(event.amount)}
                   thousandSeparator={" "}
-                  suffix={` ${"GVT"}`}
+                  suffix={` ${currency}`}
                   displayType="text"
                 />
               </Profitability>
@@ -58,6 +59,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
 };
 
 interface Props {
+  currency: CurrencyEnum;
   data: TDashboardEvent[];
 }
 
