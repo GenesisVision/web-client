@@ -6,8 +6,11 @@ import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import { CurrencyEnum } from "shared/utils/types";
 
 const _DashboardStatisticPeriods: React.FC<Props> = ({
+  currency,
   withProfitability,
   data: { day, week, month }
 }) => {
@@ -15,16 +18,19 @@ const _DashboardStatisticPeriods: React.FC<Props> = ({
   return (
     <StatisticItemList>
       <DashboardStatisticPeriodsItem
+        currency={currency}
         withProfitability={withProfitability}
         label={t("dashboard-page.total.day")}
         item={day}
       />
       <DashboardStatisticPeriodsItem
+        currency={currency}
         withProfitability={withProfitability}
         label={t("dashboard-page.total.week")}
         item={week}
       />
       <DashboardStatisticPeriodsItem
+        currency={currency}
         withProfitability={withProfitability}
         label={t("dashboard-page.total.month")}
         item={month}
@@ -34,6 +40,7 @@ const _DashboardStatisticPeriods: React.FC<Props> = ({
 };
 
 interface Props {
+  currency: CurrencyEnum;
   withProfitability?: boolean;
   data: {
     day: TDashboardTotalField;
@@ -43,22 +50,26 @@ interface Props {
 }
 
 const _DashboardStatisticPeriodsItem: React.FC<{
+  currency: CurrencyEnum;
   withProfitability?: boolean;
   item: TDashboardTotalField;
   label: string;
-}> = ({ item, label, withProfitability }) => {
+}> = ({ item, label, withProfitability, currency }) => {
   return (
     <StatisticItem big accent label={label}>
       <NumberFormat
-        value={item.value}
-        prefix={"$ "}
+        value={formatCurrencyValue(item.profit, currency)}
+        suffix={` ${currency}`}
         thousandSeparator={" "}
         displayType="text"
       />{" "}
-      {withProfitability && (
-        <Profitability value={item.profit} prefix={PROFITABILITY_PREFIX.SIGN}>
+      {withProfitability && item.profitPercent !== 0 && (
+        <Profitability
+          value={item.profitPercent}
+          prefix={PROFITABILITY_PREFIX.SIGN}
+        >
           <NumberFormat
-            value={Math.abs(item.profit)}
+            value={Math.abs(item.profitPercent)}
             suffix={" %"}
             thousandSeparator={" "}
             displayType="text"
@@ -68,7 +79,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
     </StatisticItem>
   );
 };
-const DashboardStatisticPeriodsItem = React.memo(
+export const DashboardStatisticPeriodsItem = React.memo(
   _DashboardStatisticPeriodsItem
 );
 
