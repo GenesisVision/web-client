@@ -69,4 +69,4 @@ const getCreateMethod = (
 
 type TGetCreateMethodReturn = (
   request: NewAssetRequest
-) => CancelablePromise<ProgramCreateResult>;
+) => CancelablePromise<any>; //ProgramCreateResult

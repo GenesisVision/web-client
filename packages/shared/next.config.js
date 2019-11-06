@@ -28,7 +28,6 @@ function create(role, path) {
       config.plugins.push(new webpack.EnvironmentPlugin(process.env));
       return config;
     }
-    // assetPrefix: isProd ? `/static-${role.toLowerCase()}` : ""
   };
   return withPlugins(
     [

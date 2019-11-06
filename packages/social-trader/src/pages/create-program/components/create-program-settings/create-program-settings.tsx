@@ -139,7 +139,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
 interface OwnProps {
   currency: CurrencyEnum;
   programsInfo: any; //ProgramsInfo
-  broker: Broker;
+  broker?: Broker; // TODO
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType

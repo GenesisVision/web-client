@@ -1,4 +1,4 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import CreateProgramPage from "pages/create-program/create-program.page";
 import React from "react";
 import { compose } from "redux";
@@ -22,12 +22,9 @@ CreateProgram.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx))
   ]).then(([descriptionResult]) => {
     const description = ((descriptionResult as unknown) as {
-      value: ProgramDetailsFullOld;
+      value: ProgramDetailsFull;
     }).value;
-    if (
-      !description.personalProgramDetails ||
-      !description.personalProgramDetails.isOwnProgram
-    )
+    if (!description.personalDetails || !description.personalDetails.isOwnAsset)
       throw new Error();
   });
   return {};
