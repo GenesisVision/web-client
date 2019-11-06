@@ -18,11 +18,9 @@ const _DashboardPage: React.FC = () => {
   return (
     <Page title={t(`social-trader.dashboard-page.title`)}>
       <div>
-        {/*<DashboardTotalContainer />*/}
+        <DashboardTotalContainer />
       </div>
-      <div>
-        {/*<DashboardPortfolioChartSection />*/}
-      </div>
+      <div>{/*<DashboardPortfolioChartSection />*/}</div>
       <div className="dashboard__statistic-block">
         {/*<DashboardProgramsStatistic />*/}
         {/*<DashboardInvestingStatistic />*/}
