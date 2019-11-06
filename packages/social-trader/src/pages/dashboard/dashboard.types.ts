@@ -1,16 +1,10 @@
+import { DashboardSummary, DashboardTimeframeProfit } from "gv-api-web/dist";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "shared/utils/types";
 
-export interface TDashboardTotal {
-  day: TDashboardTotalField;
-  week: TDashboardTotalField;
-  month: TDashboardTotalField;
-}
+export type TDashboardTotal = DashboardSummary;
 
-export interface TDashboardTotalField {
-  value: number;
-  profit: number;
-}
+export type TDashboardTotalField = DashboardTimeframeProfit;
 
 export interface TDashboardStatistic {
   total: TDashboardTotal;
