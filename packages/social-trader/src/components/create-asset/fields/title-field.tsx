@@ -1,3 +1,5 @@
+import "./fields.scss";
+
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -16,7 +18,7 @@ const _TitleField: React.FC<Props> = ({ name }) => {
         autoComplete="off"
         component={GVTextField}
       />
-      <div className="create-program-settings__field-caption">
+      <div className="create-asset-settings__field-caption">
         {t("create-program-page.settings.fields.name-requirements")}
       </div>
     </CreateAssetField>

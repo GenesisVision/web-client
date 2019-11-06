@@ -1,6 +1,7 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./create-program-settings.scss";
 
+import { CreateAssetFields } from "components/create-asset/create-asset-field/create-asset-field";
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
 import DescriptionBlock from "components/create-asset/fields/description-block";
 import FeesSettings from "components/create-asset/fields/fees-settings";
@@ -36,28 +37,16 @@ import TradesDelay from "./fields/trades-delay";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 const _CreateProgramSettings: React.FC<Props> = ({
+  currency,
   programsInfo,
   t,
-  validateForm,
   isValid,
   handleSubmit,
   setFieldValue,
   minimumDepositsAmount,
-  broker,
   isSubmitting,
-  values: {
-    brokerAccountTypeId,
-    depositWalletId,
-    currency,
-    depositAmount,
-    isSignalProgram,
-    hasInvestmentLimit,
-    description
-  }
+  values: { depositAmount, isSignalProgram, hasInvestmentLimit, description }
 }) => {
-  const accountType = broker.accountTypes.find(
-    ({ id }) => brokerAccountTypeId === id
-  )!;
   const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
@@ -72,28 +61,11 @@ const _CreateProgramSettings: React.FC<Props> = ({
           logoName={CREATE_PROGRAM_FIELDS.logo}
           description={description}
         />
-        <div className="create-program-settings__program-fields">
-          <BrokerAccount
-            setAccountType={(value: string) =>
-              setFieldValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
-            }
-            setLeverage={(value: number) =>
-              setFieldValue(CREATE_PROGRAM_FIELDS.leverage, value)
-            }
-            setCurrency={(value: string) =>
-              setFieldValue(CREATE_PROGRAM_FIELDS.currency, value)
-            }
-            name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-            accountTypes={broker.accountTypes}
-          />
+        <CreateAssetFields>
           <Currency
             name={CREATE_PROGRAM_FIELDS.currency}
-            disabled={accountType === undefined}
-            accountCurrencies={accountType.currencies as CurrencyEnum[]}
-          />
-          <Leverage
-            name={CREATE_PROGRAM_FIELDS.leverage}
-            accountLeverages={accountType.leverages}
+            disabled={false}
+            accountCurrencies={["GVT", "BTC", "ETH"]}
           />
           <PeriodLength
             programsInfo={programsInfo}
@@ -101,15 +73,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
           />
           <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
           <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
-        </div>
-        <InvestmentLimitField
-          checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
-          inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
-          hasInvestmentLimit={hasInvestmentLimit}
-          currency={currency as CurrencyEnum}
-        />
+        </CreateAssetFields>
         <SignalProgram
-          condition={accountType.isSignalsAvailable}
+          condition={true}
           name={CREATE_PROGRAM_FIELDS.isSignalProgram}
         />
       </SettingsBlock>
@@ -118,17 +84,13 @@ const _CreateProgramSettings: React.FC<Props> = ({
         blockNumber={"02"}
       >
         <FeesSettings
-          title={t(
-            "create-program-page.settings.investment-program-fees"
-          )}
+          title={t("create-program-page.settings.investment-program-fees")}
           entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
           entryFeeDescription={t(
             "create-program-page.settings.hints.entry-fee-description"
           )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
-          secondFeeLabel={t(
-            "create-program-page.settings.fields.success-fee"
-          )}
+          secondFeeLabel={t("create-program-page.settings.fields.success-fee")}
           secondFeeUnderText={t(
             "create-program-page.settings.hints.success-fee"
           )}
@@ -136,14 +98,31 @@ const _CreateProgramSettings: React.FC<Props> = ({
             "create-program-page.settings.hints.success-fee-description"
           )}
         />
-        {isSignalProgram && (
+      </SettingsBlock>
+      {isSignalProgram && (
+        <SettingsBlock
+          label={t("create-program-page.settings.signal-provider-fees")}
+          blockNumber={"03"}
+        >
           <SignalsFeeFormPartial
             volumeFeeFieldName={CREATE_PROGRAM_FIELDS.signalVolumeFee}
             successFeeFieldName={CREATE_PROGRAM_FIELDS.signalSuccessFee}
           />
-        )}
+        </SettingsBlock>
+      )}
+      <SettingsBlock
+        label={t("create-program-page.settings.fields.investment-limit")}
+        blockNumber={"04"}
+      >
+        <InvestmentLimitField
+          checkboxName={CREATE_PROGRAM_FIELDS.hasInvestmentLimit}
+          inputName={CREATE_PROGRAM_FIELDS.investmentLimit}
+          hasInvestmentLimit={hasInvestmentLimit}
+          currency={currency as CurrencyEnum}
+        />
       </SettingsBlock>
       <DepositDetailsBlock
+        blockNumber={5}
         availableName={CREATE_PROGRAM_FIELDS.available}
         rateName={CREATE_PROGRAM_FIELDS.rate}
         walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
@@ -151,7 +130,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
         depositAmount={depositAmount}
         minimumDepositAmount={minimumDepositsAmount[currency]}
         setFieldValue={setFieldValue}
-        assetCurrency={currency as CurrencyEnum}
+        assetCurrency={currency}
       />
       <CreateAssetNavigation
         asset={ASSET.PROGRAM}
@@ -162,8 +141,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
 };
 
 interface OwnProps {
+  currency: CurrencyEnum;
   programsInfo: ProgramsInfo;
-  broker: Broker;
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
     setSubmitting: SetSubmittingType
@@ -176,15 +155,13 @@ export interface ICreateProgramSettingsProps
     WithTranslation {}
 
 export interface ICreateProgramSettingsFormValues {
+  [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.available]: number;
   [CREATE_PROGRAM_FIELDS.rate]: number;
   [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
-  [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: number;
-  [CREATE_PROGRAM_FIELDS.leverage]?: number;
-  [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string;
   [CREATE_PROGRAM_FIELDS.signalSuccessFee]?: number;
   [CREATE_PROGRAM_FIELDS.signalVolumeFee]?: number;
   [CREATE_PROGRAM_FIELDS.isSignalProgram]: boolean;

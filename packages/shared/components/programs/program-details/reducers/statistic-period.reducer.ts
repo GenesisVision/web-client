@@ -1,8 +1,8 @@
 import statisticPeriodReducerCreator from "shared/components/details/reducers/statistic-period.reducer";
 import { fieldSelector } from "shared/utils/selectors";
 
-// import { SET_PROGRAM_STATISTIC_PERIOD } from "../actions/program-details.actions";
-const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
+import { SET_PROGRAM_STATISTIC_PERIOD } from "../program-details.constants";
+
 export const statisticPeriodSelector = fieldSelector(
   state => state.programDetails.statisticPeriod
 );

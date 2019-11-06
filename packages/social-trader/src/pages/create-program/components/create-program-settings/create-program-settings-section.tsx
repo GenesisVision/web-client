@@ -1,8 +1,7 @@
 import useCreateAssetSubmit from "components/create-asset/create-asset-submit.hook";
-import { Broker } from "gv-api-web";
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { programsInfoSelector } from "shared/reducers/platform-reducer";
@@ -10,11 +9,12 @@ import { programsInfoSelector } from "shared/reducers/platform-reducer";
 import { TFAConfirmBlock } from "../tfa-confirm-block";
 import CreateProgramSettings from "./create-program-settings";
 
-const _CreateProgramSettingsSection: React.FC<Props> = ({ broker }) => {
+const _CreateProgramSettingsSection: React.FC<Props> = () => {
   const [programId, setProgramId] = useState<string | undefined>(undefined);
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
 
   const programsInfo = useSelector(programsInfoSelector);
+  const programDescription = useSelector(programDescriptionSelector);
 
   const handleCreate = useCreateAssetSubmit({
     asset: ASSET.PROGRAM,
@@ -28,13 +28,16 @@ const _CreateProgramSettingsSection: React.FC<Props> = ({ broker }) => {
     }
   });
 
+  if (!programDescription) return null;
+  const { currency } = programDescription;
+
   return (
     <>
       <CreateProgramSettings
+        currency={currency}
         programsInfo={programsInfo}
         onSubmit={handleCreate}
-        minimumDepositsAmount={broker.accountTypes[0].minimumDepositsAmount}
-        broker={broker}
+        minimumDepositsAmount={{ GVT: 100 }}
       />
       {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
     </>
@@ -45,6 +48,4 @@ export const CreateProgramSettingsSection = React.memo(
   _CreateProgramSettingsSection
 );
 
-interface Props {
-  broker: Broker;
-}
+interface Props {}
