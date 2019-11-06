@@ -1,4 +1,4 @@
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import NumberFormat from "react-number-format";
@@ -26,7 +26,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props {
-  program: ProgramDetailsOld;
+  program: ProgramDetailsList;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -48,7 +48,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
     pathname: composeProgramDetailsUrl(program.url),
     state: `/ ${title}`
   };
-  const requestCurrency = program.statistic.balance.currency;
+  const requestCurrency = program.balance.currency;
 
   const renderActions = ({
     clearAnchor,
@@ -96,8 +96,8 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
       asset={program}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={program.statistic.profitValue}
-      profitPercent={program.statistic.profitPercent}
+      profit={program.chart.profit}
+      profitPercent={program.chart.profit}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
     >
@@ -106,7 +106,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
           <StatisticItem label={t("programs-page.programs-header.equity")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                program.statistic.balance.amount,
+                program.balance.amount,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
@@ -124,7 +124,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.investors")}>
             <NumberFormat
-              value={program.statistic.investorsCount}
+              value={program.investorsCount}
               displayType="text"
               decimalScale={0}
             />
@@ -139,7 +139,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
           >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                program.availableInvestmentInCurrency,
+                program.availableToInvest,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
@@ -149,7 +149,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.drawdown")}>
             <NumberFormat
-              value={formatValue(program.statistic.drawdownPercent, 2)}
+              value={formatValue(program.chart.drawdown, 2)}
               displayType="text"
               suffix="%"
             />

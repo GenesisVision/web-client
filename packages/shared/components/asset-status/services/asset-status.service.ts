@@ -1,10 +1,10 @@
-import { ProgramRequest, ProgramRequests } from "gv-api-web";
+import { CancelablePromise } from "gv-api-web";
 import { CancelRequestType } from "shared/components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import investorApi from "shared/services/api-client/investor-api";
-import managerApi from "shared/services/api-client/manager-api";
+// import investorApi from "shared/services/api-client/investor-api";
+// import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "shared/utils/types";
 
@@ -21,25 +21,28 @@ export const getAssetRequests = (
   id: string,
   role: ROLE = ROLE.MANAGER,
   asset: ASSET
-): Promise<Array<ProgramRequest>> => {
+): Promise<
+  Array<
+    any //ProgramRequest
+  >
+> => {
   const authorization = authService.getAuthArg();
   let method;
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      method = managerApi.getProgramRequests;
+      method = () => new CancelablePromise<any>(() => {}); //managerApi.getProgramRequests;
       break;
     case ROLE.MANAGER + ASSET.FUND:
-      method = managerApi.getProgramRequests;
+      method = () => new CancelablePromise<any>(() => {}); //managerApi.getProgramRequests;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
-      method = investorApi.getProgramRequests;
+      method = () => new CancelablePromise<any>(() => {}); //investorApi.getProgramRequests;
       break;
     default:
-      method = investorApi.getProgramRequests;
+      method = () => new CancelablePromise<any>(() => {}); //investorApi.getProgramRequests;
   }
-  return method(id, 0, 10, authorization).then(
-    (response: ProgramRequests) => response.requests
-  );
+  // @ts-ignore
+  return method(id, 0, 10, authorization).then(response => response.requests);
 };
 
 export const cancelRequest = (
@@ -52,11 +55,12 @@ export const cancelRequest = (
 
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
-      method = managerApi.cancelRequest;
+      method = () => Promise.resolve() as CancelablePromise<any>; //managerApi.cancelRequest;
       break;
     default:
-      method = investorApi.cancelRequest;
+      method = () => Promise.resolve() as CancelablePromise<any>; //investorApi.cancelRequest;
   }
+  // @ts-ignore
   return method(id, authorization);
 };
 

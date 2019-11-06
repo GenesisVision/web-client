@@ -1,4 +1,4 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -7,7 +7,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 interface ISignalProgramInfoProps {
-  programDescription: ProgramDetailsFullOld;
+  programDescription: ProgramDetailsFull;
 }
 
 const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
@@ -29,7 +29,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
         accent
       >
         <NumberFormat
-          value={programDescription.signalSuccessFee}
+          value={programDescription.signalSettings.signalSuccessFee}
           displayType="text"
           suffix=" %"
         />
@@ -45,7 +45,7 @@ const _SignalProgramInfo: React.FC<ISignalProgramInfoProps> = ({
         accent
       >
         <NumberFormat
-          value={programDescription.signalVolumeFee}
+          value={programDescription.signalSettings.signalVolumeFee}
           displayType="text"
           suffix=" %"
         />

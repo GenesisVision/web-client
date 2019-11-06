@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { FundsListOld } from "gv-api-web";
+import { ItemsViewModelFundDetailsList } from "gv-api-web";
 import * as qs from "qs";
 import {
   ComposeFiltersAllType,
@@ -47,7 +47,7 @@ export const getFunds: GetFundsType = () => dispatch => {
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<FundsListOld>;
+) => Promise<ItemsViewModelFundDetailsList>;
 export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();

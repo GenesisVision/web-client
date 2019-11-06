@@ -7,11 +7,7 @@ import FeesSettings from "components/create-asset/fields/fees-settings";
 import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
 import StopOutField from "components/create-asset/fields/stop-out-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import {
-  Broker,
-  NewProgramRequestTradesDelayEnum,
-  ProgramsInfo
-} from "gv-api-web";
+import { Broker, TradesDelay as TradesDelayType } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -118,17 +114,13 @@ const _CreateProgramSettings: React.FC<Props> = ({
         blockNumber={"02"}
       >
         <FeesSettings
-          title={t(
-            "create-program-page.settings.investment-program-fees"
-          )}
+          title={t("create-program-page.settings.investment-program-fees")}
           entryFeeName={CREATE_PROGRAM_FIELDS.entryFee}
           entryFeeDescription={t(
             "create-program-page.settings.hints.entry-fee-description"
           )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
-          secondFeeLabel={t(
-            "create-program-page.settings.fields.success-fee"
-          )}
+          secondFeeLabel={t("create-program-page.settings.fields.success-fee")}
           secondFeeUnderText={t(
             "create-program-page.settings.hints.success-fee"
           )}
@@ -162,7 +154,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
 };
 
 interface OwnProps {
-  programsInfo: ProgramsInfo;
+  programsInfo: any; //ProgramsInfo
   broker: Broker;
   onSubmit: (
     data: ICreateProgramSettingsFormValues,
@@ -178,7 +170,7 @@ export interface ICreateProgramSettingsProps
 export interface ICreateProgramSettingsFormValues {
   [CREATE_PROGRAM_FIELDS.available]: number;
   [CREATE_PROGRAM_FIELDS.rate]: number;
-  [CREATE_PROGRAM_FIELDS.tradesDelay]: NewProgramRequestTradesDelayEnum;
+  [CREATE_PROGRAM_FIELDS.tradesDelay]: TradesDelayType;
   [CREATE_PROGRAM_FIELDS.currency]: string;
   [CREATE_PROGRAM_FIELDS.periodLength]?: number;
   [CREATE_PROGRAM_FIELDS.successFee]?: number;

@@ -18,18 +18,18 @@ const _DashboardPage: React.FC = () => {
   return (
     <Page title={t(`social-trader.dashboard-page.title`)}>
       <div>
-        <DashboardTotalContainer />
+        {/*<DashboardTotalContainer />*/}
       </div>
       <div>
-        <DashboardPortfolioChartSection />
+        {/*<DashboardPortfolioChartSection />*/}
       </div>
       <div className="dashboard__statistic-block">
-        <DashboardProgramsStatistic />
-        <DashboardInvestingStatistic />
+        {/*<DashboardProgramsStatistic />*/}
+        {/*<DashboardInvestingStatistic />*/}
       </div>
       <div className="dashboard__statistic-block">
-        <DashboardPortfolio />
-        <DashboardAssets />
+        {/*<DashboardPortfolio />*/}
+        {/*<DashboardAssets />*/}
       </div>
       <DashboardRecommendationsContainer />
     </Page>

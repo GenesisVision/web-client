@@ -19,8 +19,8 @@ import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { RootState } from "shared/reducers/root-reducer";
 import brokersApi from "shared/services/api-client/brokers-api";
-import investorApi from "shared/services/api-client/investor-api";
-import managerApi from "shared/services/api-client/manager-api";
+// import investorApi from "shared/services/api-client/investor-api";
+// import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { ActionType, MiddlewareDispatch } from "shared/utils/types";
@@ -74,7 +74,9 @@ export const getFollowStatistic = (
   };
   // @ts-ignore
   return Promise.all([
+    // @ts-ignore
     programsApi.getProgramProfitChart(followId, chartFilter),
+    // @ts-ignore
     programsApi.getProgramBalanceChart(followId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
@@ -99,21 +101,21 @@ export const closePeriod = (
   onError: () => void
 ) => (dispatch: Dispatch): void => {
   const authorization = authService.getAuthArg();
-  managerApi
-    .closeCurrentPeriod(followId, authorization)
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "program-details-page.close-period.notification-success",
-          true
-        )
-      );
-    })
-    .catch(error => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+  // managerApi
+  //   .closeCurrentPeriod(followId, authorization)
+  //   .then(() => {
+  //     onSuccess();
+  //     dispatch(
+  //       alertMessageActions.success(
+  //         "program-details-page.close-period.notification-success",
+  //         true
+  //       )
+  //     );
+  //   })
+  //   .catch(error => {
+  //     onError();
+  //     dispatch(alertMessageActions.error(error.errorMessage));
+  //   });
 };
 
 export const getOpenPositions = (id: string) => (
@@ -185,11 +187,13 @@ export const fetchPortfolioEventsWithoutTable = (
     ROLE_ENV || ROLE.MANAGER // TODO remove after union
   ) {
     case ROLE.INVESTOR:
-      request = investorApi.getEvents;
+      request = () =>
+        new CancelablePromise<InvestmentEventViewModels>(() => {}); //TODO investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.getEvents;
+      request = () =>
+        new CancelablePromise<InvestmentEventViewModels>(() => {}); //TODO managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation });
@@ -209,11 +213,13 @@ export const fetchPortfolioEvents = (
     ROLE_ENV || ROLE.MANAGER // TODO remove after union
   ) {
     case ROLE.INVESTOR:
-      request = investorApi.getEvents;
+      request = () =>
+        new CancelablePromise<InvestmentEventViewModels>(() => {}); // TODO investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = managerApi.getEvents;
+      request = () =>
+        new CancelablePromise<InvestmentEventViewModels>(() => {}); // TODO managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation }).then(

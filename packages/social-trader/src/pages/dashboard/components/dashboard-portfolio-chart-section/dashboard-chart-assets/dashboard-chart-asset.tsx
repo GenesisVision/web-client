@@ -1,4 +1,3 @@
-import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -39,7 +38,7 @@ const _DashboardChartAsset: React.FC<Props> = ({
 };
 
 interface Props extends WithTranslation {
-  chartAsset: ManagerSimpleProgram | ManagerSimpleFund;
+  chartAsset: any; //ManagerSimpleProgram | ManagerSimpleFund;
   type: ASSETS_TYPES;
   selectAsset: (id: string, title: string, type: ASSETS_TYPES) => void;
 }

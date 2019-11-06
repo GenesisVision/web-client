@@ -1,4 +1,4 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { CurrencyEnum } from "shared/utils/types";
@@ -25,4 +25,4 @@ export interface IDescriptionSection {
   WithdrawContainer: React.ComponentType<IFollowWithdrawalContainerProps>;
 }
 
-export type FollowDetailsDataType = ProgramDetailsFullOld;
+export type FollowDetailsDataType = ProgramDetailsFull;

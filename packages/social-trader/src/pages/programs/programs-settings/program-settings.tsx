@@ -2,13 +2,13 @@ import "./program-settings.scss";
 
 import {
   BrokersProgramInfo,
-  ProgramDetailsFull,
-  ProgramsInfo
+  ProgramDetailsFull
+  // ProgramsInfo
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
-import InvestmentFees from "modules/asset-settings/investment-fees";
+// import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -28,7 +28,7 @@ import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
-  programsInfo,
+  // programsInfo,
   cancelChangeBroker,
   brokersInfo,
   details,
@@ -92,13 +92,13 @@ const _ProgramSettings: React.FC<Props> = ({
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         currentLeverage={details.leverageMax}
       />
-      <InvestmentFees
-        asset={ASSET.PROGRAM}
-        programsInfo={programsInfo}
-        entryFee={details.entryFeeSelected}
-        successFee={details.successFeeCurrent}
-        onSubmit={editProgram}
-      />
+      {/*<InvestmentFees*/}
+      {/*  asset={ASSET.PROGRAM}*/}
+      {/*  programsInfo={programsInfo}*/}
+      {/*  entryFee={details.entryFeeSelected}*/}
+      {/*  successFee={details.successFeeCurrent}*/}
+      {/*  onSubmit={editProgram}*/}
+      {/*/>*/}
       <TradesUpdating
         condition={!details.signalSettings}
         tradesDelay={details.tradesDelay}
@@ -143,7 +143,7 @@ const _ProgramSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  programsInfo: ProgramsInfo;
+  // programsInfo: ProgramsInfo;
   details: ProgramDetailsFull;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (

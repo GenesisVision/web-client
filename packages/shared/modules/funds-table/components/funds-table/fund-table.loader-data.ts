@@ -1,5 +1,9 @@
 import faker from "faker";
-import { FundAssetPercent, FundDetailsOld, FundsListOld } from "gv-api-web";
+import {
+  FundAssetPercent,
+  FundDetailsList,
+  ItemsViewModelFundDetailsList
+} from "gv-api-web";
 import {
   managerLoaderData,
   mockDate
@@ -22,31 +26,36 @@ const assetsLoaderDataCreator = (): FundAssetPercent[] =>
     .fill("")
     .map(() => assetLoaderDataCreator());
 
-export const fundDetailsLoaderDataCreator = (): FundDetailsOld => ({
-  totalAssetsCount: 0,
-  topFundAssets: assetsLoaderDataCreator(),
-  dashboardAssetsDetails: {
-    share: getRandomInteger(0, 100)
-  },
-  statistic: statisticListLoaderData,
-  personalDetails: personalFundDetailsFull,
-  id: "",
-  logo: "",
-  url: "",
-  color: "#858585",
-  title: faker.lorem.word(),
-  description: "",
-  status: "None",
-  creationDate: mockDate,
-  manager: managerLoaderData,
-  chart: []
-});
+export const fundDetailsLoaderDataCreator = (): FundDetailsList =>
+  new FundDetailsList({
+    totalAssetsCount: 0,
+    topFundAssets: assetsLoaderDataCreator(),
+    // dashboardAssetsDetails: {
+    //   share: getRandomInteger(0, 100)
+    // },
+    // statistic: statisticListLoaderData,
+    personalDetails: personalFundDetailsFull,
+    id: "",
+    logo: "",
+    url: "",
+    color: "#858585",
+    title: faker.lorem.word(),
+    description: "",
+    status: "None",
+    creationDate: mockDate,
+    // manager: managerLoaderData,
+    chart: {
+      profit: 0,
+      drawdown: 0,
+      chart: []
+    }
+  });
 
-export const fundListLoaderData: FundDetailsOld[] = tableLoaderCreator(
+export const fundListLoaderData: FundDetailsList[] = tableLoaderCreator(
   fundDetailsLoaderDataCreator
 );
 
-export const fundTableLoaderData: FundsListOld = {
-  funds: fundListLoaderData,
+export const fundTableLoaderData: ItemsViewModelFundDetailsList = {
+  items: fundListLoaderData,
   total: fundListLoaderData.length
 };

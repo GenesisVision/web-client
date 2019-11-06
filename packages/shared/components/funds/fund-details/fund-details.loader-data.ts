@@ -1,16 +1,5 @@
 import faker from "faker";
 import {
-  FundAssetPartWithIcon,
-  FundAssetPercent,
-  FundDetailsFull,
-  FundDetailsListStatistic,
-  FundProfitChart,
-  FundStatistic,
-  PersonalFundDetailsFull,
-  ProgramDetailsListStatistic
-} from "gv-api-web";
-import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
   mockDate
@@ -19,19 +8,19 @@ import { getRandomInteger } from "shared/utils/helpers";
 
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
 
-const assetLoaderDataCreator = (): FundAssetPartWithIcon => ({
+const assetLoaderDataCreator = () => ({
   color: faker.internet.color(),
   asset: "GVT",
   name: faker.lorem.word(),
   percent: getRandomInteger(0, 100),
   icon: ""
 });
-export const assetsLoaderDataCreator = (): FundAssetPartWithIcon[] =>
+export const assetsLoaderDataCreator = () =>
   new Array(getRandomInteger(1, 5))
     .fill("")
     .map(() => assetLoaderDataCreator());
 
-export const fundChartLoaderData: FundProfitChart = {
+export const fundChartLoaderData = {
   creationDate: new Date("2019-08-08T14:59:16.3828400+00:00"),
   profitPercent: 17.94,
   equityChart: [],
@@ -45,11 +34,9 @@ export const fundChartLoaderData: FundProfitChart = {
   rate: 1.0
 };
 
-export const fundChartDataLoaderData: ProfitChartDataType = [
-  fundChartLoaderData
-];
+export const fundChartDataLoaderData = [fundChartLoaderData];
 
-export const fundStatisticLoaderData: FundProfitChart = {
+export const fundStatisticLoaderData = {
   creationDate: mockDate,
   profitPercent: getRandomInteger(0, 100),
   equityChart: [],
@@ -68,7 +55,7 @@ export const fundStatisticDataLoaderData: IFundStatisticData = {
   statisticCurrency: "GVT"
 };
 
-export const personalFundDetailsFull: PersonalFundDetailsFull = {
+export const personalFundDetailsFull = {
   withdrawPercent: getRandomInteger(0, 100),
   canReallocate: false,
   availableReallocationPercents: getRandomInteger(0, 100),
@@ -92,7 +79,7 @@ export const personalFundDetailsFull: PersonalFundDetailsFull = {
   status: "Pending"
 };
 
-const statisticLoaderData: FundStatistic = {
+const statisticLoaderData = {
   balance: amountWithCurrencyLoaderData,
   profitPercent: getRandomInteger(0, 100),
   drawdownPercent: getRandomInteger(0, 100),
@@ -103,14 +90,14 @@ const statisticLoaderData: FundStatistic = {
   rebalancingCount: getRandomInteger(0, 100)
 };
 
-export const statisticListLoaderData: FundDetailsListStatistic = {
+export const statisticListLoaderData = {
   balance: amountWithCurrencyLoaderData,
   profitPercent: getRandomInteger(0, 100),
   drawdownPercent: getRandomInteger(0, 100),
   investorsCount: getRandomInteger(0, 100)
 };
 
-export const fundDetailsLoaderData: FundDetailsFull = {
+export const fundDetailsLoaderData = {
   entryFee: getRandomInteger(0, 100),
   exitFee: getRandomInteger(0, 100),
   managementFee: getRandomInteger(0, 100),

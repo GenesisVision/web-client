@@ -13,7 +13,7 @@ export const fetchBrokers = (): CancelablePromise<Broker[]> =>
       )
     );
 
-export const getBrokerLoaderData: () => Broker = () => ({
+export const getBrokerLoaderData: () => any = () => ({
   name: faker.lorem.word(),
   description: faker.lorem.words(11),
   logo: "",

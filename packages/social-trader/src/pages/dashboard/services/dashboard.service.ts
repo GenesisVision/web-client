@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
-  InvestmentEventViewModels,
-  ManagerSimpleFund,
-  ManagerSimpleProgram
+  InvestmentEventViewModels
+  // ManagerSimpleFund,
+  // ManagerSimpleProgram
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import {
@@ -131,9 +131,9 @@ export const getAssetChart = (
           type: assetType,
           id: assetId,
           title: assetTitle,
-          currency: data.programCurrency,
+          currency: data.charts[0].currency,
           pnLChart: [],
-          equityChart: data.equityChart
+          equityChart: data.charts
         })
       );
     });
@@ -144,7 +144,7 @@ export const getAssetChart = (
           type: assetType,
           id: assetId,
           title: assetTitle,
-          equityChart: data.equityChart
+          equityChart: data.charts
         })
       );
     });
@@ -170,4 +170,4 @@ export const getAssetsCounts = () => (
   dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };
 
-export type TChartAsset = ManagerSimpleProgram | ManagerSimpleFund;
+export type TChartAsset = any; //ManagerSimpleProgram | ManagerSimpleFund;

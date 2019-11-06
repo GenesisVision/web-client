@@ -1,4 +1,4 @@
-import { LevelUpSummary, ProgramsListOld } from "gv-api-web";
+import { ItemsViewModelProgramDetailsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -15,46 +15,50 @@ import {
   SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
-export const allProgramsSelector = apiSelector<ProgramsListOld>(
-  state => state.programsRating.programs
-);
+export const allProgramsSelector = apiSelector<
+  ItemsViewModelProgramDetailsList
+>(state => state.programsRating.programs);
 
-const allProgramsRatingReducer = apiReducerFactory<ProgramsListOld>({
+const allProgramsRatingReducer = apiReducerFactory<
+  ItemsViewModelProgramDetailsList
+>({
   apiType: PROGRAMS_RATING
 });
 
-export const selfProgramsSelector = apiSelector<ProgramsListOld>(
-  state => state.programsRating.selfPrograms
-);
+export const selfProgramsSelector = apiSelector<
+  ItemsViewModelProgramDetailsList
+>(state => state.programsRating.selfPrograms);
 
-const selfProgramsRatingReducer = apiReducerFactory<ProgramsListOld>({
+const selfProgramsRatingReducer = apiReducerFactory<
+  ItemsViewModelProgramDetailsList
+>({
   apiType: SELF_PROGRAMS_RATING
 });
 
-export const levelupSummarySelector = apiSelector<LevelUpSummary>(
-  state => state.programsRating.levelupSummary
-);
+// export const levelupSummarySelector = apiSelector<LevelUpSummary>(
+//   state => state.programsRating.levelupSummary
+// );
 
-export const levelDataSelector = apiFieldSelector(
-  levelupSummarySelector,
-  fieldSelector(state => state.levelData),
-  []
-);
-
-const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
-  apiType: LEVELUP_SUMMARY
-});
+// export const levelDataSelector = apiFieldSelector(
+//   levelupSummarySelector,
+//   fieldSelector(state => state.levelData),
+//   []
+// );
+//
+// const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
+//   apiType: LEVELUP_SUMMARY
+// });
 
 export type ProgramsRatingState = Readonly<{
-  programs: IApiState<ProgramsListOld>;
-  selfPrograms: IApiState<ProgramsListOld>;
-  levelupSummary: IApiState<LevelUpSummary>;
+  programs: IApiState<ItemsViewModelProgramDetailsList>;
+  selfPrograms: IApiState<ItemsViewModelProgramDetailsList>;
+  // levelupSummary: IApiState<LevelUpSummary>;
 }>;
 
 const programsRatingReducer = combineReducers<ProgramsRatingState>({
   programs: allProgramsRatingReducer,
-  selfPrograms: selfProgramsRatingReducer,
-  levelupSummary: levelupSummaryReducer
+  selfPrograms: selfProgramsRatingReducer
+  // levelupSummary: levelupSummaryReducer
 });
 
 export default programsRatingReducer;

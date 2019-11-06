@@ -15,7 +15,7 @@ const _DashboardPublic: React.FC<Props> = ({ data }) => {
     >
       <div className="dashboard-trading__public-cards">
         {data.map(card => (
-          <DashboardPublicCard card={card} />
+          <DashboardPublicCard asset={card} />
         ))}
       </div>
     </DashboardBlock>

@@ -6,12 +6,12 @@ import SignalProviderButtons from "shared/components/follows/follow-details/sign
 
 const _ProgramControls: React.FC<Props> = ({ description }) => {
   return (
-    (description.isSignalProgram && (
+    (description.signalSettings && (
       <SignalProviderControls>
         <SignalInfo description={description} />
         <SignalProviderButtons
-          condition={!!description.personalProgramDetails}
-          personalDetails={description.personalProgramDetails}
+          condition={!!description.personalDetails}
+          personalDetails={description.personalDetails}
           id={description.id}
           title={description.title}
           currency={description.currency}

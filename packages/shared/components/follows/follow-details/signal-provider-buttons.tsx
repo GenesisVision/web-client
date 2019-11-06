@@ -1,4 +1,4 @@
-import { PersonalProgramDetailsFullOld } from "gv-api-web";
+import { PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -29,7 +29,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 };
 
 interface Props {
-  personalDetails: PersonalProgramDetailsFullOld;
+  personalDetails: PersonalProgramDetails;
   id: string;
   title: string;
   currency: CurrencyEnum;

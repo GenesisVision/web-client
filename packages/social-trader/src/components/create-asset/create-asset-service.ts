@@ -1,10 +1,12 @@
 import {
   CancelablePromise,
-  NewFundRequest,
-  NewProgramRequest,
-  ProgramCreateResult} from "gv-api-web";
+  NewFundRequest
+  // NewProgramRequest,
+  // ProgramCreateResult
+} from "gv-api-web";
 import { ASSET } from "shared/constants/constants";
-import managerApi from "shared/services/api-client/manager-api";
+import assetsApi from "shared/services/api-client/assets-api";
+//import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
@@ -15,12 +17,13 @@ export type ICreateAssetSettingsFormValues =
   | ICreateProgramSettingsFormValues
   | ICreateFundSettingsFormValues;
 
-export type NewAssetRequest = NewFundRequest | NewProgramRequest;
+export type NewAssetRequest = any; //NewFundRequest | NewProgramRequest;
 
 export const createAsset = (
   createAssetData: ICreateAssetSettingsFormValues,
   asset: ASSET
-): CancelablePromise<ProgramCreateResult | null> => {
+): CancelablePromise<any> => {
+  //TODO ProgramCreateResult | null
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve("") as CancelablePromise<any>;
   if (createAssetData.logo.image) {
@@ -40,19 +43,19 @@ export const createAsset = (
 
 const getCreateMethod = (
   asset: ASSET
-): ((
-  request: NewAssetRequest
-) => CancelablePromise<ProgramCreateResult | null>) => {
+  // @ts-ignore
+): ((request: NewAssetRequest) => CancelablePromise<any>) => {
+  //TODO ProgramCreateResult | null
   switch (asset) {
     case ASSET.PROGRAM:
-      return (request: NewAssetRequest) =>
-        managerApi.createProgram(authService.getAuthArg(), {
-          request: request as NewProgramRequest
-        });
+      return (request: NewAssetRequest) => new CancelablePromise<any>(() => {});
+    // assetsApi.createProgram(authService.getAuthArg(), {
+    //   request: request //as NewProgramRequest
+    // });
     case ASSET.FUND:
-      return (request: NewAssetRequest) =>
-        managerApi.createFund(authService.getAuthArg(), {
-          request: request as NewFundRequest
-        });
+      return (request: NewAssetRequest) => new CancelablePromise<any>(() => {});
+    // managerApi.createFund(authService.getAuthArg(), {
+    //   request: request as NewFundRequest
+    // });
   }
 };

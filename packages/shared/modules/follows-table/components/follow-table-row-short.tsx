@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -22,7 +22,7 @@ import { formatValue } from "shared/utils/formatter";
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  follow: ProgramDetailsOld;
+  follow: ProgramDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
   onExpandClick(): void;
@@ -38,7 +38,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 }) => {
   const { t } = useTranslation();
   const {
-    statistic,
     logo,
     level,
     levelProgress,
@@ -46,7 +45,8 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     chart,
     personalDetails,
     id,
-    tags
+    tags,
+    investorsCount
   } = follow;
   const linkProps = {
     state: `/ ${title}`,
@@ -86,7 +86,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
-        {statistic.investorsCount}
+        {investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
         Age
@@ -96,18 +96,18 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
-          value={formatValue(statistic.drawdownPercent, 2)}
+          value={formatValue(chart.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
-          value={formatValue(statistic.profitPercent, 2)}
+          value={formatValue(chart.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
-            value={formatValue(statistic.profitPercent, 2)}
+            value={formatValue(chart.profit, 2)}
             suffix="%"
             allowNegative={false}
             displayType="text"
@@ -115,7 +115,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {chart && <ProgramSimpleChart data={chart} programId={id} />}
+        {chart && <ProgramSimpleChart data={chart.chart} programId={id} />}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

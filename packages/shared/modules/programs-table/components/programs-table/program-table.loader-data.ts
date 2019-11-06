@@ -1,5 +1,5 @@
 import faker from "faker";
-import { ProgramDetailsOld, ProgramsListOld, ProgramTag } from "gv-api-web";
+// import { ProgramDetailsOld, ProgramsListOld, ProgramTag } from "gv-api-web";
 import {
   managerLoaderData,
   mockDate
@@ -11,14 +11,14 @@ import {
 import { getRandomInteger } from "shared/utils/helpers";
 import { tableLoaderCreator } from "shared/utils/helpers";
 
-const tagLoaderDataCreator = (): ProgramTag => ({
+const tagLoaderDataCreator = () /*: ProgramTag*/ => ({
   name: faker.lorem.word(),
   color: faker.internet.color()
 });
-const tagsLoaderDataCreator = (): ProgramTag[] =>
+const tagsLoaderDataCreator = () => // ProgramTag[] =>
   tableLoaderCreator(tagLoaderDataCreator);
 
-export const programDetailsLoaderDataCreator = (): ProgramDetailsOld => ({
+export const programDetailsLoaderDataCreator = () => ({   //: ProgramDetailsOld => ({
   currency: "GVT",
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
@@ -46,11 +46,11 @@ export const programDetailsLoaderDataCreator = (): ProgramDetailsOld => ({
   chart: []
 });
 
-export const programListLoaderData: ProgramDetailsOld[] = tableLoaderCreator(
+export const programListLoaderData = tableLoaderCreator( //: ProgramDetailsOld[]
   programDetailsLoaderDataCreator
 );
 
-export const programTableLoaderData: ProgramsListOld = {
+export const programTableLoaderData = { //: ProgramsListOld
   programs: programListLoaderData,
   total: programListLoaderData.length
 };

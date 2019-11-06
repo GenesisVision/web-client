@@ -1,6 +1,5 @@
 import "./dashboard-chart-assets.scss";
 
-import { ManagerSimpleFund, ManagerSimpleProgram } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -66,7 +65,7 @@ const _DashboardChartAssetsContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  data: Array<ManagerSimpleProgram | ManagerSimpleFund>;
+  data: Array<any>; //ManagerSimpleProgram | ManagerSimpleFund
   type: ASSETS_TYPES;
 }
 

@@ -1,9 +1,9 @@
-import { LevelUpSummary } from "gv-api-web";
+//import { LevelUpSummary } from "gv-api-web";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
-  fetchLevelUpSummary,
+  // fetchLevelUpSummary,
   fetchProgramsRating,
   fetchSelfProgramsRating,
   IProgramsGetFilters
@@ -32,11 +32,11 @@ export const getProgramsRating = (filters: TGetProgramsRatingFilters) => (
   ).then(res => res.value.total);
 };
 
-export const getLevelUpSummary = () => (
-  dispatch: MiddlewareDispatch
-): Promise<LevelUpSummary> => {
-  const authorization = authService.getAuthArg();
-  return dispatch(fetchLevelUpSummary({ authorization })).then(
-    res => res.value
-  );
-};
+// export const getLevelUpSummary = () => (
+//   dispatch: MiddlewareDispatch
+// ): Promise<LevelUpSummary> => {
+//   const authorization = authService.getAuthArg();
+//   return dispatch(fetchLevelUpSummary({ authorization })).then(
+//     res => res.value
+//   );
+// };

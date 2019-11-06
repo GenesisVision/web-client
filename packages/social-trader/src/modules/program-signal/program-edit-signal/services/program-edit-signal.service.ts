@@ -1,7 +1,8 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import managerApi from "shared/services/api-client/manager-api";
+// import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import { ManagerThunk, ResponseError } from "shared/utils/types";
+import { CancelablePromise } from "gv-api-web";
 
 export const programEditSignal = ({
   id,
@@ -18,18 +19,19 @@ export const programEditSignal = ({
     successFee,
     volumeFee
   };
-  return managerApi
-    .updateProgramSignalSettings(authorization, requestData)
-    .then(() => {
-      dispatch(
-        alertMessageActions.success(
-          "program-edit-signal.success-alert-message",
-          true
-        )
-      );
-      return;
-    })
-    .catch((error: ResponseError) => {
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+  return new CancelablePromise<void>(() => {});
+  // return managerApi
+  //   .updateProgramSignalSettings(authorization, requestData)
+  //   .then(() => {
+  //     dispatch(
+  //       alertMessageActions.success(
+  //         "program-edit-signal.success-alert-message",
+  //         true
+  //       )
+  //     );
+  //     return;
+  //   })
+  //   .catch((error: ResponseError) => {
+  //     dispatch(alertMessageActions.error(error.errorMessage));
+  //   });
 };

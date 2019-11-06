@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { CaptchaCheckResult, RegisterManagerViewModel } from "gv-api-web";
+import { CaptchaCheckResult } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -111,7 +111,7 @@ interface OwnProps {
   refCode?: string;
 }
 
-export interface ISignUpFormFormValues extends RegisterManagerViewModel {
+export interface ISignUpFormFormValues { //extends RegisterManagerViewModel {
   [SIGN_UP_FORM_FIELDS.privacyPolicy]: boolean;
   [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean;
   [SIGN_UP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;

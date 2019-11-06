@@ -1,7 +1,7 @@
 import "./dashboard-programs.scss";
 
 import classNames from "classnames";
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -96,7 +96,7 @@ const _DashboardPrograms: React.FC<Props> = ({
           )}
         </span>
       )}
-      renderBodyRow={(program: ProgramDetailsOld, updateRow: any) => (
+      renderBodyRow={(program: ProgramDetailsFull, updateRow: any) => (
         <TableRow
           className={classNames({
             "table__row--pretender": false
@@ -137,11 +137,11 @@ const _DashboardPrograms: React.FC<Props> = ({
           </TableCell>
           {role === ROLE.MANAGER ? (
             <TableCell className="programs-table__cell dashboard-programs__cell--login">
-              {program.personalDetails.login}
+              {program.manager.username /*program.personalDetails.login*/}
             </TableCell>
           ) : null}
           <TableCell className="programs-table__cell dashboard-programs__cell--share">
-            {formatValue(program.dashboardAssetsDetails.share, 2)}%
+            5{/*{formatValue(program.dashboardAssetsDetails.share, 2)}%*/}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--period">
             <ProgramPeriodEnd periodEnds={program.periodEnds} />
@@ -160,11 +160,11 @@ const _DashboardPrograms: React.FC<Props> = ({
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
-              value={formatValue(program.statistic.profitPercent, 2)}
+              value={formatValue(program.personalDetails.profit, 2)}
               prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
-                value={formatValue(program.statistic.profitPercent, 2)}
+                value={formatValue(program.personalDetails.profit, 2)}
                 suffix="%"
                 allowNegative={false}
                 displayType="text"
@@ -172,9 +172,9 @@ const _DashboardPrograms: React.FC<Props> = ({
             </Profitability>
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--chart">
-            {program.chart.length && (
-              <ProgramSimpleChart data={program.chart} programId={program.id} />
-            )}
+            {/*{program.chart.length && (*/}
+            {/*  <ProgramSimpleChart data={program.chart} programId={program.id} />*/}
+            {/*)}*/}
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--status">
             <AssetStatus

@@ -14,7 +14,7 @@ const _Mt5: React.FC = () => {
         <iframe
           title={title}
           src="https://trade.mql5.com/trade?servers=GenesisMarketsLp-Demo,GenesisMarketsLp-Live&amp;trade_server=GenesisMarketsLp-Live&amp;demo_server=GenesisMarketsLp-Demo&amp;lang=en&amp;save_password=on"
-          allowFullScreen="allowfullscreen"
+          allowFullScreen
         >
           {title}
         </iframe>

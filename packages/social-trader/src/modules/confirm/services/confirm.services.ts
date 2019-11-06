@@ -1,5 +1,5 @@
-import { TwoFactorAuthenticator } from "gv-api-web";
-import managerApi from "shared/services/api-client/manager-api";
+import { CancelablePromise, TwoFactorAuthenticator } from "gv-api-web";
+// import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 import { IConfirmFormValues } from "../components/confirm-form";
@@ -9,13 +9,13 @@ export const confirm = (
   values: IConfirmFormValues & IConfirmProgramProps
 ): Promise<any> => {
   const authorization = authService.getAuthArg();
-  return managerApi.confirmProgram2FA(authorization, values);
+  return new CancelablePromise<void>(() => {});
+  // return managerApi.confirmProgram2FA(authorization, values);
 };
-export const get2faInfo = (
-  values: IConfirmProgramProps
-): Promise<TwoFactorAuthenticator> => {
+export const get2faInfo = (values: IConfirmProgramProps): Promise<any> => {
   const authorization = authService.getAuthArg();
-  return managerApi.getProgram2FA(authorization, values);
+  return new CancelablePromise<void>(() => {});
+  // return managerApi.getProgram2FA(authorization, values);
 };
 
 export interface IConfitmService {

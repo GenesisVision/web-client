@@ -2,10 +2,7 @@ import "shared/components/details/details.scss";
 import "components/create-asset/fields/fields.scss";
 import "pages/create-program/components/create-program-settings/create-program-settings.scss";
 
-import {
-  BrokersProgramInfo,
-  ProgramDetailsFullTradesDelayEnum
-} from "gv-api-web";
+import { BrokersProgramInfo, TradesDelay } from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
@@ -106,7 +103,7 @@ const _FollowsEditPage: React.FC = () => {
 
 export type TUpdateFollowFunc = (
   values: {
-    tradesDelay?: ProgramDetailsFullTradesDelayEnum;
+    tradesDelay?: TradesDelay;
     description?: string;
     logo?: IImageValue;
     investmentLimit?: number;

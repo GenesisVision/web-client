@@ -1,7 +1,7 @@
 import {
   CancelablePromise,
-  ItemsViewModelFundDetailsList,
   InvestmentEventViewModels,
+  ItemsViewModelFundDetailsList,
   ItemsViewModelProgramDetailsList
 } from "gv-api-web";
 import { Action } from "redux";

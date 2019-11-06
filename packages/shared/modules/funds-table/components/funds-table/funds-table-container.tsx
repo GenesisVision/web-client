@@ -1,4 +1,8 @@
-import { FundsListOld, PlatformAsset, PlatformCurrency } from "gv-api-web";
+import {
+  ItemsViewModelFundDetailsList,
+  PlatformAsset,
+  PlatformCurrencyInfo
+} from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -63,7 +67,7 @@ class _FundsTableContainer extends React.PureComponent<Props> {
     return (
       <FundsTable
         title={title}
-        data={data ? data.funds : undefined}
+        data={data ? data.items : undefined}
         sorting={filters.sorting}
         updateSorting={service.fundsChangeSorting}
         filtering={filters.filtering}
@@ -174,9 +178,9 @@ interface MergeProps {
 
 interface StateProps {
   isAuthenticated: boolean;
-  data?: FundsListOld;
+  data?: ItemsViewModelFundDetailsList;
   fundAssets: PlatformAsset[];
-  currencies: PlatformCurrency[];
+  currencies: PlatformCurrencyInfo[];
   currency: CurrencyEnum;
 }
 

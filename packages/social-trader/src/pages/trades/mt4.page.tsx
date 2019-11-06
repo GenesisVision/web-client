@@ -13,7 +13,7 @@ const _Mt4: React.FC = () => {
       <div className="mt-frame">
         <iframe
           title={title}
-          allowFullScreen="allowfullscreen"
+          allowFullScreen
           name="webTerminalHost"
           id="webTerminalHost"
           src="https://trade.mql5.com/trade?version=4"

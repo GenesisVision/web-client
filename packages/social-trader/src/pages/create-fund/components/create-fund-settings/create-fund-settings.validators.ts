@@ -22,7 +22,7 @@ import {
 const createFundSettingsValidationSchema = ({
   t,
   data: {
-    programsInfo: { managerMaxEntryFee, managerMaxExitFee }
+    // programsInfo: { managerMaxEntryFee, managerMaxExitFee } TODO
   },
   minimumDepositAmount
 }: ICreateFundSettingsProps & WithTranslation) =>
@@ -38,9 +38,7 @@ const createFundSettingsValidationSchema = ({
     );
     return object<ICreateFundSettingsFormValues>().shape({
       [CREATE_FUND_FIELDS.depositAmount]: number()
-        .required(
-          t("create-program-page.settings.validation.amount-required")
-        )
+        .required(t("create-program-page.settings.validation.amount-required"))
         .min(
           minDeposit,
           t("create-program-page.settings.validation.amount-is-zero", {
@@ -55,8 +53,8 @@ const createFundSettingsValidationSchema = ({
       [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
       [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, managerMaxEntryFee),
-      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, managerMaxExitFee),
+      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, 0),
+      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, 0),
       [CREATE_FUND_FIELDS.assets]: assetsShape(t)
     });
   });

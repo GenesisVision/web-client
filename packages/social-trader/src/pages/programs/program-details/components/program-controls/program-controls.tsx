@@ -15,11 +15,11 @@ const _ProgramControls: React.FC<Props> = ({
   data: levelsParameters,
   isAuthenticated
 }) => {
-  const personalProgramDetails = programDescription.personalProgramDetails;
+  const personalProgramDetails = programDescription.personalDetails;
   const canCloseAsset =
-    personalProgramDetails && personalProgramDetails.canCloseAsset;
+    personalProgramDetails && personalProgramDetails.ownerActions.canClose;
   const isOwnProgram =
-    personalProgramDetails && personalProgramDetails.isOwnProgram;
+    personalProgramDetails && personalProgramDetails.isOwnAsset;
 
   return (
     <div className="asset-details-description__controls">

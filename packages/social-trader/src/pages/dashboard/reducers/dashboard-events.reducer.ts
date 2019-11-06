@@ -15,6 +15,7 @@ import { apiSelector } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
 
 import { DASHBOARD_PORTFOLIO_EVENTS } from "../actions/dashboard.actions";
+import { RootState } from "shared/reducers/root-reducer";
 
 export type ManagerPortfolioEventsState = IApiState<InvestmentEventViewModels>;
 
@@ -28,7 +29,8 @@ const dashboardEventsReducer = apiReducerFactory<InvestmentEventViewModels>({
 });
 export default dashboardEventsReducer;
 
-export const dashboardEventsAllSelector = (state: ManagerRootState) =>
+export const dashboardEventsAllSelector = (state: RootState) =>
+  //@ts-ignore
   state.dashboard.eventsTable;
 
 export const dashboardEventsAllTableSelector = tableSelectorCreator<

@@ -27,8 +27,8 @@ function create(role, path) {
       config.resolve.modules.push(path);
       config.plugins.push(new webpack.EnvironmentPlugin(process.env));
       return config;
-    },
-    assetPrefix: isProd ? `/static-${role.toLowerCase()}` : ""
+    }
+    // assetPrefix: isProd ? `/static-${role.toLowerCase()}` : ""
   };
   return withPlugins(
     [

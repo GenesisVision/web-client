@@ -2,6 +2,7 @@
 import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "shared/components/auth/signin/reducers/login.reducers";
 import signUpReducer from "shared/components/auth/signup/reducers/signup.reducers";
+import followDetailsReducer from "shared/components/follows/follow-details/reducers/follow-details.reducer";
 import fundDetailsReducer, {
   FundDetailsState
 } from "shared/components/funds/fund-details/reducers/fund-details.reducer";
@@ -47,6 +48,11 @@ import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 
+import { FollowDetailsState } from "../components/follows/follow-details/reducers/follow-details.reducer";
+import followNotificationsReducer from "../modules/follow-notifications/reducers/follow-notifications.reducers";
+import followsReducer, {
+  FollowsListState
+} from "../modules/follows-table/reducers/follows-table.reducers";
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
 import headerReducer, { HeaderState } from "./header-reducer";
@@ -60,9 +66,11 @@ import uiReducer from "./ui-reducer";
 export const sharedRootReducers = {
   // profile: profileReducer,
   fundDetails: fundDetailsReducer,
+  followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
   // router: connectRouter(history),
   platformData: platformReducer,
+  followsData: followsReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
   fundsData: fundsReducer,
@@ -75,6 +83,7 @@ export const sharedRootReducers = {
   // emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   // notificationSettings: notificationSettingsReducer,
+  // followNotifications: followNotificationsReducer,
   // programNotifications: programNotificationsReducer,
   // fundNotifications: fundNotificationsReducer,
   // manager: managerReducer,
@@ -87,15 +96,18 @@ export const sharedRootReducers = {
 export type RootState = Readonly<{
   // profile: ProfileState;
   fundDetails: FundDetailsState;
+  followDetails: FollowDetailsState;
   programDetails: ProgramDetailsState;
   // notifications: NotificationsState;
   profileHeader: HeaderState;
   // notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
+  followsData: FollowsListState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
   // emailPending: EmailPendingState;
+  // followNotifications: ProgramNotificationsState;
   // programNotifications: ProgramNotificationsState;
   // fundNotifications: FundNotificationsState;
   authData: AuthState;

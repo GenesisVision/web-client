@@ -1,23 +1,18 @@
-import {
-  PersonalFundDetailsFull,
-  PersonalProgramDetailsFull
-} from "gv-api-web";
+import { PersonalFundDetails, PersonalProgramDetails } from "gv-api-web";
 
-export interface InvestmentDetails
-  extends PersonalFundDetailsFull,
-    PersonalProgramDetailsFull {}
+export type InvestmentDetails = PersonalFundDetails | PersonalProgramDetails;
 
 export const composeInvestmentDetails = (
-  personalDetails: PersonalFundDetailsFull | PersonalProgramDetailsFull
+  personalDetails: PersonalFundDetails | PersonalProgramDetails
 ) => ({
   canWithdraw: personalDetails.canWithdraw,
   canInvest: personalDetails.canInvest,
   isInvested: personalDetails.isInvested,
   pendingInput: personalDetails.pendingInput,
   pendingOutput: personalDetails.pendingOutput,
-  pendingOutputIsWithdrawAll: personalDetails.pendingOutputIsWithdrawAll,
+  pendingOutputIsWithdrawAll: false, // TODO personalDetails.pendingOutputIsWithdrawAll,
   status: personalDetails.status,
   value: personalDetails.value,
-  invested: personalDetails.invested,
-  profitPercent: personalDetails.profit
+  invested: personalDetails.isInvested,
+  profitPercent: personalDetails.value //profit
 });

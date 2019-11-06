@@ -1,7 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetailsOld } from "gv-api-web";
-import moment from "moment";
-import NextLink from "next/link";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -15,7 +13,6 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import TableRow from "shared/components/table/components/table-row";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { useTranslation } from "shared/i18n";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "shared/routes/programs.routes";
@@ -41,7 +38,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
     as: composeProgramDetailsUrl(program.url),
     pathname: PROGRAM_DETAILS_FOLDER_ROUTE
   };
-  const requestCurrency = program.statistic.balance.currency;
+  const requestCurrency = program.balance.currency;
   return (
     <TableRow>
       <td
@@ -81,11 +78,11 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                       className="program-detailed__manager-link"
                       to={{
                         pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-                        as: composeManagerDetailsUrl(program.manager.url),
+                        as: composeManagerDetailsUrl(program.owner.url),
                         state: programLinkProps.state
                       }}
                     >
-                      {program.manager.username}
+                      {program.owner.username}
                     </Link>
                   </div>
                   <TagProgramContainer tags={program.tags} />
@@ -96,15 +93,15 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
               </div>
               <div className="program-detailed__scroll">
                 <div className="program-detailed__description">
-                  {program.description}
+                  {/*{program.description}*/}
                 </div>
               </div>
             </div>
             <div className="program-detailed__statistic">
               <div className="program-detailed__chart">
-                {program.chart.length && (
+                {program.chart.chart.length && (
                   <ProgramBigChart
-                    data={program.chart}
+                    data={program.chart.chart}
                     programId={program.id}
                   />
                 )}
@@ -117,7 +114,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   <div className="program-detailed__statistic-data--value">
                     <NumberFormat
                       value={formatCurrencyValue(
-                        program.statistic.balance.amount,
+                        program.balance.amount,
                         requestCurrency
                       )}
                       suffix={` ${requestCurrency}`}
@@ -138,7 +135,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.investors")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {program.statistic.investorsCount}
+                    {program.investorsCount}
                   </div>
                 </div>
                 <div>
@@ -147,7 +144,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {`${formatCurrencyValue(
-                      program.availableInvestmentInCurrency,
+                      program.availableToInvest,
                       requestCurrency
                     )} ${requestCurrency}`}
                   </div>
@@ -177,7 +174,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <NumberFormat
-                      value={formatValue(program.statistic.drawdownPercent, 2)}
+                      value={formatValue(program.chart.drawdown, 2)}
                       suffix="%"
                       displayType="text"
                     />
@@ -189,11 +186,11 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <Profitability
-                      value={formatValue(program.statistic.profitPercent, 2)}
+                      value={formatValue(program.chart.profit, 2)}
                       prefix={PROFITABILITY_PREFIX.SIGN}
                     >
                       <NumberFormat
-                        value={formatValue(program.statistic.profitPercent, 2)}
+                        value={formatValue(program.chart.profit, 2)}
                         suffix="%"
                         allowNegative={false}
                         displayType="text"
@@ -237,7 +234,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
 
 interface Props {
   title: string;
-  program: ProgramDetailsOld;
+  program: ProgramDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;

@@ -1,4 +1,4 @@
-import { LevelsParamsInfo, ProgramDetailsFullOld } from "gv-api-web";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { CurrencyEnum } from "shared/utils/types";
@@ -13,7 +13,7 @@ export interface IProgramControlsProps
   canInvest?: boolean;
   canMakeSignalProvider?: boolean;
   isAuthenticated: boolean;
-  programDescription: ProgramDetailsFullOld;
+  programDescription: ProgramDetailsFull;
   data: LevelsParamsInfo;
 }
 
@@ -44,7 +44,7 @@ export interface IProgramReinvestingContainerOwnProps {
   isReinvesting: boolean;
 }
 export interface IChangePasswordTradingAccountProps {
-  programDescription: ProgramDetailsFullOld;
+  programDescription: ProgramDetailsFull;
 }
 
 export interface ILevelCalculatorProps {

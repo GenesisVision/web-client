@@ -1,4 +1,4 @@
-import { FundDetailsFull, PlatformAsset, ProgramsInfo } from "gv-api-web";
+import { FundDetailsFull, FundDetailsList, PlatformAsset } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
@@ -12,7 +12,7 @@ import { TUpdateFundFunc } from "./fund-settings.page";
 import Reallocation from "./reallocation/reallocation";
 
 const _FundSettings: React.FC<Props> = ({
-  programsInfo,
+  // programsInfo,
   reallocate,
   platformAssets,
   details,
@@ -22,23 +22,23 @@ const _FundSettings: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <>
-      <Reallocation
-        condition={details.personalFundDetails.canReallocate}
-        availableReallocationPercents={
-          details.personalFundDetails.availableReallocationPercents
-        }
-        onApply={reallocate}
-        id={details.id}
-        fundAssets={details.currentAssets}
-        platformAssets={platformAssets}
-      />
-      <InvestmentFees
-        asset={ASSET.FUND}
-        programsInfo={programsInfo}
-        entryFee={details.entryFee}
-        exitFee={details.exitFee}
-        onSubmit={editAsset}
-      />
+      {/*<Reallocation*/}
+      {/*  condition={details.personalDetails.ownerActions.canReallocate}*/}
+      {/*  availableReallocationPercents={*/}
+      {/*    details.personalDetails.availableReallocationPercents*/}
+      {/*  }*/}
+      {/*  onApply={reallocate}*/}
+      {/*  id={details.id}*/}
+      {/*  fundAssets={details.currentAssets}*/}
+      {/*  platformAssets={platformAssets}*/}
+      {/*/>*/}
+      {/*<InvestmentFees*/}
+      {/*  asset={ASSET.FUND}*/}
+      {/*  programsInfo={programsInfo}*/}
+      {/*  entryFee={details.entryFeeCurrent}*/}
+      {/*  exitFee={details.exitFeeCurrent}*/}
+      {/*  onSubmit={editAsset}*/}
+      {/*/>*/}
       <AssetEdit
         title={details.title}
         logo={{ src: details.logo }}
@@ -48,7 +48,7 @@ const _FundSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("asset-settings.close-fund.title")}
         asset={ASSET.FUND}
-        canCloseAsset={details.personalFundDetails.canCloseAsset}
+        canCloseAsset={details.personalDetails.ownerActions.canClose}
         id={details.id}
         closeAsset={closeAsset}
       />
@@ -59,7 +59,7 @@ const _FundSettings: React.FC<Props> = ({
 interface Props extends OwnProps {}
 
 interface OwnProps {
-  programsInfo: ProgramsInfo;
+  // programsInfo: ProgramsInfo;
   reallocate: () => void;
   platformAssets: PlatformAsset[];
   details: FundDetailsFull;

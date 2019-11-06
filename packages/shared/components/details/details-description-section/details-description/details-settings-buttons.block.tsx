@@ -1,9 +1,6 @@
 import "./details-description.scss";
 
-import {
-  PersonalFundDetailsFull,
-  PersonalProgramDetailsFullOld
-} from "gv-api-web";
+import { PersonalFundDetails, PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { ToType } from "shared/components/link/link";
@@ -13,7 +10,7 @@ import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
 
 const _DetailsSettingsButtons: React.FC<{
-  personalDetails: PersonalProgramDetailsFullOld | PersonalFundDetailsFull;
+  personalDetails: PersonalFundDetails | PersonalProgramDetails;
   id: string;
   title: string;
   notificationsUrl: ToType;
@@ -31,8 +28,8 @@ const _DetailsSettingsButtons: React.FC<{
         hasNotifications={personalDetails && personalDetails.hasNotifications}
       />
       {personalDetails &&
-        personalDetails.isOwnProgram &&
-        personalDetails.canCloseAsset && (
+        personalDetails.isOwnAsset &&
+        personalDetails.ownerActions.canClose && (
           <DetailsSettingControl
             to={settingsUrl}
             text={t("program-details-page.description.program-settings")}

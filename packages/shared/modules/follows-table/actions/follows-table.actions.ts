@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramsListOld } from "gv-api-web";
+import { CancelablePromise, ItemsViewModelProgramDetailsList } from "gv-api-web";
 import programApi from "shared/services/api-client/programs-api";
 import { ActionType } from "shared/utils/types";
 
@@ -6,8 +6,9 @@ export const FOLLOWS = "FOLLOWS";
 
 export const fetchFollowsAction = (
   filters: FetchProgramsFiltersType // TODO change api to create interface to this
-): ActionType<CancelablePromise<ProgramsListOld>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
   type: FOLLOWS,
+  //@ts-ignore
   payload: programApi.getPrograms(filters)
 });
 

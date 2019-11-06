@@ -33,7 +33,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
   data: {
-    programsInfo: { managerMaxEntryFee, managerMaxExitFee }
+    // programsInfo: { managerMaxEntryFee, managerMaxExitFee } TODO
   },
   minimumDepositAmount
 }) => {
@@ -66,19 +66,15 @@ const _CreateFundSettings: React.FC<Props> = ({
           entryFeeName={CREATE_FUND_FIELDS.entryFee}
           entryFeeDescription={t(
             "create-fund-page.settings.hints.entry-fee-description",
-            { maxFee: managerMaxEntryFee }
+            { maxFee: 0 } //managerMaxEntryFee }
           )}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
-          secondFeeLabel={t(
-            "create-fund-page.settings.fields.exit-fee"
-          )}
-          secondFeeUnderText={t(
-            "create-fund-page.settings.hints.exit-fee"
-          )}
+          secondFeeLabel={t("create-fund-page.settings.fields.exit-fee")}
+          secondFeeUnderText={t("create-fund-page.settings.hints.exit-fee")}
           secondFeeDescription={t(
             "create-fund-page.settings.hints.exit-fee-description",
             {
-              maxFee: managerMaxExitFee
+              maxFee: 0 //managerMaxExitFee
             }
           )}
         />

@@ -1,5 +1,8 @@
-import { push } from "connected-react-router";
-import { PlatformCurrency, ProgramsListOld, ProgramTag } from "gv-api-web";
+import {
+  ItemsViewModelProgramDetailsList,
+  PlatformCurrencyInfo,
+  ProgramTag
+} from "gv-api-web";
 import { Location } from "history";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -30,7 +33,7 @@ import {
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
-
+import Router from "next/router";
 import * as programsService from "../../services/programs-table.service";
 import {
   composeCurrencyFilter,
@@ -55,11 +58,11 @@ interface MergeProps {
 }
 
 interface StateProps {
-  currencies: PlatformCurrency[];
+  currencies: PlatformCurrencyInfo[];
   isAuthenticated: boolean;
   programCurrencies: string[];
   programTags: ProgramTag[];
-  data?: ProgramsListOld;
+  data?: ItemsViewModelProgramDetailsList;
 }
 
 interface DispatchProps {
@@ -119,7 +122,7 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
       <ProgramsTable
         showSwitchView={showSwitchView}
         title={title}
-        data={data ? data.programs : undefined}
+        data={data ? data.items : undefined}
         sorting={filters.sorting}
         updateSorting={service.programsChangeSorting}
         filtering={{
@@ -199,7 +202,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     {
       ...programsService,
       toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
-      redirectToLogin: () => push(LOGIN_ROUTE)
+      redirectToLogin: () => Router.push(LOGIN_ROUTE)
     },
     dispatch
   )

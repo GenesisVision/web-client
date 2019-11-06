@@ -46,7 +46,7 @@ const _FundSettingsPage: React.FC<Props> = ({
       dispatchDescription={dispatchDescriptionHandle}
       settingsBlocks={(editProgram, applyCloseAsset) => (
         <FundSettings
-          programsInfo={programsInfo}
+          // programsInfo={programsInfo}
           reallocate={dispatchDescriptionHandle}
           condition={!!description && !!platformAssets}
           platformAssets={platformAssets}

@@ -78,13 +78,13 @@ export const createProgramMapPropsToValues = ({
   [CREATE_PROGRAM_FIELDS.successFee]: undefined,
   [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
   [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
-  [CREATE_PROGRAM_FIELDS.isSignalProgram]: broker.isSignalsAvailable, // TODO move back to server
-  [CREATE_PROGRAM_FIELDS.signalSuccessFee]: broker.isSignalsAvailable
-    ? undefined
-    : 0,
-  [CREATE_PROGRAM_FIELDS.signalVolumeFee]: broker.isSignalsAvailable
-    ? undefined
-    : 0,
+  [CREATE_PROGRAM_FIELDS.isSignalProgram]: false, //broker.isSignalsAvailable, // TODO move back to server
+  [CREATE_PROGRAM_FIELDS.signalSuccessFee]: 0, //broker.isSignalsAvailable
+  // ? undefined
+  // : 0,
+  [CREATE_PROGRAM_FIELDS.signalVolumeFee]: 0, //broker.isSignalsAvailable
+  // ? undefined
+  // : 0,
   [CREATE_PROGRAM_FIELDS.currency]: getCurrency(broker.accountTypes[0]),
   [CREATE_PROGRAM_FIELDS.leverage]: getLeverage(broker.accountTypes[0]),
   [CREATE_PROGRAM_FIELDS.periodLength]:
@@ -113,10 +113,7 @@ const createProgramSettingsValidationSchema = ({
         .required(
           t("create-program-page.settings.validation.stop-out-required")
         )
-        .min(
-          10,
-          t("create-program-page.settings.validation.stop-out-is-zero")
-        )
+        .min(10, t("create-program-page.settings.validation.stop-out-is-zero"))
         .max(
           100,
           t("create-program-page.settings.validation.stop-out-is-large")
@@ -150,9 +147,7 @@ const createProgramSettingsValidationSchema = ({
           then: number()
             .min(
               0,
-              t(
-                "create-program-page.settings.validation.investment-limit-min"
-              )
+              t("create-program-page.settings.validation.investment-limit-min")
             )
             .lessThan(
               10000000000,
@@ -181,33 +176,24 @@ const createProgramSettingsValidationSchema = ({
         }
       ),
       [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
-        t(
-          "create-program-page.settings.validation.account-type-required"
-        )
+        t("create-program-page.settings.validation.account-type-required")
       ),
       [CREATE_PROGRAM_FIELDS.depositAmount]: values[
         CREATE_PROGRAM_FIELDS.currency
       ]
         ? number()
             .required(
-              t(
-                "create-program-page.settings.validation.amount-required"
-              )
+              t("create-program-page.settings.validation.amount-required")
             )
             .min(
               minDeposit,
-              t(
-                "create-program-page.settings.validation.amount-is-zero",
-                {
-                  min: minDeposit
-                }
-              )
+              t("create-program-page.settings.validation.amount-is-zero", {
+                min: minDeposit
+              })
             )
             .max(
               values[CREATE_PROGRAM_FIELDS.available],
-              t(
-                "create-program-page.settings.validation.amount-is-large"
-              )
+              t("create-program-page.settings.validation.amount-is-large")
             )
         : number().required(
             t("create-program-page.settings.validation.amount-required")

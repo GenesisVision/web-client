@@ -7,7 +7,7 @@ import authService from "shared/services/auth-service";
 import * as actions from "../actions/dashboard.actions";
 import { dashboardCopytradingTableSelector } from "../components/dashboard-assets/dashboard-copytrading.selectors";
 import {
-  getDashboardCopytrading,
+  // getDashboardCopytrading,
   getDashboardFunds
 } from "./dashboard-assets.service";
 
@@ -32,12 +32,12 @@ export const getAssetsCounts = () => (
   const fundsCountFilters = composeRequestFiltersByTableState(
     dashboardFundsTableSelector(getState())
   );
-  dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
+  // dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 
   const copytradingCountFilters = composeRequestFiltersByTableState(
     dashboardCopytradingTableSelector(getState())
   );
-  dispatch(
-    getDashboardCopytrading({ ...copytradingCountFilters, ...commonFiltering })
-  );
+  // dispatch(
+  //   getDashboardCopytrading({ ...copytradingCountFilters, ...commonFiltering })
+  // );
 };

@@ -3,14 +3,14 @@ import {
   BrokerDetails,
   LevelsParamsInfo,
   OrderModel,
-  PersonalProgramDetailsFull,
-  ProgramDetailsFullOld,
-  ProgramDetailsListStatistic,
-  ProgramProfitChart,
-  ProgramStatistic,
+  // PersonalProgramDetailsFull,
+  // ProgramDetailsFullOld,
+  // ProgramDetailsListStatistic,
+  // ProgramProfitChart,
+  // ProgramStatistic,
   TradesViewModel
 } from "gv-api-web";
-import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
+// import { ProfitChartDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
@@ -26,7 +26,7 @@ export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
 ];
 
-export const profitChartLoaderData: ProgramProfitChart = {
+export const profitChartLoaderData: any = {
   equityChart: [],
   totalProfit: 0,
   timeframeProfit: 0,
@@ -48,11 +48,12 @@ export const profitChartLoaderData: ProgramProfitChart = {
   rate: 158.63
 };
 
-export const profitChartDataLoaderData: ProfitChartDataType = [
+export const profitChartDataLoaderData: any = [
+  //ProfitChartDataType
   profitChartLoaderData
 ];
 
-export const statisticDataLoaderData = {
+export const statisticDataLoaderData: any = {
   statisticCurrency: "",
   statistic: {
     equityChart: [],
@@ -79,7 +80,8 @@ export const statisticDataLoaderData = {
   }
 };
 
-export const brokerDetailsLoaderData: BrokerDetails = {
+export const brokerDetailsLoaderData: any = {
+  //: BrokerDetails
   logo: "",
   name: faker.name.firstName(),
   isForex: false,
@@ -92,7 +94,8 @@ export const brokerDetailsLoaderData: BrokerDetails = {
   showCommissionRebateSometime: false
 };
 
-export const statisticLoaderData: ProgramStatistic = {
+export const statisticLoaderData: any = {
+  //: ProgramStatistic
   balanceBase: amountWithCurrencyLoaderData,
   balanceGVT: amountWithCurrencyLoaderData,
   balanceSecondary: amountWithCurrencyLoaderData,
@@ -113,7 +116,8 @@ export const statisticLoaderData: ProgramStatistic = {
   sharpeRatioPercent: getRandomInteger(0, 100)
 };
 
-export const statisticListLoaderData: ProgramDetailsListStatistic = {
+export const statisticListLoaderData: any = {
+  //: ProgramDetailsListStatistic
   balance: {
     amount: getRandomInteger(0, 100),
     currency: "GVT"
@@ -126,7 +130,8 @@ export const statisticListLoaderData: ProgramDetailsListStatistic = {
   tradesCount: getRandomInteger(0, 100)
 };
 
-export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
+export const personalProgramDetailsLoaderData: any = {
+  //: PersonalProgramDetailsFull
   isReinvest: false,
   gvtValue: getRandomInteger(0, 100),
   showTwoFactorButton: false,
@@ -182,7 +187,8 @@ export const personalProgramDetailsLoaderData: PersonalProgramDetailsFull = {
   status: "Pending"
 };
 
-export const programDetailsLoaderData: ProgramDetailsFullOld = {
+export const programDetailsLoaderData: any = {
+  //: ProgramDetailsFullOld
   currency: "" as CurrencyEnum,
   level: getRandomInteger(0, 100),
   levelProgress: getRandomInteger(0, 100),
@@ -241,7 +247,8 @@ export const levelsParamsLoaderData: LevelsParamsInfo = {
   investmentScaleHighRisk: getRandomInteger(0, 100)
 };
 
-export const tradeLoaderDataCreator = (): OrderModel => ({
+export const tradeLoaderDataCreator = () => ({
+  //: OrderModel
   id: "",
   login: "",
   ticket: "",
@@ -264,7 +271,8 @@ export const tradeLoaderDataCreator = (): OrderModel => ({
   }
 });
 
-export const tradesLoaderData: TradesViewModel = {
+export const tradesLoaderData: any = {
+  //: TradesViewModel
   showSwaps: false,
   showTickets: false,
   trades: tableLoaderCreator(tradeLoaderDataCreator),

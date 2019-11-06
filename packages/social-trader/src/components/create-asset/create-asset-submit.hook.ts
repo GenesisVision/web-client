@@ -1,5 +1,5 @@
 import { push } from "connected-react-router";
-import { ProgramCreateResult } from "gv-api-web";
+//import { ProgramCreateResult } from "gv-api-web";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
@@ -15,7 +15,7 @@ import {
 } from "./create-asset-service";
 
 type TUseCreateAssetSubmitProps = {
-  condition?: (data: ProgramCreateResult | null) => boolean;
+  condition?: (data: any | null) => boolean;
   asset: ASSET;
 };
 

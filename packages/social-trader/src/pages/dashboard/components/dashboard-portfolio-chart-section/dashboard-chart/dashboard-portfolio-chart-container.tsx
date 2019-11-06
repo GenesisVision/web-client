@@ -29,12 +29,12 @@ const _DashboardPortfolioChartContainer: React.FC<Props> = ({
     <>
       <ChartPeriod period={period} onChange={handleChangePeriod} />
       <div className="dashboard-portfolio-chart-section__chart">
-        {assetChart.type === ASSETS_TYPES.Program && (
-          <ProgramProfitChart
-            profitChart={[assetChart]}
-            chartCurrencies={[{ name: assetChart.currency!, color: "#16B9AD" }]}
-          />
-        )}
+        {/*{assetChart.type === ASSETS_TYPES.Program && (*/}
+        {/*  <ProgramProfitChart*/}
+        {/*    profitChart={[assetChart]}*/}
+        {/*    chartCurrencies={[{ name: assetChart.currency!, color: "#16B9AD" }]}*/}
+        {/*  />*/}
+        {/*)}*/}
         {assetChart.type === ASSETS_TYPES.Fund && (
           <FundProfitChart
             profitChart={[assetChart]}

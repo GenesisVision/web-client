@@ -1,9 +1,7 @@
-import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
-import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
 const _SignalProviderControls: React.FC<Props> = ({ children }) => {
   return (

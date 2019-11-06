@@ -3,7 +3,6 @@ import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.r
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
-import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
@@ -17,6 +16,7 @@ import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import Link from "shared/components/link/link";
 import useRole from "shared/hooks/use-role.hook";
+import { RootState } from "shared/reducers/root-reducer";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
@@ -110,7 +110,7 @@ const _EmptyPrograms: React.FC = () => {
 };
 const EmptyPrograms = React.memo(_EmptyPrograms);
 
-const mapStateToProps = (state: ManagerRootState) => {
+const mapStateToProps = (state: RootState) => {
   const counts = {
     programsCount: dashboardProgramsTableSelector(state).itemsData.data.total,
     fundsCount: dashboardFundsTableSelector(state).itemsData.data.total

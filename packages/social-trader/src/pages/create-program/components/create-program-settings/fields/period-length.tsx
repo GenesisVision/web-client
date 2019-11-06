@@ -1,5 +1,5 @@
 import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
-import { ProgramsInfo } from "gv-api-web";
+// import { ProgramsInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -16,7 +16,7 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
         label={t("create-program-page.settings.fields.period")}
         InputComponent={Select}
       >
-        {programsInfo.periods.map(period => (
+        {programsInfo.periods.map((period: any) => (
           <option value={period} key={period}>
             {`${period} ${t(
               "create-program-page.settings.fields.period-option-notation.day",
@@ -30,7 +30,7 @@ const _PeriodLength: React.FC<Props> = ({ name, programsInfo }) => {
 };
 
 interface Props {
-  programsInfo: ProgramsInfo;
+  programsInfo: any;
   name: string;
 }
 

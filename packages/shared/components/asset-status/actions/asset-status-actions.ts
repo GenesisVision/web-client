@@ -1,6 +1,6 @@
-import { ProgramRequests } from "gv-api-web";
-import investorApi from "shared/services/api-client/investor-api";
-import managerApi from "shared/services/api-client/manager-api";
+import { CancelablePromise } from "gv-api-web";
+// import investorApi from "shared/services/api-client/investor-api";
+// import managerApi from "shared/services/api-client/manager-api";
 import { ApiAction } from "shared/utils/types";
 
 export const CANCEL_MANAGER_PROGRAM_REQUESTS =
@@ -22,7 +22,7 @@ export const cancelInvestorProgramRequestAction: ICancelRequest = (
   auth
 ) => ({
   type: CANCEL_INVESTOR_PROGRAM_REQUESTS,
-  payload: investorApi.cancelRequest(id, auth)
+  payload: Promise.resolve() as CancelablePromise<any> //investorApi.cancelRequest(id, auth)
 });
 
 export const cancelManagerProgramRequestAction: ICancelRequest = (
@@ -30,21 +30,19 @@ export const cancelManagerProgramRequestAction: ICancelRequest = (
   auth
 ) => ({
   type: CANCEL_MANAGER_PROGRAM_REQUESTS,
-  payload: managerApi.cancelRequest(id, auth)
+  payload: Promise.resolve() as CancelablePromise<any> //managerApi.cancelRequest(id, auth)
 });
 
 export const fetchInRequestsInvestorAction: IFetchInRequests<
-  ProgramRequests
+  any //ProgramRequests
 > = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: investorApi.getRequests(skip, take, auth)
+  payload: Promise.resolve() as CancelablePromise<any> //investorApi.getRequests(skip, take, auth)
 });
 
-export const fetchInRequestsManagerAction: IFetchInRequests<ProgramRequests> = (
-  auth,
-  skip,
-  take
-) => ({
+export const fetchInRequestsManagerAction: IFetchInRequests<
+  any //ProgramRequests
+> = (auth, skip, take) => ({
   type: DASHBOARD_IN_REQUESTS,
-  payload: managerApi.getRequests(skip, take, auth)
+  payload: Promise.resolve() as CancelablePromise<any> //managerApi.getRequests(skip, take, auth)
 });

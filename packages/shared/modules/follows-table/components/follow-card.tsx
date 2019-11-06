@@ -1,4 +1,4 @@
-import { ProgramDetailsOld } from "gv-api-web";
+import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props {
-  follow: ProgramDetailsOld;
+  follow: ProgramDetailsList;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -48,7 +48,7 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
     pathname: composeFollowDetailsUrl(follow.url),
     state: `/ ${title}`
   };
-  const requestCurrency = follow.statistic.balance.currency;
+  const requestCurrency = follow.balance.currency;
   const renderActions = ({
     clearAnchor,
     anchor
@@ -95,8 +95,8 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       asset={follow}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={follow.statistic.profitValue}
-      profitPercent={follow.statistic.profitPercent}
+      profit={follow.chart.profit}
+      profitPercent={follow.chart.profit}
       renderActions={renderActions}
       extraBlock={follow.tags && <TagProgramContainer tags={follow.tags} />}
     >
@@ -108,11 +108,11 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("follows-page.header.trades")}>
-            <NumberFormat
-              value={follow.statistic.tradesCount}
-              displayType="text"
-              decimalScale={0}
-            />
+            {/*<NumberFormat*/}
+            {/*  value={follow.statistic.tradesCount}*/}
+            {/*  displayType="text"*/}
+            {/*  decimalScale={0}*/}
+            {/*/>*/}
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
@@ -121,7 +121,7 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
           >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                follow.availableInvestmentInCurrency,
+                follow.availableToInvest,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}

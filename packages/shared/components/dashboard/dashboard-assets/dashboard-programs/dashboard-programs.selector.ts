@@ -1,7 +1,8 @@
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { AuthRootState } from "shared/utils/types";
+import { RootState } from "shared/reducers/root-reducer";
 
-const dashboardProgramsSelector = (state: AuthRootState) =>
+const dashboardProgramsSelector = (state: RootState) =>
+  //@ts-ignore
   state.dashboard.programs;
 const dashboardProgramsTableSelector = tableSelectorCreator(
   dashboardProgramsSelector,

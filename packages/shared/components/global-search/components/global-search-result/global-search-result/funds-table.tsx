@@ -1,4 +1,4 @@
-import { FundsListOld } from "gv-api-web";
+import { ItemsViewModelFundDetailsList } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
@@ -8,12 +8,12 @@ import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds
 import { SearchTableProps } from "./global-search-result";
 
 const FundsTable: React.FC<
-  SearchTableProps<FundsListOld> & WithTranslation
+  SearchTableProps<ItemsViewModelFundDetailsList> & WithTranslation
 > = ({ t, title, data }) => {
   return (
     <Table
       columns={FUNDS_TABLE_COLUMNS}
-      items={data.funds}
+      items={data.items}
       renderHeader={column => (
         <span className={`funds-table__cell funds-table__cell--${column.name}`}>
           {t(`funds-page.funds-header.${column.name}`)}
