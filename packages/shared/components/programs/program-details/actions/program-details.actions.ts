@@ -21,26 +21,26 @@ import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import {
+  FETCH_LEVEL_PARAMETERS,
+  FETCH_PROGRAM_BALANCE_CHART,
+  FETCH_PROGRAM_DESCRIPTION,
+  FETCH_PROGRAM_PROFIT_CHART,
+  PROGRAM_FINANCIAL_STATISTIC,
+  PROGRAM_OPEN_POSITIONS,
+  PROGRAM_PERIOD_HISTORY,
+  PROGRAM_SUBSCRIPTIONS,
+  PROGRAM_TRADES,
+  SET_PROGRAM_ID,
+  SET_PROGRAM_STATISTIC_CURRENCY,
+  SET_PROGRAM_STATISTIC_PERIOD
+} from "../program-details.constants";
 import { ProgramIdState } from "../reducers/id.reducer";
 import { ProgramProfitChartDataType } from "../reducers/profit-chart.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
 } from "../services/program-details.service";
-
-export const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
-export const SET_PROGRAM_STATISTIC_CURRENCY = "SET_PROGRAM_STATISTIC_CURRENCY";
-export const FETCH_PROGRAM_PROFIT_CHART = "FETCH_PROGRAM_PROFIT_CHART";
-export const FETCH_PROGRAM_BALANCE_CHART = "FETCH_PROGRAM_BALANCE_CHART";
-export const FETCH_PROGRAM_DESCRIPTION = "FETCH_PROGRAM_DESCRIPTION";
-export const FETCH_LEVEL_PARAMETERS = "FETCH_LEVEL_PARAMETERS";
-export const SET_PROGRAM_ID = "SET_PROGRAM_ID";
-
-export const PROGRAM_OPEN_POSITIONS = "PROGRAM_OPEN_POSITIONS";
-export const PROGRAM_TRADES = "PROGRAM_TRADES";
-export const PROGRAM_PERIOD_HISTORY = "PROGRAM_PERIOD_HISTORY";
-export const PROGRAM_FINANCIAL_STATISTIC = "PROGRAM_FINANCIAL_STATISTIC";
-export const PROGRAM_SUBSCRIPTIONS = "PROGRAM_SUBSCRIPTIONS";
 
 const sendProgramChartRequest = (
   { start, end }: ChartDefaultPeriod,

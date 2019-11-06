@@ -8,7 +8,7 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_DESCRIPTION } from "../actions/program-details.actions";
+import { FETCH_PROGRAM_DESCRIPTION } from "../program-details.constants";
 
 export type ProgramDescriptionDataType = ProgramDetailsFullOld;
 

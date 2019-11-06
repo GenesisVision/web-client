@@ -5,7 +5,7 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_LEVEL_PARAMETERS } from "../actions/program-details.actions";
+import { FETCH_LEVEL_PARAMETERS } from "../program-details.constants";
 
 export type LevelParametersDataType = LevelsParamsInfo;
 

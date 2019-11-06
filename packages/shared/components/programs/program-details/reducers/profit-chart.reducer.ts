@@ -5,7 +5,7 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_PROGRAM_PROFIT_CHART } from "../actions/program-details.actions";
+import { FETCH_PROGRAM_PROFIT_CHART } from "../program-details.constants";
 
 export type ProgramProfitChartDataType = Array<ProgramProfitChart>;
 
