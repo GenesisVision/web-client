@@ -1,5 +1,4 @@
 import DashboardPage from "pages/dashboard/dashboard.page";
-import { getAssets } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
@@ -10,9 +9,7 @@ const Page: NextPageWithRedux<void> = () => {
   return <DashboardPage />;
 };
 
-Page.getInitialProps = async ctx => {
-  await ctx.reduxStore.dispatch(getAssets(ctx));
-};
+Page.getInitialProps = async ctx => {};
 
 export default compose(
   withDefaultLayout,
