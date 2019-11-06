@@ -3,29 +3,41 @@ import DashboardStatisticTable from "pages/dashboard/components/dashboard-statis
 import React from "react";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import { CurrencyEnum } from "shared/utils/types";
 
 import {
   TDashboardInvestingStatistic,
-  TDashboardProgramsStatistic
+  TDashboardTradingStatistic
 } from "../../dashboard.types";
 
-const _DashboardStatistic: React.FC<Props> = ({ renderValues, data }) => {
-  const { total, events } = data;
+const _DashboardStatistic: React.FC<Props> = ({
+  renderValues,
+  data,
+  currency
+}) => {
+  const {
+    events,
+    profits: { dayProfit, weekProfit, monthProfit }
+  } = data;
   return (
     <div>
       <div className="dashboard-statistic__values">
         <StatisticItemList>{renderValues(data)}</StatisticItemList>
-        <DashboardStatisticPeriods data={total} />
+        <DashboardStatisticPeriods
+          currency={currency}
+          data={{ day: dayProfit, week: weekProfit, month: monthProfit }}
+        />
       </div>
-      <DashboardStatisticTable data={events} />
+      <DashboardStatisticTable currency={currency} data={events.items} />
     </div>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  data: TDashboardProgramsStatistic & TDashboardInvestingStatistic;
+  currency: CurrencyEnum;
+  data: TDashboardTradingStatistic & TDashboardInvestingStatistic;
   renderValues: (
-    statistic: TDashboardProgramsStatistic & TDashboardInvestingStatistic
+    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
   ) => JSX.Element;
 }
 
