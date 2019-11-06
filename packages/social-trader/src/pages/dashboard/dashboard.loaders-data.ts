@@ -128,7 +128,8 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     type,
     color: faker.internet.color(),
     level: type === ASSET.PROGRAM ? getRandomInteger(1, 7) : undefined,
-    levelProgress: type === ASSET.PROGRAM ? getRandomInteger(1, 7) : undefined,
+    levelProgress:
+      type === ASSET.PROGRAM ? getRandomInteger(1, 100) : undefined,
     logo: "",
     id: "",
     url: "",

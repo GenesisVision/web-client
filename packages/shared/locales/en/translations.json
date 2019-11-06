@@ -2827,6 +2827,42 @@
       "validate-error": "Please correct the errors on this form"
     }
   },
+  "create-account-page": {
+    "title": "Create Account",
+    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "broker-card": {
+      "COMING_SOON": "Coming soon",
+      "KYC_REQUIRED": "KYC required",
+      "FOREX_DISABLED": "Forex disabled"
+    },
+    "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
+    "settings": {
+      "main-settings": "Main settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "min-deposit": "Min. deposit",
+        "currency": "Currency",
+        "brokers-leverage": "Broker's leverage",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in wallet"
+      },
+      "validation": {
+        "amount-required": "Amount is required",
+        "amount-is-large": "Amount must be available in Wallet",
+        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "currency-required": "Currency is required",
+        "leverage-required": "Leverage is required"
+      }
+    },
+    "notifications": {
+      "create-success": "Program was successfully created.",
+      "validate-error": "Please correct the errors on this form"
+    }
+  },
   "create-fund-page": {
     "title": "Create Fund",
     "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
@@ -2898,13 +2934,6 @@
       "select-broker": "Select broker",
       "settings": "Settings"
     },
-    "broker-info": {
-      "about": "About",
-      "terms": "Terms",
-      "leverage": "Leverage",
-      "fee": "Fee",
-      "assets": "Assets"
-    },
     "settings": {
       "exchange": "Exchange",
       "api": "API",
@@ -2914,7 +2943,6 @@
       "deposit-details": "Deposit details",
       "fields": {
         "exchange": "Exchange",
-        "api-secret": "API secret",
         "api-secret": "API secret",
         "api-key": "API key",
         "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
