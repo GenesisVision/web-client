@@ -1,6 +1,9 @@
 import * as faker from "faker";
+import { AssetType } from "gv-api-web/dist";
 import {
+  TDashboardEvent,
   TDashboardTotal,
+  TDashboardTradingStatistic,
   TRecommendation
 } from "pages/dashboard/dashboard.types";
 import { getEquityChartLoaderData } from "shared/components/multi-chart/service/multi-chart.service";
@@ -13,6 +16,15 @@ export const getTradingTotalLoaderData = () => ({
   equity: getRandomInteger(-1000, 1000),
   AUM: getRandomInteger(-1000, 1000)
 });
+
+export const getTradingEventsLoaderData = () => {
+  const length = getRandomInteger(5, 15);
+  return {
+    items: tableLoaderCreator(getEventLoaderData, length),
+    total: length
+  };
+};
+
 export const getTradingPublicLoaderData = () => {
   const length = getRandomInteger(5, 15);
   return {
@@ -75,24 +87,24 @@ export const portfolioLoaderData = () => {
   }, 4);
 };
 
-export const getProgramStatisticLoaderData = () => ({
+export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => ({
   equity: getRandomInteger(-10000, 10000),
-  AUM: getRandomInteger(-10000, 10000),
-  total: {
-    day: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
+  assetsUnderManagement: getRandomInteger(-10000, 10000),
+  profits: {
+    dayProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
     },
-    week: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
+    weekProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
     },
-    month: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
+    monthProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
     }
   },
-  events: tableLoaderCreator(getEventLoaderData, getRandomInteger(1, 10))
+  events: getTradingEventsLoaderData()
 });
 
 export const getInvestingStatisticLoaderData = () => ({
@@ -116,9 +128,33 @@ export const getInvestingStatisticLoaderData = () => ({
   events: tableLoaderCreator(getEventLoaderData, getRandomInteger(1, 10))
 });
 
-const getEventLoaderData = () => ({
-  data: new Date(),
-  description: faker.lorem.words(3),
+const getEventLoaderData = (): TDashboardEvent => ({
+  icon: "",
+  assetDetails: {
+    id: "",
+    logo: "",
+    color: "",
+    title: "",
+    url: "",
+    assetType: (getRandomAsset() as unknown) as AssetType,
+    programDetails: { level: 0, levelProgress: 0 }
+  },
+  currency: "GVT",
+  changeState: "NotChanged",
+  extendedInfo: [{ title: "", amount: 0, currency: "GVT" }],
+  feesInfo: [
+    {
+      title: "",
+      description: "",
+      type: "Undefined",
+      amount: 0,
+      currency: "GVT"
+    }
+  ],
+  totalFeesAmount: 0,
+  totalFeesCurrency: "GVT",
+  date: new Date(),
+  title: faker.lorem.words(3),
   amount: getRandomInteger(-10000, 10000)
 });
 
