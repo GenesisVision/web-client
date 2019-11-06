@@ -2587,7 +2587,12 @@
       }
     },
     "total": {
-      "title": "Total",
+      "available": "Available",
+      "invested": "Invested",
+      "pending": "Pending",
+      "profits": "Profits",
+      "total": "Total",
+      "title": "Title",
       "day": "Day",
       "week": "Week",
       "month": "Month"
