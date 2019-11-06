@@ -3,26 +3,28 @@ import "./dashboard-statistic.scss";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React, { useEffect } from "react";
 import useApiRequest from "shared/hooks/api-request.hook";
+import { CurrencyEnum } from "shared/utils/types";
 
-import { getProgramStatisticLoaderData } from "../../dashboard.loaders-data";
+import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
 import {
   TDashboardInvestingStatistic,
-  TDashboardProgramsStatistic
+  TDashboardTradingStatistic
 } from "../../dashboard.types";
 import DashboardStatistic from "./dashboard-statistic";
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
+  currency,
   label,
   request,
   renderValues
 }) => {
   const { data, sendRequest } = useApiRequest<
-    TDashboardProgramsStatistic & TDashboardInvestingStatistic
+    TDashboardTradingStatistic & TDashboardInvestingStatistic
   >({
     request
   });
   useEffect(() => {
-    sendRequest();
+    sendRequest({ currency });
   }, []);
   return (
     <DashboardBlock
@@ -31,8 +33,9 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
       className="dashboard-statistic__container"
     >
       <DashboardStatistic
+        currency={currency}
         renderValues={renderValues}
-        loaderData={getProgramStatisticLoaderData()}
+        loaderData={getTradingStatisticLoaderData()}
         data={data!}
       />
     </DashboardBlock>
@@ -40,8 +43,9 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  currency: CurrencyEnum;
   renderValues: (
-    statistic: TDashboardProgramsStatistic & TDashboardInvestingStatistic
+    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
   ) => JSX.Element;
   label: string;
   request: (...args: any) => any;
