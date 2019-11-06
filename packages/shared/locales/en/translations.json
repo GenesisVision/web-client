@@ -2581,7 +2581,7 @@
       "equity": "Your Equity",
       "balance": "Balance",
       "table": {
-        "data": "Data",
+        "date": "Date",
         "description": "Description",
         "amount": "Amount"
       }
