@@ -3,7 +3,6 @@ import { NextPageContext } from "next";
 import {
   assetsLoaderData,
   getInvestingStatisticLoaderData,
-  getProgramStatisticLoaderData,
   getRecommendationLoaderData,
   getTradingLoaderData,
   getTradingPublicLoaderData,
@@ -12,8 +11,8 @@ import {
 import {
   TAssets,
   TDashboardInvestingStatistic,
-  TDashboardProgramsStatistic,
   TDashboardTotal,
+  TDashboardTradingStatistic,
   TPortfolio,
   TRecommendation,
   TTrading
@@ -80,12 +79,12 @@ export const getTotal = ({
 }): CancelablePromise<TDashboardTotal> =>
   dashboardApi.getSummary(authService.getAuthArg(), { currency });
 
-export const getTotalProgramStatistic = (): CancelablePromise<
-  TDashboardProgramsStatistic
-> =>
-  (Promise.resolve(
-    getProgramStatisticLoaderData()
-  ) as unknown) as CancelablePromise<TDashboardProgramsStatistic>;
+export const getTotalTradingStatistic = ({
+  currency
+}: {
+  currency: CurrencyEnum;
+}): CancelablePromise<TDashboardTradingStatistic> =>
+  dashboardApi.getTradingDetails(authService.getAuthArg(), { currency });
 
 export const getTotalInvestingStatistic = (): CancelablePromise<
   TDashboardInvestingStatistic
