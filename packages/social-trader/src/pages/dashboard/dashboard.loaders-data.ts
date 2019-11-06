@@ -1,5 +1,8 @@
 import * as faker from "faker";
-import { TRecommendation } from "pages/dashboard/dashboard.types";
+import {
+  TDashboardTotal,
+  TRecommendation
+} from "pages/dashboard/dashboard.types";
 import { getEquityChartLoaderData } from "shared/components/multi-chart/service/multi-chart.service";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
@@ -154,17 +157,23 @@ export const getRecommendationLoaderData = (): TRecommendation => {
   };
 };
 
-export const getTotalLoaderData = () => ({
-  day: {
-    value: getRandomInteger(-10000, 10000),
-    profit: getRandomInteger(-100, 100)
-  },
-  week: {
-    value: getRandomInteger(-10000, 10000),
-    profit: getRandomInteger(-100, 100)
-  },
-  month: {
-    value: getRandomInteger(-10000, 10000),
-    profit: getRandomInteger(-100, 100)
+export const getTotalLoaderData = (): TDashboardTotal => ({
+  total: getRandomInteger(-10000, 10000),
+  pending: getRandomInteger(-10000, 10000),
+  invested: getRandomInteger(-10000, 10000),
+  available: getRandomInteger(-10000, 10000),
+  profits: {
+    dayProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
+    },
+    weekProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
+    },
+    monthProfit: {
+      profit: getRandomInteger(-10000, 10000),
+      profitPercent: getRandomInteger(-100, 100)
+    }
   }
 });
