@@ -9,12 +9,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import withLoader from "shared/decorators/with-loader";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import { getPercentageValue } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
-
-const getPercentageValue = (value: number, totalValue: number): number => {
-  const percentage = Math.round((value / totalValue) * 100);
-  return isNaN(percentage) ? 0 : percentage;
-};
 
 const _WalletBalanceElement: React.FC<Props> = ({
   pieContainer = true,
