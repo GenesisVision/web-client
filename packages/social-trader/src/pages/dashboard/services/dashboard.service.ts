@@ -86,12 +86,14 @@ export const getTotalTradingStatistic = ({
 }): CancelablePromise<TDashboardTradingStatistic> =>
   dashboardApi.getTradingDetails(authService.getAuthArg(), { currency });
 
-export const getTotalInvestingStatistic = (): CancelablePromise<
-  TDashboardInvestingStatistic
-> =>
-  (Promise.resolve(
-    getInvestingStatisticLoaderData()
-  ) as unknown) as CancelablePromise<TDashboardInvestingStatistic>;
+export const getTotalInvestingStatistic = ({
+  currency
+}: {
+  currency: CurrencyEnum;
+}): CancelablePromise<TDashboardInvestingStatistic> =>
+  dashboardApi.getInvestingDetails(authService.getAuthArg(), {
+    currency
+  });
 
 export const getEvents = (eventLocation: EVENT_LOCATION) => (
   filters: ComposeFiltersAllType
