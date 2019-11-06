@@ -1,4 +1,5 @@
 import {
+  DashboardInvestingDetails,
   DashboardSummary,
   DashboardTimeframeProfit,
   DashboardTradingDetails,
@@ -18,11 +19,7 @@ export interface TDashboardStatistic {
 
 export type TDashboardTradingStatistic = DashboardTradingDetails;
 
-export interface TDashboardInvestingStatistic extends TDashboardStatistic {
-  balance: number;
-  programs: number;
-  funds: number;
-}
+export type TDashboardInvestingStatistic = DashboardInvestingDetails;
 
 export type TDashboardEvent = InvestmentEventViewModel;
 
