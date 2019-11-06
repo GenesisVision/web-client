@@ -1,22 +1,15 @@
-import {
-  CancelablePromise,
-  InvestmentEventViewModels
-  // ManagerSimpleFund,
-  // ManagerSimpleProgram
-} from "gv-api-web";
+import { CancelablePromise, InvestmentEventViewModels } from "gv-api-web";
 import { NextPageContext } from "next";
 import {
   assetsLoaderData,
   getInvestingStatisticLoaderData,
   getProgramStatisticLoaderData,
   getRecommendationLoaderData,
-  getTotalLoaderData,
   getTradingLoaderData,
   getTradingPublicLoaderData,
   portfolioLoaderData
 } from "pages/dashboard/dashboard.loaders-data";
 import {
-  TAsset,
   TAssets,
   TDashboardInvestingStatistic,
   TDashboardProgramsStatistic,
@@ -34,11 +27,12 @@ import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { IDataModel } from "shared/constants/constants";
+import dashboardApi from "shared/services/api-client/dashboard-api";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { tableLoaderCreator } from "shared/utils/helpers";
-import { ActionType } from "shared/utils/types";
+import { ActionType, CurrencyEnum } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
@@ -79,10 +73,12 @@ export const getRecommendations = (): CancelablePromise<TRecommendation[]> =>
     tableLoaderCreator(getRecommendationLoaderData, 15)
   ) as unknown) as CancelablePromise<TRecommendation[]>;
 
-export const getTotal = (): CancelablePromise<TDashboardTotal> =>
-  (Promise.resolve(getTotalLoaderData()) as unknown) as CancelablePromise<
-    TDashboardTotal
-  >;
+export const getTotal = ({
+  currency
+}: {
+  currency: CurrencyEnum;
+}): CancelablePromise<TDashboardTotal> =>
+  dashboardApi.getSummary(authService.getAuthArg(), { currency });
 
 export const getTotalProgramStatistic = (): CancelablePromise<
   TDashboardProgramsStatistic
