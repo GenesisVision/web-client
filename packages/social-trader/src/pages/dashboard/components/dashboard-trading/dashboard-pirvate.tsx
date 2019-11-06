@@ -1,4 +1,5 @@
-import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
+import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
+import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card";
 import DashboardTradingTable, {
   CreateButtonToolbar
@@ -20,11 +21,11 @@ const _DashboardPrivate: React.FC<Props> = () => {
         <>
           <CreateButtonToolbar
             text={t("buttons.create-account")}
-            route={CREATE_FUND_PAGE_ROUTE}
+            route={CREATE_ACCOUNT_PAGE_ROUTE}
           />
           <CreateButtonToolbar
             text={t("buttons.attach-external-account")}
-            route={CREATE_FUND_PAGE_ROUTE}
+            route={ATTACH_ACCOUNT_PAGE_ROUTE}
           />
         </>
       }

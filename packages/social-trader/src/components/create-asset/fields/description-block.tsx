@@ -7,7 +7,7 @@ import DescriptionField from "./description-field";
 import TitleField from "./title-field";
 
 const _DescriptionBlock: React.FC<Props> = ({
-  asset,
+  asset = ASSET.FUND,
   titleName,
   descriptionName,
   logoName,
@@ -29,7 +29,7 @@ const _DescriptionBlock: React.FC<Props> = ({
 };
 
 interface Props {
-  asset: ASSET;
+  asset?: ASSET;
   titleName: string;
   descriptionName: string;
   logoName: string;

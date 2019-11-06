@@ -22,5 +22,11 @@ interface Props {
   className?: string;
 }
 
+export const CreateAssetFields: React.FC<
+  React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children }) => (
+  <div className="create-asset-fields">{children}</div>
+));
+
 const CreateAssetField = React.memo(_CreateAssetField);
 export default CreateAssetField;

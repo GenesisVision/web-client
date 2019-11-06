@@ -63,14 +63,13 @@ export const getBrokerState = (
 };
 
 export const createProgramMapPropsToValues = ({
-  broker,
-  programsInfo
+  programsInfo,
+  currency
 }: ICreateProgramSettingsProps): ICreateProgramSettingsFormValues => ({
   [CREATE_PROGRAM_FIELDS.available]: 0,
   [CREATE_PROGRAM_FIELDS.rate]: 1,
   [CREATE_PROGRAM_FIELDS.tradesDelay]: "None",
   [CREATE_PROGRAM_FIELDS.stopOutLevel]: 100,
-  [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: getBrokerId(broker.accountTypes),
   [CREATE_PROGRAM_FIELDS.title]: "",
   [CREATE_PROGRAM_FIELDS.description]: "",
   [CREATE_PROGRAM_FIELDS.logo]: {},
@@ -78,15 +77,10 @@ export const createProgramMapPropsToValues = ({
   [CREATE_PROGRAM_FIELDS.successFee]: undefined,
   [CREATE_PROGRAM_FIELDS.hasInvestmentLimit]: false,
   [CREATE_PROGRAM_FIELDS.investmentLimit]: undefined,
-  [CREATE_PROGRAM_FIELDS.isSignalProgram]: false, //broker.isSignalsAvailable, // TODO move back to server
-  [CREATE_PROGRAM_FIELDS.signalSuccessFee]: 0, //broker.isSignalsAvailable
-  // ? undefined
-  // : 0,
-  [CREATE_PROGRAM_FIELDS.signalVolumeFee]: 0, //broker.isSignalsAvailable
-  // ? undefined
-  // : 0,
-  [CREATE_PROGRAM_FIELDS.currency]: getCurrency(broker.accountTypes[0]),
-  [CREATE_PROGRAM_FIELDS.leverage]: getLeverage(broker.accountTypes[0]),
+  [CREATE_PROGRAM_FIELDS.isSignalProgram]: true, // TODO move back to server
+  [CREATE_PROGRAM_FIELDS.signalSuccessFee]: 0,
+  [CREATE_PROGRAM_FIELDS.currency]: currency,
+  [CREATE_PROGRAM_FIELDS.signalVolumeFee]: 0,
   [CREATE_PROGRAM_FIELDS.periodLength]:
     programsInfo.periods.length === 1 ? programsInfo.periods[0] : undefined,
   [CREATE_PROGRAM_FIELDS.depositWalletId]: "",
@@ -94,6 +88,7 @@ export const createProgramMapPropsToValues = ({
 });
 
 const createProgramSettingsValidationSchema = ({
+  currency,
   t,
   minimumDepositsAmount,
   programsInfo
@@ -102,10 +97,10 @@ const createProgramSettingsValidationSchema = ({
     const minDeposit = parseFloat(
       formatCurrencyValue(
         convertToCurrency(
-          minimumDepositsAmount[values[CREATE_PROGRAM_FIELDS.currency]],
+          minimumDepositsAmount[currency],
           values[CREATE_PROGRAM_FIELDS.rate] || 1
         ),
-        values[CREATE_PROGRAM_FIELDS.currency]
+        currency
       )
     );
     return object<ICreateProgramSettingsFormValues>().shape({
@@ -127,9 +122,6 @@ const createProgramSettingsValidationSchema = ({
       ),
       [CREATE_PROGRAM_FIELDS.periodLength]: number().required(
         t("create-program-page.settings.validation.period-required")
-      ),
-      [CREATE_PROGRAM_FIELDS.leverage]: number().required(
-        t("create-program-page.settings.validation.leverage-required")
       ),
       [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(
         t,
@@ -175,29 +167,18 @@ const createProgramSettingsValidationSchema = ({
           then: signalSuccessFeeShape(t, programsInfo.managerMaxSuccessFee)
         }
       ),
-      [CREATE_PROGRAM_FIELDS.brokerAccountTypeId]: string().required(
-        t("create-program-page.settings.validation.account-type-required")
-      ),
-      [CREATE_PROGRAM_FIELDS.depositAmount]: values[
-        CREATE_PROGRAM_FIELDS.currency
-      ]
-        ? number()
-            .required(
-              t("create-program-page.settings.validation.amount-required")
-            )
-            .min(
-              minDeposit,
-              t("create-program-page.settings.validation.amount-is-zero", {
-                min: minDeposit
-              })
-            )
-            .max(
-              values[CREATE_PROGRAM_FIELDS.available],
-              t("create-program-page.settings.validation.amount-is-large")
-            )
-        : number().required(
-            t("create-program-page.settings.validation.amount-required")
-          )
+      [CREATE_PROGRAM_FIELDS.depositAmount]: number()
+        .required(t("create-program-page.settings.validation.amount-required"))
+        .min(
+          minDeposit,
+          t("create-program-page.settings.validation.amount-is-zero", {
+            min: minDeposit
+          })
+        )
+        .max(
+          values[CREATE_PROGRAM_FIELDS.available],
+          t("create-program-page.settings.validation.amount-is-large")
+        )
     });
   });
 };
@@ -210,8 +191,6 @@ export enum CREATE_PROGRAM_FIELDS {
   periodLength = "periodLength",
   successFee = "successFee",
   stopOutLevel = "stopOutLevel",
-  leverage = "leverage",
-  brokerAccountTypeId = "brokerAccountTypeId",
   signalSuccessFee = "signalSuccessFee",
   signalVolumeFee = "signalVolumeFee",
   isSignalProgram = "isSignalProgram",

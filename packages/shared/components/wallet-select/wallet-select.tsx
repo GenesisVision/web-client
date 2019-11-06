@@ -17,7 +17,12 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
   >
     {items.map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
-        <CurrencyItem logo={logo} name={`${title} | ${currency}`} small />
+        <CurrencyItem
+          logo={logo}
+          name={`${title} | ${currency}`}
+          small
+          clickable={false}
+        />
       </option>
     ))}
   </GVFormikField>
