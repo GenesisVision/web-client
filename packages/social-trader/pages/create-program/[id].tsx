@@ -24,7 +24,6 @@ CreateProgram.getInitialProps = async ctx => {
     const description = ((descriptionResult as unknown) as {
       value: ProgramDetailsFullOld;
     }).value;
-    console.log(description.personalProgramDetails);
     if (
       !description.personalProgramDetails ||
       !description.personalProgramDetails.isOwnProgram
