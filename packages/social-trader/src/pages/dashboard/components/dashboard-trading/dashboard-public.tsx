@@ -1,3 +1,4 @@
+import { DashboardTradingAsset } from "gv-api-web";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import DashboardTradingTable, {
@@ -26,7 +27,9 @@ const _DashboardPublic: React.FC<Props> = () => {
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.public")}
-      renderBodyCard={(asset: TAsset) => <DashboardPublicCard asset={asset} />}
+      renderBodyCard={(asset: DashboardTradingAsset) => (
+        <DashboardPublicCard asset={asset} />
+      )}
     />
   );
 };
