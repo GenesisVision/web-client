@@ -42,7 +42,7 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsList => ({
   description: "",
   status: "None",
   creationDate: mockDate,
-  chart: {
+  statistic: {
     profit: 0,
     drawdown: 0,
     chart: []
