@@ -41,10 +41,9 @@ export enum ROLE {
   MANAGER = "manager"
 }
 export enum ASSET {
-  ACCOUNT = "ACCOUNT",
-  FOLLOW = "FOLLOW",
-  PROGRAM = "PROGRAM",
-  FUND = "FUND"
+  FOLLOW = "Follow",
+  PROGRAM = "Program",
+  FUND = "Fund"
 }
 
 export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;

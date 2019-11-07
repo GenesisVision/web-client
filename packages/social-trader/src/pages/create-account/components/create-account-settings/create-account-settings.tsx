@@ -81,10 +81,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
         setFieldValue={setFieldValue}
         assetCurrency={currency as CurrencyEnum}
       />
-      <CreateAssetNavigation
-        asset={ASSET.ACCOUNT}
-        isSubmitting={isSubmitting}
-      />
+      <CreateAssetNavigation asset={"ACCOUNT"} isSubmitting={isSubmitting} />
     </form>
   );
 };

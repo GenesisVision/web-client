@@ -6,7 +6,7 @@ import { ASSET } from "shared/constants/constants";
 
 const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   const handleCreate = useCreateAssetSubmit({
-    asset: ASSET.ACCOUNT
+    asset: "ACCOUNT" as ASSET
   });
 
   return (
