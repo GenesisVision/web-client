@@ -1,5 +1,5 @@
 import * as faker from "faker";
-import { AssetType } from "gv-api-web/dist";
+import { AssetType, MoneyLocation } from "gv-api-web/dist";
 import {
   TDashboardEvent,
   TDashboardTotal,
@@ -11,11 +11,12 @@ import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
 
-export const getTradingTotalLoaderData = () => ({
-  total: getRandomInteger(-1000, 1000),
-  equity: getRandomInteger(-1000, 1000),
-  AUM: getRandomInteger(-1000, 1000)
-});
+export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
+  ({
+    // total: getRandomInteger(-1000, 1000),
+    equity: getRandomInteger(-1000, 1000),
+    assetsUnderManagement: getRandomInteger(-1000, 1000)
+  } as TDashboardTradingStatistic);
 
 export const getTradingEventsLoaderData = () => {
   const length = getRandomInteger(5, 15);
@@ -70,10 +71,10 @@ export const assetsLoaderData = () => {
       percent: i === length - 1 ? sum + value : value,
       color: faker.internet.color()
     };
-  }, getRandomInteger(4, 15));
+  }, 5);
 };
 
-export const portfolioLoaderData = () => {
+export const portfolioLoaderData = (): Array<MoneyLocation> => {
   let sum = 100;
   const names = ["Funds", "Programs", "Trading", "Wallet"];
   return tableLoaderCreator((item, i, { length }) => {
@@ -91,41 +92,20 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
   equity: getRandomInteger(-10000, 10000),
   assetsUnderManagement: getRandomInteger(-10000, 10000),
   profits: {
-    dayProfit: {
+    day: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     },
-    weekProfit: {
+    week: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     },
-    monthProfit: {
+    month: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     }
   },
   events: getTradingEventsLoaderData()
-});
-
-export const getInvestingStatisticLoaderData = () => ({
-  balance: getRandomInteger(-10000, 10000),
-  programs: getRandomInteger(-10000, 10000),
-  funds: getRandomInteger(-10000, 10000),
-  total: {
-    day: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
-    },
-    week: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
-    },
-    month: {
-      value: getRandomInteger(-10000, 10000),
-      profit: getRandomInteger(-100, 100)
-    }
-  },
-  events: tableLoaderCreator(getEventLoaderData, getRandomInteger(1, 10))
 });
 
 const getEventLoaderData = (): TDashboardEvent => ({
@@ -162,34 +142,24 @@ const getRandomAsset = () =>
   [ASSET.FUND, ASSET.PROGRAM, ASSET.FOLLOW][getRandomInteger(0, 2)];
 
 export const getRecommendationLoaderData = (): TRecommendation => {
-  const type = getRandomAsset();
+  const assetType = getRandomAsset();
   return {
-    type,
-    color: faker.internet.color(),
-    level: type === ASSET.PROGRAM ? getRandomInteger(1, 7) : undefined,
-    levelProgress:
-      type === ASSET.PROGRAM ? getRandomInteger(1, 100) : undefined,
-    logo: "",
-    id: "",
-    url: "",
-    title: faker.name.lastName(),
-    manager: {
-      username: faker.name.lastName(),
-      url: faker.name.lastName()
-    },
     currency: "GVT",
+    assetType,
     statistic: {
-      ddown: getRandomInteger(-1000, 1000),
-      leverage: getRandomInteger(-1000, 1000),
-      age: getRandomInteger(-1000, 1000),
-      balance: { amount: getRandomInteger(-1000, 1000), currency: "GVT" },
-      profit: getRandomInteger(-1000, 1000),
-      profitPercent: getRandomInteger(-1000, 1000)
+      chart: getEquityChartLoaderData(),
+      profit: getRandomInteger(-10000, 10000),
+      drawdown: getRandomInteger(-10000, 10000)
     },
-    value: getRandomInteger(-1000, 1000),
-    chart: getEquityChartLoaderData(),
-    login: type === ASSET.PROGRAM ? faker.name.lastName() : undefined,
-    broker: type === ASSET.PROGRAM ? faker.name.lastName() : undefined
+    id: "",
+    logo: "",
+    title: faker.name.lastName(),
+    url: "",
+    programDetails: {
+      level: assetType === ASSET.PROGRAM ? getRandomInteger(1, 7) : 0,
+      levelProgress: assetType === ASSET.PROGRAM ? getRandomInteger(1, 100) : 0
+    },
+    color: faker.internet.color()
   };
 };
 
@@ -199,15 +169,15 @@ export const getTotalLoaderData = (): TDashboardTotal => ({
   invested: getRandomInteger(-10000, 10000),
   available: getRandomInteger(-10000, 10000),
   profits: {
-    dayProfit: {
+    day: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     },
-    weekProfit: {
+    week: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     },
-    monthProfit: {
+    month: {
       profit: getRandomInteger(-10000, 10000),
       profitPercent: getRandomInteger(-100, 100)
     }

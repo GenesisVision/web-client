@@ -50,10 +50,10 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   return (
     <TableCard
       asset={asset}
-      chart={asset.chart.chart}
+      chart={asset.statistic.chart}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={asset.chart.profit}
+      profit={asset.statistic.profit}
       profitPercent={0}
     >
       <TableCardRow className="dashboard-recommendations-card__row">

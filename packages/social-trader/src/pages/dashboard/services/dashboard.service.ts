@@ -50,8 +50,8 @@ export const fetchMultiChartData = ({
     .getChart(authService.getAuthArg(), {
       showIn: currency,
       assets,
-      statisticDateFrom: start,
-      statisticDateTo: end
+      dateFrom: start,
+      dateTo: end
     })
     .then(({ charts }) => charts);
 
@@ -67,15 +67,15 @@ export const getFollowThem = (): CancelablePromise<IDataModel> =>
     getTradingPublicLoaderData()
   ) as unknown) as CancelablePromise<IDataModel>;
 
-export const getPrivateAssets = (): CancelablePromise<IDataModel> =>
-  (Promise.resolve(
-    getTradingPublicLoaderData()
-  ) as unknown) as CancelablePromise<IDataModel>;
+export const getPrivateAssets = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
-export const getPublicAssets = (): CancelablePromise<IDataModel> =>
-  (Promise.resolve(
-    getTradingPublicLoaderData()
-  ) as unknown) as CancelablePromise<IDataModel>;
+export const getPublicAssets = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
 export const getTradingData = (): CancelablePromise<TTrading> =>
   (Promise.resolve(getTradingLoaderData()) as unknown) as CancelablePromise<
@@ -85,19 +85,12 @@ export const getTradingData = (): CancelablePromise<TTrading> =>
 export const getPortfolio = (): CancelablePromise<TDashboardPortfolio> =>
   dashboardApi
     .getPortfolio(authService.getAuthArg())
-    .then(({ distribution }) =>
-      distribution.map(item => ({ ...item, name: item.type }))
-    );
+    .then(({ distribution }) => distribution);
 
 export const getAssetsPercents = (): CancelablePromise<TAssets> =>
   dashboardApi
     .getHoldings(authService.getAuthArg())
-    .then(({ assets, othersPercent }) =>
-      [
-        ...assets,
-        { asset: "Others", color: "#f0f0f0", percent: othersPercent }
-      ].map(item => ({ ...item, name: item.asset }))
-    );
+    .then(({ assets }) => assets);
 
 export const getRecommendations = ({
   currency
