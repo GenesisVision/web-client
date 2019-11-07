@@ -87,7 +87,6 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         state: `/ ${title}`
       }}
       pathTitle={title}
-      profitPercent={fund.chart.profit}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
@@ -115,7 +114,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         <TableCardTableColumn>
           <StatisticItem label={t("funds-page.funds-header.drawdown")}>
             <NumberFormat
-              value={formatValue(fund.chart.drawdown, 2)}
+              value={formatValue(fund.statistic.drawdown, 2)}
               displayType="text"
               suffix="%"
             />
