@@ -11,11 +11,6 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
-interface Props {
-  asset: TRecommendation;
-  title: string;
-}
-
 const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   const [t] = useTranslation();
   const [
@@ -29,7 +24,7 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   };
 
   const renderDepositContainer = () => {
-    switch (asset.type) {
+    switch (asset.assetType) {
       case ASSET.PROGRAM:
         return (
           <FundDepositContainer
@@ -42,7 +37,7 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
       case ASSET.FUND:
         return (
           <ProgramDeposit
-            currency={asset.currency}
+            currency={"GVT"}
             open={isOpenInvestPopup}
             id={asset.id}
             onClose={setIsCloseInvestPopup}
@@ -55,23 +50,29 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   return (
     <TableCard
       asset={asset}
+      chart={asset.chart.chart}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={asset.statistic.profit}
-      profitPercent={asset.statistic.profitPercent}
+      profit={asset.chart.profit}
+      profitPercent={0}
     >
       <TableCardRow className="dashboard-recommendations-card__row">
         <GVButton
           className="dashboard-recommendations-card__button"
           onClick={setIsOpenInvestPopup}
         >
-          {t(`dashboard-page.recommendations.${asset.type.toLowerCase()}`)}
+          {t(`dashboard-page.recommendations.${asset.assetType.toLowerCase()}`)}
         </GVButton>
       </TableCardRow>
       {renderDepositContainer()}
     </TableCard>
   );
 };
+
+interface Props {
+  asset: TRecommendation;
+  title: string;
+}
 
 const RecommendationCard = React.memo(_RecommendationCard);
 export default RecommendationCard;
