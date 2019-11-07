@@ -94,6 +94,15 @@ const getRandomInteger = (min: number, max: number): number =>
 
 const getRandomText = (params: Object) => randomString.generate(params);
 
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
 export const tableLoaderCreator = (
   itemCreator: (...args: any) => any,
   count: number | undefined = 10
@@ -121,5 +130,6 @@ export {
   merge,
   mergeObjects,
   mergeArrays,
-  isServer
+  isServer,
+  getRandomColor
 };

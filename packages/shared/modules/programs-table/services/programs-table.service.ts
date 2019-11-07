@@ -55,16 +55,12 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
 
 export const fetchPrograms = (
   filters: FetchProgramsFiltersType
-): Promise<IDataModel> =>
-  programApi
-    .getPrograms({
-      ...filters,
-      authorization: authService.getAuthArg()
-    })
-    .then(data => ({
-      total: data.total,
-      items: data.programs
-    }));
+): Promise<IDataModel> => {
+  return programApi.getPrograms({
+    ...filters,
+    authorization: authService.getAuthArg()
+  });
+};
 
 const composeRequestFilters = () => (
   dispatch: any,

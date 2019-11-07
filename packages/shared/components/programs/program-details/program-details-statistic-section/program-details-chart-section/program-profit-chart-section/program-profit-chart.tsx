@@ -9,7 +9,6 @@ import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-cur
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
 const _ProgramProfitChart: React.FC<Props> = ({ charts, colors }) => {
-  console.info(charts, "charts");
   const equityCharts = charts.charts.map(chart => chart.chart);
   const equities: any = [];
   // const equityCharts = charts.map(({ ch }) => equityChart); //TODO data
