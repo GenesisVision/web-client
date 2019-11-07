@@ -3,20 +3,23 @@ import "./dashboard-trading.scss";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import useApiRequest from "shared/hooks/api-request.hook";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 
-import { getTradingTotalLoaderData } from "../../dashboard.loaders-data";
-import { TTrading } from "../../dashboard.types";
-import { getTradingData } from "../../services/dashboard.service";
+import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
+import { TDashboardTradingStatistic } from "../../dashboard.types";
+import { getTotalTradingStatistic } from "../../services/dashboard.service";
 import DashboardTradingTotal from "./dashboard-trading-total";
 
 const _DashboardTradingTotalContainer: React.FC = () => {
+  const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const { data, sendRequest } = useApiRequest<TTrading>({
-    request: getTradingData
+  const { data, sendRequest } = useApiRequest<TDashboardTradingStatistic>({
+    request: getTotalTradingStatistic
   });
   useEffect(() => {
-    sendRequest();
+    sendRequest({ currency });
   }, []);
   return (
     <DashboardBlock
@@ -25,8 +28,9 @@ const _DashboardTradingTotalContainer: React.FC = () => {
       seeAll={false}
     >
       <DashboardTradingTotal
-        loaderData={getTradingTotalLoaderData()}
-        data={(data && data.total)!}
+        currency={currency}
+        loaderData={getTradingStatisticLoaderData()}
+        data={data!}
       />
     </DashboardBlock>
   );
