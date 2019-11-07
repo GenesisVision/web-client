@@ -48,14 +48,7 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   };
 
   return (
-    <TableCard
-      asset={asset}
-      // chart={asset.statistic.chart}
-      detailsUrl={linkProps}
-      pathTitle={title}
-      // profit={asset.statistic.profit}
-      // profitPercent={0}
-    >
+    <TableCard asset={asset} detailsUrl={linkProps} pathTitle={title}>
       <TableCardRow className="dashboard-recommendations-card__row">
         <GVButton
           className="dashboard-recommendations-card__button"
