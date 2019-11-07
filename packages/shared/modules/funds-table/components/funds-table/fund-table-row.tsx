@@ -74,18 +74,18 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--drawdown">
       <NumberFormat
-        value={formatValue(fund.chart.drawdown, 2)}
+        value={formatValue(fund.statistic.drawdown, 2)}
         suffix="%"
         displayType="text"
       />
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--profit">
       <Profitability
-        value={formatValue(fund.chart.profit, 2)}
+        value={formatValue(fund.statistic.profit, 2)}
         prefix={PROFITABILITY_PREFIX.SIGN}
       >
         <NumberFormat
-          value={formatValue(fund.chart.profit, 2)}
+          value={formatValue(fund.statistic.profit, 2)}
           suffix="%"
           allowNegative={false}
           displayType="text"
@@ -93,8 +93,8 @@ const _FundsTableRow: React.FC<Props> = ({
       </Profitability>
     </TableCell>
     <TableCell className="funds-table__cell funds-table__cell--chart">
-      {fund.chart && (
-        <ProgramSimpleChart data={fund.chart.chart} programId={fund.id} />
+      {fund.statistic && (
+        <ProgramSimpleChart data={fund.statistic.chart} programId={fund.id} />
       )}
     </TableCell>
     {isAuthenticated && fund.personalDetails && (

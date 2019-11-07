@@ -31,9 +31,9 @@ const _TableCard: React.FC<ITableCardProps> = props => {
       <TableCardChartBlock
         {...props}
         assetId={props.asset.id}
-        chart={props.asset.chart.chart}
-        profit={props.asset.chart.profit}
-        profitPercent={props.asset.chart.profit}
+        chart={props.asset.statistic.chart}
+        profit={props.asset.statistic.profit}
+        profitPercent={props.asset.statistic.profit}
       />
       {props.children}
     </TableCardContainer>

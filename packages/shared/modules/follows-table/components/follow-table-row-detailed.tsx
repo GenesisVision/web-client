@@ -99,9 +99,9 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
             </div>
             <div className="program-detailed__statistic">
               <div className="program-detailed__chart">
-                {follow.chart.chart.length && (
+                {follow.statistic.chart.length && (
                   <FollowBigChart
-                    data={follow.chart.chart}
+                    data={follow.statistic.chart}
                     programId={follow.id}
                   />
                 )}
@@ -174,7 +174,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <NumberFormat
-                      value={formatValue(follow.chart.drawdown, 2)}
+                      value={formatValue(follow.statistic.drawdown, 2)}
                       suffix="%"
                       displayType="text"
                     />
@@ -186,11 +186,11 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <Profitability
-                      value={formatValue(follow.chart.profit, 2)}
+                      value={formatValue(follow.statistic.profit, 2)}
                       prefix={PROFITABILITY_PREFIX.SIGN}
                     >
                       <NumberFormat
-                        value={formatValue(follow.chart.profit, 2)}
+                        value={formatValue(follow.statistic.profit, 2)}
                         suffix="%"
                         allowNegative={false}
                         displayType="text"
