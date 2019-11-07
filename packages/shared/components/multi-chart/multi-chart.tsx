@@ -4,13 +4,13 @@ import { CancelablePromise } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import ChartAssetList from "./chart-asset-list";
 import { TChartAsset } from "./multi-chart.types";
 import { saveSelectedAssets } from "./service/multi-chart.service";
+import MultiProfitChart from "./multi-profit-chart";
 
 const _MultiChart: React.FC<Props> = ({
   currency,
@@ -39,7 +39,7 @@ const _MultiChart: React.FC<Props> = ({
             <ChartPeriod period={period} onChange={handleChangePeriod} />
           </div>
           <div className="multi-chart__profit-chart">
-            <ProgramProfitChart charts={multiChartData} />
+            <MultiProfitChart charts={multiChartData} />
           </div>
         </div>
       )}
