@@ -1,3 +1,4 @@
+import { DashboardTradingAsset } from "gv-api-web";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { TRecommendation } from "pages/dashboard/dashboard.types";
@@ -15,6 +16,7 @@ import TableCard, {
   TableCardTableColumn
 } from "shared/components/table/components/table-card/table-card";
 import {
+  ASSET,
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
 } from "shared/constants/constants";
@@ -26,7 +28,9 @@ import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
   const [t] = useTranslation();
   const detailsLink = {
-    pathname: composeProgramDetailsUrl(asset.url),
+    pathname: composeProgramDetailsUrl(
+      asset.publicInfo && asset.publicInfo.url
+    ),
     state: `/ ${title}`
   };
   const terminalLink = {
@@ -68,7 +72,11 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
             {t("dashboard-page.trading.actions.make-signal-account")}
           </GVButton>
         </Link>
-        <CloseAssetButton type={asset.type} id={asset.id} variant={"text"} />
+        <CloseAssetButton
+          type={asset.assetType as ASSET}
+          id={asset.id}
+          variant={"text"}
+        />
       </div>
     </Popover>
   );
@@ -78,14 +86,13 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
       asset={asset}
       detailsUrl={detailsLink}
       pathTitle={title}
-      profit={asset.statistic.profit}
-      profitPercent={asset.statistic.profitPercent}
+      profitPercent={asset.statistic.profit}
       renderActions={renderActions}
     >
       <TableCardTable>
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
+            {/*<NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.balance.amount,
                 DECIMAL_SCALE_SMALL_VALUE,
@@ -93,45 +100,45 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
               )}
               suffix={` ${asset.statistic.balance.currency}`}
               displayType="text"
-            />
+            />*/}
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.leverage")}>
-            <NumberFormat
+            {/*<NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.leverage,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
               displayType="text"
-            />
+            />*/}
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
-            <NumberFormat
+            {/*<NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.age,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
               displayType="text"
-            />
+            />*/}
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
-        type={asset.type}
+        type={asset.assetType as ASSET}
         id={asset.id}
-        currency={asset.currency}
+        currency={"GVT"}
       />
     </TableCard>
   );
 };
 
 interface Props {
-  asset: TRecommendation;
+  asset: DashboardTradingAsset;
   title: string;
 }
 
