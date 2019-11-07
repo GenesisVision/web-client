@@ -2,7 +2,7 @@ export const PROGRAMS_FAVORITES_TAB_NAME = "favorites";
 export const PROGRAMS_EXPLORE_TAB_NAME = "";
 export const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
 
-export const PROGRAMS_ROUTE = "/programs";
+export const PROGRAMS_ROUTE = "/invest/programs";
 export const PROGRAM_DETAILS_ROUTE = `${PROGRAMS_ROUTE}/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
 export const PROGRAM_DETAILS_FOLDER_ROUTE = `${PROGRAMS_ROUTE}/[id]`;
 export const PROGRAM_SETTINGS = `settings`;
