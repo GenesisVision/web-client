@@ -113,7 +113,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
             <Link className="table-card__title" to={detailsUrl}>
-              {asset.title || asset.title}
+              {asset.title || title}
             </Link>
             {asset.manager && (
               <Link
