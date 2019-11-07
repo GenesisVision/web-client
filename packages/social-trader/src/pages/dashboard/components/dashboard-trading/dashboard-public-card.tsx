@@ -46,6 +46,9 @@ const _DashboardPublicCard: React.FC<{
     state: `/ ${asset.publicInfo && asset.publicInfo.title}`
   };
 
+  const assetTitle = asset.publicInfo ? asset.publicInfo.title : "";
+  const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
+  const assetLogo = asset.publicInfo ? asset.publicInfo.logo : "";
   const renderActions = ({
     anchor,
     clearAnchor
@@ -61,15 +64,15 @@ const _DashboardPublicCard: React.FC<{
       showChangePassword={asset.assetType === ASSET.PROGRAM}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
-      title={asset.publicInfo && asset.publicInfo.title}
+      title={assetTitle}
     />
   );
 
   return (
     <TableCard
-      title={asset.publicInfo.title}
-      color={asset.publicInfo.color}
-      logo={asset.publicInfo.logo}
+      title={assetTitle}
+      color={assetColor}
+      logo={assetLogo}
       asset={asset}
       detailsUrl={detailsLink}
       pathTitle={title}
