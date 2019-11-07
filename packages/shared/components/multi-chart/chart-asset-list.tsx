@@ -5,16 +5,16 @@ import ChartAsset from "./chart-asset";
 import { TChartAsset } from "./multi-chart.types";
 import { isIncluded } from "./service/multi-chart.service";
 
-const ChartAssetList: React.FC<Props> = ({
+const _ChartAssetList: React.FC<Props> = ({
   assets,
   selectedAssets,
   onChange
 }) => {
   const handleToggle = useCallback(
     (asset: TChartAsset) => {
-      if (isIncluded(selectedAssets, asset.name))
-        onChange(selectedAssets.filter(({ name }) => asset.name !== name));
-      else onChange([...selectedAssets, asset]);
+      if (isIncluded(selectedAssets, asset.title))
+        onChange(selectedAssets.filter(name => asset.title !== name));
+      else onChange([...selectedAssets, asset.title]);
     },
     [selectedAssets]
   );
@@ -44,11 +44,11 @@ const _ChartAssetSubList: React.FC<IChartAssetSubListProps> = ({
   handleToggle
 }) => {
   const list = assets
-    .filter(({ type }) => type === asset)
+    .filter(({ assetType }) => assetType === asset)
     .map(asset => (
       <ChartAsset
-        key={asset.name}
-        selected={isIncluded(selectedAssets, asset.name)}
+        key={asset.title}
+        selected={isIncluded(selectedAssets, asset.title)}
         asset={asset}
         onToggle={handleToggle}
       />
@@ -67,7 +67,7 @@ const _ChartAssetSubList: React.FC<IChartAssetSubListProps> = ({
 interface IChartAssetSubListProps {
   asset: ASSET;
   assets: TChartAsset[];
-  selectedAssets: TChartAsset[];
+  selectedAssets: string[];
   handleToggle: (assets: TChartAsset) => void;
 }
 
@@ -86,7 +86,9 @@ const ChartAssetEmptyMessage: React.FC = () => {
 
 interface Props {
   assets: TChartAsset[];
-  selectedAssets: TChartAsset[];
-  onChange: (assets: TChartAsset[]) => void;
+  selectedAssets: string[];
+  onChange: (assets: string[]) => void;
 }
+
+const ChartAssetList = React.memo(_ChartAssetList);
 export default ChartAssetList;
