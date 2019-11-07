@@ -68,7 +68,7 @@ const getReferralHistoryFile = (
 };
 
 const getFileUrl = (id?: string): string =>
-  id ? `${process.env.REACT_APP_API_URL}/v1.0/file/${id}` : "";
+  id ? `${process.env.REACT_APP_API_URL}/v2.0/file/${id}` : "";
 
 const uploadFile = (
   file: File,

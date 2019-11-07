@@ -87,9 +87,15 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             loaderData={levelsParamsLoaderData}
             data={levelsParameters!}
             programDescription={description}
-            canCloseAsset={personalDetails && personalDetails.canClose}
+            canCloseAsset={
+              personalDetails &&
+              personalDetails.isOwnAsset &&
+              personalDetails.ownerActions.canClose
+            }
             canMakeSignalProvider={
-              personalDetails && personalDetails.canMakeSignalProvider
+              personalDetails &&
+              personalDetails.isOwnAsset &&
+              personalDetails.ownerActions.canMakeSignalProviderFromProgram
             }
             isOwnProgram={isOwnProgram}
             canInvest={personalDetails && personalDetails.canInvest}
