@@ -20,15 +20,24 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
 const _TableCard: React.FC<ITableCardProps> = props => {
+  const chart = Array.isArray(props.asset.chart)
+    ? props.asset.chart
+    : props.chart;
+  const profit =
+    (props.asset.statistic && props.asset.statistic.profitValue) ||
+    props.profit;
+  const profitPercent =
+    (props.asset.statistic && props.asset.statistic.profitPercent) ||
+    props.profitPercent;
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
       <TableCardChartBlock
         {...props}
         assetId={props.asset.id}
-        chart={props.asset.chart}
-        profit={props.asset.statistic.profitValue}
-        profitPercent={props.asset.statistic.profitPercent}
+        chart={chart}
+        profit={profit}
+        profitPercent={profitPercent}
       />
       {props.children}
     </TableCardContainer>
@@ -97,16 +106,18 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
             <Link className="table-card__title" to={detailsUrl}>
               {asset.title}
             </Link>
-            <Link
-              className="table-card__name"
-              to={{
-                as: composeManagerDetailsUrl(asset.manager.url),
-                pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-                state: `/ ${pathTitle}`
-              }}
-            >
-              {asset.manager.username}
-            </Link>
+            {asset.manager && (
+              <Link
+                className="table-card__name"
+                to={{
+                  as: composeManagerDetailsUrl(asset.manager.url),
+                  pathname: MANAGER_DETAILS_FOLDER_ROUTE,
+                  state: `/ ${pathTitle}`
+                }}
+              >
+                {asset.manager.username}
+              </Link>
+            )}
           </div>
           {renderActions && (
             <div className="table-card__actions">
@@ -181,6 +192,7 @@ interface ITableCardTopBlockProps {
 interface ITableCardProps
   extends ITableCardTopBlockProps,
     React.HTMLAttributes<HTMLDivElement> {
+  chart?: ChartSimple[];
   profit?: number;
   profitPercent: number;
 }
