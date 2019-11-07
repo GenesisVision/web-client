@@ -1,12 +1,19 @@
 import {
+  DashboardAsset,
+  DashboardChartAsset,
   DashboardInvestingDetails,
+  DashboardRecommendations,
   DashboardSummary,
   DashboardTimeframeProfit,
   DashboardTradingDetails,
-  InvestmentEventViewModel
+  InvestmentEventViewModel,
+  MoneyLocation,
+  RecommendedAsset
 } from "gv-api-web/dist";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "shared/utils/types";
+
+export type TChartAsset = DashboardChartAsset;
 
 export type TDashboardTotal = DashboardSummary;
 
@@ -51,17 +58,12 @@ export interface TAsset {
   value: number;
   chart: any;
 }
-export interface TRecommendation extends TAsset {}
+export type TDashboardRecommendations = DashboardRecommendations;
+export type TRecommendation = RecommendedAsset;
 
-export type TPieChartType = {
-  name: string;
-  color: string;
-  percent: number;
-};
+export type TDashboardPortfolio = Array<MoneyLocation>;
 
-export type TPortfolio = TPieChartType[];
-
-export type TAssets = TPieChartType[];
+export type TAssets = Array<DashboardAsset>;
 
 export interface TTradingTotal {
   total: number;
