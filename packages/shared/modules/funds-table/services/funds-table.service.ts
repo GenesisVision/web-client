@@ -35,6 +35,7 @@ import {
   sortableColumns,
   SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
+import { FAVORITES_TAB_NAME } from "shared/routes/invest.routes";
 
 export type GetFundsType = () => (dispatch: MiddlewareDispatch) => void;
 export const getFunds: GetFundsType = () => dispatch => {
@@ -201,6 +202,7 @@ export const fundsChangeFilter: FundsChangeFilterType = filter => (
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
+  const showFavorites = ctx.pathname.includes(FAVORITES_TAB_NAME);
   const { asPath = "", pathname, reduxStore } = ctx;
   const { page, sorting = SORTING_FILTER_VALUE, currency, ...other } = qs.parse(
     asPath.slice(pathname.length + 1)
@@ -220,6 +222,7 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
     }),
     ...skipAndTake,
     currency: currency || accountCurrency,
-    sorting
+    sorting,
+    showFavorites
   };
 };
