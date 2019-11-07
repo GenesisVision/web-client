@@ -22,7 +22,7 @@ import useAnchor, { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import { isProgram } from "shared/utils/types/assets";
+import { isFund, isProgram } from "shared/utils/types/assets";
 
 const _TableCard: React.FC<ITableCardProps> = props => {
   return (
@@ -186,7 +186,7 @@ interface ITableCardTopBlockProps {
     pathname: string;
     state: string;
   };
-  asset: ProgramDetailsList | FundDetailsList;
+  asset: any; //ProgramDetailsList | FundDetailsList;
   renderActions?: (props: {
     clearAnchor: (event: TEvent) => void;
     anchor: TAnchor;
