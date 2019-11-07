@@ -39,7 +39,7 @@ export const programDetailsLoaderDataCreator = (): ProgramDetailsList => ({
   currency: "GVT",
   availableToInvest: getRandomInteger(0, 100),
   investorsCount: getRandomInteger(0, 100),
-  chart: {
+  statistic: {
     chart: [],
     profit: getRandomInteger(0, 100),
     drawdown: getRandomInteger(0, 100)
