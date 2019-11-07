@@ -1,4 +1,4 @@
-import { NextComponentType } from "next";
+import { NextPage } from "next";
 import React from "react";
 import FacetCardsContainer, {
   ASSETS_FACETS
@@ -17,7 +17,7 @@ import {
   PROGRAMS_TAB_ROUTE
 } from "../../routes/programs.routes";
 
-const ProgramsPage: NextComponentType = () => {
+const ProgramsPage: NextPage = () => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
 

@@ -1,23 +1,18 @@
-import faker from "faker";
 import {
   FundAssetPercent,
   FundDetailsList,
   ItemsViewModelFundDetailsList
 } from "gv-api-web";
 import {
-  managerLoaderData,
-  mockDate
+  mockDate,
+  ownerLoaderData
 } from "shared/components/details/details.loader-data";
-import {
-  personalFundDetailsFull,
-  statisticListLoaderData
-} from "shared/components/funds/fund-details/fund-details.loader-data";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomColor, getRandomInteger } from "shared/utils/helpers";
 import { tableLoaderCreator } from "shared/utils/helpers";
 
 const assetLoaderDataCreator = (): FundAssetPercent => ({
   asset: "GVT",
-  name: faker.lorem.word(),
+  name: "Genesis Vision",
   percent: getRandomInteger(0, 100),
   icon: ""
 });
@@ -26,30 +21,33 @@ const assetsLoaderDataCreator = (): FundAssetPercent[] =>
     .fill("")
     .map(() => assetLoaderDataCreator());
 
-export const fundDetailsLoaderDataCreator = (): FundDetailsList =>
-  new FundDetailsList({
-    totalAssetsCount: 0,
-    topFundAssets: assetsLoaderDataCreator(),
-    // dashboardAssetsDetails: {
-    //   share: getRandomInteger(0, 100)
-    // },
-    // statistic: statisticListLoaderData,
-    personalDetails: personalFundDetailsFull,
-    id: "",
-    logo: "",
-    url: "",
-    color: "#858585",
-    title: faker.lorem.word(),
-    description: "",
-    status: "None",
-    creationDate: mockDate,
-    // manager: managerLoaderData,
-    chart: {
-      profit: 0,
-      drawdown: 0,
-      chart: []
-    }
-  });
+export const fundDetailsLoaderDataCreator = (): FundDetailsList => ({
+  totalAssetsCount: 0,
+  topFundAssets: assetsLoaderDataCreator(),
+  investorsCount: getRandomInteger(0, 100),
+  owner: ownerLoaderData,
+  balance: {
+    currency: "GVT",
+    amount: getRandomInteger(0, 100)
+  },
+  personalDetails: {
+    isFavorite: false,
+    isOwnAsset: false
+  },
+  id: "",
+  logo: "",
+  url: "",
+  color: getRandomColor(),
+  title: "Fund name",
+  description: "",
+  status: "None",
+  creationDate: mockDate,
+  chart: {
+    profit: 0,
+    drawdown: 0,
+    chart: []
+  }
+});
 
 export const fundListLoaderData: FundDetailsList[] = tableLoaderCreator(
   fundDetailsLoaderDataCreator

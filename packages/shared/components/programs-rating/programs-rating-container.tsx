@@ -37,7 +37,8 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
       fetchPrograms({
         ...filters,
         sorting: "ByLevelProgressDesc",
-        levelsSet: level ? [level] : undefined
+        levelMin: level,
+        levelMax: level
       }),
     [level]
   );

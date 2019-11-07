@@ -1,7 +1,11 @@
 import "./table-card.scss";
 
 import classNames from "classnames";
-import { ChartSimple } from "gv-api-web";
+import {
+  FundDetailsList,
+  ProgramDetailsList,
+  SimpleChartPoint
+} from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -18,26 +22,16 @@ import useAnchor, { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import { isFund, isProgram } from "shared/utils/types/assets";
 
 const _TableCard: React.FC<ITableCardProps> = props => {
-  const chart = Array.isArray(props.asset.chart)
-    ? props.asset.chart
-    : props.chart;
-  const profit =
-    (props.asset.statistic && props.asset.statistic.profitValue) ||
-    props.profit;
-  const profitPercent =
-    (props.asset.statistic && props.asset.statistic.profitPercent) ||
-    props.profitPercent;
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
       <TableCardChartBlock
-        {...props}
         assetId={props.asset.id}
-        chart={chart}
-        profit={profit}
-        profitPercent={profitPercent}
+        chart={props.asset.statistic.chart}
+        profit={props.asset.statistic.profit}
       />
       {props.children}
     </TableCardContainer>
@@ -95,17 +89,18 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         <div className="table-card__avatar">
           <Link to={detailsUrl}>
             <AssetAvatar
-              url={asset.logo || logo}
-              levelProgress={asset.levelProgress}
-              level={asset.level}
-              alt={asset.title || title}
-              color={asset.color || color}
+              url={asset.logo}
+              levelProgress={isProgram(asset) ? asset.levelProgress : undefined}
+              level={isProgram(asset) ? asset.level : undefined}
+              alt={asset.title}
+              color={asset.color}
               size="medium"
               tooltip={
-                (!!asset.level && (
+                isProgram(asset) ? (
                   <LevelTooltip level={asset.level} canLevelUp={false} />
-                )) ||
-                undefined
+                ) : (
+                  undefined
+                )
               }
             />
           </Link>
@@ -113,20 +108,18 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
             <Link className="table-card__title" to={detailsUrl}>
-              {asset.title || title}
+              {asset.title}
             </Link>
-            {asset.manager && (
-              <Link
-                className="table-card__name"
-                to={{
-                  as: composeManagerDetailsUrl(asset.manager.url),
-                  pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-                  state: `/ ${pathTitle}`
-                }}
-              >
-                {asset.manager.username}
-              </Link>
-            )}
+            <Link
+              className="table-card__name"
+              to={{
+                as: composeManagerDetailsUrl(asset.owner.url),
+                pathname: MANAGER_DETAILS_FOLDER_ROUTE,
+                state: `/ ${pathTitle}`
+              }}
+            >
+              {asset.owner.username}
+            </Link>
           </div>
           {renderActions && (
             <div className="table-card__actions">
@@ -143,7 +136,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
 
 export const TableCardChartBlock: React.FC<
   ITableCardChartBlockProps
-> = React.memo(({ chart, assetId, profitPercent, profit }) => (
+> = React.memo(({ chart, assetId, profit }) => (
   <TableCardRow>
     <div className="table-card__chart">
       <ProgramSimpleChart data={chart} programId={assetId} />
@@ -151,12 +144,12 @@ export const TableCardChartBlock: React.FC<
     <div className="table-card__chart-info">
       <div className="table-card__profit">
         <Profitability
-          value={formatValue(profitPercent, 2)}
+          value={formatValue(profit, 2)}
           variant={PROFITABILITY_VARIANT.CHIPS}
           prefix={PROFITABILITY_PREFIX.ARROW}
         >
           <NumberFormat
-            value={formatValue(profitPercent, 2)}
+            value={formatValue(profit, 2)}
             suffix="%"
             allowNegative={false}
             displayType="text"
@@ -178,9 +171,8 @@ export const TableCardChartBlock: React.FC<
 ));
 
 interface ITableCardChartBlockProps {
-  chart: ChartSimple[];
+  chart: SimpleChartPoint[];
   assetId: string;
-  profitPercent: number;
   profit: number;
 }
 
@@ -194,7 +186,7 @@ interface ITableCardTopBlockProps {
     pathname: string;
     state: string;
   };
-  asset: any;
+  asset: any; //ProgramDetailsList | FundDetailsList;
   renderActions?: (props: {
     clearAnchor: (event: TEvent) => void;
     anchor: TAnchor;
@@ -203,11 +195,7 @@ interface ITableCardTopBlockProps {
 
 interface ITableCardProps
   extends ITableCardTopBlockProps,
-    React.HTMLAttributes<HTMLDivElement> {
-  chart?: ChartSimple[];
-  profit?: number;
-  profitPercent: number;
-}
+    React.HTMLAttributes<HTMLDivElement> {}
 
 const TableCard = React.memo(_TableCard);
 export default TableCard;

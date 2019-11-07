@@ -1,4 +1,4 @@
-import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
+import { Currency, PlatformCurrencyInfo, Timeframe } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -21,7 +21,6 @@ import { fundListLoaderData } from "shared/modules/funds-table/components/funds-
 import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 import { SHOW_IN_CURRENCY_FILTER } from "shared/modules/programs-table/components/programs-table/programs.constants";
-import { CurrencyEnum } from "shared/utils/types";
 
 import {
   PROGRAMS_FACET_PAGING,
@@ -104,11 +103,11 @@ const _ProgramsFacetTable: React.FC<
 };
 
 export interface IProgramsFacetTableProps {
-  currency?: CurrencyEnum;
-  currencies?: PlatformCurrency[];
+  currency?: Currency;
+  currencies?: PlatformCurrencyInfo[];
   title: string;
   sorting: string;
-  timeframe: ProgramFacetTimeframeEnum;
+  timeframe: Timeframe;
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
   showRating?: boolean;

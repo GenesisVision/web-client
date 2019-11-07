@@ -37,7 +37,6 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       useChartStateValues={useProgramChartStateValues}
       useChartPeriod={useChartPeriod}
       renderProfitValue={chart => {
-        console.info(chart);
         return (
           <NumberFormat
             value={formatCurrencyValue(

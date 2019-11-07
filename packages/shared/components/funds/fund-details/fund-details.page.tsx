@@ -21,7 +21,6 @@ const _FundDetailsPage: React.FC<Props> = ({
   descriptionSection
 }) => {
   const description = useSelector(fundDescriptionSelector);
-  console.info(description);
   useEffect(() => {
     dispatchFundDescription();
   }, [dispatchFundDescription]);

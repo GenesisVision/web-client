@@ -76,8 +76,8 @@ const _DashboardPublicCard: React.FC<{
       asset={asset}
       detailsUrl={detailsLink}
       pathTitle={title}
-      profitPercent={asset.statistic.profit} // {asset.statistic.profitPercent}
-      chart={asset.statistic.chart}
+      // profitPercent={asset.statistic.profit} // {asset.statistic.profitPercent}
+      // chart={asset.statistic.chart}
       renderActions={renderActions}
     >
       <TableCardTable>

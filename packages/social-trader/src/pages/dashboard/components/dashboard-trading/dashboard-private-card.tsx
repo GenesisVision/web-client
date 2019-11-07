@@ -86,7 +86,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
       asset={asset}
       detailsUrl={detailsLink}
       pathTitle={title}
-      profitPercent={asset.statistic.profit}
+      // profitPercent={asset.statistic.profit}
       renderActions={renderActions}
     >
       <TableCardTable>

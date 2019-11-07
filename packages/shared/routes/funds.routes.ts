@@ -6,7 +6,7 @@ export const FUNDS_FAVORITES_TAB_NAME = "favorites";
 export const FUNDS_EXPLORE_TAB_NAME = "";
 export const FUNDS_SLUG_URL_PARAM_NAME = "fundsSlugUrl";
 
-export const FUNDS_ROUTE = "/funds";
+export const FUNDS_ROUTE = "/invest/funds";
 export const FUND_DETAILS_ROUTE = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}`;
 export const FUND_DETAILS_FOLDER_ROUTE = `${FUNDS_ROUTE}/[id]`;
 export const FUND_DETAILS_ROUTE_REGEX = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;

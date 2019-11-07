@@ -42,7 +42,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     level,
     levelProgress,
     color,
-    chart,
+    statistic,
     personalDetails,
     id,
     tags,
@@ -103,11 +103,11 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
-          value={formatValue(chart.profit, 2)}
+          value={formatValue(statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
-            value={formatValue(chart.profit, 2)}
+            value={formatValue(statistic.profit, 2)}
             suffix="%"
             allowNegative={false}
             displayType="text"
@@ -115,7 +115,9 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {chart && <ProgramSimpleChart data={chart.chart} programId={id} />}
+        {statistic && (
+          <ProgramSimpleChart data={statistic.chart} programId={id} />
+        )}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

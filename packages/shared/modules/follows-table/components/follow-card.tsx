@@ -95,8 +95,8 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       asset={follow}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={follow.chart.profit}
-      profitPercent={follow.chart.profit}
+      // profit={follow.chart.profit}
+      // profitPercent={follow.chart.profit}
       renderActions={renderActions}
       extraBlock={follow.tags && <TagProgramContainer tags={follow.tags} />}
     >

@@ -1,6 +1,6 @@
 import "./program-simple-chart.scss";
 
-import { ChartSimple } from "gv-api-web";
+import { SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
@@ -57,7 +57,7 @@ const _ProgramSimpleChart: React.FC<Props> = ({ data, programId }) => {
 };
 
 interface Props {
-  data: ChartSimple[];
+  data: SimpleChartPoint[];
   programId: string;
 }
 

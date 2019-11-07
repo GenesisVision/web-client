@@ -24,7 +24,6 @@ const _ProgramDetailsStatisticsElements: React.FC<
   const [t] = useTranslation();
   if (!data) return null;
   const { statistic, statisticCurrency } = data;
-  console.info(statistic, "ele");
   return (
     <DetailsStatisticsElements
       Current={() => (

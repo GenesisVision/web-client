@@ -1,10 +1,11 @@
 import {
+  Currency,
   FundFacet,
-  PlatformCurrency,
+  PlatformCurrencyInfo,
   PlatformInfo,
   ProgramFacet
 } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createSelector } from "reselect";
@@ -14,20 +15,12 @@ import { IProgramsFacetTableProps } from "shared/components/programs/programs-fa
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { IDataModel } from "shared/constants/constants";
 import { withAuthenticated } from "shared/decorators/is-authenticated";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import {
   platformCurrenciesSelector,
   platformDataSelector
 } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
-import {
-  CurrencyEnum,
-  MiddlewareDispatch,
-  TGetState
-} from "shared/utils/types";
-
-import { DispatchProps } from "../asset-status/asset-status-requests";
 
 const _FacetContainer: React.FC<Props> = ({
   id,
@@ -70,7 +63,7 @@ const facetsSelector = createSelector<
   (state, props) => props.asset,
   (data, asset) => {
     if (!data) return undefined;
-    return data[asset];
+    return data.assetInfo[asset].facets;
   }
 );
 const facetSelector = createSelector<
@@ -107,8 +100,8 @@ interface OwnProps {
 interface StateProps {
   facets?: FacetType[];
   facet?: FacetType;
-  currencies: PlatformCurrency[];
-  currency: CurrencyEnum;
+  currencies: PlatformCurrencyInfo[];
+  currency: Currency;
 }
 
 interface Props extends OwnProps, StateProps {}
@@ -120,8 +113,8 @@ export type FacetDataType = {
   facet?: FacetType;
 };
 export enum FACET_ASSET {
-  PROGRAMS = "programsFacets",
-  FUNDS = "fundsFacets"
+  PROGRAMS = "programInfo",
+  FUNDS = "fundInfo"
 }
 
 const FacetContainer = compose<React.ComponentType<OwnProps>>(

@@ -96,8 +96,6 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
       asset={program}
       detailsUrl={linkProps}
       pathTitle={title}
-      profit={program.chart.profit}
-      profitPercent={program.chart.profit}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
     >
@@ -149,7 +147,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.drawdown")}>
             <NumberFormat
-              value={formatValue(program.chart.drawdown, 2)}
+              value={formatValue(program.statistic.drawdown, 2)}
               displayType="text"
               suffix="%"
             />

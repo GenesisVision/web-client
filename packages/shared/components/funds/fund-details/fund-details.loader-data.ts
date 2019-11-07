@@ -7,6 +7,7 @@ import {
 import { getRandomInteger } from "shared/utils/helpers";
 
 import { IFundStatisticData } from "./fund-details-statistics-section/fund-details-statistics/fund-details-statistics-elements";
+import { PersonalFundDetails, PersonalFundDetailsList } from "gv-api-web";
 
 const assetLoaderDataCreator = () => ({
   color: faker.internet.color(),
@@ -55,27 +56,24 @@ export const fundStatisticDataLoaderData: IFundStatisticData = {
   statisticCurrency: "GVT"
 };
 
-export const personalFundDetailsFull = {
+export const personalFundDetailsFull: PersonalFundDetails = {
   withdrawPercent: getRandomInteger(0, 100),
-  canReallocate: false,
   availableReallocationPercents: getRandomInteger(0, 100),
   nextReallocationPercents: mockDate,
   exitFeePersonal: getRandomInteger(0, 100),
   isFavorite: false,
   isInvested: false,
-  isOwnProgram: false,
-  canCloseAsset: false,
-  isFinishing: false,
+  isOwnAsset: false,
+  ownerActions: {
+    canClose: false,
+    canReallocate: false
+  },
   canInvest: false,
   canWithdraw: false,
-  canClosePeriod: false,
   hasNotifications: false,
   value: getRandomInteger(0, 100),
-  profit: getRandomInteger(0, 100),
-  invested: getRandomInteger(0, 100),
   pendingInput: getRandomInteger(0, 100),
   pendingOutput: getRandomInteger(0, 100),
-  pendingOutputIsWithdrawAll: false,
   status: "Pending"
 };
 

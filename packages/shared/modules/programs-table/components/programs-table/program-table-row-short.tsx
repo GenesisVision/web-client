@@ -45,7 +45,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     color,
     periodStarts,
     periodEnds,
-    chart,
+    statistic,
     personalDetails,
     availableToInvest,
     id,
@@ -126,18 +126,18 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
-          value={formatValue(chart.drawdown, 2)}
+          value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
-          value={formatValue(chart.profit, 2)} /*statistic.profitPercent*/
+          value={formatValue(statistic.profit, 2)} /*statistic.profitPercent*/
           prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
-            value={formatValue(chart.profit, 2)} /*statistic.profitPercent*/
+            value={formatValue(statistic.profit, 2)} /*statistic.profitPercent*/
             suffix="%"
             allowNegative={false}
             displayType="text"
@@ -145,7 +145,9 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {chart && <ProgramSimpleChart data={chart.chart} programId={id} />}
+        {statistic && (
+          <ProgramSimpleChart data={statistic.chart} programId={id} />
+        )}
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

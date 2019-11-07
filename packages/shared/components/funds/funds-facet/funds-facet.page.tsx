@@ -14,10 +14,7 @@ import FundsFacetTable from "./components/funds-facet-table";
 const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
   const getFunds = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
-      fetchFunds(filters).then(data => ({
-        total: data.total,
-        items: data.funds
-      })),
+      fetchFunds(filters),
     []
   );
   return (
