@@ -1,4 +1,4 @@
-import { FundDetails } from "gv-api-web";
+import { FundDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -87,7 +87,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         state: `/ ${title}`
       }}
       pathTitle={title}
-      profitPercent={fund.statistic.profitPercent}
+      profitPercent={fund.chart.profit}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
@@ -95,10 +95,10 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
           <StatisticItem label={t("funds-page.funds-header.balance")}>
             <NumberFormat
               value={formatCurrencyValue(
-                fund.statistic.balance.amount,
-                fund.statistic.balance.currency
+                fund.balance.amount,
+                fund.balance.currency
               )}
-              suffix={` ${fund.statistic.balance.currency}`}
+              suffix={` ${fund.balance.currency}`}
               displayType="text"
             />
           </StatisticItem>
@@ -106,7 +106,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         <TableCardTableColumn>
           <StatisticItem label={t("funds-page.funds-header.investors")}>
             <NumberFormat
-              value={fund.statistic.investorsCount}
+              value={fund.investorsCount}
               displayType="text"
               decimalScale={0}
             />
@@ -115,7 +115,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         <TableCardTableColumn>
           <StatisticItem label={t("funds-page.funds-header.drawdown")}>
             <NumberFormat
-              value={formatValue(fund.statistic.drawdownPercent, 2)}
+              value={formatValue(fund.chart.drawdown, 2)}
               displayType="text"
               suffix="%"
             />
@@ -140,7 +140,7 @@ const FundCard = React.memo(_FundCard);
 export default FundCard;
 
 interface Props {
-  fund: FundDetails;
+  fund: FundDetailsList;
   toggleFavorite(programId: string, isFavorite: boolean): void;
-  title?: JSX.Element | string;
+  title?: string;
 }
