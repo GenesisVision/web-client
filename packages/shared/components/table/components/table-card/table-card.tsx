@@ -79,18 +79,27 @@ export const TableCardTableColumn: React.FC<
 ));
 
 export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
-  ({ detailsUrl, asset, pathTitle, renderActions, extraBlock }) => {
+  ({
+    detailsUrl,
+    asset,
+    pathTitle,
+    renderActions,
+    extraBlock,
+    logo,
+    title,
+    color
+  }) => {
     const { anchor, setAnchor, clearAnchor } = useAnchor();
     return (
       <TableCardRow>
         <div className="table-card__avatar">
           <Link to={detailsUrl}>
             <AssetAvatar
-              url={asset.logo}
+              url={asset.logo || logo}
               levelProgress={asset.levelProgress}
               level={asset.level}
-              alt={asset.title}
-              color={asset.color}
+              alt={asset.title || title}
+              color={asset.color || color}
               size="medium"
               tooltip={
                 (!!asset.level && (
@@ -104,7 +113,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
             <Link className="table-card__title" to={detailsUrl}>
-              {asset.title}
+              {asset.title || asset.title}
             </Link>
             {asset.manager && (
               <Link
@@ -176,6 +185,9 @@ interface ITableCardChartBlockProps {
 }
 
 interface ITableCardTopBlockProps {
+  logo?: string;
+  title?: string;
+  color?: string;
   extraBlock?: JSX.Element;
   pathTitle?: string;
   detailsUrl: {
