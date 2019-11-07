@@ -1,20 +1,21 @@
-import { CancelablePromise, InvestmentEventViewModels } from "gv-api-web";
+import {
+  CancelablePromise,
+  DashboardAssetChart,
+  DashboardChartAsset,
+  DashboardRecommendations,
+  InvestmentEventViewModels
+} from "gv-api-web";
 import { NextPageContext } from "next";
 import {
-  assetsLoaderData,
-  getInvestingStatisticLoaderData,
-  getRecommendationLoaderData,
   getTradingLoaderData,
-  getTradingPublicLoaderData,
-  portfolioLoaderData
+  getTradingPublicLoaderData
 } from "pages/dashboard/dashboard.loaders-data";
 import {
   TAssets,
   TDashboardInvestingStatistic,
+  TDashboardPortfolio,
   TDashboardTotal,
   TDashboardTradingStatistic,
-  TPortfolio,
-  TRecommendation,
   TTrading
 } from "pages/dashboard/dashboard.types";
 import { ManagerRootState } from "reducers";
@@ -30,47 +31,73 @@ import dashboardApi from "shared/services/api-client/dashboard-api";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { tableLoaderCreator } from "shared/utils/helpers";
 import { ActionType, CurrencyEnum } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 import { getDashboardFunds } from "./dashboard-funds.service";
 
+export const fetchMultiChartData = ({
+  assets,
+  period: { start, end },
+  currency
+}: {
+  assets: string[];
+  period: ChartDefaultPeriod;
+  currency: CurrencyEnum;
+}): CancelablePromise<DashboardAssetChart[]> =>
+  dashboardApi
+    .getChart(authService.getAuthArg(), {
+      showIn: currency,
+      assets,
+      dateFrom: start,
+      dateTo: end
+    })
+    .then(({ charts }) => charts);
+
+export const fetchAssets = (
+  period: ChartDefaultPeriod
+): CancelablePromise<DashboardChartAsset[]> =>
+  dashboardApi
+    .getChartAssets(authService.getAuthArg())
+    .then(({ assets }) => assets);
+
 export const getFollowThem = (): CancelablePromise<IDataModel> =>
   (Promise.resolve(
     getTradingPublicLoaderData()
   ) as unknown) as CancelablePromise<IDataModel>;
 
-export const getPrivateAssets = (): CancelablePromise<IDataModel> =>
-  (Promise.resolve(
-    getTradingPublicLoaderData()
-  ) as unknown) as CancelablePromise<IDataModel>;
+export const getPrivateAssets = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
-export const getPublicAssets = (): CancelablePromise<IDataModel> =>
-  (Promise.resolve(
-    getTradingPublicLoaderData()
-  ) as unknown) as CancelablePromise<IDataModel>;
+export const getPublicAssets = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
 export const getTradingData = (): CancelablePromise<TTrading> =>
   (Promise.resolve(getTradingLoaderData()) as unknown) as CancelablePromise<
     TTrading
   >;
 
-export const getPortfolio = (): CancelablePromise<TPortfolio> =>
-  (Promise.resolve(portfolioLoaderData()) as unknown) as CancelablePromise<
-    TPortfolio
-  >;
+export const getPortfolio = (): CancelablePromise<TDashboardPortfolio> =>
+  dashboardApi
+    .getPortfolio(authService.getAuthArg())
+    .then(({ distribution }) => distribution);
 
 export const getAssetsPercents = (): CancelablePromise<TAssets> =>
-  (Promise.resolve(assetsLoaderData()) as unknown) as CancelablePromise<
-    TAssets
-  >;
+  dashboardApi
+    .getHoldings(authService.getAuthArg())
+    .then(({ assets }) => assets);
 
-export const getRecommendations = (): CancelablePromise<TRecommendation[]> =>
-  (Promise.resolve(
-    tableLoaderCreator(getRecommendationLoaderData, 15)
-  ) as unknown) as CancelablePromise<TRecommendation[]>;
+export const getRecommendations = ({
+  currency
+}: {
+  currency: CurrencyEnum;
+}): CancelablePromise<DashboardRecommendations> =>
+  dashboardApi.getRecommendations(authService.getAuthArg(), { currency });
 
 export const getTotal = ({
   currency

@@ -29,7 +29,7 @@ const _CreateAccountContainer: React.FC<Props> = ({ brokers }) => {
     <div>
       <CreateAssetBack
         condition={tab === TAB.SETTINGS}
-        asset={ASSET.ACCOUNT}
+        asset={"ACCOUNT" as ASSET}
         onApply={confirmNavigateToBroker}
       />
       <div className="create-asset__header">

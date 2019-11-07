@@ -1,8 +1,3 @@
-import { ASSET } from "shared/constants/constants";
+import { DashboardChartAsset } from "gv-api-web";
 
-export type TChartAsset = {
-  name: string;
-  logo?: string;
-  type: ASSET;
-  url: string;
-};
+export type TChartAsset = DashboardChartAsset;

@@ -1,12 +1,12 @@
 import RecommendationCard from "pages/dashboard/components/dashboard-recommendations/recommendation-card";
-import { TRecommendation } from "pages/dashboard/dashboard.types";
+import { TDashboardRecommendations } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 
-const _DashboardRecommendations: React.FC<Props> = ({ data }) => {
+const _DashboardRecommendations: React.FC<Props> = ({ data: { assets } }) => {
   return (
     <div className="dashboard-recommendations__cards">
-      {data.map(asset => (
+      {assets.map(asset => (
         <RecommendationCard asset={asset} title={""} />
       ))}
     </div>
@@ -14,7 +14,7 @@ const _DashboardRecommendations: React.FC<Props> = ({ data }) => {
 };
 
 interface Props {
-  data: TRecommendation[];
+  data: TDashboardRecommendations;
 }
 
 const DashboardRecommendations = withBlurLoader(

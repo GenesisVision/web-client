@@ -42,7 +42,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
         showSwitchView={false}
         filtering={filtering}
         defaultFilters={defaultFilters}
-        paging={{ ...DEFAULT_PAGING, itemsOnPage: 100 }}
+        paging={DEFAULT_PAGING}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType

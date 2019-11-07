@@ -9,9 +9,9 @@ import {
   ChartDefaultPeriod,
   DEFAULT_PERIOD
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import MultiChartContainer from "shared/components/multi-chart/multi-chart.container";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 
+import DashboardMultiChartContainer from "../dashboard-multi-chart/dashboard-multi-chart.container";
 import DashboardGetStarted from "./dashboard-get-started";
 
 const _DashboardPortfolioChartSection: React.FC = () => {
@@ -20,9 +20,13 @@ const _DashboardPortfolioChartSection: React.FC = () => {
   const isNewUser = useSelector(isNewUserSelector);
 
   if (isNewUser) return <DashboardGetStarted />;
+
   return (
     <DashboardBlock label={t("dashboard-page.chart")} all={""}>
-      <MultiChartContainer period={period} handleChangePeriod={setPeriod} />
+      <DashboardMultiChartContainer
+        period={period}
+        handleChangePeriod={setPeriod}
+      />
     </DashboardBlock>
   );
 };

@@ -25,6 +25,15 @@ import { formatValue } from "shared/utils/formatter";
 import { isProgram } from "shared/utils/types/assets";
 
 const _TableCard: React.FC<ITableCardProps> = props => {
+  const chart = Array.isArray(props.asset.chart)
+    ? props.asset.chart
+    : props.chart;
+  const profit =
+    (props.asset.statistic && props.asset.statistic.profitValue) ||
+    props.profit;
+  const profitPercent =
+    (props.asset.statistic && props.asset.statistic.profitPercent) ||
+    props.profitPercent;
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
@@ -75,7 +84,16 @@ export const TableCardTableColumn: React.FC<
 ));
 
 export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
-  ({ detailsUrl, asset, pathTitle, renderActions, extraBlock }) => {
+  ({
+    detailsUrl,
+    asset,
+    pathTitle,
+    renderActions,
+    extraBlock,
+    logo,
+    title,
+    color
+  }) => {
     const { anchor, setAnchor, clearAnchor } = useAnchor();
     return (
       <TableCardRow>
@@ -83,17 +101,16 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
           <Link to={detailsUrl}>
             <AssetAvatar
               url={asset.logo}
-              levelProgress={isProgram(asset) ? asset.levelProgress : undefined}
-              level={isProgram(asset) ? asset.level : undefined}
+              levelProgress={asset.levelProgress}
+              level={asset.level}
               alt={asset.title}
               color={asset.color}
               size="medium"
               tooltip={
                 isProgram(asset) ? (
                   <LevelTooltip level={asset.level} canLevelUp={false} />
-                ) : (
-                  undefined
-                )
+                )) ||
+                undefined
               }
             />
           </Link>
@@ -171,6 +188,9 @@ interface ITableCardChartBlockProps {
 }
 
 interface ITableCardTopBlockProps {
+  logo?: string;
+  title?: string;
+  color?: string;
   extraBlock?: JSX.Element;
   pathTitle?: string;
   detailsUrl: {
@@ -187,6 +207,7 @@ interface ITableCardTopBlockProps {
 interface ITableCardProps
   extends ITableCardTopBlockProps,
     React.HTMLAttributes<HTMLDivElement> {
+  chart?: SimpleChartPoint[];
   profit?: number;
   profitPercent: number;
 }

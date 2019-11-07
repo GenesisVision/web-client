@@ -1,6 +1,6 @@
+import { DashboardTradingAsset } from "gv-api-web";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
-import { TAsset } from "pages/dashboard/dashboard.types";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import React from "react";
 import NumberFormat from "react-number-format";
@@ -28,20 +28,27 @@ import {
 } from "shared/utils/compose-url";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 
-const _DashboardPublicCard: React.FC<{ asset: TAsset; title?: string }> = ({
-  asset,
-  title
-}) => {
+const _DashboardPublicCard: React.FC<{
+  asset: DashboardTradingAsset;
+  title?: string;
+}> = ({ asset, title }) => {
   const [t] = useTranslation();
   const detailsLink = {
-    pathname: composeProgramDetailsUrl(asset.url),
+    pathname: composeProgramDetailsUrl(
+      asset.publicInfo && asset.publicInfo.url
+    ),
     state: `/ ${title}`
   };
   const settingsLink = {
-    pathname: composeProgramSettingsUrl(asset.url),
-    state: `/ ${asset.title}`
+    pathname: composeProgramSettingsUrl(
+      asset.publicInfo && asset.publicInfo.url
+    ),
+    state: `/ ${asset.publicInfo && asset.publicInfo.title}`
   };
 
+  const assetTitle = asset.publicInfo ? asset.publicInfo.title : "";
+  const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
+  const assetLogo = asset.publicInfo ? asset.publicInfo.logo : "";
   const renderActions = ({
     anchor,
     clearAnchor
@@ -54,26 +61,29 @@ const _DashboardPublicCard: React.FC<{ asset: TAsset; title?: string }> = ({
       clearAnchor={clearAnchor}
       id={asset.id}
       settingsLink={settingsLink}
-      showChangePassword={asset.type === ASSET.PROGRAM}
-      showClosePeriod={asset.type === ASSET.PROGRAM}
-      showTerminal={asset.type === ASSET.PROGRAM}
-      title={asset.title}
+      showChangePassword={asset.assetType === ASSET.PROGRAM}
+      showClosePeriod={asset.assetType === ASSET.PROGRAM}
+      showTerminal={asset.assetType === ASSET.PROGRAM}
+      title={assetTitle}
     />
   );
 
   return (
     <TableCard
+      title={assetTitle}
+      color={assetColor}
+      logo={assetLogo}
       asset={asset}
       detailsUrl={detailsLink}
       pathTitle={title}
-      profit={asset.statistic.profit}
-      profitPercent={asset.statistic.profitPercent}
+      profitPercent={asset.statistic.profit} // {asset.statistic.profitPercent}
+      chart={asset.statistic.chart}
       renderActions={renderActions}
     >
       <TableCardTable>
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
+            {/*<NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.balance.amount,
                 DECIMAL_SCALE_SMALL_VALUE,
@@ -81,19 +91,22 @@ const _DashboardPublicCard: React.FC<{ asset: TAsset; title?: string }> = ({
               )}
               suffix={` ${asset.statistic.balance.currency}`}
               displayType="text"
-            />
+            />*/}
           </StatisticItem>
-          {asset.login && (
+          {/*{"login" in asset && asset.login && (
             <StatisticItem label={t("dashboard-page.trading.login")}>
               {asset.login}
             </StatisticItem>
-          )}
+          )}*/}
+          <StatisticItem label={t("dashboard-page.trading.login")}>
+            {"login"}
+          </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.ddown")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                asset.statistic.ddown,
+                asset.statistic.drawdown,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
@@ -105,7 +118,7 @@ const _DashboardPublicCard: React.FC<{ asset: TAsset; title?: string }> = ({
           <StatisticItem label={t("dashboard-page.trading.age")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
-                asset.statistic.age,
+                10, // asset.statistic.age,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
@@ -114,15 +127,15 @@ const _DashboardPublicCard: React.FC<{ asset: TAsset; title?: string }> = ({
           </StatisticItem>
           {asset.broker && (
             <StatisticItem label={t("dashboard-page.trading.broker")}>
-              {asset.broker}
+              {asset.broker.name}
             </StatisticItem>
           )}
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
-        type={asset.type}
+        type={asset.assetType as ASSET}
         id={asset.id}
-        currency={asset.currency}
+        currency={"GVT"}
       />
     </TableCard>
   );

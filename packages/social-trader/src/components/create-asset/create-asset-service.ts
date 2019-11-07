@@ -48,7 +48,7 @@ const getCreateMethod = (
 ): ((request: NewAssetRequest) => CancelablePromise<any>) => {
   //TODO ProgramCreateResult | null
   switch (asset) {
-    case ASSET.ACCOUNT:
+    case "ACCOUNT" as ASSET:
       return (request: NewAssetRequest) => new CancelablePromise<any>(() => {});
     // return (request: NewAssetRequest) =>
     //   (Promise.resolve() as unknown) as CancelablePromise<

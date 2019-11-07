@@ -1,3 +1,4 @@
+import { DashboardTradingAsset } from "gv-api-web";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card";
@@ -8,7 +9,6 @@ import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
 } from "pages/dashboard/dashboard.constants";
-import { TAsset } from "pages/dashboard/dashboard.types";
 import { getPrivateAssets } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ const _DashboardPrivate: React.FC<Props> = () => {
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.private")}
-      renderBodyCard={(asset: TAsset) => (
+      renderBodyCard={(asset: DashboardTradingAsset) => (
         <DashboardPrivateCard title={""} asset={asset} />
       )}
     />
