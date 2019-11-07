@@ -1,9 +1,6 @@
 import DashboardPieChartBlock from "pages/dashboard/components/dashboard-pie-chart/dashboard-pie-chart-block";
 import { assetsLoaderData } from "pages/dashboard/dashboard.loaders-data";
-import {
-  getAssetsPercents,
-  getPortfolio
-} from "pages/dashboard/services/dashboard.service";
+import { getAssetsPercents } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
