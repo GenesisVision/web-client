@@ -3,6 +3,7 @@ import "shared/components/dashboard/dashboard.scss";
 
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
+import DashboardPortfolioChartSection from "pages/dashboard/components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
 import DashboardInvestingStatistic from "pages/dashboard/components/dashboard-statistic/dashboard-investing-statistic";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
@@ -10,7 +11,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
-import DashboardPortfolioChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
 
 const _DashboardPage: React.FC = () => {
@@ -20,14 +20,16 @@ const _DashboardPage: React.FC = () => {
       <div>
         <DashboardTotalContainer />
       </div>
-      <div>{/*<DashboardPortfolioChartSection />*/}</div>
+      <div>
+        <DashboardPortfolioChartSection />
+      </div>
       <div className="dashboard__statistic-block">
         <DashboardTradingStatistic />
         <DashboardInvestingStatistic />
       </div>
       <div className="dashboard__statistic-block">
-        {/*<DashboardPortfolio />*/}
-        {/*<DashboardAssets />*/}
+        <DashboardPortfolio />
+        <DashboardAssets />
       </div>
       <DashboardRecommendationsContainer />
     </Page>
