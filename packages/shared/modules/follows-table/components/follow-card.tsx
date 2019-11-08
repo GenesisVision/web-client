@@ -92,11 +92,11 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
   );
   return (
     <TableCard
-      asset={follow}
+      logo={follow.logo}
       detailsUrl={linkProps}
-      pathTitle={title}
-      // profit={follow.chart.profit}
-      // profitPercent={follow.chart.profit}
+      assetId={follow.id}
+      profit={follow.statistic.profit}
+      chart={follow.statistic.chart}
       renderActions={renderActions}
       extraBlock={follow.tags && <TagProgramContainer tags={follow.tags} />}
     >
