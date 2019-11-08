@@ -1,6 +1,7 @@
+import { SLUG_URL_PARAM_NAME } from "./app.routes";
+
 export const INVEST_ROUTE = "/invest";
 
-export const SLUG_URL_PARAM_NAME = "slugUrl";
 export const SETTINGS = `settings`;
 export const FACETS = "facets";
 export const FAVORITES_TAB_NAME = "favorites";
