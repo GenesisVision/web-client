@@ -95,11 +95,11 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         {distanceDate(follow.creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
-        <NumberFormat
+        {/*<NumberFormat
           value={formatValue(chart.drawdown, 2)}
           suffix="%"
           displayType="text"
-        />
+        />*/}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
