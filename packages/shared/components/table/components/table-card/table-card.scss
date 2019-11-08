@@ -6,6 +6,7 @@
 $chart-width: 160px;
 $card-width: 312px;
 $card-height: 372px;
+$card-avatar-size: 80px;
 
 @mixin title() {
   @include font-size($font-size-small);
@@ -55,9 +56,15 @@ $card-height: 372px;
       margin-right: -$padding-xsmall;
     }
   }
-
+  &__broker-avatar {
+    width: $card-avatar-size;
+    margin-right: $padding-xsmall;
+  }
   &__avatar {
+    height: $card-avatar-size;
     padding-left: $padding-xsmall;
+    display: flex;
+    align-items: center;
   }
   &__title {
     @include link($text-accent-color, $text-color);
@@ -117,8 +124,8 @@ $card-height: 372px;
     height: $card-height;
     margin-right: 0;
     .program-avatar {
-      width: 80px;
-      height: 80px;
+      width: $card-avatar-size;
+      height: $card-avatar-size;
     }
     &__title {
       font-size: $font-size-paragraph;
