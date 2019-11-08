@@ -2425,9 +2425,13 @@
     "close-program": {
       "title": "Close program"
     },
+    "close-account": {
+      "title": "Close account"
+    },
     "title": "{{asset}} settings",
     "period-and-closing": {
       "title": "Period and closing",
+      "text-account": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-follow": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-fund": "The fund will be closed after pressing the button",
@@ -2447,6 +2451,7 @@
       "title": "Avatar"
     },
     "buttons": {
+      "close-account": "Close account",
       "close-follow": "Close follow",
       "close-program": "Close program",
       "close-fund": "Close fund",
@@ -2546,6 +2551,7 @@
   },
   "dashboard-page": {
     "trading": {
+      "title": "Trading",
       "follow-them": "Follow them",
       "actions": {
         "make-program": "Make program",
@@ -2598,7 +2604,7 @@
       "month": "Month"
     },
     "fail-chart": "Error loading chart",
-    "title": "Dashboard",
+    "title": "Dashboard overview",
     "assets": {
       "title": "Assets",
       "programs": "Programs",
