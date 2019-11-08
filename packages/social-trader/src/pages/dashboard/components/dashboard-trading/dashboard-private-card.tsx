@@ -98,14 +98,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.leverage")}>
-            {/*<NumberFormat
+            <NumberFormat
               value={formatValueDifferentDecimalScale(
-                asset.statistic.leverage,
+                asset.accountInfo.leverage,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
               displayType="text"
-            />*/}
+            />
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
