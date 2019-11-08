@@ -1,7 +1,5 @@
 import { DashboardTradingAsset } from "gv-api-web";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
-import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
-import { TRecommendation } from "pages/dashboard/dashboard.types";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
@@ -22,17 +20,11 @@ import {
 } from "shared/constants/constants";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { useTranslation } from "shared/i18n";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
   const [t] = useTranslation();
-  const detailsLink = {
-    pathname: composeProgramDetailsUrl(
-      asset.publicInfo && asset.publicInfo.url
-    ),
-    state: `/ ${title}`
-  };
   const terminalLink = {
     pathname: ""
   };
@@ -83,24 +75,25 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
 
   return (
     <TableCard
-      asset={asset}
-      detailsUrl={detailsLink}
-      pathTitle={title}
-      // profitPercent={asset.statistic.profit}
+      assetId={asset.id}
+      profit={asset.statistic.profit}
+      chart={asset.statistic.chart}
+      title={asset.accountInfo.login}
+      logo={asset.broker.logo}
       renderActions={renderActions}
     >
       <TableCardTable>
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.equity")}>
-            {/*<NumberFormat
+            <NumberFormat
               value={formatValueDifferentDecimalScale(
-                asset.statistic.balance.amount,
+                asset.accountInfo.balance,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
-              suffix={` ${asset.statistic.balance.currency}`}
+              suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
-            />*/}
+            />
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
@@ -117,22 +110,10 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
-            {/*<NumberFormat
-              value={formatValueDifferentDecimalScale(
-                asset.statistic.age,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              displayType="text"
-            />*/}
+            {distanceDate(asset.accountInfo.creationDate)}
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
-      <DepositWithdrawButtons
-        type={asset.assetType as ASSET}
-        id={asset.id}
-        currency={"GVT"}
-      />
     </TableCard>
   );
 };
