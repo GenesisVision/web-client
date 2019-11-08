@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
-import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Link from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -46,7 +45,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     statistic,
     tradesCount,
     url,
-    currency,
     color
   } = follow;
   const linkProps = {
@@ -63,7 +61,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={linkProps}>
-            <AssetAvatar url={logo} alt={follow.title} color={follow.color} />
+            <AssetAvatar url={logo} alt={follow.title} color={color} />
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
