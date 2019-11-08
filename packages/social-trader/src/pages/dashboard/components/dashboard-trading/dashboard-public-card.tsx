@@ -2,7 +2,7 @@ import { DashboardTradingAsset } from "gv-api-web";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
-import React from "react";
+import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import Link, { ToType } from "shared/components/link/link";
@@ -22,6 +22,7 @@ import {
 } from "shared/constants/constants";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { useTranslation } from "shared/i18n";
+import { META_TRADER_4_ROUTE } from "shared/routes/trade.routes";
 import {
   composeProgramDetailsUrl,
   composeProgramSettingsUrl
@@ -29,10 +30,12 @@ import {
 import { distanceDate } from "shared/utils/dates";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 
+import { TitleContext } from "../../dashboard.constants";
+
 const _DashboardPublicCard: React.FC<{
   asset: DashboardTradingAsset;
-  title?: string;
-}> = ({ asset, title }) => {
+}> = ({ asset }) => {
+  const title = useContext(TitleContext);
   const [t] = useTranslation();
   const detailsLink = {
     pathname: composeProgramDetailsUrl(
@@ -44,7 +47,7 @@ const _DashboardPublicCard: React.FC<{
     pathname: composeProgramSettingsUrl(
       asset.publicInfo && asset.publicInfo.url
     ),
-    state: `/ ${asset.publicInfo && asset.publicInfo.title}`
+    state: `/ ${title}`
   };
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
@@ -65,7 +68,6 @@ const _DashboardPublicCard: React.FC<{
       showChangePassword={asset.actions.canChangePassword}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
-      title={assetTitle}
     />
   );
   return (
@@ -143,14 +145,15 @@ const _DashboardPublicCardActions: React.FC<
   clearAnchor,
   settingsLink,
   id,
-  title,
   showChangePassword,
   showTerminal,
   showClosePeriod
 }) => {
+  const title = useContext(TitleContext);
   const [t] = useTranslation();
   const terminalLink = {
-    pathname: ""
+    pathname: META_TRADER_4_ROUTE,
+    state: `/ ${title}`
   };
   return (
     <Popover
@@ -187,7 +190,6 @@ interface IDashboardPublicCardActionsProps {
   anchor: TAnchor;
   settingsLink: ToType;
   id: string;
-  title: string;
   showChangePassword: boolean;
   showTerminal: boolean;
   showClosePeriod: boolean;
