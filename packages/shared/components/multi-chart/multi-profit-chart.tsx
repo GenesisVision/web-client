@@ -6,6 +6,7 @@ import ProgramProfitTooltip from "shared/components/programs/program-details/pro
 import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 const _MultiProfitChart: React.FC<Props> = ({ charts }) => {
+  if (!charts || !charts.length) return null;
   const equityCharts = charts.map(({ chart }) => chart);
   const colors = charts.map(({ color }) => ({ color }));
   return (
