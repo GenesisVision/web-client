@@ -62,7 +62,7 @@ const _DashboardPublicCard: React.FC<{
       clearAnchor={clearAnchor}
       id={asset.id}
       settingsLink={settingsLink}
-      showChangePassword={asset.assetType === ASSET.PROGRAM}
+      showChangePassword={asset.actions.canChangePassword}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
       title={assetTitle}
@@ -125,6 +125,8 @@ const _DashboardPublicCard: React.FC<{
       </TableCardTable>
       <DepositWithdrawButtons
         ownAsset
+        canWithdraw={asset.actions.canAddRequestWithdraw}
+        canInvest={asset.actions.canAddRequestInvest}
         broker={asset.broker && asset.broker.type}
         type={asset.assetType as ASSET}
         id={asset.id}
