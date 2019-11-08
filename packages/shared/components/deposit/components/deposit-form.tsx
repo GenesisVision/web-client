@@ -1,5 +1,5 @@
 import { InjectedFormikProps, withFormik } from "formik";
-import { ProgramInvestInfo, WalletBaseData } from "gv-api-web";
+import { WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -12,18 +12,14 @@ import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
-import useRole from "shared/hooks/use-role.hook";
+import { ASSET } from "shared/constants/constants";
 import { fetchRate } from "shared/services/rate-service";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import {
-  investorSchema,
-  managerSchema
-} from "./deposit-form-validation-schema";
-import { TInvestInfo } from "./deposit.types";
+import { depositValidationSchema } from "./deposit-form-validation-schema";
+import { TFees } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { WalletField } from "./form-fields/wallet-field";
@@ -39,12 +35,14 @@ const isAllow = (currency: string) => ({
 const _DepositForm: React.FC<
   InjectedFormikProps<Props, IDepositFormValues>
 > = ({
+  minDeposit,
+  fees,
+  availableToInvest: availableToInvestProp = Number.MAX_SAFE_INTEGER,
   t,
   wallets,
   asset,
   hasEntryFee,
   values,
-  info,
   currency,
   isValid,
   dirty,
@@ -54,7 +52,6 @@ const _DepositForm: React.FC<
   setFieldValue,
   setFieldTouched
 }) => {
-  const role = useRole();
   const { walletCurrency, amount = 0 } = values;
   const [rate, setRate] = useState<number>(1);
   const [availableInWallet, setAvailableInWallet] = useState<number>(0);
@@ -63,39 +60,27 @@ const _DepositForm: React.FC<
     fetchRate(walletCurrency, currency).then(setRate);
   }, [currency, walletCurrency]);
   useEffect(() => {
-    const maxAvailable =
-      (info as ProgramInvestInfo).availableToInvestBase !== undefined
-        ? (info as ProgramInvestInfo).availableToInvestBase
-        : Number.MAX_SAFE_INTEGER;
-    setAvailableToInvest(convertToCurrency(maxAvailable, rate));
-    setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, maxAvailable);
-  }, [info, rate, setFieldValue]);
+    setAvailableToInvest(convertToCurrency(availableToInvestProp, rate));
+    setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvestProp);
+  }, [availableToInvestProp, rate]);
   useEffect(() => {
     const available = wallets.find(
       ({ currency }) => currency === walletCurrency
     )!.available;
     setAvailableInWallet(available);
     setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
-  }, [setFieldValue, walletCurrency, wallets]);
+  }, [walletCurrency, wallets]);
   useEffect(() => {
     setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
-  }, [rate, setFieldValue]);
+  }, [rate]);
 
   const setMaxAmount = useCallback((): void => {
     const max = formatCurrencyValue(
-      role === ROLE.INVESTOR
-        ? Math.min(availableInWallet, availableToInvest)
-        : availableInWallet,
+      Math.min(availableInWallet, availableToInvest),
       walletCurrency
     );
     setFieldValue(DEPOSIT_FORM_FIELDS.amount, max);
-  }, [
-    availableInWallet,
-    availableToInvest,
-    role,
-    setFieldValue,
-    walletCurrency
-  ]);
+  }, [availableInWallet, availableToInvest, setFieldValue, walletCurrency]);
 
   const onWalletChange = ({ currency, id }: WalletBaseData) => {
     setFieldValue(DEPOSIT_FORM_FIELDS.walletCurrency, currency);
@@ -132,9 +117,8 @@ const _DepositForm: React.FC<
           currency={currency}
         />
         <InvestorFees
-          condition={role === ROLE.INVESTOR}
+          fees={fees}
           hasEntryFee={hasEntryFee}
-          info={info}
           amount={amount}
           rate={rate}
           currency={currency}
@@ -173,10 +157,7 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
       [DEPOSIT_FORM_FIELDS.amount]: undefined,
       [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
     }),
-    validationSchema: (params: Props) =>
-      ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER // TODO remove after union
-        ? managerSchema(params)
-        : investorSchema(params),
+    validationSchema: depositValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(
         values[DEPOSIT_FORM_FIELDS.amount]!,
@@ -198,10 +179,12 @@ export enum DEPOSIT_FORM_FIELDS {
 }
 
 export interface IDepositOwnProps {
+  minDeposit: number;
+  fees: TFees;
+  availableToInvest?: number;
   wallets: WalletBaseData[];
   asset: ASSET;
   hasEntryFee: boolean;
-  info: TInvestInfo;
   currency: CurrencyEnum;
   errorMessage: string;
   onSubmit: (

@@ -2,43 +2,34 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { DialogTop } from "shared/components/dialog/dialog-top";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { ASSET, ROLE } from "shared/constants/constants";
-import useRole from "shared/hooks/use-role.hook";
+import { ASSET } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
 const _DepositTop: React.FC<DepositTopOwnProps> = ({
   header,
   asset,
-  title,
   currency,
-  availableToInvestBase
+  availableToInvest
 }) => {
   const [t] = useTranslation();
-  const role = useRole();
   return (
-    <DialogTop title={header || t("deposit-asset.title")} subtitle={title}>
-      {asset === ASSET.PROGRAM &&
-        role === ROLE.INVESTOR &&
-        availableToInvestBase && (
-          <StatisticItem
-            label={t("deposit-asset.program.available-to-invest")}
-            big
-          >
-            {`${formatCurrencyValue(
-              availableToInvestBase!,
-              currency!
-            )} ${currency}`}
-          </StatisticItem>
-        )}
+    <DialogTop title={header || t("deposit-asset.title")} subtitle={asset}>
+      {asset === ASSET.PROGRAM && availableToInvest && (
+        <StatisticItem
+          label={t("deposit-asset.program.available-to-invest")}
+          big
+        >
+          {`${formatCurrencyValue(availableToInvest, currency)} ${currency}`}
+        </StatisticItem>
+      )}
     </DialogTop>
   );
 };
 
 export interface DepositTopOwnProps {
-  currency?: CurrencyEnum;
-  title: string;
-  availableToInvestBase?: number;
+  currency: CurrencyEnum;
+  availableToInvest?: number;
   asset: ASSET;
   header?: string;
 }

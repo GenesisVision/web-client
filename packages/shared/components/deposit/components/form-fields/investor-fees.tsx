@@ -11,28 +11,31 @@ import {
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { TInvestInfo } from "../deposit.types";
+import { TFees, TInvestInfo } from "../deposit.types";
 
 const _InvestorFees: React.FC<Props> = ({
+  fees: { gvCommission, entryFee = 0 },
   amount,
   rate,
   hasEntryFee,
-  info,
   currency,
   walletCurrency
 }) => {
-  const gvFee = calculatePercentage(amount, info.gvCommission);
-  const entryFee = calculatePercentage(amount - gvFee, info.entryFee);
-  const investAmount = amount - gvFee - entryFee * +hasEntryFee;
+  const gvCommissionValue = calculatePercentage(amount, gvCommission);
+  const entryFeeValue = calculatePercentage(
+    amount - gvCommissionValue,
+    entryFee
+  );
+  const investAmount = amount - gvCommissionValue - entryFee * +hasEntryFee;
   const [t] = useTranslation();
   return (
     <DialogList>
       {hasEntryFee && (
         <DialogListItem label={t("deposit-asset.entry-fee")}>
-          {info.entryFee} %
+          {entryFee} %
           <NumberFormat
             value={formatCurrencyValue(
-              convertFromCurrency(entryFee, rate),
+              convertFromCurrency(entryFeeValue, rate),
               currency
             )}
             prefix=" ("
@@ -42,9 +45,9 @@ const _InvestorFees: React.FC<Props> = ({
         </DialogListItem>
       )}
       <DialogListItem label={t("deposit-asset.gv-commission")}>
-        {info.gvCommission} %
+        {gvCommission} %
         <NumberFormat
-          value={formatCurrencyValue(gvFee, walletCurrency)}
+          value={formatCurrencyValue(gvCommissionValue, walletCurrency)}
           prefix={" ("}
           suffix={` ${walletCurrency})`}
           displayType="text"
@@ -66,8 +69,8 @@ const _InvestorFees: React.FC<Props> = ({
 };
 
 interface Props {
+  fees: TFees;
   hasEntryFee: boolean;
-  info: TInvestInfo;
   amount: number;
   rate: number;
   currency: CurrencyEnum;
