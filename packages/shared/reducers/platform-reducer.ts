@@ -1,7 +1,9 @@
 import {
+  AmountWithCurrency,
   FilterModel,
+  ItemsViewModelProgramDetailsList,
   PlatformInfo,
-  ItemsViewModelProgramDetailsList
+  ProgramMinInvestAmount
 } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
@@ -23,6 +25,30 @@ export type PlatformState = IApiState<PlatformInfo>;
 
 export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
+);
+
+export const gvInvestFeeSelector = apiFieldSelector<PlatformInfo, number>(
+  platformDataSelector,
+  fieldSelector(state => state.commonInfo.platformCommission.investment),
+  0
+);
+
+export const fundMinDepositAmountSelector = apiFieldSelector<
+  PlatformInfo,
+  AmountWithCurrency[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.fundInfo.minInvestAmountIntoFund),
+  []
+);
+
+export const programMinDepositAmountsSelector = apiFieldSelector<
+  PlatformInfo,
+  ProgramMinInvestAmount[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.programInfo.minInvestAmounts),
+  []
 );
 
 export const currenciesSelector = apiFieldSelector(
