@@ -8,7 +8,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 
 import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
-import ProgramTableRow from "./program-table-row";
+import ProgramTableRowShort from "./program-table-row-short";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
@@ -79,7 +79,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
         />
       )}
       renderBodyRow={(program: ProgramDetailsList) => (
-        <ProgramTableRow
+        <ProgramTableRowShort
           showRating={Boolean(showRating)}
           title={title}
           program={program}

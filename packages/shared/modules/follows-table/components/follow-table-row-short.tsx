@@ -32,9 +32,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   follow,
   isAuthenticated,
   toggleFavorite
-  // onExpandClick
 }) => {
-  const { t } = useTranslation();
   const {
     logo,
     personalDetails,
@@ -58,6 +56,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         "table__row--pretender": false
       })}
     >
+      {showRating && <TableCell>{}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={linkProps}>

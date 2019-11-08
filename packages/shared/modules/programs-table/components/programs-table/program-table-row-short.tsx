@@ -26,7 +26,6 @@ interface IProgramTableRowShortProps {
   program: ProgramDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
-  onExpandClick(): void;
 }
 
 const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
@@ -34,8 +33,7 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   showRating,
   program,
   isAuthenticated,
-  toggleFavorite,
-  onExpandClick
+  toggleFavorite
 }) => {
   const { t } = useTranslation();
   const {
@@ -64,7 +62,6 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       className={classNames({
         "table__row--pretender": false
       })}
-      onClick={onExpandClick}
     >
       {showRating && <TableCell>{}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
