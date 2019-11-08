@@ -72,12 +72,15 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         message={message}
         title={programDescription.title}
         currency={programDescription.currency}
-        availableToInvestBase={programDescription.availableInvestmentBase}
+        availableToInvest={programDescription.availableInvestmentBase}
         asset={ASSET.PROGRAM}
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}
       />
       <ProgramDeposit
+        entryFee={programDescription.entryFeeCurrent}
+        availableToInvest={programDescription.availableInvestmentBase}
+        broker={programDescription.brokerDetails.type}
         condition={isAuthenticated}
         currency={programDescription.currency}
         open={isOpenInvestPopup}
