@@ -40,7 +40,7 @@ const _MultiChart: React.FC<Props> = ({
             <ChartPeriod period={period} onChange={handleChangePeriod} />
           </div>
           <div className="multi-chart__profit-chart">
-            {/*<MultiProfitChart charts={multiChartData} />*/}
+            <MultiProfitChart charts={multiChartData} />
           </div>
         </div>
       )}
