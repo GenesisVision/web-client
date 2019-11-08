@@ -5,9 +5,10 @@ import { SimpleChartPoint } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import ImageBase from "shared/components/avatar/image-base";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
-import Link from "shared/components/link/link";
+import Link, { ToType } from "shared/components/link/link";
 import Profitability from "shared/components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -16,19 +17,12 @@ import {
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import useAnchor, { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { formatValue } from "shared/utils/formatter";
-import { ASSET } from "shared/constants/constants";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
 
 const _TableCard: React.FC<ITableCardProps> = props => {
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
-      <TableCardChartBlock
-        assetId={props.asset.id}
-        chart={props.asset.statistic.chart}
-        profit={props.asset.statistic.profit}
-      />
+      <TableCardChartBlock {...props} />
       {props.children}
     </TableCardContainer>
   );
@@ -68,56 +62,90 @@ export const TableCardTableColumn: React.FC<
   <div className="table-card__table-column">{children}</div>
 ));
 
+export const TableCardTitle: React.FC<
+  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children, url }) =>
+  url ? (
+    <Link className="table-card__title" to={url}>
+      {children}
+    </Link>
+  ) : (
+    <div className="table-card__title">{children}</div>
+  )
+);
+
+export const TableCardSubTitle: React.FC<
+  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children, url }) => {
+  return url ? (
+    <Link className="table-card__name" to={url}>
+      {children}
+    </Link>
+  ) : (
+    <div className="table-card__name">{children}</div>
+  );
+});
+
+export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
+  ({ logo, hasAvatar, url, levelProgress, level, alt, color }) => {
+    const Avatar = hasAvatar ? (
+      <AssetAvatar
+        url={logo}
+        levelProgress={levelProgress}
+        level={level}
+        alt={alt || ""}
+        color={color}
+        size="medium"
+        tooltip={
+          level ? <LevelTooltip level={level} canLevelUp={false} /> : undefined
+        }
+      />
+    ) : (
+      <ImageBase
+        imageClassName="table-card__broker-avatar"
+        url={logo}
+        alt={alt}
+      />
+    );
+    return (
+      <div className="table-card__avatar">
+        {url ? <Link to={url}>{Avatar}</Link> : Avatar}
+      </div>
+    );
+  }
+);
+
 export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
   ({
+    level,
+    levelProgress,
+    hasAvatar,
+    logo,
+    managerUrl,
     detailsUrl,
-    asset,
-    pathTitle,
     renderActions,
     extraBlock,
-    logo,
     title,
+    subTitle,
     color
   }) => {
     const { anchor, setAnchor, clearAnchor } = useAnchor();
-    const isProgram = asset.assetType === ASSET.PROGRAM;
     return (
       <TableCardRow>
-        <div className="table-card__avatar">
-          <Link to={detailsUrl}>
-            <AssetAvatar
-              url={asset.logo}
-              levelProgress={isProgram ? asset.levelProgress : undefined}
-              level={isProgram ? asset.level : undefined}
-              alt={asset.title}
-              color={asset.color}
-              size="medium"
-              tooltip={
-                isProgram ? (
-                  <LevelTooltip level={asset.level} canLevelUp={false} />
-                ) : (
-                  undefined
-                )
-              }
-            />
-          </Link>
-        </div>
+        <TableCardAvatar
+          logo={logo}
+          hasAvatar={hasAvatar}
+          alt={title}
+          color={color}
+          level={level}
+          levelProgress={levelProgress}
+          url={detailsUrl}
+        />
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
-            <Link className="table-card__title" to={detailsUrl}>
-              {asset.title}
-            </Link>
-            {asset.owner && (
-              <Link
-                className="table-card__name"
-                to={{
-                  as: composeManagerDetailsUrl(asset.owner.url),
-                  pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-                  state: `/ ${pathTitle}`
-                }}
-              >
-                {asset.owner.username}
-              </Link>
+            <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            {subTitle && (
+              <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
           </div>
           {renderActions && (
@@ -138,26 +166,38 @@ export const TableCardChartBlock: React.FC<
 > = React.memo(({ chart, assetId, profit }) => (
   <TableCardRow>
     <div className="table-card__chart">
-      <ProgramSimpleChart data={chart} programId={assetId} />
+      {chart && <ProgramSimpleChart data={chart} programId={assetId} />}
     </div>
     <div className="table-card__chart-info">
       <div className="table-card__profit">
-        <Profitability
-          value={formatValue(profit, 2)}
-          variant={PROFITABILITY_VARIANT.CHIPS}
-          prefix={PROFITABILITY_PREFIX.ARROW}
-        >
-          <NumberFormat
+        {profit !== undefined && (
+          <Profitability
             value={formatValue(profit, 2)}
-            suffix="%"
-            allowNegative={false}
-            displayType="text"
-          />
-        </Profitability>
+            variant={PROFITABILITY_VARIANT.CHIPS}
+            prefix={PROFITABILITY_PREFIX.ARROW}
+          >
+            <NumberFormat
+              value={formatValue(profit, 2)}
+              suffix="%"
+              allowNegative={false}
+              displayType="text"
+            />
+          </Profitability>
+        )}
       </div>
     </div>
   </TableCardRow>
 ));
+
+interface ITableCardAvatarProps {
+  url?: ToType;
+  hasAvatar?: boolean;
+  logo: string;
+  levelProgress?: number;
+  level?: number;
+  alt?: string;
+  color?: string;
+}
 
 interface ITableCardChartBlockProps {
   chart: SimpleChartPoint[];
@@ -166,16 +206,16 @@ interface ITableCardChartBlockProps {
 }
 
 interface ITableCardTopBlockProps {
-  logo?: string;
+  level?: number;
+  levelProgress?: number;
+  hasAvatar?: boolean;
+  logo: string;
+  subTitle?: string;
   title?: string;
   color?: string;
   extraBlock?: JSX.Element;
-  pathTitle?: string;
-  detailsUrl: {
-    pathname: string;
-    state: string;
-  };
-  asset: any; //ProgramDetailsList | FundDetailsList;
+  managerUrl?: ToType;
+  detailsUrl?: ToType;
   renderActions?: (props: {
     clearAnchor: (event: TEvent) => void;
     anchor: TAnchor;
@@ -184,6 +224,7 @@ interface ITableCardTopBlockProps {
 
 interface ITableCardProps
   extends ITableCardTopBlockProps,
+    ITableCardChartBlockProps,
     React.HTMLAttributes<HTMLDivElement> {}
 
 const TableCard = React.memo(_TableCard);
