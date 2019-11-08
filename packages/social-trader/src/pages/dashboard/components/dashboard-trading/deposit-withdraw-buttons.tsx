@@ -5,24 +5,36 @@ import { TableCardRow } from "shared/components/table/components/table-card/tabl
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "shared/utils/types";
 
-const _DepositWithdrawButtons: React.FC<Props> = props => {
+const _DepositWithdrawButtons: React.FC<Props> = ({
+  ownAsset,
+  entryFee,
+  availableToInvest,
+  broker,
+  type,
+  id,
+  currency
+}) => {
   return (
     <TableCardRow>
       <DepositButton
-        type={props.type}
-        id={props.id}
-        currency={props.currency}
+        ownAsset={ownAsset}
+        entryFee={entryFee}
+        availableToInvest={availableToInvest}
+        broker={broker}
+        type={type}
+        id={id}
+        currency={currency}
       />
-      <WithdrawButton
-        type={props.type}
-        id={props.id}
-        currency={props.currency}
-      />
+      <WithdrawButton type={type} id={id} currency={currency} />
     </TableCardRow>
   );
 };
 
 interface Props {
+  ownAsset?: boolean;
+  entryFee?: number;
+  availableToInvest?: number;
+  broker: string;
   type: ASSET;
   id: string;
   currency: CurrencyEnum;
