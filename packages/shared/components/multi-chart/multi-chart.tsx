@@ -7,15 +7,16 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
+import { withBlurLoader } from "../../decorators/with-blur-loader";
 import ChartAssetList from "./chart-asset-list";
 import { TChartAsset } from "./multi-chart.types";
-import { saveSelectedAssets } from "./service/multi-chart.service";
 import MultiProfitChart from "./multi-profit-chart";
+import { saveSelectedAssets } from "./service/multi-chart.service";
 
 const _MultiChart: React.FC<Props> = ({
   currency,
   request,
-  assets,
+  data: assets,
   selectedAssets,
   period,
   handleChangePeriod
@@ -30,7 +31,7 @@ const _MultiChart: React.FC<Props> = ({
   useEffect(() => {
     saveSelectedAssets(stateSelectedAssets);
     sendRequest({ assets: stateSelectedAssets, period, currency });
-  }, [stateSelectedAssets, period]);
+  }, [stateSelectedAssets, period, currency]);
   return (
     <div className="multi-chart__block">
       {multiChartData && (
@@ -39,7 +40,7 @@ const _MultiChart: React.FC<Props> = ({
             <ChartPeriod period={period} onChange={handleChangePeriod} />
           </div>
           <div className="multi-chart__profit-chart">
-            <MultiProfitChart charts={multiChartData} />
+            {/*<MultiProfitChart charts={multiChartData} />*/}
           </div>
         </div>
       )}
@@ -61,9 +62,9 @@ interface Props {
   }) => CancelablePromise<any>;
   period: ChartDefaultPeriod;
   handleChangePeriod: HandlePeriodChangeType;
-  assets: TChartAsset[];
+  data: TChartAsset[];
   selectedAssets: string[];
 }
 
-const MultiChart = React.memo(_MultiChart);
+const MultiChart = withBlurLoader(React.memo(_MultiChart));
 export default MultiChart;

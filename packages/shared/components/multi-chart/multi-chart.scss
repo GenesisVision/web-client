@@ -50,6 +50,7 @@
   }
   &__selected-mark {
     @include adaptive-margin(right, $padding-xsmall);
+    min-width: $padding-small;
   }
   &__sub-list {
     @include adaptive-padding(bottom, $padding-xsmall);

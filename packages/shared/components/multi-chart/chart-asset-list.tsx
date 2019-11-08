@@ -11,10 +11,10 @@ const _ChartAssetList: React.FC<Props> = ({
   onChange
 }) => {
   const handleToggle = useCallback(
-    (asset: TChartAsset) => {
-      if (isIncluded(selectedAssets, asset.title))
-        onChange(selectedAssets.filter(name => asset.title !== name));
-      else onChange([...selectedAssets, asset.title]);
+    (asset: string) => {
+      if (isIncluded(selectedAssets, asset))
+        onChange(selectedAssets.filter(name => asset !== name));
+      else onChange([...selectedAssets, asset]);
     },
     [selectedAssets]
   );
@@ -48,7 +48,7 @@ const _ChartAssetSubList: React.FC<IChartAssetSubListProps> = ({
     .map(asset => (
       <ChartAsset
         key={asset.title}
-        selected={isIncluded(selectedAssets, asset.title)}
+        selected={isIncluded(selectedAssets, asset.id)}
         asset={asset}
         onToggle={handleToggle}
       />
@@ -68,7 +68,7 @@ interface IChartAssetSubListProps {
   asset: ASSET;
   assets: TChartAsset[];
   selectedAssets: string[];
-  handleToggle: (assets: TChartAsset) => void;
+  handleToggle: (asset: string) => void;
 }
 
 const ChartAssetSubList = React.memo(_ChartAssetSubList);
