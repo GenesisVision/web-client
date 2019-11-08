@@ -17,7 +17,9 @@ const _ProgramControls: React.FC<Props> = ({
 }) => {
   const personalProgramDetails = programDescription.personalDetails;
   const canCloseAsset =
-    personalProgramDetails && personalProgramDetails.ownerActions.canClose;
+    personalProgramDetails &&
+    personalProgramDetails.isOwnAsset &&
+    personalProgramDetails.ownerActions.canClose;
   const isOwnProgram =
     personalProgramDetails && personalProgramDetails.isOwnAsset;
 
