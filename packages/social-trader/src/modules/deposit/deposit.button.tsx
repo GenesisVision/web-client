@@ -7,7 +7,15 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "shared/utils/types";
 
-const _DepositButton: React.FC<Props> = ({ type, id, currency }) => {
+const _DepositButton: React.FC<Props> = ({
+  ownAsset,
+  entryFee,
+  type,
+  id,
+  currency,
+  broker,
+  availableToInvest
+}) => {
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   let deposit;
@@ -15,6 +23,8 @@ const _DepositButton: React.FC<Props> = ({ type, id, currency }) => {
     case ASSET.FUND:
       deposit = (
         <FundDepositContainer
+          entryFee={entryFee}
+          availableToInvest={availableToInvest}
           open={isOpenPopup}
           id={id}
           onClose={setIsClosePopup}
@@ -24,6 +34,9 @@ const _DepositButton: React.FC<Props> = ({ type, id, currency }) => {
     default:
       deposit = (
         <ProgramDeposit
+          entryFee={entryFee}
+          availableToInvest={availableToInvest}
+          broker={broker}
           currency={currency}
           open={isOpenPopup}
           id={id}
@@ -31,7 +44,7 @@ const _DepositButton: React.FC<Props> = ({ type, id, currency }) => {
         />
       );
   }
-  const label = "isOwnAsset" ? t("buttons.deposit") : t("buttons.invest");
+  const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
   return (
     <>
       <GVButton className="table-cards__button" onClick={setIsOpenPopup}>
@@ -43,6 +56,10 @@ const _DepositButton: React.FC<Props> = ({ type, id, currency }) => {
 };
 
 interface Props {
+  ownAsset?: boolean;
+  entryFee?: number;
+  availableToInvest?: number;
+  broker: string;
   type: ASSET;
   id: string;
   currency: CurrencyEnum;
