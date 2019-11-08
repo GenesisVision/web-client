@@ -26,9 +26,10 @@ const _DashboardMultiChartContainer: React.FC<Props> = ({
   const selectedAssets = getSelectedAssets();
   return (
     <MultiChart
+      loaderData={[]}
       currency={currency}
       request={fetchMultiChartData}
-      assets={[]}
+      data={data!}
       selectedAssets={selectedAssets}
       period={period}
       handleChangePeriod={handleChangePeriod}
