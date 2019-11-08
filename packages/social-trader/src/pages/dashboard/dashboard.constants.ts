@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ACTION_STATUS_FILTER_DEFAULT_VALUE,
   ACTION_STATUS_FILTER_NAME
@@ -15,3 +16,5 @@ export const DASHBOARD_PUBLIC_DEFAULT_FILTERS = [
     defaultValue: ACTION_STATUS_FILTER_DEFAULT_VALUE
   }
 ];
+
+export const TitleContext = React.createContext("");

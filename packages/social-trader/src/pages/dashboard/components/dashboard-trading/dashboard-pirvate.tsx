@@ -34,7 +34,7 @@ const _DashboardPrivate: React.FC<Props> = () => {
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.private")}
       renderBodyCard={(asset: DashboardTradingAsset) => (
-        <DashboardPrivateCard title={""} asset={asset} />
+        <DashboardPrivateCard asset={asset} />
       )}
     />
   );

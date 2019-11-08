@@ -1,6 +1,9 @@
 import { DashboardTradingAsset } from "gv-api-web";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
+import { composeCreateProgramUrl } from "pages/create-program/create-program.routes";
+import { TitleContext } from "pages/dashboard/dashboard.constants";
 import * as React from "react";
+import { useContext } from "react";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
@@ -20,16 +23,20 @@ import {
 } from "shared/constants/constants";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { useTranslation } from "shared/i18n";
+import { META_TRADER_4_ROUTE } from "shared/routes/trade.routes";
 import { distanceDate } from "shared/utils/dates";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 
-const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
+const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
+  const title = useContext(TitleContext);
   const [t] = useTranslation();
   const terminalLink = {
-    pathname: ""
+    pathname: META_TRADER_4_ROUTE,
+    state: `/ ${title}`
   };
   const makeProgramLink = {
-    pathname: ""
+    pathname: composeCreateProgramUrl(asset.id),
+    state: `/ ${title}`
   };
   const makeSignalAccountLink = {
     pathname: ""
@@ -65,7 +72,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
           </GVButton>
         </Link>
         <CloseAssetButton
-          type={asset.assetType as ASSET}
+          type={"account" as ASSET}
           id={asset.id}
           variant={"text"}
         />
@@ -120,7 +127,6 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, title }) => {
 
 interface Props {
   asset: DashboardTradingAsset;
-  title: string;
 }
 
 const DashboardPrivateCard = React.memo(_DashboardPrivateCard);
