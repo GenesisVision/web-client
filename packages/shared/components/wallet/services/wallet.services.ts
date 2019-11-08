@@ -2,7 +2,7 @@ import {
   CancelablePromise,
   Currency,
   ItemsViewModelTransactionViewModel,
-  WalletBaseData,
+  WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
