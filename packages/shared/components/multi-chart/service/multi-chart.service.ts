@@ -23,7 +23,7 @@ export const saveSelectedAssets = (assets: string[]) =>
 export const getSelectedAssets = (): string[] =>
   getCookie(SELECTED_ASSETS)
     ? JSON.parse(getCookie(SELECTED_ASSETS)!)[SELECTED_ASSETS]
-    : ["1ec82818-0f95-4403-b9a6-dc704be05140"];
+    : [];
 
 export const getProfitChartLoaderDataWithEquity = (): ProgramProfitChart => ({
   equityChart: getEquityChartLoaderData(),
