@@ -1,6 +1,6 @@
 import "shared/modules/programs-table/components/programs-table/programs.scss";
 
-import { ProgramDetailsList } from "gv-api-web";
+import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
 import { ITableProps } from "shared/components/table/components/table";
@@ -8,7 +8,7 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 
 import FollowCard from "./follow-card";
 import FollowTableHeaderCell from "./follow-table-header-cell";
-import FollowTableRow from "./follow-table-row";
+import ProgramTableRowShort from "./follow-table-row-short";
 import FollowTableSortingValue from "./follow-table-sorting";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
@@ -17,7 +17,7 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IFollowsTableProps extends ITableProps {
   showRating?: boolean;
-  data?: ProgramDetailsList[];
+  data?: CopyTradingDetailsList[];
   toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
@@ -76,8 +76,8 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
           column={column}
         />
       )}
-      renderBodyRow={(program: ProgramDetailsList) => (
-        <FollowTableRow
+      renderBodyRow={(program: CopyTradingDetailsList) => (
+        <ProgramTableRowShort
           showRating={Boolean(showRating)}
           title={title}
           follow={program}
@@ -85,7 +85,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
-      renderBodyCard={(program: ProgramDetailsList) => (
+      renderBodyCard={(program: CopyTradingDetailsList) => (
         <FollowCard
           title={title}
           follow={program}

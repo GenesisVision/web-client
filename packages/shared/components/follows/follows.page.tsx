@@ -19,7 +19,7 @@ import { composeProgramFacetUrl } from "shared/utils/compose-url";
 const FollowsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
-
+  //TODO FACETS
   return (
     <Page title={title}>
       <NavigationTabs
@@ -27,13 +27,13 @@ const FollowsPage: NextComponentType = () => {
         tabRoute={FOLLOW_TAB_ROUTE}
         favoritesTabName={FAVORITES_TAB_NAME}
       />
-      <FacetCardsContainer
-        key={"facets"}
-        fileRoute={FOLLOW_FACET_FOLDER_ROUTE}
-        title={title}
-        assetsFacets={ASSETS_FACETS.PROGRAMS}
-        composeFacetUrl={composeProgramFacetUrl}
-      />
+      {/*<FacetCardsContainer*/}
+      {/*  key={"facets"}*/}
+      {/*  fileRoute={FOLLOW_FACET_FOLDER_ROUTE}*/}
+      {/*  title={title}*/}
+      {/*  assetsFacets={ASSETS_FACETS.PROGRAMS}*/}
+      {/*  composeFacetUrl={composeProgramFacetUrl}*/}
+      {/*/>*/}
       <Surface className="programs-table-container" key={"table"}>
         <FollowsTableSsr showSwitchView title={t("follows-page.table")} />
       </Surface>

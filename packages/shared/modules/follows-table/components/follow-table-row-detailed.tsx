@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetailsList } from "gv-api-web";
+import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -26,7 +26,7 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 import FollowBigChart from "./follow-big-chart/follow-big-chart";
 
 const _ProgramTableRowDetailed: React.FC<Props> = ({
-  title,
+  title: back,
   follow,
   isAuthenticated,
   toggleFavorite,
@@ -34,11 +34,19 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const linkProps = {
-    state: `/ ${title}`,
-    as: composeFollowDetailsUrl(follow.url),
+    state: `/ ${back}`,
+    as: composeFollowDetailsUrl(follow.id), //TODO url
     pathname: FOLLOW_DETAILS_FOLDER_ROUTE
   };
-  const requestCurrency = follow.balance.currency;
+  const {
+    currency,
+    logo,
+    title,
+    subscribersCount,
+    creationDate,
+    description,
+    statistic
+  } = follow;
   return (
     <TableRow>
       <td
@@ -53,15 +61,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
               <div className="program-detailed__avatar">
                 <Link to={linkProps}>
                   <AssetAvatar
-                    url={follow.logo}
-                    level={follow.level}
-                    levelProgress={follow.levelProgress}
-                    alt={follow.title}
+                    url={logo}
+                    alt={title}
                     size="medium"
-                    color={follow.color}
-                    tooltip={
-                      <LevelTooltip level={follow.level} canLevelUp={false} />
-                    }
+                    // color={follow.color} TODO
                   />
                 </Link>
                 <div className="program-detailed__avatar--name">
@@ -93,16 +96,16 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
               </div>
               <div className="program-detailed__scroll">
                 <div className="program-detailed__description">
-                  {/*{follow.description}*/}
+                  {description}
                 </div>
               </div>
             </div>
             <div className="program-detailed__statistic">
               <div className="program-detailed__chart">
-                {follow.statistic.chart.length && (
+                {statistic.chart.length && (
                   <FollowBigChart
-                    data={follow.statistic.chart}
-                    programId={follow.id}
+                    data={statistic.chart}
+                    programId={id}
                   />
                 )}
               </div>
@@ -112,14 +115,14 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.equity")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <NumberFormat
-                      value={formatCurrencyValue(
-                        follow.balance.amount,
-                        requestCurrency
-                      )}
-                      suffix={` ${requestCurrency}`}
-                      displayType="text"
-                    />
+                    {/*<NumberFormat*/}
+                    {/*  value={formatCurrencyValue(*/}
+                    {/*    follow.balance.amount,*/}
+                    {/*    requestCurrency*/}
+                    {/*  )}*/}
+                    {/*  suffix={` ${requestCurrency}`}*/}
+                    {/*  displayType="text"*/}
+                    {/*/>*/}
                   </div>
                 </div>
                 <div>
@@ -127,7 +130,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.currency")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {follow.currency}
+                    {currency}
                   </div>
                 </div>
                 <div>
@@ -135,7 +138,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.investors")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {follow.investorsCount}
+                    {subscribersCount}
                   </div>
                 </div>
                 <div>
@@ -143,10 +146,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.available-to-invest")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {`${formatCurrencyValue(
-                      follow.availableToInvest,
-                      requestCurrency
-                    )} ${requestCurrency}`}
+                    {/*{`${formatCurrencyValue(*/}
+                    {/*  follow.availableToInvest,*/}
+                    {/*  requestCurrency*/}
+                    {/*)} ${requestCurrency}`}*/}
                   </div>
                 </div>
                 <div>
@@ -154,10 +157,10 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.period")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <ProgramPeriodPie
-                      start={follow.periodStarts}
-                      end={follow.periodEnds}
-                    />
+                    {/*<ProgramPeriodPie*/}
+                    {/*  start={follow.periodStarts}*/}
+                    {/*  end={follow.periodEnds}*/}
+                    {/*/>*/}
                   </div>
                 </div>
                 <div>
@@ -165,7 +168,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.age")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    {localizedDate(follow.creationDate)}
+                    {localizedDate(creationDate)}
                   </div>
                 </div>
                 <div>
@@ -173,11 +176,11 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.drawdown")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <NumberFormat
-                      value={formatValue(follow.statistic.drawdown, 2)}
-                      suffix="%"
-                      displayType="text"
-                    />
+                    {/*<NumberFormat*/}
+                    {/*  value={formatValue(follow.statistic.drawdown, 2)}*/}
+                    {/*  suffix="%"*/}
+                    {/*  displayType="text"*/}
+                    {/*/>*/}
                   </div>
                 </div>
                 <div>
@@ -185,17 +188,17 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
                     {t("programs-page.programs-header.profit")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
-                    <Profitability
-                      value={formatValue(follow.statistic.profit, 2)}
-                      prefix={PROFITABILITY_PREFIX.SIGN}
-                    >
-                      <NumberFormat
-                        value={formatValue(follow.statistic.profit, 2)}
-                        suffix="%"
-                        allowNegative={false}
-                        displayType="text"
-                      />
-                    </Profitability>
+                    {/*<Profitability*/}
+                    {/*  value={formatValue(follow.statistic.profit, 2)}*/}
+                    {/*  prefix={PROFITABILITY_PREFIX.SIGN}*/}
+                    {/*>*/}
+                    {/*  <NumberFormat*/}
+                    {/*    value={formatValue(follow.statistic.profit, 2)}*/}
+                    {/*    suffix="%"*/}
+                    {/*    allowNegative={false}*/}
+                    {/*    displayType="text"*/}
+                    {/*  />*/}
+                    {/*</Profitability>*/}
                   </div>
                 </div>
               </div>
@@ -234,7 +237,7 @@ const _ProgramTableRowDetailed: React.FC<Props> = ({
 
 interface Props {
   title: string;
-  follow: ProgramDetailsList;
+  follow: CopyTradingDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
   onCollapseClick(): void;

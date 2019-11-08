@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ProgramDetailsList } from "gv-api-web";
+import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -22,10 +22,9 @@ import { formatValue } from "shared/utils/formatter";
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  follow: ProgramDetailsList;
+  follow: CopyTradingDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
-  onExpandClick(): void;
 }
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
@@ -33,45 +32,38 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   showRating,
   follow,
   isAuthenticated,
-  toggleFavorite,
-  onExpandClick
+  toggleFavorite
+  // onExpandClick
 }) => {
   const { t } = useTranslation();
   const {
     logo,
-    level,
-    levelProgress,
-    color,
-    statistic,
     personalDetails,
     id,
     tags,
-    investorsCount
+    subscribersCount,
+    creationDate,
+    statistic,
+    tradesCount,
+    url,
+    currency,
+    color
   } = follow;
   const linkProps = {
     state: `/ ${title}`,
     pathname: FOLLOW_DETAILS_FOLDER_ROUTE,
-    as: composeFollowDetailsUrl(follow.url)
+    as: composeFollowDetailsUrl(url)
   };
   return (
     <TableRow
       className={classNames({
         "table__row--pretender": false
       })}
-      onClick={onExpandClick}
     >
-      {showRating && <TableCell>{}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={linkProps}>
-            <AssetAvatar
-              url={logo}
-              level={level}
-              levelProgress={levelProgress}
-              alt={follow.title}
-              color={color}
-              tooltip={<LevelTooltip level={level} canLevelUp={false} />}
-            />
+            <AssetAvatar url={logo} alt={follow.title} color={follow.color} />
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
@@ -86,17 +78,17 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
-        {investorsCount}
+        {subscribersCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
-        Age
+        {distanceDate(creationDate)}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
-        {distanceDate(follow.creationDate)}
+        {tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
-          value={formatValue(chart.drawdown, 2)}
+          value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />

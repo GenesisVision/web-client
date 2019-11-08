@@ -1,4 +1,4 @@
-import { ProgramDetailsList } from "gv-api-web";
+import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -37,7 +37,7 @@ const _FollowTableRow: React.FC<Props> = ({
 interface Props {
   title: string;
   showRating?: boolean;
-  follow: ProgramDetailsList;
+  follow: CopyTradingDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite: TableToggleFavoriteHandlerType;
 }

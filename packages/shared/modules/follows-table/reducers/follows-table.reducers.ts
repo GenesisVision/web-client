@@ -1,4 +1,4 @@
-import { ItemsViewModelProgramDetailsList } from "gv-api-web";
+import { ItemsViewModelCopyTradingDetailsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiState
@@ -9,11 +9,11 @@ import { FOLLOWS } from "../actions/follows-table.actions";
 import followsFavoritesReducer from "./follows-favorites.reducer";
 
 export type FollowsListState = Readonly<{
-  items: IApiState<ItemsViewModelProgramDetailsList>;
+  items: IApiState<ItemsViewModelCopyTradingDetailsList>;
 }>;
 
 export const followsDataSelector = apiSelector<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelCopyTradingDetailsList
 >(state => state.followsData.items);
 
 const followsReducer = combineReducers<FollowsListState>({
