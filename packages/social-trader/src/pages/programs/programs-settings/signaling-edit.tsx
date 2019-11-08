@@ -1,5 +1,4 @@
 import { FormikProps, withFormik } from "formik";
-import { IProgramSignalFormValues } from "modules/program-signal/program-signal-popup/components/program-signal-form";
 import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { useCallback, useState } from "react";
@@ -22,9 +21,7 @@ const _SignalingEdit: React.FC<Props> = ({
   const [isSignal, setIsSignal] = useState<boolean>(isSignalProgram);
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
-    <SettingsBlock
-      label={t("program-settings.signaling-program.title")}
-    >
+    <SettingsBlock label={t("program-settings.signaling-program.title")}>
       <form id="signaling-edit-form" onSubmit={handleSubmit}>
         <div className="program-settings__signaling-edit-form-title-block">
           {!isSignalProgram && (
