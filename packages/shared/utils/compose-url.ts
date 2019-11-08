@@ -5,6 +5,7 @@ import {
 } from "shared/components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET } from "shared/constants/constants";
+import { SLUG_URL_PARAM_NAME } from "shared/routes/app.routes";
 import {
   FUND_DETAILS_FOLDER_ROUTE,
   FUND_DETAILS_ROUTE,
@@ -14,8 +15,7 @@ import {
 } from "shared/routes/funds.routes";
 import {
   FOLLOW_DETAILS_SLUG_ROUTE,
-  SETTINGS,
-  SLUG_URL_PARAM_NAME
+  SETTINGS
 } from "shared/routes/invest.routes";
 import {
   MANAGER_DETAILS_ROUTE,
