@@ -1,5 +1,5 @@
 import * as faker from "faker";
-import { AssetType, MoneyLocation } from "gv-api-web/dist";
+import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
   TDashboardTotal,
@@ -144,6 +144,11 @@ const getRandomAsset = () =>
 export const getRecommendationLoaderData = (): TRecommendation => {
   const assetType = getRandomAsset();
   return {
+    broker: {
+      logo: "",
+      name: "",
+      type: "MetaTrader4"
+    },
     currency: "GVT",
     assetType,
     statistic: {

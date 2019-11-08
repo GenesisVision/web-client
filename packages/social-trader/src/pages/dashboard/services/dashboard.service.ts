@@ -70,7 +70,7 @@ export const getFollowThem = (): CancelablePromise<IDataModel> =>
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
 ): CancelablePromise<IDataModel> =>
-  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
+  dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), filters);
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType

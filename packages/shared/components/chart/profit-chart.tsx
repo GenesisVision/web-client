@@ -18,12 +18,9 @@ const _ProfitChart: React.FC<Props> = ({
   tooltip,
   equities,
   equityCharts,
-  colors: colorsProp
+  colors
 }) => {
   const firstEquityChart = equityCharts[0];
-  const colors =
-    // @ts-ignore
-    colorsProp || equityCharts.map(({ color }) => ({ color }));
   if (firstEquityChart.length === 0 || equityCharts.length === 0 || !colors)
     return null;
   const firstEquity = equities[0];

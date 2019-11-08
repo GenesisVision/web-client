@@ -26,6 +26,7 @@ import {
   composeProgramDetailsUrl,
   composeProgramSettingsUrl
 } from "shared/utils/compose-url";
+import { distanceDate } from "shared/utils/dates";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 
 const _DashboardPublicCard: React.FC<{
@@ -46,7 +47,7 @@ const _DashboardPublicCard: React.FC<{
     state: `/ ${asset.publicInfo && asset.publicInfo.title}`
   };
 
-  const assetTitle = asset.publicInfo ? asset.publicInfo.title : "";
+  const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
   const assetLogo = asset.publicInfo ? asset.publicInfo.logo : "";
   const renderActions = ({
@@ -61,46 +62,43 @@ const _DashboardPublicCard: React.FC<{
       clearAnchor={clearAnchor}
       id={asset.id}
       settingsLink={settingsLink}
-      showChangePassword={asset.assetType === ASSET.PROGRAM}
+      showChangePassword={asset.actions.canChangePassword}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
       title={assetTitle}
     />
   );
-
   return (
     <TableCard
+      hasAvatar
+      subTitle={asset.assetType}
       title={assetTitle}
       color={assetColor}
       logo={assetLogo}
-      asset={asset}
       detailsUrl={detailsLink}
-      pathTitle={title}
-      // profitPercent={asset.statistic.profit} // {asset.statistic.profitPercent}
-      // chart={asset.statistic.chart}
+      assetId={asset.id}
+      profit={asset.statistic.profit}
+      chart={asset.statistic.chart}
       renderActions={renderActions}
     >
       <TableCardTable>
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.equity")}>
-            {/*<NumberFormat
+            <NumberFormat
               value={formatValueDifferentDecimalScale(
-                asset.statistic.balance.amount,
+                asset.accountInfo.balance,
                 DECIMAL_SCALE_SMALL_VALUE,
                 DECIMAL_SCALE_BIG_VALUE
               )}
-              suffix={` ${asset.statistic.balance.currency}`}
+              suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
-            />*/}
+            />
           </StatisticItem>
-          {/*{"login" in asset && asset.login && (
-            <StatisticItem label={t("dashboard-page.trading.login")}>
-              {asset.login}
+          {asset.broker && (
+            <StatisticItem label={t("dashboard-page.trading.broker")}>
+              {asset.broker.name}
             </StatisticItem>
-          )}*/}
-          <StatisticItem label={t("dashboard-page.trading.login")}>
-            {"login"}
-          </StatisticItem>
+          )}
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.ddown")}>
@@ -116,26 +114,23 @@ const _DashboardPublicCard: React.FC<{
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                10, // asset.statistic.age,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              displayType="text"
-            />
+            {distanceDate(asset.accountInfo.creationDate)}
           </StatisticItem>
-          {asset.broker && (
-            <StatisticItem label={t("dashboard-page.trading.broker")}>
-              {asset.broker.name}
+          {asset.accountInfo && asset.accountInfo.login && (
+            <StatisticItem label={t("dashboard-page.trading.login")}>
+              {asset.accountInfo.login}
             </StatisticItem>
           )}
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
+        ownAsset
+        canWithdraw={asset.actions.canAddRequestWithdraw}
+        canInvest={asset.actions.canAddRequestInvest}
+        broker={asset.broker && asset.broker.type}
         type={asset.assetType as ASSET}
         id={asset.id}
-        currency={"GVT"}
+        currency={asset.accountInfo.currency}
       />
     </TableCard>
   );

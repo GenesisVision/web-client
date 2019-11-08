@@ -4,18 +4,19 @@ import { CancelablePromise } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
+import { withBlurLoader } from "../../decorators/with-blur-loader";
 import ChartAssetList from "./chart-asset-list";
 import { TChartAsset } from "./multi-chart.types";
+import MultiProfitChart from "./multi-profit-chart";
 import { saveSelectedAssets } from "./service/multi-chart.service";
 
 const _MultiChart: React.FC<Props> = ({
   currency,
   request,
-  assets,
+  data: assets,
   selectedAssets,
   period,
   handleChangePeriod
@@ -30,7 +31,7 @@ const _MultiChart: React.FC<Props> = ({
   useEffect(() => {
     saveSelectedAssets(stateSelectedAssets);
     sendRequest({ assets: stateSelectedAssets, period, currency });
-  }, [stateSelectedAssets, period]);
+  }, [stateSelectedAssets, period, currency]);
   return (
     <div className="multi-chart__block">
       {multiChartData && (
@@ -39,7 +40,7 @@ const _MultiChart: React.FC<Props> = ({
             <ChartPeriod period={period} onChange={handleChangePeriod} />
           </div>
           <div className="multi-chart__profit-chart">
-            <ProgramProfitChart charts={multiChartData} />
+            <MultiProfitChart charts={multiChartData} />
           </div>
         </div>
       )}
@@ -61,9 +62,9 @@ interface Props {
   }) => CancelablePromise<any>;
   period: ChartDefaultPeriod;
   handleChangePeriod: HandlePeriodChangeType;
-  assets: TChartAsset[];
+  data: TChartAsset[];
   selectedAssets: string[];
 }
 
-const MultiChart = React.memo(_MultiChart);
+const MultiChart = withBlurLoader(React.memo(_MultiChart));
 export default MultiChart;

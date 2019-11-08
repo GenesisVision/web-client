@@ -15,7 +15,7 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
       className={classNames("multi-chart__asset", {
         "multi-chart__asset--selected": selected
       })}
-      onClick={() => onToggle(asset)}
+      onClick={() => onToggle(asset.id)}
     >
       <SelectedMark
         selected={selected}
@@ -28,8 +28,8 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
         }}
       >
         <div className="multi-chart__asset-name">
-          <AssetAvatar url={asset.logo} alt={asset.name} />
-          <div className="multi-chart__asset-name">{asset.name}</div>
+          <AssetAvatar url={asset.logo} alt={asset.title} />
+          <div className="multi-chart__asset-name">{asset.title}</div>
         </div>
       </Link>
     </div>
@@ -39,7 +39,7 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
 interface Prop {
   asset: TChartAsset;
   selected: boolean;
-  onToggle: (asset: TChartAsset) => void;
+  onToggle: (asset: string) => void;
 }
 
 const ChartAsset = React.memo(_ChartAsset);

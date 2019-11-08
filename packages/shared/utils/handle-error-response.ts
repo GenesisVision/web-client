@@ -14,7 +14,7 @@ interface IHandleErrorResponseFunc {
 }
 const handleErrorResponse: IHandleErrorResponseFunc = response => {
   if (response) {
-    if (response.body !== null) {
+    if (response.body !== null && response.body.errors) {
       return {
         errorMessage: response.body.errors
           .filter((x: any) => !x.property)

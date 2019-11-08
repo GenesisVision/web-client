@@ -60,6 +60,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
         setIsOpenUnAuthInvestPopup={setIsOpenUnAuthInvestPopup}
       />
       <FundDepositContainer
+        entryFee={fundDescription.entryFeeCurrent}
         condition={isAuthenticated}
         open={isOpenInvestPopup}
         id={fundDescription.id}
@@ -68,7 +69,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       />
       <InvestmentUnauthPopup
         message={message}
-        title={fundDescription.title}
+        // title={fundDescription.title}
         asset={ASSET.FUND}
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}

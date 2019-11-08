@@ -1,14 +1,9 @@
 import "./deposit.scss";
 
-import { ProgramInvestInfo } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
 import {
   CurrencyEnum,
@@ -16,11 +11,15 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
+import { TWalltetsBaseData } from "../../wallet/services/wallet.services";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TAssetInvestCreator, TInvestInfoWithWallets } from "./deposit.types";
+import { TAssetDeposit, TAssetInvestCreatorArgs, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
+  availableToInvest,
+  fees,
+  minDeposit,
   id,
   assetInvest,
   onApply,
@@ -28,11 +27,11 @@ const _DepositPopup: React.FC<Props> = ({
   currency,
   hasEntryFee = false,
   asset,
-  data
+  data: wallets
 }) => {
   const dispatch = useDispatch<ReduxDispatch>();
   const { sendRequest, errorMessage } = useApiRequest({
-    request: values =>
+    request: (values: TAssetInvestCreatorArgs) =>
       dispatch(assetInvest(values))
         .then(onApply)
         .then(onClose)
@@ -49,41 +48,38 @@ const _DepositPopup: React.FC<Props> = ({
   return (
     <>
       <DepositTop
-        title={data.investInfo.title}
-        availableToInvestBase={
-          (data.investInfo as ProgramInvestInfo).availableToInvestBase
-        }
+        availableToInvest={availableToInvest}
         asset={asset}
         currency={currency}
       />
       <DepositForm
-        wallets={data.wallets}
+        minDeposit={minDeposit}
+        availableToInvest={availableToInvest}
+        fees={fees}
+        wallets={wallets}
         hasEntryFee={hasEntryFee}
         asset={asset}
         errorMessage={errorMessage}
         currency={currency}
-        info={data.investInfo}
         onSubmit={handleInvest}
       />
     </>
   );
 };
 
-const DepositPopup = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<TInvestInfoWithWallets>>
->(
-  withBlurLoader,
-  React.memo
-)(_DepositPopup);
+const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
 export default DepositPopup;
 
 interface Props {
+  availableToInvest?: number;
+  fees: TFees;
+  minDeposit: number;
   id: string;
   onClose: (param?: any) => void;
-  assetInvest: ReturnType<TAssetInvestCreator>;
+  assetInvest: TAssetDeposit;
   onApply: () => void;
   currency: CurrencyEnum;
   asset: ASSET;
-  data: TInvestInfoWithWallets;
+  data: TWalltetsBaseData;
   hasEntryFee?: boolean;
 }

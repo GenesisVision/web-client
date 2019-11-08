@@ -20,7 +20,7 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
   title,
   currency,
   asset,
-  availableToInvestBase,
+  availableToInvest,
   message
 }) => {
   const [t] = useTranslation();
@@ -42,7 +42,7 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
         asset={asset}
         currency={currency}
         title={title}
-        availableToInvestBase={availableToInvestBase}
+        availableToInvest={availableToInvest}
       />
       <DialogBottom>
         <p className="unauth-popup__message">{message}</p>

@@ -42,12 +42,13 @@ export const fetchAccounts = (
   await dispatch(actions.updateAccountTimestampAction());
 };
 
-export const fetchBaseWallets = (): RootThunk<Promise<WalletBaseData[]>> => (
-  dispatch,
-  getState
-) => {
+export type TWalltetsBaseData = WalletBaseData[];
+export const fetchBaseWallets = ({
+  currency
+}: {
+  currency: CurrencyEnum;
+}): CancelablePromise<TWalltetsBaseData> => {
   const authorization = authService.getAuthArg();
-  const { currency } = getState().accountSettings;
   return walletApi
     .getWalletAvailable(currency, authorization)
     .then(res => res.wallets);

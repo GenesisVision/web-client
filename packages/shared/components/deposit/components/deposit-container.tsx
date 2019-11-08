@@ -1,22 +1,25 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import FormError from "shared/components/form/form-error/form-error";
-import { fetchBaseWallets } from "shared/components/wallet/services/wallet.services";
+import {
+  fetchBaseWallets,
+  TWalltetsBaseData
+} from "shared/components/wallet/services/wallet.services";
 import { ASSET } from "shared/constants/constants";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { CurrencyEnum, ReduxDispatch } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
+import { gvInvestFeeSelector } from "../../../reducers/platform-reducer";
 import DepositPopup from "./deposit-popup";
 import { DepositInfoLoaderData } from "./deposit.loader";
-import {
-  TAssetInvestCreator,
-  TGetAssetInfoCreator,
-  TInvestInfoWithWallets
-} from "./deposit.types";
+import { TAssetDeposit } from "./deposit.types";
 
 const _DepositContainer: React.FC<Props> = ({
+  availableToInvest,
+  entryFee,
+  minDeposit,
   assetInvest,
   asset,
   id,
@@ -24,31 +27,25 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  // fetchInfo,
   onApply
 }) => {
-  const dispatch = useDispatch<ReduxDispatch>();
+  const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
-  const getDepositInfo = useCallback(
-    () =>
-      Promise.all([
-        // fetchInfo(id, currency || stateCurrency),
-        dispatch(fetchBaseWallets())
-      ]).then(([investInfo, wallets]) => ({ investInfo, wallets })),
-    [id, currency, stateCurrency]
-  );
   const { data, sendRequest: getInvestInfo, errorMessage } = useApiRequest<
-    TInvestInfoWithWallets
+    TWalltetsBaseData
   >({
-    request: getDepositInfo
+    request: fetchBaseWallets
   });
   useEffect(() => {
-    id && open && getInvestInfo();
+    id && open && getInvestInfo({ currency: stateCurrency });
   }, [open]);
-
+  const fees = { gvCommission, entryFee };
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopup
+        availableToInvest={availableToInvest}
+        fees={fees}
+        minDeposit={minDeposit}
         loaderData={DepositInfoLoaderData}
         id={id}
         onClose={onClose}
@@ -65,11 +62,13 @@ const _DepositContainer: React.FC<Props> = ({
 };
 
 interface Props extends IDialogProps {
+  availableToInvest?: number;
+  entryFee?: number;
+  minDeposit: number;
   asset: ASSET;
   id: string;
   onApply: () => void;
-  // fetchInfo: ReturnType<TGetAssetInfoCreator>;
-  assetInvest: ReturnType<TAssetInvestCreator>;
+  assetInvest: TAssetDeposit;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
 }
