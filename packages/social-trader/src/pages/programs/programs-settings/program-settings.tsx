@@ -1,10 +1,6 @@
 import "./program-settings.scss";
 
-import {
-  BrokersProgramInfo,
-  ProgramDetailsFull
-  // ProgramsInfo
-} from "gv-api-web";
+import { BrokersProgramInfo, ProgramDetailsFull } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
@@ -22,7 +18,7 @@ import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
-import SignalingEdit, { IProgramSignalFormValues } from "./signaling-edit";
+import { IProgramSignalFormValues } from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
@@ -39,12 +35,6 @@ const _ProgramSettings: React.FC<Props> = ({
   changeSignaling
 }) => {
   const [t] = useTranslation();
-  const signalSuccessFee = details.signalSettings
-    ? details.signalSettings.signalSuccessFee
-    : undefined;
-  const signalVolumeFee = details.signalSettings
-    ? details.signalSettings.signalVolumeFee
-    : undefined;
   return (
     <>
       <TwoFactorConfirm
@@ -112,18 +102,6 @@ const _ProgramSettings: React.FC<Props> = ({
         currency={details.currency}
         investmentLimit={details.availableInvestmentLimit}
         onSubmit={editProgram}
-      />
-      <SignalingEdit
-        condition={
-          !!details.signalSettings ||
-          (!details.signalSettings &&
-            details.personalDetails.ownerActions
-              .canMakeSignalProviderFromProgram)
-        }
-        isSignalProgram={!!details.signalSettings}
-        onSubmit={changeSignaling}
-        signalSuccessFee={signalSuccessFee}
-        signalVolumeFee={signalVolumeFee}
       />
       <AssetEdit
         title={details.title}
