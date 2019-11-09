@@ -18,11 +18,8 @@ import { TableToggleFavoriteHandlerType } from "shared/components/table/componen
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { useTranslation } from "shared/i18n";
-import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
-import {
-  composeManagerDetailsUrl,
-  composeProgramDetailsUrl
-} from "shared/utils/compose-url";
+import { managerToPathCreator } from "shared/routes/manager.routes";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { distanceDate } from "shared/utils/dates";
 import {
   formatValue,
@@ -106,11 +103,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
       title={program.title}
       subTitle={program.owner.username}
       logo={program.logo}
-      managerUrl={{
-        as: composeManagerDetailsUrl(program.owner.url),
-        pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-        state: `/ ${title}`
-      }}
+      managerUrl={managerToPathCreator(program.owner.url, title)}
       detailsUrl={linkProps}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
