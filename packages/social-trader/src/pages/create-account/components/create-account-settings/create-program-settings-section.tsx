@@ -2,11 +2,11 @@ import useCreateAssetSubmit from "components/create-asset/create-asset-submit.ho
 import { Broker } from "gv-api-web";
 import CreateAccountSettings from "pages/create-account/components/create-account-settings/create-account-settings";
 import * as React from "react";
-import { ASSET } from "shared/constants/constants";
+import { CREATE_ASSET } from "shared/constants/constants";
 
 const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   const handleCreate = useCreateAssetSubmit({
-    asset: "ACCOUNT" as ASSET
+    asset: CREATE_ASSET.ACCOUNT
   });
 
   return (
