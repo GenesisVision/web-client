@@ -2,12 +2,10 @@ import "./details-description.scss";
 
 import * as React from "react";
 import GVButton from "shared/components/gv-button";
-import Link from "shared/components/link/link";
-
-import { TUrl } from "./details.constants";
+import Link, { ToType } from "shared/components/link/link";
 
 const _DetailsManager: React.FC<{
-  to: TUrl;
+  to: ToType;
   username: string;
 }> = ({ to, username }) => {
   return (
