@@ -19,14 +19,11 @@ import TableCard, {
 } from "shared/components/table/components/table-card/table-card";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { FUND_DETAILS_FOLDER_ROUTE } from "shared/routes/funds.routes";
-import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
-import {
-  composeFundsDetailsUrl,
-  composeManagerDetailsUrl
-} from "shared/utils/compose-url";
+import { managerToPathCreator } from "shared/routes/manager.routes";
+import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
+const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title = "" }) => {
   const { t } = useTranslation();
   const handleToggleFavorite = useCallback(
     () =>
@@ -96,11 +93,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title }) => {
         pathname: composeFundsDetailsUrl(fund.url),
         state: `/ ${title}`
       }}
-      managerUrl={{
-        as: composeManagerDetailsUrl(fund.owner.url),
-        pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-        state: `/ ${title}`
-      }}
+      managerUrl={managerToPathCreator(fund.owner.url, title)}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
