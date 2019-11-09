@@ -2,14 +2,13 @@ import "./managers-table.scss";
 
 import { ManagerProfile } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import { MANAGER_DETAILS_FOLDER_ROUTE } from "shared/routes/manager.routes";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import { managerToPathCreator } from "shared/routes/manager.routes";
 import { localizedDate } from "shared/utils/dates";
 
 interface IManagersTableRowProps {
@@ -17,7 +16,6 @@ interface IManagersTableRowProps {
   title: any;
 }
 const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
-  t,
   manager,
   title
 }) => {
@@ -25,13 +23,7 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
         <ProfileAvatar url={manager.avatar} alt={manager.username} />
-        <Link
-          to={{
-            pathname: MANAGER_DETAILS_FOLDER_ROUTE,
-            as: composeManagerDetailsUrl(manager.url),
-            state: `/ ${title}`
-          }}
-        >
+        <Link to={managerToPathCreator(manager.url, title)}>
           <GVButton variant="text" color="secondary">
             {manager.username}
           </GVButton>
@@ -43,5 +35,5 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps & WithTranslation> = ({
   );
 };
 
-const ManagersTableRow = translate()(React.memo(_ManagersTableRow));
+const ManagersTableRow = React.memo(_ManagersTableRow);
 export default ManagersTableRow;
