@@ -46,6 +46,12 @@ export enum ASSET {
   FUND = "Fund"
 }
 
+export enum CREATE_ASSET {
+  ACCOUNT = "Account",
+  PROGRAM = "Program",
+  FUND = "Fund"
+}
+
 export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;
 
 export const DEFAULT_DECIMAL_SCALE = 8;
