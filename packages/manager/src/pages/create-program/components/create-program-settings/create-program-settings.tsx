@@ -153,7 +153,7 @@ class _CreateProgramSettings extends React.PureComponent<
                 >
                   {broker.accountTypes.map(accountType => (
                     <option value={accountType.id} key={accountType.id}>
-                      {accountType.type}
+                      {accountType.name}
                     </option>
                   ))}
                 </GVFormikField>
