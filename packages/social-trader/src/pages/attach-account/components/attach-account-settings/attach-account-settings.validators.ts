@@ -1,9 +1,4 @@
 import { WithTranslation } from "react-i18next";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
-import {
-  assetDescriptionShape,
-  assetTitleShape
-} from "shared/utils/validators/validators";
 import { object, string } from "yup";
 
 import {
@@ -16,18 +11,15 @@ const attachAccountSettingsValidationSchema = ({
   t
 }: ICreateFundSettingsProps & WithTranslation) =>
   object<IAttachAccountSettingsFormValues>().shape({
-    [ATTACH_ACCOUNT_FIELDS.apiSecret]: string().required(
+    [ATTACH_ACCOUNT_FIELDS.secret]: string().required(
       t("attach-account-page.settings.validation.api-secret")
     ),
-    [ATTACH_ACCOUNT_FIELDS.exchange]: string().required(
+    [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string().required(
       t("attach-account-page.settings.validation.api-secret")
     ),
-    [ATTACH_ACCOUNT_FIELDS.apiKey]: string().required(
+    [ATTACH_ACCOUNT_FIELDS.key]: string().required(
       t("attach-account-page.settings.validation.api-secret")
-    ),
-    [ATTACH_ACCOUNT_FIELDS.logo]: inputImageShape(t),
-    [ATTACH_ACCOUNT_FIELDS.title]: assetTitleShape(t),
-    [ATTACH_ACCOUNT_FIELDS.description]: assetDescriptionShape(t)
+    )
   });
 
 export default attachAccountSettingsValidationSchema;
