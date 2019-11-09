@@ -5,13 +5,12 @@ import CreateAssetField, {
   CreateAssetFields
 } from "components/create-asset/create-asset-field/create-asset-field";
 import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
-import DescriptionBlock from "components/create-asset/fields/description-block";
 import { InjectedFormikProps, withFormik } from "formik";
+import { Broker } from "gv-api-web";
 import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
@@ -29,8 +28,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
   handleSubmit,
   isValid,
   t,
-  isSubmitting,
-  values: { description }
+  isSubmitting
 }) => {
   const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
   return (
@@ -41,30 +39,19 @@ const _AttachAccountSettings: React.FC<Props> = ({
       >
         <CreateAssetField>
           <GVFormikField
-            name={ATTACH_ACCOUNT_FIELDS.exchange}
+            name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
             component={GVTextField}
             label={t("attach-account-page.settings.fields.exchange")}
             InputComponent={Select}
             disableIfSingle
           >
-            {exchanges.map((exchange: any) => (
-              <option value={exchange} key={exchange}>
-                {exchange}
+            {exchanges.map(({ name }) => (
+              <option value={name} key={name}>
+                {name}
               </option>
             ))}
           </GVFormikField>
         </CreateAssetField>
-      </SettingsBlock>
-      <SettingsBlock
-        label={t("attach-account-page.settings.main-settings")}
-        blockNumber={"02"}
-      >
-        <DescriptionBlock
-          titleName={ATTACH_ACCOUNT_FIELDS.title}
-          descriptionName={ATTACH_ACCOUNT_FIELDS.description}
-          logoName={ATTACH_ACCOUNT_FIELDS.logo}
-          description={description}
-        />
       </SettingsBlock>
       <SettingsBlock
         label={t("attach-account-page.settings.api")}
@@ -75,7 +62,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             <GVFormikField
               className="attach-account-settings__api-field"
               type="text"
-              name={ATTACH_ACCOUNT_FIELDS.apiKey}
+              name={ATTACH_ACCOUNT_FIELDS.key}
               label={t("attach-account-page.settings.fields.api-key")}
               autoComplete="off"
               component={GVTextField}
@@ -85,7 +72,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             <GVFormikField
               className="attach-account-settings__api-field"
               type="text"
-              name={ATTACH_ACCOUNT_FIELDS.apiSecret}
+              name={ATTACH_ACCOUNT_FIELDS.secret}
               label={t("attach-account-page.settings.fields.api-secret")}
               autoComplete="off"
               component={GVTextField}
@@ -102,21 +89,15 @@ const _AttachAccountSettings: React.FC<Props> = ({
 };
 
 export enum ATTACH_ACCOUNT_FIELDS {
-  exchange = "exchange",
-  apiSecret = "apiSecret",
-  apiKey = "apiKey",
-  logo = "logo",
-  description = "description",
-  title = "title"
+  brokerAccountTypeId = "brokerAccountTypeId",
+  secret = "secret",
+  key = "key"
 }
 
 export interface IAttachAccountSettingsFormValues {
-  [ATTACH_ACCOUNT_FIELDS.exchange]: string;
-  [ATTACH_ACCOUNT_FIELDS.apiSecret]: string;
-  [ATTACH_ACCOUNT_FIELDS.apiKey]: string;
-  [ATTACH_ACCOUNT_FIELDS.logo]: IImageValue;
-  [ATTACH_ACCOUNT_FIELDS.description]: string;
-  [ATTACH_ACCOUNT_FIELDS.title]: string;
+  [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
+  [ATTACH_ACCOUNT_FIELDS.secret]: string;
+  [ATTACH_ACCOUNT_FIELDS.key]: string;
 }
 
 export interface ICreateFundSettingsProps extends WithTranslation, OwnProps {}
@@ -132,14 +113,14 @@ const AttachAccountSettings = compose<
   withBlurLoader,
   translate(),
   withFormik<ICreateFundSettingsProps, IAttachAccountSettingsFormValues>({
+    enableReinitialize: true,
     displayName: "AttachAccountSettingsForm",
-    mapPropsToValues: () => ({
-      [ATTACH_ACCOUNT_FIELDS.logo]: {},
-      [ATTACH_ACCOUNT_FIELDS.description]: "",
-      [ATTACH_ACCOUNT_FIELDS.title]: "",
-      [ATTACH_ACCOUNT_FIELDS.apiSecret]: "",
-      [ATTACH_ACCOUNT_FIELDS.exchange]: "Binance",
-      [ATTACH_ACCOUNT_FIELDS.apiKey]: ""
+    mapPropsToValues: ({ data }) => ({
+      [ATTACH_ACCOUNT_FIELDS.secret]: "",
+      [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: data.length
+        ? data[0].name
+        : "",
+      [ATTACH_ACCOUNT_FIELDS.key]: ""
     }),
     validationSchema: attachAccountSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
@@ -150,7 +131,7 @@ const AttachAccountSettings = compose<
 export default AttachAccountSettings;
 
 interface OwnProps {
-  data: any[];
+  data: Broker[];
   onSubmit: (
     values: IAttachAccountSettingsFormValues,
     setSubmitting: SetSubmittingType
