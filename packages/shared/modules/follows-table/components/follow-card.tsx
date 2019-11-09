@@ -18,7 +18,11 @@ import TableCard, {
 import { TableToggleFavoriteHandlerType } from "shared/components/table/components/table.types";
 import TagProgramContainer from "shared/components/tags/tag-program-container/tag-program-container";
 import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
-import { composeFollowDetailsUrl } from "shared/utils/compose-url";
+import { managerToPathCreator } from "shared/routes/manager.routes";
+import {
+  composeFollowDetailsUrl,
+  composeManagerDetailsUrl
+} from "shared/utils/compose-url";
 import { distanceDate } from "shared/utils/dates";
 import {
   formatValue,
@@ -92,9 +96,15 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
   );
   return (
     <TableCard
-      asset={follow}
+      assetId={follow.id}
+      profit={follow.statistic.profit}
+      chart={follow.statistic.chart}
+      hasAvatar
+      subTitle={follow.owner.username}
+      logo={follow.logo}
+      managerUrl={managerToPathCreator(follow.owner.url, title)}
+      title={follow.title}
       detailsUrl={linkProps}
-      pathTitle={title}
       renderActions={renderActions}
       extraBlock={tags && <TagProgramContainer tags={tags} />}
     >
