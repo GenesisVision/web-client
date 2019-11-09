@@ -1,12 +1,12 @@
-import { push } from "connected-react-router";
 //import { ProgramCreateResult } from "gv-api-web";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Push } from "shared/components/link/link";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
-import { ASSET } from "shared/constants/constants";
+import { CREATE_ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
+import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
 import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import {
@@ -16,7 +16,7 @@ import {
 
 type TUseCreateAssetSubmitProps = {
   condition?: (data: any | null) => boolean;
-  asset: ASSET;
+  asset: CREATE_ASSET;
 };
 
 type TUseCreateAssetSubmitOutput = (
@@ -38,7 +38,7 @@ const useCreateAssetSubmit = ({
       createAsset(data, asset)
         .then(data => {
           if (!condition || !!condition(data)) {
-            dispatch(push(DASHBOARD_ROUTE));
+            Push(TRADING_ROUTE);
             dispatch(
               alertMessageActions.success(
                 `create-${asset.toLowerCase()}-page.notifications.create-success`,
