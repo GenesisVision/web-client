@@ -43,7 +43,6 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const programTags = useSelector(programTagsSelector);
   const data = useSelector(followsDataSelector);
   const { t } = useTranslation();
-
   const [filtering, sorting, page, update] = useRouteFilters(
     DEFAULT_FOLLOW_TABLE_FILTERS
   );
@@ -54,7 +53,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     <FollowsTable
       showSwitchView={showSwitchView}
       title={title}
-      data={data.programs}
+      data={data.items}
       sorting={sorting || SORTING_FILTER_VALUE}
       updateSorting={value => update({ name: SORTING_FILTER_NAME, value })}
       filtering={filtering}

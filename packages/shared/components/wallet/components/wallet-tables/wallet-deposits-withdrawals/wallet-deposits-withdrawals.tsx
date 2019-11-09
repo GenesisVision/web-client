@@ -1,6 +1,6 @@
 import "./wallet-deposits-withdrawals.scss";
 
-import { PlatformInfo } from "gv-api-web";
+import { Currency, PlatformInfo } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -22,7 +22,6 @@ import {
 import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
-import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
@@ -37,7 +36,7 @@ const TRANSACTIONS_FILTERS = {
 const DEFAULT_FILTERS = [
   { ...composeDefaultDateRangeFilter() },
   {
-    name: "type",
+    name: "transactionType",
     type: FILTER_TYPE.GENERAL
   }
 ];
@@ -51,40 +50,40 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   currency
 }) => {
   const getMultiTransactionsExternal: GetItemsFuncType = useCallback(
-    filters => fetchMultiTransactionsExternal(currency),
+    filters => fetchMultiTransactionsExternal(currency, filters),
     [currency]
   );
   if (!platformData) return null; // TODO fix filters
-  // const { externalTransactionType } = platformData.enums.multiWallet;
+  const { walletExternalTransactions } = platformData.filters;
   return (
     <div className="wallet-deposits-withdrawals">
       <TableModule
         loaderData={walletDepositsWithdrawalsLoaderData}
         timestamp={timestamp.getMilliseconds()}
-        // defaultFilters={DEFAULT_FILTERS}
+        defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
-        // filtering={{
-        //   ...TRANSACTIONS_FILTERS,
-        //   type: externalTransactionType[0]
-        // }}
+        filtering={{
+          ...TRANSACTIONS_FILTERS,
+          transactionType: walletExternalTransactions[0].key
+        }}
         getItems={getMultiTransactionsExternal}
-        // renderFilters={(updateFilter, filtering) => (
-        //   <>
-        //     <SelectFilter
-        //       name={"type"}
-        //       label="Type"
-        //       value={filtering["type"] as SelectFilterType} //TODO fix filtering types
-        //       values={reduceFilters(externalTransactionType)}
-        //       onChange={updateFilter}
-        //     />
-        //     <DateRangeFilter
-        //       name={DATE_RANGE_FILTER_NAME}
-        //       value={filtering["dateRange"]}
-        //       onChange={updateFilter}
-        //       startLabel={t("filters.date-range.account-creation")}
-        //     />
-        //   </>
-        // )}
+        renderFilters={(updateFilter, filtering) => (
+          <>
+            <SelectFilter
+              name={"transactionType"}
+              label="Type"
+              value={filtering["transactionType"] as SelectFilterType} //TODO fix filtering types
+              values={reduceFilters(walletExternalTransactions)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering["dateRange"]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.account-creation")}
+            />
+          </>
+        )}
         columns={columns}
         renderHeader={column => (
           <span
@@ -109,7 +108,7 @@ interface Props extends OwnProps, StateProps, WithTranslation {}
 interface OwnProps {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  currency?: CURRENCIES;
+  currency?: Currency;
 }
 
 interface StateProps extends WalletLastUpdateState {

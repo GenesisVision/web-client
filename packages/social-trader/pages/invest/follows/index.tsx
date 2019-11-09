@@ -5,21 +5,36 @@ import { fetchFollowsAction } from "shared/modules/follows-table/actions/follows
 import { getFiltersFromContext } from "shared/modules/programs-table/services/programs-table.service";
 import authService from "shared/services/auth-service";
 import { NextPageWithRedux } from "shared/utils/types";
+import { ItemsViewModelCopyTradingDetailsList } from "gv-api-web";
 
-const Page: NextPageWithRedux<{}> = () => {
+const Page: NextPageWithRedux<{
+  follows: ItemsViewModelCopyTradingDetailsList;
+}> = ({ follows }) => {
+  console.info(follows);
   return <FollowsPage />;
 };
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  await ctx.reduxStore.dispatch(
-    // @ts-ignore TODO why there is error
-    fetchFollowsAction({
-      ...filtering,
-      authorization: authService.getAuthArg(ctx)
-    })
-  );
-  return {};
+  try {
+    const response = await ctx.reduxStore.dispatch(
+      // @ts-ignore TODO why there is error
+      fetchFollowsAction({
+        ...filtering,
+        authorization: authService.getAuthArg(ctx)
+      })
+    );
+    return {
+      follows: response.value
+    };
+  } catch (e) {
+    return {
+      follows: {
+        items: [],
+        total: 0
+      }
+    };
+  }
 };
 
 export default withDefaultLayout(Page);

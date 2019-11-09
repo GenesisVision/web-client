@@ -10,7 +10,7 @@ import { ManagerRootState } from "manager-web-portal/src/reducers";
 import { NextPage, NextPageContext } from "next";
 import { AppContextType } from "next/dist/next-server/lib/utils";
 import React from "react";
-import { Action, Dispatch, Store } from "redux";
+import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { RootState } from "shared/reducers/root-reducer";
@@ -99,8 +99,13 @@ export type InitializeStoreType = (initialState?: {}) => Store<
   dispatch: any;
 };
 
+export interface RootStore<S = any, A extends Action = AnyAction>
+  extends Store<S, A> {
+  dispatch: MiddlewareDispatch;
+}
+
 export interface NextPageWithReduxContext extends NextPageContext {
-  reduxStore: Store<AuthRootState, RootThunkAction>; //TODO error
+  reduxStore: RootStore<AuthRootState, RootThunkAction>; //TODO error
 }
 
 export interface AppWithReduxContext extends AppContextType {

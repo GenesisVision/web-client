@@ -1,15 +1,11 @@
 import {
   CancelablePromise,
   Currency,
-  WalletBaseData,
-  WalletMultiAvailable
+  ItemsViewModelTransactionViewModel,
+  WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import {
-  mapToTableItems,
-  TableItems
-} from "shared/components/table/helpers/mapper";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { CurrencyEnum, RootThunk } from "shared/utils/types";
@@ -66,31 +62,49 @@ export const offPayFeesWithGvt = () =>
 export const onPayFeesWithGvt = () =>
   walletApi.switchPayFeeInGvtOn(authService.getAuthArg());
 
+export type FetchTransactionsInternalFilterType = {
+  transactionType?:
+    | "All"
+    | "Investment"
+    | "Withdrawal"
+    | "Deposit"
+    | "Conversion"
+    | "Commission"
+    | "Program"
+    | "Fund"
+    | "Follow"
+    | "TradingAccounts"
+    | "AgentReward"
+    | "Platform";
+  dateFrom?: Date;
+  dateTo?: Date;
+  skip?: number;
+  take?: number;
+};
+
 export const fetchMultiTransactions = (
   currency?: Currency,
-  filters?: FilteringType
-) => {
+  filters?: FetchTransactionsInternalFilterType
+): CancelablePromise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
-  const filtering = {
+
+  return walletApi.getTransactionsInternal(authorization, {
     ...filters
-  };
-  return walletApi
-    .getTransactions(authorization, filtering)
-    .then(mapToTableItems("transactions"));
+  });
+};
+
+export type FetchTransactionsExternalFilterType = {
+  transactionType?: "All" | "Withdrawal" | "Deposit" | "Platform";
+  dateFrom?: Date;
+  dateTo?: Date;
+  skip?: number;
+  take?: number;
 };
 
 export const fetchMultiTransactionsExternal = (
   currency?: string,
-  filters?: FilteringType
-): CancelablePromise<TableItems<WalletMultiAvailable>> => {
+  filters?: FetchTransactionsExternalFilterType
+): CancelablePromise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
-  const filtering = {
-    ...filters
-  };
-  return walletApi
-    .getTransactions(authorization, {
-      ...filtering,
-      transactionFilterType: "Externals"
-    })
-    .then(mapToTableItems<WalletMultiAvailable>("transactions"));
+  return walletApi.getTransactionsExternal(authorization, filters);
 };

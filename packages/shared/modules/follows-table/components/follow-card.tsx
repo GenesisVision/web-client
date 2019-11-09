@@ -1,4 +1,4 @@
-import { ProgramDetailsList } from "gv-api-web";
+import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props {
-  follow: ProgramDetailsList;
+  follow: CopyTradingDetailsList;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
@@ -35,6 +35,7 @@ const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
 const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
+  const { tags, tradesCount, subscribersCount, url } = follow;
   const handleToggleFavorite = useCallback(
     () =>
       toggleFavorite(
@@ -45,10 +46,9 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
   );
   const { t } = useTranslation();
   const linkProps = {
-    pathname: composeFollowDetailsUrl(follow.url),
+    pathname: composeFollowDetailsUrl(url),
     state: `/ ${title}`
   };
-  const requestCurrency = follow.balance.currency;
   const renderActions = ({
     clearAnchor,
     anchor
@@ -92,42 +92,44 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
   );
   return (
     <TableCard
-      logo={follow.logo}
+      asset={follow}
       detailsUrl={linkProps}
-      assetId={follow.id}
-      profit={follow.statistic.profit}
-      chart={follow.statistic.chart}
+      pathTitle={title}
       renderActions={renderActions}
-      extraBlock={follow.tags && <TagProgramContainer tags={follow.tags} />}
+      extraBlock={tags && <TagProgramContainer tags={tags} />}
     >
       <TableCardTable>
         <TableCardTableColumn>
           <StatisticItem label={t("follows-page.header.subscribers")}>
-            {t("follows-page.header.subscribers")}
+            <NumberFormat
+              value={subscribersCount}
+              displayType="text"
+              decimalScale={0}
+            />
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("follows-page.header.trades")}>
-            {/*<NumberFormat*/}
-            {/*  value={follow.statistic.tradesCount}*/}
-            {/*  displayType="text"*/}
-            {/*  decimalScale={0}*/}
-            {/*/>*/}
+            <NumberFormat
+              value={tradesCount}
+              displayType="text"
+              decimalScale={0}
+            />
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem
             label={t("programs-page.programs-header.available-to-invest")}
           >
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                follow.availableToInvest,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              displayType="text"
-              suffix={` ${requestCurrency}`}
-            />
+            {/*<NumberFormat*/}
+            {/*  value={formatValueDifferentDecimalScale(*/}
+            {/*    follow.availableToInvest,*/}
+            {/*    DECIMAL_SCALE_SMALL_VALUE,*/}
+            {/*    DECIMAL_SCALE_BIG_VALUE*/}
+            {/*  )}*/}
+            {/*  displayType="text"*/}
+            {/*  suffix={` ${requestCurrency}`}*/}
+            {/*/>*/}
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>

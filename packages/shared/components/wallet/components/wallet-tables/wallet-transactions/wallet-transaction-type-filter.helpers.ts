@@ -9,4 +9,4 @@ export const composeDefaultTransactionTypeFilter = () => ({
 });
 
 export const reduceFilters = (filters: any[]): SelectFilterValue[] =>
-  filters.map(filter => ({ value: filter, label: filter }));
+  filters.map(filter => ({ value: filter.key, label: filter.title }));
