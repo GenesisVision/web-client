@@ -4,7 +4,7 @@ import GVColors from "shared/components/gv-styles/gv-colors";
 
 import { composeTicks, dateTickFormatter } from "./chart-components.helpers";
 
-const chartXAxis = (start: Date, end: Date): JSX.Element => (
+const chartXAxis = (start: Date | number, end: Date | number): JSX.Element => (
   <XAxis
     dataKey="date"
     domain={["dataMin", "dataMax"]}
