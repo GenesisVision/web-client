@@ -44,6 +44,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
     pathname: makeSignalLinkMethod(asset.id),
     state: `/ ${title}`
   };
+  const makeProgramExternalLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.EXTERNAL_ACCOUNT,
+    assetTo: CONVERT_ASSET.PROGRAM
+  });
+  const makeProgramExternalLink = {
+    pathname: makeProgramExternalLinkMethod(asset.id),
+    state: `/ ${title}`
+  };
   const renderActions = ({
     anchor,
     clearAnchor
@@ -64,6 +72,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
             {t("dashboard-page.trading.actions.terminal")}
           </GVButton>
         </Link>
+        {asset.actions
+          .canMakeSignalProviderFromPrivateExternalTradingAccount && (
+          <Link to={makeProgramExternalLink}>
+            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+              {t("dashboard-page.trading.actions.make-program")}
+            </GVButton>
+          </Link>
+        )}
         <MakeProgramButton
           canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
           id={asset.id}
