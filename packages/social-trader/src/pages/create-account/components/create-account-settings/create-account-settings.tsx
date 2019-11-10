@@ -3,6 +3,11 @@ import "./create-account-settings.scss";
 
 import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
+import {
+  getBrokerId,
+  getCurrency,
+  getLeverage
+} from "components/assets/asset.helpers";
 import BrokerAccount from "components/assets/fields/broker-account";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import Currency from "components/assets/fields/currency";
@@ -10,12 +15,6 @@ import DepositDetailsBlock from "components/assets/fields/deposit-details-block"
 import Leverage from "components/assets/fields/leverage";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
-import {
-  CREATE_PROGRAM_FIELDS,
-  getBrokerId,
-  getCurrency,
-  getLeverage
-} from "pages/create-program/components/create-program-settings/create-program-settings.helpers";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -96,8 +95,8 @@ export enum CREATE_ACCOUNT_FIELDS {
 }
 
 export interface ICreateAccountSettingsFormValues {
-  [CREATE_PROGRAM_FIELDS.available]: number;
-  [CREATE_PROGRAM_FIELDS.rate]: number;
+  [CREATE_ACCOUNT_FIELDS.available]: number;
+  [CREATE_ACCOUNT_FIELDS.rate]: number;
   [CREATE_ACCOUNT_FIELDS.leverage]: number;
   [CREATE_ACCOUNT_FIELDS.currency]: string;
   [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
@@ -119,8 +118,8 @@ const CreateAccountSettings = compose<React.ComponentType<OwnProps>>(
   withFormik<ICreateAccountSettingsProps, ICreateAccountSettingsFormValues>({
     displayName: "CreateAccountSettingsForm",
     mapPropsToValues: ({ broker }) => ({
-      [CREATE_PROGRAM_FIELDS.available]: 0,
-      [CREATE_PROGRAM_FIELDS.rate]: 1,
+      [CREATE_ACCOUNT_FIELDS.available]: 0,
+      [CREATE_ACCOUNT_FIELDS.rate]: 1,
       [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: getBrokerId(
         broker.accountTypes
       ),
