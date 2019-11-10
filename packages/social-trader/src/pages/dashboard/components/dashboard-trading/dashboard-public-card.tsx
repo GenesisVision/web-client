@@ -1,5 +1,7 @@
 import { DashboardTradingAsset } from "gv-api-web";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
+import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
+import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import React, { useContext } from "react";
@@ -37,6 +39,14 @@ const _DashboardPublicCard: React.FC<{
 }> = ({ asset }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
+  const makeProgramLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.ACCOUNT,
+    assetTo: CONVERT_ASSET.PROGRAM
+  });
+  const makeProgramLink = {
+    pathname: makeProgramLinkMethod(asset.id),
+    state: `/ ${title}`
+  };
   const detailsLink = {
     pathname: composeProgramDetailsUrl(
       asset.publicInfo && asset.publicInfo.url

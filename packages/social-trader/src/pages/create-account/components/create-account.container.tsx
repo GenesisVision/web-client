@@ -1,6 +1,6 @@
-import { CreateAssetBack } from "components/create-asset/create-asset-back";
+import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
+import { CreateAssetBack } from "components/assets/create-asset/create-asset-back";
 import { Broker } from "gv-api-web";
-import CreateProgramBrokerContainer from "pages/create-program/components/create-program-broker/create-program-broker.container";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import GVTabs from "shared/components/gv-tabs";
@@ -8,7 +8,7 @@ import GVTab from "shared/components/gv-tabs/gv-tab";
 import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 
-import { CreateAccountSettingsSection } from "./create-account-settings/create-program-settings-section";
+import CreateAccountSettingsSection from "./create-account-settings/create-account-settings-section";
 
 const _CreateAccountContainer: React.FC<Props> = ({ brokers }) => {
   const [t] = useTranslation();
@@ -49,7 +49,7 @@ const _CreateAccountContainer: React.FC<Props> = ({ brokers }) => {
       </div>
       <div className="create-asset__content">
         {tab === TAB.BROKER && (
-          <CreateProgramBrokerContainer
+          <BrokerSelectContainer
             brokers={brokers}
             setSelectedBroker={setSelectedBroker}
             navigateToSettings={navigateToSettings}

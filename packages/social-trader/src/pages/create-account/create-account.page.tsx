@@ -1,4 +1,4 @@
-import "components/create-asset/create-asset.scss";
+import "components/assets/create-asset/create-asset.scss";
 
 import { Broker } from "gv-api-web";
 import * as React from "react";
