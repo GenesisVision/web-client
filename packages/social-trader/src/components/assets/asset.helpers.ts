@@ -1,4 +1,5 @@
-import { BrokerAccountType } from "gv-api-web";
+import faker from "faker";
+import { Broker, BrokerAccountType } from "gv-api-web";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { BROKER_CARD_EXTRA_STATE } from "./asset.constants";
@@ -45,3 +46,38 @@ export const getBrokerState = (
   }
   return BROKER_CARD_EXTRA_STATE.NONE;
 };
+
+export const getBrokerLoaderData: () => any = () => ({
+  name: faker.lorem.word(),
+  description: faker.lorem.words(11),
+  logo: "",
+  terms: faker.lorem.word(),
+  assets: faker.lorem.word(),
+  fee: faker.random.number(),
+  leverageMin: faker.random.number(),
+  leverageMax: faker.random.number(),
+  accountTypes: [
+    {
+      id: faker.lorem.word(),
+      name: faker.lorem.word(),
+      description: faker.lorem.words(11),
+      type: "MetaTrader4",
+      leverages: [10],
+      currencies: ["GVT"],
+      minimumDepositsAmount: {},
+      isForex: false,
+      isSignalsAvailable: false
+    }
+  ],
+  isForex: false,
+  isSignalsAvailable: false,
+  tags: [
+    {
+      name: "ANYANY",
+      color: "#FFF"
+    }
+  ]
+});
+export const BrokerSelectLoaderData: Broker[] = new Array(7)
+  .fill("")
+  .map(getBrokerLoaderData);
