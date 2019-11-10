@@ -36,6 +36,6 @@ export default Hint;
 interface Props {
   content: React.ReactNode;
   tooltipContent: React.ReactNode;
-  className: string;
+  className?: string;
   vertical: VERTICAL_POPOVER_POS;
 }
