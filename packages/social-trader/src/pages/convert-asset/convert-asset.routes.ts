@@ -39,7 +39,7 @@ export const makeProgramLinkCreator = ({
   assetTo,
   assetFrom
 }: TAssetFromTo) => {
-  switch (assetTo + assetFrom) {
+  switch (assetFrom + assetTo) {
     case CONVERT_ASSET.SIGNAL + CONVERT_ASSET.PROGRAM:
       return composeMakeProgramFromSignalUrl;
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.PROGRAM:
