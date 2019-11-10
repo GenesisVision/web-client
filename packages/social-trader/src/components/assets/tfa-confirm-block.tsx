@@ -1,20 +1,18 @@
-import { push } from "connected-react-router";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import * as React from "react";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { Push } from "shared/components/link/link";
 import useIsOpen from "shared/hooks/is-open.hook";
-import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
+import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
 
 const _TFAConfirmBlock: React.FC<Props> = ({ id }) => {
-  const dispatch = useDispatch();
   const [
     isOpenConfirmTFA,
     setIsOpenConfirmTFA,
     setIsCloseConfirmTFA
   ] = useIsOpen(true);
   const closeHandle = useCallback(() => {
-    dispatch(push(DASHBOARD_ROUTE));
+    Push(TRADING_ROUTE);
     setIsCloseConfirmTFA();
   }, []);
   return (
