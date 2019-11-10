@@ -1,6 +1,6 @@
+import TradesDelay from "components/assets/fields/trades-delay";
 import { FormikProps, withFormik } from "formik";
 import { TradesDelay as TradesDelayType } from "gv-api-web";
-import TradesDelay from "pages/create-program/components/create-program-settings/fields/trades-delay";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";

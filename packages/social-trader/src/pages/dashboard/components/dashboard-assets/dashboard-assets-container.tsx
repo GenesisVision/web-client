@@ -1,5 +1,4 @@
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
-import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
@@ -39,10 +38,7 @@ const _DashboardAssetsContainer: React.FC<Props> = ({
       counts={counts}
       getAssetsCounts={service.getAssetsCounts}
       createProgramButtonToolbar={
-        <CreateButtonToolbar
-          text={t("buttons.create-program")}
-          route={CREATE_PROGRAM_PAGE_ROUTE}
-        />
+        <CreateButtonToolbar text={t("buttons.create-program")} route={""} />
       }
       createFundButtonToolbar={
         <CreateButtonToolbar
@@ -101,7 +97,7 @@ const _EmptyPrograms: React.FC = () => {
         {t(`${role ? `${role}.` : ""}dashboard-page.create-program-text`)}
       </div>
       <div className="create-asset__button">
-        <Link to={CREATE_PROGRAM_PAGE_ROUTE} className="dashboard__body-button">
+        <Link to={""} className="dashboard__body-button">
           <GVButton color="primary">{t("buttons.create-program")}</GVButton>
         </Link>
       </div>
