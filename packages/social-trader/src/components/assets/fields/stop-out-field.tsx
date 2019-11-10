@@ -1,3 +1,5 @@
+import "./fields.scss";
+
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -5,12 +7,12 @@ import GVTextField from "shared/components/gv-text-field";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
-import CreateAssetField from "../create-asset-field/create-asset-field";
+import AssetField from "../asset-fields/asset-field";
 
 const _StopOutField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
-    <CreateAssetField>
+    <AssetField>
       <GVFormikField
         name={name}
         label={t("create-program-page.settings.fields.stop-out-level")}
@@ -22,13 +24,13 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
       />
       <Hint
         content={t("create-program-page.settings.hints.stop-out-level")}
-        className="create-program-settings__field-caption"
+        className="create-asset-settings__hint"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         tooltipContent={t(
           "create-program-page.settings.hints.stop-out-level-description"
         )}
       />
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

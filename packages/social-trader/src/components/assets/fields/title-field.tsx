@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 
-import CreateAssetField from "../create-asset-field/create-asset-field";
+import AssetField from "../asset-fields/asset-field";
 
 const _TitleField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
-    <CreateAssetField>
+    <AssetField>
       <GVFormikField
         type="text"
         name={name}
@@ -21,7 +21,7 @@ const _TitleField: React.FC<Props> = ({ name }) => {
       <div className="create-asset-settings__field-caption">
         {t("create-program-page.settings.fields.name-requirements")}
       </div>
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

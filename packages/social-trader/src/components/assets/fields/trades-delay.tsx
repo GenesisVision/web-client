@@ -1,4 +1,5 @@
-import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
+import "./fields.scss";
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -8,10 +9,12 @@ import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { DELAYS } from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
 import Select from "shared/components/select/select";
 
+import AssetField from "../asset-fields/asset-field";
+
 const _TradesDelay: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
   return (
-    <CreateAssetField>
+    <AssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -26,11 +29,11 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
       </GVFormikField>
       <Hint
         content={t("create-program-page.settings.hints.trades-delay")}
-        className="create-program-settings__field-caption"
+        className="create-asset-settings__hint"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         tooltipContent={t("program-settings.trades-update.text")}
       />
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

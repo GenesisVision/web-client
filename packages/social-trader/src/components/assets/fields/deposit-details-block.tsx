@@ -1,5 +1,3 @@
-import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
-import useCreateAssetSection from "components/create-asset/create-asset-section.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { onSelectChange } from "shared/components/select/select.test-helpers";
@@ -7,6 +5,8 @@ import SettingsBlock from "shared/components/settings-block/settings-block";
 import WalletSelect from "shared/components/wallet-select/wallet-select";
 import { CurrencyEnum } from "shared/utils/types";
 
+import AssetField from "../asset-fields/asset-field";
+import useAssetSection from "../asset-section.hook";
 import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
 
@@ -22,7 +22,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   setFieldValue
 }) => {
   const [t] = useTranslation();
-  const { rate, handleWalletChange, wallet, wallets } = useCreateAssetSection({
+  const { rate, handleWalletChange, wallet, wallets } = useAssetSection({
     assetCurrency
   });
   useEffect(() => {
@@ -41,7 +41,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >
-      <CreateAssetField className="deposit-details">
+      <AssetField className="deposit-details">
         <div className="deposit-amount-field">
           <WalletSelect
             name={walletFieldName}
@@ -65,7 +65,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           walletAvailable={wallet.available}
           walletCurrency={wallet.currency}
         />
-      </CreateAssetField>
+      </AssetField>
     </SettingsBlock>
   );
 };

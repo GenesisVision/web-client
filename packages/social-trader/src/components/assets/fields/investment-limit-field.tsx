@@ -1,3 +1,4 @@
+import AssetField from "components/assets/asset-fields/asset-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -6,8 +7,6 @@ import GVFormikField from "shared/components/gv-formik-field";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { validateFraction } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
-
-import CreateAssetField from "../create-asset-field/create-asset-field";
 
 const isAmountAllow = (currency: CurrencyEnum) => ({
   value
@@ -22,23 +21,21 @@ const _InvestmentLimitField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <CreateAssetField wide>
+      <AssetField wide>
         <GVFormikField
           type="checkbox"
           color="primary"
           name={checkboxName}
           label={
             <span>
-              {t(
-                "create-program-page.settings.fields.investment-limit"
-              )}
+              {t("create-program-page.settings.fields.investment-limit")}
             </span>
           }
           component={GVCheckbox}
         />
-      </CreateAssetField>
+      </AssetField>
       {hasInvestmentLimit && (
-        <CreateAssetField>
+        <AssetField>
           <InputAmountField
             autoFocus={false}
             isAllow={isAmountAllow(currency)}
@@ -48,7 +45,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
             )}
             currency={currency}
           />
-        </CreateAssetField>
+        </AssetField>
       )}
     </>
   );

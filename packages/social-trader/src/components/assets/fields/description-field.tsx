@@ -6,13 +6,13 @@ import GVFormikField from "shared/components/gv-formik-field";
 import GVProgramPeriod from "shared/components/gv-program-period";
 import GVTextField from "shared/components/gv-text-field";
 
-import CreateAssetField from "../create-asset-field/create-asset-field";
+import AssetField from "../asset-fields/asset-field";
 
 const _DescriptionField: React.FC<Props> = ({ name, description }) => {
   const { t } = useTranslation();
   const descriptionTrimmedLength = description.trim().length;
   return (
-    <CreateAssetField wide>
+    <AssetField wide>
       <GVFormikField
         type="textarea"
         name={name}
@@ -35,7 +35,7 @@ const _DescriptionField: React.FC<Props> = ({ name, description }) => {
           </span>
         )}
       </div>
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

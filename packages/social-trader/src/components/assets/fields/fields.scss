@@ -3,6 +3,16 @@
 @import "~shared/styles/sizes";
 
 .create-asset-settings {
+  &__hint {
+    font-size: $font-size-small;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+
+    &.hint {
+      cursor: pointer;
+    }
+  }
   &__row {
     display: flex;
     flex-wrap: wrap;

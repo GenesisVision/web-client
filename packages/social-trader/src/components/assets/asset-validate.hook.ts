@@ -4,19 +4,19 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
-type TUseCreateAssetValidateProps = {
+type TUseAssetValidateProps = {
   handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
   isValid: boolean;
 };
 
-type TUseCreateAssetValidateOutput = (
+type TUseAssetValidateOutput = (
   e?: React.FormEvent<HTMLFormElement> | undefined
 ) => void;
 
-const useCreateAssetValidate = ({
+const useAssetValidate = ({
   handleSubmit,
   isValid
-}: TUseCreateAssetValidateProps): TUseCreateAssetValidateOutput => {
+}: TUseAssetValidateProps): TUseAssetValidateOutput => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   return useCallback(
@@ -34,4 +34,4 @@ const useCreateAssetValidate = ({
     [handleSubmit, isValid]
   );
 };
-export default useCreateAssetValidate;
+export default useAssetValidate;

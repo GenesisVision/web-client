@@ -1,4 +1,4 @@
-import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
+import AssetField from "components/assets/asset-fields/asset-field";
 import { BrokerAccountType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,7 @@ import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import { onSelectChange } from "shared/components/select/select.test-helpers";
 
-import { getCurrency, getLeverage } from "../create-program-settings.helpers";
+import { getCurrency, getLeverage } from "../asset.helpers";
 
 const _BrokerAccount: React.FC<Props> = ({
   name,
@@ -29,7 +29,7 @@ const _BrokerAccount: React.FC<Props> = ({
   );
   const [t] = useTranslation();
   return (
-    <CreateAssetField>
+    <AssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -44,7 +44,7 @@ const _BrokerAccount: React.FC<Props> = ({
           </option>
         ))}
       </GVFormikField>
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

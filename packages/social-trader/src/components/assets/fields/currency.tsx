@@ -1,4 +1,3 @@
-import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -6,10 +5,12 @@ import GVTextField from "shared/components/gv-text-field";
 import Select from "shared/components/select/select";
 import { CurrencyEnum } from "shared/utils/types";
 
+import AssetField from "../asset-fields/asset-field";
+
 const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
   const [t] = useTranslation();
   return (
-    <CreateAssetField>
+    <AssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -24,7 +25,7 @@ const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
           </option>
         ))}
       </GVFormikField>
-    </CreateAssetField>
+    </AssetField>
   );
 };
 

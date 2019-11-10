@@ -6,20 +6,20 @@ import { fetchWallets } from "shared/components/wallet/services/wallet.services"
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
-type TUseCreateAssetSectionProps = {
+type TUseAssetSectionProps = {
   assetCurrency: CurrencyEnum;
 };
 
-type TUseCreateAssetSectionOutput = {
+type TUseAssetSectionOutput = {
   rate: number;
   handleWalletChange: (walletId: string) => void;
   wallet: WalletData;
   wallets: WalletData[];
 };
 
-const useCreateAssetSection = ({
+const useAssetSection = ({
   assetCurrency
-}: TUseCreateAssetSectionProps): TUseCreateAssetSectionOutput => {
+}: TUseAssetSectionProps): TUseAssetSectionOutput => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const [wallet, setWallet] = useState<WalletData>(
@@ -47,4 +47,4 @@ const useCreateAssetSection = ({
   );
   return { rate, handleWalletChange, wallet, wallets };
 };
-export default useCreateAssetSection;
+export default useAssetSection;

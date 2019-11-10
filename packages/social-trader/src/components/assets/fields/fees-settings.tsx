@@ -1,5 +1,6 @@
 import "./fields.scss";
 
+import AssetRow from "components/assets/asset-fields/asset-row";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -8,7 +9,7 @@ import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
-import CreateAssetField from "../create-asset-field/create-asset-field";
+import AssetField from "../asset-fields/asset-field";
 
 const _FeesSettings: React.FC<Props> = ({
   title,
@@ -23,8 +24,8 @@ const _FeesSettings: React.FC<Props> = ({
   return (
     <>
       {title && <div className="create-asset-settings__row-title">{title}</div>}
-      <div className="create-asset-settings__row">
-        <CreateAssetField>
+      <AssetRow>
+        <AssetField>
           <GVFormikField
             name={entryFeeName}
             label={t("create-program-page.settings.fields.entry-fee")}
@@ -36,12 +37,12 @@ const _FeesSettings: React.FC<Props> = ({
           />
           <Hint
             content={t("create-program-page.settings.hints.entry-fee")}
-            className="create-asset-settings__field-caption"
+            className="create-asset-settings__hint"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={entryFeeDescription}
           />
-        </CreateAssetField>
-        <CreateAssetField>
+        </AssetField>
+        <AssetField>
           <GVFormikField
             name={secondFeeName}
             label={secondFeeLabel}
@@ -53,12 +54,12 @@ const _FeesSettings: React.FC<Props> = ({
           />
           <Hint
             content={secondFeeUnderText}
-            className="create-asset-settings__field-caption"
+            className="create-asset-settings__hint"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={secondFeeDescription}
           />
-        </CreateAssetField>
-      </div>
+        </AssetField>
+      </AssetRow>
     </>
   );
 };
