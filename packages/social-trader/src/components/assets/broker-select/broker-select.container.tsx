@@ -1,5 +1,6 @@
-import "./create-program-broker.scss";
+import "./broker-select.scss";
 
+import { BrokerSelectLoaderData } from "components/assets/asset.helpers";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
@@ -9,10 +10,9 @@ import {
   kycConfirmedSelector
 } from "shared/reducers/header-reducer";
 
-import { CreateProgramBrokerLoaderData } from "../../services/create-program.service";
-import CreateProgramBroker from "./create-program-broker";
+import BrokerSelect from "./broker-select";
 
-const _CreateProgramBrokerContainer: React.FC<Props> = ({
+const _BrokerSelectBrokerContainer: React.FC<Props> = ({
   brokers,
   setSelectedBroker,
   selectedBroker,
@@ -28,8 +28,8 @@ const _CreateProgramBrokerContainer: React.FC<Props> = ({
     [brokers]
   );
   return (
-    <CreateProgramBroker
-      loaderData={CreateProgramBrokerLoaderData}
+    <BrokerSelect
+      loaderData={BrokerSelectLoaderData}
       data={brokers!}
       selectedBroker={selectedBroker}
       selectBrokerHandle={selectBrokerHandle}
@@ -47,5 +47,5 @@ interface Props {
   selectedBroker: Broker;
 }
 
-const CreateProgramBrokerContainer = React.memo(_CreateProgramBrokerContainer);
-export default CreateProgramBrokerContainer;
+const BrokerSelectContainer = React.memo(_BrokerSelectBrokerContainer);
+export default BrokerSelectContainer;
