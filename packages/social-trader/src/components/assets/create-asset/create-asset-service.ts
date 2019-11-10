@@ -5,15 +5,12 @@ import {
 } from "gv-api-web";
 import { ICreateAccountSettingsFormValues } from "pages/create-account/components/create-account-settings/create-account-settings";
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
-import { ICreateProgramSettingsFormValues } from "pages/create-program/components/create-program-settings/create-program-settings";
 import { CREATE_ASSET } from "shared/constants/constants";
 import assetsApi from "shared/services/api-client/assets-api";
-//import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 export type ICreateAssetSettingsFormValues =
-  | ICreateProgramSettingsFormValues
   | ICreateFundSettingsFormValues
   | ICreateAccountSettingsFormValues;
 
