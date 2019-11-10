@@ -10,4 +10,7 @@
     display: flex;
     justify-content: space-between;
   }
+  &__disable-button {
+    color: $label-color;
+  }
 }
