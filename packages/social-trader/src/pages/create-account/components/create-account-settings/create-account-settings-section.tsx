@@ -18,10 +18,9 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   );
 };
 
-export const CreateAccountSettingsSection = React.memo(
-  _CreateAccountSettingsSection
-);
-
 interface Props {
   broker: Broker;
 }
+
+const CreateAccountSettingsSection = React.memo(_CreateAccountSettingsSection);
+export default CreateAccountSettingsSection;
