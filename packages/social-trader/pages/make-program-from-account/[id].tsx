@@ -24,8 +24,8 @@ const Page: NextPageWithRedux<Props, {}> = ({ id, broker }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  let broker;
-  await Promise.all([
+  let broker = "MetaTrader4";
+  /*await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx)),
     ctx.reduxStore.dispatch(
       async dispatch => await dispatch(platformActions.fetchPlatformSettings())
@@ -34,10 +34,10 @@ Page.getInitialProps = async ctx => {
     const description = ((descriptionResult as unknown) as {
       value: ProgramDetailsFull;
     }).value;
-    /*if (!description.personalDetails || !description.personalDetails.isOwnAsset)
-      throw new Error();*/
+    /!*if (!description.personalDetails || !description.personalDetails.isOwnAsset)
+      throw new Error();*!/
     broker = description.brokerDetails.type;
-  });
+  });*/
   return { id, broker };
 };
 
