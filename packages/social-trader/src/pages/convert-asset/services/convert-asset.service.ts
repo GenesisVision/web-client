@@ -7,14 +7,11 @@ import {
   MakeTradingAccountSignalProvider
 } from "gv-api-web";
 import assetsApi from "shared/services/api-client/assets-api";
-import brokersApi from "shared/services/api-client/brokers-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";
-
-const GM_BROKER_NAME = "Genesis Markets";
 
 export type IConvertAssetSettingsFormValues = any;
 
@@ -76,15 +73,6 @@ const getCovertMethod = ({
 };
 
 type TGetConvertMethodReturn = (request: RequestType) => CancelablePromise<any>; //ProgramCreateResult
-
-export const fetchBrokers = (): CancelablePromise<Broker[]> =>
-  brokersApi
-    .getBrokers()
-    .then(data =>
-      data.brokers.sort(
-        (a, b) => +(b.name === GM_BROKER_NAME) - +(a.name === GM_BROKER_NAME)
-      )
-    );
 
 export const getBrokerLoaderData: () => any = () => ({
   name: faker.lorem.word(),
