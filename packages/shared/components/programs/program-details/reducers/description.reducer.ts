@@ -26,7 +26,7 @@ export const programIdSelector = apiFieldSelector(
 
 export const programStatusSelector = apiFieldSelector(
   programDescriptionSelector,
-  fieldSelector(state => state),
+  fieldSelector(state => state.status),
   undefined
 );
 
