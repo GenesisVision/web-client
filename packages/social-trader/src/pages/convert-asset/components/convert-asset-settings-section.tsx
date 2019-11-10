@@ -1,6 +1,5 @@
 import AssetContent from "components/assets/asset-fields/asset-content";
-import { ProgramAssetPlatformInfo } from "gv-api-web";
-import { TFAConfirmBlock } from "pages/create-program/components/tfa-confirm-block";
+import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import useIsOpen from "shared/hooks/is-open.hook";
