@@ -1,9 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import {
-  ProgramChartStatistic,
-  PeriodStatus,
-} from "gv-api-web";
+import { PeriodStatus, ProgramChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -243,7 +240,7 @@ export interface IProgramStatisticData {
 }
 
 export interface IProgramDetailsStatisticsElementsProps {
-  status: ProgramDetailsFullStatusEnum;
+  status: string;
   period: ChartDefaultPeriod;
   data: IProgramStatisticData;
 }

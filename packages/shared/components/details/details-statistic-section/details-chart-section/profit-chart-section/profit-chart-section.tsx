@@ -31,6 +31,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
     selectCurrencies
   } = useChartStateValues(DETAILS_CHART_TABS.PROFIT);
   const profitChart = useSelector(profitChartSelector);
+  if (!profitChart) return null;
   return (
     <ProfitChartElements
       loaderData={loaderData}
@@ -53,7 +54,7 @@ const _ProfitChartSection: React.FC<IProfitChartSectionProps> = ({
 };
 
 export interface IProfitChartSectionProps {
-  loaderData: ProfitChartDataType;
+  loaderData?: ProfitChartDataType;
   useChartStateValues: TUseChartStateValues;
   useChartPeriod: TUseChartPeriod;
   renderProfitChart: TRenderProfitChart;

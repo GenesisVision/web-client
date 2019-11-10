@@ -4,10 +4,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 
-import {
-  fundChartDataLoaderData,
-  fundStatisticDataLoaderData
-} from "../fund-details.loader-data";
+import { fundStatisticDataLoaderData } from "../fund-details.loader-data";
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { fundProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
@@ -23,15 +20,14 @@ import FundDetailsStatisticsElements, {
 
 const _FundDetailsStatisticSection: React.FC = () => (
   <DetailsStatisticSection
-    loaderData={fundChartDataLoaderData}
     balanceChartSelector={fundBalanceChartSelector}
     profitChartSelector={fundProfitChartSelector}
     statisticCurrencySelector={statisticCurrencySelector}
     useChartStateValues={useFundChartStateValues}
     useChartPeriod={useChartPeriod}
-    renderProfitValue={({ chart }) => (
+    renderProfitValue={({ statistic }) => (
       <NumberFormat
-        value={"profitPercent" in chart ? chart.profitPercent : 0}
+        value={"profitPercent" in statistic ? statistic.profitPercent : 0}
         thousandSeparator={" "}
         displayType="text"
         suffix={" %"}
