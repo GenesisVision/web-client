@@ -1,7 +1,7 @@
+import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import { FormikProps, withFormik } from "formik";
 import { IProgramSignalFormValues } from "modules/program-signal/program-signal-popup/components/program-signal-form";
 import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
-import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";

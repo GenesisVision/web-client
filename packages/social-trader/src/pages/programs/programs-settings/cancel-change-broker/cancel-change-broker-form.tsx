@@ -1,6 +1,6 @@
+import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
+import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
-import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
-import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -37,9 +37,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             tags={brokerFrom.tags}
           />
           <StatisticItem
-            label={t(
-              "create-program-page.settings.fields.account-type"
-            )}
+            label={t("create-program-page.settings.fields.account-type")}
           >
             {
               brokerFrom.accountTypes.find(
@@ -49,9 +47,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             }
           </StatisticItem>
           <StatisticItem
-            label={t(
-              "create-program-page.settings.fields.brokers-leverage"
-            )}
+            label={t("create-program-page.settings.fields.brokers-leverage")}
           >
             {leverage}
           </StatisticItem>
@@ -66,16 +62,12 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             tags={brokerTo.tags}
           />
           <StatisticItem
-            label={t(
-              "create-program-page.settings.fields.account-type"
-            )}
+            label={t("create-program-page.settings.fields.account-type")}
           >
             {brokerTo.accountTypes[0].name}
           </StatisticItem>
           <StatisticItem
-            label={t(
-              "create-program-page.settings.fields.brokers-leverage"
-            )}
+            label={t("create-program-page.settings.fields.brokers-leverage")}
           >
             {newLeverage}
           </StatisticItem>

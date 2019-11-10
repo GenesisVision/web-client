@@ -1,7 +1,7 @@
+import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
+import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import { FormikProps, withFormik } from "formik";
 import { Broker, BrokerAccountType } from "gv-api-web";
-import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
-import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React, { useCallback, useState } from "react";
 import {
   useTranslation,

@@ -1,13 +1,13 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./attach-account-settings.scss";
 
-import useCreateAssetValidate from "asset-validate.hook.ts";
 import AssetField, {
   AssetFields
 } from "components/assets/asset-fields/asset-field";
+import useAssetValidate from "components/assets/asset-validate.hook";
+import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
-import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -30,7 +30,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
   t,
   isSubmitting
 }) => {
-  const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
+  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
