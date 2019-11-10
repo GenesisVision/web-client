@@ -7,7 +7,7 @@ import ChangeAccountPasswordButton from "pages/programs/programs-settings/change
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
-import Link, { ToType } from "shared/components/link/link";
+import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -39,22 +39,8 @@ const _DashboardPublicCard: React.FC<{
 }> = ({ asset }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
-  const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: CONVERT_ASSET.ACCOUNT,
-    assetTo: CONVERT_ASSET.PROGRAM
-  });
-  const makeProgramLink = {
-    pathname: makeProgramLinkMethod(asset.id),
-    state: `/ ${title}`
-  };
   const detailsLink = {
     pathname: composeProgramDetailsUrl(
-      asset.publicInfo && asset.publicInfo.url
-    ),
-    state: `/ ${title}`
-  };
-  const settingsLink = {
-    pathname: composeProgramSettingsUrl(
       asset.publicInfo && asset.publicInfo.url
     ),
     state: `/ ${title}`
@@ -71,10 +57,11 @@ const _DashboardPublicCard: React.FC<{
     clearAnchor: (event: TEvent) => void;
   }) => (
     <DashboardPublicCardActions
+      canMakeProgram={asset.actions.canMakeProgramFromSignalProvider}
       anchor={anchor}
       clearAnchor={clearAnchor}
       id={asset.id}
-      settingsLink={settingsLink}
+      url={asset.publicInfo && asset.publicInfo.url}
       showChangePassword={asset.actions.canChangePassword}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
@@ -151,9 +138,10 @@ const _DashboardPublicCard: React.FC<{
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
 > = ({
+  canMakeProgram,
   anchor,
   clearAnchor,
-  settingsLink,
+  url,
   id,
   showChangePassword,
   showTerminal,
@@ -165,6 +153,18 @@ const _DashboardPublicCardActions: React.FC<
     pathname: META_TRADER_4_ROUTE,
     state: `/ ${title}`
   };
+  const settingsLink = {
+    pathname: composeProgramSettingsUrl(url),
+    state: `/ ${title}`
+  };
+  const makeProgramLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.SIGNAL,
+    assetTo: CONVERT_ASSET.PROGRAM
+  });
+  const makeProgramLink = {
+    pathname: makeProgramLinkMethod(id),
+    state: `/ ${title}`
+  };
   return (
     <Popover
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -174,6 +174,13 @@ const _DashboardPublicCardActions: React.FC<
       onClose={clearAnchor}
     >
       <div className="popover-list">
+        {canMakeProgram && (
+          <Link to={makeProgramLink}>
+            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+              {t("dashboard-page.trading.actions.make-program")}
+            </GVButton>
+          </Link>
+        )}
         <Link to={settingsLink}>
           <GVButton variant="text" color="secondary" onClick={clearAnchor}>
             {t("dashboard-page.trading.actions.settings")}
@@ -196,9 +203,10 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
+  canMakeProgram: boolean;
   clearAnchor: (event: TEvent) => void;
   anchor: TAnchor;
-  settingsLink: ToType;
+  url: string;
   id: string;
   showChangePassword: boolean;
   showTerminal: boolean;
