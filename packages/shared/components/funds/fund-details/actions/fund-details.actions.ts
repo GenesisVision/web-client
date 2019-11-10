@@ -1,4 +1,8 @@
-import { FundBalanceChart, FundDetailsFull } from "gv-api-web";
+import {
+  CancelablePromise,
+  FundBalanceChart,
+  FundDetailsFull
+} from "gv-api-web";
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
@@ -8,6 +12,7 @@ import { TStatisticPeriodAction } from "shared/components/details/reducers/stati
 import fundsApi from "shared/services/api-client/funds-api";
 import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
 
+import { FilteringType } from "../../../table/components/filtering/filter.type";
 import { FundIdState } from "../reducers/id.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 
@@ -70,13 +75,13 @@ export const statisticPeriodAction = (
   payload: period
 });
 
-/*export const fundReallocateHistoryAction = (
+export const fundReallocateHistoryAction = (
   fundId: string,
   filters?: FilteringType
-): ApiAction<ReallocationsViewModel> => ({
+): ApiAction<any> => ({
   type: FUND_REALLOCATE_HISTORY,
-  payload: fundsApi.getReallocationsHistory(fundId, filters)
-});*/
+  payload: Promise.resolve() as CancelablePromise<any>
+});
 
 export interface SetFundIdAction extends ActionType<FundIdState> {
   type: typeof SET_FUND_ID;
