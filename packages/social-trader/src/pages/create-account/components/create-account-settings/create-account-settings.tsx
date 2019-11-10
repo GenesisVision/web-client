@@ -1,8 +1,13 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./create-account-settings.scss";
 
-import { CreateAssetFields } from "components/create-asset/create-asset-field/create-asset-field";
-import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
+import { AssetFields } from "components/assets/asset-fields/asset-field";
+import useAssetValidate from "components/assets/asset-validate.hook";
+import BrokerAccount from "components/assets/fields/broker-account";
+import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import Currency from "components/assets/fields/currency";
+import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
+import Leverage from "components/assets/fields/leverage";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
 import {
@@ -11,16 +16,10 @@ import {
   getCurrency,
   getLeverage
 } from "pages/create-program/components/create-program-settings/create-program-settings.helpers";
-import BrokerAccount from "pages/create-program/components/create-program-settings/fields/broker-account";
-import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
-import Currency from "pages/create-program/components/create-program-settings/fields/currency";
-import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
-import Leverage from "pages/create-program/components/create-program-settings/fields/leverage";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import SettingsBlock from "shared/components/settings-block/settings-block";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
@@ -38,14 +37,14 @@ const _CreateAccountSettings: React.FC<Props> = ({
   const accountType = broker.accountTypes.find(
     ({ id }) => brokerAccountTypeId === id
   )!;
-  const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
+  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
         label={t("create-account-page.settings.main-settings")}
         blockNumber={"01"}
       >
-        <CreateAssetFields>
+        <AssetFields>
           <BrokerAccount
             setAccountType={(value: string) =>
               setFieldValue(CREATE_ACCOUNT_FIELDS.brokerAccountTypeId, value)
@@ -68,7 +67,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
             name={CREATE_ACCOUNT_FIELDS.leverage}
             accountLeverages={accountType.leverages}
           />
-        </CreateAssetFields>
+        </AssetFields>
       </SettingsBlock>
       <DepositDetailsBlock
         blockNumber={2}

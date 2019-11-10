@@ -1,4 +1,4 @@
-import { CreateAssetBack } from "components/create-asset/create-asset-back";
+import { CreateAssetBack } from "components/assets/create-asset/create-asset-back";
 import { Broker } from "gv-api-web";
 import CreateProgramBrokerContainer from "pages/create-program/components/create-program-broker/create-program-broker.container";
 import React, { useCallback, useState } from "react";

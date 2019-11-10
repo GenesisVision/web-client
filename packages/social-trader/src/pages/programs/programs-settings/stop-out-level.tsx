@@ -1,4 +1,4 @@
-import StopOutField from "components/create-asset/fields/stop-out-field";
+import StopOutField from "components/assets/fields/stop-out-field";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -69,15 +69,11 @@ const StopOutLevel = compose<React.ComponentType<OwnProps>>(
         [FIELDS.stopOutLevel]: number()
           .min(
             10,
-            t(
-              "create-program-page.settings.validation.stop-out-less-ten"
-            )
+            t("create-program-page.settings.validation.stop-out-less-ten")
           )
           .max(
             stopOutLevel || 100,
-            t(
-              "create-program-page.settings.validation.stop-out-more-current"
-            )
+            t("create-program-page.settings.validation.stop-out-more-current")
           )
       }),
     handleSubmit: (values, { props, setSubmitting }) => {

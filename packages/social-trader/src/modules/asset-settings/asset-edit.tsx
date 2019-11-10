@@ -1,5 +1,5 @@
-import DescriptionField from "components/create-asset/fields/description-field";
-import TitleField from "components/create-asset/fields/title-field";
+import DescriptionField from "components/assets/fields/description-field";
+import TitleField from "components/assets/fields/title-field";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";

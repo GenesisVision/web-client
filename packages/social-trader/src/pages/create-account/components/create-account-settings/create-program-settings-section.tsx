@@ -1,4 +1,4 @@
-import useCreateAssetSubmit from "components/create-asset/create-asset-submit.hook";
+import useCreateAssetSubmit from "components/assets/create-asset/create-asset-submit.hook";
 import { Broker } from "gv-api-web";
 import CreateAccountSettings from "pages/create-account/components/create-account-settings/create-account-settings";
 import * as React from "react";

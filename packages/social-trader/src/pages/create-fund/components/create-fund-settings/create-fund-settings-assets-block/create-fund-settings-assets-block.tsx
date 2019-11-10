@@ -1,5 +1,6 @@
 import "../create-fund-settings.scss";
 
+import AssetRow from "components/assets/asset-fields/asset-row";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
@@ -31,7 +32,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   return (
     <>
       <div className="create-fund-settings__assets-and-line">
-        <div className="create-fund-settings__row create-fund-settings__assets">
+        <AssetRow>
           <FundAssetContainer
             assets={assets}
             type={FUND_ASSET_TYPE.MIDDLE}
@@ -40,7 +41,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
             remainder={remainder}
             hoveringAsset={hoveringAssetName}
           />
-        </div>
+        </AssetRow>
         <div className="create-fund-settings__line">
           <FundAssetRatio
             values={assets}

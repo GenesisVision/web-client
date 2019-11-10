@@ -1,5 +1,5 @@
 import "shared/components/details/details.scss";
-import "components/create-asset/fields/fields.scss";
+import "components/assets/fields/fields.scss";
 import "pages/create-program/components/create-program-settings/create-program-settings.scss";
 
 import { BrokersProgramInfo, TradesDelay } from "gv-api-web";
