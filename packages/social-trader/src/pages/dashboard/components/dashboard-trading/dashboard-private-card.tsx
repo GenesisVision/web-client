@@ -7,6 +7,7 @@ import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
 import GVButton from "shared/components/gv-button";
+import Hint from "shared/components/hint/hint";
 import Link from "shared/components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -31,18 +32,10 @@ import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
-  const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: CONVERT_ASSET.ACCOUNT,
-    assetTo: CONVERT_ASSET.PROGRAM
-  });
   const makeSignalLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.SIGNAL
   });
-  const makeProgramLink = {
-    pathname: makeProgramLinkMethod(asset.id),
-    state: `/ ${title}`
-  };
   const terminalLink = {
     pathname: META_TRADER_4_ROUTE,
     state: `/ ${title}`
@@ -71,16 +64,19 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
             {t("dashboard-page.trading.actions.terminal")}
           </GVButton>
         </Link>
-        <Link to={makeProgramLink}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("dashboard-page.trading.actions.make-program")}
-          </GVButton>
-        </Link>
-        <Link to={makeSignalAccountLink}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("dashboard-page.trading.actions.make-signal-account")}
-          </GVButton>
-        </Link>
+        <MakeProgramButton
+          canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
+          id={asset.id}
+          title={title}
+          clearAnchor={clearAnchor}
+        />
+        {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
+          <Link to={makeSignalAccountLink}>
+            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+              {t("dashboard-page.trading.actions.make-signal-account")}
+            </GVButton>
+          </Link>
+        )}
         <CloseAssetButton
           type={"account" as ASSET}
           id={asset.id}
@@ -138,6 +134,40 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
 interface Props {
   asset: DashboardTradingAsset;
 }
+
+const MakeProgramButton: React.FC<{
+  canMake: boolean;
+  id: string;
+  title: string;
+  clearAnchor: (event: TEvent) => void;
+}> = React.memo(({ canMake, id, title, clearAnchor }) => {
+  const [t] = useTranslation();
+  const makeProgramLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.ACCOUNT,
+    assetTo: CONVERT_ASSET.PROGRAM
+  });
+  const makeProgramLink = {
+    pathname: makeProgramLinkMethod(id),
+    state: `/ ${title}`
+  };
+  const label = t("dashboard-page.trading.actions.make-program");
+  return canMake ? (
+    <Link to={makeProgramLink}>
+      <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+        {label}
+      </GVButton>
+    </Link>
+  ) : (
+    <GVButton variant="text" color="secondary">
+      <Hint
+        content={label}
+        className="dashboard-trading__disable-button"
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        tooltipContent={t("manager.program-settings.trades-update.text")}
+      />
+    </GVButton>
+  );
+});
 
 const DashboardPrivateCard = React.memo(_DashboardPrivateCard);
 export default DashboardPrivateCard;
