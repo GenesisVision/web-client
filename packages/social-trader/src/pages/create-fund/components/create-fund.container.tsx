@@ -1,3 +1,4 @@
+import AssetTitle from "components/assets/asset-fields/asset-title";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -7,9 +8,7 @@ const _CreateFundContainer: React.FC<Props> = ({ minimumDepositAmount }) => {
   const [t] = useTranslation();
   return (
     <>
-      <div className="create-asset__header">
-        <h1>{t("create-fund-page.title")}</h1>
-      </div>
+      <AssetTitle>{t("create-fund-page.title")}</AssetTitle>
       <div className="create-asset__content">
         <CreateFundSettingsSection
           minimumDepositAmount={minimumDepositAmount}

@@ -1,10 +1,10 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./attach-account-settings.scss";
 
-import CreateAssetField, {
-  CreateAssetFields
-} from "components/create-asset/create-asset-field/create-asset-field";
-import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
+import useCreateAssetValidate from "asset-validate.hook.ts";
+import AssetField, {
+  AssetFields
+} from "components/assets/asset-fields/asset-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
 import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
@@ -37,7 +37,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         label={t("attach-account-page.settings.exchange")}
         blockNumber={"01"}
       >
-        <CreateAssetField>
+        <AssetField>
           <GVFormikField
             name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
             component={GVTextField}
@@ -51,14 +51,14 @@ const _AttachAccountSettings: React.FC<Props> = ({
               </option>
             ))}
           </GVFormikField>
-        </CreateAssetField>
+        </AssetField>
       </SettingsBlock>
       <SettingsBlock
         label={t("attach-account-page.settings.api")}
         blockNumber={"03"}
       >
-        <CreateAssetFields>
-          <CreateAssetField wide>
+        <AssetFields>
+          <AssetField wide>
             <GVFormikField
               className="attach-account-settings__api-field"
               type="text"
@@ -67,8 +67,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
               autoComplete="off"
               component={GVTextField}
             />
-          </CreateAssetField>
-          <CreateAssetField wide>
+          </AssetField>
+          <AssetField wide>
             <GVFormikField
               className="attach-account-settings__api-field"
               type="text"
@@ -77,8 +77,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
               autoComplete="off"
               component={GVTextField}
             />
-          </CreateAssetField>
-        </CreateAssetFields>
+          </AssetField>
+        </AssetFields>
       </SettingsBlock>
       <CreateAssetNavigation
         asset={"attach-external-account"}

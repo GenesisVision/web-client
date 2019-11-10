@@ -1,4 +1,4 @@
-import InvestmentLimitField from "components/create-asset/fields/investment-limit-field";
+import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -85,9 +85,7 @@ const InvestmentLimit = compose<React.ComponentType<OwnProps>>(
           then: number()
             .min(
               0,
-              t(
-                "create-program-page.settings.validation.investment-limit-min"
-              )
+              t("create-program-page.settings.validation.investment-limit-min")
             )
             .lessThan(
               10000000000,

@@ -1,4 +1,4 @@
-import FeesSettings from "components/create-asset/fields/fees-settings";
+import FeesSettings from "components/assets/fields/fees-settings";
 import { FormikProps, withFormik } from "formik";
 //import { ProgramsInfoOld } from "gv-api-web";
 import React from "react";

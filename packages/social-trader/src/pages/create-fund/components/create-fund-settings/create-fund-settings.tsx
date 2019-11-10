@@ -1,13 +1,13 @@
 import "shared/components/deposit-details/deposit-details.scss";
 import "./create-fund-settings.scss";
 
-import useCreateAssetValidate from "components/create-asset/create-asset-validate.hook";
-import DescriptionBlock from "components/create-asset/fields/description-block";
-import FeesSettings from "components/create-asset/fields/fees-settings";
+import useAssetValidate from "components/assets/asset-validate.hook";
+import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
+import DescriptionBlock from "components/assets/fields/description-block";
+import FeesSettings from "components/assets/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
 import { PlatformInfo } from "gv-api-web";
-import CreateAssetNavigation from "pages/create-program/components/create-program-settings/fields/create-asset-navigation";
-import DepositDetailsBlock from "pages/create-program/components/create-program-settings/fields/deposit-details-block";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -37,7 +37,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   },
   minimumDepositAmount
 }) => {
-  const validateAndSubmit = useCreateAssetValidate({ handleSubmit, isValid });
+  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock

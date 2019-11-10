@@ -1,6 +1,7 @@
 import { DashboardTradingAsset } from "gv-api-web";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
-import { composeCreateProgramUrl } from "pages/create-program/create-program.routes";
+import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
+import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import * as React from "react";
 import { useContext } from "react";
@@ -30,16 +31,25 @@ import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
 const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
+  const makeProgramLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.ACCOUNT,
+    assetTo: CONVERT_ASSET.PROGRAM
+  });
+  const makeSignalLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.ACCOUNT,
+    assetTo: CONVERT_ASSET.SIGNAL
+  });
+  const makeProgramLink = {
+    pathname: makeProgramLinkMethod(asset.id),
+    state: `/ ${title}`
+  };
   const terminalLink = {
     pathname: META_TRADER_4_ROUTE,
     state: `/ ${title}`
   };
-  const makeProgramLink = {
-    pathname: composeCreateProgramUrl(asset.id),
-    state: `/ ${title}`
-  };
   const makeSignalAccountLink = {
-    pathname: ""
+    pathname: makeSignalLinkMethod(asset.id),
+    state: `/ ${title}`
   };
   const renderActions = ({
     anchor,
