@@ -35,6 +35,10 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.PROGRAM
   });
+  const makeSignalLinkMethod = makeProgramLinkCreator({
+    assetFrom: CONVERT_ASSET.ACCOUNT,
+    assetTo: CONVERT_ASSET.SIGNAL
+  });
   const makeProgramLink = {
     pathname: makeProgramLinkMethod(asset.id),
     state: `/ ${title}`
@@ -44,7 +48,8 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
     state: `/ ${title}`
   };
   const makeSignalAccountLink = {
-    pathname: ""
+    pathname: makeSignalLinkMethod(asset.id),
+    state: `/ ${title}`
   };
   const renderActions = ({
     anchor,
