@@ -38,3 +38,4 @@ src/**/*.css
 
 # locales
 static/locales
+/static/locales/
