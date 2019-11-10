@@ -1,7 +1,8 @@
+@import "~shared/styles/_sizes.scss";
 @import "~shared/styles/_colors.scss";
 
 .gv-text-field {
-  margin-top: 16px;
+  margin-top: $padding-small/2;
   display: inline-flex;
   position: relative;
   font-size: 1rem;
@@ -60,7 +61,7 @@
     position: absolute;
     left: 0;
     top: 100%;
-    font-size: 0.7em;
+    font-size: $font-size-small;
     color: $negative-color;
   }
 
@@ -68,7 +69,7 @@
     order: 1;
     color: $text-light-color;
     font-family: Montserrat;
-    font-size: 16px;
+    font-size: $font-size-h4;
     font-weight: normal;
     line-height: 1.38;
     letter-spacing: 0.2px;
@@ -109,7 +110,7 @@
     transform: translate(0, 24px) scale(1);
     transform-origin: top left;
     color: $label-color;
-    font-size: 16px;
+    font-size: $font-size-h4;
     font-weight: normal;
     letter-spacing: 0.4px;
     padding: 0;
