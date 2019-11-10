@@ -5,11 +5,10 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import withLoader from "shared/decorators/with-loader";
 import ChartCurrencySelector, {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -21,6 +20,7 @@ import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import {
   BalanceChartElementType,
+  BalanceChartType,
   useChartData
 } from "../../details.chart.helpers";
 
@@ -40,7 +40,7 @@ const _BalanceChartElements: React.FC<Props> = ({
     FundBalanceChartType | ProgramBalanceChartType
   >(balanceChart, selectedCurrencies);
   const { name, color } = chartData.selectedCurrencies[0];
-  const balance = chartData.chart.balance;
+  const { chart, balance } = chartData.chart;
   return (
     <>
       <div className="details-chart__value">
@@ -63,9 +63,9 @@ const _BalanceChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <div className="details-chart__profit">
-        {chartData.chart.chart.length &&
+        {chart.length &&
           renderBalanceChart({
-            balanceChart: chartData.chart.chart,
+            balanceChart: chart,
             currency: name,
             color
           })}
@@ -80,24 +80,17 @@ export type TRenderBalanceChart = (props: {
   currency: CurrencyEnum;
 }) => JSX.Element;
 
-interface OwnProps {
+interface Props {
   renderBalanceChart: TRenderBalanceChart;
   period: ChartDefaultPeriod;
   setPeriod: HandlePeriodChangeType;
   selectedCurrencies: TChartCurrency[];
-  balanceChart: FundBalanceChartType | ProgramBalanceChartType;
+  balanceChart: BalanceChartType;
   addCurrency: TAddChartCurrency;
   removeCurrency: TRemoveChartCurrency;
   changeCurrency: TChangeChartCurrency;
   selectCurrencies: TChartCurrency[];
 }
 
-interface Props extends OwnProps {}
-
-const BalanceChartElements = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  withLoader,
-  React.memo
-)(_BalanceChartElements);
+const BalanceChartElements = withLoader(React.memo(_BalanceChartElements));
 export default BalanceChartElements;

@@ -48,10 +48,7 @@ export const profitChartLoaderData: any = {
   rate: 158.63
 };
 
-export const profitChartDataLoaderData: any = [
-  //ProfitChartDataType
-  profitChartLoaderData
-];
+export const profitChartDataLoaderData: any = [profitChartLoaderData];
 
 export const statisticDataLoaderData: any = {
   statisticCurrency: "",

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export const dateTickFormatter = (start: Date, end: Date) => (
+export const dateTickFormatter = (start: Date | number, end: Date | number) => (
   date: Date
 ): string => {
   let dateFormat;
@@ -22,7 +22,10 @@ const getTicksCountByPeriod = (duration: number): number => {
   return 12;
 };
 
-export const composeTicks = (start: Date, end: Date): number[] => {
+export const composeTicks = (
+  start: Date | number,
+  end: Date | number
+): number[] => {
   const periodStart = dayjs(start)
     .add(1, "day")
     .startOf("day")

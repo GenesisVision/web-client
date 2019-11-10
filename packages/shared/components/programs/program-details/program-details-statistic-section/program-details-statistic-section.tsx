@@ -1,6 +1,5 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import { ProgramBalanceChart as ProgramBalanceChartType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -36,11 +35,11 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       statisticCurrencySelector={statisticCurrencySelector}
       useChartStateValues={useProgramChartStateValues}
       useChartPeriod={useChartPeriod}
-      renderProfitValue={chart => {
+      renderProfitValue={({ statistic }) => {
         return (
           <NumberFormat
             value={formatCurrencyValue(
-              "timeframeProfit" in chart ? chart.timeframeProfit : 0,
+              "profit" in statistic ? statistic.profit : 0,
               statisticCurrency
             )}
             thousandSeparator={" "}
@@ -52,7 +51,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       renderBalanceChart={({ color, currency, balanceChart }) => (
         <ProgramBalanceChart
           color={color}
-          balanceChart={balanceChart as ProgramBalanceChartType[]}
+          balanceChart={balanceChart}
           currency={currency}
         />
       )}

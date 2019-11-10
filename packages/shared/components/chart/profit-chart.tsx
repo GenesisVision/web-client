@@ -1,4 +1,4 @@
-import { SimpleChartPoint, FundAssetsState } from "gv-api-web";
+import { FundAssetsState, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -45,11 +45,11 @@ const _ProfitChart: React.FC<Props> = ({
 
         {tooltip && <Tooltip content={tooltip} />}
         {equities.map((equity, i) => (
-          // @ts-ignore
           <Area
             key={i}
             dataKey="value"
             type="monotone"
+            // @ts-ignore
             data={equity}
             connectNulls={true}
             stroke={colors && colors[i] ? colors[i].color : areaStrokeColor}

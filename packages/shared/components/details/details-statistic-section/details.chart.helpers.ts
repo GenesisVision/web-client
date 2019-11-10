@@ -1,10 +1,13 @@
 import {
   BalanceChartPoint,
   FundBalanceChart,
+  FundChartStatistic,
   FundProfitCharts,
   PlatformCurrencyInfo,
   ProgramBalanceChart,
-  ProgramProfitCharts
+  ProgramChartStatistic,
+  ProgramProfitCharts,
+  SimpleChart
 } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +17,6 @@ import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-p
 import { FundBalanceChartDataType } from "shared/components/funds/fund-details/reducers/balance-chart.reducer";
 import { ProgramBalanceChartDataType } from "shared/components/programs/program-details/reducers/balance-chart.reducer";
 import { ISelectChangeEvent } from "shared/components/select/select";
-import { IDashboardAssetChart } from "shared/constants/constants";
 import {
   TAddChartCurrency,
   TChangeChartCurrency,
@@ -41,7 +43,7 @@ export type TBalanceChartSelector = (
 
 export type TProfitChartSelector = (
   state: RootState
-) => TSelectorData<ProgramProfitCharts>;
+) => TSelectorData<ProfitChartDataType>;
 
 export type TUseChartStateValuesOutput = {
   selectedCurrencies: TChartCurrency[];
@@ -86,17 +88,23 @@ export const useChartPeriodCreator: TUseChartPeriodCreator = (
 
 type TChartData<T> = {
   chart: T;
+  selectedCurrencies: TChartCurrency[];
 };
 
-export const useChartData = <T>(chart: T): TChartData<T> => {
+export const useChartData = <T>(
+  chart: T,
+  selectedCurrencies: TChartCurrency[]
+): TChartData<T> => {
   const [chartData, setChartData] = useState<TChartData<T>>({
-    chart
+    chart,
+    selectedCurrencies
   });
   useEffect(() => {
     setChartData({
-      chart
+      chart,
+      selectedCurrencies: [...selectedCurrencies]
     });
-  }, [chart]);
+  }, [chart, selectedCurrencies]);
   return chartData;
 };
 
@@ -106,10 +114,10 @@ export interface TGetChartArgs {
   period?: ChartDefaultPeriod;
 }
 
-export type ProfitChartType =
-  | FundProfitCharts
-  | ProgramProfitCharts
-  | IDashboardAssetChart;
+export type ProfitChartType = FundProfitCharts | ProgramProfitCharts;
+export type ProfitChartDataType = ProfitChartType;
+export type StatisticDataType = ProgramChartStatistic | FundChartStatistic;
+export type ChartsDataType = Array<SimpleChart>;
 
 export type BalanceChartElementType = Array<BalanceChartPoint>;
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
@@ -141,7 +149,7 @@ export type TGetChartFunc = (
 type TUseFundChartStateDataMethods = {
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
   platformCurrencies: TChartCurrency[];
-  profitChart?: ProgramProfitCharts;
+  profitChart?: ProfitChartDataType;
   balanceChart?: BalanceChartType;
   selectedCurrencies: TChartCurrency[];
   setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
@@ -150,7 +158,7 @@ type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
 export type TUseFundChartStateDataCreator = (props: {
   view: DETAILS_CHART_TABS;
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
-  profitChartSelector: (state: RootState) => TSelectorData<ProgramProfitCharts>;
+  profitChartSelector: (state: RootState) => TSelectorData<ProfitChartDataType>;
   balanceChartSelector: (state: RootState) => TSelectorData<BalanceChartType>;
   statisticCurrencySelector: (state: RootState) => CurrencyEnum;
   idSelector: (state: RootState) => string;

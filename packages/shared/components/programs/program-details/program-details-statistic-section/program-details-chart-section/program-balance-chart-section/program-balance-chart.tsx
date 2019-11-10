@@ -1,4 +1,3 @@
-import { ProgramBalanceChartElement } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -9,6 +8,7 @@ import {
   YAxis
 } from "recharts";
 import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
+import { BalanceChartElementType } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -117,7 +117,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
 
 interface Props {
   color: string;
-  balanceChart: ProgramBalanceChartElement[];
+  balanceChart: BalanceChartElementType;
   currency: CurrencyEnum;
 }
 

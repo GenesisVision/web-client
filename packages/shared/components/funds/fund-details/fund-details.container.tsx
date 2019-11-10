@@ -110,7 +110,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         personalDetails={description.personalDetails as InvestmentDetails}
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
-      {/*<FundDetailsStatisticSection />*/}
+      <FundDetailsStatisticSection />
       {/*<FundDetailsHistorySection id={description.id} />*/}
     </Page>
   );

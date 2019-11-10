@@ -24,8 +24,6 @@ import { RootState } from "shared/reducers/root-reducer";
 import assetsApi from "shared/services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
 import eventsApi from "shared/services/api-client/events-api";
-// import investorApi from "shared/services/api-client/investor-api";
-// import managerApi from "shared/services/api-client/manager-api";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
