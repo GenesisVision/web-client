@@ -1,26 +1,34 @@
-import { ReallocationsViewModel } from "gv-api-web";
+import {
+  InvestmentEventViewModels,
+  ItemsViewModelReallocationModel
+} from "gv-api-web";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import tableReducerFactory from "shared/components/table/reducers/table.reducer";
+import tableReducerFactory, {
+  ITableState
+} from "shared/components/table/reducers/table.reducer";
 import { RootState } from "shared/reducers/root-reducer";
 
-import { FUND_REALLOCATE_HISTORY } from "../actions/fund-details.actions";
 import {
+  FUND_REALLOCATE_HISTORY,
   FUND_REBALANCING_DEFAULT_FILTERS,
   FUND_REBALANCING_FILTERS
 } from "../fund-details.constants";
+
+type TFundReallocateHistoryData = ItemsViewModelReallocationModel;
+export type TReallocateHistoryState = ITableState<TFundReallocateHistoryData>;
 
 const fundReallocateHistorySelector = (state: RootState) =>
   state.fundDetails.fundHistory.reallocateHistory;
 
 export const fundReallocateHistoryTableSelector = tableSelectorCreator<
   RootState,
-  ReallocationsViewModel,
-  ReallocationsViewModel
->(fundReallocateHistorySelector, "reallocations");
+  TFundReallocateHistoryData,
+  TFundReallocateHistoryData
+>(fundReallocateHistorySelector);
 
 const fundReallocateHistoryReducer = tableReducerFactory<
-  ReallocationsViewModel
+  TFundReallocateHistoryData
 >({
   type: FUND_REALLOCATE_HISTORY,
   paging: DEFAULT_PAGING,

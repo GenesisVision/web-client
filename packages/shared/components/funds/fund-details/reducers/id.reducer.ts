@@ -1,6 +1,7 @@
 import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
 
-import { SET_FUND_ID, SetFundIdAction } from "../actions/fund-details.actions";
+import { SET_FUND_ID } from "../fund-details.constants";
+import { SetFundIdAction } from "../fund-details.types";
 
 export type FundIdState = string;
 

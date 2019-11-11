@@ -5,7 +5,7 @@ import apiReducerFactory, {
 import { RootState } from "shared/reducers/root-reducer";
 import { apiSelector } from "shared/utils/selectors";
 
-import { FETCH_FUND_PROFIT_CHART } from "../actions/fund-details.actions";
+import { FETCH_FUND_PROFIT_CHART } from "../fund-details.constants";
 
 export type FundProfitChartDataType = FundProfitCharts;
 

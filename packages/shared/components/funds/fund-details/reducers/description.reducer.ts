@@ -9,7 +9,7 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 
-import { FETCH_FUND_DESCRIPTION } from "../actions/fund-details.actions";
+import { FETCH_FUND_DESCRIPTION } from "../fund-details.constants";
 
 export type FundDescriptionDataType = FundDetailsFull;
 

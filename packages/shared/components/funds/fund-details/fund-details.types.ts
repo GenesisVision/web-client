@@ -1,7 +1,10 @@
 import { FundDetailsFull } from "gv-api-web";
 import React from "react";
 import { IDialogProps } from "shared/components/dialog/dialog";
-import { CurrencyEnum } from "shared/utils/types";
+import { ActionType, CurrencyEnum } from "shared/utils/types";
+
+import { SET_FUND_ID } from "./fund-details.constants";
+import { FundIdState } from "./reducers/id.reducer";
 
 export interface IDescriptionSection {
   WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
@@ -18,4 +21,8 @@ export interface IFundWithdrawalContainerProps extends IDialogProps {
 export interface IFundControlsProps {
   isAuthenticated: boolean;
   fundDescription: FundDetailsFull;
+}
+
+export interface SetFundIdAction extends ActionType<FundIdState> {
+  type: typeof SET_FUND_ID;
 }
