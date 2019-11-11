@@ -1,5 +1,6 @@
 import "./details-investment.scss";
 
+import { PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
@@ -40,7 +41,7 @@ const _InvestmentContainer: React.FC<Props> = ({
         <SubscriptionDetailsContainer
           id={id}
           currency={assetCurrency}
-          personalDetails={personalDetails}
+          personalDetails={personalDetails as PersonalProgramDetails}
         />
       )}
     </div>
@@ -62,10 +63,7 @@ interface Props {
 export const haveActiveInvestment = (details: InvestmentDetails): boolean =>
   !!details && details.isInvested && details.status !== STATUS.ENDED;
 
-export const haveSubscription = (details: InvestmentDetails): boolean =>
-  !!details &&
-  !!details.signalSubscription &&
-  details.signalSubscription.hasActiveSubscription;
+export const haveSubscription = (details: InvestmentDetails): boolean => false;
 
 const InvestmentContainer = React.memo(_InvestmentContainer);
 export default InvestmentContainer;
