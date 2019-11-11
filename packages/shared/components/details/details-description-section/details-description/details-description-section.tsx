@@ -16,7 +16,6 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   personalDetails,
   PerformanceData,
   AssetDetailsExtraBlock,
-  AssetDetailsAvatar,
   description,
   Controls
 }) => {
@@ -25,7 +24,6 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
       <DetailsDescription
         personalDetails={personalDetails}
         description={description}
-        AssetDetailsAvatar={AssetDetailsAvatar}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
@@ -45,7 +43,6 @@ interface Props {
   description: FundDetailsFull | ProgramDetailsFull;
   AssetDetailsExtraBlock: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
-  AssetDetailsAvatar: React.ComponentType<any>;
   Controls: React.ComponentType<any>;
 }
 

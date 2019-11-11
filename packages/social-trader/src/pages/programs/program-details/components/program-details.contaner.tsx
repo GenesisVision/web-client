@@ -7,18 +7,14 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DetailsDescriptionSection from "shared/components/details/details-description-section/details-description/details-description-section";
-import { DetailsLimitsAvatar } from "shared/components/details/details-description-section/details-description/details-limits-avatar.block";
 import { DetailsTags } from "shared/components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
-import { PROGRAM_NOTIFICATIONS_FOLDER_ROUTE } from "shared/components/notifications/notifications.routes";
 import Page from "shared/components/page/page";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
-import { PROGRAM_SETTINGS_FOLDER_ROUTE } from "shared/routes/invest.routes";
 import {
   composeProgramNotificationsUrl,
   composeProgramSettingsUrl
@@ -36,7 +32,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const levelsParameters = useSelector(levelParametersSelector);
   const personalDetails = description.personalDetails;
   const isOwnProgram = personalDetails && personalDetails.isOwnAsset;
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const handleDispatchDescription = useCallback(() => {
     dispatch(dispatchProgramDescriptionWithId(description.id));
   }, [description.id]);
@@ -62,17 +57,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
             loaderData={levelsParamsLoaderData}
             data={levelsParameters!}
             programDescription={description}
-          />
-        )}
-        AssetDetailsAvatar={() => (
-          <DetailsLimitsAvatar
-            logo={description.logo}
-            level={description.level}
-            levelProgress={description.levelProgress}
-            title={description.title}
-            color={description.color}
-            totalAvailableInvestment={description.totalAvailableInvestment}
-            currency={description.currency}
           />
         )}
         Controls={() => (
