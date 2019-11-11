@@ -43,8 +43,7 @@ const _Investment: React.FC<Props> = ({
     successFeeCurrent,
     exitFee,
     exitFeePersonal,
-    entryFeeCurrent,
-    entryFeeSelected
+    entryFeeCurrent
   } = fees;
   const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
