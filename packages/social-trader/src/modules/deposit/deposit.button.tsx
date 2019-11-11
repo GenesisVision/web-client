@@ -21,7 +21,11 @@ const _DepositButton: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
+  const [
+    isOpenDepositPopup,
+    setIsOpenDepositPopup,
+    setIsDepositClosePopup
+  ] = useIsOpen();
   const [
     isOpenUnAuthInvestPopup,
     setIsOpenUnAuthInvestPopup,
@@ -34,9 +38,9 @@ const _DepositButton: React.FC<Props> = ({
         <FundDepositContainer
           entryFee={entryFee}
           availableToInvest={availableToInvest}
-          open={isOpenPopup}
+          open={isOpenDepositPopup}
           id={id}
-          onClose={setIsClosePopup}
+          onClose={setIsDepositClosePopup}
         />
       );
       break;
@@ -47,39 +51,31 @@ const _DepositButton: React.FC<Props> = ({
           availableToInvest={availableToInvest}
           broker={broker}
           currency={currency}
-          open={isOpenPopup}
+          open={isOpenDepositPopup}
           id={id}
-          onClose={setIsClosePopup}
+          onClose={setIsDepositClosePopup}
         />
       );
   }
-  if (!isAuthenticated)
-    return (
-      <>
-        <GVButton
-          className="details-description__invest-btn"
-          onClick={setIsOpenUnAuthInvestPopup}
-        >
-          {t("program-details-page.description.invest")}
-        </GVButton>
-        <InvestmentUnauthPopup
-          message={t("program-details-page.description.unauth-popup")}
-          title={""}
-          currency={currency}
-          availableToInvest={availableToInvest}
-          asset={ASSET.PROGRAM}
-          open={isOpenUnAuthInvestPopup}
-          onClose={setIsCloseUnAuthInvestPopup}
-        />
-      </>
-    );
   const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
+  const openPopupMethod = isAuthenticated
+    ? setIsOpenDepositPopup
+    : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton className="table-cards__button" onClick={setIsOpenPopup}>
+      <GVButton className="table-cards__button" onClick={openPopupMethod}>
         {label}
       </GVButton>
       {deposit}
+      <InvestmentUnauthPopup
+        message={t("program-details-page.description.unauth-popup")}
+        title={""}
+        currency={currency}
+        availableToInvest={availableToInvest}
+        asset={ASSET.PROGRAM}
+        open={isOpenUnAuthInvestPopup}
+        onClose={setIsCloseUnAuthInvestPopup}
+      />
     </>
   );
 };
