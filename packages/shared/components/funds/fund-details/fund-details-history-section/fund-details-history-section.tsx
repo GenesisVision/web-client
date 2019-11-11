@@ -12,7 +12,6 @@ import useTab from "shared/hooks/tab.hook";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 import { getDashboardHistoryDetailsCounts } from "../services/fund-details.service";
 import FundReallocateHistory from "./fund-reallocate-history/fund-reallocate-history";
-import FundStructure from "./fund-structure/fund-structure";
 
 const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
