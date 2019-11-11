@@ -14,7 +14,7 @@ export const tableSelectorCreator = <
   ItemsType
 >(
   selector: (state: State) => ITableState<TableState>,
-  itemName: string,
+  itemName: string = "items",
   defaultData: {
     items: any;
     total: number;
