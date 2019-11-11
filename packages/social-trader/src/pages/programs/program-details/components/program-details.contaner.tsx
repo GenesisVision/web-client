@@ -16,8 +16,8 @@ import { ASSET } from "shared/constants/constants";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import { programEventsSelector } from "shared/reducers/platform-reducer";
 import {
-  composeProgramNotificationsUrl,
-  composeProgramSettingsUrl
+  createProgramNotificationsToUrl,
+  createProgramSettingsToUrl
 } from "shared/utils/compose-url";
 
 import { levelParametersSelector } from "../reducers/level-parameters.reducer";
@@ -41,16 +41,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <DetailsDescriptionSection
         personalDetails={description.personalDetails}
         description={description}
-        notificationsUrl={{
-          pathname: PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
-          as: composeProgramNotificationsUrl(description.url),
-          state: `/ ${description.title}`
-        }}
-        settingsUrl={{
-          as: composeProgramSettingsUrl(description.url),
-          pathname: PROGRAM_SETTINGS_FOLDER_ROUTE,
-          state: `/ ${description.title}`
-        }}
+        notificationsUrl={createProgramNotificationsToUrl(
+          description.url,
+          description.title
+        )}
+        settingsUrl={createProgramSettingsToUrl(
+          description.url,
+          description.title
+        )}
         AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
         PerformanceData={() => (
           <PerformanceData
