@@ -1,4 +1,3 @@
-import { FundAssetsListInfo } from "gv-api-web";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
@@ -79,11 +78,11 @@ export const getFundReallocateHistory = (fundId: string) => (
   return fundReallocateHistoryAction(fundId, filters);
 };
 
-export const getFundStructure = (fundId: string) => (
+/*export const getFundStructure = (fundId: string) => (
   filters: ComposeFiltersAllType
 ) => {
   return fundStructureAction(fundId);
-};
+};*/
 
 export const getProfitChart: TGetChartFunc = ({
   id,
