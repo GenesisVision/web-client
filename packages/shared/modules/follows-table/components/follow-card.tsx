@@ -99,6 +99,7 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       assetId={follow.id}
       profit={follow.statistic.profit}
       chart={follow.statistic.chart}
+      color={follow.color}
       hasAvatar
       subTitle={follow.owner.username}
       logo={follow.logo}

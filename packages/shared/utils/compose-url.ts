@@ -14,7 +14,7 @@ import {
   FUNDS_SLUG_URL_PARAM_NAME
 } from "shared/routes/funds.routes";
 import {
-  FOLLOW_DETAILS_SLUG_ROUTE,
+  FOLLOW_DETAILS_SLUG_ROUTE, FOLLOW_FACET_ROUTE,
   SETTINGS
 } from "shared/routes/invest.routes";
 import {
@@ -112,6 +112,11 @@ export const composeFundNotificationsUrl = (slugUrl: string): string =>
 export const composeFundSettingsUrl = (slugUrl: string): string =>
   replaceParams(`${FUND_DETAILS_ROUTE}/${FUND_SETTINGS}`, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const composeFollowFacetUrl = (slugUrl: string): string =>
+  replaceParams(FOLLOW_FACET_ROUTE, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeProgramFacetUrl = (slugUrl: string): string =>

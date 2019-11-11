@@ -89,6 +89,7 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title = "" }) => {
       title={fund.title}
       subTitle={fund.owner.username}
       logo={fund.logo}
+      color={fund.color}
       detailsUrl={{
         pathname: composeFundsDetailsUrl(fund.url),
         state: `/ ${title}`

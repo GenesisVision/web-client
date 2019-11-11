@@ -99,6 +99,7 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
       assetId={program.id}
       profit={program.statistic.profit}
       chart={program.statistic.chart}
+      color={program.color}
       hasAvatar
       title={program.title}
       subTitle={program.owner.username}
