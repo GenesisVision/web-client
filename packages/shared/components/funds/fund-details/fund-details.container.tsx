@@ -31,7 +31,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
 import { IDescriptionSection } from "./fund-details.types";
-import { fundEventsTableSelector } from "./reducers/fund-history.reducer";
+import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
 import { dispatchFundDescription } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({
@@ -111,7 +111,7 @@ const _FundDetailsContainer: React.FC<Props> = ({
         WithdrawContainer={descriptionSection.WithdrawContainer}
       />
       <FundDetailsStatisticSection />
-      {/*<FundDetailsHistorySection id={description.id} />*/}
+      <FundDetailsHistorySection id={description.id} />
     </Page>
   );
 };
