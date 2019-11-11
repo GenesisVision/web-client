@@ -1,6 +1,5 @@
 import "./subscription-details.scss";
 
-import { PersonalProgramDetailsFull } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -47,7 +46,7 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
 interface Props {
   id: string;
   currency: CurrencyEnum;
-  personalDetails: PersonalProgramDetailsFull;
+  personalDetails: any;
 }
 
 const SubscriptionDetailsContainer = React.memo(_SubscriptionDetailsContainer);

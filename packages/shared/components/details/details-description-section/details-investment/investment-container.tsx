@@ -2,7 +2,7 @@ import "./details-investment.scss";
 
 import { PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
-import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
+import { IFundWithdrawContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { STATUS } from "shared/constants/constants";
@@ -56,7 +56,7 @@ interface Props {
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  WithdrawContainer: React.ComponentType<IFundWithdrawContainerProps>;
   ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 

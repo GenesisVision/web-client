@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
-import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
+import { IFundWithdrawContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import {
@@ -228,7 +228,7 @@ interface Props {
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  WithdrawContainer: React.ComponentType<IFundWithdrawContainerProps>;
   ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
