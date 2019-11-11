@@ -49,8 +49,8 @@ const _DepositButton: React.FC<Props> = ({
         <ProgramDeposit
           entryFee={entryFee}
           availableToInvest={availableToInvest}
-          broker={broker}
-          currency={currency}
+          broker={broker!}
+          currency={currency!}
           open={isOpenDepositPopup}
           id={id}
           onClose={setIsDepositClosePopup}
@@ -84,10 +84,10 @@ interface Props {
   ownAsset?: boolean;
   entryFee?: number;
   availableToInvest?: number;
-  broker: string;
+  broker?: string;
   type: ASSET;
   id: string;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
 }
 
 const DepositButton = React.memo(_DepositButton);
