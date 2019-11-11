@@ -1,0 +1,11 @@
+@import "~shared/styles/sizes";
+
+.program-financial-statistic {
+  &__cell {
+    padding-right: $padding-xsmall;
+
+    &--sm-size {
+      width: 160px;
+    }
+  }
+}
