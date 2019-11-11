@@ -50,7 +50,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
       </div>
       <div>
         {/*{tab === TABS.STRUCTURE && <FundStructure id={id} />}*/}
-        {/*{tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}*/}
+        {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
       </div>
     </DetailsBlock>
   );
