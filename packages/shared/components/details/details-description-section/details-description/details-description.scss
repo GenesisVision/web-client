@@ -55,7 +55,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
   &__avatar {
     cursor: pointer;
-    width: 100%;
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
     .program-avatar {
       justify-content: flex-start;

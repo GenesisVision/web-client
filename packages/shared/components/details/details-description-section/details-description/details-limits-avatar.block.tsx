@@ -29,7 +29,7 @@ const _DetailsLimitsAvatar: React.FC<{
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className="asset-details-description__avatar">
+    <div className="details-description__avatar">
       <AssetAvatar
         url={logo}
         level={level}
