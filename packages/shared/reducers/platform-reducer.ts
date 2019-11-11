@@ -100,7 +100,7 @@ export const assetTypeValuesSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      data.enums.assetTypes.map(type => ({
+      ["test"].map(type => ({
         value: type,
         label: type
       }))) ||
@@ -115,13 +115,11 @@ export const allEventsSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      data.enums.event[ROLE_ENV || ROLE.MANAGER].allAssets.map(
-        ({ key, title }) => ({
-          // TODO remove after union
-          value: key,
-          labelKey: title
-        })
-      )) ||
+      [{ key: "test", title: "test" }].map(({ key, title }) => ({
+        // TODO remove after union
+        value: key,
+        labelKey: title
+      }))) ||
     []
 );
 
