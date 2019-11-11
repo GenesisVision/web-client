@@ -285,31 +285,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     max-width: 750px;
   }
 
-  &__avatar {
-    cursor: pointer;
-    padding: $padding-xsmall-mobile 0 $padding-xsmall;
-    .program-avatar {
-      justify-content: flex-start;
-      width: $avatar-size-mobile;
-      height: $avatar-size-mobile;
-      margin: 0;
-    }
-    & .program-avatar__level {
-      background-color: $background-color;
-    }
-
-    @include media-breakpoint-phone() {
-      .program-avatar {
-        width: $avatar-size;
-        height: $avatar-size;
-        margin: 0;
-      }
-    }
-    @include media-breakpoint-tablet() {
-      padding: 0;
-    }
-  }
-
   &__info {
     order: 99;
     width: 100%;
