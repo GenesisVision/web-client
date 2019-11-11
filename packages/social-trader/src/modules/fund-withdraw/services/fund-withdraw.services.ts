@@ -2,7 +2,7 @@ import { Currency } from "gv-api-web";
 import { Dispatch } from "redux";
 import {
   FundWithdraw,
-  FundWithdrawalInfoResponse
+  FundWithdrawInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investmentsApi from "shared/services/api-client/investments-api";
@@ -13,14 +13,14 @@ import authService from "shared/services/auth-service";
 export const getFundWithdrawInfo = (
   id: string,
   currency: Currency
-) => (): Promise<FundWithdrawalInfoResponse> => {
+) => (): Promise<FundWithdrawInfoResponse> => {
   return Promise.all([
     investmentsApi.getFundWithdrawInfo(id, authService.getAuthArg(), {
       currency
     }),
     walletApi.getWalletAvailable(currency, authService.getAuthArg())
-  ]).then(([withdrawalInfo, walletMulti]) => {
-    return { withdrawalInfo, wallets: walletMulti.wallets };
+  ]).then(([withdrawInfo, walletMulti]) => {
+    return { withdrawInfo, wallets: walletMulti.wallets };
   });
 };
 
