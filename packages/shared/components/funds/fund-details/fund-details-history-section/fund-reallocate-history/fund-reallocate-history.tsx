@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
+import { ReallocationModel } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
@@ -23,7 +24,6 @@ import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cel
 
 const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-
   return (
     <TableContainer
       getItems={getFundReallocateHistory(id)}
@@ -44,7 +44,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
       renderHeader={(column: SortingColumn) => {
         return <FundStructureHeaderCell column={column} />;
       }}
-      renderBodyRow={(item: any) => (
+      renderBodyRow={(item: ReallocationModel) => (
         <TableRow stripy>
           <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
             {formatDate(item.date)}
@@ -68,12 +68,9 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   );
 };
 
-const FundReallocateHistory = React.memo(_FundReallocateHistory);
-
-export default FundReallocateHistory;
-
-interface OwnProps {
+interface Props {
   id: string;
 }
 
-interface Props extends OwnProps {}
+const FundReallocateHistory = React.memo(_FundReallocateHistory);
+export default FundReallocateHistory;
