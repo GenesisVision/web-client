@@ -9,7 +9,8 @@ import FacetCardsStub from "./facet-cards-stub";
 
 export enum ASSETS_FACETS {
   FUNDS = "fundInfo",
-  PROGRAMS = "programInfo"
+  PROGRAMS = "programInfo",
+  FOLLOWS = "followInfo"
 }
 
 export const _FacetCardsContainer: React.FC<Props> = ({
