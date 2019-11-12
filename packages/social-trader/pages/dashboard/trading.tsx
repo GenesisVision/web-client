@@ -1,11 +1,15 @@
 import { NextPage } from "next";
-import OverviewPage from "pages/dashboard/overview.page";
 import TradingPage from "pages/dashboard/trading.page";
 import React from "react";
+import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
+import withPrivateRoute from "shared/decorators/with-private-route";
 
 const Page: NextPage = () => {
   return <TradingPage />;
 };
 
-export default withDefaultLayout(Page);
+export default compose(
+  withPrivateRoute,
+  withDefaultLayout
+)(Page);
