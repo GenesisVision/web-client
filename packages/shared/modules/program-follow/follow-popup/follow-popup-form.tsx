@@ -2,10 +2,8 @@ import "./follow-popup.scss";
 
 import {
   AttachToSignalProvider,
-  AttachToSignalProviderFixedCurrencyEnum,
-  AttachToSignalProviderInitialDepositCurrencyEnum,
-  AttachToSignalProviderModeEnum,
   SignalSubscription,
+  SubscriptionMode,
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
@@ -22,13 +20,12 @@ import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 
 const initRequestParams = {
-  mode: "ByBalance" as AttachToSignalProviderModeEnum,
+  tradingAccountId: "",
+  mode: "ByBalance" as SubscriptionMode,
   percent: 10,
   openTolerancePercent: 0.5,
   fixedVolume: 100,
-  fixedCurrency: "USD" as AttachToSignalProviderFixedCurrencyEnum,
-  initialDepositCurrency: "GVT" as AttachToSignalProviderInitialDepositCurrencyEnum,
-  initialDepositAmount: 0
+  fixedCurrency: "USD" as CurrencyEnum
 };
 
 const _FollowForm: React.FC<Props> = ({
@@ -48,16 +45,9 @@ const _FollowForm: React.FC<Props> = ({
     signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
   }, [setTab, signalSubscription.hasSignalAccount]);
   const createdCopytradingAccount = useCallback(
-    ({
-      initialDepositCurrency,
-      initialDepositAmount
-    }: CreateAccountFormValues) => {
+    ({  }: CreateAccountFormValues) => {
       setTab(null, TABS.PARAMS);
-      setRequestParams({
-        ...requestParams,
-        initialDepositCurrency,
-        initialDepositAmount
-      });
+      setRequestParams(requestParams);
     },
     [requestParams, setTab]
   );

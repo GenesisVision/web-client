@@ -1,6 +1,5 @@
 import {
   AmountWithCurrency,
-  FilterModel,
   ItemsViewModelProgramDetailsList,
   PlatformInfo,
   ProgramAssetPlatformInfo,
@@ -19,8 +18,7 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
-
-import { RootState } from "./root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 export type PlatformState = IApiState<PlatformInfo>;
 
@@ -134,7 +132,7 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
       if (!data) return [];
       return data.filters.events.map(
         // TODO remove after union
-        ({ key, title }: FilterModel) => ({
+        ({ key, title }: { key: string; title: string }) => ({
           value: key,
           labelKey: title
         })

@@ -4,6 +4,7 @@ import {
   ProgramTag
 } from "gv-api-web";
 import { Location } from "history";
+import Router from "next/router";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -31,9 +32,9 @@ import {
   programCurrenciesSelector,
   programTagsSelector
 } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
-import Router from "next/router";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+
 import * as programsService from "../../services/programs-table.service";
 import {
   composeCurrencyFilter,

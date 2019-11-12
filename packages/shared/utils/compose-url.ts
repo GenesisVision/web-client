@@ -1,6 +1,9 @@
 import {
+  FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
   FOLLOW_NOTIFICATIONS_ROUTE,
+  FUND_NOTIFICATIONS_FOLDER_ROUTE,
   FUND_NOTIFICATIONS_ROUTE,
+  PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "shared/components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
@@ -15,6 +18,9 @@ import {
 } from "shared/routes/funds.routes";
 import {
   FOLLOW_DETAILS_SLUG_ROUTE,
+  FOLLOW_SETTINGS_FOLDER_ROUTE,
+  FUND_SETTINGS_FOLDER_ROUTE,
+  PROGRAM_SETTINGS_FOLDER_ROUTE,
   SETTINGS
 } from "shared/routes/invest.routes";
 import {
@@ -29,6 +35,7 @@ import {
   PROGRAMS_FACET_ROUTE
 } from "shared/routes/programs.routes";
 
+import { ToType } from "../components/link/link";
 import replaceParams from "./replace-params";
 
 export const composeUrl = (route: string, slugParamName: string) => (
@@ -123,3 +130,63 @@ export const composeFundFacetUrl = (slugUrl: string): string =>
   replaceParams(FUNDS_FACET_ROUTE, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
+
+export const createFollowSettingsToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeFollowSettingsUrl(url),
+    FOLLOW_SETTINGS_FOLDER_ROUTE,
+    title
+  );
+
+export const createFundSettingsToUrl = (url: string, title: string): ToType =>
+  createToUrl(composeFundSettingsUrl(url), FUND_SETTINGS_FOLDER_ROUTE, title);
+
+export const createProgramSettingsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeProgramSettingsUrl(url),
+    PROGRAM_SETTINGS_FOLDER_ROUTE,
+    title
+  );
+
+export const createFollowNotificationsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeFollowNotificationsUrl(url),
+    FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
+    title
+  );
+
+export const createFundNotificationsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeFundNotificationsUrl(url),
+    FUND_NOTIFICATIONS_FOLDER_ROUTE,
+    title
+  );
+
+export const createProgramNotificationsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeProgramNotificationsUrl(url),
+    PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
+    title
+  );
+
+export const createToUrl = (
+  as: string,
+  pathname: string,
+  state: string
+): ToType => ({
+  as,
+  pathname,
+  state: `/ ${state}`
+});

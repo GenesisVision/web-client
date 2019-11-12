@@ -17,13 +17,13 @@ import {
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
 import brokersApi from "shared/services/api-client/brokers-api";
 // import investorApi from "shared/services/api-client/investor-api";
 // import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { ActionType, MiddlewareDispatch } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   fetchEventsAction,

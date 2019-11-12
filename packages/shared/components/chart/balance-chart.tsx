@@ -1,4 +1,3 @@
-import { BalanceChartElement } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -14,6 +13,8 @@ import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 
+import { BalanceChartElementType } from "../details/details-statistic-section/details.chart.helpers";
+
 const _BalanceChart: React.FC<Props> = ({
   tooltip,
   color,
@@ -21,12 +22,11 @@ const _BalanceChart: React.FC<Props> = ({
   currency
 }) => {
   const chart = balanceChart.map(x => ({
-    ...x,
-    date: x.date.getTime()
+    ...x
   }));
   return (
     <ResponsiveContainer>
-      <AreaChart data={chart} margin={{ top: 20 }}>
+      <AreaChart data={balanceChart} margin={{ top: 20 }}>
         {chartXAxis(
           balanceChart[0].date,
           balanceChart[balanceChart.length - 1].date
@@ -76,7 +76,7 @@ interface Props {
     | React.StatelessComponent<any>
     | ContentRenderer<TooltipProps>;
   color: string;
-  balanceChart: BalanceChartElement[];
+  balanceChart: BalanceChartElementType;
   currency: CURRENCIES;
 }
 

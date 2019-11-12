@@ -3,19 +3,11 @@ import "./details-investment.scss";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks, useDispatch, useSelector } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import DetailsBlock from "shared/components/details/details-block";
-import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
-import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import {
   EVENT_LOCATION,
   getEvents
@@ -25,12 +17,8 @@ import { TableSelectorType } from "shared/components/table/components/table.type
 import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  CurrencyEnum,
-  DispatchDescriptionType,
-  FeesType
-} from "shared/utils/types";
+import { CurrencyEnum, FeesType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 import InvestmentContainer, {
@@ -45,7 +33,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   eventTypesSelector,
   selector,
   currency,
-  service: { dispatchDescription },
+  dispatchDescription,
   id,
   personalDetails,
   WithdrawContainer,
@@ -120,46 +108,19 @@ enum TABS {
   INVESTMENT = "INVESTMENT",
   EVENTS = "EVENTS"
 }
-interface OwnProps {
+interface Props {
   fees: FeesType;
   notice?: string;
   asset: ASSET;
   eventTypesSelector: (state: RootState) => SelectFilterValue[];
-  dispatchDescription: DispatchDescriptionType;
+  dispatchDescription: () => void;
   selector: TableSelectorType;
   currency: CurrencyEnum;
   id: string;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
-  ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
+  WithdrawContainer?: React.ComponentType<any>;
+  ReinvestingWidget?: React.ComponentType<any>;
 }
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { dispatchDescription }: Props
-): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchDescription
-    },
-    dispatch
-  )
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchDescription: DispatchDescriptionType;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends DispatchProps, OwnProps {}
-
-const DetailsInvestment = compose<React.ComponentType<OwnProps>>(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_DetailsInvestment);
+const DetailsInvestment = React.memo(_DetailsInvestment);
 export default DetailsInvestment;

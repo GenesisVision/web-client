@@ -1,16 +1,12 @@
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import FollowDetailsContainer from "pages/follows/follow-details/follow-details.contaner";
 import React from "react";
-import FollowDetailsPageCommon from "shared/components/follows/follow-details/follow-details.page";
+import { useSelector } from "react-redux";
 
-import FollowControls from "./components/follow-controls/follow-controls";
+import { followDescriptionSelector } from "./reducers/description.reducer";
 
 const _FollowDetailsPage: React.FC = () => {
-  const descriptionSection = {
-    Controls: FollowControls,
-    WithdrawContainer: ProgramWithdrawContainer
-  };
-
-  return <FollowDetailsPageCommon descriptionSection={descriptionSection} />;
+  const description = useSelector(followDescriptionSelector);
+  return <FollowDetailsContainer data={description!} />;
 };
 
 const FollowDetailsPage = React.memo(_FollowDetailsPage);

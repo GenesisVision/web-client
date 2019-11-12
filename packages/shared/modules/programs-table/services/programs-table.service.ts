@@ -12,7 +12,7 @@ import {
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import { IDataModel } from "shared/constants/constants";
-import { RootState } from "shared/reducers/root-reducer";
+import { FAVORITES_TAB_NAME } from "shared/routes/invest.routes";
 import {
   PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE,
@@ -23,6 +23,7 @@ import programApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 import { NextPageWithReduxContext } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import * as programTableActions from "../actions/programs-table.actions";
 import { FetchProgramsFiltersType } from "../actions/programs-table.actions";
@@ -32,7 +33,6 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
-import { FAVORITES_TAB_NAME } from "shared/routes/invest.routes";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

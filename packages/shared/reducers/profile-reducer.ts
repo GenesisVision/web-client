@@ -9,6 +9,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import tableReducerFactory, {
   ITableState
 } from "shared/components/table/reducers/table.reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
@@ -24,7 +25,6 @@ import {
 } from "../components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { apiSelector } from "../utils/selectors";
 import apiReducerFactory, { IApiState } from "./reducer-creators/api-reducer";
-import { RootState } from "./root-reducer";
 
 export const REFERRAL_DETAILS = "referralDetails";
 export const REFERRAL_FRIENDS = "referralFriends";

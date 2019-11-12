@@ -1,16 +1,26 @@
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import React from "react";
-import ProgramDetailsPageCommon from "shared/components/programs/program-details/program-details.page";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import ProgramControls from "./components/program-controls/program-controls";
+import { statisticCurrencyAction } from "./actions/program-details.actions";
+import ProgramDetailsContainer from "./program-details.contaner";
+import { programDescriptionSelector } from "./reducers/description.reducer";
+import {
+  dispatchPlatformLevelsParameters,
+  dispatchProgramDescription
+} from "./service/program-details.service";
 
 const _ProgramDetailsPage: React.FC = () => {
-  const descriptionSection = {
-    Controls: ProgramControls,
-    WithdrawContainer: ProgramWithdrawContainer
-  };
-
-  return <ProgramDetailsPageCommon descriptionSection={descriptionSection} />;
+  const dispatch = useDispatch();
+  const description = useSelector(programDescriptionSelector);
+  useEffect(() => {
+    dispatch(dispatchProgramDescription());
+  }, []);
+  useEffect(() => {
+    if (!description) return;
+    dispatch(dispatchPlatformLevelsParameters(description.currency));
+    dispatch(statisticCurrencyAction(description.currency));
+  }, [description]);
+  return <ProgramDetailsContainer data={description!} />;
 };
 
 const ProgramDetailsPage = React.memo(_ProgramDetailsPage);

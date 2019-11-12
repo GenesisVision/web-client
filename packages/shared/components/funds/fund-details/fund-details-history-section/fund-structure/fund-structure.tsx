@@ -22,7 +22,8 @@ const FundStructure: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
   if (!id) return null;
   return (
-    <TableContainer
+    <div>
+      {/*<TableContainer
       //getItems={getFundStructure(id)}
       dataSelector={fundStructureTableSelector}
       columns={FUND_STRUCTURE_COLUMNS}
@@ -69,7 +70,8 @@ const FundStructure: React.FC<Props> = ({ id }) => {
           </TableCell>
         </TableRow>
       )}
-    />
+    />*/}
+    </div>
   );
 };
 

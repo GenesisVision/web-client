@@ -7,11 +7,11 @@ import { SET_FUND_ID } from "./fund-details.constants";
 import { FundIdState } from "./reducers/id.reducer";
 
 export interface IDescriptionSection {
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  WithdrawContainer: React.ComponentType<IFundWithdrawContainerProps>;
   Controls: React.ComponentType<IFundControlsProps>;
 }
 
-export interface IFundWithdrawalContainerProps extends IDialogProps {
+export interface IFundWithdrawContainerProps extends IDialogProps {
   id: string;
   accountCurrency: CurrencyEnum;
   assetCurrency: CurrencyEnum;

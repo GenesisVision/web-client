@@ -7,7 +7,11 @@ import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-load
 import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  ResponseError,
+  SetSubmittingType
+} from "shared/utils/types";
 
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import { useGetRate, useGetSignalInfo } from "./program-follow-container.hooks";
@@ -64,7 +68,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
         .then(() => dispatch(alertMessageActions.success(t(successMessage))))
         .then(onApply)
         .then(onClose)
-        .catch(({ errorMessage }) =>
+        .catch(({ errorMessage }: ResponseError) =>
           dispatch(alertMessageActions.error(errorMessage))
         )
         .finally(() => setSubmitting(false));

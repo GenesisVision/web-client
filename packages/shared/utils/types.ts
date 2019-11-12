@@ -13,7 +13,7 @@ import React from "react";
 import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 

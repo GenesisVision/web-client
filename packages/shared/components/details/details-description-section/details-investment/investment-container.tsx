@@ -1,7 +1,8 @@
 import "./details-investment.scss";
 
+import { PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
-import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
+import { IFundWithdrawContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import SubscriptionDetailsContainer from "shared/components/programs/program-details/program-details-description/subscription-details/subscription-details-container";
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import { STATUS } from "shared/constants/constants";
@@ -40,7 +41,7 @@ const _InvestmentContainer: React.FC<Props> = ({
         <SubscriptionDetailsContainer
           id={id}
           currency={assetCurrency}
-          personalDetails={personalDetails}
+          personalDetails={personalDetails as PersonalProgramDetails}
         />
       )}
     </div>
@@ -55,17 +56,14 @@ interface Props {
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  WithdrawContainer?: React.ComponentType<IFundWithdrawContainerProps>;
   ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
 export const haveActiveInvestment = (details: InvestmentDetails): boolean =>
   !!details && details.isInvested && details.status !== STATUS.ENDED;
 
-export const haveSubscription = (details: InvestmentDetails): boolean =>
-  !!details &&
-  !!details.signalSubscription &&
-  details.signalSubscription.hasActiveSubscription;
+export const haveSubscription = (details: InvestmentDetails): boolean => false;
 
 const InvestmentContainer = React.memo(_InvestmentContainer);
 export default InvestmentContainer;

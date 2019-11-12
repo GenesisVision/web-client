@@ -6,9 +6,9 @@ import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
+import { followDescriptionSelector } from "pages/follows/follow-details/reducers/description.reducer";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { followDescriptionSelector } from "shared/components/follows/follow-details/reducers/description.reducer";
 import {
   dispatchFollowDescription,
   getFollowBrokers

@@ -9,7 +9,7 @@ import {
   IFundWithdrawPopupProps
 } from "./fund-withdraw-popup";
 import { FundWithdrawLoaderData } from "./fund-withdraw.loader";
-import { FundWithdrawalInfoResponse } from "./fund-withdraw.types";
+import { FundWithdrawInfoResponse } from "./fund-withdraw.types";
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
   open,
@@ -41,7 +41,7 @@ const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
 export interface IFundWithdrawDialogProps
   extends IDialogProps,
     IFundWithdrawPopupProps {
-  fetchInfo: () => Promise<FundWithdrawalInfoResponse>;
+  fetchInfo: () => Promise<FundWithdrawInfoResponse>;
 }
 
 export const FundWithdrawDialog = React.memo(_FundWithdrawDialog);

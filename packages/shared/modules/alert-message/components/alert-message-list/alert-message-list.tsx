@@ -9,8 +9,8 @@ import { connect } from "react-redux";
 import { compose, Dispatch } from "redux";
 import GVButton from "shared/components/gv-button";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
-import { RootState } from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";

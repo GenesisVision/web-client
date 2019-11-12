@@ -1,13 +1,15 @@
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import { kycConfirmedSelector } from "shared/reducers/header-reducer";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IInvestmentProgramInfoProps {
@@ -38,16 +40,14 @@ const renderFee = (
   );
 };
 
-const _InvestmentProgramInfo: React.FC<
-  WithTranslation & IInvestmentProgramInfoProps
-> = ({
-  t,
+const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   isOwnProgram,
   programDescription,
   levelsParameters,
-  LevelCalculator,
-  isKycConfirmed
+  LevelCalculator
 }) => {
+  const [t] = useTranslation();
+  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const {
     availableInvestmentBase,
     availableInvestmentLimit,
@@ -152,5 +152,5 @@ const _InvestmentProgramInfo: React.FC<
   );
 };
 
-const InvestmentProgramInfo = translate()(React.memo(_InvestmentProgramInfo));
+const InvestmentProgramInfo = React.memo(_InvestmentProgramInfo);
 export default InvestmentProgramInfo;

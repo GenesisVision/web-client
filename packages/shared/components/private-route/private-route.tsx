@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { RouteComponentProps, RouteProps } from "react-router";
 import { Redirect, Route } from "react-router-dom";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { LOGIN_ROUTE } from "shared/routes/app.routes";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 class _PrivateRoute extends React.PureComponent<RouteProps & StateProps> {
   renderComponent = (props: RouteComponentProps) => {
