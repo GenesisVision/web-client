@@ -56,7 +56,7 @@ interface Props {
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawContainerProps>;
+  WithdrawContainer?: React.ComponentType<IFundWithdrawContainerProps>;
   ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 
