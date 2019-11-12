@@ -3,8 +3,8 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import NotFoundPage from "shared/components/not-found/not-found";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
 import { WalletRouteProps } from "../wallet.routes";

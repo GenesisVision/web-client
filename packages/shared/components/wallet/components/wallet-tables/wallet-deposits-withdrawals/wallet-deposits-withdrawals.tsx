@@ -23,7 +23,7 @@ import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { platformDataSelector } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
 import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";

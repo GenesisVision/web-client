@@ -19,8 +19,7 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
-
-import { RootState } from "./root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 export type PlatformState = IApiState<PlatformInfo>;
 

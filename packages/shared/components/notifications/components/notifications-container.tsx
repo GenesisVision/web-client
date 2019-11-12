@@ -14,7 +14,7 @@ import {
 } from "shared/components/notifications/services/notifications.services";
 import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
 import { notificationsCountSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { MiddlewareDispatch } from "../../../utils/types";
 

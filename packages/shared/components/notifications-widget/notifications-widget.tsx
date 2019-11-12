@@ -8,7 +8,7 @@ import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { notificationsToggle } from "shared/components/header/header.service";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 const _NotificationsWidget: React.FC<Props> = ({
   data: notificationsCount = 0

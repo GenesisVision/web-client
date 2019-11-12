@@ -25,8 +25,8 @@ import {
   fundAssetsSelector,
   platformCurrenciesSelector
 } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import * as fundsService from "../../services/funds-table.service";

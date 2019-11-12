@@ -19,7 +19,6 @@ import {
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
 import assetsApi from "shared/services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
 import eventsApi from "shared/services/api-client/events-api";
@@ -31,6 +30,7 @@ import {
   MiddlewareDispatch,
   TGetState
 } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   fetchEventsAction,

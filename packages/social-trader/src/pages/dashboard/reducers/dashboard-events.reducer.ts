@@ -13,9 +13,9 @@ import apiReducerFactory, {
 } from "shared/reducers/reducer-creators/api-reducer";
 import { apiSelector } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { DASHBOARD_PORTFOLIO_EVENTS } from "../actions/dashboard.actions";
-import { RootState } from "shared/reducers/root-reducer";
 
 export type ManagerPortfolioEventsState = IApiState<InvestmentEventViewModels>;
 

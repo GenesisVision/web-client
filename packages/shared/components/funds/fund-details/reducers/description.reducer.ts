@@ -2,12 +2,12 @@ import { FundDetailsFull } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "shared/reducers/reducer-creators/api-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import {
   apiFieldSelector,
   apiSelector,
   fieldSelector
 } from "shared/utils/selectors";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { FETCH_FUND_DESCRIPTION } from "../fund-details.constants";
 

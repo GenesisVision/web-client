@@ -5,8 +5,8 @@ import {
   calculateTotalPages,
   IPaging
 } from "shared/components/table/helpers/paging.helpers";
-import { RootState } from "shared/reducers/root-reducer";
 import { TGetState } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { updateFiltersAction as updateFiltersActionCreator } from "../actions/table.actions";
 import {

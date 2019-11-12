@@ -5,8 +5,8 @@ import {
   DialogLoaderGoogleAuthDesktop,
   DialogLoaderGoogleAuthMobile
 } from "shared/components/dialog/dialog-loader/dialog-loader-google-auth";
-import { RootState } from "shared/reducers/root-reducer";
 import { isTablet } from "shared/utils/breakpoints";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 interface IDialogLoaderGoogleAuthStepsStateProps {
   innerWidth: number;

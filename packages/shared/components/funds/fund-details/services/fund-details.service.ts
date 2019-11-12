@@ -3,9 +3,9 @@ import { Dispatch } from "redux";
 import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
-import { RootState } from "shared/reducers/root-reducer";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch, TGetState } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   fetchFundBalanceChartAction,

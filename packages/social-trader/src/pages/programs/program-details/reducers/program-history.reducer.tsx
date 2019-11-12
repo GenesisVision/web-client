@@ -16,7 +16,7 @@ import tableReducerFactory, {
   ITableState
 } from "shared/components/table/reducers/table.reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   GET_PROGRAM_PERIOD_HISTORY,

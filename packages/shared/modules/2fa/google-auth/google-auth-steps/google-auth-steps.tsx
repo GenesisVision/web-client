@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { RootState } from "shared/reducers/root-reducer";
 import { isTablet } from "shared/utils/breakpoints";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import GoogleAuthDesktop, {
   IGoogleAuthProps

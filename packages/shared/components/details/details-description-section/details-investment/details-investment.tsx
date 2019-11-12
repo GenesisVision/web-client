@@ -17,8 +17,8 @@ import { TableSelectorType } from "shared/components/table/components/table.type
 import { ASSET } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { CurrencyEnum, FeesType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { InvestmentDetails } from "./details-investment.helpers";
 import InvestmentContainer, {
@@ -118,7 +118,7 @@ interface Props {
   currency: CurrencyEnum;
   id: string;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<any>;
+  WithdrawContainer?: React.ComponentType<any>;
   ReinvestingWidget?: React.ComponentType<any>;
 }
 

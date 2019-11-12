@@ -4,8 +4,8 @@ import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { headerSelector } from "shared/reducers/header-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { SetSubmittingType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";

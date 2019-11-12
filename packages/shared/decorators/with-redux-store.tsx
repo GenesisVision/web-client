@@ -4,9 +4,9 @@ import { Store } from "redux";
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import platformActions from "shared/actions/platform-actions";
-import { RootState } from "shared/reducers/root-reducer";
 import authService from "shared/services/auth-service";
 import { AppWithReduxContext, InitializeStoreType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 const isServer = typeof window === "undefined";
 const __NEXT_REDUX_STORE__ = "__NEXT_REDUX_STORE__";

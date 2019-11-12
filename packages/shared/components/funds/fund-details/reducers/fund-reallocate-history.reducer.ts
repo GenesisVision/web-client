@@ -7,7 +7,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import tableReducerFactory, {
   ITableState
 } from "shared/components/table/reducers/table.reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   FUND_REALLOCATE_HISTORY,
