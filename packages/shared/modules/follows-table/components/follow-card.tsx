@@ -1,4 +1,3 @@
-import { CopyTradingDetailsList } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +29,7 @@ import {
 } from "shared/utils/formatter";
 
 interface Props {
-  follow: CopyTradingDetailsList;
+  follow: any;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }

@@ -1,6 +1,5 @@
 import {
   AmountWithCurrency,
-  FilterModel,
   ItemsViewModelProgramDetailsList,
   PlatformInfo,
   ProgramAssetPlatformInfo,
@@ -133,7 +132,7 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
       if (!data) return [];
       return data.filters.events.map(
         // TODO remove after union
-        ({ key, title }: FilterModel) => ({
+        ({ key, title }: { key: string; title: string }) => ({
           value: key,
           labelKey: title
         })

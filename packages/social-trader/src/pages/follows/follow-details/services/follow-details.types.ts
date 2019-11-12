@@ -1,7 +1,7 @@
 import {
-  ChartSimple,
   ProgramBalanceChart,
-  ProgramProfitChart
+  ProgramProfitCharts,
+  SimpleChart
 } from "gv-api-web";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -24,11 +24,11 @@ export type FollowDetailsProfitChart = {
   timeFrameGvtProfit: number;
   programCurrency: CurrencyEnum;
   profitChangePercent: number;
-  equityChart: ChartSimple[];
+  equityChart: SimpleChart[];
 };
 
 export type FollowStatisticResult = {
   statistic: FollowDetailsStatistic;
-  profitChart: ProgramProfitChart;
+  profitChart: ProgramProfitCharts;
   balanceChart: ProgramBalanceChart;
 };
