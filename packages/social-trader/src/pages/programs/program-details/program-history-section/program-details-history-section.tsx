@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
-import { ROLE } from "shared/constants/constants";
 import useTab from "shared/hooks/tab.hook";
-import useRole from "shared/hooks/use-role.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
@@ -19,7 +17,7 @@ import {
   periodHistoryTableSelector,
   subscriptionsTableSelector,
   tradesTableSelector
-} from "../../reducers/program-history.reducer";
+} from "../reducers/program-history.reducer";
 import {
   getFinancialStatistics,
   getOpenPositions,
@@ -27,7 +25,7 @@ import {
   getProgramHistoryCounts,
   getSubscriptions,
   getTrades
-} from "../../service/program-details.service";
+} from "../service/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
@@ -46,7 +44,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 }) => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const role = useRole();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
 
@@ -65,7 +62,6 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
     programId && dispatch(getProgramHistoryCounts(programId));
   }, [dispatch, programId]);
 
-  const isManager = role === ROLE.MANAGER;
   return (
     <DetailsBlock table>
       <div className="details-history__header">
@@ -96,7 +92,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
               value={TABS.FINANCIAL_STATISTIC}
               label={t("program-details-page.history.tabs.financial-statistic")}
               count={financialStatisticCount}
-              visible={isAuthenticated && isManager && isOwnProgram}
+              visible={isAuthenticated && isOwnProgram}
             />
           </GVTabs>
         </div>

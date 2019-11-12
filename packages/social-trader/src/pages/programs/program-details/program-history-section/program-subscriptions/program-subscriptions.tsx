@@ -16,7 +16,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,
   SUBSCRIBERS_STATUS_TYPE
-} from "../../../program-details.constants";
+} from "../../program-details.constants";
 import ProgramSubscriptionsRow from "./program-subscriptions-row";
 
 const _ProgramSubscriptions: React.FC<Props> = ({

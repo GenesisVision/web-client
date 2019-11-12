@@ -8,7 +8,7 @@ import ProgramFollowContainer from "shared/modules/program-follow/program-follow
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { dispatchProgramDescription } from "../../../service/program-details.service";
+import { dispatchProgramDescription } from "../../service/program-details.service";
 import SubscriptionDetails from "./subscription-details";
 
 const _SubscriptionDetailsContainer: React.FC<Props> = ({

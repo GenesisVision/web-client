@@ -2,7 +2,6 @@ import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import InvestmentProgramControls from "pages/programs/program-details/components/program-controls/investment-program-controls";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,12 +19,13 @@ import {
   createProgramSettingsToUrl
 } from "shared/utils/compose-url";
 
-import { levelParametersSelector } from "../reducers/level-parameters.reducer";
-import { programEventsTableSelector } from "../reducers/program-history.reducer";
-import { dispatchProgramDescriptionWithId } from "../service/program-details.service";
+import InvestmentProgramControls from "./program-controls/investment-program-controls";
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
+import { levelParametersSelector } from "./reducers/level-parameters.reducer";
+import { programEventsTableSelector } from "./reducers/program-history.reducer";
+import { dispatchProgramDescriptionWithId } from "./service/program-details.service";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();

@@ -22,7 +22,7 @@ import { formatDate, humanizeDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { PROGRAM_PERIOD_HISTORY } from "../../../program-details.constants";
+import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
 const _ProgramPeriodHistory: React.FC<Props> = ({

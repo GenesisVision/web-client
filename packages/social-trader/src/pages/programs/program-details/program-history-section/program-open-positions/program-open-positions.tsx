@@ -11,7 +11,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { CurrencyEnum } from "shared/utils/types";
 
-import { openPositionsSelector } from "../../../reducers/program-history.reducer";
+import { openPositionsSelector } from "../../reducers/program-history.reducer";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramOpenPositionsRow from "./program-open-positions-row";
 

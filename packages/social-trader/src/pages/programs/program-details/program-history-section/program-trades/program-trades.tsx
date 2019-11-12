@@ -15,7 +15,7 @@ import {
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import filesService from "shared/services/file-service";
 
-import { tradesSelector } from "../../../reducers/program-history.reducer";
+import { tradesSelector } from "../../reducers/program-history.reducer";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";

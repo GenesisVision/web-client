@@ -1,12 +1,13 @@
-import { statisticCurrencyAction } from "pages/programs/program-details/actions/program-details.actions";
-import ProgramDetailsContainer from "pages/programs/program-details/components/program-details.contaner";
-import { programDescriptionSelector } from "pages/programs/program-details/reducers/description.reducer";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { statisticCurrencyAction } from "./actions/program-details.actions";
+import ProgramDetailsContainer from "./program-details.contaner";
+import { programDescriptionSelector } from "./reducers/description.reducer";
 import {
   dispatchPlatformLevelsParameters,
   dispatchProgramDescription
-} from "pages/programs/program-details/service/program-details.service";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+} from "./service/program-details.service";
 
 const _ProgramDetailsPage: React.FC = () => {
   const dispatch = useDispatch();

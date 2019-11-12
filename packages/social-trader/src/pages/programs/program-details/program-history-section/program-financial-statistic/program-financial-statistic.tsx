@@ -15,7 +15,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
-} from "../../../program-details.constants";
+} from "../../program-details.constants";
 import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
 import ProgramFinancialStatisticRow from "./program-financial-statistic-row";
 

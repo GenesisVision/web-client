@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { programBalanceChartSelector } from "../../reducers/balance-chart.reducer";
-import { programStatusSelector } from "../../reducers/description.reducer";
-import { programProfitChartSelector } from "../../reducers/profit-chart.reducer";
-import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import { statisticDataLoaderData } from "../program-details.loader-data";
+import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
+import { programStatusSelector } from "../reducers/description.reducer";
+import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
+import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
 import ProgramBalanceChart from "./program-details-chart-section/program-balance-chart-section/program-balance-chart";
 import {
   useChartPeriod,
