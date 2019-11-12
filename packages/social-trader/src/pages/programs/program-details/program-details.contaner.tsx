@@ -24,8 +24,22 @@ import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
 import { levelParametersSelector } from "./reducers/level-parameters.reducer";
-import { programEventsTableSelector } from "./reducers/program-history.reducer";
-import { dispatchProgramDescriptionWithId } from "./service/program-details.service";
+import {
+  financialStatisticTableSelector,
+  openPositionsTableSelector,
+  periodHistoryTableSelector,
+  programEventsTableSelector,
+  subscriptionsTableSelector,
+  tradesTableSelector
+} from "./reducers/program-history.reducer";
+import {
+  dispatchProgramDescriptionWithId,
+  getFinancialStatistics,
+  getOpenPositions,
+  getPeriodHistory,
+  getSubscriptions,
+  getTrades
+} from "./service/program-details.service";
 
 const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
@@ -36,6 +50,25 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     dispatch(dispatchProgramDescriptionWithId(description.id));
   }, [description.id]);
 
+  const tablesData = {
+    financialStatistic: {
+      dataSelector: financialStatisticTableSelector,
+      getItems: getFinancialStatistics
+    },
+    openPositions: {
+      dataSelector: openPositionsTableSelector,
+      getItems: getOpenPositions
+    },
+    periodHistory: {
+      dataSelector: periodHistoryTableSelector,
+      getItems: getPeriodHistory
+    },
+    subscriptions: {
+      dataSelector: subscriptionsTableSelector,
+      getItems: getSubscriptions
+    },
+    trades: { dataSelector: tradesTableSelector, getItems: getTrades }
+  };
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
@@ -94,6 +127,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection
+        tablesData={tablesData}
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime
         }
@@ -104,7 +138,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         }
         showSwaps={description.brokerDetails.showSwaps}
         showTickets={description.brokerDetails.showTickets}
-        isSignalProgram={false} //TODO description.isSignalProgram
         programId={description.id}
         programCurrency={description.currency}
         title={description.title}

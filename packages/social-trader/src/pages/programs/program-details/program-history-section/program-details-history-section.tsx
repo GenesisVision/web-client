@@ -6,39 +6,39 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailsBlock from "shared/components/details/details-block";
 import GVTabs from "shared/components/gv-tabs";
 import GVTab from "shared/components/gv-tabs/gv-tab";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "shared/components/table/components/table.types";
 import useTab from "shared/hooks/tab.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
-import {
-  financialStatisticTableSelector,
-  openPositionsTableSelector,
-  periodHistoryTableSelector,
-  subscriptionsTableSelector,
-  tradesTableSelector
-} from "../reducers/program-history.reducer";
-import {
-  getFinancialStatistics,
-  getOpenPositions,
-  getPeriodHistory,
-  getProgramHistoryCounts,
-  getSubscriptions,
-  getTrades
-} from "../service/program-details.service";
+import { getProgramHistoryCounts } from "../service/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
 import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
 import ProgramTrades from "./program-trades/program-trades";
 
+const nullSelector = () => ({
+  itemsData: { data: { total: 0 } }
+});
+
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  tablesData: {
+    financialStatistic,
+    openPositions,
+    periodHistory,
+    subscriptions,
+    trades
+  },
   showCommissionRebateSometime,
   programId,
   showSwaps,
   showTickets,
   programCurrency,
-  isSignalProgram,
   isOwnProgram,
   title
 }) => {
@@ -46,17 +46,18 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
-
   const dispatch = useDispatch();
-  const openPositionsCount = useSelector(openPositionsTableSelector).itemsData
+  const openPositionsCount = useSelector(openPositions.dataSelector).itemsData
     .data.total;
-  const periodHistoryCount = useSelector(periodHistoryTableSelector).itemsData
-    .data.total;
-  const subscriptionsCount = useSelector(subscriptionsTableSelector).itemsData
-    .data.total;
-  const financialStatisticCount = useSelector(financialStatisticTableSelector)
+  const periodHistoryCount = useSelector(
+    periodHistory ? periodHistory.dataSelector : nullSelector
+  ).itemsData.data.total;
+  const subscriptionsCount = useSelector(
+    subscriptions ? subscriptions.dataSelector : nullSelector
+  ).itemsData.data.total;
+  const financialStatisticCount = useSelector(financialStatistic.dataSelector)
     .itemsData.data.total;
-  const tradesCount = useSelector(tradesTableSelector).itemsData.data.total;
+  const tradesCount = useSelector(trades.dataSelector).itemsData.data.total;
 
   useEffect(() => {
     programId && dispatch(getProgramHistoryCounts(programId));
@@ -86,7 +87,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
               value={TABS.SUBSCRIBERS}
               label={t("program-details-page.history.tabs.subscriptions")}
               count={subscriptionsCount}
-              visible={isAuthenticated && isSignalProgram && isOwnProgram}
+              visible={isAuthenticated && isOwnProgram}
             />
             <GVTab
               value={TABS.FINANCIAL_STATISTIC}
@@ -99,8 +100,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </div>
       {tab === TABS.TRADES && (
         <ProgramTrades
-          getItems={getTrades(programId)}
-          dataSelector={tradesTableSelector}
+          getItems={trades.getItems(programId)}
+          dataSelector={trades.dataSelector}
           showSwaps={showSwaps}
           showTickets={showTickets}
           programId={programId}
@@ -108,34 +109,34 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
-          getItems={getOpenPositions(programId)}
-          dataSelector={openPositionsTableSelector}
+          getItems={openPositions.getItems(programId)}
+          dataSelector={openPositions.dataSelector}
           programId={programId}
           currency={programCurrency}
         />
       )}
-      {tab === TABS.SUBSCRIBERS && (
+      {tab === TABS.SUBSCRIBERS && subscriptions && (
         <ProgramSubscriptions
-          getItems={getSubscriptions(programId)}
-          dataSelector={subscriptionsTableSelector}
+          getItems={subscriptions.getItems(programId)}
+          dataSelector={subscriptions.dataSelector}
           id={programId}
           currency={currency}
         />
       )}
       {tab === TABS.FINANCIAL_STATISTIC && (
         <ProgramFinancialStatistic
-          getItems={getFinancialStatistics(programId)}
-          dataSelector={financialStatisticTableSelector}
+          getItems={financialStatistic.getItems(programId)}
+          dataSelector={financialStatistic.dataSelector}
           showCommissionRebateSometime={showCommissionRebateSometime}
           id={programId}
           currency={programCurrency}
           title={title}
         />
       )}
-      {tab === TABS.PERIOD_HISTORY && (
+      {tab === TABS.PERIOD_HISTORY && periodHistory && (
         <ProgramPeriodHistory
-          getItems={getPeriodHistory(programId)}
-          dataSelector={periodHistoryTableSelector}
+          getItems={periodHistory.getItems(programId)}
+          dataSelector={periodHistory.dataSelector}
           id={programId}
           currency={programCurrency}
         />
@@ -153,8 +154,8 @@ enum TABS {
 }
 
 interface Props {
+  tablesData: TProgramTablesData;
   showCommissionRebateSometime: boolean;
-  isSignalProgram: boolean;
   showSwaps: boolean;
   showTickets: boolean;
   programId: string;
@@ -162,6 +163,19 @@ interface Props {
   isOwnProgram: boolean;
   title: string;
 }
+
+export type TProgramTableReduxData = {
+  getItems: (id: string) => GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
+};
+
+export type TProgramTablesData = {
+  trades: TProgramTableReduxData;
+  openPositions: TProgramTableReduxData;
+  subscriptions?: TProgramTableReduxData;
+  financialStatistic: TProgramTableReduxData;
+  periodHistory?: TProgramTableReduxData;
+};
 
 const ProgramDetailsHistorySection = React.memo(_ProgramDetailsHistorySection);
 export default ProgramDetailsHistorySection;
