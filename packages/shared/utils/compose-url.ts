@@ -1,4 +1,5 @@
 import {
+  FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
   FOLLOW_NOTIFICATIONS_ROUTE,
   FUND_NOTIFICATIONS_FOLDER_ROUTE,
   FUND_NOTIFICATIONS_ROUTE,
@@ -17,6 +18,7 @@ import {
 } from "shared/routes/funds.routes";
 import {
   FOLLOW_DETAILS_SLUG_ROUTE,
+  FOLLOW_SETTINGS_FOLDER_ROUTE,
   FUND_SETTINGS_FOLDER_ROUTE,
   PROGRAM_SETTINGS_FOLDER_ROUTE,
   SETTINGS
@@ -129,6 +131,13 @@ export const composeFundFacetUrl = (slugUrl: string): string =>
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
+export const createFollowSettingsToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeFollowSettingsUrl(url),
+    FOLLOW_SETTINGS_FOLDER_ROUTE,
+    title
+  );
+
 export const createFundSettingsToUrl = (url: string, title: string): ToType =>
   createToUrl(composeFundSettingsUrl(url), FUND_SETTINGS_FOLDER_ROUTE, title);
 
@@ -142,12 +151,22 @@ export const createProgramSettingsToUrl = (
     title
   );
 
+export const createFollowNotificationsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeFollowNotificationsUrl(url),
+    FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
+    title
+  );
+
 export const createFundNotificationsToUrl = (
   url: string,
   title: string
 ): ToType =>
   createToUrl(
-    composeFundSettingsUrl(url),
+    composeFundNotificationsUrl(url),
     FUND_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
@@ -157,7 +176,7 @@ export const createProgramNotificationsToUrl = (
   title: string
 ): ToType =>
   createToUrl(
-    composeProgramSettingsUrl(url),
+    composeProgramNotificationsUrl(url),
     PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
