@@ -6,6 +6,8 @@ import {
   dispatchProgramId
 } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
+import { compose } from "redux";
+import withDefaultLayout from "shared/decorators/with-default-layout";
 import { NextPageWithRedux } from "shared/utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
@@ -27,3 +29,5 @@ Page.getInitialProps = async ctx => {
   });
   return {};
 };
+
+export default compose(withDefaultLayout)(Page);
