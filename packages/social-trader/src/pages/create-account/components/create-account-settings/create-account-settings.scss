@@ -18,18 +18,8 @@ $asset-height-mobile: $asset-height/$divider-text;
     margin-bottom: 40px;
     max-width: 230px;
 
-    .gv-text-field,
-    .gv-text-field__wrapper {
-      width: 230px;
-    }
-
     &.deposit-details {
       max-width: 280px;
-
-      .gv-text-field,
-      .gv-text-field__wrapper {
-        width: 280px;
-      }
     }
 
     .invest-popup__currency {
@@ -62,11 +52,6 @@ $asset-height-mobile: $asset-height/$divider-text;
     &--wider {
       max-width: 100%;
       width: 100%;
-
-      .gv-text-field,
-      .gv-text-field__wrapper {
-        width: 100%;
-      }
     }
   }
 
@@ -279,10 +264,6 @@ $asset-height-mobile: $asset-height/$divider-text;
     flex-wrap: wrap;
     position: relative;
     justify-content: space-between;
-
-    .gv-text-field__wrapper {
-      margin: 0;
-    }
   }
 
   &__navigation {

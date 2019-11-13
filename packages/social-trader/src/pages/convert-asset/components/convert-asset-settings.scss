@@ -31,18 +31,8 @@
     margin-bottom: 40px;
     max-width: 230px;
 
-    .gv-text-field,
-    .gv-text-field__wrapper {
-      width: 230px;
-    }
-
     &.deposit-details {
       max-width: 280px;
-
-      .gv-text-field,
-      .gv-text-field__wrapper {
-        width: 280px;
-      }
     }
 
     .invest-popup__currency {
@@ -70,11 +60,6 @@
     &--wider {
       max-width: 100%;
       width: 100%;
-
-      .gv-text-field,
-      .gv-text-field__wrapper {
-        width: 100%;
-      }
     }
   }
 
@@ -131,11 +116,6 @@
 
     & .gv-text-field__error {
       width: 100%;
-    }
-
-    .gv-text-field__wrapper,
-    .gv-checkbox-wrapper {
-      margin: 0;
     }
 
     .select--disabled .select__value {
