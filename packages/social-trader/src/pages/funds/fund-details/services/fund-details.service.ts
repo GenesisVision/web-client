@@ -4,7 +4,11 @@ import { TGetChartFunc } from "shared/components/details/details-statistic-secti
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch, TGetState } from "shared/utils/types";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  TGetState
+} from "shared/utils/types";
 import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
@@ -18,21 +22,23 @@ import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-
 
 export const dispatchFundDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg()
+  auth = authService.getAuthArg(),
+  currency: CurrencyEnum = "GVT"
 ) => async (dispatch: MiddlewareDispatch) =>
-  await dispatch(fetchFundDescriptionAction(id, auth));
+  await dispatch(fetchFundDescriptionAction(id, auth, currency));
 
-export const dispatchFundDescription = (ctx?: NextPageContext) => async (
-  dispatch: MiddlewareDispatch,
-  getState: TGetState
-) => {
+export const dispatchFundDescription = (
+  ctx?: NextPageContext,
+  currency?: CurrencyEnum
+) => async (dispatch: MiddlewareDispatch, getState: TGetState) => {
   const {
     fundDetails: { id: stateId }
   } = getState();
   return await dispatch(
     dispatchFundDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx)
+      authService.getAuthArg(ctx),
+      currency
     )
   );
 };

@@ -55,10 +55,11 @@ export const fetchFundBalanceChartAction = (
 
 export const fetchFundDescriptionAction = (
   id: string,
-  authorization: string
+  authorization: string,
+  currency: CurrencyEnum
 ): ApiAction<FundDetailsFull> => ({
   type: FETCH_FUND_DESCRIPTION,
-  payload: fundsApi.getFundDetails(id) // TODO auth
+  payload: fundsApi.getFundDetails(id, { authorization, currency }) // TODO auth
 });
 
 export const statisticCurrencyAction = (

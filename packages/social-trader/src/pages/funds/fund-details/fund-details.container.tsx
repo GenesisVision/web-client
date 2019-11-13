@@ -2,8 +2,9 @@ import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import DetailsDescriptionSection from "shared/components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
@@ -12,6 +13,7 @@ import FundAssetContainer from "shared/components/fund-asset/fund-asset-containe
 import Page from "shared/components/page/page";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { ASSET } from "shared/constants/constants";
+import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { fundEventsSelector } from "shared/reducers/platform-reducer";
 import {
   createFundNotificationsToUrl,
@@ -23,10 +25,17 @@ import FundDetailsHistorySection from "./fund-details-history-section/fund-detai
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
 import InvestmentFundControls from "./investment-fund-controls/investment-fund-controls";
 import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
-import { dispatchFundDescription } from "./services/fund-details.service";
+import { dispatchFundDescriptionWithId } from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const currency = useSelector(currencySelector);
+  const handleDispatchDescription = useCallback(() => {
+    dispatch(
+      dispatchFundDescriptionWithId(description.id, undefined, currency)
+    );
+  }, []);
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
@@ -70,7 +79,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
             ? description.personalDetails.exitFeePersonal
             : 0
         }}
-        dispatchDescription={dispatchFundDescription}
+        dispatchDescription={handleDispatchDescription}
         eventTypesSelector={fundEventsSelector}
         asset={ASSET.FUND}
         selector={fundEventsTableSelector}
