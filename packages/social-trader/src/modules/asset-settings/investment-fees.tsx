@@ -1,6 +1,5 @@
 import FeesSettings from "components/assets/fields/fees-settings";
 import { FormikProps, withFormik } from "formik";
-//import { ProgramsInfoOld } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -16,10 +15,10 @@ import {
 import { number, object } from "yup";
 
 const _InvestmentFees: React.FC<Props> = ({
+  maxEntryFee,
+  maxExitFee,
   asset,
-  //programsInfo: { managerMaxEntryFee, managerMaxExitFee },
   t,
-  values,
   handleSubmit,
   dirty,
   isValid,
@@ -50,28 +49,24 @@ const _InvestmentFees: React.FC<Props> = ({
             )}
           />
         )}
-        {/*{asset === ASSET.FUND && (*/}
-        {/*  <FeesSettings*/}
-        {/*    entryFeeName={FIELDS.entryFee}*/}
-        {/*    entryFeeDescription={t(*/}
-        {/*      "create-fund-page.settings.hints.entry-fee-description",*/}
-        {/*      { maxFee: managerMaxEntryFee }*/}
-        {/*    )}*/}
-        {/*    secondFeeName={FIELDS.exitFee}*/}
-        {/*    secondFeeLabel={t(*/}
-        {/*      "create-fund-page.settings.fields.exit-fee"*/}
-        {/*    )}*/}
-        {/*    secondFeeUnderText={t(*/}
-        {/*      "create-fund-page.settings.hints.exit-fee"*/}
-        {/*    )}*/}
-        {/*    secondFeeDescription={t(*/}
-        {/*      "create-fund-page.settings.hints.exit-fee-description",*/}
-        {/*      {*/}
-        {/*        maxFee: managerMaxExitFee*/}
-        {/*      }*/}
-        {/*    )}*/}
-        {/*  />*/}
-        {/*)}*/}
+        {asset === ASSET.FUND && (
+          <FeesSettings
+            entryFeeName={FIELDS.entryFee}
+            entryFeeDescription={t(
+              "create-fund-page.settings.hints.entry-fee-description",
+              { maxFee: maxEntryFee }
+            )}
+            secondFeeName={FIELDS.exitFee}
+            secondFeeLabel={t("create-fund-page.settings.fields.exit-fee")}
+            secondFeeUnderText={t("create-fund-page.settings.hints.exit-fee")}
+            secondFeeDescription={t(
+              "create-fund-page.settings.hints.exit-fee-description",
+              {
+                maxFee: maxExitFee
+              }
+            )}
+          />
+        )}
         <GVButton
           color="primary"
           type={"submit"}
@@ -104,7 +99,9 @@ interface Props
 
 interface OwnProps {
   asset: ASSET;
-  //programsInfo: ProgramsInfoOld;
+  maxExitFee?: number;
+  maxEntryFee?: number;
+  maxSuccessFee?: number;
   exitFee?: number;
   entryFee: number;
   successFee?: number;
@@ -124,21 +121,23 @@ const InvestmentFees = compose<React.ComponentType<OwnProps>>(
       [FIELDS.entryFee]: entryFee,
       [FIELDS.successFee]: successFee
     }),
-    // validationSchema: ({ programsInfo, t, asset }: Props) => {
-    //   const exitFee =
-    //     asset === ASSET.FUND
-    //       ? exitFeeShape(t, programsInfo.managerMaxExitFee)
-    //       : number();
-    //   const successFee =
-    //     asset === ASSET.PROGRAM
-    //       ? successFeeShape(t, programsInfo.managerMaxSuccessFee)
-    //       : number();
-    //   return object().shape({
-    //     [FIELDS.entryFee]: entryFeeShape(t, programsInfo.managerMaxEntryFee),
-    //     [FIELDS.exitFee]: exitFee,
-    //     [FIELDS.successFee]: successFee
-    //   });
-    // },
+    validationSchema: ({
+      maxExitFee = 0,
+      maxSuccessFee = 0,
+      maxEntryFee = 0,
+      t,
+      asset
+    }: Props) => {
+      const exitFee =
+        asset === ASSET.FUND ? exitFeeShape(t, maxExitFee) : number();
+      const successFee =
+        asset === ASSET.PROGRAM ? successFeeShape(t, maxSuccessFee) : number();
+      return object().shape({
+        [FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
+        [FIELDS.exitFee]: exitFee,
+        [FIELDS.successFee]: successFee
+      });
+    },
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
