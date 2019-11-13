@@ -94,3 +94,25 @@
     color: $text-light-color;
   }
 }
+
+.asset-form-field {
+  &__caption {
+    font-size: $font-size-small;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__hint {
+    font-size: $font-size-small;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+
+    &.hint {
+      cursor: pointer;
+    }
+  }
+}
