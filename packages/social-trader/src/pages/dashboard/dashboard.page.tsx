@@ -23,9 +23,6 @@ const _DashboardPage: React.FC = () => {
         <div>
           <DashboardTotalContainer />
         </div>
-        <div>
-          <DashboardPortfolioChartSection />
-        </div>
         <div className="dashboard__statistic-block">
           <DashboardTradingStatistic />
           <DashboardInvestingStatistic />
