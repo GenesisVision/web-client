@@ -64,7 +64,6 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
-  console.log(description);
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
