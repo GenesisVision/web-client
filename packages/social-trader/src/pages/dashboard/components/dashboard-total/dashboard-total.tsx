@@ -5,11 +5,13 @@ import { useTranslation } from "react-i18next";
 import GVColors from "shared/components/gv-styles/gv-colors";
 import PieContainer from "shared/components/pie-container/pie-container";
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   $pieAvailableColor,
   $piePendingColor
 } from "shared/components/wallet/components/wallet-balance/wallet-balance-elements";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
+import WalletDeposit from "shared/modules/wallet-deposit/wallet-deposit";
 import { getPercentageValue } from "shared/utils/helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -20,6 +22,9 @@ const _DashboardTotal: React.FC<Props> = ({
   data: { available, invested, pending, profits, total }
 }) => {
   const [t] = useTranslation();
+  const hasMoney = total > 0;
+  const hasProfits =
+    Object.values(profits).reduce((prev, cur) => prev + cur, 0) > 0;
   return (
     <div className="dashboard-total__values">
       <StatisticItemList className="dashboard-total__profits">
@@ -58,12 +63,19 @@ const _DashboardTotal: React.FC<Props> = ({
           value={available}
           currency={currency}
         />
+        {!hasMoney && (
+          <StatisticItem>
+            <WalletDeposit />
+          </StatisticItem>
+        )}
       </StatisticItemList>
-      <DashboardStatisticPeriods
-        data={profits}
-        currency={currency}
-        withProfitability
-      />
+      {hasProfits && (
+        <DashboardStatisticPeriods
+          data={profits}
+          currency={currency}
+          withProfitability
+        />
+      )}
     </div>
   );
 };
