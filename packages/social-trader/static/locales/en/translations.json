@@ -1,4 +1,10 @@
 {
+  "convert-page": {
+    "convert-signal-to-program": "Make program from signal account",
+    "convert-account-to-program": "Make program from account",
+    "convert-account-to-signal": "Make signal account from account",
+    "convert-externalaccount-to-signal": "Make signal account from external account"
+  },
   "follow-settings": {
     "trades-update": {
       "title": "Trades and open positions delay",
@@ -82,6 +88,7 @@
   },
   "buttons": {
     "create-account": "Create account",
+    "create-attach-external-account": "Attach external account",
     "attach-external-account": "Attach external account",
     "invest": "Invest",
     "deposit": "Deposit",
@@ -2424,9 +2431,13 @@
     "close-program": {
       "title": "Close program"
     },
+    "close-account": {
+      "title": "Close account"
+    },
     "title": "{{asset}} settings",
     "period-and-closing": {
       "title": "Period and closing",
+      "text-account": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-follow": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-fund": "The fund will be closed after pressing the button",
@@ -2446,6 +2457,7 @@
       "title": "Avatar"
     },
     "buttons": {
+      "close-account": "Close account",
       "close-follow": "Close follow",
       "close-program": "Close program",
       "close-fund": "Close fund",
@@ -2545,6 +2557,7 @@
   },
   "dashboard-page": {
     "trading": {
+      "title": "Trading",
       "follow-them": "Follow them",
       "actions": {
         "make-program": "Make program",
@@ -2580,19 +2593,24 @@
       "equity": "Your Equity",
       "balance": "Balance",
       "table": {
-        "data": "Data",
+        "date": "Date",
         "description": "Description",
         "amount": "Amount"
       }
     },
     "total": {
-      "title": "Total",
+      "available": "Available",
+      "invested": "Invested",
+      "pending": "Pending",
+      "profits": "Profits",
+      "total": "Total",
+      "title": "Title",
       "day": "Day",
       "week": "Week",
       "month": "Month"
     },
     "fail-chart": "Error loading chart",
-    "title": "Dashboard",
+    "title": "Dashboard overview",
     "assets": {
       "title": "Assets",
       "programs": "Programs",
@@ -2826,6 +2844,42 @@
       "validate-error": "Please correct the errors on this form"
     }
   },
+  "create-account-page": {
+    "title": "Create Account",
+    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "broker-card": {
+      "COMING_SOON": "Coming soon",
+      "KYC_REQUIRED": "KYC required",
+      "FOREX_DISABLED": "Forex disabled"
+    },
+    "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
+    "settings": {
+      "main-settings": "Main settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "min-deposit": "Min. deposit",
+        "currency": "Currency",
+        "brokers-leverage": "Broker's leverage",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in wallet"
+      },
+      "validation": {
+        "amount-required": "Amount is required",
+        "amount-is-large": "Amount must be available in Wallet",
+        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "currency-required": "Currency is required",
+        "leverage-required": "Leverage is required"
+      }
+    },
+    "notifications": {
+      "create-success": "Program was successfully created.",
+      "validate-error": "Please correct the errors on this form"
+    }
+  },
   "create-fund-page": {
     "title": "Create Fund",
     "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
@@ -2870,6 +2924,65 @@
         "available-in-wallet": "Available in the wallet"
       },
       "validation": {
+        "entry-fee-required": "Entry fee is required",
+        "exit-fee-required": "Exit fee is required",
+        "exit-fee-min": "Exit fee must be greater than 0 %",
+        "exit-fee-max": "Exit fee must be less than {{max}} %",
+        "assets-share": "Total share of all assets should be equal to 100%",
+        "assets-count": "Must be at least two assets.",
+        "deposit-min": "Not enough money."
+      },
+      "hints": {
+        "entry-fee": "Description about entry fee is here",
+        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
+        "exit-fee": "Description about exit fee is here",
+        "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
+      }
+    }
+  },
+  "attach-account-page": {
+    "title": "Attach external account",
+    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "notifications": {
+      "create-success": "Account was successfully attached.",
+      "validate-error": "Please fix all the errors on the screen before proceeding"
+    },
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "settings": {
+      "exchange": "Exchange",
+      "api": "API",
+      "investment-fund-fees": "Investment fund fees",
+      "main-settings": "Main settings",
+      "fees-settings": "Fees settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "exchange": "Exchange",
+        "api-secret": "API secret",
+        "api-key": "API key",
+        "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
+        "asset-description": "Total share of all assets should be equal to 100%",
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "account-type": "Account type",
+        "currency": "Currency",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "brokers-leverage": "Broker's leverage",
+        "period": "Period",
+        "upload-logo": "Upload the fund logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "entry-fee": "Entry fee",
+        "success-fee": "Success fee",
+        "exit-fee": "Exit fee",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in the wallet"
+      },
+      "validation": {
+        "api-secret": "Api secret fee is required",
+        "api-key": "Api key fee is required",
         "entry-fee-required": "Entry fee is required",
         "exit-fee-required": "Exit fee is required",
         "exit-fee-min": "Exit fee must be greater than 0 %",

@@ -1,5 +1,6 @@
 import "./follows-facet.scss";
 
+import { ItemsViewModelCopyTradingDetailsList } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
@@ -8,26 +9,27 @@ import FacetContainer, {
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import { IDataModel } from "shared/constants/constants";
-import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
+import { fetchFollows } from "shared/modules/follows-table/services/follows-table.service";
 
 import FollowsFacetTable from "./components/follows-facet-table";
 
 const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   const getPrograms = useCallback(
-    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
-      fetchPrograms({
+    (
+      filters: ComposeFiltersAllType
+    ): Promise<ItemsViewModelCopyTradingDetailsList> =>
+      fetchFollows({
         ...filters
       }),
     []
   );
 
   return (
-    <Page title={t("programs-page.title")}>
+    <Page title={t("follows-page.title")}>
       <Surface className="programs-table-container">
         <FacetContainer
           id={id}
-          asset={FACET_ASSET.PROGRAMS}
+          asset={FACET_ASSET.FOLLOWS}
           TableContainer={FollowsFacetTable}
           getItems={getPrograms}
         />
