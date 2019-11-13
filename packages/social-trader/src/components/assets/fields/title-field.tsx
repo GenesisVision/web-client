@@ -1,8 +1,8 @@
 import "./fields.scss";
 
+import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
 
 import AssetField from "../asset-fields/asset-field";
@@ -11,16 +11,13 @@ const _TitleField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
     <AssetField>
-      <GVFormikField
+      <AssetFormField
         type="text"
         name={name}
         label={t("create-program-page.settings.fields.name")}
-        autoComplete="off"
         component={GVTextField}
+        caption={t("create-program-page.settings.fields.name-requirements")}
       />
-      <div className="create-asset-settings__field-caption">
-        {t("create-program-page.settings.fields.name-requirements")}
-      </div>
     </AssetField>
   );
 };

@@ -1,12 +1,10 @@
 import "./fields.scss";
 
+import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
 import GVNumberField from "shared/components/gv-number-field/gv-number-field";
-import Hint from "shared/components/hint/hint";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import AssetField from "../asset-fields/asset-field";
@@ -26,37 +24,25 @@ const _FeesSettings: React.FC<Props> = ({
       {title && <div className="create-asset-settings__row-title">{title}</div>}
       <AssetRow>
         <AssetField>
-          <GVFormikField
+          <AssetFormField
             name={entryFeeName}
             label={t("create-program-page.settings.fields.entry-fee")}
             adornment="%"
             component={GVNumberField}
-            autoComplete="off"
-            decimalScale={4}
             isAllowed={allowValuesNumberFormat()}
-          />
-          <Hint
-            content={t("create-program-page.settings.hints.entry-fee")}
-            className="create-asset-settings__hint"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={entryFeeDescription}
+            hintTooltipContent={entryFeeDescription}
+            hintContent={t("create-program-page.settings.hints.entry-fee")}
           />
         </AssetField>
         <AssetField>
-          <GVFormikField
+          <AssetFormField
             name={secondFeeName}
             label={secondFeeLabel}
             adornment="%"
             component={GVNumberField}
-            autoComplete="off"
-            decimalScale={4}
             isAllowed={allowValuesNumberFormat()}
-          />
-          <Hint
-            content={secondFeeUnderText}
-            className="create-asset-settings__hint"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={secondFeeDescription}
+            hintTooltipContent={secondFeeDescription}
+            hintContent={secondFeeUnderText}
           />
         </AssetField>
       </AssetRow>
