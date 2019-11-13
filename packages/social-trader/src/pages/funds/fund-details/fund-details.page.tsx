@@ -1,18 +1,14 @@
 import "shared/components/details/details.scss";
 
-import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
 import * as React from "react";
-import FundDetailsPageCommon from "shared/components/funds/fund-details/fund-details.page";
+import { useSelector } from "react-redux";
 
-import InvestmentFundControls from "./components/investment-fund-controls";
+import FundDetailsContainer from "./fund-details.container";
+import { fundDescriptionSelector } from "./reducers/description.reducer";
 
 const _FundDetailsPage: React.FC = () => {
-  const descriptionSection = {
-    WithdrawContainer: FundWithdrawalContainer,
-    Controls: InvestmentFundControls
-  };
-
-  return <FundDetailsPageCommon descriptionSection={descriptionSection} />;
+  const description = useSelector(fundDescriptionSelector);
+  return <FundDetailsContainer data={description!} />;
 };
 
 const FundDetailsPage = React.memo(_FundDetailsPage);

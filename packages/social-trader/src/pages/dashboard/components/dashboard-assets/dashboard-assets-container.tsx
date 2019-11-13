@@ -15,7 +15,7 @@ import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import Link from "shared/components/link/link";
 import useRole from "shared/hooks/use-role.hook";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";

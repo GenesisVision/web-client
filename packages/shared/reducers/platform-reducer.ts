@@ -1,9 +1,10 @@
 import {
   AmountWithCurrency,
-  FilterModel,
+  FundCreateAssetPlatformInfo,
   ItemsViewModelProgramDetailsList,
   PlatformInfo,
   ProgramAssetPlatformInfo,
+  ProgramCreateAssetPlatformInfo,
   ProgramMinInvestAmount
 } from "gv-api-web";
 import { createSelector } from "reselect";
@@ -19,8 +20,7 @@ import {
   fieldSelector
 } from "shared/utils/selectors";
 import { AuthRootState } from "shared/utils/types";
-
-import { RootState } from "./root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 export type PlatformState = IApiState<PlatformInfo>;
 
@@ -92,6 +92,22 @@ export const programsInfoSelector = apiFieldSelector<
   ProgramAssetPlatformInfo
 >(platformDataSelector, fieldSelector(state => state.assetInfo.programInfo));
 
+export const createProgramInfoSelector = apiFieldSelector<
+  PlatformInfo,
+  ProgramCreateAssetPlatformInfo
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.programInfo.createProgramInfo)
+);
+
+export const createFundInfoSelector = apiFieldSelector<
+  PlatformInfo,
+  FundCreateAssetPlatformInfo
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.fundInfo.createFundInfo)
+);
+
 export const assetTypeValuesSelector = createSelector<
   AuthRootState,
   PlatformInfo | undefined,
@@ -134,7 +150,7 @@ export const assetEventsSelectorCreator = (asset: ASSET) =>
       if (!data) return [];
       return data.filters.events.map(
         // TODO remove after union
-        ({ key, title }: FilterModel) => ({
+        ({ key, title }: { key: string; title: string }) => ({
           value: key,
           labelKey: title
         })

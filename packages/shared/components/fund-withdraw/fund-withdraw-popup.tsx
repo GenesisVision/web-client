@@ -14,10 +14,7 @@ import FundWithdrawAmountForm, {
 } from "./fund-withdraw-amount-form";
 import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
 import { FundWithdrawTop } from "./fund-withdraw-top";
-import {
-  FundWithdraw,
-  FundWithdrawalInfoResponse
-} from "./fund-withdraw.types";
+import { FundWithdraw, FundWithdrawInfoResponse } from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
@@ -25,7 +22,7 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
-  data: { wallets, withdrawalInfo },
+  data: { wallets, withdrawInfo },
   accountCurrency,
   withdraw
 }) => {
@@ -55,7 +52,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
   }, []);
 
   const availableToWithdraw = convertFromCurrency(
-    withdrawalInfo.availableToWithdraw,
+    withdrawInfo.availableToWithdraw,
     rate!
   );
 
@@ -63,7 +60,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
     <>
       <FundWithdrawTop
         isPending={isPending}
-        title={withdrawalInfo.title}
+        title={withdrawInfo.title}
         availableToWithdraw={availableToWithdraw}
         currency={currency}
       />
@@ -75,7 +72,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
             setCurrency={setCurrency}
             wallets={wallets}
             availableToWithdraw={availableToWithdraw}
-            exitFee={withdrawalInfo.exitFee}
+            exitFee={withdrawInfo.exitFee}
             onSubmit={handleEnterAmountSubmit}
           />
         )}
@@ -85,7 +82,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
             availableToWithdraw={availableToWithdraw}
             percent={percent}
             currency={currency}
-            exitFee={withdrawalInfo.exitFee}
+            exitFee={withdrawInfo.exitFee}
             onBackClick={goToEnterAmountStep}
           />
         )}
@@ -104,5 +101,5 @@ export interface IFundWithdrawPopupProps {
 }
 
 interface IFundWithdrawPopupOwnProps {
-  data: FundWithdrawalInfoResponse;
+  data: FundWithdrawInfoResponse;
 }

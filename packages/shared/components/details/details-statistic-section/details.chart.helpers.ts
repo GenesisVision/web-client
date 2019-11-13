@@ -24,9 +24,9 @@ import {
   TRemoveChartCurrency
 } from "shared/modules/chart-currency-selector/chart-currency-selector";
 import { platformCurrenciesSelector } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
 import { TSelectorData } from "shared/utils/selectors";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { TStatisticCurrencyAction } from "../reducers/statistic-currency.reducer";
 import {

@@ -20,7 +20,7 @@ import {
   platformCurrenciesSelector,
   platformDataSelector
 } from "shared/reducers/platform-reducer";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 const _FacetContainer: React.FC<Props> = ({
   id,

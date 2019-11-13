@@ -7,7 +7,7 @@ import DepositDetailsBlock from "components/assets/fields/deposit-details-block"
 import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
 import { InjectedFormikProps, withFormik } from "formik";
-import { PlatformInfo } from "gv-api-web";
+import { FundCreateAssetPlatformInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -129,7 +129,9 @@ type Props = InjectedFormikProps<
 >;
 
 const CreateFundSettings = compose<
-  React.ComponentType<OwnProps & WithBlurLoaderProps<PlatformInfo>>
+  React.ComponentType<
+    OwnProps & WithBlurLoaderProps<FundCreateAssetPlatformInfo>
+  >
 >(
   withBlurLoader,
   translate(),
@@ -156,7 +158,7 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
-  data: PlatformInfo;
+  data: FundCreateAssetPlatformInfo;
   minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,

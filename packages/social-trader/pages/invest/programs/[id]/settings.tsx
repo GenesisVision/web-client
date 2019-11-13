@@ -1,10 +1,10 @@
-import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
-import React from "react";
-import { compose } from "redux";
 import {
   dispatchProgramDescription,
   dispatchProgramId
-} from "shared/components/programs/program-details/services/program-details.service";
+} from "pages/programs/program-details/service/program-details.service";
+import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
+import React from "react";
+import { compose } from "redux";
 import withDefaultLayout from "shared/decorators/with-default-layout";
 import withPrivateRoute from "shared/decorators/with-private-route";
 import { NextPageWithRedux } from "shared/utils/types";

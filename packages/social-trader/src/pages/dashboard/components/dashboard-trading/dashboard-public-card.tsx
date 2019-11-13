@@ -27,7 +27,7 @@ import { useTranslation } from "shared/i18n";
 import { META_TRADER_4_ROUTE } from "shared/routes/trade.routes";
 import {
   composeProgramDetailsUrl,
-  composeProgramSettingsUrl
+  createProgramSettingsToUrl
 } from "shared/utils/compose-url";
 import { distanceDate } from "shared/utils/dates";
 import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
@@ -153,10 +153,7 @@ const _DashboardPublicCardActions: React.FC<
     pathname: META_TRADER_4_ROUTE,
     state: `/ ${title}`
   };
-  const settingsLink = {
-    pathname: composeProgramSettingsUrl(url),
-    state: `/ ${title}`
-  };
+  const settingsLink = createProgramSettingsToUrl(url, title);
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM

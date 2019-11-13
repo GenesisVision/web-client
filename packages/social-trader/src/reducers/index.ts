@@ -6,7 +6,8 @@ import { SignUpState } from "shared/components/auth/signup/reducers/signup.reduc
 //import { ManagerState } from "shared/components/manager/reducers/manager.reducers";
 import { NotificationsState } from "shared/components/notifications/reducers/notifications.reducers";
 import clearableReducer from "shared/reducers/clearable.reducer";
-import { RootState, sharedRootReducers } from "shared/reducers/root-reducer";
+
+import { RootState, sharedRootReducers } from "./root-reducer";
 
 type State = {
   notifications: NotificationsState;

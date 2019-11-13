@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
-import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
+import { IFundWithdrawContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import GVButton from "shared/components/gv-button";
 import Profitability from "shared/components/profitability/profitability";
 import {
@@ -16,9 +16,8 @@ import { IProgramReinvestingContainerOwnProps } from "shared/components/programs
 import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { PROGRAM, ROLE, STATUS } from "shared/constants/constants";
+import { PROGRAM, STATUS } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
-import useRole from "shared/hooks/use-role.hook";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 import { CurrencyEnum, FeesType } from "shared/utils/types";
@@ -36,20 +35,17 @@ const _Investment: React.FC<Props> = ({
   WithdrawContainer,
   ReinvestingWidget
 }) => {
-  const role = useRole();
-  const isInvestor = role === ROLE.INVESTOR;
   const {
     successFeePersonal,
     successFeeCurrent,
     exitFee,
     exitFeePersonal,
-    entryFeeCurrent,
-    entryFeeSelected
+    entryFeeCurrent
   } = fees;
   const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const profitValue = personalDetails.value - personalDetails.invested;
+  const profitValue = personalDetails.value - 0; // personalDetails.invested
   return (
     <div className="details-investment__block details-investment__block--investment">
       <div className="details-investment__heading">
@@ -89,16 +85,15 @@ const _Investment: React.FC<Props> = ({
               />
             </Profitability>
             <Profitability
-              value={`${personalDetails.profit}`}
+              value={`${0}`} // personalDetails.profit
               variant={PROFITABILITY_VARIANT.CHIPS}
             >
-              {roundPercents(personalDetails.profit)}
+              {roundPercents(0)} // personalDetails.profit
             </Profitability>
           </StatisticItem>
           <StatisticItem
             condition={
-              isInvestor &&
-              personalDetails.invested !== 0 &&
+              false && // personalDetails.invested !== 0
               successFeePersonal !== undefined &&
               successFeePersonal !== null
             }
@@ -114,7 +109,6 @@ const _Investment: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             condition={
-              isInvestor &&
               exitFeePersonal !== null &&
               exitFeePersonal !== undefined &&
               exitFee !== exitFeePersonal
@@ -170,7 +164,7 @@ const _Investment: React.FC<Props> = ({
             personalDetails.canInvest && (
               <ReinvestingWidget
                 programId={id}
-                isReinvesting={personalDetails.isReinvest}
+                isReinvesting={false} // personalDetails.isReinvest
               />
             )}
           <StatisticItem
@@ -181,7 +175,7 @@ const _Investment: React.FC<Props> = ({
             accent
             label={t("fund-details-page.description.pending-output")}
           >
-            {personalDetails.pendingOutputIsWithdrawAll ? (
+            {false ? ( // personalDetails.pendingOutputIsWithdrawAll
               t("withdraw-program.withdrawing-all")
             ) : (
               <NumberFormat
@@ -207,14 +201,16 @@ const _Investment: React.FC<Props> = ({
           {notice && (
             <p className="details-investment__withdraw-notice">{notice}</p>
           )}
-          <WithdrawContainer
-            open={isOpenPopup}
-            id={id}
-            accountCurrency={accountCurrency}
-            assetCurrency={assetCurrency}
-            onClose={setClosePopup}
-            onSubmit={updateDescription}
-          />
+          {WithdrawContainer && (
+            <WithdrawContainer
+              open={isOpenPopup}
+              id={id}
+              accountCurrency={accountCurrency}
+              assetCurrency={assetCurrency}
+              onClose={setClosePopup}
+              onSubmit={updateDescription}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -229,7 +225,7 @@ interface Props {
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  WithdrawContainer?: React.ComponentType<IFundWithdrawContainerProps>;
   ReinvestingWidget?: React.ComponentType<IProgramReinvestingContainerOwnProps>;
 }
 

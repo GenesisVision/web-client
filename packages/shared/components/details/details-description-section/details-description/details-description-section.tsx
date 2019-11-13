@@ -1,7 +1,9 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import {
+  FollowDetailsFull,
   FundDetailsFull,
+  PersonalFollowDetailsFull,
   PersonalFundDetails,
   PersonalProgramDetails,
   ProgramDetailsFull
@@ -16,7 +18,6 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   personalDetails,
   PerformanceData,
   AssetDetailsExtraBlock,
-  AssetDetailsAvatar,
   description,
   Controls
 }) => {
@@ -25,7 +26,6 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
       <DetailsDescription
         personalDetails={personalDetails}
         description={description}
-        AssetDetailsAvatar={AssetDetailsAvatar}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
@@ -41,11 +41,13 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 interface Props {
   notificationsUrl: ToType;
   settingsUrl: ToType;
-  personalDetails: PersonalFundDetails | PersonalProgramDetails;
-  description: FundDetailsFull | ProgramDetailsFull;
+  personalDetails:
+    | PersonalFundDetails
+    | PersonalProgramDetails
+    | PersonalFollowDetailsFull;
+  description: FundDetailsFull | ProgramDetailsFull | FollowDetailsFull;
   AssetDetailsExtraBlock: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
-  AssetDetailsAvatar: React.ComponentType<any>;
   Controls: React.ComponentType<any>;
 }
 

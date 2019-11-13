@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";

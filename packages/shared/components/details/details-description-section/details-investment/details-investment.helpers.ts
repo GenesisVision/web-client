@@ -3,7 +3,7 @@ import { PersonalFundDetails, PersonalProgramDetails } from "gv-api-web";
 export type InvestmentDetails = PersonalFundDetails | PersonalProgramDetails;
 
 export const composeInvestmentDetails = (
-  personalDetails: PersonalFundDetails | PersonalProgramDetails
+  personalDetails: InvestmentDetails
 ) => ({
   canWithdraw: personalDetails.canWithdraw,
   canInvest: personalDetails.canInvest,

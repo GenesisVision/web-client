@@ -66,17 +66,6 @@ const _FollowDetailsContainer: React.FC<Props> = ({
         }}
         AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
         PerformanceData={() => <PerformanceData description={description} />}
-        AssetDetailsAvatar={() => (
-          <DetailsLimitsAvatar
-            logo={description.logo}
-            level={description.level}
-            levelProgress={description.levelProgress}
-            title={description.title}
-            color={description.color}
-            totalAvailableInvestment={description.totalAvailableInvestment}
-            currency={description.currency}
-          />
-        )}
         Controls={() => (
           <Controls
             description={description}

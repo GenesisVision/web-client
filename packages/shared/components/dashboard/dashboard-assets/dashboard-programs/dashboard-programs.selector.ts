@@ -1,5 +1,5 @@
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 const dashboardProgramsSelector = (state: RootState) =>
   //@ts-ignore

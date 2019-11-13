@@ -1,4 +1,4 @@
-import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React from "react";
 import GVButton from "shared/components/gv-button";
@@ -14,7 +14,7 @@ const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
   switch (type) {
     case ASSET.FUND:
       withdraw = (
-        <FundWithdrawalContainer
+        <FundWithdrawContainer
           open={isOpenPopup}
           id={id}
           accountCurrency={"GVT"}

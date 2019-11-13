@@ -10,16 +10,31 @@ import { DetailsSettingsButtons } from "shared/components/details/details-descri
 import { ToType } from "shared/components/link/link";
 import { managerToPathCreator } from "shared/routes/manager.routes";
 
+import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
+
 const _DetailsDescription: React.FC<Props> = ({
   personalDetails,
   description,
-  AssetDetailsAvatar,
   AssetDetailsExtraBlock,
   notificationsUrl,
   settingsUrl
 }) => (
   <div className="asset-details-description__main">
-    <AssetDetailsAvatar />
+    <DetailsLimitsAvatar
+      logo={description.logo}
+      level={"level" in description ? description.level : undefined}
+      levelProgress={
+        "levelProgress" in description ? description.levelProgress : undefined
+      }
+      title={description.title}
+      color={description.color}
+      totalAvailableInvestment={
+        "totalAvailableInvestment" in description
+          ? description.totalAvailableInvestment
+          : undefined
+      }
+      currency={"level" in description ? description.currency : undefined}
+    />
     <DetailsInfo
       title={description.title}
       to={managerToPathCreator(description.manager.url, description.title)}
@@ -42,7 +57,6 @@ const _DetailsDescription: React.FC<Props> = ({
 interface Props {
   notificationsUrl: ToType;
   settingsUrl: ToType;
-  AssetDetailsAvatar: React.ComponentType<any>;
   AssetDetailsExtraBlock: React.ComponentType<any>;
   description: FundDetailsFull | ProgramDetailsFull;
   personalDetails: PersonalFundDetails | PersonalProgramDetails;

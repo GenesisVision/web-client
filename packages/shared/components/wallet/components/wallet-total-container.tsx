@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "shared/reducers/root-reducer";
+import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   copyTradingAccountsSelector,

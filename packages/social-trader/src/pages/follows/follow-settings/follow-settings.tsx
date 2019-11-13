@@ -1,9 +1,6 @@
 import "./follow-settings.scss";
 
-import {
-  BrokersProgramInfo,
-  ProgramDetailsFull
-} from "gv-api-web";
+import { BrokersProgramInfo, FollowDetailsFull } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import React from "react";
@@ -40,7 +37,7 @@ const _FollowSettings: React.FC<Props> = ({
     : undefined;
   return (
     <>
-      {details.personalDetails && details.personalDetails.ownerActions && (
+      {/*{details.personalDetails && details.personalDetails.ownerActions && (
         <ChangePassword
           condition={
             details.personalDetails.ownerActions.canChangePassword &&
@@ -79,7 +76,7 @@ const _FollowSettings: React.FC<Props> = ({
         brokers={brokersInfo.brokers}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
         currentLeverage={details.leverageMax}
-      />
+      />*/}
       <SignalingEdit
         onSubmit={changeSignaling}
         signalSuccessFee={signalSuccessFee}
@@ -107,8 +104,8 @@ const _FollowSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  followsInfo: any //TODO ProgramsInfo;
-  details: ProgramDetailsFull;
+  followsInfo: any; //TODO ProgramsInfo;
+  details: FollowDetailsFull;
   brokersInfo: BrokersProgramInfo;
   changeSignaling: (
     values: IFollowSignalFormValues,
