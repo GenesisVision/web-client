@@ -6,7 +6,6 @@ import Page from "shared/components/page/page";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useIsOpen from "shared/hooks/is-open.hook";
 import TransferPopup from "shared/modules/transfer/transfer-popup";
-import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
@@ -15,11 +14,6 @@ import WalletTables from "./wallet-tables/wallet-tables";
 
 const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
   const [t] = useTranslation();
-  const [
-    isOpenAddFundsPopup,
-    setOpenAddFundsPopup,
-    setCloseAddFundsPopup
-  ] = useIsOpen();
   const [
     isOpenWithdrawPopup,
     setOpenWithdrawPopup,
@@ -44,7 +38,6 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
             />
           </h1>
           <WalletBalanceButtons
-            handleAddFunds={setOpenAddFundsPopup}
             handleWithdraw={setOpenWithdrawPopup}
             handleTransfer={setOpenTransferPopup}
             isDepositEnabled={info.isDepositEnabled}
@@ -60,11 +53,6 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
         />
       </div>
       <WalletTables currency={info.currency} />
-      <WalletAddFundsPopup
-        currentWallet={info}
-        open={isOpenAddFundsPopup}
-        onClose={setCloseAddFundsPopup}
-      />
       <WalletWithdrawPopup
         currentWallet={info}
         open={isOpenWithdrawPopup}
