@@ -20,7 +20,10 @@ import {
   getProgramBrokers
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
-import { programsInfoSelector } from "shared/reducers/platform-reducer";
+import {
+  createProgramInfoSelector,
+  programsInfoSelector
+} from "shared/reducers/platform-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
@@ -40,7 +43,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
     dispatchDescription
   }
 }) => {
-  const programsInfo = useSelector(programsInfoSelector);
+  const createProgramInfo = useSelector(createProgramInfoSelector);
   const description = useSelector(programDescriptionSelector);
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
@@ -85,8 +88,8 @@ const _ProgramsEditPage: React.FC<Props> = ({
       dispatchDescription={dispatchDescriptionHandle}
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
-          condition={!!description && !!brokersInfo && !!programsInfo}
-          // programsInfo={programsInfo} TODO
+          condition={!!description && !!brokersInfo && !!createProgramInfo}
+          createProgramInfo={createProgramInfo}
           closePeriod={dispatchDescriptionHandle}
           closeProgram={applyCloseAsset}
           details={description!}
