@@ -21,9 +21,7 @@ import {
 
 const createFundSettingsValidationSchema = ({
   t,
-  data: {
-    // programsInfo: { managerMaxEntryFee, managerMaxExitFee } TODO
-  },
+  data: { maxExitFee, maxEntryFee },
   minimumDepositAmount
 }: ICreateFundSettingsProps & WithTranslation) =>
   lazy<ICreateFundSettingsFormValues>(values => {
@@ -53,8 +51,8 @@ const createFundSettingsValidationSchema = ({
       [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
       [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
 
-      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, 0),
-      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, 0),
+      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
+      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, maxExitFee),
       [CREATE_FUND_FIELDS.assets]: assetsShape(t)
     });
   });

@@ -3,7 +3,10 @@ import useCreateAssetSubmit from "components/assets/create-asset/create-asset-su
 import React from "react";
 import { useSelector } from "react-redux";
 import { CREATE_ASSET } from "shared/constants/constants";
-import { platformDataSelector } from "shared/reducers/platform-reducer";
+import {
+  createFundInfoSelector,
+  platformDataSelector
+} from "shared/reducers/platform-reducer";
 
 import { PlatformDataLoaderData } from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";
@@ -11,14 +14,14 @@ import CreateFundSettings from "./create-fund-settings";
 const _CreateFundSettingsSection: React.FC<{
   minimumDepositAmount: number;
 }> = ({ minimumDepositAmount }) => {
-  const platformSettings = useSelector(platformDataSelector);
+  const createFundInfo = useSelector(createFundInfoSelector);
   const handleCreate = useCreateAssetSubmit({ asset: CREATE_ASSET.FUND });
 
   return (
     <AssetContent>
       <CreateFundSettings
         loaderData={PlatformDataLoaderData}
-        data={platformSettings!}
+        data={createFundInfo!}
         minimumDepositAmount={minimumDepositAmount}
         onSubmit={handleCreate}
       />
