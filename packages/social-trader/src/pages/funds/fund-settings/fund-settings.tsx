@@ -1,4 +1,9 @@
-import { FundDetailsFull, FundDetailsList, PlatformAsset } from "gv-api-web";
+import {
+  FundCreateAssetPlatformInfo,
+  FundDetailsFull,
+  FundDetailsList,
+  PlatformAsset
+} from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
@@ -12,7 +17,7 @@ import { TUpdateFundFunc } from "./fund-settings.page";
 import Reallocation from "./reallocation/reallocation";
 
 const _FundSettings: React.FC<Props> = ({
-  // programsInfo,
+  createFundInfo: { maxExitFee, maxEntryFee },
   reallocate,
   platformAssets,
   details,
@@ -32,13 +37,14 @@ const _FundSettings: React.FC<Props> = ({
       {/*  fundAssets={details.currentAssets}*/}
       {/*  platformAssets={platformAssets}*/}
       {/*/>*/}
-      {/*<InvestmentFees*/}
-      {/*  asset={ASSET.FUND}*/}
-      {/*  programsInfo={programsInfo}*/}
-      {/*  entryFee={details.entryFeeCurrent}*/}
-      {/*  exitFee={details.exitFeeCurrent}*/}
-      {/*  onSubmit={editAsset}*/}
-      {/*/>*/}
+      <InvestmentFees
+        asset={ASSET.FUND}
+        maxExitFee={maxExitFee}
+        maxEntryFee={maxEntryFee}
+        entryFee={details.entryFeeCurrent}
+        exitFee={details.exitFeeCurrent}
+        onSubmit={editAsset}
+      />
       <AssetEdit
         title={details.title}
         logo={{ src: details.logo }}
@@ -59,7 +65,7 @@ const _FundSettings: React.FC<Props> = ({
 interface Props extends OwnProps {}
 
 interface OwnProps {
-  // programsInfo: ProgramsInfo;
+  createFundInfo: FundCreateAssetPlatformInfo;
   reallocate: () => void;
   platformAssets: PlatformAsset[];
   details: FundDetailsFull;
