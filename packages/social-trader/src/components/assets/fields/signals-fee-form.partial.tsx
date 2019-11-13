@@ -1,12 +1,10 @@
 import "./fields.scss";
 
+import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
 import GVNumberField from "shared/components/gv-number-field/gv-number-field";
-import Hint from "shared/components/hint/hint";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import AssetField from "../asset-fields/asset-field";
@@ -19,8 +17,7 @@ interface ISignalsFeeFormPartialProps {
 
 const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   successFeeFieldName,
-  volumeFeeFieldName,
-  hasSubscriptionFeeAutofocus = false
+  volumeFeeFieldName
 }) => {
   const [t] = useTranslation();
   return (
@@ -30,41 +27,32 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
       </div>
       <AssetRow>
         <AssetField>
-          <GVFormikField
+          <AssetFormField
             name={volumeFeeFieldName}
             label={t("create-program-page.settings.fields.signal-volume-fee")}
             adornment="%"
             component={GVNumberField}
-            autoComplete="off"
-            decimalScale={2}
-            autoFocus={hasSubscriptionFeeAutofocus}
             isAllowed={allowValuesNumberFormat()}
-          />
-          <Hint
-            content={t("create-program-page.settings.hints.signal-volume-fee")}
-            className="create-asset-settings__hint"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={t(
+            hintTooltipContent={t(
               "create-program-page.settings.hints.signal-volume-fee-description"
+            )}
+            hintContent={t(
+              "create-program-page.settings.hints.signal-volume-fee"
             )}
           />
         </AssetField>
         <AssetField>
-          <GVFormikField
+          <AssetFormField
             name={successFeeFieldName}
             label={t("create-program-page.settings.fields.signal-success-fee")}
             adornment="%"
             component={GVNumberField}
-            autoComplete="off"
-            decimalScale={2}
             isAllowed={allowValuesNumberFormat()}
-          />
-          <Hint
-            content={t("create-program-page.settings.hints.signal-success-fee")}
-            className="create-asset-settings__hint"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={t(
+            hintTooltipContent={t(
               "create-program-page.settings.hints.signal-success-fee-description"
+            )}
+            hintContent={t(
+              "create-program-page.settings.hints.signal-success-fee"
             )}
           />
         </AssetField>
