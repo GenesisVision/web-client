@@ -13,6 +13,8 @@ export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
 
 export const PlatformDataLoaderData: any = {
   programsInfo: {
+    maxEntryFee: getRandomInteger(1, 10),
+    maxExitFee: getRandomInteger(1, 10),
     managerProgramInvestment: getRandomInteger(1, 10),
     managerProgramInvestmentUSD: getRandomInteger(1, 10),
     managerProgramInvestmentUSDT: getRandomInteger(1, 10),
