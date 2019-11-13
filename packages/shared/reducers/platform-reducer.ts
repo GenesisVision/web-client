@@ -1,8 +1,10 @@
 import {
   AmountWithCurrency,
+  FundCreateAssetPlatformInfo,
   ItemsViewModelProgramDetailsList,
   PlatformInfo,
   ProgramAssetPlatformInfo,
+  ProgramCreateAssetPlatformInfo,
   ProgramMinInvestAmount
 } from "gv-api-web";
 import { createSelector } from "reselect";
@@ -89,6 +91,22 @@ export const programsInfoSelector = apiFieldSelector<
   PlatformInfo,
   ProgramAssetPlatformInfo
 >(platformDataSelector, fieldSelector(state => state.assetInfo.programInfo));
+
+export const createProgramInfoSelector = apiFieldSelector<
+  PlatformInfo,
+  ProgramCreateAssetPlatformInfo
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.programInfo.createProgramInfo)
+);
+
+export const createFundInfoSelector = apiFieldSelector<
+  PlatformInfo,
+  FundCreateAssetPlatformInfo
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.fundInfo.createFundInfo)
+);
 
 export const assetTypeValuesSelector = createSelector<
   AuthRootState,
