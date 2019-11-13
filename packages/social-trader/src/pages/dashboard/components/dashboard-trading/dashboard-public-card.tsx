@@ -1,4 +1,4 @@
-import { DashboardTradingAsset } from "gv-api-web";
+import { AssetType, DashboardTradingAsset } from "gv-api-web";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
@@ -27,6 +27,7 @@ import { useTranslation } from "shared/i18n";
 import { META_TRADER_4_ROUTE } from "shared/routes/trade.routes";
 import {
   composeProgramDetailsUrl,
+  createFundSettingsToUrl,
   createProgramSettingsToUrl
 } from "shared/utils/compose-url";
 import { distanceDate } from "shared/utils/dates";
@@ -57,6 +58,7 @@ const _DashboardPublicCard: React.FC<{
     clearAnchor: (event: TEvent) => void;
   }) => (
     <DashboardPublicCardActions
+      assetType={asset.assetType}
       canMakeProgram={asset.actions.canMakeProgramFromSignalProvider}
       anchor={anchor}
       clearAnchor={clearAnchor}
@@ -138,6 +140,7 @@ const _DashboardPublicCard: React.FC<{
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
 > = ({
+  assetType,
   canMakeProgram,
   anchor,
   clearAnchor,
@@ -153,7 +156,9 @@ const _DashboardPublicCardActions: React.FC<
     pathname: META_TRADER_4_ROUTE,
     state: `/ ${title}`
   };
-  const settingsLink = createProgramSettingsToUrl(url, title);
+  const createSettingsToUrlMethod =
+    assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
+  const settingsLink = createSettingsToUrlMethod(url, title);
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
@@ -200,6 +205,7 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
+  assetType: AssetType;
   canMakeProgram: boolean;
   clearAnchor: (event: TEvent) => void;
   anchor: TAnchor;
