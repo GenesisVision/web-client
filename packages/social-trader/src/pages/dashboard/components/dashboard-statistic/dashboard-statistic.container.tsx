@@ -13,6 +13,7 @@ import {
 import DashboardStatistic from "./dashboard-statistic";
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
+  EmptyBlock,
   currency,
   label,
   request,
@@ -33,6 +34,7 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
       className="dashboard-statistic__container"
     >
       <DashboardStatistic
+        EmptyBlock={EmptyBlock}
         currency={currency}
         renderValues={renderValues}
         loaderData={getTradingStatisticLoaderData()}
@@ -43,6 +45,7 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  EmptyBlock: React.ComponentType;
   currency: CurrencyEnum;
   renderValues: (
     statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic

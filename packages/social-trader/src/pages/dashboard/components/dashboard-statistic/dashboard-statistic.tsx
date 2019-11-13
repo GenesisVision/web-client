@@ -11,11 +11,26 @@ import {
 } from "../../dashboard.types";
 
 const _DashboardStatistic: React.FC<Props> = ({
+  EmptyBlock,
   renderValues,
   data,
   currency
 }) => {
-  const { events, profits } = data;
+  const {
+    events,
+    profits,
+    assetsUnderManagement,
+    programsCount,
+    fundsCount
+  } = data;
+  const hasNotInvesting =
+    programsCount !== undefined && fundsCount !== undefined
+      ? !(programsCount && fundsCount)
+      : true;
+  const hasNotTrading =
+    assetsUnderManagement !== undefined ? !assetsUnderManagement : true;
+  const hasNotAssets = hasNotInvesting && hasNotTrading;
+  if (hasNotAssets) return <EmptyBlock />;
   return (
     <div>
       <div className="dashboard-statistic__values">
@@ -28,6 +43,7 @@ const _DashboardStatistic: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  EmptyBlock: React.ComponentType;
   currency: CurrencyEnum;
   data: TDashboardTradingStatistic & TDashboardInvestingStatistic;
   renderValues: (
