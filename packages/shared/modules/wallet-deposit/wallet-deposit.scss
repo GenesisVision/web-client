@@ -1,0 +1,16 @@
+.wallet-deposit {
+  &__small-button {
+    & .chip {
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+    }
+  }
+  &__full-button-icon {
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 10px;
+    height: auto;
+  }
+}
