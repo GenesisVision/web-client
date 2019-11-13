@@ -4,9 +4,7 @@ import classNames from "classnames";
 import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { compose } from "redux";
-import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Link from "shared/components/link/link";
 import Popover from "shared/components/popover/popover";
@@ -17,16 +15,13 @@ import {
   WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 import useAnchor from "shared/hooks/anchor.hook";
-import useIsOpen from "shared/hooks/is-open.hook";
-import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletDeposit, {
+  WALLET_DEPOSIT_BUTTON_TYPE
+} from "shared/modules/wallet-deposit/wallet-deposit";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { walletsSelector } from "../wallet/reducers/wallet.reducers";
 
 const _WalletWidget: React.FC<Props> = ({ data, className }) => {
   const [t] = useTranslation();
-  const wallets = useSelector(walletsSelector);
-  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const {
     currencyCcy: currency,
@@ -45,17 +40,8 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
             currency
           )} ${currency}`}</span>
         </div>
-        <div className="wallet-widget__add">
-          <Chip type={CHIP_TYPE.POSITIVE} onClick={setOpenPopup}>
-            +
-          </Chip>
-        </div>
+        <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
       </div>
-      <WalletAddFundsPopup
-        currentWallet={wallets.find(wallet => wallet.currency === "GVT")!}
-        onClose={setClosePopup}
-        open={isOpenPopup}
-      />
       <Popover anchorEl={anchor} onClose={clearAnchor}>
         <div className="wallet-details">
           <div className="wallet-details__item">
