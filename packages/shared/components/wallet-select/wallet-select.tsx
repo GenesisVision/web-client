@@ -1,6 +1,6 @@
 import "./wallet-select.scss";
 
-import { CopyTradingAccountInfo, WalletBaseData, WalletData } from "gv-api-web";
+import { TradingAccountDetails, WalletBaseData, WalletData } from "gv-api-web";
 import React from "react";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -15,7 +15,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
     InputComponent={Select}
     onChange={onChange}
   >
-    {items.map(({ id, logo, currency, title }) => (
+    {items.map(mapToWalletOption).map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
         <CurrencyItem
           logo={logo}
@@ -29,7 +29,18 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
 );
 
 export type ItemsType = Array<ItemType>;
-export type ItemType = CopyTradingAccountInfo | WalletData | WalletBaseData;
+export type ItemType = WalletData | WalletBaseData | TradingAccountDetails;
+
+const mapToWalletOption = (item: ItemType) => {
+  const logo = "logo" in item ? item.logo : undefined;
+  const title =
+    "title" in item ? item.title : "login" in item ? item.login : undefined;
+  return {
+    ...item,
+    logo,
+    title
+  };
+};
 
 interface OwnProps {
   items: ItemsType;
