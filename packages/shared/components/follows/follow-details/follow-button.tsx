@@ -1,5 +1,4 @@
 import { SignalSubscription } from "gv-api-web";
-import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,6 +7,7 @@ import InvestmentUnauthPopup from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import FollowModuleContainer from "shared/modules/follow-module/follow-module-container";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
