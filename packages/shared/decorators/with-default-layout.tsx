@@ -1,4 +1,4 @@
-import { AmountWithCurrencyCurrencyEnum, PlatformInfo } from "gv-api-web";
+import { Currency, PlatformInfo } from "gv-api-web";
 import { ErrorViewModel } from "gv-api-web";
 import { NextPage } from "next";
 import React, { Component } from "react";
@@ -30,9 +30,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       });
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
-        ctx.reduxStore.dispatch(
-          updateCurrency(currencyFromCookie as AmountWithCurrencyCurrencyEnum)
-        );
+        ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
       }
 
       return {

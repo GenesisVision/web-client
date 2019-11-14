@@ -49,17 +49,21 @@ import accountSettingsReducer, {
   AccountSettingsState
 } from "shared/reducers/account-settings-reducer";
 import authReducer, { AuthState } from "shared/reducers/auth-reducer";
-import { EmailPendingState } from "shared/reducers/email-pending-reducer";
+import emailPendingReducer, {
+  EmailPendingState
+} from "shared/reducers/email-pending-reducer";
 import headerReducer, { HeaderState } from "shared/reducers/header-reducer";
 import platformReducer, {
   PlatformState
 } from "shared/reducers/platform-reducer";
 import uiReducer, { IUiState } from "shared/reducers/ui-reducer";
+import profileReducer, { ProfileState } from "shared/reducers/profile-reducer";
+import followNotificationsReducer from "shared/modules/follow-notifications/reducers/follow-notifications.reducers";
 
 // import history from "shared/utils/history";
 
 export const sharedRootReducers = {
-  // profile: profileReducer,
+  profile: profileReducer,
   fundDetails: fundDetailsReducer,
   followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
@@ -75,12 +79,12 @@ export const sharedRootReducers = {
   passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  // emailPending: emailPendingReducer,
+  emailPending: emailPendingReducer,
   notifications: notificationsReducer,
-  // notificationSettings: notificationSettingsReducer,
-  // followNotifications: followNotificationsReducer,
-  // programNotifications: programNotificationsReducer,
-  // fundNotifications: fundNotificationsReducer,
+  notificationSettings: notificationSettingsReducer,
+  followNotifications: followNotificationsReducer,
+  programNotifications: programNotificationsReducer,
+  fundNotifications: fundNotificationsReducer,
   // manager: managerReducer,
   wallet: walletReducer,
   // copyTradingAccounts: CopyTradingAccountsReducer, TODO
@@ -89,22 +93,22 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
-  // profile: ProfileState;
+  profile: ProfileState;
   fundDetails: FundDetailsState;
   followDetails: FollowDetailsState;
   programDetails: ProgramDetailsState;
-  // notifications: NotificationsState;
+  notifications: NotificationsState;
   profileHeader: HeaderState;
-  // notificationSettings: NotificationSettingsState;
+  notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
   followsData: FollowsListState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
-  // emailPending: EmailPendingState;
-  // followNotifications: ProgramNotificationsState;
-  // programNotifications: ProgramNotificationsState;
-  // fundNotifications: FundNotificationsState;
+  emailPending: EmailPendingState;
+  followNotifications: ProgramNotificationsState;
+  programNotifications: ProgramNotificationsState;
+  fundNotifications: FundNotificationsState;
   authData: AuthState;
   // // router: RouterState;
   alertMessages: AlertMessagesState;
