@@ -1,4 +1,3 @@
-import { ItemsViewModelCopyTradingDetailsList } from "gv-api-web";
 import React from "react";
 import FollowsPage from "shared/components/follows/follows.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";

@@ -1,8 +1,4 @@
-import {
-  CancelablePromise,
-  ItemsViewModelCopyTradingDetailsList,
-  ItemsViewModelFollowDetailsList
-} from "gv-api-web";
+import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
 import followApi from "shared/services/api-client/follow-api";
 import { ActionType } from "shared/utils/types";
 

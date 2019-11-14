@@ -1,14 +1,14 @@
 import {
   CancelablePromise,
-  ItemsViewModelCopyTradingDetailsList
+  ItemsViewModelFollowDetailsList
 } from "gv-api-web";
 import * as qs from "qs";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "shared/components/table/helpers/paging.helpers";
-import { NextPageWithReduxContext } from "shared/utils/types";
-
 import followApi from "shared/services/api-client/follow-api";
 import authService from "shared/services/auth-service";
+import { NextPageWithReduxContext } from "shared/utils/types";
+
 import { FetchSignalAssetsFilterType } from "../actions/follows-table.actions";
 import {
   DEFAULT_FOLLOW_TABLE_FILTERS,
@@ -44,7 +44,8 @@ export const getFiltersFromContext = ({
 
 export const fetchFollows = (
   filters: FetchSignalAssetsFilterType
-): CancelablePromise<ItemsViewModelCopyTradingDetailsList> => {
+): CancelablePromise<ItemsViewModelFollowDetailsList> => {
+  console.info(filters);
   return followApi.getFollowAssets({
     ...filters,
     authorization: authService.getAuthArg()

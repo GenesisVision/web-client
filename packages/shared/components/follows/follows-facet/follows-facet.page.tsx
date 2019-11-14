@@ -1,6 +1,6 @@
 import "./follows-facet.scss";
 
-import { ItemsViewModelCopyTradingDetailsList } from "gv-api-web";
+import { ItemsViewModelFollowDetailsList } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import FacetContainer, {
@@ -14,10 +14,10 @@ import { fetchFollows } from "shared/modules/follows-table/services/follows-tabl
 import FollowsFacetTable from "./components/follows-facet-table";
 
 const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
-  const getPrograms = useCallback(
+  const getFollows = useCallback(
     (
       filters: ComposeFiltersAllType
-    ): Promise<ItemsViewModelCopyTradingDetailsList> =>
+    ): Promise<ItemsViewModelFollowDetailsList> =>
       fetchFollows({
         ...filters
       }),
@@ -31,7 +31,7 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
           id={id}
           asset={FACET_ASSET.FOLLOWS}
           TableContainer={FollowsFacetTable}
-          getItems={getPrograms}
+          getItems={getFollows}
         />
       </Surface>
     </Page>
