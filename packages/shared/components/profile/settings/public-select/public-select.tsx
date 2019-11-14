@@ -4,7 +4,10 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import GVSwitch from "shared/components/gv-selection/gv-switch";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
+import {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import Tooltip from "shared/components/tooltip/tooltip";
 import useApiRequest from "shared/hooks/api-request.hook";
 import useIsOpen from "shared/hooks/is-open.hook";
@@ -30,7 +33,8 @@ const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
   return (
     <div className="public-select">
       <Tooltip
-        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
         render={() => (
           <div className="public-select__tooltip">
             {t("profile-page.settings.public.text")}
