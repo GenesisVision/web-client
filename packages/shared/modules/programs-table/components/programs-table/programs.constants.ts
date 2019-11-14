@@ -22,7 +22,7 @@ export const LEVEL_FILTER_NAME = "level";
 export const PROGRAM_CURRENCY_FILTER_NAME = "programCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
-export const SHOW_IN_CURRENCY_FILTER = "showIn";
+export const CURRENCY_MAP_NAME = "currency";
 
 export const SERVER_LEVEL_MIN_FILTER_NAME = "levelMin";
 export const SERVER_LEVEL_MAX_FILTER_NAME = "levelMax";
@@ -55,7 +55,7 @@ export const programsCurrencyFilter = {
 };
 
 export const programsCurrencyMap = {
-  name: SHOW_IN_CURRENCY_FILTER,
+  name: CURRENCY_MAP_NAME,
   type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_MAP_VALUE
 };
@@ -121,7 +121,7 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
 ];
 
 export const DEFAULT_PROGRAM_TABLE_FILTERS = {
-  [SHOW_IN_CURRENCY_FILTER]: CURRENCY_MAP_VALUE,
+  [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
   [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
   [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE,
   [LEVEL_FILTER_NAME]: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
