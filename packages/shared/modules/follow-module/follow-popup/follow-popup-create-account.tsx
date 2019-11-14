@@ -1,8 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import {
-  AttachToSignalProviderInitialDepositCurrencyEnum,
-  WalletData
-} from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -154,7 +151,7 @@ interface OwnProps {
 
 export interface CreateAccountFormValues {
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: AttachToSignalProviderInitialDepositCurrencyEnum;
+  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: any;
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number;
   [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
 }

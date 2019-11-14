@@ -7,7 +7,7 @@ import InvestmentUnauthPopup from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
-import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
+import FollowModuleContainer from "shared/modules/follow-module/follow-module-container";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -35,14 +35,14 @@ const _FollowButton: React.FC<Props> = ({
       >
         {t("program-details-page.description.follow-trade")}
       </GVButton>
-      {/*<ProgramFollowContainer
+      <FollowModuleContainer
         id={id}
         open={isOpenFollow}
         currency={currency}
         signalSubscription={signalSubscription}
         onClose={setIsCloseFollow}
         onApply={dispatchDescription}
-      />*/}
+      />
       <InvestmentUnauthPopup
         header={t("program-details-page.description.follow-trade")}
         message={t("program-details-page.description.unauth-follow-popup")}

@@ -1,11 +1,23 @@
-import { AttachToSignalProvider, CancelablePromise } from "gv-api-web";
+import {
+  AttachToSignalProvider,
+  CancelablePromise,
+  DashboardTradingAsset,
+  TradingAccountDetails
+} from "gv-api-web";
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";
 
-export const getSignalInfo = (id: string): CancelablePromise<number> =>
+import dashboardApi from "../../../services/api-client/dashboard-api";
+
+export const fetchAccounts = (
+  id: string
+): CancelablePromise<TradingAccountDetails[]> =>
   signalApi
-    .getSlaveAttachInfo(id, authService.getAuthArg())
-    .then(({ minDeposit }) => minDeposit);
+    .getSubscriberAccountsForAsset(id, authService.getAuthArg())
+    .then(({ items }) => items);
+
+export const getSignalInfo = (id: string): CancelablePromise<number> =>
+  Promise.resolve(100) as CancelablePromise<number>;
 
 export const attachToSignal: TAttachToSignal = (id, requestParams) =>
   signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {

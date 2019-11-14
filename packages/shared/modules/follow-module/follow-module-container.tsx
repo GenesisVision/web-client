@@ -13,16 +13,18 @@ import {
   SetSubmittingType
 } from "shared/utils/types";
 
+import useApiRequest from "../../hooks/api-request.hook";
+import { useGetRate, useGetSignalInfo } from "./follow-module-container.hooks";
 import FollowPopupForm from "./follow-popup/follow-popup-form";
-import { useGetRate, useGetSignalInfo } from "./program-follow-container.hooks";
 import {
   attachToSignal,
+  fetchAccounts,
   updateAttachToSignal
-} from "./services/program-follow-service";
+} from "./services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
 
-const _ProgramFollowContainer: React.FC<Props> = ({
+const _FollowModuleContainer: React.FC<Props> = ({
   id,
   signalSubscription,
   currency,
@@ -32,6 +34,13 @@ const _ProgramFollowContainer: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
+  const {
+    data: accounts,
+    sendRequest,
+    isPending: isAccountsPending
+  } = useApiRequest({
+    request: fetchAccounts
+  });
   const [t] = useTranslation();
   const { minDeposit, isMinDepositPending, getMinDeposit } = useGetSignalInfo();
   const { rate, isRatePending, getRate } = useGetRate();
@@ -41,6 +50,7 @@ const _ProgramFollowContainer: React.FC<Props> = ({
       : FOLLOW_TYPE.CREATE
   );
   useEffect(() => {
+    sendRequest();
     getMinDeposit(id);
     getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
   }, []);
@@ -75,17 +85,18 @@ const _ProgramFollowContainer: React.FC<Props> = ({
     },
     [type]
   );
-  const isPending = isMinDepositPending && isRatePending;
+  const isPending = isMinDepositPending && isRatePending && isAccountsPending;
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupForm
         rate={rate}
-        condition={!isPending && !!wallets.length}
+        condition={!isPending}
         loader={<DialogLoader />}
         signalSubscription={signalSubscription}
         minDeposit={minDeposit!}
         id={id}
         currency={currency}
+        accounts={accounts}
         wallets={wallets}
         submitMethod={handleSubmit}
       />
@@ -102,5 +113,5 @@ interface Props {
   signalSubscription: SignalSubscription;
 }
 
-const ProgramFollowContainer = React.memo(_ProgramFollowContainer);
-export default ProgramFollowContainer;
+const FollowModuleContainer = React.memo(_FollowModuleContainer);
+export default FollowModuleContainer;

@@ -1,11 +1,11 @@
 import "./subscription-details.scss";
 
 import { PersonalProgramDetails } from "gv-api-web";
+import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import React, { useEffect, useState } from "react";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, Dispatch } from "redux";
 import useIsOpen from "shared/hooks/is-open.hook";
-import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
 import { fetchRate } from "shared/services/rate-service";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -33,7 +33,7 @@ const _SubscriptionDetailsContainer: React.FC<Props> = ({
         openPopup={setOpenPopup}
         rate={rate}
       />
-      <ProgramFollowContainer
+      <FollowModuleContainer
         id={id}
         open={isOpenPopup}
         currency={currency}
