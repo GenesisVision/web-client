@@ -70,7 +70,6 @@ const _WalletTransactions: React.FC<Props> = ({
         }}
         getItems={getMultiTransactions}
         renderFilters={(updateFilter, filtering) => {
-          console.info(filtering);
           return (
             <>
               <SelectFilter

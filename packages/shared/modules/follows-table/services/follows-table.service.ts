@@ -45,7 +45,6 @@ export const getFiltersFromContext = ({
 export const fetchFollows = (
   filters: FetchSignalAssetsFilterType
 ): CancelablePromise<ItemsViewModelFollowDetailsList> => {
-  console.info(filters);
   return followApi.getFollowAssets({
     ...filters,
     authorization: authService.getAuthArg()
