@@ -5,24 +5,17 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import GVButton from "shared/components/gv-button";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
+import WalletDeposit from "shared/modules/wallet-deposit/wallet-deposit";
 
 const _WalletBalanceButtons: React.FC<Props> = ({
   t,
-  handleAddFunds,
   handleWithdraw,
   handleTransfer,
   isDepositEnabled,
   isWithdrawalEnabled
 }) => (
   <div className="wallet-balance__buttons">
-    <GVButton onClick={handleAddFunds} disabled={isDepositEnabled === false}>
-      <>
-        <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
-          +
-        </span>
-        {t("wallet-page.deposit")}
-      </>
-    </GVButton>
+    <WalletDeposit disabled={isDepositEnabled === false} />
     <GVButton
       color="secondary"
       variant="outlined"
@@ -54,7 +47,6 @@ const _WalletBalanceButtons: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
-  handleAddFunds: () => void;
   handleWithdraw: () => void;
   handleTransfer?: () => void;
   isDepositEnabled?: boolean;

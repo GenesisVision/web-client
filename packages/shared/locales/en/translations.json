@@ -1218,6 +1218,10 @@
       }
     },
     "settings": {
+      "public": {
+        "label": "Public investor's profile",
+        "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Investors Rating."
+      },
       "platform-currency": "Platform currency",
       "title": "Settings",
       "profile-image": "Profile image",
@@ -2585,6 +2589,10 @@
       "follow": "Follow"
     },
     "statistic": {
+      "get-started-title": "Get started.",
+      "get-started-invest": "There's no such data right now. Find programs or the funds to invest.",
+      "get-started-account": "Create trading account and start to trade",
+      "get-started-fund": "Create your first fund",
       "total": "Total",
       "AUM": "AUM",
       "funds": "Funds",

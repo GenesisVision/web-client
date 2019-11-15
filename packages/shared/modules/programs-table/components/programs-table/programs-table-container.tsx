@@ -44,7 +44,8 @@ import ProgramsTable from "./programs-table";
 import {
   CURRENCY_MAP_NAME,
   LEVEL_FILTER_NAME,
-  PROGRAM_CURRENCY_FILTER_NAME} from "./programs.constants";
+  PROGRAM_CURRENCY_FILTER_NAME
+} from "./programs.constants";
 
 interface OwnProps {
   showSwitchView: boolean;

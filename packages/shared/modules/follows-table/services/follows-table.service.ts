@@ -1,7 +1,4 @@
-import {
-  CancelablePromise,
-  ItemsViewModelFollowDetailsList
-} from "gv-api-web";
+import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
 import * as qs from "qs";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "shared/components/table/helpers/paging.helpers";

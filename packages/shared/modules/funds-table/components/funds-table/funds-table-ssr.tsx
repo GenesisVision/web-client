@@ -20,9 +20,9 @@ import {
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
 import {
+  CURRENCY_MAP_NAME,
   DEFAULT_FUND_TABLE_FILTERS,
   DEFAULT_ITEMS_ON_PAGE,
-  CURRENCY_MAP_NAME,
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
 

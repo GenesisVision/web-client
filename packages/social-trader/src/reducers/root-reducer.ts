@@ -27,6 +27,7 @@ import {
 import alertMessagesReducer, {
   AlertMessagesState
 } from "shared/modules/alert-message/reducers/alert-message-reducers";
+import followNotificationsReducer from "shared/modules/follow-notifications/reducers/follow-notifications.reducers";
 import followsReducer, {
   FollowsListState
 } from "shared/modules/follows-table/reducers/follows-table.reducers";
@@ -56,9 +57,8 @@ import headerReducer, { HeaderState } from "shared/reducers/header-reducer";
 import platformReducer, {
   PlatformState
 } from "shared/reducers/platform-reducer";
-import uiReducer, { IUiState } from "shared/reducers/ui-reducer";
 import profileReducer, { ProfileState } from "shared/reducers/profile-reducer";
-import followNotificationsReducer from "shared/modules/follow-notifications/reducers/follow-notifications.reducers";
+import uiReducer, { IUiState } from "shared/reducers/ui-reducer";
 
 // import history from "shared/utils/history";
 

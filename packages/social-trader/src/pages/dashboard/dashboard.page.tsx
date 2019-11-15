@@ -10,30 +10,32 @@ import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Page from "shared/components/page/page";
+import { isNewUserSelector } from "shared/reducers/header-reducer";
 
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
 
 const _DashboardPage: React.FC = () => {
   const [t] = useTranslation();
   const title = t(`dashboard-page.title`);
+  const notNewUser = !useSelector(isNewUserSelector);
   return (
     <TitleContext.Provider value={title}>
       <Page title={title}>
         <div>
           <DashboardTotalContainer />
         </div>
-        <div>
-          <DashboardPortfolioChartSection />
-        </div>
         <div className="dashboard__statistic-block">
           <DashboardTradingStatistic />
           <DashboardInvestingStatistic />
         </div>
-        <div className="dashboard__statistic-block">
-          <DashboardPortfolio />
-          <DashboardAssets />
-        </div>
+        {notNewUser && (
+          <div className="dashboard__statistic-block">
+            <DashboardPortfolio />
+            <DashboardAssets />
+          </div>
+        )}
         <DashboardRecommendationsContainer />
       </Page>
     </TitleContext.Provider>
