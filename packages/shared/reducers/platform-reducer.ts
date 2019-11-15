@@ -5,7 +5,8 @@ import {
   PlatformInfo,
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
-  ProgramMinInvestAmount
+  ProgramMinInvestAmount,
+  TradingAccountMinCreateAmount
 } from "gv-api-web";
 import { createSelector } from "reselect";
 import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
@@ -32,6 +33,15 @@ export const gvInvestFeeSelector = apiFieldSelector<PlatformInfo, number>(
   platformDataSelector,
   fieldSelector(state => state.commonInfo.platformCommission.investment),
   0
+);
+
+export const tradingAccountMinDepositAmountsSelector = apiFieldSelector<
+  PlatformInfo,
+  TradingAccountMinCreateAmount[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.tradingAccountInfo.minAmounts),
+  []
 );
 
 export const fundMinDepositAmountSelector = apiFieldSelector<
