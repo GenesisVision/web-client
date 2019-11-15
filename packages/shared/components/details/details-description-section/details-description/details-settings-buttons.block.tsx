@@ -1,16 +1,16 @@
 import "./details-description.scss";
 
-import { PersonalFundDetails, PersonalProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { ToType } from "shared/components/link/link";
 
+import { PersonalDetailsType } from "../../details.types";
 import DetailsFavorite from "./controls/details-favorite";
 import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
 
 const _DetailsSettingsButtons: React.FC<{
-  personalDetails: PersonalFundDetails | PersonalProgramDetails;
+  personalDetails: PersonalDetailsType;
   id: string;
   title: string;
   notificationsUrl: ToType;
