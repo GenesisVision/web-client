@@ -21,16 +21,23 @@ const _FollowControls: React.FC<Props> = ({
         successFee={signalSettings.signalSuccessFee}
         volumeFee={signalSettings.signalVolumeFee}
       />
-      <SignalProviderButtons
-        broker={type}
-        condition={!!personalDetails}
-        signalSubscription={
-          personalDetails && personalDetails.signalSubscription
-        }
-        id={id}
-        title={title}
-        currency={currency}
-      />
+      {personalDetails && (
+        <SignalProviderButtons
+          isExternal={
+            personalDetails &&
+            personalDetails.guestActions &&
+            personalDetails.guestActions
+              .canSubscribeToExternalSignalPrivateAccount
+          }
+          broker={type}
+          signalSubscription={
+            personalDetails && personalDetails.signalSubscription
+          }
+          id={id}
+          title={title}
+          currency={currency}
+        />
+      )}
     </SignalProviderControls>
   );
 };
