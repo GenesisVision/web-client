@@ -37,22 +37,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   )!;
   const disableButton =
     !dirty || !isValid || initialDepositAmount > wallet.available;
-  const fetchRate = useCallback(
-    (initialDepositCurrency?: CurrencyEnum) => {
-      fetchRateMethod(
-        currency as CurrencyEnum,
-        initialDepositCurrency ||
-          values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]
-      ).then((rate: number) => {
-        if (rate !== values.rate)
-          setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
-      });
-    },
-    [currency, setFieldValue, values]
-  );
+
   useEffect(() => {
-    fetchRate();
-  }, [fetchRate]);
+    fetchRateMethod(currency as CurrencyEnum, initialDepositCurrency).then(
+      (rate: number) => {
+        setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
+      }
+    );
+  }, [currency, initialDepositCurrency]);
+
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const wallet = wallets.find(({ id }) => target.props.value === id)!;
@@ -67,9 +60,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
       );
       setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, "");
       setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
-      fetchRate(initialDepositCurrencyNew);
     },
-    [fetchRate, setFieldTouched, setFieldValue, wallets]
+    [setFieldTouched, setFieldValue, wallets]
   );
   const handleNext = useCallback(() => onClick(values), [onClick, values]);
   const setMaxAmount = useCallback(

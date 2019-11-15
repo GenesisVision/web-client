@@ -1,20 +1,20 @@
-import { AttachToSignalProvider, SignalSubscription } from "gv-api-web";
-import React, { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import Dialog from "shared/components/dialog/dialog";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
-import { FOLLOW_TYPE } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import {
-  CurrencyEnum,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+  AmountWithCurrency,
+  AttachToSignalProvider,
+  BrokerTradeServerType,
+  SignalSubscription
+} from "gv-api-web";
+import React, { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
+import Dialog from "shared/components/dialog/dialog";
+import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
+import useApiRequest, {
+  TUseApiRequestProps
+} from "shared/hooks/api-request.hook";
+import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import useApiRequest from "../../hooks/api-request.hook";
-import { useGetRate, useGetSignalInfo } from "./follow-module-container.hooks";
+import { tradingAccountMinDepositAmountsSelector } from "../../reducers/platform-reducer";
+import { useGetRate } from "./follow-module-container.hooks";
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
@@ -25,6 +25,7 @@ import {
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _FollowModuleContainer: React.FC<Props> = ({
+  broker,
   id,
   signalSubscription,
   currency,
@@ -32,71 +33,54 @@ const _FollowModuleContainer: React.FC<Props> = ({
   onApply,
   open
 }) => {
-  const dispatch = useDispatch();
+  const tradingAccountMinDepositAmounts = useSelector(
+    tradingAccountMinDepositAmountsSelector
+  );
+  const minDeposit = tradingAccountMinDepositAmounts
+    .find(({ serverType }) => serverType === broker)!
+    .minDepositCreateAsset.find(
+      (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
+    ).amount;
   const wallets = useSelector(walletsSelector);
-  const {
-    data: accounts,
-    sendRequest,
-    isPending: isAccountsPending
-  } = useApiRequest({
+
+  const { data: accounts, sendRequest: getAccounts } = useApiRequest({
     request: fetchAccounts
   });
-  const [t] = useTranslation();
-  const { minDeposit, isMinDepositPending, getMinDeposit } = useGetSignalInfo();
-  const { rate, isRatePending, getRate } = useGetRate();
-  const [type, setType] = useState<FOLLOW_TYPE>(
-    signalSubscription.hasActiveSubscription
-      ? FOLLOW_TYPE.EDIT
-      : FOLLOW_TYPE.CREATE
+
+  const { sendRequest: submitChanges } = useApiRequest(
+    composeApiRequest(signalSubscription.hasActiveSubscription)
   );
-  useEffect(() => {
-    sendRequest();
-    getMinDeposit(id);
-    getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
-  }, []);
+
+  const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    setType(
-      signalSubscription.hasActiveSubscription
-        ? FOLLOW_TYPE.EDIT
-        : FOLLOW_TYPE.CREATE
-    );
-  }, [signalSubscription]);
+    open &&
+      getAccounts({ id }) &&
+      getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
+  }, [open]);
+
   const handleSubmit = useCallback(
     (
       id: string,
       requestParams: AttachToSignalProvider,
       setSubmitting: SetSubmittingType
     ) => {
-      const successMessage =
-        type === FOLLOW_TYPE.CREATE
-          ? "follow-program.create-success-alert-message"
-          : "follow-program.edit-success-alert-message";
-      const submitMethod =
-        type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
-      submitMethod(id, requestParams)
-        .then(() => dispatch(alertMessageActions.success(t(successMessage))))
+      submitChanges({ id, requestParams }, setSubmitting)
         .then(onApply)
-        .then(onClose)
-        .catch(({ errorMessage }: ResponseError) =>
-          dispatch(alertMessageActions.error(errorMessage))
-        )
-        .finally(() => setSubmitting(false));
+        .then(onClose);
     },
-    [type]
+    []
   );
-  const isPending = isMinDepositPending && isRatePending && isAccountsPending;
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupForm
         rate={rate}
-        condition={!isPending}
-        loader={<DialogLoader />}
+        loaderData={[]}
         signalSubscription={signalSubscription}
         minDeposit={minDeposit!}
         id={id}
         currency={currency}
-        accounts={accounts}
+        data={accounts}
         wallets={wallets}
         submitMethod={handleSubmit}
       />
@@ -104,7 +88,18 @@ const _FollowModuleContainer: React.FC<Props> = ({
   );
 };
 
+const composeApiRequest = (
+  hasActiveSubscription: boolean
+): TUseApiRequestProps => {
+  const successMessage = hasActiveSubscription
+    ? "follow-program.edit-success-alert-message"
+    : "follow-program.create-success-alert-message";
+  const request = hasActiveSubscription ? updateAttachToSignal : attachToSignal;
+  return { successMessage, request };
+};
+
 interface Props {
+  broker: BrokerTradeServerType;
   open: boolean;
   onClose: () => void;
   onApply: () => void;

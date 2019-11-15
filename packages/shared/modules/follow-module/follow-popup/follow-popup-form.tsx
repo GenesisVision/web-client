@@ -8,13 +8,11 @@ import {
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import withLoader from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import FollowCreateAccount, {
-  CreateAccountFormValues
-} from "./follow-popup-create-account";
+import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
 import FollowSelectAccount, {
@@ -31,13 +29,13 @@ const initRequestParams = {
 };
 
 const _FollowForm: React.FC<Props> = ({
-  accounts,
+  data: accounts,
   id,
   wallets,
   currency,
   signalSubscription,
   minDeposit,
-  rate,
+  rate = 1,
   submitMethod
 }) => {
   const hasAccounts = !!accounts.length;
@@ -51,13 +49,10 @@ const _FollowForm: React.FC<Props> = ({
   useEffect(() => {
     signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
   }, [setTab, signalSubscription.hasSignalAccount]);
-  const createdCopytradingAccount = useCallback(
-    ({  }: CreateAccountFormValues) => {
-      setTab(null, TABS.PARAMS);
-      setRequestParams(requestParams);
-    },
-    [requestParams]
-  );
+  const createdCopytradingAccount = useCallback(() => {
+    setTab(null, TABS.PARAMS);
+    setRequestParams(requestParams);
+  }, [requestParams]);
   const selectCopytradingAccount = useCallback(
     ({ account }: SelectAccountFormValues) => {
       setTab(null, TABS.PARAMS);
@@ -92,7 +87,12 @@ const _FollowForm: React.FC<Props> = ({
     },
     [id, requestParams, submitMethod]
   );
-  const adaptStep = tab === TABS.SELECT_ACCOUNT ? "create-account" : "params";
+  const adaptStep =
+    tab === TABS.SELECT_ACCOUNT
+      ? hasAccounts
+        ? "select-account"
+        : "create-account"
+      : "params";
   const paramsSubscription = signalSubscription.hasActiveSubscription
     ? signalSubscription
     : undefined;
@@ -102,7 +102,7 @@ const _FollowForm: React.FC<Props> = ({
       {hasAccounts && tab === TABS.SELECT_ACCOUNT && (
         <FollowSelectAccount
           accounts={accounts}
-          onClick={selectCopytradingAccount}
+          onSelect={selectCopytradingAccount}
         />
       )}
       {!hasAccounts && tab === TABS.SELECT_ACCOUNT && (
@@ -132,8 +132,8 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 
-interface OwnProps {
-  accounts: TradingAccountDetails[];
+interface Props {
+  data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
   signalSubscription: SignalSubscription;
@@ -147,7 +147,5 @@ interface OwnProps {
   currency: CurrencyEnum;
 }
 
-export interface Props extends OwnProps {}
-
-const FollowForm = withLoader(React.memo(_FollowForm));
+const FollowForm = withBlurLoader(React.memo(_FollowForm));
 export default FollowForm;
