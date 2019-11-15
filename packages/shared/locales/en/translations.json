@@ -443,6 +443,9 @@
         "tooltip": "Each new position is opened at a fixed amount."
       }
     },
+    "select-account": {
+      "title": "Select account"
+    },
     "create-account": {
       "title": "Account creation",
       "available": "Available in wallet",
