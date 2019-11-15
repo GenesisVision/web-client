@@ -18,6 +18,9 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
           src={filesService.getFileUrl(description.brokerDetails.logo)}
         />
       </StatisticItem>
+      <StatisticItem label={t("program-details-page.description.currency")}>
+        {description.currency}
+      </StatisticItem>
     </StatisticItemList>
   );
 };
