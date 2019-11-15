@@ -43,7 +43,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
     .find(({ serverType }) => serverType === broker)!
     .minDepositCreateAsset.find(
       (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
-    ).amount;
+    )!.amount;
   const wallets = useSelector(walletsSelector);
 
   const { data: accounts, sendRequest: getAccounts } = useApiRequest({
