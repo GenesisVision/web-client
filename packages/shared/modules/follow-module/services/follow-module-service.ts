@@ -1,8 +1,12 @@
 import {
+  AttachToExternalSignalProviderExt,
   AttachToSignalProvider,
   CancelablePromise,
+  NewExternalTradingAccountRequest,
+  NewTradingAccountRequest,
   TradingAccountDetails
 } from "gv-api-web";
+import assetsApi from "shared/services/api-client/assets-api";
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";
 
@@ -27,15 +31,40 @@ export const fetchAccounts = ({
 export const getSignalInfo = (id: string): CancelablePromise<number> =>
   Promise.resolve(100) as CancelablePromise<number>;
 
-export const attachToExternalSignal: TSignalRequest = ({ id, requestParams }) =>
-  signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {
-    model: requestParams
-  });
+export const attachToExternalSignal: TSignalRequest = async ({
+  id,
+  requestParams
+}) => {
+  const auth = authService.getAuthArg();
+  const externalKeyId = requestParams.externalKeyId
+    ? requestParams.externalKeyId
+    : await assetsApi
+        .createExternalTradingAccount(auth, { request: requestParams })
+        .then(({ id }) => id);
 
-export const attachToSignal: TSignalRequest = ({ id, requestParams }) =>
-  signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {
-    model: requestParams
+  return signalApi.attachSlaveToMasterExternalPrivateAccount(
+    id,
+    authService.getAuthArg(),
+    {
+      model: { ...requestParams, externalKeyId }
+    }
+  );
+};
+
+export const attachToSignal: TSignalRequest = async ({ id, requestParams }) => {
+  const auth = authService.getAuthArg();
+  const tradingAccountId = requestParams.tradingAccountId
+    ? requestParams.tradingAccountId
+    : await assetsApi
+        .createTradingAccount(auth, {
+          request: requestParams
+        })
+        .then(({ id }) => id);
+
+  return signalApi.attachSlaveToMasterInternal(id, authService.getAuthArg(), {
+    model: { ...requestParams, tradingAccountId }
   });
+};
 
 export const updateAttachToSignal: TSignalRequest = ({ id, requestParams }) =>
   signalApi.updateSubscriptionSettings(id, authService.getAuthArg(), {
@@ -44,5 +73,8 @@ export const updateAttachToSignal: TSignalRequest = ({ id, requestParams }) =>
 
 export type TSignalRequest = (args: {
   id: string;
-  requestParams: AttachToSignalProvider;
-}) => CancelablePromise<any>;
+  requestParams: AttachToSignalProvider &
+    AttachToExternalSignalProviderExt &
+    NewTradingAccountRequest &
+    NewExternalTradingAccountRequest;
+}) => Promise<any>;
