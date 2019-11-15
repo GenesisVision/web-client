@@ -1,4 +1,4 @@
-import { SignalSubscription } from "gv-api-web";
+import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ import { CurrencyEnum } from "shared/utils/types";
 import { dispatchFollowDescription } from "./services/follow-details.service";
 
 const _FollowButton: React.FC<Props> = ({
+  broker,
   signalSubscription,
   id,
   title,
@@ -36,6 +37,7 @@ const _FollowButton: React.FC<Props> = ({
         {t("program-details-page.description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
+        broker={broker}
         id={id}
         open={isOpenFollow}
         currency={currency}
@@ -57,6 +59,7 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  broker: BrokerTradeServerType;
   signalSubscription: SignalSubscription;
   id: string;
   title: string;

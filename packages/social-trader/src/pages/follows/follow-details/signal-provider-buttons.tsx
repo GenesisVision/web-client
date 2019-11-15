@@ -1,4 +1,8 @@
-import { PersonalFollowDetailsFull, SignalSubscription } from "gv-api-web";
+import {
+  BrokerTradeServerType,
+  PersonalFollowDetailsFull,
+  SignalSubscription
+} from "gv-api-web";
 import * as React from "react";
 import withLoader from "shared/decorators/with-loader";
 import { CurrencyEnum } from "shared/utils/types";
@@ -7,6 +11,7 @@ import FollowButton from "./follow-button";
 import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
+  broker,
   signalSubscription,
   id,
   title,
@@ -18,6 +23,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
         <UnFollowButton id={id} />
       ) : (
         <FollowButton
+          broker={broker}
           signalSubscription={signalSubscription}
           id={id}
           title={title}
@@ -29,6 +35,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  broker: BrokerTradeServerType;
   signalSubscription: SignalSubscription;
   id: string;
   title: string;
