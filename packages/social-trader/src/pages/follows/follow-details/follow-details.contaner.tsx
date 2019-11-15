@@ -44,7 +44,6 @@ import { dispatchFollowDescription } from "./services/follow-details.service";
 
 const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
-  const id = useSelector(followIdSelector);
   useEffect(() => {
     dispatch(statisticCurrencyAction(description.currency));
   }, [description]);
