@@ -1,9 +1,12 @@
+import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
 import * as qs from "qs";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "shared/components/table/helpers/paging.helpers";
+import followApi from "shared/services/api-client/follow-api";
+import authService from "shared/services/auth-service";
 import { NextPageWithReduxContext } from "shared/utils/types";
 
-import { FetchProgramsFiltersType } from "../actions/follows-table.actions";
+import { FetchSignalAssetsFilterType } from "../actions/follows-table.actions";
 import {
   DEFAULT_FOLLOW_TABLE_FILTERS,
   FOLLOW_TABLE_FILTERS,
@@ -16,7 +19,7 @@ export const getFiltersFromContext = ({
   asPath = "",
   pathname,
   reduxStore
-}: NextPageWithReduxContext): FetchProgramsFiltersType => {
+}: NextPageWithReduxContext): FetchSignalAssetsFilterType => {
   const { page, sorting = SORTING_FILTER_VALUE, ...other } = qs.parse(
     asPath.slice(pathname.length + 1)
   );
@@ -33,5 +36,14 @@ export const getFiltersFromContext = ({
     }),
     currencySecondary: currency,
     sorting
-  } as FetchProgramsFiltersType;
+  } as FetchSignalAssetsFilterType;
+};
+
+export const fetchFollows = (
+  filters: FetchSignalAssetsFilterType
+): CancelablePromise<ItemsViewModelFollowDetailsList> => {
+  return followApi.getFollowAssets({
+    ...filters,
+    authorization: authService.getAuthArg()
+  });
 };

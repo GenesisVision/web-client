@@ -6,20 +6,20 @@ import { getFiltersFromContext } from "shared/modules/programs-table/services/pr
 import authService from "shared/services/auth-service";
 import { NextPageWithRedux } from "shared/utils/types";
 
-const Page: NextPageWithRedux<{}> = () => {
+const Page: NextPageWithRedux<any> = () => {
   return <FollowsPage />;
 };
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  await ctx.reduxStore.dispatch(
-    // @ts-ignore TODO why there is error
-    fetchFollowsAction({
-      ...filtering,
-      authorization: authService.getAuthArg(ctx)
-    })
-  );
-  return {};
+  try {
+    await ctx.reduxStore.dispatch(
+      fetchFollowsAction({
+        ...filtering,
+        authorization: authService.getAuthArg(ctx)
+      })
+    );
+  } catch (e) {}
 };
 
 export default withDefaultLayout(Page);

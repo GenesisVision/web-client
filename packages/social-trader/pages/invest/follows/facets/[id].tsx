@@ -1,4 +1,4 @@
 import React from "react";
-import { ProgramFacet } from "shared/routes/ssr/programs/facets/[id]";
+import { FollowsFacet } from "shared/routes/ssr/follows/facets/[id]";
 
-export default ProgramFacet;
+export default FollowsFacet;

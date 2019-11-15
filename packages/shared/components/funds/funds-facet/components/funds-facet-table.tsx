@@ -1,4 +1,4 @@
-import { PlatformCurrency, ProgramFacetTimeframeEnum } from "gv-api-web";
+import { PlatformCurrencyInfo, Timeframe } from "gv-api-web";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -15,7 +15,7 @@ import {
 } from "shared/components/table/components/table.types";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
-import { SHOW_IN_CURRENCY_FILTER } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { CURRENCY_MAP_NAME } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import { CurrencyEnum } from "shared/utils/types";
 
@@ -66,9 +66,9 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={SHOW_IN_CURRENCY_FILTER}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
             values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />
@@ -96,10 +96,10 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
 export interface IFundsFacetTableProps {
   title: string;
   sorting: string;
-  timeframe: ProgramFacetTimeframeEnum;
+  timeframe: Timeframe;
   getItems: GetItemsFuncType;
   isAuthenticated?: boolean;
-  currencies?: PlatformCurrency[];
+  currencies?: PlatformCurrencyInfo[];
   currency?: CurrencyEnum;
 }
 
