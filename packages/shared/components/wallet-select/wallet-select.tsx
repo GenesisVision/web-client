@@ -19,7 +19,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
       <option value={id} key={id}>
         <CurrencyItem
           logo={logo}
-          name={`${title} | ${currency}`}
+          name={`${title ? `${title} | ` : ""}${currency}`}
           small
           clickable={false}
         />
@@ -42,14 +42,12 @@ const mapToWalletOption = (item: ItemType) => {
   };
 };
 
-interface OwnProps {
+interface Props {
   items: ItemsType;
   label: string;
   name: string;
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
 }
-
-interface Props extends OwnProps {}
 
 const WalletSelect = React.memo(_WalletSelect);
 export default WalletSelect;
