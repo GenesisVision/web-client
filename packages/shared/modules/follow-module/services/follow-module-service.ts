@@ -6,6 +6,15 @@ import {
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";
 
+export const fetchExternalAccounts = ({
+  id
+}: {
+  id: string;
+}): CancelablePromise<TradingAccountDetails[]> =>
+  signalApi
+    .getSubscriberAccountsForAsset(id, authService.getAuthArg())
+    .then(({ items }) => items);
+
 export const fetchAccounts = ({
   id
 }: {
@@ -17,6 +26,11 @@ export const fetchAccounts = ({
 
 export const getSignalInfo = (id: string): CancelablePromise<number> =>
   Promise.resolve(100) as CancelablePromise<number>;
+
+export const attachToExternalSignal: TSignalRequest = ({ id, requestParams }) =>
+  signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {
+    model: requestParams
+  });
 
 export const attachToSignal: TSignalRequest = ({ id, requestParams }) =>
   signalApi.attachSlaveToMaster(id, authService.getAuthArg(), {

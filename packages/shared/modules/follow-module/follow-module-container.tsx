@@ -17,14 +17,17 @@ import { tradingAccountMinDepositAmountsSelector } from "../../reducers/platform
 import { useGetRate } from "./follow-module-container.hooks";
 import FollowPopupForm from "./follow-popup/follow-popup-form";
 import {
+  attachToExternalSignal,
   attachToSignal,
   fetchAccounts,
+  fetchExternalAccounts,
   updateAttachToSignal
 } from "./services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _FollowModuleContainer: React.FC<Props> = ({
+  isExternal,
   broker,
   id,
   signalSubscription,
@@ -44,11 +47,11 @@ const _FollowModuleContainer: React.FC<Props> = ({
   const wallets = useSelector(walletsSelector);
 
   const { data: accounts, sendRequest: getAccounts } = useApiRequest({
-    request: fetchAccounts
+    request: isExternal ? fetchExternalAccounts : fetchAccounts
   });
 
   const { sendRequest: submitChanges } = useApiRequest(
-    composeApiRequest(signalSubscription.hasActiveSubscription)
+    composeApiRequest(signalSubscription.hasActiveSubscription, isExternal)
   );
 
   const { rate, getRate } = useGetRate();
@@ -74,6 +77,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupForm
+        isExternal={isExternal}
         rate={rate}
         loaderData={[]}
         signalSubscription={signalSubscription}
@@ -89,16 +93,22 @@ const _FollowModuleContainer: React.FC<Props> = ({
 };
 
 const composeApiRequest = (
-  hasActiveSubscription: boolean
+  hasActiveSubscription: boolean,
+  isExternal: boolean
 ): TUseApiRequestProps => {
   const successMessage = hasActiveSubscription
     ? "follow-program.edit-success-alert-message"
     : "follow-program.create-success-alert-message";
-  const request = hasActiveSubscription ? updateAttachToSignal : attachToSignal;
+  const request = hasActiveSubscription
+    ? updateAttachToSignal
+    : isExternal
+    ? attachToExternalSignal
+    : attachToSignal;
   return { successMessage, request };
 };
 
 interface Props {
+  isExternal: boolean;
   broker: BrokerTradeServerType;
   open: boolean;
   onClose: () => void;

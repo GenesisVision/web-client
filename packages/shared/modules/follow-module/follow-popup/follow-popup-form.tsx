@@ -29,6 +29,7 @@ const initRequestParams = {
 };
 
 const _FollowForm: React.FC<Props> = ({
+  isExternal,
   data: accounts,
   id,
   wallets,
@@ -90,7 +91,9 @@ const _FollowForm: React.FC<Props> = ({
   const adaptStep =
     tab === TABS.SELECT_ACCOUNT
       ? hasAccounts
-        ? "select-account"
+        ? isExternal
+          ? "select-external-account"
+          : "select-account"
         : "create-account"
       : "params";
   const paramsSubscription = signalSubscription.hasActiveSubscription
@@ -133,6 +136,7 @@ enum TABS {
 }
 
 interface Props {
+  isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;

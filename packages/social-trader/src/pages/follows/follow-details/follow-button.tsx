@@ -37,6 +37,7 @@ const _FollowButton: React.FC<Props> = ({
         {t("program-details-page.description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
+        isExternal={false}
         broker={broker}
         id={id}
         open={isOpenFollow}
