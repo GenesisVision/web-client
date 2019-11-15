@@ -68,7 +68,8 @@
   }
 }
 
-.asset-title,.asset-content{
+.asset-title,
+.asset-content {
   padding: 0 $padding-xsmall;
 
   @include media-breakpoint-landscape-phone() {

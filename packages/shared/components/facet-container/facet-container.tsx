@@ -114,7 +114,8 @@ export type FacetDataType = {
 };
 export enum FACET_ASSET {
   PROGRAMS = "programInfo",
-  FUNDS = "fundInfo"
+  FUNDS = "fundInfo",
+  FOLLOWS = "followInfo"
 }
 
 const FacetContainer = compose<React.ComponentType<OwnProps>>(

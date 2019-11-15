@@ -42,9 +42,9 @@ import {
 } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import {
+  CURRENCY_MAP_NAME,
   LEVEL_FILTER_NAME,
-  PROGRAM_CURRENCY_FILTER_NAME,
-  SHOW_IN_CURRENCY_FILTER
+  PROGRAM_CURRENCY_FILTER_NAME
 } from "./programs.constants";
 
 interface OwnProps {
@@ -133,9 +133,9 @@ class _ProgramsTableContainer extends React.PureComponent<Props> {
         renderMappings={(updateFilter, filtering) => (
           <>
             <SelectFilter
-              name={SHOW_IN_CURRENCY_FILTER}
+              name={CURRENCY_MAP_NAME}
               label={t("filters.currency.show-in")}
-              value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
+              value={filtering && filtering[CURRENCY_MAP_NAME]}
               values={composeCurrencyMap(currencies)}
               onChange={updateFilter}
             />

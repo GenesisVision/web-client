@@ -15,8 +15,8 @@ import useRouteFilters from "shared/hooks/route-filters.hook";
 import { useTranslation } from "shared/i18n";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import {
+  CURRENCY_MAP_NAME,
   DEFAULT_PROGRAM_TABLE_FILTERS,
-  SHOW_IN_CURRENCY_FILTER,
   SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
@@ -68,9 +68,9 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={SHOW_IN_CURRENCY_FILTER}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
             values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />

@@ -20,7 +20,7 @@ import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/fa
 import { fundListLoaderData } from "shared/modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
-import { SHOW_IN_CURRENCY_FILTER } from "shared/modules/programs-table/components/programs-table/programs.constants";
+import { CURRENCY_MAP_NAME } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
 import {
   PROGRAMS_FACET_PAGING,
@@ -73,9 +73,9 @@ const _ProgramsFacetTable: React.FC<
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={SHOW_IN_CURRENCY_FILTER}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
             values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />

@@ -13,7 +13,7 @@ import { calculateTotalPages } from "shared/components/table/helpers/paging.help
 import useRouteFilters from "shared/hooks/route-filters.hook";
 import { composeCurrencyMap } from "shared/modules/programs-table/components/programs-table/program-table.helpers";
 import {
-  SHOW_IN_CURRENCY_FILTER,
+  CURRENCY_MAP_NAME,
   SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "shared/modules/programs-table/components/programs-table/programs.constants";
@@ -61,9 +61,9 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
-            name={SHOW_IN_CURRENCY_FILTER}
+            name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
-            value={filtering && filtering[SHOW_IN_CURRENCY_FILTER]}
+            value={filtering && filtering[CURRENCY_MAP_NAME]}
             values={composeCurrencyMap(currencies)}
             onChange={updateFilter}
           />

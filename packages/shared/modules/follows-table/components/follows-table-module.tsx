@@ -5,7 +5,7 @@ import TableModule, {
 import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
 import FollowTableHeaderCell from "./follow-table-header-cell";
-import FollowTableRow from "./follow-table-row";
+import FollowTableRow from "./follow-table-row-short";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FAVORITE_COLUMN_NAME } from "./follows-table";
 import { FOLLOW_COLUMNS } from "./follows.constants";
