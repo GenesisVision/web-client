@@ -21,12 +21,12 @@ import {
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
 
-const _ManagerPrograms: React.FC<Props> = ({ title, managerId }) => {
+const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const getManagerPrograms: GetItemsFuncType = useCallback(
-    filters => fetchManagerPrograms({ ...filters, managerId }),
-    [managerId]
+    filters => fetchManagerPrograms({ ...filters, ownerId }),
+    [ownerId]
   );
 
   const toggleFavorite: TableToggleFavoriteType = useCallback(
@@ -68,7 +68,7 @@ const _ManagerPrograms: React.FC<Props> = ({ title, managerId }) => {
 };
 
 interface Props {
-  managerId: string;
+  ownerId: string;
   title: string;
 }
 

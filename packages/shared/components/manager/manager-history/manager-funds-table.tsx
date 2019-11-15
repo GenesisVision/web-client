@@ -24,16 +24,16 @@ import {
 import { fetchManagerFunds } from "../services/manager.service";
 
 interface Props {
-  managerId: string;
+  ownerId: string;
   title: string;
 }
 
-const _ManagerFunds: React.FC<Props> = ({ title, managerId }) => {
+const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const getManagerFunds: GetItemsFuncType = useCallback(
-    filters => fetchManagerFunds({ ...filters, managerId }),
-    [managerId]
+    filters => fetchManagerFunds({ ...filters, ownerId }),
+    [ownerId]
   );
 
   const toggleFavorite: TableToggleFavoriteType = useCallback(
