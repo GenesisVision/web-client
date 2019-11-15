@@ -2,7 +2,7 @@ import { CancelablePromise } from "gv-api-web";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { SetSubmittingType } from "shared/utils/types";
+import { ResponseError, SetSubmittingType } from "shared/utils/types";
 
 import useErrorMessage, { TErrorMessage } from "./error-message.hook";
 import useIsOpen from "./is-open.hook";
@@ -12,10 +12,11 @@ export const nullValue = undefined;
 
 type TRequest<T> = CancelablePromise<T>;
 
-type TUseApiRequestProps<T> = {
+export type TUseApiRequestProps<T = any> = {
   request: (...args: any) => any;
   defaultData?: T;
   catchCallback?: (errorMessage?: string) => void;
+  successMessage?: string;
 };
 
 type TUseApiRequestOutput<T> = {
@@ -30,6 +31,7 @@ type TUseApiRequestOutput<T> = {
 };
 
 const useApiRequest = <T>({
+  successMessage,
   request,
   defaultData,
   catchCallback
@@ -43,15 +45,22 @@ const useApiRequest = <T>({
   } = useErrorMessage();
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
 
+  const sendSuccessMessage = (res: any) => {
+    successMessage &&
+      dispatch(alertMessageActions.success(successMessage, true));
+    return res;
+  };
+
   const sendRequest = (props?: any, setSubmitting?: SetSubmittingType) => {
     setIsPending();
     return (Promise.resolve(request(props)) as TRequest<T>)
       .then(setData)
       .then(cleanErrorMessage)
-      .catch(({ errorMessage }) => {
+      .then(sendSuccessMessage)
+      .catch((errorMessage: ResponseError) => {
         setErrorMessage(errorMessage);
-        dispatch(alertMessageActions.error(errorMessage));
-        catchCallback && catchCallback(errorMessage);
+        dispatch(alertMessageActions.error(errorMessage.errorMessage));
+        catchCallback && catchCallback(errorMessage.errorMessage);
       })
       .finally(() => {
         setIsNotPending();
