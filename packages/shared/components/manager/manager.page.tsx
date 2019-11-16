@@ -1,6 +1,6 @@
 import "./manager.page.scss";
 
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -9,18 +9,18 @@ import ManagerHistorySection from "shared/components/manager/manager-history/man
 import Page from "shared/components/page/page";
 import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
-const _ManagerPage: React.FC<Props> = ({ managerProfile }) => {
+const _ManagerPage: React.FC<Props> = ({ profile }) => {
   const [t] = useTranslation();
   return (
-    <Page title={`${t("manager-page.title")} ${managerProfile.username}`}>
+    <Page title={`${t("manager-page.title")} ${profile.username}`}>
       <div className="manager">
         <div className="manager__description">
-          <ManagerDescription managerProfile={managerProfile} />
+          <ManagerDescription profile={profile} />
         </div>
         <div className="manager__history">
           <ManagerHistorySection
-            managerId={managerProfile.id}
-            title={managerProfile.username}
+            ownerId={profile.id}
+            title={profile.username}
           />
         </div>
       </div>
@@ -29,7 +29,7 @@ const _ManagerPage: React.FC<Props> = ({ managerProfile }) => {
 };
 
 interface Props {
-  managerProfile: ManagerProfile;
+  profile: PublicProfile;
 }
 
 const ManagerPage = compose<React.ComponentType<Props & WithLoaderProps>>(

@@ -1,24 +1,24 @@
-import { ManagerProfile } from "gv-api-web";
+import { PublicProfile } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
 import ManagerPage from "shared/components/manager/manager.page";
 import withDefaultLayout from "shared/decorators/with-default-layout";
-import ManagerApi from "shared/services/api-client/manager-api";
+import profileApi from "shared/services/api-client/profile-api";
 
-const Page: NextPage<Props> = ({ managerProfile }) => {
-  return <ManagerPage managerProfile={managerProfile} />;
+const Page: NextPage<Props> = ({ profile }) => {
+  return <ManagerPage profile={profile} />;
 };
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const managerProfile = await ManagerApi.getManagerProfile(id as string);
+  const profile = await profileApi.getManagerProfile(id as string);
   return {
-    managerProfile
+    profile
   };
 };
 
 interface Props {
-  managerProfile: ManagerProfile;
+  profile: PublicProfile;
 }
 
 export const Managers = withDefaultLayout(Page);

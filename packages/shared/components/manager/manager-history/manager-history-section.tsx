@@ -13,7 +13,7 @@ import { fetchManagerAssetsCount } from "../services/manager.service";
 import ManagerFunds from "./manager-funds-table";
 import ManagerPrograms from "./manager-programs-table";
 
-const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
+const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<MANAGER_HISTORY_TAB>(
     MANAGER_HISTORY_TAB.PROGRAMS
@@ -21,11 +21,11 @@ const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
   const [fundsCount, setFundsCount] = useState(0);
   const [programsCount, setProgramsCount] = useState(0);
   useEffect(() => {
-    fetchManagerAssetsCount(managerId).then(({ fundsCount, programsCount }) => {
+    fetchManagerAssetsCount(ownerId).then(({ fundsCount, programsCount }) => {
       setProgramsCount(programsCount);
       setFundsCount(fundsCount);
     });
-  }, [managerId]);
+  }, [ownerId]);
   return (
     <Surface className="manager-history">
       <div className="manager-history__heading">
@@ -48,10 +48,10 @@ const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
 
       <div>
         {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
-          <ManagerPrograms title={title} managerId={managerId} />
+          <ManagerPrograms title={title} ownerId={ownerId} />
         )}
         {tab === MANAGER_HISTORY_TAB.FUNDS && (
-          <ManagerFunds title={title} managerId={managerId} />
+          <ManagerFunds title={title} ownerId={ownerId} />
         )}
       </div>
     </Surface>
@@ -59,7 +59,7 @@ const _ManagerHistorySection: React.FC<Props> = ({ managerId, title }) => {
 };
 
 interface Props {
-  managerId: string;
+  ownerId: string;
   title: string;
 }
 

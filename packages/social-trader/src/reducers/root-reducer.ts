@@ -11,7 +11,6 @@ import programDetailsReducer, {
 import passwordRestoreReducer from "shared/components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "shared/components/auth/signin/reducers/login.reducers";
 import signUpReducer from "shared/components/auth/signup/reducers/signup.reducers";
-import managerReducer from "shared/components/manager/reducers/manager.reducers";
 import notificationsReducer, {
   NotificationsState
 } from "shared/components/notifications/reducers/notifications.reducers";
@@ -59,8 +58,6 @@ import platformReducer, {
 } from "shared/reducers/platform-reducer";
 import profileReducer, { ProfileState } from "shared/reducers/profile-reducer";
 import uiReducer, { IUiState } from "shared/reducers/ui-reducer";
-
-// import history from "shared/utils/history";
 
 export const sharedRootReducers = {
   profile: profileReducer,

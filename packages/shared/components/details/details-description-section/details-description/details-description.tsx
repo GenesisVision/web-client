@@ -37,9 +37,9 @@ const _DetailsDescription: React.FC<Props> = ({
     />
     <DetailsInfo
       title={description.title}
-      to={managerToPathCreator(description.manager.url, description.title)}
-      username={description.manager.username}
-      socialLinks={description.manager.socialLinks}
+      to={managerToPathCreator(description.owner.url, description.title)}
+      username={description.owner.username}
+      socialLinks={description.owner.socialLinks}
       description={description.description}
     >
       <AssetDetailsExtraBlock />
