@@ -27,6 +27,7 @@ import {
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _FollowModuleContainer: React.FC<Props> = ({
+  brokerId,
   isExternal,
   broker,
   id,
@@ -68,7 +69,17 @@ const _FollowModuleContainer: React.FC<Props> = ({
       requestParams: AttachToSignalProvider,
       setSubmitting: SetSubmittingType
     ) => {
-      submitChanges({ id, requestParams }, setSubmitting)
+      submitChanges(
+        {
+          id,
+          requestParams: {
+            ...requestParams,
+            brokerAccountTypeId: brokerId
+          },
+          brokerType: broker
+        },
+        setSubmitting
+      )
         .then(onApply)
         .then(onClose);
     },
@@ -109,6 +120,7 @@ const composeApiRequest = (
 
 interface Props {
   isExternal: boolean;
+  brokerId: string;
   broker: BrokerTradeServerType;
   open: boolean;
   onClose: () => void;
