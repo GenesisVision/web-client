@@ -1,7 +1,8 @@
 import { ProfileFullViewModel } from "gv-api-web";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
@@ -13,16 +14,16 @@ const _ProfileContainer: React.FC = () => {
   const alertMessageActionsSuccess = (text: string) =>
     dispatch(alertMessageActions.success(text));
   const [t] = useTranslation();
-  const [data, setData] = useState<ProfileFullViewModel | undefined>(undefined);
-  const fetch = () =>
-    profileApi.getProfileFull(authService.getAuthArg()).then(setData);
+  const { sendRequest, data } = useApiRequest<ProfileFullViewModel>({
+    request: () => profileApi.getProfileFull(authService.getAuthArg())
+  });
   useEffect(() => {
-    fetch();
+    sendRequest();
   }, []);
-  const success = () => {
+  const success = useCallback(() => {
     alertMessageActionsSuccess(t("profile-page.success-edit"));
-    fetch();
-  };
+    sendRequest();
+  }, []);
   return (
     <Profile
       condition={!!data}
