@@ -1,12 +1,14 @@
 import {
   AttachToExternalSignalProviderExt,
   AttachToSignalProvider,
+  BrokerTradeServerType,
   CancelablePromise,
   NewExternalTradingAccountRequest,
   NewTradingAccountRequest,
   TradingAccountDetails
 } from "gv-api-web";
 import assetsApi from "shared/services/api-client/assets-api";
+import brokersApi from "shared/services/api-client/brokers-api";
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";
 
@@ -51,13 +53,22 @@ export const attachToExternalSignal: TSignalRequest = async ({
   );
 };
 
-export const attachToSignal: TSignalRequest = async ({ id, requestParams }) => {
+export const attachToSignal: TSignalRequest = async ({
+  id,
+  requestParams,
+  brokerType
+}) => {
   const auth = authService.getAuthArg();
   const tradingAccountId = requestParams.tradingAccountId
     ? requestParams.tradingAccountId
-    : await assetsApi
-        .createTradingAccount(auth, {
-          request: requestParams
+    : await brokersApi
+        .getBrokersExternal()
+        .then(({ brokers }) => {
+          const broker = brokers.find(({ name }) => name === brokerType)!;
+          const leverage = broker.leverageMax;
+          return assetsApi.createTradingAccount(auth, {
+            request: { ...requestParams, leverage }
+          });
         })
         .then(({ id }) => id);
 
@@ -77,4 +88,5 @@ export type TSignalRequest = (args: {
     AttachToExternalSignalProviderExt &
     NewTradingAccountRequest &
     NewExternalTradingAccountRequest;
+  brokerType?: BrokerTradeServerType;
 }) => Promise<any>;
