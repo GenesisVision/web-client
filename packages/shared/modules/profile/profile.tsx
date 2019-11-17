@@ -7,27 +7,26 @@ import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import GVButton from "shared/components/gv-button";
 import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import withLoader from "shared/decorators/with-loader";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import PublicInfo from "shared/modules/public-info/public-info";
 
-const _Profile: React.FC<Props> = ({ info, notifySuccess, onSuccessEdit }) => {
+const _Profile: React.FC<IProfileOwnProps> = ({ info }) => {
+  const dispatch = useDispatch();
   const [t] = useTranslation();
   const onCopy = useCallback(() => {
     copy(info.id);
-    notifySuccess(t("profile-page.success-copy"));
+    dispatch(alertMessageActions.success("profile-page.success-copy"));
   }, [info.id]);
   return (
     <>
       <SettingsBlock label={t("profile-page.public-info")}>
-        <PublicInfo
-          about={info.about}
-          userName={info.userName}
-          onSuccessEdit={onSuccessEdit}
-        />
+        <PublicInfo about={info.about} userName={info.userName} />
       </SettingsBlock>
       <SettingsBlock label={t("profile-page.id")}>
         <div className="profile__content">
@@ -51,12 +50,8 @@ const _Profile: React.FC<Props> = ({ info, notifySuccess, onSuccessEdit }) => {
   );
 };
 
-interface Props extends IProfileOwnProps {}
-
 export interface IProfileOwnProps {
   info: ProfileFullViewModel;
-  notifySuccess: (val: string) => void;
-  onSuccessEdit: () => void;
 }
 
 const Profile = withLoader(React.memo(_Profile));

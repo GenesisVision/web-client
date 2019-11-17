@@ -5,9 +5,10 @@ import { SetSubmittingType } from "shared/utils/types";
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 import { updateProfile } from "./public-info.service";
 
-const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
+const _PublicInfo: React.FC<Props> = ({ userName, about }) => {
   const { sendRequest, errorMessage } = useApiRequest({
-    request: updateProfile
+    request: updateProfile,
+    successMessage: "profile-page.success-edit"
   });
   const handleSubmit = useCallback(
     (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
@@ -16,8 +17,8 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
           model
         },
         setSubmitting
-      ).then(onSuccessEdit),
-    [onSuccessEdit]
+      ),
+    []
   );
   return (
     <PublicInfoForm
@@ -30,7 +31,6 @@ const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
 };
 
 interface Props {
-  onSuccessEdit: () => void;
   userName: string;
   about: string;
 }
