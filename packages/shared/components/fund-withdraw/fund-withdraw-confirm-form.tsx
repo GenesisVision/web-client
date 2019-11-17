@@ -8,12 +8,13 @@ import GVButton from "shared/components/gv-button";
 import useApiRequest from "shared/hooks/api-request.hook";
 import { formatValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
+import { withdrawFund } from "social-trader-web-portal/src/modules/fund-withdraw/services/fund-withdraw.services";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
-import { FundWithdraw } from "./fund-withdraw.types";
 
 const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
-  withdraw,
+  onClose,
+  id,
   availableToWithdraw,
   percent,
   currency,
@@ -21,18 +22,22 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
-    request: withdraw
+    request: withdrawFund,
+    successMessage: "withdraw-fund.success-alert-message"
   });
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
       sendRequest(
         {
-          percent,
-          currency
+          id,
+          values: {
+            percent,
+            currency
+          }
         },
         setSubmitting
-      ),
-    [percent, currency]
+      ).then(onClose),
+    [percent, currency, id]
   );
   return (
     <FundWithdrawConfirmForm
@@ -47,7 +52,8 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   );
 };
 interface IFundWithdrawConfirmProps {
-  withdraw: (value: FundWithdraw) => Promise<void>;
+  onClose: (param?: any) => void;
+  id: string;
   availableToWithdraw: number;
   percent: number;
   currency: string;

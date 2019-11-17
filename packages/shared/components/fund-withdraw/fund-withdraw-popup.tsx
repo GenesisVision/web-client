@@ -14,7 +14,7 @@ import FundWithdrawAmountForm, {
 } from "./fund-withdraw-amount-form";
 import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
 import { FundWithdrawTop } from "./fund-withdraw-top";
-import { FundWithdraw, FundWithdrawInfoResponse } from "./fund-withdraw.types";
+import { FundWithdrawInfoResponse } from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
@@ -22,21 +22,23 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
+  onClose,
   data: { wallets, withdrawInfo },
-  accountCurrency,
-  withdraw
+  id
 }) => {
   const { tab, setTab } = useTab<FUND_WITHDRAW_FORM>(
     FUND_WITHDRAW_FORM.ENTER_AMOUNT
   );
-  const [currency, setCurrency] = useState<CurrencyEnum>(accountCurrency);
+  const [currency, setCurrency] = useState<CurrencyEnum>("GVT");
   const [percent, setPercent] = useState<number | undefined>(undefined);
-  const { isPending, sendRequest, data: rate = 1 } = useApiRequest<number>({
+  const { isPending, sendRequest: getRate, data: rate = 1 } = useApiRequest<
+    number
+  >({
     request: ({ from, to }) => fetchRate(from, to)
   });
 
   useEffect(() => {
-    sendRequest({ from: FUND_CURRENCY, to: currency });
+    getRate({ from: FUND_CURRENCY, to: currency });
   }, [currency]);
 
   const handleEnterAmountSubmit = useCallback(
@@ -78,7 +80,8 @@ const _FundWithdrawPopup: React.FC<Props> = ({
         )}
         {tab === FUND_WITHDRAW_FORM.CONFIRM && percent !== undefined && (
           <FundWithdrawConfirm
-            withdraw={withdraw}
+            onClose={onClose}
+            id={id}
             availableToWithdraw={availableToWithdraw}
             percent={percent}
             currency={currency}
@@ -96,8 +99,8 @@ export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
 
 export interface IFundWithdrawPopupProps {
-  accountCurrency: CurrencyEnum;
-  withdraw: (value: FundWithdraw) => Promise<void>;
+  onClose: (param?: any) => void;
+  id: string;
 }
 
 interface IFundWithdrawPopupOwnProps {
