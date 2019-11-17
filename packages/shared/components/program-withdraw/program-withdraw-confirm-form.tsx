@@ -13,23 +13,26 @@ import useApiRequest from "shared/hooks/api-request.hook";
 import { formatDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { SetSubmittingType } from "shared/utils/types";
+import { withdrawProgramById } from "social-trader-web-portal/src/modules/program-withdraw/services/program-withdraw.services";
 
 import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
 import { ProgramWithdrawType } from "./program-withdraw-popup";
 
 const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
-  withdraw,
+  onClose,
+  id,
   programCurrency,
   formValues,
   periodEnds,
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
-    request: withdraw
+    request: withdrawProgramById,
+    successMessage: "withdraw-program.success-alert-message"
   });
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
-      sendRequest(formValues, setSubmitting),
+      sendRequest({ id, values: formValues }, setSubmitting).then(onClose),
     [formValues]
   );
 
@@ -47,7 +50,8 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
 export const ProgramWithdrawConfirm = React.memo(_ProgramWithdrawConfirm);
 
 interface ProgramWithdrawConfirmProps {
-  withdraw: (values: ProgramWithdrawType) => CancelablePromise<void>;
+  id: string;
+  onClose: (param?: any) => void;
   formValues: IProgramWithdrawAmountFormValues;
   onBackClick: () => void;
   periodEnds: Date;

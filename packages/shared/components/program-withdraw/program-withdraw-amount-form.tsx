@@ -136,9 +136,7 @@ enum FIELDS {
 
 interface OwnProps {
   formValues: IProgramWithdrawAmountFormValues;
-
   onSubmit(values: IProgramWithdrawAmountFormValues): void;
-
   availableToWithdraw: number;
   programCurrency: string;
   accountCurrency: string;

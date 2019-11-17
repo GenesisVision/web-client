@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
+import { ProgramWithdrawInfo } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,12 +18,14 @@ enum PROGRAM_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
-  data: { rate, availableToWithdraw, periodEnds, title },
+const _ProgramWithdrawPopup: React.FC<Props> = ({
+  id,
+  onClose,
+  data: { availableToWithdraw, periodEnds, title },
   assetCurrency,
-  accountCurrency,
-  withdraw
+  accountCurrency
 }) => {
+  const rate = 1; // TODO change to real value
   const [t] = useTranslation();
   const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
     PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
@@ -70,7 +72,8 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
         {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
           isAvailableProgramConfirmForm && (
             <ProgramWithdrawConfirm
-              withdraw={withdraw}
+              id={id}
+              onClose={onClose}
               formValues={formValues}
               onBackClick={handleGoToEnterAmountStep}
               programCurrency={assetCurrency}
@@ -86,11 +89,17 @@ const _ProgramWithdrawPopup: React.FC<IProgramWithdrawPopupProps> = ({
 const ProgramWithdrawPopup = withBlurLoader(React.memo(_ProgramWithdrawPopup));
 export default ProgramWithdrawPopup;
 
-export interface IProgramWithdrawPopupProps {
+interface Props extends OwnProps, IProgramWithdrawPopupProps {}
+
+interface OwnProps {
   data: ProgramWithdrawInfo;
+}
+
+export interface IProgramWithdrawPopupProps {
+  id: string;
+  onClose: (param?: any) => void;
   assetCurrency: CurrencyEnum;
   accountCurrency: CurrencyEnum;
-  withdraw: (values: ProgramWithdrawType) => CancelablePromise<void>;
 }
 
 export type ProgramWithdrawType = {

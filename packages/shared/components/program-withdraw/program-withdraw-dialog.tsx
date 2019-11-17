@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 import FormError from "shared/components/form/form-error/form-error";
 import useApiRequest from "shared/hooks/api-request.hook";
+import { getProgramWithdrawInfo } from "social-trader-web-portal/src/modules/program-withdraw/services/program-withdraw.services";
 
 import { ProgramWithdrawInfoLoaderData } from "./program-withdraw-dialog.loader";
 import ProgramWithdrawPopup, {
@@ -11,25 +12,25 @@ import ProgramWithdrawPopup, {
 } from "./program-withdraw-popup";
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
+  id,
   open,
   onClose,
   accountCurrency,
-  assetCurrency,
-  fetchInfo,
-  withdraw
+  assetCurrency
 }) => {
   const { errorMessage, data, sendRequest } = useApiRequest<
     ProgramWithdrawInfo
-  >({ request: fetchInfo });
+  >({ request: getProgramWithdrawInfo });
   useEffect(() => {
-    open && sendRequest();
+    open && sendRequest({ id });
   }, [open]);
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
+        id={id}
+        onClose={onClose}
         data={data!}
         loaderData={ProgramWithdrawInfoLoaderData}
-        withdraw={withdraw}
         accountCurrency={accountCurrency}
         assetCurrency={assetCurrency}
       />
@@ -39,7 +40,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
 };
 
 interface Props extends IDialogProps, IProgramWithdrawPopupProps {
-  fetchInfo: () => CancelablePromise<ProgramWithdrawInfo>;
+  id: string;
 }
 
 const ProgramWithdrawDialog = React.memo(_ProgramWithdrawDialog);
