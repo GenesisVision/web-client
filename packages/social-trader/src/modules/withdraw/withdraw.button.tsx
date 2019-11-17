@@ -1,7 +1,7 @@
+import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
+import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import GVButton from "shared/components/gv-button";
-import ProgramWithdrawDialog from "shared/components/program-withdraw/program-withdraw-dialog";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";

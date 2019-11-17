@@ -1,6 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
+import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,6 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import Page from "shared/components/page/page";
 import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 import { ASSET } from "shared/constants/constants";
