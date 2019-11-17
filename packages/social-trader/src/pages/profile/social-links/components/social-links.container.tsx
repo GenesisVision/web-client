@@ -7,7 +7,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import withLoader from "shared/decorators/with-loader";
 import useApiRequest from "shared/hooks/api-request.hook";
@@ -40,12 +39,12 @@ interface ILinksProps {
 }
 
 const _SocialLinksContainer: React.FC = () => {
-  const dispatch = useDispatch();
   const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest<
     SocialLinkViewModel[]
   >({ request: fetchSocialLinks });
   const { sendRequest: setSocialLinks } = useApiRequest<SocialLinkViewModel[]>({
-    request: args => dispatch(updateSocialLink(args))
+    request: updateSocialLink,
+    successMessage: "profile-page.social-links.notifications.edit-success"
   });
   useEffect(() => {
     getSocialLinks();
