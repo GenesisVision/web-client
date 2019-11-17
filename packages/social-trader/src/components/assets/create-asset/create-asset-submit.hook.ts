@@ -1,13 +1,13 @@
-//import { ProgramCreateResult } from "gv-api-web";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Push } from "shared/components/link/link";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { CREATE_ASSET } from "shared/constants/constants";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
-import { ResponseError, SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "shared/utils/types";
 
 import {
   createAsset,
@@ -30,30 +30,24 @@ const useCreateAssetSubmit = ({
 }: TUseCreateAssetSubmitProps): TUseCreateAssetSubmitOutput => {
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
+  const { sendRequest } = useApiRequest({ request: createAsset });
   return useCallback(
     (
       data: ICreateAssetSettingsFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      createAsset(data, asset)
-        .then(data => {
-          if (!condition || !!condition(data)) {
-            Push(TRADING_ROUTE);
-            dispatch(
-              alertMessageActions.success(
-                `create-${asset.toLowerCase()}-page.notifications.create-success`,
-                true
-              )
-            );
-          }
-        })
-        .catch((error: ResponseError) => {
-          dispatch(alertMessageActions.error(error.errorMessage));
-        })
-        .finally(() => {
+      sendRequest({ data, asset }).then(data => {
+        if (!condition || !!condition(data)) {
           dispatch(fetchWallets(currency));
-          setSubmitting(false);
-        });
+          dispatch(
+            alertMessageActions.success(
+              `create-${asset.toLowerCase()}-page.notifications.create-success`,
+              true
+            )
+          );
+          Push(TRADING_ROUTE);
+        }
+      });
     },
     []
   );
