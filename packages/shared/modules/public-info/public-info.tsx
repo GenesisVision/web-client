@@ -1,29 +1,23 @@
-import Router from "next/router";
 import React, { useCallback } from "react";
-import useErrorMessage from "shared/hooks/error-message.hook";
-import profileApi from "shared/services/api-client/profile-api";
-import authService from "shared/services/auth-service";
+import useApiRequest from "shared/hooks/api-request.hook";
 import { SetSubmittingType } from "shared/utils/types";
 
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
+import { updateProfile } from "./public-info.service";
 
 const _PublicInfo: React.FC<Props> = ({ userName, about, onSuccessEdit }) => {
-  const {
-    errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
+  const { sendRequest, errorMessage } = useApiRequest({
+    request: updateProfile
+  });
   const handleSubmit = useCallback(
     (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
-      profileApi
-        .updateProfile(authService.getAuthArg(), {
+      sendRequest(
+        {
           model
-        })
-        .then(onSuccessEdit)
-        .then(cleanErrorMessage)
-        .catch(setErrorMessage)
-        .finally(() => setSubmitting(false)),
-    [cleanErrorMessage, onSuccessEdit, setErrorMessage]
+        },
+        setSubmitting
+      ).then(onSuccessEdit),
+    [onSuccessEdit]
   );
   return (
     <PublicInfoForm
