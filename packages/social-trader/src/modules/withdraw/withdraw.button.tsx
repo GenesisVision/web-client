@@ -1,7 +1,7 @@
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React from "react";
+import { FundWithdrawDialog } from "shared/components/fund-withdraw/fund-withdraw-dialog";
 import GVButton from "shared/components/gv-button";
+import ProgramWithdrawDialog from "shared/components/program-withdraw/program-withdraw-dialog";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
@@ -14,25 +14,21 @@ const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
   switch (type) {
     case ASSET.FUND:
       withdraw = (
-        <FundWithdrawContainer
+        <FundWithdrawDialog
           open={isOpenPopup}
           id={id}
-          accountCurrency={"GVT"}
-          assetCurrency={currency}
           onClose={setIsClosePopup}
-          onSubmit={() => {}}
         />
       );
       break;
     default:
       withdraw = (
-        <ProgramWithdrawContainer
+        <ProgramWithdrawDialog
           open={isOpenPopup}
           id={id}
-          accountCurrency={"GVT"}
+          accountCurrency={"GVT"} // TODO change to real currecny
           assetCurrency={currency}
           onClose={setIsClosePopup}
-          onSubmit={() => {}}
         />
       );
   }
