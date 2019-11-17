@@ -12,7 +12,7 @@ const _FollowControls: React.FC<Props> = ({
     id,
     title,
     currency,
-    brokerDetails: { type }
+    brokerDetails
   }
 }) => {
   return (
@@ -29,7 +29,8 @@ const _FollowControls: React.FC<Props> = ({
             personalDetails.guestActions
               .canSubscribeToExternalSignalPrivateAccount
           }
-          broker={type}
+          brokerId={brokerDetails.id}
+          broker={brokerDetails.type}
           signalSubscription={
             personalDetails && personalDetails.signalSubscription
           }
