@@ -1,121 +1,117 @@
 import "shared/components/details/details.scss";
 
-import { BrokersProgramInfo, TradesDelay } from "gv-api-web";
+import { TradesDelay } from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
-import React, { useCallback, useEffect, useState } from "react";
-import { connect, ResolveThunks, useSelector } from "react-redux";
+import { programDescriptionSelector } from "pages/programs/program-details/reducers/description.reducer";
 import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+  dispatchProgramDescriptionWithId,
+  getProgramBrokersMethod
+} from "pages/programs/program-details/service/program-details.service";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
-import {
-  dispatchProgramDescription,
-  getProgramBrokers
-} from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
-import {
-  createProgramInfoSelector,
-  programsInfoSelector
-} from "shared/reducers/platform-reducer";
+import useApiRequest from "shared/hooks/api-request.hook";
+import { createProgramInfoSelector } from "shared/reducers/platform-reducer";
 import { SetSubmittingType } from "shared/utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
 import {
-  cancelChangeBrokerMethod,
   changeBrokerMethod,
   redirectToProgram
 } from "./services/program-settings.service";
 import { IProgramSignalFormValues } from "./signaling-edit";
 
-const _ProgramsEditPage: React.FC<Props> = ({
-  service: {
-    programEditSignal,
-    changeBrokerMethod,
-    cancelChangeBrokerMethod,
-    dispatchDescription
-  }
-}) => {
+const _ProgramsEditPage: React.FC = () => {
+  const dispatch = useDispatch();
+
   const createProgramInfo = useSelector(createProgramInfoSelector);
   const description = useSelector(programDescriptionSelector);
-  const [brokersInfo, setBrokersInfo] = useState<
-    BrokersProgramInfo | undefined
-  >(undefined);
+
+  const { sendRequest: editSignal } = useApiRequest({
+    request: programEditSignal,
+    successMessage: "program-edit-signal.success-alert-message"
+  });
+  const { sendRequest: changeBroker } = useApiRequest({
+    request: changeBrokerMethod,
+    successMessage: "program-settings.notifications.broker-success"
+  });
+  const { sendRequest: cancelChangeBroker } = useApiRequest({
+    request: changeBrokerMethod,
+    successMessage: "program-settings.notifications.broker-success"
+  });
+  const { sendRequest: getProgramBrokers, data: brokersInfo } = useApiRequest({
+    request: getProgramBrokersMethod
+  });
+
   useEffect(() => {
-    description && getProgramBrokers(description.id).then(setBrokersInfo);
+    description && getProgramBrokers(description.id);
   }, [description]);
+
+  const updateDescription = useCallback(
+    () => dispatch(dispatchProgramDescriptionWithId(description!.id)),
+    [description]
+  );
+
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      programEditSignal({
+      editSignal({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(() => dispatchDescription()),
-    [description]
+      }).then(updateDescription),
+    [description, updateDescription]
   );
-  const changeBroker = useCallback(
+
+  const handleChangeBroker = useCallback(
     (
       { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      changeBrokerMethod(
-        description!.id,
-        brokerAccountTypeId,
-        leverage,
+      changeBroker(
+        {
+          id: description!.id,
+          brokerAccountTypeId,
+          leverage
+        },
         setSubmitting
-      ).then(() => dispatchDescription());
+      ).then(updateDescription);
     },
-    [description]
+    [description, updateDescription]
   );
-  const cancelChangeBroker = useCallback(() => {
-    cancelChangeBrokerMethod(description!.id).then(() => dispatchDescription());
-  }, [description]);
-  const dispatchDescriptionHandle = useCallback(() => {
-    dispatchDescription();
-  }, []);
+
+  const handleCancelChangeBroker = useCallback(() => {
+    cancelChangeBroker(description!.id).then(updateDescription);
+  }, [description, updateDescription]);
+
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
       asset={ASSET.PROGRAM}
       description={description as AssetDescriptionType}
-      dispatchDescription={dispatchDescriptionHandle}
+      dispatchDescription={updateDescription}
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
           condition={!!description && !!brokersInfo && !!createProgramInfo}
           createProgramInfo={createProgramInfo}
-          closePeriod={dispatchDescriptionHandle}
+          closePeriod={updateDescription}
           closeProgram={applyCloseAsset}
           details={description!}
           editProgram={editProgram}
           brokersInfo={brokersInfo!}
-          changeBroker={changeBroker}
+          changeBroker={handleChangeBroker}
           loader={<AssetSettingsLoader />}
           changeSignaling={changeSignaling}
-          cancelChangeBroker={cancelChangeBroker}
+          cancelChangeBroker={handleCancelChangeBroker}
         />
       )}
     />
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      cancelChangeBrokerMethod,
-      dispatchDescription: dispatchProgramDescription,
-      programEditSignal,
-      changeBrokerMethod
-    },
-    dispatch
-  )
-});
 
 export type TUpdateProgramFunc = (
   values: {
@@ -131,25 +127,5 @@ export type TUpdateProgramFunc = (
   resetForm?: () => void
 ) => void;
 
-interface OwnProps {}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  cancelChangeBrokerMethod: typeof cancelChangeBrokerMethod;
-  dispatchDescription: typeof dispatchProgramDescription;
-  programEditSignal: typeof programEditSignal;
-  changeBrokerMethod: typeof changeBrokerMethod;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends OwnProps, DispatchProps {}
-
-const ProgramSettingsPage = compose<React.ComponentType<OwnProps>>(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ProgramsEditPage);
+const ProgramSettingsPage = React.memo(_ProgramsEditPage);
 export default ProgramSettingsPage;

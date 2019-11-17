@@ -50,11 +50,11 @@ export const changeBrokerMethod = (
 //     dispatch(alertMessageActions.error(error.errorMessage));
 //   });
 
-export const editAsset = (
-  id: string,
-  editAssetData: IAssetEditFormValues,
-  type: ASSET
-): ManagerThunk<CancelablePromise<void>> => dispatch => {
+export const editAsset = (props: {
+  id: string;
+  editAssetData: IAssetEditFormValues;
+  type: ASSET;
+}): CancelablePromise<void> => {
   return new CancelablePromise<void>(() => {});
   // const authorization = authService.getAuthArg();
   // let data = editAssetData;
