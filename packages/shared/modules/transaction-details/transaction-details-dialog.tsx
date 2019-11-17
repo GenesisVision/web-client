@@ -1,14 +1,10 @@
 import "./transaction-details.scss";
 
-import { TransactionDetails, TransactionDetailsTypeEnum } from "gv-api-web";
 import i18next from "i18next";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/transactions/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/transactions/external-deposit-details";
 import ExternalWithdrawal from "shared/modules/transaction-details/transactions/external-withdrawal-details";
@@ -18,9 +14,13 @@ import OpenCloseTransaction from "shared/modules/transaction-details/transaction
 import ProfitDetails from "shared/modules/transaction-details/transactions/profit-details";
 import SignalTransaction from "shared/modules/transaction-details/transactions/signal-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/transactions/withdrawal-details";
-import walletApi from "shared/services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
-import { ResponseError } from "shared/utils/types";
+
+import useApiRequest from "../../hooks/api-request.hook";
+import {
+  cancelWithdrawalRequestMethod,
+  getTransactionDetailsMethod,
+  resendWithdrawalRequestEmailMethod
+} from "./transaction-details.service";
 
 const _TransactionDetailsDialog: React.FC<Props> = ({
   transactionId,
@@ -28,37 +28,29 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
   onAction
 }) => {
   const [t] = useTranslation();
-  const dispatch = useDispatch();
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
-  const [data, setData] = useState<TransactionDetails | undefined>(undefined);
+  const { data, isPending, sendRequest: getTransactionDetails } = useApiRequest(
+    { request: getTransactionDetailsMethod }
+  );
+  const { sendRequest: cancelWithdrawalRequest } = useApiRequest({
+    request: cancelWithdrawalRequestMethod
+  });
+  const { sendRequest: resendWithdrawalRequestEmail } = useApiRequest({
+    request: resendWithdrawalRequestEmailMethod
+  });
+
   useEffect(() => {
-    setIsPending();
-    walletApi
-      .getTransactionDetails(transactionId, authService.getAuthArg())
-      .then(setData)
-      .catch(({ errorMessage }: ResponseError) =>
-        dispatch(alertMessageActions.error(errorMessage))
-      )
-      .finally(setIsNotPending);
+    getTransactionDetails(transactionId);
   }, [transactionId]);
 
-  const cancel = useCallback(() => {
-    walletApi
-      .cancelWithdrawalRequest(transactionId, authService.getAuthArg())
-      .then(onAction)
-      .catch(({ errorMessage }: ResponseError) =>
-        dispatch(alertMessageActions.error(errorMessage))
-      );
-  }, [transactionId]);
+  const cancel = useCallback(
+    () => cancelWithdrawalRequest(transactionId).then(onAction),
+    [transactionId]
+  );
 
-  const resendEmail = useCallback(() => {
-    walletApi
-      .resendWithdrawalRequestEmail(transactionId, authService.getAuthArg())
-      .then(close)
-      .catch(({ errorMessage }: ResponseError) =>
-        dispatch(alertMessageActions.error(errorMessage))
-      );
-  }, [transactionId]);
+  const resendEmail = useCallback(
+    () => resendWithdrawalRequestEmail(transactionId).then(close),
+    [transactionId]
+  );
 
   if (isPending || !data) return <DialogLoader />;
   const Component = Types[data.type] || (() => <p>type isn't define</p>);
@@ -91,13 +83,13 @@ const Types: TransactionTypes = {
 } as TransactionTypes;
 
 type TransactionTypes = {
-  [name in TransactionDetailsTypeEnum]:
+  [name in any]:
     | React.FC<TransactionDetailsProps>
     | React.ExoticComponent<TransactionDetailsProps>;
 };
 
 export interface TransactionDetailsProps extends i18next.WithT {
-  data: TransactionDetails;
+  data: any;
   handleCancel?: () => void;
   handleResend?: () => void;
 }
