@@ -93,29 +93,6 @@ export const getFollowStatistic = (
   });
 };
 
-export const closePeriod = (
-  followId: string,
-  onSuccess: () => void,
-  onError: () => void
-) => (dispatch: Dispatch): void => {
-  const authorization = authService.getAuthArg();
-  // managerApi
-  //   .closeCurrentPeriod(followId, authorization)
-  //   .then(() => {
-  //     onSuccess();
-  //     dispatch(
-  //       alertMessageActions.success(
-  //         "program-details-page.close-period.notification-success",
-  //         true
-  //       )
-  //     );
-  //   })
-  //   .catch(error => {
-  //     onError();
-  //     dispatch(alertMessageActions.error(error.errorMessage));
-  //   });
-};
-
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<CancelablePromise<TradesViewModel>> => {

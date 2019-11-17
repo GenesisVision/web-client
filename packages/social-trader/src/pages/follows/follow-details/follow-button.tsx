@@ -1,4 +1,4 @@
-import { SignalSubscription } from "gv-api-web";
+import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,13 +7,16 @@ import InvestmentUnauthPopup from "shared/components/details/details-description
 import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
-import ProgramFollowContainer from "shared/modules/program-follow/program-follow-container";
+import FollowModuleContainer from "shared/modules/follow-module/follow-module-container";
 import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 import { CurrencyEnum } from "shared/utils/types";
 
 import { dispatchFollowDescription } from "./services/follow-details.service";
 
 const _FollowButton: React.FC<Props> = ({
+  brokerId,
+  isExternal,
+  broker,
   signalSubscription,
   id,
   title,
@@ -35,14 +38,17 @@ const _FollowButton: React.FC<Props> = ({
       >
         {t("program-details-page.description.follow-trade")}
       </GVButton>
-      {/*<ProgramFollowContainer
+      <FollowModuleContainer
+        isExternal={isExternal}
+        brokerId={brokerId}
+        broker={broker}
         id={id}
         open={isOpenFollow}
         currency={currency}
         signalSubscription={signalSubscription}
         onClose={setIsCloseFollow}
         onApply={dispatchDescription}
-      />*/}
+      />
       <InvestmentUnauthPopup
         header={t("program-details-page.description.follow-trade")}
         message={t("program-details-page.description.unauth-follow-popup")}
@@ -57,6 +63,9 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  isExternal: boolean;
+  brokerId: string;
+  broker: BrokerTradeServerType;
   signalSubscription: SignalSubscription;
   id: string;
   title: string;

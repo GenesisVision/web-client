@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { FundDetailsFull } from "gv-api-web";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +86,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         id={description.id}
         currency={"GVT" as CurrencyEnum}
         personalDetails={description.personalDetails as InvestmentDetails}
-        WithdrawContainer={FundWithdrawContainer}
+        WithdrawContainer={FundWithdrawDialog}
       />
       <FundDetailsStatisticSection />
       <FundDetailsHistorySection id={description.id} />

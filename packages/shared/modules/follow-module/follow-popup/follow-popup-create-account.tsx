@@ -1,8 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import {
-  AttachToSignalProviderInitialDepositCurrencyEnum,
-  WalletData
-} from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -40,22 +37,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   )!;
   const disableButton =
     !dirty || !isValid || initialDepositAmount > wallet.available;
-  const fetchRate = useCallback(
-    (initialDepositCurrency?: CurrencyEnum) => {
-      fetchRateMethod(
-        currency as CurrencyEnum,
-        initialDepositCurrency ||
-          values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]
-      ).then((rate: number) => {
-        if (rate !== values.rate)
-          setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
-      });
-    },
-    [currency, setFieldValue, values]
-  );
+
   useEffect(() => {
-    fetchRate();
-  }, [fetchRate]);
+    fetchRateMethod(currency as CurrencyEnum, initialDepositCurrency).then(
+      (rate: number) => {
+        setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
+      }
+    );
+  }, [currency, initialDepositCurrency]);
+
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const wallet = wallets.find(({ id }) => target.props.value === id)!;
@@ -70,9 +60,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
       );
       setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, "");
       setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
-      fetchRate(initialDepositCurrencyNew);
     },
-    [fetchRate, setFieldTouched, setFieldValue, wallets]
+    [setFieldTouched, setFieldValue, wallets]
   );
   const handleNext = useCallback(() => onClick(values), [onClick, values]);
   const setMaxAmount = useCallback(
@@ -154,7 +143,7 @@ interface OwnProps {
 
 export interface CreateAccountFormValues {
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: AttachToSignalProviderInitialDepositCurrencyEnum;
+  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: any;
   [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number;
   [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
 }

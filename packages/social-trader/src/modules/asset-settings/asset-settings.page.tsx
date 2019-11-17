@@ -4,15 +4,9 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
+import useApiRequest from "shared/hooks/api-request.hook";
 
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
@@ -22,9 +16,16 @@ const _AssetsEditPage: React.FC<Props> = ({
   asset,
   settingsBlocks,
   redirectToAsset,
-  service: { editAsset },
   description
 }) => {
+  const successMessage =
+    (asset === ASSET.PROGRAM && "edit-program.notifications.edit-success") ||
+    (asset === ASSET.FUND && "edit-fund.notifications.edit-success") ||
+    "";
+  const { sendRequest: editRequest } = useApiRequest({
+    request: editAsset,
+    successMessage
+  });
   const [t] = useTranslation();
   useEffect(() => {
     dispatchDescription();
@@ -47,15 +48,15 @@ const _AssetsEditPage: React.FC<Props> = ({
         description: description!.description,
         logo: { src: description!.logo }
       };
-      editAsset(
-        description!.id,
-        {
+      editRequest({
+        id: description!.id,
+        editAssetData: {
           ...currentValues,
           ...values,
           investmentLimit
         },
         asset
-      )
+      })
         .then(dispatchDescription)
         .finally(resetForm);
     },
@@ -78,16 +79,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      editAsset
-    },
-    dispatch
-  )
-});
-
-interface OwnProps {
+interface Props {
   redirectToAsset: (id: string) => void;
   asset: ASSET;
   description?: AssetDescriptionType;
@@ -98,20 +90,5 @@ interface OwnProps {
   ) => JSX.Element;
 }
 
-interface ServiceThunks extends ActionCreatorsMapObject {
-  editAsset: typeof editAsset;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface Props extends OwnProps, DispatchProps {}
-
-const AssetSettingsPage = compose<React.ComponentType<OwnProps>>(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_AssetsEditPage);
+const AssetSettingsPage = React.memo(_AssetsEditPage);
 export default AssetSettingsPage;

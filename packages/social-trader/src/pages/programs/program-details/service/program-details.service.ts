@@ -57,7 +57,7 @@ export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
   fetchEventsAction(id, eventLocation, filters);
 
-export const getProgramBrokers = (id: string) =>
+export const getProgramBrokersMethod = (id: string) =>
   brokersApi.getBrokersForProgram(id);
 
 export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (

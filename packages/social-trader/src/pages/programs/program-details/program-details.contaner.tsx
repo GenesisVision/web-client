@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -123,7 +123,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         id={description.id}
         currency={description.currency}
         personalDetails={description.personalDetails as InvestmentDetails}
-        WithdrawContainer={ProgramWithdrawContainer}
+        WithdrawContainer={ProgramWithdrawDialog}
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection

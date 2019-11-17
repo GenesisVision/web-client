@@ -4,20 +4,20 @@ import {
   AttachToSignalProvider,
   SignalSubscription,
   SubscriptionMode,
+  TradingAccountDetails,
   WalletData
 } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import useTab from "shared/hooks/tab.hook";
 import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
 
-import FollowCreateAccount, {
-  CreateAccountFormValues
-} from "./follow-popup-create-account";
+import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
+import FollowSelectAccount, {
+  SelectAccountFormValues
+} from "./follow-select-account";
 
 const initRequestParams = {
   tradingAccountId: "",
@@ -29,31 +29,41 @@ const initRequestParams = {
 };
 
 const _FollowForm: React.FC<Props> = ({
+  isExternal,
+  data: accounts,
   id,
   wallets,
   currency,
   signalSubscription,
   minDeposit,
-  rate,
+  rate = 1,
   submitMethod
 }) => {
-  const { tab, setTab } = useTab<TABS>(TABS.CREATE_ACCOUNT);
+  const hasAccounts = !!accounts.length;
+  const [tradingAccountId, setTradingAccountId] = useState<string | undefined>(
+    undefined
+  );
+  const { tab, setTab } = useTab<TABS>(TABS.SELECT_ACCOUNT);
   const [requestParams, setRequestParams] = useState<AttachToSignalProvider>(
     initRequestParams
   );
   useEffect(() => {
     signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
   }, [setTab, signalSubscription.hasSignalAccount]);
-  const createdCopytradingAccount = useCallback(
-    ({  }: CreateAccountFormValues) => {
+  const createdCopytradingAccount = useCallback(() => {
+    setTab(null, TABS.PARAMS);
+    setRequestParams(requestParams);
+  }, [requestParams]);
+  const selectCopytradingAccount = useCallback(
+    ({ account }: SelectAccountFormValues) => {
       setTab(null, TABS.PARAMS);
-      setRequestParams(requestParams);
+      setTradingAccountId(account);
     },
-    [requestParams, setTab]
+    []
   );
   const returnToCreateCopytradingAccount = useCallback(
-    () => setTab(null, TABS.CREATE_ACCOUNT),
-    [setTab]
+    () => setTab(null, TABS.SELECT_ACCOUNT),
+    []
   );
   const submit = useCallback(
     (
@@ -67,6 +77,7 @@ const _FollowForm: React.FC<Props> = ({
     ) => {
       const params = {
         ...requestParams,
+        tradingAccountId: tradingAccountId!,
         mode,
         openTolerancePercent,
         percent,
@@ -77,14 +88,27 @@ const _FollowForm: React.FC<Props> = ({
     },
     [id, requestParams, submitMethod]
   );
-  const adaptStep = tab === TABS.CREATE_ACCOUNT ? "create-account" : "params";
+  const adaptStep =
+    tab === TABS.SELECT_ACCOUNT
+      ? hasAccounts
+        ? isExternal
+          ? "select-external-account"
+          : "select-account"
+        : "create-account"
+      : "params";
   const paramsSubscription = signalSubscription.hasActiveSubscription
     ? signalSubscription
     : undefined;
   return (
     <>
       <FollowTop step={adaptStep} />
-      {!signalSubscription.hasSignalAccount && tab === TABS.CREATE_ACCOUNT && (
+      {hasAccounts && tab === TABS.SELECT_ACCOUNT && (
+        <FollowSelectAccount
+          accounts={accounts}
+          onSelect={selectCopytradingAccount}
+        />
+      )}
+      {!hasAccounts && tab === TABS.SELECT_ACCOUNT && (
         <FollowCreateAccount
           minDeposit={minDeposit}
           wallets={wallets}
@@ -107,11 +131,13 @@ const _FollowForm: React.FC<Props> = ({
 };
 
 enum TABS {
-  CREATE_ACCOUNT = "CREATE_ACCOUNT",
+  SELECT_ACCOUNT = "CREATE_ACCOUNT",
   PARAMS = "PARAMS"
 }
 
-interface OwnProps {
+interface Props {
+  isExternal: boolean;
+  data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
   signalSubscription: SignalSubscription;
@@ -125,11 +151,5 @@ interface OwnProps {
   currency: CurrencyEnum;
 }
 
-export interface Props extends WithTranslation, OwnProps {}
-
-const FollowForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  withLoader,
-  translate(),
-  React.memo
-)(_FollowForm);
+const FollowForm = withBlurLoader(React.memo(_FollowForm));
 export default FollowForm;

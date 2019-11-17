@@ -1,39 +1,31 @@
-import { Currency } from "gv-api-web";
-import { Dispatch } from "redux";
 import {
   FundWithdraw,
   FundWithdrawInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { FUND_CURRENCY } from "shared/constants/constants";
 import investmentsApi from "shared/services/api-client/investments-api";
-//import managerApi from "shared/services/api-client/manager-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
-export const getFundWithdrawInfo = (
-  id: string,
-  currency: Currency
-) => (): Promise<FundWithdrawInfoResponse> => {
+export const getFundWithdrawInfo = ({ id }: { id: string }) => (): Promise<
+  FundWithdrawInfoResponse
+> => {
+  const auth = authService.getAuthArg();
   return Promise.all([
-    investmentsApi.getFundWithdrawInfo(id, authService.getAuthArg(), {
-      currency
+    investmentsApi.getFundWithdrawInfo(id, auth, {
+      currency: FUND_CURRENCY
     }),
-    walletApi.getWalletAvailable(currency, authService.getAuthArg())
-  ]).then(([withdrawInfo, walletMulti]) => {
-    return { withdrawInfo, wallets: walletMulti.wallets };
-  });
+    walletApi.getWalletAvailable(FUND_CURRENCY, auth)
+  ]).then(([withdrawInfo, walletMulti]) => ({
+    withdrawInfo,
+    wallets: walletMulti.wallets
+  }));
 };
 
-export const withdrawFund = (id: string, onClose: () => void) => (
-  value: FundWithdraw
-): any => (dispatch: Dispatch) => {
-  return investmentsApi
-    .withdrawFromFund(id, authService.getAuthArg(), value)
-    .then(response => {
-      onClose();
-      dispatch(
-        alertMessageActions.success("withdraw-fund.success-alert-message", true)
-      );
-      return response;
-    });
-};
+export const withdrawFund = ({
+  value,
+  id
+}: {
+  value: FundWithdraw;
+  id: string;
+}): any => investmentsApi.withdrawFromFund(id, authService.getAuthArg(), value);

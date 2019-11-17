@@ -28,14 +28,16 @@ const _CurrencyItem: React.FC<Props> = ({
   const rateString = `1 ${name} = ${rate} $`;
   const renderItemContent = () => (
     <div className="currency-item">
-      <div
-        className={classNames("currency-item__icon", {
-          "currency-item__icon--medium": !small,
-          "currency-item__icon--small": small
-        })}
-      >
-        <WalletImage url={logo} alt={name} />
-      </div>
+      {logo && (
+        <div
+          className={classNames("currency-item__icon", {
+            "currency-item__icon--medium": !small,
+            "currency-item__icon--small": small
+          })}
+        >
+          <WalletImage url={logo} alt={name} />
+        </div>
+      )}
       {name && (
         <div>
           <div
@@ -50,7 +52,8 @@ const _CurrencyItem: React.FC<Props> = ({
       )}
     </div>
   );
-  return ( //TODO fix it
+  return (
+    //TODO fix it
     (clickable && (
       <>
         <a href="http://example.com" onClick={openPopup}>
@@ -74,7 +77,7 @@ interface Props {
   clickable?: boolean;
   className?: string;
   small?: boolean;
-  logo: string;
+  logo?: string;
   name?: string | CurrencyEnum;
 }
 

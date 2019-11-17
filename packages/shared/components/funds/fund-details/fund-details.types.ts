@@ -14,7 +14,7 @@ export interface IDescriptionSection {
 export interface IFundWithdrawContainerProps extends IDialogProps {
   id: string;
   accountCurrency: CurrencyEnum;
-  assetCurrency: CurrencyEnum;
+  assetCurrency?: CurrencyEnum;
   onSubmit?: () => void;
 }
 

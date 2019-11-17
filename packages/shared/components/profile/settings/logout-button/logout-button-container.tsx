@@ -11,7 +11,8 @@ const _LogoutButtonContainer: React.FC = () => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const { isPending, sendRequest } = useApiRequest({
-    request: () => dispatch(logoutFromDevices)
+    request: () => dispatch(logoutFromDevices),
+    successMessage: "auth.logout-from-another-devices.success-message"
   });
   const handleSubmit = useCallback(() => sendRequest(), []);
   return (

@@ -21,22 +21,25 @@ export type RequestType =
   | MakeTradingAccountSignalProvider
   | MakeTradingAccountSignalProvider;
 
-export const convertAsset = (
-  convertAssetData: IConvertAssetSettingsFormValues,
-  fromTo: TAssetFromTo
-): CancelablePromise<any> => {
+export const convertAsset = ({
+  data,
+  fromTo
+}: {
+  data: IConvertAssetSettingsFormValues;
+  fromTo: TAssetFromTo;
+}): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve("") as CancelablePromise<any>;
-  if ("logo" in convertAssetData && convertAssetData.logo.image) {
+  if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
-      convertAssetData.logo.image.cropped,
+      data.logo.image.cropped,
       authorization
     ) as CancelablePromise<any>;
   }
   const method = getCovertMethod(fromTo);
   return promise.then(response =>
     method({
-      ...convertAssetData,
+      ...data,
       logo: response
     } as RequestType)
   );

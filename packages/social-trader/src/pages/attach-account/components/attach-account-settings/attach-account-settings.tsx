@@ -89,14 +89,12 @@ const _AttachAccountSettings: React.FC<Props> = ({
 };
 
 export enum ATTACH_ACCOUNT_FIELDS {
-  keyTitle = "keyTitle",
   brokerAccountTypeId = "brokerAccountTypeId",
   secret = "secret",
   key = "key"
 }
 
 export interface IAttachAccountSettingsFormValues {
-  [ATTACH_ACCOUNT_FIELDS.keyTitle]: string;
   [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
   [ATTACH_ACCOUNT_FIELDS.secret]: string;
   [ATTACH_ACCOUNT_FIELDS.key]: string;
@@ -118,7 +116,6 @@ const AttachAccountSettings = compose<
     enableReinitialize: true,
     displayName: "AttachAccountSettingsForm",
     mapPropsToValues: ({ data }) => ({
-      [ATTACH_ACCOUNT_FIELDS.keyTitle]: "",
       [ATTACH_ACCOUNT_FIELDS.secret]: "",
       [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: data.length
         ? data[0].name
