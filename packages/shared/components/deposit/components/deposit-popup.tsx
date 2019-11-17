@@ -31,17 +31,17 @@ const _DepositPopup: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch<ReduxDispatch>();
   const { sendRequest, errorMessage } = useApiRequest({
-    request: (values: TAssetInvestCreatorArgs) =>
-      dispatch(assetInvest(values))
-        .then(onApply)
-        .then(onClose)
+    request: (values: TAssetInvestCreatorArgs) => dispatch(assetInvest(values))
   });
   const handleInvest = useCallback(
     (
       amount: number,
       currency: CurrencyEnum,
       setSubmitting: SetSubmittingType
-    ) => sendRequest({ id, amount, currency }, setSubmitting),
+    ) =>
+      sendRequest({ id, amount, currency }, setSubmitting)
+        .then(onApply)
+        .then(onClose),
     [id]
   );
 
