@@ -1,7 +1,6 @@
 import "shared/components/details/details.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import { DetailsTags } from "shared/components/details/details-description-secti
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "shared/components/page/page";
+import ProgramWithdrawDialog from "shared/components/program-withdraw/program-withdraw-dialog";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ASSET } from "shared/constants/constants";
 import { withBlurLoader } from "shared/decorators/with-blur-loader";
@@ -123,7 +123,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         id={description.id}
         currency={description.currency}
         personalDetails={description.personalDetails as InvestmentDetails}
-        WithdrawContainer={ProgramWithdrawContainer}
+        WithdrawContainer={ProgramWithdrawDialog}
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection
