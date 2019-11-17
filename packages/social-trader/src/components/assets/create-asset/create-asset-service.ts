@@ -16,22 +16,25 @@ export type ICreateAssetSettingsFormValues =
 
 export type NewAssetRequest = NewFundRequest | NewTradingAccountRequest;
 
-export const createAsset = (
-  createAssetData: ICreateAssetSettingsFormValues,
-  asset: CREATE_ASSET
-): CancelablePromise<any> => {
+export const createAsset = ({
+  data,
+  asset
+}: {
+  data: ICreateAssetSettingsFormValues;
+  asset: CREATE_ASSET;
+}): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve("") as CancelablePromise<any>;
-  if ("logo" in createAssetData && createAssetData.logo.image) {
+  if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
-      createAssetData.logo.image.cropped,
+      data.logo.image.cropped,
       authorization
     ) as CancelablePromise<any>;
   }
   const method = getCreateMethod(asset);
   return promise.then(response =>
     method({
-      ...createAssetData,
+      ...data,
       logo: response
     } as NewAssetRequest)
   );
