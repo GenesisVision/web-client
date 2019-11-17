@@ -1,17 +1,17 @@
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import { IImageValue } from "shared/components/form/input-image/input-image";
-import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authApi from "shared/services/api-client/auth-api";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import { ResponseError } from "shared/utils/types";
 
-export const updateProfileAvatar = (newImage: IImageValue) => (
-  dispatch: Dispatch
-) => {
+export const updateProfileAvatar = ({
+  newImage
+}: {
+  newImage: IImageValue;
+}) => {
   const authorization = authService.getAuthArg();
   let promise;
   if (!newImage.src && !newImage.image) {
@@ -24,19 +24,7 @@ export const updateProfileAvatar = (newImage: IImageValue) => (
       });
   }
 
-  return promise
-    .then(() => {
-      dispatch(fetchProfileHeaderInfoAction());
-      dispatch(
-        alertMessageActions.success(
-          "profile-page.settings.image-success-save-message",
-          true
-        )
-      );
-    })
-    .catch((error: ResponseError) => {
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+  return promise;
 };
 
 export const logoutFromDevices = (dispatch: Dispatch) =>
