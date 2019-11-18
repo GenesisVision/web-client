@@ -48,7 +48,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
       })}
     >
       {assets
-        .filter((asset, idx) => idx < (size || assets.length))
+        .filter(getVisibleAssets(size || assets.length))
         .map((asset, idx) => (
           <FundAsset
             key={asset.asset}
@@ -78,24 +78,22 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
             onClose={clearAnchor}
           >
             <div className="fund-assets__container">
-              {assets
-                .filter((asset, idx) => idx >= size)
-                .map((asset, idx) => (
-                  <FundAsset
-                    key={asset.asset}
-                    {...asset}
-                    currency={asset.asset as Currency} //TODO remove when api update
-                    type={type}
-                    last={idx === assets.length - 1}
-                    removable={removable}
-                    removeHandle={removeHandle}
-                    className={
-                      hoveringAsset === asset.asset
-                        ? "fund-asset--hover"
-                        : undefined
-                    }
-                  />
-                ))}
+              {assets.filter(getInvisibleAssets(size)).map((asset, idx) => (
+                <FundAsset
+                  key={asset.asset}
+                  {...asset}
+                  currency={asset.asset as Currency} //TODO remove when api update
+                  type={type}
+                  last={idx === assets.length - 1}
+                  removable={removable}
+                  removeHandle={removeHandle}
+                  className={
+                    hoveringAsset === asset.asset
+                      ? "fund-asset--hover"
+                      : undefined
+                  }
+                />
+              ))}
             </div>
           </Popover>
         </>
@@ -109,12 +107,22 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   );
 };
 
+const getVisibleAssets = (size: number) => (
+  asset: FundAssetType,
+  idx: number
+) => idx < size;
+
+const getInvisibleAssets = (size: number) => (
+  asset: FundAssetType,
+  idx: number
+) => idx >= size;
+
 export type FundAssetRemoveType = (
   currency: string
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: Array<PlatformAssetFull | FundAssetInfo | FundAssetPartWithIcon>;
+  assets: Array<FundAssetType>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;
@@ -124,6 +132,11 @@ export interface IFundAssetContainerProps {
   hoveringAsset?: string;
   hasPopoverList?: boolean;
 }
+
+export type FundAssetType =
+  | PlatformAssetFull
+  | FundAssetInfo
+  | FundAssetPartWithIcon;
 
 const FundAssetContainer = React.memo(_FundAssetContainer);
 export default FundAssetContainer;
