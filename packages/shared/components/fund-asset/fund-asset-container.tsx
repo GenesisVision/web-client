@@ -1,7 +1,12 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import { Currency, FundAssetInfo, FundAssetPercent } from "gv-api-web";
+import {
+  Currency,
+  FundAssetInfo,
+  FundAssetPartWithIcon,
+  FundAssetPercent
+} from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
@@ -109,7 +114,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: Array<PlatformAssetFull | FundAssetInfo>;
+  assets: Array<PlatformAssetFull | FundAssetInfo | FundAssetPartWithIcon>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;
