@@ -78,7 +78,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
             onClose={clearAnchor}
           >
             <div className="fund-assets__container">
-              {assets.filter(getInvisibleAssets(size)).map((asset, idx) => (
+              {assets.filter(getHidedAssets(size)).map((asset, idx) => (
                 <FundAsset
                   key={asset.asset}
                   {...asset}
@@ -112,10 +112,8 @@ const getVisibleAssets = (size: number) => (
   idx: number
 ) => idx < size;
 
-const getInvisibleAssets = (size: number) => (
-  asset: FundAssetType,
-  idx: number
-) => idx >= size;
+const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
+  idx >= size;
 
 export type FundAssetRemoveType = (
   currency: string
