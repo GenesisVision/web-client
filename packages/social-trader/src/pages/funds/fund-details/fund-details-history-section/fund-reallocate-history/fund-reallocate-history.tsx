@@ -41,9 +41,9 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
           startLabel={t("filters.date-range.fund-start")}
         />
       )}
-      renderHeader={(column: SortingColumn) => {
-        return <FundStructureHeaderCell column={column} />;
-      }}
+      renderHeader={(column: SortingColumn) => (
+        <FundStructureHeaderCell column={column} />
+      )}
       renderBodyRow={(item: ReallocationModel) => (
         <TableRow stripy>
           <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
