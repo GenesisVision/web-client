@@ -19,8 +19,8 @@ const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {
       );
   }
 };
-const HidedAssets = React.memo(_HidedAssets);
-export default HidedAssets;
+const HidedAssetsLabel = React.memo(_HidedAssets);
+export default HidedAssetsLabel;
 
 interface Props {
   count: number;
