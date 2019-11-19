@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import GVButton from "shared/components/gv-button";
 import Link from "shared/components/link/link";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { INVESTMENTS_ROUTE } from "shared/routes/dashboard.routes";
 import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "shared/routes/invest.routes";
 
 import { getTotalInvestingStatistic } from "../../services/dashboard.service";
@@ -20,6 +21,7 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
       currency={currency}
       label={t("dashboard-page.statistic.investing")}
       request={getTotalInvestingStatistic}
+      all={INVESTMENTS_ROUTE}
       renderValues={({
         fundsCount,
         programsCount,

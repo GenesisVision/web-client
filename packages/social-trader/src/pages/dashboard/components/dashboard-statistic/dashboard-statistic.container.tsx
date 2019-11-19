@@ -17,7 +17,8 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   currency,
   label,
   request,
-  renderValues
+  renderValues,
+  all
 }) => {
   const { data, sendRequest } = useApiRequest<
     TDashboardTradingStatistic & TDashboardInvestingStatistic
@@ -30,7 +31,7 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   return (
     <DashboardBlock
       label={label}
-      all={""}
+      all={all}
       className="dashboard-statistic__container"
     >
       <DashboardStatistic
@@ -52,6 +53,7 @@ interface Props {
   ) => JSX.Element;
   label: string;
   request: (...args: any) => any;
+  all?: string;
 }
 
 const DashboardStatisticContainer = React.memo(_DashboardStatisticContainer);

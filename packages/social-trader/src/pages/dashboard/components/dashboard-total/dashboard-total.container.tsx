@@ -11,6 +11,7 @@ import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 import { TDashboardTotal } from "../../dashboard.types";
 import { getTotal } from "../../services/dashboard.service";
+import { FINANCIAL_STATISTIC_ROUTE } from "shared/routes/dashboard.routes";
 
 const _DashboardTotalContainer: React.FC<Props> = () => {
   const [t] = useTranslation();
@@ -22,7 +23,10 @@ const _DashboardTotalContainer: React.FC<Props> = () => {
     sendRequest({ currency });
   }, []);
   return (
-    <DashboardBlock label={t("dashboard-page.total.title")} all={""}>
+    <DashboardBlock
+      label={t("dashboard-page.total.title")}
+      all={FINANCIAL_STATISTIC_ROUTE}
+    >
       <DashboardTotal
         currency={currency}
         loaderData={getTotalLoaderData()}
