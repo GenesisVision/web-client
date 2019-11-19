@@ -1,12 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import {
-  Currency,
-  FundAssetInfo,
-  FundAssetPartWithIcon,
-  FundAssetPercent
-} from "gv-api-web";
+import { Currency, FundAssetInfo, FundAssetPartWithIcon } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import Popover, {
@@ -14,10 +9,10 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import useAnchor from "shared/hooks/anchor.hook";
-import { CurrencyEnum, PlatformAssetFull } from "shared/utils/types";
+import { PlatformAssetFull } from "shared/utils/types";
 
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
-import HidedAssets from "./hided-assets";
+import HidedAssetsLabel from "./hided-assets-label";
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   assets,
@@ -31,13 +26,6 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   hoveringAsset
 }) => {
   const [size, setSize] = useState<number | undefined>(sizeProp);
-  const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const handleOpen = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
-      hasPopoverList ? setAnchor(event) : setSize(assets.length);
-    },
-    [assets.length, hasPopoverList, setAnchor]
-  );
   useEffect(() => {
     if (hasPopoverList) setSize(sizeProp);
   });
@@ -47,56 +35,27 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
       })}
     >
-      {assets
-        .filter(getVisibleAssets(size || assets.length))
-        .map((asset, idx) => (
-          <FundAsset
-            key={asset.asset}
-            {...asset}
-            currency={asset.asset as Currency}
-            type={type}
-            last={idx === assets.length - 1}
-            removable={removable}
-            removeHandle={removeHandle}
-            className={
-              hoveringAsset === asset.asset ? "fund-asset--hover" : undefined
-            }
-          />
-        ))}
+      {assets.filter(getVisibleAssets(size || assets.length)).map(
+        renderFundAsset({
+          type,
+          removable,
+          removeHandle,
+          hoveringAsset,
+          assetsLength: assets.length
+        })
+      )}
       {size && size < (length || assets.length) && (
-        <>
-          <HidedAssets
-            count={(length || assets.length) - size}
-            type={type}
-            handleOpen={handleOpen}
-          />
-          <Popover
-            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-            vertical={VERTICAL_POPOVER_POS.TOP}
-            anchorEl={anchor}
-            noPadding
-            onClose={clearAnchor}
-          >
-            <div className="fund-assets__container">
-              {assets.filter(getHidedAssets(size)).map((asset, idx) => (
-                <FundAsset
-                  key={asset.asset}
-                  {...asset}
-                  currency={asset.asset as Currency} //TODO remove when api update
-                  type={type}
-                  last={idx === assets.length - 1}
-                  removable={removable}
-                  removeHandle={removeHandle}
-                  className={
-                    hoveringAsset === asset.asset
-                      ? "fund-asset--hover"
-                      : undefined
-                  }
-                />
-              ))}
-            </div>
-          </Popover>
-        </>
+        <HidedFundAssets
+          assets={assets}
+          setSize={setSize}
+          size={size}
+          type={type}
+          hasPopoverList={hasPopoverList}
+          hoveringAsset={hoveringAsset}
+          length={length}
+          removable={removable}
+          removeHandle={removeHandle}
+        />
       )}
       {remainder > 0 && (
         <div className="fund-asset fund-asset--remainder">
@@ -107,6 +66,68 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   );
 };
 
+const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
+  ({
+    length,
+    assets,
+    size,
+    type,
+    hasPopoverList,
+    setSize,
+    removable,
+    removeHandle,
+    hoveringAsset
+  }) => {
+    const { anchor, setAnchor, clearAnchor } = useAnchor();
+    const handleOpen = useCallback(
+      (event: React.MouseEvent<HTMLElement>) => {
+        hasPopoverList ? setAnchor(event) : setSize(assets.length);
+      },
+      [assets.length, hasPopoverList, setAnchor]
+    );
+    return (
+      <>
+        <HidedAssetsLabel
+          count={(length || assets.length) - size}
+          type={type}
+          handleOpen={handleOpen}
+        />
+        <Popover
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+          vertical={VERTICAL_POPOVER_POS.TOP}
+          anchorEl={anchor}
+          noPadding
+          onClose={clearAnchor}
+        >
+          <div className="fund-assets__container">
+            {assets.filter(getHidedAssets(size)).map(
+              renderFundAsset({
+                type,
+                removable,
+                removeHandle,
+                hoveringAsset,
+                assetsLength: assets.length
+              })
+            )}
+          </div>
+        </Popover>
+      </>
+    );
+  }
+);
+
+interface IHidedFundAssetsProps {
+  length?: number;
+  assets: Array<FundAssetType>;
+  type: FUND_ASSET_TYPE;
+  size: number;
+  hasPopoverList?: boolean;
+  setSize: (size: number) => void;
+  removable?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  hoveringAsset?: string;
+}
+
 const getVisibleAssets = (size: number) => (
   asset: FundAssetType,
   idx: number
@@ -114,6 +135,34 @@ const getVisibleAssets = (size: number) => (
 
 const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
   idx >= size;
+
+const renderFundAsset = ({
+  type,
+  removable,
+  removeHandle,
+  hoveringAsset,
+  assetsLength
+}: {
+  type: FUND_ASSET_TYPE;
+  removable?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  hoveringAsset?: string;
+  assetsLength: number;
+}) => (asset: FundAssetType, idx: number) => (
+  <FundAsset
+    key={asset.asset}
+    {...asset}
+    current={"current" in asset ? asset.current : asset.percent}
+    target={"target" in asset ? asset.target : asset.percent}
+    symbol={asset.asset}
+    currency={asset.asset as Currency} //TODO remove when api update
+    type={type}
+    last={idx === assetsLength - 1}
+    removable={removable}
+    removeHandle={removeHandle}
+    className={hoveringAsset === asset.asset ? "fund-asset--hover" : undefined}
+  />
+);
 
 export type FundAssetRemoveType = (
   currency: string
