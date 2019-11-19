@@ -84,15 +84,13 @@ export const PROGRAMS_TABLE_FILTERS: IComposeDefaultFilter[] = [
 
 export const PROGRAMS_COLUMNS: SortingColumn[] = [
   {
-    name: "title"
+    name: "title",
+    sortingName: "ByTitle"
   },
   {
     name: "equity",
-    sortingName: "ByBalance"
+    sortingName: "ByEquity"
   },
-  /*{
-    name: "currency"
-  },*/
   {
     name: "investors",
     sortingName: "ByInvestors"
@@ -102,7 +100,7 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
   },
   {
     name: "period",
-    sortingName: "ByEndOfPeriod"
+    sortingName: " ByPeriod"
   },
   {
     name: "age"

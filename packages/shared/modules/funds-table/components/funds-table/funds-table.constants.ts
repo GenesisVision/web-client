@@ -53,11 +53,12 @@ export const FUNDS_TABLE_FILTERS = [
 
 export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   {
-    name: "title"
+    name: "title",
+    sortingName: "ByTitle"
   },
   {
     name: "balance",
-    sortingName: "ByBalance"
+    sortingName: "BySize"
   },
   {
     name: "assets"

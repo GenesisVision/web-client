@@ -43,16 +43,19 @@ export const FOLLOW_TABLE_FILTERS: IComposeDefaultFilter[] = [
 
 export const FOLLOW_COLUMNS: SortingColumn[] = [
   {
-    name: "name"
+    name: "name",
+    sortingName: "ByTitle"
   },
   {
-    name: "subscribers"
+    name: "subscribers",
+    sortingName: "BySubscribers"
   },
   {
     name: "age"
   },
   {
-    name: "trades"
+    name: "trades",
+    sortingName: "ByTrades"
   },
   {
     name: "drawdown",
