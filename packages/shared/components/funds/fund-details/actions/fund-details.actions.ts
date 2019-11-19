@@ -32,7 +32,7 @@ export const fetchFundProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FundProfitChartDataType> => ({
   type: FETCH_FUND_PROFIT_CHART,
-  payload: fundsApi.getFundProfitChart(id, {
+  payload: fundsApi.getFundProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
