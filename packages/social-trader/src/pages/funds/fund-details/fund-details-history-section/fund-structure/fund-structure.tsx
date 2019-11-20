@@ -4,30 +4,27 @@ import { FundAssetInfo } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
 import { CurrencyItem } from "shared/components/currency-item/currency-item";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
 import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
 import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
-import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { formatValue } from "shared/utils/formatter";
 
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
-//import { getFundStructure } from "../../services/fund-details.service";
 import FundStructureHeaderCell from "./fund-structure-header-cell";
 
-const FundStructure: React.FC<Props> = ({ id }) => {
+const _FundStructure: React.FC = () => {
   const [t] = useTranslation();
-  if (!id) return null;
+  const items = useSelector(fundStructureTableSelector);
   return (
-    <>
-      {/* <TableContainer
-      //getItems={getFundStructure(id)}
-      dataSelector={fundStructureTableSelector}
+    <Table
+      items={items}
       columns={FUND_STRUCTURE_COLUMNS}
-      isFetchOnMount={true}
       renderHeader={(column: SortingColumn) => {
         return column.tooltip ? (
           <Tooltip
@@ -70,13 +67,9 @@ const FundStructure: React.FC<Props> = ({ id }) => {
           </TableCell>
         </TableRow>
       )}
-    />*/}
-    </>
+    />
   );
 };
 
+const FundStructure = React.memo(_FundStructure);
 export default FundStructure;
-
-interface Props {
-  id: string;
-}
