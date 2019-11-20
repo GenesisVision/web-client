@@ -22,7 +22,7 @@ export const LEVEL_FILTER_NAME = "level";
 export const PROGRAM_CURRENCY_FILTER_NAME = "programCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
-export const CURRENCY_MAP_NAME = "currency";
+export const CURRENCY_MAP_NAME = "showIn";
 
 export const SERVER_LEVEL_MIN_FILTER_NAME = "levelMin";
 export const SERVER_LEVEL_MAX_FILTER_NAME = "levelMax";

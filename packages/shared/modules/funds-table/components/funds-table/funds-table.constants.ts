@@ -21,7 +21,7 @@ import {
 export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
-export const CURRENCY_MAP_NAME = "currency";
+export const CURRENCY_MAP_NAME = "showIn";
 
 export const CURRENCY_MAP_VALUE = undefined;
 
