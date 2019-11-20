@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
+import FundStructure from "pages/funds/fund-details/fund-details-history-section/fund-structure/fund-structure";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +49,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
         </div>
       </div>
       <div>
-        {/*{tab === TABS.STRUCTURE && <FundStructure id={id} />}*/}
+        {tab === TABS.STRUCTURE && <FundStructure />}
         {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
       </div>
     </DetailsBlock>
