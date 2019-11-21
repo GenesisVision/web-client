@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useCallback } from "react";
 
 import {
@@ -10,9 +10,21 @@ import {
 
 const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
   const normalizedTo = normalizeTo(to);
+
+  const { route } = useRouter();
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       e.stopPropagation();
+
+      if (
+        normalizedTo.as
+          ? normalizedTo.as === route
+          : normalizedTo.pathname === route
+      ) {
+        e.preventDefault();
+        return;
+      }
+
       if (onClick) {
         onClick(e);
       }

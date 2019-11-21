@@ -1,7 +1,6 @@
 import classNames from "classnames";
-import { CopyTradingDetailsList } from "gv-api-web";
+import { FollowDetailsList } from "gv-api-web";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
@@ -21,7 +20,7 @@ import { formatValue } from "shared/utils/formatter";
 interface IProgramTableRowShortProps {
   title: string;
   showRating?: boolean;
-  follow: CopyTradingDetailsList;
+  follow: FollowDetailsList;
   isAuthenticated?: boolean;
   toggleFavorite?: TableToggleFavoriteHandlerType;
 }

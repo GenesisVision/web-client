@@ -24,7 +24,8 @@ const _DashboardBlock: React.FC<Props> = ({
           {label && <h3>{label}</h3>}
           {seeAll && (
             <div className="dashboard-block__see-all">
-              <Link to={all || "events"}>{t("dashboard-page.see-more")}</Link>
+              <Link className="dashboard-block__link" to={all || "events"}>&rsaquo;</Link>
+              {/*t("dashboard-page.see-more")*/}
             </div>
           )}
         </div>

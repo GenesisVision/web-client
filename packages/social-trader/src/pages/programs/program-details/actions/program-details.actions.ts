@@ -29,7 +29,6 @@ import {
   GET_PROGRAM_PERIOD_HISTORY,
   PROGRAM_FINANCIAL_STATISTIC,
   PROGRAM_OPEN_POSITIONS,
-  PROGRAM_PERIOD_HISTORY,
   PROGRAM_SUBSCRIPTIONS,
   PROGRAM_TRADES,
   SET_PROGRAM_ID,
@@ -42,17 +41,6 @@ import {
   fetchPortfolioEventsWithoutTable
 } from "../service/program-details.service";
 
-const sendProgramChartRequest = (
-  { start, end }: ChartDefaultPeriod,
-  id: string,
-  currency: CurrencyEnum
-): CancelablePromise<ProgramProfitCharts> =>
-  programsApi.getProgramProfitChart(id, {
-    dateFrom: start,
-    dateTo: end,
-    maxPointCount: 100,
-    currency
-  });
 
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
@@ -86,7 +74,7 @@ export const fetchProgramProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<ProgramProfitCharts> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
-  payload: programsApi.getProgramProfitChart(id, {
+  payload: programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies

@@ -11,6 +11,7 @@ import Link from "shared/components/link/link";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 
 import { getTotalTradingStatistic } from "../../services/dashboard.service";
+import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
 
 const _DashboardTradingStatistic: React.FC<Props> = () => {
   const [t] = useTranslation();
@@ -19,8 +20,9 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
     <DashboardStatisticContainer
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}
-      label={t("dashboard-page.statistic.programs")}
+      label={t("dashboard-page.statistic.trading")}
       request={getTotalTradingStatistic}
+      all={TRADING_ROUTE}
       renderValues={({
         equity,
         assetsUnderManagement

@@ -149,20 +149,22 @@ export const getAssetChart = (
 
   if (assetType === ASSETS_TYPES.Program) {
     //TODO удалить if, отрефакторить
-    programsApi.getProgramProfitChart(assetId, chartFilter).then(data => {
-      dispatch(
-        actions.dashboardChartAction({
-          type: assetType,
-          id: assetId,
-          title: assetTitle,
-          currency: data.charts[0].currency,
-          pnLChart: [],
-          equityChart: data.charts
-        })
-      );
-    });
+    programsApi
+      .getProgramProfitPercentCharts(assetId, chartFilter)
+      .then(data => {
+        dispatch(
+          actions.dashboardChartAction({
+            type: assetType,
+            id: assetId,
+            title: assetTitle,
+            currency: data.charts[0].currency,
+            pnLChart: [],
+            equityChart: data.charts
+          })
+        );
+      });
   } else {
-    fundsApi.getFundProfitChart(assetId, chartFilter).then(data => {
+    fundsApi.getFundProfitPercentCharts(assetId, chartFilter).then(data => {
       dispatch(
         actions.dashboardChartAction({
           type: assetType,

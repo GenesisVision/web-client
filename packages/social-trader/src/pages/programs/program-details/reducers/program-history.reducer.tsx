@@ -57,7 +57,7 @@ export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
   TradesViewModel,
   TradesViewModel
->(openPositionsSelector, "trades");
+>(openPositionsSelector);
 
 export const openPositionsReducer = tableReducerFactory<TradesViewModel>({
   type: PROGRAM_OPEN_POSITIONS,
@@ -71,7 +71,7 @@ export const tradesTableSelector = tableSelectorCreator<
   RootState,
   TradesViewModel,
   TradesViewModel
->(tradesSelector, "trades");
+>(tradesSelector);
 
 export const tradesReducer = tableReducerFactory<TradesViewModel>({
   type: PROGRAM_TRADES,
@@ -105,7 +105,7 @@ export const financialStatisticTableSelector = tableSelectorCreator<
   RootState,
   ProgramPeriodsViewModel,
   ProgramPeriodsViewModel
->(financialStatisticSelector, "periods");
+>(financialStatisticSelector);
 
 export const financialStatisticReducer = tableReducerFactory<
   ProgramPeriodsViewModel

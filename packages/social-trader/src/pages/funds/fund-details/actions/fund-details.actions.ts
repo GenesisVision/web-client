@@ -11,7 +11,7 @@ import { TStatisticCurrencyAction } from "shared/components/details/reducers/sta
 import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
-import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ApiAction, CurrencyEnum } from "shared/utils/types";
 
 import {
   FETCH_FUND_BALANCE_CHART,
@@ -23,7 +23,6 @@ import {
   SET_FUND_STATISTIC_PERIOD
 } from "../fund-details.constants";
 import { SetFundIdAction } from "../fund-details.types";
-import { FundIdState } from "../reducers/id.reducer";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 
 export const fetchFundProfitChartAction = (
@@ -32,7 +31,7 @@ export const fetchFundProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FundProfitChartDataType> => ({
   type: FETCH_FUND_PROFIT_CHART,
-  payload: fundsApi.getFundProfitChart(id, {
+  payload: fundsApi.getFundProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies

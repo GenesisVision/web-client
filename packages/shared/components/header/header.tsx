@@ -21,18 +21,20 @@ import useIsOpen from "shared/hooks/is-open.hook";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "shared/routes/app.routes";
 import { TMenuItem } from "shared/routes/menu";
 import { getRandomInteger } from "shared/utils/helpers";
+import { useRouter } from "next/router";
 
 const _Header: React.FC<Props> = ({
   topMenuItems,
   mobileMenuItems,
   isAuthenticated,
-  profileHeader,
-  backPath
+  profileHeader
 }) => {
   const dispatch = useDispatch();
   const handlerLogout = useCallback(() => dispatch(logout), []);
   const [isOpen, setOpen, setClose] = useIsOpen();
   const [t] = useTranslation();
+  const { route, asPath } = useRouter();
+  const backPath = asPath ? asPath : route;
   return (
     <div className="header">
       <div className="header__left">
