@@ -1,13 +1,13 @@
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { ITableState } from "components/table/reducers/table.reducer";
 import {
   InvestmentEventViewModels,
   ItemsViewModelFundDetailsList,
   ItemsViewModelProgramDetailsList
 } from "gv-api-web";
 import { combineReducers } from "redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { ITableState } from "shared/components/table/reducers/table.reducer";
 import { IDashboardAssetChart } from "shared/constants/constants";
-import { Nullable } from "shared/utils/types";
+import { Nullable } from "utils/types";
 
 import dashboardAssetChartReducer from "./dashboard-asset-chart.reducer";
 import dashboardAssetReducer, {
@@ -42,7 +42,7 @@ const dashboardReducer = combineReducers<ManagerDashboardState>({
   assetChart: dashboardAssetChartReducer,
   eventsData: dashboardEventsReducer,
   programs: dashboardProgramsReducer,
-  funds: dashboardFundsReducer,
+  funds: dashboardFundsReducer
   // inRequestsData: dashboardInRequestsReducer
 });
 

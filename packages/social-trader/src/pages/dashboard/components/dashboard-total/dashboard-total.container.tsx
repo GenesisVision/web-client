@@ -1,17 +1,17 @@
 import "./dashboard-total.scss";
 
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardTotal from "pages/dashboard/components/dashboard-total/dashboard-total";
 import { getTotalLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { FINANCIAL_STATISTIC_ROUTE } from "routes/dashboard.routes";
 
 import { TDashboardTotal } from "../../dashboard.types";
 import { getTotal } from "../../services/dashboard.service";
-import { FINANCIAL_STATISTIC_ROUTE } from "shared/routes/dashboard.routes";
 
 const _DashboardTotalContainer: React.FC<Props> = () => {
   const [t] = useTranslation();

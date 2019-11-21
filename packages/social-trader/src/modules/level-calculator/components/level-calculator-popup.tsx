@@ -1,19 +1,19 @@
+import GVButton from "components/gv-button";
+import { CloseIcon } from "components/icon/close-icon";
+import { KYC_ROUTE } from "components/profile/profile.constants";
+import withLoader from "decorators/with-loader";
 import {
   LevelsParamsInfo,
   ProgramLevelInfo,
   ProgramsLevelsInfo
 } from "gv-api-web";
+import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import GVButton from "shared/components/gv-button";
-import { CloseIcon } from "shared/components/icon/close-icon";
-import { KYC_ROUTE } from "shared/components/profile/profile.constants";
-import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
-import withLoader from "shared/decorators/with-loader";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "../components/calculator-output/calculator-output";
@@ -159,9 +159,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           className="level-calculator-popup__calculator-slider"
           valueClassName="level-calculator-popup__calculator-slider-value"
           title={t("level-calculator.weighted-volume-scale")}
-          tooltipContent={t(
-            "level-calculator.weighted-volume-scale-tooltip"
-          )}
+          tooltipContent={t("level-calculator.weighted-volume-scale-tooltip")}
           value={weightedVolumeScale}
           editableValue
           min={levelsParameters.volumeScaleMin}
@@ -185,9 +183,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
           label={t("level-calculator.current-av-to-invest")}
-          tooltipContent={t(
-            "level-calculator.current-av-to-invest-tooltip"
-          )}
+          tooltipContent={t("level-calculator.current-av-to-invest-tooltip")}
           value={
             <NumberFormat
               value={formatCurrencyValue(
@@ -217,9 +213,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
           label={t("level-calculator.new-av-to-invest")}
-          tooltipContent={t(
-            "level-calculator.new-av-to-invest-tooltip"
-          )}
+          tooltipContent={t("level-calculator.new-av-to-invest-tooltip")}
           value={
             <NumberFormat
               value={formatCurrencyValue(newAvailableToInvest, currency)}
@@ -232,9 +226,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className="level-calculator-popup__statistic-item"
           label={t("level-calculator.new-investment-scale")}
-          tooltipContent={t(
-            "level-calculator.new-investment-scale-tooltip"
-          )}
+          tooltipContent={t("level-calculator.new-investment-scale-tooltip")}
           value={
             <NumberFormat
               value={formatValue(newInvestmentScale, 2)}

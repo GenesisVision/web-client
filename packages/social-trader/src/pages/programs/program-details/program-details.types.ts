@@ -1,11 +1,11 @@
+import { IDialogProps } from "components/dialog/dialog";
 import {
   LevelsParamsInfo,
   ProfitChart,
   ProgramBalanceChart,
   ProgramDetailsFull
 } from "gv-api-web";
-import { IDialogProps } from "shared/components/dialog/dialog";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 export interface IProgramWithdrawalContainerProps extends IDialogProps {
   id: string;

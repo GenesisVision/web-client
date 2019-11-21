@@ -1,9 +1,9 @@
 import "./dashboard-statistic.scss";
 
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React, { useEffect } from "react";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
 import {

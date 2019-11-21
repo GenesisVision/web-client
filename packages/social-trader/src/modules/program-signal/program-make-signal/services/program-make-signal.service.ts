@@ -1,8 +1,8 @@
+import { CancelablePromise } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 // import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { CancelablePromise } from "gv-api-web";
 
 export const programMakeSignal = ({
   id,
@@ -19,7 +19,7 @@ export const programMakeSignal = ({
     successFee,
     volumeFee
   };
-  return   new CancelablePromise<void>(() => {});
+  return new CancelablePromise<void>(() => {});
   // return managerApi
   //   .updateProgramSignalSettings(authorization, requestData)
   //   .then(() => {

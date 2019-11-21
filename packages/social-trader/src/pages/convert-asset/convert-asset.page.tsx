@@ -1,9 +1,9 @@
 import "components/assets/create-asset/create-asset.scss";
 
+import Page from "components/page/page";
 import { IConvertAssetSettingsFormOwnProps } from "pages/convert-asset/components/convert-asset-settings";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import Page from "shared/components/page/page";
 
 import ConvertAssetContainer from "./components/convert-asset.container";
 

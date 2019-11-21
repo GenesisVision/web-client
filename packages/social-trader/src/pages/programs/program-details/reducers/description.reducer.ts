@@ -1,12 +1,8 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/reducer-creators/api-reducer";
-import {
-  apiFieldSelector,
-  apiSelector,
-  fieldSelector
-} from "shared/utils/selectors";
+} from "reducers/reducer-creators/api-reducer";
+import { apiFieldSelector, apiSelector, fieldSelector } from "utils/selectors";
 
 import { FETCH_PROGRAM_DESCRIPTION } from "../program-details.constants";
 

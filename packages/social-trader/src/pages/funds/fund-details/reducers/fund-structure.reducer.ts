@@ -1,14 +1,14 @@
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import tableReducerFactory, {
+  ITableState
+} from "components/table/reducers/table.reducer";
 import { FundAssetInfo } from "gv-api-web";
 import {
   FundDescriptionDataType,
   fundDescriptionSelector
 } from "pages/funds/fund-details/reducers/description.reducer";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import tableReducerFactory, {
-  ITableState
-} from "shared/components/table/reducers/table.reducer";
-import { apiFieldSelector, fieldSelector } from "shared/utils/selectors";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { RootState } from "reducers/root-reducer";
+import { apiFieldSelector, fieldSelector } from "utils/selectors";
 
 import { FUND_STRUCTURE } from "../fund-details.constants";
 

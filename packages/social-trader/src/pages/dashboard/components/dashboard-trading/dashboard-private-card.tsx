@@ -1,4 +1,17 @@
+import GVButton from "components/gv-button";
+import Hint from "components/hint/hint";
+import Link from "components/link/link";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "components/popover/popover";
+import StatisticItem from "components/statistic-item/statistic-item";
+import TableCard, {
+  TableCardTable,
+  TableCardTableColumn
+} from "components/table/components/table-card/table-card";
 import { DashboardTradingAsset } from "gv-api-web";
+import { TAnchor, TEvent } from "hooks/anchor.hook";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
@@ -6,28 +19,15 @@ import { TitleContext } from "pages/dashboard/dashboard.constants";
 import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
-import GVButton from "shared/components/gv-button";
-import Hint from "shared/components/hint/hint";
-import Link from "shared/components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "shared/components/popover/popover";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import TableCard, {
-  TableCardTable,
-  TableCardTableColumn
-} from "shared/components/table/components/table-card/table-card";
+import { META_TRADER_4_ROUTE } from "routes/trade.routes";
 import {
   ASSET,
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
 } from "shared/constants/constants";
-import { TAnchor, TEvent } from "shared/hooks/anchor.hook";
 import { useTranslation } from "shared/i18n";
-import { META_TRADER_4_ROUTE } from "shared/routes/trade.routes";
 import { distanceDate } from "shared/utils/dates";
-import { formatValueDifferentDecimalScale } from "shared/utils/formatter";
+import { formatValueDifferentDecimalScale } from "utils/formatter";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
   const title = useContext(TitleContext);

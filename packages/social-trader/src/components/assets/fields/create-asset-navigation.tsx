@@ -1,6 +1,6 @@
+import GVButton from "components/gv-button";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
 
 const _CreateAssetNavigation: React.FC<Props> = ({ asset, isSubmitting }) => {

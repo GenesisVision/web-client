@@ -1,16 +1,16 @@
 import "./social-links.scss";
 
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader from "decorators/with-loader";
 import {
   CancelablePromise,
   SocialLinkViewModel,
   UpdateSocialLinkViewModel
 } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader from "shared/decorators/with-loader";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import {
   fetchSocialLinks,

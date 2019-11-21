@@ -1,4 +1,4 @@
 import React from "react";
-import { WalletCurrency } from "shared/routes/ssr/wallet/[id]";
+import { WalletCurrency } from "routes/ssr/wallet/[id]";
 
 export default WalletCurrency;

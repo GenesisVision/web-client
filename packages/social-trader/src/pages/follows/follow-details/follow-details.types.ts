@@ -1,7 +1,7 @@
+import { IDialogProps } from "components/dialog/dialog";
 import { FollowDetailsFull, ProgramDetailsFull } from "gv-api-web";
 import React from "react";
-import { IDialogProps } from "shared/components/dialog/dialog";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 export interface IFollowControlsProps {
   canCloseAsset?: boolean;

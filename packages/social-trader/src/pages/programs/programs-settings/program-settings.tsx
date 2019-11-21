@@ -1,5 +1,6 @@
 import "./program-settings.scss";
 
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
   BrokersProgramInfo,
   ProgramCreateAssetPlatformInfo,
@@ -13,8 +14,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ChangeBroker from "./change-broker/change-broker";

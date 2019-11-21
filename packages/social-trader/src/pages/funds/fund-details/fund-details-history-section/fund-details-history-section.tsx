@@ -1,14 +1,14 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
+import DetailsBlock from "components/details/details-block";
+import GVTabs from "components/gv-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import useTab from "hooks/tab.hook";
 import FundStructure from "pages/funds/fund-details/fund-details-history-section/fund-structure/fund-structure";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import DetailsBlock from "shared/components/details/details-block";
-import GVTabs from "shared/components/gv-tabs";
-import GVTab from "shared/components/gv-tabs/gv-tab";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import useTab from "shared/hooks/tab.hook";
 
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 import { getDashboardHistoryDetailsCounts } from "../services/fund-details.service";

@@ -1,16 +1,16 @@
+import { DialogBottom } from "components/dialog/dialog-bottom";
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogTop } from "components/dialog/dialog-top";
+import GVButton from "components/gv-button";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import i18next from "i18next";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { DialogBottom } from "shared/components/dialog/dialog-bottom";
-import { DialogButtons } from "shared/components/dialog/dialog-buttons";
-import { DialogTop } from "shared/components/dialog/dialog-top";
-import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import { ASSET } from "shared/constants/constants";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 import { object, string } from "yup";
 
 const _CloseAssetForm: React.FC<

@@ -11,7 +11,7 @@ import {
   RecommendedAsset
 } from "gv-api-web/dist";
 import { ASSET } from "shared/constants/constants";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 export type TChartAsset = DashboardChartAsset;
 

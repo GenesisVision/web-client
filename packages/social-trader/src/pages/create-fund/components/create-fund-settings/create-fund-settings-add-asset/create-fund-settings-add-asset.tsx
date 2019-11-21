@@ -1,19 +1,17 @@
 import "../create-fund-settings.scss";
 
 import classNames from "classnames";
-import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
-import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import GVTextField from "shared/components/gv-text-field";
-import { SearchIcon } from "shared/components/icon/search-icon";
+import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
+import GVTextField from "components/gv-text-field";
+import { SearchIcon } from "components/icon/search-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
-} from "shared/components/popover/popover";
-import Regulator, {
-  TRegulatorHandle
-} from "shared/components/regulator/regulator";
-import { PlatformAssetFull } from "shared/utils/types";
+} from "components/popover/popover";
+import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
+import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
+import { PlatformAssetFull } from "utils/types";
 
 const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   remainder,

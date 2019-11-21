@@ -1,8 +1,8 @@
 import "./dashboard-pie-chart.scss";
 
+import useApiRequest from "hooks/api-request.hook";
 import DashboardPieChart from "pages/dashboard/components/dashboard-pie-chart/dashboard-pie-chart";
 import React, { useEffect } from "react";
-import useApiRequest from "shared/hooks/api-request.hook";
 
 import DashboardBlock from "../dashboard-block/dashboard-block";
 

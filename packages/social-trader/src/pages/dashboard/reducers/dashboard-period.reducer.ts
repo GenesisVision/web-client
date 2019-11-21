@@ -1,8 +1,8 @@
 import {
   ChartDefaultPeriod,
   getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
-import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
+} from "components/chart/chart-period/chart-period.helpers";
+import defaultReducer from "reducers/reducer-creators/default-reducer";
 
 import {
   DASHBOARD_PERIOD,

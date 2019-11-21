@@ -1,10 +1,10 @@
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
+import UnfollowContainer from "modules/unfollow/unfollow-container";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import GVButton from "shared/components/gv-button";
-import useIsOpen from "shared/hooks/is-open.hook";
-import UnfollowContainer from "shared/modules/unfollow/unfollow-container";
 
 import { dispatchFollowDescription } from "./services/follow-details.service";
 

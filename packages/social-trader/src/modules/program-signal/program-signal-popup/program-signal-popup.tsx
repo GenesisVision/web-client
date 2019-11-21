@@ -1,9 +1,9 @@
+import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { ProgramDetailsFull } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import ProgramSignalForm, {
   IProgramSignalFormValues

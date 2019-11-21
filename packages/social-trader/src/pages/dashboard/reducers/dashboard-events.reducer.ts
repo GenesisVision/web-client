@@ -1,28 +1,22 @@
-import { InvestmentEventViewModels } from "gv-api-web";
-import { ManagerRootState } from "reducers";
 import {
   DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   DASHBOARD_PORTFOLIO_EVENTS_FILTERS,
   EVENTS_ACTION_TYPE
-} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import tableReducerFactory from "shared/components/table/reducers/table.reducer";
+} from "components/portfolio-events-table/portfolio-events-table.constants";
+import { tableSelectorCreator } from "components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import tableReducerFactory from "components/table/reducers/table.reducer";
+import { InvestmentEventViewModels } from "gv-api-web";
+import { AuthRootState } from "reducers";
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/reducer-creators/api-reducer";
-import { apiSelector } from "shared/utils/selectors";
-import { AuthRootState } from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+} from "reducers/reducer-creators/api-reducer";
+import { RootState } from "reducers/root-reducer";
+import { apiSelector } from "utils/selectors";
 
 import { DASHBOARD_PORTFOLIO_EVENTS } from "../actions/dashboard.actions";
 
 export type ManagerPortfolioEventsState = IApiState<InvestmentEventViewModels>;
-
-export const dashboardEventsSelector = apiSelector<
-  InvestmentEventViewModels,
-  AuthRootState
->(state => state.dashboard.eventsData);
 
 const dashboardEventsReducer = apiReducerFactory<InvestmentEventViewModels>({
   apiType: DASHBOARD_PORTFOLIO_EVENTS
@@ -34,7 +28,7 @@ export const dashboardEventsAllSelector = (state: RootState) =>
   state.dashboard.eventsTable;
 
 export const dashboardEventsAllTableSelector = tableSelectorCreator<
-  ManagerRootState,
+  AuthRootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
 >(dashboardEventsAllSelector, "events", {

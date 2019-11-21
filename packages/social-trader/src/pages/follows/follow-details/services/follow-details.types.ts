@@ -3,7 +3,7 @@ import {
   ProgramProfitCharts,
   SimpleChart
 } from "gv-api-web";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 export type FollowDetailsStatistic = {
   trades: number;

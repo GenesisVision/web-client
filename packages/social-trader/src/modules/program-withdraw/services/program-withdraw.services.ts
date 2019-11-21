@@ -1,5 +1,5 @@
+import { ProgramWithdrawType } from "components/program-withdraw/program-withdraw-popup";
 import { ProgramWithdrawInfo } from "gv-api-web";
-import { ProgramWithdrawType } from "shared/components/program-withdraw/program-withdraw-popup";
 import investmentsApi from "shared/services/api-client/investments-api";
 import authService from "shared/services/auth-service";
 

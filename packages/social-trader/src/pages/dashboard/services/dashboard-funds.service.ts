@@ -1,7 +1,7 @@
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { CancelablePromise, ItemsViewModelFundDetailsList } from "gv-api-web";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import authService from "shared/services/auth-service";
-import { ActionType } from "shared/utils/types";
+import { ActionType } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 

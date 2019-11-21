@@ -1,26 +1,26 @@
-import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import React from "react";
-import { useTranslation } from "react-i18next";
 import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
-} from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import GVButton from "shared/components/gv-button";
-import Link from "shared/components/link/link";
+} from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
 import {
   FilteringType,
   TDefaultFilters
-} from "shared/components/table/components/filtering/filter.type";
-import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
+} from "components/table/components/filtering/filter.type";
+import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
+import TableModule from "components/table/components/table-module";
 import {
   GetItemsFuncType,
   RenderBodyItemFuncType,
   UpdateFilterFunc
-} from "shared/components/table/components/table.types";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { LIST_VIEW } from "shared/components/table/table.constants";
+} from "components/table/components/table.types";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { LIST_VIEW } from "components/table/table.constants";
+import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 const _DashboardTradingTable: React.FC<Props> = ({
   createButtonToolbar,

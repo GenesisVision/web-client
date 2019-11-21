@@ -1,10 +1,10 @@
+import Leverage from "components/leverage/leverage";
+import PieContainerSmall from "components/pie-container/pie-container-small";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import Leverage from "shared/components/leverage/leverage";
-import PieContainerSmall from "shared/components/pie-container/pie-container-small";
-import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import filesService from "shared/services/file-service";
+import filesService from "services/file-service";
 
 import { FollowDetailsDataType } from "../follow-details.types";
 

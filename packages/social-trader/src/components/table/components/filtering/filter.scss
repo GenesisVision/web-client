@@ -1,0 +1,40 @@
+@import "~shared/styles/_colors";
+
+.filter {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  &:hover {
+    .filter__arrow {
+      stroke: $primary-color;
+    }
+  }
+
+  &__label {
+    opacity: 0.5;
+    letter-spacing: 0.2px;
+    color: $text-color;
+    white-space: nowrap;
+  }
+
+  &__value {
+    letter-spacing: 0.2px;
+    color: $text-accent-color;
+    padding: 0 0.4rem;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    stroke: $icon-color;
+    &__is-open {
+      stroke: $primary-color;
+    }
+  }
+}
+
+.gv-hangle__text {
+  position: absolute;
+  top: -20px;
+  font-size: 0.8rem;
+}

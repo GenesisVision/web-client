@@ -1,14 +1,14 @@
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
+import GVButton from "components/gv-button";
+import GVSwitch from "components/gv-selection/gv-switch";
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
 import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import GVSwitch from "shared/components/gv-selection/gv-switch";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 const _SignalingEdit: React.FC<Props> = ({
   isValid,
@@ -28,7 +28,7 @@ const _SignalingEdit: React.FC<Props> = ({
             <GVSwitch
               touched={false}
               className="notification-setting__switch"
-              name={name}
+              name={"isSignal"}
               value={isSignal}
               color="primary"
               onChange={changeIsSignal}

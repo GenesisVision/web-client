@@ -1,3 +1,6 @@
+import chartXAxis from "components/chart/chart-components/chart-xaxis";
+import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.helpers";
+import GVColors from "components/gv-styles/gv-colors";
 import * as React from "react";
 import {
   Area,
@@ -7,10 +10,7 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
-import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import { BalanceChartElementType } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import GVColors from "shared/components/gv-styles/gv-colors";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";
 

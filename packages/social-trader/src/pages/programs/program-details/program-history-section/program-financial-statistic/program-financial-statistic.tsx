@@ -1,16 +1,16 @@
 import "./program-financial-statistic.scss";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "shared/components/table/components/table-container";
+import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "shared/components/table/components/table.types";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { CurrencyEnum } from "shared/utils/types";
+} from "components/table/components/table.types";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { CurrencyEnum } from "utils/types";
 
 import {
   PROGRAM_FINANCIAL_STATISTIC_COLUMNS,

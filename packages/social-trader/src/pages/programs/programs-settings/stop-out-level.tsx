@@ -1,11 +1,11 @@
 import StopOutField from "components/assets/fields/stop-out-field";
+import GVButton from "components/gv-button";
+import SettingsBlock from "components/settings-block/settings-block";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 import { number, object } from "yup";
 
 const _StopOutLevel: React.FC<Props> = ({

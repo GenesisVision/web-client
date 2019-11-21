@@ -1,12 +1,12 @@
-import "shared/components/details/details.scss";
-import "shared/modules/asset-settings/asset-settings.scss";
+import "components/details/details.scss";
+import "./asset-settings.scss";
 
+import Page from "components/page/page";
+import useApiRequest from "hooks/api-request.hook";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
-import useApiRequest from "shared/hooks/api-request.hook";
 
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";

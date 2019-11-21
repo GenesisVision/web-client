@@ -1,7 +1,7 @@
+import { StatisticCurrencyState } from "components/details/reducers/statistic-currency.reducer";
+import { StatisticPeriodState } from "components/details/reducers/statistic-period.reducer";
+import clearableReducer from "reducers/clearable.reducer";
 import { combineReducers } from "redux";
-import { StatisticCurrencyState } from "shared/components/details/reducers/statistic-currency.reducer";
-import { StatisticPeriodState } from "shared/components/details/reducers/statistic-period.reducer";
-import clearableReducer from "shared/reducers/clearable.reducer";
 
 import fundIdReducer, { FundIdState } from "../reducers/id.reducer";
 import fundBalanceChartReducer, {

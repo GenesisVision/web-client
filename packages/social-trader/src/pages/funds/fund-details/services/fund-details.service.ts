@@ -1,15 +1,11 @@
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { FilteringType } from "components/table/components/filtering/filter.type";
+import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { NextPageContext } from "next";
+import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import authService from "shared/services/auth-service";
-import {
-  CurrencyEnum,
-  MiddlewareDispatch,
-  TGetState
-} from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {
   fetchFundBalanceChartAction,

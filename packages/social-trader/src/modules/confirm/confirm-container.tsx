@@ -1,8 +1,8 @@
+import Dialog from "components/dialog/dialog";
+import useApiRequest from "hooks/api-request.hook";
+import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 import React, { useCallback, useEffect } from "react";
-import Dialog from "shared/components/dialog/dialog";
-import useApiRequest from "shared/hooks/api-request.hook";
-import GoogleAuthStepsContainer from "shared/modules/2fa/google-auth/google-auth-steps/google-auth-steps";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import { IConfirmFormValues } from "./components/confirm-form";
 import * as service from "./services/confirm.services";

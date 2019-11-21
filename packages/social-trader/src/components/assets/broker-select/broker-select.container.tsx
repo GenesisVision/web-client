@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import {
   forexAllowedSelector,
   kycConfirmedSelector
-} from "shared/reducers/header-reducer";
+} from "reducers/header-reducer";
 
 import BrokerSelect from "./broker-select";
 

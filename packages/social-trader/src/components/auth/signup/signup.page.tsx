@@ -1,0 +1,77 @@
+import "./signup.scss";
+
+import AuthTabs from "components/auth/components/auth-tabs/auth-tabs";
+import SignUpForm from "pages/auth/signup/signup-form/signup-form";
+import * as React from "react";
+import { withTranslation as translate } from "react-i18next";
+import { connect, ResolveThunks } from "react-redux";
+import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
+import { SIGNUP_ROUTE } from "routes/app.routes";
+import { AuthRootState, MiddlewareDispatch } from "utils/types";
+
+import CaptchaContainer from "../captcha-container";
+import { signUp } from "./services/signup.service";
+
+const _SignUpPage: React.FC<Props> = ({
+  referralCode,
+  errorMessage,
+  service
+}) => {
+  return (
+    <div className="signup">
+      <AuthTabs authPartUrl={SIGNUP_ROUTE} />
+      <CaptchaContainer
+        request={service.signUp}
+        renderForm={handle => (
+          <SignUpForm
+            refCode={referralCode}
+            onSubmit={handle}
+            error={errorMessage}
+          />
+        )}
+      />
+    </div>
+  );
+};
+
+const mapStateToProps = (state: AuthRootState): StateProps => {
+  const { signUpData } = state;
+  const { errorMessage } = signUpData;
+  return { errorMessage };
+};
+
+const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
+  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
+    {
+      signUp
+    },
+    dispatch
+  )
+});
+
+interface StateProps {
+  errorMessage: string;
+}
+
+interface DispatchProps {
+  service: ResolveThunks<ServiceThunks>;
+}
+interface ServiceThunks extends ActionCreatorsMapObject {
+  signUp: typeof signUp;
+}
+
+interface OwnProps {
+  referralCode?: string;
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+const SignUpPage = compose<React.ComponentType<OwnProps>>(
+  translate(),
+  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  React.memo
+)(_SignUpPage);
+export default SignUpPage;

@@ -1,10 +1,10 @@
+import FollowsPage from "components/follows/follows.page";
+import withDefaultLayout from "decorators/with-default-layout";
+import { fetchFollowsAction } from "modules/follows-table/actions/follows-table.actions";
+import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import React from "react";
-import FollowsPage from "shared/components/follows/follows.page";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import { fetchFollowsAction } from "shared/modules/follows-table/actions/follows-table.actions";
-import { getFiltersFromContext } from "shared/modules/programs-table/services/programs-table.service";
 import authService from "shared/services/auth-service";
-import { NextPageWithRedux } from "shared/utils/types";
+import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<any> = () => {
   return <FollowsPage />;

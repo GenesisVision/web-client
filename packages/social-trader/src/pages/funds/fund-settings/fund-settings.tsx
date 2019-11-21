@@ -1,3 +1,4 @@
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
   FundCreateAssetPlatformInfo,
   FundDetailsFull,
@@ -11,7 +12,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
 
 import { TUpdateFundFunc } from "./fund-settings.page";
 import Reallocation from "./reallocation/reallocation";

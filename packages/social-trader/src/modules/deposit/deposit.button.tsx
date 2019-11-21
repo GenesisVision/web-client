@@ -1,14 +1,14 @@
+import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React from "react";
 import { useSelector } from "react-redux";
-import InvestmentUnauthPopup from "shared/components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "shared/components/gv-button";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
   ownAsset,

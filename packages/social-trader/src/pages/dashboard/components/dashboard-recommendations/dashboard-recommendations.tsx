@@ -1,7 +1,7 @@
+import { withBlurLoader } from "decorators/with-blur-loader";
 import RecommendationCard from "pages/dashboard/components/dashboard-recommendations/recommendation-card";
 import { TDashboardRecommendations } from "pages/dashboard/dashboard.types";
 import React from "react";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
 
 const _DashboardRecommendations: React.FC<Props> = ({ data: { assets } }) => {
   return (

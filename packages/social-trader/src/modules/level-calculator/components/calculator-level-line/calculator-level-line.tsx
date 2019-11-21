@@ -1,9 +1,9 @@
 import "./calculator-level-line.scss";
 
 import classNames from "classnames";
+import GVProgramPeriod from "components/gv-program-period";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import GVProgramPeriod from "shared/components/gv-program-period";
 
 const getMarks = (start: number, end: number, value: number) =>
   new Array(end - start + 1).fill(start).reduce((acc, curr, idx) => {

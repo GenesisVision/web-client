@@ -1,27 +1,24 @@
+import { getDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { GetItemsFuncType } from "components/table/components/table.types";
+import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
+import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import {
   CancelablePromise,
   InvestmentEventViewModels,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
+import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import {
-  mapToTableItems,
-  TableItems
-} from "shared/components/table/helpers/mapper";
-import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { ActionType, MiddlewareDispatch } from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {
   fetchEventsAction,
@@ -73,7 +70,7 @@ export const getFollowStatistic = (
   // @ts-ignore
   return Promise.all([
     // @ts-ignore
-    programsApi.getProgramProfitChart(followId, chartFilter),
+    programsApi.getProgramProfitPercentCharts(followId, chartFilter),
     // @ts-ignore
     programsApi.getProgramBalanceChart(followId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {

@@ -1,6 +1,8 @@
-import "shared/components/details/details.scss";
+import "components/details/details.scss";
 
+import { IImageValue } from "components/form/input-image/input-image";
 import { TradesDelay } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
@@ -12,11 +14,9 @@ import {
 } from "pages/programs/program-details/service/program-details.service";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
+import { createProgramInfoSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { createProgramInfoSelector } from "shared/reducers/platform-reducer";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";

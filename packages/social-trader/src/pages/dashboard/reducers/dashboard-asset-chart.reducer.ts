@@ -1,6 +1,6 @@
+import defaultReducer from "reducers/reducer-creators/default-reducer";
 import { IDashboardAssetChart } from "shared/constants/constants";
-import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
-import { Nullable } from "shared/utils/types";
+import { Nullable } from "utils/types";
 
 import {
   DASHBOARD_ASSET_CHART,

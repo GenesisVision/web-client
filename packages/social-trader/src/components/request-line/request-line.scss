@@ -1,0 +1,77 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.request-line {
+  .portfolio-event-logo__photo {
+    border-color: #273642;
+  }
+
+  display: flex;
+  align-items: center;
+  color: $text-accent-color;
+
+  &:not(:last-of-type) {
+    padding-bottom: $padding-xsmall;
+    margin-bottom: $padding-xsmall;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__statistic-item {
+    padding: 0 $padding-xxsmall;
+    min-width: 130px;
+
+    &--title {
+      width: 170px;
+      padding-left: $padding-xsmall;
+
+      .statistics-item__top {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &__info {
+    flex: 2;
+  }
+
+  &__btns {
+    text-align: center;
+    .gv-btn {
+      padding: 0;
+    }
+    &:last-child {
+      padding-left: $padding-xxsmall;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    line-height: 22px;
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  &__profitability {
+    line-height: 22px;
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  &__label {
+    font-weight: normal;
+    line-height: 22px;
+    font-size: $font-size-small;
+    letter-spacing: 0.184615px;
+    mix-blend-mode: normal;
+    opacity: 0.3;
+    white-space: nowrap;
+  }
+}

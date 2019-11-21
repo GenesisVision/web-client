@@ -1,17 +1,17 @@
-import { SignalSubscriber } from "gv-api-web";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { ACTION_STATUS_FILTER_VALUES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import { SelectFilterType } from "shared/components/table/components/filtering/select-filter/select-filter.constants";
-import TableContainer from "shared/components/table/components/table-container";
+import { ACTION_STATUS_FILTER_VALUES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import { FilteringType } from "components/table/components/filtering/filter.type";
+import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
+import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType,
   UpdateFilterFunc
-} from "shared/components/table/components/table.types";
-import { CurrencyEnum } from "shared/utils/types";
+} from "components/table/components/table.types";
+import { SignalSubscriber } from "gv-api-web";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { CurrencyEnum } from "utils/types";
 
 import {
   PROGRAM_SUBSCRIBERS_COLUMNS,

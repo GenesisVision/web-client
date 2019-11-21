@@ -1,10 +1,10 @@
+import { IDialogProps } from "components/dialog/dialog";
 import { ProgramDetailsFull } from "gv-api-web";
+import { dispatchProgramDescription } from "pages/programs/program-details/service/program-details.service";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose, Dispatch } from "redux";
-import { IDialogProps } from "shared/components/dialog/dialog";
-import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 
 import ProgramSignalPopup from "../program-signal-popup/program-signal-popup";
 import { programEditSignal } from "./services/program-edit-signal.service";

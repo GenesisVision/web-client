@@ -1,9 +1,9 @@
+import GVButton from "components/gv-button";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import useIsOpen from "shared/hooks/is-open.hook";
 
 import ConfirmClosePeriodContainer from "./confirm-close-period-container";
 

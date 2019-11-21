@@ -1,3 +1,8 @@
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { GetItemsFuncType } from "components/table/components/table.types";
+import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
+import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import {
   CancelablePromise,
   Currency,
@@ -7,18 +12,11 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
+import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { TGetChartFunc } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "shared/components/table/components/table.types";
-import {
-  mapToTableItems,
-  TableItems
-} from "shared/components/table/helpers/mapper";
-import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import assetsApi from "shared/services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
 import eventsApi from "shared/services/api-client/events-api";
@@ -29,8 +27,7 @@ import {
   CurrencyEnum,
   MiddlewareDispatch,
   TGetState
-} from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+} from "utils/types";
 
 import {
   fetchEventsAction,

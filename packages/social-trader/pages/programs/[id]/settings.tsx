@@ -1,13 +1,13 @@
-import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
-import React from "react";
-import { compose } from "redux";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import {
   dispatchProgramDescription,
   dispatchProgramId
-} from "shared/components/programs/program-details/services/program-details.service";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import withPrivateRoute from "shared/decorators/with-private-route";
-import { NextPageWithRedux } from "shared/utils/types";
+} from "pages/programs/program-details/service/program-details.service";
+import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
+import React from "react";
+import { compose } from "redux";
+import { NextPageWithRedux } from "utils/types";
 
 const ProgramSettings: NextPageWithRedux<void> = () => {
   return <ProgramSettingsPage />;

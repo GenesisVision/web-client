@@ -1,15 +1,15 @@
+import { DialogBottom } from "components/dialog/dialog-bottom";
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
+import GVButton from "components/gv-button";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
 import { FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { DialogBottom } from "shared/components/dialog/dialog-bottom";
-import { DialogButtons } from "shared/components/dialog/dialog-buttons";
-import { DialogTop } from "shared/components/dialog/dialog-top";
-import FormError from "shared/components/form/form-error/form-error";
-import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
 

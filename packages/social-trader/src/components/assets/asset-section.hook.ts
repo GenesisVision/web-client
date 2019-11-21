@@ -1,10 +1,10 @@
+import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "components/wallet/services/wallet.services";
 import { WalletData } from "gv-api-web";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { walletsSelector } from "shared/components/wallet/reducers/wallet.reducers";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
-import { fetchRate } from "shared/services/rate-service";
-import { CurrencyEnum } from "shared/utils/types";
+import { fetchRate } from "services/rate-service";
+import { CurrencyEnum } from "utils/types";
 
 type TUseAssetSectionProps = {
   assetCurrency: CurrencyEnum;

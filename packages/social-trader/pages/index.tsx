@@ -1,3 +1,3 @@
-import IndexPage from "shared/routes/ssr";
+import IndexPage from "routes/ssr";
 
 export default IndexPage;

@@ -1,19 +1,19 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import DetailsBlock from "shared/components/details/details-block";
-import GVTabs from "shared/components/gv-tabs";
-import GVTab from "shared/components/gv-tabs/gv-tab";
+import DetailsBlock from "components/details/details-block";
+import GVTabs from "components/gv-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "shared/components/table/components/table.types";
-import useTab from "shared/hooks/tab.hook";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+} from "components/table/components/table.types";
+import useTab from "hooks/tab.hook";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { CurrencyEnum } from "utils/types";
 
 import { getProgramHistoryCounts } from "../service/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";

@@ -1,14 +1,14 @@
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import Table from "components/table/components/table";
+import TableCell from "components/table/components/table-cell";
+import TableRow from "components/table/components/table-row";
 import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import Table from "shared/components/table/components/table";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
 import { humanizeDate } from "shared/utils/dates";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {

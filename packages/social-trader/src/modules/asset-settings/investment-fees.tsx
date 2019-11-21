@@ -1,17 +1,17 @@
 import FeesSettings from "components/assets/fields/fees-settings";
+import GVButton from "components/gv-button";
+import SettingsBlock from "components/settings-block/settings-block";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
-import { SetSubmittingType } from "shared/utils/types";
 import {
   entryFeeShape,
   exitFeeShape,
   successFeeShape
 } from "shared/utils/validators/validators";
+import { SetSubmittingType } from "utils/types";
 import { number, object } from "yup";
 
 const _InvestmentFees: React.FC<Props> = ({

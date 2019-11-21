@@ -1,13 +1,13 @@
 import "./fields.scss";
 
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
+import Hint from "components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import Select from "components/select/select";
+import { DELAYS } from "pages/programs/program-details/program-history-section/program-open-positions/program-open-positions";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import Hint from "shared/components/hint/hint";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
-import { DELAYS } from "shared/components/programs/program-details/program-history-section/program-open-positions/program-open-positions";
-import Select from "shared/components/select/select";
 
 import AssetField from "../asset-fields/asset-field";
 

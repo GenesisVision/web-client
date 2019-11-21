@@ -1,14 +1,14 @@
 import "./program-financial-statistic.scss";
 
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { TableCell, TableRow } from "components/table/components";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { TableCell, TableRow } from "shared/components/table/components";
 import { formatDate } from "shared/utils/dates";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _ProgramFinancialStatisticRow: React.FC<Props> = ({
   period,

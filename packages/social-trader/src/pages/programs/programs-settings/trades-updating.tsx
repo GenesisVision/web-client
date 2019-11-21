@@ -1,13 +1,13 @@
 import TradesDelay from "components/assets/fields/trades-delay";
+import GVButton from "components/gv-button";
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
 import { TradesDelay as TradesDelayType } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 const _TradesUpdating: React.FC<Props> = ({
   values,

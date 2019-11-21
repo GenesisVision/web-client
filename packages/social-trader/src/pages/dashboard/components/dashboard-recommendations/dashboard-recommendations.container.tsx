@@ -1,5 +1,6 @@
 import "./dashboard-recommendations.scss";
 
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardRecommendations from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations";
 import { getRecommendationLoaderData } from "pages/dashboard/dashboard.loaders-data";
@@ -8,9 +9,8 @@ import { getRecommendations } from "pages/dashboard/services/dashboard.service";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { tableLoaderCreator } from "shared/utils/helpers";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { tableLoaderCreator } from "utils/helpers";
 
 const _DashboardRecommendationsContainer: React.FC<Props> = ({}) => {
   const currency = useSelector(currencySelector);

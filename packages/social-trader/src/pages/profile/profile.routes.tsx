@@ -1,7 +1,5 @@
-import * as React from "react";
-import { Route, Switch } from "react-router-dom";
-import KYCPage from "shared/components/profile/kyc/kyc.page";
-import PasswordPage from "shared/components/profile/password/password.page";
+import KYCPage from "components/profile/kyc/kyc.page";
+import PasswordPage from "components/profile/password/password.page";
 import {
   KYC_ROUTE,
   PASSWORD_ROUTE,
@@ -11,11 +9,13 @@ import {
   SECURITY_ROUTE,
   SETTINGS_ROUTE,
   SOCIAL_LINKS_ROUTE
-} from "shared/components/profile/profile.constants";
-import ProfilePage from "shared/components/profile/profile/profile.page";
-import ReferralProgramPage from "shared/components/profile/referral-program/referral-program.page";
-import SecurityPage from "shared/components/profile/security/security.page";
-import SettingsPage from "shared/components/profile/settings/settings.page";
+} from "components/profile/profile.constants";
+import ProfilePage from "components/profile/profile/profile.page";
+import ReferralProgramPage from "components/profile/referral-program/referral-program.page";
+import SecurityPage from "components/profile/security/security.page";
+import SettingsPage from "components/profile/settings/settings.page";
+import * as React from "react";
+import { Route, Switch } from "react-router-dom";
 
 import ProfileEditPage from "./edit/edit.page";
 import SocialLinksPage from "./social-links/social-links.page";
