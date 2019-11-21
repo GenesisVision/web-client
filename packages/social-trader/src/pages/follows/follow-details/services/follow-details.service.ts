@@ -15,7 +15,7 @@ import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import brokersApi from "shared/services/api-client/brokers-api";
+import brokersApi from "services/api-client/brokers-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";

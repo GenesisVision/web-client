@@ -1,5 +1,5 @@
 import { Broker, CancelablePromise } from "gv-api-web";
-import brokersApi from "shared/services/api-client/brokers-api";
+import brokersApi from "services/api-client/brokers-api";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
