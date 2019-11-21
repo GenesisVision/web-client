@@ -1,9 +1,9 @@
-import { DETAILS_CHART_TABS } from "shared/components/details/details-statistic-section/details-chart-section/details-chart";
+import { DETAILS_CHART_TABS } from "components/details/details-statistic-section/details-chart-section/details-chart";
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
   useFundChartStateValuesCreator
-} from "shared/components/details/details-statistic-section/details.chart.helpers";
+} from "components/details/details-statistic-section/details.chart.helpers";
 
 import {
   statisticCurrencyAction,

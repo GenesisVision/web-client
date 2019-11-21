@@ -1,9 +1,9 @@
 import AssetContent from "components/assets/asset-fields/asset-content";
 import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
+import useIsOpen from "hooks/is-open.hook";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { programsInfoSelector } from "shared/reducers/platform-reducer";
+import { programsInfoSelector } from "reducers/platform-reducer";
 
 import useConvertAssetSubmit from "../convert-asset-submit.hook";
 import ConvertAssetSettings, {

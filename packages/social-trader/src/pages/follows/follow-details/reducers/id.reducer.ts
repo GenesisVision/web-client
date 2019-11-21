@@ -1,5 +1,5 @@
-import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import defaultReducer from "reducers/reducer-creators/default-reducer";
+import { RootState } from "reducers/root-reducer";
 
 import { SetFollowIdAction } from "../actions/follow-details.actions";
 import { SET_FOLLOW_ID } from "../follow-details.constants";

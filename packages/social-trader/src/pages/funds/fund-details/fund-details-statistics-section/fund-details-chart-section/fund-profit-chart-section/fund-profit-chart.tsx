@@ -1,9 +1,7 @@
+import ProfitChart, { EquityChartType } from "components/chart/profit-chart";
+import { ChartsDataType } from "components/details/details-statistic-section/details.chart.helpers";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
 import * as React from "react";
-import ProfitChart, {
-  EquityChartType
-} from "shared/components/chart/profit-chart";
-import { ChartsDataType } from "shared/components/details/details-statistic-section/details.chart.helpers";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
 

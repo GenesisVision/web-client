@@ -1,5 +1,5 @@
+import apiReducerFactory from "reducers/reducer-creators/api-reducer";
 import { combineReducers } from "redux";
-import apiReducerFactory from "shared/reducers/reducer-creators/api-reducer";
 
 import { CREATE_FUND } from "../actions/create-fund.actions";
 

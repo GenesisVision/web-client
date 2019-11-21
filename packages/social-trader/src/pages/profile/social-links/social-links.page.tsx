@@ -1,6 +1,6 @@
+import ProfileLayout from "components/profile/profile-layout";
+import { SOCIAL_LINKS } from "components/profile/profile.constants";
 import * as React from "react";
-import ProfileLayout from "shared/components/profile/profile-layout";
-import { SOCIAL_LINKS } from "shared/components/profile/profile.constants";
 
 import SocialLinksContainer from "./components/social-links.container";
 

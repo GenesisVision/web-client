@@ -2,11 +2,11 @@ import AssetContent from "components/assets/asset-fields/asset-content";
 import useCreateAssetSubmit from "components/assets/create-asset/create-asset-submit.hook";
 import React from "react";
 import { useSelector } from "react-redux";
-import { CREATE_ASSET } from "shared/constants/constants";
 import {
   createFundInfoSelector,
   platformDataSelector
-} from "shared/reducers/platform-reducer";
+} from "reducers/platform-reducer";
+import { CREATE_ASSET } from "shared/constants/constants";
 
 import { PlatformDataLoaderData } from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";

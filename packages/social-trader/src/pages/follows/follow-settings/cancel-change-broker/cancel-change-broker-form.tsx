@@ -1,12 +1,12 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import GVButton from "components/gv-button";
+import StatisticItem from "components/statistic-item/statistic-item";
 import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import useIsOpen from "shared/hooks/is-open.hook";
 
 import { HuobiWarning } from "../change-broker/change-broker-form";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";

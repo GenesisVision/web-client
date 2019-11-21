@@ -1,13 +1,13 @@
+import { Push } from "components/link/link";
+import { fetchWallets } from "components/wallet/services/wallet.services";
+import useApiRequest from "hooks/api-request.hook";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Push } from "shared/components/link/link";
-import { fetchWallets } from "shared/components/wallet/services/wallet.services";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { CREATE_ASSET } from "shared/constants/constants";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import {
   createAsset,

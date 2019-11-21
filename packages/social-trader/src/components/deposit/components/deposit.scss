@@ -1,0 +1,19 @@
+@import "~shared/styles/_sizes";
+
+.invest-popup {
+  &__currency {
+    font-size: $font-size-small;
+    opacity: 0.5;
+    letter-spacing: 0.4px;
+  }
+
+  &__entry {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 44px;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,10 +1,10 @@
 //import { ProgramPwdUpdate } from "gv-api-web";
+import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
+import { CancelablePromise } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
-import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 // import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { CancelablePromise } from "gv-api-web";
 
 export const changePasswordTradingAccount = ({
   id,
@@ -14,7 +14,7 @@ export const changePasswordTradingAccount = ({
   model?: any;
 }): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
-  return   new CancelablePromise<void>(() => {});
+  return new CancelablePromise<void>(() => {});
   // return managerApi
   //   .changeProgramPassword(id, authorization, { model })
   //   .then(() => {

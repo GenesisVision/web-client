@@ -1,19 +1,19 @@
+import GVColors from "components/gv-styles/gv-colors";
+import PieContainer from "components/pie-container/pie-container";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import StatisticItem from "components/statistic-item/statistic-item";
+import {
+  $pieAvailableColor,
+  $piePendingColor
+} from "components/wallet/components/wallet-balance/wallet-balance-elements";
+import { withBlurLoader } from "decorators/with-blur-loader";
+import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVColors from "shared/components/gv-styles/gv-colors";
-import PieContainer from "shared/components/pie-container/pie-container";
-import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import {
-  $pieAvailableColor,
-  $piePendingColor
-} from "shared/components/wallet/components/wallet-balance/wallet-balance-elements";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import WalletDeposit from "shared/modules/wallet-deposit/wallet-deposit";
-import { getPercentageValue } from "shared/utils/helpers";
-import { CurrencyEnum } from "shared/utils/types";
+import { getPercentageValue } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
 

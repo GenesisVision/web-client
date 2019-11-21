@@ -1,21 +1,21 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import { ReallocationModel } from "gv-api-web";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import { FUND_REALLOCATE_HISTORY_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   FilteringType,
   SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
-import TableCell from "shared/components/table/components/table-cell";
-import TableContainer from "shared/components/table/components/table-container";
-import TableRow from "shared/components/table/components/table-row";
-import { UpdateFilterFunc } from "shared/components/table/components/table.types";
+} from "components/table/components/filtering/filter.type";
+import TableCell from "components/table/components/table-cell";
+import TableContainer from "components/table/components/table-container";
+import TableRow from "components/table/components/table-row";
+import { UpdateFilterFunc } from "components/table/components/table.types";
+import { ReallocationModel } from "gv-api-web";
+import { FUND_REALLOCATE_HISTORY_COLUMNS } from "pages/funds/fund-details/fund-details.constants";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { formatDate } from "shared/utils/dates";
 
 import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";

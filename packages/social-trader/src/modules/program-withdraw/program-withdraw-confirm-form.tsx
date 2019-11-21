@@ -1,17 +1,17 @@
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogList } from "components/dialog/dialog-list";
+import { DialogListItem } from "components/dialog/dialog-list-item";
+import FormError from "components/form/form-error/form-error";
+import GVButton from "components/gv-button";
 import { InjectedFormikProps, withFormik } from "formik";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import { DialogButtons } from "shared/components/dialog/dialog-buttons";
-import { DialogList } from "shared/components/dialog/dialog-list";
-import { DialogListItem } from "shared/components/dialog/dialog-list-item";
-import FormError from "shared/components/form/form-error/form-error";
-import GVButton from "shared/components/gv-button";
-import useApiRequest from "shared/hooks/api-request.hook";
 import { formatDate } from "shared/utils/dates";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { SetSubmittingType } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { SetSubmittingType } from "utils/types";
 
 import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
 import { withdrawProgramById } from "./services/program-withdraw.services";

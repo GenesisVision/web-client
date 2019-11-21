@@ -1,5 +1,6 @@
-import "shared/components/dashboard/dashboard.scss";
+import "components/dashboard/dashboard.scss";
 
+import Page from "components/page/page";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
 import DashboardPublic from "pages/dashboard/components/dashboard-trading/dashboard-public";
@@ -7,7 +8,6 @@ import DashboardTradingTotalContainer from "pages/dashboard/components/dashboard
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Page from "shared/components/page/page";
 
 const _TradingPage: React.FC = () => {
   const [t] = useTranslation();

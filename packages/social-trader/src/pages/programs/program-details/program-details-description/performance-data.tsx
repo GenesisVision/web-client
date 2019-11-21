@@ -1,22 +1,22 @@
+import Leverage from "components/leverage/leverage";
+import PieContainerSmall from "components/pie-container/pie-container-small";
+import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import StatisticItem from "components/statistic-item/statistic-item";
+import StatisticItemLoader from "components/statistic-item/statistic-item.loader";
+import StatisticItemTextLoader from "components/statistic-item/statistic-item.txt-loader";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "decorators/with-blur-loader";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import Leverage from "shared/components/leverage/leverage";
-import PieContainerSmall from "shared/components/pie-container/pie-container-small";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
-import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import StatisticItemLoader from "shared/components/statistic-item/statistic-item.loader";
-import StatisticItemTextLoader from "shared/components/statistic-item/statistic-item.txt-loader";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
+import filesService from "services/file-service";
 import { STATUS } from "shared/constants/constants";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
-import filesService from "shared/services/file-service";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomInteger } from "utils/helpers";
 
 const _PerformanceData: React.FC<Props> = ({
   programDescription,

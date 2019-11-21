@@ -1,0 +1,25 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.profile-avatar {
+  @include transition(background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  border-radius: 100%;
+  overflow: hidden;
+  background-color: $secondary-color;
+  object-fit: cover;
+  box-shadow: $box-shadow-1;
+
+  &__image {
+    width: 100%;
+    height: auto;
+
+    &--default {
+      height: 40%;
+    }
+  }
+}

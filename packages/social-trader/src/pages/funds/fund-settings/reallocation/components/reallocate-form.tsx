@@ -1,19 +1,19 @@
 import "../reallocate.scss";
 
+import FormError from "components/form/form-error/form-error";
+import GVButton from "components/gv-button";
+import GVFormikField from "components/gv-formik-field";
+import StatisticItem from "components/statistic-item/statistic-item";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
 import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import FormError from "shared/components/form/form-error/form-error";
-import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { PlatformAssetFull, SetSubmittingType } from "shared/utils/types";
+import { PlatformAssetFull, SetSubmittingType } from "utils/types";
 import { object } from "yup";
 
 import ConfirmReallocate from "./confirm-reallocate";

@@ -1,8 +1,8 @@
 import "./trades.scss";
 
+import Page from "components/page/page";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Page from "shared/components/page/page";
 
 const _Mt4: React.FC = () => {
   const [t] = useTranslation();

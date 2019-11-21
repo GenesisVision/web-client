@@ -1,12 +1,12 @@
+import { IImageValue } from "components/form/input-image/input-image";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
+import filesService from "services/file-service";
 import { ASSET } from "shared/constants/constants";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 // import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import filesService from "shared/services/file-service";
-import { ManagerThunk, ResponseError } from "shared/utils/types";
+import { ManagerThunk, ResponseError } from "utils/types";
 
 export const cancelChangeBrokerMethod = (
   programId: string

@@ -1,17 +1,17 @@
 import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "components/chart/chart-period/chart-period.helpers";
+import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
+import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
+import { FilteringType } from "components/table/components/filtering/filter.type";
+import {
   FundBalanceChart,
   FundDetailsFull,
   ItemsViewModelReallocationModel
 } from "gv-api-web";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
-import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
-import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import fundsApi from "shared/services/api-client/funds-api";
-import { ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
   FETCH_FUND_BALANCE_CHART,

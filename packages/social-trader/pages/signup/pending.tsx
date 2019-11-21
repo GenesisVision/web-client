@@ -1,4 +1,4 @@
 import React from "react";
-import { SignUpPending } from "shared/routes/ssr/signup/pending";
+import { SignUpPending } from "routes/ssr/signup/pending";
 
 export default SignUpPending;

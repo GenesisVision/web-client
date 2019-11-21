@@ -1,25 +1,25 @@
 import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "components/chart/chart-period/chart-period.helpers";
+import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
+import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
+import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import {
   CancelablePromise,
   InvestmentEventViewModels,
   ProgramBalanceChart,
   ProgramDetailsFull,
   ProgramPeriodsViewModel,
-  ProgramProfitCharts,
+  ProgramProfitPercentCharts,
   ProgramsLevelsInfo,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import {
-  ChartDefaultPeriod,
-  getDefaultPeriod
-} from "shared/components/chart/chart-period/chart-period.helpers";
-import { TStatisticCurrencyAction } from "shared/components/details/reducers/statistic-currency.reducer";
-import { TStatisticPeriodAction } from "shared/components/details/reducers/statistic-period.reducer";
-import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
-import { ActionType, ApiAction, CurrencyEnum } from "shared/utils/types";
+import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
   FETCH_LEVEL_PARAMETERS,
@@ -40,7 +40,6 @@ import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
 } from "../service/program-details.service";
-
 
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
@@ -72,7 +71,7 @@ export const fetchProgramProfitChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currencies: CurrencyEnum[]
-): ApiAction<ProgramProfitCharts> => ({
+): ApiAction<ProgramProfitPercentCharts> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
   payload: programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: period.start,

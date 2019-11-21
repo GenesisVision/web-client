@@ -1,5 +1,5 @@
-import statisticPeriodReducerCreator from "shared/components/details/reducers/statistic-period.reducer";
-import { fieldSelector } from "shared/utils/selectors";
+import statisticPeriodReducerCreator from "components/details/reducers/statistic-period.reducer";
+import { fieldSelector } from "utils/selectors";
 
 import { SET_PROGRAM_STATISTIC_PERIOD } from "../program-details.constants";
 

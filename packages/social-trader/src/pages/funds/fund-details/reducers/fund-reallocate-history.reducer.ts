@@ -1,13 +1,13 @@
+import { tableSelectorCreator } from "components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import tableReducerFactory, {
+  ITableState
+} from "components/table/reducers/table.reducer";
 import {
   InvestmentEventViewModels,
   ItemsViewModelReallocationModel
 } from "gv-api-web";
-import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import tableReducerFactory, {
-  ITableState
-} from "shared/components/table/reducers/table.reducer";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { RootState } from "reducers/root-reducer";
 
 import {
   FUND_REALLOCATE_HISTORY,

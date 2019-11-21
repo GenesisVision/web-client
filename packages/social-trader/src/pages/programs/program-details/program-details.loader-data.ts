@@ -1,13 +1,13 @@
-import faker from "faker";
-import { LevelsParamsInfo } from "gv-api-web";
 import {
   amountWithCurrencyLoaderData,
   managerLoaderData,
   mockDate
-} from "shared/components/details/details.loader-data";
-import { TChartCurrency } from "shared/modules/chart-currency-selector/chart-currency-selector";
-import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
-import { CurrencyEnum } from "shared/utils/types";
+} from "components/details/details.loader-data";
+import faker from "faker";
+import { LevelsParamsInfo } from "gv-api-web";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }

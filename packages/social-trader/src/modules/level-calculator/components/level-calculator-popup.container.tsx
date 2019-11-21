@@ -1,7 +1,7 @@
 import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
+import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
 
 import {
   getPlatformLevels,

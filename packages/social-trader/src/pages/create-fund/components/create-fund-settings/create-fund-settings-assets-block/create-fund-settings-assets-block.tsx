@@ -1,15 +1,15 @@
 import "../create-fund-settings.scss";
 
+import AddButton from "components/add-button/add-button";
 import AssetRow from "components/assets/asset-fields/asset-row";
-import React, { MouseEventHandler, useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import AddButton from "shared/components/add-button/add-button";
-import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
-import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
+import FundAssetRatio from "components/fund-asset-ratio/fund-asset-ratio";
+import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
-} from "shared/components/fund-asset/fund-asset-container";
-import { PlatformAssetFull } from "shared/utils/types";
+} from "components/fund-asset/fund-asset-container";
+import React, { MouseEventHandler, useCallback, useState } from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { PlatformAssetFull } from "utils/types";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   touched,

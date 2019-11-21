@@ -1,4 +1,4 @@
 import React from "react";
-import { Profile } from "shared/routes/ssr/profile";
+import { Profile } from "routes/ssr/profile";
 
 export default Profile;

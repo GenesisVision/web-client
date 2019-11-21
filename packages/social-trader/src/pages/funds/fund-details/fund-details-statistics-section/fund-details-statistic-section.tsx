@@ -1,8 +1,8 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
+import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
 
 import { fundStatisticDataLoaderData } from "../fund-details.loader-data";
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";

@@ -1,13 +1,13 @@
 import "./download-button.scss";
 
+import DownloadButton from "components/download-button/download-button";
+import { DateRangeFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import dayjs from "dayjs";
 import { saveAs } from "file-saver";
 import * as React from "react";
 import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import DownloadButton from "shared/components/download-button/download-button";
-import { DateRangeFilterType } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import filesService from "shared/services/file-service";
+import filesService from "services/file-service";
 
 const _DownloadButtonToolbarAuth: React.FC<Props> = ({
   t,

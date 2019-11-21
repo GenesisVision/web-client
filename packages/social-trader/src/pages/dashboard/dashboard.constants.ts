@@ -1,9 +1,9 @@
-import React from "react";
 import {
   ACTION_STATUS_FILTER_DEFAULT_VALUE,
   ACTION_STATUS_FILTER_NAME
-} from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
+} from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
+import React from "react";
 
 export const DASHBOARD_PUBLIC_FILTERING = {
   [ACTION_STATUS_FILTER_NAME]: ACTION_STATUS_FILTER_DEFAULT_VALUE

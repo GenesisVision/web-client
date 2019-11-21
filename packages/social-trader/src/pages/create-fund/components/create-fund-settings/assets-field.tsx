@@ -1,10 +1,10 @@
 import AssetField from "components/assets/asset-fields/asset-field";
+import GVFormikField from "components/gv-formik-field";
 import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import GVFormikField from "shared/components/gv-formik-field";
-import { fundAssetsSelector } from "shared/reducers/platform-reducer";
+import { fundAssetsSelector } from "reducers/platform-reducer";
 
 const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   const [t] = useTranslation();

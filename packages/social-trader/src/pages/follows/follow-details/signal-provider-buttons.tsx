@@ -1,6 +1,6 @@
 import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
 import * as React from "react";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import FollowButton from "./follow-button";
 import UnFollowButton from "./unfollow-button";

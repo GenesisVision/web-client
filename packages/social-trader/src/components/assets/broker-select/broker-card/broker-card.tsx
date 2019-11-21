@@ -1,10 +1,10 @@
 import "./broker-card.scss";
 
 import classnames from "classnames";
+import TagBrokerContainer from "components/tags/tag-broker-container/tag-broker-container";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import TagBrokerContainer from "shared/components/tags/tag-broker-container/tag-broker-container";
-import filesService from "shared/services/file-service";
+import filesService from "services/file-service";
 
 import BrokerCardAdornment from "./broker-card-adornment";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";

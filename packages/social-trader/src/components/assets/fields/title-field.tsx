@@ -1,9 +1,9 @@
 import "./fields.scss";
 
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
+import GVTextField from "components/gv-text-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import GVTextField from "shared/components/gv-text-field";
 
 import AssetField from "../asset-fields/asset-field";
 

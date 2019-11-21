@@ -1,11 +1,11 @@
 import "./dashboard-trading.scss";
 
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { currencySelector } from "reducers/account-settings-reducer";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
 import { TDashboardTradingStatistic } from "../../dashboard.types";

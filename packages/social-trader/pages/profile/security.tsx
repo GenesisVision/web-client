@@ -1,4 +1,4 @@
 import React from "react";
-import { Security } from "shared/routes/ssr/profile/security";
+import { Security } from "routes/ssr/profile/security";
 
 export default Security;

@@ -1,6 +1,6 @@
+import { getWalletBaseLoaderData } from "components/wallet/components/wallet-loader";
 import faker from "faker";
-import { getWalletBaseLoaderData } from "shared/components/wallet/components/wallet-loader";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomInteger } from "utils/helpers";
 
 import { FundWithdrawInfoResponse } from "./fund-withdraw.types";
 

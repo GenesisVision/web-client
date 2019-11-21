@@ -1,7 +1,7 @@
+import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
+import FundAssetList from "components/fund-asset-list/fund-asset-list";
+import FundAssetRatio from "components/fund-asset-ratio/fund-asset-ratio";
 import * as React from "react";
-import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
-import FundAssetList from "shared/components/fund-asset-list/fund-asset-list";
-import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 
 const FundProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
   if (!active || !payload.length) return null;

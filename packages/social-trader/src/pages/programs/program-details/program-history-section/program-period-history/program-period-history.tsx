@@ -1,26 +1,26 @@
 import classNames from "classnames";
-import { ProgramPeriodViewModel } from "gv-api-web";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import Popover from "shared/components/popover/popover";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { TableCell, TableRow } from "shared/components/table/components";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "shared/components/table/components/table-container";
+import Popover from "components/popover/popover";
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { TableCell, TableRow } from "components/table/components";
+import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "shared/components/table/components/table.types";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import withLoader from "shared/decorators/with-loader";
-import useAnchor, { TAnchor } from "shared/hooks/anchor.hook";
-import filesService from "shared/services/file-service";
+} from "components/table/components/table.types";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import withLoader from "decorators/with-loader";
+import { ProgramPeriodViewModel } from "gv-api-web";
+import useAnchor, { TAnchor } from "hooks/anchor.hook";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
+import filesService from "services/file-service";
 import { formatDate, humanizeDate } from "shared/utils/dates";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";

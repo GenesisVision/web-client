@@ -1,8 +1,8 @@
+import FeeCommission from "components/fee-commission/fee-commission";
+import FeesTooltip from "components/fees-tooltip/fees-tooltip";
 import { SignalSubscriber } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import FeeCommission from "shared/components/fee-commission/fee-commission";
-import FeesTooltip from "shared/components/fees-tooltip/fees-tooltip";
 
 const _SubscriptionsFeesTooltip: React.FC<Props> = ({
   t,

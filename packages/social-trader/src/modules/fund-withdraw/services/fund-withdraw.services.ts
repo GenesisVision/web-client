@@ -1,7 +1,7 @@
 import {
   FundWithdraw,
   FundWithdrawInfoResponse
-} from "shared/components/fund-withdraw/fund-withdraw.types";
+} from "components/fund-withdraw/fund-withdraw.types";
 import { FUND_CURRENCY } from "shared/constants/constants";
 import investmentsApi from "shared/services/api-client/investments-api";
 import walletApi from "shared/services/api-client/wallet-api";

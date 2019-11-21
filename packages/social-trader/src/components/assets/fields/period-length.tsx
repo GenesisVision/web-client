@@ -1,8 +1,8 @@
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
+import Select from "components/select/select";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import Select from "shared/components/select/select";
 
 import AssetField from "../asset-fields/asset-field";
 

@@ -1,19 +1,19 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
+import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
+import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import Tooltip from "components/tooltip/tooltip";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramChartStatistic } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsStatisticsElements from "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import Tooltip from "shared/components/tooltip/tooltip";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps

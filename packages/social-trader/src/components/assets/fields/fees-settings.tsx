@@ -2,10 +2,10 @@ import "./fields.scss";
 
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import GVNumberField from "components/gv-number-field/gv-number-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVNumberField from "shared/components/gv-number-field/gv-number-field";
-import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { allowValuesNumberFormat } from "utils/helpers";
 
 import AssetField from "../asset-fields/asset-field";
 

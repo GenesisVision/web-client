@@ -1,8 +1,8 @@
 import "components/assets/create-asset/create-asset.scss";
 
+import Page from "components/page/page";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import Page from "shared/components/page/page";
 
 import CreateFundContainer from "./components/create-fund.container";
 

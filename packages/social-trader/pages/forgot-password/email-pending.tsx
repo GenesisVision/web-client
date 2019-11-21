@@ -1,4 +1,4 @@
 import React from "react";
-import { EmailPending } from "shared/routes/ssr/forgot-password/email-pending";
+import { EmailPending } from "routes/ssr/forgot-password/email-pending";
 
 export default EmailPending;

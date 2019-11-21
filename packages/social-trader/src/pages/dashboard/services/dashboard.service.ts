@@ -1,3 +1,8 @@
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import dashboardFundsTableSelector from "components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
+import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import {
   CancelablePromise,
   DashboardAssetChart,
@@ -18,20 +23,15 @@ import {
   TDashboardTradingStatistic,
   TTrading
 } from "pages/dashboard/dashboard.types";
-import { ManagerRootState } from "reducers";
+import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { AuthRootState } from "reducers";
 import { Dispatch } from "redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
-import { EVENT_LOCATION } from "shared/components/programs/program-details/services/program-details.service";
-import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import { composeRequestFiltersByTableState } from "shared/components/table/services/table.service";
 import { IDataModel } from "shared/constants/constants";
 import dashboardApi from "shared/services/api-client/dashboard-api";
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
-import { ActionType, CurrencyEnum } from "shared/utils/types";
+import { ActionType, CurrencyEnum } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
@@ -186,7 +186,7 @@ export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
 
 export const getAssetsCounts = () => (
   dispatch: Dispatch,
-  getState: () => ManagerRootState
+  getState: () => AuthRootState
 ) => {
   const commonFiltering = { take: 0 };
 

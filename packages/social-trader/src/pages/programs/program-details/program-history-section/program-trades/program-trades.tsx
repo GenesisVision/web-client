@@ -1,19 +1,19 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import { OrderModel } from "gv-api-web";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { generateProgramTradesColumns } from "shared/components/programs/program-details/program-details.constants";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "shared/components/table/components/table-container";
+import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "shared/components/table/components/table.types";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import filesService from "shared/services/file-service";
+} from "components/table/components/table.types";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { OrderModel } from "gv-api-web";
+import { generateProgramTradesColumns } from "pages/programs/program-details/program-details.constants";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import filesService from "services/file-service";
 
 import { tradesSelector } from "../../reducers/program-history.reducer";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";

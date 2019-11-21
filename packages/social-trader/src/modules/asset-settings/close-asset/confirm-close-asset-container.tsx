@@ -1,11 +1,11 @@
+import Dialog from "components/dialog/dialog";
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
+import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
+import { RootState } from "reducers/root-reducer";
 import { bindActionCreators, compose, Dispatch } from "redux";
-import Dialog from "shared/components/dialog/dialog";
 import { ASSET } from "shared/constants/constants";
-import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
-import { SetSubmittingType } from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { SetSubmittingType } from "utils/types";
 
 import {
   closeFund,

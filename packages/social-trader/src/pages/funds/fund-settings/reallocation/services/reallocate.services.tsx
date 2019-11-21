@@ -2,10 +2,10 @@ import { CancelablePromise, FundAssetPart } from "gv-api-web";
 import {
   ALERT_ACTIONS_FIELDS,
   alertMessageActions
-} from "shared/modules/alert-message/actions/alert-message-actions";
+} from "modules/alert-message/actions/alert-message-actions";
 //import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import { MiddlewareDispatch } from "shared/utils/types";
+import { MiddlewareDispatch } from "utils/types";
 
 export const updateAssets = ({
   id,

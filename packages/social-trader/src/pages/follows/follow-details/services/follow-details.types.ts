@@ -1,9 +1,9 @@
 import {
   ProgramBalanceChart,
-  ProgramProfitCharts,
+  ProgramProfitPercentCharts,
   SimpleChart
 } from "gv-api-web";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 export type FollowDetailsStatistic = {
   trades: number;
@@ -29,6 +29,6 @@ export type FollowDetailsProfitChart = {
 
 export type FollowStatisticResult = {
   statistic: FollowDetailsStatistic;
-  profitChart: ProgramProfitCharts;
+  profitChart: ProgramProfitPercentCharts;
   balanceChart: ProgramBalanceChart;
 };

@@ -1,9 +1,9 @@
+import { Push } from "components/link/link";
+import useIsOpen from "hooks/is-open.hook";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import * as React from "react";
 import { useCallback } from "react";
-import { Push } from "shared/components/link/link";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
+import { TRADING_ROUTE } from "routes/dashboard.routes";
 
 const _TFAConfirmBlock: React.FC<Props> = ({ id }) => {
   const [

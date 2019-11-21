@@ -1,7 +1,7 @@
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
 import ConfirmClosePeriodContainer from "modules/asset-settings/close-period/confirm-close-period-container";
 import React from "react";
-import GVButton from "shared/components/gv-button";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
 
 const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({

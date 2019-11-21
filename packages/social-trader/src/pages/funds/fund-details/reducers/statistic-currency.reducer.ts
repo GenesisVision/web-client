@@ -1,11 +1,11 @@
 import statisticCurrencyReducerCreator, {
   StatisticCurrencyState
-} from "shared/components/details/reducers/statistic-currency.reducer";
-import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
+} from "components/details/reducers/statistic-currency.reducer";
+import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import { RootState } from "reducers/root-reducer";
 import { getCookie } from "shared/utils/cookie";
-import { fieldSelector } from "shared/utils/selectors";
-import { CurrencyEnum } from "shared/utils/types";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+import { fieldSelector } from "utils/selectors";
+import { CurrencyEnum } from "utils/types";
 
 import { SET_FUND_STATISTIC_CURRENCY } from "../fund-details.constants";
 

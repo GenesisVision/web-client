@@ -1,8 +1,8 @@
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
+import { KYC_ROUTE } from "components/profile/profile.constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import GVButton from "shared/components/gv-button";
-import Link from "shared/components/link/link";
-import { KYC_ROUTE } from "shared/components/profile/profile.constants";
 
 const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
   t,

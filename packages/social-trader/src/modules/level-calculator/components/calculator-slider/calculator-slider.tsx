@@ -1,11 +1,11 @@
 import "./calculator-slider.scss";
 
 import classnames from "classnames";
+import GVTextField from "components/gv-text-field";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import GVTextField from "shared/components/gv-text-field";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
 
 class _CalculatorSlider extends React.PureComponent<Props> {
   marks = {
@@ -49,6 +49,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
 
   render() {
     const {
+      name,
       value,
       min,
       max,

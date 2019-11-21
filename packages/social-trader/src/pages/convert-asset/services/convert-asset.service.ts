@@ -6,9 +6,9 @@ import {
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
 } from "gv-api-web";
+import filesService from "services/file-service";
 import assetsApi from "shared/services/api-client/assets-api";
 import authService from "shared/services/auth-service";
-import filesService from "shared/services/file-service";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";

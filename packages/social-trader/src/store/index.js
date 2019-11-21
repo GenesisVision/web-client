@@ -1,18 +1,18 @@
+import apiErrorHandlerMiddleware from "middlewares/api-error-handler-middleware/api-error-handler-middleware";
+import clearOnceMetaMiddleware from "middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
+import gtmMiddleware from "middlewares/gtm-middleware/gtm-middleware";
+import refreshTokenMiddleware from "middlewares/refresh-token-middleware/refresh-token-middleware";
+import { updateAccountCurrencyMiddleware } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import {
+  FAILURE_SUFFIX,
+  REQUEST_SUFFIX,
+  SUCCESS_SUFFIX
+} from "reducers/reducer-creators/api-reducer";
 import { applyMiddleware, createStore } from "redux";
 import debounceMiddleware from "redux-debounced";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
-import apiErrorHandlerMiddleware from "shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
-import clearOnceMetaMiddleware from "shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
-import gtmMiddleware from "shared/middlewares/gtm-middleware/gtm-middleware";
-import refreshTokenMiddleware from "shared/middlewares/refresh-token-middleware/refresh-token-middleware";
-import { updateAccountCurrencyMiddleware } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
-import {
-  FAILURE_SUFFIX,
-  REQUEST_SUFFIX,
-  SUCCESS_SUFFIX
-} from "shared/reducers/reducer-creators/api-reducer";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 

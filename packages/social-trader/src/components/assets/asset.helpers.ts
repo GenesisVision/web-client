@@ -1,6 +1,6 @@
 import faker from "faker";
 import { Broker, BrokerAccountType } from "gv-api-web";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import { BROKER_CARD_EXTRA_STATE } from "./asset.constants";
 

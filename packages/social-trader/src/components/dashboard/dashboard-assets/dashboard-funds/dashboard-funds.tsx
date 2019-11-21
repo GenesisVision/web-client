@@ -1,0 +1,197 @@
+import "./dashboard-funds.scss";
+
+import AssetStatus from "components/asset-status/asset-status";
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "components/table/components/filtering/filter.type";
+import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
+import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
+import TableCell from "components/table/components/table-cell";
+import TableContainer from "components/table/components/table-container";
+import TableRow from "components/table/components/table-row";
+import {
+  Column,
+  GetItemsFuncActionType,
+  UpdateFilterFunc
+} from "components/table/components/table.types";
+import useRole from "hooks/use-role.hook";
+import { fundListLoaderData } from "modules/funds-table/components/funds-table/fund-table.loader-data";
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
+import { FUND, FUND_CURRENCY } from "shared/constants/constants";
+import { composeFundsDetailsUrl } from "utils/compose-url";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
+
+import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
+import {
+  ACTION_STATUS_FILTER_NAME,
+  ACTION_STATUS_FILTER_VALUES
+} from "../dashboard-programs/dashboard-programs.helpers";
+import dashboardFundsTableSelector from "./dashboard-funds.selector";
+
+const _DashboardFunds: React.FC<Props> = ({
+  onChangeStatus,
+  getDashboardFunds,
+  createButtonToolbar,
+  createFund,
+  title
+}) => {
+  const [t] = useTranslation();
+  const role = useRole();
+  return (
+    <TableContainer
+      loaderData={fundListLoaderData}
+      createButtonToolbar={createButtonToolbar}
+      emptyMessage={createFund}
+      getItems={getDashboardFunds}
+      dataSelector={dashboardFundsTableSelector}
+      isFetchOnMount={true}
+      columns={DASHBOARD_FUNDS_COLUMNS}
+      renderFilters={(
+        updateFilter: UpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
+        <>
+          <SelectFilter
+            name={ACTION_STATUS_FILTER_NAME}
+            label={t(
+              `${
+                role ? `${role}.` : ""
+              }dashboard-page.actions-status-filter.label`
+            )}
+            value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+            values={ACTION_STATUS_FILTER_VALUES}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        </>
+      )}
+      renderHeader={(column: Column) => (
+        <span
+          className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${column.name}`}
+        >
+          {t(
+            `${role ? `${role}.` : ""}dashboard-page.funds-header.${
+              column.name
+            }`
+          )}
+        </span>
+      )}
+      renderBodyRow={(fund: any) => (
+        <TableRow>
+          <TableCell className="funds-table__cell funds-table__cell--name">
+            <div className="funds-table__cell--avatar-title">
+              <Link
+                to={{
+                  pathname: FUND_DETAILS_FOLDER_ROUTE,
+                  as: composeFundsDetailsUrl(fund.url),
+                  state: `/ ${title}`
+                }}
+              >
+                <AssetAvatar
+                  url={fund.logo}
+                  alt={fund.title}
+                  color={fund.color}
+                />
+              </Link>
+              <div className="funds-table__cell--title">
+                <Link
+                  to={{
+                    pathname: FUND_DETAILS_FOLDER_ROUTE,
+                    as: composeFundsDetailsUrl(fund.url),
+                    state: `/ ${title}`
+                  }}
+                >
+                  <GVButton variant="text" color="secondary">
+                    {fund.title}
+                  </GVButton>
+                </Link>
+              </div>
+            </div>
+          </TableCell>
+          <TableCell className="funds-table__cell funds-table__cell--amount">
+            {formatCurrencyValue(fund.statistic.balance.amount, FUND_CURRENCY)}{" "}
+            {FUND_CURRENCY}
+          </TableCell>
+          <TableCell className="funds-table__cell">
+            <FundAssetContainer
+              assets={fund.topFundAssets}
+              type={FUND_ASSET_TYPE.SHORT}
+              size={3}
+              length={fund.totalAssetsCount} //TODO why we have totalAssetsCount prop?..
+            />
+          </TableCell>
+          <TableCell className="funds-table__cell funds-table__cell--value">
+            <NumberFormat
+              value={formatCurrencyValue(
+                fund.personalDetails.value,
+                FUND_CURRENCY
+              )}
+              suffix={` ${FUND_CURRENCY}`}
+              displayType="text"
+            />
+          </TableCell>
+          <TableCell className="funds-table__cell funds-table__cell--drawdown">
+            <NumberFormat
+              value={formatValue(fund.statistic.drawdownPercent, 2)}
+              suffix="%"
+              displayType="text"
+            />
+          </TableCell>
+          <TableCell className="funds-table__cell funds-table__cell--profit">
+            <Profitability
+              value={formatValue(fund.statistic.profitPercent, 2)}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
+                value={formatValue(fund.statistic.profitPercent, 2)}
+                suffix="%"
+                allowNegative={false}
+                displayType="text"
+              />
+            </Profitability>
+          </TableCell>
+          <TableCell className="funds-table__cell funds-table__cell--chart">
+            {fund.chart.length && (
+              <ProgramSimpleChart data={fund.chart} programId={fund.id} />
+            )}
+          </TableCell>
+          <TableCell className="programs-table__cell dashboard-programs__cell--status">
+            <AssetStatus
+              status={fund.personalDetails.status}
+              id={fund.id}
+              asset={FUND}
+              onCancel={onChangeStatus}
+            />
+          </TableCell>
+        </TableRow>
+      )}
+    />
+  );
+};
+
+interface Props {
+  title: string;
+  getDashboardFunds: GetItemsFuncActionType;
+  onChangeStatus?(): void;
+  createButtonToolbar: JSX.Element;
+  createFund: JSX.Element;
+}
+
+const DashboardFunds = React.memo(_DashboardFunds);
+export default DashboardFunds;

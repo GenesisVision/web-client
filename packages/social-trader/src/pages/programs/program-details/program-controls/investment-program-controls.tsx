@@ -1,11 +1,11 @@
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "components/details/details-block";
+import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import * as React from "react";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
-import InvestmentProgramInfo from "shared/components/details/details-description-section/investment-program-info";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentProgramControls: React.FC<Props> = ({

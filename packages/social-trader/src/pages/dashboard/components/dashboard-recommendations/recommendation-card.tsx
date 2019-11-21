@@ -1,11 +1,11 @@
+import TableCard, {
+  TableCardRow
+} from "components/table/components/table-card/table-card";
 import DepositButton from "modules/deposit/deposit.button";
 import { TRecommendation } from "pages/dashboard/dashboard.types";
 import * as React from "react";
-import TableCard, {
-  TableCardRow
-} from "shared/components/table/components/table-card/table-card";
 import { ASSET } from "shared/constants/constants";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { composeProgramDetailsUrl } from "utils/compose-url";
 
 const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
   const linkProps = {

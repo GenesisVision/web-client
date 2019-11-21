@@ -1,11 +1,7 @@
 import apiReducerFactory, {
   IApiState
-} from "shared/reducers/reducer-creators/api-reducer";
-import {
-  apiFieldSelector,
-  apiSelector,
-  fieldSelector
-} from "shared/utils/selectors";
+} from "reducers/reducer-creators/api-reducer";
+import { apiFieldSelector, apiSelector, fieldSelector } from "utils/selectors";
 
 import { FETCH_FOLLOW_DESCRIPTION } from "../follow-details.constants";
 import { FollowDetailsDataType } from "../follow-details.types";

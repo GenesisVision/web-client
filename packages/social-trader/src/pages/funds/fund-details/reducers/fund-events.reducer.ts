@@ -1,15 +1,15 @@
-import { InvestmentEventViewModels } from "gv-api-web";
 import {
   ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   ASSET_PORTFOLIO_EVENTS_FILTERS,
   EVENTS_ACTION_TYPE
-} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+} from "components/portfolio-events-table/portfolio-events-table.constants";
+import { tableSelectorCreator } from "components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
-} from "shared/components/table/reducers/table.reducer";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
+} from "components/table/reducers/table.reducer";
+import { InvestmentEventViewModels } from "gv-api-web";
+import { RootState } from "reducers/root-reducer";
 
 type TFundEventsData = InvestmentEventViewModels;
 export type TFundEventsState = ITableState<TFundEventsData>;

@@ -1,14 +1,14 @@
 import "./social-link.scss";
 
+import SocialLinkImage from "components/avatar/social-link/social-link";
+import GVButton from "components/gv-button";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
 import { FormikProps, withFormik } from "formik";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import SocialLinkImage from "shared/components/avatar/social-link/social-link";
-import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
 import { object, string } from "yup";
 
 import { TOnEditLinkSubmitFunc } from "../social-links.container";

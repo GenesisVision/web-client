@@ -1,6 +1,6 @@
+import { closePeriod } from "pages/programs/program-details/service/program-details.service";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { closePeriod } from "shared/components/programs/program-details/services/program-details.service";
 
 import ConfirmClosePeriod from "./confirm-close-period";
 

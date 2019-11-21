@@ -1,8 +1,8 @@
+import GVCheckbox from "components/gv-checkbox/gv-checkbox";
+import GVFormikField from "components/gv-formik-field";
+import withLoader from "decorators/with-loader";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
-import GVFormikField from "shared/components/gv-formik-field";
-import withLoader from "shared/decorators/with-loader";
 
 import AssetField from "../asset-fields/asset-field";
 

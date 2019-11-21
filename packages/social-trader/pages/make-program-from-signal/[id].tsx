@@ -1,13 +1,13 @@
+import platformActions from "actions/platform-actions";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import { ProgramDetailsFull } from "gv-api-web";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import ConvertAssetPage from "pages/convert-asset/convert-asset.page";
+import { dispatchProgramDescription } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
-import platformActions from "shared/actions/platform-actions";
-import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import withPrivateRoute from "shared/decorators/with-private-route";
-import { NextPageWithRedux } from "shared/utils/types";
+import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<Props, {}> = ({ id, broker }) => {
   return (

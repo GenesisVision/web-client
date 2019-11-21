@@ -1,5 +1,5 @@
+import SvgLoader from "components/svg-loader/svg-loader";
 import * as React from "react";
-import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 const SocialLinkLoader: React.FC = () => (
   <SvgLoader height={80} width={300}>

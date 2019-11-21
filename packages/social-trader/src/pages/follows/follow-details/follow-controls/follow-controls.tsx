@@ -1,6 +1,6 @@
+import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { FollowDetailsDataType } from "pages/follows/follow-details/follow-details.types";
 import * as React from "react";
-import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 
 import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";

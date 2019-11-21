@@ -1,6 +1,6 @@
+import SettingsBlock from "components/settings-block/settings-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
 
 import CloseAsset from "./close-asset/close-asset";

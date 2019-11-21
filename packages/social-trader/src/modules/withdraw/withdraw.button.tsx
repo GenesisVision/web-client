@@ -1,11 +1,11 @@
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
   const [t] = useTranslation();

@@ -1,0 +1,39 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+$tooltip-padding: 16px;
+
+.tooltip {
+  &__popover {
+    @include horizontal-paddings($tooltip-padding, $divider-text);
+    @include vertical-paddings($tooltip-padding, $divider-text);
+    color: white;
+  }
+
+  &__content {
+    font-size: 13px;
+    max-width: 400px;
+  }
+
+  &__label {
+    cursor: help;
+
+    &--cursor-pointer {
+      cursor: pointer;
+    }
+
+    &--question {
+      box-sizing: border-box;
+      border: 1px solid $text-color;
+      border-radius: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      font-size: 8px;
+      line-height: 15px;
+      color: $text-color;
+    }
+  }
+}

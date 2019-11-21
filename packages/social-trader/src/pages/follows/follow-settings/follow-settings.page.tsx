@@ -1,22 +1,22 @@
-import "shared/components/details/details.scss";
+import "components/details/details.scss";
 import "components/assets/fields/fields.scss";
 
+import { IImageValue } from "components/form/input-image/input-image";
 import { BrokersProgramInfo, TradesDelay } from "gv-api-web";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import { followDescriptionSelector } from "pages/follows/follow-details/reducers/description.reducer";
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   dispatchFollowDescription,
   getFollowBrokers
-} from "shared/components/follows/follow-details/services/follow-details.service";
-import { IImageValue } from "shared/components/form/input-image/input-image";
+} from "pages/follows/follow-details/services/follow-details.service";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { programsInfoSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
-import { programsInfoSelector } from "shared/reducers/platform-reducer";
-import { ReduxDispatch, SetSubmittingType } from "shared/utils/types";
+import { ReduxDispatch, SetSubmittingType } from "utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import FollowSettings from "./follow-settings";

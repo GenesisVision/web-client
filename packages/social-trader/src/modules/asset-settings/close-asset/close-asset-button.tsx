@@ -1,7 +1,7 @@
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 import { useTranslation } from "shared/i18n";
 
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";

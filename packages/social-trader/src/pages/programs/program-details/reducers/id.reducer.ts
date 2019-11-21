@@ -1,4 +1,4 @@
-import defaultReducer from "shared/reducers/reducer-creators/default-reducer";
+import defaultReducer from "reducers/reducer-creators/default-reducer";
 
 import { SetProgramIdAction } from "../actions/program-details.actions";
 import { SET_PROGRAM_ID } from "../program-details.constants";

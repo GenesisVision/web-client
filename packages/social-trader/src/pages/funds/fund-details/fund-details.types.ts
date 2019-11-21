@@ -1,7 +1,7 @@
+import { IDialogProps } from "components/dialog/dialog";
 import { FundDetailsFull } from "gv-api-web";
 import React from "react";
-import { IDialogProps } from "shared/components/dialog/dialog";
-import { ActionType, CurrencyEnum } from "shared/utils/types";
+import { ActionType, CurrencyEnum } from "utils/types";
 
 import { SET_FUND_ID } from "./fund-details.constants";
 import { FundIdState } from "./reducers/id.reducer";

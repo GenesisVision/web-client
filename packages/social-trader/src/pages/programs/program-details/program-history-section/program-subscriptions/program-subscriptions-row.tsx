@@ -1,15 +1,15 @@
 import classNames from "classnames";
+import AssetStatusLabel from "components/asset-status/asset-status-label";
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { TableCell, TableRow } from "components/table/components";
 import { SignalSubscriber } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
-import AssetStatusLabel from "shared/components/asset-status/asset-status-label";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { TableCell, TableRow } from "shared/components/table/components";
 import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 import SubscriptionsFeesTooltip from "./program-subscriptions-fees-tooltip";
 

@@ -1,15 +1,15 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
-import TableContainer from "shared/components/table/components/table-container";
+import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
-} from "shared/components/table/components/table.types";
-import { CurrencyEnum } from "shared/utils/types";
+} from "components/table/components/table.types";
+import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "pages/programs/program-details/program-details.constants";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { CurrencyEnum } from "utils/types";
 
 import { openPositionsSelector } from "../../reducers/program-history.reducer";
 import { TradesDelayHint } from "../trades-delay-hint";
