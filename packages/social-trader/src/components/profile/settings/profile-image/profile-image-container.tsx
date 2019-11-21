@@ -1,12 +1,12 @@
+import { IImageValue } from "components/form/input-image/input-image";
+import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
-import { fetchProfileHeaderInfoAction } from "shared/components/header/actions/header-actions";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { headerSelector } from "shared/reducers/header-reducer";
-import { SetSubmittingType } from "shared/utils/types";
+import { headerSelector } from "reducers/header-reducer";
+import { SetSubmittingType } from "utils/types";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
