@@ -13,7 +13,7 @@ import debounceMiddleware from "redux-debounced";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
-import authApi from "shared/services/api-client/auth-api";
+import authApi from "services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import rootReducer from "../reducers";

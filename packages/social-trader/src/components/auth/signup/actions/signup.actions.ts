@@ -1,5 +1,5 @@
 import { RegisterViewModel, ResendConfirmationViewModel } from "gv-api-web";
-import authApi from "shared/services/api-client/auth-api";
+import authApi from "services/api-client/auth-api";
 import { ApiAction } from "utils/types";
 
 export const SIGN_UP = "SIGN_UP";
