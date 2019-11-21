@@ -4,11 +4,11 @@ import {
   BalanceChartPoint,
   FundBalanceChart,
   FundChartStatistic,
-  FundProfitPercentCharts,
+  FundProfitCharts,
   PlatformCurrencyInfo,
   ProgramBalanceChart,
   ProgramChartStatistic,
-  ProgramProfitPercentCharts,
+  ProgramProfitCharts,
   SimpleChart
 } from "gv-api-web";
 import {
@@ -114,9 +114,7 @@ export interface TGetChartArgs {
   period?: ChartDefaultPeriod;
 }
 
-export type ProfitChartType =
-  | FundProfitPercentCharts
-  | ProgramProfitPercentCharts;
+export type ProfitChartType = FundProfitCharts | ProgramProfitCharts;
 export type ProfitChartDataType = ProfitChartType;
 export type StatisticDataType = ProgramChartStatistic | FundChartStatistic;
 export type ChartsDataType = Array<SimpleChart>;

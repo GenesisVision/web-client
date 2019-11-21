@@ -10,7 +10,7 @@ import {
   CancelablePromise,
   InvestmentEventViewModels,
   ProgramBalanceChart,
-  ProgramProfitPercentCharts,
+  ProgramProfitCharts,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
@@ -41,7 +41,7 @@ const sendFollowChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): CancelablePromise<ProgramProfitPercentCharts> =>
+): CancelablePromise<ProgramProfitCharts> =>
   // @ts-ignore
   programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: start,

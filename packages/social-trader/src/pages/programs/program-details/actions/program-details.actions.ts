@@ -12,7 +12,7 @@ import {
   ProgramBalanceChart,
   ProgramDetailsFull,
   ProgramPeriodsViewModel,
-  ProgramProfitPercentCharts,
+  ProgramProfitCharts,
   ProgramsLevelsInfo,
   SignalProviderSubscribers,
   TradesViewModel
@@ -71,7 +71,7 @@ export const fetchProgramProfitChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currencies: CurrencyEnum[]
-): ApiAction<ProgramProfitPercentCharts> => ({
+): ApiAction<ProgramProfitCharts> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
   payload: programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: period.start,
