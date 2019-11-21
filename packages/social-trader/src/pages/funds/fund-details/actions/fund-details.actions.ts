@@ -10,7 +10,7 @@ import {
   FundDetailsFull,
   ItemsViewModelReallocationModel
 } from "gv-api-web";
-import fundsApi from "shared/services/api-client/funds-api";
+import fundsApi from "services/api-client/funds-api";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
