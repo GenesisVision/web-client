@@ -9,7 +9,7 @@ import authService from "shared/services/auth-service";
 import { getRandomInteger } from "utils/helpers";
 
 export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
-  await CancelablePromise.resolve(); //managerApi.getFundInvestment(authService.getAuthArg(ctx));
+  await CancelablePromise.resolve(100); //managerApi.getFundInvestment(authService.getAuthArg(ctx));
 
 export const PlatformDataLoaderData: any = {
   programsInfo: {
