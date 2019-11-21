@@ -94,10 +94,7 @@ interface DispatchProps {
 
 const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  ),
+  connect(null, mapDispatchToProps),
   withFormik<IAboutFormOwnProps, IAboutFormValues>({
     enableReinitialize: true,
     displayName: "about-manager",
