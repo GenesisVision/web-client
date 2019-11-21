@@ -82,7 +82,7 @@ export const fetchFollowProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FollowProfitChartDataType> => ({
   type: FETCH_FOLLOW_PROFIT_CHART,
-  payload: programsApi.getProgramProfitChart(id, {
+  payload: programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
