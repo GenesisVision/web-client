@@ -1,6 +1,6 @@
+import LogoField from "components/logo-field/logo-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import LogoField from "shared/components/logo-field/logo-field";
 import { ASSET } from "shared/constants/constants";
 
 import DescriptionField from "./description-field";

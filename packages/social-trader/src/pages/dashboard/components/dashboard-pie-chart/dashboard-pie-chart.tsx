@@ -1,6 +1,6 @@
+import MultiPieContainer from "components/pie-container/multi-pie.container";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import React, { useState } from "react";
-import MultiPieContainer from "shared/components/pie-container/multi-pie.container";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
 
 const _DashboardPieChart: React.FC<Props> = ({ data }) => {
   const [overItem, setOverItem] = useState();

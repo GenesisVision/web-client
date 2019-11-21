@@ -1,0 +1,141 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$withdraw-button-height: 50px;
+$withdraw-button-width: 150px;
+$withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
+$withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
+$padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
+
+.details-investment {
+  display: flex;
+  flex-direction: column;
+  @include media-breakpoint-landscape-phone() {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .profitability--chips {
+    margin-left: $padding-xxsmall/2;
+    margin-top: -$padding-xxsmall * 2;
+  }
+
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: $padding-xxsmall;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-xsmall;
+    }
+
+    &:nth-child(2) {
+      @include media-breakpoint-landscape-tablet() {
+        margin-left: $padding-medium;
+        padding-left: $padding-medium;
+        border-left: 2px solid $separator-color;
+      }
+      @include media-breakpoint-desktop() {
+        margin-left: $padding-large;
+        padding-left: $padding-large;
+      }
+    }
+  }
+
+  &__block--investment {
+    flex: 2;
+    min-width: 100%;
+    @include media-breakpoint-landscape-tablet() {
+      min-width: initial;
+      max-width: 70%;
+    }
+  }
+  &__block--subscription {
+    flex: 1;
+
+    @include media-breakpoint-landscape-tablet() {
+      .details__short-statistic-item {
+        min-width: 45%;
+      }
+    }
+  }
+
+  &__heading {
+    font-size: $font-size-small;
+    text-transform: uppercase;
+    letter-spacing: 0.15px;
+    color: $label-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__investment-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__investment-container,
+  &__investment-tabs {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-small;
+    }
+  }
+
+  &__short-statistic {
+    .gv-switch-wrapper {
+      margin: 0;
+      .tooltip__label {
+        letter-spacing: 0.6px;
+        white-space: nowrap;
+        font-weight: 600;
+        color: $text-light-color;
+        font-size: $font-size-common-mobile;
+        @include media-breakpoint-landscape-phone() {
+          font-size: $font-size-paragraph;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    & .gv-btn {
+      width: $withdraw-button-width-mobile;
+      height: $withdraw-button-height-mobile;
+      letter-spacing: 0.3px;
+      font-size: $font-size-small-mobile;
+      font-weight: 600;
+      @include media-breakpoint-landscape-phone() {
+        width: $withdraw-button-width;
+        height: $withdraw-button-height;
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  &__withdraw-notice {
+    color: $short-statistic-notice-color;
+    line-height: $font-size-h3-mobile;
+    font-size: $font-size-small-mobile;
+    letter-spacing: 0.15px;
+    margin-left: 5%;
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-h3;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.reinvesting-widget {
+  padding-bottom: $padding-xsmall;
+  display: flex;
+  align-items: flex-end;
+}

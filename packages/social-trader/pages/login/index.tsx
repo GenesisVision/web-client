@@ -1,4 +1,4 @@
 import React from "react";
-import { Login } from "shared/routes/ssr/login";
+import { Login } from "routes/ssr/login";
 
 export default Login;

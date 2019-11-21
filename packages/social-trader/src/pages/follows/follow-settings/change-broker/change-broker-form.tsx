@@ -1,7 +1,12 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import GVButton from "components/gv-button";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
+import Select from "components/select/select";
 import { FormikProps, withFormik } from "formik";
 import { Broker, BrokerAccountType } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import {
   useTranslation,
@@ -9,12 +14,7 @@ import {
   withTranslation as translate
 } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import Select from "shared/components/select/select";
-import useIsOpen from "shared/hooks/is-open.hook";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import ConfirmChangeBroker from "./confirm-change-broker";
 

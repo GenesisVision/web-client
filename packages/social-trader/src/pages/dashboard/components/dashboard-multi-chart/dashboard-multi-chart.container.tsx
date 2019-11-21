@@ -1,16 +1,16 @@
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import MultiChart from "components/multi-chart/multi-chart";
+import { getSelectedAssets } from "components/multi-chart/service/multi-chart.service";
 import { DashboardChartAsset } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import {
   fetchAssets,
   fetchMultiChartData
 } from "pages/dashboard/services/dashboard.service";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import MultiChart from "shared/components/multi-chart/multi-chart";
-import { getSelectedAssets } from "shared/components/multi-chart/service/multi-chart.service";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { HandlePeriodChangeType } from "shared/utils/types";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { HandlePeriodChangeType } from "utils/types";
 
 const _DashboardMultiChartContainer: React.FC<Props> = ({
   period,

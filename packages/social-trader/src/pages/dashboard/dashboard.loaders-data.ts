@@ -1,3 +1,5 @@
+import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
+import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import * as faker from "faker";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
@@ -6,10 +8,8 @@ import {
   TDashboardTradingStatistic,
   TRecommendation
 } from "pages/dashboard/dashboard.types";
-import { getEquityChartLoaderData } from "shared/components/multi-chart/service/multi-chart.service";
-import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
-import { getRandomInteger, tableLoaderCreator } from "shared/utils/helpers";
+import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 
 export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
   ({

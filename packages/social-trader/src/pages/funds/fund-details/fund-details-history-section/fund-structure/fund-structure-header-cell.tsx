@@ -1,9 +1,9 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
 import classNames from "classnames";
+import { SortingColumn } from "components/table/components/filtering/filter.type";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 export const _FundStructureHeaderCell: React.FC<
   WithTranslation & {

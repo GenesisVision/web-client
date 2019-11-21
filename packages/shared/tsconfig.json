@@ -21,7 +21,7 @@
   },
   "include": [
     "./",
-    "decorators/with-redux-store.tsx"
+    "../social-trader/src/decorators/with-redux-store.tsx"
   ],
   "files": [
     "../../node_modules/gv-api-web/distribution/types.d.ts"

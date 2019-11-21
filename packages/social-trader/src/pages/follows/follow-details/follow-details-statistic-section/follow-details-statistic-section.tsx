@@ -1,12 +1,12 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
+import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import ProgramBalanceChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-balance-chart-section/program-balance-chart";
+import ProgramProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
-import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
-import ProgramBalanceChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-balance-chart-section/program-balance-chart";
-import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "utils/formatter";
 
 import { statisticDataLoaderData } from "../follow-details.loader-data";
 import { followBalanceChartSelector } from "../reducers/balance-chart.reducer";

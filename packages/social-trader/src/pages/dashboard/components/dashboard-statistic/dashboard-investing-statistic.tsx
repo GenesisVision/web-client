@@ -1,14 +1,14 @@
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import GVButton from "shared/components/gv-button";
-import Link from "shared/components/link/link";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
-import { INVESTMENTS_ROUTE } from "shared/routes/dashboard.routes";
-import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "shared/routes/invest.routes";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { INVESTMENTS_ROUTE } from "routes/dashboard.routes";
+import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "routes/invest.routes";
 
 import { getTotalInvestingStatistic } from "../../services/dashboard.service";
 

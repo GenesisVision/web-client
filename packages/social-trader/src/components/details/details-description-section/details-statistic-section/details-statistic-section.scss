@@ -1,0 +1,15 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.details-statistic-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.recharts-text {
+  font-size: $font-size-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    font-size: $font-size-small;
+  }
+}

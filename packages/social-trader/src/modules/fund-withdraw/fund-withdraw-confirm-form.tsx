@@ -1,13 +1,13 @@
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import FormError from "components/form/form-error/form-error";
+import GVButton from "components/gv-button";
 import { InjectedFormikProps, withFormik } from "formik";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import { DialogButtons } from "shared/components/dialog/dialog-buttons";
-import FormError from "shared/components/form/form-error/form-error";
-import GVButton from "shared/components/gv-button";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { formatValue } from "shared/utils/formatter";
-import { SetSubmittingType } from "shared/utils/types";
+import { formatValue } from "utils/formatter";
+import { SetSubmittingType } from "utils/types";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 import { withdrawFund } from "./services/fund-withdraw.services";

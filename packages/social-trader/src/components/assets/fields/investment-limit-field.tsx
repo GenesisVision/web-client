@@ -1,12 +1,12 @@
 import AssetField from "components/assets/asset-fields/asset-field";
+import GVCheckbox from "components/gv-checkbox/gv-checkbox";
+import GVFormikField from "components/gv-formik-field";
+import InputAmountField from "components/input-amount-field/input-amount-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
-import GVFormikField from "shared/components/gv-formik-field";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { validateFraction } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { validateFraction } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const isAmountAllow = (currency: CurrencyEnum) => ({
   value

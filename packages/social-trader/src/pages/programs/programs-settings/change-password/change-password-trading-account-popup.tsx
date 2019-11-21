@@ -1,9 +1,9 @@
+import Dialog, { IDialogProps } from "components/dialog/dialog";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { twoFactorEnabledSelector } from "shared/reducers/2fa-reducer";
-import { SetSubmittingType } from "shared/utils/types";
+import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
+import { SetSubmittingType } from "utils/types";
 
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues

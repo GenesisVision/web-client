@@ -1,8 +1,8 @@
+import StatisticItem from "components/statistic-item/statistic-item";
 import React from "react";
 import NumberFormat from "react-number-format";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _DashboardValueItem: React.FC<Props> = ({ value, label, currency }) => {
   return (

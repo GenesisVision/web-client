@@ -1,5 +1,5 @@
+import clearableReducer from "reducers/clearable.reducer";
 import { combineReducers } from "redux";
-import clearableReducer from "shared/reducers/clearable.reducer";
 
 import { fundEventsReducer, TFundEventsState } from "./fund-events.reducer";
 import fundReallocateHistoryReducer, {

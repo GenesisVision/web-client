@@ -1,9 +1,9 @@
 import "./asset-edit.scss";
 
+import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
 import { TwoFactorAuthenticator } from "gv-api-web";
 import * as React from "react";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import ConfirmForm, { IConfirmFormValues } from "./confirm-form";
 

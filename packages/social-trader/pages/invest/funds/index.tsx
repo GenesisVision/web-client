@@ -1,4 +1,4 @@
 import React from "react";
-import { Funds } from "shared/routes/ssr/funds";
+import { Funds } from "routes/ssr/funds";
 
 export default Funds;

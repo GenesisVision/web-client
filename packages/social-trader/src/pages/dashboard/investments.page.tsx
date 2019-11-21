@@ -1,7 +1,7 @@
-import "shared/components/dashboard/dashboard.scss";
+import "components/dashboard/dashboard.scss";
 
+import Page from "components/page/page";
 import React from "react";
-import Page from "shared/components/page/page";
 
 const _InvestmentsPage: React.FC = () => {
   return <Page title={""}>Investment</Page>;

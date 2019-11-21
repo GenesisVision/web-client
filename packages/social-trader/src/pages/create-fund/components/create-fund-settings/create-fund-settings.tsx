@@ -1,4 +1,4 @@
-import "shared/components/deposit-details/deposit-details.scss";
+import "components/deposit-details/deposit-details.scss";
 import "./create-fund-settings.scss";
 
 import useAssetValidate from "components/assets/asset-validate.hook";
@@ -6,19 +6,19 @@ import CreateAssetNavigation from "components/assets/fields/create-asset-navigat
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
+import { IImageValue } from "components/form/input-image/input-image";
+import SettingsBlock from "components/settings-block/settings-block";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "decorators/with-blur-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import { FundCreateAssetPlatformInfo } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
-import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
 import { AssetsField } from "./assets-field";

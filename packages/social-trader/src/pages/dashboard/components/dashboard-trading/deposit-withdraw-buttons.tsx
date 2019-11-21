@@ -1,9 +1,9 @@
+import { TableCardRow } from "components/table/components/table-card/table-card";
 import DepositButton from "modules/deposit/deposit.button";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
-import { TableCardRow } from "shared/components/table/components/table-card/table-card";
 import { ASSET } from "shared/constants/constants";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
   canWithdraw,

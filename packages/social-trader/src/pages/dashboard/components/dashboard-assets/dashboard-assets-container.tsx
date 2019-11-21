@@ -1,21 +1,21 @@
+import DashboardAssets from "components/dashboard/dashboard-assets/dashboard-assets";
+import dashboardFundsTableSelector from "components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
+import dashboardProgramsTableSelector from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
+import GVButton from "components/gv-button";
+import { ChartIcon } from "components/icon/chart-icon";
+import Link from "components/link/link";
+import useRole from "hooks/use-role.hook";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
+import { RootState } from "reducers/root-reducer";
 import {
   ActionCreatorsMapObject,
   bindActionCreators,
   compose,
   Dispatch
 } from "redux";
-import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
-import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
-import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
-import GVButton from "shared/components/gv-button";
-import { ChartIcon } from "shared/components/icon/chart-icon";
-import Link from "shared/components/link/link";
-import useRole from "shared/hooks/use-role.hook";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";

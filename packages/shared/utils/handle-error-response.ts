@@ -1,7 +1,10 @@
 import { ErrorViewModel } from "gv-api-web";
 import authService from "shared/services/auth-service";
 
-import { ResponseError } from "./types";
+export type ResponseError = {
+  errorMessage: string;
+  code: string;
+};
 
 export const SERVER_CONNECTION_ERROR_CODE = "ServerConnectionError";
 interface IResponse {

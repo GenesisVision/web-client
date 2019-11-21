@@ -1,10 +1,10 @@
 import "./dashboard-block.scss";
 
 import classNames from "classnames";
+import DetailsBlock from "components/details/details-block";
+import Link from "components/link/link";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import DetailsBlock from "shared/components/details/details-block";
-import Link from "shared/components/link/link";
 
 const _DashboardBlock: React.FC<Props> = ({
   seeAll = true,
@@ -24,7 +24,9 @@ const _DashboardBlock: React.FC<Props> = ({
           {label && <h3>{label}</h3>}
           {seeAll && (
             <div className="dashboard-block__see-all">
-              <Link className="dashboard-block__link" to={all || "events"}>&rsaquo;</Link>
+              <Link className="dashboard-block__link" to={all || "events"}>
+                &rsaquo;
+              </Link>
               {/*t("dashboard-page.see-more")*/}
             </div>
           )}

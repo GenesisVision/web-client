@@ -1,9 +1,9 @@
+import { onSelectChange } from "components/select/select.test-helpers";
+import SettingsBlock from "components/settings-block/settings-block";
+import WalletSelect from "components/wallet-select/wallet-select";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { onSelectChange } from "shared/components/select/select.test-helpers";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import WalletSelect from "shared/components/wallet-select/wallet-select";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
 import useAssetSection from "../asset-section.hook";

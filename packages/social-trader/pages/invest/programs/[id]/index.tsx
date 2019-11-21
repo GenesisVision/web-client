@@ -1,3 +1,4 @@
+import withDefaultLayout from "decorators/with-default-layout";
 import { ProgramDetailsFull } from "gv-api-web";
 import { statisticCurrencyAction } from "pages/programs/program-details/actions/program-details.actions";
 import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
@@ -7,8 +8,7 @@ import {
 } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import { NextPageWithRedux } from "shared/utils/types";
+import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
   return <ProgramDetailsPage />;

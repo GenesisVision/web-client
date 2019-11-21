@@ -1,4 +1,4 @@
 import React from "react";
-import { Settings } from "shared/routes/ssr/profile/settings";
+import { Settings } from "routes/ssr/profile/settings";
 
 export default Settings;

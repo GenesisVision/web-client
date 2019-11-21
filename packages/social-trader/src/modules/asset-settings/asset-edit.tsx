@@ -1,19 +1,19 @@
 import DescriptionField from "components/assets/fields/description-field";
 import TitleField from "components/assets/fields/title-field";
+import { IImageValue } from "components/form/input-image/input-image";
+import inputImageShape from "components/form/input-image/input-image.validation";
+import GVButton from "components/gv-button";
+import LogoField from "components/logo-field/logo-field";
+import SettingsBlock from "components/settings-block/settings-block";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
-import GVButton from "shared/components/gv-button";
-import LogoField from "shared/components/logo-field/logo-field";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import { SetSubmittingType } from "shared/utils/types";
 import {
   assetDescriptionShape,
   assetTitleShape
 } from "shared/utils/validators/validators";
+import { SetSubmittingType } from "utils/types";
 import { object } from "yup";
 
 const _AssetEdit: React.FC<Props> = ({

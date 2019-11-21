@@ -1,12 +1,12 @@
+import platformActions from "actions/platform-actions";
+import { fetchWalletsWithCtx } from "components/wallet/services/wallet.services";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import CreateFundPage from "pages/create-fund/create-fund.page";
 import { fetchMinimumDepositAmount } from "pages/create-fund/services/create-fund.service";
 import React from "react";
 import { compose } from "redux";
-import platformActions from "shared/actions/platform-actions";
-import { fetchWalletsWithCtx } from "shared/components/wallet/services/wallet.services";
-import withDefaultLayout from "shared/decorators/with-default-layout";
-import withPrivateRoute from "shared/decorators/with-private-route";
-import { NextPageWithRedux } from "shared/utils/types";
+import { NextPageWithRedux } from "utils/types";
 
 const CreateFund: NextPageWithRedux<Props, {}> = ({ minimumDepositAmount }) => {
   return <CreateFundPage minimumDepositAmount={minimumDepositAmount} />;

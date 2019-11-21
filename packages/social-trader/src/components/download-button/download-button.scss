@@ -1,0 +1,27 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.download-button {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &.gv-btn {
+    @include font-size($font-size-common);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    padding: 0;
+    &:hover {
+      .download-icon [stroke] {
+        stroke: rgba(darken($primary-color, 10%), 0.9);
+      }
+    }
+    .download-icon {
+      margin-left: 5px;
+      [stroke] {
+        transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import Tooltip from "components/tooltip/tooltip";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import Tooltip from "shared/components/tooltip/tooltip";
 
 import { DELAYS_LABELS } from "./program-open-positions/program-open-positions";
 

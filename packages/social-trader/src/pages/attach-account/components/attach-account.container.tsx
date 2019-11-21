@@ -1,14 +1,14 @@
+import { Push } from "components/link/link";
 import { Broker } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import {
   attachAccount,
   fetchExchanges
 } from "pages/attach-account/services/attach-account.service";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Push } from "shared/components/link/link";
-import useApiRequest from "shared/hooks/api-request.hook";
-import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
-import { SetSubmittingType } from "shared/utils/types";
+import { TRADING_ROUTE } from "routes/dashboard.routes";
+import { SetSubmittingType } from "utils/types";
 
 import AttachAccountSettings, {
   IAttachAccountSettingsFormValues

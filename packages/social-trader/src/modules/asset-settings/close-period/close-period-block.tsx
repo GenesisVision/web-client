@@ -1,7 +1,7 @@
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader from "decorators/with-loader";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader from "shared/decorators/with-loader";
 
 import ClosePeriod from "./close-period";
 

@@ -1,9 +1,9 @@
+import GVButton from "components/gv-button";
+import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
 
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
@@ -13,9 +13,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
     <>
       <div className="asset-settings__block-wrapper">
         <p className="asset-settings__text">
-          {t(
-            `asset-settings.period-and-closing.text-${asset.toLowerCase()}`
-          )}
+          {t(`asset-settings.period-and-closing.text-${asset.toLowerCase()}`)}
         </p>
         <GVButton
           color="danger"

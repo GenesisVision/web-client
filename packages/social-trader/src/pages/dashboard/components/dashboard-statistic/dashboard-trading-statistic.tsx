@@ -1,3 +1,5 @@
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
@@ -6,12 +8,10 @@ import { TDashboardTradingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import GVButton from "shared/components/gv-button";
-import Link from "shared/components/link/link";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { TRADING_ROUTE } from "routes/dashboard.routes";
 
 import { getTotalTradingStatistic } from "../../services/dashboard.service";
-import { TRADING_ROUTE } from "shared/routes/dashboard.routes";
 
 const _DashboardTradingStatistic: React.FC<Props> = () => {
   const [t] = useTranslation();

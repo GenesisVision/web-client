@@ -1,15 +1,15 @@
+import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
+import GVButton from "components/gv-button";
 import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
+import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import InvestmentUnauthPopup from "shared/components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "shared/components/gv-button";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
-import useIsOpen from "shared/hooks/is-open.hook";
-import FollowModuleContainer from "shared/modules/follow-module/follow-module-container";
-import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import { dispatchFollowDescription } from "./services/follow-details.service";
 

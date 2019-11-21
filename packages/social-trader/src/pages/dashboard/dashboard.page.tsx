@@ -1,9 +1,9 @@
 import "./dashboard.scss";
-import "shared/components/dashboard/dashboard.scss";
+import "components/dashboard/dashboard.scss";
 
+import Page from "components/page/page";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
-import DashboardPortfolioChartSection from "pages/dashboard/components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
 import DashboardInvestingStatistic from "pages/dashboard/components/dashboard-statistic/dashboard-investing-statistic";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
@@ -11,8 +11,7 @@ import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import Page from "shared/components/page/page";
-import { isNewUserSelector } from "shared/reducers/header-reducer";
+import { isNewUserSelector } from "reducers/header-reducer";
 
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
 

@@ -1,14 +1,10 @@
 import { CancelablePromise } from "gv-api-web";
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import Router from "next/router";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
+import { PROGRAMS_ROUTE } from "routes/programs.routes";
 // import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import {
-  ManagerThunk,
-  ResponseError,
-  SetSubmittingType
-} from "shared/utils/types";
+import { ManagerThunk, ResponseError, SetSubmittingType } from "utils/types";
 
 export const cancelChangeBrokerMethod = (programId: string): Promise<void> =>
   new CancelablePromise<void>(() => {});

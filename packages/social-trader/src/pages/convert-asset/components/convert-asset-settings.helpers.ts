@@ -1,6 +1,6 @@
+import inputImageShape from "components/form/input-image/input-image.validation";
 import i18next from "i18next";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import {
   assetDescriptionShape,
   assetTitleShape,

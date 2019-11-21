@@ -1,5 +1,5 @@
+import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import * as React from "react";
-import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 
 const TooltipBody: React.FC<{ equity: string }> = React.memo(({ equity }) => (
   <div className="details-tooltip__statistic">

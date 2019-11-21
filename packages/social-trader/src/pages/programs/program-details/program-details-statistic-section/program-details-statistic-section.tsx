@@ -1,10 +1,10 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
+import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
-import DetailsStatisticSection from "shared/components/details/details-statistic-section/details-statistic-section";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "utils/formatter";
 
 import { statisticDataLoaderData } from "../program-details.loader-data";
 import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";

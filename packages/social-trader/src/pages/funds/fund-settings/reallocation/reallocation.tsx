@@ -1,11 +1,11 @@
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { compose } from "redux";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import useApiRequest from "shared/hooks/api-request.hook";
 
 import ReallocateForm, {
   IReallocateFormValues

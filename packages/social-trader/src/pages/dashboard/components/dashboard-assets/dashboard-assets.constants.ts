@@ -1,4 +1,4 @@
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import { SortingColumn } from "components/table/components/filtering/filter.type";
 
 export const DASHBOARD_PROGRAMS_COLUMNS: SortingColumn[] = [
   {

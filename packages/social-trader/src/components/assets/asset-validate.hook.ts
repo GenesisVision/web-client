@@ -1,8 +1,8 @@
+import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 type TUseAssetValidateProps = {
   handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;

@@ -1,12 +1,12 @@
 import "./asset-field.scss";
 
 import classNames from "classnames";
+import GVFormikField from "components/gv-formik-field";
+import GVProgramPeriod from "components/gv-program-period";
+import Hint from "components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { TextInputValues } from "components/text-input-component/text-input-component";
 import * as React from "react";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVProgramPeriod from "shared/components/gv-program-period";
-import Hint from "shared/components/hint/hint";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
-import { TextInputValues } from "shared/components/text-input-component/text-input-component";
 
 export const _AssetFormField: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props

@@ -1,1 +1,1 @@
-export { default } from "shared/routes/ssr/_document";
+export { default } from "routes/ssr/_document";

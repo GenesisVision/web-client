@@ -1,4 +1,4 @@
 import React from "react";
-import { Search } from "shared/routes/ssr/search";
+import { Search } from "routes/ssr/search";
 
 export default Search;

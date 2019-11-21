@@ -1,18 +1,18 @@
+import { IImageValue } from "components/form/input-image/input-image";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
+import { fundDescriptionSelector } from "pages/funds/fund-details/reducers/description.reducer";
 import { dispatchFundDescriptionWithId } from "pages/funds/fund-details/services/fund-details.service";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
-import { fundDescriptionSelector } from "shared/components/funds/fund-details/reducers/description.reducer";
-import { ASSET } from "shared/constants/constants";
-import { currencySelector } from "shared/reducers/account-settings-reducer";
+import { currencySelector } from "reducers/account-settings-reducer";
 import {
   createFundInfoSelector,
   fundAssetsSelector
-} from "shared/reducers/platform-reducer";
-import { SetSubmittingType } from "shared/utils/types";
+} from "reducers/platform-reducer";
+import { ASSET } from "shared/constants/constants";
+import { SetSubmittingType } from "utils/types";
 
 import FundSettings from "./fund-settings";
 import { redirectToFund } from "./services/fund-settings.service";

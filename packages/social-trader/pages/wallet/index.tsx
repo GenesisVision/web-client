@@ -1,4 +1,4 @@
 import React from "react";
-import { Wallets } from "shared/routes/ssr/wallet";
+import { Wallets } from "routes/ssr/wallet";
 
 export default Wallets;

@@ -1,9 +1,9 @@
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardStatisticTable from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-table";
 import React from "react";
-import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
-import { CurrencyEnum } from "shared/utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import {
   TDashboardInvestingStatistic,

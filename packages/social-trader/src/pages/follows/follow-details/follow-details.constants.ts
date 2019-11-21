@@ -1,10 +1,10 @@
-import { ACTION_STATUS_FILTER_TYPES } from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { ACTION_STATUS_FILTER_TYPES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc
-} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
+} from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const SET_FOLLOW_STATISTIC_PERIOD = "SET_FOLLOW_STATISTIC_PERIOD";
 export const SET_FOLLOW_STATISTIC_CURRENCY = "SET_FOLLOW_STATISTIC_CURRENCY";

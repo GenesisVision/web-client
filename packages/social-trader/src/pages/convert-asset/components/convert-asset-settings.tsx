@@ -1,4 +1,4 @@
-import "shared/components/deposit-details/deposit-details.scss";
+import "components/deposit-details/deposit-details.scss";
 import "./convert-asset-settings.scss";
 
 import { AssetFields } from "components/assets/asset-fields/asset-field";
@@ -13,6 +13,9 @@ import SignalProgram from "components/assets/fields/signal-program";
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
+import { IImageValue } from "components/form/input-image/input-image";
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
   ProgramAssetPlatformInfo,
@@ -23,11 +26,8 @@ import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { IImageValue } from "shared/components/form/input-image/input-image";
-import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import convertAssetSettingsValidationSchema, {
   CONVERT_ASSET_FIELDS,

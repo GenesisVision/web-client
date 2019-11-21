@@ -1,5 +1,5 @@
+import { mockDate } from "components/details/details.loader-data";
 import faker from "faker";
-import { mockDate } from "shared/components/details/details.loader-data";
 
 export const statisticDataLoaderData = {
   statisticCurrency: "",

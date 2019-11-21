@@ -1,4 +1,9 @@
+import GVButton from "components/gv-button";
+import SettingsBlock from "components/settings-block/settings-block";
+import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import useIsOpen from "hooks/is-open.hook";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import { dispatchProgramDescription } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
@@ -8,11 +13,6 @@ import {
   compose,
   Dispatch
 } from "redux";
-import GVButton from "shared/components/gv-button";
-import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
-import useIsOpen from "shared/hooks/is-open.hook";
 
 const _TwoFactorConfirm: React.FC<Props> = ({
   id,
@@ -21,9 +21,7 @@ const _TwoFactorConfirm: React.FC<Props> = ({
 }) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
-    <SettingsBlock
-      label={t("program-settings.two-factor-confirm.title")}
-    >
+    <SettingsBlock label={t("program-settings.two-factor-confirm.title")}>
       <p className="program-settings__text">
         {t("program-settings.two-factor-confirm.text")}
       </p>

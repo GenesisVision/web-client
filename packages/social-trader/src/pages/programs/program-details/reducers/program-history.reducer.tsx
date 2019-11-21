@@ -1,22 +1,22 @@
 import {
+  ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  ASSET_PORTFOLIO_EVENTS_FILTERS,
+  EVENTS_ACTION_TYPE
+} from "components/portfolio-events-table/portfolio-events-table.constants";
+import { tableSelectorCreator } from "components/table/helpers/table.selector";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import tableReducerFactory, {
+  ITableState
+} from "components/table/reducers/table.reducer";
+import {
   InvestmentEventViewModels,
   ProgramPeriodsViewModel,
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
+import clearableReducer from "reducers/clearable.reducer";
+import { RootState } from "reducers/root-reducer";
 import { combineReducers } from "redux";
-import {
-  ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  ASSET_PORTFOLIO_EVENTS_FILTERS,
-  EVENTS_ACTION_TYPE
-} from "shared/components/portfolio-events-table/portfolio-events-table.constants";
-import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import tableReducerFactory, {
-  ITableState
-} from "shared/components/table/reducers/table.reducer";
-import clearableReducer from "shared/reducers/clearable.reducer";
-import { RootState } from "social-trader-web-portal/src/reducers/root-reducer";
 
 import {
   GET_PROGRAM_PERIOD_HISTORY,

@@ -1,10 +1,10 @@
 import "./calculator-output.scss";
 
 import classNames from "classnames";
+import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import withLoader from "decorators/with-loader";
 import * as React from "react";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import withLoader from "shared/decorators/with-loader";
 
 const _CalculatorOutput: React.FC<Props> = ({
   label,

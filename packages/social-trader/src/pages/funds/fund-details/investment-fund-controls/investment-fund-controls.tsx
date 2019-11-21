@@ -1,10 +1,10 @@
-import { FundDetailsFull } from "gv-api-web";
-import DepositButton from "modules/deposit/deposit.button";
-import * as React from "react";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
-import InvestmentFundInfo from "shared/components/funds/fund-details/fund-details-description/investment-fund-info";
+} from "components/details/details-block";
+import { FundDetailsFull } from "gv-api-web";
+import DepositButton from "modules/deposit/deposit.button";
+import InvestmentFundInfo from "pages/funds/fund-details/fund-details-description/investment-fund-info";
+import * as React from "react";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentFundControls: React.FC<Props> = ({ fundDescription }) => {

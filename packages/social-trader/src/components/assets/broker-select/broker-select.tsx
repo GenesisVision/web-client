@@ -1,10 +1,10 @@
 import "./broker-select.scss";
 
+import Surface from "components/surface/surface";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import Surface from "shared/components/surface/surface";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
 
 import {
   getAccountTypes,

@@ -1,20 +1,20 @@
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
   CancelablePromise,
   InvestmentEventViewModels,
   ItemsViewModelFundDetailsList,
   ItemsViewModelProgramDetailsList
 } from "gv-api-web";
-import { Action } from "redux";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
-} from "shared/components/programs/program-details/services/program-details.service";
-import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
+} from "pages/programs/program-details/service/program-details.service";
+import { Action } from "redux";
 import { IDashboardAssetChart } from "shared/constants/constants";
 //import managerApi from "shared/services/api-client/manager-api";
-import { ActionType } from "shared/utils/types";
+import { ActionType } from "utils/types";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";

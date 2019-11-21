@@ -1,11 +1,11 @@
 import AssetField from "components/assets/asset-fields/asset-field";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
+import Select from "components/select/select";
+import { onSelectChange } from "components/select/select.test-helpers";
 import { BrokerAccountType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import Select from "shared/components/select/select";
-import { onSelectChange } from "shared/components/select/select.test-helpers";
 
 import { getCurrency, getLeverage } from "../asset.helpers";
 

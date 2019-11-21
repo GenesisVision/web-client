@@ -1,4 +1,4 @@
 import React from "react";
-import { SignUp } from "shared/routes/ssr/signup";
+import { SignUp } from "routes/ssr/signup";
 
 export default SignUp;

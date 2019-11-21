@@ -1,4 +1,4 @@
-import "shared/components/deposit-details/deposit-details.scss";
+import "components/deposit-details/deposit-details.scss";
 import "./attach-account-settings.scss";
 
 import AssetField, {
@@ -6,20 +6,20 @@ import AssetField, {
 } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import GVFormikField from "components/gv-formik-field";
+import GVTextField from "components/gv-text-field";
+import Select from "components/select/select";
+import SettingsBlock from "components/settings-block/settings-block";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "decorators/with-blur-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVFormikField from "shared/components/gv-formik-field";
-import GVTextField from "shared/components/gv-text-field";
-import Select from "shared/components/select/select";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "shared/decorators/with-blur-loader";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import attachAccountSettingsValidationSchema from "./attach-account-settings.validators";
 

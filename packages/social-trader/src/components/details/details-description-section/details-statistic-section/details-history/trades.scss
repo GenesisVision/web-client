@@ -1,0 +1,114 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.details-trades {
+  overflow: hidden;
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+  }
+
+  &__delay-question {
+    cursor: help;
+    box-sizing: border-box;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+    font-size: 8px;
+    border: 1px solid rgba($icon-color, 0.2);
+    color: rgba($icon-color, 0.2);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: 12px;
+  }
+
+  &__delay-tooltip {
+    font-size: 13px;
+    min-width: 200px;
+    max-width: 500px;
+  }
+
+  &__delay-hint {
+    color: $label-color;
+    margin-right: $padding-xxsmall;
+  }
+
+  &__history-popup {
+    @include vertical-paddings($padding-medium);
+    @include horizontal-paddings($padding-medium);
+  }
+
+  &__history-popup-item {
+    display: flex;
+  }
+  &__history-popup-item:not(:last-child) {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+
+  &__history-popup-item-name,
+  &__history-popup-item-value {
+    @include font-size($font-size-common);
+  }
+  &__history-popup-item-name {
+    width: 200px;
+    color: $label-color;
+    letter-spacing: 0.4px;
+    font-weight: normal;
+  }
+
+  &__cell,
+  &__head-cell {
+    font-size: $font-size-paragraph-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+    }
+  }
+
+  &__cell {
+    @include adaptive-padding(right, $padding-medium);
+    @include vertical-paddings($padding-xxsmall);
+
+    &--direction {
+      width: 10%;
+      min-width: 83px;
+    }
+
+    &--symbol {
+      width: 16%;
+      min-width: 80px;
+    }
+
+    &--volume {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--price {
+      width: 16%;
+      min-width: 95px;
+    }
+
+    &--profit {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--date {
+      width: 23%;
+      min-width: 168px;
+    }
+
+    &--ticket {
+      width: 16%;
+      min-width: 83px;
+    }
+
+    &--entry {
+      width: 16%;
+      min-width: 62px;
+    }
+  }
+}

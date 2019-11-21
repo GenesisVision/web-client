@@ -1,17 +1,17 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
+import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
+import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
+import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { FundChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import DetailsStatisticsElements from "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { TooltipLabel } from "shared/components/tooltip-label/tooltip-label";
-import { withBlurLoader } from "shared/decorators/with-blur-loader";
 import { localizedDate } from "shared/utils/dates";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _FundDetailsStatisticsElements: React.FC<
   IFundDetailsStatisticsElementsProps

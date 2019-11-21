@@ -1,9 +1,9 @@
+import FollowCard from "modules/follows-table/components/follow-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import { TAsset } from "pages/dashboard/dashboard.types";
 import { getFollowThem } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import FollowCard from "shared/modules/follows-table/components/follow-card";
 
 const _DashboardFollowThem: React.FC<Props> = () => {
   const [t] = useTranslation();

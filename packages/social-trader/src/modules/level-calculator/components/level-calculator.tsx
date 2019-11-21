@@ -1,10 +1,10 @@
 import "./level-calculator.scss";
 
+import Dialog from "components/dialog/dialog";
+import { CalculatorIcon } from "components/icon/calculator-icon";
+import useIsOpen from "hooks/is-open.hook";
+import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
-import Dialog from "shared/components/dialog/dialog";
-import { CalculatorIcon } from "shared/components/icon/calculator-icon";
-import { ILevelCalculatorProps } from "shared/components/programs/program-details/program-details.types";
-import useIsOpen from "shared/hooks/is-open.hook";
 
 import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
 

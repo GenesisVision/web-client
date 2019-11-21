@@ -1,6 +1,6 @@
 import faker from "faker";
 import { ProgramWithdrawInfo } from "gv-api-web";
-import { getRandomInteger } from "shared/utils/helpers";
+import { getRandomInteger } from "utils/helpers";
 
 export const ProgramWithdrawInfoLoaderData: ProgramWithdrawInfo = {
   withheldInvestment: getRandomInteger(0, 100),

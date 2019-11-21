@@ -1,12 +1,12 @@
+import DepositContainer from "components/deposit/components/deposit-container";
+import { fundInvest } from "components/deposit/services/fund-deposit.service";
+import { getFundMinDeposit } from "components/deposit/services/program-deposit.service";
+import { IDialogProps } from "components/dialog/dialog";
+import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import DepositContainer from "shared/components/deposit/components/deposit-container";
-import { fundInvest } from "shared/components/deposit/services/fund-deposit.service";
-import { getFundMinDeposit } from "shared/components/deposit/services/program-deposit.service";
-import { IDialogProps } from "shared/components/dialog/dialog";
+import { fundMinDepositAmountSelector } from "reducers/platform-reducer";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
-import withLoader from "shared/decorators/with-loader";
-import { fundMinDepositAmountSelector } from "shared/reducers/platform-reducer";
 
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   entryFee,

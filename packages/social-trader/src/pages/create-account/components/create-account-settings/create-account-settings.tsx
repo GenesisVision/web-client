@@ -1,4 +1,4 @@
-import "shared/components/deposit-details/deposit-details.scss";
+import "components/deposit-details/deposit-details.scss";
 import "./create-account-settings.scss";
 
 import { AssetFields } from "components/assets/asset-fields/asset-field";
@@ -13,13 +13,13 @@ import CreateAssetNavigation from "components/assets/fields/create-asset-navigat
 import Currency from "components/assets/fields/currency";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import Leverage from "components/assets/fields/leverage";
+import SettingsBlock from "components/settings-block/settings-block";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import { CurrencyEnum, SetSubmittingType } from "shared/utils/types";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 

@@ -1,13 +1,13 @@
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import StatisticItem from "components/statistic-item/statistic-item";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import Profitability from "shared/components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { StatisticItemList } from "shared/components/statistic-item-list/statistic-item-list";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { CurrencyEnum } from "shared/utils/types";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _DashboardStatisticPeriods: React.FC<Props> = ({
   currency,

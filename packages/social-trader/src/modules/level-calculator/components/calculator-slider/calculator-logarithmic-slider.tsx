@@ -1,6 +1,6 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import CalculatorSlider from "./calculator-slider";
 

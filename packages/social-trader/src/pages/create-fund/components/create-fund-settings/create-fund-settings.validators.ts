@@ -1,15 +1,15 @@
+import inputImageShape from "components/form/input-image/input-image.validation";
 import { FundAssetPart } from "gv-api-web";
 import i18next from "i18next";
 import { WithTranslation } from "react-i18next";
-import inputImageShape from "shared/components/form/input-image/input-image.validation";
 import { convertToCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
 import {
   assetDescriptionShape,
   assetTitleShape,
   entryFeeShape,
   exitFeeShape
 } from "shared/utils/validators/validators";
+import { formatCurrencyValue } from "utils/formatter";
 import { array, lazy, number, object } from "yup";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";

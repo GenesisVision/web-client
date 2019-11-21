@@ -1,13 +1,13 @@
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
+import GVButton from "components/gv-button";
+import SettingsBlock from "components/settings-block/settings-block";
 import { FormikProps, withFormik } from "formik";
 import { IProgramSignalFormValues } from "modules/program-signal/program-signal-popup/components/program-signal-form";
 import { SignalValidationSchema } from "modules/program-signal/program-signal-popup/components/program-signal.validators";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import GVButton from "shared/components/gv-button";
-import SettingsBlock from "shared/components/settings-block/settings-block";
-import { SetSubmittingType } from "shared/utils/types";
+import { SetSubmittingType } from "utils/types";
 
 const _SignalingEdit: React.FC<Props> = ({
   isValid,

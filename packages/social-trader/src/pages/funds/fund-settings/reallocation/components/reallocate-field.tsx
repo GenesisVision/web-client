@@ -1,17 +1,17 @@
+import { FundAssetRemoveType } from "components/fund-asset/fund-asset-container";
 import {
   FundAssetPart,
   FundAssetPartWithIcon,
   PlatformAsset
 } from "gv-api-web";
+import useAnchor from "hooks/anchor.hook";
 import CreateFundSettingsAddAsset, {
   TRegulatorInputHandle
 } from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { FundAssetRemoveType } from "shared/components/fund-asset/fund-asset-container";
-import useAnchor from "shared/hooks/anchor.hook";
-import { PlatformAssetFull } from "shared/utils/types";
+import { PlatformAssetFull } from "utils/types";
 
 const _ReallocateField: React.FC<Props> = ({
   name,

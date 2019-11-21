@@ -1,19 +1,19 @@
-import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
+import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
+import { CurrencyItem } from "components/currency-item/currency-item";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { SortingColumn } from "components/table/components/filtering/filter.type";
+import Table from "components/table/components/table";
+import TableCell from "components/table/components/table-cell";
+import TableRow from "components/table/components/table-row";
+import Tooltip from "components/tooltip/tooltip";
 import { FundAssetInfo } from "gv-api-web";
+import { FUND_STRUCTURE_COLUMNS } from "pages/funds/fund-details/fund-details.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
-import { CurrencyItem } from "shared/components/currency-item/currency-item";
-import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
-import { HORIZONTAL_POPOVER_POS } from "shared/components/popover/popover";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
-import Table from "shared/components/table/components/table";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import Tooltip from "shared/components/tooltip/tooltip";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
 import FundStructureHeaderCell from "./fund-structure-header-cell";

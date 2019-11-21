@@ -1,0 +1,148 @@
+import GVButton from "components/gv-button";
+import Link from "components/link/link";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "components/popover/popover";
+import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
+import StatisticItem from "components/statistic-item/statistic-item";
+import TableCard, {
+  TableCardTable,
+  TableCardTableColumn
+} from "components/table/components/table-card/table-card";
+import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
+import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TAnchor, TEvent } from "hooks/anchor.hook";
+import * as React from "react";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { managerToPathCreator } from "routes/manager.routes";
+import { distanceDate } from "shared/utils/dates";
+import {
+  composeFollowDetailsUrl,
+  composeManagerDetailsUrl
+} from "utils/compose-url";
+import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
+
+interface Props {
+  follow: any;
+  toggleFavorite: TableToggleFavoriteHandlerType;
+  title: string;
+}
+
+const DECIMAL_SCALE_SMALL_VALUE = 4;
+const DECIMAL_SCALE_BIG_VALUE = 2;
+
+const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
+  const { tags, tradesCount, subscribersCount, url } = follow;
+  const handleToggleFavorite = useCallback(
+    () =>
+      toggleFavorite(
+        follow.id,
+        follow.personalDetails && follow.personalDetails.isFavorite
+      ),
+    [follow.id, follow.personalDetails, toggleFavorite]
+  );
+  const { t } = useTranslation();
+  const linkProps = {
+    pathname: composeFollowDetailsUrl(url),
+    state: `/ ${title}`
+  };
+  const renderActions = ({
+    clearAnchor,
+    anchor
+  }: {
+    clearAnchor: (event: TEvent) => void;
+    anchor: TAnchor;
+  }) => (
+    <Popover
+      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+      vertical={VERTICAL_POPOVER_POS.BOTTOM}
+      anchorEl={anchor}
+      noPadding
+      onClose={clearAnchor}
+    >
+      <div className="popover-list">
+        <Link to={linkProps}>
+          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+            {t("program-actions.details")}
+          </GVButton>
+        </Link>
+        {follow.personalDetails && !follow.personalDetails.isFavorite && (
+          <GVButton
+            variant="text"
+            color="secondary"
+            onClick={handleToggleFavorite}
+          >
+            {t("follow-actions.add-to-favorites")}
+          </GVButton>
+        )}
+        {follow.personalDetails && follow.personalDetails.isFavorite && (
+          <GVButton
+            variant="text"
+            color="secondary"
+            onClick={handleToggleFavorite}
+          >
+            {t("follow-actions.remove-from-favorites")}
+          </GVButton>
+        )}
+      </div>
+    </Popover>
+  );
+  return (
+    <TableCard
+      assetId={follow.id}
+      profit={follow.statistic.profit}
+      chart={follow.statistic.chart}
+      color={follow.color}
+      hasAvatar
+      subTitle={follow.owner.username}
+      logo={follow.logo}
+      managerUrl={managerToPathCreator(follow.owner.url, title)}
+      title={follow.title}
+      detailsUrl={linkProps}
+      renderActions={renderActions}
+      extraBlock={tags && <TagProgramContainer tags={tags} />}
+    >
+      <TableCardTable>
+        <TableCardTableColumn>
+          <StatisticItem label={t("follows-page.header.subscribers")}>
+            <NumberFormat
+              value={subscribersCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("follows-page.header.trades")}>
+            <NumberFormat
+              value={tradesCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem
+            label={t("programs-page.programs-header.available-to-invest")}
+          >
+            {/*<NumberFormat*/}
+            {/*  value={formatValueDifferentDecimalScale(*/}
+            {/*    follow.availableToInvest,*/}
+            {/*    DECIMAL_SCALE_SMALL_VALUE,*/}
+            {/*    DECIMAL_SCALE_BIG_VALUE*/}
+            {/*  )}*/}
+            {/*  displayType="text"*/}
+            {/*  suffix={` ${requestCurrency}`}*/}
+            {/*/>*/}
+          </StatisticItem>
+        </TableCardTableColumn>
+      </TableCardTable>
+    </TableCard>
+  );
+};
+
+const FollowCard = React.memo(_FollowCard);
+export default FollowCard;
