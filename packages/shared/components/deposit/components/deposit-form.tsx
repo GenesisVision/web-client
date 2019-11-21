@@ -162,7 +162,8 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
       props.onSubmit(
         values[DEPOSIT_FORM_FIELDS.amount]!,
         values[DEPOSIT_FORM_FIELDS.walletCurrency],
-        setSubmitting
+        setSubmitting,
+        values[DEPOSIT_FORM_FIELDS.walletId]
       );
     }
   })
@@ -190,7 +191,8 @@ export interface IDepositOwnProps {
   onSubmit: (
     amount: number,
     currency: CurrencyEnum,
-    setSubmitting: SetSubmittingType
+    setSubmitting: SetSubmittingType,
+    walletId: string
   ) => void;
 }
 
@@ -202,4 +204,5 @@ export interface IDepositFormValues {
   [DEPOSIT_FORM_FIELDS.availableInWallet]?: number;
   [DEPOSIT_FORM_FIELDS.amount]?: number;
   [DEPOSIT_FORM_FIELDS.walletCurrency]: CurrencyEnum;
+  [DEPOSIT_FORM_FIELDS.walletId]: string;
 }

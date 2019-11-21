@@ -19,10 +19,12 @@ export const getFundInfoCreator: TGetAssetInfoCreator = getFundInfoFn => (
 export const fundInvest: TAssetDeposit = ({
   id,
   amount,
-  currency
+  currency,
+  walletId
 }: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => {
   return investmentsApi
     .investIntoFund(id, authService.getAuthArg(), {
+      walletId,
       amount
     })
     .then(() => {

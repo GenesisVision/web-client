@@ -57,10 +57,12 @@ export const programInvestCreator: TAssetInvestCreator = programInvestFn => ({
 export const programInvest: TAssetDeposit = ({
   id,
   amount,
-  currency
+  currency,
+  walletId
 }: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => {
   return investmentsApi
     .investIntoProgram(id, authService.getAuthArg(), {
+      walletId,
       amount
     })
     .then(() => {

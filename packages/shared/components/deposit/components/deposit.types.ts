@@ -41,6 +41,7 @@ export type TAssetInvestCreator = (
 ) => (args: TAssetInvestCreatorArgs) => CancelablePromise<null>;
 
 export type TAssetInvestCreatorArgs = {
+  walletId: string;
   id: string;
   amount: number;
   currency: CurrencyEnum;
