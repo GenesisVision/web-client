@@ -1,4 +1,4 @@
-import assetsApi from "shared/services/api-client/assets-api";
+import assetsApi from "services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
 import authService from "shared/services/auth-service";
 

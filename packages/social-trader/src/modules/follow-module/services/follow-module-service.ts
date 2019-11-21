@@ -7,7 +7,7 @@ import {
   NewTradingAccountRequest,
   TradingAccountDetails
 } from "gv-api-web";
-import assetsApi from "shared/services/api-client/assets-api";
+import assetsApi from "services/api-client/assets-api";
 import brokersApi from "shared/services/api-client/brokers-api";
 import signalApi from "shared/services/api-client/signal-api";
 import authService from "shared/services/auth-service";

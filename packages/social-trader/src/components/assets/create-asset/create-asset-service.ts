@@ -7,7 +7,7 @@ import { ICreateAccountSettingsFormValues } from "pages/create-account/component
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
 import filesService from "services/file-service";
 import { CREATE_ASSET } from "shared/constants/constants";
-import assetsApi from "shared/services/api-client/assets-api";
+import assetsApi from "services/api-client/assets-api";
 import authService from "shared/services/auth-service";
 
 export type ICreateAssetSettingsFormValues =
