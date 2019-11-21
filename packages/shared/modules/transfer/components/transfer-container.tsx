@@ -1,5 +1,5 @@
-import { InternalTransferRequestSourceTypeEnum } from "gv-api-web";
-import React, { useCallback, useEffect } from "react";
+import { TransferRequestType } from "gv-api-web";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { ItemType } from "shared/components/wallet-select/wallet-select";
@@ -29,38 +29,21 @@ const _TransferContainer: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
-  const copyTradingAccounts = useSelector(copyTradingAccountsSelector);
   const currency = useSelector(currencySelector);
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     request: transferRequest
   });
-  useEffect(() => {
-    if (
-      destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-      sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-    )
-      dispatch(fetchAccounts());
-  }, []);
   const handleSubmit = useCallback(
     (values: TransferFormValues) =>
       sendTransferRequest(values).then(() => {
         onClose();
         dispatch(fetchWallets(currency));
         dispatch(updateWalletTimestampAction());
-        if (
-          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-        )
-          dispatch(fetchAccounts());
       }),
     [destinationType, sourceType]
   );
-  const sourceItems =
-    sourceType === TRANSFER_DIRECTION.WALLET ? wallets : copyTradingAccounts;
-  const destinationItems =
-    destinationType === TRANSFER_DIRECTION.WALLET
-      ? wallets
-      : copyTradingAccounts;
+  const sourceItems = wallets;
+  const destinationItems = wallets;
   return (
     <TransferForm
       condition={!!sourceItems.length && !!destinationItems.length}
@@ -81,8 +64,8 @@ const _TransferContainer: React.FC<Props> = ({
 interface Props {
   currentItem: ItemType;
   onClose(): void;
-  sourceType: InternalTransferRequestSourceTypeEnum;
-  destinationType: InternalTransferRequestSourceTypeEnum;
+  sourceType: TransferRequestType;
+  destinationType: TransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
