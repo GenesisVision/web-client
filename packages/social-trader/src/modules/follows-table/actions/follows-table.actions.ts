@@ -1,5 +1,5 @@
 import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
-import followApi from "shared/services/api-client/follow-api";
+import followApi from "services/api-client/follow-api";
 import { ActionType } from "utils/types";
 
 export const FOLLOWS = "FOLLOWS";

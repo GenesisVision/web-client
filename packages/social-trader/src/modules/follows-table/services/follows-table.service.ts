@@ -2,7 +2,7 @@ import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
 import * as qs from "qs";
-import followApi from "shared/services/api-client/follow-api";
+import followApi from "services/api-client/follow-api";
 import authService from "shared/services/auth-service";
 import { NextPageWithReduxContext } from "utils/types";
 

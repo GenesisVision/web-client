@@ -14,7 +14,7 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import followApi from "shared/services/api-client/follow-api";
+import followApi from "services/api-client/follow-api";
 import programsApi from "shared/services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
