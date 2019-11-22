@@ -1,6 +1,6 @@
 // import managerApi from "shared/services/api-client/manager-api";
 import { CancelablePromise } from "gv-api-web";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const programEditSignal = ({
   id,

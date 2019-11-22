@@ -2,7 +2,7 @@ import { ProfileFullViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import profileApi from "services/api-client/profile-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import Profile from "./profile";
 

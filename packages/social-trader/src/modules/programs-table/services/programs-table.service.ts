@@ -21,7 +21,7 @@ import {
 } from "routes/programs.routes";
 import { IDataModel } from "shared/constants/constants";
 import programApi from "services/api-client/programs-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import getParams from "shared/utils/get-params";
 import { NextPageWithReduxContext } from "utils/types";
 

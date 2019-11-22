@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import authApi from "services/api-client/auth-api";
 import profileApi from "services/api-client/profile-api";
 import filesService from "services/file-service";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const updateProfileAvatar = ({
   newImage

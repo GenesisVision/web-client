@@ -17,7 +17,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import Router from "next/router";
 import { Dispatch } from "redux";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import {
   MiddlewareDispatch,
   ResponseError,

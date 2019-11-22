@@ -5,7 +5,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
 import { ROLE_ENV } from "shared/constants/constants";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import {
   cancelProgramRequestAction,

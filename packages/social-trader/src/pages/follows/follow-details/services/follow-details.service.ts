@@ -17,7 +17,7 @@ import { Dispatch } from "redux";
 import brokersApi from "services/api-client/brokers-api";
 import programsApi from "services/api-client/programs-api";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {

@@ -5,7 +5,7 @@ import { push } from "connected-react-router";
 import { ChangePasswordViewModel } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import authApi from "services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
 export const changePassword = (model: ChangePasswordViewModel) => (

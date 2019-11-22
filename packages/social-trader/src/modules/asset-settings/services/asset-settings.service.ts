@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 import filesService from "services/file-service";
 import { ASSET } from "shared/constants/constants";
 // import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ManagerThunk, ResponseError } from "utils/types";
 
 export const cancelChangeBrokerMethod = (

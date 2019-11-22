@@ -1,5 +1,5 @@
 import walletApi from "services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const getTransactionDetailsMethod = (id: string) => Promise.resolve(); //walletApi.getTransactionDetailsMethod(id, authService.getAuthArg());
 

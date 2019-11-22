@@ -3,7 +3,7 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { fetchFundsAction } from "modules/funds-table/actions/funds-table.actions";
 import { getFiltersFromContext } from "modules/funds-table/services/funds-table.service";
 import React from "react";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}, {}> = () => {

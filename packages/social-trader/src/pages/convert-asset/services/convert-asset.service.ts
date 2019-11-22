@@ -8,7 +8,7 @@ import {
 } from "gv-api-web";
 import filesService from "services/file-service";
 import assetsApi from "services/api-client/assets-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";

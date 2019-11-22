@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
 import { Dispatch } from "redux";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
 const isServer = typeof window === "undefined";

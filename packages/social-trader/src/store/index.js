@@ -14,7 +14,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import authApi from "services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import rootReducer from "../reducers";
 

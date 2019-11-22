@@ -1,5 +1,5 @@
 import fundsApi from "services/api-client/funds-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
 import {

@@ -8,7 +8,7 @@ import {
   TwoFactorCodeWithPassword
 } from "gv-api-web";
 import authApi from "services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
 export const confirm2fa = (
