@@ -1,27 +1,20 @@
 import "./fields.scss";
 
-import AssetFormField from "components/assets/asset-fields/asset-form-field";
-import GVTextField from "components/gv-text-field";
+import TextAreaField from "components/assets/fields/text-area-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-import AssetField from "../asset-fields/asset-field";
 
 const _DescriptionField: React.FC<Props> = ({ name, description }) => {
   const { t } = useTranslation();
   return (
-    <AssetField wide>
-      <AssetFormField
-        value={description}
-        type="textarea"
-        name={name}
-        label={t("create-program-page.settings.fields.description")}
-        component={GVTextField}
-        caption={t(
-          "create-program-page.settings.fields.description-requirements"
-        )}
-      />
-    </AssetField>
+    <TextAreaField
+      value={description}
+      name={name}
+      label={t("create-program-page.settings.fields.description")}
+      caption={t(
+        "create-program-page.settings.fields.description-requirements"
+      )}
+    />
   );
 };
 
