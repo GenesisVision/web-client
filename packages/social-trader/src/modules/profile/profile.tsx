@@ -16,7 +16,11 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-const _Profile: React.FC<IProfileOwnProps> = ({ info, onUpdate }) => {
+const _Profile: React.FC<IProfileOwnProps> = ({
+  info,
+  onUpdate,
+  isPending
+}) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const onCopy = useCallback(() => {
@@ -27,6 +31,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({ info, onUpdate }) => {
     <>
       <SettingsBlock label={t("profile-page.public-info")}>
         <PublicInfo
+          isPending={isPending}
           about={info.about}
           userName={info.userName}
           onUpdate={onUpdate}
@@ -55,6 +60,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({ info, onUpdate }) => {
 };
 
 export interface IProfileOwnProps {
+  isPending: boolean;
   onUpdate: () => void;
   info: ProfileFullViewModel;
 }
