@@ -2,7 +2,7 @@ import { fetchProfileHeaderInfoAction } from "components/header/actions/header-a
 import { fetchWallets } from "components/wallet/services/wallet.services";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import investmentsApi from "services/api-client/investments-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ReduxDispatch } from "utils/types";
 
 import {

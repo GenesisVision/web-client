@@ -1,5 +1,5 @@
 import { ErrorViewModel } from "gv-api-web";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export type ResponseError = {
   errorMessage: string;

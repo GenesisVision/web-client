@@ -4,7 +4,7 @@ import { composeRequestFiltersByTableState } from "components/table/services/tab
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {

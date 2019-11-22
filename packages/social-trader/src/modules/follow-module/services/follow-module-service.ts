@@ -10,7 +10,7 @@ import {
 import assetsApi from "services/api-client/assets-api";
 import brokersApi from "services/api-client/brokers-api";
 import signalApi from "services/api-client/signal-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const fetchExternalAccounts = ({
   id

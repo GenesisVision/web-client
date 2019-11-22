@@ -1,6 +1,6 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
 import notificationsApi from "services/api-client/notifications-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ApiAction, NotificationsActionType } from "utils/types";
 
 export const ADD_PROGRAM_NOTIFICATIONS = "ADD_PROGRAM_NOTIFICATIONS";

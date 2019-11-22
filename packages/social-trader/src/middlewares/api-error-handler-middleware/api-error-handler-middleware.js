@@ -1,5 +1,5 @@
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import { SERVER_CONNECTION_ERROR_CODE } from "shared/utils/handle-error-response";
+import { SERVER_CONNECTION_ERROR_CODE } from "utils/handle-error-response";
 
 const REJECTED_SUFFIX = "FAILURE";
 

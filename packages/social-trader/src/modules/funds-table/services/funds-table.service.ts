@@ -19,7 +19,7 @@ import {
   FUNDS_TAB_ROUTE
 } from "routes/funds.routes";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { getCookie } from "shared/utils/cookie";
 import getParams from "shared/utils/get-params";
 import {

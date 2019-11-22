@@ -5,7 +5,7 @@ import { NextPageContext } from "next";
 import Router from "next/router";
 import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 // import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { getRandomInteger } from "utils/helpers";
 
 export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>

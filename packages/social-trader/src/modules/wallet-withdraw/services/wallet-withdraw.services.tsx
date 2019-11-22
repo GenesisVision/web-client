@@ -1,7 +1,7 @@
 import { fetchWalletTransactions } from "components/wallet/services/wallet.services";
 import { CreateWithdrawalRequestModel } from "gv-api-web";
 import walletApi from "services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
 export const fetchPaymentInfo = () => {

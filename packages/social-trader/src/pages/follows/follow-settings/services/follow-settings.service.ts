@@ -3,7 +3,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import Router from "next/router";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 //import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ManagerThunk, ResponseError, SetSubmittingType } from "utils/types";
 
 export const cancelChangeBrokerMethod = (

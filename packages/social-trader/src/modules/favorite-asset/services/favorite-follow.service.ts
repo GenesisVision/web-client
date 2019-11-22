@@ -1,6 +1,6 @@
 import { CancelablePromise } from "gv-api-web";
 import programsApi from "services/api-client/programs-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import {
   addFavoriteFollowAction,

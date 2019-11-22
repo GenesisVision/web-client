@@ -3,7 +3,7 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { fetchFollowsAction } from "modules/follows-table/actions/follows-table.actions";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import React from "react";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<any> = () => {
