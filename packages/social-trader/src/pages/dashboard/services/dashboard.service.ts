@@ -26,10 +26,10 @@ import {
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import { AuthRootState } from "reducers";
 import { Dispatch } from "redux";
-import { IDataModel } from "shared/constants/constants";
 import dashboardApi from "services/api-client/dashboard-api";
 import fundsApi from "services/api-client/funds-api";
-import programsApi from "shared/services/api-client/programs-api";
+import programsApi from "services/api-client/programs-api";
+import { IDataModel } from "shared/constants/constants";
 import authService from "shared/services/auth-service";
 import { ActionType, CurrencyEnum } from "utils/types";
 

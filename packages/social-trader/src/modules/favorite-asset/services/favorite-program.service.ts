@@ -1,5 +1,5 @@
 import { CancelablePromise } from "gv-api-web";
-import programsApi from "shared/services/api-client/programs-api";
+import programsApi from "services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
 import {
