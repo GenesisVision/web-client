@@ -16,7 +16,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-const _Profile: React.FC<IProfileOwnProps> = ({ info }) => {
+const _Profile: React.FC<IProfileOwnProps> = ({ info, onUpdate }) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const onCopy = useCallback(() => {
@@ -26,7 +26,11 @@ const _Profile: React.FC<IProfileOwnProps> = ({ info }) => {
   return (
     <>
       <SettingsBlock label={t("profile-page.public-info")}>
-        <PublicInfo about={info.about} userName={info.userName} />
+        <PublicInfo
+          about={info.about}
+          userName={info.userName}
+          onUpdate={onUpdate}
+        />
       </SettingsBlock>
       <SettingsBlock label={t("profile-page.id")}>
         <div className="profile__content">
@@ -51,6 +55,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({ info }) => {
 };
 
 export interface IProfileOwnProps {
+  onUpdate: () => void;
   info: ProfileFullViewModel;
 }
 
