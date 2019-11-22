@@ -21,14 +21,6 @@ const _PublicInfoForm: React.FC<Props> = ({
   dirty,
   isSubmitting
 }) => {
-  console.log(
-    "isSubmitting: ",
-    isSubmitting,
-    ". isValid: ",
-    isValid,
-    ". dirty: ",
-    dirty
-  );
   return (
     <form id="about-manager" onSubmit={handleSubmit} className="about">
       <div>
