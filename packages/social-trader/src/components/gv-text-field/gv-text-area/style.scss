@@ -1,3 +1,5 @@
+@import "~shared/styles/_sizes";
+
 .gv-text-area {
   width: 100%;
   &__hidden {
@@ -9,6 +11,7 @@
   }
 
   .gv-text-field__input {
+    line-height: $input-line-height;
     box-sizing: border-box;
     resize: none;
     width: 100%;
