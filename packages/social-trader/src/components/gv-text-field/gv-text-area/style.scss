@@ -9,8 +9,8 @@
   }
 
   .gv-text-field__input {
+    box-sizing: border-box;
     resize: none;
-    padding: 3px 0;
     width: 100%;
   }
 }
