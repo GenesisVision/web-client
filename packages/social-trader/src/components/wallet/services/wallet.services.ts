@@ -6,7 +6,7 @@ import {
   WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
-import walletApi from "shared/services/api-client/wallet-api";
+import walletApi from "services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { CurrencyEnum, RootThunk } from "utils/types";
 

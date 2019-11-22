@@ -1,6 +1,6 @@
 import { ItemsType, ItemType } from "components/wallet-select/wallet-select";
 import { InternalTransferRequest } from "gv-api-web";
-import walletApi from "shared/services/api-client/wallet-api";
+import walletApi from "services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
 
