@@ -6,7 +6,7 @@ import {
 } from "gv-api-web";
 import { Dispatch } from "redux";
 import fundsApi from "services/api-client/funds-api";
-import profileApi from "shared/services/api-client/profile-api";
+import profileApi from "services/api-client/profile-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 

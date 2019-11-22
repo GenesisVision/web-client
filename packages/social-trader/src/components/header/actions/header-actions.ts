@@ -1,6 +1,6 @@
 import { PROFILE_HEADER } from "components/header/header.constants";
 import { ProfileHeaderViewModel } from "gv-api-web";
-import profileApi from "shared/services/api-client/profile-api";
+import profileApi from "services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import { ApiAction } from "utils/types";
 

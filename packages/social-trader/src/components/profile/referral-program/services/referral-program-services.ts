@@ -1,4 +1,4 @@
-import profileApi from "shared/services/api-client/profile-api";
+import profileApi from "services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import { CurrencyEnum } from "utils/types";
 
