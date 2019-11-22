@@ -4,7 +4,7 @@ import { FilteringType } from "components/table/components/filtering/filter.type
 import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import fileApi from "services/api-client/file-api";
-import partnershipApi from "shared/services/api-client/partnership-api";
+import partnershipApi from "services/api-client/partnership-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
