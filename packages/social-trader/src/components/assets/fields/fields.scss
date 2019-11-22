@@ -116,3 +116,10 @@
     line-height: 1.4;
   }
 }
+
+.text-area-field {
+  max-width: 500px;
+  .gv-text-field__label {
+    transform: translate(0, $input-line-height) scale(1);
+  }
+}
