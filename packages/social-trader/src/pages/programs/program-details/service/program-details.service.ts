@@ -20,7 +20,7 @@ import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import assetsApi from "services/api-client/assets-api";
 import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
-import platformApi from "shared/services/api-client/platform-api";
+import platformApi from "services/api-client/platform-api";
 import authService from "shared/services/auth-service";
 import {
   ActionType,
