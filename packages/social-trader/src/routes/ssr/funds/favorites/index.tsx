@@ -5,7 +5,7 @@ import { fetchFundsAction } from "modules/funds-table/actions/funds-table.action
 import { getFiltersFromContext } from "modules/funds-table/services/funds-table.service";
 import React from "react";
 import { compose } from "redux";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux = () => {

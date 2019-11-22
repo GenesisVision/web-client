@@ -6,7 +6,7 @@ import * as qs from "qs";
 import fileApi from "services/api-client/file-api";
 import partnershipApi from "services/api-client/partnership-api";
 import programsApi from "services/api-client/programs-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 const SERVER_QUERY_DATE_RANGE_MIN_FILTER_NAME = "DateFrom";
 const SERVER_QUERY_DATE_RANGE_MAX_FILTER_NAME = "DateTo";

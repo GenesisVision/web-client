@@ -5,7 +5,7 @@ import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import authApi from "services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { SetSubmittingType } from "utils/types";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";

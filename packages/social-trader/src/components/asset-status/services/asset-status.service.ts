@@ -5,7 +5,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import { ASSET, ROLE } from "shared/constants/constants";
 // import investorApi from "shared/services/api-client/investor-api";
 // import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { ResponseError } from "utils/types";
 
 import {

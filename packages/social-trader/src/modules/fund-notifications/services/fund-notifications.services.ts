@@ -9,7 +9,7 @@ import {
   removeNotificationSettingAction
 } from "modules/notification-settings/actions/notification-settings.actions";
 import { NextPageContext } from "next";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
 import {

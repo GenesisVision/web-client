@@ -1,6 +1,6 @@
 import { CancelablePromise, TwoFactorAuthenticator } from "gv-api-web";
 // import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 import { IConfirmFormValues } from "../components/confirm-form";
 import { IConfirmProgramProps } from "../confirm-container";

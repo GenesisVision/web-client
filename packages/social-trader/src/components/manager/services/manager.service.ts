@@ -8,7 +8,7 @@ import { Dispatch } from "redux";
 import fundsApi from "services/api-client/funds-api";
 import profileApi from "services/api-client/profile-api";
 import programsApi from "services/api-client/programs-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const fetchManagerPrograms = (
   filter: FilteringType

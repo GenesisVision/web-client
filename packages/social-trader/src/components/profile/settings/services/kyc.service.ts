@@ -1,5 +1,5 @@
 import profileApi from "services/api-client/profile-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const loadKycIFrame = () => {
   const $script = require("scriptjs");

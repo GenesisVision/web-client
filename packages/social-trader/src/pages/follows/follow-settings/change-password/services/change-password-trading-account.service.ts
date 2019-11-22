@@ -4,7 +4,7 @@ import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
 // import managerApi from "shared/services/api-client/manager-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 
 export const changePasswordTradingAccount = ({
   id,

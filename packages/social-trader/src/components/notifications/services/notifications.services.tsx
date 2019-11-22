@@ -8,7 +8,7 @@ import {
 } from "components/notifications/actions/notifications.actions";
 import { CancelablePromise, NotificationList } from "gv-api-web";
 import notificationsApi from "services/api-client/notifications-api";
-import authService from "shared/services/auth-service";
+import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
 export const serviceGetNotifications = (): RootThunk<
