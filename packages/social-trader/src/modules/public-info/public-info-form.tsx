@@ -1,8 +1,9 @@
 import "./public-info.scss";
 
+import AboutField from "components/assets/fields/about-field";
+import UserNameField from "components/assets/fields/user-name-field";
+import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
@@ -13,6 +14,7 @@ import { SetSubmittingType } from "utils/types";
 import { object } from "yup";
 
 const _PublicInfoForm: React.FC<Props> = ({
+  values: { about },
   isPending,
   t,
   handleSubmit,
@@ -23,26 +25,9 @@ const _PublicInfoForm: React.FC<Props> = ({
 }) => {
   return (
     <form id="about-manager" onSubmit={handleSubmit} className="about">
-      <div>
-        <div className="profile__row">
-          <GVFormikField
-            type="text"
-            label={t("profile-page.login")}
-            component={GVTextField}
-            name={FIELDS.userName}
-            autoFocus
-          />
-        </div>
-        <div className="profile__row">
-          <GVFormikField
-            label={t("profile-page.about")}
-            component={GVTextField}
-            type="textarea"
-            name={FIELDS.about}
-          />
-        </div>
-        <div className="form-error profile__form-error">{errorMessage}</div>
-      </div>
+      <UserNameField name={FIELDS.userName} />
+      <AboutField description={about} name={FIELDS.about} />
+      <FormError error={errorMessage} />
       <div className="profile__row">
         <GVButton
           type="submit"
