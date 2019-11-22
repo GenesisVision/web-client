@@ -1,5 +1,5 @@
 import { CancelablePromise } from "gv-api-web";
-import { rateApi } from "shared/services/api-client/rate-api";
+import { rateApi } from "services/api-client/rate-api";
 import { CurrencyEnum } from "utils/types";
 
 export const fetchRate = (
