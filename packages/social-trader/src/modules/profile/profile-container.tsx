@@ -7,14 +7,21 @@ import authService from "shared/services/auth-service";
 import Profile from "./profile";
 
 const _ProfileContainer: React.FC = () => {
-  const { sendRequest, data } = useApiRequest<ProfileFullViewModel>({
+  const { sendRequest, data, isPending } = useApiRequest<ProfileFullViewModel>({
     request: () => profileApi.getProfileFull(authService.getAuthArg())
   });
   useEffect(() => {
     sendRequest();
   }, []);
-  const onUpdate = useCallback(() => sendRequest(), []);
-  return <Profile condition={!!data} info={data!} onUpdate={onUpdate} />;
+  const onUpdate = useCallback(async () => await sendRequest(), []);
+  return (
+    <Profile
+      condition={!!data}
+      info={data!}
+      onUpdate={onUpdate}
+      isPending={isPending}
+    />
+  );
 };
 
 const ProfileContainer = React.memo(_ProfileContainer);
