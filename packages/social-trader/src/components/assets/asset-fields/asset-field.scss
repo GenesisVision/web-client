@@ -97,6 +97,12 @@
 }
 
 .asset-form-field {
+  &__caption-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: $padding-medium;
+  }
   &__caption {
     font-size: $font-size-small;
     color: $label-color;
