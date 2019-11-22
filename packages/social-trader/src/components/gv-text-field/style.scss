@@ -114,7 +114,7 @@
     font-weight: normal;
     letter-spacing: 0.4px;
     padding: 0;
-    &--shrink {
+    &.gv-text-field__label.gv-text-field__label--shrink {
       transform: scale(0.75) translate(0px, 1.5px);
     }
   }
