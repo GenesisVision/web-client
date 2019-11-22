@@ -20,7 +20,7 @@ import {
   PROGRAMS_TAB_ROUTE
 } from "routes/programs.routes";
 import { IDataModel } from "shared/constants/constants";
-import programApi from "shared/services/api-client/programs-api";
+import programApi from "services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 import { NextPageWithReduxContext } from "utils/types";
