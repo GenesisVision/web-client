@@ -3,7 +3,7 @@ import { push } from "connected-react-router";
 import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { HOME_ROUTE } from "routes/app.routes";
-import authApi from "shared/services/api-client/auth-api";
+import authApi from "services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 

@@ -1,6 +1,6 @@
 import { PartnershipDetails } from "gv-api-web";
 import { REFERRAL_DETAILS } from "reducers/profile-reducer";
-import partnershipApi from "shared/services/api-client/partnership-api";
+import partnershipApi from "services/api-client/partnership-api";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 export const referralDetailsAction = (

@@ -2,7 +2,7 @@ import {
   CancelablePromise,
   ItemsViewModelProgramDetailsList
 } from "gv-api-web";
-import programApi from "shared/services/api-client/programs-api";
+import programApi from "services/api-client/programs-api";
 import { ActionType } from "utils/types";
 
 export const PROGRAMS_RATING = "PROGRAMS_RATING";

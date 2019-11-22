@@ -1,7 +1,7 @@
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { fetchWallets } from "components/wallet/services/wallet.services";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import investmentsApi from "shared/services/api-client/investments-api";
+import investmentsApi from "services/api-client/investments-api";
 import authService from "shared/services/auth-service";
 import { ReduxDispatch } from "utils/types";
 
@@ -19,10 +19,12 @@ export const getFundInfoCreator: TGetAssetInfoCreator = getFundInfoFn => (
 export const fundInvest: TAssetDeposit = ({
   id,
   amount,
-  currency
+  currency,
+  walletId
 }: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => {
   return investmentsApi
     .investIntoFund(id, authService.getAuthArg(), {
+      walletId,
       amount
     })
     .then(() => {

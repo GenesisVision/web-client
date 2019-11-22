@@ -1,4 +1,4 @@
-import handleErrorResponse from "shared/utils/handle-error-response";
+import handleErrorResponse from "utils/handle-error-response";
 
 const withApiProxy = (api: any) => {
   return new Proxy(api, {

@@ -1,5 +1,5 @@
 import { PlatformInfo } from "gv-api-web";
-import platformApi from "shared/services/api-client/platform-api";
+import platformApi from "services/api-client/platform-api";
 import { ApiAction } from "utils/types";
 
 export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";

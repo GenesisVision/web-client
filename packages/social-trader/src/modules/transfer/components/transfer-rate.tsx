@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { rateApi } from "shared/services/api-client/rate-api";
+import { rateApi } from "services/api-client/rate-api";
 
 const _TransferRate: React.FC<Props> = ({
   sourceCurrency,

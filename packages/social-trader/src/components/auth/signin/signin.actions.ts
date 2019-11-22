@@ -1,5 +1,5 @@
 import { LoginViewModel } from "gv-api-web";
-import authApi from "shared/services/api-client/auth-api";
+import authApi from "services/api-client/auth-api";
 import { ActionType, ApiAction } from "utils/types";
 
 import { ITwoFactorState } from "./reducers/two-factor.reducer";

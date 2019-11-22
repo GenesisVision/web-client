@@ -3,7 +3,8 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { PublicProfile } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
-import profileApi from "shared/services/api-client/profile-api";
+import profileApi from "services/api-client/profile-api";
+
 
 const Page: NextPage<Props> = ({ profile }) => {
   return <ManagerPage profile={profile} />;

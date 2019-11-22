@@ -1,7 +1,7 @@
 import { DetachFromSignalProvider } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
-import signalApi from "shared/services/api-client/signal-api";
+import signalApi from "services/api-client/signal-api";
 import authService from "shared/services/auth-service";
 import { ResponseError } from "utils/types";
 

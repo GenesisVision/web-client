@@ -1,6 +1,6 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { Currency, WalletMultiAvailable, WalletMultiSummary } from "gv-api-web";
-import walletApi from "shared/services/api-client/wallet-api";
+import walletApi from "services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 

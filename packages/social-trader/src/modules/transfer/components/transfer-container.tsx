@@ -6,6 +6,7 @@ import {
   fetchAccounts,
   fetchWallets
 } from "components/wallet/services/wallet.services";
+import { TransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,24 +30,12 @@ const _TransferContainer: React.FC<Props> = ({
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     request: transferRequest
   });
-  useEffect(() => {
-    if (
-      destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-      sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-    )
-      dispatch(fetchAccounts());
-  }, []);
   const handleSubmit = useCallback(
     (values: TransferFormValues) =>
       sendTransferRequest(values).then(() => {
         onClose();
         dispatch(fetchWallets(currency));
         dispatch(updateWalletTimestampAction());
-        if (
-          destinationType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT ||
-          sourceType === TRANSFER_DIRECTION.COPYTRADING_ACCOUNT
-        )
-          dispatch(fetchAccounts());
       }),
     [destinationType, sourceType]
   );
@@ -72,8 +61,8 @@ const _TransferContainer: React.FC<Props> = ({
 interface Props {
   currentItem: ItemType;
   onClose(): void;
-  sourceType: any; // TODO declare type
-  destinationType: any; // TODO declare type
+  sourceType: TransferRequestType;
+  destinationType: TransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }

@@ -1,9 +1,9 @@
 import authActions from "actions/auth-actions";
 import { IImageValue } from "components/form/input-image/input-image";
 import { Dispatch } from "redux";
+import authApi from "services/api-client/auth-api";
+import profileApi from "services/api-client/profile-api";
 import filesService from "services/file-service";
-import authApi from "shared/services/api-client/auth-api";
-import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 
 export const updateProfileAvatar = ({

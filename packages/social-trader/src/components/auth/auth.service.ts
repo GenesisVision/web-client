@@ -4,7 +4,7 @@ import {
   GeeTestDetails,
   PowDetails
 } from "gv-api-web";
-import platformApi from "shared/services/api-client/platform-api";
+import platformApi from "services/api-client/platform-api";
 
 //@ts-ignore
 import SHAWorker from "./sha.worker";

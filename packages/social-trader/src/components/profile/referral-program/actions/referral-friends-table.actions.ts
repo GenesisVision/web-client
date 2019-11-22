@@ -1,7 +1,7 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { ItemsViewModelReferralFriend } from "gv-api-web";
 import { REFERRAL_FRIENDS } from "reducers/profile-reducer";
-import partnershipApi from "shared/services/api-client/partnership-api";
+import partnershipApi from "services/api-client/partnership-api";
 import { ApiAction } from "utils/types";
 
 export const referralFriendsTableAction = (

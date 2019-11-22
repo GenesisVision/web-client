@@ -21,7 +21,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({ info }) => {
   const [t] = useTranslation();
   const onCopy = useCallback(() => {
     copy(info.id);
-    dispatch(alertMessageActions.success("profile-page.success-copy"));
+    dispatch(alertMessageActions.success("profile-page.success-copy", true));
   }, [info.id]);
   return (
     <>

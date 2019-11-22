@@ -1,11 +1,10 @@
 import Dialog from "components/dialog/dialog";
 import { ItemType } from "components/wallet-select/wallet-select";
+import { TransferRequestType } from "gv-api-web";
 import * as React from "react";
 
 import TransferContainer from "./components/transfer-container";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
-
-type InternalTransferRequestSourceTypeEnum = any; // TODO declare type
 
 const _TransferPopup: React.FC<Props> = ({
   title,
@@ -32,8 +31,8 @@ interface Props {
   currentItem: ItemType;
   onClose(): void;
   open: boolean;
-  sourceType?: InternalTransferRequestSourceTypeEnum;
-  destinationType?: InternalTransferRequestSourceTypeEnum;
+  sourceType?: TransferRequestType;
+  destinationType?: TransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
