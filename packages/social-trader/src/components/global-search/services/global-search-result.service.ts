@@ -1,5 +1,5 @@
 import { SearchViewModel } from "gv-api-web";
-import searchApi from "shared/services/api-client/search-api";
+import searchApi from "services/api-client/search-api";
 import authService from "shared/services/auth-service";
 import { Nullable } from "utils/types";
 
