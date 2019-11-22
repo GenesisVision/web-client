@@ -13,6 +13,7 @@ import { SetSubmittingType } from "utils/types";
 import { object } from "yup";
 
 const _PublicInfoForm: React.FC<Props> = ({
+  isPending,
   t,
   handleSubmit,
   errorMessage,
@@ -20,6 +21,14 @@ const _PublicInfoForm: React.FC<Props> = ({
   dirty,
   isSubmitting
 }) => {
+  console.log(
+    "isSubmitting: ",
+    isSubmitting,
+    ". isValid: ",
+    isValid,
+    ". dirty: ",
+    dirty
+  );
   return (
     <form id="about-manager" onSubmit={handleSubmit} className="about">
       <div>
@@ -43,7 +52,10 @@ const _PublicInfoForm: React.FC<Props> = ({
         <div className="form-error profile__form-error">{errorMessage}</div>
       </div>
       <div className="profile__row">
-        <GVButton type="submit" disabled={isSubmitting || !isValid || !dirty}>
+        <GVButton
+          type="submit"
+          disabled={isPending || isSubmitting || !isValid || !dirty}
+        >
           {t("buttons.save")}
         </GVButton>
       </div>
@@ -59,7 +71,11 @@ enum FIELDS {
 export interface IAboutFormValues extends UpdateProfileViewModel {}
 
 interface IAboutFormOwnProps {
-  onSubmit(values: IAboutFormValues, setSubmitting: SetSubmittingType): void;
+  isPending: boolean;
+  onSubmit: (
+    values: IAboutFormValues,
+    setSubmitting: SetSubmittingType
+  ) => void;
   userName: string;
   about: string;
   errorMessage?: string;
