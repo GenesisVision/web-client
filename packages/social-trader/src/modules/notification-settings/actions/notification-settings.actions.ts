@@ -1,6 +1,6 @@
 import { NotificationSettingList } from "gv-api-web";
 import CancelablePromise from "gv-api-web/dist/cancelable-promise/CancelablePromise";
-import notificationsApi from "shared/services/api-client/notifications-api";
+import notificationsApi from "services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
 import { ActionType } from "utils/types";
 
