@@ -38,15 +38,15 @@ export const _AssetFormField: React.FC<
         <div className="asset-form-field__caption">
           <span>{caption}</span>
           {trimmedLength > 0 && (
-            <span>
+            <div className="asset-form-field__caption-count">
               {trimmedLength}
               <GVProgramPeriod
                 start={0}
-                end={500}
+                end={max}
                 value={trimmedLength}
                 variant="pie"
               />
-            </span>
+            </div>
           )}
         </div>
       )}
