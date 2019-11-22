@@ -3,18 +3,11 @@ import "./public-info.scss";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
-import { goBack } from "connected-react-router";
 import { FormikProps, withFormik } from "formik";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import { compose } from "redux";
 import { assetTitleShape } from "shared/utils/validators/validators";
 import { SetSubmittingType } from "utils/types";
 import { object } from "yup";
@@ -72,32 +65,13 @@ interface IAboutFormOwnProps {
   errorMessage?: string;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { goBack },
-    dispatch
-  )
-});
-
 interface Props
   extends WithTranslation,
     FormikProps<IAboutFormValues>,
-    IAboutFormOwnProps,
-    DispatchProps {}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  goBack: typeof goBack;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
+    IAboutFormOwnProps {}
 
 const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
   translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  ),
   withFormik<IAboutFormOwnProps, IAboutFormValues>({
     enableReinitialize: true,
     displayName: "about-manager",
