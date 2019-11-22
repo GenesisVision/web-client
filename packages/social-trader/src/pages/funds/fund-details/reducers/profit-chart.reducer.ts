@@ -1,4 +1,4 @@
-import { FundProfitCharts } from "gv-api-web";
+import { FundProfitPercentCharts } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -7,7 +7,7 @@ import { apiSelector } from "utils/selectors";
 
 import { FETCH_FUND_PROFIT_CHART } from "../fund-details.constants";
 
-export type FundProfitChartDataType = FundProfitCharts;
+export type FundProfitChartDataType = FundProfitPercentCharts;
 
 export type FundProfitChartState = IApiState<FundProfitChartDataType>;
 
