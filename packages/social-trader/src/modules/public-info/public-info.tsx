@@ -1,12 +1,11 @@
 import useApiRequest from "hooks/api-request.hook";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { SetSubmittingType } from "utils/types";
 
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 import { updateProfile } from "./public-info.service";
 
-const _PublicInfo: React.FC<Props> = ({ userName, about }) => {
-  const [state, setState] = useState<IAboutFormValues>({ userName, about });
+const _PublicInfo: React.FC<Props> = ({ userName, about, onUpdate }) => {
   const { sendRequest, errorMessage } = useApiRequest({
     request: updateProfile,
     successMessage: "profile-page.success-edit"
@@ -18,13 +17,13 @@ const _PublicInfo: React.FC<Props> = ({ userName, about }) => {
           model
         },
         setSubmitting
-      ).then(() => setState(model)),
+      ).then(onUpdate),
     []
   );
   return (
     <PublicInfoForm
-      userName={state.userName}
-      about={state.about}
+      userName={userName}
+      about={about}
       onSubmit={handleSubmit}
       errorMessage={errorMessage}
     />
@@ -32,6 +31,7 @@ const _PublicInfo: React.FC<Props> = ({ userName, about }) => {
 };
 
 interface Props {
+  onUpdate: () => void;
   userName: string;
   about: string;
 }
