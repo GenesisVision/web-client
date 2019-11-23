@@ -77,6 +77,8 @@
     "items-counter": "Showing {{from}}-{{to}} of {{total}}"
   },
   "alerts": {
+    "copy-success": "Successfully copied to the clipboard.",
+    "copy-error": "Failed to copy data to the clipboard.",
     "clear-all": "Clear all",
     "server-error": "Server error occurred. Please try again later or contact the support department."
   },
