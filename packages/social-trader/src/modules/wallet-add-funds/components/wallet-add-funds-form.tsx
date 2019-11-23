@@ -8,22 +8,21 @@ import CopyIcon from "components/icon/copy-icon";
 import { ISelectChangeEvent } from "components/select/select";
 import StatisticItem from "components/statistic-item/statistic-item";
 import WalletSelect from "components/wallet-select/wallet-select";
-import copy from "copy-to-clipboard";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
+import useCopy from "hooks/copy.hook";
 import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
 const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
-  t,
   wallets,
-  notifySuccess,
-  notifyError,
   currentWallet,
   setFieldValue
 }) => {
+  const [t] = useTranslation();
+  const copy = useCopy("wallet-deposit.copy-to-clipboard-success");
   const [selected, setSelected] = useState<WalletData>(currentWallet);
   const { depositAddress } = selected;
   const onChangeWallet = useCallback(
@@ -34,12 +33,7 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
     [wallets, setSelected]
   );
   const onCopy = useCallback(() => {
-    try {
-      copy(depositAddress);
-      notifySuccess(t("wallet-deposit.copy-to-clipboard-success"));
-    } catch (error) {
-      notifyError(t("wallet-deposit.copy-to-clipboard-error"));
-    }
+    copy(depositAddress);
   }, [depositAddress]);
   return (
     <div className="wallet-add-funds-popup">
@@ -85,7 +79,6 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
 
 const WalletAddFundsForm = compose<React.FC<OwnProps & WithLoaderProps>>(
   withLoader,
-  translate(),
   withFormik<Props, FormValues>({
     displayName: "wallet-deposit",
     mapPropsToValues: ({ currentWallet: { id } }) => ({
@@ -108,8 +101,6 @@ interface FormValues {
 interface OwnProps {
   wallets: WalletData[];
   currentWallet: WalletData;
-  notifySuccess(text: string): void;
-  notifyError(text: string): void;
 }
 
-interface Props extends WithTranslation, OwnProps {}
+interface Props extends OwnProps {}
