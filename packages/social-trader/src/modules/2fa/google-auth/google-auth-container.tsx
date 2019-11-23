@@ -2,19 +2,18 @@ import "./google-auth.scss";
 
 import { TwoFactorAuthenticator } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import authApi from "services/api-client/auth-api";
-import authService from "services/auth-service";
 import { SetSubmittingType } from "utils/types";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
 import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
 import * as twoFactorServices from "../services/2fa.service";
+import { fetchTFAData } from "../services/2fa.service";
 import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
 
-const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
+const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   const dispatch = useDispatch();
   const {
     data: recoveryCodesView,
@@ -23,13 +22,12 @@ const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   } = useApiRequest({
     request: values => dispatch(twoFactorServices.confirm2fa(values))
   });
-
-  const [TFAData, setTFAData] = useState<TwoFactorAuthenticator | undefined>(
-    undefined
-  );
+  const { data: TFAData, sendRequest: getTFAData } = useApiRequest<
+    TwoFactorAuthenticator
+  >({ request: fetchTFAData });
 
   useEffect(() => {
-    authApi.createTwoStepAuth(authService.getAuthArg()).then(setTFAData);
+    getTFAData();
   }, []);
 
   const handleSubmit = useCallback(
@@ -49,9 +47,9 @@ const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
     [TFAData]
   );
 
-  if (!TFAData || !recoveryCodesView) return <DialogLoaderGoogleAuthSteps />;
-  const { authenticatorUri, sharedKey } = TFAData!;
-  const { codes } = recoveryCodesView;
+  if (!TFAData) return <DialogLoaderGoogleAuthSteps />;
+  const { authenticatorUri, sharedKey } = TFAData;
+  const { codes } = recoveryCodesView || { codes: undefined };
   return codes ? (
     <GoogleAuthCodes codes={codes} />
   ) : (
@@ -68,4 +66,5 @@ interface Props {
   onSubmit: () => void;
 }
 
-export default React.memo(GoogleAuthContainer);
+const GoogleAuthContainer = React.memo(_GoogleAuthContainer);
+export default GoogleAuthContainer;
