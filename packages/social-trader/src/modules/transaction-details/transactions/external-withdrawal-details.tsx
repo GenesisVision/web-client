@@ -1,12 +1,10 @@
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
-import CopyIcon from "components/icon/copy-icon";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
-import useCopy from "hooks/copy.hook";
 import ArrowIcon from "media/arrow-up-thin.svg";
+import CopyButton from "modules/copy-button/copy-button";
 import { TransactionDetailsProps } from "modules/transaction-details/transaction-details-dialog";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +20,6 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   handleResend
 }) => {
   const [t] = useTranslation();
-  const copy = useCopy();
   return (
     <TransactionDetails
       header={t(`transactions-details.withdrawal.title`)}
@@ -66,19 +63,10 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
                 </div>
                 <div className="external-transaction__address">
                   {data.externalTransactionDetails.fromAddress}
-                  <GVButton
-                    color="secondary"
-                    onClick={() =>
-                      copy(data.externalTransactionDetails.fromAddress)
-                    }
-                    variant="text"
-                  >
-                    <>
-                      <CopyIcon primary />
-                      &nbsp;
-                      {t("buttons.copy")}
-                    </>
-                  </GVButton>
+                  <CopyButton
+                    text
+                    value={data.externalTransactionDetails.fromAddress}
+                  />
                 </div>
               </div>
             </StatisticItem>
