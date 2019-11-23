@@ -3,6 +3,7 @@ import { FundAssetsState, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
+  CartesianGrid,
   ComposedChart,
   ContentRenderer,
   ResponsiveContainer,
@@ -44,6 +45,7 @@ const _ProfitChart: React.FC<Props> = ({
         />
 
         {tooltip && <Tooltip content={tooltip} />}
+        <CartesianGrid vertical={false} strokeWidth={0.1} />
         {equities.map((equity, i) => (
           <Area
             key={i}
