@@ -17,7 +17,7 @@ import { CurrencyEnum } from "utils/types";
 
 const _ProgramDetailsStatisticsElements: React.FC<
   IProgramDetailsStatisticsElementsProps
-> = ({ data, period, status = "hello" }) => {
+> = ({ data, period, status }) => {
   const [t] = useTranslation();
   if (!data) return null;
   const { statistic, statisticCurrency } = data;
