@@ -7,27 +7,19 @@ import {
   CancelablePromise,
   Currency,
   InvestmentEventViewModels,
-  LevelInfo,
-  ProgramPeriodsViewModel,
-  SignalProviderSubscribers,
-  TradesViewModel
+  LevelInfo
 } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import assetsApi from "services/api-client/assets-api";
 import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
 import platformApi from "services/api-client/platform-api";
 import authService from "services/auth-service";
-import {
-  ActionType,
-  CurrencyEnum,
-  MiddlewareDispatch,
-  TGetState
-} from "utils/types";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {
   fetchEventsAction,
@@ -51,8 +43,7 @@ import {
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
-  fetchEventsAction(id, eventLocation, filters);
+) => fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokersMethod = (id: string) =>
   brokersApi.getBrokersForProgram(id);
@@ -111,26 +102,26 @@ export const closePeriod = (
 
 export const getOpenPositions = (programId: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => {
+) => {
   return fetchOpenPositionsAction(programId, filters);
 };
 
 export const getTrades = (programId: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => {
+) => {
   return fetchTradesAction(programId, filters);
 };
 
 export const getPeriodHistory = (programId: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+) => {
   const authorization = authService.getAuthArg();
   return fetchPeriodHistoryAction(programId, { authorization, ...filters });
 };
 
 export const getFinancialStatistics = (programId: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => {
+) => {
   const authorization = authService.getAuthArg();
   return fetchFinancialStatisticAction(programId, {
     authorization,
@@ -140,7 +131,7 @@ export const getFinancialStatistics = (programId: string) => (
 
 export const getSubscriptions = (programId: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
+) => {
   const authorization = authService.getAuthArg();
   return fetchSubscriptionsAction(programId, authorization, filters);
 };
