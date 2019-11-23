@@ -9,6 +9,7 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import {
   CancelablePromise,
   InvestmentEventViewModels,
+  LevelsParamsInfo,
   ProgramBalanceChart,
   ProgramDetailsFull,
   ProgramPeriodsViewModel,
@@ -104,9 +105,9 @@ export const fetchProgramDescriptionAction = (
 
 export const fetchLevelParametersAction = (
   currency: CurrencyEnum
-): ApiAction<ProgramsLevelsInfo> => ({
+): ApiAction<LevelsParamsInfo> => ({
   type: FETCH_LEVEL_PARAMETERS,
-  payload: platformApi.getProgramLevels({ currency })
+  payload: platformApi.getProgramLevelsParams({ currency })
 });
 
 export const fetchOpenPositionsAction = (
