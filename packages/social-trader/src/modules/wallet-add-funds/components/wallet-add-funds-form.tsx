@@ -2,16 +2,14 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import GVqr from "components/gv-qr/gv-qr";
-import CopyIcon from "components/icon/copy-icon";
 import { ISelectChangeEvent } from "components/select/select";
 import StatisticItem from "components/statistic-item/statistic-item";
 import WalletSelect from "components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
-import useCopy from "hooks/copy.hook";
+import CopyButton from "modules/copy-button/copy-button";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -22,7 +20,6 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   setFieldValue
 }) => {
   const [t] = useTranslation();
-  const copy = useCopy("wallet-deposit.copy-to-clipboard-success");
   const [selected, setSelected] = useState<WalletData>(currentWallet);
   const { depositAddress } = selected;
   const onChangeWallet = useCallback(
@@ -32,9 +29,6 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
     },
     [wallets, setSelected]
   );
-  const onCopy = useCallback(() => {
-    copy(depositAddress);
-  }, [depositAddress]);
   return (
     <div className="wallet-add-funds-popup">
       <DialogTop title={t("wallet-deposit.title")}>
@@ -60,17 +54,10 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
           </StatisticItem>
         </DialogField>
         <DialogButtons>
-          <GVButton
-            color="secondary"
-            onClick={onCopy}
-            disabled={!depositAddress}
-          >
-            <>
-              <CopyIcon />
-              &nbsp;
-              {t("buttons.copy")}
-            </>
-          </GVButton>
+          <CopyButton
+            value={depositAddress}
+            successMessage={"wallet-deposit.copy-to-clipboard-success"}
+          />
         </DialogButtons>
       </DialogBottom>
     </div>
