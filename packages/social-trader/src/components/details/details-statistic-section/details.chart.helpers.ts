@@ -18,7 +18,7 @@ import {
   TRemoveChartCurrency
 } from "modules/chart-currency-selector/chart-currency-selector";
 import { FundBalanceChartDataType } from "pages/funds/fund-details/reducers/balance-chart.reducer";
-import { ProgramBalanceChartDataType } from "pages/programs/program-details/reducers/balance-chart.reducer";
+import { ProgramBalanceChartDataType } from "pages/programs/program-details/program-details.types";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";
