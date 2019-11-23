@@ -6,26 +6,23 @@ import GVButton from "components/gv-button";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
 import SettingsBlock from "components/settings-block/settings-block";
 import StatisticItem from "components/statistic-item/statistic-item";
-import copy from "copy-to-clipboard";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import useCopy from "hooks/copy.hook";
 import PublicInfo from "modules/public-info/public-info";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 const _Profile: React.FC<IProfileOwnProps> = ({
   info,
   onUpdate,
   isPending
 }) => {
-  const dispatch = useDispatch();
+  const copy = useCopy("profile-page.success-copy");
   const [t] = useTranslation();
   const onCopy = useCallback(() => {
     copy(info.id);
-    dispatch(alertMessageActions.success("profile-page.success-copy", true));
   }, [info.id]);
   return (
     <>
