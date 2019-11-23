@@ -3,12 +3,9 @@ import "./google-auth.scss";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
-import CopyIcon from "components/icon/copy-icon";
 import { RecoveryCode } from "gv-api-web";
-import useCopy from "hooks/copy.hook";
+import CopyButton from "modules/copy-button/copy-button";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
@@ -32,10 +29,6 @@ const getCodesString = (codes: RecoveryCode[]): string =>
 
 const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
   const [t] = useTranslation();
-  const copy = useCopy("2fa-page.codes.copy-success");
-  const onCopy = useCallback(() => {
-    copy(getCodesString(codes));
-  }, [codes]);
   return (
     <div className="recovery-codes-container">
       <DialogTop title={t("2fa-page.codes.title")} />
@@ -46,13 +39,10 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
         </div>
         <CodeList codes={codes} />
         <DialogButtons>
-          <GVButton color="secondary" onClick={onCopy}>
-            <>
-              <CopyIcon />
-              &nbsp;
-              {t("buttons.copy")}
-            </>
-          </GVButton>
+          <CopyButton
+            value={getCodesString(codes)}
+            successMessage={"2fa-page.codes.copy-success"}
+          />
         </DialogButtons>
         <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
       </DialogBottom>
