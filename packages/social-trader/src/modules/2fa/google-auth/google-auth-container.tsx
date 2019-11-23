@@ -49,9 +49,9 @@ const GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
     [TFAData]
   );
 
-  if (!TFAData) return <DialogLoaderGoogleAuthSteps />;
+  if (!TFAData || !recoveryCodesView) return <DialogLoaderGoogleAuthSteps />;
   const { authenticatorUri, sharedKey } = TFAData!;
-  const { codes } = recoveryCodesView || { codes: undefined };
+  const { codes } = recoveryCodesView;
   return codes ? (
     <GoogleAuthCodes codes={codes} />
   ) : (
