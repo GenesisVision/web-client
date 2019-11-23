@@ -1,8 +1,8 @@
 import GVButton from "components/gv-button";
 import CopyIcon from "components/icon/copy-icon";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import Copy from "decorators/with-copy";
 import { ProfileFullViewModel } from "gv-api-web";
+import useCopy from "hooks/copy.hook";
 import Email from "media/email.svg";
 import * as React from "react";
 import { useEffect } from "react";
@@ -12,6 +12,7 @@ import { rawUrlEncode } from "utils/helpers";
 const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   data: { refUrl, lastName, firstName }
 }) => {
+  const copy = useCopy();
   const [t] = useTranslation();
   return (
     <div>
@@ -21,21 +22,14 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
       <div className="referral-program__link-block">
         {t("profile-page.referral-program.referral-link")}
         <div className="referral-program__link">{refUrl}</div>
-        <Copy>
-          {({ copy }) => (
-            <GVButton
-              color="secondary"
-              onClick={() => copy(refUrl)}
-              variant="text"
-            >
-              <>
-                <CopyIcon primary />
-                &nbsp;
-                {t("buttons.copy")}
-              </>
-            </GVButton>
-          )}
-        </Copy>
+        <GVButton color="secondary" onClick={() => copy(refUrl)} variant="text">
+          <>
+            <CopyIcon primary />
+            &nbsp;
+            {t("buttons.copy")}
+          </>
+        </GVButton>
+        )}
       </div>
       <div className="referral-program__share-block">
         {t("profile-page.referral-program.share-your-passion")}
