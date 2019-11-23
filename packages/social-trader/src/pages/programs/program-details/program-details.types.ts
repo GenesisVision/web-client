@@ -1,9 +1,14 @@
 import { IDialogProps } from "components/dialog/dialog";
 import {
+  InvestmentEventViewModels,
   LevelsParamsInfo,
   ProfitChart,
   ProgramBalanceChart,
-  ProgramDetailsFull
+  ProgramDetailsFull,
+  ProgramPeriodsViewModel,
+  ProgramProfitPercentCharts,
+  SignalProviderSubscribers,
+  TradesViewModel
 } from "gv-api-web";
 import { CurrencyEnum } from "utils/types";
 
@@ -52,3 +57,12 @@ export type ProgramStatisticResult = {
   profitChart: ProfitChart;
   balanceChart: ProgramBalanceChart;
 };
+
+export type ProgramProfitChartDataType = ProgramProfitPercentCharts;
+export type ProgramDescriptionDataType = ProgramDetailsFull;
+export type ProgramBalanceChartDataType = ProgramBalanceChart;
+export type SignalProviderSubscribersDataType = SignalProviderSubscribers;
+export type ProgramPeriodsDataType = ProgramPeriodsViewModel;
+export type TradesDataType = TradesViewModel;
+export type EventsDataType = InvestmentEventViewModels;
+export type LevelParametersDataType = LevelsParamsInfo;

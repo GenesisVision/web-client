@@ -1,4 +1,3 @@
-import { LevelsParamsInfo } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -6,8 +5,7 @@ import { RootState } from "reducers/root-reducer";
 import { apiSelector } from "utils/selectors";
 
 import { FETCH_LEVEL_PARAMETERS } from "../program-details.constants";
-
-export type LevelParametersDataType = LevelsParamsInfo;
+import { LevelParametersDataType } from "../program-details.types";
 
 export type LevelParametersState = IApiState<LevelParametersDataType>;
 

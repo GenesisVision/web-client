@@ -6,18 +6,6 @@ import { TStatisticCurrencyAction } from "components/details/reducers/statistic-
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import {
-  CancelablePromise,
-  InvestmentEventViewModels,
-  LevelsParamsInfo,
-  ProgramBalanceChart,
-  ProgramDetailsFull,
-  ProgramPeriodsViewModel,
-  ProgramProfitPercentCharts,
-  ProgramsLevelsInfo,
-  SignalProviderSubscribers,
-  TradesViewModel
-} from "gv-api-web";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
@@ -36,6 +24,16 @@ import {
   SET_PROGRAM_STATISTIC_CURRENCY,
   SET_PROGRAM_STATISTIC_PERIOD
 } from "../program-details.constants";
+import {
+  EventsDataType,
+  LevelParametersDataType,
+  ProgramBalanceChartDataType,
+  ProgramDescriptionDataType,
+  ProgramPeriodsDataType,
+  ProgramProfitChartDataType,
+  SignalProviderSubscribersDataType,
+  TradesDataType
+} from "../program-details.types";
 import { ProgramIdState } from "../reducers/id.reducer";
 import {
   EVENT_LOCATION,
@@ -60,7 +58,7 @@ export const fetchEventsAction = (
   assetId: string,
   eventLocation: EVENT_LOCATION,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+): ApiAction<EventsDataType> => ({
   type: EVENTS_ACTION_TYPE,
   payload: fetchPortfolioEventsWithoutTable(eventLocation, {
     ...filters,
@@ -72,7 +70,7 @@ export const fetchProgramProfitChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currencies: CurrencyEnum[]
-): ApiAction<ProgramProfitPercentCharts> => ({
+): ApiAction<ProgramProfitChartDataType> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
   payload: programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: period.start,
@@ -85,7 +83,7 @@ export const fetchProgramBalanceChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currency: CurrencyEnum
-): ApiAction<ProgramBalanceChart> => ({
+): ApiAction<ProgramBalanceChartDataType> => ({
   type: FETCH_PROGRAM_BALANCE_CHART,
   payload: programsApi.getProgramBalanceChart(id, {
     currency,
@@ -98,14 +96,14 @@ export const fetchProgramBalanceChartAction = (
 export const fetchProgramDescriptionAction = (
   id: string,
   authorization: string
-): ApiAction<ProgramDetailsFull> => ({
+): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
   payload: programsApi.getProgramDetails(id, { authorization })
 });
 
 export const fetchLevelParametersAction = (
   currency: CurrencyEnum
-): ApiAction<LevelsParamsInfo> => ({
+): ApiAction<LevelParametersDataType> => ({
   type: FETCH_LEVEL_PARAMETERS,
   payload: platformApi.getProgramLevelsParams({ currency })
 });
@@ -113,7 +111,7 @@ export const fetchLevelParametersAction = (
 export const fetchOpenPositionsAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ApiAction<TradesDataType> => ({
   type: PROGRAM_OPEN_POSITIONS,
   payload: programsApi.getProgramOpenTrades(id, filters)
 });
@@ -121,7 +119,7 @@ export const fetchOpenPositionsAction = (
 export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ApiAction<TradesDataType> => ({
   type: PROGRAM_TRADES,
   payload: programsApi.getProgramTrades(id, filters)
 });
@@ -129,7 +127,7 @@ export const fetchTradesAction = (
 export const fetchPeriodHistoryAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
+): ApiAction<ProgramPeriodsDataType> => ({
   type: GET_PROGRAM_PERIOD_HISTORY,
   payload: programsApi.getProgramPeriods(id, filters)
 });
@@ -137,7 +135,7 @@ export const fetchPeriodHistoryAction = (
 export const fetchFinancialStatisticAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramPeriodsViewModel>> => ({
+): ApiAction<ProgramPeriodsDataType> => ({
   type: PROGRAM_FINANCIAL_STATISTIC,
   payload: programsApi.getProgramPeriods(id, filters)
 });
@@ -146,7 +144,7 @@ export const fetchSubscriptionsAction = (
   id: string,
   authorization: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
+): ApiAction<SignalProviderSubscribersDataType> => ({
   type: PROGRAM_SUBSCRIPTIONS,
   payload: programsApi.getProgramSubscribers(id, authorization, filters)
 });
