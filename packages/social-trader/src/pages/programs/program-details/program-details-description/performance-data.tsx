@@ -4,14 +4,10 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
 import filesService from "services/file-service";
 import { STATUS } from "shared/constants/constants";
 
@@ -105,10 +101,5 @@ interface Props {
   programDescription: ProgramDetailsFull;
 }
 
-const PerformanceData = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<LevelsParamsInfo>>
->(
-  withBlurLoader,
-  React.memo
-)(_PerformanceData);
+const PerformanceData = withBlurLoader(React.memo(_PerformanceData));
 export default PerformanceData;
