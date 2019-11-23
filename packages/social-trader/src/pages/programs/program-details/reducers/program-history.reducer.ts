@@ -8,12 +8,6 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";
-import {
-  InvestmentEventViewModels,
-  ProgramPeriodsViewModel,
-  SignalProviderSubscribers,
-  TradesViewModel
-} from "gv-api-web";
 import clearableReducer from "reducers/clearable.reducer";
 import { RootState } from "reducers/root-reducer";
 import { combineReducers } from "redux";
@@ -22,7 +16,6 @@ import {
   GET_PROGRAM_PERIOD_HISTORY,
   PROGRAM_FINANCIAL_STATISTIC,
   PROGRAM_OPEN_POSITIONS,
-  PROGRAM_PERIOD_HISTORY,
   PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS,
   PROGRAM_SUBSCRIBERS_FILTERS,
   PROGRAM_SUBSCRIPTIONS,
@@ -30,19 +23,23 @@ import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../program-details.constants";
+import {
+  EventsDataType,
+  ProgramPeriodsDataType,
+  SignalProviderSubscribersDataType,
+  TradesDataType
+} from "../program-details.types";
 
 export const programEventsSelector = (state: RootState) =>
   state.programDetails.programHistory.events;
 
 export const programEventsTableSelector = tableSelectorCreator<
   RootState,
-  InvestmentEventViewModels,
-  InvestmentEventViewModels
+  EventsDataType,
+  EventsDataType
 >(programEventsSelector, "events");
 
-export const programEventsReducer = tableReducerFactory<
-  InvestmentEventViewModels
->({
+export const programEventsReducer = tableReducerFactory<EventsDataType>({
   clearable: true,
   type: EVENTS_ACTION_TYPE,
   paging: DEFAULT_PAGING,
@@ -55,11 +52,11 @@ export const openPositionsSelector = (state: RootState) =>
 
 export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
-  TradesViewModel,
-  TradesViewModel
+  TradesDataType,
+  TradesDataType
 >(openPositionsSelector);
 
-export const openPositionsReducer = tableReducerFactory<TradesViewModel>({
+export const openPositionsReducer = tableReducerFactory<TradesDataType>({
   type: PROGRAM_OPEN_POSITIONS,
   paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
 });
@@ -69,11 +66,11 @@ export const tradesSelector = (state: RootState) =>
 
 export const tradesTableSelector = tableSelectorCreator<
   RootState,
-  TradesViewModel,
-  TradesViewModel
+  TradesDataType,
+  TradesDataType
 >(tradesSelector);
 
-export const tradesReducer = tableReducerFactory<TradesViewModel>({
+export const tradesReducer = tableReducerFactory<TradesDataType>({
   type: PROGRAM_TRADES,
   paging: DEFAULT_PAGING,
   filtering: PROGRAM_TRADES_FILTERS,
@@ -85,30 +82,30 @@ const periodHistorySelector = (state: RootState) =>
 
 export const periodHistoryTableSelector = tableSelectorCreator<
   RootState,
-  ProgramPeriodsViewModel,
-  ProgramPeriodsViewModel
+  ProgramPeriodsDataType,
+  ProgramPeriodsDataType
 >(periodHistorySelector, "periods");
 
-export const periodHistoryReducer = tableReducerFactory<
-  ProgramPeriodsViewModel
->({
-  type: GET_PROGRAM_PERIOD_HISTORY,
-  paging: DEFAULT_PAGING,
-  filtering: PROGRAM_TRADES_FILTERS,
-  defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-});
+export const periodHistoryReducer = tableReducerFactory<ProgramPeriodsDataType>(
+  {
+    type: GET_PROGRAM_PERIOD_HISTORY,
+    paging: DEFAULT_PAGING,
+    filtering: PROGRAM_TRADES_FILTERS,
+    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+  }
+);
 
 const financialStatisticSelector = (state: RootState) =>
   state.programDetails.programHistory.financialStatistic;
 
 export const financialStatisticTableSelector = tableSelectorCreator<
   RootState,
-  ProgramPeriodsViewModel,
-  ProgramPeriodsViewModel
+  ProgramPeriodsDataType,
+  ProgramPeriodsDataType
 >(financialStatisticSelector);
 
 export const financialStatisticReducer = tableReducerFactory<
-  ProgramPeriodsViewModel
+  ProgramPeriodsDataType
 >({
   type: PROGRAM_FINANCIAL_STATISTIC,
   paging: DEFAULT_PAGING,
@@ -121,12 +118,12 @@ const subscriptionsSelector = (state: RootState) =>
 
 export const subscriptionsTableSelector = tableSelectorCreator<
   RootState,
-  SignalProviderSubscribers,
-  SignalProviderSubscribers
+  SignalProviderSubscribersDataType,
+  SignalProviderSubscribersDataType
 >(subscriptionsSelector, "subscribers");
 
 export const subscriptionsReducer = tableReducerFactory<
-  SignalProviderSubscribers
+  SignalProviderSubscribersDataType
 >({
   type: PROGRAM_SUBSCRIPTIONS,
   paging: DEFAULT_PAGING,
@@ -135,12 +132,12 @@ export const subscriptionsReducer = tableReducerFactory<
 });
 
 export type ProgramHistoryState = Readonly<{
-  events: ITableState<InvestmentEventViewModels>;
-  openPositions: ITableState<TradesViewModel>;
-  trades: ITableState<TradesViewModel>;
-  periodHistory: ITableState<ProgramPeriodsViewModel>;
-  financialStatistic: ITableState<ProgramPeriodsViewModel>;
-  subscriptions: ITableState<SignalProviderSubscribers>;
+  events: ITableState<EventsDataType>;
+  openPositions: ITableState<TradesDataType>;
+  trades: ITableState<TradesDataType>;
+  periodHistory: ITableState<ProgramPeriodsDataType>;
+  financialStatistic: ITableState<ProgramPeriodsDataType>;
+  subscriptions: ITableState<SignalProviderSubscribersDataType>;
 }>;
 
 const programHistoryReducer = clearableReducer(
