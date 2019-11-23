@@ -2,16 +2,14 @@ import "components/details/details.scss";
 import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
-import GVButton from "components/gv-button";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
 import SettingsBlock from "components/settings-block/settings-block";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
-import useCopy from "hooks/copy.hook";
+import CopyButton from "modules/copy-button/copy-button";
 import PublicInfo from "modules/public-info/public-info";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 const _Profile: React.FC<IProfileOwnProps> = ({
@@ -19,11 +17,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({
   onUpdate,
   isPending
 }) => {
-  const copy = useCopy("profile-page.success-copy");
   const [t] = useTranslation();
-  const onCopy = useCallback(() => {
-    copy(info.id);
-  }, [info.id]);
   return (
     <>
       <SettingsBlock label={t("profile-page.public-info")}>
@@ -37,7 +31,10 @@ const _Profile: React.FC<IProfileOwnProps> = ({
       <SettingsBlock label={t("profile-page.id")}>
         <div className="profile__content">
           <div>{info.id}</div>
-          <GVButton onClick={onCopy}>{t("buttons.copy")}</GVButton>
+          <CopyButton
+            value={info.id}
+            successMessage={"profile-page.success-copy"}
+          />
         </div>
       </SettingsBlock>
       <SettingsBlock label={t("profile-page.settings.profile-image")}>
