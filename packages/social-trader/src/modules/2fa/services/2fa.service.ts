@@ -33,3 +33,6 @@ export const sendPassword = (model: PasswordModel) =>
 
 export const disableTFA = (model: TwoFactorCodeWithPassword) =>
   authApi.disableTwoStepAuth(authService.getAuthArg(), { model });
+
+export const fetchTFAData = () =>
+  authApi.createTwoStepAuth(authService.getAuthArg());
