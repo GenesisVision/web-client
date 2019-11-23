@@ -1,15 +1,15 @@
+import "./google-auth.scss";
+
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import CopyIcon from "components/icon/copy-icon";
-import copy from "copy-to-clipboard";
 import { RecoveryCode } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import useCopy from "hooks/copy.hook";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose, Dispatch } from "redux";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
   <div className="codes__item" key={code}>
@@ -30,22 +30,14 @@ const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
 const getCodesString = (codes: RecoveryCode[]): string =>
   codes.map(code => code.code).join("\n");
 
-const GoogleAuth: React.FC<Props> = ({
-  t,
-  codes,
-  notifySuccess,
-  notifyError
-}) => {
-  const onCopy = () => {
-    try {
-      copy(getCodesString(codes));
-      notifySuccess(t("2fa-page.codes.copy-success"));
-    } catch (error) {
-      notifyError(t("2fa-page.codes.copy-error"));
-    }
-  };
+const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
+  const [t] = useTranslation();
+  const copy = useCopy("2fa-page.codes.copy-success");
+  const onCopy = useCallback(() => {
+    copy(getCodesString(codes));
+  }, [codes]);
   return (
-    <>
+    <div className="recovery-codes-container">
       <DialogTop title={t("2fa-page.codes.title")} />
       <DialogBottom>
         <div className="dialog__text">
@@ -64,28 +56,12 @@ const GoogleAuth: React.FC<Props> = ({
         </DialogButtons>
         <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
       </DialogBottom>
-    </>
+    </div>
   );
 };
 
-const GoogleAuthCodes = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(
-    undefined,
-    (dispatch: Dispatch): DispatchProps => ({
-      notifySuccess: (text: string) =>
-        dispatch(alertMessageActions.success(text)),
-      notifyError: (text: string) => dispatch(alertMessageActions.error(text))
-    })
-  )
-)(GoogleAuth);
-
-interface Props extends WithTranslation, DispatchProps, OwnProps {}
-interface OwnProps {
+interface Props {
   codes: RecoveryCode[];
 }
-interface DispatchProps {
-  notifySuccess: (text: string) => void;
-  notifyError: (text: string) => void;
-}
+const GoogleAuthCodes = React.memo(_GoogleAuthCodes);
 export default GoogleAuthCodes;
