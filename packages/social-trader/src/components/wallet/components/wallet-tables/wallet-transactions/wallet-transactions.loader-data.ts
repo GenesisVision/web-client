@@ -1,24 +1,45 @@
 import faker from "faker";
-import { getRandomInteger } from "utils/helpers";
+import { ManagerAssetDetails } from "gv-api-web";
+import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 
-type MultiWalletTransaction = any; // TODO declare type
+import { MultiWalletTransaction } from "../../../wallet.types";
 
 const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
   id: "",
-  currencyFrom: "GVT",
-  currencyTo: "GVT",
-  type: "Investment",
+  actions: { canResend: false, canCancel: false },
+  details: [{ details: "", title: "" }],
+  asset: {} as ManagerAssetDetails,
   date: new Date(),
   status: "Done",
-  logoFrom: "",
-  logoTo: "",
   description: faker.lorem.words(5),
-  amount: getRandomInteger(0, 100),
-  amountTo: getRandomInteger(0, 100)
+  amount: {
+    first: {
+      amount: getRandomInteger(0, 100),
+      currency: "GVT",
+      title: "",
+      color: ""
+    },
+    second: {
+      amount: getRandomInteger(0, 100),
+      currency: "GVT",
+      title: "",
+      color: ""
+    }
+  },
+  wallet: {
+    first: {
+      title: "",
+      currency: "GVT",
+      logo: ""
+    },
+    second: {
+      title: "",
+      currency: "GVT",
+      logo: ""
+    }
+  }
 });
 
-export const walletTransactionsLoaderData: MultiWalletTransaction[] = new Array(
-  10
-)
-  .fill("")
-  .map(walletTransactionLoaderDataCreator);
+export const walletTransactionsLoaderData: MultiWalletTransaction[] = tableLoaderCreator(
+  walletTransactionLoaderDataCreator
+);
