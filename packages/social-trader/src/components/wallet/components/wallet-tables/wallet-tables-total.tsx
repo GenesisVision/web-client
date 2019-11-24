@@ -7,10 +7,8 @@ import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Surface from "components/surface/surface";
 import Tooltip from "components/tooltip/tooltip";
 import { WalletData } from "gv-api-web";
-import { Location } from "history";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import useHashTab from "../../services/hashTab.hook";
 import { WALLET_TOTAL_PAGE_ROUTE } from "../../wallet.routes";
@@ -22,7 +20,8 @@ import TransactionsRow from "./wallet-transactions/transactions-row";
 import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
-const _WalletTablesTotal: React.FC<Props> = ({ t, wallets }) => {
+const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
+  const [t] = useTranslation();
   const { tab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
     <Surface className="wallet-container">
@@ -122,16 +121,9 @@ enum TABS {
   EXTERNAL_TAB = "#external"
 }
 
-interface Props extends WithTranslation, OwnProps {
-  location: Location;
-}
-
-interface OwnProps {
+interface Props {
   wallets: WalletData[];
 }
 
-const WalletContainerTotal = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_WalletTablesTotal);
+const WalletContainerTotal = React.memo(_WalletTablesTotal);
 export default WalletContainerTotal;
