@@ -17,7 +17,6 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   transaction,
   update
 }) => {
-  console.log(transaction);
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const handleAction = useCallback(() => {
     if (update) update();
