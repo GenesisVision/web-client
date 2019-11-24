@@ -11,15 +11,19 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
+import { MultiWalletTransaction } from "../../../wallet.types";
+
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   transaction,
   update
 }) => {
+  console.log(transaction);
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const handleAction = useCallback(() => {
     if (update) update();
     setClosePopup();
   }, [update]);
+  const walletFirst = transaction.wallet.first;
   return (
     <>
       <TransactionDetailsPopup
@@ -31,8 +35,8 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
       <TableRow stripy onClick={setOpenPopup}>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
           <CurrencyItem
-            logo={transaction.logo}
-            name={transaction.currency}
+            logo={walletFirst.logo}
+            name={walletFirst.currency}
             small
           />
         </TableCell>
@@ -40,21 +44,28 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
           {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-          {(transaction.statusUrl && (
+          {/*{("statusUrl" in transaction && transaction.statusUrl && (
             <a href={transaction.statusUrl} target="_blank">
               {transaction.status}
             </a>
-          )) || <>{transaction.status}</>}
+          )) || <>{transaction.status}</>}*/}
+          {transaction.status}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
           <Profitability
-            value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+            value={formatValue(
+              transaction.amount.first.amount,
+              DEFAULT_DECIMAL_SCALE
+            )}
           >
             <NumberFormat
-              value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+              value={formatValue(
+                transaction.amount.first.amount,
+                DEFAULT_DECIMAL_SCALE
+              )}
               thousandSeparator=" "
               displayType="text"
-              suffix={` ${transaction.currency}`}
+              suffix={` ${transaction.amount.first.currency}`}
             />
           </Profitability>
         </TableCell>
@@ -64,7 +75,7 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
 };
 
 interface Props {
-  transaction: any; // TODO declare type
+  transaction: MultiWalletTransaction;
   update?: UpdateItemsFuncType;
 }
 
