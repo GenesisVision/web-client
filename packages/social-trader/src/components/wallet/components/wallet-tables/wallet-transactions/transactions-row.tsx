@@ -3,6 +3,7 @@ import Profitability from "components/profitability/profitability";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { AmountRowCell, WalletRowCell } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import TransactionDetailsPopup from "modules/transaction-details/transaction-details-popup";
 import React, { useCallback } from "react";
@@ -11,51 +12,57 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
-type MultiWalletTransaction = any; // TODO declare type
+import { MultiWalletTransaction } from "../../../wallet.types";
 
-const ConvertTransaction: React.FC<Props> = React.memo(({ transaction }) => (
-  <>
-    <div className="wallet-transactions__col">
-      <CurrencyItem
-        logo={transaction.logoFrom}
-        name={transaction.currencyFrom}
-        small
-      />
-    </div>
-    <div className="wallet-transactions__back-arrow">&rarr;</div>
-    <div className="wallet-transactions__col">
-      <CurrencyItem
-        logo={transaction.logoTo}
-        name={transaction.currencyTo}
-        small
-      />
-    </div>
-  </>
-));
+const ConvertTransaction: React.FC<{
+  wallets: WalletRowCell;
+}> = React.memo(({ wallets: { first, second } }) => {
+  return (
+    <>
+      {first && (
+        <div className="wallet-transactions__col">
+          <CurrencyItem logo={first.logo} name={first.currency} small />
+        </div>
+      )}
+      <div className="wallet-transactions__back-arrow">&rarr;</div>
+      {second && (
+        <div className="wallet-transactions__col">
+          <CurrencyItem logo={second.logo} name={second.currency} small />
+        </div>
+      )}
+    </>
+  );
+});
 
 const AmountConvertTransaction: React.FC<{
-  transaction: MultiWalletTransaction;
-}> = React.memo(props => (
-  <>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amount, DEFAULT_DECIMAL_SCALE)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix={` ${props.transaction.currencyFrom}`}
-      />
-    </span>
-    <span className="wallet-transactions__back-arrow">&rarr;</span>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amountTo, DEFAULT_DECIMAL_SCALE)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix={` ${props.transaction.currencyTo}`}
-      />
-    </span>
-  </>
-));
+  amount: AmountRowCell;
+}> = React.memo(({ amount: { first, second } }) => {
+  return (
+    <>
+      {first && (
+        <span className="wallet-transactions__col">
+          <NumberFormat
+            value={formatValue(first.amount, DEFAULT_DECIMAL_SCALE)}
+            thousandSeparator=" "
+            displayType="text"
+            suffix={` ${first.currency}`}
+          />
+        </span>
+      )}
+      <span className="wallet-transactions__back-arrow">&rarr;</span>
+      {second && (
+        <span className="wallet-transactions__col">
+          <NumberFormat
+            value={formatValue(second.amount, DEFAULT_DECIMAL_SCALE)}
+            thousandSeparator=" "
+            displayType="text"
+            suffix={` ${second.currency}`}
+          />
+        </span>
+      )}
+    </>
+  );
+});
 
 const _TransactionsRow: React.FC<Props> = ({
   transaction,
@@ -67,7 +74,8 @@ const _TransactionsRow: React.FC<Props> = ({
     if (update) update();
     setClosePopup();
   }, [update]);
-  const isConvertAction = transaction.type === "Converting";
+  const isConvertAction = false; // transaction.type === "Converting";
+  const walletFirst = transaction.wallet.first;
   return (
     <>
       <TransactionDetailsPopup
@@ -81,11 +89,11 @@ const _TransactionsRow: React.FC<Props> = ({
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             <div className="wallet-transactions__cell--wallet-wrapper">
               {isConvertAction ? (
-                <ConvertTransaction transaction={transaction} />
+                <ConvertTransaction wallets={transaction.wallet} />
               ) : (
                 <CurrencyItem
-                  logo={transaction.logoFrom}
-                  name={transaction.currencyFrom}
+                  logo={walletFirst.logo}
+                  name={walletFirst.currency}
                   small
                 />
               )}
@@ -106,17 +114,23 @@ const _TransactionsRow: React.FC<Props> = ({
         </TableCell>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
           {isConvertAction ? (
-            <AmountConvertTransaction transaction={transaction} />
+            <AmountConvertTransaction amount={transaction.amount} />
           ) : (
             <Profitability
-              value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+              value={formatValue(
+                transaction.amount.first.amount,
+                DEFAULT_DECIMAL_SCALE
+              )}
             >
               <NumberFormat
-                value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+                value={formatValue(
+                  transaction.amount.first.amount,
+                  DEFAULT_DECIMAL_SCALE
+                )}
                 thousandSeparator=" "
                 displayType="text"
                 allowNegative={false}
-                suffix={` ${transaction.currencyFrom}`}
+                suffix={` ${transaction.amount.first.currency}`}
               />
             </Profitability>
           )}
@@ -129,7 +143,7 @@ const _TransactionsRow: React.FC<Props> = ({
 export interface Props {
   transaction: MultiWalletTransaction;
   walletCurrency?: string;
-  update?(): void;
+  update?: () => void;
 }
 
 const TransactionsRow = React.memo(_TransactionsRow);
