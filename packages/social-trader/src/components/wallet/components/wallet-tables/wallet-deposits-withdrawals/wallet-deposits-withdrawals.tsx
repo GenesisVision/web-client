@@ -27,7 +27,7 @@ import { compose } from "redux";
 
 import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
 import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
-import { walletDepositsWithdrawalsLoaderData } from "./wallet-deposits-withdrawals.loader-data";
+import { walletTransactionsLoaderData } from "../wallet-transactions/wallet-transactions.loader-data";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -58,7 +58,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   return (
     <div className="wallet-deposits-withdrawals">
       <TableModule
-        loaderData={walletDepositsWithdrawalsLoaderData}
+        loaderData={walletTransactionsLoaderData}
         timestamp={timestamp.getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
