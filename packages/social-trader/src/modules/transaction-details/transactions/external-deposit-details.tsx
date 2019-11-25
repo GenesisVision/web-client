@@ -11,7 +11,7 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
-
+/*
 const ExternalDeposit: React.FC<TransactionDetailsProps> = ({ data }) => {
   const [t] = useTranslation();
   return (
@@ -64,4 +64,4 @@ const ExternalDeposit: React.FC<TransactionDetailsProps> = ({ data }) => {
   );
 };
 
-export default ExternalDeposit;
+export default ExternalDeposit;*/

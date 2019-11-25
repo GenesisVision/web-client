@@ -14,7 +14,7 @@ import { formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
 
-const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
+/*const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   data,
   handleCancel,
   handleResend
@@ -99,4 +99,4 @@ const ExternalWithdrawal: React.FC<TransactionDetailsProps> = ({
   );
 };
 
-export default ExternalWithdrawal;
+export default ExternalWithdrawal;*/

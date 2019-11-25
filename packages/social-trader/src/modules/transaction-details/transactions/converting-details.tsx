@@ -10,7 +10,7 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
 
-const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
+/*const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
     header={t("transactions-details.converting.title")}
     body={
@@ -91,4 +91,4 @@ const ConvertingDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   />
 );
 
-export default ConvertingDetails;
+export default ConvertingDetails;*/

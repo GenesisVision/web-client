@@ -36,7 +36,7 @@ const SignalFees: React.ComponentType<
 interface SignalFeesProps {
   fees: SignalFee[];
 }
-
+/*
 const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data }) => {
   const [t] = useTranslation();
   const role = useRole();
@@ -81,4 +81,4 @@ const _SignalTransaction: React.FC<TransactionDetailsProps> = ({ data }) => {
   );
 };
 const SignalTransaction = React.memo(_SignalTransaction);
-export default SignalTransaction;
+export default SignalTransaction;*/

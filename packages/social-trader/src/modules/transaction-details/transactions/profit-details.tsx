@@ -10,7 +10,7 @@ import { formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
 
-const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
+/*const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   <TransactionDetails
     header={t(`transactions-details.profit`)}
     body={
@@ -82,4 +82,4 @@ const ProfitDetails: React.FC<TransactionDetailsProps> = ({ data, t }) => (
   />
 );
 
-export default ProfitDetails;
+export default ProfitDetails;*/

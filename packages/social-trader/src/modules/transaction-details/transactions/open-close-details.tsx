@@ -10,7 +10,7 @@ import { formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
 
-const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
+/*const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
   data,
   t
 }) => (
@@ -55,4 +55,4 @@ const OpenCloseTransaction: React.FC<TransactionDetailsProps> = ({
   />
 );
 
-export default OpenCloseTransaction;
+export default OpenCloseTransaction;*/

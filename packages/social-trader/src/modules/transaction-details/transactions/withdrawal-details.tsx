@@ -10,7 +10,7 @@ import { formatValue } from "utils/formatter";
 
 import TransactionDetails from "./transaction-details";
 
-const WithdrawalTransaction: React.FC<TransactionDetailsProps> = ({
+/*const WithdrawalTransaction: React.FC<TransactionDetailsProps> = ({
   data,
   t
 }) => (
@@ -57,4 +57,4 @@ const WithdrawalTransaction: React.FC<TransactionDetailsProps> = ({
   />
 );
 
-export default WithdrawalTransaction;
+export default WithdrawalTransaction;*/
