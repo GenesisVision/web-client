@@ -74,8 +74,9 @@ const _TransactionsRow: React.FC<Props> = ({
     if (update) update();
     setClosePopup();
   }, [update]);
-  const isConvertAction = false; // transaction.type === "Converting";
   const walletFirst = transaction.wallet.first;
+  const walletSecond = transaction.wallet.second;
+  const isConvertAction = !!walletSecond;
   return (
     <>
       <TransactionDetailsPopup
