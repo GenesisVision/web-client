@@ -1,28 +1,33 @@
 import GVProgramAvatar from "components/gv-program-avatar";
+import { ManagerAssetDetails } from "gv-api-web";
 import * as React from "react";
 
-type ProgramTransactionDetails = any; // TODO declare type
-const TransactionAsset = ({ data, url }: Props) => (
+const _TransactionAsset: React.FC<Props> = ({ data, url }) => (
   <div
-    className={`transaction-asset transaction-asset--${data.programType.toLowerCase()}`}
+    className={`transaction-asset transaction-asset--${data.assetType.toLowerCase()}`}
   >
     <GVProgramAvatar
       url={url}
-      level={data.level > 0 ? data.level : undefined}
+      level={
+        data.programDetails && data.programDetails.level > 0
+          ? data.programDetails.level
+          : undefined
+      }
       alt={data.title}
       color={data.color}
-      levelProgress={data.levelProgress}
+      levelProgress={data.programDetails && data.programDetails.levelProgress}
     />
     <div className="transaction-asset__description">
       <p className="transaction-asset__title">{data.title}</p>
-      <p className="transaction-asset__trader">{data.managerName}</p>
+      <p className="transaction-asset__trader">{data.manager}</p>
     </div>
   </div>
 );
 
-export default React.memo(TransactionAsset);
-
 interface Props {
-  data: ProgramTransactionDetails;
+  data: ManagerAssetDetails;
   url?: string;
 }
+
+const TransactionAsset = React.memo(_TransactionAsset);
+export default TransactionAsset;
