@@ -15,12 +15,8 @@ import TransactionAsset from "modules/transaction-details/transactions/transacti
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
-import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
-import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatValue } from "utils/formatter";
-import { CurrencyEnum } from "utils/types";
 
 import TransactionDetails from "./transaction-details";
 
@@ -42,27 +38,6 @@ const TransactionDetailsItem: React.FC<{
   return (
     <DialogField>
       <StatisticItem label={title}>{details}</StatisticItem>
-    </DialogField>
-  );
-});
-
-const TransactionFeeBlock: React.FC<{
-  fee: number;
-  feeAmount: number;
-  currency: CurrencyEnum;
-  label: string;
-}> = React.memo(({ fee, feeAmount, currency, label }) => {
-  return (
-    <DialogField>
-      <StatisticItem label={label}>
-        <NumberFormat value={fee} suffix="%" displayType="text" />
-        <NumberFormat
-          value={formatValue(Math.abs(feeAmount), DEFAULT_DECIMAL_SCALE)}
-          prefix={" ("}
-          suffix={` ${currency})`}
-          displayType="text"
-        />
-      </StatisticItem>
     </DialogField>
   );
 });
@@ -140,9 +115,6 @@ const _CommonTransactionDetails: React.FC<Props> = ({
 }) => {
   console.log(data);
   const [t] = useTranslation();
-  const amount = data.amount.first.amount;
-  const gvInvestFee = useSelector(gvInvestFeeSelector);
-  const gvInvestFeeAmount = calculatePercentage(amount, gvInvestFee);
   return (
     <TransactionDetails
       header={data.description}
@@ -168,12 +140,6 @@ const _CommonTransactionDetails: React.FC<Props> = ({
             />
           )}
           <TransactionStatusBlock status={data.status} />
-          <TransactionFeeBlock
-            currency={data.amount.first.currency}
-            fee={gvInvestFee}
-            feeAmount={gvInvestFeeAmount}
-            label={t(`transactions-details.gv-fee`)}
-          />
           {data.details && (
             <TransactionDetailsItemsBlock items={data.details} />
           )}
