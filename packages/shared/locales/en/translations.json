@@ -1246,6 +1246,7 @@
     }
   },
   "transactions-details": {
+    "amount": "Amount",
     "title": "Transaction details",
     "entry-fee": "Entry fee",
     "success-fee": "Success fee",
@@ -1284,18 +1285,18 @@
     },
     "investment": {
       "amount": "Investment amount",
-      "Program": "Program investment",
-      "Fund": "Fund investment",
-      "to-Program": "To the program",
-      "to-Fund": "To the fund"
+      "program": "Program investment",
+      "fund": "Fund investment",
+      "direction-program": "To the program",
+      "direction-fund": "To the fund"
     },
     "withdrawal": {
       "title": "Withdrawal",
       "amount": "Withdrawal amount",
-      "Program": "Program withdrawal",
-      "Fund": "Fund withdrawal",
-      "from-Program": "From the program",
-      "from-Fund": "From the fund"
+      "program": "Program withdrawal",
+      "fund": "Fund withdrawal",
+      "direction-program": "From the program",
+      "direction-fund": "From the fund"
     },
     "signal": {
       "SubscribeSignal": "Signal fee payment",
