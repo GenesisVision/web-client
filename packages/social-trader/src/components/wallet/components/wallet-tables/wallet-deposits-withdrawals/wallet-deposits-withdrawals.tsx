@@ -17,15 +17,13 @@ import {
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
-import { Currency, PlatformInfo } from "gv-api-web";
+import { Currency } from "gv-api-web";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { platformDataSelector } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
-import { compose } from "redux";
 
-import { WalletLastUpdateState } from "../../../reducers/wallet-last-update";
 import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
 import { walletTransactionsLoaderData } from "../wallet-transactions/wallet-transactions.loader-data";
 
@@ -42,13 +40,15 @@ const DEFAULT_FILTERS = [
 ];
 
 const _WalletDepositsWithdrawals: React.FC<Props> = ({
-  t,
   renderBodyRow,
   columns,
-  platformData,
-  timestamp,
   currency
 }) => {
+  const timestamp = useSelector(
+    (state: RootState) => state.wallet.lastUpdate.timestamp
+  );
+  const platformData = useSelector(platformDataSelector);
+  const [t] = useTranslation();
   const getMultiTransactionsExternal: GetItemsFuncType = useCallback(
     filters => fetchMultiTransactionsExternal(currency, filters),
     [currency]
@@ -98,26 +98,11 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  timestamp: state.wallet.lastUpdate.timestamp,
-  platformData: platformDataSelector(state)
-});
-
-interface Props extends OwnProps, StateProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
   currency?: Currency;
 }
 
-interface StateProps extends WalletLastUpdateState {
-  platformData?: PlatformInfo;
-}
-
-const WalletDepositsWithdrawals = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(mapStateToProps),
-  React.memo
-)(_WalletDepositsWithdrawals);
+const WalletDepositsWithdrawals = React.memo(_WalletDepositsWithdrawals);
 export default WalletDepositsWithdrawals;
