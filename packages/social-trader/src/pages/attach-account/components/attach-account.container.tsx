@@ -16,7 +16,9 @@ import AttachAccountSettings, {
 
 const _AttachAccountPage: React.FC<Props> = () => {
   const [t] = useTranslation();
+  const pushMiddleware = () => Push(TRADING_ROUTE);
   const { sendRequest: attach } = useApiRequest({
+    middleware: [pushMiddleware],
     request: attachAccount
   });
   const { sendRequest: getExchanges, data: exchanges } = useApiRequest<
@@ -31,7 +33,7 @@ const _AttachAccountPage: React.FC<Props> = () => {
     (
       values: IAttachAccountSettingsFormValues,
       setSubmitting: SetSubmittingType
-    ) => attach(values, setSubmitting).then(() => Push(TRADING_ROUTE)),
+    ) => attach(values, setSubmitting),
     []
   );
   return (

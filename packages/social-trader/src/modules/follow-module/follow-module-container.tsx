@@ -49,9 +49,10 @@ const _FollowModuleContainer: React.FC<Props> = ({
     request: isExternal ? fetchExternalAccounts : fetchAccounts
   });
 
-  const { sendRequest: submitChanges } = useApiRequest(
-    composeApiRequest(signalSubscription.hasActiveSubscription, isExternal)
-  );
+  const { sendRequest: submitChanges } = useApiRequest({
+    ...composeApiRequest(signalSubscription.hasActiveSubscription, isExternal),
+    middleware: [onApply, onClose]
+  });
 
   const { rate, getRate } = useGetRate();
 
@@ -77,9 +78,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
           brokerType: broker
         },
         setSubmitting
-      )
-        .then(onApply)
-        .then(onClose);
+      );
     },
     []
   );

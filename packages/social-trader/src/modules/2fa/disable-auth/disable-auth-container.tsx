@@ -13,14 +13,13 @@ import DisableAuthSuccess from "./disable-auth-success";
 const _DisableAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   const [isSuccess, setSuccess, setFail] = useIsOpen();
   const { errorMessage, sendRequest } = useApiRequest({
+    middleware: [setSuccess, onSubmit],
     request: disableTFA,
-    catchCallback: () => setFail()
+    catchCallback: setFail
   });
   const handleSubmit = useCallback(
     (model: IDisableAuthFormFormValues, setSubmitting: SetSubmittingType) =>
-      sendRequest(model, setSubmitting)
-        .then(setSuccess)
-        .then(onSubmit),
+      sendRequest(model, setSubmitting),
     []
   );
   return isSuccess ? (

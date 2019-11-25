@@ -23,6 +23,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     (asset === ASSET.FUND && "edit-fund.notifications.edit-success") ||
     "";
   const { sendRequest: editRequest } = useApiRequest({
+    middleware: [dispatchDescription],
     request: editAsset,
     successMessage
   });
@@ -56,11 +57,9 @@ const _AssetsEditPage: React.FC<Props> = ({
           investmentLimit
         },
         asset
-      })
-        .then(dispatchDescription)
-        .finally(resetForm);
+      }).finally(resetForm);
     },
-    [asset, description, dispatchDescription, editAsset]
+    [asset, description, editAsset]
   );
   const applyCloseAsset = useCallback(() => redirectToAsset(description!.id), [
     description,

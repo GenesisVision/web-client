@@ -22,11 +22,12 @@ const _Reallocation: React.FC<Props> = ({
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const { errorMessage, sendRequest } = useApiRequest({
+    middleware: [onApply],
     request: args => dispatch(updateAssets(args))
   });
   const handleApply = useCallback(
     ({ assets }: IReallocateFormValues, isSubmitting) => {
-      sendRequest({ id, assets }, isSubmitting).then(onApply);
+      sendRequest({ id, assets }, isSubmitting);
     },
     [id]
   );

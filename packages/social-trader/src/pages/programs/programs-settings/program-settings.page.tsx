@@ -32,15 +32,23 @@ const _ProgramsEditPage: React.FC = () => {
   const createProgramInfo = useSelector(createProgramInfoSelector);
   const description = useSelector(programDescriptionSelector);
 
+  const updateDescription = useCallback(
+    () => dispatch(dispatchProgramDescriptionWithId(description!.id)),
+    [description]
+  );
+
   const { sendRequest: editSignal } = useApiRequest({
+    middleware: [updateDescription],
     request: programEditSignal,
     successMessage: "program-edit-signal.success-alert-message"
   });
   const { sendRequest: changeBroker } = useApiRequest({
+    middleware: [updateDescription],
     request: changeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
   const { sendRequest: cancelChangeBroker } = useApiRequest({
+    middleware: [updateDescription],
     request: changeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
@@ -52,18 +60,13 @@ const _ProgramsEditPage: React.FC = () => {
     description && getProgramBrokers(description.id);
   }, [description]);
 
-  const updateDescription = useCallback(
-    () => dispatch(dispatchProgramDescriptionWithId(description!.id)),
-    [description]
-  );
-
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       editSignal({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(updateDescription),
+      }),
     [description, updateDescription]
   );
 
@@ -79,13 +82,13 @@ const _ProgramsEditPage: React.FC = () => {
           leverage
         },
         setSubmitting
-      ).then(updateDescription);
+      );
     },
     [description, updateDescription]
   );
 
   const handleCancelChangeBroker = useCallback(() => {
-    cancelChangeBroker(description!.id).then(updateDescription);
+    cancelChangeBroker(description!.id);
   }, [description, updateDescription]);
 
   return (

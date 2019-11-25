@@ -17,7 +17,10 @@ const _ConfirmContainer: React.FC<Props> = ({
     errorMessage,
     cleanErrorMessage,
     sendRequest: confirm
-  } = useApiRequest({ request: service.confirm });
+  } = useApiRequest({
+    middleware: [onClose, onApply],
+    request: service.confirm
+  });
   const { data, sendRequest: get2faInfo } = useApiRequest({
     request: service.get2faInfo
   });
@@ -33,9 +36,7 @@ const _ConfirmContainer: React.FC<Props> = ({
 
   const handleConfirm = useCallback(
     (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {
-      confirm({ ...values, programId }, setSubmitting)
-        .then(handleClose)
-        .then(onApply);
+      confirm({ ...values, programId }, setSubmitting);
     },
     [programId]
   );
