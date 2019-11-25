@@ -7,8 +7,8 @@ import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import {
   AmountItem,
   CurrencyItem as CurrencyItemType,
-  ManagerAssetDetails,
   MultiWalletTransactionStatus,
+  TransactionAssetDetails,
   TransactionDetailItem
 } from "gv-api-web";
 import TransactionAsset from "modules/transaction-details/transactions/transaction-asset";
@@ -84,7 +84,7 @@ const TransactionStatusBlock: React.FC<{
 
 const TransactionAssetBlock: React.FC<{
   type: "investment" | "withdrawal";
-  asset: ManagerAssetDetails;
+  asset: TransactionAssetDetails;
 }> = React.memo(({ asset, type }) => {
   const [t] = useTranslation();
   return (

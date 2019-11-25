@@ -3,7 +3,7 @@ import "./tag-broker-container.scss";
 import classNames from "classnames";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 
 import TagItem from "../tag-item/tag-item";
@@ -42,7 +42,7 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
 };
 
 interface Props {
-  tags: ProgramTag[];
+  tags: Tag[];
   className?: string;
 }
 

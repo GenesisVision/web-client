@@ -1,6 +1,6 @@
 import "./tag-item.scss";
 
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import React from "react";
 
 import TagItem from "./tag-item";
@@ -16,7 +16,7 @@ const _TagItemList: React.FC<Props> = ({ tags }) => {
 };
 
 interface Props {
-  tags: ProgramTag[];
+  tags: Tag[];
 }
 const TagItemList = React.memo(_TagItemList);
 export default TagItemList;

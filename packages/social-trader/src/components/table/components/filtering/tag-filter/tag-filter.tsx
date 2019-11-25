@@ -1,7 +1,7 @@
 import "./tag-filter.scss";
 
 import TagItem from "components/tags/tag-item/tag-item";
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -48,6 +48,6 @@ export default TagFilter;
 export interface Props {
   name: string;
   value: string[];
-  values: ProgramTag[];
+  values: Tag[];
   onChange(value: TFilter<string[]>): void;
 }

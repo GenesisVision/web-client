@@ -2,7 +2,7 @@ import "./broker-card.scss";
 
 import classnames from "classnames";
 import TagBrokerContainer from "components/tags/tag-broker-container/tag-broker-container";
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 import filesService from "services/file-service";
 
@@ -68,6 +68,6 @@ interface Props {
   brokerName: string;
   onSelect?(brokerName: string): () => void;
   cardState: BROKER_CARD_EXTRA_STATE;
-  tags?: ProgramTag[];
+  tags?: Tag[];
   isSelected?: boolean;
 }

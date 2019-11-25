@@ -1,5 +1,5 @@
 import GVProgramAvatar from "components/gv-program-avatar";
-import { ManagerAssetDetails } from "gv-api-web";
+import { TransactionAssetDetails } from "gv-api-web";
 import * as React from "react";
 
 const _TransactionAsset: React.FC<Props> = ({ data, url }) => (
@@ -25,7 +25,7 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => (
 );
 
 interface Props {
-  data: ManagerAssetDetails;
+  data: TransactionAssetDetails;
   url?: string;
 }
 

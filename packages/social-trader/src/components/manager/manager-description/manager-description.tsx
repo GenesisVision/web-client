@@ -41,7 +41,7 @@ const _ManagerDescription: React.FC<Props> = ({ profile }) => {
               <StatisticItem label={t("manager-page.assets")}>
                 <FundAssetContainer
                   assets={profile.assets.map(
-                    item =>
+                    (item: string) =>
                       ({
                         asset: item,
                         name: item,
@@ -61,7 +61,9 @@ const _ManagerDescription: React.FC<Props> = ({ profile }) => {
   );
 };
 
+interface Props {
+  profile: PublicProfile;
+}
+
 const ManagerDescription = React.memo(_ManagerDescription);
 export default ManagerDescription;
-
-type Props = { profile: PublicProfile };

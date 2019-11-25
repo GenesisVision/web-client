@@ -12,7 +12,7 @@ import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filte
 import {
   ItemsViewModelProgramDetailsList,
   PlatformCurrencyInfo,
-  ProgramTag
+  Tag
 } from "gv-api-web";
 import { Location } from "history";
 import { ToggleFavoriteDispatchableType } from "modules/favorite-asset/services/favorite-fund.service";
@@ -62,7 +62,7 @@ interface StateProps {
   currencies: PlatformCurrencyInfo[];
   isAuthenticated: boolean;
   programCurrencies: string[];
-  programTags: ProgramTag[];
+  programTags: Tag[];
   data?: ItemsViewModelProgramDetailsList;
 }
 

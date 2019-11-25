@@ -1,5 +1,5 @@
 import TagItem from "components/tags/tag-item/tag-item";
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -47,6 +47,6 @@ const TagFilterPopover = compose<React.ComponentType<Props>>(
 export default TagFilterPopover;
 
 interface Props {
-  values: ProgramTag[];
+  values: Tag[];
   changeFilter?(value: string): void;
 }

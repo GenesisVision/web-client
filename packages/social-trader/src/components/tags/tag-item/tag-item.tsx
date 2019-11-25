@@ -1,11 +1,11 @@
 import "./tag-item.scss";
 
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 
 import TagBubble from "./tag-bubble";
 
-const _TagItem: React.FC<ProgramTag> = ({ color, name }) => (
+const _TagItem: React.FC<Tag> = ({ color, name }) => (
   <TagBubble color={color} content={name} />
 );
 

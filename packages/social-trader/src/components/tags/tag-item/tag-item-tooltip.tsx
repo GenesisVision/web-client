@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import { ProgramTag } from "gv-api-web";
+import { Tag } from "gv-api-web";
 import * as React from "react";
 
 import TagItem from "./tag-item";
 
 interface Props {
-  tags: ProgramTag[];
+  tags: Tag[];
   className?: string;
 }
 
