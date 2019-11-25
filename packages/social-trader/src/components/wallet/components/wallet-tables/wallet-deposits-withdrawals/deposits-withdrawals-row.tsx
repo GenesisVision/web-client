@@ -10,6 +10,8 @@ import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
+import { MultiWalletTransaction } from "../../../wallet.types";
+
 const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const handleAction = useCallback(() => {
@@ -29,21 +31,28 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
           {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-          {(transaction.statusUrl && (
+          {/* {(transaction.statusUrl && (
             <a href={transaction.statusUrl} target="_blank">
               {transaction.status}
             </a>
-          )) || <>{transaction.status}</>}
+          )) || <>{transaction.status}</>}*/}
+          {transaction.status}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
           <Profitability
-            value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+            value={formatValue(
+              transaction.amount.first.amount,
+              DEFAULT_DECIMAL_SCALE
+            )}
           >
             <NumberFormat
-              value={formatValue(transaction.amount, DEFAULT_DECIMAL_SCALE)}
+              value={formatValue(
+                transaction.amount.first.amount,
+                DEFAULT_DECIMAL_SCALE
+              )}
               thousandSeparator=" "
               displayType="text"
-              suffix={` ${transaction.currency}`}
+              suffix={` ${transaction.amount.first.currency}`}
             />
           </Profitability>
         </TableCell>
@@ -52,7 +61,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   );
 };
 interface Props {
-  transaction: any; // TODO declare type
+  transaction: MultiWalletTransaction;
   update?: UpdateItemsFuncType;
 }
 
