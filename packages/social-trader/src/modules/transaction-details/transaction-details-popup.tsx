@@ -16,7 +16,7 @@ const TransactionDetailsPopup: React.FC<ITransactionDetailsProps> = React.memo(
 );
 
 interface ITransactionDetailsProps {
-  transactionId: string;
+  transaction: MultiWalletTransaction;
   open: boolean;
   onClose(): void;
   onAction(): void;

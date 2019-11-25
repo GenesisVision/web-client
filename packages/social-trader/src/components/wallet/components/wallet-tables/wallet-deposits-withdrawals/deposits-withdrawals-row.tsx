@@ -19,7 +19,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   return (
     <>
       <TransactionDetailsPopup
-        transactionId={transaction.id}
+        transaction={transaction}
         open={isOpenPopup}
         onClose={setClosePopup}
         onAction={handleAction}
