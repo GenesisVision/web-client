@@ -4,7 +4,8 @@ const NextI18NextInstance = new NextI18Next({
   defaultLanguage: "en",
   otherLanguages: ["de"],
   defaultNS: "translations",
-  browserLanguageDetection: false
+  browserLanguageDetection: false,
+  localePath: typeof window === "undefined" ? "public/locales" : "locales"
 });
 
 module.exports = NextI18NextInstance;

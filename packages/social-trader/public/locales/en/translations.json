@@ -670,8 +670,8 @@
       "invest": "Invest",
       "reinvest": "Reinvest profit",
       "yourInvestment": {
-        "PROGRAM": "Current period investment",
-        "FUND": "Current investment"
+        "Program": "Current period investment",
+        "Fund": "Current investment"
       },
       "pending-input": "Pending input",
       "pending-output": "Pending output",
