@@ -21,14 +21,11 @@ const _AttachAccountPage: React.FC<Props> = () => {
     middleware: [pushMiddleware],
     request: attachAccount
   });
-  const { sendRequest: getExchanges, data: exchanges } = useApiRequest<
-    Broker[]
-  >({
+  const { data: exchanges } = useApiRequest<Broker[]>({
+    fetchOnMount: true,
     request: fetchExchanges
   });
-  useEffect(() => {
-    getExchanges();
-  }, []);
+
   const handleSubmit = useCallback(
     (
       values: IAttachAccountSettingsFormValues,

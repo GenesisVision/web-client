@@ -8,12 +8,10 @@ import Active from "./active";
 import { fetchActive, getActiveLoaderData } from "./service/active.service";
 
 const _ActivePopup: React.FC<Props> = ({ open, onClose, active }) => {
-  const { data, sendRequest } = useApiRequest({
-    request: fetchActive
+  const { data } = useApiRequest({
+    request: () => fetchActive({ active }),
+    fetchOnMount: true
   });
-  useEffect(() => {
-    sendRequest({ active });
-  }, []);
   return (
     <Dialog open={open} onClose={onClose} top>
       <div className="active__popup">

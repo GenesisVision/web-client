@@ -45,8 +45,10 @@ const _FollowModuleContainer: React.FC<Props> = ({
     )!.amount;
   const wallets = useSelector(walletsSelector);
 
-  const { data: accounts, sendRequest: getAccounts } = useApiRequest({
-    request: isExternal ? fetchExternalAccounts : fetchAccounts
+  const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
+  const { data: accounts } = useApiRequest({
+    request: () => open && getAccountsMethod({ id }),
+    fetchOnMount: true
   });
 
   const { sendRequest: submitChanges } = useApiRequest({
@@ -57,10 +59,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    open &&
-      getAccounts({ id }) &&
-      getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
-  }, [open]);
+    open && getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
+  }, [open, currency]);
 
   const handleSubmit = useCallback(
     (

@@ -23,13 +23,10 @@ const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
     middleware: [onSubmit],
     request: values => dispatch(twoFactorServices.confirm2fa(values))
   });
-  const { data: TFAData, sendRequest: getTFAData } = useApiRequest<
-    TwoFactorAuthenticator
-  >({ request: fetchTFAData });
-
-  useEffect(() => {
-    getTFAData();
-  }, []);
+  const { data: TFAData } = useApiRequest<TwoFactorAuthenticator>({
+    request: fetchTFAData,
+    fetchOnMount: true
+  });
 
   const handleSubmit = useCallback(
     (
