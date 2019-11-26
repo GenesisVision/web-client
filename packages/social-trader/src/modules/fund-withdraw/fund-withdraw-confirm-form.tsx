@@ -30,7 +30,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
       sendRequest(
         {
           id,
-          values: {
+          value: {
             percent,
             currency
           }
