@@ -12,7 +12,7 @@ export const _AssetFormField: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({
   max = 500,
-  value = "",
+  value,
   name,
   label,
   component,
@@ -23,7 +23,7 @@ export const _AssetFormField: React.FC<
   hintContent,
   hintTooltipContent
 }) => {
-  const trimmedLength = value.trim().length;
+  const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
     <div className={classNames("asset-form-field", className)}>
       <GVFormikField
@@ -65,7 +65,7 @@ export const _AssetFormField: React.FC<
 interface Props {
   isAllowed?: (values: TextInputValues) => boolean;
   max?: number;
-  value?: string;
+  value?: string | null;
   hintContent?: string;
   hintTooltipContent?: string;
   adornment?: string;
