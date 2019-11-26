@@ -1,37 +1,17 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import FormError from "components/form/form-error/form-error";
-import useApiRequest from "hooks/api-request.hook";
+import { FundWithdrawPopupContainer } from "modules/fund-withdraw/fund-withdraw-popup.container";
 import * as React from "react";
-import { useEffect } from "react";
 
-import {
-  FundWithdrawPopup,
-  IFundWithdrawPopupProps
-} from "./fund-withdraw-popup";
-import { FundWithdrawLoaderData } from "./fund-withdraw.loader";
-import { getFundWithdrawInfo } from "./services/fund-withdraw.services";
+import { IFundWithdrawPopupProps } from "./fund-withdraw-popup";
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
   id,
   open,
   onClose
 }) => {
-  const { data, sendRequest, errorMessage } = useApiRequest({
-    request: getFundWithdrawInfo
-  });
-  useEffect(() => {
-    open && sendRequest({ id });
-  }, [open]);
-
   return (
     <Dialog open={open} onClose={onClose}>
-      <FundWithdrawPopup
-        onClose={onClose}
-        id={id}
-        loaderData={FundWithdrawLoaderData}
-        data={data!}
-      />
-      <FormError error={errorMessage} />
+      <FundWithdrawPopupContainer onClose={onClose} id={id} />
     </Dialog>
   );
 };

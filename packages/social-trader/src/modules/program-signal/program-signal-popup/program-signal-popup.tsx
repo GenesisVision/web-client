@@ -17,7 +17,12 @@ const _ProgramSignalPopup: React.FC<Props> = ({
   open,
   header
 }) => {
+  const handleClose = useCallback(() => {
+    cleanErrorMessage();
+    onClose();
+  }, []);
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
+    middleware: [onApply, handleClose],
     request: serviceMethod
   });
   const handleApply = useCallback(
@@ -29,16 +34,10 @@ const _ProgramSignalPopup: React.FC<Props> = ({
           volumeFee: values.volumeFee!
         },
         setSubmitting
-      )
-        .then(onApply)
-        .then(handleClose);
+      );
     },
     []
   );
-  const handleClose = useCallback(() => {
-    cleanErrorMessage();
-    onClose();
-  }, []);
   const signalSuccessFee = programDescription.signalSettings
     ? programDescription.signalSettings.signalSuccessFee
     : undefined;
