@@ -113,7 +113,6 @@ const _CommonTransactionDetails: React.FC<Props> = ({
   handleCancel,
   handleResend
 }) => {
-  console.log(data);
   const [t] = useTranslation();
   return (
     <TransactionDetails
