@@ -103,6 +103,6 @@ export interface IProgramWithdrawPopupProps {
 }
 
 export type ProgramWithdrawType = {
-  amount: number;
+  amount?: number;
   withdrawAll?: boolean;
 };

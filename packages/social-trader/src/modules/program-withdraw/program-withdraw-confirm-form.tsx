@@ -30,7 +30,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   });
   const handleSubmit = useCallback(
     (setSubmitting: SetSubmittingType) =>
-      sendRequest({ id, values: formValues }, setSubmitting).then(onClose),
+      sendRequest({ id, value: formValues }, setSubmitting).then(onClose),
     [formValues]
   );
 
