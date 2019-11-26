@@ -1,6 +1,6 @@
 import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { MiddlewareType, setPromiseMiddleware } from "utils/promise-middleware";
 import { ResponseError, SetSubmittingType } from "utils/types";
@@ -19,6 +19,7 @@ export type TUseApiRequestProps<T = any> = {
   catchCallback?: (errorMessage?: string) => void;
   successMessage?: string;
   middleware?: MiddlewareType[];
+  fetchOnMount?: boolean;
 };
 
 type TUseApiRequestOutput<T> = {
@@ -33,6 +34,7 @@ type TUseApiRequestOutput<T> = {
 };
 
 const useApiRequest = <T>({
+  fetchOnMount,
   middleware = [],
   successMessage,
   request,
@@ -63,7 +65,7 @@ const useApiRequest = <T>({
 
   const sendRequest = (props?: any, setSubmitting?: SetSubmittingType) => {
     setIsPending();
-    return setPromiseMiddleware(Promise.resolve(request(props)), middlewareList)
+    return setPromiseMiddleware(request(props), middlewareList)
       .catch((errorMessage: ResponseError) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage.errorMessage));
@@ -74,6 +76,10 @@ const useApiRequest = <T>({
         setSubmitting && setSubmitting(false);
       }) as TRequest<T>;
   };
+
+  useEffect(() => {
+    if (fetchOnMount) sendRequest();
+  }, []);
 
   return { errorMessage, cleanErrorMessage, isPending, data, sendRequest };
 };
