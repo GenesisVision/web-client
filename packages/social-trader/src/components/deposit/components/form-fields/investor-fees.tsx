@@ -26,7 +26,8 @@ const _InvestorFees: React.FC<Props> = ({
     amount - gvCommissionValue,
     entryFee
   );
-  const investAmount = amount - gvCommissionValue - entryFee * +hasEntryFee;
+  const investAmount =
+    amount - gvCommissionValue - entryFeeValue * +hasEntryFee;
   const [t] = useTranslation();
   return (
     <DialogList>
