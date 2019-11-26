@@ -19,7 +19,8 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   currency,
   onApply = () => {},
   open,
-  onClose
+  onClose,
+  ownAsset
 }) => {
   let programMinDepositAmounts = useSelector(programMinDepositAmountsSelector);
   const minDeposit = getMinProgramDeposit(
@@ -29,6 +30,7 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   );
   return (
     <DepositContainer
+      ownAsset={ownAsset}
       availableToInvest={availableToInvest}
       entryFee={entryFee}
       minDeposit={minDeposit}
@@ -49,6 +51,7 @@ export default ProgramDeposit;
 
 interface OwnProps {
   entryFee?: number;
+  ownAsset?: boolean;
   availableToInvest?: number;
   broker: string;
   id: string;

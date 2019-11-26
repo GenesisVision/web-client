@@ -47,6 +47,7 @@ const _DepositButton: React.FC<Props> = ({
     default:
       deposit = (
         <ProgramDeposit
+          ownAsset={ownAsset}
           entryFee={entryFee}
           availableToInvest={availableToInvest}
           broker={broker!}
