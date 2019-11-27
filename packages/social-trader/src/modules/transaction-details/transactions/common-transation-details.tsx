@@ -5,13 +5,15 @@ import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
+import AmountConvert from "components/wallet/components/wallet-tables/wallet-transactions/amount-convert";
+import WalletsConvert from "components/wallet/components/wallet-tables/wallet-transactions/wallets-convert";
 import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import {
-  AmountItem,
-  CurrencyItem as CurrencyItemType,
+  AmountRowCell,
   MultiWalletTransactionStatus,
   TransactionAssetDetails,
-  TransactionDetailItem
+  TransactionDetailItem,
+  WalletRowCell
 } from "gv-api-web";
 import TransactionAsset from "modules/transaction-details/transactions/transaction-asset";
 import * as React from "react";
@@ -19,8 +21,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
-
-import TransactionDetails from "./transaction-details";
 
 const TransactionDetailsItemsBlock: React.FC<{
   items: TransactionDetailItem[];
@@ -76,31 +76,45 @@ const TransactionAssetBlock: React.FC<{
 });
 
 const TransactionWalletBlock: React.FC<{
-  direction: "from" | "to";
-  wallet: CurrencyItemType;
-  amount: AmountItem;
-}> = React.memo(({ wallet, amount, direction }) => {
+  wallets: WalletRowCell;
+}> = React.memo(({ wallets }) => {
   const [t] = useTranslation();
+  const walletFirst = wallets.first;
+  const walletSecond = wallets.second;
   return (
-    <>
-      <TransactionDetailsItem
-        label={t(`transactions-details.external.${direction}-wallet`)}
-      >
+    <TransactionDetailsItem label={t(`transactions-details.wallet`)}>
+      {walletSecond ? (
+        <WalletsConvert wallets={wallets} />
+      ) : (
         <CurrencyItem
-          logo={wallet.logo}
-          name={wallet.currency}
+          logo={walletFirst.logo}
+          name={walletFirst.currency}
           clickable={false}
         />
-      </TransactionDetailsItem>
-      <TransactionDetailsItem label={t(`transactions-details.amount`)}>
+      )}
+    </TransactionDetailsItem>
+  );
+});
+
+const TransactionAmountBlock: React.FC<{
+  amounts: AmountRowCell;
+}> = React.memo(({ amounts }) => {
+  const [t] = useTranslation();
+  const amountFirst = amounts.first;
+  const amountSecond = amounts.second;
+  return (
+    <TransactionDetailsItem label={t(`transactions-details.amount`)}>
+      {amountSecond ? (
+        <AmountConvert amount={amounts} />
+      ) : (
         <NumberFormat
-          value={formatValue(amount.amount, DEFAULT_DECIMAL_SCALE)}
-          suffix={` ${amount.currency}`}
+          value={formatValue(amountFirst.amount, DEFAULT_DECIMAL_SCALE)}
+          suffix={` ${amountFirst.currency}`}
           allowNegative={true}
           displayType="text"
         />
-      </TransactionDetailsItem>
-    </>
+      )}
+    </TransactionDetailsItem>
   );
 });
 
@@ -119,20 +133,10 @@ const _CommonTransactionDetails: React.FC<Props> = ({
         {data.asset && (
           <TransactionAssetBlock asset={data.asset} type={"investment"} />
         )}
-        <TransactionWalletBlock
-          wallet={data.wallet.first}
-          amount={data.amount.first}
-          direction={"from"}
-        />
+        <TransactionWalletBlock wallets={data.wallet} />
       </DialogTop>
       <DialogBottom>
-        {data.wallet.second && data.amount.second && (
-          <TransactionWalletBlock
-            wallet={data.wallet.second}
-            amount={data.amount.second}
-            direction={"to"}
-          />
-        )}
+        <TransactionAmountBlock amounts={data.amount} />
         {data.details && <TransactionDetailsItemsBlock items={data.details} />}
         <TransactionStatusBlock status={data.status} />
         {data.actions && (
