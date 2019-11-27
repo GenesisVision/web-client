@@ -75,12 +75,14 @@ const _WalletWithdrawForm: React.FC<
   return (
     <form id="wallet-withdraw" onSubmit={handleSubmit} noValidate>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <WalletSelect
-          name={FIELDS.id}
-          label={t("wallet-withdraw.select-currency")}
-          items={wallets}
-          onChange={onChangeCurrency}
-        />
+        <DialogField>
+          <WalletSelect
+            name={FIELDS.id}
+            label={t("wallet-withdraw.select-currency")}
+            items={wallets}
+            onChange={onChangeCurrency}
+          />
+        </DialogField>
         <DialogField>
           <StatisticItem label={t("wallet-withdraw.available")} big>
             {`${formatCurrencyValue(available, currency)} ${currency}`}
