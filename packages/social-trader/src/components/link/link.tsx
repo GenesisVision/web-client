@@ -9,6 +9,9 @@ import {
 } from "./link.helper";
 
 const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
+  if (!to) {
+    return <>{children}</>;
+  }
   const normalizedTo = normalizeTo(to);
 
   const { route } = useRouter();
@@ -47,7 +50,7 @@ const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
 export default Link;
 
 export interface LinkProps {
-  to: ToType | string;
+  to?: ToType | string;
   className?: string;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
