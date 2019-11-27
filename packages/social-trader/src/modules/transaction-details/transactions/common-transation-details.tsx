@@ -132,10 +132,10 @@ const _CommonTransactionDetails: React.FC<Props> = ({
               direction={"to"}
             />
           )}
-          <TransactionStatusBlock status={data.status} />
           {data.details && (
             <TransactionDetailsItemsBlock items={data.details} />
           )}
+          <TransactionStatusBlock status={data.status} />
           {data.actions && (
             <DialogField>
               <div className="external-transaction__actions">
