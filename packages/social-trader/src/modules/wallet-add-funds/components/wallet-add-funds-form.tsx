@@ -32,14 +32,16 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   return (
     <div className="wallet-add-funds-popup">
       <DialogTop title={t("wallet-deposit.title")}>
-        <form id="wallet-deposit" noValidate>
-          <WalletSelect
-            name={FIELDS.id}
-            label={t("wallet-deposit.select-currency")}
-            items={wallets}
-            onChange={onChangeWallet}
-          />
-        </form>
+        <DialogField>
+          <form id="wallet-deposit" noValidate>
+            <WalletSelect
+              name={FIELDS.id}
+              label={t("wallet-deposit.select-currency")}
+              items={wallets}
+              onChange={onChangeWallet}
+            />
+          </form>
+        </DialogField>
       </DialogTop>
       <DialogBottom className="wallet-add-funds-popup__bottom">
         <DialogField>

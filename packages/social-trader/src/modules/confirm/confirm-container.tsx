@@ -1,7 +1,7 @@
 import Dialog from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/google-auth-steps";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { SetSubmittingType } from "utils/types";
 
 import { IConfirmFormValues } from "./components/confirm-form";
@@ -17,14 +17,14 @@ const _ConfirmContainer: React.FC<Props> = ({
     errorMessage,
     cleanErrorMessage,
     sendRequest: confirm
-  } = useApiRequest({ request: service.confirm });
-  const { data, sendRequest: get2faInfo } = useApiRequest({
-    request: service.get2faInfo
+  } = useApiRequest({
+    middleware: [onClose, onApply],
+    request: service.confirm
   });
-
-  useEffect(() => {
-    get2faInfo({ programId });
-  }, []);
+  const { data } = useApiRequest({
+    request: () => service.get2faInfo({ programId }),
+    fetchOnMount: true
+  });
 
   const handleClose = useCallback(() => {
     cleanErrorMessage();
@@ -33,9 +33,7 @@ const _ConfirmContainer: React.FC<Props> = ({
 
   const handleConfirm = useCallback(
     (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {
-      confirm({ ...values, programId }, setSubmitting)
-        .then(handleClose)
-        .then(onApply);
+      confirm({ ...values, programId }, setSubmitting);
     },
     [programId]
   );

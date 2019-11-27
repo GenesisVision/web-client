@@ -12,6 +12,7 @@ const _PublicInfo: React.FC<Props> = ({
   isPending
 }) => {
   const { sendRequest, errorMessage } = useApiRequest({
+    middleware: [onUpdate],
     request: updateProfile,
     successMessage: "profile-page.success-edit"
   });
@@ -22,7 +23,7 @@ const _PublicInfo: React.FC<Props> = ({
           model
         },
         setSubmitting
-      ).then(onUpdate),
+      ),
     []
   );
   return (

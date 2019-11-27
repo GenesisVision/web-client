@@ -45,21 +45,22 @@ const _FollowModuleContainer: React.FC<Props> = ({
     )!.amount;
   const wallets = useSelector(walletsSelector);
 
-  const { data: accounts, sendRequest: getAccounts } = useApiRequest({
-    request: isExternal ? fetchExternalAccounts : fetchAccounts
+  const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
+  const { data: accounts } = useApiRequest({
+    request: () => open && getAccountsMethod({ id }),
+    fetchOnMount: true
   });
 
-  const { sendRequest: submitChanges } = useApiRequest(
-    composeApiRequest(signalSubscription.hasActiveSubscription, isExternal)
-  );
+  const { sendRequest: submitChanges } = useApiRequest({
+    ...composeApiRequest(signalSubscription.hasActiveSubscription, isExternal),
+    middleware: [onApply, onClose]
+  });
 
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    open &&
-      getAccounts({ id }) &&
-      getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
-  }, [open]);
+    open && getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
+  }, [open, currency]);
 
   const handleSubmit = useCallback(
     (
@@ -77,9 +78,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
           brokerType: broker
         },
         setSubmitting
-      )
-        .then(onApply)
-        .then(onClose);
+      );
     },
     []
   );

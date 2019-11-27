@@ -1,17 +1,18 @@
-import {
-  FundWithdraw,
-  FundWithdrawInfoResponse
-} from "components/fund-withdraw/fund-withdraw.types";
-import { FUND_CURRENCY } from "shared/constants/constants";
+import { CancelablePromise } from "gv-api-web";
 import investmentsApi from "services/api-client/investments-api";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
+import { FUND_CURRENCY } from "shared/constants/constants";
 
-export const getFundWithdrawInfo = ({ id }: { id: string }) => (): Promise<
-  FundWithdrawInfoResponse
-> => {
+import { FundWithdraw, FundWithdrawInfoResponse } from "../fund-withdraw.types";
+
+export const getFundWithdrawInfo = ({
+  id
+}: {
+  id: string;
+}): CancelablePromise<FundWithdrawInfoResponse> => {
   const auth = authService.getAuthArg();
-  return Promise.all([
+  return CancelablePromise.all([
     investmentsApi.getFundWithdrawInfo(id, auth, {
       currency: FUND_CURRENCY
     }),

@@ -2,18 +2,6 @@
 @import "~shared/styles/_colors";
 
 .transaction-details {
-  &__top {
-    & .dialog__field:last-child {
-      .statistics-item {
-        padding-bottom: 0;
-      }
-    }
-  }
-  .dialog {
-    &__header {
-      margin-bottom: $padding-xsmall;
-    }
-  }
 }
 
 .transaction-asset {
