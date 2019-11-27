@@ -1246,6 +1246,7 @@
     }
   },
   "transactions-details": {
+    "wallet": "Wallet",
     "amount": "Amount",
     "title": "Transaction details",
     "entry-fee": "Entry fee",

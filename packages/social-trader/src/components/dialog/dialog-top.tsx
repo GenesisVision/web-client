@@ -10,9 +10,9 @@ export const _DialogTop: React.FC<
   <div className="dialog__top">
     <div className="dialog__header">
       {title && <h2>{title}</h2>}
-      {subtitle && <p>{subtitle}</p>}
+      {subtitle && <div className="dialog__subtitle">{subtitle}</div>}
     </div>
-    {children && <DialogField>{children}</DialogField>}
+    {children}
   </div>
 );
 

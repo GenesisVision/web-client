@@ -109,20 +109,6 @@
   &__top {
     max-width: $modal-width;
     padding: $padding-upper-medium $padding-small $padding-small;
-
-    &:last-child {
-      padding-bottom: $padding-upper-medium;
-    }
-
-    & > .dialog__field {
-      & > div.statistics-item:last-child {
-        padding-bottom: 0;
-      }
-    }
-
-    .gv-text-field__wrapper:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__wrapper {
@@ -187,22 +173,31 @@
   }
 
   &__header {
-    p {
-      font-size: $font-size-common;
-      font-weight: 300;
-      letter-spacing: 0.4px;
-      color: #e8eff3;
-    }
+    padding-bottom: $padding-xsmall;
+  }
+  &__subtitle {
+    font-size: $font-size-common;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+    color: #e8eff3;
+    padding-bottom: $font-size-h3;
   }
 
   &__field {
-    &:not(:first-child) {
-      margin-top: $padding-xsmall;
+    &:last-child {
+      & .statistics-item {
+        padding-bottom: 0;
+      }
     }
+    &:not(:last-child) {
+      margin-bottom: $padding-xsmall;
+    }
+
     font-weight: 300;
 
     .gv-text-field__wrapper {
       margin-top: 0;
+      margin-bottom: $padding-xsmall;
     }
     .gv-checkbox-wrapper {
       margin-left: 0;

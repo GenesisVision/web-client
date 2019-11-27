@@ -1,3 +1,4 @@
+import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
@@ -15,10 +16,12 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
   const [t] = useTranslation();
   return (
     <DialogTop title={t("withdraw-program.title")} subtitle={title}>
-      <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
-        {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
-        {programCurrency}
-      </StatisticItem>
+      <DialogField>
+        <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
+          {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
+          {programCurrency}
+        </StatisticItem>
+      </DialogField>
     </DialogTop>
   );
 };
