@@ -12,7 +12,11 @@ import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
 const _ProfileImageContainer: React.FC = () => {
+  const fetchProfileMiddleware = () => {
+    dispatch(fetchProfileHeaderInfoAction());
+  };
   const { sendRequest } = useApiRequest({
+    middleware: [fetchProfileMiddleware],
     request: updateProfileAvatar,
     successMessage: "profile-page.settings.image-success-save-message"
   });
@@ -20,9 +24,7 @@ const _ProfileImageContainer: React.FC = () => {
   const headerData = useSelector(headerSelector);
   const handleSubmit = useCallback(
     (newImage: IImageValue, setSubmitting: SetSubmittingType) =>
-      sendRequest({ newImage }, setSubmitting).then(() => {
-        dispatch(fetchProfileHeaderInfoAction());
-      }),
+      sendRequest({ newImage }, setSubmitting),
     []
   );
   if (headerData === undefined) return null;

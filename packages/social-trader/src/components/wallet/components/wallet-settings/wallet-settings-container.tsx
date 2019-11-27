@@ -23,15 +23,18 @@ const _WalletSettingsContainer: React.FC<Props> = ({
     setNotPayFeesWithGvt,
     setPayFeesWithGvtValue
   ] = useIsOpen(isPayFeesWithGvtProp);
+  const setPayMiddleware = () => {
+    setPayFeesWithGvtValue(!isPayFeesWithGvt);
+  };
   const request = isPayFeesWithGvt ? offPayFeesWithGvt : onPayFeesWithGvt;
-  const { isPending, sendRequest } = useApiRequest({ request });
-  const handleSwitch = useCallback(
-    () =>
-      sendRequest().then(() => {
-        setPayFeesWithGvtValue(!isPayFeesWithGvt);
-      }),
-    [request, isPayFeesWithGvt]
-  );
+  const { isPending, sendRequest } = useApiRequest({
+    request,
+    middleware: [setPayMiddleware]
+  });
+  const handleSwitch = useCallback(() => sendRequest(), [
+    request,
+    isPayFeesWithGvt
+  ]);
   return (
     <WalletSettings
       name="PayGVTFee"

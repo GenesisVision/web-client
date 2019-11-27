@@ -22,14 +22,14 @@ const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
     isPublicInvestor
   );
   const request = isPublic ? setPublicOff : setPublicOn;
-  const { isPending, sendRequest } = useApiRequest({ request });
-  const handleSwitch = useCallback(
-    () =>
-      sendRequest().then(() => {
-        setPublicValue(!isPublic);
-      }),
-    [request, isPublic]
-  );
+  const setPublicMiddleware = () => {
+    setPublicValue(!isPublic);
+  };
+  const { isPending, sendRequest } = useApiRequest({
+    request,
+    middleware: [setPublicMiddleware]
+  });
+  const handleSwitch = useCallback(() => sendRequest(), [request, isPublic]);
   return (
     <div className="public-select">
       <Tooltip

@@ -30,24 +30,28 @@ const useConvertAssetSubmit = ({
 }: TUseConvertAssetSubmitProps): TUseConvertAssetSubmitOutput => {
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
-  const { sendRequest } = useApiRequest({ request: convertAsset });
+  const checkConditionMiddleware = (data: any) => {
+    if (!condition || !!condition(data)) {
+      dispatch(
+        alertMessageActions.success(
+          `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`,
+          true
+        )
+      );
+      dispatch(fetchWallets(currency));
+      Push(TRADING_ROUTE);
+    }
+  };
+  const { sendRequest } = useApiRequest({
+    middleware: [checkConditionMiddleware],
+    request: convertAsset
+  });
   return useCallback(
     (
       data: IConvertAssetSettingsFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      sendRequest({ data, fromTo }, setSubmitting).then((data: any) => {
-        if (!condition || !!condition(data)) {
-          dispatch(
-            alertMessageActions.success(
-              `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`,
-              true
-            )
-          );
-          dispatch(fetchWallets(currency));
-          Push(TRADING_ROUTE);
-        }
-      });
+      sendRequest({ data, fromTo }, setSubmitting);
     },
     []
   );

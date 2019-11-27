@@ -116,12 +116,14 @@ const _TransferForm: React.FC<Props> = ({
       noValidate
     >
       <DialogTop title={title || t("transfer.title")}>
-        <WalletSelect
-          name={FIELDS.sourceId}
-          label={t("transfer.from")}
-          items={sourceItems}
-          onChange={onChangeSourceId}
-        />
+        <DialogField>
+          <WalletSelect
+            name={FIELDS.sourceId}
+            label={t("transfer.from")}
+            items={sourceItems}
+            onChange={onChangeSourceId}
+          />
+        </DialogField>
         <DialogField>
           <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
             {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}

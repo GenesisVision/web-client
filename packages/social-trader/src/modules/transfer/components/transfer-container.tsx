@@ -27,16 +27,17 @@ const _TransferContainer: React.FC<Props> = ({
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const currency = useSelector(currencySelector);
+  const updateWalletMiddleware = () => {
+    onClose();
+    dispatch(fetchWallets(currency));
+    dispatch(updateWalletTimestampAction());
+  };
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
+    middleware: [updateWalletMiddleware],
     request: transferRequest
   });
   const handleSubmit = useCallback(
-    (values: TransferFormValues) =>
-      sendTransferRequest(values).then(() => {
-        onClose();
-        dispatch(fetchWallets(currency));
-        dispatch(updateWalletTimestampAction());
-      }),
+    (values: TransferFormValues) => sendTransferRequest(values),
     [destinationType, sourceType]
   );
   const sourceItems = wallets;

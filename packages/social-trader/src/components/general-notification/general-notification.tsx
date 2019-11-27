@@ -28,11 +28,7 @@ const _GeneralNotification: React.FC<Props> = ({
   const { sendRequest, isPending } = useApiRequest({
     request
   });
-  const handleSwitch = useCallback(() => sendRequest(), [
-    name,
-    assetId,
-    setting
-  ]);
+  const handleSwitch = useCallback(() => sendRequest(), [sendRequest]);
   return (
     <span className="notification-setting">
       <GVSwitch

@@ -3,7 +3,6 @@ import Profitability from "components/profitability/profitability";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { AmountRowCell, WalletRowCell } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import TransactionDetailsPopup from "modules/transaction-details/transaction-details-popup";
 import React, { useCallback } from "react";
@@ -13,56 +12,8 @@ import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
 import { MultiWalletTransaction } from "../../../wallet.types";
-
-const ConvertTransaction: React.FC<{
-  wallets: WalletRowCell;
-}> = React.memo(({ wallets: { first, second } }) => {
-  return (
-    <>
-      {first && (
-        <div className="wallet-transactions__col">
-          <CurrencyItem logo={first.logo} name={first.currency} small />
-        </div>
-      )}
-      <div className="wallet-transactions__back-arrow">&rarr;</div>
-      {second && (
-        <div className="wallet-transactions__col">
-          <CurrencyItem logo={second.logo} name={second.currency} small />
-        </div>
-      )}
-    </>
-  );
-});
-
-const AmountConvertTransaction: React.FC<{
-  amount: AmountRowCell;
-}> = React.memo(({ amount: { first, second } }) => {
-  return (
-    <>
-      {first && (
-        <span className="wallet-transactions__col">
-          <NumberFormat
-            value={formatValue(first.amount, DEFAULT_DECIMAL_SCALE)}
-            thousandSeparator=" "
-            displayType="text"
-            suffix={` ${first.currency}`}
-          />
-        </span>
-      )}
-      <span className="wallet-transactions__back-arrow">&rarr;</span>
-      {second && (
-        <span className="wallet-transactions__col">
-          <NumberFormat
-            value={formatValue(second.amount, DEFAULT_DECIMAL_SCALE)}
-            thousandSeparator=" "
-            displayType="text"
-            suffix={` ${second.currency}`}
-          />
-        </span>
-      )}
-    </>
-  );
-});
+import AmountConvert from "./amount-convert";
+import WalletsConvert from "./wallets-convert";
 
 const _TransactionsRow: React.FC<Props> = ({
   transaction,
@@ -90,7 +41,7 @@ const _TransactionsRow: React.FC<Props> = ({
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             <div className="wallet-transactions__cell--wallet-wrapper">
               {isConvertAction ? (
-                <ConvertTransaction wallets={transaction.wallet} />
+                <WalletsConvert wallets={transaction.wallet} />
               ) : (
                 <CurrencyItem
                   logo={walletFirst.logo}
@@ -115,7 +66,7 @@ const _TransactionsRow: React.FC<Props> = ({
         </TableCell>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
           {isConvertAction ? (
-            <AmountConvertTransaction amount={transaction.amount} />
+            <AmountConvert amount={transaction.amount} />
           ) : (
             <Profitability
               value={formatValue(

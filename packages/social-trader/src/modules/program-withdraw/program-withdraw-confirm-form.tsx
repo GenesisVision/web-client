@@ -25,6 +25,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
+    middleware: [onClose],
     request: withdrawProgramById,
     successMessage: "withdraw-program.success-alert-message"
   });
