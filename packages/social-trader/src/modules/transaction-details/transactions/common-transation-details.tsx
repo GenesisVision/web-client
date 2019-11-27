@@ -99,11 +99,10 @@ const TransactionWalletBlock: React.FC<{
 const TransactionAmountBlock: React.FC<{
   amounts: AmountRowCell;
 }> = React.memo(({ amounts }) => {
-  const [t] = useTranslation();
   const amountFirst = amounts.first;
   const amountSecond = amounts.second;
   return (
-    <TransactionDetailsItem label={t(`transactions-details.amount`)}>
+    <TransactionDetailsItem label={amountFirst.title}>
       {amountSecond ? (
         <AmountConvert amount={amounts} />
       ) : (
