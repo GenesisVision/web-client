@@ -30,26 +30,27 @@ const useCreateAssetSubmit = ({
 }: TUseCreateAssetSubmitProps): TUseCreateAssetSubmitOutput => {
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
-  const { sendRequest } = useApiRequest({ request: createAsset });
+  const checkConditionMiddleware = (data: any) => {
+    if (!condition || !!condition(data)) {
+      dispatch(fetchWallets(currency));
+      dispatch(
+        alertMessageActions.success(
+          `create-${asset.toLowerCase()}-page.notifications.create-success`,
+          true
+        )
+      );
+      Push(TRADING_ROUTE);
+    }
+  };
+  const { sendRequest } = useApiRequest({
+    request: createAsset,
+    middleware: [checkConditionMiddleware]
+  });
   return useCallback(
-    (
-      data: ICreateAssetSettingsFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      sendRequest({ data, asset }).then(data => {
-        if (!condition || !!condition(data)) {
-          dispatch(fetchWallets(currency));
-          dispatch(
-            alertMessageActions.success(
-              `create-${asset.toLowerCase()}-page.notifications.create-success`,
-              true
-            )
-          );
-          Push(TRADING_ROUTE);
-        }
-      });
+    (data: ICreateAssetSettingsFormValues) => {
+      sendRequest({ data, asset });
     },
-    []
+    [asset]
   );
 };
 export default useCreateAssetSubmit;

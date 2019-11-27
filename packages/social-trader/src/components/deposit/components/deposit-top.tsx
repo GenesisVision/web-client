@@ -1,3 +1,4 @@
+import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
@@ -20,12 +21,14 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
       subtitle={title || asset}
     >
       {asset === ASSET.PROGRAM && availableToInvest && (
-        <StatisticItem
-          label={t("deposit-asset.program.available-to-invest")}
-          big
-        >
-          {`${formatCurrencyValue(availableToInvest, currency!)} ${currency}`}
-        </StatisticItem>
+        <DialogField>
+          <StatisticItem
+            label={t("deposit-asset.program.available-to-invest")}
+            big
+          >
+            {`${formatCurrencyValue(availableToInvest, currency!)} ${currency}`}
+          </StatisticItem>
+        </DialogField>
       )}
     </DialogTop>
   );

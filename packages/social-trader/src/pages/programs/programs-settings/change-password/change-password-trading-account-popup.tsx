@@ -19,6 +19,7 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
   const dispatch = useDispatch();
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
+    middleware: [onClose],
     request: args => dispatch(changePasswordTradingAccount(args))
   });
   const handleApply = useCallback(
@@ -30,7 +31,7 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
         password: values.password,
         twoFactorCode: values.twoFactorCode
       };
-      sendRequest({ id, model }, setSubmitting).then(handleClose);
+      sendRequest({ id, model }, setSubmitting);
     },
     [id]
   );

@@ -1,5 +1,6 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
@@ -37,22 +38,24 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
         title={t("notifications-page.create.title")}
         subtitle={asset.title}
       >
-        <GVFormikField
-          name={FIELDS.conditionType}
-          component={GVTextField}
-          label={t("notifications-page.create.type-label")}
-          InputComponent={Select}
-        >
-          <option value={CONDITION_TYPE_VALUES.Profit}>
-            {t("notifications-page.create.Profit.title")}
-          </option>
-          <option value={CONDITION_TYPE_VALUES.Level}>
-            {t("notifications-page.create.Level.title")}
-          </option>
-          <option value={CONDITION_TYPE_VALUES.AvailableToInvest}>
-            {t("notifications-page.create.AvailableToInvest.title")}
-          </option>
-        </GVFormikField>
+        <DialogField>
+          <GVFormikField
+            name={FIELDS.conditionType}
+            component={GVTextField}
+            label={t("notifications-page.create.type-label")}
+            InputComponent={Select}
+          >
+            <option value={CONDITION_TYPE_VALUES.Profit}>
+              {t("notifications-page.create.Profit.title")}
+            </option>
+            <option value={CONDITION_TYPE_VALUES.Level}>
+              {t("notifications-page.create.Level.title")}
+            </option>
+            <option value={CONDITION_TYPE_VALUES.AvailableToInvest}>
+              {t("notifications-page.create.AvailableToInvest.title")}
+            </option>
+          </GVFormikField>
+        </DialogField>
       </DialogTop>
       <DialogBottom>
         <GVFormikField

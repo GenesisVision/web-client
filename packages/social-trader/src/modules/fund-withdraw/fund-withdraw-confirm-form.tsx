@@ -22,6 +22,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
+    middleware: [onClose],
     request: withdrawFund,
     successMessage: "withdraw-fund.success-alert-message"
   });
@@ -36,7 +37,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
           }
         },
         setSubmitting
-      ).then(onClose),
+      ),
     [percent, currency, id]
   );
   return (

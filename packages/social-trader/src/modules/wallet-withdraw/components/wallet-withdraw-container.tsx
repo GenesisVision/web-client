@@ -21,20 +21,19 @@ const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
   const wallets = useSelector(walletsSelector);
   const dispatch = useDispatch();
   const [isSuccess, setSuccess, setNotSuccess] = useIsOpen();
+  const updateWalletMiddleware = () => {
+    setSuccess();
+    dispatch(updateWalletTimestampAction());
+  };
   const { errorMessage, sendRequest } = useApiRequest({
+    middleware: [updateWalletMiddleware],
     request: values =>
       dispatch(walletWithdrawService.newWithdrawRequest(values)),
     catchCallback: () => setNotSuccess()
   });
   const handleSubmit = useCallback(
     (values: IWalletWithdrawFormValues, setSubmitting: SetSubmittingType) => {
-      sendRequest(
-        { ...values, amount: Number(values.amount) },
-        setSubmitting
-      ).then(() => {
-        setSuccess();
-        dispatch(updateWalletTimestampAction());
-      });
+      sendRequest({ ...values, amount: Number(values.amount) }, setSubmitting);
     },
     []
   );

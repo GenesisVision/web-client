@@ -18,19 +18,20 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
   onAction
 }) => {
   const { sendRequest: cancelWithdrawalRequest } = useApiRequest({
+    middleware: [onAction],
     request: cancelWithdrawalRequestMethod
   });
   const { sendRequest: resendWithdrawalRequestEmail } = useApiRequest({
+    middleware: [close],
     request: resendWithdrawalRequestEmailMethod
   });
 
-  const cancel = useCallback(
-    () => cancelWithdrawalRequest(transaction.id).then(onAction),
-    [transaction.id]
-  );
+  const cancel = useCallback(() => cancelWithdrawalRequest(transaction.id), [
+    transaction.id
+  ]);
 
   const resendEmail = useCallback(
-    () => resendWithdrawalRequestEmail(transaction.id).then(close),
+    () => resendWithdrawalRequestEmail(transaction.id),
     [transaction.id]
   );
 
