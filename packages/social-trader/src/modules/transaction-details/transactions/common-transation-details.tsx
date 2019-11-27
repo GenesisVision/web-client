@@ -1,6 +1,8 @@
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogField } from "components/dialog/dialog-field";
+import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import { MultiWalletTransaction } from "components/wallet/wallet.types";
@@ -109,54 +111,50 @@ const _CommonTransactionDetails: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <TransactionDetails
-      header={data.description}
-      body={
-        <>
-          {data.asset && (
-            <TransactionAssetBlock asset={data.asset} type={"investment"} />
-          )}
+    <>
+      <DialogTop
+        title={t(`transactions-details.title`)}
+        subtitle={data.description}
+      >
+        {data.asset && (
+          <TransactionAssetBlock asset={data.asset} type={"investment"} />
+        )}
+        <TransactionWalletBlock
+          wallet={data.wallet.first}
+          amount={data.amount.first}
+          direction={"from"}
+        />
+      </DialogTop>
+      <DialogBottom>
+        {data.wallet.second && data.amount.second && (
           <TransactionWalletBlock
-            wallet={data.wallet.first}
-            amount={data.amount.first}
-            direction={"from"}
+            wallet={data.wallet.second}
+            amount={data.amount.second}
+            direction={"to"}
           />
-        </>
-      }
-      bottom={
-        <>
-          {data.wallet.second && data.amount.second && (
-            <TransactionWalletBlock
-              wallet={data.wallet.second}
-              amount={data.amount.second}
-              direction={"to"}
-            />
-          )}
-          {data.details && (
-            <TransactionDetailsItemsBlock items={data.details} />
-          )}
-          <TransactionStatusBlock status={data.status} />
-          {data.actions && (
-            <DialogField>
-              <div className="external-transaction__actions">
-                {data.actions.canCancel && (
-                  <ActionButton
-                    onClick={handleCancel}
-                    text={t("buttons.cancel")}
-                  />
-                )}
-                {data.actions.canResend && (
-                  <ActionButton
-                    onClick={handleResend}
-                    text={t("buttons.resend-email")}
-                  />
-                )}
-              </div>
-            </DialogField>
-          )}
-        </>
-      }
-    />
+        )}
+        {data.details && <TransactionDetailsItemsBlock items={data.details} />}
+        <TransactionStatusBlock status={data.status} />
+        {data.actions && (
+          <DialogField>
+            <div className="external-transaction__actions">
+              {data.actions.canCancel && (
+                <ActionButton
+                  onClick={handleCancel}
+                  text={t("buttons.cancel")}
+                />
+              )}
+              {data.actions.canResend && (
+                <ActionButton
+                  onClick={handleResend}
+                  text={t("buttons.resend-email")}
+                />
+              )}
+            </div>
+          </DialogField>
+        )}
+      </DialogBottom>
+    </>
   );
 };
 
