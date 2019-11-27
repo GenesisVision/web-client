@@ -25,19 +25,21 @@ const TransactionDetailsItemsBlock: React.FC<{
 }> = React.memo(({ items }) => {
   return (
     <>
-      {items.map(item => (
-        <TransactionDetailsItem item={item} />
+      {items.map(({ details, title }) => (
+        <TransactionDetailsItem label={title}>{details}</TransactionDetailsItem>
       ))}
     </>
   );
 });
 
-const TransactionDetailsItem: React.FC<{
-  item: TransactionDetailItem;
-}> = React.memo(({ item: { details, title } }) => {
+const TransactionDetailsItem: React.FC<
+  {
+    label: string;
+  } & React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ label, children }) => {
   return (
     <DialogField>
-      <StatisticItem label={title}>{details}</StatisticItem>
+      <StatisticItem label={label}>{children}</StatisticItem>
     </DialogField>
   );
 });
@@ -47,13 +49,11 @@ const TransactionStatusBlock: React.FC<{
 }> = React.memo(({ status }) => {
   const [t] = useTranslation();
   return (
-    <DialogField>
-      <StatisticItem label={t(`transactions-details.status.title`)}>
-        <div className="external-transaction__status">
-          {status} <Status status={status} />
-        </div>
-      </StatisticItem>
-    </DialogField>
+    <TransactionDetailsItem label={t(`transactions-details.status.title`)}>
+      <div className="external-transaction__status">
+        {status} <Status status={status} />
+      </div>
+    </TransactionDetailsItem>
   );
 });
 
@@ -63,15 +63,13 @@ const TransactionAssetBlock: React.FC<{
 }> = React.memo(({ asset, type }) => {
   const [t] = useTranslation();
   return (
-    <DialogField>
-      <StatisticItem
-        label={t(
-          `transactions-details.${type}.direction-${asset.assetType.toLowerCase()}`
-        )}
-      >
-        <TransactionAsset url={asset.logo} data={asset} />
-      </StatisticItem>
-    </DialogField>
+    <TransactionDetailsItem
+      label={t(
+        `transactions-details.${type}.direction-${asset.assetType.toLowerCase()}`
+      )}
+    >
+      <TransactionAsset url={asset.logo} data={asset} />
+    </TransactionDetailsItem>
   );
 });
 
@@ -83,27 +81,23 @@ const TransactionWalletBlock: React.FC<{
   const [t] = useTranslation();
   return (
     <>
-      <DialogField>
-        <StatisticItem
-          label={t(`transactions-details.external.${direction}-wallet`)}
-        >
-          <CurrencyItem
-            logo={wallet.logo}
-            name={wallet.currency}
-            clickable={false}
-          />
-        </StatisticItem>
-      </DialogField>
-      <DialogField>
-        <StatisticItem label={t(`transactions-details.amount`)}>
-          <NumberFormat
-            value={formatValue(amount.amount, DEFAULT_DECIMAL_SCALE)}
-            suffix={` ${amount.currency}`}
-            allowNegative={true}
-            displayType="text"
-          />
-        </StatisticItem>
-      </DialogField>
+      <TransactionDetailsItem
+        label={t(`transactions-details.external.${direction}-wallet`)}
+      >
+        <CurrencyItem
+          logo={wallet.logo}
+          name={wallet.currency}
+          clickable={false}
+        />
+      </TransactionDetailsItem>
+      <TransactionDetailsItem label={t(`transactions-details.amount`)}>
+        <NumberFormat
+          value={formatValue(amount.amount, DEFAULT_DECIMAL_SCALE)}
+          suffix={` ${amount.currency}`}
+          allowNegative={true}
+          displayType="text"
+        />
+      </TransactionDetailsItem>
     </>
   );
 });
@@ -113,7 +107,6 @@ const _CommonTransactionDetails: React.FC<Props> = ({
   handleCancel,
   handleResend
 }) => {
-  console.log(data);
   const [t] = useTranslation();
   return (
     <TransactionDetails
