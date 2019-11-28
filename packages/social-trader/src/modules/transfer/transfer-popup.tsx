@@ -1,6 +1,6 @@
 import Dialog from "components/dialog/dialog";
 import { ItemType } from "components/wallet-select/wallet-select";
-import { TransferRequestType } from "gv-api-web";
+import { InternalTransferRequestType } from "gv-api-web";
 import * as React from "react";
 
 import TransferContainer from "./components/transfer-container";
@@ -31,8 +31,8 @@ interface Props {
   currentItem: ItemType;
   onClose(): void;
   open: boolean;
-  sourceType?: TransferRequestType;
-  destinationType?: TransferRequestType;
+  sourceType?: InternalTransferRequestType;
+  destinationType?: InternalTransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }

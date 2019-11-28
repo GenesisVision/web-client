@@ -6,7 +6,7 @@ import {
   fetchAccounts,
   fetchWallets
 } from "components/wallet/services/wallet.services";
-import { TransferRequestType } from "gv-api-web";
+import { InternalTransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,8 +62,8 @@ const _TransferContainer: React.FC<Props> = ({
 interface Props {
   currentItem: ItemType;
   onClose(): void;
-  sourceType: TransferRequestType;
-  destinationType: TransferRequestType;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
   title?: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
