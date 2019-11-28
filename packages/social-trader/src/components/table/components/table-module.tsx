@@ -43,7 +43,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       );
       setData(dataProp);
       setPaging({ ...pagingProp, totalPages });
-    } else updateItems();
+    }
   }, []);
 
   useEffect(() => {
