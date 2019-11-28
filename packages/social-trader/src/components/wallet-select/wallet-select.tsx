@@ -15,7 +15,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
     InputComponent={Select}
     onChange={onChange}
   >
-    {items.map(mapToWalletOption).map(({ id, logo, currency, title }) => (
+    {items.map(({ id, logo, currency, title }) => (
       <option value={id} key={id}>
         <CurrencyItem
           logo={logo}
@@ -29,18 +29,7 @@ const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
 );
 
 export type ItemsType = Array<ItemType>;
-export type ItemType = WalletData | WalletBaseData | TradingAccountDetails;
-
-const mapToWalletOption = (item: ItemType) => {
-  const logo = "logo" in item ? item.logo : undefined;
-  const title =
-    "title" in item ? item.title : "login" in item ? item.login : undefined;
-  return {
-    ...item,
-    logo,
-    title
-  };
-};
+export type ItemType = WalletData | WalletBaseData;
 
 interface Props {
   items: ItemsType;
