@@ -8,13 +8,21 @@ import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
 } from "pages/dashboard/dashboard.constants";
-import { TAsset } from "pages/dashboard/dashboard.types";
 import { getPublicAssets } from "pages/dashboard/services/dashboard.service";
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 
 const _DashboardPublic: React.FC<Props> = () => {
   const [t] = useTranslation();
+  const showIn = useSelector(currencySelector);
+  const getItems = useCallback(filters => {
+    return getPublicAssets({
+      ...filters,
+      showIn
+    });
+  }, []);
   return (
     <DashboardTradingTable
       createButtonToolbar={
@@ -23,7 +31,7 @@ const _DashboardPublic: React.FC<Props> = () => {
           route={CREATE_FUND_PAGE_ROUTE}
         />
       }
-      getItems={getPublicAssets}
+      getItems={getItems}
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.public")}
