@@ -27,7 +27,8 @@ const _DepositContainer: React.FC<Props> = ({
   hasEntryFee,
   onClose,
   currency,
-  onApply
+  onApply,
+  ownAsset
 }) => {
   const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
@@ -43,6 +44,7 @@ const _DepositContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopup
+        ownAsset={ownAsset}
         availableToInvest={availableToInvest}
         fees={fees}
         minDeposit={minDeposit}
@@ -71,6 +73,7 @@ interface Props extends IDialogProps {
   assetInvest: TAssetDeposit;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
+  ownAsset?: boolean;
 }
 
 const DepositContainer = React.memo(_DepositContainer);

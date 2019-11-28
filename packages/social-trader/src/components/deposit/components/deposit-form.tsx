@@ -50,7 +50,8 @@ const _DepositForm: React.FC<
   isSubmitting,
   errorMessage,
   setFieldValue,
-  setFieldTouched
+  setFieldTouched,
+  ownAsset
 }) => {
   const { walletCurrency, amount = 0 } = values;
   const [rate, setRate] = useState<number>(1);
@@ -116,14 +117,16 @@ const _DepositForm: React.FC<
           rate={rate}
           currency={currency}
         />
-        <InvestorFees
-          fees={fees}
-          hasEntryFee={hasEntryFee}
-          amount={amount}
-          rate={rate}
-          currency={currency}
-          walletCurrency={walletCurrency}
-        />
+        {!ownAsset && (
+          <InvestorFees
+            fees={fees}
+            hasEntryFee={hasEntryFee}
+            amount={amount}
+            rate={rate}
+            currency={currency}
+            walletCurrency={walletCurrency}
+          />
+        )}
         <FormError error={errorMessage} />
         <DialogButtons>
           <GVButton
@@ -181,6 +184,7 @@ export enum DEPOSIT_FORM_FIELDS {
 
 export interface IDepositOwnProps {
   minDeposit: number;
+  ownAsset?: boolean;
   fees: TFees;
   availableToInvest?: number;
   wallets: WalletBaseData[];

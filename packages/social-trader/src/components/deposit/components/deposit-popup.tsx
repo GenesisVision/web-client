@@ -23,7 +23,8 @@ const _DepositPopup: React.FC<Props> = ({
   currency,
   hasEntryFee = false,
   asset,
-  data: wallets
+  data: wallets,
+  ownAsset
 }) => {
   const dispatch = useDispatch<ReduxDispatch>();
   const { sendRequest, errorMessage } = useApiRequest({
@@ -48,6 +49,7 @@ const _DepositPopup: React.FC<Props> = ({
         currency={currency}
       />
       <DepositForm
+        ownAsset={ownAsset}
         minDeposit={minDeposit}
         availableToInvest={availableToInvest}
         fees={fees}
@@ -77,4 +79,5 @@ interface Props {
   asset: ASSET;
   data: TWalltetsBaseData;
   hasEntryFee?: boolean;
+  ownAsset?: boolean;
 }
