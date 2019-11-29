@@ -204,12 +204,13 @@ export const fundsChangeFilter: FundsChangeFilterType = filter => (
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
   const showFavorites = ctx.pathname.includes(FAVORITES_TAB_NAME);
   const { asPath = "", pathname, reduxStore } = ctx;
-  const { page, sorting = SORTING_FILTER_VALUE, currency, ...other } = qs.parse(
+  const { page, sorting = SORTING_FILTER_VALUE, dateRange = {}, showIn, ...other } = qs.parse(
     asPath.slice(pathname.length + 1)
   );
   const accountCurrency =
     (getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum) ||
     reduxStore.getState().accountSettings.currency;
+
   const skipAndTake = calculateSkipAndTake({
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
@@ -221,7 +222,9 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
       ...other
     }),
     ...skipAndTake,
-    currency: currency || accountCurrency,
+    dateFrom: dateRange.dateStart,
+    dateTo: dateRange.dateEnd,
+    showIn: showIn || accountCurrency,
     sorting,
     showFavorites
   };
