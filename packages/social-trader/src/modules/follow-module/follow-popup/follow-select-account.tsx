@@ -20,11 +20,11 @@ const _FollowSelectAccount: React.FC<Props> = ({
     <form id="follow-select-account">
       <DialogBottom>
         <DialogField>
-          <WalletSelect
-            name={SELECT_ACCOUNT_FORM_FIELDS.account}
-            label={t("follow-program.create-account.from")}
-            items={accounts}
-          />
+          {/*<WalletSelect*/}
+          {/*  name={SELECT_ACCOUNT_FORM_FIELDS.account}*/}
+          {/*  label={t("follow-program.create-account.from")}*/}
+          {/*  items={accounts}*/}
+          {/*/>*/}
         </DialogField>
         <DialogButtons>
           <GVButton onClick={handleNext} className="invest-form__submit-button">
