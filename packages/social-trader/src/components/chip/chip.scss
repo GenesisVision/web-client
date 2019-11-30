@@ -63,3 +63,23 @@
     margin: 0 auto;
   }
 }
+
+.chip-button {
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    .chip {
+      background-color: lighten($secondary-background-color, 5%);
+    }
+  }
+  .gv-btn {
+    padding: 0;
+    color: $main-color;
+    font-size: $font-size-common;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  &__label {
+    margin-left: 24px;
+  }
+}
