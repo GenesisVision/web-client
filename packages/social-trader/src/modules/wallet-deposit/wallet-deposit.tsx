@@ -1,6 +1,7 @@
 import "./wallet-deposit.scss";
 
-import Chip, { CHIP_TYPE } from "components/chip/chip";
+import { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
+import ChipButton from "components/chip/chip-button";
 import GVButton from "components/gv-button";
 import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import useIsOpen from "hooks/is-open.hook";
@@ -44,9 +45,12 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     return (
-      <div className="wallet-deposit__small-button" onClick={onClick}>
-        <Chip type={CHIP_TYPE.POSITIVE}>+</Chip>
-      </div>
+      <ChipButton
+        onClick={onClick}
+        size={CHIP_SIZE.SMALL}
+        chipLabel={"+"}
+        type={CHIP_TYPE.POSITIVE}
+      />
     );
   }
 );
