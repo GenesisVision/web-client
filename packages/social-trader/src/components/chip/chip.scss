@@ -97,6 +97,10 @@ $chip-small: 32px;
 
   &--reversed {
     flex-direction: row-reverse;
+    &.chip-button__label {
+      margin-right: 24px;
+      margin-left: 0;
+    }
   }
 
   &__label {
