@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import GVButton from "components/gv-button";
 import * as React from "react";
+import { ReactNode } from "react";
 
 const ChipButton: React.FC<Props> = React.memo(
   ({
@@ -37,7 +38,7 @@ interface Props {
   reverseOrder?: boolean;
   size?: CHIP_SIZE;
   label?: string | JSX.Element;
-  chipLabel?: string | number;
+  chipLabel?: string | number | ReactNode;
   disabled?: boolean;
   className?: string;
   rounded?: boolean;
