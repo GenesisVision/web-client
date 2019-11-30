@@ -1,11 +1,13 @@
 import "./chip.scss";
 
+import classNames from "classnames";
 import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import GVButton from "components/gv-button";
 import * as React from "react";
 
 const ChipButton: React.FC<Props> = React.memo(
   ({
+    reverseOrder,
     size,
     type,
     children,
@@ -17,7 +19,11 @@ const ChipButton: React.FC<Props> = React.memo(
     chipLabel
   }) => (
     <GVButton variant="text" onClick={onClick}>
-      <div className="chip-button">
+      <div
+        className={classNames("chip-button", {
+          "chip-button--reversed": reverseOrder
+        })}
+      >
         <Chip type={type} disabled={disabled} rounded={rounded} size={size}>
           {chipLabel}
         </Chip>
@@ -28,9 +34,10 @@ const ChipButton: React.FC<Props> = React.memo(
 );
 
 interface Props {
+  reverseOrder?: boolean;
   size?: CHIP_SIZE;
-  label?: string;
-  chipLabel?: string;
+  label?: string | JSX.Element;
+  chipLabel?: string | number;
   disabled?: boolean;
   className?: string;
   rounded?: boolean;
