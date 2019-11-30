@@ -75,9 +75,16 @@ $chip-small: 32px;
 .chip-button {
   display: flex;
   cursor: pointer;
+  align-items: center;
   &:hover {
+    svg [stroke] {
+      stroke: $primary-color;
+    }
     .chip {
       background-color: lighten($secondary-background-color, 5%);
+    }
+    .chip--negative {
+      background-color: lighten($background-chip-negative, 5%);
     }
   }
   .gv-btn {
@@ -87,6 +94,11 @@ $chip-small: 32px;
     font-weight: 600;
     letter-spacing: 0.3px;
   }
+
+  &--reversed {
+    flex-direction: row-reverse;
+  }
+
   &__label {
     margin-left: 24px;
   }
