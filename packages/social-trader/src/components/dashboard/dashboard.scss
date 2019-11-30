@@ -3,25 +3,6 @@
 @import "~shared/styles/_colors";
 
 .dashboard {
-  &__chart-block {
-    display: flex;
-    flex-direction: column;
-    flex: 3 1;
-    min-width: 200px;
-    svg.recharts-surface {
-      overflow: visible;
-    }
-
-    & .chart-period {
-      width: auto;
-      padding: 0 $padding-xsmall;
-
-      @include media-breakpoint-landscape-phone() {
-        padding: 0 $padding-small;
-      }
-    }
-  }
-
   &__events-block {
     width: 100%;
     display: flex;
