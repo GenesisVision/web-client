@@ -6,19 +6,6 @@
   &__cell {
     @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
-
-    &--buttons {
-      .chip {
-        @include adaptive-margin(left, $padding-xsmall);
-        width: 32px;
-        height: 32px;
-      }
-    }
-  }
-
-  &__button {
-    display: inline-flex;
-    vertical-align: middle;
   }
 
   &__tooltip-button {
