@@ -19,17 +19,17 @@
   }
 
   &__description {
-    margin-left: 20px;
+    margin-left: $padding-xsmall;
 
     p {
       padding-bottom: 4px;
     }
   }
   &__title {
-    font-size: 16px;
+    font-size: $font-size-h4;
   }
   &__trader {
-    font-size: 12px;
+    font-size: $font-size-small;
   }
 }
 
@@ -43,7 +43,7 @@
     flex-direction: row;
     justify-content: stretch;
     img {
-      margin-left: 20px;
+      margin-left: $padding-xsmall;
     }
   }
   &__wallet {
@@ -51,7 +51,7 @@
     height: $small-avatar-size;
   }
   &__icon {
-    margin-right: 30px;
+    margin-right: $padding-small;
   }
   &__rate {
     opacity: 0.5;
@@ -65,7 +65,7 @@
     white-space: normal;
 
     .gv-btn.gv-btn--text {
-      padding: 10px 0;
+      padding: $padding-xxsmall 0;
       justify-content: start;
       color: $primary-color;
       transition: opacity 250ms;
