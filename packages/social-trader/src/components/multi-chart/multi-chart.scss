@@ -25,11 +25,6 @@
   &__period {
     box-sizing: border-box;
     @include details-block-horizontal-paddings();
-    & .chart-period {
-      width: 100%;
-      box-sizing: border-box;
-      margin-top: 0;
-    }
   }
   &__profit-chart {
     @include details-block-horizontal-paddings();

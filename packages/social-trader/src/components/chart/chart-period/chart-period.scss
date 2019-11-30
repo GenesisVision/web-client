@@ -3,12 +3,12 @@
 @import "~shared/styles/_sizes";
 
 .chart-period {
+  box-sizing: border-box;
   @include adaptive-padding(bottom, $padding-xsmall);
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: $padding-small;
   min-height: 1em;
 
   &__period {
