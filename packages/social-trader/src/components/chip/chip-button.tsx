@@ -21,7 +21,7 @@ const ChipButton: React.FC<Props> = React.memo(
         <Chip type={type} disabled={disabled} rounded={rounded} size={size}>
           {chipLabel}
         </Chip>
-        <div className="chip-button__label">{label}</div>
+        {label && <div className="chip-button__label">{label}</div>}
       </div>
     </GVButton>
   )
