@@ -2,6 +2,8 @@
 @import "~shared/styles/_constants";
 @import "~shared/styles/_sizes";
 
+$chip-small: 32px;
+
 .chip {
   @include transition(background-color);
   display: inline-flex;
@@ -16,6 +18,12 @@
   background-color: $secondary-background-color;
   box-shadow: $box-shadow-1;
   cursor: default;
+
+  &--small {
+    width: $chip-small;
+    height: $chip-small;
+    font-size: $font-size-h3;
+  }
 
   &--negative {
     color: $negative-color;
