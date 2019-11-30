@@ -8,12 +8,12 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 30px;
+  margin-top: $padding-small;
   min-height: 1em;
 
   &__period {
     color: $text-dark-color;
-    font-size: 11px;
+    font-size: $font-size-small;
     font-weight: bold;
     letter-spacing: 0.2px;
   }
@@ -24,7 +24,7 @@
       padding: 0;
     }
     &:not(:last-of-type) {
-      margin-right: 20px;
+      margin-right: $padding-xsmall;
     }
     &:not(&--active) {
       cursor: pointer;
