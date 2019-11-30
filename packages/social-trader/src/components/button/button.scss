@@ -1,3 +1,5 @@
+@import "~shared/styles/_colors";
+
 .gv-btn {
   display: inline-flex;
   font-family: "NeuzeitGroBol";
@@ -30,7 +32,7 @@
   &:focus,
   &.focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(3, 189, 175, 0.25);
+    box-shadow: 0 0 0 0.2rem $green-4;
   }
 
   &:hover,
@@ -50,64 +52,64 @@
 }
 
 .gv-btn--primary {
-  color: #fff;
-  background-color: #03bdaf;
-  border-color: #03bdaf;
-  box-shadow: 0 5px 15px 0 rgba(22, 183, 173, 0.28);
+  color: $text-accent-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  box-shadow: 0 5px 15px 0 $green-3;
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
-    background-color: #028b81;
-    border-color: #027e75;
+    background-color: $green-2;
+    border-color: $green-2;
   }
 
   &:focus,
   &.focus {
-    box-shadow: 0 0 0 0.2rem rgba(3, 189, 175, 0.5);
+    box-shadow: 0 0 0 0.2rem $green-5;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #02978c;
-    border-color: #028b81;
+    color: $text-accent-color;
+    background-color: $green-2;
+    border-color: $green-2;
   }
 
   &.disabled,
   &:disabled {
-    background-color: #03bdaf;
-    border-color: #03bdaf;
+    background-color: $primary-color;
+    border-color: $primary-color;
   }
 }
 
 .gv-btn--secondary {
-  color: #184f61;
-  background-color: #fff;
+  color: $green-1;
+  background-color: $text-accent-color;
   background-image: none;
-  border-color: #e3ebed;
-  box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.67);
+  border-color: $text-accent-color;
+  box-shadow: 0 1px 4px 0 $grey-1;
 
   &:not(:disabled):not(.disabled):active:focus,
   &:not(:disabled):not(.disabled).active:focus {
-    box-shadow: 0 0 0 0.2rem rgba(24, 79, 97, 0.5);
+    box-shadow: 0 0 0 0.2rem $green-6;
   }
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
-    color: #fff;
-    background-color: #184f61;
-    border-color: #184f61;
+    color: $text-accent-color;
+    background-color: $green-1;
+    border-color: $green-1;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #184f61;
-    border-color: #184f61;
+    color: $text-accent-color;
+    background-color: $green-1;
+    border-color: $green-1;
   }
 
   &.disabled,
   &:disabled {
-    color: #184f61;
+    color: $green-1;
     background-color: transparent;
-    border-color: #e3ebed;
+    border-color: $text-accent-color;
   }
 }
