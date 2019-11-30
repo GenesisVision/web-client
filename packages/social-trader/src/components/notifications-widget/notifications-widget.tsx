@@ -1,5 +1,3 @@
-import "./notifications-widget.scss";
-
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import { notificationsToggle } from "components/header/header.service";
@@ -25,7 +23,7 @@ const _NotificationsWidget: React.FC<Props> = ({
       onClick={handlerOpenNotifications}
       type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
       chipLabel={notificationsCount}
-      label={<RingIcon className="notifications-widget__ring" />}
+      label={<RingIcon />}
     />
   );
 };
