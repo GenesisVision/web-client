@@ -1,6 +1,5 @@
-import Chip, { CHIP_TYPE } from "components/chip/chip";
+import ChipButton from "components/chip/chip-button";
 import Dialog from "components/dialog/dialog";
-import GVButton from "components/gv-button";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -66,14 +65,11 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
           toggleNotifications={toggleNotification}
         />
       ))}
-      <div className="custom-notification__create">
-        <GVButton variant="text" onClick={setOpenPopup}>
-          <>
-            <Chip type={CHIP_TYPE.POSITIVE}>+</Chip>
-            {t("notifications-page.create.title")}
-          </>
-        </GVButton>
-      </div>
+      <ChipButton
+        onClick={setOpenPopup}
+        label={t("notifications-page.create.title")}
+        chipLabel={"+"}
+      />
       <Dialog open={isOpenPopup} onClose={setClosePopup}>
         <CustomNotificationCreateForm
           asset={asset}
