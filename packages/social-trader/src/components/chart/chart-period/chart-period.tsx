@@ -10,12 +10,13 @@ import { HandlePeriodChangeType } from "utils/types";
 import {
   ChartDefaultPeriod,
   ChartPeriodType,
-  getPeriodStartDate
+  getPeriodStartDate,
+  TChartPeriod
 } from "./chart-period.helpers";
 
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   const { t } = useTranslation();
-  const handleChangePeriod = (newPeriodType: ChartPeriodType) => () => {
+  const handleChangePeriod = (newPeriodType: TChartPeriod) => () => {
     if (period.type !== newPeriodType) {
       const start = getPeriodStartDate(newPeriodType);
       onChange({ type: newPeriodType, start });

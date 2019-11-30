@@ -1,6 +1,9 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ChartPeriodType } from "components/chart/chart-period/chart-period.helpers";
+import {
+  ChartPeriodType,
+  TChartPeriod
+} from "components/chart/chart-period/chart-period.helpers";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -32,7 +35,7 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
 interface Props {
   Current: React.ComponentType;
   Particular: React.ComponentType;
-  periodType: ChartPeriodType;
+  periodType: TChartPeriod;
 }
 
 const DetailsStatisticsElements = React.memo(_DetailsStatisticsElements);
