@@ -1,5 +1,6 @@
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
+import HeaderIcon from "components/header/header-icon";
 import { notificationsToggle } from "components/header/header.service";
 import { RingIcon } from "components/icon/ring-icon";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -23,7 +24,11 @@ const _NotificationsWidget: React.FC<Props> = ({
       onClick={handlerOpenNotifications}
       type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
       chipLabel={notificationsCount}
-      label={<RingIcon />}
+      label={
+        <HeaderIcon>
+          <RingIcon />
+        </HeaderIcon>
+      }
     />
   );
 };
