@@ -1,6 +1,7 @@
 import "./wallet-widget.scss";
 
 import classNames from "classnames";
+import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Link from "components/link/link";
 import Popover from "components/popover/popover";
@@ -34,11 +35,10 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
     <>
       <div className={classNames("wallet-widget", className)}>
         <div className="wallet-widget__wallet" onClick={setAnchor}>
-          <WalletIcon primary={anchor !== undefined} />
-          <span className="wallet-widget__value">{`${formatCurrencyValue(
-            available,
-            currency
-          )} ${currency}`}</span>
+          <HeaderIcon>
+            <WalletIcon primary={anchor !== undefined} />
+          </HeaderIcon>
+          {`${formatCurrencyValue(available, currency)} ${currency}`}
         </div>
         <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
       </div>
