@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 const ChipButton: React.FC<Props> = React.memo(
   ({
     reverseOrder,
-    size,
+    size = CHIP_SIZE.SMALL,
     type,
     children,
     rounded,
