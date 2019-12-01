@@ -17,7 +17,6 @@ $chip-small: 32px;
   letter-spacing: 0.4px;
   background-color: $secondary-background-color;
   box-shadow: $box-shadow-1;
-  cursor: default;
 
   &--small {
     width: $chip-small;
@@ -87,23 +86,17 @@ $chip-small: 32px;
       background-color: lighten($background-chip-negative, 5%);
     }
   }
-  .gv-btn {
-    padding: 0;
-    color: $main-color;
-    font-size: $font-size-common;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
 
   &--reversed {
     flex-direction: row-reverse;
-    &.chip-button__label {
-      margin-right: 24px;
+    & .chip-button__label {
       margin-left: 0;
     }
   }
 
   &__label {
+    display: flex;
+    align-items: center;
     margin-left: 24px;
   }
 }
