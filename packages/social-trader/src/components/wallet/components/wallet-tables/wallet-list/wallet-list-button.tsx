@@ -24,7 +24,7 @@ const _WalletListButton: React.FC<IWalletListButton> = ({
   handleOpenWithdrawPopup,
   handleOpenAddFundsPopup
 }) => (
-  <>
+  <div className="wallet-list__buttons">
     <TransferButton handleOpen={handleOpenTransferPopup(wallet)} />
     <WithdrawButton
       handleOpen={handleOpenWithdrawPopup(wallet)}
@@ -34,7 +34,7 @@ const _WalletListButton: React.FC<IWalletListButton> = ({
       handleOpen={handleOpenAddFundsPopup(wallet)}
       disabled={wallet.isDepositEnabled === false}
     />
-  </>
+  </div>
 );
 
 const WalletListButton = React.memo(_WalletListButton);
