@@ -2,7 +2,6 @@ import "./chip.scss";
 
 import classNames from "classnames";
 import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
-import GVButton from "components/gv-button";
 import * as React from "react";
 import { ReactNode } from "react";
 
@@ -19,18 +18,17 @@ const ChipButton: React.FC<Props> = React.memo(
     label,
     chipLabel
   }) => (
-    <GVButton variant="text" onClick={onClick}>
-      <div
-        className={classNames("chip-button", {
-          "chip-button--reversed": reverseOrder
-        })}
-      >
-        <Chip type={type} disabled={disabled} rounded={rounded} size={size}>
-          {chipLabel}
-        </Chip>
-        {label && <div className="chip-button__label">{label}</div>}
-      </div>
-    </GVButton>
+    <div
+      onClick={onClick}
+      className={classNames("chip-button", {
+        "chip-button--reversed": reverseOrder
+      })}
+    >
+      <Chip type={type} disabled={disabled} rounded={rounded} size={size}>
+        {chipLabel}
+      </Chip>
+      {label && <div className="chip-button__label">{label}</div>}
+    </div>
   )
 );
 
