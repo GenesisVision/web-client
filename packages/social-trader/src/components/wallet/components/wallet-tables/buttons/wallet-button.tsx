@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import Tooltip from "components/tooltip/tooltip";
@@ -14,7 +15,7 @@ export const _WalletButton: React.FC<Props> = ({
   <Tooltip
     render={() => <div className="wallet-list__tooltip-button">{title}</div>}
   >
-    <div className={className}>
+    <div className={classNames(className, "wallet-list__button")}>
       <ChipButton
         disabled={disabled}
         reverseOrder
