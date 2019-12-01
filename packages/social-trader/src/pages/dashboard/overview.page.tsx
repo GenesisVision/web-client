@@ -1,5 +1,3 @@
-import "components/dashboard/dashboard.scss";
-
 import Page from "components/page/page";
 import React from "react";
 
