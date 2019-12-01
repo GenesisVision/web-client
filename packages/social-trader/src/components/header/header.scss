@@ -1,11 +1,18 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
 
 .header {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    margin-right: $padding-small/2;
+  }
 
   &__buttons {
     display: none !important;
@@ -43,7 +50,7 @@
 
   &__search {
     display: flex;
-    margin-right: 20px;
+    margin-right: $padding-xsmall;
 
     a {
       display: inline-flex;
@@ -63,7 +70,7 @@
 
   &__buttons {
     a + a {
-      margin-left: 10px;
+      margin-left: $padding-xxsmall;
     }
   }
 
