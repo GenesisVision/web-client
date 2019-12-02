@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 
 const ChipButton: React.FC<Props> = React.memo(
   ({
+    stretch,
     reverseOrder,
     size = CHIP_SIZE.SMALL,
     type,
@@ -24,7 +25,13 @@ const ChipButton: React.FC<Props> = React.memo(
         "chip-button--reversed": reverseOrder
       })}
     >
-      <Chip type={type} disabled={disabled} rounded={rounded} size={size}>
+      <Chip
+        type={type}
+        disabled={disabled}
+        rounded={rounded}
+        size={size}
+        stretch={stretch}
+      >
         {chipLabel}
       </Chip>
       {label && <div className="chip-button__label">{label}</div>}
@@ -33,6 +40,7 @@ const ChipButton: React.FC<Props> = React.memo(
 );
 
 interface Props {
+  stretch?: boolean;
   reverseOrder?: boolean;
   size?: CHIP_SIZE;
   label?: string | JSX.Element;

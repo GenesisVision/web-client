@@ -18,8 +18,12 @@ $chip-small: 32px;
   background-color: $secondary-background-color;
   box-shadow: $box-shadow-1;
 
+  &--stretch {
+    width: auto !important;
+  }
+
   &--small {
-    min-width: $chip-small;
+    width: $chip-small;
     height: $chip-small;
     font-size: $font-size-h3;
   }

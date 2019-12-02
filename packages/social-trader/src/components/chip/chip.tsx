@@ -4,11 +4,21 @@ import classNames from "classnames";
 import * as React from "react";
 
 const Chip: React.FC<Props> = React.memo(
-  ({ type, children, rounded, onClick, className, disabled, size }) => (
+  ({
+    type,
+    children,
+    rounded,
+    onClick,
+    className,
+    disabled,
+    size,
+    stretch
+  }) => (
     <div
       className={classNames("chip", className, {
         [`chip--${type}`]: type,
         "chip--small": size === CHIP_SIZE.SMALL,
+        "chip--stretch": stretch,
         "chip--rounded": rounded,
         "chip--disabled": disabled,
         "chip--pointer": !disabled && typeof onClick === "function"
@@ -31,6 +41,7 @@ export enum CHIP_TYPE {
 }
 
 interface Props {
+  stretch?: boolean;
   size?: CHIP_SIZE;
   disabled?: boolean;
   className?: string;
