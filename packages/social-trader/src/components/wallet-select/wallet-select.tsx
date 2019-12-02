@@ -1,31 +1,15 @@
-import "./wallet-select.scss";
-
-import { CurrencyItem } from "components/currency-item/currency-item";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import Select, { ISelectChangeEvent } from "components/select/select";
-import { TradingAccountDetails, WalletBaseData, WalletData } from "gv-api-web";
+import CurrencySourceSelect from "components/currency-source-select/currency-source-select";
+import { ISelectChangeEvent } from "components/select/select";
+import { WalletBaseData, WalletData } from "gv-api-web";
 import React from "react";
 
 const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
-  <GVFormikField
-    name={name}
-    component={GVTextField}
+  <CurrencySourceSelect
     label={label}
-    InputComponent={Select}
+    items={items}
+    name={name}
     onChange={onChange}
-  >
-    {items.map(({ id, logo, currency, title }) => (
-      <option value={id} key={id}>
-        <CurrencyItem
-          logo={logo}
-          name={`${title ? `${title} | ` : ""}${currency}`}
-          small
-          clickable={false}
-        />
-      </option>
-    ))}
-  </GVFormikField>
+  />
 );
 
 export type ItemsType = Array<ItemType>;
