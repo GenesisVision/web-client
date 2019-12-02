@@ -40,17 +40,15 @@ const _InputDepositAmount: React.FC<Props> = ({
         setMax={setMaxAmount(walletAvailable, walletCurrency)}
       />
       {assetCurrency !== walletCurrency && depositAmount && (
-        <div className="invest-popup__currency">
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(depositAmount, rate),
-              assetCurrency
-            )}
-            prefix="≈ "
-            suffix={` ${assetCurrency}`}
-            displayType="text"
-          />
-        </div>
+        <NumberFormat
+          value={formatCurrencyValue(
+            convertFromCurrency(depositAmount, rate),
+            assetCurrency
+          )}
+          prefix="≈ "
+          suffix={` ${assetCurrency}`}
+          displayType="text"
+        />
       )}
     </AssetField>
   );

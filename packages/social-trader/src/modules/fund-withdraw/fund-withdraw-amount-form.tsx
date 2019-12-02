@@ -79,16 +79,14 @@ const _FundWithdrawAmountForm: React.FC<
         isAllow={isAllow}
         setMax={setMaxAmount}
       />
-      <div className="invest-popup__currency">
-        <BlurContainer blur={isPending}>
-          <NumberFormat
-            value={formatCurrencyValue(amountToWithdrawCcy, currency)}
-            prefix="≈ "
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </BlurContainer>
-      </div>
+      <BlurContainer blur={isPending}>
+        <NumberFormat
+          value={formatCurrencyValue(amountToWithdrawCcy, currency)}
+          prefix="≈ "
+          suffix={` ${currency}`}
+          displayType="text"
+        />
+      </BlurContainer>
       <FundWithdrawResult
         isPending={isPending}
         availableToWithdraw={availableToWithdraw}
