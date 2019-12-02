@@ -4,12 +4,48 @@ import * as faker from "faker";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
+  TDashboardInRequests,
+  TDashboardRequest,
   TDashboardTotal,
   TDashboardTradingStatistic,
   TRecommendation
 } from "pages/dashboard/dashboard.types";
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+
+export const getInRequestsData = (): TDashboardRequest => ({
+  id: "",
+  date: new Date(),
+  amount: getRandomInteger(-1000, 1000),
+  currency: "GVT",
+  type: "Invest",
+  status: "Cancelled",
+  canCancelRequest: false,
+  assetDetails: {
+    id: "",
+    logo: "",
+    color: "",
+    title: "",
+    url: "",
+    assetType: "Follow",
+    programDetails: {
+      level: 0,
+      levelProgress: 0
+    }
+  },
+  fundRequestDetails: {
+    entryFee: 0,
+    exitFee: 0,
+    withdrawPercent: 0
+  },
+  programRequestDetails: {
+    entryFee: 0,
+    isWithdrawAll: false,
+    successFee: 0
+  }
+});
+export const getInRequestsLoadersData = (): TDashboardInRequests =>
+  tableLoaderCreator(getInRequestsData);
 
 export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
   ({
