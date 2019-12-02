@@ -20,7 +20,7 @@ export const getTransferAll = (
   const { amount, sourceId } = values;
   const selectedSourceItem = getSelectedItem(sourceItems, sourceId);
   const formattedAvailableSourceItem = formatCurrencyValue(
-    0, //selectedSourceItem.available,
+    selectedSourceItem.available,
     selectedSourceItem.currency
   );
   return String(amount) === formattedAvailableSourceItem;

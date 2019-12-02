@@ -41,8 +41,7 @@ const DEFAULT_FILTERS = [
 
 const _WalletTransactions: React.FC<Props> = ({
   renderBodyRow,
-  columns,
-  currency
+  columns
 }) => {
   const timestamp = useSelector(
     (state: RootState) => state.wallet.lastUpdate.timestamp
@@ -51,9 +50,9 @@ const _WalletTransactions: React.FC<Props> = ({
   const [t] = useTranslation();
   const getMultiTransactions: GetItemsFuncType = useCallback(
     filters => {
-      return fetchMultiTransactions(currency, filters);
+      return fetchMultiTransactions(filters);
     },
-    [currency]
+    []
   );
   if (!platformData) return null;
   const { walletTransactions } = platformData.filters;
