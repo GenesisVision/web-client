@@ -22,6 +22,11 @@ export const getInRequestsData = (): TDashboardRequest => ({
   status: "Cancelled",
   canCancelRequest: false,
   assetDetails: {
+    entryFee: 0,
+    isWithdrawAll: false,
+    successFee: 0,
+    exitFee: 0,
+    withdrawPercent: 0,
     id: "",
     logo: "",
     color: "",
@@ -32,20 +37,10 @@ export const getInRequestsData = (): TDashboardRequest => ({
       level: 0,
       levelProgress: 0
     }
-  },
-  fundRequestDetails: {
-    entryFee: 0,
-    exitFee: 0,
-    withdrawPercent: 0
-  },
-  programRequestDetails: {
-    entryFee: 0,
-    isWithdrawAll: false,
-    successFee: 0
   }
 });
 export const getInRequestsLoadersData = (): TDashboardInRequests =>
-  tableLoaderCreator(getInRequestsData);
+  tableLoaderCreator(getInRequestsData, 3);
 
 export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
   ({
