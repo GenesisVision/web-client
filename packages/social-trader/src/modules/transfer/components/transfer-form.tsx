@@ -69,9 +69,7 @@ const _TransferForm: React.FC<Props> = ({
         sourceItems,
         values[FIELDS.sourceId]
       );
-      // const { currency, available } = selectedSourceItem;
-      const { currency } = selectedSourceItem;
-      const available = 0;
+      const { currency, available } = selectedSourceItem;
       return (
         formattedValue === "" ||
         (validateFraction(value, currency) && floatValue <= available)
@@ -89,7 +87,7 @@ const _TransferForm: React.FC<Props> = ({
     values[FIELDS.sourceId]
   );
   const formattedAvailableSourceItem = formatCurrencyValue(
-    0, //selectedSourceItem.available,
+    selectedSourceItem.available,
     selectedSourceItem.currency
   );
   const selectedDestinationItem = service.getSelectedItem(
@@ -97,7 +95,7 @@ const _TransferForm: React.FC<Props> = ({
     values[FIELDS.destinationId]
   );
   const formattedAvailableDestinationItem = formatCurrencyValue(
-    0, //selectedSourceItem.available,
+    selectedSourceItem.available,
     selectedDestinationItem.currency
   );
 
@@ -238,7 +236,7 @@ const TransferForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
               .moreThan(0, t("transfer.validation.amount-is-zero"))
               .max(
                 +formatCurrencyValue(
-                  0, //selectedSourceItem.available,
+                  selectedSourceItem.available,
                   selectedSourceItem.currency
                 ),
                 t("transfer.validation.amount-more-than-available")
