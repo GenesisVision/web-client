@@ -19,7 +19,7 @@ $chip-small: 32px;
   box-shadow: $box-shadow-1;
 
   &--small {
-    width: $chip-small;
+    min-width: $chip-small;
     height: $chip-small;
     font-size: $font-size-h3;
   }
