@@ -7,13 +7,9 @@ import React from "react";
 
 const _DashboardInRequests: React.FC<Props> = ({ data, updateData }) => {
   return (
-    <div className="">
+    <div className="dashboard-in-requests">
       {data.map(request => (
-        <RequestLine
-          key={request.id}
-          request={request}
-          onApplyCancelRequest={updateData}
-        />
+        <RequestLine request={request} onApplyCancelRequest={updateData} />
       ))}
     </div>
   );
