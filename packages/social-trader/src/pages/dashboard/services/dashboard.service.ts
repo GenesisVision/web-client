@@ -14,6 +14,7 @@ import {
 } from "pages/dashboard/dashboard.loaders-data";
 import {
   TAssets,
+  TDashboardInRequests,
   TDashboardInvestingStatistic,
   TDashboardPortfolio,
   TDashboardTotal,
@@ -23,12 +24,18 @@ import {
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import { Dispatch } from "redux";
 import dashboardApi from "services/api-client/dashboard-api";
+import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
 import { IDataModel } from "shared/constants/constants";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
+
+export const fetchInRequests = (): CancelablePromise<TDashboardInRequests> =>
+  investmentsApi
+    .getRequests(0, 10, authService.getAuthArg())
+    .then(({ items }) => items);
 
 export const fetchMultiChartData = ({
   assets,
