@@ -1,4 +1,5 @@
 import {
+  AssetInvestmentRequest,
   DashboardAsset,
   DashboardChartAsset,
   DashboardInvestingDetails,
@@ -9,9 +10,12 @@ import {
   InvestmentEventViewModel,
   MoneyLocation,
   RecommendedAsset
-} from "gv-api-web/dist";
+} from "gv-api-web";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
+
+export type TDashboardRequest = AssetInvestmentRequest;
+export type TDashboardInRequests = TDashboardRequest[];
 
 export type TChartAsset = DashboardChartAsset;
 
