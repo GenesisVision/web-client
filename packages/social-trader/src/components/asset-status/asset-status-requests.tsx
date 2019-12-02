@@ -49,9 +49,6 @@ const _AssetStatusRequests: React.FC<Props> = ({
           exitFee={request.exitFee}
           key={request.id}
           request={request}
-          cancelRequest={(values: CancelRequestPropsType) => {
-            dispatch(cancelRequestDispatch(values));
-          }}
           asset={asset}
           onApplyCancelRequest={handleCancel}
         />
