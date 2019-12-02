@@ -1,6 +1,7 @@
 import "./dashboard.scss";
 
 import Page from "components/page/page";
+import useApiRequest from "hooks/api-request.hook";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
@@ -12,9 +13,15 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isNewUserSelector } from "reducers/header-reducer";
 
+import DashboardInRequestsContainer from "./components/dashboard-in-requests/dashboard-in-requests.container";
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
+import { getRequestsCount } from "./services/dashboard.service";
 
 const _DashboardPage: React.FC = () => {
+  const { data: requestCount } = useApiRequest({
+    request: getRequestsCount,
+    fetchOnMount: true
+  });
   const [t] = useTranslation();
   const title = t(`dashboard-page.title`);
   const notNewUser = !useSelector(isNewUserSelector);
@@ -24,6 +31,11 @@ const _DashboardPage: React.FC = () => {
         <div>
           <DashboardTotalContainer />
         </div>
+        {!!requestCount && requestCount > 0 && (
+          <div>
+            <DashboardInRequestsContainer />
+          </div>
+        )}
         <div className="dashboard__statistic-block">
           <DashboardTradingStatistic />
           <DashboardInvestingStatistic />
