@@ -8,8 +8,6 @@ import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
 import {
-  composeAssetDetailsFolderUrl,
-  composeAssetDetailsUrl,
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "utils/compose-url";
@@ -28,11 +26,7 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     state: from ? `/ ${from}` : ""
   };
   return (
-    <div
-      className={classNames("portfolio-event-logo", {
-        "portfolio-event-logo--with-asset": withAsset
-      })}
-    >
+    <div className="portfolio-event-logo">
       {withAsset &&
         ((assetDetails.url && (
           <Link to={to} className="portfolio-event-logo__photo">
