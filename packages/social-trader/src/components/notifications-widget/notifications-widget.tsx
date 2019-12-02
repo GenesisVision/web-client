@@ -1,3 +1,5 @@
+import "./notifications-widget.scss";
+
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import HeaderIcon from "components/header/header-icon";
@@ -23,7 +25,9 @@ const _NotificationsWidget: React.FC<Props> = ({
       reverseOrder
       onClick={handlerOpenNotifications}
       type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
-      chipLabel={notificationsCount}
+      chipLabel={
+        <div className="notifications-count">{notificationsCount}</div>
+      }
       label={
         <HeaderIcon>
           <RingIcon />
