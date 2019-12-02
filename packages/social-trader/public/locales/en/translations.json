@@ -1,4 +1,8 @@
 {
+  "request-line": {
+    "cancel-header": "Cancel request",
+    "cancel-body": "Please confirm that you want to cancel the request."
+  },
   "convert-page": {
     "convert-signal-to-program": "Make program from signal account",
     "convert-account-to-program": "Make program from account",
