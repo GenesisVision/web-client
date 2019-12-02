@@ -1,5 +1,4 @@
 import "./dashboard.scss";
-import "components/dashboard/dashboard.scss";
 
 import Page from "components/page/page";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";

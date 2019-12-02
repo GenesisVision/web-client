@@ -1,13 +1,14 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
 
 .profile-avatar {
   @include transition(background-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 44px;
-  width: 44px;
+  height: $small-avatar-size;
+  width: $small-avatar-size;
   border-radius: 100%;
   overflow: hidden;
   background-color: $secondary-color;

@@ -26,25 +26,4 @@
     color: $negative-color;
     padding: 0;
   }
-
-  &__create {
-    .gv-btn {
-      padding: 0;
-      color: $main-color;
-      font-size: $font-size-common;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-
-      &:hover {
-        .chip {
-          background-color: lighten($secondary-background-color, 5%);
-        }
-      }
-    }
-
-    .chip {
-      margin-right: 24px;
-      cursor: pointer;
-    }
-  }
 }

@@ -1,6 +1,6 @@
 import { subtractDate } from "shared/utils/dates";
 
-export type ChartPeriodType =
+export type TChartPeriod =
   | "day"
   | "week"
   | "month"
@@ -9,15 +9,15 @@ export type ChartPeriodType =
   | "all";
 
 export const ChartPeriodType = {
-  day: "day" as ChartPeriodType,
-  week: "week" as ChartPeriodType,
-  month: "month" as ChartPeriodType,
-  quarter: "quarter" as ChartPeriodType,
-  year: "year" as ChartPeriodType,
-  all: "all" as ChartPeriodType
+  day: "day" as TChartPeriod,
+  week: "week" as TChartPeriod,
+  month: "month" as TChartPeriod,
+  quarter: "quarter" as TChartPeriod,
+  year: "year" as TChartPeriod,
+  all: "all" as TChartPeriod
 };
 
-export const getPeriodStartDate = (periodType: ChartPeriodType) => {
+export const getPeriodStartDate = (periodType: TChartPeriod) => {
   if (periodType === ChartPeriodType.all) {
     return undefined;
   }
@@ -35,7 +35,7 @@ export const getDefaultPeriod = (): ChartDefaultPeriod => {
 export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
-  type: ChartPeriodType;
+  type: TChartPeriod;
   start?: Date; // TODO set start/end as required
   end?: Date;
 };

@@ -18,10 +18,6 @@ $asset-height-mobile: $asset-height/$divider-text;
       max-width: 280px;
     }
 
-    .invest-popup__currency {
-      margin-bottom: 0;
-    }
-
     &-caption {
       padding-top: $padding-small;
       font-size: 12px;
@@ -105,10 +101,6 @@ $asset-height-mobile: $asset-height/$divider-text;
     font-weight: 600;
     & > div {
       padding-right: $padding-small/2;
-    }
-    .add-button {
-      background: rgb(21, 187, 175);
-      color: $text-accent-color;
     }
   }
   &__regulator-indicator {

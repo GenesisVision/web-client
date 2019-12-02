@@ -1,10 +1,11 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .portfolio-event-logo {
   position: relative;
   &--with-asset {
-    width: 44px;
-    height: 44px;
+    width: $small-avatar-size;
+    height: $small-avatar-size;
   }
 
   &__type {

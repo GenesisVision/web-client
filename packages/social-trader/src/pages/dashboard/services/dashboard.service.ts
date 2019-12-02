@@ -1,8 +1,5 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import dashboardFundsTableSelector from "components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds.selector";
-import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import {
   CancelablePromise,
   DashboardAssetChart,
@@ -24,18 +21,14 @@ import {
   TTrading
 } from "pages/dashboard/dashboard.types";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
-import { AuthRootState } from "reducers";
 import { Dispatch } from "redux";
 import dashboardApi from "services/api-client/dashboard-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import { IDataModel } from "shared/constants/constants";
 import authService from "services/auth-service";
+import { IDataModel } from "shared/constants/constants";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
-import { getDashboardFunds } from "./dashboard-funds.service";
 
 export const fetchMultiChartData = ({
   assets,
@@ -135,65 +128,6 @@ export const getPortfolioEvents = (dispatch: Dispatch) =>
     })
   );
 
-export const getAssetChart = (
-  assetId: string,
-  assetTitle: string,
-  assetType: ASSETS_TYPES,
-  period: ChartDefaultPeriod
-) => (dispatch: Dispatch) => {
-  const chartFilter = {
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 100
-  };
-
-  if (assetType === ASSETS_TYPES.Program) {
-    //TODO удалить if, отрефакторить
-    programsApi
-      .getProgramProfitPercentCharts(assetId, chartFilter)
-      .then(data => {
-        dispatch(
-          actions.dashboardChartAction({
-            type: assetType,
-            id: assetId,
-            title: assetTitle,
-            currency: data.charts[0].currency,
-            pnLChart: [],
-            equityChart: data.charts
-          })
-        );
-      });
-  } else {
-    fundsApi.getFundProfitPercentCharts(assetId, chartFilter).then(data => {
-      dispatch(
-        actions.dashboardChartAction({
-          type: assetType,
-          id: assetId,
-          title: assetTitle,
-          equityChart: data.charts
-        })
-      );
-    });
-  }
-};
-
 export const getAssets = (ctx?: NextPageContext) => async (
   dispatch: Dispatch
 ) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
-
-export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
-  dispatch(actions.setPeriodAction(period));
-
-export const getAssetsCounts = () => (
-  dispatch: Dispatch,
-  getState: () => AuthRootState
-) => {
-  const commonFiltering = { take: 0 };
-
-  const fundsCountFilters = composeRequestFiltersByTableState(
-    dashboardFundsTableSelector(getState())
-  );
-  dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
-};
-
-export type TChartAsset = any; //ManagerSimpleProgram | ManagerSimpleFund;

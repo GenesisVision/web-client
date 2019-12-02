@@ -100,17 +100,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
             setMax={setMaxAmount}
           />
           {currency !== initialDepositCurrency && (
-            <div className="invest-popup__currency">
-              <NumberFormat
-                value={formatCurrencyValue(
-                  convertToCurrency(initialDepositAmount, rate),
-                  currency
-                )}
-                prefix="≈ "
-                suffix={` ${currency}`}
-                displayType="text"
-              />
-            </div>
+            <NumberFormat
+              value={formatCurrencyValue(
+                convertToCurrency(initialDepositAmount, rate),
+                currency
+              )}
+              prefix="≈ "
+              suffix={` ${currency}`}
+              displayType="text"
+            />
           )}
         </DialogField>
         <DialogButtons>

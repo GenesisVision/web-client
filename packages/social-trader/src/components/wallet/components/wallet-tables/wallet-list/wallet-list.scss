@@ -3,22 +3,19 @@
 @import "~shared/styles/_sizes";
 
 .wallet-list {
-  &__cell {
-    @include adaptive-padding(right, $padding-xsmall, 2);
-    color: $text-light-color;
-
-    &--buttons {
-      .chip {
-        @include adaptive-margin(left, $padding-xsmall);
-        width: 32px;
-        height: 32px;
-      }
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__button {
+    &:not(:last-child) {
+      margin-right: $padding-xsmall;
     }
   }
 
-  &__button {
-    display: inline-flex;
-    vertical-align: middle;
+  &__cell {
+    @include adaptive-padding(right, $padding-xsmall, 2);
+    color: $text-light-color;
   }
 
   &__tooltip-button {

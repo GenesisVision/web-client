@@ -1,7 +1,8 @@
 import "./notifications-widget.scss";
 
-import classNames from "classnames";
-import Chip, { CHIP_TYPE } from "components/chip/chip";
+import { CHIP_TYPE } from "components/chip/chip";
+import ChipButton from "components/chip/chip-button";
+import HeaderIcon from "components/header/header-icon";
 import { notificationsToggle } from "components/header/header.service";
 import { RingIcon } from "components/icon/ring-icon";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -15,26 +16,25 @@ const _NotificationsWidget: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.notifications.isOpen);
-  const handlerOpenNotifications = useCallback(
-    () => dispatch(notificationsToggle(isOpen)),
-    []
-  );
+  const handlerOpenNotifications = useCallback(() => {
+    dispatch(notificationsToggle(isOpen));
+  }, []);
   const hasNotifications: boolean = notificationsCount > 0;
   return (
-    <div
-      className={classNames("notifications-widget", {
-        "notifications-widget--has": hasNotifications
-      })}
+    <ChipButton
+      stretch
+      reverseOrder
       onClick={handlerOpenNotifications}
-    >
-      <RingIcon className="notifications-widget__ring" />
-      <Chip
-        className="notifications-widget__count"
-        type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
-      >
-        {notificationsCount}
-      </Chip>
-    </div>
+      type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
+      chipLabel={
+        <div className="notifications-count">{notificationsCount}</div>
+      }
+      label={
+        <HeaderIcon>
+          <RingIcon />
+        </HeaderIcon>
+      }
+    />
   );
 };
 

@@ -12,7 +12,6 @@ export const _WithdrawButton: React.FC<Props> = ({
   <WalletButton
     title={t("wallet-page.buttons.withdraw")}
     handleOpen={handleOpen}
-    className="wallet-list__withdraw"
     disabled={disabled}
   >
     <img src={ArrowIcon} alt={t("wallet-page.buttons.withdraw")} />

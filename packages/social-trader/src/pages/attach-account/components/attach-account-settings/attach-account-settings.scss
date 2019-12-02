@@ -22,10 +22,6 @@ $asset-height-mobile: $asset-height/$divider-text;
       max-width: 280px;
     }
 
-    .invest-popup__currency {
-      margin-bottom: 0;
-    }
-
     &-caption {
       padding-top: $padding-small;
       font-size: 12px;
@@ -100,20 +96,6 @@ $asset-height-mobile: $asset-height/$divider-text;
   &__add-assets {
     display: flex;
     margin-bottom: 24px;
-  }
-  &__add-assets-button {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: $font-size-paragraph;
-    font-weight: 600;
-    & > div {
-      padding-right: $padding-small/2;
-    }
-    .add-button {
-      background: rgb(21, 187, 175);
-      color: $text-accent-color;
-    }
   }
   &__regulator-indicator {
   }

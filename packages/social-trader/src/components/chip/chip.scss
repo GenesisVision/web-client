@@ -2,6 +2,8 @@
 @import "~shared/styles/_constants";
 @import "~shared/styles/_sizes";
 
+$chip-small: 32px;
+
 .chip {
   @include transition(background-color);
   display: inline-flex;
@@ -15,7 +17,16 @@
   letter-spacing: 0.4px;
   background-color: $secondary-background-color;
   box-shadow: $box-shadow-1;
-  cursor: default;
+
+  &--stretch {
+    width: auto !important;
+  }
+
+  &--small {
+    width: $chip-small;
+    height: $chip-small;
+    font-size: $font-size-h3;
+  }
 
   &--negative {
     color: $negative-color;
@@ -61,5 +72,35 @@
     display: flex;
     align-items: center;
     margin: 0 auto;
+  }
+}
+
+.chip-button {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  &:hover {
+    svg [stroke] {
+      stroke: $primary-color;
+    }
+    .chip {
+      background-color: lighten($secondary-background-color, 5%);
+    }
+    .chip--negative {
+      background-color: lighten($background-chip-negative, 5%);
+    }
+  }
+
+  &--reversed {
+    flex-direction: row-reverse;
+    & .chip-button__label {
+      margin-left: 0;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
   }
 }

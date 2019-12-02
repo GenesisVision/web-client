@@ -1,3 +1,5 @@
+import "./dashboard-portfolio-empty-view.scss";
+
 import { EVENT_LOGO_TYPE } from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import useRole from "hooks/use-role.hook";
 import EventCancelledIconRed from "media/event-cancelled-red.svg";

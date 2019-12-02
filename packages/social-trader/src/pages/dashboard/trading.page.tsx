@@ -1,5 +1,3 @@
-import "components/dashboard/dashboard.scss";
-
 import Page from "components/page/page";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
