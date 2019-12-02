@@ -1,8 +1,8 @@
+import AccountSelect from "components/account-select/account-select";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
-import WalletSelect from "components/wallet-select/wallet-select";
 import { FormikProps, withFormik } from "formik";
 import { TradingAccountDetails } from "gv-api-web";
 import React, { useCallback } from "react";
@@ -20,11 +20,11 @@ const _FollowSelectAccount: React.FC<Props> = ({
     <form id="follow-select-account">
       <DialogBottom>
         <DialogField>
-          {/*<WalletSelect*/}
-          {/*  name={SELECT_ACCOUNT_FORM_FIELDS.account}*/}
-          {/*  label={t("follow-program.create-account.from")}*/}
-          {/*  items={accounts}*/}
-          {/*/>*/}
+          <AccountSelect
+            name={SELECT_ACCOUNT_FORM_FIELDS.account}
+            label={t("follow-program.create-account.from")}
+            items={accounts}
+          />
         </DialogField>
         <DialogButtons>
           <GVButton onClick={handleNext} className="invest-form__submit-button">
