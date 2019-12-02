@@ -32,10 +32,14 @@ import { ActionType, CurrencyEnum } from "utils/types";
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 
+export const fetchRequests = (take: number = 100) =>
+  investmentsApi.getRequests(0, take, authService.getAuthArg());
+
+export const getRequestsCount = () =>
+  fetchRequests(0).then(({ total }) => total);
+
 export const fetchInRequests = (): CancelablePromise<TDashboardInRequests> =>
-  investmentsApi
-    .getRequests(0, 10, authService.getAuthArg())
-    .then(({ items }) => items);
+  fetchRequests().then(({ items }) => items);
 
 export const fetchMultiChartData = ({
   assets,
