@@ -4,7 +4,6 @@ import classNames from "classnames";
 import DetailsBlock from "components/details/details-block";
 import Link from "components/link/link";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 const _DashboardBlock: React.FC<Props> = ({
   seeAll = true,
@@ -13,7 +12,6 @@ const _DashboardBlock: React.FC<Props> = ({
   children,
   className
 }) => {
-  const [t] = useTranslation();
   return (
     <DetailsBlock
       table
@@ -27,7 +25,6 @@ const _DashboardBlock: React.FC<Props> = ({
               <Link className="dashboard-block__link" to={all || "events"}>
                 &rsaquo;
               </Link>
-              {/*t("dashboard-page.see-more")*/}
             </div>
           )}
         </div>
