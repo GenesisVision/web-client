@@ -30,7 +30,8 @@ const _RequestLine: React.FC<Props> = ({
         </StatisticItem>
         <StatisticItem
           label={
-            request.assetDetails.isWithdrawAll ? (
+            request.programRequestDetails &&
+            request.programRequestDetails.isWithdrawAll ? ( // TODO
               t("withdraw-program.withdrawing-all")
             ) : (
               <NumberFormat
@@ -63,7 +64,7 @@ const _RequestLine: React.FC<Props> = ({
         <StatisticItem
           label={
             <NumberFormat
-              value={request.assetDetails.entryFee}
+              value={request.programRequestDetails.entryFee} //TODO
               suffix={` %`}
               allowNegative={false}
               displayType="text"

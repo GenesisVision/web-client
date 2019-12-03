@@ -21,6 +21,7 @@ import { SetSubmittingType } from "utils/types";
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ProgramSettings from "./program-settings";
 import {
+  cancelChangeBrokerMethod,
   changeBrokerMethod,
   redirectToProgram
 } from "./services/program-settings.service";
@@ -49,7 +50,7 @@ const _ProgramsEditPage: React.FC = () => {
   });
   const { sendRequest: cancelChangeBroker } = useApiRequest({
     middleware: [updateDescription],
-    request: changeBrokerMethod,
+    request: cancelChangeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
   const { sendRequest: getProgramBrokers, data: brokersInfo } = useApiRequest({
