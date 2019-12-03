@@ -61,7 +61,7 @@ const _Popover: React.FC<Props> = props => {
         translateX = `-${50 - orientationValue}%`;
         break;
       case HORIZONTAL_POPOVER_POS.RIGHT:
-        translateX = `-${50 - orientationValue}%`;
+        translateX = `-${100 - orientationValue}%`;
         break;
     }
     switch (getVerticalPosition()) {
