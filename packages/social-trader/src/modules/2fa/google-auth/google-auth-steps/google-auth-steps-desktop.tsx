@@ -17,7 +17,7 @@ const GoogleAuth: React.FC<IGoogleAuthProps & WithTranslation> = ({
   errorMessage
 }) => (
   <div className="google-auth google-auth--desktop">
-    <div className="dialog__header">
+    <div className="google-auth__header">
       <h2>{t("2fa-page.title")}</h2>
       <p>{t("2fa-page.google")}</p>
     </div>

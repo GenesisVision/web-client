@@ -1,17 +1,14 @@
 import "./request-line.scss";
 
-import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { CancelRequestPropsType } from "components/dashboard/dashboard.constants";
-import GVButton from "components/gv-button";
+import { CancelRequestButton } from "components/request-line/cancel-request-button";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { ProgramAssetDetails } from "gv-api-web";
-import useIsOpen from "hooks/is-open.hook";
-import useRole from "hooks/use-role.hook";
-import React, { useCallback } from "react";
+import { AssetInvestmentRequest } from "gv-api-web";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -19,140 +16,84 @@ const _RequestLine: React.FC<Props> = ({
   successFee,
   exitFee,
   request,
-  cancelRequest,
-  onApplyCancelRequest,
-  asset = ASSET.PROGRAM
+  onApplyCancelRequest
 }) => {
   const [t] = useTranslation();
-  const role = useRole();
-  const isInvestor = role === ROLE.INVESTOR;
-  const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const [disabled, setDisabled, setNotDisabled] = useIsOpen();
-  const handleApplyCancelRequest = useCallback(() => {
-    setDisabled();
-    const onFinally = () => onApplyCancelRequest();
-    const removeDisableBtn = () => setNotDisabled();
-    cancelRequest({
-      id: request.id,
-      onFinally,
-      removeDisableBtn,
-      role,
-      asset
-    });
-  }, [request.id, role, asset]);
-  const assetDetails = {
-    programDetails: (undefined as unknown) as ProgramAssetDetails,
-    logo: request.logo,
-    title: request.title,
-    color: request.color,
-    url: "",
-    id: request.programId,
-    assetType: "Programs" as any
-  };
   return (
     <div className="request-line">
       <div className="request-line__logo">
-        <PortfolioEventLogo assetDetails={assetDetails} icon={""} />
+        <PortfolioEventLogo assetDetails={request.assetDetails} icon={""} />
       </div>
-      <StatisticItem
-        className={
-          "request-line__statistic-item request-line__statistic-item--title"
-        }
-        label={request.title}
-        invert
-        accent
-      >
-        {request.type}
-      </StatisticItem>
-      <StatisticItem
-        className={"request-line__statistic-item"}
-        label={
-          request.withdrawAll ? (
-            t("withdraw-program.withdrawing-all")
-          ) : (
+      <StatisticItemList className="request-line__values">
+        <StatisticItem label={request.assetDetails.title} invert accent>
+          {request.type}
+        </StatisticItem>
+        <StatisticItem
+          label={
+            request.assetDetails.isWithdrawAll ? (
+              t("withdraw-program.withdrawing-all")
+            ) : (
+              <NumberFormat
+                value={formatCurrencyValue(request.amount, request.currency)}
+                decimalScale={8}
+                displayType="text"
+                allowNegative={false}
+                suffix={` ${request.currency}`}
+              />
+            )
+          }
+          invert
+        >
+          {localizedDate(request.date)}
+        </StatisticItem>
+        <StatisticItem
+          condition={successFee !== null && successFee !== undefined}
+          label={
             <NumberFormat
-              value={formatCurrencyValue(request.value, request.currency)}
-              decimalScale={8}
-              displayType="text"
+              value={successFee}
+              suffix={` %`}
               allowNegative={false}
-              suffix={` ${request.currency}`}
+              displayType="text"
             />
-          )
-        }
-        invert
-      >
-        {localizedDate(request.date)}
-      </StatisticItem>
-      <StatisticItem
-        className={"request-line__statistic-item"}
-        condition={
-          isInvestor && successFee !== null && successFee !== undefined
-        }
-        label={
-          <NumberFormat
-            value={successFee}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        }
-        invert
-      >
-        {t("program-details-page.description.successFee")}
-      </StatisticItem>
-      <StatisticItem
-        className={"request-line__statistic-item"}
-        condition={
-          isInvestor &&
-          request.type === "Invest" &&
-          request.entryFee !== null &&
-          request.entryFee !== undefined
-        }
-        label={
-          <NumberFormat
-            value={request.entryFee}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        }
-        invert
-      >
-        {t("fund-details-page.description.entryFee")}
-      </StatisticItem>
-      <StatisticItem
-        className={"request-line__statistic-item"}
-        condition={isInvestor && exitFee !== null && exitFee !== undefined}
-        label={
-          <NumberFormat
-            value={exitFee}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        }
-        invert
-      >
-        {t("fund-details-page.description.exitFee")}
-      </StatisticItem>
-      <div className="request-line__btns">
-        {request.canCancelRequest && (
-          <GVButton color="primary" variant="text" onClick={setOpenPopup}>
-            {t("buttons.cancel")}
-          </GVButton>
-        )}
-        <ConfirmPopup
-          open={isOpenPopup}
-          onClose={setClosePopup}
-          onCancel={setClosePopup}
-          onApply={handleApplyCancelRequest}
-          header={"Cancel request"}
-          body={"Please confirm that you want to cancel the request."}
-          applyButtonText={t("buttons.confirm")}
-          className="dialog--wider"
-          disabled={disabled}
+          }
+          invert
+        >
+          {t("program-details-page.description.successFee")}
+        </StatisticItem>
+        <StatisticItem
+          label={
+            <NumberFormat
+              value={request.assetDetails.entryFee}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          }
+          invert
+        >
+          {t("fund-details-page.description.entryFee")}
+        </StatisticItem>
+        <StatisticItem
+          condition={exitFee !== null && exitFee !== undefined}
+          label={
+            <NumberFormat
+              value={exitFee}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          }
+          invert
+        >
+          {t("fund-details-page.description.exitFee")}
+        </StatisticItem>
+      </StatisticItemList>
+      {request.canCancelRequest && (
+        <CancelRequestButton
+          onApplyCancelRequest={onApplyCancelRequest}
+          id={request.id}
         />
-      </div>
+      )}
     </div>
   );
 };
@@ -160,9 +101,8 @@ const _RequestLine: React.FC<Props> = ({
 interface Props {
   successFee?: number;
   exitFee?: number;
-  request: any; // TODO declare type
-  cancelRequest: (x: CancelRequestPropsType) => void;
-  onApplyCancelRequest(): void;
+  request: AssetInvestmentRequest;
+  onApplyCancelRequest: () => void;
   asset?: ASSET;
 }
 

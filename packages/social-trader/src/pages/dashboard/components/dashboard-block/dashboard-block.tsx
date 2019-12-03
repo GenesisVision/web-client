@@ -4,30 +4,26 @@ import classNames from "classnames";
 import DetailsBlock from "components/details/details-block";
 import Link from "components/link/link";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 const _DashboardBlock: React.FC<Props> = ({
-  seeAll = true,
   label,
   all,
   children,
   className
 }) => {
-  const [t] = useTranslation();
   return (
     <DetailsBlock
       table
       className={classNames("dashboard-block__container", className)}
     >
-      {(label || seeAll) && (
+      {(label || all) && (
         <div className="dashboard-block__header">
           {label && <h3>{label}</h3>}
-          {seeAll && (
+          {all && (
             <div className="dashboard-block__see-all">
-              <Link className="dashboard-block__link" to={all || "events"}>
+              <Link className="dashboard-block__link" to={all}>
                 &rsaquo;
               </Link>
-              {/*t("dashboard-page.see-more")*/}
             </div>
           )}
         </div>
@@ -38,7 +34,6 @@ const _DashboardBlock: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  seeAll?: boolean;
   label?: string;
   all?: string;
 }

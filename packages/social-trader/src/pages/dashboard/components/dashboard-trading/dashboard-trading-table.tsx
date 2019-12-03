@@ -32,7 +32,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <DashboardBlock seeAll={false}>
+    <DashboardBlock>
       <TableModule
         createButtonToolbar={createButtonToolbar}
         title={title}

@@ -23,7 +23,7 @@ const _DashboardRecommendationsContainer: React.FC<Props> = ({}) => {
   }, []);
   if (!data) return null;
   return (
-    <DashboardBlock label={t("dashboard-page.recommendations.title")} all={""}>
+    <DashboardBlock label={t("dashboard-page.recommendations.title")}>
       <DashboardRecommendations
         loaderData={{
           assets: tableLoaderCreator(getRecommendationLoaderData, 15)

@@ -1,4 +1,8 @@
 {
+  "request-line": {
+    "cancel-header": "Cancel request",
+    "cancel-body": "Please confirm that you want to cancel the request."
+  },
   "convert-page": {
     "convert-signal-to-program": "Make program from signal account",
     "convert-account-to-program": "Make program from account",
@@ -2567,6 +2571,9 @@
     }
   },
   "dashboard-page": {
+    "in-requests": {
+      "title": "In requests"
+    },
     "trading": {
       "title": "Trading",
       "follow-them": "Follow them",
@@ -2602,6 +2609,7 @@
       "get-started-fund": "Create your first fund",
       "total": "Total",
       "AUM": "AUM",
+      "programs": "Programs",
       "funds": "Funds",
       "trading": "Trading",
       "investing": "Investing",

@@ -68,7 +68,6 @@ const _DashboardInRequestsContainer: React.FC<Props> = ({
             <RequestLine
               key={x.id}
               request={x}
-              cancelRequest={service.cancelRequest}
               onApplyCancelRequest={clearAnchor}
             />
           ))}

@@ -77,3 +77,10 @@
     }
   }
 }
+
+.amount-item {
+  display: flex;
+  &__amount {
+    padding-right: $padding-xxsmall;
+  }
+}
