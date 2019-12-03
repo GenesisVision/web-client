@@ -9,7 +9,7 @@ import { useCallback } from "react";
 import { STATUS } from "shared/constants/constants";
 
 import AssetStatusLabel from "./asset-status-label";
-import AssetStatusRequests from "./asset-status-requests";
+import AssetStatusRequestsContainer from "./asset-status-requests.container";
 
 const _AssetStatus: React.FC<Props> = ({
   successFee,
@@ -38,13 +38,13 @@ const _AssetStatus: React.FC<Props> = ({
       />
       <Popover
         orientation={ORIENTATION_POPOVER.RIGHT}
-        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         anchorEl={anchor}
         noPadding
         onClose={clearAnchor}
       >
-        <AssetStatusRequests
+        <AssetStatusRequestsContainer
           successFee={successFee}
           entryFee={entryFee}
           exitFee={exitFee}
