@@ -25,7 +25,7 @@ const _DashboardTotalContainer: React.FC<Props> = () => {
   return (
     <DashboardBlock
       label={t("dashboard-page.total.title")}
-      all={FINANCIAL_STATISTIC_ROUTE}
+      // all={FINANCIAL_STATISTIC_ROUTE}
     >
       <DashboardTotal
         currency={currency}

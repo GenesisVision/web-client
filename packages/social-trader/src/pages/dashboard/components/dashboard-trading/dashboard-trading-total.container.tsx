@@ -22,11 +22,7 @@ const _DashboardTradingTotalContainer: React.FC = () => {
     sendRequest({ currency });
   }, []);
   return (
-    <DashboardBlock
-      label={t("dashboard-page.trading.total")}
-      all={""}
-      seeAll={false}
-    >
+    <DashboardBlock label={t("dashboard-page.trading.total")}>
       <DashboardTradingTotal
         currency={currency}
         loaderData={getTradingStatisticLoaderData()}

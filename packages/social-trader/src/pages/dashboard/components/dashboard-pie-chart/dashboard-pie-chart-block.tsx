@@ -18,7 +18,7 @@ const _DashboardPieChartBlock: React.FC<Props> = ({
     sendRequest();
   }, []);
   return (
-    <DashboardBlock label={label} all={""}>
+    <DashboardBlock label={label}>
       <DashboardPieChart loaderData={loaderData} data={data} />
     </DashboardBlock>
   );
