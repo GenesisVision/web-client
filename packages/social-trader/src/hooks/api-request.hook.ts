@@ -14,6 +14,7 @@ export const nullValue = undefined;
 type TRequest<T> = CancelablePromise<T>;
 
 export type TUseApiRequestProps<T = any> = {
+  fetchOnMountData?: any;
   request: (...args: any) => any;
   defaultData?: T;
   catchCallback?: (errorMessage?: string) => void;
@@ -34,6 +35,7 @@ type TUseApiRequestOutput<T> = {
 };
 
 const useApiRequest = <T>({
+  fetchOnMountData,
   fetchOnMount,
   middleware = [],
   successMessage,
@@ -78,7 +80,7 @@ const useApiRequest = <T>({
   };
 
   useEffect(() => {
-    if (fetchOnMount) sendRequest();
+    if (fetchOnMount) sendRequest(fetchOnMountData);
   }, []);
 
   return { errorMessage, cleanErrorMessage, isPending, data, sendRequest };
