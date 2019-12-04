@@ -89,7 +89,7 @@ const _FollowForm: React.FC<Props> = ({
       setRequestParams(params);
       submitMethod(id, params, setSubmitting);
     },
-    [id, requestParams, submitMethod]
+    [id, requestParams, submitMethod, tradingAccountId]
   );
   const adaptStep =
     tab === TABS.SELECT_ACCOUNT
