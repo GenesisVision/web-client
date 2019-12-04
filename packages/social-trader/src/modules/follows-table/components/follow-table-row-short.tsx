@@ -103,7 +103,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {statistic && (
+        {statistic && statistic.chart && (
           <ProgramSimpleChart data={statistic.chart} programId={id} />
         )}
       </TableCell>
