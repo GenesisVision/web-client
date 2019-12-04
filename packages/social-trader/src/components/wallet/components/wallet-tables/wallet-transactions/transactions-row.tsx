@@ -1,33 +1,25 @@
-import { CurrencyItem } from "components/currency-item/currency-item";
 import Profitability from "components/profitability/profitability";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useIsOpen from "hooks/is-open.hook";
 import TransactionDetailsPopup from "modules/transaction-details/transaction-details-popup";
+import AmountItem from "modules/transaction-details/transactions/amount-item";
 import React, { useCallback } from "react";
-import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
 import { MultiWalletTransaction } from "../../../wallet.types";
 import AmountConvert from "./amount-convert";
-import WalletsConvert from "./wallets-convert";
 
-const _TransactionsRow: React.FC<Props> = ({
-  transaction,
-  update,
-  walletCurrency
-}) => {
+const _TransactionsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const handleAction = useCallback(() => {
     if (update) update();
     setClosePopup();
   }, [update]);
-  const walletFirst = transaction.wallet.first;
-  const walletSecond = transaction.wallet.second;
-  const isConvertAction = !!walletSecond;
+  const isConvertAction = !!transaction.amount.second;
   return (
     <>
       <TransactionDetailsPopup
@@ -37,21 +29,6 @@ const _TransactionsRow: React.FC<Props> = ({
         onAction={handleAction}
       />
       <TableRow stripy onClick={setOpenPopup}>
-        {!walletCurrency && (
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
-            <div className="wallet-transactions__cell--wallet-wrapper">
-              {isConvertAction ? (
-                <WalletsConvert wallets={transaction.wallet} />
-              ) : (
-                <CurrencyItem
-                  logo={walletFirst.logo}
-                  name={walletFirst.currency}
-                  small
-                />
-              )}
-            </div>
-          </TableCell>
-        )}
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
           {formatDate(transaction.date)}
         </TableCell>
@@ -74,16 +51,7 @@ const _TransactionsRow: React.FC<Props> = ({
                 DEFAULT_DECIMAL_SCALE
               )}
             >
-              <NumberFormat
-                value={formatValue(
-                  transaction.amount.first.amount,
-                  DEFAULT_DECIMAL_SCALE
-                )}
-                thousandSeparator=" "
-                displayType="text"
-                allowNegative={false}
-                suffix={` ${transaction.amount.first.currency}`}
-              />
+              <AmountItem amount={transaction.amount.first} />
             </Profitability>
           )}
         </TableCell>
@@ -94,7 +62,6 @@ const _TransactionsRow: React.FC<Props> = ({
 
 export interface Props {
   transaction: MultiWalletTransaction;
-  walletCurrency?: string;
   update?: () => void;
 }
 
