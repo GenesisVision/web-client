@@ -2,93 +2,41 @@ import { IImageValue } from "components/form/input-image/input-image";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { Dispatch } from "redux";
+import assetsApi from "services/api-client/assets-api";
+import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { ASSET } from "shared/constants/constants";
-// import managerApi from "shared/services/api-client/manager-api";
-import authService from "services/auth-service";
-import { ManagerThunk, ResponseError } from "utils/types";
-
-export const cancelChangeBrokerMethod = (
-  programId: string
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
-  new CancelablePromise<void>(() => {});
-// managerApi
-//   .cancelChangeBroker(authService.getAuthArg(), {
-//     programId
-//   })
-//   .then(() => {
-//     dispatch(
-//       alertMessageActions.success(
-//         "program-settings.notifications.broker-success",
-//         true
-//       )
-//     );
-//   })
-//   .catch((error: ResponseError) => {
-//     dispatch(alertMessageActions.error(error.errorMessage));
-//   });
-
-export const changeBrokerMethod = (
-  programId: string,
-  newBrokerAccountTypeId: string,
-  newLeverage: number
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
-  new CancelablePromise<void>(() => {});
-// managerApi
-//   .changeBroker(authService.getAuthArg(), {
-//     request: { programId, newBrokerAccountTypeId, newLeverage }
-//   })
-//   .then(() => {
-//     dispatch(
-//       alertMessageActions.success(
-//         "program-settings.notifications.broker-success",
-//         true
-//       )
-//     );
-//   })
-//   .catch((error: ResponseError) => {
-//     dispatch(alertMessageActions.error(error.errorMessage));
-//   });
 
 export const editAsset = (props: {
   id: string;
   editAssetData: IAssetEditFormValues;
   type: ASSET;
-}): CancelablePromise<void> => {
-  return new CancelablePromise<void>(() => {});
-  // const authorization = authService.getAuthArg();
-  // let data = editAssetData;
-  // let promise = Promise.resolve("") as CancelablePromise<any>;
-  // if (data.logo.image)
-  //   promise = filesService.uploadFile(
-  //     data.logo.image.cropped,
-  //     authorization
-  //   ) as CancelablePromise<any>;
-  //
-  // return promise
-  //   .then(response => {
-  //     data = {
-  //       ...data,
-  //       logo: response || data.logo.src
-  //     };
-  //     return managerApi.updateInvestmentProgram(id, authorization, {
-  //       model: data as ProgramUpdate
-  //     }); //TODO ask backend to change ProgramUpdate logo type
-  //   })
-  //   .then(() => {
-  //     dispatch(
-  //       alertMessageActions.success(
-  //         (type === ASSET.PROGRAM &&
-  //           "edit-program.notifications.edit-success") ||
-  //           (type === ASSET.FUND && "edit-fund.notifications.edit-success") ||
-  //           "",
-  //         true
-  //       )
-  //     );
-  //   })
-  //   .catch(({ errorMessage }: { errorMessage: string }) =>
-  //     dispatch(alertMessageActions.error(errorMessage))
-  //   ) as CancelablePromise<void>;
+}): CancelablePromise<null> => {
+  const authorization = authService.getAuthArg();
+  let data = props.editAssetData;
+  let promise = Promise.resolve("") as CancelablePromise<any>;
+  if (data.logo.image)
+    promise = filesService.uploadFile(
+      data.logo.image.cropped,
+      authorization
+    ) as CancelablePromise<any>;
+  return promise.then(response => {
+    const model = {
+      ...data,
+      logo: response || data.logo.src
+    };
+    switch (props.type) {
+      case ASSET.PROGRAM:
+        return assetsApi.updateAsset_1(props.id, authorization, {
+          model: model as ProgramUpdate
+        }); //TODO ask backend to change ProgramUpdate logo type
+      case ASSET.FOLLOW:
+      case ASSET.FUND:
+        return assetsApi.updateAsset(props.id, authorization, {
+          model: model as ProgramUpdate
+        }); //TODO ask backend to change ProgramUpdate logo type
+    }
+  });
 };
 
 export const closeProgram: TCloseAsset = ({
@@ -97,23 +45,31 @@ export const closeProgram: TCloseAsset = ({
   id,
   opts
 }) => dispatch => {
-  return new CancelablePromise<void>(() => {});
-  // const authorization = authService.getAuthArg();
-  // managerApi
-  //   .closeInvestmentProgram(id, authorization, opts)
-  //   .then(() => {
-  //     onSuccess();
-  //     dispatch(
-  //       alertMessageActions.success(
-  //         "program-details-page.description.close-program-notification-success",
-  //         true
-  //       )
-  //     );
-  //   })
-  //   .catch((error: { errorMessage: string }) => {
-  //     onError();
-  //     dispatch(alertMessageActions.error(error.errorMessage));
-  //   });
+  const authorization = authService.getAuthArg();
+  const model =
+    opts && opts.twoFactorCode
+      ? {
+          twoFactorCode: opts.twoFactorCode
+        }
+      : undefined;
+
+  assetsApi
+    .closeInvestmentProgram(id, authorization, {
+      model
+    })
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "program-details-page.description.close-program-notification-success",
+          true
+        )
+      );
+    })
+    .catch((error: { errorMessage: string }) => {
+      onError();
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
 };
 
 export const closeFund: TCloseAsset = ({
@@ -121,22 +77,33 @@ export const closeFund: TCloseAsset = ({
   onError,
   id,
   opts
-}) => dispatch => {};
-// managerApi
-//   .closeFund(id, authService.getAuthArg(), opts)
-//   .then(() => {
-//     onSuccess();
-//     dispatch(
-//       alertMessageActions.success(
-//         "fund-details-page.description.close-fund-notification-success",
-//         true
-//       )
-//     );
-//   })
-//   .catch((error: { errorMessage: string }) => {
-//     onError();
-//     dispatch(alertMessageActions.error(error.errorMessage));
-//   });
+}) => dispatch => {
+  const authorization = authService.getAuthArg();
+  const model =
+    opts && opts.twoFactorCode
+      ? {
+          twoFactorCode: opts.twoFactorCode
+        }
+      : undefined;
+
+  assetsApi
+    .closeFund(id, authorization, {
+      model
+    })
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "fund-details-page.description.close-fund-notification-success",
+          true
+        )
+      );
+    })
+    .catch((error: { errorMessage: string }) => {
+      onError();
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
+};
 
 export type TCloseAsset = (opts: {
   onSuccess: () => void;

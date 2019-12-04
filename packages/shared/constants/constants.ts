@@ -45,6 +45,7 @@ export enum ROLE {
   INVESTOR = "investor",
   MANAGER = "manager"
 }
+
 export enum ASSET {
   FOLLOW = "Follow",
   PROGRAM = "Program",
