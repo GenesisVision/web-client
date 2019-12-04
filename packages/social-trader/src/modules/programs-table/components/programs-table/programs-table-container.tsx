@@ -10,6 +10,7 @@ import { SelectFilterType } from "components/table/components/filtering/select-f
 import TagFilter from "components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import {
+  CancelablePromise,
   ItemsViewModelProgramDetailsList,
   PlatformCurrencyInfo,
   Tag
@@ -71,7 +72,9 @@ interface DispatchProps {
     toggleFavoriteProgram: ToggleFavoriteDispatchableType;
     redirectToLogin(): void;
     getPrograms(filters: Object): void;
-    fetchPrograms(filters: { [keys: string]: any }): Promise<IDataModel>;
+    fetchPrograms(filters: {
+      [keys: string]: any;
+    }): CancelablePromise<IDataModel>;
     getProgramsFilters(): (dispatch: any, getState: any) => Object;
     programsChangePage(
       nextPage: number

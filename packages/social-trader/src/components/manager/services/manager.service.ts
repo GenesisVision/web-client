@@ -1,18 +1,16 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
+  CancelablePromise,
   ItemsViewModelFundDetailsList,
-  ItemsViewModelProgramDetailsList,
-  PublicProfile
+  ItemsViewModelProgramDetailsList
 } from "gv-api-web";
-import { Dispatch } from "redux";
 import fundsApi from "services/api-client/funds-api";
-import profileApi from "services/api-client/profile-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 
 export const fetchManagerPrograms = (
   filter: FilteringType
-): Promise<ItemsViewModelProgramDetailsList> => {
+): CancelablePromise<ItemsViewModelProgramDetailsList> => {
   return programsApi.getPrograms({
     ...filter,
     authorization: authService.getAuthArg()
@@ -22,7 +20,7 @@ export const fetchManagerPrograms = (
 
 export const fetchManagerFunds = (
   filter: FilteringType
-): Promise<ItemsViewModelFundDetailsList> => {
+): CancelablePromise<ItemsViewModelFundDetailsList> => {
   return fundsApi.getFunds({
     ...filter,
     authorization: authService.getAuthArg()

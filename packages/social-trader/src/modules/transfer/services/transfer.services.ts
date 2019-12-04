@@ -1,5 +1,5 @@
 import { ItemsType, ItemType } from "components/wallet-select/wallet-select";
-import { InternalTransferRequest } from "gv-api-web";
+import { CancelablePromise, InternalTransferRequest } from "gv-api-web";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
@@ -8,7 +8,7 @@ import { TransferFormValues } from "../components/transfer-form";
 
 export const transferRequest = (
   request: Pick<TransferFormValues, keyof InternalTransferRequest>
-): Promise<any> =>
+): CancelablePromise<any> =>
   walletApi.transfer(authService.getAuthArg(), {
     request: request as InternalTransferRequest
   });

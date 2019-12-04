@@ -6,7 +6,7 @@ import FacetContainer, {
 import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import { ItemsViewModelFollowDetailsList } from "gv-api-web";
+import { CancelablePromise, ItemsViewModelFollowDetailsList } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -17,7 +17,7 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   const getFollows = useCallback(
     (
       filters: ComposeFiltersAllType
-    ): Promise<ItemsViewModelFollowDetailsList> =>
+    ): CancelablePromise<ItemsViewModelFollowDetailsList> =>
       fetchFollows({
         ...filters
       }),

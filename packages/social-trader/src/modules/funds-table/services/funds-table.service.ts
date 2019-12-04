@@ -9,7 +9,7 @@ import {
 } from "components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "components/table/helpers/sorting.helpers";
 import { push } from "connected-react-router";
-import { ItemsViewModelFundDetailsList } from "gv-api-web";
+import { CancelablePromise, ItemsViewModelFundDetailsList } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -48,7 +48,7 @@ export const getFunds: GetFundsType = () => dispatch => {
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<ItemsViewModelFundDetailsList>;
+) => CancelablePromise<ItemsViewModelFundDetailsList>;
 export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
@@ -204,9 +204,13 @@ export const fundsChangeFilter: FundsChangeFilterType = filter => (
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
   const showFavorites = ctx.pathname.includes(FAVORITES_TAB_NAME);
   const { asPath = "", pathname, reduxStore } = ctx;
-  const { page, sorting = SORTING_FILTER_VALUE, dateRange = {}, showIn, ...other } = qs.parse(
-    asPath.slice(pathname.length + 1)
-  );
+  const {
+    page,
+    sorting = SORTING_FILTER_VALUE,
+    dateRange = {},
+    showIn,
+    ...other
+  } = qs.parse(asPath.slice(pathname.length + 1));
   const accountCurrency =
     (getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum) ||
     reduxStore.getState().accountSettings.currency;

@@ -1,5 +1,5 @@
 import { fetchWalletTransactions } from "components/wallet/services/wallet.services";
-import { CreateWithdrawalRequestModel } from "gv-api-web";
+import { CancelablePromise, CreateWithdrawalRequestModel } from "gv-api-web";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
@@ -10,7 +10,7 @@ export const fetchPaymentInfo = () => {
 
 export const newWithdrawRequest = (data: CreateWithdrawalRequestModel) => (
   dispatch: MiddlewareDispatch
-): Promise<any> => {
+): CancelablePromise<any> => {
   return walletApi
     .createWithdrawalRequest(authService.getAuthArg(), { model: data })
     .then(response => {

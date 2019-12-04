@@ -10,6 +10,7 @@ import {
 } from "components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "components/table/helpers/sorting.helpers";
 import { push } from "connected-react-router";
+import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import { RootState } from "reducers/root-reducer";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
@@ -19,9 +20,9 @@ import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "routes/programs.routes";
-import { IDataModel } from "shared/constants/constants";
 import programApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
+import { IDataModel } from "shared/constants/constants";
 import getParams from "shared/utils/get-params";
 import { NextPageWithReduxContext } from "utils/types";
 
@@ -56,7 +57,7 @@ export const getPrograms = (filters: ComposeFiltersAllType) => (
 
 export const fetchPrograms = (
   filters: any //FetchProgramsFiltersType TODO
-): Promise<IDataModel> => {
+): CancelablePromise<IDataModel> => {
   return programApi.getPrograms({
     ...filters,
     authorization: authService.getAuthArg()

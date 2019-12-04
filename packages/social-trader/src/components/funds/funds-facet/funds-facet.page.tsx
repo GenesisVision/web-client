@@ -4,6 +4,7 @@ import FacetContainer, {
 import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { CancelablePromise } from "gv-api-web";
 import { fetchFunds } from "modules/funds-table/services/funds-table.service";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -13,7 +14,7 @@ import FundsFacetTable from "./components/funds-facet-table";
 
 const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
   const getFunds = useCallback(
-    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
+    (filters: ComposeFiltersAllType): CancelablePromise<IDataModel> =>
       fetchFunds(filters),
     []
   );
