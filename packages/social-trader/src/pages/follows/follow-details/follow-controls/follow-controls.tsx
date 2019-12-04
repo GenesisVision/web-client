@@ -23,6 +23,7 @@ const _FollowControls: React.FC<Props> = ({
       />
       {personalDetails && (
         <SignalProviderButtons
+          leverage={personalDetails ? personalDetails.leverage : 0}
           isExternal={
             personalDetails &&
             personalDetails.guestActions &&
