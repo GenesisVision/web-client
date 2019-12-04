@@ -9,11 +9,9 @@ const _AmountConvert: React.FC<{
 }> = ({ amount: { first, second } }) => {
   return (
     <div className="convert-field">
-      {first && <AmountItem amount={first.amount} currency={first.currency} />}
+      {first && <AmountItem amount={first} />}
       <span className="wallet-transactions__back-arrow">&rarr;</span>
-      {second && (
-        <AmountItem amount={second.amount} currency={second.currency} />
-      )}
+      {second && <AmountItem amount={second} />}
     </div>
   );
 };
