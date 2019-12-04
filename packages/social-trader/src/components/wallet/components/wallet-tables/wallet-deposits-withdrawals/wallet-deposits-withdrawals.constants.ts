@@ -12,9 +12,6 @@ export const WALLET_DEPOSITS_WITHDRAWALS_COLUMNS = [
 
 export const WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS = [
   {
-    name: "wallet"
-  },
-  {
     name: "date"
   },
   {

@@ -21,23 +21,7 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
   }
 ];
 
-export const WALLET_TOTAL_TRANSACTIONS_COLUMNS = [
-  {
-    name: "wallet"
-  },
-  {
-    name: "date"
-  },
-  {
-    name: "type"
-  },
-  {
-    name: "description"
-  },
-  {
-    name: "amount"
-  }
-];
+export const WALLET_TOTAL_TRANSACTIONS_COLUMNS = WALLET_TRANSACTIONS_COLUMNS;
 
 export const WALLET_TRANSACTIONS_FILTERS_DEFAULT = [
   {

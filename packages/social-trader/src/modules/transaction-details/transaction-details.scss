@@ -80,6 +80,7 @@
 
 .amount-item {
   display: flex;
+  align-items: center;
   &__amount {
     padding-right: $padding-xxsmall;
   }

@@ -72,13 +72,13 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   );
   const changeAccount = useCallback(
     ({ target }) => {
-      setAccount(
-        selectedBroker.accountTypes.find(
-          account => account.id === target.value
-        )!
-      );
+      const account = selectedBroker.accountTypes.find(
+        account => account.id === target.value
+      )!;
+      setAccount(account);
+      setFieldValue(FIELDS.brokerAccountTypeId, target.value);
     },
-    [selectedBroker]
+    [selectedBroker.accountTypes, setFieldValue]
   );
   const { brokerAccountTypeId, brokerFrom } = values;
   return (
