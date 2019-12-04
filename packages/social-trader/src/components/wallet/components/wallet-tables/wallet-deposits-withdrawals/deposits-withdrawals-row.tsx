@@ -4,8 +4,8 @@ import TableRow from "components/table/components/table-row";
 import { UpdateItemsFuncType } from "components/table/components/table.types";
 import useIsOpen from "hooks/is-open.hook";
 import TransactionDetailsPopup from "modules/transaction-details/transaction-details-popup";
+import AmountItem from "modules/transaction-details/transactions/amount-item";
 import React, { useCallback } from "react";
-import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
@@ -45,15 +45,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
               DEFAULT_DECIMAL_SCALE
             )}
           >
-            <NumberFormat
-              value={formatValue(
-                transaction.amount.first.amount,
-                DEFAULT_DECIMAL_SCALE
-              )}
-              thousandSeparator=" "
-              displayType="text"
-              suffix={` ${transaction.amount.first.currency}`}
-            />
+            <AmountItem amount={transaction.amount.first} />
           </Profitability>
         </TableCell>
       </TableRow>
