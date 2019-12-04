@@ -101,9 +101,12 @@ export type FetchTransactionsExternalFilterType = {
 };
 
 export const fetchMultiTransactionsExternal = (
-  currency?: string,
+  currency?: CurrencyEnum,
   filters?: FetchTransactionsExternalFilterType
 ): CancelablePromise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
-  return walletApi.getTransactionsExternal(authorization, filters);
+  return walletApi.getTransactionsExternal(authorization, {
+    ...filters,
+    currency
+  });
 };
