@@ -83,6 +83,7 @@ export type FetchTransactionsInternalFilterType = {
 };
 
 export const fetchMultiTransactions = (
+  currency?: CurrencyEnum,
   filters?: FetchTransactionsInternalFilterType
 ): CancelablePromise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
