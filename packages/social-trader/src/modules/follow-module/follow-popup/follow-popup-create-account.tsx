@@ -26,40 +26,36 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   dirty,
   wallets,
   t,
-  currency,
+  followCurrency,
   values,
   setFieldTouched,
   setFieldValue
 }) => {
-  const { initialDepositCurrency, initialDepositAmount, rate } = values;
+  const { currency, depositAmount, rate } = values;
   const wallet = wallets.find(
-    (wallet: WalletData) => wallet.currency === initialDepositCurrency
+    (wallet: WalletData) => wallet.currency === currency
   )!;
-  const disableButton =
-    !dirty || !isValid || initialDepositAmount > wallet.available;
+  const disableButton = !dirty || !isValid || depositAmount > wallet.available;
 
   useEffect(() => {
-    fetchRateMethod(currency as CurrencyEnum, initialDepositCurrency).then(
+    fetchRateMethod(followCurrency as CurrencyEnum, currency).then(
       (rate: number) => {
         setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
       }
     );
-  }, [currency, initialDepositCurrency]);
+  }, [followCurrency, currency]);
 
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
       const wallet = wallets.find(({ id }) => target.props.value === id)!;
-      const initialDepositCurrencyNew = wallet.currency;
+      const depositCurrencyNew = wallet.currency;
+      setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.currency, depositCurrencyNew);
       setFieldValue(
-        CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency,
-        initialDepositCurrencyNew
-      );
-      setFieldValue(
-        CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId,
+        CREATE_ACCOUNT_FORM_FIELDS.depositWalletId,
         target.props.value
       );
-      setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, "");
-      setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount, false);
+      setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, "");
+      setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, false);
     },
     [setFieldTouched, setFieldValue, wallets]
   );
@@ -67,17 +63,17 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   const setMaxAmount = useCallback(
     () =>
       setFieldValue(
-        CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount,
-        formatCurrencyValue(wallet.available, currency)
+        CREATE_ACCOUNT_FORM_FIELDS.depositAmount,
+        formatCurrencyValue(wallet.available, followCurrency)
       ),
-    [currency, setFieldValue, wallet.available]
+    [followCurrency, setFieldValue, wallet.available]
   );
   return (
     <form id="follow-create-account">
       <DialogBottom>
         <DialogField>
           <WalletSelect
-            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId}
+            name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
             label={t("follow-program.create-account.from")}
             items={wallets}
             onChange={onChangeCurrencyFrom}
@@ -87,26 +83,26 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
               value={wallet.available}
-              suffix={` ${initialDepositCurrency}`}
+              suffix={` ${currency}`}
               displayType="text"
             />
           </StatisticItem>
         </DialogField>
         <DialogField>
           <InputAmountField
-            name={CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount}
+            name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
             label={t("follow-program.create-account.amount")}
-            currency={initialDepositCurrency}
+            currency={currency}
             setMax={setMaxAmount}
           />
-          {currency !== initialDepositCurrency && (
+          {followCurrency !== currency && (
             <NumberFormat
               value={formatCurrencyValue(
-                convertToCurrency(initialDepositAmount, rate),
-                currency
+                convertToCurrency(depositAmount, rate),
+                followCurrency
               )}
               prefix="≈ "
-              suffix={` ${currency}`}
+              suffix={` ${followCurrency}`}
               displayType="text"
             />
           )}
@@ -126,23 +122,23 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
 };
 
 export enum CREATE_ACCOUNT_FORM_FIELDS {
-  initialDepositWalletId = "initialDepositWalletId",
-  initialDepositCurrency = "initialDepositCurrency",
-  initialDepositAmount = "initialDepositAmount",
+  depositWalletId = "depositWalletId",
+  currency = "currency",
+  depositAmount = "depositAmount",
   rate = "rate"
 }
 
 interface OwnProps {
   minDeposit: number;
   wallets: WalletData[];
-  currency: string;
+  followCurrency: string;
   onClick: (values: CreateAccountFormValues) => void;
 }
 
 export interface CreateAccountFormValues {
-  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: any;
-  [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number;
+  [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: string;
+  [CREATE_ACCOUNT_FORM_FIELDS.currency]: any;
+  [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number;
   [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
 }
 
@@ -155,12 +151,15 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",
-    mapPropsToValues: ({ wallets, currency }: CreateAccountFormProps) => ({
-      [CREATE_ACCOUNT_FORM_FIELDS.initialDepositWalletId]: wallets.find(
-        wallet => wallet.currency === currency
+    mapPropsToValues: ({
+      wallets,
+      followCurrency
+    }: CreateAccountFormProps) => ({
+      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: wallets.find(
+        wallet => wallet.currency === followCurrency
       )!.id,
-      [CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency]: currency,
-      [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: "",
+      [CREATE_ACCOUNT_FORM_FIELDS.currency]: followCurrency,
+      [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: "",
       [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1
     }),
     validationSchema: CreateAccountFormValidationSchema,
