@@ -2,35 +2,26 @@ import { IFundsFacetTableProps } from "components/funds/funds-facet/components/f
 import NotFoundPage from "components/not-found/not-found";
 import { IProgramsFacetTableProps } from "components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "components/table/components/filtering/filter.type";
-import { withAuthenticated } from "decorators/is-authenticated";
-import {
-  CancelablePromise,
-  Currency,
-  PlatformCurrencyInfo,
-  PlatformInfo
-} from "gv-api-web";
+import { CancelablePromise, PlatformInfo } from "gv-api-web";
 import React, { useCallback } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import {
   platformCurrenciesSelector,
   platformDataSelector
 } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
-import { compose } from "redux";
 import { createSelector } from "reselect";
 import { IDataModel } from "shared/constants/constants";
 
-const _FacetContainer: React.FC<Props> = ({
-  id,
-  TableContainer,
-  isAuthenticated,
-  facet,
-  facets,
-  getItems,
-  currency,
-  currencies
-}) => {
+const _FacetContainer: React.FC<Props> = props => {
+  const { TableContainer, isAuthenticated, getItems } = props;
+  const facets = useSelector((state: RootState) =>
+    facetsSelector(state, props)
+  );
+  const facet = useSelector((state: RootState) => facetSelector(state, props));
+  const currencies = useSelector(platformCurrenciesSelector);
+  const currency = useSelector(currencySelector);
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
     [facet, getItems]
@@ -53,7 +44,7 @@ const _FacetContainer: React.FC<Props> = ({
 
 const facetsSelector = createSelector<
   RootState,
-  OwnProps,
+  Props,
   PlatformInfo | undefined,
   FACET_ASSET,
   FacetType[] | undefined
@@ -67,7 +58,7 @@ const facetsSelector = createSelector<
 );
 const facetSelector = createSelector<
   RootState,
-  OwnProps,
+  Props,
   FacetType[] | undefined,
   string,
   FacetType | undefined
@@ -80,14 +71,7 @@ const facetSelector = createSelector<
   }
 );
 
-const mapStateToProps = (state: RootState, props: OwnProps): StateProps => ({
-  facets: facetsSelector(state, props),
-  facet: facetSelector(state, props),
-  currencies: platformCurrenciesSelector(state),
-  currency: currencySelector(state)
-});
-
-interface OwnProps {
+interface Props {
   id: string;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
@@ -96,14 +80,6 @@ interface OwnProps {
   getItems: (args: FilteringType) => CancelablePromise<IDataModel>;
   isAuthenticated?: boolean;
 }
-interface StateProps {
-  facets?: FacetType[];
-  facet?: FacetType;
-  currencies: PlatformCurrencyInfo[];
-  currency: Currency;
-}
-
-interface Props extends OwnProps, StateProps {}
 
 export type FacetType = any; // TODO declare type
 export type FacetDataType = {
@@ -117,9 +93,5 @@ export enum FACET_ASSET {
   FOLLOWS = "followInfo"
 }
 
-const FacetContainer = compose<React.ComponentType<OwnProps>>(
-  withAuthenticated,
-  connect(mapStateToProps),
-  React.memo
-)(_FacetContainer);
+const FacetContainer = React.memo(_FacetContainer);
 export default FacetContainer;
