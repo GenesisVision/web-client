@@ -14,6 +14,7 @@ import { CurrencyEnum } from "utils/types";
 import { dispatchFollowDescription } from "./services/follow-details.service";
 
 const _FollowButton: React.FC<Props> = ({
+  leverage,
   brokerId,
   isExternal,
   broker,
@@ -39,6 +40,7 @@ const _FollowButton: React.FC<Props> = ({
         {t("program-details-page.description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
+        leverage={leverage}
         isExternal={isExternal}
         brokerId={brokerId}
         broker={broker}
@@ -63,6 +65,7 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  leverage: number;
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
