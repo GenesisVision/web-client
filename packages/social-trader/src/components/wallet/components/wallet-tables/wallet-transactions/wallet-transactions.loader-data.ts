@@ -13,29 +13,18 @@ const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
   status: "Done",
   description: faker.lorem.words(5),
   amount: {
+    title: "",
     first: {
+      logo: "",
       amount: getRandomInteger(0, 100),
       currency: "GVT",
-      title: "",
       color: ""
     },
     second: {
+      logo: "",
       amount: getRandomInteger(0, 100),
       currency: "GVT",
-      title: "",
       color: ""
-    }
-  },
-  wallet: {
-    first: {
-      title: "",
-      currency: "GVT",
-      logo: ""
-    },
-    second: {
-      title: "",
-      currency: "GVT",
-      logo: ""
     }
   }
 });
