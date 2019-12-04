@@ -25,6 +25,7 @@ import {
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _FollowModuleContainer: React.FC<Props> = ({
+  leverage,
   brokerId,
   isExternal,
   broker,
@@ -75,7 +76,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
             ...requestParams,
             brokerAccountTypeId: brokerId
           },
-          brokerType: broker
+          leverage
         },
         setSubmitting
       );
@@ -116,6 +117,7 @@ const composeApiRequest = (
 };
 
 interface Props {
+  leverage: number;
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
