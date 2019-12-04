@@ -25,7 +25,8 @@
     }
     &--amount {
       min-width: 140px;
-      padding-right: 0;
+      display: flex;
+      justify-content: flex-end;
     }
     &--type {
       text-align: right;
