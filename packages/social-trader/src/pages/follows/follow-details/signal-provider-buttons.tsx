@@ -6,6 +6,7 @@ import FollowButton from "./follow-button";
 import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
+  leverage,
   brokerId,
   isExternal,
   broker,
@@ -20,6 +21,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
         <UnFollowButton id={id} />
       ) : (
         <FollowButton
+          leverage={leverage}
           brokerId={brokerId}
           isExternal={isExternal}
           broker={broker}
@@ -34,6 +36,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  leverage: number;
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
