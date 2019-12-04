@@ -2698,6 +2698,8 @@
       "deposit": "Deposit"
     },
     "portfolio-events": {
+      "investment-history": "Investment history",
+      "trading-history": "Trading history",
       "title": "Events",
       "see-all-button": "See All",
       "table-title": "Operations",
