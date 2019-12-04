@@ -24,6 +24,7 @@ import {
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import { Dispatch } from "redux";
 import dashboardApi from "services/api-client/dashboard-api";
+import eventsApi from "services/api-client/events-api";
 import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
 import { IDataModel } from "shared/constants/constants";
@@ -142,3 +143,21 @@ export const getPortfolioEvents = (dispatch: Dispatch) =>
 export const getAssets = (ctx?: NextPageContext) => async (
   dispatch: Dispatch
 ) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
+
+export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
+  eventsApi
+    .getEvents(authService.getAuthArg(), {
+      ...filters,
+      eventGroup: "InvestmentHistory",
+      eventLocation: "Dashboard"
+    })
+    .then(({ events, total }) => ({ items: events, total }));
+
+export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
+  eventsApi
+    .getEvents(authService.getAuthArg(), {
+      ...filters,
+      eventGroup: "TradingHistory",
+      eventLocation: "Dashboard"
+    })
+    .then(({ events, total }) => ({ items: events, total }));
