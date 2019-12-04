@@ -56,19 +56,14 @@ export const attachToExternalSignal: TSignalRequest = async ({
 export const attachToSignal: TSignalRequest = async ({
   id,
   requestParams,
-  brokerType
+  leverage
 }) => {
   const auth = authService.getAuthArg();
   const tradingAccountId = requestParams.tradingAccountId
     ? requestParams.tradingAccountId
-    : await brokersApi
-        .getBrokersExternal()
-        .then(({ brokers }) => {
-          const broker = brokers.find(({ name }) => name === brokerType)!;
-          const leverage = broker.leverageMax;
-          return assetsApi.createTradingAccount(auth, {
-            request: { ...requestParams, leverage }
-          });
+    : await assetsApi
+        .createTradingAccount(auth, {
+          request: { ...requestParams, leverage }
         })
         .then(({ id }) => id);
 
@@ -88,5 +83,5 @@ export type TSignalRequest = (args: {
     AttachToExternalSignalProviderExt &
     NewTradingAccountRequest &
     NewExternalTradingAccountRequest;
-  brokerType?: BrokerTradeServerType;
+  leverage: number;
 }) => Promise<any>;
