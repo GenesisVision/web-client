@@ -13,11 +13,11 @@ import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _RequestLine: React.FC<Props> = ({
-  successFee,
-  exitFee,
-  request,
-  onApplyCancelRequest
-}) => {
+                                         successFee,
+                                         exitFee,
+                                         request,
+                                         onApplyCancelRequest
+                                       }) => {
   const [t] = useTranslation();
   return (
     <div className="request-line">
