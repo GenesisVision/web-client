@@ -22,7 +22,9 @@ const _TradingPage: React.FC = () => {
         <div>
           <DashboardPrivate />
         </div>
-        <div>{/*<DashboardFollowThem />*/}</div>
+        <div>
+          <DashboardFollowThem />
+        </div>
       </Page>
     </TitleContext.Provider>
   );
