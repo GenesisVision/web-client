@@ -3,7 +3,7 @@ import "./details-investment.scss";
 import DetailsBlock from "components/details/details-block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import PortfolioEventsTable from "components/portfolio-events-table/portfolio-events-table";
+import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import { TableSelectorType } from "components/table/components/table.types";
 import useTab from "hooks/tab.hook";
@@ -91,7 +91,7 @@ const _DetailsInvestment: React.FC<Props> = ({
         />
       )}
       {tab === TABS.EVENTS && (
-        <PortfolioEventsTable
+        <PortfolioEventsTableContainer
           getItems={getEvents(id!, EVENT_LOCATION.Asset)}
           selector={selector}
           asset={asset}
