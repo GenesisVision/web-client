@@ -7,6 +7,7 @@ import {
   DashboardRecommendations,
   InvestmentEventViewModels
 } from "gv-api-web";
+import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { NextPageContext } from "next";
 import {
   getTradingLoaderData,
@@ -67,10 +68,7 @@ export const fetchAssets = (
     .getChartAssets(authService.getAuthArg())
     .then(({ assets }) => assets);
 
-export const getFollowThem = (): CancelablePromise<IDataModel> =>
-  (Promise.resolve(
-    getTradingPublicLoaderData()
-  ) as unknown) as CancelablePromise<IDataModel>;
+export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
