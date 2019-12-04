@@ -8,7 +8,7 @@ import * as React from "react";
 
 import FollowCard from "./follow-card";
 import FollowTableHeaderCell from "./follow-table-header-cell";
-import ProgramTableRowShort from "./follow-table-row-short";
+import FollowTableRowShort from "./follow-table-row-short";
 import FollowTableSortingValue from "./follow-table-sorting";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
@@ -77,7 +77,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
         />
       )}
       renderBodyRow={(follow: FollowDetailsList) => (
-        <ProgramTableRowShort
+        <FollowTableRowShort
           showRating={Boolean(showRating)}
           title={title}
           follow={follow}
