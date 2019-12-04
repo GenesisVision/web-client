@@ -13,11 +13,11 @@ import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _RequestLine: React.FC<Props> = ({
-  successFee,
-  exitFee,
-  request,
-  onApplyCancelRequest
-}) => {
+                                         successFee,
+                                         exitFee,
+                                         request,
+                                         onApplyCancelRequest
+                                       }) => {
   const [t] = useTranslation();
   return (
     <div className="request-line">
@@ -30,8 +30,7 @@ const _RequestLine: React.FC<Props> = ({
         </StatisticItem>
         <StatisticItem
           label={
-            request.programRequestDetails &&
-            request.programRequestDetails.isWithdrawAll ? ( // TODO
+            request.assetDetails.isWithdrawAll ? (
               t("withdraw-program.withdrawing-all")
             ) : (
               <NumberFormat
@@ -64,7 +63,7 @@ const _RequestLine: React.FC<Props> = ({
         <StatisticItem
           label={
             <NumberFormat
-              value={request.programRequestDetails.entryFee} //TODO
+              value={request.assetDetails.entryFee}
               suffix={` %`}
               allowNegative={false}
               displayType="text"

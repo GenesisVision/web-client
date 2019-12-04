@@ -14,14 +14,19 @@ import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 
 export const getInRequestsData = (): TDashboardRequest => ({
-  id: "string",
+  id: "",
   date: new Date(),
-  amount: 100,
+  amount: getRandomInteger(-1000, 1000),
   currency: "GVT",
   type: "Invest",
   status: "Cancelled",
   canCancelRequest: false,
   assetDetails: {
+    entryFee: 0,
+    isWithdrawAll: false,
+    successFee: 0,
+    exitFee: 0,
+    withdrawPercent: 0,
     id: "",
     logo: "",
     color: "",
@@ -32,16 +37,6 @@ export const getInRequestsData = (): TDashboardRequest => ({
       level: 0,
       levelProgress: 0
     }
-  },
-  fundRequestDetails: {
-    entryFee: 5,
-    exitFee: 5,
-    withdrawPercent: 5
-  },
-  programRequestDetails: {
-    isWithdrawAll: false,
-    successFee: 4,
-    entryFee: 4
   }
 });
 export const getInRequestsLoadersData = (): TDashboardInRequests =>
