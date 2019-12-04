@@ -4,7 +4,6 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
-import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -12,30 +11,30 @@ import TableCard, {
 } from "components/table/components/table-card/table-card";
 import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { FollowDetailsList } from "gv-api-web";
 import { TAnchor, TEvent } from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
-import { distanceDate } from "shared/utils/dates";
-import {
-  composeFollowDetailsUrl,
-  composeManagerDetailsUrl
-} from "utils/compose-url";
-import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
+import { composeFollowDetailsUrl } from "utils/compose-url";
+import { formatValue } from "utils/formatter";
 
 interface Props {
-  follow: any;
+  follow: FollowDetailsList;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
-const DECIMAL_SCALE_SMALL_VALUE = 4;
-const DECIMAL_SCALE_BIG_VALUE = 2;
-
 const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
-  const { tags, tradesCount, subscribersCount, url } = follow;
+  const {
+    tags,
+    tradesCount,
+    subscribersCount,
+    url,
+    statistic: { drawdown }
+  } = follow;
   const handleToggleFavorite = useCallback(
     () =>
       toggleFavorite(
@@ -125,18 +124,12 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
-            label={t("programs-page.programs-header.available-to-invest")}
-          >
-            {/*<NumberFormat*/}
-            {/*  value={formatValueDifferentDecimalScale(*/}
-            {/*    follow.availableToInvest,*/}
-            {/*    DECIMAL_SCALE_SMALL_VALUE,*/}
-            {/*    DECIMAL_SCALE_BIG_VALUE*/}
-            {/*  )}*/}
-            {/*  displayType="text"*/}
-            {/*  suffix={` ${requestCurrency}`}*/}
-            {/*/>*/}
+          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+            <NumberFormat
+              value={formatValue(drawdown, 2)}
+              displayType="text"
+              suffix="%"
+            />
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
