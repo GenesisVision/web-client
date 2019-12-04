@@ -25,7 +25,7 @@ const CreateAccountFormValidationSchema = ({
   return lazy(
     (values: CreateAccountFormValues): Schema<any> =>
       object().shape({
-        [CREATE_ACCOUNT_FORM_FIELDS.initialDepositAmount]: number()
+        [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number()
           .required(
             t("follow-program.create-account.validation.amount-required")
           )
@@ -45,10 +45,7 @@ const CreateAccountFormValidationSchema = ({
             )
           )
           .max(
-            getAvailable(
-              values[CREATE_ACCOUNT_FORM_FIELDS.initialDepositCurrency],
-              1
-            ),
+            getAvailable(values[CREATE_ACCOUNT_FORM_FIELDS.currency], 1),
             t(
               "follow-program.create-account.validation.amount-more-than-available"
             )
