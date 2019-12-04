@@ -15,12 +15,12 @@ import {
 } from "components/table/components/table.types";
 import { PlatformCurrencyInfo, Timeframe } from "gv-api-web";
 import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
+import FollowsTableModule from "modules/follows-table/components/follows-table-module";
 import { fundListLoaderData } from "modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
-import ProgramTableModule from "modules/programs-table/components/programs-table/programs-table-module";
 import { CURRENCY_MAP_NAME } from "modules/programs-table/components/programs-table/programs.constants";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -28,12 +28,8 @@ import {
   PROGRAMS_FACET_TABLE_FILTERS
 } from "./follows-facet.constants";
 
-const _ProgramsFacetTable: React.FC<
-  IProgramsFacetTableProps & WithTranslation
-> = ({
-  currency,
+const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
   currencies,
-  t,
   title,
   sorting,
   getItems,
@@ -42,6 +38,7 @@ const _ProgramsFacetTable: React.FC<
   timeframe,
   columns
 }) => {
+  const [t] = useTranslation();
   const toggleFavorite: TableToggleFavoriteType = useCallback(
     (program, updateRow) => () => {
       const { isFavorite } = program.personalDetails;
@@ -69,7 +66,7 @@ const _ProgramsFacetTable: React.FC<
   );
 
   return (
-    <ProgramTableModule
+    <FollowsTableModule
       loaderData={fundListLoaderData}
       renderMappings={(updateFilter, filtering) => (
         <>
@@ -116,5 +113,5 @@ export interface IProgramsFacetTableProps {
   columns?: SortingColumn[];
 }
 
-const FollowsFacetTable = translate()(React.memo(_ProgramsFacetTable));
+const FollowsFacetTable = React.memo(_FollowsFacetTable);
 export default FollowsFacetTable;
