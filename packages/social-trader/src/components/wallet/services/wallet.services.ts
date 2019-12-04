@@ -67,15 +67,13 @@ export type FetchTransactionsInternalFilterType = {
     | "All"
     | "Investment"
     | "Withdrawal"
-    | "Deposit"
     | "Conversion"
     | "Commission"
     | "Program"
     | "Fund"
     | "Follow"
     | "TradingAccounts"
-    | "AgentReward"
-    | "Platform";
+    | "AgentReward";
   dateFrom?: Date;
   dateTo?: Date;
   skip?: number;
@@ -89,7 +87,8 @@ export const fetchMultiTransactions = (
   const authorization = authService.getAuthArg();
 
   return walletApi.getTransactionsInternal(authorization, {
-    ...filters
+    ...filters,
+    currency
   });
 };
 
