@@ -1,0 +1,16 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.statistics-item-list {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  & .statistics-item__label {
+    white-space: nowrap;
+  }
+  & > div:not(:last-child) {
+    @include adaptive-margin(right, $padding-medium);
+  }
+}

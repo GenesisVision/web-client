@@ -1,0 +1,29 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-statistic {
+  &__create-block-text {
+    margin-bottom: $padding-small;
+  }
+  &__create-block-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $padding-small;
+  }
+  &__container.details__block,
+  &__container .table {
+    padding-bottom: 0;
+  }
+  &__table-block {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  &__values {
+    @include details-block-horizontal-paddings();
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

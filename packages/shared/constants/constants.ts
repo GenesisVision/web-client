@@ -1,6 +1,11 @@
-import { ChartSimple } from "gv-api-web";
-import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { CurrencyEnum } from "shared/utils/types";
+import { Currency, SimpleChart } from "gv-api-web";
+
+export enum ASSETS_TYPES {
+  All = "All",
+  Signal = "Signal",
+  Program = "Program",
+  Fund = "Fund"
+}
 
 export const REF_PARAM_NAME = "ref";
 export const FUND_CURRENCY = "GVT";
@@ -41,8 +46,15 @@ export enum ROLE {
   MANAGER = "manager"
 }
 export enum ASSET {
-  PROGRAM = "PROGRAM",
-  FUND = "FUND"
+  FOLLOW = "Follow",
+  PROGRAM = "Program",
+  FUND = "Fund"
+}
+
+export enum CREATE_ASSET {
+  ACCOUNT = "Account",
+  PROGRAM = "Program",
+  FUND = "Fund"
 }
 
 export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;
@@ -53,7 +65,10 @@ export interface IDashboardAssetChart {
   type: ASSETS_TYPES;
   id: string;
   title: string;
-  currency?: CurrencyEnum;
-  equityChart: ChartSimple[];
-  pnLChart?: ChartSimple[];
+  currency?: Currency;
+  equityChart: SimpleChart[];
+  pnLChart?: SimpleChart[];
 }
+
+export const DECIMAL_SCALE_SMALL_VALUE = 4;
+export const DECIMAL_SCALE_BIG_VALUE = 2;

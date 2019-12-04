@@ -57,7 +57,7 @@ const _ProgramsEditPage: React.FC<Props> = ({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(dispatchDescription),
+      }).then(() => dispatchDescription()),
     [description]
   );
   const changeBroker = useCallback(
@@ -70,24 +70,27 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(dispatchDescription);
+      ).then(() => dispatchDescription());
     },
     [description]
   );
   const cancelChangeBroker = useCallback(() => {
-    cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
+    cancelChangeBrokerMethod(description!.id).then(() => dispatchDescription());
   }, [description]);
+  const dispatchDescriptionHandle = useCallback(() => {
+    dispatchDescription();
+  }, []);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
       asset={ASSET.PROGRAM}
       description={description as AssetDescriptionType}
-      dispatchDescription={dispatchProgramDescription}
-      settingsBlocks={(editProgram, applyCloseAsset) => (
+      dispatchDescription={dispatchDescriptionHandle}
+      settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
           condition={!!description && !!brokersInfo && !!programsInfo}
           programsInfo={programsInfo}
-          closePeriod={dispatchProgramDescription}
+          closePeriod={dispatchDescriptionHandle}
           closeProgram={applyCloseAsset}
           details={description!}
           editProgram={editProgram}

@@ -4,6 +4,7 @@ import {
   ManagerSimpleFund,
   ManagerSimpleProgram
 } from "gv-api-web";
+import { NextPageContext } from "next";
 import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -53,18 +54,20 @@ export const getAssetChart = (
 
   if (assetType === ASSETS_TYPES.Program) {
     //TODO удалить if, отрефакторить
-    programsApi.getProgramProfitChart(assetId, chartFilter).then(data => {
-      dispatch(
-        actions.dashboardChartAction({
-          type: assetType,
-          id: assetId,
-          title: assetTitle,
-          currency: data.programCurrency,
-          pnLChart: [],
-          equityChart: data.equityChart
-        })
-      );
-    });
+    programsApi
+      .getProgramProfitPercentCharts(assetId, chartFilter)
+      .then(data => {
+        dispatch(
+          actions.dashboardChartAction({
+            type: assetType,
+            id: assetId,
+            title: assetTitle,
+            currency: data.programCurrency,
+            pnLChart: [],
+            equityChart: data.equityChart
+          })
+        );
+      });
   } else {
     fundsApi.getFundProfitChart(assetId, chartFilter).then(data => {
       dispatch(
@@ -79,8 +82,9 @@ export const getAssetChart = (
   }
 };
 
-export const getAssets = (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
+export const getAssets = (ctx?: NextPageContext) => async (
+  dispatch: Dispatch
+) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));

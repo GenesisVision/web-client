@@ -1,0 +1,20 @@
+import DashboardPieChartBlock from "pages/dashboard/components/dashboard-pie-chart/dashboard-pie-chart-block";
+import { portfolioLoaderData } from "pages/dashboard/dashboard.loaders-data";
+import { TDashboardPortfolio } from "pages/dashboard/dashboard.types";
+import { getPortfolio } from "pages/dashboard/services/dashboard.service";
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+const _DashboardPortfolio = () => {
+  const [t] = useTranslation();
+  return (
+    <DashboardPieChartBlock
+      label={t("dashboard-page.assets.title")}
+      request={getPortfolio}
+      loaderData={portfolioLoaderData()}
+    />
+  );
+};
+
+const DashboardPortfolio = React.memo(_DashboardPortfolio);
+export default DashboardPortfolio;

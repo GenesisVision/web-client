@@ -1,0 +1,14 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.fund-asset-tooltip {
+  @include font-size($font-size-paragraph);
+  &__header {
+    letter-spacing: 0.2px;
+    color: $text-dark-color;
+  }
+
+  &__content {
+    color: $text-accent-color;
+  }
+}

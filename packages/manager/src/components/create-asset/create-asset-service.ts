@@ -28,7 +28,7 @@ export const createAsset = (
     promise = filesService.uploadFile(
       createAssetData.logo.image.cropped,
       authorization
-    );
+    ) as CancelablePromise<any>;
   }
   const method = getCreateMethod(asset);
   return promise.then(response =>

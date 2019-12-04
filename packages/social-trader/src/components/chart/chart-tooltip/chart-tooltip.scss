@@ -1,0 +1,32 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.gv-tooltip {
+  font-size: 10px;
+  line-height: 1.2rem;
+  padding: $padding-xsmall;
+  border-radius: 0.5rem;
+  background-color: $tooltip-background-color;
+  box-shadow: 5px 5px 25px 0 $tooltip-shadow-color;
+
+  &__heading {
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    color: $text-dark-color;
+  }
+
+  &__body {
+    margin-top: 7px;
+    margin-bottom: 15px;
+    font-size: $font-size-h4;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $text-light-color;
+  }
+
+  &__date {
+    font-size: $font-size-small;
+    letter-spacing: 0.2px;
+    color: $text-dark-color;
+  }
+}

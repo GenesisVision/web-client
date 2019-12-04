@@ -1,0 +1,60 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+.wallet-widget {
+  display: flex;
+  align-items: center;
+  color: white;
+
+  &__loader {
+    display: flex;
+  }
+
+  &__wallet {
+    font-size: $font-size-common;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 25px;
+    cursor: pointer;
+
+    &:hover {
+      svg [stroke] {
+        stroke: $primary-color;
+      }
+    }
+  }
+}
+
+.wallet-details {
+  color: white;
+  padding: 30px 20px;
+  min-width: 170px;
+
+  &__item:last-child {
+    margin-top: $padding-xsmall;
+  }
+
+  &__title {
+    opacity: 0.4;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    margin-bottom: 8px;
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+  }
+
+  &__arrow-link {
+    margin-left: 5px;
+  }
+
+  a {
+    color: white;
+  }
+}

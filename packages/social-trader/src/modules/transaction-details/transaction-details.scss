@@ -1,0 +1,87 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.transaction-details {
+}
+
+.transaction-asset {
+  display: flex;
+  flex-direction: row;
+
+  & .program-avatar__level {
+    background-color: $secondary-background-color;
+  }
+
+  &--fund {
+    .program-avatar {
+      margin-right: 0;
+    }
+  }
+
+  &__description {
+    margin-left: $padding-xsmall;
+
+    p {
+      padding-bottom: 4px;
+    }
+  }
+  &__title {
+    font-size: $font-size-h4;
+  }
+  &__trader {
+    font-size: $font-size-small;
+  }
+}
+
+.external-transaction {
+  display: flex;
+  flex-direction: row;
+  &__status,
+  &__actions {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: stretch;
+    img {
+      margin-left: $padding-xsmall;
+    }
+  }
+  &__wallet {
+    width: $small-avatar-size;
+    height: $small-avatar-size;
+  }
+  &__icon {
+    margin-right: $padding-small;
+  }
+  &__rate {
+    opacity: 0.5;
+  }
+  &__address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    word-break: break-all;
+    white-space: normal;
+
+    .gv-btn.gv-btn--text {
+      padding: $padding-xxsmall 0;
+      justify-content: start;
+      color: $primary-color;
+      transition: opacity 250ms;
+
+      &:hover {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.amount-item {
+  display: flex;
+  align-items: center;
+  &__amount {
+    padding-right: $padding-xxsmall;
+  }
+}

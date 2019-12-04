@@ -12,9 +12,22 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ]
   },
-  "include": ["./"],
-  "files": ["../../node_modules/gv-api-web/distribution/types.d.ts"],
-  "exclude": ["node_modules", "config-overrides.js"]
+  "include": [
+    "./",
+    "../social-trader/src/decorators/with-redux-store.tsx"
+  ],
+  "files": [
+    "../../node_modules/gv-api-web/distribution/types.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "config-overrides.js"
+  ]
 }

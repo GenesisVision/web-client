@@ -3,7 +3,6 @@ import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.r
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
-import { Link } from "react-router-dom";
 import { ManagerRootState } from "reducers";
 import {
   ActionCreatorsMapObject,
@@ -16,6 +15,7 @@ import dashboardFundsTableSelector from "shared/components/dashboard/dashboard-a
 import dashboardProgramsTableSelector from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.selector";
 import GVButton from "shared/components/gv-button";
 import { ChartIcon } from "shared/components/icon/chart-icon";
+import Link from "shared/components/link/link";
 import useRole from "shared/hooks/use-role.hook";
 
 import { clearDashboardAssetsTableAction } from "../../actions/dashboard.actions";

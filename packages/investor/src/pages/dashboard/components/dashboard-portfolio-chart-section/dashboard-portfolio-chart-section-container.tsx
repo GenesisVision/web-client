@@ -1,22 +1,23 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ChartDefaultPeriod,
-  DEFAULT_PERIOD
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { currencySelector } from "shared/reducers/account-settings-reducer";
 import { isNewUserSelector } from "shared/reducers/header-reducer";
 
 import { DashboardChartValueLoaderData } from "../../dashboard.loaders-data";
 import {
   dashboardPortfolioChartErrorSelector,
+  dashboardPortfolioChartPeriodSelector,
   dashboardPortfolioChartSelector
 } from "../../reducers/dashboard-portfolio-chart.reducer";
-import { getPortfolioChart } from "../../services/dashboard-chart.service";
+import {
+  changePeriod,
+  getPortfolioChart
+} from "../../services/dashboard-chart.service";
 import { getInRequests } from "../../services/dashboard-in-requests.service";
 import DashboardFailChart from "./dashboard-fail-chart";
 import DashboardGetStarted from "./dashboard-get-started";
@@ -32,7 +33,7 @@ const _DashboardPortfolioChartSectionContainer: React.FC = () => {
   const currency = useSelector(currencySelector);
   const isNewUser = useSelector(isNewUserSelector);
   const [t] = useTranslation();
-  const [period, setPeriod] = useState<ChartDefaultPeriod>(DEFAULT_PERIOD);
+  const period = useSelector(dashboardPortfolioChartPeriodSelector);
 
   useEffect(() => {
     dispatch(getInRequests());
@@ -41,6 +42,10 @@ const _DashboardPortfolioChartSectionContainer: React.FC = () => {
   useEffect(() => {
     dispatch(getPortfolioChart(period.start, period.end, currency));
   }, [currency, period]);
+
+  const handleChangePeriod = useCallback((period: ChartDefaultPeriod) => {
+    dispatch(changePeriod(period));
+  }, []);
 
   if (isNewUser) return <DashboardGetStarted />;
   if (portfolioChartDataError)
@@ -60,7 +65,7 @@ const _DashboardPortfolioChartSectionContainer: React.FC = () => {
         data={portfolioChartData!}
         period={period}
         currency={currency}
-        handleChangePeriod={setPeriod}
+        handleChangePeriod={handleChangePeriod}
       />
     </>
   );

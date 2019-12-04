@@ -1,8 +1,8 @@
 import {
   CancelablePromise,
-  FundsList,
-  ProgramsListOld,
-  SignalsList
+  ItemsViewModelFundDetailsList,
+  ItemsViewModelProgramDetailsList,
+  // SignalsList
 } from "gv-api-web";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
 import authService from "shared/services/auth-service";
@@ -12,21 +12,21 @@ import * as actions from "../actions/dashboard.actions";
 
 export const getDashboardFunds = (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsList>> => {
+): ActionType<Promise<ItemsViewModelFundDetailsList>> => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardFundsAction(authorization, filters);
 };
 
 export const getDashboardPrograms = (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsListOld>> => {
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardProgramsAction(authorization, filters);
 };
-
-export const getDashboardCopytrading = (
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalsList>> => {
-  const authorization = authService.getAuthArg();
-  return actions.fetchDashboardCopytradingAction(authorization, filters);
-};
+//
+// export const getDashboardCopytrading = (
+//   filters: ComposeFiltersAllType
+// ): ActionType<Promise<SignalsList>> => {
+//   const authorization = authService.getAuthArg();
+//   return actions.fetchDashboardCopytradingAction(authorization, filters);
+// };

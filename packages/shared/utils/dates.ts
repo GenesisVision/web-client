@@ -43,13 +43,13 @@ export const subtractDate = (
     .toDate();
 };
 
-export type TimeUnitName = "month" | "day" | "hour" | "minute";
+export type TTimeUnitName = "month" | "day" | "hour" | "minute" | "week";
 
 export const TimeUnitName = {
-  MONTHS: "month" as TimeUnitName,
-  DAYS: "day" as TimeUnitName,
-  HOURS: "hour" as TimeUnitName,
-  MINUTES: "minute" as TimeUnitName
+  MONTHS: "month" as TTimeUnitName,
+  DAYS: "day" as TTimeUnitName,
+  HOURS: "hour" as TTimeUnitName,
+  MINUTES: "minute" as TTimeUnitName
 };
 
 export const timeUnits = {
@@ -75,8 +75,8 @@ export const humanizeDate = (
   const thisTimeUnits = { ...timeUnits };
 
   for (const period in thisTimeUnits) {
-    thisTimeUnits[period] = dayjs(to).diff(from, period as TimeUnitName);
-    from = dayjs(from).add(thisTimeUnits[period], period as TimeUnitName);
+    thisTimeUnits[period] = dayjs(to).diff(from, period as TTimeUnitName);
+    from = dayjs(from).add(thisTimeUnits[period], period as TTimeUnitName);
   }
 
   return Object.entries(thisTimeUnits)

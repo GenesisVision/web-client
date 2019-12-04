@@ -26,7 +26,7 @@ const _InputDepositAmount: React.FC<Props> = ({
     (available: number, currency: string) => () => {
       setFieldValue(name, formatCurrencyValue(available, currency));
     },
-    [name]
+    [name, setFieldValue]
   );
   return (
     <CreateAssetField className="deposit-amount-field">

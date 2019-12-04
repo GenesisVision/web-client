@@ -16,7 +16,7 @@ import NavigateToSettings from "./navigate-to-settings";
 
 const _CreateProgramBroker: React.FC<Props> = ({
   data,
-  selectedBroker = data[0],
+  selectedBroker,
   selectBrokerHandle,
   isForexAllowed = true,
   isKycConfirmed = true,
@@ -119,7 +119,7 @@ const _CreateProgramBroker: React.FC<Props> = ({
 
 interface Props {
   data: Broker[];
-  selectedBroker?: Broker;
+  selectedBroker: Broker;
   selectBrokerHandle: (broker: string) => () => void;
   isForexAllowed?: boolean;
   isKycConfirmed?: boolean;

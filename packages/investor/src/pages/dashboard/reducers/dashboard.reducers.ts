@@ -26,7 +26,7 @@ export type DashboardState = Readonly<{
   programs: ITableState<ProgramsListOld>;
   funds: ITableState<FundsListOld>;
   copytrading: any;
-  portfolioChartData: DashboardPortfolioChartState;
+  portfolioChart: DashboardPortfolioChartState;
   inRequestsData: DashboardInRequestsState;
   eventsData: DashboardEventsState;
 }>;
@@ -36,7 +36,7 @@ const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
   copytrading: dashboardCopytradingReducer,
-  portfolioChartData: dashboardPortfolioChartReducer,
+  portfolioChart: dashboardPortfolioChartReducer,
   inRequestsData: dashboardInRequestsReducer,
   eventsData: dashboardEventsReducer
 });

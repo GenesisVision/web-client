@@ -29,10 +29,14 @@ a {
   }
 }
 
-.root,
+#__next,
 .app__scroll,
 .app__body {
-  height: 200vh; // TODO why?
+  height: 100vh; // TODO why?
+  color: white;
+}
+
+.app {
   color: white;
 }
 

@@ -13,11 +13,14 @@ const _ConfirmReallocate: React.FC<Props> = ({
   onClose,
   assets
 }) => {
-  const handleApplyClick = useCallback((setSubmitting: SetSubmittingType) => {
-    onApply();
-    onClose();
-    setSubmitting(false);
-  }, []);
+  const handleApplyClick = useCallback(
+    (setSubmitting: SetSubmittingType) => {
+      onApply();
+      onClose();
+      setSubmitting(false);
+    },
+    [onApply, onClose]
+  );
   return (
     <ConfirmPopup
       open={open}

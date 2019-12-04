@@ -1,21 +1,26 @@
 import {
   CancelablePromise,
-  DashboardChartValue,
-  FundsListOld,
+  // DashboardChartValue,
+  ItemsViewModelFundDetailsList,
   InvestmentEventViewModels,
-  ProgramRequests,
-  ProgramsListOld,
-  SignalsList
+  // ProgramRequests,
+  ItemsViewModelProgramDetailsList
+  // SignalsList
 } from "gv-api-web";
 import { Action } from "redux";
+import chartPeriodActionCreator from "shared/actions/chart-period.action-creator";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { EVENTS_ACTION_TYPE } from "shared/components/portfolio-events-table/portfolio-events-table.constants";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
 } from "shared/components/programs/program-details/services/program-details.service";
 import { ComposeFiltersAllType } from "shared/components/table/components/filtering/filter.type";
-import investorApi from "shared/services/api-client/investor-api";
+//import investorApi from "shared/services/api-client/investor-api";
 import { ActionType } from "shared/utils/types";
+import programsApi from "shared/services/api-client/programs-api";
+import fundsApi from "shared/services/api-client/funds-api";
+import signalApi from "shared/services/api-client/signal-api";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
@@ -38,33 +43,33 @@ export const fetchEventsAction = (
 });
 
 export const fetchDashboardProgramsAction = (
-  auth: string,
+  authorization: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<ProgramsListOld>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
   type: DASHBOARD_PROGRAMS,
-  payload: investorApi.getPrograms(auth, filters)
+  payload: programsApi.getPrograms({ ...filters, authorization }) //investorApi.getPrograms(auth, filters)
 });
 
 export const fetchDashboardFundsAction = (
-  auth: string,
+  authorization: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<FundsListOld>> => ({
+): ActionType<CancelablePromise<ItemsViewModelFundDetailsList>> => ({
   type: DASHBOARD_FUNDS,
-  payload: investorApi.getFunds(auth, filters)
+  payload: fundsApi.getFunds({ ...filters, authorization }) //investorApi.getFunds(auth, filters)
 });
 
-export const fetchDashboardCopytradingAction = (
-  auth: string,
-  filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalsList>> => ({
-  type: DASHBOARD_COPYTRADING,
-  payload: investorApi.getSignalPrograms(auth, filters)
-});
+// export const fetchDashboardCopytradingAction = (
+//   auth: string,
+//   filters: ComposeFiltersAllType
+// ): ActionType<Promise<SignalsList>> => ({
+//   type: DASHBOARD_COPYTRADING,
+//   payload: signalApi.getSignalPrograms(auth, filters)
+// });
 
 export const fetchPortfolioChartAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<DashboardChartValue>> => ({
+): ActionType<Promise<DashboardChartValue>> => ({
   type: DASHBOARD_PORTFOLIO_CHART,
   payload: investorApi.getPortfolioChart(auth, filters)
 });
@@ -81,7 +86,7 @@ export const fetchInRequestsAction = (
   auth: string,
   skip: number,
   take: number
-): ActionType<CancelablePromise<ProgramRequests>> => ({
+): ActionType<Promise<ProgramRequests>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: investorApi.getRequests(skip, take, auth)
 });
@@ -93,6 +98,9 @@ export const cancelProgramRequestAction = (
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: investorApi.cancelRequest(id, auth)
 });
+
+export const changeChartPeriodAction = (period: ChartDefaultPeriod): Action =>
+  chartPeriodActionCreator(DASHBOARD_PORTFOLIO_CHART, period);
 
 export const clearDashboardAssetsTableAction = (): Action => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE

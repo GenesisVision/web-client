@@ -1,0 +1,9 @@
+.dashboard {
+  &__statistic-block {
+    width: 100%;
+    display: flex;
+    & > div {
+      width: 50%;
+    }
+  }
+}
