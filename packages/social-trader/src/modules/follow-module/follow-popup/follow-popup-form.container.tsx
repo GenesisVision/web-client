@@ -81,6 +81,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
     },
     []
   );
+  console.log(accounts);
   return (
     <FollowPopupForm
       isExternal={isExternal}
