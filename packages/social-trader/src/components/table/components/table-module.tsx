@@ -109,7 +109,6 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     totalItems: data.total ? data.total : 0,
     totalPages: calculateTotalPages(data.total, paging && paging.itemsOnPage)
   };
-  console.log("develop");
   return (
     <Table
       {...props}
