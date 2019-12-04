@@ -50,10 +50,13 @@ const _FollowForm: React.FC<Props> = ({
   useEffect(() => {
     signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
   }, [setTab, signalSubscription.hasSignalAccount]);
-  const createdCopytradingAccount = useCallback(() => {
-    setTab(null, TABS.PARAMS);
-    setRequestParams(requestParams);
-  }, [requestParams]);
+  const createdCopytradingAccount = useCallback(
+    values => {
+      setTab(null, TABS.PARAMS);
+      setRequestParams({ ...requestParams, ...values });
+    },
+    [requestParams]
+  );
   const selectCopytradingAccount = useCallback(
     ({ account }: SelectAccountFormValues) => {
       setTab(null, TABS.PARAMS);
@@ -112,7 +115,7 @@ const _FollowForm: React.FC<Props> = ({
         <FollowCreateAccount
           minDeposit={minDeposit}
           wallets={wallets}
-          currency={currency}
+          followCurrency={currency}
           onClick={createdCopytradingAccount}
         />
       )}
