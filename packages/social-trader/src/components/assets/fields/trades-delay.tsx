@@ -29,7 +29,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
       </GVFormikField>
       <Hint
         content={t("create-program-page.settings.hints.trades-delay")}
-        className="create-asset-settings__hint"
+        className="asset-form-field__hint"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         tooltipContent={t("program-settings.trades-update.text")}
       />

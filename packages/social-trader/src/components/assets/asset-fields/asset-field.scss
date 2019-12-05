@@ -117,5 +117,12 @@
     &.hint {
       cursor: pointer;
     }
+
+    &-tooltip-content {
+      width: 248px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: $text-light-color;
+    }
   }
 }
