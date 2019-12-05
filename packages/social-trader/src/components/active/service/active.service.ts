@@ -1,14 +1,18 @@
 import * as faker from "faker";
-import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+import { AssetInfo } from "gv-api-web";
+import platformApi from "services/api-client/platform-api";
+import { tableLoaderCreator } from "utils/helpers";
 
 const getTag = () => ({ label: faker.lorem.word() });
 
-export const getActiveLoaderData = (active?: string) => ({
+export const getActiveLoaderData = (active?: string): AssetInfo => ({
+  logo: "",
+  symbol: "",
+  chartSymbol: "",
   name: active || faker.finance.currencyName(),
-  rate: getRandomInteger(0, 10),
-  about: faker.lorem.words(50),
+  description: faker.lorem.words(50),
   tags: tableLoaderCreator(getTag)
 });
 
-export const fetchActive = ({ active }: { active?: string }) =>
-  Promise.resolve(getActiveLoaderData(active));
+export const fetchActive = ({ active }: { active: string }) =>
+  platformApi.getPlatformAssetInfo(active);
