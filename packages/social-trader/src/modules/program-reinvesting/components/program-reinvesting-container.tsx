@@ -1,3 +1,5 @@
+import "./program-reinvesting-container.scss";
+
 import classNames from "classnames";
 import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
