@@ -159,12 +159,14 @@ const _Investment: React.FC<Props> = ({
               displayType="text"
             />
           </StatisticItem>
-          {personalDetails.isInvested && personalDetails.canInvest && (
-            <ProgramReinvestingContainer
-              id={id}
-              isReinvesting={false} // personalDetails.isReinvest
-            />
-          )}
+          {"isReinvest" in personalDetails &&
+            personalDetails.isInvested &&
+            personalDetails.canInvest && (
+              <ProgramReinvestingContainer
+                id={id}
+                isReinvesting={personalDetails.isReinvest}
+              />
+            )}
           <StatisticItem
             condition={
               personalDetails.pendingOutput !== undefined &&
