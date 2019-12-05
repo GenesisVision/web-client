@@ -516,6 +516,10 @@
     },
     "programs-table": "All programs",
     "programs-header": {
+      "reinvest": "Reinvest",
+      "current-value": "Current value",
+      "share": "Share",
+      "status": "Status",
       "position": "Pos.",
       "title": "Name",
       "equity": "Equity",
@@ -2571,6 +2575,10 @@
     }
   },
   "dashboard-page": {
+    "investing": {
+      "funds": "Funds",
+      "programs": "Programs"
+    },
     "in-requests": {
       "title": "In requests"
     },
