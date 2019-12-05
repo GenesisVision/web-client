@@ -121,7 +121,10 @@ export const getTotalTradingStatistic = ({
 }: {
   currency: CurrencyEnum;
 }): CancelablePromise<TDashboardTradingStatistic> =>
-  dashboardApi.getTradingDetails(authService.getAuthArg(), { currency });
+  dashboardApi.getTradingDetails(authService.getAuthArg(), {
+    currency,
+    eventsTake: 4
+  });
 
 export const getTotalInvestingStatistic = ({
   currency
@@ -129,7 +132,8 @@ export const getTotalInvestingStatistic = ({
   currency: CurrencyEnum;
 }): CancelablePromise<TDashboardInvestingStatistic> =>
   dashboardApi.getInvestingDetails(authService.getAuthArg(), {
-    currency
+    currency,
+    eventsTake: 4
   });
 
 export const getEvents = (eventLocation: EVENT_LOCATION) => (

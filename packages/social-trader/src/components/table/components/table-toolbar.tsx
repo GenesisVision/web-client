@@ -29,7 +29,8 @@ const _TableToolbar: React.FC<
   sorting,
   updateSorting,
   renderSorting,
-  isViewSwitchEnabled
+  isViewSwitchEnabled,
+  hide
 }) => {
   const handleIconClick = useCallback(
     (view: LIST_VIEW) => () => {
@@ -37,6 +38,8 @@ const _TableToolbar: React.FC<
     },
     [onChange]
   );
+
+  if (hide) return null;
 
   return (
     <div className="table__toolbar">
@@ -103,6 +106,7 @@ export interface ITableToolbarExternalProps {
   sorting?: string;
   updateSorting?: UpdateSortingFuncType;
   renderSorting?: RenderSortingFuncType;
+  hide?: boolean;
 }
 
 const TableToolbar = React.memo(_TableToolbar);
