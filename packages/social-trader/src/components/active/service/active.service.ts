@@ -6,6 +6,7 @@ import { tableLoaderCreator } from "utils/helpers";
 const getTag = () => ({ label: faker.lorem.word() });
 
 export const getActiveLoaderData = (active?: string): AssetInfo => ({
+  socialLinks: [],
   logo: "",
   symbol: "",
   chartSymbol: "",
