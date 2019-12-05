@@ -1,39 +1,49 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
 
 import UnfollowForm, {
   IProgramUnfollowFormValues
 } from "./components/unfollow-form";
-import { detachToSignal } from "./services/unfollow.service";
+import {
+  detachToSignalExternal,
+  detachToSignalInternal
+} from "./services/unfollow.service";
 
 const _UnfollowContainer: React.FC<Props> = ({
+  isExternal,
   open,
   onClose,
   onApply,
   id
 }) => {
-  const dispatch = useDispatch();
-  const handleClose = useCallback(() => onClose(), [onClose]);
+  const { sendRequest } = useApiRequest({
+    request: getDetachMethod(isExternal),
+    successMessage: "unfollow-program.success-alert-message",
+    middleware: [onClose, onApply]
+  });
   const handleSubmit = useCallback(
-    (value: IProgramUnfollowFormValues) => {
-      const model = { mode: value.mode, tradingAccountId: id };
-      dispatch(detachToSignal(id, onApply, model));
-      handleClose();
+    (values: IProgramUnfollowFormValues) => {
+      const model = { mode: values.mode, tradingAccountId: id };
+      sendRequest({ id, model });
     },
-    [dispatch, handleClose, id, onApply]
+    [id]
   );
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={onClose}>
       <UnfollowForm onSubmit={handleSubmit} />
     </Dialog>
   );
 };
 
-const UnfollowContainer = React.memo(_UnfollowContainer);
-export default UnfollowContainer;
+const getDetachMethod = (isExternal: boolean) =>
+  isExternal ? detachToSignalExternal : detachToSignalInternal;
 
 interface Props extends IDialogProps {
+  isExternal: boolean;
   id: string;
   onApply: () => void;
 }
+
+const UnfollowContainer = React.memo(_UnfollowContainer);
+export default UnfollowContainer;
