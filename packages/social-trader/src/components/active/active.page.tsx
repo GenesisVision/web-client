@@ -1,6 +1,7 @@
 import "./active.scss";
 
 import Page from "components/page/page";
+import { AssetInfo } from "gv-api-web";
 import React from "react";
 
 import Active from "./active";
@@ -17,7 +18,7 @@ const _ActivePage: React.FC<Props> = ({ data }) => {
 };
 
 interface Props {
-  data: any;
+  data: AssetInfo;
 }
 
 const ActivePage = React.memo(_ActivePage);
