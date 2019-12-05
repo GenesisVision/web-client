@@ -1,5 +1,8 @@
+@import "~shared/styles/_sizes.scss";
+
 .dashboard {
   &__public-page-block {
+    @include details-block-horizontal-paddings;
     display: flex;
     align-items: center;
   }
