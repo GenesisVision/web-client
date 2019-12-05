@@ -1,9 +1,9 @@
 import "./active.scss";
 
+import { SocialLinksMocks } from "components/active/active.helpers";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import * as faker from "faker";
-import { SocialLinkType } from "gv-api-web";
+import { AssetInfo } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // @ts-ignore
@@ -12,26 +12,9 @@ import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
 
-const SocialLinksMock = {
-  url: "",
-  logo: "",
-  name: "",
-  value: "",
-  type: "Undefined" as SocialLinkType
-};
-const SocialLinksMocks = Array(5)
-  .fill("")
-  .map(() => SocialLinksMock);
-
-const getTagMock = () => ({
-  name: faker.lorem.word(),
-  color: "#f0f0f0"
-});
-const tagMocks = Array(5)
-  .fill("")
-  .map(getTagMock);
-
-const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
+const _Active: React.FC<Props> = ({
+  data: { name, description, tags, chartSymbol, logo }
+}) => {
   const [isServer, setIsServer] = useState(typeof window === "undefined");
   const [t] = useTranslation();
   useEffect(() => {
@@ -41,23 +24,17 @@ const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
   return (
     <div>
       <div className="active__block">
-        <CurrencyItem
-          logo={""}
-          name={name}
-          rate={10245}
-          clickable={false}
-          big
-        />
+        <CurrencyItem logo={logo} name={name} clickable={false} big />
       </div>
       <div className="active__block active__tags">
-        <TagItemList tags={tagMocks} />
+        <TagItemList tags={tags} />
       </div>
       <div className="active__block">
         <div className="active__title">{t("active.chart")}</div>
         <div className="active__chart-container">
           {!isServer && (
             <TradingViewWidget
-              symbol={`${name}USD`}
+              symbol={chartSymbol}
               autosize
               theme={Themes.DARK}
             />
@@ -68,7 +45,7 @@ const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
         <div className="active__title">
           {t("active.about")} {name}
         </div>
-        <div>{about}</div>
+        <div>{description}</div>
       </div>
       <div className="active__block">
         <SocialLinksBlock socialLinks={SocialLinksMocks} />
@@ -78,7 +55,7 @@ const _Active: React.FC<Props> = ({ data: { name, rate, about, tags } }) => {
 };
 
 interface Props {
-  data: any;
+  data: AssetInfo;
 }
 
 const Active = withBlurLoader(React.memo(_Active));
