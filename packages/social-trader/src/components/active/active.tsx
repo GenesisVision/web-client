@@ -1,6 +1,5 @@
 import "./active.scss";
 
-import { SocialLinksMocks } from "components/active/active.helpers";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetInfo } from "gv-api-web";
@@ -13,7 +12,7 @@ import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
 
 const _Active: React.FC<Props> = ({
-  data: { name, description, tags, chartSymbol, logo }
+  data: { name, description, tags, chartSymbol, logo, socialLinks }
 }) => {
   const [isServer, setIsServer] = useState(typeof window === "undefined");
   const [t] = useTranslation();
@@ -48,7 +47,7 @@ const _Active: React.FC<Props> = ({
         <div>{description}</div>
       </div>
       <div className="active__block">
-        <SocialLinksBlock socialLinks={SocialLinksMocks} />
+        <SocialLinksBlock socialLinks={socialLinks} />
       </div>
     </div>
   );
