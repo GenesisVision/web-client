@@ -9,10 +9,7 @@ import {
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { NextPageContext } from "next";
-import {
-  getTradingLoaderData,
-  getTradingPublicLoaderData
-} from "pages/dashboard/dashboard.loaders-data";
+import { getTradingLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import {
   TAssets,
   TDashboardInRequests,
@@ -33,6 +30,16 @@ import { ActionType, CurrencyEnum } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
+
+export const getInvestingFunds = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getInvestingFunds(authService.getAuthArg(), filters);
+
+export const getInvestingPrograms = (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getInvestingPrograms(authService.getAuthArg(), filters);
 
 export const fetchRequests = (take: number = 100) =>
   investmentsApi.getRequests(0, take, authService.getAuthArg());
