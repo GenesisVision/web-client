@@ -1,6 +1,7 @@
 import "./currency-item.scss";
 
 import classNames from "classnames";
+import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
 import useIsOpen from "hooks/is-open.hook";
@@ -52,16 +53,17 @@ const _CurrencyItem: React.FC<Props> = ({
       )}
     </div>
   );
+  const active = symbol || name || "";
   return (
     (clickable && (
       <>
-        <a href="http://example.com" onClick={openPopup}>
+        <a href={getActiveUrl(active)} onClick={openPopup}>
           {renderItemContent()}
         </a>
         <ActivePopup
           open={isOpenPopup}
           onClose={setClosePopup}
-          active={symbol || name || ""}
+          active={active}
         />
       </>
     )) ||
