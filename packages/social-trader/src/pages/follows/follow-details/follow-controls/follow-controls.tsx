@@ -32,7 +32,7 @@ const _FollowControls: React.FC<Props> = ({
           brokerId={brokerDetails.id}
           broker={brokerDetails.type}
           signalSubscription={
-            personalDetails && personalDetails.signalSubscription
+            personalDetails && personalDetails.signalSubscriptions[0] //TODO
           }
           id={id}
           title={title}

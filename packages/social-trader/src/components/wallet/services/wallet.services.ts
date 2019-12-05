@@ -67,17 +67,16 @@ export type FetchTransactionsInternalFilterType = {
     | "All"
     | "Investment"
     | "Withdrawal"
-    | "Deposit"
     | "Conversion"
     | "Commission"
     | "Program"
     | "Fund"
     | "Follow"
     | "TradingAccounts"
-    | "AgentReward"
-    | "Platform";
+    | "AgentReward";
   dateFrom?: Date;
   dateTo?: Date;
+  currency?: Currency;
   skip?: number;
   take?: number;
 };
