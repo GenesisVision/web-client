@@ -2,7 +2,9 @@
 @import "~shared/styles/_sizes";
 
 .gv-switch-wrapper {
-  margin: 16px 8px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
   position: relative;
 }
 
