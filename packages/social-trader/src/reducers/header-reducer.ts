@@ -11,6 +11,11 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
   state => state.profileHeader
 );
 
+export const managerUrlSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.url)
+);
+
 export const isNewUserSelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.isNewUser)
