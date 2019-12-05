@@ -27,16 +27,16 @@ const _FundSettings: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <>
-      {/*<Reallocation*/}
-      {/*  condition={details.personalDetails.ownerActions.canReallocate}*/}
-      {/*  availableReallocationPercents={*/}
-      {/*    details.personalDetails.availableReallocationPercents*/}
-      {/*  }*/}
-      {/*  onApply={reallocate}*/}
-      {/*  id={details.id}*/}
-      {/*  fundAssets={details.currentAssets}*/}
-      {/*  platformAssets={platformAssets}*/}
-      {/*/>*/}
+      <Reallocation
+        condition={details.personalDetails.ownerActions.canReallocate}
+        availableReallocationPercents={
+          details.personalDetails.availableReallocationPercents
+        }
+        onApply={reallocate}
+        id={details.id}
+        fundAssets={details.assetsStructure}
+        platformAssets={platformAssets}
+      />
       <InvestmentFees
         asset={ASSET.FUND}
         maxExitFee={maxExitFee}
