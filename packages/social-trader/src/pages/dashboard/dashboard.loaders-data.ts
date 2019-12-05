@@ -201,7 +201,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
 
 export const getTotalLoaderData = (): TDashboardTotal => ({
   total: getRandomInteger(-10000, 10000),
-  pending: getRandomInteger(-10000, 10000),
+  trading: getRandomInteger(-10000, 10000),
   invested: getRandomInteger(-10000, 10000),
   available: getRandomInteger(-10000, 10000),
   profits: {

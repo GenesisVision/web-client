@@ -32,7 +32,7 @@ const _DetailsSettingsButtons: React.FC<{
         personalDetails.ownerActions.canClose && (
           <DetailsSettingControl
             to={settingsUrl}
-            text={t("program-details-page.description.program-settings")}
+            text={t("program-details-page.description.settings")}
           />
         )}
     </div>

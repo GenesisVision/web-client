@@ -76,6 +76,7 @@ export type FetchTransactionsInternalFilterType = {
     | "AgentReward";
   dateFrom?: Date;
   dateTo?: Date;
+  currency?: Currency;
   skip?: number;
   take?: number;
 };
