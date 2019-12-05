@@ -2986,6 +2986,7 @@
       "settings": "Settings"
     },
     "settings": {
+      "account-type": "Account type",
       "exchange": "Exchange",
       "api": "API",
       "investment-fund-fees": "Investment fund fees",
