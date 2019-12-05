@@ -22,6 +22,9 @@
     @include media-breakpoint-landscape-phone() {
       margin-bottom: $padding-xsmall/2;
     }
+    &--hidden {
+      visibility: hidden;
+    }
   }
 
   &__label {

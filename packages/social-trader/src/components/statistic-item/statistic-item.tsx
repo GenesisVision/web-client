@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _StatisticItem: React.FC<Props> = ({
+  hideLabel,
   isPending,
   invert,
   large,
@@ -50,17 +51,16 @@ const _StatisticItem: React.FC<Props> = ({
         className
       )}
     >
-      {label && (
-        <div
-          className={classNames(
-            "statistics-item__top",
-            labelClassName,
-            generateClasses(ITEM.LABEL)
-          )}
-        >
-          {label}
-        </div>
-      )}
+      <div
+        className={classNames(
+          { "statistics-item__top--hidden": hideLabel },
+          "statistics-item__top",
+          labelClassName,
+          generateClasses(ITEM.LABEL)
+        )}
+      >
+        {label}
+      </div>
       <div className={generateClasses(ITEM.VALUE)}>
         <BlurContainer blur={!!isPending}>{children}</BlurContainer>
       </div>
@@ -84,6 +84,7 @@ enum ITEM {
 }
 
 interface Props {
+  hideLabel?: boolean;
   isPending?: boolean;
   label?: string | React.ReactNode;
   equivalent?: number;
