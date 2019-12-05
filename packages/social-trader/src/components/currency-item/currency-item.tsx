@@ -53,17 +53,16 @@ const _CurrencyItem: React.FC<Props> = ({
     </div>
   );
   return (
-    //TODO fix it
     (clickable && (
       <>
         <a href="http://example.com" onClick={openPopup}>
           {renderItemContent()}
         </a>
-        {/*<ActivePopup*/}
-        {/*  open={isOpenPopup}*/}
-        {/*  onClose={setClosePopup}*/}
-        {/*  active={symbol || name}*/}
-        {/*/>*/}
+        <ActivePopup
+          open={isOpenPopup}
+          onClose={setClosePopup}
+          active={symbol || name || ""}
+        />
       </>
     )) ||
     renderItemContent()
