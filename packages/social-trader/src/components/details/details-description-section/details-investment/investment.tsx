@@ -11,6 +11,7 @@ import { StatisticItemList } from "components/statistic-item-list/statistic-item
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useIsOpen from "hooks/is-open.hook";
+import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import { IFundWithdrawalContainerProps } from "pages/funds/fund-details/fund-details.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -158,14 +159,12 @@ const _Investment: React.FC<Props> = ({
               displayType="text"
             />
           </StatisticItem>
-          {ReinvestingWidget &&
-            personalDetails.isInvested &&
-            personalDetails.canInvest && (
-              <ReinvestingWidget
-                programId={id}
-                isReinvesting={false} // personalDetails.isReinvest
-              />
-            )}
+          {personalDetails.isInvested && personalDetails.canInvest && (
+            <ProgramReinvestingContainer
+              id={id}
+              isReinvesting={false} // personalDetails.isReinvest
+            />
+          )}
           <StatisticItem
             condition={
               personalDetails.pendingOutput !== undefined &&
