@@ -3,11 +3,11 @@ import "./dashboard.scss";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
-import Link from "components/link/link";
 import Page from "components/page/page";
 import PublicSelect from "components/profile/settings/public-select/public-select";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
+import { PublicPageLink } from "pages/dashboard/components/dashboard-investing/public-page-link";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
@@ -40,11 +40,6 @@ const _InvestmentsPage: React.FC = () => {
     </TitleContext.Provider>
   );
 };
-
-const PublicPageLink: React.FC = React.memo(() => {
-  const [t] = useTranslation();
-  return <Link to={"asd"}>{t("dashboard-page.investing.public-page")}</Link>;
-});
 
 const InvestmentsPage = React.memo(_InvestmentsPage);
 export default InvestmentsPage;
