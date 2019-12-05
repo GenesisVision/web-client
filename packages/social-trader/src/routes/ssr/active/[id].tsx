@@ -1,6 +1,7 @@
 import ActivePage from "components/active/active.page";
 import { fetchActive } from "components/active/service/active.service";
 import withDefaultLayout from "decorators/with-default-layout";
+import { AssetInfo } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
 
@@ -17,7 +18,7 @@ Page.getInitialProps = async ctx => {
 };
 
 interface Props {
-  data: any;
+  data: AssetInfo;
 }
 
 export default withDefaultLayout(Page);
