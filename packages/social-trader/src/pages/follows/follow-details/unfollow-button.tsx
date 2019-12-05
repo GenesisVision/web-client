@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 import { dispatchFollowDescription } from "./services/follow-details.service";
 
-const _UnFollowButton: React.FC<Props> = ({ id }) => {
+const _UnFollowButton: React.FC<Props> = ({ id, isExternal }) => {
   const dispatch = useDispatch();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id));
@@ -26,6 +26,7 @@ const _UnFollowButton: React.FC<Props> = ({ id }) => {
         {t("program-details-page.description.unfollow")}
       </GVButton>
       <UnfollowContainer
+        isExternal={isExternal}
         open={isOpenUnFollow}
         id={id}
         onClose={setIsCloseUnFollow}
@@ -36,6 +37,7 @@ const _UnFollowButton: React.FC<Props> = ({ id }) => {
 };
 
 interface Props {
+  isExternal: boolean;
   id: string;
 }
 

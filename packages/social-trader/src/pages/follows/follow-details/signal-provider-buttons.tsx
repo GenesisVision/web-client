@@ -18,7 +18,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
   return (
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
       {signalSubscription.hasActiveSubscription ? (
-        <UnFollowButton id={id} />
+        <UnFollowButton id={id} isExternal={isExternal} />
       ) : (
         <FollowButton
           leverage={leverage}
