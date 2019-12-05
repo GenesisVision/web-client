@@ -1,9 +1,50 @@
+import "./dashboard.scss";
+
+import DetailsBlock, {
+  DETAILS_BLOCK_TYPE
+} from "components/details/details-block";
+import Link from "components/link/link";
 import Page from "components/page/page";
+import PublicSelect from "components/profile/settings/public-select/public-select";
+import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
+import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
+import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
+import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const _InvestmentsPage: React.FC = () => {
-  return <Page title={""}>Investment</Page>;
+  const [t] = useTranslation();
+  const title = t(`dashboard-page.investing.title`);
+  return (
+    <TitleContext.Provider value={title}>
+      <Page title={title}>
+        <div>
+          <DashboardTotalContainer />
+        </div>
+        <div>
+          <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
+            <div className="dashboard__public-page-block">
+              <PublicSelect />
+              <PublicPageLink />
+            </div>
+          </DetailsBlock>
+        </div>
+        <div>
+          <DashboardInvestingFunds />
+        </div>
+        <div>
+          <DashboardInvestingPrograms />
+        </div>
+      </Page>
+    </TitleContext.Provider>
+  );
 };
+
+const PublicPageLink: React.FC = React.memo(() => {
+  const [t] = useTranslation();
+  return <Link to={"asd"}>{t("dashboard-page.investing.public-page")}</Link>;
+});
 
 const InvestmentsPage = React.memo(_InvestmentsPage);
 export default InvestmentsPage;
