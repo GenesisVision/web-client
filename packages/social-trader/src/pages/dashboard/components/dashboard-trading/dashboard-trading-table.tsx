@@ -70,16 +70,5 @@ interface Props {
   renderBodyCard?: RenderBodyItemFuncType;
 }
 
-export const CreateButtonToolbar: React.FC<{
-  text: string;
-  route: string;
-}> = React.memo(({ text, route }) => (
-  <Link to={route} className="dashboard-trading__button">
-    <GVButton color="primary" variant="text">
-      {text}
-    </GVButton>
-  </Link>
-));
-
 const DashboardTradingTable = React.memo(_DashboardTradingTable);
 export default DashboardTradingTable;
