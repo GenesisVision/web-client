@@ -31,10 +31,13 @@ import { ActionType, CurrencyEnum } from "utils/types";
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 
-export const getInvestingFunds = (
+export const getInvestingFunds = (showIn: CurrencyEnum) => (
   filters?: ComposeFiltersAllType
 ): CancelablePromise<IDataModel> =>
-  dashboardApi.getInvestingFunds(authService.getAuthArg(), filters);
+  dashboardApi.getInvestingFunds(authService.getAuthArg(), {
+    ...filters,
+    showIn
+  });
 
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
