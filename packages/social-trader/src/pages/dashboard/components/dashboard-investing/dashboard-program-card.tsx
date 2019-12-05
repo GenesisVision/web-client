@@ -168,7 +168,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
       <DepositWithdrawButtons
         canWithdraw={program.personalDetails.canWithdraw}
         canInvest={program.personalDetails.canInvest}
-        broker={"MetaTrader5"}
+        broker={program.brokerDetails.type}
         type={ASSET.PROGRAM}
         id={program.id}
         currency={program.currency}
