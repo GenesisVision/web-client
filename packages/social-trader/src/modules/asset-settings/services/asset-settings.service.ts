@@ -25,17 +25,9 @@ export const editAsset = (props: {
       ...data,
       logo: response || data.logo.src
     };
-    switch (props.type) {
-      case ASSET.PROGRAM:
-        return assetsApi.updateAsset_1(props.id, authorization, {
-          model: model as ProgramUpdate
-        }); //TODO ask backend to change ProgramUpdate logo type
-      case ASSET.FOLLOW:
-      case ASSET.FUND:
-        return assetsApi.updateAsset(props.id, authorization, {
-          model: model as ProgramUpdate
-        }); //TODO ask backend to change ProgramUpdate logo type
-    }
+    return assetsApi.updateAsset(props.id, authorization, {
+      model: model as ProgramUpdate
+    }); //TODO ask backend to change ProgramUpdate logo type
   });
 };
 
