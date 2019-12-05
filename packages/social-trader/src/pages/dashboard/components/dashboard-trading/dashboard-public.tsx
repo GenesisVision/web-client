@@ -1,9 +1,8 @@
+import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
-import DashboardTradingTable, {
-  CreateButtonToolbar
-} from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
+import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
@@ -26,7 +25,7 @@ const _DashboardPublic: React.FC<Props> = () => {
   return (
     <DashboardTradingTable
       createButtonToolbar={
-        <CreateButtonToolbar
+        <ToolbarButton
           text={t("buttons.create-fund")}
           route={CREATE_FUND_PAGE_ROUTE}
         />
