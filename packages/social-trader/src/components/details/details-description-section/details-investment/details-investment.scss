@@ -75,10 +75,6 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
   &__investment-container {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  &__investment-container,
-  &__investment-tabs {
     padding: 0 $padding-xsmall;
 
     @include media-breakpoint-landscape-phone() {
