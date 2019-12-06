@@ -32,12 +32,14 @@ import {
   createProgramSettingsToUrl
 } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
+import { VoidFuncType } from "utils/types";
 
 import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCard: React.FC<{
+  updateItems: VoidFuncType;
   asset: DashboardTradingAsset;
-}> = ({ asset }) => {
+}> = ({ asset, updateItems }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const detailsLink = {
@@ -125,6 +127,7 @@ const _DashboardPublicCard: React.FC<{
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
+        onApply={updateItems}
         ownAsset
         canWithdraw={asset.actions.canAddRequestWithdraw}
         canInvest={asset.actions.canAddRequestInvest}

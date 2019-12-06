@@ -34,9 +34,11 @@ const _DashboardPublic: React.FC<Props> = () => {
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.public")}
-      renderBodyCard={(asset: DashboardTradingAsset) => (
-        <DashboardPublicCard asset={asset} />
-      )}
+      renderBodyCard={(
+        asset: DashboardTradingAsset,
+        updateRow,
+        updateItems
+      ) => <DashboardPublicCard asset={asset} updateItems={updateItems!} />}
     />
   );
 };
