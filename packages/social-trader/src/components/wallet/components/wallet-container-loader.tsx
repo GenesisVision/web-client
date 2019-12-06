@@ -2,7 +2,7 @@ import "./wallet-balance/wallet-balance.scss";
 
 import SvgLoader from "components/svg-loader/svg-loader";
 import * as faker from "faker";
-import { WalletMultiSummary } from "gv-api-web";
+import { WalletData, WalletSummary } from "gv-api-web";
 import * as React from "react";
 import { getRandomInteger } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
@@ -30,11 +30,10 @@ const WalletTitleLoader: React.FC = () => (
   </div>
 );
 
-export const walletDataCreator = () => ({
+export const walletDataCreator = (): WalletData => ({
   id: faker.lorem.word(),
   title: faker.lorem.word(),
   logo: faker.lorem.word(),
-  rateToGVT: getRandomInteger(1, 1000),
   isDepositEnabled: false,
   isWithdrawalEnabled: false,
   withdrawalCommission: getRandomInteger(1, 1000),
@@ -42,27 +41,18 @@ export const walletDataCreator = () => ({
   currency: "GVT" as CurrencyEnum,
   available: getRandomInteger(1, 1000),
   invested: getRandomInteger(1, 1000),
-  pending: getRandomInteger(1, 1000),
+  trading: getRandomInteger(1, 1000),
   total: getRandomInteger(1, 1000),
-  currencyCcy: "GVT" as CurrencyEnum,
-  availableCcy: getRandomInteger(1, 1000),
-  investedCcy: getRandomInteger(1, 1000),
-  pendingCcy: getRandomInteger(1, 1000),
-  totalCcy: getRandomInteger(1, 1000)
+  pending: getRandomInteger(1, 1000)
 });
 
-export const walletMultiSummaryLoaderData: WalletMultiSummary = {
+export const walletMultiSummaryLoaderData: WalletSummary = {
   grandTotal: {
     currency: "GVT",
     available: getRandomInteger(1, 1000),
     invested: getRandomInteger(1, 1000),
-    pending: getRandomInteger(1, 1000),
-    total: getRandomInteger(1, 1000),
-    currencyCcy: "GVT",
-    availableCcy: getRandomInteger(1, 1000),
-    investedCcy: getRandomInteger(1, 1000),
-    pendingCcy: getRandomInteger(1, 1000),
-    totalCcy: getRandomInteger(1, 1000)
+    trading: getRandomInteger(1, 1000),
+    total: getRandomInteger(1, 1000)
   },
   wallets: Array(4)
     .fill("")

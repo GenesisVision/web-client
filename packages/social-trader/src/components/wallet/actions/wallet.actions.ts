@@ -1,5 +1,5 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
-import { Currency, WalletMultiAvailable, WalletMultiSummary } from "gv-api-web";
+import { Currency, WalletMultiAvailable, WalletSummary } from "gv-api-web";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
@@ -13,7 +13,7 @@ export const WALLET_TRANSACTIONS = "WALLET_TRANSACTIONS";
 export const WALLET_LAST_UPDATE = "WALLET_LAST_UPDATE";
 export const ACCOUNT_LAST_UPDATE = "ACCOUNT_LAST_UPDATE";
 
-interface FetchWalletAction extends ApiAction<WalletMultiSummary> {
+interface FetchWalletAction extends ApiAction<WalletSummary> {
   type: typeof WALLET_BALANCE;
 }
 

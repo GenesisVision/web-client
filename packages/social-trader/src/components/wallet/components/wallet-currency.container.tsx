@@ -1,5 +1,5 @@
 import NotFoundPage from "components/not-found/not-found";
-import { WalletData, WalletMultiSummary } from "gv-api-web";
+import { WalletData, WalletSummary } from "gv-api-web";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
@@ -23,13 +23,13 @@ const _WalletCurrencyContainer: React.FC<Props> = props => {
 const walletSelector = createSelector<
   RootState,
   Props,
-  WalletMultiSummary | undefined,
+  WalletSummary | undefined,
   string,
   WalletData | undefined
 >(
   (state: RootState) => walletDataSelector(state),
   (state: RootState, props: Props) => props.currency,
-  (data: WalletMultiSummary | undefined, currency: string) => {
+  (data: WalletSummary | undefined, currency: string) => {
     if (!data) return undefined;
     return data.wallets.find(
       (wallet: WalletData) => wallet.currency === currency.toUpperCase()

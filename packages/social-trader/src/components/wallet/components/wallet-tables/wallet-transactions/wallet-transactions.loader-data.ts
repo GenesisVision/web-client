@@ -7,7 +7,7 @@ import { MultiWalletTransaction } from "../../../wallet.types";
 const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
   id: "",
   actions: { canResend: false, canCancel: false },
-  details: [{ details: "", title: "" }],
+  details: [{ details: "", title: "", url: "" }],
   asset: {} as TransactionAssetDetails,
   date: new Date(),
   status: "Done",
