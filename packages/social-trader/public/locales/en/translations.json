@@ -961,6 +961,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "creation-date": "Creation date",
       "currency": "Currency",
       "broker": "Broker",
       "leverage": "Leverage",
