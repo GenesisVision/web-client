@@ -25,21 +25,23 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         settingsUrl={settingsUrl}
       />
       {PerformanceData && <PerformanceData />}
-      <div className="asset-details-description__controls">
-        <Controls />
-      </div>
+      {Controls && (
+        <div className="asset-details-description__controls">
+          <Controls />
+        </div>
+      )}
     </div>
   );
 };
 
 interface Props {
-  notificationsUrl: ToType;
+  notificationsUrl?: ToType;
   settingsUrl: ToType;
-  personalDetails: PersonalDetailsType;
+  personalDetails?: PersonalDetailsType;
   description: DetailsFullType;
-  AssetDetailsExtraBlock: React.ComponentType<any>;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
-  Controls: React.ComponentType<any>;
+  Controls?: React.ComponentType<any>;
 }
 
 const DetailsDescriptionSection = React.memo(_DetailsDescriptionSection);
