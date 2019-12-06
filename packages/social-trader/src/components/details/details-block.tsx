@@ -3,7 +3,7 @@ import "./details.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-const _DetailsBlock: React.FC<React.HTMLAttributes<HTMLDivElement> & Props> = ({
+const _DetailsBlock: React.FC<Props> = ({
   horizontalPaddings,
   table,
   wide,
@@ -31,7 +31,7 @@ export enum DETAILS_BLOCK_TYPE {
   TRANSPARENT = "TRANSPARENT"
 }
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: DETAILS_BLOCK_TYPE;
   className?: string;
   wide?: boolean;
