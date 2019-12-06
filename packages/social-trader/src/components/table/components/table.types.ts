@@ -5,7 +5,7 @@ import {
 } from "gv-api-web";
 import { Action } from "redux";
 import { IDataModel } from "shared/constants/constants";
-import { MiddlewareDispatch, TGetState } from "utils/types";
+import { MiddlewareDispatch, TGetState, VoidFuncType } from "utils/types";
 
 import { FILTER_TYPE } from "../helpers/filtering.helpers";
 import { IPaging } from "../helpers/paging.helpers";
@@ -27,7 +27,7 @@ export type Column = {
 
 export type UpdateFilterFunc = (filter: TFilter<any>) => void;
 
-export type UpdateItemsFuncType = () => void;
+export type UpdateItemsFuncType = VoidFuncType;
 
 export type UpdateRowFuncType = (row: any) => void;
 
