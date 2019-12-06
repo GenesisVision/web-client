@@ -31,6 +31,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={description.login}>
       <DetailsDescriptionSection
+        showSettings
         description={description}
         settingsUrl={createAccountSettingsToUrl(
           description.id,

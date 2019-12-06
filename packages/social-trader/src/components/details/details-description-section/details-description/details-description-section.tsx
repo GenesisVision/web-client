@@ -7,6 +7,7 @@ import * as React from "react";
 import { DetailsFullType, PersonalDetailsType } from "../../details.types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  showSettings,
   notificationsUrl,
   settingsUrl,
   personalDetails,
@@ -18,6 +19,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        showSettings={showSettings}
         personalDetails={personalDetails}
         description={description}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
@@ -35,6 +37,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
+  showSettings?: boolean;
   notificationsUrl?: ToType;
   settingsUrl: ToType;
   personalDetails?: PersonalDetailsType;
