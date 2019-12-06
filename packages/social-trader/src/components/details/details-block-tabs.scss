@@ -1,0 +1,4 @@
+@import "~shared/styles/_sizes";
+.details-block-tabs {
+  @include details-block-horizontal-paddings();
+}
