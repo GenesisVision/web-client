@@ -30,11 +30,10 @@ import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "utils/formatter";
-
-const DECIMAL_SCALE_SMALL_VALUE = 4;
-const DECIMAL_SCALE_BIG_VALUE = 2;
+import { VoidFuncType } from "utils/types";
 
 const _DashboardProgramCard: React.FC<Props> = ({
+  updateItems,
   program,
   toggleFavorite,
   title
@@ -152,7 +151,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
               status={program.personalDetails.status as STATUS}
               id={program.id}
               asset={ASSET.PROGRAM}
-              onCancel={() => {}}
+              onCancel={updateItems}
             />
           </StatisticItem>
         </TableCardTableColumn>
@@ -166,6 +165,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
+        onApply={updateItems}
         canWithdraw={program.personalDetails.canWithdraw}
         canInvest={program.personalDetails.canInvest}
         broker={program.brokerDetails.type}
@@ -178,6 +178,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
 };
 
 interface Props {
+  updateItems: VoidFuncType;
   program: ProgramInvestingDetailsList;
   toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
