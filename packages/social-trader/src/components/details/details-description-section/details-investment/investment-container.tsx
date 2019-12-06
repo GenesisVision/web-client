@@ -2,7 +2,7 @@ import "./details-investment.scss";
 
 import { IFundWithdrawalContainerProps } from "pages/funds/fund-details/fund-details.types";
 import * as React from "react";
-import { STATUS } from "shared/constants/constants";
+import { ASSET, STATUS } from "shared/constants/constants";
 import { CurrencyEnum, FeesType } from "utils/types";
 
 import { InvestmentDetails } from "./details-investment.helpers";
@@ -49,7 +49,7 @@ const _InvestmentContainer: React.FC<Props> = ({
 interface Props {
   fees: FeesType;
   updateDescription: () => void;
-  asset: string;
+  asset: ASSET;
   notice?: string;
   id: string;
   assetCurrency: CurrencyEnum;
