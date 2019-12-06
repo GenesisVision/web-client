@@ -1,6 +1,8 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "components/select/select";
 import {
+  AccountChartStatistic,
+  AccountProfitPercentCharts,
   BalanceChartPoint,
   FundBalanceChart,
   FundChartStatistic,
@@ -116,9 +118,13 @@ export interface TGetChartArgs {
 
 export type ProfitChartType =
   | FundProfitPercentCharts
-  | ProgramProfitPercentCharts;
+  | ProgramProfitPercentCharts
+  | AccountProfitPercentCharts;
 export type ProfitChartDataType = ProfitChartType;
-export type StatisticDataType = ProgramChartStatistic | FundChartStatistic;
+export type StatisticDataType =
+  | ProgramChartStatistic
+  | FundChartStatistic
+  | AccountChartStatistic;
 export type ChartsDataType = Array<SimpleChart>;
 
 export type BalanceChartElementType = Array<BalanceChartPoint>;
