@@ -74,7 +74,7 @@ const _DashboardPublicCard: React.FC<{
   return (
     <TableCard
       hasAvatar
-      subTitle={asset.assetType}
+      subTitle={asset.assetTypeExt}
       title={assetTitle}
       color={assetColor}
       logo={assetLogo}
@@ -114,6 +114,13 @@ const _DashboardPublicCard: React.FC<{
               displayType="text"
             />
           </StatisticItem>
+          {!!asset.signalInfo && (
+            <StatisticItem
+              label={t("dashboard-page.trading.subscribers-count")}
+            >
+              {asset.signalInfo.subscribersCount}
+            </StatisticItem>
+          )}
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
