@@ -34,6 +34,9 @@ import programNotificationsReducer, {
 import programsReducer, {
   ProgramsListState
 } from "modules/programs-table/reducers/programs-table.reducers";
+import accountDetailsReducer, {
+  AccountDetailsState
+} from "pages/accounts/account-details/reducers/account-details.reducer";
 import followDetailsReducer, {
   FollowDetailsState
 } from "pages/follows/follow-details/reducers/follow-details.reducer";
@@ -57,6 +60,7 @@ import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
   profile: profileReducer,
+  accountDetails: accountDetailsReducer,
   fundDetails: fundDetailsReducer,
   followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
@@ -87,6 +91,7 @@ export const sharedRootReducers = {
 
 export type RootState = Readonly<{
   profile: ProfileState;
+  accountDetails: AccountDetailsState;
   fundDetails: FundDetailsState;
   followDetails: FollowDetailsState;
   programDetails: ProgramDetailsState;
