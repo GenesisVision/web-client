@@ -13,48 +13,62 @@ const _DetailsDescription: React.FC<Props> = ({
   AssetDetailsExtraBlock,
   notificationsUrl,
   settingsUrl
-}) => (
-  <div className="asset-details-description__main">
-    <DetailsLimitsAvatar
-      logo={description.logo}
-      level={"level" in description ? description.level : undefined}
-      levelProgress={
-        "levelProgress" in description ? description.levelProgress : undefined
-      }
-      title={description.title}
-      color={description.color}
-      totalAvailableInvestment={
-        "totalAvailableInvestment" in description
-          ? description.totalAvailableInvestment
-          : undefined
-      }
-      currency={"level" in description ? description.currency : undefined}
-    />
-    <DetailsInfo
-      title={description.title}
-      to={managerToPathCreator(description.owner.url, description.title)}
-      username={description.owner.username}
-      socialLinks={description.owner.socialLinks}
-      description={description.description}
-    >
-      <AssetDetailsExtraBlock />
-    </DetailsInfo>
-    <DetailsSettingsButtons
-      personalDetails={personalDetails}
-      id={description.id}
-      title={description.title}
-      notificationsUrl={notificationsUrl}
-      settingsUrl={settingsUrl}
-    />
-  </div>
-);
+}) => {
+  const logo =
+    "logo" in description ? description.logo : description.brokerDetails.logo;
+  const title = "title" in description ? description.title : description.login;
+  return (
+    <div className="asset-details-description__main">
+      <DetailsLimitsAvatar
+        logo={logo}
+        level={"level" in description ? description.level : undefined}
+        levelProgress={
+          "levelProgress" in description ? description.levelProgress : undefined
+        }
+        title={title}
+        color={"color" in description ? description.color : undefined}
+        totalAvailableInvestment={
+          "totalAvailableInvestment" in description
+            ? description.totalAvailableInvestment
+            : undefined
+        }
+        currency={"level" in description ? description.currency : undefined}
+      />
+      <DetailsInfo
+        title={title}
+        to={
+          "owner" in description
+            ? managerToPathCreator(description.owner.url, title)
+            : undefined
+        }
+        username={
+          "owner" in description ? description.owner.username : undefined
+        }
+        socialLinks={
+          "owner" in description ? description.owner.socialLinks : undefined
+        }
+        description={
+          "description" in description ? description.description : undefined
+        }
+      >
+        {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
+      </DetailsInfo>
+      <DetailsSettingsButtons
+        personalDetails={personalDetails}
+        id={description.id}
+        notificationsUrl={notificationsUrl}
+        settingsUrl={settingsUrl}
+      />
+    </div>
+  );
+};
 
 interface Props {
-  notificationsUrl: ToType;
+  notificationsUrl?: ToType;
   settingsUrl: ToType;
-  AssetDetailsExtraBlock: React.ComponentType<any>;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
   description: DetailsFullType;
-  personalDetails: PersonalDetailsType;
+  personalDetails?: PersonalDetailsType;
 }
 
 const DetailsDescription = React.memo(_DetailsDescription);
