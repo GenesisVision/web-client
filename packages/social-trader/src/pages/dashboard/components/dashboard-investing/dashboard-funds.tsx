@@ -24,7 +24,7 @@ const _DashboardInvestingFunds: React.FC = () => {
         updateItems
       ) => (
         <DashboardFundCard
-          updateItems={updateItems}
+          updateItems={updateItems!}
           title={title}
           fund={fund}
           toggleFavorite={(id: string, isFavorite: boolean) =>
