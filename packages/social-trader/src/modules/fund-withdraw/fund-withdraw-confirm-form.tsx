@@ -13,6 +13,7 @@ import { FundWithdrawResult } from "./fund-withdraw-result";
 import { withdrawFund } from "./services/fund-withdraw.services";
 
 const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
+  onApply = () => {},
   onClose,
   id,
   availableToWithdraw,
@@ -22,7 +23,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [onClose],
+    middleware: [onClose, onApply],
     request: withdrawFund,
     successMessage: "withdraw-fund.success-alert-message"
   });
@@ -52,7 +53,9 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
     />
   );
 };
+
 interface IFundWithdrawConfirmProps {
+  onApply?: VoidFunction;
   onClose: (param?: any) => void;
   id: string;
   availableToWithdraw: number;
@@ -115,8 +118,8 @@ interface OwnProps {
   currency: string;
   exitFee: number;
   errorMessage?: string;
-  onSubmit(setSubmitting: SetSubmittingType): void;
-  onBackClick(): void;
+  onSubmit: (setSubmitting: SetSubmittingType) => void;
+  onBackClick: () => void;
 }
 
 interface Props extends OwnProps {}

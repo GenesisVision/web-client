@@ -19,6 +19,7 @@ enum PROGRAM_WITHDRAW_FORM {
 }
 
 const _ProgramWithdrawPopup: React.FC<Props> = ({
+  onApply,
   id,
   onClose,
   data: { availableToWithdraw, periodEnds, title },
@@ -72,6 +73,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
         {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
           isAvailableProgramConfirmForm && (
             <ProgramWithdrawConfirm
+              onApply={onApply}
               id={id}
               onClose={onClose}
               formValues={formValues}
@@ -96,6 +98,7 @@ interface OwnProps {
 }
 
 export interface IProgramWithdrawPopupProps {
+  onApply?: VoidFunction;
   id: string;
   onClose: (param?: any) => void;
   assetCurrency: CurrencyEnum;

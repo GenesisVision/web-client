@@ -10,6 +10,7 @@ import { FundWithdrawLoaderData } from "./fund-withdraw.loader";
 import { getFundWithdrawInfo } from "./services/fund-withdraw.services";
 
 const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
+  onApply,
   id,
   onClose
 }) => {
@@ -20,6 +21,7 @@ const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
   return (
     <>
       <FundWithdrawPopup
+        onApply={onApply}
         onClose={onClose}
         id={id}
         loaderData={FundWithdrawLoaderData}

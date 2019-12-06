@@ -17,6 +17,7 @@ import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
 const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
+  onApply = () => {},
   onClose,
   id,
   programCurrency,
@@ -25,7 +26,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   onBackClick
 }) => {
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [onClose],
+    middleware: [onClose, onApply],
     request: withdrawProgramById,
     successMessage: "withdraw-program.success-alert-message"
   });
@@ -49,6 +50,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
 export const ProgramWithdrawConfirm = React.memo(_ProgramWithdrawConfirm);
 
 interface ProgramWithdrawConfirmProps {
+  onApply?: VoidFunction;
   id: string;
   onClose: (param?: any) => void;
   formValues: IProgramWithdrawAmountFormValues;

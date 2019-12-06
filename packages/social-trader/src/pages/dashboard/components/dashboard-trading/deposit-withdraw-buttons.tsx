@@ -6,6 +6,7 @@ import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  onApply,
   canWithdraw,
   canInvest,
   ownAsset,
@@ -20,6 +21,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
     <TableCardRow>
       {canInvest && (
         <DepositButton
+          onApply={onApply}
           ownAsset={ownAsset}
           entryFee={entryFee}
           availableToInvest={availableToInvest}
@@ -30,13 +32,19 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
         />
       )}
       {canWithdraw && (
-        <WithdrawButton type={type} id={id} currency={currency} />
+        <WithdrawButton
+          onApply={onApply}
+          type={type}
+          id={id}
+          currency={currency}
+        />
       )}
     </TableCardRow>
   );
 };
 
 interface Props {
+  onApply?: VoidFunction;
   canWithdraw?: boolean;
   canInvest?: boolean;
   ownAsset?: boolean;

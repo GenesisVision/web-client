@@ -5,13 +5,14 @@ import * as React from "react";
 import { IFundWithdrawPopupProps } from "./fund-withdraw-popup";
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
+  onApply,
   id,
   open,
   onClose
 }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <FundWithdrawPopupContainer onClose={onClose} id={id} />
+      <FundWithdrawPopupContainer onApply={onApply} onClose={onClose} id={id} />
     </Dialog>
   );
 };

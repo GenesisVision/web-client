@@ -22,6 +22,7 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
+  onApply,
   onClose,
   data: { wallets, withdrawInfo },
   id
@@ -80,6 +81,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
         )}
         {tab === FUND_WITHDRAW_FORM.CONFIRM && percent !== undefined && (
           <FundWithdrawConfirm
+            onApply={onApply}
             onClose={onClose}
             id={id}
             availableToWithdraw={availableToWithdraw}
@@ -99,6 +101,7 @@ export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
 
 export interface IFundWithdrawPopupProps {
+  onApply?: VoidFunction;
   onClose: (param?: any) => void;
   id: string;
 }

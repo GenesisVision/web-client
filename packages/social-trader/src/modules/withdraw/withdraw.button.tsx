@@ -7,7 +7,7 @@ import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
-const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
+const _WithdrawButton: React.FC<Props> = ({ onApply, type, id, currency }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   let withdraw;
@@ -15,6 +15,7 @@ const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
     case ASSET.FUND:
       withdraw = (
         <FundWithdrawDialog
+          onApply={onApply}
           open={isOpenPopup}
           id={id}
           onClose={setIsClosePopup}
@@ -24,6 +25,7 @@ const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
     default:
       withdraw = (
         <ProgramWithdrawDialog
+          onApply={onApply}
           open={isOpenPopup}
           id={id}
           accountCurrency={"GVT"} // TODO change to real currecny
@@ -48,6 +50,7 @@ const _WithdrawButton: React.FC<Props> = ({ type, id, currency }) => {
 };
 
 interface Props {
+  onApply?: VoidFunction;
   type: ASSET;
   id: string;
   currency: CurrencyEnum;

@@ -12,6 +12,7 @@ import ProgramWithdrawPopup, {
 import { getProgramWithdrawInfo } from "./services/program-withdraw.services";
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
+  onApply,
   id,
   open,
   onClose,
@@ -27,6 +28,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
+        onApply={onApply}
         id={id}
         onClose={onClose}
         data={data!}
