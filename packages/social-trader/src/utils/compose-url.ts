@@ -7,6 +7,11 @@ import {
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import {
+  ACCOUNT_DETAILS_ROUTE,
+  ACCOUNT_SETTINGS,
+  ACCOUNT_SLUG_URL_PARAM_NAME
+} from "routes/accounts.routes";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
 import {
   FUND_DETAILS_FOLDER_ROUTE,
@@ -89,6 +94,11 @@ export const composeProgramSettingsUrl = (slugUrl: string): string =>
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
+export const composeAccountSettingsUrl = (slugUrl: string): string =>
+  replaceParams(`${ACCOUNT_DETAILS_ROUTE}/${ACCOUNT_SETTINGS}`, {
+    [`:${ACCOUNT_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
 export const composeFollowNotificationsUrl = (slugUrl: string): string =>
   replaceParams(FOLLOW_NOTIFICATIONS_ROUTE, {
     ":id": slugUrl
@@ -153,6 +163,16 @@ export const createProgramSettingsToUrl = (
 ): ToType =>
   createToUrl(
     composeProgramSettingsUrl(url),
+    PROGRAM_SETTINGS_FOLDER_ROUTE,
+    title
+  );
+
+export const createAccountSettingsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeAccountSettingsUrl(url),
     PROGRAM_SETTINGS_FOLDER_ROUTE,
     title
   );
