@@ -46,7 +46,8 @@ const _Table: React.FC<ITableProps> = ({
   isPending,
   emptyMessage,
   updateRow,
-  showSwitchView
+  showSwitchView,
+  hideToolbar
 }) => {
   const [view, setView] = useState<LIST_VIEW>(outerView);
   const isViewSwitchEnabled =
@@ -67,6 +68,7 @@ const _Table: React.FC<ITableProps> = ({
   return (
     <div className="table-wrapper">
       <TableToolbar
+        hide={hideToolbar}
         disableTitle={disableTitle}
         title={title}
         renderMappings={renderMappings}
@@ -139,6 +141,7 @@ export interface ITableProps
     ITableBodyContainerExternalProps,
     ITableHeaderProps {
   outerView?: LIST_VIEW;
+  hideToolbar?: boolean;
   renderBodyCard?: RenderBodyItemFuncType;
   renderBodyRow?: RenderBodyItemFuncType;
   emptyMessage?: JSX.Element;

@@ -27,6 +27,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data, currency }) => {
   return (
     <div className="dashboard-statistic__table-block">
       <Table
+        hideToolbar
         columns={DASHBOARD_STATISTIC_COLUMNS}
         items={data}
         renderHeader={column => (
