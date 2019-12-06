@@ -26,8 +26,10 @@ import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { VoidFuncType } from "utils/types";
 
 const _DashboardFundCard: React.FC<Props> = ({
+  updateItems,
   fund,
   toggleFavorite,
   title = ""
@@ -148,6 +150,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         </TableCardTableRow>
       </TableCardTable>
       <DepositWithdrawButtons
+        onApply={updateItems}
         canWithdraw={fund.personalDetails.canWithdraw}
         canInvest={fund.personalDetails.canInvest}
         broker={""}
@@ -163,6 +166,7 @@ const DashboardFundCard = React.memo(_DashboardFundCard);
 export default DashboardFundCard;
 
 interface Props {
+  updateItems: VoidFuncType;
   fund: FundInvestingDetailsList;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   title?: string;

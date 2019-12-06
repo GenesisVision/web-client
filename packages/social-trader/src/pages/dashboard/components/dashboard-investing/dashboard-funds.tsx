@@ -18,8 +18,13 @@ const _DashboardInvestingFunds: React.FC = () => {
     <DashboardInvestingTable
       getItems={getInvestingFunds(currency)}
       title={t("dashboard-page.investing.funds")}
-      renderBodyCard={(fund: FundInvestingDetailsList) => (
+      renderBodyCard={(
+        fund: FundInvestingDetailsList,
+        updateRow,
+        updateItems
+      ) => (
         <DashboardFundCard
+          updateItems={updateItems}
           title={title}
           fund={fund}
           toggleFavorite={(id: string, isFavorite: boolean) =>
