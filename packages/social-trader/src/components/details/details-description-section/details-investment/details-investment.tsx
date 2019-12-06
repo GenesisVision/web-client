@@ -1,7 +1,7 @@
 import "./details-investment.scss";
 
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { SelectFilterValue } from "components/table/components/filtering/filter.type";
@@ -63,20 +63,18 @@ const _DetailsInvestment: React.FC<Props> = ({
   if (!showInvestment) return null;
   return (
     <DetailsBlock table wide className="details-investment">
-      <div className="details-investment__investment-tabs">
-        <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            visible={haveInvestment}
-            value={TABS.INVESTMENT}
-            label={t(`fund-details-page.description.yourInvestment.${asset}`)}
-          />
-          <GVTab
-            visible={haveEvents}
-            value={TABS.EVENTS}
-            label={t("program-details-page.history.tabs.events")}
-          />
-        </GVTabs>
-      </div>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          visible={haveInvestment}
+          value={TABS.INVESTMENT}
+          label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+        />
+        <GVTab
+          visible={haveEvents}
+          value={TABS.EVENTS}
+          label={t("program-details-page.history.tabs.events")}
+        />
+      </DetailsBlockTabs>
       {tab === TABS.INVESTMENT && (
         <InvestmentContainer
           fees={fees}

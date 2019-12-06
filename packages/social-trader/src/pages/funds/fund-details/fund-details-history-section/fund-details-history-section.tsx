@@ -1,7 +1,7 @@
 import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useTab from "hooks/tab.hook";
@@ -27,27 +27,23 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
 
   return (
     <DetailsBlock table>
-      <div className="details-history__header">
-        <div className="details-history__tabs">
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              value={TABS.STRUCTURE}
-              label={
-                <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.structure")}
-                  labelText={t("fund-details-page.history.tabs.structure")}
-                  className="tooltip__label--cursor-pointer"
-                />
-              }
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={TABS.STRUCTURE}
+          label={
+            <TooltipLabel
+              tooltipContent={t("fund-details-page.tooltip.structure")}
+              labelText={t("fund-details-page.history.tabs.structure")}
+              className="tooltip__label--cursor-pointer"
             />
-            <GVTab
-              value={TABS.REALLOCATE_HISTORY}
-              label={t("fund-details-page.history.tabs.reallocate-history")}
-              count={reallocateCount}
-            />
-          </GVTabs>
-        </div>
-      </div>
+          }
+        />
+        <GVTab
+          value={TABS.REALLOCATE_HISTORY}
+          label={t("fund-details-page.history.tabs.reallocate-history")}
+          count={reallocateCount}
+        />
+      </DetailsBlockTabs>
       <div>
         {tab === TABS.STRUCTURE && <FundStructure />}
         {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}

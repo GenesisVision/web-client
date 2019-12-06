@@ -1,7 +1,7 @@
 import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
 import ProgramOpenPositions from "pages/programs/program-details/program-history-section/program-open-positions/program-open-positions";
@@ -53,28 +53,24 @@ const _FollowDetailsHistorySection: React.FC<Props> = ({
 
   return (
     <DetailsBlock table>
-      <div className="details-history__header">
-        <div className="details-history__tabs">
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              value={TABS.OPEN_POSITIONS}
-              label={t("program-details-page.history.tabs.open-positions")}
-              count={openPositionsCount}
-            />
-            <GVTab
-              value={TABS.TRADES}
-              label={t("program-details-page.history.tabs.trades")}
-              count={tradesCount}
-            />
-            <GVTab
-              value={TABS.SUBSCRIBERS}
-              label={t("program-details-page.history.tabs.subscriptions")}
-              count={subscriptionsCount}
-              visible={isAuthenticated && isSignalProgram && isOwnProgram}
-            />
-          </GVTabs>
-        </div>
-      </div>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={TABS.OPEN_POSITIONS}
+          label={t("program-details-page.history.tabs.open-positions")}
+          count={openPositionsCount}
+        />
+        <GVTab
+          value={TABS.TRADES}
+          label={t("program-details-page.history.tabs.trades")}
+          count={tradesCount}
+        />
+        <GVTab
+          value={TABS.SUBSCRIBERS}
+          label={t("program-details-page.history.tabs.subscriptions")}
+          count={subscriptionsCount}
+          visible={isAuthenticated && isSignalProgram && isOwnProgram}
+        />
+      </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
           getItems={getTrades(id)}

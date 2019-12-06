@@ -1,7 +1,7 @@
 import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import {
   GetItemsFuncActionType,
@@ -65,39 +65,35 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 
   return (
     <DetailsBlock table>
-      <div className="details-history__header">
-        <div className="details-history__tabs">
-          <GVTabs value={tab} onChange={setTab}>
-            <GVTab
-              value={TABS.OPEN_POSITIONS}
-              label={t("program-details-page.history.tabs.open-positions")}
-              count={openPositionsCount}
-            />
-            <GVTab
-              value={TABS.TRADES}
-              label={t("program-details-page.history.tabs.trades")}
-              count={tradesCount}
-            />
-            <GVTab
-              value={TABS.PERIOD_HISTORY}
-              label={t("program-details-page.history.tabs.period-history")}
-              count={periodHistoryCount}
-            />
-            <GVTab
-              value={TABS.SUBSCRIBERS}
-              label={t("program-details-page.history.tabs.subscriptions")}
-              count={subscriptionsCount}
-              visible={isAuthenticated && isOwnProgram}
-            />
-            <GVTab
-              value={TABS.FINANCIAL_STATISTIC}
-              label={t("program-details-page.history.tabs.financial-statistic")}
-              count={financialStatisticCount}
-              visible={isAuthenticated && isOwnProgram}
-            />
-          </GVTabs>
-        </div>
-      </div>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={TABS.OPEN_POSITIONS}
+          label={t("program-details-page.history.tabs.open-positions")}
+          count={openPositionsCount}
+        />
+        <GVTab
+          value={TABS.TRADES}
+          label={t("program-details-page.history.tabs.trades")}
+          count={tradesCount}
+        />
+        <GVTab
+          value={TABS.PERIOD_HISTORY}
+          label={t("program-details-page.history.tabs.period-history")}
+          count={periodHistoryCount}
+        />
+        <GVTab
+          value={TABS.SUBSCRIBERS}
+          label={t("program-details-page.history.tabs.subscriptions")}
+          count={subscriptionsCount}
+          visible={isAuthenticated && isOwnProgram}
+        />
+        <GVTab
+          value={TABS.FINANCIAL_STATISTIC}
+          label={t("program-details-page.history.tabs.financial-statistic")}
+          count={financialStatisticCount}
+          visible={isAuthenticated && isOwnProgram}
+        />
+      </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
           getItems={trades.getItems(programId)}

@@ -1,5 +1,5 @@
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Page from "components/page/page";
 import PortfolioEventsTableModule from "components/portfolio-events-table/portfolio-events-table-module";
@@ -23,20 +23,16 @@ const _PortfolioEventsAllComponent: React.FC = () => {
   return (
     <Page title={t(`dashboard-page.portfolio-events.title`)}>
       <DetailsBlock table>
-        <div className="details-history__header">
-          <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={setTab}>
-              <GVTab
-                value={TABS.INVESTMENT_HISTORY}
-                label={t(`dashboard-page.portfolio-events.investment-history`)}
-              />
-              <GVTab
-                value={TABS.TRADING_HISTORY}
-                label={t(`dashboard-page.portfolio-events.trading-history`)}
-              />
-            </GVTabs>
-          </div>
-        </div>
+        <DetailsBlockTabs value={tab} onChange={setTab}>
+          <GVTab
+            value={TABS.INVESTMENT_HISTORY}
+            label={t(`dashboard-page.portfolio-events.investment-history`)}
+          />
+          <GVTab
+            value={TABS.TRADING_HISTORY}
+            label={t(`dashboard-page.portfolio-events.trading-history`)}
+          />
+        </DetailsBlockTabs>
         {tab === TABS.INVESTMENT_HISTORY && (
           <PortfolioEventsTableModule
             columns={PORTFOLIO_EVENTS_COLUMNS}
