@@ -4,13 +4,15 @@ import {
   PersonalFollowDetailsFull,
   PersonalFundDetails,
   PersonalProgramDetails,
+  PrivateTradingAccountFull,
   ProgramDetailsFull
 } from "gv-api-web";
 
 export type DetailsFullType =
   | FundDetailsFull
   | ProgramDetailsFull
-  | FollowDetailsFull;
+  | FollowDetailsFull
+  | PrivateTradingAccountFull;
 export type PersonalDetailsType =
   | PersonalFundDetails
   | PersonalProgramDetails
