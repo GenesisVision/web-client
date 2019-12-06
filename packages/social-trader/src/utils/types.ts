@@ -137,3 +137,5 @@ export type FeesType = {
 export type TagType =
   | React.ComponentType<{ className?: string; style?: any }>
   | string;
+
+export type VoidFuncType = () => void;
