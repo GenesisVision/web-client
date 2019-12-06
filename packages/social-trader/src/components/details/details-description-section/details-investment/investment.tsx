@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { PROGRAM, STATUS } from "shared/constants/constants";
+import { ASSET, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
 
@@ -64,7 +64,7 @@ const _Investment: React.FC<Props> = ({
             />
           </StatisticItem>
           <StatisticItem
-            condition={asset === PROGRAM}
+            condition={asset === ASSET.PROGRAM}
             accent
             label={
               <TooltipLabel
@@ -88,7 +88,7 @@ const _Investment: React.FC<Props> = ({
               value={`${0}`} // personalDetails.profit
               variant={PROFITABILITY_VARIANT.CHIPS}
             >
-              {roundPercents(0)} // personalDetails.profit
+              {roundPercents(0)}
             </Profitability>
           </StatisticItem>
           <StatisticItem
@@ -222,7 +222,7 @@ const _Investment: React.FC<Props> = ({
 interface Props {
   fees: FeesType;
   updateDescription: () => void;
-  asset: string;
+  asset: ASSET;
   notice?: string;
   id: string;
   assetCurrency: CurrencyEnum;
