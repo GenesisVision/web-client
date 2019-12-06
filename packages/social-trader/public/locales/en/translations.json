@@ -2585,6 +2585,7 @@
       "title": "In requests"
     },
     "trading": {
+      "subscribers-count": "Subs.",
       "title": "Trading",
       "follow-them": "Follow them",
       "actions": {
