@@ -20,19 +20,16 @@ const _DashboardInvestingPrograms: React.FC = () => {
         program: ProgramInvestingDetailsList,
         updateRow,
         updateItems
-      ) => {
-        console.log(updateRow, updateItems);
-        return (
-          <DashboardProgramCard
-            updateItems={updateItems!}
-            title={title}
-            program={program}
-            toggleFavorite={(id: string, isFavorite: boolean) =>
-              dispatch(toggleFavoriteProgramDispatchable(id, isFavorite))
-            }
-          />
-        );
-      }}
+      ) => (
+        <DashboardProgramCard
+          updateItems={updateItems!}
+          title={title}
+          program={program}
+          toggleFavorite={(id: string, isFavorite: boolean) =>
+            dispatch(toggleFavoriteProgramDispatchable(id, isFavorite))
+          }
+        />
+      )}
     />
   );
 };
