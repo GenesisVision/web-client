@@ -204,7 +204,7 @@
   },
   "navigation": {
     "overview": "Overview",
-    "events": "Events",
+    "events": "History",
     "investments": "Investments",
     "trading": "Trading",
     "financial-statistic": "Financial statistic",
@@ -873,7 +873,7 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "My events",
+        "events": "My history",
         "open-positions": "Open positions",
         "subscriptions": "Subscriptions",
         "financial-statistic": "Financial statistic",
@@ -1068,7 +1068,7 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "My events",
+        "events": "My history",
         "open-positions": "Open positions",
         "subscriptions": "Subscriptions",
         "financial-statistic": "Financial statistic",
@@ -2710,7 +2710,7 @@
     "portfolio-events": {
       "investment-history": "Investment history",
       "trading-history": "Trading history",
-      "title": "Events",
+      "title": "History",
       "see-all-button": "See All",
       "table-title": "Operations",
       "balance": "Balance",

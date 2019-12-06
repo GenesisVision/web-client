@@ -4,7 +4,7 @@ export const DASHBOARD_EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${PORTFOLIO_EVENTS_ALL
 
 export const OVERVIEW = "overview";
 export const OVERVIEW_ROUTE = `${DASHBOARD_ROUTE}/${OVERVIEW}`;
-export const EVENTS = "events";
+export const EVENTS = "history";
 export const EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${EVENTS}`;
 export const INVESTMENTS = "investments";
 export const INVESTMENTS_ROUTE = `${DASHBOARD_ROUTE}/${INVESTMENTS}`;
