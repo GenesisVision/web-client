@@ -40,7 +40,10 @@ import {
   subscriptionsTableSelector,
   tradesTableSelector
 } from "./reducers/follow-history.reducer";
-import { dispatchFollowDescription } from "./services/follow-details.service";
+import {
+  dispatchFollowDescription,
+  getFollowHistoryCounts
+} from "./services/follow-details.service";
 
 const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
@@ -102,6 +105,7 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />*/}
       <FollowDetailsStatisticSection />
       <ProgramDetailsHistorySection
+        getHistoryCounts={getFollowHistoryCounts}
         tablesData={tablesData}
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime
