@@ -89,6 +89,8 @@ const _Table: React.FC<ITableProps> = ({
         {view === LIST_VIEW.CARDS && (
           <div className={classNames("table", className)}>
             <TableBodyContainer
+              updateRow={updateRow}
+              updateItems={updateItems}
               loaderData={loaderData}
               isPending={isPending}
               items={items}
