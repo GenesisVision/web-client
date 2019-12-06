@@ -21,16 +21,12 @@ import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 import { formatCurrencyValue } from "utils/formatter";
 
-const _WalletWidget: React.FC<Props> = ({ data, className }) => {
+const _WalletWidget: React.FC<Props> = ({
+  data: { currency, available, invested, trading, total },
+  className
+}) => {
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const {
-    currencyCcy: currency,
-    availableCcy: available,
-    investedCcy: invested,
-    pendingCcy: pending,
-    totalCcy: totalBalance
-  } = data;
   return (
     <>
       <div className={classNames("wallet-widget", className)}>
@@ -46,7 +42,7 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
         <div className="wallet-details">
           <div className="wallet-details__item">
             <StatisticItem label={t("wallet-widget.total-balance")}>
-              {`${formatCurrencyValue(totalBalance, currency)} ${currency}`}
+              {`${formatCurrencyValue(total, currency)} ${currency}`}
             </StatisticItem>
           </div>
           <div className="wallet-details__item">
@@ -61,7 +57,7 @@ const _WalletWidget: React.FC<Props> = ({ data, className }) => {
           </div>
           <div className="wallet-details__item">
             <StatisticItem label={t("wallet-widget.pending")}>
-              {`${formatCurrencyValue(pending, currency)} ${currency}`}
+              {`${formatCurrencyValue(trading, currency)} ${currency}`}
             </StatisticItem>
           </div>
           <div className="wallet-details__item">

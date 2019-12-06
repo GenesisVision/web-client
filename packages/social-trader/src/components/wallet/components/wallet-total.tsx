@@ -3,7 +3,7 @@ import {
   withBlurLoader,
   WithBlurLoaderProps
 } from "decorators/with-blur-loader";
-import { WalletMultiSummary } from "gv-api-web";
+import { WalletSummary } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -23,11 +23,11 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
           <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
         </div>
         <WalletBalanceElements
-          available={wallet.grandTotal.availableCcy}
-          pending={wallet.grandTotal.pendingCcy}
-          total={wallet.grandTotal.totalCcy}
-          invested={wallet.grandTotal.investedCcy}
-          currency={wallet.grandTotal.currencyCcy}
+          available={wallet.grandTotal.available}
+          pending={wallet.grandTotal.trading}
+          total={wallet.grandTotal.total}
+          invested={wallet.grandTotal.invested}
+          currency={wallet.grandTotal.currency}
         />
         <WalletTablesTotal wallets={wallet.wallets} />
       </div>
@@ -36,11 +36,11 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
 };
 
 interface Props {
-  data: WalletMultiSummary;
+  data: WalletSummary;
 }
 
 const WalletTotal = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<WalletMultiSummary>>
+  React.ComponentType<Props & WithBlurLoaderProps<WalletSummary>>
 >(
   withBlurLoader,
   React.memo

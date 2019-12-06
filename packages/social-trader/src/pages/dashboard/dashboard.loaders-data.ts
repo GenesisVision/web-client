@@ -203,7 +203,7 @@ export const getTotalLoaderData = (): TDashboardTotal => ({
   total: getRandomInteger(-10000, 10000),
   trading: getRandomInteger(-10000, 10000),
   invested: getRandomInteger(-10000, 10000),
-  available: getRandomInteger(-10000, 10000),
+  wallets: getRandomInteger(-10000, 10000),
   profits: {
     day: {
       profit: getRandomInteger(-10000, 10000),

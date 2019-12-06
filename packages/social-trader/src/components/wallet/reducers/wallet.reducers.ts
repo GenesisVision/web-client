@@ -1,4 +1,4 @@
-import { WalletMultiSummary } from "gv-api-web";
+import { WalletSummary } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -11,11 +11,11 @@ import walletLastUpdateReducer, {
 } from "./wallet-last-update";
 
 export type WalletState = Readonly<{
-  info: IApiState<WalletMultiSummary>;
+  info: IApiState<WalletSummary>;
   lastUpdate: WalletLastUpdateState;
 }>;
 
-export const walletSelector = apiSelector<WalletMultiSummary>(
+export const walletSelector = apiSelector<WalletSummary>(
   state => state.wallet.info
 );
 
@@ -31,7 +31,7 @@ export const grandTotalSelector = apiFieldSelector(
 );
 
 export const walletReducer = combineReducers<WalletState>({
-  info: apiReducerFactory<WalletMultiSummary>({
+  info: apiReducerFactory<WalletSummary>({
     apiType: WALLET_BALANCE
   }),
   lastUpdate: walletLastUpdateReducer

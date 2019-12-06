@@ -19,7 +19,7 @@ import { TDashboardTotal } from "../../dashboard.types";
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
-  data: { available, invested, trading, profits, total }
+  data: { wallets, invested, trading, profits, total }
 }) => {
   const [t] = useTranslation();
   const hasMoney = total > 0;
@@ -54,13 +54,13 @@ const _DashboardTotal: React.FC<Props> = ({
           currency={currency}
         />
         <PieContainer
-          value={getPercentageValue(available, total)}
-          label={`${getPercentageValue(available, total)} %`}
+          value={getPercentageValue(wallets, total)}
+          label={`${getPercentageValue(wallets, total)} %`}
           color={$pieAvailableColor}
         />
         <DashboardValueItem
           label={t("dashboard-page.total.available")}
-          value={available}
+          value={wallets}
           currency={currency}
         />
         {!hasMoney && (
