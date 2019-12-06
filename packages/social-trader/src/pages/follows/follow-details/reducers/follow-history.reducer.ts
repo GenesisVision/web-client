@@ -53,7 +53,7 @@ export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
   TradesViewModel,
   TradesViewModel
->(openPositionsSelector, "trades");
+>(openPositionsSelector);
 
 export const openPositionsReducer = tableReducerFactory<TradesViewModel>({
   type: FOLLOW_OPEN_POSITIONS,
@@ -67,7 +67,7 @@ export const tradesTableSelector = tableSelectorCreator<
   RootState,
   TradesViewModel,
   TradesViewModel
->(tradesSelector, "trades");
+>(tradesSelector);
 
 export const tradesReducer = tableReducerFactory<TradesViewModel>({
   type: FOLLOW_TRADES,
