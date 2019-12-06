@@ -6,7 +6,7 @@ import Popover, {
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import { STATUS } from "shared/constants/constants";
+import { ASSET, STATUS } from "shared/constants/constants";
 
 import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequestsContainer from "./asset-status-requests.container";
@@ -65,8 +65,8 @@ interface Props {
   className?: string;
   status: STATUS;
   id: string;
-  asset: any;
-  onCancel: any;
+  asset: ASSET;
+  onCancel: () => void;
 }
 
 const AssetStatus = React.memo(_AssetStatus);
