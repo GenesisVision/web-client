@@ -37,9 +37,10 @@ import { VoidFuncType } from "utils/types";
 import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCard: React.FC<{
+  ownAsset?: boolean;
   updateItems: VoidFuncType;
   asset: DashboardTradingAsset;
-}> = ({ asset, updateItems }) => {
+}> = ({ asset, updateItems, ownAsset }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const detailsLink = {
@@ -61,6 +62,7 @@ const _DashboardPublicCard: React.FC<{
     clearAnchor: (event: TEvent) => void;
   }) => (
     <DashboardPublicCardActions
+      canEdit={!!ownAsset}
       assetType={asset.assetType}
       canMakeProgram={asset.actions.canMakeProgramFromSignalProvider}
       anchor={anchor}
@@ -136,7 +138,7 @@ const _DashboardPublicCard: React.FC<{
       </TableCardTable>
       <DepositWithdrawButtons
         onApply={updateItems}
-        ownAsset
+        ownAsset={ownAsset}
         canWithdraw={asset.actions.canAddRequestWithdraw}
         canInvest={asset.actions.canAddRequestInvest}
         broker={asset.broker && asset.broker.type}
@@ -151,6 +153,7 @@ const _DashboardPublicCard: React.FC<{
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
 > = ({
+  canEdit,
   assetType,
   canMakeProgram,
   anchor,
@@ -194,11 +197,13 @@ const _DashboardPublicCardActions: React.FC<
             </GVButton>
           </Link>
         )}
-        <Link to={settingsLink}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("dashboard-page.trading.actions.settings")}
-          </GVButton>
-        </Link>
+        {canEdit && (
+          <Link to={settingsLink}>
+            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
+              {t("dashboard-page.trading.actions.settings")}
+            </GVButton>
+          </Link>
+        )}
         {showTerminal && (
           <Link to={terminalLink}>
             <GVButton variant="text" color="secondary" onClick={clearAnchor}>
@@ -216,6 +221,7 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
+  canEdit: boolean;
   assetType: AssetType;
   canMakeProgram: boolean;
   clearAnchor: (event: TEvent) => void;
