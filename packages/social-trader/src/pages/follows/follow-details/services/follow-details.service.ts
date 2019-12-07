@@ -10,7 +10,6 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
