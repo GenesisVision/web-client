@@ -11,6 +11,7 @@ import {
 } from "./services/unfollow.service";
 
 const _UnfollowContainer: React.FC<Props> = ({
+  tradingAccountId,
   isExternal,
   open,
   onClose,
@@ -23,11 +24,10 @@ const _UnfollowContainer: React.FC<Props> = ({
     middleware: [onClose, onApply]
   });
   const handleSubmit = useCallback(
-    (values: IProgramUnfollowFormValues) => {
-      const model = { mode: values.mode, tradingAccountId: id };
-      sendRequest({ id, model });
+    ({ mode }: IProgramUnfollowFormValues) => {
+      sendRequest({ id, model: { mode, tradingAccountId } });
     },
-    [id]
+    [id, tradingAccountId]
   );
   return (
     <Dialog open={open} onClose={onClose}>
@@ -40,6 +40,7 @@ const getDetachMethod = (isExternal: boolean) =>
   isExternal ? detachToSignalExternal : detachToSignalInternal;
 
 interface Props extends IDialogProps {
+  tradingAccountId: string;
   isExternal: boolean;
   id: string;
   onApply: () => void;
