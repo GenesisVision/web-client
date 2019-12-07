@@ -17,7 +17,6 @@ const _DetailsDescription: React.FC<Props> = ({
 }) => {
   const logo =
     "logo" in description ? description.logo : description.brokerDetails.logo;
-  const title = "title" in description ? description.title : description.login;
   return (
     <div className="asset-details-description__main">
       <DetailsLimitsAvatar
@@ -26,7 +25,7 @@ const _DetailsDescription: React.FC<Props> = ({
         levelProgress={
           "levelProgress" in description ? description.levelProgress : undefined
         }
-        title={title}
+        title={description.title}
         color={"color" in description ? description.color : undefined}
         totalAvailableInvestment={
           "totalAvailableInvestment" in description
@@ -36,10 +35,10 @@ const _DetailsDescription: React.FC<Props> = ({
         currency={"level" in description ? description.currency : undefined}
       />
       <DetailsInfo
-        title={title}
+        title={description.title}
         to={
           "owner" in description
-            ? managerToPathCreator(description.owner.url, title)
+            ? managerToPathCreator(description.owner.url, description.title)
             : undefined
         }
         username={

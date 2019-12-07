@@ -26,16 +26,16 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
     selectedCurrencies,
     selectCurrencies
   } = useChartStateValues(DETAILS_CHART_TABS.BALANCE);
-  const balanceChart = useSelector(balanceChartSelector);
+  const chart = useSelector(balanceChartSelector);
   return (
     <BalanceChartElements
-      condition={!!balanceChart && !!selectedCurrencies.length}
+      condition={!!chart && !!selectedCurrencies.length}
       loader={<ChartValuePeriodLoader />}
       renderBalanceChart={renderBalanceChart}
       period={period}
       setPeriod={setPeriod}
       selectedCurrencies={selectedCurrencies}
-      balanceChart={balanceChart!}
+      balanceChart={chart!}
       addCurrency={addCurrency}
       removeCurrency={removeCurrency}
       changeCurrency={changeCurrency}

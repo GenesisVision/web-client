@@ -10,6 +10,8 @@ import DetailsStatistics, {
 } from "./details-statistics/details-statistics";
 
 const _DetailsStatisticSection: React.FC<Props> = ({
+  renderAbsoluteProfitChart,
+  absoluteProfitChartSelector,
   loaderData,
   useChartStateValues,
   balanceChartSelector,
@@ -29,6 +31,8 @@ const _DetailsStatisticSection: React.FC<Props> = ({
       renderDetailsStatisticsElements={renderDetailsStatisticsElements}
     />
     <DetailsChart
+      renderAbsoluteProfitChart={renderAbsoluteProfitChart}
+      absoluteProfitChartSelector={absoluteProfitChartSelector}
       loaderData={loaderData}
       useChartStateValues={useChartStateValues}
       useChartPeriod={useChartPeriod}
