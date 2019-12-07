@@ -126,7 +126,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         personalDetails={
           description.personalDetails as InvestmentBlockDetailsType
         }
-        WithdrawContainer={ProgramWithdrawDialog}
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection

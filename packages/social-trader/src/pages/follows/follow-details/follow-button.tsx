@@ -19,7 +19,6 @@ const _FollowButton: React.FC<Props> = ({
   isExternal,
   broker,
   hasSignalAccount,
-  hasActiveSubscription,
   id,
   title,
   currency
@@ -42,7 +41,6 @@ const _FollowButton: React.FC<Props> = ({
       </GVButton>
       <FollowModuleContainer
         hasSignalAccount={hasSignalAccount}
-        hasActiveSubscription={hasActiveSubscription}
         leverage={leverage}
         isExternal={isExternal}
         brokerId={brokerId}
@@ -68,7 +66,6 @@ const _FollowButton: React.FC<Props> = ({
 
 interface Props {
   hasSignalAccount: boolean;
-  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;

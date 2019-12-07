@@ -34,9 +34,7 @@ const _FollowForm: React.FC<Props> = ({
   id,
   wallets,
   currency,
-  signalSubscription,
   hasSignalAccount,
-  hasActiveSubscription,
   minDeposit,
   rate = 1,
   submitMethod
@@ -101,9 +99,7 @@ const _FollowForm: React.FC<Props> = ({
           : "select-account"
         : "create-account"
       : "params";
-  const paramsSubscription = hasActiveSubscription
-    ? signalSubscription
-    : undefined;
+
   return (
     <>
       <FollowTop step={adaptStep} />
@@ -125,8 +121,6 @@ const _FollowForm: React.FC<Props> = ({
         <FollowParams
           rate={rate}
           currency={currency}
-          isShowBack={!hasSignalAccount}
-          paramsSubscription={paramsSubscription}
           onSubmit={submit}
           onPrevStep={returnToCreateCopytradingAccount}
         />
@@ -142,12 +136,10 @@ enum TABS {
 
 interface Props {
   hasSignalAccount: boolean;
-  hasActiveSubscription: boolean;
   isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
-  signalSubscription?: SignalSubscription;
   submitMethod: (
     programId: string,
     requestParams: AttachToSignalProvider,

@@ -40,7 +40,6 @@ const _FollowParams: React.FC<
   setFieldValue,
   isSubmitting,
   onPrevStep,
-  isShowBack,
   isValid,
   values,
   handleSubmit
@@ -121,7 +120,7 @@ const _FollowParams: React.FC<
           />
         </DialogField>
         <DialogButtons>
-          {isShowBack && (
+          {onPrevStep && (
             <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
               {t("follow-program.params.back")}
             </GVButton>
@@ -183,13 +182,12 @@ export interface FollowParamsFormValues {
 interface OwnProps {
   rate: number;
   currency: CurrencyEnum;
-  isShowBack: boolean;
   paramsSubscription?: SignalSubscription;
   onSubmit: (
     values: FollowParamsFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
-  onPrevStep(): void;
+  onPrevStep?: () => void;
 }
 
 interface Props extends OwnProps, WithTranslation {}

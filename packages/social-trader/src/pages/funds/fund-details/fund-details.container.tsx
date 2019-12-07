@@ -88,7 +88,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         personalDetails={
           description.personalDetails as InvestmentBlockDetailsType
         }
-        WithdrawContainer={FundWithdrawDialog}
       />
       <FundDetailsStatisticSection />
       <FundDetailsHistorySection id={description.id} />

@@ -42,7 +42,6 @@ const _SignalProviderButtons: React.FC<Props> = ({
           canSubscribeToInternalSignal) && (
           <FollowButton
             hasSignalAccount={hasSignalAccount}
-            hasActiveSubscription={hasActiveSubscription}
             leverage={leverage}
             brokerId={brokerId}
             isExternal={isExternal}

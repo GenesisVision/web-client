@@ -10,9 +10,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
   isExternal,
   broker,
   id,
-  signalSubscription,
   hasSignalAccount,
-  hasActiveSubscription,
   currency,
   onClose,
   onApply,
@@ -22,14 +20,12 @@ const _FollowModuleContainer: React.FC<Props> = ({
     <Dialog open={open} onClose={onClose}>
       <FollowPopupFormContainer
         hasSignalAccount={hasSignalAccount}
-        hasActiveSubscription={hasActiveSubscription}
         onApply={onApply}
         onClose={onClose}
         broker={broker}
         leverage={leverage}
         brokerId={brokerId}
         isExternal={isExternal}
-        signalSubscription={signalSubscription}
         id={id}
         currency={currency}
       />
@@ -39,7 +35,6 @@ const _FollowModuleContainer: React.FC<Props> = ({
 
 interface Props {
   hasSignalAccount: boolean;
-  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
@@ -49,7 +44,6 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   id: string;
-  signalSubscription?: SignalSubscription;
 }
 
 const FollowModuleContainer = React.memo(_FollowModuleContainer);
