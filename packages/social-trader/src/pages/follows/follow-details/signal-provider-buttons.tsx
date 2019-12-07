@@ -1,4 +1,8 @@
-import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
+import {
+  AssetGuestActions,
+  BrokerTradeServerType,
+  SignalSubscription
+} from "gv-api-web";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
 
@@ -6,6 +10,11 @@ import FollowButton from "./follow-button";
 import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
+  guestActions: {
+    canSubscribeToExternalSignalCommonAccount,
+    canSubscribeToExternalSignalPrivateAccount,
+    canSubscribeToInternalSignal
+  },
   leverage,
   brokerId,
   isExternal,
@@ -24,23 +33,28 @@ const _SignalProviderButtons: React.FC<Props> = ({
       {hasActiveSubscription ? (
         <UnFollowButton id={id} isExternal={isExternal} />
       ) : (
-        <FollowButton
-          hasSignalAccount={hasSignalAccount}
-          hasActiveSubscription={hasActiveSubscription}
-          leverage={leverage}
-          brokerId={brokerId}
-          isExternal={isExternal}
-          broker={broker}
-          id={id}
-          title={title}
-          currency={currency}
-        />
+        (canSubscribeToExternalSignalCommonAccount ||
+          canSubscribeToExternalSignalPrivateAccount ||
+          canSubscribeToInternalSignal) && (
+          <FollowButton
+            hasSignalAccount={hasSignalAccount}
+            hasActiveSubscription={hasActiveSubscription}
+            leverage={leverage}
+            brokerId={brokerId}
+            isExternal={isExternal}
+            broker={broker}
+            id={id}
+            title={title}
+            currency={currency}
+          />
+        )
       )}
     </div>
   );
 };
 
 interface Props {
+  guestActions: AssetGuestActions;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
