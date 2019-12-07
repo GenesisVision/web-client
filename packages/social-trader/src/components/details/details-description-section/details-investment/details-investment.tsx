@@ -2,10 +2,13 @@ import "./details-investment.scss";
 
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
+import Investment from "components/details/details-description-section/details-investment/investment";
+import Subscription from "components/details/details-description-section/details-investment/subscription";
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import { TableSelectorType } from "components/table/components/table.types";
+import { PersonalFollowDetailsFull } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import {
   EVENT_LOCATION,
@@ -20,11 +23,12 @@ import { RootState } from "reducers/root-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, FeesType } from "utils/types";
 
-import { InvestmentDetails } from "./details-investment.helpers";
-import InvestmentContainer, {
+import {
   haveActiveInvestment,
-  haveSubscription
-} from "./investment-container";
+  haveSubscription,
+  InvestmentBlockDetailsType,
+  InvestmentType
+} from "./details-investment.helpers";
 
 const _DetailsInvestment: React.FC<Props> = ({
   fees,
@@ -35,9 +39,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   currency,
   dispatchDescription,
   id,
-  personalDetails,
-  WithdrawContainer,
-  ReinvestingWidget
+  personalDetails
 }) => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
@@ -52,20 +54,27 @@ const _DetailsInvestment: React.FC<Props> = ({
   useEffect(() => {
     isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
   }, [isAuthenticated, events]);
-  const haveInvestment =
-    asset !== ASSET.FOLLOW &&
-    (haveActiveInvestment(personalDetails) ||
-      haveSubscription(personalDetails));
-  const showInvestment = haveEvents || haveInvestment;
+
+  const showInvestment = haveActiveInvestment(personalDetails);
+  const showSubscription = haveSubscription(personalDetails);
+
   useEffect(() => {
-    if (haveEvents && !haveInvestment) setTab(null, TABS.EVENTS);
-  }, [haveInvestment, haveEvents]);
-  if (!showInvestment) return null;
+    if (haveEvents && !showInvestment && !showSubscription)
+      setTab(null, TABS.EVENTS);
+    if (showSubscription) setTab(null, TABS.SUBSCRIPTION);
+  }, [showInvestment, showSubscription, haveEvents]);
+
+  if (!haveEvents && !showInvestment && !showSubscription) return null;
   return (
     <DetailsBlock table wide className="details-investment">
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
-          visible={haveInvestment}
+          visible={showSubscription}
+          value={TABS.SUBSCRIPTION}
+          label={t("follow-details-page.current-investment.title")}
+        />
+        <GVTab
+          visible={showInvestment}
           value={TABS.INVESTMENT}
           label={t(`fund-details-page.description.yourInvestment.${asset}`)}
         />
@@ -75,17 +84,23 @@ const _DetailsInvestment: React.FC<Props> = ({
           label={t("program-details-page.history.tabs.events")}
         />
       </DetailsBlockTabs>
-      {tab === TABS.INVESTMENT && (
-        <InvestmentContainer
-          fees={fees}
+      {tab === TABS.SUBSCRIPTION && showSubscription && (
+        <Subscription
           updateDescription={dispatchDescription}
-          asset={asset}
-          notice={notice}
           id={id}
           assetCurrency={currency}
-          personalDetails={personalDetails}
-          WithdrawContainer={WithdrawContainer}
-          ReinvestingWidget={ReinvestingWidget}
+          personalDetails={personalDetails as PersonalFollowDetailsFull}
+        />
+      )}
+      {tab === TABS.INVESTMENT && showInvestment && (
+        <Investment
+          fees={fees}
+          updateDescription={dispatchDescription}
+          id={id}
+          assetCurrency={currency}
+          asset={asset}
+          notice={notice}
+          personalDetails={personalDetails as InvestmentType}
         />
       )}
       {tab === TABS.EVENTS && (
@@ -103,6 +118,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 };
 
 enum TABS {
+  SUBSCRIPTION = "SUBSCRIPTION",
   INVESTMENT = "INVESTMENT",
   EVENTS = "EVENTS"
 }
@@ -115,9 +131,7 @@ interface Props {
   selector: TableSelectorType;
   currency: CurrencyEnum;
   id: string;
-  personalDetails: InvestmentDetails;
-  WithdrawContainer?: React.ComponentType<any>;
-  ReinvestingWidget?: React.ComponentType<any>;
+  personalDetails: InvestmentBlockDetailsType;
 }
 
 const DetailsInvestment = React.memo(_DetailsInvestment);
