@@ -27,6 +27,7 @@ import {
   fetchLevelParametersAction,
   fetchOpenPositionsAction,
   fetchPeriodHistoryAction,
+  fetchProgramAbsoluteProfitChartAction,
   fetchProgramBalanceChartAction,
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction,
@@ -224,6 +225,15 @@ export const getProfitChart: TGetChartFunc = ({
   currencies
 }) => async dispatch =>
   await dispatch(fetchProgramProfitChartAction(id, period, currencies));
+
+export const getAbsoluteProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => async dispatch =>
+  await dispatch(
+    fetchProgramAbsoluteProfitChartAction(id, period, currencies[0])
+  );
 
 export const getBalanceChart: TGetChartFunc = ({
   id,
