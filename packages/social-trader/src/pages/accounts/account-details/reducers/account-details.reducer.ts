@@ -1,5 +1,8 @@
 import { StatisticCurrencyState } from "components/details/reducers/statistic-currency.reducer";
 import { StatisticPeriodState } from "components/details/reducers/statistic-period.reducer";
+import accountAbsoluteProfitChartReducer, {
+  AccountAbsoluteProfitChartState
+} from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
 import statisticCurrencyReducer from "pages/accounts/account-details/reducers/statistic-currency.reducer";
 import statisticPeriodReducer from "pages/accounts/account-details/reducers/statistic-period.reducer";
 import clearableReducer from "reducers/clearable.reducer";
@@ -23,6 +26,7 @@ type AccountDetailsDataType = Readonly<{
   id: AccountIdState;
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
+  absoluteProfitChart: AccountAbsoluteProfitChartState;
   profitChart: AccountProfitChartState;
   balanceChart: AccountBalanceChartState;
   description: AccountDescriptionState;
@@ -37,6 +41,7 @@ const accountDetailsReducer = clearableReducer(
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
     description: accountDescriptionReducer,
+    absoluteProfitChart: accountAbsoluteProfitChartReducer,
     profitChart: accountProfitChartReducer,
     balanceChart: accountBalanceChartReducer,
     accountHistory: accountHistoryReducer

@@ -1,6 +1,8 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import { accountAbsoluteProfitChartSelector } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
+import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
 import ProgramBalanceChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-balance-chart-section/program-balance-chart";
 import ProgramProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import * as React from "react";
@@ -26,6 +28,7 @@ const _AccountDetailsStatisticSection: React.FC = () => {
   const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
     <DetailsStatisticSection
+      absoluteProfitChartSelector={accountAbsoluteProfitChartSelector}
       balanceChartSelector={accountBalanceChartSelector}
       profitChartSelector={accountProfitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
@@ -51,6 +54,13 @@ const _AccountDetailsStatisticSection: React.FC = () => {
       )}
       renderProfitChart={({ profitChart, chartCurrencies }) => (
         <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
+      )}
+      renderAbsoluteProfitChart={({ color, currency, chart }) => (
+        <ProgramAbsoluteProfitChart
+          color={color}
+          chart={chart}
+          currency={currency}
+        />
       )}
       renderDetailsStatisticsElements={({ period, statisticData }) => (
         <AccountDetailsStatisticsElements

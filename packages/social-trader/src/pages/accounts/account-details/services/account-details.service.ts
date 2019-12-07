@@ -12,6 +12,7 @@ import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {
+  fetchAccountAbsoluteProfitChartAction,
   fetchAccountBalanceChartAction,
   fetchAccountDescriptionAction,
   fetchAccountProfitChartAction,
@@ -114,6 +115,15 @@ export const getProfitChart: TGetChartFunc = ({
   currencies
 }) => async dispatch =>
   await dispatch(fetchAccountProfitChartAction(id, period, currencies));
+
+export const getAbsoluteProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => async dispatch =>
+  await dispatch(
+    fetchAccountAbsoluteProfitChartAction(id, period, currencies[0])
+  );
 
 export const getBalanceChart: TGetChartFunc = ({
   id,

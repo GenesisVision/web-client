@@ -10,12 +10,14 @@ import {
   CancelablePromise,
   TradesViewModel
 } from "gv-api-web";
+import { AccountAbsoluteProfitChartDataType } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
 import accountsApi from "services/api-client/accounts-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
   ACCOUNT_OPEN_POSITIONS,
   ACCOUNT_TRADES,
+  FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
   FETCH_ACCOUNT_BALANCE_CHART,
   FETCH_ACCOUNT_DESCRIPTION,
   FETCH_ACCOUNT_PROFIT_CHART,
@@ -51,6 +53,19 @@ export const fetchAccountProfitChartAction = (
     dateFrom: period.start,
     dateTo: period.end,
     currencies
+  })
+});
+
+export const fetchAccountAbsoluteProfitChartAction = (
+  id: string,
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
+): ApiAction<AccountAbsoluteProfitChartDataType> => ({
+  type: FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
+  payload: accountsApi.getAbsoluteProfitChart(id, {
+    dateFrom: period.start,
+    dateTo: period.end,
+    currency
   })
 });
 
