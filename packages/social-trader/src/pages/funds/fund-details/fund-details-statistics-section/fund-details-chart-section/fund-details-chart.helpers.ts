@@ -4,6 +4,7 @@ import {
   useChartStateDataCreator,
   useFundChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
+import { fundAbsoluteProfitChartSelector } from "pages/funds/fund-details/reducers/absolute-profit-chart.reducer";
 
 import {
   statisticCurrencyAction,
@@ -15,6 +16,7 @@ import { fundProfitChartSelector } from "../../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../../reducers/statistic-currency.reducer";
 import { statisticPeriodSelector } from "../../reducers/statistic-period.reducer";
 import {
+  getAbsoluteProfitChart,
   getBalanceChart,
   getProfitChart
 } from "../../services/fund-details.service";
@@ -26,9 +28,11 @@ export const useFundChartStateData = (view: DETAILS_CHART_TABS) =>
     idSelector: fundIdSelector,
     statisticPeriodSelector,
     statisticCurrencySelector,
+    absoluteProfitChartSelector: fundAbsoluteProfitChartSelector,
     profitChartSelector: fundProfitChartSelector,
     balanceChartSelector: fundBalanceChartSelector,
     getBalanceChart,
+    getAbsoluteProfitChart,
     getProfitChart
   });
 

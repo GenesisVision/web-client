@@ -27,6 +27,7 @@ import {
 } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
+import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
@@ -101,13 +102,17 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
       </div>
     </Popover>
   );
-
+  const detailsLink = {
+    pathname: composeAccountDetailsUrl(asset.id),
+    state: `/ ${title}`
+  };
   return (
     <TableCard
+      detailsUrl={detailsLink}
       assetId={asset.id}
       profit={asset.statistic.profit}
       chart={asset.statistic.chart}
-      title={asset.accountInfo.login}
+      title={asset.accountInfo.title}
       logo={asset.broker.logo}
       renderActions={renderActions}
     >

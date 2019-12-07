@@ -10,10 +10,12 @@ import {
   FundDetailsFull,
   ItemsViewModelReallocationModel
 } from "gv-api-web";
+import { FundAbsoluteProfitChartDataType } from "pages/funds/fund-details/reducers/absolute-profit-chart.reducer";
 import fundsApi from "services/api-client/funds-api";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
+  FETCH_FUND_ABSOLUTE_PROFIT_CHART,
   FETCH_FUND_BALANCE_CHART,
   FETCH_FUND_DESCRIPTION,
   FETCH_FUND_PROFIT_CHART,
@@ -35,6 +37,19 @@ export const fetchFundProfitChartAction = (
     dateFrom: period.start,
     dateTo: period.end,
     currencies
+  })
+});
+
+export const fetchFundAbsoluteProfitChartAction = (
+  id: string,
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
+): ApiAction<FundAbsoluteProfitChartDataType> => ({
+  type: FETCH_FUND_ABSOLUTE_PROFIT_CHART,
+  payload: fundsApi.getFundAbsoluteProfitChart(id, {
+    dateFrom: period.start,
+    dateTo: period.end,
+    currency
   })
 });
 

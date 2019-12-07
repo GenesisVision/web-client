@@ -16,12 +16,13 @@ import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import brokersApi from "services/api-client/brokers-api";
 import programsApi from "services/api-client/programs-api";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import authService from "services/auth-service";
+import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {
   fetchEventsAction,
+  fetchFollowAbsoluteProfitChartAction,
   fetchFollowBalanceChartAction,
   fetchFollowDescriptionAction,
   fetchFollowProfitChartAction,
@@ -205,6 +206,15 @@ export const getProfitChart: TGetChartFunc = ({
   currencies
 }) => async dispatch =>
   await dispatch(fetchFollowProfitChartAction(id, period, currencies));
+
+export const getAbsoluteProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => async dispatch =>
+  await dispatch(
+    fetchFollowAbsoluteProfitChartAction(id, period, currencies[0])
+  );
 
 export const getBalanceChart: TGetChartFunc = ({
   id,

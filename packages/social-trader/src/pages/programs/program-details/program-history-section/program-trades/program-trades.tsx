@@ -31,7 +31,7 @@ const _ProgramTrades: React.FC<Props> = ({
   const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
   const {
     itemsData: { data }
-  } = useSelector(tradesSelector);
+  } = useSelector(dataSelector);
   const delay = data ? data.tradesDelay : "None";
 
   return (

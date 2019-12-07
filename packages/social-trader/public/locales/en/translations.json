@@ -656,7 +656,8 @@
       "value": "Value",
       "heading": "Chart",
       "tabs": {
-        "profit": "Profit",
+        "absolute-profit": "Profit (Abs)",
+        "profit": "Profit (%)",
         "balance": "Balance"
       }
     }
@@ -961,6 +962,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "creation-date": "Creation date",
       "currency": "Currency",
       "broker": "Broker",
       "leverage": "Leverage",

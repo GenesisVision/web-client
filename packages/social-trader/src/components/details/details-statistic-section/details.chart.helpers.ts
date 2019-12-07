@@ -1,6 +1,9 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { ISelectChangeEvent } from "components/select/select";
 import {
+  AbsoluteProfitChart,
+  AccountChartStatistic,
+  AccountProfitPercentCharts,
   BalanceChartPoint,
   FundBalanceChart,
   FundChartStatistic,
@@ -9,7 +12,8 @@ import {
   ProgramBalanceChart,
   ProgramChartStatistic,
   ProgramProfitPercentCharts,
-  SimpleChart
+  SimpleChart,
+  SimpleChartPoint
 } from "gv-api-web";
 import {
   TAddChartCurrency,
@@ -44,6 +48,10 @@ export type TBalanceChartSelector = (
 export type TProfitChartSelector = (
   state: RootState
 ) => TSelectorData<ProfitChartDataType>;
+
+export type TAbsoluteProfitChartSelector = (
+  state: RootState
+) => TSelectorData<AbsoluteProfitChartDataType>;
 
 export type TUseChartStateValuesOutput = {
   selectedCurrencies: TChartCurrency[];
@@ -116,10 +124,18 @@ export interface TGetChartArgs {
 
 export type ProfitChartType =
   | FundProfitPercentCharts
-  | ProgramProfitPercentCharts;
+  | ProgramProfitPercentCharts
+  | AccountProfitPercentCharts;
+
+export type AbsoluteProfitChartType = AbsoluteProfitChart;
 export type ProfitChartDataType = ProfitChartType;
-export type StatisticDataType = ProgramChartStatistic | FundChartStatistic;
+export type AbsoluteProfitChartDataType = AbsoluteProfitChartType;
+export type StatisticDataType =
+  | ProgramChartStatistic
+  | FundChartStatistic
+  | AccountChartStatistic;
 export type ChartsDataType = Array<SimpleChart>;
+export type ChartDataType = Array<SimpleChartPoint>;
 
 export type BalanceChartElementType = Array<BalanceChartPoint>;
 export type BalanceChartType = FundBalanceChart | ProgramBalanceChart;
@@ -151,6 +167,7 @@ export type TGetChartFunc = (
 type TUseFundChartStateDataMethods = {
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
   platformCurrencies: TChartCurrency[];
+  absoluteProfitChart?: AbsoluteProfitChartDataType;
   profitChart?: ProfitChartDataType;
   balanceChart?: BalanceChartType;
   selectedCurrencies: TChartCurrency[];
@@ -161,22 +178,28 @@ export type TUseFundChartStateDataCreator = (props: {
   view: DETAILS_CHART_TABS;
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
   profitChartSelector: (state: RootState) => TSelectorData<ProfitChartDataType>;
+  absoluteProfitChartSelector: (
+    state: RootState
+  ) => TSelectorData<AbsoluteProfitChartDataType>;
   balanceChartSelector: (state: RootState) => TSelectorData<BalanceChartType>;
   statisticCurrencySelector: (state: RootState) => CurrencyEnum;
   idSelector: (state: RootState) => string;
   statisticPeriodSelector: (state: RootState) => ChartDefaultPeriod;
   getBalanceChart: TGetChartFunc;
   getProfitChart: TGetChartFunc;
+  getAbsoluteProfitChart: TGetChartFunc;
 }) => TUseFundChartStateDataMethods;
 export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   view,
   statisticCurrencyAction,
+  absoluteProfitChartSelector,
   profitChartSelector,
   balanceChartSelector,
   statisticCurrencySelector,
   idSelector,
   statisticPeriodSelector,
   getBalanceChart,
+  getAbsoluteProfitChart,
   getProfitChart
 }) => {
   const dispatch = useDispatch();
@@ -184,6 +207,7 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   const period = useSelector(statisticPeriodSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
   const platformCurrencies = useSelector(platformChartCurrenciesSelector);
+  const absoluteProfitChart = useSelector(absoluteProfitChartSelector);
   const profitChart = useSelector(profitChartSelector);
   const balanceChart = useSelector(balanceChartSelector);
   const [selectedCurrencies, setSelectedCurrencies] = useState<
@@ -203,16 +227,17 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
       period,
       currencies
     };
+    dispatch(getProfitChart(opts));
     switch (view) {
-      case DETAILS_CHART_TABS.PROFIT:
-        dispatch(getProfitChart(opts));
+      case DETAILS_CHART_TABS.ABSOLUTE_PROFIT:
+        dispatch(getAbsoluteProfitChart(opts));
         break;
       case DETAILS_CHART_TABS.BALANCE:
-        dispatch(getProfitChart(opts));
         dispatch(getBalanceChart(opts));
     }
   }, [period, id, selectedCurrencies]);
   return {
+    absoluteProfitChart,
     statisticCurrencyAction,
     platformCurrencies,
     profitChart,

@@ -7,6 +7,7 @@ import * as React from "react";
 import { DetailsFullType, PersonalDetailsType } from "../../details.types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  showSettings,
   notificationsUrl,
   settingsUrl,
   personalDetails,
@@ -18,6 +19,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        showSettings={showSettings}
         personalDetails={personalDetails}
         description={description}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
@@ -25,21 +27,24 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         settingsUrl={settingsUrl}
       />
       {PerformanceData && <PerformanceData />}
-      <div className="asset-details-description__controls">
-        <Controls />
-      </div>
+      {Controls && (
+        <div className="asset-details-description__controls">
+          <Controls />
+        </div>
+      )}
     </div>
   );
 };
 
 interface Props {
-  notificationsUrl: ToType;
+  showSettings?: boolean;
+  notificationsUrl?: ToType;
   settingsUrl: ToType;
-  personalDetails: PersonalDetailsType;
+  personalDetails?: PersonalDetailsType;
   description: DetailsFullType;
-  AssetDetailsExtraBlock: React.ComponentType<any>;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
-  Controls: React.ComponentType<any>;
+  Controls?: React.ComponentType<any>;
 }
 
 const DetailsDescriptionSection = React.memo(_DetailsDescriptionSection);

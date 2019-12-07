@@ -10,15 +10,7 @@ import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
 
-const _DetailsLimitsAvatar: React.FC<{
-  logo: string;
-  title: string;
-  color: string;
-  level?: number;
-  levelProgress?: number;
-  totalAvailableInvestment?: number;
-  currency?: CurrencyEnum;
-}> = ({
+const _DetailsLimitsAvatar: React.FC<Props> = ({
   logo,
   level,
   levelProgress,
@@ -59,5 +51,15 @@ const _DetailsLimitsAvatar: React.FC<{
     </div>
   );
 };
+
+interface Props {
+  logo: string;
+  title: string;
+  color?: string;
+  level?: number;
+  levelProgress?: number;
+  totalAvailableInvestment?: number;
+  currency?: CurrencyEnum;
+}
 
 export const DetailsLimitsAvatar = React.memo(_DetailsLimitsAvatar);

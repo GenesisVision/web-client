@@ -1,5 +1,8 @@
 import { StatisticCurrencyState } from "components/details/reducers/statistic-currency.reducer";
 import { StatisticPeriodState } from "components/details/reducers/statistic-period.reducer";
+import fundAbsoluteProfitChartReducer, {
+  FundAbsoluteProfitChartState
+} from "pages/funds/fund-details/reducers/absolute-profit-chart.reducer";
 import clearableReducer from "reducers/clearable.reducer";
 import { combineReducers } from "redux";
 
@@ -21,6 +24,7 @@ type FundDetailsDataType = Readonly<{
   id: FundIdState;
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
+  absoluteProfitChart: FundAbsoluteProfitChartState;
   profitChart: FundProfitChartState;
   balanceChart: FundBalanceChartState;
   description: FundDescriptionState;
@@ -35,6 +39,7 @@ const fundDetailsReducer = clearableReducer(
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
     description: fundDescriptionReducer,
+    absoluteProfitChart: fundAbsoluteProfitChartReducer,
     profitChart: fundProfitChartReducer,
     balanceChart: fundBalanceChartReducer,
     fundHistory: fundHistoryReducer

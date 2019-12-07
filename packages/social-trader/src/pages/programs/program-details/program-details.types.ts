@@ -1,5 +1,6 @@
 import { IDialogProps } from "components/dialog/dialog";
 import {
+  AbsoluteProfitChart,
   InvestmentEventViewModels,
   LevelsParamsInfo,
   ProfitChart,
@@ -58,6 +59,7 @@ export type ProgramStatisticResult = {
   balanceChart: ProgramBalanceChart;
 };
 
+export type ProgramAbsoluteProfitChartDataType = AbsoluteProfitChart;
 export type ProgramProfitChartDataType = ProgramProfitPercentCharts;
 export type ProgramDescriptionDataType = ProgramDetailsFull;
 export type ProgramBalanceChartDataType = ProgramBalanceChart;

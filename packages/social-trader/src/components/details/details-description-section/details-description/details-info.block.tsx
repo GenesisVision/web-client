@@ -19,20 +19,20 @@ const _DetailsInfo: React.FC<Props> = ({
   return (
     <div className="asset-details-description__info">
       <h1 className="title-small-padding">{title}</h1>
-      <DetailsManager to={to} username={username} />
-      <SocialLinksBlock socialLinks={socialLinks} />
+      {to && username && <DetailsManager to={to} username={username} />}
+      {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
       {children}
-      <DetailsStrategy description={description} />
+      {description && <DetailsStrategy description={description} />}
     </div>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  to: ToType;
-  username: string;
-  socialLinks: SocialLinkViewModel[];
-  description: string;
+  to?: ToType;
+  username?: string;
+  socialLinks?: SocialLinkViewModel[];
+  description?: string;
 }
 
 export const DetailsInfo = React.memo(_DetailsInfo);

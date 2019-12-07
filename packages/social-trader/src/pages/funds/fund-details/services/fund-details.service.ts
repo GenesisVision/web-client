@@ -8,6 +8,7 @@ import authService from "services/auth-service";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {
+  fetchFundAbsoluteProfitChartAction,
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
@@ -76,6 +77,13 @@ export const getFundReallocateHistory = (fundId: string) => (
 ) => {
   return fundStructureAction(fundId);
 };*/
+
+export const getAbsoluteProfitChart: TGetChartFunc = ({
+  id,
+  period,
+  currencies
+}) => dispatch =>
+  dispatch(fetchFundAbsoluteProfitChartAction(id, period, currencies[0]));
 
 export const getProfitChart: TGetChartFunc = ({
   id,

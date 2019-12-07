@@ -1,6 +1,8 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
+import { programAbsoluteProfitChartSelector } from "pages/programs/program-details/reducers/absolute-profit-chart.reducer";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -26,6 +28,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
   const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
     <DetailsStatisticSection
+      absoluteProfitChartSelector={programAbsoluteProfitChartSelector}
       balanceChartSelector={programBalanceChartSelector}
       profitChartSelector={programProfitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
@@ -48,6 +51,13 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
         <ProgramBalanceChart
           color={color}
           balanceChart={balanceChart}
+          currency={currency}
+        />
+      )}
+      renderAbsoluteProfitChart={({ color, currency, chart }) => (
+        <ProgramAbsoluteProfitChart
+          color={color}
+          chart={chart}
           currency={currency}
         />
       )}

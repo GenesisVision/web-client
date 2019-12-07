@@ -12,6 +12,7 @@ import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
   FETCH_LEVEL_PARAMETERS,
+  FETCH_PROGRAM_ABSOLUTE_PROFIT_CHART,
   FETCH_PROGRAM_BALANCE_CHART,
   FETCH_PROGRAM_DESCRIPTION,
   FETCH_PROGRAM_PROFIT_CHART,
@@ -27,6 +28,7 @@ import {
 import {
   EventsDataType,
   LevelParametersDataType,
+  ProgramAbsoluteProfitChartDataType,
   ProgramBalanceChartDataType,
   ProgramDescriptionDataType,
   ProgramPeriodsDataType,
@@ -76,6 +78,19 @@ export const fetchProgramProfitChartAction = (
     dateFrom: period.start,
     dateTo: period.end,
     currencies
+  })
+});
+
+export const fetchProgramAbsoluteProfitChartAction = (
+  id: string,
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
+): ApiAction<ProgramAbsoluteProfitChartDataType> => ({
+  type: FETCH_PROGRAM_ABSOLUTE_PROFIT_CHART,
+  payload: programsApi.getProgramAbsoluteProfitChart(id, {
+    dateFrom: period.start,
+    dateTo: period.end,
+    currency
   })
 });
 

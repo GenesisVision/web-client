@@ -14,11 +14,13 @@ import {
   SignalProviderSubscribers,
   TradesViewModel
 } from "gv-api-web";
+import { FollowAbsoluteProfitChartDataType } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import followApi from "services/api-client/follow-api";
 import programsApi from "services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
+  FETCH_FOLLOW_ABSOLUTE_PROFIT_CHART,
   FETCH_FOLLOW_BALANCE_CHART,
   FETCH_FOLLOW_DESCRIPTION,
   FETCH_FOLLOW_PROFIT_CHART,
@@ -86,6 +88,19 @@ export const fetchFollowProfitChartAction = (
     dateFrom: period.start,
     dateTo: period.end,
     currencies
+  })
+});
+
+export const fetchFollowAbsoluteProfitChartAction = (
+  id: string,
+  period = getDefaultPeriod(),
+  currency: CurrencyEnum
+): ApiAction<FollowAbsoluteProfitChartDataType> => ({
+  type: FETCH_FOLLOW_ABSOLUTE_PROFIT_CHART,
+  payload: programsApi.getProgramAbsoluteProfitChart(id, {
+    dateFrom: period.start,
+    dateTo: period.end,
+    currency
   })
 });
 

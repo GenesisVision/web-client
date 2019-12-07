@@ -13,9 +13,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { RootState } from "reducers/root-reducer";
+import { Dispatch } from "redux";
 import { CurrencyEnum } from "utils/types";
 
-import { getProgramHistoryCounts } from "../service/program-details.service";
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
 import ProgramOpenPositions from "./program-open-positions/program-open-positions";
 import ProgramPeriodHistory from "./program-period-history/program-period-history";
@@ -27,6 +28,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  getHistoryCounts,
   tablesData: {
     financialStatistic,
     openPositions,
@@ -55,12 +57,13 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   const subscriptionsCount = useSelector(
     subscriptions ? subscriptions.dataSelector : nullSelector
   ).itemsData.data.total;
-  const financialStatisticCount = useSelector(financialStatistic.dataSelector)
-    .itemsData.data.total;
+  const financialStatisticCount = useSelector(
+    financialStatistic ? financialStatistic.dataSelector : nullSelector
+  ).itemsData.data.total;
   const tradesCount = useSelector(trades.dataSelector).itemsData.data.total;
 
   useEffect(() => {
-    programId && dispatch(getProgramHistoryCounts(programId));
+    programId && dispatch(getHistoryCounts(programId));
   }, [dispatch, programId]);
 
   return (
@@ -77,6 +80,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={tradesCount}
         />
         <GVTab
+          visible={!!periodHistory}
           value={TABS.PERIOD_HISTORY}
           label={t("program-details-page.history.tabs.period-history")}
           count={periodHistoryCount}
@@ -85,13 +89,13 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           value={TABS.SUBSCRIBERS}
           label={t("program-details-page.history.tabs.subscriptions")}
           count={subscriptionsCount}
-          visible={isAuthenticated && isOwnProgram}
+          visible={isAuthenticated && isOwnProgram && !!subscriptions}
         />
         <GVTab
           value={TABS.FINANCIAL_STATISTIC}
           label={t("program-details-page.history.tabs.financial-statistic")}
           count={financialStatisticCount}
-          visible={isAuthenticated && isOwnProgram}
+          visible={isAuthenticated && isOwnProgram && !!financialStatistic}
         />
       </DetailsBlockTabs>
       {tab === TABS.TRADES && (
@@ -119,7 +123,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           currency={currency}
         />
       )}
-      {tab === TABS.FINANCIAL_STATISTIC && (
+      {tab === TABS.FINANCIAL_STATISTIC && financialStatistic && (
         <ProgramFinancialStatistic
           getItems={financialStatistic.getItems(programId)}
           dataSelector={financialStatistic.dataSelector}
@@ -150,6 +154,9 @@ enum TABS {
 }
 
 interface Props {
+  getHistoryCounts: (
+    id: string
+  ) => (dispatch: Dispatch, getState: () => RootState) => void;
   tablesData: TProgramTablesData;
   showCommissionRebateSometime: boolean;
   showSwaps: boolean;
@@ -169,7 +176,7 @@ export type TProgramTablesData = {
   trades: TProgramTableReduxData;
   openPositions: TProgramTableReduxData;
   subscriptions?: TProgramTableReduxData;
-  financialStatistic: TProgramTableReduxData;
+  financialStatistic?: TProgramTableReduxData;
   periodHistory?: TProgramTableReduxData;
 };
 

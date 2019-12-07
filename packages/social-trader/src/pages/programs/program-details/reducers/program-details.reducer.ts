@@ -1,5 +1,8 @@
 import { StatisticCurrencyState } from "components/details/reducers/statistic-currency.reducer";
 import { StatisticPeriodState } from "components/details/reducers/statistic-period.reducer";
+import programAbsoluteProfitChartReducer, {
+  ProgramAbsoluteProfitChartState
+} from "pages/programs/program-details/reducers/absolute-profit-chart.reducer";
 import statisticCurrencyReducer from "pages/programs/program-details/reducers/statistic-currency.reducer";
 import statisticPeriodReducer from "pages/programs/program-details/reducers/statistic-period.reducer";
 import clearableReducer from "reducers/clearable.reducer";
@@ -27,6 +30,7 @@ type ProgramDetailsDataType = Readonly<{
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
   profitChart: ProgramProfitChartState;
+  absoluteProfitChart: ProgramAbsoluteProfitChartState;
   balanceChart: ProgramBalanceChartState;
   description: ProgramDescriptionState;
   levelParameters: LevelParametersState;
@@ -43,6 +47,7 @@ const programDetailsReducer = clearableReducer(
     levelParameters: levelParametersReducer,
     description: programDescriptionReducer,
     profitChart: programProfitChartReducer,
+    absoluteProfitChart: programAbsoluteProfitChartReducer,
     balanceChart: programBalanceChartReducer,
     programHistory: programHistoryReducer
   })

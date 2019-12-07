@@ -27,7 +27,7 @@ import {
 import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import {
-  composeProgramDetailsUrl,
+  composeAssetDetailsUrl,
   createFundSettingsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -43,7 +43,8 @@ const _DashboardPublicCard: React.FC<{
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const detailsLink = {
-    pathname: composeProgramDetailsUrl(
+    pathname: composeAssetDetailsUrl(
+      asset.assetTypeExt,
       asset.publicInfo && asset.publicInfo.url
     ),
     state: `/ ${title}`

@@ -37,6 +37,7 @@ import {
   getFinancialStatistics,
   getOpenPositions,
   getPeriodHistory,
+  getProgramHistoryCounts,
   getSubscriptions,
   getTrades
 } from "./service/program-details.service";
@@ -127,6 +128,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <ProgramDetailsStatisticSection />
       <ProgramDetailsHistorySection
+        getHistoryCounts={getProgramHistoryCounts}
         tablesData={tablesData}
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime
