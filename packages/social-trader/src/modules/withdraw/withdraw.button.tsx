@@ -3,11 +3,20 @@ import useIsOpen from "hooks/is-open.hook";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
+import { useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
-const _WithdrawButton: React.FC<Props> = ({ onApply, type, id, currency }) => {
+const _WithdrawButton: React.FC<Props> = ({
+  onApply,
+  type,
+  id,
+  currency,
+  disabled
+}) => {
+  const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   let withdraw;
@@ -28,7 +37,7 @@ const _WithdrawButton: React.FC<Props> = ({ onApply, type, id, currency }) => {
           onApply={onApply}
           open={isOpenPopup}
           id={id}
-          accountCurrency={"GVT"} // TODO change to real currecny
+          accountCurrency={accountCurrency}
           assetCurrency={currency}
           onClose={setIsClosePopup}
         />
@@ -37,6 +46,7 @@ const _WithdrawButton: React.FC<Props> = ({ onApply, type, id, currency }) => {
   return (
     <>
       <GVButton
+        disabled={disabled}
         className="table-cards__button"
         color="secondary"
         variant="outlined"
@@ -50,6 +60,7 @@ const _WithdrawButton: React.FC<Props> = ({ onApply, type, id, currency }) => {
 };
 
 interface Props {
+  disabled?: boolean;
   onApply?: VoidFunction;
   type: ASSET;
   id: string;
