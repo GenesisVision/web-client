@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import UnfollowContainer from "modules/unfollow/unfollow-container";
 import * as React from "react";
@@ -22,9 +22,9 @@ const _UnFollowButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        size={GV_BTN_SIZE.BIG}
         color="secondary"
         variant="outlined"
-        className="asset-details-description__invest-btn"
         onClick={setIsOpenUnFollow}
       >
         {t("program-details-page.description.unfollow")}
