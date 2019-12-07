@@ -3,7 +3,13 @@ import "./style.scss";
 import classnames from "classnames";
 import React from "react";
 
+export enum GV_BTN_SIZE {
+  BIG = "BIG",
+  MIDDLE = "MIDDLE"
+}
+
 interface GVButtonProps {
+  size?: GV_BTN_SIZE;
   id?: string;
   title?: string;
   variant?: "text" | "outlined" | "contained";
@@ -18,6 +24,7 @@ interface GVButtonProps {
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
+  size = GV_BTN_SIZE.MIDDLE,
   id,
   className,
   title,
@@ -31,6 +38,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
+    "gv-btn--big": size === GV_BTN_SIZE.BIG,
     "gv-btn--danger": color === "danger",
     "gv-btn--primary": color === "primary",
     "gv-btn--secondary": color === "secondary",

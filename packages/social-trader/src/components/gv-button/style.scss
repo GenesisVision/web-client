@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 @mixin box-shadow($color) {
   box-shadow: 0 0.2em 0.5em 0 $color;
@@ -16,6 +17,21 @@
   transition-property: background-color, box-shadow, color;
   color: $text-accent-color;
   background-color: transparent;
+
+  &--big {
+    align-self: flex-end;
+    font-size: $font-size-paragraph-mobile;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    box-sizing: border-box;
+    width: $btn-width-mobile;
+    height: $btn-height-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      width: $btn-width;
+      height: $btn-height;
+    }
+  }
 
   &--no-padding {
     padding: 0;
