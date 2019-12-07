@@ -6,6 +6,7 @@ import DetailsBlock, {
 import Page from "components/page/page";
 import PublicSelect from "components/profile/settings/public-select/public-select";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
+import DashboardInvestingMostProfitable from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
 import { PublicPageLink } from "pages/dashboard/components/dashboard-investing/public-page-link";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
@@ -35,6 +36,9 @@ const _InvestmentsPage: React.FC = () => {
         </div>
         <div>
           <DashboardInvestingPrograms />
+        </div>
+        <div>
+          <DashboardInvestingMostProfitable />
         </div>
       </Page>
     </TitleContext.Provider>
