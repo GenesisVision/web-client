@@ -765,6 +765,15 @@
     }
   },
   "follow-details-page": {
+    "current-investment": {
+      "title": "Subscription details",
+      "fields": {
+        "profit": "Profit",
+        "status": "Status",
+        "type": "Type",
+        "percentage": "Percentage"
+      }
+    },
     "title": "Follow detail",
     "description": {
       "currency": "Follow currency",
