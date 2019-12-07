@@ -38,7 +38,13 @@ const _DashboardPublic: React.FC<Props> = () => {
         asset: DashboardTradingAsset,
         updateRow,
         updateItems
-      ) => <DashboardPublicCard asset={asset} updateItems={updateItems!} />}
+      ) => (
+        <DashboardPublicCard
+          asset={asset}
+          updateItems={updateItems!}
+          ownAsset
+        />
+      )}
     />
   );
 };
