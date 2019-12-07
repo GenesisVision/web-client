@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
@@ -10,6 +10,7 @@ import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({
+  size,
   onApply,
   type,
   id,
@@ -46,8 +47,8 @@ const _WithdrawButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        size={size}
         disabled={disabled}
-        className="table-cards__button"
         color="secondary"
         variant="outlined"
         onClick={setIsOpenPopup}
@@ -60,6 +61,7 @@ const _WithdrawButton: React.FC<Props> = ({
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   disabled?: boolean;
   onApply?: VoidFunction;
   type: ASSET;
