@@ -5,7 +5,7 @@ import {
   BrokerTradeServerType,
   SignalSubscription
 } from "gv-api-web";
-import useApiRequest, { TUseApiRequestProps } from "hooks/api-request.hook";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
@@ -17,8 +17,7 @@ import {
   attachToExternalSignal,
   attachToSignal,
   fetchAccounts,
-  fetchExternalAccounts,
-  updateAttachToSignal
+  fetchExternalAccounts
 } from "../services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
@@ -29,9 +28,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
   isExternal,
   broker,
   id,
-  signalSubscription,
   hasSignalAccount,
-  hasActiveSubscription,
   currency,
   onClose,
   onApply
@@ -53,7 +50,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   });
 
   const { sendRequest: submitChanges } = useApiRequest({
-    ...composeApiRequest(hasActiveSubscription, isExternal),
+    successMessage: "follow-program.create-success-alert-message",
+    request: getApiRequest(isExternal),
     middleware: [onApply, onClose]
   });
 
@@ -86,11 +84,9 @@ const _FollowModuleContainer: React.FC<Props> = ({
   return (
     <FollowPopupForm
       hasSignalAccount={hasSignalAccount}
-      hasActiveSubscription={hasActiveSubscription}
       isExternal={isExternal}
       rate={rate}
       loaderData={[]}
-      signalSubscription={signalSubscription}
       minDeposit={minDeposit!}
       id={id}
       currency={currency}
@@ -101,24 +97,11 @@ const _FollowModuleContainer: React.FC<Props> = ({
   );
 };
 
-const composeApiRequest = (
-  hasActiveSubscription: boolean,
-  isExternal: boolean
-): TUseApiRequestProps => {
-  const successMessage = hasActiveSubscription
-    ? "follow-program.edit-success-alert-message"
-    : "follow-program.create-success-alert-message";
-  const request = hasActiveSubscription
-    ? updateAttachToSignal
-    : isExternal
-    ? attachToExternalSignal
-    : attachToSignal;
-  return { successMessage, request };
-};
+const getApiRequest = (isExternal: boolean) =>
+  isExternal ? attachToExternalSignal : attachToSignal;
 
 interface Props {
   hasSignalAccount: boolean;
-  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
@@ -127,7 +110,6 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   id: string;
-  signalSubscription?: SignalSubscription;
 }
 
 const FollowPopupFormContainer = React.memo(_FollowModuleContainer);
