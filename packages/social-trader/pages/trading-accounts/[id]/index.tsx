@@ -1,4 +1,5 @@
 import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import { ProgramDetailsFull } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import AccountDetailsPage from "pages/accounts/account-details/account-details.page";
@@ -31,7 +32,6 @@ Page.getInitialProps = async ctx => {
     }).value;
     const statisticCurrency =
       description.currency || currency || cookiesCurrency;
-    console.log(statisticCurrency);
     ctx.reduxStore.dispatch(dispatch =>
       dispatch(statisticCurrencyAction(statisticCurrency))
     );
@@ -39,4 +39,7 @@ Page.getInitialProps = async ctx => {
   return {};
 };
 
-export default compose(withDefaultLayout)(Page);
+export default compose(
+  withPrivateRoute,
+  withDefaultLayout
+)(Page);
