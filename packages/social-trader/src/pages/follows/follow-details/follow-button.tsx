@@ -1,6 +1,6 @@
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "components/gv-button";
-import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import * as React from "react";
@@ -34,7 +34,7 @@ const _FollowButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
-        className="asset-details-description__invest-btn"
+        size={GV_BTN_SIZE.BIG}
         onClick={isAuthenticated ? setIsOpenFollow : setIsOpenUnAuth}
       >
         {t("program-details-page.description.follow-trade")}
