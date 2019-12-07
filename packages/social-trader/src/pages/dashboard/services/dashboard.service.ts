@@ -44,6 +44,14 @@ export const getInvestingPrograms = (
 ): CancelablePromise<IDataModel> =>
   dashboardApi.getInvestingPrograms(authService.getAuthArg(), filters);
 
+export const getInvestingMostProfitable = (showIn: CurrencyEnum) => (
+  filters?: ComposeFiltersAllType
+): CancelablePromise<IDataModel> =>
+  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), {
+    ...filters,
+    showIn
+  });
+
 export const fetchRequests = (take: number = 100) =>
   investmentsApi.getRequests(0, take, authService.getAuthArg());
 
