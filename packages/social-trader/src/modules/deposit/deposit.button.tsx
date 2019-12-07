@@ -1,5 +1,5 @@
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
@@ -11,6 +11,7 @@ import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
+  size,
   onApply,
   ownAsset,
   entryFee,
@@ -67,7 +68,7 @@ const _DepositButton: React.FC<Props> = ({
     : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton className="table-cards__button" onClick={openPopupMethod}>
+      <GVButton size={size} onClick={openPopupMethod}>
         {label}
       </GVButton>
       {deposit}
@@ -85,6 +86,7 @@ const _DepositButton: React.FC<Props> = ({
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   onApply?: VoidFunction;
   ownAsset?: boolean;
   entryFee?: number;
