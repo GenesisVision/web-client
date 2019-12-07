@@ -93,6 +93,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <InvestmentProgramControls
+            onApply={handleDispatchDescription}
             programDescription={description}
             canCloseAsset={
               personalDetails &&
