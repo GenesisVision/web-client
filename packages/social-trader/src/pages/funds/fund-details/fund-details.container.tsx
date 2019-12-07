@@ -2,7 +2,7 @@ import "components/details/details.scss";
 
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
-import { InvestmentDetails } from "components/details/details-description-section/details-investment/details-investment.helpers";
+import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
@@ -85,7 +85,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         selector={fundEventsTableSelector}
         id={description.id}
         currency={"GVT" as CurrencyEnum}
-        personalDetails={description.personalDetails as InvestmentDetails}
+        personalDetails={
+          description.personalDetails as InvestmentBlockDetailsType
+        }
         WithdrawContainer={FundWithdrawDialog}
       />
       <FundDetailsStatisticSection />
