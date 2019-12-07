@@ -11,7 +11,7 @@ import { dispatchFollowDescription } from "./services/follow-details.service";
 const _UnFollowButton: React.FC<Props> = ({ id, isExternal }) => {
   const dispatch = useDispatch();
   const dispatchDescription = useCallback(() => {
-    dispatch(dispatchFollowDescription(id));
+    dispatch(dispatchFollowDescription(id)());
   }, [id]);
   const [t] = useTranslation();
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
