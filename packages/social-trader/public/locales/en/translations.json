@@ -656,7 +656,8 @@
       "value": "Value",
       "heading": "Chart",
       "tabs": {
-        "profit": "Profit",
+        "absolute-profit": "Profit (Abs)",
+        "profit": "Profit (%)",
         "balance": "Balance"
       }
     }
