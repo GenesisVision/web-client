@@ -3,7 +3,7 @@ import "components/details/details.scss";
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
-import { InvestmentDetails } from "components/details/details-description-section/details-investment/details-investment.helpers";
+import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
@@ -84,25 +84,16 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
         Controls={() => <FollowControls description={description} />}
       />
       <div className="details__divider" />
-      {/*<DetailsInvestment
-        fees={{
-          successFee: description.successFeeCurrent,
-          successFeePersonal:
-            personalDetails && personalDetails.successFeePersonal,
-          successFeeCurrent: description.successFeeCurrent,
-          successFeeSelected: description.successFeeSelected,
-          entryFee: description.successFeeCurrent,
-          entryFeeCurrent: description.entryFeeCurrent,
-          entryFeeSelected: description.entryFeeSelected
-        }}
-        dispatchDescription={dispatchFollowDescription(id)}
+      <DetailsInvestment
+        fees={{}}
+        dispatchDescription={dispatchFollowDescription(description.id)}
         eventTypesSelector={programEventsSelector}
         asset={ASSET.FOLLOW}
         selector={followEventsTableSelector}
         id={description.id}
         currency={description.currency}
-        personalDetails={personalDetails as InvestmentDetails}
-      />*/}
+        personalDetails={personalDetails as InvestmentBlockDetailsType}
+      />
       <FollowDetailsStatisticSection />
       <ProgramDetailsHistorySection
         getHistoryCounts={getFollowHistoryCounts}
