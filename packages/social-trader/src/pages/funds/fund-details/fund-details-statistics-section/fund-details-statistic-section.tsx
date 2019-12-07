@@ -1,6 +1,8 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import { fundAbsoluteProfitChartSelector } from "pages/funds/fund-details/reducers/absolute-profit-chart.reducer";
+import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
@@ -22,6 +24,7 @@ const _FundDetailsStatisticSection: React.FC = () => (
   <DetailsStatisticSection
     balanceChartSelector={fundBalanceChartSelector}
     profitChartSelector={fundProfitChartSelector}
+    absoluteProfitChartSelector={fundAbsoluteProfitChartSelector}
     statisticCurrencySelector={statisticCurrencySelector}
     useChartStateValues={useFundChartStateValues}
     useChartPeriod={useChartPeriod}
@@ -38,6 +41,13 @@ const _FundDetailsStatisticSection: React.FC = () => (
         balanceChart={balanceChart}
         currency={currency}
         color={color}
+      />
+    )}
+    renderAbsoluteProfitChart={({ color, currency, chart }) => (
+      <ProgramAbsoluteProfitChart
+        color={color}
+        chart={chart}
+        currency={currency}
       />
     )}
     renderProfitChart={({ profitChart, chartCurrencies }) => (
