@@ -7,10 +7,10 @@ import {
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { AssetTypeExt } from "gv-api-web";
 import {
   ACCOUNT_DETAILS_ROUTE,
-  ACCOUNT_SETTINGS,
-  ACCOUNT_SLUG_URL_PARAM_NAME
+  ACCOUNT_SETTINGS
 } from "routes/accounts.routes";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
 import {
@@ -57,12 +57,24 @@ export const composeAssetDetailsFolderUrl = (assetType: ASSETS_TYPES): string =>
     : FUND_DETAILS_FOLDER_ROUTE;
 
 export const composeAssetDetailsUrl = (
-  assetType: string,
+  assetType: AssetTypeExt,
   slugUrl: string
-): string =>
-  assetType === ASSETS_TYPES.Program
-    ? composeProgramDetailsUrl(slugUrl)
-    : composeFundsDetailsUrl(slugUrl);
+): string => {
+  switch (assetType) {
+    case "Fund":
+      return composeFundsDetailsUrl(slugUrl);
+    case "Program":
+      return composeProgramDetailsUrl(slugUrl);
+    case "SignalProgram":
+    default:
+      return composeFollowDetailsUrl(slugUrl);
+  }
+};
+
+export const composeAccountDetailsUrl = (slugUrl: string): string =>
+  replaceParams(ACCOUNT_DETAILS_ROUTE, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
 
 export const composeFollowDetailsUrl = (slugUrl: string): string =>
   replaceParams(FOLLOW_DETAILS_SLUG_ROUTE, {
@@ -96,7 +108,7 @@ export const composeProgramSettingsUrl = (slugUrl: string): string =>
 
 export const composeAccountSettingsUrl = (slugUrl: string): string =>
   replaceParams(`${ACCOUNT_DETAILS_ROUTE}/${ACCOUNT_SETTINGS}`, {
-    [`:${ACCOUNT_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeFollowNotificationsUrl = (slugUrl: string): string =>
