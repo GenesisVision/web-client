@@ -1,0 +1,79 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$withdraw-button-height: 50px;
+$withdraw-button-width: 150px;
+$withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
+$withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
+$padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
+
+.details-investment-block {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: $padding-xxsmall;
+  @include media-breakpoint-landscape-phone() {
+    margin-top: $padding-xsmall;
+  }
+
+  &:nth-child(2) {
+    @include media-breakpoint-landscape-tablet() {
+      margin-left: $padding-medium;
+      padding-left: $padding-medium;
+      border-left: 2px solid $separator-color;
+    }
+    @include media-breakpoint-desktop() {
+      margin-left: $padding-large;
+      padding-left: $padding-large;
+    }
+  }
+
+  &--investment {
+    flex: 2;
+    min-width: 100%;
+    @include media-breakpoint-landscape-tablet() {
+      min-width: initial;
+      max-width: 70%;
+    }
+  }
+}
+
+.details-investment-heading {
+  font-size: $font-size-small;
+  text-transform: uppercase;
+  letter-spacing: 0.15px;
+  color: $label-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details-investment-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  & .gv-btn {
+    width: $withdraw-button-width-mobile;
+    height: $withdraw-button-height-mobile;
+    letter-spacing: 0.3px;
+    font-size: $font-size-small-mobile;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      width: $withdraw-button-width;
+      height: $withdraw-button-height;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.details-investment-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 $padding-small;
+  }
+}
