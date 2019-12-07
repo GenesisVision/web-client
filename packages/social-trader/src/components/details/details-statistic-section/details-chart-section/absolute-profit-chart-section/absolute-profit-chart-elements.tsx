@@ -61,9 +61,7 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
         fullSelectCurrencies={platformCurrencies.map(
           ({ name }) => name as CurrencyEnum
         )}
-        maxCharts={
-          selectCurrencies.length + chartData.selectedCurrencies.length
-        }
+        maxCharts={1}
         selectCurrencies={selectCurrencies.map(({ name }) => name)}
         chartCurrencies={chartData.selectedCurrencies}
         onAdd={addCurrency}
