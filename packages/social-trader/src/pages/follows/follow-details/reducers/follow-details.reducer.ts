@@ -1,5 +1,8 @@
 import { StatisticCurrencyState } from "components/details/reducers/statistic-currency.reducer";
 import { StatisticPeriodState } from "components/details/reducers/statistic-period.reducer";
+import followAbsoluteProfitChartReducer, {
+  FollowAbsoluteProfitChartState
+} from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import statisticCurrencyReducer from "pages/follows/follow-details/reducers/statistic-currency.reducer";
 import statisticPeriodReducer from "pages/follows/follow-details/reducers/statistic-period.reducer";
 import clearableReducer from "reducers/clearable.reducer";
@@ -23,6 +26,7 @@ type FollowDetailsDataType = Readonly<{
   id: FollowIdState;
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
+  absoluteProfitChart: FollowAbsoluteProfitChartState;
   profitChart: FollowProfitChartState;
   balanceChart: FollowBalanceChartState;
   description: FollowDescriptionState;
@@ -37,6 +41,7 @@ const followDetailsReducer = clearableReducer(
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
     description: followDescriptionReducer,
+    absoluteProfitChart: followAbsoluteProfitChartReducer,
     profitChart: followProfitChartReducer,
     balanceChart: followBalanceChartReducer,
     followHistory: followHistoryReducer
