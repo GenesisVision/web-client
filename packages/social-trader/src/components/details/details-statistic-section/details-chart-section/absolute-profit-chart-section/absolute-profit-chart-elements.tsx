@@ -17,17 +17,13 @@ import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import {
   AbsoluteProfitChartDataType,
-  BalanceChartElementType,
   ChartDataType,
-  ChartsDataType,
-  ProfitChartDataType,
   StatisticDataType,
   useChartData
 } from "../../details.chart.helpers";
 
 const _AbsoluteProfitChartElements: React.FC<Props> = ({
   renderChart,
-  renderValue,
   period,
   setPeriod,
   data,
