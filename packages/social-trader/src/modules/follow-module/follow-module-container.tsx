@@ -1,6 +1,7 @@
 import Dialog from "components/dialog/dialog";
 import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
 import FollowPopupFormContainer from "modules/follow-module/follow-popup/follow-popup-form.container";
+import FollowButton from "pages/follows/follow-details/follow-button";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
@@ -11,6 +12,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   broker,
   id,
   signalSubscription,
+  hasSignalAccount,
+  hasActiveSubscription,
   currency,
   onClose,
   onApply,
@@ -19,6 +22,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupFormContainer
+        hasSignalAccount={hasSignalAccount}
+        hasActiveSubscription={hasActiveSubscription}
         onApply={onApply}
         onClose={onClose}
         broker={broker}
@@ -34,6 +39,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  hasSignalAccount: boolean;
+  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
@@ -43,7 +50,7 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   id: string;
-  signalSubscription: SignalSubscription;
+  signalSubscription?: SignalSubscription;
 }
 
 const FollowModuleContainer = React.memo(_FollowModuleContainer);

@@ -15,17 +15,22 @@ const _SignalProviderButtons: React.FC<Props> = ({
   title,
   currency
 }) => {
+  const hasActiveSubscription =
+    !!signalSubscription && signalSubscription.hasActiveSubscription;
+  const hasSignalAccount =
+    !!signalSubscription && signalSubscription.hasSignalAccount;
   return (
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
-      {signalSubscription.hasActiveSubscription ? (
+      {hasActiveSubscription ? (
         <UnFollowButton id={id} isExternal={isExternal} />
       ) : (
         <FollowButton
+          hasSignalAccount={hasSignalAccount}
+          hasActiveSubscription={hasActiveSubscription}
           leverage={leverage}
           brokerId={brokerId}
           isExternal={isExternal}
           broker={broker}
-          signalSubscription={signalSubscription}
           id={id}
           title={title}
           currency={currency}
@@ -40,7 +45,7 @@ interface Props {
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
-  signalSubscription: SignalSubscription;
+  signalSubscription?: SignalSubscription;
   id: string;
   title: string;
   currency: CurrencyEnum;

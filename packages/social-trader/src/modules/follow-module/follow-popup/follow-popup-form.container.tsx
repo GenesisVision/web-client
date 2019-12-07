@@ -30,6 +30,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   broker,
   id,
   signalSubscription,
+  hasSignalAccount,
+  hasActiveSubscription,
   currency,
   onClose,
   onApply
@@ -51,7 +53,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
   });
 
   const { sendRequest: submitChanges } = useApiRequest({
-    ...composeApiRequest(signalSubscription.hasActiveSubscription, isExternal),
+    ...composeApiRequest(hasActiveSubscription, isExternal),
     middleware: [onApply, onClose]
   });
 
@@ -83,6 +85,8 @@ const _FollowModuleContainer: React.FC<Props> = ({
   );
   return (
     <FollowPopupForm
+      hasSignalAccount={hasSignalAccount}
+      hasActiveSubscription={hasActiveSubscription}
       isExternal={isExternal}
       rate={rate}
       loaderData={[]}
@@ -113,6 +117,8 @@ const composeApiRequest = (
 };
 
 interface Props {
+  hasSignalAccount: boolean;
+  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
@@ -121,7 +127,7 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   id: string;
-  signalSubscription: SignalSubscription;
+  signalSubscription?: SignalSubscription;
 }
 
 const FollowPopupFormContainer = React.memo(_FollowModuleContainer);

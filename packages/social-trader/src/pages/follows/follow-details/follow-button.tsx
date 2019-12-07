@@ -18,7 +18,8 @@ const _FollowButton: React.FC<Props> = ({
   brokerId,
   isExternal,
   broker,
-  signalSubscription,
+  hasSignalAccount,
+  hasActiveSubscription,
   id,
   title,
   currency
@@ -40,6 +41,8 @@ const _FollowButton: React.FC<Props> = ({
         {t("program-details-page.description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
+        hasSignalAccount={hasSignalAccount}
+        hasActiveSubscription={hasActiveSubscription}
         leverage={leverage}
         isExternal={isExternal}
         brokerId={brokerId}
@@ -47,7 +50,6 @@ const _FollowButton: React.FC<Props> = ({
         id={id}
         open={isOpenFollow}
         currency={currency}
-        signalSubscription={signalSubscription}
         onClose={setIsCloseFollow}
         onApply={dispatchDescription}
       />
@@ -65,11 +67,12 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  hasSignalAccount: boolean;
+  hasActiveSubscription: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
-  signalSubscription: SignalSubscription;
   id: string;
   title: string;
   currency: CurrencyEnum;

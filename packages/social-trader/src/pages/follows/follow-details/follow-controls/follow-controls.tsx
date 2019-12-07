@@ -21,7 +21,7 @@ const _FollowControls: React.FC<Props> = ({
         successFee={signalSettings.signalSuccessFee}
         volumeFee={signalSettings.signalVolumeFee}
       />
-      {personalDetails && !!personalDetails.signalSubscriptions.length && (
+      {personalDetails && (
         <SignalProviderButtons
           leverage={personalDetails ? personalDetails.leverage : 0}
           isExternal={

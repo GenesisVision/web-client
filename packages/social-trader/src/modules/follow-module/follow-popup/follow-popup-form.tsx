@@ -35,6 +35,8 @@ const _FollowForm: React.FC<Props> = ({
   wallets,
   currency,
   signalSubscription,
+  hasSignalAccount,
+  hasActiveSubscription,
   minDeposit,
   rate = 1,
   submitMethod
@@ -48,8 +50,8 @@ const _FollowForm: React.FC<Props> = ({
     initRequestParams
   );
   useEffect(() => {
-    signalSubscription.hasSignalAccount && setTab(null, TABS.PARAMS);
-  }, [setTab, signalSubscription.hasSignalAccount]);
+    hasSignalAccount && setTab(null, TABS.PARAMS);
+  }, [setTab, hasSignalAccount]);
   const createdCopytradingAccount = useCallback(
     values => {
       setTab(null, TABS.PARAMS);
@@ -99,7 +101,7 @@ const _FollowForm: React.FC<Props> = ({
           : "select-account"
         : "create-account"
       : "params";
-  const paramsSubscription = signalSubscription.hasActiveSubscription
+  const paramsSubscription = hasActiveSubscription
     ? signalSubscription
     : undefined;
   return (
@@ -123,7 +125,7 @@ const _FollowForm: React.FC<Props> = ({
         <FollowParams
           rate={rate}
           currency={currency}
-          isShowBack={!signalSubscription.hasSignalAccount}
+          isShowBack={!hasSignalAccount}
           paramsSubscription={paramsSubscription}
           onSubmit={submit}
           onPrevStep={returnToCreateCopytradingAccount}
@@ -139,11 +141,13 @@ enum TABS {
 }
 
 interface Props {
+  hasSignalAccount: boolean;
+  hasActiveSubscription: boolean;
   isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
-  signalSubscription: SignalSubscription;
+  signalSubscription?: SignalSubscription;
   submitMethod: (
     programId: string,
     requestParams: AttachToSignalProvider,
