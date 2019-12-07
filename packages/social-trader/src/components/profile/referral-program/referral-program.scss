@@ -6,6 +6,9 @@
   &__share-buttons {
     @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
+    .at-share-btn {
+      margin-right: 10px !important;
+    }
     &--email {
       line-height: 32px;
       height: 32px;
