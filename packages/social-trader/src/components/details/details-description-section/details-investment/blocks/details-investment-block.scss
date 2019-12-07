@@ -2,12 +2,6 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 
-$withdraw-button-height: 50px;
-$withdraw-button-width: 150px;
-$withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
-$withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
-$padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
-
 .details-investment-block {
   display: flex;
   flex-wrap: wrap;
@@ -54,18 +48,6 @@ $padding-controls-left: $avatar-size + $padding-upper-medium - $padding-small;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  & .gv-btn {
-    width: $withdraw-button-width-mobile;
-    height: $withdraw-button-height-mobile;
-    letter-spacing: 0.3px;
-    font-size: $font-size-small-mobile;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      width: $withdraw-button-width;
-      height: $withdraw-button-height;
-      font-size: $font-size-small;
-    }
-  }
 }
 
 .details-investment-container {
