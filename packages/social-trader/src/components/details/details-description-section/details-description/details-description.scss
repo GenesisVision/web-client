@@ -469,25 +469,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
-  &__invest-btn {
-    align-self: flex-end;
-    font-size: $font-size-paragraph-mobile;
-    letter-spacing: 0.3px;
-    font-weight: 600;
-    box-sizing: border-box;
-    width: $btn-width-mobile;
-    height: $btn-height-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      width: $btn-width;
-      height: $btn-height;
-    }
-
-    &.signal-provider__btn {
-      width: auto;
-    }
-  }
-
   &__reinvest {
     letter-spacing: 0.3px;
     font-weight: 600;
