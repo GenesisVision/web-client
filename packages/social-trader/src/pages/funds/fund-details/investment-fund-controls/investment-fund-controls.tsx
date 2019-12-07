@@ -1,6 +1,7 @@
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
+import { GV_BTN_SIZE } from "components/gv-button";
 import { FundDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import InvestmentFundInfo from "pages/funds/fund-details/fund-details-description/investment-fund-info";
@@ -18,6 +19,7 @@ const _InvestmentFundControls: React.FC<Props> = ({ fundDescription }) => {
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
+          size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
           entryFee={fundDescription.entryFeeCurrent}
           type={ASSET.FUND}
