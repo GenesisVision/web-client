@@ -33,7 +33,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
       {hasActiveSubscription ? (
         <UnFollowButton
           id={id}
-          tradingAccountId={"mock"}
+          tradingAccountId={signalSubscription!.followAssetId}
           isExternal={isExternal}
         />
       ) : (
