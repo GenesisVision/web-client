@@ -1,7 +1,6 @@
 import Dialog from "components/dialog/dialog";
 import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
 import FollowPopupFormContainer from "modules/follow-module/follow-popup/follow-popup-form.container";
-import FollowButton from "pages/follows/follow-details/follow-button";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
