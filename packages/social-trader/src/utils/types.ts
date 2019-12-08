@@ -20,16 +20,6 @@ export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
-export type FavoriteActionProps = { id: string; authorization: string };
-
-type FavoriteActionMeta = {
-  id: string;
-  isFavorite: boolean;
-};
-export interface FavoriteActionType<T = any> extends ApiAction<T> {
-  meta: FavoriteActionMeta;
-}
-
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
   extends ActionType {
   errorMessage?: string;

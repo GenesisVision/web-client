@@ -1,7 +1,7 @@
 import { ItemsViewModelFundDetailsList } from "gv-api-web";
 import { SET_FAVORITE_FUND } from "modules/toggle-asset-favorite-button/actions/favorite-fund.actions";
+import { FavoriteActionType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
-import { FavoriteActionType } from "utils/types";
 
 const updateFavoriteLocal = (
   state: IApiState<ItemsViewModelFundDetailsList>,

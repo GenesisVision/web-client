@@ -1,7 +1,7 @@
 import { ItemsViewModelProgramDetailsList } from "gv-api-web";
 import { SET_FAVORITE_FOLLOW } from "modules/toggle-asset-favorite-button/actions/favorite-follow.actions";
+import { FavoriteActionType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
-import { FavoriteActionType } from "utils/types";
 
 const updateFavoriteLocal = (
   state: IApiState<ItemsViewModelProgramDetailsList>,

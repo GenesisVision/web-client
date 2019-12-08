@@ -1,4 +1,7 @@
-import { FavoriteActionProps, FavoriteActionType } from "utils/types";
+import {
+  FavoriteActionProps,
+  FavoriteActionType
+} from "../toggle-asset-favorite-button.types";
 
 export const SET_FAVORITE_PROGRAM = "SET_FAVORITE_PROGRAM";
 

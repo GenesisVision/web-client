@@ -7,7 +7,7 @@ import {
   ProgramInvestingDetailsList
 } from "gv-api-web";
 import CancelablePromise from "gv-api-web/dist/cancelable-promise/CancelablePromise";
-import { MiddlewareDispatch } from "utils/types";
+import { ApiAction, MiddlewareDispatch } from "utils/types";
 
 export type ToggleFavoriteDispatchableType = (
   id: string,
@@ -30,3 +30,13 @@ export type ToggleableAssetType =
   | FundDetailsList
   | ProgramInvestingDetailsList
   | FundInvestingDetailsList;
+
+export type FavoriteActionProps = { id: string };
+
+type FavoriteActionMeta = {
+  id: string;
+  isFavorite: boolean;
+};
+export interface FavoriteActionType<T = any> extends ApiAction<T> {
+  meta: FavoriteActionMeta;
+}
