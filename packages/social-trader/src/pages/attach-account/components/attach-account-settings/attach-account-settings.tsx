@@ -45,7 +45,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
   useEffect(() => {
     setBroker(exchanges[0]);
   }, [exchanges]);
-  console.log(broker, exchanges);
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
