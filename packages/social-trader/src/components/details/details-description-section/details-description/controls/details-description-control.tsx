@@ -10,7 +10,6 @@ interface IDetailsDescriptionControlProps
   className?: string;
   onClick?(): void;
   to?: ToType;
-  disabled?: boolean;
   tag: React.ComponentType<any> | string;
 }
 const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({
