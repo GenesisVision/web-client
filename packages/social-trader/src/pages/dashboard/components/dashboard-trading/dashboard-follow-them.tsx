@@ -12,7 +12,7 @@ const _DashboardFollowThem: React.FC<Props> = () => {
       getItems={getFollowThem}
       title={t("dashboard-page.trading.follow-them")}
       renderBodyCard={(asset: FollowDetailsList) => (
-        <FollowCard follow={asset} toggleFavorite={() => {}} title={""} />
+        <FollowCard follow={asset} title={""} />
       )}
     />
   );
