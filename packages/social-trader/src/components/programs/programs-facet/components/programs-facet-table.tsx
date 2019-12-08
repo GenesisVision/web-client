@@ -9,12 +9,8 @@ import {
   SortingColumn
 } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
-import {
-  GetItemsFuncType,
-  TableToggleFavoriteType
-} from "components/table/components/table.types";
+import { GetItemsFuncType } from "components/table/components/table.types";
 import { Currency, PlatformCurrencyInfo, Timeframe } from "gv-api-web";
-import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
 import { fundListLoaderData } from "modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
 import ProgramTableModule from "modules/programs-table/components/programs-table/programs-table-module";
@@ -41,21 +37,6 @@ const _ProgramsFacetTable: React.FC<
   timeframe,
   columns
 }) => {
-  const toggleFavorite: TableToggleFavoriteType = useCallback(
-    (program, updateRow) => () => {
-      const { isFavorite } = program.personalDetails;
-      const newProgram = {
-        ...program,
-        personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
-      };
-      updateRow(newProgram);
-      toggleFavoriteProgram({ id: program.id, isFavorite }).catch(() => {
-        updateRow(program);
-      });
-    },
-    []
-  );
-
   const composeFiltering = useCallback(
     () =>
       ({
@@ -93,7 +74,6 @@ const _ProgramsFacetTable: React.FC<
       sorting={sorting}
       filtering={composeFiltering()}
       defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
-      toggleFavorite={toggleFavorite}
       getItems={getItems}
       isAuthenticated={isAuthenticated}
       showRating={showRating}
