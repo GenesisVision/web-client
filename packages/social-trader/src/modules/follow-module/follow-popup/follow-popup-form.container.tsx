@@ -2,16 +2,15 @@ import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import {
   AmountWithCurrency,
   AttachToSignalProvider,
-  BrokerTradeServerType,
-  SignalSubscription
+  BrokerTradeServerType
 } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
+import { useGetRate } from "hooks/get-rate.hook";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import { useGetRate } from "../follow-module-container.hooks";
 import FollowPopupForm from "../follow-popup/follow-popup-form";
 import {
   attachToExternalSignal,
