@@ -1,9 +1,10 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramWithdrawInfo } from "gv-api-web";
+import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
@@ -26,7 +27,10 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   assetCurrency,
   accountCurrency
 }) => {
-  const rate = 1; // TODO change to real value
+  const { rate, getRate } = useGetRate();
+  useEffect(() => {
+    getRate({ from: assetCurrency, to: accountCurrency });
+  }, [assetCurrency, accountCurrency]);
   const [t] = useTranslation();
   const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
     PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
