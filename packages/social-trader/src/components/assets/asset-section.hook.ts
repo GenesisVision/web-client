@@ -1,9 +1,9 @@
 import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "components/wallet/services/wallet.services";
 import { WalletData } from "gv-api-web";
+import { useGetRate } from "hooks/get-rate.hook";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRate } from "services/rate-service";
 import { CurrencyEnum } from "utils/types";
 
 type TUseAssetSectionProps = {
@@ -25,7 +25,7 @@ const useAssetSection = ({
   const [wallet, setWallet] = useState<WalletData>(
     wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
   );
-  const [rate, setRate] = useState<number>(1);
+  const { rate, getRate } = useGetRate();
 
   useEffect(() => {
     dispatch(fetchWallets(assetCurrency));
@@ -38,7 +38,7 @@ const useAssetSection = ({
   }, [wallets]);
 
   useEffect(() => {
-    wallet && fetchRate(wallet.currency, assetCurrency).then(setRate);
+    wallet && getRate({ from: wallet.currency, to: assetCurrency });
   }, [wallet, assetCurrency]);
 
   const handleWalletChange = useCallback(
