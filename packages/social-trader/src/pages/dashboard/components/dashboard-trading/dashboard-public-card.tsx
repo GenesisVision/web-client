@@ -1,14 +1,12 @@
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
+import {
+  TableCardActions,
+  TableCardActionsItem
+} from "components/table/components/table-card/table-card-actions";
 import { AssetType, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor, TEvent } from "hooks/anchor.hook";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
@@ -182,41 +180,27 @@ const _DashboardPublicCardActions: React.FC<
     state: `/ ${title}`
   };
   return (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={clearAnchor}
-    >
-      <div className="popover-list">
-        {canMakeProgram && (
-          <Link to={makeProgramLink}>
-            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-              {t("dashboard-page.trading.actions.make-program")}
-            </GVButton>
-          </Link>
-        )}
-        {canEdit && (
-          <Link to={settingsLink}>
-            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-              {t("dashboard-page.trading.actions.settings")}
-            </GVButton>
-          </Link>
-        )}
-        {showTerminal && (
-          <Link to={terminalLink}>
-            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-              {t("dashboard-page.trading.actions.terminal")}
-            </GVButton>
-          </Link>
-        )}
-        {showClosePeriod && <ClosePeriodButton id={id} />}
-        {showChangePassword && (
-          <ChangeAccountPasswordButton id={id} title={title} />
-        )}
-      </div>
-    </Popover>
+    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      {canMakeProgram && (
+        <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.make-program")}
+        </TableCardActionsItem>
+      )}
+      {canEdit && (
+        <TableCardActionsItem to={settingsLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.settings")}
+        </TableCardActionsItem>
+      )}
+      {showTerminal && (
+        <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.terminal")}
+        </TableCardActionsItem>
+      )}
+      {showClosePeriod && <ClosePeriodButton id={id} />}
+      {showChangePassword && (
+        <ChangeAccountPasswordButton id={id} title={title} />
+      )}
+    </TableCardActions>
   );
 };
 

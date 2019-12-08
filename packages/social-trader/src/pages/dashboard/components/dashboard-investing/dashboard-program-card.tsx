@@ -1,35 +1,28 @@
 import AssetStatus from "components/asset-status/asset-status";
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
+import {
+  IRenderActionsArgs,
+  TableCardActions,
+  TableCardActionsItem
+} from "components/table/components/table-card/table-card-actions";
 import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { ProgramDetailsList, ProgramInvestingDetailsList } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
+import { ProgramInvestingDetailsList } from "gv-api-web";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
 import { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET, FUND_CURRENCY, STATUS } from "shared/constants/constants";
+import { ASSET, STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
-import {
-  formatCurrencyValue,
-  formatValue,
-  formatValueDifferentDecimalScale
-} from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardProgramCard: React.FC<Props> = ({
@@ -53,46 +46,22 @@ const _DashboardProgramCard: React.FC<Props> = ({
   };
   const requestCurrency = program.balance.currency;
 
-  const renderActions = ({
-    clearAnchor,
-    anchor
-  }: {
-    clearAnchor: (event: TEvent) => void;
-    anchor: TAnchor;
-  }) => (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={clearAnchor}
-    >
-      <div className="popover-list">
-        <Link to={linkProps}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("program-actions.details")}
-          </GVButton>
-        </Link>
-        {program.personalDetails && !program.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("program-actions.add-to-favorites")}
-          </GVButton>
-        )}
-        {program.personalDetails && program.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("program-actions.remove-from-favorites")}
-          </GVButton>
-        )}
-      </div>
-    </Popover>
+  const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
+    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
+        {t("program-actions.details")}
+      </TableCardActionsItem>
+      {program.personalDetails && !program.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("program-actions.add-to-favorites")}
+        </TableCardActionsItem>
+      )}
+      {program.personalDetails && program.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("program-actions.remove-from-favorites")}
+        </TableCardActionsItem>
+      )}
+    </TableCardActions>
   );
   return (
     <TableCard

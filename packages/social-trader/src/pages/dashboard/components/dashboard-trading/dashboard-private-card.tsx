@@ -1,17 +1,18 @@
 import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
-import Link from "components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
+import {
+  IRenderActionsArgs,
+  TableCardActions,
+  TableCardActionsItem
+} from "components/table/components/table-card/table-card-actions";
 import { DashboardTradingAsset } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
+import { TEvent } from "hooks/anchor.hook";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
@@ -53,54 +54,36 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
     pathname: makeProgramExternalLinkMethod(asset.id),
     state: `/ ${title}`
   };
-  const renderActions = ({
-    anchor,
-    clearAnchor
-  }: {
-    anchor: TAnchor;
-    clearAnchor: (event: TEvent) => void;
-  }) => (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={clearAnchor}
-    >
-      <div className="popover-list">
-        <Link to={terminalLink}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("dashboard-page.trading.actions.terminal")}
-          </GVButton>
-        </Link>
-        {asset.actions
-          .canMakeSignalProviderFromPrivateExternalTradingAccount && (
-          <Link to={makeProgramExternalLink}>
-            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-              {t("dashboard-page.trading.actions.make-program")}
-            </GVButton>
-          </Link>
-        )}
-        <MakeProgramButton
-          canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
-          id={asset.id}
-          title={title}
-          clearAnchor={clearAnchor}
-        />
-        {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
-          <Link to={makeSignalAccountLink}>
-            <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-              {t("dashboard-page.trading.actions.make-signal-account")}
-            </GVButton>
-          </Link>
-        )}
-        <CloseAssetButton
-          type={"account" as ASSET}
-          id={asset.id}
-          variant={"text"}
-        />
-      </div>
-    </Popover>
+  const renderActions = ({ anchor, clearAnchor }: IRenderActionsArgs) => (
+    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
+        {t("dashboard-page.trading.actions.terminal")}
+      </TableCardActionsItem>
+      {asset.actions.canMakeSignalProviderFromPrivateExternalTradingAccount && (
+        <TableCardActionsItem
+          to={makeProgramExternalLink}
+          onClick={clearAnchor}
+        >
+          {t("dashboard-page.trading.actions.make-program")}
+        </TableCardActionsItem>
+      )}
+      <MakeProgramButton
+        canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
+        id={asset.id}
+        title={title}
+        clearAnchor={clearAnchor}
+      />
+      {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
+        <TableCardActionsItem to={makeSignalAccountLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.make-signal-account")}
+        </TableCardActionsItem>
+      )}
+      <CloseAssetButton
+        type={"account" as ASSET}
+        id={asset.id}
+        variant={"text"}
+      />
+    </TableCardActions>
   );
   const detailsLink = {
     pathname: composeAccountDetailsUrl(asset.id),
@@ -173,11 +156,9 @@ const MakeProgramButton: React.FC<{
   };
   const label = t("dashboard-page.trading.actions.make-program");
   return canMake ? (
-    <Link to={makeProgramLink}>
-      <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-        {label}
-      </GVButton>
-    </Link>
+    <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
+      {label}
+    </TableCardActionsItem>
   ) : (
     <GVButton variant="text" color="secondary">
       <Hint

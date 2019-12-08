@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "shared/i18n";
@@ -17,13 +17,9 @@ const _ChangeAccountPasswordButton: React.FC<{ title: string; id: string }> = ({
   const [t] = useTranslation();
   return (
     <>
-      <GVButton
-        variant="text"
-        color="secondary"
-        onClick={setChangePasswordOpen}
-      >
+      <TableCardActionsItem onClick={setChangePasswordOpen}>
         {t("program-actions.change-password")}
-      </GVButton>
+      </TableCardActionsItem>
       <ChangePasswordTradingAccountPopup
         programName={title}
         open={isChangePasswordOpen}

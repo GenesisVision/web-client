@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
 import ConfirmClosePeriodContainer from "modules/asset-settings/close-period/confirm-close-period-container";
 import React from "react";
@@ -16,9 +16,9 @@ const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({
   ] = useIsOpen();
   return (
     <>
-      <GVButton variant="text" color="secondary" onClick={setClosePeriodOpen}>
+      <TableCardActionsItem onClick={setClosePeriodOpen}>
         {t("dashboard-page.trading.actions.close-period")}
-      </GVButton>
+      </TableCardActionsItem>
       <ConfirmClosePeriodContainer
         open={isClosePeriodOpen}
         onClose={setClosePeriodClose}

@@ -1,19 +1,17 @@
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
+import {
+  IRenderActionsArgs,
+  TableCardActions,
+  TableCardActionsItem
+} from "components/table/components/table-card/table-card-actions";
 import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ProgramDetailsList } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import NumberFormat from "react-number-format";
@@ -48,46 +46,22 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
   };
   const requestCurrency = program.balance.currency;
 
-  const renderActions = ({
-    clearAnchor,
-    anchor
-  }: {
-    clearAnchor: (event: TEvent) => void;
-    anchor: TAnchor;
-  }) => (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={clearAnchor}
-    >
-      <div className="popover-list">
-        <Link to={linkProps}>
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("program-actions.details")}
-          </GVButton>
-        </Link>
-        {program.personalDetails && !program.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("program-actions.add-to-favorites")}
-          </GVButton>
-        )}
-        {program.personalDetails && program.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("program-actions.remove-from-favorites")}
-          </GVButton>
-        )}
-      </div>
-    </Popover>
+  const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
+    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
+        {t("program-actions.details")}
+      </TableCardActionsItem>
+      {program.personalDetails && !program.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("program-actions.add-to-favorites")}
+        </TableCardActionsItem>
+      )}
+      {program.personalDetails && program.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("program-actions.remove-from-favorites")}
+        </TableCardActionsItem>
+      )}
+    </TableCardActions>
   );
   return (
     <TableCard

@@ -2,20 +2,18 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
+import {
+  IRenderActionsArgs,
+  TableCardActions,
+  TableCardActionsItem
+} from "components/table/components/table-card/table-card-actions";
 import { FundInvestingDetailsList } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
 import { useCallback } from "react";
@@ -43,52 +41,29 @@ const _DashboardFundCard: React.FC<Props> = ({
       ),
     [fund.id, fund.personalDetails, toggleFavorite]
   );
-  const renderActions = ({
-    clearAnchor,
-    anchor
-  }: {
-    clearAnchor: (event: TEvent) => void;
-    anchor: TAnchor;
-  }) => (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={clearAnchor}
-    >
-      <div className="popover-list">
-        <Link
-          to={{
-            as: composeFundsDetailsUrl(fund.url),
-            pathname: FUND_DETAILS_FOLDER_ROUTE,
-            state: `/ ${title}`
-          }}
-        >
-          <GVButton variant="text" color="secondary" onClick={clearAnchor}>
-            {t("fund-actions.details")}
-          </GVButton>
-        </Link>
-        {fund.personalDetails && !fund.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("fund-actions.add-to-favorites")}
-          </GVButton>
-        )}
-        {fund.personalDetails && fund.personalDetails.isFavorite && (
-          <GVButton
-            variant="text"
-            color="secondary"
-            onClick={handleToggleFavorite}
-          >
-            {t("fund-actions.remove-from-favorites")}
-          </GVButton>
-        )}
-      </div>
-    </Popover>
+  const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
+    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      <TableCardActionsItem
+        onClick={clearAnchor}
+        to={{
+          as: composeFundsDetailsUrl(fund.url),
+          pathname: FUND_DETAILS_FOLDER_ROUTE,
+          state: `/ ${title}`
+        }}
+      >
+        {t("fund-actions.details")}
+      </TableCardActionsItem>
+      {fund.personalDetails && !fund.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("fund-actions.add-to-favorites")}
+        </TableCardActionsItem>
+      )}
+      {fund.personalDetails && fund.personalDetails.isFavorite && (
+        <TableCardActionsItem onClick={handleToggleFavorite}>
+          {t("fund-actions.remove-from-favorites")}
+        </TableCardActionsItem>
+      )}
+    </TableCardActions>
   );
   return (
     <TableCard
