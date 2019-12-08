@@ -1,14 +1,11 @@
-import programApi from "services/api-client/programs-api";
 import { FavoriteActionProps, FavoriteActionType } from "utils/types";
 
-export const SET_FAVORITE_PROGRAM = "SET_FAVORITE_PROGRAM";
+export const SET_FAVORITE_FOLLOW = "SET_FAVORITE_FOLLOW";
 
 export const addFavoriteFollowAction = ({
-  id,
-  authorization
+  id
 }: FavoriteActionProps): FavoriteActionType<any> => ({
-  type: SET_FAVORITE_PROGRAM,
-  payload: programApi.addToFavorites(id, authorization),
+  type: SET_FAVORITE_FOLLOW,
   meta: {
     id,
     isFavorite: true
@@ -16,11 +13,9 @@ export const addFavoriteFollowAction = ({
 });
 
 export const removeFavoriteFollowAction = ({
-  id,
-  authorization
+  id
 }: FavoriteActionProps): FavoriteActionType<any> => ({
-  type: SET_FAVORITE_PROGRAM,
-  payload: programApi.removeFromFavorites(id, authorization),
+  type: SET_FAVORITE_FOLLOW,
   meta: {
     id,
     isFavorite: false
