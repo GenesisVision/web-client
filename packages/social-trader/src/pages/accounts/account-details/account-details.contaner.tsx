@@ -10,6 +10,7 @@ import {
 } from "pages/accounts/account-details/services/account-details.service";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
+import { ASSET } from "shared/constants/constants";
 import { createAccountSettingsToUrl } from "utils/compose-url";
 
 import PerformanceData from "./account-details-description/performance-data";
@@ -31,6 +32,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={description.login}>
       <DetailsDescriptionSection
+        asset={ASSET.FOLLOW}
         showSettings
         description={description}
         settingsUrl={createAccountSettingsToUrl(
