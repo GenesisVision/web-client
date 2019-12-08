@@ -1,8 +1,4 @@
-import {
-  CancelablePromise,
-  FundDetailsList,
-  ProgramDetailsList
-} from "gv-api-web";
+import { CancelablePromise } from "gv-api-web";
 import { Action } from "redux";
 import { IDataModel } from "shared/constants/constants";
 import { MiddlewareDispatch, TGetState, VoidFuncType } from "utils/types";
@@ -36,16 +32,6 @@ export type GetItemsFuncType = (
 ) => CancelablePromise<IDataModel>;
 
 export type GetItemsFuncActionType = (filters: ComposeFiltersAllType) => Action;
-
-export type TableToggleFavoriteType = (
-  asset: ProgramDetailsList | FundDetailsList,
-  updateRow: UpdateRowFuncType
-) => TableToggleFavoriteHandlerType;
-
-export type TableToggleFavoriteHandlerType = (
-  assetId: string,
-  isFavorite: boolean
-) => void;
 
 export interface IComposeDefaultFilter<T = any> {
   name?: string;
