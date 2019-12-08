@@ -7,12 +7,12 @@ import InputAmountField from "components/input-amount-field/input-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletBaseData } from "gv-api-web";
+import { useGetRate } from "hooks/get-rate.hook";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import { fetchRate } from "services/rate-service";
 import { ASSET } from "shared/constants/constants";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
@@ -54,11 +54,11 @@ const _DepositForm: React.FC<
   ownAsset
 }) => {
   const { walletCurrency, amount = 0 } = values;
-  const [rate, setRate] = useState<number>(1);
+  const { rate, getRate } = useGetRate();
   const [availableInWallet, setAvailableInWallet] = useState<number>(0);
   const [availableToInvest, setAvailableToInvest] = useState<number>(0);
   useEffect(() => {
-    fetchRate(walletCurrency, currency).then(setRate);
+    getRate({ from: walletCurrency, to: currency });
   }, [currency, walletCurrency]);
   useEffect(() => {
     setAvailableToInvest(convertToCurrency(availableToInvestProp, rate));
