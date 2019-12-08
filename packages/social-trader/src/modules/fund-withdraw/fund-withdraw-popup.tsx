@@ -1,10 +1,9 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import useApiRequest from "hooks/api-request.hook";
+import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { fetchRate } from "services/rate-service";
 import { FUND_CURRENCY } from "shared/constants/constants";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
@@ -32,12 +31,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
   );
   const [currency, setCurrency] = useState<CurrencyEnum>("GVT");
   const [percent, setPercent] = useState<number | undefined>(undefined);
-  const { isPending, sendRequest: getRate, data: rate = 1 } = useApiRequest<
-    number
-  >({
-    request: ({ from, to }) => fetchRate(from, to)
-  });
-
+  const { rate, getRate, isRatePending } = useGetRate();
   useEffect(() => {
     getRate({ from: FUND_CURRENCY, to: currency });
   }, [currency]);
@@ -62,7 +56,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
   return (
     <>
       <FundWithdrawTop
-        isPending={isPending}
+        isPending={isRatePending}
         title={withdrawInfo.title}
         availableToWithdraw={availableToWithdraw}
         currency={currency}
@@ -70,7 +64,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
           <FundWithdrawAmountForm
-            isPending={isPending}
+            isPending={isRatePending}
             currency={currency}
             setCurrency={setCurrency}
             wallets={wallets}
