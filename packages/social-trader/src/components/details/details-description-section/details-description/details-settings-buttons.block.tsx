@@ -3,6 +3,7 @@ import "./details-description.scss";
 import { ToType } from "components/link/link";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { ASSET } from "shared/constants/constants";
 
 import { PersonalDetailsType } from "../../details.types";
 import DetailsFavorite from "./controls/details-favorite";
@@ -10,6 +11,7 @@ import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
+  asset,
   showSettings,
   personalDetails,
   id,
@@ -21,6 +23,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
     <div className="asset-details-description__settings">
       {personalDetails && (
         <DetailsFavorite
+          asset={asset}
           id={id}
           isFavorite={personalDetails && personalDetails.isFavorite}
         />
@@ -42,6 +45,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  asset: ASSET;
   showSettings?: boolean;
   personalDetails?: PersonalDetailsType;
   id: string;

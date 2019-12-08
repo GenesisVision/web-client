@@ -1,24 +1,19 @@
 import "./details-description-control.scss";
 
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
-import { push } from "connected-react-router";
-import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
+import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { LOGIN_ROUTE } from "routes/app.routes";
+import { ASSET } from "shared/constants/constants";
 
 import DetailsDescriptionControl from "./details-description-control";
 
 const _DetailsFavorite: React.FC<Props> = ({
+  asset,
   id,
   isFavorite: isFavoriteProp
 }) => {
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const [
     isFavorite,
@@ -26,40 +21,34 @@ const _DetailsFavorite: React.FC<Props> = ({
     setIsNotFavorite,
     setIsFavoriteValue
   ] = useIsOpen(isFavoriteProp);
-  const { isPending, sendRequest } = useApiRequest({
-    request: toggleFavoriteProgram
-  });
-  const handleFavoriteClickOnButton = useCallback(
-    (id: string, isFavorite: boolean) => {
-      if (isAuthenticated) {
-        setIsFavoriteValue(!isFavorite);
-        sendRequest({ id, isFavorite });
-      } else dispatch(push(LOGIN_ROUTE));
-    },
-    [isAuthenticated]
-  );
-  const handleFavoriteClickOnText = useCallback(() => {
-    handleFavoriteClickOnButton(id, isFavorite);
-  }, [id, isFavorite]);
+
+  const onApply = useCallback(() => {
+    setIsFavoriteValue(!isFavorite);
+  }, [isFavorite]);
   return (
-    <DetailsDescriptionControl
-      tag="button"
-      className="details-description-control--button"
-      onClick={handleFavoriteClickOnText}
-      disabled={isPending}
-      text={t("fund-details-page.description.addToFavorites")}
+    <ToggleAssetFavoriteButton
+      onApply={onApply}
+      assetType={asset}
+      id={id}
+      isFavorite={isFavorite}
     >
-      <FavoriteIcon
-        className="details-description-control__icon"
-        id={id}
-        selected={isFavorite}
-        onClick={handleFavoriteClickOnButton}
-      />
-    </DetailsDescriptionControl>
+      <DetailsDescriptionControl
+        tag="button"
+        className="details-description-control--button"
+        text={t("fund-details-page.description.addToFavorites")}
+      >
+        <FavoriteIcon
+          className="details-description-control__icon"
+          id={id}
+          selected={isFavorite}
+        />
+      </DetailsDescriptionControl>
+    </ToggleAssetFavoriteButton>
   );
 };
 
 interface Props {
+  asset: ASSET;
   id: string;
   isFavorite: boolean;
 }

@@ -3,10 +3,12 @@ import "components/details/details-description-section/details-description/detai
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
 import { ToType } from "components/link/link";
 import * as React from "react";
+import { ASSET } from "shared/constants/constants";
 
 import { DetailsFullType, PersonalDetailsType } from "../../details.types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  asset,
   showSettings,
   notificationsUrl,
   settingsUrl,
@@ -19,6 +21,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        asset={asset}
         showSettings={showSettings}
         personalDetails={personalDetails}
         description={description}
@@ -37,6 +40,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
+  asset: ASSET;
   showSettings?: boolean;
   notificationsUrl?: ToType;
   settingsUrl: ToType;

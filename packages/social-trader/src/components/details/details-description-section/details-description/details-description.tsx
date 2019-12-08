@@ -3,11 +3,13 @@ import { DetailsSettingsButtons } from "components/details/details-description-s
 import { ToType } from "components/link/link";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
+import { ASSET } from "shared/constants/constants";
 
 import { DetailsFullType, PersonalDetailsType } from "../../details.types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  asset,
   showSettings,
   personalDetails,
   description,
@@ -54,6 +56,7 @@ const _DetailsDescription: React.FC<Props> = ({
         {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
       </DetailsInfo>
       <DetailsSettingsButtons
+        asset={asset}
         showSettings={showSettings}
         personalDetails={personalDetails}
         id={description.id}
@@ -65,6 +68,7 @@ const _DetailsDescription: React.FC<Props> = ({
 };
 
 interface Props {
+  asset: ASSET;
   showSettings?: boolean;
   notificationsUrl?: ToType;
   settingsUrl: ToType;
