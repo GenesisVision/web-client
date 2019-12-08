@@ -1,32 +1,8 @@
 import { ItemsViewModelProgramDetailsList } from "gv-api-web";
 import { SET_FAVORITE_PROGRAM } from "modules/toggle-asset-favorite-button/actions/favorite-program.actions";
+import { updateFavoriteLocal } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.service";
 import { FavoriteActionType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
-
-const updateFavoriteLocal = (
-  state: IApiState<ItemsViewModelProgramDetailsList>,
-  id: string,
-  isFavorite: boolean
-): IApiState<ItemsViewModelProgramDetailsList> => {
-  if (!state.data) return state;
-  return {
-    ...state,
-    data: {
-      ...state.data,
-      items: state.data.items.map(program =>
-        program.id === id
-          ? {
-              ...program,
-              personalDetails: {
-                ...program.personalDetails,
-                isFavorite
-              }
-            }
-          : program
-      )
-    }
-  };
-};
 
 const favoritesReducer = (
   state: IApiState<ItemsViewModelProgramDetailsList>,
@@ -34,7 +10,11 @@ const favoritesReducer = (
 ): IApiState<ItemsViewModelProgramDetailsList> => {
   switch (action.type) {
     case SET_FAVORITE_PROGRAM:
-      return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
+      return updateFavoriteLocal(
+        state,
+        action.meta.id,
+        action.meta.isFavorite
+      ) as IApiState<ItemsViewModelProgramDetailsList>;
     default:
       return state;
   }

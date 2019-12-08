@@ -1,3 +1,4 @@
+import { IApiState } from "reducers/reducer-creators/api-reducer";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
 import programsApi from "services/api-client/programs-api";
@@ -19,6 +20,7 @@ import {
 import {
   MethodType,
   TableToggleFavoriteType,
+  ToggleableAssetListType,
   ToggleFavoriteDispatchableType
 } from "./toggle-asset-favorite-button.types";
 
@@ -152,4 +154,30 @@ export const toggleFavoriteUpdateRow: TableToggleFavoriteType = (
     }
   };
   updateRow(newAsset);
+};
+
+export const updateFavoriteLocal = (
+  state: IApiState<ToggleableAssetListType>,
+  id: string,
+  isFavorite: boolean
+): IApiState<ToggleableAssetListType> => {
+  if (!state.data) return state;
+  return {
+    ...state,
+    data: {
+      ...state.data,
+      // @ts-ignore TODO why
+      items: state.data.items.map((asset: any) =>
+        asset.id === id
+          ? {
+              ...asset,
+              personalDetails: {
+                ...asset.personalDetails,
+                isFavorite
+              }
+            }
+          : asset
+      )
+    }
+  };
 };

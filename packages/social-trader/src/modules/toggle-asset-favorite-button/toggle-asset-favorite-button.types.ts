@@ -3,6 +3,9 @@ import {
   FollowDetailsList,
   FundDetailsList,
   FundInvestingDetailsList,
+  ItemsViewModelFollowDetailsList,
+  ItemsViewModelFundDetailsList,
+  ItemsViewModelProgramDetailsList,
   ProgramDetailsList,
   ProgramInvestingDetailsList
 } from "gv-api-web";
@@ -23,6 +26,11 @@ export type TableToggleFavoriteType = (
   asset: ToggleableAssetType,
   updateRow: UpdateRowFuncType
 ) => void;
+
+export type ToggleableAssetListType =
+  | ItemsViewModelFollowDetailsList
+  | ItemsViewModelProgramDetailsList
+  | ItemsViewModelFundDetailsList;
 
 export type ToggleableAssetType =
   | FollowDetailsList
