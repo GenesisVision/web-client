@@ -5,11 +5,9 @@ import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/da
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
   GetItemsFuncType,
-  TableToggleFavoriteType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "modules/funds-table/components/funds-table/funds-table-module";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/components/funds-table/funds-table.constants";
 import React, { useCallback } from "react";
@@ -36,21 +34,6 @@ const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
     [ownerId]
   );
 
-  const toggleFavorite: TableToggleFavoriteType = useCallback(
-    (asset, updateRow) => () => {
-      const isFavorite = asset.personalDetails.isFavorite;
-      const newProgram = {
-        ...asset,
-        personalDetails: { ...asset.personalDetails, isFavorite: !isFavorite }
-      };
-      updateRow(newProgram);
-      toggleFavoriteFund(asset.id, isFavorite).catch(() => {
-        updateRow(asset);
-      });
-    },
-    []
-  );
-
   return (
     <FundsTableModule
       disableTitle
@@ -71,7 +54,6 @@ const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
           startLabel={t("filters.date-range.fund-start")}
         />
       )}
-      toggleFavorite={toggleFavorite}
       isAuthenticated={isAuthenticated}
     />
   );
