@@ -11,12 +11,13 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import { FundInvestingDetailsList } from "gv-api-web";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
@@ -27,20 +28,12 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardFundCard: React.FC<Props> = ({
+  updateRow,
   updateItems,
   fund,
-  toggleFavorite,
   title = ""
 }) => {
   const { t } = useTranslation();
-  const handleToggleFavorite = useCallback(
-    () =>
-      toggleFavorite(
-        fund.id,
-        fund.personalDetails && fund.personalDetails.isFavorite
-      ),
-    [fund.id, fund.personalDetails, toggleFavorite]
-  );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
@@ -53,15 +46,14 @@ const _DashboardFundCard: React.FC<Props> = ({
       >
         {t("fund-actions.details")}
       </TableCardActionsItem>
-      {fund.personalDetails && !fund.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("fund-actions.add-to-favorites")}
-        </TableCardActionsItem>
-      )}
-      {fund.personalDetails && fund.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("fund-actions.remove-from-favorites")}
-        </TableCardActionsItem>
+      {fund.personalDetails && (
+        <TableCardFavoriteActionItem
+          asset={fund}
+          updateRow={updateRow}
+          assetType={ASSET.FUND}
+          id={fund.id}
+          isFavorite={fund.personalDetails.isFavorite}
+        />
       )}
     </TableCardActions>
   );
@@ -141,8 +133,8 @@ const DashboardFundCard = React.memo(_DashboardFundCard);
 export default DashboardFundCard;
 
 interface Props {
+  updateRow?: UpdateRowFuncType;
   updateItems: VoidFuncType;
   fund: FundInvestingDetailsList;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
   title?: string;
 }

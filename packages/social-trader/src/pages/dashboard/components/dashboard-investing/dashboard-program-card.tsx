@@ -8,15 +8,15 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ProgramInvestingDetailsList } from "gv-api-web";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
-import { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, STATUS } from "shared/constants/constants";
@@ -26,19 +26,11 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardProgramCard: React.FC<Props> = ({
+  updateRow,
   updateItems,
   program,
-  toggleFavorite,
   title
 }) => {
-  const handleToggleFavorite = useCallback(
-    () =>
-      toggleFavorite(
-        program.id,
-        program.personalDetails && program.personalDetails.isFavorite
-      ),
-    [program.id, program.personalDetails, toggleFavorite]
-  );
   const { t } = useTranslation();
   const linkProps = {
     pathname: composeProgramDetailsUrl(program.url),
@@ -51,15 +43,14 @@ const _DashboardProgramCard: React.FC<Props> = ({
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
         {t("program-actions.details")}
       </TableCardActionsItem>
-      {program.personalDetails && !program.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("program-actions.add-to-favorites")}
-        </TableCardActionsItem>
-      )}
-      {program.personalDetails && program.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("program-actions.remove-from-favorites")}
-        </TableCardActionsItem>
+      {program.personalDetails && (
+        <TableCardFavoriteActionItem
+          updateRow={updateRow}
+          asset={program}
+          assetType={ASSET.PROGRAM}
+          id={program.id}
+          isFavorite={program.personalDetails.isFavorite}
+        />
       )}
     </TableCardActions>
   );
@@ -147,9 +138,9 @@ const _DashboardProgramCard: React.FC<Props> = ({
 };
 
 interface Props {
+  updateRow?: UpdateRowFuncType;
   updateItems: VoidFuncType;
   program: ProgramInvestingDetailsList;
-  toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
