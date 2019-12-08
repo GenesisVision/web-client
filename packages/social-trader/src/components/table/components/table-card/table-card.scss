@@ -103,6 +103,11 @@ $card-avatar-size: 80px;
       height: 30px;
     }
   }
+  &__actions-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   &__table {
     display: flex;
