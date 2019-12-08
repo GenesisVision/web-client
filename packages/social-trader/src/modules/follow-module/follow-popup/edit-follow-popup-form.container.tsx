@@ -1,5 +1,6 @@
 import { SignalSubscription } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
+import { useGetRate } from "hooks/get-rate.hook";
 import FollowParams, {
   FollowParamsFormValues
 } from "modules/follow-module/follow-popup/follow-popup-params";
@@ -7,7 +8,6 @@ import FollowTop from "modules/follow-module/follow-popup/follow-popup-top";
 import React, { useCallback, useEffect } from "react";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import { useGetRate } from "../follow-module-container.hooks";
 import { updateAttachToSignal } from "../services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
