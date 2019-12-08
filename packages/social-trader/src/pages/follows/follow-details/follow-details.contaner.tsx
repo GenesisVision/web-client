@@ -15,8 +15,8 @@ import {
   getTrades
 } from "pages/programs/program-details/service/program-details.service";
 import * as React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { programEventsSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
 import {
@@ -28,12 +28,7 @@ import { statisticCurrencyAction } from "./actions/follow-details.actions";
 import FollowControls from "./follow-controls/follow-controls";
 import PerformanceData from "./follow-details-description/performance-data";
 import FollowDetailsStatisticSection from "./follow-details-statistic-section/follow-details-statistic-section";
-import {
-  FollowDetailsDataType,
-  IDescriptionSection
-} from "./follow-details.types";
-import FollowDetailsHistorySection from "./follow-history-section/follow-details-history-section";
-import { followIdSelector } from "./reducers/description.reducer";
+import { FollowDetailsDataType } from "./follow-details.types";
 import {
   followEventsTableSelector,
   openPositionsTableSelector,
@@ -66,9 +61,13 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+  const handleDispatchDescription = useCallback(() => {
+    dispatch(dispatchFollowDescription(description.id)());
+  }, []);
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
+        asset={ASSET.FOLLOW}
         personalDetails={personalDetails}
         description={description}
         notificationsUrl={createFollowNotificationsToUrl(
@@ -86,7 +85,7 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <div className="details__divider" />
       <DetailsInvestment
         fees={{}}
-        dispatchDescription={dispatchFollowDescription(description.id)}
+        dispatchDescription={handleDispatchDescription}
         eventTypesSelector={programEventsSelector}
         asset={ASSET.FOLLOW}
         selector={followEventsTableSelector}
