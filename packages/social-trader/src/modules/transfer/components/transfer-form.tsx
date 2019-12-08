@@ -15,8 +15,8 @@ import WalletSelect, {
 } from "components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
-import TransferRate from "modules/transfer/components/transfer-rate";
-import React, { useCallback } from "react";
+import { useGetRate } from "hooks/get-rate.hook";
+import React, { useCallback, useEffect } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
@@ -44,6 +44,7 @@ const _TransferForm: React.FC<Props> = ({
   setFieldValue,
   isSubmitting
 }) => {
+  const { rate, getRate } = useGetRate();
   const onChangeSourceId = useCallback(
     (event: ISelectChangeEvent) => {
       const currencyFromNew = event.target.value;
@@ -98,6 +99,13 @@ const _TransferForm: React.FC<Props> = ({
     selectedSourceItem.available,
     selectedDestinationItem.currency
   );
+
+  useEffect(() => {
+    getRate({
+      from: selectedDestinationItem.currency,
+      to: selectedSourceItem.currency
+    });
+  }, [selectedDestinationItem.currency, selectedSourceItem.currency]);
 
   const setMaxAmount = () => {
     setFieldValue(FIELDS.amount, formattedAvailableSourceItem);
@@ -155,17 +163,10 @@ const _TransferForm: React.FC<Props> = ({
           />
         </DialogField>
         {!!values[FIELDS.amount] && (
-          <TransferRate
-            destinationCurrency={selectedDestinationItem.currency}
-            sourceCurrency={selectedSourceItem.currency}
-          >
-            {props => (
-              <span>{`≈ ${formatCurrencyValue(
-                props.rate * Number(values[FIELDS.amount]),
-                selectedDestinationItem.currency
-              )} ${selectedDestinationItem.currency}`}</span>
-            )}
-          </TransferRate>
+          <span>{`≈ ${formatCurrencyValue(
+            rate * Number(values[FIELDS.amount]),
+            selectedDestinationItem.currency
+          )} ${selectedDestinationItem.currency}`}</span>
         )}
         <FormError error={errorMessage} />
         <DialogButtons>
