@@ -2,7 +2,6 @@ import "./funds-table.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import { FundDetailsList } from "gv-api-web";
 import * as React from "react";
 
@@ -15,7 +14,6 @@ import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
   data?: FundDetailsList[];
-  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated: boolean;
 }
 
@@ -29,7 +27,6 @@ const _FundsTable: React.FC<Props> = ({
   renderMappings,
   paging,
   updatePaging,
-  toggleFavorite,
   isAuthenticated,
   title
 }) => (
@@ -58,19 +55,13 @@ const _FundsTable: React.FC<Props> = ({
     )}
     renderBodyRow={fund => (
       <FundsTableRow
+        withDispatch
         title={title}
         fund={fund}
-        toggleFavorite={toggleFavorite}
         isAuthenticated={isAuthenticated}
       />
     )}
-    renderBodyCard={fund => (
-      <FundCard
-        title={title as string}
-        fund={fund}
-        toggleFavorite={toggleFavorite}
-      />
-    )}
+    renderBodyCard={fund => <FundCard title={title as string} fund={fund} />}
   />
 );
 

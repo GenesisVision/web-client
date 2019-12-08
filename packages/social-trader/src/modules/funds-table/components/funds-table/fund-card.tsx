@@ -11,28 +11,21 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import { FundDetailsList } from "gv-api-web";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { managerToPathCreator } from "routes/manager.routes";
+import { ASSET } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title = "" }) => {
+const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
   const { t } = useTranslation();
-  const handleToggleFavorite = useCallback(
-    () =>
-      toggleFavorite(
-        fund.id,
-        fund.personalDetails && fund.personalDetails.isFavorite
-      ),
-    [fund.id, fund.personalDetails, toggleFavorite]
-  );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
@@ -45,15 +38,13 @@ const _FundCard: React.FC<Props> = ({ fund, toggleFavorite, title = "" }) => {
       >
         {t("fund-actions.details")}
       </TableCardActionsItem>
-      {fund.personalDetails && !fund.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("fund-actions.add-to-favorites")}
-        </TableCardActionsItem>
-      )}
-      {fund.personalDetails && fund.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("fund-actions.remove-from-favorites")}
-        </TableCardActionsItem>
+      {fund.personalDetails && (
+        <TableCardFavoriteActionItem
+          withDispatch
+          assetType={ASSET.FUND}
+          id={fund.id}
+          isFavorite={fund.personalDetails.isFavorite}
+        />
       )}
     </TableCardActions>
   );
@@ -125,6 +116,5 @@ export default FundCard;
 
 interface Props {
   fund: FundDetailsList;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
   title?: string;
 }

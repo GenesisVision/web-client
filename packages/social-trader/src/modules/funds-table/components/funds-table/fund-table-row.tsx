@@ -9,19 +9,22 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import { FundDetailsList } from "gv-api-web";
+import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
+import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FundsTableRow: React.FC<Props> = ({
+  withDispatch,
   fund,
   isAuthenticated,
-  toggleFavorite,
+  updateRow,
   title
 }) => (
   <TableRow>
@@ -99,20 +102,29 @@ const _FundsTableRow: React.FC<Props> = ({
     </TableCell>
     {isAuthenticated && fund.personalDetails && (
       <TableCell className="funds-table__cell funds-table__cell--favorite">
-        <FavoriteIcon
+        <ToggleAssetFavoriteButton
+          asset={fund}
+          updateRow={updateRow}
+          withDispatch={withDispatch}
+          assetType={ASSET.FUND}
           id={fund.id}
-          selected={fund.personalDetails.isFavorite}
-          onClick={toggleFavorite}
-        />
+          isFavorite={fund.personalDetails.isFavorite}
+        >
+          <FavoriteIcon
+            id={fund.id}
+            selected={fund.personalDetails.isFavorite}
+          />
+        </ToggleAssetFavoriteButton>
       </TableCell>
     )}
   </TableRow>
 );
 
 interface Props {
+  updateRow?: UpdateRowFuncType;
+  withDispatch?: boolean;
   fund: FundDetailsList;
   isAuthenticated?: boolean;
-  toggleFavorite?: TableToggleFavoriteHandlerType;
   title?: JSX.Element | string;
 }
 

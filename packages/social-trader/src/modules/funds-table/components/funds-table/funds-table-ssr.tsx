@@ -6,9 +6,8 @@ import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fu
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { calculateTotalPages } from "components/table/helpers/paging.helpers";
 import useRouteFilters from "hooks/route-filters.hook";
-import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
@@ -27,7 +26,6 @@ import {
 } from "./funds-table.constants";
 
 const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
-  const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const data = useSelector(fundsDataSelector);
@@ -85,9 +83,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         totalItems: data.total
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
-      toggleFavorite={(id: string, isFavorite: boolean) =>
-        dispatch(toggleFavoriteFundDispatchable(id, isFavorite))
-      }
       isAuthenticated={isAuthenticated}
     />
   );

@@ -1,10 +1,6 @@
 import { ItemsViewModelFundDetailsList } from "gv-api-web";
-import { SET_FAVORITE_FUND } from "modules/favorite-asset/actions/favorite-fund.actions";
-import {
-  FAILURE_SUFFIX,
-  IApiState,
-  REQUEST_SUFFIX
-} from "reducers/reducer-creators/api-reducer";
+import { SET_FAVORITE_FUND } from "modules/toggle-asset-favorite-button/actions/favorite-fund.actions";
+import { IApiState } from "reducers/reducer-creators/api-reducer";
 import { FavoriteActionType } from "utils/types";
 
 const updateFavoriteLocal = (
@@ -37,15 +33,8 @@ const favoritesReducer = (
   action: FavoriteActionType
 ): IApiState<ItemsViewModelFundDetailsList> => {
   switch (action.type) {
-    case `${SET_FAVORITE_FUND}_${REQUEST_SUFFIX}`:
+    case SET_FAVORITE_FUND:
       return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
-    case `${SET_FAVORITE_FUND}_${FAILURE_SUFFIX}`: {
-      return updateFavoriteLocal(
-        state,
-        action.meta.id,
-        !action.meta.isFavorite
-      );
-    }
     default:
       return state;
   }
