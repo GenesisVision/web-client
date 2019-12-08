@@ -8,7 +8,6 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { FundDetailsFull } from "gv-api-web";
-import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,6 +38,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
+        asset={ASSET.FUND}
         personalDetails={description.personalDetails}
         description={description}
         notificationsUrl={createFundNotificationsToUrl(
