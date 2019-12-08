@@ -6,17 +6,13 @@ import {
 import { mapServerTimeFrameToFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
-import {
-  GetItemsFuncType,
-  TableToggleFavoriteType
-} from "components/table/components/table.types";
+import { GetItemsFuncType } from "components/table/components/table.types";
 import { PlatformCurrencyInfo, Timeframe } from "gv-api-web";
-import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
 import FundsTableModule from "modules/funds-table/components/funds-table/funds-table-module";
 import { CURRENCY_MAP_NAME } from "modules/funds-table/components/funds-table/funds-table.constants";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -24,8 +20,7 @@ import {
   FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
-const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
-  t,
+const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
   title,
   sorting,
   getItems,
@@ -34,21 +29,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
   currency,
   currencies
 }) => {
-  const toggleFavorite: TableToggleFavoriteType = useCallback(
-    (fund, updateRow) => () => {
-      const isFavorite = fund.personalDetails.isFavorite;
-      const newProgram = {
-        ...fund,
-        personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
-      };
-      updateRow(newProgram);
-      toggleFavoriteFund(fund.id, isFavorite).catch(() => {
-        updateRow(fund);
-      });
-    },
-    []
-  );
-
+  const [t] = useTranslation();
   const composeFiltering = useCallback(
     () =>
       ({
@@ -86,7 +67,6 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps & WithTranslation> = ({
       sorting={sorting}
       filtering={composeFiltering()}
       defaultFilters={FUNDS_FACET_TABLE_FILTERS}
-      toggleFavorite={toggleFavorite}
       getItems={getItems}
       isAuthenticated={isAuthenticated}
     />
@@ -103,5 +83,5 @@ export interface IFundsFacetTableProps {
   currency?: CurrencyEnum;
 }
 
-const FundsFacetTable = translate()(React.memo(_FundsFacetTable));
+const FundsFacetTable = React.memo(_FundsFacetTable);
 export default FundsFacetTable;
