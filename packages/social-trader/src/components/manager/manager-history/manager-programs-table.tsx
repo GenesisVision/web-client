@@ -2,12 +2,8 @@ import "components/details/details-description-section/details-statistic-section
 
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  GetItemsFuncType,
-  TableToggleFavoriteType
-} from "components/table/components/table.types";
+import { GetItemsFuncType } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule from "modules/programs-table/components/programs-table/programs-table-module";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,21 +25,6 @@ const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
     [ownerId]
   );
 
-  const toggleFavorite: TableToggleFavoriteType = useCallback(
-    (program, updateRow) => () => {
-      const isFavorite = program.personalDetails.isFavorite;
-      const newProgram = {
-        ...program,
-        personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
-      };
-      updateRow(newProgram);
-      toggleFavoriteProgram({ id: program.id, isFavorite }).catch(() => {
-        updateRow(program);
-      });
-    },
-    []
-  );
-
   return (
     <ProgramTableModule
       disableTitle
@@ -61,7 +42,6 @@ const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
           startLabel={t("filters.date-range.program-start")}
         />
       )}
-      toggleFavorite={toggleFavorite}
       isAuthenticated={isAuthenticated}
     />
   );
