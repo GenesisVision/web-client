@@ -7,7 +7,6 @@ import { InvestmentBlockDetailsType } from "components/details/details-descripti
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramDetailsFull } from "gv-api-web";
-import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import * as React from "react";
 import { useCallback } from "react";
@@ -73,6 +72,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
+        asset={ASSET.PROGRAM}
         personalDetails={description.personalDetails}
         description={description}
         notificationsUrl={createProgramNotificationsToUrl(
