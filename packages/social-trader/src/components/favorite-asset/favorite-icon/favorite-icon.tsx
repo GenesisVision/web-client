@@ -2,23 +2,14 @@ import "./favorite-icon.scss";
 
 import { Icon } from "components/icon/icon";
 import * as React from "react";
-import { useCallback } from "react";
 
 const FavoriteIcon: React.FC<Props> = React.memo(
-  ({ onClick, selected, className, id }) => {
-    const handleClick = useCallback(
-      (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        if (onClick) onClick(id, selected);
-      },
-      [onClick, id, selected]
-    );
+  ({ selected, className, id }) => {
     return (
       <Icon
         type={"favorite"} // TODO change to enum
         selected={selected}
         className={className}
-        onClick={handleClick}
       >
         <svg
           width="28px"
