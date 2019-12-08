@@ -9,31 +9,26 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ProgramDetailsList } from "gv-api-web";
+import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
+import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-interface IProgramTableRowShortProps {
-  title: string;
-  showRating?: boolean;
-  program: ProgramDetailsList;
-  isAuthenticated?: boolean;
-  toggleFavorite?: TableToggleFavoriteHandlerType;
-}
-
-const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
+const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
+  withDispatch,
+  updateRow,
   title,
   showRating,
   program,
-  isAuthenticated,
-  toggleFavorite
+  isAuthenticated
 }) => {
   const { t } = useTranslation();
   const {
@@ -148,15 +143,30 @@ const ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
-          <FavoriteIcon
+          <ToggleAssetFavoriteButton
+            asset={program}
+            updateRow={updateRow}
+            withDispatch={withDispatch}
+            assetType={ASSET.PROGRAM}
             id={id}
-            selected={personalDetails.isFavorite}
-            onClick={toggleFavorite}
-          />
+            isFavorite={personalDetails.isFavorite}
+          >
+            <FavoriteIcon id={id} selected={personalDetails.isFavorite} />
+          </ToggleAssetFavoriteButton>
         </TableCell>
       )}
     </TableRow>
   );
 };
 
-export default React.memo(ProgramTableRowShort);
+interface IProgramTableRowShortProps {
+  updateRow?: UpdateRowFuncType;
+  withDispatch?: boolean;
+  title: string;
+  showRating?: boolean;
+  program: ProgramDetailsList;
+  isAuthenticated?: boolean;
+}
+
+const ProgramTableRowShort = React.memo(_ProgramTableRowShort);
+export default ProgramTableRowShort;

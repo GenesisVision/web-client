@@ -10,7 +10,6 @@ import TagFilter from "components/table/components/filtering/tag-filter/tag-filt
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import { calculateTotalPages } from "components/table/helpers/paging.helpers";
 import useRouteFilters from "hooks/route-filters.hook";
-import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
 import {
   CURRENCY_MAP_NAME,
   DEFAULT_PROGRAM_TABLE_FILTERS,
@@ -18,7 +17,7 @@ import {
   SORTING_FILTER_VALUE
 } from "modules/programs-table/components/programs-table/programs.constants";
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
   platformCurrenciesSelector,
@@ -42,7 +41,6 @@ import {
 const ITEMS_ON_PAGE = 12;
 
 const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
-  const dispatch = useDispatch();
   const programCurrencies = useSelector(programCurrenciesSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const currencies = useSelector(platformCurrenciesSelector);
@@ -112,9 +110,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         totalItems: data.total
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
-      toggleFavorite={(id: string, isFavorite: boolean) =>
-        dispatch(toggleFavoriteProgramDispatchable(id, isFavorite))
-      }
       redirectToLogin={() => Push(LOGIN_ROUTE)}
       isAuthenticated={isAuthenticated}
       currencies={programCurrencies}

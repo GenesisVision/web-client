@@ -1,7 +1,6 @@
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
-import { TableToggleFavoriteType } from "components/table/components/table.types";
 import * as React from "react";
 
 import ProgramTableHeaderCell from "./program-table-header-cell";
@@ -22,50 +21,50 @@ const _ProgramTableModule: React.FC<Props> = ({
   showRating,
   title,
   disableTitle,
-  toggleFavorite,
   columns
-}) => (
-  <TableModule
-    loaderData={programListLoaderData}
-    renderMappings={renderMappings}
-    disableTitle={disableTitle}
-    getItems={getItems}
-    defaultFilters={defaultFilters}
-    filtering={filtering}
-    sorting={sorting}
-    renderFilters={renderFilters}
-    paging={paging}
-    title={title}
-    columns={columns || PROGRAMS_COLUMNS}
-    renderHeader={column => (
-      <ProgramTableHeaderCell
-        condition={
-          !isAuthenticated ||
-          (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-        }
-        column={column}
-      />
-    )}
-    renderBodyRow={(
-      program,
-      updateRow: any //TODO fix updateRow
-    ) => (
-      <ProgramTableRow
-        showRating={showRating}
-        title={title}
-        program={program}
-        toggleFavorite={toggleFavorite(program, updateRow)}
-        isAuthenticated={isAuthenticated}
-      />
-    )}
-  />
-);
+}) => {
+  return (
+    <TableModule
+      loaderData={programListLoaderData}
+      renderMappings={renderMappings}
+      disableTitle={disableTitle}
+      getItems={getItems}
+      defaultFilters={defaultFilters}
+      filtering={filtering}
+      sorting={sorting}
+      renderFilters={renderFilters}
+      paging={paging}
+      title={title}
+      columns={columns || PROGRAMS_COLUMNS}
+      renderHeader={column => (
+        <ProgramTableHeaderCell
+          condition={
+            !isAuthenticated ||
+            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+          }
+          column={column}
+        />
+      )}
+      renderBodyRow={(
+        program,
+        updateRow: any //TODO fix updateRow
+      ) => (
+        <ProgramTableRow
+          updateRow={updateRow}
+          showRating={showRating}
+          title={title}
+          program={program}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+    />
+  );
+};
 
 interface Props extends ITableModuleProps {
   isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
-  toggleFavorite: TableToggleFavoriteType;
 }
 
 const ProgramTableModule = React.memo(_ProgramTableModule);

@@ -2,7 +2,6 @@ import "./programs.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
 
@@ -19,7 +18,6 @@ interface IProgramsTableProps extends ITableProps {
   showRating?: boolean;
   currencies?: string[];
   data?: ProgramDetailsList[];
-  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?: () => void;
@@ -40,7 +38,6 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  toggleFavorite,
   isAuthenticated,
   title
 }) => {
@@ -80,19 +77,15 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
       )}
       renderBodyRow={(program: ProgramDetailsList) => (
         <ProgramTableRowShort
+          withDispatch
           showRating={Boolean(showRating)}
           title={title}
           program={program}
-          toggleFavorite={toggleFavorite}
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyCard={(program: ProgramDetailsList) => (
-        <ProgramCard
-          title={title}
-          program={program}
-          toggleFavorite={toggleFavorite}
-        />
+        <ProgramCard title={title} program={program} />
       )}
     />
   );

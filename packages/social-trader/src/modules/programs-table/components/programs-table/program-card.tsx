@@ -7,15 +7,15 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ProgramDetailsList } from "gv-api-web";
 import * as React from "react";
-import { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
+import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
@@ -23,22 +23,13 @@ import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {
   program: ProgramDetailsList;
-  toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
-  const handleToggleFavorite = useCallback(
-    () =>
-      toggleFavorite(
-        program.id,
-        program.personalDetails && program.personalDetails.isFavorite
-      ),
-    [program.id, program.personalDetails, toggleFavorite]
-  );
+const _ProgramCard: React.FC<Props> = ({ program, title }) => {
   const { t } = useTranslation();
   const linkProps = {
     pathname: composeProgramDetailsUrl(program.url),
@@ -51,15 +42,13 @@ const _ProgramCard: React.FC<Props> = ({ program, toggleFavorite, title }) => {
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
         {t("program-actions.details")}
       </TableCardActionsItem>
-      {program.personalDetails && !program.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("program-actions.add-to-favorites")}
-        </TableCardActionsItem>
-      )}
-      {program.personalDetails && program.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("program-actions.remove-from-favorites")}
-        </TableCardActionsItem>
+      {program.personalDetails && (
+        <TableCardFavoriteActionItem
+          withDispatch
+          assetType={ASSET.PROGRAM}
+          id={program.id}
+          isFavorite={program.personalDetails.isFavorite}
+        />
       )}
     </TableCardActions>
   );
