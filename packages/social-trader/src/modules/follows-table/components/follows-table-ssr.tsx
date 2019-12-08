@@ -16,7 +16,7 @@ import {
 } from "modules/programs-table/components/programs-table/programs.constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
   platformCurrenciesSelector,
@@ -24,7 +24,6 @@ import {
 } from "reducers/platform-reducer";
 import { LOGIN_ROUTE } from "routes/app.routes";
 
-import { toggleFavoriteFollowDispatchable } from "../../favorite-asset/services/favorite-follow.service";
 import { followsDataSelector } from "../reducers/follows-table.reducers";
 import { composeTypeFilter } from "./follow-table.helpers";
 import FollowsTable from "./follows-table";
@@ -37,7 +36,6 @@ import {
 const ITEMS_ON_PAGE = 12;
 
 const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
-  const dispatch = useDispatch();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const programTags = useSelector(programTagsSelector);
@@ -100,9 +98,6 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         totalItems: data.total
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
-      toggleFavorite={(id: string, isFavorite: boolean) =>
-        dispatch(toggleFavoriteFollowDispatchable(id, isFavorite))
-      }
       redirectToLogin={() => Push(LOGIN_ROUTE)}
       isAuthenticated={isAuthenticated}
     />

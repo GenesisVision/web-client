@@ -7,30 +7,25 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { FollowDetailsList } from "gv-api-web";
+import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
-interface IProgramTableRowShortProps {
-  title: string;
-  showRating?: boolean;
-  follow: FollowDetailsList;
-  isAuthenticated?: boolean;
-  toggleFavorite?: TableToggleFavoriteHandlerType;
-}
-
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
+  updateRow,
+  withDispatch,
   title,
   showRating,
   follow,
-  isAuthenticated,
-  toggleFavorite
+  isAuthenticated
 }) => {
   const {
     logo,
@@ -109,16 +104,30 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
-          <FavoriteIcon
+          <ToggleAssetFavoriteButton
+            asset={follow}
+            updateRow={updateRow}
+            withDispatch={withDispatch}
+            assetType={ASSET.FOLLOW}
             id={id}
-            selected={personalDetails.isFavorite}
-            onClick={toggleFavorite}
-          />
+            isFavorite={personalDetails.isFavorite}
+          >
+            <FavoriteIcon id={id} selected={personalDetails.isFavorite} />
+          </ToggleAssetFavoriteButton>
         </TableCell>
       )}
     </TableRow>
   );
 };
+
+interface IProgramTableRowShortProps {
+  updateRow?: UpdateRowFuncType;
+  withDispatch?: boolean;
+  title: string;
+  showRating?: boolean;
+  follow: FollowDetailsList;
+  isAuthenticated?: boolean;
+}
 
 const FollowTableRowShort = React.memo(_FollowTableRowShort);
 export default FollowTableRowShort;

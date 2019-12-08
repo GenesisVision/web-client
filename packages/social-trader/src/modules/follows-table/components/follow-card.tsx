@@ -6,26 +6,25 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { FollowDetailsList } from "gv-api-web";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
+import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
 interface Props {
   follow: FollowDetailsList;
-  toggleFavorite: TableToggleFavoriteHandlerType;
   title: string;
 }
 
-const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
+const _FollowCard: React.FC<Props> = ({ follow, title }) => {
   const {
     tags,
     tradesCount,
@@ -33,14 +32,6 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
     url,
     statistic: { drawdown }
   } = follow;
-  const handleToggleFavorite = useCallback(
-    () =>
-      toggleFavorite(
-        follow.id,
-        follow.personalDetails && follow.personalDetails.isFavorite
-      ),
-    [follow.id, follow.personalDetails, toggleFavorite]
-  );
   const { t } = useTranslation();
   const linkProps = {
     pathname: composeFollowDetailsUrl(url),
@@ -51,15 +42,13 @@ const _FollowCard: React.FC<Props> = ({ follow, toggleFavorite, title }) => {
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
         {t("program-actions.details")}
       </TableCardActionsItem>
-      {follow.personalDetails && !follow.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("follow-actions.add-to-favorites")}
-        </TableCardActionsItem>
-      )}
-      {follow.personalDetails && follow.personalDetails.isFavorite && (
-        <TableCardActionsItem onClick={handleToggleFavorite}>
-          {t("follow-actions.remove-from-favorites")}
-        </TableCardActionsItem>
+      {follow.personalDetails && (
+        <TableCardFavoriteActionItem
+          withDispatch
+          assetType={ASSET.FOLLOW}
+          id={follow.id}
+          isFavorite={follow.personalDetails.isFavorite}
+        />
       )}
     </TableCardActions>
   );

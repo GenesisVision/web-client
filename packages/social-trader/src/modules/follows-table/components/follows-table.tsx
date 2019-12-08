@@ -2,7 +2,6 @@ import "modules/programs-table/components/programs-table/programs.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { TableToggleFavoriteHandlerType } from "components/table/components/table.types";
 import { FollowDetailsList } from "gv-api-web";
 import * as React from "react";
 
@@ -18,7 +17,6 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 interface IFollowsTableProps extends ITableProps {
   showRating?: boolean;
   data?: FollowDetailsList[];
-  toggleFavorite: TableToggleFavoriteHandlerType;
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?: () => void;
@@ -38,7 +36,6 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  toggleFavorite,
   isAuthenticated,
   title
 }) => {
@@ -78,19 +75,15 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
       )}
       renderBodyRow={(follow: FollowDetailsList) => (
         <FollowTableRowShort
+          withDispatch
           showRating={Boolean(showRating)}
           title={title}
           follow={follow}
-          toggleFavorite={toggleFavorite}
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyCard={(program: FollowDetailsList) => (
-        <FollowCard
-          title={title}
-          follow={program}
-          toggleFavorite={toggleFavorite}
-        />
+        <FollowCard title={title} follow={program} />
       )}
     />
   );

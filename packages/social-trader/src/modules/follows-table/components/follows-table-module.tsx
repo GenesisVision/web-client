@@ -1,7 +1,6 @@
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
-import { TableToggleFavoriteType } from "components/table/components/table.types";
 import * as React from "react";
 
 import FollowTableHeaderCell from "./follow-table-header-cell";
@@ -23,51 +22,51 @@ const FollowsTableModule: React.FC<Props> = React.memo(
     showRating,
     title,
     disableTitle,
-    toggleFavorite,
     columns
-  }) => (
-    <TableModule
-      loaderData={followListLoaderData}
-      renderMappings={renderMappings}
-      disableTitle={disableTitle}
-      getItems={getItems}
-      defaultFilters={defaultFilters}
-      filtering={filtering}
-      sorting={sorting}
-      renderFilters={renderFilters}
-      paging={paging}
-      title={title}
-      columns={columns || FOLLOW_COLUMNS}
-      renderHeader={column => (
-        <FollowTableHeaderCell
-          condition={
-            !isAuthenticated ||
-            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-          }
-          column={column}
-        />
-      )}
-      renderBodyRow={(
-        follow,
-        updateRow: any //TODO fix updateRow
-      ) => (
-        <FollowTableRow
-          showRating={showRating}
-          title={title}
-          follow={follow}
-          toggleFavorite={toggleFavorite(follow, updateRow)}
-          isAuthenticated={isAuthenticated}
-        />
-      )}
-    />
-  )
+  }) => {
+    return (
+      <TableModule
+        loaderData={followListLoaderData}
+        renderMappings={renderMappings}
+        disableTitle={disableTitle}
+        getItems={getItems}
+        defaultFilters={defaultFilters}
+        filtering={filtering}
+        sorting={sorting}
+        renderFilters={renderFilters}
+        paging={paging}
+        title={title}
+        columns={columns || FOLLOW_COLUMNS}
+        renderHeader={column => (
+          <FollowTableHeaderCell
+            condition={
+              !isAuthenticated ||
+              (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
+            }
+            column={column}
+          />
+        )}
+        renderBodyRow={(
+          follow,
+          updateRow: any //TODO fix updateRow
+        ) => (
+          <FollowTableRow
+            updateRow={updateRow}
+            showRating={showRating}
+            title={title}
+            follow={follow}
+            isAuthenticated={isAuthenticated}
+          />
+        )}
+      />
+    );
+  }
 );
 
 interface Props extends ITableModuleProps {
   isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
-  toggleFavorite: TableToggleFavoriteType;
 }
 
 export default FollowsTableModule;
