@@ -26,10 +26,10 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
     >
       <TableCardRow className="dashboard-recommendations-card__row">
         <DepositButton
-          broker={"Exante"}
+          broker={asset.broker.type}
           type={asset.assetType as ASSET}
           id={asset.id}
-          currency={"USD"} // {asset.currency}
+          currency={asset.currency}
         />
       </TableCardRow>
     </TableCard>
