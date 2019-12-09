@@ -7,10 +7,8 @@ import {
   DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   DASHBOARD_PORTFOLIO_EVENTS_FILTERS
 } from "components/portfolio-events-table/portfolio-events-table.constants";
-import {
-  SelectFilterValue,
-  SortingColumn
-} from "components/table/components/filtering/filter.type";
+import { THistoryType } from "components/portfolio-events-table/portfolio-events-table.service";
+import { SortingColumn } from "components/table/components/filtering/filter.type";
 import TableModule from "components/table/components/table-module";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
@@ -18,12 +16,16 @@ import { InvestmentEventViewModel } from "gv-api-web";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { useSelector } from "react-redux";
-import { assetTypeValuesSelector } from "reducers/platform-reducer";
+import {
+  allEventsSelector,
+  assetTypeValuesSelector
+} from "reducers/platform-reducer";
 
 import { DashboardPortfolioEventsLoaderData } from "../dashboard/dashboard.loaders-data";
 import PortfolioEventsTableRow from "./portfolio-events-table-row";
 
 const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
+  historyType,
   columns,
   title,
   getItems,
@@ -32,6 +34,7 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   dateRangeStartLabel
 }) => {
   const assetTypeValues = useSelector(assetTypeValuesSelector);
+  const eventTypeFilterValues = useSelector(allEventsSelector);
   return (
     <div className={className}>
       <TableModule
@@ -42,7 +45,9 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
         getItems={getItems}
         renderFilters={(updateFilter, filtering) => (
           <PortfolioEventsTableFiltering
+            historyType={historyType}
             assetTypeValues={assetTypeValues}
+            eventTypeFilterValues={eventTypeFilterValues!}
             dateRangeStartLabel={dateRangeStartLabel}
             updateFilter={updateFilter}
             filtering={filtering}
@@ -66,6 +71,7 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
 };
 
 export interface IPortfolioEventsTableOwnProps {
+  historyType: THistoryType;
   columns: SortingColumn[];
   getItems: GetItemsFuncType;
   eventLocation: EVENT_LOCATION;
