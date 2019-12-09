@@ -1,7 +1,9 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .gv-checkbox-wrapper {
-  margin: 16px 8px;
+  margin-right: $padding-xxsmall;
+  margin-bottom: $padding-xsmall;
   position: relative;
   display: inline-flex;
   align-items: flex-start;
