@@ -17,6 +17,7 @@ import assetsApi from "services/api-client/assets-api";
 import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
 import platformApi from "services/api-client/platform-api";
+import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
@@ -58,6 +59,9 @@ export const dispatchProgramDescriptionWithId = (
   auth = authService.getAuthArg()
 ) => async (dispatch: Dispatch) =>
   await dispatch(fetchProgramDescriptionAction(id, auth));
+
+export const fetchProgramDescription = (id: string, authorization?: string) =>
+  programsApi.getProgramDetails(id, { authorization });
 
 export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,
