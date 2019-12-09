@@ -64,7 +64,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
           to={makeProgramExternalLink}
           onClick={clearAnchor}
         >
-          {t("dashboard-page.trading.actions.make-program")}
+          {t("dashboard-page.trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
       <MakeProgramButton
