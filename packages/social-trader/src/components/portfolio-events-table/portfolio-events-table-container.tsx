@@ -57,7 +57,7 @@ const _PortfolioEventsTableContainer: React.FC<
         isFetchOnMount={true}
         renderFilters={(updateFilter, filtering) => (
           <PortfolioEventsTableFiltering
-            historyType={"investingHistory"}
+            historyType={"investmentHistory"}
             assetTypeValues={assetTypeValues}
             dateRangeStartLabel={dateRangeStartLabel}
             eventTypeFilterValues={eventTypeFilterValues!}
