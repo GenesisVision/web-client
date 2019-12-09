@@ -1,3 +1,7 @@
+import {
+  getEventTypes,
+  THistoryType
+} from "components/portfolio-events-table/portfolio-events-table.service";
 import { ASSET_TYPE_FILTER_NAME } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -9,21 +13,22 @@ import {
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
 import { UpdateFilterFunc } from "components/table/components/table.types";
+import { EventFilters } from "gv-api-web";
 import React from "react";
 
-const _PortfolioEventsTableFiltering: React.FC<{
-  assetTypeValues: SelectFilterValue<string>[];
-  dateRangeStartLabel: string;
-  eventTypeFilterValues: SelectFilterValue[];
-  updateFilter: UpdateFilterFunc;
-  filtering: FilteringType;
-}> = ({
+const _PortfolioEventsTableFiltering: React.FC<Props> = ({
+  historyType,
   updateFilter,
   filtering,
   eventTypeFilterValues,
   assetTypeValues,
   dateRangeStartLabel
 }) => {
+  const eventTypes = getEventTypes(
+    eventTypeFilterValues,
+    historyType,
+    filtering[ASSET_TYPE_FILTER_NAME]
+  );
   return (
     <>
       {filtering[EVENT_TYPE_FILTER_NAME] && (
@@ -31,7 +36,7 @@ const _PortfolioEventsTableFiltering: React.FC<{
           name={EVENT_TYPE_FILTER_NAME}
           label="Type"
           value={filtering[EVENT_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-          values={eventTypeFilterValues}
+          values={eventTypes}
           onChange={updateFilter}
         />
       )}
@@ -55,6 +60,15 @@ const _PortfolioEventsTableFiltering: React.FC<{
     </>
   );
 };
+
+interface Props {
+  historyType: THistoryType;
+  assetTypeValues: SelectFilterValue<string>[];
+  dateRangeStartLabel: string;
+  eventTypeFilterValues: EventFilters;
+  updateFilter: UpdateFilterFunc;
+  filtering: FilteringType;
+}
 
 const PortfolioEventsTableFiltering = React.memo(
   _PortfolioEventsTableFiltering
