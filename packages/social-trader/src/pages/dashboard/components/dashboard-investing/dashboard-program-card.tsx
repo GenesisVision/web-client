@@ -110,7 +110,6 @@ const _DashboardProgramCard: React.FC<Props> = ({
             <AssetStatus
               status={program.personalDetails.status as STATUS}
               id={program.id}
-              asset={ASSET.PROGRAM}
               onCancel={updateItems}
             />
           </StatisticItem>

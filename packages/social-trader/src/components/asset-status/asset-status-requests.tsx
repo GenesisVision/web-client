@@ -12,12 +12,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
   return (
     <div className="request-popover">
       {requests.map(request => (
-        <RequestLine
-          successFee={request.assetDetails.successFee}
-          exitFee={request.assetDetails.exitFee}
-          request={request}
-          onApplyCancelRequest={handleCancel}
-        />
+        <RequestLine request={request} onApplyCancelRequest={handleCancel} />
       ))}
     </div>
   );

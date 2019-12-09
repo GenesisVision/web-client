@@ -6,21 +6,12 @@ import Popover, {
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import { ASSET, STATUS } from "shared/constants/constants";
+import { STATUS } from "shared/constants/constants";
 
 import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequestsContainer from "./asset-status-requests.container";
 
-const _AssetStatus: React.FC<Props> = ({
-  successFee,
-  entryFee,
-  exitFee,
-  className,
-  status,
-  id,
-  asset,
-  onCancel
-}) => {
+const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleOpenDropdown = useCallback(
     (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -45,11 +36,7 @@ const _AssetStatus: React.FC<Props> = ({
         onClose={clearAnchor}
       >
         <AssetStatusRequestsContainer
-          successFee={successFee}
-          entryFee={entryFee}
-          exitFee={exitFee}
           id={id}
-          asset={asset}
           handleCloseDropdown={clearAnchor}
           onCancel={onCancel}
         />
@@ -59,13 +46,9 @@ const _AssetStatus: React.FC<Props> = ({
 };
 
 interface Props {
-  successFee?: number;
-  exitFee?: boolean;
-  entryFee?: number;
   className?: string;
   status: STATUS;
   id: string;
-  asset: ASSET;
   onCancel: () => void;
 }
 

@@ -13,14 +13,12 @@ const _CancelRequestButton: React.FC<{
 }> = ({ onApplyCancelRequest, id }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const [disabled, setDisabled, setNotDisabled] = useIsOpen();
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, isPending: disabled } = useApiRequest({
     request: (id: string) =>
       investmentsApi.cancelRequest(id, authService.getAuthArg()),
-    middleware: [onApplyCancelRequest, setNotDisabled, setClosePopup]
+    middleware: [onApplyCancelRequest, setClosePopup]
   });
   const handleApplyCancelRequest = useCallback(() => {
-    setDisabled();
     sendRequest(id);
   }, [id]);
   return (
