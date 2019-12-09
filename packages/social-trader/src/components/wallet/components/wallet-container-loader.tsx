@@ -31,6 +31,11 @@ const WalletTitleLoader: React.FC = () => (
 );
 
 export const walletDataCreator = (): WalletData => ({
+  availableCcy: getRandomInteger(1, 1000),
+  investedCcy: getRandomInteger(1, 1000),
+  tradingCcy: getRandomInteger(1, 1000),
+  pendingCcy: getRandomInteger(1, 1000),
+  totalCcy: getRandomInteger(1, 1000),
   id: faker.lorem.word(),
   title: faker.lorem.word(),
   logo: faker.lorem.word(),

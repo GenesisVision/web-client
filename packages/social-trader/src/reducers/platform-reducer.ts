@@ -61,8 +61,8 @@ export const programMinDepositAmountsSelector = apiFieldSelector<
 export const currenciesSelector = apiFieldSelector(
   // TODO currency-selector-container
   platformDataSelector,
-  fieldSelector(
-    state => state.assetInfo.programInfo.availableProgramCurrencies
+  fieldSelector(state =>
+    state.commonInfo.platformCurrencies.map(currency => currency.name)
   ), //TODO
   []
 );
