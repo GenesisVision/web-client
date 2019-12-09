@@ -2,6 +2,7 @@ import { PLATFORM_SETTINGS } from "actions/platform-actions";
 import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import {
   AmountWithCurrency,
+  EventFilters,
   FundCreateAssetPlatformInfo,
   PlatformInfo,
   ProgramAssetPlatformInfo,
@@ -14,7 +15,6 @@ import apiReducerFactory, {
 } from "reducers/reducer-creators/api-reducer";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
-import { ASSET } from "shared/constants/constants";
 import { apiFieldSelector, apiSelector, fieldSelector } from "utils/selectors";
 import { AuthRootState } from "utils/types";
 
@@ -121,11 +121,7 @@ export const assetTypeValuesSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      [
-        { key: "Fund", title: "Fund" },
-        { key: "Program", title: "Program" },
-        { key: "Follow", title: "Follow" }
-      ].map(({ key, title }) => ({
+      data.filters.assets.map(({ key, title }) => ({
         value: key,
         label: title
       }))) ||
@@ -133,53 +129,58 @@ export const assetTypeValuesSelector = createSelector<
 );
 
 export const allEventsSelector = createSelector<
-  AuthRootState,
+  RootState,
   PlatformInfo | undefined,
+  EventFilters | undefined
+>(
+  platformDataSelector,
+  data => (data && data.filters.events) || undefined
+);
+
+export const fundEventsSelector = createSelector<
+  RootState,
+  EventFilters | undefined,
   SelectFilterValue<string>[]
 >(
-  state => platformDataSelector(state),
+  allEventsSelector,
   data =>
     (data &&
-      data.filters.events.map(({ key, title }) => ({
-        // TODO remove after union
+      data.investingHistory.fundDetails.map(({ key, title }) => ({
         value: key,
         labelKey: title
       }))) ||
     []
 );
 
-export const assetEventsSelectorCreator = (asset: ASSET) =>
-  createSelector<
-    RootState,
-    PlatformInfo | undefined,
-    SelectFilterValue<string>[]
-  >(
-    state => platformDataSelector(state),
-    data => {
-      if (!data) return [];
-      return data.filters.events.map(
-        // TODO remove after union
-        ({ key, title }: { key: string; title: string }) => ({
-          value: key,
-          labelKey: title
-        })
-      );
+export const programEventsSelector = createSelector<
+  RootState,
+  EventFilters | undefined,
+  SelectFilterValue<string>[]
+>(
+  allEventsSelector,
+  data =>
+    (data &&
+      data.investingHistory.programDetails.map(({ key, title }) => ({
+        value: key,
+        labelKey: title
+      }))) ||
+    []
+);
 
-      //   .enums.event[ROLE_ENV || ROLE.MANAGER][
-      //   `${asset.toLowerCase()}Details`
-      // ].map(
-      //   // TODO remove after union
-      //   ({ key, title }: FilterModel) => ({
-      //     value: key,
-      //     labelKey: title
-      //   })
-      // );
-    }
-  );
-
-export const fundEventsSelector = assetEventsSelectorCreator(ASSET.FUND);
-
-export const programEventsSelector = assetEventsSelectorCreator(ASSET.PROGRAM);
+export const followEventsSelector = createSelector<
+  RootState,
+  EventFilters | undefined,
+  SelectFilterValue<string>[]
+>(
+  allEventsSelector,
+  data =>
+    (data &&
+      data.tradingHistory.signalProgramDetails.map(({ key, title }) => ({
+        value: key,
+        labelKey: title
+      }))) ||
+    []
+);
 
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS
