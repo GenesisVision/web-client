@@ -29,8 +29,7 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   getItems,
   eventLocation,
   className,
-  dateRangeStartLabel,
-  eventTypeFilterValues
+  dateRangeStartLabel
 }) => {
   const assetTypeValues = useSelector(assetTypeValuesSelector);
   return (
@@ -45,7 +44,6 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
           <PortfolioEventsTableFiltering
             assetTypeValues={assetTypeValues}
             dateRangeStartLabel={dateRangeStartLabel}
-            eventTypeFilterValues={eventTypeFilterValues}
             updateFilter={updateFilter}
             filtering={filtering}
           />
@@ -72,7 +70,6 @@ export interface IPortfolioEventsTableOwnProps {
   getItems: GetItemsFuncType;
   eventLocation: EVENT_LOCATION;
   dateRangeStartLabel: string;
-  eventTypeFilterValues: SelectFilterValue[];
   className?: string;
   title?: string;
 }

@@ -11,7 +11,6 @@ import ProgramDetailsStatisticSection from "pages/programs/program-details/progr
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { programEventsSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
@@ -119,7 +118,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
           entryFeeSelected: description.entryFeeSelected
         }}
         dispatchDescription={handleDispatchDescription}
-        eventTypesSelector={programEventsSelector}
         asset={ASSET.PROGRAM}
         selector={programEventsTableSelector}
         id={description.id}

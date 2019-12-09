@@ -33,7 +33,6 @@ const _PortfolioEventsTableContainer: React.FC<
   eventLocation,
   className,
   dateRangeStartLabel,
-  eventTypeFilterValues,
   asset
 }) => {
   const assetTypeValues = useSelector(assetTypeValuesSelector);
@@ -83,7 +82,6 @@ export interface IPortfolioEventsTableOwnProps {
   selector: TableSelectorType;
   eventLocation: EVENT_LOCATION;
   dateRangeStartLabel: string;
-  eventTypeFilterValues: SelectFilterValue[];
   className?: string;
   title?: string;
   asset?: ASSET;

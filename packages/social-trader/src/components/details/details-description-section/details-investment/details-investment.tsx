@@ -34,7 +34,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   fees,
   notice,
   asset,
-  eventTypesSelector,
   selector,
   currency,
   dispatchDescription,
@@ -51,7 +50,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(selector);
-  const eventTypeFilterValues = useSelector(eventTypesSelector);
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
@@ -111,7 +109,6 @@ const _DetailsInvestment: React.FC<Props> = ({
           asset={asset}
           eventLocation={EVENT_LOCATION.Asset}
           dateRangeStartLabel={t("filters.date-range.program-start")}
-          eventTypeFilterValues={eventTypeFilterValues!}
         />
       )}
     </DetailsBlock>
@@ -127,7 +124,6 @@ interface Props {
   fees: FeesType;
   notice?: string;
   asset: ASSET;
-  eventTypesSelector: (state: RootState) => SelectFilterValue[];
   dispatchDescription: () => void;
   selector: TableSelectorType;
   currency: CurrencyEnum;

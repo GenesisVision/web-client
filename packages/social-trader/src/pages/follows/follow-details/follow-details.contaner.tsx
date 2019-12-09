@@ -18,7 +18,6 @@ import {
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { programEventsSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
 import {
   createFollowNotificationsToUrl,
@@ -86,7 +85,6 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <DetailsInvestment
         fees={{}}
         dispatchDescription={handleDispatchDescription}
-        eventTypesSelector={programEventsSelector}
         asset={ASSET.FOLLOW}
         selector={followEventsTableSelector}
         id={description.id}

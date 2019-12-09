@@ -19,7 +19,6 @@ import {
 const _PortfolioEventsAllComponent: React.FC = () => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT_HISTORY);
   const [t] = useTranslation();
-  const events = useSelector(allEventsSelector);
   return (
     <Page title={t(`dashboard-page.portfolio-events.title`)}>
       <DetailsBlock table>
@@ -40,7 +39,6 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             eventLocation={EVENT_LOCATION.Dashboard}
             className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
-            eventTypeFilterValues={events}
           />
         )}
         {tab === TABS.TRADING_HISTORY && (
@@ -50,7 +48,6 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             eventLocation={EVENT_LOCATION.Dashboard}
             className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
-            eventTypeFilterValues={events}
           />
         )}
       </DetailsBlock>
