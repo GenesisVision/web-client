@@ -1,14 +1,14 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import UnfollowContainer from "modules/unfollow/unfollow-container";
+import { dispatchFollowDescription } from "pages/follows/follow-details/services/follow-details.service";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import { dispatchFollowDescription } from "./services/follow-details.service";
-
 const _UnFollowButton: React.FC<Props> = ({
+  onApply,
   id,
   isExternal,
   tradingAccountId
@@ -16,6 +16,7 @@ const _UnFollowButton: React.FC<Props> = ({
   const dispatch = useDispatch();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
+    onApply();
   }, [id]);
   const [t] = useTranslation();
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
@@ -42,6 +43,7 @@ const _UnFollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  onApply: VoidFunction;
   tradingAccountId: string;
   isExternal: boolean;
   id: string;
