@@ -136,7 +136,11 @@ export const allEventsSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      [{ key: "test", title: "test" }].map(({ key, title }) => ({
+      [
+        { key: "Fund", title: "Fund" },
+        { key: "Program", title: "Program" },
+        { key: "Follow", title: "Follow" }
+      ].map(({ key, title }) => ({
         // TODO remove after union
         value: key,
         labelKey: title
