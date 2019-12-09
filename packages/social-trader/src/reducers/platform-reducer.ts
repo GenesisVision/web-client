@@ -121,7 +121,11 @@ export const assetTypeValuesSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      data.filters.events.map(({ key, title }) => ({
+      [
+        { key: "Fund", title: "Fund" },
+        { key: "Program", title: "Program" },
+        { key: "Follow", title: "Follow" }
+      ].map(({ key, title }) => ({
         value: key,
         label: title
       }))) ||
@@ -136,11 +140,7 @@ export const allEventsSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      [
-        { key: "Fund", title: "Fund" },
-        { key: "Program", title: "Program" },
-        { key: "Follow", title: "Follow" }
-      ].map(({ key, title }) => ({
+      data.filters.events.map(({ key, title }) => ({
         // TODO remove after union
         value: key,
         labelKey: title
