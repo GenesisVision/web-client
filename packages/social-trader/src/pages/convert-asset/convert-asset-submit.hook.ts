@@ -1,10 +1,8 @@
 import { Push } from "components/link/link";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import useApiRequest from "hooks/api-request.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { SetSubmittingType } from "utils/types";
 
@@ -29,16 +27,15 @@ const useConvertAssetSubmit = ({
   fromTo
 }: TUseConvertAssetSubmitProps): TUseConvertAssetSubmitOutput => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
   const checkConditionMiddleware = (data: any) => {
-    if (!condition || !!condition(data)) {
+    if (!!data && condition) condition(data);
+    else {
       dispatch(
         alertMessageActions.success(
           `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`,
           true
         )
       );
-      dispatch(fetchWallets(currency));
       Push(TRADING_ROUTE);
     }
   };
