@@ -145,7 +145,7 @@ export const fundEventsSelector = createSelector<
   allEventsSelector,
   data =>
     (data &&
-      data.investingHistory.fundDetails.map(({ key, title }) => ({
+      data.investmentHistory.fund.map(({ key, title }) => ({
         value: key,
         labelKey: title
       }))) ||
@@ -160,7 +160,7 @@ export const programEventsSelector = createSelector<
   allEventsSelector,
   data =>
     (data &&
-      data.investingHistory.programDetails.map(({ key, title }) => ({
+      data.investmentHistory.program.map(({ key, title }) => ({
         value: key,
         labelKey: title
       }))) ||
@@ -175,7 +175,7 @@ export const followEventsSelector = createSelector<
   allEventsSelector,
   data =>
     (data &&
-      data.tradingHistory.signalProgramDetails.map(({ key, title }) => ({
+      data.tradingHistory.follow.map(({ key, title }) => ({
         value: key,
         labelKey: title
       }))) ||
