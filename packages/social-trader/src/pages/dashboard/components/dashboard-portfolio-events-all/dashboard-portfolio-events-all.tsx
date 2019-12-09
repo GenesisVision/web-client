@@ -8,8 +8,6 @@ import useTab from "hooks/tab.hook";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { allEventsSelector } from "reducers/platform-reducer";
 
 import {
   fetchInvestmentHistory,
@@ -34,6 +32,7 @@ const _PortfolioEventsAllComponent: React.FC = () => {
         </DetailsBlockTabs>
         {tab === TABS.INVESTMENT_HISTORY && (
           <PortfolioEventsTableModule
+            historyType={"investingHistory"}
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchInvestmentHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
@@ -43,6 +42,7 @@ const _PortfolioEventsAllComponent: React.FC = () => {
         )}
         {tab === TABS.TRADING_HISTORY && (
           <PortfolioEventsTableModule
+            historyType={"tradingHistory"}
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchTradingHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
