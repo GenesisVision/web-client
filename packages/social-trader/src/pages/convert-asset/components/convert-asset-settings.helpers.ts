@@ -17,6 +17,7 @@ import {
 } from "./convert-asset-settings";
 
 export const convertAssetMapPropsToValues = ({
+  currency,
   programsInfo: { periods }
 }: IConvertAssetSettingsProps): IConvertAssetSettingsFormValues => ({
   [CONVERT_ASSET_FIELDS.available]: 0,
@@ -32,7 +33,7 @@ export const convertAssetMapPropsToValues = ({
   [CONVERT_ASSET_FIELDS.investmentLimit]: undefined,
   [CONVERT_ASSET_FIELDS.isSignalProgram]: true, // TODO move back to server
   [CONVERT_ASSET_FIELDS.signalSuccessFee]: 0,
-  [CONVERT_ASSET_FIELDS.currency]: "GVT",
+  [CONVERT_ASSET_FIELDS.currency]: currency || "GVT",
   [CONVERT_ASSET_FIELDS.signalVolumeFee]: 0,
   [CONVERT_ASSET_FIELDS.periodLength]:
     periods.length === 1 ? periods[0] : undefined

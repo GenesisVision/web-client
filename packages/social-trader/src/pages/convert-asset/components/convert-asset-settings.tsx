@@ -115,7 +115,7 @@ const _ConvertAssetSettings: React.FC<Props> = ({
           </SettingsBlock>
           <SettingsBlock
             label={t("create-program-page.settings.fields.investment-limit")}
-            blockNumber={"04"}
+            blockNumber={"03"}
           >
             <InvestmentLimitField
               checkboxName={CONVERT_ASSET_FIELDS.hasInvestmentLimit}
@@ -129,7 +129,7 @@ const _ConvertAssetSettings: React.FC<Props> = ({
       {showSignalFees && (
         <SettingsBlock
           label={t("create-program-page.settings.signal-provider-fees")}
-          blockNumber={"03"}
+          blockNumber={"04"}
         >
           <SignalsFeeFormPartial
             volumeFeeFieldName={CONVERT_ASSET_FIELDS.signalVolumeFee}
@@ -146,6 +146,7 @@ const _ConvertAssetSettings: React.FC<Props> = ({
 };
 
 export interface IConvertAssetSettingsFormOwnProps {
+  currency?: CurrencyEnum;
   id: string;
   broker?: string;
   fromTo: TAssetFromTo;

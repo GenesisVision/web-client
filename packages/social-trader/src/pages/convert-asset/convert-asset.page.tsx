@@ -7,7 +7,12 @@ import { useTranslation } from "react-i18next";
 
 import ConvertAssetContainer from "./components/convert-asset.container";
 
-const _ConvertAssetPage: React.FC<Props> = ({ fromTo, id, broker }) => {
+const _ConvertAssetPage: React.FC<Props> = ({
+  fromTo,
+  id,
+  broker,
+  currency
+}) => {
   const [t] = useTranslation();
   const title = t(
     `convert-page.convert-${fromTo.assetFrom.toLowerCase()}-to-${fromTo.assetTo.toLowerCase()}`
@@ -15,6 +20,7 @@ const _ConvertAssetPage: React.FC<Props> = ({ fromTo, id, broker }) => {
   return (
     <Page title={title}>
       <ConvertAssetContainer
+        currency={currency}
         fromTo={fromTo}
         title={title}
         id={id}

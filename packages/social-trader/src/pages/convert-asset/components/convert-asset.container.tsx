@@ -5,6 +5,7 @@ import React from "react";
 import { ConvertAssetSettingsSection } from "./convert-asset-settings-section";
 
 const _ConvertAssetContainer: React.FC<Props> = ({
+  currency,
   fromTo,
   title,
   id,
@@ -13,7 +14,12 @@ const _ConvertAssetContainer: React.FC<Props> = ({
   return (
     <>
       <AssetTitle>{title}</AssetTitle>
-      <ConvertAssetSettingsSection fromTo={fromTo} id={id} broker={broker} />
+      <ConvertAssetSettingsSection
+        currency={currency}
+        fromTo={fromTo}
+        id={id}
+        broker={broker}
+      />
     </>
   );
 };

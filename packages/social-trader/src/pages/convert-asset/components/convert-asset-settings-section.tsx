@@ -11,6 +11,7 @@ import ConvertAssetSettings, {
 } from "./convert-asset-settings";
 
 const _ConvertAssetSettingsSection: React.FC<Props> = ({
+  currency,
   fromTo,
   id,
   broker
@@ -35,6 +36,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   return (
     <AssetContent>
       <ConvertAssetSettings
+        currency={currency}
         id={id}
         broker={broker}
         fromTo={fromTo}
