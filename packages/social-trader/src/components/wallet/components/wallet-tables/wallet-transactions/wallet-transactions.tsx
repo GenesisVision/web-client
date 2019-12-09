@@ -82,7 +82,7 @@ const _WalletTransactions: React.FC<Props> = ({
               />
               <DateRangeFilter
                 name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
                 onChange={updateFilter}
                 startLabel={t("filters.date-range.account-creation")}
               />

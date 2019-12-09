@@ -1,5 +1,6 @@
 import {
   DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
@@ -19,7 +20,6 @@ import {
 } from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 
 export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
-export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_MAP_NAME = "showIn";
 
