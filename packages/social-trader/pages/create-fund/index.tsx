@@ -3,25 +3,22 @@ import { fetchWalletsWithCtx } from "components/wallet/services/wallet.services"
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import CreateFundPage from "pages/create-fund/create-fund.page";
-import { fetchMinimumDepositAmount } from "pages/create-fund/services/create-fund.service";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
 
-const CreateFund: NextPageWithRedux<Props, {}> = ({ minimumDepositAmount }) => {
-  return <CreateFundPage minimumDepositAmount={minimumDepositAmount} />;
+const CreateFund: NextPageWithRedux<Props, {}> = ({}) => {
+  return <CreateFundPage />;
 };
 
 CreateFund.getInitialProps = async ctx => {
-  let minimumDepositAmount;
   await Promise.all([
     ctx.reduxStore.dispatch(
       async dispatch => await dispatch(platformActions.fetchPlatformSettings())
     ),
-    ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx)),
-    fetchMinimumDepositAmount(ctx).then(res => (minimumDepositAmount = res))
+    ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx))
   ]);
-  return { minimumDepositAmount };
+  return {};
 };
 
 export default compose(
@@ -29,6 +26,4 @@ export default compose(
   withPrivateRoute
 )(CreateFund);
 
-interface Props {
-  minimumDepositAmount: number;
-}
+interface Props {}

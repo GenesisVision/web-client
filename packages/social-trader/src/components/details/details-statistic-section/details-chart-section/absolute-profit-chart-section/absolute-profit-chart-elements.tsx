@@ -39,13 +39,13 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
   );
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const { name, color } = chartData.selectedCurrencies[0];
-  const { chart } = chartData.chart;
+  const { chart, profit } = chartData.chart;
   return (
     <>
       <div className="details-chart__value">
         <StatisticItem big accent>
           <NumberFormat
-            value={formatCurrencyValue(0, name)}
+            value={formatCurrencyValue(profit, name)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${name}`}
