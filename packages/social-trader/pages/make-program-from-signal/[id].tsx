@@ -5,11 +5,16 @@ import ConvertAssetPage from "pages/convert-asset/convert-asset.page";
 import { fetchProgramDescription } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
-import { NextPageWithRedux } from "utils/types";
+import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<Props, {}> = ({ id, broker }) => {
+const Page: NextPageWithRedux<Props, {}> = ({
+  id,
+  broker,
+  accountCurrency
+}) => {
   return (
     <ConvertAssetPage
+      currency={accountCurrency}
       id={id}
       broker={broker}
       fromTo={{
@@ -23,13 +28,18 @@ const Page: NextPageWithRedux<Props, {}> = ({ id, broker }) => {
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   let broker;
-  await fetchProgramDescription(id as string).then(({ brokerDetails }) => {
-    broker = brokerDetails.type;
-  });
-  return { id, broker };
+  let accountCurrency;
+  await fetchProgramDescription(id as string).then(
+    ({ brokerDetails, currency }) => {
+      broker = brokerDetails.type;
+      accountCurrency = currency;
+    }
+  );
+  return { id, broker, accountCurrency };
 };
 
 interface Props {
+  accountCurrency: CurrencyEnum;
   id: string;
   broker: string;
 }
