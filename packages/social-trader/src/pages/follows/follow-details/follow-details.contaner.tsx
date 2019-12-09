@@ -6,6 +6,7 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import { financialStatisticTableSelector } from "pages/programs/program-details/reducers/program-history.reducer";
 import {
@@ -25,7 +26,6 @@ import {
 } from "utils/compose-url";
 
 import { statisticCurrencyAction } from "./actions/follow-details.actions";
-import FollowControls from "./follow-controls/follow-controls";
 import PerformanceData from "./follow-details-description/performance-data";
 import FollowDetailsStatisticSection from "./follow-details-statistic-section/follow-details-statistic-section";
 import { FollowDetailsDataType } from "./follow-details.types";
@@ -80,7 +80,7 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
         PerformanceData={() => <PerformanceData description={description} />}
-        Controls={() => <FollowControls description={description} />}
+        Controls={() => <FollowControlsContainer description={description} />}
       />
       <div className="details__divider" />
       <DetailsInvestment
