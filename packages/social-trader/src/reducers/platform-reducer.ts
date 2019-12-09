@@ -3,7 +3,6 @@ import { SelectFilterValue } from "components/table/components/filtering/filter.
 import {
   AmountWithCurrency,
   FundCreateAssetPlatformInfo,
-  ItemsViewModelProgramDetailsList,
   PlatformInfo,
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
@@ -15,7 +14,7 @@ import apiReducerFactory, {
 } from "reducers/reducer-creators/api-reducer";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
-import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import { apiFieldSelector, apiSelector, fieldSelector } from "utils/selectors";
 import { AuthRootState } from "utils/types";
 
@@ -122,9 +121,9 @@ export const assetTypeValuesSelector = createSelector<
   state => platformDataSelector(state),
   data =>
     (data &&
-      ["test"].map(type => ({
-        value: type,
-        label: type
+      data.filters.events.map(({ key, title }) => ({
+        value: key,
+        label: title
       }))) ||
     []
 );
