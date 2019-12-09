@@ -4,6 +4,10 @@ import "./portfolio-events.scss";
 import PortfolioEventsTableFiltering from "components/portfolio-events-table/portfolio-events-table-filtering";
 import PortfolioEventsTableHeaderCell from "components/portfolio-events-table/portfolio-events-table-header-cell";
 import {
+  DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  DASHBOARD_PORTFOLIO_EVENTS_FILTERS
+} from "components/portfolio-events-table/portfolio-events-table.constants";
+import {
   SelectFilterValue,
   SortingColumn
 } from "components/table/components/filtering/filter.type";
@@ -32,6 +36,8 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   return (
     <div className={className}>
       <TableModule
+        filtering={DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING}
+        defaultFilters={DASHBOARD_PORTFOLIO_EVENTS_FILTERS}
         loaderData={DashboardPortfolioEventsLoaderData}
         title={title}
         getItems={getItems}
