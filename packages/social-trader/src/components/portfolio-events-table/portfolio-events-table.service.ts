@@ -1,14 +1,17 @@
 import { SelectFilterValue } from "components/table/components/filtering/filter.type";
-import { EventFilters } from "gv-api-web";
+import { EventFilters, EventTradingItemFilters } from "gv-api-web";
 
 export const getEventTypes = (
   allEventTypes: EventFilters,
   historyType: THistoryType,
-  assetType: "allAssets" | "programDetails" | "fundDetails"
+  assetType: AssetType
 ): SelectFilterValue<string>[] =>
-  allEventTypes[historyType]["programDetails"].map(({ key, title }) => ({
+  (allEventTypes[historyType] as EventTradingItemFilters)[
+    assetType.toLowerCase() as AssetType
+  ].map(({ key, title }) => ({
     value: key,
     labelKey: title
   }));
 
-export type THistoryType = "investingHistory" | "tradingHistory";
+type AssetType = "follow" | "all" | "program" | "fund";
+export type THistoryType = "investmentHistory" | "tradingHistory";
