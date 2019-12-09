@@ -1,4 +1,3 @@
-import { getDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
@@ -6,8 +5,8 @@ import { CancelablePromise, TradesViewModel } from "gv-api-web";
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
+import accountsApi from "services/api-client/accounts-api";
 import brokersApi from "services/api-client/brokers-api";
-import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
@@ -21,7 +20,9 @@ import {
   setAccountIdAction
 } from "../actions/account-details.actions";
 import { tradesTableSelector } from "../reducers/account-history.reducer";
-import { AccountStatisticResult } from "./account-details.types";
+
+export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
+  accountsApi.getTradingAccountDetails(id, authService.getAuthArg(ctx));
 
 export const getAccountBrokers = (id: string) =>
   brokersApi.getBrokersForProgram(id);
@@ -37,40 +38,6 @@ export const dispatchAccountDescription = (id: string) => (
 export const dispatchAccountId = (id: string) => async (
   dispatch: MiddlewareDispatch
 ) => await dispatch(setAccountIdAction(id));
-
-export const getAccountStatistic = (
-  accountId: string,
-  currency = "",
-  period = getDefaultPeriod()
-): Promise<AccountStatisticResult> => {
-  const chartFilter = {
-    currency,
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 100
-  };
-  // @ts-ignore
-  return Promise.all([
-    // @ts-ignore
-    programsApi.getProgramProfitPercentCharts(accountId, chartFilter),
-    // @ts-ignore
-    programsApi.getProgramBalanceChart(accountId, chartFilter)
-  ]).then(([profitChart, balanceChart]) => {
-    const statistic = {
-      trades: profitChart.trades,
-      successTradesPercent: profitChart.successTradesPercent,
-      profitFactor: profitChart.profitFactor,
-      investors: profitChart.investors,
-      sharpeRatio: profitChart.sharpeRatio,
-      sortinoRatio: profitChart.sortinoRatio,
-      maxDrawdown: profitChart.maxDrawdown,
-      periodStarts: profitChart.lastPeriodStarts,
-      periodEnds: profitChart.lastPeriodEnds,
-      tradingVolume: profitChart.tradingVolume
-    };
-    return { statistic, profitChart, balanceChart };
-  });
-};
 
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
