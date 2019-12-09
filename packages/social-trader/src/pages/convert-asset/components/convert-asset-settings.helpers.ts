@@ -86,7 +86,7 @@ const convertToSignalValidationSchema = ({
   });
 
 export enum CONVERT_ASSET_FIELDS {
-  assetId = "assetId",
+  tradingAccountId = "tradingAccountId",
   available = "available",
   rate = "rate",
   tradesDelay = "tradesDelay",
