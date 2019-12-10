@@ -35,7 +35,9 @@ const _Investment: React.FC<Props> = ({
 }) => {
   const { successFeePersonal, exitFee, exitFeePersonal } = fees;
   const [t] = useTranslation();
-  const profitValue = personalDetails.value - 0; // personalDetails.invested
+  const profitValue = "profit" in personalDetails ? personalDetails.profit : 0;
+  const profitPercentValue =
+    "profitPercent" in personalDetails ? personalDetails.profitPercent : 0;
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
@@ -71,10 +73,10 @@ const _Investment: React.FC<Props> = ({
             />
           </Profitability>
           <Profitability
-            value={`${0}`} // personalDetails.profit
+            value={`${profitPercentValue}`}
             variant={PROFITABILITY_VARIANT.CHIPS}
           >
-            {roundPercents(0)}
+            {roundPercents(profitPercentValue)}
           </Profitability>
         </StatisticItem>
         <StatisticItem
