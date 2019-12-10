@@ -3,6 +3,7 @@ import "./chart-period.scss";
 import classNames from "classnames";
 import GVButton from "components/gv-button";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { localizedDate } from "shared/utils/dates";
 import { HandlePeriodChangeType } from "utils/types";
@@ -10,48 +11,53 @@ import { HandlePeriodChangeType } from "utils/types";
 import {
   ChartDefaultPeriod,
   ChartPeriodType,
+  ChartPeriodTypeValues,
   getPeriodStartDate,
   TChartPeriod
 } from "./chart-period.helpers";
 
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
+  const { type, start } = period;
   const { t } = useTranslation();
-  const handleChangePeriod = (newPeriodType: TChartPeriod) => () => {
-    if (period.type !== newPeriodType) {
+  const handleChangePeriod = useCallback(
+    (newPeriodType: TChartPeriod) => () => {
       const start = getPeriodStartDate(newPeriodType);
       onChange({ type: newPeriodType, start });
-    }
-  };
-  const renderDateRange = (): JSX.Element | null => {
-    if (period.type === ChartPeriodType.all) return null;
-    if (!period.start) return null;
-    return (
-      <span>
-        {localizedDate(period.start)} - {localizedDate(new Date())}
-      </span>
-    );
-  };
-  const { type } = period;
+    },
+    []
+  );
   return (
     <div className="chart-period">
       <div className="chart-period__period">
-        {Object.values(ChartPeriodType).map(x => (
+        {ChartPeriodTypeValues.map(period => (
           <GVButton
-            key={x}
+            key={period}
             className={classNames("chart-period__period-item", {
-              "chart-period__period-item--active": type === x
+              "chart-period__period-item--active": type === period
             })}
-            onClick={handleChangePeriod(x)}
+            onClick={handleChangePeriod(period)}
             variant="text"
             color="secondary"
-            disabled={type === x}
+            disabled={type === period}
           >
-            {t(`chart-period.${ChartPeriodType[x]}-short`)}
+            {t(`chart-period.${ChartPeriodType[period]}-short`)}
           </GVButton>
         ))}
       </div>
-      <div className="chart-period__date-range">{renderDateRange()}</div>
+      <div className="chart-period__date-range">
+        {type !== ChartPeriodType.all && (
+          <ChartPeriodDateLabel start={start!} />
+        )}
+      </div>
     </div>
+  );
+};
+
+const ChartPeriodDateLabel: React.FC<{ start: Date }> = ({ start }) => {
+  return (
+    <span>
+      {localizedDate(start)} - {localizedDate(new Date())}
+    </span>
   );
 };
 

@@ -17,6 +17,8 @@ export const ChartPeriodType = {
   all: "all" as TChartPeriod
 };
 
+export const ChartPeriodTypeValues = Object.values(ChartPeriodType);
+
 export const getPeriodStartDate = (periodType: TChartPeriod) => {
   if (periodType === ChartPeriodType.all) {
     return undefined;
@@ -24,11 +26,12 @@ export const getPeriodStartDate = (periodType: TChartPeriod) => {
   return subtractDate(new Date(), 1, periodType as any);
 };
 
+const DEFAULT_PERIOD_TYPE = ChartPeriodType.month;
+
 export const getDefaultPeriod = (): ChartDefaultPeriod => {
   return {
     type: ChartPeriodType.month,
-    start: getPeriodStartDate(ChartPeriodType.month),
-    end: new Date()
+    start: getPeriodStartDate(DEFAULT_PERIOD_TYPE)
   };
 };
 
@@ -36,6 +39,6 @@ export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
   type: TChartPeriod;
-  start?: Date; // TODO set start/end as required
+  start?: Date;
   end?: Date;
 };
