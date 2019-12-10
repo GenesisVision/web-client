@@ -30,7 +30,7 @@ const _FollowButton: React.FC<Props> = ({
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
-    onApply();
+    onApply && onApply();
   }, [id]);
   return (
     <>

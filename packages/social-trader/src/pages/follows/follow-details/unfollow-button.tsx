@@ -16,7 +16,7 @@ const _UnFollowButton: React.FC<Props> = ({
   const dispatch = useDispatch();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
-    onApply();
+    onApply && onApply();
   }, [id]);
   const [t] = useTranslation();
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
