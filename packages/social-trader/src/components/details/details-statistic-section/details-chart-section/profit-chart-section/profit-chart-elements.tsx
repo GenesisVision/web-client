@@ -1,6 +1,7 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import {
+  ChartAssetsType,
   ChartsDataType,
   ProfitChartDataType,
   StatisticDataType
@@ -67,6 +68,8 @@ const _ProfitChartElements: React.FC<Props> = ({
       <div className="details-chart__profit">
         {charts.length &&
           renderProfitChart({
+            assets:
+              "assets" in chartData.chart ? chartData.chart.assets : undefined,
             profitChart: charts,
             chartCurrencies: chartData.selectedCurrencies
           })}
@@ -81,6 +84,7 @@ export type TRenderProfitValue = (props: {
 
 export type TRenderProfitChart = (props: {
   profitChart: ChartsDataType;
+  assets?: ChartAssetsType;
   chartCurrencies?: TChartCurrency[];
 }) => JSX.Element;
 
