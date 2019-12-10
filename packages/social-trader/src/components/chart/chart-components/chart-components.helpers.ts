@@ -46,7 +46,7 @@ export const composeTicks = (
 
   const diff = duration / (ticks - 1);
   return [...Array(ticks).keys()].map(
-    x => (isOneDay ? (start as Date).getTime() : periodStart) + diff * x
+    x => (isOneDay ? new Date(start).getTime() : periodStart) + diff * x
   );
 };
 
