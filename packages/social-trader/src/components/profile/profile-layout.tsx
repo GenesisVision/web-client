@@ -43,19 +43,19 @@ const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
         <GVTabs value={route}>
           {tabs
             .filter(tab => !tab.hideable || !verified)
-            .map(x => (
+            .map(({ value, pathname }) => (
               <GVTab
-                key={x.value}
+                key={value}
                 label={
                   <Link
                     to={{
-                      pathname: x.pathname
+                      pathname
                     }}
                   >
-                    {t(`profile-page.tabs.${x.value}`)}
+                    {t(`profile-page.tabs.${value}`)}
                   </Link>
                 }
-                value={x.value}
+                value={value}
               />
             ))}
         </GVTabs>
