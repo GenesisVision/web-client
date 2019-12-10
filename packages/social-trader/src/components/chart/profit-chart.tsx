@@ -1,5 +1,5 @@
 import GVColors from "components/gv-styles/gv-colors";
-import { FundAssetsState, SimpleChartPoint } from "gv-api-web";
+import { FundAssetPartWithIcon, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
   Area,
@@ -26,7 +26,7 @@ const _ProfitChart: React.FC<Props> = ({
     return null;
   const firstEquity = equities[0];
 
-  const firstEquityValues = firstEquity.map(x => x.value);
+  const firstEquityValues = firstEquity.map(({ value }) => value);
   const areaStrokeColor = getStrokeColor(firstEquityValues);
   return (
     <ResponsiveContainer>
@@ -83,7 +83,7 @@ export type TChartColor = {
 };
 
 export type EquityChartElementType = SimpleChartPoint & {
-  assetsState?: FundAssetsState;
+  assets?: FundAssetPartWithIcon[];
 };
 export type EquityChartType = Array<EquityChartElementType>;
 
