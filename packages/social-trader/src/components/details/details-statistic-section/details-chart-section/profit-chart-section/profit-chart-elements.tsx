@@ -9,8 +9,10 @@ import ChartCurrencySelector, {
   TRemoveChartCurrency
 } from "modules/chart-currency-selector/chart-currency-selector";
 import * as React from "react";
+import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import {
@@ -34,12 +36,18 @@ const _ProfitChartElements: React.FC<Props> = ({
 }) => {
   const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
+  const { name } = chartData.selectedCurrencies[0];
   const { statistic, charts } = chartData.chart;
   return (
     <>
       <div className="details-chart__value">
         <StatisticItem big accent>
-          {renderProfitValue({ statistic })}
+          <NumberFormat
+            value={formatCurrencyValue(statistic.profitPercent, name)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` %`}
+          />
         </StatisticItem>
       </div>
       <ChartPeriod onChange={setPeriod} period={period} />
