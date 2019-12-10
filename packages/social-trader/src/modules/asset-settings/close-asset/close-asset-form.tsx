@@ -21,11 +21,11 @@ const _CloseAssetForm: React.FC<
       title={t(
         `asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
       )}
-      subtitle={t(
-        `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
-      )}
     />
     <DialogBottom>
+      {t(
+        `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+      )}
       {twoFactorEnabled && (
         <GVFormikField
           type="tel"
