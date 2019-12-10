@@ -19,13 +19,9 @@ const _FundBalanceChart: React.FC<Props> = ({
   balanceChart,
   currency
 }) => {
-  const chart = balanceChart.map(x => ({
-    ...x,
-    date: new Date(x.date).getTime()
-  }));
   return (
     <ResponsiveContainer>
-      <AreaChart data={chart} margin={{ top: 20 }}>
+      <AreaChart data={balanceChart} margin={{ top: 20 }}>
         {chartXAxis(
           balanceChart[0].date,
           balanceChart[balanceChart.length - 1].date
@@ -45,7 +41,7 @@ const _FundBalanceChart: React.FC<Props> = ({
           connectNulls={true}
           fill={`${color}2a`}
           stroke={`${color}2a`}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"
@@ -57,7 +53,7 @@ const _FundBalanceChart: React.FC<Props> = ({
           connectNulls={true}
           fill={color}
           stroke={color}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"
