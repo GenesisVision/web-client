@@ -19,24 +19,9 @@ const _ProgramBalanceChart: React.FC<Props> = ({
   currency,
   color
 }) => {
-  const chart = balanceChart.map(x => {
-    let dot = {
-      profit: 0,
-      profitNegative: 0,
-      managerFunds: x.managerFunds,
-      investorsFunds: x.investorsFunds,
-      date: new Date(x.date).getTime()
-    };
-    /*if (x.profit > 0) {
-      dot.profit = x.profit;
-    } else {
-      dot.profitNegative = x.profit;
-    }*/
-    return dot;
-  });
   return (
     <ResponsiveContainer>
-      <AreaChart data={chart} margin={{ top: 20 }}>
+      <AreaChart data={balanceChart} margin={{ top: 20 }}>
         <defs>
           <pattern
             id="diagonalHatch"
@@ -48,7 +33,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
             <path
               d="M0,0 l0,4"
               stroke={GVColors.$negativeColor}
-              strokeWidth={2}
+              strokeWidth={1}
             />
           </pattern>
         </defs>
@@ -70,7 +55,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
           type="monotone"
           fill={`${color}2a`}
           stroke={`${color}2a`}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"
@@ -81,29 +66,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
           type="monotone"
           fill={color}
           stroke={color}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profit"
-          type="monotone"
-          fill={`${color}2a`}
-          stroke={`${color}2a`}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profitNegative"
-          type="monotone"
-          fill="url(#diagonalHatch)"
-          stroke={color}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"
