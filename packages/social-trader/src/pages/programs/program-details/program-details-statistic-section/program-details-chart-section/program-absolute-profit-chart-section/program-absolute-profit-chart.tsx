@@ -47,47 +47,14 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
         />
         <CartesianGrid vertical={false} strokeWidth={0.1} />
         <Area
-          dataKey="managerFunds"
+          dataKey="value"
           type="monotone"
-          fill={`${color}2a`}
-          stroke={`${color}2a`}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="investorsFunds"
-          type="monotone"
-          fill={color}
+          connectNulls={true}
           stroke={color}
-          strokeWidth={2}
+          fill={`url(#equityProgramChartFill)`}
+          strokeWidth={1}
           dot={false}
           unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profit"
-          type="monotone"
-          fill={`${color}2a`}
-          stroke={`${color}2a`}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profitNegative"
-          type="monotone"
-          fill="url(#diagonalHatch)"
-          stroke={color}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
           isAnimationActive={false}
         />
         <Tooltip content={ProgramAbsoluteProfitTooltip} />
