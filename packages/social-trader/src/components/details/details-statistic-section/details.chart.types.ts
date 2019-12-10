@@ -10,6 +10,7 @@ import {
   AccountChartStatistic,
   AccountProfitPercentCharts,
   BalanceChartPoint,
+  FundAssetsState,
   FundBalanceChart,
   FundChartStatistic,
   FundProfitPercentCharts,
@@ -31,6 +32,8 @@ import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { TSelectorData } from "utils/selectors";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
+
+export type ChartAssetsType = FundAssetsState[];
 
 export type TBalanceChartSelector = (
   state: RootState
