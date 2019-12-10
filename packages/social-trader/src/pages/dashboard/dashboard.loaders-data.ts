@@ -175,7 +175,11 @@ const getRandomAsset = () =>
 export const getRecommendationLoaderData = (): TRecommendation => {
   const assetType = getRandomAsset();
   return {
+    hasSignalAccount: false,
+    isExternal: false,
+    leverage: getRandomInteger(-10000, 10000),
     broker: {
+      id: "",
       logo: "",
       name: "",
       type: "MetaTrader4"
