@@ -100,6 +100,13 @@ const _WalletList: React.FC<Props> = ({ t, createButtonToolbar, wallets }) => {
             </TableCell>
             <TableCell className="wallet-list__cell">
               <NumberFormat
+                value={formatCurrencyValue(wallet.trading, wallet.currency)}
+                thousandSeparator=" "
+                displayType="text"
+              />
+            </TableCell>
+            <TableCell className="wallet-list__cell">
+              <NumberFormat
                 value={formatCurrencyValue(wallet.pending, wallet.currency)}
                 thousandSeparator=" "
                 displayType="text"

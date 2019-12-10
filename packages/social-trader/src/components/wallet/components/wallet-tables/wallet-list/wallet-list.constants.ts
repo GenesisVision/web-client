@@ -14,6 +14,9 @@ export const WALLET_LIST_COLUMNS: Column[] = [
     name: "invested"
   },
   {
+    name: "trading"
+  },
+  {
     name: "pending"
   },
   {
