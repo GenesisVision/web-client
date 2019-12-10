@@ -1,9 +1,8 @@
 import { GV_BTN_SIZE } from "components/gv-button";
-import TableCard, {
-  TableCardRow
-} from "components/table/components/table-card/table-card";
+import TableCard from "components/table/components/table-card/table-card";
 import DepositButton from "modules/deposit/deposit.button";
 import { TRecommendation } from "pages/dashboard/dashboard.types";
+import FollowButton from "pages/follows/follow-details/follow-button";
 import * as React from "react";
 import { ASSET } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "utils/compose-url";
@@ -26,13 +25,28 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
       detailsUrl={linkProps}
     >
       <div className="dashboard-recommendations-card__row">
-        <DepositButton
-          size={GV_BTN_SIZE.BIG}
-          broker={asset.broker && asset.broker.type}
-          type={asset.assetType as ASSET}
-          id={asset.id}
-          currency={asset.currency}
-        />
+        {asset.assetType === ASSET.FOLLOW && (
+          <FollowButton
+            id={asset.id}
+            currency={asset.currency}
+            title={""}
+            isExternal={false}
+            broker={asset.broker.type}
+            brokerId={asset.broker.name}
+            hasSignalAccount={false}
+            leverage={1}
+          />
+        )}
+        {(asset.assetType === ASSET.PROGRAM ||
+          asset.assetType === ASSET.FUND) && (
+          <DepositButton
+            size={GV_BTN_SIZE.BIG}
+            broker={asset.broker && asset.broker.type}
+            type={asset.assetType as ASSET}
+            id={asset.id}
+            currency={asset.currency}
+          />
+        )}
       </div>
     </TableCard>
   );
