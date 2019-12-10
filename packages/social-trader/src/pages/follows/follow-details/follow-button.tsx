@@ -66,7 +66,7 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
-  onApply: VoidFunction;
+  onApply?: VoidFunction;
   hasSignalAccount: boolean;
   leverage: number;
   isExternal: boolean;

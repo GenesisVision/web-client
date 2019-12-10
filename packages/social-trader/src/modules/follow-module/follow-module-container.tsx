@@ -41,7 +41,7 @@ interface Props {
   broker: BrokerTradeServerType;
   open: boolean;
   onClose: VoidFunction;
-  onApply: VoidFunction;
+  onApply?: VoidFunction;
   currency: CurrencyEnum;
   id: string;
 }
