@@ -1,3 +1,4 @@
+import { GV_BTN_SIZE } from "components/gv-button";
 import TableCard, {
   TableCardRow
 } from "components/table/components/table-card/table-card";
@@ -24,14 +25,15 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
       logo={asset.logo}
       detailsUrl={linkProps}
     >
-      <TableCardRow className="dashboard-recommendations-card__row">
+      <div className="dashboard-recommendations-card__row">
         <DepositButton
+          size={GV_BTN_SIZE.BIG}
           broker={asset.broker && asset.broker.type}
           type={asset.assetType as ASSET}
           id={asset.id}
           currency={asset.currency}
         />
-      </TableCardRow>
+      </div>
     </TableCard>
   );
 };
