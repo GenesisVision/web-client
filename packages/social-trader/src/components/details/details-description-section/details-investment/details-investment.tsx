@@ -2,14 +2,11 @@ import "./details-investment.scss";
 
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
-import { fetchSubscriptionsCount } from "components/details/details-description-section/details-investment/details-investment.service";
 import Investment from "components/details/details-description-section/details-investment/investment";
 import SubscriptionContainer from "components/details/details-description-section/details-investment/subscription.container";
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
-import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import { TableSelectorType } from "components/table/components/table.types";
-import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import {
   EVENT_LOCATION,
@@ -20,7 +17,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { RootState } from "reducers/root-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, FeesType } from "utils/types";
 
@@ -40,12 +36,10 @@ const _DetailsInvestment: React.FC<Props> = ({
   id,
   personalDetails
 }) => {
-  const { data: subscriptionsCount } = useApiRequest({
-    request: fetchSubscriptionsCount,
-    fetchOnMount: asset === ASSET.FOLLOW,
-    fetchOnMountData: id
-  });
-
+  const subscriptionsCount =
+    "subscribedAccounts" in personalDetails
+      ? personalDetails.subscribedAccounts
+      : 0;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);

@@ -7,11 +7,6 @@ export const fetchSubscriptions = (id: string) =>
     .getFollowSubscriptionsForAsset(id, authService.getAuthArg())
     .then(({ items }) => items);
 
-export const fetchSubscriptionsCount = (id: string) =>
-  followApi
-    .getFollowSubscriptionsForAsset(id, authService.getAuthArg())
-    .then(({ total }) => total);
-
 export const SignalSubscriptionLoaderData: SignalSubscription = {
   subscriberInfo: { tradingAccountId: "", tradingAccountLogin: "" },
   asset: {
