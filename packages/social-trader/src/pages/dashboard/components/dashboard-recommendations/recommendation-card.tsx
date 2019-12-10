@@ -32,9 +32,9 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
             title={""}
             isExternal={false}
             broker={asset.broker.type}
-            brokerId={asset.broker.name}
-            hasSignalAccount={false}
-            leverage={1}
+            brokerId={asset.broker.id}
+            hasSignalAccount={asset.hasSignalAccount}
+            leverage={asset.leverage}
           />
         )}
         {(asset.assetType === ASSET.PROGRAM ||
