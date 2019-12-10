@@ -82,12 +82,9 @@ export const useChartPeriodCreator: TUseChartPeriodCreator = (
 ) => {
   const period = useSelector(selector);
   const dispatch = useDispatch();
-  const setPeriod = useCallback(
-    period => {
-      dispatch(action(period));
-    },
-    [dispatch]
-  );
+  const setPeriod = useCallback(period => {
+    dispatch(action(period));
+  }, []);
   return {
     period,
     setPeriod
@@ -265,7 +262,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
     setSelectCurrencies(
       platformCurrencies.filter(
         ({ name }) =>
-          !!!selectedCurrencies.find(currency => currency.name === name)
+          !selectedCurrencies.find(currency => currency.name === name)
       )
     );
   }, [platformCurrencies, selectedCurrencies]);
