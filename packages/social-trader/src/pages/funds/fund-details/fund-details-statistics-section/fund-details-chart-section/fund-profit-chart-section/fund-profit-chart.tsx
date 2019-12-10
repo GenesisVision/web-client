@@ -1,7 +1,4 @@
-import ProfitChart, {
-  EquityChartElementType,
-  EquityChartType
-} from "components/chart/profit-chart";
+import ProfitChart from "components/chart/profit-chart";
 import {
   ChartAssetsType,
   ChartsDataType
@@ -17,34 +14,11 @@ const _FundProfitChart: React.FC<Props> = ({
   chartCurrencies
 }) => {
   const equityCharts = profitChart.map(chart => chart.chart);
-  const assetsChart = assets.map(
-    assets =>
-      (({
-        ...assets,
-        value: undefined
-      } as unknown) as EquityChartElementType)
-  );
-  /*const equities = equityCharts.map(equityChart =>
-    (equityChart as EquityChartType).map((item: any) => ({
-      ...item,
-      assets:
-        [
-          ...assets,
-          {
-            icon: "",
-            color: "grey",
-            name: "Other",
-            asset: "Other",
-            percent: 10 // item.assetsState.otherPercent
-          }
-        ].filter(({ percent }) => !!percent) || []
-    }))
-  );*/
   return (
     <ProfitChart
       equityCharts={equityCharts}
       tooltip={FundProfitTooltip}
-      equities={[assetsChart, ...equityCharts]}
+      equities={[assets, ...equityCharts]}
       colors={chartCurrencies}
     />
   );
