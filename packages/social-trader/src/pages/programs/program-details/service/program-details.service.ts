@@ -1,4 +1,4 @@
-import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { mapToTableItems, TableItems } from "components/table/helpers/mapper";

@@ -1,5 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
-import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.helpers";
+import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
 import * as React from "react";
 import {

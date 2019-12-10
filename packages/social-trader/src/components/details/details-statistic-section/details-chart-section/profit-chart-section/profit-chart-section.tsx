@@ -1,13 +1,13 @@
-import { selectedCurrenciesLoaderData } from "pages/programs/program-details/program-details.loader-data";
-import * as React from "react";
-import { useSelector } from "react-redux";
-
 import {
   ProfitChartDataType,
   TProfitChartSelector,
   TUseChartPeriod,
   TUseChartStateValues
-} from "../../details.chart.helpers";
+} from "components/details/details-statistic-section/details.chart.types";
+import { selectedCurrenciesLoaderData } from "pages/programs/program-details/program-details.loader-data";
+import * as React from "react";
+import { useSelector } from "react-redux";
+
 import { DETAILS_CHART_TABS } from "../details-chart";
 import ProfitChartElements, {
   TRenderProfitChart,

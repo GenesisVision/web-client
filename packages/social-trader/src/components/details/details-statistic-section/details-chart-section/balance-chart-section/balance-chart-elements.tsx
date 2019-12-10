@@ -1,5 +1,9 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import {
+  BalanceChartElementType,
+  BalanceChartType
+} from "components/details/details-statistic-section/details.chart.types";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import {
@@ -18,11 +22,7 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
-import {
-  BalanceChartElementType,
-  BalanceChartType,
-  useChartData
-} from "../../details.chart.helpers";
+import { useChartData } from "../../details.chart.helpers";
 
 const _BalanceChartElements: React.FC<Props> = ({
   renderBalanceChart,

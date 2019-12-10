@@ -2,19 +2,17 @@ import "components/details/details-description-section/details-statistic-section
 
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsBlock from "components/details/details-block";
+import {
+  StatisticDataType,
+  TProfitChartSelector,
+  TStatisticCurrencySelector,
+  TUseChartPeriod
+} from "components/details/details-statistic-section/details.chart.types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { CurrencyEnum } from "utils/types";
-
-import {
-  ProfitChartType,
-  StatisticDataType,
-  TProfitChartSelector,
-  TStatisticCurrencySelector,
-  TUseChartPeriod
-} from "../details.chart.helpers";
 
 const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   profitChartSelector,

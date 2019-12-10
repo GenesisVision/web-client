@@ -1,5 +1,10 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import {
+  AbsoluteProfitChartDataType,
+  ChartDataType,
+  StatisticDataType
+} from "components/details/details-statistic-section/details.chart.types";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ChartCurrencySelector, {
@@ -15,12 +20,7 @@ import { platformCurrenciesSelector } from "reducers/platform-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
-import {
-  AbsoluteProfitChartDataType,
-  ChartDataType,
-  StatisticDataType,
-  useChartData
-} from "../../details.chart.helpers";
+import { useChartData } from "../../details.chart.helpers";
 
 const _AbsoluteProfitChartElements: React.FC<Props> = ({
   renderChart,

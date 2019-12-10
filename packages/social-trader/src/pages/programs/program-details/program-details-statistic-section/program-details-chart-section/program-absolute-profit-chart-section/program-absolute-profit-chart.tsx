@@ -1,5 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
-import { ChartDataType } from "components/details/details-statistic-section/details.chart.helpers";
+import { ChartDataType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
 import ProgramAbsoluteProfitTooltip from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-tooltip";
 import * as React from "react";
