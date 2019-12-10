@@ -32,7 +32,7 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
             <path
               d="M0,0 l0,4"
               stroke={GVColors.$negativeColor}
-              strokeWidth={2}
+              strokeWidth={1}
             />
           </pattern>
         </defs>

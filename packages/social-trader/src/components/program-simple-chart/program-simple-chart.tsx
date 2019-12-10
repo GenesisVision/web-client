@@ -39,7 +39,7 @@ const _ProgramSimpleChart: React.FC<Props> = ({ data, programId }) => {
             type="monotone"
             dataKey="value"
             stroke={areaColor}
-            strokeWidth={2}
+            strokeWidth={1}
             fill={`url(#equitySimpleChartFill__${programId})`}
             isAnimationActive={false}
           />

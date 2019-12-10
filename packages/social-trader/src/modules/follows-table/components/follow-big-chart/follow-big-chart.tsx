@@ -59,7 +59,7 @@ const _FollowBigChart: React.FC<Props> = ({ programId, data }) => {
           type="monotone"
           dataKey="equity"
           stroke={areaStrokeColor}
-          strokeWidth={2}
+          strokeWidth={1}
           fill={`url(#equityChartFill__${programId})`}
           isAnimationActive={false}
         />
