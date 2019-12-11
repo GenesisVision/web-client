@@ -1,7 +1,7 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
 import { SetSubmittingType } from "utils/types";
 
@@ -17,10 +17,10 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   onClose
 }) => {
   const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
-  const dispatch = useDispatch();
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
+    successMessage: "password-change-trading-account.success-alert-message",
     middleware: [onClose],
-    request: args => dispatch(changePasswordTradingAccount(args))
+    request: changePasswordTradingAccount
   });
   const handleApply = useCallback(
     (

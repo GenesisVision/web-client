@@ -1,7 +1,5 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import { Dispatch } from "redux";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
@@ -31,80 +29,26 @@ export const editAsset = (props: {
   });
 };
 
-export const closeProgram: TCloseAsset = ({
-  onSuccess,
-  onError,
-  id,
-  opts
-}) => dispatch => {
-  const authorization = authService.getAuthArg();
-  const model =
-    opts && opts.twoFactorCode
-      ? {
-          twoFactorCode: opts.twoFactorCode
-        }
-      : undefined;
-
-  assetsApi
-    .closeInvestmentProgram(id, authorization, {
-      model
-    })
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "program-details-page.description.close-program-notification-success",
-          true
-        )
-      );
-    })
-    .catch((error: { errorMessage: string }) => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+export const closeProgram: TCloseAsset = ({ id, twoFactorCode }) => {
+  return assetsApi.closeInvestmentProgram(id, authService.getAuthArg(), {
+    model: { twoFactorCode: twoFactorCode! }
+  });
 };
 
-export const closeFund: TCloseAsset = ({
-  onSuccess,
-  onError,
-  id,
-  opts
-}) => dispatch => {
-  const authorization = authService.getAuthArg();
-  const model =
-    opts && opts.twoFactorCode
-      ? {
-          twoFactorCode: opts.twoFactorCode
-        }
-      : undefined;
+export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
+  return assetsApi.closeFund(id, authService.getAuthArg(), {
+    model: { twoFactorCode: twoFactorCode! }
+  });
+};
 
-  assetsApi
-    .closeFund(id, authorization, {
-      model
-    })
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "fund-details-page.description.close-fund-notification-success",
-          true
-        )
-      );
-    })
-    .catch((error: { errorMessage: string }) => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+export const closeTradingAccount: TCloseAsset = ({ id }) => {
+  return assetsApi.closeTradingAccount(id, authService.getAuthArg());
 };
 
 export type TCloseAsset = (opts: {
-  onSuccess: () => void;
-  onError: () => void;
   id: string;
-  opts?: {
-    twoFactorCode?: string;
-  };
-}) => (dispatch: Dispatch) => void;
+  twoFactorCode?: string;
+}) => void;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

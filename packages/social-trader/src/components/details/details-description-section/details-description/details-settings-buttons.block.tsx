@@ -12,7 +12,6 @@ import DetailsSettingControl from "./controls/details-setting-control";
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
   asset,
-  showSettings,
   personalDetails,
   id,
   notificationsUrl,
@@ -34,7 +33,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
           hasNotifications={personalDetails && personalDetails.hasNotifications}
         />
       )}
-      {((personalDetails && personalDetails.isOwnAsset) || showSettings) && (
+      {personalDetails && personalDetails.isOwnAsset && !!settingsUrl && (
         <DetailsSettingControl
           to={settingsUrl}
           text={t("program-details-page.description.settings")}
@@ -46,11 +45,10 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
 
 interface Props {
   asset: ASSET;
-  showSettings?: boolean;
   personalDetails?: PersonalDetailsType;
   id: string;
   notificationsUrl?: ToType;
-  settingsUrl: ToType;
+  settingsUrl?: ToType;
 }
 
 export const DetailsSettingsButtons = React.memo(_DetailsSettingsButtons);

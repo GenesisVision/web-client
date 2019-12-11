@@ -1,7 +1,7 @@
 import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import React from "react";
-import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
@@ -41,7 +41,7 @@ interface Props {
   id: string;
   onApply?: () => void;
   variant?: "text" | "outlined" | "contained";
-  type: ASSET;
+  type: CLOSEABLE_ASSET;
 }
 
 const CloseAssetButton = React.memo(_CloseAssetButton);

@@ -163,7 +163,7 @@ interface OwnProps extends IConvertAssetSettingsFormOwnProps {
 export interface IConvertAssetSettingsProps extends OwnProps, WithTranslation {}
 
 export interface IConvertAssetSettingsFormValues {
-  [CONVERT_ASSET_FIELDS.tradingAccountId]?: string;
+  [CONVERT_ASSET_FIELDS.id]?: string;
   [CONVERT_ASSET_FIELDS.currency]: string;
   [CONVERT_ASSET_FIELDS.available]: number;
   [CONVERT_ASSET_FIELDS.rate]: number;
@@ -196,8 +196,8 @@ const ConvertAssetSettings = compose<
     displayName: "ConvertAssetSettingsForm",
     mapPropsToValues: convertAssetMapPropsToValues,
     validationSchema: convertAssetSettingsValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit({ ...values, tradingAccountId: props.id }, setSubmitting);
+    handleSubmit: (values, { props: { id, onSubmit }, setSubmitting }) => {
+      onSubmit({ ...values, id }, setSubmitting);
     }
   }),
   React.memo

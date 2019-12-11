@@ -1,23 +1,10 @@
 import i18next from "i18next";
+import { twoFactorValidator } from "shared/utils/validators/validators";
 import { object, ref, string } from "yup";
 
 interface IChangePasswordTradingAccountValidationSchema {
   twoFactorEnabled: boolean;
 }
-
-const twoFactorValidator = (
-  params: i18next.WithT & IChangePasswordTradingAccountValidationSchema
-) => {
-  const { t, twoFactorEnabled } = params;
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
-        .required(t("wallet-withdraw.validation.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
-};
 
 const passwordValidator = ({ t }: i18next.WithT) => {
   return string()
@@ -36,7 +23,7 @@ export const ChangePasswordTradingAccountValidationSchema = (
   params: i18next.WithT & IChangePasswordTradingAccountValidationSchema
 ) =>
   object().shape({
-    twoFactorCode: twoFactorValidator(params),
+    twoFactorCode: twoFactorValidator(params.t, params.twoFactorEnabled),
     password: passwordValidator({ t: params.t }),
     confirmPassword: string()
       .oneOf(
