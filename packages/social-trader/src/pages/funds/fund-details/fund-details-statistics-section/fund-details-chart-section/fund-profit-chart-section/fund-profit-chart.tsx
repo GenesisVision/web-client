@@ -11,7 +11,7 @@ import FundProfitTooltip from "./fund-profit-tooltip";
 const _FundProfitChart: React.FC<Props> = ({
   assets,
   profitChart,
-  chartCurrencies
+  chartCurrencies = []
 }) => {
   const equityCharts = profitChart.map(chart => chart.chart);
   return (
@@ -19,7 +19,7 @@ const _FundProfitChart: React.FC<Props> = ({
       equityCharts={equityCharts}
       tooltip={FundProfitTooltip}
       equities={[assets, ...equityCharts]}
-      colors={chartCurrencies}
+      colors={[chartCurrencies[0], ...chartCurrencies]}
     />
   );
 };
