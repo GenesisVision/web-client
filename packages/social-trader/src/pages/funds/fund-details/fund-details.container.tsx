@@ -66,7 +66,10 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           </div>
         )}
         Controls={() => (
-          <InvestmentFundControls fundDescription={description} />
+          <InvestmentFundControls
+            fundDescription={description}
+            onApply={handleDispatchDescription}
+          />
         )}
       />
       <div className="details__divider" />

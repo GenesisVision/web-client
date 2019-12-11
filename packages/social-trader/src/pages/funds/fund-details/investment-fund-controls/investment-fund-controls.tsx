@@ -8,7 +8,10 @@ import InvestmentFundInfo from "pages/funds/fund-details/fund-details-descriptio
 import * as React from "react";
 import { ASSET } from "shared/constants/constants";
 
-const _InvestmentFundControls: React.FC<Props> = ({ fundDescription }) => {
+const _InvestmentFundControls: React.FC<Props> = ({
+  fundDescription,
+  onApply
+}) => {
   const { personalDetails } = fundDescription;
   const isOwnProgram = personalDetails && personalDetails.isOwnAsset;
   return (
@@ -19,6 +22,7 @@ const _InvestmentFundControls: React.FC<Props> = ({ fundDescription }) => {
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
+          onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
           entryFee={fundDescription.entryFeeCurrent}
@@ -32,6 +36,7 @@ const _InvestmentFundControls: React.FC<Props> = ({ fundDescription }) => {
 
 interface Props {
   fundDescription: FundDetailsFull;
+  onApply: () => any;
 }
 
 const InvestmentFundControls = React.memo(_InvestmentFundControls);

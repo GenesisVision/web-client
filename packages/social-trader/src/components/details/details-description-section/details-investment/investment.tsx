@@ -18,6 +18,8 @@ import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 import { ASSET, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
@@ -34,10 +36,16 @@ const _Investment: React.FC<Props> = ({
   personalDetails
 }) => {
   const { successFeePersonal, exitFee, exitFeePersonal } = fees;
+  const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
   const profitValue = "profit" in personalDetails ? personalDetails.profit : 0;
   const profitPercentValue =
     "profitPercent" in personalDetails ? personalDetails.profitPercent : 0;
+
+  const currency = asset === ASSET.FUND ? accountCurrency : assetCurrency;
+  const pendingCurrency =
+    asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
+
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
@@ -46,8 +54,8 @@ const _Investment: React.FC<Props> = ({
       <StatisticItemList className="details-investment__short-statistic">
         <StatisticItem accent label={t("fund-details-page.description.value")}>
           <NumberFormat
-            value={formatCurrencyValue(personalDetails.value, assetCurrency)}
-            suffix={` ${assetCurrency}`}
+            value={formatCurrencyValue(personalDetails.value, currency)}
+            suffix={` ${currency}`}
             displayType="text"
           />
         </StatisticItem>
@@ -137,9 +145,9 @@ const _Investment: React.FC<Props> = ({
           <NumberFormat
             value={formatCurrencyValue(
               personalDetails.pendingInput,
-              assetCurrency
+              pendingCurrency
             )}
-            suffix={` ${assetCurrency}`}
+            suffix={` ${pendingCurrency}`}
             displayType="text"
           />
         </StatisticItem>
@@ -167,9 +175,9 @@ const _Investment: React.FC<Props> = ({
             <NumberFormat
               value={formatCurrencyValue(
                 personalDetails.pendingOutput,
-                assetCurrency
+                pendingCurrency
               )}
-              suffix={` ${assetCurrency}`}
+              suffix={` ${pendingCurrency}`}
               displayType="text"
             />
           )}
