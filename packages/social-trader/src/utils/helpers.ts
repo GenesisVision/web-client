@@ -93,14 +93,21 @@ const getRandomInteger = (min: number, max: number): number =>
 
 const getRandomText = (params: Object) => randomString.generate(params);
 
-const getRandomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
+export const getRandomWord = (params?: Object) =>
+  randomString.generate({
+    length: getRandomInteger(3, 8),
+    readable: true,
+    charset: "alphabetic",
+    ...params
+  });
+
+export const getRandomWords = (length: number) =>
+  tableLoaderCreator(getRandomWord, length).join(" ");
+
+export const getRandomColorNumber = () => getRandomInteger(0, 255).toString(16);
+
+const getRandomColor = () =>
+  `#${getRandomColorNumber}${getRandomColorNumber}${getRandomColorNumber}`;
 
 export const tableLoaderCreator = (
   itemCreator: (...args: any) => any,
