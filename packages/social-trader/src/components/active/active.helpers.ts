@@ -1,5 +1,5 @@
-import * as faker from "faker";
 import { SocialLinkType } from "gv-api-web";
+import { getRandomWord } from "utils/helpers";
 
 export const ACTIVE_ROUTE = "/active";
 
@@ -17,7 +17,7 @@ export const SocialLinksMocks = Array(5)
   .map(() => SocialLinksMock);
 
 export const getTagMock = () => ({
-  name: faker.lorem.word(),
+  name: getRandomWord(),
   color: "#f0f0f0"
 });
 export const tagMocks = Array(5)
