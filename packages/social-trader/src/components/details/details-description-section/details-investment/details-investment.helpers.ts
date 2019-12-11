@@ -10,7 +10,7 @@ export type InvestmentBlockDetailsType =
   | PersonalProgramDetails
   | PersonalFollowDetailsFull;
 
-export type InvestmentType = PersonalFundDetails | PersonalProgramDetails;
+export type InvestmentType = PersonalFundDetails & PersonalProgramDetails;
 
 export const haveActiveInvestment = (
   details: InvestmentBlockDetailsType

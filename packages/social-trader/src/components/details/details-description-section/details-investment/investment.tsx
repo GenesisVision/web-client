@@ -43,6 +43,8 @@ const _Investment: React.FC<Props> = ({
     "profitPercent" in personalDetails ? personalDetails.profitPercent : 0;
 
   const currency = asset === ASSET.FUND ? accountCurrency : assetCurrency;
+  const pendingCurrency =
+    asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
 
   return (
     <DetailsInvestmentBlock>
@@ -143,9 +145,9 @@ const _Investment: React.FC<Props> = ({
           <NumberFormat
             value={formatCurrencyValue(
               personalDetails.pendingInput,
-              assetCurrency
+              pendingCurrency
             )}
-            suffix={` ${assetCurrency}`}
+            suffix={` ${pendingCurrency}`}
             displayType="text"
           />
         </StatisticItem>
@@ -173,9 +175,9 @@ const _Investment: React.FC<Props> = ({
             <NumberFormat
               value={formatCurrencyValue(
                 personalDetails.pendingOutput,
-                assetCurrency
+                pendingCurrency
               )}
-              suffix={` ${assetCurrency}`}
+              suffix={` ${pendingCurrency}`}
               displayType="text"
             />
           )}
