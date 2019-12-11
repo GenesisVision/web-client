@@ -33,12 +33,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
     <Page title={description.login}>
       <DetailsDescriptionSection
         asset={ASSET.FOLLOW}
-        showSettings
         description={description}
-        settingsUrl={createAccountSettingsToUrl(
-          description.id,
-          description.login
-        )}
         PerformanceData={() => <PerformanceData description={description} />}
       />
       <div className="details__divider" />
