@@ -15,7 +15,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
     canSubscribeToExternalSignalCommonAccount,
     canSubscribeToExternalSignalPrivateAccount,
     canSubscribeToInternalSignal
-  },
+  } = {},
   leverage,
   brokerId,
   isExternal,
@@ -61,7 +61,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 
 interface Props {
   onApply: VoidFunction;
-  guestActions: AssetGuestActions;
+  guestActions?: AssetGuestActions;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
