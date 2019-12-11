@@ -3,7 +3,7 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { ASSET } from "shared/constants/constants";
 
-import CloseAsset from "./close-asset/close-asset";
+import CloseAsset, { CLOSEABLE_ASSET } from "./close-asset/close-asset";
 import ClosePeriod from "./close-period/close-period";
 
 const _PeriodAndClosing: React.FC<Props> = ({
@@ -29,7 +29,7 @@ const _PeriodAndClosing: React.FC<Props> = ({
 
 interface Props extends WithTranslation {
   label?: string;
-  asset: ASSET;
+  asset: CLOSEABLE_ASSET;
   id: string;
   canClosePeriod?: boolean;
   canCloseAsset: boolean;

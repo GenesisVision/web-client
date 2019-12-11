@@ -18,7 +18,13 @@ const _DashboardInvestingMostProfitable: React.FC = () => {
         asset: DashboardTradingAsset,
         updateRow,
         updateItems
-      ) => <DashboardPublicCard updateItems={updateItems!} asset={asset} />}
+      ) => (
+        <DashboardPublicCard
+          showActions={false}
+          updateItems={updateItems!}
+          asset={asset}
+        />
+      )}
     />
   );
 };
