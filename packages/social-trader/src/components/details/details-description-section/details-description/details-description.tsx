@@ -10,7 +10,6 @@ import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
   asset,
-  showSettings,
   personalDetails,
   description,
   AssetDetailsExtraBlock,
@@ -57,7 +56,6 @@ const _DetailsDescription: React.FC<Props> = ({
       </DetailsInfo>
       <DetailsSettingsButtons
         asset={asset}
-        showSettings={showSettings}
         personalDetails={personalDetails}
         id={description.id}
         notificationsUrl={notificationsUrl}
@@ -69,9 +67,8 @@ const _DetailsDescription: React.FC<Props> = ({
 
 interface Props {
   asset: ASSET;
-  showSettings?: boolean;
   notificationsUrl?: ToType;
-  settingsUrl: ToType;
+  settingsUrl?: ToType;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   description: DetailsFullType;
   personalDetails?: PersonalDetailsType;

@@ -13,16 +13,17 @@ import {
 } from "components/table/components/table-card/table-card-actions";
 import { DashboardTradingAsset } from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
+import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
 import { META_TRADER_4_ROUTE } from "routes/trade.routes";
 import {
-  ASSET,
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
 } from "shared/constants/constants";
@@ -78,8 +79,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
           {t("dashboard-page.trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
+      {asset.actions.canChangePassword && (
+        <ChangeAccountPasswordButton
+          id={asset.id}
+          title={asset.accountInfo.title}
+        />
+      )}
       <CloseAssetButton
-        type={"account" as ASSET}
+        type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
         id={asset.id}
         variant={"text"}
       />

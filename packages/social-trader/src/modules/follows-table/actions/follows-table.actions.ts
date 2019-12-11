@@ -12,6 +12,7 @@ export const fetchFollowsAction = (
 });
 
 export type FetchSignalAssetsFilterType = {
+  isFavorite?: boolean;
   authorization?: string;
   tags?: Array<string>;
   dateFrom?: Date;

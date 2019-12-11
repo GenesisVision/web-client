@@ -7,6 +7,7 @@ import {
   ProgramDetailsFull
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
@@ -116,7 +117,7 @@ const _ProgramSettings: React.FC<Props> = ({
       />
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
-        asset={ASSET.PROGRAM}
+        asset={CLOSEABLE_ASSET.PROGRAM}
         canCloseAsset={details.personalDetails.ownerActions.canClose}
         id={details.id}
         closeAsset={closeProgram}

@@ -238,6 +238,19 @@
     "Ended": "Ended",
     "Pending": "Pending"
   },
+  "follow-actions": {
+    "change-password": "Change password",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
+    "details": "Details",
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "create-program": "Create Follow",
+    "create-tournament-account": "Create Tournament Account",
+    "edit-program": "Edit Follow",
+    "close-program": "Close Follow",
+    "close-period": "Close Period"
+  },
   "program-actions": {
     "change-password": "Change password",
     "remove-from-favorites": "Remove from Favourites",
@@ -1172,6 +1185,7 @@
     }
   },
   "global-search-page": {
+    "follows": "Follows",
     "title": "Search",
     "heading": "Search Results",
     "programs": "Programs",
@@ -2455,7 +2469,12 @@
       "title": "Close period"
     },
     "close-asset": {
-      "title": "Close asset"
+      "title": "Close asset",
+      "notifications": {
+        "fund": "Request to close the fund was sent successfully.",
+        "program": "Request to close the program was sent successfully.",
+        "trading-account": "Request to close the trading account was sent successfully."
+      }
     },
     "close-fund": {
       "title": "Close fund"
@@ -2489,6 +2508,7 @@
       "title": "Avatar"
     },
     "buttons": {
+      "close-trading-account": "Close trading account",
       "close-account": "Close account",
       "close-follow": "Close follow",
       "close-program": "Close program",

@@ -24,7 +24,8 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import {
   btcWalletValidator,
-  ethGvtWalletValidator
+  ethGvtWalletValidator,
+  twoFactorValidator
 } from "shared/utils/validators/validators";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
@@ -146,20 +147,6 @@ const _WalletWithdrawForm: React.FC<
       </DialogBottom>
     </form>
   );
-};
-
-const twoFactorValidator = (
-  t: i18next.TFunction,
-  twoFactorEnabled: boolean
-): StringSchema => {
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
-        .required(t("wallet-withdraw.validation.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
 enum FIELDS {

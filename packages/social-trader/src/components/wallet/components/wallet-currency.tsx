@@ -46,7 +46,7 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
         </div>
         <WalletBalanceElements
           available={info.available}
-          pending={info.pending}
+          pending={info.trading}
           total={info.total}
           invested={info.invested}
           currency={info.currency}

@@ -6,6 +6,7 @@ import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
+import { FollowsTable } from "./follows-table";
 import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
@@ -29,6 +30,11 @@ const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
             value={SEARCH_TABS.FUNDS}
             label={t("global-search-page.funds")}
             count={data.funds && data.funds.total}
+          />
+          <GVTab
+            value={SEARCH_TABS.FOLLOWS}
+            label={t("global-search-page.follows")}
+            count={data.follow && data.follow.total}
           />
           <GVTab
             value={SEARCH_TABS.MANAGERS}
@@ -68,12 +74,19 @@ const Tab: React.FC<ITabProps> = React.memo(({ data, title, tab }) => {
           <ProgramsTable title={title} data={data.programs} />
         </SearchResultTable>
       );
+    case SEARCH_TABS.FOLLOWS:
+      return (
+        <SearchResultTable data={Boolean(data.follow)}>
+          <FollowsTable title={title} data={data.follow} />
+        </SearchResultTable>
+      );
     default:
       return null;
   }
 });
 
 export enum SEARCH_TABS {
+  FOLLOWS = "follows",
   PROGRAMS = "programs",
   FUNDS = "funds",
   MANAGERS = "manages"
