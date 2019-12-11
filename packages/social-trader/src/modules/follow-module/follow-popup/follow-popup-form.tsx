@@ -3,12 +3,12 @@ import "./follow-popup.scss";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   AttachToSignalProvider,
-  SignalSubscription,
   SubscriptionMode,
   TradingAccountDetails,
   WalletData
 } from "gv-api-web";
 import useTab from "hooks/tab.hook";
+import FollowCreateExternalAccount from "modules/follow-module/follow-popup/follow-popup-create-external-account";
 import React, { useCallback, useEffect, useState } from "react";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
@@ -109,14 +109,18 @@ const _FollowForm: React.FC<Props> = ({
           onSelect={selectCopytradingAccount}
         />
       )}
-      {!hasAccounts && tab === TABS.SELECT_ACCOUNT && (
-        <FollowCreateAccount
-          minDeposit={minDeposit}
-          wallets={wallets}
-          followCurrency={currency}
-          onClick={createdCopytradingAccount}
-        />
-      )}
+      {!hasAccounts &&
+        tab === TABS.SELECT_ACCOUNT &&
+        (isExternal ? (
+          <FollowCreateExternalAccount onClick={createdCopytradingAccount} />
+        ) : (
+          <FollowCreateAccount
+            minDeposit={minDeposit}
+            wallets={wallets}
+            followCurrency={currency}
+            onClick={createdCopytradingAccount}
+          />
+        ))}
       {tab === TABS.PARAMS && (
         <FollowParams
           rate={rate}
