@@ -1,9 +1,10 @@
 import { WalletData } from "gv-api-web";
+import { CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS } from "modules/follow-module/follow-popup/follow-popup-create-external-account";
 import {
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
-import { lazy, number, object, Schema } from "yup";
+import { lazy, number, object, Schema, string } from "yup";
 
 import {
   CREATE_ACCOUNT_FORM_FIELDS,
@@ -53,5 +54,17 @@ const CreateAccountFormValidationSchema = ({
       })
   );
 };
+
+export const CreateExternalAccountFormValidationSchema = ({
+  t
+}: CreateAccountFormProps) =>
+  object<CreateAccountFormValues>().shape({
+    [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret]: string().required(
+      t("attach-account-page.settings.validation.api-secret")
+    ),
+    [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key]: string().required(
+      t("attach-account-page.settings.validation.api-secret")
+    )
+  });
 
 export default CreateAccountFormValidationSchema;

@@ -10,7 +10,7 @@ import { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 
-import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
+import { CreateExternalAccountFormValidationSchema } from "./follow-popup-create-account.validators";
 
 const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
   onClick,
@@ -83,7 +83,7 @@ const FollowCreateExternalAccount = compose<React.ComponentType<OwnProps>>(
       [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret]: "",
       [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key]: ""
     }),
-    validationSchema: CreateAccountFormValidationSchema,
+    validationSchema: CreateExternalAccountFormValidationSchema,
     handleSubmit: () => {}
   }),
   React.memo
