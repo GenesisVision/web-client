@@ -60,8 +60,10 @@ export const dispatchProgramDescriptionWithId = (
 ) => async (dispatch: Dispatch) =>
   await dispatch(fetchProgramDescriptionAction(id, auth));
 
-export const fetchProgramDescription = (id: string, authorization?: string) =>
-  programsApi.getProgramDetails(id, { authorization });
+export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
+  programsApi.getProgramDetails(id, {
+    authorization: authService.getAuthArg(ctx)
+  });
 
 export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,
