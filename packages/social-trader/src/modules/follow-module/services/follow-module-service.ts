@@ -1,14 +1,12 @@
 import {
   AttachToExternalSignalProviderExt,
   AttachToSignalProvider,
-  BrokerTradeServerType,
   CancelablePromise,
   NewExternalTradingAccountRequest,
   NewTradingAccountRequest,
   TradingAccountDetails
 } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
-import brokersApi from "services/api-client/brokers-api";
 import signalApi from "services/api-client/signal-api";
 import authService from "services/auth-service";
 
@@ -38,8 +36,8 @@ export const attachToExternalSignal: TSignalRequest = async ({
   requestParams
 }) => {
   const auth = authService.getAuthArg();
-  const externalKeyId = requestParams.externalKeyId
-    ? requestParams.externalKeyId
+  const tradingAccountId = requestParams.tradingAccountId
+    ? requestParams.tradingAccountId
     : await assetsApi
         .createExternalTradingAccount(auth, { request: requestParams })
         .then(({ id }) => id);
@@ -48,7 +46,7 @@ export const attachToExternalSignal: TSignalRequest = async ({
     id,
     authService.getAuthArg(),
     {
-      model: { ...requestParams, externalKeyId }
+      model: { ...requestParams, tradingAccountId }
     }
   );
 };
