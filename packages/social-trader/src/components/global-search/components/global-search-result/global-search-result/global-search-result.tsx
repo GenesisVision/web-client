@@ -34,7 +34,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
           <GVTab
             value={SEARCH_TABS.FOLLOWS}
             label={t("global-search-page.follows")}
-            count={data.follow && data.follow.total}
+            count={data.follows && data.follows.total}
           />
           <GVTab
             value={SEARCH_TABS.MANAGERS}
@@ -76,8 +76,8 @@ const Tab: React.FC<ITabProps> = React.memo(({ data, title, tab }) => {
       );
     case SEARCH_TABS.FOLLOWS:
       return (
-        <SearchResultTable data={Boolean(data.follow)}>
-          <FollowsTable title={title} data={data.follow} />
+        <SearchResultTable data={Boolean(data.follows)}>
+          <FollowsTable title={title} data={data.follows} />
         </SearchResultTable>
       );
     default:
