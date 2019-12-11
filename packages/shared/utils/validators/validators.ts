@@ -106,3 +106,17 @@ export const exitFeeShape = (t: i18next.TFunction, max: number) =>
         max
       })
     );
+
+export const twoFactorValidator = (
+  t: i18next.TFunction,
+  twoFactorEnabled: boolean
+) => {
+  return twoFactorEnabled
+    ? string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
+        .required(t("wallet-withdraw.validation.two-factor-required"))
+    : string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
+};
