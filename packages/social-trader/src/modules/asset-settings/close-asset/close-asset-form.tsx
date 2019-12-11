@@ -5,13 +5,13 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import i18next from "i18next";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
+import { twoFactorValidator } from "shared/utils/validators/validators";
 import { SetSubmittingType } from "utils/types";
-import { object, string } from "yup";
+import { object } from "yup";
 
 const _CloseAssetForm: React.FC<
   InjectedFormikProps<FormProps, ICloseAssetFormValues>
@@ -52,20 +52,6 @@ const _CloseAssetForm: React.FC<
   </form>
 );
 
-const twoFactorValidator = (
-  t: i18next.TFunction,
-  twoFactorEnabled: boolean
-) => {
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
-        .required(t("wallet-withdraw.validation.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
-};
-
 const CloseAssetForm = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<OwnProps, ICloseAssetFormValues>({
@@ -87,13 +73,13 @@ enum FIELDS {
 }
 
 interface OwnProps {
-  asset: ASSET;
-  onCancel(): void;
+  asset: CLOSEABLE_ASSET;
+  onCancel: () => void;
   twoFactorEnabled: boolean;
-  onSubmit(
+  onSubmit: (
     values: ICloseAssetFormValues,
     setSubmitting: SetSubmittingType
-  ): void;
+  ) => void;
 }
 
 export interface ICloseAssetFormValues {

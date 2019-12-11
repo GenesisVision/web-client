@@ -1,13 +1,12 @@
 import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
+import { useTranslation } from "react-i18next";
 
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
-const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
+const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
+  const [t] = useTranslation();
   const [isCloseAssetOpen, setCloseAssetOpen, setCloseAssetClose] = useIsOpen();
   return (
     <>
@@ -34,17 +33,19 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, t, onApply, canClose }) => {
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
-  asset: ASSET;
+interface Props {
+  asset: CLOSEABLE_ASSET;
   canClose: boolean;
   onApply: () => void;
   id: string;
 }
 
-const CloseAsset = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_CloseAsset);
+export enum CLOSEABLE_ASSET {
+  FOLLOW = "Follow",
+  PROGRAM = "Program",
+  FUND = "Fund",
+  TRADING_ACCOUNT = "Trading-account"
+}
+
+const CloseAsset = React.memo(_CloseAsset);
 export default CloseAsset;

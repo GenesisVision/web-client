@@ -1,49 +1,39 @@
 import Dialog from "components/dialog/dialog";
+import useApiRequest from "hooks/api-request.hook";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import React, { useCallback } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
-import { RootState } from "reducers/root-reducer";
-import { bindActionCreators, compose, Dispatch } from "redux";
-import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import {
   closeFund,
   closeProgram,
-  TCloseAsset
+  closeTradingAccount
 } from "../services/asset-settings.service";
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   asset,
   open,
-  twoFactorEnabled,
   onClose,
-  service: { closeProgram, closeFund },
   onApply,
   id
 }) => {
+  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const { sendRequest } = useApiRequest({
+    request: getMethod(asset),
+    successMessage: `asset-settings.close-asset.notifications.${asset.toLowerCase()}`,
+    middleware: [onApply, onClose]
+  });
   const handleSubmit = useCallback(
     (
       { twoFactorCode }: ICloseAssetFormValues,
       setSubmitting: SetSubmittingType
     ) => {
-      const method = asset === ASSET.FUND ? closeFund : closeProgram;
-      const onSuccess = () => {
-        onApply();
-        onClose();
-      };
-      const onError = () => setSubmitting(false);
-      method({
-        onSuccess,
-        onError,
-        id,
-        opts: {
-          twoFactorCode
-        }
-      });
+      sendRequest({ id, twoFactorCode }, setSubmitting);
     },
-    [asset, id]
+    [id]
   );
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
@@ -57,46 +47,25 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => ({
-  twoFactorEnabled: twoFactorEnabledSelector(state)
-});
+const getMethod = (asset: CLOSEABLE_ASSET) => {
+  switch (asset) {
+    case CLOSEABLE_ASSET.TRADING_ACCOUNT:
+      return closeTradingAccount;
+    case CLOSEABLE_ASSET.FUND:
+      return closeFund;
+    case CLOSEABLE_ASSET.PROGRAM:
+    default:
+      return closeProgram;
+  }
+};
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators(
-    {
-      closeProgram,
-      closeFund
-    },
-    dispatch
-  )
-});
-
-interface Props extends OwnProps, DispatchProps, StateProps {}
-
-interface OwnProps {
-  asset: ASSET;
+interface Props {
+  asset: CLOSEABLE_ASSET;
   open: boolean;
-  onClose(): void;
-  onApply(): void;
+  onClose: () => void;
+  onApply: () => void;
   id: string;
 }
 
-interface StateProps {
-  twoFactorEnabled: boolean;
-}
-
-interface DispatchProps {
-  service: {
-    closeProgram: TCloseAsset;
-    closeFund: TCloseAsset;
-  };
-}
-
-const ConfirmCloseAssetContainer = compose<React.ComponentType<OwnProps>>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_ConfirmCloseAssetContainer);
+const ConfirmCloseAssetContainer = React.memo(_ConfirmCloseAssetContainer);
 export default ConfirmCloseAssetContainer;
