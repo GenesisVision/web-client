@@ -1185,6 +1185,7 @@
     }
   },
   "global-search-page": {
+    "follows": "Follows",
     "title": "Search",
     "heading": "Search Results",
     "programs": "Programs",
