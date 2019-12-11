@@ -2,7 +2,7 @@ import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import ConvertAssetPage from "pages/convert-asset/convert-asset.page";
-import { fetchProgramDescriptionCtx } from "pages/programs/program-details/service/program-details.service";
+import { fetchFollowDescriptionCtx } from "pages/follows/follow-details/services/follow-details.service";
 import React from "react";
 import { compose } from "redux";
 import { CurrencyEnum, NextPageWithRedux } from "utils/types";
@@ -29,7 +29,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   let broker;
   let accountCurrency;
-  await fetchProgramDescriptionCtx(id as string).then(
+  await fetchFollowDescriptionCtx(id as string, ctx).then(
     ({ brokerDetails, currency }) => {
       broker = brokerDetails.type;
       accountCurrency = currency;
