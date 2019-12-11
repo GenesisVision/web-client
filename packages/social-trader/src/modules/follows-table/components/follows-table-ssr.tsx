@@ -3,7 +3,6 @@ import DateRangeFilter from "components/table/components/filtering/date-range-fi
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
-import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
 import TagFilter from "components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import { calculateTotalPages } from "components/table/helpers/paging.helpers";
@@ -25,13 +24,8 @@ import {
 import { LOGIN_ROUTE } from "routes/app.routes";
 
 import { followsDataSelector } from "../reducers/follows-table.reducers";
-import { composeTypeFilter } from "./follow-table.helpers";
 import FollowsTable from "./follows-table";
-import {
-  DEFAULT_FOLLOW_TABLE_FILTERS,
-  FOLLOW_TYPE_FILTER_NAME,
-  FOLLOW_TYPES
-} from "./follows.constants";
+import { DEFAULT_FOLLOW_TABLE_FILTERS } from "./follows.constants";
 
 const ITEMS_ON_PAGE = 12;
 
@@ -75,21 +69,12 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         </>
       )}
       renderFilters={(updateFilter, filtering: FilteringType) => (
-        <>
-          <TagFilter
-            name={TAG_FILTER_NAME}
-            value={filtering[TAG_FILTER_NAME] as string[]}
-            values={programTags}
-            onChange={updateFilter}
-          />
-          <SelectFilter
-            name={FOLLOW_TYPE_FILTER_NAME}
-            label={t("follows-page.filters." + FOLLOW_TYPE_FILTER_NAME)}
-            value={filtering[FOLLOW_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
-            values={composeTypeFilter(FOLLOW_TYPES)}
-            onChange={updateFilter}
-          />
-        </>
+        <TagFilter
+          name={TAG_FILTER_NAME}
+          value={filtering[TAG_FILTER_NAME] as string[]}
+          values={programTags}
+          onChange={updateFilter}
+        />
       )}
       paging={{
         totalPages: totalPages,

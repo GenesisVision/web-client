@@ -37,7 +37,6 @@ export const followTypeFilter = {
 };
 
 export const FOLLOW_TABLE_FILTERS: IComposeDefaultFilter[] = [
-  followTypeFilter,
   programsCurrencyMap,
   programsTagFilter,
   programsDateRangeFilter
@@ -73,7 +72,6 @@ export const FOLLOW_COLUMNS: SortingColumn[] = [
 ];
 
 export const DEFAULT_FOLLOW_TABLE_FILTERS = {
-  [FOLLOW_TYPE_FILTER_NAME]: FOLLOW_TYPE_FILTER_VALUE,
   [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
   [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
   [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE
