@@ -1,7 +1,7 @@
 import "./account-settings.scss";
 
 import withLoader from "decorators/with-loader";
-import { ProgramDetailsFull } from "gv-api-web";
+import { PrivateTradingAccountFull } from "gv-api-web";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ChangePassword from "pages/programs/programs-settings/change-password/change-password";
@@ -14,8 +14,8 @@ const _AccountSettings: React.FC<Props> = ({ details, closeProgram }) => {
     <>
       <ChangePassword
         condition={
-          details.personalDetails.ownerActions.canChangePassword &&
-          details.personalDetails.ownerActions.canClose
+          details.ownerActions.canChangePassword &&
+          details.ownerActions.canClose
         }
         title={details.title}
         id={details.id}
@@ -23,7 +23,7 @@ const _AccountSettings: React.FC<Props> = ({ details, closeProgram }) => {
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
         asset={CLOSEABLE_ASSET.TRADING_ACCOUNT}
-        canCloseAsset={details.personalDetails.ownerActions.canClose}
+        canCloseAsset={details.ownerActions.canClose}
         id={details.id}
         closeAsset={closeProgram}
       />
@@ -32,7 +32,7 @@ const _AccountSettings: React.FC<Props> = ({ details, closeProgram }) => {
 };
 
 interface Props {
-  details: ProgramDetailsFull;
+  details: PrivateTradingAccountFull;
   closeProgram: () => void;
 }
 
