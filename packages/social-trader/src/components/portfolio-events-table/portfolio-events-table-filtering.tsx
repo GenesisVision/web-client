@@ -13,10 +13,11 @@ import {
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
 import { UpdateFilterFunc } from "components/table/components/table.types";
-import { EventFilters } from "gv-api-web";
+import { AssetType, EventFilters } from "gv-api-web";
 import React from "react";
 
 const _PortfolioEventsTableFiltering: React.FC<Props> = ({
+  assetType,
   historyType,
   updateFilter,
   filtering,
@@ -24,10 +25,11 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
   assetTypeValues,
   dateRangeStartLabel
 }) => {
+  console.log(eventTypeFilterValues, historyType);
   const eventTypes = getEventTypes(
     eventTypeFilterValues,
     historyType,
-    filtering[ASSET_TYPE_FILTER_NAME]
+    filtering[ASSET_TYPE_FILTER_NAME] || assetType
   );
   return (
     <>
@@ -62,6 +64,7 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
 };
 
 interface Props {
+  assetType?: AssetType;
   historyType: THistoryType;
   assetTypeValues: SelectFilterValue<string>[];
   dateRangeStartLabel: string;

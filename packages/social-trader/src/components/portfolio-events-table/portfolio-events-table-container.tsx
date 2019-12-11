@@ -3,7 +3,6 @@ import "./portfolio-events.scss";
 
 import PortfolioEventsTableFiltering from "components/portfolio-events-table/portfolio-events-table-filtering";
 import PortfolioEventsTableHeaderCell from "components/portfolio-events-table/portfolio-events-table-header-cell";
-import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -57,6 +56,7 @@ const _PortfolioEventsTableContainer: React.FC<
         isFetchOnMount={true}
         renderFilters={(updateFilter, filtering) => (
           <PortfolioEventsTableFiltering
+            assetType={asset}
             historyType={"investmentHistory"}
             assetTypeValues={assetTypeValues}
             dateRangeStartLabel={dateRangeStartLabel}
