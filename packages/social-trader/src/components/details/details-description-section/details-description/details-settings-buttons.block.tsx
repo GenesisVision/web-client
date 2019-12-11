@@ -18,7 +18,6 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
   settingsUrl
 }) => {
   const [t] = useTranslation();
-  console.log(personalDetails, settingsUrl);
   return (
     <div className="asset-details-description__settings">
       {personalDetails && (
