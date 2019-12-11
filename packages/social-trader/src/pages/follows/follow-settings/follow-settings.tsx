@@ -3,6 +3,7 @@ import "./follow-settings.scss";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { BrokersProgramInfo, FollowDetailsFull } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -90,7 +91,7 @@ const _FollowSettings: React.FC<Props> = ({
       />
       <CloseAssetBlock
         label={t("asset-settings.close-follow.title")}
-        asset={ASSET.FOLLOW}
+        asset={CLOSEABLE_ASSET.PROGRAM}
         canCloseAsset={
           details.personalDetails &&
           details.personalDetails.ownerActions &&
