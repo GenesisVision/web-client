@@ -2455,7 +2455,12 @@
       "title": "Close period"
     },
     "close-asset": {
-      "title": "Close asset"
+      "title": "Close asset",
+      "notifications": {
+        "fund": "Request to close the fund was sent successfully.",
+        "program": "Request to close the program was sent successfully.",
+        "trading-account": "Request to close the trading account was sent successfully."
+      }
     },
     "close-fund": {
       "title": "Close fund"
