@@ -1,17 +1,21 @@
-import faker from "faker";
 import { InvestmentEventViewModel } from "gv-api-web";
-import { tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomColor,
+  getRandomWord,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 
 const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
-  title: faker.lorem.words(6),
+  title: getRandomWords(6),
   icon: "",
   date: new Date(),
   assetDetails: {
     programDetails: { level: 0, levelProgress: 0 },
     id: "",
     logo: "",
-    color: faker.internet.color(),
-    title: faker.lorem.word(),
+    color: getRandomColor(),
+    title: getRandomWord(),
     url: "",
     assetType: "None"
   },

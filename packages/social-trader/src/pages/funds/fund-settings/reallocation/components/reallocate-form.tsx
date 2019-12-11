@@ -7,6 +7,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
 import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
+import { FundAssetInfo } from "gv-api-web/dist/model/FundAssetInfo";
 import useIsOpen from "hooks/is-open.hook";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
@@ -99,7 +100,7 @@ export interface IReallocateFormValues {
 
 export interface IReallocateFormOwnProps {
   availableReallocationPercents: number;
-  fundAssets: FundAssetPartWithIcon[];
+  fundAssets: FundAssetInfo[];
   platformAssets: PlatformAsset[];
   onSubmit(
     values: IReallocateFormValues,
@@ -124,9 +125,9 @@ const ReallocateForm = compose<
     mapPropsToValues: ({ fundAssets, platformAssets }) => {
       const assets = fundAssets.map(fundAsset => {
         const platformAsset = platformAssets.find(
-          x => x.asset === fundAsset.asset
+          x => x.asset === fundAsset.symbol
         )!;
-        return { ...platformAsset, percent: fundAsset.percent };
+        return { ...platformAsset, percent: fundAsset.target };
       });
 
       return {

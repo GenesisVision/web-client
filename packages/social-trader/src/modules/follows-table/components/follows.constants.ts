@@ -1,4 +1,7 @@
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import {
   TAG_FILTER_DEFAULT_VALUE,
@@ -14,7 +17,6 @@ import {
 } from "modules/programs-table/components/programs-table/programs.constants";
 
 export const CURRENCY_MAP_NAME = "showIn";
-export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 

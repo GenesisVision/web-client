@@ -12,7 +12,6 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { fundEventsSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
 import {
   createFundNotificationsToUrl,
@@ -80,7 +79,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
             : 0
         }}
         dispatchDescription={handleDispatchDescription}
-        eventTypesSelector={fundEventsSelector}
         asset={ASSET.FUND}
         selector={fundEventsTableSelector}
         id={description.id}

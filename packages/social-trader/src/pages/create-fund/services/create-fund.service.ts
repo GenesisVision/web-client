@@ -1,15 +1,4 @@
-import { CancelablePromise, NewFundRequest } from "gv-api-web";
-import { PlatformInfo } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import { NextPageContext } from "next";
-import Router from "next/router";
-import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
-// import managerApi from "shared/services/api-client/manager-api";
-import authService from "services/auth-service";
 import { getRandomInteger } from "utils/helpers";
-
-export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
-  await CancelablePromise.resolve(100); //managerApi.getFundInvestment(authService.getAuthArg(ctx));
 
 export const PlatformDataLoaderData: any = {
   programsInfo: {

@@ -1,4 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
+import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
 import { CURRENCIES } from "modules/currency-select/currency-select.constants";
 import * as React from "react";
@@ -12,8 +13,6 @@ import {
   TooltipProps,
   YAxis
 } from "recharts";
-
-import { BalanceChartElementType } from "../details/details-statistic-section/details.chart.helpers";
 
 const _BalanceChart: React.FC<Props> = ({
   tooltip,
@@ -46,7 +45,7 @@ const _BalanceChart: React.FC<Props> = ({
           connectNulls={true}
           fill={`${color}2a`}
           stroke={`${color}2a`}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"
@@ -58,7 +57,7 @@ const _BalanceChart: React.FC<Props> = ({
           connectNulls={true}
           fill={color}
           stroke={color}
-          strokeWidth={2}
+          strokeWidth={1}
           dot={false}
           unit={currency}
           stackId="1"

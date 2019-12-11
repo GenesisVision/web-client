@@ -1,5 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
-import { ChartDataType } from "components/details/details-statistic-section/details.chart.helpers";
+import { ChartDataType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
 import ProgramAbsoluteProfitTooltip from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-tooltip";
 import * as React from "react";
@@ -32,7 +32,7 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
             <path
               d="M0,0 l0,4"
               stroke={GVColors.$negativeColor}
-              strokeWidth={2}
+              strokeWidth={1}
             />
           </pattern>
         </defs>
@@ -47,47 +47,14 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
         />
         <CartesianGrid vertical={false} strokeWidth={0.1} />
         <Area
-          dataKey="managerFunds"
+          dataKey="value"
           type="monotone"
-          fill={`${color}2a`}
-          stroke={`${color}2a`}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="investorsFunds"
-          type="monotone"
-          fill={color}
+          connectNulls={true}
           stroke={color}
-          strokeWidth={2}
+          fill={`url(#equityProgramChartFill)`}
+          strokeWidth={1}
           dot={false}
           unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profit"
-          type="monotone"
-          fill={`${color}2a`}
-          stroke={`${color}2a`}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
-          isAnimationActive={false}
-        />
-        <Area
-          dataKey="profitNegative"
-          type="monotone"
-          fill="url(#diagonalHatch)"
-          stroke={color}
-          strokeWidth={2}
-          dot={false}
-          unit={currency}
-          stackId="1"
           isAnimationActive={false}
         />
         <Tooltip content={ProgramAbsoluteProfitTooltip} />

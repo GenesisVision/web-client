@@ -51,7 +51,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
         value={pending!}
         condition={pending !== undefined}
         totalValue={total}
-        title={t("wallet-page.pending")}
+        title={t("wallet-page.trading")}
         currency={currency}
         color={$piePendingColor}
         tooltipContentLabel={t("wallet-page.tooltip.pending")}

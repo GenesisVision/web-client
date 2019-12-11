@@ -3,7 +3,6 @@ import { getCookie, setCookie } from "shared/utils/cookie";
 import { getRandomInteger } from "utils/helpers";
 
 import { ChartDefaultPeriod } from "../../chart/chart-period/chart-period.helpers";
-import { ProfitChartDataType } from "../../details/details-statistic-section/details.chart.helpers";
 import { TChartAsset } from "../multi-chart.types";
 
 export const SELECTED_ASSETS = "SELECTED_ASSETS";

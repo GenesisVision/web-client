@@ -8,7 +8,6 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
 
 import {
   KYC_ROUTE,
@@ -26,17 +25,13 @@ import {
 } from "./profile.constants";
 
 const tabs = [
+  { pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS },
   { pathname: PROFILE_ROUTE, value: PROFILE },
   { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
   { pathname: SETTINGS_ROUTE, value: SETTINGS },
   { pathname: SECURITY_ROUTE, value: SECURITY },
   { pathname: REFERRAL_PROGRAM_ROUTE, value: REFERRAL_PROGRAM }
 ];
-
-if (ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER) {
-  // TODO remove after union
-  tabs.push({ pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS });
-}
 
 const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
   const [t] = useTranslation();
@@ -48,19 +43,19 @@ const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
         <GVTabs value={route}>
           {tabs
             .filter(tab => !tab.hideable || !verified)
-            .map(x => (
+            .map(({ value, pathname }) => (
               <GVTab
-                key={x.value}
+                key={value}
                 label={
                   <Link
                     to={{
-                      pathname: x.pathname
+                      pathname
                     }}
                   >
-                    {t(`profile-page.tabs.${x.value}`)}
+                    {t(`profile-page.tabs.${value}`)}
                   </Link>
                 }
-                value={x.value}
+                value={value}
               />
             ))}
         </GVTabs>

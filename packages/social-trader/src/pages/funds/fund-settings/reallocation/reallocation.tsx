@@ -1,6 +1,7 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
+import { FundAssetInfo } from "gv-api-web/dist/model/FundAssetInfo";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,7 +50,7 @@ interface Props {
   availableReallocationPercents: number;
   id: string;
   platformAssets: PlatformAsset[];
-  fundAssets: FundAssetPartWithIcon[];
+  fundAssets: FundAssetInfo[];
   onApply: () => void;
 }
 

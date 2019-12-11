@@ -48,6 +48,11 @@ export const walletDataCreator = (): WalletData => ({
   invested: getRandomInteger(1, 1000),
   trading: getRandomInteger(1, 1000),
   total: getRandomInteger(1, 1000),
+  availableCcy: getRandomInteger(1, 1000),
+  investedCcy: getRandomInteger(1, 1000),
+  pendingCcy: getRandomInteger(1, 1000),
+  totalCcy: getRandomInteger(1, 1000),
+  tradingCcy: getRandomInteger(1, 1000),
   pending: getRandomInteger(1, 1000)
 });
 

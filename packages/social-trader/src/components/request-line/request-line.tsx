@@ -8,16 +8,10 @@ import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { ASSET } from "shared/constants/constants";
 import { localizedDate } from "shared/utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
-const _RequestLine: React.FC<Props> = ({
-                                         successFee,
-                                         exitFee,
-                                         request,
-                                         onApplyCancelRequest
-                                       }) => {
+const _RequestLine: React.FC<Props> = ({ request, onApplyCancelRequest }) => {
   const [t] = useTranslation();
   return (
     <div className="request-line">
@@ -47,10 +41,9 @@ const _RequestLine: React.FC<Props> = ({
           {localizedDate(request.date)}
         </StatisticItem>
         <StatisticItem
-          condition={successFee !== null && successFee !== undefined}
           label={
             <NumberFormat
-              value={successFee}
+              value={request.assetDetails.successFee}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
@@ -74,10 +67,9 @@ const _RequestLine: React.FC<Props> = ({
           {t("fund-details-page.description.entryFee")}
         </StatisticItem>
         <StatisticItem
-          condition={exitFee !== null && exitFee !== undefined}
           label={
             <NumberFormat
-              value={exitFee}
+              value={request.assetDetails.exitFee}
               suffix={` %`}
               allowNegative={false}
               displayType="text"
@@ -99,11 +91,8 @@ const _RequestLine: React.FC<Props> = ({
 };
 
 interface Props {
-  successFee?: number;
-  exitFee?: number;
   request: AssetInvestmentRequest;
   onApplyCancelRequest: () => void;
-  asset?: ASSET;
 }
 
 const RequestLine = React.memo(_RequestLine);

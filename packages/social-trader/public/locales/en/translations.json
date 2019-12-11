@@ -1335,6 +1335,7 @@
     "total-balance": "Total balance",
     "invested": "Invested",
     "available": "Available",
+    "trading": "Trading",
     "pending": "Pending",
     "deposit": "Deposit",
     "withdraw": "Withdraw",
@@ -1388,6 +1389,7 @@
       "total-balance": "Total balance",
       "invested": "Invested",
       "available": "Available",
+      "trading": "Trading",
       "pending": "Pending",
       "buttons": ""
     },

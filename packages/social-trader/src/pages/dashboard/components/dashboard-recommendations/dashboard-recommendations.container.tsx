@@ -6,7 +6,7 @@ import DashboardRecommendations from "pages/dashboard/components/dashboard-recom
 import { getRecommendationLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import { TDashboardRecommendations } from "pages/dashboard/dashboard.types";
 import { getRecommendations } from "pages/dashboard/services/dashboard.service";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -15,12 +15,11 @@ import { tableLoaderCreator } from "utils/helpers";
 const _DashboardRecommendationsContainer: React.FC<Props> = ({}) => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const { data, sendRequest } = useApiRequest<TDashboardRecommendations>({
+  const { data } = useApiRequest<TDashboardRecommendations>({
+    fetchOnMount: true,
+    fetchOnMountData: { currency },
     request: getRecommendations
   });
-  useEffect(() => {
-    sendRequest({ currency });
-  }, []);
   if (!data) return null;
   return (
     <DashboardBlock label={t("dashboard-page.recommendations.title")}>

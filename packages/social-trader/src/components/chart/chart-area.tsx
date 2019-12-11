@@ -13,7 +13,7 @@ const ChartArea: React.FC<Props> = ({ data, stroke, fill }) => (
       connectNulls={true}
       stroke={stroke}
       fill={fill}
-      strokeWidth={3}
+      strokeWidth={1}
       dot={false}
       unit=" %"
       isAnimationActive={false}

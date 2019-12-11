@@ -1,4 +1,6 @@
 import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
+import { withBlurLoader } from "decorators/with-blur-loader";
+import { SignalSubscription } from "gv-api-web";
 import { FollowDetailsDataType } from "pages/follows/follow-details/follow-details.types";
 import * as React from "react";
 
@@ -6,6 +8,8 @@ import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
 
 const _FollowControls: React.FC<Props> = ({
+  onApply,
+  data,
   description: {
     signalSettings,
     personalDetails,
@@ -15,6 +19,7 @@ const _FollowControls: React.FC<Props> = ({
     brokerDetails
   }
 }) => {
+  const signalSubscriptions = data && data[0];
   return (
     <SignalProviderControls>
       <SignalInfo
@@ -23,6 +28,7 @@ const _FollowControls: React.FC<Props> = ({
       />
       {personalDetails && (
         <SignalProviderButtons
+          onApply={onApply}
           guestActions={personalDetails.guestActions}
           leverage={personalDetails ? personalDetails.leverage : 0}
           isExternal={
@@ -33,9 +39,7 @@ const _FollowControls: React.FC<Props> = ({
           }
           brokerId={brokerDetails.id}
           broker={brokerDetails.type}
-          signalSubscription={
-            personalDetails && personalDetails.signalSubscriptions[0] //TODO
-          }
+          signalSubscription={signalSubscriptions}
           id={id}
           title={title}
           currency={currency}
@@ -46,8 +50,10 @@ const _FollowControls: React.FC<Props> = ({
 };
 
 interface Props {
+  onApply: VoidFunction;
+  data: SignalSubscription[];
   description: FollowDetailsDataType;
 }
 
-const FollowControls = React.memo(_FollowControls);
+const FollowControls = withBlurLoader(React.memo(_FollowControls));
 export default FollowControls;

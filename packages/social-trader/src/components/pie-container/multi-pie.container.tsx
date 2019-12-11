@@ -1,8 +1,8 @@
 import "./pie-container.scss";
 
 import classNames from "classnames";
-import * as faker from "faker";
 import React from "react";
+import { getRandomColor } from "utils/helpers";
 
 import Pie from "./pie";
 
@@ -10,7 +10,7 @@ const _MultiPieContainer: React.FC<Props> = ({ data, over }) => {
   let sum = 0;
   return (
     <div className="multi-pie-container">
-      {data.map(({ value, color = faker.internet.color(), name }, i) => {
+      {data.map(({ value, color = getRandomColor(), name }, i) => {
         const begin = sum;
         sum += value;
         return (

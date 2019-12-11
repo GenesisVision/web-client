@@ -1,5 +1,6 @@
 import {
   DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
@@ -20,7 +21,6 @@ import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
 export const PROGRAM_CURRENCY_FILTER_NAME = "programCurrency";
-export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
 export const CURRENCY_MAP_NAME = "showIn";
 

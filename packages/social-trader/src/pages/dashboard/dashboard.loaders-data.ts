@@ -1,6 +1,5 @@
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import * as faker from "faker";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
@@ -11,7 +10,13 @@ import {
   TRecommendation
 } from "pages/dashboard/dashboard.types";
 import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
-import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomColor,
+  getRandomInteger,
+  getRandomText,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 
 export const getInRequestsData = (): TDashboardRequest => ({
   id: "",
@@ -98,9 +103,9 @@ export const assetsLoaderData = () => {
     const value = getRandomInteger(Math.round(sum / 4), Math.round(sum / 3));
     sum -= value;
     return {
-      name: faker.finance.currencyCode(),
+      name: getRandomText({ length: 3 }),
       percent: i === length - 1 ? sum + value : value,
-      color: faker.internet.color()
+      color: getRandomColor()
     };
   }, 5);
 };
@@ -114,7 +119,7 @@ export const portfolioLoaderData = (): Array<MoneyLocation> => {
     return {
       name: names[i],
       percent: i === length - 1 ? sum + value : value,
-      color: faker.internet.color()
+      color: getRandomColor()
     };
   }, 4);
 };
@@ -165,7 +170,7 @@ const getEventLoaderData = (): TDashboardEvent => ({
   totalFeesAmount: 0,
   totalFeesCurrency: "GVT",
   date: new Date(),
-  title: faker.lorem.words(3),
+  title: getRandomWords(3),
   amount: getRandomInteger(-10000, 10000)
 });
 
@@ -175,7 +180,11 @@ const getRandomAsset = () =>
 export const getRecommendationLoaderData = (): TRecommendation => {
   const assetType = getRandomAsset();
   return {
+    hasSignalAccount: false,
+    isExternal: false,
+    leverage: getRandomInteger(-10000, 10000),
     broker: {
+      id: "",
       logo: "",
       name: "",
       type: "MetaTrader4"
@@ -189,13 +198,13 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     },
     id: "",
     logo: "",
-    title: faker.name.lastName(),
+    title: getRandomText({ length: 7 }),
     url: "",
     programDetails: {
       level: assetType === ASSET.PROGRAM ? getRandomInteger(1, 7) : 0,
       levelProgress: assetType === ASSET.PROGRAM ? getRandomInteger(1, 100) : 0
     },
-    color: faker.internet.color()
+    color: getRandomColor()
   };
 };
 

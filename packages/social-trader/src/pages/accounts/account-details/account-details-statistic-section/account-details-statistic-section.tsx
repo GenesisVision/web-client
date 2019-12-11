@@ -37,12 +37,12 @@ const _AccountDetailsStatisticSection: React.FC = () => {
       renderProfitValue={({ statistic }) => (
         <NumberFormat
           value={formatCurrencyValue(
-            "profit" in statistic ? statistic.profit : 0,
+            statistic.profitPercent,
             statisticCurrency
           )}
           thousandSeparator={" "}
           displayType="text"
-          suffix={` ${statisticCurrency}`}
+          suffix={` %`}
         />
       )}
       renderBalanceChart={({ color, currency, balanceChart }) => (

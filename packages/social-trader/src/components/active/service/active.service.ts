@@ -1,17 +1,20 @@
-import * as faker from "faker";
 import { AssetInfo } from "gv-api-web";
 import platformApi from "services/api-client/platform-api";
-import { tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomWord,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 
-const getTag = () => ({ label: faker.lorem.word() });
+const getTag = () => ({ label: getRandomWord() });
 
 export const getActiveLoaderData = (active?: string): AssetInfo => ({
   socialLinks: [],
   logo: "",
   symbol: "",
   chartSymbol: "",
-  name: active || faker.finance.currencyName(),
-  description: faker.lorem.words(50),
+  name: active || getRandomWord(3),
+  description: getRandomWords(50),
   tags: tableLoaderCreator(getTag)
 });
 

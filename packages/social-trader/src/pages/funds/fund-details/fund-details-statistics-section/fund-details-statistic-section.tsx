@@ -50,8 +50,9 @@ const _FundDetailsStatisticSection: React.FC = () => (
         currency={currency}
       />
     )}
-    renderProfitChart={({ profitChart, chartCurrencies }) => (
+    renderProfitChart={({ profitChart, chartCurrencies, assets }) => (
       <FundProfitChart
+        assets={assets!}
         profitChart={profitChart}
         chartCurrencies={chartCurrencies}
       />

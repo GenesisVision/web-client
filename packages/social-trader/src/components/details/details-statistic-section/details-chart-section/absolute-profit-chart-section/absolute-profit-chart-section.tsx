@@ -1,14 +1,14 @@
 import { TRenderProfitValue } from "components/details/details-statistic-section/details-chart-section/profit-chart-section/profit-chart-elements";
-import { selectedCurrenciesLoaderData } from "pages/programs/program-details/program-details.loader-data";
-import * as React from "react";
-import { useSelector } from "react-redux";
-
 import {
   ProfitChartDataType,
   TAbsoluteProfitChartSelector,
   TUseChartPeriod,
   TUseChartStateValues
-} from "../../details.chart.helpers";
+} from "components/details/details-statistic-section/details.chart.types";
+import { selectedCurrenciesLoaderData } from "pages/programs/program-details/program-details.loader-data";
+import * as React from "react";
+import { useSelector } from "react-redux";
+
 import { DETAILS_CHART_TABS } from "../details-chart";
 import AbsoluteProfitChartElements, {
   TRenderAbsoluteProfitChart

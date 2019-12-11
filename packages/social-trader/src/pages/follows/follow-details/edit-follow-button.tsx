@@ -4,21 +4,18 @@ import EditFollowModuleContainer from "modules/follow-module/edit-follow-module-
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { CurrencyEnum } from "utils/types";
 
-import { dispatchFollowDescription } from "./services/follow-details.service";
-
 const _EditFollowButton: React.FC<Props> = ({
+  onApply,
   tradingAccountId,
   id,
   currency
 }) => {
-  const dispatch = useDispatch();
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   const dispatchDescription = useCallback(() => {
-    dispatch(dispatchFollowDescription(id)());
+    onApply();
   }, [id]);
   return (
     <>
@@ -38,6 +35,7 @@ const _EditFollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  onApply: VoidFunction;
   tradingAccountId: string;
   id: string;
   currency: CurrencyEnum;

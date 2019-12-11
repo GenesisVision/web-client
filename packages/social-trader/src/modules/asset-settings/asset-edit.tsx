@@ -25,7 +25,11 @@ const _AssetEdit: React.FC<Props> = ({
   isSubmitting
 }) => (
   <SettingsBlock>
-    <form id="edit-form" onSubmit={handleSubmit}>
+    <form
+      id="edit-form"
+      className={"asset-settings-block__form"}
+      onSubmit={handleSubmit}
+    >
       <div className="asset-settings__block-wrapper">
         <h3>{t("asset-settings.avatar.title")}</h3>
         <LogoField name={FIELDS.logo} />

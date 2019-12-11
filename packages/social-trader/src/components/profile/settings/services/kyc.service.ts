@@ -6,7 +6,7 @@ export const loadKycIFrame = () => {
   const authorization = authService.getAuthArg();
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
     if (!(window as any).idensic.init) return;
-    /*profileApi.verificationToken(authorization).then(data => {
+    profileApi.getVerificationToken(authorization).then(data => {
       (window as any).idensic.init(
         // selector of an IFrame container (see above)
         "#idensic",
@@ -52,6 +52,6 @@ export const loadKycIFrame = () => {
           console.log("[IDENSIC DEMO] Idensic message:", messageType, payload);
         }
       );
-    });*/
+    });
   });
 };

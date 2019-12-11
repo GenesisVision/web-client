@@ -1,5 +1,10 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import {
+  AbsoluteProfitChartDataType,
+  ChartDataType,
+  StatisticDataType
+} from "components/details/details-statistic-section/details.chart.types";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ChartCurrencySelector, {
@@ -15,12 +20,7 @@ import { platformCurrenciesSelector } from "reducers/platform-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
-import {
-  AbsoluteProfitChartDataType,
-  ChartDataType,
-  StatisticDataType,
-  useChartData
-} from "../../details.chart.helpers";
+import { useChartData } from "../../details.chart.helpers";
 
 const _AbsoluteProfitChartElements: React.FC<Props> = ({
   renderChart,
@@ -39,13 +39,13 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
   );
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const { name, color } = chartData.selectedCurrencies[0];
-  const { chart } = chartData.chart;
+  const { chart, profit } = chartData.chart;
   return (
     <>
       <div className="details-chart__value">
         <StatisticItem big accent>
           <NumberFormat
-            value={formatCurrencyValue(0, name)}
+            value={formatCurrencyValue(profit, name)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${name}`}

@@ -30,7 +30,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
   hasSignalAccount,
   currency,
   onClose,
-  onApply
+  onApply = () => {}
 }) => {
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
@@ -106,7 +106,7 @@ interface Props {
   brokerId: string;
   broker: BrokerTradeServerType;
   onClose: () => void;
-  onApply: () => void;
+  onApply?: () => void;
   currency: CurrencyEnum;
   id: string;
 }

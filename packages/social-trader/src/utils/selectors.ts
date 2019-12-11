@@ -17,8 +17,9 @@ export const apiSelector = <T, U = RootState>(
   return (state: U): TSelectorData<T> => func(selector(state).data);
 };
 
-export const fieldSelector = <R1, S = RootState>(selector: (state: S) => R1) =>
-  memoize((state: S): R1 => selector(state));
+export const fieldSelector = <R1, S = RootState>(
+  selector: (state: S) => R1
+) => (state: S): R1 => selector(state);
 
 export const apiFieldSelector = <R1, T, S = RootState>(
   innerApiSelector: (state: S) => TSelectorData<R1>,

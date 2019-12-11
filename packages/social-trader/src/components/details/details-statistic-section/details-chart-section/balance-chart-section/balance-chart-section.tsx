@@ -1,12 +1,12 @@
-import * as React from "react";
-import { useSelector } from "react-redux";
-
-import { ChartValuePeriodLoader } from "../../../details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import {
   TBalanceChartSelector,
   TUseChartPeriod,
   TUseChartStateValues
-} from "../../details.chart.helpers";
+} from "components/details/details-statistic-section/details.chart.types";
+import * as React from "react";
+import { useSelector } from "react-redux";
+
+import { ChartValuePeriodLoader } from "../../../details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { DETAILS_CHART_TABS } from "../details-chart";
 import BalanceChartElements, {
   TRenderBalanceChart

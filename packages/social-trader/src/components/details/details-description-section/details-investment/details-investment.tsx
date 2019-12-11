@@ -3,12 +3,10 @@ import "./details-investment.scss";
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import Investment from "components/details/details-description-section/details-investment/investment";
-import Subscription from "components/details/details-description-section/details-investment/subscription";
+import SubscriptionContainer from "components/details/details-description-section/details-investment/subscription.container";
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
-import { SelectFilterValue } from "components/table/components/filtering/filter.type";
 import { TableSelectorType } from "components/table/components/table.types";
-import { PersonalFollowDetailsFull } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import {
   EVENT_LOCATION,
@@ -19,13 +17,11 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { RootState } from "reducers/root-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, FeesType } from "utils/types";
 
 import {
   haveActiveInvestment,
-  haveSubscription,
   InvestmentBlockDetailsType,
   InvestmentType
 } from "./details-investment.helpers";
@@ -34,18 +30,20 @@ const _DetailsInvestment: React.FC<Props> = ({
   fees,
   notice,
   asset,
-  eventTypesSelector,
   selector,
   currency,
   dispatchDescription,
   id,
   personalDetails
 }) => {
+  const subscriptionsCount =
+    "subscribedAccounts" in personalDetails
+      ? personalDetails.subscribedAccounts
+      : 0;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(selector);
-  const eventTypeFilterValues = useSelector(eventTypesSelector);
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
@@ -56,7 +54,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   }, [isAuthenticated, events]);
 
   const showInvestment = haveActiveInvestment(personalDetails);
-  const showSubscription = haveSubscription(personalDetails);
+  const showSubscription = !!subscriptionsCount;
 
   useEffect(() => {
     if (haveEvents && !showInvestment && !showSubscription)
@@ -85,12 +83,7 @@ const _DetailsInvestment: React.FC<Props> = ({
         />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (
-        <Subscription
-          updateDescription={dispatchDescription}
-          id={id}
-          assetCurrency={currency}
-          personalDetails={personalDetails as PersonalFollowDetailsFull}
-        />
+        <SubscriptionContainer id={id} assetCurrency={currency} />
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
         <Investment
@@ -110,7 +103,6 @@ const _DetailsInvestment: React.FC<Props> = ({
           asset={asset}
           eventLocation={EVENT_LOCATION.Asset}
           dateRangeStartLabel={t("filters.date-range.program-start")}
-          eventTypeFilterValues={eventTypeFilterValues!}
         />
       )}
     </DetailsBlock>
@@ -126,7 +118,6 @@ interface Props {
   fees: FeesType;
   notice?: string;
   asset: ASSET;
-  eventTypesSelector: (state: RootState) => SelectFilterValue[];
   dispatchDescription: () => void;
   selector: TableSelectorType;
   currency: CurrencyEnum;

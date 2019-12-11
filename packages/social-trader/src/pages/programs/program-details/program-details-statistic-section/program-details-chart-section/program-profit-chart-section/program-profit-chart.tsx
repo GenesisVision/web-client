@@ -1,5 +1,5 @@
 import ProfitChart from "components/chart/profit-chart";
-import { ChartsDataType } from "components/details/details-statistic-section/details.chart.helpers";
+import { ChartsDataType } from "components/details/details-statistic-section/details.chart.types";
 import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
 import * as React from "react";
 

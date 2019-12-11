@@ -19,11 +19,3 @@ export const haveActiveInvestment = (
   "isInvested" in details &&
   details.isInvested &&
   details.status !== STATUS.ENDED;
-
-export const haveSubscription = (
-  details: InvestmentBlockDetailsType
-): boolean =>
-  !!details &&
-  "signalSubscriptions" in details &&
-  details.signalSubscriptions &&
-  !!details.signalSubscriptions.length;

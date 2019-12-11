@@ -10,6 +10,7 @@ import FollowButton from "./follow-button";
 import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
+  onApply,
   guestActions: {
     canSubscribeToExternalSignalCommonAccount,
     canSubscribeToExternalSignalPrivateAccount,
@@ -32,8 +33,9 @@ const _SignalProviderButtons: React.FC<Props> = ({
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
       {hasActiveSubscription ? (
         <UnFollowButton
+          onApply={onApply}
           id={id}
-          tradingAccountId={signalSubscription!.followAssetId}
+          tradingAccountId={signalSubscription!.subscriberInfo.tradingAccountId}
           isExternal={isExternal}
         />
       ) : (
@@ -41,6 +43,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
           canSubscribeToExternalSignalPrivateAccount ||
           canSubscribeToInternalSignal) && (
           <FollowButton
+            onApply={onApply}
             hasSignalAccount={hasSignalAccount}
             leverage={leverage}
             brokerId={brokerId}
@@ -57,6 +60,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  onApply: VoidFunction;
   guestActions: AssetGuestActions;
   leverage: number;
   isExternal: boolean;

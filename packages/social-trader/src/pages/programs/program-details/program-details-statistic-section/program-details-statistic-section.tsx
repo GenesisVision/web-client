@@ -38,7 +38,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
         return (
           <NumberFormat
             value={formatCurrencyValue(
-              "profit" in statistic ? statistic.profit : 0,
+              "profitPercent" in statistic ? statistic.profitPercent : 0,
               statisticCurrency
             )}
             thousandSeparator={" "}

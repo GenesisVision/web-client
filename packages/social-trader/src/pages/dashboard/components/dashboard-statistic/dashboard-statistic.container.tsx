@@ -2,7 +2,7 @@ import "./dashboard-statistic.scss";
 
 import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import React, { useEffect } from "react";
+import React from "react";
 import { CurrencyEnum } from "utils/types";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
@@ -20,14 +20,13 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   renderValues,
   all
 }) => {
-  const { data, sendRequest } = useApiRequest<
+  const { data } = useApiRequest<
     TDashboardTradingStatistic & TDashboardInvestingStatistic
   >({
-    request
+    request,
+    fetchOnMount: true,
+    fetchOnMountData: { currency }
   });
-  useEffect(() => {
-    sendRequest({ currency });
-  }, []);
   return (
     <DashboardBlock
       label={label}

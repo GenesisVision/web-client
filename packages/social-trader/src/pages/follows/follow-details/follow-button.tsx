@@ -3,6 +3,7 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
+import { dispatchFollowDescription } from "pages/follows/follow-details/services/follow-details.service";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,9 +12,8 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
-import { dispatchFollowDescription } from "./services/follow-details.service";
-
 const _FollowButton: React.FC<Props> = ({
+  onApply,
   leverage,
   brokerId,
   isExternal,
@@ -30,6 +30,7 @@ const _FollowButton: React.FC<Props> = ({
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
+    onApply && onApply();
   }, [id]);
   return (
     <>
@@ -65,6 +66,7 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  onApply?: VoidFunction;
   hasSignalAccount: boolean;
   leverage: number;
   isExternal: boolean;

@@ -6,16 +6,11 @@ import useApiRequest from "hooks/api-request.hook";
 import { getInRequestsLoadersData } from "pages/dashboard/dashboard.loaders-data";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import { getAssetRequests } from "./services/asset-status.service";
 
 const _AssetStatusRequestsContainer: React.FC<Props> = ({
-  successFee,
-  entryFee,
-  exitFee,
   id,
-  asset,
   onCancel,
   handleCloseDropdown
 }) => {
@@ -46,11 +41,7 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  successFee?: number;
-  exitFee?: boolean;
-  entryFee?: number;
   id: string;
-  asset: ASSET;
   onCancel: () => void;
   handleCloseDropdown: () => void;
 }

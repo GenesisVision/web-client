@@ -1,4 +1,4 @@
-import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
@@ -60,8 +60,10 @@ export const dispatchProgramDescriptionWithId = (
 ) => async (dispatch: Dispatch) =>
   await dispatch(fetchProgramDescriptionAction(id, auth));
 
-export const fetchProgramDescription = (id: string, authorization?: string) =>
-  programsApi.getProgramDetails(id, { authorization });
+export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
+  programsApi.getProgramDetails(id, {
+    authorization: authService.getAuthArg(ctx)
+  });
 
 export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
   dispatch: MiddlewareDispatch,

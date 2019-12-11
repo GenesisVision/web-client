@@ -14,7 +14,10 @@ import { InvestmentEventViewModel } from "gv-api-web";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { assetTypeValuesSelector } from "reducers/platform-reducer";
+import {
+  allEventsSelector,
+  assetTypeValuesSelector
+} from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
 
 import { DashboardPortfolioEventsLoaderData } from "../dashboard/dashboard.loaders-data";
@@ -33,9 +36,9 @@ const _PortfolioEventsTableContainer: React.FC<
   eventLocation,
   className,
   dateRangeStartLabel,
-  eventTypeFilterValues,
   asset
 }) => {
+  const eventTypeFilterValues = useSelector(allEventsSelector);
   const assetTypeValues = useSelector(assetTypeValuesSelector);
   const isOwner = true;
   const hideFeeColumn = isOwner && asset === ASSET.PROGRAM;
@@ -54,9 +57,10 @@ const _PortfolioEventsTableContainer: React.FC<
         isFetchOnMount={true}
         renderFilters={(updateFilter, filtering) => (
           <PortfolioEventsTableFiltering
+            historyType={"investmentHistory"}
             assetTypeValues={assetTypeValues}
             dateRangeStartLabel={dateRangeStartLabel}
-            eventTypeFilterValues={eventTypeFilterValues}
+            eventTypeFilterValues={eventTypeFilterValues!}
             updateFilter={updateFilter}
             filtering={filtering}
           />
@@ -83,7 +87,6 @@ export interface IPortfolioEventsTableOwnProps {
   selector: TableSelectorType;
   eventLocation: EVENT_LOCATION;
   dateRangeStartLabel: string;
-  eventTypeFilterValues: SelectFilterValue[];
   className?: string;
   title?: string;
   asset?: ASSET;

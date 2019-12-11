@@ -9,7 +9,7 @@ import { EVENT_LOCATION } from "pages/programs/program-details/service/program-d
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { allEventsSelector } from "reducers/platform-reducer";
+import { assetTypeValuesSelector } from "reducers/platform-reducer";
 
 import {
   fetchInvestmentHistory,
@@ -19,7 +19,7 @@ import {
 const _PortfolioEventsAllComponent: React.FC = () => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT_HISTORY);
   const [t] = useTranslation();
-  const events = useSelector(allEventsSelector);
+  const assetTypeValues = useSelector(assetTypeValuesSelector);
   return (
     <Page title={t(`dashboard-page.portfolio-events.title`)}>
       <DetailsBlock table>
@@ -35,22 +35,26 @@ const _PortfolioEventsAllComponent: React.FC = () => {
         </DetailsBlockTabs>
         {tab === TABS.INVESTMENT_HISTORY && (
           <PortfolioEventsTableModule
+            assetTypeValues={assetTypeValues.filter(
+              ({ value }) => value.toLowerCase() !== "follow"
+            )}
+            historyType={"investmentHistory"}
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchInvestmentHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
             className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
-            eventTypeFilterValues={events}
           />
         )}
         {tab === TABS.TRADING_HISTORY && (
           <PortfolioEventsTableModule
+            assetTypeValues={assetTypeValues}
+            historyType={"tradingHistory"}
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchTradingHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
             className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
-            eventTypeFilterValues={events}
           />
         )}
       </DetailsBlock>

@@ -106,22 +106,17 @@ const _DashboardProgramCard: React.FC<Props> = ({
       </TableCardTable>
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.status")}>
-            <AssetStatus
-              status={program.personalDetails.status as STATUS}
-              id={program.id}
-              asset={ASSET.PROGRAM}
-              onCancel={updateItems}
-            />
-          </StatisticItem>
+          <AssetStatus
+            status={program.personalDetails.status as STATUS}
+            id={program.id}
+            onCancel={updateItems}
+          />
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.reinvest")}>
-            <ProgramReinvestingContainer
-              id={program.id}
-              isReinvesting={program.personalDetails.isReinvest}
-            />
-          </StatisticItem>
+          <ProgramReinvestingContainer
+            id={program.id}
+            isReinvesting={program.personalDetails.isReinvest}
+          />
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons

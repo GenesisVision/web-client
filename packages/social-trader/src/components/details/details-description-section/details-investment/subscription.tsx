@@ -5,7 +5,8 @@ import { DetailsInvestmentFooter } from "components/details/details-description-
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { PersonalFollowDetailsFull } from "gv-api-web";
+import { withBlurLoader } from "decorators/with-blur-loader";
+import { SignalSubscription } from "gv-api-web";
 import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,13 +15,12 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _Subscription: React.FC<Props> = ({
-  updateDescription,
   id,
-  assetCurrency,
-  personalDetails
+  updateInfo,
+  data: subscriptionInfo,
+  assetCurrency
 }) => {
   const [t] = useTranslation();
-  const subscriptionInfo = personalDetails.signalSubscriptions[0];
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
@@ -65,8 +65,9 @@ const _Subscription: React.FC<Props> = ({
       </StatisticItemList>
       <DetailsInvestmentFooter>
         <EditFollowButton
+          onApply={updateInfo}
           currency={assetCurrency}
-          tradingAccountId={subscriptionInfo.followAssetId}
+          tradingAccountId={subscriptionInfo.subscriberInfo.tradingAccountId}
           id={id}
         />
       </DetailsInvestmentFooter>
@@ -75,11 +76,11 @@ const _Subscription: React.FC<Props> = ({
 };
 
 interface Props {
-  updateDescription: () => void;
-  id: string;
   assetCurrency: CurrencyEnum;
-  personalDetails: PersonalFollowDetailsFull;
+  data: SignalSubscription;
+  updateInfo: VoidFunction;
+  id: string;
 }
 
-const Subscription = React.memo(_Subscription);
+const Subscription = withBlurLoader(React.memo(_Subscription));
 export default Subscription;

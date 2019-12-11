@@ -1,5 +1,5 @@
 import { getDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.helpers";
+import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
@@ -14,6 +14,7 @@ import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import brokersApi from "services/api-client/brokers-api";
+import followApi from "services/api-client/follow-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ROLE, ROLE_ENV } from "shared/constants/constants";
@@ -43,6 +44,11 @@ export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
 
 export const getFollowBrokers = (id: string) =>
   brokersApi.getBrokersForProgram(id);
+
+export const fetchFollowDescriptionCtx = (id: string, ctx?: NextPageContext) =>
+  followApi.getFollowAssetDetails(id, {
+    authorization: authService.getAuthArg(ctx)
+  });
 
 export const dispatchFollowDescription = (id: string) => (
   ctx?: NextPageContext
