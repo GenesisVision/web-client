@@ -18,6 +18,7 @@ import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-but
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
+import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
@@ -77,6 +78,12 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
         <TableCardActionsItem to={makeSignalAccountLink} onClick={clearAnchor}>
           {t("dashboard-page.trading.actions.make-signal-account")}
         </TableCardActionsItem>
+      )}
+      {asset.actions.canChangePassword && (
+        <ChangeAccountPasswordButton
+          id={asset.id}
+          title={asset.accountInfo.title}
+        />
       )}
       <CloseAssetButton
         type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
