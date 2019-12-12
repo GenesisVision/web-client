@@ -28,6 +28,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  haveDelay = true,
   getHistoryCounts,
   tablesData: {
     financialStatistic,
@@ -100,6 +101,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
+          haveDelay={haveDelay}
           getItems={trades.getItems(programId)}
           dataSelector={trades.dataSelector}
           showSwaps={showSwaps}
@@ -154,6 +156,7 @@ enum TABS {
 }
 
 interface Props {
+  haveDelay?: boolean;
   getHistoryCounts: (
     id: string
   ) => (dispatch: Dispatch, getState: () => RootState) => void;

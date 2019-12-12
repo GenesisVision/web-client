@@ -21,6 +21,7 @@ import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  haveDelay,
   getItems,
   dataSelector,
   showSwaps,
@@ -32,13 +33,13 @@ const _ProgramTrades: React.FC<Props> = ({
   const {
     itemsData: { data }
   } = useSelector(dataSelector);
-  const delay = data ? data.tradesDelay : "None";
+  const delay = data && data.tradesDelay ? data.tradesDelay : "None";
 
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
         <div className="details-trades__toolbar">
-          <TradesDelayHint delay={delay} />
+          {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
             <DownloadButtonToolbar
               filtering={filtering!.dateRange}
@@ -80,6 +81,7 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  haveDelay: boolean;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;
   showSwaps: boolean;

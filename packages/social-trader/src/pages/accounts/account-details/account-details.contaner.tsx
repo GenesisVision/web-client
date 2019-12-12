@@ -39,6 +39,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <div className="details__divider" />
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
+        haveDelay={false}
         getHistoryCounts={getAccountHistoryCounts}
         tablesData={tablesData}
         showCommissionRebateSometime={
