@@ -1,24 +1,22 @@
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { FollowDetailsList } from "gv-api-web";
 import FollowCard from "modules/follows-table/components/follow-card";
-import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
-import { getFollowThem } from "pages/dashboard/services/dashboard.service";
+import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
-const _DashboardFollowThem: React.FC<Props> = () => {
-  const [t] = useTranslation();
+const _DashboardFollowThem: React.FC<Props> = ({ data }) => {
   return (
-    <DashboardTradingTable
-      getItems={getFollowThem}
-      title={t("dashboard-page.trading.follow-them")}
-      renderBodyCard={(asset: FollowDetailsList) => (
+    <DashboardHorizontalList>
+      {data.map((asset: FollowDetailsList) => (
         <FollowCard follow={asset} title={""} />
-      )}
-    />
+      ))}
+    </DashboardHorizontalList>
   );
 };
 
-interface Props {}
+interface Props {
+  data: FollowDetailsList[];
+}
 
-const DashboardFollowThem = React.memo(_DashboardFollowThem);
+const DashboardFollowThem = withBlurLoader(React.memo(_DashboardFollowThem));
 export default DashboardFollowThem;
