@@ -2668,12 +2668,12 @@
       }
     },
     "total": {
-      "available": "Available",
+      "available": "Wallets",
       "invested": "Invested",
-      "pending": "Pending",
+      "pending": "Trading",
       "profits": "Profits",
-      "total": "Total",
-      "title": "Title",
+      "total": "Total balance",
+      "title": "Overview",
       "day": "Day",
       "week": "Week",
       "month": "Month"
