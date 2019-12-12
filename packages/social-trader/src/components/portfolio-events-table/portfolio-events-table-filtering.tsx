@@ -25,7 +25,6 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
   assetTypeValues,
   dateRangeStartLabel
 }) => {
-  console.log(eventTypeFilterValues, historyType);
   const eventTypes = getEventTypes(
     eventTypeFilterValues,
     historyType,
