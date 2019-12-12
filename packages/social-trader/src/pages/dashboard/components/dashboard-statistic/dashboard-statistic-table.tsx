@@ -8,7 +8,6 @@ import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "shared/utils/dates";
-import { CurrencyEnum } from "utils/types";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {
@@ -22,7 +21,7 @@ const DASHBOARD_STATISTIC_COLUMNS = [
   }
 ];
 
-const _DashboardStatisticTable: React.FC<Props> = ({ data, currency }) => {
+const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <div className="dashboard-statistic__table-block">
@@ -64,7 +63,6 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data, currency }) => {
 };
 
 interface Props {
-  currency: CurrencyEnum;
   data: TDashboardEvent[];
 }
 
