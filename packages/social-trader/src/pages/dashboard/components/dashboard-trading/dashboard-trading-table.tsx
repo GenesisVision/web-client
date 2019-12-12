@@ -2,8 +2,6 @@ import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
 import {
   FilteringType,
   TDefaultFilters
@@ -16,7 +14,7 @@ import {
   RenderBodyItemFuncType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { DEFAULT_CARD_PAGING } from "components/table/reducers/table-paging.reducer";
 import { LIST_VIEW } from "components/table/table.constants";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
@@ -42,7 +40,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
         showSwitchView={false}
         filtering={filtering}
         defaultFilters={defaultFilters}
-        paging={DEFAULT_PAGING}
+        paging={DEFAULT_CARD_PAGING}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
