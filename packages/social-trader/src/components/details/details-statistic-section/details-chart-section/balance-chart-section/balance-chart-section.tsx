@@ -6,7 +6,6 @@ import {
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { ChartValuePeriodLoader } from "../../../details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import { DETAILS_CHART_TABS } from "../details-chart";
 import BalanceChartElements, {
   TRenderBalanceChart
@@ -30,7 +29,6 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
   return (
     <BalanceChartElements
       condition={!!chart && !!selectedCurrencies.length}
-      loader={<ChartValuePeriodLoader />}
       renderBalanceChart={renderBalanceChart}
       period={period}
       setPeriod={setPeriod}
