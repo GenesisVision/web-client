@@ -27,7 +27,11 @@ const _DashboardTradingTotal: React.FC<Props> = ({
           currency={currency}
         />
       </StatisticItemList>
-      <DashboardStatisticPeriods currency={currency} data={profits} />
+      <DashboardStatisticPeriods
+        withProfitability
+        currency={currency}
+        data={profits}
+      />
     </div>
   );
 };
