@@ -13,6 +13,7 @@ import DepositTop from "./deposit-top";
 import { TAssetDeposit, TAssetInvestCreatorArgs, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
+  title,
   availableToInvest,
   fees,
   minDeposit,
@@ -44,6 +45,7 @@ const _DepositPopup: React.FC<Props> = ({
   return (
     <>
       <DepositTop
+        title={title}
         availableToInvest={availableToInvest}
         asset={asset}
         currency={currency}
@@ -68,6 +70,7 @@ const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
 export default DepositPopup;
 
 interface Props {
+  title: string;
   availableToInvest?: number;
   fees: TFees;
   minDeposit: number;

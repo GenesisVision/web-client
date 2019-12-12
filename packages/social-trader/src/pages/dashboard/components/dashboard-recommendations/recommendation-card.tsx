@@ -40,6 +40,7 @@ const _RecommendationCard: React.FC<Props> = ({ asset, title }) => {
         {(asset.assetType === ASSET.PROGRAM ||
           asset.assetType === ASSET.FUND) && (
           <DepositButton
+            title={asset.title}
             size={GV_BTN_SIZE.BIG}
             broker={asset.broker && asset.broker.type}
             type={asset.assetType as ASSET}

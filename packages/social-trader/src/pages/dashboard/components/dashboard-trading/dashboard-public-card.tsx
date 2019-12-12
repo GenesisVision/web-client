@@ -124,6 +124,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
+        title={asset.accountInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
         canWithdraw={asset.actions.canAddRequestWithdraw}

@@ -11,6 +11,7 @@ import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
+  title,
   size,
   onApply,
   ownAsset,
@@ -38,6 +39,7 @@ const _DepositButton: React.FC<Props> = ({
     case ASSET.FUND:
       deposit = (
         <FundDepositContainer
+          title={title}
           onApply={onApply}
           entryFee={entryFee}
           availableToInvest={availableToInvest}
@@ -50,6 +52,7 @@ const _DepositButton: React.FC<Props> = ({
     default:
       deposit = (
         <ProgramDeposit
+          title={title}
           onApply={onApply}
           ownAsset={ownAsset}
           entryFee={entryFee}
@@ -86,6 +89,7 @@ const _DepositButton: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
   size?: GV_BTN_SIZE;
   onApply?: VoidFunction;
   ownAsset?: boolean;

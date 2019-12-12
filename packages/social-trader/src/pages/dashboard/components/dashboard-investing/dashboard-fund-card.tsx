@@ -117,6 +117,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         </TableCardTableRow>
       </TableCardTable>
       <DepositWithdrawButtons
+        title={fund.title}
         onApply={updateItems}
         canWithdraw={fund.personalDetails.canWithdraw}
         canInvest={fund.personalDetails.canInvest}

@@ -9,6 +9,7 @@ import { fundMinDepositAmountSelector } from "reducers/platform-reducer";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
+  title,
   entryFee,
   availableToInvest,
   id,
@@ -20,6 +21,7 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   const minDeposit = getFundMinDeposit(fundMinDepositAmounts, FUND_CURRENCY);
   return (
     <DepositContainer
+      title={title}
       availableToInvest={availableToInvest}
       entryFee={entryFee}
       minDeposit={minDeposit}
@@ -39,6 +41,7 @@ const FundDeposit = withLoader(React.memo(_FundDeposit));
 export default FundDeposit;
 
 interface OwnProps {
+  title: string;
   entryFee?: number;
   availableToInvest?: number;
   id: string;

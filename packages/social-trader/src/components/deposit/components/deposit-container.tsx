@@ -17,6 +17,7 @@ import { DepositInfoLoaderData } from "./deposit.loader";
 import { TAssetDeposit } from "./deposit.types";
 
 const _DepositContainer: React.FC<Props> = ({
+  title,
   availableToInvest,
   entryFee,
   minDeposit,
@@ -44,6 +45,7 @@ const _DepositContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopup
+        title={title}
         ownAsset={ownAsset}
         availableToInvest={availableToInvest}
         fees={fees}
@@ -64,6 +66,7 @@ const _DepositContainer: React.FC<Props> = ({
 };
 
 interface Props extends IDialogProps {
+  title: string;
   availableToInvest?: number;
   entryFee?: number;
   minDeposit: number;

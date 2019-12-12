@@ -12,6 +12,7 @@ import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
+  title,
   entryFee,
   availableToInvest,
   broker,
@@ -30,6 +31,7 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   );
   return (
     <DepositContainer
+      title={title}
       ownAsset={ownAsset}
       availableToInvest={availableToInvest}
       entryFee={entryFee}
@@ -50,6 +52,7 @@ const ProgramDeposit = withLoader(React.memo(_ProgramDeposit));
 export default ProgramDeposit;
 
 interface OwnProps {
+  title: string;
   entryFee?: number;
   ownAsset?: boolean;
   availableToInvest?: number;

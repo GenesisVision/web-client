@@ -22,6 +22,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
+          title={fundDescription.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
