@@ -1,5 +1,5 @@
 import Page from "components/page/page";
-import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
+import DashboardFollowThemContainer from "pages/dashboard/components/dashboard-trading/dashboard-follow-them.container";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
 import DashboardPublic from "pages/dashboard/components/dashboard-trading/dashboard-public";
 import DashboardTradingTotalContainer from "pages/dashboard/components/dashboard-trading/dashboard-trading-total.container";
@@ -23,7 +23,7 @@ const _TradingPage: React.FC = () => {
           <DashboardPrivate />
         </div>
         <div>
-          <DashboardFollowThem />
+          <DashboardFollowThemContainer />
         </div>
       </Page>
     </TitleContext.Provider>
