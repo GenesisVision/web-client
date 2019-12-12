@@ -18,11 +18,11 @@ import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-but
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
+import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
-import { META_TRADER_4_ROUTE } from "routes/trade.routes";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -40,7 +40,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
     assetTo: CONVERT_ASSET.SIGNAL
   });
   const terminalLink = {
-    pathname: META_TRADER_4_ROUTE,
+    pathname: getTerminalLink(asset.broker.type),
     state: `/ ${title}`
   };
   const makeSignalAccountLink = {
