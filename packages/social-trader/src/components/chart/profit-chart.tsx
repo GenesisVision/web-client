@@ -36,6 +36,7 @@ const _ProfitChart: React.FC<Props> = ({
           firstEquityChart[firstEquity.length - 1].date
         )}
         <YAxis
+          orientation="right"
           dataKey="value"
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
