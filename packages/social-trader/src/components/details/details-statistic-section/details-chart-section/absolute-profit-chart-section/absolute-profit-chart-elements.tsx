@@ -14,6 +14,7 @@ import ChartCurrencySelector, {
   TRemoveChartCurrency
 } from "modules/chart-currency-selector/chart-currency-selector";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";
@@ -33,6 +34,7 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
+  const [t] = useTranslation();
   const chartData = useChartData<AbsoluteProfitChartDataType>(
     data,
     selectedCurrencies
@@ -43,7 +45,7 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem big accent>
+        <StatisticItem big accent label={t("details-page.chart.value")}>
           <NumberFormat
             value={formatCurrencyValue(profit, name)}
             thousandSeparator={" "}

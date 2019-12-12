@@ -15,6 +15,7 @@ import ChartCurrencySelector, {
   TRemoveChartCurrency
 } from "modules/chart-currency-selector/chart-currency-selector";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";
@@ -35,6 +36,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   changeCurrency,
   selectCurrencies
 }) => {
+  const [t] = useTranslation();
   const chartData = useChartData<ProfitChartDataType>(data, selectedCurrencies);
   const platformCurrencies = useSelector(platformCurrenciesSelector);
   const { name } = chartData.selectedCurrencies[0];
@@ -42,7 +44,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <div className="details-chart__value">
-        <StatisticItem big accent>
+        <StatisticItem big accent label={t("details-page.chart.percent")}>
           <NumberFormat
             value={formatCurrencyValue(statistic.profitPercent, name)}
             thousandSeparator={" "}
