@@ -2,29 +2,7 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.dashboard-recommendations {
-  &__cards {
-    display: flex;
-    overflow-x: scroll;
-    @include details-block-left-padding();
-  }
-  &__card {
-  }
-  &__chart {
-    width: 125px;
-  }
-}
 .dashboard-recommendations-card {
-  min-width: 266px;
-  box-sizing: border-box;
-  padding: $padding-small 20px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 274px;
-  background: #e8eff304;
-  margin-right: 20px;
   &__row {
     display: flex;
     flex-direction: row;
