@@ -4,3 +4,8 @@ export enum DEFAULT_PAGING {
   totalPages = 0,
   totalItems = 0
 }
+
+export const DEFAULT_CARD_PAGING = {
+  ...DEFAULT_PAGING,
+  itemsOnPage: 12
+};
