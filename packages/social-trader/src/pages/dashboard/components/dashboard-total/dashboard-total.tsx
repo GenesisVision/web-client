@@ -17,6 +17,25 @@ import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
 
+const DashboardTotalItem: React.FC<{
+  color: string;
+  label: string;
+  value: number;
+  currency: CurrencyEnum;
+  total: number;
+}> = React.memo(({ label, value, currency, color, total }) => {
+  return (
+    <>
+      <PieContainer
+        value={getPercentageValue(value, total)}
+        label={`${getPercentageValue(value, total)} %`}
+        color={color}
+      />
+      <DashboardValueItem label={label} value={value} currency={currency} />
+    </>
+  );
+});
+
 const _DashboardTotal: React.FC<Props> = ({
   currency,
   data: { wallets, invested, trading, profits, total }
@@ -33,35 +52,26 @@ const _DashboardTotal: React.FC<Props> = ({
           value={total}
           currency={currency}
         />
-        <PieContainer
-          value={getPercentageValue(invested, total)}
-          label={`${getPercentageValue(invested, total)} %`}
+        <DashboardTotalItem
+          currency={currency}
           color={GVColors.$primaryColor}
-        />
-        <DashboardValueItem
           label={t("dashboard-page.total.invested")}
           value={invested}
+          total={total}
+        />
+        <DashboardTotalItem
           currency={currency}
-        />
-        <PieContainer
-          value={getPercentageValue(trading, total)}
-          label={`${getPercentageValue(trading, total)} %`}
           color={$piePendingColor}
-        />
-        <DashboardValueItem
           label={t("dashboard-page.total.pending")}
           value={trading}
+          total={total}
+        />
+        <DashboardTotalItem
           currency={currency}
-        />
-        <PieContainer
-          value={getPercentageValue(wallets, total)}
-          label={`${getPercentageValue(wallets, total)} %`}
           color={$pieAvailableColor}
-        />
-        <DashboardValueItem
           label={t("dashboard-page.total.available")}
           value={wallets}
-          currency={currency}
+          total={total}
         />
         {!hasMoney && (
           <StatisticItem>
