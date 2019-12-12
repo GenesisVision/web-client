@@ -5,7 +5,10 @@ import {
 import { ASSET_TYPE_FILTER_NAME } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_NAME } from "components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import {
+  EVENT_TYPE_FILTER_DEFAULT_VALUE,
+  EVENT_TYPE_FILTER_NAME
+} from "components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import {
   FilteringType,
   SelectFilterValue
@@ -30,13 +33,19 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
     historyType,
     filtering[ASSET_TYPE_FILTER_NAME] || assetType
   );
+  const eventTypeValue = hasEventType(
+    filtering[EVENT_TYPE_FILTER_NAME],
+    eventTypes
+  )
+    ? filtering[EVENT_TYPE_FILTER_NAME]
+    : EVENT_TYPE_FILTER_DEFAULT_VALUE;
   return (
     <>
       {filtering[EVENT_TYPE_FILTER_NAME] && (
         <SelectFilter
           name={EVENT_TYPE_FILTER_NAME}
           label="Type"
-          value={filtering[EVENT_TYPE_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
+          value={eventTypeValue as SelectFilterType} //TODO fix filtering types
           values={eventTypes}
           onChange={updateFilter}
         />
@@ -61,6 +70,11 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
     </>
   );
 };
+
+const hasEventType = (
+  type: string,
+  types: SelectFilterValue<string>[]
+): boolean => !!types.find(({ value }) => value === type);
 
 interface Props {
   assetType?: AssetType;
