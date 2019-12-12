@@ -51,4 +51,6 @@ export type TAssetDeposit = ({
   id,
   amount,
   currency
-}: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => Promise<any>;
+}: TAssetInvestCreatorArgs) => (
+  dispatch: ReduxDispatch
+) => CancelablePromise<any>;
