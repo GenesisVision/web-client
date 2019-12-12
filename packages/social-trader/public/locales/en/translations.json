@@ -665,6 +665,7 @@
       "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
     },
     "chart": {
+      "percent": "Percent",
       "assets": "Assets",
       "value": "Value",
       "heading": "Chart",
