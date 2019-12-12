@@ -8,7 +8,7 @@ import { ManagerThunk, ResponseError, SetSubmittingType } from "utils/types";
 
 export const cancelChangeBrokerMethod = (
   programId: string
-): ManagerThunk<Promise<void>> => dispatch =>
+): ManagerThunk<CancelablePromise<void>> => dispatch =>
   new CancelablePromise<void>(() => {});
 // managerApi
 //   .cancelChangeBroker(authService.getAuthArg(), {
@@ -31,7 +31,7 @@ export const changeBrokerMethod = (
   newBrokerAccountTypeId: string,
   newLeverage: number,
   setSubmitting: SetSubmittingType
-): ManagerThunk<Promise<void>> => dispatch =>
+): ManagerThunk<CancelablePromise<void>> => dispatch =>
   new CancelablePromise<void>(() => {});
 // managerApi
 //   .changeBroker(authService.getAuthArg(), {

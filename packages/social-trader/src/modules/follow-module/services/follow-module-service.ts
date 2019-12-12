@@ -82,4 +82,4 @@ export type TSignalRequest = (args: {
     NewTradingAccountRequest &
     NewExternalTradingAccountRequest;
   leverage: number;
-}) => CancelablePromise<any>;
+}) => PromiseLike<any>;

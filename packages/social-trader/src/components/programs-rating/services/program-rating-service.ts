@@ -1,4 +1,4 @@
-//import { LevelUpSummary } from "gv-api-web";
+import { CancelablePromise } from "gv-api-web";
 import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
@@ -17,7 +17,7 @@ export type TGetProgramsRatingFilters = IProgramsGetFilters & {
 
 export const getProgramsRating = (filters: TGetProgramsRatingFilters) => (
   dispatch: MiddlewareDispatch
-): Promise<number> => {
+): CancelablePromise<number> => {
   const { tab, managerId, itemsOnPage, currentPage } = filters;
   const requestFilters = {
     managerId,
