@@ -12,7 +12,7 @@ export const editAsset = (props: {
 }): CancelablePromise<null> => {
   const authorization = authService.getAuthArg();
   let data = props.editAssetData;
-  let promise = Promise.resolve("") as CancelablePromise<any>;
+  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
   if (data.logo.image)
     promise = filesService.uploadFile(
       data.logo.image.cropped,

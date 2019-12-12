@@ -6,9 +6,9 @@ import {
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
 } from "gv-api-web";
-import filesService from "services/file-service";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
+import filesService from "services/file-service";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";
@@ -29,7 +29,7 @@ export const convertAsset = ({
   fromTo: TAssetFromTo;
 }): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
-  let promise = Promise.resolve("") as CancelablePromise<any>;
+  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
   if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
       data.logo.image.cropped,

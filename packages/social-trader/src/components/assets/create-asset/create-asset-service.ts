@@ -5,10 +5,10 @@ import {
 } from "gv-api-web";
 import { ICreateAccountSettingsFormValues } from "pages/create-account/components/create-account-settings/create-account-settings";
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
-import filesService from "services/file-service";
-import { CREATE_ASSET } from "shared/constants/constants";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
+import filesService from "services/file-service";
+import { CREATE_ASSET } from "shared/constants/constants";
 
 export type ICreateAssetSettingsFormValues =
   | ICreateFundSettingsFormValues
@@ -24,7 +24,7 @@ export const createAsset = ({
   asset: CREATE_ASSET;
 }): CancelablePromise<any> => {
   const authorization = authService.getAuthArg();
-  let promise = Promise.resolve("") as CancelablePromise<any>;
+  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
   if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
       data.logo.image.cropped,
