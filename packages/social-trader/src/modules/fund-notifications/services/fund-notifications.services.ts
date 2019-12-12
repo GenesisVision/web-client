@@ -10,7 +10,7 @@ import {
 } from "modules/notification-settings/actions/notification-settings.actions";
 import { NextPageContext } from "next";
 import authService from "services/auth-service";
-import { MiddlewareDispatch } from "utils/types";
+import { MiddlewareDispatch, ResponseError } from "utils/types";
 
 import {
   addErrorMessageAction,
@@ -34,11 +34,11 @@ export const addFundNotification: TAddNotification = (
   message
 ) => dispatch =>
   dispatch(addNotificationSettingAction(opts))
-    .payload!.then(() => {
+    .then(() => {
       dispatch(fetchFundNotifications(opts.assetId!));
       dispatch(alertMessageActions.success(message));
     })
-    .catch(data => {
+    .catch((data: ResponseError) => {
       dispatch(addErrorMessageAction(data.errorMessage));
     }) as CancelablePromise<void>;
 

@@ -127,6 +127,7 @@ export const portfolioLoaderData = (): Array<MoneyLocation> => {
 export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => ({
   equity: getRandomInteger(-10000, 10000),
   assetsUnderManagement: getRandomInteger(-10000, 10000),
+  total: 100,
   profits: {
     day: {
       profit: getRandomInteger(-10000, 10000),

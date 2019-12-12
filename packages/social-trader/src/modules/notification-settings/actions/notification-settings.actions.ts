@@ -32,7 +32,7 @@ export interface IAddNotificationSettingProps {
 
 export const addNotificationSettingAction = (
   opts: IAddNotificationSettingProps
-): ActionType<Promise<string>> => ({
+): ActionType<CancelablePromise<string>> => ({
   type: ADD_NOTIFICATION_SETTING,
   payload: notificationsApi.addNotificationsSettings(
     authService.getAuthArg(),

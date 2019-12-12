@@ -75,7 +75,10 @@ const uploadFile = (
 ): CancelablePromise<string> =>
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
-const uploadDocument = (file: File, authorization: string): Promise<string> =>
+const uploadDocument = (
+  file: File,
+  authorization: string
+): CancelablePromise<string> =>
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
 const filesService = {

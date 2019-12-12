@@ -47,7 +47,7 @@ interface ApiActionResponse<T> {
 }
 
 export interface MiddlewareDispatch {
-  <A extends ApiAction = ApiAction>(apiAction: A): Promise<
+  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<
     ApiActionResponse<A>
   >;
   <A extends ActionType = ActionType>(action: A): A;
