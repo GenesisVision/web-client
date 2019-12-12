@@ -21,7 +21,7 @@ const _DashboardTradingTotalContainer: React.FC = () => {
     request: getTotalTradingStatistic
   });
   return (
-    <DashboardBlock label={t("dashboard-page.trading.total")}>
+    <DashboardBlock label={t("dashboard-page.trading.title")}>
       <DashboardTradingTotal
         currency={currency}
         loaderData={getTradingStatisticLoaderData()}
