@@ -1,15 +1,15 @@
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TradesDelay } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { DELAYS_LABELS } from "./program-open-positions/program-open-positions";
 
-const _TradesDelayHint: React.FC<{ delay: any }> = ({ delay }) => {
+const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
   const [t] = useTranslation();
   if (delay === "None") return null;
-  // @ts-ignore
-  const label = DELAYS_LABELS[delay as string];
+  const label = DELAYS_LABELS[delay];
   return (
     <>
       <div className="details-trades__delay-hint">
