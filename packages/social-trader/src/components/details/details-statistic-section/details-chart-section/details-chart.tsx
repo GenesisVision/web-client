@@ -48,34 +48,36 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           label={t("details-page.chart.tabs.balance")}
         />
       </GVTabs>
-      {tab === DETAILS_CHART_TABS.PROFIT && (
-        <ProfitChartSection
-          loaderData={loaderData}
-          renderProfitChart={renderProfitChart}
-          profitChartSelector={profitChartSelector}
-          renderProfitValue={renderProfitValue}
-          useChartStateValues={useChartStateValues}
-          useChartPeriod={useChartPeriod}
-        />
-      )}
-      {tab === DETAILS_CHART_TABS.ABSOLUTE_PROFIT && (
-        <AbsoluteProfitChartSection
-          loaderData={loaderData}
-          renderAbsoluteProfitChart={renderAbsoluteProfitChart}
-          absoluteProfitChartSelector={absoluteProfitChartSelector}
-          renderProfitValue={renderProfitValue}
-          useChartStateValues={useChartStateValues}
-          useChartPeriod={useChartPeriod}
-        />
-      )}
-      {tab === DETAILS_CHART_TABS.BALANCE && (
-        <BalanceChartSection
-          useChartStateValues={useChartStateValues}
-          useChartPeriod={useChartPeriod}
-          balanceChartSelector={balanceChartSelector}
-          renderBalanceChart={renderBalanceChart}
-        />
-      )}
+      <div className="details-chart__container">
+        {tab === DETAILS_CHART_TABS.PROFIT && (
+          <ProfitChartSection
+            loaderData={loaderData}
+            renderProfitChart={renderProfitChart}
+            profitChartSelector={profitChartSelector}
+            renderProfitValue={renderProfitValue}
+            useChartStateValues={useChartStateValues}
+            useChartPeriod={useChartPeriod}
+          />
+        )}
+        {tab === DETAILS_CHART_TABS.ABSOLUTE_PROFIT && (
+          <AbsoluteProfitChartSection
+            loaderData={loaderData}
+            renderAbsoluteProfitChart={renderAbsoluteProfitChart}
+            absoluteProfitChartSelector={absoluteProfitChartSelector}
+            renderProfitValue={renderProfitValue}
+            useChartStateValues={useChartStateValues}
+            useChartPeriod={useChartPeriod}
+          />
+        )}
+        {tab === DETAILS_CHART_TABS.BALANCE && (
+          <BalanceChartSection
+            useChartStateValues={useChartStateValues}
+            useChartPeriod={useChartPeriod}
+            balanceChartSelector={balanceChartSelector}
+            renderBalanceChart={renderBalanceChart}
+          />
+        )}
+      </div>
     </DetailsBlock>
   );
 };
