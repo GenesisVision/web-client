@@ -3,6 +3,7 @@ import "./portfolio-events.scss";
 
 import PortfolioEventsTableFiltering from "components/portfolio-events-table/portfolio-events-table-filtering";
 import PortfolioEventsTableHeaderCell from "components/portfolio-events-table/portfolio-events-table-header-cell";
+import { THistoryType } from "components/portfolio-events-table/portfolio-events-table.service";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -29,6 +30,7 @@ import {
 const _PortfolioEventsTableContainer: React.FC<
   IPortfolioEventsTableOwnProps
 > = ({
+  historyType,
   title,
   getItems,
   selector,
@@ -57,7 +59,7 @@ const _PortfolioEventsTableContainer: React.FC<
         renderFilters={(updateFilter, filtering) => (
           <PortfolioEventsTableFiltering
             assetType={asset}
-            historyType={"investmentHistory"}
+            historyType={historyType}
             assetTypeValues={assetTypeValues}
             dateRangeStartLabel={dateRangeStartLabel}
             eventTypeFilterValues={eventTypeFilterValues!}
@@ -83,6 +85,7 @@ const _PortfolioEventsTableContainer: React.FC<
 };
 
 export interface IPortfolioEventsTableOwnProps {
+  historyType: THistoryType;
   getItems: GetItemsFuncActionType;
   selector: TableSelectorType;
   eventLocation: EVENT_LOCATION;

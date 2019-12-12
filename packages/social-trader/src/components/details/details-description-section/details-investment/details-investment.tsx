@@ -55,6 +55,8 @@ const _DetailsInvestment: React.FC<Props> = ({
 
   const showInvestment = haveActiveInvestment(personalDetails);
   const showSubscription = !!subscriptionsCount;
+  const historyType =
+    asset === ASSET.FOLLOW ? "tradingHistory" : "investmentHistory";
 
   useEffect(() => {
     if (haveEvents && !showInvestment && !showSubscription)
@@ -96,8 +98,9 @@ const _DetailsInvestment: React.FC<Props> = ({
           personalDetails={personalDetails as InvestmentType}
         />
       )}
-      {tab === TABS.EVENTS && (
+      {tab === TABS.EVENTS && haveEvents && (
         <PortfolioEventsTableContainer
+          historyType={historyType}
           getItems={getEvents(id!, EVENT_LOCATION.Asset)}
           selector={selector}
           asset={asset}
