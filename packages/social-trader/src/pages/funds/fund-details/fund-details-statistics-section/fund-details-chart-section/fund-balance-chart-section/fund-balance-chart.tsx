@@ -28,7 +28,7 @@ const _FundBalanceChart: React.FC<Props> = ({
         )}
         <YAxis
           axisLine={false}
-          orientation="right"
+          orientation="left"
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
           tickFormatter={x => +x.toFixed(4)}
           unit={currency}
