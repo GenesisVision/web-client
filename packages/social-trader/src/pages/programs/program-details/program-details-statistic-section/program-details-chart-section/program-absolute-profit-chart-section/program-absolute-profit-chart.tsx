@@ -39,7 +39,7 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
         {chartXAxis(chart[0].date, chart[chart.length - 1].date)}
         <YAxis
           axisLine={false}
-          orientation="right"
+          orientation="left"
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
           tickFormatter={x => +x.toFixed(4)}
           unit={currency}
