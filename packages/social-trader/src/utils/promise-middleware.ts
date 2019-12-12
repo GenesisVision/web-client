@@ -1,7 +1,9 @@
+import { CancelablePromise } from "gv-api-web";
+
 export type MiddlewareType<T = any> = (res: T) => void;
 
 export const setPromiseMiddleware = async (
-  promise: Promise<any>,
+  promise: CancelablePromise<any>,
   middleware: MiddlewareType[]
 ) => {
   const result = await promise;

@@ -29,7 +29,7 @@ export const fetchAccounts = ({
     .then(({ items }) => items);
 
 export const getSignalInfo = (id: string): CancelablePromise<number> =>
-  Promise.resolve(100) as CancelablePromise<number>;
+  (Promise.resolve(100) as unknown) as CancelablePromise<number>;
 
 export const attachToExternalSignal: TSignalRequest = async ({
   id,
@@ -82,4 +82,4 @@ export type TSignalRequest = (args: {
     NewTradingAccountRequest &
     NewExternalTradingAccountRequest;
   leverage: number;
-}) => Promise<any>;
+}) => CancelablePromise<any>;

@@ -1,13 +1,16 @@
-import { SearchViewModel } from "gv-api-web";
+import { CancelablePromise, SearchViewModel } from "gv-api-web";
 import searchApi from "services/api-client/search-api";
 import authService from "services/auth-service";
 import { Nullable } from "utils/types";
 
 export const search = (
   queryValue: string = ""
-): Promise<Nullable<SearchViewModel>> => {
+): CancelablePromise<Nullable<SearchViewModel>> => {
   const trimmedQuery = queryValue.trim();
-  if (trimmedQuery.length === 0) return Promise.resolve(null);
+  if (trimmedQuery.length === 0)
+    return (Promise.resolve(null) as unknown) as CancelablePromise<
+      Nullable<SearchViewModel>
+    >;
 
   let filters: RequestFilters = {
     mask: trimmedQuery,

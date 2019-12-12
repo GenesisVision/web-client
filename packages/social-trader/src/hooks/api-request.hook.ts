@@ -67,7 +67,10 @@ const useApiRequest = <T>({
 
   const sendRequest = (props?: any, setSubmitting?: SetSubmittingType) => {
     setIsPending();
-    return setPromiseMiddleware(request(props), middlewareList)
+    return ((setPromiseMiddleware(
+      request(props),
+      middlewareList
+    ) as unknown) as CancelablePromise<any>)
       .catch((errorMessage: ResponseError) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage.errorMessage));

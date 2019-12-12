@@ -10,7 +10,7 @@ export const programEditSignal = ({
   id: string;
   successFee: number;
   volumeFee: number;
-}): Promise<void> => {
+}): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   const requestData = {
     programId: id,

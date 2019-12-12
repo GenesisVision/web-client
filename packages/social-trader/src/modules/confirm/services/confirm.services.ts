@@ -7,12 +7,14 @@ import { IConfirmProgramProps } from "../confirm-container";
 
 export const confirm = (
   values: IConfirmFormValues & IConfirmProgramProps
-): Promise<any> => {
+): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   return new CancelablePromise<void>(() => {});
   // return managerApi.confirmProgram2FA(authorization, values);
 };
-export const get2faInfo = (values: IConfirmProgramProps): Promise<any> => {
+export const get2faInfo = (
+  values: IConfirmProgramProps
+): CancelablePromise<void> => {
   const authorization = authService.getAuthArg();
   return new CancelablePromise<void>(() => {});
   // return managerApi.getProgram2FA(authorization, values);
