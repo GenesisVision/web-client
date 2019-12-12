@@ -86,7 +86,8 @@ export const fetchAssets = (
     .getChartAssets(authService.getAuthArg())
     .then(({ assets }) => assets);
 
-export const getFollowThem = () => fetchFollows({ facetId: "Top" });
+export const getFollowThem = () =>
+  fetchFollows({ facetId: "Top" }).then(({ items }) => items);
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
