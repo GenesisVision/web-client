@@ -43,7 +43,9 @@ const _DashboardTotal: React.FC<Props> = ({
   const [t] = useTranslation();
   const hasMoney = total > 0;
   const hasProfits =
-    Object.values(profits).reduce((prev, cur) => prev + cur, 0) > 0;
+    Object.values(profits)
+      .map(({ profit }) => profit)
+      .reduce((prev, cur) => prev + cur, 0) !== 0;
   return (
     <div className="dashboard-total__values">
       <StatisticItemList className="dashboard-total__profits">
