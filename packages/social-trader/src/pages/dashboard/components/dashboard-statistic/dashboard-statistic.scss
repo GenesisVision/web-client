@@ -3,6 +3,10 @@
 @import "~shared/styles/_sizes.scss";
 
 .dashboard-statistic {
+  &__event-description {
+    display: flex;
+    align-items: center;
+  }
   &__create-block-text {
     margin-bottom: $padding-small;
   }
