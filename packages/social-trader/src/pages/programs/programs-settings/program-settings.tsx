@@ -39,12 +39,12 @@ const _ProgramSettings: React.FC<Props> = ({
   closeProgram
 }) => {
   const [t] = useTranslation();
-  const { programDetails } = description;
-  const signalSuccessFee = description.signalSettings
-    ? description.signalSettings.signalSuccessFee
+  const { programDetails, followDetails } = description;
+  const signalSuccessFee = followDetails.signalSettings
+    ? followDetails.signalSettings.signalSuccessFee
     : undefined;
-  const signalVolumeFee = description.signalSettings
-    ? description.signalSettings.signalVolumeFee
+  const signalVolumeFee = followDetails.signalSettings
+    ? followDetails.signalSettings.signalVolumeFee
     : undefined;
   const isSignalProgram = !!description.followDetails;
   return (
@@ -54,14 +54,14 @@ const _ProgramSettings: React.FC<Props> = ({
         id={description.id}
       />
       <ClosePeriodBlock
-        condition={programDetails.personalDetails.ownerActions.canClosePeriod}
+        condition={description.ownerActions.canClosePeriod}
         id={description.id}
         closePeriod={updateDescription}
       />
       <ChangePassword
         condition={
-          programDetails.personalDetails.ownerActions.canChangePassword &&
-          programDetails.personalDetails.ownerActions.canClose
+          description.ownerActions.canChangePassword &&
+          description.ownerActions.canClose
         }
         title={description.title}
         id={description.id}
@@ -133,7 +133,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
         asset={CLOSEABLE_ASSET.PROGRAM}
-        canCloseAsset={programDetails.personalDetails.ownerActions.canClose}
+        canCloseAsset={description.ownerActions.canClose}
         id={description.id}
         closeAsset={closeProgram}
       />

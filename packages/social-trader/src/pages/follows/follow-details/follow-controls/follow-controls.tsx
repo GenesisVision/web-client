@@ -11,8 +11,7 @@ const _FollowControls: React.FC<Props> = ({
   onApply,
   data,
   description: {
-    signalSettings,
-    followDetails: { currency, personalDetails },
+    followDetails: { currency, personalDetails, signalSettings },
     id,
     title,
     brokerDetails
