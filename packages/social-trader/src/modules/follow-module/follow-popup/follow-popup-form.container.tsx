@@ -35,13 +35,14 @@ const _FollowModuleContainer: React.FC<Props> = ({
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
-  const minDeposit = isExternal
-    ? 0
-    : tradingAccountMinDepositAmounts
-        .find(({ serverType }) => serverType === broker)!
-        .minDepositCreateAsset.find(
-          (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
-        )!.amount;
+  const minDeposit =
+    isExternal || !hasSignalAccount
+      ? 0
+      : tradingAccountMinDepositAmounts
+          .find(({ serverType }) => serverType === broker)!
+          .minDepositCreateAsset.find(
+            (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
+          )!.amount;
   const wallets = useSelector(walletsSelector);
 
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
