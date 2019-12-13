@@ -74,7 +74,7 @@ interface Props {
   broker: BrokerTradeServerType;
   id: string;
   title: string;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
 }
 
 const FollowButton = React.memo(_FollowButton);

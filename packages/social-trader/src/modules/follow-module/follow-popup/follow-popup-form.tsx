@@ -117,7 +117,7 @@ const _FollowForm: React.FC<Props> = ({
           <FollowCreateAccount
             minDeposit={minDeposit}
             wallets={wallets}
-            followCurrency={currency}
+            followCurrency={currency!}
             onClick={createdCopytradingAccount}
           />
         ))}
@@ -151,7 +151,7 @@ interface Props {
   ) => void;
   id: string;
   wallets: WalletData[];
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
 }
 
 const FollowForm = withBlurLoader(React.memo(_FollowForm));

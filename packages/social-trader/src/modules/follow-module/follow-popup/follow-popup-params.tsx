@@ -93,15 +93,17 @@ const _FollowParams: React.FC<
               label={`${t("follow-program.params.usd-equivalent")} *`}
               currency={"USD"}
             />
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
-                currency
-              )}
-              prefix="≈ "
-              suffix={` ${currency}`}
-              displayType="text"
-            />
+            {currency && (
+              <NumberFormat
+                value={formatCurrencyValue(
+                  convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+                  currency
+                )}
+                prefix="≈ "
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            )}
           </DialogField>
         )}
         <DialogField>
@@ -133,7 +135,7 @@ const _FollowParams: React.FC<
             {t("follow-program.params.submit")}
           </GVButton>
         </DialogButtons>
-        {values[FIELDS.mode] === modes.fixed.value && (
+        {values[FIELDS.mode] === modes.fixed.value && currency && (
           <div className="dialog__info">* {t(getInfoText(currency))}</div>
         )}
       </DialogBottom>
@@ -181,7 +183,7 @@ export interface FollowParamsFormValues {
 
 interface OwnProps {
   rate: number;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
   paramsSubscription?: SignalSubscription;
   onSubmit: (
     values: FollowParamsFormValues,

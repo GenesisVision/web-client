@@ -42,7 +42,7 @@ interface Props {
   open: boolean;
   onClose: VoidFunction;
   onApply?: VoidFunction;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
   id: string;
 }
 

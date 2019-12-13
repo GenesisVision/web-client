@@ -109,7 +109,7 @@ interface Props {
   broker: BrokerTradeServerType;
   onClose: () => void;
   onApply?: () => void;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
   id: string;
 }
 
