@@ -13,7 +13,7 @@ export type InvestmentBlockDetailsType =
 export type InvestmentType = PersonalFundDetails & PersonalProgramDetails;
 
 export const haveActiveInvestment = (
-  details: InvestmentBlockDetailsType
+  details: PersonalFundDetails | PersonalProgramDetails
 ): boolean =>
   !!details &&
   "isInvested" in details &&

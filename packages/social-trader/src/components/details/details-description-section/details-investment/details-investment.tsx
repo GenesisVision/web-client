@@ -7,6 +7,11 @@ import SubscriptionContainer from "components/details/details-description-sectio
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { TableSelectorType } from "components/table/components/table.types";
+import {
+  PersonalFollowDetailsFull,
+  PersonalFundDetails,
+  PersonalProgramDetails
+} from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import {
   EVENT_LOCATION,
@@ -22,7 +27,6 @@ import { CurrencyEnum, FeesType } from "utils/types";
 
 import {
   haveActiveInvestment,
-  InvestmentBlockDetailsType,
   InvestmentType
 } from "./details-investment.helpers";
 
@@ -34,12 +38,15 @@ const _DetailsInvestment: React.FC<Props> = ({
   currency,
   dispatchDescription,
   id,
-  personalDetails
+  personalFundDetails,
+  programPersonalDetails,
+  followPersonalDetails
 }) => {
   const subscriptionsCount =
-    "subscribedAccounts" in personalDetails
-      ? personalDetails.subscribedAccounts
+    followPersonalDetails && "subscribedAccounts" in followPersonalDetails
+      ? followPersonalDetails.subscribedAccounts
       : 0;
+  const investmentDetails = personalFundDetails || programPersonalDetails;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -53,7 +60,8 @@ const _DetailsInvestment: React.FC<Props> = ({
     isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
   }, [isAuthenticated, events]);
 
-  const showInvestment = haveActiveInvestment(personalDetails);
+  const showInvestment =
+    investmentDetails && haveActiveInvestment(investmentDetails);
   const showSubscription = !!subscriptionsCount;
   const historyType =
     asset === ASSET.FOLLOW ? "tradingHistory" : "investmentHistory";
@@ -95,7 +103,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           assetCurrency={currency}
           asset={asset}
           notice={notice}
-          personalDetails={personalDetails as InvestmentType}
+          personalDetails={investmentDetails as InvestmentType}
         />
       )}
       {tab === TABS.EVENTS && haveEvents && (
@@ -125,7 +133,9 @@ interface Props {
   selector: TableSelectorType;
   currency: CurrencyEnum;
   id: string;
-  personalDetails: InvestmentBlockDetailsType;
+  personalFundDetails?: PersonalFundDetails;
+  programPersonalDetails?: PersonalProgramDetails;
+  followPersonalDetails?: PersonalFollowDetailsFull;
 }
 
 const DetailsInvestment = React.memo(_DetailsInvestment);

@@ -3,22 +3,17 @@ import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import { LevelsParamsInfo } from "gv-api-web";
+import {
+  ILevelCalculatorProps,
+  ProgramDescriptionDataType
+} from "pages/programs/program-details/program-details.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-
-interface IInvestmentProgramInfoProps {
-  isOwnProgram?: boolean;
-  programDescription: ProgramDetailsFull;
-  LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
-  levelsParameters?: LevelsParamsInfo;
-  isKycConfirmed?: boolean;
-}
 
 const renderFee = (
   valueSelected: number,
@@ -42,7 +37,7 @@ const renderFee = (
 
 const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   isOwnProgram,
-  programDescription,
+  description,
   levelsParameters,
   LevelCalculator
 }) => {
@@ -58,7 +53,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
     successFeeSelected,
     stopOutLevelCurrent,
     stopOutLevelSelected
-  } = programDescription;
+  } = description.programDetails;
   const availableInvestment =
     availableInvestmentLimit < availableInvestmentBase &&
     availableInvestmentLimit !== null
@@ -69,9 +64,9 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       {LevelCalculator && isOwnProgram && (
         <div className="statistics-item asset-details-description__level-calculator">
           <LevelCalculator
-            id={programDescription.id}
-            currency={programDescription.currency}
-            title={programDescription.title}
+            id={description.id}
+            currency={description.programDetails.currency}
+            title={description.title}
             levelsParameters={levelsParameters!}
             isKycConfirmed={isKycConfirmed!}
           />
@@ -151,6 +146,14 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
     </StatisticItemList>
   );
 };
+
+interface IInvestmentProgramInfoProps {
+  isOwnProgram?: boolean;
+  description: ProgramDescriptionDataType;
+  LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
+  levelsParameters?: LevelsParamsInfo;
+  isKycConfirmed?: boolean;
+}
 
 const InvestmentProgramInfo = React.memo(_InvestmentProgramInfo);
 export default InvestmentProgramInfo;

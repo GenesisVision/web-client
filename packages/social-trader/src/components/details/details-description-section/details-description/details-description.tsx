@@ -18,22 +18,22 @@ const _DetailsDescription: React.FC<Props> = ({
 }) => {
   const logo =
     "logo" in description ? description.logo : description.brokerDetails.logo;
+  const programDetails =
+    "programDetails" in description ? description.programDetails : undefined;
   return (
     <div className="asset-details-description__main">
       <DetailsLimitsAvatar
         logo={logo}
-        level={"level" in description ? description.level : undefined}
+        level={programDetails ? programDetails.level : undefined}
         levelProgress={
-          "levelProgress" in description ? description.levelProgress : undefined
+          programDetails ? programDetails.levelProgress : undefined
         }
         title={description.title}
         color={"color" in description ? description.color : undefined}
         totalAvailableInvestment={
-          "totalAvailableInvestment" in description
-            ? description.totalAvailableInvestment
-            : undefined
+          programDetails ? programDetails.totalAvailableInvestment : undefined
         }
-        currency={"level" in description ? description.currency : undefined}
+        currency={programDetails && programDetails.currency}
       />
       <DetailsInfo
         title={description.title}
