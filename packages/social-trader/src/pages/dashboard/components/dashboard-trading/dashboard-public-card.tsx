@@ -49,14 +49,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
-      canEdit={!!ownAsset}
+      onApply={updateItems}
+      name={asset.publicInfo.title}
+      actions={asset.actions}
       assetType={asset.assetType}
-      canMakeProgram={asset.actions.canMakeProgramFromSignalProvider}
       anchor={anchor}
       clearAnchor={clearAnchor}
       id={asset.id}
       url={asset.publicInfo && asset.publicInfo.url}
-      showChangePassword={asset.actions.canChangePassword}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
       showTerminal={asset.assetType === ASSET.PROGRAM}
     />

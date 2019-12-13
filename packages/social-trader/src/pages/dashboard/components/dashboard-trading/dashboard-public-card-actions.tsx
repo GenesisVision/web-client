@@ -2,13 +2,14 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
-import { AssetType } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
+import { AssetType, DashboardTradingAssetActions } from "gv-api-web";
+import { TAnchor } from "hooks/anchor.hook";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
+import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { META_TRADER_4_ROUTE } from "routes/trade.routes";
 import { useTranslation } from "shared/i18n";
 import {
@@ -21,14 +22,19 @@ import { TitleContext } from "../../dashboard.constants";
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
 > = ({
-  canEdit,
+  onApply,
+  name,
   assetType,
-  canMakeProgram,
+  actions: {
+    canMakeSignalProviderFromProgram,
+    canMakeProgramFromPrivateTradingAccount,
+    canMakeProgramFromSignalProvider,
+    canChangePassword
+  },
   anchor,
   clearAnchor,
   url,
   id,
-  showChangePassword,
   showTerminal,
   showClosePeriod
 }) => {
@@ -49,25 +55,31 @@ const _DashboardPublicCardActions: React.FC<
     pathname: makeProgramLinkMethod(id),
     state: `/ ${title}`
   };
+  const handleOnApply = useCallback(() => {
+    clearAnchor();
+    onApply();
+  }, []);
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      {canMakeProgram && (
+      {canMakeSignalProviderFromProgram && (
+        <MakeSignalButton onApply={handleOnApply} id={id} programName={name} />
+      )}
+      {(canMakeProgramFromPrivateTradingAccount ||
+        canMakeProgramFromSignalProvider) && (
         <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
           {t("dashboard-page.trading.actions.make-program")}
         </TableCardActionsItem>
       )}
-      {canEdit && (
-        <TableCardActionsItem to={settingsLink} onClick={clearAnchor}>
-          {t("dashboard-page.trading.actions.settings")}
-        </TableCardActionsItem>
-      )}
+      <TableCardActionsItem to={settingsLink} onClick={clearAnchor}>
+        {t("dashboard-page.trading.actions.settings")}
+      </TableCardActionsItem>
       {showTerminal && (
         <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
           {t("dashboard-page.trading.actions.terminal")}
         </TableCardActionsItem>
       )}
       {showClosePeriod && <ClosePeriodButton id={id} />}
-      {showChangePassword && (
+      {canChangePassword && (
         <ChangeAccountPasswordButton id={id} title={title} />
       )}
     </TableCardActions>
@@ -75,13 +87,14 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
-  canEdit: boolean;
+  onApply: VoidFunction;
+  name: string;
+  actions: DashboardTradingAssetActions;
   assetType: AssetType;
   clearAnchor: VoidFunction;
   anchor: TAnchor;
   url: string;
   id: string;
-  showChangePassword: boolean;
   showTerminal: boolean;
   showClosePeriod: boolean;
 }
