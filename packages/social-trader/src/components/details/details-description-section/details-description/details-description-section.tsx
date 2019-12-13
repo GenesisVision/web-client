@@ -2,16 +2,24 @@ import "components/details/details-description-section/details-description/detai
 
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
 import { ToType } from "components/link/link";
+import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { ASSET } from "shared/constants/constants";
-
-import { DetailsFullType, PersonalDetailsType } from "../../details.types";
+import { CurrencyEnum } from "utils/types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  id,
+  title,
+  logo,
+  color,
+  currency,
+  ownerUrl,
+  socialLinks,
+  username,
   asset,
   notificationsUrl,
   settingsUrl,
-  personalDetails,
+  programDetails,
   PerformanceData,
   AssetDetailsExtraBlock,
   description,
@@ -20,8 +28,16 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        id={id}
+        title={title}
+        logo={logo}
+        color={color}
+        currency={currency}
+        ownerUrl={ownerUrl}
+        socialLinks={socialLinks}
+        username={username}
         asset={asset}
-        personalDetails={personalDetails}
+        programDetails={programDetails}
         description={description}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
         notificationsUrl={notificationsUrl}
@@ -38,11 +54,19 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
+  id: string;
+  logo: string;
+  title: string;
+  color?: string;
+  currency?: CurrencyEnum;
+  ownerUrl?: string;
+  username?: string;
+  socialLinks?: SocialLinkViewModel[];
+  programDetails?: ProgramDetailsFull;
   asset: ASSET;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
-  personalDetails?: PersonalDetailsType;
-  description: DetailsFullType;
+  description?: string;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
   Controls?: React.ComponentType<any>;

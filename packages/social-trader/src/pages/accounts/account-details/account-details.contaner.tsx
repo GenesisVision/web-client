@@ -11,7 +11,6 @@ import {
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { ASSET } from "shared/constants/constants";
-import { createAccountSettingsToUrl } from "utils/compose-url";
 
 import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
@@ -29,11 +28,15 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+  const title = description.publicInfo.title;
   return (
-    <Page title={description.login}>
+    <Page title={title}>
       <DetailsDescriptionSection
+        logo={description.brokerDetails.logo}
+        title={title}
+        id={description.id}
+        currency={description.tradingAccountInfo.currency}
         asset={ASSET.FOLLOW}
-        description={description}
         PerformanceData={() => <PerformanceData description={description} />}
       />
       <div className="details__divider" />
@@ -49,8 +52,8 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         showSwaps={description.brokerDetails.showSwaps}
         showTickets={description.brokerDetails.showTickets}
         programId={description.id}
-        programCurrency={description.currency}
-        title={description.login}
+        programCurrency={description.tradingAccountInfo.currency}
+        title={title}
       />
     </Page>
   );

@@ -43,24 +43,27 @@ import {
 const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
   const levelsParameters = useSelector(levelParametersSelector);
-  const programDetails = description.programDetails;
-  const followDetails = description.followDetails;
+  const {
+    programDetails,
+    followDetails,
+    publicInfo: { isOwnAsset, title, status, url, logo, color },
+    owner: { username, url: ownerUrl, socialLinks },
+    tradingAccountInfo,
+    tags,
+    id,
+    brokerDetails,
+    ownerActions
+  } = description;
   const programPersonalDetails =
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;
-  const isOwnAsset =
-    programPersonalDetails && programPersonalDetails.isOwnAsset;
   const assetType = followPersonalDetails ? ASSET.FOLLOW : ASSET.PROGRAM;
-  const currency = programDetails
-    ? programDetails.currency
-    : followDetails.currency;
+  const currency = tradingAccountInfo.currency;
   const personalDetails = followPersonalDetails || programPersonalDetails;
 
   const handleDispatchDescription = useCallback(() => {
-    dispatch(
-      dispatchProgramDescriptionWithId(description.id, undefined, assetType)
-    );
-  }, [description.id]);
+    dispatch(dispatchProgramDescriptionWithId(id, undefined, assetType));
+  }, [id]);
 
   const tablesData = {
     financialStatistic: {
@@ -82,24 +85,26 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
   return (
-    <Page title={description.title}>
+    <Page title={title}>
       <DetailsDescriptionSection
+        logo={logo}
+        title={title}
+        id={id}
+        username={username}
+        socialLinks={socialLinks}
+        ownerUrl={ownerUrl}
+        currency={currency}
+        color={color}
         asset={assetType}
-        personalDetails={personalDetails}
-        description={description}
-        notificationsUrl={createProgramNotificationsToUrl(
-          description.url,
-          description.title
-        )}
-        settingsUrl={createProgramSettingsToUrl(
-          description.url,
-          description.title
-        )}
-        AssetDetailsExtraBlock={() => <DetailsTags tags={description.tags} />}
+        programDetails={programDetails || followDetails}
+        description={description.publicInfo.description}
+        notificationsUrl={createProgramNotificationsToUrl(url, title)}
+        settingsUrl={createProgramSettingsToUrl(url, title)}
+        AssetDetailsExtraBlock={() => <DetailsTags tags={tags} />}
         PerformanceData={() => (
           <PerformanceData
-            status={description.status}
-            brokerDetails={description.brokerDetails}
+            status={status}
+            brokerDetails={brokerDetails}
             loaderData={levelsParamsLoaderData}
             data={levelsParameters!}
             programDetails={programDetails}
@@ -114,11 +119,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
                 description={description}
-                canCloseAsset={
-                  programPersonalDetails &&
-                  programPersonalDetails.isOwnAsset &&
-                  description.ownerActions.canClose
-                }
+                canCloseAsset={ownerActions && ownerActions.canClose}
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
@@ -129,15 +130,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <div className="details__divider" />
       <DetailsInvestment
         fees={{
-          successFee:
-            programPersonalDetails && programDetails.successFeeCurrent,
+          successFee: programDetails && programDetails.successFeeCurrent,
           successFeePersonal:
             programPersonalDetails && programPersonalDetails.successFeePersonal
         }}
         dispatchDescription={handleDispatchDescription}
         asset={assetType}
         selector={programEventsTableSelector}
-        id={description.id}
+        id={id}
         currency={currency}
         programPersonalDetails={programPersonalDetails}
         followPersonalDetails={followPersonalDetails}
@@ -147,16 +147,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         getHistoryCounts={getProgramHistoryCounts}
         tablesData={tablesData}
         showCommissionRebateSometime={
-          description.brokerDetails.showCommissionRebateSometime
+          brokerDetails.showCommissionRebateSometime
         }
-        isOwnProgram={
-          programPersonalDetails ? programPersonalDetails.isOwnAsset : false
-        }
-        showSwaps={description.brokerDetails.showSwaps}
-        showTickets={description.brokerDetails.showTickets}
-        programId={description.id}
+        isOwnProgram={isOwnAsset}
+        showSwaps={brokerDetails.showSwaps}
+        showTickets={brokerDetails.showTickets}
+        programId={id}
         programCurrency={currency}
-        title={description.title}
+        title={title}
       />
     </Page>
   );

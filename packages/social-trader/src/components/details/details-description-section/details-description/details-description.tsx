@@ -1,25 +1,30 @@
 import { DetailsInfo } from "components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "components/details/details-description-section/details-description/details-settings-buttons.block";
 import { ToType } from "components/link/link";
+import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET } from "shared/constants/constants";
+import { CurrencyEnum } from "utils/types";
 
-import { DetailsFullType, PersonalDetailsType } from "../../details.types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  id,
+  logo,
+  title,
+  color,
+  currency,
+  ownerUrl,
+  username,
+  socialLinks,
+  programDetails,
   asset,
-  personalDetails,
   description,
   AssetDetailsExtraBlock,
   notificationsUrl,
   settingsUrl
 }) => {
-  const logo =
-    "logo" in description ? description.logo : description.brokerDetails.logo;
-  const programDetails =
-    "programDetails" in description ? description.programDetails : undefined;
   return (
     <div className="asset-details-description__main">
       <DetailsLimitsAvatar
@@ -28,50 +33,50 @@ const _DetailsDescription: React.FC<Props> = ({
         levelProgress={
           programDetails ? programDetails.levelProgress : undefined
         }
-        title={description.title}
-        color={"color" in description ? description.color : undefined}
+        title={title}
+        color={color}
         totalAvailableInvestment={
           programDetails ? programDetails.totalAvailableInvestment : undefined
         }
-        currency={programDetails && programDetails.currency}
+        currency={currency}
       />
       <DetailsInfo
-        title={description.title}
-        to={
-          "owner" in description
-            ? managerToPathCreator(description.owner.url, description.title)
-            : undefined
-        }
-        username={
-          "owner" in description ? description.owner.username : undefined
-        }
-        socialLinks={
-          "owner" in description ? description.owner.socialLinks : undefined
-        }
-        description={
-          "description" in description ? description.description : undefined
-        }
+        title={title}
+        to={ownerUrl ? managerToPathCreator(ownerUrl, title) : undefined}
+        username={username}
+        socialLinks={socialLinks}
+        description={description}
       >
         {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
       </DetailsInfo>
-      <DetailsSettingsButtons
-        asset={asset}
-        personalDetails={personalDetails}
-        id={description.id}
-        notificationsUrl={notificationsUrl}
-        settingsUrl={settingsUrl}
-      />
+      {programDetails && (
+        <DetailsSettingsButtons
+          asset={asset}
+          personalDetails={programDetails.personalDetails}
+          id={id}
+          notificationsUrl={notificationsUrl}
+          settingsUrl={settingsUrl}
+        />
+      )}
     </div>
   );
 };
 
 interface Props {
+  id: string;
+  logo: string;
+  title: string;
+  color?: string;
+  currency?: CurrencyEnum;
+  ownerUrl?: string;
+  username?: string;
+  socialLinks?: SocialLinkViewModel[];
+  programDetails?: ProgramDetailsFull;
   asset: ASSET;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
-  description: DetailsFullType;
-  personalDetails?: PersonalDetailsType;
+  description?: string;
 }
 
 const DetailsDescription = React.memo(_DetailsDescription);
