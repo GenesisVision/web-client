@@ -46,7 +46,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor
   }: {
     anchor: TAnchor;
-    clearAnchor: (event: TEvent) => void;
+    clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
       canEdit={!!ownAsset}

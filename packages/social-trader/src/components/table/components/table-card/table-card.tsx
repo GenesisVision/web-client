@@ -13,7 +13,7 @@ import {
 } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { SimpleChartPoint } from "gv-api-web";
-import useAnchor, { TAnchor, TEvent } from "hooks/anchor.hook";
+import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
@@ -217,7 +217,7 @@ interface ITableCardTopBlockProps {
   managerUrl?: ToType;
   detailsUrl?: ToType;
   renderActions?: (props: {
-    clearAnchor: (event: TEvent) => void;
+    clearAnchor: VoidFunction;
     anchor: TAnchor;
   }) => JSX.Element;
 }

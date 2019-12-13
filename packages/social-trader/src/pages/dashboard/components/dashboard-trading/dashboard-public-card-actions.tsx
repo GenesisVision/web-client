@@ -77,8 +77,7 @@ const _DashboardPublicCardActions: React.FC<
 interface IDashboardPublicCardActionsProps {
   canEdit: boolean;
   assetType: AssetType;
-  canMakeProgram: boolean;
-  clearAnchor: (event: TEvent) => void;
+  clearAnchor: VoidFunction;
   anchor: TAnchor;
   url: string;
   id: string;
