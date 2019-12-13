@@ -9,7 +9,7 @@ const _DashboardRecommendations: React.FC<Props> = ({ data }) => {
   return (
     <DashboardHorizontalList>
       {data.map(asset => (
-        <FollowCard title={title} follow={asset} />
+        <FollowCard withFollowButton title={title} follow={asset} />
       ))}
     </DashboardHorizontalList>
   );
