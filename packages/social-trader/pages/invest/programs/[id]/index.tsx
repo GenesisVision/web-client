@@ -1,6 +1,4 @@
 import withDefaultLayout from "decorators/with-default-layout";
-import { ProgramDetailsFull } from "gv-api-web";
-import { statisticCurrencyAction } from "pages/programs/program-details/actions/program-details.actions";
 import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
 import {
   dispatchProgramDescription,
@@ -19,14 +17,7 @@ Page.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
-  ]).then(([_, descriptionResult]) => {
-    const description = ((descriptionResult as unknown) as {
-      value: ProgramDetailsFull;
-    }).value;
-    ctx.reduxStore.dispatch(dispatch =>
-      dispatch(statisticCurrencyAction(description.currency))
-    );
-  });
+  ]);
   return {};
 };
 
