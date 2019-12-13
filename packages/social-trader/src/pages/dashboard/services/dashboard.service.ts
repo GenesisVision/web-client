@@ -4,8 +4,8 @@ import {
   CancelablePromise,
   DashboardAssetChart,
   DashboardChartAsset,
-  DashboardRecommendations,
-  InvestmentEventViewModels
+  InvestmentEventViewModels,
+  ItemsViewModelFollowDetailsList
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { NextPageContext } from "next";
@@ -118,8 +118,10 @@ export const getRecommendations = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<DashboardRecommendations> =>
-  dashboardApi.getRecommendations(authService.getAuthArg(), { currency });
+}): CancelablePromise<ItemsViewModelFollowDetailsList> =>
+  dashboardApi
+    .getRecommendations(authService.getAuthArg(), { currency })
+    .then(({ follows }) => follows);
 
 export const getTotal = ({
   currency
