@@ -117,7 +117,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 canCloseAsset={
                   programPersonalDetails &&
                   programPersonalDetails.isOwnAsset &&
-                  programPersonalDetails.ownerActions.canClose
+                  description.ownerActions.canClose
                 }
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
