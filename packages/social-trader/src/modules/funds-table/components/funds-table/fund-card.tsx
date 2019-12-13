@@ -14,7 +14,7 @@ import {
   TableCardActionsItem,
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
-import { FundDetailsList } from "gv-api-web";
+import { FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -115,6 +115,6 @@ const FundCard = React.memo(_FundCard);
 export default FundCard;
 
 interface Props {
-  fund: FundDetailsList;
+  fund: FundDetailsListItem;
   title?: string;
 }

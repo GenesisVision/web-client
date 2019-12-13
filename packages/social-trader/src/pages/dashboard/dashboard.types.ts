@@ -6,9 +6,9 @@ import {
   DashboardSummary,
   DashboardTimeframeProfit,
   DashboardTradingDetails,
-  FollowDetailsList,
+  FollowDetailsListItem,
   InvestmentEventViewModel,
-  ItemsViewModelFollowDetailsList,
+  ItemsViewModelFollowDetailsListItem,
   MoneyLocation
 } from "gv-api-web";
 import { ASSET } from "shared/constants/constants";
@@ -62,8 +62,8 @@ export interface TAsset {
   value: number;
   chart: any;
 }
-export type TDashboardRecommendations = ItemsViewModelFollowDetailsList;
-export type TRecommendation = FollowDetailsList;
+export type TDashboardRecommendations = FollowDetailsListItem[];
+export type TRecommendation = FollowDetailsListItem;
 
 export type TDashboardPortfolio = Array<MoneyLocation>;
 

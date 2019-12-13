@@ -4,7 +4,7 @@ import {
 } from "components/dashboard/dashboard.constants";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "components/table/reducers/table.reducer";
-import { ItemsViewModelProgramDetailsList } from "gv-api-web";
+import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 
 import {
   CLEAR_DASHBOARD_ASSETS_TABLE,
@@ -12,7 +12,7 @@ import {
 } from "../actions/dashboard.actions";
 
 const dashboardProgramsReducer = tableReducerFactory<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >({
   type: DASHBOARD_PROGRAMS,
   paging: DEFAULT_PAGING,

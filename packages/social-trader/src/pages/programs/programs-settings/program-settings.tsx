@@ -63,7 +63,7 @@ const _ProgramSettings: React.FC<Props> = ({
           description.ownerActions.canChangePassword &&
           description.ownerActions.canClose
         }
-        title={description.title}
+        title={description.publicInfo.title}
         id={description.id}
       />
       <CancelChangeBroker
@@ -81,7 +81,7 @@ const _ProgramSettings: React.FC<Props> = ({
         migration={programDetails.personalDetails.migration}
         onSubmit={cancelChangeBroker}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        leverage={programDetails.leverageMax}
+        leverage={description.tradingAccountInfo.leverageMax}
       />
       <ChangeBroker
         condition={
@@ -93,7 +93,7 @@ const _ProgramSettings: React.FC<Props> = ({
         id={description.id}
         brokers={brokersInfo.brokers}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        currentLeverage={programDetails.leverageMax}
+        currentLeverage={description.tradingAccountInfo.leverageMax}
       />
       <InvestmentFees
         asset={ASSET.PROGRAM}
@@ -113,14 +113,14 @@ const _ProgramSettings: React.FC<Props> = ({
         onSubmit={editProgram}
       />
       <InvestmentLimit
-        currency={programDetails.currency}
+        currency={description.tradingAccountInfo.currency}
         investmentLimit={programDetails.availableInvestmentLimit}
         onSubmit={editProgram}
       />
       <AssetEdit
-        title={description.title}
-        logo={{ src: description.logo }}
-        description={description.description}
+        title={description.publicInfo.title}
+        logo={{ src: description.publicInfo.logo }}
+        description={description.publicInfo.description}
         onSubmit={editProgram}
       />
       <SignalingEdit

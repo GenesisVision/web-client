@@ -1,5 +1,5 @@
 import { withBlurLoader } from "decorators/with-blur-loader";
-import { FollowDetailsList } from "gv-api-web";
+import { FollowDetailsListItem } from "gv-api-web";
 import FollowCard from "modules/follows-table/components/follow-card";
 import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
 import React from "react";
@@ -7,7 +7,7 @@ import React from "react";
 const _DashboardFollowThem: React.FC<Props> = ({ data }) => {
   return (
     <DashboardHorizontalList>
-      {data.map((asset: FollowDetailsList) => (
+      {data.map((asset: FollowDetailsListItem) => (
         <FollowCard follow={asset} title={""} />
       ))}
     </DashboardHorizontalList>
@@ -15,7 +15,7 @@ const _DashboardFollowThem: React.FC<Props> = ({ data }) => {
 };
 
 interface Props {
-  data: FollowDetailsList[];
+  data: FollowDetailsListItem[];
 }
 
 const DashboardFollowThem = withBlurLoader(React.memo(_DashboardFollowThem));

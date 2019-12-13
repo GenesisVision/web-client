@@ -10,7 +10,7 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
-import { FundDetailsList } from "gv-api-web";
+import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -123,7 +123,7 @@ const _FundsTableRow: React.FC<Props> = ({
 interface Props {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  fund: FundDetailsList;
+  fund: FundDetailsListItem;
   isAuthenticated?: boolean;
   title?: JSX.Element | string;
 }

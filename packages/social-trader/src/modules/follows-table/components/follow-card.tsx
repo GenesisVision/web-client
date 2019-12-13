@@ -10,7 +10,8 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { FollowDetailsList } from "gv-api-web";
+import { FollowDetailsListItem } from "gv-api-web";
+import FollowButton from "pages/follows/follow-details/follow-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -19,12 +20,7 @@ import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
-interface Props {
-  follow: FollowDetailsList;
-  title: string;
-}
-
-const _FollowCard: React.FC<Props> = ({ follow, title }) => {
+const _FollowCard: React.FC<Props> = ({ follow, title, withFollowButton }) => {
   const {
     tags,
     tradesCount,
@@ -96,9 +92,27 @@ const _FollowCard: React.FC<Props> = ({ follow, title }) => {
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
+      {withFollowButton && (
+        <FollowButton
+          id={follow.id}
+          currency={follow.currency}
+          title={""}
+          isExternal={false}
+          broker={"MetaTrader4"}
+          brokerId={follow.brokerId}
+          hasSignalAccount={true}
+          leverage={follow.leverageMax}
+        />
+      )}
     </TableCard>
   );
 };
+
+interface Props {
+  withFollowButton?: boolean;
+  follow: FollowDetailsListItem;
+  title: string;
+}
 
 const FollowCard = React.memo(_FollowCard);
 export default FollowCard;

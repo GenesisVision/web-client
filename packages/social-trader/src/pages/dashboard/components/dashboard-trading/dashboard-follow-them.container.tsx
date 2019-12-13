@@ -1,4 +1,4 @@
-import { FollowDetailsList } from "gv-api-web";
+import { FollowDetailsListItem } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const _DashboardFollowThemContainer: React.FC<Props> = () => {
   const [t] = useTranslation();
-  const { data } = useApiRequest<FollowDetailsList[]>({
+  const { data } = useApiRequest<FollowDetailsListItem[]>({
     fetchOnMount: true,
     request: getFollowThem
   });

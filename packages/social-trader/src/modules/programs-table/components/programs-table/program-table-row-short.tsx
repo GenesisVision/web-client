@@ -11,7 +11,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { ProgramDetailsList } from "gv-api-web";
+import { ProgramDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -164,7 +164,7 @@ interface IProgramTableRowShortProps {
   withDispatch?: boolean;
   title: string;
   showRating?: boolean;
-  program: ProgramDetailsList;
+  program: ProgramDetailsListItem;
   isAuthenticated?: boolean;
 }
 

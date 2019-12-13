@@ -1,4 +1,4 @@
-import { ItemsViewModelProgramDetailsList } from "gv-api-web";
+import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -9,11 +9,11 @@ import { PROGRAMS } from "../actions/programs-table.actions";
 import programsFavoritesReducer from "./programs-favorites.reducer";
 
 export type ProgramsListState = Readonly<{
-  items: IApiState<ItemsViewModelProgramDetailsList>;
+  items: IApiState<ItemsViewModelProgramDetailsListItem>;
 }>;
 
 export const programsDataSelector = apiSelector<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >(state => {
   return state.programsData.items;
 });

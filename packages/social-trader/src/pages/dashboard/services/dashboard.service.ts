@@ -4,8 +4,8 @@ import {
   CancelablePromise,
   DashboardAssetChart,
   DashboardChartAsset,
-  InvestmentEventViewModels,
-  ItemsViewModelFollowDetailsList
+  FollowDetailsListItem,
+  InvestmentEventViewModels
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { NextPageContext } from "next";

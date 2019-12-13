@@ -1,4 +1,4 @@
-import { ItemsViewModelProgramDetailsList } from "gv-api-web";
+import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -12,21 +12,21 @@ import {
 } from "../actions/programs-rating.actions";
 
 export const allProgramsSelector = apiSelector<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >(state => state.programsRating.programs);
 
 const allProgramsRatingReducer = apiReducerFactory<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >({
   apiType: PROGRAMS_RATING
 });
 
 export const selfProgramsSelector = apiSelector<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >(state => state.programsRating.selfPrograms);
 
 const selfProgramsRatingReducer = apiReducerFactory<
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 >({
   apiType: SELF_PROGRAMS_RATING
 });
@@ -46,8 +46,8 @@ const selfProgramsRatingReducer = apiReducerFactory<
 // });
 
 export type ProgramsRatingState = Readonly<{
-  programs: IApiState<ItemsViewModelProgramDetailsList>;
-  selfPrograms: IApiState<ItemsViewModelProgramDetailsList>;
+  programs: IApiState<ItemsViewModelProgramDetailsListItem>;
+  selfPrograms: IApiState<ItemsViewModelProgramDetailsListItem>;
   // levelupSummary: IApiState<LevelUpSummary>;
 }>;
 

@@ -4,8 +4,8 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import {
   CancelablePromise,
   InvestmentEventViewModels,
-  ItemsViewModelFundDetailsList,
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
 import {
   EVENT_LOCATION,
@@ -66,7 +66,7 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: managerApi.getManagerPrograms(auth, filters)
 });
@@ -74,7 +74,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelFundDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelFundDetailsListItem>> => ({
   type: DASHBOARD_FUNDS,
   payload: managerApi.getManagerFunds(auth, filters)
 });

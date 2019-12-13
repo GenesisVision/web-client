@@ -2,7 +2,7 @@ import {
   mockDate,
   ownerLoaderData
 } from "components/details/details.loader-data";
-import { ProgramDetailsList } from "gv-api-web";
+import { ProgramDetailsListItem } from "gv-api-web";
 import { personalProgramDetailsLoaderData } from "pages/programs/program-details/program-details.loader-data";
 import { getRandomColor, getRandomInteger } from "utils/helpers";
 import { tableLoaderCreator } from "utils/helpers";
@@ -15,7 +15,7 @@ const tagsLoaderDataCreator = () =>
   // ProgramTag[] =>
   tableLoaderCreator(tagLoaderDataCreator);
 
-export const programDetailsLoaderDataCreator = (): ProgramDetailsList => ({
+export const programDetailsLoaderDataCreator = (): ProgramDetailsListItem => ({
   balance: {
     currency: "GVT",
     amount: 100

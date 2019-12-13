@@ -1,6 +1,6 @@
 import {
   CancelablePromise,
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
 import programApi from "services/api-client/programs-api";
 import { ActionType } from "utils/types";
@@ -11,7 +11,7 @@ export const LEVELUP_SUMMARY = "LEVELUP_SUMMARY";
 
 export const fetchProgramsRating = (
   filters: IProgramsGetFilters
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
   type: PROGRAMS_RATING,
   //@ts-ignore
   payload: programApi.getPrograms(filters)
@@ -19,7 +19,7 @@ export const fetchProgramsRating = (
 
 export const fetchSelfProgramsRating = (
   filters: IProgramsGetFilters
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
   type: SELF_PROGRAMS_RATING,
   //@ts-ignore
   payload: programApi.getPrograms(filters)

@@ -22,7 +22,7 @@ export const followIdSelector = apiFieldSelector(
 
 export const followStatusSelector = apiFieldSelector(
   followDescriptionSelector,
-  fieldSelector(state => state.status),
+  fieldSelector(state => state.publicInfo.status),
   undefined
 );
 

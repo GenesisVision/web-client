@@ -2,8 +2,8 @@ import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.h
 import { ITableState } from "components/table/reducers/table.reducer";
 import {
   InvestmentEventViewModels,
-  ItemsViewModelFundDetailsList,
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
 import { combineReducers } from "redux";
 import { IDashboardAssetChart } from "shared/constants/constants";
@@ -30,8 +30,8 @@ export type ManagerDashboardState = {
   assets: ManagerAssetsState;
   assetChart: Nullable<IDashboardAssetChart>;
   eventsData: ManagerPortfolioEventsState;
-  programs: ITableState<ItemsViewModelProgramDetailsList>;
-  funds: ITableState<ItemsViewModelFundDetailsList>;
+  programs: ITableState<ItemsViewModelProgramDetailsListItem>;
+  funds: ITableState<ItemsViewModelFundDetailsListItem>;
   // inRequestsData: ProgramRequestsState;
 };
 

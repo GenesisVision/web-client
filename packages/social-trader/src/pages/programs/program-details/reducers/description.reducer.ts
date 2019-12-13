@@ -20,7 +20,7 @@ export const programIdSelector = apiFieldSelector(
 
 export const programStatusSelector = apiFieldSelector(
   programDescriptionSelector,
-  fieldSelector(state => state.status),
+  fieldSelector(state => state.publicInfo.status),
   undefined
 );
 
