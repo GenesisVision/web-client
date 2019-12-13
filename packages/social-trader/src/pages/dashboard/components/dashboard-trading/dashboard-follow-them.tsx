@@ -8,7 +8,7 @@ const _DashboardFollowThem: React.FC<Props> = ({ data }) => {
   return (
     <DashboardHorizontalList>
       {data.map((asset: FollowDetailsList) => (
-        <FollowCard follow={asset} title={""} />
+        <FollowCard key={asset.id} follow={asset} title={""} />
       ))}
     </DashboardHorizontalList>
   );

@@ -61,10 +61,13 @@ const _DashboardPublicCard: React.FC<Props> = ({
       showTerminal={asset.assetType === ASSET.PROGRAM}
     />
   );
+  const { programDetails } = asset.publicInfo;
   return (
     <TableCard
       hasAvatar
       subTitle={asset.assetTypeExt}
+      level={programDetails ? programDetails.level : undefined}
+      levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}
       color={assetColor}
       logo={assetLogo}
