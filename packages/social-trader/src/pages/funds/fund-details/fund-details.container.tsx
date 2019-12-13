@@ -7,7 +7,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { FundDetailsFull } from "gv-api-web";
+import { FundDetailsFull, PersonalFundDetails } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,9 +86,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         selector={fundEventsTableSelector}
         id={description.id}
         currency={"GVT" as CurrencyEnum}
-        personalDetails={
-          description.personalDetails as InvestmentBlockDetailsType
-        }
+        personalFundDetails={description.personalDetails}
       />
       <FundDetailsStatisticSection />
       <FundDetailsHistorySection id={description.id} />

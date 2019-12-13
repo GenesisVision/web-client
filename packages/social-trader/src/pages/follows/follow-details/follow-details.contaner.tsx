@@ -40,7 +40,7 @@ import {
 } from "./services/follow-details.service";
 
 const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
-  const dispatch = useDispatch();
+  /*const dispatch = useDispatch();
   useEffect(() => {
     dispatch(statisticCurrencyAction(description.currency));
   }, [description]);
@@ -110,7 +110,8 @@ const _FollowDetailsContainer: React.FC<Props> = ({ data: description }) => {
         title={description.title}
       />
     </Page>
-  );
+  );*/
+  return null;
 };
 
 interface Props {

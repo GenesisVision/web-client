@@ -5,6 +5,7 @@ import {
 import useApiRequest from "hooks/api-request.hook";
 import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import { FollowDetailsDataType } from "pages/follows/follow-details/follow-details.types";
+import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -28,7 +29,7 @@ const _FollowControlsContainer: React.FC<Props> = ({ description }) => {
 };
 
 interface Props {
-  description: FollowDetailsDataType;
+  description: ProgramDescriptionDataType;
 }
 
 const FollowControlsContainer = React.memo(_FollowControlsContainer);
