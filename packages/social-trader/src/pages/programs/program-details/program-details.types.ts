@@ -6,6 +6,7 @@ import {
   ProfitChart,
   ProgramBalanceChart,
   ProgramDetailsFull,
+  ProgramFollowDetailsFull,
   ProgramPeriodsViewModel,
   ProgramProfitPercentCharts,
   SignalProviderSubscribers,
@@ -61,7 +62,7 @@ export type ProgramStatisticResult = {
 
 export type ProgramAbsoluteProfitChartDataType = AbsoluteProfitChart;
 export type ProgramProfitChartDataType = ProgramProfitPercentCharts;
-export type ProgramDescriptionDataType = ProgramDetailsFull;
+export type ProgramDescriptionDataType = ProgramFollowDetailsFull;
 export type ProgramBalanceChartDataType = ProgramBalanceChart;
 export type SignalProviderSubscribersDataType = SignalProviderSubscribers;
 export type ProgramPeriodsDataType = ProgramPeriodsViewModel;

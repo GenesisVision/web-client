@@ -3,16 +3,17 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
-import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
+import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   onApply,
   isOwnProgram,
-  programDescription,
+  description,
   levelsParameters
 }) => {
   return (
@@ -22,22 +23,22 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     >
       <InvestmentProgramInfo
         isOwnProgram={isOwnProgram}
-        programDescription={programDescription}
+        description={description}
         levelsParameters={levelsParameters}
         LevelCalculator={LevelCalculator}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
-          title={programDescription.title}
+          title={description.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
-          entryFee={programDescription.entryFeeCurrent}
-          availableToInvest={programDescription.availableInvestmentBase}
-          broker={programDescription.brokerDetails.type}
+          entryFee={description.programDetails.entryFeeCurrent}
+          availableToInvest={description.programDetails.availableInvestmentBase}
+          broker={description.brokerDetails.type}
           type={ASSET.PROGRAM}
-          id={programDescription.id}
-          currency={programDescription.currency}
+          id={description.id}
+          currency={description.programDetails.currency}
         />
       </div>
     </DetailsBlock>
@@ -48,7 +49,7 @@ interface Props {
   onApply?: VoidFunction;
   canCloseAsset: boolean;
   isOwnProgram: boolean;
-  programDescription: ProgramDetailsFull;
+  description: ProgramDescriptionDataType;
   levelsParameters: LevelsParamsInfo;
 }
 

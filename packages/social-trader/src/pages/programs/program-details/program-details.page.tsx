@@ -4,21 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { statisticCurrencyAction } from "./actions/program-details.actions";
 import ProgramDetailsContainer from "./program-details.contaner";
 import { programDescriptionSelector } from "./reducers/description.reducer";
-import {
-  dispatchPlatformLevelsParameters,
-  dispatchProgramDescription
-} from "./service/program-details.service";
+import { dispatchPlatformLevelsParameters } from "./service/program-details.service";
 
 const _ProgramDetailsPage: React.FC = () => {
   const dispatch = useDispatch();
   const description = useSelector(programDescriptionSelector);
   useEffect(() => {
-    dispatch(dispatchProgramDescription());
-  }, []);
-  useEffect(() => {
     if (!description) return;
-    dispatch(dispatchPlatformLevelsParameters(description.currency));
-    dispatch(statisticCurrencyAction(description.currency));
+    const currency = description.programDetails
+      ? description.programDetails.currency
+      : description.followDetails.currency;
+    dispatch(dispatchPlatformLevelsParameters(currency));
+    dispatch(statisticCurrencyAction(currency));
   }, [description]);
   return <ProgramDetailsContainer data={description!} />;
 };

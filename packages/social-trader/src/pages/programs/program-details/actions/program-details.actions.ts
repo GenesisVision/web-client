@@ -6,6 +6,7 @@ import { TStatisticCurrencyAction } from "components/details/reducers/statistic-
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import followApi from "services/api-client/follow-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
@@ -114,6 +115,14 @@ export const fetchProgramDescriptionAction = (
 ): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
   payload: programsApi.getProgramDetails(id, { authorization })
+});
+
+export const fetchFollowProgramDescriptionAction = (
+  id: string,
+  authorization: string
+): ApiAction<ProgramDescriptionDataType> => ({
+  type: FETCH_PROGRAM_DESCRIPTION,
+  payload: followApi.getFollowAssetDetails(id, { authorization })
 });
 
 export const fetchLevelParametersAction = (

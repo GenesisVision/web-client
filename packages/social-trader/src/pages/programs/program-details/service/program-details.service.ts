@@ -19,12 +19,13 @@ import eventsApi from "services/api-client/events-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {
   fetchEventsAction,
   fetchFinancialStatisticAction,
+  fetchFollowProgramDescriptionAction,
   fetchLevelParametersAction,
   fetchOpenPositionsAction,
   fetchPeriodHistoryAction,
@@ -56,26 +57,33 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
 
 export const dispatchProgramDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg()
-) => async (dispatch: Dispatch) =>
-  await dispatch(fetchProgramDescriptionAction(id, auth));
+  auth = authService.getAuthArg(),
+  asset: ASSET = ASSET.PROGRAM
+) => async (dispatch: Dispatch) => {
+  const action =
+    asset === ASSET.FOLLOW
+      ? fetchFollowProgramDescriptionAction
+      : fetchProgramDescriptionAction;
+  await dispatch(action(id, auth));
+};
 
 export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
   programsApi.getProgramDetails(id, {
     authorization: authService.getAuthArg(ctx)
   });
 
-export const dispatchProgramDescription = (ctx?: NextPageContext) => async (
-  dispatch: MiddlewareDispatch,
-  getState: TGetState
-) => {
+export const dispatchProgramDescription = (
+  ctx?: NextPageContext,
+  asset?: ASSET
+) => async (dispatch: MiddlewareDispatch, getState: TGetState) => {
   const {
     programDetails: { id: stateId }
   } = getState();
   return await dispatch(
     dispatchProgramDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx)
+      authService.getAuthArg(ctx),
+      asset
     )
   );
 };
