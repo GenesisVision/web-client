@@ -5,6 +5,7 @@ import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 import { MultiWalletTransaction } from "../../../wallet.types";
 
 const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
+  detailsTitle: "",
   id: "",
   actions: { canResend: false, canCancel: false },
   details: [{ details: "", title: "", url: "", canCopy: false }],
