@@ -11,9 +11,10 @@ const _FollowControls: React.FC<Props> = ({
   onApply,
   data,
   description: {
-    followDetails: { currency, personalDetails, signalSettings },
+    publicInfo: { title },
+    tradingAccountInfo: { currency, leverageMax },
+    followDetails: { personalDetails, signalSettings },
     id,
-    title,
     brokerDetails
   }
 }) => {
@@ -28,7 +29,7 @@ const _FollowControls: React.FC<Props> = ({
         <SignalProviderButtons
           onApply={onApply}
           guestActions={personalDetails.guestActions}
-          leverage={personalDetails ? personalDetails.leverage : 0}
+          leverage={leverageMax}
           isExternal={
             personalDetails &&
             personalDetails.guestActions &&

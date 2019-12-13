@@ -37,23 +37,26 @@ const renderFee = (
 
 const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   isOwnProgram,
-  description,
+  description: {
+    id,
+    tradingAccountInfo: { currency },
+    publicInfo: { title },
+    programDetails: {
+      availableInvestmentBase,
+      availableInvestmentLimit,
+      entryFeeSelected,
+      entryFeeCurrent,
+      successFeeCurrent,
+      successFeeSelected,
+      stopOutLevelCurrent,
+      stopOutLevelSelected
+    }
+  },
   levelsParameters,
   LevelCalculator
 }) => {
   const [t] = useTranslation();
   const isKycConfirmed = useSelector(kycConfirmedSelector);
-  const {
-    availableInvestmentBase,
-    availableInvestmentLimit,
-    currency,
-    entryFeeSelected,
-    entryFeeCurrent,
-    successFeeCurrent,
-    successFeeSelected,
-    stopOutLevelCurrent,
-    stopOutLevelSelected
-  } = description.programDetails;
   const availableInvestment =
     availableInvestmentLimit < availableInvestmentBase &&
     availableInvestmentLimit !== null
@@ -64,9 +67,9 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       {LevelCalculator && isOwnProgram && (
         <div className="statistics-item asset-details-description__level-calculator">
           <LevelCalculator
-            id={description.id}
-            currency={description.programDetails.currency}
-            title={description.title}
+            id={id}
+            currency={currency}
+            title={title}
             levelsParameters={levelsParameters!}
             isKycConfirmed={isKycConfirmed!}
           />

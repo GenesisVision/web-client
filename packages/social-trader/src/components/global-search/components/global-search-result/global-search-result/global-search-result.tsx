@@ -1,7 +1,7 @@
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Surface from "components/surface/surface";
-import { SearchViewModel } from "gv-api-web";
+import { CommonPublicAssetsViewModel } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -49,7 +49,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
 };
 
 interface ITabProps {
-  data: SearchViewModel;
+  data: CommonPublicAssetsViewModel;
   title: string;
   tab: SEARCH_TABS;
 }
@@ -98,7 +98,7 @@ export interface SearchTableProps<T> {
 }
 
 interface Props extends WithTranslation {
-  data: SearchViewModel;
+  data: CommonPublicAssetsViewModel;
   title: string;
 }
 

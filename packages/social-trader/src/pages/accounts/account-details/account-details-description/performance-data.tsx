@@ -7,7 +7,10 @@ import { formatDate } from "shared/utils/dates";
 import { AccountDetailsDataType } from "../account-details.types";
 
 const _PerformanceData: React.FC<Props> = ({
-  description: { leverage, currency, creationDate }
+  description: {
+    publicInfo: { creationDate },
+    tradingAccountInfo: { leverage, currency }
+  }
 }) => {
   const [t] = useTranslation();
   return (

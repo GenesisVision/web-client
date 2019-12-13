@@ -16,6 +16,9 @@ const tagsLoaderDataCreator = () =>
   tableLoaderCreator(tagLoaderDataCreator);
 
 export const programDetailsLoaderDataCreator = (): ProgramDetailsListItem => ({
+  brokerId: "",
+  entryFeeSelected: 0,
+  entryFeeCurrent: 0,
   balance: {
     currency: "GVT",
     amount: 100

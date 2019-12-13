@@ -48,7 +48,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     followDetails,
     publicInfo: { isOwnAsset, title, status, url, logo, color },
     owner: { username, url: ownerUrl, socialLinks },
-    tradingAccountInfo,
+    tradingAccountInfo: { currency, leverageMax, leverageMin },
     tags,
     id,
     brokerDetails,
@@ -58,7 +58,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;
   const assetType = followPersonalDetails ? ASSET.FOLLOW : ASSET.PROGRAM;
-  const currency = tradingAccountInfo.currency;
   const personalDetails = followPersonalDetails || programPersonalDetails;
 
   const handleDispatchDescription = useCallback(() => {
@@ -104,6 +103,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         AssetDetailsExtraBlock={() => <DetailsTags tags={tags} />}
         PerformanceData={() => (
           <PerformanceData
+            leverageMax={leverageMax}
+            leverageMin={leverageMin}
+            currency={currency}
             status={status}
             brokerDetails={brokerDetails}
             loaderData={levelsParamsLoaderData}

@@ -17,7 +17,7 @@ const _AccountSettings: React.FC<Props> = ({ details, closeProgram }) => {
           details.ownerActions.canChangePassword &&
           details.ownerActions.canClose
         }
-        title={details.title}
+        title={details.publicInfo.title}
         id={details.id}
       />
       <CloseAssetBlock
