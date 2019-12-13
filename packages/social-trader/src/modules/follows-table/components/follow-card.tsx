@@ -1,6 +1,7 @@
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
+  TableCardTableButtons,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
 import {
@@ -93,16 +94,18 @@ const _FollowCard: React.FC<Props> = ({ follow, title, withFollowButton }) => {
         </TableCardTableColumn>
       </TableCardTable>
       {withFollowButton && (
-        <FollowButton
-          id={follow.id}
-          currency={follow.currency}
-          title={""}
-          isExternal={false}
-          broker={"MetaTrader4"}
-          brokerId={follow.brokerId}
-          hasSignalAccount={true}
-          leverage={follow.leverageMax}
-        />
+        <TableCardTableButtons>
+          <FollowButton
+            id={follow.id}
+            currency={follow.currency}
+            title={""}
+            isExternal={follow.isExternal}
+            broker={"MetaTrader4"}
+            brokerId={follow.brokerId}
+            hasSignalAccount={true}
+            leverage={follow.leverageMax}
+          />
+        </TableCardTableButtons>
       )}
     </TableCard>
   );
