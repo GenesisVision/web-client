@@ -3,14 +3,16 @@ import {
   FollowDetailsFull,
   FundDetailsFull,
   PrivateTradingAccountFull,
-  ProgramDetailsFull
+  ProgramDetailsFull,
+  ProgramFollowDetailsFull
 } from "gv-api-web";
 import { SetSubmittingType } from "utils/types";
 
 export type AssetDescriptionType = ProgramDetailsFull &
   FundDetailsFull &
   FollowDetailsFull &
-  PrivateTradingAccountFull;
+  PrivateTradingAccountFull &
+  ProgramFollowDetailsFull;
 
 export type TUpdateAssetFunc = (
   values: {
