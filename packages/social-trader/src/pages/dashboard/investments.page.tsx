@@ -21,7 +21,9 @@ const _InvestmentsPage: React.FC = () => {
     <TitleContext.Provider value={title}>
       <Page title={title}>
         <div>
-          <DashboardTotalContainer />
+          <DashboardTotalContainer
+            label={t("dashboard-page.investing.title")}
+          />
         </div>
         <div>
           <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>

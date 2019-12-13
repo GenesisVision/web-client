@@ -29,7 +29,7 @@ const _DashboardPage: React.FC = () => {
     <TitleContext.Provider value={title}>
       <Page title={title}>
         <div>
-          <DashboardTotalContainer />
+          <DashboardTotalContainer label={t("dashboard-page.total.title")} />
         </div>
         {!!requestCount && requestCount > 0 && (
           <div>

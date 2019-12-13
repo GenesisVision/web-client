@@ -5,15 +5,13 @@ import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard
 import DashboardTotal from "pages/dashboard/components/dashboard-total/dashboard-total";
 import { getTotalLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
 import { TDashboardTotal } from "../../dashboard.types";
 import { getTotal } from "../../services/dashboard.service";
 
-const _DashboardTotalContainer: React.FC<Props> = () => {
-  const [t] = useTranslation();
+const _DashboardTotalContainer: React.FC<Props> = ({ label }) => {
   const currency = useSelector(currencySelector);
   const { data } = useApiRequest<TDashboardTotal>({
     fetchOnMount: true,
@@ -21,10 +19,7 @@ const _DashboardTotalContainer: React.FC<Props> = () => {
     request: getTotal
   });
   return (
-    <DashboardBlock
-      label={t("dashboard-page.total.title")}
-      // all={FINANCIAL_STATISTIC_ROUTE}
-    >
+    <DashboardBlock label={label}>
       <DashboardTotal
         currency={currency}
         loaderData={getTotalLoaderData()}
@@ -34,7 +29,9 @@ const _DashboardTotalContainer: React.FC<Props> = () => {
   );
 };
 
-interface Props {}
+interface Props {
+  label: string;
+}
 
 const DashboardTotalContainer = React.memo(_DashboardTotalContainer);
 export default DashboardTotalContainer;
