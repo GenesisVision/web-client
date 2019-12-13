@@ -1,32 +1,24 @@
 import withDefaultLayout from "decorators/with-default-layout";
-import { ProgramDetailsFull } from "gv-api-web";
-import { statisticCurrencyAction } from "pages/follows/follow-details/actions/follow-details.actions";
-import FollowDetailsPage from "pages/follows/follow-details/follow-details.page";
+import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
 import {
-  dispatchFollowDescription,
-  dispatchFollowId
-} from "pages/follows/follow-details/services/follow-details.service";
+  dispatchProgramDescription,
+  dispatchProgramId
+} from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
+import { ASSET } from "shared/constants/constants";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
-  return <FollowDetailsPage />;
+  return <ProgramDetailsPage />;
 };
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
-    ctx.reduxStore.dispatch(dispatchFollowId(id as string)),
-    ctx.reduxStore.dispatch(dispatchFollowDescription(id as string)(ctx))
-  ]).then(([_, descriptionResult]) => {
-    const description = ((descriptionResult as unknown) as {
-      value: ProgramDetailsFull;
-    }).value;
-    ctx.reduxStore.dispatch(dispatch =>
-      dispatch(statisticCurrencyAction(description.currency))
-    );
-  });
+    ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
+    ctx.reduxStore.dispatch(dispatchProgramDescription(ctx, ASSET.FOLLOW))
+  ]);
   return {};
 };
 
