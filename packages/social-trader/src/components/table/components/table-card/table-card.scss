@@ -38,6 +38,11 @@ $card-avatar-size: 80px;
   border-radius: 8px;
   background-color: $row-color;
   flex-grow: 1;
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   &__profit {
     margin-bottom: 8px;
   }

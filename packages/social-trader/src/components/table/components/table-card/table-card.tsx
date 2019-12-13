@@ -62,6 +62,12 @@ export const TableCardTableColumn: React.FC<
   <div className="table-card__table-column">{children}</div>
 ));
 
+export const TableCardTableButtons: React.FC<
+  React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children }) => (
+  <div className="table-card__buttons">{children}</div>
+));
+
 export const TableCardTitle: React.FC<
   { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) =>
