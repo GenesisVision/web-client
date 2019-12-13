@@ -32,6 +32,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        isOwnAsset={true}
         logo={description.brokerDetails.logo}
         title={title}
         id={description.id}

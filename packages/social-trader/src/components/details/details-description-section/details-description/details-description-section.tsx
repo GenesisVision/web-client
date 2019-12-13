@@ -8,6 +8,7 @@ import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  isOwnAsset,
   id,
   title,
   logo,
@@ -28,6 +29,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        isOwnAsset={isOwnAsset}
         id={id}
         title={title}
         logo={logo}
@@ -54,6 +56,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
+  isOwnAsset: boolean;
   id: string;
   logo: string;
   title: string;

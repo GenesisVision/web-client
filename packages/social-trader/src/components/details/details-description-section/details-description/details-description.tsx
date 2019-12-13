@@ -10,6 +10,7 @@ import { CurrencyEnum } from "utils/types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  isOwnAsset,
   id,
   logo,
   title,
@@ -51,6 +52,7 @@ const _DetailsDescription: React.FC<Props> = ({
       </DetailsInfo>
       {programDetails && (
         <DetailsSettingsButtons
+          isOwnAsset={isOwnAsset}
           asset={asset}
           personalDetails={programDetails.personalDetails}
           id={id}
@@ -63,6 +65,7 @@ const _DetailsDescription: React.FC<Props> = ({
 };
 
 interface Props {
+  isOwnAsset: boolean;
   id: string;
   logo: string;
   title: string;
