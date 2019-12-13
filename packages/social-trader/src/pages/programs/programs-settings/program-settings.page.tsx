@@ -6,7 +6,6 @@ import useApiRequest from "hooks/api-request.hook";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
-import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import { programDescriptionSelector } from "pages/programs/program-details/reducers/description.reducer";
 import {
   dispatchProgramDescriptionWithId,
@@ -25,7 +24,6 @@ import {
   changeBrokerMethod,
   redirectToProgram
 } from "./services/program-settings.service";
-import { IProgramSignalFormValues } from "./signaling-edit";
 
 const _ProgramsEditPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,11 +36,6 @@ const _ProgramsEditPage: React.FC = () => {
     [description]
   );
 
-  const { sendRequest: editSignal } = useApiRequest({
-    middleware: [updateDescription],
-    request: programEditSignal,
-    successMessage: "program-edit-signal.success-alert-message"
-  });
   const { sendRequest: changeBroker } = useApiRequest({
     middleware: [updateDescription],
     request: changeBrokerMethod,
@@ -60,16 +53,6 @@ const _ProgramsEditPage: React.FC = () => {
   useEffect(() => {
     description && getProgramBrokers(description.id);
   }, [description]);
-
-  const changeSignaling = useCallback(
-    ({ volumeFee, successFee }: IProgramSignalFormValues) =>
-      editSignal({
-        id: description!.id,
-        successFee: successFee!,
-        volumeFee: volumeFee!
-      }),
-    [description, updateDescription]
-  );
 
   const handleChangeBroker = useCallback(
     (
@@ -100,16 +83,15 @@ const _ProgramsEditPage: React.FC = () => {
       dispatchDescription={updateDescription}
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
+          updateDescription={updateDescription}
           condition={!!description && !!brokersInfo && !!createProgramInfo}
           createProgramInfo={createProgramInfo}
-          closePeriod={updateDescription}
           closeProgram={applyCloseAsset}
-          details={description!}
+          description={description!}
           editProgram={editProgram}
           brokersInfo={brokersInfo!}
           changeBroker={handleChangeBroker}
           loader={<AssetSettingsLoader />}
-          changeSignaling={changeSignaling}
           cancelChangeBroker={handleCancelChangeBroker}
         />
       )}

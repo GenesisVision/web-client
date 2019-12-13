@@ -4,7 +4,7 @@ import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
   BrokersProgramInfo,
   ProgramCreateAssetPlatformInfo,
-  ProgramDetailsFull
+  ProgramFollowDetailsFull
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
@@ -23,45 +23,52 @@ import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
-import { IProgramSignalFormValues } from "./signaling-edit";
+import SignalingEdit from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
+  updateDescription,
   createProgramInfo: { maxSuccessFee, maxEntryFee },
   cancelChangeBroker,
   brokersInfo,
-  details,
+  description,
   changeBroker,
   editProgram,
-  closePeriod,
-  closeProgram,
-  changeSignaling
+  closeProgram
 }) => {
   const [t] = useTranslation();
+  const { programDetails } = description;
+  const signalSuccessFee = description.signalSettings
+    ? description.signalSettings.signalSuccessFee
+    : undefined;
+  const signalVolumeFee = description.signalSettings
+    ? description.signalSettings.signalVolumeFee
+    : undefined;
+  const isSignalProgram = !!description.followDetails;
   return (
     <>
       <TwoFactorConfirm
-        condition={details.personalDetails.showTwoFactorButton}
-        id={details.id}
+        condition={programDetails.personalDetails.showTwoFactorButton}
+        id={description.id}
       />
       <ClosePeriodBlock
-        condition={!!details.personalDetails.ownerActions.canClosePeriod}
-        id={details.id}
-        closePeriod={closePeriod}
+        condition={programDetails.personalDetails.ownerActions.canClosePeriod}
+        id={description.id}
+        closePeriod={updateDescription}
       />
       <ChangePassword
         condition={
-          details.personalDetails.ownerActions.canChangePassword &&
-          details.personalDetails.ownerActions.canClose
+          programDetails.personalDetails.ownerActions.canChangePassword &&
+          programDetails.personalDetails.ownerActions.canClose
         }
-        title={details.title}
-        id={details.id}
+        title={description.title}
+        id={description.id}
       />
       <CancelChangeBroker
-        condition={!!details.personalDetails.migration}
-        isSignalProgram={!!details.signalSettings}
+        condition={!!programDetails.personalDetails.migration}
+        isSignalProgram={isSignalProgram}
         brokerFrom={
           brokersInfo.brokers.find(
             broker =>
@@ -71,55 +78,63 @@ const _ProgramSettings: React.FC<Props> = ({
               )
           )!
         }
-        migration={details.personalDetails.migration}
+        migration={programDetails.personalDetails.migration}
         onSubmit={cancelChangeBroker}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        leverage={details.leverageMax}
+        leverage={programDetails.leverageMax}
       />
       <ChangeBroker
         condition={
-          !!!details.personalDetails.migration && brokersInfo.brokers.length > 1
+          !programDetails.personalDetails.migration &&
+          brokersInfo.brokers.length > 1
         }
-        isSignalProgram={!!details.signalSettings}
+        isSignalProgram={isSignalProgram}
         onSubmit={changeBroker}
-        id={details.id}
+        id={description.id}
         brokers={brokersInfo.brokers}
         currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        currentLeverage={details.leverageMax}
+        currentLeverage={programDetails.leverageMax}
       />
       <InvestmentFees
         asset={ASSET.PROGRAM}
         maxSuccessFee={maxSuccessFee}
         maxEntryFee={maxEntryFee}
-        entryFee={details.entryFeeSelected}
-        successFee={details.successFeeCurrent}
+        entryFee={programDetails.entryFeeSelected}
+        successFee={programDetails.successFeeCurrent}
         onSubmit={editProgram}
       />
       <TradesUpdating
-        condition={!details.signalSettings}
-        tradesDelay={details.tradesDelay}
+        condition={!isSignalProgram}
+        tradesDelay={programDetails.tradesDelay}
         onSubmit={editProgram}
       />
       <StopOutLevel
-        stopOutLevel={details.stopOutLevelCurrent}
+        stopOutLevel={programDetails.stopOutLevelCurrent}
         onSubmit={editProgram}
       />
       <InvestmentLimit
-        currency={details.currency}
-        investmentLimit={details.availableInvestmentLimit}
+        currency={programDetails.currency}
+        investmentLimit={programDetails.availableInvestmentLimit}
         onSubmit={editProgram}
       />
       <AssetEdit
-        title={details.title}
-        logo={{ src: details.logo }}
-        description={details.description}
+        title={description.title}
+        logo={{ src: description.logo }}
+        description={description.description}
         onSubmit={editProgram}
+      />
+      <SignalingEdit
+        id={description.id}
+        isSignalProgram={isSignalProgram}
+        onApply={updateDescription}
+        signalSuccessFee={signalSuccessFee}
+        signalVolumeFee={signalVolumeFee}
       />
       <CloseAssetBlock
         label={t("asset-settings.close-program.title")}
         asset={CLOSEABLE_ASSET.PROGRAM}
-        canCloseAsset={details.personalDetails.ownerActions.canClose}
-        id={details.id}
+        canCloseAsset={programDetails.personalDetails.ownerActions.canClose}
+        id={description.id}
         closeAsset={closeProgram}
       />
     </>
@@ -128,20 +143,16 @@ const _ProgramSettings: React.FC<Props> = ({
 
 interface Props {
   createProgramInfo: ProgramCreateAssetPlatformInfo;
-  details: ProgramDetailsFull;
+  description: ProgramFollowDetailsFull;
   brokersInfo: BrokersProgramInfo;
-  changeSignaling: (
-    values: IProgramSignalFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
-  closePeriod: () => void;
-  closeProgram: () => void;
+  updateDescription: VoidFunction;
+  closeProgram: VoidFunction;
   changeBroker: (
     values: ChangeBrokerFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
   editProgram: TUpdateProgramFunc;
-  cancelChangeBroker: () => void;
+  cancelChangeBroker: VoidFunction;
 }
 
 const ProgramSettings = compose<React.ComponentType<Props & WithLoaderProps>>(
