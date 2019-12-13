@@ -2624,7 +2624,7 @@
       "title": "Trading",
       "follow-them": "Follow them",
       "actions": {
-        "make-signal": "Make signal provider",
+        "make-signal": "Make a signal provider",
         "make-program": "Make program",
         "make-signal-account": "Make signal account",
         "settings": "Open settings",
