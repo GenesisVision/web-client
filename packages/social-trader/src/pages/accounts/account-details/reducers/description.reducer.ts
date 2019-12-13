@@ -22,7 +22,7 @@ export const accountIdSelector = apiFieldSelector(
 
 export const accountStatusSelector = apiFieldSelector(
   accountDescriptionSelector,
-  fieldSelector(state => state.status),
+  fieldSelector(state => state.publicInfo.status),
   undefined
 );
 
