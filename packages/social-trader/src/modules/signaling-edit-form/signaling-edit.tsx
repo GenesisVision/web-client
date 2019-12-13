@@ -1,4 +1,5 @@
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
+import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
 import { FormikProps, withFormik } from "formik";
 import React from "react";
@@ -9,6 +10,7 @@ import { SetSubmittingType } from "utils/types";
 import { SignalValidationSchema } from "./program-signal.validators";
 
 const _SignalingEdit: React.FC<Props> = ({
+  inDialog,
   showFields,
   isValid,
   handleSubmit,
@@ -16,6 +18,11 @@ const _SignalingEdit: React.FC<Props> = ({
   isSubmitting,
   t
 }) => {
+  const renderButton = () => (
+    <GVButton type="submit" disabled={!dirty || isSubmitting || !isValid}>
+      {t("buttons.save")}
+    </GVButton>
+  );
   return (
     <form id="signaling-edit-form" onSubmit={handleSubmit}>
       {showFields && (
@@ -24,9 +31,11 @@ const _SignalingEdit: React.FC<Props> = ({
           successFeeFieldName={FORM_FIELDS.successFee}
         />
       )}
-      <GVButton type="submit" disabled={!dirty || isSubmitting || !isValid}>
-        {t("buttons.save")}
-      </GVButton>
+      {inDialog ? (
+        <DialogButtons>{renderButton()}</DialogButtons>
+      ) : (
+        renderButton()
+      )}
     </form>
   );
 };
@@ -47,6 +56,7 @@ export interface IProgramSignalFormValues {
 }
 
 interface OwnProps {
+  inDialog?: boolean;
   showFields: boolean;
   successFee?: number;
   volumeFee?: number;

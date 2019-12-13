@@ -14,9 +14,13 @@ const _ProgramSignalForm: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <>
-      <DialogTop title={t("Make signal")} subtitle={programName} />
+      <DialogTop
+        title={t("dashboard-page.trading.actions.make-signal")}
+        subtitle={programName}
+      />
       <DialogBottom>
         <SignalingEditFormContainer
+          inDialog
           id={id}
           onApply={onApply}
           successFee={successFee}

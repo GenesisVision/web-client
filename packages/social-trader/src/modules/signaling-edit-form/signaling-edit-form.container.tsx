@@ -6,6 +6,7 @@ import { editSignal } from "modules/signaling-edit-form/signaling-edit-form.serv
 import React, { useCallback } from "react";
 
 const _SignalingEditFormContainer: React.FC<Props> = ({
+  inDialog,
   id,
   onApply = () => {},
   showFields = true,
@@ -21,7 +22,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
     ({ volumeFee, successFee }: IProgramSignalFormValues, setSubmitting) =>
       editSignalRequest(
         {
-          id,
+          assetId: id,
           successFee,
           volumeFee
         },
@@ -31,6 +32,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   );
   return (
     <SignalingEdit
+      inDialog={inDialog}
       showFields={showFields}
       successFee={successFee}
       volumeFee={volumeFee}
@@ -40,6 +42,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  inDialog?: boolean;
   id: string;
   showFields?: boolean;
   successFee?: number;
