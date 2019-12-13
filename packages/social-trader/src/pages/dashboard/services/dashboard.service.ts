@@ -120,7 +120,7 @@ export const getRecommendations = ({
   currency: CurrencyEnum;
 }): CancelablePromise<FollowDetailsListItem[]> =>
   dashboardApi
-    .getRecommendations(authService.getAuthArg(), { currency })
+    .getRecommendations(authService.getAuthArg(), { currency, take: 15 })
     .then(({ follows }) => follows)
     .then(({ items }) => items);
 
