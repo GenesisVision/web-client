@@ -36,7 +36,7 @@ const _FollowModuleContainer: React.FC<Props> = ({
     tradingAccountMinDepositAmountsSelector
   );
   const minDeposit =
-    isExternal || !hasSignalAccount
+    isExternal || hasSignalAccount
       ? 0
       : tradingAccountMinDepositAmounts
           .find(({ serverType }) => serverType === broker)!
