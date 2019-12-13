@@ -23,7 +23,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   onApply,
   id,
   onClose,
-  data: { availableToWithdraw, periodEnds, title },
+  data: { availableToWithdraw, periodEnds, title, isOwner },
   assetCurrency,
   accountCurrency
 }) => {
@@ -66,6 +66,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
+            isOwner={isOwner}
             formValues={formValues}
             rate={rate}
             programCurrency={assetCurrency}
