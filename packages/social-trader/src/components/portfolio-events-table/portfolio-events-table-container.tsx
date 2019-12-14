@@ -9,7 +9,6 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { InvestmentEventViewModel } from "gv-api-web";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React, { useMemo } from "react";
@@ -67,7 +66,6 @@ const _PortfolioEventsTableContainer: React.FC<
             filtering={filtering}
           />
         )}
-        paging={DEFAULT_PAGING}
         columns={columns}
         renderHeader={column => (
           <PortfolioEventsTableHeaderCell column={column} />
