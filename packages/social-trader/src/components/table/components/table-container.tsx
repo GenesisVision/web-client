@@ -1,15 +1,120 @@
 import { updateFilter } from "components/table/helpers/filtering.helpers";
 import * as React from "react";
-import { connect } from "react-redux";
+import { useCallback, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
-import { bindActionCreators, Dispatch } from "redux";
-import { IDataModel } from "shared/constants/constants";
 
-import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, TDefaults, TFilter } from "./filtering/filter.type";
+import { FilteringType, TFilter } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncActionType, TableSelectorType } from "./table.types";
+
+const _TableContainer: React.FC<ITableContainerProps> = props => {
+  const { isFetchOnMount, dataSelector } = props;
+  const tableSelectorData = useSelector(tableDataSelector(props));
+  const {
+    data,
+    isPending,
+    paging,
+    filtering,
+    fetchItems,
+    defaults
+  } = tableSelectorData;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isFetchOnMount) updateItems();
+  }, [isFetchOnMount]);
+
+  const updateItems = useCallback(
+    (changedFilters?: FilteringType) => {
+      dispatch(updateFilters(defaults.type, changedFilters));
+      dispatch(getItems(fetchItems, dataSelector));
+    },
+    [defaults.type, dataSelector]
+  );
+
+  const handleUpdateSorting = useCallback(
+    (sorting: string) => {
+      updateItems({
+        sorting,
+        paging: {
+          ...paging,
+          currentPage: 1
+        }
+      });
+    },
+    [paging]
+  );
+
+  const handleUpdateFilter = useCallback(
+    (filter: TFilter<string>) => {
+      const changedFilters = {
+        filtering: dispatch(updateFilter(filtering, filter)),
+        paging: {
+          ...paging,
+          currentPage: 1
+        }
+      };
+      updateItems(changedFilters);
+    },
+    [filtering, paging]
+  );
+
+  const handleUpdatePaging = useCallback(
+    (nextPageIndex: number) => {
+      const changedFilters = {
+        paging: {
+          ...paging,
+          currentPage: nextPageIndex + 1
+        }
+      };
+      updateItems(changedFilters);
+    },
+    [paging]
+  );
+
+  const newPaging = useMemo(
+    () => ({ ...paging, totalItems: data ? data.total : 0 }),
+    [data, paging]
+  );
+  console.log(paging);
+  return (
+    <>
+      <Table
+        {...props}
+        {...tableSelectorData}
+        updateRow={updateItems}
+        paging={newPaging}
+        items={data.items}
+        isPending={isPending}
+        updateSorting={handleUpdateSorting}
+        updatePaging={handleUpdatePaging}
+        updateFilter={handleUpdateFilter}
+      />
+    </>
+  );
+};
+
+const tableDataSelector = ({
+  dataSelector,
+  getItems
+}: ITableContainerProps) => (state: RootState) => {
+  const {
+    itemsData,
+    filters: { sorting, paging, filtering },
+    defaults
+  } = dataSelector(state);
+  return {
+    data: itemsData.data,
+    isPending: itemsData.isPending,
+    sorting,
+    paging,
+    filtering,
+    fetchItems: getItems,
+    defaults
+  };
+};
 
 interface ITableContainerProps extends ITableProps {
   getItems: GetItemsFuncActionType;
@@ -17,120 +122,5 @@ interface ITableContainerProps extends ITableProps {
   isFetchOnMount: boolean;
 }
 
-interface ITableContainerStateProps {
-  data: IDataModel;
-  isPending: boolean;
-  sorting: string;
-  paging: IPaging;
-  filtering: FilteringType;
-  fetchItems: GetItemsFuncActionType;
-  defaults: TDefaults;
-}
-
-interface ITableContainerDispatchProps {
-  service: {
-    getItems(
-      fetchItems: GetItemsFuncActionType,
-      dataSelector: (opts?: any) => { [keys: string]: any }
-    ): (dispatch: Dispatch, getState: any) => void;
-    updateFilters(
-      filters?: FilteringType,
-      type?: string
-    ): (dispatch: Dispatch) => void;
-  };
-}
-
-class _TableContainer extends React.PureComponent<
-  ITableContainerProps &
-    ITableContainerDispatchProps &
-    ITableContainerStateProps
-> {
-  componentDidMount() {
-    const { isFetchOnMount } = this.props;
-    if (isFetchOnMount) this.updateItems();
-  }
-
-  updateItems = (changedFilters?: FilteringType) => {
-    const { service, dataSelector, fetchItems, defaults } = this.props;
-    service.updateFilters(changedFilters, defaults.type);
-    service.getItems(fetchItems, dataSelector);
-  };
-
-  handleUpdateSorting = (sorting: string) => {
-    this.updateItems({
-      sorting,
-      paging: {
-        ...this.props.paging,
-        currentPage: 1
-      }
-    });
-  };
-
-  handleUpdateFilter = (filter: TFilter<string>) => {
-    let changedFilters = {
-      filtering: updateFilter(this.props.filtering, filter),
-      paging: {
-        ...this.props.paging,
-        currentPage: 1
-      }
-    };
-    this.updateItems(changedFilters);
-  };
-
-  handleUpdatePaging = (nextPageIndex: number) => {
-    let changedFilters = {
-      paging: {
-        ...this.props.paging,
-        currentPage: nextPageIndex + 1
-      }
-    };
-    this.updateItems(changedFilters);
-  };
-
-  render() {
-    const { data, isPending, paging, ...otherProps } = this.props;
-    const newPaging = { ...paging, totalItems: data ? data.total : 0 };
-    return (
-      <Table
-        {...otherProps}
-        updateRow={this.updateItems}
-        paging={newPaging}
-        items={data.items}
-        isPending={isPending}
-        updateSorting={this.handleUpdateSorting}
-        updatePaging={this.handleUpdatePaging}
-        updateFilter={this.handleUpdateFilter}
-      />
-    );
-  }
-}
-
-const mapStateToProps = (
-  state: RootState,
-  props: ITableContainerProps
-): ITableContainerStateProps => {
-  const selector = props.dataSelector(state);
-  const { itemsData, filters, defaults } = selector;
-  const { sorting, paging, filtering } = filters;
-  return {
-    data: itemsData.data,
-    isPending: itemsData.isPending,
-    sorting,
-    paging,
-    filtering,
-    fetchItems: props.getItems,
-    defaults
-  };
-};
-
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): ITableContainerDispatchProps => ({
-  service: bindActionCreators({ getItems, updateFilters }, dispatch)
-});
-
-const TableContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_TableContainer);
+const TableContainer = React.memo(_TableContainer);
 export default TableContainer;
