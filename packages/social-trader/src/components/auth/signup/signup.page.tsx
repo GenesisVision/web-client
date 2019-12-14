@@ -1,12 +1,10 @@
 import "./signup.scss";
 
-import AuthTabs from "components/auth/components/auth-tabs/auth-tabs";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { withTranslation as translate } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
-import { SIGNUP_ROUTE } from "routes/app.routes";
 import { AuthRootState, MiddlewareDispatch } from "utils/types";
 
 import CaptchaContainer from "../captcha-container";
@@ -19,7 +17,6 @@ const _SignUpPage: React.FC<Props> = ({
 }) => {
   return (
     <div className="signup">
-      <AuthTabs authPartUrl={SIGNUP_ROUTE} />
       <CaptchaContainer
         request={service.signUp}
         renderForm={handle => (
