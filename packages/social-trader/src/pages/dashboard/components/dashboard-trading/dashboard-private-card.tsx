@@ -3,6 +3,7 @@ import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
+  TableCardRow,
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
@@ -15,10 +16,13 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
+import TransferButton from "modules/transfer/transfer-button";
+import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import { useContext } from "react";
@@ -138,6 +142,32 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
+      <TableCardRow>
+        {asset.actions.canAddRequestInvest && (
+          <TransferButton
+            label={t("buttons.deposit")}
+            title={t("transfer.deposit-to", { title: asset.accountInfo.title })}
+            currentItem={mapAccountToTransferItemType(asset)}
+            currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
+            sourceType={"Wallet"}
+            destinationType={"PrivateTradingAccount"}
+          />
+        )}
+        {asset.actions.canAddRequestWithdraw && (
+          <TransferButton
+            color={"secondary"}
+            variant={"outlined"}
+            label={t("buttons.withdraw")}
+            title={t("transfer.withdraw-from", {
+              title: asset.accountInfo.title
+            })}
+            currentItem={mapAccountToTransferItemType(asset)}
+            currentItemContainer={TRANSFER_CONTAINER.SOURCE}
+            sourceType={"PrivateTradingAccount"}
+            destinationType={"Wallet"}
+          />
+        )}
+      </TableCardRow>
     </TableCard>
   );
 };
