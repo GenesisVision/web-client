@@ -1,17 +1,20 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import {
-  ITransferFormOwnProps,
-  ITransferFormProps,
-  TRANSFER_FORM_FIELDS,
-  TransferFormValues
-} from "modules/transfer/components/transfer-form";
+import { FormikProps } from "formik";
+import { InternalTransferRequestType } from "gv-api-web";
 import {
   getItem,
   getOtherItems
 } from "modules/transfer/services/transfer.services";
-import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
+import {
+  TRANSFER_CONTAINER,
+  TransferFormItemsType,
+  TransferItemType
+} from "modules/transfer/transfer.types";
+import { WithTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { getRandomWord } from "utils/helpers";
+import { SetSubmittingType } from "utils/types";
 import { lazy, number, object, Schema } from "yup";
 
 export const isAmountAllow = (sourceItems: any[], id: string) => ({
@@ -27,7 +30,7 @@ export const isAmountAllow = (sourceItems: any[], id: string) => ({
 };
 
 export const transferFormValidationSchema = ({
-  sourceItems,
+  data: { sourceItems },
   t
 }: ITransferFormProps) => {
   return lazy(
@@ -51,8 +54,7 @@ export const transferFormValidationSchema = ({
 export const transferFormMapPropsToValues = ({
   destinationType,
   sourceType,
-  sourceItems,
-  destinationItems,
+  data: { sourceItems, destinationItems },
   currentItem,
   currentItemContainer
 }: ITransferFormOwnProps) => {
@@ -80,3 +82,58 @@ export const transferFormMapPropsToValues = ({
 
 export const formatWalletItemValue = (item: WalletItemType) =>
   formatCurrencyValue(item.available, item.currency);
+
+export const getTransferItemLoader = (): TransferItemType => ({
+  available: 0,
+  currency: "ETH",
+  id: "id",
+  logo: "",
+  title: getRandomWord()
+});
+
+export const getTransferFormLoaderData = (
+  currentItem: WalletItemType
+): TransferFormItemsType => {
+  const otherItems = [getTransferItemLoader()];
+  return {
+    destinationItems: [...otherItems, currentItem],
+    sourceItems: [...otherItems, currentItem]
+  };
+};
+
+export enum TRANSFER_FORM_FIELDS {
+  sourceId = "sourceId",
+  sourceType = "sourceType",
+  destinationId = "destinationId",
+  destinationType = "destinationType",
+  amount = "amount",
+  transferAll = "transferAll"
+}
+
+export interface ITransferFormOwnProps {
+  data: TransferFormItemsType;
+  onSubmit: (
+    values: TransferFormValues,
+    setSubmitting: SetSubmittingType
+  ) => void;
+  currentItem: WalletItemType;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
+  errorMessage?: string;
+  title?: string;
+  currentItemContainer?: TRANSFER_CONTAINER;
+}
+
+export interface TransferFormValues {
+  sourceId: string;
+  sourceType: InternalTransferRequestType;
+  destinationId: string;
+  destinationType: InternalTransferRequestType;
+  amount?: number;
+  transferAll: boolean;
+}
+
+export interface ITransferFormProps
+  extends WithTranslation,
+    FormikProps<TransferFormValues>,
+    ITransferFormOwnProps {}

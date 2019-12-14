@@ -11,17 +11,23 @@ import InputAmountField from "components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "components/select/select";
 import StatisticItem from "components/statistic-item/statistic-item";
 import WalletSelect, {
-  ItemsType,
-  WalletItemType
+  ItemsType
 } from "components/wallet-select/wallet-select";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { FormikProps, withFormik } from "formik";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "decorators/with-blur-loader";
+import { withFormik } from "formik";
 import { useGetRate } from "hooks/get-rate.hook";
 import {
   formatWalletItemValue,
   isAmountAllow,
+  ITransferFormOwnProps,
+  ITransferFormProps,
+  TRANSFER_FORM_FIELDS,
   transferFormMapPropsToValues,
-  transferFormValidationSchema
+  transferFormValidationSchema,
+  TransferFormValues
 } from "modules/transfer/components/transfer-form.helpers";
 import {
   getItem,
@@ -29,16 +35,12 @@ import {
   getTransferAll
 } from "modules/transfer/services/transfer.services";
 import React, { useCallback, useEffect } from "react";
-import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
+import { useTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { formatCurrencyValue } from "utils/formatter";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
-import { TRANSFER_CONTAINER } from "../transfer.types";
+import { TransferFormItemsType } from "../transfer.types";
 
 type InternalTransferRequestSourceTypeEnum = any; //TODO declare type
 
@@ -46,8 +48,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
   title,
   sourceType,
   destinationType,
-  sourceItems,
-  destinationItems,
+  data: { sourceItems, destinationItems },
   t,
   handleSubmit,
   values,
@@ -172,44 +173,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
   );
 };
 
-export enum TRANSFER_FORM_FIELDS {
-  sourceId = "sourceId",
-  sourceType = "sourceType",
-  destinationId = "destinationId",
-  destinationType = "destinationType",
-  amount = "amount",
-  transferAll = "transferAll"
-}
-
-export interface ITransferFormOwnProps {
-  onSubmit: (
-    values: TransferFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
-  currentItem: WalletItemType;
-  sourceType: InternalTransferRequestSourceTypeEnum;
-  destinationType: InternalTransferRequestSourceTypeEnum;
-  sourceItems: ItemsType;
-  destinationItems: ItemsType;
-  errorMessage?: string;
-  title?: string;
-  currentItemContainer?: TRANSFER_CONTAINER;
-}
-
-export interface TransferFormValues {
-  sourceId: string;
-  sourceType: InternalTransferRequestSourceTypeEnum;
-  destinationId: string;
-  destinationType: InternalTransferRequestSourceTypeEnum;
-  amount?: number;
-  transferAll: boolean;
-}
-
-export interface ITransferFormProps
-  extends WithTranslation,
-    FormikProps<TransferFormValues>,
-    ITransferFormOwnProps {}
-
 const TransferSelectField: React.FC<{
   name: string;
   label: string;
@@ -242,11 +205,14 @@ const TransferSelectField: React.FC<{
 );
 
 const TransferForm = compose<
-  React.ComponentType<ITransferFormOwnProps & WithLoaderProps>
+  React.ComponentType<
+    ITransferFormOwnProps & WithBlurLoaderProps<TransferFormItemsType>
+  >
 >(
-  withLoader,
+  withBlurLoader,
   translate(),
   withFormik<ITransferFormOwnProps, TransferFormValues>({
+    enableReinitialize: true,
     displayName: "transfer",
     mapPropsToValues: transferFormMapPropsToValues,
     validationSchema: transferFormValidationSchema,
@@ -254,7 +220,7 @@ const TransferForm = compose<
       const { amount, sourceId } = values;
       const transferAll = getTransferAll(
         { amount: amount!, sourceId },
-        props.sourceItems
+        props.data.sourceItems
       );
       props.onSubmit({ ...values, transferAll }, setSubmitting);
     }

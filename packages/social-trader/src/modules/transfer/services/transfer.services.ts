@@ -3,11 +3,10 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import { CancelablePromise, InternalTransferRequest } from "gv-api-web";
+import { TransferFormValues } from "modules/transfer/components/transfer-form.helpers";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
-
-import { TransferFormValues } from "../components/transfer-form";
 
 export const transferRequest = (
   request: Pick<TransferFormValues, keyof InternalTransferRequest>
@@ -35,4 +34,4 @@ export const getOtherItems: getItemsType<WalletItemType> = (items, sourceId) =>
 
 export type getItemType<T> = (items: T[], sourceId: string) => T;
 export const getItem: getItemType<WalletItemType> = (items, currentItemId) =>
-  items.find(({ id }) => id === currentItemId)!;
+  items.find(({ id }) => id === currentItemId) || items[0];

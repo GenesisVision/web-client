@@ -1,18 +1,25 @@
-import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { updateWalletTimestampAction } from "components/wallet/actions/wallet.actions";
 import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "components/wallet/services/wallet.services";
 import { InternalTransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
+import {
+  getTransferFormLoaderData,
+  TransferFormValues
+} from "modules/transfer/components/transfer-form.helpers";
 import { getPrivateAssetsForTransfer } from "pages/dashboard/services/dashboard.service";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
 import { transferRequest } from "../services/transfer.services";
-import { TRANSFER_CONTAINER, TransferItemType } from "../transfer.types";
-import TransferForm, { TransferFormValues } from "./transfer-form";
+import {
+  TRANSFER_CONTAINER,
+  TransferFormItemsType,
+  TransferItemType
+} from "../transfer.types";
+import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<Props> = ({
   onApply,
@@ -23,6 +30,9 @@ const _TransferContainer: React.FC<Props> = ({
   currentItemContainer,
   onClose
 }) => {
+  const [items, setItems] = useState<TransferFormItemsType | undefined>(
+    undefined
+  );
   const {
     sendRequest: getTradingAccounts,
     data: tradingAccounts
@@ -53,16 +63,18 @@ const _TransferContainer: React.FC<Props> = ({
     if (destinationType !== "Wallet" || sourceType !== "Wallet")
       getTradingAccounts();
   }, []);
+  useEffect(() => {
+    if (!!sourceItems && !!destinationItems)
+      setItems({ sourceItems, destinationItems });
+  }, [sourceItems, destinationItems]);
   return (
     <TransferForm
-      condition={!!sourceItems && !!destinationItems}
-      loader={<DialogLoader />}
+      loaderData={getTransferFormLoaderData(currentItem)}
+      data={items!}
       sourceType={sourceType}
       destinationType={destinationType}
       title={title}
       currentItemContainer={currentItemContainer}
-      sourceItems={sourceItems!}
-      destinationItems={destinationItems!}
       currentItem={currentItem}
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
