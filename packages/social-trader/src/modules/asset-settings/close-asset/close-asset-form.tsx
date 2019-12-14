@@ -15,12 +15,21 @@ import { object } from "yup";
 
 const _CloseAssetForm: React.FC<
   InjectedFormikProps<FormProps, ICloseAssetFormValues>
-> = ({ asset, t, onCancel, twoFactorEnabled, handleSubmit, isSubmitting }) => (
+> = ({
+  asset,
+  t,
+  onCancel,
+  twoFactorEnabled,
+  handleSubmit,
+  isSubmitting,
+  assetName
+}) => (
   <form id="closeAssetForm" onSubmit={handleSubmit} noValidate>
     <DialogTop
       title={t(
         `asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
       )}
+      subtitle={assetName}
     />
     <DialogBottom>
       {t(
@@ -73,6 +82,7 @@ enum FIELDS {
 }
 
 interface OwnProps {
+  assetName?: string;
   asset: CLOSEABLE_ASSET;
   onCancel: () => void;
   twoFactorEnabled: boolean;
