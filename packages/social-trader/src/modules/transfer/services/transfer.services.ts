@@ -18,7 +18,7 @@ export const getTransferAll = (
   sourceItems: ItemsType
 ): boolean => {
   const { amount, sourceId } = values;
-  const selectedSourceItem = getSelectedItem(sourceItems, sourceId);
+  const selectedSourceItem = getItem(sourceItems, sourceId);
   const formattedAvailableSourceItem = formatCurrencyValue(
     selectedSourceItem.available,
     selectedSourceItem.currency
@@ -26,14 +26,10 @@ export const getTransferAll = (
   return String(amount) === formattedAvailableSourceItem;
 };
 
-export type getDestinationItemsType<T> = (items: T[], sourceId: string) => T[];
-export const getDestinationItems: getDestinationItemsType<ItemType> = (
-  items,
-  sourceId
-) => items.filter(item => item.id !== sourceId);
+export type getItemsType<T> = (items: T[], sourceId: string) => T[];
+export const getOtherItems: getItemsType<ItemType> = (items, sourceId) =>
+  items.filter(({ id }) => id !== sourceId);
 
-export type getSelectedItemType<T> = (items: T[], sourceId: string) => T;
-export const getSelectedItem: getSelectedItemType<ItemType> = (
-  items,
-  currentItemId
-) => items.find(item => item.id === currentItemId)!;
+export type getItemType<T> = (items: T[], sourceId: string) => T;
+export const getItem: getItemType<ItemType> = (items, currentItemId) =>
+  items.find(({ id }) => id === currentItemId)!;

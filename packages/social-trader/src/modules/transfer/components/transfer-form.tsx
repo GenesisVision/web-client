@@ -17,20 +17,32 @@ import WalletSelect, {
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
 import { useGetRate } from "hooks/get-rate.hook";
+import {
+  formatWalletItemValue,
+  isAmountAllow,
+  transferFormMapPropsToValues,
+  transferFormValidationSchema
+} from "modules/transfer/components/transfer-form.helpers";
+import {
+  getItem,
+  getOtherItems,
+  getTransferAll
+} from "modules/transfer/services/transfer.services";
 import React, { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { NumberFormatValues } from "react-number-format";
+import {
+  useTranslation,
+  WithTranslation,
+  withTranslation as translate
+} from "react-i18next";
 import { compose } from "redux";
-import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { SetSubmittingType } from "utils/types";
-import { lazy, number, object, Schema } from "yup";
+import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import * as service from "../services/transfer.services";
 import { TRANSFER_CONTAINER } from "../transfer.types";
 
 type InternalTransferRequestSourceTypeEnum = any; //TODO declare type
 
-const _TransferForm: React.FC<Props> = ({
+const _TransferForm: React.FC<ITransferFormProps> = ({
   title,
   sourceType,
   destinationType,
@@ -45,62 +57,26 @@ const _TransferForm: React.FC<Props> = ({
   setFieldValue,
   isSubmitting
 }) => {
-  const { rate, getRate } = useGetRate();
-  const onChangeSourceId = useCallback(
-    (event: ISelectChangeEvent) => {
-      const currencyFromNew = event.target.value;
-      if (currencyFromNew === values[FIELDS.destinationId]) {
-        setFieldValue(FIELDS.destinationId, values[FIELDS.sourceId]);
-      }
-      setFieldValue(FIELDS.amount, "");
-      setFieldValue(FIELDS.sourceId, currencyFromNew);
-    },
-    [setFieldValue, values]
-  );
-
-  const onChangeDestinationId = useCallback(
-    (event: ISelectChangeEvent) =>
-      setFieldValue(FIELDS.destinationId, event.target.value),
-    [setFieldValue]
-  );
-
-  const isAllow = useCallback(
-    (inputValues: NumberFormatValues) => {
-      const { floatValue, formattedValue, value } = inputValues;
-      const selectedSourceItem = service.getSelectedItem(
-        sourceItems,
-        values[FIELDS.sourceId]
-      );
-      const { currency, available } = selectedSourceItem;
-      return (
-        formattedValue === "" ||
-        (validateFraction(value, currency) && floatValue <= available)
-      );
-    },
-    [values]
-  );
-
-  const destinationItemWithoutCurrent = service.getDestinationItems(
+  const destinationItemWithoutCurrent = getOtherItems(
     destinationItems,
-    values[FIELDS.sourceId]
+    values[TRANSFER_FORM_FIELDS.sourceId]
   );
-  const selectedSourceItem = service.getSelectedItem(
-    sourceItems,
-    values[FIELDS.sourceId]
-  );
-  const formattedAvailableSourceItem = formatCurrencyValue(
-    selectedSourceItem.available,
-    selectedSourceItem.currency
-  );
-  const selectedDestinationItem = service.getSelectedItem(
+  const selectedDestinationItem = getItem(
     destinationItemWithoutCurrent,
-    values[FIELDS.destinationId]
+    values[TRANSFER_FORM_FIELDS.destinationId]
   );
-  const formattedAvailableDestinationItem = formatCurrencyValue(
-    selectedSourceItem.available,
-    selectedDestinationItem.currency
+  const selectedSourceItem = getItem(
+    sourceItems,
+    values[TRANSFER_FORM_FIELDS.sourceId]
+  );
+  const formattedAvailableSourceItem = formatWalletItemValue(
+    selectedSourceItem
+  );
+  const formattedAvailableDestinationItem = formatWalletItemValue(
+    selectedDestinationItem
   );
 
+  const { rate, getRate } = useGetRate();
   useEffect(() => {
     getRate({
       from: selectedDestinationItem.currency,
@@ -108,12 +84,30 @@ const _TransferForm: React.FC<Props> = ({
     });
   }, [selectedDestinationItem.currency, selectedSourceItem.currency]);
 
-  const setMaxAmount = () => {
-    setFieldValue(FIELDS.amount, formattedAvailableSourceItem);
-  };
+  const setMaxAmount = useCallback(() => {
+    setFieldValue(TRANSFER_FORM_FIELDS.amount, formattedAvailableSourceItem);
+  }, [formattedAvailableSourceItem]);
+  const onChangeSourceId = useCallback(
+    ({ target: { value } }: ISelectChangeEvent) => {
+      const currencyFromNew = value;
+      if (currencyFromNew === values[TRANSFER_FORM_FIELDS.destinationId]) {
+        setFieldValue(
+          TRANSFER_FORM_FIELDS.destinationId,
+          values[TRANSFER_FORM_FIELDS.sourceId]
+        );
+      }
+      setFieldValue(TRANSFER_FORM_FIELDS.amount, "");
+      setFieldValue(TRANSFER_FORM_FIELDS.sourceId, currencyFromNew);
+    },
+    [setFieldValue, values]
+  );
+  const onChangeDestinationId = useCallback(
+    ({ target: { value } }: ISelectChangeEvent) =>
+      setFieldValue(TRANSFER_FORM_FIELDS.destinationId, value),
+    [setFieldValue]
+  );
 
-  const disableButton =
-    isSubmitting || !values[FIELDS.amount] || !isValid || !dirty;
+  const disableButton = isSubmitting || !isValid || !dirty;
 
   return (
     <form
@@ -123,49 +117,41 @@ const _TransferForm: React.FC<Props> = ({
       noValidate
     >
       <DialogTop title={title || t("transfer.title")}>
-        <DialogField>
-          <WalletSelect
-            name={FIELDS.sourceId}
-            label={t("transfer.from")}
-            items={sourceItems}
-            onChange={onChangeSourceId}
-          />
-        </DialogField>
-        <DialogField>
-          <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
-            {`${formattedAvailableSourceItem} ${selectedSourceItem.currency}`}
-          </StatisticItem>
-        </DialogField>
+        <TransferSelectField
+          currency={selectedSourceItem.currency}
+          name={TRANSFER_FORM_FIELDS.sourceId}
+          value={formattedAvailableSourceItem}
+          label={t("transfer.from")}
+          onChange={onChangeSourceId}
+          items={sourceItems}
+          sourceType={sourceType}
+        />
       </DialogTop>
       <DialogBottom>
-        <DialogField>
-          <WalletSelect
-            name={FIELDS.destinationId}
-            label={t("transfer.to")}
-            items={destinationItemWithoutCurrent}
-            onChange={onChangeDestinationId}
-          />
-        </DialogField>
-        <DialogField>
-          <StatisticItem
-            label={t(`transfer.available${destinationType}To`)}
-            big
-          >
-            {`${formattedAvailableDestinationItem} ${selectedDestinationItem.currency}`}
-          </StatisticItem>
-        </DialogField>
+        <TransferSelectField
+          currency={selectedDestinationItem.currency}
+          name={TRANSFER_FORM_FIELDS.destinationId}
+          value={formattedAvailableDestinationItem}
+          label={t("transfer.to")}
+          onChange={onChangeDestinationId}
+          items={destinationItemWithoutCurrent}
+          sourceType={destinationType}
+        />
         <DialogField>
           <InputAmountField
-            name={FIELDS.amount}
+            name={TRANSFER_FORM_FIELDS.amount}
             label={t("transfer.amount")}
             currency={selectedSourceItem.currency}
             setMax={setMaxAmount}
-            isAllow={isAllow}
+            isAllow={isAmountAllow(
+              sourceItems,
+              values[TRANSFER_FORM_FIELDS.sourceId]
+            )}
           />
         </DialogField>
-        {!!values[FIELDS.amount] && (
+        {!!values[TRANSFER_FORM_FIELDS.amount] && (
           <span>{`≈ ${formatCurrencyValue(
-            rate * Number(values[FIELDS.amount]),
+            rate * Number(values[TRANSFER_FORM_FIELDS.amount]),
             selectedDestinationItem.currency
           )} ${selectedDestinationItem.currency}`}</span>
         )}
@@ -186,82 +172,7 @@ const _TransferForm: React.FC<Props> = ({
   );
 };
 
-const TransferForm = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  withLoader,
-  translate(),
-  withFormik<OwnProps, TransferFormValues>({
-    displayName: "transfer",
-    mapPropsToValues: props => {
-      const {
-        destinationType,
-        sourceType,
-        sourceItems,
-        destinationItems,
-        currentItem,
-        currentItemContainer
-      } = props;
-      let sourceId, destinationId;
-      if (currentItemContainer === TRANSFER_CONTAINER.DESTINATION) {
-        destinationId = currentItem.id;
-        const sourceItemWithoutCurrent = service.getDestinationItems(
-          sourceItems,
-          destinationId
-        );
-        sourceId = sourceItemWithoutCurrent[0].id;
-      } else {
-        sourceId = currentItem.id;
-        const destinationItemWithoutCurrent = service.getDestinationItems(
-          destinationItems,
-          sourceId
-        );
-        destinationId = destinationItemWithoutCurrent[0].id;
-      }
-      return {
-        [FIELDS.sourceId]: sourceId,
-        [FIELDS.amount]: undefined,
-        [FIELDS.destinationId]: destinationId,
-        [FIELDS.sourceType]: sourceType,
-        [FIELDS.destinationType]: destinationType,
-        [FIELDS.transferAll]: false
-      };
-    },
-    validationSchema: (props: Props) => {
-      const { sourceItems, t } = props;
-      return lazy(
-        (values: TransferFormValues): Schema<any> => {
-          const selectedSourceItem = service.getSelectedItem(
-            sourceItems,
-            values[FIELDS.sourceId]
-          );
-          return object().shape({
-            [FIELDS.amount]: number()
-              .moreThan(0, t("transfer.validation.amount-is-zero"))
-              .max(
-                +formatCurrencyValue(
-                  selectedSourceItem.available,
-                  selectedSourceItem.currency
-                ),
-                t("transfer.validation.amount-more-than-available")
-              )
-          });
-        }
-      );
-    },
-    handleSubmit: (values, { props, setSubmitting }) => {
-      const { amount, sourceId } = values;
-
-      const transferAll = service.getTransferAll(
-        { amount: amount!, sourceId },
-        props.sourceItems
-      );
-      props.onSubmit({ ...values, transferAll }, setSubmitting);
-    }
-  }),
-  React.memo
-)(_TransferForm);
-export default TransferForm;
-
-enum FIELDS {
+export enum TRANSFER_FORM_FIELDS {
   sourceId = "sourceId",
   sourceType = "sourceType",
   destinationId = "destinationId",
@@ -270,8 +181,11 @@ enum FIELDS {
   transferAll = "transferAll"
 }
 
-interface OwnProps {
-  onSubmit(values: TransferFormValues, setSubmitting: SetSubmittingType): void;
+export interface ITransferFormOwnProps {
+  onSubmit: (
+    values: TransferFormValues,
+    setSubmitting: SetSubmittingType
+  ) => void;
   currentItem: ItemType;
   sourceType: InternalTransferRequestSourceTypeEnum;
   destinationType: InternalTransferRequestSourceTypeEnum;
@@ -291,7 +205,60 @@ export interface TransferFormValues {
   transferAll: boolean;
 }
 
-interface Props
+export interface ITransferFormProps
   extends WithTranslation,
     FormikProps<TransferFormValues>,
-    OwnProps {}
+    ITransferFormOwnProps {}
+
+const TransferSelectField: React.FC<{
+  name: string;
+  label: string;
+  items: ItemsType;
+  onChange: (e: ISelectChangeEvent) => void;
+  sourceType: InternalTransferRequestSourceTypeEnum;
+  value: string;
+  currency: CurrencyEnum;
+}> = React.memo(
+  ({ name, label, items, onChange, sourceType, value, currency }) => {
+    const [t] = useTranslation();
+    return (
+      <>
+        <DialogField>
+          <WalletSelect
+            name={name}
+            label={label}
+            items={items}
+            onChange={onChange}
+          />
+        </DialogField>
+        <DialogField>
+          <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
+            {`${value} ${currency}`}
+          </StatisticItem>
+        </DialogField>
+      </>
+    );
+  }
+);
+
+const TransferForm = compose<
+  React.ComponentType<ITransferFormOwnProps & WithLoaderProps>
+>(
+  withLoader,
+  translate(),
+  withFormik<ITransferFormOwnProps, TransferFormValues>({
+    displayName: "transfer",
+    mapPropsToValues: transferFormMapPropsToValues,
+    validationSchema: transferFormValidationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      const { amount, sourceId } = values;
+      const transferAll = getTransferAll(
+        { amount: amount!, sourceId },
+        props.sourceItems
+      );
+      props.onSubmit({ ...values, transferAll }, setSubmitting);
+    }
+  }),
+  React.memo
+)(_TransferForm);
+export default TransferForm;
