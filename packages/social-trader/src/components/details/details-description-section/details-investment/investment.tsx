@@ -154,7 +154,8 @@ const _Investment: React.FC<Props> = ({
         </StatisticItem>
         {"isReinvest" in personalDetails &&
           personalDetails.isInvested &&
-          personalDetails.canInvest && (
+          personalDetails.canInvest &&
+          !isOwnAsset && (
             <StatisticItem label={"Reinvesting"} hideLabel>
               <ProgramReinvestingContainer
                 id={id}
