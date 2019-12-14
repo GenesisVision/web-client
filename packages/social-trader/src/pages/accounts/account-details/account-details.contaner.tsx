@@ -1,6 +1,7 @@
 import "components/details/details.scss";
 
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
+import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
@@ -40,7 +41,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         asset={ASSET.FOLLOW}
         PerformanceData={() => <PerformanceData description={description} />}
       />
-      <div className="details__divider" />
+      <DetailsDivider />
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
         haveDelay={false}

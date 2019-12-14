@@ -2,6 +2,7 @@ import "components/details/details.scss";
 
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
+import { DetailsDivider } from "components/details/details-divider.block";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
@@ -78,7 +79,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           />
         )}
       />
-      <div className="details__divider" />
+      <DetailsDivider />
       <DetailsInvestment
         fees={{
           exitFee: description.exitFeeCurrent,
