@@ -2635,6 +2635,10 @@
       "title": "In requests"
     },
     "trading": {
+      "asset-types": {
+        "TradingAccount": "Trading account",
+        "ExternalTradingAccount": "External trading account"
+      },
       "subscribers-count": "Subs.",
       "title": "Trading",
       "follow-them": "Follow them",
