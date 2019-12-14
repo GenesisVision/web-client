@@ -1,4 +1,5 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
+import { DialogInfo } from "components/dialog/dialog-info";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -86,7 +87,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
               periodEnds={periodEnds}
             />
           )}
-        <div className="dialog__info">{t("withdraw-program.info")}</div>
+        <DialogInfo>{t("withdraw-program.info")}</DialogInfo>
       </DialogBottom>
     </>
   );

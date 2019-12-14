@@ -1,6 +1,7 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
+import { DialogInfo } from "components/dialog/dialog-info";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -136,7 +137,7 @@ const _FollowParams: React.FC<
           </GVButton>
         </DialogButtons>
         {values[FIELDS.mode] === modes.fixed.value && currency && (
-          <div className="dialog__info">* {t(getInfoText(currency))}</div>
+          <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>
         )}
       </DialogBottom>
     </form>

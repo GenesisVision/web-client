@@ -3,6 +3,7 @@ import "./transfer-form.scss";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
+import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
@@ -179,7 +180,7 @@ const _TransferForm: React.FC<Props> = ({
             {t("buttons.confirm")}
           </GVButton>
         </DialogButtons>
-        <div className="dialog__info">{t("transfer.info")}</div>
+        <DialogInfo>{t("transfer.info")}</DialogInfo>
       </DialogBottom>
     </form>
   );
