@@ -111,19 +111,21 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       renderActions={renderActions}
     >
       <TableCardTable>
-        <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                asset.accountInfo.balance,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              suffix={` ${asset.accountInfo.currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
+        {asset.accountInfo.currency && (
+          <TableCardTableColumn>
+            <StatisticItem label={t("programs-page.programs-header.equity")}>
+              <NumberFormat
+                value={formatValueDifferentDecimalScale(
+                  asset.accountInfo.balance,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
+                suffix={` ${asset.accountInfo.currency}`}
+                displayType="text"
+              />
+            </StatisticItem>
+          </TableCardTableColumn>
+        )}
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.leverage")}>
             <NumberFormat
