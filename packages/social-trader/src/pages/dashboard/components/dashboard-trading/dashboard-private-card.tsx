@@ -36,7 +36,7 @@ import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
-const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
+const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const makeSignalLinkMethod = makeProgramLinkCreator({
@@ -143,29 +143,33 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
         </TableCardTableColumn>
       </TableCardTable>
       <TableCardRow>
-        {asset.actions.canAddRequestInvest && (
-          <TransferButton
-            label={t("buttons.deposit")}
-            title={t("transfer.deposit-to", { title: asset.accountInfo.title })}
-            currentItem={mapAccountToTransferItemType(asset)}
-            currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
-            sourceType={"Wallet"}
-            destinationType={"PrivateTradingAccount"}
-          />
-        )}
-        {asset.actions.canAddRequestWithdraw && (
-          <TransferButton
-            color={"secondary"}
-            variant={"outlined"}
-            label={t("buttons.withdraw")}
-            title={t("transfer.withdraw-from", {
-              title: asset.accountInfo.title
-            })}
-            currentItem={mapAccountToTransferItemType(asset)}
-            currentItemContainer={TRANSFER_CONTAINER.SOURCE}
-            sourceType={"PrivateTradingAccount"}
-            destinationType={"Wallet"}
-          />
+        {asset.actions.canTransferMoney && (
+          <>
+            <TransferButton
+              onApply={updateItems}
+              label={t("buttons.deposit")}
+              title={t("transfer.deposit-to", {
+                title: asset.accountInfo.title
+              })}
+              currentItem={mapAccountToTransferItemType(asset)}
+              currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
+              sourceType={"Wallet"}
+              destinationType={"PrivateTradingAccount"}
+            />
+            <TransferButton
+              onApply={updateItems}
+              color={"secondary"}
+              variant={"outlined"}
+              label={t("buttons.withdraw")}
+              title={t("transfer.withdraw-from", {
+                title: asset.accountInfo.title
+              })}
+              currentItem={mapAccountToTransferItemType(asset)}
+              currentItemContainer={TRANSFER_CONTAINER.SOURCE}
+              sourceType={"PrivateTradingAccount"}
+              destinationType={"Wallet"}
+            />
+          </>
         )}
       </TableCardRow>
     </TableCard>
@@ -173,6 +177,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
 };
 
 interface Props {
+  updateItems: VoidFunction;
   asset: DashboardTradingAsset;
 }
 

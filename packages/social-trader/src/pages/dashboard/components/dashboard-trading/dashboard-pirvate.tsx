@@ -32,9 +32,11 @@ const _DashboardPrivate: React.FC = () => {
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       filtering={DASHBOARD_PUBLIC_FILTERING}
       title={t("dashboard-page.trading.private")}
-      renderBodyCard={(asset: DashboardTradingAsset) => (
-        <DashboardPrivateCard asset={asset} />
-      )}
+      renderBodyCard={(
+        asset: DashboardTradingAsset,
+        updateRow,
+        updateItems
+      ) => <DashboardPrivateCard updateItems={updateItems!} asset={asset} />}
     />
   );
 };
