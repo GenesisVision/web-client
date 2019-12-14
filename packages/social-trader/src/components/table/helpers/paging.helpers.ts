@@ -16,7 +16,7 @@ export const composePagingActionType = (actionType: string): string =>
 
 export const calculateTotalPages = (
   itemsCount: number,
-  itemsOnPage: DEFAULT_PAGING = DEFAULT_PAGING.itemsOnPage
+  itemsOnPage: number = DEFAULT_PAGING.itemsOnPage
 ): number => {
   if (itemsCount === 0) return 0;
   return Math.ceil(itemsCount / itemsOnPage);
