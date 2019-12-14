@@ -4,10 +4,12 @@ import {
   CancelablePromise,
   DashboardAssetChart,
   DashboardChartAsset,
+  DashboardTradingAsset,
   FollowDetailsListItem,
   InvestmentEventViewModels
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
+import { TransferItemType } from "modules/transfer/transfer.types";
 import { NextPageContext } from "next";
 import { getTradingLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import {
@@ -185,3 +187,14 @@ export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
       eventLocation: "Dashboard"
     })
     .then(({ events, total }) => ({ items: events, total }));
+
+export const mapAccountToTransferItemType = ({
+  id,
+  accountInfo: { title, currency, balance }
+}: DashboardTradingAsset): TransferItemType => ({
+  id,
+  title,
+  logo: "",
+  currency: currency || "ETH",
+  available: balance || 0
+});
