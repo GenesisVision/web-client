@@ -27,6 +27,7 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  isOwnAsset,
   fees,
   updateDescription,
   id,
@@ -201,6 +202,7 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
+  isOwnAsset?: boolean;
   fees: FeesType;
   updateDescription: () => void;
   asset: ASSET;

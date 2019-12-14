@@ -133,6 +133,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        isOwnAsset={isOwnAsset}
         fees={{
           successFee: programDetails && programDetails.successFeeCurrent,
           successFeePersonal:

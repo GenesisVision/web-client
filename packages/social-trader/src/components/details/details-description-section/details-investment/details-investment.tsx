@@ -31,6 +31,7 @@ import {
 } from "./details-investment.helpers";
 
 const _DetailsInvestment: React.FC<Props> = ({
+  isOwnAsset,
   fees,
   notice,
   asset,
@@ -99,6 +100,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
         <Investment
+          isOwnAsset={isOwnAsset}
           fees={fees}
           updateDescription={dispatchDescription}
           id={id}
@@ -128,6 +130,7 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface Props {
+  isOwnAsset?: boolean;
   fees: FeesType;
   notice?: string;
   asset: ASSET;
