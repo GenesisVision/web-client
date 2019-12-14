@@ -8,12 +8,14 @@ import {
   getTransferFormLoaderData,
   TransferFormValues
 } from "modules/transfer/components/transfer-form.helpers";
-import { getPrivateAssetsForTransfer } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
-import { transferRequest } from "../services/transfer.services";
+import {
+  fetchTradingAccounts,
+  transferRequest
+} from "../services/transfer.services";
 import {
   TRANSFER_CONTAINER,
   TransferFormItemsType,
@@ -37,7 +39,7 @@ const _TransferContainer: React.FC<Props> = ({
     sendRequest: getTradingAccounts,
     data: tradingAccounts
   } = useApiRequest<TransferItemType[]>({
-    request: getPrivateAssetsForTransfer
+    request: fetchTradingAccounts
   });
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);

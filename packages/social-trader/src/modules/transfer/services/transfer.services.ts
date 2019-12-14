@@ -8,6 +8,11 @@ import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
 
+export const fetchTradingAccounts = () =>
+  walletApi
+    .getAccountsAvailable("ETH", authService.getAuthArg())
+    .then(({ wallets }) => wallets);
+
 export const transferRequest = (
   request: Pick<TransferFormValues, keyof InternalTransferRequest>
 ): CancelablePromise<any> =>
