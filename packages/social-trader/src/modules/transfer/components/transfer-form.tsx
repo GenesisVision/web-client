@@ -12,7 +12,7 @@ import { ISelectChangeEvent } from "components/select/select";
 import StatisticItem from "components/statistic-item/statistic-item";
 import WalletSelect, {
   ItemsType,
-  ItemType
+  WalletItemType
 } from "components/wallet-select/wallet-select";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { FormikProps, withFormik } from "formik";
@@ -57,12 +57,12 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
   setFieldValue,
   isSubmitting
 }) => {
-  const destinationItemWithoutCurrent = getOtherItems(
+  const destinationItemsWithoutCurrent = getOtherItems(
     destinationItems,
     values[TRANSFER_FORM_FIELDS.sourceId]
   );
   const selectedDestinationItem = getItem(
-    destinationItemWithoutCurrent,
+    destinationItemsWithoutCurrent,
     values[TRANSFER_FORM_FIELDS.destinationId]
   );
   const selectedSourceItem = getItem(
@@ -134,7 +134,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
           value={formattedAvailableDestinationItem}
           label={t("transfer.to")}
           onChange={onChangeDestinationId}
-          items={destinationItemWithoutCurrent}
+          items={destinationItemsWithoutCurrent}
           sourceType={destinationType}
         />
         <DialogField>
@@ -186,7 +186,7 @@ export interface ITransferFormOwnProps {
     values: TransferFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
-  currentItem: ItemType;
+  currentItem: WalletItemType;
   sourceType: InternalTransferRequestSourceTypeEnum;
   destinationType: InternalTransferRequestSourceTypeEnum;
   sourceItems: ItemsType;

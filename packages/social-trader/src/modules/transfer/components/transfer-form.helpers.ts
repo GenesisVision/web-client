@@ -1,4 +1,4 @@
-import { ItemType } from "components/wallet-select/wallet-select";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   ITransferFormOwnProps,
   ITransferFormProps,
@@ -78,5 +78,5 @@ export const transferFormMapPropsToValues = ({
   };
 };
 
-export const formatWalletItemValue = (item: ItemType) =>
+export const formatWalletItemValue = (item: WalletItemType) =>
   formatCurrencyValue(item.available, item.currency);

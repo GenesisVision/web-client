@@ -1,4 +1,7 @@
-import { ItemsType, ItemType } from "components/wallet-select/wallet-select";
+import {
+  ItemsType,
+  WalletItemType
+} from "components/wallet-select/wallet-select";
 import { CancelablePromise, InternalTransferRequest } from "gv-api-web";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
@@ -27,9 +30,9 @@ export const getTransferAll = (
 };
 
 export type getItemsType<T> = (items: T[], sourceId: string) => T[];
-export const getOtherItems: getItemsType<ItemType> = (items, sourceId) =>
+export const getOtherItems: getItemsType<WalletItemType> = (items, sourceId) =>
   items.filter(({ id }) => id !== sourceId);
 
 export type getItemType<T> = (items: T[], sourceId: string) => T;
-export const getItem: getItemType<ItemType> = (items, currentItemId) =>
+export const getItem: getItemType<WalletItemType> = (items, currentItemId) =>
   items.find(({ id }) => id === currentItemId)!;
