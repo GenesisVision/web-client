@@ -103,6 +103,7 @@ $card-avatar-size: 80px;
     cursor: pointer;
     padding-right: $padding-xsmall;
 
+    & .icon,
     & .icon svg {
       width: 30px;
       height: 30px;
