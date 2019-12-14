@@ -116,9 +116,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <>
-            {followDetails && (
-              <FollowControlsContainer description={description} />
-            )}
             {programDetails && (
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
@@ -127,6 +124,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
+            )}
+            {followDetails && (
+              <FollowControlsContainer description={description} />
             )}
           </>
         )}
