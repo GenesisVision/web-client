@@ -316,6 +316,8 @@
     }
   },
   "transfer": {
+    "deposit-to": "Deposit to {{title}}",
+    "withdraw-from": "Withdraw from {{title}}",
     "title": "Transfer",
     "availableWalletTo": "Available in Wallet",
     "availableWalletFrom": "Available in Wallet",
