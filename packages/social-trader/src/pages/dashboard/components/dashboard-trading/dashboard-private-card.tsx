@@ -104,6 +104,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   };
   return (
     <TableCard
+      subTitle={t(
+        `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+      )}
       detailsUrl={detailsLink}
       assetId={asset.id}
       profit={asset.statistic.profit}
