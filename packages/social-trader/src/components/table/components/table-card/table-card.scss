@@ -86,6 +86,9 @@ $card-avatar-size: 80px;
   &__name {
     @include link($primary-color);
     transition-property: color;
+  }
+  &__subtitle {
+    color: $label-color;
     font-size: $font-size-common/1.5;
     margin-bottom: 10px;
     display: block;
