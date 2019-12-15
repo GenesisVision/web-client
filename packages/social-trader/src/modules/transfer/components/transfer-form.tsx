@@ -152,7 +152,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         </DialogField>
         {!!values[TRANSFER_FORM_FIELDS.amount] && (
           <span>{`≈ ${formatCurrencyValue(
-            rate * Number(values[TRANSFER_FORM_FIELDS.amount]),
+            Number(values[TRANSFER_FORM_FIELDS.amount]) / rate,
             selectedDestinationItem.currency
           )} ${selectedDestinationItem.currency}`}</span>
         )}

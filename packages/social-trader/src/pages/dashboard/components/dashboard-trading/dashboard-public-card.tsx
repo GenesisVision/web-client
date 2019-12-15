@@ -4,7 +4,7 @@ import TableCard, {
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
 import { DashboardTradingAsset } from "gv-api-web";
-import { TAnchor, TEvent } from "hooks/anchor.hook";
+import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import React, { useContext } from "react";
@@ -49,6 +49,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
+      brokerType={asset.broker && asset.broker.type}
       onApply={updateItems}
       name={asset.publicInfo.title}
       actions={asset.actions}
@@ -58,7 +59,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       id={asset.id}
       url={asset.publicInfo && asset.publicInfo.url}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
-      showTerminal={asset.assetType === ASSET.PROGRAM}
+      showTerminal={asset.assetType !== ASSET.FUND}
     />
   );
   return (

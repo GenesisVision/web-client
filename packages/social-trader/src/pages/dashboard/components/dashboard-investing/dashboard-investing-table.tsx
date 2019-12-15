@@ -1,27 +1,39 @@
-import TableModule from "components/table/components/table-module";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import TableContainer from "components/table/components/table-container";
 import {
-  GetItemsFuncType,
-  RenderBodyItemFuncType
+  RenderBodyItemFuncType,
+  TableSelectorType
 } from "components/table/components/table.types";
-import { DEFAULT_CARD_PAGING } from "components/table/reducers/table-paging.reducer";
 import { LIST_VIEW } from "components/table/table.constants";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import React from "react";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
+import { ApiAction } from "utils/types";
 
 const _DashboardInvestingTable: React.FC<Props> = ({
-  getItems,
+  dataSelector,
+  action,
   title,
   renderBodyCard
 }) => {
+  const showIn = useSelector(currencySelector);
+  const getItems = useCallback(filters => {
+    return action({
+      ...filters,
+      showIn
+    });
+  }, []);
   return (
     <DashboardBlock>
-      <TableModule
+      <TableContainer
+        dataSelector={dataSelector}
+        isFetchOnMount={true}
         title={title}
         loaderData={[]}
         getItems={getItems}
         outerView={LIST_VIEW.CARDS}
         showSwitchView={false}
-        paging={DEFAULT_CARD_PAGING}
         renderBodyCard={renderBodyCard}
       />
     </DashboardBlock>
@@ -29,7 +41,8 @@ const _DashboardInvestingTable: React.FC<Props> = ({
 };
 
 interface Props {
-  getItems: GetItemsFuncType;
+  dataSelector: TableSelectorType;
+  action: (filters?: ComposeFiltersAllType) => ApiAction<any>;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
 }

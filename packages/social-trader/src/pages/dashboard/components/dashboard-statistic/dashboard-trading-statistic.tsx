@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 
-import { getTotalTradingStatistic } from "../../services/dashboard.service";
+import { fetchTradingTotalStatistic } from "../../services/dashboard.service";
 
 const _DashboardTradingStatistic: React.FC<Props> = () => {
   const [t] = useTranslation();
@@ -21,7 +21,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}
       label={t("dashboard-page.statistic.trading")}
-      request={getTotalTradingStatistic}
+      request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
       renderValues={({
         equity,

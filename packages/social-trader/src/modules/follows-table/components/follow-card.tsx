@@ -21,7 +21,12 @@ import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
-const _FollowCard: React.FC<Props> = ({ follow, title, withFollowButton }) => {
+const _FollowCard: React.FC<Props> = ({
+  follow,
+  title,
+  withFollowButton,
+  onApply
+}) => {
   const {
     tags,
     tradesCount,
@@ -96,6 +101,7 @@ const _FollowCard: React.FC<Props> = ({ follow, title, withFollowButton }) => {
       {withFollowButton && (
         <TableCardTableButtons>
           <FollowButton
+            onApply={onApply}
             id={follow.id}
             currency={follow.currency}
             title={""}
@@ -112,6 +118,7 @@ const _FollowCard: React.FC<Props> = ({ follow, title, withFollowButton }) => {
 };
 
 interface Props {
+  onApply?: VoidFunction;
   withFollowButton?: boolean;
   follow: FollowDetailsListItem;
   title: string;
