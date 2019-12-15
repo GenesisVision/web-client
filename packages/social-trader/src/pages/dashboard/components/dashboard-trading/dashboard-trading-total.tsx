@@ -21,8 +21,6 @@ const _DashboardTradingTotal: React.FC<Props> = ({
           value={total}
           currency={currency}
         />
-      </StatisticItemList>
-      <StatisticItemList>
         <DashboardValueItem
           label={t("dashboard-page.statistic.equity")}
           value={equity}
