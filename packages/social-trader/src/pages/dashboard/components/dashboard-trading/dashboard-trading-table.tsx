@@ -2,28 +2,24 @@ import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import {
-  FilteringType,
-  TDefaultFilters
-} from "components/table/components/filtering/filter.type";
+import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
-import TableModule from "components/table/components/table-module";
+import TableContainer from "components/table/components/table-container";
 import {
-  GetItemsFuncType,
+  GetItemsFuncActionType,
   RenderBodyItemFuncType,
+  TableSelectorType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
-import { DEFAULT_CARD_PAGING } from "components/table/reducers/table-paging.reducer";
 import { LIST_VIEW } from "components/table/table.constants";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _DashboardTradingTable: React.FC<Props> = ({
+  dataSelector,
   createButtonToolbar,
-  filtering,
-  defaultFilters,
   getItems,
   title,
   renderBodyCard
@@ -31,16 +27,15 @@ const _DashboardTradingTable: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DashboardBlock>
-      <TableModule
+      <TableContainer
+        isFetchOnMount={true}
+        dataSelector={dataSelector}
         createButtonToolbar={createButtonToolbar}
         title={title}
         loaderData={[]}
         getItems={getItems}
         outerView={LIST_VIEW.CARDS}
         showSwitchView={false}
-        filtering={filtering}
-        defaultFilters={defaultFilters}
-        paging={DEFAULT_CARD_PAGING}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
@@ -60,10 +55,9 @@ const _DashboardTradingTable: React.FC<Props> = ({
 };
 
 interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
   createButtonToolbar?: JSX.Element;
-  getItems: GetItemsFuncType;
-  defaultFilters?: TDefaultFilters;
-  filtering?: FilteringType;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
 }

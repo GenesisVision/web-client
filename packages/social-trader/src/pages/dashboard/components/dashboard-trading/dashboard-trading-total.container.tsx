@@ -1,25 +1,24 @@
 import "./dashboard-trading.scss";
 
-import useApiRequest from "hooks/api-request.hook";
+import { fetchDashboardTradingTotalAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import React from "react";
+import { dashboardTradingTotalSelector } from "pages/dashboard/reducers/dashboard-trading-total.reducer";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
-import { TDashboardTradingStatistic } from "../../dashboard.types";
-import { getTotalTradingStatistic } from "../../services/dashboard.service";
 import DashboardTradingTotal from "./dashboard-trading-total";
 
 const _DashboardTradingTotalContainer: React.FC = () => {
+  const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const { data } = useApiRequest<TDashboardTradingStatistic>({
-    fetchOnMount: true,
-    fetchOnMountData: { currency },
-    request: getTotalTradingStatistic
-  });
+  const data = useSelector(dashboardTradingTotalSelector);
+  useEffect(() => {
+    dispatch(fetchDashboardTradingTotalAction(currency));
+  }, []);
   return (
     <DashboardBlock label={t("dashboard-page.trading.title")}>
       <DashboardTradingTotal

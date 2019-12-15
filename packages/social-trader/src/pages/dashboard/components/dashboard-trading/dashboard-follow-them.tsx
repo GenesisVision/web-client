@@ -4,17 +4,23 @@ import FollowCard from "modules/follows-table/components/follow-card";
 import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
 import React from "react";
 
-const _DashboardFollowThem: React.FC<Props> = ({ data }) => {
+const _DashboardFollowThem: React.FC<Props> = ({ data, onApply }) => {
   return (
     <DashboardHorizontalList>
       {data.map((asset: FollowDetailsListItem) => (
-        <FollowCard withFollowButton follow={asset} title={""} />
+        <FollowCard
+          withFollowButton
+          follow={asset}
+          title={""}
+          onApply={onApply}
+        />
       ))}
     </DashboardHorizontalList>
   );
 };
 
 interface Props {
+  onApply?: VoidFunction;
   data: FollowDetailsListItem[];
 }
 
