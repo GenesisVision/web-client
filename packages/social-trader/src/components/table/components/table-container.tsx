@@ -78,12 +78,12 @@ const _TableContainer: React.FC<ITableContainerProps> = props => {
     () => ({ ...paging, totalItems: data ? data.total : 0 }),
     [data, paging]
   );
-  console.log(paging);
   return (
     <>
       <Table
         {...props}
         {...tableSelectorData}
+        updateItems={updateItems}
         updateRow={updateItems}
         paging={newPaging}
         items={data.items}
