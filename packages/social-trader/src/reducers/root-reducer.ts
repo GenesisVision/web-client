@@ -37,6 +37,9 @@ import programsReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
+import dashboardReducer, {
+  DashboardState
+} from "pages/dashboard/reducers/dashboard.reducers";
 import followDetailsReducer, {
   FollowDetailsState
 } from "pages/follows/follow-details/reducers/follow-details.reducer";
@@ -59,6 +62,7 @@ import profileReducer, { ProfileState } from "reducers/profile-reducer";
 import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
+  dashboard: dashboardReducer,
   profile: profileReducer,
   accountDetails: accountDetailsReducer,
   fundDetails: fundDetailsReducer,
@@ -90,6 +94,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  dashboard: DashboardState;
   profile: ProfileState;
   accountDetails: AccountDetailsState;
   fundDetails: FundDetailsState;
