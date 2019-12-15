@@ -156,7 +156,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               onApply={updateItems}
               label={t("buttons.deposit")}
               title={t("transfer.deposit-to", {
-                title: asset.accountInfo.title
+                title: t(
+                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+                )
               })}
               currentItem={mapAccountToTransferItemType(asset)}
               currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
@@ -169,7 +171,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               variant={"outlined"}
               label={t("buttons.withdraw")}
               title={t("transfer.withdraw-from", {
-                title: asset.accountInfo.title
+                title: t(
+                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+                )
               })}
               currentItem={mapAccountToTransferItemType(asset)}
               currentItemContainer={TRANSFER_CONTAINER.SOURCE}
