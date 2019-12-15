@@ -1,20 +1,33 @@
 import { FundInvestingDetailsList } from "gv-api-web";
+import {
+  fetchDashboardInvestmentsFundsAction,
+  fetchDashboardInvestmentsTotalAction
+} from "pages/dashboard/actions/dashboard.actions";
 import DashboardFundCard from "pages/dashboard/components/dashboard-investing/dashboard-fund-card";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
-import { getInvestingFunds } from "pages/dashboard/services/dashboard.service";
-import React, { useContext } from "react";
+import { dashboardInvestmentsFundsSelector } from "pages/dashboard/reducers/dashboard-investments-funds.reducer";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
 const _DashboardInvestingFunds: React.FC = () => {
+  const dispatch = useDispatch();
+  const currency = useSelector(currencySelector);
   const [t] = useTranslation();
   const title = useContext(TitleContext);
-  const currency = useSelector(currencySelector);
+  const handleUpdateItems = useCallback(
+    updateItems => () => {
+      dispatch(fetchDashboardInvestmentsTotalAction(currency));
+      updateItems();
+    },
+    [currency]
+  );
   return (
     <DashboardInvestingTable
-      getItems={getInvestingFunds(currency)}
+      dataSelector={dashboardInvestmentsFundsSelector}
+      action={fetchDashboardInvestmentsFundsAction}
       title={t("dashboard-page.investing.funds")}
       renderBodyCard={(
         fund: FundInvestingDetailsList,
@@ -22,8 +35,8 @@ const _DashboardInvestingFunds: React.FC = () => {
         updateItems
       ) => (
         <DashboardFundCard
-          updateRow={updateRow}
-          updateItems={updateItems!}
+          updateRow={handleUpdateItems(updateRow)}
+          updateItems={handleUpdateItems(updateItems!)}
           title={title}
           fund={fund}
         />
