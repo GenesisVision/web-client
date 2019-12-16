@@ -29,7 +29,6 @@ export const depositValidationSchema = ({
       availableToInvestInAsset
     );
     return object<IDepositFormValues>().shape({
-      [DEPOSIT_FORM_FIELDS.rate]: number(),
       [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
