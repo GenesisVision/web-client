@@ -1,16 +1,21 @@
 import "./deposit.scss";
 
+import { fundInvest } from "components/deposit/services/fund-deposit.service";
+import { programInvest } from "components/deposit/services/program-deposit.service";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ASSET } from "shared/constants/constants";
-import { CurrencyEnum, ReduxDispatch, SetSubmittingType } from "utils/types";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import { TWalltetsBaseData } from "../../wallet/services/wallet.services";
+import {
+  fetchWallets,
+  TWalltetsBaseData
+} from "../../wallet/services/wallet.services";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TAssetDeposit, TAssetInvestCreatorArgs, TFees } from "./deposit.types";
+import { TAssetDeposit, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
   title,
@@ -27,18 +32,16 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
-  const dispatch = useDispatch<ReduxDispatch>();
+  const dispatch = useDispatch();
+  const updateWalletInfoMiddleware = () => dispatch(fetchWallets(currency));
   const { sendRequest, errorMessage } = useApiRequest({
-    request: (values: TAssetInvestCreatorArgs) => dispatch(assetInvest(values)),
-    middleware: [onApply, onClose]
+    successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
+    request: getRequestMethod(asset),
+    middleware: [onApply, onClose, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (
-      amount: number,
-      currency: CurrencyEnum,
-      setSubmitting: SetSubmittingType,
-      walletId: string
-    ) => sendRequest({ id, amount, currency, walletId }, setSubmitting),
+    (amount: number, setSubmitting: SetSubmittingType, walletId: string) =>
+      sendRequest({ id, amount, walletId }, setSubmitting),
     [id]
   );
 
@@ -66,8 +69,8 @@ const _DepositPopup: React.FC<Props> = ({
   );
 };
 
-const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
-export default DepositPopup;
+const getRequestMethod = (asset: ASSET) =>
+  asset === ASSET.FUND ? fundInvest : programInvest;
 
 interface Props {
   title: string;
@@ -84,3 +87,6 @@ interface Props {
   hasEntryFee?: boolean;
   ownAsset?: boolean;
 }
+
+const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
+export default DepositPopup;

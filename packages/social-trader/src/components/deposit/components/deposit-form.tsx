@@ -166,7 +166,6 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(
         values[DEPOSIT_FORM_FIELDS.amount]!,
-        values[DEPOSIT_FORM_FIELDS.walletCurrency],
         setSubmitting,
         values[DEPOSIT_FORM_FIELDS.walletId]
       );
@@ -196,7 +195,6 @@ export interface IDepositOwnProps {
   errorMessage: string;
   onSubmit: (
     amount: number,
-    currency: CurrencyEnum,
     setSubmitting: SetSubmittingType,
     walletId: string
   ) => void;

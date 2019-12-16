@@ -1,10 +1,7 @@
-import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import { AmountWithCurrency, ProgramMinInvestAmount } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
-import { CurrencyEnum, ReduxDispatch } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import {
   TAssetDeposit,
@@ -29,23 +26,9 @@ export const getFundMinDeposit = (
 export const programInvest: TAssetDeposit = ({
   id,
   amount,
-  currency,
   walletId
-}: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => {
-  return investmentsApi
-    .investIntoProgram(id, authService.getAuthArg(), {
-      walletId,
-      amount
-    })
-    .then(() => {
-      dispatch(
-        alertMessageActions.success(
-          "deposit-asset.program.success-alert-message",
-          true
-        )
-      );
-      // @ts-ignore
-      dispatch(fetchWallets(currency));
-      dispatch(fetchProfileHeaderInfoAction());
-    });
-};
+}: TAssetInvestCreatorArgs) =>
+  investmentsApi.investIntoProgram(id, authService.getAuthArg(), {
+    walletId,
+    amount
+  });

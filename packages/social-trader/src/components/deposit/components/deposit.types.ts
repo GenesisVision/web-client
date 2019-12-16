@@ -1,16 +1,9 @@
 import {
   CancelablePromise,
   FundAssetPlatformInfo,
-  ProgramAssetPlatformInfo,
-  WalletBaseData
+  ProgramAssetPlatformInfo
 } from "gv-api-web";
-import { Dispatch } from "redux";
-import {
-  CurrencyEnum,
-  ReduxDispatch,
-  RootThunk,
-  SetSubmittingType
-} from "utils/types";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 export type TFees = { gvCommission: number; entryFee?: number };
 
@@ -49,8 +42,5 @@ export type TAssetInvestCreatorArgs = {
 
 export type TAssetDeposit = ({
   id,
-  amount,
-  currency
-}: TAssetInvestCreatorArgs) => (
-  dispatch: ReduxDispatch
-) => CancelablePromise<any>;
+  amount
+}: TAssetInvestCreatorArgs) => CancelablePromise<any>;

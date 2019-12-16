@@ -19,23 +19,9 @@ export const getFundInfoCreator: TGetAssetInfoCreator = getFundInfoFn => (
 export const fundInvest: TAssetDeposit = ({
   id,
   amount,
-  currency,
   walletId
-}: TAssetInvestCreatorArgs) => (dispatch: ReduxDispatch) => {
-  return investmentsApi
-    .investIntoFund(id, authService.getAuthArg(), {
-      walletId,
-      amount
-    })
-    .then(() => {
-      dispatch(
-        alertMessageActions.success(
-          "deposit-asset.program.success-alert-message",
-          true
-        )
-      );
-      // @ts-ignore
-      dispatch(fetchWallets(currency));
-      dispatch(fetchProfileHeaderInfoAction());
-    });
-};
+}: TAssetInvestCreatorArgs) =>
+  investmentsApi.investIntoFund(id, authService.getAuthArg(), {
+    walletId,
+    amount
+  });
