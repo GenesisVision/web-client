@@ -15,12 +15,14 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   id,
   onApply = () => {},
   open,
-  onClose
+  onClose,
+  ownAsset
 }) => {
   const fundMinDepositAmounts = useSelector(fundMinDepositAmountSelector);
   const minDeposit = getFundMinDeposit(fundMinDepositAmounts, FUND_CURRENCY);
   return (
     <DepositContainer
+      ownAsset={ownAsset}
       title={title}
       availableToInvest={availableToInvest}
       entryFee={entryFee}
@@ -46,4 +48,5 @@ interface OwnProps {
   availableToInvest?: number;
   id: string;
   onApply?: () => void;
+  ownAsset?: boolean;
 }

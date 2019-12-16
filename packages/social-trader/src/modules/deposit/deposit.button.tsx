@@ -40,6 +40,7 @@ const _DepositButton: React.FC<Props> = ({
       deposit = (
         <FundDepositContainer
           title={title}
+          ownAsset={ownAsset}
           onApply={onApply}
           entryFee={entryFee}
           availableToInvest={availableToInvest}
