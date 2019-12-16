@@ -480,17 +480,18 @@
       }
     },
     "params": {
+      "fixed-currency": "Fixed currency",
       "title": "Trading settings",
       "type": "Type",
       "tolerance-percent": "Tolerance percentage",
       "tolerance-percent-tooltip": "This parameter shows the percentage of the maximum possible deviation of investors opening price from the price at which the managers transaction was opened. Deviation ranges from 0% to 20%. If the price at the time of opening the transaction changes by more than the specified percentage, then the transaction will not open.",
       "volume-percent": "Volume percentage",
-      "usd-equivalent": "USD equivalent",
+      "fixed-currency-equivalent": "{{fixedCurrency}} equivalent",
       "back": "Back",
       "submit": "Subscribe",
       "validation": {
-        "fixedVolume-min": "USD equivalent must be greater than or equal to 0",
-        "fixedVolume-max": "USD equivalent must be less than or equal to 99999",
+        "fixedVolume-min": "{{fixedCurrency}} equivalent must be greater than or equal to 0",
+        "fixedVolume-max": "{{fixedCurrency}} equivalent must be less than or equal to 99999",
         "percent-min": "Percent must be greater than or equal to 1%",
         "percent-max": "Percent must be less than or equal to 999%",
         "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
