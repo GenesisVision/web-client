@@ -120,6 +120,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
         </TableCardTableColumn>
       </TableCardTable>
       <DepositWithdrawButtons
+        availableToInvest={program.availableToInvest}
         title={program.title}
         onApply={updateItems}
         canWithdraw={program.personalDetails.canWithdraw}
