@@ -1,17 +1,33 @@
 import "./convert-fields.scss";
 
+import { CurrencyItem } from "components/currency-item/currency-item";
 import ConvertField from "components/wallet/components/wallet-tables/wallet-transactions/convert-field";
 import { AmountRowCell } from "gv-api-web";
-import AmountItem from "modules/transaction-details/transactions/amount-item";
 import React from "react";
 
 const _WalletConvert: React.FC<{
-  amount: AmountRowCell;
-}> = ({ amount: { first, second } }) => {
+  wallets: AmountRowCell;
+}> = ({ wallets: { first, second } }) => {
   return (
     <ConvertField
-      first={<AmountItem amount={first} />}
-      second={second && <AmountItem amount={second} />}
+      first={
+        <CurrencyItem
+          name={first.currency}
+          logo={first.logo}
+          small
+          clickable={false}
+        />
+      }
+      second={
+        second && (
+          <CurrencyItem
+            name={second.currency}
+            logo={second.logo}
+            small
+            clickable={false}
+          />
+        )
+      }
     />
   );
 };
