@@ -62,6 +62,12 @@ export const TableCardTableColumn: React.FC<
   <div className="table-card__table-column">{children}</div>
 ));
 
+export const TableCardTableButtons: React.FC<
+  React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children }) => (
+  <div className="table-card__buttons">{children}</div>
+));
+
 export const TableCardTitle: React.FC<
   { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) =>
@@ -77,12 +83,16 @@ export const TableCardTitle: React.FC<
 export const TableCardSubTitle: React.FC<
   { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) => {
-  return url ? (
-    <Link className="table-card__name" to={url}>
-      {children}
-    </Link>
-  ) : (
-    <div className="table-card__name">{children}</div>
+  return (
+    <div className="table-card__subtitle">
+      {url ? (
+        <Link className=" table-card__name" to={url}>
+          {children}
+        </Link>
+      ) : (
+        children
+      )}
+    </div>
   );
 });
 

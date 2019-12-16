@@ -29,7 +29,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
-          title={description.title}
+          title={description.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
@@ -38,7 +38,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           broker={description.brokerDetails.type}
           type={ASSET.PROGRAM}
           id={description.id}
-          currency={description.programDetails.currency}
+          currency={description.tradingAccountInfo.currency}
         />
       </div>
     </DetailsBlock>

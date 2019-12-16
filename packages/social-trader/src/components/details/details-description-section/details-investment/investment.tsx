@@ -27,6 +27,7 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  isOwnAsset,
   fees,
   updateDescription,
   id,
@@ -153,7 +154,8 @@ const _Investment: React.FC<Props> = ({
         </StatisticItem>
         {"isReinvest" in personalDetails &&
           personalDetails.isInvested &&
-          personalDetails.canInvest && (
+          personalDetails.canInvest &&
+          !isOwnAsset && (
             <StatisticItem label={"Reinvesting"} hideLabel>
               <ProgramReinvestingContainer
                 id={id}
@@ -201,6 +203,7 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
+  isOwnAsset?: boolean;
   fees: FeesType;
   updateDescription: () => void;
   asset: ASSET;

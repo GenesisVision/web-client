@@ -4,10 +4,13 @@ import {
   CancelablePromise,
   DashboardAssetChart,
   DashboardChartAsset,
-  DashboardRecommendations,
-  InvestmentEventViewModels
+  DashboardTradingAsset,
+  FollowDetailsListItem,
+  InvestmentEventViewModels,
+  ItemsViewModelDashboardTradingAsset
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
+import { TransferItemType } from "modules/transfer/transfer.types";
 import { NextPageContext } from "next";
 import { getTradingLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import {
@@ -31,26 +34,20 @@ import { ActionType, CurrencyEnum } from "utils/types";
 import * as actions from "../actions/dashboard.actions";
 import { fetchEventsAction } from "../actions/dashboard.actions";
 
-export const getInvestingFunds = (showIn: CurrencyEnum) => (
+export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
 ): CancelablePromise<IDataModel> =>
-  dashboardApi.getInvestingFunds(authService.getAuthArg(), {
-    ...filters,
-    showIn
-  });
+  dashboardApi.getInvestingFunds(authService.getAuthArg(), filters);
 
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
 ): CancelablePromise<IDataModel> =>
   dashboardApi.getInvestingPrograms(authService.getAuthArg(), filters);
 
-export const getInvestingMostProfitable = (showIn: CurrencyEnum) => (
+export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
 ): CancelablePromise<IDataModel> =>
-  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), {
-    ...filters,
-    showIn
-  });
+  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), filters);
 
 export const fetchRequests = (take: number = 100) =>
   investmentsApi.getRequests(0, take, authService.getAuthArg());
@@ -86,17 +83,16 @@ export const fetchAssets = (
     .getChartAssets(authService.getAuthArg())
     .then(({ assets }) => assets);
 
-export const getFollowThem = () =>
-  fetchFollows({ facetId: "Top" }).then(({ items }) => items);
+export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<IDataModel> =>
+): CancelablePromise<ItemsViewModelDashboardTradingAsset> =>
   dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), filters);
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<IDataModel> =>
+): CancelablePromise<ItemsViewModelDashboardTradingAsset> =>
   dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
 export const getTradingData = (): CancelablePromise<TTrading> =>
@@ -118,8 +114,11 @@ export const getRecommendations = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<DashboardRecommendations> =>
-  dashboardApi.getRecommendations(authService.getAuthArg(), { currency });
+}): CancelablePromise<FollowDetailsListItem[]> =>
+  dashboardApi
+    .getRecommendations(authService.getAuthArg(), { currency, take: 15 })
+    .then(({ follows }) => follows)
+    .then(({ items }) => items);
 
 export const getTotal = ({
   currency
@@ -128,7 +127,7 @@ export const getTotal = ({
 }): CancelablePromise<TDashboardTotal> =>
   dashboardApi.getSummary(authService.getAuthArg(), { currency });
 
-export const getTotalTradingStatistic = ({
+export const fetchTradingTotalStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
@@ -182,3 +181,14 @@ export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
       eventLocation: "Dashboard"
     })
     .then(({ events, total }) => ({ items: events, total }));
+
+export const mapAccountToTransferItemType = ({
+  id,
+  accountInfo: { title, currency, balance }
+}: DashboardTradingAsset): TransferItemType => ({
+  id,
+  title,
+  logo: "",
+  currency: currency || "ETH",
+  available: balance || 0
+});

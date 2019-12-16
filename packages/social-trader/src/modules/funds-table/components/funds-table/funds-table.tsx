@@ -2,7 +2,7 @@ import "./funds-table.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { FundDetailsList } from "gv-api-web";
+import { FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
 
 import FundCard from "./fund-card";
@@ -13,7 +13,7 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
-  data?: FundDetailsList[];
+  data?: FundDetailsListItem[];
   isAuthenticated: boolean;
 }
 

@@ -179,19 +179,27 @@ const getRandomAsset = () =>
   [ASSET.FUND, ASSET.PROGRAM, ASSET.FOLLOW][getRandomInteger(0, 2)];
 
 export const getRecommendationLoaderData = (): TRecommendation => {
-  const assetType = getRandomAsset();
   return {
-    hasSignalAccount: false,
-    isExternal: false,
-    leverage: getRandomInteger(-10000, 10000),
-    broker: {
-      id: "",
-      logo: "",
-      name: "",
-      type: "MetaTrader4"
+    tags: [],
+    personalDetails: {
+      isOwnAsset: false,
+      isFavorite: false
     },
+    owner: {
+      id: "",
+      username: "",
+      url: ""
+    },
+    status: "",
+    tradesCount: 0,
+    subscribersCount: 0,
+    description: "",
+    creationDate: new Date(),
+    isExternal: false,
+    leverageMax: getRandomInteger(-10000, 10000),
+    leverageMin: getRandomInteger(-10000, 10000),
+    brokerId: "",
     currency: "GVT",
-    assetType,
     statistic: {
       chart: getEquityChartLoaderData(),
       profit: getRandomInteger(-10000, 10000),
@@ -201,10 +209,6 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     logo: "",
     title: getRandomText({ length: 7 }),
     url: "",
-    programDetails: {
-      level: assetType === ASSET.PROGRAM ? getRandomInteger(1, 7) : 0,
-      levelProgress: assetType === ASSET.PROGRAM ? getRandomInteger(1, 100) : 0
-    },
     color: getRandomColor()
   };
 };

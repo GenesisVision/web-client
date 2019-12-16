@@ -3,6 +3,7 @@ import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
+  TableCardRow,
   TableCardTable,
   TableCardTableColumn
 } from "components/table/components/table-card/table-card";
@@ -15,10 +16,13 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
+import TransferButton from "modules/transfer/transfer-button";
+import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import { useContext } from "react";
@@ -32,7 +36,7 @@ import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
-const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
+const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const makeSignalLinkMethod = makeProgramLinkCreator({
@@ -86,6 +90,8 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
         />
       )}
       <CloseAssetButton
+        assetName={asset.accountInfo.title}
+        onApply={updateItems}
         type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
         id={asset.id}
         variant={"text"}
@@ -98,6 +104,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
   };
   return (
     <TableCard
+      subTitle={t(
+        `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+      )}
       detailsUrl={detailsLink}
       assetId={asset.id}
       profit={asset.statistic.profit}
@@ -107,19 +116,21 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
       renderActions={renderActions}
     >
       <TableCardTable>
-        <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                asset.accountInfo.balance,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              suffix={` ${asset.accountInfo.currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
+        {asset.accountInfo.currency && (
+          <TableCardTableColumn>
+            <StatisticItem label={t("programs-page.programs-header.equity")}>
+              <NumberFormat
+                value={formatValueDifferentDecimalScale(
+                  asset.accountInfo.balance,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
+                suffix={` ${asset.accountInfo.currency}`}
+                displayType="text"
+              />
+            </StatisticItem>
+          </TableCardTableColumn>
+        )}
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.leverage")}>
             <NumberFormat
@@ -138,11 +149,46 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset }) => {
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
+      <TableCardRow>
+        {asset.actions.canTransferMoney && (
+          <>
+            <TransferButton
+              onApply={updateItems}
+              label={t("buttons.deposit")}
+              title={t("transfer.deposit-to", {
+                title: t(
+                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+                )
+              })}
+              currentItem={mapAccountToTransferItemType(asset)}
+              currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
+              sourceType={"Wallet"}
+              destinationType={"PrivateTradingAccount"}
+            />
+            <TransferButton
+              onApply={updateItems}
+              color={"secondary"}
+              variant={"outlined"}
+              label={t("buttons.withdraw")}
+              title={t("transfer.withdraw-from", {
+                title: t(
+                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+                )
+              })}
+              currentItem={mapAccountToTransferItemType(asset)}
+              currentItemContainer={TRANSFER_CONTAINER.SOURCE}
+              sourceType={"PrivateTradingAccount"}
+              destinationType={"Wallet"}
+            />
+          </>
+        )}
+      </TableCardRow>
     </TableCard>
   );
 };
 
 interface Props {
+  updateItems: VoidFunction;
   asset: DashboardTradingAsset;
 }
 

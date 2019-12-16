@@ -7,6 +7,7 @@ import { useTranslation } from "shared/i18n";
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
 const _CloseAssetButton: React.FC<Props> = ({
+  assetName,
   variant = "contained",
   canClose = true,
   type,
@@ -26,6 +27,7 @@ const _CloseAssetButton: React.FC<Props> = ({
         {t(`asset-settings.buttons.close-${type.toLowerCase()}`)}
       </GVButton>
       <ConfirmCloseAssetContainer
+        assetName={assetName}
         asset={type}
         open={isOpen}
         onClose={setClose}
@@ -37,6 +39,7 @@ const _CloseAssetButton: React.FC<Props> = ({
 };
 
 interface Props {
+  assetName?: string;
   canClose?: boolean;
   id: string;
   onApply?: () => void;

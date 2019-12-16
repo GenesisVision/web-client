@@ -5,8 +5,8 @@ import { composeFiltersActionType } from "../reducers/table-filters.reducer";
 
 export type TTableAction = ActionType<ComposeFiltersType>;
 export const updateFiltersAction = (
-  payload: ComposeFiltersType,
-  actionType: string
+  actionType: string,
+  payload?: ComposeFiltersType
 ): TTableAction => ({
   type: composeFiltersActionType(actionType),
   payload

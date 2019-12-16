@@ -2,7 +2,7 @@ import "./programs.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { ProgramDetailsList } from "gv-api-web";
+import { ProgramDetailsListItem } from "gv-api-web";
 import * as React from "react";
 
 import ProgramCard from "./program-card";
@@ -17,7 +17,7 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 interface IProgramsTableProps extends ITableProps {
   showRating?: boolean;
   currencies?: string[];
-  data?: ProgramDetailsList[];
+  data?: ProgramDetailsListItem[];
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?: () => void;
@@ -75,7 +75,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           column={column}
         />
       )}
-      renderBodyRow={(program: ProgramDetailsList) => (
+      renderBodyRow={(program: ProgramDetailsListItem) => (
         <ProgramTableRowShort
           withDispatch
           showRating={Boolean(showRating)}
@@ -84,7 +84,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
-      renderBodyCard={(program: ProgramDetailsList) => (
+      renderBodyCard={(program: ProgramDetailsListItem) => (
         <ProgramCard title={title} program={program} />
       )}
     />

@@ -1,7 +1,7 @@
 import "modules/programs-table/components/programs-table/programs.scss";
 
 import { Table } from "components/table/components";
-import { ItemsViewModelFollowDetailsList } from "gv-api-web";
+import { ItemsViewModelFollowDetailsListItem } from "gv-api-web";
 import FollowTableRowShort from "modules/follows-table/components/follow-table-row-short";
 import { FOLLOW_COLUMNS } from "modules/follows-table/components/follows.constants";
 import React from "react";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { SearchTableProps } from "./global-search-result";
 
 const _FollowsTable: React.FC<
-  SearchTableProps<ItemsViewModelFollowDetailsList>
+  SearchTableProps<ItemsViewModelFollowDetailsListItem>
 > = ({ data, title }) => {
   const [t] = useTranslation();
   return (

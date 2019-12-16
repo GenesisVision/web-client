@@ -14,6 +14,7 @@ import {
 import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
+  assetName,
   asset,
   open,
   onClose,
@@ -38,6 +39,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
       <CloseAssetForm
+        assetName={assetName}
         asset={asset}
         onSubmit={handleSubmit}
         onCancel={onClose}
@@ -60,6 +62,7 @@ const getMethod = (asset: CLOSEABLE_ASSET) => {
 };
 
 interface Props {
+  assetName?: string;
   asset: CLOSEABLE_ASSET;
   open: boolean;
   onClose: () => void;

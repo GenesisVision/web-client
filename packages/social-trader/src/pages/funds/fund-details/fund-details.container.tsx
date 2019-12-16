@@ -2,12 +2,12 @@ import "components/details/details.scss";
 
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
-import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
+import { DetailsDivider } from "components/details/details-divider.block";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { FundDetailsFull, PersonalFundDetails } from "gv-api-web";
+import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,9 +37,16 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={description.title}>
       <DetailsDescriptionSection
+        isOwnAsset={description.personalDetails.isOwnAsset}
+        id={description.id}
+        title={description.title}
+        logo={description.logo}
+        color={description.color}
+        ownerUrl={description.owner.url}
+        socialLinks={description.owner.socialLinks}
+        username={description.owner.username}
         asset={ASSET.FUND}
-        personalDetails={description.personalDetails}
-        description={description}
+        description={description.description}
         notificationsUrl={createFundNotificationsToUrl(
           description.url,
           description.title
@@ -72,7 +79,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           />
         )}
       />
-      <div className="details__divider" />
+      <DetailsDivider />
       <DetailsInvestment
         fees={{
           exitFee: description.exitFeeCurrent,

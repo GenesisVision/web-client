@@ -1,6 +1,6 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
-import { ProgramDetailsFull } from "gv-api-web";
+import { PrivateTradingAccountFull } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import AccountDetailsPage from "pages/accounts/account-details/account-details.page";
 import { statisticCurrencyAction } from "pages/accounts/account-details/actions/account-details.actions";
@@ -28,10 +28,10 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchAccountDescription(id as string)(ctx))
   ]).then(([_, descriptionResult]) => {
     const description = ((descriptionResult as unknown) as {
-      value: ProgramDetailsFull;
+      value: PrivateTradingAccountFull;
     }).value;
     const statisticCurrency =
-      description.currency || currency || cookiesCurrency;
+      description.tradingAccountInfo.currency || currency || cookiesCurrency;
     ctx.reduxStore.dispatch(dispatch =>
       dispatch(statisticCurrencyAction(statisticCurrency))
     );

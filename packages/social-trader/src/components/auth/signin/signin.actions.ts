@@ -26,16 +26,7 @@ export const storeTwoFactorAction = ({
   }
 });
 
-export const loginUserManagerAction = (
-  loginData: LoginViewModel
-): ApiAction<string> => ({
-  type: LOGIN,
-  payload: authApi.authorize({
-    model: loginData
-  })
-});
-
-export const loginUserInvestorAction = (
+export const loginUserAction = (
   loginData: LoginViewModel
 ): ApiAction<string> => ({
   type: LOGIN,

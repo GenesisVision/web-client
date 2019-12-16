@@ -7,8 +7,7 @@ export const changePasswordTradingAccount = ({
 }: {
   id: string;
   model?: any;
-}) => {
+}) =>
   assetsApi.changeTradingAccountPassword(id, authService.getAuthArg(), {
     model
   });
-};

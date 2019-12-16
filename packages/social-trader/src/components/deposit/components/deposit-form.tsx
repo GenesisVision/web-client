@@ -1,6 +1,7 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
+import { DialogInfo } from "components/dialog/dialog-info";
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/input-amount-field";
@@ -138,9 +139,7 @@ const _DepositForm: React.FC<
           </GVButton>
         </DialogButtons>
         {asset === ASSET.FUND && (
-          <div className="dialog__info">
-            {t("deposit-asset.fund.disclaimer")}
-          </div>
+          <DialogInfo>{t("deposit-asset.fund.disclaimer")}</DialogInfo>
         )}
       </DialogBottom>
     </form>

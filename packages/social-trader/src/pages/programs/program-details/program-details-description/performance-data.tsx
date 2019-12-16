@@ -14,8 +14,12 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import filesService from "services/file-service";
 import { STATUS } from "shared/constants/constants";
+import { CurrencyEnum } from "utils/types";
 
 const _PerformanceData: React.FC<Props> = ({
+  leverageMin,
+  leverageMax,
+  currency,
   programDetails,
   brokerDetails,
   status,
@@ -30,20 +34,16 @@ const _PerformanceData: React.FC<Props> = ({
           src={filesService.getFileUrl(brokerDetails.logo)}
         />
       </StatisticItem>
+      {currency && (
+        <StatisticItem label={t("program-details-page.description.currency")}>
+          {currency}
+        </StatisticItem>
+      )}
+      <StatisticItem label={t("program-details-page.description.leverage")}>
+        <Leverage min={leverageMin} max={leverageMax} />
+      </StatisticItem>
       {programDetails && (
         <>
-          <StatisticItem label={t("program-details-page.description.currency")}>
-            {programDetails.currency}
-          </StatisticItem>
-          <StatisticItem label={t("program-details-page.description.leverage")}>
-            <Leverage
-              min={programDetails.leverageMin}
-              max={programDetails.leverageMax}
-            />
-          </StatisticItem>
-          <StatisticItem label={t("program-details-page.description.currency")}>
-            {programDetails.currency}
-          </StatisticItem>
           <StatisticItem label={t("program-details-page.description.period")}>
             <ProgramPeriodPie
               condition={status !== STATUS.CLOSED}
@@ -112,6 +112,9 @@ const _PerformanceData: React.FC<Props> = ({
 };
 
 interface Props {
+  leverageMin: number;
+  leverageMax: number;
+  currency?: CurrencyEnum;
   data: LevelsParamsInfo;
   status: string;
   brokerDetails: BrokerDetails;

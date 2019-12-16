@@ -49,10 +49,10 @@ export const composeRequestFiltersByTableState = (
   return requestFilters;
 };
 
-export const updateFilters = (filters: FilteringType, type: string) => (
+export const updateFilters = (type: string, filters?: FilteringType) => (
   dispatch: Dispatch
 ) => {
-  dispatch(updateFiltersActionCreator(filters, type));
+  dispatch(updateFiltersActionCreator(type, filters));
 };
 
 export const updateFiltersDispatch = (
@@ -60,7 +60,7 @@ export const updateFiltersDispatch = (
   type: string,
   dispatch: Dispatch
 ) => {
-  updateFilters(filters, type)(dispatch);
+  updateFilters(type, filters)(dispatch);
 };
 
 export const getItems = (

@@ -27,7 +27,6 @@
     flex-direction: column;
     width: 100%;
     max-width: 340px;
-    min-height: 560px;
     background-color: $panel-background-color;
     border-radius: $border-radius;
   }
@@ -103,7 +102,6 @@
     }
     &__right {
       min-width: 460px;
-      min-height: 600px;
     }
     &__logo {
       display: flex;
@@ -154,7 +152,6 @@
       flex-direction: column;
       box-sizing: border-box;
       min-width: 476px;
-      min-height: 700px;
     }
     &__content {
       padding: $padding-large $padding-large $padding-big;

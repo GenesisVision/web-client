@@ -1,5 +1,5 @@
 import Dialog from "components/dialog/dialog";
-import { ItemType } from "components/wallet-select/wallet-select";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { InternalTransferRequestType } from "gv-api-web";
 import * as React from "react";
 
@@ -7,6 +7,7 @@ import TransferContainer from "./components/transfer-container";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
 
 const _TransferPopup: React.FC<Props> = ({
+  onApply,
   title,
   currentItemContainer = TRANSFER_CONTAINER.SOURCE,
   sourceType = TRANSFER_DIRECTION.WALLET,
@@ -17,6 +18,7 @@ const _TransferPopup: React.FC<Props> = ({
 }) => (
   <Dialog open={open} onClose={onClose}>
     <TransferContainer
+      onApply={onApply}
       title={title}
       currentItemContainer={currentItemContainer}
       currentItem={currentItem}
@@ -28,8 +30,9 @@ const _TransferPopup: React.FC<Props> = ({
 );
 
 interface Props {
-  currentItem: ItemType;
-  onClose(): void;
+  onApply?: VoidFunction;
+  currentItem: WalletItemType;
+  onClose: () => void;
   open: boolean;
   sourceType?: InternalTransferRequestType;
   destinationType?: InternalTransferRequestType;

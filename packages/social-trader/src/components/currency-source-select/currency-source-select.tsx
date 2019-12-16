@@ -31,8 +31,8 @@ const _CurrencySourceSelect: React.FC<Props> = ({
   </GVFormikField>
 );
 
-export type ItemsType = Array<ItemType>;
-export interface ItemType {
+export type ItemsType = Array<CurrencySourceSelectItemType>;
+export interface CurrencySourceSelectItemType {
   id: string;
   currency: CurrencyEnum;
   logo?: string;

@@ -30,7 +30,7 @@ Page.getInitialProps = async ctx => {
   let broker;
   let accountCurrency;
   await fetchFollowDescriptionCtx(id as string, ctx).then(
-    ({ brokerDetails, followDetails: { currency } }) => {
+    ({ brokerDetails, tradingAccountInfo: { currency } }) => {
       broker = brokerDetails.type;
       accountCurrency = currency;
     }

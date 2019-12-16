@@ -11,7 +11,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { ProgramDetailsList } from "gv-api-web";
+import { ProgramDetailsListItem } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
@@ -22,7 +22,7 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {
-  program: ProgramDetailsList;
+  program: ProgramDetailsListItem;
   title: string;
 }
 

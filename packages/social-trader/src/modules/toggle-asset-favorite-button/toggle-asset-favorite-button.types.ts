@@ -1,12 +1,12 @@
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import {
-  FollowDetailsList,
-  FundDetailsList,
+  FollowDetailsListItem,
+  FundDetailsListItem,
   FundInvestingDetailsList,
-  ItemsViewModelFollowDetailsList,
-  ItemsViewModelFundDetailsList,
-  ItemsViewModelProgramDetailsList,
-  ProgramDetailsList,
+  ItemsViewModelFollowDetailsListItem,
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem,
+  ProgramDetailsListItem,
   ProgramInvestingDetailsList
 } from "gv-api-web";
 import CancelablePromise from "gv-api-web/dist/cancelable-promise/CancelablePromise";
@@ -28,14 +28,14 @@ export type TableToggleFavoriteType = (
 ) => void;
 
 export type ToggleableAssetListType =
-  | ItemsViewModelFollowDetailsList
-  | ItemsViewModelProgramDetailsList
-  | ItemsViewModelFundDetailsList;
+  | ItemsViewModelFollowDetailsListItem
+  | ItemsViewModelProgramDetailsListItem
+  | ItemsViewModelFundDetailsListItem;
 
 export type ToggleableAssetType =
-  | FollowDetailsList
-  | ProgramDetailsList
-  | FundDetailsList
+  | FollowDetailsListItem
+  | ProgramDetailsListItem
+  | FundDetailsListItem
   | ProgramInvestingDetailsList
   | FundInvestingDetailsList;
 

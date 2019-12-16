@@ -2,12 +2,17 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
-import { AssetType, DashboardTradingAssetActions } from "gv-api-web";
+import {
+  AssetType,
+  BrokerTradeServerType,
+  DashboardTradingAssetActions
+} from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
 import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
+import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import React, { useCallback, useContext } from "react";
 import { META_TRADER_4_ROUTE } from "routes/trade.routes";
@@ -22,6 +27,7 @@ import { TitleContext } from "../../dashboard.constants";
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
 > = ({
+  brokerType,
   onApply,
   name,
   assetType,
@@ -41,7 +47,7 @@ const _DashboardPublicCardActions: React.FC<
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const terminalLink = {
-    pathname: META_TRADER_4_ROUTE,
+    pathname: getTerminalLink(brokerType),
     state: `/ ${title}`
   };
   const createSettingsToUrlMethod =
@@ -87,6 +93,7 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
+  brokerType: BrokerTradeServerType;
   onApply: VoidFunction;
   name: string;
   actions: DashboardTradingAssetActions;

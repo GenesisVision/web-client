@@ -2,7 +2,7 @@ import "modules/programs-table/components/programs-table/programs.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { FollowDetailsList } from "gv-api-web";
+import { FollowDetailsListItem } from "gv-api-web";
 import * as React from "react";
 
 import FollowCard from "./follow-card";
@@ -16,7 +16,7 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IFollowsTableProps extends ITableProps {
   showRating?: boolean;
-  data?: FollowDetailsList[];
+  data?: FollowDetailsListItem[];
   isAuthenticated?: boolean;
   title: string;
   redirectToLogin?: () => void;
@@ -73,7 +73,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
           column={column}
         />
       )}
-      renderBodyRow={(follow: FollowDetailsList) => (
+      renderBodyRow={(follow: FollowDetailsListItem) => (
         <FollowTableRowShort
           withDispatch
           showRating={Boolean(showRating)}
@@ -82,8 +82,8 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
           isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
-      renderBodyCard={(program: FollowDetailsList) => (
-        <FollowCard title={title} follow={program} />
+      renderBodyCard={(follow: FollowDetailsListItem) => (
+        <FollowCard title={title} follow={follow} />
       )}
     />
   );

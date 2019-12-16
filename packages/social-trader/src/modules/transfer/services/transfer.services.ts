@@ -1,10 +1,17 @@
-import { ItemsType, ItemType } from "components/wallet-select/wallet-select";
+import {
+  ItemsType,
+  WalletItemType
+} from "components/wallet-select/wallet-select";
 import { CancelablePromise, InternalTransferRequest } from "gv-api-web";
+import { TransferFormValues } from "modules/transfer/components/transfer-form.helpers";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
 
-import { TransferFormValues } from "../components/transfer-form";
+export const fetchTradingAccounts = () =>
+  walletApi
+    .getAccountsAvailable("ETH", authService.getAuthArg())
+    .then(({ wallets }) => wallets);
 
 export const transferRequest = (
   request: Pick<TransferFormValues, keyof InternalTransferRequest>
@@ -18,7 +25,7 @@ export const getTransferAll = (
   sourceItems: ItemsType
 ): boolean => {
   const { amount, sourceId } = values;
-  const selectedSourceItem = getSelectedItem(sourceItems, sourceId);
+  const selectedSourceItem = getItem(sourceItems, sourceId);
   const formattedAvailableSourceItem = formatCurrencyValue(
     selectedSourceItem.available,
     selectedSourceItem.currency
@@ -26,14 +33,10 @@ export const getTransferAll = (
   return String(amount) === formattedAvailableSourceItem;
 };
 
-export type getDestinationItemsType<T> = (items: T[], sourceId: string) => T[];
-export const getDestinationItems: getDestinationItemsType<ItemType> = (
-  items,
-  sourceId
-) => items.filter(item => item.id !== sourceId);
+export type getItemsType<T> = (items: T[], sourceId: string) => T[];
+export const getOtherItems: getItemsType<WalletItemType> = (items, sourceId) =>
+  items.filter(({ id }) => id !== sourceId);
 
-export type getSelectedItemType<T> = (items: T[], sourceId: string) => T;
-export const getSelectedItem: getSelectedItemType<ItemType> = (
-  items,
-  currentItemId
-) => items.find(item => item.id === currentItemId)!;
+export type getItemType<T> = (items: T[], sourceId: string) => T;
+export const getItem: getItemType<WalletItemType> = (items, currentItemId) =>
+  items.find(({ id }) => id === currentItemId) || items[0];

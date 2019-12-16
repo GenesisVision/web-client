@@ -66,7 +66,7 @@ export const login: LoginFuncType = (method, fromPath, type) => (
     });
 };
 
-export const clearLoginData: clearLoginDataFuncType = () => dispatch => {
+export const clearLoginData: clearLoginDataFuncType = dispatch => {
   const clearLoginDataAction = clearDataActionFactory(LOGIN);
   dispatch(clearLoginDataAction.clearData());
 };
@@ -106,7 +106,7 @@ export type LoginFuncType = (
   setSubmitting?: SetSubmittingType
 ) => Promise<void>;
 
-export type clearLoginDataFuncType = () => (dispatch: Dispatch) => void;
+export type clearLoginDataFuncType = (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = (dispatch: Dispatch) => void;
 

@@ -4,9 +4,51 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import {
   CancelablePromise,
   InvestmentEventViewModels,
-  ItemsViewModelFundDetailsList,
-  ItemsViewModelProgramDetailsList
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
+import {
+  DASHBOARD_INVESTMENTS_FUNDS,
+  TInvestmentsFundsAction
+} from "pages/dashboard/reducers/dashboard-investments-funds.reducer";
+import {
+  DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
+  TInvestmentsMostProfitableAction
+} from "pages/dashboard/reducers/dashboard-investments-most-profitable.reducer";
+import {
+  DASHBOARD_INVESTMENTS_PROGRAMS,
+  TInvestmentsProgramsAction
+} from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
+import {
+  DASHBOARD_INVESTMENTS_TOTAL,
+  TInvestmentsTotalAction
+} from "pages/dashboard/reducers/dashboard-investments-total.reducer";
+import {
+  DASHBOARD_TRADING_FOLLOW_THEM,
+  TTradingFollowThemAction
+} from "pages/dashboard/reducers/dashboard-trading-follow-them.reducer";
+import {
+  DASHBOARD_TRADING_PRIVATE,
+  TTradingPrivateAction
+} from "pages/dashboard/reducers/dashboard-trading-private.reducer";
+import {
+  DASHBOARD_TRADING_PUBLIC,
+  TTradingPublicAction
+} from "pages/dashboard/reducers/dashboard-trading-public.reducer";
+import {
+  DASHBOARD_TRADING_TOTAL,
+  TTradingTotalAction
+} from "pages/dashboard/reducers/dashboard-trading-total.reducer";
+import {
+  fetchTradingTotalStatistic,
+  getFollowThem,
+  getInvestingFunds,
+  getInvestingMostProfitable,
+  getInvestingPrograms,
+  getPrivateAssets,
+  getPublicAssets,
+  getTotal
+} from "pages/dashboard/services/dashboard.service";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
@@ -14,7 +56,7 @@ import {
 import { Action } from "redux";
 import { IDashboardAssetChart } from "shared/constants/constants";
 //import managerApi from "shared/services/api-client/manager-api";
-import { ActionType } from "utils/types";
+import { ActionType, CurrencyEnum } from "utils/types";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
@@ -66,7 +108,7 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: managerApi.getManagerPrograms(auth, filters)
 });
@@ -74,7 +116,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelFundDetailsList>> => ({
+): ActionType<CancelablePromise<ItemsViewModelFundDetailsListItem>> => ({
   type: DASHBOARD_FUNDS,
   payload: managerApi.getManagerFunds(auth, filters)
 });
@@ -115,3 +157,59 @@ export const clearDashboardAssetsTableAction = (): Action => ({
 });
 
 // TODO move actions to shared
+
+export const fetchDashboardInvestmentsTotalAction = (
+  currency: CurrencyEnum
+): TInvestmentsTotalAction => ({
+  type: DASHBOARD_INVESTMENTS_TOTAL,
+  payload: getTotal({ currency })
+});
+
+export const fetchDashboardInvestmentsFundsAction = (
+  filters?: ComposeFiltersAllType
+): TInvestmentsFundsAction => ({
+  type: DASHBOARD_INVESTMENTS_FUNDS,
+  payload: getInvestingFunds(filters)
+});
+
+export const fetchDashboardInvestmentsProgramsAction = (
+  filters?: ComposeFiltersAllType
+): TInvestmentsProgramsAction => ({
+  type: DASHBOARD_INVESTMENTS_PROGRAMS,
+  payload: getInvestingPrograms(filters)
+});
+
+export const fetchDashboardInvestmentsMostProfitableAction = (
+  filters?: ComposeFiltersAllType
+): TInvestmentsMostProfitableAction => ({
+  type: DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
+  payload: getInvestingMostProfitable(filters)
+});
+
+export const fetchDashboardTradingTotalAction = (
+  currency: CurrencyEnum
+): TTradingTotalAction => ({
+  type: DASHBOARD_TRADING_TOTAL,
+  payload: fetchTradingTotalStatistic({ currency })
+});
+
+export const fetchDashboardPublicAction = (
+  filters?: ComposeFiltersAllType
+): TTradingPublicAction => ({
+  type: DASHBOARD_TRADING_PUBLIC,
+  payload: getPublicAssets(filters)
+});
+
+export const fetchDashboardPrivateAction = (
+  filters?: ComposeFiltersAllType
+): TTradingPrivateAction => ({
+  type: DASHBOARD_TRADING_PRIVATE,
+  payload: getPrivateAssets(filters)
+});
+
+export const fetchDashboardFollowThemAction = (
+  filters?: ComposeFiltersAllType
+): TTradingFollowThemAction => ({
+  type: DASHBOARD_TRADING_FOLLOW_THEM,
+  payload: getFollowThem()
+});

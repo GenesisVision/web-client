@@ -11,9 +11,7 @@ const _ProgramDetailsPage: React.FC = () => {
   const description = useSelector(programDescriptionSelector);
   useEffect(() => {
     if (!description) return;
-    const currency = description.programDetails
-      ? description.programDetails.currency
-      : description.followDetails.currency;
+    const { currency } = description.tradingAccountInfo;
     dispatch(dispatchPlatformLevelsParameters(currency));
     dispatch(statisticCurrencyAction(currency));
   }, [description]);

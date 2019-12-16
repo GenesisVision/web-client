@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { SearchViewModel } from "gv-api-web";
+import { CommonPublicAssetsViewModel } from "gv-api-web";
 import { debounce } from "lodash";
 import * as React from "react";
 import { useCallback, useState } from "react";
@@ -11,7 +11,7 @@ import GlobalSearchResult from "./global-search-result/global-search-result";
 
 const _GlobalSearchResultContainer: React.FC<Props> = ({ title }) => {
   const [query, setQuery] = useState<string>("");
-  const [data, setData] = useState<Nullable<SearchViewModel>>(null);
+  const [data, setData] = useState<Nullable<CommonPublicAssetsViewModel>>(null);
 
   const searchDebounced = debounce((value: string) => {
     search(value).then(setData);

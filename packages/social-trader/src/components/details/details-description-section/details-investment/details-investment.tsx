@@ -31,6 +31,7 @@ import {
 } from "./details-investment.helpers";
 
 const _DetailsInvestment: React.FC<Props> = ({
+  isOwnAsset,
   fees,
   notice,
   asset,
@@ -79,17 +80,19 @@ const _DetailsInvestment: React.FC<Props> = ({
         <GVTab
           visible={showSubscription}
           value={TABS.SUBSCRIPTION}
-          label={t("follow-details-page.current-investment.title")}
+          label={t("details-page.investment.tabs.subscription")}
         />
         <GVTab
           visible={showInvestment}
           value={TABS.INVESTMENT}
-          label={t(`fund-details-page.description.yourInvestment.${asset}`)}
+          label={t(
+            `details-page.investment.tabs.investment.${asset.toLowerCase()}`
+          )}
         />
         <GVTab
           visible={haveEvents}
           value={TABS.EVENTS}
-          label={t("program-details-page.history.tabs.events")}
+          label={t("details-page.investment.tabs.events")}
         />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (
@@ -97,6 +100,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
         <Investment
+          isOwnAsset={isOwnAsset}
           fees={fees}
           updateDescription={dispatchDescription}
           id={id}
@@ -126,6 +130,7 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface Props {
+  isOwnAsset?: boolean;
   fees: FeesType;
   notice?: string;
   asset: ASSET;

@@ -2,6 +2,7 @@ import "./google-auth.scss";
 
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
 import { RecoveryCode } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
@@ -44,7 +45,7 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
             successMessage={"2fa-page.codes.copy-success"}
           />
         </DialogButtons>
-        <div className="dialog__info">{t("2fa-page.codes.warning")}</div>
+        <DialogInfo>{t("2fa-page.codes.warning")}</DialogInfo>
       </DialogBottom>
     </div>
   );

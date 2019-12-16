@@ -316,11 +316,13 @@
     }
   },
   "transfer": {
+    "deposit-to": "Deposit to {{title}}",
+    "withdraw-from": "Withdraw from {{title}}",
     "title": "Transfer",
     "availableWalletTo": "Available in Wallet",
     "availableWalletFrom": "Available in Wallet",
-    "availableCopyTradingAccountTo": "Available in Account",
-    "availableCopyTradingAccountFrom": "Available in Account",
+    "availablePrivateTradingAccountTo": "Available in Account",
+    "availablePrivateTradingAccountFrom": "Available in Account",
     "to": "To",
     "from": "From",
     "amount": "Enter correct amount",
@@ -628,6 +630,17 @@
     "select": "Show in:"
   },
   "details-page": {
+    "investment": {
+      "tabs": {
+        "subscription": "Subscription details",
+        "investment": {
+          "follow": "Current period investment",
+          "program": "Current period investment",
+          "fund": "Current investment"
+        },
+        "events": "My history"
+      }
+    },
     "statistics": {
       "heading": "Statistics",
       "current": "Current",
@@ -2494,6 +2507,8 @@
       "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
       "text-fund": "The fund will be closed after pressing the button",
       "text-period": "The current period of the program will end in one hour.",
+      "close-confirm-title-trading-account": "Close trading account",
+      "close-confirm-notification-trading-account": "Do you really want to close trading account?",
       "close-confirm-title-fund": "Close Fund",
       "close-confirm-notification-fund": "Are you sure you want to close this Fund? This action is irreversible.",
       "close-confirm-title-program": "Close Program",
@@ -2620,6 +2635,10 @@
       "title": "In requests"
     },
     "trading": {
+      "asset-types": {
+        "TradingAccount": "Trading account",
+        "ExternalTradingAccount": "External trading account"
+      },
       "subscribers-count": "Subs.",
       "title": "Trading",
       "follow-them": "Follow them",
