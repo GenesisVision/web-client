@@ -1,5 +1,8 @@
 import Profitability from "components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "components/profitability/profitability.helper";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
@@ -57,25 +60,30 @@ const _DashboardStatisticPeriodsItem: React.FC<{
 }> = ({ item, label, withProfitability, currency }) => {
   return (
     <StatisticItem big accent label={label}>
-      <NumberFormat
-        value={formatCurrencyValue(item.profit, currency)}
-        suffix={` ${currency}`}
-        thousandSeparator={" "}
-        displayType="text"
-      />{" "}
-      {withProfitability && item.profitPercent !== 0 && (
-        <Profitability
-          value={item.profitPercent}
-          prefix={PROFITABILITY_PREFIX.SIGN}
-        >
+      <div className="dashboard-statistic-periods-item__value-container">
+        <div className="dashboard-statistic-periods-item__value">
           <NumberFormat
-            value={Math.abs(item.profitPercent)}
-            suffix={" %"}
+            value={formatCurrencyValue(item.profit, currency)}
+            suffix={` ${currency}`}
             thousandSeparator={" "}
             displayType="text"
           />
-        </Profitability>
-      )}
+        </div>
+        {withProfitability && item.profitPercent !== 0 && (
+          <Profitability
+            variant={PROFITABILITY_VARIANT.CHIPS}
+            value={item.profitPercent}
+            prefix={PROFITABILITY_PREFIX.SIGN}
+          >
+            <NumberFormat
+              value={Math.abs(item.profitPercent)}
+              suffix={" %"}
+              thousandSeparator={" "}
+              displayType="text"
+            />
+          </Profitability>
+        )}
+      </div>
     </StatisticItem>
   );
 };
