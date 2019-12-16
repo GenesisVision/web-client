@@ -10,6 +10,8 @@ import {
 import useTab from "hooks/tab.hook";
 import FollowCreateExternalAccount from "modules/follow-module/follow-popup/follow-popup-create-external-account";
 import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
@@ -39,6 +41,9 @@ const _FollowForm: React.FC<Props> = ({
   rate = 1,
   submitMethod
 }) => {
+  const subscribeFixedCurrencies = useSelector(
+    subscribeFixedCurrenciesSelector
+  );
   const hasAccounts = !!accounts.length;
   const [tradingAccountId, setTradingAccountId] = useState<string | undefined>(
     undefined
@@ -123,6 +128,7 @@ const _FollowForm: React.FC<Props> = ({
         ))}
       {tab === TABS.PARAMS && (
         <FollowParams
+          subscribeFixedCurrencies={subscribeFixedCurrencies}
           rate={rate}
           currency={currency}
           onSubmit={submit}

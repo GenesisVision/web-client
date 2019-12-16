@@ -6,6 +6,8 @@ import FollowParams, {
 } from "modules/follow-module/follow-popup/follow-popup-params";
 import FollowTop from "modules/follow-module/follow-popup/follow-popup-top";
 import React, { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import { updateAttachToSignal } from "../services/follow-module-service";
@@ -20,6 +22,9 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   onClose,
   onApply
 }) => {
+  const subscribeFixedCurrencies = useSelector(
+    subscribeFixedCurrenciesSelector
+  );
   const { sendRequest: submitChanges } = useApiRequest({
     request: updateAttachToSignal,
     successMessage: "follow-program.edit-success-alert-message",
@@ -46,6 +51,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
     <>
       <FollowTop step={"params"} />
       <FollowParams
+        subscribeFixedCurrencies={subscribeFixedCurrencies}
         rate={rate}
         currency={currency}
         paramsSubscription={signalSubscription}
