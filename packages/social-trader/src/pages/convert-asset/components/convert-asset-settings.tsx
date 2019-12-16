@@ -7,6 +7,7 @@ import CreateAssetNavigation from "components/assets/fields/create-asset-navigat
 import Currency from "components/assets/fields/currency";
 import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
+import FormTextField from "components/assets/fields/form-text-field";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import PeriodLength from "components/assets/fields/period-length";
 import SignalProgram from "components/assets/fields/signal-program";
@@ -123,6 +124,9 @@ const _ConvertAssetSettings: React.FC<Props> = ({
               hasInvestmentLimit={hasInvestmentLimit}
               currency={currency as CurrencyEnum}
             />
+            <FormTextField>
+              {t("program-settings.investment-limit.text")}
+            </FormTextField>
           </SettingsBlock>
         </>
       )}
