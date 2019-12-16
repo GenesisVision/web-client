@@ -33,12 +33,15 @@ const _PortfolioEventsTableFiltering: React.FC<Props> = ({
     historyType,
     filtering[ASSET_TYPE_FILTER_NAME] || assetType
   );
-  const eventTypeValue = hasEventType(
+  const assetHasEventType = hasEventType(
     filtering[EVENT_TYPE_FILTER_NAME],
     eventTypes
-  )
+  );
+  const eventTypeValue = assetHasEventType
     ? filtering[EVENT_TYPE_FILTER_NAME]
     : EVENT_TYPE_FILTER_DEFAULT_VALUE;
+  if (!assetHasEventType)
+    updateFilter({ name: EVENT_TYPE_FILTER_NAME, value: eventTypeValue });
   return (
     <>
       {filtering[EVENT_TYPE_FILTER_NAME] && (
