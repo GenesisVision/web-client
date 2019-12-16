@@ -49,12 +49,16 @@ const DashboardInvestingEmpty: React.FC = React.memo(() => {
         {t("dashboard-page.statistic.get-started-invest")}
       </div>
       <div className="dashboard-statistic__create-block-links">
-        <Link to={GV_PROGRAMS_ROUTE}>
-          <GVButton color="primary">{t("navigation.gv-programs")}</GVButton>
-        </Link>
-        <Link to={GV_FUNDS_ROUTE}>
-          <GVButton color="primary">{t("navigation.gv-funds")}</GVButton>
-        </Link>
+        <div className="dashboard-statistic__create-block-link">
+          <Link to={GV_PROGRAMS_ROUTE}>
+            <GVButton color="primary">{t("navigation.gv-programs")}</GVButton>
+          </Link>
+        </div>
+        <div className="dashboard-statistic__create-block-link">
+          <Link to={GV_FUNDS_ROUTE}>
+            <GVButton color="primary">{t("navigation.gv-funds")}</GVButton>
+          </Link>
+        </div>
       </div>
     </div>
   );

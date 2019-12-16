@@ -30,25 +30,20 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
     fetchOnMount: true,
     fetchOnMountData: { currency }
   });
-  const [t] = useTranslation();
   return (
     <DashboardBlock
       label={label}
       all={all}
       className="dashboard-statistic__container"
     >
-      <div className="dashboard-statistic__data">
-        <DashboardStatistic
-          EmptyBlock={EmptyBlock}
-          currency={currency}
-          renderValues={renderValues}
-          loaderData={getTradingStatisticLoaderData()}
-          data={data!}
-        />
-      </div>
-      <div className="dashboard-statistic__see-all">
-        <Link to={EVENTS_ROUTE}>{t("dashboard-page.statistic.see-all")}</Link>
-      </div>
+      <DashboardStatistic
+        className="dashboard-statistic__data"
+        EmptyBlock={EmptyBlock}
+        currency={currency}
+        renderValues={renderValues}
+        loaderData={getTradingStatisticLoaderData()}
+        data={data!}
+      />
     </DashboardBlock>
   );
 };

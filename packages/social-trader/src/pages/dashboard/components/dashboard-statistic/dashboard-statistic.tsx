@@ -1,9 +1,11 @@
+import Link from "components/link/link";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardStatisticTable from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-table";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { EVENTS_ROUTE } from "routes/dashboard.routes";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -17,6 +19,7 @@ const _DashboardStatistic: React.FC<Props> = ({
   data,
   currency
 }) => {
+  const [t] = useTranslation();
   const {
     events,
     profits,
@@ -34,15 +37,20 @@ const _DashboardStatistic: React.FC<Props> = ({
   if (hasNotAssets) return <EmptyBlock />;
   return (
     <>
-      <div className="dashboard-statistic__values">
-        <StatisticItemList>{renderValues(data)}</StatisticItemList>
-        <DashboardStatisticPeriods
-          withProfitability
-          currency={currency}
-          data={profits}
-        />
+      <div>
+        <div className="dashboard-statistic__values">
+          <StatisticItemList>{renderValues(data)}</StatisticItemList>
+          <DashboardStatisticPeriods
+            withProfitability
+            currency={currency}
+            data={profits}
+          />
+        </div>
+        <DashboardStatisticTable data={events.items} />
       </div>
-      <DashboardStatisticTable data={events.items} />
+      <div className="dashboard-statistic__see-all">
+        <Link to={EVENTS_ROUTE}>{t("dashboard-page.statistic.see-all")}</Link>
+      </div>
     </>
   );
 };
