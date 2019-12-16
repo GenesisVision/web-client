@@ -93,6 +93,7 @@
     "rejected": "Rejected"
   },
   "buttons": {
+    "create-signal": "Create signal account",
     "create-account": "Create account",
     "create-attach-external-account": "Attach external account",
     "attach-external-account": "Attach external account",
