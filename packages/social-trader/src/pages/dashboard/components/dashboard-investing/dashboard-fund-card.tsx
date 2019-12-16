@@ -79,7 +79,7 @@ const _DashboardFundCard: React.FC<Props> = ({
           <StatisticItem label={t("funds-page.funds-header.balance")}>
             <NumberFormat
               value={formatCurrencyValue(
-                fund.balance.amount,
+                fund.personalDetails.value,
                 fund.balance.currency
               )}
               suffix={` ${fund.balance.currency}`}
