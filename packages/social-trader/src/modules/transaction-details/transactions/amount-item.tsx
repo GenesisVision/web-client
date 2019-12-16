@@ -1,15 +1,12 @@
 import "../transaction-details.scss";
 
-import { CurrencyItem } from "components/currency-item/currency-item";
 import { AmountItem as AmountItemType } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
-const _AmountItem: React.FC<Props> = ({
-  amount: { amount, currency, logo }
-}) => {
+const _AmountItem: React.FC<Props> = ({ amount: { amount, currency } }) => {
   return (
     <div className="amount-item">
       <div className="amount-item__amount">
@@ -19,7 +16,7 @@ const _AmountItem: React.FC<Props> = ({
           displayType="text"
         />
       </div>
-      <CurrencyItem name={currency} logo={logo} small clickable={false} />
+      {currency}
     </div>
   );
 };
