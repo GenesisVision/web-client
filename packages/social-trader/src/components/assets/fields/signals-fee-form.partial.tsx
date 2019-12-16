@@ -5,7 +5,7 @@ import AssetRow from "components/assets/asset-fields/asset-row";
 import GVNumberField from "components/gv-number-field/gv-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { allowValuesNumberFormat } from "utils/helpers";
+import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
 import AssetField from "../asset-fields/asset-field";
 
@@ -32,7 +32,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             label={t("create-program-page.settings.fields.signal-volume-fee")}
             adornment="%"
             component={GVNumberField}
-            isAllowed={allowValuesNumberFormat()}
+            isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={t(
               "create-program-page.settings.hints.signal-volume-fee-description"
             )}
@@ -47,7 +47,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             label={t("create-program-page.settings.fields.signal-success-fee")}
             adornment="%"
             component={GVNumberField}
-            isAllowed={allowValuesNumberFormat()}
+            isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={t(
               "create-program-page.settings.hints.signal-success-fee-description"
             )}
