@@ -40,12 +40,14 @@ const _ProgramSettings: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { programDetails, followDetails } = description;
-  const signalSuccessFee = followDetails.signalSettings
-    ? followDetails.signalSettings.signalSuccessFee
-    : undefined;
-  const signalVolumeFee = followDetails.signalSettings
-    ? followDetails.signalSettings.signalVolumeFee
-    : undefined;
+  const signalSuccessFee =
+    followDetails && followDetails.signalSettings
+      ? followDetails.signalSettings.signalSuccessFee
+      : undefined;
+  const signalVolumeFee =
+    followDetails && followDetails.signalSettings
+      ? followDetails.signalSettings.signalVolumeFee
+      : undefined;
   const isSignalProgram = !!description.followDetails;
   return (
     <>

@@ -1,6 +1,7 @@
 import "components/details/details-description-section/details-description/details-description.scss";
 
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
+import { PersonalDetailsType } from "components/details/details.types";
 import { ToType } from "components/link/link";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -8,6 +9,7 @@ import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  personalDetails,
   isOwnAsset,
   id,
   title,
@@ -29,6 +31,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   return (
     <div className="details__section asset-details-description">
       <DetailsDescription
+        personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         id={id}
         title={title}
@@ -56,6 +59,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
+  personalDetails?: PersonalDetailsType;
   isOwnAsset: boolean;
   id: string;
   logo: string;

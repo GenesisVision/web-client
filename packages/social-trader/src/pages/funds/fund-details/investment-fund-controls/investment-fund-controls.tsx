@@ -12,8 +12,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
   fundDescription,
   onApply
 }) => {
-  const { personalDetails } = fundDescription;
-  const isOwnProgram = personalDetails && personalDetails.isOwnAsset;
+  const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -22,7 +21,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
-          title={fundDescription.title}
+          title={fundDescription.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}

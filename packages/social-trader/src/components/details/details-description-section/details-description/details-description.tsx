@@ -1,5 +1,6 @@
 import { DetailsInfo } from "components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "components/details/details-description-section/details-description/details-settings-buttons.block";
+import { PersonalDetailsType } from "components/details/details.types";
 import { ToType } from "components/link/link";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -10,6 +11,7 @@ import { CurrencyEnum } from "utils/types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  personalDetails,
   isOwnAsset,
   id,
   logo,
@@ -50,11 +52,11 @@ const _DetailsDescription: React.FC<Props> = ({
       >
         {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
       </DetailsInfo>
-      {programDetails && (
+      {personalDetails && (
         <DetailsSettingsButtons
           isOwnAsset={isOwnAsset}
           asset={asset}
-          personalDetails={programDetails.personalDetails}
+          personalDetails={personalDetails}
           id={id}
           notificationsUrl={notificationsUrl}
           settingsUrl={settingsUrl}
@@ -65,6 +67,7 @@ const _DetailsDescription: React.FC<Props> = ({
 };
 
 interface Props {
+  personalDetails?: PersonalDetailsType;
   isOwnAsset: boolean;
   id: string;
   logo: string;

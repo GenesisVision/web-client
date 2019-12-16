@@ -35,25 +35,26 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
   return (
-    <Page title={description.title}>
+    <Page title={description.publicInfo.title}>
       <DetailsDescriptionSection
-        isOwnAsset={description.personalDetails.isOwnAsset}
+        personalDetails={description.personalDetails}
+        isOwnAsset={description.publicInfo.isOwnAsset}
         id={description.id}
-        title={description.title}
-        logo={description.logo}
-        color={description.color}
+        title={description.publicInfo.title}
+        logo={description.publicInfo.logo}
+        color={description.publicInfo.color}
         ownerUrl={description.owner.url}
         socialLinks={description.owner.socialLinks}
         username={description.owner.username}
         asset={ASSET.FUND}
-        description={description.description}
+        description={description.publicInfo.description}
         notificationsUrl={createFundNotificationsToUrl(
-          description.url,
-          description.title
+          description.publicInfo.url,
+          description.publicInfo.title
         )}
         settingsUrl={createFundSettingsToUrl(
-          description.url,
-          description.title
+          description.publicInfo.url,
+          description.publicInfo.title
         )}
         AssetDetailsExtraBlock={() => (
           <div className="details-description__info-block">

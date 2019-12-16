@@ -44,10 +44,10 @@ const _AssetsEditPage: React.FC<Props> = ({
         exitFee: description!.exitFeeSelected, //exitFee
         entryFee: description!.entryFeeSelected, //entryFee
         successFee: description!.successFeeSelected,
-        title: description!.title,
+        title: description!.publicInfo.title,
         stopOutLevel: description!.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
-        description: description!.description,
-        logo: { src: description!.logo }
+        description: description!.publicInfo.description,
+        logo: { src: description!.publicInfo.logo }
       };
       editRequest({
         id: description!.id,

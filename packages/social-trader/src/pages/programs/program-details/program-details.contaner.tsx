@@ -87,6 +87,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         logo={logo}
         title={title}
