@@ -17,6 +17,7 @@ export const depositValidationSchema = ({
 }: WithTranslation & IDepositOwnProps) =>
   lazy<IDepositFormValues>(values => {
     const rate = values[DEPOSIT_FORM_FIELDS.rate];
+    const walletCurrency = values[DEPOSIT_FORM_FIELDS.walletCurrency];
     const availableToInvestInAsset = convertToCurrency(
       availableToInvestProp || Number.MAX_SAFE_INTEGER,
       rate
@@ -34,16 +35,16 @@ export const depositValidationSchema = ({
         .min(
           +formatCurrencyValue(
             convertToCurrency(minDeposit, rate),
-            values[DEPOSIT_FORM_FIELDS.walletCurrency]
+            walletCurrency
           ),
           t("deposit-asset.validation.amount-min-value", {
             min: formatCurrencyValue(minDeposit, currency),
             currency,
             walletMin: formatCurrencyValue(
               convertToCurrency(minDeposit, rate),
-              values[DEPOSIT_FORM_FIELDS.walletCurrency]
+              walletCurrency
             ),
-            walletCurrency: values[DEPOSIT_FORM_FIELDS.walletCurrency]
+            walletCurrency
           })
         )
         .max(
