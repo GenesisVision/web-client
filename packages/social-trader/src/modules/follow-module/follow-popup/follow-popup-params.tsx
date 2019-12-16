@@ -18,7 +18,7 @@ import { compose } from "redux";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
-import { number, object } from "yup";
+import { lazy, number, object } from "yup";
 
 const getInfoText = (currency: CurrencyEnum): string => {
   switch (currency) {
@@ -35,6 +35,7 @@ const getInfoText = (currency: CurrencyEnum): string => {
 const _FollowParams: React.FC<
   InjectedFormikProps<Props, FollowParamsFormValues>
 > = ({
+  subscribeFixedCurrencies,
   rate,
   currency,
   t,
@@ -88,24 +89,44 @@ const _FollowParams: React.FC<
           </DialogField>
         )}
         {values[FIELDS.mode] === modes.fixed.value && (
-          <DialogField>
-            <InputAmountField
-              name={FIELDS.fixedVolume}
-              label={`${t("follow-program.params.usd-equivalent")} *`}
-              currency={"USD"}
-            />
-            {currency && (
-              <NumberFormat
-                value={formatCurrencyValue(
-                  convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
-                  currency
-                )}
-                prefix="≈ "
-                suffix={` ${currency}`}
-                displayType="text"
-              />
+          <>
+            {subscribeFixedCurrencies.length > 1 && (
+              <DialogField>
+                <GVFormikField
+                  name={FIELDS.fixedCurrency}
+                  component={GVTextField}
+                  label={t("follow-program.params.fixed-currency")}
+                  InputComponent={Select}
+                >
+                  {subscribeFixedCurrencies.map((currency: string) => (
+                    <option value={currency} key={currency}>
+                      {currency}
+                    </option>
+                  ))}
+                </GVFormikField>
+              </DialogField>
             )}
-          </DialogField>
+            <DialogField>
+              <InputAmountField
+                name={FIELDS.fixedVolume}
+                label={`${t("follow-program.params.fixed-currency-equivalent", {
+                  fixedCurrency: values[FIELDS.fixedCurrency]
+                })} *`}
+                currency={values[FIELDS.fixedCurrency]}
+              />
+              {currency && (
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+                    currency
+                  )}
+                  prefix="≈ "
+                  suffix={` ${currency}`}
+                  displayType="text"
+                />
+              )}
+            </DialogField>
+          </>
         )}
         <DialogField>
           <InputAmountField
@@ -145,6 +166,7 @@ const _FollowParams: React.FC<
 };
 
 enum FIELDS {
+  fixedCurrency = "fixedCurrency",
   mode = "mode",
   openTolerancePercent = "openTolerancePercent",
   percent = "percent",
@@ -176,6 +198,7 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface FollowParamsFormValues {
+  [FIELDS.fixedCurrency]: string;
   [FIELDS.mode]: SubscriptionMode;
   [FIELDS.openTolerancePercent]: number;
   [FIELDS.percent]: number;
@@ -183,6 +206,7 @@ export interface FollowParamsFormValues {
 }
 
 interface OwnProps {
+  subscribeFixedCurrencies: string[];
   rate: number;
   currency?: CurrencyEnum;
   paramsSubscription?: SignalSubscription;
@@ -200,39 +224,52 @@ const FollowParams = compose<React.ComponentType<OwnProps>>(
   withFormik<Props, FollowParamsFormValues>({
     isInitialValid: true,
     displayName: "follow-params",
-    mapPropsToValues: props => {
-      const params = props.paramsSubscription;
+    mapPropsToValues: ({ paramsSubscription, subscribeFixedCurrencies }) => {
       return {
-        [FIELDS.mode]: params
-          ? params.mode
+        [FIELDS.fixedCurrency]: subscribeFixedCurrencies[0],
+        [FIELDS.mode]: paramsSubscription
+          ? paramsSubscription.mode
           : (modes.byBalance.value as SubscriptionMode),
-        [FIELDS.openTolerancePercent]: params
-          ? params.openTolerancePercent
+        [FIELDS.openTolerancePercent]: paramsSubscription
+          ? paramsSubscription.openTolerancePercent
           : 0.5,
-        [FIELDS.fixedVolume]: params ? params.fixedVolume : 100,
-        [FIELDS.percent]: params ? params.percent : 10
+        [FIELDS.fixedVolume]: paramsSubscription
+          ? paramsSubscription.fixedVolume
+          : 100,
+        [FIELDS.percent]: paramsSubscription ? paramsSubscription.percent : 10
       };
     },
     validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FIELDS.fixedVolume]: number()
-          .min(0, t("follow-program.params.validation.fixedVolume-min"))
-          .lessThan(
-            100000,
-            t("follow-program.params.validation.fixedVolume-max")
-          ),
-        [FIELDS.percent]: number()
-          .min(1, t("follow-program.params.validation.percent-min"))
-          .lessThan(1000, t("follow-program.params.validation.percent-max"))
-          .nullable(true),
-        [FIELDS.openTolerancePercent]: number()
-          .required(t("follow-program.params.validation.tolerance-required"))
-          .min(
-            0.01,
-            t("follow-program.params.validation.tolerance-percent-min")
-          )
-          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
-      }),
+      lazy<FollowParamsFormValues>(values =>
+        object<FollowParamsFormValues>().shape({
+          [FIELDS.fixedVolume]: number()
+            .min(
+              0,
+              t("follow-program.params.validation.fixedVolume-min", {
+                fixedCurrency: values[FIELDS.fixedCurrency]
+              })
+            )
+            .lessThan(
+              100000,
+              t("follow-program.params.validation.fixedVolume-max", {
+                fixedCurrency: values[FIELDS.fixedCurrency]
+              })
+            ),
+          [FIELDS.percent]: number()
+            .min(1, t("follow-program.params.validation.percent-min"))
+            .lessThan(1000, t("follow-program.params.validation.percent-max")),
+          [FIELDS.openTolerancePercent]: number()
+            .required(t("follow-program.params.validation.tolerance-required"))
+            .min(
+              0.01,
+              t("follow-program.params.validation.tolerance-percent-min")
+            )
+            .max(
+              20,
+              t("follow-program.params.validation.tolerance-percent-max")
+            )
+        })
+      ),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
