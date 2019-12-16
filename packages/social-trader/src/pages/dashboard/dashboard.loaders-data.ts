@@ -55,7 +55,7 @@ export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
   } as TDashboardTradingStatistic);
 
 export const getTradingEventsLoaderData = () => {
-  const length = getRandomInteger(5, 15);
+  const length = getRandomInteger(1, 4);
   return {
     items: tableLoaderCreator(getEventLoaderData, length),
     total: length
