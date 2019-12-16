@@ -6,10 +6,10 @@ import DetailsBlock, {
 import Page from "components/page/page";
 import PublicSelect from "components/profile/settings/public-select/public-select";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
+import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";
 import DashboardInvestingMostProfitable from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
 import { PublicPageLink } from "pages/dashboard/components/dashboard-investing/public-page-link";
-import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -21,9 +21,7 @@ const _InvestmentsPage: React.FC = () => {
     <TitleContext.Provider value={title}>
       <Page title={title}>
         <div>
-          <DashboardTotalContainer
-            label={t("dashboard-page.investing.title")}
-          />
+          <DashboardInvestingTotalContainer />
         </div>
         <div>
           <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
