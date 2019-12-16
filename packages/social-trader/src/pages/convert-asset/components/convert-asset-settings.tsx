@@ -125,7 +125,7 @@ const _ConvertAssetSettings: React.FC<Props> = ({
       {showSignalFees && (
         <SettingsBlock
           label={t("create-program-page.settings.signal-provider-fees")}
-          blockNumber={"04"}
+          blockNumber={"02"}
         >
           <SignalsFeeFormPartial
             volumeFeeFieldName={CONVERT_ASSET_FIELDS.signalVolumeFee}
