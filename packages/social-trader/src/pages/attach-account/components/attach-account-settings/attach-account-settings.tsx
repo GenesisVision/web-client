@@ -68,8 +68,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
               ))}
             </GVFormikField>
           </AssetField>
-          <AssetField>
-            {broker && (
+          {broker && broker.accountTypes.length > 1 && (
+            <AssetField>
               <GVFormikField
                 name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
                 component={GVTextField}
@@ -83,8 +83,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
                   </option>
                 ))}
               </GVFormikField>
-            )}
-          </AssetField>
+            </AssetField>
+          )}
         </AssetFields>
       </SettingsBlock>
       <SettingsBlock
