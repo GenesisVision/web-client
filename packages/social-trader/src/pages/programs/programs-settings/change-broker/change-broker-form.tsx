@@ -1,5 +1,6 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -134,9 +135,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
-      <p className="program-settings__text program-settings__text--padding-top">
-        {t("program-settings.broker.text-change")}
-      </p>
+      <FormTextField>{t("program-settings.broker.text-change")}</FormTextField>
       <GVButton
         onClick={setChangeBrokerOpen}
         color="primary"
@@ -230,8 +229,8 @@ export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
 }) => {
   const [t] = useTranslation();
   return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
-    <p className="program-settings__text program-settings__text--color-accent program-settings__text--padding-top">
+    <FormTextField topPadding accent>
       {t("program-settings.broker.text-warning")}
-    </p>
+    </FormTextField>
   ) : null;
 };

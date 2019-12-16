@@ -1,5 +1,6 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
@@ -78,12 +79,12 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         to={brokerTo.name}
         isSignalProgram={isSignalProgram}
       />
-      <p className="program-settings__text program-settings__text--padding-top">
+      <FormTextField topPadding>
         {t("program-settings.broker.text-cancel", {
           brokerFrom: brokerFrom.name,
           brokerTo: brokerTo.name
         })}
-      </p>
+      </FormTextField>
       <GVButton
         color="primary"
         className="invest-form__submit-button"

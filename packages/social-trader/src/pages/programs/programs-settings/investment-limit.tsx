@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
@@ -28,9 +29,9 @@ const _InvestmentLimit: React.FC<Props> = ({
           hasInvestmentLimit={values.hasInvestmentLimit}
           currency={currency}
         />
-        <p className="program-settings__text">
+        <FormTextField>
           {t("program-settings.investment-limit.text")}
-        </p>
+        </FormTextField>
         <GVButton
           color="primary"
           type={"submit"}

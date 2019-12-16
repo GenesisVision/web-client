@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
@@ -17,9 +18,7 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
   return (
     <SettingsBlock label={t("program-settings.password.title")}>
       <div>
-        <p className="program-settings__text">
-          {t("program-settings.password.text")}
-        </p>
+        <FormTextField>{t("program-settings.password.text")}</FormTextField>
         <GVButton color="primary" onClick={setChangePasswordOpen}>
           {t("program-details-page.description.change-password")}
         </GVButton>

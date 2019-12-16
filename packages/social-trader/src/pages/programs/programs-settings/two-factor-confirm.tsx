@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
@@ -22,9 +23,9 @@ const _TwoFactorConfirm: React.FC<Props> = ({
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
     <SettingsBlock label={t("program-settings.two-factor-confirm.title")}>
-      <p className="program-settings__text">
+      <FormTextField>
         {t("program-settings.two-factor-confirm.text")}
-      </p>
+      </FormTextField>
       <GVButton color="primary" onClick={setOpen}>
         {t("program-settings.buttons.two-factor-confirm")}
       </GVButton>
