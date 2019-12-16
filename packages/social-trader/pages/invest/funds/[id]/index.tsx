@@ -26,7 +26,9 @@ Page.getInitialProps = async ctx => {
       dispatch(statisticCurrencyAction(cookiesCurrency || currency))
     ),
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
-    ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
+    ctx.reduxStore.dispatch(
+      dispatchFundDescription(ctx, cookiesCurrency || currency)
+    )
   ]);
   return {};
 };
