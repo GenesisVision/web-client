@@ -25,9 +25,13 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       } catch (ex) {
         componentProps = { ex };
       }
-      await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
-        await dispatch(platformActions.fetchPlatformSettings());
-      });
+      try {
+        await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
+          await dispatch(platformActions.fetchPlatformSettings());
+        });
+      } catch (e) {
+        componentProps = { e };
+      }
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
