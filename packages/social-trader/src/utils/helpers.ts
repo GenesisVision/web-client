@@ -49,10 +49,13 @@ const mergeArrays = (items: any[][]): any[] => {
   return result;
 };
 
-const hasCorrectCountNulls = (value: string): boolean => {
+const hasCorrectCountNulls = (
+  value: string,
+  countNulls: number = 1
+): boolean => {
   const [whole, fraction] = value.split(".");
   if (fraction === undefined) return true;
-  return !(whole[0] === "0" && whole.length > 1);
+  return !(whole[0] === "0" && fraction.length > countNulls);
 };
 
 const allowValuesNumberFormat = (
@@ -69,6 +72,19 @@ const allowValuesNumberFormat = (
   (floatValue >= from &&
     floatValue <= to &&
     hasCorrectCountNulls(formattedValue));
+
+export const allowPositiveValuesNumberFormat = (countNulls: number = 1) => ({
+  formattedValue,
+  floatValue
+}: NumberFormatValues): boolean => {
+  return (
+    formattedValue === "" ||
+    formattedValue === "0." ||
+    (formattedValue[0] !== "-" &&
+      floatValue >= 0 &&
+      hasCorrectCountNulls(formattedValue, countNulls))
+  );
+};
 
 const getNumberWithoutSuffix = (str: string): Nullable<number> => {
   let result = null;
