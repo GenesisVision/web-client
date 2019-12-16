@@ -1,10 +1,12 @@
 import ActionButton from "components/action-button/action-button";
+import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import AmountConvert from "components/wallet/components/wallet-tables/wallet-transactions/amount-convert";
+import WalletConvert from "components/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
 import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import {
   AmountRowCell,
@@ -69,7 +71,26 @@ const TransactionAssetBlock: React.FC<{
     </TransactionDetailsItem>
   );
 });
-
+const TransactionWalletBlock: React.FC<{
+  wallets: AmountRowCell;
+}> = React.memo(({ wallets }) => {
+  const [t] = useTranslation();
+  const walletFirst = wallets.first;
+  const walletSecond = wallets.second;
+  return (
+    <TransactionDetailsItem label={t(`transactions-details.wallet`)}>
+      {walletSecond ? (
+        <WalletConvert wallets={wallets} />
+      ) : (
+        <CurrencyItem
+          logo={walletFirst.logo}
+          name={walletFirst.currency}
+          clickable={false}
+        />
+      )}
+    </TransactionDetailsItem>
+  );
+});
 const TransactionAmountBlock: React.FC<{
   amounts: AmountRowCell;
 }> = React.memo(({ amounts }) => {
@@ -100,9 +121,9 @@ const _CommonTransactionDetails: React.FC<Props> = ({
         {data.asset && (
           <TransactionAssetBlock asset={data.asset} type={"investment"} />
         )}
+        <TransactionWalletBlock wallets={data.amount} />
       </DialogTop>
       <DialogBottom>
-        <TransactionAmountBlock amounts={data.amount} />
         {data.details && <TransactionDetailsItemsBlock items={data.details} />}
         <TransactionStatusBlock status={data.status} />
         {data.actions && (
