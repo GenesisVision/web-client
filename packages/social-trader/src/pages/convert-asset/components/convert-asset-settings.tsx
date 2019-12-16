@@ -133,10 +133,7 @@ const _ConvertAssetSettings: React.FC<Props> = ({
           />
         </SettingsBlock>
       )}
-      <CreateAssetNavigation
-        asset={ASSET.PROGRAM}
-        isSubmitting={isSubmitting}
-      />
+      <CreateAssetNavigation asset={assetTo} isSubmitting={isSubmitting} />
     </form>
   );
 };
