@@ -1,0 +1,9 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-investing {
+  &__values {
+    @include details-block-horizontal-paddings();
+  }
+}
