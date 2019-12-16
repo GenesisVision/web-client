@@ -5,10 +5,12 @@ import platformActions from "actions/platform-actions";
 import { windowResizeAction } from "actions/ui-actions";
 import { Push } from "components/link/link";
 import { CaptchaCheckResult } from "gv-api-web";
+import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import Router from "next/router";
 import { Dispatch } from "redux";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
+import { removeCookie } from "shared/utils/cookie";
 import { ResponseError, SetSubmittingType } from "utils/types";
 
 import {
@@ -78,6 +80,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 
 export const logout: logoutFuncType = dispatch => {
   authService.removeToken();
+  removeCookie(ACCOUNT_CURRENCY_KEY);
   dispatch(authActions.logoutAction());
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
