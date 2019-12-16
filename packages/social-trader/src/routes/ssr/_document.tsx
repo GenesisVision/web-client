@@ -4,12 +4,10 @@ import { ROLE_ENV } from "shared/constants/constants";
 
 class MyDocument extends Document {
   render() {
-    const prod = process.env.NODE_ENV === "production";
-    const icon = (prod ? `/static-${ROLE_ENV}` : "") + "/static/favicon.ico";
     return (
       <Html>
         <Head>
-          <link rel="shortcut icon" href={icon} />
+          <link rel="shortcut icon" href="/static/favicon.ico" />
           <meta name="theme-color" content="#131e26" />
           <script
             dangerouslySetInnerHTML={{
