@@ -10,7 +10,6 @@ import FeesSettings from "components/assets/fields/fees-settings";
 import FormTextField from "components/assets/fields/form-text-field";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import PeriodLength from "components/assets/fields/period-length";
-import SignalProgram from "components/assets/fields/signal-program";
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
@@ -48,7 +47,6 @@ const _ConvertAssetSettings: React.FC<Props> = ({
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;
-  const showSignalCheckBox = assetFrom === CONVERT_ASSET.EXTERNAL_ACCOUNT;
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
   const showCurrency = broker === "Huobi";
   return (
@@ -82,12 +80,6 @@ const _ConvertAssetSettings: React.FC<Props> = ({
             <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
             <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
           </AssetFields>
-        )}
-        {showSignalCheckBox && (
-          <SignalProgram
-            condition={true}
-            name={CONVERT_ASSET_FIELDS.isSignalProgram}
-          />
         )}
       </SettingsBlock>
       {showProgramFields && (
