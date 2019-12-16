@@ -30,6 +30,15 @@ export const gvInvestFeeSelector = apiFieldSelector<PlatformInfo, number>(
   0
 );
 
+export const subscribeFixedCurrenciesSelector = apiFieldSelector<
+  PlatformInfo,
+  Array<string>
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.followInfo.subscribeFixedCurrencies),
+  []
+);
+
 export const tradingAccountMinDepositAmountsSelector = apiFieldSelector<
   PlatformInfo,
   TradingAccountMinCreateAmount[]
