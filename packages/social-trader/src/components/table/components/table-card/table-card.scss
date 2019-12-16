@@ -89,7 +89,7 @@ $card-avatar-size: 80px;
   }
   &__subtitle {
     color: $label-color;
-    font-size: $font-size-common/1.5;
+    font-size: $font-size-common;
     margin-bottom: 10px;
     display: block;
     word-break: break-all;
@@ -145,9 +145,6 @@ $card-avatar-size: 80px;
     }
     &__title {
       font-size: $font-size-paragraph;
-    }
-    &__name {
-      font-size: $font-size-common;
     }
     &__balance {
       font-size: $font-size-common;
