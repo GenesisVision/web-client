@@ -113,7 +113,11 @@ const _WalletTables: React.FC<Props> = ({ t, currency }) => {
           <WalletTransactions
             columns={WALLET_TRANSACTIONS_COLUMNS}
             renderBodyRow={(transaction, updateRow, updateItems) => (
-              <TransactionsRow transaction={transaction} update={updateItems} />
+              <TransactionsRow
+                walletCurrency={currency}
+                transaction={transaction}
+                update={updateItems}
+              />
             )}
             currency={currency}
           />
