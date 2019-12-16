@@ -18,7 +18,7 @@ export const depositValidationSchema = ({
   lazy<IDepositFormValues>(values => {
     const rate = values[DEPOSIT_FORM_FIELDS.rate];
     const availableToInvestInAsset = convertToCurrency(
-      availableToInvestProp,
+      availableToInvestProp || Number.MAX_SAFE_INTEGER,
       rate
     );
     const availableInWallet =
