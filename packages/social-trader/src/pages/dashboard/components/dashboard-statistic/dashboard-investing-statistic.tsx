@@ -36,12 +36,10 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
           <DashboardValueItem
             label={t("dashboard-page.statistic.programs")}
             value={programsCount}
-            currency={currency}
           />
           <DashboardValueItem
             label={t("dashboard-page.statistic.funds")}
             value={fundsCount}
-            currency={currency}
           />
         </>
       )}
