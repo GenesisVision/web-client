@@ -21,7 +21,7 @@ import {
 
 const DEFAULT_RATE_CURRENCY = "USD";
 
-const _FollowModuleContainer: React.FC<Props> = ({
+const _FollowPopupFormContainer: React.FC<Props> = ({
   leverage,
   brokerId,
   isExternal,
@@ -114,5 +114,5 @@ interface Props {
   id: string;
 }
 
-const FollowPopupFormContainer = React.memo(_FollowModuleContainer);
+const FollowPopupFormContainer = React.memo(_FollowPopupFormContainer);
 export default FollowPopupFormContainer;
