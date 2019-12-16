@@ -26,7 +26,8 @@ const _ProgramWithdrawAmountForm: React.FC<
   programCurrency,
   rate,
   values,
-  isValid
+  isValid,
+  isOwner
 }) => {
   const [emptyInit, setEmptyInit] = useState<boolean>(true);
   const role = useRole();
@@ -69,7 +70,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         currency={programCurrency}
         isAllow={isAllow}
         disabled={values[FIELDS.withdrawAll]}
-        setMax={role === ROLE.MANAGER ? setMaxAmount : undefined}
+        setMax={isOwner ? setMaxAmount : undefined}
       />
       {programCurrency !== accountCurrency && values[FIELDS.amount] !== 0 && (
         <NumberFormat
@@ -141,6 +142,7 @@ interface OwnProps {
   programCurrency: string;
   accountCurrency: string;
   rate: number;
+  isOwner: boolean;
 }
 
 interface Props extends WithTranslation, OwnProps {}
