@@ -1,7 +1,7 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
-import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -27,21 +27,12 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
         programsCount,
         equity
       }: TDashboardInvestingStatistic) => (
-        <>
-          <DashboardValueItem
-            label={t("dashboard-page.statistic.balance")}
-            value={equity}
-            currency={currency}
-          />
-          <DashboardValueItem
-            label={t("dashboard-page.statistic.programs")}
-            value={programsCount}
-          />
-          <DashboardValueItem
-            label={t("dashboard-page.statistic.funds")}
-            value={fundsCount}
-          />
-        </>
+        <DashboardInvestingCounts
+          balance={equity}
+          currency={currency}
+          programs={programsCount}
+          funds={fundsCount}
+        />
       )}
     />
   );
