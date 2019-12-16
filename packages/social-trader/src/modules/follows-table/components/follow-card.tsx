@@ -106,7 +106,7 @@ const _FollowCard: React.FC<Props> = ({
             currency={follow.currency}
             title={""}
             isExternal={follow.isExternal}
-            broker={"MetaTrader4"}
+            broker={follow.brokerType}
             brokerId={follow.brokerId}
             leverage={follow.leverageMax}
           />

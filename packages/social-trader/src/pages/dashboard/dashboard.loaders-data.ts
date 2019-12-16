@@ -180,6 +180,7 @@ const getRandomAsset = () =>
 
 export const getRecommendationLoaderData = (): TRecommendation => {
   return {
+    brokerType: "MetaTrader5",
     tags: [],
     personalDetails: {
       isOwnAsset: false,
