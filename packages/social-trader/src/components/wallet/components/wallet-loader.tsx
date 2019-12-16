@@ -3,11 +3,10 @@ import "./wallet-balance/wallet-balance.scss";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
 import Page from "components/page/page";
 import SvgLoader from "components/svg-loader/svg-loader";
-import faker from "faker";
 import { WalletBaseData } from "gv-api-web";
 import * as React from "react";
 
-import { getRandomInteger } from "../../../utils/helpers";
+import { getRandomInteger, getRandomWord } from "../../../utils/helpers";
 import WalletBalanceButtonsLoader from "./wallet-balance/wallet-balance-buttons-loader";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 
@@ -38,10 +37,19 @@ const WalletTitleLoader: React.FC = () => (
 );
 
 export const getWalletBaseLoaderData = (): WalletBaseData => ({
-  id: faker.lorem.word(),
-  title: faker.lorem.word(),
-  logo: faker.lorem.word(),
+  id: getRandomWord(),
+  title: getRandomWord(),
+  logo: getRandomWord(),
   currency: "GVT",
+  available: getRandomInteger(0, 100),
+  rate: getRandomInteger(0, 100)
+});
+
+export const getWalletBaseLoaderDataWithETHCurrency = (): WalletBaseData => ({
+  id: getRandomWord(),
+  title: getRandomWord(),
+  logo: getRandomWord(),
+  currency: "ETH",
   available: getRandomInteger(0, 100),
   rate: getRandomInteger(0, 100)
 });
