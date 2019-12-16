@@ -7,12 +7,16 @@ import { CurrencyEnum } from "utils/types";
 const _DashboardValueItem: React.FC<Props> = ({ value, label, currency }) => {
   return (
     <StatisticItem big accent label={label}>
-      <NumberFormat
-        value={formatCurrencyValue(value, currency)}
-        thousandSeparator={" "}
-        suffix={` ${currency}`}
-        displayType="text"
-      />
+      {currency ? (
+        <NumberFormat
+          value={formatCurrencyValue(value, currency)}
+          thousandSeparator={" "}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
+      ) : (
+        value
+      )}
     </StatisticItem>
   );
 };
@@ -20,7 +24,7 @@ const _DashboardValueItem: React.FC<Props> = ({ value, label, currency }) => {
 interface Props {
   value: number;
   label: string;
-  currency: CurrencyEnum;
+  currency?: CurrencyEnum;
 }
 
 const DashboardValueItem = React.memo(_DashboardValueItem);
