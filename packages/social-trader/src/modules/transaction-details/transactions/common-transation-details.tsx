@@ -91,20 +91,6 @@ const TransactionWalletBlock: React.FC<{
     </TransactionDetailsItem>
   );
 });
-const TransactionAmountBlock: React.FC<{
-  amounts: AmountRowCell;
-}> = React.memo(({ amounts }) => {
-  const { title, first, second } = amounts;
-  return (
-    <TransactionDetailsItem label={title}>
-      {second ? (
-        <AmountConvert amount={amounts} />
-      ) : (
-        <AmountItem amount={first} />
-      )}
-    </TransactionDetailsItem>
-  );
-});
 
 const _CommonTransactionDetails: React.FC<Props> = ({
   data,
