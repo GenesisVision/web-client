@@ -108,7 +108,6 @@ const _FollowCard: React.FC<Props> = ({
             isExternal={follow.isExternal}
             broker={"MetaTrader4"}
             brokerId={follow.brokerId}
-            hasSignalAccount={true}
             leverage={follow.leverageMax}
           />
         </TableCardTableButtons>

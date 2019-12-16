@@ -10,7 +10,6 @@ const _FollowModuleContainer: React.FC<Props> = ({
   isExternal,
   broker,
   id,
-  hasSignalAccount,
   currency,
   onClose,
   onApply,
@@ -19,7 +18,6 @@ const _FollowModuleContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <FollowPopupFormContainer
-        hasSignalAccount={hasSignalAccount}
         onApply={onApply}
         onClose={onClose}
         broker={broker}
@@ -34,7 +32,6 @@ const _FollowModuleContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  hasSignalAccount: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;

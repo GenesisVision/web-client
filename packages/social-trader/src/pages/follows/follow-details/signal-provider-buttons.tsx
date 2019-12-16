@@ -27,8 +27,6 @@ const _SignalProviderButtons: React.FC<Props> = ({
 }) => {
   const hasActiveSubscription =
     !!signalSubscription && signalSubscription.hasActiveSubscription;
-  const hasSignalAccount =
-    !!signalSubscription && signalSubscription.hasSignalAccount;
   return (
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
       {hasActiveSubscription ? (
@@ -44,7 +42,6 @@ const _SignalProviderButtons: React.FC<Props> = ({
           canSubscribeToInternalSignal) && (
           <FollowButton
             onApply={onApply}
-            hasSignalAccount={hasSignalAccount}
             leverage={leverage}
             brokerId={brokerId}
             isExternal={isExternal}

@@ -27,7 +27,6 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   isExternal,
   broker,
   id,
-  hasSignalAccount,
   currency,
   onClose,
   onApply = () => {}
@@ -35,14 +34,13 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
-  const minDeposit =
-    isExternal || hasSignalAccount
-      ? 0
-      : tradingAccountMinDepositAmounts
-          .find(({ serverType }) => serverType === broker)!
-          .minDepositCreateAsset.find(
-            (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
-          )!.amount;
+  const minDeposit = isExternal
+    ? 0
+    : tradingAccountMinDepositAmounts
+        .find(({ serverType }) => serverType === broker)!
+        .minDepositCreateAsset.find(
+          (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
+        )!.amount;
   const wallets = useSelector(walletsSelector);
 
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
@@ -85,7 +83,6 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   );
   return (
     <FollowPopupForm
-      hasSignalAccount={hasSignalAccount}
       isExternal={isExternal}
       rate={rate}
       loaderData={[]}
@@ -103,7 +100,6 @@ const getApiRequest = (isExternal: boolean) =>
   isExternal ? attachToExternalSignal : attachToSignal;
 
 interface Props {
-  hasSignalAccount: boolean;
   leverage: number;
   isExternal: boolean;
   brokerId: string;

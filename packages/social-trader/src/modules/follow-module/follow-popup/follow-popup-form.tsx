@@ -36,7 +36,6 @@ const _FollowForm: React.FC<Props> = ({
   id,
   wallets,
   currency,
-  hasSignalAccount,
   minDeposit,
   rate = 1,
   submitMethod
@@ -52,9 +51,6 @@ const _FollowForm: React.FC<Props> = ({
   const [requestParams, setRequestParams] = useState<AttachToSignalProvider>(
     initRequestParams
   );
-  useEffect(() => {
-    hasSignalAccount && setTab(null, TABS.PARAMS);
-  }, [setTab, hasSignalAccount]);
   const createdCopytradingAccount = useCallback(
     values => {
       setTab(null, TABS.PARAMS);
@@ -145,7 +141,6 @@ enum TABS {
 }
 
 interface Props {
-  hasSignalAccount: boolean;
   isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
