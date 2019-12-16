@@ -1,21 +1,22 @@
 import "./dashboard-total.scss";
 
-import { fetchDashboardInvestmentsTotalAction } from "pages/dashboard/actions/dashboard.actions";
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardTotal from "pages/dashboard/components/dashboard-total/dashboard-total";
 import { getTotalLoaderData } from "pages/dashboard/dashboard.loaders-data";
-import { dashboardInvestmentsTotalSelector } from "pages/dashboard/reducers/dashboard-investments-total.reducer";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { TDashboardTotal } from "pages/dashboard/dashboard.types";
+import { getTotal } from "pages/dashboard/services/dashboard.service";
+import React from "react";
+import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
 const _DashboardTotalContainer: React.FC<Props> = ({ label }) => {
-  const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
-  const data = useSelector(dashboardInvestmentsTotalSelector);
-  useEffect(() => {
-    dispatch(fetchDashboardInvestmentsTotalAction(currency));
-  }, []);
+  const { data } = useApiRequest<TDashboardTotal>({
+    fetchOnMount: true,
+    fetchOnMountData: { currency },
+    request: getTotal
+  });
   return (
     <DashboardBlock label={label}>
       <DashboardTotal
