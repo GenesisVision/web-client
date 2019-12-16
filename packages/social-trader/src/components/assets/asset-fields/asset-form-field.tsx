@@ -11,6 +11,7 @@ import * as React from "react";
 export const _AssetFormField: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({
+  isAllowed,
   max = 500,
   value,
   name,
@@ -27,6 +28,7 @@ export const _AssetFormField: React.FC<
   return (
     <div className={classNames("asset-form-field", className)}>
       <GVFormikField
+        isAllowed={isAllowed}
         adornment={adornment}
         type={type}
         name={name}
