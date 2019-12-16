@@ -62,8 +62,10 @@ const _DepositForm: React.FC<
     getRate({ from: walletCurrency, to: currency });
   }, [currency, walletCurrency]);
   useEffect(() => {
+    setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
+  }, [rate]);
+  useEffect(() => {
     setAvailableToInvest(convertToCurrency(availableToInvestProp, rate));
-    setFieldValue(DEPOSIT_FORM_FIELDS.availableToInvest, availableToInvestProp);
   }, [availableToInvestProp, rate]);
   useEffect(() => {
     const available = wallets.find(
@@ -72,9 +74,6 @@ const _DepositForm: React.FC<
     setAvailableInWallet(available);
     setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
   }, [walletCurrency, wallets]);
-  useEffect(() => {
-    setFieldValue(DEPOSIT_FORM_FIELDS.rate, rate);
-  }, [rate]);
 
   const setMaxAmount = useCallback((): void => {
     const max = formatCurrencyValue(
@@ -151,14 +150,18 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   withFormik<Props, IDepositFormValues>({
     enableReinitialize: true,
     displayName: "invest-form",
-    mapPropsToValues: ({ wallets }) => ({
-      [DEPOSIT_FORM_FIELDS.rate]: 1,
-      [DEPOSIT_FORM_FIELDS.walletId]: wallets.find(
-        wallet => wallet.currency === INIT_WALLET_CURRENCY
-      )!.id,
-      [DEPOSIT_FORM_FIELDS.amount]: undefined,
-      [DEPOSIT_FORM_FIELDS.walletCurrency]: INIT_WALLET_CURRENCY
-    }),
+    mapPropsToValues: ({ wallets }) => {
+      const initWallet =
+        wallets.find(({ currency }) => currency === INIT_WALLET_CURRENCY) ||
+        wallets[0];
+      return {
+        [DEPOSIT_FORM_FIELDS.availableInWallet]: initWallet.available,
+        [DEPOSIT_FORM_FIELDS.walletId]: initWallet.id,
+        [DEPOSIT_FORM_FIELDS.rate]: 1,
+        [DEPOSIT_FORM_FIELDS.amount]: undefined,
+        [DEPOSIT_FORM_FIELDS.walletCurrency]: initWallet.currency
+      };
+    },
     validationSchema: depositValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(
@@ -168,7 +171,8 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
         values[DEPOSIT_FORM_FIELDS.walletId]
       );
     }
-  })
+  }),
+  React.memo
 )(_DepositForm);
 export default DepositForm;
 
@@ -177,7 +181,6 @@ export enum DEPOSIT_FORM_FIELDS {
   amount = "amount",
   walletCurrency = "walletCurrency",
   walletId = "walletId",
-  availableToInvest = "availableToInvest",
   availableInWallet = "availableInWallet"
 }
 
@@ -203,7 +206,6 @@ interface Props extends IDepositOwnProps, WithTranslation {}
 
 export interface IDepositFormValues {
   [DEPOSIT_FORM_FIELDS.rate]: number;
-  [DEPOSIT_FORM_FIELDS.availableToInvest]?: number;
   [DEPOSIT_FORM_FIELDS.availableInWallet]?: number;
   [DEPOSIT_FORM_FIELDS.amount]?: number;
   [DEPOSIT_FORM_FIELDS.walletCurrency]: CurrencyEnum;
