@@ -47,7 +47,7 @@ import {
   getInvestingPrograms,
   getPrivateAssets,
   getPublicAssets,
-  getTotal
+  getTotalInvestingStatistic
 } from "pages/dashboard/services/dashboard.service";
 import {
   EVENT_LOCATION,
@@ -162,7 +162,7 @@ export const fetchDashboardInvestmentsTotalAction = (
   currency: CurrencyEnum
 ): TInvestmentsTotalAction => ({
   type: DASHBOARD_INVESTMENTS_TOTAL,
-  payload: getTotal({ currency })
+  payload: getTotalInvestingStatistic({ currency })
 });
 
 export const fetchDashboardInvestmentsFundsAction = (
