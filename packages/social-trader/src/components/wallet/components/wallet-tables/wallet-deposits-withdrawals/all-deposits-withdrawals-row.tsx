@@ -1,4 +1,5 @@
 import Profitability from "components/profitability/profitability";
+import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateItemsFuncType } from "components/table/components/table.types";
@@ -34,12 +35,11 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
           {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-          {/*{("statusUrl" in transaction && transaction.statusUrl && (
-            <a href={transaction.statusUrl} target="_blank">
-              {transaction.status}
-            </a>
-          )) || <>{transaction.status}</>}*/}
-          {transaction.status}
+          <Status
+            withText
+            status={transaction.status}
+            className="wallet-transactions__icon"
+          />
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
           <Profitability
