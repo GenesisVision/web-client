@@ -2,6 +2,16 @@
 @import "~shared/styles/_colors";
 
 .transaction-details {
+  &__details-list-statistic-item {
+    display: flex;
+    align-items: center;
+  }
+  &__details-list-statistic-item-value {
+    padding-right: $padding-xsmall;
+    &--long {
+      font-size: $font-size-xxxxsmall;
+    }
+  }
 }
 
 .transaction-asset {
