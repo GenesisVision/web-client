@@ -803,7 +803,8 @@
         "profit": "Profit",
         "status": "Status",
         "type": "Type",
-        "percentage": "Percentage"
+        "percent": "Percent",
+        "percentage": "Tolerance percentage"
       }
     },
     "title": "Follow detail",
