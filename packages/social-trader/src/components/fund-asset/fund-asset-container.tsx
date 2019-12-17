@@ -1,12 +1,12 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
+import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import {
-  Currency,
   FundAssetInfo,
   FundAssetPartWithIcon,
   FundAssetPercent
@@ -16,11 +16,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { PlatformAssetFull } from "utils/types";
 
-import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
+import { FUND_ASSET_TYPE } from "./fund-asset";
 import HidedAssetsLabel from "./hided-assets-label";
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
-  assets,
+  assets = [],
   type,
   length,
   remainder = 0,
@@ -154,19 +154,14 @@ const renderFundAsset = ({
   hoveringAsset?: string;
   assetsLength: number;
 }) => (asset: FundAssetType, idx: number) => (
-  <FundAsset
-    key={asset.asset}
-    asset={asset.asset}
-    icon={asset.icon}
-    current={"current" in asset ? asset.current : asset.percent}
-    target={"target" in asset ? asset.target : asset.percent}
-    symbol={asset.asset}
-    currency={asset.asset as Currency} //TODO remove when api update
+  <FundAssetTooltipContainer
+    key={idx}
+    asset={asset as PlatformAssetFull}
+    idx={idx}
+    assetsLength={assetsLength}
     type={type}
-    last={idx === assetsLength - 1}
     removable={removable}
     removeHandle={removeHandle}
-    className={hoveringAsset === asset.asset ? "fund-asset--hover" : undefined}
   />
 );
 
@@ -175,7 +170,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
-  assets: Array<FundAssetType>;
+  assets?: Array<FundAssetType>;
   type: FUND_ASSET_TYPE;
   size?: number;
   length?: number;
