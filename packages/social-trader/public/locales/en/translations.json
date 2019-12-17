@@ -2843,6 +2843,7 @@
       "KYC_REQUIRED": "KYC required",
       "FOREX_DISABLED": "Forex disabled"
     },
+    "kyc-requirement-title": "KYC required",
     "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
     "broker-info": {
       "about": "About",
