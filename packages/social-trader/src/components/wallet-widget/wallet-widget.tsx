@@ -56,7 +56,7 @@ const _WalletWidget: React.FC<Props> = ({
             </StatisticItem>
           </div>
           <div className="wallet-details__item">
-            <StatisticItem label={t("wallet-widget.pending")}>
+            <StatisticItem label={t("wallet-widget.trading")}>
               {`${formatCurrencyValue(trading, currency)} ${currency}`}
             </StatisticItem>
           </div>
