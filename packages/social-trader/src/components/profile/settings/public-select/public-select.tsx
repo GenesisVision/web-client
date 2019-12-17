@@ -8,7 +8,7 @@ import {
 import Tooltip from "components/tooltip/tooltip";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isPublicInvestorSelector } from "reducers/header-reducer";
@@ -21,6 +21,9 @@ const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
   const [isPublic, setPublic, setNotPublic, setPublicValue] = useIsOpen(
     isPublicInvestor
   );
+  useEffect(() => {
+    setPublicValue(isPublicInvestor);
+  }, [isPublicInvestor]);
   const request = isPublic ? setPublicOff : setPublicOn;
   const setPublicMiddleware = () => {
     setPublicValue(!isPublic);
@@ -46,15 +49,17 @@ const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
       <div className="public-select__label">
         {t("profile-page.settings.public.label")}
       </div>
-      <GVSwitch
-        name={"isPublic"}
-        touched={false}
-        className="public-select__switch"
-        value={isPublic}
-        disabled={isPending}
-        color="primary"
-        onChange={handleSwitch}
-      />
+      {isPublicInvestor !== undefined && (
+        <GVSwitch
+          name={"isPublic"}
+          touched={false}
+          className="public-select__switch"
+          value={isPublic}
+          disabled={isPending}
+          color="primary"
+          onChange={handleSwitch}
+        />
+      )}
     </div>
   );
 };
