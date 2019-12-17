@@ -12,7 +12,9 @@ import { CurrencyEnum } from "utils/types";
 import { ITwoFactorReducer } from "./2fa-reducer";
 import defaultReducer from "./reducer-creators/default-reducer";
 
-const initialState = (getCookie(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || "BTC";
+export const DEFAULT_ACCOUNT_CURRENCY: CurrencyEnum = "BTC";
+const initialState =
+  (getCookie(ACCOUNT_CURRENCY_KEY) as CurrencyEnum) || DEFAULT_ACCOUNT_CURRENCY;
 
 export const currencySelector = fieldSelector(
   state => state.accountSettings.currency

@@ -1,4 +1,5 @@
 import { setTwoFactorRequirementAction } from "actions/2fa-actions";
+import { updateAccountSettingsCurrencyAction } from "actions/account-settings-actions";
 import authActions from "actions/auth-actions";
 import clearDataActionFactory from "actions/clear-data.factory";
 import platformActions from "actions/platform-actions";
@@ -81,6 +82,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 export const logout: logoutFuncType = dispatch => {
   authService.removeToken();
   removeCookie(ACCOUNT_CURRENCY_KEY);
+  dispatch(updateAccountSettingsCurrencyAction());
   dispatch(authActions.logoutAction());
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
