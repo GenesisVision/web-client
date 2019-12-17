@@ -12,6 +12,7 @@ import {
 } from "gv-api-web";
 import { AccountAbsoluteProfitChartDataType } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
 import accountsApi from "services/api-client/accounts-api";
+import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -49,7 +50,7 @@ export const fetchAccountProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<AccountProfitChartDataType> => ({
   type: FETCH_ACCOUNT_PROFIT_CHART,
-  payload: accountsApi.getProfitPercentCharts(id, {
+  payload: accountsApi.getProfitPercentCharts(id, authService.getAuthArg(), {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -62,7 +63,7 @@ export const fetchAccountAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountAbsoluteProfitChartDataType> => ({
   type: FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
-  payload: accountsApi.getAbsoluteProfitChart(id, {
+  payload: accountsApi.getAbsoluteProfitChart(id, authService.getAuthArg(), {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -75,7 +76,7 @@ export const fetchAccountBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountBalanceChart> => ({
   type: FETCH_ACCOUNT_BALANCE_CHART,
-  payload: accountsApi.getBalanceChart(id, {
+  payload: accountsApi.getBalanceChart(id, authService.getAuthArg(), {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
