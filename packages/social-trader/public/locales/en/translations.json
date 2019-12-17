@@ -271,6 +271,7 @@
     "details": "Details"
   },
   "wallet-widget": {
+    "trading": "Trading",
     "total-balance": "Total Balance",
     "invested": "Invested",
     "pending": "Pending",
