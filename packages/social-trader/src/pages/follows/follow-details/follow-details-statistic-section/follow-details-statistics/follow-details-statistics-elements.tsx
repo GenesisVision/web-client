@@ -3,12 +3,11 @@ import "components/details/details-description-section/details-statistic-section
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
-import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import { ProgramChartStatistic } from "gv-api-web";
+import { FollowChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -42,13 +41,13 @@ const _ProgramDetailsStatisticsElements: React.FC<
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.investors")}
-                labelText={t("program-details-page.statistics.investors")}
+                tooltipContent={t("follow-details-page.tooltip.subscribers")}
+                labelText={t("follow-details-page.statistics.subscribers")}
               />
             }
           >
             <NumberFormat
-              value={statistic.investors}
+              value={statistic.subscribers}
               thousandSeparator={" "}
               displayType="text"
             />
@@ -66,11 +65,6 @@ const _ProgramDetailsStatisticsElements: React.FC<
                 {t("program-details-page.statistics.period")}
               </span>
             </Tooltip>
-            <ProgramPeriodLine
-              start={statistic.lastPeriodStarts}
-              end={statistic.lastPeriodEnds}
-              status={status}
-            />
           </div>
         </>
       )}
@@ -234,7 +228,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
 
 export interface IFollowStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: ProgramChartStatistic;
+  statistic: FollowChartStatistic;
 }
 
 export interface IFollowDetailsStatisticsElementsProps {
