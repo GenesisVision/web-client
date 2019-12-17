@@ -1,0 +1,10 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
+.create-fund-settings__assets-block {
+  &__form-error {
+    padding-bottom: $padding-xsmall;
+    @include font-size($font-size-small);
+    color: $negative-color;
+  }
+}

@@ -1,4 +1,5 @@
 import "../create-fund-settings.scss";
+import "./create-fund-settings-assets-block.scss";
 
 import AddButton from "components/add-button/add-button";
 import AssetRow from "components/assets/asset-fields/asset-row";
@@ -51,7 +52,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
         </div>
       </div>
       {touched && (
-        <div className="form-error reallocate-container__form-error">
+        <div className="create-fund-settings__assets-block__form-error">
           {error}
         </div>
       )}
