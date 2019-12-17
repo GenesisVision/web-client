@@ -85,7 +85,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
-  console.log(assetType);
   return (
     <Page title={title}>
       <DetailsDescriptionSection
