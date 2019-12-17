@@ -797,6 +797,7 @@
     "current-investment": {
       "title": "Subscription details",
       "fields": {
+        "fixed-volume": "Fixed volume",
         "profit": "Profit",
         "status": "Status",
         "type": "Type",
