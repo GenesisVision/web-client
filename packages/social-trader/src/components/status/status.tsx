@@ -1,4 +1,6 @@
-import classnames from "classnames";
+import "./status.scss";
+
+import classNames from "classnames";
 import Error from "media/transactions/error.svg";
 import Pending from "media/transactions/pending.svg";
 import Success from "media/transactions/success.svg";
@@ -12,18 +14,23 @@ const statuses = {
 };
 
 export type IStatus = {
+  withText?: boolean;
   status: "Done" | "Pending" | "Canceled" | "Error";
   className?: string;
 };
 
-const Status: React.FC<IStatus> = props => {
+const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
   return (
-    <img
-      className={classnames(props.className)}
-      src={statuses[props.status]}
-      alt={`status ${props.status}`}
-    />
+    <div className="status">
+      <img
+        className={classNames(className)}
+        src={statuses[status]}
+        alt={`status ${status}`}
+      />
+      {withText && status}
+    </div>
   );
 };
 
+const Status = React.memo(_Status);
 export default Status;
