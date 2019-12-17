@@ -73,18 +73,19 @@ const _DashboardProgramCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.share")}>
+          <StatisticItem label={t("programs-page.programs-header.profit")}>
             <NumberFormat
-              value={formatValue(program.personalDetails.share, 2)}
+              value={formatCurrencyValue(
+                program.personalDetails.profit,
+                requestCurrency
+              )}
               displayType="text"
-              suffix="%"
+              suffix={` ${requestCurrency}`}
             />
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
-            label={t("programs-page.programs-header.current-value")}
-          >
+          <StatisticItem label={t("programs-page.programs-header.value")}>
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.value,
