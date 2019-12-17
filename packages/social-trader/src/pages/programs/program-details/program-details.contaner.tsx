@@ -7,6 +7,7 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
+import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
@@ -84,6 +85,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+  console.log(assetType);
   return (
     <Page title={title}>
       <DetailsDescriptionSection
@@ -148,7 +150,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         programPersonalDetails={programPersonalDetails}
         followPersonalDetails={followPersonalDetails}
       />
-      <ProgramDetailsStatisticSection />
+      {assetType === ASSET.FOLLOW ? (
+        <FollowDetailsStatisticSection />
+      ) : (
+        <ProgramDetailsStatisticSection />
+      )}
       <ProgramDetailsHistorySection
         getHistoryCounts={getProgramHistoryCounts}
         tablesData={tablesData}
