@@ -1,11 +1,15 @@
+import "../transaction-details.scss";
+
+import classNames from "classnames";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
+import Link from "components/link/link";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
-import AmountConvert from "components/wallet/components/wallet-tables/wallet-transactions/amount-convert";
 import WalletConvert from "components/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
 import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import {
@@ -14,7 +18,7 @@ import {
   TransactionAssetDetails,
   TransactionDetailItem
 } from "gv-api-web";
-import AmountItem from "modules/transaction-details/transactions/amount-item";
+import CopyButton from "modules/copy-button/copy-button";
 import TransactionAsset from "modules/transaction-details/transactions/transaction-asset";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -23,11 +27,34 @@ const TransactionDetailsItemsBlock: React.FC<{
   items: TransactionDetailItem[];
 }> = React.memo(({ items }) => {
   return (
-    <>
-      {items.map(({ details, title }) => (
-        <TransactionDetailsItem label={title}>{details}</TransactionDetailsItem>
+    <StatisticItemList>
+      {items.map(item => (
+        <TransactionDetailsListItem item={item} />
       ))}
-    </>
+    </StatisticItemList>
+  );
+});
+
+const TransactionDetailsListItem: React.FC<{
+  item: TransactionDetailItem;
+}> = React.memo(({ item: { title, details, url, canCopy } }) => {
+  return (
+    <StatisticItem label={title}>
+      <div className="transaction-details__details-list-statistic-item">
+        <div
+          className={classNames(
+            "transaction-details__details-list-statistic-item-value",
+            {
+              "transaction-details__details-list-statistic-item-value--long":
+                details.length > 40
+            }
+          )}
+        >
+          {url ? <Link to={"url"}>details</Link> : details}
+        </div>
+        {canCopy && <CopyButton value={details} text />}
+      </div>
+    </StatisticItem>
   );
 });
 
