@@ -2,6 +2,8 @@ import "components/details/details.scss";
 import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
+import Link from "components/link/link";
+import { KYC_ROUTE } from "components/profile/profile.constants";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
 import SettingsBlock from "components/settings-block/settings-block";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -39,7 +41,11 @@ const _Profile: React.FC<IProfileOwnProps> = ({
       <SettingsBlock
         label={t("profile-page.personal-info")}
         verificationStatus={info.verificationStatus}
-      />
+      >
+        {info.verificationStatus === "NotVerified" && (
+          <Link to={KYC_ROUTE}>{t("profile-page.tabs.verify")}</Link>
+        )}
+      </SettingsBlock>
     </>
   );
 };
