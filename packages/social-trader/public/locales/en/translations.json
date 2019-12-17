@@ -860,6 +860,7 @@
       "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
     },
     "statistics": {
+      "subscribers": "Subscribers",
       "heading": "Statistics",
       "current": "Current",
       "for": "For",
