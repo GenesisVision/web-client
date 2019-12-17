@@ -7,6 +7,10 @@ import {
   ItemsViewModelProgramInvestingDetailsList,
   ProgramInvestingDetailsList
 } from "gv-api-web";
+import {
+  DASHBOARD_INVESTMENTS_DEFAULT_FILTERS,
+  DASHBOARD_INVESTMENTS_FILTERING
+} from "pages/dashboard/dashboard.constants";
 import { RootState } from "reducers/root-reducer";
 import { ApiAction } from "utils/types";
 
@@ -34,5 +38,7 @@ export const dashboardInvestmentsProgramsReducer = tableReducerFactory<
   TInvestmentsProgramsStateData
 >({
   type: DASHBOARD_INVESTMENTS_PROGRAMS,
-  paging: DEFAULT_CARD_PAGING
+  paging: DEFAULT_CARD_PAGING,
+  filtering: DASHBOARD_INVESTMENTS_FILTERING,
+  defaultFilters: DASHBOARD_INVESTMENTS_DEFAULT_FILTERS
 });
