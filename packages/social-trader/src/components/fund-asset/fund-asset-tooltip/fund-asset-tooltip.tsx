@@ -1,7 +1,6 @@
 import "./fund-asset-tooltip.scss";
 
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 interface IFundAssetTooltipProps {
@@ -9,18 +8,17 @@ interface IFundAssetTooltipProps {
   currency: CurrencyEnum;
 }
 
-const _FundAssetTooltip: React.FC<IFundAssetTooltipProps & WithTranslation> = ({
-  t,
+const _FundAssetTooltip: React.FC<IFundAssetTooltipProps> = ({
   name,
   currency
 }) => (
   <div className="fund-asset-tooltip">
     <div className="fund-asset-tooltip__content">
-      {name}
-      <span className="fund-asset__currency-short">{currency}</span>
+      <div className="fund-asset-tooltip__name"> {name}</div>
+      <div className="fund-asset__currency-short">{currency}</div>
     </div>
   </div>
 );
 
-const FundAssetTooltip = translate()(React.memo(_FundAssetTooltip));
+const FundAssetTooltip = React.memo(_FundAssetTooltip);
 export default FundAssetTooltip;

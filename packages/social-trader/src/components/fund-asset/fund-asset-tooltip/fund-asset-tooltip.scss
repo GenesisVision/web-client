@@ -8,7 +8,13 @@
     color: $text-dark-color;
   }
 
+  &__name {
+    padding-right: $padding-xxsmall;
+  }
+
   &__content {
+    display: flex;
+    align-items: center;
     color: $text-accent-color;
   }
 }
