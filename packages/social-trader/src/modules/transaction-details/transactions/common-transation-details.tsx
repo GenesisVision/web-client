@@ -7,7 +7,6 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import Link from "components/link/link";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import WalletConvert from "components/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
@@ -27,11 +26,11 @@ const TransactionDetailsItemsBlock: React.FC<{
   items: TransactionDetailItem[];
 }> = React.memo(({ items }) => {
   return (
-    <StatisticItemList>
+    <>
       {items.map(item => (
         <TransactionDetailsListItem item={item} />
       ))}
-    </StatisticItemList>
+    </>
   );
 });
 
