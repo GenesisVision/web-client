@@ -535,6 +535,7 @@
     "programs-table": "All programs",
     "programs-header": {
       "reinvest": "Reinvest",
+      "value": "Value",
       "current-value": "Current value",
       "share": "Share",
       "status": "Status",
