@@ -32,9 +32,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   t,
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
-  data: {
-    // programsInfo: { managerMaxEntryFee, managerMaxExitFee } TODO
-  },
+  data: { maxExitFee, maxEntryFee },
   minimumDepositAmount
 }) => {
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
@@ -66,7 +64,7 @@ const _CreateFundSettings: React.FC<Props> = ({
           entryFeeName={CREATE_FUND_FIELDS.entryFee}
           entryFeeDescription={t(
             "create-fund-page.settings.hints.entry-fee-description",
-            { maxFee: 0 } //managerMaxEntryFee }
+            { maxFee: maxEntryFee }
           )}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
           secondFeeLabel={t("create-fund-page.settings.fields.exit-fee")}
@@ -74,7 +72,7 @@ const _CreateFundSettings: React.FC<Props> = ({
           secondFeeDescription={t(
             "create-fund-page.settings.hints.exit-fee-description",
             {
-              maxFee: 0 //managerMaxExitFee
+              maxFee: maxExitFee
             }
           )}
         />
