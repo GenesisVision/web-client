@@ -12,6 +12,7 @@ const _CopyButton: React.FC<Props> = ({ value, successMessage, text }) => {
   }, [value]);
   return (
     <GVButton
+      noPadding={!!text}
       color="secondary"
       onClick={onCopy}
       variant={text ? "text" : undefined}
