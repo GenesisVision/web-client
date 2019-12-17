@@ -1,7 +1,12 @@
+import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
+import FundAssetContainer, {
+  FundAssetType
+} from "components/fund-asset/fund-asset-container";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
-  TableCardTableColumn
+  TableCardTableColumn,
+  TableCardTableRow
 } from "components/table/components/table-card/table-card";
 import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
@@ -62,7 +67,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
       showTerminal={asset.assetType !== ASSET.FUND}
     />
   );
-  const { programDetails } = asset.publicInfo;
+  const { programDetails, fundDetails } = asset.publicInfo;
+  const topFundAssets = fundDetails && fundDetails.topFundAssets;
   return (
     <TableCard
       hasAvatar
@@ -127,6 +133,18 @@ const _DashboardPublicCard: React.FC<Props> = ({
           )}
         </TableCardTableColumn>
       </TableCardTable>
+      {topFundAssets && (
+        <TableCardTableRow>
+          {topFundAssets && (
+            <FundAssetContainer
+              assets={topFundAssets as FundAssetType[]}
+              type={FUND_ASSET_TYPE.SHORT}
+              size={3}
+              length={topFundAssets.length}
+            />
+          )}
+        </TableCardTableRow>
+      )}
       <DepositWithdrawButtons
         title={asset.accountInfo.title}
         onApply={updateItems}
