@@ -17,7 +17,7 @@ const GlobalSearchInput: React.FC<Props> = React.memo(({ query, onChange }) => {
       <GVTextField
         name="queryValue"
         wrapperClassName="global-search-input__wrapper"
-        placeholder="Search for programs or funds or managers"
+        placeholder="Search"
         autoComplete="off"
         adornment={<SearchIcon primary />}
         adornmentPosition="start"
