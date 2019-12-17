@@ -21,6 +21,7 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
         )}
       </div>
       <ConfirmPopup
+        header={t("create-program-page.kyc-requirement-title")}
         open={isOpenPopup}
         onApply={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
