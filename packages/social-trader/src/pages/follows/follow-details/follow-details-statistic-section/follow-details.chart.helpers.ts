@@ -5,13 +5,13 @@ import {
   useFundChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
 import { followAbsoluteProfitChartSelector } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
+import { programIdSelector } from "pages/programs/program-details/reducers/description.reducer";
 
 import {
   statisticCurrencyAction,
   statisticPeriodAction
 } from "../actions/follow-details.actions";
 import { followBalanceChartSelector } from "../reducers/balance-chart.reducer";
-import { followIdSelector } from "../reducers/description.reducer";
 import { followProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
 import { statisticPeriodSelector } from "../reducers/statistic-period.reducer";
@@ -28,7 +28,7 @@ export const useFollowChartStateData = (view: DETAILS_CHART_TABS) =>
   useChartStateDataCreator({
     view,
     statisticCurrencyAction,
-    idSelector: followIdSelector,
+    idSelector: programIdSelector,
     statisticPeriodSelector,
     statisticCurrencySelector,
     absoluteProfitChartSelector: followAbsoluteProfitChartSelector,
