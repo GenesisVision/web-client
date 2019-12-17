@@ -1,4 +1,5 @@
 import AssetField from "components/assets/asset-fields/asset-field";
+import FormTextField from "components/assets/fields/form-text-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import GVFormikField from "components/gv-formik-field";
 import InputAmountField from "components/input-amount-field/input-amount-field";
@@ -47,6 +48,11 @@ const _InvestmentLimitField: React.FC<Props> = ({
           />
         </AssetField>
       )}
+      <AssetField wide>
+        <FormTextField>
+          {t("program-settings.investment-limit.text")}
+        </FormTextField>
+      </AssetField>
     </>
   );
 };
