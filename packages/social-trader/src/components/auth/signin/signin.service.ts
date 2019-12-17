@@ -8,6 +8,7 @@ import { Push } from "components/link/link";
 import { CaptchaCheckResult } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import Router from "next/router";
+import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
@@ -82,7 +83,7 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 export const logout: logoutFuncType = dispatch => {
   authService.removeToken();
   removeCookie(ACCOUNT_CURRENCY_KEY);
-  dispatch(updateAccountSettingsCurrencyAction());
+  dispatch(updateAccountSettingsCurrencyAction(DEFAULT_ACCOUNT_CURRENCY));
   dispatch(authActions.logoutAction());
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
