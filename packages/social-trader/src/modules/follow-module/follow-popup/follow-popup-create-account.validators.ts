@@ -4,6 +4,7 @@ import {
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
 import { lazy, number, object, Schema, string } from "yup";
 
 import {
@@ -38,9 +39,12 @@ const CreateAccountFormValidationSchema = ({
             t(
               "follow-program.create-account.validation.amount-more-than-min-deposit",
               {
-                value: convertFromCurrency(
-                  minDeposit,
-                  values[CREATE_ACCOUNT_FORM_FIELDS.rate]
+                value: formatCurrencyValue(
+                  convertFromCurrency(
+                    minDeposit,
+                    values[CREATE_ACCOUNT_FORM_FIELDS.rate]
+                  ),
+                  values[CREATE_ACCOUNT_FORM_FIELDS.currency]
                 )
               }
             )
