@@ -84,7 +84,7 @@ export const fetchFollowProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FollowProfitChartDataType> => ({
   type: FETCH_FOLLOW_PROFIT_CHART,
-  payload: programsApi.getProgramProfitPercentCharts(id, {
+  payload: followApi.getProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -97,7 +97,7 @@ export const fetchFollowAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<FollowAbsoluteProfitChartDataType> => ({
   type: FETCH_FOLLOW_ABSOLUTE_PROFIT_CHART,
-  payload: programsApi.getProgramAbsoluteProfitChart(id, {
+  payload: followApi.getAbsoluteProfitChart(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -111,7 +111,7 @@ export const fetchFollowBalanceChartAction = (
 ): ApiAction<ProgramBalanceChart> => ({
   type: FETCH_FOLLOW_BALANCE_CHART,
   // @ts-ignore
-  payload: programsApi.getProgramBalanceChart(id, {
+  payload: followApi.getBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
