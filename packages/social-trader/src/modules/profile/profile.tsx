@@ -28,15 +28,6 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           onUpdate={onUpdate}
         />
       </SettingsBlock>
-      <SettingsBlock label={t("profile-page.id")}>
-        <div className="profile__content">
-          <div>{info.id}</div>
-          <CopyButton
-            value={info.id}
-            successMessage={"profile-page.success-copy"}
-          />
-        </div>
-      </SettingsBlock>
       <SettingsBlock label={t("profile-page.settings.profile-image")}>
         <ProfileImageContainer />
       </SettingsBlock>
