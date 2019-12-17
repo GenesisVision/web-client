@@ -62,7 +62,8 @@ const _DetailsInvestment: React.FC<Props> = ({
   }, [isAuthenticated, events]);
 
   const showInvestment =
-    investmentDetails && haveActiveInvestment(investmentDetails);
+    !!investmentDetails && haveActiveInvestment(investmentDetails);
+
   const showSubscription = !!subscriptionsCount;
   const historyType =
     asset === ASSET.FOLLOW ? "tradingHistory" : "investmentHistory";
