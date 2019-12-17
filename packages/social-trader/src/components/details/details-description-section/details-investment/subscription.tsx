@@ -77,6 +77,7 @@ const _Subscription: React.FC<Props> = ({
       </StatisticItemList>
       <DetailsInvestmentFooter>
         <EditFollowButton
+          signalSubscription={subscriptionInfo}
           onApply={updateInfo}
           currency={assetCurrency}
           tradingAccountId={subscriptionInfo.subscriberInfo.tradingAccountId}
