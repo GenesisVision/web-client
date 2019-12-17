@@ -57,8 +57,20 @@ const _Subscription: React.FC<Props> = ({
           label={t("follow-details-page.current-investment.fields.percentage")}
         >
           <NumberFormat
-            value={subscriptionInfo.percent}
+            value={subscriptionInfo.openTolerancePercent}
             suffix={` %`}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          accent
+          label={t(
+            "follow-details-page.current-investment.fields.fixed-volume"
+          )}
+        >
+          <NumberFormat
+            value={subscriptionInfo.fixedVolume}
+            suffix={` ${subscriptionInfo.fixedCurrency}`}
             displayType="text"
           />
         </StatisticItem>
