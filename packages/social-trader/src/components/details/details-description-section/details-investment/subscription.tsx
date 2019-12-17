@@ -44,7 +44,7 @@ const _Subscription: React.FC<Props> = ({
           accent
           label={t("follow-details-page.current-investment.fields.status")}
         >
-          ???
+          {subscriptionInfo.status}
         </StatisticItem>
         <StatisticItem
           accent
