@@ -7,8 +7,8 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 
 const _FundAsset: React.FC<Props> = ({
-  current: mandatoryFundPercent,
-  target: percent,
+  current: percent,
+  target: mandatoryFundPercent,
   currency,
   type,
   last,
