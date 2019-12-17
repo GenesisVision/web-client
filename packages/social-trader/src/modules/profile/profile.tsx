@@ -2,6 +2,7 @@ import "components/details/details.scss";
 import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
+import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
@@ -43,7 +44,11 @@ const _Profile: React.FC<IProfileOwnProps> = ({
         verificationStatus={info.verificationStatus}
       >
         {info.verificationStatus === "NotVerified" && (
-          <Link to={KYC_ROUTE}>{t("profile-page.tabs.verify")}</Link>
+          <Link className="level-calculator-popup__btn-verify" to={KYC_ROUTE}>
+            <GVButton color="primary" variant="outlined">
+              {t("buttons.verify")}
+            </GVButton>
+          </Link>
         )}
       </SettingsBlock>
     </>
