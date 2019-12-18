@@ -21,13 +21,13 @@ export type mode = {
 
 export const modes: { [key: string]: mode } = {
   byBalance: {
-    label: "follow-program.modes.byBalance.label",
-    tooltip: "follow-program.modes.byBalance.tooltip",
+    label: "follow-program.modes.bybalance.label",
+    tooltip: "follow-program.modes.bybalance.tooltip",
     value: "ByBalance"
   },
   percentage: {
-    label: "follow-program.modes.percentage.label",
-    tooltip: "follow-program.modes.percentage.tooltip",
+    label: "follow-program.modes.percent.label",
+    tooltip: "follow-program.modes.percent.tooltip",
     value: "Percent"
   },
   fixed: {

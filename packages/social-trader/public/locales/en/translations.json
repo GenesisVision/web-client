@@ -453,11 +453,11 @@
       "USDT": "The minimum order size on Binance is 10 USDT"
     },
     "modes": {
-      "byBalance": {
+      "bybalance": {
         "label": "By balance",
         "tooltip": "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
       },
-      "percentage": {
+      "percent": {
         "label": "Percentage",
         "tooltip": "Positions are opened according to the percentage of the volume of positions opened by the signal provider."
       },
@@ -804,7 +804,7 @@
         "status": "Status",
         "type": "Type",
         "percent": "Percent",
-        "percentage": "Tolerance percentage"
+        "percentage": "Tolerance"
       }
     },
     "title": "Follow detail",
