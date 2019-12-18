@@ -32,8 +32,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   t,
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
-  data: { maxExitFee, maxEntryFee },
-  minimumDepositAmount
+  data: { maxExitFee, maxEntryFee, minDeposit }
 }) => {
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
@@ -84,7 +83,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
         inputName={CREATE_FUND_FIELDS.depositAmount}
         depositAmount={depositAmount}
-        minimumDepositAmount={minimumDepositAmount}
+        minimumDepositAmount={minDeposit}
         setFieldValue={setFieldValue}
         assetCurrency={FUND_CURRENCY}
       />
@@ -157,7 +156,6 @@ export default CreateFundSettings;
 
 interface OwnProps {
   data: FundCreateAssetPlatformInfo;
-  minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,
     setSubmitting: SetSubmittingType

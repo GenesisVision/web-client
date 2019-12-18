@@ -21,16 +21,12 @@ import {
 
 const createFundSettingsValidationSchema = ({
   t,
-  data: { maxExitFee, maxEntryFee },
-  minimumDepositAmount
+  data: { maxExitFee, maxEntryFee, minDeposit }
 }: ICreateFundSettingsProps & WithTranslation) =>
   lazy<ICreateFundSettingsFormValues>(values => {
-    const minDeposit = parseFloat(
+    const minDepositInCur = parseFloat(
       formatCurrencyValue(
-        convertToCurrency(
-          minimumDepositAmount,
-          values[CREATE_FUND_FIELDS.rate]
-        ),
+        convertToCurrency(minDeposit, values[CREATE_FUND_FIELDS.rate]),
         FUND_CURRENCY
       )
     );
@@ -38,9 +34,9 @@ const createFundSettingsValidationSchema = ({
       [CREATE_FUND_FIELDS.depositAmount]: number()
         .required(t("create-program-page.settings.validation.amount-required"))
         .min(
-          minDeposit,
+          minDepositInCur,
           t("create-program-page.settings.validation.amount-is-zero", {
-            min: minDeposit
+            min: minDepositInCur
           })
         )
         .max(
