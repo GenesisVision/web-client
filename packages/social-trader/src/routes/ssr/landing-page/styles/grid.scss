@@ -1,0 +1,167 @@
+@import "../../../../../../../node_modules/shared/styles/breakpoint";
+
+$grid-max-width: 1600px;
+
+// число колонок
+$grid-columns: 12;
+
+// ширина колоки
+$grid-gap: 40px;
+
+// ФУНКЦИИ
+
+// переводит число в пиксели
+// $number - {Number} - число - 100
+// @return - {String} - возврщает число в пикселях - 100px
+@function numberToPx($number) {
+  @return $number * 1px;
+}
+
+// переводит количество колонок в проценты
+// @return - {Number} - возврщает ширину колонки в процентах
+@function column($number: 1, $of: $grid-columns) {
+  // синоним половины колонки
+  @if $number == "half" {
+    @return percentage(1 / 2);
+    // синоним 1/3 колонки
+  } @else if $number == "thrid" {
+    @return percentage(1 / 3);
+    // синоним 1/4 колонки
+  } @else if $number == "fourth" {
+    @return percentage(1 / 4);
+  } @else {
+    @return percentage($number / $of);
+  }
+}
+
+// МИКСИНЫ
+
+@mixin container() {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: $grid-max-width;
+}
+
+@mixin grid() {
+  display: grid;
+  grid-template-columns: repeat($grid-columns/3, 1fr);
+  grid-column-gap: $grid-gap/2;
+
+  @include media-breakpoint-tablet() {
+    grid-template-columns: repeat($grid-columns, 1fr);
+    grid-column-gap: $grid-gap;
+  }
+}
+
+// создает колонку
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin column($number: 1, $of: $grid-columns) {
+  flex-grow: 1;
+  // alias half
+  @if $number == "half" {
+    flex-basis: column(1, 2);
+    max-width: column(1, 2);
+    // alias thrid
+  } @else if $number == "thrid" {
+    flex-basis: column(1, 3);
+    max-width: column(1, 3);
+    // alias fourth
+  } @else if $number == "fourth" {
+    flex-basis: column(1, 4);
+    max-width: column(1, 4);
+  } @else if $number == "auto" {
+    max-width: auto;
+    flex-basis: auto;
+    flex-grow: 0;
+  } @else {
+    flex-basis: column($number, $of);
+    max-width: column($number, $of);
+  }
+  box-sizing: border-box;
+}
+
+// margin left
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin push($number, $of: $grid-columns) {
+  margin-left: column($number, $of);
+}
+
+// margin right
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin post($number, $of: $grid-columns) {
+  margin-right: column($number, $of);
+}
+
+// margin left and right
+// Объединяет push и post. Удобно когда они используются с одинаковыми значениями
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin vertical-margins($number, $of: $grid-columns) {
+  @include push($number, $of);
+  @include post($number, $of);
+}
+
+// padding left
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin prefix($number, $of: $grid-columns) {
+  padding-left: column($number, $of);
+}
+
+// padding right
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+@mixin suffix($number, $of: $grid-columns) {
+  padding-right: column($number, $of);
+}
+
+// padding left and right
+// Объединяет prefix и suffix. Удобно когда они используются с одинаковыми значениями
+// $number - {Number} - количество колонок
+// $of - {Number} - из какого количества колонок;  по умолчанию из $grid-columns = 36
+
+@mixin vertical-paddings($number, $of: $grid-columns) {
+  @include prefix($number, $of);
+  @include suffix($number, $of);
+}
+
+// толкает по горизонтали колонку и весь последующий контент в конец
+@mixin shift() {
+  margin-left: auto;
+}
+
+// делает колонку первой
+@mixin start() {
+  order: -9999;
+}
+
+// центрирует колонку по горизонтале
+@mixin center() {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// делает колонку последней
+@mixin end() {
+  order: 9999;
+}
+
+// поднимает колонку вверх
+@mixin top() {
+  align-self: flex-start;
+}
+
+// центрирует колонку по вертикали
+@mixin middle() {
+  align-self: center;
+}
+
+// прижимает колонку снизу
+@mixin bottom() {
+  align-self: flex-end;
+}

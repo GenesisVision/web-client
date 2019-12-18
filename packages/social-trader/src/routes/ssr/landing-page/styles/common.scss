@@ -1,0 +1,30 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: $landing-bg;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: $main-color;
+}
+
+a,
+label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+//h1 {
+//  color: $landing-text;
+//}
+//
+//h2 {
+//  color: $landing-text;
+//}
