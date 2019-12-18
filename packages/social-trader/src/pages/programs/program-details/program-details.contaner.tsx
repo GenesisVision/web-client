@@ -10,9 +10,11 @@ import FollowControlsContainer from "pages/follows/follow-details/follow-control
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
+import { getProgramSchema } from "pages/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { InvestmentOrDeposit } from "schema-dts";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
@@ -86,7 +88,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
   return (
-    <Page title={title}>
+    <Page<InvestmentOrDeposit>
+      title={title}
+      schema={getProgramSchema(description)}
+    >
       <DetailsDescriptionSection
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
