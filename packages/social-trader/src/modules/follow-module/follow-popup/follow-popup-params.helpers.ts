@@ -49,37 +49,47 @@ export const followParamsMapPropsToValues = ({
     [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: paramsSubscription
       ? paramsSubscription.openTolerancePercent
       : 0.5,
-    [FOLLOW_PARAMS_FIELDS.fixedVolume]: paramsSubscription
-      ? paramsSubscription.fixedVolume
-      : 100,
-    [FOLLOW_PARAMS_FIELDS.percent]: paramsSubscription
-      ? paramsSubscription.percent
-      : 10
+    [FOLLOW_PARAMS_FIELDS.fixedVolume]:
+      paramsSubscription && paramsSubscription.fixedVolume
+        ? paramsSubscription.fixedVolume
+        : 100,
+    [FOLLOW_PARAMS_FIELDS.percent]:
+      paramsSubscription && paramsSubscription.percent
+        ? paramsSubscription.percent
+        : 10
   };
 };
 
 export const followParamsValidationSchema = ({ t }: IFollowParamsProps) =>
-  lazy<FollowParamsFormValues>(values =>
-    object<FollowParamsFormValues>().shape({
-      [FOLLOW_PARAMS_FIELDS.fixedVolume]: number()
-        .min(
-          0,
-          t("follow-program.params.validation.fixedVolume-min", {
-            fixedCurrency: values[FOLLOW_PARAMS_FIELDS.fixedCurrency]
-          })
-        )
-        .lessThan(
-          100000,
-          t("follow-program.params.validation.fixedVolume-max", {
-            fixedCurrency: values[FOLLOW_PARAMS_FIELDS.fixedCurrency]
-          })
-        ),
-      [FOLLOW_PARAMS_FIELDS.percent]: number()
-        .min(1, t("follow-program.params.validation.percent-min"))
-        .lessThan(1000, t("follow-program.params.validation.percent-max")),
+  lazy<FollowParamsFormValues>(values => {
+    const fixedCurrency = values[FOLLOW_PARAMS_FIELDS.fixedCurrency];
+    const mode = values[FOLLOW_PARAMS_FIELDS.mode];
+    return object<FollowParamsFormValues>().shape({
+      [FOLLOW_PARAMS_FIELDS.fixedVolume]:
+        mode === modes.fixed.value
+          ? number()
+              .min(
+                0,
+                t("follow-program.params.validation.fixedVolume-min", {
+                  fixedCurrency
+                })
+              )
+              .lessThan(
+                100000,
+                t("follow-program.params.validation.fixedVolume-max", {
+                  fixedCurrency
+                })
+              )
+          : number(),
+      [FOLLOW_PARAMS_FIELDS.percent]:
+        mode === modes.percentage.value
+          ? number()
+              .min(1, t("follow-program.params.validation.percent-min"))
+              .lessThan(1000, t("follow-program.params.validation.percent-max"))
+          : number(),
       [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number()
         .required(t("follow-program.params.validation.tolerance-required"))
         .min(0.01, t("follow-program.params.validation.tolerance-percent-min"))
         .max(20, t("follow-program.params.validation.tolerance-percent-max"))
-    })
-  );
+    });
+  });
