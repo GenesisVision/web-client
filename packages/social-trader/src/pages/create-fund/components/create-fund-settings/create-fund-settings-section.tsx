@@ -11,9 +11,7 @@ import { CREATE_ASSET } from "shared/constants/constants";
 import { PlatformDataLoaderData } from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";
 
-const _CreateFundSettingsSection: React.FC<{
-  minimumDepositAmount: number;
-}> = ({ minimumDepositAmount }) => {
+const _CreateFundSettingsSection: React.FC = () => {
   const createFundInfo = useSelector(createFundInfoSelector);
   const handleCreate = useCreateAssetSubmit({ asset: CREATE_ASSET.FUND });
 
@@ -22,7 +20,6 @@ const _CreateFundSettingsSection: React.FC<{
       <CreateFundSettings
         loaderData={PlatformDataLoaderData}
         data={createFundInfo!}
-        minimumDepositAmount={minimumDepositAmount}
         onSubmit={handleCreate}
       />
     </AssetContent>

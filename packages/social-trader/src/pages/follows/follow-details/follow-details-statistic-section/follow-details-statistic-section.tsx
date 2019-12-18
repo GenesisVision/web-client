@@ -1,9 +1,9 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import FollowBalanceChart from "pages/follows/follow-details/follow-details-statistic-section/follow-balance-chart-section/follow-balance-chart";
 import { followAbsoluteProfitChartSelector } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
-import ProgramBalanceChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-balance-chart-section/program-balance-chart";
 import ProgramProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -46,7 +46,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
         />
       )}
       renderBalanceChart={({ color, currency, balanceChart }) => (
-        <ProgramBalanceChart
+        <FollowBalanceChart
           color={color}
           balanceChart={balanceChart}
           currency={currency}

@@ -13,11 +13,13 @@ interface ISignalsFeeFormPartialProps {
   volumeFeeFieldName: string;
   successFeeFieldName: string;
   hasSubscriptionFeeAutofocus?: boolean;
+  isSignalProgram?: boolean;
 }
 
 const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   successFeeFieldName,
-  volumeFeeFieldName
+  volumeFeeFieldName,
+  isSignalProgram
 }) => {
   const [t] = useTranslation();
   return (
@@ -28,6 +30,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
       <AssetRow>
         <AssetField>
           <AssetFormField
+            disabled={isSignalProgram}
             name={volumeFeeFieldName}
             label={t("create-program-page.settings.fields.signal-volume-fee")}
             adornment="%"
@@ -43,6 +46,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
         </AssetField>
         <AssetField>
           <AssetFormField
+            disabled={isSignalProgram}
             name={successFeeFieldName}
             label={t("create-program-page.settings.fields.signal-success-fee")}
             adornment="%"

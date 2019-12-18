@@ -14,8 +14,12 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { fetchRate as fetchRateMethod } from "services/rate-service";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import {
+  convertToCurrency,
+  CURRENCY_FRACTIONS
+} from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
+import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
@@ -90,6 +94,9 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogField>
           <InputAmountField
+            isAllow={allowPositiveValuesNumberFormat(
+              CURRENCY_FRACTIONS(currency)
+            )}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
             label={t("follow-program.create-account.amount")}
             currency={currency}

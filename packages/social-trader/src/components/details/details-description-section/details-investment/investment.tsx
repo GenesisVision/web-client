@@ -171,7 +171,7 @@ const _Investment: React.FC<Props> = ({
           accent
           label={t("fund-details-page.description.pending-output")}
         >
-          {false ? ( // personalDetails.pendingOutputIsWithdrawAll
+          {personalDetails.pendingOutputIsWithdrawAll ? (
             t("withdraw-program.withdrawing-all")
           ) : (
             <NumberFormat
