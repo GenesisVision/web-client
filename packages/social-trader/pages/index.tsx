@@ -1,3 +1,3 @@
-import IndexPage from "routes/ssr/landing-page";
+import LandingIndexPage from "routes/ssr/landing-page";
 
-export default IndexPage;
+export default LandingIndexPage;

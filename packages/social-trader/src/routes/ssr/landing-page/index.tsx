@@ -1,37 +1,32 @@
+import "./styles/index.scss";
+
 import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import { NextPage } from "next";
-import Link from "next/link";
 import React from "react";
 import programsApi from "services/api-client/programs-api";
-import { composeProgramDetailsUrl } from "utils/compose-url";
+import { useTranslation } from "shared/i18n";
 
-const IndexPage: NextPage<{
+import Layout from "./layouts/_layout";
+
+const LandingIndexPage: NextPage<{
   programs: ItemsViewModelProgramDetailsListItem;
 }> = ({ programs }) => {
+  const { t } = useTranslation();
+  // const title = t("funds-page.title");
   return (
-    <main>
-      <h1>Mega Landing Page</h1>
-      <section>
-        <h2>Our programs(12/{programs.total})</h2>
-        <ul>
-          {programs.items.map(program => {
-            return (
-              <li key={program.id}>
-                <Link href={composeProgramDetailsUrl(program.url)}>
-                  <a>{program.title}</a>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    </main>
+    <Layout title="Genesis Vision">
+      <main className="home">
+        <section className="home__section home__section--first-screen">
+          <div className="home__container">Landing Page</div>
+        </section>
+      </main>
+    </Layout>
   );
 };
 
-export default IndexPage;
+export default LandingIndexPage;
 
-IndexPage.getInitialProps = async () => {
+LandingIndexPage.getInitialProps = async () => {
   try {
     const programs = await programsApi.getPrograms({
       skip: 0,

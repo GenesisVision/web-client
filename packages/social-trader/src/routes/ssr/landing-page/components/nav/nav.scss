@@ -1,0 +1,44 @@
+.nav {
+  display: none;
+
+  //@media #{$tablet-portrait} {
+  //	display: block;
+  //	margin-left: 60px;
+  //
+  //	@media #{$tablet-landscape} {
+  //		margin-left: 100px;
+  //	}
+  //
+  //	@media #{$laptop-wide} {
+  //		margin-left: 138px;
+  //	}
+  //}
+}
+
+.nav__list {
+  display: flex;
+}
+
+.nav__item {
+  margin-right: 40px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  //@media #{$tablet-landscape} {
+  //	margin-right: 90px;
+  //}
+  //
+  //@media #{$laptop} {
+  //	margin-right: 104px;
+  //}
+}
+
+.nav__link {
+  @include transition(color);
+  @include reset-link();
+  font-size: 12px;
+  //color: $menu-gray;
+  font-weight: 700;
+}
