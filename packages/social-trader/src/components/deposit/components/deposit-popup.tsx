@@ -23,7 +23,6 @@ const _DepositPopup: React.FC<Props> = ({
   fees,
   minDeposit,
   id,
-  assetInvest,
   onApply,
   onClose,
   currency,
@@ -79,7 +78,6 @@ interface Props {
   minDeposit: number;
   id: string;
   onClose: (param?: any) => void;
-  assetInvest: TAssetDeposit;
   onApply: () => void;
   currency: CurrencyEnum;
   asset: ASSET;

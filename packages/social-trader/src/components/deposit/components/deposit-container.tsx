@@ -21,7 +21,6 @@ const _DepositContainer: React.FC<Props> = ({
   availableToInvest,
   entryFee,
   minDeposit,
-  assetInvest,
   asset,
   id,
   open,
@@ -53,7 +52,6 @@ const _DepositContainer: React.FC<Props> = ({
         loaderData={DepositInfoLoaderData}
         id={id}
         onClose={onClose}
-        assetInvest={assetInvest}
         onApply={onApply}
         data={data!}
         asset={asset}
@@ -73,7 +71,6 @@ interface Props extends IDialogProps {
   asset: ASSET;
   id: string;
   onApply: () => void;
-  assetInvest: TAssetDeposit;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
   ownAsset?: boolean;

@@ -1,5 +1,4 @@
 import DepositContainer from "components/deposit/components/deposit-container";
-import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { getFundMinDeposit } from "components/deposit/services/program-deposit.service";
 import { IDialogProps } from "components/dialog/dialog";
 import withLoader from "decorators/with-loader";
@@ -29,7 +28,6 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
       minDeposit={minDeposit}
       currency={FUND_CURRENCY}
       asset={ASSET.FUND}
-      assetInvest={fundInvest}
       id={id}
       hasEntryFee
       onApply={onApply}
