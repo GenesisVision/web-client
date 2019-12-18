@@ -76,7 +76,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 
   if (!haveEvents && !showInvestment && !showSubscription) return null;
   return (
-    <DetailsBlock table wide className="details-investment">
+    <DetailsBlock table wide>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           visible={showSubscription}
