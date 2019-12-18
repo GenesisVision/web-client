@@ -55,7 +55,7 @@ const hasCorrectCountNulls = (
 ): boolean => {
   const [whole, fraction] = value.split(".");
   if (fraction === undefined) return true;
-  return !(whole[0] === "0" && fraction.length > countNulls);
+  return fraction.length <= countNulls;
 };
 
 const allowValuesNumberFormat = (
