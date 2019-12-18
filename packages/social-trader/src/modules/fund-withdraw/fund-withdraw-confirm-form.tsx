@@ -133,4 +133,3 @@ const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
   }),
   React.memo
 )(_FundWithdrawConfirmForm);
-export default FundWithdrawConfirmForm;
