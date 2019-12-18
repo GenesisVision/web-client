@@ -39,7 +39,7 @@ const _ProgramSettings: React.FC<Props> = ({
   closeProgram
 }) => {
   const [t] = useTranslation();
-  const { programDetails, followDetails, tradingAccountInfo} = description;
+  const { programDetails, followDetails, tradingAccountInfo } = description;
   const signalSuccessFee =
     followDetails && followDetails.signalSettings
       ? followDetails.signalSettings.signalSuccessFee
@@ -102,7 +102,7 @@ const _ProgramSettings: React.FC<Props> = ({
         maxSuccessFee={maxSuccessFee}
         maxEntryFee={maxEntryFee}
         entryFee={programDetails.entryFeeSelected}
-        successFee={programDetails.successFeeCurrent}
+        successFee={programDetails.successFeeSelected}
         onSubmit={editProgram}
       />
       <TradesUpdating
