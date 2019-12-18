@@ -38,7 +38,5 @@ export const dashboardTradingPrivateReducer = tableReducerFactory<
   type: DASHBOARD_TRADING_PRIVATE,
   paging: DEFAULT_CARD_PAGING,
   filtering: DASHBOARD_PUBLIC_FILTERING,
-  defaultFilters: DASHBOARD_PUBLIC_DEFAULT_FILTERS,
-  clearable: true,
-  clearableActionType: CLEAR_DASHBOARD_TRADING_PRIVATE
+  defaultFilters: DASHBOARD_PUBLIC_DEFAULT_FILTERS
 });

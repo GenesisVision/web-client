@@ -69,6 +69,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
   const { programDetails, fundDetails } = asset.publicInfo;
   const topFundAssets = fundDetails && fundDetails.topFundAssets;
+  const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
   return (
     <TableCard
       hasAvatar
@@ -135,14 +136,12 @@ const _DashboardPublicCard: React.FC<Props> = ({
       </TableCardTable>
       {topFundAssets && (
         <TableCardTableRow>
-          {topFundAssets && (
-            <FundAssetContainer
-              assets={topFundAssets as FundAssetType[]}
-              type={FUND_ASSET_TYPE.SHORT}
-              size={3}
-              length={topFundAssets.length}
-            />
-          )}
+          <FundAssetContainer
+            assets={topFundAssets as FundAssetType[]}
+            type={FUND_ASSET_TYPE.SHORT}
+            size={3}
+            length={totalAssetsCount}
+          />
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons

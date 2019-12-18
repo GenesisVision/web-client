@@ -67,7 +67,7 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   id: string;
-  signalSubscription?: SignalSubscription;
+  signalSubscription: SignalSubscription;
 }
 
 const EditFollowModuleFormContainer = React.memo(

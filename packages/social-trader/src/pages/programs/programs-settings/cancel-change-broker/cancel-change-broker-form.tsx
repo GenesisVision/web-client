@@ -6,8 +6,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import { HuobiWarning } from "../change-broker/change-broker-form";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
@@ -15,12 +14,12 @@ import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 const _CancelChangeBrokerForm: React.FC<Props> = ({
   isSignalProgram,
   onSubmit,
-  t,
   brokerFrom,
   currentAccountTypeId,
   leverage,
   migration: { newBroker: brokerTo, newLeverage }
 }) => {
+  const [t] = useTranslation();
   const [
     isCancelChangeBrokerOpen,
     setCancelChangeBrokerOpen,
@@ -103,7 +102,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
   );
 };
 
-interface Props extends CancelChangeBrokerFormOwnProps, WithTranslation {}
+interface Props extends CancelChangeBrokerFormOwnProps {}
 
 export interface CancelChangeBrokerFormOwnProps {
   isSignalProgram: boolean;
@@ -114,10 +113,5 @@ export interface CancelChangeBrokerFormOwnProps {
   migration: MigrationRequest;
 }
 
-const CancelChangeBrokerForm = compose<
-  React.ComponentType<CancelChangeBrokerFormOwnProps>
->(
-  translate(),
-  React.memo
-)(_CancelChangeBrokerForm);
+const CancelChangeBrokerForm = React.memo(_CancelChangeBrokerForm);
 export default CancelChangeBrokerForm;

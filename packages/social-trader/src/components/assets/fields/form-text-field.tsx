@@ -5,14 +5,16 @@ import * as React from "react";
 
 const _FormTextField: React.FC<Props> = ({ children, topPadding, accent }) => {
   return (
-    <p
-      className={classNames("form-text-field", {
-        "form-text-field--padding-top": topPadding,
-        "form-text-field--color-accent": accent
-      })}
-    >
-      {children}
-    </p>
+    <div className="form-text-field__container">
+      <p
+        className={classNames("form-text-field__text", {
+          "form-text-field__text--padding-top": topPadding,
+          "form-text-field__text--color-accent": accent
+        })}
+      >
+        {children}
+      </p>
+    </div>
   );
 };
 

@@ -22,7 +22,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
     ({ volumeFee, successFee }: IProgramSignalFormValues, setSubmitting) =>
       editSignalRequest(
         {
-          assetId: id,
+          id,
           successFee,
           volumeFee
         },

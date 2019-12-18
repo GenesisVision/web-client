@@ -453,11 +453,11 @@
       "USDT": "The minimum order size on Binance is 10 USDT"
     },
     "modes": {
-      "byBalance": {
+      "bybalance": {
         "label": "By balance",
         "tooltip": "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
       },
-      "percentage": {
+      "percent": {
         "label": "Percentage",
         "tooltip": "Positions are opened according to the percentage of the volume of positions opened by the signal provider."
       },
@@ -803,7 +803,8 @@
         "profit": "Profit",
         "status": "Status",
         "type": "Type",
-        "percentage": "Percentage"
+        "percent": "Percent",
+        "percentage": "Tolerance"
       }
     },
     "title": "Follow detail",
@@ -2843,6 +2844,7 @@
       "KYC_REQUIRED": "KYC required",
       "FOREX_DISABLED": "Forex disabled"
     },
+    "kyc-requirement-title": "KYC required",
     "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
     "broker-info": {
       "about": "About",

@@ -5,7 +5,8 @@ import { programInvest } from "components/deposit/services/program-deposit.servi
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
@@ -15,7 +16,7 @@ import {
 } from "../../wallet/services/wallet.services";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TAssetDeposit, TFees } from "./deposit.types";
+import { TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
   title,
@@ -23,7 +24,6 @@ const _DepositPopup: React.FC<Props> = ({
   fees,
   minDeposit,
   id,
-  assetInvest,
   onApply,
   onClose,
   currency,
@@ -32,8 +32,10 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
+  const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  const updateWalletInfoMiddleware = () => dispatch(fetchWallets(currency));
+  const updateWalletInfoMiddleware = () =>
+    dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
@@ -79,7 +81,6 @@ interface Props {
   minDeposit: number;
   id: string;
   onClose: (param?: any) => void;
-  assetInvest: TAssetDeposit;
   onApply: () => void;
   currency: CurrencyEnum;
   asset: ASSET;
