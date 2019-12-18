@@ -5,6 +5,9 @@ import { DetailsInvestmentFooter } from "components/details/details-description-
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { SignalSubscription } from "gv-api-web";
 import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
@@ -50,7 +53,17 @@ const _Subscription: React.FC<Props> = ({
           accent
           label={t("follow-details-page.current-investment.fields.type")}
         >
-          {subscriptionInfo.mode}
+          <Tooltip
+            render={() => (
+              <TooltipContent>
+                {t(
+                  `follow-program.modes.${subscriptionInfo.mode.toLowerCase()}.tooltip`
+                )}
+              </TooltipContent>
+            )}
+          >
+            <div className="tooltip__label">{subscriptionInfo.mode}</div>
+          </Tooltip>
         </StatisticItem>
         <StatisticItem
           condition={!!subscriptionInfo.percent}
@@ -66,7 +79,16 @@ const _Subscription: React.FC<Props> = ({
         <StatisticItem
           condition={!!subscriptionInfo.openTolerancePercent}
           accent
-          label={t("follow-details-page.current-investment.fields.percentage")}
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "follow-program.params.tolerance-percent-tooltip"
+              )}
+              labelText={t(
+                "follow-details-page.current-investment.fields.percentage"
+              )}
+            />
+          }
         >
           <NumberFormat
             value={subscriptionInfo.openTolerancePercent}
