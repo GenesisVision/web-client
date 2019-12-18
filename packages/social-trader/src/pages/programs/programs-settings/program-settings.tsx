@@ -39,7 +39,7 @@ const _ProgramSettings: React.FC<Props> = ({
   closeProgram
 }) => {
   const [t] = useTranslation();
-  const { programDetails, followDetails } = description;
+  const { programDetails, followDetails, tradingAccountInfo } = description;
   const signalSuccessFee =
     followDetails && followDetails.signalSettings
       ? followDetails.signalSettings.signalSuccessFee
@@ -66,7 +66,7 @@ const _ProgramSettings: React.FC<Props> = ({
           description.ownerActions.canClose
         }
         title={description.publicInfo.title}
-        id={description.id}
+        id={tradingAccountInfo.id}
       />
       <CancelChangeBroker
         condition={!!programDetails.personalDetails.migration}
@@ -102,7 +102,7 @@ const _ProgramSettings: React.FC<Props> = ({
         maxSuccessFee={maxSuccessFee}
         maxEntryFee={maxEntryFee}
         entryFee={programDetails.entryFeeSelected}
-        successFee={programDetails.successFeeCurrent}
+        successFee={programDetails.successFeeSelected}
         onSubmit={editProgram}
       />
       <TradesUpdating

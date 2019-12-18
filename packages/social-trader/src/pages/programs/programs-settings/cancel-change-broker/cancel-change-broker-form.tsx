@@ -26,7 +26,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
     setCancelChangeBrokerClose
   ] = useIsOpen();
   return (
-    <>
+    <div>
       <div className="program-settings__block-wrapper--broker-list">
         <div className="program-settings__broker-info">
           <BrokerCard
@@ -98,7 +98,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         brokerFrom={brokerFrom.name}
         brokerTo={brokerTo.name}
       />
-    </>
+    </div>
   );
 };
 

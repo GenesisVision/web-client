@@ -16,7 +16,8 @@ const _SignalingEdit: React.FC<Props> = ({
   handleSubmit,
   dirty,
   isSubmitting,
-  t
+  t,
+  isSignalProgram
 }) => {
   const renderButton = () => (
     <GVButton type="submit" disabled={!dirty || isSubmitting || !isValid}>
@@ -27,15 +28,19 @@ const _SignalingEdit: React.FC<Props> = ({
     <form id="signaling-edit-form" onSubmit={handleSubmit}>
       {showFields && (
         <SignalsFeeFormPartial
+          isSignalProgram={isSignalProgram}
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
         />
       )}
-      {inDialog ? (
-        <DialogButtons>{renderButton()}</DialogButtons>
-      ) : (
-        renderButton()
-      )}
+
+      {!isSignalProgram ? (
+        inDialog ? (
+          <DialogButtons>{renderButton()}</DialogButtons>
+        ) : (
+          renderButton()
+        )
+      ) : null}
     </form>
   );
 };
@@ -56,6 +61,7 @@ export interface IProgramSignalFormValues {
 }
 
 interface OwnProps {
+  isSignalProgram?: boolean;
   inDialog?: boolean;
   showFields: boolean;
   successFee?: number;
