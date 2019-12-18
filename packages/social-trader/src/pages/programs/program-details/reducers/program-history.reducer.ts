@@ -105,7 +105,7 @@ export const financialStatisticTableSelector = tableSelectorCreator<
   RootState,
   ProgramPeriodsDataType,
   ProgramPeriodsDataType
->(financialStatisticSelector);
+>(financialStatisticSelector, "periods");
 
 export const financialStatisticReducer = tableReducerFactory<
   ProgramPeriodsDataType
