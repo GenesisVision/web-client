@@ -49,7 +49,7 @@ const TransactionDetailsListItem: React.FC<{
             }
           )}
         >
-          {url ? <Link to={"url"}>details</Link> : details}
+          {url ? <Link to={url}>{details}</Link> : details}
         </div>
         {canCopy && <CopyButton value={details} text />}
       </div>
@@ -86,13 +86,8 @@ const TransactionAssetBlock: React.FC<{
   type: "investment" | "withdrawal";
   asset: TransactionAssetDetails;
 }> = React.memo(({ asset, type }) => {
-  const [t] = useTranslation();
   return (
-    <TransactionDetailsItem
-      label={t(
-        `transactions-details.${type}.direction-${asset.assetType.toLowerCase()}`
-      )}
-    >
+    <TransactionDetailsItem label={asset.description}>
       <TransactionAsset url={asset.logo} data={asset} />
     </TransactionDetailsItem>
   );
@@ -128,7 +123,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
     <>
       <DialogTop
         title={t(`transactions-details.title`)}
-        subtitle={data.description}
+        subtitle={data.detailsTitle}
       >
         {data.asset && (
           <TransactionAssetBlock asset={data.asset} type={"investment"} />
