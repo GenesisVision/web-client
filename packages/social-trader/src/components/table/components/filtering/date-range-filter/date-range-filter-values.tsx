@@ -1,5 +1,6 @@
 import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import GVTextField from "components/gv-text-field";
+import dayjs from "dayjs";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { localizedDate, subtractDate } from "shared/utils/dates";
@@ -55,7 +56,7 @@ const _DateRangeFilterValues: React.FC<
               type="text"
               name="dateStart"
               label={t("filters.date-range.start")}
-              value={String(dateStart)}
+              value={dayjs(dateStart).format("YYYY-MM-DD")}
               InputComponent={GVDatePicker}
               //@ts-ignore
               horizontal="right"
@@ -71,7 +72,7 @@ const _DateRangeFilterValues: React.FC<
               type="text"
               name="dateEnd"
               label={t("filters.date-range.end")}
-              value={String(dateEnd)}
+              value={dayjs(dateEnd).format("YYYY-MM-DD")}
               //@ts-ignore
               horizontal="right"
               InputComponent={GVDatePicker}

@@ -26,22 +26,25 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     switch (type) {
       case DATA_RANGE_FILTER_TYPES.ALL:
-        return dayjs(0).format("YYYY-MM-DD");
+        return dayjs(0).toISOString();
       default:
         return dayjs()
           .subtract(1, subtract[type])
-          .format("YYYY-MM-DD");
+          .toISOString();
     }
   };
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
       type,
       dateStart: this.getDateStart(type),
-      dateEnd: dayjs().format("YYYY-MM-DD")
+      dateEnd: dayjs().toISOString()
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {
-    this.setState({ [type]: date } as Pick<State, keyof State>);
+    this.setState({ [type]: dayjs(date).toISOString() } as Pick<
+      State,
+      keyof State
+    >);
   };
   handleSubmit = () => {
     if (this.props.changeFilter) {
