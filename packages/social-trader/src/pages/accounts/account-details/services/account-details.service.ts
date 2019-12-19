@@ -3,10 +3,12 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { CancelablePromise, TradesViewModel } from "gv-api-web";
 import { NextPageContext } from "next";
+import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import accountsApi from "services/api-client/accounts-api";
 import brokersApi from "services/api-client/brokers-api";
+import followApi from "services/api-client/follow-api";
 import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
@@ -20,6 +22,14 @@ import {
   setAccountIdAction
 } from "../actions/account-details.actions";
 import { tradesTableSelector } from "../reducers/account-history.reducer";
+
+export const fetchAccountSubscriptions = (
+  id: string
+): CancelablePromise<AccountSubscriptionsType> => {
+  return followApi
+    .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg())
+    .then(({ items }) => items);
+};
 
 export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
   accountsApi.getTradingAccountDetails(id, authService.getAuthArg(ctx));
