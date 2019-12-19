@@ -13,6 +13,7 @@ import { ProgramDescriptionDataType } from "pages/programs/program-details/progr
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
@@ -85,6 +86,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Page title={title}>
       <DetailsDescriptionSection
@@ -127,7 +129,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 levelsParameters={levelsParameters!}
               />
             )}
-            {followDetails && (
+            {followDetails && isAuthenticated && (
               <FollowControlsContainer description={description} />
             )}
           </>
