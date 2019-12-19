@@ -33,9 +33,15 @@ export const TableCardContainer: React.FC<
 > = React.memo(({ children }) => <div className="table-card">{children}</div>);
 
 export const TableCardRow: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
-  <div className="table-card__row">{children}</div>
+  { center?: boolean } & React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children, center }) => (
+  <div
+    className={classNames("table-card__row", {
+      "table-card__row--center": center
+    })}
+  >
+    {children}
+  </div>
 ));
 
 export const TableCardTable: React.FC<

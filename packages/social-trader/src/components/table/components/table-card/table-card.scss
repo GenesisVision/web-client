@@ -60,6 +60,10 @@ $card-avatar-size: 80px;
       margin-left: -$padding-xsmall;
       margin-right: -$padding-xsmall;
     }
+
+    &--center {
+      justify-content: center;
+    }
   }
   &__broker-avatar {
     width: $card-avatar-size;
