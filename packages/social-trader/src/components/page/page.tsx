@@ -1,25 +1,27 @@
 import BackButton from "components/back-button/back-button";
 import useRole from "hooks/use-role.hook";
+import Head from "next/head";
 import * as React from "react";
-import DocumentTitle from "react-document-title";
+import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
-const _Page: React.FC<Props> = ({ title, children }) => {
+const _Page = ({ title, children }: PropsWithChildren<Props>) => {
   const [t] = useTranslation();
   const role = useRole();
   return (
-    <DocumentTitle title={t(`${role ? `${role}.` : ""}app.title`) + title}>
-      <>
-        <div>
-          <BackButton />
-        </div>
-        {children}
-      </>
-    </DocumentTitle>
+    <>
+      <Head>
+        <title>{t(`${role ? `${role}.` : ""}app.title`) + title}</title>
+      </Head>
+      <div>
+        <BackButton />
+      </div>
+      {children}
+    </>
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
   title: string;
 }
 
