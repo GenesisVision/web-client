@@ -52,6 +52,8 @@
     border-radius: 100px;
 
     @include media-breakpoint-desktop() {
+      text-transform: none;
+
       &:hover {
         background-color: rgba($main-color, 0.15);
       }

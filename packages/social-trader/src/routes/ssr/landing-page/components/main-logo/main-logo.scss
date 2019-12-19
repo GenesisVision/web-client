@@ -1,0 +1,8 @@
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+
+.main-logo {
+  svg {
+    fill: $main-color;
+  }
+}

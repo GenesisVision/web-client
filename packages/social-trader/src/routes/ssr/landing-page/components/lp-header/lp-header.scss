@@ -1,3 +1,4 @@
+@import "~shared/styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -5,6 +6,7 @@
   @include container();
   padding-top: 35px;
   padding-bottom: 35px;
+  background-color: transparent;
 
   @include media-breakpoint-tablet() {
     padding-top: 40px;
@@ -72,7 +74,7 @@
     }
   }
 
-  &__logo-img {
+  .main-logo {
     max-height: 22px;
 
     @include media-breakpoint-tablet() {
@@ -85,5 +87,37 @@
     @include transition(opacity);
     @include reset-link();
     display: block;
+  }
+
+  &--sticky {
+    position: sticky;
+  }
+
+  &--reverse {
+    .nav-list__link {
+      color: $row-color;
+    }
+
+    .lp-button--secondary {
+      background-color: rgba($primary-color, 0.1);
+      color: $row-color;
+
+      @include media-breakpoint-desktop() {
+        &:hover {
+          color: $row-color;
+          background-color: rgba($primary-color, 0.15);
+        }
+
+        &:focus,
+        &:active {
+          color: $row-color;
+          background-color: rgba($primary-color, 0.1);
+        }
+      }
+    }
+
+    .main-logo svg {
+      fill: $row-color;
+    }
   }
 }

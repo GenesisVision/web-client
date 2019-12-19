@@ -4,9 +4,9 @@ import Link from "components/link/link";
 import * as React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
+import { MainLogo } from "routes/ssr/landing-page/components/main-logo/main-logo";
 import { MobileBurger } from "routes/ssr/landing-page/components/mobile-burger/mobile-burger";
 import NavList from "routes/ssr/landing-page/components/nav/nav-list";
-import MainLogo from "routes/ssr/landing-page/images/logos/main-logo.svg";
 import { navHeader, START_ROUTE } from "routes/ssr/landing-page/routes/nav";
 
 const LPHeader: React.FC = () => {
@@ -24,11 +24,7 @@ const LPHeader: React.FC = () => {
               pathname: HOME_ROUTE
             }}
           >
-            <img
-              src={MainLogo}
-              className="lp-header__logo-img"
-              alt="genesis vision"
-            />
+            <MainLogo />
           </Link>
         </div>
         <NavList menuItems={navHeader} className="lp-header__nav" />
