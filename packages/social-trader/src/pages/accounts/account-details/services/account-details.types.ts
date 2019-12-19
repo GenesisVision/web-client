@@ -1,6 +1,7 @@
 import {
   ProgramBalanceChart,
   ProgramProfitPercentCharts,
+  SignalSubscription,
   SimpleChart
 } from "gv-api-web";
 import { CurrencyEnum } from "utils/types";
@@ -32,3 +33,6 @@ export type AccountStatisticResult = {
   profitChart: ProgramProfitPercentCharts;
   balanceChart: ProgramBalanceChart;
 };
+
+export type AccountSubscriptionsDataType = SignalSubscription;
+export type AccountSubscriptionsType = AccountSubscriptionsDataType[];
