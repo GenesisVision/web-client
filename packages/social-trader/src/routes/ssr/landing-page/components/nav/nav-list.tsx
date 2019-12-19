@@ -6,8 +6,8 @@ import NavItem from "routes/ssr/landing-page/components/nav/nav-item";
 
 const _NavList: React.FC<Props> = ({ menuItems, className }) => {
   return (
-    <nav className={classNames("nav", className)}>
-      <ul className="nav__list">
+    <nav className={className}>
+      <ul className="nav-list">
         {menuItems.map((item: any, index: number) => (
           <NavItem
             key={index}

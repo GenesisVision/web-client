@@ -26,6 +26,8 @@
 @mixin reset-list() {
   list-style-type: none;
   padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 @mixin reset-button() {
@@ -61,7 +63,6 @@
 }
 
 @mixin reset-link() {
-  @include transition(color);
   text-decoration: none;
   cursor: pointer;
   color: inherit;

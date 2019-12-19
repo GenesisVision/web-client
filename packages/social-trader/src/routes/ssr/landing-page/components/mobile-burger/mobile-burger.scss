@@ -1,6 +1,5 @@
 @import "~shared/styles/_colors";
 @import "../../styles/mixins";
-@import "../../styles/grid";
 
 .mobile-burger {
   @include transition(fill);

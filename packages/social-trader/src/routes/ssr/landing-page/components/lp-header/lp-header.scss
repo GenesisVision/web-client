@@ -1,8 +1,7 @@
-//@import "~shared/styles/breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.header {
+.lp-header {
   @include container();
   padding-top: 35px;
   padding-bottom: 35px;

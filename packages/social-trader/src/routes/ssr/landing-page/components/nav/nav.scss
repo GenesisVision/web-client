@@ -1,44 +1,55 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
 @import "../../styles/mixins";
 
-.nav {
-  //@media #{$tablet-portrait} {
-  //	display: block;
-  //	margin-left: 60px;
-  //
-  //	@media #{$tablet-landscape} {
-  //		margin-left: 100px;
-  //	}
-  //
-  //	@media #{$laptop-wide} {
-  //		margin-left: 138px;
-  //	}
-  //}
+.nav-list {
+  @include reset-list();
+
+  @include media-breakpoint-desktop() {
+    display: grid;
+    grid-auto-flow: column;
+  }
 }
 
-.nav__list {
-  display: flex;
-}
+.nav-list__item {
+  @include media-breakpoint-desktop() {
+    margin-right: 40px;
 
-.nav__item {
-  margin-right: 40px;
-
-  &:last-child {
-    margin-right: 0;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
-  //@media #{$tablet-landscape} {
-  //	margin-right: 90px;
-  //}
-  //
-  //@media #{$laptop} {
-  //	margin-right: 104px;
-  //}
+  @include media-breakpoint-large-desktop() {
+    margin-right: 60px;
+  }
 }
 
-.nav__link {
+.nav-list__link {
   @include transition(color);
   @include reset-link();
-  font-size: 12px;
-  //color: $menu-gray;
-  font-weight: 700;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $background-pretender;
+  }
+
+  @include media-breakpoint-tablet() {
+    font-weight: 600;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  @include media-breakpoint-desktop() {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 20px;
+  }
 }

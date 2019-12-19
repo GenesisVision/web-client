@@ -21,17 +21,17 @@ const _NavItem: React.FC<INavItemProps> = ({
 }) => {
   const { route } = useRouter();
   return (
-    <li className="nav__item">
+    <li className="nav-list__item">
       <Link
         onClick={onClick}
         to={{ pathname: href as string, state }}
-        className={classNames("nav__link", {
-          "nav__link--active": route.startsWith(
+        className={classNames("nav-list__link", {
+          "nav-list__link--active": route.startsWith(
             normalizeUrlString(String(href))
           )
         })}
       >
-        {icon && <span className="b-nav__link-icon">{icon}</span>}
+        {icon && <span className="nav-list__link-icon">{icon}</span>}
         {name}
       </Link>
     </li>

@@ -1,13 +1,12 @@
 import * as React from "react";
 import DocumentTitle from "react-document-title";
-
-import Header from "../components/header/header";
+import LPHeader from "routes/ssr/landing-page/components/lp-header/lp-header";
 
 const _Layout: React.FC<Props> = ({ title, children }) => {
   return (
     <DocumentTitle title={title}>
       <>
-        <Header />
+        <LPHeader />
         {children}
       </>
     </DocumentTitle>

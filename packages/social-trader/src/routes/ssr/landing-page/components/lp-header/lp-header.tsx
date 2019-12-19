@@ -1,50 +1,45 @@
-import "./header.scss";
+import "./lp-header.scss";
 
 import Link from "components/link/link";
 import * as React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
+import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { MobileBurger } from "routes/ssr/landing-page/components/mobile-burger/mobile-burger";
 import NavList from "routes/ssr/landing-page/components/nav/nav-list";
 import MainLogo from "routes/ssr/landing-page/images/logos/main-logo.svg";
 import { navHeader, START_ROUTE } from "routes/ssr/landing-page/routes/nav";
 
-const _Header: React.FC = () => {
+const LPHeader: React.FC = () => {
   return (
-    <header className="header">
-      <div className="header__row">
-        <div className="header__burger">
+    <header className="lp-header">
+      <div className="lp-header__row">
+        <div className="lp-header__burger">
           <MobileBurger />
         </div>
-        <NavList menuItems={navHeader} className="header__mobile-menu" />
-        <div className="header__logo">
+        <NavList menuItems={navHeader} className="lp-header__mobile-menu" />
+        <div className="lp-header__logo">
           <Link
-            className="header__logo-link"
+            className="lp-header__logo-link"
             to={{
               pathname: HOME_ROUTE
             }}
           >
             <img
               src={MainLogo}
-              className="header__logo-img"
+              className="lp-header__logo-img"
               alt="genesis vision"
             />
           </Link>
         </div>
-        <NavList menuItems={navHeader} className="header__nav" />
-        <div className="header__start-btn">
-          <Link
-            className="header__start-btn-link"
-            to={{
-              pathname: START_ROUTE
-            }}
-          >
+        <NavList menuItems={navHeader} className="lp-header__nav" />
+        <div className="lp-header__start-btn">
+          <LPButton color="secondary" href={START_ROUTE}>
             Get started
-          </Link>
+          </LPButton>
         </div>
       </div>
     </header>
   );
 };
 
-const Header = React.memo(_Header);
-export default Header;
+export default LPHeader;
