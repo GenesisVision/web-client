@@ -5,7 +5,7 @@ import React from "react";
 
 import TagItem from "./tag-item";
 
-const _TagItemList: React.FC<Props> = ({ tags }) => {
+const _TagItemList: React.FC<Props> = ({ tags = [] }) => {
   return (
     <div className="tag-item-list">
       {tags.map((tag, idx) => (
