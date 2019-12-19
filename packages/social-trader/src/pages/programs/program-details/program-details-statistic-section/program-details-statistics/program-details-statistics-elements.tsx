@@ -55,25 +55,43 @@ const _ProgramDetailsStatisticsElements: React.FC<
               displayType="text"
             />
           </StatisticItem>
-          <div className="details-statistics__period">
-            <Tooltip
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              render={() => (
-                <div className="tooltip__content">
-                  {t("program-details-page.tooltip.period")}
-                </div>
-              )}
+          {statistic.subscribers && (
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t("follow-details-page.tooltip.subscribers")}
+                  labelText={t("follow-details-page.statistics.subscribers")}
+                />
+              }
             >
-              <span className="details-statistics__label tooltip__label">
-                {t("program-details-page.statistics.period")}
-              </span>
-            </Tooltip>
-            <ProgramPeriodLine
-              start={statistic.lastPeriodStarts}
-              end={statistic.lastPeriodEnds}
-              status={status}
-            />
-          </div>
+              <NumberFormat
+                value={statistic.subscribers}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </StatisticItem>
+          )}
+          {statistic.lastPeriodStarts && (
+            <div className="details-statistics__period">
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("program-details-page.tooltip.period")}
+                  </div>
+                )}
+              >
+                <span className="details-statistics__label tooltip__label">
+                  {t("program-details-page.statistics.period")}
+                </span>
+              </Tooltip>
+              <ProgramPeriodLine
+                start={statistic.lastPeriodStarts}
+                end={statistic.lastPeriodEnds}
+                status={status}
+              />
+            </div>
+          )}
         </>
       )}
       Particular={() => (
