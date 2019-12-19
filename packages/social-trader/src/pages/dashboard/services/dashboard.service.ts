@@ -116,7 +116,11 @@ export const getRecommendations = ({
   currency: CurrencyEnum;
 }): CancelablePromise<FollowDetailsListItem[]> =>
   dashboardApi
-    .getRecommendations(authService.getAuthArg(), { currency, take: 15 })
+    .getRecommendations(authService.getAuthArg(), {
+      onlyFollows: true,
+      currency,
+      take: 15
+    })
     .then(({ follows }) => follows)
     .then(({ items }) => items);
 
