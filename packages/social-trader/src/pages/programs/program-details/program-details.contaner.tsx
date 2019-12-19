@@ -6,18 +6,22 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import Head from "next/head";
 import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
+import { getSchema } from "pages/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FinancialProduct } from "schema-dts";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
+import { descriptionMeta, imageMeta, schema, titleMeta } from "utils/seo";
 
 import InvestmentProgramControls from "./program-controls/investment-program-controls";
 import PerformanceData from "./program-details-description/performance-data";
@@ -85,8 +89,15 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+
   return (
     <Page title={title}>
+      <Head>
+        {schema<FinancialProduct>(getSchema(description))}
+        {descriptionMeta(description.publicInfo.description)}
+        {imageMeta(description.publicInfo.logo)}
+        {titleMeta(description.publicInfo.title)}
+      </Head>
       <DetailsDescriptionSection
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
