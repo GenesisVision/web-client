@@ -5,6 +5,9 @@ import FollowBalanceChart from "pages/follows/follow-details/follow-details-stat
 import { followAbsoluteProfitChartSelector } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
 import ProgramProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import ProgramDetailsStatisticsElements, {
+  IProgramStatisticData
+} from "pages/programs/program-details/program-details-statistic-section/program-details-statistics/program-details-statistics-elements";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -15,9 +18,6 @@ import { followBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { followStatusSelector } from "../reducers/description.reducer";
 import { followProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
-import FollowDetailsStatisticsElements, {
-  IFollowStatisticData
-} from "./follow-details-statistics/follow-details-statistics-elements";
 import {
   useChartPeriod,
   useFollowChartStateValues
@@ -63,10 +63,10 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
         <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
       )}
       renderDetailsStatisticsElements={({ period, statisticData }) => (
-        <FollowDetailsStatisticsElements
+        <ProgramDetailsStatisticsElements
           loaderData={statisticDataLoaderData}
           status={status}
-          data={statisticData! as IFollowStatisticData}
+          data={statisticData! as IProgramStatisticData}
           period={period}
         />
       )}
