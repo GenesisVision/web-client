@@ -9,6 +9,7 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import followApi from "services/api-client/follow-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
+import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -76,6 +77,7 @@ export const fetchProgramProfitChartAction = (
 ): ApiAction<ProgramProfitChartDataType> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
   payload: programsApi.getProgramProfitPercentCharts(id, {
+    authorization: authService.getAuthArg(),
     dateFrom: period.start,
     dateTo: period.end,
     currencies
