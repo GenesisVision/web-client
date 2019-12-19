@@ -4,7 +4,7 @@ import SocialLinkImage from "components/avatar/social-link/social-link";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
-const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
+const _SocialLinksBlock: React.FC<Props> = ({ socialLinks = [] }) => {
   return (
     <div className="social-links-block">
       {socialLinks.map(socialLink => (
