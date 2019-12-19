@@ -90,6 +90,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page<InvestmentOrDeposit>
       title={title}
+      description={description.publicInfo.description}
+      previewImage={description.publicInfo.logo}
       schema={getProgramSchema(description)}
     >
       <DetailsDescriptionSection
