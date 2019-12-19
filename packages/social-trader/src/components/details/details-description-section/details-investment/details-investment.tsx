@@ -43,10 +43,9 @@ const _DetailsInvestment: React.FC<Props> = ({
   programPersonalDetails,
   followPersonalDetails
 }) => {
-  const subscriptionsCount =
-    followPersonalDetails && "subscribedAccounts" in followPersonalDetails
-      ? followPersonalDetails.subscribedAccounts
-      : 0;
+  const subscriptionsCount = followPersonalDetails
+    ? followPersonalDetails.subscribedAccounts
+    : 0;
   const investmentDetails = personalFundDetails || programPersonalDetails;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
