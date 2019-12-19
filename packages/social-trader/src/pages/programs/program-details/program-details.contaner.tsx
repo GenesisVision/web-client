@@ -14,7 +14,7 @@ import { getProgramSchema } from "pages/programs/program-details/program-schema"
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { InvestmentOrDeposit } from "schema-dts";
+import { BrokerageAccount } from "schema-dts";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
@@ -88,7 +88,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
   return (
-    <Page<InvestmentOrDeposit>
+    <Page<BrokerageAccount>
       title={title}
       description={description.publicInfo.description}
       previewImage={description.publicInfo.logo}
