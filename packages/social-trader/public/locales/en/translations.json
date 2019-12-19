@@ -795,6 +795,18 @@
       }
     }
   },
+  "account-details-page": {
+    "subscriptions": {
+      "title": "Subscriptions",
+      "table": {
+        "provider": "Provider",
+        "profit": "Profit",
+        "subscription-date": "Subscription date",
+        "type": "Type",
+        "tolerance": "Tolerance"
+      }
+    }
+  },
   "follow-details-page": {
     "current-investment": {
       "title": "Subscription details",
