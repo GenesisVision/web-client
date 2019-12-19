@@ -8,6 +8,7 @@ import {
   DATA_RANGE_FILTER_TYPES,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
+import { dateToInput } from "./date-range-filter.helpers";
 
 const _DateRangeFilterValues: React.FC<
   IDateRangeFilterValuesProps & WithTranslation
@@ -55,7 +56,7 @@ const _DateRangeFilterValues: React.FC<
               type="text"
               name="dateStart"
               label={t("filters.date-range.start")}
-              value={String(dateStart)}
+              value={dateToInput(dateStart)}
               InputComponent={GVDatePicker}
               //@ts-ignore
               horizontal="right"
@@ -71,7 +72,7 @@ const _DateRangeFilterValues: React.FC<
               type="text"
               name="dateEnd"
               label={t("filters.date-range.end")}
-              value={String(dateEnd)}
+              value={dateToInput(dateEnd)}
               //@ts-ignore
               horizontal="right"
               InputComponent={GVDatePicker}
