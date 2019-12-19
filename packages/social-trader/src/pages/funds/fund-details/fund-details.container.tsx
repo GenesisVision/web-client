@@ -8,10 +8,12 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { FundDetailsFull } from "gv-api-web";
+import { getFundSchema } from "pages/funds/fund-details/fund-schema";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
+import { InvestmentFund } from "schema-dts";
 import { ASSET } from "shared/constants/constants";
 import {
   createFundNotificationsToUrl,
@@ -35,7 +37,12 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
   return (
-    <Page title={description.publicInfo.title}>
+    <Page<InvestmentFund>
+      title={description.publicInfo.title}
+      description={description.publicInfo.description}
+      previewImage={description.publicInfo.logo}
+      schema={getFundSchema(description)}
+    >
       <DetailsDescriptionSection
         personalDetails={description.personalDetails}
         isOwnAsset={description.publicInfo.isOwnAsset}

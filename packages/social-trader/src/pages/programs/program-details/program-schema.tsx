@@ -1,7 +1,7 @@
 import * as React from "react";
 import { InvestmentOrDeposit, WithContext } from "schema-dts";
+import filesService from "services/file-service";
 
-import filesService from "../../../services/file-service";
 import { ProgramDescriptionDataType } from "./program-details.types";
 
 export const getProgramSchema = (
@@ -9,7 +9,7 @@ export const getProgramSchema = (
 ): WithContext<InvestmentOrDeposit> => ({
   "@context": "https://schema.org",
   "@type": "InvestmentOrDeposit",
-  name: details.publicInfo.description,
+  name: details.publicInfo.title,
   description: details.publicInfo.description,
   broker: details.brokerDetails.name,
   feesAndCommissionsSpecification: "", //TODO
