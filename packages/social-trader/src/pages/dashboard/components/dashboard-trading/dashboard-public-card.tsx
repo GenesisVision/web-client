@@ -28,6 +28,8 @@ import { VoidFuncType } from "utils/types";
 import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCard: React.FC<Props> = ({
+  showWithdraw = true,
+  showInvest = true,
   showActions = true,
   asset,
   updateItems,
@@ -148,8 +150,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
         title={asset.accountInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
-        canWithdraw={asset.actions.canAddRequestWithdraw}
-        canInvest={asset.actions.canAddRequestInvest}
+        canWithdraw={asset.actions.canAddRequestWithdraw && showWithdraw}
+        canInvest={asset.actions.canAddRequestInvest && showInvest}
         broker={asset.broker && asset.broker.type}
         type={asset.assetType as ASSET}
         id={asset.id}
@@ -160,6 +162,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
 };
 
 interface Props {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
   showActions?: boolean;
   ownAsset?: boolean;
   updateItems: VoidFuncType;
