@@ -1,6 +1,6 @@
-.nav {
-  display: none;
+@import "../../styles/mixins";
 
+.nav {
   //@media #{$tablet-portrait} {
   //	display: block;
   //	margin-left: 60px;

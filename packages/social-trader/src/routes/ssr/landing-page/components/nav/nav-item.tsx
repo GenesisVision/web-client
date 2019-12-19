@@ -7,15 +7,23 @@ import React from "react";
 interface INavItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   state?: string;
   name: string;
-  href?: string | { pathname: string; state: string };
+  href?: string;
   icon?: JSX.Element;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
 
-const _NavItem: React.FC<INavItemProps> = ({ href, name, icon, state }) => {
+const _NavItem: React.FC<INavItemProps> = ({
+  href,
+  name,
+  icon,
+  state,
+  onClick
+}) => {
   const { route } = useRouter();
   return (
     <li className="nav__item">
       <Link
+        onClick={onClick}
         to={{ pathname: href as string, state }}
         className={classNames("nav__link", {
           "nav__link--active": route.startsWith(

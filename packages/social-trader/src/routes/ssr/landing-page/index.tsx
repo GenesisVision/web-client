@@ -1,4 +1,5 @@
 import "./styles/index.scss";
+import "./styles/home.scss";
 
 import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import { NextPage } from "next";
