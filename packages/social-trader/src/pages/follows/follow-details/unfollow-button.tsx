@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 const _UnFollowButton: React.FC<Props> = ({
+  size = GV_BTN_SIZE,
   onApply,
   id,
   isExternal,
@@ -23,7 +24,7 @@ const _UnFollowButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
-        size={GV_BTN_SIZE.BIG}
+        size={size}
         color="secondary"
         variant="outlined"
         onClick={setIsOpenUnFollow}
@@ -43,6 +44,7 @@ const _UnFollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   onApply: VoidFunction;
   tradingAccountId: string;
   isExternal: boolean;
