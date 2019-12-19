@@ -66,4 +66,4 @@ const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType => ({
 });
 
 export const getAccountSubscriptionsLoaderData = (): AccountSubscriptionsDataType[] =>
-  tableLoaderCreator(getAccountSubscriptionLoaderData);
+  tableLoaderCreator(getAccountSubscriptionLoaderData, 3);
