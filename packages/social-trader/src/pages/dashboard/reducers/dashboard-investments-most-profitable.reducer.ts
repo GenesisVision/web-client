@@ -5,11 +5,10 @@ import tableReducerFactory, {
 } from "components/table/reducers/table.reducer";
 import {
   DashboardTradingAsset,
-  ItemsViewModelDashboardTradingAsset,
-  ItemsViewModelProgramInvestingDetailsList,
-  ProgramInvestingDetailsList
+  ItemsViewModelDashboardTradingAsset
 } from "gv-api-web";
 import { RootState } from "reducers/root-reducer";
+import { createSelector } from "reselect";
 import { ApiAction } from "utils/types";
 
 export const DASHBOARD_INVESTMENTS_MOST_PROFITABLE =
@@ -33,6 +32,12 @@ export const dashboardInvestmentsMostProfitableSelector = tableSelectorCreator<
   TInvestmentsMostProfitableStateData,
   TInvestmentsMostProfitableItems
 >(dashboardInvestmentsMostProfitableTableSelector);
+
+export const dashboardInvestmentsMostProfitableItemsSelector = createSelector(
+  dashboardInvestmentsMostProfitableSelector,
+  (state: TInvestmentsMostProfitableState) =>
+    state.itemsData.data ? state.itemsData.data.items : undefined
+);
 
 export const dashboardInvestmentsMostProfitableReducer = tableReducerFactory<
   TInvestmentsMostProfitableStateData
