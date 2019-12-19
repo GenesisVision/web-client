@@ -12,17 +12,24 @@
     padding-bottom: 40px;
   }
 
+  &__row {
+    @include grid();
+    align-items: center;
+
+    @include media-breakpoint-tablet() {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      justify-content: space-between;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-template-columns: repeat($grid-columns, 1fr);
+    }
+  }
+
   &__burger {
     @include media-breakpoint-desktop() {
       display: none;
     }
-  }
-
-  &__row {
-    @include grid();
-    align-items: center;
-    justify-content: space-between;
-    grid-auto-flow: row dense;
   }
 
   &__mobile-menu {
@@ -34,17 +41,50 @@
 
     @include media-breakpoint-desktop() {
       display: block;
+      grid-column: 3/11;
+      justify-self: end;
     }
   }
 
-  &__link {
-    @include transition(opacity);
-    @include reset-link();
-    font-size: 12px;
+  &__start-btn {
     display: none;
 
     @include media-breakpoint-tablet() {
       display: block;
+      justify-self: end;
     }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 11/13;
+    }
+  }
+
+  &__logo {
+    grid-column: 2/4;
+    justify-self: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 2/2;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 1/3;
+      justify-self: start;
+    }
+  }
+
+  &__logo-img {
+    max-height: 22px;
+
+    @include media-breakpoint-tablet() {
+      max-height: none;
+    }
+  }
+
+  &__start-btn-link,
+  &__logo-link {
+    @include transition(opacity);
+    @include reset-link();
+    display: block;
   }
 }

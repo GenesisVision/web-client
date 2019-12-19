@@ -9,7 +9,7 @@ import { useTranslation } from "shared/i18n";
 
 import Layout from "./layouts/_layout";
 
-const LandingIndexPage: NextPage<{
+const IndexPage: NextPage<{
   programs: ItemsViewModelProgramDetailsListItem;
 }> = ({ programs }) => {
   const { t } = useTranslation();
@@ -25,9 +25,9 @@ const LandingIndexPage: NextPage<{
   );
 };
 
-export default LandingIndexPage;
+export default IndexPage;
 
-LandingIndexPage.getInitialProps = async () => {
+IndexPage.getInitialProps = async () => {
   try {
     const programs = await programsApi.getPrograms({
       skip: 0,
