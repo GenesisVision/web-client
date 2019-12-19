@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Thing, WithContext } from "schema-dts";
+import { Organization, Table, Thing, WithContext } from "schema-dts";
 import filesService from "services/file-service";
 
 export const schema = (() => {
@@ -58,4 +58,33 @@ export const imageMeta = (image?: string) => {
       />
     </>
   ) : null;
+};
+
+export const getOrganizationSchema = (): WithContext<Organization> => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Genesis Vision",
+    logo: "",
+    sameAs: [
+      "https://twitter.com/genesis_vision/",
+      "https://www.facebook.com/GenesisVisionProject/"
+    ]
+  };
+};
+
+export const getProgramTable = (): WithContext<Table> => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Table",
+    about: "List of programs"
+  };
+};
+
+export const getFundsTable = (): WithContext<Table> => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Table",
+    about: "List of funds"
+  };
 };
