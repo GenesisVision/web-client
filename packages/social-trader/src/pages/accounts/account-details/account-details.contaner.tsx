@@ -4,6 +4,7 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { AccountDetailsSubscriptions } from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import {
   getAccountHistoryCounts,
   getOpenPositions,
@@ -42,6 +43,10 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         PerformanceData={() => <PerformanceData description={description} />}
       />
       <DetailsDivider />
+      <AccountDetailsSubscriptions
+        id={description.id}
+        assetCurrency={description.tradingAccountInfo.currency}
+      />
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
         haveDelay={false}
