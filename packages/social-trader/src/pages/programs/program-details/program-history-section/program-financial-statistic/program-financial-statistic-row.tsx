@@ -15,11 +15,13 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
   currency,
   showCommissionRebateSometime
 }) => {
-  const { profit, balance, successFee, entryFee } = period.managerStatistic;
+  const {
+    managerStatistic: { profit, balance, successFee, entryFee },
+    managerDeposit,
+    managerWithdraw,
+    managerCommissionRebate
+  } = period;
 
-  const deposit = 0;
-  const withdraw = 0;
-  const commissionRebate = 0;
   return (
     <TableRow stripy>
       <TableCell className="program-financial-statistic__cell">
@@ -62,13 +64,13 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         />
       </TableCell>
       <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
-        {withdraw ? (
+        {managerWithdraw ? (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
-            value={`-${formatCurrencyValue(withdraw, currency)}`}
+            value={`-${formatCurrencyValue(managerWithdraw, currency)}`}
           >
             <NumberFormat
-              value={formatCurrencyValue(withdraw, currency)}
+              value={formatCurrencyValue(managerWithdraw, currency)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
@@ -77,10 +79,10 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         ) : (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
-            value={formatCurrencyValue(deposit, currency)}
+            value={formatCurrencyValue(managerDeposit, currency)}
           >
             <NumberFormat
-              value={formatCurrencyValue(deposit, currency)}
+              value={formatCurrencyValue(managerDeposit, currency)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
@@ -91,7 +93,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
       {showCommissionRebateSometime && (
         <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
           <NumberFormat
-            value={formatCurrencyValue(commissionRebate, currency)}
+            value={formatCurrencyValue(managerCommissionRebate, currency)}
             displayType="text"
             suffix={` ${currency}`}
           />
