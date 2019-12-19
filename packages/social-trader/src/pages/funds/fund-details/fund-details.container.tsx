@@ -8,17 +8,19 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { FundDetailsFull } from "gv-api-web";
+import Head from "next/head";
 import { getFundSchema } from "pages/funds/fund-details/fund-schema";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { InvestmentFund } from "schema-dts";
+import { FinancialProduct } from "schema-dts";
 import { ASSET } from "shared/constants/constants";
 import {
   createFundNotificationsToUrl,
   createFundSettingsToUrl
 } from "utils/compose-url";
+import { descriptionMeta, imageMeta, schema, titleMeta } from "utils/seo";
 import { CurrencyEnum } from "utils/types";
 
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
@@ -37,12 +39,13 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
   return (
-    <Page<InvestmentFund>
-      title={description.publicInfo.title}
-      description={description.publicInfo.description}
-      previewImage={description.publicInfo.logo}
-      schema={getFundSchema(description)}
-    >
+    <Page title={description.publicInfo.title}>
+      <Head>
+        {schema<FinancialProduct>(getFundSchema(description))}
+        {descriptionMeta(description.publicInfo.description)}
+        {imageMeta(description.publicInfo.logo)}
+        {titleMeta(description.publicInfo.title)}
+      </Head>
       <DetailsDescriptionSection
         personalDetails={description.personalDetails}
         isOwnAsset={description.publicInfo.isOwnAsset}
