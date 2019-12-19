@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 const _EditFollowButton: React.FC<Props> = ({
+  size = GV_BTN_SIZE,
   signalSubscription,
   onApply,
   tradingAccountId,
@@ -21,7 +22,7 @@ const _EditFollowButton: React.FC<Props> = ({
   }, [id]);
   return (
     <>
-      <GVButton size={GV_BTN_SIZE.BIG} onClick={setIsOpenPopup}>
+      <GVButton size={size} onClick={setIsOpenPopup}>
         {t("buttons.edit")}
       </GVButton>
       <EditFollowModuleContainer
@@ -38,6 +39,7 @@ const _EditFollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   signalSubscription: SignalSubscription;
   onApply: VoidFunction;
   tradingAccountId: string;
