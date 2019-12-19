@@ -31,27 +31,40 @@ const LPButton: React.FC<LPButtonProps> = ({
     "lp-button--primary": color === "primary",
     "lp-button--secondary": color === "secondary"
   });
-  return href ? (
-    <Link
-      className={classname}
-      onClick={onClick}
-      to={{
-        pathname: href
-      }}
-    >
-      {children}
-    </Link>
-  ) : (
-    <button
-      id={id}
-      disabled={disabled}
-      className={classname}
-      onClick={onClick}
-      type={type}
-    >
-      {children}
-    </button>
-  );
+  switch (true) {
+    case href && (href.includes("http") || href.includes("mailto")):
+      return (
+        <a href={href} className={classname}>
+          {children}
+        </a>
+      );
+    case !href:
+      return (
+        <button
+          id={id}
+          disabled={disabled}
+          className={classname}
+          onClick={onClick}
+          type={type}
+        >
+          {children}
+        </button>
+      );
+    case !!href:
+      return (
+        <Link
+          className={classname}
+          onClick={onClick}
+          to={{
+            pathname: href as string
+          }}
+        >
+          {children}
+        </Link>
+      );
+    default:
+      return null;
+  }
 };
 
 LPButton.defaultProps = {

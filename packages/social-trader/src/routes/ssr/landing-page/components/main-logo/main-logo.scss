@@ -2,7 +2,5 @@
 @import "../../styles/mixins";
 
 .main-logo {
-  svg {
-    fill: $main-color;
-  }
+  fill: $main-color;
 }

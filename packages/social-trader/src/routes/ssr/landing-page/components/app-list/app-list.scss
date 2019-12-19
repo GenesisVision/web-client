@@ -1,0 +1,74 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+
+.app-list {
+  @include reset-list();
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+
+  @include media-breakpoint-landscape-tablet() {
+    justify-content: start;
+  }
+}
+
+.app-list__item {
+  margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    margin-right: 30px;
+  }
+}
+
+.app-list__link {
+  @include transition(fill, stroke, background-color);
+  @include reset-link();
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: $main-color;
+  stroke: #1d1a3d;
+  background-color: #1d1a3d;
+  mix-blend-mode: normal;
+  border: 1px solid #1d1a3d;
+
+  svg {
+    width: 19px;
+    height: 22px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 14px;
+      height: 17px;
+    }
+  }
+
+  @include media-breakpoint-desktop() {
+    &:hover {
+      fill: $primary-color;
+    }
+  }
+
+  @include media-breakpoint-large-desktop() {
+    width: 50px;
+    height: 50px;
+
+    svg {
+      width: 19px;
+      height: 22px;
+    }
+  }
+}

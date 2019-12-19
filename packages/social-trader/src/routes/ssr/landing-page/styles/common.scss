@@ -1,3 +1,5 @@
+@import "~shared/styles/breakpoint";
+
 *,
 *:before,
 *:after {
@@ -24,7 +26,50 @@ img {
 //h1 {
 //  color: $landing-text;
 //}
-//
-//h2 {
-//  color: $landing-text;
-//}
+
+h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 30px;
+  padding-bottom: 0;
+
+  @include media-breakpoint-tablet() {
+    font-size: 38px;
+    line-height: 38px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 26px;
+    line-height: 40px;
+  }
+
+  @include media-breakpoint-desktop() {
+    font-size: 30px;
+    line-height: 50px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 38px;
+  }
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  padding-bottom: 0;
+
+  @include media-breakpoint-tablet() {
+    font-size: 24px;
+    line-height: 40px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 22px;
+  }
+}

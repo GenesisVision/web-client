@@ -1,8 +1,8 @@
 import "./nav.scss";
 
-import classNames from "classnames";
 import * as React from "react";
 import NavItem from "routes/ssr/landing-page/components/nav/nav-item";
+import { TNavHeader } from "routes/ssr/landing-page/routes/nav";
 
 const _NavList: React.FC<Props> = ({ menuItems, className }) => {
   return (
@@ -22,7 +22,7 @@ const _NavList: React.FC<Props> = ({ menuItems, className }) => {
 };
 
 export interface Props {
-  menuItems: any;
+  menuItems: TNavHeader[];
   className?: string;
 }
 

@@ -1,6 +1,10 @@
 @import "mixins";
 @import "grid";
 
+.home {
+  background-color: #fff;
+}
+
 .home__container {
   @include container();
 }

@@ -3,12 +3,13 @@ import "./main-logo.scss";
 import * as React from "react";
 
 export const MainLogo: React.FC = () => (
-  <div className="main-logo">
+  <>
     <svg
       width="139"
       height="34"
       viewBox="0 0 139 34"
       xmlns="http://www.w3.org/2000/svg"
+      className="main-logo"
     >
       <mask
         id="mask0"
@@ -99,5 +100,5 @@ export const MainLogo: React.FC = () => (
         d="M120.874 18.8975H123.995V29.2781H121.112L117.011 23.9767V29.2781H113.875V18.8975H116.758L120.874 24.2283V18.8975Z"
       />
     </svg>
-  </div>
+  </>
 );
