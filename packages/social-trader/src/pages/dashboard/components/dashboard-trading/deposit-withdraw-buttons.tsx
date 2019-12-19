@@ -19,7 +19,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
   currency
 }) => {
   return (
-    <TableCardRow>
+    <TableCardRow center={!canWithdraw || !canInvest}>
       {canInvest && (
         <DepositButton
           title={title}
@@ -46,6 +46,8 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
   title: string;
   onApply?: VoidFunction;
   canWithdraw?: boolean;
