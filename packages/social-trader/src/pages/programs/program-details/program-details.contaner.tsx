@@ -128,7 +128,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 levelsParameters={levelsParameters!}
               />
             )}
-            {followDetails && (
+            {followDetails && followPersonalDetails && (
               <FollowControlsContainer description={description} />
             )}
           </>
