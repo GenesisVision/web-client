@@ -3,9 +3,10 @@ import "./hint.scss";
 import classNames from "classnames";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 
-const Hint: React.FC<Props> = ({
+const _Hint: React.FC<Props> = ({
   content,
   tooltipContent,
   className,
@@ -15,15 +16,7 @@ const Hint: React.FC<Props> = ({
     <div className={classNames("hint", className)}>
       <Tooltip
         vertical={vertical}
-        render={() => (
-          <div
-            className={classNames("hint__tooltip-content", {
-              [className + "-tooltip-content"]: className
-            })}
-          >
-            {tooltipContent}
-          </div>
-        )}
+        render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
       >
         <div className="hint__content">{content}</div>
       </Tooltip>
@@ -31,6 +24,7 @@ const Hint: React.FC<Props> = ({
   );
 };
 
+const Hint = React.memo(_Hint);
 export default Hint;
 
 interface Props {
