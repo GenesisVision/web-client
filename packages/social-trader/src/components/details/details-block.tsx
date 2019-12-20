@@ -4,6 +4,7 @@ import classNames from "classnames";
 import * as React from "react";
 
 const _DetailsBlock: React.FC<Props> = ({
+  row,
   horizontalPaddings,
   table,
   wide,
@@ -13,6 +14,7 @@ const _DetailsBlock: React.FC<Props> = ({
 }) => (
   <div
     className={classNames("details__block", className, {
+      "details__block--row": row,
       "details__block--horizontal-paddings": !!horizontalPaddings,
       "details__block--table": !!table,
       "details__block--wide": !!wide,
@@ -32,6 +34,7 @@ export enum DETAILS_BLOCK_TYPE {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  row?: boolean;
   type?: DETAILS_BLOCK_TYPE;
   className?: string;
   wide?: boolean;
