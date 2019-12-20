@@ -1,174 +1,43 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
 @import "mixins";
 @import "grid";
 
 .home {
-  background-color: #fff;
-}
+  &__container {
+    @include container();
 
-.home__container {
-  @include container();
-}
+    &--grid {
+      @include media-breakpoint-tablet() {
+        @include grid();
+      }
+    }
+  }
 
-.home__section {
-  //background-color: $white;
-}
+  &__section {
+    &--bg-white {
+      background-color: $main-color;
+    }
 
-//.home__social-list {
-//	display: none;
-//
-//	@media #{$tablet-landscape} {
-//		@include post(0.5, 12);
-//		display: block;
-//		position: fixed;
-//		right: 0;
-//		top: 50%;
-//		transform: translateY(-50%);
-//		z-index: 5;
-//	}
-//}
-//
-//.home__slider {
-//	@include prefix(1, 12);
-//	@include suffix(1, 12);
-//	padding-top: 50px;
-//	padding-bottom: 60px;
-//	overflow: hidden;
-//
-//	@media #{$laptop} {
-//		@include prefix(2, 12);
-//	}
-//}
-//
-//.home__advantages {
-//	@include prefix(1, 12);
-//	@include suffix(1, 12);
-//	padding-bottom: 35px;
-//
-//	@media #{$tablet-portrait} {
-//		@include prefix(1.5, 12);
-//		@include suffix(1.5, 12);
-//	}
-//
-//	@media #{$tablet-landscape} {
-//		@include prefix(1, 12);
-//		@include suffix(1, 12);
-//	}
-//}
-//
-//.home__about {
-//	@include prefix(1, 12);
-//	@include suffix(1, 12);
-//
-//	@media #{$laptop} {
-//		@include prefix(2, 12);
-//	}
-//}
-//
-//.home__partners {
-//    @include prefix(1,12);
-//    @include suffix(1, 12);
-//	padding-top: 80px;
-//	padding-bottom: 80px;
-//
-//    @media #{$tablet-portrait} {
-//        @include prefix(1.5, 12);
-//        @include suffix(1.5, 12);
-//		padding-top: 120px;
-//		padding-top: 120px;
-//    }
-//
-//    @media #{$tablet-landscape} {
-//        @include prefix(1, 12);
-//        @include suffix(1, 12);
-//    }
-//
-//    @media #{$laptop} {
-//        @include prefix(2, 12);
-//        @include suffix(2, 12);
-//		padding-top: 160px;
-//		padding-bottom: 150px;
-//    }
-//
-//	@media #{$laptop-wide} {
-//		padding-top: 110px;
-//		padding-bottom: 110px;
-//	}
-//}
-//
-//.home__buy {
-//	@include prefix(1, 12);
-//	@include suffix(1, 12);
-//	padding-top: 57px;
-//	padding-bottom: 57px;
-//
-//	@media #{$tablet-portrait} {
-//		@include prefix(2, 12);
-//		@include suffix(2, 12);
-//		padding-top: 50px;
-//		padding-bottom: 50px;
-//	}
-//
-//	@media #{$tablet-landscape} {
-//		@include prefix(1, 12);
-//		@include suffix(1, 12);
-//		padding-top: 120px;
-//		padding-bottom: 90px;
-//	}
-//
-//	@media #{$laptop} {
-//		padding-bottom: 130px;
-//	}
-//
-//	@media #{$laptop-wide} {
-//		@include prefix(2, 12);
-//		@include suffix(2, 12);
-//		padding-top: 200px;
-//		padding-bottom: 170px;
-//	}
-//}
-//
-////modify
-//.home__section_firts_screen {
-//	@media #{$tablet-portrait} {
-//		height: calc(100vh - 130px);
-//		display: flex;
-//		flex-direction: column;
-//		justify-content: space-around;
-//		min-height: 670px;
-//	}
-//
-//	@media #{$laptop} {
-//		height: calc(100vh - 110px);
-//	}
-//
-//	@media #{$laptop-wide} {
-//		height: calc(100vh - 124px);
-//		min-height: 770px;
-//	}
-//}
-//
-//.home__about_theme_reverse {
-//	@include prefix(1, 12);
-//	@include suffix(1, 12);
-//
-//	@media #{$laptop} {
-//		@include prefix(1, 12);
-//	}
-//
-//	@media #{$laptop-wide} {
-//		@include prefix(2, 12);
-//		@include suffix(2, 12);
-//	}
-//}
-//
-//.home__section_color_gray {
-//    background-color: $light-gray;
-//
-//	.app-links__link {
-//		stroke: $light-gray;
-//	}
-//}
-//
-//.home__section_color_dark {
-//    background-color: $dark-blue;
-//}
+    &--bg-gray {
+      background-color: $landing-bg-gray;
+    }
+
+    &--bg-white,
+    &--bg-gray {
+      color: $row-color;
+
+      h1,
+      h2,
+      h3 {
+        color: $row-color;
+      }
+    }
+  }
+
+  &__section-item {
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+  }
+}
