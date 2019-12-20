@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 const _EditFollowButton: React.FC<Props> = ({
-  size = GV_BTN_SIZE,
+  size = GV_BTN_SIZE.BIG,
   signalSubscription,
   onApply,
   tradingAccountId,
