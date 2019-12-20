@@ -6,7 +6,6 @@ import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
-import Head from "next/head";
 import React from "react";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
@@ -14,15 +13,8 @@ import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "routes/programs.routes";
-import { Organization, Table } from "schema-dts";
 import { useTranslation } from "shared/i18n";
 import { composeProgramFacetUrl } from "utils/compose-url";
-import {
-  getOrganizationSchema,
-  getProgramTable,
-  schema,
-  titleMeta
-} from "utils/seo";
 
 const ProgramsPage: NextPage = () => {
   const { t } = useTranslation();

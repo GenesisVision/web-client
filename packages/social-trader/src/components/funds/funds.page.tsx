@@ -4,7 +4,6 @@ import FacetCardsContainer, {
 import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import FundsTableSSR from "modules/funds-table/components/funds-table/funds-table-ssr";
-import Head from "next/head";
 import * as React from "react";
 import {
   FUNDS_EXPLORE_TAB_NAME,
@@ -12,15 +11,8 @@ import {
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "routes/funds.routes";
-import { Organization, Table } from "schema-dts";
 import { useTranslation } from "shared/i18n";
 import { composeFundFacetUrl } from "utils/compose-url";
-import {
-  getFundsTable,
-  getOrganizationSchema,
-  schema,
-  titleMeta
-} from "utils/seo";
 
 import NavigationTabs from "../navigation-tabs/navigation-tabs";
 
