@@ -22,9 +22,12 @@ import { formatCurrencyValue } from "utils/formatter";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
-import CreateAccountFormValidationSchema from "./follow-popup-create-account.validators";
+import CreateAccountFormValidationSchema, {
+  CREATE_ACCOUNT_FORM_FIELDS
+} from "./follow-popup-create-account.validators";
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
+  handleSubmit,
   onClick,
   isValid,
   dirty,
@@ -39,7 +42,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   const wallet = wallets.find(
     (wallet: WalletData) => wallet.currency === currency
   )!;
-  const disableButton = !dirty || !isValid || depositAmount > wallet.available;
+  const disableButton = !dirty || !isValid;
 
   useEffect(() => {
     fetchRateMethod(followCurrency as CurrencyEnum, currency).then(
@@ -73,7 +76,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     [followCurrency, setFieldValue, wallet.available]
   );
   return (
-    <form id="follow-create-account">
+    <form id="follow-create-account" onSubmit={handleSubmit}>
       <DialogBottom>
         <DialogField>
           <WalletSelect
@@ -127,13 +130,6 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     </form>
   );
 };
-
-export enum CREATE_ACCOUNT_FORM_FIELDS {
-  depositWalletId = "depositWalletId",
-  currency = "currency",
-  depositAmount = "depositAmount",
-  rate = "rate"
-}
 
 interface OwnProps {
   minDeposit: number;
