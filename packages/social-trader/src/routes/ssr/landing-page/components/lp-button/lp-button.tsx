@@ -13,7 +13,7 @@ interface LPButtonProps {
   onClick?: (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
   ) => void;
-  children?: string | JSX.Element;
+  children: string | JSX.Element;
   href?: string;
 }
 

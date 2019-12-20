@@ -4,6 +4,7 @@ import "./styles/home.scss";
 import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
+import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
 import programsApi from "services/api-client/programs-api";
 import { useTranslation } from "shared/i18n";
@@ -16,10 +17,10 @@ const IndexPage: NextPage = () => {
   return (
     <Layout title="Genesis Vision">
       <main className="home">
-        <section className="home__section">
+        <section className="home__section home__section--first-screen">
           <div className="home__container home__container--grid">
             <div className="home__section-item">
-              <h2>First Slider</h2>
+              <FirstSlider />
             </div>
             <StatList className="home__section-item" />
           </div>

@@ -8,13 +8,31 @@
     @include container();
 
     &--grid {
+      height: 100%;
+
       @include media-breakpoint-tablet() {
         @include grid();
+        align-items: center;
       }
     }
   }
 
   &__section {
+    &--first-screen {
+      @include media-breakpoint-tablet() {
+        height: calc(100vh - 130px);
+        min-height: 670px;
+      }
+
+      @include media-breakpoint-desktop() {
+        height: calc(100vh - 138px);
+      }
+
+      @include media-breakpoint-large-desktop() {
+        min-height: 770px;
+      }
+    }
+
     &--bg-white {
       background-color: $main-color;
     }
