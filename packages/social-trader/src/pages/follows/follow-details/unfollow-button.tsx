@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 const _UnFollowButton: React.FC<Props> = ({
-  size = GV_BTN_SIZE,
+  size = GV_BTN_SIZE.BIG,
   onApply,
   id,
   isExternal,
