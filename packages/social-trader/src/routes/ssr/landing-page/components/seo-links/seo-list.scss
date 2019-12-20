@@ -17,7 +17,7 @@
     &:hover,
     &:focus,
     &:active {
-      color: $background-pretender;
+      color: $landing-link-hover;
     }
 
     @include media-breakpoint-tablet() {
