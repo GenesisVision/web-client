@@ -27,7 +27,9 @@ export const fetchAccountSubscriptions = (
   id: string
 ): CancelablePromise<AccountSubscriptionsType> => {
   return followApi
-    .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg())
+    .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg(), {
+      onlyActive: true
+    })
     .then(({ items }) => items);
 };
 
