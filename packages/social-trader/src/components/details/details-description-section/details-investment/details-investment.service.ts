@@ -8,6 +8,8 @@ export const fetchSubscriptions = (id: string) =>
     .then(({ items }) => items);
 
 export const SignalSubscriptionLoaderData: SignalSubscription = {
+  subscriptionDate: new Date(),
+  isExternal: false,
   status: "",
   subscriberInfo: { tradingAccountId: "", tradingAccountLogin: "" },
   asset: {
