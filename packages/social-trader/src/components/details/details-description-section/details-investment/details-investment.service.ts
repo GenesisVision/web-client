@@ -8,6 +8,8 @@ export const fetchSubscriptions = (id: string) =>
     .then(({ items }) => items);
 
 export const SignalSubscriptionLoaderData: SignalSubscription = {
+  detachMode: "None",
+  unsubscriptionDate: new Date(),
   subscriptionDate: new Date(),
   isExternal: false,
   status: "",
