@@ -29,11 +29,6 @@ const FundsPage: React.FC = () => {
   const title = t("funds-page.title");
   return (
     <Page title={title}>
-      <Head>
-        {schema<Organization>(getOrganizationSchema())}
-        {schema<Table>(getFundsTable())}
-        {titleMeta("Genesis vision")}
-      </Head>
       <NavigationTabs
         exploreTabName={FUNDS_EXPLORE_TAB_NAME}
         tabRoute={FUNDS_TAB_ROUTE}

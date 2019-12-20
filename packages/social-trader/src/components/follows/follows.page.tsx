@@ -29,11 +29,6 @@ const FollowsPage: NextComponentType = () => {
   const title = t("follows-page.title");
   return (
     <Page title={title}>
-      <Head>
-        {schema<Organization>(getOrganizationSchema())}
-        {schema<Table>(getProgramTable())}
-        {titleMeta("Genesis vision")}
-      </Head>
       <NavigationTabs
         exploreTabName={EXPLORE_TAB_NAME}
         tabRoute={FOLLOW_TAB_ROUTE}

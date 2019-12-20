@@ -40,12 +40,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }, []);
   return (
     <Page title={description.publicInfo.title}>
-      <Head>
-        {schema<FinancialProduct>(getFundSchema(description))}
-        {descriptionMeta(description.publicInfo.description)}
-        {imageMeta(description.publicInfo.logo)}
-        {titleMeta(description.publicInfo.title)}
-      </Head>
       <DetailsDescriptionSection
         personalDetails={description.personalDetails}
         isOwnAsset={description.publicInfo.isOwnAsset}

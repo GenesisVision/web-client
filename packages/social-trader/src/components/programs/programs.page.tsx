@@ -30,11 +30,6 @@ const ProgramsPage: NextPage = () => {
 
   return (
     <Page title={title}>
-      <Head>
-        {schema<Organization>(getOrganizationSchema())}
-        {schema<Table>(getProgramTable())}
-        {titleMeta("Genesis vision")}
-      </Head>
       <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}

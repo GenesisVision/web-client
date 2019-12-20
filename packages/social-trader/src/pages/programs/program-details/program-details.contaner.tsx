@@ -92,12 +92,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
 
   return (
     <Page title={title}>
-      <Head>
-        {schema<FinancialProduct>(getSchema(description))}
-        {descriptionMeta(description.publicInfo.description)}
-        {imageMeta(description.publicInfo.logo)}
-        {titleMeta(description.publicInfo.title)}
-      </Head>
       <DetailsDescriptionSection
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
