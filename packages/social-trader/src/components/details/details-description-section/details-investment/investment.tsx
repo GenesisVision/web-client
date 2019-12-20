@@ -125,7 +125,7 @@ const _Investment: React.FC<Props> = ({
           label={
             <TooltipLabel
               tooltipContent={t(
-                `fund-details-page.tooltip.status.${asset.toLowerCase()}`
+                `asset-details-page.tooltip.status.${asset.toLowerCase()}`
               )}
               labelText={t("fund-details-page.description.status")}
             />
