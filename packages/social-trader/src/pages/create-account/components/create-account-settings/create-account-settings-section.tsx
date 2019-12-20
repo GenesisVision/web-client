@@ -9,13 +9,7 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
     asset: CREATE_ASSET.ACCOUNT
   });
 
-  return (
-    <CreateAccountSettings
-      onSubmit={handleCreate}
-      minimumDepositsAmount={broker.accountTypes[0].minimumDepositsAmount}
-      broker={broker}
-    />
-  );
+  return <CreateAccountSettings onSubmit={handleCreate} broker={broker} />;
 };
 
 interface Props {

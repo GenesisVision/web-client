@@ -30,12 +30,12 @@ const _CreateAccountSettings: React.FC<Props> = ({
   handleSubmit,
   isValid,
   isSubmitting,
-  minimumDepositsAmount,
   values: { brokerAccountTypeId, depositAmount, currency }
 }) => {
   const accountType = broker.accountTypes.find(
     ({ id }) => brokerAccountTypeId === id
   )!;
+  const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
     <form onSubmit={validateAndSubmit}>
@@ -75,7 +75,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
         walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
         inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
         depositAmount={depositAmount}
-        minimumDepositAmount={minimumDepositsAmount[currency]}
+        minimumDepositAmount={minimumDepositAmount}
         setFieldValue={setFieldValue}
         assetCurrency={currency as CurrencyEnum}
       />
@@ -137,7 +137,6 @@ const CreateAccountSettings = compose<React.ComponentType<OwnProps>>(
 export default CreateAccountSettings;
 
 interface OwnProps {
-  minimumDepositsAmount: { [key: string]: number };
   broker: Broker;
   onSubmit: (
     values: ICreateAccountSettingsFormValues,
