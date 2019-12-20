@@ -109,7 +109,6 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
                 suffix=" %)"
               />
             }
-            className="asset-details-description__short-statistic-hint"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
               "program-details-page.description.entry-fee-levels"
