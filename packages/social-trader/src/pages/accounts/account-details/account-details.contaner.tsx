@@ -60,7 +60,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         }
       />
       <DetailsDivider />
-      {description.brokerDetails.isSignalsAvailable && (
+      {!!description.tradingAccountInfo.subscriptions && (
         <AccountDetailsSubscriptions
           id={description.id}
           assetCurrency={description.tradingAccountInfo.currency}
