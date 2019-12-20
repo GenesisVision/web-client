@@ -1,0 +1,30 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.stat-list {
+  @include reset-list();
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    //@include grid();
+    grid-template-columns: repeat(4, 1fr);
+    grid-column: 2/12;
+  }
+
+  &__item {
+  }
+}

@@ -9,24 +9,22 @@ interface ISeoItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
 
-const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => {
-  return (
-    <li className="seo-list__item">
-      {href.includes("http") ? (
-        <a href={href} className="seo-list__link">
-          {name}
-        </a>
-      ) : (
-        <Link
-          onClick={onClick}
-          to={{ pathname: href as string, state }}
-          className="seo-list__link"
-        >
-          {name}
-        </Link>
-      )}
-    </li>
-  );
-};
+const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => (
+  <li className="seo-list__item">
+    {href.includes("http") ? (
+      <a href={href} className="seo-list__link">
+        {name}
+      </a>
+    ) : (
+      <Link
+        onClick={onClick}
+        to={{ pathname: href as string, state }}
+        className="seo-list__link"
+      >
+        {name}
+      </Link>
+    )}
+  </li>
+);
 const SeoItem = React.memo(_SeoItem);
 export default SeoItem;

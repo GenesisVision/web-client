@@ -17,7 +17,7 @@ interface LPButtonProps {
   href?: string;
 }
 
-const LPButton: React.FC<LPButtonProps> = ({
+const _LPButton: React.FC<LPButtonProps> = ({
   id,
   color,
   className,
@@ -67,9 +67,10 @@ const LPButton: React.FC<LPButtonProps> = ({
   }
 };
 
-LPButton.defaultProps = {
+_LPButton.defaultProps = {
   color: "primary",
   type: "button"
 };
 
+const LPButton = React.memo(_LPButton);
 export default LPButton;

@@ -31,16 +31,6 @@ $grid-gap-mobile: 14px;
     grid-column-gap: $grid-gap;
     grid-template-columns: repeat($grid-columns, 1fr);
   }
-
-  //@if ($auto-fit != false) {
-  //  @include media-breakpoint-tablet() {
-  //    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  //  }
-  //} @else {
-  //  @include media-breakpoint-tablet() {
-  //    grid-template-columns: repeat($grid-columns, 1fr);
-  //  }
-  //}
 }
 
 //@mixin grid-auto-fit() {

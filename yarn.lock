@@ -9406,7 +9406,6 @@ next-transpile-modules@^2.3.1:
 
 next@../../next.tgz:
   version "9.0.9-canary.0"
-  uid "3bdc2ea18978e6429b415f96f695459dfecb7391"
   resolved "../../next.tgz#3bdc2ea18978e6429b415f96f695459dfecb7391"
   dependencies:
     "@ampproject/toolbox-optimizer" "1.0.1"
