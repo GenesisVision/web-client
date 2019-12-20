@@ -43,10 +43,12 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         PerformanceData={() => <PerformanceData description={description} />}
       />
       <DetailsDivider />
-      <AccountDetailsSubscriptions
-        id={description.id}
-        assetCurrency={description.tradingAccountInfo.currency}
-      />
+      {description.brokerDetails.isSignalsAvailable && (
+        <AccountDetailsSubscriptions
+          id={description.id}
+          assetCurrency={description.tradingAccountInfo.currency}
+        />
+      )}
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
         haveDelay={false}
