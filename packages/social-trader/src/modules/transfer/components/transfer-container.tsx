@@ -63,7 +63,7 @@ const _TransferContainer: React.FC<Props> = ({
     destinationType === "Wallet" ? wallets : tradingAccounts;
   useEffect(() => {
     if (destinationType !== "Wallet" || sourceType !== "Wallet")
-      getTradingAccounts();
+      getTradingAccounts(currency);
   }, []);
   useEffect(() => {
     if (!!sourceItems && !!destinationItems)
