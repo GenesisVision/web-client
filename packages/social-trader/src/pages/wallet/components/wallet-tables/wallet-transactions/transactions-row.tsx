@@ -35,18 +35,15 @@ const _TransactionsRow: React.FC<Props> = ({
       />
       <TableRow stripy onClick={setOpenPopup}>
         {!walletCurrency && (
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+          <TableCell className="wallet-transactions__cell">
             <WalletConvert wallets={transaction.amount} />
           </TableCell>
         )}
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
           {formatDate(transaction.date)}
         </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-          <Status
-            status={transaction.status}
-            className="wallet-transactions__icon"
-          />
+        <TableCell className="wallet-transactions__cell">
+          <Status status={transaction.status} />
         </TableCell>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
           {transaction.description}
