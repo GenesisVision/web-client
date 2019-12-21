@@ -1,15 +1,15 @@
 import GVProgramAvatar from "components/gv-program-avatar";
+import Link, { ToType } from "components/link/link";
 import { TransactionAssetDetails } from "gv-api-web";
 import * as React from "react";
-import Link, { ToType } from "components/link/link";
+import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import {
   composeFollowDetailsUrl,
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "utils/compose-url";
-import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
-import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 
 const getAssetLink = (data: TransactionAssetDetails): ToType | undefined => {
   const state = "/ Wallet";
@@ -57,8 +57,8 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
         />
       </Link>
       <div className="transaction-asset__description">
-        <Link to={programLinkProps}>
-          <a className="transaction-asset__title">{data.title}</a>
+        <Link to={programLinkProps} className="transaction-asset__title">
+          {data.title}
         </Link>
         <p className="transaction-asset__trader">{data.manager}</p>
       </div>

@@ -16,7 +16,7 @@ import {
   TransactionDetailItem
 } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
-import TransactionAsset from "modules/transaction-details/transactions/transaction-asset";
+import TransactionAsset from "pages/wallet/components/transaction-details/transactions/transaction-asset";
 import WalletConvert from "pages/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
 import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
@@ -76,7 +76,7 @@ const TransactionStatusBlock: React.FC<{
   return (
     <TransactionDetailsItem label={t(`transactions-details.status.title`)}>
       <div className="external-transaction__status">
-        {status} <Status status={status} />
+        <Status withText status={status} />
       </div>
     </TransactionDetailsItem>
   );
