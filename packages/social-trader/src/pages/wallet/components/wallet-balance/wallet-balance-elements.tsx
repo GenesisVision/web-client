@@ -1,66 +1,79 @@
 import "./wallet-balance.scss";
 
 import GVColors from "components/gv-styles/gv-colors";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
+import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { CurrencyEnum } from "utils/types";
-
-import WalletBalanceElement from "./wallet-balance-element";
 
 export const $piePendingColor = "#f7931a";
 export const $pieAvailableColor = "#5758a5";
 
 const _WalletBalanceElements: React.FC<Props> = ({
-  t,
   pending,
   total,
   currency,
   available,
   invested
-}) => (
-  <div className="wallet-balance__wrapper">
-    <WalletBalanceElement
-      value={total!}
-      condition={total !== undefined}
-      title={t("wallet-page.total-balance")}
-      currency={currency}
-      pieContainer={false}
-      className="wallet-balance__statistic-item--total"
-      tooltipContentLabel={t("wallet-page.tooltip.total-balance")}
-    />
-    <div className="wallet-balance__elements">
-      <WalletBalanceElement
-        value={available!}
+}) => {
+  const [t] = useTranslation();
+  return (
+    <StatisticItemList>
+      <StatisticItem
+        big
+        accent
+        label={
+          <TooltipLabel
+            tooltipContent={t("wallet-page.tooltip.total-balance")}
+            labelText={t("wallet-page.total-balance")}
+          />
+        }
+        condition={total !== undefined}
+      >
+        <NumberFormat
+          value={total}
+          thousandSeparator={" "}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
+      </StatisticItem>
+      <div className="wallet-balance__divider" />
+      <PieStatisticItem
         condition={available !== undefined}
-        totalValue={total}
-        title={t("wallet-page.available")}
-        currency={currency}
+        value={available!}
+        total={total!}
+        label={t("wallet-page.available")}
+        suffix={currency}
         color={$pieAvailableColor}
         tooltipContentLabel={t("wallet-page.tooltip.available")}
       />
-      <WalletBalanceElement
-        value={invested!}
+      <PieStatisticItem
         condition={invested !== undefined}
-        totalValue={total}
-        title={t("wallet-page.invested")}
-        currency={currency}
+        value={invested!}
+        total={total!}
+        label={t("wallet-page.invested")}
+        suffix={currency}
         color={GVColors.$primaryColor}
         tooltipContentLabel={t("wallet-page.tooltip.invested")}
       />
-      <WalletBalanceElement
-        value={pending!}
+      <PieStatisticItem
         condition={pending !== undefined}
-        totalValue={total}
-        title={t("wallet-page.trading")}
-        currency={currency}
+        value={pending!}
+        total={total!}
+        label={t("wallet-page.trading")}
+        suffix={currency}
         color={$piePendingColor}
         tooltipContentLabel={t("wallet-page.tooltip.pending")}
       />
-    </div>
-  </div>
-);
+    </StatisticItemList>
+  );
+};
 
-interface Props extends WithTranslation {
+interface Props {
   total?: number;
   available?: number;
   invested?: number;
@@ -68,5 +81,5 @@ interface Props extends WithTranslation {
   currency: CurrencyEnum;
 }
 
-const WalletBalanceElements = translate()(React.memo(_WalletBalanceElements));
+const WalletBalanceElements = React.memo(_WalletBalanceElements);
 export default WalletBalanceElements;
