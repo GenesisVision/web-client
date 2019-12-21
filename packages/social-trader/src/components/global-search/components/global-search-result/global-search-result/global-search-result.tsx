@@ -1,10 +1,11 @@
 import DetailsBlock from "components/details/details-block";
-import GVTabs from "components/gv-tabs";
+import DetailsBlockTabs from "components/details/details-block-tabs";
+import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
 import { CommonPublicAssetsViewModel } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { FollowsTable } from "./follows-table";
 import FundsTable from "./funds-table";
@@ -12,37 +13,38 @@ import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
 import SearchResultTable from "./search-result-table";
 
-const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
+const _GlobalSearchResult: React.FC<Props> = ({ data, title }) => {
+  const [t] = useTranslation();
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
   return (
     <DetailsBlock table>
-      <h3 className="global-search-result__heading">
-        {t("global-search-page.heading")}
-      </h3>
-      <div className="global-search-result__tabs">
-        <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            value={SEARCH_TABS.PROGRAMS}
-            label={t("global-search-page.programs")}
-            count={data.programs && data.programs.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.FUNDS}
-            label={t("global-search-page.funds")}
-            count={data.funds && data.funds.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.FOLLOWS}
-            label={t("global-search-page.follows")}
-            count={data.follows && data.follows.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.MANAGERS}
-            label={t("global-search-page.managers")}
-            count={data.managers && data.managers.total}
-          />
-        </GVTabs>
-      </div>
+      <DetailsBlockTitleBox>
+        <h3 className="global-search-result__heading">
+          {t("global-search-page.heading")}
+        </h3>
+      </DetailsBlockTitleBox>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={SEARCH_TABS.PROGRAMS}
+          label={t("global-search-page.programs")}
+          count={data.programs && data.programs.total}
+        />
+        <GVTab
+          value={SEARCH_TABS.FUNDS}
+          label={t("global-search-page.funds")}
+          count={data.funds && data.funds.total}
+        />
+        <GVTab
+          value={SEARCH_TABS.FOLLOWS}
+          label={t("global-search-page.follows")}
+          count={data.follows && data.follows.total}
+        />
+        <GVTab
+          value={SEARCH_TABS.MANAGERS}
+          label={t("global-search-page.managers")}
+          count={data.managers && data.managers.total}
+        />
+      </DetailsBlockTabs>
       <Tab title={title} data={data} tab={tab} />
     </DetailsBlock>
   );
@@ -97,10 +99,10 @@ export interface SearchTableProps<T> {
   data: T;
 }
 
-interface Props extends WithTranslation {
+interface Props {
   data: CommonPublicAssetsViewModel;
   title: string;
 }
 
-const GlobalSearchResult = translate()(React.memo(_GlobalSearchResult));
+const GlobalSearchResult = React.memo(_GlobalSearchResult);
 export default GlobalSearchResult;
