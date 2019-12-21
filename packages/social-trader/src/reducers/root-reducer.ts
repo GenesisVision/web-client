@@ -59,9 +59,13 @@ import emailPendingReducer, {
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
 import profileReducer, { ProfileState } from "reducers/profile-reducer";
+import tablesViewReducer, {
+  TablesViewState
+} from "reducers/tables-view-reducer";
 import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
+  tablesView: tablesViewReducer,
   dashboard: dashboardReducer,
   profile: profileReducer,
   accountDetails: accountDetailsReducer,
@@ -94,6 +98,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  tablesView: TablesViewState;
   dashboard: DashboardState;
   profile: ProfileState;
   accountDetails: AccountDetailsState;
