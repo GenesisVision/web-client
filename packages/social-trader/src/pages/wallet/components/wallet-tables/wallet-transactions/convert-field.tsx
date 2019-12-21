@@ -6,9 +6,7 @@ const _ConvertField: React.FC<Props> = ({ first, second }) => {
   return (
     <div className="convert-field">
       {first}
-      {second && (
-        <span className="wallet-transactions__back-arrow">&rarr;</span>
-      )}
+      {second && <span className="convert-field__arrow">&rarr;</span>}
       {second}
     </div>
   );
