@@ -1,8 +1,8 @@
 import "./convert-fields.scss";
 
 import { CurrencyItem } from "components/currency-item/currency-item";
-import ConvertField from "components/wallet/components/wallet-tables/wallet-transactions/convert-field";
 import { AmountRowCell } from "gv-api-web";
+import ConvertField from "pages/wallet/components/wallet-tables/wallet-transactions/convert-field";
 import React from "react";
 
 const _WalletConvert: React.FC<{

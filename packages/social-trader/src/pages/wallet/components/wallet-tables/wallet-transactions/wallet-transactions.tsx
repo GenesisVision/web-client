@@ -1,4 +1,4 @@
-import "./wallet-deposits-withdrawals.scss";
+import "./wallet-transactions.scss";
 
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
@@ -16,16 +16,17 @@ import {
 } from "components/table/components/table.types";
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import { reduceFilters } from "components/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
 import { Currency } from "gv-api-web";
+import { reduceFilters } from "pages/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { platformDataSelector } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
+import { CurrencyEnum } from "utils/types";
 
-import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
-import { walletTransactionsLoaderData } from "../wallet-transactions/wallet-transactions.loader-data";
+import { fetchMultiTransactions } from "../../../services/wallet.services";
+import { walletTransactionsLoaderData } from "./wallet-transactions.loader-data";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -39,7 +40,7 @@ const DEFAULT_FILTERS = [
   }
 ];
 
-const _WalletDepositsWithdrawals: React.FC<Props> = ({
+const _WalletTransactions: React.FC<Props> = ({
   renderBodyRow,
   columns,
   currency
@@ -49,47 +50,51 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   );
   const platformData = useSelector(platformDataSelector);
   const [t] = useTranslation();
-  const getMultiTransactionsExternal: GetItemsFuncType = useCallback(
-    filters => fetchMultiTransactionsExternal(currency, filters),
+  const getMultiTransactions: GetItemsFuncType = useCallback(
+    filters => {
+      return fetchMultiTransactions(currency, filters);
+    },
     [currency]
   );
-  if (!platformData) return null; // TODO fix filters
-  const { walletExternalTransactions } = platformData.filters;
+  if (!platformData) return null;
+  const { walletTransactions } = platformData.filters;
   return (
-    <div className="wallet-deposits-withdrawals">
+    <div className="wallet-transactions">
       <TableModule
         loaderData={walletTransactionsLoaderData}
-        timestamp={timestamp.getMilliseconds()}
+        timestamp={new Date(timestamp).getMilliseconds()}
         defaultFilters={DEFAULT_FILTERS}
         paging={DEFAULT_PAGING}
         filtering={{
           ...TRANSACTIONS_FILTERS,
-          transactionType: walletExternalTransactions[0].key
+          transactionType: walletTransactions[0].key
         }}
-        getItems={getMultiTransactionsExternal}
-        renderFilters={(updateFilter, filtering) => (
-          <>
-            <SelectFilter
-              name={"transactionType"}
-              label="Type"
-              value={filtering["transactionType"] as SelectFilterType} //TODO fix filtering types
-              values={reduceFilters(walletExternalTransactions)}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.account-creation")}
-            />
-          </>
-        )}
+        getItems={getMultiTransactions}
+        renderFilters={(updateFilter, filtering) => {
+          return (
+            <>
+              <SelectFilter
+                name={"transactionType"}
+                label="Type"
+                value={filtering["transactionType"] as SelectFilterType}
+                values={reduceFilters(walletTransactions)}
+                onChange={updateFilter}
+              />
+              <DateRangeFilter
+                name={DATE_RANGE_FILTER_NAME}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
+                onChange={updateFilter}
+                startLabel={t("filters.date-range.account-creation")}
+              />
+            </>
+          );
+        }}
         columns={columns}
         renderHeader={column => (
           <span
-            className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${column.name}`}
+            className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
           >
-            {t(`wallet-page.deposits-withdrawals.${column.name}`)}
+            {t(`wallet-page.transactions.${column.name}`)}
           </span>
         )}
         renderBodyRow={renderBodyRow}
@@ -101,8 +106,8 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
 interface Props {
   renderBodyRow: RenderBodyItemFuncType;
   columns: SortingColumn[];
-  currency?: Currency;
+  currency?: CurrencyEnum;
 }
 
-const WalletDepositsWithdrawals = React.memo(_WalletDepositsWithdrawals);
-export default WalletDepositsWithdrawals;
+const WalletTransactions = React.memo(_WalletTransactions);
+export default WalletTransactions;

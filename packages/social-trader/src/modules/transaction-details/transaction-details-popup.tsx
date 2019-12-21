@@ -1,5 +1,5 @@
 import Dialog from "components/dialog/dialog";
-import { MultiWalletTransaction } from "components/wallet/wallet.types";
+import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
 
 import TransactionDetailsDialog from "./transaction-details-dialog";

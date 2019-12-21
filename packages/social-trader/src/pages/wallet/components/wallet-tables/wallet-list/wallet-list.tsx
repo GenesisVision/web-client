@@ -6,15 +6,15 @@ import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import {
-  composeWalletCurrencyUrl,
-  WALLET_CURRENCY_FOLDER_ROUTE
-} from "components/wallet/wallet.routes";
 import { WalletData } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import TransferPopup from "modules/transfer/transfer-popup";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
+import {
+  composeWalletCurrencyUrl,
+  WALLET_CURRENCY_FOLDER_ROUTE
+} from "pages/wallet/wallet.routes";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";

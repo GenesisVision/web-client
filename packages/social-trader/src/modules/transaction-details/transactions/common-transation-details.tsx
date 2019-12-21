@@ -9,8 +9,6 @@ import { DialogTop } from "components/dialog/dialog-top";
 import Link from "components/link/link";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
-import WalletConvert from "components/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
-import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import {
   AmountRowCell,
   MultiWalletTransactionStatus,
@@ -19,6 +17,8 @@ import {
 } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
 import TransactionAsset from "modules/transaction-details/transactions/transaction-asset";
+import WalletConvert from "pages/wallet/components/wallet-tables/wallet-transactions/wallet-convert";
+import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 

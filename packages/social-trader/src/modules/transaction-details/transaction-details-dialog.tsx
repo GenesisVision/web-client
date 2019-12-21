@@ -1,9 +1,9 @@
 import "./transaction-details.scss";
 
-import { MultiWalletTransaction } from "components/wallet/wallet.types";
 import useApiRequest from "hooks/api-request.hook";
 import i18next from "i18next";
 import CommonTransactionDetails from "modules/transaction-details/transactions/common-transation-details";
+import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
 import { useCallback } from "react";
 

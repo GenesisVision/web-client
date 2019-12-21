@@ -1,8 +1,8 @@
 import "./wallet-add-funds-form.scss";
 
 import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import { WalletData } from "gv-api-web";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import * as React from "react";
 import { useSelector } from "react-redux";
 

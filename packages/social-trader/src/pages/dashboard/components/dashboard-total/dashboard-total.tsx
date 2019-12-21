@@ -2,14 +2,14 @@ import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
-import {
-  $pieAvailableColor,
-  $piePendingColor
-} from "components/wallet/components/wallet-balance/wallet-balance-elements";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
+import {
+  $pieAvailableColor,
+  $piePendingColor
+} from "pages/wallet/components/wallet-balance/wallet-balance-elements";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { getPercentageValue } from "utils/helpers";
