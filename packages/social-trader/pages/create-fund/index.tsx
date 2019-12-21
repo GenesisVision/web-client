@@ -1,8 +1,8 @@
 import platformActions from "actions/platform-actions";
-import { fetchWalletsWithCtx } from "components/wallet/services/wallet.services";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import CreateFundPage from "pages/create-fund/create-fund.page";
+import { fetchWalletsWithCtx } from "pages/wallet/services/wallet.services";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
