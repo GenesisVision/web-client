@@ -57,14 +57,13 @@ const _Table: React.FC<ITableProps> = ({
 }) => {
   const dispatch = useDispatch();
   const tableView = useSelector(globalTableViewSelector);
-  const [view, setView] = useState<LIST_VIEW>(tableView);
   const isViewSwitchEnabled =
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  useEffect(() => {
-    if (isViewSwitchEnabled) setView(tableView || LIST_VIEW.TABLE);
-  }, [isViewSwitchEnabled]);
+  const [view, setView] = useState<LIST_VIEW>(
+    isViewSwitchEnabled ? tableView : LIST_VIEW.TABLE
+  );
   const changeView = useCallback((view: LIST_VIEW) => {
     dispatch(updateGlobalTableViewAction(view));
     setCookie(GLOBAL_TABLE_VIEW, view);
@@ -106,7 +105,7 @@ const _Table: React.FC<ITableProps> = ({
               items={items}
               className="table-cards"
               tag="div"
-              view={LIST_VIEW.CARDS}
+              view={view}
               renderBodyItem={renderBodyItem!}
             />
           </div>
@@ -125,7 +124,7 @@ const _Table: React.FC<ITableProps> = ({
               items={items}
               className="table__body"
               tag="tbody"
-              view={LIST_VIEW.TABLE}
+              view={view}
               updateRow={updateRow}
               updateItems={updateItems}
               renderBodyItem={renderBodyItem!}
