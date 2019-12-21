@@ -1,4 +1,33 @@
+import { updateGlobalTableViewAction } from "actions/tables-view-actions";
+import FundsPage from "components/funds/funds.page";
+import { LIST_VIEW } from "components/table/table.constants";
+import withDefaultLayout from "decorators/with-default-layout";
+import { fetchFundsAction } from "modules/funds-table/actions/funds-table.actions";
+import { getFiltersFromContext } from "modules/funds-table/services/funds-table.service";
 import React from "react";
-import { Funds } from "routes/ssr/funds";
+import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
+import authService from "services/auth-service";
+import { getCookie } from "shared/utils/cookie";
+import { NextPageWithRedux } from "utils/types";
 
-export default Funds;
+const Page: NextPageWithRedux<{}, {}> = () => {
+  return <FundsPage />;
+};
+
+Page.getInitialProps = async ctx => {
+  const filters = getFiltersFromContext(ctx);
+  const tableView = getCookie(GLOBAL_TABLE_VIEW, ctx) as LIST_VIEW;
+  await Promise.all([
+    ctx.reduxStore.dispatch(
+      //@ts-ignore
+      fetchFundsAction({
+        ...filters,
+        authorization: authService.getAuthArg(ctx)
+      })
+    ),
+    ctx.reduxStore.dispatch(updateGlobalTableViewAction(tableView))
+  ]);
+  return {};
+};
+
+export default withDefaultLayout(Page);
