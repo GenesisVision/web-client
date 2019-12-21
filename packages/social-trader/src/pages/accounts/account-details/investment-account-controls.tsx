@@ -15,6 +15,8 @@ const _InvestmentAccountControls: React.FC<Props> = ({ account, onApply }) => {
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED} row>
       <DetailsRowItem>
         <TransferButton
+          color={"primary"}
+          variant={"contained"}
           onApply={onApply}
           label={t("buttons.deposit")}
           title={t("transfer.deposit-to", {
@@ -31,8 +33,6 @@ const _InvestmentAccountControls: React.FC<Props> = ({ account, onApply }) => {
       <DetailsRowItem>
         <TransferButton
           onApply={onApply}
-          color={"secondary"}
-          variant={"outlined"}
           label={t("buttons.withdraw")}
           title={t("transfer.withdraw-from", {
             title: t(
