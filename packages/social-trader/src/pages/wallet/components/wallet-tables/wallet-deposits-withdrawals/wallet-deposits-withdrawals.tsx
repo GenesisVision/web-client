@@ -57,6 +57,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   const { walletExternalTransactions } = platformData.filters;
   return (
     <TableModule
+      className="wallet-deposits-withdrawals"
       loaderData={walletTransactionsLoaderData}
       timestamp={timestamp.getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}
