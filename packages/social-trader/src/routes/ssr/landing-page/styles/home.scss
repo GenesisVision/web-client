@@ -39,16 +39,26 @@
     @include media-breakpoint-tablet() {
       grid-column: 2/12;
     }
+
+    &--sm {
+      @include media-breakpoint-tablet() {
+        grid-column: 3/11;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        grid-column: 4/10;
+      }
+    }
   }
 
   &__section {
     &--first-screen {
       @include media-breakpoint-tablet() {
-        height: calc(100vh - 130px);
         min-height: 670px;
       }
 
       @include media-breakpoint-landscape-tablet() {
+        height: calc(100vh - 130px);
         min-height: 630px;
       }
 
@@ -72,6 +82,13 @@
 
     &--bg-white {
       background-color: $main-color;
+      padding-top: 100px;
+      padding-bottom: 100px;
+
+      @include media-breakpoint-large-desktop() {
+        padding-top: 140px;
+        padding-bottom: 140px;
+      }
     }
 
     &--bg-gray {

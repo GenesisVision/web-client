@@ -4,6 +4,7 @@ import "./styles/home.scss";
 import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
+import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
@@ -21,14 +22,18 @@ const IndexPage: NextPage = () => {
         <section className="home__section home__section--first-screen">
           <div className="home__container">
             <FirstSlider className="home__grid-row" slidesItems={slides} />
-            <div className="home__grid-row home__grid-row--mob-wide">
+            <div className="home__grid-row home__grid-row--mob-wider">
               <StatList className="home__grid-item" />
             </div>
           </div>
         </section>
         <section className="home__section home__section--bg-white">
           <div className="home__container">
-            <h2>Our Best</h2>
+            <div className="home__grid-row">
+              <div className="home__grid-item home__grid-item--sm">
+                <BestList />
+              </div>
+            </div>
           </div>
         </section>
         <section className="home__section home__section--bg-gray">
