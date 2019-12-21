@@ -30,14 +30,16 @@ const _SwitchWithQuestion: React.FC<Props> = ({
         />
       </HelpContainer>
       <div className="switch-with-question__label">{label}</div>
-      <GVSwitch
-        touched={false}
-        name={name}
-        value={value}
-        disabled={isPending}
-        color="primary"
-        onChange={onChange}
-      />
+      {value !== undefined && (
+        <GVSwitch
+          touched={false}
+          name={name}
+          value={value}
+          disabled={isPending}
+          color="primary"
+          onChange={onChange}
+        />
+      )}
     </div>
   );
 };
