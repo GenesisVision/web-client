@@ -82,7 +82,7 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
 export default GVSwitch;
 
 interface GVSwitchProps {
-  name: string;
+  name?: string;
   checked?: boolean;
   color?: string;
   className?: string;
