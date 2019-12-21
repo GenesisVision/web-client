@@ -1,57 +1,41 @@
 import "./wallet-balance.scss";
 
-import GVButton from "components/gv-button";
-import ArrowIcon from "media/arrow-up.svg";
-import ConvertIcon from "media/convert.svg";
+import { WalletData } from "gv-api-web";
+import TransferButton from "modules/transfer/transfer-button";
+import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
+import WalletWithdrawButton from "modules/wallet-withdraw/wallet-withdraw.button";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
 
-const _WalletBalanceButtons: React.FC<Props> = ({
-  t,
-  handleWithdraw,
-  handleTransfer,
-  isDepositEnabled,
-  isWithdrawalEnabled
-}) => (
-  <div className="wallet-balance__buttons">
-    <WalletDeposit disabled={isDepositEnabled === false} />
-    <GVButton
-      color="secondary"
-      variant="outlined"
-      onClick={handleWithdraw}
-      disabled={isWithdrawalEnabled === false}
-    >
-      <>
-        <img
-          className="wallet-balance__button-icon"
-          src={ArrowIcon}
-          alt="Arrow icon"
+const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
+  const { currency, isDepositEnabled, isWithdrawalEnabled } = currentItem;
+  return (
+    <div className="wallet-balance__buttons">
+      <div>
+        <WalletDeposit currency={currency} disabled={!isDepositEnabled} />
+      </div>
+      <div>
+        <WalletWithdrawButton
+          currency={currency}
+          disabled={!isWithdrawalEnabled}
         />
-        {t("wallet-page.withdraw")}
-      </>
-    </GVButton>
-    {handleTransfer && (
-      <GVButton color="secondary" variant="outlined" onClick={handleTransfer}>
-        <>
-          <img
-            className="wallet-balance__button-icon"
-            src={ConvertIcon}
-            alt="Convert icon"
-          />
-          {t("wallet-page.transfer")}
-        </>
-      </GVButton>
-    )}
-  </div>
-);
+      </div>
+      <div>
+        <TransferButton
+          withIcon
+          currentItem={currentItem}
+          currentItemContainer={TRANSFER_CONTAINER.SOURCE}
+          sourceType={"Wallet"}
+          destinationType={"Wallet"}
+        />
+      </div>
+    </div>
+  );
+};
 
-interface Props extends WithTranslation {
-  handleWithdraw: () => void;
-  handleTransfer?: () => void;
-  isDepositEnabled?: boolean;
-  isWithdrawalEnabled?: boolean;
+interface Props {
+  currentItem: WalletData;
 }
 
-const WalletBalanceButtons = translate()(React.memo(_WalletBalanceButtons));
+const WalletBalanceButtons = React.memo(_WalletBalanceButtons);
 export default WalletBalanceButtons;
