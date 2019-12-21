@@ -19,9 +19,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ data, title }) => {
   return (
     <DetailsBlock table>
       <DetailsBlockTitleBox>
-        <h3 className="global-search-result__heading">
-          {t("global-search-page.heading")}
-        </h3>
+        <h3>{t("global-search-page.heading")}</h3>
       </DetailsBlockTitleBox>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
