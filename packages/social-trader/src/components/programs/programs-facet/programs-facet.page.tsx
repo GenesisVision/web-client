@@ -1,10 +1,10 @@
 import "./programs-facet.scss";
 
+import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { CancelablePromise } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
@@ -25,14 +25,14 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
 
   return (
     <Page title={t("programs-page.title")}>
-      <Surface className="programs-table-container">
+      <DetailsBlock table>
         <FacetContainer
           id={id}
           asset={FACET_ASSET.PROGRAMS}
           TableContainer={ProgramsFacetTable}
           getItems={getPrograms}
         />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

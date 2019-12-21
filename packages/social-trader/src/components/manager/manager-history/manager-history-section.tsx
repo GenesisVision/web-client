@@ -1,8 +1,9 @@
 import "./manager-history.scss";
 
-import GVTabs from "components/gv-tabs";
+import DetailsBlock from "components/details/details-block";
+import DetailsBlockTabs from "components/details/details-block-tabs";
+import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
-import Surface from "components/surface/surface";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -27,34 +28,29 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
     });
   }, [ownerId]);
   return (
-    <Surface className="manager-history">
-      <div className="manager-history__heading">
+    <DetailsBlock table>
+      <DetailsBlockTitleBox>
         <h3>{t("manager-page.assets")}</h3>
-      </div>
-      <div className="manager-history__tabs">
-        <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            value={MANAGER_HISTORY_TAB.PROGRAMS}
-            label={t("manager-page.history.tabs.programs")}
-            count={programsCount}
-          />
-          <GVTab
-            value={MANAGER_HISTORY_TAB.FUNDS}
-            label={t("manager-page.history.tabs.funds")}
-            count={fundsCount}
-          />
-        </GVTabs>
-      </div>
-
-      <div>
-        {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
-          <ManagerPrograms title={title} ownerId={ownerId} />
-        )}
-        {tab === MANAGER_HISTORY_TAB.FUNDS && (
-          <ManagerFunds title={title} ownerId={ownerId} />
-        )}
-      </div>
-    </Surface>
+      </DetailsBlockTitleBox>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab
+          value={MANAGER_HISTORY_TAB.PROGRAMS}
+          label={t("manager-page.history.tabs.programs")}
+          count={programsCount}
+        />
+        <GVTab
+          value={MANAGER_HISTORY_TAB.FUNDS}
+          label={t("manager-page.history.tabs.funds")}
+          count={fundsCount}
+        />
+      </DetailsBlockTabs>
+      {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
+        <ManagerPrograms title={title} ownerId={ownerId} />
+      )}
+      {tab === MANAGER_HISTORY_TAB.FUNDS && (
+        <ManagerFunds title={title} ownerId={ownerId} />
+      )}
+    </DetailsBlock>
   );
 };
 

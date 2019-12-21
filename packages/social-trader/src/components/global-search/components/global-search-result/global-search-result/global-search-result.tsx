@@ -1,6 +1,6 @@
+import DetailsBlock from "components/details/details-block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import Surface from "components/surface/surface";
 import { CommonPublicAssetsViewModel } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
@@ -15,7 +15,7 @@ import SearchResultTable from "./search-result-table";
 const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
   return (
-    <Surface className="global-search-result">
+    <DetailsBlock table>
       <h3 className="global-search-result__heading">
         {t("global-search-page.heading")}
       </h3>
@@ -44,7 +44,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ t, data, title }) => {
         </GVTabs>
       </div>
       <Tab title={title} data={data} tab={tab} />
-    </Surface>
+    </DetailsBlock>
   );
 };
 
