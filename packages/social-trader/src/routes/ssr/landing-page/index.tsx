@@ -6,6 +6,7 @@ import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
+import SocialSection from "routes/ssr/landing-page/components/social-section/social-section";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
 import programsApi from "services/api-client/programs-api";
@@ -27,7 +28,7 @@ const IndexPage: NextPage = () => {
             </div>
           </div>
         </section>
-        <section className="home__section home__section--bg-white">
+        <section className="home__section home__section--bg-white home__section--horizontal-padding">
           <div className="home__container">
             <div className="home__grid-row">
               <div className="home__grid-item home__grid-item--sm">
@@ -69,11 +70,12 @@ const IndexPage: NextPage = () => {
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <h2>Brockers and trading conditions</h2>
+            <p>Brockers and trading conditions</p>
           </div>
         </section>
-        <section className="home__section">
+        <section className="home__section home__section--last-screen">
           <div className="home__container">
-            <h2>Join the Genesis Vision Community</h2>
+            <SocialSection />
           </div>
         </section>
       </main>

@@ -2,7 +2,7 @@
 @import "~shared/styles/breakpoint";
 @import "../../styles/mixins";
 
-.app-list {
+.icon-list {
   @include reset-list();
   display: grid;
   grid-auto-flow: column;

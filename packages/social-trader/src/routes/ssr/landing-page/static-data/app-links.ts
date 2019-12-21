@@ -2,13 +2,13 @@ import * as React from "react";
 import { AndroidIcon } from "routes/ssr/landing-page/components/app-icons/android-icon";
 import { AppleIcon } from "routes/ssr/landing-page/components/app-icons/apple-icon";
 
-export type TAppLinks = {
+export type TIconLinks = {
   name: string;
   href?: string;
   icon: React.ReactNode;
 };
 
-export const appLinks: TAppLinks[] = [
+export const appLinks: TIconLinks[] = [
   {
     name: "Apple Store",
     href: "https://itunes.apple.com/app/genesis-vision-investor/id1369865290",

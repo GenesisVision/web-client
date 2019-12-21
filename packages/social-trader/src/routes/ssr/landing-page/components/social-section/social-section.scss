@@ -1,0 +1,27 @@
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.social-section {
+  @include media-breakpoint-landscape-tablet() {
+    @include grid();
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 2/7;
+    }
+  }
+
+  &__list {
+  }
+}

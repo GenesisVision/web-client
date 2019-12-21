@@ -80,8 +80,41 @@
       }
     }
 
-    &--bg-white {
-      background-color: $main-color;
+    &--last-screen {
+      padding-top: 360px;
+      background-image: url("../images/bg/join-bg-mob.svg");
+      background-repeat: no-repeat;
+      background-size: auto 300px;
+      background-position: 50% 30px;
+
+      @include media-breakpoint-tablet() {
+        padding-top: 420px;
+        background-size: auto 400px;
+        background-position: 50% 30px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        background-image: url("../images/bg/join-bg.svg");
+        padding-top: 235px;
+        padding-bottom: 235px;
+        background-size: 100%;
+        background-position: 50% 80px;
+      }
+
+      @include media-breakpoint-desktop() {
+        padding-top: 260px;
+        padding-bottom: 260px;
+        background-position: 50%;
+        background-size: 1600px 100%;
+      }
+
+      @include media-breakpoint-large-desktop() {
+        padding-top: 320px;
+        padding-bottom: 320px;
+      }
+    }
+
+    &--horizontal-padding {
       padding-top: 100px;
       padding-bottom: 100px;
 
@@ -89,6 +122,10 @@
         padding-top: 140px;
         padding-bottom: 140px;
       }
+    }
+
+    &--bg-white {
+      background-color: $main-color;
     }
 
     &--bg-gray {

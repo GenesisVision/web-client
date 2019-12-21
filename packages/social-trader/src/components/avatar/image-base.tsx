@@ -26,8 +26,6 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   }, []);
   const currentSrc = isError ? defaultImage : fullUrl;
   const className = isError ? defaultImageClassName : "";
-  console.log(currentSrc);
-  console.log("isError", isError);
   return (isError || !hasUrl) && DefaultImageComponent ? (
     <DefaultImageComponent color={color} imageClassName={className} />
   ) : (
