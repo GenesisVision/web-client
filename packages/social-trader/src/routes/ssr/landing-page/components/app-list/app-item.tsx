@@ -1,5 +1,5 @@
 import React from "react";
-import { TAppLinks } from "routes/ssr/landing-page/routes/app";
+import { TAppLinks } from "routes/ssr/landing-page/static-data/app-links";
 
 const _AppItem: React.FC<TAppLinks> = ({ href, name, icon }) => (
   <li className="app-list__item">

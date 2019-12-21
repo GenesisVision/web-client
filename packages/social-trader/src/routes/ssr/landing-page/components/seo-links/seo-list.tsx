@@ -3,7 +3,7 @@ import "./seo-list.scss";
 import classNames from "classnames";
 import * as React from "react";
 import SeoItem from "routes/ssr/landing-page/components/seo-links/seo-item";
-import { TNavFooter } from "routes/ssr/landing-page/routes/nav";
+import { TNavFooter } from "routes/ssr/landing-page/static-data/nav-links";
 
 const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
   <ul className={classNames("seo-list", className)}>

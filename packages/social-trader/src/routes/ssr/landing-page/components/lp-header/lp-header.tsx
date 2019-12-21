@@ -7,7 +7,10 @@ import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { MainLogo } from "routes/ssr/landing-page/components/main-logo/main-logo";
 import { MobileBurger } from "routes/ssr/landing-page/components/mobile-burger/mobile-burger";
 import NavList from "routes/ssr/landing-page/components/nav/nav-list";
-import { navHeader, START_ROUTE } from "routes/ssr/landing-page/routes/nav";
+import {
+  navHeader,
+  START_ROUTE
+} from "routes/ssr/landing-page/static-data/nav-links";
 
 const LPHeader: React.FC = () => {
   return (

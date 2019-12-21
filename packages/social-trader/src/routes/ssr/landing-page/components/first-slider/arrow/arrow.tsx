@@ -9,12 +9,12 @@ export const Arrow: React.FC = () => (
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="Page-1" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Page-1" strokeWidth="1" fill="none" fillRule="evenodd">
         <g
           id="320"
           transform="translate(-108.000000, -427.000000)"
-          fill-rule="nonzero"
-          stroke-width="1.27999985"
+          fillRule="nonzero"
+          strokeWidth="1.27999985"
         >
           <g id="Group-16" transform="translate(90.000000, 412.000000)">
             <polyline

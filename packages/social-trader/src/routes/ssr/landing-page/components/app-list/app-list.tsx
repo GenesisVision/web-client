@@ -3,7 +3,7 @@ import "./app-list.scss";
 import classNames from "classnames";
 import * as React from "react";
 import AppItem from "routes/ssr/landing-page/components/app-list/app-item";
-import { TAppLinks } from "routes/ssr/landing-page/routes/app";
+import { TAppLinks } from "routes/ssr/landing-page/static-data/app-links";
 
 const _AppList: React.FC<Props> = ({ appItems, className }) => (
   <ul className={classNames("app-list", className)}>

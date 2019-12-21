@@ -3,7 +3,6 @@ import "./stat-list.scss";
 import classNames from "classnames";
 import * as React from "react";
 import StatItem from "routes/ssr/landing-page/components/statistics/stat-item";
-import { TNavFooter } from "routes/ssr/landing-page/routes/nav";
 
 interface Props {
   className?: string;

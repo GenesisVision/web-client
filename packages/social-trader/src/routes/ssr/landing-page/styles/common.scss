@@ -23,15 +23,33 @@ img {
   max-width: 100%;
 }
 
-//h1 {
-//  color: $landing-text;
-//}
+p {
+  font-size: 13px;
+  line-height: 1.6;
+
+  @include media-breakpoint-tablet() {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 14px;
+  }
+
+  @include media-breakpoint-desktop() {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 18px;
+  }
+}
 
 h2 {
   font-weight: 600;
   font-size: 28px;
   line-height: 30px;
   padding-bottom: 0;
+  margin-bottom: 20px;
 
   @include media-breakpoint-tablet() {
     font-size: 38px;

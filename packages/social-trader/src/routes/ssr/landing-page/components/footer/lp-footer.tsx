@@ -4,8 +4,11 @@ import * as React from "react";
 import AppList from "routes/ssr/landing-page/components/app-list/app-list";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import SeoList from "routes/ssr/landing-page/components/seo-links/seo-list";
-import { appLinks } from "routes/ssr/landing-page/routes/app";
-import { EMAIL_ROUTE, navFooter } from "routes/ssr/landing-page/routes/nav";
+import { appLinks } from "routes/ssr/landing-page/static-data/app-links";
+import {
+  EMAIL_ROUTE,
+  navFooter
+} from "routes/ssr/landing-page/static-data/nav-links";
 
 const LPFooter: React.FC = () => {
   return (
