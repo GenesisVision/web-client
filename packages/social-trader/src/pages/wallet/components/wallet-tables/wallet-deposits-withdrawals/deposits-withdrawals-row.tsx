@@ -4,14 +4,14 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateItemsFuncType } from "components/table/components/table.types";
 import useIsOpen from "hooks/is-open.hook";
-import TransactionDetailsPopup from "modules/transaction-details/transaction-details-popup";
-import AmountItem from "modules/transaction-details/transactions/amount-item";
 import React, { useCallback } from "react";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatDate } from "shared/utils/dates";
 import { formatValue } from "utils/formatter";
 
 import { MultiWalletTransaction } from "../../../wallet.types";
+import TransactionDetailsPopup from "../../transaction-details/transaction-details-popup";
+import AmountItem from "../../transaction-details/transactions/amount-item";
 
 const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -32,11 +32,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
           {formatDate(transaction.date)}
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-          <Status
-            withText
-            status={transaction.status}
-            className="wallet-transactions__icon"
-          />
+          <Status withText status={transaction.status} />
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
           <Profitability
