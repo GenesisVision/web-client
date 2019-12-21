@@ -1,7 +1,5 @@
-import "./convert-fields.scss";
-
 import { AmountRowCell } from "gv-api-web";
-import AmountItem from "modules/transaction-details/transactions/amount-item";
+import AmountItem from "pages/wallet/components/transaction-details/transactions/amount-item";
 import ConvertField from "pages/wallet/components/wallet-tables/wallet-transactions/convert-field";
 import React from "react";
 
