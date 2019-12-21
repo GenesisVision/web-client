@@ -1,3 +1,5 @@
+import GVTFees from "components/gvt-fees/gvt-fees";
+import SwitchWithQuestion from "components/switch-with-question/switch-with-question";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -10,7 +12,6 @@ import {
   offPayFeesWithGvt,
   onPayFeesWithGvt
 } from "../../services/wallet.services";
-import WalletSettings from "./wallet-settings";
 
 const _WalletSettingsContainer: React.FC<Props> = ({
   isPayFeesWithGvt: isPayFeesWithGvtProp
@@ -36,16 +37,17 @@ const _WalletSettingsContainer: React.FC<Props> = ({
     isPayFeesWithGvt
   ]);
   return (
-    <WalletSettings
-      name="PayGVTFee"
-      label={t("wallet-page.settings.label")}
-      isPayFeesWithGvt={isPayFeesWithGvt}
-      isPending={isPending}
-      handleOpenGVTFees={setOpenGVTFees}
-      handleCloseGVTFees={setCloseGVTFees}
-      handleSwitch={handleSwitch}
-      isOpenGVTFees={isOpenGVTFees}
-    />
+    <>
+      <SwitchWithQuestion
+        name="PayGVTFee"
+        label={t("wallet-page.settings.label")}
+        isPending={isPending}
+        value={isPayFeesWithGvt}
+        onChange={handleSwitch}
+        onClickHelp={setOpenGVTFees}
+      />
+      <GVTFees open={isOpenGVTFees} onClose={setCloseGVTFees} />
+    </>
   );
 };
 
