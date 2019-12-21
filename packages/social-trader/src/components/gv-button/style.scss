@@ -18,6 +18,12 @@
   color: $text-accent-color;
   background-color: transparent;
 
+  &--large {
+    font-weight: 600;
+    font-size: $font-size-common;
+    min-height: 50px;
+  }
+
   &--big {
     align-self: flex-end;
     font-size: $font-size-paragraph-mobile;
