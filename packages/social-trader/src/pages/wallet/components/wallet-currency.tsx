@@ -14,35 +14,22 @@ import WalletTables from "./wallet-tables/wallet-tables";
 
 const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
   const [t] = useTranslation();
-  const [
-    isOpenWithdrawPopup,
-    setOpenWithdrawPopup,
-    setCloseWithdrawPopup
-  ] = useIsOpen();
-  const [
-    isOpenTransferPopup,
-    setOpenTransferPopup,
-    setCloseTransferPopup
-  ] = useIsOpen();
   return (
     <Page title={info.title}>
       <div className="wallet-balance">
         <div className="wallet-balance__wrapper">
-          <h1 className="wallet-balance__title">
-            {info.title}
-            <span>&nbsp;{t("wallet-page.wallet")}</span>
+          <div className="wallet-balance__title">
+            <h1>
+              {info.title}
+              <span>&nbsp;{t("wallet-page.wallet")}</span>
+            </h1>
             <WalletImage
               url={info.logo}
               imageClassName="wallet-balance__title-icon"
               alt={info.currency}
             />
-          </h1>
-          <WalletBalanceButtons
-            handleWithdraw={setOpenWithdrawPopup}
-            handleTransfer={setOpenTransferPopup}
-            isDepositEnabled={info.isDepositEnabled}
-            isWithdrawalEnabled={info.isWithdrawalEnabled}
-          />
+          </div>
+          <WalletBalanceButtons currentItem={info} />
         </div>
         <WalletBalanceElements
           available={info.available}
@@ -53,16 +40,6 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
         />
       </div>
       <WalletTables currency={info.currency} />
-      <WalletWithdrawPopup
-        currentWallet={info}
-        open={isOpenWithdrawPopup}
-        onClose={setCloseWithdrawPopup}
-      />
-      <TransferPopup
-        currentItem={info}
-        open={isOpenTransferPopup}
-        onClose={setCloseTransferPopup}
-      />
     </Page>
   );
 };
