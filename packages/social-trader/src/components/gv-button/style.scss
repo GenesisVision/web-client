@@ -39,6 +39,16 @@
     }
   }
 
+  &--small {
+    @include font-size($font-size-common);
+    @include width($btn-width-small);
+    @include height($btn-height-small);
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
   &--no-padding {
     padding: 0;
   }
