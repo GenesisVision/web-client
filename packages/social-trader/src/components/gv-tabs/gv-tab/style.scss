@@ -47,4 +47,8 @@
       color: $text-light-color;
     }
   }
+  &--disabled {
+    pointer-events: none;
+    cursor: default;
+  }
 }

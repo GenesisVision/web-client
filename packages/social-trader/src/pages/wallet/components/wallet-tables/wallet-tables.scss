@@ -3,11 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .wallet-container {
-  .gv-tab--disabled {
-    pointer-events: none;
-    cursor: default;
-  }
-
   &__subheading {
     @include font-size($font-size-paragraph);
     letter-spacing: 0.2px;
