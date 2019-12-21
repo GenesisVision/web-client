@@ -3,21 +3,14 @@ import * as React from "react";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const _WalletImage: React.FC<Props> = ({
-  url,
-  alt,
-  className,
-  imageClassName
-}) => {
+const _WalletImage: React.FC<Props> = ({ url, alt, imageClassName }) => {
   return (
-    <div className={className}>
-      <ImageBase
-        url={url}
-        alt={alt}
-        defaultImage={WalletCurrency}
-        imageClassName={imageClassName}
-      />
-    </div>
+    <ImageBase
+      url={url}
+      alt={alt}
+      defaultImage={WalletCurrency}
+      imageClassName={imageClassName}
+    />
   );
 };
 
