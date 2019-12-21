@@ -19,7 +19,9 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
     <Page title={t("wallet-page.title")}>
       <div className="wallet-balance">
         <div className="wallet-balance__wrapper">
-          <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
+          <div className="wallet-balance__title">
+            <h1>{t("wallet-page.title")}</h1>
+          </div>
           <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
         </div>
         <WalletBalanceElements
@@ -29,8 +31,8 @@ const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
           invested={wallet.grandTotal.invested}
           currency={wallet.grandTotal.currency}
         />
-        <WalletTablesTotal wallets={wallet.wallets} />
       </div>
+      <WalletTablesTotal wallets={wallet.wallets} />
     </Page>
   );
 };
