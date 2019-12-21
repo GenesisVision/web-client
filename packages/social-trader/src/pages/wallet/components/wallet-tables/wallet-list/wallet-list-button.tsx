@@ -1,41 +1,24 @@
 import { WalletData } from "gv-api-web";
+import LineTransferButton from "pages/wallet/components/wallet-tables/buttons/line-transfer-button";
 import * as React from "react";
 
-import DepositButton from "../buttons/deposit-button";
-import TransferButton from "../buttons/transfer-button";
-import WithdrawButton from "../buttons/withdraw-button";
+import LineDepositButton from "../buttons/line-deposit-button";
+import LineWithdrawButton from "../buttons/line-withdraw-button";
+
+const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
+  const { currency, isWithdrawalEnabled, isDepositEnabled } = wallet;
+  return (
+    <div className="wallet-list__buttons">
+      <LineTransferButton wallet={wallet} />
+      <LineWithdrawButton currency={currency} disabled={!isWithdrawalEnabled} />
+      <LineDepositButton currency={currency} disabled={!isDepositEnabled} />
+    </div>
+  );
+};
 
 interface IWalletListButton {
   wallet: WalletData;
-  handleOpenTransferPopup(
-    wallet: WalletData
-  ): (event: React.MouseEvent<HTMLElement>) => void;
-  handleOpenWithdrawPopup(
-    wallet: WalletData
-  ): (event: React.MouseEvent<HTMLElement>) => void;
-  handleOpenAddFundsPopup(
-    wallet: WalletData
-  ): (event: React.MouseEvent<HTMLElement>) => void;
 }
-
-const _WalletListButton: React.FC<IWalletListButton> = ({
-  wallet,
-  handleOpenTransferPopup,
-  handleOpenWithdrawPopup,
-  handleOpenAddFundsPopup
-}) => (
-  <div className="wallet-list__buttons">
-    <TransferButton handleOpen={handleOpenTransferPopup(wallet)} />
-    <WithdrawButton
-      handleOpen={handleOpenWithdrawPopup(wallet)}
-      disabled={wallet.isWithdrawalEnabled === false}
-    />
-    <DepositButton
-      handleOpen={handleOpenAddFundsPopup(wallet)}
-      disabled={wallet.isDepositEnabled === false}
-    />
-  </div>
-);
 
 const WalletListButton = React.memo(_WalletListButton);
 export default WalletListButton;
