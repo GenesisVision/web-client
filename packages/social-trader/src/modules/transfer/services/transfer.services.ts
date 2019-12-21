@@ -7,10 +7,11 @@ import { TransferFormValues } from "modules/transfer/components/transfer-form.he
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { formatCurrencyValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
-export const fetchTradingAccounts = () =>
+export const fetchTradingAccounts = (currency: CurrencyEnum) =>
   walletApi
-    .getAccountsAvailable("ETH", authService.getAuthArg())
+    .getAccountsAvailable(currency, authService.getAuthArg())
     .then(({ wallets }) => wallets);
 
 export const transferRequest = (

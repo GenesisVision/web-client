@@ -8,10 +8,6 @@ import notificationsReducer, {
 import programsRatingReducer, {
   ProgramsRatingState
 } from "components/programs-rating/reducers/programs-rating.reducers";
-import {
-  walletReducer,
-  WalletState
-} from "components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
@@ -49,6 +45,10 @@ import fundDetailsReducer, {
 import programDetailsReducer, {
   ProgramDetailsState
 } from "pages/programs/program-details/reducers/program-details.reducer";
+import {
+  walletReducer,
+  WalletState
+} from "pages/wallet/reducers/wallet.reducers";
 import accountSettingsReducer, {
   AccountSettingsState
 } from "reducers/account-settings-reducer";

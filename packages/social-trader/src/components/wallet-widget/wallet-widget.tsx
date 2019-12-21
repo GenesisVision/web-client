@@ -6,7 +6,6 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import Link from "components/link/link";
 import Popover from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { WALLET_TOTAL_PAGE_ROUTE } from "components/wallet/wallet.routes";
 import {
   withBlurLoader,
   WithBlurLoaderProps
@@ -16,6 +15,7 @@ import useAnchor from "hooks/anchor.hook";
 import WalletDeposit, {
   WALLET_DEPOSIT_BUTTON_TYPE
 } from "modules/wallet-deposit/wallet-deposit";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";

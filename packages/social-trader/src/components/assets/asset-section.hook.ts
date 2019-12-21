@@ -1,7 +1,7 @@
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import { WalletData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "pages/wallet/services/wallet.services";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrencyEnum } from "utils/types";

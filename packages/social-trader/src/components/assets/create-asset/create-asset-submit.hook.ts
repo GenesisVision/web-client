@@ -1,7 +1,7 @@
 import { Push } from "components/link/link";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import useApiRequest from "hooks/api-request.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import { fetchWallets } from "pages/wallet/services/wallet.services";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";

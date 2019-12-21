@@ -173,6 +173,7 @@ $padding: $padding-small;
   &__cell {
     @include vertical-paddings($padding-xsmall);
     @include font-size($font-size-common);
+    @include adaptive-padding(right, $padding-xsmall, 2);
     text-align: left;
     cursor: default;
     box-sizing: border-box;
@@ -185,7 +186,7 @@ $padding: $padding-small;
     white-space: nowrap;
 
     &:first-child {
-      padding-left: $padding-xsmall;
+      padding-left: $padding-small;
 
       .programs-table__cell,
       .funds-table__cell {
@@ -193,7 +194,7 @@ $padding: $padding-small;
       }
     }
     &:last-child {
-      padding-right: $padding-xsmall;
+      padding-right: $padding-small;
     }
 
     &#{&} {
@@ -202,7 +203,7 @@ $padding: $padding-small;
         opacity: 0.3;
 
         &:last-child {
-          padding-right: $padding-xsmall;
+          padding-right: $padding-small;
         }
       }
       &--sortable {

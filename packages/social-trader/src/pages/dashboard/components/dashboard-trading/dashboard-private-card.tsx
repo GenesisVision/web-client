@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -153,6 +153,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
         {asset.actions.canTransferMoney && (
           <>
             <TransferButton
+              size={GV_BTN_SIZE.MIDDLE}
+              color={"primary"}
+              variant={"contained"}
               onApply={updateItems}
               label={t("buttons.deposit")}
               title={t("transfer.deposit-to", {
@@ -166,9 +169,8 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               destinationType={"PrivateTradingAccount"}
             />
             <TransferButton
+              size={GV_BTN_SIZE.MIDDLE}
               onApply={updateItems}
-              color={"secondary"}
-              variant={"outlined"}
               label={t("buttons.withdraw")}
               title={t("transfer.withdraw-from", {
                 title: t(

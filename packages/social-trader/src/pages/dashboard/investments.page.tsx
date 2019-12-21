@@ -26,7 +26,9 @@ const _InvestmentsPage: React.FC = () => {
         <div>
           <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
             <div className="dashboard__public-page-block">
-              <PublicSelect />
+              <div className="dashboard__public-page-select">
+                <PublicSelect />
+              </div>
               <PublicPageLink />
             </div>
           </DetailsBlock>

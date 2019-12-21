@@ -32,6 +32,7 @@ const _Tooltip: React.FC<Props> = ({
         onMouseLeave={clearAnchor}
         onTouchStart={handleMouseEnter}
         onTouchEnd={clearAnchor}
+        onClick={clearAnchor}
       />
       <Popover
         noAbsolute

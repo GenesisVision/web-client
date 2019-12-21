@@ -2,15 +2,20 @@ import "./wallet-deposit.scss";
 
 import { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import GVButton from "components/gv-button";
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { CurrencyEnum } from "utils/types";
 
-const _WalletDeposit: React.FC<Props> = ({ type, disabled }) => {
+const _WalletDeposit: React.FC<Props> = ({
+  type,
+  disabled,
+  currency = "GVT"
+}) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const wallets = useSelector(walletsSelector);
   const Button =
@@ -19,7 +24,7 @@ const _WalletDeposit: React.FC<Props> = ({ type, disabled }) => {
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
       <WalletAddFundsPopup
-        currentWallet={wallets.find(wallet => wallet.currency === "GVT")!}
+        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
         onClose={setClosePopup}
         open={isOpenPopup}
       />
@@ -33,7 +38,7 @@ const FullButton: React.FC<{
 }> = React.memo(({ disabled, onClick }) => {
   const [t] = useTranslation();
   return (
-    <GVButton disabled={disabled} onClick={onClick}>
+    <GVButton size={GV_BTN_SIZE.LARGE} disabled={disabled} onClick={onClick}>
       <>
         <span className="wallet-deposit__full-button-icon">+</span>
         {t("wallet-page.deposit")}
@@ -56,6 +61,7 @@ const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
 );
 
 interface Props {
+  currency?: CurrencyEnum;
   disabled?: boolean;
   type?: WALLET_DEPOSIT_BUTTON_TYPE;
 }

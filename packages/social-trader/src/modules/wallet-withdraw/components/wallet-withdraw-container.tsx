@@ -1,9 +1,9 @@
 import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
-import { updateWalletTimestampAction } from "components/wallet/actions/wallet.actions";
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import { WalletData } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
