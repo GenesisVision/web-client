@@ -11,7 +11,8 @@ import WalletCurrencyContainer from "./components/wallet-currency.container";
 import WalletTotalContainer from "./components/wallet-total-container";
 import { fetchWallets } from "./services/wallet.services";
 
-export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
+export const WALLET_TOTAL_PAGE_NAME = "wallet";
+export const WALLET_TOTAL_PAGE_ROUTE = `/${WALLET_TOTAL_PAGE_NAME}`;
 export const WALLET_COPYTRADING_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/copytrading`;
 export const CURRENCY_SLUG = ":currency";
 export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/${CURRENCY_SLUG}`;
