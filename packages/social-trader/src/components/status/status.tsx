@@ -23,7 +23,7 @@ const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
   return (
     <div className="status">
       <img
-        className={classNames(className)}
+        className={classNames("status__image", className)}
         src={statuses[status]}
         alt={`status ${status}`}
       />
