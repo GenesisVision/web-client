@@ -144,6 +144,15 @@
     "typescript": "^3.2.2",
     "worker-loader": "^2.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
+    "**/*.{ts,tsx,js}": ["eslint --fix", "git add"]
+  },
   "scripts": {
     "upgrade-api": "cd packages/gv-api-web && git checkout development && git pull",
     "investor": "cd packages/investor && yarn start",
