@@ -3,13 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .dashboard-total {
-  &__profits {
-    align-items: flex-end;
-    & div.pie-container:not(:last-child) {
-      margin-bottom: $padding-xsmall;
-      margin-right: $padding-xsmall;
-    }
-  }
   &__values {
     @include details-block-horizontal-paddings();
   }
