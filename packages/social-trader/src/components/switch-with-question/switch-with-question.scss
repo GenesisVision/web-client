@@ -2,23 +2,24 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
 
-.wallet-settings {
-  @include adaptive-padding(bottom, $padding-medium);
+.switch-with-question {
   display: flex;
   align-items: center;
-
-  .gv-switch-wrapper {
-    margin: 0 0 0 12px;
-  }
 
   &__label {
     @include font-size($font-size-common);
     font-weight: 600;
+    margin-right: $padding-xxsmall;
   }
-
+  &__question-container {
+    display: flex;
+  }
   &__question {
     border: 1px solid rgba($icon-color, 0.2);
     color: rgba($icon-color, 0.2);
     margin-right: 12px;
+    &.switch-with-question__question-button {
+      cursor: help;
+    }
   }
 }
