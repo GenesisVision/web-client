@@ -1,5 +1,3 @@
-import "./wallet-tables.scss";
-
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
