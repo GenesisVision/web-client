@@ -16,7 +16,6 @@ import {
 } from "components/table/components/table.types";
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import { Currency } from "gv-api-web";
 import { reduceFilters } from "pages/wallet/components/wallet-tables/wallet-transactions/wallet-transaction-type-filter.helpers";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -59,47 +58,45 @@ const _WalletTransactions: React.FC<Props> = ({
   if (!platformData) return null;
   const { walletTransactions } = platformData.filters;
   return (
-    <div className="wallet-transactions">
-      <TableModule
-        loaderData={walletTransactionsLoaderData}
-        timestamp={new Date(timestamp).getMilliseconds()}
-        defaultFilters={DEFAULT_FILTERS}
-        paging={DEFAULT_PAGING}
-        filtering={{
-          ...TRANSACTIONS_FILTERS,
-          transactionType: walletTransactions[0].key
-        }}
-        getItems={getMultiTransactions}
-        renderFilters={(updateFilter, filtering) => {
-          return (
-            <>
-              <SelectFilter
-                name={"transactionType"}
-                label="Type"
-                value={filtering["transactionType"] as SelectFilterType}
-                values={reduceFilters(walletTransactions)}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering[DATE_RANGE_FILTER_NAME]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.account-creation")}
-              />
-            </>
-          );
-        }}
-        columns={columns}
-        renderHeader={column => (
-          <span
-            className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
-          >
-            {t(`wallet-page.transactions.${column.name}`)}
-          </span>
-        )}
-        renderBodyRow={renderBodyRow}
-      />
-    </div>
+    <TableModule
+      loaderData={walletTransactionsLoaderData}
+      timestamp={new Date(timestamp).getMilliseconds()}
+      defaultFilters={DEFAULT_FILTERS}
+      paging={DEFAULT_PAGING}
+      filtering={{
+        ...TRANSACTIONS_FILTERS,
+        transactionType: walletTransactions[0].key
+      }}
+      getItems={getMultiTransactions}
+      renderFilters={(updateFilter, filtering) => {
+        return (
+          <>
+            <SelectFilter
+              name={"transactionType"}
+              label="Type"
+              value={filtering["transactionType"] as SelectFilterType}
+              values={reduceFilters(walletTransactions)}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.account-creation")}
+            />
+          </>
+        );
+      }}
+      columns={columns}
+      renderHeader={column => (
+        <span
+          className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
+        >
+          {t(`wallet-page.transactions.${column.name}`)}
+        </span>
+      )}
+      renderBodyRow={renderBodyRow}
+    />
   );
 };
 

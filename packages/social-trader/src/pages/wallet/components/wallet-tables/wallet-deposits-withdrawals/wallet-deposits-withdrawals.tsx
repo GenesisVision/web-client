@@ -56,45 +56,43 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   if (!platformData) return null; // TODO fix filters
   const { walletExternalTransactions } = platformData.filters;
   return (
-    <div className="wallet-deposits-withdrawals">
-      <TableModule
-        loaderData={walletTransactionsLoaderData}
-        timestamp={timestamp.getMilliseconds()}
-        defaultFilters={DEFAULT_FILTERS}
-        paging={DEFAULT_PAGING}
-        filtering={{
-          ...TRANSACTIONS_FILTERS,
-          transactionType: walletExternalTransactions[0].key
-        }}
-        getItems={getMultiTransactionsExternal}
-        renderFilters={(updateFilter, filtering) => (
-          <>
-            <SelectFilter
-              name={"transactionType"}
-              label="Type"
-              value={filtering["transactionType"] as SelectFilterType} //TODO fix filtering types
-              values={reduceFilters(walletExternalTransactions)}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.account-creation")}
-            />
-          </>
-        )}
-        columns={columns}
-        renderHeader={column => (
-          <span
-            className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${column.name}`}
-          >
-            {t(`wallet-page.deposits-withdrawals.${column.name}`)}
-          </span>
-        )}
-        renderBodyRow={renderBodyRow}
-      />
-    </div>
+    <TableModule
+      loaderData={walletTransactionsLoaderData}
+      timestamp={timestamp.getMilliseconds()}
+      defaultFilters={DEFAULT_FILTERS}
+      paging={DEFAULT_PAGING}
+      filtering={{
+        ...TRANSACTIONS_FILTERS,
+        transactionType: walletExternalTransactions[0].key
+      }}
+      getItems={getMultiTransactionsExternal}
+      renderFilters={(updateFilter, filtering) => (
+        <>
+          <SelectFilter
+            name={"transactionType"}
+            label="Type"
+            value={filtering["transactionType"] as SelectFilterType} //TODO fix filtering types
+            values={reduceFilters(walletExternalTransactions)}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.account-creation")}
+          />
+        </>
+      )}
+      columns={columns}
+      renderHeader={column => (
+        <span
+          className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${column.name}`}
+        >
+          {t(`wallet-page.deposits-withdrawals.${column.name}`)}
+        </span>
+      )}
+      renderBodyRow={renderBodyRow}
+    />
   );
 };
 

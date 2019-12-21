@@ -1,10 +1,10 @@
 import "./wallet-tables.scss";
 
-import GVTabs from "components/gv-tabs";
+import DetailsBlock from "components/details/details-block";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
-import Surface from "components/surface/surface";
 import Tooltip from "components/tooltip/tooltip";
 import { WalletData } from "gv-api-web";
 import React from "react";
@@ -24,73 +24,67 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
   const [t] = useTranslation();
   const { tab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
-    <Surface className="wallet-container">
-      <div className="wallet-container__header">
-        <div className="wallet-container__tabs">
-          <GVTabs value={tab}>
-            <GVTab
-              value={TABS.WALLETS_TAB}
-              label={
-                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
-                  {t("wallet-page.tabs.wallets")}
+    <DetailsBlock table>
+      <DetailsBlockTabs value={tab}>
+        <GVTab
+          value={TABS.WALLETS_TAB}
+          label={
+            <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
+              {t("wallet-page.tabs.wallets")}
+            </Link>
+          }
+        />
+        <GVTab
+          className={"gv-tab"}
+          value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
+          label={
+            <Tooltip
+              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+              render={() => (
+                <div className="tooltip__content">
+                  {t("wallet-page.tooltip.transactions")}
+                </div>
+              )}
+            >
+              <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`}>
+                {t("wallet-page.tabs.transactions")}
+              </Link>
+            </Tooltip>
+          }
+        />
+        <GVTab
+          className={"gv-tab"}
+          value={TABS.EXTERNAL_TAB}
+          label={
+            <>
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("wallet-page.tooltip.deposit")}
+                  </div>
+                )}
+              >
+                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                  {t("wallet-page.tabs.deposit")}
                 </Link>
-              }
-            />
-            <GVTab
-              className={"gv-tab"}
-              value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
-              label={
-                <Tooltip
-                  horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                  render={() => (
-                    <div className="tooltip__content">
-                      {t("wallet-page.tooltip.transactions")}
-                    </div>
-                  )}
-                >
-                  <Link
-                    to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`}
-                  >
-                    {t("wallet-page.tabs.transactions")}
-                  </Link>
-                </Tooltip>
-              }
-            />
-            <GVTab
-              className={"gv-tab"}
-              value={TABS.EXTERNAL_TAB}
-              label={
-                <>
-                  <Tooltip
-                    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                    render={() => (
-                      <div className="tooltip__content">
-                        {t("wallet-page.tooltip.deposit")}
-                      </div>
-                    )}
-                  >
-                    <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
-                      {t("wallet-page.tabs.deposit")}
-                    </Link>
-                  </Tooltip>
-                  <Tooltip
-                    horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                    render={() => (
-                      <div className="tooltip__content">
-                        {t("wallet-page.tooltip.withdrawals")}
-                      </div>
-                    )}
-                  >
-                    <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
-                      {t("wallet-page.tabs.withdrawals")}
-                    </Link>
-                  </Tooltip>
-                </>
-              }
-            />
-          </GVTabs>
-        </div>
-      </div>
+              </Tooltip>
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("wallet-page.tooltip.withdrawals")}
+                  </div>
+                )}
+              >
+                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                  {t("wallet-page.tabs.withdrawals")}
+                </Link>
+              </Tooltip>
+            </>
+          }
+        />
+      </DetailsBlockTabs>
       {tab === TABS.WALLETS_TAB && <WalletList wallets={wallets} />}
       {tab === TABS.TRANSACTIONS_TAB && (
         <WalletTransactions
@@ -111,7 +105,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
           )}
         />
       )}
-    </Surface>
+    </DetailsBlock>
   );
 };
 
