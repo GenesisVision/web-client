@@ -1,7 +1,7 @@
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
-import { DetailsRowItem } from "components/details/details-row-item.block";
+import { DetailsBlockRowItem } from "components/details/details-block-row-item.block";
 import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import { AccountDetailsDataType } from "pages/accounts/account-details/account-details.types";
@@ -13,7 +13,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({ account, onApply }) => {
   const [t] = useTranslation();
   return (
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED} row>
-      <DetailsRowItem>
+      <DetailsBlockRowItem>
         <TransferButton
           color={"primary"}
           variant={"contained"}
@@ -29,8 +29,8 @@ const _InvestmentAccountControls: React.FC<Props> = ({ account, onApply }) => {
           sourceType={"Wallet"}
           destinationType={"PrivateTradingAccount"}
         />
-      </DetailsRowItem>
-      <DetailsRowItem>
+      </DetailsBlockRowItem>
+      <DetailsBlockRowItem>
         <TransferButton
           onApply={onApply}
           label={t("buttons.withdraw")}
@@ -44,7 +44,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({ account, onApply }) => {
           sourceType={"PrivateTradingAccount"}
           destinationType={"Wallet"}
         />
-      </DetailsRowItem>
+      </DetailsBlockRowItem>
     </DetailsBlock>
   );
 };
