@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const FacebookIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="10px"
       height="18px"
@@ -26,5 +26,5 @@ export const FacebookIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const TelegramIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="22px"
       height="17px"
@@ -26,5 +26,5 @@ export const TelegramIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

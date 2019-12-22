@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const LinkedinIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="16px"
       height="15px"
@@ -24,5 +24,5 @@ export const LinkedinIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

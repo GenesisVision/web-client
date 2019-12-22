@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const AndroidIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="19px"
       height="22px"
@@ -42,5 +42,5 @@ export const AndroidIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

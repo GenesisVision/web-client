@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const BitcoinIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="16px"
       height="22px"
@@ -27,5 +27,5 @@ export const BitcoinIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

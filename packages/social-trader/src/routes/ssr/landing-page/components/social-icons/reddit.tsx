@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const RedditIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="22px"
       height="19px"
@@ -24,5 +24,5 @@ export const RedditIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

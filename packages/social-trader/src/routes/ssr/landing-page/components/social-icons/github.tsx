@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const GithubIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="17px"
       height="18px"
@@ -26,5 +26,5 @@ export const GithubIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const YoutubeIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="20px"
       height="15px"
@@ -24,5 +24,5 @@ export const YoutubeIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );

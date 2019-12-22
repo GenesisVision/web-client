@@ -41,6 +41,10 @@
       height: 22px;
     }
 
+    &:hover {
+      fill: $landing-link-hover;
+    }
+
     @include media-breakpoint-landscape-tablet() {
       width: 40px;
       height: 40px;
@@ -48,12 +52,6 @@
       svg {
         width: 14px;
         height: 17px;
-      }
-    }
-
-    @include media-breakpoint-desktop() {
-      &:hover {
-        fill: $landing-link-hover;
       }
     }
 

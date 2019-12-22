@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export const TwitterIcon: React.FC = () => (
-  <div>
+  <>
     <svg
       width="22px"
       height="16px"
@@ -26,5 +26,5 @@ export const TwitterIcon: React.FC = () => (
         </g>
       </g>
     </svg>
-  </div>
+  </>
 );
