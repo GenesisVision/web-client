@@ -1,11 +1,18 @@
 import { TableCardRow } from "components/table/components/table-card/table-card";
+import { WalletItemType } from "components/wallet-select/wallet-select";
+import { PrivateTradingAccountType } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
+import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
+import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  accountType,
+  transferableItem,
+  canTransfer,
   title,
   onApply,
   canWithdraw,
@@ -41,12 +48,28 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
           currency={currency}
         />
       )}
+      {canTransfer && transferableItem && (
+        <>
+          <DepositTransferButton
+            onApply={onApply}
+            currentItem={transferableItem}
+            accountType={accountType}
+          />
+          <WithdrawTransferButton
+            onApply={onApply}
+            currentItem={transferableItem}
+            accountType={accountType}
+          />
+        </>
+      )}
     </TableCardRow>
   );
 };
 
 interface Props {
-  showWithdraw?: boolean;
+  accountType?: PrivateTradingAccountType;
+  transferableItem?: WalletItemType;
+  canTransfer?: boolean;
   showInvest?: boolean;
   title: string;
   onApply?: VoidFunction;
