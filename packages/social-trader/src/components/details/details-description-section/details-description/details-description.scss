@@ -90,13 +90,12 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__info-block {
-    @include adaptive-padding(top, $padding-xlarge);
+    @include adaptive-padding(top, $padding-xsmall, 2);
   }
 }
 
 .asset-details-description {
   &__tag {
-    @include adaptive-padding(top, $padding-xsmall, 2);
     display: flex;
     flex-wrap: wrap;
   }
@@ -115,6 +114,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     font-size: $font-size-common;
     letter-spacing: 0.19px;
     font-weight: bold;
+    color: $text-color;
   }
 
   &__controls {

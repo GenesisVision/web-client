@@ -59,7 +59,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           description.publicInfo.title
         )}
         AssetDetailsExtraBlock={() => (
-          <div className="details-description__info-block">
+          <>
             <h4 className="details-description__subheading">
               <TooltipLabel
                 tooltipContent={t("fund-details-page.tooltip.assets")}
@@ -73,7 +73,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 size={7}
               />
             </div>
-          </div>
+          </>
         )}
         Controls={() => (
           <InvestmentFundControls

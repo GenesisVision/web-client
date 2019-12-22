@@ -22,7 +22,9 @@ const _DetailsInfo: React.FC<Props> = ({
       <h1 className="title-small-padding">{title}</h1>
       {subtitle && <DetailsSubtitle to={subtitleUrl} text={subtitle} />}
       {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
-      {children}
+      {children && (
+        <div className="details-description__info-block">{children}</div>
+      )}
       {description && (
         <DetailsStrategy title={descriptionTitle} description={description} />
       )}
