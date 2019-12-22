@@ -2,6 +2,7 @@ import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
 import { DetailsBlockRowItem } from "components/details/details-block-row-item.block";
+import { GV_BTN_SIZE } from "components/gv-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
@@ -17,6 +18,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED} row>
       <DetailsBlockRowItem>
         <DepositTransferButton
+          size={GV_BTN_SIZE.BIG}
           onApply={onApply}
           currentItem={transferableItem}
           accountType={accountType}
@@ -24,6 +26,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
       </DetailsBlockRowItem>
       <DetailsBlockRowItem>
         <WithdrawTransferButton
+          size={GV_BTN_SIZE.BIG}
           onApply={onApply}
           currentItem={transferableItem}
           accountType={accountType}
