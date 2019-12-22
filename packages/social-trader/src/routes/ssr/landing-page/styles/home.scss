@@ -9,10 +9,8 @@
   }
 
   &__grid-row {
-    @include media-breakpoint-tablet() {
-      @include grid();
-      align-items: center;
-    }
+    @include grid();
+    align-items: center;
 
     &--mob-wider {
       margin-left: -20px;
@@ -52,6 +50,9 @@
   }
 
   &__section {
+    background-color: $landing-bg;
+    color: $main-color;
+
     &--first-screen {
       @include media-breakpoint-tablet() {
         min-height: 670px;

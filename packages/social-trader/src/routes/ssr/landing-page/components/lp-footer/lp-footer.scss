@@ -3,24 +3,26 @@
 @import "../../styles/grid";
 
 .lp-footer {
-  @include container();
+  background-color: $landing-bg;
   color: $main-color;
-  padding-top: 40px;
-  padding-bottom: 100px;
 
-  @include media-breakpoint-tablet() {
-    padding-top: 80px;
-  }
+  &__container {
+    @include container();
+    padding-top: 40px;
+    padding-bottom: 100px;
 
-  @include media-breakpoint-large-desktop() {
-    padding-bottom: 200px;
+    @include media-breakpoint-tablet() {
+      padding-top: 80px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      padding-bottom: 200px;
+    }
   }
 
   &__row {
-    @include media-breakpoint-tablet() {
-      @include grid();
-      align-items: baseline;
-    }
+    @include grid();
+    align-items: baseline;
   }
 
   &__title {

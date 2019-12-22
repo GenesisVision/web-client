@@ -1,6 +1,6 @@
 @import "~shared/styles/breakpoint";
 
-$grid-max-width: 1600px;
+$grid-max-width: 1400px;
 
 $grid-columns: 12;
 
@@ -17,17 +17,15 @@ $grid-gap-mobile: 14px;
   padding-right: 20px;
 
   @include media-breakpoint-large-desktop() {
+    max-width: 1600px;
     padding-left: 100px;
     padding-right: 100px;
   }
 }
 
 @mixin grid() {
-  display: grid;
-  grid-template-columns: repeat($grid-columns/3, 1fr);
-  grid-column-gap: $grid-gap-mobile;
-
   @include media-breakpoint-tablet() {
+    display: grid;
     grid-column-gap: $grid-gap;
     grid-template-columns: repeat($grid-columns, 1fr);
   }

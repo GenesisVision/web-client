@@ -15,26 +15,28 @@ import {
 const LPHeader: React.FC = () => {
   return (
     <header className="lp-header">
-      <div className="lp-header__row">
-        <div className="lp-header__burger">
-          <MobileBurger />
-        </div>
-        <NavList menuItems={navHeader} className="lp-header__mobile-menu" />
-        <div className="lp-header__logo">
-          <Link
-            className="lp-header__logo-link"
-            to={{
-              pathname: HOME_ROUTE
-            }}
-          >
-            <MainLogo />
-          </Link>
-        </div>
-        <NavList menuItems={navHeader} className="lp-header__nav" />
-        <div className="lp-header__start-btn">
-          <LPButton color="secondary" href={START_ROUTE}>
-            Get started
-          </LPButton>
+      <div className="lp-header__container">
+        <div className="lp-header__row">
+          <div className="lp-header__burger">
+            <MobileBurger />
+          </div>
+          <NavList menuItems={navHeader} className="lp-header__mobile-menu" />
+          <div className="lp-header__logo">
+            <Link
+              className="lp-header__logo-link"
+              to={{
+                pathname: HOME_ROUTE
+              }}
+            >
+              <MainLogo />
+            </Link>
+          </div>
+          <NavList menuItems={navHeader} className="lp-header__nav" />
+          <div className="lp-header__start-btn">
+            <LPButton color="secondary" href={START_ROUTE}>
+              Get started
+            </LPButton>
+          </div>
         </div>
       </div>
     </header>

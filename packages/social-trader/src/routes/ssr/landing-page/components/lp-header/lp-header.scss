@@ -3,21 +3,28 @@
 @import "../../styles/grid";
 
 .lp-header {
-  @include container();
-  padding-top: 35px;
-  padding-bottom: 35px;
-  background-color: transparent;
+  background-color: $landing-bg;
+  color: $main-color;
 
-  @include media-breakpoint-tablet() {
-    padding-top: 40px;
-    padding-bottom: 40px;
+  &__container {
+    @include container();
+    padding-top: 35px;
+    padding-bottom: 35px;
+
+    @include media-breakpoint-tablet() {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
   }
 
   &__row {
-    @include grid();
+    display: grid;
     align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: $grid-gap-mobile;
 
     @include media-breakpoint-tablet() {
+      grid-column-gap: $grid-gap;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       justify-content: space-between;
     }
