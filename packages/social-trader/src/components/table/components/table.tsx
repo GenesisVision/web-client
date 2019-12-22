@@ -62,7 +62,7 @@ const _Table: React.FC<ITableProps> = ({
     renderBodyCard !== undefined &&
     !!showSwitchView;
   const [view, setView] = useState<LIST_VIEW>(
-    isViewSwitchEnabled ? tableView : LIST_VIEW.TABLE
+    isViewSwitchEnabled ? tableView : outerView || LIST_VIEW.TABLE
   );
   const changeView = useCallback((view: LIST_VIEW) => {
     dispatch(updateGlobalTableViewAction(view));
