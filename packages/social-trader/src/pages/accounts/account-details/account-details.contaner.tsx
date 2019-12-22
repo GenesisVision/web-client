@@ -15,7 +15,7 @@ import ProgramDetailsHistorySection from "pages/programs/program-details/program
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { ASSET } from "shared/constants/constants";
+import { ASSET, CREATE_ASSET } from "shared/constants/constants";
 
 import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
@@ -68,6 +68,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       )}
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
+        assetType={CREATE_ASSET.ACCOUNT}
         haveDelay={false}
         getHistoryCounts={getAccountHistoryCounts}
         tablesData={tablesData}
