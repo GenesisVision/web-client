@@ -5,11 +5,11 @@
 .lp-footer {
   @include container();
   color: $main-color;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 100px;
 
   @include media-breakpoint-tablet() {
-    padding-top: 100px;
+    padding-top: 80px;
   }
 
   @include media-breakpoint-large-desktop() {

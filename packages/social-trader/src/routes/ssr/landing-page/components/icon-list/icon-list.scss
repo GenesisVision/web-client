@@ -4,8 +4,8 @@
 
 .icon-list {
   @include reset-list();
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 
   @include media-breakpoint-landscape-tablet() {
@@ -14,10 +14,6 @@
 
   &__item {
     margin-right: 20px;
-
-    &:last-child {
-      margin-right: 0;
-    }
 
     @include media-breakpoint-landscape-tablet() {
       margin-right: 30px;
