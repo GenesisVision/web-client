@@ -5,7 +5,7 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
+import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
@@ -128,8 +128,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 levelsParameters={levelsParameters!}
               />
             )}
-            {followDetails && followPersonalDetails && (
-              <FollowControlsContainer description={description} />
+            {followDetails && (
+              <FollowControls
+                onApply={handleDispatchDescription}
+                description={description}
+              />
             )}
           </>
         )}
