@@ -1,6 +1,6 @@
 import { GV_BTN_SIZE } from "components/gv-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { PrivateTradingAccountType } from "gv-api-web";
+import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
 import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
@@ -27,7 +27,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
 interface Props {
   currentItem: WalletItemType;
   onApply?: VoidFunction;
-  accountType?: PrivateTradingAccountType;
+  accountType?: PrivateTradingAccountType | AssetTypeExt;
 }
 
 export const WithdrawTransferButton = React.memo(_WithdrawTransferButton);

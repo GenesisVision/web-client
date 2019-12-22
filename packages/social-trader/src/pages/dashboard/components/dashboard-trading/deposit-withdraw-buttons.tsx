@@ -1,6 +1,6 @@
 import { TableCardRow } from "components/table/components/table-card/table-card";
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { PrivateTradingAccountType } from "gv-api-web";
+import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
@@ -71,7 +71,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
 };
 
 interface Props {
-  accountType?: PrivateTradingAccountType;
+  accountType?: PrivateTradingAccountType | AssetTypeExt;
   transferableItem?: WalletItemType;
   canTransfer?: boolean;
   showInvest?: boolean;
