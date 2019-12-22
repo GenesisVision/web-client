@@ -7,12 +7,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _DepositTransferButton: React.FC<Props> = props => {
-  const { accountType } = props;
+  const { accountType, size = GV_BTN_SIZE.MIDDLE } = props;
   const [t] = useTranslation();
   return (
     <TransferButton
       {...props}
-      size={GV_BTN_SIZE.MIDDLE}
+      size={size}
       color={"primary"}
       variant={"contained"}
       label={t("buttons.deposit")}
@@ -27,6 +27,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   currentItem: WalletItemType;
   onApply?: VoidFunction;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
