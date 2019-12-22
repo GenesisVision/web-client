@@ -8,7 +8,8 @@ import {
   FollowDetailsListItem,
   InvestmentEventViewModels,
   ItemsViewModelDashboardTradingAsset,
-  PrivateTradingAccountFull
+  PrivateTradingAccountFull,
+  ProgramFollowDetailsFull
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { TransferItemType } from "modules/transfer/transfer.types";
@@ -191,6 +192,18 @@ export const mapAccountToTransferItemType = ({
   id,
   accountInfo: { title, currency, balance }
 }: DashboardTradingAsset): TransferItemType => ({
+  id,
+  title,
+  logo: "",
+  currency: currency || "ETH",
+  available: balance || 0
+});
+
+export const mapProgramFollowToTransferItemType = ({
+  id,
+  publicInfo: { title },
+  tradingAccountInfo: { currency, balance }
+}: ProgramFollowDetailsFull | PrivateTradingAccountFull): TransferItemType => ({
   id,
   title,
   logo: "",
