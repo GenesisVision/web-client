@@ -1,5 +1,3 @@
-import "./program-financial-statistic.scss";
-
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "components/table/components/table-container";
@@ -34,7 +32,6 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <TableContainer
-      className="program-financial-statistic"
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
           dateRange={filtering!.dateRange}

@@ -1,7 +1,7 @@
 import "./download-button.scss";
 
 import GVButton from "components/gv-button";
-import ExportIcon from "media/export.svg";
+import { ExportIcon } from "components/icon/export-icon";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -12,11 +12,9 @@ const _DownloadButton: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <a
-      href={getExportFileUrl && getExportFileUrl()}
-      className="download-button__container"
-    >
+    <a href={getExportFileUrl && getExportFileUrl()}>
       <GVButton
+        noPadding
         className="download-button"
         color="primary"
         variant="text"
@@ -24,7 +22,7 @@ const _DownloadButton: React.FC<Props> = ({
       >
         <>
           {title || t("program-details-page.history.trades.download")}
-          <img src={ExportIcon} className="download-icon" />
+          <ExportIcon />
         </>
       </GVButton>
     </a>

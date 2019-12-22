@@ -1,9 +1,8 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
+import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
@@ -89,14 +88,15 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        detailsType={DETAILS_TYPE.ASSET}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         logo={logo}
         title={title}
         id={id}
-        username={username}
+        subtitle={username}
         socialLinks={socialLinks}
-        ownerUrl={ownerUrl}
+        subtitleUrl={ownerUrl}
         currency={currency}
         color={color}
         asset={assetType}

@@ -1,29 +1,52 @@
-import "./manager.page.scss";
-
-import ManagerDescription from "components/manager/manager-description/manager-description";
+import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
+import { DETAILS_TYPE } from "components/details/details.types";
+import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
+import FundAssetContainer, {
+  FundAssetType
+} from "components/fund-asset/fund-asset-container";
 import ManagerHistorySection from "components/manager/manager-history/manager-history-section";
 import Page from "components/page/page";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import StatisticItem from "components/statistic-item/statistic-item";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
+import { localizedDate } from "shared/utils/dates";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
   const [t] = useTranslation();
+  const memberSince = `${t("manager-page.member-since")} ${localizedDate(
+    profile.regDate
+  )}`;
   return (
     <Page title={`${t("manager-page.title")} ${profile.username}`}>
-      <div className="manager">
-        <div className="manager__description">
-          <ManagerDescription profile={profile} />
-        </div>
-        <div className="manager__history">
-          <ManagerHistorySection
-            ownerId={profile.id}
-            title={profile.username}
-          />
-        </div>
-      </div>
+      <DetailsDescriptionSection
+        descriptionTitle={t("manager-page.about")}
+        subtitle={memberSince}
+        detailsType={DETAILS_TYPE.USER}
+        id={profile.id}
+        title={profile.username}
+        logo={profile.avatar}
+        description={profile.about}
+        socialLinks={profile.socialLinks}
+        AssetDetailsExtraBlock={() => (
+          <StatisticItem label={t("manager-page.assets")}>
+            <FundAssetContainer
+              assets={profile.assets.map(
+                (item: string) =>
+                  ({
+                    asset: item,
+                    name: item,
+                    percent: 0,
+                    icon: ""
+                  } as FundAssetType)
+              )}
+              type={FUND_ASSET_TYPE.TEXT}
+              size={profile.assets.length}
+            />
+          </StatisticItem>
+        )}
+      />
+      <ManagerHistorySection ownerId={profile.id} title={profile.username} />
     </Page>
   );
 };
@@ -32,8 +55,5 @@ interface Props {
   profile: PublicProfile;
 }
 
-const ManagerPage = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
-  React.memo
-)(_ManagerPage);
+const ManagerPage = React.memo(_ManagerPage);
 export default ManagerPage;

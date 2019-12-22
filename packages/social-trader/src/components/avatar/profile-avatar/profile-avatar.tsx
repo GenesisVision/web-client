@@ -6,9 +6,13 @@ import * as React from "react";
 
 import ImageBase, { IImageProps } from "../image-base";
 
-const _ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
+const _ProfileAvatar: React.FC<Props> = ({ url, alt, className, big }) => {
   return (
-    <div className={classNames("profile-avatar", className)}>
+    <div
+      className={classNames("profile-avatar", className, {
+        "profile-avatar--big": big
+      })}
+    >
       <ImageBase
         url={url}
         alt={alt}
@@ -19,6 +23,10 @@ const _ProfileAvatar: React.FC<IImageProps> = ({ url, alt, className }) => {
     </div>
   );
 };
+
+interface Props extends IImageProps {
+  big?: boolean;
+}
 
 const ProfileAvatar = React.memo(_ProfileAvatar);
 export default ProfileAvatar;

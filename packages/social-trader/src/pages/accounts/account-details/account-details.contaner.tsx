@@ -1,7 +1,6 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsDivider } from "components/details/details-divider.block";
+import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AccountDetailsSubscriptions } from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
@@ -43,6 +42,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        detailsType={DETAILS_TYPE.ASSET}
         isOwnAsset={true}
         logo={description.brokerDetails.logo}
         title={title}

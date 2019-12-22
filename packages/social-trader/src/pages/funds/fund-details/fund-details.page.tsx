@@ -1,5 +1,3 @@
-import "components/details/details.scss";
-
 import * as React from "react";
 import { useSelector } from "react-redux";
 

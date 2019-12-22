@@ -1,6 +1,9 @@
 import { DetailsInfo } from "components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "components/details/details-description-section/details-description/details-settings-buttons.block";
-import { PersonalDetailsType } from "components/details/details.types";
+import {
+  DETAILS_TYPE,
+  PersonalDetailsType
+} from "components/details/details.types";
 import { ToType } from "components/link/link";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -11,6 +14,8 @@ import { CurrencyEnum } from "utils/types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  descriptionTitle,
+  detailsType,
   personalDetails,
   isOwnAsset,
   id,
@@ -18,8 +23,8 @@ const _DetailsDescription: React.FC<Props> = ({
   title,
   color,
   currency,
-  ownerUrl,
-  username,
+  subtitleUrl,
+  subtitle,
   socialLinks,
   programDetails,
   asset,
@@ -29,8 +34,9 @@ const _DetailsDescription: React.FC<Props> = ({
   settingsUrl
 }) => {
   return (
-    <div className="asset-details-description__main">
+    <div className="details-description__main">
       <DetailsLimitsAvatar
+        detailsType={detailsType}
         logo={logo}
         level={programDetails ? programDetails.level : undefined}
         levelProgress={
@@ -44,9 +50,12 @@ const _DetailsDescription: React.FC<Props> = ({
         currency={currency}
       />
       <DetailsInfo
+        descriptionTitle={descriptionTitle}
         title={title}
-        to={ownerUrl ? managerToPathCreator(ownerUrl, title) : undefined}
-        username={username}
+        subtitleUrl={
+          subtitleUrl ? managerToPathCreator(subtitleUrl, title) : undefined
+        }
+        subtitle={subtitle}
         socialLinks={socialLinks}
         description={description}
       >
@@ -67,18 +76,20 @@ const _DetailsDescription: React.FC<Props> = ({
 };
 
 interface Props {
+  descriptionTitle?: string;
+  detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
-  isOwnAsset: boolean;
+  isOwnAsset?: boolean;
   id: string;
   logo: string;
   title: string;
   color?: string;
   currency?: CurrencyEnum;
-  ownerUrl?: string;
-  username?: string;
+  subtitleUrl?: string;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
-  asset: ASSET;
+  asset?: ASSET;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
