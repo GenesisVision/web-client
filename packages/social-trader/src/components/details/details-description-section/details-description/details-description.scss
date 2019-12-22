@@ -95,12 +95,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 }
 
 .asset-details-description {
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-landscape-phone() {
-    padding: 0;
-  }
-
   &__tag {
     @include adaptive-padding(top, $padding-xsmall, 2);
     display: flex;
