@@ -12,6 +12,7 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import {
@@ -147,6 +148,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        canTransfer={asset.actions.canTransferMoney}
+        transferableItem={mapAccountToTransferItemType(asset)}
         title={asset.accountInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
