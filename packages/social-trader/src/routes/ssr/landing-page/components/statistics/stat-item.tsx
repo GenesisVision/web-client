@@ -1,4 +1,3 @@
-import Link from "components/link/link";
 import React from "react";
 
 interface IStatItemProps extends React.HTMLAttributes<HTMLAnchorElement> {

@@ -12,7 +12,7 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -21,7 +21,7 @@
 
   @include media-breakpoint-landscape-tablet() {
     grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 0;
+    padding-bottom: 0;
   }
 
   @include media-breakpoint-desktop {

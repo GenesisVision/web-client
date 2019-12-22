@@ -6,8 +6,9 @@ import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
-import SocialSection from "routes/ssr/landing-page/components/social-section/social-section";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
+import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
 import programsApi from "services/api-client/programs-api";
 import { useTranslation } from "shared/i18n";
@@ -37,9 +38,9 @@ const IndexPage: NextPage = () => {
             </div>
           </div>
         </section>
-        <section className="home__section home__section--bg-gray">
+        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            <h2>Trades</h2>
+            <TradersContainer />
           </div>
         </section>
         <section className="home__section">
@@ -75,7 +76,7 @@ const IndexPage: NextPage = () => {
         </section>
         <section className="home__section home__section--last-screen">
           <div className="home__container">
-            <SocialSection />
+            <SocialContainer />
           </div>
         </section>
       </main>

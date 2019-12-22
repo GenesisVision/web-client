@@ -2,7 +2,7 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.social-section {
+.social-container {
   @include media-breakpoint-landscape-tablet() {
     @include grid();
   }
