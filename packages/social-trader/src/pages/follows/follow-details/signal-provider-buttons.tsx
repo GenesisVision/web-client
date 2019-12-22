@@ -1,9 +1,8 @@
-import {
-  AssetGuestActions,
-  BrokerTradeServerType,
-  SignalSubscription
-} from "gv-api-web";
+import { fetchSubscriptions } from "components/details/details-description-section/details-investment/details-investment.service";
+import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
+import { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
 
 import FollowButton from "./follow-button";
@@ -11,46 +10,49 @@ import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
   onApply,
-  guestActions: {
-    canSubscribeToExternalSignalCommonAccount,
-    canSubscribeToExternalSignalPrivateAccount,
-    canSubscribeToInternalSignal
-  } = {},
+  guestActions,
   leverage,
   brokerId,
-  isExternal,
   broker,
-  signalSubscription,
   id,
-  title,
   currency
 }) => {
+  const { data, sendRequest } = useApiRequest({
+    request: fetchSubscriptions,
+    fetchOnMount: true,
+    fetchOnMountData: id
+  });
+  const updateInfo = useCallback(() => {
+    sendRequest(id);
+    onApply();
+  }, [id]);
+  const signalSubscription = data && data[0];
+
+  const isExternal = !!(
+    guestActions && guestActions.canSubscribeToExternalSignalPrivateAccount
+  );
   const hasActiveSubscription =
     !!signalSubscription && signalSubscription.hasActiveSubscription;
   return (
     <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
       {hasActiveSubscription ? (
         <UnFollowButton
-          onApply={onApply}
+          onApply={updateInfo}
           id={id}
           tradingAccountId={signalSubscription!.subscriberInfo.tradingAccountId}
           isExternal={isExternal}
         />
       ) : (
-        (canSubscribeToExternalSignalCommonAccount ||
-          canSubscribeToExternalSignalPrivateAccount ||
-          canSubscribeToInternalSignal) && (
-          <FollowButton
-            onApply={onApply}
-            leverage={leverage}
-            brokerId={brokerId}
-            isExternal={isExternal}
-            broker={broker}
-            id={id}
-            title={title}
-            currency={currency}
-          />
-        )
+        <FollowButton
+          guestActions={guestActions}
+          onApply={updateInfo}
+          leverage={leverage}
+          brokerId={brokerId}
+          isExternal={isExternal}
+          broker={broker}
+          id={id}
+          currency={currency}
+        />
       )}
     </div>
   );
@@ -60,12 +62,9 @@ interface Props {
   onApply: VoidFunction;
   guestActions?: AssetGuestActions;
   leverage: number;
-  isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
-  signalSubscription?: SignalSubscription;
   id: string;
-  title: string;
   currency: CurrencyEnum;
 }
 
