@@ -2665,6 +2665,8 @@
     "trading": {
       "asset-types": {
         "TradingAccount": "Trading account",
+        "SignalTradingAccount": "Trading account",
+        "ExternalSignalTradingAccount": "External trading account",
         "ExternalTradingAccount": "External trading account"
       },
       "subscribers-count": "Subs.",
