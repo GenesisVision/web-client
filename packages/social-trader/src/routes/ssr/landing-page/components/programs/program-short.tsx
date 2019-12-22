@@ -3,21 +3,21 @@ import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import React from "react";
 
-interface IProgramItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
+interface IProgramShortProps extends React.HTMLAttributes<HTMLAnchorElement> {
   title: string;
   data: string;
   url?: string;
   imageClassName?: string;
 }
 
-const _ProgramItem: React.FC<IProgramItemProps> = ({
+const _ProgramShort: React.FC<IProgramShortProps> = ({
   title,
   data,
   url,
   imageClassName
 }) => (
   <li className="programs-list__item">
-    <div className="programs-list__item-avatar">
+    <div className="program-short">
       <ImageBase
         DefaultImageComponent={GVProgramDefaultAvatar}
         imageClassName={classNames("programs-list__item-image", imageClassName)}
@@ -31,5 +31,5 @@ const _ProgramItem: React.FC<IProgramItemProps> = ({
     </div>
   </li>
 );
-const ProgramItem = React.memo(_ProgramItem);
-export default ProgramItem;
+const ProgramShort = React.memo(_ProgramShort);
+export default ProgramShort;

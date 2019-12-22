@@ -1,4 +1,5 @@
 @import "~shared/styles/breakpoint";
+@import "~shared/styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -7,6 +8,7 @@
 
   &__info {
     margin-bottom: 60px;
+    text-align: center;
 
     @include media-breakpoint-tablet() {
       grid-column: 3/11;
@@ -14,7 +16,12 @@
     }
 
     @include media-breakpoint-landscape-tablet() {
-      grid-column: 2/6;
+      grid-column: 4/10;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      grid-column: 5/9;
+      margin-bottom: 150px;
     }
   }
 
@@ -22,19 +29,22 @@
     grid-column: 1/13;
 
     @include media-breakpoint-landscape-tablet() {
-      grid-column: 6/12;
+      grid-column: 3/11;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 4/10;
     }
   }
 
-  &__title {
-    text-align: center;
-
-    @include media-breakpoint-tablet() {
-      text-align: left;
-    }
+  &__img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
   }
 
   &__text {
+    color: rgba($main-color, 0.5);
     margin-bottom: 20px;
 
     @include media-breakpoint-tablet() {

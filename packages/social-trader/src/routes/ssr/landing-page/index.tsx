@@ -44,10 +44,9 @@ const IndexPage: NextPage<{
             <TradersContainer />
           </div>
         </section>
-        <section className="home__section">
+        <section className="home__section home__section--horizontal-padding">
           <div className="home__container">
-            <h2>Programs</h2>
-            <ProgramsContainer programs={programs} />
+            <ProgramsContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">

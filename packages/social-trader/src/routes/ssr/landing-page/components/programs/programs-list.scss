@@ -42,14 +42,14 @@ $scroll-thumb-color: $row-color;
   }
 
   @include media-breakpoint-tablet() {
-    padding-left: 150px;
+    padding-left: 85px;
     grid-column-gap: 40px;
   }
 
   @include media-breakpoint-landscape-tablet() {
-    grid-template-rows: repeat(2, 1fr);
+    //grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-flow: row;
+    //grid-auto-flow: row;
     padding-left: 0;
     padding-right: 0;
     margin-right: 0;
