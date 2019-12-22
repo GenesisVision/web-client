@@ -65,10 +65,10 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 
 interface Props {
   detailsType: DETAILS_TYPE;
-  isOwnAsset: boolean;
   id: string;
   logo: string;
   title: string;
+  isOwnAsset?: boolean;
   personalDetails?: PersonalDetailsType;
   color?: string;
   currency?: CurrencyEnum;

@@ -74,7 +74,7 @@ const _DetailsDescription: React.FC<Props> = ({
 interface Props {
   detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
-  isOwnAsset: boolean;
+  isOwnAsset?: boolean;
   id: string;
   logo: string;
   title: string;
