@@ -20,6 +20,15 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     padding: 0;
   }
 
+  &__section {
+    margin-bottom: $padding-xsmall;
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0;
+    }
+  }
+
   &__main {
     display: flex;
     flex-wrap: wrap;

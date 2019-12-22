@@ -34,7 +34,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   Controls
 }) => {
   return (
-    <div className="details__section">
+    <div className="details-description__section">
       <DetailsDescription
         descriptionTitle={descriptionTitle}
         detailsType={detailsType}
