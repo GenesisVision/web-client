@@ -1,5 +1,3 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";

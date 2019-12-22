@@ -1,4 +1,3 @@
-import "components/details/details.scss";
 import "./asset-settings.scss";
 
 import Page from "components/page/page";

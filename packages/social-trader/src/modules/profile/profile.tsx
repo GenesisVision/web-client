@@ -1,4 +1,3 @@
-import "components/details/details.scss";
 import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 

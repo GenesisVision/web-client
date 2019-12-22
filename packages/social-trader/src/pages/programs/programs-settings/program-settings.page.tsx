@@ -1,5 +1,3 @@
-import "components/details/details.scss";
-
 import { IImageValue } from "components/form/input-image/input-image";
 import { TradesDelay } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";

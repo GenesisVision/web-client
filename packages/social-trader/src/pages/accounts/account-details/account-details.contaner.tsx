@@ -1,5 +1,3 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
