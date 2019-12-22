@@ -14,6 +14,7 @@ import { CurrencyEnum } from "utils/types";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
+  descriptionTitle,
   detailsType,
   personalDetails,
   isOwnAsset,
@@ -49,6 +50,7 @@ const _DetailsDescription: React.FC<Props> = ({
         currency={currency}
       />
       <DetailsInfo
+        descriptionTitle={descriptionTitle}
         title={title}
         subtitleUrl={
           subtitleUrl ? managerToPathCreator(subtitleUrl, title) : undefined
@@ -74,6 +76,7 @@ const _DetailsDescription: React.FC<Props> = ({
 };
 
 interface Props {
+  descriptionTitle?: string;
   detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
   isOwnAsset?: boolean;
