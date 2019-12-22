@@ -1,5 +1,3 @@
-import "./download-button.scss";
-
 import DownloadButton from "components/download-button/download-button";
 import { DateRangeFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import * as React from "react";
