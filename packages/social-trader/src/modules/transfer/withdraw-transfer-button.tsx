@@ -27,7 +27,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
 interface Props {
   currentItem: WalletItemType;
   onApply?: VoidFunction;
-  accountType: PrivateTradingAccountType;
+  accountType?: PrivateTradingAccountType;
 }
 
 export const WithdrawTransferButton = React.memo(_WithdrawTransferButton);

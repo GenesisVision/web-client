@@ -29,7 +29,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
 interface Props {
   currentItem: WalletItemType;
   onApply?: VoidFunction;
-  accountType: PrivateTradingAccountType;
+  accountType?: PrivateTradingAccountType;
 }
 
 export const DepositTransferButton = React.memo(_DepositTransferButton);
