@@ -1,9 +1,8 @@
 import "./wallet-balance/wallet-balance.scss";
 
-import * as faker from "faker";
 import { WalletData, WalletSummary } from "gv-api-web";
 import * as React from "react";
-import { getRandomInteger } from "utils/helpers";
+import { getRandomInteger, getRandomWord } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 export const walletDataCreator = (): WalletData => ({
@@ -13,13 +12,13 @@ export const walletDataCreator = (): WalletData => ({
   tradingCcy: getRandomInteger(1, 1000),
   pendingCcy: getRandomInteger(1, 1000),
   totalCcy: getRandomInteger(1, 1000),
-  id: faker.lorem.word(),
-  title: faker.lorem.word(),
-  logo: faker.lorem.word(),
+  id: getRandomWord(),
+  title: getRandomWord(),
+  logo: getRandomWord(),
   isDepositEnabled: false,
   isWithdrawalEnabled: false,
   withdrawalCommission: getRandomInteger(1, 1000),
-  depositAddress: faker.lorem.word(),
+  depositAddress: getRandomWord(),
   currency: "GVT" as CurrencyEnum,
   available: getRandomInteger(1, 1000),
   invested: getRandomInteger(1, 1000),
