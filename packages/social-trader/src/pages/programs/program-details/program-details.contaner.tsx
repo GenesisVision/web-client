@@ -74,10 +74,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
-    periodHistory: {
-      dataSelector: periodHistoryTableSelector,
-      getItems: getPeriodHistory
-    },
+    periodHistory: programDetails
+      ? {
+          dataSelector: periodHistoryTableSelector,
+          getItems: getPeriodHistory
+        }
+      : undefined,
     subscriptions: {
       dataSelector: subscriptionsTableSelector,
       getItems: getSubscriptions
