@@ -1,3 +1,5 @@
+import "./investment-limits-popover.scss";
+
 import GVButton from "components/gv-button";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { LevelInfo } from "gv-api-web";
