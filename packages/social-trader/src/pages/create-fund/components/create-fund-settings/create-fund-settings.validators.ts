@@ -12,7 +12,6 @@ import {
 import { formatCurrencyValue } from "utils/formatter";
 import { array, lazy, number, object } from "yup";
 
-import { FUND_CURRENCY } from "../../create-fund.constants";
 import {
   CREATE_FUND_FIELDS,
   ICreateFundSettingsFormValues,
@@ -20,16 +19,20 @@ import {
 } from "./create-fund-settings";
 
 const createFundSettingsValidationSchema = ({
+  wallets,
   t,
   data: { maxExitFee, maxEntryFee, minDeposit }
 }: ICreateFundSettingsProps & WithTranslation) =>
   lazy<ICreateFundSettingsFormValues>(values => {
+    const wallet = wallets.find(
+      ({ id }) => id === values[CREATE_FUND_FIELDS.depositWalletId]
+    )!;
     const minDepositInCur = convertToCurrency(
       minDeposit,
       values[CREATE_FUND_FIELDS.rate]
     );
     const minDepositInCurText = parseFloat(
-      formatCurrencyValue(minDepositInCur, FUND_CURRENCY)
+      formatCurrencyValue(minDepositInCur, wallet.currency)
     );
     return object<ICreateFundSettingsFormValues>().shape({
       [CREATE_FUND_FIELDS.depositAmount]: number()
