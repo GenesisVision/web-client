@@ -38,7 +38,7 @@ const createFundSettingsValidationSchema = ({
       [CREATE_FUND_FIELDS.depositAmount]: number()
         .required(t("create-program-page.settings.validation.amount-required"))
         .min(
-          minDepositInCur,
+          minDepositInCurText,
           t("create-program-page.settings.validation.amount-is-zero", {
             min: minDepositInCurText
           })
