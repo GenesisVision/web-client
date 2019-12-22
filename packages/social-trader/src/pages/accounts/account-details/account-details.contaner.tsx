@@ -11,6 +11,7 @@ import {
   getOpenPositions,
   getTrades
 } from "pages/accounts/account-details/services/account-details.service";
+import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { useCallback } from "react";
@@ -53,7 +54,8 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         Controls={() =>
           description.ownerActions.canTransferMoney ? (
             <InvestmentAccountControls
-              account={description}
+              transferableItem={mapProgramFollowToTransferItemType(description)}
+              accountType={description.tradingAccountInfo.type}
               onApply={handleDispatchDescription}
             />
           ) : null
