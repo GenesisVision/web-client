@@ -17,7 +17,7 @@ const _DetailsInfo: React.FC<Props> = ({
   children
 }) => {
   return (
-    <div className="asset-details-description__info">
+    <div className="details-description__info">
       <h1 className="title-small-padding">{title}</h1>
       {to && username && <DetailsManager to={to} username={username} />}
       {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}

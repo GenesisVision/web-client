@@ -29,7 +29,7 @@ const _DetailsDescription: React.FC<Props> = ({
   settingsUrl
 }) => {
   return (
-    <div className="asset-details-description__main">
+    <div className="details-description__main">
       <DetailsLimitsAvatar
         logo={logo}
         level={programDetails ? programDetails.level : undefined}
