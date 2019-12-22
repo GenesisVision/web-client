@@ -48,7 +48,7 @@ const _DetailsFavorite: React.FC<Props> = ({
 };
 
 interface Props {
-  asset: ASSET;
+  asset?: ASSET;
   id: string;
   isFavorite: boolean;
 }
