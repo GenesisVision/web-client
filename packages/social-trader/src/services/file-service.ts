@@ -29,13 +29,22 @@ const getDateFiltersForRequest = (
     SERVER_REQUEST_DATE_RANGE_MAX_FILTER_NAME
   )(dateRange);
 
-const getTradesExportFileUrl = (
+const getProgramTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
 ): string => {
   const dateFilter = getDateFiltersForQuery(dateRange);
   const queryString = "?" + qs.stringify(dateFilter);
   return `${process.env.REACT_APP_API_URL}/v1.0/programs/${id}/trades/export${queryString}`;
+};
+
+const getAccountTradesExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType
+): string => {
+  const dateFilter = getDateFiltersForQuery(dateRange);
+  const queryString = "?" + qs.stringify(dateFilter);
+  return `${process.env.REACT_APP_API_URL}/v1.0/tradingaccount/${id}/trades/export${queryString}`;
 };
 
 const getPeriodExportFileUrl = (
@@ -82,8 +91,9 @@ const uploadDocument = (
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
 const filesService = {
+  getAccountTradesExportFileUrl,
   getReferralHistoryFile,
-  getTradesExportFileUrl,
+  getProgramTradesExportFileUrl,
   getStatisticExportFile,
   getPeriodExportFileUrl,
   getFileUrl,

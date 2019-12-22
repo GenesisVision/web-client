@@ -14,13 +14,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import filesService from "services/file-service";
+import { CREATE_ASSET } from "shared/constants/constants";
 
-import { tradesSelector } from "../../reducers/program-history.reducer";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  assetType = CREATE_ASSET.PROGRAM,
   haveDelay,
   getItems,
   dataSelector,
@@ -34,7 +35,10 @@ const _ProgramTrades: React.FC<Props> = ({
     itemsData: { data }
   } = useSelector(dataSelector);
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
-
+  const getExportFileUrlMethod =
+    assetType === CREATE_ASSET.PROGRAM
+      ? filesService.getProgramTradesExportFileUrl
+      : filesService.getAccountTradesExportFileUrl;
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
@@ -44,7 +48,7 @@ const _ProgramTrades: React.FC<Props> = ({
             <DownloadButtonToolbar
               filtering={filtering!.dateRange}
               programId={programId}
-              getExportFileUrl={filesService.getTradesExportFileUrl}
+              getExportFileUrl={getExportFileUrlMethod}
             />
           </div>
         </div>
@@ -81,6 +85,7 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  assetType?: CREATE_ASSET;
   haveDelay: boolean;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;
