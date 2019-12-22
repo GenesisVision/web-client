@@ -26,7 +26,11 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
   currency
 }) => {
   return (
-    <TableCardRow center={!canWithdraw || !canInvest}>
+    <TableCardRow
+      center={
+        (!canWithdraw || !canInvest) && !(canTransfer && transferableItem)
+      }
+    >
       {canInvest && (
         <DepositButton
           title={title}
