@@ -7,6 +7,7 @@ import { getRandomInteger } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 export const walletDataCreator = (): WalletData => ({
+  depositUrlCoindirect: "",
   availableCcy: getRandomInteger(1, 1000),
   investedCcy: getRandomInteger(1, 1000),
   tradingCcy: getRandomInteger(1, 1000),
