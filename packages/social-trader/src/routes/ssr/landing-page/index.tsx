@@ -7,17 +7,18 @@ import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
 import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
+import Layout from "routes/ssr/landing-page/layouts/_layout";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
 import programsApi from "services/api-client/programs-api";
 import { useTranslation } from "shared/i18n";
 
-import Layout from "./layouts/_layout";
-
-const IndexPage: NextPage = () => {
-  const { t } = useTranslation();
-  // const title = t("funds-page.title");
+const IndexPage: NextPage<{
+  programsData: ItemsViewModelProgramDetailsListItem;
+}> = ({ programsData }) => {
+  const programs = programsData.items;
   return (
     <Layout title="Genesis Vision">
       <main className="home">
@@ -46,6 +47,7 @@ const IndexPage: NextPage = () => {
         <section className="home__section">
           <div className="home__container">
             <h2>Programs</h2>
+            <ProgramsContainer programs={programs} />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">
@@ -86,18 +88,18 @@ const IndexPage: NextPage = () => {
 
 export default IndexPage;
 
-// IndexPage.getInitialProps = async () => {
-//   try {
-//     const programs = await programsApi.getPrograms({
-//       skip: 0,
-//       take: 12
-//     });
-//     return { programs };
-//   } catch (e) {
-//     const programs = {
-//       total: 0,
-//       items: []
-//     };
-//     return { programs };
-//   }
-// };
+IndexPage.getInitialProps = async () => {
+  try {
+    const programsData = await programsApi.getPrograms({
+      skip: 0,
+      take: 12
+    });
+    return { programsData };
+  } catch (e) {
+    const programsData = {
+      total: 0,
+      items: []
+    };
+    return { programsData };
+  }
+};
