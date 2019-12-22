@@ -22,8 +22,8 @@ const _DetailsDescription: React.FC<Props> = ({
   title,
   color,
   currency,
-  ownerUrl,
-  username,
+  subtitleUrl,
+  subtitle,
   socialLinks,
   programDetails,
   asset,
@@ -50,8 +50,10 @@ const _DetailsDescription: React.FC<Props> = ({
       />
       <DetailsInfo
         title={title}
-        to={ownerUrl ? managerToPathCreator(ownerUrl, title) : undefined}
-        username={username}
+        subtitleUrl={
+          subtitleUrl ? managerToPathCreator(subtitleUrl, title) : undefined
+        }
+        subtitle={subtitle}
         socialLinks={socialLinks}
         description={description}
       >
@@ -80,8 +82,8 @@ interface Props {
   title: string;
   color?: string;
   currency?: CurrencyEnum;
-  ownerUrl?: string;
-  username?: string;
+  subtitleUrl?: string;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
   asset?: ASSET;

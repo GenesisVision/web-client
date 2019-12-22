@@ -5,13 +5,13 @@ import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
-import { DetailsManager } from "./details-manager.block";
 import { DetailsStrategy } from "./details-strategy.block";
+import { DetailsSubtitle } from "./details-subtitle.block";
 
 const _DetailsInfo: React.FC<Props> = ({
   title,
-  to,
-  username,
+  subtitleUrl,
+  subtitle,
   socialLinks,
   description,
   children
@@ -29,8 +29,8 @@ const _DetailsInfo: React.FC<Props> = ({
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  to?: ToType;
-  username?: string;
+  subtitleUrl?: ToType;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   description?: string;
 }

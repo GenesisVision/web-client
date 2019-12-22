@@ -20,9 +20,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   logo,
   color,
   currency,
-  ownerUrl,
+  subtitleUrl,
   socialLinks,
-  username,
+  subtitle,
   asset,
   notificationsUrl,
   settingsUrl,
@@ -33,7 +33,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   Controls
 }) => {
   return (
-    <div className="details__section asset-details-description">
+    <div className="details__section">
       <DetailsDescription
         detailsType={detailsType}
         personalDetails={personalDetails}
@@ -43,9 +43,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         logo={logo}
         color={color}
         currency={currency}
-        ownerUrl={ownerUrl}
+        subtitleUrl={subtitleUrl}
         socialLinks={socialLinks}
-        username={username}
+        subtitle={subtitle}
         asset={asset}
         programDetails={programDetails}
         description={description}
@@ -72,8 +72,8 @@ interface Props {
   personalDetails?: PersonalDetailsType;
   color?: string;
   currency?: CurrencyEnum;
-  ownerUrl?: string;
-  username?: string;
+  subtitleUrl?: string;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
   asset?: ASSET;

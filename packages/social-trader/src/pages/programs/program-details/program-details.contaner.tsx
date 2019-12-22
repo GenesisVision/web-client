@@ -96,9 +96,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         logo={logo}
         title={title}
         id={id}
-        username={username}
+        subtitle={username}
         socialLinks={socialLinks}
-        ownerUrl={ownerUrl}
+        subtitleUrl={ownerUrl}
         currency={currency}
         color={color}
         asset={assetType}

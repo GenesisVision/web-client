@@ -45,9 +45,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         title={description.publicInfo.title}
         logo={description.publicInfo.logo}
         color={description.publicInfo.color}
-        ownerUrl={description.owner.url}
+        subtitleUrl={description.owner.url}
         socialLinks={description.owner.socialLinks}
-        username={description.owner.username}
+        subtitle={description.owner.username}
         asset={ASSET.FUND}
         description={description.publicInfo.description}
         notificationsUrl={createFundNotificationsToUrl(
