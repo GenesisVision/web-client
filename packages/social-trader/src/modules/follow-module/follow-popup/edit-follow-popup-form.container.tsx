@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import { updateAttachToSignal } from "../services/follow-module-service";
+import { getUpdateAttachMethod } from "../services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
 
@@ -26,7 +26,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
     subscribeFixedCurrenciesSelector
   );
   const { sendRequest: submitChanges } = useApiRequest({
-    request: updateAttachToSignal,
+    request: getUpdateAttachMethod(signalSubscription.isExternal),
     successMessage: "follow-program.edit-success-alert-message",
     middleware: [onApply, onClose]
   });

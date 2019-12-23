@@ -1,58 +1,26 @@
 import "./details-description.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import InvestmentLimitsPopover from "components/details/details-description-section/investment-limits-popover";
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
-import useAnchor from "hooks/anchor.hook";
+import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { DetailsAssetAvatar } from "components/details/details-description-section/details-description/details-asset-avatar";
+import { DETAILS_TYPE } from "components/details/details.types";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
 
-const _DetailsLimitsAvatar: React.FC<Props> = ({
-  logo,
-  level,
-  levelProgress,
-  title,
-  color,
-  totalAvailableInvestment,
-  currency
-}) => {
-  const { anchor, setAnchor, clearAnchor } = useAnchor();
+const _DetailsLimitsAvatar: React.FC<Props> = props => {
+  const { detailsType, logo, title } = props;
   return (
     <div className="details-description__avatar">
-      <AssetAvatar
-        url={logo}
-        level={level}
-        levelProgress={levelProgress}
-        alt={title}
-        size="big"
-        color={color}
-        onClickLevel={setAnchor}
-      />
-      {level !== undefined && (
-        <Popover
-          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          anchorEl={anchor}
-          noPadding
-          onClose={clearAnchor}
-        >
-          <InvestmentLimitsPopover
-            limit={totalAvailableInvestment!}
-            currency={currency!}
-            level={level}
-            canLevelUp={false}
-            closePopover={clearAnchor}
-          />
-        </Popover>
+      {detailsType === DETAILS_TYPE.ASSET ? (
+        <DetailsAssetAvatar {...props} />
+      ) : (
+        <ProfileAvatar big url={logo} alt={title} />
       )}
     </div>
   );
 };
 
 interface Props {
+  detailsType: DETAILS_TYPE;
   logo: string;
   title: string;
   color?: string;

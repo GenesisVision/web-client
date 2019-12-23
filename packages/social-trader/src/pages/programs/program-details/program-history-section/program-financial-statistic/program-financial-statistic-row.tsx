@@ -15,20 +15,18 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
   currency,
   showCommissionRebateSometime
 }) => {
-  const { profit, balance, successFee, entryFee } = period.managerStatistic;
+  const {
+    managerStatistic: { profit, balance, successFee, entryFee },
+    managerDeposit,
+    managerWithdraw,
+    managerCommissionRebate
+  } = period;
 
-  const deposit = 0;
-  const withdraw = 0;
-  const commissionRebate = 0;
   return (
     <TableRow stripy>
-      <TableCell className="program-financial-statistic__cell">
-        {period.number}
-      </TableCell>
-      <TableCell className="program-financial-statistic__cell">
-        {formatDate(period.dateFrom)}
-      </TableCell>
-      <TableCell className="program-financial-statistic__cell">
+      <TableCell>{period.number}</TableCell>
+      <TableCell>{formatDate(period.dateFrom)}</TableCell>
+      <TableCell>
         <NumberFormat
           value={formatCurrencyValue(balance, currency)}
           displayType="text"
@@ -36,7 +34,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
           suffix={` ${currency}`}
         />
       </TableCell>
-      <TableCell className="program-financial-statistic__cell">
+      <TableCell>
         <Profitability value={profit} prefix={PROFITABILITY_PREFIX.SIGN}>
           <NumberFormat
             value={formatCurrencyValue(profit, currency)}
@@ -47,28 +45,28 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
+      <TableCell className="program-financial-statistic__cell--sm-size">
         <NumberFormat
           value={successFee}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
+      <TableCell className="program-financial-statistic__cell--sm-size">
         <NumberFormat
           value={entryFee}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
-        {withdraw ? (
+      <TableCell className="program-financial-statistic__cell--sm-size">
+        {managerWithdraw ? (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
-            value={`-${formatCurrencyValue(withdraw, currency)}`}
+            value={`-${formatCurrencyValue(managerWithdraw, currency)}`}
           >
             <NumberFormat
-              value={formatCurrencyValue(withdraw, currency)}
+              value={formatCurrencyValue(managerWithdraw, currency)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
@@ -77,10 +75,10 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         ) : (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
-            value={formatCurrencyValue(deposit, currency)}
+            value={formatCurrencyValue(managerDeposit, currency)}
           >
             <NumberFormat
-              value={formatCurrencyValue(deposit, currency)}
+              value={formatCurrencyValue(managerDeposit, currency)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
@@ -89,9 +87,9 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         )}
       </TableCell>
       {showCommissionRebateSometime && (
-        <TableCell className="program-financial-statistic__cell program-financial-statistic__cell--sm-size">
+        <TableCell className="program-financial-statistic__cell--sm-size">
           <NumberFormat
-            value={formatCurrencyValue(commissionRebate, currency)}
+            value={formatCurrencyValue(managerCommissionRebate, currency)}
             displayType="text"
             suffix={` ${currency}`}
           />

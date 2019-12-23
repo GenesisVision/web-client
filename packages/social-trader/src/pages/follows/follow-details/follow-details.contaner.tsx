@@ -1,12 +1,9 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import { financialStatisticTableSelector } from "pages/programs/program-details/reducers/program-history.reducer";
 import {

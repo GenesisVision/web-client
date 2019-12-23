@@ -12,6 +12,7 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import {
@@ -28,6 +29,8 @@ import { VoidFuncType } from "utils/types";
 import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCard: React.FC<Props> = ({
+  showWithdraw = true,
+  showInvest = true,
   showActions = true,
   asset,
   updateItems,
@@ -145,11 +148,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        accountType={asset.assetTypeExt}
+        canTransfer={asset.actions.canTransferMoney}
+        transferableItem={mapAccountToTransferItemType(asset)}
         title={asset.accountInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
-        canWithdraw={asset.actions.canAddRequestWithdraw}
-        canInvest={asset.actions.canAddRequestInvest}
+        canWithdraw={asset.actions.canAddRequestWithdraw && showWithdraw}
+        canInvest={asset.actions.canAddRequestInvest && showInvest}
         broker={asset.broker && asset.broker.type}
         type={asset.assetType as ASSET}
         id={asset.id}
@@ -160,6 +166,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
 };
 
 interface Props {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
   showActions?: boolean;
   ownAsset?: boolean;
   updateItems: VoidFuncType;

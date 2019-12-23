@@ -6,8 +6,9 @@ export interface IFollowTop {
   step: string;
 }
 
-const FollowTop: React.FC<IFollowTop & WithTranslation> = ({ t, step }) => (
+const _FollowTop: React.FC<IFollowTop & WithTranslation> = ({ t, step }) => (
   <DialogTop title={t(`follow-program.${step}.title`)} />
 );
 
-export default translate()(React.memo(FollowTop));
+const FollowTop = translate()(React.memo(_FollowTop));
+export default FollowTop;

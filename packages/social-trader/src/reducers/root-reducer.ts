@@ -8,10 +8,6 @@ import notificationsReducer, {
 import programsRatingReducer, {
   ProgramsRatingState
 } from "components/programs-rating/reducers/programs-rating.reducers";
-import {
-  walletReducer,
-  WalletState
-} from "components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
@@ -49,6 +45,10 @@ import fundDetailsReducer, {
 import programDetailsReducer, {
   ProgramDetailsState
 } from "pages/programs/program-details/reducers/program-details.reducer";
+import {
+  walletReducer,
+  WalletState
+} from "pages/wallet/reducers/wallet.reducers";
 import accountSettingsReducer, {
   AccountSettingsState
 } from "reducers/account-settings-reducer";
@@ -59,9 +59,13 @@ import emailPendingReducer, {
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
 import profileReducer, { ProfileState } from "reducers/profile-reducer";
+import tablesViewReducer, {
+  TablesViewState
+} from "reducers/tables-view-reducer";
 import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
+  tablesView: tablesViewReducer,
   dashboard: dashboardReducer,
   profile: profileReducer,
   accountDetails: accountDetailsReducer,
@@ -94,6 +98,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  tablesView: TablesViewState;
   dashboard: DashboardState;
   profile: ProfileState;
   accountDetails: AccountDetailsState;

@@ -7,7 +7,7 @@ import Page from "components/page/page";
 import PublicSelect from "components/profile/settings/public-select/public-select";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
 import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";
-import DashboardInvestingMostProfitable from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable";
+import DashboardInvestingMostProfitableContainer from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable.container";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
 import { PublicPageLink } from "pages/dashboard/components/dashboard-investing/public-page-link";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
@@ -26,7 +26,9 @@ const _InvestmentsPage: React.FC = () => {
         <div>
           <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
             <div className="dashboard__public-page-block">
-              <PublicSelect />
+              <div className="dashboard__public-page-select">
+                <PublicSelect />
+              </div>
               <PublicPageLink />
             </div>
           </DetailsBlock>
@@ -38,7 +40,7 @@ const _InvestmentsPage: React.FC = () => {
           <DashboardInvestingPrograms />
         </div>
         <div>
-          <DashboardInvestingMostProfitable />
+          <DashboardInvestingMostProfitableContainer />
         </div>
       </Page>
     </TitleContext.Provider>

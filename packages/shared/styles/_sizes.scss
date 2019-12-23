@@ -34,6 +34,8 @@ $border-radius: 5px;
 $border-radius-middle: 8px;
 $btn-height: 50px;
 $btn-width: 149px;
+$btn-height-small: 30px;
+$btn-width-small: 100px;
 $icon-size: 29px;
 $avatar-size: 120px;
 $asset-height: 40px;
@@ -73,6 +75,26 @@ $icon-size-mobile: $icon-size/$divider-text;
 $avatar-size-mobile: $avatar-size/$divider-title;
 
 //mixins
+@mixin height($height) {
+  $divider: $divider-text;
+
+  height: $height/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    height: $height;
+  }
+}
+
+@mixin width($width) {
+  $divider: $divider-text;
+
+  width: $width/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    width: $width;
+  }
+}
+
 @mixin font-size($font-size) {
   $divider: $divider-text;
 

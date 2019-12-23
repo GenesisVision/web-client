@@ -1,4 +1,5 @@
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint";
 
 .dashboard {
   &__public-page-block {
@@ -6,11 +7,18 @@
     display: flex;
     align-items: center;
   }
+  &__public-page-select {
+    padding-right: $padding-xsmall;
+  }
   &__statistic-block {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     & > div {
-      width: 50%;
+      width: 100%;
+      @include media-breakpoint-landscape-phone() {
+        width: calc(50% - #{$padding-xsmall}/ 2);
+      }
     }
   }
 }

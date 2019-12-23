@@ -1,12 +1,13 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
+import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
+import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
+import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
@@ -76,10 +77,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
-    periodHistory: {
-      dataSelector: periodHistoryTableSelector,
-      getItems: getPeriodHistory
-    },
+    periodHistory: programDetails
+      ? {
+          dataSelector: periodHistoryTableSelector,
+          getItems: getPeriodHistory
+        }
+      : undefined,
     subscriptions: {
       dataSelector: subscriptionsTableSelector,
       getItems: getSubscriptions
@@ -95,14 +98,15 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection
+        detailsType={DETAILS_TYPE.ASSET}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         logo={logo}
         title={title}
         id={id}
-        username={username}
+        subtitle={username}
         socialLinks={socialLinks}
-        ownerUrl={ownerUrl}
+        subtitleUrl={ownerUrl}
         currency={currency}
         color={color}
         asset={assetType}
@@ -125,6 +129,15 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <>
+            {followDetails && (
+              <InvestmentAccountControls
+                transferableItem={mapProgramFollowToTransferItemType(
+                  description
+                )}
+                accountType={description.publicInfo.typeExt}
+                onApply={handleDispatchDescription}
+              />
+            )}
             {programDetails && (
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
@@ -135,7 +148,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
               />
             )}
             {followDetails && (
-              <FollowControlsContainer description={description} />
+              <FollowControls
+                onApply={handleDispatchDescription}
+                description={description}
+              />
             )}
           </>
         )}

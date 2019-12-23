@@ -1,41 +1,45 @@
-import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { BrokerTradeServerType } from "gv-api-web";
+import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import { dispatchFollowDescription } from "pages/follows/follow-details/services/follow-details.service";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
+import { useDispatch } from "react-redux";
 import { CurrencyEnum } from "utils/types";
 
 const _FollowButton: React.FC<Props> = ({
+  guestActions: {
+    canSubscribeToExternalSignalCommonAccount,
+    canSubscribeToExternalSignalPrivateAccount,
+    canSubscribeToInternalSignal
+  } = {},
   onApply,
   leverage,
   brokerId,
   isExternal,
   broker,
   id,
-  title,
   currency
 }) => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const [isOpenFollow, setIsOpenFollow, setIsCloseFollow] = useIsOpen();
-  const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
     onApply && onApply();
   }, [id]);
+  const canFollow =
+    canSubscribeToExternalSignalCommonAccount ||
+    canSubscribeToExternalSignalPrivateAccount ||
+    canSubscribeToInternalSignal;
   return (
     <>
       <GVButton
+        disabled={!canFollow}
         size={GV_BTN_SIZE.BIG}
-        onClick={isAuthenticated ? setIsOpenFollow : setIsOpenUnAuth}
+        onClick={setIsOpenFollow}
       >
         {t("program-details-page.description.follow-trade")}
       </GVButton>
@@ -50,27 +54,18 @@ const _FollowButton: React.FC<Props> = ({
         onClose={setIsCloseFollow}
         onApply={dispatchDescription}
       />
-      <InvestmentUnauthPopup
-        header={t("program-details-page.description.follow-trade")}
-        message={t("program-details-page.description.unauth-follow-popup")}
-        asset={ASSET.PROGRAM}
-        title={title}
-        currency={currency}
-        open={isOpenUnAuth}
-        onClose={setIsCloseUnAuth}
-      />
     </>
   );
 };
 
 interface Props {
+  guestActions?: AssetGuestActions;
   onApply?: VoidFunction;
   leverage: number;
   isExternal: boolean;
   brokerId: string;
   broker: BrokerTradeServerType;
   id: string;
-  title: string;
   currency?: CurrencyEnum;
 }
 

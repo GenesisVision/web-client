@@ -1,9 +1,9 @@
+import DetailsBlock from "components/details/details-block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
 import React from "react";
@@ -45,12 +45,12 @@ const ProgramsPage: NextPage = () => {
         assetsFacets={ASSETS_FACETS.PROGRAMS}
         composeFacetUrl={composeProgramFacetUrl}
       />
-      <Surface className="programs-table-container" key={"table"}>
+      <DetailsBlock table key={"table"}>
         <ProgramsTableSSR
           showSwitchView
           title={t("programs-page.programs-table")}
         />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

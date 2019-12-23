@@ -1,6 +1,7 @@
 import "./table.scss";
 import "./table-cards.scss";
 
+import { updateGlobalTableViewAction } from "actions/tables-view-actions";
 import classNames from "classnames";
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
 import TableFooter, {
@@ -12,16 +13,21 @@ import TableHeader, {
 import TableToolbar, {
   ITableToolbarExternalProps
 } from "components/table/components/table-toolbar";
-import { LIST_VIEW, PROGRAMS_VIEW } from "components/table/table.constants";
+import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useEffect, useState } from "react";
-import { getCookie, setCookie } from "shared/utils/cookie";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GLOBAL_TABLE_VIEW,
+  globalTableViewSelector
+} from "reducers/tables-view-reducer";
+import { setCookie } from "shared/utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";
 import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
-  outerView = LIST_VIEW.TABLE,
+  outerView,
   loaderData,
   exportButtonToolbarRender,
   updateItems,
@@ -49,17 +55,18 @@ const _Table: React.FC<ITableProps> = ({
   showSwitchView,
   hideToolbar
 }) => {
-  const [view, setView] = useState<LIST_VIEW>(outerView);
+  const dispatch = useDispatch();
+  const tableView = useSelector(globalTableViewSelector);
   const isViewSwitchEnabled =
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  useEffect(() => {
-    if (isViewSwitchEnabled)
-      setView((getCookie(PROGRAMS_VIEW) as LIST_VIEW) || LIST_VIEW.TABLE);
-  }, [isViewSwitchEnabled]);
+  const [view, setView] = useState<LIST_VIEW>(
+    isViewSwitchEnabled ? tableView : outerView || LIST_VIEW.TABLE
+  );
   const changeView = useCallback((view: LIST_VIEW) => {
-    setCookie(PROGRAMS_VIEW, view);
+    dispatch(updateGlobalTableViewAction(view));
+    setCookie(GLOBAL_TABLE_VIEW, view);
     setView(view);
   }, []);
   if (!items && emptyMessage) return emptyMessage;
@@ -98,7 +105,7 @@ const _Table: React.FC<ITableProps> = ({
               items={items}
               className="table-cards"
               tag="div"
-              view={LIST_VIEW.CARDS}
+              view={view}
               renderBodyItem={renderBodyItem!}
             />
           </div>
@@ -117,7 +124,7 @@ const _Table: React.FC<ITableProps> = ({
               items={items}
               className="table__body"
               tag="tbody"
-              view={LIST_VIEW.TABLE}
+              view={view}
               updateRow={updateRow}
               updateItems={updateItems}
               renderBodyItem={renderBodyItem!}

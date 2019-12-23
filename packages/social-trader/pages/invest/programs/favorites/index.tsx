@@ -1,4 +1,5 @@
 import React from "react";
-import { Programs } from "routes/ssr/programs";
+
+import Programs from "../index";
 
 export default Programs;

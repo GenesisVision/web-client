@@ -1,13 +1,13 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { updateWalletTimestampAction } from "components/wallet/actions/wallet.actions";
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import { InternalTransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import {
   getTransferFormLoaderData,
   TransferFormValues
 } from "modules/transfer/components/transfer-form.helpers";
+import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -63,7 +63,7 @@ const _TransferContainer: React.FC<Props> = ({
     destinationType === "Wallet" ? wallets : tradingAccounts;
   useEffect(() => {
     if (destinationType !== "Wallet" || sourceType !== "Wallet")
-      getTradingAccounts();
+      getTradingAccounts(currency);
   }, []);
   useEffect(() => {
     if (!!sourceItems && !!destinationItems)

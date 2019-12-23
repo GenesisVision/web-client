@@ -13,7 +13,7 @@ import {
   WithBlurLoaderProps
 } from "decorators/with-blur-loader";
 import { InjectedFormikProps, withFormik } from "formik";
-import { FundCreateAssetPlatformInfo } from "gv-api-web";
+import { FundCreateAssetPlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -155,6 +155,7 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
+  wallets: WalletData[];
   data: FundCreateAssetPlatformInfo;
   onSubmit: (
     values: ICreateFundSettingsFormValues,

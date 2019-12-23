@@ -10,18 +10,21 @@ import {
 } from "./create-account-settings";
 
 const createAccountSettingsValidationSchema = ({
-  t,
-  minimumDepositsAmount
+  broker,
+  t
 }: ICreateAccountSettingsProps & WithTranslation) => {
   return lazy<ICreateAccountSettingsFormValues>(values => {
-    const minDeposit = parseFloat(
-      formatCurrencyValue(
-        convertToCurrency(
-          minimumDepositsAmount[values[CREATE_ACCOUNT_FIELDS.currency]],
-          values[CREATE_ACCOUNT_FIELDS.rate] || 1
-        ),
-        values[CREATE_ACCOUNT_FIELDS.currency]
-      )
+    const currency = values[CREATE_ACCOUNT_FIELDS.currency];
+    const accountType = broker.accountTypes.find(
+      ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
+    )!;
+    const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
+    const minDeposit = convertToCurrency(
+      minimumDepositAmount,
+      values[CREATE_ACCOUNT_FIELDS.rate] || 1
+    );
+    const minDepositText = parseFloat(
+      formatCurrencyValue(minDeposit, currency)
     );
     return object<ICreateAccountSettingsFormValues>().shape({
       [CREATE_ACCOUNT_FIELDS.currency]: string().required(
@@ -33,9 +36,7 @@ const createAccountSettingsValidationSchema = ({
       [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string().required(
         t("create-program-page.settings.validation.account-type-required")
       ),
-      [CREATE_ACCOUNT_FIELDS.depositAmount]: values[
-        CREATE_ACCOUNT_FIELDS.currency
-      ]
+      [CREATE_ACCOUNT_FIELDS.depositAmount]: currency
         ? number()
             .required(
               t("create-program-page.settings.validation.amount-required")
@@ -43,7 +44,7 @@ const createAccountSettingsValidationSchema = ({
             .min(
               minDeposit,
               t("create-program-page.settings.validation.amount-is-zero", {
-                min: minDeposit
+                min: minDepositText
               })
             )
             .max(

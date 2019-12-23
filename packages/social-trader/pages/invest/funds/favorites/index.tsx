@@ -1,4 +1,5 @@
 import React from "react";
-import { FundsFavorites } from "routes/ssr/funds/favorites";
+
+import FundsFavorites from "../index";
 
 export default FundsFavorites;

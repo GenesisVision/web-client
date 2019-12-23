@@ -7,7 +7,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import { FollowChartStatistic } from "gv-api-web";
+import { ProgramChartStatistic } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -228,7 +228,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
 
 export interface IFollowStatisticData {
   statisticCurrency: CurrencyEnum;
-  statistic: FollowChartStatistic;
+  statistic: ProgramChartStatistic;
 }
 
 export interface IFollowDetailsStatisticsElementsProps {

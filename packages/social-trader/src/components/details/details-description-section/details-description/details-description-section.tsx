@@ -1,7 +1,10 @@
 import "components/details/details-description-section/details-description/details-description.scss";
 
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
-import { PersonalDetailsType } from "components/details/details.types";
+import {
+  DETAILS_TYPE,
+  PersonalDetailsType
+} from "components/details/details.types";
 import { ToType } from "components/link/link";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -9,6 +12,8 @@ import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  descriptionTitle,
+  detailsType,
   personalDetails,
   isOwnAsset,
   id,
@@ -16,9 +21,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   logo,
   color,
   currency,
-  ownerUrl,
+  subtitleUrl,
   socialLinks,
-  username,
+  subtitle,
   asset,
   notificationsUrl,
   settingsUrl,
@@ -29,8 +34,10 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   Controls
 }) => {
   return (
-    <div className="details__section asset-details-description">
+    <div className="details-description__section">
       <DetailsDescription
+        descriptionTitle={descriptionTitle}
+        detailsType={detailsType}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         id={id}
@@ -38,9 +45,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         logo={logo}
         color={color}
         currency={currency}
-        ownerUrl={ownerUrl}
+        subtitleUrl={subtitleUrl}
         socialLinks={socialLinks}
-        username={username}
+        subtitle={subtitle}
         asset={asset}
         programDetails={programDetails}
         description={description}
@@ -59,18 +66,20 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
 };
 
 interface Props {
-  personalDetails?: PersonalDetailsType;
-  isOwnAsset: boolean;
+  descriptionTitle?: string;
+  detailsType: DETAILS_TYPE;
   id: string;
   logo: string;
   title: string;
+  isOwnAsset?: boolean;
+  personalDetails?: PersonalDetailsType;
   color?: string;
   currency?: CurrencyEnum;
-  ownerUrl?: string;
-  username?: string;
+  subtitleUrl?: string;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
-  asset: ASSET;
+  asset?: ASSET;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
   description?: string;

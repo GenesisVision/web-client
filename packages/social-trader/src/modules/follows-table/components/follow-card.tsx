@@ -104,7 +104,6 @@ const _FollowCard: React.FC<Props> = ({
             onApply={onApply}
             id={follow.id}
             currency={follow.currency}
-            title={""}
             isExternal={follow.isExternal}
             broker={follow.brokerType}
             brokerId={follow.brokerId}

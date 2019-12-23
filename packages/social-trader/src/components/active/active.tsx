@@ -26,7 +26,7 @@ const _Active: React.FC<Props> = ({
         <CurrencyItem logo={logo} name={name} clickable={false} big />
       </div>
       <div className="active__block active__tags">
-        <TagItemList tags={tags} />
+        {tags && <TagItemList tags={tags} />}
       </div>
       <div className="active__block">
         <div className="active__title">{t("active.chart")}</div>
@@ -47,7 +47,7 @@ const _Active: React.FC<Props> = ({
         <div>{description}</div>
       </div>
       <div className="active__block">
-        <SocialLinksBlock socialLinks={socialLinks} />
+        {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
       </div>
     </div>
   );

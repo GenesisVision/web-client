@@ -4,16 +4,16 @@ import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
+import {
+  fetchWallets,
+  TWalltetsBaseData
+} from "pages/wallet/services/wallet.services";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
-import {
-  fetchWallets,
-  TWalltetsBaseData
-} from "../../wallet/services/wallet.services";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 import { TFees } from "./deposit.types";

@@ -1,4 +1,3 @@
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
 import {
   AmountWithCurrency,
   AttachToSignalProvider,
@@ -6,6 +5,7 @@ import {
 } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { useGetRate } from "hooks/get-rate.hook";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";

@@ -21,7 +21,7 @@ const _ToggleAssetFavoriteButton: React.FC<IToggleAssetFavoriteButtonProps> = ({
   onApply,
   id,
   isFavorite,
-  assetType
+  assetType = ASSET.PROGRAM
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const dispatchMiddleware = useToggleFavoriteDispatch();
@@ -64,7 +64,7 @@ export interface IToggleAssetFavoriteButtonProps {
   onApply?: VoidFunction;
   id: string;
   isFavorite: boolean;
-  assetType: ASSET;
+  assetType?: ASSET;
 }
 
 export const ToggleAssetFavoriteButton = React.memo(_ToggleAssetFavoriteButton);

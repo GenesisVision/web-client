@@ -55,6 +55,9 @@ const dateTo = (): string =>
     .startOf("minute")
     .toISOString();
 
+export const dateToInput = (date?: Date | number | string) =>
+  dayjs(date).format("YYYY-MM-DD");
+
 export const composeRequestValueFunc = (
   fromFilterName: string = SERVER_DATE_RANGE_MIN_FILTER_NAME,
   toFilterName: string = SERVER_DATE_RANGE_MAX_FILTER_NAME

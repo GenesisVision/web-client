@@ -1,10 +1,10 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import FormError from "components/form/form-error/form-error";
+import useApiRequest from "hooks/api-request.hook";
 import {
   fetchBaseWallets,
   TWalltetsBaseData
-} from "components/wallet/services/wallet.services";
-import useApiRequest from "hooks/api-request.hook";
+} from "pages/wallet/services/wallet.services";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";

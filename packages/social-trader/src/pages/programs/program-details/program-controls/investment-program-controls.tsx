@@ -16,6 +16,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   description,
   levelsParameters
 }) => {
+  const canInvest =
+    description.programDetails.personalDetails &&
+    description.programDetails.personalDetails.canInvest;
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -29,6 +32,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
+          disabled={!canInvest}
           title={description.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}

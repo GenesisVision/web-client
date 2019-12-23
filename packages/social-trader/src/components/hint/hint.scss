@@ -1,4 +1,5 @@
 .hint {
-  display: inline-flex;
-  cursor: help;
+  &__content {
+    cursor: help;
+  }
 }

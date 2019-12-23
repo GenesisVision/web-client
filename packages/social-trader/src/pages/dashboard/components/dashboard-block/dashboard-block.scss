@@ -4,7 +4,6 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    @include details-block-horizontal-paddings();
   }
 
   &__link {

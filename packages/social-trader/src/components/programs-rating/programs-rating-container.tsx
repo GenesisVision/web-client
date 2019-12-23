@@ -1,11 +1,11 @@
 import "components/programs/programs-facet/programs-facet.scss";
 
+import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
 import GVButton from "components/gv-button";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { CancelablePromise, LevelInfo } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
@@ -58,7 +58,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
           </GVButton>
         ))}
       </div>
-      <Surface className="programs-table-container">
+      <DetailsBlock table>
         <FacetContainer
           id={RATING_FACET_NAME}
           asset={FACET_ASSET.PROGRAMS}
@@ -71,7 +71,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
           )}
           getItems={getPrograms}
         />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

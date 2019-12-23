@@ -469,6 +469,9 @@
     "select-account": {
       "title": "Select account"
     },
+    "select-external-account": {
+      "title": "Select external account"
+    },
     "create-account": {
       "title": "Account creation",
       "available": "Available in wallet",
@@ -693,6 +696,15 @@
       }
     }
   },
+  "asset-details-page": {
+    "tooltip": {
+      "status": {
+        "follow": "",
+        "program": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "fund": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      }
+    }
+  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {
@@ -795,6 +807,18 @@
       }
     }
   },
+  "account-details-page": {
+    "subscriptions": {
+      "title": "Subscriptions",
+      "table": {
+        "provider": "Provider",
+        "profit": "Profit",
+        "subscription-date": "Subscription date",
+        "type": "Type",
+        "tolerance": "Tolerance"
+      }
+    }
+  },
   "follow-details-page": {
     "current-investment": {
       "title": "Subscription details",
@@ -857,9 +881,10 @@
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully",
-      "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
-      "unauth-follow-popup": "To Follow trades in the selected program please login as an investor or create a new investor account.",
-      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
+      "fund-unauth-popup": "You must be logged in to invest in a fund",
+      "program-unauth-popup": "You must be logged in to invest in a program",
+      "unauth-follow-popup": "You must be logged in to follow trades.",
+      "auth-manager-popup": "You must be logged in to invest in a program"
     },
     "statistics": {
       "subscribers": "Subscribers",
@@ -2642,8 +2667,13 @@
       "title": "In requests"
     },
     "trading": {
+      "tooltips": {
+        "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
+      },
       "asset-types": {
         "TradingAccount": "Trading account",
+        "SignalTradingAccount": "Trading account",
+        "ExternalSignalTradingAccount": "External trading account",
         "ExternalTradingAccount": "External trading account"
       },
       "subscribers-count": "Subs.",
@@ -2914,7 +2944,7 @@
         "stop-out-more-current": "Level can't be more than a current value",
         "amount-required": "Amount is required",
         "amount-is-large": "Amount must be available in Wallet",
-        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "amount-is-zero": "Amount must be greater {{min}}",
         "title-required": "Title is required",
         "title-is-long": "Title is too long",
         "title-is-short": "Title is too short",

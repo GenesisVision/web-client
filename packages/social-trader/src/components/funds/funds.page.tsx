@@ -1,8 +1,8 @@
+import DetailsBlock from "components/details/details-block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import FundsTableSSR from "modules/funds-table/components/funds-table/funds-table-ssr";
 import * as React from "react";
 import {
@@ -13,7 +13,6 @@ import {
 } from "routes/funds.routes";
 import { useTranslation } from "shared/i18n";
 import { composeFundFacetUrl } from "utils/compose-url";
-import { ORGANIZATION_SCHEMA } from "utils/seo";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 import NavigationTabs from "../navigation-tabs/navigation-tabs";
@@ -44,9 +43,9 @@ const FundsPage: React.FC = () => {
         composeFacetUrl={composeFundFacetUrl}
         fileRoute={FUNDS_FACET_FOLDER_ROUTE}
       />
-      <Surface className="funds-table-container">
+      <DetailsBlock table>
         <FundsTableSSR title={t("funds-page.all-funds")} showSwitchView />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

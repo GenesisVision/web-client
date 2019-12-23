@@ -45,8 +45,8 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
 };
 
 interface Props {
-  isOwnAsset: boolean;
-  asset: ASSET;
+  isOwnAsset?: boolean;
+  asset?: ASSET;
   personalDetails?: PersonalDetailsType;
   id: string;
   notificationsUrl?: ToType;

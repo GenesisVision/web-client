@@ -1,9 +1,10 @@
-import "./details.scss";
+import "./details.block.scss";
 
 import classNames from "classnames";
 import * as React from "react";
 
 const _DetailsBlock: React.FC<Props> = ({
+  row,
   horizontalPaddings,
   table,
   wide,
@@ -12,13 +13,14 @@ const _DetailsBlock: React.FC<Props> = ({
   type = DETAILS_BLOCK_TYPE.SOLID
 }) => (
   <div
-    className={classNames("details__block", className, {
-      "details__block--horizontal-paddings": !!horizontalPaddings,
-      "details__block--table": !!table,
-      "details__block--wide": !!wide,
-      "details__block--solid": type === DETAILS_BLOCK_TYPE.SOLID,
-      "details__block--bordered": type === DETAILS_BLOCK_TYPE.BORDERED,
-      "details__block--transparent": type === DETAILS_BLOCK_TYPE.TRANSPARENT
+    className={classNames("details-block", className, {
+      "details-block--row": row,
+      "details-block--horizontal-paddings": !!horizontalPaddings,
+      "details-block--table": !!table,
+      "details-block--wide": !!wide,
+      "details-block--solid": type === DETAILS_BLOCK_TYPE.SOLID,
+      "details-block--bordered": type === DETAILS_BLOCK_TYPE.BORDERED,
+      "details-block--transparent": type === DETAILS_BLOCK_TYPE.TRANSPARENT
     })}
   >
     {children}
@@ -32,6 +34,7 @@ export enum DETAILS_BLOCK_TYPE {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  row?: boolean;
   type?: DETAILS_BLOCK_TYPE;
   className?: string;
   wide?: boolean;

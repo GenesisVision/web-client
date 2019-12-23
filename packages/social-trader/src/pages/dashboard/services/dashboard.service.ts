@@ -7,7 +7,9 @@ import {
   DashboardTradingAsset,
   FollowDetailsListItem,
   InvestmentEventViewModels,
-  ItemsViewModelDashboardTradingAsset
+  ItemsViewModelDashboardTradingAsset,
+  PrivateTradingAccountFull,
+  ProgramFollowDetailsFull
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { TransferItemType } from "modules/transfer/transfer.types";
@@ -116,7 +118,11 @@ export const getRecommendations = ({
   currency: CurrencyEnum;
 }): CancelablePromise<FollowDetailsListItem[]> =>
   dashboardApi
-    .getRecommendations(authService.getAuthArg(), { currency, take: 15 })
+    .getRecommendations(authService.getAuthArg(), {
+      onlyFollows: true,
+      currency,
+      take: 15
+    })
     .then(({ follows }) => follows)
     .then(({ items }) => items);
 
@@ -186,6 +192,30 @@ export const mapAccountToTransferItemType = ({
   id,
   accountInfo: { title, currency, balance }
 }: DashboardTradingAsset): TransferItemType => ({
+  id,
+  title,
+  logo: "",
+  currency: currency || "ETH",
+  available: balance || 0
+});
+
+export const mapProgramFollowToTransferItemType = ({
+  id,
+  publicInfo: { title },
+  tradingAccountInfo: { currency, balance }
+}: ProgramFollowDetailsFull | PrivateTradingAccountFull): TransferItemType => ({
+  id,
+  title,
+  logo: "",
+  currency: currency || "ETH",
+  available: balance || 0
+});
+
+export const mapAccountFullToTransferItemType = ({
+  id,
+  publicInfo: { title },
+  tradingAccountInfo: { currency, balance }
+}: PrivateTradingAccountFull): TransferItemType => ({
   id,
   title,
   logo: "",
