@@ -141,7 +141,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
-        canTransfer={description.ownerActions.canTransferMoney}
+        canTransfer={
+          description.ownerActions && description.ownerActions.canTransferMoney
+        }
         currentItem={mapProgramFollowToTransferItemType(description)}
         accountType={description.publicInfo.typeExt}
         isOwnAsset={isOwnAsset}

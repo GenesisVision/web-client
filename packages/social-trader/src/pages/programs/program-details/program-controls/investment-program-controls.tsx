@@ -33,7 +33,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         LevelCalculator={LevelCalculator}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
-        {description.ownerActions.canTransferMoney ? (
+        {description.ownerActions &&
+        description.ownerActions.canTransferMoney ? (
           <DepositTransferButton
             size={GV_BTN_SIZE.BIG}
             onApply={onApply}
