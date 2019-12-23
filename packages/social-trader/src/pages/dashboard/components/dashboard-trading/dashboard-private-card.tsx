@@ -10,7 +10,8 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardActionsItemContainer
 } from "components/table/components/table-card/table-card-actions";
 import {
   BrokerTradeServerType,
@@ -107,13 +108,16 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           title={asset.accountInfo.title}
         />
       )}
-      <CloseAssetButton
-        assetName={asset.accountInfo.title}
-        onApply={updateItems}
-        type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
-        id={asset.id}
-        variant={"text"}
-      />
+      <TableCardActionsItemContainer>
+        <CloseAssetButton
+          noPadding
+          assetName={asset.accountInfo.title}
+          onApply={updateItems}
+          type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
+          id={asset.id}
+          variant={"text"}
+        />
+      </TableCardActionsItemContainer>
     </TableCardActions>
   );
   const detailsLink = {

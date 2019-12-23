@@ -7,6 +7,7 @@ import { useTranslation } from "shared/i18n";
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
 const _CloseAssetButton: React.FC<Props> = ({
+  noPadding,
   assetName,
   variant = "contained",
   canClose = true,
@@ -19,6 +20,7 @@ const _CloseAssetButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        noPadding={noPadding}
         variant={variant}
         color="danger"
         onClick={setOpen}
@@ -39,6 +41,7 @@ const _CloseAssetButton: React.FC<Props> = ({
 };
 
 interface Props {
+  noPadding?: boolean;
   assetName?: string;
   canClose?: boolean;
   id: string;
