@@ -6,6 +6,7 @@
 .funds-container {
   @include grid();
   position: relative;
+  align-items: center;
 
   &__info {
     margin-bottom: 60px;
@@ -22,24 +23,34 @@
       margin-bottom: 0;
       position: absolute;
       z-index: 0;
+      padding-bottom: 60px;
     }
 
     @include media-breakpoint-large-desktop() {
-      //grid-column: 5/9;
+      padding-bottom: 100px;
     }
   }
 
   &__list {
+    @include reset-list();
     grid-column: 1/13;
+    padding: 0 20px 40px;
+    margin-right: -20px;
+    margin-left: -20px;
 
-    @include media-breakpoint-landscape-tablet() {
-      //grid-column: 7/13;
-      position: relative;
-      z-index: 1;
+    @include media-breakpoint-tablet() {
+      padding-bottom: 100px;
     }
 
-    @include media-breakpoint-desktop() {
-      //grid-column: 4/10;
+    @include media-breakpoint-landscape-tablet() {
+      position: relative;
+      z-index: 1;
+      padding-left: 50%;
+      padding-bottom: 60px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      padding-bottom: 100px;
     }
   }
 

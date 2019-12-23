@@ -117,6 +117,11 @@ $scroll-width: 2px;
   border-radius: $scroll-width / 2;
 }
 
+//::-webkit-scrollbar-thumb[orient="horizontal"] {
+//  min-width: 2px;
+//  height: 4px;
+//}
+
 ::-webkit-scrollbar-corner {
   background: $scroll-background;
 }
