@@ -2666,6 +2666,9 @@
       "title": "In requests"
     },
     "trading": {
+      "tooltips": {
+        "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
+      },
       "asset-types": {
         "TradingAccount": "Trading account",
         "SignalTradingAccount": "Trading account",
