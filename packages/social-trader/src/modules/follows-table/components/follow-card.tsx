@@ -101,6 +101,7 @@ const _FollowCard: React.FC<Props> = ({
       {withFollowButton && (
         <TableCardTableButtons>
           <FollowButton
+            canFollow={true}
             onApply={onApply}
             id={follow.id}
             currency={follow.currency}
