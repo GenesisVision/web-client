@@ -41,20 +41,22 @@ const _ProgramDetailsStatisticsElements: React.FC<
               suffix={` ${statisticCurrency}`}
             />
           </StatisticItem>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.investors")}
-                labelText={t("program-details-page.statistics.investors")}
+          {statistic.investors && (
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t("program-details-page.tooltip.investors")}
+                  labelText={t("program-details-page.statistics.investors")}
+                />
+              }
+            >
+              <NumberFormat
+                value={statistic.investors}
+                thousandSeparator={" "}
+                displayType="text"
               />
-            }
-          >
-            <NumberFormat
-              value={statistic.investors}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </StatisticItem>
+            </StatisticItem>
+          )}
           {statistic.subscribers && (
             <StatisticItem
               label={
