@@ -136,7 +136,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
                 description={description}
-                canCloseAsset={ownerActions && ownerActions.canClose}
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
@@ -152,6 +151,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        canTransfer={description.ownerActions.canTransferMoney}
+        currentItem={mapProgramFollowToTransferItemType(description)}
+        accountType={description.publicInfo.typeExt}
         isOwnAsset={isOwnAsset}
         fees={{
           successFee: programDetails && programDetails.successFeeCurrent,
