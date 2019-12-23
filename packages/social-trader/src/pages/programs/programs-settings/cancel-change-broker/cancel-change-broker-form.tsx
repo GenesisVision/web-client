@@ -3,7 +3,12 @@ import BrokerCard from "components/assets/broker-select/broker-card/broker-card"
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
+import { withBlurLoader } from "decorators/with-blur-loader";
+import {
+  BrokerAccountType,
+  BrokersProgramInfo,
+  MigrationRequest
+} from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,8 +19,7 @@ import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 const _CancelChangeBrokerForm: React.FC<Props> = ({
   isSignalProgram,
   onSubmit,
-  brokerFrom,
-  currentAccountTypeId,
+  data: { brokers, currentAccountTypeId },
   leverage,
   migration: { newBroker: brokerTo, newLeverage }
 }) => {
@@ -25,6 +29,12 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
     setCancelChangeBrokerOpen,
     setCancelChangeBrokerClose
   ] = useIsOpen();
+  const brokerFrom = brokers.find(
+    broker =>
+      !!broker.accountTypes.find(
+        accountType => accountType.id === currentAccountTypeId
+      )
+  )!;
   return (
     <div>
       <div className="program-settings__block-wrapper--broker-list">
@@ -105,13 +115,14 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
 interface Props extends CancelChangeBrokerFormOwnProps {}
 
 export interface CancelChangeBrokerFormOwnProps {
+  data: BrokersProgramInfo;
   isSignalProgram: boolean;
   onSubmit: () => void;
-  brokerFrom: Broker;
-  currentAccountTypeId: string;
   leverage: number;
   migration: MigrationRequest;
 }
 
-const CancelChangeBrokerForm = React.memo(_CancelChangeBrokerForm);
+const CancelChangeBrokerForm = withBlurLoader(
+  React.memo(_CancelChangeBrokerForm)
+);
 export default CancelChangeBrokerForm;
