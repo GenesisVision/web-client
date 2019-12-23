@@ -12,7 +12,11 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
-import { DashboardTradingAsset } from "gv-api-web";
+import {
+  BrokerTradeServerType,
+  DashboardTradingAsset,
+  ProgramMinInvestAmount
+} from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
@@ -27,6 +31,8 @@ import ChangeAccountPasswordButton from "pages/programs/programs-settings/change
 import * as React from "react";
 import { useContext } from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -35,8 +41,17 @@ import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
+  const programMinDepositAmounts = useSelector(
+    programMinDepositAmountsSelector
+  );
+  const minDepositCreateProgram = getMinDepositCreateProgram(
+    programMinDepositAmounts,
+    asset.broker.type,
+    asset.accountInfo.currency
+  );
   const title = useContext(TitleContext);
   const [t] = useTranslation();
   const makeSignalLinkMethod = makeProgramLinkCreator({
@@ -74,6 +89,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       )}
       {asset.actions.canMakeProgramFromPrivateTradingAccount && (
         <MakeProgramButton
+          necessaryMoney={`${minDepositCreateProgram} ${asset.accountInfo.currency}`}
           isEnoughMoney={asset.actions.isEnoughMoneyToCreateProgram}
           id={asset.id}
           title={title}
@@ -177,11 +193,12 @@ interface Props {
 }
 
 const MakeProgramButton: React.FC<{
+  necessaryMoney: string;
   isEnoughMoney: boolean;
   id: string;
   title: string;
   clearAnchor: (event: TEvent) => void;
-}> = React.memo(({ isEnoughMoney, id, title, clearAnchor }) => {
+}> = React.memo(({ isEnoughMoney, id, title, clearAnchor, necessaryMoney }) => {
   const [t] = useTranslation();
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.ACCOUNT,
@@ -202,11 +219,28 @@ const MakeProgramButton: React.FC<{
         content={label}
         className="dashboard-trading__disable-button"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t("manager.program-settings.trades-update.text")}
+        tooltipContent={t(
+          "dashboard-page.trading.tooltips.is-not-enough-money",
+          { value: necessaryMoney }
+        )}
       />
     </GVButton>
   );
 });
+
+const getMinDepositCreateProgram = (
+  programMinDepositAmounts: ProgramMinInvestAmount[],
+  brokerType: BrokerTradeServerType,
+  curr: CurrencyEnum
+) => {
+  const broker = programMinDepositAmounts.find(
+    ({ serverType }) => serverType === brokerType
+  );
+  return broker
+    ? broker.minDepositCreateAsset.find(({ currency }) => currency === curr)!
+        .amount
+    : 0;
+};
 
 const DashboardPrivateCard = React.memo(_DashboardPrivateCard);
 export default DashboardPrivateCard;
