@@ -23,10 +23,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
       label={t("dashboard-page.statistic.trading")}
       request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
-      renderValues={({
-        equity,
-        assetsUnderManagement
-      }: TDashboardTradingStatistic) => (
+      renderValues={({ equity, aum }: TDashboardTradingStatistic) => (
         <>
           <DashboardValueItem
             label={t("dashboard-page.statistic.equity")}
@@ -35,7 +32,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
           />
           <DashboardValueItem
             label={t("dashboard-page.statistic.AUM")}
-            value={assetsUnderManagement}
+            value={aum}
             currency={currency}
           />
         </>

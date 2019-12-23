@@ -20,19 +20,12 @@ const _DashboardStatistic: React.FC<Props> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const {
-    events,
-    profits,
-    assetsUnderManagement,
-    programsCount,
-    fundsCount
-  } = data;
+  const { equity, events, profits, programsCount, fundsCount } = data;
   const hasNotInvesting =
     programsCount !== undefined && fundsCount !== undefined
       ? !(programsCount && fundsCount)
       : true;
-  const hasNotTrading =
-    assetsUnderManagement !== undefined ? !assetsUnderManagement : true;
+  const hasNotTrading = equity !== undefined ? !equity : true;
   const hasNotAssets = hasNotInvesting && hasNotTrading;
   if (hasNotAssets) return <EmptyBlock />;
   return (
