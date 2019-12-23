@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
-import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import UserIcon from "media/user-avatar.svg";
 import React from "react";
 

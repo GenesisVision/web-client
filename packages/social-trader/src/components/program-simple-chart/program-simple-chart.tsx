@@ -15,6 +15,7 @@ const _ProgramSimpleChart: React.FC<Props> = ({ data, programId }) => {
   const programChartDataValues = data.map(({ value }) => value);
   const off = gradientOffset(programChartDataValues);
   const areaColor = getStrokeColor(programChartDataValues);
+
   return (
     <div className="program-simple-chart">
       <ResponsiveContainer>

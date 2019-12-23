@@ -6,12 +6,11 @@ import FundsList from "routes/ssr/landing-page/components/funds/funds-list";
 import FundsIcon from "routes/ssr/landing-page/images/common/funds-icon.svg";
 
 interface Props {
-  funds?: FundDetailsListItem[];
+  funds: FundDetailsListItem[];
 }
 
 const FundsContainer: React.FC<Props> = ({ funds }) => {
-  console.log(funds);
-  // if (!funds.length) return null;
+  if (!funds.length) return null;
   return (
     <div className="funds-container">
       <div className="funds-container__info">
@@ -22,7 +21,7 @@ const FundsContainer: React.FC<Props> = ({ funds }) => {
           is unlocked as soon as you start trading!
         </p>
       </div>
-      <FundsList className="funds-container__list" />
+      <FundsList funds={funds} className="funds-container__list" />
     </div>
   );
 };

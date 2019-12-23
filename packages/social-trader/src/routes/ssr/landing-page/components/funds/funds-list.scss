@@ -29,90 +29,132 @@
     margin-right: -18%;
   }
 
-  &__item {
+  .table-card {
     background-color: $main-color;
-    border-radius: 20px;
-    padding: 34px;
-    width: 210px;
-    line-height: 1.6;
+    color: #100e3b;
+    margin: 0;
+    min-width: 260px;
 
     @include media-breakpoint-tablet() {
-      width: 215px;
+      min-width: 410px;
+      height: 440px;
+      padding: 35px;
     }
 
     @include media-breakpoint-landscape-tablet() {
-      min-height: 280px;
-      width: auto;
+      min-width: 385px;
+      height: 415px;
+    }
 
-      &:nth-child(odd) {
-        margin-bottom: 40px;
+    @include media-breakpoint-desktop() {
+      min-width: 430px;
+      height: 460px;
+    }
+
+    .table-card__title {
+      color: #100e3b;
+      font-weight: 600;
+    }
+
+    .fund-asset {
+      background-color: $landing-bg-gray;
+      color: #100e3b;
+      font-weight: 600;
+
+      .currency-item__icon {
+        background-color: $landing-color-icon;
       }
-
-      &:nth-child(even) {
-        margin-top: 40px;
-      }
     }
 
-    @include media-breakpoint-desktop() {
-      padding: 40px;
+    .table-card__actions {
+      display: none;
     }
   }
 
-  &__item-avatar {
-    width: 66px;
-    height: 66px;
-    background: linear-gradient(0deg, #f7f7f7, #f7f7f7);
-    border-radius: 16px;
-    margin-bottom: 34px;
-
-    @include media-breakpoint-desktop() {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      margin-bottom: 40px;
-    }
-
-    @include media-breakpoint-large-desktop() {
-      width: 100px;
-      height: 100px;
-    }
-  }
-
-  &__item-title {
-    font-weight: 600;
-    font-size: 16px;
-    color: $row-color;
-    margin-bottom: 16px;
-
-    @include media-breakpoint-desktop() {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    @include media-breakpoint-large-desktop() {
-      font-size: 22px;
-    }
-  }
-
-  &__item-number {
-    font-size: 32px;
-    color: $primary-color;
-    font-weight: 400;
-    letter-spacing: 0.385127px;
-    margin-bottom: 10px;
-
-    @include media-breakpoint-desktop() {
-      font-size: 38px;
-    }
-  }
-
-  &__item-label {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba($row-color, 0.5);
-
-    @include media-breakpoint-desktop() {
-      font-size: 16px;
-    }
-  }
+  //&__item {
+  //  background-color: $main-color;
+  //  border-radius: 20px;
+  //  padding: 34px;
+  //  width: 210px;
+  //  line-height: 1.6;
+  //
+  //  @include media-breakpoint-tablet() {
+  //    width: 215px;
+  //  }
+  //
+  //  @include media-breakpoint-landscape-tablet() {
+  //    min-height: 280px;
+  //    width: auto;
+  //
+  //    &:nth-child(odd) {
+  //      margin-bottom: 40px;
+  //    }
+  //
+  //    &:nth-child(even) {
+  //      margin-top: 40px;
+  //    }
+  //  }
+  //
+  //  @include media-breakpoint-desktop() {
+  //    padding: 40px;
+  //  }
+  //}
+  //
+  //&__item-avatar {
+  //  width: 66px;
+  //  height: 66px;
+  //  background: linear-gradient(0deg, #f7f7f7, #f7f7f7);
+  //  border-radius: 16px;
+  //  margin-bottom: 34px;
+  //
+  //  @include media-breakpoint-desktop() {
+  //    width: 80px;
+  //    height: 80px;
+  //    border-radius: 20px;
+  //    margin-bottom: 40px;
+  //  }
+  //
+  //  @include media-breakpoint-large-desktop() {
+  //    width: 100px;
+  //    height: 100px;
+  //  }
+  //}
+  //
+  //&__item-title {
+  //  font-weight: 600;
+  //  font-size: 16px;
+  //  color: $row-color;
+  //  margin-bottom: 16px;
+  //
+  //  @include media-breakpoint-desktop() {
+  //    font-size: 20px;
+  //    margin-bottom: 20px;
+  //  }
+  //
+  //  @include media-breakpoint-large-desktop() {
+  //    font-size: 22px;
+  //  }
+  //}
+  //
+  //&__item-number {
+  //  font-size: 32px;
+  //  color: $primary-color;
+  //  font-weight: 400;
+  //  letter-spacing: 0.385127px;
+  //  margin-bottom: 10px;
+  //
+  //  @include media-breakpoint-desktop() {
+  //    font-size: 38px;
+  //  }
+  //}
+  //
+  //&__item-label {
+  //  font-size: 13px;
+  //  font-weight: 400;
+  //  color: rgba($row-color, 0.5);
+  //
+  //  @include media-breakpoint-desktop() {
+  //    font-size: 16px;
+  //  }
+  //}
 }

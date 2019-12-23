@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     padding: 20px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid $landing-bg-gray-2;
     box-sizing: border-box;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -103,7 +103,7 @@
 
     @include media-breakpoint-tablet() {
       display: block;
-      background-color: #f0f0f0;
+      background-color: $landing-bg-gray-2;
       border-radius: 20px;
       color: $row-color;
       font-size: 13px;

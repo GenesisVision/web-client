@@ -99,9 +99,9 @@ h3 {
   text-align: center;
 }
 
-$scroll-background: transparent;
-$scroll-thumb-color: rgba(255, 255, 255, 0.3);
-$scroll-width: 6px;
+$scroll-background: $landing-bg-gray-2;
+$scroll-thumb-color: $row-color;
+$scroll-width: 2px;
 
 ::-webkit-scrollbar {
   width: $scroll-width;

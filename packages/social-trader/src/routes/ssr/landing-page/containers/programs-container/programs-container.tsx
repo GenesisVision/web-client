@@ -11,7 +11,6 @@ interface Props {
 }
 
 const ProgramsContainer: React.FC<Props> = ({ programs }) => {
-  console.log(programs);
   // if (!programs.length) return null;
   return (
     <div className="programs-container">

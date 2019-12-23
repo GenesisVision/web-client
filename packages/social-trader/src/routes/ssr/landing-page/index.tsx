@@ -1,24 +1,28 @@
 import "./styles/index.scss";
 import "./styles/home.scss";
 
-import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
+import {
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem
+} from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
 import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
+import fundsApi from "services/api-client/funds-api";
 import programsApi from "services/api-client/programs-api";
 import { useTranslation } from "shared/i18n";
 
 const IndexPage: NextPage<{
-  programsData: ItemsViewModelProgramDetailsListItem;
-}> = ({ programsData }) => {
-  const programs = programsData.items;
+  fundsData: ItemsViewModelFundDetailsListItem;
+}> = ({ fundsData }) => {
   return (
     <Layout title="Genesis Vision">
       <main className="home">
@@ -49,9 +53,9 @@ const IndexPage: NextPage<{
             <ProgramsContainer />
           </div>
         </section>
-        <section className="home__section home__section--bg-gray">
+        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            <h2>Funds</h2>
+            <FundsContainer funds={fundsData.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-white">
@@ -88,17 +92,30 @@ const IndexPage: NextPage<{
 export default IndexPage;
 
 IndexPage.getInitialProps = async () => {
+  // try {
+  //   const programsData = await programsApi.getPrograms({
+  //     skip: 0,
+  //     take: 6
+  //   });
+  //   return { programsData };
+  // } catch (e) {
+  //   const programsData = {
+  //     total: 0,
+  //     items: []
+  //   };
+  //   return { programsData };
+  // }
   try {
-    const programsData = await programsApi.getPrograms({
+    const fundsData = await fundsApi.getFunds({
       skip: 0,
-      take: 12
+      take: 6
     });
-    return { programsData };
+    return { fundsData };
   } catch (e) {
-    const programsData = {
+    const fundsData = {
       total: 0,
       items: []
     };
-    return { programsData };
+    return { fundsData };
   }
 };
