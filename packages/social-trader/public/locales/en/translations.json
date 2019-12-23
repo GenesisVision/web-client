@@ -1453,7 +1453,9 @@
       "available": "Available",
       "trading": "Trading",
       "pending": "Pending",
-      "buttons": ""
+      "buttons": {
+        "buy-with-card": "Buy with card"
+      }
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
