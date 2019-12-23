@@ -2089,7 +2089,7 @@
   },
   "create-program-page": {
     "title": "Create Program",
-    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
     "tabs": {
       "select-broker": "Select broker",
       "settings": "Settings"
@@ -2201,7 +2201,7 @@
   },
   "create-account-page": {
     "title": "Create Account",
-    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
     "tabs": {
       "select-broker": "Select broker",
       "settings": "Settings"
@@ -2237,7 +2237,7 @@
   },
   "create-fund-page": {
     "title": "Create Fund",
-    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
     "notifications": {
       "create-success": "Fund was successfully created.",
       "validate-error": "Please fix all the errors on the screen before proceeding"
@@ -2297,7 +2297,7 @@
   },
   "attach-account-page": {
     "title": "Attach external account",
-    "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
     "notifications": {
       "create-success": "Account was successfully attached.",
       "validate-error": "Please fix all the errors on the screen before proceeding"
