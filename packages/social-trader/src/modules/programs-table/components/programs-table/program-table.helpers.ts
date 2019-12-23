@@ -9,6 +9,11 @@ export const composeCurrencyMap = (
     ...currencies.map(({ name }) => ({ value: name, label: name }))
   ];
 };
+export const composeCurrencyMapWithoutBase = (
+  currencies: PlatformCurrencyInfo[] | undefined = []
+): SelectFilterValue<string | undefined>[] => {
+  return currencies.map(({ name }) => ({ value: name, label: name }));
+};
 
 export const composeCurrencyFilter = (
   currencies: string[] | undefined = []
