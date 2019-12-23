@@ -129,7 +129,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 levelsParameters={levelsParameters!}
               />
             )}
-            {followDetails && (
+            {followDetails && !isOwnAsset && (
               <FollowControls
                 onApply={handleDispatchDescription}
                 description={description}
