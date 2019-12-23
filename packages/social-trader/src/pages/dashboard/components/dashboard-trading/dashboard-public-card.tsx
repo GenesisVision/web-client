@@ -76,7 +76,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   return (
     <TableCard
       hasAvatar
-      subTitle={asset.assetTypeExt}
+      subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
       levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}
