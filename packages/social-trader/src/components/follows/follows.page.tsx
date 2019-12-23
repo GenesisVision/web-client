@@ -6,7 +6,6 @@ import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import FollowsTableSsr from "modules/follows-table/components/follows-table-ssr";
 import { NextComponentType } from "next";
-import Head from "next/head";
 import React from "react";
 import {
   EXPLORE_TAB_NAME,
@@ -14,26 +13,15 @@ import {
   FOLLOW_FACET_FOLDER_ROUTE,
   FOLLOW_TAB_ROUTE
 } from "routes/invest.routes";
-import { Organization, Table } from "schema-dts";
 import { useTranslation } from "shared/i18n";
 import { composeFollowFacetUrl } from "utils/compose-url";
-import {
-  getOrganizationSchema,
-  getProgramTable,
-  schema,
-  titleMeta
-} from "utils/seo";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const FollowsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
   return (
-    <Page title={title}>
-      <Head>
-        {schema<Organization>(getOrganizationSchema())}
-        {schema<Table>(getProgramTable())}
-        {titleMeta("Genesis vision")}
-      </Head>
+    <Page title={title} schemas={[ORGANIZATION_SCHEMA]}>
       <NavigationTabs
         exploreTabName={EXPLORE_TAB_NAME}
         tabRoute={FOLLOW_TAB_ROUTE}

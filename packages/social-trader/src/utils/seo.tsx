@@ -1,18 +1,23 @@
 import * as React from "react";
-import { Organization, Table, Thing, WithContext } from "schema-dts";
-import filesService from "services/file-service";
+import { Organization, Thing, WithContext } from "schema-dts";
+
+import filesService from "../services/file-service";
 
 export const schema = (() => {
   let index = 0;
 
-  return <T extends Thing>(schema?: WithContext<T>) => {
-    return schema ? (
-      <script
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        key={`json-ld-${index++}`}
-        type="application/ld+json"
-      />
-    ) : null;
+  return (schema?: WithContext<Thing>[]) => {
+    return schema
+      ? schema.map(s => {
+          return (
+            <script
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
+              key={`json-ld-${index}`}
+              type="application/ld+json"
+            />
+          );
+        })
+      : null;
   };
 })();
 
@@ -60,31 +65,13 @@ export const imageMeta = (image?: string) => {
   ) : null;
 };
 
-export const getOrganizationSchema = (): WithContext<Organization> => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Genesis Vision",
-    logo: "",
-    sameAs: [
-      "https://twitter.com/genesis_vision/",
-      "https://www.facebook.com/GenesisVisionProject/"
-    ]
-  };
-};
-
-export const getProgramTable = (): WithContext<Table> => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Table",
-    about: "List of programs"
-  };
-};
-
-export const getFundsTable = (): WithContext<Table> => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Table",
-    about: "List of funds"
-  };
+export const ORGANIZATION_SCHEMA: WithContext<Organization> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Genesis Vision",
+  logo: "",
+  sameAs: [
+    "https://twitter.com/genesis_vision/",
+    "https://www.facebook.com/GenesisVisionProject/"
+  ]
 };

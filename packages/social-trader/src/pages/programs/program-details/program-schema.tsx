@@ -14,7 +14,7 @@ export const getSchema = (description: ProgramDescriptionDataType) => {
     : getProgramSchema(description);
 };
 
-export const getProgramSchema = (
+const getProgramSchema = (
   details: ProgramDescriptionDataType
 ): WithContext<DepositAccount> => ({
   "@context": "https://schema.org",
@@ -31,7 +31,7 @@ export const getProgramSchema = (
   } //TODO
 });
 
-export const getFollowSchema = (
+const getFollowSchema = (
   details: ProgramDescriptionDataType
 ): WithContext<FinancialProduct> => ({
   "@context": "https://schema.org",

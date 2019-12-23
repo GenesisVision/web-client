@@ -6,7 +6,6 @@ import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
-import Head from "next/head";
 import React from "react";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
@@ -14,27 +13,16 @@ import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "routes/programs.routes";
-import { Organization, Table } from "schema-dts";
 import { useTranslation } from "shared/i18n";
 import { composeProgramFacetUrl } from "utils/compose-url";
-import {
-  getOrganizationSchema,
-  getProgramTable,
-  schema,
-  titleMeta
-} from "utils/seo";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const ProgramsPage: NextPage = () => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
 
   return (
-    <Page title={title}>
-      <Head>
-        {schema<Organization>(getOrganizationSchema())}
-        {schema<Table>(getProgramTable())}
-        {titleMeta("Genesis vision")}
-      </Head>
+    <Page title={title} schemas={[ORGANIZATION_SCHEMA]}>
       <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}
