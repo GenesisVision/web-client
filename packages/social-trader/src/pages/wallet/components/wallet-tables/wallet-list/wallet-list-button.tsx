@@ -1,7 +1,7 @@
-import Link from "components/link/link";
 import { WalletData } from "gv-api-web";
 import LineTransferButton from "pages/wallet/components/wallet-tables/buttons/line-transfer-button";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import LineDepositButton from "../buttons/line-deposit-button";
@@ -15,13 +15,18 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
     depositUrlCoindirect
   } = wallet;
   const [t] = useTranslation();
+  const [location, setLocation] = useState();
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location)
+      setLocation(window.location.href);
+  }, [window]);
   return (
     <div className="wallet-list__buttons">
       {depositUrlCoindirect && (
         <div className="wallet-list__button">
-          <Link to={`${depositUrlCoindirect}&url=${window.location.href}`}>
-            {t("wallet-page.list.buttons.buy-with-card")}
-          </Link>
+          <a href={`${depositUrlCoindirect}&url=${location}`} target={"_blank"}>
+            {t("wallet-page.list.buy-with-card")}
+          </a>
         </div>
       )}
       <LineTransferButton wallet={wallet} />
