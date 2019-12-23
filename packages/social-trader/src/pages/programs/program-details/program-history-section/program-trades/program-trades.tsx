@@ -10,6 +10,7 @@ import {
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { OrderModel } from "gv-api-web";
 import { generateProgramTradesColumns } from "pages/programs/program-details/program-details.constants";
+import DownloadButtonToolbarAuth from "pages/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -21,6 +22,7 @@ import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  title,
   assetType = CREATE_ASSET.PROGRAM,
   haveDelay,
   getItems,
@@ -35,21 +37,27 @@ const _ProgramTrades: React.FC<Props> = ({
     itemsData: { data }
   } = useSelector(dataSelector);
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
-  const getExportFileUrlMethod =
-    assetType === CREATE_ASSET.PROGRAM
-      ? filesService.getProgramTradesExportFileUrl
-      : filesService.getAccountTradesExportFileUrl;
+
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
         <div className="details-trades__toolbar">
           {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
-            <DownloadButtonToolbar
-              filtering={filtering!.dateRange}
-              programId={programId}
-              getExportFileUrl={getExportFileUrlMethod}
-            />
+            {assetType === CREATE_ASSET.PROGRAM ? (
+              <DownloadButtonToolbar
+                filtering={filtering!.dateRange}
+                programId={programId}
+                getExportFileUrl={filesService.getProgramTradesExportFileUrl}
+              />
+            ) : (
+              <DownloadButtonToolbarAuth
+                method={filesService.getAccountTradesExportFileUrl}
+                dateRange={filtering!.dateRange}
+                programId={programId}
+                title={title}
+              />
+            )}
           </div>
         </div>
       )}
@@ -85,6 +93,7 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
   assetType?: CREATE_ASSET;
   haveDelay: boolean;
   getItems: GetItemsFuncActionType;
