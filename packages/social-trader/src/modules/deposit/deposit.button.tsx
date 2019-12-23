@@ -78,9 +78,7 @@ const _DepositButton: React.FC<Props> = ({
       </GVButton>
       {deposit}
       <InvestmentUnauthPopup
-        message={t(
-          `program-details-page.description.${type.toLowerCase()}-unauth-popup`
-        )}
+        message={t(`unauth-popup.${type.toLowerCase()}`)}
         title={""}
         currency={currency}
         availableToInvest={availableToInvest}

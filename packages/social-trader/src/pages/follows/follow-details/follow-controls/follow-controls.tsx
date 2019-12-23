@@ -44,7 +44,7 @@ const _FollowControls: React.FC<Props> = ({
             label={t("program-details-page.description.follow-trade")}
             asset={ASSET.FOLLOW}
             header={t("program-details-page.description.follow-trade")}
-            message={t("program-details-page.description.unauth-follow-popup")}
+            message={t("unauth-popup.follow")}
             title={title}
           />
         )}
