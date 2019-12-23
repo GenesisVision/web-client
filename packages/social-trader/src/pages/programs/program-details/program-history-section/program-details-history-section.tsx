@@ -103,6 +103,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
+          title={title}
           assetType={assetType}
           haveDelay={haveDelay}
           getItems={trades.getItems(programId)}
