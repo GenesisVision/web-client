@@ -32,7 +32,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
-          disabled={canInvest}
+          disabled={!canInvest}
           title={description.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
