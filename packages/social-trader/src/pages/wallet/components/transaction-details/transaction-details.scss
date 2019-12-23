@@ -45,5 +45,14 @@
   align-items: center;
   &__amount {
     padding-right: $padding-xxsmall;
+    &--red {
+      color: $negative-color;
+    }
+    &--white {
+      color: $text-light-color;
+    }
+    &--green {
+      color: $positive-color;
+    }
   }
 }
