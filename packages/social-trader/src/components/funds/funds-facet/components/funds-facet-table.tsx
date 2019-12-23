@@ -10,7 +10,7 @@ import { GetItemsFuncType } from "components/table/components/table.types";
 import { PlatformCurrencyInfo, Timeframe } from "gv-api-web";
 import FundsTableModule from "modules/funds-table/components/funds-table/funds-table-module";
 import { CURRENCY_MAP_NAME } from "modules/funds-table/components/funds-table/funds-table.constants";
-import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
+import { composeCurrencyMapWithoutBase } from "modules/programs-table/components/programs-table/program-table.helpers";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
@@ -33,7 +33,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
   const composeFiltering = useCallback(
     () =>
       ({
-        currency,
+        [CURRENCY_MAP_NAME]: currency,
         dateRange: {
           ...DEFAULT_DATE_RANGE_FILTER_VALUE,
           type: mapServerTimeFrameToFilterType(timeframe)
@@ -50,7 +50,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
             name={CURRENCY_MAP_NAME}
             label={t("filters.currency.show-in")}
             value={filtering && filtering[CURRENCY_MAP_NAME]}
-            values={composeCurrencyMap(currencies)}
+            values={composeCurrencyMapWithoutBase(currencies)}
             onChange={updateFilter}
           />
           <DateRangeFilter
