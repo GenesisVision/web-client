@@ -2,7 +2,6 @@ import "./program-settings.scss";
 
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
-  BrokersProgramInfo,
   ProgramCreateAssetPlatformInfo,
   ProgramFollowDetailsFull
 } from "gv-api-web";
@@ -32,7 +31,6 @@ const _ProgramSettings: React.FC<Props> = ({
   updateDescription,
   createProgramInfo: { maxSuccessFee, maxEntryFee },
   cancelChangeBroker,
-  brokersInfo,
   description,
   changeBroker,
   editProgram,
@@ -51,15 +49,6 @@ const _ProgramSettings: React.FC<Props> = ({
   const isSignalProgram = !!description.followDetails;
   return (
     <>
-      <TwoFactorConfirm
-        condition={programDetails.personalDetails.showTwoFactorButton}
-        id={description.id}
-      />
-      <ClosePeriodBlock
-        condition={description.ownerActions.canClosePeriod}
-        id={description.id}
-        closePeriod={updateDescription}
-      />
       <ChangePassword
         condition={
           description.ownerActions.canChangePassword &&
@@ -68,57 +57,56 @@ const _ProgramSettings: React.FC<Props> = ({
         title={description.publicInfo.title}
         id={tradingAccountInfo.id}
       />
-      <CancelChangeBroker
-        condition={!!programDetails.personalDetails.migration}
-        isSignalProgram={isSignalProgram}
-        brokerFrom={
-          brokersInfo.brokers.find(
-            broker =>
-              !!broker.accountTypes.find(
-                accountType =>
-                  accountType.id === brokersInfo.currentAccountTypeId
-              )
-          )!
-        }
-        migration={programDetails.personalDetails.migration}
-        onSubmit={cancelChangeBroker}
-        currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        leverage={description.tradingAccountInfo.leverageMax}
-      />
-      <ChangeBroker
-        condition={
-          !programDetails.personalDetails.migration &&
-          brokersInfo.brokers.length > 1
-        }
-        isSignalProgram={isSignalProgram}
-        onSubmit={changeBroker}
-        id={description.id}
-        brokers={brokersInfo.brokers}
-        currentAccountTypeId={brokersInfo.currentAccountTypeId}
-        currentLeverage={description.tradingAccountInfo.leverageMax}
-      />
-      <InvestmentFees
-        asset={ASSET.PROGRAM}
-        maxSuccessFee={maxSuccessFee}
-        maxEntryFee={maxEntryFee}
-        entryFee={programDetails.entryFeeSelected}
-        successFee={programDetails.successFeeSelected}
-        onSubmit={editProgram}
-      />
-      <TradesUpdating
-        condition={!isSignalProgram}
-        tradesDelay={programDetails.tradesDelay}
-        onSubmit={editProgram}
-      />
-      <StopOutLevel
-        stopOutLevel={programDetails.stopOutLevelCurrent}
-        onSubmit={editProgram}
-      />
-      <InvestmentLimit
-        currency={description.tradingAccountInfo.currency}
-        investmentLimit={programDetails.availableInvestmentLimit}
-        onSubmit={editProgram}
-      />
+      {programDetails && (
+        <>
+          <TwoFactorConfirm
+            condition={programDetails.personalDetails.showTwoFactorButton}
+            id={description.id}
+          />
+          <ClosePeriodBlock
+            condition={description.ownerActions.canClosePeriod}
+            id={description.id}
+            closePeriod={updateDescription}
+          />
+          <CancelChangeBroker
+            id={description.id}
+            condition={!!programDetails.personalDetails.migration}
+            isSignalProgram={isSignalProgram}
+            migration={programDetails.personalDetails.migration}
+            onSubmit={cancelChangeBroker}
+            leverage={description.tradingAccountInfo.leverageMax}
+          />
+          <ChangeBroker
+            condition={!programDetails.personalDetails.migration}
+            isSignalProgram={isSignalProgram}
+            onSubmit={changeBroker}
+            id={description.id}
+            currentLeverage={description.tradingAccountInfo.leverageMax}
+          />
+          <InvestmentFees
+            asset={ASSET.PROGRAM}
+            maxSuccessFee={maxSuccessFee}
+            maxEntryFee={maxEntryFee}
+            entryFee={programDetails.entryFeeSelected}
+            successFee={programDetails.successFeeSelected}
+            onSubmit={editProgram}
+          />
+          <TradesUpdating
+            condition={!isSignalProgram}
+            tradesDelay={programDetails.tradesDelay}
+            onSubmit={editProgram}
+          />
+          <StopOutLevel
+            stopOutLevel={programDetails.stopOutLevelCurrent}
+            onSubmit={editProgram}
+          />
+          <InvestmentLimit
+            currency={description.tradingAccountInfo.currency}
+            investmentLimit={programDetails.availableInvestmentLimit}
+            onSubmit={editProgram}
+          />
+        </>
+      )}
       <AssetEdit
         title={description.publicInfo.title}
         logo={{ src: description.publicInfo.logo }}
@@ -146,7 +134,6 @@ const _ProgramSettings: React.FC<Props> = ({
 interface Props {
   createProgramInfo: ProgramCreateAssetPlatformInfo;
   description: ProgramFollowDetailsFull;
-  brokersInfo: BrokersProgramInfo;
   updateDescription: VoidFunction;
   closeProgram: VoidFunction;
   changeBroker: (
