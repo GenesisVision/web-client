@@ -21,7 +21,17 @@ const FollowsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
   return (
-    <Page title={title} schemas={[ORGANIZATION_SCHEMA]}>
+    <Page
+      title={title}
+      schemas={[
+        ORGANIZATION_SCHEMA,
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          about: "List of programs"
+        }
+      ]}
+    >
       <NavigationTabs
         exploreTabName={EXPLORE_TAB_NAME}
         tabRoute={FOLLOW_TAB_ROUTE}

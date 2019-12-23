@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "shared/i18n";
 import { composeFundFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 import NavigationTabs from "../navigation-tabs/navigation-tabs";
 
@@ -21,7 +22,17 @@ const FundsPage: React.FC = () => {
   const { t } = useTranslation();
   const title = t("funds-page.title");
   return (
-    <Page title={title} schemas={[ORGANIZATION_SCHEMA]}>
+    <Page
+      title={title}
+      schemas={[
+        ORGANIZATION_SCHEMA,
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          about: "List of funds"
+        }
+      ]}
+    >
       <NavigationTabs
         exploreTabName={FUNDS_EXPLORE_TAB_NAME}
         tabRoute={FUNDS_TAB_ROUTE}

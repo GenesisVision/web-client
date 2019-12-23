@@ -28,6 +28,18 @@ import { FundDescriptionDataType } from "./reducers/description.reducer";
 import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
 import { dispatchFundDescriptionWithId } from "./services/fund-details.service";
 
+//TODO
+const getFundSchema = (
+  details: FundDescriptionDataType
+): WithContext<InvestmentFund> => ({
+  "@context": "https://schema.org",
+  "@type": "InvestmentFund",
+  name: details.publicInfo.title,
+  description: details.publicInfo.description,
+  feesAndCommissionsSpecification: "", //TODO
+  logo: filesService.getFileUrl(details.publicInfo.logo)
+});
+
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();

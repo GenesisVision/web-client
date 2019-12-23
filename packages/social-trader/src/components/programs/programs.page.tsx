@@ -22,7 +22,17 @@ const ProgramsPage: NextPage = () => {
   const title = t("programs-page.title");
 
   return (
-    <Page title={title} schemas={[ORGANIZATION_SCHEMA]}>
+    <Page
+      title={title}
+      schemas={[
+        ORGANIZATION_SCHEMA,
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          about: "List of programs"
+        }
+      ]}
+    >
       <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}
