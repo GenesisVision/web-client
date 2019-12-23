@@ -24,6 +24,7 @@ const _UnfollowForm: React.FC<Props> = ({
       <DialogTop title={t("unfollow-program.title")} />
       <DialogBottom>
         <GVFormikField
+          disableIfSingle
           name={FIELDS.mode}
           component={GVTextField}
           label={t("unfollow-program.type")}
