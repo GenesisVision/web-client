@@ -26,14 +26,12 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     totalProfit,
     openTolerancePercent,
     mode,
-    asset: {
-      url,
-      title,
-      logo,
-      color,
-      programDetails: { level, levelProgress }
-    }
+    asset: { url, title, logo, color, programDetails }
   } = provider;
+  const level = programDetails ? programDetails.level : undefined;
+  const levelProgress = programDetails
+    ? programDetails.levelProgress
+    : undefined;
   return (
     <TableRow stripy>
       <TableCell>
