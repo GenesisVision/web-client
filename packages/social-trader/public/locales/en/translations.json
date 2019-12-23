@@ -469,6 +469,9 @@
     "select-account": {
       "title": "Select account"
     },
+    "select-external-account": {
+      "title": "Select external account"
+    },
     "create-account": {
       "title": "Account creation",
       "available": "Available in wallet",
