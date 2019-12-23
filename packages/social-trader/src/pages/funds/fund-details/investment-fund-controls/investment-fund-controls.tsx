@@ -6,6 +6,8 @@ import { FundDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import InvestmentFundInfo from "pages/funds/fund-details/fund-details-description/investment-fund-info";
 import * as React from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentFundControls: React.FC<Props> = ({
@@ -13,6 +15,11 @@ const _InvestmentFundControls: React.FC<Props> = ({
   onApply
 }) => {
   const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const canInvest = isAuthenticated
+    ? !!fundDescription.personalDetails &&
+      fundDescription.personalDetails.canInvest
+    : true;
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -21,7 +28,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
-          disabled={!fundDescription.personalDetails.canInvest}
+          disabled={!canInvest}
           title={fundDescription.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
