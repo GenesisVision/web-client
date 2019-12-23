@@ -5,7 +5,6 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
@@ -123,15 +122,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <>
-            {description.ownerActions.canTransferMoney && (
-              <InvestmentAccountControls
-                transferableItem={mapProgramFollowToTransferItemType(
-                  description
-                )}
-                accountType={description.publicInfo.typeExt}
-                onApply={handleDispatchDescription}
-              />
-            )}
             {programDetails && (
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
