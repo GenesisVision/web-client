@@ -1,15 +1,19 @@
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
+import { DetailsBlockRowItem } from "components/details/details-block-row-item.block";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
 import { LevelsParamsInfo } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
+import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
@@ -18,9 +22,11 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   description,
   levelsParameters
 }) => {
-  const canInvest =
-    description.programDetails.personalDetails &&
-    description.programDetails.personalDetails.canInvest;
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const canInvest = isAuthenticated
+    ? !!description.programDetails.personalDetails &&
+      description.programDetails.personalDetails.canInvest
+    : true;
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -35,12 +41,24 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {description.ownerActions &&
         description.ownerActions.canTransferMoney ? (
-          <DepositTransferButton
-            size={GV_BTN_SIZE.BIG}
-            onApply={onApply}
-            currentItem={mapProgramFollowToTransferItemType(description)}
-            accountType={description.publicInfo.typeExt}
-          />
+          <>
+            <DetailsBlockRowItem>
+              <DepositTransferButton
+                size={GV_BTN_SIZE.BIG}
+                onApply={onApply}
+                currentItem={mapProgramFollowToTransferItemType(description)}
+                accountType={description.publicInfo.typeExt}
+              />
+            </DetailsBlockRowItem>
+            <DetailsBlockRowItem>
+              <WithdrawTransferButton
+                size={GV_BTN_SIZE.BIG}
+                onApply={onApply}
+                currentItem={mapProgramFollowToTransferItemType(description)}
+                accountType={description.publicInfo.typeExt}
+              />
+            </DetailsBlockRowItem>
+          </>
         ) : (
           <DepositButton
             disabled={!canInvest}
