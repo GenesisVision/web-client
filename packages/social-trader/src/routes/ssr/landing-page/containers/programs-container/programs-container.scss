@@ -41,6 +41,16 @@
     display: inline-block;
     width: 60px;
     height: 60px;
+
+    @include media-breakpoint-tablet() {
+      width: 80px;
+      height: 70px;
+    }
+
+    @include media-breakpoint-desktop() {
+      width: 100px;
+      height: 87px;
+    }
   }
 
   &__text {

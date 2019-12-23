@@ -3,10 +3,6 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-$scroll-width: 2px;
-$scroll-background: rgba($row-color, 0.1);
-$scroll-thumb-color: $row-color;
-
 .programs-list {
   @include reset-list();
   display: grid;
@@ -20,29 +16,9 @@ $scroll-thumb-color: $row-color;
   padding-right: 20px;
   margin-right: -20px;
   margin-left: -20px;
-  scrollbar-width: thin;
-  scrollbar-color: $scroll-thumb-color $scroll-background;
-
-  ::-webkit-scrollbar {
-    width: $scroll-width;
-    height: $scroll-width;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: $scroll-background;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: $scroll-thumb-color;
-    border-radius: $scroll-width / 2;
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: $scroll-background;
-  }
 
   @include media-breakpoint-tablet() {
-    padding-left: 85px;
+    padding-left: 11%;
     grid-column-gap: 40px;
   }
 
@@ -70,14 +46,6 @@ $scroll-thumb-color: $row-color;
     @include media-breakpoint-landscape-tablet() {
       min-height: 280px;
       width: auto;
-
-      &:nth-child(odd) {
-        margin-bottom: 40px;
-      }
-
-      &:nth-child(even) {
-        margin-top: 40px;
-      }
     }
 
     @include media-breakpoint-desktop() {
