@@ -7,13 +7,10 @@ import SubscriptionContainer from "components/details/details-description-sectio
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { TableSelectorType } from "components/table/components/table.types";
-import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
-  AssetTypeExt,
   PersonalFollowDetailsFull,
   PersonalFundDetails,
-  PersonalProgramDetails,
-  PrivateTradingAccountType
+  PersonalProgramDetails
 } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import {
@@ -34,9 +31,6 @@ import {
 } from "./details-investment.helpers";
 
 const _DetailsInvestment: React.FC<Props> = ({
-  currentItem,
-  accountType,
-  canTransfer,
   isOwnAsset,
   fees,
   notice,
@@ -106,9 +100,6 @@ const _DetailsInvestment: React.FC<Props> = ({
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
         <Investment
-          canTransfer={canTransfer}
-          currentItem={currentItem}
-          accountType={accountType}
           isOwnAsset={isOwnAsset}
           fees={fees}
           updateDescription={dispatchDescription}
@@ -139,9 +130,6 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface Props {
-  canTransfer?: boolean;
-  currentItem?: WalletItemType;
-  accountType?: PrivateTradingAccountType | AssetTypeExt;
   isOwnAsset?: boolean;
   fees: FeesType;
   notice?: string;

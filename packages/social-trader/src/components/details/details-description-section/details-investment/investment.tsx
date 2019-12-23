@@ -13,10 +13,7 @@ import {
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { WalletItemType } from "components/wallet-select/wallet-select";
-import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
-import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -30,9 +27,6 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
-  canTransfer,
-  currentItem,
-  accountType,
   isOwnAsset,
   fees,
   updateDescription,
@@ -194,24 +188,14 @@ const _Investment: React.FC<Props> = ({
         </StatisticItem>
       </StatisticItemList>
       <DetailsInvestmentFooter>
-        {canTransfer && currentItem ? (
-          <WithdrawTransferButton
-            size={GV_BTN_SIZE.BIG}
-            onApply={updateDescription}
-            currentItem={currentItem}
-            accountType={accountType}
-          />
-        ) : (
-          <WithdrawButton
-            size={GV_BTN_SIZE.BIG}
-            disabled={!personalDetails.canWithdraw}
-            onApply={updateDescription}
-            type={asset}
-            id={id}
-            currency={assetCurrency}
-          />
-        )}
-
+        <WithdrawButton
+          size={GV_BTN_SIZE.BIG}
+          disabled={!personalDetails.canWithdraw}
+          onApply={updateDescription}
+          type={asset}
+          id={id}
+          currency={assetCurrency}
+        />
         {notice && (
           <p className="details-investment__withdraw-notice">{notice}</p>
         )}
@@ -221,9 +205,6 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
-  canTransfer?: boolean;
-  currentItem?: WalletItemType;
-  accountType?: PrivateTradingAccountType | AssetTypeExt;
   isOwnAsset?: boolean;
   fees: FeesType;
   updateDescription: () => void;
