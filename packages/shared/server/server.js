@@ -9,7 +9,8 @@ module.exports = async app => {
   const server = express();
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
-  server.all("*", (req, res) => handle(req, res));
+  server.get("*", (req, res) => handle(req, res));
+  server.post("*", (req, res) => handle(req, res));
 
   server.listen(port, err => {
     if (err) throw err;
