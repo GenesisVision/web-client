@@ -4,6 +4,7 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 import { CurrencyEnum } from "utils/types";
 
 type TUseAssetSectionProps = {
@@ -22,20 +23,21 @@ const useAssetSection = ({
 }: TUseAssetSectionProps): TUseAssetSectionOutput => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
+  const accountCurrency = useSelector(currencySelector);
   const [wallet, setWallet] = useState<WalletData>(
     wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
   );
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    dispatch(fetchWallets(assetCurrency));
+    dispatch(fetchWallets(accountCurrency));
   }, [assetCurrency]);
 
   useEffect(() => {
     setWallet(
       wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
     );
-  }, [wallets]);
+  }, [wallets, assetCurrency]);
 
   useEffect(() => {
     wallet && getRate({ from: wallet.currency, to: assetCurrency });
