@@ -19,7 +19,7 @@ import eventsApi from "services/api-client/events-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { ASSET, ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
 import {
@@ -156,12 +156,11 @@ export const fetchInvestmentsLevels = (
 ): CancelablePromise<LevelInfo[]> =>
   platformApi.getProgramLevels({ currency }).then(({ levels }) => levels);
 
-export const getProgramHistoryCounts = (id: string) => (
+export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
   const isAuthenticated = authService.isAuthenticated();
-  const isManager = ROLE_ENV || ROLE.MANAGER === ROLE.MANAGER; // TODO remove after union
 
   const commonFiltering = { take: 0 };
 
@@ -175,17 +174,7 @@ export const getProgramHistoryCounts = (id: string) => (
     })
   );
 
-  const periodHistoryFilters = composeRequestFiltersByTableState(
-    periodHistoryTableSelector(getState())
-  );
-  dispatch(
-    getPeriodHistory(id)({
-      ...periodHistoryFilters,
-      ...commonFiltering
-    })
-  );
-
-  if (isAuthenticated && isManager) {
+  if (isAuthenticated) {
     const subscriptionFilters = composeRequestFiltersByTableState(
       subscriptionsTableSelector(getState())
     );
@@ -196,15 +185,27 @@ export const getProgramHistoryCounts = (id: string) => (
       })
     );
 
-    const financialStatisticsFilters = composeRequestFiltersByTableState(
-      financialStatisticTableSelector(getState())
-    );
-    dispatch(
-      getFinancialStatistics(id)({
-        ...financialStatisticsFilters,
-        ...commonFiltering
-      })
-    );
+    if (isProgram) {
+      const periodHistoryFilters = composeRequestFiltersByTableState(
+        periodHistoryTableSelector(getState())
+      );
+      dispatch(
+        getPeriodHistory(id)({
+          ...periodHistoryFilters,
+          ...commonFiltering
+        })
+      );
+
+      const financialStatisticsFilters = composeRequestFiltersByTableState(
+        financialStatisticTableSelector(getState())
+      );
+      dispatch(
+        getFinancialStatistics(id)({
+          ...financialStatisticsFilters,
+          ...commonFiltering
+        })
+      );
+    }
   }
 };
 

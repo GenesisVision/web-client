@@ -172,7 +172,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         <ProgramDetailsStatisticSection />
       )}
       <ProgramDetailsHistorySection
-        getHistoryCounts={getProgramHistoryCounts}
+        getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
         tablesData={tablesData}
         showCommissionRebateSometime={
           brokerDetails.showCommissionRebateSometime
