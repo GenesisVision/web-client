@@ -128,7 +128,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 transferableItem={mapProgramFollowToTransferItemType(
                   description
                 )}
-                accountType={"SignalTradingAccount"}
+                accountType={description.publicInfo.typeExt}
                 onApply={handleDispatchDescription}
               />
             )}
