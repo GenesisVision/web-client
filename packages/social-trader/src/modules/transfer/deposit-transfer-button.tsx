@@ -12,6 +12,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
+      singleCurrentItemContainer
       size={size}
       color={"primary"}
       variant={"contained"}

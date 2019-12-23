@@ -13,6 +13,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _TransferButton: React.FC<Props> = ({
+  singleCurrentItemContainer,
   size = GV_BTN_SIZE.LARGE,
   withIcon,
   color,
@@ -41,6 +42,7 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        singleCurrentItemContainer={singleCurrentItemContainer}
         currentItem={currentItem}
         sourceType={sourceType}
         destinationType={destinationType}
@@ -55,6 +57,7 @@ const _TransferButton: React.FC<Props> = ({
 };
 
 interface Props {
+  singleCurrentItemContainer?: boolean;
   size?: GV_BTN_SIZE;
   withIcon?: boolean;
   type?: WALLET_BUTTON_TYPE;

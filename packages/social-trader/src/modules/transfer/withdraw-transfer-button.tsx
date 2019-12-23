@@ -12,6 +12,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
+      singleCurrentItemContainer
       size={size}
       label={t("buttons.withdraw")}
       title={t("transfer.withdraw-from", {
