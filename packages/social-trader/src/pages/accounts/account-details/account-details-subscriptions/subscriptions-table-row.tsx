@@ -20,6 +20,9 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   assetCurrency
 }) => {
   const {
+    fixedVolume,
+    fixedCurrency,
+    percent,
     status,
     isExternal,
     subscriptionDate,
@@ -61,30 +64,41 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
           <div className="subscriptions-table__buttons-cell-item--first">
             {openTolerancePercent} %
           </div>
-          {status !== "Canceled" && (
-            <div className="subscriptions-table__center-cell">
-              <div className="subscriptions-table__buttons-cell-item">
-                <EditFollowButton
-                  size={GV_BTN_SIZE.MIDDLE}
-                  signalSubscription={provider}
-                  onApply={onApply}
-                  currency={assetCurrency}
-                  id={provider.asset.id}
-                  tradingAccountId={id}
-                />
-              </div>
-              <div className="subscriptions-table__buttons-cell-item ">
-                <UnFollowButton
-                  size={GV_BTN_SIZE.MIDDLE}
-                  onApply={onApply}
-                  id={provider.asset.id}
-                  tradingAccountId={id}
-                  isExternal={isExternal}
-                />
-              </div>
-            </div>
-          )}
         </div>
+      </TableCell>
+      <TableCell>
+        {percent && <>{percent} %</>}
+        {fixedVolume && (
+          <>
+            {fixedVolume} {fixedCurrency}
+          </>
+        )}
+        {percent === null && fixedVolume === null && <> - </>}
+      </TableCell>
+      <TableCell>
+        {status !== "Canceled" && (
+          <div className="subscriptions-table__center-cell">
+            <div className="subscriptions-table__buttons-cell-item">
+              <EditFollowButton
+                size={GV_BTN_SIZE.MIDDLE}
+                signalSubscription={provider}
+                onApply={onApply}
+                currency={assetCurrency}
+                id={provider.asset.id}
+                tradingAccountId={id}
+              />
+            </div>
+            <div className="subscriptions-table__buttons-cell-item ">
+              <UnFollowButton
+                size={GV_BTN_SIZE.MIDDLE}
+                onApply={onApply}
+                id={provider.asset.id}
+                tradingAccountId={id}
+                isExternal={isExternal}
+              />
+            </div>
+          </div>
+        )}
       </TableCell>
     </TableRow>
   );
