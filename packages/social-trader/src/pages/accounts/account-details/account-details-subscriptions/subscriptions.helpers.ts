@@ -15,5 +15,11 @@ export const SUBSCRIPTIONS_COLUMNS: SortingColumn[] = [
   },
   {
     name: "tolerance"
+  },
+  {
+    name: "value"
+  },
+  {
+    name: "buttons"
   }
 ];
