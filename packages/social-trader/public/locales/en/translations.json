@@ -747,6 +747,8 @@
     "subscriptions": {
       "title": "Subscriptions",
       "table": {
+        "buttons": "",
+        "value": "Value",
         "provider": "Provider",
         "profit": "Profit",
         "subscription-date": "Subscription date",
