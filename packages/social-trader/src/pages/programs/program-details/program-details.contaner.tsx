@@ -68,10 +68,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }, [id]);
 
   const tablesData = {
-    financialStatistic: {
-      dataSelector: financialStatisticTableSelector,
-      getItems: getFinancialStatistics
-    },
+    financialStatistic: programDetails
+      ? {
+          dataSelector: financialStatisticTableSelector,
+          getItems: getFinancialStatistics
+        }
+      : undefined,
     openPositions: {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
