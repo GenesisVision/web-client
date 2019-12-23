@@ -79,7 +79,7 @@ export const updateExternalAttachToSignal: TSignalRequest = ({
   id,
   requestParams
 }) =>
-  signalApi.updateSubscriptionSettings_1(id, authService.getAuthArg(), {
+  signalApi.updateExternalSubscriptionSettings(id, authService.getAuthArg(), {
     model: requestParams
   });
 
