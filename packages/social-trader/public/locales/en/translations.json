@@ -880,7 +880,7 @@
       "requests-completed": "All requests completed successfully",
       "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
       "unauth-follow-popup": "You must be logged in to follow trades.",
-      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
+      "auth-manager-popup": "You must be logged in to invest in a program"
     },
     "statistics": {
       "subscribers": "Subscribers",
