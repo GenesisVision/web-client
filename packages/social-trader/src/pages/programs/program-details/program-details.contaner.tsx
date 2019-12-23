@@ -123,7 +123,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <>
-            {followDetails && (
+            {description.ownerActions.canTransferMoney && (
               <InvestmentAccountControls
                 transferableItem={mapProgramFollowToTransferItemType(
                   description
