@@ -1896,8 +1896,11 @@
         "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
       },
       "asset-types": {
+        "Fund": "Fund",
+        "Program": "Program",
+        "SignalProgram": "Signal Program",
         "TradingAccount": "Trading account",
-        "SignalTradingAccount": "Trading account",
+        "SignalTradingAccount": "Signal trading account",
         "ExternalSignalTradingAccount": "External trading account",
         "ExternalTradingAccount": "External trading account"
       },
