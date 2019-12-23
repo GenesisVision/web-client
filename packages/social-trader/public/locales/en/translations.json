@@ -1,4 +1,9 @@
 {
+  "unauth-popup": {
+    "fund": "You must be logged in to invest in a fund",
+    "program": "You must be logged in to invest in a program",
+    "follow": "You must be logged in to follow trades."
+  },
   "request-line": {
     "cancel-header": "Cancel request",
     "cancel-body": "Please confirm that you want to cancel the request."
@@ -881,9 +886,6 @@
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully",
-      "fund-unauth-popup": "You must be logged in to invest in a fund",
-      "program-unauth-popup": "You must be logged in to invest in a program",
-      "unauth-follow-popup": "You must be logged in to follow trades.",
       "auth-manager-popup": "You must be logged in to invest in a program"
     },
     "statistics": {
