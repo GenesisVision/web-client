@@ -72,12 +72,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           {t("dashboard-page.trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
-      <MakeProgramButton
-        canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
-        id={asset.id}
-        title={title}
-        clearAnchor={clearAnchor}
-      />
+      {asset.actions.canMakeProgramFromPrivateTradingAccount && (
+        <MakeProgramButton
+          isEnoughMoney={asset.actions.isEnoughMoneyToCreateProgram}
+          id={asset.id}
+          title={title}
+          clearAnchor={clearAnchor}
+        />
+      )}
       {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
         <TableCardActionsItem to={makeSignalAccountLink} onClick={clearAnchor}>
           {t("dashboard-page.trading.actions.make-signal-account")}
@@ -175,11 +177,11 @@ interface Props {
 }
 
 const MakeProgramButton: React.FC<{
-  canMake: boolean;
+  isEnoughMoney: boolean;
   id: string;
   title: string;
   clearAnchor: (event: TEvent) => void;
-}> = React.memo(({ canMake, id, title, clearAnchor }) => {
+}> = React.memo(({ isEnoughMoney, id, title, clearAnchor }) => {
   const [t] = useTranslation();
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.ACCOUNT,
@@ -190,7 +192,7 @@ const MakeProgramButton: React.FC<{
     state: `/ ${title}`
   };
   const label = t("dashboard-page.trading.actions.make-program");
-  return canMake ? (
+  return isEnoughMoney ? (
     <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
       {label}
     </TableCardActionsItem>
