@@ -10,7 +10,11 @@ import UnFollowButton from "./unfollow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
   onApply,
-  guestActions,
+  guestActions: {
+    canSubscribeToExternalSignalCommonAccount,
+    canSubscribeToExternalSignalPrivateAccount,
+    canSubscribeToInternalSignal
+  } = {},
   leverage,
   brokerId,
   broker,
@@ -28,9 +32,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
   }, [id]);
   const signalSubscription = data && data[0];
 
-  const isExternal = !!(
-    guestActions && guestActions.canSubscribeToExternalSignalPrivateAccount
-  );
+  const isExternal = !!canSubscribeToExternalSignalPrivateAccount;
   const hasActiveSubscription =
     !!signalSubscription && signalSubscription.hasActiveSubscription;
   return (
@@ -44,7 +46,11 @@ const _SignalProviderButtons: React.FC<Props> = ({
         />
       ) : (
         <FollowButton
-          guestActions={guestActions}
+          canFollow={
+            canSubscribeToExternalSignalCommonAccount ||
+            canSubscribeToExternalSignalPrivateAccount ||
+            canSubscribeToInternalSignal
+          }
           onApply={updateInfo}
           leverage={leverage}
           brokerId={brokerId}
