@@ -31,10 +31,10 @@
     align-items: center;
     justify-content: center;
     fill: $main-color;
-    stroke: #1d1a3d;
-    background-color: #1d1a3d;
+    stroke: $landing-color-icon;
+    background-color: $landing-color-icon;
     mix-blend-mode: normal;
-    border: 1px solid #1d1a3d;
+    border: 1px solid $landing-color-icon;
 
     svg {
       width: 19px;

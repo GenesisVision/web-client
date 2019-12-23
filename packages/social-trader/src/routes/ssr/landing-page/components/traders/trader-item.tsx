@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
+import UserIcon from "media/user-avatar.svg";
 import React from "react";
 
 interface ITraderItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
@@ -19,7 +20,8 @@ const _TraderItem: React.FC<ITraderItemProps> = ({
   <li className="traders-list__item">
     <div className="traders-list__item-avatar">
       <ImageBase
-        DefaultImageComponent={GVProgramDefaultAvatar}
+        defaultImage={UserIcon}
+        defaultImageClassName="traders-list__item-image--default"
         imageClassName={classNames("traders-list__item-image", imageClassName)}
         url={url}
       />

@@ -83,7 +83,7 @@
 
     &--last-screen {
       padding-top: 360px;
-      background-image: url("../images/bg/join-bg-mob.svg");
+      background-image: url("../images/common/join-bg-mob.svg");
       background-repeat: no-repeat;
       background-size: auto 300px;
       background-position: 50% 30px;
@@ -95,7 +95,7 @@
       }
 
       @include media-breakpoint-landscape-tablet() {
-        background-image: url("../images/bg/join-bg.svg");
+        background-image: url("../images/common/join-bg.svg");
         padding-top: 235px;
         padding-bottom: 235px;
         background-size: 100%;

@@ -16,7 +16,7 @@ const _BestList: React.FC<Props> = ({ className }) => (
       <BestItem
         title="Rodney Green"
         text="Profit from “RefPrllevel"
-        url=""
+        url="61b1301c-796f-4f5c-bf37-7540bf72aa7b"
         data="+0.989482929"
       />
       <BestItem
@@ -28,13 +28,13 @@ const _BestList: React.FC<Props> = ({ className }) => (
       <BestItem
         title="Rodney Green"
         text="Profit from “RefPrllevel"
-        url=""
+        url="2ef91289-7a0e-4762-81f6-b6962300fb0d"
         data="+0.989482929"
       />
       <BestItem
         title="Rodney Green"
         text="Profit from “RefPrllevel"
-        url=""
+        url="016da29f-ca9d-4797-a5db-22908a80fc7e"
         data="+0.989482929"
       />
       <BestItem

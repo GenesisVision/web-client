@@ -64,9 +64,12 @@
   &__item-avatar {
     width: 66px;
     height: 66px;
-    background: linear-gradient(0deg, #f7f7f7, #f7f7f7);
+    background-color: $landing-color-icon;
     border-radius: 16px;
     margin-bottom: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @include media-breakpoint-desktop() {
       width: 80px;
@@ -78,6 +81,16 @@
     @include media-breakpoint-large-desktop() {
       width: 100px;
       height: 100px;
+    }
+  }
+
+  &__item-image {
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
+
+    &--default {
+      height: 40%;
     }
   }
 
