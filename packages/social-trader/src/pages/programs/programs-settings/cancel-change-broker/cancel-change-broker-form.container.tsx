@@ -14,6 +14,7 @@ const _CancelChangeBrokerFormContainer: React.FC<
     fetchOnMount: true,
     request: getProgramBrokersMethod
   });
+  if (!data) return null;
   return (
     <CancelChangeBrokerForm
       loaderData={getBrokersProgramInfoLoaderData()}
