@@ -1384,9 +1384,8 @@
       "available": "Available",
       "trading": "Trading",
       "pending": "Pending",
-      "buttons": {
-        "buy-with-card": "Buy with card"
-      }
+      "buy-with-card": "Buy with card",
+      "buttons": ""
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
