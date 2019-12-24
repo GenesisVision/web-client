@@ -2360,6 +2360,11 @@
       }
     }
   },
+  "edit-follow": {
+    "notifications": {
+      "edit-success": "Follow has been edited"
+    }
+  },
   "edit-program": {
     "title": "Edit program",
     "navigation-back-text": "All data will be deleted. Do you want to continue?",
