@@ -4,6 +4,9 @@ import classNames from "classnames";
 import * as React from "react";
 
 const _DetailsBlock: React.FC<Props> = ({
+  landscapeTablet,
+  tablet,
+  landscapePhone = true,
   row,
   horizontalPaddings,
   table,
@@ -14,6 +17,10 @@ const _DetailsBlock: React.FC<Props> = ({
 }) => (
   <div
     className={classNames("details-block", className, {
+      "details-block--landscape-tablet": landscapeTablet,
+      "details-block--tablet": tablet,
+      "details-block--landscape-phone":
+        landscapePhone && (!landscapeTablet && !tablet),
       "details-block--row": row,
       "details-block--horizontal-paddings": !!horizontalPaddings,
       "details-block--table": !!table,
@@ -34,6 +41,9 @@ export enum DETAILS_BLOCK_TYPE {
 }
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
+  landscapePhone?: boolean;
   row?: boolean;
   type?: DETAILS_BLOCK_TYPE;
   className?: string;
