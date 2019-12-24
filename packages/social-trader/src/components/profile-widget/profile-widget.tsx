@@ -5,6 +5,7 @@ import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import GVButton from "components/gv-button";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
+import { ReferrerIcon } from "components/icon/referrer-icon";
 import { SecurityIcon } from "components/icon/security-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
 import Link from "components/link/link";
@@ -67,12 +68,12 @@ const _ProfileWidget: React.FC<Props> = ({
                 {t("profile-widget.security")}
               </Link>
             </div>
-            <div className="profile-menu__item profile-menu__item--security">
+            <div className="profile-menu__item profile-menu__item--referrer">
               <Link
                 to={linkCreator(REFERRAL_PROGRAM_ROUTE)}
                 onClick={clearAnchor}
               >
-                <SecurityIcon />
+                <ReferrerIcon />
                 {t("profile-page.tabs.referral-program")}
               </Link>
             </div>
