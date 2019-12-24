@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import * as uuid from "uuid";
 
 import { ToType } from "./link";
@@ -20,9 +21,36 @@ export const normalizeTo = (to: ToType | string): ToType => {
       };
 };
 
-export const normalizeUrlString = (url: string): string => {
-  const role = process.env.REACT_ROOT_ROUTE // TODO remove after union
-    ? `/${process.env.REACT_ROOT_ROUTE}`
-    : "";
-  return `${role}${url}`;
+export const normalizeLinkFrom = (to: ToType | string): string => {
+  return typeof to === "string" ? to : to.pathname;
+};
+
+export const normalizeUrlString = (url: string): string => url;
+
+export const createToUrl = (
+  as: string,
+  pathname: string,
+  state: string
+): ToType => ({
+  as,
+  pathname,
+  state: `/ ${state}`
+});
+
+export const TitleContext = React.createContext("");
+
+export const useToLink = (): {
+  contextTitle: string;
+  linkCreator: (
+    as: string,
+    title?: string,
+    pathname?: string
+  ) => ToType | string;
+} => {
+  const contextTitle = useContext(TitleContext);
+  const linkCreator = (as: string, title?: string, pathname: string = "") => {
+    const state = title || contextTitle;
+    return state ? createToUrl(as, pathname, title || contextTitle) : as;
+  };
+  return { contextTitle, linkCreator };
 };

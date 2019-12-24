@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Link, { LinkProps } from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 import NewsIcon from "media/news.svg";
@@ -32,15 +33,15 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   closeNotifications,
   assetType
 }) => {
+  const { linkCreator } = useToLink();
   const Tag: React.ComponentType<LinkProps | any> | string = url ? Link : "div";
   const to = url
-    ? {
-        pathname:
-          assetType === "Program"
-            ? composeProgramDetailsUrl(url)
-            : composeFundsDetailsUrl(url),
-        state: `/ ${type}`
-      }
+    ? linkCreator(
+        assetType === "Program"
+          ? composeProgramDetailsUrl(url)
+          : composeFundsDetailsUrl(url),
+        type
+      )
     : null;
   return (
     <Tag to={to} onClick={closeNotifications} className="notification__icon">

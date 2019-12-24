@@ -1,12 +1,13 @@
-import "components/details/details.scss";
-
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
+import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import FollowControlsContainer from "pages/follows/follow-details/follow-controls/follow-controls.container";
+import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
+import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
@@ -67,35 +68,41 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }, [id]);
 
   const tablesData = {
-    financialStatistic: {
-      dataSelector: financialStatisticTableSelector,
-      getItems: getFinancialStatistics
-    },
+    financialStatistic: programDetails
+      ? {
+          dataSelector: financialStatisticTableSelector,
+          getItems: getFinancialStatistics
+        }
+      : undefined,
     openPositions: {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
-    periodHistory: {
-      dataSelector: periodHistoryTableSelector,
-      getItems: getPeriodHistory
-    },
+    periodHistory: programDetails
+      ? {
+          dataSelector: periodHistoryTableSelector,
+          getItems: getPeriodHistory
+        }
+      : undefined,
     subscriptions: {
       dataSelector: subscriptionsTableSelector,
       getItems: getSubscriptions
     },
     trades: { dataSelector: tradesTableSelector, getItems: getTrades }
   };
+
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        detailsType={DETAILS_TYPE.ASSET}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         logo={logo}
         title={title}
         id={id}
-        username={username}
+        subtitle={username}
         socialLinks={socialLinks}
-        ownerUrl={ownerUrl}
+        subtitleUrl={ownerUrl}
         currency={currency}
         color={color}
         asset={assetType}
@@ -122,13 +129,25 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
                 description={description}
-                canCloseAsset={ownerActions && ownerActions.canClose}
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
             )}
             {followDetails && (
-              <FollowControlsContainer description={description} />
+              <FollowControls
+                isOwnAsset={isOwnAsset}
+                onApply={handleDispatchDescription}
+                description={description}
+              />
+            )}
+            {isOwnAsset && ownerActions.canTransferMoney && (
+              <InvestmentAccountControls
+                transferableItem={mapProgramFollowToTransferItemType(
+                  description
+                )}
+                accountType={description.publicInfo.typeExt}
+                onApply={handleDispatchDescription}
+              />
             )}
           </>
         )}
@@ -155,7 +174,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         <ProgramDetailsStatisticSection />
       )}
       <ProgramDetailsHistorySection
-        getHistoryCounts={getProgramHistoryCounts}
+        getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
         tablesData={tablesData}
         showCommissionRebateSometime={
           brokerDetails.showCommissionRebateSometime

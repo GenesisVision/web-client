@@ -1,3 +1,4 @@
+import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
@@ -31,10 +32,8 @@ const DECIMAL_SCALE_BIG_VALUE = 2;
 
 const _ProgramCard: React.FC<Props> = ({ program, title }) => {
   const { t } = useTranslation();
-  const linkProps = {
-    pathname: composeProgramDetailsUrl(program.url),
-    state: `/ ${title}`
-  };
+  const { linkCreator } = useToLink();
+  const linkProps = linkCreator(composeProgramDetailsUrl(program.url), title);
   const requestCurrency = program.balance.currency;
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (

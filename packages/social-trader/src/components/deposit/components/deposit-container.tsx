@@ -1,10 +1,10 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import FormError from "components/form/form-error/form-error";
+import useApiRequest from "hooks/api-request.hook";
 import {
   fetchBaseWallets,
   TWalltetsBaseData
-} from "components/wallet/services/wallet.services";
-import useApiRequest from "hooks/api-request.hook";
+} from "pages/wallet/services/wallet.services";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -21,7 +21,6 @@ const _DepositContainer: React.FC<Props> = ({
   availableToInvest,
   entryFee,
   minDeposit,
-  assetInvest,
   asset,
   id,
   open,
@@ -53,7 +52,6 @@ const _DepositContainer: React.FC<Props> = ({
         loaderData={DepositInfoLoaderData}
         id={id}
         onClose={onClose}
-        assetInvest={assetInvest}
         onApply={onApply}
         data={data!}
         asset={asset}
@@ -73,7 +71,6 @@ interface Props extends IDialogProps {
   asset: ASSET;
   id: string;
   onApply: () => void;
-  assetInvest: TAssetDeposit;
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
   ownAsset?: boolean;

@@ -5,32 +5,38 @@ import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
-import { DetailsManager } from "./details-manager.block";
 import { DetailsStrategy } from "./details-strategy.block";
+import { DetailsSubtitle } from "./details-subtitle.block";
 
 const _DetailsInfo: React.FC<Props> = ({
+  descriptionTitle,
   title,
-  to,
-  username,
+  subtitleUrl,
+  subtitle,
   socialLinks,
   description,
   children
 }) => {
   return (
-    <div className="asset-details-description__info">
+    <div className="details-description__info">
       <h1 className="title-small-padding">{title}</h1>
-      {to && username && <DetailsManager to={to} username={username} />}
+      {subtitle && <DetailsSubtitle to={subtitleUrl} text={subtitle} />}
       {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
-      {children}
-      {description && <DetailsStrategy description={description} />}
+      {children && (
+        <div className="details-description__info-block">{children}</div>
+      )}
+      {description && (
+        <DetailsStrategy title={descriptionTitle} description={description} />
+      )}
     </div>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  descriptionTitle?: string;
   title: string;
-  to?: ToType;
-  username?: string;
+  subtitleUrl?: ToType;
+  subtitle?: string;
   socialLinks?: SocialLinkViewModel[];
   description?: string;
 }

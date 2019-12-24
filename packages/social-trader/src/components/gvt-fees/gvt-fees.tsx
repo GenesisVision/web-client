@@ -1,25 +1,18 @@
 import "./gvt-fees.scss";
 
 import Dialog from "components/dialog/dialog";
-import useRole from "hooks/use-role.hook";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ROLE } from "shared/constants/constants";
 
 const _GVTFees: React.FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
-  const role = useRole();
   return (
     <Dialog open={open} onClose={onClose} className="gvt-fees">
       <div className="gvt-fees__container">
         <h1>{t("gvt-fees.titles.main")}</h1>
         <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-1")}</p>
-        {role === ROLE.INVESTOR ? (
-          <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-2")}</p>
-        ) : null}
-        {role === ROLE.MANAGER ? (
-          <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-3")}</p>
-        ) : null}
+        <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-2")}</p>
+        <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-3")}</p>
         <div className="gvt-fees__table-wrapper">
           <table className="gvt-fees__table">
             <thead>

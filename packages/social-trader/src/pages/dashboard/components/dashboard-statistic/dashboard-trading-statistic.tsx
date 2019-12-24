@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
@@ -23,10 +24,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
       label={t("dashboard-page.statistic.trading")}
       request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
-      renderValues={({
-        equity,
-        assetsUnderManagement
-      }: TDashboardTradingStatistic) => (
+      renderValues={({ equity, aum }: TDashboardTradingStatistic) => (
         <>
           <DashboardValueItem
             label={t("dashboard-page.statistic.equity")}
@@ -35,7 +33,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
           />
           <DashboardValueItem
             label={t("dashboard-page.statistic.AUM")}
-            value={assetsUnderManagement}
+            value={aum}
             currency={currency}
           />
         </>
@@ -45,6 +43,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
 };
 
 const DashboardTradingEmpty: React.FC = React.memo(() => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
     <div className=" dashboard-statistic__values">
@@ -54,7 +53,7 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
           {t("dashboard-page.statistic.get-started-account")}
         </div>
         <div className="dashboard-statistic__create-block-links">
-          <Link to={CREATE_ACCOUNT_PAGE_ROUTE}>
+          <Link to={linkCreator(CREATE_ACCOUNT_PAGE_ROUTE)}>
             <GVButton color="primary">{t("buttons.create-account")}</GVButton>
           </Link>
         </div>
@@ -64,7 +63,7 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
           {t("dashboard-page.statistic.get-started-fund")}
         </div>
         <div className="dashboard-statistic__create-block-links">
-          <Link to={CREATE_FUND_PAGE_ROUTE}>
+          <Link to={linkCreator(CREATE_FUND_PAGE_ROUTE)}>
             <GVButton color="primary">{t("buttons.create-fund")}</GVButton>
           </Link>
         </div>

@@ -43,10 +43,9 @@ const _DetailsInvestment: React.FC<Props> = ({
   programPersonalDetails,
   followPersonalDetails
 }) => {
-  const subscriptionsCount =
-    followPersonalDetails && "subscribedAccounts" in followPersonalDetails
-      ? followPersonalDetails.subscribedAccounts
-      : 0;
+  const subscriptionsCount = followPersonalDetails
+    ? followPersonalDetails.subscribedAccounts
+    : 0;
   const investmentDetails = personalFundDetails || programPersonalDetails;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
@@ -76,7 +75,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 
   if (!haveEvents && !showInvestment && !showSubscription) return null;
   return (
-    <DetailsBlock table wide className="details-investment">
+    <DetailsBlock table wide>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           visible={showSubscription}

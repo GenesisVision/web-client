@@ -13,7 +13,7 @@ import {
   WithBlurLoaderProps
 } from "decorators/with-blur-loader";
 import { InjectedFormikProps, withFormik } from "formik";
-import { FundCreateAssetPlatformInfo } from "gv-api-web";
+import { FundCreateAssetPlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -32,8 +32,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   t,
   isSubmitting,
   values: { depositAmount, description, depositWalletId },
-  data: { maxExitFee, maxEntryFee },
-  minimumDepositAmount
+  data: { maxExitFee, maxEntryFee, minDeposit }
 }) => {
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   return (
@@ -84,7 +83,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
         inputName={CREATE_FUND_FIELDS.depositAmount}
         depositAmount={depositAmount}
-        minimumDepositAmount={minimumDepositAmount}
+        minimumDepositAmount={minDeposit}
         setFieldValue={setFieldValue}
         assetCurrency={FUND_CURRENCY}
       />
@@ -156,8 +155,8 @@ const CreateFundSettings = compose<
 export default CreateFundSettings;
 
 interface OwnProps {
+  wallets: WalletData[];
   data: FundCreateAssetPlatformInfo;
-  minimumDepositAmount: number;
   onSubmit: (
     values: ICreateFundSettingsFormValues,
     setSubmitting: SetSubmittingType

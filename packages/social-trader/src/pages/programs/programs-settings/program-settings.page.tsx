@@ -1,5 +1,3 @@
-import "components/details/details.scss";
-
 import { IImageValue } from "components/form/input-image/input-image";
 import { TradesDelay } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
@@ -7,11 +5,8 @@ import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programDescriptionSelector } from "pages/programs/program-details/reducers/description.reducer";
-import {
-  dispatchProgramDescriptionWithId,
-  getProgramBrokersMethod
-} from "pages/programs/program-details/service/program-details.service";
-import React, { useCallback, useEffect } from "react";
+import { dispatchProgramDescriptionWithId } from "pages/programs/program-details/service/program-details.service";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProgramInfoSelector } from "reducers/platform-reducer";
 import { ASSET } from "shared/constants/constants";
@@ -46,13 +41,6 @@ const _ProgramsEditPage: React.FC = () => {
     request: cancelChangeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
-  const { sendRequest: getProgramBrokers, data: brokersInfo } = useApiRequest({
-    request: getProgramBrokersMethod
-  });
-
-  useEffect(() => {
-    description && getProgramBrokers(description.id);
-  }, [description]);
 
   const handleChangeBroker = useCallback(
     (
@@ -84,12 +72,11 @@ const _ProgramsEditPage: React.FC = () => {
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
           updateDescription={updateDescription}
-          condition={!!description && !!brokersInfo && !!createProgramInfo}
+          condition={!!description && !!createProgramInfo}
           createProgramInfo={createProgramInfo}
           closeProgram={applyCloseAsset}
           description={description!}
           editProgram={editProgram}
-          brokersInfo={brokersInfo!}
           changeBroker={handleChangeBroker}
           loader={<AssetSettingsLoader />}
           cancelChangeBroker={handleCancelChangeBroker}

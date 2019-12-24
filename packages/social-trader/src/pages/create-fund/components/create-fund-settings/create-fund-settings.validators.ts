@@ -12,7 +12,6 @@ import {
 import { formatCurrencyValue } from "utils/formatter";
 import { array, lazy, number, object } from "yup";
 
-import { FUND_CURRENCY } from "../../create-fund.constants";
 import {
   CREATE_FUND_FIELDS,
   ICreateFundSettingsFormValues,
@@ -20,27 +19,28 @@ import {
 } from "./create-fund-settings";
 
 const createFundSettingsValidationSchema = ({
+  wallets,
   t,
-  data: { maxExitFee, maxEntryFee },
-  minimumDepositAmount
+  data: { maxExitFee, maxEntryFee, minDeposit }
 }: ICreateFundSettingsProps & WithTranslation) =>
   lazy<ICreateFundSettingsFormValues>(values => {
-    const minDeposit = parseFloat(
-      formatCurrencyValue(
-        convertToCurrency(
-          minimumDepositAmount,
-          values[CREATE_FUND_FIELDS.rate]
-        ),
-        FUND_CURRENCY
-      )
+    const wallet = wallets.find(
+      ({ id }) => id === values[CREATE_FUND_FIELDS.depositWalletId]
+    )!;
+    const minDepositInCur = convertToCurrency(
+      minDeposit,
+      values[CREATE_FUND_FIELDS.rate]
+    );
+    const minDepositInCurText = parseFloat(
+      formatCurrencyValue(minDepositInCur, wallet.currency)
     );
     return object<ICreateFundSettingsFormValues>().shape({
       [CREATE_FUND_FIELDS.depositAmount]: number()
         .required(t("create-program-page.settings.validation.amount-required"))
-        .min(
-          minDeposit,
+        .moreThan(
+          minDepositInCurText,
           t("create-program-page.settings.validation.amount-is-zero", {
-            min: minDeposit
+            min: minDepositInCurText
           })
         )
         .max(

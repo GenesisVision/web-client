@@ -8,54 +8,66 @@ import { formatCurrencyValue } from "utils/formatter";
 import { lazy, number, object, Schema, string } from "yup";
 
 import {
-  CREATE_ACCOUNT_FORM_FIELDS,
   CreateAccountFormProps,
   CreateAccountFormValues
 } from "./follow-popup-create-account";
+
+export enum CREATE_ACCOUNT_FORM_FIELDS {
+  depositWalletId = "depositWalletId",
+  currency = "currency",
+  depositAmount = "depositAmount",
+  rate = "rate"
+}
+
+const getAvailable = (
+  wallets: WalletData[],
+  currency: string,
+  rate: number
+): number => {
+  const wallet = wallets.find(
+    (wallet: WalletData) => wallet.currency === currency
+  );
+  return convertToCurrency(wallet ? wallet.available : 0, rate);
+};
 
 const CreateAccountFormValidationSchema = ({
   minDeposit,
   wallets,
   t
 }: CreateAccountFormProps) => {
-  const getAvailable = (currency: string, rate: number): number => {
-    const wallet = wallets.find(
-      (wallet: WalletData) => wallet.currency === currency
-    );
-    return convertToCurrency(wallet ? wallet.available : 0, rate);
-  };
   return lazy(
-    (values: CreateAccountFormValues): Schema<any> =>
-      object().shape({
+    (values: CreateAccountFormValues): Schema<any> => {
+      const rate = values[CREATE_ACCOUNT_FORM_FIELDS.rate];
+      const currency = values[CREATE_ACCOUNT_FORM_FIELDS.currency];
+      return object().shape({
         [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number()
           .required(
             t("follow-program.create-account.validation.amount-required")
           )
           .min(
-            convertFromCurrency(
-              minDeposit,
-              values[CREATE_ACCOUNT_FORM_FIELDS.rate]
-            ),
+            convertFromCurrency(minDeposit, rate),
             t(
               "follow-program.create-account.validation.amount-more-than-min-deposit",
               {
-                value: formatCurrencyValue(
-                  convertFromCurrency(
-                    minDeposit,
-                    values[CREATE_ACCOUNT_FORM_FIELDS.rate]
-                  ),
-                  values[CREATE_ACCOUNT_FORM_FIELDS.currency]
-                )
+                value: `${formatCurrencyValue(
+                  convertFromCurrency(minDeposit, rate),
+                  currency
+                )} ${currency}`
               }
             )
           )
           .max(
-            getAvailable(values[CREATE_ACCOUNT_FORM_FIELDS.currency], 1),
+            getAvailable(
+              wallets,
+              values[CREATE_ACCOUNT_FORM_FIELDS.currency],
+              1
+            ),
             t(
               "follow-program.create-account.validation.amount-more-than-available"
             )
           )
-      })
+      });
+    }
   );
 };
 

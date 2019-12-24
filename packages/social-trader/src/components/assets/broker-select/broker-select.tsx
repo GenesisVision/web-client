@@ -35,7 +35,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               isSelected={broker === selectedBroker}
               onSelect={selectBrokerHandle}
               cardState={getBrokerState(
-                false, // broker.isForex,
+                broker.isKycRequired,
                 isForexAllowed,
                 isKycConfirmed
               )}
@@ -44,7 +44,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           ))}
           <div className="broker-select__navigation">
             <NavigateToSettings
-              isForex={false} //selectedBroker.isForex}
+              isForex={selectedBroker.isKycRequired}
               isKycConfirmed={isKycConfirmed}
               navigateToSettings={navigateToSettings}
             />

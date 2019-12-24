@@ -20,7 +20,7 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
       title={header || t("deposit-asset.title")}
       subtitle={title || asset}
     >
-      {asset === ASSET.PROGRAM && availableToInvest && (
+      {asset === ASSET.PROGRAM && !!availableToInvest && (
         <DialogField>
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}

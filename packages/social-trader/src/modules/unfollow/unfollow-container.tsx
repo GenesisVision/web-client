@@ -31,7 +31,7 @@ const _UnfollowContainer: React.FC<Props> = ({
   );
   return (
     <Dialog open={open} onClose={onClose}>
-      <UnfollowForm onSubmit={handleSubmit} />
+      <UnfollowForm isExternal={isExternal} onSubmit={handleSubmit} />
     </Dialog>
   );
 };

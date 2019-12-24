@@ -8,6 +8,8 @@ import DepositButton from "modules/deposit/deposit.button";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { ASSET } from "shared/constants/constants";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
@@ -16,6 +18,11 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   description,
   levelsParameters
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const canInvest = isAuthenticated
+    ? !!description.programDetails.personalDetails &&
+      description.programDetails.personalDetails.canInvest
+    : true;
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -29,6 +36,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
+          disabled={!canInvest}
           title={description.publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
@@ -47,7 +55,6 @@ const _InvestmentProgramControls: React.FC<Props> = ({
 
 interface Props {
   onApply?: VoidFunction;
-  canCloseAsset: boolean;
   isOwnProgram: boolean;
   description: ProgramDescriptionDataType;
   levelsParameters: LevelsParamsInfo;

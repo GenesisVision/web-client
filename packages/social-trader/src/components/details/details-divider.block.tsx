@@ -1,7 +1,7 @@
-import "./details.scss";
+import "./details-divider.block.scss";
 
 import * as React from "react";
 
 export const DetailsDivider: React.FC = () => {
-  return <div className="details__divider" />;
+  return <div className="details-divider" />;
 };

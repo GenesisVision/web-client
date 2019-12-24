@@ -60,6 +60,10 @@ $card-avatar-size: 80px;
       margin-left: -$padding-xsmall;
       margin-right: -$padding-xsmall;
     }
+
+    &--center {
+      justify-content: center;
+    }
   }
   &__broker-avatar {
     width: $card-avatar-size;
@@ -92,7 +96,6 @@ $card-avatar-size: 80px;
     font-size: $font-size-common;
     margin-bottom: 10px;
     display: block;
-    word-break: break-all;
   }
   &__main-info {
     margin-left: $padding-small/4;

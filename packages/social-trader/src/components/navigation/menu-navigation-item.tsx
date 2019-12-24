@@ -1,3 +1,4 @@
+import { useToLink } from "components/link/link.helper";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -11,15 +12,16 @@ import { TMenuItem } from "routes/menu";
 import NavigationItem from "./navigation-item";
 
 const _MenuNavigationItem: React.FC<Props> = ({
-  item: { Icon, route, label, children },
+  item: { Icon, route = "", label, children },
   popover
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const renderNavigationItem = ({ Icon, route, label }: TMenuItem) => (
+  const renderNavigationItem = ({ Icon, route = "", label }: TMenuItem) => (
     <NavigationItem
       icon={<Icon primary />}
-      href={route}
+      href={linkCreator(route)}
       onClick={clearAnchor}
       key={label}
     >
@@ -30,7 +32,11 @@ const _MenuNavigationItem: React.FC<Props> = ({
   const haveSecondLevel = !!children && !popover;
   return (
     <>
-      <NavigationItem icon={<Icon primary />} href={route} onClick={setAnchor}>
+      <NavigationItem
+        icon={<Icon primary />}
+        href={linkCreator(route)}
+        onClick={setAnchor}
+      >
         {label && t(label)}
         {havePopover && <FilterArrowIcon isOpen={!!anchor} />}
       </NavigationItem>

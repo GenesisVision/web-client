@@ -1,9 +1,9 @@
+import DetailsBlock from "components/details/details-block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import FollowsTableSsr from "modules/follows-table/components/follows-table-ssr";
 import { NextComponentType } from "next";
 import React from "react";
@@ -33,9 +33,9 @@ const FollowsPage: NextComponentType = () => {
         assetsFacets={ASSETS_FACETS.FOLLOWS}
         composeFacetUrl={composeFollowFacetUrl}
       />
-      <Surface className="programs-table-container" key={"table"}>
+      <DetailsBlock table key={"table"}>
         <FollowsTableSsr showSwitchView title={t("follows-page.table")} />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

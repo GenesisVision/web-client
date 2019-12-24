@@ -11,7 +11,8 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   onApply = () => {},
   showFields = true,
   successFee,
-  volumeFee
+  volumeFee,
+  isSignalProgram
 }) => {
   const { sendRequest: editSignalRequest } = useApiRequest({
     middleware: [onApply],
@@ -22,7 +23,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
     ({ volumeFee, successFee }: IProgramSignalFormValues, setSubmitting) =>
       editSignalRequest(
         {
-          assetId: id,
+          id,
           successFee,
           volumeFee
         },
@@ -32,6 +33,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   );
   return (
     <SignalingEdit
+      isSignalProgram={isSignalProgram}
       inDialog={inDialog}
       showFields={showFields}
       successFee={successFee}
@@ -48,6 +50,7 @@ interface Props {
   successFee?: number;
   volumeFee?: number;
   onApply?: VoidFunction;
+  isSignalProgram?: boolean;
 }
 
 export const SignalingEditFormContainer = React.memo(

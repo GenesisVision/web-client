@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -10,14 +11,10 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
   isKycConfirmed,
   navigateToSettings
 }) => {
+  const { linkCreator } = useToLink();
   if (isForex && !isKycConfirmed)
     return (
-      <Link
-        to={{
-          pathname: KYC_ROUTE,
-          state: `/ ${t("create-program-page.title")}`
-        }}
-      >
+      <Link to={linkCreator(KYC_ROUTE, t("create-program-page.title"))}>
         <GVButton color="primary" variant="outlined">
           {t("buttons.verify")}
         </GVButton>

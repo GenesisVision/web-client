@@ -17,6 +17,7 @@ import {
 import { FollowAbsoluteProfitChartDataType } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import followApi from "services/api-client/follow-api";
 import programsApi from "services/api-client/programs-api";
+import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -85,6 +86,7 @@ export const fetchFollowProfitChartAction = (
 ): ApiAction<FollowProfitChartDataType> => ({
   type: FETCH_FOLLOW_PROFIT_CHART,
   payload: followApi.getProfitPercentCharts(id, {
+    authorization: authService.getAuthArg(),
     dateFrom: period.start,
     dateTo: period.end,
     currencies

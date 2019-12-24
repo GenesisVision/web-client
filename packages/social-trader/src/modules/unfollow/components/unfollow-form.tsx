@@ -13,22 +13,24 @@ import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
 const _UnfollowForm: React.FC<Props> = ({
-  onSubmit,
+  isExternal,
   handleSubmit,
   isSubmitting
 }) => {
   const [t] = useTranslation();
+  const modesList = (isExternal && [MODE_NONE]) || Object.keys(modes);
   return (
     <form id="unfollow-form" onSubmit={handleSubmit} noValidate>
       <DialogTop title={t("unfollow-program.title")} />
       <DialogBottom>
         <GVFormikField
+          disableIfSingle
           name={FIELDS.mode}
           component={GVTextField}
           label={t("unfollow-program.type")}
           InputComponent={Select}
         >
-          {Object.keys(modes).map((mode: string) => (
+          {modesList.map((mode: string) => (
             <option
               value={String(modes[mode].value as string)}
               key={String(modes[mode].value)}
@@ -69,18 +71,22 @@ type mode = {
   value: SignalDetachMode;
 };
 
+export const MODE_NONE = "none";
+export const MODE_CLOSE_ONLY = "closeOnly";
+export const MODE_CLOSE_ALL = "closeAll";
+
 const modes: { [key: string]: mode } = {
-  none: {
+  [MODE_NONE]: {
     label: "unfollow-program.modes.manual-closing.label",
     tooltip: "unfollow-program.modes.manual-closing.tooltip",
     value: "None"
   },
-  closeOnly: {
+  [MODE_CLOSE_ONLY]: {
     label: "unfollow-program.modes.close-only.label",
     tooltip: "unfollow-program.modes.close-only.tooltip",
     value: "ProviderCloseOnly"
   },
-  closeAll: {
+  [MODE_CLOSE_ALL]: {
     label: "unfollow-program.modes.close-all-immediately.label",
     tooltip: "unfollow-program.modes.close-all-immediately.tooltip",
     value: "CloseAllImmediately"
@@ -88,6 +94,7 @@ const modes: { [key: string]: mode } = {
 };
 
 interface OwnProps {
+  isExternal: boolean;
   onSubmit: (values: IProgramUnfollowFormValues) => void;
 }
 

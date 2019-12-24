@@ -22,7 +22,8 @@ export const _AssetFormField: React.FC<
   adornment,
   type,
   hintContent,
-  hintTooltipContent
+  hintTooltipContent,
+  disabled
 }) => {
   const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
@@ -35,6 +36,7 @@ export const _AssetFormField: React.FC<
         label={label}
         autoComplete="off"
         component={component}
+        disabled={disabled}
       />
       {caption && (
         <div className="asset-form-field__caption">
@@ -77,6 +79,7 @@ interface Props {
   label: string;
   name: string;
   className?: string;
+  disabled?: boolean;
 }
 
 const AssetFormField = React.memo(_AssetFormField);

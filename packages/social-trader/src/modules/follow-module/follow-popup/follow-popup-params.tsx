@@ -11,6 +11,12 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { InjectedFormikProps, withFormik } from "formik";
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
+import {
+  FOLLOW_PARAMS_FIELDS,
+  followParamsMapPropsToValues,
+  followParamsValidationSchema,
+  modes
+} from "modules/follow-module/follow-popup/follow-popup-params.helpers";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -18,7 +24,6 @@ import { compose } from "redux";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
-import { lazy, number, object } from "yup";
 
 const getInfoText = (currency: CurrencyEnum): string => {
   switch (currency) {
@@ -33,7 +38,7 @@ const getInfoText = (currency: CurrencyEnum): string => {
 };
 
 const _FollowParams: React.FC<
-  InjectedFormikProps<Props, FollowParamsFormValues>
+  InjectedFormikProps<IFollowParamsProps, FollowParamsFormValues>
 > = ({
   subscribeFixedCurrencies,
   rate,
@@ -47,10 +52,10 @@ const _FollowParams: React.FC<
   handleSubmit
 }) => {
   const setMaxOpenTolerancePercent = useCallback(() => {
-    setFieldValue(FIELDS.openTolerancePercent, "20");
+    setFieldValue(FOLLOW_PARAMS_FIELDS.openTolerancePercent, "20");
   }, [setFieldValue]);
   const setMaxVolumePercent = useCallback(() => {
-    setFieldValue(FIELDS.percent, "999");
+    setFieldValue(FOLLOW_PARAMS_FIELDS.percent, "999");
   }, [setFieldValue]);
   const disableButton = isSubmitting || !isValid;
   return (
@@ -58,7 +63,7 @@ const _FollowParams: React.FC<
       <DialogBottom>
         <DialogField>
           <GVFormikField
-            name={FIELDS.mode}
+            name={FOLLOW_PARAMS_FIELDS.mode}
             component={GVTextField}
             label={t("follow-program.params.type")}
             InputComponent={Select}
@@ -78,22 +83,22 @@ const _FollowParams: React.FC<
             ))}
           </GVFormikField>
         </DialogField>
-        {values[FIELDS.mode] === modes.percentage.value && (
+        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.percentage.value && (
           <DialogField>
             <InputAmountField
-              name={FIELDS.percent}
+              name={FOLLOW_PARAMS_FIELDS.percent}
               label={t("follow-program.params.volume-percent")}
               currency={"%"}
               setMax={setMaxVolumePercent}
             />
           </DialogField>
         )}
-        {values[FIELDS.mode] === modes.fixed.value && (
+        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.fixed.value && (
           <>
             {subscribeFixedCurrencies.length > 1 && (
               <DialogField>
                 <GVFormikField
-                  name={FIELDS.fixedCurrency}
+                  name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
                   component={GVTextField}
                   label={t("follow-program.params.fixed-currency")}
                   InputComponent={Select}
@@ -108,16 +113,19 @@ const _FollowParams: React.FC<
             )}
             <DialogField>
               <InputAmountField
-                name={FIELDS.fixedVolume}
+                name={FOLLOW_PARAMS_FIELDS.fixedVolume}
                 label={`${t("follow-program.params.fixed-currency-equivalent", {
-                  fixedCurrency: values[FIELDS.fixedCurrency]
+                  fixedCurrency: values[FOLLOW_PARAMS_FIELDS.fixedCurrency]
                 })} *`}
-                currency={values[FIELDS.fixedCurrency]}
+                currency={values[FOLLOW_PARAMS_FIELDS.fixedCurrency]}
               />
               {currency && (
                 <NumberFormat
                   value={formatCurrencyValue(
-                    convertFromCurrency(values[FIELDS.fixedVolume]!, rate),
+                    convertFromCurrency(
+                      values[FOLLOW_PARAMS_FIELDS.fixedVolume]!,
+                      rate
+                    ),
                     currency
                   )}
                   prefix="≈ "
@@ -130,7 +138,7 @@ const _FollowParams: React.FC<
         )}
         <DialogField>
           <InputAmountField
-            name={FIELDS.openTolerancePercent}
+            name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
             label={
               <TooltipLabel
                 tooltipContent={t(
@@ -157,52 +165,19 @@ const _FollowParams: React.FC<
             {t("follow-program.params.submit")}
           </GVButton>
         </DialogButtons>
-        {values[FIELDS.mode] === modes.fixed.value && currency && (
-          <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>
-        )}
+        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.fixed.value &&
+          currency && <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>}
       </DialogBottom>
     </form>
   );
 };
 
-enum FIELDS {
-  fixedCurrency = "fixedCurrency",
-  mode = "mode",
-  openTolerancePercent = "openTolerancePercent",
-  percent = "percent",
-  fixedVolume = "fixedVolume"
-}
-
-type mode = {
-  label: string;
-  tooltip: string;
-  value: SubscriptionMode;
-};
-
-const modes: { [key: string]: mode } = {
-  byBalance: {
-    label: "follow-program.modes.byBalance.label",
-    tooltip: "follow-program.modes.byBalance.tooltip",
-    value: "ByBalance"
-  },
-  percentage: {
-    label: "follow-program.modes.percentage.label",
-    tooltip: "follow-program.modes.percentage.tooltip",
-    value: "Percent"
-  },
-  fixed: {
-    label: "follow-program.modes.fixed.label",
-    tooltip: "follow-program.modes.fixed.tooltip",
-    value: "Fixed"
-  }
-};
-
 export interface FollowParamsFormValues {
-  [FIELDS.fixedCurrency]: string;
-  [FIELDS.mode]: SubscriptionMode;
-  [FIELDS.openTolerancePercent]: number;
-  [FIELDS.percent]: number;
-  [FIELDS.fixedVolume]: number;
+  [FOLLOW_PARAMS_FIELDS.fixedCurrency]: string;
+  [FOLLOW_PARAMS_FIELDS.mode]: SubscriptionMode;
+  [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number;
+  [FOLLOW_PARAMS_FIELDS.percent]: number;
+  [FOLLOW_PARAMS_FIELDS.fixedVolume]: number;
 }
 
 interface OwnProps {
@@ -217,59 +192,15 @@ interface OwnProps {
   onPrevStep?: () => void;
 }
 
-interface Props extends OwnProps, WithTranslation {}
+export interface IFollowParamsProps extends OwnProps, WithTranslation {}
 
 const FollowParams = compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, FollowParamsFormValues>({
+  withFormik<IFollowParamsProps, FollowParamsFormValues>({
     isInitialValid: true,
     displayName: "follow-params",
-    mapPropsToValues: ({ paramsSubscription, subscribeFixedCurrencies }) => {
-      return {
-        [FIELDS.fixedCurrency]: subscribeFixedCurrencies[0],
-        [FIELDS.mode]: paramsSubscription
-          ? paramsSubscription.mode
-          : (modes.byBalance.value as SubscriptionMode),
-        [FIELDS.openTolerancePercent]: paramsSubscription
-          ? paramsSubscription.openTolerancePercent
-          : 0.5,
-        [FIELDS.fixedVolume]: paramsSubscription
-          ? paramsSubscription.fixedVolume
-          : 100,
-        [FIELDS.percent]: paramsSubscription ? paramsSubscription.percent : 10
-      };
-    },
-    validationSchema: ({ t }: Props) =>
-      lazy<FollowParamsFormValues>(values =>
-        object<FollowParamsFormValues>().shape({
-          [FIELDS.fixedVolume]: number()
-            .min(
-              0,
-              t("follow-program.params.validation.fixedVolume-min", {
-                fixedCurrency: values[FIELDS.fixedCurrency]
-              })
-            )
-            .lessThan(
-              100000,
-              t("follow-program.params.validation.fixedVolume-max", {
-                fixedCurrency: values[FIELDS.fixedCurrency]
-              })
-            ),
-          [FIELDS.percent]: number()
-            .min(1, t("follow-program.params.validation.percent-min"))
-            .lessThan(1000, t("follow-program.params.validation.percent-max")),
-          [FIELDS.openTolerancePercent]: number()
-            .required(t("follow-program.params.validation.tolerance-required"))
-            .min(
-              0.01,
-              t("follow-program.params.validation.tolerance-percent-min")
-            )
-            .max(
-              20,
-              t("follow-program.params.validation.tolerance-percent-max")
-            )
-        })
-      ),
+    mapPropsToValues: followParamsMapPropsToValues,
+    validationSchema: followParamsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

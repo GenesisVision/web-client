@@ -15,6 +15,7 @@ import { currencySelector } from "reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
+import { CREATE_ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
@@ -28,6 +29,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  assetType,
   haveDelay = true,
   getHistoryCounts,
   tablesData: {
@@ -101,6 +103,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
+          title={title}
+          assetType={assetType}
           haveDelay={haveDelay}
           getItems={trades.getItems(programId)}
           dataSelector={trades.dataSelector}
@@ -156,6 +160,7 @@ enum TABS {
 }
 
 interface Props {
+  assetType?: CREATE_ASSET;
   haveDelay?: boolean;
   getHistoryCounts: (
     id: string

@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
+import { useToLink } from "components/link/link.helper";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
@@ -10,23 +11,28 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem
+  TableCardActionsItem,
+  TableCardActionsItemContainer
 } from "components/table/components/table-card/table-card-actions";
-import { DashboardTradingAsset } from "gv-api-web";
+import {
+  BrokerTradeServerType,
+  DashboardTradingAsset,
+  ProgramMinInvestAmount
+} from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
-import TransferButton from "modules/transfer/transfer-button";
-import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
+import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
+import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
-import { useContext } from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -35,30 +41,32 @@ import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
-  const title = useContext(TitleContext);
+  const programMinDepositAmounts = useSelector(
+    programMinDepositAmountsSelector
+  );
+  const minDepositCreateProgram = getMinDepositCreateProgram(
+    programMinDepositAmounts,
+    asset.broker.type,
+    asset.accountInfo.currency
+  );
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const makeSignalLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.SIGNAL
   });
-  const terminalLink = {
-    pathname: getTerminalLink(asset.broker.type),
-    state: `/ ${title}`
-  };
-  const makeSignalAccountLink = {
-    pathname: makeSignalLinkMethod(asset.id),
-    state: `/ ${title}`
-  };
+  const terminalLink = linkCreator(getTerminalLink(asset.broker.type));
+  const makeSignalAccountLink = linkCreator(makeSignalLinkMethod(asset.id));
   const makeProgramExternalLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.EXTERNAL_ACCOUNT,
     assetTo: CONVERT_ASSET.PROGRAM
   });
-  const makeProgramExternalLink = {
-    pathname: makeProgramExternalLinkMethod(asset.id),
-    state: `/ ${title}`
-  };
+  const makeProgramExternalLink = linkCreator(
+    makeProgramExternalLinkMethod(asset.id)
+  );
   const renderActions = ({ anchor, clearAnchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
@@ -72,12 +80,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           {t("dashboard-page.trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
-      <MakeProgramButton
-        canMake={asset.actions.canMakeProgramFromPrivateTradingAccount}
-        id={asset.id}
-        title={title}
-        clearAnchor={clearAnchor}
-      />
+      {asset.actions.canMakeProgramFromPrivateTradingAccount && (
+        <MakeProgramButton
+          necessaryMoney={`${minDepositCreateProgram} ${asset.accountInfo.currency}`}
+          isEnoughMoney={asset.actions.isEnoughMoneyToCreateProgram}
+          id={asset.id}
+          clearAnchor={clearAnchor}
+        />
+      )}
       {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
         <TableCardActionsItem to={makeSignalAccountLink} onClick={clearAnchor}>
           {t("dashboard-page.trading.actions.make-signal-account")}
@@ -89,19 +99,19 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           title={asset.accountInfo.title}
         />
       )}
-      <CloseAssetButton
-        assetName={asset.accountInfo.title}
-        onApply={updateItems}
-        type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
-        id={asset.id}
-        variant={"text"}
-      />
+      <TableCardActionsItemContainer>
+        <CloseAssetButton
+          noPadding
+          assetName={asset.accountInfo.title}
+          onApply={updateItems}
+          type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
+          id={asset.id}
+          variant={"text"}
+        />
+      </TableCardActionsItemContainer>
     </TableCardActions>
   );
-  const detailsLink = {
-    pathname: composeAccountDetailsUrl(asset.id),
-    state: `/ ${title}`
-  };
+  const detailsLink = linkCreator(composeAccountDetailsUrl(asset.id));
   return (
     <TableCard
       subTitle={t(
@@ -152,33 +162,15 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       <TableCardRow>
         {asset.actions.canTransferMoney && (
           <>
-            <TransferButton
+            <DepositTransferButton
               onApply={updateItems}
-              label={t("buttons.deposit")}
-              title={t("transfer.deposit-to", {
-                title: t(
-                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
-                )
-              })}
               currentItem={mapAccountToTransferItemType(asset)}
-              currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
-              sourceType={"Wallet"}
-              destinationType={"PrivateTradingAccount"}
+              accountType={asset.accountInfo.type}
             />
-            <TransferButton
+            <WithdrawTransferButton
               onApply={updateItems}
-              color={"secondary"}
-              variant={"outlined"}
-              label={t("buttons.withdraw")}
-              title={t("transfer.withdraw-from", {
-                title: t(
-                  `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
-                )
-              })}
               currentItem={mapAccountToTransferItemType(asset)}
-              currentItemContainer={TRANSFER_CONTAINER.SOURCE}
-              sourceType={"PrivateTradingAccount"}
-              destinationType={"Wallet"}
+              accountType={asset.accountInfo.type}
             />
           </>
         )}
@@ -193,22 +185,20 @@ interface Props {
 }
 
 const MakeProgramButton: React.FC<{
-  canMake: boolean;
+  necessaryMoney: string;
+  isEnoughMoney: boolean;
   id: string;
-  title: string;
   clearAnchor: (event: TEvent) => void;
-}> = React.memo(({ canMake, id, title, clearAnchor }) => {
+}> = React.memo(({ isEnoughMoney, id, clearAnchor, necessaryMoney }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.PROGRAM
   });
-  const makeProgramLink = {
-    pathname: makeProgramLinkMethod(id),
-    state: `/ ${title}`
-  };
+  const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
   const label = t("dashboard-page.trading.actions.make-program");
-  return canMake ? (
+  return isEnoughMoney ? (
     <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
       {label}
     </TableCardActionsItem>
@@ -218,11 +208,28 @@ const MakeProgramButton: React.FC<{
         content={label}
         className="dashboard-trading__disable-button"
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t("manager.program-settings.trades-update.text")}
+        tooltipContent={t(
+          "dashboard-page.trading.tooltips.is-not-enough-money",
+          { value: necessaryMoney }
+        )}
       />
     </GVButton>
   );
 });
+
+const getMinDepositCreateProgram = (
+  programMinDepositAmounts: ProgramMinInvestAmount[],
+  brokerType: BrokerTradeServerType,
+  curr: CurrencyEnum
+) => {
+  const broker = programMinDepositAmounts.find(
+    ({ serverType }) => serverType === brokerType
+  );
+  return broker
+    ? broker.minDepositCreateAsset.find(({ currency }) => currency === curr)!
+        .amount
+    : 0;
+};
 
 const DashboardPrivateCard = React.memo(_DashboardPrivateCard);
 export default DashboardPrivateCard;

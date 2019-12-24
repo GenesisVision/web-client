@@ -10,17 +10,20 @@ import {
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { OrderModel } from "gv-api-web";
 import { generateProgramTradesColumns } from "pages/programs/program-details/program-details.constants";
+import DownloadButtonToolbarAuth from "pages/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import filesService from "services/file-service";
+import { CREATE_ASSET } from "shared/constants/constants";
 
-import { tradesSelector } from "../../reducers/program-history.reducer";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  title,
+  assetType = CREATE_ASSET.PROGRAM,
   haveDelay,
   getItems,
   dataSelector,
@@ -41,11 +44,20 @@ const _ProgramTrades: React.FC<Props> = ({
         <div className="details-trades__toolbar">
           {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
-            <DownloadButtonToolbar
-              filtering={filtering!.dateRange}
-              programId={programId}
-              getExportFileUrl={filesService.getTradesExportFileUrl}
-            />
+            {assetType === CREATE_ASSET.PROGRAM ? (
+              <DownloadButtonToolbar
+                filtering={filtering!.dateRange}
+                programId={programId}
+                getExportFileUrl={filesService.getProgramTradesExportFileUrl}
+              />
+            ) : (
+              <DownloadButtonToolbarAuth
+                method={filesService.getAccountTradesExportFileUrl}
+                dateRange={filtering!.dateRange}
+                programId={programId}
+                title={title}
+              />
+            )}
           </div>
         </div>
       )}
@@ -81,6 +93,8 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  assetType?: CREATE_ASSET;
   haveDelay: boolean;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;

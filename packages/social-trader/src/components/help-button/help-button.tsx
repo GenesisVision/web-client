@@ -21,6 +21,6 @@ const HelpButton: React.FC<OwnProps> = ({ className, onClick }) => {
 export default HelpButton;
 
 interface OwnProps {
-  onClick(): void;
+  onClick?: () => void;
   className?: string;
 }

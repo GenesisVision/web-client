@@ -5,12 +5,10 @@ import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import GVFormikField from "components/gv-formik-field";
 import InputAmountField from "components/input-amount-field/input-amount-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import useRole from "hooks/use-role.hook";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import { ROLE } from "shared/constants/constants";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { boolean, mixed, number, object } from "yup";
@@ -30,7 +28,6 @@ const _ProgramWithdrawAmountForm: React.FC<
   isOwner
 }) => {
   const [emptyInit, setEmptyInit] = useState<boolean>(true);
-  const role = useRole();
   const isAllow = useCallback(
     (values: NumberFormatValues) => {
       const { formattedValue, value } = values;
@@ -52,7 +49,7 @@ const _ProgramWithdrawAmountForm: React.FC<
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
-      {role === ROLE.INVESTOR && (
+      {!isOwner && (
         <DialogField>
           <GVFormikField
             type="checkbox"

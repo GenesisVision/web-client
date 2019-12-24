@@ -1,5 +1,5 @@
-import { fetchWalletTransactions } from "components/wallet/services/wallet.services";
 import { CancelablePromise, CreateWithdrawalRequestModel } from "gv-api-web";
+import { fetchWalletTransactions } from "pages/wallet/services/wallet.services";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";

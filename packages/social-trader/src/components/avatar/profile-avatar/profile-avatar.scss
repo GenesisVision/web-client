@@ -23,4 +23,8 @@
       height: 40%;
     }
   }
+  &--big {
+    @include width($avatar-size);
+    @include height($avatar-size);
+  }
 }

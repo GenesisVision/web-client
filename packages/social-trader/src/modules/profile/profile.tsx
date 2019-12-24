@@ -1,9 +1,9 @@
-import "components/details/details.scss";
 import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
 import SettingsBlock from "components/settings-block/settings-block";
@@ -20,6 +20,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({
   onUpdate,
   isPending
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
     <>
@@ -44,7 +45,10 @@ const _Profile: React.FC<IProfileOwnProps> = ({
         verificationStatus={info.verificationStatus}
       >
         {info.verificationStatus === "NotVerified" && (
-          <Link className="level-calculator-popup__btn-verify" to={KYC_ROUTE}>
+          <Link
+            className="level-calculator-popup__btn-verify"
+            to={linkCreator(KYC_ROUTE)}
+          >
             <GVButton color="primary" variant="outlined">
               {t("buttons.verify")}
             </GVButton>

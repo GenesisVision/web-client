@@ -50,7 +50,7 @@ const _TableContainer: React.FC<ITableContainerProps> = props => {
   const handleUpdateFilter = useCallback(
     (filter: TFilter<string>) => {
       const changedFilters = {
-        filtering: dispatch(updateFilter(filtering, filter)),
+        filtering: updateFilter(filtering, filter),
         paging: {
           ...paging,
           currentPage: 1

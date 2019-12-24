@@ -1,5 +1,5 @@
-import faker from "faker";
-import { Broker, BrokerAccountType } from "gv-api-web";
+import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
+import { getRandomInteger, getRandomWord, getRandomWords } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 import { BROKER_CARD_EXTRA_STATE } from "./asset.constants";
@@ -47,30 +47,29 @@ export const getBrokerState = (
   return BROKER_CARD_EXTRA_STATE.NONE;
 };
 
-export const getBrokerLoaderData: () => any = () => ({
-  name: faker.lorem.word(),
-  description: faker.lorem.words(11),
+export const getBrokerLoaderData = (): Broker => ({
+  name: getRandomWord(),
+  description: getRandomWords(11),
   logo: "",
-  terms: faker.lorem.word(),
-  assets: faker.lorem.word(),
-  fee: faker.random.number(),
-  leverageMin: faker.random.number(),
-  leverageMax: faker.random.number(),
+  terms: getRandomWord(),
+  assets: getRandomWord(),
+  fee: getRandomInteger(0, 100),
+  leverageMin: getRandomInteger(0, 100),
+  leverageMax: getRandomInteger(0, 100),
   accountTypes: [
     {
-      id: faker.lorem.word(),
-      name: faker.lorem.word(),
-      description: faker.lorem.words(11),
+      isKycRequired: false,
+      id: getRandomWord(),
+      name: getRandomWord(),
+      description: getRandomWords(11),
       type: "MetaTrader4",
       leverages: [10],
       currencies: ["GVT"],
       minimumDepositsAmount: {},
-      isForex: false,
       isSignalsAvailable: false
     }
   ],
-  isForex: false,
-  isSignalsAvailable: false,
+  isKycRequired: false,
   tags: [
     {
       name: "ANYANY",
@@ -78,6 +77,16 @@ export const getBrokerLoaderData: () => any = () => ({
     }
   ]
 });
+
+export const getBrokersProgramInfoLoaderData = (): BrokersProgramInfo => {
+  const loaderBroker = getBrokerLoaderData();
+  return {
+    brokers: [loaderBroker],
+    currentAccountTypeId: loaderBroker.accountTypes[0].id
+  };
+};
+
+export const getBrokerLoaderDataFunc: () => any = getBrokerLoaderData;
 export const BrokerSelectLoaderData: Broker[] = new Array(7)
   .fill("")
-  .map(getBrokerLoaderData);
+  .map(getBrokerLoaderDataFunc);

@@ -4,9 +4,9 @@ import classNames from "classnames";
 import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Popover from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { WALLET_TOTAL_PAGE_ROUTE } from "components/wallet/wallet.routes";
 import {
   withBlurLoader,
   WithBlurLoaderProps
@@ -16,6 +16,7 @@ import useAnchor from "hooks/anchor.hook";
 import WalletDeposit, {
   WALLET_DEPOSIT_BUTTON_TYPE
 } from "modules/wallet-deposit/wallet-deposit";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -25,6 +26,7 @@ const _WalletWidget: React.FC<Props> = ({
   data: { currency, available, invested, trading, total },
   className
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
@@ -62,7 +64,10 @@ const _WalletWidget: React.FC<Props> = ({
           </div>
           <div className="wallet-details__item">
             <div className="wallet-details__value">
-              <Link to={WALLET_TOTAL_PAGE_ROUTE} onClick={clearAnchor}>
+              <Link
+                to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)}
+                onClick={clearAnchor}
+              >
                 {t("wallet-widget.details")} ›
               </Link>
             </div>

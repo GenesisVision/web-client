@@ -1,15 +1,18 @@
 import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
-import { withBlurLoader } from "decorators/with-blur-loader";
-import { SignalSubscription } from "gv-api-web";
+import { InvestmentUnauthButton } from "modules/investment-unauth-button/investment-unauth-button";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { ASSET } from "shared/constants/constants";
 
 import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
 
 const _FollowControls: React.FC<Props> = ({
+  isOwnAsset,
   onApply,
-  data,
   description: {
     publicInfo: { title },
     tradingAccountInfo: { currency, leverageMax },
@@ -18,41 +21,46 @@ const _FollowControls: React.FC<Props> = ({
     brokerDetails
   }
 }) => {
-  const signalSubscriptions = data && data[0];
+  const [t] = useTranslation();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <SignalProviderControls>
       <SignalInfo
         successFee={signalSettings.signalSuccessFee}
         volumeFee={signalSettings.signalVolumeFee}
       />
-      {personalDetails && (
-        <SignalProviderButtons
-          onApply={onApply}
-          guestActions={personalDetails.guestActions}
-          leverage={leverageMax}
-          isExternal={
-            personalDetails &&
-            personalDetails.guestActions &&
-            personalDetails.guestActions
-              .canSubscribeToExternalSignalPrivateAccount
-          }
-          brokerId={brokerDetails.id}
-          broker={brokerDetails.type}
-          signalSubscription={signalSubscriptions}
-          id={id}
-          title={title}
-          currency={currency}
-        />
-      )}
+      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
+        {isAuthenticated ? (
+          !isOwnAsset && (
+            <SignalProviderButtons
+              onApply={onApply}
+              guestActions={personalDetails && personalDetails.guestActions}
+              leverage={leverageMax}
+              brokerId={brokerDetails.id}
+              broker={brokerDetails.type}
+              id={id}
+              currency={currency}
+            />
+          )
+        ) : (
+          <InvestmentUnauthButton
+            label={t("program-details-page.description.follow-trade")}
+            asset={ASSET.FOLLOW}
+            header={t("program-details-page.description.follow-trade")}
+            message={t("unauth-popup.follow")}
+            title={title}
+          />
+        )}
+      </div>
     </SignalProviderControls>
   );
 };
 
 interface Props {
+  isOwnAsset: boolean;
   onApply: VoidFunction;
-  data: SignalSubscription[];
   description: ProgramDescriptionDataType;
 }
 
-const FollowControls = withBlurLoader(React.memo(_FollowControls));
+const FollowControls = React.memo(_FollowControls);
 export default FollowControls;

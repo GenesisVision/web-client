@@ -124,7 +124,9 @@ const _Investment: React.FC<Props> = ({
           accent
           label={
             <TooltipLabel
-              tooltipContent={t(`fund-details-page.tooltip.status.${asset}`)}
+              tooltipContent={t(
+                `asset-details-page.tooltip.status.${asset.toLowerCase()}`
+              )}
               labelText={t("fund-details-page.description.status")}
             />
           }
@@ -171,7 +173,7 @@ const _Investment: React.FC<Props> = ({
           accent
           label={t("fund-details-page.description.pending-output")}
         >
-          {false ? ( // personalDetails.pendingOutputIsWithdrawAll
+          {personalDetails.pendingOutputIsWithdrawAll ? (
             t("withdraw-program.withdrawing-all")
           ) : (
             <NumberFormat

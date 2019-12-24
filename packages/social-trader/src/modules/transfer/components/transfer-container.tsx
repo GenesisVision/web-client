@@ -1,14 +1,14 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { updateWalletTimestampAction } from "components/wallet/actions/wallet.actions";
-import { walletsSelector } from "components/wallet/reducers/wallet.reducers";
-import { fetchWallets } from "components/wallet/services/wallet.services";
 import { InternalTransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import {
   getTransferFormLoaderData,
   TransferFormValues
 } from "modules/transfer/components/transfer-form.helpers";
-import React, { useCallback, useEffect, useState } from "react";
+import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "pages/wallet/services/wallet.services";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
@@ -24,6 +24,7 @@ import {
 import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<Props> = ({
+  singleCurrentItemContainer,
   onApply,
   title,
   currentItem,
@@ -58,16 +59,38 @@ const _TransferContainer: React.FC<Props> = ({
     (values: TransferFormValues) => sendTransferRequest(values),
     [destinationType, sourceType]
   );
-  const sourceItems = sourceType === "Wallet" ? wallets : tradingAccounts;
-  const destinationItems =
-    destinationType === "Wallet" ? wallets : tradingAccounts;
   useEffect(() => {
-    if (destinationType !== "Wallet" || sourceType !== "Wallet")
-      getTradingAccounts();
+    if (
+      !singleCurrentItemContainer &&
+      ((currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
+        sourceType !== "Wallet") ||
+        (currentItemContainer === TRANSFER_CONTAINER.DESTINATION &&
+          destinationType !== "Wallet"))
+    )
+      getTradingAccounts(currency);
   }, []);
+  const currentItemContainerItems = useMemo(
+    () => (singleCurrentItemContainer ? [currentItem] : undefined),
+    [currentItem]
+  );
+  const sourceItems =
+    currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
+    currentItemContainerItems
+      ? currentItemContainerItems
+      : sourceType === "Wallet"
+      ? wallets
+      : tradingAccounts;
+  const destinationItems =
+    currentItemContainer === TRANSFER_CONTAINER.DESTINATION &&
+    currentItemContainerItems
+      ? currentItemContainerItems
+      : destinationType === "Wallet"
+      ? wallets
+      : tradingAccounts;
   useEffect(() => {
-    if (!!sourceItems && !!destinationItems)
+    if (!!sourceItems && !!destinationItems) {
       setItems({ sourceItems, destinationItems });
+    }
   }, [sourceItems, destinationItems]);
   return (
     <TransferForm
@@ -85,6 +108,7 @@ const _TransferContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  singleCurrentItemContainer?: boolean;
   onApply?: VoidFunction;
   currentItem: WalletItemType;
   onClose: () => void;

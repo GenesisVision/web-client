@@ -33,9 +33,15 @@ export const TableCardContainer: React.FC<
 > = React.memo(({ children }) => <div className="table-card">{children}</div>);
 
 export const TableCardRow: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
-  <div className="table-card__row">{children}</div>
+  { center?: boolean } & React.HTMLAttributes<HTMLDivElement>
+> = React.memo(({ children, center }) => (
+  <div
+    className={classNames("table-card__row", {
+      "table-card__row--center": center
+    })}
+  >
+    {children}
+  </div>
 ));
 
 export const TableCardTable: React.FC<
@@ -69,7 +75,7 @@ export const TableCardTableButtons: React.FC<
 ));
 
 export const TableCardTitle: React.FC<
-  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) =>
   url ? (
     <Link className="table-card__title" to={url}>
@@ -81,7 +87,7 @@ export const TableCardTitle: React.FC<
 );
 
 export const TableCardSubTitle: React.FC<
-  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) => {
   return (
     <div className="table-card__subtitle">
@@ -200,7 +206,7 @@ export const TableCardChartBlock: React.FC<
 ));
 
 interface ITableCardAvatarProps {
-  url?: ToType;
+  url?: ToType | string;
   hasAvatar?: boolean;
   logo: string;
   levelProgress?: number;
@@ -224,8 +230,8 @@ interface ITableCardTopBlockProps {
   title?: string;
   color?: string;
   extraBlock?: JSX.Element;
-  managerUrl?: ToType;
-  detailsUrl?: ToType;
+  managerUrl?: ToType | string;
+  detailsUrl?: ToType | string;
   renderActions?: (props: {
     clearAnchor: VoidFunction;
     anchor: TAnchor;

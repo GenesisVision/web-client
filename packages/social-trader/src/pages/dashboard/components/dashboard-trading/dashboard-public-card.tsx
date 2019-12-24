@@ -2,6 +2,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -12,7 +13,8 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
-import React, { useContext } from "react";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import React from "react";
 import NumberFormat from "react-number-format";
 import {
   ASSET,
@@ -25,23 +27,22 @@ import { composeAssetDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
-import { TitleContext } from "../../dashboard.constants";
-
 const _DashboardPublicCard: React.FC<Props> = ({
+  showWithdraw = true,
+  showInvest = true,
   showActions = true,
   asset,
   updateItems,
   ownAsset
 }) => {
-  const title = useContext(TitleContext);
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const detailsLink = {
-    pathname: composeAssetDetailsUrl(
+  const detailsLink = linkCreator(
+    composeAssetDetailsUrl(
       asset.assetTypeExt,
       asset.publicInfo && asset.publicInfo.url
-    ),
-    state: `/ ${title}`
-  };
+    )
+  );
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
@@ -69,10 +70,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
   const { programDetails, fundDetails } = asset.publicInfo;
   const topFundAssets = fundDetails && fundDetails.topFundAssets;
+  const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
   return (
     <TableCard
       hasAvatar
-      subTitle={asset.assetTypeExt}
+      subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
       levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}
@@ -135,22 +137,23 @@ const _DashboardPublicCard: React.FC<Props> = ({
       </TableCardTable>
       {topFundAssets && (
         <TableCardTableRow>
-          {topFundAssets && (
-            <FundAssetContainer
-              assets={topFundAssets as FundAssetType[]}
-              type={FUND_ASSET_TYPE.SHORT}
-              size={3}
-              length={topFundAssets.length}
-            />
-          )}
+          <FundAssetContainer
+            assets={topFundAssets as FundAssetType[]}
+            type={FUND_ASSET_TYPE.SHORT}
+            size={3}
+            length={totalAssetsCount}
+          />
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        accountType={asset.assetTypeExt}
+        canTransfer={asset.actions.canTransferMoney}
+        transferableItem={mapAccountToTransferItemType(asset)}
         title={asset.accountInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
-        canWithdraw={asset.actions.canAddRequestWithdraw}
-        canInvest={asset.actions.canAddRequestInvest}
+        canWithdraw={asset.actions.canAddRequestWithdraw && showWithdraw}
+        canInvest={asset.actions.canAddRequestInvest && showInvest}
         broker={asset.broker && asset.broker.type}
         type={asset.assetType as ASSET}
         id={asset.id}
@@ -161,6 +164,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
 };
 
 interface Props {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
   showActions?: boolean;
   ownAsset?: boolean;
   updateItems: VoidFuncType;

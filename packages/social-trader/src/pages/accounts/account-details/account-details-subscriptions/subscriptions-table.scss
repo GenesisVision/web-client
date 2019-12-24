@@ -1,0 +1,16 @@
+@import "~shared/styles/_sizes.scss";
+.subscriptions-table {
+  &__center-cell {
+    display: flex;
+    align-items: center;
+    &--buttons {
+      justify-content: space-between;
+    }
+  }
+  &__buttons-cell-item {
+    &--first {
+      margin-right: $padding-upper-medium;
+    }
+    margin-right: $padding-xsmall;
+  }
+}

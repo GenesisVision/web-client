@@ -1,5 +1,3 @@
-import "./program-financial-statistic.scss";
-
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "components/table/components/table-container";
@@ -10,6 +8,7 @@ import {
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -34,9 +33,9 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <TableContainer
-      className="program-financial-statistic"
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
+          method={filesService.getStatisticExportFile}
           dateRange={filtering!.dateRange}
           programId={id}
           title={title}

@@ -55,7 +55,7 @@ const hasCorrectCountNulls = (
 ): boolean => {
   const [whole, fraction] = value.split(".");
   if (fraction === undefined) return true;
-  return !(whole[0] === "0" && fraction.length > countNulls);
+  return fraction.length <= countNulls;
 };
 
 const allowValuesNumberFormat = (
@@ -74,6 +74,7 @@ const allowValuesNumberFormat = (
     hasCorrectCountNulls(formattedValue));
 
 export const allowPositiveValuesNumberFormat = (countNulls: number = 1) => ({
+  value,
   formattedValue,
   floatValue
 }: NumberFormatValues): boolean => {
@@ -82,7 +83,7 @@ export const allowPositiveValuesNumberFormat = (countNulls: number = 1) => ({
     formattedValue === "0." ||
     (formattedValue[0] !== "-" &&
       floatValue >= 0 &&
-      hasCorrectCountNulls(formattedValue, countNulls))
+      hasCorrectCountNulls(value, countNulls))
   );
 };
 

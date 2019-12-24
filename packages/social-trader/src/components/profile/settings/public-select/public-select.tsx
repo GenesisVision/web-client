@@ -1,11 +1,5 @@
-import "./public-select.scss";
-
-import GVSwitch from "components/gv-selection/gv-switch";
-import {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
-import Tooltip from "components/tooltip/tooltip";
+import SwitchWithQuestion from "components/switch-with-question/switch-with-question";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
@@ -15,7 +9,7 @@ import { isPublicInvestorSelector } from "reducers/header-reducer";
 
 import { setPublicOff, setPublicOn } from "./public-select.service";
 
-const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
+const _PublicSelect: React.FC = () => {
   const isPublicInvestor = useSelector(isPublicInvestorSelector);
   const [t] = useTranslation();
   const [isPublic, setPublic, setNotPublic, setPublicValue] = useIsOpen(
@@ -34,39 +28,19 @@ const _PublicSelect: React.FC<Props> = ({ isPublicProp }) => {
   });
   const handleSwitch = useCallback(() => sendRequest(), [request, isPublic]);
   return (
-    <div className="public-select">
-      <Tooltip
-        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-        vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        render={() => (
-          <div className="public-select__tooltip">
-            {t("profile-page.settings.public.text")}
-          </div>
-        )}
-      >
-        <div className="public-select__question">?</div>
-      </Tooltip>
-      <div className="public-select__label">
-        {t("profile-page.settings.public.label")}
-      </div>
-      {isPublicInvestor !== undefined && (
-        <GVSwitch
-          name={"isPublic"}
-          touched={false}
-          className="public-select__switch"
-          value={isPublic}
-          disabled={isPending}
-          color="primary"
-          onChange={handleSwitch}
-        />
-      )}
-    </div>
+    <SwitchWithQuestion
+      onChange={handleSwitch}
+      value={isPublic}
+      isPending={isPending}
+      label={t("profile-page.settings.public.label")}
+      tooltipContent={
+        <TooltipContent>
+          {t("profile-page.settings.public.text")}
+        </TooltipContent>
+      }
+    />
   );
 };
-
-interface Props {
-  isPublicProp?: boolean;
-}
 
 const PublicSelect = React.memo(_PublicSelect);
 export default PublicSelect;

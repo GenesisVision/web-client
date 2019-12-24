@@ -1,10 +1,11 @@
 import "components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
 import DetailsBlock from "components/details/details-block";
+import DetailsBlockTabs from "components/details/details-block-tabs";
+import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import AbsoluteProfitChartSection, {
   IAbsoluteProfitChartSectionProps
 } from "components/details/details-statistic-section/details-chart-section/absolute-profit-chart-section/absolute-profit-chart-section";
-import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
@@ -32,9 +33,11 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   const [t] = useTranslation();
   const { tab, setTab } = useTab<DETAILS_CHART_TABS>(DETAILS_CHART_TABS.PROFIT);
   return (
-    <DetailsBlock horizontalPaddings className="details-chart">
-      <h3>{t("details-page.chart.heading")}</h3>
-      <GVTabs value={tab} onChange={setTab}>
+    <DetailsBlock className="details-chart">
+      <DetailsBlockTitleBox>
+        <h3>{t("details-page.chart.heading")}</h3>
+      </DetailsBlockTitleBox>
+      <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           value={DETAILS_CHART_TABS.PROFIT}
           label={t("details-page.chart.tabs.profit")}
@@ -47,7 +50,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           value={DETAILS_CHART_TABS.BALANCE}
           label={t("details-page.chart.tabs.balance")}
         />
-      </GVTabs>
+      </DetailsBlockTabs>
       <div className="details-chart__container">
         {tab === DETAILS_CHART_TABS.PROFIT && (
           <ProfitChartSection

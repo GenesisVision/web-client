@@ -1,8 +1,8 @@
+import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
 import Page from "components/page/page";
-import Surface from "components/surface/surface";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { CancelablePromise } from "gv-api-web";
 import { fetchFunds } from "modules/funds-table/services/funds-table.service";
@@ -20,14 +20,14 @@ const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
   );
   return (
     <Page title={t("funds-page.title")}>
-      <Surface className="funds-table-container">
+      <DetailsBlock table>
         <FacetContainer
           id={id}
           asset={FACET_ASSET.FUNDS}
           TableContainer={FundsFacetTable}
           getItems={getFunds}
         />
-      </Surface>
+      </DetailsBlock>
     </Page>
   );
 };

@@ -4,6 +4,8 @@ import classnames from "classnames";
 import React from "react";
 
 export enum GV_BTN_SIZE {
+  SMALL = "SMALL",
+  LARGE = "LARGE",
   BIG = "BIG",
   MIDDLE = "MIDDLE"
 }
@@ -38,7 +40,9 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
+    "gv-btn--large": size === GV_BTN_SIZE.LARGE,
     "gv-btn--big": size === GV_BTN_SIZE.BIG,
+    "gv-btn--small": size === GV_BTN_SIZE.SMALL,
     "gv-btn--danger": color === "danger",
     "gv-btn--primary": color === "primary",
     "gv-btn--secondary": color === "secondary",

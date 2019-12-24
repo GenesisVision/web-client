@@ -1,4 +1,5 @@
 import React from "react";
-import { Managers } from "routes/ssr/managers/[id]";
+
+import Managers from "../users/[id]";
 
 export default Managers;

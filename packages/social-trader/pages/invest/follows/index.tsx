@@ -1,9 +1,13 @@
+import { updateGlobalTableViewAction } from "actions/tables-view-actions";
 import FollowsPage from "components/follows/follows.page";
+import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import { fetchFollowsAction } from "modules/follows-table/actions/follows-table.actions";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import React from "react";
+import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
 import authService from "services/auth-service";
+import { getCookie } from "shared/utils/cookie";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<any> = () => {
@@ -12,14 +16,17 @@ const Page: NextPageWithRedux<any> = () => {
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  try {
-    await ctx.reduxStore.dispatch(
+  const tableView =
+    (getCookie(GLOBAL_TABLE_VIEW, ctx) as LIST_VIEW) || LIST_VIEW.CARDS;
+  await Promise.all([
+    ctx.reduxStore.dispatch(
       fetchFollowsAction({
         ...filtering,
         authorization: authService.getAuthArg(ctx)
       })
-    );
-  } catch (e) {}
+    ),
+    ctx.reduxStore.dispatch(updateGlobalTableViewAction(tableView))
+  ]);
 };
 
 export default withDefaultLayout(Page);

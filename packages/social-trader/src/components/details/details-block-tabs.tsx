@@ -1,15 +1,14 @@
-import "./details-block-tabs.scss";
-
+import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTabs, { GVTabsProps } from "components/gv-tabs";
 import React from "react";
 
 const _DetailsBlockTabs: React.FC<Props> = ({ value, onChange, children }) => {
   return (
-    <div className="details-block-tabs">
+    <DetailsBlockTitleBox>
       <GVTabs value={value} onChange={onChange}>
         {children}
       </GVTabs>
-    </div>
+    </DetailsBlockTitleBox>
   );
 };
 

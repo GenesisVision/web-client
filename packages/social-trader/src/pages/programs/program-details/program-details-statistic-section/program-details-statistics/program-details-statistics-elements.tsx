@@ -41,39 +41,59 @@ const _ProgramDetailsStatisticsElements: React.FC<
               suffix={` ${statisticCurrency}`}
             />
           </StatisticItem>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.investors")}
-                labelText={t("program-details-page.statistics.investors")}
-              />
-            }
-          >
-            <NumberFormat
-              value={statistic.investors}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </StatisticItem>
-          <div className="details-statistics__period">
-            <Tooltip
-              horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-              render={() => (
-                <div className="tooltip__content">
-                  {t("program-details-page.tooltip.period")}
-                </div>
-              )}
+          {!!statistic.investors && (
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t("program-details-page.tooltip.investors")}
+                  labelText={t("program-details-page.statistics.investors")}
+                />
+              }
             >
-              <span className="details-statistics__label tooltip__label">
-                {t("program-details-page.statistics.period")}
-              </span>
-            </Tooltip>
-            <ProgramPeriodLine
-              start={statistic.lastPeriodStarts}
-              end={statistic.lastPeriodEnds}
-              status={status}
-            />
-          </div>
+              <NumberFormat
+                value={statistic.investors}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </StatisticItem>
+          )}
+          {!!statistic.subscribers && (
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t("follow-details-page.tooltip.subscribers")}
+                  labelText={t("follow-details-page.statistics.subscribers")}
+                />
+              }
+            >
+              <NumberFormat
+                value={statistic.subscribers}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </StatisticItem>
+          )}
+          {!!statistic.lastPeriodStarts && (
+            <div className="details-statistics__period">
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <div className="tooltip__content">
+                    {t("program-details-page.tooltip.period")}
+                  </div>
+                )}
+              >
+                <span className="details-statistics__label tooltip__label">
+                  {t("program-details-page.statistics.period")}
+                </span>
+              </Tooltip>
+              <ProgramPeriodLine
+                start={statistic.lastPeriodStarts}
+                end={statistic.lastPeriodEnds}
+                status={status}
+              />
+            </div>
+          )}
         </>
       )}
       Particular={() => (

@@ -11,6 +11,7 @@ import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
+  disabled,
   title,
   size,
   onApply,
@@ -72,16 +73,16 @@ const _DepositButton: React.FC<Props> = ({
     : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton size={size} onClick={openPopupMethod}>
+      <GVButton disabled={disabled} size={size} onClick={openPopupMethod}>
         {label}
       </GVButton>
       {deposit}
       <InvestmentUnauthPopup
-        message={t("program-details-page.description.unauth-popup")}
+        message={t(`unauth-popup.${type.toLowerCase()}`)}
         title={""}
         currency={currency}
         availableToInvest={availableToInvest}
-        asset={ASSET.PROGRAM}
+        asset={type}
         open={isOpenUnAuthInvestPopup}
         onClose={setIsCloseUnAuthInvestPopup}
       />
@@ -90,6 +91,7 @@ const _DepositButton: React.FC<Props> = ({
 };
 
 interface Props {
+  disabled?: boolean;
   title: string;
   size?: GV_BTN_SIZE;
   onApply?: VoidFunction;

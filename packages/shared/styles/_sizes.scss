@@ -19,6 +19,7 @@ $font-size-h4: 16px;
 $font-size-paragraph: 14px;
 $font-size-common: 13px;
 $font-size-small: 12px;
+$font-size-xsmall: 11px;
 $font-size-xxxxsmall: 7.5px;
 
 //others
@@ -33,6 +34,8 @@ $border-radius: 5px;
 $border-radius-middle: 8px;
 $btn-height: 50px;
 $btn-width: 149px;
+$btn-height-small: 30px;
+$btn-width-small: 100px;
 $icon-size: 29px;
 $avatar-size: 120px;
 $asset-height: 40px;
@@ -72,6 +75,26 @@ $icon-size-mobile: $icon-size/$divider-text;
 $avatar-size-mobile: $avatar-size/$divider-title;
 
 //mixins
+@mixin height($height) {
+  $divider: $divider-text;
+
+  height: $height/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    height: $height;
+  }
+}
+
+@mixin width($width) {
+  $divider: $divider-text;
+
+  width: $width/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    width: $width;
+  }
+}
+
 @mixin font-size($font-size) {
   $divider: $divider-text;
 

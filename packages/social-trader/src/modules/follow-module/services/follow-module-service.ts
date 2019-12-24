@@ -75,6 +75,14 @@ export const updateAttachToSignal: TSignalRequest = ({ id, requestParams }) =>
     model: requestParams
   });
 
+export const updateExternalAttachToSignal: TSignalRequest = ({
+  id,
+  requestParams
+}) =>
+  signalApi.updateExternalSubscriptionSettings(id, authService.getAuthArg(), {
+    model: requestParams
+  });
+
 export type TSignalRequest = (args: {
   id: string;
   requestParams: AttachToSignalProvider &
@@ -83,3 +91,6 @@ export type TSignalRequest = (args: {
     NewExternalTradingAccountRequest;
   leverage: number;
 }) => PromiseLike<any>;
+
+export const getUpdateAttachMethod = (isExternal: boolean) =>
+  isExternal ? updateExternalAttachToSignal : updateAttachToSignal;

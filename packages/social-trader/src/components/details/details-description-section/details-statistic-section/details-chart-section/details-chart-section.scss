@@ -11,6 +11,7 @@
   min-height: 400px;
 
   &__container {
+    @include details-block-horizontal-paddings();
     height: 490px;
   }
 

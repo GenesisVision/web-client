@@ -1,11 +1,11 @@
 import WalletWidget from "components/wallet-widget/wallet-widget";
-import { fetchWallets } from "components/wallet/services/wallet.services";
+import { grandTotalSelector } from "pages/wallet/reducers/wallet.reducers";
+import { fetchWallets } from "pages/wallet/services/wallet.services";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 
-import { grandTotalSelector } from "../wallet/reducers/wallet.reducers";
 import { WalletWidgetLoaderData } from "./wallet-widget.txt-loader";
 
 const _WalletWidgetContainer: React.FC<Props> = ({ className }) => {
