@@ -26,3 +26,13 @@ export const normalizeUrlString = (url: string): string => {
     : "";
   return `${role}${url}`;
 };
+
+export const createToUrl = (
+  as: string,
+  pathname: string,
+  state: string
+): ToType => ({
+  as,
+  pathname,
+  state: `/ ${state}`
+});

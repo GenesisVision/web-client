@@ -1,11 +1,11 @@
 import Link from "components/link/link";
+import { createToUrl } from "components/link/link.helper";
 import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { managerUrlSelector } from "reducers/header-reducer";
 import { MANAGERS_ROUTE } from "routes/manager.routes";
-import { createToUrl } from "utils/compose-url";
 
 export const PublicPageLink: React.FC = React.memo(() => {
   const title = useContext(TitleContext);
