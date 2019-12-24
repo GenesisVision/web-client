@@ -142,9 +142,9 @@ $avatar-size-mobile: $avatar-size/$divider-title;
 }
 
 @mixin details-block-left-margin() {
-  margin-left: $details-block-margin;
+  margin-left: $details-block-padding;
   @include media-breakpoint-landscape-phone() {
-    margin-left: $details-block-margin;
+    margin-left: $details-block-padding;
   }
 }
 
