@@ -1,6 +1,7 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
@@ -25,7 +26,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
       request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
       renderValues={({ equity, aum }: TDashboardTradingStatistic) => (
-        <>
+        <StatisticItemList>
           <DashboardValueItem
             label={t("dashboard-page.statistic.equity")}
             value={equity}
@@ -36,7 +37,7 @@ const _DashboardTradingStatistic: React.FC<Props> = () => {
             value={aum}
             currency={currency}
           />
-        </>
+        </StatisticItemList>
       )}
     />
   );
