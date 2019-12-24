@@ -1,0 +1,20 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.tab-controls {
+  @include reset-list();
+
+  &__item {
+    line-height: 1.6;
+
+    @include media-breakpoint-desktop() {
+      //padding: 40px;
+    }
+  }
+
+  &__item-btn {
+    @include reset-button();
+  }
+}
