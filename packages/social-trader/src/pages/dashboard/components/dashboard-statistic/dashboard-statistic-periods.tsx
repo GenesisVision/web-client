@@ -59,7 +59,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   label: string;
 }> = ({ item, label, withProfitability, currency }) => {
   return (
-    <StatisticItem big accent label={label}>
+    <StatisticItem label={label}>
       <div className="dashboard-statistic-periods-item__value-container">
         <div className="dashboard-statistic-periods-item__value">
           <NumberFormat
