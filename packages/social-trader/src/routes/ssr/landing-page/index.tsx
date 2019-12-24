@@ -10,6 +10,7 @@ import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
@@ -66,9 +67,9 @@ const IndexPage: NextPage<{
             <TabsContainer />
           </div>
         </section>
-        <section className="home__section home__section--bg-gray">
+        <section className="home__section home__section--bg-gray home__section--not-padding-bottom-mob">
           <div className="home__container">
-            <h2>Downloads</h2>
+            <DownloadContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-white">

@@ -65,4 +65,18 @@
       }
     }
   }
+
+  &--color-gray {
+    .icon-list__link {
+      fill: $panel-background-color;
+      stroke: $landing-bg-gray;
+      background-color: $landing-bg-gray;
+      mix-blend-mode: normal;
+      border: 1px solid rgba($panel-background-color, 0.1);
+
+      &:hover {
+        fill: $primary-color;
+      }
+    }
+  }
 }

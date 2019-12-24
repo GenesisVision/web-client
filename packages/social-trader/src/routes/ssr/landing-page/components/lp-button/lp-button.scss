@@ -33,15 +33,15 @@
   &--primary {
     background-color: $primary-color;
 
-    @include media-breakpoint-desktop() {
-      &:hover {
-        background-color: $primary-color-hover;
-      }
+    &:hover {
+      background-color: $primary-color-hover;
+      color: $main-color;
+    }
 
-      &:focus,
-      &:active {
-        background-color: $primary-color;
-      }
+    &:focus,
+    &:active {
+      background-color: $primary-color;
+      color: $main-color;
     }
   }
 
@@ -52,17 +52,19 @@
     border-radius: 100px;
     min-width: 120px;
 
+    &:hover {
+      background-color: rgba($main-color, 0.15);
+      color: $main-color;
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba($main-color, 0.1);
+      color: $main-color;
+    }
+
     @include media-breakpoint-desktop() {
       text-transform: none;
-
-      &:hover {
-        background-color: rgba($main-color, 0.15);
-      }
-
-      &:focus,
-      &:active {
-        background-color: rgba($main-color, 0.1);
-      }
     }
   }
 }

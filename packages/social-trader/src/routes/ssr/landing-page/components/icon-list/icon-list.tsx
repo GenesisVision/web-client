@@ -6,8 +6,18 @@ import { TIconLinks } from "routes/ssr/landing-page/static-data/app-links";
 
 import IconItem from "./icon-item";
 
-const _IconList: React.FC<Props> = ({ items, className }) => (
-  <ul className={classNames("icon-list", className)}>
+interface Props {
+  items: TIconLinks[];
+  className?: string;
+  lightTheme?: boolean;
+}
+
+const _IconList: React.FC<Props> = ({ items, className, lightTheme }) => (
+  <ul
+    className={classNames("icon-list", className, {
+      "icon-list--color-gray": lightTheme
+    })}
+  >
     {items.map((item: any, index: number) => (
       <IconItem
         key={index}
@@ -18,11 +28,6 @@ const _IconList: React.FC<Props> = ({ items, className }) => (
     ))}
   </ul>
 );
-
-export interface Props {
-  items: TIconLinks[];
-  className?: string;
-}
 
 const IconList = React.memo(_IconList);
 export default IconList;
