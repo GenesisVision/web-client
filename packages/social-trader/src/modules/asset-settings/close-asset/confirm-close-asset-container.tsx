@@ -54,6 +54,12 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
 
 const getMethod = (asset: CloseableAssetType) => {
   switch (asset) {
+    case "Follow":
+    case "TradingAccount":
+    case "Trading-account":
+    case "SignalTradingAccount":
+    case "ExternalTradingAccount":
+    case "ExternalSignalTradingAccount":
     case CLOSEABLE_ASSET.TRADING_ACCOUNT:
       return closeTradingAccount;
     case CLOSEABLE_ASSET.FUND:
