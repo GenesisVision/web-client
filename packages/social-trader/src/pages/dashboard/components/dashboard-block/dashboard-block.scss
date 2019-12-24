@@ -18,5 +18,5 @@
 .dashboard-horizontal-list {
   display: flex;
   overflow-x: scroll;
-  @include details-block-left-padding();
+  @include details-block-left-margin();
 }
