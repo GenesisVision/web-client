@@ -34,7 +34,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
+    currency && getRate({ from: DEFAULT_RATE_CURRENCY, to: currency });
   }, [currency]);
 
   const submit = useCallback(
