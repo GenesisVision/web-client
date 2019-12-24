@@ -1,4 +1,6 @@
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
 .dashboard-block {
   &__header {
     display: flex;
@@ -7,6 +9,7 @@
   }
 
   &__link {
+    color: $text-light-color;
     display: inline-block;
     text-align: center;
     font-size: $font-size-h1;
