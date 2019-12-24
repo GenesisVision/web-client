@@ -6,7 +6,6 @@ import {
   ProgramFollowDetailsFull
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
-import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
@@ -47,6 +46,7 @@ const _ProgramSettings: React.FC<Props> = ({
       ? followDetails.signalSettings.signalVolumeFee
       : undefined;
   const isSignalProgram = !!description.followDetails;
+  const assetType = description.publicInfo.typeExt;
   return (
     <>
       <ChangePassword
@@ -121,8 +121,8 @@ const _ProgramSettings: React.FC<Props> = ({
         signalVolumeFee={signalVolumeFee}
       />
       <CloseAssetBlock
-        label={t("asset-settings.close-program.title")}
-        asset={CLOSEABLE_ASSET.PROGRAM}
+        label={t(`asset-settings.close-${assetType.toLowerCase()}.title`)}
+        asset={assetType}
         canCloseAsset={description.ownerActions.canClose}
         id={description.id}
         closeAsset={closeProgram}
