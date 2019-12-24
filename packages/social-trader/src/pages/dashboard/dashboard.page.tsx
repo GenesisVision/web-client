@@ -36,14 +36,14 @@ const _DashboardPage: React.FC = () => {
             <DashboardInRequestsContainer />
           </div>
         )}
-        <div className="dashboard__statistic-block">
-          <DashboardTradingStatistic />
-          <DashboardInvestingStatistic />
+        <div className="dashboard__statistic-block dashboard__statistic-block--landscape-tablet">
+          <DashboardTradingStatistic landscapeTablet />
+          <DashboardInvestingStatistic landscapeTablet />
         </div>
         {notNewUser && (
-          <div className="dashboard__statistic-block">
-            <DashboardPortfolio />
-            <DashboardAssets />
+          <div className="dashboard__statistic-block dashboard__statistic-block--tablet">
+            <DashboardPortfolio tablet />
+            <DashboardAssets tablet />
           </div>
         )}
         <DashboardRecommendationsContainer />
