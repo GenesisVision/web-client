@@ -9,18 +9,19 @@ const Pie: React.FC<Props> = ({
   end,
   value
 }) => {
+  const circleSize = 36;
   const valuePercent = calcPercent(value, start, end);
   return (
     <svg
       width="100%"
       height="100%"
-      viewBox="0 0 34 34"
+      viewBox={`0 0 ${circleSize} ${circleSize}`}
       transform={`rotate(${begin})`}
     >
       {withSubstrate && (
         <circle
-          cx="17"
-          cy="17"
+          cx={circleSize / 2}
+          cy={circleSize / 2}
           r="15.91549430918954"
           fill="transparent"
           stroke={color}
@@ -30,8 +31,8 @@ const Pie: React.FC<Props> = ({
       )}
 
       <circle
-        cx="17"
-        cy="17"
+        cx={circleSize / 2}
+        cy={circleSize / 2}
         r="15.91549430918954"
         fill="transparent"
         stroke={color}
@@ -40,7 +41,7 @@ const Pie: React.FC<Props> = ({
         strokeDashoffset={25}
         transform={
           pieDirection === PIE_DIRECTION.COUNTERCLOCKWISE
-            ? "scale(-1, 1)  translate(-34, 0)"
+            ? `scale(-1, 1)  translate(-${circleSize}, 0)`
             : ""
         }
       />
