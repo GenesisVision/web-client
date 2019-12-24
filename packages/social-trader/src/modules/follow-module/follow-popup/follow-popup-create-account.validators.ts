@@ -39,18 +39,19 @@ const CreateAccountFormValidationSchema = ({
     (values: CreateAccountFormValues): Schema<any> => {
       const rate = values[CREATE_ACCOUNT_FORM_FIELDS.rate];
       const currency = values[CREATE_ACCOUNT_FORM_FIELDS.currency];
+      const minDepositAmount = convertFromCurrency(minDeposit, rate);
       return object().shape({
         [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number()
           .required(
             t("follow-program.create-account.validation.amount-required")
           )
           .min(
-            convertFromCurrency(minDeposit, rate),
+            minDepositAmount,
             t(
               "follow-program.create-account.validation.amount-more-than-min-deposit",
               {
                 value: `${formatCurrencyValue(
-                  convertFromCurrency(minDeposit, rate),
+                  minDepositAmount,
                   currency
                 )} ${currency}`
               }
