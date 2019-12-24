@@ -1,7 +1,7 @@
 import "./social-links-block.scss";
 
 import SocialLinkImage from "components/avatar/social-link/social-link";
-import { AssetInfoLink, SocialLinkViewModel } from "gv-api-web";
+import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
 const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
@@ -29,5 +29,5 @@ const SocialLinksBlock = React.memo(_SocialLinksBlock);
 export default SocialLinksBlock;
 
 interface Props {
-  socialLinks: Array<SocialLinkViewModel | AssetInfoLink>;
+  socialLinks: Array<SocialLinkViewModel>;
 }
