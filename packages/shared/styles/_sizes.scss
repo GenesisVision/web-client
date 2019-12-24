@@ -141,6 +141,13 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
+@mixin details-block-left-margin() {
+  margin-left: $details-block-margin;
+  @include media-breakpoint-landscape-phone() {
+    margin-left: $details-block-margin;
+  }
+}
+
 @mixin details-block-right-padding() {
   padding-right: $details-block-padding;
   @include media-breakpoint-landscape-phone() {
