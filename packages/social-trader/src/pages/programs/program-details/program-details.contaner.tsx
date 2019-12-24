@@ -133,22 +133,22 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
                 levelsParameters={levelsParameters!}
               />
             )}
-            {followDetails &&
-              ((!isOwnAsset && (
-                <FollowControls
-                  onApply={handleDispatchDescription}
-                  description={description}
-                />
-              )) ||
-                (isOwnAsset && ownerActions.canTransferMoney && (
-                  <InvestmentAccountControls
-                    transferableItem={mapProgramFollowToTransferItemType(
-                      description
-                    )}
-                    accountType={description.publicInfo.typeExt}
-                    onApply={handleDispatchDescription}
-                  />
-                )))}
+            {followDetails && (
+              <FollowControls
+                isOwnAsset={isOwnAsset}
+                onApply={handleDispatchDescription}
+                description={description}
+              />
+            )}
+            {isOwnAsset && ownerActions.canTransferMoney && (
+              <InvestmentAccountControls
+                transferableItem={mapProgramFollowToTransferItemType(
+                  description
+                )}
+                accountType={description.publicInfo.typeExt}
+                onApply={handleDispatchDescription}
+              />
+            )}
           </>
         )}
       />
