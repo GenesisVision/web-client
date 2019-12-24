@@ -1,7 +1,10 @@
 import "./styles/index.scss";
 import "./styles/home.scss";
 
-import { ItemsViewModelFundDetailsListItem } from "gv-api-web";
+import {
+  ItemsViewModelFollowDetailsListItem,
+  ItemsViewModelFundDetailsListItem
+} from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
@@ -13,12 +16,15 @@ import SocialContainer from "routes/ssr/landing-page/containers/social-container
 import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
+import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
 import { subtractDate } from "shared/utils/dates";
 
 const IndexPage: NextPage<{
   fundsData: ItemsViewModelFundDetailsListItem;
-}> = ({ fundsData }) => {
+  followsData: ItemsViewModelFollowDetailsListItem;
+}> = ({ fundsData, followsData }) => {
+  // console.log(followsData);
   return (
     <Layout title="Genesis Vision">
       <main className="home">
@@ -88,36 +94,35 @@ const IndexPage: NextPage<{
 export default IndexPage;
 
 IndexPage.getInitialProps = async () => {
-  // try {
-  //   const programsData = await programsApi.getPrograms({
-  //     skip: 0,
-  //     take: 6
-  //   });
-  //   return { programsData };
-  // } catch (e) {
-  //   const programsData = {
-  //     total: 0,
-  //     items: []
-  //   };
-  //   return { programsData };
-  // }
   try {
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
-    const fundsData = await fundsApi.getFunds({
-      sorting: "ByProfitDesc",
-      showIn: "USDT",
-      dateFrom,
-      dateTo,
-      skip: 0,
-      take: 12
-    });
-    return { fundsData };
+    // const traders = await followApi.getFollowAssets({});
+    const [fundsData, followsData] = await Promise.all([
+      fundsApi.getFunds({
+        sorting: "ByProfitDesc",
+        showIn: "USDT",
+        dateFrom,
+        dateTo,
+        skip: 0,
+        take: 12
+      }),
+      followApi.getFollowAssets({
+        sorting: "BySubscribersDesc",
+        skip: 0,
+        take: 6
+      })
+    ]);
+    return { fundsData, followsData };
   } catch (e) {
     const fundsData = {
       total: 0,
       items: []
     };
-    return { fundsData };
+    const followsData = {
+      total: 0,
+      items: []
+    };
+    return { fundsData, followsData };
   }
 };

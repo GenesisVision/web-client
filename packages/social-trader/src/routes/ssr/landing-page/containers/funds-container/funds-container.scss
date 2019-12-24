@@ -24,6 +24,18 @@
       position: absolute;
       z-index: 0;
       padding-bottom: 60px;
+      opacity: 1;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+
+      &--hide {
+        animation-name: hide;
+      }
+
+      &--show {
+        opacity: 0;
+        animation-name: show;
+      }
     }
 
     @include media-breakpoint-large-desktop() {
@@ -82,5 +94,27 @@
     @include media-breakpoint-desktop() {
       grid-column: 2/7;
     }
+  }
+}
+
+/* prettier-ignore */
+@keyframes hide {
+  0 {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* prettier-ignore */
+@keyframes show {
+  0 {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

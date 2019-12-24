@@ -1,6 +1,8 @@
+import { BitcoinIcon } from "routes/ssr/landing-page/components/social-icons/bitcoin";
 import { FacebookIcon } from "routes/ssr/landing-page/components/social-icons/facebook";
 import { GithubIcon } from "routes/ssr/landing-page/components/social-icons/github";
 import { LinkedinIcon } from "routes/ssr/landing-page/components/social-icons/linkedin";
+import { MediumIcon } from "routes/ssr/landing-page/components/social-icons/medium";
 import { RedditIcon } from "routes/ssr/landing-page/components/social-icons/reddit";
 import { TelegramIcon } from "routes/ssr/landing-page/components/social-icons/telegram";
 import { TwitterIcon } from "routes/ssr/landing-page/components/social-icons/twitter";
@@ -42,5 +44,15 @@ export const socialLinks: TIconLinks[] = [
     name: "Linkedin",
     href: "https://www.linkedin.com/company/genesis-vision/",
     icon: LinkedinIcon
+  },
+  {
+    name: "Medium Blog",
+    href: "https://blog.genesis.vision/",
+    icon: MediumIcon
+  },
+  {
+    name: "BitcoinTalk",
+    href: "https://bitcointalk.org/index.php?topic=2143279.0",
+    icon: BitcoinIcon
   }
 ];

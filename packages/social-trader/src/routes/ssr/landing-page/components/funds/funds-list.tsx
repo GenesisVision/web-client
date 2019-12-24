@@ -13,25 +13,31 @@ interface Props {
 
 const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
   const list = useRef<any>(null);
+  const [activeScroll, setActiveScroll] = useState(false);
   const handleScroll = useCallback(() => {
     if (list.current) {
+      if (!activeScroll) setActiveScroll(true);
       const firstNodeList = list.current.firstChild;
-      const positionsFirstNodeList = firstNodeList
+      const posFirstNodeList = firstNodeList
         ? firstNodeList.getBoundingClientRect()
         : null;
-      onScroll(positionsFirstNodeList.left);
+      {
+        posFirstNodeList && onScroll(posFirstNodeList);
+      }
     }
-  }, []);
+  }, [list.current]);
   return (
-    <ul
-      className={classNames("funds-list", className)}
+    <div
+      className={classNames("funds-list", className, {
+        "funds-list--active": activeScroll
+      })}
       onScroll={handleScroll}
       ref={list}
     >
       {funds.map(fund => (
         <FundCard key={fund.id} fund={fund} />
       ))}
-    </ul>
+    </div>
   );
 };
 

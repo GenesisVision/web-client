@@ -7,6 +7,7 @@
 
   &__info {
     margin-bottom: 60px;
+    position: relative;
 
     @include media-breakpoint-tablet() {
       grid-column: 3/11;
@@ -15,6 +16,13 @@
 
     @include media-breakpoint-landscape-tablet() {
       grid-column: 2/6;
+    }
+  }
+
+  &__wrapper-fixed {
+    @include media-breakpoint-landscape-tablet() {
+      position: sticky;
+      top: 50px;
     }
   }
 
