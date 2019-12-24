@@ -1,6 +1,6 @@
 import "./lp-footer.scss";
 
-import * as React from "react";
+import React from "react";
 import IconList from "routes/ssr/landing-page/components/icon-list/icon-list";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import SeoList from "routes/ssr/landing-page/components/seo-links/seo-list";

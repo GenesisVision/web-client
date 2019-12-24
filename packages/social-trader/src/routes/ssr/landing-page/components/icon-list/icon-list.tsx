@@ -1,7 +1,7 @@
 import "./icon-list.scss";
 
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import { TIconLinks } from "routes/ssr/landing-page/static-data/app-links";
 
 import IconItem from "./icon-item";

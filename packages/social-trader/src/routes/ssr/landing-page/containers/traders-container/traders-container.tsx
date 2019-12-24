@@ -1,6 +1,6 @@
 import "./traders-container.scss";
 
-import * as React from "react";
+import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import TradersList from "routes/ssr/landing-page/components/traders/traders-list";
 

@@ -3,7 +3,7 @@ import "./programs-list.scss";
 import classNames from "classnames";
 import { ProgramDetailsListItem } from "gv-api-web";
 import ProgramCard from "modules/programs-table/components/programs-table/program-card";
-import * as React from "react";
+import React from "react";
 
 import ProgramShort from "./program-short";
 

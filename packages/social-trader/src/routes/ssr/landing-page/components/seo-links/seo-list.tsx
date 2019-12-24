@@ -1,7 +1,7 @@
 import "./seo-list.scss";
 
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import SeoItem from "routes/ssr/landing-page/components/seo-links/seo-item";
 import { TNavFooter } from "routes/ssr/landing-page/static-data/nav-links";
 

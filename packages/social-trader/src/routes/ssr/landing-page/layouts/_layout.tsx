@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import DocumentTitle from "react-document-title";
 import LPFooter from "routes/ssr/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "routes/ssr/landing-page/components/lp-header/lp-header";

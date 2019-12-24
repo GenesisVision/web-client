@@ -1,7 +1,7 @@
 import "./programs-container.scss";
 
 import { ProgramDetailsListItem } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import ProgramsList from "routes/ssr/landing-page/components/programs/programs-list";
 import ProgramIcon from "routes/ssr/landing-page/images/common/program-icon.svg";

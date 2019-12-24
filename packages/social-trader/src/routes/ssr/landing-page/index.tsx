@@ -13,6 +13,7 @@ import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
+import TabsContainer from "routes/ssr/landing-page/containers/tabs-container/tabs-container";
 import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
@@ -57,12 +58,12 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            <FundsContainer funds={fundsData.items} />
+            {/*<FundsContainer funds={fundsData.items} />*/}
           </div>
         </section>
-        <section className="home__section home__section--bg-white">
+        <section className="home__section home__section--bg-white home__section--horizontal-padding">
           <div className="home__container">
-            <h2>Tabs</h2>
+            <TabsContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">

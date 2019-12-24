@@ -1,7 +1,7 @@
 import "./traders-list.scss";
 
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
 import TraderItem from "./trader-item";
 

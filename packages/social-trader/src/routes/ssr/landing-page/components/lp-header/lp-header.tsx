@@ -1,7 +1,7 @@
 import "./lp-header.scss";
 
 import Link from "components/link/link";
-import * as React from "react";
+import React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { MainLogo } from "routes/ssr/landing-page/components/main-logo/main-logo";

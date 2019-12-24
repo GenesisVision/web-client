@@ -80,7 +80,6 @@ const TabsContainer: React.FC = () => {
             ...props
           }}
         >
-          <h2>{item.title}</h2>
           <TabInfoList />
         </animated.div>
       ))}

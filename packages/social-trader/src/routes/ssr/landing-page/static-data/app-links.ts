@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { AndroidIcon } from "routes/ssr/landing-page/components/app-icons/android-icon";
 import { AppleIcon } from "routes/ssr/landing-page/components/app-icons/apple-icon";
 

@@ -1,6 +1,6 @@
 import "./social-container.scss";
 
-import * as React from "react";
+import React from "react";
 import IconList from "routes/ssr/landing-page/components/icon-list/icon-list";
 import { socialLinks } from "routes/ssr/landing-page/static-data/social-links";
 

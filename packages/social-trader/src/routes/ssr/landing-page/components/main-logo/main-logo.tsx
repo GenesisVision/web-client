@@ -1,6 +1,6 @@
 import "./main-logo.scss";
 
-import * as React from "react";
+import React from "react";
 
 export const MainLogo: React.FC = () => (
   <>
