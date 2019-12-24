@@ -21,11 +21,16 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
         )}
       </div>
       <ConfirmPopup
-        header={t("create-program-page.kyc-requirement-title")}
+        header={t("create-account-page.settings.kyc-required")}
         open={isOpenPopup}
         onApply={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
-        body={t("create-program-page.kyc-requirement")}
+        body={
+          <>
+            <div>{t("create-account-page.settings.kyc-required-text-1")}</div>
+            <div>{t("create-account-page.settings.kyc-required-text-2")}</div>
+          </>
+        }
         applyButtonText={t("buttons.close")}
       />
     </>
