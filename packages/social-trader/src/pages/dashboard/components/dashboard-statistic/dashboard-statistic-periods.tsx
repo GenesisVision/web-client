@@ -69,7 +69,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
             displayType="text"
           />
         </div>
-        {withProfitability && item.profitPercent !== 0 && (
+        {withProfitability && (
           <Profitability
             variant={PROFITABILITY_VARIANT.CHIPS}
             value={item.profitPercent}
