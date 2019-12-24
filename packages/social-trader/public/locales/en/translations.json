@@ -2103,7 +2103,6 @@
       "FOREX_DISABLED": "Forex disabled"
     },
     "kyc-requirement-title": "KYC required",
-    "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure. KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
     "broker-info": {
       "about": "About",
       "terms": "Terms",
@@ -2214,11 +2213,10 @@
       "KYC_REQUIRED": "KYC required",
       "FOREX_DISABLED": "Forex disabled"
     },
-    "kyc-requirement": "In order to create a program with the selected broker, you need to verify your account first. To do that, you need complete the KYC procedure. KYC (Know Your Customer) refers to the process of a business verifying the identity of its customers.",
     "settings": {
       "kyc-required": "KYC required",
-      "kyc-required-text-1": "KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
-      "kyc-required-text-2": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure.",
+      "kyc-required-text-1": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure.",
+      "kyc-required-text-2": "KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
       "main-settings": "Main settings",
       "deposit-details": "Deposit details",
       "fields": {
