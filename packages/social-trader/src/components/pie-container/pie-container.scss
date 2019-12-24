@@ -38,9 +38,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    //opacity: 0.4;
+    & circle {
+      transition: 300ms ease-in-out;
+    }
     &--over {
-      //opacity: 1;
+      & circle {
+        stroke-width: 4;
+      }
     }
   }
 }
