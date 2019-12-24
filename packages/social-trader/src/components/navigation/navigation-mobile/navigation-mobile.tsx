@@ -49,7 +49,10 @@ const _NavigationMobile: React.FC<Props> = ({
           ) : (
             <NavigationItem
               icon={<LogoutIcon primary rotate />}
-              href={linkCreator(LOGIN_ROUTE, backPath)}
+              href={{
+                pathname: LOGIN_ROUTE,
+                state: backPath
+              }}
             >
               {t("navigation.login")}
             </NavigationItem>

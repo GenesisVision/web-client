@@ -70,7 +70,12 @@ const _Header: React.FC<Props> = ({
           </>
         ) : (
           <div className="header__buttons">
-            <Link to={linkCreator(LOGIN_ROUTE, backPath)}>
+            <Link
+              to={{
+                pathname: LOGIN_ROUTE,
+                state: backPath
+              }}
+            >
               <GVButton variant="outlined" color="secondary">
                 {t("auth.login.title")}
               </GVButton>
