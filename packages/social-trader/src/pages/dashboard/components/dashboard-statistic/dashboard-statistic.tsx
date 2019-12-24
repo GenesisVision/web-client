@@ -32,7 +32,7 @@ const _DashboardStatistic: React.FC<Props> = ({
     <>
       <div>
         <div className="dashboard-statistic__values">
-          <StatisticItemList>{renderValues(data)}</StatisticItemList>
+          {renderValues(data)}
           <DashboardStatisticPeriods
             withProfitability
             currency={currency}
