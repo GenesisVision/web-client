@@ -1,20 +1,21 @@
 import BackButton from "components/back-button/back-button";
-import useRole from "hooks/use-role.hook";
+import { TitleContext } from "components/link/link.helper";
 import * as React from "react";
 import DocumentTitle from "react-document-title";
 import { useTranslation } from "react-i18next";
 
 const _Page: React.FC<Props> = ({ title, children }) => {
   const [t] = useTranslation();
-  const role = useRole();
   return (
-    <DocumentTitle title={t(`${role ? `${role}.` : ""}app.title`) + title}>
-      <>
-        <div>
-          <BackButton />
-        </div>
-        {children}
-      </>
+    <DocumentTitle title={t("app.title") + title}>
+      <TitleContext.Provider value={title}>
+        <>
+          <div>
+            <BackButton />
+          </div>
+          {children}
+        </>
+      </TitleContext.Provider>
     </DocumentTitle>
   );
 };
