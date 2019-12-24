@@ -13,11 +13,16 @@ import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "routes/invest.routes";
 
 import { getTotalInvestingStatistic } from "../../services/dashboard.service";
 
-const _DashboardInvestingStatistic: React.FC<Props> = () => {
+const _DashboardInvestingStatistic: React.FC<Props> = ({
+  landscapeTablet,
+  tablet
+}) => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
   return (
     <DashboardStatisticContainer
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
       EmptyBlock={DashboardInvestingEmpty}
       currency={currency}
       label={t("dashboard-page.statistic.investing")}
@@ -39,7 +44,10 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
   );
 };
 
-interface Props {}
+interface Props {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
+}
 
 const DashboardInvestingEmpty: React.FC = React.memo(() => {
   const { linkCreator } = useToLink();

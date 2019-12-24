@@ -1,6 +1,5 @@
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardStatisticTable from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-table";

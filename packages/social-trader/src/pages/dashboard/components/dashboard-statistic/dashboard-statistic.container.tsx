@@ -16,6 +16,8 @@ import {
 import DashboardStatistic from "./dashboard-statistic";
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
+  landscapeTablet,
+  tablet,
   EmptyBlock,
   currency,
   label,
@@ -32,6 +34,8 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   });
   return (
     <DashboardBlock
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
       label={label}
       all={all}
       className="dashboard-statistic__container"
@@ -49,6 +53,8 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
   EmptyBlock: React.ComponentType;
   currency: CurrencyEnum;
   renderValues: (

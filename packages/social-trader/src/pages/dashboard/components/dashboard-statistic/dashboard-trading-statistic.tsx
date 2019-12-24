@@ -15,11 +15,16 @@ import { TRADING_ROUTE } from "routes/dashboard.routes";
 
 import { fetchTradingTotalStatistic } from "../../services/dashboard.service";
 
-const _DashboardTradingStatistic: React.FC<Props> = () => {
+const _DashboardTradingStatistic: React.FC<Props> = ({
+  landscapeTablet,
+  tablet
+}) => {
   const [t] = useTranslation();
   const currency = useSelector(currencySelector);
   return (
     <DashboardStatisticContainer
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}
       label={t("dashboard-page.statistic.trading")}
@@ -73,7 +78,10 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
   );
 });
 
-interface Props {}
+interface Props {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
+}
 
 const DashboardTradingStatistic = React.memo(_DashboardTradingStatistic);
 export default DashboardTradingStatistic;

@@ -7,6 +7,8 @@ import React, { useEffect } from "react";
 import DashboardBlock from "../dashboard-block/dashboard-block";
 
 const _DashboardPieChartBlock: React.FC<Props> = ({
+  landscapeTablet,
+  tablet,
   label,
   request,
   loaderData
@@ -18,13 +20,19 @@ const _DashboardPieChartBlock: React.FC<Props> = ({
     sendRequest();
   }, []);
   return (
-    <DashboardBlock label={label}>
+    <DashboardBlock
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
+      label={label}
+    >
       <DashboardPieChart loaderData={loaderData} data={data} />
     </DashboardBlock>
   );
 };
 
 interface Props {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
   label: string;
   loaderData: any;
   request: (...args: any) => any;
