@@ -1,5 +1,6 @@
 import GVProgramAvatar from "components/gv-program-avatar";
 import Link, { ToType } from "components/link/link";
+import { createToUrl, useToLink } from "components/link/link.helper";
 import { TransactionAssetDetails } from "gv-api-web";
 import * as React from "react";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
@@ -11,32 +12,35 @@ import {
   composeProgramDetailsUrl
 } from "utils/compose-url";
 
-const getAssetLink = (data: TransactionAssetDetails): ToType | undefined => {
-  const state = "/ Wallet";
+const getAssetLink = (
+  data: TransactionAssetDetails,
+  title: string
+): ToType | undefined => {
   switch (data.assetType) {
     case "Follow":
-      return {
-        state,
-        pathname: FOLLOW_DETAILS_FOLDER_ROUTE,
-        as: composeFollowDetailsUrl(data.url)
-      };
+      return createToUrl(
+        composeFollowDetailsUrl(data.url),
+        FOLLOW_DETAILS_FOLDER_ROUTE,
+        title
+      );
     case "Fund":
-      return {
-        state,
-        pathname: FUND_DETAILS_FOLDER_ROUTE,
-        as: composeFundsDetailsUrl(data.url)
-      };
+      return createToUrl(
+        composeFundsDetailsUrl(data.url),
+        FUND_DETAILS_FOLDER_ROUTE,
+        title
+      );
     case "Program":
-      return {
-        state,
-        pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
-        as: composeProgramDetailsUrl(data.url)
-      };
+      return createToUrl(
+        composeProgramDetailsUrl(data.url),
+        PROGRAM_DETAILS_FOLDER_ROUTE,
+        title
+      );
   }
 };
 
 const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
-  const programLinkProps = getAssetLink(data);
+  const { contextTitle } = useToLink();
+  const programLinkProps = getAssetLink(data, contextTitle);
   return (
     <div
       className={`transaction-asset transaction-asset--${data.assetType.toLowerCase()}`}
