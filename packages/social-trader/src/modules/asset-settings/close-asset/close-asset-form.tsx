@@ -5,7 +5,7 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
+import { CloseableAssetType } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
@@ -83,7 +83,7 @@ enum FIELDS {
 
 interface OwnProps {
   assetName?: string;
-  asset: CLOSEABLE_ASSET;
+  asset: CloseableAssetType;
   onCancel: () => void;
   twoFactorEnabled: boolean;
   onSubmit: (

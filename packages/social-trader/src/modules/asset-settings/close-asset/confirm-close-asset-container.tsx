@@ -1,6 +1,9 @@
 import Dialog from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
-import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
+import {
+  CLOSEABLE_ASSET,
+  CloseableAssetType
+} from "modules/asset-settings/close-asset/close-asset";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
@@ -49,13 +52,15 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   );
 };
 
-const getMethod = (asset: CLOSEABLE_ASSET) => {
+const getMethod = (asset: CloseableAssetType) => {
   switch (asset) {
     case CLOSEABLE_ASSET.TRADING_ACCOUNT:
       return closeTradingAccount;
     case CLOSEABLE_ASSET.FUND:
       return closeFund;
     case CLOSEABLE_ASSET.PROGRAM:
+    case "SignalProgram":
+    case "Program":
     default:
       return closeProgram;
   }
@@ -63,7 +68,7 @@ const getMethod = (asset: CLOSEABLE_ASSET) => {
 
 interface Props {
   assetName?: string;
-  asset: CLOSEABLE_ASSET;
+  asset: CloseableAssetType;
   open: boolean;
   onClose: () => void;
   onApply: () => void;
