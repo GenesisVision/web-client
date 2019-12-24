@@ -31,7 +31,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
   updateItems,
   program
 }) => {
-  const { linkCreator } = useToLink();
+  const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const linkProps = linkCreator(composeProgramDetailsUrl(program.url));
   const requestCurrency = program.balance.currency;
@@ -64,7 +64,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
       title={program.title}
       subTitle={program.owner.username}
       logo={program.logo}
-      managerUrl={managerToPathCreator(program.owner.url, title)}
+      managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
