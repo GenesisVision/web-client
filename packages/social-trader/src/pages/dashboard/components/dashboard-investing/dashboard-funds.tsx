@@ -1,3 +1,4 @@
+import { TitleContext } from "components/link/link.helper";
 import { FundInvestingDetailsList } from "gv-api-web";
 import {
   fetchDashboardInvestmentsFundsAction,
@@ -5,7 +6,6 @@ import {
 } from "pages/dashboard/actions/dashboard.actions";
 import DashboardFundCard from "pages/dashboard/components/dashboard-investing/dashboard-fund-card";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import { dashboardInvestmentsFundsSelector } from "pages/dashboard/reducers/dashboard-investments-funds.reducer";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";

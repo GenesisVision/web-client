@@ -3,6 +3,7 @@ import "./dashboard.scss";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
+import { TitleContext } from "components/link/link.helper";
 import Page from "components/page/page";
 import PublicSelect from "components/profile/settings/public-select/public-select";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
@@ -10,7 +11,6 @@ import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboa
 import DashboardInvestingMostProfitableContainer from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable.container";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
 import { PublicPageLink } from "pages/dashboard/components/dashboard-investing/public-page-link";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

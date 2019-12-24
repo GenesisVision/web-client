@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
+import { TitleContext } from "components/link/link.helper";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
@@ -25,7 +26,6 @@ import { DepositTransferButton } from "modules/transfer/deposit-transfer-button"
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";

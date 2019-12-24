@@ -1,3 +1,4 @@
+import { TitleContext } from "components/link/link.helper";
 import {
   TableCardActions,
   TableCardActionsItem
@@ -21,8 +22,6 @@ import {
   createFundSettingsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
-
-import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps

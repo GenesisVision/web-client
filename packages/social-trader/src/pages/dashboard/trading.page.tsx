@@ -1,9 +1,9 @@
+import { TitleContext } from "components/link/link.helper";
 import Page from "components/page/page";
 import DashboardFollowThemContainer from "pages/dashboard/components/dashboard-trading/dashboard-follow-them.container";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
 import DashboardPublic from "pages/dashboard/components/dashboard-trading/dashboard-public";
 import DashboardTradingTotalContainer from "pages/dashboard/components/dashboard-trading/dashboard-trading-total.container";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

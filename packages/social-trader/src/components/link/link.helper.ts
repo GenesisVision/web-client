@@ -1,3 +1,4 @@
+import React from "react";
 import * as uuid from "uuid";
 
 import { ToType } from "./link";
@@ -36,3 +37,5 @@ export const createToUrl = (
   pathname,
   state: `/ ${state}`
 });
+
+export const TitleContext = React.createContext("");

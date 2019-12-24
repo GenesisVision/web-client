@@ -2,6 +2,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { TitleContext } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -25,8 +26,6 @@ import { distanceDate } from "shared/utils/dates";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
-
-import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCard: React.FC<Props> = ({
   showWithdraw = true,

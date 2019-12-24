@@ -1,5 +1,6 @@
 import "./dashboard.scss";
 
+import { TitleContext } from "components/link/link.helper";
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
@@ -7,7 +8,6 @@ import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/d
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
 import DashboardInvestingStatistic from "pages/dashboard/components/dashboard-statistic/dashboard-investing-statistic";
 import DashboardTotalContainer from "pages/dashboard/components/dashboard-total/dashboard-total.container";
-import { TitleContext } from "pages/dashboard/dashboard.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
