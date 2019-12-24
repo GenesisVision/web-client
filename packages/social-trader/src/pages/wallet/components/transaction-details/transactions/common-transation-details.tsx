@@ -7,6 +7,7 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import {
@@ -37,6 +38,7 @@ const TransactionDetailsItemsBlock: React.FC<{
 const TransactionDetailsListItem: React.FC<{
   item: TransactionDetailItem;
 }> = React.memo(({ item: { title, details, url, canCopy } }) => {
+  const { linkCreator } = useToLink();
   return (
     <StatisticItem label={title}>
       <div className="transaction-details__details-list-statistic-item">
@@ -49,7 +51,7 @@ const TransactionDetailsListItem: React.FC<{
             }
           )}
         >
-          {url ? <Link to={url}>{details}</Link> : details}
+          {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
         </div>
         {canCopy && <CopyButton value={details} text />}
       </div>

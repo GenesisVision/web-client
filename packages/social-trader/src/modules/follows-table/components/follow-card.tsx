@@ -1,3 +1,4 @@
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -34,11 +35,9 @@ const _FollowCard: React.FC<Props> = ({
     url,
     statistic: { drawdown }
   } = follow;
+  const { linkCreator } = useToLink();
   const { t } = useTranslation();
-  const linkProps = {
-    pathname: composeFollowDetailsUrl(url),
-    state: `/ ${title}`
-  };
+  const linkProps = linkCreator(composeFollowDetailsUrl(url), title);
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>

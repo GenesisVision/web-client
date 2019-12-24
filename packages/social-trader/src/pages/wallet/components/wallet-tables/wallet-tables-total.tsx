@@ -2,6 +2,7 @@ import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { WalletData } from "gv-api-web";
@@ -19,6 +20,7 @@ import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
 const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { tab } = useHashTab<TABS>(TABS.WALLETS_TAB);
   return (
@@ -27,7 +29,9 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
         <GVTab
           value={TABS.WALLETS_TAB}
           label={
-            <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
+            <Link
+              to={linkCreator(`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`)}
+            >
               {t("wallet-page.tabs.wallets")}
             </Link>
           }
@@ -44,7 +48,11 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                 </div>
               )}
             >
-              <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`}>
+              <Link
+                to={linkCreator(
+                  `${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`
+                )}
+              >
                 {t("wallet-page.tabs.transactions")}
               </Link>
             </Tooltip>
@@ -63,7 +71,11 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                   </div>
                 )}
               >
-                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                <Link
+                  to={linkCreator(
+                    `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
+                  )}
+                >
                   {t("wallet-page.tabs.deposit")}
                 </Link>
               </Tooltip>
@@ -75,7 +87,11 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                   </div>
                 )}
               >
-                <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`}>
+                <Link
+                  to={linkCreator(
+                    `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
+                  )}
+                >
                   {t("wallet-page.tabs.withdrawals")}
                 </Link>
               </Tooltip>

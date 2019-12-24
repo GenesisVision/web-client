@@ -1,6 +1,7 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import TableCell from "components/table/components/table-cell";
@@ -31,6 +32,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     mode,
     asset: { url, title, logo, color, programDetails }
   } = provider;
+  const { linkCreator } = useToLink();
   const level = programDetails ? programDetails.level : undefined;
   const levelProgress = programDetails
     ? programDetails.levelProgress
@@ -38,7 +40,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   return (
     <TableRow stripy>
       <TableCell>
-        <Link to={composeFollowDetailsUrl(url)}>
+        <Link to={linkCreator(composeFollowDetailsUrl(url))}>
           <div className="subscriptions-table__center-cell">
             <AssetAvatar
               className="subscriptions-table__buttons-cell-item--first"

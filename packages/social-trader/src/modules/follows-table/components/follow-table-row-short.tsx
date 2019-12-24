@@ -2,6 +2,7 @@ import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
@@ -39,11 +40,12 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     url,
     color
   } = follow;
-  const linkProps = {
-    state: `/ ${title}`,
-    pathname: FOLLOW_DETAILS_FOLDER_ROUTE,
-    as: composeFollowDetailsUrl(url)
-  };
+  const { linkCreator } = useToLink();
+  const linkProps = linkCreator(
+    composeFollowDetailsUrl(url),
+    title,
+    FOLLOW_DETAILS_FOLDER_ROUTE
+  );
   return (
     <TableRow
       className={classNames({

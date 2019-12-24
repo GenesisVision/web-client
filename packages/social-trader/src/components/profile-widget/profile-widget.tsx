@@ -8,6 +8,7 @@ import { LogoutIcon } from "components/icon/logout-icon";
 import { SecurityIcon } from "components/icon/security-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import {
   PROFILE_ROUTE,
@@ -27,6 +28,7 @@ const _ProfileWidget: React.FC<Props> = ({
   logout,
   className
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
@@ -48,25 +50,28 @@ const _ProfileWidget: React.FC<Props> = ({
           <div className="profile-menu__header">{profileHeader.email}</div>
           <div className="profile-menu__container">
             <div className="profile-menu__item profile-menu__item--details">
-              <Link to={PROFILE_ROUTE} onClick={clearAnchor}>
+              <Link to={linkCreator(PROFILE_ROUTE)} onClick={clearAnchor}>
                 <DetailsIcon />
                 {t("profile-widget.personal-details")}
               </Link>
             </div>
             <div className="profile-menu__item profile-menu__item--settings">
-              <Link to={SETTINGS_ROUTE} onClick={clearAnchor}>
+              <Link to={linkCreator(SETTINGS_ROUTE)} onClick={clearAnchor}>
                 <SettingsIcon />
                 {t("profile-widget.settings")}
               </Link>
             </div>
             <div className="profile-menu__item profile-menu__item--security">
-              <Link to={SECURITY_ROUTE} onClick={clearAnchor}>
+              <Link to={linkCreator(SECURITY_ROUTE)} onClick={clearAnchor}>
                 <SecurityIcon />
                 {t("profile-widget.security")}
               </Link>
             </div>
             <div className="profile-menu__item profile-menu__item--security">
-              <Link to={REFERRAL_PROGRAM_ROUTE} onClick={clearAnchor}>
+              <Link
+                to={linkCreator(REFERRAL_PROGRAM_ROUTE)}
+                onClick={clearAnchor}
+              >
                 <SecurityIcon />
                 {t("profile-page.tabs.referral-program")}
               </Link>

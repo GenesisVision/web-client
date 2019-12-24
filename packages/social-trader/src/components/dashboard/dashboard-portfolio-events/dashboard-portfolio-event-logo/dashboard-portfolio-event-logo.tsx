@@ -4,6 +4,7 @@ import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
@@ -18,13 +19,14 @@ const _PortfolioEventLogo: React.FC<Props> = ({
   icon,
   from
 }) => {
-  const to = {
-    pathname:
-      assetDetails.assetType === "Program"
-        ? composeProgramDetailsUrl(assetDetails.url || "")
-        : composeFundsDetailsUrl(assetDetails.url || ""),
-    state: from ? `/ ${from}` : ""
-  };
+  const { linkCreator } = useToLink();
+  const to = linkCreator(
+    assetDetails.assetType === "Program"
+      ? composeProgramDetailsUrl(assetDetails.url || "")
+      : composeFundsDetailsUrl(assetDetails.url || ""),
+    from,
+    undefined
+  );
   return (
     <div className="portfolio-event-logo">
       {withAsset &&

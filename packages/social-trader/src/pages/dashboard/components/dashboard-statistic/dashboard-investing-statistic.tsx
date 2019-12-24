@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
@@ -41,6 +42,7 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
 interface Props {}
 
 const DashboardInvestingEmpty: React.FC = React.memo(() => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
     <div className="dashboard-statistic__create-block dashboard-statistic__values">
@@ -50,12 +52,12 @@ const DashboardInvestingEmpty: React.FC = React.memo(() => {
       </div>
       <div className="dashboard-statistic__create-block-links">
         <div className="dashboard-statistic__create-block-link">
-          <Link to={GV_PROGRAMS_ROUTE}>
+          <Link to={linkCreator(GV_PROGRAMS_ROUTE)}>
             <GVButton color="primary">{t("navigation.gv-programs")}</GVButton>
           </Link>
         </div>
         <div className="dashboard-statistic__create-block-link">
-          <Link to={GV_FUNDS_ROUTE}>
+          <Link to={linkCreator(GV_FUNDS_ROUTE)}>
             <GVButton color="primary">{t("navigation.gv-funds")}</GVButton>
           </Link>
         </div>

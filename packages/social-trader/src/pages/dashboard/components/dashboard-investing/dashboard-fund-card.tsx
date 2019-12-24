@@ -2,6 +2,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -20,7 +21,6 @@ import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
@@ -30,19 +30,15 @@ import { VoidFuncType } from "utils/types";
 const _DashboardFundCard: React.FC<Props> = ({
   updateRow,
   updateItems,
-  fund,
-  title = ""
+  fund
 }) => {
+  const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
         onClick={clearAnchor}
-        to={{
-          as: composeFundsDetailsUrl(fund.url),
-          pathname: FUND_DETAILS_FOLDER_ROUTE,
-          state: `/ ${title}`
-        }}
+        to={linkCreator(composeFundsDetailsUrl(fund.url))}
       >
         {t("fund-actions.details")}
       </TableCardActionsItem>
@@ -67,11 +63,8 @@ const _DashboardFundCard: React.FC<Props> = ({
       subTitle={fund.owner.username}
       logo={fund.logo}
       color={fund.color}
-      detailsUrl={{
-        pathname: composeFundsDetailsUrl(fund.url),
-        state: `/ ${title}`
-      }}
-      managerUrl={managerToPathCreator(fund.owner.url, title)}
+      detailsUrl={linkCreator(composeFundsDetailsUrl(fund.url))}
+      managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
@@ -137,5 +130,4 @@ interface Props {
   updateRow?: UpdateRowFuncType;
   updateItems: VoidFuncType;
   fund: FundInvestingDetailsList;
-  title?: string;
 }

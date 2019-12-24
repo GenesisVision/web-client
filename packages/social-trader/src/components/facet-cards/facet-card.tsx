@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Surface from "components/surface/surface";
 import { AssetFacet } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -14,6 +15,7 @@ const _FacetCard: React.FC<Props> = ({
   title,
   fileRoute
 }) => {
+  const { linkCreator } = useToLink();
   const [isHovered, setHovered, setNotHovered] = useIsOpen();
   return (
     <Surface
@@ -23,13 +25,7 @@ const _FacetCard: React.FC<Props> = ({
       onMouseEnter={setHovered}
       onMouseLeave={setNotHovered}
     >
-      <Link
-        to={{
-          pathname: fileRoute,
-          state: `/ ${title}`,
-          as: composeFacetUrl(facet.url)
-        }}
-      >
+      <Link to={linkCreator(composeFacetUrl(facet.url), title, fileRoute)}>
         <div className="facet__facet-container">
           <div className="facet__logo-wrapper">
             <ImageBase

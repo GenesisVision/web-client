@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
+import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import withLoader from "decorators/with-loader";
 import {
@@ -52,6 +53,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
   onClose,
   isKycConfirmed
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
 
   const [values, setValues] = useState<TValues>(
@@ -250,10 +252,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           </div>
           <Link
             className="level-calculator-popup__btn-verify"
-            to={{
-              pathname: KYC_ROUTE,
-              state: title
-            }}
+            to={linkCreator(KYC_ROUTE, title)}
           >
             <GVButton color="primary" variant="outlined">
               {t("buttons.verify")}

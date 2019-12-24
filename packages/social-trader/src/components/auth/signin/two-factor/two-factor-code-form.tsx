@@ -5,6 +5,7 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { FormikProps, InjectedFormikProps, withFormik } from "formik";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
@@ -27,6 +28,7 @@ const _TwoFactorCodeForm: React.FC<
   setSubmitting,
   onSubmit
 }) => {
+  const { linkCreator } = useToLink();
   const [isChecking, setIsChecking] = useIsOpen();
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const _TwoFactorCodeForm: React.FC<
         {t("auth.login.two-factor.recovery-info")}
       </div>
       <GVButton className="login-two-factor__recovery-link" variant="text">
-        <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
+        <Link to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}>
           {t("auth.login.two-factor.link-to-recovery")}
         </Link>
       </GVButton>

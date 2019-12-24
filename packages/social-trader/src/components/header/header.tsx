@@ -6,6 +6,7 @@ import GVButton from "components/gv-button";
 import { Icon } from "components/icon/icon";
 import { SearchIcon } from "components/icon/search-icon";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Navigation from "components/navigation/navigation";
 import NavigationMobile from "components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "components/notifications-widget/notifications-widget";
@@ -29,6 +30,7 @@ const _Header: React.FC<Props> = ({
   isAuthenticated,
   profileHeader
 }) => {
+  const { linkCreator } = useToLink();
   const dispatch = useDispatch();
   const handlerLogout = useCallback(() => dispatch(logout), []);
   const [isOpen, setOpen, setClose] = useIsOpen();
@@ -45,12 +47,7 @@ const _Header: React.FC<Props> = ({
       </div>
       <div className="header__center">
         <div className="header__search">
-          <Link
-            to={{
-              pathname: GLOBAL_SEARCH_ROUTE,
-              state: backPath
-            }}
-          >
+          <Link to={linkCreator(GLOBAL_SEARCH_ROUTE, backPath)}>
             <SearchIcon />
           </Link>
         </div>
@@ -73,17 +70,12 @@ const _Header: React.FC<Props> = ({
           </>
         ) : (
           <div className="header__buttons">
-            <Link
-              to={{
-                pathname: LOGIN_ROUTE,
-                state: backPath
-              }}
-            >
+            <Link to={linkCreator(LOGIN_ROUTE, backPath)}>
               <GVButton variant="outlined" color="secondary">
                 {t("auth.login.title")}
               </GVButton>
             </Link>
-            <Link to={SIGNUP_ROUTE}>
+            <Link to={linkCreator(SIGNUP_ROUTE)}>
               <GVButton variant="contained" color="primary">
                 {t("auth.signup.title")}
               </GVButton>

@@ -16,7 +16,6 @@ const _DashboardInvestingFunds: React.FC = () => {
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const title = useContext(TitleContext);
   const handleUpdateItems = useCallback(
     updateItems => () => {
       dispatch(fetchDashboardInvestmentsTotalAction(currency));
@@ -37,7 +36,6 @@ const _DashboardInvestingFunds: React.FC = () => {
         <DashboardFundCard
           updateRow={handleUpdateItems(updateRow)}
           updateItems={handleUpdateItems(updateItems!)}
-          title={title}
           fund={fund}
         />
       )}

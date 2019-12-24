@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import GVButton from "components/gv-button";
-import Link from "components/link/link";
+import Link, { ToType } from "components/link/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { normalizeUrlString } from "../link/link.helper";
+import { normalizeLinkFrom } from "../link/link.helper";
 
 interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
@@ -27,8 +27,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 export const NavigationButton = React.memo(_NavigationButton);
 
 interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  state?: string;
-  href?: string | { pathname: string; state: string };
+  href: string | ToType;
   icon: JSX.Element;
   exact?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -38,18 +37,15 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   onClick,
   href,
   icon,
-  children,
-  state
+  children
 }) => {
   const { route } = useRouter();
   return (
     (!!href && (
       <Link
-        to={{ pathname: href as string, state }}
+        to={href}
         className={classNames("navigation__item", {
-          "navigation__item--active": route.startsWith(
-            normalizeUrlString(String(href))
-          )
+          "navigation__item--active": route.startsWith(normalizeLinkFrom(href))
         })}
       >
         {<icon.type {...icon.props} className="navigation__icon" />}

@@ -1,4 +1,5 @@
 import AssetStatus from "components/asset-status/asset-status";
+import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
@@ -22,20 +23,17 @@ import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "utils/compose-url";
-import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { formatCurrencyValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardProgramCard: React.FC<Props> = ({
   updateRow,
   updateItems,
-  program,
-  title
+  program
 }) => {
+  const { linkCreator } = useToLink();
   const { t } = useTranslation();
-  const linkProps = {
-    pathname: composeProgramDetailsUrl(program.url),
-    state: `/ ${title}`
-  };
+  const linkProps = linkCreator(composeProgramDetailsUrl(program.url));
   const requestCurrency = program.balance.currency;
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
@@ -139,7 +137,6 @@ interface Props {
   updateRow?: UpdateRowFuncType;
   updateItems: VoidFuncType;
   program: ProgramInvestingDetailsList;
-  title: string;
 }
 
 const DashboardProgramCard = React.memo(_DashboardProgramCard);
