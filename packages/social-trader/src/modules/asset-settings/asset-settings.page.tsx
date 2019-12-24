@@ -18,6 +18,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   description
 }) => {
   const successMessage =
+    (asset === ASSET.FOLLOW && "edit-follow.notifications.edit-success") ||
     (asset === ASSET.PROGRAM && "edit-program.notifications.edit-success") ||
     (asset === ASSET.FUND && "edit-fund.notifications.edit-success") ||
     "";
