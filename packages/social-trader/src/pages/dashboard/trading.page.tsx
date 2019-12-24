@@ -1,4 +1,3 @@
-import { TitleContext } from "components/link/link.helper";
 import Page from "components/page/page";
 import DashboardFollowThemContainer from "pages/dashboard/components/dashboard-trading/dashboard-follow-them.container";
 import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
@@ -11,22 +10,20 @@ const _TradingPage: React.FC = () => {
   const [t] = useTranslation();
   const title = t(`dashboard-page.trading.title`);
   return (
-    <TitleContext.Provider value={title}>
-      <Page title={title}>
-        <div>
-          <DashboardTradingTotalContainer />
-        </div>
-        <div>
-          <DashboardPublic />
-        </div>
-        <div>
-          <DashboardPrivate />
-        </div>
-        <div>
-          <DashboardFollowThemContainer />
-        </div>
-      </Page>
-    </TitleContext.Provider>
+    <Page title={title}>
+      <div>
+        <DashboardTradingTotalContainer />
+      </div>
+      <div>
+        <DashboardPublic />
+      </div>
+      <div>
+        <DashboardPrivate />
+      </div>
+      <div>
+        <DashboardFollowThemContainer />
+      </div>
+    </Page>
   );
 };
 

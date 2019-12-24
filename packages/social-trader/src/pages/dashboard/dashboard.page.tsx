@@ -1,6 +1,5 @@
 import "./dashboard.scss";
 
-import { TitleContext } from "components/link/link.helper";
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
@@ -26,29 +25,27 @@ const _DashboardPage: React.FC = () => {
   const title = t(`dashboard-page.title`);
   const notNewUser = !useSelector(isNewUserSelector);
   return (
-    <TitleContext.Provider value={title}>
-      <Page title={title}>
+    <Page title={title}>
+      <div>
+        <DashboardTotalContainer label={t("dashboard-page.total.title")} />
+      </div>
+      {!!requestCount && requestCount > 0 && (
         <div>
-          <DashboardTotalContainer label={t("dashboard-page.total.title")} />
+          <DashboardInRequestsContainer />
         </div>
-        {!!requestCount && requestCount > 0 && (
-          <div>
-            <DashboardInRequestsContainer />
-          </div>
-        )}
-        <div className="dashboard__statistic-block dashboard__statistic-block--landscape-tablet">
-          <DashboardTradingStatistic landscapeTablet />
-          <DashboardInvestingStatistic landscapeTablet />
+      )}
+      <div className="dashboard__statistic-block dashboard__statistic-block--landscape-tablet">
+        <DashboardTradingStatistic landscapeTablet />
+        <DashboardInvestingStatistic landscapeTablet />
+      </div>
+      {notNewUser && (
+        <div className="dashboard__statistic-block dashboard__statistic-block--tablet">
+          <DashboardPortfolio tablet />
+          <DashboardAssets tablet />
         </div>
-        {notNewUser && (
-          <div className="dashboard__statistic-block dashboard__statistic-block--tablet">
-            <DashboardPortfolio tablet />
-            <DashboardAssets tablet />
-          </div>
-        )}
-        <DashboardRecommendationsContainer />
-      </Page>
-    </TitleContext.Provider>
+      )}
+      <DashboardRecommendationsContainer />
+    </Page>
   );
 };
 
