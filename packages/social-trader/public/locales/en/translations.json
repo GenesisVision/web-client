@@ -1954,6 +1954,7 @@
       }
     },
     "total": {
+      "performance": "Performance",
       "available": "Wallets",
       "invested": "Invested",
       "pending": "Trading",
