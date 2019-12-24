@@ -1,5 +1,6 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
 
 $avatar-small-size: 40px;
 $avatar-medium-size: 80px;
@@ -11,10 +12,13 @@ $avatar-big-size: 120px;
   justify-content: center;
   align-items: center;
 
+  &--with-level {
+    margin-right: $padding-xsmall;
+  }
+
   &--small {
     height: $avatar-small-size;
     width: $avatar-small-size;
-    margin-right: 24px;
     .program-avatar__level {
       right: -25px;
       height: 32px;
@@ -25,7 +29,7 @@ $avatar-big-size: 120px;
   &--medium {
     height: $avatar-medium-size;
     width: $avatar-medium-size;
-    margin-right: 20px;
+    margin-right: $padding-xsmall;
     .program-avatar__level {
       right: -18px;
       height: 36px;

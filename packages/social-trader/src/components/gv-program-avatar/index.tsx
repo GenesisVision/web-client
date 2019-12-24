@@ -25,6 +25,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
 }) => (
   <div
     className={classNames("program-avatar", className, {
+      "program-avatar--with-level": level !== undefined,
       "program-avatar--small": size === "small",
       "program-avatar--medium": size === "medium",
       "program-avatar--big": size === "big"
