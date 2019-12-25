@@ -259,6 +259,8 @@
     "title": "Transfer",
     "availableWalletTo": "Available in Wallet",
     "availableWalletFrom": "Available in Wallet",
+    "availableTradingAccountTo": "Available in Account",
+    "availableTradingAccountFrom": "Available in Account",
     "availableSignalTradingAccountTo": "Available in Account",
     "availableSignalTradingAccountFrom": "Available in Account",
     "availablePrivateTradingAccountTo": "Available in Account",
