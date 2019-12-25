@@ -67,7 +67,7 @@ const getString = (value: number, period: string) => {
 
 export const humanizeDate = (
   start: string | number | Date,
-  end: string | number | Date
+  end: string | number | Date = new Date()
 ): string => {
   let from = dayjs(start);
   const to = dayjs(end);
