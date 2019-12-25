@@ -4,8 +4,15 @@ import { WalletBaseData, WalletData } from "gv-api-web";
 import { TransferItemType } from "modules/transfer/transfer.types";
 import React from "react";
 
-const _WalletSelect: React.FC<Props> = ({ items, onChange, label, name }) => (
+const _WalletSelect: React.FC<Props> = ({
+  items,
+  onChange,
+  label,
+  name,
+  disabled
+}) => (
   <CurrencySourceSelect
+    disabled={disabled}
     label={label}
     items={items}
     name={name}
@@ -21,6 +28,7 @@ interface Props {
   label: string;
   name: string;
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
+  disabled?: boolean;
 }
 
 const WalletSelect = React.memo(_WalletSelect);
