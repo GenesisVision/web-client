@@ -29,17 +29,16 @@ const _FundsTableRow: React.FC<Props> = ({
   title
 }) => {
   const { linkCreator } = useToLink();
+  const link = linkCreator(
+    composeFundsDetailsUrl(fund.url),
+    String(title),
+    FUND_DETAILS_FOLDER_ROUTE
+  );
   return (
     <TableRow>
       <TableCell className="funds-table__cell funds-table__cell--name">
         <div className="funds-table__cell--avatar-title">
-          <Link
-            to={linkCreator(
-              composeFundsDetailsUrl(fund.url),
-              String(title),
-              FUND_DETAILS_FOLDER_ROUTE
-            )}
-          >
+          <Link to={link}>
             <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
           </Link>
           <div className="funds-table__cell--title">

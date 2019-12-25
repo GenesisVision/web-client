@@ -17,6 +17,7 @@ import FollowButton from "pages/follows/follow-details/follow-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
@@ -37,7 +38,11 @@ const _FollowCard: React.FC<Props> = ({
   } = follow;
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
-  const linkProps = linkCreator(composeFollowDetailsUrl(url), title);
+  const linkProps = linkCreator(
+    composeFollowDetailsUrl(url),
+    title,
+    FOLLOW_DETAILS_FOLDER_ROUTE
+  );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
