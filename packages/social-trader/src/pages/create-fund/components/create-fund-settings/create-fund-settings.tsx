@@ -25,13 +25,14 @@ import { AssetsField } from "./assets-field";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
 const _CreateFundSettings: React.FC<Props> = ({
+  setFieldTouched,
   validateForm,
   setFieldValue,
   handleSubmit,
   isValid,
   t,
   isSubmitting,
-  values: { depositAmount, description, depositWalletId },
+  values: { depositAmount, description, depositWalletId, enterMinDeposit },
   data: { maxExitFee, maxEntryFee, minDeposit }
 }) => {
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
@@ -77,6 +78,9 @@ const _CreateFundSettings: React.FC<Props> = ({
         />
       </SettingsBlock>
       <DepositDetailsBlock
+        setFieldTouched={setFieldTouched}
+        enterMinDeposit={enterMinDeposit}
+        enterMinDepositName={CREATE_FUND_FIELDS.enterMinDeposit}
         availableName={CREATE_FUND_FIELDS.available}
         rateName={CREATE_FUND_FIELDS.rate}
         blockNumber={4}
@@ -93,6 +97,7 @@ const _CreateFundSettings: React.FC<Props> = ({
 };
 
 export enum CREATE_FUND_FIELDS {
+  enterMinDeposit = "enterMinDeposit",
   available = "available",
   rate = "rate",
   depositWalletId = "depositWalletId",
@@ -106,6 +111,7 @@ export enum CREATE_FUND_FIELDS {
 }
 
 export interface ICreateFundSettingsFormValues {
+  [CREATE_FUND_FIELDS.enterMinDeposit]?: boolean;
   [CREATE_FUND_FIELDS.available]: number;
   [CREATE_FUND_FIELDS.rate]: number;
   [CREATE_FUND_FIELDS.depositWalletId]: string;
