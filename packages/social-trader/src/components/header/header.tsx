@@ -19,17 +19,14 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
-import { TMenuItem } from "routes/menu";
+import { mobileMenuItems, topMenuItems } from "routes/menu";
 import { getRandomInteger } from "utils/helpers";
 
-const _Header: React.FC<Props> = ({
-  topMenuItems,
-  mobileMenuItems,
-  isAuthenticated,
-  profileHeader
-}) => {
+const _Header: React.FC<Props> = ({ profileHeader }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const dispatch = useDispatch();
   const handlerLogout = useCallback(() => dispatch(logout), []);
@@ -102,10 +99,7 @@ const _Header: React.FC<Props> = ({
 };
 
 export interface Props {
-  mobileMenuItems: TMenuItem[];
-  topMenuItems: TMenuItem[];
   profileHeader?: ProfileHeaderViewModel;
-  isAuthenticated: boolean;
   backPath: string;
 }
 
