@@ -7,7 +7,7 @@ import TableRow from "components/table/components/table-row";
 import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "shared/utils/dates";
+import { formatDate, humanizeDate } from "shared/utils/dates";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {
@@ -34,7 +34,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
         )}
         renderBodyRow={(event: TDashboardEvent) => (
           <TableRow stripy>
-            <TableCell>{formatDate(event.date)}</TableCell>
+            <TableCell>{humanizeDate(formatDate(event.date))} ago</TableCell>
             <TableCell>
               <div className="dashboard-statistic__event-description">
                 {event.assetDetails && (
