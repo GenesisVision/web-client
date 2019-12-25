@@ -3,6 +3,7 @@ import "./tab-info-list.scss";
 import classNames from "classnames";
 import React from "react";
 import TradeTab from "routes/ssr/landing-page/images/tabs/trade-tab.png";
+import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
 
 import TabInfoItem from "./tab-info-item";
 
@@ -24,7 +25,7 @@ const _TabInfoList: React.FC<Props> = ({ className }) => (
       transparent
       image={TradeTab}
       textBold={"William is here, you can too"}
-      button={{ link: "/", text: "Join" }}
+      button={{ link: JOIN_ROUTE, text: "Join" }}
     />
     <TabInfoItem
       text={"Follow the most "}

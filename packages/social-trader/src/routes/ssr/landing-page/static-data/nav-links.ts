@@ -94,5 +94,6 @@ export const navFooter: TNavHeader[] = [
   }
 ];
 
+export const JOIN_ROUTE = "/investor/login";
 export const START_ROUTE = "/investor/programs/";
 export const EMAIL_ROUTE = "mailto:support@genesis.vision";

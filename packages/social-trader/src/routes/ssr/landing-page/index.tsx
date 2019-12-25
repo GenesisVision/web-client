@@ -11,6 +11,7 @@ import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
@@ -29,7 +30,6 @@ const IndexPage: NextPage<{
   fundsData: ItemsViewModelFundDetailsListItem;
   followsData: ItemsViewModelFollowDetailsListItem;
 }> = ({ programsData, fundsData, followsData }) => {
-  console.log(programsData);
   return (
     <Layout title="Genesis Vision">
       <main className="home">
@@ -57,12 +57,12 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--horizontal-padding">
           <div className="home__container">
-            <ProgramsContainer programs={programsData.items} />
+            {/*<ProgramsContainer programs={programsData.items} />*/}
           </div>
         </section>
         <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            <FundsContainer funds={fundsData.items} />
+            {/*<FundsContainer funds={fundsData.items} />*/}
           </div>
         </section>
         <section className="home__section home__section--bg-white home__section--horizontal-padding">
@@ -77,13 +77,12 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--bg-white">
           <div className="home__container">
-            <h2>Our Advantages</h2>
+            <AdvantagesContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <h2>Brockers and trading conditions</h2>
-            <p>Brockers and trading conditions</p>
           </div>
         </section>
         <section className="home__section home__section--last-screen">

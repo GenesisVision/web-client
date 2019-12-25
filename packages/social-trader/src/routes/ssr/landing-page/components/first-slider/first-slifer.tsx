@@ -4,7 +4,10 @@ import classNames from "classnames";
 import React, { useCallback, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
-import { START_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
+import {
+  JOIN_ROUTE,
+  START_ROUTE
+} from "routes/ssr/landing-page/static-data/nav-links";
 import { TSlides } from "routes/ssr/landing-page/static-data/slides";
 
 import { Arrow } from "./arrow/arrow";
@@ -60,7 +63,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
           ))}
         </div>
         <div className="slider__controls-wrapper">
-          <LPButton href={START_ROUTE}>Join</LPButton>
+          <LPButton href={JOIN_ROUTE}>Join</LPButton>
           <div className="slider__controls">
             <button
               type="button"
