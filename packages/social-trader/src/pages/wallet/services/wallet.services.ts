@@ -38,16 +38,16 @@ export const fetchAccounts = (
   await dispatch(actions.updateAccountTimestampAction());
 };
 
-export type TWalltetsBaseData = WalletBaseData[];
-export const fetchBaseWallets = ({
+export type TWalletsAvailableData = WalletBaseData[];
+export const fetchAvailableWallets = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<TWalltetsBaseData> => {
+}): CancelablePromise<TWalletsAvailableData> => {
   const authorization = authService.getAuthArg();
   return walletApi
     .getWalletAvailable(currency, authorization)
-    .then(res => res.wallets);
+    .then(({ wallets }) => wallets);
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>

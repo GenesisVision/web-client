@@ -1,7 +1,8 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
-import { Currency, WalletMultiAvailable, WalletSummary } from "gv-api-web";
+import { Currency, WalletSummary } from "gv-api-web";
+import { WalletsAvailableStateType } from "pages/wallet/reducers/wallet.reducers";
+import { fetchAvailableWallets } from "pages/wallet/services/wallet.services";
 import walletApi from "services/api-client/wallet-api";
-import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import { WalletLastUpdateState } from "../reducers/wallet-last-update";
@@ -17,7 +18,8 @@ interface FetchWalletAction extends ApiAction<WalletSummary> {
   type: typeof WALLET_BALANCE;
 }
 
-interface FetchWalletByCurrencyAction extends ApiAction<WalletMultiAvailable> {
+interface FetchWalletByCurrencyAction
+  extends ApiAction<WalletsAvailableStateType> {
   type: typeof WALLET_BALANCE_BY_CURRENCY_AVAILABLE;
 }
 
@@ -47,7 +49,7 @@ export const fetchWalletsByCurrencyAvailableAction = (
   currency: CurrencyEnum
 ): FetchWalletByCurrencyAction => ({
   type: WALLET_BALANCE_BY_CURRENCY_AVAILABLE,
-  payload: walletApi.getWalletAvailable(currency, authService.getAuthArg())
+  payload: fetchAvailableWallets({ currency })
 });
 
 export const fetchWalletTransactionsAction = (
