@@ -51,6 +51,9 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       setFieldTouched(inputName);
     }
   }, [enterMinDeposit, minimumDepositAmountInCurr]);
+  useEffect(() => {
+    if (!enterMinDeposit) setFieldValue(inputName, "");
+  }, [enterMinDeposit]);
 
   if (!wallet) return null;
   return (
