@@ -2192,7 +2192,7 @@
         "stop-out-more-current": "Level can't be more than a current value",
         "amount-required": "Amount is required",
         "amount-is-large": "Amount must be available in Wallet",
-        "amount-is-zero": "Amount must be greater {{min}}",
+        "amount-is-zero": "Amount must be greater or equal {{min}}",
         "title-required": "Title is required",
         "title-is-long": "Title is too long",
         "title-is-short": "Title is too short",
