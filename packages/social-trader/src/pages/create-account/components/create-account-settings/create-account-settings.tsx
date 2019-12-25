@@ -27,13 +27,14 @@ import { CurrencyEnum, SetSubmittingType } from "utils/types";
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
 const _CreateAccountSettings: React.FC<Props> = ({
+  setFieldTouched,
   t,
   broker,
   setFieldValue,
   handleSubmit,
   isValid,
   isSubmitting,
-  values: { brokerAccountTypeId, depositAmount, currency }
+  values: { brokerAccountTypeId, depositAmount, currency, enterMinDeposit }
 }) => {
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const accountType = broker.accountTypes.find(
@@ -78,6 +79,9 @@ const _CreateAccountSettings: React.FC<Props> = ({
       ) : (
         <>
           <DepositDetailsBlock
+            setFieldTouched={setFieldTouched}
+            enterMinDeposit={enterMinDeposit}
+            enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
             blockNumber={2}
             availableName={CREATE_ACCOUNT_FIELDS.available}
             rateName={CREATE_ACCOUNT_FIELDS.rate}
@@ -99,6 +103,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
 };
 
 export enum CREATE_ACCOUNT_FIELDS {
+  enterMinDeposit = "enterMinDeposit",
   available = "available",
   rate = "rate",
   depositWalletId = "depositWalletId",
@@ -109,6 +114,7 @@ export enum CREATE_ACCOUNT_FIELDS {
 }
 
 export interface ICreateAccountSettingsFormValues {
+  [CREATE_ACCOUNT_FIELDS.enterMinDeposit]?: boolean;
   [CREATE_ACCOUNT_FIELDS.available]: number;
   [CREATE_ACCOUNT_FIELDS.rate]: number;
   [CREATE_ACCOUNT_FIELDS.leverage]: number;
