@@ -123,12 +123,12 @@ const mainMenuItemsUnion = [
     ]
   }
 ];
-export const topMenuItemsUnion: TMenuItem[] = [
+export const topMenuItems: TMenuItem[] = [
   { Icon: GVLogo, route: HOME_ROUTE },
   ...mainMenuItemsUnion
 ];
 
-export const mobileMenuItemsUnion: TMenuItem[] = [
+export const mobileMenuItems: TMenuItem[] = [
   ...mainMenuItemsUnion,
   ...advancedMobileMenuItems
 ];
