@@ -18,8 +18,8 @@ const _DashboardPrivate: React.FC = () => {
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
-  const getItems = useCallback(() => {
-    return fetchDashboardPrivateAction();
+  const getItems = useCallback(filters => {
+    return fetchDashboardPrivateAction(filters);
   }, []);
   const handleUpdateItems = useCallback(
     updateItems => () => {
