@@ -6,12 +6,14 @@ import React from "react";
 import { CurrencyEnum } from "utils/types";
 
 const _CurrencySourceSelect: React.FC<Props> = ({
+  disabled,
   items,
   onChange,
   label,
   name
 }) => (
   <GVFormikField
+    disabled={disabled}
     name={name}
     component={GVTextField}
     label={label}
@@ -44,6 +46,7 @@ interface Props {
   label: string;
   name: string;
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
+  disabled?: boolean;
 }
 
 const CurrencySourceSelect = React.memo(_CurrencySourceSelect);
