@@ -9,6 +9,7 @@ import { CurrencyEnum } from "utils/types";
 import AssetField from "../asset-fields/asset-field";
 
 const _InputDepositAmount: React.FC<Props> = ({
+  disabled,
   rate,
   name,
   setFieldValue,
@@ -32,6 +33,7 @@ const _InputDepositAmount: React.FC<Props> = ({
   return (
     <AssetField className="deposit-amount-field">
       <InputAmountField
+        disabled={disabled}
         autoFocus={false}
         name={name}
         label={t("transfer.amount")}
@@ -62,6 +64,7 @@ interface Props {
   walletAvailable: number;
   walletCurrency: CurrencyEnum;
   depositAmount?: number;
+  disabled?: boolean;
 }
 
 const InputDepositAmount = React.memo(_InputDepositAmount);
