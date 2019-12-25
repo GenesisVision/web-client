@@ -22,6 +22,7 @@ import {
   FUNDS_TAB_ROUTE
 } from "routes/funds.routes";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
+import fundsApi from "services/api-client/funds-api";
 import authService from "services/auth-service";
 import { getCookie } from "shared/utils/cookie";
 import getParams from "shared/utils/get-params";
@@ -56,7 +57,7 @@ export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
-  return fundsTableActions.fetchFundsAction(filters).payload!;
+  return fundsApi.getFunds(filters);
 };
 
 const composeRequestFilters = () => (
