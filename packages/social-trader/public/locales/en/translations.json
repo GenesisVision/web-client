@@ -2108,6 +2108,7 @@
     }
   },
   "create-asset-page": {
+    "min-deposit": "Min deposit",
     "go-back": "Go back"
   },
   "create-program-page": {
