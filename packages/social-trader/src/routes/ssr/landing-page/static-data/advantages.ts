@@ -1,29 +1,30 @@
-import ImgCreditCard from "routes/ssr/landing-page/images/slider/credit-card.svg";
-import ImgPeople from "routes/ssr/landing-page/images/slider/people.svg";
+import ImgAccess from "routes/ssr/landing-page/images/advantages/access.svg";
+import ImgChoose from "routes/ssr/landing-page/images/advantages/choose.svg";
+import ImgControl from "routes/ssr/landing-page/images/advantages/control.svg";
+import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
 
 export type TAdvantages = {
   title: string;
   text: string;
-  image: string;
+  image?: string;
 };
 
 export const advantagesItems: TAdvantages[] = [
   {
-    title: "Pay with card",
+    title: "Access all financial markets",
     text:
-      "Receive a 100% bonus on any deposit made on Genesis Markets. The bonus is unlocked as soon as you start trading!",
-    image: ImgCreditCard
+      "Open multi broker trading platform. Access to Forex, Crypto and Stocks markets. Wide range of instruments and asset classes",
+    image: ImgAccess
   },
   {
-    title: "Enticing invitations",
-    text:
-      "Use the Genesis Vision two-level Affiliate Network to receive a percentage of the commission paid by the people you invite, and also the people who were invited by them!",
-    image: ImgPeople
+    title: "Choose the best tool to make money",
+    text: "Trade, Invest, Manage, Follow or become the followed one",
+    image: ImgChoose
   },
   {
-    title: "Enticing invitations",
+    title: "Control your exposure",
     text:
-      "Use the Genesis Vision two-level Affiliate Network to receive a percentage of the commission paid by the people you invite, and also the people who were invited by them!",
-    image: ImgPeople
+      "Wide range of investment opportunities in different risk/profitability level categories - Asset Management, Funds, Copytrading. Risk analysis and management",
+    image: ImgControl
   }
 ];

@@ -8,7 +8,7 @@ const TradersContainer: React.FC = () => (
   <div className="traders-container">
     <div className="traders-container__info">
       <div className="traders-container__wrapper-fixed">
-        <h2 className="traders-container__title">Trades</h2>
+        <h2 className="traders-container__title">Traders</h2>
         <p className="traders-container__text">
           Receive a 100% bonus on any deposit made on Genesis Markets. The bonus
           is unlocked as soon as you start trading!

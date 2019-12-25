@@ -57,12 +57,12 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--horizontal-padding">
           <div className="home__container">
-            {/*<ProgramsContainer programs={programsData.items} />*/}
+            <ProgramsContainer programs={programsData.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            {/*<FundsContainer funds={fundsData.items} />*/}
+            <FundsContainer funds={fundsData.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-white home__section--horizontal-padding">
@@ -75,11 +75,7 @@ const IndexPage: NextPage<{
             <DownloadContainer />
           </div>
         </section>
-        <section className="home__section home__section--bg-white">
-          <div className="home__container">
-            <AdvantagesContainer />
-          </div>
-        </section>
+        <AdvantagesContainer />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <h2>Brockers and trading conditions</h2>

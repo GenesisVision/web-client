@@ -52,6 +52,7 @@
   &__section {
     background-color: $landing-bg;
     color: $main-color;
+    position: relative;
 
     &--first-screen {
       @include media-breakpoint-tablet() {

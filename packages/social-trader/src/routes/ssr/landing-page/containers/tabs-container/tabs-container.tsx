@@ -66,12 +66,14 @@ const TabsContainer: React.FC = () => {
   });
   return (
     <div className="tabs-container">
-      <TabControls
-        currentTabId={currentTabId}
-        tabsItems={tabsItems}
-        onChange={handleChange}
-        className="tabs-container__controls"
-      />
+      <div className="tabs-container__wrapper-controls">
+        <TabControls
+          currentTabId={currentTabId}
+          tabsItems={tabsItems}
+          onChange={handleChange}
+          className="tabs-container__controls"
+        />
+      </div>
       {transitions.map(({ item, props, key }) => (
         <animated.div
           className="tabs-container__tab-info"

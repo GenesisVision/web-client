@@ -6,19 +6,30 @@
   @include grid();
   position: relative;
 
-  &__controls.tab-controls {
+  &__wrapper-controls {
     @include media-breakpoint-tablet() {
-      display: grid;
-      grid-auto-flow: column;
       grid-column: 2/12;
-      margin-bottom: 100px;
     }
 
     @include media-breakpoint-landscape-tablet() {
       grid-column: 2/6;
+      position: relative;
+    }
+  }
+
+  &__controls.tab-controls {
+    @include media-breakpoint-tablet() {
+      display: grid;
+      grid-auto-flow: column;
+      margin-bottom: 100px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
       display: block;
       margin-bottom: 0;
       margin-top: 50%;
+      top: 50px;
+      position: sticky;
     }
   }
 

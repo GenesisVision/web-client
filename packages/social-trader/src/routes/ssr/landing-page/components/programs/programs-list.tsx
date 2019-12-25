@@ -14,18 +14,18 @@ interface Props {
 
 const _ProgramsList: React.FC<Props> = ({ className, programs }) => {
   return (
-    <div className={classNames("programs-list", className)}>
+    <ul className={classNames("programs-list", className)}>
       {programs.map((program, index) => (
-        <div className="programs-list__item">
+        <li className="programs-list__item" key={program.id}>
           <ProgramCard
             key={program.id}
             title={program.title}
             program={program}
           />
           {index > 1 && <ProgramShort program={program} />}
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
