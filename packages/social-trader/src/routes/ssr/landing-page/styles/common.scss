@@ -99,8 +99,8 @@ h3 {
   text-align: center;
 }
 
-$scroll-background: $landing-bg-gray-2;
-$scroll-thumb-color: $row-color;
+$scroll-thumb-color: #4f4d68;
+$scroll-background: rgba($scroll-thumb-color, 0.1);
 $scroll-width: 2px;
 
 ::-webkit-scrollbar {
@@ -116,11 +116,6 @@ $scroll-width: 2px;
   background: $scroll-thumb-color;
   border-radius: $scroll-width / 2;
 }
-
-//::-webkit-scrollbar-thumb[orient="horizontal"] {
-//  min-width: 2px;
-//  height: 4px;
-//}
 
 ::-webkit-scrollbar-corner {
   background: $scroll-background;

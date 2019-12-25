@@ -26,45 +26,59 @@ $font-color: #100e3b;
     min-width: 260px;
     opacity: 0.5;
     border-radius: 18px;
+    height: auto;
+    min-height: 310px;
 
     &:first-child {
       opacity: 1;
     }
 
+    @include media-breakpoint-landscape-phone() {
+      min-width: 360px;
+    }
+
     @include media-breakpoint-tablet() {
       min-width: 410px;
-      height: 440px;
+      min-height: 440px;
       padding: 35px;
     }
 
     @include media-breakpoint-landscape-tablet() {
       min-width: 385px;
-      height: 415px;
+      min-height: 415px;
     }
 
     @include media-breakpoint-desktop() {
       min-width: 420px;
-      height: 450px;
+      min-height: 450px;
     }
 
     @include media-breakpoint-large-desktop() {
       border-radius: 20px;
       min-width: 440px;
-      height: 500px;
+      min-height: 500px;
     }
 
-    &__row:first-child {
-      margin-left: 0;
-      margin-right: 0;
+    &__row {
+      margin-bottom: 10px;
 
-      @include media-breakpoint-tablet() {
-        display: block;
+      &:first-child {
+        margin-left: 0;
+        margin-right: 0;
+
+        @include media-breakpoint-tablet() {
+          display: block;
+        }
       }
     }
 
     &__avatar {
       padding-left: 0;
-      margin-bottom: 30px;
+      height: auto;
+
+      @include media-breakpoint-tablet() {
+        margin-bottom: 30px;
+      }
     }
 
     &__main-info {
@@ -86,8 +100,12 @@ $font-color: #100e3b;
       }
 
       @include media-breakpoint-tablet() {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 10px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        font-size: 16px;
       }
 
       @include media-breakpoint-desktop() {
@@ -145,6 +163,21 @@ $font-color: #100e3b;
     background-color: $landing-bg-gray;
     color: $font-color;
     font-weight: 600;
+  }
+
+  .program-avatar--medium {
+    width: 70px;
+    height: 70px;
+
+    @include media-breakpoint-desktop() {
+      width: 75px;
+      height: 75px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &--active {

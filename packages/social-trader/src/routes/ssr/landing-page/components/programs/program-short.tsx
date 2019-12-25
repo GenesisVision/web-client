@@ -1,35 +1,64 @@
-import classNames from "classnames";
-import ImageBase from "components/avatar/image-base";
-import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
-import React from "react";
+import "./program-short.scss";
 
-interface IProgramShortProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  data: string;
-  url?: string;
-  imageClassName?: string;
+import classNames from "classnames";
+import StatisticItem from "components/statistic-item/statistic-item";
+import {
+  TableCardAvatar,
+  TableCardTitle
+} from "components/table/components/table-card/table-card";
+import { ProgramDetailsListItem } from "gv-api-web";
+import React from "react";
+import NumberFormat from "react-number-format";
+import {
+  DECIMAL_SCALE_BIG_VALUE,
+  DECIMAL_SCALE_SMALL_VALUE
+} from "shared/constants/constants";
+import { useTranslation } from "shared/i18n";
+import { distanceDate } from "shared/utils/dates";
+import { composeProgramDetailsUrl } from "utils/compose-url";
+import { formatValueDifferentDecimalScale } from "utils/formatter";
+
+interface Props {
+  program: ProgramDetailsListItem;
 }
 
-const _ProgramShort: React.FC<IProgramShortProps> = ({
-  title,
-  data,
-  url,
-  imageClassName
-}) => (
-  <li className="programs-list__item">
+const _ProgramShort: React.FC<Props> = ({ program }) => {
+  const { t } = useTranslation();
+  const linkProps = {
+    pathname: composeProgramDetailsUrl(program.url),
+    state: `/ ${program.title}`
+  };
+  return (
     <div className="program-short">
-      <ImageBase
-        DefaultImageComponent={GVProgramDefaultAvatar}
-        imageClassName={classNames("programs-list__item-image", imageClassName)}
-        url={url}
+      <TableCardAvatar
+        logo={program.logo}
+        hasAvatar
+        alt={program.title}
+        color={program.color}
+        level={program.level}
+        levelProgress={program.levelProgress}
+        url={linkProps}
       />
+      <div className="program-short__period">
+        {distanceDate(program.periodStarts, program.periodEnds)}
+      </div>
+      <TableCardTitle url={linkProps}>{program.title}</TableCardTitle>
+      <StatisticItem
+        className="program-short__balance"
+        label={t("programs-page.programs-header.equity")}
+      >
+        <NumberFormat
+          value={formatValueDifferentDecimalScale(
+            program.balance.amount,
+            DECIMAL_SCALE_SMALL_VALUE,
+            DECIMAL_SCALE_BIG_VALUE
+          )}
+          suffix={` ${program.balance.currency}`}
+          displayType="text"
+        />
+      </StatisticItem>
     </div>
-    <div className="programs-list__item-title">{title}</div>
-    <div className="programs-list__item-data">
-      <div className="programs-list__item-number">{data}</div>
-      <span className="programs-list__item-label">Followers</span>
-    </div>
-  </li>
-);
+  );
+};
 const ProgramShort = React.memo(_ProgramShort);
 export default ProgramShort;

@@ -3,7 +3,8 @@ import "./styles/home.scss";
 
 import {
   ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem
+  ItemsViewModelFundDetailsListItem,
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
@@ -20,13 +21,15 @@ import Layout from "routes/ssr/landing-page/layouts/_layout";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
+import programsApi from "services/api-client/programs-api";
 import { subtractDate } from "shared/utils/dates";
 
 const IndexPage: NextPage<{
+  programsData: ItemsViewModelProgramDetailsListItem;
   fundsData: ItemsViewModelFundDetailsListItem;
   followsData: ItemsViewModelFollowDetailsListItem;
-}> = ({ fundsData, followsData }) => {
-  // console.log(followsData);
+}> = ({ programsData, fundsData, followsData }) => {
+  console.log(programsData);
   return (
     <Layout title="Genesis Vision">
       <main className="home">
@@ -54,12 +57,12 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--horizontal-padding">
           <div className="home__container">
-            <ProgramsContainer />
+            <ProgramsContainer programs={programsData.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
-            {/*<FundsContainer funds={fundsData.items} />*/}
+            <FundsContainer funds={fundsData.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-white home__section--horizontal-padding">
@@ -99,8 +102,16 @@ IndexPage.getInitialProps = async () => {
   try {
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
-    // const traders = await followApi.getFollowAssets({});
-    const [fundsData, followsData] = await Promise.all([
+    const [programsData, fundsData, followsData] = await Promise.all([
+      programsApi.getPrograms({
+        sorting: "ByProfitDesc",
+        levelMin: 1,
+        levelMax: 7,
+        dateFrom,
+        dateTo,
+        skip: 0,
+        take: 6
+      }),
       fundsApi.getFunds({
         sorting: "ByProfitDesc",
         showIn: "USDT",
@@ -115,8 +126,12 @@ IndexPage.getInitialProps = async () => {
         take: 6
       })
     ]);
-    return { fundsData, followsData };
+    return { programsData, fundsData, followsData };
   } catch (e) {
+    const programsData = {
+      total: 0,
+      items: []
+    };
     const fundsData = {
       total: 0,
       items: []
@@ -125,6 +140,6 @@ IndexPage.getInitialProps = async () => {
       total: 0,
       items: []
     };
-    return { fundsData, followsData };
+    return { programsData, fundsData, followsData };
   }
 };

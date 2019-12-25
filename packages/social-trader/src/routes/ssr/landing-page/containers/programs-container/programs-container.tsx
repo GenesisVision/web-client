@@ -7,11 +7,11 @@ import ProgramsList from "routes/ssr/landing-page/components/programs/programs-l
 import ProgramIcon from "routes/ssr/landing-page/images/common/program-icon.svg";
 
 interface Props {
-  programs?: ProgramDetailsListItem[];
+  programs: ProgramDetailsListItem[];
 }
 
 const ProgramsContainer: React.FC<Props> = ({ programs }) => {
-  // if (!programs.length) return null;
+  if (!programs.length) return null;
   return (
     <div className="programs-container">
       <div className="programs-container__info">
@@ -27,7 +27,7 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
         </p>
         <LPButton href="/">Discover</LPButton>
       </div>
-      <ProgramsList className="programs-container__list" />
+      <ProgramsList className="programs-container__list" programs={programs} />
     </div>
   );
 };

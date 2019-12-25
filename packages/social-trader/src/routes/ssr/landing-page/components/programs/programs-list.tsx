@@ -9,17 +9,25 @@ import ProgramShort from "./program-short";
 
 interface Props {
   className?: string;
-  programs?: ProgramDetailsListItem[];
+  programs: ProgramDetailsListItem[];
 }
 
-const _ProgramsList: React.FC<Props> = ({ className, programs }) => (
-  <ul className={classNames("programs-list", className)}>
-    <ProgramShort title="Luke Hudson 1" data="1.5k" url="" />
-    {/*{programs.map(program => (*/}
-    {/*  <ProgramCard title={"Programs"} program={program} />*/}
-    {/*))}*/}
-  </ul>
-);
+const _ProgramsList: React.FC<Props> = ({ className, programs }) => {
+  return (
+    <div className={classNames("programs-list", className)}>
+      {programs.map((program, index) => (
+        <div className="programs-list__item">
+          <ProgramCard
+            key={program.id}
+            title={program.title}
+            program={program}
+          />
+          {index > 1 && <ProgramShort program={program} />}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const ProgramsList = React.memo(_ProgramsList);
 export default ProgramsList;
