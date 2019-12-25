@@ -1,7 +1,7 @@
-import { WalletData } from "gv-api-web";
+import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
-import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
-import { fetchWallets } from "pages/wallet/services/wallet.services";
+import { fetchWalletsByCurrencyAvailableAction } from "pages/wallet/actions/wallet.actions";
+import { walletsAvailableSelector } from "pages/wallet/reducers/wallet.reducers";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -11,26 +11,28 @@ type TUseAssetSectionProps = {
   assetCurrency: CurrencyEnum;
 };
 
+export type AssetSectionWalletType = WalletBaseData;
+
 type TUseAssetSectionOutput = {
   rate: number;
   handleWalletChange: (walletId: string) => void;
-  wallet: WalletData;
-  wallets: WalletData[];
+  wallet: AssetSectionWalletType;
+  wallets: AssetSectionWalletType[];
 };
 
 const useAssetSection = ({
   assetCurrency
 }: TUseAssetSectionProps): TUseAssetSectionOutput => {
   const dispatch = useDispatch();
-  const wallets = useSelector(walletsSelector);
+  const wallets = useSelector(walletsAvailableSelector);
   const accountCurrency = useSelector(currencySelector);
-  const [wallet, setWallet] = useState<WalletData>(
+  const [wallet, setWallet] = useState<AssetSectionWalletType>(
     wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
   );
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
-    dispatch(fetchWallets(accountCurrency));
+    dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
   }, [assetCurrency]);
 
   useEffect(() => {
