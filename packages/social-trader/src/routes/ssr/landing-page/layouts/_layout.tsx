@@ -10,6 +10,7 @@ const _Layout: React.FC<Props> = ({ title, children }) => {
         <LPHeader />
         {children}
         <LPFooter />
+        <div id="modal-root" />
       </>
     </DocumentTitle>
   );

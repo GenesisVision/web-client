@@ -17,6 +17,11 @@ body {
 #__next {
   background-color: $landing-bg;
   color: $main-color;
+
+  .popover,
+  .tooltip__popover {
+    background-color: $landing-color-icon;
+  }
 }
 
 a,
