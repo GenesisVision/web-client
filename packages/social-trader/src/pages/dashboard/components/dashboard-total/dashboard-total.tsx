@@ -62,13 +62,15 @@ const _DashboardTotal: React.FC<Props> = ({
           </StatisticItem>
         )}
       </StatisticItemList>
-      <h5>{t("dashboard-page.total.performance")}</h5>
       {hasProfits && (
-        <DashboardStatisticPeriods
-          data={profits}
-          currency={currency}
-          withProfitability
-        />
+        <>
+          <h5>{t("dashboard-page.total.performance")}</h5>
+          <DashboardStatisticPeriods
+            data={profits}
+            currency={currency}
+            withProfitability
+          />
+        </>
       )}
     </div>
   );
