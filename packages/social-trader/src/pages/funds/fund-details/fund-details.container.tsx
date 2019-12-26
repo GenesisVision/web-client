@@ -20,6 +20,7 @@ import { CurrencyEnum } from "utils/types";
 
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
+import { getFundSchema } from "./fund-schema";
 import InvestmentFundControls from "./investment-fund-controls/investment-fund-controls";
 import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
 import { dispatchFundDescriptionWithId } from "./services/fund-details.service";
@@ -34,7 +35,12 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
   return (
-    <Page title={description.publicInfo.title}>
+    <Page
+      title={description.publicInfo.title}
+      schemas={[getFundSchema(description)]}
+      description={description.publicInfo.description}
+      previewImage={description.publicInfo.logo}
+    >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
         personalDetails={description.personalDetails}

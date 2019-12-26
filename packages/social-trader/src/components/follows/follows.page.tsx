@@ -15,12 +15,23 @@ import {
 } from "routes/invest.routes";
 import { useTranslation } from "shared/i18n";
 import { composeFollowFacetUrl } from "utils/compose-url";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const FollowsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
   return (
-    <Page title={title}>
+    <Page
+      title={title}
+      schemas={[
+        ORGANIZATION_SCHEMA,
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          about: "List of programs"
+        }
+      ]}
+    >
       <NavigationTabs
         exploreTabName={EXPLORE_TAB_NAME}
         tabRoute={FOLLOW_TAB_ROUTE}

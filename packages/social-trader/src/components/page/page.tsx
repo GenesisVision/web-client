@@ -1,27 +1,50 @@
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
+import Head from "next/head";
 import * as React from "react";
-import DocumentTitle from "react-document-title";
+import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  descriptionMeta,
+  imageMeta,
+  schema,
+  SchemaType,
+  titleMeta
+} from "utils/seo";
 
-const _Page: React.FC<Props> = ({ title, children }) => {
+const _Page = ({
+  title,
+  description,
+  children,
+  schemas,
+  previewImage
+}: PropsWithChildren<Props>) => {
   const [t] = useTranslation();
+  const pageTitle = t("app.title") + title;
   return (
-    <DocumentTitle title={t("app.title") + title}>
-      <TitleContext.Provider value={title}>
-        <>
-          <div>
-            <BackButton />
-          </div>
-          {children}
-        </>
-      </TitleContext.Provider>
-    </DocumentTitle>
+    <TitleContext.Provider value={title}>
+      <>
+        <Head>
+          <title>{pageTitle}</title>
+          {schema(schemas)}
+          {titleMeta(pageTitle)}
+          {descriptionMeta(description)}
+          {imageMeta(previewImage)}
+        </Head>
+        <div>
+          <BackButton />
+        </div>
+        {children}
+      </>
+    </TitleContext.Provider>
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
   title: string;
+  schemas?: Array<SchemaType>;
+  description?: string;
+  previewImage?: string;
 }
 
 const Page = React.memo(_Page);

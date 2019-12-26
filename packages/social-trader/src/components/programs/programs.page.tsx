@@ -15,13 +15,24 @@ import {
 } from "routes/programs.routes";
 import { useTranslation } from "shared/i18n";
 import { composeProgramFacetUrl } from "utils/compose-url";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const ProgramsPage: NextPage = () => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
 
   return (
-    <Page title={title}>
+    <Page
+      title={title}
+      schemas={[
+        ORGANIZATION_SCHEMA,
+        {
+          "@context": "https://schema.org",
+          "@type": "Table",
+          about: "List of programs"
+        }
+      ]}
+    >
       <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { DepositAccount, FinancialProduct, WithContext } from "schema-dts";
 import filesService from "services/file-service";
 
 import { ProgramDescriptionDataType } from "./program-details.types";
@@ -14,9 +13,7 @@ export const getSchema = (description: ProgramDescriptionDataType) => {
     : getProgramSchema(description);
 };
 
-export const getProgramSchema = (
-  details: ProgramDescriptionDataType
-): WithContext<DepositAccount> => ({
+const getProgramSchema = (details: ProgramDescriptionDataType) => ({
   "@context": "https://schema.org",
   "@type": "DepositAccount",
   name: details.publicInfo.title,
@@ -31,9 +28,7 @@ export const getProgramSchema = (
   } //TODO
 });
 
-export const getFollowSchema = (
-  details: ProgramDescriptionDataType
-): WithContext<FinancialProduct> => ({
+const getFollowSchema = (details: ProgramDescriptionDataType) => ({
   "@context": "https://schema.org",
   "@type": "FinancialProduct",
   name: details.publicInfo.title,

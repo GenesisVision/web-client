@@ -11,6 +11,7 @@ import FollowControls from "pages/follows/follow-details/follow-controls/follow-
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
+import { getSchema } from "pages/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,7 +93,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   };
 
   return (
-    <Page title={title}>
+    <Page
+      title={title}
+      description={description.publicInfo.description}
+      previewImage={description.publicInfo.logo}
+      schemas={[getSchema(description)]}
+    >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
         personalDetails={personalDetails}
