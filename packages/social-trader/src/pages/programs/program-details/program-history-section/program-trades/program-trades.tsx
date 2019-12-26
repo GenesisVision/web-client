@@ -8,7 +8,7 @@ import {
   TableSelectorType
 } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import { OrderModel } from "gv-api-web";
+import { OrderSignalModel } from "gv-api-web";
 import { generateProgramTradesColumns } from "pages/programs/program-details/program-details.constants";
 import DownloadButtonToolbarAuth from "pages/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
 import React from "react";
@@ -81,7 +81,7 @@ const _ProgramTrades: React.FC<Props> = ({
           {t(`program-details-page.history.trades.${column.name}`)}
         </span>
       )}
-      renderBodyRow={(trade: OrderModel) => (
+      renderBodyRow={(trade: OrderSignalModel) => (
         <ProgramTradesRow
           trade={trade}
           showSwaps={showSwaps}

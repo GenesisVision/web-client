@@ -5,7 +5,7 @@ import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { OrderModel } from "gv-api-web";
+import { OrderSignalModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
@@ -69,7 +69,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({ position, currency }) => (
 
 interface Props {
   currency: CurrencyEnum;
-  position: OrderModel;
+  position: OrderSignalModel;
 }
 
 const ProgramOpenPositionsRow = React.memo(_ProgramOpenPositionsRow);
