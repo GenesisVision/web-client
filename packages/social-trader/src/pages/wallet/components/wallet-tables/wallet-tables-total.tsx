@@ -29,9 +29,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
         <GVTab
           value={TABS.WALLETS_TAB}
           label={
-            <Link
-              to={linkCreator(`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`)}
-            >
+            <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
               {t("wallet-page.tabs.wallets")}
             </Link>
           }
