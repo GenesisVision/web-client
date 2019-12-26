@@ -28,6 +28,11 @@ $chip-small: 32px;
     font-size: $font-size-h3;
   }
 
+  &--empty {
+    color: $text-light-color;
+    background-color: $popover-background;
+  }
+
   &--negative {
     color: $negative-color;
     background-color: $background-chip-negative;
