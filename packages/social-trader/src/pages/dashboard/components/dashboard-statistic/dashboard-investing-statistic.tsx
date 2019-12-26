@@ -1,7 +1,5 @@
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
-import { useToLink } from "components/link/link.helper";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
+import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
@@ -50,27 +48,41 @@ interface Props {
 }
 
 const DashboardInvestingEmpty: React.FC = React.memo(() => {
-  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <div className="dashboard-statistic__create-block dashboard-statistic__values">
-      <h1>{t("dashboard-page.statistic.get-started-title")}</h1>
-      <div className="dashboard-statistic__create-block-text">
-        {t("dashboard-page.statistic.get-started-invest")}
-      </div>
-      <div className="dashboard-statistic__create-block-links">
-        <div className="dashboard-statistic__create-block-link">
-          <Link to={linkCreator(GV_PROGRAMS_ROUTE)}>
-            <GVButton color="primary">{t("navigation.gv-programs")}</GVButton>
-          </Link>
-        </div>
-        <div className="dashboard-statistic__create-block-link">
-          <Link to={linkCreator(GV_FUNDS_ROUTE)}>
-            <GVButton color="primary">{t("navigation.gv-funds")}</GVButton>
-          </Link>
-        </div>
-      </div>
-    </div>
+    <DashboardNewUserBlock
+      leftField={{
+        link: GV_PROGRAMS_ROUTE,
+        linkLabel: t(
+          "dashboard-page.statistic.get-started.investing.left-field.button"
+        ),
+        text: (
+          <>
+            <span className="dashboard-new-user-block__text--muted">
+              {t(
+                "dashboard-page.statistic.get-started.investing.left-field.text"
+              )}
+            </span>
+            {t(
+              "dashboard-page.statistic.get-started.investing.left-field.text-2"
+            )}
+          </>
+        )
+      }}
+      rightField={{
+        link: GV_FUNDS_ROUTE,
+        linkLabel: t(
+          "dashboard-page.statistic.get-started.investing.right-field.button"
+        ),
+        text: (
+          <>
+            {t(
+              "dashboard-page.statistic.get-started.investing.right-field.text"
+            )}
+          </>
+        )
+      }}
+    />
   );
 });
 

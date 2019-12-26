@@ -39,9 +39,9 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   setFieldValue
 }) => {
   const { currency, depositAmount, rate } = values;
-  const wallet = wallets.find(
-    (wallet: WalletData) => wallet.currency === currency
-  )!;
+  const wallet =
+    wallets.find((wallet: WalletData) => wallet.currency === currency) ||
+    wallets[0];
   const disableButton = !dirty || !isValid;
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
       formatCurrencyValue(wallet.available, followCurrency)
     );
     setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, true);
-  }, [followCurrency, wallet.available]);
+  }, [followCurrency, wallet]);
   return (
     <form id="follow-create-account" onSubmit={handleSubmit}>
       <DialogBottom>
@@ -153,17 +153,17 @@ const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",
-    mapPropsToValues: ({
-      wallets,
-      followCurrency
-    }: CreateAccountFormProps) => ({
-      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: wallets.find(
-        wallet => wallet.currency === followCurrency
-      )!.id,
-      [CREATE_ACCOUNT_FORM_FIELDS.currency]: followCurrency,
-      [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: "",
-      [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1
-    }),
+    mapPropsToValues: ({ wallets, followCurrency }: CreateAccountFormProps) => {
+      const wallet = wallets.find(wallet => wallet.currency === followCurrency);
+      return {
+        [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: wallet
+          ? wallet.id
+          : wallets[0].id,
+        [CREATE_ACCOUNT_FORM_FIELDS.currency]: followCurrency,
+        [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: "",
+        [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1
+      };
+    },
     validationSchema: CreateAccountFormValidationSchema,
     handleSubmit: () => {}
   }),

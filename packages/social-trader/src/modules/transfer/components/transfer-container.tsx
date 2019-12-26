@@ -92,9 +92,10 @@ const _TransferContainer: React.FC<Props> = ({
       setItems({ sourceItems, destinationItems });
     }
   }, [sourceItems, destinationItems]);
+
   return (
     <TransferForm
-      loaderData={getTransferFormLoaderData(currentItem)}
+      loaderData={getTransferFormLoaderData(currentItem, wallets)}
       data={items!}
       sourceType={sourceType}
       destinationType={destinationType}
