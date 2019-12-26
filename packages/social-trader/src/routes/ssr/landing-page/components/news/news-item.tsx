@@ -1,13 +1,7 @@
 import React from "react";
+import { TNews } from "routes/ssr/landing-page/static-data/news";
 
-interface IStatItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  text: string;
-  tag?: string;
-  url?: string;
-}
-
-const _NewsItem: React.FC<IStatItemProps> = ({ title, text, tag, url }) => (
+const _NewsItem: React.FC<TNews> = ({ title, text, tag, url }) => (
   <li className="news-list__item">
     <a href={url} className="news-list__item-link">
       <div className="news-list__item-title">
