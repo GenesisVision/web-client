@@ -58,6 +58,9 @@
     line-height: 1.6;
     font-size: 16px;
     font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
 
     @include media-breakpoint-tablet() {
       min-height: 200px;
@@ -77,17 +80,29 @@
 
     &--bg {
       background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+      background-size: contain;
+      background-position: 100% 0;
     }
   }
 
   &__advantage-text {
+    width: 75%;
+
+    @include media-breakpoint-tablet() {
+      width: 100%;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      width: 75%;
+    }
   }
 
   &__advantage-number {
     font-size: 30px;
     font-weight: 400;
+    width: 100%;
+    line-height: 1;
+    margin-bottom: 20px;
 
     @include media-breakpoint-large-desktop() {
       font-size: 38px;
