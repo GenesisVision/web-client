@@ -4,12 +4,12 @@ import useApiRequest from "hooks/api-request.hook";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import { programDescriptionSelector } from "pages/programs/program-details/reducers/description.reducer";
 import { dispatchProgramDescriptionWithId } from "pages/programs/program-details/service/program-details.service";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProgramInfoSelector } from "reducers/platform-reducer";
-import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
@@ -63,10 +63,12 @@ const _ProgramsEditPage: React.FC = () => {
     cancelChangeBroker(description!.id);
   }, [description, updateDescription]);
 
+  const isProgram = description && description.programDetails;
+
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
-      asset={ASSET.PROGRAM}
+      asset={isProgram ? CLOSEABLE_ASSET.PROGRAM : CLOSEABLE_ASSET.FOLLOW}
       description={description as AssetDescriptionType}
       dispatchDescription={updateDescription}
       settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
