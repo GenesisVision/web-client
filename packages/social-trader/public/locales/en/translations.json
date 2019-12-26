@@ -1144,6 +1144,7 @@
         "period-history": "Period History"
       },
       "trades": {
+        "buttons": "",
         "download": "Export",
         "swap": "Swap",
         "providers": "Providers",
