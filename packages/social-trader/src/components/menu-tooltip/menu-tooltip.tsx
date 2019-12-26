@@ -3,43 +3,74 @@ import "./menu-tooltip.scss";
 import classNames from "classnames";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
+  ORIENTATION_POPOVER,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import useAnchor from "hooks/anchor.hook";
+import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 const _MenuTooltip: React.FC<Props> = ({
   render,
-  vertical = VERTICAL_POPOVER_POS.TOP,
-  horizontal = HORIZONTAL_POPOVER_POS.CENTER,
   className,
   children,
   disable
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const handleMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
-      !disable && setAnchor(event),
+  const [inPopover, setInPopover, setOutPopover] = useIsOpen();
+  const [inLabel, setInLabel, setOutLabel] = useIsOpen();
+  const handleButtonMouseEnter = useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      !disable && setAnchor(event);
+    },
     [disable]
   );
+
+  const handlePopoverMouseEnter = useCallback(() => {
+    setInPopover();
+  }, []);
+  const handlePopoverMouseLeave = useCallback(() => {
+    setOutPopover();
+  }, [inLabel]);
+
+  const handleLabelMouseEnter = useCallback(() => {
+    setInLabel();
+  }, []);
+  const handleLabelMouseLeave = useCallback(() => {
+    setOutLabel();
+  }, [inPopover]);
+
+  useEffect(() => {
+    if (!inLabel && !inPopover) clearAnchor();
+  }, [inLabel, inPopover]);
+
   const child = React.Children.only(children)! as JSX.Element;
   return (
-    <div onMouseEnter={handleMouseEnter} onMouseLeave={clearAnchor}>
+    <div
+      onMouseEnter={handleLabelMouseEnter}
+      onMouseLeave={handleLabelMouseLeave}
+      className="menu-tooltip__label"
+    >
       <child.type
         {...child.props}
-        onTouchStart={handleMouseEnter}
+        onMouseEnter={handleButtonMouseEnter}
+        onTouchStart={handleButtonMouseEnter}
         onTouchEnd={clearAnchor}
         onClick={clearAnchor}
+        className="menu-tooltip__label-child"
       />
       <Popover
-        onMouseLeave={clearAnchor}
+        fixedHorizontal
+        onMouseEnter={handlePopoverMouseEnter}
+        onMouseLeave={handlePopoverMouseLeave}
         noAbsolute
         noPadding
         anchorEl={anchor}
-        className={classNames("tooltip__popover", className)}
-        vertical={vertical}
-        horizontal={horizontal}
+        className={classNames("menu-tooltip__popover", className)}
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        horizontal={HORIZONTAL_POPOVER_POS.CENTER}
+        orientation={ORIENTATION_POPOVER.CENTER}
       >
         {render()}
       </Popover>
