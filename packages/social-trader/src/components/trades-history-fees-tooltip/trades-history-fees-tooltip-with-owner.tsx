@@ -11,7 +11,11 @@ const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({
   children
 }) => {
   if (trade.totalCommissionByType)
-    return <TradesHistoryFeesTooltip trade={trade} />;
+    return (
+      <TradesHistoryFeesTooltip trade={trade}>
+        {children}
+      </TradesHistoryFeesTooltip>
+    );
   else
     return (
       <Tooltip
@@ -32,7 +36,7 @@ const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({
           )
         }
       >
-        {children}
+        <span>{children}</span>
       </Tooltip>
     );
 };
