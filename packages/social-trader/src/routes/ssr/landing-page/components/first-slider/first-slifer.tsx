@@ -20,9 +20,9 @@ interface Props {
 const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
+    from: { opacity: 0, position: "absolute" },
+    enter: { opacity: 1, position: "static" },
+    leave: { opacity: 0, position: "absolute" },
     config: { tension: 220, friction: 120 }
   });
   const countsSlides = slidesItems.length;
@@ -45,7 +45,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
               ...props
             }}
           >
-            <img src={item.url} alt={item.title} className="slider__img" />
+            <img src={item.image} alt={item.title} className="slider__img" />
           </animated.div>
         ))}
       </div>
@@ -63,7 +63,11 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
           ))}
         </div>
         <div className="slider__controls-wrapper">
-          <LPButton href={JOIN_ROUTE}>Join</LPButton>
+          {transitions.map(({ item, props, key }) => (
+            <animated.div key={key} style={{ ...props }}>
+              <LPButton href={item.link}>Join</LPButton>
+            </animated.div>
+          ))}
           <div className="slider__controls">
             <button
               type="button"

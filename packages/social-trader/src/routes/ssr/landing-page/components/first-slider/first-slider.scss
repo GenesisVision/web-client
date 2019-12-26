@@ -38,7 +38,6 @@
   }
 
   &__img-animate {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -83,18 +82,14 @@
 
   &__info {
     position: relative;
-    height: 200px;
+    min-height: 205px;
 
     @include media-breakpoint-tablet() {
-      height: 180px;
+      min-height: 170px;
     }
 
-    @include media-breakpoint-landscape-tablet() {
-      height: 200px;
-    }
-
-    @include media-breakpoint-large-desktop() {
-      height: 240px;
+    @include media-breakpoint-desktop() {
+      min-height: 200px;
     }
   }
 
@@ -102,7 +97,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    position: absolute;
   }
 
   &__text {
@@ -114,6 +108,11 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+    margin-top: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-top: 40px;
+    }
 
     @include media-breakpoint-landscape-tablet() {
       grid-auto-flow: row;
