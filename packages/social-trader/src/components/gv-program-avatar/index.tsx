@@ -38,7 +38,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
       imageClassName={classNames("program-avatar__image", imageClassName)}
       alt={alt}
     />
-    {level !== undefined && (
+    {level !== undefined && level !== 0 && (
       <div
         onMouseOver={onMouseOverLevel}
         onMouseEnter={onMouseEnterLevel}
