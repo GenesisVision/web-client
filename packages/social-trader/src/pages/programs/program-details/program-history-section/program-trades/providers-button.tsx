@@ -20,7 +20,7 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 const _ProvidersButton: React.FC<Props> = ({ providers }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <>
+    <div className="providers-button__container">
       <Popover
         anchorEl={anchor}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -39,7 +39,8 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
         chipLabel={<CopyIcon />}
         type={CHIP_TYPE.EMPTY}
       />
-    </>
+      <div className="providers-button__count">{providers.length}</div>
+    </div>
   );
 };
 
