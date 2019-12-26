@@ -1,0 +1,18 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.provider-item {
+  &__avatar {
+    margin-right: $padding-xxsmall;
+    display: flex;
+    align-items: center;
+  }
+  display: flex;
+  padding: $padding-xxsmall 0;
+  align-items: center;
+  white-space: nowrap;
+}
+.provider-items {
+  padding: $padding-xsmall;
+}
