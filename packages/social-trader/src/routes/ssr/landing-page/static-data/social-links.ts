@@ -49,10 +49,5 @@ export const socialLinks: TIconLinks[] = [
     name: "Medium Blog",
     href: "https://blog.genesis.vision/",
     icon: MediumIcon
-  },
-  {
-    name: "BitcoinTalk",
-    href: "https://bitcointalk.org/index.php?topic=2143279.0",
-    icon: BitcoinIcon
   }
 ];

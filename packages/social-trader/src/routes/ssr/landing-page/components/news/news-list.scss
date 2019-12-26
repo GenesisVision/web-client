@@ -3,7 +3,7 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.stat-list {
+.news-list {
   @include reset-list();
   display: grid;
   grid-auto-flow: column;
@@ -62,7 +62,19 @@
   }
 
   &__item-text {
+    @include transition(color);
     font-weight: 500;
     color: rgba($landing-bg-gray, 0.8);
+  }
+
+  &__item-link {
+    @include reset-link();
+    display: block;
+
+    &:hover {
+      .news-list__item-text {
+        color: $primary-color;
+      }
+    }
   }
 }
