@@ -10,8 +10,6 @@ import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
-import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
-import NewsList from "routes/ssr/landing-page/components/news/news-list";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
@@ -25,8 +23,6 @@ import {
   brokersInfo,
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
-import { newsItems } from "routes/ssr/landing-page/static-data/news";
-import { slides } from "routes/ssr/landing-page/static-data/slides";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
 import programsApi from "services/api-client/programs-api";
