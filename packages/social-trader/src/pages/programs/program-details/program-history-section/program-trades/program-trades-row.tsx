@@ -6,7 +6,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
-import TradesHistoryFeesTooltip from "components/trades-history-fees-tooltip/trades-history-fees-tooltip";
+import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
 import { OrderSignalModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
@@ -61,30 +61,9 @@ const _ProgramTradesRow: React.FC<Props> = ({
         </Profitability>
       </TableCell>
       <TableCell className="details-trades__cell">
-        <Tooltip
-          render={() =>
-            trade.showOriginalCommission ? (
-              <div>
-                {`${formatValue(
-                  trade.originalCommission,
-                  DEFAULT_DECIMAL_SCALE
-                )} ${trade.originalCommissionCurrency}`}
-              </div>
-            ) : (
-              <div>
-                {`${formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)} ${
-                  trade.originalCommissionCurrency
-                }`}
-              </div>
-            )
-          }
-        >
-          <NumberFormat
-            value={formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}
-            displayType="text"
-            thousandSeparator=" "
-          />
-        </Tooltip>
+        <TradesHistoryFeesTooltipWithOwner trade={trade}>
+          <span>{formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}</span>
+        </TradesHistoryFeesTooltipWithOwner>
       </TableCell>
       {showSwaps && (
         <TableCell className="details-trades__cell">{trade.swap}</TableCell>
