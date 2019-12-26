@@ -61,6 +61,7 @@
 
   &__cell,
   &__head-cell {
+    height: 50px;
     font-size: $font-size-paragraph-mobile;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
