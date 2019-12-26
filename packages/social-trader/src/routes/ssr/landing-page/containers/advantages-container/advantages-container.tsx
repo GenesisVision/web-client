@@ -5,7 +5,7 @@ import { animated, useTrail } from "react-spring";
 import AdvantagesList from "routes/ssr/landing-page/components/advantages-list/advantages-list";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { advantagesItems } from "routes/ssr/landing-page/static-data/advantages";
-import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
+import { TRADE } from "routes/trade.routes";
 
 const translate = (x: number, y: number) => `translate3d(${x}px,${y}px,0)`;
 const config = { tension: 1200, friction: 40 };
@@ -50,7 +50,7 @@ const AdvantagesContainer: React.FC = () => {
           //@ts-ignore
           style={{ transform: props.xy.interpolate(translate) }}
         >
-          <LPButton href={JOIN_ROUTE}>Join</LPButton>
+          <LPButton href={TRADE}>Join</LPButton>
         </animated.div>
       ))}
       <div className="home__container">

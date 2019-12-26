@@ -4,7 +4,7 @@ import classNames from "classnames";
 import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TAdvantages } from "routes/ssr/landing-page/static-data/advantages";
-import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
+import { TRADE } from "routes/trade.routes";
 
 import AdvantageItem from "./advantage-item";
 
@@ -24,7 +24,7 @@ const _AdvantagesList: React.FC<Props> = ({ className, advantagesItems }) => (
       />
     ))}
     <li className="advantages-list__item advantages-list__item--button">
-      <LPButton href={JOIN_ROUTE}>Join</LPButton>
+      <LPButton href={TRADE}>Join</LPButton>
     </li>
   </ul>
 );

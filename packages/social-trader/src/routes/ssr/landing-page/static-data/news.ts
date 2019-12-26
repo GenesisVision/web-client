@@ -1,8 +1,3 @@
-import ImgAccess from "routes/ssr/landing-page/images/advantages/access.svg";
-import ImgChoose from "routes/ssr/landing-page/images/advantages/choose.svg";
-import ImgControl from "routes/ssr/landing-page/images/advantages/control.svg";
-import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
-
 export type TNews = {
   title: string;
   text: string;

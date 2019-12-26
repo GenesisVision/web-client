@@ -1,7 +1,6 @@
 import ImgAccess from "routes/ssr/landing-page/images/advantages/access.svg";
 import ImgChoose from "routes/ssr/landing-page/images/advantages/choose.svg";
 import ImgControl from "routes/ssr/landing-page/images/advantages/control.svg";
-import { JOIN_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
 
 export type TAdvantages = {
   title: string;
@@ -13,18 +12,19 @@ export const advantagesItems: TAdvantages[] = [
   {
     title: "Access all financial markets",
     text:
-      "Open multi broker trading platform. Access to Forex, Crypto and Stocks markets. Wide range of instruments and asset classes",
+      "Open multi broker trading platform. Wide range of instruments and asset classes including Forex, Crypto and Stock markets.",
     image: ImgAccess
-  },
-  {
-    title: "Choose the best tool to make money",
-    text: "Trade, Invest, Manage, Follow or become the followed one",
-    image: ImgChoose
   },
   {
     title: "Control your exposure",
     text:
-      "Wide range of investment opportunities in different risk/profitability level categories - Asset Management, Funds, Copytrading. Risk analysis and management",
+      "Wide range of investment opportunities broken by risk tolerance and profitability. Access to risk analysis and management tools. The products offered include Asset Management, Funds and Copytrading.",
+    image: ImgChoose
+  },
+  {
+    title: "Choose the best tool to make money",
+    text:
+      "Choose your role or combine them - Trade, Invest, Manage, Follow or Lead",
     image: ImgControl
   }
 ];
