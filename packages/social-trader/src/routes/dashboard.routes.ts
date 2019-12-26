@@ -3,7 +3,7 @@ export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 export const DASHBOARD_EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${PORTFOLIO_EVENTS_ALL_PAGE_ROUTE}`;
 
 export const OVERVIEW = "overview";
-export const OVERVIEW_ROUTE = `${DASHBOARD_ROUTE}/${OVERVIEW}`;
+export const OVERVIEW_ROUTE = DASHBOARD_ROUTE;
 export const EVENTS = "history";
 export const EVENTS_ROUTE = `${DASHBOARD_ROUTE}/${EVENTS}`;
 export const INVESTMENTS = "investments";
