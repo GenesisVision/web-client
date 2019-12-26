@@ -56,8 +56,8 @@ export const openPositionsSelector = (state: RootState) =>
 
 export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
-  TradesDataType,
-  TradesDataType
+  OpenTradesDataType,
+  OpenTradesDataType
 >(openPositionsSelector);
 
 export const openPositionsReducer = tableReducerFactory<OpenTradesDataType>({
@@ -137,7 +137,7 @@ export const subscriptionsReducer = tableReducerFactory<
 
 export type ProgramHistoryState = Readonly<{
   events: ITableState<EventsDataType>;
-  openPositions: ITableState<TradesDataType>;
+  openPositions: ITableState<OpenTradesDataType>;
   trades: ITableState<TradesDataType>;
   periodHistory: ITableState<ProgramPeriodsDataType>;
   financialStatistic: ITableState<ProgramPeriodsDataType>;
