@@ -28,6 +28,7 @@ import {
 } from "../program-details.constants";
 import {
   EventsDataType,
+  OpenTradesDataType,
   ProgramPeriodsDataType,
   SignalProviderSubscribersDataType,
   TradesDataType
@@ -59,7 +60,7 @@ export const openPositionsTableSelector = tableSelectorCreator<
   TradesDataType
 >(openPositionsSelector);
 
-export const openPositionsReducer = tableReducerFactory<TradesDataType>({
+export const openPositionsReducer = tableReducerFactory<OpenTradesDataType>({
   type: PROGRAM_OPEN_POSITIONS,
   paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
 });

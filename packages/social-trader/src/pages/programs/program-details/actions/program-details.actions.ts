@@ -30,6 +30,7 @@ import {
 import {
   EventsDataType,
   LevelParametersDataType,
+  OpenTradesDataType,
   ProgramAbsoluteProfitChartDataType,
   ProgramBalanceChartDataType,
   ProgramDescriptionDataType,
@@ -137,7 +138,7 @@ export const fetchLevelParametersAction = (
 export const fetchOpenPositionsAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ApiAction<TradesDataType> => ({
+): ApiAction<OpenTradesDataType> => ({
   type: PROGRAM_OPEN_POSITIONS,
   payload: programsApi.getProgramOpenTrades(id, filters)
 });
@@ -147,7 +148,7 @@ export const fetchTradesAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<TradesDataType> => ({
   type: PROGRAM_TRADES,
-  payload: programsApi.getProgramTrades(id, filters)
+  payload: programsApi.getAssetTrades(id, filters)
 });
 
 export const fetchPeriodHistoryAction = (
