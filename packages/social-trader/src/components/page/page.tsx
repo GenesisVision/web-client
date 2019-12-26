@@ -4,8 +4,13 @@ import Head from "next/head";
 import * as React from "react";
 import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
-import { Thing, WithContext } from "schema-dts";
-import { descriptionMeta, imageMeta, schema, titleMeta } from "utils/seo";
+import {
+  descriptionMeta,
+  imageMeta,
+  schema,
+  SchemaType,
+  titleMeta
+} from "utils/seo";
 
 const _Page = ({
   title,
@@ -37,7 +42,7 @@ const _Page = ({
 
 interface Props {
   title: string;
-  schemas?: WithContext<Thing>[];
+  schemas?: Array<SchemaType>;
   description?: string;
   previewImage?: string;
 }

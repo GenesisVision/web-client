@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Organization, Thing, WithContext } from "schema-dts";
 
 import filesService from "../services/file-service";
 
 export const schema = (() => {
   let index = 0;
 
-  return (schema?: WithContext<Thing>[]) => {
+  return (schema?: Array<SchemaType>) => {
     return schema
       ? schema.map(s => {
           return (
@@ -65,7 +64,7 @@ export const imageMeta = (image?: string) => {
   ) : null;
 };
 
-export const ORGANIZATION_SCHEMA: WithContext<Organization> = {
+export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Genesis Vision",
@@ -75,3 +74,5 @@ export const ORGANIZATION_SCHEMA: WithContext<Organization> = {
     "https://www.facebook.com/GenesisVisionProject/"
   ]
 };
+
+export type SchemaType = { [key: string]: string | string[] | number };
