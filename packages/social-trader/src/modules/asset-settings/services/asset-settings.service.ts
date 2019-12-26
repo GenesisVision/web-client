@@ -3,27 +3,27 @@ import { CancelablePromise, ProgramUpdate } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
-import { ASSET } from "shared/constants/constants";
 
-export const editAsset = (props: {
+export const editAsset = ({
+  editAssetData,
+  id
+}: {
   id: string;
   editAssetData: IAssetEditFormValues;
-  type: ASSET;
 }): CancelablePromise<null> => {
   const authorization = authService.getAuthArg();
-  let data = props.editAssetData;
   let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
-  if (data.logo.image)
+  if (editAssetData.logo.image)
     promise = filesService.uploadFile(
-      data.logo.image.cropped,
+      editAssetData.logo.image.cropped,
       authorization
     ) as CancelablePromise<any>;
   return promise.then(response => {
     const model = {
-      ...data,
-      logo: response || data.logo.src
+      ...editAssetData,
+      logo: response || editAssetData.logo.src
     };
-    return assetsApi.updateAsset(props.id, authorization, {
+    return assetsApi.updateAsset(id, authorization, {
       model: model as ProgramUpdate
     }); //TODO ask backend to change ProgramUpdate logo type
   });
