@@ -118,11 +118,6 @@ const mainMenuItemsUnion = [
     route: TRADE_ROUTE,
     children: [
       {
-        Icon: Mt4Icon,
-        route: META_TRADER_4_ROUTE,
-        label: "navigation.mt4"
-      },
-      {
         Icon: Mt5Icon,
         route: META_TRADER_5_ROUTE,
         label: "navigation.mt5"
