@@ -2465,9 +2465,14 @@
       }
     }
   },
-  "edit-follow": {
+  "edit-asset": {
     "notifications": {
-      "edit-success": "Follow has been edited"
+      "edit-success": {
+        "trading-account": "Trading account was successfully edited.",
+        "follow": "Follow has been edited",
+        "program": "Program has been edited",
+        "fund": "Fund was successfully edited."
+      }
     }
   },
   "edit-program": {
@@ -2496,9 +2501,6 @@
         "description-required": "Description is required",
         "account-type-required": "Account type is required"
       }
-    },
-    "notifications": {
-      "edit-success": "Program has been edited"
     }
   },
   "edit-fund": {
@@ -2527,9 +2529,6 @@
         "description-required": "Description is required",
         "account-type-required": "Account type is required"
       }
-    },
-    "notifications": {
-      "edit-success": "Fund was successfully edited."
     }
   },
   "reallocate": {
