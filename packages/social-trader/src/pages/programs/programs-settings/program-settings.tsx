@@ -47,6 +47,10 @@ const _ProgramSettings: React.FC<Props> = ({
       : undefined;
   const isSignalProgram = !!description.followDetails;
   const assetType = description.publicInfo.typeExt;
+  const closeId =
+    assetType === "Program" || assetType === "SignalProgram"
+      ? description.id
+      : description.tradingAccountInfo.id;
   return (
     <>
       <ChangePassword
@@ -124,7 +128,7 @@ const _ProgramSettings: React.FC<Props> = ({
         label={t(`asset-settings.close-${assetType.toLowerCase()}.title`)}
         asset={assetType}
         canCloseAsset={description.ownerActions.canClose}
-        id={description.id}
+        id={closeId}
         closeAsset={closeProgram}
       />
     </>
