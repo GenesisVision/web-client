@@ -10,8 +10,9 @@ import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
-import StatList from "routes/ssr/landing-page/components/statistics/stat-list";
+import NewsList from "routes/ssr/landing-page/components/news/news-list";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
+import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
@@ -37,7 +38,7 @@ const IndexPage: NextPage<{
           <div className="home__container">
             <FirstSlider className="home__grid-row" slidesItems={slides} />
             <div className="home__grid-row home__grid-row--mob-wider">
-              <StatList className="home__grid-item" />
+              <NewsList className="home__grid-item" />
             </div>
           </div>
         </section>
@@ -78,7 +79,7 @@ const IndexPage: NextPage<{
         <AdvantagesContainer />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
-            <h2>Brockers and trading conditions</h2>
+            <BrokersContainer />
           </div>
         </section>
         <section className="home__section home__section--last-screen">

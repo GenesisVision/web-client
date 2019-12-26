@@ -15,15 +15,15 @@ enum TABS {
 const tabsItems = [
   {
     id: 0,
-    name: "Trade"
+    text: "Trade"
   },
   {
     id: 1,
-    name: "Invest"
+    text: "Invest"
   },
   {
     id: 2,
-    name: "Partake"
+    text: "Partake"
   }
 ];
 

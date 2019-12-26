@@ -3,9 +3,18 @@ import "./tab-controls.scss";
 import classNames from "classnames";
 import React from "react";
 
+export type TTabsItem = {
+  id: number;
+  text?: string;
+  image?: {
+    link: string;
+    title?: string;
+  };
+};
+
 interface Props {
   currentTabId: number;
-  tabsItems: any;
+  tabsItems: TTabsItem[];
   onChange: (id: number) => void;
   className?: string;
 }
@@ -30,7 +39,15 @@ const _TabControls: React.FC<Props> = ({
             type="button"
             className="tab-controls__item-btn"
           >
-            {tab.name}
+            {tab.text && tab.text}
+            {tab.image && (
+              <img
+                className="tab-controls__item-img"
+                src={tab.image.link}
+                alt={tab.image.title}
+                title={tab.image.title}
+              />
+            )}
           </button>
         </li>
       ))}
