@@ -4,8 +4,7 @@
 
 .brokers-container {
   @include grid();
-  padding-top: 100px;
-  padding-bottom: 100px;
+  @include horizontal-padding();
   position: relative;
 
   &__title {
@@ -72,5 +71,8 @@
       grid-row: 2/3;
       width: 100%;
     }
+  }
+
+  &--dark {
   }
 }

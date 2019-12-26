@@ -108,4 +108,10 @@
       font-size: 38px;
     }
   }
+
+  &--dark {
+    .broker-info__advantage {
+      background-color: $row-color;
+    }
+  }
 }
