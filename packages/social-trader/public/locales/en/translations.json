@@ -2468,10 +2468,10 @@
   "edit-asset": {
     "notifications": {
       "edit-success": {
-        "trading-account": "Trading account was successfully edited.",
+        "trading-account": "Trading account has been edited.",
         "follow": "Follow has been edited",
         "program": "Program has been edited",
-        "fund": "Fund was successfully edited."
+        "fund": "Fund has been edited."
       }
     }
   },
