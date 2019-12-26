@@ -67,7 +67,6 @@ const mainMenuItemsUnion = [
     label: "navigation.dashboard",
     route: OVERVIEW_ROUTE,
     children: [
-      { Icon: HistoryIcon, route: EVENTS_ROUTE, label: "navigation.events" },
       {
         Icon: InvestIcon,
         route: INVESTMENTS_ROUTE,
@@ -78,11 +77,12 @@ const mainMenuItemsUnion = [
         route: TRADING_ROUTE,
         label: "navigation.trading"
       },
-      {
+      { Icon: HistoryIcon, route: EVENTS_ROUTE, label: "navigation.events" }
+      /*{
         Icon: StatisticIcon,
         route: FINANCIAL_STATISTIC_ROUTE,
         label: "navigation.financial-statistic"
-      }
+      }*/
     ]
   },
   {
