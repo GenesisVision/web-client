@@ -67,11 +67,6 @@ const mainMenuItemsUnion = [
     label: "navigation.dashboard",
     route: OVERVIEW_ROUTE,
     children: [
-      /*{
-        Icon: SearchIcon,
-        route: OVERVIEW_ROUTE,
-        label: "navigation.overview"
-      },*/
       { Icon: HistoryIcon, route: EVENTS_ROUTE, label: "navigation.events" },
       {
         Icon: InvestIcon,
