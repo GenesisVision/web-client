@@ -85,6 +85,11 @@
 
   &__text {
     color: rgba($row-color, 0.8);
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-bottom: 40px;
+    }
   }
 
   &__item {

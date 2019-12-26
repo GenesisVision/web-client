@@ -3,7 +3,9 @@ import "./funds-container.scss";
 import classNames from "classnames";
 import { FundDetailsListItem } from "gv-api-web";
 import React, { useCallback, useRef, useState } from "react";
+import { FUNDS_ROUTE } from "routes/funds.routes";
 import FundsList from "routes/ssr/landing-page/components/funds/funds-list";
+import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import FundsIcon from "routes/ssr/landing-page/images/common/funds-icon.svg";
 
 interface Props {
@@ -37,9 +39,13 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
         <img src={FundsIcon} alt="Funds" className="funds-container__img" />
         <h2 className="funds-container__title">Funds</h2>
         <p className="funds-container__text">
-          Receive a 100% bonus on any deposit made on Genesis Markets. The bonus
-          is unlocked as soon as you start trading!
+          Diversify your capital across hundreds of cryptocurrencies in one
+          click. Select a fund with a composition that matches your opinion on
+          the market and let the manager readjust while the market evolves. You
+          can withdraw your capital at any time you retain full control of your
+          investment.
         </p>
+        <LPButton href={FUNDS_ROUTE}>Discover</LPButton>
       </div>
       <FundsList
         funds={funds}

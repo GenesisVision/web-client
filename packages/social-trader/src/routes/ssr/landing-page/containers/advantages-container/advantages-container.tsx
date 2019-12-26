@@ -53,12 +53,14 @@ const AdvantagesContainer: React.FC = () => {
           <LPButton href={JOIN_ROUTE}>Join</LPButton>
         </animated.div>
       ))}
-      <div className="advantages-container">
-        <h2 className="advantages-container__title">Our advantages</h2>
-        <AdvantagesList
-          advantagesItems={advantagesItems}
-          className="advantages-container__list"
-        />
+      <div className="home__container">
+        <div className="advantages-container">
+          <h2 className="advantages-container__title">Our advantages</h2>
+          <AdvantagesList
+            advantagesItems={advantagesItems}
+            className="advantages-container__list"
+          />
+        </div>
       </div>
     </section>
   );
