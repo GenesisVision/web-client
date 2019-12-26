@@ -28,16 +28,14 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
+  const link = linkCreator(
+    composeFundsDetailsUrl(fund.url),
+    String(title),
+    FUND_DETAILS_FOLDER_ROUTE
+  );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <TableCardActionsItem
-        to={linkCreator(
-          composeFundsDetailsUrl(fund.url),
-          title,
-          FUND_DETAILS_FOLDER_ROUTE
-        )}
-        onClick={clearAnchor}
-      >
+      <TableCardActionsItem to={link} onClick={clearAnchor}>
         {t("fund-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
@@ -60,7 +58,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
       subTitle={fund.owner.username}
       logo={fund.logo}
       color={fund.color}
-      detailsUrl={linkCreator(composeFundsDetailsUrl(fund.url), title)}
+      detailsUrl={link}
       managerUrl={managerToPathCreator(fund.owner.url, title)}
       renderActions={renderActions}
     >

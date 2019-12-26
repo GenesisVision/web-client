@@ -16,6 +16,7 @@ import { ProgramDetailsListItem } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
@@ -33,7 +34,11 @@ const DECIMAL_SCALE_BIG_VALUE = 2;
 const _ProgramCard: React.FC<Props> = ({ program, title }) => {
   const { t } = useTranslation();
   const { linkCreator } = useToLink();
-  const linkProps = linkCreator(composeProgramDetailsUrl(program.url), title);
+  const linkProps = linkCreator(
+    composeProgramDetailsUrl(program.url),
+    title,
+    PROGRAM_DETAILS_FOLDER_ROUTE
+  );
   const requestCurrency = program.balance.currency;
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
