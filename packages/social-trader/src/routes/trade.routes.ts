@@ -1,4 +1,5 @@
-export const TRADE = "/trade";
+export const TRADE = "trade";
+export const TRADE_ROUTE = `/${TRADE}`;
 
 export const META_TRADER_4 = "mt4";
 export const META_TRADER_4_ROUTE = `${TRADE}/${META_TRADER_4}`;
