@@ -1,6 +1,7 @@
 import { SLUG_URL_PARAM_NAME } from "./app.routes";
 
-export const INVEST_ROUTE = "/invest";
+export const INVEST = "invest";
+export const INVEST_ROUTE = `/${INVEST}`;
 
 export const SETTINGS = `settings`;
 export const FACETS = "facets";
