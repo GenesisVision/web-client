@@ -8,6 +8,7 @@ import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
 import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
 import { OrderSignalModel } from "gv-api-web";
+import { ProvidersButton } from "pages/programs/program-details/program-history-section/program-trades/providers-button";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
@@ -74,6 +75,11 @@ const _ProgramTradesRow: React.FC<Props> = ({
       {showTickets && (
         <TableCell className="details-trades__cell">{trade.ticket}</TableCell>
       )}
+      <TableCell className="details-trades__cell">
+        {!!trade.providers.length && (
+          <ProvidersButton providers={trade.providers} />
+        )}
+      </TableCell>
     </TableRow>
   );
 };
