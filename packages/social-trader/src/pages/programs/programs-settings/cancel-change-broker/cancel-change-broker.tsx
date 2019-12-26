@@ -1,27 +1,21 @@
 import SettingsBlock from "components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
+import CancelChangeBrokerFormContainer, {
+  ICancelChangeBrokerFormContainerProps
+} from "pages/programs/programs-settings/cancel-change-broker/cancel-change-broker-form.container";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-
-import CancelChangeBrokerForm, {
-  CancelChangeBrokerFormOwnProps
-} from "./cancel-change-broker-form";
+import { useTranslation } from "react-i18next";
 
 const _ChangeChangeBroker: React.FC<
-  CancelChangeBrokerFormOwnProps & WithTranslation
-> = props => (
-  <SettingsBlock label={props.t("program-settings.broker.title")}>
-    <CancelChangeBrokerForm {...props} />
-  </SettingsBlock>
-);
+  ICancelChangeBrokerFormContainerProps
+> = props => {
+  const [t] = useTranslation();
+  return (
+    <SettingsBlock label={t("program-settings.broker.title")}>
+      <CancelChangeBrokerFormContainer {...props} />
+    </SettingsBlock>
+  );
+};
 
-const ChangeChangeBroker = compose<
-  React.ComponentType<CancelChangeBrokerFormOwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  React.memo
-)(_ChangeChangeBroker);
-
+const ChangeChangeBroker = withLoader(React.memo(_ChangeChangeBroker));
 export default ChangeChangeBroker;

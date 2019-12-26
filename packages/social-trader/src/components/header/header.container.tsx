@@ -10,13 +10,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { headerSelector } from "reducers/header-reducer";
-import { TMenuItem } from "routes/menu";
 
-const _HeaderContainer: React.FC<Props & WithRouterProps> = ({
-  router,
-  topMenuItems,
-  mobileMenuItems
-}) => {
+const _HeaderContainer: React.FC<Props & WithRouterProps> = ({ router }) => {
   const dispatch = useDispatch();
   const info = useSelector(headerSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -28,21 +23,10 @@ const _HeaderContainer: React.FC<Props & WithRouterProps> = ({
     }
   }, [isAuthenticated]);
 
-  return (
-    <Header
-      topMenuItems={topMenuItems}
-      mobileMenuItems={mobileMenuItems}
-      profileHeader={info}
-      backPath={router.pathname}
-      isAuthenticated={isAuthenticated}
-    />
-  );
+  return <Header profileHeader={info} backPath={router.pathname} />;
 };
 
-interface Props {
-  mobileMenuItems: TMenuItem[];
-  topMenuItems: TMenuItem[];
-}
+interface Props {}
 
 const HeaderContainer = withRouter(React.memo(_HeaderContainer));
 export default HeaderContainer;

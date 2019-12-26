@@ -6,6 +6,7 @@ import GVButton from "components/gv-button";
 import { Icon } from "components/icon/icon";
 import { SearchIcon } from "components/icon/search-icon";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Navigation from "components/navigation/navigation";
 import NavigationMobile from "components/navigation/navigation-mobile/navigation-mobile";
 import NotificationsWidget from "components/notifications-widget/notifications-widget";
@@ -18,17 +19,15 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
-import { TMenuItem } from "routes/menu";
+import { mobileMenuItems, topMenuItems } from "routes/menu";
 import { getRandomInteger } from "utils/helpers";
 
-const _Header: React.FC<Props> = ({
-  topMenuItems,
-  mobileMenuItems,
-  isAuthenticated,
-  profileHeader
-}) => {
+const _Header: React.FC<Props> = ({ profileHeader }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const { linkCreator } = useToLink();
   const dispatch = useDispatch();
   const handlerLogout = useCallback(() => dispatch(logout), []);
   const [isOpen, setOpen, setClose] = useIsOpen();
@@ -45,12 +44,7 @@ const _Header: React.FC<Props> = ({
       </div>
       <div className="header__center">
         <div className="header__search">
-          <Link
-            to={{
-              pathname: GLOBAL_SEARCH_ROUTE,
-              state: backPath
-            }}
-          >
+          <Link to={linkCreator(GLOBAL_SEARCH_ROUTE, backPath)}>
             <SearchIcon />
           </Link>
         </div>
@@ -83,7 +77,7 @@ const _Header: React.FC<Props> = ({
                 {t("auth.login.title")}
               </GVButton>
             </Link>
-            <Link to={SIGNUP_ROUTE}>
+            <Link to={linkCreator(SIGNUP_ROUTE)}>
               <GVButton variant="contained" color="primary">
                 {t("auth.signup.title")}
               </GVButton>
@@ -105,10 +99,7 @@ const _Header: React.FC<Props> = ({
 };
 
 export interface Props {
-  mobileMenuItems: TMenuItem[];
-  topMenuItems: TMenuItem[];
   profileHeader?: ProfileHeaderViewModel;
-  isAuthenticated: boolean;
   backPath: string;
 }
 

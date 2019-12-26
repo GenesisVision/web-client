@@ -5,8 +5,12 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "decorators/with-blur-loader";
 import { FormikProps, withFormik } from "formik";
-import { Broker, BrokerAccountType } from "gv-api-web";
+import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import {
@@ -24,7 +28,6 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   currentLeverage,
   onSubmit,
   submitForm,
-  currentAccountTypeId,
   handleSubmit,
   values,
   dirty,
@@ -33,7 +36,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   setFieldValue,
   t,
   id,
-  brokers
+  data: { brokers, currentAccountTypeId }
 }) => {
   const [
     isChangeBrokerOpen,
@@ -171,14 +174,13 @@ interface Props
     FormikProps<ChangeBrokerFormValues> {}
 
 export interface ChangeBrokerFormOwnProps {
+  data: BrokersProgramInfo;
   isSignalProgram: boolean;
-  currentAccountTypeId: string;
   onSubmit: (
     values: ChangeBrokerFormValues,
     setSubmitting: SetSubmittingType
   ) => void;
   id: string;
-  brokers: Broker[];
   currentLeverage: number;
 }
 
@@ -194,12 +196,20 @@ export interface ChangeBrokerFormValues {
   [FIELDS.brokerFrom]: Broker;
 }
 
-const ChangeBrokerForm = compose<React.ComponentType<ChangeBrokerFormOwnProps>>(
+const ChangeBrokerForm = compose<
+  React.ComponentType<
+    ChangeBrokerFormOwnProps & WithBlurLoaderProps<BrokersProgramInfo>
+  >
+>(
+  withBlurLoader,
   translate(),
   withFormik<ChangeBrokerFormOwnProps, ChangeBrokerFormValues>({
     enableReinitialize: true,
     displayName: "edit-form",
-    mapPropsToValues: ({ brokers, currentAccountTypeId, currentLeverage }) => ({
+    mapPropsToValues: ({
+      data: { brokers, currentAccountTypeId },
+      currentLeverage
+    }) => ({
       [FIELDS.brokerFrom]: brokers.find(
         broker =>
           !!broker.accountTypes.find(

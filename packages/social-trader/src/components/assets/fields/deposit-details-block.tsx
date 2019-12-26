@@ -1,8 +1,11 @@
+import GVCheckbox from "components/gv-checkbox/gv-checkbox";
+import GVFormikField from "components/gv-formik-field";
 import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
 import WalletSelect from "components/wallet-select/wallet-select";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { convertToCurrency } from "shared/utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
@@ -11,6 +14,9 @@ import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
+  setFieldTouched,
+  enterMinDeposit,
+  enterMinDepositName,
   rateName,
   availableName,
   blockNumber = 3,
@@ -25,6 +31,10 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   const { rate, handleWalletChange, wallet, wallets } = useAssetSection({
     assetCurrency
   });
+  const minimumDepositAmountInCurr = convertToCurrency(
+    minimumDepositAmount,
+    rate
+  );
   useEffect(() => {
     setFieldValue(rateName, rate);
   }, [rate]);
@@ -34,6 +44,17 @@ const _DepositDetailsBlock: React.FC<Props> = ({
     setFieldValue(availableName, wallet.available);
     setFieldValue(walletFieldName, wallet.id);
   }, [wallet]);
+
+  useEffect(() => {
+    if (enterMinDeposit) {
+      setFieldValue(inputName, minimumDepositAmountInCurr);
+      setFieldTouched(inputName);
+    }
+  }, [enterMinDeposit, minimumDepositAmountInCurr]);
+  useEffect(() => {
+    if (!enterMinDeposit) setFieldValue(inputName, "");
+  }, [enterMinDeposit]);
+
   if (!wallet) return null;
   return (
     <SettingsBlock
@@ -42,15 +63,14 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       withBorder={false}
     >
       <AssetField className="deposit-details">
-        <div className="deposit-amount-field">
-          <WalletSelect
-            name={walletFieldName}
-            label={t("transfer.from")}
-            items={wallets}
-            onChange={onSelectChange(handleWalletChange)}
-          />
-        </div>
+        <WalletSelect
+          name={walletFieldName}
+          label={t("transfer.from")}
+          items={wallets}
+          onChange={onSelectChange(handleWalletChange)}
+        />
         <InputDepositAmount
+          disabled={enterMinDeposit}
           name={inputName}
           walletCurrency={wallet.currency}
           walletAvailable={wallet.available}
@@ -58,6 +78,13 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
+        />
+        <GVFormikField
+          type="checkbox"
+          color="primary"
+          name={enterMinDepositName}
+          label={<>{t("create-asset-page.min-deposit")}</>}
+          component={GVCheckbox}
         />
         <AmountInfo
           assetCurrency={assetCurrency}
@@ -71,6 +98,8 @@ const _DepositDetailsBlock: React.FC<Props> = ({
 };
 
 interface Props {
+  enterMinDeposit?: boolean;
+  enterMinDepositName: string;
   availableName: string;
   rateName: string;
   blockNumber?: number;
@@ -78,6 +107,7 @@ interface Props {
   inputName: string;
   depositAmount?: number;
   minimumDepositAmount: number;
+  setFieldTouched: Function;
   setFieldValue: Function;
   assetCurrency: CurrencyEnum;
 }

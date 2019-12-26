@@ -8,6 +8,7 @@ import {
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -34,6 +35,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadButtonToolbarAuth
+          method={filesService.getStatisticExportFile}
           dateRange={filtering!.dateRange}
           programId={id}
           title={title}

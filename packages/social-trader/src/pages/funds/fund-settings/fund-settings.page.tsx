@@ -2,6 +2,7 @@ import { IImageValue } from "components/form/input-image/input-image";
 import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import { fundDescriptionSelector } from "pages/funds/fund-details/reducers/description.reducer";
 import { dispatchFundDescriptionWithId } from "pages/funds/fund-details/services/fund-details.service";
 import React, { useCallback } from "react";
@@ -11,7 +12,6 @@ import {
   createFundInfoSelector,
   fundAssetsSelector
 } from "reducers/platform-reducer";
-import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import FundSettings from "./fund-settings";
@@ -31,7 +31,7 @@ const _FundSettingsPage: React.FC = () => {
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToFund}
-      asset={ASSET.FUND}
+      asset={CLOSEABLE_ASSET.FUND}
       description={description as AssetDescriptionType}
       dispatchDescription={handleDispatchDescription}
       settingsBlocks={(editProgram, applyCloseAsset) => (

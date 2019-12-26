@@ -2,6 +2,7 @@ import "./wallet-list.scss";
 
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -22,6 +23,7 @@ import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
 const _WalletList: React.FC<Props> = ({ wallets }) => {
   const [t] = useTranslation();
+  const { linkCreator } = useToLink();
   return (
     <>
       <Table
@@ -38,11 +40,11 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
           <TableRow key={wallet.id}>
             <TableCell className="wallet-list__cell--wallet">
               <Link
-                to={{
-                  pathname: WALLET_CURRENCY_FOLDER_ROUTE,
-                  as: composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
-                  state: `/ ${WALLET_TOTAL_PAGE_NAME}`
-                }}
+                to={linkCreator(
+                  composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
+                  WALLET_TOTAL_PAGE_NAME,
+                  WALLET_CURRENCY_FOLDER_ROUTE
+                )}
               >
                 <CurrencyItem
                   logo={wallet.logo}

@@ -69,10 +69,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }, [id]);
 
   const tablesData = {
-    financialStatistic: {
-      dataSelector: financialStatisticTableSelector,
-      getItems: getFinancialStatistics
-    },
+    financialStatistic: programDetails
+      ? {
+          dataSelector: financialStatisticTableSelector,
+          getItems: getFinancialStatistics
+        }
+      : undefined,
     openPositions: {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
@@ -129,28 +131,28 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         )}
         Controls={() => (
           <>
-            {followDetails && (
-              <InvestmentAccountControls
-                transferableItem={mapProgramFollowToTransferItemType(
-                  description
-                )}
-                accountType={description.publicInfo.typeExt}
-                onApply={handleDispatchDescription}
-              />
-            )}
             {programDetails && (
               <InvestmentProgramControls
                 onApply={handleDispatchDescription}
                 description={description}
-                canCloseAsset={ownerActions && ownerActions.canClose}
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
             )}
             {followDetails && (
               <FollowControls
+                isOwnAsset={isOwnAsset}
                 onApply={handleDispatchDescription}
                 description={description}
+              />
+            )}
+            {isOwnAsset && ownerActions.canTransferMoney && (
+              <InvestmentAccountControls
+                transferableItem={mapProgramFollowToTransferItemType(
+                  description
+                )}
+                accountType={description.publicInfo.typeExt}
+                onApply={handleDispatchDescription}
               />
             )}
           </>
@@ -178,7 +180,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         <ProgramDetailsStatisticSection />
       )}
       <ProgramDetailsHistorySection
-        getHistoryCounts={getProgramHistoryCounts}
+        getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
         tablesData={tablesData}
         showCommissionRebateSometime={
           brokerDetails.showCommissionRebateSometime

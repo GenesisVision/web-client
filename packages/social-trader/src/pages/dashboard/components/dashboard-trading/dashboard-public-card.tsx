@@ -2,6 +2,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -13,7 +14,7 @@ import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import React, { useContext } from "react";
+import React from "react";
 import NumberFormat from "react-number-format";
 import {
   ASSET,
@@ -26,8 +27,6 @@ import { composeAssetDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
-import { TitleContext } from "../../dashboard.constants";
-
 const _DashboardPublicCard: React.FC<Props> = ({
   showWithdraw = true,
   showInvest = true,
@@ -36,15 +35,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
   updateItems,
   ownAsset
 }) => {
-  const title = useContext(TitleContext);
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const detailsLink = {
-    pathname: composeAssetDetailsUrl(
+  const detailsLink = linkCreator(
+    composeAssetDetailsUrl(
       asset.assetTypeExt,
       asset.publicInfo && asset.publicInfo.url
-    ),
-    state: `/ ${title}`
-  };
+    )
+  );
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
@@ -76,7 +74,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   return (
     <TableCard
       hasAvatar
-      subTitle={asset.assetTypeExt}
+      subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
       levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}

@@ -8,6 +8,7 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import {
   AccountBalanceChart,
   CancelablePromise,
+  TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
 import { AccountAbsoluteProfitChartDataType } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
@@ -105,7 +106,7 @@ export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType,
   authorization: string
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ActionType<CancelablePromise<TradesSignalViewModel>> => ({
   type: ACCOUNT_TRADES,
   payload: accountsApi.getTrades(id, authorization, filters)
 });

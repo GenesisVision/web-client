@@ -7,6 +7,7 @@ import TransferContainer from "./components/transfer-container";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
 
 const _TransferPopup: React.FC<Props> = ({
+  singleCurrentItemContainer,
   onApply,
   title,
   currentItemContainer = TRANSFER_CONTAINER.SOURCE,
@@ -18,6 +19,7 @@ const _TransferPopup: React.FC<Props> = ({
 }) => (
   <Dialog open={open} onClose={onClose}>
     <TransferContainer
+      singleCurrentItemContainer={singleCurrentItemContainer}
       onApply={onApply}
       title={title}
       currentItemContainer={currentItemContainer}
@@ -30,6 +32,7 @@ const _TransferPopup: React.FC<Props> = ({
 );
 
 interface Props {
+  singleCurrentItemContainer?: boolean;
   onApply?: VoidFunction;
   currentItem: WalletItemType;
   onClose: () => void;

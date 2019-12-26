@@ -59,7 +59,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   label: string;
 }> = ({ item, label, withProfitability, currency }) => {
   return (
-    <StatisticItem big accent label={label}>
+    <StatisticItem label={label}>
       <div className="dashboard-statistic-periods-item__value-container">
         <div className="dashboard-statistic-periods-item__value">
           <NumberFormat
@@ -69,7 +69,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
             displayType="text"
           />
         </div>
-        {withProfitability && item.profitPercent !== 0 && (
+        {withProfitability && (
           <Profitability
             variant={PROFITABILITY_VARIANT.CHIPS}
             value={item.profitPercent}

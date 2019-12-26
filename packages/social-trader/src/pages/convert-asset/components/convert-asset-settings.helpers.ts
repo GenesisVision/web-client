@@ -32,9 +32,9 @@ export const convertAssetMapPropsToValues = ({
   [CONVERT_ASSET_FIELDS.hasInvestmentLimit]: false,
   [CONVERT_ASSET_FIELDS.investmentLimit]: undefined,
   [CONVERT_ASSET_FIELDS.isSignalProgram]: true, // TODO move back to server
-  [CONVERT_ASSET_FIELDS.signalSuccessFee]: 0,
+  [CONVERT_ASSET_FIELDS.successFee]: 0,
   [CONVERT_ASSET_FIELDS.currency]: currency || "GVT",
-  [CONVERT_ASSET_FIELDS.signalVolumeFee]: 0,
+  [CONVERT_ASSET_FIELDS.volumeFee]: 0,
   [CONVERT_ASSET_FIELDS.periodLength]:
     periods.length === 1 ? periods[0] : undefined
 });
@@ -95,8 +95,7 @@ export enum CONVERT_ASSET_FIELDS {
   periodLength = "periodLength",
   successFee = "successFee",
   stopOutLevel = "stopOutLevel",
-  signalSuccessFee = "signalSuccessFee",
-  signalVolumeFee = "signalVolumeFee",
+  volumeFee = "volumeFee",
   isSignalProgram = "isSignalProgram",
   hasInvestmentLimit = "hasInvestmentLimit",
   title = "title",
@@ -144,14 +143,14 @@ const getPublicInfoShapes = (t: i18next.TFunction) => ({
 
 const getSignalShapes = (t: i18next.TFunction, maxSuccessFee: number) => ({
   [CONVERT_ASSET_FIELDS.isSignalProgram]: boolean(),
-  [CONVERT_ASSET_FIELDS.signalVolumeFee]: mixed().when(
+  [CONVERT_ASSET_FIELDS.volumeFee]: mixed().when(
     CONVERT_ASSET_FIELDS.isSignalProgram,
     {
       is: true,
       then: signalVolumeFeeShape(t)
     }
   ),
-  [CONVERT_ASSET_FIELDS.signalSuccessFee]: mixed().when(
+  [CONVERT_ASSET_FIELDS.successFee]: mixed().when(
     CONVERT_ASSET_FIELDS.isSignalProgram,
     {
       is: true,

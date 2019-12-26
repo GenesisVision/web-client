@@ -2,8 +2,8 @@ import Dialog, { IDialogProps } from "components/dialog/dialog";
 import FormError from "components/form/form-error/form-error";
 import useApiRequest from "hooks/api-request.hook";
 import {
-  fetchBaseWallets,
-  TWalltetsBaseData
+  fetchAvailableWallets,
+  TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositPopup from "./deposit-popup";
 import { DepositInfoLoaderData } from "./deposit.loader";
-import { TAssetDeposit } from "./deposit.types";
 
 const _DepositContainer: React.FC<Props> = ({
   title,
@@ -33,9 +32,9 @@ const _DepositContainer: React.FC<Props> = ({
   const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
   const { data, sendRequest: getInvestInfo, errorMessage } = useApiRequest<
-    TWalltetsBaseData
+    TWalletsAvailableData
   >({
-    request: fetchBaseWallets
+    request: fetchAvailableWallets
   });
   useEffect(() => {
     id && open && getInvestInfo({ currency: stateCurrency });

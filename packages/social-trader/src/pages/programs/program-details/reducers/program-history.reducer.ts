@@ -28,6 +28,7 @@ import {
 } from "../program-details.constants";
 import {
   EventsDataType,
+  OpenTradesDataType,
   ProgramPeriodsDataType,
   SignalProviderSubscribersDataType,
   TradesDataType
@@ -55,11 +56,11 @@ export const openPositionsSelector = (state: RootState) =>
 
 export const openPositionsTableSelector = tableSelectorCreator<
   RootState,
-  TradesDataType,
-  TradesDataType
+  OpenTradesDataType,
+  OpenTradesDataType
 >(openPositionsSelector);
 
-export const openPositionsReducer = tableReducerFactory<TradesDataType>({
+export const openPositionsReducer = tableReducerFactory<OpenTradesDataType>({
   type: PROGRAM_OPEN_POSITIONS,
   paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
 });
@@ -136,7 +137,7 @@ export const subscriptionsReducer = tableReducerFactory<
 
 export type ProgramHistoryState = Readonly<{
   events: ITableState<EventsDataType>;
-  openPositions: ITableState<TradesDataType>;
+  openPositions: ITableState<OpenTradesDataType>;
   trades: ITableState<TradesDataType>;
   periodHistory: ITableState<ProgramPeriodsDataType>;
   financialStatistic: ITableState<ProgramPeriodsDataType>;

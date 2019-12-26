@@ -11,6 +11,7 @@ import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
 
 const _FollowControls: React.FC<Props> = ({
+  isOwnAsset,
   onApply,
   description: {
     publicInfo: { title },
@@ -30,21 +31,23 @@ const _FollowControls: React.FC<Props> = ({
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         {isAuthenticated ? (
-          <SignalProviderButtons
-            onApply={onApply}
-            guestActions={personalDetails && personalDetails.guestActions}
-            leverage={leverageMax}
-            brokerId={brokerDetails.id}
-            broker={brokerDetails.type}
-            id={id}
-            currency={currency}
-          />
+          !isOwnAsset && (
+            <SignalProviderButtons
+              onApply={onApply}
+              guestActions={personalDetails && personalDetails.guestActions}
+              leverage={leverageMax}
+              brokerId={brokerDetails.id}
+              broker={brokerDetails.type}
+              id={id}
+              currency={currency}
+            />
+          )
         ) : (
           <InvestmentUnauthButton
             label={t("program-details-page.description.follow-trade")}
             asset={ASSET.FOLLOW}
             header={t("program-details-page.description.follow-trade")}
-            message={t("program-details-page.description.unauth-follow-popup")}
+            message={t("unauth-popup.follow")}
             title={title}
           />
         )}
@@ -54,6 +57,7 @@ const _FollowControls: React.FC<Props> = ({
 };
 
 interface Props {
+  isOwnAsset: boolean;
   onApply: VoidFunction;
   description: ProgramDescriptionDataType;
 }

@@ -2,6 +2,7 @@ import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import React from "react";
@@ -21,6 +22,8 @@ import WalletTransactions from "./wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions/wallet-transactions.constants";
 
 const _WalletTables: React.FC<Props> = ({ currency }) => {
+  const { linkCreator } = useToLink();
+  const title = "Wallet";
   const [t] = useTranslation();
   const { tab } = useHashTab<TABS>(TABS.TRANSACTIONS_TAB);
   return (
@@ -39,13 +42,12 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
               )}
             >
               <Link
-                to={{
-                  pathname: WALLET_CURRENCY_FOLDER_ROUTE,
-                  as:
-                    composeWalletCurrencyUrl(currency.toLowerCase()) +
+                to={linkCreator(
+                  composeWalletCurrencyUrl(currency.toLowerCase()) +
                     TABS.TRANSACTIONS_TAB,
-                  state: "/ Wallet"
-                }}
+                  title,
+                  WALLET_CURRENCY_FOLDER_ROUTE
+                )}
               >
                 {t("wallet-page.tabs.transactions")}
               </Link>
@@ -66,13 +68,12 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 )}
               >
                 <Link
-                  to={{
-                    pathname: WALLET_CURRENCY_FOLDER_ROUTE,
-                    as:
-                      composeWalletCurrencyUrl(currency.toLowerCase()) +
+                  to={linkCreator(
+                    composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,
-                    state: "/ Wallet"
-                  }}
+                    title,
+                    WALLET_CURRENCY_FOLDER_ROUTE
+                  )}
                 >
                   {t("wallet-page.tabs.deposit")}
                 </Link>
@@ -86,13 +87,12 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 )}
               >
                 <Link
-                  to={{
-                    pathname: WALLET_CURRENCY_FOLDER_ROUTE,
-                    as:
-                      composeWalletCurrencyUrl(currency.toLowerCase()) +
+                  to={linkCreator(
+                    composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,
-                    state: "/ Wallet"
-                  }}
+                    title,
+                    WALLET_CURRENCY_FOLDER_ROUTE
+                  )}
                 >
                   {t("wallet-page.tabs.withdrawals")}
                 </Link>

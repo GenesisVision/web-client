@@ -1,3 +1,4 @@
+import { createToUrl } from "components/link/link.helper";
 import {
   FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
   FOLLOW_NOTIFICATIONS_ROUTE,
@@ -218,13 +219,3 @@ export const createProgramNotificationsToUrl = (
     PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
-
-export const createToUrl = (
-  as: string,
-  pathname: string,
-  state: string
-): ToType => ({
-  as,
-  pathname,
-  state: `/ ${state}`
-});

@@ -3,6 +3,7 @@ import { composeRequestValueFunc } from "components/table/components/filtering/d
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
+import accountsApi from "services/api-client/accounts-api";
 import fileApi from "services/api-client/file-api";
 import partnershipApi from "services/api-client/partnership-api";
 import programsApi from "services/api-client/programs-api";
@@ -41,10 +42,11 @@ const getProgramTradesExportFileUrl = (
 const getAccountTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
-): string => {
-  const dateFilter = getDateFiltersForQuery(dateRange);
-  const queryString = "?" + qs.stringify(dateFilter);
-  return `${process.env.REACT_APP_API_URL}/v1.0/tradingaccount/${id}/trades/export${queryString}`;
+): CancelablePromise<Blob> => {
+  const opts = getDateFiltersForRequest(dateRange);
+  return accountsApi
+    .exportTrades(id, authService.getAuthArg(), opts)
+    .then(blob => blob);
 };
 
 const getPeriodExportFileUrl = (

@@ -1,4 +1,6 @@
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
 .dashboard-block {
   &__header {
     display: flex;
@@ -7,6 +9,7 @@
   }
 
   &__link {
+    color: $text-light-color;
     display: inline-block;
     text-align: center;
     font-size: $font-size-h1;
@@ -18,5 +21,36 @@
 .dashboard-horizontal-list {
   display: flex;
   overflow-x: scroll;
-  @include details-block-left-padding();
+
+  &__shadow-wrapper {
+    display: flex;
+    @include details-block-left-margin();
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 70px;
+      z-index: 2;
+      //opacity: 0;
+      transition: opacity 250ms;
+      pointer-events: none;
+      right: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(19, 30, 38, 0),
+        $panel-background-color 50px
+      );
+    }
+    &--dark-shadow {
+      &:after {
+        background: linear-gradient(
+          90deg,
+          rgba(19, 30, 38, 0),
+          $background-color 50px
+        );
+      }
+    }
+  }
 }

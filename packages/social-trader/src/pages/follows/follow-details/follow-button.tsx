@@ -1,5 +1,5 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
+import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
 import { dispatchFollowDescription } from "pages/follows/follow-details/services/follow-details.service";
@@ -10,11 +10,7 @@ import { useDispatch } from "react-redux";
 import { CurrencyEnum } from "utils/types";
 
 const _FollowButton: React.FC<Props> = ({
-  guestActions: {
-    canSubscribeToExternalSignalCommonAccount,
-    canSubscribeToExternalSignalPrivateAccount,
-    canSubscribeToInternalSignal
-  } = {},
+  canFollow,
   onApply,
   leverage,
   brokerId,
@@ -30,10 +26,6 @@ const _FollowButton: React.FC<Props> = ({
     dispatch(dispatchFollowDescription(id)());
     onApply && onApply();
   }, [id]);
-  const canFollow =
-    canSubscribeToExternalSignalCommonAccount ||
-    canSubscribeToExternalSignalPrivateAccount ||
-    canSubscribeToInternalSignal;
   return (
     <>
       <GVButton
@@ -59,7 +51,7 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
-  guestActions?: AssetGuestActions;
+  canFollow?: boolean;
   onApply?: VoidFunction;
   leverage: number;
   isExternal: boolean;

@@ -3,6 +3,7 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
@@ -30,6 +31,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   program,
   isAuthenticated
 }) => {
+  const { linkCreator } = useToLink();
   const { t } = useTranslation();
   const {
     logo,
@@ -46,11 +48,11 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     balance,
     investorsCount
   } = program;
-  const programLinkProps = {
-    state: `/ ${title}`,
-    pathname: PROGRAM_DETAILS_FOLDER_ROUTE,
-    as: composeProgramDetailsUrl(program.url)
-  };
+  const programLinkProps = linkCreator(
+    composeProgramDetailsUrl(program.url),
+    title,
+    PROGRAM_DETAILS_FOLDER_ROUTE
+  );
   const { currency, amount } = balance;
   return (
     <TableRow

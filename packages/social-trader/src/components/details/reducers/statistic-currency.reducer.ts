@@ -1,14 +1,12 @@
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import { initialAccountCurrencyState } from "reducers/account-settings-reducer";
 import defaultReducer from "reducers/reducer-creators/default-reducer";
-import { getCookie } from "shared/utils/cookie";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 export type StatisticCurrencyDataType = CurrencyEnum;
 export type TStatisticCurrencyAction = ActionType<StatisticCurrencyDataType>;
 export type StatisticCurrencyState = StatisticCurrencyDataType;
 
-const initialState: StatisticCurrencyState =
-  (getCookie(ACCOUNT_CURRENCY_KEY) as StatisticCurrencyDataType) || "BTC";
+const initialState: StatisticCurrencyState = initialAccountCurrencyState;
 
 const statisticCurrencyReducerCreator = (type: string) => (
   state: StatisticCurrencyState = initialState,

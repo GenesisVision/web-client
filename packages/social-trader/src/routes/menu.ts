@@ -1,9 +1,17 @@
 import GVLogo from "components/gv-logo/gv-logo";
 import { DashboardIcon } from "components/icon/dashboard-icon";
 import { DetailsIcon } from "components/icon/details-icon";
+import { FollowIcon } from "components/icon/follow-icon";
 import { FundsIcon } from "components/icon/funds-icon";
+import { HistoryIcon } from "components/icon/history-icon";
+import { InvestIcon } from "components/icon/invest-icon";
+import { Mt4Icon } from "components/icon/mt4-icon";
+import { Mt5Icon } from "components/icon/mt5-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
+import { StatisticIcon } from "components/icon/statistic-icon";
+import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
+import { TradeIcon } from "components/icon/trade-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import {
   PROFILE_ROUTE,
@@ -14,24 +22,22 @@ import * as React from "react";
 
 import { HOME_ROUTE } from "./app.routes";
 import {
-  DASHBOARD_ROUTE,
   EVENTS_ROUTE,
   FINANCIAL_STATISTIC_ROUTE,
   INVESTMENTS_ROUTE,
   OVERVIEW_ROUTE,
   TRADING_ROUTE
 } from "./dashboard.routes";
-import { FUNDS_ROUTE } from "./funds.routes";
 import {
   GV_FOLLOW_ROUTE,
   GV_FUNDS_ROUTE,
-  GV_PROGRAMS_ROUTE
+  GV_PROGRAMS_ROUTE,
+  INVEST_ROUTE
 } from "./invest.routes";
-import { PROGRAMS_ROUTE } from "./programs.routes";
 import {
-  COMING_SOON_ROUTE,
   META_TRADER_4_ROUTE,
-  META_TRADER_5_ROUTE
+  META_TRADER_5_ROUTE,
+  TRADE_ROUTE
 } from "./trade.routes";
 
 export type TMenuItem = {
@@ -40,21 +46,6 @@ export type TMenuItem = {
   label?: string;
   children?: TMenuItem[];
 };
-
-const mainItems: TMenuItem[] = [
-  {
-    Icon: DashboardIcon,
-    label: "navigation.dashboard",
-    route: DASHBOARD_ROUTE
-  },
-  { Icon: ProgramsIcon, route: PROGRAMS_ROUTE, label: "navigation.programs" },
-  { Icon: FundsIcon, route: FUNDS_ROUTE, label: "navigation.funds" }
-];
-
-export const topMenuItems: TMenuItem[] = [
-  { Icon: GVLogo, route: HOME_ROUTE },
-  ...mainItems
-];
 
 const advancedMobileMenuItems: TMenuItem[] = [
   {
@@ -70,84 +61,71 @@ const advancedMobileMenuItems: TMenuItem[] = [
   { Icon: SettingsIcon, route: SETTINGS_ROUTE, label: "navigation.settings" }
 ];
 
-export const mobileMenuItems: TMenuItem[] = [
-  ...mainItems,
-  ...advancedMobileMenuItems
-];
-
 const mainMenuItemsUnion = [
   {
     Icon: DashboardIcon,
     label: "navigation.dashboard",
+    route: OVERVIEW_ROUTE,
     children: [
       {
-        Icon: SettingsIcon,
-        route: OVERVIEW_ROUTE,
-        label: "navigation.overview"
-      },
-      { Icon: SettingsIcon, route: EVENTS_ROUTE, label: "navigation.events" },
-      {
-        Icon: SettingsIcon,
+        Icon: InvestIcon,
         route: INVESTMENTS_ROUTE,
         label: "navigation.investments"
       },
-      { Icon: SettingsIcon, route: TRADING_ROUTE, label: "navigation.trading" },
       {
-        Icon: SettingsIcon,
+        Icon: TradeArrowsIcon,
+        route: TRADING_ROUTE,
+        label: "navigation.trading"
+      },
+      { Icon: HistoryIcon, route: EVENTS_ROUTE, label: "navigation.events" }
+      /*{
+        Icon: StatisticIcon,
         route: FINANCIAL_STATISTIC_ROUTE,
         label: "navigation.financial-statistic"
-      }
+      }*/
     ]
   },
   {
-    Icon: DashboardIcon,
+    Icon: InvestIcon,
     label: "navigation.invest",
+    route: INVEST_ROUTE,
     children: [
       {
-        Icon: SettingsIcon,
+        Icon: FollowIcon,
         route: GV_FOLLOW_ROUTE,
         label: "navigation.gv-follow"
       },
       {
-        Icon: SettingsIcon,
+        Icon: FundsIcon,
         route: GV_FUNDS_ROUTE,
         label: "navigation.gv-funds"
       },
       {
-        Icon: SettingsIcon,
+        Icon: ProgramsIcon,
         route: GV_PROGRAMS_ROUTE,
         label: "navigation.gv-programs"
       }
     ]
   },
   {
-    Icon: DashboardIcon,
+    Icon: TradeIcon,
     label: "navigation.trade",
+    route: TRADE_ROUTE,
     children: [
       {
-        Icon: SettingsIcon,
-        route: META_TRADER_4_ROUTE,
-        label: "navigation.mt4"
-      },
-      {
-        Icon: SettingsIcon,
+        Icon: Mt5Icon,
         route: META_TRADER_5_ROUTE,
         label: "navigation.mt5"
-      },
-      {
-        Icon: SettingsIcon,
-        route: COMING_SOON_ROUTE,
-        label: "navigation.coming-soon"
       }
     ]
   }
 ];
-export const topMenuItemsUnion: TMenuItem[] = [
+export const topMenuItems: TMenuItem[] = [
   { Icon: GVLogo, route: HOME_ROUTE },
   ...mainMenuItemsUnion
 ];
 
-export const mobileMenuItemsUnion: TMenuItem[] = [
+export const mobileMenuItems: TMenuItem[] = [
   ...mainMenuItemsUnion,
   ...advancedMobileMenuItems
 ];

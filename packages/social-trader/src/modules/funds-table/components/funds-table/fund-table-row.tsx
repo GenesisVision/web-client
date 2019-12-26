@@ -4,6 +4,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
@@ -26,99 +27,104 @@ const _FundsTableRow: React.FC<Props> = ({
   isAuthenticated,
   updateRow,
   title
-}) => (
-  <TableRow>
-    <TableCell className="funds-table__cell funds-table__cell--name">
-      <div className="funds-table__cell--avatar-title">
-        <Link
-          to={{
-            pathname: FUND_DETAILS_FOLDER_ROUTE,
-            as: composeFundsDetailsUrl(fund.url),
-            state: `/ ${title}`
-          }}
-        >
-          <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
-        </Link>
-        <div className="funds-table__cell--title">
-          <Link
-            to={{
-              pathname: FUND_DETAILS_FOLDER_ROUTE,
-              as: composeFundsDetailsUrl(fund.url),
-              state: `/ ${title}`
-            }}
-          >
-            <GVButton variant="text" color="secondary">
-              {fund.title}
-            </GVButton>
+}) => {
+  const { linkCreator } = useToLink();
+  const link = linkCreator(
+    composeFundsDetailsUrl(fund.url),
+    String(title),
+    FUND_DETAILS_FOLDER_ROUTE
+  );
+  return (
+    <TableRow>
+      <TableCell className="funds-table__cell funds-table__cell--name">
+        <div className="funds-table__cell--avatar-title">
+          <Link to={link}>
+            <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
           </Link>
+          <div className="funds-table__cell--title">
+            <Link
+              to={linkCreator(
+                composeFundsDetailsUrl(fund.url),
+                String(title),
+                FUND_DETAILS_FOLDER_ROUTE
+              )}
+            >
+              <GVButton variant="text" color="secondary">
+                {fund.title}
+              </GVButton>
+            </Link>
+          </div>
         </div>
-      </div>
-    </TableCell>
-    <TableCell className="funds-table__cell funds-table__cell--amount">
-      <NumberFormat
-        value={formatCurrencyValue(fund.balance.amount, fund.balance.currency)}
-        suffix={` ${fund.balance.currency}`}
-        displayType="text"
-      />
-    </TableCell>
-    <TableCell className="funds-table__cell">
-      <FundAssetContainer
-        assets={fund.topFundAssets}
-        type={FUND_ASSET_TYPE.SHORT}
-        size={3}
-        length={fund.totalAssetsCount}
-      />
-    </TableCell>
-    <TableCell className="funds-table__cell funds-table__cell--investors">
-      {fund.investorsCount}
-    </TableCell>
-    <TableCell className="programs-table__cell programs-table__cell--age">
-      {distanceDate(fund.creationDate)}
-    </TableCell>
-    <TableCell className="funds-table__cell funds-table__cell--drawdown">
-      <NumberFormat
-        value={formatValue(fund.statistic.drawdown, 2)}
-        suffix="%"
-        displayType="text"
-      />
-    </TableCell>
-    <TableCell className="funds-table__cell funds-table__cell--profit">
-      <Profitability
-        value={formatValue(fund.statistic.profit, 2)}
-        prefix={PROFITABILITY_PREFIX.SIGN}
-      >
+      </TableCell>
+      <TableCell className="funds-table__cell funds-table__cell--amount">
         <NumberFormat
-          value={formatValue(fund.statistic.profit, 2)}
-          suffix="%"
-          allowNegative={false}
+          value={formatCurrencyValue(
+            fund.balance.amount,
+            fund.balance.currency
+          )}
+          suffix={` ${fund.balance.currency}`}
           displayType="text"
         />
-      </Profitability>
-    </TableCell>
-    <TableCell className="funds-table__cell funds-table__cell--chart">
-      {fund.statistic && (
-        <ProgramSimpleChart data={fund.statistic.chart} programId={fund.id} />
-      )}
-    </TableCell>
-    {isAuthenticated && fund.personalDetails && (
-      <TableCell className="funds-table__cell funds-table__cell--favorite">
-        <ToggleAssetFavoriteButton
-          asset={fund}
-          updateRow={updateRow}
-          withDispatch={withDispatch}
-          assetType={ASSET.FUND}
-          id={fund.id}
-          isFavorite={fund.personalDetails.isFavorite}
-        >
-          <FavoriteIcon
-            id={fund.id}
-            selected={fund.personalDetails.isFavorite}
-          />
-        </ToggleAssetFavoriteButton>
       </TableCell>
-    )}
-  </TableRow>
-);
+      <TableCell className="funds-table__cell">
+        <FundAssetContainer
+          assets={fund.topFundAssets}
+          type={FUND_ASSET_TYPE.SHORT}
+          size={3}
+          length={fund.totalAssetsCount}
+        />
+      </TableCell>
+      <TableCell className="funds-table__cell funds-table__cell--investors">
+        {fund.investorsCount}
+      </TableCell>
+      <TableCell className="programs-table__cell programs-table__cell--age">
+        {distanceDate(fund.creationDate)}
+      </TableCell>
+      <TableCell className="funds-table__cell funds-table__cell--drawdown">
+        <NumberFormat
+          value={formatValue(fund.statistic.drawdown, 2)}
+          suffix="%"
+          displayType="text"
+        />
+      </TableCell>
+      <TableCell className="funds-table__cell funds-table__cell--profit">
+        <Profitability
+          value={formatValue(fund.statistic.profit, 2)}
+          prefix={PROFITABILITY_PREFIX.SIGN}
+        >
+          <NumberFormat
+            value={formatValue(fund.statistic.profit, 2)}
+            suffix="%"
+            allowNegative={false}
+            displayType="text"
+          />
+        </Profitability>
+      </TableCell>
+      <TableCell className="funds-table__cell funds-table__cell--chart">
+        {fund.statistic && (
+          <ProgramSimpleChart data={fund.statistic.chart} programId={fund.id} />
+        )}
+      </TableCell>
+      {isAuthenticated && fund.personalDetails && (
+        <TableCell className="funds-table__cell funds-table__cell--favorite">
+          <ToggleAssetFavoriteButton
+            asset={fund}
+            updateRow={updateRow}
+            withDispatch={withDispatch}
+            assetType={ASSET.FUND}
+            id={fund.id}
+            isFavorite={fund.personalDetails.isFavorite}
+          >
+            <FavoriteIcon
+              id={fund.id}
+              selected={fund.personalDetails.isFavorite}
+            />
+          </ToggleAssetFavoriteButton>
+        </TableCell>
+      )}
+    </TableRow>
+  );
+};
 
 interface Props {
   updateRow?: UpdateRowFuncType;

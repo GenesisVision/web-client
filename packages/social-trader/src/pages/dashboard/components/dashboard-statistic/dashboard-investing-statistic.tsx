@@ -1,6 +1,5 @@
-import GVButton from "components/gv-button";
-import Link from "components/link/link";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
+import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
@@ -12,11 +11,16 @@ import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "routes/invest.routes";
 
 import { getTotalInvestingStatistic } from "../../services/dashboard.service";
 
-const _DashboardInvestingStatistic: React.FC<Props> = () => {
+const _DashboardInvestingStatistic: React.FC<Props> = ({
+  landscapeTablet,
+  tablet
+}) => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
   return (
     <DashboardStatisticContainer
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
       EmptyBlock={DashboardInvestingEmpty}
       currency={currency}
       label={t("dashboard-page.statistic.investing")}
@@ -38,29 +42,47 @@ const _DashboardInvestingStatistic: React.FC<Props> = () => {
   );
 };
 
-interface Props {}
+interface Props {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
+}
 
 const DashboardInvestingEmpty: React.FC = React.memo(() => {
   const [t] = useTranslation();
   return (
-    <div className="dashboard-statistic__create-block dashboard-statistic__values">
-      <h1>{t("dashboard-page.statistic.get-started-title")}</h1>
-      <div className="dashboard-statistic__create-block-text">
-        {t("dashboard-page.statistic.get-started-invest")}
-      </div>
-      <div className="dashboard-statistic__create-block-links">
-        <div className="dashboard-statistic__create-block-link">
-          <Link to={GV_PROGRAMS_ROUTE}>
-            <GVButton color="primary">{t("navigation.gv-programs")}</GVButton>
-          </Link>
-        </div>
-        <div className="dashboard-statistic__create-block-link">
-          <Link to={GV_FUNDS_ROUTE}>
-            <GVButton color="primary">{t("navigation.gv-funds")}</GVButton>
-          </Link>
-        </div>
-      </div>
-    </div>
+    <DashboardNewUserBlock
+      leftField={{
+        link: GV_PROGRAMS_ROUTE,
+        linkLabel: t(
+          "dashboard-page.statistic.get-started.investing.left-field.button"
+        ),
+        text: (
+          <>
+            <span className="dashboard-new-user-block__text--muted">
+              {t(
+                "dashboard-page.statistic.get-started.investing.left-field.text"
+              )}
+            </span>
+            {t(
+              "dashboard-page.statistic.get-started.investing.left-field.text-2"
+            )}
+          </>
+        )
+      }}
+      rightField={{
+        link: GV_FUNDS_ROUTE,
+        linkLabel: t(
+          "dashboard-page.statistic.get-started.investing.right-field.button"
+        ),
+        text: (
+          <>
+            {t(
+              "dashboard-page.statistic.get-started.investing.right-field.text"
+            )}
+          </>
+        )
+      }}
+    />
   );
 });
 

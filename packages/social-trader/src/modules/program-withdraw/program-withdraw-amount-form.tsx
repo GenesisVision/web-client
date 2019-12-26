@@ -49,15 +49,17 @@ const _ProgramWithdrawAmountForm: React.FC<
 
   return (
     <form id="withdraw-form" onSubmit={handleSubmit}>
-      <DialogField>
-        <GVFormikField
-          type="checkbox"
-          color="primary"
-          name={FIELDS.withdrawAll}
-          label={<span>{t("withdraw-program.withdraw-all")}</span>}
-          component={GVCheckbox}
-        />
-      </DialogField>
+      {!isOwner && (
+        <DialogField>
+          <GVFormikField
+            type="checkbox"
+            color="primary"
+            name={FIELDS.withdrawAll}
+            label={<span>{t("withdraw-program.withdraw-all")}</span>}
+            component={GVCheckbox}
+          />
+        </DialogField>
+      )}
       <InputAmountField
         emptyInit={emptyInit}
         name={FIELDS.amount}

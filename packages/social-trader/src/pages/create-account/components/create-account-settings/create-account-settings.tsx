@@ -16,27 +16,33 @@ import Leverage from "components/assets/fields/leverage";
 import SettingsBlock from "components/settings-block/settings-block";
 import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
+import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useSelector } from "react-redux";
+import { kycConfirmedSelector } from "reducers/header-reducer";
 import { compose } from "redux";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
 const _CreateAccountSettings: React.FC<Props> = ({
+  setFieldTouched,
   t,
   broker,
   setFieldValue,
   handleSubmit,
   isValid,
   isSubmitting,
-  values: { brokerAccountTypeId, depositAmount, currency }
+  values: { brokerAccountTypeId, depositAmount, currency, enterMinDeposit }
 }) => {
+  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const accountType = broker.accountTypes.find(
     ({ id }) => brokerAccountTypeId === id
   )!;
   const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
+  const kycRequired = !isKycConfirmed && accountType.isKycRequired;
   return (
     <form onSubmit={validateAndSubmit}>
       <SettingsBlock
@@ -68,23 +74,36 @@ const _CreateAccountSettings: React.FC<Props> = ({
           />
         </AssetFields>
       </SettingsBlock>
-      <DepositDetailsBlock
-        blockNumber={2}
-        availableName={CREATE_ACCOUNT_FIELDS.available}
-        rateName={CREATE_ACCOUNT_FIELDS.rate}
-        walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
-        inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
-        depositAmount={depositAmount}
-        minimumDepositAmount={minimumDepositAmount}
-        setFieldValue={setFieldValue}
-        assetCurrency={currency as CurrencyEnum}
-      />
-      <CreateAssetNavigation asset={"ACCOUNT"} isSubmitting={isSubmitting} />
+      {kycRequired ? (
+        <KycRequiredBlock />
+      ) : (
+        <>
+          <DepositDetailsBlock
+            setFieldTouched={setFieldTouched}
+            enterMinDeposit={enterMinDeposit}
+            enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
+            blockNumber={2}
+            availableName={CREATE_ACCOUNT_FIELDS.available}
+            rateName={CREATE_ACCOUNT_FIELDS.rate}
+            walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
+            inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
+            depositAmount={depositAmount}
+            minimumDepositAmount={minimumDepositAmount}
+            setFieldValue={setFieldValue}
+            assetCurrency={currency as CurrencyEnum}
+          />
+          <CreateAssetNavigation
+            asset={"ACCOUNT"}
+            isSubmitting={isSubmitting}
+          />
+        </>
+      )}
     </form>
   );
 };
 
 export enum CREATE_ACCOUNT_FIELDS {
+  enterMinDeposit = "enterMinDeposit",
   available = "available",
   rate = "rate",
   depositWalletId = "depositWalletId",
@@ -95,6 +114,7 @@ export enum CREATE_ACCOUNT_FIELDS {
 }
 
 export interface ICreateAccountSettingsFormValues {
+  [CREATE_ACCOUNT_FIELDS.enterMinDeposit]?: boolean;
   [CREATE_ACCOUNT_FIELDS.available]: number;
   [CREATE_ACCOUNT_FIELDS.rate]: number;
   [CREATE_ACCOUNT_FIELDS.leverage]: number;

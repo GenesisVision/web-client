@@ -19,13 +19,13 @@ const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
       logo: "",
       amount: getRandomInteger(0, 100),
       currency: "GVT",
-      color: ""
+      color: "White"
     },
     second: {
       logo: "",
       amount: getRandomInteger(0, 100),
       currency: "GVT",
-      color: ""
+      color: "White"
     }
   }
 });

@@ -124,8 +124,8 @@ const _ConvertAssetSettings: React.FC<Props> = ({
           blockNumber={"02"}
         >
           <SignalsFeeFormPartial
-            volumeFeeFieldName={CONVERT_ASSET_FIELDS.signalVolumeFee}
-            successFeeFieldName={CONVERT_ASSET_FIELDS.signalSuccessFee}
+            volumeFeeFieldName={CONVERT_ASSET_FIELDS.volumeFee}
+            successFeeFieldName={CONVERT_ASSET_FIELDS.successFee}
           />
         </SettingsBlock>
       )}
@@ -160,8 +160,8 @@ export interface IConvertAssetSettingsFormValues {
   [CONVERT_ASSET_FIELDS.periodLength]?: number;
   [CONVERT_ASSET_FIELDS.successFee]?: number;
   [CONVERT_ASSET_FIELDS.stopOutLevel]: number;
-  [CONVERT_ASSET_FIELDS.signalSuccessFee]?: number;
-  [CONVERT_ASSET_FIELDS.signalVolumeFee]?: number;
+  [CONVERT_ASSET_FIELDS.successFee]?: number;
+  [CONVERT_ASSET_FIELDS.volumeFee]?: number;
   [CONVERT_ASSET_FIELDS.isSignalProgram]: boolean;
   [CONVERT_ASSET_FIELDS.hasInvestmentLimit]: boolean;
   [CONVERT_ASSET_FIELDS.title]: string;

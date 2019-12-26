@@ -2,6 +2,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
@@ -25,17 +26,16 @@ import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
+  const { linkCreator } = useToLink();
   const { t } = useTranslation();
+  const link = linkCreator(
+    composeFundsDetailsUrl(fund.url),
+    String(title),
+    FUND_DETAILS_FOLDER_ROUTE
+  );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <TableCardActionsItem
-        to={{
-          as: composeFundsDetailsUrl(fund.url),
-          pathname: FUND_DETAILS_FOLDER_ROUTE,
-          state: `/ ${title}`
-        }}
-        onClick={clearAnchor}
-      >
+      <TableCardActionsItem to={link} onClick={clearAnchor}>
         {t("fund-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
@@ -58,10 +58,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
       subTitle={fund.owner.username}
       logo={fund.logo}
       color={fund.color}
-      detailsUrl={{
-        pathname: composeFundsDetailsUrl(fund.url),
-        state: `/ ${title}`
-      }}
+      detailsUrl={link}
       managerUrl={managerToPathCreator(fund.owner.url, title)}
       renderActions={renderActions}
     >

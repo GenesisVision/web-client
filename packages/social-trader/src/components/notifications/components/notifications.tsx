@@ -5,6 +5,7 @@ import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import NotificationsGroup from "components/notifications/components/notification-group/notification-group";
 import Spinner from "components/spiner/spiner";
 import dayjs from "dayjs";
@@ -54,6 +55,7 @@ const _Notifications: React.FC<Props> = ({
   closeNotifications,
   clearNotifications
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { isPending, sendRequest } = useApiRequest({
     request: fetchNotifications
@@ -95,7 +97,10 @@ const _Notifications: React.FC<Props> = ({
               {count}
             </Chip>
           </div>
-          <Link to={NOTIFICATIONS_ROUTE} onClick={() => closeNotifications()}>
+          <Link
+            to={linkCreator(NOTIFICATIONS_ROUTE)}
+            onClick={() => closeNotifications()}
+          >
             <div className="profile-avatar notifications__link">
               <Icon type={"controls"} />
             </div>

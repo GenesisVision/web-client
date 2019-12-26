@@ -8,6 +8,7 @@ import {
   CancelablePromise,
   InvestmentEventViewModels,
   SignalProviderSubscribers,
+  TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
 import { NextPageContext } from "next";
@@ -104,7 +105,7 @@ export const getOpenPositions = (id: string) => (
 
 export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => {
+): ActionType<CancelablePromise<TradesSignalViewModel>> => {
   return fetchTradesAction(id, filters);
 };
 

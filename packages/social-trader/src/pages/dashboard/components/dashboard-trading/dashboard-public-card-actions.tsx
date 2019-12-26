@@ -1,3 +1,4 @@
+import { useToLink } from "components/link/link.helper";
 import {
   TableCardActions,
   TableCardActionsItem
@@ -14,15 +15,12 @@ import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
-import React, { useCallback, useContext } from "react";
-import { META_TRADER_4_ROUTE } from "routes/trade.routes";
+import React, { useCallback } from "react";
 import { useTranslation } from "shared/i18n";
 import {
   createFundSettingsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
-
-import { TitleContext } from "../../dashboard.constants";
 
 const _DashboardPublicCardActions: React.FC<
   IDashboardPublicCardActionsProps
@@ -44,23 +42,17 @@ const _DashboardPublicCardActions: React.FC<
   showTerminal,
   showClosePeriod
 }) => {
-  const title = useContext(TitleContext);
+  const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
-  const terminalLink = {
-    pathname: getTerminalLink(brokerType),
-    state: `/ ${title}`
-  };
+  const terminalLink = linkCreator(getTerminalLink(brokerType));
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
-  const settingsLink = createSettingsToUrlMethod(url, title);
+  const settingsLink = createSettingsToUrlMethod(url, contextTitle);
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
-  const makeProgramLink = {
-    pathname: makeProgramLinkMethod(id),
-    state: `/ ${title}`
-  };
+  const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
   const handleOnApply = useCallback(() => {
     clearAnchor();
     onApply();
@@ -86,7 +78,7 @@ const _DashboardPublicCardActions: React.FC<
       )}
       {showClosePeriod && <ClosePeriodButton id={id} />}
       {canChangePassword && (
-        <ChangeAccountPasswordButton id={id} title={title} />
+        <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
     </TableCardActions>
   );

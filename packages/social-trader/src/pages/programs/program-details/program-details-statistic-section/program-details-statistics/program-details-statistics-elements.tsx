@@ -41,7 +41,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
               suffix={` ${statisticCurrency}`}
             />
           </StatisticItem>
-          {statistic.investors && (
+          {statistic.investors !== null && (
             <StatisticItem
               label={
                 <TooltipLabel
@@ -57,7 +57,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
               />
             </StatisticItem>
           )}
-          {statistic.subscribers && (
+          {statistic.subscribers !== null && (
             <StatisticItem
               label={
                 <TooltipLabel
@@ -73,7 +73,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
               />
             </StatisticItem>
           )}
-          {statistic.lastPeriodStarts && (
+          {!!statistic.lastPeriodStarts && (
             <div className="details-statistics__period">
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}

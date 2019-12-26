@@ -1,6 +1,7 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import TableCell from "components/table/components/table-cell";
@@ -20,6 +21,9 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   assetCurrency
 }) => {
   const {
+    fixedVolume,
+    fixedCurrency,
+    percent,
     status,
     isExternal,
     subscriptionDate,
@@ -28,6 +32,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     mode,
     asset: { url, title, logo, color, programDetails }
   } = provider;
+  const { linkCreator } = useToLink();
   const level = programDetails ? programDetails.level : undefined;
   const levelProgress = programDetails
     ? programDetails.levelProgress
@@ -35,7 +40,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   return (
     <TableRow stripy>
       <TableCell>
-        <Link to={composeFollowDetailsUrl(url)}>
+        <Link to={linkCreator(composeFollowDetailsUrl(url))}>
           <div className="subscriptions-table__center-cell">
             <AssetAvatar
               className="subscriptions-table__buttons-cell-item--first"
@@ -61,30 +66,41 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
           <div className="subscriptions-table__buttons-cell-item--first">
             {openTolerancePercent} %
           </div>
-          {status !== "Canceled" && (
-            <div className="subscriptions-table__center-cell">
-              <div className="subscriptions-table__buttons-cell-item">
-                <EditFollowButton
-                  size={GV_BTN_SIZE.MIDDLE}
-                  signalSubscription={provider}
-                  onApply={onApply}
-                  currency={assetCurrency}
-                  id={provider.asset.id}
-                  tradingAccountId={id}
-                />
-              </div>
-              <div className="subscriptions-table__buttons-cell-item ">
-                <UnFollowButton
-                  size={GV_BTN_SIZE.MIDDLE}
-                  onApply={onApply}
-                  id={provider.asset.id}
-                  tradingAccountId={id}
-                  isExternal={isExternal}
-                />
-              </div>
-            </div>
-          )}
         </div>
+      </TableCell>
+      <TableCell>
+        {percent && <>{percent} %</>}
+        {fixedVolume && (
+          <>
+            {fixedVolume} {fixedCurrency}
+          </>
+        )}
+        {percent === null && fixedVolume === null && <> - </>}
+      </TableCell>
+      <TableCell>
+        {status !== "Canceled" && (
+          <div className="subscriptions-table__center-cell">
+            <div className="subscriptions-table__buttons-cell-item">
+              <EditFollowButton
+                size={GV_BTN_SIZE.MIDDLE}
+                signalSubscription={provider}
+                onApply={onApply}
+                currency={assetCurrency}
+                id={provider.asset.id}
+                tradingAccountId={id}
+              />
+            </div>
+            <div className="subscriptions-table__buttons-cell-item ">
+              <UnFollowButton
+                size={GV_BTN_SIZE.MIDDLE}
+                onApply={onApply}
+                id={provider.asset.id}
+                tradingAccountId={id}
+                isExternal={isExternal}
+              />
+            </div>
+          </div>
+        )}
       </TableCell>
     </TableRow>
   );

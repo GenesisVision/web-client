@@ -2,7 +2,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
-import CloseAsset, { CLOSEABLE_ASSET } from "./close-asset";
+import CloseAsset, { CloseableAssetType } from "./close-asset";
 
 const _CloseAssetBlock: React.FC<Props> = ({
   asset,
@@ -24,7 +24,7 @@ const _CloseAssetBlock: React.FC<Props> = ({
 
 interface Props extends WithTranslation {
   label?: string;
-  asset: CLOSEABLE_ASSET;
+  asset: CloseableAssetType;
   id: string;
   canCloseAsset: boolean;
   closeAsset: () => void;

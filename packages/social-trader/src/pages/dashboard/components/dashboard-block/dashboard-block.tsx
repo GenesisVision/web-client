@@ -7,6 +7,8 @@ import Link from "components/link/link";
 import React from "react";
 
 const _DashboardBlock: React.FC<Props> = ({
+  landscapeTablet,
+  tablet,
   label,
   all,
   children,
@@ -14,6 +16,8 @@ const _DashboardBlock: React.FC<Props> = ({
 }) => {
   return (
     <DetailsBlock
+      landscapeTablet={landscapeTablet}
+      tablet={tablet}
       table
       className={classNames("dashboard-block__container", className)}
     >
@@ -37,6 +41,8 @@ const _DashboardBlock: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  landscapeTablet?: boolean;
+  tablet?: boolean;
   label?: string;
   all?: string;
 }

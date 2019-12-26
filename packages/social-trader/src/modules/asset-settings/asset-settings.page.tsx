@@ -2,10 +2,10 @@ import "./asset-settings.scss";
 
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
@@ -17,10 +17,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   redirectToAsset,
   description
 }) => {
-  const successMessage =
-    (asset === ASSET.PROGRAM && "edit-program.notifications.edit-success") ||
-    (asset === ASSET.FUND && "edit-fund.notifications.edit-success") ||
-    "";
+  const successMessage = `edit-asset.notifications.edit-success.${asset.toLowerCase()}`;
   const { sendRequest: editRequest } = useApiRequest({
     middleware: [dispatchDescription],
     request: editAsset,
@@ -54,19 +51,16 @@ const _AssetsEditPage: React.FC<Props> = ({
           ...currentValues,
           ...values,
           investmentLimit
-        },
-        asset
+        }
       }).finally(resetForm);
     },
-    [asset, description, editAsset]
+    [description, editAsset]
   );
   const applyCloseAsset = useCallback(() => redirectToAsset(description!.id), [
     description,
     redirectToAsset
   ]);
-  const title = t("asset-settings.title", {
-    asset: String(asset).toLowerCase()
-  });
+  const title = t("asset-settings.title");
   return (
     <Page title={title}>
       <div className="asset-settings">
@@ -79,7 +73,7 @@ const _AssetsEditPage: React.FC<Props> = ({
 
 interface Props {
   redirectToAsset: (id: string) => void;
-  asset: ASSET;
+  asset: CLOSEABLE_ASSET;
   description?: AssetDescriptionType;
   dispatchDescription: () => void;
   settingsBlocks: (

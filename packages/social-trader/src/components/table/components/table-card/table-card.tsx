@@ -75,7 +75,7 @@ export const TableCardTableButtons: React.FC<
 ));
 
 export const TableCardTitle: React.FC<
-  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) =>
   url ? (
     <Link className="table-card__title" to={url}>
@@ -87,7 +87,7 @@ export const TableCardTitle: React.FC<
 );
 
 export const TableCardSubTitle: React.FC<
-  { url?: ToType } & React.HTMLAttributes<HTMLDivElement>
+  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
 > = React.memo(({ children, url }) => {
   return (
     <div className="table-card__subtitle">
@@ -206,7 +206,7 @@ export const TableCardChartBlock: React.FC<
 ));
 
 interface ITableCardAvatarProps {
-  url?: ToType;
+  url?: ToType | string;
   hasAvatar?: boolean;
   logo: string;
   levelProgress?: number;
@@ -230,8 +230,8 @@ interface ITableCardTopBlockProps {
   title?: string;
   color?: string;
   extraBlock?: JSX.Element;
-  managerUrl?: ToType;
-  detailsUrl?: ToType;
+  managerUrl?: ToType | string;
+  detailsUrl?: ToType | string;
   renderActions?: (props: {
     clearAnchor: VoidFunction;
     anchor: TAnchor;

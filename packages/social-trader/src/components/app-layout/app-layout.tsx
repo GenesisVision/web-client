@@ -6,7 +6,6 @@ import NotificationsContainer from "components/notifications/components/notifica
 import AlertMessageList from "modules/alert-message/components/alert-message-list/alert-message-list";
 import React, { ComponentType, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { mobileMenuItemsUnion, topMenuItemsUnion } from "routes/menu";
 
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   const dispatch = useDispatch();
@@ -18,10 +17,7 @@ const _AppLayout: ComponentType<Props> = ({ children }) => {
     <div className="app__wrapper root">
       <div className="app">
         <div className="app__header">
-          <HeaderContainer
-            topMenuItems={topMenuItemsUnion}
-            mobileMenuItems={mobileMenuItemsUnion}
-          />
+          <HeaderContainer />
         </div>
         <div className="app__main">{children}</div>
         <NotificationsContainer />

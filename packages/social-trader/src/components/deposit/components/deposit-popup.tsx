@@ -6,7 +6,7 @@ import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import {
   fetchWallets,
-  TWalltetsBaseData
+  TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -84,7 +84,7 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   asset: ASSET;
-  data: TWalltetsBaseData;
+  data: TWalletsAvailableData;
   hasEntryFee?: boolean;
   ownAsset?: boolean;
 }

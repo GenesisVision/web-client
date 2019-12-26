@@ -1,5 +1,5 @@
 import Link from "components/link/link";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { useToLink } from "components/link/link.helper";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardStatisticTable from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-table";
@@ -19,27 +19,21 @@ const _DashboardStatistic: React.FC<Props> = ({
   data,
   currency
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const {
-    events,
-    profits,
-    assetsUnderManagement,
-    programsCount,
-    fundsCount
-  } = data;
+  const { equity, events, profits, programsCount, fundsCount } = data;
   const hasNotInvesting =
     programsCount !== undefined && fundsCount !== undefined
       ? !(programsCount && fundsCount)
       : true;
-  const hasNotTrading =
-    assetsUnderManagement !== undefined ? !assetsUnderManagement : true;
+  const hasNotTrading = equity !== undefined ? !equity : true;
   const hasNotAssets = hasNotInvesting && hasNotTrading;
   if (hasNotAssets) return <EmptyBlock />;
   return (
     <>
       <div>
         <div className="dashboard-statistic__values">
-          <StatisticItemList>{renderValues(data)}</StatisticItemList>
+          {renderValues(data)}
           <DashboardStatisticPeriods
             withProfitability
             currency={currency}
@@ -49,7 +43,9 @@ const _DashboardStatistic: React.FC<Props> = ({
         <DashboardStatisticTable data={events.items} />
       </div>
       <div className="dashboard-statistic__see-all">
-        <Link to={EVENTS_ROUTE}>{t("dashboard-page.statistic.see-all")}</Link>
+        <Link to={linkCreator(EVENTS_ROUTE)}>
+          {t("dashboard-page.statistic.see-all")}
+        </Link>
       </div>
     </>
   );

@@ -6,7 +6,8 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
-import { OrderModel } from "gv-api-web";
+import TradesHistoryFeesTooltip from "components/trades-history-fees-tooltip/trades-history-fees-tooltip";
+import { OrderSignalModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
@@ -99,7 +100,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
 };
 
 interface Props {
-  trade: OrderModel;
+  trade: OrderSignalModel;
   showSwaps: boolean;
   showTickets: boolean;
 }

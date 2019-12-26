@@ -1,0 +1,41 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint";
+
+.asset-block {
+  &--side {
+    display: flex;
+    padding-left: $padding-big;
+    .asset-block__description-block {
+      width: 30%;
+    }
+    .asset-block__assets-block {
+      width: 70%;
+    }
+  }
+
+  &__title {
+    margin-bottom: $padding-xsmall;
+  }
+  &__description-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: $padding-large;
+    &--side {
+      align-items: flex-start;
+    }
+  }
+  &__description {
+    max-width: 500px;
+    color: $text-dark-color;
+    font-size: $font-size-common;
+    margin-bottom: $padding-big;
+    text-align: center;
+    &--side {
+      text-align: left;
+    }
+  }
+  padding-top: $padding-large;
+  padding-bottom: $padding-large;
+}

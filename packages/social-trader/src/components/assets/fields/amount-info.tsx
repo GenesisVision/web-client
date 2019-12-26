@@ -11,7 +11,7 @@ const _AmountInfo: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="deposit-details__available-list">
+    <div>
       <div className="deposit-details__available-amount">
         {t("create-program-page.settings.fields.min-deposit")}
         <span className={"deposit-details__available-amount-value"}>

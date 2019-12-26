@@ -3,7 +3,7 @@ import "./auth-layout.scss";
 import GvBrand from "components/gv-brand/gv-brand";
 import GvLogo from "components/gv-logo/gv-logo";
 import Link from "components/link/link";
-import useRole from "hooks/use-role.hook";
+import { useToLink } from "components/link/link.helper";
 import { NextPage } from "next";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -18,16 +18,14 @@ const _AuthLayout: NextPage<Props> = ({
   Footer,
   footerAuthRoute
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const role = useRole();
   return (
     <div className="root auth page">
       <div className="auth__left">
         <Link
           className="navigation__link auth__logo"
-          to={{
-            pathname: HOME_ROUTE
-          }}
+          to={linkCreator(HOME_ROUTE)}
         >
           <>
             <GvLogo />
@@ -36,11 +34,11 @@ const _AuthLayout: NextPage<Props> = ({
         </Link>
 
         <blockquote className="auth__quote">
-          {t(`${role ? `${role}.` : ""}auth-quotes.${quoteNo}.quote`)}
+          {t(`auth-quotes.${quoteNo}.quote`)}
           <footer className="auth__quote-footer">
             —{" "}
             <cite className="auth__quote-author">
-              {t(`${role ? `${role}.` : ""}auth-quotes.${quoteNo}.author`)}
+              {t(`auth-quotes.${quoteNo}.author`)}
             </cite>
           </footer>
         </blockquote>

@@ -1,6 +1,7 @@
 @import "./_breakpoint.scss";
 
 //paddings
+$padding-xxxxlarge: 190px;
 $padding-xxlarge: 108px;
 $padding-xlarge: 90px;
 $padding-large: 80px;
@@ -138,6 +139,13 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   padding-left: $details-block-padding;
   @include media-breakpoint-landscape-phone() {
     padding-left: $details-block-padding;
+  }
+}
+
+@mixin details-block-left-margin() {
+  margin-left: $details-block-padding;
+  @include media-breakpoint-landscape-phone() {
+    margin-left: $details-block-padding;
   }
 }
 

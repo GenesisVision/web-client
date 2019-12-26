@@ -30,6 +30,7 @@ const _DashboardTotal: React.FC<Props> = ({
     <div className="dashboard-total__values">
       <StatisticItemList>
         <DashboardValueItem
+          big
           label={t("dashboard-page.total.total")}
           value={total}
           currency={currency}
@@ -62,11 +63,14 @@ const _DashboardTotal: React.FC<Props> = ({
         )}
       </StatisticItemList>
       {hasProfits && (
-        <DashboardStatisticPeriods
-          data={profits}
-          currency={currency}
-          withProfitability
-        />
+        <>
+          <h5>{t("dashboard-page.total.performance")}</h5>
+          <DashboardStatisticPeriods
+            data={profits}
+            currency={currency}
+            withProfitability
+          />
+        </>
       )}
     </div>
   );

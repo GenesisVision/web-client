@@ -186,14 +186,16 @@ const TransferSelectField: React.FC<{
     const [t] = useTranslation();
     return (
       <>
-        <DialogField>
-          <WalletSelect
-            name={name}
-            label={label}
-            items={items}
-            onChange={onChange}
-          />
-        </DialogField>
+        {items.length > 1 && (
+          <DialogField>
+            <WalletSelect
+              name={name}
+              label={label}
+              items={items}
+              onChange={onChange}
+            />
+          </DialogField>
+        )}
         <DialogField>
           <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
             {`${value} ${currency}`}

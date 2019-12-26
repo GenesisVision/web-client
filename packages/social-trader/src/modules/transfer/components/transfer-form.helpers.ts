@@ -92,12 +92,15 @@ export const getTransferItemLoader = (): TransferItemType => ({
 });
 
 export const getTransferFormLoaderData = (
-  currentItem: WalletItemType
+  currentItem: WalletItemType,
+  wallets: WalletItemType[]
 ): TransferFormItemsType => {
-  const otherItems = [getTransferItemLoader()];
+  const otherWallet = wallets.filter(
+    ({ currency }) => currency !== currentItem.currency
+  )[0];
   return {
-    destinationItems: [...otherItems, currentItem],
-    sourceItems: [...otherItems, currentItem]
+    destinationItems: [otherWallet, currentItem],
+    sourceItems: [otherWallet, currentItem]
   };
 };
 

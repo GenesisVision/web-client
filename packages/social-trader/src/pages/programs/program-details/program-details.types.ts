@@ -10,6 +10,7 @@ import {
   ProgramPeriodsViewModel,
   ProgramProfitPercentCharts,
   SignalProviderSubscribers,
+  TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
 import { CurrencyEnum } from "utils/types";
@@ -66,6 +67,7 @@ export type ProgramDescriptionDataType = ProgramFollowDetailsFull;
 export type ProgramBalanceChartDataType = ProgramBalanceChart;
 export type SignalProviderSubscribersDataType = SignalProviderSubscribers;
 export type ProgramPeriodsDataType = ProgramPeriodsViewModel;
-export type TradesDataType = TradesViewModel;
+export type OpenTradesDataType = TradesViewModel;
+export type TradesDataType = TradesSignalViewModel;
 export type EventsDataType = InvestmentEventViewModels;
 export type LevelParametersDataType = LevelsParamsInfo;

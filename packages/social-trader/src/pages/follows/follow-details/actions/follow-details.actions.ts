@@ -12,6 +12,7 @@ import {
   ProgramBalanceChart,
   ProgramProfitPercentCharts,
   SignalProviderSubscribers,
+  TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
 import { FollowAbsoluteProfitChartDataType } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
@@ -140,9 +141,9 @@ export const fetchOpenPositionsAction = (
 export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ActionType<CancelablePromise<TradesSignalViewModel>> => ({
   type: FOLLOW_TRADES,
-  payload: programsApi.getProgramTrades(id, filters)
+  payload: programsApi.getAssetTrades(id, filters)
 });
 
 export const fetchSubscriptionsAction = (

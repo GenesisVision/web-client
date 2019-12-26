@@ -39,7 +39,7 @@ const _PieStatisticItem: React.FC<Props> = ({
           color={color}
         />
       </div>
-      <StatisticItem big accent label={renderLabel}>
+      <StatisticItem accent label={renderLabel}>
         {renderValue}
       </StatisticItem>
     </div>

@@ -1,9 +1,6 @@
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
-import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
-import useAnchor from "hooks/anchor.hook";
+import { useToLink } from "components/link/link.helper";
+import MenuTooltip from "components/menu-tooltip/menu-tooltip";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
@@ -11,16 +8,15 @@ import { TMenuItem } from "routes/menu";
 import NavigationItem from "./navigation-item";
 
 const _MenuNavigationItem: React.FC<Props> = ({
-  item: { Icon, route, label, children },
+  item: { Icon, route = "", label, children },
   popover
 }) => {
+  const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const renderNavigationItem = ({ Icon, route, label }: TMenuItem) => (
+  const renderNavigationItem = ({ Icon, route = "", label }: TMenuItem) => (
     <NavigationItem
       icon={<Icon primary />}
-      href={route}
-      onClick={clearAnchor}
+      href={linkCreator(route)}
       key={label}
     >
       {label && t(label)}
@@ -30,23 +26,14 @@ const _MenuNavigationItem: React.FC<Props> = ({
   const haveSecondLevel = !!children && !popover;
   return (
     <>
-      <NavigationItem icon={<Icon primary />} href={route} onClick={setAnchor}>
-        {label && t(label)}
-        {havePopover && <FilterArrowIcon isOpen={!!anchor} />}
-      </NavigationItem>
-      {havePopover && (
-        <Popover
-          className="navigation__popover"
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          fixedVertical
-          anchorEl={anchor}
-          onClose={clearAnchor}
-          horizontal={HORIZONTAL_POPOVER_POS.CENTER}
-          noPadding
-        >
-          {children!.map(renderNavigationItem)}
-        </Popover>
-      )}
+      <MenuNavigationTooltipItem
+        havePopover={havePopover}
+        secondLevel={children && children.map(renderNavigationItem)}
+      >
+        <NavigationItem icon={<Icon primary />} href={linkCreator(route)}>
+          {label && t(label)}
+        </NavigationItem>
+      </MenuNavigationTooltipItem>
       {haveSecondLevel && (
         <div className="navigation__second-level">
           {children!.map(renderNavigationItem)}
@@ -60,5 +47,29 @@ interface Props {
   popover?: boolean;
   item: TMenuItem;
 }
+
+const MenuNavigationTooltipItem: React.FC<
+  {
+    havePopover?: boolean;
+    secondLevel?: JSX.Element[];
+  } & React.HTMLAttributes<HTMLDivElement>
+> = ({ children, secondLevel, havePopover }) => {
+  switch (!!secondLevel && havePopover) {
+    case true:
+      return (
+        <MenuTooltip
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
+          render={() => (
+            <div className="navigation__popover">{secondLevel}</div>
+          )}
+        >
+          <div>{children}</div>
+        </MenuTooltip>
+      );
+    case false:
+    default:
+      return <>{children}</>;
+  }
+};
 
 export const MenuNavigationItem = React.memo(_MenuNavigationItem);

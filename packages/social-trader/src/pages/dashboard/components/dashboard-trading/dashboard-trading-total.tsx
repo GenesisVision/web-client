@@ -10,7 +10,7 @@ import { TDashboardTradingStatistic } from "../../dashboard.types";
 
 const _DashboardTradingTotal: React.FC<Props> = ({
   currency,
-  data: { equity, assetsUnderManagement, profits, total }
+  data: { equity, aum, profits, total }
 }) => {
   const [t] = useTranslation();
   return (
@@ -28,7 +28,7 @@ const _DashboardTradingTotal: React.FC<Props> = ({
         />
         <DashboardValueItem
           label={t("dashboard-page.statistic.AUM")}
-          value={assetsUnderManagement}
+          value={aum}
           currency={currency}
         />
       </StatisticItemList>

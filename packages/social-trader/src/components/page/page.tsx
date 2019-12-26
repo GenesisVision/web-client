@@ -1,5 +1,5 @@
 import BackButton from "components/back-button/back-button";
-import useRole from "hooks/use-role.hook";
+import { TitleContext } from "components/link/link.helper";
 import Head from "next/head";
 import * as React from "react";
 import { PropsWithChildren } from "react";
@@ -15,22 +15,23 @@ const _Page = ({
   previewImage
 }: PropsWithChildren<Props>) => {
   const [t] = useTranslation();
-  const role = useRole();
-  const gvTitle = t(`${role ? `${role}.` : ""}app.title`) + title;
+  const pageTitle = t("app.title") + title;
   return (
-    <>
-      <Head>
-        <title>{gvTitle}</title>
-        {schema(schemas)}
-        {titleMeta(gvTitle)}
-        {descriptionMeta(description)}
-        {imageMeta(previewImage)}
-      </Head>
-      <div>
-        <BackButton />
-      </div>
-      {children}
-    </>
+    <TitleContext.Provider value={title}>
+      <>
+        <Head>
+          <title>{pageTitle}</title>
+          {schema(schemas)}
+          {titleMeta(pageTitle)}
+          {descriptionMeta(description)}
+          {imageMeta(previewImage)}
+        </Head>
+        <div>
+          <BackButton />
+        </div>
+        {children}
+      </>
+    </TitleContext.Provider>
   );
 };
 

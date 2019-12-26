@@ -1,6 +1,7 @@
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import isAuthenticated from "decorators/is-authenticated";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -14,6 +15,7 @@ const _NavigationTabs: React.FC<Props> = ({
   tabRoute,
   favoritesTabName
 }) => {
+  const { linkCreator } = useToLink();
   const { pathname } = useRouter();
   const tab = pathname.includes(favoritesTabName)
     ? favoritesTabName
@@ -25,11 +27,11 @@ const _NavigationTabs: React.FC<Props> = ({
           value={exploreTabName}
           label={
             <Link
-              to={{
-                pathname: replaceParams(tabRoute, {
+              to={linkCreator(
+                replaceParams(tabRoute, {
                   ":tab": exploreTabName
                 }).slice(0, -1)
-              }}
+              )}
             >
               {t("funds-page.tabs.explore")}
             </Link>
@@ -39,11 +41,11 @@ const _NavigationTabs: React.FC<Props> = ({
           value={favoritesTabName}
           label={
             <Link
-              to={{
-                pathname: replaceParams(tabRoute, {
+              to={linkCreator(
+                replaceParams(tabRoute, {
                   ":tab": favoritesTabName
                 })
-              }}
+              )}
             >
               {t("funds-page.tabs.favorites")}
             </Link>
