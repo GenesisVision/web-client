@@ -63,7 +63,9 @@ const _ProgramTradesRow: React.FC<Props> = ({
       </TableCell>
       <TableCell className="details-trades__cell">
         <TradesHistoryFeesTooltipWithOwner trade={trade}>
-          <span>{formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}</span>
+          <span>
+            {formatValue(trade.totalCommission, DEFAULT_DECIMAL_SCALE)}
+          </span>
         </TradesHistoryFeesTooltipWithOwner>
       </TableCell>
       {showSwaps && (
