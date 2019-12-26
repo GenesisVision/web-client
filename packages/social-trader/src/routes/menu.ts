@@ -8,7 +8,6 @@ import { InvestIcon } from "components/icon/invest-icon";
 import { Mt4Icon } from "components/icon/mt4-icon";
 import { Mt5Icon } from "components/icon/mt5-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
-import { SearchIcon } from "components/icon/search-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
 import { StatisticIcon } from "components/icon/statistic-icon";
 import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
@@ -32,9 +31,14 @@ import {
 import {
   GV_FOLLOW_ROUTE,
   GV_FUNDS_ROUTE,
-  GV_PROGRAMS_ROUTE
+  GV_PROGRAMS_ROUTE,
+  INVEST_ROUTE
 } from "./invest.routes";
-import { META_TRADER_4_ROUTE, META_TRADER_5_ROUTE } from "./trade.routes";
+import {
+  META_TRADER_4_ROUTE,
+  META_TRADER_5_ROUTE,
+  TRADE_ROUTE
+} from "./trade.routes";
 
 export type TMenuItem = {
   route?: string;
@@ -61,12 +65,13 @@ const mainMenuItemsUnion = [
   {
     Icon: DashboardIcon,
     label: "navigation.dashboard",
+    route: OVERVIEW_ROUTE,
     children: [
-      {
+      /*{
         Icon: SearchIcon,
         route: OVERVIEW_ROUTE,
         label: "navigation.overview"
-      },
+      },*/
       { Icon: HistoryIcon, route: EVENTS_ROUTE, label: "navigation.events" },
       {
         Icon: InvestIcon,
@@ -88,6 +93,7 @@ const mainMenuItemsUnion = [
   {
     Icon: InvestIcon,
     label: "navigation.invest",
+    route: INVEST_ROUTE,
     children: [
       {
         Icon: FollowIcon,
@@ -109,6 +115,7 @@ const mainMenuItemsUnion = [
   {
     Icon: TradeIcon,
     label: "navigation.trade",
+    route: TRADE_ROUTE,
     children: [
       {
         Icon: Mt4Icon,
