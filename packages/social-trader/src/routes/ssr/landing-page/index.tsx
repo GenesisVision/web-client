@@ -20,6 +20,10 @@ import SocialContainer from "routes/ssr/landing-page/containers/social-container
 import TabsContainer from "routes/ssr/landing-page/containers/tabs-container/tabs-container";
 import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
+import {
+  brokersInfo,
+  brokersTabs
+} from "routes/ssr/landing-page/static-data/brokers";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
@@ -51,27 +55,27 @@ const IndexPage: NextPage<{
             </div>
           </div>
         </section>
-        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
+        <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <TradersContainer />
           </div>
         </section>
-        <section className="home__section home__section--horizontal-padding">
+        <section className="home__section">
           <div className="home__container">
             <ProgramsContainer programs={programsData.items} />
           </div>
         </section>
-        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
+        <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <FundsContainer funds={fundsData.items} />
           </div>
         </section>
-        <section className="home__section home__section--bg-white home__section--horizontal-padding">
+        <section className="home__section home__section--bg-white">
           <div className="home__container">
             <TabsContainer />
           </div>
         </section>
-        <section className="home__section home__section--bg-gray home__section--not-padding-bottom-mob">
+        <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <DownloadContainer />
           </div>
@@ -79,7 +83,11 @@ const IndexPage: NextPage<{
         <AdvantagesContainer />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
-            <BrokersContainer />
+            <BrokersContainer
+              brokersInfo={brokersInfo}
+              brokersTabs={brokersTabs}
+              title="Brokers and Exhanges"
+            />
           </div>
         </section>
         <section className="home__section home__section--last-screen">

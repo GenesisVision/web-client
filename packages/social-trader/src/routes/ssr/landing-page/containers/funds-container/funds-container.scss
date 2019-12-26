@@ -5,6 +5,7 @@
 
 .funds-container {
   @include grid();
+  @include horizontal-padding();
   position: relative;
   align-items: center;
 

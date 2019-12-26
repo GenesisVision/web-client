@@ -4,8 +4,7 @@
 
 .advantages-container {
   @include grid();
-  padding-top: 100px;
-  padding-bottom: 100px;
+  @include horizontal-padding();
 
   @include media-breakpoint-desktop() {
     padding-bottom: 200px;

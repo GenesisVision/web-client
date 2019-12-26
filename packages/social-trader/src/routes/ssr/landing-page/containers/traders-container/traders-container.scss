@@ -4,6 +4,7 @@
 
 .traders-container {
   @include grid();
+  @include horizontal-padding();
 
   &__info {
     margin-bottom: 60px;

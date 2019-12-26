@@ -5,6 +5,12 @@
 
 .download-container {
   @include grid();
+  @include horizontal-padding();
+  padding-bottom: 0;
+
+  @include media-breakpoint-tablet() {
+    padding-bottom: 100px;
+  }
 
   @include media-breakpoint-landscape-tablet() {
     align-items: center;

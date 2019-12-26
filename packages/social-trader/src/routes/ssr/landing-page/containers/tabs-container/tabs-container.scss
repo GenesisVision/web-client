@@ -4,6 +4,7 @@
 
 .tabs-container {
   @include grid();
+  @include horizontal-padding();
   position: relative;
 
   &__wrapper-controls {
