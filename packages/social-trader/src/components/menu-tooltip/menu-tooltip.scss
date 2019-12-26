@@ -1,0 +1,16 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+$tooltip-padding: 16px;
+
+.menu-tooltip {
+  &__popover {
+    @include horizontal-paddings($tooltip-padding, $divider-text);
+    @include vertical-paddings($tooltip-padding, $divider-text);
+    color: white;
+  }
+
+  &__label {
+    padding: $padding-xxsmall 0;
+  }
+}

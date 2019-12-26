@@ -7,6 +7,9 @@ import EventListener from "react-event-listener";
 
 const _Popover: React.FC<Props> = props => {
   const {
+    fixedHorizontal,
+    onMouseEnter,
+    onMouseLeave,
     fixedVertical,
     orientation = ORIENTATION_POPOVER.LEFT,
     horizontal = HORIZONTAL_POPOVER_POS.LEFT,
@@ -125,7 +128,10 @@ const _Popover: React.FC<Props> = props => {
         transform = 1;
         break;
     }
-    if (popoverBounds.left - popoverBounds.width * transform < 0) {
+    if (
+      !fixedHorizontal &&
+      popoverBounds.left - popoverBounds.width * transform < 0
+    ) {
       return ORIENTATION_POPOVER.RIGHT;
     }
     return orientation;
@@ -136,6 +142,8 @@ const _Popover: React.FC<Props> = props => {
     <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
       <EventListener target={"window"} onScroll={handleScroll} />
       <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         className={classNames("popover", className, {
           "popover--no-padding": noPadding
         })}
@@ -173,6 +181,9 @@ const Popover = React.memo<React.FC<Props>>(_Popover);
 export default Popover;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  onMouseEnter?: VoidFunction;
+  onMouseLeave?: VoidFunction;
+  fixedHorizontal?: boolean;
   fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
