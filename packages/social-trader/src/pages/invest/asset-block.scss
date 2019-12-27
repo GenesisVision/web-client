@@ -3,9 +3,11 @@
 @import "~shared/styles/_breakpoint";
 
 .asset-block {
+  &--left {
+    flex-direction: row-reverse;
+  }
   &--side {
     display: flex;
-    padding-left: $padding-big;
     .asset-block__description-block {
       width: 30%;
     }
@@ -22,7 +24,10 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: $padding-large;
+    margin-right: $padding-xsmall;
+    padding-left: 0;
     &--side {
+      padding-left: $padding-big;
       align-items: flex-start;
     }
   }

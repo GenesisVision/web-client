@@ -12,6 +12,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _AssetBlock: React.FC<Props> = ({
+  blockType,
+  left,
   side,
   investLink,
   assets,
@@ -22,8 +24,10 @@ const _AssetBlock: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DetailsBlock
-      type={side ? DETAILS_BLOCK_TYPE.SOLID : DETAILS_BLOCK_TYPE.TRANSPARENT}
+      wide
+      type={blockType}
       className={classNames("asset-block", {
+        "asset-block--left": left,
         "asset-block--side": side
       })}
     >
@@ -47,7 +51,10 @@ const _AssetBlock: React.FC<Props> = ({
         </Link>
       </div>
       <div className="asset-block__assets-block">
-        <DashboardHorizontalList darkShadow={!side}>
+        <DashboardHorizontalList
+          darkShadow={blockType === DETAILS_BLOCK_TYPE.TRANSPARENT}
+          left={left}
+        >
           {assets.map(renderCard)}
         </DashboardHorizontalList>
       </div>
@@ -56,6 +63,8 @@ const _AssetBlock: React.FC<Props> = ({
 };
 
 interface Props {
+  blockType?: DETAILS_BLOCK_TYPE;
+  left?: boolean;
   side?: boolean;
   investLink: ToType;
   title: string;
