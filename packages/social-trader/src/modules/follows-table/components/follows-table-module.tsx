@@ -54,7 +54,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
             updateRow={updateRow}
             showRating={showRating}
             follow={follow}
-            isAuthenticated={isAuthenticated}
           />
         )}
       />

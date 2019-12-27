@@ -9,7 +9,6 @@ import useRouteFilters from "hooks/route-filters.hook";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
   fundAssetsSelector,
   platformCurrenciesSelector
@@ -29,7 +28,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const currency = useSelector(currencySelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const data = useSelector(fundsDataSelector);
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const fundAssets = useSelector(fundAssetsSelector);
   const { t } = useTranslation();
   const [filtering, sorting, page, update] = useRouteFilters(
@@ -83,7 +81,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         totalItems: data.total
       }}
       updatePaging={page => update({ name: "page", value: page + 1 })}
-      isAuthenticated={isAuthenticated}
     />
   );
 };

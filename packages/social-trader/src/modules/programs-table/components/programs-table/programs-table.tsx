@@ -80,7 +80,6 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
           withDispatch
           showRating={Boolean(showRating)}
           program={program}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyCard={(program: ProgramDetailsListItem) => (

@@ -14,7 +14,6 @@ import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
   data?: FundDetailsListItem[];
-  isAuthenticated: boolean;
 }
 
 const _FundsTable: React.FC<Props> = ({
@@ -27,7 +26,6 @@ const _FundsTable: React.FC<Props> = ({
   renderMappings,
   paging,
   updatePaging,
-  isAuthenticated,
   title
 }) => (
   <Table
@@ -44,22 +42,9 @@ const _FundsTable: React.FC<Props> = ({
     showSwitchView
     renderFilters={renderFilters}
     renderMappings={renderMappings}
-    renderHeader={column => (
-      <FundsTableHeaderCell column={column} isAuthenticated={isAuthenticated} />
-    )}
-    renderSorting={column => (
-      <FundTableSortingValue
-        column={column}
-        isAuthenticated={isAuthenticated}
-      />
-    )}
-    renderBodyRow={fund => (
-      <FundsTableRow
-        withDispatch
-        fund={fund}
-        isAuthenticated={isAuthenticated}
-      />
-    )}
+    renderHeader={column => <FundsTableHeaderCell column={column} />}
+    renderSorting={column => <FundTableSortingValue column={column} />}
+    renderBodyRow={fund => <FundsTableRow withDispatch fund={fund} />}
     renderBodyCard={fund => <FundCard title={title as string} fund={fund} />}
   />
 );

@@ -14,6 +14,8 @@ import { FollowDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
@@ -24,9 +26,9 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   updateRow,
   withDispatch,
   showRating,
-  follow,
-  isAuthenticated
+  follow
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
     logo,
     personalDetails,
@@ -127,7 +129,6 @@ interface IProgramTableRowShortProps {
   withDispatch?: boolean;
   showRating?: boolean;
   follow: FollowDetailsListItem;
-  isAuthenticated?: boolean;
 }
 
 const FollowTableRowShort = React.memo(_FollowTableRowShort);

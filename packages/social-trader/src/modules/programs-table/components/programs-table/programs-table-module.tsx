@@ -53,7 +53,6 @@ const _ProgramTableModule: React.FC<Props> = ({
           updateRow={updateRow}
           showRating={showRating}
           program={program}
-          isAuthenticated={isAuthenticated}
         />
       )}
     />

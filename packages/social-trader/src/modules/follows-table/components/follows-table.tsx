@@ -78,7 +78,6 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
           withDispatch
           showRating={Boolean(showRating)}
           follow={follow}
-          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyCard={(follow: FollowDetailsListItem) => (

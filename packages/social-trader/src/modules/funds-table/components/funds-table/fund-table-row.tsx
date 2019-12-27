@@ -14,18 +14,16 @@ import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundsTableRow: React.FC<Props> = ({
-  withDispatch,
-  fund,
-  isAuthenticated,
-  updateRow
-}) => {
+const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
@@ -119,7 +117,6 @@ interface Props {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
   fund: FundDetailsListItem;
-  isAuthenticated?: boolean;
 }
 
 const FundsTableRow = React.memo(_FundsTableRow);

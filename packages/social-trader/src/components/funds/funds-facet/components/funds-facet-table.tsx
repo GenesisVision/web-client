@@ -24,7 +24,6 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
   title,
   sorting,
   getItems,
-  isAuthenticated,
   timeframe,
   currency,
   currencies
@@ -68,7 +67,6 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
       filtering={composeFiltering()}
       defaultFilters={FUNDS_FACET_TABLE_FILTERS}
       getItems={getItems}
-      isAuthenticated={isAuthenticated}
     />
   );
 };
@@ -78,7 +76,6 @@ export interface IFundsFacetTableProps {
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;
-  isAuthenticated?: boolean;
   currencies?: PlatformCurrencyInfo[];
   currency?: CurrencyEnum;
 }

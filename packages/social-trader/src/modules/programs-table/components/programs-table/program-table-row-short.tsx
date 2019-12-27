@@ -16,6 +16,8 @@ import { ProgramDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
@@ -27,9 +29,9 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   withDispatch,
   updateRow,
   showRating,
-  program,
-  isAuthenticated
+  program
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
   const {
@@ -162,7 +164,6 @@ interface IProgramTableRowShortProps {
   withDispatch?: boolean;
   showRating?: boolean;
   program: ProgramDetailsListItem;
-  isAuthenticated?: boolean;
 }
 
 const ProgramTableRowShort = React.memo(_ProgramTableRowShort);
