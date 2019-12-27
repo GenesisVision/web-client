@@ -3,7 +3,7 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.traders-list {
+.follows-list {
   @include reset-list();
   display: grid;
   grid-auto-flow: column;
@@ -61,6 +61,9 @@
       padding: 40px;
     }
   }
+  &__item-link {
+    display: block;
+  }
 
   &__item-avatar {
     width: 66px;
@@ -88,11 +91,7 @@
   &__item-image {
     border-radius: 15px;
     width: 100%;
-    height: auto;
-
-    &--default {
-      height: 40%;
-    }
+    max-height: 100%;
   }
 
   &__item-title {

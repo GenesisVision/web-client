@@ -2,7 +2,7 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.traders-container {
+.follows-container {
   @include grid();
   @include horizontal-padding();
 
@@ -23,7 +23,7 @@
   &__wrapper-fixed {
     @include media-breakpoint-landscape-tablet() {
       position: sticky;
-      top: 50px;
+      top: 150px;
     }
   }
 

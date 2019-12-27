@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
 
   @include media-breakpoint-desktop() {
     background-color: rgba($landing-bg, 0.5);
@@ -103,10 +103,6 @@
     @include transition(opacity);
     @include reset-link();
     display: block;
-  }
-
-  &--sticky {
-    position: sticky;
   }
 
   &--reverse {

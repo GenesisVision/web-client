@@ -4,7 +4,8 @@ import "./styles/home.scss";
 import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem
+  ItemsViewModelProgramDetailsListItem,
+  PlatformApi
 } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
@@ -13,11 +14,11 @@ import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-s
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
+import FollowsContainer from "routes/ssr/landing-page/containers/follows-container/follows-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
 import TabsContainer from "routes/ssr/landing-page/containers/tabs-container/tabs-container";
-import TradersContainer from "routes/ssr/landing-page/containers/traders-container/traders-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 import {
   brokersInfo,
@@ -48,7 +49,7 @@ const IndexPage: NextPage<{
         </section>
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
-            <TradersContainer />
+            <FollowsContainer follows={followsData.items} />
           </div>
         </section>
         <section className="home__section">
@@ -98,6 +99,15 @@ IndexPage.getInitialProps = async () => {
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
     const [programsData, fundsData, followsData] = await Promise.all([
+      // PlatformApi({
+      //   sorting: "ByProfitDesc",
+      //   levelMin: 1,
+      //   levelMax: 7,
+      //   dateFrom,
+      //   dateTo,
+      //   skip: 0,
+      //   take: 6
+      // }),
       programsApi.getPrograms({
         sorting: "ByProfitDesc",
         levelMin: 1,
