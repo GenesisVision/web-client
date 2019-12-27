@@ -20,7 +20,6 @@
   align-items: start;
 
   @include media-breakpoint-tablet() {
-    grid-template-rows: repeat(auto-fill, 1fr);
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 40px;
     grid-auto-flow: row;
