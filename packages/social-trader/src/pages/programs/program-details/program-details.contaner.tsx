@@ -61,7 +61,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const programPersonalDetails =
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;
-  const assetType = followPersonalDetails ? ASSET.FOLLOW : ASSET.PROGRAM;
+  const assetType = !!followDetails ? ASSET.FOLLOW : ASSET.PROGRAM;
   const personalDetails = followPersonalDetails || programPersonalDetails;
 
   const handleDispatchDescription = useCallback(() => {
