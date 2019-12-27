@@ -9,7 +9,7 @@ import { search } from "../../services/global-search-result.service";
 import GlobalSearchInput from "./global-search-input";
 import GlobalSearchResult from "./global-search-result/global-search-result";
 
-const _GlobalSearchResultContainer: React.FC<Props> = ({ title }) => {
+const _GlobalSearchResultContainer: React.FC<Props> = ({}) => {
   const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<Nullable<CommonPublicAssetsViewModel>>(null);
 
@@ -27,16 +27,14 @@ const _GlobalSearchResultContainer: React.FC<Props> = ({ title }) => {
       <GlobalSearchInput query={query} onChange={handleOnChange} />
       {data && (
         <div className={classNames({ "global-search-hidden": !query })}>
-          <GlobalSearchResult data={data} title={title} />
+          <GlobalSearchResult data={data} />
         </div>
       )}
     </>
   );
 };
 
-interface Props {
-  title: string;
-}
+interface Props {}
 
 const GlobalSearchResultContainer = React.memo(_GlobalSearchResultContainer);
 export default GlobalSearchResultContainer;

@@ -11,7 +11,7 @@ import { SearchTableProps } from "./global-search-result";
 
 const _FollowsTable: React.FC<
   SearchTableProps<ItemsViewModelFollowDetailsListItem>
-> = ({ data, title }) => {
+> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <Table
@@ -24,9 +24,7 @@ const _FollowsTable: React.FC<
           {t(`follows-page.header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={follow => (
-        <FollowTableRowShort title={title} follow={follow} />
-      )}
+      renderBodyRow={follow => <FollowTableRowShort follow={follow} />}
     />
   );
 };

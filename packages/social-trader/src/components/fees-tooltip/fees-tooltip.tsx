@@ -18,7 +18,7 @@ const _FeesTooltip: React.FC<Props> = ({ children, header, footer }) => (
       </div>
     )}
   >
-    {children}
+    <span>{children}</span>
   </Tooltip>
 );
 

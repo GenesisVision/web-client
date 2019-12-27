@@ -4,7 +4,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { managerUrlSelector } from "reducers/header-reducer";
-import { MANAGERS_ROUTE } from "routes/manager.routes";
+import {
+  MANAGER_DETAILS_FOLDER_ROUTE,
+  MANAGERS_ROUTE
+} from "routes/manager.routes";
 
 export const PublicPageLink: React.FC = React.memo(() => {
   const { linkCreator } = useToLink();
@@ -13,7 +16,7 @@ export const PublicPageLink: React.FC = React.memo(() => {
   const url = `${MANAGERS_ROUTE}/${managerUrl}`;
   if (!managerUrl) return null;
   return (
-    <Link to={linkCreator(url)}>
+    <Link to={linkCreator(url, MANAGER_DETAILS_FOLDER_ROUTE)}>
       {t("dashboard-page.investing.public-page")}
     </Link>
   );

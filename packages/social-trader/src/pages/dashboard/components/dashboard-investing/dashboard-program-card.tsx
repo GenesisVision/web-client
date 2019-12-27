@@ -19,6 +19,7 @@ import ProgramReinvestingContainer from "modules/program-reinvesting/components/
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
@@ -33,7 +34,10 @@ const _DashboardProgramCard: React.FC<Props> = ({
 }) => {
   const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
-  const linkProps = linkCreator(composeProgramDetailsUrl(program.url));
+  const linkProps = linkCreator(
+    composeProgramDetailsUrl(program.url),
+    PROGRAM_DETAILS_FOLDER_ROUTE
+  );
   const requestCurrency = program.balance.currency;
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (

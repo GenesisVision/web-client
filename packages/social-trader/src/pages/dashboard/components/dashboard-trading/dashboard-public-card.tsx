@@ -9,13 +9,18 @@ import TableCard, {
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
-import { DashboardTradingAsset } from "gv-api-web";
+import { AssetType, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import NumberFormat from "react-number-format";
+import {
+  FOLLOW_DETAILS_FOLDER_ROUTE,
+  FUND_DETAILS_FOLDER_ROUTE,
+  PROGRAM_DETAILS_FOLDER_ROUTE
+} from "routes/invest.routes";
 import {
   ASSET,
   DECIMAL_SCALE_BIG_VALUE,
@@ -41,7 +46,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
     composeAssetDetailsUrl(
       asset.assetTypeExt,
       asset.publicInfo && asset.publicInfo.url
-    )
+    ),
+    getAssetFolderRoute(asset.assetType)
   );
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
@@ -161,6 +167,18 @@ const _DashboardPublicCard: React.FC<Props> = ({
       />
     </TableCard>
   );
+};
+
+export const getAssetFolderRoute = (assetType: AssetType) => {
+  switch (assetType) {
+    case "Follow":
+      return FOLLOW_DETAILS_FOLDER_ROUTE;
+    case "Fund":
+      return FUND_DETAILS_FOLDER_ROUTE;
+    case "Program":
+    default:
+      return PROGRAM_DETAILS_FOLDER_ROUTE;
+  }
 };
 
 interface Props {

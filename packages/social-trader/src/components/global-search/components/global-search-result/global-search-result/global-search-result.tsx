@@ -13,7 +13,7 @@ import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
 import SearchResultTable from "./search-result-table";
 
-const _GlobalSearchResult: React.FC<Props> = ({ data, title }) => {
+const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
   return (
@@ -43,41 +43,40 @@ const _GlobalSearchResult: React.FC<Props> = ({ data, title }) => {
           count={data.managers && data.managers.total}
         />
       </DetailsBlockTabs>
-      <Tab title={title} data={data} tab={tab} />
+      <Tab data={data} tab={tab} />
     </DetailsBlock>
   );
 };
 
 interface ITabProps {
   data: CommonPublicAssetsViewModel;
-  title: string;
   tab: SEARCH_TABS;
 }
 
-const Tab: React.FC<ITabProps> = React.memo(({ data, title, tab }) => {
+const Tab: React.FC<ITabProps> = React.memo(({ data, tab }) => {
   switch (tab) {
     case SEARCH_TABS.MANAGERS:
       return (
         <SearchResultTable data={Boolean(data.managers)}>
-          <ManagersTable title={title} data={data.managers} />
+          <ManagersTable data={data.managers} />
         </SearchResultTable>
       );
     case SEARCH_TABS.FUNDS:
       return (
         <SearchResultTable data={Boolean(data.funds)}>
-          <FundsTable title={title} data={data.funds} />
+          <FundsTable data={data.funds} />
         </SearchResultTable>
       );
     case SEARCH_TABS.PROGRAMS:
       return (
         <SearchResultTable data={Boolean(data.programs)}>
-          <ProgramsTable title={title} data={data.programs} />
+          <ProgramsTable data={data.programs} />
         </SearchResultTable>
       );
     case SEARCH_TABS.FOLLOWS:
       return (
         <SearchResultTable data={Boolean(data.follows)}>
-          <FollowsTable title={title} data={data.follows} />
+          <FollowsTable data={data.follows} />
         </SearchResultTable>
       );
     default:
@@ -93,13 +92,11 @@ export enum SEARCH_TABS {
 }
 
 export interface SearchTableProps<T> {
-  title: string;
   data: T;
 }
 
 interface Props {
   data: CommonPublicAssetsViewModel;
-  title: string;
 }
 
 const GlobalSearchResult = React.memo(_GlobalSearchResult);

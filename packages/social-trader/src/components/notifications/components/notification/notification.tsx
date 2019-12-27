@@ -8,6 +8,10 @@ import NewsIcon from "media/news.svg";
 import RedUserIcon from "media/red-user.svg";
 import * as React from "react";
 import {
+  FUND_DETAILS_FOLDER_ROUTE,
+  PROGRAM_DETAILS_FOLDER_ROUTE
+} from "routes/invest.routes";
+import {
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "utils/compose-url";
@@ -40,7 +44,9 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
         assetType === "Program"
           ? composeProgramDetailsUrl(url)
           : composeFundsDetailsUrl(url),
-        type
+        assetType === "Program"
+          ? PROGRAM_DETAILS_FOLDER_ROUTE
+          : FUND_DETAILS_FOLDER_ROUTE
       )
     : null;
   return (

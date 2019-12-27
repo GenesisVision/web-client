@@ -21,6 +21,7 @@ import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { FUND_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
@@ -38,7 +39,10 @@ const _DashboardFundCard: React.FC<Props> = ({
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
         onClick={clearAnchor}
-        to={linkCreator(composeFundsDetailsUrl(fund.url))}
+        to={linkCreator(
+          composeFundsDetailsUrl(fund.url),
+          FUND_DETAILS_FOLDER_ROUTE
+        )}
       >
         {t("fund-actions.details")}
       </TableCardActionsItem>
@@ -63,7 +67,10 @@ const _DashboardFundCard: React.FC<Props> = ({
       subTitle={fund.owner.username}
       logo={fund.logo}
       color={fund.color}
-      detailsUrl={linkCreator(composeFundsDetailsUrl(fund.url))}
+      detailsUrl={linkCreator(
+        composeFundsDetailsUrl(fund.url),
+        FUND_DETAILS_FOLDER_ROUTE
+      )}
       managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >

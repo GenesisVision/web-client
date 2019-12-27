@@ -35,6 +35,7 @@ export enum CHIP_SIZE {
 }
 
 export enum CHIP_TYPE {
+  EMPTY = "empty",
   POSITIVE = "positive",
   NEGATIVE = "negative",
   WARNING = "warning"

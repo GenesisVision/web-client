@@ -8,9 +8,7 @@ import { fundListLoaderData } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-interface Props extends ITableModuleProps {
-  isAuthenticated?: boolean;
-}
+interface Props extends ITableModuleProps {}
 
 const FundsTableModule: React.FC<Props> = React.memo(
   ({
@@ -20,7 +18,6 @@ const FundsTableModule: React.FC<Props> = React.memo(
     filtering,
     defaultFilters,
     paging,
-    isAuthenticated,
     title,
     disableTitle
   }) => {
@@ -36,19 +33,9 @@ const FundsTableModule: React.FC<Props> = React.memo(
         paging={paging}
         title={title}
         columns={FUNDS_TABLE_COLUMNS}
-        renderHeader={column => (
-          <FundsTableHeaderCell
-            column={column}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
+        renderHeader={column => <FundsTableHeaderCell column={column} />}
         renderBodyRow={(fund, updateRow = () => {}) => (
-          <FundsTableRow
-            updateRow={updateRow}
-            title={title}
-            fund={fund}
-            isAuthenticated={isAuthenticated}
-          />
+          <FundsTableRow updateRow={updateRow} fund={fund} />
         )}
       />
     );

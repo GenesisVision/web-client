@@ -6,8 +6,9 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
-import TradesHistoryFeesTooltip from "components/trades-history-fees-tooltip/trades-history-fees-tooltip";
+import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
 import { OrderSignalModel } from "gv-api-web";
+import { ProvidersButton } from "pages/programs/program-details/program-history-section/program-trades/providers-button";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
@@ -61,30 +62,11 @@ const _ProgramTradesRow: React.FC<Props> = ({
         </Profitability>
       </TableCell>
       <TableCell className="details-trades__cell">
-        <Tooltip
-          render={() =>
-            trade.showOriginalCommission ? (
-              <div>
-                {`${formatValue(
-                  trade.originalCommission,
-                  DEFAULT_DECIMAL_SCALE
-                )} ${trade.originalCommissionCurrency}`}
-              </div>
-            ) : (
-              <div>
-                {`${formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)} ${
-                  trade.originalCommissionCurrency
-                }`}
-              </div>
-            )
-          }
-        >
-          <NumberFormat
-            value={formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}
-            displayType="text"
-            thousandSeparator=" "
-          />
-        </Tooltip>
+        <TradesHistoryFeesTooltipWithOwner trade={trade}>
+          <span>
+            {formatValue(trade.totalCommission, DEFAULT_DECIMAL_SCALE)}
+          </span>
+        </TradesHistoryFeesTooltipWithOwner>
       </TableCell>
       {showSwaps && (
         <TableCell className="details-trades__cell">{trade.swap}</TableCell>
@@ -95,6 +77,11 @@ const _ProgramTradesRow: React.FC<Props> = ({
       {showTickets && (
         <TableCell className="details-trades__cell">{trade.ticket}</TableCell>
       )}
+      <TableCell className="details-trades__cell">
+        {!!trade.providers.length && (
+          <ProvidersButton providers={trade.providers} />
+        )}
+      </TableCell>
     </TableRow>
   );
 };

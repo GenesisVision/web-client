@@ -1,26 +1,22 @@
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import { dispatchProgramDescription } from "pages/programs/program-details/service/program-details.service";
-import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
-const _TwoFactorConfirm: React.FC<Props> = ({
-  id,
-  t,
-  service: { dispatchProgramDescription }
-}) => {
+const _TwoFactorConfirm: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
   const [isOpen, setOpen, setClose] = useIsOpen();
+  const handleOnApply = useCallback(() => {
+    dispatch(dispatchProgramDescription());
+    setClose();
+  }, []);
   return (
     <SettingsBlock label={t("program-settings.two-factor-confirm.title")}>
       <FormTextField>
@@ -32,47 +28,15 @@ const _TwoFactorConfirm: React.FC<Props> = ({
       <ConfirmContainer
         open={isOpen}
         onClose={setClose}
-        onApply={() => {
-          dispatchProgramDescription();
-          setClose();
-        }}
+        onApply={handleOnApply}
         programId={id}
       />
     </SettingsBlock>
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      dispatchProgramDescription
-    },
-    dispatch
-  )
-});
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchProgramDescription: typeof dispatchProgramDescription;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps {
+interface Props {
   id: string;
 }
 
-interface Props extends OwnProps, WithTranslation, DispatchProps {}
-
-const TwoFactorConfirm = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  connect(
-    null,
-    mapDispatchToProps
-  ),
-  withLoader,
-  translate(),
-  React.memo
-)(_TwoFactorConfirm);
+const TwoFactorConfirm = withLoader(React.memo(_TwoFactorConfirm));
 export default TwoFactorConfirm;

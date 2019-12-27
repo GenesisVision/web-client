@@ -9,6 +9,10 @@ import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
 import {
+  FUND_DETAILS_FOLDER_ROUTE,
+  PROGRAM_DETAILS_FOLDER_ROUTE
+} from "routes/invest.routes";
+import {
   composeFundsDetailsUrl,
   composeProgramDetailsUrl
 } from "utils/compose-url";
@@ -24,8 +28,10 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     assetDetails.assetType === "Program"
       ? composeProgramDetailsUrl(assetDetails.url || "")
       : composeFundsDetailsUrl(assetDetails.url || ""),
-    from,
-    undefined
+    assetDetails.assetType === "Program"
+      ? PROGRAM_DETAILS_FOLDER_ROUTE
+      : FUND_DETAILS_FOLDER_ROUTE,
+    from
   );
   return (
     <div className="portfolio-event-logo">

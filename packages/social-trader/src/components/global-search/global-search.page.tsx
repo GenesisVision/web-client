@@ -9,7 +9,7 @@ const GlobalSearchPage: React.FC = () => {
   const title = t("global-search-page.title");
   return (
     <Page title={title}>
-      <GlobalSearchResultContainer title={title} />
+      <GlobalSearchResultContainer />
     </Page>
   );
 };

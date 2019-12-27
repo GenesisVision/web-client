@@ -11,7 +11,7 @@ import { SearchTableProps } from "./global-search-result";
 
 const ProgramsTable: React.FC<
   SearchTableProps<ItemsViewModelProgramDetailsListItem>
-> = ({ data, title }) => {
+> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <Table
@@ -24,9 +24,7 @@ const ProgramsTable: React.FC<
           {t(`programs-page.programs-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={program => (
-        <ProgramTableRowShort title={title} program={program} />
-      )}
+      renderBodyRow={program => <ProgramTableRowShort program={program} />}
     />
   );
 };

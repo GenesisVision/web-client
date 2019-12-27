@@ -4,7 +4,16 @@ import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-const _TradesHistoryFeesTooltip: React.FC<Props> = ({ trade, children }) => {
+const _TradesHistoryFeesTooltip: React.FC<Props> = ({
+  trade: {
+    totalCommissionByType,
+    originalCommission,
+    originalCommissionCurrency,
+    totalCommission,
+    currency
+  },
+  children
+}) => {
   const [t] = useTranslation();
   return (
     <FeesTooltip
@@ -12,10 +21,10 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({ trade, children }) => {
         <>
           <FeeCommission
             title={t(`copytrading-tables.fees.trading`)}
-            value={trade.originalCommission}
-            currency={trade.originalCommissionCurrency}
+            value={originalCommission}
+            currency={originalCommissionCurrency}
           />
-          {trade.totalCommissionByType.map((commission, index) => (
+          {totalCommissionByType.map((commission, index) => (
             <FeeCommission
               key={index}
               title={t(`copytrading-tables.fees.${commission.type}`)}
@@ -26,11 +35,11 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({ trade, children }) => {
         </>
       }
       footer={
-        trade.totalCommissionByType.length > 0 ? (
+        totalCommissionByType && totalCommissionByType.length > 0 ? (
           <FeeCommission
             title={t(`copytrading-tables.fees.total`)}
-            value={trade.totalCommission}
-            currency={trade.currency}
+            value={totalCommission}
+            currency={currency}
           />
         ) : (
           undefined

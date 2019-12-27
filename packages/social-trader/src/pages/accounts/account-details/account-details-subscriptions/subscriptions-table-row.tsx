@@ -1,4 +1,4 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -10,6 +10,7 @@ import { AccountSubscriptionsDataType } from "pages/accounts/account-details/ser
 import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
 import UnFollowButton from "pages/follows/follow-details/unfollow-button";
 import React from "react";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { formatDate } from "shared/utils/dates";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { CurrencyEnum } from "utils/types";
@@ -40,17 +41,21 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   return (
     <TableRow stripy>
       <TableCell>
-        <Link to={linkCreator(composeFollowDetailsUrl(url))}>
+        <Link
+          to={linkCreator(
+            composeFollowDetailsUrl(url),
+            FOLLOW_DETAILS_FOLDER_ROUTE
+          )}
+        >
           <div className="subscriptions-table__center-cell">
-            <AssetAvatar
-              className="subscriptions-table__buttons-cell-item--first"
+            <AssetAvatarWithName
               url={logo}
               alt={title}
               color={color}
               level={level}
               levelProgress={levelProgress}
+              name={title}
             />
-            {title}
           </div>
         </Link>
       </TableCell>

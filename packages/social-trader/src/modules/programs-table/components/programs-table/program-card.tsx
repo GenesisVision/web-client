@@ -36,7 +36,6 @@ const _ProgramCard: React.FC<Props> = ({ program, title }) => {
   const { linkCreator } = useToLink();
   const linkProps = linkCreator(
     composeProgramDetailsUrl(program.url),
-    title,
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const requestCurrency = program.balance.currency;

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
@@ -16,6 +16,8 @@ import { ProgramDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
@@ -26,11 +28,10 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   withDispatch,
   updateRow,
-  title,
   showRating,
-  program,
-  isAuthenticated
+  program
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
   const {
@@ -50,7 +51,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   } = program;
   const programLinkProps = linkCreator(
     composeProgramDetailsUrl(program.url),
-    title,
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const { currency, amount } = balance;
@@ -64,28 +64,26 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={programLinkProps}>
-            <AssetAvatar
+            <AssetAvatarWithName
               url={logo}
               level={level}
               levelProgress={levelProgress}
               alt={program.title}
               color={color}
               tooltip={<LevelTooltip level={level} canLevelUp={false} />}
+              name={
+                <div className="programs-table__cell--title">
+                  <Link
+                    className="programs-table__cell--link"
+                    to={programLinkProps}
+                  >
+                    {program.title}
+                  </Link>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              }
             />
           </Link>
-          <div className="programs-table__cell--title">
-            <div className="programs-table__cell--top">
-              <Link
-                className="programs-table__cell--link"
-                to={programLinkProps}
-              >
-                {program.title}
-              </Link>
-            </div>
-            <div className="programs-table__cell--bottom">
-              <TagProgramContainer tags={tags} />
-            </div>
-          </div>
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">
@@ -164,10 +162,8 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  title: string;
   showRating?: boolean;
   program: ProgramDetailsListItem;
-  isAuthenticated?: boolean;
 }
 
 const ProgramTableRowShort = React.memo(_ProgramTableRowShort);

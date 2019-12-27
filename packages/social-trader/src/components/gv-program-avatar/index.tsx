@@ -22,39 +22,42 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   onMouseEnterLevel,
   onMouseLeaveLevel,
   onClickLevel
-}) => (
-  <div
-    className={classNames("program-avatar", className, {
-      "program-avatar--with-level": level !== undefined,
-      "program-avatar--small": size === "small",
-      "program-avatar--medium": size === "medium",
-      "program-avatar--big": size === "big"
-    })}
-  >
-    <ImageBase
-      DefaultImageComponent={GVProgramDefaultAvatar}
-      url={url}
-      color={color}
-      imageClassName={classNames("program-avatar__image", imageClassName)}
-      alt={alt}
-    />
-    {level !== undefined && (
-      <div
-        onMouseOver={onMouseOverLevel}
-        onMouseEnter={onMouseEnterLevel}
-        onMouseLeave={onMouseLeaveLevel}
-        onClick={onClickLevel}
-        className={"program-avatar__level"}
-      >
-        <PieContainer
-          color={(GVColors as any)[`$levelColor${level}`]}
-          label={String(level)}
-          value={levelProgress}
-        />
-      </div>
-    )}
-  </div>
-);
+}) => {
+  const haveLevel = level !== undefined && level !== 0;
+  return (
+    <div
+      className={classNames("program-avatar", className, {
+        "program-avatar--with-level": haveLevel,
+        "program-avatar--small": size === "small",
+        "program-avatar--medium": size === "medium",
+        "program-avatar--big": size === "big"
+      })}
+    >
+      <ImageBase
+        DefaultImageComponent={GVProgramDefaultAvatar}
+        url={url}
+        color={color}
+        imageClassName={classNames("program-avatar__image", imageClassName)}
+        alt={alt}
+      />
+      {haveLevel && (
+        <div
+          onMouseOver={onMouseOverLevel}
+          onMouseEnter={onMouseEnterLevel}
+          onMouseLeave={onMouseLeaveLevel}
+          onClick={onClickLevel}
+          className={"program-avatar__level"}
+        >
+          <PieContainer
+            color={(GVColors as any)[`$levelColor${level}`]}
+            label={String(level)}
+            value={levelProgress}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export interface GVProgramAvatarProps {
   url?: string;

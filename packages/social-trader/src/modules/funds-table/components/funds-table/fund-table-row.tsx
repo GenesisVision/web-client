@@ -1,8 +1,7 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -15,23 +14,19 @@ import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundsTableRow: React.FC<Props> = ({
-  withDispatch,
-  fund,
-  isAuthenticated,
-  updateRow,
-  title
-}) => {
+const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
-    String(title),
     FUND_DETAILS_FOLDER_ROUTE
   );
   return (
@@ -39,21 +34,13 @@ const _FundsTableRow: React.FC<Props> = ({
       <TableCell className="funds-table__cell funds-table__cell--name">
         <div className="funds-table__cell--avatar-title">
           <Link to={link}>
-            <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
+            <AssetAvatarWithName
+              url={fund.logo}
+              alt={fund.title}
+              color={fund.color}
+              name={fund.title}
+            />
           </Link>
-          <div className="funds-table__cell--title">
-            <Link
-              to={linkCreator(
-                composeFundsDetailsUrl(fund.url),
-                String(title),
-                FUND_DETAILS_FOLDER_ROUTE
-              )}
-            >
-              <GVButton variant="text" color="secondary">
-                {fund.title}
-              </GVButton>
-            </Link>
-          </div>
         </div>
       </TableCell>
       <TableCell className="funds-table__cell funds-table__cell--amount">
@@ -130,8 +117,6 @@ interface Props {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
   fund: FundDetailsListItem;
-  isAuthenticated?: boolean;
-  title?: JSX.Element | string;
 }
 
 const FundsTableRow = React.memo(_FundsTableRow);

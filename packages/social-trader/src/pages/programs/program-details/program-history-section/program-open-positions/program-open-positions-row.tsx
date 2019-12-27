@@ -60,7 +60,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({ position, currency }) => (
           thousandSeparator=" "
           displayType="text"
           allowNegative={false}
-          suffix={` ${currency}`}
+          suffix={` ${position.profitCurrency}`}
         />
       </Profitability>
     </TableCell>

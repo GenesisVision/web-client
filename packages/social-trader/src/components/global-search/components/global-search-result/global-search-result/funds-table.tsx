@@ -9,7 +9,7 @@ import { SearchTableProps } from "./global-search-result";
 
 const FundsTable: React.FC<
   SearchTableProps<ItemsViewModelFundDetailsListItem> & WithTranslation
-> = ({ t, title, data }) => {
+> = ({ t, data }) => {
   return (
     <Table
       columns={FUNDS_TABLE_COLUMNS}
@@ -19,7 +19,7 @@ const FundsTable: React.FC<
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={fund => <FundsTableRow title={title} fund={fund} />}
+      renderBodyRow={fund => <FundsTableRow fund={fund} />}
     />
   );
 };

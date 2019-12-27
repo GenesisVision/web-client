@@ -73,6 +73,9 @@ export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "ticket",
     sortingName: "ByTicket"
+  },
+  {
+    name: "buttons"
   }
 ];
 export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [

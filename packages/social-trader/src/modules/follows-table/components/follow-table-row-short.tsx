@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -14,6 +14,8 @@ import { FollowDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { ASSET } from "shared/constants/constants";
 import { distanceDate } from "shared/utils/dates";
@@ -23,11 +25,10 @@ import { formatValue } from "utils/formatter";
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   updateRow,
   withDispatch,
-  title,
   showRating,
-  follow,
-  isAuthenticated
+  follow
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
     logo,
     personalDetails,
@@ -43,7 +44,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { linkCreator } = useToLink();
   const linkProps = linkCreator(
     composeFollowDetailsUrl(url),
-    title,
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
   return (
@@ -56,18 +56,20 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={linkProps}>
-            <AssetAvatar url={logo} alt={follow.title} color={color} />
+            <AssetAvatarWithName
+              url={logo}
+              alt={follow.title}
+              color={color}
+              name={
+                <div className="programs-table__cell--title">
+                  <Link className="programs-table__cell--link" to={linkProps}>
+                    {follow.title}
+                  </Link>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              }
+            />
           </Link>
-          <div className="programs-table__cell--title">
-            <div className="programs-table__cell--top">
-              <Link className="programs-table__cell--link" to={linkProps}>
-                {follow.title}
-              </Link>
-            </div>
-            <div className="programs-table__cell--bottom">
-              <TagProgramContainer tags={tags} />
-            </div>
-          </div>
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
@@ -125,10 +127,8 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  title: string;
   showRating?: boolean;
   follow: FollowDetailsListItem;
-  isAuthenticated?: boolean;
 }
 
 const FollowTableRowShort = React.memo(_FollowTableRowShort);
