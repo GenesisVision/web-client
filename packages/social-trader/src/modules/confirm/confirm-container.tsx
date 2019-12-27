@@ -5,7 +5,7 @@ import React, { useCallback } from "react";
 import { SetSubmittingType } from "utils/types";
 
 import { IConfirmFormValues } from "./components/confirm-form";
-import * as service from "./services/confirm.services";
+import { confirm2fa, get2faInfo } from "./services/confirm.services";
 
 const _ConfirmContainer: React.FC<Props> = ({
   onClose,
@@ -19,10 +19,10 @@ const _ConfirmContainer: React.FC<Props> = ({
     sendRequest: confirm
   } = useApiRequest({
     middleware: [onClose, onApply],
-    request: service.confirm
+    request: confirm2fa
   });
   const { data } = useApiRequest({
-    request: () => service.get2faInfo({ programId }),
+    request: () => get2faInfo({ programId }),
     fetchOnMount: true
   });
 
