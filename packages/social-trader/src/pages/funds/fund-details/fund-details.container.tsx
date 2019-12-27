@@ -58,10 +58,14 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           description.publicInfo.url,
           description.publicInfo.title
         )}
-        settingsUrl={createFundSettingsToUrl(
-          description.publicInfo.url,
-          description.publicInfo.title
-        )}
+        settingsUrl={
+          description.publicInfo.status !== "Disabled"
+            ? createFundSettingsToUrl(
+                description.publicInfo.url,
+                description.publicInfo.title
+              )
+            : undefined
+        }
         AssetDetailsExtraBlock={() => (
           <>
             <h4 className="details-description__subheading">

@@ -115,7 +115,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         programDetails={programDetails || followDetails}
         description={description.publicInfo.description}
         notificationsUrl={createProgramNotificationsToUrl(url, title)}
-        settingsUrl={createProgramSettingsToUrl(url, title)}
+        settingsUrl={
+          description.publicInfo.status !== "Disabled"
+            ? createProgramSettingsToUrl(
+                description.publicInfo.url,
+                description.publicInfo.title
+              )
+            : undefined
+        }
         AssetDetailsExtraBlock={() => <DetailsTags tags={tags} />}
         PerformanceData={() => (
           <PerformanceData
