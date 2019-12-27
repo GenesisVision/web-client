@@ -99,16 +99,18 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           title={asset.accountInfo.title}
         />
       )}
-      <TableCardActionsItemContainer>
-        <CloseAssetButton
-          noPadding
-          assetName={asset.accountInfo.title}
-          onApply={updateItems}
-          type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
-          id={asset.id}
-          variant={"text"}
-        />
-      </TableCardActionsItemContainer>
+      {asset.actions.canClose && (
+        <TableCardActionsItemContainer>
+          <CloseAssetButton
+            noPadding
+            assetName={asset.accountInfo.title}
+            onApply={updateItems}
+            type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
+            id={asset.id}
+            variant={"text"}
+          />
+        </TableCardActionsItemContainer>
+      )}
     </TableCardActions>
   );
   const detailsLink = linkCreator(composeAccountDetailsUrl(asset.id));
