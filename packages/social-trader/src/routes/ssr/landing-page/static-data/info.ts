@@ -135,7 +135,7 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Create your own Fund"
+            text: "Create your own"
           },
           {
             text: " Fund",
