@@ -6,8 +6,6 @@
   @include transition(background-color);
   background-color: $landing-bg;
   color: $main-color;
-  position: fixed;
-  top: 0;
   width: 100%;
   z-index: 3;
 

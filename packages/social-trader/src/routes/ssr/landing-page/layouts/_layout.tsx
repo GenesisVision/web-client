@@ -6,12 +6,12 @@ import LPHeader from "routes/ssr/landing-page/components/lp-header/lp-header";
 const _Layout: React.FC<Props> = ({ title, children }) => {
   return (
     <DocumentTitle title={title}>
-      <>
+      <div className="landing-page">
         <LPHeader />
         {children}
         <LPFooter />
         <div id="modal-root" />
-      </>
+      </div>
     </DocumentTitle>
   );
 };

@@ -6,15 +6,7 @@
   box-sizing: border-box;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  background-color: $main-color;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  color: $row-color;
-}
-
-#__next {
+.landing-page {
   background-color: $landing-bg;
   color: $main-color;
 
