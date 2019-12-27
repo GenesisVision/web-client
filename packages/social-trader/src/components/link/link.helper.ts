@@ -43,12 +43,16 @@ export const useToLink = (): {
   contextTitle: string;
   linkCreator: (
     as: string,
-    title?: string,
-    pathname?: string
+    pathname?: string,
+    title?: string
   ) => ToType | string;
 } => {
   const contextTitle = useContext(TitleContext);
-  const linkCreator = (as: string, title?: string, pathname: string = "") => {
+  const linkCreator = (
+    as: string,
+    pathname: string = "",
+    title: string = ""
+  ) => {
     const state = title || contextTitle;
     return state ? createToUrl(as, pathname, title || contextTitle) : as;
   };
