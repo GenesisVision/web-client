@@ -21,6 +21,10 @@
 .dashboard-horizontal-list {
   display: flex;
   overflow-x: scroll;
+  width: 100%;
+  & .table-card:last-child {
+    margin-right: 0;
+  }
 
   &__shadow-wrapper {
     display: flex;
@@ -33,7 +37,6 @@
       bottom: 0;
       width: 70px;
       z-index: 2;
-      //opacity: 0;
       transition: opacity 250ms;
       pointer-events: none;
       right: 0;
@@ -43,6 +46,11 @@
         $panel-background-color 50px
       );
     }
+    &--hided {
+      &:after {
+        opacity: 0;
+      }
+    }
     &--dark-shadow {
       &:after {
         background: linear-gradient(
@@ -50,6 +58,26 @@
           rgba(19, 30, 38, 0),
           $background-color 50px
         );
+      }
+    }
+    &--left {
+      &:after {
+        left: 0;
+        right: auto;
+        background: linear-gradient(
+          90deg,
+          $panel-background-color,
+          rgba(19, 30, 38, 0) 50px
+        );
+      }
+      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
+        &:after {
+          background: linear-gradient(
+            90deg,
+            $background-color,
+            rgba(19, 30, 38, 0) 50px
+          );
+        }
       }
     }
   }
