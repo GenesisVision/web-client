@@ -8,14 +8,7 @@ import { useToLink } from "components/link/link.helper";
 import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
-import {
-  FUND_DETAILS_FOLDER_ROUTE,
-  PROGRAM_DETAILS_FOLDER_ROUTE
-} from "routes/invest.routes";
-import {
-  composeFundsDetailsUrl,
-  composeProgramDetailsUrl
-} from "utils/compose-url";
+import { getAssetLink } from "utils/compose-url";
 
 const _PortfolioEventLogo: React.FC<Props> = ({
   withAsset = true,
@@ -23,15 +16,11 @@ const _PortfolioEventLogo: React.FC<Props> = ({
   icon,
   from
 }) => {
-  const { linkCreator } = useToLink();
-  const to = linkCreator(
-    assetDetails.assetType === "Program"
-      ? composeProgramDetailsUrl(assetDetails.url || "")
-      : composeFundsDetailsUrl(assetDetails.url || ""),
-    assetDetails.assetType === "Program"
-      ? PROGRAM_DETAILS_FOLDER_ROUTE
-      : FUND_DETAILS_FOLDER_ROUTE,
-    from
+  const { contextTitle } = useToLink();
+  const to = getAssetLink(
+    assetDetails.url,
+    assetDetails.assetType,
+    contextTitle
   );
   return (
     <div className="portfolio-event-logo">
