@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
 import ProgramDetailsContainer from "./program-details.contaner";
@@ -9,11 +10,12 @@ import { dispatchPlatformLevelsParameters } from "./service/program-details.serv
 const _ProgramDetailsPage: React.FC = () => {
   const dispatch = useDispatch();
   const description = useSelector(programDescriptionSelector);
+  const profileCurrency = useSelector(currencySelector);
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;
-    dispatch(dispatchPlatformLevelsParameters(currency));
-    dispatch(statisticCurrencyAction(currency));
+    dispatch(dispatchPlatformLevelsParameters(currency || profileCurrency));
+    dispatch(statisticCurrencyAction(currency || profileCurrency));
   }, [description]);
   return <ProgramDetailsContainer data={description!} />;
 };
