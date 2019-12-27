@@ -10,7 +10,7 @@ import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 
-const _AssetAvatar: React.FC<Props> = props => {
+const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
   const { tooltip, onClickLevel, click, vertical, horizontal } = props;
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleMouseEnter = useCallback(
@@ -45,7 +45,7 @@ const _AssetAvatar: React.FC<Props> = props => {
   );
 };
 
-interface Props extends GVProgramAvatarProps {
+export interface IAssetAvatarProps extends GVProgramAvatarProps {
   tooltip?: React.ReactElement<ILevelTooltip>;
   click?: boolean;
   vertical?: VERTICAL_POPOVER_POS;
