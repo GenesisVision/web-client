@@ -16,7 +16,7 @@ const _FollowsContainer: React.FC<Props> = ({ follows }) => {
     <div className="follows-container">
       <div className="follows-container__info">
         <div className="follows-container__wrapper-fixed">
-          <h2 className="follows-container__title">Follows</h2>
+          <h2 className="follows-container__title">Follow</h2>
           <p className="follows-container__text">
             Leverage the expertise of seasoned traders while keeping control of
             your capital. Just choose a program and Genesis Vision will
