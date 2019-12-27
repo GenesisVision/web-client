@@ -1,7 +1,7 @@
 import "./providers-button.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
+import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import CopyIcon from "components/icon/copy-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
@@ -37,7 +37,6 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
         onClick={setAnchor}
         size={CHIP_SIZE.SMALL}
         chipLabel={<CopyIcon />}
-        type={CHIP_TYPE.EMPTY}
       />
       <div className="providers-button__count">{providers.length}</div>
     </div>
@@ -58,19 +57,15 @@ const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
         PROGRAM_DETAILS_FOLDER_ROUTE
       )}
     >
-      <div className="provider-item">
-        <div className="provider-item__avatar">
-          <AssetAvatar
-            url={logo}
-            level={level}
-            levelProgress={levelProgress}
-            alt={title}
-            color={color}
-            tooltip={<LevelTooltip level={level} canLevelUp={false} />}
-          />
-        </div>
-        <div>{title}</div>
-      </div>
+      <AssetAvatarWithName
+        name={title}
+        url={logo}
+        level={level}
+        levelProgress={levelProgress}
+        alt={title}
+        color={color}
+        tooltip={<LevelTooltip level={level} canLevelUp={false} />}
+      />
     </Link>
   );
 };

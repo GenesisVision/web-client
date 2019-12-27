@@ -1,4 +1,4 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -42,15 +42,14 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
       <TableCell>
         <Link to={linkCreator(composeFollowDetailsUrl(url))}>
           <div className="subscriptions-table__center-cell">
-            <AssetAvatar
-              className="subscriptions-table__buttons-cell-item--first"
+            <AssetAvatarWithName
               url={logo}
               alt={title}
               color={color}
               level={level}
               levelProgress={levelProgress}
+              name={title}
             />
-            {title}
           </div>
         </Link>
       </TableCell>

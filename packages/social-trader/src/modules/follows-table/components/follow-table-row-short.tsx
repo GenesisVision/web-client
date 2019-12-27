@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -56,18 +56,20 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={linkProps}>
-            <AssetAvatar url={logo} alt={follow.title} color={color} />
+            <AssetAvatarWithName
+              url={logo}
+              alt={follow.title}
+              color={color}
+              name={
+                <div className="programs-table__cell--title">
+                  <Link className="programs-table__cell--link" to={linkProps}>
+                    {follow.title}
+                  </Link>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              }
+            />
           </Link>
-          <div className="programs-table__cell--title">
-            <div className="programs-table__cell--top">
-              <Link className="programs-table__cell--link" to={linkProps}>
-                {follow.title}
-              </Link>
-            </div>
-            <div className="programs-table__cell--bottom">
-              <TagProgramContainer tags={tags} />
-            </div>
-          </div>
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">

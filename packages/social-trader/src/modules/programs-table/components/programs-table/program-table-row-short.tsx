@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
@@ -64,28 +64,26 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={programLinkProps}>
-            <AssetAvatar
+            <AssetAvatarWithName
               url={logo}
               level={level}
               levelProgress={levelProgress}
               alt={program.title}
               color={color}
               tooltip={<LevelTooltip level={level} canLevelUp={false} />}
+              name={
+                <div className="programs-table__cell--title">
+                  <Link
+                    className="programs-table__cell--link"
+                    to={programLinkProps}
+                  >
+                    {program.title}
+                  </Link>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              }
             />
           </Link>
-          <div className="programs-table__cell--title">
-            <div className="programs-table__cell--top">
-              <Link
-                className="programs-table__cell--link"
-                to={programLinkProps}
-              >
-                {program.title}
-              </Link>
-            </div>
-            <div className="programs-table__cell--bottom">
-              <TagProgramContainer tags={tags} />
-            </div>
-          </div>
         </div>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--equity">

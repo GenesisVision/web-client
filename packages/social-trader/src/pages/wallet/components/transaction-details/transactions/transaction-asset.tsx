@@ -1,4 +1,4 @@
-import GVProgramAvatar from "components/gv-program-avatar";
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import Link, { ToType } from "components/link/link";
 import { createToUrl, useToLink } from "components/link/link.helper";
 import { TransactionAssetDetails } from "gv-api-web";
@@ -46,7 +46,13 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
       className={`transaction-asset transaction-asset--${data.assetType.toLowerCase()}`}
     >
       <Link to={programLinkProps}>
-        <GVProgramAvatar
+        <AssetAvatarWithName
+          name={
+            <>
+              <div className="transaction-asset__title">{data.title}</div>
+              <div className="transaction-asset__trader">{data.manager}</div>
+            </>
+          }
           url={url}
           level={
             data.programDetails && data.programDetails.level > 0
@@ -60,12 +66,6 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
           }
         />
       </Link>
-      <div className="transaction-asset__description">
-        <Link to={programLinkProps} className="transaction-asset__title">
-          {data.title}
-        </Link>
-        <p className="transaction-asset__trader">{data.manager}</p>
-      </div>
     </div>
   );
 };
