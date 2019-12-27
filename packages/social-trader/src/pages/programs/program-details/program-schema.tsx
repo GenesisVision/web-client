@@ -24,7 +24,7 @@ const getProgramSchema = (details: ProgramDescriptionDataType) => ({
   aggregateRating: {
     "@type": "AggregateRating",
     bestRating: 7, //TODO
-    ratingValue: details.programDetails.level
+    ratingValue: details.programDetails ? details.programDetails.level : 0
   } //TODO
 });
 
