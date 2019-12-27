@@ -1,5 +1,6 @@
 @import "~shared/styles/_sizes.scss";
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_shadow.scss";
 
 .dashboard-block {
   &__header {
@@ -30,53 +31,23 @@
     display: flex;
     @include details-block-left-margin();
     position: relative;
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 70px;
-      z-index: 2;
-      transition: opacity 250ms;
-      pointer-events: none;
-      right: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(19, 30, 38, 0),
-        $panel-background-color 50px
-      );
-    }
-    &--hided {
-      &:after {
-        opacity: 0;
-      }
-    }
-    &--dark-shadow {
-      &:after {
-        background: linear-gradient(
-          90deg,
-          rgba(19, 30, 38, 0),
-          $background-color 50px
-        );
-      }
-    }
     &--left {
+      &:before {
+        @include leftShadow();
+      }
+      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
+        &:before {
+          @include leftDarkShadow();
+        }
+      }
+    }
+    &--right {
       &:after {
-        left: 0;
-        right: auto;
-        background: linear-gradient(
-          90deg,
-          $panel-background-color,
-          rgba(19, 30, 38, 0) 50px
-        );
+        @include rightShadow();
       }
       &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
         &:after {
-          background: linear-gradient(
-            90deg,
-            $background-color,
-            rgba(19, 30, 38, 0) 50px
-          );
+          @include rightDarkShadow();
         }
       }
     }
