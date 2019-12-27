@@ -41,14 +41,14 @@ export interface DispatchType<R> {
 
 type UnpackApiAction<T> = T extends ApiAction<infer U> ? U : T;
 
-interface ApiActionResponse<T> {
-  action: T;
-  value: UnpackApiAction<T>;
-}
+export type ApiActionResponse<T> = CancelablePromise<{
+  action: ApiAction<T>;
+  value: T;
+}>;
 
 export interface MiddlewareDispatch {
-  <A extends ApiAction = ApiAction>(apiAction: A): CancelablePromise<
-    ApiActionResponse<A>
+  <A extends ApiAction = ApiAction>(apiAction: A): ApiActionResponse<
+    UnpackApiAction<A>
   >;
   <A extends ActionType = ActionType>(action: A): A;
   <R, S>(asyncAction: RootThunk<R, S>): R;

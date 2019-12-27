@@ -7,7 +7,8 @@ import {
   CancelablePromise,
   Currency,
   InvestmentEventViewModels,
-  LevelInfo
+  LevelInfo,
+  ProgramFollowDetailsFull
 } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
@@ -20,7 +21,12 @@ import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ASSET } from "shared/constants/constants";
-import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
+import {
+  ApiActionResponse,
+  CurrencyEnum,
+  MiddlewareDispatch,
+  RootThunk
+} from "utils/types";
 
 import {
   fetchEventsAction,
@@ -59,12 +65,12 @@ export const dispatchProgramDescriptionWithId = (
   id: string,
   auth = authService.getAuthArg(),
   asset: ASSET = ASSET.PROGRAM
-) => async (dispatch: Dispatch) => {
+): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => dispatch => {
   const action =
     asset === ASSET.FOLLOW
       ? fetchFollowProgramDescriptionAction
       : fetchProgramDescriptionAction;
-  await dispatch(action(id, auth));
+  return dispatch(action(id, auth));
 };
 
 export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
@@ -75,11 +81,14 @@ export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
 export const dispatchProgramDescription = (
   ctx?: NextPageContext,
   asset?: ASSET
-) => async (dispatch: MiddlewareDispatch, getState: TGetState) => {
+): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => (
+  dispatch,
+  getState
+) => {
   const {
     programDetails: { id: stateId }
   } = getState();
-  return await dispatch(
+  return dispatch(
     dispatchProgramDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
       authService.getAuthArg(ctx),
