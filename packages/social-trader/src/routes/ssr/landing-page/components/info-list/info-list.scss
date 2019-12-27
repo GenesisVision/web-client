@@ -3,7 +3,7 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.tab-info-list {
+.info-list {
   @include reset-list();
   display: grid;
   grid-auto-flow: column;
@@ -100,7 +100,6 @@
     display: inline-block;
     height: auto;
     max-width: 160px;
-    margin-bottom: 40px;
   }
 
   &__item-text {

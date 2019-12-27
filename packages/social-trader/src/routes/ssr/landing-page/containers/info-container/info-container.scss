@@ -1,8 +1,9 @@
 @import "~shared/styles/breakpoint";
+@import "~shared/styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.tabs-container {
+.info-container {
   @include grid();
   @include horizontal-padding();
   position: relative;
@@ -18,19 +19,37 @@
     }
   }
 
-  &__controls.tab-controls {
-    @include media-breakpoint-tablet() {
-      display: grid;
-      grid-auto-flow: column;
-      margin-bottom: 100px;
+  &__controls {
+    &.tab-controls {
+      @include media-breakpoint-tablet() {
+        display: grid;
+        grid-auto-flow: column;
+        margin-bottom: 100px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        display: block;
+        margin-bottom: 0;
+        margin-top: 50%;
+        top: 150px;
+        position: sticky;
+      }
     }
 
-    @include media-breakpoint-landscape-tablet() {
-      display: block;
-      margin-bottom: 0;
-      margin-top: 50%;
-      top: 150px;
-      position: sticky;
+    .tab-controls__item-btn {
+      @include transition(color, text-shadow);
+      font-size: 45px;
+      font-weight: 900;
+      text-shadow: -1px 0 $row-color, 0 1px $row-color, 1px 0 $row-color,
+        0 -1px $row-color;
+      color: $main-color;
+    }
+
+    .tab-controls__item--active {
+      .tab-controls__item-btn {
+        text-shadow: none;
+        color: $row-color;
+      }
     }
   }
 

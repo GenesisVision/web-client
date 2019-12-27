@@ -16,9 +16,9 @@ import BrokersContainer from "routes/ssr/landing-page/containers/brokers-contain
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
 import FollowsContainer from "routes/ssr/landing-page/containers/follows-container/follows-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
+import InfoContainer from "routes/ssr/landing-page/containers/info-container/info-container";
 import ProgramsContainer from "routes/ssr/landing-page/containers/programs-container/programs-container";
 import SocialContainer from "routes/ssr/landing-page/containers/social-container/social-container";
-import TabsContainer from "routes/ssr/landing-page/containers/tabs-container/tabs-container";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 import {
   brokersInfo,
@@ -64,7 +64,7 @@ const IndexPage: NextPage<{
         </section>
         <section id="info" className="home__section home__section--bg-white">
           <div className="home__container">
-            <TabsContainer />
+            <InfoContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">

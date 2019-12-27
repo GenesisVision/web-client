@@ -3,9 +3,7 @@ import React from "react";
 import { TBrokerItem } from "routes/ssr/landing-page/static-data/brokers";
 
 const _BrokerAdvantage: React.FC<TBrokerItem> = ({ text, number, imageBg }) => {
-  // const style = imageBg ? { backgroundColor: `url(${imageBg})` } : {};
   const style = imageBg ? { backgroundImage: `url(${imageBg})` } : {};
-  // console.log(style);
   return (
     <li
       className={classNames("broker-info__advantage", {
