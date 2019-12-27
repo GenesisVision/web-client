@@ -5,15 +5,15 @@ import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem,
-  PlatformApi
+  PlatformEvents
 } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
-import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
+import EventsContainer from "routes/ssr/landing-page/containers/events-container/events-container";
 import FollowsContainer from "routes/ssr/landing-page/containers/follows-container/follows-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import InfoContainer from "routes/ssr/landing-page/containers/info-container/info-container";
@@ -26,6 +26,7 @@ import {
 } from "routes/ssr/landing-page/static-data/brokers";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
+import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import { subtractDate } from "shared/utils/dates";
 
@@ -33,20 +34,13 @@ const IndexPage: NextPage<{
   programsData: ItemsViewModelProgramDetailsListItem;
   fundsData: ItemsViewModelFundDetailsListItem;
   followsData: ItemsViewModelFollowDetailsListItem;
-}> = ({ programsData, fundsData, followsData }) => {
+  eventsData: PlatformEvents;
+}> = ({ programsData, fundsData, followsData, eventsData }) => {
   return (
     <Layout title="Genesis Vision">
       <main className="home">
         <FirstScreen />
-        <section className="home__section home__section--bg-white home__section--horizontal-padding">
-          <div className="home__container">
-            <div className="home__grid-row">
-              <div className="home__grid-item home__grid-item--sm">
-                <BestList />
-              </div>
-            </div>
-          </div>
-        </section>
+        <EventsContainer events={eventsData.events} />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <FollowsContainer follows={followsData.items} />
@@ -78,7 +72,7 @@ const IndexPage: NextPage<{
             <BrokersContainer
               brokersInfo={brokersInfo}
               brokersTabs={brokersTabs}
-              title="Brokers and Exhanges"
+              title="Brokers and Exchanges"
             />
           </div>
         </section>
@@ -98,16 +92,12 @@ IndexPage.getInitialProps = async () => {
   try {
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
-    const [programsData, fundsData, followsData] = await Promise.all([
-      // PlatformApi({
-      //   sorting: "ByProfitDesc",
-      //   levelMin: 1,
-      //   levelMax: 7,
-      //   dateFrom,
-      //   dateTo,
-      //   skip: 0,
-      //   take: 6
-      // }),
+    const [
+      programsData,
+      fundsData,
+      followsData,
+      eventsData
+    ] = await Promise.all([
       programsApi.getPrograms({
         sorting: "ByProfitDesc",
         levelMin: 1,
@@ -129,9 +119,12 @@ IndexPage.getInitialProps = async () => {
         sorting: "BySubscribersDesc",
         skip: 0,
         take: 6
+      }),
+      platformApi.getPlatformEvents({
+        take: 5
       })
     ]);
-    return { programsData, fundsData, followsData };
+    return { programsData, fundsData, followsData, eventsData };
   } catch (e) {
     const programsData = {
       total: 0,
@@ -145,6 +138,9 @@ IndexPage.getInitialProps = async () => {
       total: 0,
       items: []
     };
-    return { programsData, fundsData, followsData };
+    const eventsData = {
+      events: []
+    };
+    return { programsData, fundsData, followsData, eventsData };
   }
 };
