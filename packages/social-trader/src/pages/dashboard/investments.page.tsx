@@ -21,7 +21,7 @@ const _InvestmentsPage: React.FC = () => {
       <div>
         <DashboardInvestingTotalContainer />
       </div>
-      <div>
+      {/*<div>
         <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
           <div className="dashboard__public-page-block">
             <div className="dashboard__public-page-select">
@@ -30,7 +30,7 @@ const _InvestmentsPage: React.FC = () => {
             <PublicPageLink />
           </div>
         </DetailsBlock>
-      </div>
+      </div>*/}
       <div>
         <DashboardInvestingFunds />
       </div>
