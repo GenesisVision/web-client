@@ -81,14 +81,13 @@ export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => 
 };
 
 export const logout: logoutFuncType = dispatch => {
+  Push(HOME_ROUTE);
   authService.removeToken();
   removeCookie(ACCOUNT_CURRENCY_KEY);
   dispatch(updateAccountSettingsCurrencyAction(DEFAULT_ACCOUNT_CURRENCY));
-  dispatch(authActions.logoutAction());
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
   dispatch(windowResizeAction());
-  Push(HOME_ROUTE);
 };
 
 export type LoginFuncType = (
