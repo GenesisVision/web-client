@@ -22,36 +22,6 @@ $chart-width: 160px;
   &--value {
     white-space: nowrap;
   }
-  &--avatar-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    .gv-btn {
-      font-size: $font-size-paragraph-mobile;
-      padding: 0;
-    }
-    .program-avatar {
-      width: 40px;
-      margin: 0;
-      padding-right: $padding-xsmall-mobile;
-      @include media-breakpoint-landscape-phone() {
-        padding-right: $padding-xsmall;
-      }
-    }
-    @include media-breakpoint-landscape-phone() {
-      .gv-btn {
-        font-size: $font-size-paragraph;
-      }
-    }
-  }
-  &--title {
-    min-width: 50px;
-    padding: 0;
-    div {
-      padding: $padding-xsmall/10;
-    }
-  }
   &--bottom {
     opacity: 0.3;
   }

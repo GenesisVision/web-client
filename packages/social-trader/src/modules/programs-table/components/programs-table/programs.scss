@@ -21,20 +21,17 @@ $border-radius: 5px;
     }
   }
   &--title {
-    @include font-size($font-size-paragraph);
-    @include adaptive-padding(left, 15px);
-    word-break: break-all;
     width: 170px;
   }
-  &--top {
-    padding-bottom: 3px;
-  }
   &--link {
-    @include link($text-accent-color, $text-color);
+    margin-bottom: 3px;
+    word-break: break-all;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
+    @include font-size($font-size-paragraph);
+    @include link($text-accent-color, $text-color);
   }
 
   &--name {
