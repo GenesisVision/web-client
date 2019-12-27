@@ -14,6 +14,7 @@ $remove-button-color: #293842;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
 
   @include media-breakpoint-landscape-phone() {
     align-items: center;
