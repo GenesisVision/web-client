@@ -13,7 +13,7 @@ import { RootThunk } from "utils/types";
 
 export const serviceGetNotifications = (): RootThunk<
   CancelablePromise<NotificationList>
-> => (dispatch, getState): CancelablePromise<NotificationList> => {
+> => (dispatch, getState) => {
   const { notifications } = getState();
   return notificationsApi
     .getNotifications(authService.getAuthArg(), notifications.options)
