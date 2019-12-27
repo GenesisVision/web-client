@@ -25,7 +25,7 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
         <p className="programs-container__text">
           Select investment programs that suit your personal profile and let the
           manager do the work for you. You will be able to withdraw your
-          investment or profits only at the predefined intervals.
+          investment or profits only at predefined intervals set by the program’s manager.
         </p>
         <LPButton href={PROGRAMS_ROUTE}>Discover</LPButton>
       </div>
