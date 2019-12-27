@@ -45,7 +45,6 @@ const FundsTableModule: React.FC<Props> = React.memo(
         renderBodyRow={(fund, updateRow = () => {}) => (
           <FundsTableRow
             updateRow={updateRow}
-            title={title}
             fund={fund}
             isAuthenticated={isAuthenticated}
           />

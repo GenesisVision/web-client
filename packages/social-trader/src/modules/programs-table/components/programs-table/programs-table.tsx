@@ -79,7 +79,6 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
         <ProgramTableRowShort
           withDispatch
           showRating={Boolean(showRating)}
-          title={title}
           program={program}
           isAuthenticated={Boolean(isAuthenticated)}
         />

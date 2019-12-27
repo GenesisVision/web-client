@@ -26,7 +26,6 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   withDispatch,
   updateRow,
-  title,
   showRating,
   program,
   isAuthenticated
@@ -161,7 +160,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  title: string;
   showRating?: boolean;
   program: ProgramDetailsListItem;
   isAuthenticated?: boolean;

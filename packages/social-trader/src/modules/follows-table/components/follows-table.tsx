@@ -77,7 +77,6 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
         <FollowTableRowShort
           withDispatch
           showRating={Boolean(showRating)}
-          title={title}
           follow={follow}
           isAuthenticated={Boolean(isAuthenticated)}
         />

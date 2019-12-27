@@ -56,7 +56,6 @@ const _FundsTable: React.FC<Props> = ({
     renderBodyRow={fund => (
       <FundsTableRow
         withDispatch
-        title={title}
         fund={fund}
         isAuthenticated={isAuthenticated}
       />

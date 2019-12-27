@@ -7,10 +7,7 @@ import { useTranslation } from "react-i18next";
 import { SearchTableProps } from "./global-search-result";
 
 type ManagersList = any;
-const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
-  data,
-  title
-}) => {
+const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <Table
@@ -21,9 +18,7 @@ const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({
           {t(`managers-table.${column.name}`)}
         </span>
       )}
-      renderBodyRow={manager => (
-        <ManagersTableRow manager={manager} title={title} />
-      )}
+      renderBodyRow={manager => <ManagersTableRow manager={manager} />}
     />
   );
 };

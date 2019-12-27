@@ -53,8 +53,7 @@ const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
     <Link
       to={linkCreator(
         composeProgramDetailsUrl(url),
-        PROGRAM_DETAILS_FOLDER_ROUTE,
-        title
+        PROGRAM_DETAILS_FOLDER_ROUTE
       )}
     >
       <AssetAvatarWithName

@@ -23,7 +23,6 @@ import { formatValue } from "utils/formatter";
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   updateRow,
   withDispatch,
-  title,
   showRating,
   follow,
   isAuthenticated
@@ -126,7 +125,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  title: string;
   showRating?: boolean;
   follow: FollowDetailsListItem;
   isAuthenticated?: boolean;

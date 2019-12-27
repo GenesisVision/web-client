@@ -24,8 +24,7 @@ const _FundsTableRow: React.FC<Props> = ({
   withDispatch,
   fund,
   isAuthenticated,
-  updateRow,
-  title
+  updateRow
 }) => {
   const { linkCreator } = useToLink();
   const link = linkCreator(
@@ -121,7 +120,6 @@ interface Props {
   withDispatch?: boolean;
   fund: FundDetailsListItem;
   isAuthenticated?: boolean;
-  title?: JSX.Element | string;
 }
 
 const FundsTableRow = React.memo(_FundsTableRow);
