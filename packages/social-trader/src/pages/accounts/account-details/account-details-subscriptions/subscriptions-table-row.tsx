@@ -10,6 +10,7 @@ import { AccountSubscriptionsDataType } from "pages/accounts/account-details/ser
 import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
 import UnFollowButton from "pages/follows/follow-details/unfollow-button";
 import React from "react";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { formatDate } from "shared/utils/dates";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { CurrencyEnum } from "utils/types";
@@ -40,7 +41,12 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   return (
     <TableRow stripy>
       <TableCell>
-        <Link to={linkCreator(composeFollowDetailsUrl(url))}>
+        <Link
+          to={linkCreator(
+            composeFollowDetailsUrl(url),
+            FOLLOW_DETAILS_FOLDER_ROUTE
+          )}
+        >
           <div className="subscriptions-table__center-cell">
             <AssetAvatarWithName
               url={logo}

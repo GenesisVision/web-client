@@ -25,7 +25,7 @@ const _FacetCard: React.FC<Props> = ({
       onMouseEnter={setHovered}
       onMouseLeave={setNotHovered}
     >
-      <Link to={linkCreator(composeFacetUrl(facet.url), title, fileRoute)}>
+      <Link to={linkCreator(composeFacetUrl(facet.url), fileRoute, title)}>
         <div className="facet__facet-container">
           <div className="facet__logo-wrapper">
             <ImageBase

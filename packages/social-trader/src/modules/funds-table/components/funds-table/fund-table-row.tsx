@@ -30,7 +30,6 @@ const _FundsTableRow: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
-    String(title),
     FUND_DETAILS_FOLDER_ROUTE
   );
   return (

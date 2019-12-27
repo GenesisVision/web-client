@@ -30,7 +30,6 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
   const { t } = useTranslation();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
-    String(title),
     FUND_DETAILS_FOLDER_ROUTE
   );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (

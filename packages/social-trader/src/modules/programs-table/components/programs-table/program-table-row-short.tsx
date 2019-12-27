@@ -50,7 +50,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   } = program;
   const programLinkProps = linkCreator(
     composeProgramDetailsUrl(program.url),
-    title,
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const { currency, amount } = balance;

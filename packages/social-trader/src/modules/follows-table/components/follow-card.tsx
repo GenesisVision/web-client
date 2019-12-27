@@ -40,7 +40,6 @@ const _FollowCard: React.FC<Props> = ({
   const { t } = useTranslation();
   const linkProps = linkCreator(
     composeFollowDetailsUrl(url),
-    title,
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (

@@ -43,7 +43,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { linkCreator } = useToLink();
   const linkProps = linkCreator(
     composeFollowDetailsUrl(url),
-    title,
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
   return (

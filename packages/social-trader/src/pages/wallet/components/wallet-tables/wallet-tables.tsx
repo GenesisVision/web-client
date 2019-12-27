@@ -45,8 +45,8 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 to={linkCreator(
                   composeWalletCurrencyUrl(currency.toLowerCase()) +
                     TABS.TRANSACTIONS_TAB,
-                  title,
-                  WALLET_CURRENCY_FOLDER_ROUTE
+                  WALLET_CURRENCY_FOLDER_ROUTE,
+                  title
                 )}
               >
                 {t("wallet-page.tabs.transactions")}
@@ -71,8 +71,8 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                   to={linkCreator(
                     composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,
-                    title,
-                    WALLET_CURRENCY_FOLDER_ROUTE
+                    WALLET_CURRENCY_FOLDER_ROUTE,
+                    title
                   )}
                 >
                   {t("wallet-page.tabs.deposit")}
@@ -90,8 +90,8 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                   to={linkCreator(
                     composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,
-                    title,
-                    WALLET_CURRENCY_FOLDER_ROUTE
+                    WALLET_CURRENCY_FOLDER_ROUTE,
+                    title
                   )}
                 >
                   {t("wallet-page.tabs.withdrawals")}

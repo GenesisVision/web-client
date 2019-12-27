@@ -42,8 +42,8 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
               <Link
                 to={linkCreator(
                   composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
-                  WALLET_TOTAL_PAGE_NAME,
-                  WALLET_CURRENCY_FOLDER_ROUTE
+                  WALLET_CURRENCY_FOLDER_ROUTE,
+                  WALLET_TOTAL_PAGE_NAME
                 )}
               >
                 <CurrencyItem
