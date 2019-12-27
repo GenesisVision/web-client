@@ -12,7 +12,13 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => (
     {image && <img src={image} alt="" className="info-list__item-image" />}
     {texts && (
       <div className="info-list__item-text">
-        {texts.map(item => (item.bold ? <b>{item.text}</b> : <>{item.text}</>))}
+        {texts.map((item, index) =>
+          item.bold ? (
+            <b key={index}>{item.text}</b>
+          ) : (
+            <span key={index}>{item.text}</span>
+          )
+        )}
       </div>
     )}
     {button && (
