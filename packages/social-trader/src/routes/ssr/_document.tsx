@@ -1,6 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-import { ROLE_ENV } from "shared/constants/constants";
 
 class MyDocument extends Document {
   render() {
