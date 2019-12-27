@@ -2019,7 +2019,7 @@
         "trading": {
           "left-field": {
             "text": "Create trading account ",
-            "text-2": "and start to trade",
+            "text-2": "and start trading",
             "button": "Create account"
           },
           "right-field": {
@@ -2029,12 +2029,12 @@
         },
         "investing": {
           "left-field": {
-            "text": "There's no such data right now. ",
+            "text": "",
             "text-2": "Find programs.",
             "button": "Programs"
           },
           "right-field": {
-            "text": "Find funds to invest",
+            "text": "Find funds",
             "button": "Funds"
           }
         }
@@ -2042,7 +2042,7 @@
       "see-all": "See all",
       "get-started-title": "Get started.",
       "get-started-invest": "There's no such data right now. Find programs or the funds to invest.",
-      "get-started-account": "Create trading account and start to trade",
+      "get-started-account": "Create trading account and start trading.",
       "get-started-fund": "Create your first fund",
       "total": "Total",
       "AUM": "AUM",
