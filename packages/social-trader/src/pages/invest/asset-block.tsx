@@ -53,7 +53,6 @@ const _AssetBlock: React.FC<Props> = ({
       <div className="asset-block__assets-block">
         <DashboardHorizontalList
           darkShadow={blockType === DETAILS_BLOCK_TYPE.TRANSPARENT}
-          left={left}
         >
           {assets.map(renderCard)}
         </DashboardHorizontalList>
