@@ -1,4 +1,4 @@
-import { WALLET_TOTAL_PAGE_ROUTE } from "components/wallet/wallet.routes";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import ImgCreditCard from "routes/ssr/landing-page/images/slider/credit-card.svg";
 import ImgPeople from "routes/ssr/landing-page/images/slider/people.svg";
 
