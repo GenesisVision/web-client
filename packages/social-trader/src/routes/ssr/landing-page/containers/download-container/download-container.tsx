@@ -13,8 +13,8 @@ const DownloadContainer: React.FC = () => (
     <div className="download-container__info">
       <h2 className="download-container__title">Download app</h2>
       <p className="download-container__text">
-        Receive a 100% bonus on any deposit made on Genesis Markets. The bonus
-        is unlocked as soon as you start trading!
+        The best social trading experience. Download the Genesis Vision app
+        today.
       </p>
       <IconList
         items={appLinks}
