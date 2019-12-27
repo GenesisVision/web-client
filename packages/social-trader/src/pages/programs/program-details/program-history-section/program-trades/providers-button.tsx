@@ -14,8 +14,8 @@ import Popover, {
 import { OrderSignalProgramInfo } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React from "react";
-import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { composeProgramDetailsUrl } from "utils/compose-url";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import { composeFollowDetailsUrl } from "utils/compose-url";
 
 const _ProvidersButton: React.FC<Props> = ({ providers }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
@@ -52,8 +52,8 @@ const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
   return (
     <Link
       to={linkCreator(
-        composeProgramDetailsUrl(url),
-        PROGRAM_DETAILS_FOLDER_ROUTE
+        composeFollowDetailsUrl(url),
+        FOLLOW_DETAILS_FOLDER_ROUTE
       )}
     >
       <AssetAvatarWithName
