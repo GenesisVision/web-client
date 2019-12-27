@@ -18,15 +18,17 @@ Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
   const tableView =
     (getCookie(GLOBAL_TABLE_VIEW, ctx) as LIST_VIEW) || LIST_VIEW.CARDS;
-  await Promise.all([
-    ctx.reduxStore.dispatch(
-      fetchFollowsAction({
-        ...filtering,
-        authorization: authService.getAuthArg(ctx)
-      })
-    ),
-    ctx.reduxStore.dispatch(updateGlobalTableViewAction(tableView))
-  ]);
+  try {
+    await Promise.all([
+      ctx.reduxStore.dispatch(
+        fetchFollowsAction({
+          ...filtering,
+          authorization: authService.getAuthArg(ctx)
+        })
+      ),
+      ctx.reduxStore.dispatch(updateGlobalTableViewAction(tableView))
+    ]);
+  } catch (e) {}
 };
 
 export default withDefaultLayout(Page);
