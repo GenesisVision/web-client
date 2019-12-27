@@ -1,0 +1,30 @@
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+
+.mobile-burger {
+  @include transition(fill);
+  @include reset-button();
+  line-height: 0;
+  width: 30px;
+  height: 30px;
+  text-align: right;
+
+  &__item {
+    display: block;
+    height: 3px;
+    width: 30px;
+    background-color: $background-pretender;
+    border-radius: 2px;
+
+    &:last-child {
+      margin-top: 10px;
+      width: 15px;
+    }
+  }
+
+  &--open-menu {
+    .mobile-burger__item:last-child {
+      display: none;
+    }
+  }
+}

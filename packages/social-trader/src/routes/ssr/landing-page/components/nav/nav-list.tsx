@@ -1,0 +1,30 @@
+import "./nav.scss";
+
+import React from "react";
+import NavItem from "routes/ssr/landing-page/components/nav/nav-item";
+import { TNavHeader } from "routes/ssr/landing-page/static-data/nav-links";
+
+const _NavList: React.FC<Props> = ({ menuItems, className, onClick }) => (
+  <nav className={className}>
+    <ul className="nav-list">
+      {menuItems.map((item: any, index: number) => (
+        <NavItem
+          key={index}
+          name={item.name}
+          href={item.href}
+          state={item.state}
+          onClick={onClick}
+        />
+      ))}
+    </ul>
+  </nav>
+);
+
+export interface Props {
+  menuItems: TNavHeader[];
+  className?: string;
+  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
+}
+
+const NavList = React.memo(_NavList);
+export default NavList;

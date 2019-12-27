@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gv-api-web": "^2.0.0",
     "next": "../../next.tgz",
-    "shared": "^1.0.0",
-    "gv-api-web": "^2.0.0"
+    "shared": "^1.0.0"
   },
   "scripts": {
     "start": "node index.js",

@@ -1,0 +1,132 @@
+@import "~shared/styles/breakpoint";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: $main-color;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: $row-color;
+}
+
+#__next {
+  background-color: $landing-bg;
+  color: $main-color;
+
+  .popover,
+  .tooltip__popover {
+    background-color: $landing-color-icon;
+  }
+}
+
+a,
+label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  font-size: 13px;
+  line-height: 1.6;
+  padding-bottom: 0;
+
+  @include media-breakpoint-tablet() {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 14px;
+  }
+
+  @include media-breakpoint-desktop() {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 18px;
+  }
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.6;
+  padding-bottom: 0;
+  margin-bottom: 16px;
+
+  @include media-breakpoint-tablet() {
+    font-size: 38px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 26px;
+  }
+
+  @include media-breakpoint-desktop() {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 38px;
+  }
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  padding-bottom: 0;
+
+  @include media-breakpoint-tablet() {
+    font-size: 24px;
+    line-height: 40px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    font-size: 22px;
+  }
+}
+
+.header-center {
+  text-align: center;
+}
+
+$scroll-thumb-color: #4f4d68;
+$scroll-background: rgba($scroll-thumb-color, 0.1);
+$scroll-width: 2px;
+
+::-webkit-scrollbar {
+  width: $scroll-width;
+  height: $scroll-width;
+}
+
+::-webkit-scrollbar-track {
+  background: $scroll-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $scroll-thumb-color;
+  border-radius: $scroll-width / 2;
+}
+
+::-webkit-scrollbar-corner {
+  background: $scroll-background;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $scroll-thumb-color $scroll-background;
+}

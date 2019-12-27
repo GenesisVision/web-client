@@ -1,0 +1,56 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+
+.nav-list {
+  @include reset-list();
+
+  @include media-breakpoint-desktop() {
+    display: grid;
+    grid-auto-flow: column;
+  }
+
+  &__item {
+    @include media-breakpoint-desktop() {
+      margin-right: 40px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @include media-breakpoint-large-desktop() {
+      margin-right: 60px;
+    }
+  }
+
+  &__link {
+    @include transition(color);
+    @include reset-link();
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: $main-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $landing-link-hover;
+    }
+
+    @include media-breakpoint-tablet() {
+      font-weight: 600;
+      font-size: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 20px;
+    }
+  }
+}
