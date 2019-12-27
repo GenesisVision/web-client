@@ -15,7 +15,7 @@ const _DashboardHorizontalList: React.FC<
     if (!ref.current) return;
     left && (ref.current.scrollLeft = 100000);
     setEndOfList(left ? 0 : ref.current.scrollWidth - ref.current.offsetWidth);
-  }, [ref, left, setEndOfList]);
+  }, [ref.current, left, setEndOfList]);
   const handleScroll = useCallback(() => {
     if (!ref.current) return;
     setScroll(ref.current.scrollLeft);
