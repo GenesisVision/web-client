@@ -1,3 +1,4 @@
+import { DETAILS_BLOCK_TYPE } from "components/details/details-block";
 import { createToUrl } from "components/link/link.helper";
 import Page from "components/page/page";
 import {
@@ -25,8 +26,10 @@ const _InvestPage: React.FC<Props> = ({
   const title = t("invest.title");
   return (
     <Page title={title}>
-      <h1>{title}</h1>
       <AssetBlock
+        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
+        left
+        side
         title={t("invest.follows.title")}
         description={t("invest.follows.text")}
         assets={follows}
@@ -49,6 +52,9 @@ const _InvestPage: React.FC<Props> = ({
         )}
       />
       <AssetBlock
+        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
+        left
+        side
         title={t("invest.funds.title")}
         description={t("invest.funds.text")}
         assets={funds}
