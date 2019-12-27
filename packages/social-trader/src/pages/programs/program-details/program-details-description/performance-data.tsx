@@ -39,9 +39,11 @@ const _PerformanceData: React.FC<Props> = ({
           {currency}
         </StatisticItem>
       )}
-      <StatisticItem label={t("program-details-page.description.leverage")}>
-        <Leverage min={leverageMin} max={leverageMax} />
-      </StatisticItem>
+      {!!leverageMin && !!leverageMax && (
+        <StatisticItem label={t("program-details-page.description.leverage")}>
+          <Leverage min={leverageMin} max={leverageMax} />
+        </StatisticItem>
+      )}
       {programDetails && (
         <>
           <StatisticItem label={t("program-details-page.description.period")}>
