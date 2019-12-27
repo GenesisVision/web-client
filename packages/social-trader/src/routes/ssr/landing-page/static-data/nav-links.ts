@@ -29,36 +29,16 @@ export const navHeader: TNavHeader[] = [
 
 export const navFooter: TNavHeader[] = [
   {
-    name: "Buy GVT",
-    href: "/#buy"
-  },
-  {
-    name: "Investors",
-    href: "/#investor"
-  },
-  {
-    name: "Managers",
-    href: "/#manager"
-  },
-  {
-    name: "Exchange",
-    href: "/#buy"
-  },
-  {
-    name: "Blog",
-    href: "https://blog.genesis.vision/"
-  },
-  {
-    name: "Careers",
-    href: "/careers.html"
+    name: "Referral program",
+    href: "/referral-program/"
   },
   {
     name: "Fees",
     href: "/fees/"
   },
   {
-    name: "About",
-    href: "/about/"
+    name: "Blog",
+    href: "https://blog.genesis.vision/"
   },
   {
     name: "Feedback",
@@ -70,11 +50,11 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Glossary",
-    href: "/glossary/"
+    href: "/glossary.html"
   },
   {
     name: "AML Manual",
-    href: "/aml-manual/"
+    href: "/aml-manual.html"
   },
   {
     name: "White paper",
@@ -82,15 +62,15 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Privacy policy",
-    href: "/privacy-policy/"
+    href: "/privacy-policy.html"
   },
   {
     name: "Terms and conditions",
-    href: "/terms/"
+    href: "/terms.html"
   },
   {
     name: "Download terminal",
-    href: "/downloads/"
+    href: "/downloads.html"
   }
 ];
 
