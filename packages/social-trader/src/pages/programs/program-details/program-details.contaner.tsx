@@ -116,7 +116,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         description={description.publicInfo.description}
         notificationsUrl={createProgramNotificationsToUrl(url, title)}
         settingsUrl={
-          description.publicInfo.status !== "Disabled"
+          description.publicInfo.status !== "Disabled" &&
+          description.publicInfo.status !== "Closed"
             ? createProgramSettingsToUrl(
                 description.publicInfo.url,
                 description.publicInfo.title

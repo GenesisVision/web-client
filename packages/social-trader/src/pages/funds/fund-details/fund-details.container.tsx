@@ -59,7 +59,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           description.publicInfo.title
         )}
         settingsUrl={
-          description.publicInfo.status !== "Disabled"
+          description.publicInfo.status !== "Disabled" &&
+          description.publicInfo.status !== "Closed"
             ? createFundSettingsToUrl(
                 description.publicInfo.url,
                 description.publicInfo.title
