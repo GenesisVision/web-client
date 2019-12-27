@@ -5,17 +5,18 @@
 .mobile-nav {
   @include container();
   @include transition(height);
-  position: absolute;
-  top: 104px;
+  position: fixed;
+  top: 64px;
   left: 0;
   height: 0;
   width: 100%;
   background-color: $landing-bg;
   color: $main-color;
-  z-index: 2;
+  z-index: 3;
   overflow: auto;
 
   @include media-breakpoint-tablet() {
+    top: 130px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-content: center;

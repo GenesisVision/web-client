@@ -21,7 +21,6 @@ const LPHeader: React.FC = () => {
           <div className="lp-header__burger">
             <MobileNav navHeader={navHeader} navFooter={navFooter} />
           </div>
-          {/*<NavList menuItems={navHeader} className="lp-header__mobile-menu" />*/}
           <div className="lp-header__logo">
             <Link
               className="lp-header__logo-link"

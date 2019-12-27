@@ -61,7 +61,7 @@ const IndexPage: NextPage<{
             <FundsContainer funds={fundsData.items} />
           </div>
         </section>
-        <section className="home__section home__section--bg-white">
+        <section id="info" className="home__section home__section--bg-white">
           <div className="home__container">
             <TabsContainer />
           </div>

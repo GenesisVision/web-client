@@ -3,13 +3,22 @@
 @import "../../styles/grid";
 
 .lp-header {
+  @include transition(background-color);
   background-color: $landing-bg;
   color: $main-color;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  @include media-breakpoint-desktop() {
+    background-color: rgba($landing-bg, 0.5);
+  }
 
   &__container {
     @include container();
-    padding-top: 35px;
-    padding-bottom: 35px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     @include media-breakpoint-tablet() {
       padding-top: 40px;

@@ -4,6 +4,16 @@
 @import "grid";
 
 .home {
+  padding-top: 64px;
+
+  @include media-breakpoint-tablet() {
+    padding-top: 130px;
+  }
+
+  @include media-breakpoint-desktop() {
+    padding-top: 138px;
+  }
+
   &__container {
     @include container();
   }

@@ -1,3 +1,6 @@
+import { INVEST_ROUTE } from "routes/invest.routes";
+import { TRADE } from "routes/trade.routes";
+
 export type TNavFooter = {
   state?: string;
   name: string;
@@ -10,20 +13,16 @@ export type TNavHeader = TNavFooter & {
 
 export const navHeader: TNavHeader[] = [
   {
-    name: "For investor",
-    href: "/investor/programs/"
+    name: "Invest",
+    href: INVEST_ROUTE
   },
   {
-    name: "For manager",
-    href: "/manager/programs/"
+    name: "Trade",
+    href: TRADE
   },
   {
-    name: "FAQ",
-    href: "/faq/"
-  },
-  {
-    name: "Contacts",
-    href: "#contacts"
+    name: "Info",
+    href: "#info"
   }
 ];
 
