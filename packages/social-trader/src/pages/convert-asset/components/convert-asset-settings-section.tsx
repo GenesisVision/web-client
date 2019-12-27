@@ -3,7 +3,10 @@ import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { programsInfoSelector } from "reducers/platform-reducer";
+import {
+  createFollowInfoSelector,
+  programsInfoSelector
+} from "reducers/platform-reducer";
 
 import useConvertAssetSubmit from "../convert-asset-submit.hook";
 import ConvertAssetSettings, {
@@ -20,6 +23,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
 
   const programsInfo = useSelector(programsInfoSelector);
+  const followInfo = useSelector(createFollowInfoSelector);
 
   const handleCreate = useConvertAssetSubmit({
     fromTo,
@@ -36,6 +40,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   return (
     <AssetContent>
       <ConvertAssetSettings
+        followInfo={followInfo}
         currency={currency}
         id={id}
         broker={broker}
