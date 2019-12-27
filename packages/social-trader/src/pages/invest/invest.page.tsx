@@ -28,7 +28,6 @@ const _InvestPage: React.FC<Props> = ({
     <Page title={title}>
       <AssetBlock
         blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
-        left
         side
         title={t("invest.follows.title")}
         description={t("invest.follows.text")}
@@ -40,6 +39,7 @@ const _InvestPage: React.FC<Props> = ({
       />
       <AssetBlock
         side
+        left
         title={t("invest.programs.title")}
         description={t("invest.programs.text")}
         assets={programs}
@@ -53,7 +53,6 @@ const _InvestPage: React.FC<Props> = ({
       />
       <AssetBlock
         blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
-        left
         side
         title={t("invest.funds.title")}
         description={t("invest.funds.text")}
