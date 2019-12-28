@@ -41,7 +41,7 @@ a {
 }
 
 $scroll-background: transparent;
-$scroll-thumb-color: rgba(255, 255, 255, 0.3);
+$scroll-thumb-color: $text-dark-color;
 $scroll-width: 6px;
 ::-webkit-scrollbar {
   width: $scroll-width;

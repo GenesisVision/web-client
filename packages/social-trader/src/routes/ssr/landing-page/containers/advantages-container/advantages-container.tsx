@@ -1,6 +1,6 @@
 import "./advantages-container.scss";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { animated, useTrail } from "react-spring";
 import AdvantagesList from "routes/ssr/landing-page/components/advantages-list/advantages-list";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";

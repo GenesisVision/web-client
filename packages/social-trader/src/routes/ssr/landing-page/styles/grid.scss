@@ -30,7 +30,3 @@ $grid-gap-mobile: 14px;
     grid-template-columns: repeat($grid-columns, 1fr);
   }
 }
-
-//@mixin grid-auto-fit() {
-//  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-//}

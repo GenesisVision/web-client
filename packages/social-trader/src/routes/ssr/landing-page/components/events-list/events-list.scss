@@ -2,17 +2,16 @@
 @import "~shared/styles/breakpoint";
 @import "../../styles/mixins";
 
-.best-list {
+.events-list {
   @include reset-list();
 
   &__item {
-    display: flex;
-    align-items: center;
-    padding: 20px;
     border: 1px solid $landing-bg-gray-2;
-    box-sizing: border-box;
     border-radius: 20px;
     margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
 
     @include media-breakpoint-large-desktop() {
       padding-left: 40px;
@@ -20,20 +19,25 @@
     }
 
     &--last {
-      display: none;
-
-      @include media-breakpoint-tablet() {
-        display: flex;
-      }
-
-      .best-list__item-avatar {
+      .events-list__item-avatar {
         background-image: linear-gradient(0deg, #f7f7f7, #f7f7f7);
       }
 
-      .best-list__item-image {
+      .events-list__item-image {
         border-radius: 0;
         width: 36px;
         height: 20px;
+      }
+    }
+  }
+
+  &__item-link {
+    @include reset-link();
+    display: block;
+
+    &:hover {
+      .events-list__item-title {
+        color: $primary-color;
       }
     }
   }
@@ -43,7 +47,8 @@
     height: 40px;
     margin-right: 20px;
     background-color: $landing-color-icon;
-    border-radius: 15px;
+    border-radius: 10px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +56,7 @@
     @include media-breakpoint-tablet() {
       width: 60px;
       height: 60px;
+      border-radius: 15px;
     }
 
     @include media-breakpoint-large-desktop() {
@@ -60,9 +66,13 @@
   }
 
   &__item-image {
-    border-radius: 15px;
+    border-radius: 10px;
     width: 100%;
     height: auto;
+
+    @include media-breakpoint-tablet() {
+      border-radius: 15px;
+    }
 
     &--default {
       height: 40%;
@@ -70,6 +80,7 @@
   }
 
   &__item-title {
+    @include transition(color);
     font-weight: 600;
     font-size: 13px;
     line-height: 1;
@@ -125,5 +136,19 @@
 
   &__item-button {
     margin-left: auto;
+  }
+
+  &__only-mob {
+    @include media-breakpoint-tablet() {
+      display: none;
+    }
+  }
+
+  &__only-desktop {
+    display: none;
+
+    @include media-breakpoint-tablet() {
+      display: inline-block;
+    }
   }
 }

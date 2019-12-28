@@ -30,18 +30,15 @@
     .nav-list__item {
       opacity: 0;
       animation: 1s appear forwards;
-      //animationDelay: this.props.delay
     }
 
     .nav-list__link {
-      //padding: "1rem 0",
       transform: translateX(-2%);
       animation: 0.5s slideIn forwards;
-      //animationDelay: this.props.delay
 
       @include media-breakpoint-tablet() {
         padding-top: 0;
-        padding-bottom: 35px;
+        padding-bottom: 36px;
       }
     }
   }

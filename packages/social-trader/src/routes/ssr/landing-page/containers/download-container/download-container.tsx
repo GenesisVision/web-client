@@ -13,8 +13,9 @@ const DownloadContainer: React.FC = () => (
     <div className="download-container__info">
       <h2 className="download-container__title">Download app</h2>
       <p className="download-container__text">
-        The best social trading experience. Download the Genesis Vision app
-        today.
+        The best social trading experience.
+        <br />
+        Download the Genesis Vision app today.
       </p>
       <IconList
         items={appLinks}

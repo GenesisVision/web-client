@@ -36,7 +36,6 @@
   &__item {
     background-color: $main-color;
     border-radius: 20px;
-    padding: 34px;
     width: 210px;
     line-height: 1.6;
 
@@ -56,13 +55,21 @@
         margin-top: 40px;
       }
     }
+  }
+  &__item-link {
+    @include transition(box-shadow);
+    @include reset-link();
+    display: block;
+    padding: 34px;
+    height: 100%;
+
+    &:hover {
+      box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.05);
+    }
 
     @include media-breakpoint-desktop() {
       padding: 40px;
     }
-  }
-  &__item-link {
-    display: block;
   }
 
   &__item-avatar {
