@@ -73,10 +73,6 @@
     @include media-breakpoint-tablet() {
       border-radius: 15px;
     }
-
-    &--default {
-      height: 40%;
-    }
   }
 
   &__item-title {
