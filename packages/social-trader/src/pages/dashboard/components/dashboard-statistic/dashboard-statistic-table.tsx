@@ -52,7 +52,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
                 value={event.amount}
                 prefix={PROFITABILITY_PREFIX.SIGN}
               >
-                {Math.abs(event.amount)}
+                {Math.abs(event.amount)} {event.currency}
               </Profitability>
             </TableCell>
           </TableRow>
