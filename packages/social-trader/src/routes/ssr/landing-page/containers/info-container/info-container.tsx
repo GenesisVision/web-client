@@ -37,9 +37,7 @@ const InfoContainer: React.FC = () => {
         <animated.div
           className="info-container__tab-info"
           key={key}
-          style={{
-            ...props
-          }}
+          style={props as any}
         >
           <InfoList id={item.id} listItems={item.listItems} />
         </animated.div>
