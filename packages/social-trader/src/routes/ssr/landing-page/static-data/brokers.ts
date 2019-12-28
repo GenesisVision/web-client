@@ -17,6 +17,7 @@ enum BROKERS {
 }
 
 export type TBrokerInfo = {
+  type?: "Attach" | "Create";
   id: number;
   title: string;
   description?: string;
@@ -105,6 +106,7 @@ export const brokersInfo: TBrokerInfo[] = [
     ]
   },
   {
+    type: "Attach",
     id: 1,
     title: BROKERS.BINANCE,
     description:
