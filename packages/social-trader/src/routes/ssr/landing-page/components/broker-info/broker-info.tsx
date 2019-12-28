@@ -1,10 +1,10 @@
 import "./broker-info.scss";
 
 import classNames from "classnames";
+import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
 import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TBrokerInfo } from "routes/ssr/landing-page/static-data/brokers";
-import { TRADE } from "routes/trade.routes";
 
 import BrokerAdvantage from "./broker-advantage";
 
@@ -28,7 +28,9 @@ const _BrokerInfo: React.FC<Props> = ({
     >
       <h3 className="broker-info__subtitle">{title}</h3>
       {description && <p className="broker-info__description">{description}</p>}
-      <LPButton href={TRADE}>Start trading</LPButton>
+      <LPButton href={composeCreateAccountRouteWithBroker(title)}>
+        Start trading
+      </LPButton>
       <ul className="broker-info__list-advantages">
         {listItems.map((item, index) => (
           <BrokerAdvantage
