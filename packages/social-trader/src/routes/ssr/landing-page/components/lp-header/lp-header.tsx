@@ -3,14 +3,14 @@ import "./lp-header.scss";
 import Link from "components/link/link";
 import React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
+import { INVEST_ROUTE } from "routes/invest.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { MainLogo } from "routes/ssr/landing-page/components/main-logo/main-logo";
 import MobileNav from "routes/ssr/landing-page/components/mobile-nav/mobile-nav";
 import NavList from "routes/ssr/landing-page/components/nav/nav-list";
 import {
   navFooter,
-  navHeader,
-  START_ROUTE
+  navHeader
 } from "routes/ssr/landing-page/static-data/nav-links";
 
 const LPHeader: React.FC = () => {
@@ -33,7 +33,7 @@ const LPHeader: React.FC = () => {
           </div>
           <NavList menuItems={navHeader} className="lp-header__nav" />
           <div className="lp-header__start-btn">
-            <LPButton color="secondary" href={START_ROUTE}>
+            <LPButton color="secondary" href={INVEST_ROUTE}>
               Get started
             </LPButton>
           </div>

@@ -30,7 +30,6 @@ const _EventItem: React.FC<IBestItemProps> = ({
         state: `/ ${title}`
       }
     : undefined;
-  console.log(linkProps);
   return (
     <li
       className={classNames("events-list__item", {

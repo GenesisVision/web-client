@@ -10,7 +10,6 @@ interface Props {
 
 const _FollowsContainer: React.FC<Props> = ({ events }) => {
   if (!events.length) return null;
-  console.log(events);
   return (
     <section className="home__section home__section--bg-white">
       <div className="home__container">
