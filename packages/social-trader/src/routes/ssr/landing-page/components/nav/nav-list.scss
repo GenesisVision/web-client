@@ -36,7 +36,7 @@
 
     &--sub-open {
       @include media-breakpoint-desktop() {
-        background-color: rgba($main-color, 0.1);
+        background-color: #1d1a3d;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
       }
@@ -80,7 +80,7 @@
       position: absolute;
       height: 0;
       left: 0;
-      background-color: rgba($main-color, 0.1);
+      background-color: #1d1a3d;
       color: $main-color;
       z-index: 3;
       overflow: auto;
