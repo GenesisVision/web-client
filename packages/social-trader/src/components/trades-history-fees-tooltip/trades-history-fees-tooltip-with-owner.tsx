@@ -6,14 +6,11 @@ import { formatValue } from "utils/formatter";
 
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
 
-const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({
-  trade,
-  children
-}) => {
+const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({ trade }) => {
   if (trade.totalCommissionByType)
     return (
       <TradesHistoryFeesTooltip trade={trade}>
-        {children}
+        <span>{formatValue(trade.totalCommission, DEFAULT_DECIMAL_SCALE)}</span>
       </TradesHistoryFeesTooltip>
     );
   else
@@ -36,12 +33,15 @@ const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({
           )
         }
       >
-        <span>{children}</span>
+        <span>
+          {formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}{" "}
+          {trade.originalCommissionCurrency}
+        </span>
       </Tooltip>
     );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
   trade: OrderSignalModel;
 }
 
