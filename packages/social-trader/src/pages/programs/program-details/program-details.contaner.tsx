@@ -69,10 +69,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const personalDetails = followPersonalDetails || programPersonalDetails;
   const showFollowStatistic =
     (route === ASSET.FOLLOW && !!followPersonalDetails) ||
-    (!!followPersonalDetails && !programDetails);
+    (!!followDetails && !programDetails);
   const showProgramStatistic =
     (route === ASSET.PROGRAM && !!programDetails) ||
-    (!!programDetails && !followPersonalDetails);
+    (!!programDetails && !followDetails);
 
   const handleDispatchDescription = useCallback(() => {
     dispatch(dispatchProgramDescriptionWithId(id, undefined, assetType));
