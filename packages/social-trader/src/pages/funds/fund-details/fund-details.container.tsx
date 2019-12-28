@@ -11,6 +11,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
+import filesService from "services/file-service";
 import { ASSET } from "shared/constants/constants";
 import {
   createFundNotificationsToUrl,
@@ -39,7 +40,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       title={description.publicInfo.title}
       schemas={[getFundSchema(description)]}
       description={description.publicInfo.description}
-      previewImage={description.publicInfo.logo}
+      previewImage={filesService.getFileUrl(description.publicInfo.logo)}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}

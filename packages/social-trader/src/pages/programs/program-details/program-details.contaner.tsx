@@ -15,6 +15,7 @@ import { getSchema } from "pages/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import filesService from "services/file-service";
 import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
@@ -105,7 +106,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     <Page
       title={title}
       description={description.publicInfo.description}
-      previewImage={description.publicInfo.logo}
+      previewImage={filesService.getFileUrl(description.publicInfo.logo)}
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection

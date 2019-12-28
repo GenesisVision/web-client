@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import filesService from "../services/file-service";
-
 export const schema = (() => {
   let index = 0;
 
@@ -19,6 +17,10 @@ export const schema = (() => {
       : null;
   };
 })();
+
+export const urlMeta = (url?: string) => {
+  return url ? <meta key="og-url" property="og:url" content={url} /> : null;
+};
 
 export const titleMeta = (title?: string) => {
   return title ? (
@@ -38,7 +40,7 @@ export const descriptionMeta = (description?: string) => {
         content={description}
       />
       <meta
-        key="twitter-description"
+        key="tw-description"
         name="twitter:description"
         content={description}
       />
@@ -46,20 +48,21 @@ export const descriptionMeta = (description?: string) => {
   ) : null;
 };
 
+export const commonMeta = () => {
+  return (
+    <>
+      <meta key={"og-type"} property="og:type" content="website" />
+      <meta key={"og-sn"} property="og:site_name" content="Genesis Vision" />
+      <meta key={"tw-site"} property="twitter:site" content="Genesis Vision" />
+    </>
+  );
+};
+
 export const imageMeta = (image?: string) => {
   return image ? (
     <>
-      <meta
-        property="og:image"
-        key="og-image"
-        content={filesService.getFileUrl(image)}
-      />
-
-      <meta
-        name="twitter:image:src"
-        key="twitter:image:src"
-        content={filesService.getFileUrl(image)}
-      />
+      <meta property="og:image" key="og-image" content={image} />
+      <meta name="twitter:image:src" key="twitter:image:src" content={image} />
     </>
   ) : null;
 };
