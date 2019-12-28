@@ -4,9 +4,11 @@ import "./styles/home.scss";
 import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
-  PlatformApi
+  ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
+import { fetchFollows } from "modules/follows-table/services/follows-table.service";
+import { fetchFunds } from "modules/funds-table/services/funds-table.service";
+import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { NextPage } from "next";
 import React from "react";
 import BestList from "routes/ssr/landing-page/components/best/best-list";
@@ -24,9 +26,6 @@ import {
   brokersInfo,
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
-import followApi from "services/api-client/follow-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
 import { subtractDate } from "shared/utils/dates";
 
 const IndexPage: NextPage<{
@@ -108,7 +107,7 @@ IndexPage.getInitialProps = async () => {
       //   skip: 0,
       //   take: 6
       // }),
-      programsApi.getPrograms({
+      fetchPrograms({
         sorting: "ByProfitDesc",
         levelMin: 1,
         levelMax: 7,
@@ -117,7 +116,7 @@ IndexPage.getInitialProps = async () => {
         skip: 0,
         take: 6
       }),
-      fundsApi.getFunds({
+      fetchFunds({
         sorting: "ByProfitDesc",
         showIn: "USDT",
         dateFrom,
@@ -125,7 +124,7 @@ IndexPage.getInitialProps = async () => {
         skip: 0,
         take: 12
       }),
-      followApi.getFollowAssets({
+      fetchFollows({
         sorting: "BySubscribersDesc",
         skip: 0,
         take: 6
