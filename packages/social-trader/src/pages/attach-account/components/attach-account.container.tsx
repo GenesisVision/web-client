@@ -14,7 +14,7 @@ import AttachAccountSettings, {
   IAttachAccountSettingsFormValues
 } from "./attach-account-settings/attach-account-settings";
 
-const _AttachAccountPage: React.FC<Props> = () => {
+const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
   const [t] = useTranslation();
   const pushMiddleware = () => Push(TRADING_ROUTE);
   const { sendRequest: attach } = useApiRequest({
@@ -40,6 +40,7 @@ const _AttachAccountPage: React.FC<Props> = () => {
       </div>
       <div className="create-asset__content">
         <AttachAccountSettings
+          requestBrokerName={requestBrokerName}
           onSubmit={handleSubmit}
           data={exchanges!}
           loaderData={[]}
@@ -49,7 +50,9 @@ const _AttachAccountPage: React.FC<Props> = () => {
   );
 };
 
-interface Props {}
+interface Props {
+  requestBrokerName?: string;
+}
 
 const AttachAccountContainer = React.memo(_AttachAccountPage);
 export default AttachAccountContainer;

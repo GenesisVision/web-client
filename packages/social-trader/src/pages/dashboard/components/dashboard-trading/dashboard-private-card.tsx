@@ -1,7 +1,4 @@
-import GVButton from "components/gv-button";
-import Hint from "components/hint/hint";
 import { useToLink } from "components/link/link.helper";
-import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardRow,
@@ -14,18 +11,18 @@ import {
   TableCardActionsItem,
   TableCardActionsItemContainer
 } from "components/table/components/table-card/table-card-actions";
-import {
-  BrokerTradeServerType,
-  DashboardTradingAsset,
-  ProgramMinInvestAmount
-} from "gv-api-web";
-import { TEvent } from "hooks/anchor.hook";
+import { DashboardTradingAsset } from "gv-api-web";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
+import {
+  ConfirmTFAButton,
+  getMinDepositCreateProgram,
+  MakeProgramButton
+} from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
@@ -41,7 +38,6 @@ import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
-import { CurrencyEnum } from "utils/types";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   const programMinDepositAmounts = useSelector(
@@ -110,6 +106,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
             variant={"text"}
           />
         </TableCardActionsItemContainer>
+      )}
+      {asset.actions.canConfirm2FA && (
+        <ConfirmTFAButton onApply={updateItems} id={asset.id} />
       )}
     </TableCardActions>
   );
@@ -185,53 +184,6 @@ interface Props {
   updateItems: VoidFunction;
   asset: DashboardTradingAsset;
 }
-
-const MakeProgramButton: React.FC<{
-  necessaryMoney: string;
-  isEnoughMoney: boolean;
-  id: string;
-  clearAnchor: (event: TEvent) => void;
-}> = React.memo(({ isEnoughMoney, id, clearAnchor, necessaryMoney }) => {
-  const { linkCreator } = useToLink();
-  const [t] = useTranslation();
-  const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: CONVERT_ASSET.ACCOUNT,
-    assetTo: CONVERT_ASSET.PROGRAM
-  });
-  const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
-  const label = t("dashboard-page.trading.actions.make-program");
-  return isEnoughMoney ? (
-    <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
-      {label}
-    </TableCardActionsItem>
-  ) : (
-    <GVButton variant="text" color="secondary">
-      <Hint
-        content={label}
-        className="dashboard-trading__disable-button"
-        vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t(
-          "dashboard-page.trading.tooltips.is-not-enough-money",
-          { value: necessaryMoney }
-        )}
-      />
-    </GVButton>
-  );
-});
-
-const getMinDepositCreateProgram = (
-  programMinDepositAmounts: ProgramMinInvestAmount[],
-  brokerType: BrokerTradeServerType,
-  curr: CurrencyEnum
-) => {
-  const broker = programMinDepositAmounts.find(
-    ({ serverType }) => serverType === brokerType
-  );
-  return broker
-    ? broker.minDepositCreateAsset.find(({ currency }) => currency === curr)!
-        .amount
-    : 0;
-};
 
 const DashboardPrivateCard = React.memo(_DashboardPrivateCard);
 export default DashboardPrivateCard;

@@ -1,16 +1,18 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
+import { getBrokerFromContext } from "pages/attach-account/attach-account.helpers";
 import AttachAccountPage from "pages/attach-account/attach-account.page";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<Props, {}> = ({}) => {
-  return <AttachAccountPage />;
+const Page: NextPageWithRedux<Props, {}> = ({ requestBrokerName }) => {
+  return <AttachAccountPage requestBrokerName={requestBrokerName} />;
 };
 
 Page.getInitialProps = async ctx => {
-  return {};
+  const requestBrokerName = getBrokerFromContext(ctx);
+  return { requestBrokerName };
 };
 
 export default compose(
@@ -19,5 +21,6 @@ export default compose(
 )(Page);
 
 interface Props {
+  requestBrokerName: string;
   minimumDepositAmount: number;
 }

@@ -13,9 +13,9 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
 
   const handleCreate = useCreateAssetSubmit({
-    condition: ({ twoFactorRequired, programId }) => {
+    condition: ({ twoFactorRequired, id }) => {
       if (twoFactorRequired) {
-        setProgramId(programId);
+        setProgramId(id);
         setTwoFactorRequired();
         return false;
       }

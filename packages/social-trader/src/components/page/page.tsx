@@ -5,11 +5,13 @@ import * as React from "react";
 import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  commonMeta,
   descriptionMeta,
   imageMeta,
   schema,
   SchemaType,
-  titleMeta
+  titleMeta,
+  urlMeta
 } from "utils/seo";
 
 const _Page = ({
@@ -17,7 +19,8 @@ const _Page = ({
   description,
   children,
   schemas,
-  previewImage
+  previewImage,
+  url
 }: PropsWithChildren<Props>) => {
   const [t] = useTranslation();
   const pageTitle = t("app.title") + title;
@@ -26,8 +29,10 @@ const _Page = ({
       <>
         <Head>
           <title>{pageTitle}</title>
+          {commonMeta()}
+          {urlMeta(url)}
           {schema(schemas)}
-          {titleMeta(pageTitle)}
+          {titleMeta(title)}
           {descriptionMeta(description)}
           {imageMeta(previewImage)}
         </Head>
@@ -45,6 +50,7 @@ interface Props {
   schemas?: Array<SchemaType>;
   description?: string;
   previewImage?: string;
+  url?: string;
 }
 
 const Page = React.memo(_Page);

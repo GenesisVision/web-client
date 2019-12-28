@@ -4,7 +4,7 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "routes/invest.routes";
-import { TRADE } from "routes/trade.routes";
+import { TRADE_ROUTE } from "routes/trade.routes";
 
 export type TNavFooter = {
   state?: string;
@@ -43,7 +43,7 @@ export const navHeader: TNavHeader[] = [
   },
   {
     name: "Trade",
-    href: TRADE
+    href: TRADE_ROUTE
   },
   {
     name: "Info",
