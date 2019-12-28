@@ -15,6 +15,19 @@ export const fetchFollowsAction = (
 });
 
 export type FetchSignalAssetsFilterType = {
+  sorting?:
+    | "ByTitleAsc"
+    | "ByTitleDesc"
+    | "BySubscribersAsc"
+    | "BySubscribersDesc"
+    | "ByTradesAsc"
+    | "ByTradesDesc"
+    | "ByDrawdownAsc"
+    | "ByDrawdownDesc"
+    | "ByProfitAsc"
+    | "ByProfitDesc"
+    | "ByNewAsc"
+    | "ByNewDesc";
   isFavorite?: boolean;
   authorization?: string;
   tags?: Array<string>;
