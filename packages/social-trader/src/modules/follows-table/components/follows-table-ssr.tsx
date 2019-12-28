@@ -18,8 +18,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
-  platformCurrenciesSelector,
-  programTagsSelector
+  followTagsSelector,
+  platformCurrenciesSelector
 } from "reducers/platform-reducer";
 import { LOGIN_ROUTE } from "routes/app.routes";
 
@@ -32,7 +32,7 @@ const ITEMS_ON_PAGE = 12;
 const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const currencies = useSelector(platformCurrenciesSelector);
-  const programTags = useSelector(programTagsSelector);
+  const tags = useSelector(followTagsSelector);
   const data = useSelector(followsDataSelector);
   const { t } = useTranslation();
   const [filtering, sorting, page, update] = useRouteFilters(
@@ -72,7 +72,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
         <TagFilter
           name={TAG_FILTER_NAME}
           value={filtering[TAG_FILTER_NAME] as string[]}
-          values={programTags}
+          values={tags}
           onChange={updateFilter}
         />
       )}
