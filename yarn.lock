@@ -9491,10 +9491,9 @@ next-transpile-modules@^2.3.1:
   resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-2.3.1.tgz#8977c070912fbc3e927c662431fc4e91ae335b43"
   integrity sha512-euNOBAk/CXZA6binwL47+QpcxAmK1pzH2zjF7XnRN55f2iuN/ecpUw5p3x4bikFu0yDPtSLS92nv9fcgcCo0vg==
 
-next@../../next.tgz:
-  version "9.0.9-canary.0"
-  uid "3bdc2ea18978e6429b415f96f695459dfecb7391"
-  resolved "../../next.tgz#3bdc2ea18978e6429b415f96f695459dfecb7391"
+next@../../next1.tgz:
+  version "9.0.9-canary.1"
+  resolved "../../next1.tgz#dd40624372202b05a75fda71ddb6b065660bba90"
   dependencies:
     "@ampproject/toolbox-optimizer" "1.0.1"
     "@babel/core" "7.4.5"
