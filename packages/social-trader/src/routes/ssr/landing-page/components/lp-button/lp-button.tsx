@@ -34,9 +34,9 @@ const _LPButton: React.FC<LPButtonProps> = ({
   switch (true) {
     case href && (href.includes("http") || href.includes("mailto")):
       return (
-        <Link to={href} className={classname}>
+        <a href={href} className={classname}>
           {children}
-        </Link>
+        </a>
       );
     case !href:
       return (
