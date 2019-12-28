@@ -7,16 +7,23 @@ import { useTranslation } from "react-i18next";
 
 import CreateAccountContainer from "./components/create-account.container";
 
-const _CreateAccountPage: React.FC<Props> = ({ brokers }) => {
+const _CreateAccountPage: React.FC<Props> = ({
+  brokers,
+  requestBrokerName
+}) => {
   const [t] = useTranslation();
   return (
     <Page title={t("create-account-page.title")}>
-      <CreateAccountContainer brokers={brokers} />
+      <CreateAccountContainer
+        brokers={brokers}
+        requestBrokerName={requestBrokerName}
+      />
     </Page>
   );
 };
 
 interface Props {
+  requestBrokerName?: string;
   brokers: Broker[];
 }
 const CreateAccountPage = React.memo(_CreateAccountPage);

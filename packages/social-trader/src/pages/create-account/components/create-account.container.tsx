@@ -10,11 +10,18 @@ import { ASSET } from "shared/constants/constants";
 
 import CreateAccountSettingsSection from "./create-account-settings/create-account-settings-section";
 
-const _CreateAccountContainer: React.FC<Props> = ({ brokers }) => {
+const _CreateAccountContainer: React.FC<Props> = ({
+  brokers,
+  requestBrokerName
+}) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
-
-  const [selectedBroker, setSelectedBroker] = useState<Broker>(brokers[0]);
+  const broker = brokers.find(
+    ({ name }) => name.toLowerCase() === requestBrokerName
+  );
+  const [selectedBroker, setSelectedBroker] = useState<Broker>(
+    broker || brokers[0]
+  );
 
   const confirmNavigateToBroker = useCallback(() => {
     setTab(null, TAB.BROKER);
@@ -70,6 +77,7 @@ enum TAB {
 }
 
 interface Props {
+  requestBrokerName?: string;
   brokers: Broker[];
 }
 
