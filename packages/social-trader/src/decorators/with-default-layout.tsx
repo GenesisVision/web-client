@@ -8,7 +8,6 @@ import { NextPage } from "next";
 import React, { Component } from "react";
 import { Dispatch } from "redux";
 import { getCookie } from "shared/utils/cookie";
-import { addRequestAnimationFrame } from "utils/helpers";
 import { NextPageWithReduxContext } from "utils/types";
 
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
@@ -36,8 +35,6 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
       }
-
-      addRequestAnimationFrame();
 
       return {
         namespacesRequired: ["translation"],

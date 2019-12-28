@@ -1,3 +1,4 @@
+@import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 
@@ -30,5 +31,13 @@ $text-size: 13px;
       font-size: $text-size;
       padding: 5px 13px;
     }
+  }
+}
+.profitability-value-percent {
+  margin-top: -4px;
+  display: flex;
+  align-items: center;
+  &__value {
+    margin-right: $padding-xxsmall;
   }
 }

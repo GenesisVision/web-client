@@ -1,6 +1,5 @@
 import "./info-container.scss";
 
-import classNames from "classnames";
 import React, { useCallback, useState } from "react";
 import { animated, config, useTransition } from "react-spring";
 import InfoList from "routes/ssr/landing-page/components/info-list/info-list";
@@ -37,9 +36,7 @@ const InfoContainer: React.FC = () => {
         <animated.div
           className="info-container__tab-info"
           key={key}
-          style={{
-            ...props
-          }}
+          style={props as any}
         >
           <InfoList id={item.id} listItems={item.listItems} />
         </animated.div>

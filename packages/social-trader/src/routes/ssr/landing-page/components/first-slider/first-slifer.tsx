@@ -37,9 +37,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
           <animated.div
             key={key}
             className="slider__img-animate"
-            style={{
-              ...props
-            }}
+            style={props as any}
           >
             <img src={item.image} alt={item.title} className="slider__img" />
           </animated.div>
@@ -51,7 +49,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
             <animated.div
               className="slider__info-animate"
               key={key}
-              style={{ ...props }}
+              style={props as any}
             >
               <h2 className="slider__title">{item.title}</h2>
               <p className="slider__text">{item.text}</p>
@@ -60,7 +58,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
         </div>
         <div className="slider__controls-wrapper">
           {transitions.map(({ item, props, key }) => (
-            <animated.div key={key} style={{ ...props }}>
+            <animated.div key={key} style={props as any}>
               <LPButton href={item.link}>Join</LPButton>
             </animated.div>
           ))}

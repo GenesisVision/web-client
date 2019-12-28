@@ -12,6 +12,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _AssetBlock: React.FC<Props> = ({
+  buttonLabel,
   blockType,
   left,
   side,
@@ -46,7 +47,7 @@ const _AssetBlock: React.FC<Props> = ({
         </div>
         <Link to={investLink}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
-            {t("invest.invest-button")}
+            {buttonLabel || t("invest.invest-button")}
           </GVButton>
         </Link>
       </div>
@@ -62,6 +63,7 @@ const _AssetBlock: React.FC<Props> = ({
 };
 
 interface Props {
+  buttonLabel?: string;
   blockType?: DETAILS_BLOCK_TYPE;
   left?: boolean;
   side?: boolean;

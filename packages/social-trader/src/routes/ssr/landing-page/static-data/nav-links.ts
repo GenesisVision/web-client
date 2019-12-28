@@ -1,4 +1,9 @@
-import { INVEST_ROUTE } from "routes/invest.routes";
+import {
+  GV_FOLLOW_ROUTE,
+  GV_FUNDS_ROUTE,
+  GV_PROGRAMS_ROUTE,
+  INVEST_ROUTE
+} from "routes/invest.routes";
 import { TRADE } from "routes/trade.routes";
 
 export type TNavFooter = {
@@ -7,14 +12,34 @@ export type TNavFooter = {
   href?: string;
 };
 
+export type TSubNav = TNavFooter & {
+  hideMobile?: boolean;
+};
+
 export type TNavHeader = TNavFooter & {
   icon?: JSX.Element;
+  subNav?: TSubNav[];
+  hideMobile?: boolean;
 };
 
 export const navHeader: TNavHeader[] = [
   {
     name: "Invest",
-    href: INVEST_ROUTE
+    href: INVEST_ROUTE,
+    subNav: [
+      {
+        name: "Follow",
+        href: GV_FOLLOW_ROUTE
+      },
+      {
+        name: "Programs",
+        href: GV_FUNDS_ROUTE
+      },
+      {
+        name: "Funds",
+        href: GV_PROGRAMS_ROUTE
+      }
+    ]
   },
   {
     name: "Trade",
@@ -22,7 +47,29 @@ export const navHeader: TNavHeader[] = [
   },
   {
     name: "Info",
-    href: "#info"
+    href: "#info",
+    subNav: [
+      {
+        name: "Blog",
+        hideMobile: true,
+        href: "https://blog.genesis.vision"
+      },
+      {
+        name: "Fees",
+        hideMobile: true,
+        href: "/fees/"
+      },
+      {
+        name: "Referral program",
+        hideMobile: true,
+        href: "/referral-program/"
+      },
+      {
+        name: "Feedback",
+        hideMobile: true,
+        href: "https://feedback.genesis.vision/"
+      }
+    ]
   }
 ];
 
@@ -73,5 +120,4 @@ export const navFooter: TNavHeader[] = [
   }
 ];
 
-export const START_ROUTE = "/investor/programs/";
 export const EMAIL_ROUTE = "mailto:support@genesis.vision";

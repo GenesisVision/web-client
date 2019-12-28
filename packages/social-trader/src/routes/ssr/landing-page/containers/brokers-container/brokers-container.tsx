@@ -62,9 +62,7 @@ const _BrokersContainer: React.FC<Props> = ({
         <animated.div
           className="brokers-container__tab-info"
           key={key}
-          style={{
-            ...props
-          }}
+          style={props as any}
         >
           <BrokerInfo
             darkTheme={darkTheme}

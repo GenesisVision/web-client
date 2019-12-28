@@ -27,6 +27,7 @@ const _InvestPage: React.FC<Props> = ({
   return (
     <Page title={title}>
       <AssetBlock
+        buttonLabel={t("invest.follow-button")}
         blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
         side
         title={t("invest.follows.title")}

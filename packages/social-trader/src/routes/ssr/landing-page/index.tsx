@@ -11,11 +11,11 @@ import { fetchFunds } from "modules/funds-table/services/funds-table.service";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { NextPage } from "next";
 import React from "react";
-import BestList from "routes/ssr/landing-page/components/best/best-list";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "routes/ssr/landing-page/containers/download-container/download-container";
+import EventsContainer from "routes/ssr/landing-page/containers/events-container/events-container";
 import FollowsContainer from "routes/ssr/landing-page/containers/follows-container/follows-container";
 import FundsContainer from "routes/ssr/landing-page/containers/funds-container/funds-container";
 import InfoContainer from "routes/ssr/landing-page/containers/info-container/info-container";
@@ -27,7 +27,6 @@ import {
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
 import { subtractDate } from "shared/utils/dates";
-import { addRequestAnimationFrame } from "utils/helpers";
 
 const IndexPage: NextPage<{
   programsData: ItemsViewModelProgramDetailsListItem;
@@ -38,15 +37,7 @@ const IndexPage: NextPage<{
     <Layout title="Genesis Vision">
       <main className="home">
         <FirstScreen />
-        <section className="home__section home__section--bg-white home__section--horizontal-padding">
-          <div className="home__container">
-            <div className="home__grid-row">
-              <div className="home__grid-item home__grid-item--sm">
-                <BestList />
-              </div>
-            </div>
-          </div>
-        </section>
+        {/*<EventsContainer events={}/>*/}
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <FollowsContainer follows={followsData.items} />
@@ -96,7 +87,6 @@ export default IndexPage;
 
 IndexPage.getInitialProps = async () => {
   try {
-    addRequestAnimationFrame();
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
     const [programsData, fundsData, followsData] = await Promise.all([

@@ -5,11 +5,7 @@ import { DetailsInvestmentBlock } from "components/details/details-description-s
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { GV_BTN_SIZE } from "components/gv-button";
-import Profitability from "components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "components/profitability/profitability.helper";
+import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -21,7 +17,7 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { ASSET, STATUS } from "shared/constants/constants";
-import { formatCurrencyValue, roundPercents } from "utils/formatter";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
 
 import { InvestmentType } from "./details-investment.helpers";
@@ -70,23 +66,11 @@ const _Investment: React.FC<Props> = ({
             />
           }
         >
-          <Profitability
-            value={formatCurrencyValue(profitValue, assetCurrency)}
-            prefix={PROFITABILITY_PREFIX.SIGN}
-          >
-            <NumberFormat
-              value={formatCurrencyValue(profitValue, assetCurrency)}
-              suffix={` ${assetCurrency}`}
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
-          <Profitability
-            value={`${profitPercentValue}`}
-            variant={PROFITABILITY_VARIANT.CHIPS}
-          >
-            {roundPercents(profitPercentValue)}
-          </Profitability>
+          <ProfitabilityValuePercent
+            currency={assetCurrency}
+            value={profitValue}
+            percent={profitPercentValue}
+          />
         </StatisticItem>
         <StatisticItem
           condition={
