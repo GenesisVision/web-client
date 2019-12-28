@@ -69,6 +69,14 @@
         left: -43px;
       }
     }
+
+    &--star {
+      &:before {
+        content: "*";
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
   }
 
   &__table-wrapper {

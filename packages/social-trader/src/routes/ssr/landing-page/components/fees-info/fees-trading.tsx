@@ -89,8 +89,8 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 <th className="fees-table__cell">55%</th>
               </tr>
               <tr className="fees-table__row">
-                <th className="fees-table__cell fees-table__cell--white"></th>
-                <th className="fees-table__cell fees-table__cell--white"></th>
+                <th className="fees-table__cell fees-table__cell--white" />
+                <th className="fees-table__cell fees-table__cell--white" />
                 <th
                   className="fees-table__cell fees-table__cell--colspan"
                   colSpan={7}
@@ -99,9 +99,9 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 </th>
               </tr>
               <tr className="fees-table__row">
-                <th className="fees-table__cell fees-table__cell--white"></th>
-                <th className="fees-table__cell fees-table__cell--white"></th>
-                <th className="fees-table__cell fees-table__cell--white"></th>
+                <th className="fees-table__cell fees-table__cell--white" />
+                <th className="fees-table__cell fees-table__cell--white" />
+                <th className="fees-table__cell fees-table__cell--white" />
                 <th
                   className="fees-table__cell fees-table__cell--colspan"
                   colSpan={6}
@@ -192,7 +192,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Germane</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">1.00</td>
                 <td className="fees-table__cell">0.70</td>
                 <td className="fees-table__cell">0.65</td>
@@ -203,7 +202,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Switzerland</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">0.60</td>
                 <td className="fees-table__cell">0.42</td>
                 <td className="fees-table__cell">0.39</td>
@@ -214,7 +212,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">France</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
                 <td className="fees-table__cell">0.26</td>
@@ -225,7 +222,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Spain</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
                 <td className="fees-table__cell">0.52</td>
@@ -236,7 +232,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Netherlands</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
                 <td className="fees-table__cell">0.26</td>
@@ -282,7 +277,6 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Japan</td>
-                <td className="fees-table__cell" />
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
                 <td className="fees-table__cell">0.52</td>
@@ -302,8 +296,8 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               available tools and the associated fees.
             </li>
             <li className="fees-info__note-item">
-              GVT holders: 30-50% discount depending on the amount of GVT stored
-              in the wallet.
+              GVT holders: 55% discount depending on the amount of GVT stored in
+              the wallet.
             </li>
           </ul>
         </div>
@@ -330,6 +324,10 @@ export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
             The "Using GVT to pay for fees" function must be enabled. The fee
             will be charged at a discount depending on the amount of GVT stored
             in the wallet.
+          </li>
+          <li className="fees-info__note-item">
+            The discounted fee will be charged from the GVT wallet, not from the
+            trading account.
           </li>
         </ul>
       </div>
