@@ -33,10 +33,7 @@ const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({ trade }) => {
           )
         }
       >
-        <span>
-          {formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)}{" "}
-          {trade.originalCommissionCurrency}
-        </span>
+        <span>{formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)} </span>
       </Tooltip>
     );
 };
