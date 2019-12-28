@@ -18,6 +18,11 @@ import { DepositTransferButton } from "modules/transfer/deposit-transfer-button"
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
+import {
+  ConfirmTFAButton,
+  getMinDepositCreateProgram,
+  MakeProgramButton
+} from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
@@ -33,11 +38,6 @@ import { useTranslation } from "shared/i18n";
 import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
-import {
-  ConfirmTFAButton,
-  getMinDepositCreateProgram,
-  MakeProgramButton
-} from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   const programMinDepositAmounts = useSelector(

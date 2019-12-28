@@ -1,6 +1,6 @@
 import { TTabsItem } from "routes/ssr/landing-page/components/tab-controls/tab-controls";
 import TradeTab from "routes/ssr/landing-page/images/tabs/trade-tab.png";
-import { TRADE } from "routes/trade.routes";
+import { TRADE_ROUTE } from "routes/trade.routes";
 
 type TInfoText = {
   text: string;
@@ -64,7 +64,7 @@ export const infoList: TInfoList[] = [
       },
       {
         image: TradeTab,
-        button: { link: TRADE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "Join" }
       },
       {
         texts: [
@@ -114,7 +114,7 @@ export const infoList: TInfoList[] = [
       },
       {
         image: TradeTab,
-        button: { link: TRADE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "Join" }
       }
     ]
   },
@@ -152,7 +152,7 @@ export const infoList: TInfoList[] = [
       },
       {
         image: TradeTab,
-        button: { link: TRADE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "Join" }
       },
       {
         texts: [
