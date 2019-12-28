@@ -67,7 +67,7 @@ const IndexPage: NextPage<{
           </div>
         </section>
         <AdvantagesContainer />
-        <section className="home__section home__section--bg-gray">
+        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
             <BrokersContainer
               brokersInfo={brokersInfo}
