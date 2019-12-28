@@ -12,12 +12,12 @@ import CreateAccountSettingsSection from "./create-account-settings/create-accou
 
 const _CreateAccountContainer: React.FC<Props> = ({
   brokers,
-  requestBrokerName
+  requestBrokerName = ""
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
   const broker = brokers.find(
-    ({ name }) => name.toLowerCase() === requestBrokerName
+    ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
   );
   const [selectedBroker, setSelectedBroker] = useState<Broker>(
     broker || brokers[0]
