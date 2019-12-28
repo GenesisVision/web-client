@@ -48,12 +48,14 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
               </div>
             </TableCell>
             <TableCell>
-              <Profitability
-                value={event.amount}
-                prefix={PROFITABILITY_PREFIX.SIGN}
-              >
-                {Math.abs(event.amount)} {event.currency}
-              </Profitability>
+              {event.amount && (
+                <Profitability
+                  value={event.amount}
+                  prefix={PROFITABILITY_PREFIX.SIGN}
+                >
+                  {Math.abs(event.amount)} {event.currency}
+                </Profitability>
+              )}
             </TableCell>
           </TableRow>
         )}
