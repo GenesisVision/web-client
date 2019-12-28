@@ -1,4 +1,7 @@
 {
+  "trade": {
+    "title": "Brokers and trading conditions"
+  },
   "copytrading-tables": {
     "title": "Trades",
     "open-trades": "Open trades",
