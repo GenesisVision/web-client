@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { rawUrlEncode } from "utils/helpers";
 
 const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
-  data: { refUrl, lastName, firstName }
+  data: { refUrl, lastName, firstName, userName }
 }) => {
   const [t] = useTranslation();
   return (
@@ -25,6 +25,7 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
         {t("profile-page.referral-program.share-your-passion")}
         {refUrl && (
           <ShareBlock
+            userName={userName}
             firstName={firstName}
             lastName={lastName}
             refUrl={refUrl}
@@ -36,13 +37,13 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
 };
 
 const _ShareBlock: React.FC<{
+  userName: string;
   firstName: string;
   lastName: string;
   refUrl: string;
-}> = ({ firstName, lastName, refUrl }) => {
-  const shareMessage = `Hey! ${
-    firstName ? `${firstName} ` : ""
-  }${lastName} has invited you to join Genesis Vision!`;
+}> = ({ userName, firstName, lastName, refUrl }) => {
+  const name = firstName || lastName || userName || "";
+  const shareMessage = `Hey! ${name} has invited you to join Genesis Vision!`;
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -79,6 +80,7 @@ const _ShareBlock: React.FC<{
 const ShareBlock = React.memo(_ShareBlock);
 
 export const inviteBlockLoaderData = {
+  userName: "",
   firstName: "",
   lastName: "",
   refUrl: ""

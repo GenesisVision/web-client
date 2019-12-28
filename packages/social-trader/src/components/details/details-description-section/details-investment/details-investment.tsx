@@ -7,6 +7,7 @@ import SubscriptionContainer from "components/details/details-description-sectio
 import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { TableSelectorType } from "components/table/components/table.types";
+import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
 import {
   PersonalFollowDetailsFull,
   PersonalFundDetails,
@@ -54,7 +55,13 @@ const _DetailsInvestment: React.FC<Props> = ({
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
-    isAuthenticated && id && dispatch(getEvents(id, EVENT_LOCATION.Asset)());
+    isAuthenticated &&
+      id &&
+      dispatch(
+        getEvents(id, EVENT_LOCATION.Asset)({
+          take: DEFAULT_EVENTS_PAGING.itemsOnPage
+        })
+      );
   }, [isAuthenticated, id]);
   useEffect(() => {
     isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);

@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "gv-api-web": "^2.0.0",
-    "next": "../../next.tgz",
+    "next": "../../next1.tgz",
     "shared": "^1.0.0"
   },
   "scripts": {
