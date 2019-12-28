@@ -1,13 +1,10 @@
 import "./fees-section.scss";
 
 import React, { useCallback, useState } from "react";
-import { animated, config, useTransition } from "react-spring";
 import FeesGeneral from "routes/ssr/landing-page/components/fees-info/fees-general";
 import FeesTrading from "routes/ssr/landing-page/components/fees-info/fees-trading";
-import InfoList from "routes/ssr/landing-page/components/info-list/info-list";
 import TabControls from "routes/ssr/landing-page/components/tab-controls/tab-controls";
 import { feesTabs } from "routes/ssr/landing-page/static-data/fees";
-import { infoList, infoTabs } from "routes/ssr/landing-page/static-data/info";
 
 const FeesSection: React.FC = () => {
   const [currentTabId, setCurrentTab] = useState(0);

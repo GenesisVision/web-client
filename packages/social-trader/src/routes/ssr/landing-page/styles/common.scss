@@ -43,6 +43,30 @@
     }
   }
 
+  h1 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 16px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 38px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 26px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 38px;
+    }
+  }
+
   h1,
   h2,
   h3 {

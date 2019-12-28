@@ -2,18 +2,21 @@ import "./advantages-list.scss";
 
 import classNames from "classnames";
 import React from "react";
-import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TAdvantages } from "routes/ssr/landing-page/static-data/advantages";
-import { TRADE } from "routes/trade.routes";
 
 import AdvantageItem from "./advantage-item";
 
 interface Props {
   className?: string;
   advantagesItems: TAdvantages[];
+  lastItem?: any;
 }
 
-const _AdvantagesList: React.FC<Props> = ({ className, advantagesItems }) => (
+const _AdvantagesList: React.FC<Props> = ({
+  className,
+  advantagesItems,
+  lastItem
+}) => (
   <ul className={classNames("advantages-list", className)}>
     {advantagesItems.map((item, index) => (
       <AdvantageItem
@@ -23,9 +26,11 @@ const _AdvantagesList: React.FC<Props> = ({ className, advantagesItems }) => (
         image={item.image}
       />
     ))}
-    <li className="advantages-list__item advantages-list__item--button">
-      <LPButton href={TRADE}>Join</LPButton>
-    </li>
+    {lastItem && (
+      <li className="advantages-list__item advantages-list__item--last">
+        {lastItem}
+      </li>
+    )}
   </ul>
 );
 
