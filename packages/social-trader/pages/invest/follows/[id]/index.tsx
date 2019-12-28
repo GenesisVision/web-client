@@ -10,7 +10,7 @@ import { ASSET } from "shared/constants/constants";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
-  return <ProgramDetailsPage />;
+  return <ProgramDetailsPage route={ASSET.FOLLOW} />;
 };
 
 Page.getInitialProps = async ctx => {
