@@ -181,6 +181,8 @@ $font-color: #100e3b;
   }
 
   &--active {
+    z-index: 1;
+
     .table-card {
       opacity: 1;
     }
