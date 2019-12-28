@@ -87,16 +87,16 @@
     vertical-align: top;
 
     .fees-table__row {
-      background-color: $landing-bg-gray;
+      //background-color: $landing-bg-gray;
     }
 
     .fees-table__cell--white {
       background-color: $main-color;
+      color: rgba($row-color, 0.5);
     }
 
     .fees-table__cell {
       font-size: 14px;
-      color: rgba($row-color, 0.5);
       font-weight: 400;
     }
   }
