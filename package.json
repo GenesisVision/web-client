@@ -55,7 +55,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
     "react-select": "^1.2.1",
-    "react-spring": "^8.0.27",
+    "react-spring": "^9.0.0-beta.34",
     "react-tradingview-widget": "^1.3.2",
     "reactstrap": "^5.0.0",
     "recharts": "1.5.0",
