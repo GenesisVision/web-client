@@ -47,18 +47,21 @@ const _NavItem: React.FC<INavItemProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       <>
-        <Link
-          onClick={onClick}
-          to={{ pathname: href as string, state }}
-          className={classNames("nav-list__link", {
-            "nav-list__link--active": route.startsWith(
-              normalizeUrlString(String(href))
-            )
-          })}
-        >
-          {icon && <span className="nav-list__link-icon">{icon}</span>}
-          {name}
-        </Link>
+        {href && href.includes("http") ? (
+          <a href={href} className="nav-list__link">
+            {icon && <span className="nav-list__link-icon">{icon}</span>}
+            {name}
+          </a>
+        ) : (
+          <Link
+            onClick={onClick}
+            to={{ pathname: href as string, state }}
+            className="nav-list__link"
+          >
+            {icon && <span className="nav-list__link-icon">{icon}</span>}
+            {name}
+          </Link>
+        )}
         {subNav && (
           <NavSubList subNav={subNav} onClick={onClick} subNavOpen={subOpen} />
         )}

@@ -3,11 +3,7 @@ import "./fees-info.scss";
 import React from "react";
 import { DoneIcon } from "routes/ssr/landing-page/components/internal-icons/done-icon";
 
-interface Props {
-  className?: string;
-}
-
-const _FeesGeneral: React.FC<Props> = ({ className }) => (
+const _FeesGeneral: React.FC = () => (
   <div className="fees-info">
     <div className="fees-info__section">
       <div className="internal__container">
@@ -39,7 +35,6 @@ const _FeesGeneral: React.FC<Props> = ({ className }) => (
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     {<DoneIcon />}
                   </td>
-                  `
                 </tr>
                 <tr className="fees-table__row">
                   <td className="fees-table__cell">Success Fee</td>
@@ -49,6 +44,19 @@ const _FeesGeneral: React.FC<Props> = ({ className }) => (
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     {<DoneIcon />} (0,05%)
+                  </td>
+                  <td className="fees-table__cell fees-table__cell--color-primary">
+                    &mdash;
+                  </td>
+                </tr>
+                <tr className="fees-table__row">
+                  <td className="fees-table__cell">GV Commission</td>
+                  <td className="fees-table__cell">15%</td>
+                  <td className="fees-table__cell fees-table__cell--color-primary">
+                    &mdash;
+                  </td>
+                  <td className="fees-table__cell fees-table__cell--color-primary">
+                    {<DoneIcon />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     &mdash;
@@ -72,7 +80,12 @@ const _FeesGeneral: React.FC<Props> = ({ className }) => (
               a trade transaction when copy trading. No profit means no Platform
               Success fee is charged
             </li>
-            <li className="fees-info__note-item">
+            <li className="fees-info__note-item fees-info__note-item--star">
+              {" "}
+              For external account, GV charges a 15% volume fee from all copied
+              trades
+            </li>
+            <li className="fees-info__note-item fees-info__note-item--star">
               The percentage depends on the amount of GVT stored in the wallet.
               For every 1 000 GVT stored in the wallet, investors receive a 10%
               discount with a maximum discount of 100% (i.e. an investor holding

@@ -93,7 +93,7 @@ IndexPage.getInitialProps = async () => {
   try {
     addRequestAnimationFrame();
     const dateTo = new Date();
-    const dateFrom = subtractDate(dateTo, 1, "week");
+    const dateFrom = subtractDate(dateTo, 1, "month");
     const [
       programsData,
       fundsData,

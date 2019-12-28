@@ -59,6 +59,7 @@ const AdvantagesContainer: React.FC = () => {
           <AdvantagesList
             advantagesItems={advantagesItems}
             className="advantages-container__list"
+            lastItem={<LPButton href={TRADE_ROUTE}>Join</LPButton>}
           />
         </div>
       </div>

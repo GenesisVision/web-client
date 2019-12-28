@@ -15,27 +15,36 @@
     @include container();
   }
 
-  ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin-bottom: 20px;
+  &__list {
+    @include reset-list();
   }
 
-  ol {
-    list-style-type: decimal;
-    padding-left: 20px;
-    margin-bottom: 20px;
-  }
-
-  li {
-    margin-bottom: 5px;
-    line-height: 26px;
+  &__list-item {
+    margin-bottom: 30px;
+    position: relative;
     font-size: 13px;
+    padding-left: 20px;
 
-    @include media-breakpoint-desktop() {
-      line-height: 32px;
-      font-size: 14px;
-      letter-spacing: 0.05px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      display: block;
+      border-radius: 50%;
+      background: $primary-color;
+      border: 7px solid #e8f8f7;
+      top: 5px;
+      left: -20px;
+
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
+        left: -43px;
+      }
     }
   }
 

@@ -3,14 +3,14 @@ import "routes/ssr/landing-page/styles/internal.scss";
 
 import { NextPage } from "next";
 import React from "react";
-import FeesSection from "routes/ssr/landing-page/components/fees-section/fees-section";
+import ReferralProgramSection from "routes/ssr/landing-page/components/referral-program-section/referral-program-section";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 
-export const Fees: NextPage = () => {
+export const LPReferralProgram: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Fees">
+    <Layout title="Genesis Vision Referral Program">
       <main className="internal">
-        <FeesSection />
+        <ReferralProgramSection />
       </main>
     </Layout>
   );
