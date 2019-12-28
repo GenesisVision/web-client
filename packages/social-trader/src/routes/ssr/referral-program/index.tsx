@@ -11,7 +11,6 @@ export const LPReferralProgram: NextPage = () => {
     <Layout title="Genesis Vision Referral Program">
       <main className="internal">
         <ReferralProgramSection />
-        {/*<FeesSection />*/}
       </main>
     </Layout>
   );
