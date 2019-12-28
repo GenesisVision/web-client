@@ -65,6 +65,7 @@ const _BrokersContainer: React.FC<Props> = ({
           style={props as any}
         >
           <BrokerInfo
+            type={item.type}
             darkTheme={darkTheme}
             id={item.id}
             title={item.title}

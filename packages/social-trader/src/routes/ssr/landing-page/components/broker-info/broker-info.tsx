@@ -1,6 +1,7 @@
 import "./broker-info.scss";
 
 import classNames from "classnames";
+import { composeAttachAccountRouteWithBroker } from "pages/attach-account/attach-account.constants";
 import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
 import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
@@ -14,12 +15,17 @@ interface Props extends TBrokerInfo {
 }
 
 const _BrokerInfo: React.FC<Props> = ({
+  type,
   darkTheme,
   className,
   title,
   description,
   listItems
 }) => {
+  const tradingLink =
+    type === "Attach"
+      ? composeAttachAccountRouteWithBroker(title)
+      : composeCreateAccountRouteWithBroker(title);
   return (
     <div
       className={classNames("broker-info", className, {
@@ -28,9 +34,7 @@ const _BrokerInfo: React.FC<Props> = ({
     >
       <h3 className="broker-info__subtitle">{title}</h3>
       {description && <p className="broker-info__description">{description}</p>}
-      <LPButton href={composeCreateAccountRouteWithBroker(title)}>
-        Start trading
-      </LPButton>
+      <LPButton href={tradingLink}>Start trading</LPButton>
       <ul className="broker-info__list-advantages">
         {listItems.map((item, index) => (
           <BrokerAdvantage

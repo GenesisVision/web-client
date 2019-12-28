@@ -144,6 +144,7 @@ type Props = InjectedFormikProps<
 >;
 
 interface OwnProps {
+  requestBrokerName?: string;
   data: Broker[];
   onSubmit: (
     values: IAttachAccountSettingsFormValues,
@@ -159,14 +160,24 @@ const AttachAccountSettings = compose<
   withFormik<ICreateFundSettingsProps, IAttachAccountSettingsFormValues>({
     enableReinitialize: true,
     displayName: "AttachAccountSettingsForm",
-    mapPropsToValues: ({ data }) => ({
-      [ATTACH_ACCOUNT_FIELDS.secret]: "",
-      [ATTACH_ACCOUNT_FIELDS.brokerName]: data.length ? data[0].name : "",
-      [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: data.length
+    mapPropsToValues: ({ data, requestBrokerName = "" }) => {
+      const requestBroker = data.find(
+        ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
+      );
+      const requestBrokerAccountTypeId = requestBroker
+        ? requestBroker.accountTypes[0].id
+        : "";
+      const firstBrokerAccountTypeId = data.length
         ? data[0].accountTypes[0].id
-        : "",
-      [ATTACH_ACCOUNT_FIELDS.key]: ""
-    }),
+        : "";
+      return {
+        [ATTACH_ACCOUNT_FIELDS.secret]: "",
+        [ATTACH_ACCOUNT_FIELDS.brokerName]: data.length ? data[0].name : "",
+        [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]:
+          requestBrokerAccountTypeId || firstBrokerAccountTypeId,
+        [ATTACH_ACCOUNT_FIELDS.key]: ""
+      };
+    },
     validationSchema: attachAccountSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);

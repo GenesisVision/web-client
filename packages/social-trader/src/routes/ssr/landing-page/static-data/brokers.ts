@@ -4,7 +4,7 @@ import ExanteLogo from "routes/ssr/landing-page/images/brokers/exante.png";
 import GMBg from "routes/ssr/landing-page/images/brokers/gm-bg.svg";
 import GMLogo from "routes/ssr/landing-page/images/brokers/gm.svg";
 import HuobiLogo from "routes/ssr/landing-page/images/brokers/huobi.png";
-import Just2tradeLogo from "routes/ssr/landing-page/images/brokers/just2trade.png";
+import Just2tradeLogo from "routes/ssr/landing-page/images/brokers/just-2-trade.svg";
 import RoboforexLogo from "routes/ssr/landing-page/images/brokers/roboforex.svg";
 
 enum BROKERS {
@@ -17,6 +17,7 @@ enum BROKERS {
 }
 
 export type TBrokerInfo = {
+  type?: "Attach" | "Create";
   id: number;
   title: string;
   description?: string;
@@ -105,6 +106,7 @@ export const brokersInfo: TBrokerInfo[] = [
     ]
   },
   {
+    type: "Attach",
     id: 1,
     title: BROKERS.BINANCE,
     description:
