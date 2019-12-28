@@ -9,17 +9,13 @@
     border: 1px solid $landing-bg-gray-2;
     border-radius: 20px;
     margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
 
-    &--last,
-    &--without-link {
-      display: flex;
-      align-items: center;
-      padding: 20px;
-
-      @include media-breakpoint-large-desktop() {
-        padding-left: 40px;
-        padding-right: 40px;
-      }
+    @include media-breakpoint-large-desktop() {
+      padding-left: 40px;
+      padding-right: 40px;
     }
 
     &--last {
@@ -36,19 +32,13 @@
   }
 
   &__item-link {
-    @include transition(box-shadow);
     @include reset-link();
-    padding: 20px;
-    display: flex;
-    align-items: center;
+    display: block;
 
     &:hover {
-      box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.05);
-    }
-
-    @include media-breakpoint-large-desktop() {
-      padding-left: 40px;
-      padding-right: 40px;
+      .events-list__item-title {
+        color: $primary-color;
+      }
     }
   }
 
@@ -90,6 +80,7 @@
   }
 
   &__item-title {
+    @include transition(color);
     font-weight: 600;
     font-size: 13px;
     line-height: 1;

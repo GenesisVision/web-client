@@ -13,7 +13,8 @@ interface IBestItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   title: string;
   text: string;
   icon: string;
-  url: string;
+  assetUrl: string;
+  userUrl: string;
   value: string;
 }
 
@@ -21,45 +22,42 @@ const _EventItem: React.FC<IBestItemProps> = ({
   title,
   text,
   icon,
-  url,
+  assetUrl,
+  userUrl,
   value
 }) => {
-  const linkProps = url
+  const linkAsset = assetUrl
     ? {
-        pathname: composeManagerDetailsUrl(url),
+        pathname: composeProgramDetailsUrl(assetUrl),
+        state: `/ ${title}`
+      }
+    : undefined;
+  const linkUser = userUrl
+    ? {
+        pathname: composeManagerDetailsUrl(userUrl),
         state: `/ ${title}`
       }
     : undefined;
   return (
-    <li
-      className={classNames("events-list__item", {
-        "events-list__item--without-link": !linkProps
-      })}
-    >
-      <Link className="events-list__item-link" to={linkProps}>
+    <li className="events-list__item">
+      <Link className="events-list__item-link" to={linkAsset}>
         <div className="events-list__item-avatar">
-          {/*<ImageBase*/}
-          {/*  defaultImage={UserIcon}*/}
-          {/*  defaultImageClassName="events-list__item-image--default"*/}
-          {/*  imageClassName="events-list__item-image"*/}
-          {/*  url={icon}*/}
-          {/*  alt={title}*/}
-          {/*/>*/}
           <ImageBase
             DefaultImageComponent={GVProgramDefaultAvatar}
             defaultImageClassName="events-list__item-image--default"
-            // color={color}
             alt={title}
             imageClassName="events-list__item-image"
             url={icon}
           />
         </div>
-        <div className="events-list__item-info">
-          <div className="events-list__item-title">{title}</div>
-          <div className="events-list__item-text">{text}</div>
-        </div>
-        {value && <div className="events-list__item-number">{value}</div>}
       </Link>
+      <div className="events-list__item-info">
+        <Link className="events-list__item-link" to={linkUser}>
+          <div className="events-list__item-title">{title}</div>
+        </Link>
+        <div className="events-list__item-text">{text}</div>
+      </div>
+      {value && <div className="events-list__item-number">{value}</div>}
     </li>
   );
 };

@@ -19,7 +19,8 @@ const _EventsList: React.FC<Props> = ({ className, events }) => (
         title={event.title}
         text={event.text}
         icon={event.icon}
-        url={event.userUrl}
+        userUrl={event.userUrl}
+        assetUrl={event.assetUrl}
         value={event.value}
       />
     ))}
