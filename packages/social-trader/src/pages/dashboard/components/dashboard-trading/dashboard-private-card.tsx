@@ -20,8 +20,10 @@ import {
   ProgramMinInvestAmount
 } from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
+import useIsOpen from "hooks/is-open.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
+import ConfirmContainer from "modules/confirm/confirm-container";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
@@ -216,6 +218,27 @@ const MakeProgramButton: React.FC<{
         )}
       />
     </GVButton>
+  );
+});
+
+const ConfirmTFAButton: React.FC<{
+  onApply: VoidFunction;
+  id: string;
+}> = React.memo(({ onApply, id }) => {
+  const { t } = useTranslation();
+  const [isOpen, setOpen, setClose] = useIsOpen();
+  return (
+    <>
+      <TableCardActionsItem onClick={setOpen}>
+        {t("program-settings.buttons.two-factor-confirm")}
+      </TableCardActionsItem>
+      <ConfirmContainer
+        open={isOpen}
+        onClose={setClose}
+        onApply={onApply}
+        programId={id}
+      />
+    </>
   );
 });
 
