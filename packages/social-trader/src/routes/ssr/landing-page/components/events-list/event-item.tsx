@@ -1,36 +1,22 @@
-import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
-import UserIcon from "media/user-avatar.svg";
+import { PlatformEvent } from "gv-api-web";
 import React from "react";
-import {
-  composeManagerDetailsUrl,
-  composeProgramDetailsUrl
-} from "utils/compose-url";
+import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
-interface IBestItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  text: string;
-  icon: string;
-  assetUrl: string;
-  userUrl: string;
-  value: string;
-}
-
-const _EventItem: React.FC<IBestItemProps> = ({
+const _EventItem: React.FC<PlatformEvent> = ({
   title,
   text,
   icon,
   assetUrl,
   userUrl,
+  color,
+  assetType,
   value
 }) => {
   const linkAsset = assetUrl
-    ? {
-        pathname: composeProgramDetailsUrl(assetUrl),
-        state: `/ ${title}`
-      }
+    ? getAssetLink(assetUrl, assetType, title)
     : undefined;
   const linkUser = userUrl
     ? {
@@ -46,6 +32,7 @@ const _EventItem: React.FC<IBestItemProps> = ({
             DefaultImageComponent={GVProgramDefaultAvatar}
             defaultImageClassName="events-list__item-image--default"
             alt={title}
+            color={color}
             imageClassName="events-list__item-image"
             url={icon}
           />

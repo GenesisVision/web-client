@@ -4,7 +4,8 @@ import "./styles/home.scss";
 import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem
+  ItemsViewModelProgramDetailsListItem,
+  PlatformEvents
 } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { fetchFunds } from "modules/funds-table/services/funds-table.service";
@@ -26,6 +27,7 @@ import {
   brokersInfo,
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
+import platformApi from "services/api-client/platform-api";
 import { subtractDate } from "shared/utils/dates";
 import { addRequestAnimationFrame } from "utils/helpers";
 
@@ -33,12 +35,13 @@ const IndexPage: NextPage<{
   programsData: ItemsViewModelProgramDetailsListItem;
   fundsData: ItemsViewModelFundDetailsListItem;
   followsData: ItemsViewModelFollowDetailsListItem;
-}> = ({ programsData, fundsData, followsData }) => {
+  eventsData: PlatformEvents;
+}> = ({ programsData, fundsData, followsData, eventsData }) => {
   return (
     <Layout title="Genesis Vision">
       <main className="home">
         <FirstScreen />
-        {/*<EventsContainer events={}/>*/}
+        <EventsContainer events={eventsData.events} />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
             <FollowsContainer follows={followsData.items} />
@@ -65,7 +68,7 @@ const IndexPage: NextPage<{
           </div>
         </section>
         <AdvantagesContainer />
-        <section className="home__section home__section--bg-gray">
+        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
           <div className="home__container">
             <BrokersContainer
               brokersInfo={brokersInfo}
@@ -91,16 +94,12 @@ IndexPage.getInitialProps = async () => {
     addRequestAnimationFrame();
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
-    const [programsData, fundsData, followsData] = await Promise.all([
-      // PlatformApi({
-      //   sorting: "ByProfitDesc",
-      //   levelMin: 1,
-      //   levelMax: 7,
-      //   dateFrom,
-      //   dateTo,
-      //   skip: 0,
-      //   take: 6
-      // }),
+    const [
+      programsData,
+      fundsData,
+      followsData,
+      eventsData
+    ] = await Promise.all([
       fetchPrograms({
         sorting: "ByProfitDesc",
         levelMin: 1,
@@ -122,9 +121,12 @@ IndexPage.getInitialProps = async () => {
         sorting: "BySubscribersDesc",
         skip: 0,
         take: 6
+      }),
+      platformApi.getPlatformEvents({
+        take: 5
       })
     ]);
-    return { programsData, fundsData, followsData };
+    return { programsData, fundsData, followsData, eventsData };
   } catch (e) {
     const programsData = {
       total: 0,
@@ -138,6 +140,9 @@ IndexPage.getInitialProps = async () => {
       total: 0,
       items: []
     };
-    return { programsData, fundsData, followsData };
+    const eventsData = {
+      events: []
+    };
+    return { programsData, fundsData, followsData, eventsData };
   }
 };

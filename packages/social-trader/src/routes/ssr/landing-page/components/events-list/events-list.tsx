@@ -14,15 +14,7 @@ interface Props {
 const _EventsList: React.FC<Props> = ({ className, events }) => (
   <ul className={classNames("events-list", className)}>
     {events.map((event, index) => (
-      <EventItem
-        key={index}
-        title={event.title}
-        text={event.text}
-        icon={event.icon}
-        userUrl={event.userUrl}
-        assetUrl={event.assetUrl}
-        value={event.value}
-      />
+      <EventItem key={index} {...event} />
     ))}
     <EventLastItem />
   </ul>
