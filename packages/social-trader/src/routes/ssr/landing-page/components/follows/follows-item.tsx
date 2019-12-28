@@ -3,7 +3,7 @@ import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
 import React from "react";
-import { composeProgramDetailsUrl } from "utils/compose-url";
+import { composeFollowDetailsUrl } from "utils/compose-url";
 
 interface ITraderItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   title: string;
@@ -23,7 +23,7 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
   imageClassName
 }) => {
   const linkProps = {
-    pathname: composeProgramDetailsUrl(url),
+    pathname: composeFollowDetailsUrl(url),
     state: `/ ${title}`
   };
   return (

@@ -21,6 +21,8 @@
 
   &__controls {
     &.tab-controls {
+      margin-bottom: 60px;
+
       @include media-breakpoint-tablet() {
         display: grid;
         grid-auto-flow: column;
@@ -30,7 +32,7 @@
       @include media-breakpoint-landscape-tablet() {
         display: block;
         margin-bottom: 0;
-        margin-top: 50%;
+        margin-top: 30%;
         top: 150px;
         position: sticky;
       }

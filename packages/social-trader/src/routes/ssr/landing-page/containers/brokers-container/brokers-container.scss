@@ -4,7 +4,6 @@
 
 .brokers-container {
   @include grid();
-  @include horizontal-padding();
   position: relative;
 
   &__title {
