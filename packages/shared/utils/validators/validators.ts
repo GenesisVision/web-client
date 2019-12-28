@@ -39,9 +39,13 @@ export const assetDescriptionShape = (t: i18next.TFunction) => {
     .max(500, t("create-program-page.settings.validation.description-is-long"));
 };
 
-export const signalSuccessFeeShape = (t: i18next.TFunction, max: number) => {
+export const signalSuccessFeeShape = (
+  t: i18next.TFunction,
+  min: number,
+  max: number
+) => {
   return number()
-    .min(0, t("create-program-page.settings.validation.success-fee-min"))
+    .min(min, t("create-program-page.settings.validation.success-fee-min"))
     .required(t("create-program-page.settings.validation.success-fee-required"))
     .max(
       max,
@@ -63,13 +67,13 @@ export const signalVolumeFeeShape = (
     .min(
       min,
       t("create-program-page.settings.validation.signal-volume-fee-min", {
-        min: min.toFixed(2)
+        min
       })
     )
     .max(
       max,
       t("create-program-page.settings.validation.signal-volume-fee-max", {
-        max: max.toFixed(2)
+        max
       })
     );
 };

@@ -3,6 +3,7 @@ import { SelectFilterValue } from "components/table/components/filtering/filter.
 import {
   AmountWithCurrency,
   EventFilters,
+  FollowCreateAssetPlatformInfo,
   FundCreateAssetPlatformInfo,
   PlatformInfo,
   ProgramAssetPlatformInfo,
@@ -22,6 +23,15 @@ export type PlatformState = IApiState<PlatformInfo>;
 
 export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
+);
+
+export const createFollowInfoSelector = apiFieldSelector<
+  PlatformInfo,
+  FollowCreateAssetPlatformInfo
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.followInfo.createFollowInfo),
+  undefined
 );
 
 export const gvInvestFeeSelector = apiFieldSelector<PlatformInfo, number>(
@@ -86,6 +96,12 @@ export const programCurrenciesSelector = apiFieldSelector(
 export const platformCurrenciesSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.commonInfo.platformCurrencies),
+  []
+);
+
+export const followTagsSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.followInfo.tags),
   []
 );
 

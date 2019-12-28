@@ -1,3 +1,4 @@
+import { FollowCreateAssetPlatformInfo } from "gv-api-web";
 import i18next from "i18next";
 import {
   signalSuccessFeeShape,
@@ -6,17 +7,15 @@ import {
 import { object } from "yup";
 
 export const SignalValidationSchema = ({
-  t,
-  signalSuccessFee = 50,
-  signalVolumeFee = 0.1
+  followInfo: { maxSuccessFee, maxVolumeFee, minSuccessFee, minVolumeFee },
+  t
 }: SignalValidationSchemaProps) =>
   object().shape({
-    successFee: signalSuccessFeeShape(t, signalSuccessFee),
-    volumeFee: signalVolumeFeeShape(t, 0, signalVolumeFee)
+    successFee: signalSuccessFeeShape(t, minVolumeFee, maxVolumeFee),
+    volumeFee: signalVolumeFeeShape(t, minSuccessFee, maxSuccessFee)
   });
 
 interface SignalValidationSchemaProps {
+  followInfo: FollowCreateAssetPlatformInfo;
   t: i18next.TFunction;
-  signalSuccessFee: number;
-  signalVolumeFee: number;
 }

@@ -44,7 +44,10 @@ import {
   getTrades
 } from "./service/program-details.service";
 
-const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
+const _ProgramDetailsContainer: React.FC<Props> = ({
+  data: description,
+  route
+}) => {
   const dispatch = useDispatch();
   const levelsParameters = useSelector(levelParametersSelector);
   const {
@@ -63,6 +66,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const followPersonalDetails = followDetails && followDetails.personalDetails;
   const assetType = !!followDetails ? ASSET.FOLLOW : ASSET.PROGRAM;
   const personalDetails = followPersonalDetails || programPersonalDetails;
+  const showFollowStatistic =
+    (route === ASSET.FOLLOW && !!followPersonalDetails) ||
+    (!!followPersonalDetails && !programDetails);
+  const showProgramStatistic =
+    (route === ASSET.PROGRAM && !!programDetails) ||
+    (!!programDetails && !followPersonalDetails);
 
   const handleDispatchDescription = useCallback(() => {
     dispatch(dispatchProgramDescriptionWithId(id, undefined, assetType));
@@ -182,11 +191,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
         programPersonalDetails={programPersonalDetails}
         followPersonalDetails={followPersonalDetails}
       />
-      {assetType === ASSET.FOLLOW ? (
-        <FollowDetailsStatisticSection />
-      ) : (
-        <ProgramDetailsStatisticSection />
-      )}
+      {showFollowStatistic && <FollowDetailsStatisticSection />}
+      {showProgramStatistic && <ProgramDetailsStatisticSection />}
       <ProgramDetailsHistorySection
         getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
         tablesData={tablesData}
@@ -205,6 +211,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({ data: description }) => {
 };
 
 interface Props {
+  route: ASSET;
   data: ProgramDescriptionDataType;
 }
 

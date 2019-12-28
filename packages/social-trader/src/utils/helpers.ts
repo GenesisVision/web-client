@@ -2,6 +2,11 @@ import randomString from "randomstring";
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const addRequestAnimationFrame = () => {
+  if (typeof window !== undefined && !window.requestAnimationFrame)
+    window.requestAnimationFrame = () => -1;
+};
+
 export const getPercentageValue = (
   value: number,
   totalValue: number

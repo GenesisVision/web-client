@@ -79,11 +79,17 @@ const convertAccountToProgramValidationSchema = ({
 
 const convertToSignalValidationSchema = ({
   t,
-  programsInfo
+  followInfo: { maxSuccessFee, maxVolumeFee, minSuccessFee, minVolumeFee }
 }: IConvertAssetSettingsProps) =>
   object<IConvertAssetSettingsFormValues>().shape({
     ...getPublicInfoShapes(t),
-    ...getSignalShapes(t, programsInfo.createProgramInfo.maxSuccessFee)
+    ...getSignalShapes(
+      t,
+      minSuccessFee,
+      maxSuccessFee,
+      minVolumeFee,
+      maxVolumeFee
+    )
   });
 
 export enum CONVERT_ASSET_FIELDS {
@@ -141,20 +147,26 @@ const getPublicInfoShapes = (t: i18next.TFunction) => ({
   [CONVERT_ASSET_FIELDS.description]: assetDescriptionShape(t)
 });
 
-const getSignalShapes = (t: i18next.TFunction, maxSuccessFee: number) => ({
+const getSignalShapes = (
+  t: i18next.TFunction,
+  minSuccessFee: number,
+  maxSuccessFee: number,
+  minVolumeFee: number,
+  maxVolumeFee: number
+) => ({
   [CONVERT_ASSET_FIELDS.isSignalProgram]: boolean(),
   [CONVERT_ASSET_FIELDS.volumeFee]: mixed().when(
     CONVERT_ASSET_FIELDS.isSignalProgram,
     {
       is: true,
-      then: signalVolumeFeeShape(t)
+      then: signalVolumeFeeShape(t, minVolumeFee, maxVolumeFee)
     }
   ),
   [CONVERT_ASSET_FIELDS.successFee]: mixed().when(
     CONVERT_ASSET_FIELDS.isSignalProgram,
     {
       is: true,
-      then: signalSuccessFeeShape(t, maxSuccessFee)
+      then: signalSuccessFeeShape(t, minSuccessFee, maxSuccessFee)
     }
   )
 });

@@ -1,8 +1,7 @@
 import platformActions from "actions/platform-actions";
 import AppLayout from "components/app-layout/app-layout";
 import ServerErrorPage from "components/server-error-page/server-error-page";
-import { Currency, PlatformInfo } from "gv-api-web";
-import { ErrorViewModel } from "gv-api-web";
+import { Currency, ErrorViewModel, PlatformInfo } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import { NextPage } from "next";

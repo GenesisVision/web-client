@@ -1,18 +1,19 @@
+import Head from "next/head";
 import React from "react";
-import DocumentTitle from "react-document-title";
 import LPFooter from "routes/ssr/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "routes/ssr/landing-page/components/lp-header/lp-header";
 
 const _Layout: React.FC<Props> = ({ title, children }) => {
   return (
-    <DocumentTitle title={title}>
-      <div className="landing-page">
-        <LPHeader />
-        {children}
-        <LPFooter />
-        <div id="modal-root" />
-      </div>
-    </DocumentTitle>
+    <div className="landing-page">
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <LPHeader />
+      {children}
+      <LPFooter />
+      <div id="modal-root" />
+    </div>
   );
 };
 

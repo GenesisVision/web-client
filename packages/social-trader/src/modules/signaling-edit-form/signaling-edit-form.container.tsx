@@ -4,6 +4,8 @@ import SignalingEdit, {
 } from "modules/signaling-edit-form/signaling-edit";
 import { editSignal } from "modules/signaling-edit-form/signaling-edit-form.service";
 import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { createFollowInfoSelector } from "reducers/platform-reducer";
 
 const _SignalingEditFormContainer: React.FC<Props> = ({
   inDialog,
@@ -14,6 +16,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   volumeFee,
   isSignalProgram
 }) => {
+  const followInfo = useSelector(createFollowInfoSelector);
   const { sendRequest: editSignalRequest } = useApiRequest({
     middleware: [onApply],
     request: editSignal,
@@ -33,6 +36,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   );
   return (
     <SignalingEdit
+      followInfo={followInfo}
       isSignalProgram={isSignalProgram}
       inDialog={inDialog}
       showFields={showFields}

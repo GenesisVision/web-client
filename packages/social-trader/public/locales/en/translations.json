@@ -1,4 +1,7 @@
 {
+  "trade": {
+    "title": "Trade"
+  },
   "copytrading-tables": {
     "title": "Trades",
     "open-trades": "Open trades",

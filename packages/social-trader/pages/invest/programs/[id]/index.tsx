@@ -6,10 +6,11 @@ import {
 } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
+import { ASSET } from "shared/constants/constants";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
-  return <ProgramDetailsPage />;
+  return <ProgramDetailsPage route={ASSET.PROGRAM} />;
 };
 
 Page.getInitialProps = async ctx => {

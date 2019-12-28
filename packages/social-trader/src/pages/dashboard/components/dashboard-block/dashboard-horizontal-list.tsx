@@ -4,28 +4,33 @@ import classNames from "classnames";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const _DashboardHorizontalList: React.FC<
-  { darkShadow?: boolean; left?: boolean } & React.HTMLAttributes<
-    HTMLDivElement
-  >
-> = ({ children, darkShadow, left }) => {
+  { darkShadow?: boolean } & React.HTMLAttributes<HTMLDivElement>
+> = ({ children, darkShadow }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [endOfList, setEndOfList] = useState(0);
   const [scroll, setScroll] = useState(0);
+  const [leftShadow, setLeftShadow] = useState<boolean>(false);
+  const [rightShadow, setRightShadow] = useState<boolean>(false);
   useEffect(() => {
     if (!ref.current) return;
-    left && (ref.current.scrollLeft = 100000);
-    setEndOfList(left ? 0 : ref.current.scrollWidth - ref.current.offsetWidth);
-  }, [ref.current, left, setEndOfList]);
+    setEndOfList(ref.current.scrollWidth - ref.current.offsetWidth);
+  }, [ref.current, setEndOfList]);
   const handleScroll = useCallback(() => {
     if (!ref.current) return;
     setScroll(ref.current.scrollLeft);
   }, []);
+  useEffect(() => {
+    if (scroll > 0) setLeftShadow(true);
+    if (scroll === 0) setLeftShadow(false);
+    if (scroll < endOfList) setRightShadow(true);
+    if (scroll === endOfList) setRightShadow(false);
+  }, [scroll, endOfList]);
+
   return (
     <div
       className={classNames("dashboard-horizontal-list__shadow-wrapper", {
-        "dashboard-horizontal-list__shadow-wrapper--hided":
-          scroll === endOfList,
-        "dashboard-horizontal-list__shadow-wrapper--left": left,
+        "dashboard-horizontal-list__shadow-wrapper--right": rightShadow,
+        "dashboard-horizontal-list__shadow-wrapper--left": leftShadow,
         "dashboard-horizontal-list__shadow-wrapper--dark-shadow": darkShadow
       })}
     >

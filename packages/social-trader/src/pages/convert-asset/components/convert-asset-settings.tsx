@@ -17,6 +17,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
+  FollowCreateAssetPlatformInfo,
   ProgramAssetPlatformInfo,
   TradesDelay as TradesDelayType
 } from "gv-api-web";
@@ -142,6 +143,7 @@ export interface IConvertAssetSettingsFormOwnProps {
 }
 
 interface OwnProps extends IConvertAssetSettingsFormOwnProps {
+  followInfo: FollowCreateAssetPlatformInfo;
   programsInfo: ProgramAssetPlatformInfo;
   onSubmit: (
     data: IConvertAssetSettingsFormValues,

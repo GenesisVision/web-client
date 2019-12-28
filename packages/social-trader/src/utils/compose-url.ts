@@ -8,7 +8,7 @@ import {
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { AssetTypeExt } from "gv-api-web";
+import { AssetType, AssetTypeExt } from "gv-api-web";
 import {
   ACCOUNT_DETAILS_ROUTE,
   ACCOUNT_SETTINGS
@@ -22,6 +22,7 @@ import {
   FUNDS_SLUG_URL_PARAM_NAME
 } from "routes/funds.routes";
 import {
+  FOLLOW_DETAILS_FOLDER_ROUTE,
   FOLLOW_DETAILS_SLUG_ROUTE,
   FOLLOW_FACET_ROUTE,
   FOLLOW_SETTINGS_FOLDER_ROUTE,
@@ -219,3 +220,31 @@ export const createProgramNotificationsToUrl = (
     PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
+
+export const getAssetLink = (
+  url: string,
+  assetType: AssetType,
+  title: string
+): ToType => {
+  switch (assetType) {
+    case "Follow":
+      return createToUrl(
+        composeFollowDetailsUrl(url),
+        FOLLOW_DETAILS_FOLDER_ROUTE,
+        title
+      );
+    case "Fund":
+      return createToUrl(
+        composeFundsDetailsUrl(url),
+        FUND_DETAILS_FOLDER_ROUTE,
+        title
+      );
+    case "Program":
+    default:
+      return createToUrl(
+        composeProgramDetailsUrl(url),
+        PROGRAM_DETAILS_FOLDER_ROUTE,
+        title
+      );
+  }
+};
