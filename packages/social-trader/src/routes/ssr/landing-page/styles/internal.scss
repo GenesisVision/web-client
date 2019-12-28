@@ -43,37 +43,6 @@
     @include reset-link();
   }
 
-  //table {
-  //	border-collapse: collapse;
-  //}
-  //
-  //thead {
-  //	font-weight: 700;
-  //	//color: $gray;
-  //}
-  //
-  //th,
-  //td {
-  //	border: 1px solid rgba($gray, 0.1);
-  //	text-align: left;
-  //	padding: 18px 14px;
-  //
-  //	@media #{$tablet-portrait} {
-  //		padding: 18px;
-  //	}
-  //}
-
-  //p,
-  //table {
-  //	line-height: 26px;
-  //	font-size: 13px;
-  //
-  //	@media #{$tablet-portrait} {
-  //		line-height: 32px;
-  //		font-size: 14px;
-  //	}
-  //}
-
   &--font-small {
     h2,
     h3,
