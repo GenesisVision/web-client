@@ -27,6 +27,7 @@ import {
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
 import { subtractDate } from "shared/utils/dates";
+import { addRequestAnimationFrame } from "utils/helpers";
 
 const IndexPage: NextPage<{
   programsData: ItemsViewModelProgramDetailsListItem;
@@ -95,6 +96,7 @@ export default IndexPage;
 
 IndexPage.getInitialProps = async () => {
   try {
+    addRequestAnimationFrame();
     const dateTo = new Date();
     const dateFrom = subtractDate(dateTo, 1, "week");
     const [programsData, fundsData, followsData] = await Promise.all([
