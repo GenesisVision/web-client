@@ -99,6 +99,12 @@ export const platformCurrenciesSelector = apiFieldSelector(
   []
 );
 
+export const followTagsSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.followInfo.tags),
+  []
+);
+
 export const programTagsSelector = apiFieldSelector(
   platformDataSelector,
   fieldSelector(state => state.assetInfo.programInfo.tags),
