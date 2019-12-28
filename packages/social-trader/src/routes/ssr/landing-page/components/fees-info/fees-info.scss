@@ -29,30 +29,44 @@
     h4 {
       margin-bottom: 30px;
     }
+  }
 
-    .fees-info__list-notes {
-      @include reset-list();
+  &__list-notes {
+    @include reset-list();
+
+    &--dark {
+      .fees-info__note-item {
+        &::before {
+          border-color: $background-color;
+        }
+      }
+    }
+  }
+
+  &__note-item {
+    margin-bottom: 30px;
+    position: relative;
+
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    .fees-info__note-item {
-      margin-bottom: 30px;
-      position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      display: block;
+      border-radius: 50%;
+      background: $primary-color;
+      border: 7px solid #e8f8f7;
+      top: 5px;
+      left: -20px;
+      box-sizing: border-box;
 
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-      &:before {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        display: block;
-        border-radius: 50%;
-        background: $primary-color;
-        border: 7px solid #e8f8f7;
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
         left: -43px;
-        top: 5px;
       }
     }
   }
@@ -87,7 +101,7 @@
     vertical-align: top;
 
     .fees-table__row {
-      //background-color: $landing-bg-gray;
+      background-color: $landing-bg-gray;
     }
 
     .fees-table__cell--white {
@@ -125,6 +139,14 @@
     .fees-table__head {
       .fees-table__row {
         background-color: $main-color;
+      }
+    }
+  }
+
+  &--dark {
+    .fees-table__head {
+      .fees-table__row {
+        background-color: transparent;
       }
     }
   }

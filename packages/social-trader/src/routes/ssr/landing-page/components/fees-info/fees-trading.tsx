@@ -318,7 +318,11 @@ export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
     <>
       <div className="fees-info__notes">
         <h3>To be eligible for a trading discount</h3>
-        <ul className="fees-info__list-notes">
+        <ul
+          className={classNames("fees-info__list-notes", {
+            "fees-info__list-notes--dark": dark
+          })}
+        >
           <li className="fees-info__note-item">
             There must be more than 1 GVT stored in the wallet
           </li>
@@ -334,7 +338,7 @@ export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
         <div className="fees-info__table-wrapper">
           <table
             className={classNames("fees-table", {
-              "fees-table--white-head": !dark
+              "fees-table--dark": dark
             })}
           >
             <thead className="fees-table__head">
@@ -374,7 +378,11 @@ export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
       </div>
       <div className="fees-info__notes">
         <h3>Note</h3>
-        <ul className="fees-info__list-notes">
+        <ul
+          className={classNames("fees-info__list-notes", {
+            "fees-info__list-notes--dark": dark
+          })}
+        >
           <li className="fees-info__note-item">
             If you switch this function off, the fee will become "Regular" and
             charge 100%.
