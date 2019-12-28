@@ -107,6 +107,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           />
         </TableCardActionsItemContainer>
       )}
+      {asset.actions.canConfirm2FA && (
+        <ConfirmTFAButton onApply={updateItems} id={asset.id} />
+      )}
     </TableCardActions>
   );
   const detailsLink = linkCreator(composeAccountDetailsUrl(asset.id));
