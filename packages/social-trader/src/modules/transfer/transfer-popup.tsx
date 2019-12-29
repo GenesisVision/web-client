@@ -39,7 +39,7 @@ interface Props {
   open: boolean;
   sourceType?: InternalTransferRequestType;
   destinationType?: InternalTransferRequestType;
-  title?: string;
+  title: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
 

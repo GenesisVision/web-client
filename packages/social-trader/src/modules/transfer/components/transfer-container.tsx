@@ -115,7 +115,7 @@ interface Props {
   onClose: () => void;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
-  title?: string;
+  title: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
 
