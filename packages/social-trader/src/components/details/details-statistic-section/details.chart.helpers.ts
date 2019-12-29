@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 import { DETAILS_CHART_TABS } from "./details-chart-section/details-chart";
@@ -147,7 +148,7 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
     currency => {
       setSelectedCurrencies([
         ...selectedCurrencies,
-        selectCurrencies.find(({ name }) => name === currency)!
+        safeGetElemFromArray(selectCurrencies, ({ name }) => name === currency)
       ]);
     },
     [selectedCurrencies, selectCurrencies]
@@ -165,9 +166,10 @@ export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = u
       const newSelectedCurrencies = selectedCurrencies.filter(
         ({ name }) => name !== event.target.value
       );
-      newSelectedCurrencies[i] = platformCurrencies.find(
+      newSelectedCurrencies[i] = safeGetElemFromArray(
+        platformCurrencies,
         ({ name }) => name === event.target.value
-      )!;
+      );
       setSelectedCurrencies([...newSelectedCurrencies]);
       dispatch(statisticCurrencyAction(newSelectedCurrencies[0].name));
     },

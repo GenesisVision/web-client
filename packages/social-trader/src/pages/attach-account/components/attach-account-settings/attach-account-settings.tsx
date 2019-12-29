@@ -20,6 +20,7 @@ import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { safeGetElemFromArray } from "utils/helpers";
 import { SetSubmittingType } from "utils/types";
 
 import attachAccountSettingsValidationSchema from "./attach-account-settings.validators";
@@ -36,7 +37,10 @@ const _AttachAccountSettings: React.FC<Props> = ({
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   const brokerNameChangeHandle = useCallback(
     ({ target: { value } }: ISelectChangeEvent) => {
-      const broker = exchanges.find(({ name }) => name === value)!;
+      const broker = safeGetElemFromArray(
+        exchanges,
+        ({ name }) => name === value
+      );
       setBroker(broker);
       setFieldValue(ATTACH_ACCOUNT_FIELDS.brokerName, value);
     },

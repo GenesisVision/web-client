@@ -20,7 +20,7 @@ const _RequestLine: React.FC<Props> = ({
   return (
     <div className="request-line">
       <div className="request-line__logo">
-        <PortfolioEventLogo assetDetails={assetDetails} icon={""} />
+        <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </div>
       <StatisticItemList className="request-line__values">
         <StatisticItem label={title} invert accent>

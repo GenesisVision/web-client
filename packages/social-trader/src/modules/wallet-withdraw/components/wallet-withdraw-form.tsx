@@ -16,7 +16,6 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import WalletSelect from "components/wallet-select/wallet-select";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
-import i18next from "i18next";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -28,8 +27,9 @@ import {
   twoFactorValidator
 } from "shared/utils/validators/validators";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
-import { lazy, object, Schema, string, StringSchema } from "yup";
+import { lazy, object, Schema } from "yup";
 
 const _WalletWithdrawForm: React.FC<
   InjectedFormikProps<Props, IWalletWithdrawFormValues>
@@ -47,11 +47,14 @@ const _WalletWithdrawForm: React.FC<
 }) => {
   const { currency, amount } = values;
   const [selected, setSelected] = useState<WalletData>(
-    wallets.find(wallet => wallet.currency === currency)!
+    safeGetElemFromArray(wallets, wallet => wallet.currency === currency)
   );
   const onChangeCurrency = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
-      const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
+      const wallet = safeGetElemFromArray(
+        wallets,
+        wallet => wallet.id === target.props.value
+      );
       setSelected(wallet);
       setFieldValue(FIELDS.currency, wallet.currency);
       setFieldValue(FIELDS.id, wallet.id);

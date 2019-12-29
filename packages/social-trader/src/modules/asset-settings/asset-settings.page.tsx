@@ -1,6 +1,7 @@
 import "./asset-settings.scss";
 
 import Page from "components/page/page";
+import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
@@ -34,19 +35,19 @@ const _AssetsEditPage: React.FC<Props> = ({
           ? values.hasInvestmentLimit
             ? values.investmentLimit || null
             : null
-          : description!.availableInvestmentLimit;
+          : description.availableInvestmentLimit;
       const currentValues = {
-        tradesDelay: description!.tradesDelay,
-        exitFee: description!.exitFeeSelected, //exitFee
-        entryFee: description!.entryFeeSelected, //entryFee
-        successFee: description!.successFeeSelected,
-        title: description!.publicInfo.title,
-        stopOutLevel: description!.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
-        description: description!.publicInfo.description,
-        logo: { src: description!.publicInfo.logo }
+        tradesDelay: description.tradesDelay,
+        exitFee: description.exitFeeSelected, //exitFee
+        entryFee: description.entryFeeSelected, //entryFee
+        successFee: description.successFeeSelected,
+        title: description.publicInfo.title,
+        stopOutLevel: description.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
+        description: description.publicInfo.description,
+        logo: { src: description.publicInfo.logo }
       };
       editRequest({
-        id: description!.id,
+        id: description.id,
         editAssetData: {
           ...currentValues,
           ...values,
@@ -56,7 +57,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     },
     [description, editAsset]
   );
-  const applyCloseAsset = useCallback(() => redirectToAsset(description!.id), [
+  const applyCloseAsset = useCallback(() => redirectToAsset(description.id), [
     description,
     redirectToAsset
   ]);
@@ -74,7 +75,7 @@ const _AssetsEditPage: React.FC<Props> = ({
 interface Props {
   redirectToAsset: (id: string) => void;
   asset: CLOSEABLE_ASSET;
-  description?: AssetDescriptionType;
+  description: AssetDescriptionType;
   dispatchDescription: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
@@ -82,5 +83,5 @@ interface Props {
   ) => JSX.Element;
 }
 
-const AssetSettingsPage = React.memo(_AssetsEditPage);
+const AssetSettingsPage = React.memo(Crashable(_AssetsEditPage));
 export default AssetSettingsPage;

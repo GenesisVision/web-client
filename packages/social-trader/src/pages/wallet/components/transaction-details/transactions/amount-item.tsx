@@ -1,6 +1,7 @@
 import "../transaction-details.scss";
 
 import classNames from "classnames";
+import Crashable from "decorators/crashable";
 import { AmountItem as AmountItemType, Color } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -46,5 +47,5 @@ interface Props {
   amount: AmountItemType;
 }
 
-const AmountItem = React.memo(_AmountItem);
+const AmountItem = React.memo(Crashable(_AmountItem));
 export default AmountItem;

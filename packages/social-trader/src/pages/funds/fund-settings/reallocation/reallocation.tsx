@@ -1,12 +1,12 @@
 import SettingsBlock from "components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { FundAssetPartWithIcon, PlatformAsset } from "gv-api-web";
+import Crashable from "decorators/crashable";
+import withLoader from "decorators/with-loader";
+import { PlatformAsset } from "gv-api-web";
 import { FundAssetInfo } from "gv-api-web/dist/model/FundAssetInfo";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { compose } from "redux";
 
 import ReallocateForm, {
   IReallocateFormValues
@@ -54,8 +54,5 @@ interface Props {
   onApply: () => void;
 }
 
-const Reallocation = compose<React.ComponentType<Props & WithLoaderProps>>(
-  withLoader,
-  React.memo
-)(_Reallocation);
+const Reallocation = withLoader(React.memo(Crashable(_Reallocation)));
 export default Reallocation;

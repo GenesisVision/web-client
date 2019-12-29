@@ -10,6 +10,7 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
+import Crashable from "decorators/crashable";
 import {
   AmountRowCell,
   MultiWalletTransactionStatus,
@@ -23,9 +24,9 @@ import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-const TransactionDetailsItemsBlock: React.FC<{
+const _TransactionDetailsItemsBlock: React.FC<{
   items: TransactionDetailItem[];
-}> = React.memo(({ items }) => {
+}> = ({ items }) => {
   return (
     <>
       {items.map(item => (
@@ -33,7 +34,10 @@ const TransactionDetailsItemsBlock: React.FC<{
       ))}
     </>
   );
-});
+};
+const TransactionDetailsItemsBlock = React.memo(
+  Crashable(_TransactionDetailsItemsBlock)
+);
 
 const TransactionDetailsListItem: React.FC<{
   item: TransactionDetailItem;
@@ -84,19 +88,21 @@ const TransactionStatusBlock: React.FC<{
   );
 });
 
-const TransactionAssetBlock: React.FC<{
+const _TransactionAssetBlock: React.FC<{
   type: "investment" | "withdrawal";
   asset: TransactionAssetDetails;
-}> = React.memo(({ asset, type }) => {
+}> = ({ asset, type }) => {
   return (
     <TransactionDetailsItem label={asset.description}>
       <TransactionAsset url={asset.logo} data={asset} />
     </TransactionDetailsItem>
   );
-});
-const TransactionWalletBlock: React.FC<{
+};
+const TransactionAssetBlock = React.memo(Crashable(_TransactionAssetBlock));
+
+const _TransactionWalletBlock: React.FC<{
   wallets: AmountRowCell;
-}> = React.memo(({ wallets }) => {
+}> = ({ wallets }) => {
   const [t] = useTranslation();
   const walletFirst = wallets.first;
   const walletSecond = wallets.second;
@@ -113,7 +119,8 @@ const TransactionWalletBlock: React.FC<{
       )}
     </TransactionDetailsItem>
   );
-});
+};
+const TransactionWalletBlock = React.memo(Crashable(_TransactionWalletBlock));
 
 const _CommonTransactionDetails: React.FC<Props> = ({
   data,
@@ -160,9 +167,11 @@ const _CommonTransactionDetails: React.FC<Props> = ({
 
 interface Props {
   data: MultiWalletTransaction;
-  handleCancel?: () => void;
-  handleResend?: () => void;
+  handleCancel: VoidFunction;
+  handleResend: VoidFunction;
 }
 
-const CommonTransactionDetails = React.memo(_CommonTransactionDetails);
+const CommonTransactionDetails = React.memo(
+  Crashable(_CommonTransactionDetails)
+);
 export default CommonTransactionDetails;

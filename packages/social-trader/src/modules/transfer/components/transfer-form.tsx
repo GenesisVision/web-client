@@ -117,7 +117,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit={handleSubmit}
       noValidate
     >
-      <DialogTop title={title || t("transfer.title")}>
+      <DialogTop title={title}>
         <TransferSelectField
           currency={selectedSourceItem.currency}
           name={TRANSFER_FORM_FIELDS.sourceId}

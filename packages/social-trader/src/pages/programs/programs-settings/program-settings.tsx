@@ -29,9 +29,7 @@ import TwoFactorConfirm from "./two-factor-confirm";
 const _ProgramSettings: React.FC<Props> = ({
   updateDescription,
   createProgramInfo: { maxSuccessFee, maxEntryFee },
-  cancelChangeBroker,
   description,
-  changeBroker,
   editProgram,
   closeProgram
 }) => {
@@ -73,17 +71,17 @@ const _ProgramSettings: React.FC<Props> = ({
             closePeriod={updateDescription}
           />
           <CancelChangeBroker
+            onApply={updateDescription}
             id={description.id}
             condition={!!programDetails.personalDetails.migration}
             isSignalProgram={isSignalProgram}
             migration={programDetails.personalDetails.migration}
-            onSubmit={cancelChangeBroker}
             leverage={description.tradingAccountInfo.leverageMax}
           />
           <ChangeBroker
+            onApply={updateDescription}
             condition={!programDetails.personalDetails.migration}
             isSignalProgram={isSignalProgram}
-            onSubmit={changeBroker}
             id={description.id}
             currentLeverage={description.tradingAccountInfo.leverageMax}
           />
@@ -140,12 +138,7 @@ interface Props {
   description: ProgramFollowDetailsFull;
   updateDescription: VoidFunction;
   closeProgram: VoidFunction;
-  changeBroker: (
-    values: ChangeBrokerFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
   editProgram: TUpdateProgramFunc;
-  cancelChangeBroker: VoidFunction;
 }
 
 const ProgramSettings = compose<React.ComponentType<Props & WithLoaderProps>>(
