@@ -5,7 +5,7 @@ import {
   PowResult,
   RegisterInvestorViewModel
 } from "gv-api-web";
-import * as React from "react";
+import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";

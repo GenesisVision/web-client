@@ -4,14 +4,13 @@ import {
   OrderSignalProgramInfo
 } from "gv-api-web";
 import { TRADES_HISTORY_PROVIDERS_COLUMNS } from "modules/copytrading-tables/components/copytrading-tables.constants";
-import moment from "moment";
 import * as React from "react";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -19,6 +18,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 import ProvidersPopup from "./providers-popup/providers-popup";
@@ -75,7 +75,7 @@ const _TradesHistoryRow: React.FC<Props> = ({ trade, title }) => {
           ) : null}
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--ticket">
-          {moment(trade.date).format()}
+          {formatDate(trade.date)}
         </TableCell>
         <TableCell className="details-trades__cell program-details-trades__cell--direction">
           <BaseProfitability

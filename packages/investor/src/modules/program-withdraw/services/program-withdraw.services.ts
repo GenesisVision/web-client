@@ -9,7 +9,7 @@ export const getProgramWithdrawInfo = (
   id: string,
   currency: string
 ) => (): Promise<ProgramWithdrawInfo> => {
-  return investorApi.v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(
+  return investorApi.getProgramWithdrawInfo(
     id,
     currency,
     authService.getAuthArg()
@@ -20,11 +20,7 @@ export const withdrawProgramById = (id: string, onClose: () => void) => (
   values: ProgramWithdrawType
 ): InvestorThunk<Promise<void>> => (dispatch): Promise<void> => {
   return investorApi
-    .v10InvestorProgramsByIdWithdrawMultiPost(
-      id,
-      authService.getAuthArg(),
-      values
-    )
+    .withdrawFromProgram(id, authService.getAuthArg(), values)
     .then(() => {
       onClose();
       dispatch(

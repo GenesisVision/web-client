@@ -1,8 +1,7 @@
-import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import { KYC_ROUTE } from "shared/components/profile/profile.constants";
 
 const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
@@ -16,8 +15,7 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
       <Link
         to={{
           pathname: KYC_ROUTE,
-          state: `/ ${t("manager.create-program-page.title")}`,
-          prevPath: CREATE_PROGRAM_PAGE_ROUTE
+          state: `/ ${t("manager.create-program-page.title")}`
         }}
       >
         <GVButton color="primary" variant="outlined">

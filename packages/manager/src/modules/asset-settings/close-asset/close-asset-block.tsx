@@ -13,17 +13,14 @@ const _CloseAssetBlock: React.FC<Props> = ({
   canCloseAsset,
   closeAsset
 }) => (
-  <SettingsBlock
-    label={label}
-    content={
-      <CloseAsset
-        asset={asset}
-        canClose={canCloseAsset}
-        onApply={closeAsset}
-        id={id}
-      />
-    }
-  />
+  <SettingsBlock label={label}>
+    <CloseAsset
+      asset={asset}
+      canClose={canCloseAsset}
+      onApply={closeAsset}
+      id={id}
+    />
+  </SettingsBlock>
 );
 
 interface Props extends WithTranslation {

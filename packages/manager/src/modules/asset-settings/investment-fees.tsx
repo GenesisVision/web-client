@@ -1,9 +1,9 @@
+import FeesSettings from "components/create-asset/fields/fees-settings";
 import { FormikProps, withFormik } from "formik";
 import { ProgramsInfo } from "gv-api-web";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import FeesSettings from "shared/components/fields/fees-settings";
 import GVButton from "shared/components/gv-button";
 import SettingsBlock from "shared/components/settings-block/settings-block";
 import { ASSET } from "shared/constants/constants";
@@ -30,59 +30,58 @@ const _InvestmentFees: React.FC<Props> = ({
       label={t(
         `manager.create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
       )}
-      content={
-        <form id="edit-form" onSubmit={handleSubmit}>
-          {asset === ASSET.PROGRAM && (
-            <FeesSettings
-              entryFeeName={FIELDS.entryFee}
-              entryFeeDescription={t(
-                "manager.create-program-page.settings.hints.entry-fee-description"
-              )}
-              secondFeeName={FIELDS.successFee}
-              secondFeeLabel={t(
-                "manager.create-program-page.settings.fields.success-fee"
-              )}
-              secondFeeUnderText={t(
-                "manager.create-program-page.settings.hints.success-fee"
-              )}
-              secondFeeDescription={t(
-                "manager.create-program-page.settings.hints.success-fee-description"
-              )}
-            />
-          )}
-          {asset === ASSET.FUND && (
-            <FeesSettings
-              entryFeeName={FIELDS.entryFee}
-              entryFeeDescription={t(
-                "manager.create-fund-page.settings.hints.entry-fee-description",
-                { maxFee: managerMaxEntryFee }
-              )}
-              secondFeeName={FIELDS.exitFee}
-              secondFeeLabel={t(
-                "manager.create-fund-page.settings.fields.exit-fee"
-              )}
-              secondFeeUnderText={t(
-                "manager.create-fund-page.settings.hints.exit-fee"
-              )}
-              secondFeeDescription={t(
-                "manager.create-fund-page.settings.hints.exit-fee-description",
-                {
-                  maxFee: managerMaxExitFee
-                }
-              )}
-            />
-          )}
-          <GVButton
-            color="primary"
-            type={"submit"}
-            className="invest-form__submit-button"
-            disabled={!dirty || !isValid || isSubmitting}
-          >
-            {t("manager.program-settings.buttons.save")}
-          </GVButton>
-        </form>
-      }
-    />
+    >
+      <form id="edit-form" onSubmit={handleSubmit}>
+        {asset === ASSET.PROGRAM && (
+          <FeesSettings
+            entryFeeName={FIELDS.entryFee}
+            entryFeeDescription={t(
+              "manager.create-program-page.settings.hints.entry-fee-description"
+            )}
+            secondFeeName={FIELDS.successFee}
+            secondFeeLabel={t(
+              "manager.create-program-page.settings.fields.success-fee"
+            )}
+            secondFeeUnderText={t(
+              "manager.create-program-page.settings.hints.success-fee"
+            )}
+            secondFeeDescription={t(
+              "manager.create-program-page.settings.hints.success-fee-description"
+            )}
+          />
+        )}
+        {asset === ASSET.FUND && (
+          <FeesSettings
+            entryFeeName={FIELDS.entryFee}
+            entryFeeDescription={t(
+              "manager.create-fund-page.settings.hints.entry-fee-description",
+              { maxFee: managerMaxEntryFee }
+            )}
+            secondFeeName={FIELDS.exitFee}
+            secondFeeLabel={t(
+              "manager.create-fund-page.settings.fields.exit-fee"
+            )}
+            secondFeeUnderText={t(
+              "manager.create-fund-page.settings.hints.exit-fee"
+            )}
+            secondFeeDescription={t(
+              "manager.create-fund-page.settings.hints.exit-fee-description",
+              {
+                maxFee: managerMaxExitFee
+              }
+            )}
+          />
+        )}
+        <GVButton
+          color="primary"
+          type={"submit"}
+          className="invest-form__submit-button"
+          disabled={!dirty || !isValid || isSubmitting}
+        >
+          {t("manager.program-settings.buttons.save")}
+        </GVButton>
+      </form>
+    </SettingsBlock>
   );
 };
 

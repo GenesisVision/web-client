@@ -1,0 +1,55 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_shadow.scss";
+
+.dashboard-block {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__link {
+    color: $text-light-color;
+    display: inline-block;
+    text-align: center;
+    font-size: $font-size-h1;
+    line-height: $font-size-h2;
+    width: $font-size-h2;
+  }
+}
+
+.dashboard-horizontal-list {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  & .table-card:last-child {
+    margin-right: 0;
+  }
+
+  &__shadow-wrapper {
+    display: flex;
+    @include details-block-left-margin();
+    position: relative;
+    &--left {
+      &:before {
+        @include leftShadow();
+      }
+      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
+        &:before {
+          @include leftDarkShadow();
+        }
+      }
+    }
+    &--right {
+      &:after {
+        @include rightShadow();
+      }
+      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
+        &:after {
+          @include rightDarkShadow();
+        }
+      }
+    }
+  }
+}

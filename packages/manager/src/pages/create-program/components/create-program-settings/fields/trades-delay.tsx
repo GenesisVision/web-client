@@ -1,3 +1,4 @@
+import CreateAssetField from "components/create-asset/create-asset-field/create-asset-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GVFormikField from "shared/components/gv-formik-field";
@@ -10,7 +11,7 @@ import Select from "shared/components/select/select";
 const _TradesDelay: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
   return (
-    <div className="program-settings__block-wrapper create-program-settings__row">
+    <CreateAssetField>
       <GVFormikField
         name={name}
         component={GVTextField}
@@ -29,7 +30,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         tooltipContent={t("manager.program-settings.trades-update.text")}
       />
-    </div>
+    </CreateAssetField>
   );
 };
 

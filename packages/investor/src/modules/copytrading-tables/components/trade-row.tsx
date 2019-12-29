@@ -5,18 +5,17 @@ import {
   CloseCopytradingTrade,
   closeCopytradingTrade
 } from "modules/copytrading-tables/services/copytrading-tables.service";
-import moment from "moment";
 import * as React from "react";
 import { useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Count from "shared/components/avatar/count/count";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import GVButton from "shared/components/gv-button";
+import Link from "shared/components/link/link";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -26,6 +25,7 @@ import { UpdateRowFuncType } from "shared/components/table/components/table.type
 import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatDate } from "shared/utils/dates";
 import { formatValue } from "shared/utils/formatter";
 
 import ProvidersPopup from "./providers-popup/providers-popup";
@@ -82,7 +82,7 @@ const _TradeRow: React.FC<Props> = ({
           </div>
         </TableCell>
         <TableCell className="details-trades__cell">
-          {moment(trade.date).format()}
+          {formatDate(trade.date)}
         </TableCell>
         <TableCell className="details-trades__cell">{trade.symbol}</TableCell>
         <TableCell className="details-trades__cell">
@@ -168,7 +168,7 @@ const _TradeRow: React.FC<Props> = ({
         onClose={setClosePopup}
         open={isOpenPopup}
         onApply={() => {
-          setClosePopup;
+          setClosePopup();
           closeCopytradingTrade(trade.id, () => {
             update(undefined);
           });

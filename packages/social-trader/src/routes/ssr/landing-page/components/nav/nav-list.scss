@@ -1,0 +1,140 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+
+.nav-list {
+  @include reset-list();
+
+  @include media-breakpoint-desktop() {
+    display: grid;
+    grid-auto-flow: column;
+  }
+
+  &__item {
+    position: relative;
+
+    @include media-breakpoint-desktop() {
+      margin-right: 40px;
+      text-align: center;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @include media-breakpoint-large-desktop() {
+      margin-right: 60px;
+    }
+
+    &--hide-mobile {
+      display: none;
+
+      @include media-breakpoint-desktop() {
+        display: block;
+      }
+    }
+
+    &--sub-open {
+      @include media-breakpoint-desktop() {
+        background-color: #1d1a3d;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+    }
+  }
+
+  &__link {
+    @include transition(color);
+    @include reset-link();
+    display: block;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: $main-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $landing-link-hover;
+    }
+
+    @include media-breakpoint-tablet() {
+      font-weight: 600;
+      font-size: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 20px 30px;
+      width: 135px;
+    }
+  }
+
+  &--sub {
+    @include media-breakpoint-desktop() {
+      position: absolute;
+      height: 0;
+      left: 0;
+      background-color: #1d1a3d;
+      color: $main-color;
+      z-index: 3;
+      overflow: auto;
+      display: block;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+
+      @include media-breakpoint-desktop() {
+        padding-bottom: 10px;
+      }
+    }
+
+    .nav-list__item {
+      @include media-breakpoint-desktop() {
+        margin-right: 0;
+        opacity: 0;
+        animation: 0.5s appear forwards;
+      }
+    }
+
+    .nav-list__link {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba($main-color, 0.5);
+      padding-left: 20px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $landing-link-hover;
+      }
+
+      @include media-breakpoint-tablet() {
+        font-size: 20px;
+      }
+
+      @include media-breakpoint-desktop() {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 15px 30px;
+      }
+    }
+  }
+
+  &--sub-open {
+    height: auto;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

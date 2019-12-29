@@ -1,0 +1,9 @@
+@import "~shared/styles/_sizes";
+
+.invest-popup {
+  &__currency {
+    font-size: $font-size-small;
+    opacity: 0.5;
+    letter-spacing: 0.4px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Broker, MigrationRequest } from "gv-api-web";
+import { Broker, BrokerAccountType, MigrationRequest } from "gv-api-web";
 import BrokerCard from "pages/create-program/components/create-program-broker/broker-card/broker-card";
 import { BROKER_CARD_EXTRA_STATE } from "pages/create-program/components/create-program-broker/broker-card/broker-card.constants";
 import React from "react";
@@ -43,7 +43,8 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           >
             {
               brokerFrom.accountTypes.find(
-                account => account.id === currentAccountTypeId
+                (account: BrokerAccountType) =>
+                  account.id === currentAccountTypeId
               )!.name
             }
           </StatisticItem>

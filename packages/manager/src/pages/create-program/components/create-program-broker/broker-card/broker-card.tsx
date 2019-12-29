@@ -3,8 +3,7 @@ import "./broker-card.scss";
 import classnames from "classnames";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import SelectedMark from "shared/components/selected-mark/selected-mark";
 import TagBrokerContainer from "shared/components/tags/tag-broker-container/tag-broker-container";
 import filesService from "shared/services/file-service";
 
@@ -12,9 +11,8 @@ import BrokerCardAdornment from "./broker-card-adornment";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
 import { slugBrokerName } from "./broker-card.helpers";
 
-const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
+const _BrokerCard: React.FC<Props> = ({
   logo,
-  t,
   brokerName,
   onSelect,
   isSelected,
@@ -41,7 +39,9 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
       onClick={isActive ? onSelect && onSelect(brokerName) : undefined}
     >
       {isSelected && (
-        <div className="broker-card__selected-mark"> &#10004;</div>
+        <div className="broker-card__selected-mark">
+          <SelectedMark selected />
+        </div>
       )}
       <BrokerCardAdornment
         condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
@@ -63,13 +63,10 @@ const _BrokerCard: React.FC<OwnProps & WithTranslation> = ({
   );
 };
 
-const BrokerCard = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_BrokerCard);
+const BrokerCard = React.memo(_BrokerCard);
 export default BrokerCard;
 
-interface OwnProps {
+interface Props {
   logo: string;
   brokerName: string;
   onSelect?(brokerName: string): () => void;

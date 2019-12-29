@@ -1,0 +1,196 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$padding-info-left: $padding-upper-medium;
+$padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
+
+.details-description {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "logo links" "main main" "details details";
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-tablet() {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "logo main links" ". details details";
+    grid-column-gap: $padding-upper-medium;
+    padding: 0;
+  }
+
+  &__section {
+    margin-bottom: $padding-xsmall;
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include media-breakpoint-tablet() {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+
+  &__control-elements-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .fund-asset {
+    background: rgba(216, 216, 216, 0.05);
+    height: 50px / $divider-title;
+    padding: 15px / $divider-padding;
+    justify-content: space-between;
+    &__container {
+      &--others-count {
+        cursor: pointer;
+      }
+    }
+    &--others-count {
+      min-width: auto;
+      background: rgba(216, 216, 216, 0.1);
+    }
+    @include media-breakpoint-landscape-phone() {
+      height: 50px;
+      padding: 15px;
+      min-width: 240px;
+      &--others-count {
+        min-width: auto;
+      }
+    }
+  }
+
+  &__avatar {
+    cursor: pointer;
+    padding: $padding-xsmall-mobile 0 $padding-xsmall;
+    & .program-avatar__level {
+      border-color: $background-color;
+    }
+    @include media-breakpoint-tablet() {
+      padding: 0;
+    }
+  }
+
+  &__subheading {
+    @include adaptive-padding(bottom, $padding-small);
+    @include font-size($font-size-h4);
+    font-weight: bold;
+    letter-spacing: 0.21px;
+  }
+
+  &__info {
+    order: 99;
+    width: 100%;
+
+    @include media-breakpoint-tablet() {
+      order: 0;
+      width: auto;
+      margin-left: $padding-info-left;
+    }
+  }
+
+  &__info-block {
+    @include adaptive-padding(top, $padding-xsmall, 2);
+  }
+}
+
+.asset-details-description {
+  &__tag {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__settings {
+    padding: $padding-xsmall-mobile 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      margin-left: auto;
+      padding: 0;
+    }
+  }
+
+  &__author-btn {
+    padding: 0;
+    font-size: $font-size-common;
+    letter-spacing: 0.19px;
+    font-weight: bold;
+    color: $text-color;
+  }
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 (-$padding-xxsmall/2);
+
+    @include media-breakpoint-desktop() {
+      flex-wrap: nowrap;
+    }
+    @include media-breakpoint-tablet() {
+      margin-left: $padding-controls-left;
+      margin-right: 0;
+    }
+  }
+
+  &__level-calculator {
+    align-self: flex-end;
+  }
+
+  &__statistic-container {
+    @include adaptive-margin(bottom, 15px);
+    display: inline-flex;
+    min-width: 50%;
+    box-sizing: border-box;
+    flex-grow: 1;
+
+    &--btn {
+      min-width: 100%;
+      margin-bottom: 0;
+    }
+
+    @include media-breakpoint-desktop() {
+      min-width: auto;
+    }
+  }
+
+  &__performance-data {
+    padding-left: 0;
+
+    @include adaptive-padding(top, $padding-xxsmall);
+    @include adaptive-padding(bottom, $padding-upper-medium);
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+      margin-left: $padding-controls-left;
+    }
+  }
+
+  &__broker {
+    width: 100px;
+  }
+
+  &__subheading {
+    @include adaptive-padding(top, $padding-big);
+  }
+
+  &__text {
+    line-height: $font-size-paragraph-mobile * 2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: $text-color;
+    padding-bottom: $padding-small;
+    word-break: break-word;
+    white-space: pre-wrap;
+    @include font-size($font-size-paragraph);
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-paragraph * 2;
+    }
+  }
+}

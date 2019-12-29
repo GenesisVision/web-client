@@ -1,14 +1,12 @@
 import { LevelsParamsInfo } from "gv-api-web";
 import * as React from "react";
 import { compose } from "redux";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "shared/components/details/details-block";
+import SignalProviderControls from "shared/components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 import {
-  WithBlurLoaderProps,
-  withBlurLoader
+  withBlurLoader,
+  WithBlurLoaderProps
 } from "shared/decorators/with-blur-loader";
 
 import InvestmentProgramControls from "./investment-program-controls";
@@ -19,36 +17,35 @@ const _ProgramControls: React.FC<Props> = ({
   isAuthenticated
 }) => {
   const personalProgramDetails = programDescription.personalProgramDetails;
-  const canCloseProgram =
-    personalProgramDetails && personalProgramDetails.canCloseProgram;
+  const canCloseAsset =
+    personalProgramDetails && personalProgramDetails.canCloseAsset;
   const isOwnProgram =
     personalProgramDetails && personalProgramDetails.isOwnProgram;
 
   return (
-    <div className="asset-details-description__controls">
+    <>
       <InvestmentProgramControls
         programDescription={programDescription}
-        canCloseProgram={canCloseProgram}
+        canCloseAsset={canCloseAsset}
         isOwnProgram={isOwnProgram}
         isAuthenticated={isAuthenticated}
         levelsParameters={levelsParameters}
       />
       {isOwnProgram && programDescription.isSignalProgram && (
-        <DetailsBlock
-          type={DETAILS_BLOCK_TYPE.BORDERED}
-          className="asset-details-description__col"
-        >
+        <SignalProviderControls>
           <SignalProgramInfo programDescription={programDescription} />
-        </DetailsBlock>
+        </SignalProviderControls>
       )}
-    </div>
+    </>
   );
 };
 
 interface Props extends IProgramControlsProps {}
 
 const ProgramControls = compose<
-  React.ComponentType<IProgramControlsProps & WithBlurLoaderProps<LevelsParamsInfo>>
+  React.ComponentType<
+    IProgramControlsProps & WithBlurLoaderProps<LevelsParamsInfo>
+  >
 >(
   withBlurLoader,
   React.memo

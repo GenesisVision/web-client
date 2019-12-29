@@ -1,6 +1,14 @@
-import { ChartSimple } from "gv-api-web";
-import { ASSETS_TYPES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { CurrencyEnum } from "shared/utils/types";
+import { Currency, SimpleChart } from "gv-api-web";
+
+export enum ASSETS_TYPES {
+  All = "All",
+  Signal = "Signal",
+  Program = "Program",
+  Fund = "Fund"
+}
+
+export const REF_PARAM_NAME = "ref";
+export const FUND_CURRENCY = "GVT";
 
 export const MANAGER = "manager";
 export const INVESTOR = "investor";
@@ -37,44 +45,31 @@ export enum ROLE {
   INVESTOR = "investor",
   MANAGER = "manager"
 }
+
 export enum ASSET {
-  PROGRAM = "PROGRAM",
-  FUND = "FUND"
+  FOLLOW = "Follow",
+  PROGRAM = "Program",
+  FUND = "Fund"
+}
+
+export enum CREATE_ASSET {
+  ACCOUNT = "Account",
+  PROGRAM = "Program",
+  FUND = "Fund"
 }
 
 export const ROLE_ENV = process.env.REACT_APP_PLATFORM as ROLE;
 
 export const DEFAULT_DECIMAL_SCALE = 8;
 
-export const YEARS = "years";
-export const MONTHS = "months";
-export const DAYS = "days";
-export const HOURS = "hours";
-export const MINUTES = "minutes";
-export const SECONDS = "seconds";
-
-export type TUnitName =
-  | "years"
-  | "months"
-  | "days"
-  | "hours"
-  | "minutes"
-  | "seconds";
-
-export const timeUnits = {
-  [YEARS]: 0,
-  [MONTHS]: 0,
-  [DAYS]: 0,
-  [HOURS]: 0,
-  [MINUTES]: 0,
-  [SECONDS]: 0
-};
-
 export interface IDashboardAssetChart {
   type: ASSETS_TYPES;
   id: string;
   title: string;
-  currency?: CurrencyEnum;
-  equityChart: ChartSimple[];
-  pnLChart?: ChartSimple[];
+  currency?: Currency;
+  equityChart: SimpleChart[];
+  pnLChart?: SimpleChart[];
 }
+
+export const DECIMAL_SCALE_SMALL_VALUE = 4;
+export const DECIMAL_SCALE_BIG_VALUE = 2;

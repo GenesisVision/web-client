@@ -1,21 +1,24 @@
-import "./create-program.page.scss";
+import "components/create-asset/create-asset.scss";
 
+import { Broker } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateProgramContainer from "./components/create-program.container";
 
-const _CreateProgramPage: React.FC<WithTranslation> = ({ t }) => (
-  <Page title={t("manager.create-program-page.title")}>
-    <div className="create-program-page">
-      <div className="create-program-page__header">
-        <h1>{t("manager.create-program-page.title")}</h1>
-      </div>
-      <CreateProgramContainer />
-    </div>
-  </Page>
-);
+const _CreateProgramPage: React.FC<Props> = ({ brokers }) => {
+  const [t] = useTranslation();
+  return (
+    <Page title={t("manager.create-program-page.title")}>
+      <CreateProgramContainer brokers={brokers} />
+    </Page>
+  );
+};
 
-const CreateProgramPage = translate()(React.memo(_CreateProgramPage));
+interface Props {
+  brokers: Broker[];
+}
+
+const CreateProgramPage = React.memo(_CreateProgramPage);
 export default CreateProgramPage;

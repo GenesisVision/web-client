@@ -4,9 +4,9 @@ import authService from "shared/services/auth-service";
 
 export const getProgramLevelsInfo = (id: string) => {
   const authorization = authService.getAuthArg();
-  return managerApi.v10ManagerProgramsByIdLevelsInfoGet(id, authorization);
+  return managerApi.getLevelsCalculator(id, authorization);
 };
 
 export const getPlatformLevels = (currency: string) => {
-  return platformApi.v10PlatformLevelsGet({ currency });
+  return platformApi.getProgramsLevels({ currency });
 };

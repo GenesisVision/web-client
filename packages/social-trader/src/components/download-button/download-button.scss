@@ -1,0 +1,12 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.download-button {
+  @include font-size($font-size-common);
+  font-weight: 600;
+}
+
+.download-icon {
+  margin-left: 5px;
+}

@@ -1,52 +1,31 @@
-import { push } from "connected-react-router";
 import { NewFundRequest } from "gv-api-web";
+import { PlatformInfo } from "gv-api-web";
+import { NextPageContext } from "next";
+import Router from "next/router";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { DASHBOARD_ROUTE } from "shared/routes/dashboard.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import filesService from "shared/services/file-service";
-import { RootThunk, SetSubmittingType } from "shared/utils/types";
+import { getRandomInteger } from "shared/utils/helpers";
 
-import { ICreateFundSettingsFormValues } from "../components/create-fund-settings/create-fund-settings";
+export const fetchMinimumDepositAmount = async (ctx?: NextPageContext) =>
+  await managerApi.getFundInvestment(authService.getAuthArg(ctx));
 
-export const fetchMinimumDepositAmount = () =>
-  managerApi.v10ManagerFundsInvestmentAmountGet(authService.getAuthArg());
-
-export const createFund = (
-  createFundData: ICreateFundSettingsFormValues,
-  setSubmitting: SetSubmittingType
-): RootThunk<void> => dispatch => {
-  const authorization = authService.getAuthArg();
-  let promise = Promise.resolve("");
-  if (createFundData.logo.image) {
-    promise = filesService.uploadFile(
-      createFundData.logo.image.cropped,
-      authorization
-    );
+export const PlatformDataLoaderData: PlatformInfo = {
+  programsInfo: {
+    managerProgramInvestment: getRandomInteger(1, 10),
+    managerProgramInvestmentUSD: getRandomInteger(1, 10),
+    managerProgramInvestmentUSDT: getRandomInteger(1, 10),
+    managerProgramInvestmentBTC: getRandomInteger(1, 10),
+    managerProgramInvestmentETH: getRandomInteger(1, 10),
+    managerMaxEntryFee: getRandomInteger(1, 10),
+    managerMaxSuccessFee: getRandomInteger(1, 10),
+    managerFundInvestment: getRandomInteger(1, 10),
+    managerMaxExitFee: getRandomInteger(1, 10),
+    managerMaxSignalVolumeFee: getRandomInteger(1, 10),
+    managerMinSignalVolumeFee: getRandomInteger(1, 10),
+    managerMaxSignalSuccessFee: getRandomInteger(1, 10),
+    managerMinSignalSuccessFee: getRandomInteger(1, 10),
+    periods: [getRandomInteger(1, 10)]
   }
-  promise
-    .then(response => {
-      const requestData = <NewFundRequest>{
-        ...createFundData,
-        logo: response
-      };
-
-      return managerApi.v10ManagerFundsCreatePost(authorization, {
-        request: requestData
-      });
-    })
-    .then(() => {
-      setSubmitting(false);
-      dispatch(
-        alertMessageActions.success(
-          "manager.create-fund-page.notifications.create-success",
-          true
-        )
-      );
-      dispatch(push(DASHBOARD_ROUTE));
-    })
-    .catch(error => {
-      setSubmitting(false);
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
-};
+} as PlatformInfo;

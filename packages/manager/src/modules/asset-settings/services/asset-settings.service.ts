@@ -1,26 +1,18 @@
-import { push } from "connected-react-router";
 import { CancelablePromise, ProgramUpdate } from "gv-api-web";
 import { Dispatch } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { ASSET } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  PROGRAMS_ROUTE,
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import getParams from "shared/utils/get-params";
 import { ManagerThunk, ResponseError } from "shared/utils/types";
 
 export const cancelChangeBrokerMethod = (
   programId: string
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+    .cancelChangeBroker(authService.getAuthArg(), {
       programId
     })
     .then(() => {
@@ -41,7 +33,7 @@ export const changeBrokerMethod = (
   newLeverage: number
 ): ManagerThunk<CancelablePromise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
+    .changeBroker(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }
     })
     .then(() => {
@@ -56,32 +48,19 @@ export const changeBrokerMethod = (
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export const redirectToProgram = () => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const { router } = getState();
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
-  dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));
-};
-
 export const editAsset = (
   id: string,
   editAssetData: IAssetEditFormValues,
   type: ASSET
 ): ManagerThunk<CancelablePromise<void>> => dispatch => {
   const authorization = authService.getAuthArg();
-  const editMethod =
-    type === ASSET.PROGRAM
-      ? managerApi.v10ManagerProgramsByIdUpdatePost
-      : managerApi.v10ManagerFundsByIdUpdatePost;
   let data = editAssetData;
   let promise = Promise.resolve("") as CancelablePromise<any>;
   if (data.logo.image)
-    promise = filesService.uploadFile(data.logo.image.cropped, authorization);
+    promise = filesService.uploadFile(
+      data.logo.image.cropped,
+      authorization
+    ) as CancelablePromise<any>;
 
   return promise
     .then(response => {
@@ -89,7 +68,9 @@ export const editAsset = (
         ...data,
         logo: response || data.logo.src
       };
-      return editMethod(id, authorization, { model: data as ProgramUpdate }); //TODO ask backend to change ProgramUpdate logo type
+      return managerApi.updateInvestmentProgram(id, authorization, {
+        model: data as ProgramUpdate
+      }); //TODO ask backend to change ProgramUpdate logo type
     })
     .then(() => {
       dispatch(
@@ -116,7 +97,7 @@ export const closeProgram: TCloseAsset = ({
 }) => dispatch => {
   const authorization = authService.getAuthArg();
   managerApi
-    .v10ManagerProgramsByIdClosePost(id, authorization, opts)
+    .closeInvestmentProgram(id, authorization, opts)
     .then(() => {
       onSuccess();
       dispatch(
@@ -139,7 +120,7 @@ export const closeFund: TCloseAsset = ({
   opts
 }) => dispatch =>
   managerApi
-    .v10ManagerFundsByIdClosePost(id, authService.getAuthArg(), opts)
+    .closeFund(id, authService.getAuthArg(), opts)
     .then(() => {
       onSuccess();
       dispatch(
@@ -154,16 +135,14 @@ export const closeFund: TCloseAsset = ({
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export type TCloseAsset = (
-  opts: {
-    onSuccess: () => void;
-    onError: () => void;
-    id: string;
-    opts?: {
-      twoFactorCode?: string;
-    };
-  }
-) => (dispatch: Dispatch) => void;
+export type TCloseAsset = (opts: {
+  onSuccess: () => void;
+  onError: () => void;
+  id: string;
+  opts?: {
+    twoFactorCode?: string;
+  };
+}) => (dispatch: Dispatch) => void;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

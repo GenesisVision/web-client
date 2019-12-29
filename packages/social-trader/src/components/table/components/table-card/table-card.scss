@@ -1,0 +1,203 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+$chart-width: 160px;
+$card-width: 312px;
+$card-height: 372px;
+$card-avatar-size: 80px;
+
+@mixin title() {
+  @include font-size($font-size-small);
+  @include adaptive-padding(bottom, $font-size-small);
+  opacity: 0.3;
+  color: white;
+  text-align: left;
+}
+
+@mixin link($color-link, $color-link-hover: $color-link) {
+  @include transition(color);
+  font-size: inherit;
+  color: $color-link;
+
+  &:hover {
+    color: rgba(darken($color-link-hover, 10%), 0.9);
+  }
+}
+
+.table-card {
+  margin-bottom: $padding-small/2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: $card-height/1.2;
+  padding: $padding-small $padding-xsmall;
+  border-radius: 8px;
+  background-color: $row-color;
+  flex-grow: 1;
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__profit {
+    margin-bottom: 8px;
+  }
+  &__profit-value {
+    font-size: $font-size-common;
+    letter-spacing: 0.28px;
+  }
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &:first-child {
+      margin-left: -$padding-xsmall;
+      margin-right: -$padding-xsmall;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+  }
+  &__broker-avatar {
+    width: $card-avatar-size;
+    margin-right: $padding-xsmall;
+  }
+  &__avatar {
+    height: $card-avatar-size;
+    padding-left: $padding-xsmall;
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    @include link($text-accent-color, $text-color);
+    padding: 3px 0;
+    font-size: $font-size-paragraph/1.5;
+    word-break: break-all;
+    display: block;
+  }
+  &__title-wrapper {
+    max-width: calc(100% - 50px);
+    padding-right: $padding-small/4;
+    box-sizing: border-box;
+  }
+  &__name {
+    @include link($primary-color);
+    transition-property: color;
+  }
+  &__subtitle {
+    color: $label-color;
+    font-size: $font-size-common;
+    margin-bottom: 10px;
+    display: block;
+  }
+  &__main-info {
+    margin-left: $padding-small/4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  &__actions {
+    text-align: right;
+    cursor: pointer;
+    padding-right: $padding-xsmall;
+
+    & .icon,
+    & .icon svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__actions-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__actions-item {
+    padding: $padding-xxsmall $padding-small;
+  }
+  &__table {
+    display: flex;
+    justify-content: space-between;
+
+    &--flex-wrap {
+      flex-wrap: wrap;
+    }
+  }
+  &__table-column {
+    display: flex;
+    flex-direction: column;
+  }
+  &__table-row {
+    width: 100%;
+  }
+
+  @include media-breakpoint-phone() {
+    height: $card-height;
+    margin-right: 0;
+    .program-avatar {
+      width: $card-avatar-size;
+      height: $card-avatar-size;
+    }
+    &__title {
+      font-size: $font-size-paragraph;
+    }
+    &__balance {
+      font-size: $font-size-common;
+    }
+    &__profit {
+      font-size: $font-size-common;
+    }
+    &__chart {
+      width: $chart-width;
+      flex-grow: 1;
+      margin-right: $padding-small;
+    }
+    &__balance {
+      font-size: $font-size-common;
+    }
+    &__table {
+      & table {
+        td {
+          font-size: $font-size-common;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    min-width: $card-width;
+    width: calc(50% - #{$padding-small}/ 2);
+    margin-right: $padding-small/2;
+  }
+  @include media-breakpoint-tablet() {
+    flex-grow: 0;
+  }
+  @media (min-width: 1075px) {
+    width: calc(33.33% - #{$padding-small}/ 2);
+  }
+  @include media-breakpoint-landscape-tablet() {
+    &__table {
+      &--title {
+        width: 45%;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
+  }
+  @media (min-width: 1400px) {
+    width: $card-width;
+  }
+}

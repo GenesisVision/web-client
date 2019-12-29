@@ -9,12 +9,12 @@ import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { programDescriptionSelector } from "shared/components/programs/program-details/reducers/description.reducer";
@@ -48,19 +48,16 @@ const _ProgramsEditPage: React.FC<Props> = ({
   const [brokersInfo, setBrokersInfo] = useState<
     BrokersProgramInfo | undefined
   >(undefined);
-  useEffect(
-    () => {
-      description && getProgramBrokers(description.id).then(setBrokersInfo);
-    },
-    [description]
-  );
+  useEffect(() => {
+    description && getProgramBrokers(description.id).then(setBrokersInfo);
+  }, [description]);
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>
       programEditSignal({
         id: description!.id,
         successFee: successFee!,
         volumeFee: volumeFee!
-      }).then(dispatchDescription),
+      }).then(() => dispatchDescription()),
     [description]
   );
   const changeBroker = useCallback(
@@ -73,27 +70,27 @@ const _ProgramsEditPage: React.FC<Props> = ({
         brokerAccountTypeId,
         leverage,
         setSubmitting
-      ).then(dispatchDescription);
+      ).then(() => dispatchDescription());
     },
     [description]
   );
-  const cancelChangeBroker = useCallback(
-    () => {
-      cancelChangeBrokerMethod(description!.id).then(dispatchDescription);
-    },
-    [description]
-  );
+  const cancelChangeBroker = useCallback(() => {
+    cancelChangeBrokerMethod(description!.id).then(() => dispatchDescription());
+  }, [description]);
+  const dispatchDescriptionHandle = useCallback(() => {
+    dispatchDescription();
+  }, []);
   return (
     <AssetSettingsPage
       redirectToAsset={redirectToProgram}
       asset={ASSET.PROGRAM}
       description={description as AssetDescriptionType}
-      dispatchDescription={dispatchProgramDescription}
-      settingsBlocks={(editProgram, applyCloseAsset) => (
+      dispatchDescription={dispatchDescriptionHandle}
+      settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
         <ProgramSettings
           condition={!!description && !!brokersInfo && !!programsInfo}
           programsInfo={programsInfo}
-          closePeriod={dispatchProgramDescription}
+          closePeriod={dispatchDescriptionHandle}
           closeProgram={applyCloseAsset}
           details={description!}
           editProgram={editProgram}

@@ -1,0 +1,26 @@
+{
+  "name": "social-trader-web-portal",
+  "homepage": "",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "gv-api-web": "^2.0.0",
+    "next": "../../next1.tgz",
+    "shared": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "next build",
+    "production": "cross-env NODE_ENV=production node index.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "test": "react-scripts test --env=jsdom",
+    "test:ui": "majestic",
+    "eject": "react-scripts eject"
+  },
+  "majestic": {
+    "jestScriptPath": "../../node_modules/react-app-rewired/bin/jest.js",
+    "env": {
+      "CI": true
+    }
+  }
+}

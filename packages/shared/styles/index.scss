@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,900");
 @import "./_colors.scss";
 @import "./_typography.scss";
 
@@ -29,15 +29,19 @@ a {
   }
 }
 
-.root,
+#__next,
 .app__scroll,
 .app__body {
-  height: 100vh;
+  height: 100vh; // TODO why?
+  color: white;
+}
+
+.app {
   color: white;
 }
 
 $scroll-background: transparent;
-$scroll-thumb-color: rgba(255, 255, 255, 0.3);
+$scroll-thumb-color: $text-dark-color;
 $scroll-width: 6px;
 ::-webkit-scrollbar {
   width: $scroll-width;

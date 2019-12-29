@@ -1,0 +1,69 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.fees-section {
+  padding-top: 100px;
+
+  @include media-breakpoint-large-desktop() {
+    padding-top: 140px;
+  }
+
+  .internal__container {
+    @include media-breakpoint-tablet() {
+      @include grid();
+    }
+  }
+
+  &__text {
+    margin-bottom: 40px;
+  }
+
+  &__wrapper-controls {
+    text-align: center;
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 4/10;
+    }
+  }
+
+  &__controls {
+    &.tab-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tab-controls__item-btn {
+      @include transition(background-color, color);
+      border-radius: 12px;
+      padding: 18px 40px;
+      background-color: transparent;
+    }
+
+    .tab-controls__item--active {
+      .tab-controls__item-btn {
+        background-color: $primary-color;
+        color: $main-color;
+      }
+    }
+  }
+
+  &__tab-info {
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+  }
+
+  &__title {
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      text-align: left;
+    }
+  }
+}

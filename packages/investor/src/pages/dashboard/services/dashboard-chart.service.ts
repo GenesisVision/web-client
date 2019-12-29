@@ -1,15 +1,16 @@
 import { Dispatch } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import authService from "shared/services/auth-service";
-import { TGetState } from "shared/utils/types";
+import { CurrencyEnum } from "shared/utils/types";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getPortfolioChart = (from?: Date, to?: Date) => (
-  dispatch: Dispatch,
-  getState: TGetState
-) => {
+export const getPortfolioChart = (
+  from?: Date,
+  to?: Date,
+  currency?: CurrencyEnum
+) => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
-  const { currency } = getState().accountSettings;
 
   const filters = {
     currency,
@@ -20,4 +21,10 @@ export const getPortfolioChart = (from?: Date, to?: Date) => (
   };
 
   dispatch(actions.fetchPortfolioChartAction(authorization, filters));
+};
+
+export const changePeriod = (period: ChartDefaultPeriod) => (
+  dispatch: Dispatch
+) => {
+  dispatch(actions.changeChartPeriodAction(period));
 };

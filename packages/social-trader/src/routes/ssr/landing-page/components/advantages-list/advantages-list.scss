@@ -1,0 +1,111 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.advantages-list {
+  @include reset-list();
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: -20px;
+  margin-left: -20px;
+  padding-bottom: 40px;
+  align-items: start;
+
+  @include media-breakpoint-tablet() {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+    grid-auto-flow: row;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-large-desktop() {
+    //grid-template-rows: 265px auto;
+  }
+
+  &__item {
+    background: $landing-bg-gray;
+    border-radius: 20px;
+    padding: 40px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-width: 210px;
+
+    @include media-breakpoint-tablet() {
+      padding: 40px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 14px;
+    }
+
+    @include media-breakpoint-desktop() {
+      padding: 40px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 22px;
+      min-height: 225px;
+    }
+
+    &--last {
+      background-color: transparent;
+      padding: 0;
+      display: none;
+
+      @include media-breakpoint-tablet() {
+        display: block;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        grid-column: 1/4;
+        text-align: center;
+      }
+      @include media-breakpoint-desktop() {
+        display: none;
+      }
+    }
+  }
+
+  &__item-image {
+    display: inline-block;
+    max-width: 60px;
+    margin-bottom: 20px;
+  }
+
+  &__item-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 22px;
+    }
+  }
+
+  &__item-text {
+    font-size: 13px;
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 14px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 16px;
+    }
+  }
+}

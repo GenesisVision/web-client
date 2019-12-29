@@ -22,47 +22,34 @@ export const btcWalletValidator = string().matches(
 export const assetTitleShape = (t: i18next.TFunction) => {
   return string()
     .trim()
-    .required(
-      t("manager.create-program-page.settings.validation.title-required")
-    )
-    .min(4, t("manager.create-program-page.settings.validation.title-is-short"))
-    .max(20, t("manager.create-program-page.settings.validation.title-is-long"))
+    .required(t("create-program-page.settings.validation.title-required"))
+    .min(4, t("create-program-page.settings.validation.title-is-short"))
+    .max(20, t("create-program-page.settings.validation.title-is-long"))
     .matches(
       /^[-a-zA-Z0-9\s]{4,20}$/,
-      t(
-        "manager.create-program-page.settings.validation.title-is-latin-and-numbers"
-      )
+      t("create-program-page.settings.validation.title-is-latin-and-numbers")
     );
 };
 
 export const assetDescriptionShape = (t: i18next.TFunction) => {
   return string()
     .trim()
-    .required(
-      t("manager.create-program-page.settings.validation.description-required")
-    )
-    .min(
-      20,
-      t("manager.create-program-page.settings.validation.description-is-short")
-    )
-    .max(
-      500,
-      t("manager.create-program-page.settings.validation.description-is-long")
-    );
+    .required(t("create-program-page.settings.validation.description-required"))
+    .min(20, t("create-program-page.settings.validation.description-is-short"))
+    .max(500, t("create-program-page.settings.validation.description-is-long"));
 };
 
-export const signalSuccessFeeShape = (t: i18next.TFunction, max: number) => {
+export const signalSuccessFeeShape = (
+  t: i18next.TFunction,
+  min: number,
+  max: number
+) => {
   return number()
-    .min(
-      0,
-      t("manager.create-program-page.settings.validation.success-fee-min")
-    )
-    .required(
-      t("manager.create-program-page.settings.validation.success-fee-required")
-    )
+    .min(min, t("create-program-page.settings.validation.success-fee-min"))
+    .required(t("create-program-page.settings.validation.success-fee-required"))
     .max(
       max,
-      t("manager.create-program-page.settings.validation.success-fee-max", {
+      t("create-program-page.settings.validation.success-fee-max", {
         max
       })
     );
@@ -75,64 +62,65 @@ export const signalVolumeFeeShape = (
 ) => {
   return number()
     .required(
-      t(
-        "manager.create-program-page.settings.validation.signal-volume-fee-required"
-      )
+      t("create-program-page.settings.validation.signal-volume-fee-required")
     )
     .min(
       min,
-      t(
-        "manager.create-program-page.settings.validation.signal-volume-fee-min",
-        { min: min.toFixed(2) }
-      )
+      t("create-program-page.settings.validation.signal-volume-fee-min", {
+        min
+      })
     )
     .max(
       max,
-      t(
-        "manager.create-program-page.settings.validation.signal-volume-fee-max",
-        { max: max.toFixed(2) }
-      )
+      t("create-program-page.settings.validation.signal-volume-fee-max", {
+        max
+      })
     );
 };
 
 export const entryFeeShape = (t: i18next.TFunction, max: number) =>
   number()
-    .required(
-      t("manager.create-program-page.settings.validation.entry-fee-required")
-    )
-    .min(0, t("manager.create-program-page.settings.validation.entry-fee-min"))
+    .required(t("create-program-page.settings.validation.entry-fee-required"))
+    .min(0, t("create-program-page.settings.validation.entry-fee-min"))
     .max(
       max,
-      t("manager.create-program-page.settings.validation.entry-fee-max", {
+      t("create-program-page.settings.validation.entry-fee-max", {
         max
       })
     );
 
 export const successFeeShape = (t: i18next.TFunction, max: number) =>
   number()
-    .required(
-      t("manager.create-program-page.settings.validation.success-fee-required")
-    )
-    .min(
-      0,
-      t("manager.create-program-page.settings.validation.success-fee-min")
-    )
+    .required(t("create-program-page.settings.validation.success-fee-required"))
+    .min(0, t("create-program-page.settings.validation.success-fee-min"))
     .max(
       max,
-      t("manager.create-program-page.settings.validation.success-fee-max", {
+      t("create-program-page.settings.validation.success-fee-max", {
         max
       })
     );
 
 export const exitFeeShape = (t: i18next.TFunction, max: number) =>
   number()
-    .required(
-      t("manager.create-fund-page.settings.validation.exit-fee-required")
-    )
-    .min(0, t("manager.create-fund-page.settings.validation.exit-fee-min"))
+    .required(t("create-fund-page.settings.validation.exit-fee-required"))
+    .min(0, t("create-fund-page.settings.validation.exit-fee-min"))
     .max(
       max,
-      t("manager.create-fund-page.settings.validation.exit-fee-max", {
+      t("create-fund-page.settings.validation.exit-fee-max", {
         max
       })
     );
+
+export const twoFactorValidator = (
+  t: i18next.TFunction,
+  twoFactorEnabled: boolean
+) => {
+  return twoFactorEnabled
+    ? string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
+        .required(t("wallet-withdraw.validation.two-factor-required"))
+    : string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
+};

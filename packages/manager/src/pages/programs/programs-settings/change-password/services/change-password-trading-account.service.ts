@@ -14,7 +14,7 @@ export const changePasswordTradingAccount = ({
 }): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
   return managerApi
-    .v10ManagerProgramsByIdPasswordChangePost(id, authorization, { model })
+    .changeProgramPassword(id, authorization, { model })
     .then(() => {
       dispatch(fetchProfileHeaderInfoAction());
       dispatch(

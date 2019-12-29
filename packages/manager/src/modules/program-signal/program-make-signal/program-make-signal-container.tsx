@@ -1,8 +1,8 @@
-import { ProgramDetailsFull } from "gv-api-web";
+import { ProgramDetailsFullOld } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import { IDialogProps } from "shared/components/dialog/dialog";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 
@@ -44,7 +44,7 @@ const ProgramMakeSignalContainer = compose<React.ComponentType<OwnProps>>(
 export default ProgramMakeSignalContainer;
 
 interface OwnProps extends IDialogProps {
-  programDescription: ProgramDetailsFull;
+  programDescription: ProgramDetailsFullOld;
 }
 
 interface Props extends OwnProps, WithTranslation {

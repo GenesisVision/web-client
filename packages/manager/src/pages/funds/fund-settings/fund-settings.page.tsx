@@ -4,12 +4,12 @@ import { AssetDescriptionType } from "modules/asset-settings/asset-settings.type
 import { programEditSignal } from "modules/program-signal/program-edit-signal/services/program-edit-signal.service";
 import React, { useCallback } from "react";
 import { withTranslation as translate } from "react-i18next";
-import { ResolveThunks, connect, useSelector } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import { IImageValue } from "shared/components/form/input-image/input-image";
 import { fundDescriptionSelector } from "shared/components/funds/fund-details/reducers/description.reducer";
@@ -35,7 +35,7 @@ const _FundSettingsPage: React.FC<Props> = ({
   const programsInfo = useSelector(programsInfoSelector);
   const description = useSelector(fundDescriptionSelector);
   const platformAssets = useSelector(fundAssetsSelector);
-  const reallocate = useCallback(() => {
+  const dispatchDescriptionHandle = useCallback(() => {
     dispatchDescription();
   }, []);
   return (
@@ -43,11 +43,11 @@ const _FundSettingsPage: React.FC<Props> = ({
       redirectToAsset={redirectToFund}
       asset={ASSET.FUND}
       description={description as AssetDescriptionType}
-      dispatchDescription={dispatchFundDescription}
+      dispatchDescription={dispatchDescriptionHandle}
       settingsBlocks={(editProgram, applyCloseAsset) => (
         <FundSettings
           programsInfo={programsInfo}
-          reallocate={reallocate}
+          reallocate={dispatchDescriptionHandle}
           condition={!!description && !!platformAssets}
           platformAssets={platformAssets}
           closeAsset={applyCloseAsset}

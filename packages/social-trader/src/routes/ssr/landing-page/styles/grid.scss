@@ -1,0 +1,32 @@
+@import "~shared/styles/breakpoint";
+
+$grid-max-width: 1400px;
+
+$grid-columns: 12;
+
+$grid-gap: 40px;
+$grid-gap-mobile: 14px;
+
+@mixin container() {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: $grid-max-width;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include media-breakpoint-large-desktop() {
+    max-width: 1600px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+@mixin grid() {
+  @include media-breakpoint-tablet() {
+    display: grid;
+    grid-column-gap: $grid-gap;
+    grid-template-columns: repeat($grid-columns, 1fr);
+  }
+}

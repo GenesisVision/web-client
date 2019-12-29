@@ -11,7 +11,7 @@ const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
   const data = useSelector(dashboardEventsSelector);
   useEffect(() => {
     dispatch(getTopPortfolioEvents);
-  }, []);
+  }, [dispatch]);
   return (
     <DashboardPortfolioEvents
       fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
@@ -21,9 +21,7 @@ const _DashboardPortfolioEventsSection: React.FC<Props> = ({ title }) => {
   );
 };
 
-interface Props extends OwnProps {}
-
-interface OwnProps {
+interface Props {
   title: string;
 }
 

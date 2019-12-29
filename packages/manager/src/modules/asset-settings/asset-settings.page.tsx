@@ -4,25 +4,25 @@ import "shared/modules/asset-settings/asset-settings.scss";
 import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
-import BackButtonBody from "shared/components/back-button/back-button-body";
 import Page from "shared/components/page/page";
 import { ASSET } from "shared/constants/constants";
-import { DispatchDescriptionType } from "shared/utils/types";
 
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
 const _AssetsEditPage: React.FC<Props> = ({
+  dispatchDescription,
   asset,
   settingsBlocks,
-  service: { dispatchDescription, editAsset, redirectToAsset },
+  redirectToAsset,
+  service: { editAsset },
   description
 }) => {
   const [t] = useTranslation();
@@ -34,16 +34,16 @@ const _AssetsEditPage: React.FC<Props> = ({
       const investmentLimit =
         "hasInvestmentLimit" in values
           ? values.hasInvestmentLimit
-            ? values.investmentLimit
+            ? values.investmentLimit || null
             : null
           : description!.availableInvestmentLimit;
       const currentValues = {
         tradesDelay: description!.tradesDelay,
         exitFee: description!.exitFee,
         entryFee: description!.entryFee,
-        successFee: description!.successFee,
+        successFee: description!.successFeeCurrent,
         title: description!.title,
-        stopOutLevel: description!.stopOutLevel,
+        stopOutLevel: description!.stopOutLevelCurrent, // TODO current != selected ? current (selected) : current
         description: description!.description,
         logo: { src: description!.logo }
       };
@@ -59,18 +59,17 @@ const _AssetsEditPage: React.FC<Props> = ({
         .then(dispatchDescription)
         .finally(resetForm);
     },
-    [description]
+    [asset, description, dispatchDescription, editAsset]
   );
-  const applyCloseAsset = useCallback(() => redirectToAsset(), []);
+  const applyCloseAsset = useCallback(() => redirectToAsset(description!.id), [
+    description,
+    redirectToAsset
+  ]);
   const title = t("manager.asset-settings.title", {
     asset: String(asset).toLowerCase()
   });
   return (
     <Page title={title}>
-      <BackButtonBody
-        onClick={applyCloseAsset}
-        backPath={description && `/ ${description.title}`}
-      />
       <div className="asset-settings">
         <h1 className="asset-settings__title">{title}</h1>
         {settingsBlocks(editAssetCallback, applyCloseAsset)}
@@ -79,25 +78,20 @@ const _AssetsEditPage: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { dispatchDescription, redirectToAsset }: Props
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
     {
-      dispatchDescription,
-      editAsset,
-      redirectToAsset
+      editAsset
     },
     dispatch
   )
 });
 
 interface OwnProps {
-  redirectToAsset: () => void;
+  redirectToAsset: (id: string) => void;
   asset: ASSET;
   description?: AssetDescriptionType;
-  dispatchDescription: DispatchDescriptionType;
+  dispatchDescription: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
     closeAsset: () => void
@@ -105,9 +99,7 @@ interface OwnProps {
 }
 
 interface ServiceThunks extends ActionCreatorsMapObject {
-  dispatchDescription: DispatchDescriptionType;
   editAsset: typeof editAsset;
-  redirectToAsset: () => void;
 }
 interface DispatchProps {
   service: ResolveThunks<ServiceThunks>;

@@ -1,12 +1,13 @@
 import {
-  CURRENCY_FRACTIONS,
   calculatePercentage,
   checkCurrencyValue,
   convertFromCurrency,
-  convertToCurrency
+  convertToCurrency,
+  CURRENCY_FRACTIONS
 } from "./currency-converter";
 
 require("jasmine-check").install();
+
 declare const check: any;
 declare const gen: any;
 

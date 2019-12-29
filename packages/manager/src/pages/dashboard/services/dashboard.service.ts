@@ -1,4 +1,10 @@
-import { CancelablePromise, InvestmentEventViewModels } from "gv-api-web";
+import {
+  CancelablePromise,
+  InvestmentEventViewModels,
+  ManagerSimpleFund,
+  ManagerSimpleProgram
+} from "gv-api-web";
+import { NextPageContext } from "next";
 import { ManagerRootState } from "reducers";
 import { Dispatch } from "redux";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
@@ -26,7 +32,7 @@ export const getEvents = (eventLocation: EVENT_LOCATION) => (
 ): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
   fetchEventsAction(filters, eventLocation);
 
-export const getPortfolioEvents = () => (dispatch: Dispatch) =>
+export const getPortfolioEvents = (dispatch: Dispatch) =>
   dispatch(
     actions.fetchPortfolioEventsAction(authService.getAuthArg(), {
       eventLocation: EVENT_LOCATION.Dashboard,
@@ -37,9 +43,9 @@ export const getPortfolioEvents = () => (dispatch: Dispatch) =>
 export const getAssetChart = (
   assetId: string,
   assetTitle: string,
-  assetType: ASSETS_TYPES
-) => (dispatch: Dispatch, getState: TGetAuthState) => {
-  const { period } = getState().dashboard;
+  assetType: ASSETS_TYPES,
+  period: ChartDefaultPeriod
+) => (dispatch: Dispatch) => {
   const chartFilter = {
     dateFrom: period.start,
     dateTo: period.end,
@@ -49,7 +55,7 @@ export const getAssetChart = (
   if (assetType === ASSETS_TYPES.Program) {
     //TODO удалить if, отрефакторить
     programsApi
-      .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
+      .getProgramProfitPercentCharts(assetId, chartFilter)
       .then(data => {
         dispatch(
           actions.dashboardChartAction({
@@ -57,13 +63,13 @@ export const getAssetChart = (
             id: assetId,
             title: assetTitle,
             currency: data.programCurrency,
-            pnLChart: data.pnLChart,
+            pnLChart: [],
             equityChart: data.equityChart
           })
         );
       });
   } else {
-    fundsApi.v10FundsByIdChartsProfitGet(assetId, chartFilter).then(data => {
+    fundsApi.getFundProfitChart(assetId, chartFilter).then(data => {
       dispatch(
         actions.dashboardChartAction({
           type: assetType,
@@ -76,41 +82,12 @@ export const getAssetChart = (
   }
 };
 
-export const getAssets = () => (dispatch: Dispatch) =>
-  dispatch(actions.fetchAssetsAction(authService.getAuthArg()));
-
-export const composeAssetChart = (assetType: ASSETS_TYPES) => (
-  dispatch: MiddlewareDispatch,
-  getState: TGetAuthState
-) => {
-  const { programs, funds } = getState().dashboard.assets.data;
-  let asset;
-  if (assetType === ASSETS_TYPES.Program) {
-    asset = programs[0];
-  } else if (assetType === ASSETS_TYPES.Fund) {
-    asset = funds[0];
-  } else return;
-
-  dispatch(getAssetChart(asset.id, asset.title, assetType));
-};
+export const getAssets = (ctx?: NextPageContext) => async (
+  dispatch: Dispatch
+) => await dispatch(actions.fetchAssetsAction(authService.getAuthArg(ctx)));
 
 export const setPeriod = (period: ChartDefaultPeriod) => (dispatch: Dispatch) =>
   dispatch(actions.setPeriodAction(period));
-
-export const getAssetsCount = (): Promise<{
-  programsCount: number;
-  fundsCount: number;
-}> => {
-  const authorization = authService.getAuthArg();
-  const filtering = { take: 0 };
-  return Promise.all([
-    managerApi.v10ManagerProgramsGet(authorization, filtering),
-    managerApi.v10ManagerFundsGet(authorization, filtering)
-  ]).then(([programsData, fundsData]) => ({
-    programsCount: programsData.total,
-    fundsCount: fundsData.total
-  }));
-};
 
 export const getAssetsCounts = () => (
   dispatch: Dispatch,
@@ -123,3 +100,5 @@ export const getAssetsCounts = () => (
   );
   dispatch(getDashboardFunds({ ...fundsCountFilters, ...commonFiltering }));
 };
+
+export type TChartAsset = ManagerSimpleProgram | ManagerSimpleFund;

@@ -2,6 +2,10 @@ import { FormikProps, withFormik } from "formik";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { DialogBottom } from "shared/components/dialog/dialog-bottom";
+import { DialogButtons } from "shared/components/dialog/dialog-buttons";
+import { DialogTop } from "shared/components/dialog/dialog-top";
+import FormError from "shared/components/form/form-error/form-error";
 import GVButton from "shared/components/gv-button";
 import GVFormikField from "shared/components/gv-formik-field";
 import GVTextField from "shared/components/gv-text-field";
@@ -49,13 +53,11 @@ const _ChangePasswordTradingAccountForm: React.FC<
 }) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("password-change-trading-account.title")}</h2>
-          <p>{programName}</p>
-        </div>
-      </div>
-      <div className="dialog__bottom">
+      <DialogTop
+        title={t("password-change-trading-account.title")}
+        subtitle={programName}
+      />
+      <DialogBottom>
         <GVFormikField
           component={GVTextField}
           label={t("password-change-trading-account.new-password")}
@@ -79,13 +81,13 @@ const _ChangePasswordTradingAccountForm: React.FC<
             component={GVTextField}
           />
         )}
-        <div className="form-error">{errorMessage}</div>
-        <div className="dialog__buttons">
+        <FormError error={errorMessage} />
+        <DialogButtons>
           <GVButton type="submit" disabled={!isValid || !dirty || isSubmitting}>
             {t("buttons.confirm")}
           </GVButton>
-        </div>
-      </div>
+        </DialogButtons>
+      </DialogBottom>
     </form>
   );
 };

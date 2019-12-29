@@ -1,0 +1,133 @@
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.lp-header {
+  @include transition(background-color);
+  background-color: $landing-bg;
+  color: $main-color;
+  width: 100%;
+  z-index: 3;
+
+  @include media-breakpoint-desktop() {
+    background-color: rgba($landing-bg, 0.5);
+  }
+
+  &__container {
+    @include container();
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    @include media-breakpoint-tablet() {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+
+  &__row {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: $grid-gap-mobile;
+
+    @include media-breakpoint-tablet() {
+      grid-column-gap: $grid-gap;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      justify-content: space-between;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-template-columns: repeat($grid-columns, 1fr);
+    }
+  }
+
+  &__burger {
+    @include media-breakpoint-desktop() {
+      display: none;
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+  }
+
+  &__nav {
+    display: none;
+
+    @include media-breakpoint-desktop() {
+      display: block;
+      grid-column: 3/11;
+      justify-self: end;
+    }
+  }
+
+  &__start-btn {
+    display: none;
+
+    @include media-breakpoint-tablet() {
+      display: block;
+      justify-self: end;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 11/13;
+    }
+  }
+
+  &__logo {
+    grid-column: 2/4;
+    justify-self: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 2/2;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 1/3;
+      justify-self: start;
+    }
+  }
+
+  .main-logo {
+    max-height: 22px;
+
+    @include media-breakpoint-tablet() {
+      max-height: none;
+    }
+  }
+
+  &__start-btn-link,
+  &__logo-link {
+    @include transition(opacity);
+    @include reset-link();
+    display: block;
+  }
+
+  &--reverse {
+    .nav-list__link {
+      color: $row-color;
+    }
+
+    .lp-button--secondary {
+      background-color: rgba($primary-color, 0.1);
+      color: $row-color;
+
+      @include media-breakpoint-desktop() {
+        &:hover {
+          color: $row-color;
+          background-color: rgba($primary-color, 0.15);
+        }
+
+        &:focus,
+        &:active {
+          color: $row-color;
+          background-color: rgba($primary-color, 0.1);
+        }
+      }
+    }
+
+    .main-logo {
+      fill: $row-color;
+    }
+  }
+}

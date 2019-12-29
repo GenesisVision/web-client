@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import {
   FundWithdraw,
-  FundWithdrawalInfoResponse
+  FundWithdrawInfoResponse
 } from "shared/components/fund-withdraw/fund-withdraw.types";
 import { fetchWalletsByCurrencyAvailableAction } from "shared/components/wallet/actions/wallet.actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -14,13 +14,13 @@ import { getFundWithdrawInfoAction } from "../actions/fund-withdrawal.actions";
 export const fetchFundWithdrawInfo = (
   id: string,
   currency: string
-): InvestorThunk<Promise<FundWithdrawalInfoResponse>> => dispatch => {
+): InvestorThunk<Promise<FundWithdrawInfoResponse>> => dispatch => {
   return Promise.all([
     dispatch(getFundWithdrawInfoAction(id, currency)),
     dispatch(fetchWalletsByCurrencyAvailableAction(currency))
-  ]).then(([withdrawalInfo, wallets]) => {
+  ]).then(([withdrawInfo, wallets]) => {
     return {
-      withdrawalInfo: withdrawalInfo.value,
+      withdrawInfo: withdrawInfo.value,
       wallets: wallets.value.wallets
     };
   });
@@ -30,12 +30,9 @@ export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
 ): any => (dispatch: Dispatch) => {
   return investorApi
-    .v10InvestorFundsByIdWithdrawByPercentPost(
-      id,
-      value.percent,
-      authService.getAuthArg(),
-      { currency: value.currency }
-    )
+    .withdrawFromFund(id, value.percent, authService.getAuthArg(), {
+      currency: value.currency
+    })
     .then(response => {
       onClose();
       dispatch(

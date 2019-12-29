@@ -1,16 +1,8 @@
-import { push } from "connected-react-router";
-import { CancelablePromise } from "gv-api-web";
-import { Dispatch } from "redux";
+import Router from "next/router";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { RootState } from "shared/reducers/root-reducer";
-import {
-  PROGRAMS_ROUTE,
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "shared/routes/programs.routes";
+import { PROGRAMS_ROUTE } from "shared/routes/programs.routes";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
 import {
   ManagerThunk,
   ResponseError,
@@ -19,9 +11,9 @@ import {
 
 export const cancelChangeBrokerMethod = (
   programId: string
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
+): ManagerThunk<Promise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangeCancelPost(authService.getAuthArg(), {
+    .cancelChangeBroker(authService.getAuthArg(), {
       programId
     })
     .then(() => {
@@ -41,9 +33,9 @@ export const changeBrokerMethod = (
   newBrokerAccountTypeId: string,
   newLeverage: number,
   setSubmitting: SetSubmittingType
-): ManagerThunk<CancelablePromise<void>> => dispatch =>
+): ManagerThunk<Promise<void>> => dispatch =>
   managerApi
-    .v10ManagerProgramsBrokerChangePost(authService.getAuthArg(), {
+    .changeBroker(authService.getAuthArg(), {
       request: { programId, newBrokerAccountTypeId, newLeverage }
     })
     .then(() => {
@@ -58,14 +50,6 @@ export const changeBrokerMethod = (
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 
-export const redirectToProgram = () => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const { router } = getState();
-  const programSlugUrl = getParams(
-    router.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  )[PROGRAM_SLUG_URL_PARAM_NAME];
-  dispatch(push(`${PROGRAMS_ROUTE}/${programSlugUrl}`));
+export const redirectToProgram = (id: string) => {
+  Router.replace(`${PROGRAMS_ROUTE}/${id}`);
 };

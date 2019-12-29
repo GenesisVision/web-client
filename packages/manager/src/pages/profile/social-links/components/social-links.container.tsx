@@ -21,11 +21,11 @@ import SocialLinkForm from "./social-link/social-link-form";
 import SocialLinksLoader from "./social-links-loader";
 
 const _Links: React.FC<ILinksProps> = ({ socialLinks, onSubmit }) => (
-  <>
+  <div>
     {socialLinks.map(x => (
       <SocialLinkForm key={x.type} socialLink={x} onSubmit={onSubmit} />
     ))}
-  </>
+  </div>
 );
 const Links = React.memo(withLoader(_Links));
 
@@ -58,18 +58,14 @@ const _SocialLinksContainer: React.FC = () => {
   const handleSubmitSocialLink = useCallback(_handleSubmitSocialLink, []);
 
   return (
-    <div className="asset-settings profile__container--padding-top social-links">
-      <SettingsBlock
-        content={
-          <Links
-            condition={socialLinks !== undefined}
-            loader={<SocialLinksLoader />}
-            socialLinks={socialLinks!}
-            onSubmit={handleSubmitSocialLink}
-          />
-        }
+    <SettingsBlock>
+      <Links
+        condition={socialLinks !== undefined}
+        loader={<SocialLinksLoader />}
+        socialLinks={socialLinks!}
+        onSubmit={handleSubmitSocialLink}
       />
-    </div>
+    </SettingsBlock>
   );
 };
 

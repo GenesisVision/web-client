@@ -1,8 +1,20 @@
-export const getCookie = (cookieName: string): string | undefined => {
-  const name = encodeURIComponent(cookieName).replace(/[\-\.\+\*]/g, "\\$&");
-  const regExp = new RegExp(
-    `(?:(?:^|.*;)\\s*${name}\\s*\\=\\s*([^;]*).*$)|^.*$`
-  );
-  const cookie = document.cookie.replace(regExp, "$1");
-  return decodeURIComponent(cookie) || undefined;
+import cookie from "js-cookie";
+import { NextPageContext } from "next";
+import nextCookie from "next-cookies";
+
+export const getCookie = (
+  name: string,
+  ctx?: NextPageContext
+): string | undefined => {
+  return ctx ? nextCookie(ctx)[name] : cookie.get(name);
+};
+
+export const setCookie = (name: string, value: string) => {
+  cookie.set(name, value, {
+    expires: 1000
+  });
+};
+
+export const removeCookie = (name: string) => {
+  cookie.remove(name);
 };

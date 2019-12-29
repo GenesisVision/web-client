@@ -1,0 +1,59 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.multi-chart {
+  box-sizing: border-box;
+  &__asset {
+    display: flex;
+    align-items: center;
+    padding: 0 $padding-xxsmall $padding-xxsmall 0;
+  }
+  &__block {
+    box-sizing: border-box;
+    width: 100%;
+    height: 600px;
+    display: flex;
+  }
+  &__profit-chart-block {
+    box-sizing: border-box;
+    flex: 3 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  &__period {
+    box-sizing: border-box;
+    @include details-block-horizontal-paddings();
+  }
+  &__profit-chart {
+    @include details-block-horizontal-paddings();
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  &__asset-list {
+    box-sizing: border-box;
+    @include adaptive-padding(left, $padding-xsmall);
+    width: 260px;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  &__asset-name {
+    display: flex;
+    align-items: center;
+  }
+  &__selected-mark {
+    @include adaptive-margin(right, $padding-xsmall);
+    min-width: $padding-small;
+  }
+  &__sub-list {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+  &__separator {
+    @include adaptive-padding(bottom, $padding-xsmall);
+    text-transform: uppercase;
+    font-size: $font-size-paragraph;
+    font-weight: 600;
+  }
+}

@@ -20,7 +20,7 @@ export const fetchCopytradingTradesLogAction = (
   filters: FilteringType
 ): ApiAction<SignalTradingEvents> => ({
   type: COPYTRADING_TRADES_LOG,
-  payload: signalApi.v10SignalTradesLogGet(auth, filters)
+  payload: signalApi.getSignalTradingLog(auth, filters)
 });
 
 export const fetchCopytradingOpenTradesAction = (
@@ -28,7 +28,7 @@ export const fetchCopytradingOpenTradesAction = (
   filters: FilteringType
 ): ApiAction<TradesSignalViewModel> => ({
   type: COPYTRADING_OPEN_TRADES,
-  payload: signalApi.v10SignalTradesOpenGet(auth, filters)
+  payload: signalApi.getOpenSignalTrades(auth, filters)
 });
 
 export const fetchCopytradingTradesHistoryAction = (
@@ -36,5 +36,5 @@ export const fetchCopytradingTradesHistoryAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<TradesSignalViewModel> => ({
   type: COPYTRADING_TRADES_HISTORY,
-  payload: signalApi.v10SignalTradesGet(auth, filters)
+  payload: signalApi.getSignalTrades(auth, filters)
 });

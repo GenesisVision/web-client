@@ -2,30 +2,31 @@ import { ProgramDetailsFull } from "gv-api-web";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ResolveThunks, connect } from "react-redux";
+import { connect, ResolveThunks, useSelector } from "react-redux";
 import {
   ActionCreatorsMapObject,
-  Dispatch,
   bindActionCreators,
-  compose
+  compose,
+  Dispatch
 } from "redux";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "shared/components/details/details-block";
+import InvestmentProgramInfo from "shared/components/details/details-description-section/investment-program-info";
+import InvestmentUnauthPopup from "shared/components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton from "shared/components/gv-button";
-import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
-import InvestmentUnauthPopup from "shared/components/programs/program-details/program-details-description/investment-unauth-popup/investment-unauth-popup";
 import { dispatchProgramDescription } from "shared/components/programs/program-details/services/program-details.service";
 import { ASSET } from "shared/constants/constants";
 import useIsOpen from "shared/hooks/is-open.hook";
+import { isAuthenticatedSelector } from "shared/reducers/auth-reducer";
 
 import NotifyButton from "./notify-button";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   service: { dispatchProgramDescription },
-  isAuthenticated,
   programDescription
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const [
     isOpenInvestmentPopup,
@@ -38,13 +39,10 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     setCloseUnAuthInvestmentPopup
   ] = useIsOpen();
 
-  const openInvestmentPopup = useCallback(
-    () => {
-      if (isAuthenticated) setOpenInvestmentPopup();
-      else setOpenUnAuthInvestmentPopup();
-    },
-    [isAuthenticated]
-  );
+  const openInvestmentPopup = useCallback(() => {
+    if (isAuthenticated) setOpenInvestmentPopup();
+    else setOpenUnAuthInvestmentPopup();
+  }, [isAuthenticated]);
 
   const notificationId = programDescription.personalProgramDetails
     ? programDescription.personalProgramDetails.notificationAvailableToInvestId
@@ -115,7 +113,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  isAuthenticated: boolean;
   programDescription: ProgramDetailsFull;
 }
 

@@ -1,12 +1,16 @@
-import { FundsList, InvestmentEventViewModels, ProgramsList } from "gv-api-web";
+import {
+  FundsListOld,
+  InvestmentEventViewModels,
+  ProgramsListOld
+} from "gv-api-web";
 import { combineReducers } from "redux";
 import { ITableState } from "shared/components/table/reducers/table.reducer";
 
 import dashboardCopytradingReducer from "./dashboard-copytrading.reducer";
 import {
-  DashboardEventsState,
   dashboardEventsAllReducer,
-  dashboardEventsReducer
+  dashboardEventsReducer,
+  DashboardEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {
@@ -19,10 +23,10 @@ import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
 export type DashboardState = Readonly<{
   eventsTable: ITableState<InvestmentEventViewModels>;
-  programs: ITableState<ProgramsList>;
-  funds: ITableState<FundsList>;
+  programs: ITableState<ProgramsListOld>;
+  funds: ITableState<FundsListOld>;
   copytrading: any;
-  portfolioChartData: DashboardPortfolioChartState;
+  portfolioChart: DashboardPortfolioChartState;
   inRequestsData: DashboardInRequestsState;
   eventsData: DashboardEventsState;
 }>;
@@ -32,7 +36,7 @@ const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
   copytrading: dashboardCopytradingReducer,
-  portfolioChartData: dashboardPortfolioChartReducer,
+  portfolioChart: dashboardPortfolioChartReducer,
   inRequestsData: dashboardInRequestsReducer,
   eventsData: dashboardEventsReducer
 });

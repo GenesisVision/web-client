@@ -4,14 +4,17 @@ import { compose } from "redux";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
-import withLoader, { WithLoaderProps } from "shared/decorators/with-loader";
+import {
+  withBlurLoader,
+  WithBlurLoaderProps
+} from "shared/decorators/with-blur-loader";
 import { CurrencyEnum, HandlePeriodChangeType } from "shared/utils/types";
 
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 
 const composeBalanceChartData = (balanceChart: any) =>
   balanceChart.map((x: any) => ({
-    date: x.date.getTime(),
+    date: new Date(x.date).getTime(),
     balance: formartChartMinValue(x.value)
   }));
 
@@ -21,7 +24,7 @@ const composeAssetsChartData = (
   assetsChart.map((x: any) => {
     let assetsCount = 0;
     const newAsset: { [keys: string]: any } = {
-      date: x.date.getTime(),
+      date: new Date(x.date).getTime(),
       value: formartChartMinValue(x.value)
     };
     x.topAssets.forEach((asset: any) => {
@@ -47,7 +50,6 @@ const composeAssetsChartData = (
 
 const _DashboardPortfolioChartSection: React.FC<Props> = ({
   data,
-  currency,
   period,
   handleChangePeriod
 }) => (
@@ -73,9 +75,9 @@ interface Props {
 }
 
 const DashboardPortfolioChartSection = compose<
-  React.ComponentType<Props & WithLoaderProps>
+  React.ComponentType<Props & WithBlurLoaderProps<DashboardChartValue>>
 >(
   React.memo,
-  withLoader
+  withBlurLoader
 )(_DashboardPortfolioChartSection);
 export default DashboardPortfolioChartSection;

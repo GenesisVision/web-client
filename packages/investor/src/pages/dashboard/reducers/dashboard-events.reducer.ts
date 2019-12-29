@@ -36,7 +36,10 @@ export const dashboardEventsAllTableSelector = tableSelectorCreator<
   InvestorRootState,
   InvestmentEventViewModels,
   InvestmentEventViewModels
->(dashboardEventsAllSelector, "events");
+>(dashboardEventsAllSelector, "events", {
+  items: undefined,
+  total: 0
+});
 
 export const dashboardEventsAllReducer = tableReducerFactory<
   InvestmentEventViewModels

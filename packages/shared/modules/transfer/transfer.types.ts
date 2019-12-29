@@ -1,9 +1,0 @@
-export enum TRANSFER_DIRECTION {
-  WALLET = "Wallet",
-  COPYTRADING_ACCOUNT = "CopyTradingAccount"
-}
-
-export enum TRANSFER_CONTAINER {
-  SOURCE = "SOURCE",
-  DESTINATION = "DESTINATION"
-}

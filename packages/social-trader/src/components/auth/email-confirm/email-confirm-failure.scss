@@ -1,0 +1,18 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.email-confirm-failure {
+  &__main-text {
+    line-height: $font-size-h2;
+    margin-bottom: $padding-medium;
+    color: $text-color;
+    font-size: $font-size-h4;
+  }
+
+  &__error-text {
+    color: $text-error;
+    line-height: $font-size-h2;
+    margin-bottom: $padding-medium;
+    font-size: $font-size-h4;
+  }
+}
