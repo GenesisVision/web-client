@@ -12,7 +12,6 @@ import {
   ProgramFollowDetailsFullTradingAccountDetails
 } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
-import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -46,7 +45,6 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         programDetails={programDetails}
         isOwnProgram={isOwnProgram}
         levelsParameters={levelsParameters}
-        LevelCalculator={LevelCalculator}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton

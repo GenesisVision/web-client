@@ -5,7 +5,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Crashable from "decorators/crashable";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -49,8 +49,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
     stopOutLevelCurrent,
     stopOutLevelSelected
   },
-  levelsParameters,
-  LevelCalculator
+  levelsParameters
 }) => {
   const [t] = useTranslation();
   const isKycConfirmed = useSelector(kycConfirmedSelector);
@@ -68,7 +67,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
             currency={currency}
             title={title}
             levelsParameters={levelsParameters}
-            isKycConfirmed={isKycConfirmed}
+            isKycConfirmed={isKycConfirmed || false}
           />
         </div>
       )}
@@ -152,7 +151,6 @@ interface IInvestmentProgramInfoProps {
   title: string;
   programDetails: ProgramDetailsFull;
   isOwnProgram: boolean;
-  LevelCalculator: React.ComponentType<ILevelCalculatorProps>;
   levelsParameters: LevelsParamsInfo;
 }
 
