@@ -31,10 +31,5 @@ interface Props {
   code: string;
 }
 
-export interface IQueryParams {
-  userId: string;
-  code: string;
-}
-
 const EmailConfirmContainer = React.memo(_EmailConfirmContainer);
 export default EmailConfirmContainer;
