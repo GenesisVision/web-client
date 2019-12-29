@@ -3,7 +3,6 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
-import Crashable from "decorators/crashable";
 import {
   AssetType,
   BrokerTradeServerType,
@@ -45,10 +44,12 @@ const _DashboardPublicCardActions: React.FC<
 }) => {
   const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
-  const terminalLink = linkCreator(getTerminalLink(brokerType));
+  const terminalLink = brokerType
+    ? linkCreator(getTerminalLink(brokerType))
+    : "";
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
-  const settingsLink = createSettingsToUrlMethod(url, contextTitle);
+  const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
@@ -86,18 +87,18 @@ const _DashboardPublicCardActions: React.FC<
 };
 
 interface IDashboardPublicCardActionsProps {
-  brokerType: BrokerTradeServerType;
+  brokerType?: BrokerTradeServerType;
   onApply: VoidFunction;
   name: string;
   actions: DashboardTradingAssetActions;
   assetType: AssetType;
   clearAnchor: VoidFunction;
-  anchor: TAnchor;
-  url: string;
+  anchor?: TAnchor;
+  url?: string;
   id: string;
   showTerminal: boolean;
   showClosePeriod: boolean;
 }
 export const DashboardPublicCardActions = React.memo(
-  Crashable(_DashboardPublicCardActions)
+  _DashboardPublicCardActions
 );
