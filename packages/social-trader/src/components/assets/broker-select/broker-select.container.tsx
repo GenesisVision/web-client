@@ -10,6 +10,7 @@ import {
   forexAllowedSelector,
   kycConfirmedSelector
 } from "reducers/header-reducer";
+import { safeGetElemFromArray } from "utils/helpers";
 
 import BrokerSelect from "./broker-select";
 
@@ -23,7 +24,10 @@ const _BrokerSelectBrokerContainer: React.FC<Props> = ({
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
-      const selectedBroker = brokers!.find(({ name }) => name === brokerName)!;
+      const selectedBroker = safeGetElemFromArray(
+        brokers!,
+        ({ name }) => name === brokerName
+      );
       setSelectedBroker(selectedBroker);
     },
     [brokers]

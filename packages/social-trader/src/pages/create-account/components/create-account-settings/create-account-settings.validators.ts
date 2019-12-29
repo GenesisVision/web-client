@@ -1,6 +1,7 @@
 import { WithTranslation } from "react-i18next";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { lazy, number, object, string } from "yup";
 
 import {
@@ -15,9 +16,10 @@ const createAccountSettingsValidationSchema = ({
 }: ICreateAccountSettingsProps & WithTranslation) => {
   return lazy<ICreateAccountSettingsFormValues>(values => {
     const currency = values[CREATE_ACCOUNT_FIELDS.currency];
-    const accountType = broker.accountTypes.find(
+    const accountType = safeGetElemFromArray(
+      broker.accountTypes,
       ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
-    )!;
+    );
     const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
     const minDeposit = convertToCurrency(
       minimumDepositAmount,

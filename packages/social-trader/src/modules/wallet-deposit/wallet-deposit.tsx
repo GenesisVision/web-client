@@ -9,6 +9,7 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _WalletDeposit: React.FC<Props> = ({
@@ -24,7 +25,10 @@ const _WalletDeposit: React.FC<Props> = ({
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
       <WalletAddFundsPopup
-        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
+        currentWallet={safeGetElemFromArray(
+          wallets,
+          wallet => wallet.currency === currency
+        )}
         onClose={setClosePopup}
         open={isOpenPopup}
       />

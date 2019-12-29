@@ -7,6 +7,7 @@ import Crashable from "decorators/crashable";
 import { BrokerAccountType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
 
 import { getCurrency, getLeverage } from "../asset.helpers";
 
@@ -19,9 +20,10 @@ const _BrokerAccount: React.FC<Props> = ({
 }) => {
   const handleAccountTypeChange = useCallback(
     (brokerAccountTypeId: string) => {
-      const accountType = accountTypes.find(
+      const accountType = safeGetElemFromArray(
+        accountTypes,
         ({ id }) => id === brokerAccountTypeId
-      )!;
+      );
       setAccountType(accountType.id);
       setCurrency(getCurrency(accountType));
       setLeverage(getLeverage(accountType));
