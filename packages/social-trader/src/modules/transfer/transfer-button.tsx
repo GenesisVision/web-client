@@ -22,14 +22,13 @@ const _TransferButton: React.FC<Props> = ({
   currentItem,
   sourceType,
   destinationType,
-  title: titleProp,
+  title,
   currentItemContainer,
   label,
   onApply,
   disabled
 }) => {
   const [t] = useTranslation();
-  const title = titleProp || t("transfer.title");
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   const Button = type === WALLET_BUTTON_TYPE.SMALL ? SmallButton : FullButton;
   return (
@@ -48,7 +47,7 @@ const _TransferButton: React.FC<Props> = ({
         currentItem={currentItem}
         sourceType={sourceType}
         destinationType={destinationType}
-        title={title}
+        title={title || t("transfer.title")}
         currentItemContainer={currentItemContainer}
         onApply={onApply}
         open={isOpenPopup}
