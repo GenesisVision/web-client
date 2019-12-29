@@ -2452,8 +2452,8 @@
         "available-in-wallet": "Available in the wallet"
       },
       "validation": {
-        "api-secret": "Api secret fee is required",
-        "api-key": "Api key fee is required",
+        "api-secret": "Api secret is required",
+        "api-key": "Api key is required",
         "entry-fee-required": "Entry fee is required",
         "exit-fee-required": "Exit fee is required",
         "exit-fee-min": "Exit fee must be greater than 0 %",
