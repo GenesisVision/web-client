@@ -14,21 +14,12 @@ import {
   ResetPasswordViewModel
 } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import Router from "next/router";
 import { Dispatch } from "redux";
-import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
+import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import {
-  MiddlewareDispatch,
-  ResponseError,
-  SetSubmittingType,
-  TGetState
-} from "utils/types";
+import { MiddlewareDispatch, SetSubmittingType, TGetState } from "utils/types";
 
-import {
-  forgotPasswordAction,
-  restorePasswordAction
-} from "../actions/forgot-password.actions";
+import { forgotPasswordAction } from "../actions/forgot-password.actions";
 
 export const forgotPassword = (data: ForgotPasswordViewModel) => (
   dispatch: MiddlewareDispatch
@@ -41,29 +32,11 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
 export const restorePassword = (
   model: ResetPasswordViewModel & { setSubmitting: SetSubmittingType }
 ) => (dispatch: MiddlewareDispatch) =>
-  dispatch(restorePasswordAction(model))
-    .then(response => {
-      authService.storeToken(response.value);
-      dispatch(authActions.updateTokenAction(true));
-      Push(HOME_ROUTE);
-      dispatch(
-        alertMessageActions.success(
-          "auth.password-restore.success-alert-message",
-          true
-        )
-      );
-    })
-    .catch(({ code }: ResponseError) => {
-      if (code === "RequiresTwoFactor") {
-        Push(LOGIN_ROUTE);
-        dispatch(
-          alertMessageActions.success(
-            "auth.password-restore.success-alert-message",
-            true
-          )
-        );
-      } else model.setSubmitting(false);
-    });
+  authApi.resetPassword({ model }).then(response => {
+    authService.storeToken(response);
+    dispatch(authActions.updateTokenAction(true));
+    // Push(HOME_ROUTE);
+  });
 
 export const sendForgotPasswordEmail = (
   captchaCheckResult: CaptchaCheckResult
