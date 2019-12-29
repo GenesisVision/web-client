@@ -1,12 +1,35 @@
 import { getBrokersProgramInfoLoaderData } from "components/assets/asset.helpers";
 import useApiRequest from "hooks/api-request.hook";
 import { getProgramBrokersMethod } from "pages/programs/program-details/service/program-details.service";
-import React from "react";
+import { changeBrokerMethod } from "pages/programs/programs-settings/services/program-settings.service";
+import React, { useCallback } from "react";
 import { SetSubmittingType } from "utils/types";
 
 import ChangeBrokerForm, { ChangeBrokerFormValues } from "./change-broker-form";
 
 const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
+  const { id, onApply } = props;
+  const { sendRequest: changeBroker } = useApiRequest({
+    middleware: [onApply],
+    request: changeBrokerMethod,
+    successMessage: "program-settings.notifications.broker-success"
+  });
+  const handleChangeBroker = useCallback(
+    (
+      { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
+      setSubmitting: SetSubmittingType
+    ) => {
+      changeBroker(
+        {
+          id,
+          brokerAccountTypeId,
+          leverage
+        },
+        setSubmitting
+      );
+    },
+    [id]
+  );
   const { data } = useApiRequest({
     fetchOnMountData: props.id,
     fetchOnMount: true,
@@ -17,17 +40,15 @@ const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
     <ChangeBrokerForm
       loaderData={getBrokersProgramInfoLoaderData()}
       data={data}
+      onSubmit={handleChangeBroker}
       {...props}
     />
   );
 };
 
 export interface IChangeBrokerFormContainerProps {
+  onApply: VoidFunction;
   isSignalProgram: boolean;
-  onSubmit: (
-    values: ChangeBrokerFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
   id: string;
   currentLeverage: number;
 }
