@@ -1,14 +1,13 @@
 import AuthLayout from "components/auth/components/auth-layout/auth-layout";
 import SignUpFooter from "components/auth/components/signup-footer/signup-footer";
 import EmailConfirmContainer from "components/auth/email-confirm/email-confirm-container";
-import qs from "qs";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 
 export const EMAIL_CONFIRM_ROUTE = `/email-confirm`;
 
-const _EmailConfirmPage: React.FC<Props> = ({ location }) => {
+const _EmailConfirmPage: React.FC<Props> = ({ userId, code }) => {
   const [t] = useTranslation();
   return (
     <AuthLayout
@@ -18,16 +17,15 @@ const _EmailConfirmPage: React.FC<Props> = ({ location }) => {
       footerAuthRoute={LOGIN_ROUTE}
     >
       <div className="email-confirm-page">
-        <EmailConfirmContainer
-          queryParams={qs.parse(location.search.slice(1))}
-        />
+        <EmailConfirmContainer userId={userId} code={code} />
       </div>
     </AuthLayout>
   );
 };
 
 interface Props {
-  location: Location;
+  userId: string;
+  code: string;
 }
 
 const EmailConfirmPage = React.memo(_EmailConfirmPage);
