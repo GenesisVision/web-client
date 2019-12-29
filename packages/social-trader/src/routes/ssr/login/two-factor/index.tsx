@@ -4,22 +4,13 @@ import useHistoryContext from "decorators/history-provider/use-history-context";
 import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage } from "next";
 import React from "react";
-import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import { SIGNUP_ROUTE } from "routes/app.routes";
+import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 
-const Page: NextPage<Props> = ({ redirectFrom }) => {
+const Page: NextPage = () => {
   const { from } = useHistoryContext();
-  return <TwoFactorPage redirectFrom={from || redirectFrom} />;
+  return <TwoFactorPage redirectFrom={from || OVERVIEW_ROUTE} />;
 };
-
-Page.getInitialProps = async () => {
-  return {
-    redirectFrom: HOME_ROUTE
-  };
-};
-
-interface Props {
-  redirectFrom: string;
-}
 
 export const Login2FA = withAuthLayout({
   footerAuthRoute: SIGNUP_ROUTE,
