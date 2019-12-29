@@ -11,7 +11,7 @@ const _Layout: React.FC<Props> = ({ title, children }) => {
         <title>{title}</title>
         {commonMeta()}
         <meta property="og:url" content="https://genesis.vision" />
-        {imageMeta("/platform.png")}
+        {imageMeta("https://genesis.vision/platform.png")}
         <meta property="og:image:type" content="image/png" />
         {titleMeta("Genesis Vision")}
         {descriptionMeta("Genesis Vision - Social Trading Platform")}
