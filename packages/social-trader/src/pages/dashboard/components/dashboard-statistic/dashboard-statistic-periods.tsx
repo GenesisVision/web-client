@@ -5,6 +5,7 @@ import {
 } from "components/profitability/profitability.helper";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
+import Crashable from "decorators/crashable";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -91,5 +92,7 @@ export const DashboardStatisticPeriodsItem = React.memo(
   _DashboardStatisticPeriodsItem
 );
 
-const DashboardStatisticPeriods = React.memo(_DashboardStatisticPeriods);
+const DashboardStatisticPeriods = React.memo(
+  Crashable(_DashboardStatisticPeriods)
+);
 export default DashboardStatisticPeriods;
