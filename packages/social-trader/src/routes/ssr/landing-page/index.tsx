@@ -11,20 +11,19 @@ import { fetchFollows } from "modules/follows-table/services/follows-table.servi
 import { fetchFunds } from "modules/funds-table/services/funds-table.service";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { NextPage, NextPageContext } from "next";
-import * as qs from "qs";
 import React from "react";
 import { LandingPage } from "routes/ssr/landing-page/landing.page";
 import platformApi from "services/api-client/platform-api";
 import { subtractDate } from "shared/utils/dates";
 import { addRequestAnimationFrame } from "utils/helpers";
+import { getParamsFromCtx } from "utils/ssr-helpers";
 
 const IndexPage: NextPage<Props> = props => {
   return <LandingPage {...props} />;
 };
 
 IndexPage.getInitialProps = async (ctx: NextPageContext) => {
-  const { asPath = "", pathname } = ctx;
-  const { ref } = qs.parse(asPath.slice(pathname.length + 1));
+  const { ref } = getParamsFromCtx(ctx);
   try {
     addRequestAnimationFrame();
     const dateTo = new Date();
