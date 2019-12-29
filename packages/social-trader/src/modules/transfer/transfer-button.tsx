@@ -68,8 +68,8 @@ interface Props {
   disabled?: boolean;
   onApply: VoidFunction;
   currentItem: WalletItemType;
-  sourceType?: InternalTransferRequestType;
-  destinationType?: InternalTransferRequestType;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
   title?: string;
   currentItemContainer: TRANSFER_CONTAINER;
 }

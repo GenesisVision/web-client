@@ -37,8 +37,8 @@ interface Props {
   currentItem: WalletItemType;
   onClose: () => void;
   open: boolean;
-  sourceType?: InternalTransferRequestType;
-  destinationType?: InternalTransferRequestType;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
   title: string;
   currentItemContainer: TRANSFER_CONTAINER;
 }
