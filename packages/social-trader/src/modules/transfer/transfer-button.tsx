@@ -71,7 +71,7 @@ interface Props {
   sourceType?: InternalTransferRequestType;
   destinationType?: InternalTransferRequestType;
   title?: string;
-  currentItemContainer?: TRANSFER_CONTAINER;
+  currentItemContainer: TRANSFER_CONTAINER;
 }
 
 const FullButton: React.FC<{
