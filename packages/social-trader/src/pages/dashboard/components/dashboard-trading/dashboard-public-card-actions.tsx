@@ -3,6 +3,7 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
+import Crashable from "decorators/crashable";
 import {
   AssetType,
   BrokerTradeServerType,
@@ -98,5 +99,5 @@ interface IDashboardPublicCardActionsProps {
   showClosePeriod: boolean;
 }
 export const DashboardPublicCardActions = React.memo(
-  _DashboardPublicCardActions
+  Crashable(_DashboardPublicCardActions)
 );
