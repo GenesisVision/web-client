@@ -4,11 +4,12 @@ import useHistoryContext from "decorators/history-provider/use-history-context";
 import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage } from "next";
 import React from "react";
-import { ROLE_HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import { SIGNUP_ROUTE } from "routes/app.routes";
+import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 
 const Page: NextPage = () => {
   const { from } = useHistoryContext();
-  return <LoginPage redirectFrom={from || ROLE_HOME_ROUTE} />;
+  return <LoginPage redirectFrom={from || OVERVIEW_ROUTE} />;
 };
 
 export const Login = withAuthLayout({
