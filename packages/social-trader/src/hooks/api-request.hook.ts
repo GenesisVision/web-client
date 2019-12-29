@@ -17,7 +17,7 @@ export type TUseApiRequestProps<T = any> = {
   fetchOnMountData?: any;
   request: (...args: any) => any;
   defaultData?: T;
-  catchCallback?: (errorMessage?: string) => void;
+  catchCallback?: (error: ResponseError) => void;
   successMessage?: string;
   middleware?: MiddlewareType[];
   fetchOnMount?: boolean;
@@ -74,7 +74,7 @@ const useApiRequest = <T>({
       .catch((errorMessage: ResponseError) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage.errorMessage));
-        catchCallback && catchCallback(errorMessage.errorMessage);
+        catchCallback && catchCallback(errorMessage);
       })
       .finally(() => {
         setIsNotPending();
