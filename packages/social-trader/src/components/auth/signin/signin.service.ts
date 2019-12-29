@@ -24,9 +24,6 @@ import {
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.constants";
 
 export const client = "Web";
-export const redirectToLogin = () => {
-  Push(LOGIN_ROUTE);
-};
 
 export const login: LoginFuncType = (method, fromPath, type) => (
   dispatch,
