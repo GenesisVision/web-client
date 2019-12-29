@@ -39,7 +39,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
 interface Props {
   transferableItem: WalletItemType;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
-  onApply?: VoidFunction;
+  onApply: VoidFunction;
 }
 
 const InvestmentAccountControls = React.memo(_InvestmentAccountControls);

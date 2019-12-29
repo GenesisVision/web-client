@@ -76,7 +76,7 @@ interface Props {
   canTransfer?: boolean;
   showInvest?: boolean;
   title: string;
-  onApply?: VoidFunction;
+  onApply: VoidFunction;
   canWithdraw?: boolean;
   canInvest?: boolean;
   ownAsset?: boolean;

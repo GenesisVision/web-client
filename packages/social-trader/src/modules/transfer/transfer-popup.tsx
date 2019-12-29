@@ -32,8 +32,8 @@ const _TransferPopup: React.FC<Props> = ({
 );
 
 interface Props {
-  singleCurrentItemContainer?: boolean;
-  onApply?: VoidFunction;
+  singleCurrentItemContainer: boolean;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
   onClose: () => void;
   open: boolean;

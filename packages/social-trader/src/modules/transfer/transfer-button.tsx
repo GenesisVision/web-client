@@ -13,7 +13,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _TransferButton: React.FC<Props> = ({
-  singleCurrentItemContainer,
+  singleCurrentItemContainer = false,
   size = GV_BTN_SIZE.LARGE,
   withIcon,
   color,
@@ -66,7 +66,7 @@ interface Props {
   variant?: "text" | "outlined" | "contained";
   label?: string;
   disabled?: boolean;
-  onApply?: VoidFunction;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
   sourceType?: InternalTransferRequestType;
   destinationType?: InternalTransferRequestType;

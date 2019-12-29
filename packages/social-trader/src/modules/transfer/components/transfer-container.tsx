@@ -109,10 +109,10 @@ const _TransferContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  singleCurrentItemContainer?: boolean;
-  onApply?: VoidFunction;
+  singleCurrentItemContainer: boolean;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
-  onClose: () => void;
+  onClose: VoidFunction;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
   title: string;
