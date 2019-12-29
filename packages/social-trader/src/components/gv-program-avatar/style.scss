@@ -14,6 +14,9 @@ $avatar-big-size: 120px;
 
   &--with-level {
     margin-right: $padding-xsmall;
+    &.program-avatar--big {
+      margin-right: 0;
+    }
   }
 
   &--small {
