@@ -2,6 +2,26 @@ import randomString from "randomstring";
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const safeGetElemFromArray = <T>(
+  arr: T[],
+  predicate: (item: T) => boolean
+): T => {
+  if (!arr || arr.length === 0) {
+    console.log("Array \n", arr, "\nis empty or not found");
+  }
+  const item = arr.find(predicate);
+  if (!item) {
+    console.log(
+      "safeGetElemFromArray: Array \n",
+      arr,
+      "\nisn't contain element for predicate: \n",
+      predicate
+    );
+    return arr[0];
+  }
+  return item;
+};
+
 export const addRequestAnimationFrame = () => {
   if (typeof window !== undefined && !window.requestAnimationFrame)
     window.requestAnimationFrame = () => -1;
