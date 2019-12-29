@@ -25,7 +25,6 @@ const IndexPage: NextPage<Props> = props => {
 IndexPage.getInitialProps = async (ctx: NextPageContext) => {
   const { asPath = "", pathname } = ctx;
   const { ref } = qs.parse(asPath.slice(pathname.length + 1));
-  console.log("ref : ", ref);
   try {
     addRequestAnimationFrame();
     const dateTo = new Date();
