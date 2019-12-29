@@ -1,5 +1,6 @@
 import "./wallet-balance.scss";
 
+import Crashable from "decorators/crashable";
 import { WalletData } from "gv-api-web";
 import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
@@ -37,5 +38,5 @@ interface Props {
   currentItem: WalletData;
 }
 
-const WalletBalanceButtons = React.memo(_WalletBalanceButtons);
+const WalletBalanceButtons = React.memo(Crashable(_WalletBalanceButtons));
 export default WalletBalanceButtons;
