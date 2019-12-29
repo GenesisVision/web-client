@@ -3,7 +3,14 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
-import { LevelsParamsInfo } from "gv-api-web";
+import Crashable from "decorators/crashable";
+import {
+  AssetPublicDetails,
+  BrokerDetails,
+  LevelsParamsInfo,
+  ProgramDetailsFull,
+  ProgramFollowDetailsFullTradingAccountDetails
+} from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
@@ -15,13 +22,17 @@ import { ASSET } from "shared/constants/constants";
 const _InvestmentProgramControls: React.FC<Props> = ({
   onApply,
   isOwnProgram,
-  description,
+  id,
+  programDetails,
+  publicInfo,
+  brokerDetails,
+  tradingAccountInfo,
   levelsParameters
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
-    ? !!description.programDetails.personalDetails &&
-      description.programDetails.personalDetails.canInvest
+    ? !!programDetails.personalDetails &&
+      programDetails.personalDetails.canInvest
     : true;
   return (
     <DetailsBlock
@@ -29,24 +40,27 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       className="details-description__control-elements-block"
     >
       <InvestmentProgramInfo
+        id={id}
+        currency={tradingAccountInfo.currency}
+        title={publicInfo.title}
+        programDetails={programDetails}
         isOwnProgram={isOwnProgram}
-        description={description}
         levelsParameters={levelsParameters}
         LevelCalculator={LevelCalculator}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
           disabled={!canInvest}
-          title={description.publicInfo.title}
+          title={publicInfo.title}
           onApply={onApply}
           size={GV_BTN_SIZE.BIG}
           ownAsset={isOwnProgram}
-          entryFee={description.programDetails.entryFeeCurrent}
-          availableToInvest={description.programDetails.availableInvestmentBase}
-          broker={description.brokerDetails.type}
+          entryFee={programDetails.entryFeeCurrent}
+          availableToInvest={programDetails.availableInvestmentBase}
+          broker={brokerDetails.type}
           type={ASSET.PROGRAM}
-          id={description.id}
-          currency={description.tradingAccountInfo.currency}
+          id={id}
+          currency={tradingAccountInfo.currency}
         />
       </div>
     </DetailsBlock>
@@ -54,11 +68,18 @@ const _InvestmentProgramControls: React.FC<Props> = ({
 };
 
 interface Props {
-  onApply?: VoidFunction;
+  id: string;
+  programDetails: ProgramDetailsFull;
+  publicInfo: AssetPublicDetails;
+  brokerDetails: BrokerDetails;
+  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
+  onApply: VoidFunction;
   isOwnProgram: boolean;
   description: ProgramDescriptionDataType;
   levelsParameters: LevelsParamsInfo;
 }
 
-const InvestmentProgramControls = React.memo(_InvestmentProgramControls);
+const InvestmentProgramControls = React.memo(
+  Crashable(_InvestmentProgramControls)
+);
 export default InvestmentProgramControls;

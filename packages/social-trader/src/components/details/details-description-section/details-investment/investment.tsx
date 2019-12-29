@@ -9,6 +9,7 @@ import { ProfitabilityValuePercent } from "components/profitability/profitabilit
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import Crashable from "decorators/crashable";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
@@ -29,7 +30,6 @@ const _Investment: React.FC<Props> = ({
   id,
   assetCurrency,
   asset,
-  notice,
   personalDetails
 }) => {
   const { successFeePersonal, exitFee, exitFeePersonal } = fees;
@@ -180,24 +180,20 @@ const _Investment: React.FC<Props> = ({
           id={id}
           currency={assetCurrency}
         />
-        {notice && (
-          <p className="details-investment__withdraw-notice">{notice}</p>
-        )}
       </DetailsInvestmentFooter>
     </DetailsInvestmentBlock>
   );
 };
 
 interface Props {
-  isOwnAsset?: boolean;
+  isOwnAsset: boolean;
   fees: FeesType;
   updateDescription: () => void;
   asset: ASSET;
-  notice?: string;
   id: string;
   assetCurrency: CurrencyEnum;
   personalDetails: InvestmentType;
 }
 
-const Investment = React.memo(_Investment);
+const Investment = React.memo(Crashable(_Investment));
 export default Investment;

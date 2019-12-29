@@ -1,6 +1,12 @@
 import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
+import Crashable from "decorators/crashable";
+import {
+  AssetPublicDetails,
+  BrokerDetails,
+  FollowDetailsFull,
+  ProgramFollowDetailsFullTradingAccountDetails
+} from "gv-api-web";
 import { InvestmentUnauthButton } from "modules/investment-unauth-button/investment-unauth-button";
-import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -13,13 +19,11 @@ import SignalProviderButtons from "../signal-provider-buttons";
 const _FollowControls: React.FC<Props> = ({
   isOwnAsset,
   onApply,
-  description: {
-    publicInfo: { title },
-    tradingAccountInfo: { currency, leverageMax },
-    followDetails: { personalDetails, signalSettings },
-    id,
-    brokerDetails
-  }
+  publicInfo: { title },
+  tradingAccountInfo: { currency, leverageMax },
+  followDetails: { personalDetails, signalSettings },
+  id,
+  brokerDetails
 }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -59,8 +63,12 @@ const _FollowControls: React.FC<Props> = ({
 interface Props {
   isOwnAsset: boolean;
   onApply: VoidFunction;
-  description: ProgramDescriptionDataType;
+  publicInfo: AssetPublicDetails;
+  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
+  followDetails: FollowDetailsFull;
+  id: string;
+  brokerDetails: BrokerDetails;
 }
 
-const FollowControls = React.memo(_FollowControls);
+const FollowControls = React.memo(Crashable(_FollowControls));
 export default FollowControls;

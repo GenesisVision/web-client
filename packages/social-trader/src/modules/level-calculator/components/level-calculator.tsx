@@ -2,6 +2,7 @@ import "./level-calculator.scss";
 
 import Dialog from "components/dialog/dialog";
 import { CalculatorIcon } from "components/icon/calculator-icon";
+import Crashable from "decorators/crashable";
 import useIsOpen from "hooks/is-open.hook";
 import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
@@ -40,5 +41,5 @@ const _LevelCalculator: React.FC<ILevelCalculatorProps> = ({
   );
 };
 
-const LevelCalculator = React.memo(_LevelCalculator);
+const LevelCalculator = React.memo(Crashable(_LevelCalculator));
 export default LevelCalculator;

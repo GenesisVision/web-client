@@ -3,17 +3,16 @@ import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { LevelsParamsInfo } from "gv-api-web";
-import {
-  ILevelCalculatorProps,
-  ProgramDescriptionDataType
-} from "pages/programs/program-details/program-details.types";
+import Crashable from "decorators/crashable";
+import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
+import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 const renderFee = (
   valueSelected: number,
@@ -37,20 +36,18 @@ const renderFee = (
 
 const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   isOwnProgram,
-  description: {
-    id,
-    tradingAccountInfo: { currency },
-    publicInfo: { title },
-    programDetails: {
-      availableInvestmentBase,
-      availableInvestmentLimit,
-      entryFeeSelected,
-      entryFeeCurrent,
-      successFeeCurrent,
-      successFeeSelected,
-      stopOutLevelCurrent,
-      stopOutLevelSelected
-    }
+  id,
+  currency,
+  title,
+  programDetails: {
+    availableInvestmentBase,
+    availableInvestmentLimit,
+    entryFeeSelected,
+    entryFeeCurrent,
+    successFeeCurrent,
+    successFeeSelected,
+    stopOutLevelCurrent,
+    stopOutLevelSelected
   },
   levelsParameters,
   LevelCalculator
@@ -64,14 +61,14 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       : availableInvestmentBase;
   return (
     <StatisticItemList>
-      {LevelCalculator && isOwnProgram && (
+      {isOwnProgram && (
         <div className="statistics-item asset-details-description__level-calculator">
           <LevelCalculator
             id={id}
             currency={currency}
             title={title}
-            levelsParameters={levelsParameters!}
-            isKycConfirmed={isKycConfirmed!}
+            levelsParameters={levelsParameters}
+            isKycConfirmed={isKycConfirmed}
           />
         </div>
       )}
@@ -150,12 +147,14 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
 };
 
 interface IInvestmentProgramInfoProps {
-  isOwnProgram?: boolean;
-  description: ProgramDescriptionDataType;
-  LevelCalculator?: React.ComponentType<ILevelCalculatorProps>;
-  levelsParameters?: LevelsParamsInfo;
-  isKycConfirmed?: boolean;
+  id: string;
+  currency: CurrencyEnum;
+  title: string;
+  programDetails: ProgramDetailsFull;
+  isOwnProgram: boolean;
+  LevelCalculator: React.ComponentType<ILevelCalculatorProps>;
+  levelsParameters: LevelsParamsInfo;
 }
 
-const InvestmentProgramInfo = React.memo(_InvestmentProgramInfo);
+const InvestmentProgramInfo = React.memo(Crashable(_InvestmentProgramInfo));
 export default InvestmentProgramInfo;

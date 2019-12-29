@@ -12,16 +12,24 @@ export const getMinProgramDeposit = (
   amounts: ProgramMinInvestAmount[],
   cur: CurrencyEnum,
   broker: string
-): number =>
-  amounts
-    .find(({ serverType }) => serverType === broker)!
-    .minInvestAmountIntoProgram.find(({ currency }) => currency === cur)!
-    .amount;
+): number => {
+  const amountInBroker = amounts.find(
+    ({ serverType }) => serverType === broker
+  );
+  if (!amountInBroker) return 0;
+  const amountInCurr = amountInBroker.minInvestAmountIntoProgram.find(
+    ({ currency }) => currency === cur
+  );
+  return amountInCurr ? amountInCurr.amount : 0;
+};
 
 export const getFundMinDeposit = (
   amounts: AmountWithCurrency[],
   cur: CurrencyEnum
-): number => amounts.find(({ currency }) => currency === cur)!.amount;
+): number => {
+  const amountInCurr = amounts.find(({ currency }) => currency === cur);
+  return amountInCurr ? amountInCurr.amount : 0;
+};
 
 export const programInvest: TAssetDeposit = ({
   id,
