@@ -28,7 +28,7 @@ const _SignInContainer: React.FC<Props> = ({
   useEffect(() => {
     if (type && (email === "" || password === ""))
       Router.replace(NOT_FOUND_PAGE_ROUTE);
-  }, [type, email, password]);
+  }, []);
   return (
     <div className={className}>
       <CaptchaContainer
