@@ -3,6 +3,7 @@ import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
 import { onSelectChange } from "components/select/select.test-helpers";
+import Crashable from "decorators/crashable";
 import { BrokerAccountType } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -56,5 +57,5 @@ interface Props {
   accountTypes: BrokerAccountType[];
 }
 
-const BrokerAccount = React.memo(_BrokerAccount);
+const BrokerAccount = React.memo(Crashable(_BrokerAccount));
 export default BrokerAccount;

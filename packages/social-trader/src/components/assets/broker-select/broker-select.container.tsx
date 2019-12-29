@@ -1,6 +1,7 @@
 import "./broker-select.scss";
 
 import { BrokerSelectLoaderData } from "components/assets/asset.helpers";
+import Crashable from "decorators/crashable";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
@@ -47,5 +48,7 @@ interface Props {
   selectedBroker: Broker;
 }
 
-const BrokerSelectContainer = React.memo(_BrokerSelectBrokerContainer);
+const BrokerSelectContainer = React.memo(
+  Crashable(_BrokerSelectBrokerContainer)
+);
 export default BrokerSelectContainer;
