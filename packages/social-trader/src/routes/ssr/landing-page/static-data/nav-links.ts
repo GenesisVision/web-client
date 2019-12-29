@@ -33,11 +33,11 @@ export const navHeader: TNavHeader[] = [
       },
       {
         name: "Programs",
-        href: GV_FUNDS_ROUTE
+        href: GV_PROGRAMS_ROUTE
       },
       {
         name: "Funds",
-        href: GV_PROGRAMS_ROUTE
+        href: GV_FUNDS_ROUTE
       }
     ]
   },
