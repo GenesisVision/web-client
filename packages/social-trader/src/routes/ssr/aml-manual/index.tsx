@@ -3,15 +3,15 @@ import "routes/ssr/landing-page/styles/internal.scss";
 
 import { NextPage } from "next";
 import React from "react";
-import GlossarySection from "routes/ssr/landing-page/components/glossary-section/glossary-section";
+import AmlManualSection from "routes/ssr/landing-page/components/aml-manual-section/aml-manual-section";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 
-export const Glossary: NextPage = () => {
+export const AmlManual: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Glossary">
+    <Layout title="Genesis Vision Fees">
       <main className="internal">
         <div className="internal__container">
-          <GlossarySection />
+          <AmlManualSection />
         </div>
       </main>
     </Layout>

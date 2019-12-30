@@ -100,7 +100,7 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "AML Manual",
-    href: "/aml-manual.html"
+    href: "/aml-manual"
   },
   {
     name: "White paper",
