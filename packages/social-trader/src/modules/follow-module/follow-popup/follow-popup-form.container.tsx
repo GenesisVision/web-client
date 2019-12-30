@@ -1,8 +1,4 @@
-import {
-  AmountWithCurrency,
-  AttachToSignalProvider,
-  BrokerTradeServerType
-} from "gv-api-web";
+import { AttachToSignalProvider, BrokerTradeServerType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { useGetRate } from "hooks/get-rate.hook";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
@@ -16,7 +12,8 @@ import {
   attachToExternalSignal,
   attachToSignal,
   fetchAccounts,
-  fetchExternalAccounts
+  fetchExternalAccounts,
+  getMinDeposit
 } from "../services/follow-module-service";
 
 const DEFAULT_RATE_CURRENCY = "USD";
@@ -34,14 +31,14 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
-  const minDeposit = isExternal
-    ? 0
-    : tradingAccountMinDepositAmounts
-        .find(({ serverType }) => serverType === broker)!
-        .minDepositCreateAsset.find(
-          (minDeposit: AmountWithCurrency) => minDeposit.currency === currency
-        )!.amount;
   const wallets = useSelector(walletsSelector);
+
+  const minDeposit = getMinDeposit({
+    isExternal,
+    tradingAccountMinDepositAmounts,
+    broker,
+    currency
+  });
 
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
   const { data: accounts } = useApiRequest({

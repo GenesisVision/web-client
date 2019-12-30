@@ -10,6 +10,7 @@ import {
   exitFeeShape
 } from "shared/utils/validators/validators";
 import { formatCurrencyValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { array, lazy, number, object } from "yup";
 
 import {
@@ -24,9 +25,10 @@ const createFundSettingsValidationSchema = ({
   data: { maxExitFee, maxEntryFee, minDeposit }
 }: ICreateFundSettingsProps & WithTranslation) =>
   lazy<ICreateFundSettingsFormValues>(values => {
-    const wallet = wallets.find(
+    const wallet = safeGetElemFromArray(
+      wallets,
       ({ id }) => id === values[CREATE_FUND_FIELDS.depositWalletId]
-    )!;
+    );
     const minDepositInCur = convertToCurrency(
       minDeposit,
       values[CREATE_FUND_FIELDS.rate]

@@ -10,6 +10,7 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _WalletWithdrawButton: React.FC<Props> = ({
@@ -25,7 +26,10 @@ const _WalletWithdrawButton: React.FC<Props> = ({
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
       <WalletWithdrawPopup
-        currentWallet={wallets.find(wallet => wallet.currency === currency)!}
+        currentWallet={safeGetElemFromArray(
+          wallets,
+          wallet => wallet.currency === currency
+        )}
         open={isOpenPopup}
         onClose={setClosePopup}
       />

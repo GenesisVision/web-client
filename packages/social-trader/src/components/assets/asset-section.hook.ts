@@ -5,6 +5,7 @@ import { walletsAvailableSelector } from "pages/wallet/reducers/wallet.reducers"
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 type TUseAssetSectionProps = {
@@ -46,7 +47,8 @@ const useAssetSection = ({
   }, [wallet, assetCurrency]);
 
   const handleWalletChange = useCallback(
-    (walletId: string) => setWallet(wallets.find(({ id }) => id === walletId)!),
+    (walletId: string) =>
+      setWallet(safeGetElemFromArray(wallets, ({ id }) => id === walletId)),
     [wallets]
   );
   return { rate, handleWalletChange, wallet, wallets };

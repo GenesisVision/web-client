@@ -2,6 +2,26 @@ import randomString from "randomstring";
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const safeGetElemFromArray = <T>(
+  arr: T[],
+  predicate: (item: T) => boolean
+): T => {
+  if (!arr || arr.length === 0) {
+    console.log("Array \n", arr, "\nis empty or not found");
+  }
+  const item = arr.find(predicate);
+  if (!item) {
+    console.log(
+      "safeGetElemFromArray: Array \n",
+      arr,
+      "\nisn't contain element for predicate: \n",
+      predicate
+    );
+    return arr[0];
+  }
+  return item;
+};
+
 export const addRequestAnimationFrame = () => {
   if (typeof window !== undefined && !window.requestAnimationFrame)
     window.requestAnimationFrame = () => -1;
@@ -110,7 +130,7 @@ const isServer = () => {
   return global.hasOwnProperty("window");
 };
 
-const getRandomInteger = (min: number, max: number): number =>
+const getRandomInteger = (min: number = 0, max: number = 100): number =>
   Math.floor(min + Math.random() * (max + 1 - min));
 
 const getRandomText = (params: Object) => randomString.generate(params);
@@ -125,6 +145,9 @@ export const getRandomWord = (params?: Object) =>
 
 export const getRandomWords = (length: number) =>
   tableLoaderCreator(getRandomWord, length).join(" ");
+
+export const getRandomEmail = () =>
+  `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
 export const getRandomColorNumber = () => getRandomInteger(0, 255).toString(16);
 

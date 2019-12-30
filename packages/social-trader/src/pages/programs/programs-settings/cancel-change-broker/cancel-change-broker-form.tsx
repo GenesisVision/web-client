@@ -12,6 +12,7 @@ import {
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
 
 import { HuobiWarning } from "../change-broker/change-broker-form";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
@@ -29,12 +30,14 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
     setCancelChangeBrokerOpen,
     setCancelChangeBrokerClose
   ] = useIsOpen();
-  const brokerFrom = brokers.find(
+  const brokerFrom = safeGetElemFromArray(
+    brokers,
     broker =>
-      !!broker.accountTypes.find(
+      !!safeGetElemFromArray(
+        broker.accountTypes,
         accountType => accountType.id === currentAccountTypeId
       )
-  )!;
+  );
   return (
     <div>
       <div className="program-settings__block-wrapper--broker-list">
@@ -50,10 +53,11 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             label={t("create-program-page.settings.fields.account-type")}
           >
             {
-              brokerFrom.accountTypes.find(
+              safeGetElemFromArray(
+                brokerFrom.accountTypes,
                 (account: BrokerAccountType) =>
                   account.id === currentAccountTypeId
-              )!.name
+              ).name
             }
           </StatisticItem>
           <StatisticItem

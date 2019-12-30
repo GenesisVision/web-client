@@ -1,6 +1,9 @@
-import faker from "faker";
 import { TransactionAssetDetails } from "gv-api-web";
-import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomInteger,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 
 import { MultiWalletTransaction } from "../../../wallet.types";
 
@@ -12,7 +15,7 @@ const walletTransactionLoaderDataCreator = (): MultiWalletTransaction => ({
   asset: {} as TransactionAssetDetails,
   date: new Date(),
   status: "Done",
-  description: faker.lorem.words(5),
+  description: getRandomWords(5),
   amount: {
     title: "",
     first: {

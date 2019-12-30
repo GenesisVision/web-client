@@ -4,7 +4,6 @@ import DetailsBlock from "components/details/details-block";
 import ProfileLayout from "components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "components/profile/profile.constants";
 import SettingsBlock from "components/settings-block/settings-block";
-import * as faker from "faker";
 import { ProfileFullViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";

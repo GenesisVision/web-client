@@ -19,7 +19,10 @@ import {
   CURRENCY_FRACTIONS
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
-import { allowPositiveValuesNumberFormat } from "utils/helpers";
+import {
+  allowPositiveValuesNumberFormat,
+  safeGetElemFromArray
+} from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 import CreateAccountFormValidationSchema, {
@@ -54,7 +57,10 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
 
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element) => {
-      const wallet = wallets.find(({ id }) => target.props.value === id)!;
+      const wallet = safeGetElemFromArray(
+        wallets,
+        ({ id }) => target.props.value === id
+      );
       const depositCurrencyNew = wallet.currency;
       setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.currency, depositCurrencyNew);
       setFieldValue(

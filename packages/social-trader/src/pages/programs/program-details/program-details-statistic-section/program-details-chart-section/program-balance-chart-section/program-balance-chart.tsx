@@ -1,6 +1,7 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
+import Crashable from "decorators/crashable";
 import * as React from "react";
 import {
   Area,
@@ -84,5 +85,5 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-const ProgramBalanceChart = React.memo(_ProgramBalanceChart);
+const ProgramBalanceChart = React.memo(Crashable(_ProgramBalanceChart));
 export default ProgramBalanceChart;

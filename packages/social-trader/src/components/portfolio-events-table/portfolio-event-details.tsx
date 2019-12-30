@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import GVButton from "components/gv-button";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import Crashable from "decorators/crashable";
 import { InvestmentEventItemViewModel } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React, { memo } from "react";
@@ -43,7 +44,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   );
 };
 
-const PortfolioEventsDetails = memo(_PortfolioEventsDetails);
+const PortfolioEventsDetails = memo(Crashable(_PortfolioEventsDetails));
 export default PortfolioEventsDetails;
 
 interface Props {

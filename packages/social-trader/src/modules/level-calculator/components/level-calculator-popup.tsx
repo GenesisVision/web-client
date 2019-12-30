@@ -2,6 +2,7 @@ import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
+import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import {
   LevelsParamsInfo,
@@ -264,7 +265,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
   );
 };
 
-const LevelCalculatorPopup = withLoader(React.memo(_LevelCalculatorPopup));
+const LevelCalculatorPopup = withLoader(
+  React.memo(Crashable(_LevelCalculatorPopup))
+);
 export default LevelCalculatorPopup;
 
 interface Props extends ILevelCalculatorProps {

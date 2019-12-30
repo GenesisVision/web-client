@@ -11,6 +11,7 @@ import CreateFundSettingsAddAsset, {
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
+import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
 const _ReallocateField: React.FC<Props> = ({
@@ -98,7 +99,10 @@ const _ReallocateField: React.FC<Props> = ({
 
   const handleRemove: FundAssetRemoveType = useCallback(
     currency => () => {
-      const asset = stateAssets.find(item => item.asset === currency)!;
+      const asset = safeGetElemFromArray(
+        stateAssets,
+        item => item.asset === currency
+      );
       setNewAsset({ ...asset, percent: asset.mandatoryFundPercent });
       submitChanges();
     },

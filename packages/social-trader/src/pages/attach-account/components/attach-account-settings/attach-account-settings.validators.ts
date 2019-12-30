@@ -18,7 +18,7 @@ const attachAccountSettingsValidationSchema = ({
       t("attach-account-page.settings.validation.api-secret")
     ),
     [ATTACH_ACCOUNT_FIELDS.key]: string().required(
-      t("attach-account-page.settings.validation.api-secret")
+      t("attach-account-page.settings.validation.api-key")
     )
   });
 

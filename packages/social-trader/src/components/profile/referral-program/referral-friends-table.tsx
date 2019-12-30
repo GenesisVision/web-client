@@ -1,13 +1,12 @@
 import TableCell from "components/table/components/table-cell";
 import TableContainer from "components/table/components/table-container";
 import TableRow from "components/table/components/table-row";
-import * as faker from "faker";
 import { ReferralFriend } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { referralFriendsTableSelector } from "reducers/profile-reducer";
 import { formatDate } from "shared/utils/dates";
-import { tableLoaderCreator } from "utils/helpers";
+import { getRandomEmail, tableLoaderCreator } from "utils/helpers";
 
 import { getFriendsTable } from "./services/referral-program-services";
 
@@ -47,7 +46,7 @@ const COLUMNS = [
 
 const getReferralFriendLoaderData = (): ReferralFriend => ({
   date: (new Date().toString() as unknown) as Date,
-  emailMask: faker.internet.email()
+  emailMask: getRandomEmail()
 });
 
 const ReferralFriendsLoaderData = tableLoaderCreator(

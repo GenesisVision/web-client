@@ -5,12 +5,16 @@ import { WalletBaseData } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
 
 const _WalletField: React.FC<Props> = ({ name, wallets, onChange }) => {
   const [t] = useTranslation();
   const onChangeCurrencyFrom = useCallback(
     (event: ISelectChangeEvent, target: JSX.Element): void => {
-      const wallet = wallets.find(wallet => wallet.id === target.props.value)!;
+      const wallet = safeGetElemFromArray(
+        wallets,
+        wallet => wallet.id === target.props.value
+      );
       onChange(wallet);
     },
     [wallets]

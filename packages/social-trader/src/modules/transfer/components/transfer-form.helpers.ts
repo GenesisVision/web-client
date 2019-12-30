@@ -123,7 +123,7 @@ export interface ITransferFormOwnProps {
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
   errorMessage?: string;
-  title?: string;
+  title: string;
   currentItemContainer?: TRANSFER_CONTAINER;
 }
 

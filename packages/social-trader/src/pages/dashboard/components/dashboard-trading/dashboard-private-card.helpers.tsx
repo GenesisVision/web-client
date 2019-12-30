@@ -75,8 +75,8 @@ export const getMinDepositCreateProgram = (
   const broker = programMinDepositAmounts.find(
     ({ serverType }) => serverType === brokerType
   );
-  return broker
-    ? broker.minDepositCreateAsset.find(({ currency }) => currency === curr)!
-        .amount
-    : 0;
+  const minDepositCreateAssetInCurr =
+    !!broker &&
+    broker.minDepositCreateAsset.find(({ currency }) => currency === curr);
+  return minDepositCreateAssetInCurr ? minDepositCreateAssetInCurr.amount : 0;
 };

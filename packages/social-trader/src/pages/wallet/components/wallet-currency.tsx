@@ -2,9 +2,6 @@ import WalletImage from "components/avatar/wallet-image/wallet-image";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { WalletData } from "gv-api-web";
-import useIsOpen from "hooks/is-open.hook";
-import TransferPopup from "modules/transfer/transfer-popup";
-import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 

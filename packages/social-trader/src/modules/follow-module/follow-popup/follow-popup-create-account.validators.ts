@@ -80,7 +80,7 @@ export const CreateExternalAccountFormValidationSchema = ({
       t("attach-account-page.settings.validation.api-secret")
     ),
     [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key]: string().required(
-      t("attach-account-page.settings.validation.api-secret")
+      t("attach-account-page.settings.validation.api-key")
     )
   });
 

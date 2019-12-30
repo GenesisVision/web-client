@@ -22,6 +22,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
 import { compose } from "redux";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
@@ -37,9 +38,10 @@ const _CreateAccountSettings: React.FC<Props> = ({
   values: { brokerAccountTypeId, depositAmount, currency, enterMinDeposit }
 }) => {
   const isKycConfirmed = useSelector(kycConfirmedSelector);
-  const accountType = broker.accountTypes.find(
+  const accountType = safeGetElemFromArray(
+    broker.accountTypes,
     ({ id }) => brokerAccountTypeId === id
-  )!;
+  );
   const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;

@@ -40,6 +40,11 @@ $mobile-title-divider: 2;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+    & .fees-info__notes {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
   &__paragraph {
     @include adaptive-padding(bottom, $padding-xsmall);
