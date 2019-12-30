@@ -22,6 +22,9 @@ export type TNavHeader = TNavFooter & {
   hideMobile?: boolean;
 };
 
+export const FEES_ROUTE = "/fees";
+export const REFERRAL_PROGRAM_ROUTE = "/referral-program";
+
 export const navHeader: TNavHeader[] = [
   {
     name: "Invest",
@@ -57,12 +60,12 @@ export const navHeader: TNavHeader[] = [
       {
         name: "Fees",
         hideMobile: true,
-        href: "/fees"
+        href: FEES_ROUTE
       },
       {
         name: "Referral program",
         hideMobile: true,
-        href: "/referral-program"
+        href: REFERRAL_PROGRAM_ROUTE
       },
       {
         name: "Feedback",
@@ -76,11 +79,11 @@ export const navHeader: TNavHeader[] = [
 export const navFooter: TNavHeader[] = [
   {
     name: "Referral program",
-    href: "/referral-program"
+    href: REFERRAL_PROGRAM_ROUTE
   },
   {
     name: "Fees",
-    href: "/fees"
+    href: FEES_ROUTE
   },
   {
     name: "Blog",
