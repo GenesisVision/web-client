@@ -14,6 +14,7 @@ const CookieMessage: React.FC = () => {
   }, [hasAcceptance]);
   const handleClick = useCallback(() => {
     setCookie(ACCEPT_PARAM_NAME, "y");
+    setAcceptance(true);
   }, [hasAcceptance]);
   if (hasAcceptance) return null;
   return (
