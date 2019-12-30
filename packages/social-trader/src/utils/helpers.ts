@@ -130,7 +130,7 @@ const isServer = () => {
   return global.hasOwnProperty("window");
 };
 
-const getRandomInteger = (min: number, max: number): number =>
+const getRandomInteger = (min: number = 0, max: number = 100): number =>
   Math.floor(min + Math.random() * (max + 1 - min));
 
 const getRandomText = (params: Object) => randomString.generate(params);
@@ -145,6 +145,9 @@ export const getRandomWord = (params?: Object) =>
 
 export const getRandomWords = (length: number) =>
   tableLoaderCreator(getRandomWord, length).join(" ");
+
+export const getRandomEmail = () =>
+  `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
 export const getRandomColorNumber = () => getRandomInteger(0, 255).toString(16);
 
