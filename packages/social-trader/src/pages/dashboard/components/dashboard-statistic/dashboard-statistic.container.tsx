@@ -1,11 +1,8 @@
 import "./dashboard-statistic.scss";
 
-import Link from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { EVENTS_ROUTE } from "routes/dashboard.routes";
 import { CurrencyEnum } from "utils/types";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";

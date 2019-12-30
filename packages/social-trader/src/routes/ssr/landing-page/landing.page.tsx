@@ -6,7 +6,7 @@ import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem,
-  PlatformEvents
+  PlatformEvent
 } from "gv-api-web";
 import React, { useEffect } from "react";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
@@ -27,10 +27,10 @@ import {
 import { setCookie } from "shared/utils/cookie";
 
 const _LandingPage: React.FC<Props> = ({
-  programsData,
-  fundsData,
-  followsData,
-  eventsData,
+  programs,
+  funds,
+  follows,
+  events,
   refLink
 }) => {
   useEffect(() => {
@@ -41,20 +41,20 @@ const _LandingPage: React.FC<Props> = ({
     <Layout title="Genesis Vision">
       <main className="home">
         <FirstScreen />
-        <EventsContainer events={eventsData.events} />
+        <EventsContainer events={events} />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
-            <FollowsContainer follows={followsData.items} />
+            <FollowsContainer follows={follows.items} />
           </div>
         </section>
         <section className="home__section">
           <div className="home__container">
-            <ProgramsContainer programs={programsData.items} />
+            <ProgramsContainer programs={programs.items} />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
-            <FundsContainer funds={fundsData.items} />
+            <FundsContainer funds={funds.items} />
           </div>
         </section>
         <section id="info" className="home__section home__section--bg-white">
@@ -89,9 +89,9 @@ const _LandingPage: React.FC<Props> = ({
 
 interface Props {
   refLink?: string;
-  programsData: ItemsViewModelProgramDetailsListItem;
-  fundsData: ItemsViewModelFundDetailsListItem;
-  followsData: ItemsViewModelFollowDetailsListItem;
-  eventsData: PlatformEvents;
+  programs: ItemsViewModelProgramDetailsListItem;
+  funds: ItemsViewModelFundDetailsListItem;
+  follows: ItemsViewModelFollowDetailsListItem;
+  events: Array<PlatformEvent>;
 }
 export const LandingPage = React.memo(_LandingPage);
