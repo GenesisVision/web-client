@@ -24,11 +24,6 @@
   &__notes {
     grid-column: 4/10;
     margin-top: 100px;
-
-    h3,
-    h4 {
-      margin-bottom: 30px;
-    }
   }
 
   &__list-notes {
@@ -92,7 +87,7 @@
     }
   }
 
-  &__text {
+  p.fees-info__text {
     margin-bottom: 30px;
   }
 }

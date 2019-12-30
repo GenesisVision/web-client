@@ -6,10 +6,15 @@
 .internal {
   background-color: $main-color;
   color: $row-color;
+  line-height: 2;
 
-  //&__section {
-  //	background-color: $main-color;
-  //}
+  &__article {
+    margin-bottom: 30px;
+
+    @include media-breakpoint-desktop() {
+      margin-bottom: 50px;
+    }
+  }
 
   &__container {
     @include container();
@@ -46,6 +51,23 @@
         left: -43px;
       }
     }
+  }
+
+  h1 {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  h3,
+  h4 {
+    margin-bottom: 30px;
+  }
+
+  p {
+    margin-bottom: 20px;
   }
 
   a {
