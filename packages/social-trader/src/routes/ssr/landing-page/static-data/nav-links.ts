@@ -108,7 +108,7 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Privacy policy",
-    href: "/privacy-policy.html"
+    href: "/privacy-policy"
   },
   {
     name: "Terms and conditions",
