@@ -72,12 +72,12 @@ const ReferralProgramSection: React.FC = () => {
             <ul className="internal__list">
               <li className="internal__list-item">
                 Trading Fee commission: generated from each transaction if the
-                referral is trading on Genesis Markets.
+                referral is trading on Genesis Markets Crypto.
               </li>
               <li className="internal__list-item">
                 Entry Fee commission: the Entry Fee that is charged to investors
                 entering the referrals' programs created with any trading
-                account other than Genesis Markets.
+                account other than Genesis Markets Crypto.
               </li>
               <li className="internal__list-item">
                 Platform Success fee commission: It is calculated according to
