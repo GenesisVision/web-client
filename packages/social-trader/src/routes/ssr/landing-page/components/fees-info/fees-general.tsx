@@ -30,7 +30,7 @@ const _FeesGeneral: React.FC = () => (
                     <span>{<DoneIcon />}</span>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />} (0,05%)
+                    <b>&mdash;</b>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     {<DoneIcon />}
@@ -43,23 +43,23 @@ const _FeesGeneral: React.FC = () => (
                     {<DoneIcon />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />} (0,05%)
+                    {<DoneIcon />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    &mdash;
+                    <b>&mdash;</b>
                   </td>
                 </tr>
                 <tr className="fees-table__row">
                   <td className="fees-table__cell">GV Commission</td>
                   <td className="fees-table__cell">15%</td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    &mdash;
+                    <b>&mdash;</b>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     {<DoneIcon />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    &mdash;
+                    <b>&mdash;</b>
                   </td>
                 </tr>
               </tbody>
@@ -80,8 +80,7 @@ const _FeesGeneral: React.FC = () => (
               a trade transaction when copy trading. No profit means no Platform
               Success fee is charged
             </li>
-            <li className="fees-info__note-item fees-info__note-item--star">
-              {" "}
+            <li className="fees-info__note-item">
               For external account, GV charges a 15% volume fee from all copied
               trades
             </li>
@@ -119,10 +118,10 @@ const _FeesGeneral: React.FC = () => (
             <tbody>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Fee</td>
-                <td className="fees-table__cell">0,22 GVT</td>
+                <td className="fees-table__cell">1 GVT</td>
                 <td className="fees-table__cell">0,01 ETH</td>
                 <td className="fees-table__cell">0,0005 BTC</td>
-                <td className="fees-table__cell">0,22 USDT</td>
+                <td className="fees-table__cell">2 USDT</td>
               </tr>
             </tbody>
           </table>
