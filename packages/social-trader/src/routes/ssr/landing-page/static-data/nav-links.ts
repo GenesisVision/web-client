@@ -116,7 +116,7 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Download terminal",
-    href: "/downloads.html"
+    href: "/downloads"
   }
 ];
 

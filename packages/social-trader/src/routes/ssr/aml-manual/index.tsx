@@ -8,7 +8,7 @@ import Layout from "routes/ssr/landing-page/layouts/_layout";
 
 export const AmlManual: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Fees">
+    <Layout title="Genesis Vision Aml Manual">
       <main className="internal">
         <div className="internal__container">
           <AmlManualSection />

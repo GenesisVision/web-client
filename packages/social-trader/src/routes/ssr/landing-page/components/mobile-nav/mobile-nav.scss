@@ -23,7 +23,11 @@
   }
 
   &--open {
-    height: calc(100% - 104px);
+    height: calc(100% - 64px);
+
+    @include media-breakpoint-tablet() {
+      height: calc(100% - 130px);
+    }
   }
 
   &__list {

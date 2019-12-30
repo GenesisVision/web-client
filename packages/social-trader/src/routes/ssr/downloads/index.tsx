@@ -3,15 +3,15 @@ import "routes/ssr/landing-page/styles/internal.scss";
 
 import { NextPage } from "next";
 import React from "react";
-import TermsSection from "routes/ssr/landing-page/components/terms-section/terms-section";
+import DownloadsSection from "routes/ssr/landing-page/components/downloads-section/downloads-section";
 import Layout from "routes/ssr/landing-page/layouts/_layout";
 
-export const Terms: NextPage = () => {
+export const Downloads: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Terms and conditions">
+    <Layout title="Genesis Vision Downloads">
       <main className="internal">
         <div className="internal__container">
-          <TermsSection />
+          <DownloadsSection />
         </div>
       </main>
     </Layout>

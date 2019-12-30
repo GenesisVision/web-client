@@ -8,7 +8,7 @@ import Layout from "routes/ssr/landing-page/layouts/_layout";
 
 export const PrivacyPolicy: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Glossary">
+    <Layout title="Genesis Vision Privacy Policy">
       <main className="internal">
         <div className="internal__container">
           <PrivacyPolicySection />
