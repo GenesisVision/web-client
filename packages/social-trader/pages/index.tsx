@@ -2,16 +2,12 @@ import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem,
-  PlatformEvents
+  PlatformEvent
 } from "gv-api-web";
-import { fetchFollows } from "modules/follows-table/services/follows-table.service";
-import { fetchFunds } from "modules/funds-table/services/funds-table.service";
-import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { NextPage, NextPageContext } from "next";
 import React from "react";
 import { LandingPage } from "routes/ssr/landing-page/landing.page";
 import platformApi from "services/api-client/platform-api";
-import { subtractDate } from "shared/utils/dates";
 import { addRequestAnimationFrame } from "utils/helpers";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
@@ -23,79 +19,53 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
   const { ref } = getParamsFromCtx(ctx);
   try {
     addRequestAnimationFrame();
-    const dateTo = new Date();
-    const dateFrom = subtractDate(dateTo, 1, "month");
-    const [
-      programsData,
-      fundsData,
-      followsData,
-      eventsData
-    ] = await Promise.all([
-      fetchPrograms({
-        sorting: "ByProfitDesc",
-        levelMin: 1,
-        levelMax: 7,
-        dateFrom,
-        dateTo,
-        skip: 0,
-        take: 6
-      }),
-      fetchFunds({
-        sorting: "ByProfitDesc",
-        showIn: "USDT",
-        dateFrom,
-        dateTo,
-        skip: 0,
-        take: 12
-      }),
-      fetchFollows({
-        sorting: "BySubscribersDesc",
-        skip: 0,
-        take: 6
-      }),
-      platformApi.getPlatformEvents({
-        take: 5
-      })
-    ]);
+    const {
+      events,
+      follows,
+      programs,
+      funds
+    } = await platformApi.getPlatformLandingInfo({
+      eventsTake: 5,
+      followTake: 6,
+      programsTake: 6,
+      fundsTake: 12
+    });
     return {
-      programsData,
-      fundsData,
-      followsData,
-      eventsData,
+      events,
+      follows,
+      programs,
+      funds,
       refLink: ref
     };
   } catch (e) {
-    const programsData = {
+    const funds = {
       total: 0,
       items: []
     };
-    const fundsData = {
+    const follows = {
       total: 0,
       items: []
     };
-    const followsData = {
+    const programs = {
       total: 0,
       items: []
-    };
-    const eventsData = {
-      events: []
     };
     return {
-      programsData,
-      fundsData,
-      followsData,
-      eventsData,
-      refLink: ref
+      events: [],
+      follows,
+      programs,
+      funds,
+      refLink: ""
     };
   }
 };
 
 interface Props {
   refLink?: string;
-  programsData: ItemsViewModelProgramDetailsListItem;
-  fundsData: ItemsViewModelFundDetailsListItem;
-  followsData: ItemsViewModelFollowDetailsListItem;
-  eventsData: PlatformEvents;
+  events: Array<PlatformEvent>;
+  follows: ItemsViewModelFollowDetailsListItem;
+  programs: ItemsViewModelProgramDetailsListItem;
+  funds: ItemsViewModelFundDetailsListItem;
 }
 
 export default IndexPage;

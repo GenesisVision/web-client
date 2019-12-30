@@ -19,7 +19,6 @@ module.exports = async app => {
   const server = express();
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
-  server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
 
