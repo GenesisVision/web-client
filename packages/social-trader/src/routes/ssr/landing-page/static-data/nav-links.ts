@@ -112,7 +112,7 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Terms and conditions",
-    href: "/terms.html"
+    href: "/terms"
   },
   {
     name: "Download terminal",
