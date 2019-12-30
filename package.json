@@ -70,6 +70,7 @@
     "yup": "^0.26.6"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/runtime": "7.0.0-beta.55",
     "@hot-loader/react-dom": "^16.8.6",
     "@juggle/resize-observer": "^1.1.1",
