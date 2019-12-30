@@ -1,6 +1,3 @@
-import "./styles/index.scss";
-import "./styles/home.scss";
-
 import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
@@ -88,7 +85,7 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
       fundsData,
       followsData,
       eventsData,
-      refLink: ""
+      refLink: ref
     };
   }
 };
