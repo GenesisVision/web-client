@@ -6,11 +6,9 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Popover from "components/popover/popover";
+import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { WalletsGrandTotal } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import WalletDeposit, {
@@ -19,7 +17,6 @@ import WalletDeposit, {
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _WalletWidget: React.FC<Props> = ({
@@ -42,36 +39,28 @@ const _WalletWidget: React.FC<Props> = ({
       </div>
       <Popover anchorEl={anchor} onClose={clearAnchor}>
         <div className="wallet-details">
-          <div className="wallet-details__item">
+          <StatisticItemList vertical>
             <StatisticItem label={t("wallet-widget.total-balance")}>
               {`${formatCurrencyValue(total, currency)} ${currency}`}
             </StatisticItem>
-          </div>
-          <div className="wallet-details__item">
             <StatisticItem label={t("wallet-widget.available")}>
               {`${formatCurrencyValue(available, currency)} ${currency}`}
             </StatisticItem>
-          </div>
-          <div className="wallet-details__item">
             <StatisticItem label={t("wallet-widget.invested")}>
               {`${formatCurrencyValue(invested, currency)} ${currency}`}
             </StatisticItem>
-          </div>
-          <div className="wallet-details__item">
             <StatisticItem label={t("wallet-widget.trading")}>
               {`${formatCurrencyValue(trading, currency)} ${currency}`}
             </StatisticItem>
-          </div>
-          <div className="wallet-details__item">
-            <div className="wallet-details__value">
+            <StatisticItem>
               <Link
                 to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)}
                 onClick={clearAnchor}
               >
                 {t("wallet-widget.details")} ›
               </Link>
-            </div>
-          </div>
+            </StatisticItem>
+          </StatisticItemList>
         </div>
       </Popover>
     </>
@@ -83,10 +72,5 @@ interface Props {
   className?: string;
 }
 
-const WalletWidget = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<WalletsGrandTotal>>
->(
-  withBlurLoader,
-  React.memo
-)(_WalletWidget);
+const WalletWidget = withBlurLoader(React.memo(_WalletWidget));
 export default WalletWidget;
