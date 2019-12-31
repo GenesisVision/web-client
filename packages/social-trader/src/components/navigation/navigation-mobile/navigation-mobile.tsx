@@ -1,7 +1,5 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { LogoutIcon } from "components/icon/logout-icon";
-import { ToType } from "components/link/link";
-import { useToLink } from "components/link/link.helper";
 import NavigationItem, {
   NavigationButton
 } from "components/navigation/navigation-item";
@@ -23,7 +21,6 @@ const _NavigationMobile: React.FC<Props> = ({
   logout,
   backPath
 }) => {
-  const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
     <Sidebar open={isOpenNavigation} onClose={onClose}>
