@@ -2,8 +2,6 @@ import "./lp-header.scss";
 
 import Link from "components/link/link";
 import React from "react";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
@@ -14,9 +12,10 @@ import {
   navFooter,
   navHeader
 } from "routes/ssr/landing-page/static-data/nav-links";
+import authService from "services/auth-service";
 
 const LPHeader: React.FC = () => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isAuthenticated = authService.isAuthenticated();
   return (
     <header className="lp-header">
       <div className="lp-header__container">
