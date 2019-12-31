@@ -3,6 +3,7 @@ import "./header.scss";
 import { logout } from "components/auth/signin/signin.service";
 import { GLOBAL_SEARCH_ROUTE } from "components/global-search/global-search.routes";
 import GVButton from "components/gv-button";
+import HeaderIcon from "components/header/header-icon";
 import { Icon } from "components/icon/icon";
 import { SearchIcon } from "components/icon/search-icon";
 import Link from "components/link/link";
@@ -43,11 +44,11 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
         <Navigation menuItems={topMenuItems} className="header__navigation" />
       </div>
       <div className="header__center">
-        <div className="header__search">
-          <Link to={linkCreator(GLOBAL_SEARCH_ROUTE, backPath)}>
+        <Link to={linkCreator(GLOBAL_SEARCH_ROUTE, backPath)}>
+          <HeaderIcon>
             <SearchIcon />
-          </Link>
-        </div>
+          </HeaderIcon>
+        </Link>
       </div>
       <div className="header__right">
         {isAuthenticated ? (
