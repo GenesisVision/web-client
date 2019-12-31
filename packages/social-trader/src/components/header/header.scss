@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_hide";
 
 .header {
   display: flex;
@@ -14,46 +15,23 @@
     margin-right: $padding-small/2;
   }
 
-  &__buttons {
-    display: none !important;
-  }
-
-  &__navigation {
-    display: none !important;
-  }
-
-  &__profile {
-    display: none;
-    margin-left: auto;
-  }
-
+  &__buttons,
+  &__navigation,
+  &__profile,
   &__wallet {
-    display: none !important;
-    margin-right: auto;
+    @include hide(flex);
   }
 
   &__right,
   &__left,
   &__center {
     display: flex;
-    flex-direction: row;
     align-items: center;
   }
 
   &__center {
     flex-grow: 2;
     justify-content: flex-end;
-  }
-
-  &__separator {
-    flex-grow: 2;
-    justify-content: center;
-    align-self: stretch;
-    display: none;
-    &:before {
-      content: "";
-      border-left: 2px solid #1f2b36;
-    }
   }
 
   &__buttons {
@@ -68,38 +46,13 @@
     }
     &__right {
       flex-grow: 2;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
     &__menu {
       display: flex;
     }
-    &__navigation {
-      display: inherit !important;
-    }
-
-    &__currency {
-      min-width: 100px;
-      margin: initial;
-    }
-
     &__search {
       margin-right: 0;
-    }
-
-    &__profile {
-      display: flex;
-    }
-
-    &__wallet {
-      display: flex !important;
-    }
-
-    &__separator {
-      display: flex;
-    }
-
-    &__buttons {
-      display: inherit !important;
     }
   }
 }
