@@ -10,7 +10,7 @@ export const newsItems: TNews[] = [
     title: "Genesis Vision 2.0",
     text: "Long awaited update released",
     tag: "Hot",
-    url: ""
+    url: "https://blog.genesis.vision/genesis-vision-2-0-e8471c73e1be"
   },
   {
     title: "Genesis Vision",

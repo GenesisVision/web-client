@@ -9,11 +9,7 @@
   &__container {
     @include container();
     padding-top: 40px;
-    padding-bottom: 100px;
-
-    @include media-breakpoint-tablet() {
-      padding-top: 80px;
-    }
+    padding-bottom: 150px;
 
     @include media-breakpoint-large-desktop() {
       padding-bottom: 200px;
