@@ -6,11 +6,11 @@ import { TableCardActionsItem } from "components/table/components/table-card/tab
 import { BrokerTradeServerType, ProgramMinInvestAmount } from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import ConfirmContainer from "modules/confirm/confirm-container";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import * as React from "react";
-import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 export const MakeProgramButton: React.FC<{

@@ -14,11 +14,11 @@ import {
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";

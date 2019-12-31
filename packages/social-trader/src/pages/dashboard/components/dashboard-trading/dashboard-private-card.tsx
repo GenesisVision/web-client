@@ -16,6 +16,7 @@ import {
   DECIMAL_SCALE_SMALL_VALUE
 } from "constants/constants";
 import { DashboardTradingAsset } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
@@ -34,7 +35,6 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
-import { useTranslation } from "shared/i18n";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";

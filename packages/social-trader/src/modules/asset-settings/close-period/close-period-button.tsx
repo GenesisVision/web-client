@@ -1,8 +1,8 @@
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import ConfirmClosePeriodContainer from "modules/asset-settings/close-period/confirm-close-period-container";
 import React from "react";
-import { useTranslation } from "shared/i18n";
 
 const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({
   id,

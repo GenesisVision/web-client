@@ -10,6 +10,7 @@ import TagFilter from "components/table/components/filtering/tag-filter/tag-filt
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import { calculateTotalPages } from "components/table/helpers/paging.helpers";
 import useRouteFilters from "hooks/route-filters.hook";
+import { useTranslation } from "i18n";
 import {
   CURRENCY_MAP_NAME,
   DEFAULT_PROGRAM_TABLE_FILTERS,
@@ -25,7 +26,6 @@ import {
   programTagsSelector
 } from "reducers/platform-reducer";
 import { LOGIN_ROUTE } from "routes/app.routes";
-import { useTranslation } from "shared/i18n";
 
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
 import {

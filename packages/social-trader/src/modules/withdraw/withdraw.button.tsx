@@ -1,12 +1,12 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({

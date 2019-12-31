@@ -1,8 +1,8 @@
 import Page from "components/page/page";
 import withDefaultLayout from "decorators/with-default-layout";
+import { useTranslation } from "i18n";
 import { NextPage } from "next";
 import React from "react";
-import { useTranslation } from "shared/i18n";
 
 const Component: NextPage<IErrorPage> = ({
   code,

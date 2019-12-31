@@ -1,7 +1,7 @@
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import React from "react";
-import { useTranslation } from "shared/i18n";
 
 import ChangePasswordTradingAccountPopup from "./change-password-trading-account-popup";
 

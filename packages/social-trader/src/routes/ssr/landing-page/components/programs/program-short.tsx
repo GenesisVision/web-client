@@ -11,9 +11,9 @@ import {
   DECIMAL_SCALE_SMALL_VALUE
 } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
