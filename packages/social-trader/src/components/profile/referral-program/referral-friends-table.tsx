@@ -5,7 +5,7 @@ import { ReferralFriend } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { referralFriendsTableSelector } from "reducers/profile-reducer";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { getRandomEmail, tableLoaderCreator } from "utils/helpers";
 
 import { getFriendsTable } from "./services/referral-program-services";

@@ -1,11 +1,11 @@
 import DepositContainer from "components/deposit/components/deposit-container";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
 import { IDialogProps } from "components/dialog/dialog";
+import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({

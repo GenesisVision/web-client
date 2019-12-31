@@ -8,7 +8,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
-import { localizedDate } from "shared/utils/dates";
+import { localizedDate } from "utils/dates";
 
 type ManagerProfile = any;
 

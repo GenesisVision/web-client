@@ -1,11 +1,11 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
+import { FUND_CURRENCY } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { FUND_CURRENCY } from "shared/constants/constants";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
 import FundWithdrawAmountForm, {

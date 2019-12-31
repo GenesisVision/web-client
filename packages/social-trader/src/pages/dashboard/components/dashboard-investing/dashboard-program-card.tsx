@@ -14,6 +14,7 @@ import {
 } from "components/table/components/table-card/table-card-actions";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET, STATUS } from "constants/constants";
 import { ProgramInvestingDetailsList } from "gv-api-web";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
@@ -21,7 +22,6 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET, STATUS } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue } from "utils/formatter";

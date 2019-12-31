@@ -24,7 +24,7 @@ import {
   brokersInfo,
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
-import { setCookie } from "shared/utils/cookie";
+import { setCookie } from "utils/cookie";
 
 const _LandingPage: React.FC<Props> = ({
   programs,

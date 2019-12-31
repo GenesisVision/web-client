@@ -3,11 +3,11 @@ import AssetStatusLabel from "components/asset-status/asset-status-label";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { TableCell, TableRow } from "components/table/components";
+import { DEFAULT_DECIMAL_SCALE, STATUS } from "constants/constants";
 import { SignalSubscriber } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { DEFAULT_DECIMAL_SCALE, STATUS } from "shared/constants/constants";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

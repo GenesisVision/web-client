@@ -9,8 +9,8 @@ import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { assetTitleShape } from "shared/utils/validators/validators";
 import { SetSubmittingType } from "utils/types";
+import { assetTitleShape } from "utils/validators/validators";
 import { object } from "yup";
 
 const _PublicInfoForm: React.FC<Props> = ({

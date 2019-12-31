@@ -7,7 +7,7 @@ import { updateCurrency } from "modules/currency-select/services/currency-select
 import { NextPage } from "next";
 import React, { Component } from "react";
 import { Dispatch } from "redux";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { addRequestAnimationFrame } from "utils/helpers";
 import { NextPageWithReduxContext } from "utils/types";
 

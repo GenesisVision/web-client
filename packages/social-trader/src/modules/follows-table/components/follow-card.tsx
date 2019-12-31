@@ -12,6 +12,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/follows/follow-details/follow-button";
 import * as React from "react";
@@ -19,7 +20,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 

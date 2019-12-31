@@ -1,6 +1,6 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
   <div className="program-period-tooltip">

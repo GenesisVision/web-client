@@ -7,7 +7,7 @@ import {
 } from "pages/funds/fund-details/services/fund-details.service";
 import React from "react";
 import { compose } from "redux";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
 export const fundDetailsCreator = (Component: React.ComponentType) => {

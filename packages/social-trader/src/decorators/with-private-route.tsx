@@ -5,7 +5,7 @@ import nextCookie from "next-cookies";
 import qs from "qs";
 import React, { Component } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
-import { getTokenName } from "shared/utils/get-token-name";
+import { getTokenName } from "utils/get-token-name";
 
 const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
   class extends Component {

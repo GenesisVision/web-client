@@ -11,8 +11,8 @@ import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
 import UnFollowButton from "pages/follows/follow-details/unfollow-button";
 import React from "react";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
-import { formatDate } from "shared/utils/dates";
 import { composeFollowDetailsUrl } from "utils/compose-url";
+import { formatDate } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
 
 const _SubscriptionsTableRow: React.FC<Props> = ({

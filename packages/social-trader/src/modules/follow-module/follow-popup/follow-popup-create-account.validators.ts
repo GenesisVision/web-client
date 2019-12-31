@@ -3,7 +3,7 @@ import { CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS } from "modules/follow-module/follo
 import {
   convertFromCurrency,
   convertToCurrency
-} from "shared/utils/currency-converter";
+} from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { lazy, number, object, Schema, string } from "yup";
 

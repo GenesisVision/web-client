@@ -1,5 +1,6 @@
 import "./program-settings.scss";
 
+import { ASSET } from "constants/constants";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
   ProgramCreateAssetPlatformInfo,
@@ -12,7 +13,6 @@ import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";

@@ -16,7 +16,7 @@ import { ReallocationModel } from "gv-api-web";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "pages/funds/fund-details/fund-details.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
 import { getFundReallocateHistory } from "../../services/fund-details.service";

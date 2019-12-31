@@ -1,12 +1,12 @@
 import "./notification-settings.scss";
 
+import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import { NotificationSettingList } from "gv-api-web";
 import AssetNotificationsGeneral from "modules/asset-notifications/asset-notifications-general";
 import { NOTIFICATIONS } from "modules/asset-notifications/asset-notifications.types";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";

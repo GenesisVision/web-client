@@ -1,5 +1,5 @@
 import { CancelablePromise, SimpleChart, SimpleChartPoint } from "gv-api-web";
-import { getCookie, setCookie } from "shared/utils/cookie";
+import { getCookie, setCookie } from "utils/cookie";
 import { getRandomInteger } from "utils/helpers";
 
 import { ChartDefaultPeriod } from "../../chart/chart-period/chart-period.helpers";

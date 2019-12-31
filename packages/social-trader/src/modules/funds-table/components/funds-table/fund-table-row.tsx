@@ -10,6 +10,7 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
+import { ASSET } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
@@ -17,9 +18,8 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
-import { ASSET } from "shared/constants/constants";
-import { distanceDate } from "shared/utils/dates";
 import { composeFundsDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {

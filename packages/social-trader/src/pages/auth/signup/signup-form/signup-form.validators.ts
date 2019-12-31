@@ -1,7 +1,4 @@
-import {
-  emailValidator,
-  passwordValidator
-} from "shared/utils/validators/validators";
+import { emailValidator, passwordValidator } from "utils/validators/validators";
 import { boolean, object, ref, string } from "yup";
 
 const confirmPasswordValidator = string()

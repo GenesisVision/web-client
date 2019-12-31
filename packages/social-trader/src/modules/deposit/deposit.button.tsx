@@ -1,12 +1,12 @@
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit";
 import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 

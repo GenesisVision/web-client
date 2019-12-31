@@ -1,9 +1,9 @@
 import "./asset-status.scss";
 
 import classNames from "classnames";
+import { STATUS } from "constants/constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { STATUS } from "shared/constants/constants";
 
 const getStatusClassName = (status: STATUS, className?: string) =>
   classNames("asset-status", className, {

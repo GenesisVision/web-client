@@ -1,4 +1,5 @@
 import { Push } from "components/link/link";
+import { CREATE_ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
@@ -6,7 +7,6 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
-import { CREATE_ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import {

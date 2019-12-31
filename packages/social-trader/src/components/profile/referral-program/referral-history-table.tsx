@@ -15,7 +15,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { referralHistoryTableSelector } from "reducers/profile-reducer";
 import filesService from "services/file-service";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 
 import { getHistoryTable } from "./services/referral-program-services";

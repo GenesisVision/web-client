@@ -16,6 +16,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import { UpdateRowFuncType } from "components/table/components/table.types";
+import { ASSET, FUND_CURRENCY } from "constants/constants";
 import { FundInvestingDetailsList } from "gv-api-web";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
@@ -23,7 +24,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET, FUND_CURRENCY } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";

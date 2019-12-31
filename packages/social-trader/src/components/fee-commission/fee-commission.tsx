@@ -1,8 +1,8 @@
 import "./fee-commission.scss";
 
 import classNames from "classnames";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import * as React from "react";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
 export const FeeCommission: React.FC<Props> = ({

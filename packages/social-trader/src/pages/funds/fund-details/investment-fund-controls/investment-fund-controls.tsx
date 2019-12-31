@@ -2,13 +2,13 @@ import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
 import { GV_BTN_SIZE } from "components/gv-button";
+import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import InvestmentFundInfo from "pages/funds/fund-details/fund-details-description/investment-fund-info";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
 
 const _InvestmentFundControls: React.FC<Props> = ({
   fundDescription,

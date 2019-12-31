@@ -6,7 +6,7 @@ import { TableCell, TableRow } from "components/table/components";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

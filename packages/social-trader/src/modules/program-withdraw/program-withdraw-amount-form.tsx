@@ -9,7 +9,7 @@ import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { boolean, mixed, number, object } from "yup";
 

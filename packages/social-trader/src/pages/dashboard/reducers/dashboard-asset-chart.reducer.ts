@@ -1,5 +1,5 @@
+import { IDashboardAssetChart } from "constants/constants";
 import defaultReducer from "reducers/reducer-creators/default-reducer";
-import { IDashboardAssetChart } from "shared/constants/constants";
 import { Nullable } from "utils/types";
 
 import {

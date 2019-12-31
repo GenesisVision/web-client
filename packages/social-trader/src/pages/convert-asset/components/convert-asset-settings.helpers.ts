@@ -8,7 +8,7 @@ import {
   signalSuccessFeeShape,
   signalVolumeFeeShape,
   successFeeShape
-} from "shared/utils/validators/validators";
+} from "utils/validators/validators";
 import { boolean, mixed, number, object, string } from "yup";
 
 import {

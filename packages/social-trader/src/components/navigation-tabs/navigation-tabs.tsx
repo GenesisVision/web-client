@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
-import replaceParams from "shared/utils/replace-params";
+import replaceParams from "utils/replace-params";
 
 const _NavigationTabs: React.FC<Props> = ({
   t,

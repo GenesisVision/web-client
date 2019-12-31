@@ -2,11 +2,11 @@ import "./program-period-line.scss";
 
 import classNames from "classnames";
 import GVProgramPeriod from "components/gv-program-period";
+import { STATUS } from "constants/constants";
 import { PeriodStatus } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { STATUS } from "shared/constants/constants";
-import { distanceDate } from "shared/utils/dates";
+import { distanceDate } from "utils/dates";
 
 const _ProgramPeriodLine: React.FC<Props> = ({
   start,

@@ -7,12 +7,12 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import { UpdateRowFuncType } from "components/table/components/table.types";
+import { ASSET } from "constants/constants";
 import { TAnchor, TEvent } from "hooks/anchor.hook";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 const _TableCardActions: React.FC<Props> = ({
   clearAnchor,

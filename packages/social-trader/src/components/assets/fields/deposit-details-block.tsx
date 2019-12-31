@@ -5,7 +5,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import WalletSelect from "components/wallet-select/wallet-select";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import { convertToCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";

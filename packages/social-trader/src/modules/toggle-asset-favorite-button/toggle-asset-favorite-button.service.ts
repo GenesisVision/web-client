@@ -1,9 +1,9 @@
+import { ASSET } from "constants/constants";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { ASSET } from "shared/constants/constants";
 
 import {
   addFavoriteFollowAction,

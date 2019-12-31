@@ -3,6 +3,7 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
+import { ASSET } from "constants/constants";
 import {
   CancelablePromise,
   Currency,
@@ -20,7 +21,6 @@ import eventsApi from "services/api-client/events-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { ASSET } from "shared/constants/constants";
 import {
   ApiActionResponse,
   CurrencyEnum,

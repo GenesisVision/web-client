@@ -1,4 +1,4 @@
-import { subtractDate } from "shared/utils/dates";
+import { subtractDate } from "utils/dates";
 
 export type TChartPeriod =
   | "day"

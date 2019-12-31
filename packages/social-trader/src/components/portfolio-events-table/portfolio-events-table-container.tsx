@@ -9,6 +9,7 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import { ASSET } from "constants/constants";
 import { InvestmentEventViewModel } from "gv-api-web";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React, { useMemo } from "react";
@@ -17,7 +18,6 @@ import {
   allEventsSelector,
   assetTypeValuesSelector
 } from "reducers/platform-reducer";
-import { ASSET } from "shared/constants/constants";
 
 import { DashboardPortfolioEventsLoaderData } from "../dashboard/dashboard.loaders-data";
 import PortfolioEventsTableRow from "./portfolio-events-table-row";

@@ -8,7 +8,7 @@ import Crashable from "decorators/crashable";
 import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { formatDate, humanizeDate } from "shared/utils/dates";
+import { formatDate, humanizeDate } from "utils/dates";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {

@@ -4,6 +4,7 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
+import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
@@ -16,7 +17,6 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import filesService from "services/file-service";
-import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl

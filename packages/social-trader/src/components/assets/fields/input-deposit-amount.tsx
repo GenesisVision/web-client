@@ -2,7 +2,7 @@ import InputAmountField from "components/input-amount-field/input-amount-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

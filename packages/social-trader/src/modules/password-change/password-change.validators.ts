@@ -1,5 +1,5 @@
 import { WithTranslation } from "react-i18next";
-import { passwordValidator } from "shared/utils/validators/validators";
+import { passwordValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
 import { PASSWORD_CHANGE_FORM_FIELDS } from "./password-change-form";

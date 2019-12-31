@@ -1,11 +1,11 @@
 import "./details-description-control.scss";
 
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
+import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import DetailsDescriptionControl from "./details-description-control";
 

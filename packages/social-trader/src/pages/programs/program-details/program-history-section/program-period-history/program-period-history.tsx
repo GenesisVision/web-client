@@ -18,7 +18,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import filesService from "services/file-service";
-import { formatDate, humanizeDate } from "shared/utils/dates";
+import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

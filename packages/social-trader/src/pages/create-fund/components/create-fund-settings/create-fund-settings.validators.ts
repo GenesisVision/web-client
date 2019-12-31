@@ -2,15 +2,15 @@ import inputImageShape from "components/form/input-image/input-image.validation"
 import { FundAssetPart } from "gv-api-web";
 import i18next from "i18next";
 import { WithTranslation } from "react-i18next";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import { convertToCurrency } from "utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import {
   assetDescriptionShape,
   assetTitleShape,
   entryFeeShape,
   exitFeeShape
-} from "shared/utils/validators/validators";
-import { formatCurrencyValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
+} from "utils/validators/validators";
 import { array, lazy, number, object } from "yup";
 
 import {

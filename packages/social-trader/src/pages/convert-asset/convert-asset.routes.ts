@@ -1,7 +1,7 @@
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
-import replaceParams from "shared/utils/replace-params";
+import replaceParams from "utils/replace-params";
 
 export const MAKE_PROGRAM_FROM_SIGNAL_PAGE_ROUTE = "/make-program-from-signal";
 export const MAKE_PROGRAM_FROM_SIGNAL_PAGE_SLUG_ROUTE = `${MAKE_PROGRAM_FROM_SIGNAL_PAGE_ROUTE}/:${SLUG_URL_PARAM_NAME}`;

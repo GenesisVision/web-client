@@ -9,7 +9,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { SetSubmittingType } from "utils/types";
 

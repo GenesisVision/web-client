@@ -7,7 +7,7 @@ import {
   FUNDS_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
 } from "routes/funds.routes";
-import getParams from "shared/utils/get-params";
+import getParams from "utils/get-params";
 
 export const redirectToFund = () => (
   dispatch: Dispatch,

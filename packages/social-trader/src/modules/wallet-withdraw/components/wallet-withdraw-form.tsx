@@ -21,14 +21,14 @@ import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 import {
   btcWalletValidator,
   ethGvtWalletValidator,
   twoFactorValidator
-} from "shared/utils/validators/validators";
-import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+} from "utils/validators/validators";
 import { lazy, object, Schema } from "yup";
 
 const _WalletWithdrawForm: React.FC<

@@ -6,7 +6,7 @@ import { fetchPrograms } from "modules/programs-table/services/programs-table.se
 import { InvestPage } from "pages/invest/invest.page";
 import { InvestAssetsType } from "pages/invest/invest.types";
 import React from "react";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<Props, {}> = ({ assets }) => {

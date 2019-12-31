@@ -7,12 +7,12 @@ import FacetContainer, {
 import GVButton from "components/gv-button";
 import Page from "components/page/page";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { IDataModel } from "constants/constants";
 import { CancelablePromise, LevelInfo } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { fetchInvestmentsLevels } from "pages/programs/program-details/service/program-details.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { IDataModel } from "shared/constants/constants";
 
 import LevelIcon from "../details/details-description-section/about-levels/level-icon";
 import ProgramsFacetTable from "../programs/programs-facet/components/programs-facet-table";

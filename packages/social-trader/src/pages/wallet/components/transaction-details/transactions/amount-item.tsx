@@ -1,11 +1,11 @@
 import "../transaction-details.scss";
 
 import classNames from "classnames";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import { AmountItem as AmountItemType, Color } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
 const _AmountItem: React.FC<Props> = ({

@@ -11,6 +11,10 @@ import {
   TableCardActionsItem,
   TableCardActionsItemContainer
 } from "components/table/components/table-card/table-card-actions";
+import {
+  DECIMAL_SCALE_BIG_VALUE,
+  DECIMAL_SCALE_SMALL_VALUE
+} from "constants/constants";
 import { DashboardTradingAsset } from "gv-api-web";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
@@ -30,13 +34,9 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
-import {
-  DECIMAL_SCALE_BIG_VALUE,
-  DECIMAL_SCALE_SMALL_VALUE
-} from "shared/constants/constants";
 import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeAccountDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
