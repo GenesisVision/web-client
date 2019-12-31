@@ -55,7 +55,6 @@ import {
   fetchPortfolioEventsWithoutTable
 } from "pages/programs/program-details/service/program-details.service";
 import { Action } from "redux";
-//import managerApi from "shared/services/api-client/manager-api";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
