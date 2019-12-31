@@ -1,5 +1,6 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { IDataModel } from "constants/constants";
 import {
   CancelablePromise,
   DashboardAssetChart,
@@ -30,7 +31,6 @@ import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
 import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
-import { IDataModel } from "shared/constants/constants";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 import * as actions from "../actions/dashboard.actions";

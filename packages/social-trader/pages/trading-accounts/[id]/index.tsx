@@ -10,7 +10,7 @@ import {
 } from "pages/accounts/account-details/services/account-details.service";
 import React from "react";
 import { compose } from "redux";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {

@@ -2,7 +2,7 @@ import withLoader from "decorators/with-loader";
 import { ManagerNotificationSettingList } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import replaceParams from "shared/utils/replace-params";
+import replaceParams from "utils/replace-params";
 
 import NotificationEntity from "./notification-entity";
 

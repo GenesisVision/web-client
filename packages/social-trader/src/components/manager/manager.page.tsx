@@ -11,7 +11,7 @@ import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { localizedDate } from "shared/utils/dates";
+import { localizedDate } from "utils/dates";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
   const [t] = useTranslation();

@@ -7,6 +7,7 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import { CREATE_ASSET } from "constants/constants";
 import useTab from "hooks/tab.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +16,6 @@ import { currencySelector } from "reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { CREATE_ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";

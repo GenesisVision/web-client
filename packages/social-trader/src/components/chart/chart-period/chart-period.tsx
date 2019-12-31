@@ -5,7 +5,7 @@ import GVButton from "components/gv-button";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { localizedDate } from "shared/utils/dates";
+import { localizedDate } from "utils/dates";
 import { HandlePeriodChangeType } from "utils/types";
 
 import {

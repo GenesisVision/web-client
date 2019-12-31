@@ -4,6 +4,7 @@ import FacetCardsContainer, {
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
+import { useTranslation } from "i18n";
 import FollowsTableSsr from "modules/follows-table/components/follows-table-ssr";
 import { NextComponentType } from "next";
 import React from "react";
@@ -13,7 +14,6 @@ import {
   FOLLOW_FACET_FOLDER_ROUTE,
   FOLLOW_TAB_ROUTE
 } from "routes/invest.routes";
-import { useTranslation } from "shared/i18n";
 import { composeFollowFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 

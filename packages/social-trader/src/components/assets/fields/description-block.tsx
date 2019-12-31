@@ -1,7 +1,7 @@
 import LogoField from "components/logo-field/logo-field";
+import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import DescriptionField from "./description-field";
 import TitleField from "./title-field";

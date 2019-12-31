@@ -6,7 +6,7 @@ import {
 import { composeDefaultDateRangeFilter } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
-import { ASSET, ROLE } from "shared/constants/constants";
+import { ASSET, ROLE } from "constants/constants";
 import { MiddlewareDispatch } from "utils/types";
 
 import {

@@ -7,12 +7,12 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
 import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
 import { ProvidersButton } from "pages/programs/program-details/program-history-section/program-trades/providers-button";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 
 const _ProgramTradesRow: React.FC<Props> = ({

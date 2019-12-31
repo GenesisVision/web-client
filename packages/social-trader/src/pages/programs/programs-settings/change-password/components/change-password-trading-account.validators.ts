@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { twoFactorValidator } from "shared/utils/validators/validators";
+import { twoFactorValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
 interface IChangePasswordTradingAccountValidationSchema {

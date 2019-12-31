@@ -1,7 +1,7 @@
 import Tooltip from "components/tooltip/tooltip";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";

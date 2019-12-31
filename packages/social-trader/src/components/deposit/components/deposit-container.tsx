@@ -1,5 +1,6 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import FormError from "components/form/form-error/form-error";
+import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import {
   fetchAvailableWallets,
@@ -9,7 +10,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 import DepositPopup from "./deposit-popup";

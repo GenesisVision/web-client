@@ -17,7 +17,7 @@ import { fetchRate as fetchRateMethod } from "services/rate-service";
 import {
   convertToCurrency,
   CURRENCY_FRACTIONS
-} from "shared/utils/currency-converter";
+} from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import {
   allowPositiveValuesNumberFormat,

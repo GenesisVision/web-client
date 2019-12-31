@@ -1,9 +1,9 @@
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

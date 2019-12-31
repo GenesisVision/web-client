@@ -12,17 +12,17 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { ASSET } from "shared/constants/constants";
-import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({

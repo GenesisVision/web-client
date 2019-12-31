@@ -3,7 +3,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 import { MultiWalletTransaction } from "../../../wallet.types";
 import TransactionDetailsPopup from "../../transaction-details/transaction-details-popup";

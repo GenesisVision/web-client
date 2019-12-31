@@ -1,7 +1,7 @@
 import SettingsBlock from "components/settings-block/settings-block";
+import { ASSET } from "constants/constants";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import CloseAsset, { CLOSEABLE_ASSET } from "./close-asset/close-asset";
 import ClosePeriod from "./close-period/close-period";

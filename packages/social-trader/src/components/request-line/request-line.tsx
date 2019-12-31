@@ -8,7 +8,7 @@ import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { localizedDate } from "shared/utils/dates";
+import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _RequestLine: React.FC<Props> = ({

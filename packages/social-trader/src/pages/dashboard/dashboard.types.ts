@@ -1,3 +1,4 @@
+import { ASSET } from "constants/constants";
 import {
   AssetInvestmentRequest,
   DashboardAsset,
@@ -11,7 +12,6 @@ import {
   ItemsViewModelFollowDetailsListItem,
   MoneyLocation
 } from "gv-api-web";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 export type TDashboardRequest = AssetInvestmentRequest;

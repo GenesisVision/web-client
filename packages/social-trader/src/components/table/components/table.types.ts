@@ -1,6 +1,6 @@
+import { IDataModel } from "constants/constants";
 import { CancelablePromise } from "gv-api-web";
 import { Action } from "redux";
-import { IDataModel } from "shared/constants/constants";
 import { MiddlewareDispatch, TGetState, VoidFuncType } from "utils/types";
 
 import { FILTER_TYPE } from "../helpers/filtering.helpers";

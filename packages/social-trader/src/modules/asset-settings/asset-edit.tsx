@@ -9,11 +9,11 @@ import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "utils/types";
 import {
   assetDescriptionShape,
   assetTitleShape
-} from "shared/utils/validators/validators";
-import { SetSubmittingType } from "utils/types";
+} from "utils/validators/validators";
 import { object } from "yup";
 
 const _AssetEdit: React.FC<Props> = ({

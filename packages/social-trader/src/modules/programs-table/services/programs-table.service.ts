@@ -10,6 +10,7 @@ import {
 } from "components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "components/table/helpers/sorting.helpers";
 import { push } from "connected-react-router";
+import { IDataModel } from "constants/constants";
 import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import { RootState } from "reducers/root-reducer";
@@ -22,8 +23,7 @@ import {
 } from "routes/programs.routes";
 import programApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { IDataModel } from "shared/constants/constants";
-import getParams from "shared/utils/get-params";
+import getParams from "utils/get-params";
 import { NextPageWithReduxContext } from "utils/types";
 
 import * as programTableActions from "../actions/programs-table.actions";

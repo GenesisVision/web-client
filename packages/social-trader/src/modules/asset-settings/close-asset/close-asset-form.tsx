@@ -9,8 +9,8 @@ import { CloseableAssetType } from "modules/asset-settings/close-asset/close-ass
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { twoFactorValidator } from "shared/utils/validators/validators";
 import { SetSubmittingType } from "utils/types";
+import { twoFactorValidator } from "utils/validators/validators";
 import { object } from "yup";
 
 const _CloseAssetForm: React.FC<

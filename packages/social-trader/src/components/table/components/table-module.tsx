@@ -3,9 +3,9 @@ import {
   IPaging
 } from "components/table//helpers/paging.helpers";
 import { updateFilter } from "components/table/helpers/filtering.helpers";
+import { IDataModel } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useState } from "react";
-import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
 import {

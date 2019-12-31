@@ -1,4 +1,4 @@
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
+import { ROLE, ROLE_ENV } from "constants/constants";
 
 const useRole = () => {
   return ROLE_ENV.toLowerCase() as ROLE;

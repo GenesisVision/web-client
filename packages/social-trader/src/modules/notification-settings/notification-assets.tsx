@@ -1,3 +1,4 @@
+import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import {
   FundNotificationSettingList,
@@ -5,7 +6,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 import { composeAssetNotificationsUrl } from "utils/compose-url";
 
 import {

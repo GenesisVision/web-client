@@ -8,6 +8,7 @@ import GVTab from "components/gv-tabs/gv-tab";
 import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { TableSelectorType } from "components/table/components/table.types";
 import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
+import { ASSET } from "constants/constants";
 import {
   PersonalFollowDetailsFull,
   PersonalFundDetails,
@@ -23,7 +24,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, FeesType } from "utils/types";
 
 import {

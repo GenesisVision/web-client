@@ -1,7 +1,7 @@
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { distanceDate } from "shared/utils/dates";
+import { distanceDate } from "utils/dates";
 
 export const _PeriodTimeLeft: React.FC<Props> = ({
   t,

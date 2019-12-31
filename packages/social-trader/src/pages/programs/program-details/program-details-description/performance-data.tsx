@@ -4,6 +4,7 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import { STATUS } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   BrokerDetails,
@@ -13,7 +14,6 @@ import {
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import filesService from "services/file-service";
-import { STATUS } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _PerformanceData: React.FC<Props> = ({

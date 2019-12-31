@@ -11,7 +11,7 @@ import React, { ComponentType, useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import { calculatePercentage } from "shared/utils/currency-converter";
+import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";

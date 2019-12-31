@@ -6,13 +6,13 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import filesService from "services/file-service";
-import { ASSET } from "shared/constants/constants";
 import {
   createFundNotificationsToUrl,
   createFundSettingsToUrl

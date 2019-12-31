@@ -3,6 +3,7 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
+import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import {
   AssetPublicDetails,
@@ -16,7 +17,6 @@ import { ProgramDescriptionDataType } from "pages/programs/program-details/progr
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
   onApply,

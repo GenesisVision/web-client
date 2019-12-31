@@ -1,9 +1,9 @@
 import "./details-description.scss";
 
 import { ToType } from "components/link/link";
+import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import { PersonalDetailsType } from "../../details.types";
 import DetailsFavorite from "./controls/details-favorite";

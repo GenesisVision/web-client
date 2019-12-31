@@ -20,7 +20,7 @@ import {
   GLOBAL_TABLE_VIEW,
   globalTableViewSelector
 } from "reducers/tables-view-reducer";
-import { setCookie } from "shared/utils/cookie";
+import { setCookie } from "utils/cookie";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";

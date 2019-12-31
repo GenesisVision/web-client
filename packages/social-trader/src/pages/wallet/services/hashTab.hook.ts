@@ -1,7 +1,7 @@
 import useTab from "hooks/tab.hook";
 import Router from "next/router";
 import { useCallback, useEffect } from "react";
-import { getLocation } from "shared/utils/location";
+import { getLocation } from "utils/location";
 
 const useHashTab = <T>(initValue: T) => {
   const { tab, setTab } = useTab<T>(initValue);

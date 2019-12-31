@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import {
   calculatePercentage,
   convertFromCurrency
-} from "shared/utils/currency-converter";
+} from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

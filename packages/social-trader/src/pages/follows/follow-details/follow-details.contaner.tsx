@@ -3,6 +3,7 @@ import { DetailsTags } from "components/details/details-description-section/deta
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { InvestmentBlockDetailsType } from "components/details/details-description-section/details-investment/details-investment.helpers";
 import Page from "components/page/page";
+import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
 import { financialStatisticTableSelector } from "pages/programs/program-details/reducers/program-history.reducer";
@@ -15,7 +16,6 @@ import {
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ASSET } from "shared/constants/constants";
 import {
   createFollowNotificationsToUrl,
   createFollowSettingsToUrl

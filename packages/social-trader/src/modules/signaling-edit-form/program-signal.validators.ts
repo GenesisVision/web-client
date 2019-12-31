@@ -3,7 +3,7 @@ import i18next from "i18next";
 import {
   signalSuccessFeeShape,
   signalVolumeFeeShape
-} from "shared/utils/validators/validators";
+} from "utils/validators/validators";
 import { object } from "yup";
 
 export const SignalValidationSchema = ({

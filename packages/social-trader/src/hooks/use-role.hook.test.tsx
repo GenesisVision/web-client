@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react-hooks";
+import { ROLE_ENV } from "constants/constants";
 import React from "react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
-import { ROLE_ENV } from "shared/constants/constants";
 
 import useRole from "./use-role.hook";
 

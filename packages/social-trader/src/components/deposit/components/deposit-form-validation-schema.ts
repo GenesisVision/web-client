@@ -1,5 +1,5 @@
 import { WithTranslation } from "react-i18next";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { lazy, number, object } from "yup";
 

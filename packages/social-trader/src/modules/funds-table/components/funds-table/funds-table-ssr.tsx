@@ -6,6 +6,7 @@ import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fu
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { calculateTotalPages } from "components/table/helpers/paging.helpers";
 import useRouteFilters from "hooks/route-filters.hook";
+import { useTranslation } from "i18n";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -13,7 +14,6 @@ import {
   fundAssetsSelector,
   platformCurrenciesSelector
 } from "reducers/platform-reducer";
-import { useTranslation } from "shared/i18n";
 
 import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";

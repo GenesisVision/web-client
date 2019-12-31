@@ -4,6 +4,7 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
+import { ROLE, ROLE_ENV } from "constants/constants";
 import {
   CancelablePromise,
   InvestmentEventViewModels,
@@ -18,7 +19,6 @@ import brokersApi from "services/api-client/brokers-api";
 import followApi from "services/api-client/follow-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
-import { ROLE, ROLE_ENV } from "shared/constants/constants";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {

@@ -1,3 +1,4 @@
+import { CREATE_ASSET } from "constants/constants";
 import {
   CancelablePromise,
   NewFundRequest,
@@ -8,7 +9,6 @@ import { ICreateFundSettingsFormValues } from "pages/create-fund/components/crea
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
-import { CREATE_ASSET } from "shared/constants/constants";
 
 export type ICreateAssetSettingsFormValues =
   | ICreateFundSettingsFormValues

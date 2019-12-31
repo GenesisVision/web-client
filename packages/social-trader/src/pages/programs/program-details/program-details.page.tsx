@@ -1,7 +1,7 @@
+import { ASSET } from "constants/constants";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { ASSET } from "shared/constants/constants";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
 import ProgramDetailsContainer from "./program-details.contaner";

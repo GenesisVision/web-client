@@ -1,5 +1,5 @@
+import { ASSET } from "constants/constants";
 import React, { useCallback } from "react";
-import { ASSET } from "shared/constants/constants";
 
 import ChartAsset from "./chart-asset";
 import { TChartAsset } from "./multi-chart.types";

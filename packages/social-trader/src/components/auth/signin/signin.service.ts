@@ -12,7 +12,7 @@ import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
-import { removeCookie } from "shared/utils/cookie";
+import { removeCookie } from "utils/cookie";
 import { ResponseError, SetSubmittingType } from "utils/types";
 
 import {

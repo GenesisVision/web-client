@@ -1,5 +1,6 @@
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ASSET, IDashboardAssetChart } from "constants/constants";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
@@ -9,7 +10,6 @@ import {
   TDashboardTradingStatistic,
   TRecommendation
 } from "pages/dashboard/dashboard.types";
-import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import {
   getRandomColor,
   getRandomInteger,

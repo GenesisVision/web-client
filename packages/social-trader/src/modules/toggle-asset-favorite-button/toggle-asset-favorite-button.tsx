@@ -1,11 +1,11 @@
 import GVButton from "components/gv-button";
 import { UpdateRowFuncType } from "components/table/components/table.types";
+import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { ASSET } from "shared/constants/constants";
 
 import { useToggleFavoriteDispatch } from "./toggle-asset-favorite-button.hook";
 import {

@@ -2,7 +2,7 @@ import { StatisticItemList } from "components/statistic-item-list/statistic-item
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 import { AccountDetailsDataType } from "../account-details.types";
 

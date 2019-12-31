@@ -1,9 +1,7 @@
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
-import {
-  checkCurrencyValue,
-  CURRENCY_FRACTIONS
-} from "shared/utils/currency-converter";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { CurrencyEnum } from "utils/types";
+
+import { checkCurrencyValue, CURRENCY_FRACTIONS } from "./currency-converter";
 
 const reverseString = (value: string | number): string =>
   String(value)

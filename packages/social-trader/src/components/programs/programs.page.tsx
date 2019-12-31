@@ -4,6 +4,7 @@ import FacetCardsContainer, {
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
+import { useTranslation } from "i18n";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
 import React from "react";
@@ -13,7 +14,6 @@ import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "routes/programs.routes";
-import { useTranslation } from "shared/i18n";
 import { composeProgramFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 

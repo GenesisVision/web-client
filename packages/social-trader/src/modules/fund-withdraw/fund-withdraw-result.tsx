@@ -4,7 +4,7 @@ import { DialogListItem } from "components/dialog/dialog-list-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { calculatePercentage } from "shared/utils/currency-converter";
+import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 
 interface IFundWithdrawResultProps {

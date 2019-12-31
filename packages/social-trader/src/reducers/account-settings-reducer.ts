@@ -5,7 +5,7 @@ import {
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import twoFactorReducer from "reducers/2fa-reducer";
 import { combineReducers } from "redux";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { fieldSelector } from "utils/selectors";
 import { CurrencyEnum } from "utils/types";
 

@@ -3,10 +3,10 @@ import Popover, {
   ORIENTATION_POPOVER,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { STATUS } from "constants/constants";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import { STATUS } from "shared/constants/constants";
 
 import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequestsContainer from "./asset-status-requests.container";

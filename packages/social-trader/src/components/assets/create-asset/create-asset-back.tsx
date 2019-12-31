@@ -1,10 +1,10 @@
 import BackButtonBody from "components/back-button/back-button-body";
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
+import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 const _CreateAssetBack: React.FC<Props> = ({ onApply, asset }) => {
   const [t] = useTranslation();

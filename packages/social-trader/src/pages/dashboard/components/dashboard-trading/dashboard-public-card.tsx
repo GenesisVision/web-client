@@ -9,8 +9,14 @@ import TableCard, {
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
+import {
+  ASSET,
+  DECIMAL_SCALE_BIG_VALUE,
+  DECIMAL_SCALE_SMALL_VALUE
+} from "constants/constants";
 import { AssetType, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
+import { useTranslation } from "i18n";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
@@ -21,14 +27,8 @@ import {
   FUND_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE
 } from "routes/invest.routes";
-import {
-  ASSET,
-  DECIMAL_SCALE_BIG_VALUE,
-  DECIMAL_SCALE_SMALL_VALUE
-} from "shared/constants/constants";
-import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeAssetDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 

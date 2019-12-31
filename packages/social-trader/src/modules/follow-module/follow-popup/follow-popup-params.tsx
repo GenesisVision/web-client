@@ -21,7 +21,7 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 

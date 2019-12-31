@@ -24,8 +24,8 @@ import {
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
 import fundsApi from "services/api-client/funds-api";
 import authService from "services/auth-service";
-import { getCookie } from "shared/utils/cookie";
-import getParams from "shared/utils/get-params";
+import { getCookie } from "utils/cookie";
+import getParams from "utils/get-params";
 import {
   CurrencyEnum,
   MiddlewareDispatch,

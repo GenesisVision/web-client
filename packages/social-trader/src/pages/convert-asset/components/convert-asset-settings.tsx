@@ -14,6 +14,7 @@ import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
 import SettingsBlock from "components/settings-block/settings-block";
+import { ASSET } from "constants/constants";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { InjectedFormikProps, withFormik } from "formik";
 import {
@@ -26,7 +27,6 @@ import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import convertAssetSettingsValidationSchema, {
