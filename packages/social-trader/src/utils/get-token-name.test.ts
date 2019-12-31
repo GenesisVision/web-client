@@ -1,4 +1,4 @@
-import { getTokenName } from "shared/utils/get-token-name";
+import { getTokenName } from "./get-token-name";
 
 describe("test get-token", () => {
   it("must be gvManagerToken", () => {

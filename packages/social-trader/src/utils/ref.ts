@@ -1,4 +1,4 @@
-import { REF_PARAM_NAME } from "shared/constants/constants";
+import { REF_PARAM_NAME } from "constants/constants";
 
 import { getCookie, setCookie } from "./cookie";
 

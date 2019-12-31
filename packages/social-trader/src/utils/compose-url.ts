@@ -1,3 +1,4 @@
+import { ToType } from "components/link/link";
 import { createToUrl } from "components/link/link.helper";
 import {
   FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
@@ -8,6 +9,7 @@ import {
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "components/notifications/notifications.routes";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ASSET } from "constants/constants";
 import { AssetType, AssetTypeExt } from "gv-api-web";
 import {
   ACCOUNT_DETAILS_ROUTE,
@@ -41,10 +43,8 @@ import {
   PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE
 } from "routes/programs.routes";
-import { ASSET } from "shared/constants/constants";
-import replaceParams from "shared/utils/replace-params";
 
-import { ToType } from "../components/link/link";
+import replaceParams from "./replace-params";
 
 export const composeUrl = (route: string, slugParamName: string) => (
   slugUrl: string
