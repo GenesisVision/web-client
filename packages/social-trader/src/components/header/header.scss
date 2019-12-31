@@ -45,18 +45,6 @@
     justify-content: flex-end;
   }
 
-  &__currency {
-  }
-
-  &__search {
-    display: flex;
-    margin-right: $padding-xsmall;
-
-    a {
-      display: inline-flex;
-    }
-  }
-
   &__separator {
     flex-grow: 2;
     justify-content: center;
