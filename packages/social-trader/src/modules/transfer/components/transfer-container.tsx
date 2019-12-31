@@ -1,4 +1,5 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import Crashable from "decorators/crashable";
 import { InternalTransferRequestType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -109,15 +110,15 @@ const _TransferContainer: React.FC<Props> = ({
 };
 
 interface Props {
-  singleCurrentItemContainer?: boolean;
-  onApply?: VoidFunction;
+  singleCurrentItemContainer: boolean;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
-  onClose: () => void;
+  onClose: VoidFunction;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
-  title?: string;
-  currentItemContainer?: TRANSFER_CONTAINER;
+  title: string;
+  currentItemContainer: TRANSFER_CONTAINER;
 }
 
-const TransferContainer = React.memo(_TransferContainer);
+const TransferContainer = React.memo(Crashable(_TransferContainer));
 export default TransferContainer;

@@ -1,6 +1,7 @@
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import ImgCreditCard from "routes/ssr/landing-page/images/slider/credit-card.svg";
 import ImgPeople from "routes/ssr/landing-page/images/slider/people.svg";
+import { REFERRAL_PROGRAM_ROUTE } from "routes/ssr/landing-page/static-data/nav-links";
 
 export type TSlides = {
   id: number;
@@ -25,6 +26,6 @@ export const slides: TSlides[] = [
     text:
       "Use the Genesis Vision two-level Affiliate Network to receive a percentage of the commission paid by your referrals… and your referrals’ referrals!",
     image: ImgPeople,
-    link: "/referral-program"
+    link: REFERRAL_PROGRAM_ROUTE
   }
 ];

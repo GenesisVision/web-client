@@ -1,4 +1,3 @@
-import faker from "faker";
 import {
   Broker,
   CancelablePromise,
@@ -9,6 +8,7 @@ import {
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
+import { getRandomInteger, getRandomWord, getRandomWords } from "utils/helpers";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";
@@ -78,19 +78,19 @@ const getCovertMethod = ({
 type TGetConvertMethodReturn = (request: RequestType) => CancelablePromise<any>; //ProgramCreateResult
 
 export const getBrokerLoaderData: () => any = () => ({
-  name: faker.lorem.word(),
-  description: faker.lorem.words(11),
+  name: getRandomWord(),
+  description: getRandomWords(11),
   logo: "",
-  terms: faker.lorem.word(),
-  assets: faker.lorem.word(),
-  fee: faker.random.number(),
-  leverageMin: faker.random.number(),
-  leverageMax: faker.random.number(),
+  terms: getRandomWord(),
+  assets: getRandomWord(),
+  fee: getRandomInteger(),
+  leverageMin: getRandomInteger(),
+  leverageMax: getRandomInteger(),
   accountTypes: [
     {
-      id: faker.lorem.word(),
-      name: faker.lorem.word(),
-      description: faker.lorem.words(11),
+      id: getRandomWord(),
+      name: getRandomWord(),
+      description: getRandomWords(11),
       type: "MetaTrader4",
       leverages: [10],
       currencies: ["GVT"],

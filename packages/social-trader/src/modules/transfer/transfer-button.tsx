@@ -13,7 +13,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _TransferButton: React.FC<Props> = ({
-  singleCurrentItemContainer,
+  singleCurrentItemContainer = false,
   size = GV_BTN_SIZE.LARGE,
   withIcon,
   color,
@@ -28,6 +28,7 @@ const _TransferButton: React.FC<Props> = ({
   onApply,
   disabled
 }) => {
+  const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   const Button = type === WALLET_BUTTON_TYPE.SMALL ? SmallButton : FullButton;
   return (
@@ -46,7 +47,7 @@ const _TransferButton: React.FC<Props> = ({
         currentItem={currentItem}
         sourceType={sourceType}
         destinationType={destinationType}
-        title={title}
+        title={title || t("transfer.title")}
         currentItemContainer={currentItemContainer}
         onApply={onApply}
         open={isOpenPopup}
@@ -65,12 +66,12 @@ interface Props {
   variant?: "text" | "outlined" | "contained";
   label?: string;
   disabled?: boolean;
-  onApply?: VoidFunction;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
-  sourceType?: InternalTransferRequestType;
-  destinationType?: InternalTransferRequestType;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
   title?: string;
-  currentItemContainer?: TRANSFER_CONTAINER;
+  currentItemContainer: TRANSFER_CONTAINER;
 }
 
 const FullButton: React.FC<{

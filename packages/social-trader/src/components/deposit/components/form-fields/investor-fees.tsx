@@ -1,6 +1,6 @@
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
-import withLoader from "decorators/with-loader";
+import Crashable from "decorators/crashable";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -11,7 +11,7 @@ import {
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-import { TFees, TInvestInfo } from "../deposit.types";
+import { TFees } from "../deposit.types";
 
 const _InvestorFees: React.FC<Props> = ({
   fees: { gvCommission, entryFee = 0 },
@@ -78,4 +78,4 @@ interface Props {
   walletCurrency: CurrencyEnum;
 }
 
-export const InvestorFees = withLoader(React.memo(_InvestorFees));
+export const InvestorFees = React.memo(Crashable(_InvestorFees));

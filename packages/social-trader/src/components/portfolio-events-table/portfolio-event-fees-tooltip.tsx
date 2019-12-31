@@ -1,6 +1,7 @@
 import FeeCommission from "components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import { FeeDetails } from "gv-api-web";
 import React from "react";
@@ -30,7 +31,7 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
 };
 
 const PortfolioEventFeesTooltip = withLoader(
-  React.memo(_PortfolioEventFeesTooltip)
+  React.memo(Crashable(_PortfolioEventFeesTooltip))
 );
 export default PortfolioEventFeesTooltip;
 

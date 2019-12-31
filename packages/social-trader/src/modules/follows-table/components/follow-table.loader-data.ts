@@ -3,17 +3,20 @@ import {
   managerLoaderData,
   mockDate
 } from "components/details/details.loader-data";
-import faker from "faker";
 import {
   personalProgramDetailsLoaderData,
   statisticListLoaderData
 } from "pages/programs/program-details/program-details.loader-data";
-import { getRandomInteger } from "utils/helpers";
-import { tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomColor,
+  getRandomInteger,
+  getRandomWord,
+  tableLoaderCreator
+} from "utils/helpers";
 
 const tagLoaderDataCreator = () => ({
-  name: faker.lorem.word(),
-  color: faker.internet.color()
+  name: getRandomWord(),
+  color: getRandomColor()
 });
 const tagsLoaderDataCreator = () => tableLoaderCreator(tagLoaderDataCreator);
 
@@ -37,7 +40,7 @@ export const followDetailsLoaderDataCreator = () => ({
   logo: "",
   url: "",
   color: "#858585",
-  title: faker.lorem.word(),
+  title: getRandomWord(),
   description: "",
   status: "None",
   creationDate: mockDate,

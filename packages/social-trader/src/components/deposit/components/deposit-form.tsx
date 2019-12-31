@@ -17,6 +17,7 @@ import { compose } from "redux";
 import { ASSET } from "shared/constants/constants";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import { depositValidationSchema } from "./deposit-form-validation-schema";
@@ -68,9 +69,10 @@ const _DepositForm: React.FC<
     setAvailableToInvest(convertToCurrency(availableToInvestProp, rate));
   }, [availableToInvestProp, rate]);
   useEffect(() => {
-    const available = wallets.find(
+    const available = safeGetElemFromArray(
+      wallets,
       ({ currency }) => currency === walletCurrency
-    )!.available;
+    ).available;
     setAvailableInWallet(available);
     setFieldValue(DEPOSIT_FORM_FIELDS.availableInWallet, available);
   }, [walletCurrency, wallets]);

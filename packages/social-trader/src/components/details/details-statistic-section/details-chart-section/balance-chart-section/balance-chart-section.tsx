@@ -3,6 +3,7 @@ import {
   TUseChartPeriod,
   TUseChartStateValues
 } from "components/details/details-statistic-section/details.chart.types";
+import Crashable from "decorators/crashable";
 import * as React from "react";
 import { useSelector } from "react-redux";
 
@@ -49,5 +50,5 @@ export interface IBalanceChartSectionProps {
   renderBalanceChart: TRenderBalanceChart;
 }
 
-const BalanceChartSection = React.memo(_BalanceChartSection);
+const BalanceChartSection = React.memo(Crashable(_BalanceChartSection));
 export default BalanceChartSection;

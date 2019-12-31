@@ -19,6 +19,7 @@ import {
   withTranslation as translate
 } from "react-i18next";
 import { compose } from "redux";
+import { safeGetElemFromArray } from "utils/helpers";
 import { SetSubmittingType } from "utils/types";
 
 import ConfirmChangeBroker from "./confirm-change-broker";
@@ -26,16 +27,12 @@ import ConfirmChangeBroker from "./confirm-change-broker";
 const _ChangeBrokerForm: React.FC<Props> = ({
   isSignalProgram,
   currentLeverage,
-  onSubmit,
-  submitForm,
   handleSubmit,
   values,
   dirty,
-  isValid,
   isSubmitting,
   setFieldValue,
   t,
-  id,
   data: { brokers, currentAccountTypeId }
 }) => {
   const [
@@ -44,24 +41,29 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     setChangeBrokerClose
   ] = useIsOpen();
   const [selectedBroker, setSelectedBroker] = useState<Broker>(
-    brokers.find(
+    safeGetElemFromArray(
+      brokers,
       broker =>
         !!broker.accountTypes.find(
           accountType => accountType.id === currentAccountTypeId
         )
-    )!
+    )
   );
   const [account, setAccount] = useState<BrokerAccountType>(
-    selectedBroker.accountTypes.find(acc => acc.id === currentAccountTypeId)!
+    safeGetElemFromArray(
+      selectedBroker.accountTypes,
+      acc => acc.id === currentAccountTypeId
+    )
   );
   const selectBroker = useCallback(
     (brokerName: string) => () => {
-      const broker = brokers.find(x => x.name === brokerName)!;
+      const broker = safeGetElemFromArray(brokers, x => x.name === brokerName);
       const account =
         brokerName === values[FIELDS.brokerFrom].name
-          ? broker.accountTypes.find(
+          ? safeGetElemFromArray(
+              broker.accountTypes,
               accountType => accountType.id === currentAccountTypeId
-            )!
+            )
           : broker.accountTypes[0];
       const leverage =
         brokerName === values[FIELDS.brokerFrom].name
@@ -77,9 +79,10 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   const changeAccount = useCallback(
     ({ target }) => {
       setAccount(
-        selectedBroker.accountTypes.find(
+        safeGetElemFromArray(
+          selectedBroker.accountTypes,
           account => account.id === target.value
-        )!
+        )
       );
     },
     [selectedBroker]
@@ -156,12 +159,14 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         onClose={setChangeBrokerClose}
         brokerFrom={brokerFrom.name}
         brokerTo={
-          brokers.find(
+          safeGetElemFromArray(
+            brokers,
             broker =>
-              !!broker.accountTypes.find(
+              !!safeGetElemFromArray(
+                broker.accountTypes,
                 accountType => accountType.id === brokerAccountTypeId
               )
-          )!.name
+          ).name
         }
       />
     </form>
@@ -210,12 +215,13 @@ const ChangeBrokerForm = compose<
       data: { brokers, currentAccountTypeId },
       currentLeverage
     }) => ({
-      [FIELDS.brokerFrom]: brokers.find(
+      [FIELDS.brokerFrom]: safeGetElemFromArray(
+        brokers,
         broker =>
           !!broker.accountTypes.find(
             accountType => accountType.id === currentAccountTypeId
           )
-      )!,
+      ),
       [FIELDS.brokerAccountTypeId]: currentAccountTypeId,
       [FIELDS.leverage]: currentLeverage
     }),

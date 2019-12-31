@@ -13,6 +13,7 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 import { number, object } from "yup";
 
@@ -55,7 +56,8 @@ const _FundWithdrawAmountForm: React.FC<
     (_: ISelectChangeEvent, target: JSX.Element) => {
       setFieldValue(FUND_WITHDRAW_FIELDS.walletId, target.props.value);
       setCurrency(
-        wallets.find(({ id }) => id === target.props.value)!.currency
+        safeGetElemFromArray(wallets, ({ id }) => id === target.props.value)
+          .currency
       );
     },
     [wallets]

@@ -94,6 +94,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        isOwnAsset={description.publicInfo.isOwnAsset}
         fees={{
           exitFee: description.exitFeeCurrent,
           entryFee: description.entryFeeCurrent,

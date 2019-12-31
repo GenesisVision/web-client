@@ -34,7 +34,6 @@ import {
 const _DetailsInvestment: React.FC<Props> = ({
   isOwnAsset,
   fees,
-  notice,
   asset,
   selector,
   currency,
@@ -113,7 +112,6 @@ const _DetailsInvestment: React.FC<Props> = ({
           id={id}
           assetCurrency={currency}
           asset={asset}
-          notice={notice}
           personalDetails={investmentDetails as InvestmentType}
         />
       )}
@@ -137,9 +135,8 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 interface Props {
-  isOwnAsset?: boolean;
+  isOwnAsset: boolean;
   fees: FeesType;
-  notice?: string;
   asset: ASSET;
   dispatchDescription: () => void;
   selector: TableSelectorType;

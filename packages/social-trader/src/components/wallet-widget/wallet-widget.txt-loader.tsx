@@ -3,17 +3,16 @@ import "./wallet-widget.scss";
 import classNames from "classnames";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { WalletIcon } from "components/icon/wallet-icon";
-import faker from "faker";
 import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
 import { getRandomInteger, getRandomText } from "utils/helpers";
 
 export const WalletWidgetLoaderData: WalletsGrandTotal = {
   currency: "GVT",
-  available: faker.random.number(),
-  invested: faker.random.number(),
-  trading: faker.random.number(),
-  total: faker.random.number()
+  available: getRandomInteger(),
+  invested: getRandomInteger(),
+  trading: getRandomInteger(),
+  total: getRandomInteger()
 };
 
 export const WalletWidgetTxtLoader: React.FC<{

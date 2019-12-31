@@ -1,3 +1,4 @@
+import Crashable from "decorators/crashable";
 import { AmountRowCell } from "gv-api-web";
 import AmountItem from "pages/wallet/components/transaction-details/transactions/amount-item";
 import ConvertField from "pages/wallet/components/wallet-tables/wallet-transactions/convert-field";
@@ -13,5 +14,5 @@ const _AmountConvert: React.FC<{
     />
   );
 };
-const AmountConvert = React.memo(_AmountConvert);
+const AmountConvert = React.memo(Crashable(_AmountConvert));
 export default AmountConvert;

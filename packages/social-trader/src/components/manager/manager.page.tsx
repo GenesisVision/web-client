@@ -7,6 +7,7 @@ import FundAssetContainer, {
 import ManagerHistorySection from "components/manager/manager-history/manager-history-section";
 import Page from "components/page/page";
 import StatisticItem from "components/statistic-item/statistic-item";
+import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -55,5 +56,5 @@ interface Props {
   profile: PublicProfile;
 }
 
-const ManagerPage = React.memo(_ManagerPage);
+const ManagerPage = React.memo(Crashable(_ManagerPage));
 export default ManagerPage;

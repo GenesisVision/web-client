@@ -3,10 +3,14 @@ import {
   managerLoaderData,
   mockDate
 } from "components/details/details.loader-data";
-import faker from "faker";
 import { LevelsParamsInfo } from "gv-api-web";
 import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
-import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomInteger,
+  getRandomWord,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
@@ -17,33 +21,33 @@ export const statisticDataLoaderData: any = {
   statisticCurrency: "",
   statistic: {
     equityChart: [],
-    totalProgramCurrencyProfit: faker.random.number(),
-    timeframeProgramCurrencyProfit: faker.random.number(),
+    totalProgramCurrencyProfit: getRandomInteger(),
+    timeframeProgramCurrencyProfit: getRandomInteger(),
     programCurrency: "GVT",
-    trades: faker.random.number(),
-    successTradesPercent: faker.random.number(),
-    profitFactor: faker.random.number(),
+    trades: getRandomInteger(),
+    successTradesPercent: getRandomInteger(),
+    profitFactor: getRandomInteger(),
     periods: [],
     lastPeriodStarts: mockDate,
     lastPeriodEnds: mockDate,
-    tradingVolume: faker.random.number(),
-    totalGvtProfit: faker.random.number(),
-    timeframeGvtProfit: faker.random.number(),
-    balance: faker.random.number(),
-    investors: faker.random.number(),
-    profitChangePercent: faker.random.number(),
-    sharpeRatio: faker.random.number(),
-    sortinoRatio: faker.random.number(),
-    calmarRatio: faker.random.number(),
-    maxDrawdown: faker.random.number(),
-    rate: faker.random.number()
+    tradingVolume: getRandomInteger(),
+    totalGvtProfit: getRandomInteger(),
+    timeframeGvtProfit: getRandomInteger(),
+    balance: getRandomInteger(),
+    investors: getRandomInteger(),
+    profitChangePercent: getRandomInteger(),
+    sharpeRatio: getRandomInteger(),
+    sortinoRatio: getRandomInteger(),
+    calmarRatio: getRandomInteger(),
+    maxDrawdown: getRandomInteger(),
+    rate: getRandomInteger()
   }
 };
 
 export const brokerDetailsLoaderData: any = {
   //: BrokerDetails
   logo: "",
-  name: faker.name.firstName(),
+  name: getRandomWord(),
   isForex: false,
   showSwaps: false,
   showTickets: false,
@@ -183,8 +187,8 @@ export const programDetailsLoaderData: any = {
   logo: "",
   url: "",
   color: "#fff",
-  description: faker.lorem.sentences(3),
-  title: faker.lorem.word(),
+  description: getRandomWords(15),
+  title: getRandomWord(),
   ipfsHash: "",
   creationDate: mockDate,
   status: "None",

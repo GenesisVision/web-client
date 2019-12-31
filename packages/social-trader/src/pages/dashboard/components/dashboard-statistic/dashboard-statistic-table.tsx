@@ -4,6 +4,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import Crashable from "decorators/crashable";
 import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -68,5 +69,5 @@ interface Props {
   data: TDashboardEvent[];
 }
 
-const DashboardStatisticTable = React.memo(_DashboardStatisticTable);
+const DashboardStatisticTable = React.memo(Crashable(_DashboardStatisticTable));
 export default DashboardStatisticTable;

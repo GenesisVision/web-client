@@ -5,6 +5,7 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import Crashable from "decorators/crashable";
 import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
@@ -13,8 +14,7 @@ import { getAssetLink } from "utils/compose-url";
 const _PortfolioEventLogo: React.FC<Props> = ({
   withAsset = true,
   assetDetails,
-  icon,
-  from
+  icon
 }) => {
   const { contextTitle } = useToLink();
   const to = getAssetLink(
@@ -60,9 +60,8 @@ const _PortfolioEventLogo: React.FC<Props> = ({
 interface Props {
   assetDetails: AssetDetails;
   icon: string;
-  from?: string;
   withAsset?: boolean;
 }
 
-const PortfolioEventLogo = React.memo(_PortfolioEventLogo);
+const PortfolioEventLogo = React.memo(Crashable(_PortfolioEventLogo));
 export default PortfolioEventLogo;

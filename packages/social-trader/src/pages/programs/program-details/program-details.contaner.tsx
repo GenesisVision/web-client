@@ -151,6 +151,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           <>
             {programDetails && (
               <InvestmentProgramControls
+                id={id}
+                programDetails={programDetails}
+                publicInfo={description.publicInfo}
+                brokerDetails={brokerDetails}
+                tradingAccountInfo={description.tradingAccountInfo}
                 onApply={handleDispatchDescription}
                 description={description}
                 isOwnProgram={isOwnAsset}
@@ -161,7 +166,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               <FollowControls
                 isOwnAsset={isOwnAsset}
                 onApply={handleDispatchDescription}
-                description={description}
+                publicInfo={description.publicInfo}
+                tradingAccountInfo={description.tradingAccountInfo}
+                followDetails={followDetails}
+                id={id}
+                brokerDetails={brokerDetails}
               />
             )}
             {isOwnAsset && ownerActions.canTransferMoney && (

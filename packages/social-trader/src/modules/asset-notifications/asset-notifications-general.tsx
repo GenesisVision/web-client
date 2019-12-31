@@ -7,6 +7,7 @@ import {
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { safeGetElemFromArray } from "utils/helpers";
 
 import {
   TAddNotification,
@@ -28,7 +29,7 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
     (
       type: NotificationSettingViewModelTypeEnum
     ): NotificationSettingViewModel =>
-      settings.find(setting => setting.type === type)!,
+      safeGetElemFromArray(settings, setting => setting.type === type),
     [settings]
   );
 

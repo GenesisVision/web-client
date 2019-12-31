@@ -13,6 +13,7 @@ import CopyButton from "modules/copy-button/copy-button";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
+import { safeGetElemFromArray } from "utils/helpers";
 
 const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   wallets,
@@ -24,7 +25,12 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   const { depositAddress } = selected;
   const onChangeWallet = useCallback(
     (event: ISelectChangeEvent) => {
-      setSelected(wallets.find(wallet => wallet.id === event.target.value)!);
+      setSelected(
+        safeGetElemFromArray(
+          wallets,
+          wallet => wallet.id === event.target.value
+        )
+      );
       setFieldValue(FIELDS.id, event.target.value);
     },
     [wallets, setSelected]

@@ -32,15 +32,15 @@ const _TransferPopup: React.FC<Props> = ({
 );
 
 interface Props {
-  singleCurrentItemContainer?: boolean;
-  onApply?: VoidFunction;
+  singleCurrentItemContainer: boolean;
+  onApply: VoidFunction;
   currentItem: WalletItemType;
   onClose: () => void;
   open: boolean;
-  sourceType?: InternalTransferRequestType;
-  destinationType?: InternalTransferRequestType;
-  title?: string;
-  currentItemContainer?: TRANSFER_CONTAINER;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
+  title: string;
+  currentItemContainer: TRANSFER_CONTAINER;
 }
 
 const TransferPopup = React.memo(_TransferPopup);

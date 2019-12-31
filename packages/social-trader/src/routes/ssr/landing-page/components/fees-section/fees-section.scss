@@ -5,6 +5,7 @@
 
 .fees-section {
   padding-top: 100px;
+  line-height: 1.6;
 
   @include media-breakpoint-large-desktop() {
     padding-top: 140px;
@@ -16,7 +17,7 @@
     }
   }
 
-  &__text {
+  p.fees-section__text {
     margin-bottom: 40px;
   }
 

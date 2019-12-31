@@ -22,6 +22,9 @@ export type TNavHeader = TNavFooter & {
   hideMobile?: boolean;
 };
 
+export const FEES_ROUTE = "/fees";
+export const REFERRAL_PROGRAM_ROUTE = "/referral-program";
+
 export const navHeader: TNavHeader[] = [
   {
     name: "Invest",
@@ -57,12 +60,12 @@ export const navHeader: TNavHeader[] = [
       {
         name: "Fees",
         hideMobile: true,
-        href: "/fees/"
+        href: FEES_ROUTE
       },
       {
         name: "Referral program",
         hideMobile: true,
-        href: "/referral-program/"
+        href: REFERRAL_PROGRAM_ROUTE
       },
       {
         name: "Feedback",
@@ -76,11 +79,11 @@ export const navHeader: TNavHeader[] = [
 export const navFooter: TNavHeader[] = [
   {
     name: "Referral program",
-    href: "/referral-program/"
+    href: REFERRAL_PROGRAM_ROUTE
   },
   {
     name: "Fees",
-    href: "/fees/"
+    href: FEES_ROUTE
   },
   {
     name: "Blog",
@@ -96,11 +99,11 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Glossary",
-    href: "/glossary.html"
+    href: "/glossary"
   },
   {
     name: "AML Manual",
-    href: "/aml-manual.html"
+    href: "/aml-manual"
   },
   {
     name: "White paper",
@@ -108,15 +111,15 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Privacy policy",
-    href: "/privacy-policy.html"
+    href: "/privacy-policy"
   },
   {
     name: "Terms and conditions",
-    href: "/terms.html"
+    href: "/terms"
   },
   {
     name: "Download terminal",
-    href: "/downloads.html"
+    href: "/downloads"
   }
 ];
 

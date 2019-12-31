@@ -18,7 +18,9 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
           <table className="fees-table ">
             <thead className="fees-table__head">
               <tr className="fees-table__row">
-                <th className="fees-table__cell">Amount</th>
+                <th className="fees-table__cell fees-table__cell--width-bg">
+                  Amount
+                </th>
                 <th className="fees-table__cell">Discount</th>
                 <th className="fees-table__cell">Fees</th>
               </tr>
@@ -62,7 +64,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
           <ul className="fees-info__list-notes">
             <li className="fees-info__note-item">Regular: 0,3% trading fee</li>
             <li className="fees-info__note-item">
-              GVT holders*: 30-50% discount depending on the amount of GVT
+              GVT holders*: 30-55% discount depending on the amount of GVT
               stored in the wallet.
             </li>
           </ul>
@@ -113,36 +115,39 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
             <tbody>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Forex</td>
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
+                <td className="fees-table__cell" rowSpan={4}>
+                  for 100 000 USD
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  6
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  4.2
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  3.9
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  3.6
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  3.3
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  3
+                </td>
+                <td className="fees-table__cell" rowSpan={4}>
+                  2.7
+                </td>
               </tr>
               <tr className="fees-table__row">
-                <td className="fees-table__cell">Spot metals Index</td>
-                <td className="fees-table__cell">for 100 000 USD</td>
-                <td className="fees-table__cell">6</td>
-                <td className="fees-table__cell">4.2</td>
-                <td className="fees-table__cell">3.9</td>
-                <td className="fees-table__cell">3.6</td>
-                <td className="fees-table__cell">3.3</td>
-                <td className="fees-table__cell">3</td>
-                <td className="fees-table__cell">2.7</td>
+                <td className="fees-table__cell">Spot metals</td>
+              </tr>
+              <tr className="fees-table__row">
+                <td className="fees-table__cell">Index</td>
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Spot commodities</td>
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
-                <td className="fees-table__cell" />
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell">Crypto-Currency</td>
@@ -296,18 +301,21 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               available tools and the associated fees.
             </li>
             <li className="fees-info__note-item">
-              GVT holders: 55% discount depending on the amount of GVT stored in
-              the wallet.
+              GVT holders: 30-55% discount depending on the amount of GVT stored
+              in the wallet.
             </li>
           </ul>
         </div>
-        <FeesTradingDiscount />
+        <FeesTradingDiscount white />
       </div>
     </div>
   </div>
 );
 
-export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
+export const FeesTradingDiscount: React.FC<{
+  dark?: boolean;
+  white?: boolean;
+}> = ({ dark, white }) => {
   return (
     <>
       <div className="fees-info__notes">
@@ -336,12 +344,15 @@ export const FeesTradingDiscount: React.FC<{ dark?: boolean }> = ({ dark }) => {
         <div className="fees-info__table-wrapper">
           <table
             className={classNames("fees-table", {
-              "fees-table--dark": dark
+              "fees-table--dark": dark,
+              "fees-table--white-head": white
             })}
           >
             <thead className="fees-table__head">
               <tr className="fees-table__row">
-                <th className="fees-table__cell">Wallet</th>
+                <th className="fees-table__cell fees-table__cell--width-bg">
+                  Wallet
+                </th>
                 <th className="fees-table__cell">Amount</th>
               </tr>
             </thead>

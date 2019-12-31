@@ -1,6 +1,7 @@
 import "./broker-select.scss";
 
 import { BrokerSelectLoaderData } from "components/assets/asset.helpers";
+import Crashable from "decorators/crashable";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
@@ -9,6 +10,7 @@ import {
   forexAllowedSelector,
   kycConfirmedSelector
 } from "reducers/header-reducer";
+import { safeGetElemFromArray } from "utils/helpers";
 
 import BrokerSelect from "./broker-select";
 
@@ -22,7 +24,10 @@ const _BrokerSelectBrokerContainer: React.FC<Props> = ({
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const selectBrokerHandle = useCallback(
     (brokerName: string) => () => {
-      const selectedBroker = brokers!.find(({ name }) => name === brokerName)!;
+      const selectedBroker = safeGetElemFromArray(
+        brokers!,
+        ({ name }) => name === brokerName
+      );
       setSelectedBroker(selectedBroker);
     },
     [brokers]
@@ -47,5 +52,7 @@ interface Props {
   selectedBroker: Broker;
 }
 
-const BrokerSelectContainer = React.memo(_BrokerSelectBrokerContainer);
+const BrokerSelectContainer = React.memo(
+  Crashable(_BrokerSelectBrokerContainer)
+);
 export default BrokerSelectContainer;
