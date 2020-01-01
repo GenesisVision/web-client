@@ -1,21 +1,22 @@
 import TagItem from "components/tags/tag-item/tag-item";
 import { Tag } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import TileFilterPopover from "../tile-filter-popover";
 
-const _TagFilterPopover: React.FC<Props & WithTranslation> = ({
-  t,
-  values,
-  changeFilter
-}) => {
-  const filterableValues = values.map(x => ({
-    ...x,
-    id: x.name,
-    searchValue: x.name
-  }));
+const _TagFilterPopover: React.FC<Props> = ({ values, changeFilter }) => {
+  const [t] = useTranslation();
+  const filterableValues = useMemo(
+    () =>
+      values.map(x => ({
+        ...x,
+        id: x.name,
+        searchValue: x.name
+      })),
+    [values]
+  );
   return (
     <TileFilterPopover
       header={t("filters.tag.popover-header")}
@@ -40,10 +41,7 @@ const _TagFilterPopover: React.FC<Props & WithTranslation> = ({
   );
 };
 
-const TagFilterPopover = compose<React.ComponentType<Props>>(
-  React.memo,
-  translate()
-)(_TagFilterPopover);
+const TagFilterPopover = React.memo(_TagFilterPopover);
 export default TagFilterPopover;
 
 interface Props {
