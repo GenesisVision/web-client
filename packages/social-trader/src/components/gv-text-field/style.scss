@@ -139,5 +139,11 @@
     flex-direction: column;
     min-width: 0;
     margin: 0 $padding-xxsmall $padding-xsmall 0;
+
+    &--wide {
+      margin-right: 0;
+      margin-left: 0;
+      width: 100%;
+    }
   }
 }
