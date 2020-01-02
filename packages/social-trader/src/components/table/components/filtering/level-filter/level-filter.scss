@@ -1,36 +1,29 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .level-filter {
-  width: 200px;
-  margin: 0 25px;
-
+  width: 250px;
   &__btns {
-    text-align: end;
+    display: flex;
   }
-
   &__btn {
-    padding: 1em;
+    font-size: $font-size-paragraph;
+    margin-right: $padding-xsmall;
   }
-
-  .rc-slider {
-    margin: 1.5rem 0;
+  &__slider {
+    padding: 0 0 $padding-small;
   }
-
   .rc-slider-track {
     background-color: $primary-color;
-  }
-
-  .rc-slider-handle {
     border-color: $primary-color;
-  }
-
-  .rc-slider-handle:hover {
-    border-color: $primary-color;
-  }
-  .rc-slider-handle:active,
-  .rc-slider-handle:focus {
-    border-color: $primary-color;
-    box-shadow: 0 0 5px $primary-color;
+    &:hover {
+      border-color: $primary-color;
+    }
+    &:active,
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px $primary-color;
+    }
   }
 
   .rc-slider-dot-active {
