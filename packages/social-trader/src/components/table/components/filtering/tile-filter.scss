@@ -12,16 +12,7 @@
 
 .tile-filter-popover {
   width: 236px;
-  padding: $padding-xsmall;
-  &__header {
-    @include font-size($font-size-paragraph);
-    font-weight: 600;
-    color: $main-color;
-  }
   &__search-wrapper {
-    margin: 0;
-  }
-  &__items {
-    padding-top: $padding-xsmall;
+    margin: 0 0 $padding-xsmall;
   }
 }
