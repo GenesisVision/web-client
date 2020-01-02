@@ -73,9 +73,4 @@ $large-padding: 42px;
       color: $positive-color;
     }
   }
-
-  &__popover {
-    padding: $padding-xsmall;
-    @include font-size($font-size-common);
-  }
 }
