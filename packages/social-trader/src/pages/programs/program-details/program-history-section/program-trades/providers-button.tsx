@@ -11,6 +11,10 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
 } from "components/popover/popover";
+import {
+  PopoverContent,
+  PopoverContentListItem
+} from "components/popover/popover-content";
 import { OrderSignalProgramInfo } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React from "react";
@@ -27,11 +31,11 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
         orientation={ORIENTATION_POPOVER.LEFT}
         onClose={clearAnchor}
       >
-        <div className="provider-items">
+        <PopoverContent type={"list"}>
           {providers.map(provider => (
             <ProviderItem provider={provider} />
           ))}
-        </div>
+        </PopoverContent>
       </Popover>
       <ChipButton
         onClick={setAnchor}
@@ -50,22 +54,24 @@ const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
 }) => {
   const { linkCreator } = useToLink();
   return (
-    <Link
-      to={linkCreator(
-        composeFollowDetailsUrl(url),
-        FOLLOW_DETAILS_FOLDER_ROUTE
-      )}
-    >
-      <AssetAvatarWithName
-        name={title}
-        url={logo}
-        level={level}
-        levelProgress={levelProgress}
-        alt={title}
-        color={color}
-        tooltip={<LevelTooltip level={level} canLevelUp={false} />}
-      />
-    </Link>
+    <PopoverContentListItem>
+      <Link
+        to={linkCreator(
+          composeFollowDetailsUrl(url),
+          FOLLOW_DETAILS_FOLDER_ROUTE
+        )}
+      >
+        <AssetAvatarWithName
+          name={title}
+          url={logo}
+          level={level}
+          levelProgress={levelProgress}
+          alt={title}
+          color={color}
+          tooltip={<LevelTooltip level={level} canLevelUp={false} />}
+        />
+      </Link>
+    </PopoverContentListItem>
   );
 };
 
