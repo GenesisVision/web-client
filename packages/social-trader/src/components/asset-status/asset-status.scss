@@ -29,11 +29,7 @@
 }
 
 .request-popover {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-  padding-left: $padding-xsmall;
-  box-sizing: border-box;
+  padding: 0 $padding-xsmall;
   max-height: 300px;
   overflow: auto;
 }
