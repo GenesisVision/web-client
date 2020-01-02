@@ -6,12 +6,7 @@
 }
 
 .fees-tooltip-container {
-  display: flex;
-  flex-direction: column;
   min-width: 250px;
-  border-radius: $border-radius-middle;
-  letter-spacing: 0.4px;
-  font-weight: 400;
   @include font-size($font-size-paragraph);
 
   &__header,
