@@ -1,5 +1,5 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -57,7 +57,7 @@ const _DepositContainer: React.FC<Props> = ({
         hasEntryFee={hasEntryFee}
         currency={currency || stateCurrency}
       />
-      <FormError error={errorMessage} />
+      <DialogError error={errorMessage} />
     </Dialog>
   );
 };
