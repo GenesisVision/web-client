@@ -2,10 +2,10 @@ import "./transfer-form.scss";
 
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/input-amount-field";
 import { ISelectChangeEvent } from "components/select/select";
@@ -140,6 +140,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         />
         <DialogField>
           <InputAmountField
+            wide
             name={TRANSFER_FORM_FIELDS.amount}
             label={t("transfer.amount")}
             currency={selectedSourceItem.currency}
@@ -156,9 +157,10 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
             selectedDestinationItem.currency
           )} ${selectedDestinationItem.currency}`}</span>
         )}
-        <FormError error={errorMessage} />
+        <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            wide
             type="submit"
             variant="contained"
             color="primary"

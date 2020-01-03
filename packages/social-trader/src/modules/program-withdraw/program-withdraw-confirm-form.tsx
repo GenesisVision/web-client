@@ -1,7 +1,7 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import { InjectedFormikProps, withFormik } from "formik";
 import useApiRequest from "hooks/api-request.hook";
@@ -84,7 +84,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
           {formatDate(periodEnds)}
         </DialogListItem>
       </DialogList>
-      <FormError error={errorMessage} />
+      <DialogError error={errorMessage} />
       <DialogButtons>
         <GVButton
           onClick={onBackClick}
