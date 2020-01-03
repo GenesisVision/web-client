@@ -1866,6 +1866,7 @@
     "buttons": {
       "close-externalsignaltradingaccount": "Close trading account",
       "close-signaltradingaccount": "Close trading account",
+      "close-signalprogram": "Close signal program",
       "close-trading-account": "Close trading account",
       "close-account": "Close account",
       "close-follow": "Close follow",
