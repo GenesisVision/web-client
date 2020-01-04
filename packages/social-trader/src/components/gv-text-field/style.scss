@@ -58,6 +58,7 @@
   }
 
   &__error {
+    width: 100%;
     position: absolute;
     left: 0;
     top: 100%;
@@ -144,6 +145,13 @@
       margin-right: 0;
       margin-left: 0;
       width: 100%;
+    }
+
+    &--no-margin {
+      &,
+      & .gv-text-field {
+        margin: 0;
+      }
     }
   }
 }
