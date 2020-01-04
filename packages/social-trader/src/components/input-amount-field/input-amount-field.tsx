@@ -7,6 +7,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _InputAmountField: React.FC<Props> = ({
+  wide,
   emptyInit,
   onChange,
   t,
@@ -21,6 +22,7 @@ const _InputAmountField: React.FC<Props> = ({
 }) => (
   <DialogField>
     <GVFormikField
+      wide={wide}
       emptyInit={emptyInit}
       onChange={onChange}
       name={name}
@@ -50,6 +52,7 @@ const _InputAmountField: React.FC<Props> = ({
 );
 
 interface Props extends WithTranslation {
+  wide?: boolean;
   name: string;
   label: React.ReactNode;
   currency: string;
