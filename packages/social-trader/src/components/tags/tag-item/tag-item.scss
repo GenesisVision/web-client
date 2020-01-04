@@ -5,8 +5,10 @@
 .tag-item {
   display: inline-block;
   position: relative;
-  margin-right: 10px;
   cursor: default;
+  &:not(:last-child) {
+    margin-right: $padding-xxsmall;
+  }
 
   &__button-remove {
     padding: 0;
@@ -24,10 +26,6 @@
       width: 6px;
     }
   }
-
-  .gv-btn:hover:not(disabled).gv-btn--secondary {
-    background-color: #161b20;
-  }
 }
 
 .tag-item-tooltip {
@@ -38,17 +36,6 @@
   .tag-item {
     margin-top: $padding-xxsmall/2;
     margin-bottom: $padding-xxsmall/2;
-  }
-
-  &.tag-broker-container {
-    .tag-item {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
   }
 }
 

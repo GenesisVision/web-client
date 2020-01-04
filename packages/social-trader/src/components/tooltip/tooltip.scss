@@ -1,20 +1,7 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
 
-$tooltip-padding: 16px;
-
 .tooltip {
-  &__popover {
-    @include horizontal-paddings($tooltip-padding, $divider-text);
-    @include vertical-paddings($tooltip-padding, $divider-text);
-    color: white;
-  }
-
-  &__content {
-    font-size: 13px;
-    max-width: 400px;
-  }
-
   &__label {
     cursor: help;
 
