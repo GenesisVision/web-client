@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
@@ -99,8 +99,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         </h2>
         <div>
           <GVButton
+            size={GV_BTN_SIZE.SMALL}
+            color={"secondary"}
             onClick={handleResetForm}
-            className="level-calculator-popup__reset-button"
           >
             <span className="level-calculator-popup__reset-button-text">
               {t("buttons.reset")}
