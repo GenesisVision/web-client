@@ -19,7 +19,7 @@
   &__navigation,
   &__profile,
   &__wallet {
-    @include hide(flex);
+    @include hide-on-landscape-tablet(flex);
   }
 
   &__right,
