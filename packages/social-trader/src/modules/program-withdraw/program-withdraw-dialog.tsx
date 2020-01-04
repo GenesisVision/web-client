@@ -1,5 +1,4 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import FormError from "components/form/form-error/form-error";
 import { ProgramWithdrawInfo } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
@@ -19,9 +18,9 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   accountCurrency,
   assetCurrency
 }) => {
-  const { errorMessage, data, sendRequest } = useApiRequest<
-    ProgramWithdrawInfo
-  >({ request: getProgramWithdrawInfo });
+  const { data, sendRequest } = useApiRequest<ProgramWithdrawInfo>({
+    request: getProgramWithdrawInfo
+  });
   useEffect(() => {
     open && sendRequest({ id });
   }, [open]);
@@ -36,7 +35,6 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
         accountCurrency={accountCurrency}
         assetCurrency={assetCurrency}
       />
-      <FormError error={errorMessage} />
     </Dialog>
   );
 };

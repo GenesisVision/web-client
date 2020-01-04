@@ -31,7 +31,7 @@ const _DepositContainer: React.FC<Props> = ({
 }) => {
   const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
-  const { data, sendRequest: getInvestInfo, errorMessage } = useApiRequest<
+  const { data, sendRequest: getInvestInfo } = useApiRequest<
     TWalletsAvailableData
   >({
     request: fetchAvailableWallets
@@ -57,7 +57,6 @@ const _DepositContainer: React.FC<Props> = ({
         hasEntryFee={hasEntryFee}
         currency={currency || stateCurrency}
       />
-      <DialogError error={errorMessage} />
     </Dialog>
   );
 };
