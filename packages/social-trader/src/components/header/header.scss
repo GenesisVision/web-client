@@ -35,6 +35,8 @@
   }
 
   &__buttons {
+    width: 100%;
+    justify-content: flex-end;
     a + a {
       margin-left: $padding-xxsmall;
     }
