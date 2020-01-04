@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .filter {
   cursor: pointer;
@@ -33,8 +34,8 @@
   }
 }
 
-.gv-hangle__text {
-  position: absolute;
-  top: -20px;
-  font-size: 0.8rem;
+.filter-title {
+  @include font-size($font-size-paragraph);
+  font-weight: 600;
+  color: $main-color;
 }
