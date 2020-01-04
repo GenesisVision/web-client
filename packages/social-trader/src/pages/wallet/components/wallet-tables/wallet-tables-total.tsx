@@ -5,6 +5,7 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { WalletData } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -41,9 +42,9 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
             <Tooltip
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
-                <div className="tooltip__content">
+                <TooltipContent>
                   {t("wallet-page.tooltip.transactions")}
-                </div>
+                </TooltipContent>
               )}
             >
               <Link
@@ -64,9 +65,9 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
-                  <div className="tooltip__content">
+                  <TooltipContent>
                     {t("wallet-page.tooltip.deposit")}
-                  </div>
+                  </TooltipContent>
                 )}
               >
                 <Link
@@ -80,9 +81,9 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
-                  <div className="tooltip__content">
+                  <TooltipContent>
                     {t("wallet-page.tooltip.withdrawals")}
-                  </div>
+                  </TooltipContent>
                 )}
               >
                 <Link
