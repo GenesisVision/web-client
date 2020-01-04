@@ -1,0 +1,59 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+$tooltip-padding: 16px;
+
+.popover-content {
+  box-sizing: border-box;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__list-item {
+    padding: $padding-xxsmall $padding-small;
+  }
+
+  &__block {
+    box-sizing: border-box;
+    background-color: lighten($secondary-background-color, 2%);
+    &--fixed {
+      max-width: 400px;
+    }
+    &--small {
+      font-size: $font-size-common;
+      padding: $tooltip-padding;
+      &.popover-content__block--stretched {
+        padding: $padding-xsmall $tooltip-padding;
+      }
+    }
+    &--middle {
+      padding: $padding-xsmall;
+      &.popover-content__block--stretched {
+        padding: $padding-small $padding-xsmall;
+      }
+    }
+    &--big {
+      padding: $padding-small;
+      max-width: 100%;
+      @include media-breakpoint-landscape-phone() {
+        max-width: $modal-width;
+      }
+    }
+    &--dark {
+      background-color: $secondary-background-color;
+    }
+  }
+
+  &__block-item {
+    &:not(:last-child) {
+      padding-bottom: $padding-xsmall;
+    }
+  }
+}
