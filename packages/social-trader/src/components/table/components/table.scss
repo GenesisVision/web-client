@@ -301,13 +301,4 @@ $padding: $padding-small;
   &:not(:last-child) {
     margin-right: $padding-xsmall;
   }
-
-  & .gv-btn {
-    font-size: $font-size-paragraph-mobile;
-    font-weight: 600;
-    padding: 0;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-    }
-  }
 }

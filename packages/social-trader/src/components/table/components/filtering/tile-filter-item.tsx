@@ -1,6 +1,5 @@
 import "./tile-filter-item.scss";
 
-import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import * as React from "react";
 
@@ -15,14 +14,12 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
     <div className="tile-filter-item">
       {children}
       {!mandatory && removable && (
-        <GVButton
-          variant="text"
-          color="secondary"
+        <div
           className="tile-filter-item__button-remove"
           onClick={() => removeTile!(id)}
         >
           <CloseIcon />
-        </GVButton>
+        </div>
       )}
     </div>
   );

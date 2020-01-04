@@ -98,6 +98,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         <AssetFields>
           <AssetField wide>
             <GVFormikField
+              wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.key}
@@ -108,6 +109,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           </AssetField>
           <AssetField wide>
             <GVFormikField
+              wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.secret}

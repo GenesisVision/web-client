@@ -9,7 +9,7 @@ export const ToolbarButton: React.FC<{
   route: string;
 }> = React.memo(({ text, route }) => (
   <Link to={route} className="toolbar-button">
-    <GVButton color="primary" variant="text">
+    <GVButton bold noPadding color="primary" variant="text">
       {text}
     </GVButton>
   </Link>

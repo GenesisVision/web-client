@@ -32,10 +32,6 @@
     @include adaptive-padding(bottom, $padding-xsmall);
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
-
-    .gv-tab {
-      white-space: nowrap;
-    }
   }
 
   .table__row--pretender {

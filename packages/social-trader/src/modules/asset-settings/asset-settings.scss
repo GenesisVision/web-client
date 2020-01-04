@@ -26,11 +26,8 @@
   &__signaling-edit-form-title-block {
     display: flex;
     align-items: center;
-
-    & .gv-switch-wrapper {
-      @include adaptive-padding(bottom, $padding-xsmall);
-      margin: 0 $padding-xsmall;
-    }
+    @include adaptive-padding(bottom, $padding-xsmall);
+    margin: 0 $padding-xsmall;
   }
 
   &__block {

@@ -15,6 +15,7 @@ const GlobalSearchInput: React.FC<Props> = React.memo(({ query, onChange }) => {
       {/*
       //@ts-ignore TODO сделать фикс GVTextField*/}
       <GVTextField
+        noMargin
         name="queryValue"
         wrapperClassName="global-search-input__wrapper"
         placeholder="Search"

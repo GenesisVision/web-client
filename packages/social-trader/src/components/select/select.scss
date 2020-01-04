@@ -55,13 +55,6 @@
     }
   }
 
-  &.gv-text-field__input {
-    .select__value {
-      flex: 1;
-      font-size: 16px;
-    }
-  }
-
   &--disabled {
     .select__content {
       cursor: default;

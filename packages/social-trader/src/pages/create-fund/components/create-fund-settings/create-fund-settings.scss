@@ -14,10 +14,6 @@ $asset-height-mobile: $asset-height/$divider-text;
     margin-bottom: 40px;
     max-width: 230px;
 
-    &.deposit-details {
-      max-width: 280px;
-    }
-
     &-caption {
       padding-top: $padding-small;
       font-size: 12px;
@@ -179,16 +175,6 @@ $asset-height-mobile: $asset-height/$divider-text;
       color: $label-color;
       letter-spacing: 0.4px;
     }
-
-    &-chars {
-      display: inline-flex;
-      align-items: center;
-      color: $text-light-color;
-
-      .gv-program-period {
-        margin-left: 15px;
-      }
-    }
   }
 
   &__logo-title {
@@ -252,10 +238,6 @@ $asset-height-mobile: $asset-height/$divider-text;
     flex-wrap: wrap;
     position: relative;
     justify-content: space-between;
-
-    /*.gv-text-field__wrapper {
-      margin: 0;
-    }*/
   }
 
   &__navigation {
@@ -282,7 +264,6 @@ $asset-height-mobile: $asset-height/$divider-text;
 }
 
 .popover-add {
-  background: $panel-background-color;
   &__regulator-indicator {
     display: flex;
     align-items: center;
