@@ -8,8 +8,13 @@
     padding-right: 3px;
   }
 
-  &__add.gv-btn {
+  &__add {
     @include font-size(11px);
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 20px;
     font-weight: 500;
     text-transform: uppercase;
