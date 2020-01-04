@@ -11,6 +11,7 @@ export enum GV_BTN_SIZE {
 }
 
 interface GVButtonProps {
+  bold?: boolean;
   wide?: boolean;
   size?: GV_BTN_SIZE;
   id?: string;
@@ -27,6 +28,7 @@ interface GVButtonProps {
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
+  bold,
   wide,
   size = GV_BTN_SIZE.MIDDLE,
   id,
@@ -42,6 +44,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classnames("gv-btn", className, {
+    "gv-btn--bold": bold,
     "gv-btn--wide": wide,
     "gv-btn--large": size === GV_BTN_SIZE.LARGE,
     "gv-btn--big": size === GV_BTN_SIZE.BIG,
