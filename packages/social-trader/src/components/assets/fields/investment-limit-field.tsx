@@ -24,6 +24,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
     <>
       <AssetField wide>
         <GVFormikField
+          wide
           type="checkbox"
           color="primary"
           name={checkboxName}

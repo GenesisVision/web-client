@@ -63,6 +63,7 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
         </DialogField>
         <DialogButtons>
           <CopyButton
+            wide
             value={depositAddress}
             successMessage={"wallet-deposit.copy-to-clipboard-success"}
           />

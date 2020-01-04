@@ -32,7 +32,7 @@ const _ConfirmPopup: React.ComponentType<
           <p>{body}</p>
         </div>
         <DialogButtons>
-          <GVButton type="submit" disabled={isSubmitting}>
+          <GVButton wide={!onCancel} type="submit" disabled={isSubmitting}>
             {applyButtonText}
           </GVButton>
           {onCancel && (
