@@ -1,6 +1,7 @@
 import "./profile-widget.scss";
 
 import classNames from "classnames";
+import { logout } from "components/auth/signin/signin.service";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import GVButton from "components/gv-button";
 import { DetailsIcon } from "components/icon/details-icon";
@@ -27,7 +28,9 @@ import withLoader from "decorators/with-loader";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 const ProfileMenuItem: React.FC<{
   to?: ToType | string;
@@ -56,11 +59,9 @@ const ProfileMenuItem: React.FC<{
   );
 });
 
-const _ProfileWidget: React.FC<Props> = ({
-  profileHeader,
-  logout,
-  className
-}) => {
+const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
+  const dispatch = useDispatch();
+  const handlerLogout = useCallback(() => dispatch(logout), []);
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
@@ -111,7 +112,7 @@ const _ProfileWidget: React.FC<Props> = ({
             <div className="profile-menu__separator" />
             <ProfileMenuItem
               Icon={LogoutIcon}
-              onClick={logout}
+              onClick={handlerLogout}
               label={t("profile-widget.logout")}
             />
           </PopoverContentCardBlock>
@@ -123,7 +124,6 @@ const _ProfileWidget: React.FC<Props> = ({
 
 interface Props {
   profileHeader: ProfileHeaderViewModel;
-  logout: () => void;
   className?: string;
 }
 
