@@ -53,14 +53,15 @@
 
   &__menu {
     padding: 0;
-    height: $wallet-item-size;
-    width: $wallet-item-size;
+    min-height: $wallet-item-size;
+    min-width: $wallet-item-size;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+    @include adaptive-margin(right, $padding-medium);
 
     &:hover {
       box-shadow: $box-shadow-4;
