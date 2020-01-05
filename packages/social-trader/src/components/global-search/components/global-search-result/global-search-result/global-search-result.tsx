@@ -2,6 +2,7 @@ import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { CommonPublicAssetsViewModel } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
@@ -99,5 +100,5 @@ interface Props {
   data: CommonPublicAssetsViewModel;
 }
 
-const GlobalSearchResult = React.memo(_GlobalSearchResult);
+const GlobalSearchResult = withBlurLoader(React.memo(_GlobalSearchResult));
 export default GlobalSearchResult;
