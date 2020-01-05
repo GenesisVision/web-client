@@ -1,3 +1,4 @@
+import { changeLocationAction } from "actions/location.actions";
 import platformActions from "actions/platform-actions";
 import AppLayout from "components/app-layout/app-layout";
 import ServerErrorPage from "components/server-error-page/server-error-page";
@@ -28,6 +29,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       try {
         await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
           await dispatch(platformActions.fetchPlatformSettings());
+          await dispatch(changeLocationAction());
         });
       } catch (e) {
         componentProps = { e };
