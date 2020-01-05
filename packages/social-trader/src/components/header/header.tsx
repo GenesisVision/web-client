@@ -24,49 +24,59 @@ import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import { mobileMenuItems, topMenuItems } from "routes/menu";
 import { getRandomInteger } from "utils/helpers";
 
+const HeaderLeft: React.FC<{
+  backPath: string;
+  profileHeader?: ProfileHeaderViewModel;
+}> = React.memo(({ backPath, profileHeader }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
+  return (
+    <div
+      className={classNames("header__left", {
+        "header__left--search": openSearch
+      })}
+    >
+      <NavigationMobileButton
+        mobileMenuItems={mobileMenuItems}
+        backPath={backPath}
+        profileHeader={profileHeader}
+        isAuthenticated={isAuthenticated}
+      />
+      <Navigation
+        menuItems={topMenuItems}
+        className={classNames("header__navigation", {
+          "header__navigation--search": openSearch
+        })}
+      />
+      <div
+        onClick={setSearchIsOpen}
+        className={classNames("header__search-container", {
+          "header__search-container--search": openSearch
+        })}
+      >
+        <HeaderIcon>
+          {openSearch ? (
+            <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
+          ) : (
+            <div className="header__search-button">
+              <SearchIcon />
+            </div>
+          )}
+        </HeaderIcon>
+      </div>
+    </div>
+  );
+});
+
 const _Header: React.FC<Props> = ({ profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
     <div className="header">
-      <div
-        className={classNames("header__left", {
-          "header__left--search": openSearch
-        })}
-      >
-        <NavigationMobileButton
-          mobileMenuItems={mobileMenuItems}
-          backPath={backPath}
-          profileHeader={profileHeader}
-          isAuthenticated={isAuthenticated}
-        />
-        <Navigation
-          menuItems={topMenuItems}
-          className={classNames("header__navigation", {
-            "header__navigation--search": openSearch
-          })}
-        />
-        <div
-          onClick={setSearchIsOpen}
-          className={classNames("header__search-container", {
-            "header__search-container--search": openSearch
-          })}
-        >
-          <HeaderIcon>
-            {openSearch ? (
-              <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
-            ) : (
-              <div className="header__search-button">
-                <SearchIcon />
-              </div>
-            )}
-          </HeaderIcon>
-        </div>
-      </div>
+      <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
       <div className="header__right">
         {isAuthenticated ? (
           <>
