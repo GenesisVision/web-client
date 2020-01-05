@@ -35,9 +35,14 @@ const _WalletWidget: React.FC<Props> = ({
           <HeaderIcon>
             <WalletIcon primary={anchor !== undefined} />
           </HeaderIcon>
-          {`${formatCurrencyValue(available, currency)} ${currency}`}
+          <div className="wallet-widget__amount">{`${formatCurrencyValue(
+            available,
+            currency
+          )} ${currency}`}</div>
         </div>
-        <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
+        <HeaderIcon>
+          <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
+        </HeaderIcon>
       </div>
       <Popover anchorEl={anchor} onClose={clearAnchor}>
         <PopoverContent>

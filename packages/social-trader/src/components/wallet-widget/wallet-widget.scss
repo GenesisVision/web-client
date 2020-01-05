@@ -6,6 +6,10 @@
   display: flex;
   align-items: center;
 
+  &__amount {
+    white-space: nowrap;
+  }
+
   &__wallet {
     font-size: $font-size-common;
     display: flex;
