@@ -2,27 +2,12 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_constants";
-@import "~components/table/components/table-card/table-card";
-
-$padding: $padding-small;
-$detailed-text: 11px;
-$border-radius: 5px;
 
 .programs-table__cell {
-  @include vertical-paddings($padding-xxsmall);
-  @include horizontal-paddings($padding-xsmall);
-  &--avatar-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    .program-avatar {
-      min-width: 40px;
-    }
+  &.table__cell {
+    @include vertical-paddings($padding-xxsmall);
   }
-  &--title {
-    width: 170px;
-  }
+
   &--link {
     margin-bottom: 3px;
     word-break: break-all;
@@ -34,23 +19,14 @@ $border-radius: 5px;
     @include link($text-accent-color, $text-color);
   }
 
-  &--name {
-    padding-right: $padding-xsmall;
-  }
-
-  &--equity {
-    padding-left: 0;
-  }
-
   &--chart {
     max-width: 136px;
     width: 136px;
-    padding-right: 0;
   }
 
   &--favorite {
     &.table__cell:last-child {
-      padding-right: 22px;
+      padding-right: $padding-xsmall;
     }
     .favorite-icon {
       width: 20px;
@@ -62,222 +38,4 @@ $border-radius: 5px;
       }
     }
   }
-}
-
-.program-detailed {
-  &__container {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-    &--inner {
-      width: calc(100% - 45px);
-    }
-  }
-  &__info {
-    display: flex;
-    flex-direction: column;
-    background: $secondary-color;
-    padding: $padding/1.5;
-    border-radius: $border-radius 0 0 $border-radius;
-    min-width: 255px;
-  }
-
-  &__collapse {
-    @include transition(background-color);
-    @include background-with-avatar-level($secondary-color);
-
-    border-radius: 0 $border-radius $border-radius 0;
-    width: 45px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      @include background-with-avatar-level(lighten($secondary-color, 2%));
-    }
-  }
-  &__collapse-icon {
-    width: 15px;
-  }
-
-  &__avatar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: $padding/1.5;
-    &--name {
-      margin-left: $padding-xxsmall;
-    }
-  }
-
-  &__title {
-    font-size: $detailed-text;
-    letter-spacing: 0.2px;
-    margin-bottom: $padding/3.75;
-    word-break: break-word;
-  }
-
-  &__title-link {
-    @include link($text-accent-color, $text-color);
-  }
-
-  &__manager {
-    font-size: $detailed-text;
-    letter-spacing: 0.2px;
-    color: $primary-color;
-    word-break: break-all;
-    margin-bottom: $padding/3.75;
-  }
-
-  &__manager-link {
-    @include link($primary-color);
-  }
-
-  &__strategy {
-    font-size: $font-size-common/1.5;
-    line-height: 1.85;
-    letter-spacing: 0.4px;
-    color: #fff;
-    margin-bottom: $padding/2/1.5;
-    font-weight: 600;
-  }
-
-  &__scroll {
-    position: relative;
-    margin: 0 0-$padding/1.5;
-    flex: 1;
-  }
-
-  &__description {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 $padding/1.5;
-    font-size: $font-size-common/1.5;
-    line-height: 1.85;
-    letter-spacing: 0.4px;
-    color: #fff;
-    max-height: 300px;
-    word-break: break-all;
-    white-space: pre-wrap;
-  }
-
-  &__chart {
-    height: 50%;
-    min-height: 250px;
-  }
-
-  &__statistic {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: stretch;
-    padding: $padding/1.5;
-    width: 100%;
-    background-color: $row-color;
-  }
-
-  &__details {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    font-size: 11px;
-  }
-
-  &__details-link {
-    @include link($text-accent-color, $text-color);
-  }
-
-  &__statistic-data,
-  &__bottom-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  &__favorites-block {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: $padding/4;
-
-    .icon {
-      margin: 0 10px;
-    }
-  }
-
-  &__statistic-data {
-    margin-bottom: $padding;
-    &--label {
-      opacity: 0.3;
-      font-size: $font-size-common/1.5;
-      padding: $padding/3 4px;
-    }
-    &--value {
-      font-size: $font-size-common/1.5;
-      padding: 0 4px;
-      &--positive {
-        color: $positive-color;
-      }
-    }
-  }
-
-  @include media-breakpoint-landscape-phone() {
-    &__scroll {
-      margin: 0 0-$padding;
-    }
-    &__info {
-      padding: $padding;
-    }
-    &__avatar {
-      margin-bottom: $padding;
-    }
-    &__strategy {
-      margin-bottom: $padding/2;
-    }
-
-    &__strategy {
-      font-size: $font-size-common;
-    }
-
-    &__description {
-      font-size: $font-size-common;
-      padding: 0 $padding;
-    }
-    &__avatar__img {
-      height: 80px;
-      width: 80px;
-    }
-    &__statistic {
-      padding: $padding;
-    }
-    &__statistic-data {
-      &--label {
-        font-size: $font-size-common;
-      }
-      &--value {
-        font-size: $font-size-common;
-      }
-    }
-    &__statistic-data {
-      margin-bottom: $padding * 2;
-    }
-    &__favorites-block {
-      margin-bottom: $padding/3;
-    }
-  }
-}
-
-.popover-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
