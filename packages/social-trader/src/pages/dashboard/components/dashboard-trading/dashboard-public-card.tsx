@@ -144,6 +144,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       {topFundAssets && (
         <TableCardTableRow>
           <FundAssetContainer
+            noWrap
             assets={topFundAssets as FundAssetType[]}
             type={FUND_ASSET_TYPE.SHORT}
             size={3}

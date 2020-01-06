@@ -95,6 +95,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
         <TableCardTableRow>
           {fund.topFundAssets && (
             <FundAssetContainer
+              noWrap
               assets={fund.topFundAssets as FundAssetType[]}
               type={FUND_ASSET_TYPE.SHORT}
               size={3}
