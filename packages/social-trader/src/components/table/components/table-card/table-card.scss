@@ -8,24 +8,6 @@ $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
 
-@mixin title() {
-  @include font-size($font-size-small);
-  @include adaptive-padding(bottom, $font-size-small);
-  opacity: 0.3;
-  color: white;
-  text-align: left;
-}
-
-@mixin link($color-link, $color-link-hover: $color-link) {
-  @include transition(color);
-  font-size: inherit;
-  color: $color-link;
-
-  &:hover {
-    color: rgba(darken($color-link-hover, 10%), 0.9);
-  }
-}
-
 .table-card {
   margin-bottom: $padding-small/2;
   display: flex;
