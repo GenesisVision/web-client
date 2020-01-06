@@ -148,25 +148,11 @@ $padding: $padding-small;
     }
 
     &:not(.table__row--head):hover {
-      background-color: $row-color;
+      @include background-with-avatar-level($row-color);
     }
 
     &--stripy:nth-child(2n + 1) {
       background-color: $table-background-subcolor;
-    }
-
-    &:hover {
-      .program-avatar__level {
-        background-color: $row-color;
-      }
-
-      .program-detailed__avatar .program-avatar__level {
-        background-color: $secondary-color;
-      }
-    }
-
-    .program-avatar__level {
-      transition: border-color 300ms ease;
     }
   }
 
