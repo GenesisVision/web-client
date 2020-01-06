@@ -122,6 +122,26 @@ $card-avatar-size: 80px;
     &--flex-wrap {
       flex-wrap: wrap;
     }
+    @include media-breakpoint-landscape-tablet() {
+      &--title {
+        width: 45%;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
+    @include media-breakpoint-phone() {
+      & table {
+        td {
+          font-size: $font-size-common;
+        }
+      }
+    }
   }
   &__table-column {
     display: flex;
@@ -134,10 +154,6 @@ $card-avatar-size: 80px;
   @include media-breakpoint-phone() {
     height: $card-height;
     margin-right: 0;
-    .program-avatar {
-      width: $card-avatar-size;
-      height: $card-avatar-size;
-    }
     &__title {
       font-size: $font-size-paragraph;
     }
@@ -155,13 +171,6 @@ $card-avatar-size: 80px;
     &__balance {
       font-size: $font-size-common;
     }
-    &__table {
-      & table {
-        td {
-          font-size: $font-size-common;
-        }
-      }
-    }
   }
   @include media-breakpoint-landscape-phone() {
     min-width: $card-width;
@@ -173,21 +182,6 @@ $card-avatar-size: 80px;
   }
   @media (min-width: 1075px) {
     width: calc(33.33% - #{$padding-small}/ 2);
-  }
-  @include media-breakpoint-landscape-tablet() {
-    &__table {
-      &--title {
-        width: 45%;
-
-        &:first-child {
-          width: 30%;
-        }
-
-        &:nth-child(2) {
-          width: 25%;
-        }
-      }
-    }
   }
   @media (min-width: 1400px) {
     width: $card-width;
