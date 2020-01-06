@@ -20,6 +20,7 @@ import { FUND_ASSET_TYPE } from "./fund-asset";
 import HidedAssetsLabel from "./hided-assets-label";
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
+  noWrap,
   assets = [],
   type,
   length,
@@ -37,6 +38,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   return (
     <div
       className={classNames("fund-assets", {
+        "fund-assets--no-wrap": noWrap,
         "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
       })}
     >
@@ -170,6 +172,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
+  noWrap?: boolean;
   assets?: Array<FundAssetType>;
   type: FUND_ASSET_TYPE;
   size?: number;
