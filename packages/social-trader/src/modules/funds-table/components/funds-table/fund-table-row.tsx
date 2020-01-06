@@ -31,17 +31,15 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
   );
   return (
     <TableRow>
-      <TableCell className="funds-table__cell funds-table__cell--name">
-        <div className="funds-table__cell--avatar-title">
-          <Link to={link}>
-            <AssetAvatarWithName
-              url={fund.logo}
-              alt={fund.title}
-              color={fund.color}
-              name={fund.title}
-            />
-          </Link>
-        </div>
+      <TableCell className="funds-table__cell">
+        <Link to={link}>
+          <AssetAvatarWithName
+            url={fund.logo}
+            alt={fund.title}
+            color={fund.color}
+            name={fund.title}
+          />
+        </Link>
       </TableCell>
       <TableCell className="funds-table__cell funds-table__cell--amount">
         <NumberFormat
@@ -55,26 +53,25 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
       </TableCell>
       <TableCell className="funds-table__cell">
         <FundAssetContainer
+          noWrap
           assets={fund.topFundAssets}
           type={FUND_ASSET_TYPE.SHORT}
           size={3}
           length={fund.totalAssetsCount}
         />
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--investors">
-        {fund.investorsCount}
-      </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--age">
+      <TableCell className="funds-table__cell">{fund.investorsCount}</TableCell>
+      <TableCell className="programs-table__cell">
         {distanceDate(fund.creationDate)}
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--drawdown">
+      <TableCell className="funds-table__cell">
         <NumberFormat
           value={formatValue(fund.statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--profit">
+      <TableCell className="funds-table__cell">
         <Profitability
           value={formatValue(fund.statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -93,7 +90,7 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
         )}
       </TableCell>
       {isAuthenticated && fund.personalDetails && (
-        <TableCell className="funds-table__cell funds-table__cell--favorite">
+        <TableCell className="funds-table__cell">
           <ToggleAssetFavoriteButton
             asset={fund}
             updateRow={updateRow}
