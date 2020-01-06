@@ -36,7 +36,7 @@ $card-avatar-size: 80px;
   height: $card-height/1.2;
   padding: $padding-small $padding-xsmall;
   border-radius: 8px;
-  background-color: $row-color;
+  @include background-with-avatar-level($row-color);
   flex-grow: 1;
   &__buttons {
     display: flex;
