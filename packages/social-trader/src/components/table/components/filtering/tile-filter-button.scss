@@ -10,16 +10,18 @@
 
   &__add {
     @include font-size($font-size-xsmall);
+    @include adaptive-border-radius(19.5px);
+    @include height(18px);
+    @include line-height(18px);
+    @include horizontal-paddings($padding-xxsmall);
     cursor: pointer;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
     font-weight: 500;
     text-transform: uppercase;
     line-height: 16px;
-    padding: 0 $padding-xxsmall;
     white-space: nowrap;
     transition-property: border-color;
     border: 1px solid #6e757b;
