@@ -7,7 +7,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding-left: 0 $padding-xsmall;
+  padding-left: 0;
 
   @include media-breakpoint-landscape-phone() {
     padding-left: $padding-small;
