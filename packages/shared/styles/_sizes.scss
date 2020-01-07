@@ -77,6 +77,16 @@ $icon-size-mobile: $icon-size/$divider-text;
 $avatar-size-mobile: $avatar-size/$divider-title;
 
 //mixins
+@mixin line-height($height) {
+  $divider: $divider-text;
+
+  line-height: $height/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    line-height: $height;
+  }
+}
+
 @mixin height($height) {
   $divider: $divider-text;
 
@@ -169,4 +179,11 @@ $avatar-size-mobile: $avatar-size/$divider-title;
 @mixin details-block-horizontal-paddings() {
   @include details-block-left-padding();
   @include details-block-right-padding();
+}
+
+@mixin adaptive-border-radius($size) {
+  border-radius: $size/$divider-padding;
+  @include media-breakpoint-landscape-phone() {
+    border-radius: $size;
+  }
 }
