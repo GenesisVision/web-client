@@ -87,9 +87,14 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
-@mixin height($height) {
-  $divider: $divider-text;
+@mixin right($right, $divider: $divider-text) {
+  right: $right/$divider;
+  @include media-breakpoint-landscape-phone() {
+    right: $right;
+  }
+}
 
+@mixin height($height, $divider: $divider-text) {
   height: $height/$divider;
 
   @include media-breakpoint-landscape-phone() {
@@ -166,10 +171,7 @@ $avatar-size-mobile: $avatar-size/$divider-title;
 }
 
 @mixin details-block-left-margin() {
-  margin-left: $details-block-padding;
-  @include media-breakpoint-landscape-phone() {
-    margin-left: $details-block-padding;
-  }
+  @include adaptive-margin(left, $details-block-padding);
 }
 
 @mixin details-block-right-padding() {
