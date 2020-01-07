@@ -23,19 +23,4 @@
     max-width: 136px;
     width: 136px;
   }
-
-  &--favorite {
-    &.table__cell:last-child {
-      padding-right: $padding-xsmall;
-    }
-    .favorite-icon {
-      width: 20px;
-      height: 19px;
-
-      @include media-breakpoint-landscape-phone() {
-        width: 28px;
-        height: 27px;
-      }
-    }
-  }
 }
