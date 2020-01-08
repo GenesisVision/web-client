@@ -25,7 +25,7 @@ const _SignUpPage: React.FC<Props> = ({
         request={service.signUp}
         renderForm={handle => (
           <SignUpForm
-            refCode={referralCodeFromStorage as string}
+            refCode={referralCodeFromStorage || referralCode}
             onSubmit={handle}
             error={errorMessage}
           />
