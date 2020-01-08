@@ -34,7 +34,7 @@ $add-button-button-font-size: 28px;
   &__button {
     padding: 0 7px;
     font-size: $add-button-button-font-size/$divider-text;
-    font-weight: 100;
+    font-weight: 200;
     @include media-breakpoint-landscape-phone() {
       font-size: $add-button-button-font-size;
     }
