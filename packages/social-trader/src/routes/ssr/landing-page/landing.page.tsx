@@ -42,9 +42,8 @@ const _LandingPage: React.FC<Props> = ({
     if (location) {
       const { ref } = qs.parse(location.search.slice(1));
       setToStorage(REFERRAL_CODE, ref);
+      setCookie(REFERRAL_CODE, ref);
     }
-    if (typeof window !== undefined && refLink)
-      setCookie(REFERRAL_CODE, refLink);
   }, [window, location]);
   return (
     <Layout title="Genesis Vision">
