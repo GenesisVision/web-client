@@ -3,7 +3,7 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { ASSET, CREATE_ASSET } from "constants/constants";
-import { withBlurLoader } from "decorators/with-blur-loader";
+import Crashable from "decorators/crashable";
 import { AccountDetailsSubscriptions } from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
 import {
@@ -92,7 +92,5 @@ interface Props {
   data: AccountDetailsDataType;
 }
 
-const AccountDetailsContainer = withBlurLoader(
-  React.memo(_AccountDetailsContainer)
-);
+const AccountDetailsContainer = React.memo(Crashable(_AccountDetailsContainer));
 export default AccountDetailsContainer;

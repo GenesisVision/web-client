@@ -5,7 +5,7 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { ASSET } from "constants/constants";
-import { withBlurLoader } from "decorators/with-blur-loader";
+import Crashable from "decorators/crashable";
 import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
@@ -225,7 +225,5 @@ interface Props {
   data: ProgramDescriptionDataType;
 }
 
-const ProgramDetailsContainer = withBlurLoader(
-  React.memo(_ProgramDetailsContainer)
-);
+const ProgramDetailsContainer = React.memo(Crashable(_ProgramDetailsContainer));
 export default ProgramDetailsContainer;

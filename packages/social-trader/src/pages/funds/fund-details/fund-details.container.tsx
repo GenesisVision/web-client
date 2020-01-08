@@ -7,6 +7,7 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
+import Crashable from "decorators/crashable";
 import { FundDetailsFull } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -119,5 +120,5 @@ interface Props {
   data: FundDetailsFull;
 }
 
-const FundDetailsContainer = React.memo(_FundDetailsContainer);
+const FundDetailsContainer = React.memo(Crashable(_FundDetailsContainer));
 export default FundDetailsContainer;
