@@ -8,6 +8,9 @@ import {
   ItemsViewModelProgramDetailsListItem,
   PlatformEvent
 } from "gv-api-web";
+import { useLocalStorage } from "hooks/localstorage";
+import { useLocation } from "hooks/location";
+import * as qs from "qs";
 import React, { useEffect } from "react";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
@@ -33,10 +36,16 @@ const _LandingPage: React.FC<Props> = ({
   events,
   refLink
 }) => {
+  const { location } = useLocation();
+  const { setToStorage } = useLocalStorage();
   useEffect(() => {
+    if (location) {
+      const { ref } = qs.parse(location.search.slice(1));
+      setToStorage(REFERRAL_CODE, ref);
+    }
     if (typeof window !== undefined && refLink)
       setCookie(REFERRAL_CODE, refLink);
-  }, [window]);
+  }, [window, location]);
   return (
     <Layout title="Genesis Vision">
       <main className="home">

@@ -1,5 +1,7 @@
 import "./signup.scss";
 
+import { REFERRAL_CODE } from "components/auth/signup/signup.constants";
+import { useLocalStorage } from "hooks/localstorage";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
 import { withTranslation as translate } from "react-i18next";
@@ -15,13 +17,15 @@ const _SignUpPage: React.FC<Props> = ({
   errorMessage,
   service
 }) => {
+  const { getFromStorage } = useLocalStorage();
+  const referralCodeFromStorage = getFromStorage(REFERRAL_CODE);
   return (
     <div className="signup">
       <CaptchaContainer
         request={service.signUp}
         renderForm={handle => (
           <SignUpForm
-            refCode={referralCode}
+            refCode={referralCodeFromStorage as string}
             onSubmit={handle}
             error={errorMessage}
           />
