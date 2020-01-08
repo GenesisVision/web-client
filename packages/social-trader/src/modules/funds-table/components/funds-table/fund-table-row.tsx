@@ -85,9 +85,7 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
         </Profitability>
       </TableCell>
       <TableCell className="funds-table__cell funds-table__cell--chart">
-        {fund.statistic && (
-          <ProgramSimpleChart data={fund.statistic.chart} programId={fund.id} />
-        )}
+        <ProgramSimpleChart data={fund?.statistic?.chart} />
       </TableCell>
       {isAuthenticated && fund.personalDetails && (
         <TableCell className="funds-table__cell">
