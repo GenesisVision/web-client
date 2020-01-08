@@ -8,7 +8,6 @@ import {
   ItemsViewModelProgramDetailsListItem,
   PlatformEvent
 } from "gv-api-web";
-import { useLocalStorage } from "hooks/localstorage";
 import { useLocation } from "hooks/location";
 import * as qs from "qs";
 import React, { useEffect } from "react";
@@ -37,11 +36,9 @@ const _LandingPage: React.FC<Props> = ({
   refLink
 }) => {
   const { location } = useLocation();
-  const { setToStorage } = useLocalStorage();
   useEffect(() => {
     if (location) {
       const { ref } = qs.parse(location.search.slice(1));
-      setToStorage(REFERRAL_CODE, ref);
       setCookie(REFERRAL_CODE, ref);
     }
   }, [window, location]);
