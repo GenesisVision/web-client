@@ -1,16 +1,10 @@
-import Profitability from "components/profitability/profitability";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "components/profitability/profitability.helper";
+import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Crashable from "decorators/crashable";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _DashboardStatisticPeriods: React.FC<Props> = ({
@@ -58,32 +52,15 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   withProfitability?: boolean;
   item: TDashboardTotalField;
   label: string;
-}> = ({ item, label, withProfitability, currency }) => {
+}> = ({ item, label, currency }) => {
   return (
     <StatisticItem label={label}>
       <div className="dashboard-statistic-periods-item__value-container">
-        <div className="dashboard-statistic-periods-item__value">
-          <NumberFormat
-            value={formatCurrencyValue(item.profit, currency)}
-            suffix={` ${currency}`}
-            thousandSeparator={" "}
-            displayType="text"
-          />
-        </div>
-        {withProfitability && (
-          <Profitability
-            variant={PROFITABILITY_VARIANT.CHIPS}
-            value={item.profitPercent}
-            prefix={PROFITABILITY_PREFIX.SIGN}
-          >
-            <NumberFormat
-              value={Math.abs(item.profitPercent)}
-              suffix={" %"}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </Profitability>
-        )}
+        <ProfitabilityValuePercent
+          currency={currency}
+          percent={item.profit}
+          value={item.profitPercent}
+        />
       </div>
     </StatisticItem>
   );

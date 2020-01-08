@@ -40,20 +40,15 @@
 }
 
 .tag-button {
-  @include font-size($tag-font-size);
-  border-radius: 19.5px;
+  @include font-size($font-size-xsmall);
+  @include adaptive-border-radius(19.5px);
+  @include height(18px);
+  @include line-height(18px);
+  @include horizontal-paddings($padding-xxsmall);
   font-weight: 500;
   text-transform: uppercase;
-  height: 18px;
-  line-height: 18px;
-  padding: 0 $padding-xxsmall-mobile;
   white-space: nowrap;
 
-  @include media-breakpoint-landscape-phone() {
-    padding: 0 $padding-xxsmall;
-    max-height: 18px;
-    line-height: 18px;
-  }
   &--remainder {
     color: $positive-color;
     background-color: rgba($positive-color, 0.1);

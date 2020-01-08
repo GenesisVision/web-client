@@ -5,11 +5,15 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 5px;
+  @include adaptive-full-padding($padding-xxxsmall);
+  @include font-size($font-size-common);
   &:hover {
     .filter__arrow {
       stroke: $primary-color;
     }
+  }
+  &:not(:last-child) {
+    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__label {
@@ -22,7 +26,7 @@
   &__value {
     letter-spacing: 0.2px;
     color: $text-accent-color;
-    padding: 0 0.4rem;
+    padding: 0 $padding-xxxsmall;
     white-space: nowrap;
   }
 

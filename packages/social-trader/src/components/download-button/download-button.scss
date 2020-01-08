@@ -3,6 +3,10 @@
 @import "~shared/styles/_sizes";
 
 .download-button {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
   @include font-size($font-size-common);
   font-weight: 600;
 }

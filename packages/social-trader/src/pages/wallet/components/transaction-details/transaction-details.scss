@@ -17,10 +17,8 @@
 .transaction-asset {
   display: flex;
   flex-direction: row;
+  @include background-with-avatar-level($secondary-background-color);
 
-  & .program-avatar__level {
-    background-color: $secondary-background-color;
-  }
   &__title {
     font-size: $font-size-h4;
   }

@@ -41,7 +41,7 @@
     .tab-controls__item-btn {
       @include transition(color, text-shadow);
       font-size: 45px;
-      font-weight: 900;
+      font-weight: 700;
       text-shadow: -1px 0 $row-color, 0 1px $row-color, 1px 0 $row-color,
         0 -1px $row-color;
       color: $main-color;

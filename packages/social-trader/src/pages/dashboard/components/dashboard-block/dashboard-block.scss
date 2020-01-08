@@ -23,8 +23,8 @@
   display: flex;
   overflow-x: scroll;
   width: 100%;
-  & .table-card:last-child {
-    margin-right: 0;
+  & .table-card {
+    margin-right: $padding-xsmall;
   }
 
   &__shadow-wrapper {

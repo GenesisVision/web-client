@@ -1,5 +1,5 @@
 import withLoader from "decorators/with-loader";
-import React from "react";
+import React, { useCallback } from "react";
 import { Dispatch } from "redux";
 import { TGetState } from "utils/types";
 
@@ -13,7 +13,7 @@ import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
 import { TRenderHeaderFunc, UpdateSortingFuncType } from "./table.types";
 
-const TableHeader: React.FC<ITableHeaderProps> = ({
+const _TableHeader: React.FC<ITableHeaderProps> = ({
   sorting,
   updateSorting,
   columns,
@@ -39,29 +39,33 @@ export interface ITableHeaderProps {
   renderHeader?: TRenderHeaderFunc;
 }
 
+const getSortingDirection = (
+  name?: string,
+  sorting?: string
+): SORTING_DIRECTION =>
+  (name !== getSortingColumnName(sorting) && SORTING_DIRECTION.NONE) ||
+  getSortingDirectionHelper(sorting);
+
+const isSortable = (sortingName?: string): boolean => sortingName !== undefined;
+
 const _TableColumns: React.FC<IColumnsProps> = ({
   columns,
   updateSorting,
   renderHeader,
   sorting
 }) => {
-  const handleSorting: HandleSortingType = name => () => {
-    if (
-      name !== getSortingColumnName(sorting) ||
-      getSortingDirectionHelper(sorting) === SORTING_DIRECTION.ASC
-    ) {
-      return updateSorting && updateSorting(name + SORTING_DIRECTION.DESC);
-    }
-    return updateSorting && updateSorting(name + SORTING_DIRECTION.ASC);
-  };
-
-  const getSortingDirection = (name?: string): SORTING_DIRECTION =>
-    (name !== getSortingColumnName(sorting) && SORTING_DIRECTION.NONE) ||
-    getSortingDirectionHelper(sorting);
-
-  const isSortable = (sortingName?: string): boolean =>
-    sortingName !== undefined;
-
+  const handleSorting: HandleSortingType = useCallback(
+    name => () => {
+      if (
+        name !== getSortingColumnName(sorting) ||
+        getSortingDirectionHelper(sorting) === SORTING_DIRECTION.ASC
+      ) {
+        return updateSorting && updateSorting(name + SORTING_DIRECTION.DESC);
+      }
+      return updateSorting && updateSorting(name + SORTING_DIRECTION.ASC);
+    },
+    [sorting]
+  );
   return (
     <>
       {columns.map(column => (
@@ -90,4 +94,5 @@ type HandleSortingType = (
   sortingName?: string
 ) => () => ((dispatch: Dispatch, getState: TGetState) => void) | void;
 
+const TableHeader = React.memo(_TableHeader);
 export default TableHeader;

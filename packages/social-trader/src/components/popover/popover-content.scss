@@ -17,7 +17,8 @@ $tooltip-padding: 16px;
   }
 
   &__list-item {
-    padding: $padding-xxsmall $padding-small;
+    @include horizontal-paddings($padding-small);
+    @include vertical-paddings($padding-xxsmall);
   }
 
   &__block {
@@ -27,20 +28,22 @@ $tooltip-padding: 16px;
       max-width: 400px;
     }
     &--small {
-      font-size: $font-size-common;
-      padding: $tooltip-padding;
+      @include font-size($font-size-common);
+      @include adaptive-full-padding($tooltip-padding);
       &.popover-content__block--stretched {
-        padding: $padding-xsmall $tooltip-padding;
+        @include horizontal-paddings($tooltip-padding);
+        @include vertical-paddings($padding-xsmall);
       }
     }
     &--middle {
-      padding: $padding-xsmall;
+      @include adaptive-full-padding($padding-xsmall);
       &.popover-content__block--stretched {
-        padding: $padding-small $padding-xsmall;
+        @include horizontal-paddings($padding-xsmall);
+        @include vertical-paddings($padding-small);
       }
     }
     &--big {
-      padding: $padding-small;
+      @include adaptive-full-padding($padding-small);
       max-width: 100%;
       @include media-breakpoint-landscape-phone() {
         max-width: $modal-width;
@@ -53,7 +56,7 @@ $tooltip-padding: 16px;
 
   &__block-item {
     &:not(:last-child) {
-      padding-bottom: $padding-xsmall;
+      @include adaptive-padding(bottom, $padding-xsmall);
     }
   }
 }

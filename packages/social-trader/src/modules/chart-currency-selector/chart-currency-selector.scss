@@ -8,7 +8,7 @@
       margin-right: 0;
     }
     & button.select__value {
-      font-size: $tag-font-size;
+      @include font-size($tag-font-size);
       border-bottom: 0;
     }
     & .select {

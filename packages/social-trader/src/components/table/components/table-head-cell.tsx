@@ -10,7 +10,7 @@ interface ITableHeadCellProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick(): void;
 }
 
-const TableHeadCell: React.FC<ITableHeadCellProps> = ({
+const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   sortable,
   sortingDirection,
   className,
@@ -26,10 +26,10 @@ const TableHeadCell: React.FC<ITableHeadCellProps> = ({
     >
       <span
         className={classNames({
-          "table__cell--sortable-asc":
-            sortingDirection === SORTING_DIRECTION.ASC,
-          "table__cell--sortable-desc":
-            sortingDirection === SORTING_DIRECTION.DESC
+          "sortable-asc":
+            sortable && sortingDirection === SORTING_DIRECTION.ASC,
+          "sortable-desc":
+            sortable && sortingDirection === SORTING_DIRECTION.DESC
         })}
       >
         {children}
@@ -38,4 +38,5 @@ const TableHeadCell: React.FC<ITableHeadCellProps> = ({
   );
 };
 
-export default React.memo(TableHeadCell);
+const TableHeadCell = React.memo(_TableHeadCell);
+export default TableHeadCell;

@@ -15,29 +15,28 @@
       height: auto;
     }
     &--medium {
-      margin-right: $padding-xsmall;
-      width: $wallet-item-size;
-      height: $wallet-item-size;
+      @include adaptive-margin(right, $padding-xsmall);
+      @include width($wallet-item-size);
+      @include height($wallet-item-size);
     }
     &--small {
-      margin-right: $padding-xsmall/$divider-title;
-      width: $wallet-item-size/$divider-title;
-      height: $wallet-item-size/$divider-title;
+      @include adaptive-margin(right, $padding-xsmall/$divider-title);
+      @include width($wallet-item-size/$divider-title);
+      @include height($wallet-item-size/$divider-title);
     }
   }
   &__rate {
-    font-size: $font-size-small;
+    @include font-size($font-size-small);
     color: $text-light-color;
   }
   &__name {
-    font-size: $font-size-paragraph;
+    @include font-size($font-size-paragraph);
     white-space: nowrap;
     letter-spacing: 0.6px;
-    font-weight: 300;
     color: $text-light-color;
     &--big {
       font-weight: 600;
-      font-size: $font-size-h2;
+      @include font-size($font-size-h2);
     }
   }
 }

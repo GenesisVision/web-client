@@ -24,9 +24,9 @@
   }
 
   &__info {
-    margin-top: $padding-upper-medium;
+    @include adaptive-margin(top, $padding-upper-medium);
     opacity: 0.5;
-    font-size: 11px;
+    @include font-size($font-size-xsmall);
     line-height: 1.64;
     letter-spacing: 0.2px;
     text-align: center;
@@ -38,7 +38,7 @@
 
   &__close {
     position: absolute;
-    padding: 1rem;
+    @include adaptive-full-padding($padding-xxsmall);
     z-index: 2;
 
     .icon {
@@ -81,14 +81,14 @@
   }
 
   &__header {
-    margin-top: $padding-xsmall;
+    @include adaptive-margin(top, $padding-xsmall);
     &:not(:last-child) {
-      padding-bottom: $padding-small;
+      @include adaptive-padding(bottom, $padding-small);
     }
   }
 
   &__subtitle {
-    font-size: $font-size-common;
+    @include font-size($font-size-common);
     font-weight: 300;
     letter-spacing: 0.4px;
     color: #e8eff3;
@@ -101,7 +101,7 @@
       }
     }
     &:not(:last-child) {
-      margin-bottom: $padding-xsmall;
+      @include adaptive-margin(bottom, $padding-xsmall);
     }
 
     font-weight: 300;
@@ -109,12 +109,12 @@
 
   &__buttons {
     display: flex;
-    margin-top: $padding-small;
+    @include adaptive-margin(top, $padding-small);
     justify-content: space-between;
   }
 
   &__text {
-    padding-top: 20px;
+    @include adaptive-padding(top, $padding-xsmall);
 
     &:first-child {
       padding-top: 0;

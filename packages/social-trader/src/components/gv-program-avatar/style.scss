@@ -3,8 +3,11 @@
 @import "~shared/styles/_sizes";
 
 $avatar-small-size: 40px;
+$avatar-small-level-size: 32px;
 $avatar-medium-size: 80px;
+$avatar-medium-level-size: 36px;
 $avatar-big-size: 120px;
+$avatar-big-level-size: 36px;
 
 .program-avatar {
   position: relative;
@@ -13,40 +16,40 @@ $avatar-big-size: 120px;
   align-items: center;
 
   &--with-level {
-    margin-right: $padding-xsmall;
+    @include adaptive-margin(right, $padding-xsmall);
     &.program-avatar--big {
       margin-right: 0;
     }
   }
 
   &--small {
-    height: $avatar-small-size;
-    width: $avatar-small-size;
+    @include height($avatar-small-size);
+    @include width($avatar-small-size);
     .program-avatar__level {
-      right: -25px;
-      height: 32px;
-      width: 32px;
+      @include right(-($avatar-small-level-size/1.3));
+      @include height($avatar-small-level-size);
+      @include width($avatar-small-level-size);
     }
   }
 
   &--medium {
-    height: $avatar-medium-size;
-    width: $avatar-medium-size;
+    @include height($avatar-medium-size);
+    @include width($avatar-medium-size);
     margin-right: $padding-xsmall;
     .program-avatar__level {
-      right: -18px;
-      height: 36px;
-      width: 36px;
+      @include right(-($avatar-medium-level-size/2));
+      @include height($avatar-medium-level-size);
+      @include width($avatar-medium-level-size);
     }
   }
 
   &--big {
-    height: $avatar-big-size;
-    width: $avatar-big-size;
+    @include height($avatar-big-size);
+    @include width($avatar-big-size);
     .program-avatar__level {
-      right: -20px;
-      height: 36px;
-      width: 36px;
+      @include right(-($avatar-big-level-size/2));
+      @include height($avatar-big-level-size);
+      @include width($avatar-big-level-size);
     }
   }
 
@@ -58,20 +61,20 @@ $avatar-big-size: 120px;
     background-color: $panel-background-color;
     border-radius: 50%;
     & .pie-container {
-      height: 26px;
-      width: 26px;
+      @include height(26px);
+      @include width(26px);
     }
   }
 
   &__image {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 0.5em;
+    @include adaptive-border-radius(7px);
   }
 
   &__default-image {
     width: 100%;
     height: 100%;
-    border-radius: 0.5em;
+    @include adaptive-border-radius(7px);
   }
 }

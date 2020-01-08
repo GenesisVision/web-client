@@ -31,16 +31,10 @@
   padding: 11px 16px;
   border-radius: $border-radius;
   margin: 0 -16px;
-
-  & .program-avatar__level {
-    background-color: $background-color;
-  }
+  @include background-with-avatar-level($background-color);
 
   &:hover {
-    background-color: $secondary-background-color;
-    & .program-avatar__level {
-      background-color: $secondary-background-color;
-    }
+    @include background-with-avatar-level($secondary-background-color);
   }
 
   &__list {
