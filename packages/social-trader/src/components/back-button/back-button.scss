@@ -3,20 +3,25 @@
 @import "~shared/styles/_sizes";
 
 .back-button {
-  margin-bottom: 12px;
+  margin-bottom: $padding-xxsmall;
   display: flex;
   align-items: center;
   padding: 0 $padding-xsmall;
 
   @include media-breakpoint-landscape-phone() {
-    margin-bottom: 25px;
+    margin-bottom: $padding-xsmall;
     padding: 0;
   }
 
-  &__container.gv-btn {
+  &__container {
     display: flex;
     align-items: stretch;
-    font-size: $font-size-common;
+    font-size: $font-size-small;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+      opacity: 0.4;
+    }
   }
 
   &__back {
@@ -30,11 +35,6 @@
     margin-right: 5px;
     height: 16.5px;
     font-family: "Times New Roman";
-  }
-
-  & .gv-btn--text {
-    padding: 0;
-    font-size: $font-size-small;
   }
 
   &__path {

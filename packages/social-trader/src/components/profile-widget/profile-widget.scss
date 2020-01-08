@@ -22,41 +22,23 @@
 }
 
 .profile-menu {
-  display: flex;
-  flex-direction: column;
-  min-width: 250px;
-  border-radius: 8px;
-  * {
-    color: $main-color !important;
-  }
   &__header {
-    padding: 30px 20px;
-    letter-spacing: 0.4px;
     font-size: $font-size-common;
-    font-weight: 400;
-    background-color: $panel-background-color;
-  }
-
-  &__container {
-    padding: 20px 0;
-  }
-
-  .icon {
-    opacity: 0.2;
-    background-position: center;
-    margin-right: 20px;
+    padding: $padding-xxsmall 0;
   }
 
   &__item {
-    padding: 10px 20px;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
     font-size: $font-size-common;
-    font-weight: 300;
-    letter-spacing: 0.3px;
 
-    a,
-    .gv-btn {
-      display: inline-flex;
-      align-items: center;
+    .icon {
+      opacity: 0.2;
+      background-position: center;
+      margin-right: $padding-xsmall;
+      height: 13px;
+      width: 13px;
     }
 
     &:hover {
@@ -64,36 +46,14 @@
         opacity: 0.5;
       }
     }
+  }
 
-    &--details {
-      .icon {
-        height: 14px;
-      }
-    }
-    &--settings {
-      .icon {
-        height: 13px;
-      }
-    }
-    &--security {
-      .icon {
-        height: 13px;
-        width: 20px;
-      }
-      svg [fill] {
-        fill: none;
-      }
-    }
-    &--logout {
-      margin-top: 15px;
-      .icon {
-        height: 12px;
-      }
-      .gv-btn {
-        font-weight: 300;
-        font-size: 1em;
-        padding: 0;
-      }
-    }
+  &__item-label {
+    color: $text-light-color;
+    white-space: nowrap;
+  }
+
+  &__separator {
+    padding: $padding-xxsmall 0;
   }
 }

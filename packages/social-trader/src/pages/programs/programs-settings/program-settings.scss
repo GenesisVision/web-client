@@ -19,11 +19,8 @@
   &__signaling-edit-form-title-block {
     display: flex;
     align-items: center;
-
-    & .gv-switch-wrapper {
-      @include adaptive-padding(bottom, $padding-xsmall);
-      margin: 0;
-    }
+    @include adaptive-padding(bottom, $padding-xsmall);
+    margin: 0;
   }
 
   &__block {
@@ -74,12 +71,6 @@
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 0;
-    }
-
-    &--wide {
-      .gv-text-field__wrapper {
-        width: 100%;
-      }
     }
 
     @include media-breakpoint-landscape-phone() {

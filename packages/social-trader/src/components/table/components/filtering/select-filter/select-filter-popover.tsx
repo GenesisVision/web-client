@@ -1,4 +1,8 @@
 import GVButton from "components/gv-button";
+import {
+  PopoverContent,
+  PopoverContentListItem
+} from "components/popover/popover-content";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -24,21 +28,22 @@ const _SelectFilterPopover: React.FC<Props> = ({
   );
 
   return (
-    <div className="select-filter">
+    <PopoverContent type={"list"}>
       {values.map((x, idx) => {
         const selected = x.value === value;
         return (
           <GVButton
+            noPadding
             variant="text"
             color={selected ? "primary" : "secondary"}
             key={idx}
             onClick={handleClick(x.value)}
           >
-            {renderLabel(x)}
+            <PopoverContentListItem>{renderLabel(x)} </PopoverContentListItem>
           </GVButton>
         );
       })}
-    </div>
+    </PopoverContent>
   );
 };
 

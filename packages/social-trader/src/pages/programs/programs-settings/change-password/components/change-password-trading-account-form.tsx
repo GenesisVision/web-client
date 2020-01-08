@@ -1,7 +1,7 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -81,9 +81,13 @@ const _ChangePasswordTradingAccountForm: React.FC<
             component={GVTextField}
           />
         )}
-        <FormError error={errorMessage} />
+        <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton type="submit" disabled={!isValid || !dirty || isSubmitting}>
+          <GVButton
+            wide
+            type="submit"
+            disabled={!isValid || !dirty || isSubmitting}
+          >
             {t("buttons.confirm")}
           </GVButton>
         </DialogButtons>

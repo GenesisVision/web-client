@@ -1,23 +1,27 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .gv-tab {
   cursor: pointer;
   color: $text-color;
-  font-size: 13px;
+  @include font-size($font-size-common);
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0.1px;
-  padding: 0 12.5px;
-  padding-bottom: 0.2em;
+  @include adaptive-padding(bottom, $padding-xxxsmall);
+  &:not(:last-child) {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
   white-space: nowrap;
   &__count {
     display: inline-block;
     text-align: center;
     min-width: 8px;
-    margin-left: 6px;
+    @include adaptive-margin(left, $padding-xxxsmall);
     margin-bottom: -4px;
-    padding: 4px 7px;
-    border-radius: 6px;
+    @include horizontal-paddings(7px);
+    @include vertical-paddings(4px);
+    @include adaptive-border-radius(6px);
     line-height: 1;
     background-color: rgba($secondary-color, 0.5);
   }

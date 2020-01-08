@@ -1,5 +1,5 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -31,7 +31,7 @@ const _DepositContainer: React.FC<Props> = ({
 }) => {
   const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
-  const { data, sendRequest: getInvestInfo, errorMessage } = useApiRequest<
+  const { data, sendRequest: getInvestInfo } = useApiRequest<
     TWalletsAvailableData
   >({
     request: fetchAvailableWallets
@@ -57,7 +57,6 @@ const _DepositContainer: React.FC<Props> = ({
         hasEntryFee={hasEntryFee}
         currency={currency || stateCurrency}
       />
-      <FormError error={errorMessage} />
     </Dialog>
   );
 };

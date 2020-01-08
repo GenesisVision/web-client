@@ -127,7 +127,6 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           label={t("create-program-page.settings.fields.brokers-leverage")}
           InputComponent={Select}
           disableIfSingle
-          className="create-program-settings__leverage"
         >
           {account.leverages.map(leverage => (
             <option value={leverage} key={leverage}>

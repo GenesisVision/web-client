@@ -1,5 +1,6 @@
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TradesDelay } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -18,11 +19,11 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
       <Tooltip
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         render={() => (
-          <div className="details-trades__delay-tooltip">
+          <TooltipContent>
             {t("program-details-page.history.open-positions.delay-tooltip", {
               delay: label
             })}
-          </div>
+          </TooltipContent>
         )}
       >
         <div className="details-trades__delay-question">?</div>

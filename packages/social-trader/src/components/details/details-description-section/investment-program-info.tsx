@@ -61,7 +61,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   return (
     <StatisticItemList>
       {isOwnProgram && (
-        <div className="statistics-item asset-details-description__level-calculator">
+        <StatisticItem className="asset-details-description__level-calculator">
           <LevelCalculator
             id={id}
             currency={currency}
@@ -69,7 +69,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
             levelsParameters={levelsParameters}
             isKycConfirmed={isKycConfirmed || false}
           />
-        </div>
+        </StatisticItem>
       )}
       <StatisticItem
         label={

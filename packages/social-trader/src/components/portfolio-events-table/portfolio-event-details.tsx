@@ -1,6 +1,7 @@
-import classnames from "classnames";
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
+import { PopoverContent } from "components/popover/popover-content";
 import Crashable from "decorators/crashable";
 import { InvestmentEventItemViewModel } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
@@ -15,14 +16,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   if (extendedInfo.length === 0) return null;
   return (
     <div className="portfolio-event-details">
-      <GVButton
-        variant="text"
-        color="secondary"
-        className={classnames("portfolio-event-details__button", {
-          "portfolio-event-details__button--active": !!anchor
-        })}
-        onClick={setAnchor}
-      >
+      <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
         {t("Details")}
       </GVButton>
       <Popover
@@ -32,12 +26,16 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
         className="portfolio-event-details__popover"
       >
         {extendedInfo.map((info, idx) => (
-          <FeeCommission
-            key={idx}
-            title={info.title}
-            value={info.amount}
-            currency={info.currency}
-          />
+          <PopoverContent>
+            <PopoverContentCardBlock size={"small"}>
+              <FeeCommission
+                key={idx}
+                title={info.title}
+                value={info.amount}
+                currency={info.currency}
+              />
+            </PopoverContentCardBlock>
+          </PopoverContent>
         ))}
       </Popover>
     </div>

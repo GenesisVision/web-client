@@ -1,6 +1,5 @@
 import "./tooltip.scss";
 
-import classNames from "classnames";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -38,7 +37,7 @@ const _Tooltip: React.FC<Props> = ({
         noAbsolute
         noPadding
         anchorEl={anchor}
-        className={classNames("tooltip__popover", className)}
+        className={className}
         vertical={vertical}
         horizontal={horizontal}
       >

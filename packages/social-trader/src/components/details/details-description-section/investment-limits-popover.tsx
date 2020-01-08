@@ -1,6 +1,7 @@
 import "./investment-limits-popover.scss";
 
 import GVButton from "components/gv-button";
+import { PopoverContent } from "components/popover/popover-content";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { LevelInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -30,7 +31,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
   }, [currency]);
   return (
     <>
-      <div className="popover-levels">
+      <PopoverContent type={"list"} className="popover-levels">
         <div className="popover-levels__block">
           <h4 className="popover-levels__title">
             {t("program-details-page.popover.genesis-level")} {level}
@@ -68,7 +69,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
             <>{t("program-details-page.popover.about-levels")} &#8250;</>
           </GVButton>
         </div>
-      </div>
+      </PopoverContent>
       <AboutLevelsComponent
         condition={!!investmentsLimits}
         open={isOpen}

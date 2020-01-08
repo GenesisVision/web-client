@@ -1,5 +1,3 @@
-import "./paging.scss";
-
 import Pager from "components/pager/pager";
 import { IPaging } from "components/table/helpers/paging.helpers";
 import withLoader from "decorators/with-loader";

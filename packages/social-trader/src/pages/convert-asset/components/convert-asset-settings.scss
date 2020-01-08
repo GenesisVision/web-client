@@ -31,10 +31,6 @@
     margin-bottom: 40px;
     max-width: 230px;
 
-    &.deposit-details {
-      max-width: 280px;
-    }
-
     &-caption {
       font-size: $font-size-small;
       color: $label-color;
@@ -68,9 +64,6 @@
 
     &:last-child {
       margin-right: 0;
-    }
-    & .gv-text-field__label {
-      font-size: 15.8px;
     }
     &-hint {
       font-size: 12px;
@@ -108,10 +101,6 @@
 
     & .deposit-amount-field {
       margin: $padding-xsmall 0;
-    }
-
-    & .gv-text-field__error {
-      width: 100%;
     }
 
     .select--disabled .select__value {
@@ -153,16 +142,6 @@
     &-requirements {
       color: $label-color;
       letter-spacing: 0.4px;
-    }
-
-    &-chars {
-      color: $text-light-color;
-      display: inline-flex;
-      align-items: center;
-
-      .gv-program-period {
-        margin-left: 15px;
-      }
     }
   }
 

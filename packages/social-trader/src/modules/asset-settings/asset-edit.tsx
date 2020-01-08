@@ -35,11 +35,11 @@ const _AssetEdit: React.FC<Props> = ({
         <LogoField name={FIELDS.logo} />
       </div>
       <h3>{t("asset-settings.name.title")}</h3>
-      <div className="asset-settings__block-wrapper create-program-settings__row">
+      <div className="asset-settings__block-wrapper">
         <TitleField name={FIELDS.title} />
       </div>
       <h3>{t("asset-settings.strategy.title")}</h3>
-      <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
+      <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide">
         <DescriptionField
           name={FIELDS.description}
           description={values.description}

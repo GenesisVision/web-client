@@ -6,6 +6,10 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import {
+  PopoverContent,
+  PopoverContentListItem
+} from "components/popover/popover-content";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import { ASSET } from "constants/constants";
 import { TAnchor, TEvent } from "hooks/anchor.hook";
@@ -27,7 +31,7 @@ const _TableCardActions: React.FC<Props> = ({
       noPadding
       onClose={clearAnchor}
     >
-      <div className="table-card__actions-list">{children}</div>
+      <PopoverContent type={"list"}>{children}</PopoverContent>
     </Popover>
   );
 };
@@ -36,20 +40,14 @@ export const TableCardActionsItem: React.FC<
   ITableCardActionsItemProps
 > = React.memo(({ to, onClick, children }) => {
   return (
-    <TableCardActionsItemContainer>
+    <PopoverContentListItem>
       <Link to={to}>
         <GVButton noPadding variant="text" color="secondary" onClick={onClick}>
           {children}
         </GVButton>
       </Link>
-    </TableCardActionsItemContainer>
+    </PopoverContentListItem>
   );
-});
-
-export const TableCardActionsItemContainer: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => {
-  return <div className="table-card__actions-item">{children}</div>;
 });
 
 export const TableCardFavoriteActionItem: React.FC<{
@@ -63,7 +61,7 @@ export const TableCardFavoriteActionItem: React.FC<{
 }> = React.memo(({ id, isFavorite, onApply, assetType, asset, updateRow }) => {
   const { t } = useTranslation();
   return (
-    <TableCardActionsItemContainer>
+    <PopoverContentListItem>
       <ToggleAssetFavoriteButton
         asset={asset}
         updateRow={updateRow}
@@ -77,7 +75,7 @@ export const TableCardFavoriteActionItem: React.FC<{
           ? t("fund-actions.remove-from-favorites")
           : t("fund-actions.add-to-favorites")}
       </ToggleAssetFavoriteButton>
-    </TableCardActionsItemContainer>
+    </PopoverContentListItem>
   );
 });
 

@@ -3,18 +3,25 @@
 
 .tile-filter-button {
   &__plus {
-    @include font-size(17px);
+    @include font-size($font-size-h3);
     font-weight: 400;
-    padding-right: 3px;
+    padding-right: $padding-xxxsmall;
   }
 
-  &__add.gv-btn {
-    @include font-size(11px);
-    border-radius: 20px;
+  &__add {
+    @include font-size($font-size-xsmall);
+    @include adaptive-border-radius(19.5px);
+    @include height(18px);
+    @include line-height(18px);
+    @include horizontal-paddings($padding-xxsmall);
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 500;
     text-transform: uppercase;
     line-height: 16px;
-    padding: 0 $padding-xxsmall;
     white-space: nowrap;
     transition-property: border-color;
     border: 1px solid #6e757b;
@@ -31,5 +38,11 @@
         color: $panel-background-color;
       }
     }
+  }
+}
+
+.tile-filter {
+  .tag-item {
+    margin-right: 0;
   }
 }

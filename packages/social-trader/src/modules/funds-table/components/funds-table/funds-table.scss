@@ -10,20 +10,8 @@ $chart-width: 160px;
 
 .funds-table__cell {
   @include vertical-paddings($padding-xxsmall);
-  @include horizontal-paddings($padding-xsmall);
-  & .fund-assets {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-  & .fund-asset {
-    margin-bottom: 0;
-  }
-  &--amount,
-  &--value {
+  &--amount {
     white-space: nowrap;
-  }
-  &--bottom {
-    opacity: 0.3;
   }
   &--chart {
     min-width: 50px;

@@ -48,7 +48,7 @@ const _Investment: React.FC<Props> = ({
       <DetailsInvestmentHeading>
         {t("program-details-page.description.investment-details")}
       </DetailsInvestmentHeading>
-      <StatisticItemList className="details-investment__short-statistic">
+      <StatisticItemList>
         <StatisticItem accent label={t("fund-details-page.description.value")}>
           <NumberFormat
             value={formatCurrencyValue(personalDetails.value, currency)}

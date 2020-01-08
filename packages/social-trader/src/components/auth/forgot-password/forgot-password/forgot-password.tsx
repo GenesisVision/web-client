@@ -1,4 +1,4 @@
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -24,7 +24,7 @@ const _ForgotPasswordForm: React.FC<
       autoFocus
       component={GVTextField}
     />
-    <FormError error={error} />
+    <DialogError error={error} />
     <div className="forgot-password__navigation">
       <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
         <GVButton variant="text" color="secondary">

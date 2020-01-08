@@ -19,7 +19,7 @@
   &__navigation,
   &__profile,
   &__wallet {
-    @include hide(flex);
+    @include hide-on-landscape-tablet(flex);
   }
 
   &__right,
@@ -35,6 +35,8 @@
   }
 
   &__buttons {
+    width: 100%;
+    justify-content: flex-end;
     a + a {
       margin-left: $padding-xxsmall;
     }

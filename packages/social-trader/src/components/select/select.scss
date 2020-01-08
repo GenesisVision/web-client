@@ -6,14 +6,7 @@
   height: 22px;
 
   &__options {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0;
-    overflow-x: auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     align-items: flex-start;
-    max-height: 300px;
   }
 
   &__content {
@@ -53,22 +46,12 @@
   }
 
   &__option {
-    padding: 15px 30px;
-    cursor: pointer;
-
     &:hover {
       opacity: 0.9;
     }
 
     &--selected {
       color: $primary-color;
-    }
-  }
-
-  &.gv-text-field__input {
-    .select__value {
-      flex: 1;
-      font-size: 16px;
     }
   }
 

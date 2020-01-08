@@ -2,6 +2,7 @@ import "./select.scss";
 
 import classNames from "classnames";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { PopoverContent } from "components/popover/popover-content";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import * as React from "react";
 import { RefObject } from "react";
@@ -145,7 +146,9 @@ class Select extends React.PureComponent<Props, State> {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <div className="select__options">{items}</div>
+          <PopoverContent type={"list"} className="select__options">
+            {items}
+          </PopoverContent>
         </Popover>
       </div>
     );

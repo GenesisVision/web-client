@@ -2,6 +2,7 @@
 @import "~shared/styles/_sizes";
 
 $tag-vertical-margin: $padding-xxsmall/2;
+$tag-button-vertical-margin: $padding-xxxsmall/2;
 
 .tag-filter {
   cursor: default;
@@ -12,16 +13,16 @@ $tag-vertical-margin: $padding-xxsmall/2;
     padding-left: 0;
   }
 
-  .tag-button {
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
+  &__tag {
+    @include vertical-margins($tag-button-vertical-margin);
+    &:not(:last-child) {
+      @include adaptive-margin(right, $padding-xxsmall);
+    }
   }
+}
 
-  .tag-item {
-    cursor: pointer;
-    margin-top: $tag-vertical-margin;
-    margin-bottom: $tag-vertical-margin;
-  }
+.tag-button {
+  @include vertical-margins($tag-button-vertical-margin);
 }
 
 .tile-filter {

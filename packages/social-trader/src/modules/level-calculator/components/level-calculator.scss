@@ -36,14 +36,6 @@
     @include adaptive-margin("left", $padding-xxsmall);
   }
 
-  &__reset-button.gv-btn {
-    padding: 5px 10px;
-    background-color: rgba($icon-color, 0.1);
-    &:hover:not(:disabled) {
-      background-color: rgba($icon-color, 0.2);
-    }
-  }
-
   &__reset-button-text {
     color: rgba($text-light-color, 0.5);
   }

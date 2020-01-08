@@ -1,6 +1,5 @@
 import "./table.scss";
 
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import React from "react";
 
@@ -9,8 +8,6 @@ export const ToolbarButton: React.FC<{
   route: string;
 }> = React.memo(({ text, route }) => (
   <Link to={route} className="toolbar-button">
-    <GVButton color="primary" variant="text">
-      {text}
-    </GVButton>
+    {text}
   </Link>
 ));

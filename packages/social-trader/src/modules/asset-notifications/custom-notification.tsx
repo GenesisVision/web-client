@@ -74,8 +74,9 @@ const CustomNotification: React.FC<Props> = ({ service, settings, t }) => {
           InputComponent={NumberFormat}
         />
         <GVButton
+          noPadding
           variant="text"
-          color="secondary"
+          color="danger"
           disabled={isPending}
           onClick={handleDelete}
         >

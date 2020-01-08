@@ -182,7 +182,7 @@ export const TableCardChartBlock: React.FC<
 > = React.memo(({ chart, assetId, profit }) => (
   <TableCardRow>
     <div className="table-card__chart">
-      {chart && <ProgramSimpleChart data={chart} programId={assetId} />}
+      <ProgramSimpleChart data={chart} />
     </div>
     <div className="table-card__chart-info">
       <div className="table-card__profit">

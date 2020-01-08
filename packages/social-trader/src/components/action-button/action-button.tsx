@@ -9,9 +9,11 @@ interface IActionButtonProps {
 }
 
 const ActionButton: React.FC<IActionButtonProps> = ({ onClick, text }) => (
-  <GVButton color="secondary" className="action-button" onClick={onClick}>
-    {text}
-  </GVButton>
+  <div className="action-button">
+    <GVButton color="secondary" onClick={onClick}>
+      {text}
+    </GVButton>
+  </div>
 );
 
 export default ActionButton;

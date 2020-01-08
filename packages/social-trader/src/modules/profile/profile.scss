@@ -43,19 +43,6 @@
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
-    & .gv-btn {
-      margin-right: $padding-xsmall;
-    }
-  }
-
-  &__phone {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-
-    .gv-btn {
-      padding: 0;
-    }
   }
 
   &__content &__right {
@@ -83,24 +70,5 @@
     display: inline-flex;
     flex-shrink: 0;
     padding: 20px 0;
-  }
-
-  .gv-text-field {
-    min-width: 350px;
-
-    &__wrapper {
-      margin-left: 0;
-      margin-right: 16px;
-    }
-
-    &__input {
-      color: $main-color !important;
-    }
-  }
-
-  &--is-disabled {
-    .gv-text-field::before {
-      border: none;
-    }
   }
 }
