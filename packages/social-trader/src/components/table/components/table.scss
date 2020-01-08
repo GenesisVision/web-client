@@ -136,6 +136,9 @@ $view-svg-size: 15px;
 .toolbar-button {
   display: flex;
   align-items: center;
+  @include font-size($font-size-paragraph);
+  font-weight: 600;
+
   &:not(:last-child) {
     @include adaptive-margin(right, $padding-xsmall);
   }
