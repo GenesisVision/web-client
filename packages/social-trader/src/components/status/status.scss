@@ -4,7 +4,7 @@
   align-items: center;
   &__image {
     @include adaptive-margin(right, $padding-xsmall);
-    width: 24px;
-    height: 24px;
+    @include width(24px);
+    @include height(24px);
   }
 }
