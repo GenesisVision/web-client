@@ -14,11 +14,11 @@
 }
 .pie-container {
   position: relative;
-  width: 43px;
-  height: 43px;
+  @include width(43px);
+  @include height(43px);
   flex-shrink: 0;
   &__value-container {
-    font-size: $font-size-small;
+    @include font-size($font-size-small);
     position: absolute;
     width: 100%;
     height: 100%;
