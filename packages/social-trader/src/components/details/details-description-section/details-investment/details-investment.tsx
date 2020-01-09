@@ -2,10 +2,7 @@ import "./details-investment.scss";
 
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
-import Investment from "components/details/details-description-section/details-investment/investment";
-import SubscriptionContainer from "components/details/details-description-section/details-investment/subscription.container";
 import GVTab from "components/gv-tabs/gv-tab";
-import PortfolioEventsTableContainer from "components/portfolio-events-table/portfolio-events-table-container";
 import { TableSelectorType } from "components/table/components/table.types";
 import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
 import { ASSET } from "constants/constants";
@@ -15,6 +12,7 @@ import {
   PersonalProgramDetails
 } from "gv-api-web";
 import useTab from "hooks/tab.hook";
+import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
   getEvents
@@ -30,6 +28,20 @@ import {
   haveActiveInvestment,
   InvestmentType
 } from "./details-investment.helpers";
+
+const SubscriptionContainer = dynamic(() =>
+  import(
+    "components/details/details-description-section/details-investment/subscription.container"
+  )
+);
+const Investment = dynamic(() =>
+  import(
+    "components/details/details-description-section/details-investment/investment"
+  )
+);
+const PortfolioEventsTableContainer = dynamic(() =>
+  import("components/portfolio-events-table/portfolio-events-table-container")
+);
 
 const _DetailsInvestment: React.FC<Props> = ({
   isOwnAsset,

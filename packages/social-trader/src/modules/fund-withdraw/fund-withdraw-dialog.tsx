@@ -1,8 +1,12 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import { FundWithdrawPopupContainer } from "modules/fund-withdraw/fund-withdraw-popup.container";
+import dynamic from "next/dynamic";
 import * as React from "react";
 
 import { IFundWithdrawPopupProps } from "./fund-withdraw-popup";
+
+const FundWithdrawPopupContainer = dynamic(() =>
+  import("modules/fund-withdraw/fund-withdraw-popup.container")
+);
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
   onApply,

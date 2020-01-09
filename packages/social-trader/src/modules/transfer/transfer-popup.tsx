@@ -1,10 +1,14 @@
 import Dialog from "components/dialog/dialog";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { InternalTransferRequestType } from "gv-api-web";
+import dynamic from "next/dynamic";
 import * as React from "react";
 
-import TransferContainer from "./components/transfer-container";
 import { TRANSFER_CONTAINER, TRANSFER_DIRECTION } from "./transfer.types";
+
+const TransferContainer = dynamic(() =>
+  import("./components/transfer-container")
+);
 
 const _TransferPopup: React.FC<Props> = ({
   singleCurrentItemContainer,

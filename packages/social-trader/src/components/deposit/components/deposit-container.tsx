@@ -1,7 +1,7 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import { DialogError } from "components/dialog/dialog-error";
 import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
+import dynamic from "next/dynamic";
 import {
   fetchAvailableWallets,
   TWalletsAvailableData
@@ -12,8 +12,9 @@ import { currencySelector } from "reducers/account-settings-reducer";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-import DepositPopup from "./deposit-popup";
 import { DepositInfoLoaderData } from "./deposit.loader";
+
+const DepositPopup = dynamic(() => import("./deposit-popup"));
 
 const _DepositContainer: React.FC<Props> = ({
   title,
