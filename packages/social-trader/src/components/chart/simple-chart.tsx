@@ -4,7 +4,6 @@ import { getChartColor } from "components/chart/chart-gradient/chart-gradient";
 import { max, min } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
-import Crashable from "decorators/crashable";
 import { SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 
@@ -57,5 +56,5 @@ interface Props {
   height?: number;
 }
 
-const SimpleChart = React.memo(Crashable(_SimpleChart));
+const SimpleChart = React.memo(_SimpleChart);
 export default SimpleChart;
