@@ -1,6 +1,6 @@
 import { logout } from "components/auth/signin/signin.service";
 import { Icon } from "components/icon/icon";
-import NavigationMobile from "components/navigation/navigation-mobile/navigation-mobile";
+import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
@@ -22,7 +22,7 @@ const _NavigationMobileButton: React.FC<Props> = ({
       <div className="navigation__menu" onClick={setOpen}>
         <Icon type="menu" />
       </div>
-      <NavigationMobile
+      <NavigationMobileContainer
         mobileMenuItems={mobileMenuItems}
         backPath={backPath}
         logout={handlerLogout}

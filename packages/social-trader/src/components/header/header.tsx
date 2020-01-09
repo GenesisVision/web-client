@@ -1,28 +1,24 @@
 import "./header.scss";
 
 import classNames from "classnames";
-import GVButton from "components/gv-button";
 import HeaderIcon from "components/header/header-icon";
-import { HeaderSearchInput } from "components/header/header-search-input";
 import { SearchIcon } from "components/icon/search-icon";
-import Link from "components/link/link";
-import { useToLink } from "components/link/link.helper";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
-import NotificationsWidget from "components/notifications-widget/notifications-widget";
-import ProfileWidget from "components/profile-widget/profile-widget";
-import { ProfileWidgetLoader } from "components/profile-widget/profile-widget.loader";
-import WalletWidgetContainer from "components/wallet-widget/wallet-widget-container";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import { mobileMenuItems, topMenuItems } from "routes/menu";
-import { getRandomInteger } from "utils/helpers";
+
+const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
+const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
+const HeaderSearchInput = dynamic(() =>
+  import("components/header/header-search-input")
+);
 
 const HeaderLeft: React.FC<{
   backPath: string;
@@ -70,8 +66,6 @@ const HeaderLeft: React.FC<{
 
 const _Header: React.FC<Props> = ({ profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { linkCreator } = useToLink();
-  const [t] = useTranslation();
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
@@ -79,37 +73,9 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
       <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
       <div className="header__right">
         {isAuthenticated ? (
-          <>
-            <WalletWidgetContainer className="header__wallet" />
-            <NotificationsWidget
-              loaderData={getRandomInteger(0, 1000)}
-              data={profileHeader && profileHeader.notificationsCount}
-            />
-            <ProfileWidget
-              condition={!!profileHeader}
-              loader={<ProfileWidgetLoader className="header__profile" />}
-              profileHeader={profileHeader!}
-              className="header__profile"
-            />
-          </>
+          <AuthWidgets profileHeader={profileHeader} />
         ) : (
-          <div className="header__buttons">
-            <Link
-              to={{
-                pathname: LOGIN_ROUTE,
-                state: backPath
-              }}
-            >
-              <GVButton variant="outlined" color="secondary">
-                {t("auth.login.title")}
-              </GVButton>
-            </Link>
-            <Link to={linkCreator(SIGNUP_ROUTE)}>
-              <GVButton variant="contained" color="primary">
-                {t("auth.signup.title")}
-              </GVButton>
-            </Link>
-          </div>
+          <UnauthLinks backPath={backPath} />
         )}
       </div>
     </div>
