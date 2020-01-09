@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { animated, config, useTransition } from "react-spring";
+import React, { useRef } from "react";
+import { animated, useTransition } from "react-spring";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
@@ -31,7 +31,8 @@ const _AccordionContent: React.FC<Props> = ({
   const innerRef = useRef(null);
   //@ts-ignore
   const transitions = useTransition(isVisible, null, {
-    enter: () => async (next: any, cancel: any) => {
+    //@ts-ignore
+    enter: () => async (next, cancel) => {
       const height = getElementHeight(innerRef);
 
       cancel();
@@ -39,7 +40,8 @@ const _AccordionContent: React.FC<Props> = ({
       await next({ height, opacity: 1, overflow: "hidden" });
       await next(visibleStyle);
     },
-    leave: () => async (next: any, cancel: any) => {
+    //@ts-ignore
+    leave: () => async (next, cancel) => {
       const height = getElementHeight(containerRef);
 
       cancel();
