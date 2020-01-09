@@ -4,7 +4,7 @@ import { animated, useTransition } from "react-spring";
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
 
-const getElementHeight = (ref: any) => {
+const getElementHeight = (ref: React.RefObject<HTMLDivElement>) => {
   return ref.current ? ref.current.getBoundingClientRect().height : 0;
 };
 
@@ -65,7 +65,7 @@ const _AccordionContent: React.FC<Props> = ({
               {content.text && <p>{content.text}</p>}
               {content.list && (
                 <ul>
-                  {content.list.map((item: any, index: number) => (
+                  {content.list.map((item, index) => (
                     <li key={index}>{item.text}</li>
                   ))}
                 </ul>
