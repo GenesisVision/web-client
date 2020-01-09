@@ -1,14 +1,12 @@
 import "./gvt-fees.scss";
 
 import Dialog from "components/dialog/dialog";
-import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
-
-const FeesTradingDiscount = dynamic(() =>
-  import("routes/ssr/landing-page/components/fees-info/fees-trading-discount")
-);
+import { useTranslation } from "react-i18next";
+import { FeesTradingDiscount } from "routes/ssr/landing-page/components/fees-info/fees-trading";
 
 const _GVTFees: React.FC<Props> = ({ open, onClose }) => {
+  const [t] = useTranslation();
   return (
     <Dialog open={open} onClose={onClose} className="gvt-fees">
       <div className="gvt-fees__container">

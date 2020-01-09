@@ -4,13 +4,10 @@ import Dialog from "components/dialog/dialog";
 import { CalculatorIcon } from "components/icon/calculator-icon";
 import Crashable from "decorators/crashable";
 import useIsOpen from "hooks/is-open.hook";
-import dynamic from "next/dynamic";
 import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
 import * as React from "react";
 
-const LevelCalculatorPopupContainer = dynamic(() =>
-  import("./level-calculator-popup.container")
-);
+import LevelCalculatorPopupContainer from "./level-calculator-popup.container";
 
 const _LevelCalculator: React.FC<ILevelCalculatorProps> = ({
   id,

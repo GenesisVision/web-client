@@ -1,25 +1,65 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import dynamic from "next/dist/next-server/lib/dynamic";
+import { DialogBottom } from "components/dialog/dialog-bottom";
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogTop } from "components/dialog/dialog-top";
+import GVButton from "components/gv-button";
+import { InjectedFormikProps, withFormik } from "formik";
 import React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
-const ConfirmPopupContent = dynamic(() =>
-  import("components/confirm-popup/confirm-popup-content")
+const _ConfirmPopup: React.ComponentType<
+  InjectedFormikProps<IConfirmPopupProps & WithTranslation, {}>
+> = ({
+  t,
+  open,
+  onClose,
+  onCancel,
+  header,
+  body,
+  applyButtonText = t("buttons.apply"),
+  cancelButtonText = t("buttons.cancel"),
+  className,
+  handleSubmit,
+  isSubmitting
+}) => (
+  <Dialog open={open} onClose={onClose} className={className}>
+    <form onSubmit={handleSubmit} noValidate>
+      <DialogTop title={header} />
+      <DialogBottom>
+        <div className="dialog__text">
+          <p>{body}</p>
+        </div>
+        <DialogButtons>
+          <GVButton wide={!onCancel} type="submit" disabled={isSubmitting}>
+            {applyButtonText}
+          </GVButton>
+          {onCancel && (
+            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+              {cancelButtonText}
+            </GVButton>
+          )}
+        </DialogButtons>
+      </DialogBottom>
+    </form>
+  </Dialog>
 );
 
-const _ConfirmPopup: React.FC<Props> = props => {
-  const { open, onClose, className } = props;
-  return (
-    <Dialog open={open} onClose={onClose} className={className}>
-      <ConfirmPopupContent {...props} />
-    </Dialog>
-  );
-};
-
-const ConfirmPopup = React.memo(_ConfirmPopup);
+const ConfirmPopup = compose<React.ComponentType<IConfirmPopupProps>>(
+  translate(),
+  withFormik<IConfirmPopupProps, {}>({
+    displayName: "confirm-form",
+    mapPropsToValues: () => ({}),
+    handleSubmit: (_, { props, setSubmitting }) => {
+      props.onApply(setSubmitting);
+    }
+  }),
+  React.memo
+)(_ConfirmPopup);
 export default ConfirmPopup;
 
-export interface Props extends IDialogProps {
+export interface IConfirmPopupProps extends IDialogProps {
   onApply(setSubmitting: SetSubmittingType): void;
   onCancel?(): void;
   header?: string;
