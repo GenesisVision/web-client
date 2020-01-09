@@ -172,5 +172,9 @@
         background-color: transparent;
       }
     }
+
+    .fees-table__cell {
+      border-bottom-color: rgba($main-color, 0.2);
+    }
   }
 }
