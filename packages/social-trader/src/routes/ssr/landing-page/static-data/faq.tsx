@@ -42,7 +42,7 @@ export const faqGeneral: TAccordion[] = [
             Yes, we have{" "}
             <a
               href="https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
-              target="F"
+              target="_blank"
             >
               iOS application
             </a>{" "}
