@@ -1,12 +1,18 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import InvestmentLimitsPopover from "components/details/details-description-section/investment-limits-popover";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import useAnchor from "hooks/anchor.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
+
+const InvestmentLimitsPopover = dynamic(() =>
+  import(
+    "components/details/details-description-section/investment-limits-popover"
+  )
+);
 
 const _DetailsAssetAvatar: React.FC<Props> = ({
   logo,
@@ -60,4 +66,5 @@ interface Props {
   currency?: CurrencyEnum;
 }
 
-export const DetailsAssetAvatar = React.memo(_DetailsAssetAvatar);
+const DetailsAssetAvatar = React.memo(_DetailsAssetAvatar);
+export default DetailsAssetAvatar;
