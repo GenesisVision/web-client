@@ -190,7 +190,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  UK
+                  🇬🇧 UK
                 </td>
                 <td className="fees-table__cell" rowSpan={6}>
                   order volume (%)
@@ -205,7 +205,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  Germane
+                  🇩🇪 Germane
                 </td>
                 <td className="fees-table__cell">1.00</td>
                 <td className="fees-table__cell">0.70</td>
@@ -217,7 +217,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  Switzerland
+                  🇨🇭 Switzerland
                 </td>
                 <td className="fees-table__cell">0.60</td>
                 <td className="fees-table__cell">0.42</td>
@@ -229,7 +229,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  France
+                  🇫🇷 France
                 </td>
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
@@ -241,7 +241,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  Spain
+                  🇪🇸 Spain
                 </td>
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
@@ -252,7 +252,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 <td className="fees-table__cell">0.36</td>
               </tr>
               <tr className="fees-table__row">
-                <td className="fees-table__cell">Netherlands</td>
+                <td className="fees-table__cell"> 🇳🇱 Netherlands</td>
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
                 <td className="fees-table__cell">0.26</td>
@@ -285,7 +285,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  Hong Kong
+                  🇭🇰 Hong Kong
                 </td>
                 <td className="fees-table__cell" rowSpan={6}>
                   order volume (%)
@@ -299,7 +299,7 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 <td className="fees-table__cell">0.54</td>
               </tr>
               <tr className="fees-table__row">
-                <td className="fees-table__cell">Japan</td>
+                <td className="fees-table__cell">🇯🇵 Japan</td>
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
                 <td className="fees-table__cell">0.52</td>
