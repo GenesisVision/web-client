@@ -1,14 +1,17 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
 import { SetSubmittingType } from "utils/types";
 
-import ChangePasswordTradingAccountForm, {
-  IChangePasswordTradingAccountFormValues
-} from "./components/change-password-trading-account-form";
+import { IChangePasswordTradingAccountFormValues } from "./components/change-password-trading-account-form";
 import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
+
+const ChangePasswordTradingAccountForm = dynamic(() =>
+  import("./components/change-password-trading-account-form")
+);
 
 const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   open,
