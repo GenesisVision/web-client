@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DoneIcon: React.FC = () => (
+export const Done: React.FC = () => (
   <>
     <svg
       width="16"
