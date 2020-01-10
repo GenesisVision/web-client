@@ -28,7 +28,6 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
         componentProps = { e };
       }
       try {
-        addRequestAnimationFrame();
         componentProps =
           WrappedComponent.getInitialProps &&
           (await WrappedComponent.getInitialProps(ctx));
@@ -38,6 +37,11 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
+      }
+      try {
+        addRequestAnimationFrame();
+      } catch (e) {
+        console.log(e);
       }
 
       return {
