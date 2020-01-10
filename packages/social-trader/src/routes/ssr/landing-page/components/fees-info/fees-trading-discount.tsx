@@ -3,12 +3,10 @@ import "./fees-info.scss";
 import classNames from "classnames";
 import React from "react";
 
-interface Props {
+const _FeesTradingDiscount: React.FC<{
   dark?: boolean;
   white?: boolean;
-}
-
-const FeesTradingDiscount: React.FC<Props> = ({ dark, white }) => {
+}> = ({ dark, white }) => {
   return (
     <>
       <div className="fees-info__notes">
@@ -99,4 +97,6 @@ const FeesTradingDiscount: React.FC<Props> = ({ dark, white }) => {
     </>
   );
 };
+
+const FeesTradingDiscount = React.memo(_FeesTradingDiscount);
 export default FeesTradingDiscount;

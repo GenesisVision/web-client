@@ -3,6 +3,7 @@ import Dialog from "components/dialog/dialog";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
@@ -20,9 +21,11 @@ import {
   TToggleNotification
 } from "./asset-notifications.types";
 import CustomNotification from "./custom-notification";
-import CustomNotificationCreateForm, {
-  ICustomNotificationCreateFormValues
-} from "./custom-notification-create-form";
+import { ICustomNotificationCreateFormValues } from "./custom-notification-create-form";
+
+const CustomNotificationCreateForm = dynamic(() =>
+  import("./custom-notification-create-form")
+);
 
 const _AssetNotificationsCustom: React.FC<Props> = ({
   t,
