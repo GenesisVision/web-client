@@ -1,8 +1,9 @@
 import ImageBaseElement from "components/avatar/image-base.element";
-import useUrl from "hooks/url.hook";
+import useUrl, { ImageQualityType } from "hooks/url.hook";
 import * as React from "react";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
+  quality,
   title,
   color,
   DefaultImageComponent,
@@ -13,7 +14,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   defaultImageClassName
 }) => {
   const { getUrl } = useUrl();
-  const fullUrl = getUrl(src);
+  const fullUrl = getUrl(src, quality);
   return (
     <ImageBaseElement
       defaultImageClassName={defaultImageClassName}
@@ -38,6 +39,7 @@ export interface IImageProps {
 }
 
 export interface IImageBaseProps {
+  quality?: ImageQualityType;
   title?: string;
   color?: string;
   DefaultImageComponent?: React.ComponentType<any>;
