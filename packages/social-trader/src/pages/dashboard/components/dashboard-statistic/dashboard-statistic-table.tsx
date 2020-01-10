@@ -35,7 +35,9 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
         )}
         renderBodyRow={(event: TDashboardEvent) => (
           <TableRow stripy>
-            <TableCell>{humanizeDate(formatDate(event.date))} ago</TableCell>
+            <TableCell>
+              {humanizeDate(formatDate(event.date))} {event.date && "ago"}
+            </TableCell>
             <TableCell>
               <div className="dashboard-statistic__event-description">
                 {event.assetDetails && (
