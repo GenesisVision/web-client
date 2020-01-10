@@ -1,5 +1,6 @@
 import "./transfer.button.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
@@ -96,7 +97,7 @@ const FullButton: React.FC<{
       >
         <>
           {withIcon && (
-            <img
+            <ImageBaseElement
               className="transfer-button__full-button-icon"
               src={ConvertIcon}
               alt={labelText}
@@ -116,7 +117,9 @@ const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
       <ChipButton
         onClick={onClick}
         size={CHIP_SIZE.SMALL}
-        chipLabel={<img src={ConvertIcon} alt={t("wallet-page.transfer")} />}
+        chipLabel={
+          <ImageBaseElement src={ConvertIcon} alt={t("wallet-page.transfer")} />
+        }
       />
     );
   }

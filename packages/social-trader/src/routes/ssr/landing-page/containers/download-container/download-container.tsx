@@ -1,5 +1,6 @@
 import "./download-container.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 import IconList from "routes/ssr/landing-page/components/icon-list/icon-list";
 import FacetImg from "routes/ssr/landing-page/images/download/facet.svg";
@@ -24,17 +25,17 @@ const DownloadContainer: React.FC = () => (
       />
     </div>
     <div className="download-container__img-wrapper">
-      <img
+      <ImageBaseElement
         src={FacetImg}
         alt="Download app"
         className="download-container__img-facet"
       />
-      <img
+      <ImageBaseElement
         src={NotificationImg}
         alt="Download app"
         className="download-container__img-notification"
       />
-      <img
+      <ImageBaseElement
         src={iPhoneImg}
         alt="Download app"
         className="download-container__img-iphone"

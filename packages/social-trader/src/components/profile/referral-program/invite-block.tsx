@@ -1,3 +1,4 @@
+import ImageBaseElement from "components/avatar/image-base.element";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import Email from "media/email.svg";
@@ -71,7 +72,7 @@ const _ShareBlock: React.FC<{
           target="_blank"
           href={`mailto:?body=${rawUrlEncode(`${shareMessage} ${refUrl}`)} `}
         >
-          <img src={Email} />
+          <ImageBaseElement src={Email} />
         </a>
       </div>
     </div>

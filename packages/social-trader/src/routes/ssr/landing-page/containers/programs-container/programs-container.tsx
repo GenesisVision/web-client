@@ -1,5 +1,6 @@
 import "./programs-container.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import { ProgramDetailsListItem } from "gv-api-web";
 import React from "react";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
@@ -16,7 +17,7 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
   return (
     <div className="programs-container">
       <div className="programs-container__info">
-        <img
+        <ImageBaseElement
           src={ProgramIcon}
           alt="Programs"
           className="programs-container__img"
@@ -25,7 +26,8 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
         <p className="programs-container__text">
           Select investment programs that suit your personal profile and let the
           manager do the work for you. You will be able to withdraw your
-          investment or profits only at predefined intervals set by the program’s manager.
+          investment or profits only at predefined intervals set by the
+          program’s manager.
         </p>
         <LPButton href={PROGRAMS_ROUTE}>Discover</LPButton>
       </div>
