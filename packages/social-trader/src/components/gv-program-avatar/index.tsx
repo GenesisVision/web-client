@@ -34,6 +34,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
       })}
     >
       <ImageBase
+        quality={size === "big" ? "Medium" : "Low"}
         DefaultImageComponent={GVProgramDefaultAvatar}
         src={url}
         color={color}
