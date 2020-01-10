@@ -7,7 +7,7 @@ export const getFundSchema = (
   details: FundDescriptionDataType
 ): SchemaType => ({
   context: "https://schema.org",
-  type: "InvestmentFund",
+  "@type": "InvestmentFund",
   name: details.publicInfo.title,
   description: details.publicInfo.description,
   feesAndCommissionsSpecification: "", //TODO
