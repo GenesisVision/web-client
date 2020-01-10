@@ -5,7 +5,7 @@ import React from "react";
 import IconList from "routes/ssr/landing-page/components/icon-list/icon-list";
 import FacetImg from "routes/ssr/landing-page/images/download/facet.svg";
 import iPhoneImg from "routes/ssr/landing-page/images/download/iPhone.png";
-import NotificationImg from "routes/ssr/landing-page/images/download/notification.svg";
+import NotificationImg from "routes/ssr/landing-page/images/download/notification.png";
 import { appLinks } from "routes/ssr/landing-page/static-data/app-links";
 import { VIDEO_LINK } from "routes/ssr/landing-page/static-data/download";
 
