@@ -3,14 +3,16 @@ import "./programs.scss";
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { ProgramDetailsListItem } from "gv-api-web";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 
-import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
-import ProgramTableRowShort from "./program-table-row-short";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+
+const ProgramCard = dynamic(() => import("./program-card"));
+const ProgramTableRowShort = dynamic(() => import("./program-table-row-short"));
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 
