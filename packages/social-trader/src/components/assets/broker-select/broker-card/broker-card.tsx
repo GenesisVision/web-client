@@ -1,6 +1,7 @@
 import "./broker-card.scss";
 
 import classnames from "classnames";
+import ImageBase from "components/avatar/image-base";
 import TagBrokerContainer from "components/tags/tag-broker-container/tag-broker-container";
 import { Tag } from "gv-api-web";
 import * as React from "react";
@@ -44,11 +45,7 @@ const _BrokerCard: React.FC<Props> = ({
         condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
         cardState={cardState}
       />
-      <img
-        className={logoClassName}
-        src={filesService.getFileUrl(logo)}
-        alt={brokerName}
-      />
+      <ImageBase className={logoClassName} src={logo} alt={brokerName} />
       <TagBrokerContainer
         tags={tags!}
         condition={tags && tags.length !== 0}

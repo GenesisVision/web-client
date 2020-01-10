@@ -3,14 +3,16 @@ import "modules/programs-table/components/programs-table/programs.scss";
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { FollowDetailsListItem } from "gv-api-web";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 
-import FollowCard from "./follow-card";
 import FollowTableHeaderCell from "./follow-table-header-cell";
-import FollowTableRowShort from "./follow-table-row-short";
 import FollowTableSortingValue from "./follow-table-sorting";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
+
+const FollowTableRowShort = dynamic(() => import("./follow-table-row-short"));
+const FollowCard = dynamic(() => import("./follow-card"));
 
 export const FAVORITE_COLUMN_NAME = "favorite";
 

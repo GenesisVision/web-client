@@ -1,3 +1,4 @@
+import ImageBase from "components/avatar/image-base";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
@@ -13,7 +14,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
 const _PerformanceData: React.FC<Props> = ({
@@ -29,9 +29,9 @@ const _PerformanceData: React.FC<Props> = ({
   return (
     <StatisticItemList className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
-        <img
+        <ImageBase
           className={"asset-details-description__broker"}
-          src={filesService.getFileUrl(brokerDetails.logo)}
+          src={brokerDetails.logo}
         />
       </StatisticItem>
       {currency && (

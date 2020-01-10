@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import dayjs from "dayjs";
@@ -83,7 +84,7 @@ const _Notification: React.FC<INotificationProps> = props => {
     >
       {staticIconUrl ? (
         <div className="notification__icon">
-          <img
+          <ImageBaseElement
             src={staticIconUrl}
             alt={type}
             className="notification__icon-logo"

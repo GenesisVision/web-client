@@ -9,10 +9,10 @@ import ImageBase, { IImageProps } from "../image-base";
 const _FundAssetImage: React.FC<IImageProps> = ({ url, alt, className }) => (
   <div className={classNames("fund-asset-icon", className)}>
     <ImageBase
-      url={url}
+      src={url}
       alt={alt}
       defaultImage={FundAsset}
-      imageClassName="fund-asset-icon__img"
+      className="fund-asset-icon__img"
     />
   </div>
 );

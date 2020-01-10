@@ -1,8 +1,9 @@
 import "./first-slider.scss";
 
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import React, { useCallback, useState } from "react";
-import { animated, config, useTransition } from "react-spring";
+import { animated, useTransition } from "react-spring";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TSlides } from "routes/ssr/landing-page/static-data/slides";
 
@@ -39,7 +40,11 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
             className="slider__img-animate"
             style={props as any}
           >
-            <img src={item.image} alt={item.title} className="slider__img" />
+            <ImageBaseElement
+              src={item.image}
+              alt={item.title}
+              className="slider__img"
+            />
           </animated.div>
         ))}
       </div>

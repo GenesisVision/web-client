@@ -35,9 +35,9 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     >
       <ImageBase
         DefaultImageComponent={GVProgramDefaultAvatar}
-        url={url}
+        src={url}
         color={color}
-        imageClassName={classNames("program-avatar__image", imageClassName)}
+        className={classNames("program-avatar__image", imageClassName)}
         alt={alt}
       />
       {haveLevel && (

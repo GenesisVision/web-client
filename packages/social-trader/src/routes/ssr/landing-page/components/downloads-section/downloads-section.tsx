@@ -1,5 +1,6 @@
 import "./downloads-section.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 import MetatraderLogo from "routes/ssr/landing-page/images/internal/metatrader.png";
 
@@ -16,7 +17,7 @@ const DownloadsSection: React.FC = () => {
           <a href="https://download.mql5.com/cdn/web/11830/mt5/genesismarketslp5setup.exe">
             Download for PC
             <br />
-            <img src={MetatraderLogo} alt="metatrader logo" />
+            <ImageBaseElement src={MetatraderLogo} alt="metatrader logo" />
           </a>
         </p>
       </article>

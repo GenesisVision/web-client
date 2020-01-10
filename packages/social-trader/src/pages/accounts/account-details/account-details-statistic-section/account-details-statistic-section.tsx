@@ -1,10 +1,8 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import { accountAbsoluteProfitChartSelector } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
-import FollowBalanceChart from "pages/follows/follow-details/follow-details-statistic-section/follow-balance-chart-section/follow-balance-chart";
-import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
-import ProgramProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -22,6 +20,22 @@ import {
   useAccountChartStateValues,
   useChartPeriod
 } from "./account-details.chart.helpers";
+
+const FollowBalanceChart = dynamic(() =>
+  import(
+    "pages/follows/follow-details/follow-details-statistic-section/follow-balance-chart-section/follow-balance-chart"
+  )
+);
+const ProgramAbsoluteProfitChart = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+  )
+);
+const ProgramProfitChart = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
+  )
+);
 
 const _AccountDetailsStatisticSection: React.FC = () => {
   const status = useSelector(accountStatusSelector);

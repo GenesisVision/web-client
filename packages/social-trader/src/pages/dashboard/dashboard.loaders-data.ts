@@ -130,16 +130,16 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
   total: 100,
   profits: {
     day: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     week: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     month: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     }
   },
   events: getTradingEventsLoaderData()
@@ -221,16 +221,16 @@ export const getTotalLoaderData = (): TDashboardTotal => ({
   wallets: getRandomInteger(-10000, 10000),
   profits: {
     day: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     week: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     month: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     }
   }
 });

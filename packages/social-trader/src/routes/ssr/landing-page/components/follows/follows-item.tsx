@@ -35,11 +35,8 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
             defaultImageClassName="follows-list__item-image--default"
             color={color}
             alt={title}
-            imageClassName={classNames(
-              "follows-list__item-image",
-              imageClassName
-            )}
-            url={logo}
+            className={classNames("follows-list__item-image", imageClassName)}
+            src={logo}
           />
         </div>
         <div className="follows-list__item-title">{title}</div>

@@ -1,14 +1,15 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
+import dynamic from "next/dynamic";
 import React, { useCallback } from "react";
 
-import UnfollowForm, {
-  IProgramUnfollowFormValues
-} from "./components/unfollow-form";
+import { IProgramUnfollowFormValues } from "./components/unfollow-form";
 import {
   detachToSignalExternal,
   detachToSignalInternal
 } from "./services/unfollow.service";
+
+const UnfollowForm = dynamic(() => import("./components/unfollow-form"));
 
 const _UnfollowContainer: React.FC<Props> = ({
   tradingAccountId,

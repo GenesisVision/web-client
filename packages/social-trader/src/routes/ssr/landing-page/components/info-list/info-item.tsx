@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TInfoItem } from "routes/ssr/landing-page/static-data/info";
@@ -9,7 +10,9 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => (
       "info-list__item--bg-transparent": image
     })}
   >
-    {image && <img src={image} alt="" className="info-list__item-image" />}
+    {image && (
+      <ImageBaseElement src={image} alt="" className="info-list__item-image" />
+    )}
     {texts && (
       <div className="info-list__item-text">
         {texts.map((item, index) =>

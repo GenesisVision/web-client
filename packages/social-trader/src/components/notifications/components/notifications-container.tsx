@@ -1,5 +1,4 @@
 import { notificationsToggleAction } from "components/notifications/actions/notifications.actions";
-import Notifications from "components/notifications/components/notifications";
 import {
   serviceClearNotifications,
   serviceGetNotifications
@@ -10,12 +9,17 @@ import {
   NotificationList,
   NotificationViewModel
 } from "gv-api-web";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import { connect } from "react-redux";
 import { notificationsCountSelector } from "reducers/header-reducer";
 import { RootState } from "reducers/root-reducer";
 import { compose } from "redux";
 import { MiddlewareDispatch } from "utils/types";
+
+const Notifications = dynamic(() =>
+  import("components/notifications/components/notifications")
+);
 
 const _NotificationsContainer: React.FC<Props> = ({
   service,

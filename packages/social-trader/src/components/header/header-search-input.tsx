@@ -42,4 +42,5 @@ interface Props {
   setSearchIsClose: VoidFunction;
 }
 
-export const HeaderSearchInput = React.memo(_HeaderSearchInput);
+const HeaderSearchInput = React.memo(_HeaderSearchInput);
+export default HeaderSearchInput;

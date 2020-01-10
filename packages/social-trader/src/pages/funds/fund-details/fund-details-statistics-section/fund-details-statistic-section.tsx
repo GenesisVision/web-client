@@ -1,8 +1,8 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import { fundAbsoluteProfitChartSelector } from "pages/funds/fund-details/reducers/absolute-profit-chart.reducer";
-import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
@@ -10,15 +10,29 @@ import { fundStatisticDataLoaderData } from "../fund-details.loader-data";
 import { fundBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { fundProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
-import FundBalanceChart from "./fund-details-chart-section/fund-balance-chart-section/fund-balance-chart";
 import {
   useChartPeriod,
   useFundChartStateValues
 } from "./fund-details-chart-section/fund-details-chart.helpers";
-import FundProfitChart from "./fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
 import FundDetailsStatisticsElements, {
   IFundStatisticData
 } from "./fund-details-statistics/fund-details-statistics-elements";
+
+const FundProfitChart = dynamic(() =>
+  import(
+    "./fund-details-chart-section/fund-profit-chart-section/fund-profit-chart"
+  )
+);
+const FundBalanceChart = dynamic(() =>
+  import(
+    "./fund-details-chart-section/fund-balance-chart-section/fund-balance-chart"
+  )
+);
+const ProgramAbsoluteProfitChart = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+  )
+);
 
 const _FundDetailsStatisticSection: React.FC = () => (
   <DetailsStatisticSection

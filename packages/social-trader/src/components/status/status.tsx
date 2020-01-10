@@ -1,6 +1,7 @@
 import "./status.scss";
 
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import Error from "media/transactions/error.svg";
 import Pending from "media/transactions/pending.svg";
 import Success from "media/transactions/success.svg";
@@ -22,7 +23,7 @@ export type IStatus = {
 const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
   return (
     <div className="status">
-      <img
+      <ImageBaseElement
         className={classNames("status__image", className)}
         src={statuses[status]}
         alt={`status ${status}`}

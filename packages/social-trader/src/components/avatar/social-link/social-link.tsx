@@ -7,8 +7,8 @@ import ImageBase, { IImageProps } from "../image-base";
 
 const _SocialLinkImage: React.FC<IImageProps> = ({ url, alt }) => (
   <ImageBase
-    imageClassName="social-link-image"
-    url={url}
+    className="social-link-image"
+    src={url}
     alt={alt}
     defaultImage={SocialLink}
   />
