@@ -1,7 +1,7 @@
 import "./fees-info.scss";
 
 import React from "react";
-import { DoneIcon } from "routes/ssr/landing-page/components/internal-icons/done-icon";
+import { Done } from "routes/ssr/landing-page/components/common-icons/done";
 
 const _FeesGeneral: React.FC = () => (
   <div className="fees-info">
@@ -27,23 +27,23 @@ const _FeesGeneral: React.FC = () => (
                   <td className="fees-table__cell">Entry Fee</td>
                   <td className="fees-table__cell">0.5%</td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    <span>{<DoneIcon />}</span>
+                    <span>{<Done />}</span>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     <b>&mdash;</b>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />}
+                    {<Done />}
                   </td>
                 </tr>
                 <tr className="fees-table__row">
                   <td className="fees-table__cell">Success Fee</td>
                   <td className="fees-table__cell">0 - 10%*</td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />}
+                    {<Done />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />}
+                    {<Done />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     <b>&mdash;</b>
@@ -56,7 +56,7 @@ const _FeesGeneral: React.FC = () => (
                     <b>&mdash;</b>
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
-                    {<DoneIcon />}
+                    {<Done />}
                   </td>
                   <td className="fees-table__cell fees-table__cell--color-primary">
                     <b>&mdash;</b>

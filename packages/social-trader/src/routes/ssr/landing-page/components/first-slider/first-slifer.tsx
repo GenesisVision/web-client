@@ -7,7 +7,7 @@ import { animated, useTransition } from "react-spring";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
 import { TSlides } from "routes/ssr/landing-page/static-data/slides";
 
-import { Arrow } from "./arrow/arrow";
+import { Arrow } from "../common-icons/arrow";
 
 interface Props {
   className?: string;

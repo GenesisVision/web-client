@@ -41,9 +41,15 @@
 
     .tab-controls__item-btn {
       @include transition(background-color, color);
+      font-size: 12px;
       border-radius: 12px;
-      padding: 18px 40px;
+      padding: 4px 25px;
       background-color: transparent;
+
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
+        padding: 18px 40px;
+      }
     }
 
     .tab-controls__item--active {
