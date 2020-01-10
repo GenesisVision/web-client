@@ -1,12 +1,8 @@
 import "./active.scss";
 
+import ActivePopupContainer from "components/active/active.popup.container";
 import Dialog, { IDialogProps } from "components/dialog/dialog";
-import dynamic from "next/dist/next-server/lib/dynamic";
 import React from "react";
-
-const ActivePopupContainer = dynamic(() =>
-  import("components/active/active.popup.container")
-);
 
 const _ActivePopup: React.FC<Props> = ({ open, onClose, active }) => {
   return (
