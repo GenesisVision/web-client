@@ -1,3 +1,4 @@
+import "./image-base.scss";
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
 
@@ -32,10 +33,13 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     <DefaultImageComponent color={color} imageClassName={imgClassName} />
   ) : (
     <img
+      src={
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
+      }
       data-src={currentSrc}
       title={title}
       alt={alt}
-      className={classNames("lazyload", className, imgClassName)}
+      className={classNames("lazyload", "blur-up", className, imgClassName)}
       onError={handleError}
     />
   );
