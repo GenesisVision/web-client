@@ -77,8 +77,13 @@ const getReferralHistoryFile = (
   return partnershipApi.exportHistory(authorization, opts).then(blob => blob);
 };
 
-const getFileUrl = (id?: string): string =>
-  id ? `${process.env.REACT_APP_API_URL}/v2.0/file/${id}` : "";
+const getFileUrl = (
+  id?: string,
+  quality: "Low" | "Medium" | "High" = "Low"
+): string =>
+  id
+    ? `${process.env.REACT_APP_API_URL}/v2.0/file/${id}?quality=${quality}`
+    : "";
 
 const uploadFile = (
   file: File,
