@@ -1,5 +1,4 @@
 import ImageBase from "components/avatar/image-base";
-import ImageBaseElement from "components/avatar/image-base.element";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
@@ -15,7 +14,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
 const _PerformanceData: React.FC<Props> = ({
