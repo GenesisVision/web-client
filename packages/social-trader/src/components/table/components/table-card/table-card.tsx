@@ -117,11 +117,7 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
         }
       />
     ) : (
-      <ImageBase
-        imageClassName="table-card__broker-avatar"
-        url={logo}
-        alt={alt}
-      />
+      <ImageBase className="table-card__broker-avatar" src={logo} alt={alt} />
     );
     return (
       <div className="table-card__avatar">

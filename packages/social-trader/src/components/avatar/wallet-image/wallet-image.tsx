@@ -6,10 +6,10 @@ import ImageBase, { IImageProps } from "../image-base";
 const _WalletImage: React.FC<Props> = ({ url, alt, imageClassName }) => {
   return (
     <ImageBase
-      url={url}
+      src={url}
       alt={alt}
       defaultImage={WalletCurrency}
-      imageClassName={imageClassName}
+      className={imageClassName}
     />
   );
 };

@@ -6,7 +6,7 @@ const InputImageDefault: React.FC<Props> = ({ src = "", defaultImage }) => {
     <ImageBase
       alt="Default Profile Avatar"
       defaultImage={defaultImage}
-      url={src}
+      src={src}
     />
   );
 };
