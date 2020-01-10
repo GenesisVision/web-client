@@ -6,8 +6,13 @@ const css = require("@zeit/next-css");
 const withPlugins = require("next-compose-plugins");
 const images = require("next-images");
 const workers = require("@zeit/next-workers");
+const withBundleAnalyzer = require("@next/bundle-analyzer");
 
 const isProd = process.env.NODE_ENV === "production";
+
+const analyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true"
+});
 
 function create(role, path) {
   if (isProd) {
@@ -31,6 +36,7 @@ function create(role, path) {
   };
   return withPlugins(
     [
+      analyzer,
       sass,
       css,
       images,
