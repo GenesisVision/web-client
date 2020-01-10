@@ -1,3 +1,4 @@
+import ImageBase from "components/avatar/image-base";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
@@ -30,7 +31,7 @@ const _PerformanceData: React.FC<Props> = ({
   return (
     <StatisticItemList className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
-        <ImageBaseElement
+        <ImageBase
           className={"asset-details-description__broker"}
           src={brokerDetails.logo}
         />
