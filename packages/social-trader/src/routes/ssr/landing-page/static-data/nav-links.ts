@@ -24,6 +24,7 @@ export type TNavHeader = TNavFooter & {
 
 export const FEES_ROUTE = "/fees";
 export const REFERRAL_PROGRAM_ROUTE = "/referral-program";
+export const FAQ_ROUTE = "/faq";
 
 export const navHeader: TNavHeader[] = [
   {
@@ -68,6 +69,11 @@ export const navHeader: TNavHeader[] = [
         href: REFERRAL_PROGRAM_ROUTE
       },
       {
+        name: "FAQ",
+        hideMobile: true,
+        href: FAQ_ROUTE
+      },
+      {
         name: "Feedback",
         hideMobile: true,
         href: "https://feedback.genesis.vision/"
@@ -84,6 +90,10 @@ export const navFooter: TNavHeader[] = [
   {
     name: "Fees",
     href: FEES_ROUTE
+  },
+  {
+    name: "FAQ",
+    href: FAQ_ROUTE
   },
   {
     name: "Blog",

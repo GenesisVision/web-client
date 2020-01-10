@@ -3,7 +3,7 @@ import "./gvt-fees.scss";
 import Dialog from "components/dialog/dialog";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { FeesTradingDiscount } from "routes/ssr/landing-page/components/fees-info/fees-trading";
+import FeesTradingDiscount from "routes/ssr/landing-page/components/fees-info/fees-trading-discount";
 
 const _GVTFees: React.FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();

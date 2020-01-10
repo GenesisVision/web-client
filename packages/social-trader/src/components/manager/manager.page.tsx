@@ -11,6 +11,7 @@ import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import filesService from "services/file-service";
 import { localizedDate } from "utils/dates";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
@@ -18,8 +19,13 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
     profile.regDate
   )}`;
+  const title = `${t("manager-page.title")} ${profile.username}`;
   return (
-    <Page title={`${t("manager-page.title")} ${profile.username}`}>
+    <Page
+      title={title}
+      description={profile.about || title}
+      previewImage={filesService.getFileUrl(profile.avatar)}
+    >
       <DetailsDescriptionSection
         descriptionTitle={t("manager-page.about")}
         subtitle={memberSince}
