@@ -20,14 +20,7 @@ const getProgramSchema = (details: ProgramDescriptionDataType) => ({
   description: details.publicInfo.description,
   broker: details.brokerDetails.name,
   feesAndCommissionsSpecification: "", //TODO
-  logo: filesService.getFileUrl(details.publicInfo.logo),
-  aggregateRating: details.programDetails
-    ? {
-        "@type": "AggregateRating",
-        bestRating: 7, //TODO
-        ratingValue: details.programDetails.level
-      }
-    : undefined //TODO
+  logo: filesService.getFileUrl(details.publicInfo.logo)
 });
 
 const getFollowSchema = (details: ProgramDescriptionDataType) => ({

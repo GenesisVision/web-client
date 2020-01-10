@@ -34,6 +34,7 @@ export const titleMeta = (title?: string) => {
 export const descriptionMeta = (description?: string) => {
   return description ? (
     <>
+      <meta key="description" name="description" content={description} />
       <meta
         key="og-description"
         property="og:description"
