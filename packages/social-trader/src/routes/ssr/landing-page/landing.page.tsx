@@ -7,7 +7,6 @@ import {
   ItemsViewModelProgramDetailsListItem,
   PlatformEvent
 } from "gv-api-web";
-import { useRefLink } from "hooks/ref-link";
 import React from "react";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "routes/ssr/landing-page/containers/advantages-container/advantages-container";
@@ -32,7 +31,6 @@ const _LandingPage: React.FC<Props> = ({
   events,
   refLink
 }) => {
-  useRefLink();
   return (
     <Layout title="Genesis Vision">
       <main className="home">
