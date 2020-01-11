@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_transition";
 
 .program-period-pie {
   display: flex;
@@ -38,13 +39,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    & circle {
-      transition: 300ms ease-in-out;
-    }
-    &--over {
-      & circle {
-        stroke-width: 4;
-      }
-    }
+  }
+}
+
+.pie-circle {
+  @include transition();
+  cursor: pointer;
+  &--selected {
+    stroke-width: 4;
   }
 }
