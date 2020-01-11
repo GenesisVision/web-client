@@ -1,5 +1,6 @@
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
+import { useRefLink } from "hooks/ref-link";
 import Head from "next/head";
 import * as React from "react";
 import { PropsWithChildren } from "react";
@@ -22,6 +23,7 @@ const _Page = ({
   previewImage,
   url
 }: PropsWithChildren<Props>) => {
+  useRefLink();
   const [t] = useTranslation();
   const pageTitle = t("app.title") + title;
   return (
