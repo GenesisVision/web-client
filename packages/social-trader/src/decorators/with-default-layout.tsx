@@ -11,6 +11,9 @@ import { Dispatch } from "redux";
 import { getCookie } from "utils/cookie";
 import { addRequestAnimationFrame } from "utils/helpers";
 import { NextPageWithReduxContext } from "utils/types";
+import LogRocket from "logrocket";
+
+LogRocket.init("skegn6/genesis-vision");
 
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
