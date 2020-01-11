@@ -170,7 +170,7 @@ const getEventLoaderData = (): TDashboardEvent => ({
   ],
   totalFeesAmount: 0,
   totalFeesCurrency: "GVT",
-  date: new Date(),
+  date: new Date("2020-01-11T06:15:02.703Z"),
   title: getRandomWords(3),
   amount: getRandomInteger(-10000, 10000)
 });
