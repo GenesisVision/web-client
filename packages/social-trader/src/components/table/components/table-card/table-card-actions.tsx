@@ -31,7 +31,9 @@ const _TableCardActions: React.FC<Props> = ({
       noPadding
       onClose={clearAnchor}
     >
-      <PopoverContent type={"list"}>{children}</PopoverContent>
+      <PopoverContent leftAlign type={"list"}>
+        {children}
+      </PopoverContent>
     </Popover>
   );
 };
