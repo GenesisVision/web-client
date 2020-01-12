@@ -5,7 +5,7 @@ import Modal from "components/modal/modal";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
 
-const _Popover: React.FC<Props> = props => {
+const Popover: React.FC<Props> = props => {
   const {
     fixedHorizontal,
     onMouseEnter,
@@ -177,7 +177,6 @@ export enum ORIENTATION_POPOVER {
 const getAnchorEl = (el?: anchorElType) =>
   typeof el === "function" ? el() : el;
 
-const Popover = React.memo<React.FC<Props>>(_Popover);
 export default Popover;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {

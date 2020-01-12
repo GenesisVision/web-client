@@ -14,7 +14,7 @@ import {
   GV_PROGRAMS_ROUTE
 } from "routes/invest.routes";
 
-const _InvestPage: React.FC<Props> = ({
+export const InvestPage: React.FC<Props> = ({
   assets: { follows, funds, programs }
 }) => {
   const [t] = useTranslation();
@@ -68,5 +68,3 @@ const _InvestPage: React.FC<Props> = ({
 interface Props {
   assets: InvestAssetsType;
 }
-
-export const InvestPage = React.memo(_InvestPage);

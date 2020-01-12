@@ -18,7 +18,7 @@ import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const _TableCardActions: React.FC<Props> = ({
+export const TableCardActions: React.FC<Props> = ({
   clearAnchor,
   anchor,
   children
@@ -95,4 +95,3 @@ export interface IRenderActionsArgs {
   clearAnchor: (event: TEvent) => void;
   anchor: TAnchor;
 }
-export const TableCardActions = React.memo(_TableCardActions);

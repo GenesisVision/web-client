@@ -18,7 +18,7 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
 
-const _TableCard: React.FC<ITableCardProps> = props => {
+const TableCard: React.FC<ITableCardProps> = props => {
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
@@ -239,5 +239,4 @@ interface ITableCardProps
     ITableCardChartBlockProps,
     React.HTMLAttributes<HTMLDivElement> {}
 
-const TableCard = React.memo(_TableCard);
 export default TableCard;

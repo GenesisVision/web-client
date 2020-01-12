@@ -3,7 +3,7 @@ import "./dashboard-block.scss";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 
-const _HorizontalListShadowContainer: React.FC<Props> = ({
+export const HorizontalListShadowContainer: React.FC<Props> = ({
   scroll,
   darkShadow,
   children,
@@ -35,7 +35,3 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   endOfList: number;
   darkShadow?: boolean;
 }
-
-export const HorizontalListShadowContainer = React.memo(
-  _HorizontalListShadowContainer
-);

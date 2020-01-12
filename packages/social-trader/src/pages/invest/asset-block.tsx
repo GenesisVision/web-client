@@ -18,7 +18,7 @@ const OFFSET_WIDTH = 20;
 const CELL_WIDTH = ASSET_WIDTH + OFFSET_WIDTH;
 const CONTAINER_WIDTH = Math.round(CELL_WIDTH * 2.6);
 
-const _AssetBlock: React.FC<Props> = ({
+export const AssetBlock: React.FC<Props> = ({
   buttonLabel,
   blockType,
   left,
@@ -83,5 +83,3 @@ interface Props {
   renderCard: React.FC<ListChildComponentProps>;
   assets: InvestAssetType[];
 }
-
-export const AssetBlock = React.memo(_AssetBlock);

@@ -4,7 +4,7 @@ import { HorizontalListShadowContainer } from "pages/dashboard/components/dashbo
 import React, { useCallback, useRef, useState } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 
-const _DashboardHorizontalWindowList: React.FC<Props> = ({
+const DashboardHorizontalWindowList: React.FC<Props> = ({
   itemWidth,
   renderItem,
   height,
@@ -51,8 +51,4 @@ interface Props {
   darkShadow?: boolean;
   renderItem: React.FC<ListChildComponentProps>;
 }
-
-const DashboardHorizontalWindowList = React.memo(
-  _DashboardHorizontalWindowList
-);
 export default DashboardHorizontalWindowList;
