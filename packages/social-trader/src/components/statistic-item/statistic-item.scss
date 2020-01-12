@@ -35,6 +35,9 @@
     &--loader {
       opacity: 0.5;
     }
+    &--no-wrap {
+      white-space: nowrap;
+    }
   }
 
   &__value {

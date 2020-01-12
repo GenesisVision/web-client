@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _StatisticItem: React.FC<Props> = ({
+  noWrap = true,
   withPadding = true,
   hideLabel,
   isPending,
@@ -37,7 +38,9 @@ const _StatisticItem: React.FC<Props> = ({
         });
       case false:
       default:
-        return "statistics-item__label";
+        return classNames("statistics-item__label", {
+          "statistics-item__label--no-wrap": noWrap
+        });
     }
   };
 
@@ -86,6 +89,7 @@ enum ITEM {
 }
 
 interface Props {
+  noWrap?: boolean;
   withPadding?: boolean;
   hideLabel?: boolean;
   isPending?: boolean;
