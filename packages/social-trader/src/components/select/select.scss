@@ -24,7 +24,7 @@
     justify-content: space-between;
     padding: 0;
     letter-spacing: 0.4px;
-    font-size: $font-size-small;
+    @include font-size($font-size-small);
     font-weight: 400;
     border: none;
     outline: none;
@@ -35,6 +35,7 @@
   }
 
   &__text {
+    @include font-size($font-size-h4);
     display: inline-flex;
     align-items: center;
     margin-right: $padding-xxsmall;
