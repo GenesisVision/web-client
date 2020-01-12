@@ -13,5 +13,5 @@ export const notificationsToggle = (isOpen: boolean) => (
   dispatch(notificationsToggleAction(!isOpen));
 };
 export const fetchTwoFactor = (dispatch: Dispatch) => {
-  dispatch(fetchTwoFactorAction());
+  dispatch(fetchTwoFactorAction);
 };
