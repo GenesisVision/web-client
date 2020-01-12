@@ -5,10 +5,11 @@ import React from "react";
 
 const _PopoverContent: React.FC<
   Props & React.HTMLAttributes<HTMLDivElement>
-> = ({ type, children, className }) => {
+> = ({ type, children, className, leftAlign }) => {
   return (
     <div
       className={classNames("popover-content", className, {
+        "popover-content__list--left-align": leftAlign,
         "popover-content__list": type === "list"
       })}
     >
@@ -18,6 +19,7 @@ const _PopoverContent: React.FC<
 };
 
 interface Props {
+  leftAlign?: boolean;
   className?: string;
   type?: "list";
 }

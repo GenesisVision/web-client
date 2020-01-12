@@ -14,6 +14,10 @@ $tooltip-padding: 16px;
     overflow-x: auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+
+    &--left-align {
+      align-items: flex-start;
+    }
   }
 
   &__list-item {
