@@ -65,9 +65,11 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   );
   const renderActions = ({ anchor, clearAnchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
-        {t("dashboard-page.trading.actions.terminal")}
-      </TableCardActionsItem>
+      {asset.actions.hasTerminal && (
+        <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.terminal")}
+        </TableCardActionsItem>
+      )}
       {asset.actions.canMakeSignalProviderFromPrivateExternalTradingAccount && (
         <TableCardActionsItem
           to={makeProgramExternalLink}

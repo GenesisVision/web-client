@@ -71,7 +71,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       id={asset.id}
       url={asset.publicInfo && asset.publicInfo.url}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
-      showTerminal={asset.assetType !== ASSET.FUND}
+      showTerminal={asset.actions.hasTerminal}
     />
   );
   const { programDetails, fundDetails } = asset.publicInfo;
