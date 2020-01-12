@@ -106,5 +106,5 @@ interface Props {
   labelClassName?: string;
 }
 
-const StatisticItem = React.memo(withLoader(_StatisticItem));
+const StatisticItem = withLoader(_StatisticItem);
 export default StatisticItem;

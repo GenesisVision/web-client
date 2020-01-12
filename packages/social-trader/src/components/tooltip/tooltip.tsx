@@ -8,7 +8,7 @@ import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 
-const _Tooltip: React.FC<Props> = ({
+const Tooltip: React.FC<Props> = ({
   render,
   vertical = VERTICAL_POPOVER_POS.TOP,
   horizontal = HORIZONTAL_POPOVER_POS.CENTER,
@@ -55,5 +55,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Tooltip = React.memo(_Tooltip);
 export default Tooltip;

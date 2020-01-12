@@ -15,7 +15,7 @@ import {
   urlMeta
 } from "utils/seo";
 
-const _Page = ({
+const Page = ({
   title,
   description,
   children,
@@ -55,5 +55,4 @@ interface Props {
   url?: string;
 }
 
-const Page = React.memo(_Page);
 export default Page;

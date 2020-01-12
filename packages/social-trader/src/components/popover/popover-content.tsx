@@ -3,7 +3,7 @@ import "./popover-content.scss";
 import classNames from "classnames";
 import React from "react";
 
-const _PopoverContent: React.FC<
+export const PopoverContent: React.FC<
   Props & React.HTMLAttributes<HTMLDivElement>
 > = ({ type, children, className, leftAlign }) => {
   return (
@@ -24,8 +24,6 @@ interface Props {
   type?: "list";
 }
 
-export const PopoverContent = React.memo(_PopoverContent);
-
-export const PopoverContentListItem: React.FC = React.memo(({ children }) => {
+export const PopoverContentListItem: React.FC = ({ children }) => {
   return <div className="popover-content__list-item">{children}</div>;
-});
+};

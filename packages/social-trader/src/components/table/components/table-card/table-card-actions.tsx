@@ -38,9 +38,11 @@ export const TableCardActions: React.FC<Props> = ({
   );
 };
 
-export const TableCardActionsItem: React.FC<
-  ITableCardActionsItemProps
-> = React.memo(({ to, onClick, children }) => {
+export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
+  to,
+  onClick,
+  children
+}) => {
   return (
     <PopoverContentListItem>
       <Link to={to}>
@@ -50,7 +52,7 @@ export const TableCardActionsItem: React.FC<
       </Link>
     </PopoverContentListItem>
   );
-});
+};
 
 export const TableCardFavoriteActionItem: React.FC<{
   asset?: ToggleableAssetType;
@@ -60,7 +62,7 @@ export const TableCardFavoriteActionItem: React.FC<{
   isFavorite: boolean;
   withDispatch?: boolean;
   onApply?: VoidFunction;
-}> = React.memo(({ id, isFavorite, onApply, assetType, asset, updateRow }) => {
+}> = ({ id, isFavorite, onApply, assetType, asset, updateRow }) => {
   const { t } = useTranslation();
   return (
     <PopoverContentListItem>
@@ -79,7 +81,7 @@ export const TableCardFavoriteActionItem: React.FC<{
       </ToggleAssetFavoriteButton>
     </PopoverContentListItem>
   );
-});
+};
 
 interface ITableCardActionsItemProps {
   children?: string | JSX.Element;
