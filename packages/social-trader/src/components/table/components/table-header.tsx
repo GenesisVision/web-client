@@ -73,7 +73,7 @@ const _TableColumns: React.FC<IColumnsProps> = ({
           key={column.name}
           sortable={!!updateSorting && isSortable(column.sortingName)}
           onClick={handleSorting(column.sortingName)}
-          sortingDirection={getSortingDirection(column.sortingName)}
+          sortingDirection={getSortingDirection(column.sortingName, sorting)}
         >
           {column.name && renderHeader ? renderHeader(column) : null}
         </TableHeadCell>
