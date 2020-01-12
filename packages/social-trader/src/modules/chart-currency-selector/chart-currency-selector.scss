@@ -20,6 +20,9 @@
   }
 
   &__item {
+    & .select__text {
+      @include font-size($tag-font-size);
+    }
     display: flex;
     align-items: center;
   }

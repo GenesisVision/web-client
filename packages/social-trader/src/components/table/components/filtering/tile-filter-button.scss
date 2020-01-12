@@ -9,7 +9,10 @@
   }
 
   &__add {
-    @include font-size($font-size-xsmall);
+    &,
+    & .select__text {
+      @include font-size($font-size-xsmall);
+    }
     @include adaptive-border-radius(19.5px);
     @include height(18px);
     @include line-height(18px);
