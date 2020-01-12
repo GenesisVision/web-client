@@ -25,6 +25,12 @@ export type TNavHeader = TNavFooter & {
 export const FEES_ROUTE = "/fees";
 export const REFERRAL_PROGRAM_ROUTE = "/referral-program";
 export const FAQ_ROUTE = "/faq";
+export const GLOSSARY_ROUTE = "/glossary";
+export const AML_MANUAL_ROUTE = "/aml-manual";
+export const WHITE_PAPER_ROUTE = "/white-paper-eng.pdf";
+export const PRIVACY_POLICY_ROUTE = "/privacy-policy";
+export const TERMS_ROUTE = "/terms";
+export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
   {
@@ -109,27 +115,27 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "Glossary",
-    href: "/glossary"
+    href: GLOSSARY_ROUTE
   },
   {
     name: "AML Manual",
-    href: "/aml-manual"
+    href: AML_MANUAL_ROUTE
   },
   {
     name: "White paper",
-    href: "https://genesis.vision/white-paper-eng.pdf"
+    href: WHITE_PAPER_ROUTE
   },
   {
     name: "Privacy policy",
-    href: "/privacy-policy"
+    href: PRIVACY_POLICY_ROUTE
   },
   {
     name: "Terms and conditions",
-    href: "/terms"
+    href: TERMS_ROUTE
   },
   {
     name: "Download terminal",
-    href: "/downloads"
+    href: DOWNLOADS_ROUTE
   }
 ];
 
