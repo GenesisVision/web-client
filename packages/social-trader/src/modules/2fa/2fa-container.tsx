@@ -12,14 +12,14 @@ const _TwoFactorAuthContainer: React.FC = () => {
   const twoFactorAuth = useSelector(twoFactorSelector);
   const [type, setType] = useState<TYPE_2FA | undefined>(undefined);
   useEffect(() => {
-    dispatch(fetchTwoFactorAction);
+    dispatch(fetchTwoFactorAction());
   }, []);
   const handleChange = useCallback(
     (event: React.ChangeEvent<any>) => setType(event.target.value),
     []
   );
   const handleClose = useCallback(() => setType(undefined), []);
-  const handleSubmit = useCallback(() => dispatch(fetchTwoFactorAction), []);
+  const handleSubmit = useCallback(() => dispatch(fetchTwoFactorAction()), []);
   return (
     <TwoFactor
       condition={!!twoFactorAuth}
