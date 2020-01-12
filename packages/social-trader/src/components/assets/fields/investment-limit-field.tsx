@@ -39,6 +39,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
       {hasInvestmentLimit && (
         <AssetField>
           <InputAmountField
+            wide
             autoFocus={false}
             isAllow={isAmountAllow(currency)}
             name={inputName}

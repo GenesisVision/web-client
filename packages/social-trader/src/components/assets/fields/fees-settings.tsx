@@ -25,6 +25,7 @@ const _FeesSettings: React.FC<Props> = ({
       <AssetRow>
         <AssetField>
           <AssetFormField
+            wide
             name={entryFeeName}
             label={t("create-program-page.settings.fields.entry-fee")}
             adornment="%"
@@ -36,6 +37,7 @@ const _FeesSettings: React.FC<Props> = ({
         </AssetField>
         <AssetField>
           <AssetFormField
+            wide
             name={secondFeeName}
             label={secondFeeLabel}
             adornment="%"

@@ -34,6 +34,7 @@ const _BrokerAccount: React.FC<Props> = ({
   return (
     <AssetField>
       <GVFormikField
+        wide
         name={name}
         component={GVTextField}
         label={t("create-program-page.settings.fields.account-type")}
