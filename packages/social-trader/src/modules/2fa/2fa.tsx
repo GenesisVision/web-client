@@ -4,11 +4,10 @@ import classNames from "classnames";
 import Dialog from "components/dialog/dialog";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import { TwoFactorStatus } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
@@ -17,44 +16,44 @@ import GoogleAuthContainer from "./google-auth/google-auth-container";
 const _TwoFactor: React.FC<Props> = ({
   handleSubmit,
   handleChange,
-  t,
   twoFactorAuth,
   type,
   handleClose
-}) => (
-  <div className="two-factor">
-    <GVTextField
-      name="2fa"
-      label={t("2fa-page.type")}
-      value={
-        twoFactorAuth.twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE
-      }
-      onChange={handleChange}
-      InputComponent={Select}
-    >
-      <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
-      <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
-    </GVTextField>
-    <GenerateRecoveryCode disabled={twoFactorAuth.twoFactorEnabled} />
-    <Dialog
-      className={classNames({
-        "dialog--width-auto": !twoFactorAuth.twoFactorEnabled
-      })}
-      open={Boolean(type)}
-      onClose={handleClose}
-    >
-      {type && type === TYPE_2FA.GOOGLE ? (
-        <GoogleAuthContainer onSubmit={handleSubmit} />
-      ) : (
-        <DisableAuthContainer onSubmit={handleSubmit} />
-      )}
-    </Dialog>
-  </div>
-);
+}) => {
+  const [t] = useTranslation();
+  return (
+    <div className="two-factor">
+      <GVTextField
+        name="2fa"
+        label={t("2fa-page.type")}
+        value={
+          twoFactorAuth.twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE
+        }
+        onChange={handleChange}
+        InputComponent={Select}
+      >
+        <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
+        <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
+      </GVTextField>
+      <GenerateRecoveryCode disabled={twoFactorAuth.twoFactorEnabled} />
+      <Dialog
+        className={classNames({
+          "dialog--width-auto": !twoFactorAuth.twoFactorEnabled
+        })}
+        open={Boolean(type)}
+        onClose={handleClose}
+      >
+        {type && type === TYPE_2FA.GOOGLE ? (
+          <GoogleAuthContainer onSubmit={handleSubmit} />
+        ) : (
+          <DisableAuthContainer onSubmit={handleSubmit} />
+        )}
+      </Dialog>
+    </div>
+  );
+};
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   twoFactorAuth: TwoFactorStatus;
   handleSubmit: () => void;
   handleChange: (event: React.ChangeEvent<any>) => void;
@@ -67,9 +66,5 @@ export enum TYPE_2FA {
   DISABLE = "disable"
 }
 
-const TwoFactor = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  withLoader,
-  translate(),
-  React.memo
-)(_TwoFactor);
+const TwoFactor = withLoader(React.memo(_TwoFactor));
 export default TwoFactor;
