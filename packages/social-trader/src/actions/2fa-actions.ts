@@ -6,10 +6,10 @@ import { ActionType, ApiAction } from "utils/types";
 export const TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH";
 export const TWO_FACTOR_SET_REQUIREMENT = "TWO_FACTOR_SET_REQUIREMENT";
 
-export const fetchTwoFactorAction: ApiAction<TwoFactorStatus> = {
+export const fetchTwoFactorAction = (): ApiAction<TwoFactorStatus> => ({
   type: TWO_FACTOR_AUTH,
   payload: authApi.getTwoStepAuthStatus(authService.getAuthArg())
-};
+});
 
 export const setTwoFactorRequirementAction = (
   twoFactorEnabled: boolean
