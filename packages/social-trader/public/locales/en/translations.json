@@ -49,7 +49,7 @@
   "invest": {
     "title": "Invest",
     "follows": {
-      "title": "Follows",
+      "title": "Follow",
       "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time."
     },
     "programs": {
@@ -223,7 +223,7 @@
     "trading": "Trading",
     "financial-statistic": "Financial statistic",
     "invest": "Invest",
-    "gv-follow": "Follows",
+    "gv-follow": "Follow",
     "gv-funds": "Funds",
     "gv-programs": "Programs",
     "trade": "Trade",
@@ -562,7 +562,7 @@
     }
   },
   "follows-page": {
-    "title": "Follows",
+    "title": "Follow",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favourites"
@@ -1235,7 +1235,7 @@
     }
   },
   "global-search-page": {
-    "follows": "Follows",
+    "follows": "Follow",
     "title": "Search",
     "heading": "Search Results",
     "programs": "Programs",
@@ -1623,7 +1623,7 @@
         "label": "Amount"
       }
     },
-    "follows": "FOLLOWs",
+    "follows": "FOLLOW",
     "programs": "PROGRAMS",
     "funds": "FUNDS",
     "follow": {
