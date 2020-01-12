@@ -8,6 +8,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getAssetRequests } from "./services/asset-status.service";
+import { PopoverContentListItem } from "components/popover/popover-content";
 
 const _AssetStatusRequestsContainer: React.FC<Props> = ({
   id,
@@ -26,10 +27,11 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
     if (onCancel) onCancel();
   }, []);
 
-  if (requests && requests.length === 0)
-    return (
-      <div>{t("program-details-page.description.requests-completed")}</div>
-    );
+  return (
+    <PopoverContentListItem>
+      {t("program-details-page.description.requests-completed")}
+    </PopoverContentListItem>
+  );
 
   return (
     <AssetStatusRequests
