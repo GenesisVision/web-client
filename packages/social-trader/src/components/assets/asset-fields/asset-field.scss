@@ -9,16 +9,15 @@
 }
 .asset-field {
   position: relative;
-  max-width: 230px;
-  padding-right: $padding-xsmall;
-
+  width: 230px;
+  @include adaptive-padding(right, $padding-xsmall);
   &:not(:last-child) {
-    margin-bottom: 40px;
+    @include adaptive-margin(bottom, $padding-medium);
   }
 
   &-caption {
-    padding-top: $padding-xsmall;
-    font-size: $font-size-small;
+    @include adaptive-padding(top, $padding-xsmall);
+    @include font-size($font-size-small);
     color: $label-color;
     letter-spacing: 0.4px;
     width: 100%;
@@ -30,7 +29,7 @@
 
   &-caption-tooltip-content {
     width: 248px;
-    font-size: 12px;
+    @include font-size($font-size-small);
     line-height: 1.6;
     color: $text-light-color;
   }
@@ -67,10 +66,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: $padding-medium;
+    @include width($padding-medium);
   }
   &__caption {
-    font-size: $font-size-small;
+    @include font-size($font-size-small);
     color: $label-color;
     letter-spacing: 0.4px;
     width: 100%;
@@ -79,7 +78,7 @@
   }
 
   &__hint {
-    font-size: $font-size-small;
+    @include font-size($font-size-small);
     color: $label-color;
     letter-spacing: 0.4px;
     width: 100%;
@@ -90,7 +89,7 @@
 
     &-tooltip-content {
       width: 248px;
-      font-size: $font-size-small;
+      @include font-size($font-size-small);
       line-height: 1.6;
       color: $text-light-color;
     }
