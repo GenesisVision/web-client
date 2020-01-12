@@ -1,9 +1,10 @@
 @import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
 
 .select {
   display: flex;
   min-width: 150px;
-  height: 22px;
+  @include height(22px);
 
   &__options {
     align-items: flex-start;
@@ -17,12 +18,13 @@
   }
 
   &__value {
+    width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     padding: 0;
     letter-spacing: 0.4px;
-    font-size: 12px;
+    font-size: $font-size-small;
     font-weight: 400;
     border: none;
     outline: none;
@@ -35,7 +37,7 @@
   &__text {
     display: inline-flex;
     align-items: center;
-    margin-right: 8px;
+    margin-right: $padding-xxsmall;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
