@@ -61,6 +61,7 @@ $avatar-size: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include font-size($font-size-h4);
     @include adaptive-margin(bottom, $padding-small);
     @include horizontal-paddings($padding-xsmall);
     @include adaptive-padding(top, $padding-small);
