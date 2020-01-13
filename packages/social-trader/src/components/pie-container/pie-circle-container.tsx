@@ -1,8 +1,11 @@
 import * as React from "react";
 
-export const PieCircleContainer: React.FC<
-  IPieCircleContainerProps
-> = React.memo(({ children, withSubstrate, color, circleSize }) => {
+export const PieCircleContainer: React.FC<IPieCircleContainerProps> = ({
+  children,
+  withSubstrate,
+  color,
+  circleSize
+}) => {
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${circleSize} ${circleSize}`}>
       {withSubstrate && (
@@ -19,7 +22,7 @@ export const PieCircleContainer: React.FC<
       {children}
     </svg>
   );
-});
+};
 
 interface IPieCircleContainerProps
   extends React.HTMLAttributes<HTMLDivElement> {

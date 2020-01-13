@@ -32,3 +32,6 @@ export const serviceClearNotifications = (): RootThunk<void> => dispatch => {
   dispatch(setNotificationsOptionsAction(calculateOptions()));
   dispatch(fetchProfileHeaderInfoAction());
 };
+
+export const clearAll = () =>
+  notificationsApi.readAllNotification(authService.getAuthArg());

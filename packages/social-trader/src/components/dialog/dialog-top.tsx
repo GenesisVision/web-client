@@ -3,7 +3,7 @@ import "./dialog.scss";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import * as React from "react";
 
-export const _DialogTop: React.FC<
+export const DialogTop: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({ title, subtitle, children }) => (
   <PopoverContentCardBlock dark size={"big"}>
@@ -19,5 +19,3 @@ interface Props {
   title?: string | JSX.Element;
   subtitle?: string | JSX.Element;
 }
-
-export const DialogTop = React.memo(_DialogTop);

@@ -6,6 +6,7 @@ import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import ClearButton from "components/notifications/components/ClearButton";
 import NotificationsGroup from "components/notifications/components/notification-group/notification-group";
 import Spinner from "components/spiner/spiner";
 import dayjs from "dayjs";
@@ -91,11 +92,16 @@ const _Notifications: React.FC<Props> = ({
           <div className="notifications__ring">
             <RingIcon />
           </div>
-          {t("notifications-aside.header")}
+          <div className="notifications__header-title">
+            {t("notifications-aside.header")}
+          </div>
           <div className="notifications__count">
             <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
               {count}
             </Chip>
+          </div>
+          <div className="notifications__clear">
+            {count !== 0 && <ClearButton />}
           </div>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}

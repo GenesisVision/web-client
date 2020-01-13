@@ -32,9 +32,9 @@ export const convertAssetMapPropsToValues = ({
   [CONVERT_ASSET_FIELDS.hasInvestmentLimit]: false,
   [CONVERT_ASSET_FIELDS.investmentLimit]: undefined,
   [CONVERT_ASSET_FIELDS.isSignalProgram]: true, // TODO move back to server
-  [CONVERT_ASSET_FIELDS.successFee]: 0,
+  [CONVERT_ASSET_FIELDS.successFee]: undefined,
   [CONVERT_ASSET_FIELDS.currency]: currency || "GVT",
-  [CONVERT_ASSET_FIELDS.volumeFee]: 0,
+  [CONVERT_ASSET_FIELDS.volumeFee]: undefined,
   [CONVERT_ASSET_FIELDS.periodLength]:
     periods.length === 1 ? periods[0] : undefined
 });

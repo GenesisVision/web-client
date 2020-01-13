@@ -9,7 +9,7 @@ export const useRefLink = () => {
   useEffect(() => {
     if (location) {
       const { ref } = qs.parse(location.search.slice(1));
-      setCookie(REFERRAL_CODE, ref);
+      if (ref) setCookie(REFERRAL_CODE, ref);
     }
   }, [window, location]);
 };

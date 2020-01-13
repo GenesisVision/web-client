@@ -34,7 +34,7 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
 };
 
 const PortfolioEventFeesTooltip = withLoader(
-  React.memo(Crashable(_PortfolioEventFeesTooltip))
+  Crashable(_PortfolioEventFeesTooltip)
 );
 export default PortfolioEventFeesTooltip;
 
