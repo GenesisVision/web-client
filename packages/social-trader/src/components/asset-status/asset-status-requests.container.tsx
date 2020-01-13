@@ -1,6 +1,7 @@
 import "./asset-status.scss";
 
 import AssetStatusRequests from "components/asset-status/asset-status-requests";
+import { PopoverContentListItem } from "components/popover/popover-content";
 import { AssetInvestmentRequest } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { getInRequestsLoadersData } from "pages/dashboard/dashboard.loaders-data";
@@ -8,7 +9,6 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getAssetRequests } from "./services/asset-status.service";
-import { PopoverContentListItem } from "components/popover/popover-content";
 
 const _AssetStatusRequestsContainer: React.FC<Props> = ({
   id,
@@ -27,11 +27,12 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
     if (onCancel) onCancel();
   }, []);
 
-  return (
-    <PopoverContentListItem>
-      {t("program-details-page.description.requests-completed")}
-    </PopoverContentListItem>
-  );
+  if (requests && requests.length === 0)
+    return (
+      <PopoverContentListItem>
+        {t("program-details-page.description.requests-completed")}
+      </PopoverContentListItem>
+    );
 
   return (
     <AssetStatusRequests
