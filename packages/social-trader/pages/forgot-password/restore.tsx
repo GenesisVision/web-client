@@ -1,7 +1,9 @@
+import LoginFooter from "components/auth/components/login-footer/login-footer";
 import PasswordRestorePage from "components/auth/forgot-password/password-restore/password-restore.page";
-import withDefaultLayout from "decorators/with-default-layout";
+import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage, NextPageContext } from "next";
 import React from "react";
+import { SIGNUP_ROUTE } from "routes/app.routes";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
 const Page: NextPage<Props> = ({ userId, code }) => {
@@ -18,4 +20,8 @@ interface Props {
   code: string;
 }
 
-export default withDefaultLayout(Page);
+export default withAuthLayout({
+  titleKey: "auth.password-restore.title",
+  footerAuthRoute: SIGNUP_ROUTE,
+  Footer: LoginFooter
+})(Page);
