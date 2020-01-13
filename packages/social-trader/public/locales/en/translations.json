@@ -241,6 +241,7 @@
     "login": "Login"
   },
   "notifications-aside": {
+    "clear": "Clear",
     "header": "Notifications",
     "today": "today",
     "yesterday": "yesterday"
