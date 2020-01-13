@@ -27,7 +27,6 @@ $avatar-size: 32px;
     }
   }
 
-  &__count,
   &__link {
     margin: 0 auto;
   }
@@ -50,7 +49,7 @@ $avatar-size: 32px;
   &__ring {
     @include height($ring-icon-size);
     @include width($ring-icon-size);
-    @include adaptive-margin(right, $padding-xsmall);
+    @include adaptive-margin(right, $padding-xxsmall);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,10 +60,25 @@ $avatar-size: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @include font-size($font-size-h4);
     @include adaptive-margin(bottom, $padding-small);
     @include horizontal-paddings($padding-xsmall);
     @include adaptive-padding(top, $padding-small);
+  }
+
+  &__count {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
+  &__header-title {
+    @include font-size($font-size-h4);
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
+  &__clear {
+    & button {
+      @include font-size($font-size-h4);
+    }
+    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__content {
