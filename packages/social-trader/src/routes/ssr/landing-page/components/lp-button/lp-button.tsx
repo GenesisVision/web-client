@@ -1,7 +1,7 @@
 import "./lp-button.scss";
 
 import classnames from "classnames";
-import Link from "components/link/link";
+import Link, { ToType } from "components/link/link";
 import React from "react";
 
 interface LPButtonProps {
@@ -14,7 +14,7 @@ interface LPButtonProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
   ) => void;
   children: string | JSX.Element;
-  href?: string;
+  href?: string | ToType;
 }
 
 const _LPButton: React.FC<LPButtonProps> = ({
@@ -32,9 +32,11 @@ const _LPButton: React.FC<LPButtonProps> = ({
     "lp-button--secondary": color === "secondary"
   });
   switch (true) {
-    case href && (href.includes("http") || href.includes("mailto")):
+    case href &&
+      typeof href === "string" &&
+      (href.includes("http") || href.includes("mailto")):
       return (
-        <a href={href} className={classname}>
+        <a href={href as string} className={classname}>
           {children}
         </a>
       );
@@ -52,13 +54,7 @@ const _LPButton: React.FC<LPButtonProps> = ({
       );
     case !!href:
       return (
-        <Link
-          className={classname}
-          onClick={onClick}
-          to={{
-            pathname: href as string
-          }}
-        >
+        <Link className={classname} onClick={onClick} to={href}>
           {children}
         </Link>
       );
