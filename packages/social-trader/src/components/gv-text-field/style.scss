@@ -92,7 +92,7 @@
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
       -webkit-text-fill-color: $text-light-color;
-      -webkit-box-shadow: 0 0 0 30px $secondary-background-color inset;
+      -webkit-box-shadow: 0 0 0 30px $panel-background-color inset;
       caret-color: $text-light-color;
     }
     &::-webkit-outer-spin-button,
