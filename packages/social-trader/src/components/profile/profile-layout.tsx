@@ -33,7 +33,7 @@ const tabs = [
   { pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS }
 ];
 
-const _ProfileLayout: React.FC<Props> = ({ route, children }) => {
+const ProfileLayout: React.FC<Props> = ({ route, children }) => {
   const [t] = useTranslation();
   const verified = useSelector(kycConfirmedSelector);
   return (
@@ -69,5 +69,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   route: string;
 }
 
-const ProfileLayout = React.memo(_ProfileLayout);
 export default ProfileLayout;

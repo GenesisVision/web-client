@@ -3,7 +3,7 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import * as React from "react";
 
-const _SignalProviderControls: React.FC<Props> = ({ children }) => {
+const SignalProviderControls: React.FC<Props> = ({ children }) => {
   return (
     <DetailsBlock
       type={DETAILS_BLOCK_TYPE.BORDERED}
@@ -16,7 +16,4 @@ const _SignalProviderControls: React.FC<Props> = ({ children }) => {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
-const SignalProviderControls = React.memo<React.FC<Props>>(
-  _SignalProviderControls
-);
 export default SignalProviderControls;

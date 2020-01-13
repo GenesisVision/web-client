@@ -2,7 +2,7 @@ import "./asset-field.scss";
 
 import * as React from "react";
 
-export const _AssetTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+export const AssetTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
 }) => {
   return (
@@ -12,5 +12,4 @@ export const _AssetTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   );
 };
 
-const AssetTitle = React.memo(_AssetTitle);
 export default AssetTitle;

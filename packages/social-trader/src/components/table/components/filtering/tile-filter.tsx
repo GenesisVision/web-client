@@ -9,7 +9,7 @@ import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
 import { ITileFilterItemProps } from "./tile-filter-item";
 
-const _TileFilter: React.FC<Props> = ({
+const TileFilter: React.FC<Props> = ({
   selectedTiles,
   buttonTitle,
   value,
@@ -69,7 +69,6 @@ const _TileFilter: React.FC<Props> = ({
   );
 };
 
-const TileFilter = React.memo(_TileFilter);
 export default TileFilter;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {

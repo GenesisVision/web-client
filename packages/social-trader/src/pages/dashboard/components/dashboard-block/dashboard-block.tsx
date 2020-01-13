@@ -6,7 +6,7 @@ import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
 import React from "react";
 
-const _DashboardBlock: React.FC<Props> = ({
+const DashboardBlock: React.FC<Props> = ({
   landscapeTablet,
   tablet,
   label,
@@ -47,5 +47,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   all?: string;
 }
 
-const DashboardBlock = React.memo(_DashboardBlock);
 export default DashboardBlock;
