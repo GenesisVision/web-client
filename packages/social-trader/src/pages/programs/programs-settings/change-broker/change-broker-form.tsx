@@ -161,8 +161,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           safeGetElemFromArray(
             brokers,
             broker =>
-              !!safeGetElemFromArray(
-                broker.accountTypes,
+              !!broker.accountTypes.find(
                 accountType => accountType.id === brokerAccountTypeId
               )
           ).name
