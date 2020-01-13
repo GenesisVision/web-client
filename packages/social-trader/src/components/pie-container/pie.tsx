@@ -35,6 +35,7 @@ export const MultiPie: React.FC<
         const strokeDasharray = calcDash(valuePercent);
         return (
           <PieCircle
+            key={name}
             selected={!!over && over === name}
             onMouseLeave={onMouseLeave}
             onMouseOver={onMouseOver ? onMouseOver(name) : undefined}
