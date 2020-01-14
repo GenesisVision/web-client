@@ -38,7 +38,10 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     update,
     updateSorting,
     updatePaging
-  ] = useRouteFilters(DEFAULT_FOLLOW_TABLE_FILTERS);
+  ] = useRouteFilters(DEFAULT_FOLLOW_TABLE_FILTERS, [
+    CURRENCY_MAP_NAME,
+    DATE_RANGE_FILTER_NAME
+  ]);
   const renderMappings = useCallback(
     (updateFilter, filtering) => (
       <>

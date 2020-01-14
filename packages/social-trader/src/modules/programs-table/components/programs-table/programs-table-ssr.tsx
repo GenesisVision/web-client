@@ -51,7 +51,10 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     update,
     updateSorting,
     updatePaging
-  ] = useRouteFilters(DEFAULT_PROGRAM_TABLE_FILTERS);
+  ] = useRouteFilters(DEFAULT_PROGRAM_TABLE_FILTERS, [
+    CURRENCY_MAP_NAME,
+    DATE_RANGE_FILTER_NAME
+  ]);
   const renderMappings = useCallback(
     (updateFilter, filtering) => (
       <>

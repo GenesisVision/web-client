@@ -38,7 +38,10 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     update,
     updateSorting,
     updatePaging
-  ] = useRouteFilters(DEFAULT_FUND_TABLE_FILTERS);
+  ] = useRouteFilters(DEFAULT_FUND_TABLE_FILTERS, [
+    CURRENCY_MAP_NAME,
+    DATE_RANGE_FILTER_NAME
+  ]);
   if (!filtering[CURRENCY_MAP_NAME]) {
     filtering[CURRENCY_MAP_NAME] = currency;
   }
