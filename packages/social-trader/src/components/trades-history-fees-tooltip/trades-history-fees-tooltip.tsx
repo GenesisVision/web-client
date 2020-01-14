@@ -27,7 +27,7 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({
           {totalCommissionByType.map((commission, index) => (
             <FeeCommission
               key={index}
-              title={t(`copytrading-tables.fees.${commission.type}`)}
+              title={commission.title}
               value={commission.amount}
               currency={commission.currency}
             />
