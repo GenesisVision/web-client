@@ -15,6 +15,8 @@ import {
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
 
+export const SORTING_FILTER_NAME = "sorting";
+
 const _SortingFilter: React.FC<ISortingFilterProps> = ({
   renderValueText,
   columns,
@@ -55,7 +57,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   return (
     <span className="sorting-filter">
       <SelectFilter
-        name="sorting"
+        name={SORTING_FILTER_NAME}
         label="Order By"
         value={composeSortingColumnName()}
         values={columnValues}
