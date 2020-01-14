@@ -17,7 +17,6 @@ const _ProgramTableModule: React.FC<Props> = ({
   filtering,
   defaultFilters,
   paging,
-  isAuthenticated,
   showRating,
   title,
   disableTitle,
@@ -52,7 +51,6 @@ const _ProgramTableModule: React.FC<Props> = ({
 };
 
 interface Props extends ITableModuleProps {
-  isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
 }

@@ -18,7 +18,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
     filtering,
     defaultFilters,
     paging,
-    isAuthenticated,
     showRating,
     title,
     disableTitle,
@@ -54,7 +53,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
 );
 
 interface Props extends ITableModuleProps {
-  isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
 }
