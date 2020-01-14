@@ -12,7 +12,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { ASSET } from "constants/constants";
+import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
@@ -35,6 +35,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
   const {
+    status,
     logo,
     level,
     levelProgress,
@@ -101,7 +102,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts && (
           <ProgramPeriodPie
-            condition={true}
+            condition={status !== STATUS.CLOSED}
             loader={t("program-period.program-closed")}
             start={periodStarts}
             end={periodEnds}
