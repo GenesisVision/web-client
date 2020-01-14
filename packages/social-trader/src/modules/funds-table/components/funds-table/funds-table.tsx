@@ -47,7 +47,7 @@ const _FundsTable: React.FC<Props> = ({
     renderHeader={column => <FundsTableHeaderCell column={column} />}
     renderSorting={column => <FundTableSortingValue column={column} />}
     renderBodyRow={fund => <FundsTableRow withDispatch fund={fund} />}
-    renderBodyCard={fund => <FundCard title={title as string} fund={fund} />}
+    renderBodyCard={fund => <FundCard fund={fund} />}
   />
 );
 

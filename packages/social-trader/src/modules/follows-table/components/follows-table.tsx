@@ -83,7 +83,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
         />
       )}
       renderBodyCard={(follow: FollowDetailsListItem) => (
-        <FollowCard title={title} follow={follow} />
+        <FollowCard follow={follow} />
       )}
     />
   );

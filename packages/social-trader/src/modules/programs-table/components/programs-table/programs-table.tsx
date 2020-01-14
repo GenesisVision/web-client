@@ -78,14 +78,10 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
         />
       )}
       renderBodyRow={(program: ProgramDetailsListItem) => (
-        <ProgramTableRowShort
-          withDispatch
-          showRating={Boolean(showRating)}
-          program={program}
-        />
+        <ProgramTableRowShort withDispatch program={program} />
       )}
       renderBodyCard={(program: ProgramDetailsListItem) => (
-        <ProgramCard title={title} program={program} />
+        <ProgramCard program={program} />
       )}
     />
   );
