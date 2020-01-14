@@ -18,6 +18,7 @@
     "build:analyze": "cross-env ANALYZE=true yarn build",
     "test": "react-scripts test --env=jsdom",
     "test:ui": "majestic",
+    "test:e2e": "yarn run cypress open",
     "eject": "react-scripts eject"
   },
   "majestic": {
