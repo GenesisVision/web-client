@@ -5,6 +5,7 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
@@ -36,9 +37,9 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
             <Tooltip
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
-                <div className="tooltip__content">
+                <TooltipContent>
                   {t("wallet-page.tooltip.transactions")}
-                </div>
+                </TooltipContent>
               )}
             >
               <Link
@@ -62,9 +63,9 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
-                  <div className="tooltip__content">
+                  <TooltipContent>
                     {t("wallet-page.tooltip.deposit")}
-                  </div>
+                  </TooltipContent>
                 )}
               >
                 <Link
@@ -81,9 +82,9 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
-                  <div className="tooltip__content">
+                  <TooltipContent>
                     {t("wallet-page.tooltip.withdrawals")}
-                  </div>
+                  </TooltipContent>
                 )}
               >
                 <Link

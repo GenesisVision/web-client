@@ -15,7 +15,13 @@ const _HeaderContainer: React.FC<Props & WithRouterProps> = ({ router }) => {
   const dispatch = useDispatch();
   const info = useSelector(headerSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-
+  if (info) {
+    const { name, email, id } = info;
+    /*LogRocket.identify(id, {
+      name,
+      email
+    });*/
+  }
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchProfileHeaderInfo);

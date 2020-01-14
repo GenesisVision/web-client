@@ -11,6 +11,7 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
   return (
     <AssetField>
       <GVFormikField
+        wide
         name={name}
         component={GVTextField}
         label={t("create-program-page.settings.fields.period")}

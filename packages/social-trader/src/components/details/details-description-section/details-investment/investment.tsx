@@ -9,6 +9,7 @@ import { ProfitabilityValuePercent } from "components/profitability/profitabilit
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
@@ -17,7 +18,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { ASSET, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
 
@@ -48,7 +48,7 @@ const _Investment: React.FC<Props> = ({
       <DetailsInvestmentHeading>
         {t("program-details-page.description.investment-details")}
       </DetailsInvestmentHeading>
-      <StatisticItemList className="details-investment__short-statistic">
+      <StatisticItemList>
         <StatisticItem accent label={t("fund-details-page.description.value")}>
           <NumberFormat
             value={formatCurrencyValue(personalDetails.value, currency)}

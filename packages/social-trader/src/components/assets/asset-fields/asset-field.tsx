@@ -3,7 +3,7 @@ import "./asset-field.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-export const _AssetField: React.FC<
+export const AssetField: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({ children, wide, className }) => {
   return (
@@ -22,11 +22,8 @@ interface Props {
   className?: string;
 }
 
-export const AssetFields: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
-  <div className="asset-fields">{children}</div>
-));
+export const AssetFields: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  children
+}) => <div className="asset-fields">{children}</div>;
 
-const AssetField = React.memo(_AssetField);
 export default AssetField;

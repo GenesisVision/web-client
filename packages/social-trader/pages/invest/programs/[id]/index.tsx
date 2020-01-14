@@ -1,4 +1,7 @@
+import { ASSET } from "constants/constants";
 import withDefaultLayout from "decorators/with-default-layout";
+import { ProgramFollowDetailsFull } from "gv-api-web";
+import { statisticCurrencyAction } from "pages/programs/program-details/actions/program-details.actions";
 import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
 import {
   dispatchProgramDescription,
@@ -6,7 +9,6 @@ import {
 } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
@@ -18,7 +20,12 @@ Page.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
-  ]);
+  ]).then(([_, res]) => {
+    const {
+      tradingAccountInfo: { currency }
+    } = res.value as ProgramFollowDetailsFull;
+    ctx.reduxStore.dispatch(statisticCurrencyAction(currency));
+  });
   return {};
 };
 

@@ -1,9 +1,10 @@
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
-  <div className="program-period-tooltip">
+  <TooltipContent>
     <div className="program-period-tooltip__header">
       {t("program-period.period-ends")}
     </div>
@@ -12,7 +13,7 @@ const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
         ? formatDate(periodEnds)
         : t("program-period.waiting-period-start")}
     </div>
-  </div>
+  </TooltipContent>
 );
 
 interface Props extends WithTranslation {

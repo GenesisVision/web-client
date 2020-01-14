@@ -1,3 +1,4 @@
+import ImageBaseElement from "components/avatar/image-base.element";
 import GooglePlay from "media/badge-android.png";
 import AppStore from "media/badge-ios.png";
 import * as React from "react";
@@ -13,10 +14,10 @@ export const GoogleStep1: React.FC<WithTranslation> = ({ t }) => (
     <div className="google-auth__count">01</div>
     <div className="google-auth__title">{t("2fa-page.download-app")}</div>
     <a href={AuthAndroidLink} className="google-auth__link">
-      <img src={GooglePlay} alt={"link to android market"} />
+      <ImageBaseElement src={GooglePlay} alt={"link to android market"} />
     </a>
     <a href={AuthIosLink} className="google-auth__link">
-      <img src={AppStore} alt={"link to app store"} />
+      <ImageBaseElement src={AppStore} alt={"link to app store"} />
     </a>
   </div>
 );

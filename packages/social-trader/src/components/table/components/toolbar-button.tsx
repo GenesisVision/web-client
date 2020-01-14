@@ -1,16 +1,17 @@
 import "./table.scss";
 
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import React from "react";
 
 export const ToolbarButton: React.FC<{
   text: string;
   route: string;
-}> = React.memo(({ text, route }) => (
-  <Link to={route} className="toolbar-button">
-    <GVButton color="primary" variant="text">
+}> = React.memo(({ text, route }) => {
+  const { linkCreator } = useToLink();
+  return (
+    <Link to={linkCreator(route)} className="toolbar-button">
       {text}
-    </GVButton>
-  </Link>
-));
+    </Link>
+  );
+});

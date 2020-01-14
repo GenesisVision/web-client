@@ -4,15 +4,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/logrocket-react": "^3.0.0",
     "gv-api-web": "^2.0.0",
-    "next": "../../next1.tgz",
+    "logrocket": "^1.0.6",
+    "logrocket-react": "^4.0.1",
+    "next": "../../next-9.1.71.tgz",
     "shared": "^1.0.0"
   },
   "scripts": {
     "start": "node index.js",
     "build": "next build",
     "production": "cross-env NODE_ENV=production node index.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "build:analyze": "cross-env ANALYZE=true yarn build",
     "test": "react-scripts test --env=jsdom",
     "test:ui": "majestic",
     "eject": "react-scripts eject"

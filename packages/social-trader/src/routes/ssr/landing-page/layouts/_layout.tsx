@@ -1,3 +1,4 @@
+import { useRefLink } from "hooks/ref-link";
 import Head from "next/head";
 import React from "react";
 import CookieMessage from "routes/ssr/landing-page/components/cookie-message/cookie-message";
@@ -6,6 +7,7 @@ import LPHeader from "routes/ssr/landing-page/components/lp-header/lp-header";
 import { commonMeta, descriptionMeta, imageMeta, titleMeta } from "utils/seo";
 
 const _Layout: React.FC<Props> = ({ title, children }) => {
+  useRefLink();
   return (
     <div className="landing-page">
       <Head>

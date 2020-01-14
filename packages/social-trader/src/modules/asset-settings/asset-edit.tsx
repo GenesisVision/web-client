@@ -9,11 +9,11 @@ import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import { SetSubmittingType } from "utils/types";
 import {
   assetDescriptionShape,
   assetTitleShape
-} from "shared/utils/validators/validators";
-import { SetSubmittingType } from "utils/types";
+} from "utils/validators/validators";
 import { object } from "yup";
 
 const _AssetEdit: React.FC<Props> = ({
@@ -35,11 +35,11 @@ const _AssetEdit: React.FC<Props> = ({
         <LogoField name={FIELDS.logo} />
       </div>
       <h3>{t("asset-settings.name.title")}</h3>
-      <div className="asset-settings__block-wrapper create-program-settings__row">
+      <div className="asset-settings__block-wrapper">
         <TitleField name={FIELDS.title} />
       </div>
       <h3>{t("asset-settings.strategy.title")}</h3>
-      <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide create-program-settings__row">
+      <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide">
         <DescriptionField
           name={FIELDS.description}
           description={values.description}

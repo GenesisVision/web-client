@@ -2,6 +2,10 @@
 import passwordRestoreReducer from "components/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "components/auth/signin/reducers/login.reducers";
 import signUpReducer from "components/auth/signup/reducers/signup.reducers";
+import {
+  globalSearchReducer,
+  GlobalSearchState
+} from "components/global-search/reducers/global-search.reducer";
 import notificationsReducer, {
   NotificationsState
 } from "components/notifications/reducers/notifications.reducers";
@@ -65,6 +69,7 @@ import tablesViewReducer, {
 import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
+  globalSearch: globalSearchReducer,
   tablesView: tablesViewReducer,
   dashboard: dashboardReducer,
   profile: profileReducer,
@@ -98,6 +103,7 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
+  globalSearch: GlobalSearchState;
   tablesView: TablesViewState;
   dashboard: DashboardState;
   profile: ProfileState;

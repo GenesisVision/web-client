@@ -1,6 +1,7 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import { IDashboardAssetChart } from "constants/constants";
 import {
   CancelablePromise,
   InvestmentEventViewModels,
@@ -54,8 +55,6 @@ import {
   fetchPortfolioEventsWithoutTable
 } from "pages/programs/program-details/service/program-details.service";
 import { Action } from "redux";
-import { IDashboardAssetChart } from "shared/constants/constants";
-//import managerApi from "shared/services/api-client/manager-api";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";

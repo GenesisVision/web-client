@@ -9,6 +9,7 @@ import InputAmountField from "components/input-amount-field/input-amount-field";
 import Select from "components/select/select";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { InjectedFormikProps, withFormik } from "formik";
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import {
@@ -21,7 +22,7 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
@@ -63,6 +64,7 @@ const _FollowParams: React.FC<
       <DialogBottom>
         <DialogField>
           <GVFormikField
+            wide
             name={FOLLOW_PARAMS_FIELDS.mode}
             component={GVTextField}
             label={t("follow-program.params.type")}
@@ -72,9 +74,7 @@ const _FollowParams: React.FC<
               <option value={modes[mode].value} key={modes[mode].value}>
                 <Tooltip
                   render={() => (
-                    <div className="tooltip__content">
-                      {t(modes[mode].tooltip)}
-                    </div>
+                    <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
                   )}
                 >
                   <span>{t(modes[mode].label)}</span>
@@ -86,6 +86,7 @@ const _FollowParams: React.FC<
         {values[FOLLOW_PARAMS_FIELDS.mode] === modes.percentage.value && (
           <DialogField>
             <InputAmountField
+              wide
               name={FOLLOW_PARAMS_FIELDS.percent}
               label={t("follow-program.params.volume-percent")}
               currency={"%"}
@@ -98,6 +99,7 @@ const _FollowParams: React.FC<
             {subscribeFixedCurrencies.length > 1 && (
               <DialogField>
                 <GVFormikField
+                  wide
                   name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
                   component={GVTextField}
                   label={t("follow-program.params.fixed-currency")}
@@ -113,6 +115,7 @@ const _FollowParams: React.FC<
             )}
             <DialogField>
               <InputAmountField
+                wide
                 name={FOLLOW_PARAMS_FIELDS.fixedVolume}
                 label={`${t("follow-program.params.fixed-currency-equivalent", {
                   fixedCurrency: values[FOLLOW_PARAMS_FIELDS.fixedCurrency]
@@ -138,6 +141,7 @@ const _FollowParams: React.FC<
         )}
         <DialogField>
           <InputAmountField
+            wide
             name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
             label={
               <TooltipLabel
@@ -158,6 +162,7 @@ const _FollowParams: React.FC<
             </GVButton>
           )}
           <GVButton
+            wide={!onPrevStep}
             type="submit"
             className="invest-form__submit-button"
             disabled={disableButton}

@@ -6,6 +6,8 @@ import React from "react";
 import GVTextArea from "./gv-text-area";
 
 export interface GVTextFieldProps {
+  noMargin?: boolean;
+  wide?: boolean;
   name: string;
   type?: string;
   label?: string;
@@ -163,6 +165,8 @@ class GVTextField extends React.PureComponent<
   };
   render() {
     const {
+      noMargin,
+      wide,
       className,
       wrapperClassName,
       disabled,
@@ -170,7 +174,12 @@ class GVTextField extends React.PureComponent<
       error
     } = this.props;
     return (
-      <div className={classnames("gv-text-field__wrapper", wrapperClassName)}>
+      <div
+        className={classnames("gv-text-field__wrapper", wrapperClassName, {
+          "gv-text-field__wrapper--no-margin": noMargin,
+          "gv-text-field__wrapper--wide": wide
+        })}
+      >
         {this.renderLabel()}
         <div
           className={classnames("gv-text-field", className, {

@@ -15,10 +15,6 @@
     }
   }
 
-  &__tooltip-button {
-    font-size: 13px;
-  }
-
   @include media-breakpoint-landscape-phone() {
     &__cell {
       &--wallet {

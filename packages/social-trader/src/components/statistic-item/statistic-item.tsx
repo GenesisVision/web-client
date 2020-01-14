@@ -8,6 +8,8 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _StatisticItem: React.FC<Props> = ({
+  noWrap = true,
+  withPadding = true,
   hideLabel,
   isPending,
   invert,
@@ -36,7 +38,9 @@ const _StatisticItem: React.FC<Props> = ({
         });
       case false:
       default:
-        return "statistics-item__label";
+        return classNames("statistics-item__label", {
+          "statistics-item__label--no-wrap": noWrap
+        });
     }
   };
 
@@ -45,6 +49,7 @@ const _StatisticItem: React.FC<Props> = ({
       className={classNames(
         "statistics-item",
         {
+          "statistics-item--with-padding": withPadding,
           "statistics-item--half": half,
           "statistics-item--small": small
         },
@@ -84,6 +89,8 @@ enum ITEM {
 }
 
 interface Props {
+  noWrap?: boolean;
+  withPadding?: boolean;
   hideLabel?: boolean;
   isPending?: boolean;
   label?: string | React.ReactNode;
@@ -99,5 +106,5 @@ interface Props {
   labelClassName?: string;
 }
 
-const StatisticItem = React.memo(withLoader(_StatisticItem));
+const StatisticItem = withLoader(_StatisticItem);
 export default StatisticItem;

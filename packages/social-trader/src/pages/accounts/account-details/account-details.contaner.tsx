@@ -2,9 +2,9 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
-import { withBlurLoader } from "decorators/with-blur-loader";
-import { AccountDetailsSubscriptions } from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
-import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
+import { ASSET, CREATE_ASSET } from "constants/constants";
+import Crashable from "decorators/crashable";
+import dynamic from "next/dynamic";
 import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
@@ -16,7 +16,6 @@ import ProgramDetailsHistorySection from "pages/programs/program-details/program
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { ASSET, CREATE_ASSET } from "shared/constants/constants";
 
 import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
@@ -25,6 +24,15 @@ import {
   openPositionsTableSelector,
   tradesTableSelector
 } from "./reducers/account-history.reducer";
+
+const InvestmentAccountControls = dynamic(() =>
+  import("pages/accounts/account-details/investment-account-controls")
+);
+const AccountDetailsSubscriptions = dynamic(() =>
+  import(
+    "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions"
+  )
+);
 
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
@@ -92,7 +100,5 @@ interface Props {
   data: AccountDetailsDataType;
 }
 
-const AccountDetailsContainer = withBlurLoader(
-  React.memo(_AccountDetailsContainer)
-);
+const AccountDetailsContainer = React.memo(Crashable(_AccountDetailsContainer));
 export default AccountDetailsContainer;

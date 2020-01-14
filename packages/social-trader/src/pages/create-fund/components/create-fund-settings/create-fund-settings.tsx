@@ -8,6 +8,7 @@ import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
 import { IImageValue } from "components/form/input-image/input-image";
 import SettingsBlock from "components/settings-block/settings-block";
+import { ASSET } from "constants/constants";
 import {
   withBlurLoader,
   WithBlurLoaderProps
@@ -17,7 +18,6 @@ import { FundCreateAssetPlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
 import { SetSubmittingType } from "utils/types";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";

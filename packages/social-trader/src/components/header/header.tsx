@@ -1,99 +1,83 @@
 import "./header.scss";
 
-import { logout } from "components/auth/signin/signin.service";
-import { GLOBAL_SEARCH_ROUTE } from "components/global-search/global-search.routes";
-import GVButton from "components/gv-button";
-import { Icon } from "components/icon/icon";
+import classNames from "classnames";
+import HeaderIcon from "components/header/header-icon";
 import { SearchIcon } from "components/icon/search-icon";
-import Link from "components/link/link";
-import { useToLink } from "components/link/link.helper";
 import Navigation from "components/navigation/navigation";
-import NavigationMobile from "components/navigation/navigation-mobile/navigation-mobile";
-import NotificationsWidget from "components/notifications-widget/notifications-widget";
-import ProfileWidget from "components/profile-widget/profile-widget";
-import { ProfileWidgetLoader } from "components/profile-widget/profile-widget.loader";
-import WalletWidgetContainer from "components/wallet-widget/wallet-widget-container";
+import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import { mobileMenuItems, topMenuItems } from "routes/menu";
-import { getRandomInteger } from "utils/helpers";
+
+const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
+const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
+const HeaderSearchInput = dynamic(() =>
+  import("components/header/header-search-input")
+);
+
+const HeaderLeft: React.FC<{
+  backPath: string;
+  profileHeader?: ProfileHeaderViewModel;
+}> = React.memo(({ backPath, profileHeader }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
+  return (
+    <div
+      className={classNames("header__left", {
+        "header__left--search": openSearch
+      })}
+    >
+      <NavigationMobileButton
+        mobileMenuItems={mobileMenuItems}
+        backPath={backPath}
+        profileHeader={profileHeader}
+        isAuthenticated={isAuthenticated}
+      />
+      <Navigation
+        menuItems={topMenuItems}
+        className={classNames("header__navigation", {
+          "header__navigation--search": openSearch
+        })}
+      />
+      <div
+        onClick={setSearchIsOpen}
+        className={classNames("header__search-container", {
+          "header__search-container--search": openSearch
+        })}
+      >
+        <HeaderIcon>
+          {openSearch ? (
+            <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
+          ) : (
+            <div className="header__search-button">
+              <SearchIcon />
+            </div>
+          )}
+        </HeaderIcon>
+      </div>
+    </div>
+  );
+});
 
 const _Header: React.FC<Props> = ({ profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { linkCreator } = useToLink();
-  const dispatch = useDispatch();
-  const handlerLogout = useCallback(() => dispatch(logout), []);
-  const [isOpen, setOpen, setClose] = useIsOpen();
-  const [t] = useTranslation();
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
     <div className="header">
-      <div className="header__left">
-        <div className="navigation__menu" onClick={setOpen}>
-          <Icon type="menu" />
-        </div>
-        <Navigation menuItems={topMenuItems} className="header__navigation" />
-      </div>
-      <div className="header__center">
-        <div className="header__search">
-          <Link to={linkCreator(GLOBAL_SEARCH_ROUTE, backPath)}>
-            <SearchIcon />
-          </Link>
-        </div>
-      </div>
+      <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
       <div className="header__right">
         {isAuthenticated ? (
-          <>
-            <WalletWidgetContainer className="header__wallet" />
-            <NotificationsWidget
-              loaderData={getRandomInteger(0, 1000)}
-              data={profileHeader && profileHeader.notificationsCount}
-            />
-            <ProfileWidget
-              condition={!!profileHeader}
-              loader={<ProfileWidgetLoader className="header__profile" />}
-              profileHeader={profileHeader!}
-              className="header__profile"
-              logout={handlerLogout}
-            />
-          </>
+          <AuthWidgets profileHeader={profileHeader} />
         ) : (
-          <div className="header__buttons">
-            <Link
-              to={{
-                pathname: LOGIN_ROUTE,
-                state: backPath
-              }}
-            >
-              <GVButton variant="outlined" color="secondary">
-                {t("auth.login.title")}
-              </GVButton>
-            </Link>
-            <Link to={linkCreator(SIGNUP_ROUTE)}>
-              <GVButton variant="contained" color="primary">
-                {t("auth.signup.title")}
-              </GVButton>
-            </Link>
-          </div>
+          <UnauthLinks backPath={backPath} />
         )}
       </div>
-      <NavigationMobile
-        mobileMenuItems={mobileMenuItems}
-        backPath={backPath}
-        logout={handlerLogout}
-        isOpenNavigation={isOpen}
-        profileHeader={profileHeader}
-        isAuthenticated={isAuthenticated}
-        onClose={setClose}
-      />
     </div>
   );
 };

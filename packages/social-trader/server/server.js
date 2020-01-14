@@ -1,6 +1,6 @@
 const express = require("express");
 const nextI18NextMiddleware = require("next-i18next/middleware");
-const nextI18next = require("shared/i18n");
+const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 
 module.exports = async app => {

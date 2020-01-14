@@ -2,8 +2,8 @@
 
 .fund-asset-filter {
   &__asset-name {
-    font-size: $font-size-common;
-    padding-right: $padding-xxsmall;
+    @include font-size($font-size-common);
+    @include adaptive-margin(right, $padding-xxsmall);
   }
 
   &__assets-block {
@@ -21,10 +21,10 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-bottom: $padding-xxsmall;
+    @include adaptive-margin(bottom, $padding-xxsmall);
   }
 
   &__asset-item-name {
-    padding-left: $padding-xxsmall;
+    @include adaptive-padding(left, $padding-xxsmall);
   }
 }

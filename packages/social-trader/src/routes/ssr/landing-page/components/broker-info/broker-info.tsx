@@ -1,6 +1,7 @@
 import "./broker-info.scss";
 
 import classNames from "classnames";
+import { useToLink } from "components/link/link.helper";
 import { composeAttachAccountRouteWithBroker } from "pages/attach-account/attach-account.constants";
 import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
 import React from "react";
@@ -22,6 +23,7 @@ const _BrokerInfo: React.FC<Props> = ({
   description,
   listItems
 }) => {
+  const { linkCreator } = useToLink();
   const tradingLink =
     type === "Attach"
       ? composeAttachAccountRouteWithBroker(title)
@@ -34,7 +36,7 @@ const _BrokerInfo: React.FC<Props> = ({
     >
       <h3 className="broker-info__subtitle">{title}</h3>
       {description && <p className="broker-info__description">{description}</p>}
-      <LPButton href={tradingLink}>Start trading</LPButton>
+      <LPButton href={linkCreator(tradingLink)}>Start trading</LPButton>
       <ul className="broker-info__list-advantages">
         {listItems.map((item, index) => (
           <BrokerAdvantage

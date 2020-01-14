@@ -12,17 +12,17 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { ASSET } from "shared/constants/constants";
-import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
@@ -61,32 +61,27 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       })}
     >
       {showRating && <TableCell>{}</TableCell>}
-      <TableCell className="programs-table__cell programs-table__cell--name">
-        <div className="programs-table__cell--avatar-title">
-          <Link to={programLinkProps}>
-            <AssetAvatarWithName
-              url={logo}
-              level={level}
-              levelProgress={levelProgress}
-              alt={program.title}
-              color={color}
-              tooltip={<LevelTooltip level={level} canLevelUp={false} />}
-              name={
-                <div className="programs-table__cell--title">
-                  <Link
-                    className="programs-table__cell--link"
-                    to={programLinkProps}
-                  >
-                    {program.title}
-                  </Link>
-                  <TagProgramContainer tags={tags} />
+      <TableCell className="programs-table__cell">
+        <Link to={programLinkProps}>
+          <AssetAvatarWithName
+            url={logo}
+            level={level}
+            levelProgress={levelProgress}
+            alt={program.title}
+            color={color}
+            tooltip={<LevelTooltip level={level} canLevelUp={false} />}
+            name={
+              <div>
+                <div className="programs-table__cell--link">
+                  {program.title}
                 </div>
-              }
-            />
-          </Link>
-        </div>
+                <TagProgramContainer tags={tags} />
+              </div>
+            }
+          />
+        </Link>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--equity">
+      <TableCell className="programs-table__cell">
         <NumberFormat
           value={formatCurrencyValue(amount, currency)}
           suffix={` ${currency}`}
@@ -137,9 +132,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {statistic && (
-          <ProgramSimpleChart data={statistic.chart} programId={id} />
-        )}
+        <ProgramSimpleChart data={statistic?.chart} />
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

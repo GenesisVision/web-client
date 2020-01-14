@@ -7,7 +7,7 @@ import { TMenuItem } from "routes/menu";
 
 import NavigationItem from "./navigation-item";
 
-const _MenuNavigationItem: React.FC<Props> = ({
+export const MenuNavigationItem: React.FC<Props> = ({
   item: { Icon, route = "", label, children },
   popover
 }) => {
@@ -71,5 +71,3 @@ const MenuNavigationTooltipItem: React.FC<
       return <>{children}</>;
   }
 };
-
-export const MenuNavigationItem = React.memo(_MenuNavigationItem);

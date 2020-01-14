@@ -6,12 +6,19 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link, { ToType } from "components/link/link";
-import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
+import DashboardHorizontalWindowList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-window-list";
 import { InvestAssetType } from "pages/invest/invest.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { ListChildComponentProps } from "react-window";
 
-const _AssetBlock: React.FC<Props> = ({
+const ASSET_WIDTH = 312;
+const ASSET_HEIGHT = 390;
+const OFFSET_WIDTH = 20;
+const CELL_WIDTH = ASSET_WIDTH + OFFSET_WIDTH;
+const CONTAINER_WIDTH = Math.round(CELL_WIDTH * 2.6);
+
+export const AssetBlock: React.FC<Props> = ({
   buttonLabel,
   blockType,
   left,
@@ -52,11 +59,14 @@ const _AssetBlock: React.FC<Props> = ({
         </Link>
       </div>
       <div className="asset-block__assets-block">
-        <DashboardHorizontalList
+        <DashboardHorizontalWindowList
           darkShadow={blockType === DETAILS_BLOCK_TYPE.TRANSPARENT}
-        >
-          {assets.map(renderCard)}
-        </DashboardHorizontalList>
+          items={assets}
+          height={ASSET_HEIGHT}
+          itemWidth={CELL_WIDTH}
+          width={CONTAINER_WIDTH}
+          renderItem={renderCard}
+        />
       </div>
     </DetailsBlock>
   );
@@ -70,8 +80,6 @@ interface Props {
   investLink: ToType;
   title: string;
   description: string;
-  renderCard: (asset: InvestAssetType) => JSX.Element;
+  renderCard: React.FC<ListChildComponentProps>;
   assets: InvestAssetType[];
 }
-
-export const AssetBlock = React.memo(_AssetBlock);

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import GVButton from "components/gv-button";
+import HeaderIcon from "components/header/header-icon";
 import Link, { ToType } from "components/link/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -19,7 +20,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 }) => (
   <GVButton className="navigation__button" variant="text" onClick={onClick}>
     <>
-      {<icon.type {...icon.props} className="navigation__icon" />}
+      <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
       <span className="navigation__link">{children}</span>
     </>
   </GVButton>
@@ -40,6 +41,12 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   children
 }) => {
   const { route } = useRouter();
+  const renderIconWithName = () => (
+    <>
+      <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
+      <span className="navigation__link">{children}</span>
+    </>
+  );
   return (
     (!!href && (
       <Link
@@ -48,13 +55,11 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
           "navigation__item--active": route.startsWith(normalizeLinkFrom(href))
         })}
       >
-        {<icon.type {...icon.props} className="navigation__icon" />}
-        <span className="navigation__link">{children}</span>
+        {renderIconWithName()}
       </Link>
     )) || (
       <div className="navigation__item" onClick={onClick}>
-        {<icon.type {...icon.props} className="navigation__icon" />}
-        <div className="navigation__link">{children}</div>
+        {renderIconWithName()}
       </div>
     )
   );

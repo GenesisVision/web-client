@@ -1,8 +1,8 @@
 import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import React from "react";
-import { useTranslation } from "shared/i18n";
 
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 

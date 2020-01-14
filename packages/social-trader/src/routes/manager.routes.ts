@@ -1,7 +1,7 @@
 import { ToType } from "components/link/link";
 import { createToUrl } from "components/link/link.helper";
-import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import { composeManagerDetailsUrl } from "utils/compose-url";
+import { SLUG_URL_REGEXP } from "utils/constants";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
 

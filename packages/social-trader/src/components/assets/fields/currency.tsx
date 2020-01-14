@@ -12,6 +12,7 @@ const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
   return (
     <AssetField>
       <GVFormikField
+        wide
         name={name}
         component={GVTextField}
         label={t("create-program-page.settings.fields.currency")}

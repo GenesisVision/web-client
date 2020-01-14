@@ -12,7 +12,10 @@ const _DownloadButton: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <a href={getExportFileUrl && getExportFileUrl()}>
+    <a
+      className="download-button__container"
+      href={getExportFileUrl && getExportFileUrl()}
+    >
       <GVButton
         noPadding
         className="download-button"

@@ -1,7 +1,7 @@
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { convertFromCurrency } from "shared/utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

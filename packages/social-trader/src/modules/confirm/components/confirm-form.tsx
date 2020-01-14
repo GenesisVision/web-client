@@ -1,7 +1,7 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -28,9 +28,14 @@ const _ConfirmForm: React.FC<
         autoFocus
         component={GVTextField}
       />
-      <FormError error={serverError} />
+      <DialogError error={serverError} />
       <DialogButtons>
-        <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
+        <GVButton
+          wide
+          type="submit"
+          id="signUpFormSubmit"
+          disabled={isSubmitting}
+        >
           {t("auth.login.two-factor.verify")}
         </GVButton>
       </DialogButtons>

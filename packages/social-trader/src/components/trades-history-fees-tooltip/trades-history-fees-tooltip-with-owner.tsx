@@ -1,7 +1,8 @@
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
 import TradesHistoryFeesTooltip from "./trades-history-fees-tooltip";
@@ -16,22 +17,16 @@ const _TradesHistoryFeesTooltipWithOwner: React.FC<Props> = ({ trade }) => {
   else
     return (
       <Tooltip
-        render={() =>
-          trade.showOriginalCommission ? (
-            <div>
-              {`${formatValue(
-                trade.originalCommission,
-                DEFAULT_DECIMAL_SCALE
-              )} ${trade.originalCommissionCurrency}`}
-            </div>
-          ) : (
-            <div>
-              {`${formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)} ${
-                trade.originalCommissionCurrency
-              }`}
-            </div>
-          )
-        }
+        render={() => (
+          <TooltipContent>
+            {`${formatValue(
+              trade.showOriginalCommission
+                ? trade.originalCommission
+                : trade.commission,
+              DEFAULT_DECIMAL_SCALE
+            )} ${trade.originalCommissionCurrency}`}
+          </TooltipContent>
+        )}
       >
         <span>{formatValue(trade.commission, DEFAULT_DECIMAL_SCALE)} </span>
       </Tooltip>

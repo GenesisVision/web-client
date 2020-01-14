@@ -1,8 +1,11 @@
 import Dialog from "components/dialog/dialog";
 import { WalletData } from "gv-api-web";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 
-import WalletWithdrawContainer from "./components/wallet-withdraw-container";
+const WalletWithdrawContainer = dynamic(() =>
+  import("./components/wallet-withdraw-container")
+);
 
 const _WalletWithdrawPopup: React.FC<Props> = ({
   open,

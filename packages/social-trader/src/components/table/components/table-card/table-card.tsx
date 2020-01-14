@@ -18,7 +18,7 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
 
-const _TableCard: React.FC<ITableCardProps> = props => {
+const TableCard: React.FC<ITableCardProps> = props => {
   return (
     <TableCardContainer>
       <TableCardTopBlock {...props} />
@@ -30,11 +30,11 @@ const _TableCard: React.FC<ITableCardProps> = props => {
 
 export const TableCardContainer: React.FC<
   React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => <div className="table-card">{children}</div>);
+> = ({ children }) => <div className="table-card">{children}</div>;
 
 export const TableCardRow: React.FC<
   { center?: boolean } & React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children, center }) => (
+> = ({ children, center }) => (
   <div
     className={classNames("table-card__row", {
       "table-card__row--center": center
@@ -42,11 +42,11 @@ export const TableCardRow: React.FC<
   >
     {children}
   </div>
-));
+);
 
 export const TableCardTable: React.FC<
   { wrap?: boolean } & React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children, wrap }) => (
+> = ({ children, wrap }) => (
   <div
     className={classNames("table-card__table", {
       "table-card__table--flex-wrap": wrap
@@ -54,41 +54,36 @@ export const TableCardTable: React.FC<
   >
     {children}
   </div>
-));
+);
 
 export const TableCardTableRow: React.FC<
   React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
-  <div className="table-card__table-row">{children}</div>
-));
+> = ({ children }) => <div className="table-card__table-row">{children}</div>;
 
 export const TableCardTableColumn: React.FC<
   React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
+> = ({ children }) => (
   <div className="table-card__table-column">{children}</div>
-));
+);
 
 export const TableCardTableButtons: React.FC<
   React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children }) => (
-  <div className="table-card__buttons">{children}</div>
-));
+> = ({ children }) => <div className="table-card__buttons">{children}</div>;
 
 export const TableCardTitle: React.FC<
   { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children, url }) =>
+> = ({ children, url }) =>
   url ? (
     <Link className="table-card__title" to={url}>
       {children}
     </Link>
   ) : (
     <div className="table-card__title">{children}</div>
-  )
-);
+  );
 
 export const TableCardSubTitle: React.FC<
   { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ children, url }) => {
+> = ({ children, url }) => {
   return (
     <div className="table-card__subtitle">
       {url ? (
@@ -100,7 +95,7 @@ export const TableCardSubTitle: React.FC<
       )}
     </div>
   );
-});
+};
 
 export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
   ({ logo, hasAvatar, url, levelProgress, level, alt, color }) => {
@@ -117,11 +112,7 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
         }
       />
     ) : (
-      <ImageBase
-        imageClassName="table-card__broker-avatar"
-        url={logo}
-        alt={alt}
-      />
+      <ImageBase className="table-card__broker-avatar" src={logo} alt={alt} />
     );
     return (
       <div className="table-card__avatar">
@@ -182,7 +173,7 @@ export const TableCardChartBlock: React.FC<
 > = React.memo(({ chart, assetId, profit }) => (
   <TableCardRow>
     <div className="table-card__chart">
-      {chart && <ProgramSimpleChart data={chart} programId={assetId} />}
+      <ProgramSimpleChart data={chart} />
     </div>
     <div className="table-card__chart-info">
       <div className="table-card__profit">
@@ -243,5 +234,4 @@ interface ITableCardProps
     ITableCardChartBlockProps,
     React.HTMLAttributes<HTMLDivElement> {}
 
-const TableCard = React.memo(_TableCard);
 export default TableCard;

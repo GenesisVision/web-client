@@ -38,7 +38,9 @@ const _LoginForm: React.FC<
 
     <div className="login-form__forgot">
       <Link to={FORGOT_PASSWORD_ROUTE}>
-        <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
+        <GVButton noPadding variant="text">
+          {t("auth.login.forgot")}
+        </GVButton>
       </Link>
     </div>
     <FormError error={error} />

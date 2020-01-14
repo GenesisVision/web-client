@@ -4,7 +4,12 @@ import useCopy from "hooks/copy.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-const _CopyButton: React.FC<Props> = ({ value, successMessage, text }) => {
+const _CopyButton: React.FC<Props> = ({
+  value,
+  successMessage,
+  text,
+  wide
+}) => {
   const [t] = useTranslation();
   const copy = useCopy(successMessage);
   const onCopy = useCallback(() => {
@@ -12,6 +17,7 @@ const _CopyButton: React.FC<Props> = ({ value, successMessage, text }) => {
   }, [value]);
   return (
     <GVButton
+      wide={wide}
       noPadding={!!text}
       color="secondary"
       onClick={onCopy}
@@ -27,6 +33,7 @@ const _CopyButton: React.FC<Props> = ({ value, successMessage, text }) => {
 };
 
 interface Props {
+  wide?: boolean;
   text?: boolean;
   successMessage?: string;
   value: string;

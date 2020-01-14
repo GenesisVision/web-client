@@ -7,7 +7,7 @@ import { getFiltersFromContext } from "modules/programs-table/services/programs-
 import React from "react";
 import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
 import authService from "services/auth-service";
-import { getCookie } from "shared/utils/cookie";
+import { getCookie } from "utils/cookie";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {

@@ -2,7 +2,7 @@ import "./cookie-message.scss";
 
 import React, { useCallback, useEffect, useState } from "react";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
-import { getCookie, setCookie } from "shared/utils/cookie";
+import { getCookie, setCookie } from "utils/cookie";
 
 const ACCEPT_PARAM_NAME = "ACCEPTCONSENT";
 

@@ -1,6 +1,6 @@
 import "../reallocate.scss";
 
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -65,11 +65,7 @@ const _ReallocateForm: React.FC<Props> = ({
           assets={platformAssets}
         />
       </StatisticItem>
-      {errorMessage && (
-        <div className="reallocate-container__form-error">
-          <FormError error={errorMessage} />
-        </div>
-      )}
+      {errorMessage && <DialogError error={errorMessage} />}
       <p className="asset-settings__text">
         {t("fund-settings.reallocation.text-3")}
       </p>

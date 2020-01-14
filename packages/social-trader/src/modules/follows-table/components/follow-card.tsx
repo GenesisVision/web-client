@@ -12,6 +12,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/follows/follow-details/follow-button";
 import * as React from "react";
@@ -19,13 +20,11 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET } from "shared/constants/constants";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
 const _FollowCard: React.FC<Props> = ({
   follow,
-  title,
   withFollowButton,
   onApply
 }) => {
@@ -36,7 +35,7 @@ const _FollowCard: React.FC<Props> = ({
     url,
     statistic: { drawdown }
   } = follow;
-  const { linkCreator } = useToLink();
+  const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const linkProps = linkCreator(
     composeFollowDetailsUrl(url),
@@ -66,7 +65,7 @@ const _FollowCard: React.FC<Props> = ({
       hasAvatar
       subTitle={follow.owner.username}
       logo={follow.logo}
-      managerUrl={managerToPathCreator(follow.owner.url, title)}
+      managerUrl={managerToPathCreator(follow.owner.url, contextTitle)}
       title={follow.title}
       detailsUrl={linkProps}
       renderActions={renderActions}
@@ -123,7 +122,6 @@ interface Props {
   onApply?: VoidFunction;
   withFollowButton?: boolean;
   follow: FollowDetailsListItem;
-  title: string;
 }
 
 const FollowCard = React.memo(_FollowCard);

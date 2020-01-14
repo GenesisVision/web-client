@@ -5,11 +5,8 @@ import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
-import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _WalletDeposit: React.FC<Props> = ({
@@ -18,17 +15,13 @@ const _WalletDeposit: React.FC<Props> = ({
   currency = "GVT"
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const wallets = useSelector(walletsSelector);
   const Button =
     type === WALLET_DEPOSIT_BUTTON_TYPE.SMALL ? SmallButton : FullButton;
   return (
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
       <WalletAddFundsPopup
-        currentWallet={safeGetElemFromArray(
-          wallets,
-          wallet => wallet.currency === currency
-        )}
+        currentCurrency={currency}
         onClose={setClosePopup}
         open={isOpenPopup}
       />

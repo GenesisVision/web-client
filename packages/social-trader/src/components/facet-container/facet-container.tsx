@@ -2,6 +2,7 @@ import { IFundsFacetTableProps } from "components/funds/funds-facet/components/f
 import NotFoundPage from "components/not-found/not-found";
 import { IProgramsFacetTableProps } from "components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "components/table/components/filtering/filter.type";
+import { IDataModel } from "constants/constants";
 import { CancelablePromise, PlatformInfo } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -12,10 +13,9 @@ import {
 } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
-import { IDataModel } from "shared/constants/constants";
 
 const _FacetContainer: React.FC<Props> = props => {
-  const { TableContainer, isAuthenticated, getItems } = props;
+  const { TableContainer, getItems } = props;
   const facets = useSelector((state: RootState) =>
     facetsSelector(state, props)
   );
@@ -35,7 +35,6 @@ const _FacetContainer: React.FC<Props> = props => {
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}
-      isAuthenticated={isAuthenticated}
       currency={currency}
       currencies={currencies}
     />

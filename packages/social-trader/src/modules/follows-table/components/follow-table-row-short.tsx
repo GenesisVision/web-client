@@ -10,6 +10,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
@@ -17,9 +18,8 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
-import { ASSET } from "shared/constants/constants";
-import { distanceDate } from "shared/utils/dates";
 import { composeFollowDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
@@ -53,24 +53,22 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       })}
     >
       {showRating && <TableCell>{}</TableCell>}
-      <TableCell className="programs-table__cell programs-table__cell--name">
-        <div className="programs-table__cell--avatar-title">
-          <Link to={linkProps}>
-            <AssetAvatarWithName
-              url={logo}
-              alt={follow.title}
-              color={color}
-              name={
-                <div className="programs-table__cell--title">
-                  <Link className="programs-table__cell--link" to={linkProps}>
-                    {follow.title}
-                  </Link>
-                  <TagProgramContainer tags={tags} />
-                </div>
-              }
-            />
-          </Link>
-        </div>
+      <TableCell className="programs-table__cell">
+        <Link to={linkProps}>
+          <AssetAvatarWithName
+            url={logo}
+            alt={follow.title}
+            color={color}
+            name={
+              <div className="programs-table__cell--title">
+                <Link className="programs-table__cell--link" to={linkProps}>
+                  {follow.title}
+                </Link>
+                <TagProgramContainer tags={tags} />
+              </div>
+            }
+          />
+        </Link>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--subscribers">
         {subscribersCount}
@@ -102,9 +100,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--chart">
-        {statistic && statistic.chart && (
-          <ProgramSimpleChart data={statistic.chart} programId={id} />
-        )}
+          <ProgramSimpleChart data={statistic?.chart} />
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">

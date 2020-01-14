@@ -11,12 +11,12 @@ import {
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { PlatformCurrencyInfo, Timeframe } from "gv-api-web";
+import { useTranslation } from "i18n";
 import FollowsTableModule from "modules/follows-table/components/follows-table-module";
 import { fundListLoaderData } from "modules/funds-table/components/funds-table/fund-table.loader-data";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
 import { CURRENCY_MAP_NAME } from "modules/programs-table/components/programs-table/programs.constants";
 import React, { useCallback } from "react";
-import { useTranslation } from "shared/i18n";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -29,7 +29,6 @@ const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
   title,
   sorting,
   getItems,
-  isAuthenticated,
   showRating,
   timeframe,
   columns
@@ -74,7 +73,6 @@ const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
       filtering={composeFiltering()}
       defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
       getItems={getItems}
-      isAuthenticated={isAuthenticated}
       showRating={showRating}
       columns={columns}
     />
@@ -88,7 +86,6 @@ export interface IProgramsFacetTableProps {
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;
-  isAuthenticated?: boolean;
   showRating?: boolean;
   level?: number;
   columns?: SortingColumn[];

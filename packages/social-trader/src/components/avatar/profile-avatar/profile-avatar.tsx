@@ -14,10 +14,10 @@ const _ProfileAvatar: React.FC<Props> = ({ url, alt, className, big }) => {
       })}
     >
       <ImageBase
-        url={url}
+        src={url}
         alt={alt}
         defaultImage={UserIcon}
-        imageClassName="profile-avatar__image"
+        className="profile-avatar__image"
         defaultImageClassName="profile-avatar__image--default"
       />
     </div>

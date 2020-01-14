@@ -8,6 +8,10 @@ import { CaptchaCheckResult } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
+import {
+  PRIVACY_POLICY_ROUTE,
+  TERMS_ROUTE
+} from "routes/ssr/landing-page/static-data/nav-links";
 import { SetSubmittingType } from "utils/types";
 
 import validationSchema, {
@@ -63,7 +67,7 @@ const _SignUpForm: React.FC<
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://genesis.vision/privacy-policy.html"
+            href={PRIVACY_POLICY_ROUTE}
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.privacy-policy-text")}
@@ -82,7 +86,7 @@ const _SignUpForm: React.FC<
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://genesis.vision/terms.html"
+            href={TERMS_ROUTE}
             onClick={e => e.stopPropagation()}
           >
             {t("auth.signup.accept-terms-text")}

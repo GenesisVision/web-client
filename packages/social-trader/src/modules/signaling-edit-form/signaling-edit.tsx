@@ -21,7 +21,7 @@ const _SignalingEdit: React.FC<Props> = ({
   isSignalProgram
 }) => {
   const renderButton = () => (
-    <GVButton type="submit" disabled={!dirty || isSubmitting || !isValid}>
+    <GVButton wide type="submit" disabled={!dirty || isSubmitting || !isValid}>
       {t("buttons.save")}
     </GVButton>
   );

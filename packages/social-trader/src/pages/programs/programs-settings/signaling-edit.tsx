@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const _SignalingEdit: React.FC<Props> = ({
+  canMakeSignal,
   onApply,
   signalSuccessFee,
   signalVolumeFee,
@@ -18,7 +19,7 @@ const _SignalingEdit: React.FC<Props> = ({
     <SettingsBlock label={t("program-settings.signaling-program.title")}>
       <div>
         <div className="program-settings__signaling-edit-form-title-block">
-          {!isSignalProgram && (
+          {!isSignalProgram && canMakeSignal && (
             <GVSwitch
               touched={false}
               className="notification-setting__switch"
@@ -43,6 +44,7 @@ const _SignalingEdit: React.FC<Props> = ({
 };
 
 interface Props {
+  canMakeSignal?: boolean;
   id: string;
   onApply: VoidFunction;
   isSignalProgram: boolean;

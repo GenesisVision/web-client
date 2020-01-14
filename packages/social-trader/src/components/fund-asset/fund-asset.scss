@@ -20,6 +20,10 @@ $remove-button-color: #293842;
     align-items: center;
   }
 
+  &--no-wrap {
+    flex-wrap: nowrap;
+  }
+
   &__container {
     padding: $padding-xsmall;
     display: flex;

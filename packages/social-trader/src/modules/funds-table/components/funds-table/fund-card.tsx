@@ -15,18 +15,18 @@ import {
   TableCardActionsItem,
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
+import { ASSET } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
-  const { linkCreator } = useToLink();
+const _FundCard: React.FC<Props> = ({ fund }) => {
+  const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
@@ -58,7 +58,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
       logo={fund.logo}
       color={fund.color}
       detailsUrl={link}
-      managerUrl={managerToPathCreator(fund.owner.url, title)}
+      managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
@@ -95,6 +95,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
         <TableCardTableRow>
           {fund.topFundAssets && (
             <FundAssetContainer
+              noWrap
               assets={fund.topFundAssets as FundAssetType[]}
               type={FUND_ASSET_TYPE.SHORT}
               size={3}
@@ -112,5 +113,4 @@ export default FundCard;
 
 interface Props {
   fund: FundDetailsListItem;
-  title?: string;
 }

@@ -13,6 +13,7 @@ const _CurrencySourceSelect: React.FC<Props> = ({
   name
 }) => (
   <GVFormikField
+    wide
     disabled={disabled}
     name={name}
     component={GVTextField}

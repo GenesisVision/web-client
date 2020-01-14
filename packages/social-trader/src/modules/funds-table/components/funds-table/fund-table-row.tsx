@@ -10,6 +10,7 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateRowFuncType } from "components/table/components/table.types";
+import { ASSET } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
@@ -17,9 +18,8 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
-import { ASSET } from "shared/constants/constants";
-import { distanceDate } from "shared/utils/dates";
 import { composeFundsDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
@@ -31,17 +31,15 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
   );
   return (
     <TableRow>
-      <TableCell className="funds-table__cell funds-table__cell--name">
-        <div className="funds-table__cell--avatar-title">
-          <Link to={link}>
-            <AssetAvatarWithName
-              url={fund.logo}
-              alt={fund.title}
-              color={fund.color}
-              name={fund.title}
-            />
-          </Link>
-        </div>
+      <TableCell className="funds-table__cell">
+        <Link to={link}>
+          <AssetAvatarWithName
+            url={fund.logo}
+            alt={fund.title}
+            color={fund.color}
+            name={fund.title}
+          />
+        </Link>
       </TableCell>
       <TableCell className="funds-table__cell funds-table__cell--amount">
         <NumberFormat
@@ -55,26 +53,25 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
       </TableCell>
       <TableCell className="funds-table__cell">
         <FundAssetContainer
+          noWrap
           assets={fund.topFundAssets}
           type={FUND_ASSET_TYPE.SHORT}
           size={3}
           length={fund.totalAssetsCount}
         />
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--investors">
-        {fund.investorsCount}
-      </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--age">
+      <TableCell className="funds-table__cell">{fund.investorsCount}</TableCell>
+      <TableCell className="programs-table__cell">
         {distanceDate(fund.creationDate)}
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--drawdown">
+      <TableCell className="funds-table__cell">
         <NumberFormat
           value={formatValue(fund.statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--profit">
+      <TableCell className="funds-table__cell">
         <Profitability
           value={formatValue(fund.statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -88,12 +85,10 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
         </Profitability>
       </TableCell>
       <TableCell className="funds-table__cell funds-table__cell--chart">
-        {fund.statistic && (
-          <ProgramSimpleChart data={fund.statistic.chart} programId={fund.id} />
-        )}
+        <ProgramSimpleChart data={fund?.statistic?.chart} />
       </TableCell>
       {isAuthenticated && fund.personalDetails && (
-        <TableCell className="funds-table__cell funds-table__cell--favorite">
+        <TableCell className="funds-table__cell">
           <ToggleAssetFavoriteButton
             asset={fund}
             updateRow={updateRow}

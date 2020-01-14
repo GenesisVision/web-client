@@ -53,17 +53,21 @@
 
   &__menu {
     padding: 0;
-    height: $wallet-item-size;
-    width: $wallet-item-size;
+    min-height: $wallet-item-size;
+    min-width: $wallet-item-size;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+    @include adaptive-margin(right, $padding-medium);
 
     &:hover {
       box-shadow: $box-shadow-4;
+    }
+    @include media-breakpoint-landscape-tablet() {
+      display: none !important;
     }
   }
 
@@ -84,10 +88,19 @@
     &--active {
       opacity: 1;
     }
-  }
-
-  &__icon {
-    margin-right: 24px;
+    @include media-breakpoint-landscape-tablet() {
+      padding: 0;
+      margin-right: $padding-xsmall;
+    }
+    @include media-breakpoint-desktop() {
+      margin-right: $padding-big;
+    }
+    @include media-breakpoint-large-desktop() {
+      margin-right: 70px;
+      &:first-child {
+        margin-right: $padding-upper-medium;
+      }
+    }
   }
 
   &__link {
@@ -102,35 +115,11 @@
     }
   }
 
-  @include media-breakpoint-landscape-tablet() {
-    &__menu {
-      display: none !important;
-    }
-
-    &__item {
-      padding: 0;
-      margin-right: $padding-xsmall;
-    }
-
-    &__icon {
+  &__icon {
+    @include media-breakpoint-landscape-tablet() {
       margin-right: $padding-xxsmall;
     }
-  }
-
-  @include media-breakpoint-desktop() {
-    &__item {
-      margin-right: $padding-big;
-    }
-  }
-
-  @include media-breakpoint-large-desktop() {
-    &__item:first-child {
-      margin-right: $padding-upper-medium;
-    }
-    &__item {
-      margin-right: 70px;
-    }
-    &__icon {
+    @include media-breakpoint-large-desktop() {
       margin-right: $padding-xsmall;
     }
   }

@@ -1,8 +1,12 @@
 import Dialog from "components/dialog/dialog";
 import { SignalSubscription } from "gv-api-web";
-import EditFollowModuleFormContainer from "modules/follow-module/follow-popup/edit-follow-popup-form.container";
+import dynamic from "next/dynamic";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
+
+const EditFollowModuleFormContainer = dynamic(() =>
+  import("modules/follow-module/follow-popup/edit-follow-popup-form.container")
+);
 
 const _EditFollowModuleContainer: React.FC<Props> = ({
   signalSubscription,

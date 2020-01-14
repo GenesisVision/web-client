@@ -10,47 +10,51 @@
 
   &__type {
     box-sizing: border-box;
-    border-radius: 18px;
+    border-radius: 50%;
     text-align: center;
     & img {
-      width: 28px;
-      height: 28px;
+      @include height(28px);
+      @include width(28px);
     }
     &--with-asset {
       position: absolute;
-      top: 18px;
-      left: 18px;
+      top: 18px / $divider-text;
+      left: 18px / $divider-text;
+      @include media-breakpoint-landscape-phone() {
+        top: 18px;
+        left: 18px;
+      }
       z-index: 1;
     }
   }
 
   &__photo {
     display: block;
-    margin-right: 24px;
+    @include adaptive-margin(right, 24px);
     box-sizing: border-box;
-    width: 32px;
-    height: 32px;
+    @include height(32px);
+    @include width(32px);
     border: solid 2px $panel-background-color;
-    border-radius: 18px;
+    border-radius: 50%;
     background-color: #27323a;
     position: relative;
     top: 0;
     left: 0;
     z-index: 2;
-    line-height: 28px;
+    @include line-height(28px);
     text-align: center;
     overflow: hidden;
   }
 
   &__wallet {
-    height: 12px;
-    width: 12px;
+    @include height(12px);
+    @include width(12px);
   }
 
   &__logo {
     &.program-avatar {
-      height: 28px;
-      width: 28px;
+      @include height(28px);
+      @include width(28px);
     }
   }
 

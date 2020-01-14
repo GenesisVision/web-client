@@ -12,7 +12,6 @@ const _DashboardFollowThem: React.FC<Props> = ({ data, onApply }) => {
           key={asset.id}
           withFollowButton
           follow={asset}
-          title={""}
           onApply={onApply}
         />
       ))}

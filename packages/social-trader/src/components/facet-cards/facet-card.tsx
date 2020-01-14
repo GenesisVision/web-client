@@ -29,10 +29,10 @@ const _FacetCard: React.FC<Props> = ({
         <div className="facet__facet-container">
           <div className="facet__logo-wrapper">
             <ImageBase
-              url={facet.logo}
+              src={facet.logo}
               alt={facet.title}
               defaultImage={facetImg}
-              imageClassName="facet__logo"
+              className="facet__logo"
             />
           </div>
           <div className="facet__info">

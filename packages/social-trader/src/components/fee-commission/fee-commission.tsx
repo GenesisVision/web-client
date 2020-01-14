@@ -1,11 +1,11 @@
 import "./fee-commission.scss";
 
 import classNames from "classnames";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import * as React from "react";
-import { DEFAULT_DECIMAL_SCALE } from "shared/constants/constants";
 import { formatValue } from "utils/formatter";
 
-export const FeeCommission: React.FC<Props> = ({
+export const _FeeCommission: React.FC<Props> = ({
   title,
   value,
   currency,
@@ -20,6 +20,7 @@ export const FeeCommission: React.FC<Props> = ({
   </div>
 );
 
+const FeeCommission = React.memo(_FeeCommission);
 export default FeeCommission;
 
 interface Props {

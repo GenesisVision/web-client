@@ -4,11 +4,12 @@
 .chart-currency-selector {
   &__container {
     display: flex;
+    align-items: center;
     & .tag-button {
       margin-right: 0;
     }
     & button.select__value {
-      font-size: $tag-font-size;
+      @include font-size($tag-font-size);
       border-bottom: 0;
     }
     & .select {
@@ -19,6 +20,9 @@
   }
 
   &__item {
+    & .select__text {
+      @include font-size($tag-font-size);
+    }
     display: flex;
     align-items: center;
   }

@@ -33,8 +33,8 @@ const _EventItem: React.FC<PlatformEvent> = ({
             defaultImageClassName="events-list__item-image--default"
             alt={title}
             color={color}
-            imageClassName="events-list__item-image"
-            url={icon}
+            className="events-list__item-image"
+            src={icon}
           />
         </div>
       </Link>

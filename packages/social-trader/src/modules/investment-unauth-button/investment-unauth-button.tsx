@@ -1,9 +1,9 @@
 import { DepositTopOwnProps } from "components/deposit/components/deposit-top";
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-import { ASSET } from "shared/constants/constants";
 
 const _InvestmentUnauthButton: React.FC<Props> = ({
   header,

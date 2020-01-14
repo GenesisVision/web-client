@@ -1,4 +1,6 @@
 import GVTextField from "components/gv-text-field";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
+import { FilterTitle } from "components/table/components/filtering/filter-title";
 import * as React from "react";
 
 class TileFilterPopover<
@@ -40,8 +42,8 @@ class TileFilterPopover<
     const { filteredItems: filteredAssets } = this.state;
     const { header, placeholder, children } = this.props;
     return (
-      <div className="tile-filter-popover">
-        <div className="tile-filter-popover__header">{header}</div>
+      <PopoverContentCardBlock className="tile-filter-popover">
+        <FilterTitle>{header}</FilterTitle>
         <GVTextField
           name="queryValue"
           wrapperClassName="tile-filter-popover__search-wrapper"
@@ -53,7 +55,7 @@ class TileFilterPopover<
         <div className="tile-filter-popover__items">
           {children(filteredAssets, this.handleClick)}
         </div>
-      </div>
+      </PopoverContentCardBlock>
     );
   }
 }

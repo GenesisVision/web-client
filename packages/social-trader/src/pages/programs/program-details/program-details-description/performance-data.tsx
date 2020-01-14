@@ -1,9 +1,11 @@
+import ImageBase from "components/avatar/image-base";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import { STATUS } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   BrokerDetails,
@@ -12,8 +14,6 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import filesService from "services/file-service";
-import { STATUS } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 const _PerformanceData: React.FC<Props> = ({
@@ -29,9 +29,10 @@ const _PerformanceData: React.FC<Props> = ({
   return (
     <StatisticItemList className="asset-details-description__performance-data">
       <StatisticItem label={t("program-details-page.description.broker")}>
-        <img
+        <ImageBase
+          alt={brokerDetails.name}
           className={"asset-details-description__broker"}
-          src={filesService.getFileUrl(brokerDetails.logo)}
+          src={brokerDetails.logo}
         />
       </StatisticItem>
       {currency && (

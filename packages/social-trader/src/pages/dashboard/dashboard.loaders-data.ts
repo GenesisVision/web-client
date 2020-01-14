@@ -1,5 +1,6 @@
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ASSET, IDashboardAssetChart } from "constants/constants";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
@@ -9,7 +10,6 @@ import {
   TDashboardTradingStatistic,
   TRecommendation
 } from "pages/dashboard/dashboard.types";
-import { ASSET, IDashboardAssetChart } from "shared/constants/constants";
 import {
   getRandomColor,
   getRandomInteger,
@@ -130,16 +130,16 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
   total: 100,
   profits: {
     day: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     week: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     month: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     }
   },
   events: getTradingEventsLoaderData()
@@ -170,7 +170,7 @@ const getEventLoaderData = (): TDashboardEvent => ({
   ],
   totalFeesAmount: 0,
   totalFeesCurrency: "GVT",
-  date: new Date(),
+  date: new Date("2020-01-11T06:15:02.703Z"),
   title: getRandomWords(3),
   amount: getRandomInteger(-10000, 10000)
 });
@@ -221,16 +221,16 @@ export const getTotalLoaderData = (): TDashboardTotal => ({
   wallets: getRandomInteger(-10000, 10000),
   profits: {
     day: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     week: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     },
     month: {
-      profit: getRandomInteger(-10000, 10000),
-      profitPercent: getRandomInteger(-100, 100)
+      profit: 0,
+      profitPercent: 0
     }
   }
 });

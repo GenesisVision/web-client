@@ -67,30 +67,6 @@
     letter-spacing: 0.3px;
   }
 
-  .gv-text-field {
-    margin-bottom: 16px;
-  }
-
-  .gv-text-field__wrapper {
-    width: 100%;
-    margin: 0;
-  }
-  .gv-checkbox-wrapper {
-    margin: 16px 0;
-  }
-
-  .gv-text-field__error {
-    transform: translateY(-100%);
-  }
-
-  & .gv-btn.gv-btn--text {
-    padding: 0;
-  }
-
-  .gv-tabs {
-    margin-bottom: $padding-xsmall;
-  }
-
   @include media-breakpoint-landscape-phone() {
     padding: $padding-xsmall;
   }
@@ -158,10 +134,6 @@
     }
     &__footer {
       padding: $padding-medium $padding-large;
-    }
-
-    .gv-tabs {
-      margin-bottom: $padding-medium;
     }
   }
 }

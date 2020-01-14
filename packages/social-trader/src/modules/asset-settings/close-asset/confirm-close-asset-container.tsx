@@ -4,6 +4,7 @@ import {
   CLOSEABLE_ASSET,
   CloseableAssetType
 } from "modules/asset-settings/close-asset/close-asset";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
@@ -14,7 +15,9 @@ import {
   closeProgram,
   closeTradingAccount
 } from "../services/asset-settings.service";
-import CloseAssetForm, { ICloseAssetFormValues } from "./close-asset-form";
+import { ICloseAssetFormValues } from "./close-asset-form";
+
+const CloseAssetForm = dynamic(() => import("./close-asset-form"));
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   assetName,

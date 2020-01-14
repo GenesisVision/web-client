@@ -12,6 +12,7 @@ const _TitleField: React.FC<Props> = ({ name }) => {
   return (
     <AssetField>
       <AssetFormField
+        wide
         type="text"
         name={name}
         label={t("create-program-page.settings.fields.name")}

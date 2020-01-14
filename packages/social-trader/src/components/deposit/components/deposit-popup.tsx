@@ -2,6 +2,7 @@ import "./deposit.scss";
 
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
+import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -11,7 +12,6 @@ import {
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import DepositForm from "./deposit-form";

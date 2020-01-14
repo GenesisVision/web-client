@@ -12,28 +12,27 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { ASSET } from "shared/constants/constants";
-import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
 import { composeProgramDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {
   program: ProgramDetailsListItem;
-  title: string;
 }
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-const _ProgramCard: React.FC<Props> = ({ program, title }) => {
+const _ProgramCard: React.FC<Props> = ({ program }) => {
   const { t } = useTranslation();
-  const { linkCreator } = useToLink();
+  const { linkCreator, contextTitle } = useToLink();
   const linkProps = linkCreator(
     composeProgramDetailsUrl(program.url),
     PROGRAM_DETAILS_FOLDER_ROUTE
@@ -67,7 +66,7 @@ const _ProgramCard: React.FC<Props> = ({ program, title }) => {
       title={program.title}
       subTitle={program.owner.username}
       logo={program.logo}
-      managerUrl={managerToPathCreator(program.owner.url, title)}
+      managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
@@ -85,26 +84,6 @@ const _ProgramCard: React.FC<Props> = ({ program, title }) => {
               displayType="text"
             />
           </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
-            <ProgramPeriodPie
-              start={program.periodStarts}
-              end={program.periodEnds}
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.investors")}>
-            <NumberFormat
-              value={program.investorsCount}
-              displayType="text"
-              decimalScale={0}
-            />
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.age")}>
-            {distanceDate(program.creationDate)}
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
           <StatisticItem
             label={t("programs-page.programs-header.available-to-invest")}
           >
@@ -117,6 +96,26 @@ const _ProgramCard: React.FC<Props> = ({ program, title }) => {
               displayType="text"
               suffix={` ${requestCurrency}`}
             />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("programs-page.programs-header.investors")}>
+            <NumberFormat
+              value={program.investorsCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+          <StatisticItem label={t("programs-page.programs-header.period")}>
+            <ProgramPeriodPie
+              start={program.periodStarts}
+              end={program.periodEnds}
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("programs-page.programs-header.age")}>
+            {distanceDate(program.creationDate)}
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.drawdown")}>
             <NumberFormat

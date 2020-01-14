@@ -2,7 +2,7 @@ import "./form-error.scss";
 
 import * as React from "react";
 
-interface IFormErrorProps {
+export interface IFormErrorProps {
   error?: string;
 }
 

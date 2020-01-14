@@ -1,3 +1,5 @@
+import memoizeOne from "memoize-one";
+
 import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 
 export interface IPaging {
@@ -33,3 +35,12 @@ export type ComposedSkipTakeName = "skip" | "take";
 export type ComposedPagingName = "paging";
 export type PagingType = IPaging;
 export type ComposedPagingValue = PagingType;
+
+export const composePaging = memoizeOne(
+  (totalItems: number, currentPage: number, itemsOnPage: number) => ({
+    totalPages: calculateTotalPages(totalItems, itemsOnPage),
+    currentPage,
+    itemsOnPage,
+    totalItems
+  })
+);

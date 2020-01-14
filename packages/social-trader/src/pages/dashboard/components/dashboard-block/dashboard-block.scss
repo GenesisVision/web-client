@@ -23,28 +23,33 @@
   display: flex;
   overflow-x: scroll;
   width: 100%;
-  & .table-card:last-child {
-    margin-right: 0;
+
+  & .table-card {
+    margin-right: $padding-xsmall;
   }
 
   &__shadow-wrapper {
     display: flex;
     @include details-block-left-margin();
     position: relative;
+
     &--left {
       &:before {
         @include leftShadow();
       }
+
       &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
         &:before {
           @include leftDarkShadow();
         }
       }
     }
+
     &--right {
       &:after {
         @include rightShadow();
       }
+
       &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
         &:after {
           @include rightDarkShadow();
@@ -52,4 +57,8 @@
       }
     }
   }
+}
+
+.dashboard-horizontal-window-list {
+  overflow-y: hidden !important;
 }

@@ -26,6 +26,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
       <DialogBottom>
         <DialogField>
           <GVFormikField
+            wide
             type="text"
             name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
             label={t("attach-account-page.settings.fields.api-key")}
@@ -35,6 +36,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogField>
           <GVFormikField
+            wide
             type="text"
             name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
             label={t("attach-account-page.settings.fields.api-secret")}
@@ -44,6 +46,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogButtons>
           <GVButton
+            wide
             onClick={handleNext}
             className="invest-form__submit-button"
             disabled={disableButton}

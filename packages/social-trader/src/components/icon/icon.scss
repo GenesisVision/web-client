@@ -141,7 +141,14 @@
   }
 
   &--referrer {
-    height: 15px;
+    height: 13px;
+    width: 13px;
+  }
+
+  &--security {
+    svg [fill] {
+      fill: none;
+    }
   }
 
   &--selected {

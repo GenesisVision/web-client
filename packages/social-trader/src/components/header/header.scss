@@ -1,10 +1,15 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_hide";
+@import "~shared/styles/_transition";
 
 .header {
+  &,
+  & * {
+    box-sizing: border-box;
+  }
   display: flex;
-  justify-content: space-between;
   width: 100%;
   align-items: center;
 
@@ -14,61 +19,66 @@
     margin-right: $padding-small/2;
   }
 
-  &__buttons {
-    display: none !important;
-  }
-
-  &__navigation {
-    display: none !important;
-  }
-
-  &__profile {
-    display: none;
-    margin-left: auto;
-  }
-
+  &__buttons,
+  &__navigation,
+  &__profile,
   &__wallet {
-    display: none !important;
-    margin-right: auto;
+    @include hide-on-landscape-tablet(flex);
   }
 
   &__right,
   &__left,
   &__center {
     display: flex;
-    flex-direction: row;
     align-items: center;
   }
 
-  &__center {
-    flex-grow: 2;
-    justify-content: flex-end;
-  }
-
-  &__currency {
-  }
-
-  &__search {
-    display: flex;
-    margin-right: $padding-xsmall;
-
-    a {
-      display: inline-flex;
+  &__navigation {
+    overflow: hidden;
+    @include transition();
+    width: 100%;
+    &--search {
+      width: 0;
     }
   }
 
-  &__separator {
-    flex-grow: 2;
-    justify-content: center;
-    align-self: stretch;
-    display: none;
-    &:before {
-      content: "";
-      border-left: 2px solid #1f2b36;
+  &__search-container {
+    width: 40px;
+    @include transition();
+    &--search {
+      width: 100%;
+    }
+  }
+
+  &__search-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    justify-content: flex-end;
+    width: 40%;
+  }
+
+  &__left {
+    width: 60%;
+    justify-content: space-between;
+    padding-right: $padding-medium;
+    @include transition();
+  }
+
+  &__center {
+    justify-content: flex-start;
+    width: 100%;
+    &--hide {
+      width: auto;
     }
   }
 
   &__buttons {
+    width: 100%;
+    justify-content: flex-end;
     a + a {
       margin-left: $padding-xxsmall;
     }
@@ -79,39 +89,13 @@
       justify-content: space-between;
     }
     &__right {
-      flex-grow: 2;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
     &__menu {
       display: flex;
     }
-    &__navigation {
-      display: inherit !important;
-    }
-
-    &__currency {
-      min-width: 100px;
-      margin: initial;
-    }
-
     &__search {
       margin-right: 0;
-    }
-
-    &__profile {
-      display: flex;
-    }
-
-    &__wallet {
-      display: flex !important;
-    }
-
-    &__separator {
-      display: flex;
-    }
-
-    &__buttons {
-      display: inherit !important;
     }
   }
 }

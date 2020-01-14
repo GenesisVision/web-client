@@ -17,7 +17,6 @@ const _ProgramTableModule: React.FC<Props> = ({
   filtering,
   defaultFilters,
   paging,
-  isAuthenticated,
   showRating,
   title,
   disableTitle,
@@ -36,15 +35,7 @@ const _ProgramTableModule: React.FC<Props> = ({
       paging={paging}
       title={title}
       columns={columns || PROGRAMS_COLUMNS}
-      renderHeader={column => (
-        <ProgramTableHeaderCell
-          condition={
-            !isAuthenticated ||
-            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-          }
-          column={column}
-        />
-      )}
+      renderHeader={column => <ProgramTableHeaderCell column={column} />}
       renderBodyRow={(
         program,
         updateRow: any //TODO fix updateRow
@@ -60,7 +51,6 @@ const _ProgramTableModule: React.FC<Props> = ({
 };
 
 interface Props extends ITableModuleProps {
-  isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
 }

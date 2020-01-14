@@ -1,12 +1,10 @@
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
-import { CreateAssetBack } from "components/assets/create-asset/create-asset-back";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Broker } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ASSET } from "shared/constants/constants";
 
 import CreateAccountSettingsSection from "./create-account-settings/create-account-settings-section";
 
@@ -34,17 +32,13 @@ const _CreateAccountContainer: React.FC<Props> = ({
 
   return (
     <div>
-      <CreateAssetBack
-        condition={tab === TAB.SETTINGS}
-        asset={"ACCOUNT" as ASSET}
-        onApply={confirmNavigateToBroker}
-      />
       <div className="create-asset__header">
         <h1>{t("create-account-page.title")}</h1>
       </div>
       <div className="create-asset__tabs">
         <GVTabs value={tab}>
           <GVTab
+            onClick={confirmNavigateToBroker}
             value={TAB.BROKER}
             label={t("create-account-page.tabs.select-broker")}
           />

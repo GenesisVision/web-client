@@ -2,7 +2,7 @@ import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import GVTextField from "components/gv-text-field";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { localizedDate, subtractDate } from "shared/utils/dates";
+import { localizedDate, subtractDate } from "utils/dates";
 
 import {
   DATA_RANGE_FILTER_TYPES,

@@ -13,4 +13,10 @@
   & > div:not(:last-child) {
     @include adaptive-margin(right, $padding-medium);
   }
+  &--vertical {
+    flex-direction: column;
+    & > .statistics-item:last-child {
+      padding-bottom: 0;
+    }
+  }
 }

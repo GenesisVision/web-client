@@ -9,6 +9,7 @@ import {
   DashboardTradingAssetActions
 } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
+import { useTranslation } from "i18n";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
 import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
@@ -16,7 +17,6 @@ import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
 import React, { useCallback } from "react";
-import { useTranslation } from "shared/i18n";
 import {
   createFundSettingsToUrl,
   createProgramSettingsToUrl

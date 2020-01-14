@@ -1,5 +1,5 @@
 import { UPDATE_ACCOUNT_SETTINGS_CURRENCY } from "actions/account-settings-actions";
-import { setCookie } from "shared/utils/cookie";
+import { setCookie } from "utils/cookie";
 
 export const ACCOUNT_CURRENCY_KEY = "accountCurrency";
 

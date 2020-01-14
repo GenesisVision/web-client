@@ -1,0 +1,8 @@
+@import "~shared/styles/_breakpoint";
+
+@mixin hide-on-landscape-tablet($display: block) {
+  display: none;
+  @include media-breakpoint-landscape-tablet() {
+    display: $display;
+  }
+}

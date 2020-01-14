@@ -5,10 +5,10 @@ import {
   PersonalDetailsType
 } from "components/details/details.types";
 import { ToType } from "components/link/link";
+import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
-import { ASSET } from "shared/constants/constants";
 import { CurrencyEnum } from "utils/types";
 
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";

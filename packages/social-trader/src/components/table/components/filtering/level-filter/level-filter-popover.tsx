@@ -1,4 +1,6 @@
 import GVButton from "components/gv-button";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
+import { PopoverContent } from "components/popover/popover-content";
 import { Range } from "rc-slider";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -20,34 +22,40 @@ const _LevelFilterPopover: React.FC<Props> = ({
     changeFilter
   ]);
   return (
-    <div className="level-filter">
-      <Range
-        dots
-        min={1}
-        max={7}
-        marks={marks}
-        value={value}
-        onChange={handleChange}
-        pushable={false}
-      />
-      <div className="level-filter__btns">
-        <GVButton
-          className="level-filter__btn"
-          variant="text"
-          onClick={handleSubmit}
-        >
-          {t("buttons.apply")}
-        </GVButton>
-        <GVButton
-          className="level-filter__btn"
-          variant="text"
-          color="secondary"
-          onClick={cancel}
-        >
-          {t("buttons.cancel")}
-        </GVButton>
-      </div>
-    </div>
+    <PopoverContent className="level-filter">
+      <PopoverContentCardBlock>
+        <div className="level-filter__slider">
+          <Range
+            dots
+            min={1}
+            max={7}
+            marks={marks}
+            value={value}
+            onChange={handleChange}
+            pushable={false}
+          />
+        </div>
+        <div className="level-filter__btns">
+          <GVButton
+            noPadding
+            className="level-filter__btn"
+            variant="text"
+            onClick={handleSubmit}
+          >
+            {t("buttons.apply")}
+          </GVButton>
+          <GVButton
+            noPadding
+            className="level-filter__btn"
+            variant="text"
+            color="secondary"
+            onClick={cancel}
+          >
+            {t("buttons.cancel")}
+          </GVButton>
+        </div>
+      </PopoverContentCardBlock>
+    </PopoverContent>
   );
 };
 

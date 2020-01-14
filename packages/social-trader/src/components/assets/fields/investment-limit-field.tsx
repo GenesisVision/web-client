@@ -24,6 +24,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
     <>
       <AssetField wide>
         <GVFormikField
+          wide
           type="checkbox"
           color="primary"
           name={checkboxName}
@@ -38,6 +39,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
       {hasInvestmentLimit && (
         <AssetField>
           <InputAmountField
+            wide
             autoFocus={false}
             isAllow={isAmountAllow(currency)}
             name={inputName}

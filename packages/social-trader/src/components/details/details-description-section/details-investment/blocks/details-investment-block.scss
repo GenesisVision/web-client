@@ -34,7 +34,7 @@
 }
 
 .details-investment-heading {
-  font-size: $font-size-small;
+  @include font-size($font-size-small);
   text-transform: uppercase;
   letter-spacing: 0.15px;
   color: $label-color;
@@ -53,9 +53,5 @@
 .details-investment-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-landscape-phone() {
-    padding: 0 $padding-small;
-  }
+  @include horizontal-paddings($padding-small);
 }

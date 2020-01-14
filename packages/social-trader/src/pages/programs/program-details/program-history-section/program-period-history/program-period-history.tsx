@@ -1,5 +1,9 @@
 import classNames from "classnames";
 import Popover from "components/popover/popover";
+import {
+  PopoverContent,
+  PopoverContentListItem
+} from "components/popover/popover-content";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { TableCell, TableRow } from "components/table/components";
@@ -18,7 +22,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import filesService from "services/file-service";
-import { formatDate, humanizeDate } from "shared/utils/dates";
+import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
@@ -73,12 +77,14 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
   value: number;
   currency: CurrencyEnum;
 }> = ({ label, value, currency }) => (
-  <div className="details-trades__history-popup-item">
-    <div className="details-trades__history-popup-item-name">{label}</div>
-    <div className="details-trades__history-popup-item-value">
-      {value} {currency}
+  <PopoverContentListItem>
+    <div className="details-trades__history-popup-item">
+      <div className="details-trades__history-popup-item-name">{label}</div>
+      <div className="details-trades__history-popup-item-value">
+        {value} {currency}
+      </div>
     </div>
-  </div>
+  </PopoverContentListItem>
 );
 const ProgramPeriodHistoryPopupItem = withLoader(
   _ProgramPeriodHistoryPopupItem
@@ -93,7 +99,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
   const [t] = useTranslation();
   return (
     <Popover ownWidth anchorEl={anchor} onClose={onClose}>
-      <div className="details-trades__history-popup">
+      <PopoverContent type={"list"}>
         <ProgramPeriodHistoryPopupItem
           condition={!!period.investorsDeposit}
           label={t(
@@ -150,7 +156,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
           value={period.managerCommissionRebate}
           currency={currency}
         />
-      </div>
+      </PopoverContent>
     </Popover>
   );
 };

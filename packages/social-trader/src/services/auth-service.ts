@@ -1,8 +1,8 @@
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
 import { NextPageContext } from "next";
-import { getCookie, removeCookie, setCookie } from "shared/utils/cookie";
-import { getTokenName } from "shared/utils/get-token-name";
+import { getCookie, removeCookie, setCookie } from "utils/cookie";
+import { getTokenName } from "utils/get-token-name";
 
 const canParseToken = (token: string): boolean => {
   try {

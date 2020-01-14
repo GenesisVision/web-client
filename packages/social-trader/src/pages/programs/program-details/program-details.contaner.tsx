@@ -4,10 +4,10 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
-import { withBlurLoader } from "decorators/with-blur-loader";
-import InvestmentAccountControls from "pages/accounts/account-details/investment-account-controls";
+import { ASSET } from "constants/constants";
+import Crashable from "decorators/crashable";
+import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowControls from "pages/follows/follow-details/follow-controls/follow-controls";
 import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
@@ -16,13 +16,11 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import filesService from "services/file-service";
-import { ASSET } from "shared/constants/constants";
 import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
 
-import InvestmentProgramControls from "./program-controls/investment-program-controls";
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
 import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
@@ -44,6 +42,26 @@ import {
   getSubscriptions,
   getTrades
 } from "./service/program-details.service";
+
+/*const FollowDetailsStatisticSection = dynamic(() =>
+  import(
+    "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section"
+  )
+);
+const ProgramDetailsStatisticSection = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section"
+  )
+);*/
+const InvestmentAccountControls = dynamic(() =>
+  import("pages/accounts/account-details/investment-account-controls")
+);
+const InvestmentProgramControls = dynamic(() =>
+  import("./program-controls/investment-program-controls")
+);
+const FollowControls = dynamic(() =>
+  import("pages/follows/follow-details/follow-controls/follow-controls")
+);
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   data: description,
@@ -225,7 +243,5 @@ interface Props {
   data: ProgramDescriptionDataType;
 }
 
-const ProgramDetailsContainer = withBlurLoader(
-  React.memo(_ProgramDetailsContainer)
-);
+const ProgramDetailsContainer = React.memo(Crashable(_ProgramDetailsContainer));
 export default ProgramDetailsContainer;

@@ -6,10 +6,8 @@
   align-items: center;
   margin-bottom: $padding-xsmall;
 
-  .gv-switch-wrapper {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 $padding-xsmall 0 0;
+  &__switch-wrapper {
+    margin-right: $padding-xxsmall;
   }
 
   &__label {

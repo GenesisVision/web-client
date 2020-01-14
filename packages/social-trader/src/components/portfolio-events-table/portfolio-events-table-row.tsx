@@ -10,7 +10,7 @@ import { InvestmentEventViewModel } from "gv-api-web";
 import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import PortfolioEventsDetails from "./portfolio-event-details";

@@ -1,24 +1,21 @@
 import "./dialog.scss";
 
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import * as React from "react";
 
-import { DialogField } from "./dialog-field";
-
-export const _DialogTop: React.FC<
+export const DialogTop: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({ title, subtitle, children }) => (
-  <div className="dialog__top">
+  <PopoverContentCardBlock dark size={"big"}>
     <div className="dialog__header">
       {title && <h2>{title}</h2>}
       {subtitle && <div className="dialog__subtitle">{subtitle}</div>}
     </div>
     {children}
-  </div>
+  </PopoverContentCardBlock>
 );
 
 interface Props {
   title?: string | JSX.Element;
   subtitle?: string | JSX.Element;
 }
-
-export const DialogTop = React.memo(_DialogTop);

@@ -1,6 +1,6 @@
 import { Location } from "history";
 import { useEffect, useState } from "react";
-import { getLocation } from "shared/utils/location";
+import { getLocation } from "utils/location";
 
 export const useLocation = () => {
   const [location, setLocation] = useState<Location | undefined>();

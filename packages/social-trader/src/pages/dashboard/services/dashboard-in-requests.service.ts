@@ -1,10 +1,10 @@
 import { CancelRequestType } from "components/dashboard/dashboard.constants";
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import { ROLE_ENV } from "constants/constants";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
-import { ROLE_ENV } from "shared/constants/constants";
 import authService from "services/auth-service";
 
 import {

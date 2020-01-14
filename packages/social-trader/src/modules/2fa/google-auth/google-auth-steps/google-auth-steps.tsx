@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import { compose } from "redux";
-import { isTablet } from "shared/utils/breakpoints";
+import { isTablet } from "utils/breakpoints";
 
 import GoogleAuthDesktop, {
   IGoogleAuthProps

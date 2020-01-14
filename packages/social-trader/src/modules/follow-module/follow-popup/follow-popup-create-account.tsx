@@ -17,7 +17,7 @@ import { fetchRate as fetchRateMethod } from "services/rate-service";
 import {
   convertToCurrency,
   CURRENCY_FRACTIONS
-} from "shared/utils/currency-converter";
+} from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import {
   allowPositiveValuesNumberFormat,
@@ -102,6 +102,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogField>
           <InputAmountField
+            wide
             isAllow={allowPositiveValuesNumberFormat(
               CURRENCY_FRACTIONS(currency)
             )}
@@ -124,6 +125,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogButtons>
           <GVButton
+            wide
             onClick={handleNext}
             className="invest-form__submit-button"
             disabled={disableButton}

@@ -2,11 +2,11 @@ import "./wallet-withdraw-form.scss";
 
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -21,14 +21,14 @@ import { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum, SetSubmittingType } from "utils/types";
 import {
   btcWalletValidator,
   ethGvtWalletValidator,
   twoFactorValidator
-} from "shared/utils/validators/validators";
-import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+} from "utils/validators/validators";
 import { lazy, object, Schema } from "yup";
 
 const _WalletWithdrawForm: React.FC<
@@ -103,6 +103,7 @@ const _WalletWithdrawForm: React.FC<
         />
         <DialogField>
           <GVFormikField
+            wide
             name={FIELDS.address}
             label={t("wallet-withdraw.address")}
             component={GVTextField}
@@ -112,6 +113,7 @@ const _WalletWithdrawForm: React.FC<
         {twoFactorEnabled && (
           <DialogField>
             <GVFormikField
+              wide
               type="text"
               name={FIELDS.twoFactorCode}
               label={t("wallet-withdraw.two-factor-code-label")}
@@ -136,9 +138,10 @@ const _WalletWithdrawForm: React.FC<
             />
           </DialogListItem>
         </DialogList>
-        <FormError error={errorMessage} />
+        <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            wide
             type="submit"
             variant="contained"
             color="primary"

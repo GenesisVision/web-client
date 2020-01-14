@@ -6,16 +6,16 @@ import {
   TableCardAvatar,
   TableCardTitle
 } from "components/table/components/table-card/table-card";
-import { ProgramDetailsListItem } from "gv-api-web";
-import React from "react";
-import NumberFormat from "react-number-format";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
-} from "shared/constants/constants";
-import { useTranslation } from "shared/i18n";
-import { distanceDate } from "shared/utils/dates";
+} from "constants/constants";
+import { ProgramDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
+import React from "react";
+import NumberFormat from "react-number-format";
 import { composeProgramDetailsUrl } from "utils/compose-url";
+import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {

@@ -1,6 +1,7 @@
 import "./funds-container.scss";
 
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import { FundDetailsListItem } from "gv-api-web";
 import React, { useCallback, useRef, useState } from "react";
 import { FUNDS_ROUTE } from "routes/funds.routes";
@@ -36,7 +37,11 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
         })}
         ref={animate}
       >
-        <img src={FundsIcon} alt="Funds" className="funds-container__img" />
+        <ImageBaseElement
+          src={FundsIcon}
+          alt="Funds"
+          className="funds-container__img"
+        />
         <h2 className="funds-container__title">Funds</h2>
         <p className="funds-container__text">
           Diversify your capital across hundreds of cryptocurrencies in one

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 
@@ -11,13 +12,15 @@ interface Props {
 
 const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
   return (
-    <div className={classNames("tag-item-tooltip", className)}>
-      {tags
-        .filter((tag, idx) => idx > 0)
-        .map((tag, idx) => (
-          <TagItem name={tag.name} color={tag.color} key={idx} />
-        ))}
-    </div>
+    <TooltipContent>
+      <div className={classNames("tag-item-tooltip", className)}>
+        {tags
+          .filter((tag, idx) => idx > 0)
+          .map((tag, idx) => (
+            <TagItem name={tag.name} color={tag.color} key={idx} />
+          ))}
+      </div>
+    </TooltipContent>
   );
 };
 

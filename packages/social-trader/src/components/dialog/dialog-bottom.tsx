@@ -1,11 +1,13 @@
 import "./dialog.scss";
 
-import classNames from "classnames";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import * as React from "react";
 
-export const _DialogBottom: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+export const DialogBottom: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   children
-}) => <div className={classNames("dialog__bottom", className)}>{children}</div>;
-
-export const DialogBottom = React.memo(_DialogBottom);
+}) => (
+  <PopoverContentCardBlock size={"big"} className={className}>
+    {children}
+  </PopoverContentCardBlock>
+);

@@ -2,6 +2,7 @@ import "./dashboard.scss";
 
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
 import DashboardRecommendationsContainer from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations.container";
@@ -12,9 +13,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isNewUserSelector } from "reducers/header-reducer";
 
-import DashboardInRequestsContainer from "./components/dashboard-in-requests/dashboard-in-requests.container";
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
 import { getRequestsCount } from "./services/dashboard.service";
+
+const DashboardInRequestsContainer = dynamic(() =>
+  import("./components/dashboard-in-requests/dashboard-in-requests.container")
+);
 
 const _DashboardPage: React.FC = () => {
   const { data: requestCount } = useApiRequest({

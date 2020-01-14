@@ -2,7 +2,7 @@ import "./gv-datepicker.scss";
 
 import * as React from "react";
 import { RefObject } from "react";
-import { formatDate } from "shared/utils/dates";
+import { formatDate } from "utils/dates";
 
 class GVDatePicker extends React.PureComponent<Props, State> {
   state: State = {

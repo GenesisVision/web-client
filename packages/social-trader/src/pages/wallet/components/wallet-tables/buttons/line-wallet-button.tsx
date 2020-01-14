@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 
 export const _LineWalletButton: React.FC<Props> = ({
@@ -7,9 +8,7 @@ export const _LineWalletButton: React.FC<Props> = ({
   className,
   children
 }) => (
-  <Tooltip
-    render={() => <div className="wallet-list__tooltip-button">{title}</div>}
-  >
+  <Tooltip render={() => <TooltipContent>{title}</TooltipContent>}>
     <div className={classNames(className, "wallet-list__button")}>
       {children}
     </div>

@@ -1,39 +1,30 @@
-import classNames from "classnames";
-import useIsOpen from "hooks/is-open.hook";
-import useUrl from "hooks/url.hook";
+import ImageBaseElement from "components/avatar/image-base.element";
+import useUrl, { ImageQualityType } from "hooks/url.hook";
 import * as React from "react";
-import { useCallback, useEffect } from "react";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
+  quality,
+  title,
   color,
   DefaultImageComponent,
-  url,
+  src,
   alt,
   defaultImage,
-  imageClassName,
+  className,
   defaultImageClassName
 }) => {
-  const fullUrl = useUrl(url);
-  const hasUrl = fullUrl.length !== 0;
-  const [isError, setIsError, setIsNotError] = useIsOpen();
-  useEffect(() => {
-    if (url) setIsNotError();
-    else setIsError();
-  }, [url]);
-  const handleError = useCallback((e: any) => {
-    e.target.onerror = null;
-    setIsError();
-  }, []);
-  const currentSrc = isError ? defaultImage : fullUrl;
-  const className = isError ? defaultImageClassName : "";
-  return (isError || !hasUrl) && DefaultImageComponent ? (
-    <DefaultImageComponent color={color} imageClassName={className} />
-  ) : (
-    <img
+  const { getUrl } = useUrl();
+  const fullUrl = getUrl(src, quality);
+  return (
+    <ImageBaseElement
+      defaultImageClassName={defaultImageClassName}
+      defaultImage={defaultImage}
+      color={color}
+      DefaultImageComponent={DefaultImageComponent}
+      title={title}
       alt={alt}
-      className={classNames(imageClassName, className)}
-      src={currentSrc}
-      onError={handleError}
+      className={className}
+      src={fullUrl}
     />
   );
 };
@@ -48,11 +39,13 @@ export interface IImageProps {
 }
 
 export interface IImageBaseProps {
+  quality?: ImageQualityType;
+  title?: string;
   color?: string;
   DefaultImageComponent?: React.ComponentType<any>;
-  url?: string;
+  src?: string;
   alt?: string;
   defaultImage?: string;
-  imageClassName?: string;
+  className?: string;
   defaultImageClassName?: string;
 }

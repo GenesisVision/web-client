@@ -13,8 +13,8 @@ export const fetchManagerPrograms = (
 ): CancelablePromise<ItemsViewModelProgramDetailsListItem> => {
   return programsApi.getPrograms({
     ...filter,
-    authorization: authService.getAuthArg()
-    // hasInvestorsForClosed: true
+    authorization: authService.getAuthArg(),
+    includeWithInvestments: true
   });
 };
 
@@ -23,8 +23,8 @@ export const fetchManagerFunds = (
 ): CancelablePromise<ItemsViewModelFundDetailsListItem> => {
   return fundsApi.getFunds({
     ...filter,
-    authorization: authService.getAuthArg()
-    // hasInvestorsForClosed: true
+    authorization: authService.getAuthArg(),
+    includeWithInvestments: true
   });
 };
 
@@ -34,7 +34,7 @@ export const fetchManagerAssetsCount = (
   const options = {
     ownerId,
     take: 0,
-    hasInvestorsForClosed: true,
+    includeWithInvestments: true,
     authorization: authService.getAuthArg()
   };
   return Promise.all([

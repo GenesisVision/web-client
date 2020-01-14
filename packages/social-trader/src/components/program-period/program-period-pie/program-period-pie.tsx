@@ -5,7 +5,7 @@ import GVProgramPeriod from "components/gv-program-period";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
-import { distanceDate } from "shared/utils/dates";
+import { distanceDate } from "utils/dates";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
 

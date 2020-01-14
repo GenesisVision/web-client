@@ -41,6 +41,7 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
         <CodeList codes={codes} />
         <DialogButtons>
           <CopyButton
+            wide
             value={getCodesString(codes)}
             successMessage={"2fa-page.codes.copy-success"}
           />

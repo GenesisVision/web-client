@@ -1,8 +1,8 @@
+import { FUND_CURRENCY } from "constants/constants";
 import { CancelablePromise } from "gv-api-web";
 import investmentsApi from "services/api-client/investments-api";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
-import { FUND_CURRENCY } from "shared/constants/constants";
 
 import { FundWithdraw, FundWithdrawInfoResponse } from "../fund-withdraw.types";
 

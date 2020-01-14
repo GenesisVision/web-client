@@ -1,11 +1,12 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/input-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { ASSET } from "constants/constants";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -14,8 +15,7 @@ import { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import { ASSET } from "shared/constants/constants";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
@@ -107,6 +107,7 @@ const _DepositForm: React.FC<
           </StatisticItem>
         </DialogField>
         <InputAmountField
+          wide
           name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}
           currency={walletCurrency}
@@ -129,9 +130,10 @@ const _DepositForm: React.FC<
             walletCurrency={walletCurrency}
           />
         )}
-        <FormError error={errorMessage} />
+        <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            wide
             type="submit"
             className="invest-form__submit-button"
             disabled={isSubmitting || !isValid || !dirty}

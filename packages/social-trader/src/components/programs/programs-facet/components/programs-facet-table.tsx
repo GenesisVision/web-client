@@ -32,7 +32,6 @@ const _ProgramsFacetTable: React.FC<
   title,
   sorting,
   getItems,
-  isAuthenticated,
   showRating,
   timeframe,
   columns
@@ -75,7 +74,6 @@ const _ProgramsFacetTable: React.FC<
       filtering={composeFiltering()}
       defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
       getItems={getItems}
-      isAuthenticated={isAuthenticated}
       showRating={showRating}
       columns={columns}
     />
@@ -89,7 +87,6 @@ export interface IProgramsFacetTableProps {
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;
-  isAuthenticated?: boolean;
   showRating?: boolean;
   level?: number;
   columns?: SortingColumn[];

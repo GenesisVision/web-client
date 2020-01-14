@@ -1,4 +1,4 @@
-import { SLUG_URL_REGEXP } from "shared/utils/constants";
+import { SLUG_URL_REGEXP } from "utils/constants";
 
 import { FACETS } from "./programs.routes";
 

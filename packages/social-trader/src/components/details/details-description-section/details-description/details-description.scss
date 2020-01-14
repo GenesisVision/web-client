@@ -2,27 +2,15 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 
+$avatar-big-size: 120px;
 $padding-info-left: $padding-upper-medium;
 $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
 .details-description {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "logo links" "main main" "details details";
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-tablet() {
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    grid-template-areas: "logo main links" ". details details";
-    grid-column-gap: $padding-upper-medium;
-    padding: 0;
-  }
-
   &__section {
-    margin-bottom: $padding-xsmall;
-    padding: 0 $padding-xsmall;
+    @include background-with-avatar-level($background-color);
+    @include adaptive-margin(bottom, $padding-xsmall);
+    padding: 0 $padding-small/$divider-padding;
 
     @include media-breakpoint-landscape-phone() {
       padding: 0;
@@ -45,36 +33,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     flex-direction: column;
   }
 
-  & .fund-asset {
-    background: rgba(216, 216, 216, 0.05);
-    height: 50px / $divider-title;
-    padding: 15px / $divider-padding;
-    justify-content: space-between;
-    &__container {
-      &--others-count {
-        cursor: pointer;
-      }
-    }
-    &--others-count {
-      min-width: auto;
-      background: rgba(216, 216, 216, 0.1);
-    }
-    @include media-breakpoint-landscape-phone() {
-      height: 50px;
-      padding: 15px;
-      min-width: 240px;
-      &--others-count {
-        min-width: auto;
-      }
-    }
-  }
-
   &__avatar {
     cursor: pointer;
-    padding: $padding-xsmall-mobile 0 $padding-xsmall;
-    & .program-avatar__level {
-      border-color: $background-color;
-    }
+    margin: $padding-xsmall-mobile 0 $padding-xsmall;
+    @include width($avatar-big-size);
     @include media-breakpoint-tablet() {
       padding: 0;
     }
@@ -120,7 +82,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
   &__author-btn {
     padding: 0;
-    font-size: $font-size-common;
+    @include font-size($font-size-common);
     letter-spacing: 0.19px;
     font-weight: bold;
     color: $text-color;
@@ -129,9 +91,9 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__controls {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 (-$padding-xxsmall/2);
 
     @include media-breakpoint-desktop() {
+      margin-left: (-$padding-xxsmall/2);
       flex-wrap: nowrap;
     }
     @include media-breakpoint-tablet() {
