@@ -3,6 +3,8 @@ import {
   FilteringType,
   TFilter
 } from "components/table/components/filtering/filter.type";
+import { PAGING_FILTER_NAME } from "components/table/components/paging/paging";
+import { SORTING_FILTER_NAME } from "components/table/components/sorting/sorting-filter/sorting-filter";
 import {
   UpdatePagingFuncType,
   UpdateSortingFuncType
@@ -11,7 +13,13 @@ import { useRouter } from "next/router";
 import qs from "qs";
 import { useCallback, useMemo } from "react";
 
-const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
+const isExcluded = (filters: string[], currentFilter: string): boolean =>
+  filters.filter(filter => filter === currentFilter).length !== 0;
+
+const useRouteFilters = (
+  defaultFilter: any,
+  safePagingFilters: string[] = []
+): UseRouteFilters => {
   const basename = process.env.REACT_ROOT_ROUTE;
   const { asPath, pathname } = useRouter();
   const queryParams = qs.parse(asPath.slice(pathname.length + 1));
@@ -19,14 +27,22 @@ const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
 
   const updateFilter: UpdateFilter = useCallback(
     filter => {
+      const isSafePagingFilter = isExcluded(
+        [...safePagingFilters, PAGING_FILTER_NAME, SORTING_FILTER_NAME],
+        filter.name
+      );
+
       const query = qs.stringify({
         ...queryParams,
+        [PAGING_FILTER_NAME]: isSafePagingFilter
+          ? queryParams[PAGING_FILTER_NAME]
+          : 0,
         [filter.name]: filter.value
       });
       const route = query ? `${pathname}?${query}` : pathname;
       Push(route.replace("/" + basename, ""));
     },
-    [queryParams, pathname, basename]
+    [safePagingFilters, queryParams, pathname, basename]
   );
 
   const filters = useMemo(() => ({ ...defaultFilter, ...filtering }), [
@@ -35,11 +51,11 @@ const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
   ]);
 
   const updateSorting = useCallback(
-    value => updateFilter({ name: "sorting", value }),
+    value => updateFilter({ name: SORTING_FILTER_NAME, value }),
     [updateFilter]
   );
   const updatePaging = useCallback(
-    page => updateFilter({ name: "page", value: page + 1 }),
+    page => updateFilter({ name: PAGING_FILTER_NAME, value: page + 1 }),
     [updateFilter]
   );
 
