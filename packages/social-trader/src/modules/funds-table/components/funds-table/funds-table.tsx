@@ -5,6 +5,7 @@ import { ITableProps } from "components/table/components/table";
 import { FundDetailsListItem } from "gv-api-web";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
+import { useCallback } from "react";
 
 import FundTableSortingValue from "./fund-table-sorting";
 import { fundListLoaderData } from "./fund-table.loader-data";
@@ -44,10 +45,30 @@ const _FundsTable: React.FC<Props> = ({
     showSwitchView
     renderFilters={renderFilters}
     renderMappings={renderMappings}
-    renderHeader={column => <FundsTableHeaderCell column={column} />}
-    renderSorting={column => <FundTableSortingValue column={column} />}
-    renderBodyRow={fund => <FundsTableRow withDispatch fund={fund} />}
-    renderBodyCard={fund => <FundCard fund={fund} />}
+    renderHeader={useCallback(
+      column => (
+        <FundsTableHeaderCell column={column} />
+      ),
+      []
+    )}
+    renderSorting={useCallback(
+      column => (
+        <FundTableSortingValue column={column} />
+      ),
+      []
+    )}
+    renderBodyRow={useCallback(
+      fund => (
+        <FundsTableRow withDispatch fund={fund} />
+      ),
+      []
+    )}
+    renderBodyCard={useCallback(
+      fund => (
+        <FundCard fund={fund} />
+      ),
+      []
+    )}
   />
 );
 
