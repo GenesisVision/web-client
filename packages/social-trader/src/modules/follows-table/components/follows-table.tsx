@@ -20,7 +20,6 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 interface IFollowsTableProps extends ITableProps {
   data?: FollowDetailsListItem[];
   title: string;
-  redirectToLogin?: () => void;
 }
 
 const _FollowsTable: React.FC<IFollowsTableProps> = ({

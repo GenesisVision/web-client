@@ -3,6 +3,10 @@ import {
   FilteringType,
   TFilter
 } from "components/table/components/filtering/filter.type";
+import {
+  UpdatePagingFuncType,
+  UpdateSortingFuncType
+} from "components/table/components/table.types";
 import { useRouter } from "next/router";
 import qs from "qs";
 import { useCallback, useMemo } from "react";
@@ -30,10 +34,33 @@ const useRouteFilters = (defaultFilter: any): UseRouteFilters => {
     filtering
   ]);
 
-  return [filters, sorting, parseInt(page), updateFilter];
+  const updateSorting = useCallback(
+    value => updateFilter({ name: "sorting", value }),
+    [updateFilter]
+  );
+  const updatePaging = useCallback(
+    page => updateFilter({ name: "page", value: page + 1 }),
+    [updateFilter]
+  );
+
+  return [
+    filters,
+    sorting,
+    parseInt(page),
+    updateFilter,
+    updateSorting,
+    updatePaging
+  ];
 };
 
 export default useRouteFilters;
 
 type UpdateFilter = (filter: TFilter) => void;
-type UseRouteFilters = [FilteringType, string, number, UpdateFilter];
+type UseRouteFilters = [
+  FilteringType,
+  string,
+  number,
+  UpdateFilter,
+  UpdateSortingFuncType,
+  UpdatePagingFuncType
+];

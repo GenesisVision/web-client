@@ -1,4 +1,3 @@
-import { Push } from "components/link/link";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "components/table/components/filtering/filter.type";
@@ -14,7 +13,6 @@ import { useTranslation } from "i18n";
 import {
   CURRENCY_MAP_NAME,
   DEFAULT_PROGRAM_TABLE_FILTERS,
-  SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "modules/programs-table/components/programs-table/programs.constants";
 import * as React from "react";
@@ -25,7 +23,6 @@ import {
   programCurrenciesSelector,
   programTagsSelector
 } from "reducers/platform-reducer";
-import { LOGIN_ROUTE } from "routes/app.routes";
 
 import { programsDataSelector } from "../../reducers/programs-table.reducers";
 import {
@@ -47,9 +44,14 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const data = useSelector(programsDataSelector);
   const { t } = useTranslation();
 
-  const [filtering, sorting, page, update] = useRouteFilters(
-    DEFAULT_PROGRAM_TABLE_FILTERS
-  );
+  const [
+    filtering,
+    sorting,
+    page,
+    update,
+    updateSorting,
+    updatePaging
+  ] = useRouteFilters(DEFAULT_PROGRAM_TABLE_FILTERS);
   const renderMappings = useCallback(
     (updateFilter, filtering) => (
       <>
@@ -70,10 +72,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       </>
     ),
     [currencies]
-  );
-  const updateSorting = useCallback(
-    value => update({ name: SORTING_FILTER_NAME, value }),
-    [update]
   );
   const renderFilters = useCallback(
     (updateFilter, filtering: FilteringType) => (
@@ -100,11 +98,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     ),
     [programCurrencies]
   );
-  const updatePaging = useCallback(
-    page => update({ name: "page", value: page + 1 }),
-    [update]
-  );
-  const redirectToLogin = useCallback(() => Push(LOGIN_ROUTE), []);
 
   if (!data) return null;
   return (
@@ -120,7 +113,6 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderFilters={renderFilters}
       paging={composePaging(data.total, page, ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
-      redirectToLogin={redirectToLogin}
       currencies={programCurrencies}
     />
   );

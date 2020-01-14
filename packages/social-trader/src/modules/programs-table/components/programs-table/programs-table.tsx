@@ -21,7 +21,6 @@ interface IProgramsTableProps extends ITableProps {
   currencies?: string[];
   data?: ProgramDetailsListItem[];
   title: string;
-  redirectToLogin?: () => void;
 }
 
 const _ProgramsTable: React.FC<IProgramsTableProps> = ({

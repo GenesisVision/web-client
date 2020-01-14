@@ -1,4 +1,3 @@
-import { Push } from "components/link/link";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "components/table/components/filtering/filter.type";
@@ -10,7 +9,6 @@ import useRouteFilters from "hooks/route-filters.hook";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
 import {
   CURRENCY_MAP_NAME,
-  SORTING_FILTER_NAME,
   SORTING_FILTER_VALUE
 } from "modules/programs-table/components/programs-table/programs.constants";
 import * as React from "react";
@@ -21,7 +19,6 @@ import {
   followTagsSelector,
   platformCurrenciesSelector
 } from "reducers/platform-reducer";
-import { LOGIN_ROUTE } from "routes/app.routes";
 
 import { followsDataSelector } from "../reducers/follows-table.reducers";
 import FollowsTable from "./follows-table";
@@ -34,9 +31,14 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const tags = useSelector(followTagsSelector);
   const data = useSelector(followsDataSelector);
   const { t } = useTranslation();
-  const [filtering, sorting, page, update] = useRouteFilters(
-    DEFAULT_FOLLOW_TABLE_FILTERS
-  );
+  const [
+    filtering,
+    sorting,
+    page,
+    update,
+    updateSorting,
+    updatePaging
+  ] = useRouteFilters(DEFAULT_FOLLOW_TABLE_FILTERS);
   const renderMappings = useCallback(
     (updateFilter, filtering) => (
       <>
@@ -69,15 +71,6 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
     ),
     [tags]
   );
-  const updatePaging = useCallback(
-    page => update({ name: "page", value: page + 1 }),
-    [update]
-  );
-  const redirectToLogin = useCallback(() => Push(LOGIN_ROUTE), []);
-  const updateSorting = useCallback(
-    value => update({ name: SORTING_FILTER_NAME, value }),
-    [update]
-  );
 
   if (!data) return null;
   return (
@@ -93,7 +86,6 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderFilters={renderFilters}
       paging={composePaging(data.total, page, ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
-      redirectToLogin={redirectToLogin}
     />
   );
 };

@@ -31,9 +31,14 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   const data = useSelector(fundsDataSelector);
   const fundAssets = useSelector(fundAssetsSelector);
   const { t } = useTranslation();
-  const [filtering, sorting, page, update] = useRouteFilters(
-    DEFAULT_FUND_TABLE_FILTERS
-  );
+  const [
+    filtering,
+    sorting,
+    page,
+    update,
+    updateSorting,
+    updatePaging
+  ] = useRouteFilters(DEFAULT_FUND_TABLE_FILTERS);
   if (!filtering[CURRENCY_MAP_NAME]) {
     filtering[CURRENCY_MAP_NAME] = currency;
   }
@@ -69,14 +74,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       />
     ),
     [fundAssets]
-  );
-  const updateSorting = useCallback(
-    value => update({ name: "sorting", value }),
-    [update]
-  );
-  const updatePaging = useCallback(
-    page => update({ name: "page", value: page + 1 }),
-    [update]
   );
 
   if (!data) return null;
