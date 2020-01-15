@@ -1,17 +1,14 @@
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
+const dotenvExtended = require("dotenv-extended");
+const dotenv = require("dotenv");
+const getenv = require("getenv");
 
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
+dotenvExtended.load();
+dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  config.testUserName = getenv.string("CYPRESS_TEST_USER_NAME", "");
+  config.testUserPassword = getenv.string("CYPRESS_TEST_USER_PASSWORD", "");
+  config.baseUrl = getenv.string("CYPRESS_BASE_URL", "");
+  return config;
 };
