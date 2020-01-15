@@ -2,11 +2,7 @@ import "./social-links.scss";
 
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
-import {
-  CancelablePromise,
-  SocialLinkViewModel,
-  UpdateSocialLinkViewModel
-} from "gv-api-web";
+import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
@@ -31,7 +27,7 @@ const Links = React.memo(withLoader(_Links));
 export type TOnEditLinkSubmitFunc = (
   values: UpdateSocialLinkViewModel,
   setSubmitting: SetSubmittingType
-) => CancelablePromise<void>;
+) => Promise<void>;
 
 interface ILinksProps {
   socialLinks: SocialLinkViewModel[];

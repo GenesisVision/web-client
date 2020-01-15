@@ -8,12 +8,12 @@ import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
-export const changePassword = (model: ChangePasswordViewModel) => (
+export const changePassword = (body: ChangePasswordViewModel) => (
   dispatch: MiddlewareDispatch
 ) =>
   authApi
     .changePassword(authService.getAuthArg(), {
-      model
+      body
     })
     .then((response: string) => {
       authService.storeToken(response);

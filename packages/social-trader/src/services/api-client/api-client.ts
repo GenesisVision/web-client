@@ -1,4 +1,4 @@
-import { ApiClient } from "gv-api-web";
+import { ApiClient, SignalDetachMode } from "gv-api-web";
 
 const newClient = new ApiClient(process.env.REACT_APP_API_URL);
 

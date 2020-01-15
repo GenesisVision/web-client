@@ -1,6 +1,5 @@
 import {
   Broker,
-  CancelablePromise,
   MakeSignalProviderProgram,
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
@@ -27,14 +26,14 @@ export const convertAsset = ({
 }: {
   data: IConvertAssetSettingsFormValues;
   fromTo: TAssetFromTo;
-}): CancelablePromise<any> => {
+}): Promise<any> => {
   const authorization = authService.getAuthArg();
-  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
+  let promise = (Promise.resolve("") as unknown) as Promise<any>;
   if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
       data.logo.image.cropped,
       authorization
-    ) as CancelablePromise<any>;
+    ) as Promise<any>;
   }
   const method = getCovertMethod(fromTo);
   return promise.then(response =>
@@ -48,34 +47,34 @@ export const convertAsset = ({
 const getCovertMethod = ({
   assetFrom,
   assetTo
-}: TAssetFromTo): ((request: RequestType) => CancelablePromise<any>) => {
+}: TAssetFromTo): ((body: RequestType) => Promise<any>) => {
   const authorization = authService.getAuthArg();
   switch (assetFrom + assetTo) {
     case CONVERT_ASSET.SIGNAL + CONVERT_ASSET.PROGRAM:
-      return (request: RequestType) =>
+      return (body: RequestType) =>
         assetsApi.makeSignalProviderProgram(authorization, {
-          request: request as MakeSignalProviderProgram
+          body: body as MakeSignalProviderProgram
         });
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.PROGRAM:
-      return (request: RequestType) =>
+      return (body: RequestType) =>
         assetsApi.makeAccountProgram(authorization, {
-          request: request as MakeTradingAccountProgram
+          body: body as MakeTradingAccountProgram
         });
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.SIGNAL:
-      return (request: RequestType) =>
+      return (body: RequestType) =>
         assetsApi.makeAccountSignalProvider(authorization, {
-          request: request as MakeTradingAccountSignalProvider
+          body: body as MakeTradingAccountSignalProvider
         });
     case CONVERT_ASSET.EXTERNAL_ACCOUNT + CONVERT_ASSET.SIGNAL:
     default:
-      return (request: RequestType) =>
+      return (body: RequestType) =>
         assetsApi.makeExternalAccountSignalProvider(authorization, {
-          request: request as MakeTradingAccountSignalProvider
+          body: body as MakeTradingAccountSignalProvider
         });
   }
 };
 
-type TGetConvertMethodReturn = (request: RequestType) => CancelablePromise<any>; //ProgramCreateResult
+type TGetConvertMethodReturn = (request: RequestType) => Promise<any>; //ProgramCreateResult
 
 export const getBrokerLoaderData: () => any = () => ({
   name: getRandomWord(),

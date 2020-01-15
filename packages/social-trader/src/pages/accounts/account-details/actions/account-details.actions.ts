@@ -7,7 +7,6 @@ import { TStatisticPeriodAction } from "components/details/reducers/statistic-pe
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
   AccountBalanceChart,
-  CancelablePromise,
   TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
@@ -97,7 +96,7 @@ export const fetchOpenPositionsAction = (
   id: string,
   filters: ComposeFiltersAllType,
   authorization: string
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ActionType<Promise<TradesViewModel>> => ({
   type: ACCOUNT_OPEN_POSITIONS,
   payload: accountsApi.getOpenTrades(id, authorization, filters)
 });
@@ -106,7 +105,7 @@ export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType,
   authorization: string
-): ActionType<CancelablePromise<TradesSignalViewModel>> => ({
+): ActionType<Promise<TradesSignalViewModel>> => ({
   type: ACCOUNT_TRADES,
   payload: accountsApi.getTrades(id, authorization, filters)
 });

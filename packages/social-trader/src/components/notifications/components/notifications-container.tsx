@@ -4,11 +4,7 @@ import {
   serviceGetNotifications
 } from "components/notifications/services/notifications.services";
 import Sidebar, { SIDEBAR_POSITION } from "components/sidebar/sidebar";
-import {
-  CancelablePromise,
-  NotificationList,
-  NotificationViewModel
-} from "gv-api-web";
+import { NotificationList, NotificationViewModel } from "gv-api-web";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -82,7 +78,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    getNotifications(): CancelablePromise<NotificationList>;
+    getNotifications(): Promise<NotificationList>;
     clearNotifications(): void;
     toggleNotifications(): void;
   };

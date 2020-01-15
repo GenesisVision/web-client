@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,7 +10,7 @@ import useIsOpen from "./is-open.hook";
 type TNullValue = undefined;
 export const nullValue = undefined;
 
-type TRequest<T> = CancelablePromise<T>;
+type TRequest<T> = Promise<T>;
 
 export type TUseApiRequestProps<T = any> = {
   fetchOnMountData?: any;
@@ -70,7 +69,7 @@ const useApiRequest = <T>({
     return ((setPromiseMiddleware(
       request(props),
       middlewareList
-    ) as unknown) as CancelablePromise<any>)
+    ) as unknown) as Promise<any>)
       .catch((errorMessage: ResponseError) => {
         setErrorMessage(errorMessage);
         dispatch(alertMessageActions.error(errorMessage.errorMessage));

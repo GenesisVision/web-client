@@ -42,6 +42,7 @@ export const fetchWalletsAction = (
   authorization: string
 ): FetchWalletAction => ({
   type: WALLET_BALANCE,
+  //@ts-ignore
   payload: walletApi.getWalletSummary(currency, authorization)
 });
 

@@ -1,6 +1,5 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
-  CancelablePromise,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem
 } from "gv-api-web";
@@ -10,7 +9,7 @@ import authService from "services/auth-service";
 
 export const fetchManagerPrograms = (
   filter: FilteringType
-): CancelablePromise<ItemsViewModelProgramDetailsListItem> => {
+): Promise<ItemsViewModelProgramDetailsListItem> => {
   return programsApi.getPrograms({
     ...filter,
     authorization: authService.getAuthArg(),
@@ -20,7 +19,7 @@ export const fetchManagerPrograms = (
 
 export const fetchManagerFunds = (
   filter: FilteringType
-): CancelablePromise<ItemsViewModelFundDetailsListItem> => {
+): Promise<ItemsViewModelFundDetailsListItem> => {
   return fundsApi.getFunds({
     ...filter,
     authorization: authService.getAuthArg(),

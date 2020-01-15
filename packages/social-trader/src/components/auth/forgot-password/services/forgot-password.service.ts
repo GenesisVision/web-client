@@ -32,7 +32,7 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
 export const restorePassword = (
   model: ResetPasswordViewModel & { setSubmitting: SetSubmittingType }
 ) => (dispatch: MiddlewareDispatch) =>
-  authApi.resetPassword({ model }).then(response => {
+  authApi.resetPassword({ body: model }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
     // Push(HOME_ROUTE);

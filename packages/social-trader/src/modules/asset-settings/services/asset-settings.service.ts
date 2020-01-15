@@ -1,5 +1,5 @@
 import { IImageValue } from "components/form/input-image/input-image";
-import { CancelablePromise, ProgramUpdate } from "gv-api-web";
+import { ProgramUpdate } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
@@ -10,34 +10,34 @@ export const editAsset = ({
 }: {
   id: string;
   editAssetData: IAssetEditFormValues;
-}): CancelablePromise<null> => {
+}): Promise<Response> => {
   const authorization = authService.getAuthArg();
-  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
+  let promise = Promise.resolve("");
   if (editAssetData.logo.image)
     promise = filesService.uploadFile(
       editAssetData.logo.image.cropped,
       authorization
-    ) as CancelablePromise<any>;
+    );
   return promise.then(response => {
-    const model = {
+    const body = {
       ...editAssetData,
       logo: response || editAssetData.logo.src
-    };
+    } as ProgramUpdate;
     return assetsApi.updateAsset(id, authorization, {
-      model: model as ProgramUpdate
+      body
     }); //TODO ask backend to change ProgramUpdate logo type
   });
 };
 
 export const closeProgram: TCloseAsset = ({ id, twoFactorCode }) => {
   return assetsApi.closeInvestmentProgram(id, authService.getAuthArg(), {
-    model: { twoFactorCode: twoFactorCode! }
+    body: { twoFactorCode: twoFactorCode! }
   });
 };
 
 export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
   return assetsApi.closeFund(id, authService.getAuthArg(), {
-    model: { twoFactorCode: twoFactorCode! }
+    body: { twoFactorCode: twoFactorCode! }
   });
 };
 
