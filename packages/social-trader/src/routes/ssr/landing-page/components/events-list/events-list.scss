@@ -4,14 +4,17 @@
 
 .events-list {
   @include reset-list();
+  position: relative;
 
   &__item {
     border: 1px solid $landing-bg-gray-2;
+    background-color: $main-color;
     border-radius: 20px;
     margin-bottom: 20px;
     padding: 20px;
     display: flex;
     align-items: center;
+    position: relative;
 
     @include media-breakpoint-large-desktop() {
       padding-left: 40px;

@@ -25,7 +25,7 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
       programs,
       funds
     } = await platformApi.getPlatformLandingInfo({
-      eventsTake: 5,
+      eventsTake: 15,
       followTake: 6,
       programsTake: 6,
       fundsTake: 12

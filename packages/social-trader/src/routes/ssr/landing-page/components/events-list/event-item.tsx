@@ -3,6 +3,7 @@ import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-def
 import Link from "components/link/link";
 import { PlatformEvent } from "gv-api-web";
 import React from "react";
+import { animated, useSpring } from "react-spring";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 const _EventItem: React.FC<PlatformEvent> = ({
@@ -24,8 +25,12 @@ const _EventItem: React.FC<PlatformEvent> = ({
         state: `/ ${title}`
       }
     : undefined;
+  const props = useSpring({
+    to: { opacity: 1, transform: "translate3d(0,100%,0) scale(1)" },
+    from: { opacity: 0, transform: "translate3d(0,0%,0) scale(0.7)" }
+  });
   return (
-    <li className="events-list__item">
+    <animated.li className="events-list__item" style={props}>
       <Link className="events-list__item-link" to={linkAsset}>
         <div className="events-list__item-avatar">
           <ImageBase
@@ -45,7 +50,7 @@ const _EventItem: React.FC<PlatformEvent> = ({
         <div className="events-list__item-text">{text}</div>
       </div>
       {value && <div className="events-list__item-number">{value}</div>}
-    </li>
+    </animated.li>
   );
 };
 const EventItem = React.memo(_EventItem);
