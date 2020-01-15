@@ -1,13 +1,14 @@
-import "../create-fund-settings.scss";
+import "./create-fund-settings-add-asset.scss";
 
 import classNames from "classnames";
-import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
+import { CurrencyItem } from "components/currency-item/currency-item";
 import GVTextField from "components/gv-text-field";
 import { SearchIcon } from "components/icon/search-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { PopoverContent } from "components/popover/popover-content";
 import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
@@ -43,45 +44,47 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
     );
   }, [assets, searchValue]);
   return (
-    <Popover
-      horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-      vertical={VERTICAL_POPOVER_POS.BOTTOM}
-      anchorEl={anchor}
-      noPadding
-      onClose={handleCloseDropdown}
-    >
-      <div className="popover-add">
-        <div className="popover-add__search">
-          <GVTextField
-            name="queryValue"
-            wrapperClassName="popover-add__search-input"
-            placeholder="Search for assets"
-            autoComplete="off"
-            adornment={<SearchIcon secondary />}
-            adornmentPosition="start"
-            onChange={searchHandle}
-            value={searchValue}
-            // autoFocus
-          />
-        </div>
-        <div className="popover-add__assets">
-          <table>
-            <tbody>
-              {filteredAssets.map(asset => (
-                <AssetLine
-                  remainder={remainder}
-                  asset={asset}
-                  handleDown={handleDown}
-                  handleUp={handleUp}
-                  handlePercentChange={handlePercentChange}
-                  key={asset.id}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </Popover>
+    <>
+      <Popover
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        anchorEl={anchor}
+        noPadding
+        onClose={handleCloseDropdown}
+      >
+        <PopoverContent>
+          <div className="add-fund-asset-popover__search">
+            <GVTextField
+              noMargin
+              name="queryValue"
+              wrapperClassName="add-fund-asset-popover__search-input"
+              placeholder="Search for assets"
+              autoComplete="off"
+              adornment={<SearchIcon secondary />}
+              adornmentPosition="start"
+              onChange={searchHandle}
+              value={searchValue}
+            />
+          </div>
+          <div className="add-fund-asset-popover__assets">
+            <table>
+              <tbody>
+                {filteredAssets.map(asset => (
+                  <AssetLine
+                    remainder={remainder}
+                    asset={asset}
+                    handleDown={handleDown}
+                    handleUp={handleUp}
+                    handlePercentChange={handlePercentChange}
+                    key={asset.id}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </>
   );
 };
 
@@ -90,17 +93,19 @@ export default CreateFundSettingsAddAsset;
 
 const AssetLine: React.FC<AssetLineProps> = React.memo(
   ({ remainder, asset, handleDown, handleUp, handlePercentChange }) => (
-    <tr className="popover-add__asset">
-      <td className="popover-add__asset-icon-container">
-        <FundAssetImage
-          url={asset.icon}
-          alt={asset.asset}
-          className="popover-add__asset-icon"
+    <tr className="add-fund-asset-popover__asset">
+      <td>
+        <CurrencyItem
+          logo={asset.icon}
+          small
+          name={asset.name}
+          symbol={asset.name}
         />
       </td>
-      <td className="popover-add__asset-currency-full">{asset.name}</td>
-      <td className="popover-add__asset-currency-short">{asset.asset}</td>
-      <td className="popover-add__regulator-container">
+      <td className="add-fund-asset-popover__asset-currency-short">
+        {asset.asset}
+      </td>
+      <td>
         <Regulator
           remainder={remainder}
           minValue={asset.mandatoryFundPercent}
@@ -108,12 +113,13 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
           handleDown={handleDown(asset)}
           handleUp={handleUp(asset)}
         >
-          <div className={"popover-add__regulator-indicator"}>
+          <div className="add-fund-asset-popover__regulator-indicator">
             <input
               value={asset.percent}
               onChange={handlePercentChange(asset)}
-              className={classNames("popover-add__regulator-input", {
-                "popover-add__regulator-input--mute": asset.percent === 0
+              className={classNames("add-fund-asset-popover__regulator-input", {
+                "add-fund-asset-popover__regulator-input--mute":
+                  asset.percent === 0
               })}
             />
             %

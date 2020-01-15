@@ -1,0 +1,57 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.add-fund-asset-popover {
+  display: flex;
+  flex-direction: column;
+  &__regulator-indicator {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &__regulator-input {
+    width: 23px;
+    display: block;
+    background: transparent;
+    border-width: 0;
+    @include font-size($font-size-paragraph);
+    @include line-height($font-size-paragraph);
+    color: $text-accent-color;
+    text-align: right;
+    &:focus {
+      border-width: 0;
+      outline-width: 0;
+    }
+    &--mute {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+  &__asset-currency-short {
+    opacity: 0.4;
+    @include font-size($font-size-small);
+  }
+  &__assets {
+    display: flex;
+    @include adaptive-padding(bottom, $popover-padding-medium);
+    max-height: 180px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    table {
+      @include horizontal-paddings($popover-padding-medium);
+      border-spacing: 0;
+    }
+    td {
+      padding-top: $padding-xxsmall;
+      &:not(:last-child) {
+        padding-right: $padding-xsmall;
+      }
+    }
+  }
+  &__search {
+    @include adaptive-full-padding($popover-padding-medium);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
