@@ -1,4 +1,3 @@
-import "components/deposit-details/deposit-details.scss";
 import "./attach-account-settings.scss";
 
 import AssetField, {
