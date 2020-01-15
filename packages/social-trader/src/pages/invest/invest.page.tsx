@@ -31,7 +31,7 @@ export const InvestPage: React.FC<Props> = ({
         investLink={createToUrl(GV_FOLLOW_ROUTE, GV_FOLLOW_ROUTE, title)}
         renderCard={({ data, index, style }) => (
           <div style={style}>
-            <FollowCard title={title} follow={data[index]} />
+            <FollowCard follow={data[index]} />
           </div>
         )}
       />
@@ -44,7 +44,7 @@ export const InvestPage: React.FC<Props> = ({
         investLink={createToUrl(GV_PROGRAMS_ROUTE, GV_PROGRAMS_ROUTE, title)}
         renderCard={({ data, index, style }) => (
           <div style={style}>
-            <ProgramCard title={title} program={data[index]} />
+            <ProgramCard program={data[index]} />
           </div>
         )}
       />
@@ -57,7 +57,7 @@ export const InvestPage: React.FC<Props> = ({
         investLink={createToUrl(GV_FUNDS_ROUTE, GV_FUNDS_ROUTE, title)}
         renderCard={({ data, index, style }) => (
           <div style={style}>
-            <FundCard title={title} fund={data[index]} />
+            <FundCard fund={data[index]} />
           </div>
         )}
       />

@@ -7,8 +7,6 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import ProgramTableModule from "modules/programs-table/components/programs-table/programs-table-module";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import {
   MANAGER_DEFAULT_FILTERS,
@@ -19,7 +17,6 @@ import { fetchManagerPrograms } from "../services/manager.service";
 
 const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
   const [t] = useTranslation();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const getManagerPrograms: GetItemsFuncType = useCallback(
     filters => fetchManagerPrograms({ ...filters, ownerId }),
     [ownerId]
@@ -42,7 +39,6 @@ const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
           startLabel={t("filters.date-range.program-start")}
         />
       )}
-      isAuthenticated={isAuthenticated}
     />
   );
 };

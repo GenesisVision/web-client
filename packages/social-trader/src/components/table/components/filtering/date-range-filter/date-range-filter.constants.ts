@@ -2,6 +2,9 @@ export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
 export const SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
+
+export const DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
+export const DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
 

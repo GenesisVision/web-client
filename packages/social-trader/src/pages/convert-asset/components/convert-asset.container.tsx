@@ -1,4 +1,4 @@
-import AssetTitle from "components/assets/asset-fields/asset-title";
+import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import { IConvertAssetSettingsFormOwnProps } from "pages/convert-asset/components/convert-asset-settings";
 import React from "react";
 
@@ -13,7 +13,7 @@ const _ConvertAssetContainer: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <AssetTitle>{title}</AssetTitle>
+      <AssetTitleBlock>{title}</AssetTitleBlock>
       <ConvertAssetSettingsSection
         currency={currency}
         fromTo={fromTo}

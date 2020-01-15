@@ -6,7 +6,7 @@ import VerificationStatus, {
 } from "components/verification-status/verification-status";
 import React from "react";
 
-const _SettingsBlock: React.FC<Props> = ({
+const SettingsBlock: React.FC<Props> = ({
   withBorder = true,
   blockNumber,
   label,
@@ -54,5 +54,4 @@ interface OwnProps extends IStatusProps {
 }
 interface Props extends OwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
-const SettingsBlock = React.memo(_SettingsBlock);
 export default SettingsBlock;

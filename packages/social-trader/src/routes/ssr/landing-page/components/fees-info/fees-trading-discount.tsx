@@ -92,6 +92,12 @@ const _FeesTradingDiscount: React.FC<{
             have an insufficient amount of GVT stored in the wallet, this
             function will no longer work and the fee will become Regular.
           </li>
+          <li className="fees-info__note-item">
+            For managers the commission for trading will be debited from the
+            manager’s GVT wallet. At the end of the reporting period, the
+            manager will receive a refund of the commission at the expense of
+            increasing the share of own funds in management.
+          </li>
         </ul>
       </div>
     </>

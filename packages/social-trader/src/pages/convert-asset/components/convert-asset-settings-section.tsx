@@ -1,4 +1,4 @@
-import AssetContent from "components/assets/asset-fields/asset-content";
+import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
 import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useState } from "react";
@@ -38,7 +38,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   });
 
   return (
-    <AssetContent>
+    <AssetContentBlock>
       <ConvertAssetSettings
         followInfo={followInfo}
         currency={currency}
@@ -49,7 +49,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
         onSubmit={handleCreate}
       />
       {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
-    </AssetContent>
+    </AssetContentBlock>
   );
 };
 

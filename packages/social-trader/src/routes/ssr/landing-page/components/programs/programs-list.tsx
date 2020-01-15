@@ -17,11 +17,7 @@ const _ProgramsList: React.FC<Props> = ({ className, programs }) => {
     <ul className={classNames("programs-list", className)}>
       {programs.map((program, index) => (
         <li className="programs-list__item" key={program.id}>
-          <ProgramCard
-            key={program.id}
-            title={program.title}
-            program={program}
-          />
+          <ProgramCard key={program.id} program={program} />
           {index > 1 && <ProgramShort program={program} />}
         </li>
       ))}

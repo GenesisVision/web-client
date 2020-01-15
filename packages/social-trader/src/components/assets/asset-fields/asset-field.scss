@@ -95,3 +95,12 @@
     }
   }
 }
+.asset-tabs {
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0;
+  }
+
+  @include adaptive-margin(bottom, $padding-small);
+}
