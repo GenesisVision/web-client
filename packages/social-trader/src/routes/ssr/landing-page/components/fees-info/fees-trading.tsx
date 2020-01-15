@@ -1,7 +1,16 @@
 import "./fees-info.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 import FeesTradingDiscount from "routes/ssr/landing-page/components/fees-info/fees-trading-discount";
+import CHFlag from "routes/ssr/landing-page/images/flags/ch.png";
+import ESFlag from "routes/ssr/landing-page/images/flags/es.png";
+import FRFlag from "routes/ssr/landing-page/images/flags/fr.png";
+import GBFlag from "routes/ssr/landing-page/images/flags/gb.png";
+import GEFlag from "routes/ssr/landing-page/images/flags/ge.png";
+import HKFlag from "routes/ssr/landing-page/images/flags/hk.png";
+import JPFlag from "routes/ssr/landing-page/images/flags/jp.png";
+import NLFlag from "routes/ssr/landing-page/images/flags/nl.png";
 
 interface Props {
   className?: string;
@@ -190,7 +199,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇬🇧 UK
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={GBFlag}
+                    alt="UK flag"
+                  />{" "}
+                  UK
                 </td>
                 <td className="fees-table__cell" rowSpan={6}>
                   order volume (%)
@@ -205,7 +219,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇩🇪 Germane
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={GEFlag}
+                    alt="Germane flag"
+                  />{" "}
+                  Germane
                 </td>
                 <td className="fees-table__cell">1.00</td>
                 <td className="fees-table__cell">0.70</td>
@@ -217,7 +236,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇨🇭 Switzerland
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={CHFlag}
+                    alt="Switzerland flag"
+                  />{" "}
+                  Switzerland
                 </td>
                 <td className="fees-table__cell">0.60</td>
                 <td className="fees-table__cell">0.42</td>
@@ -229,7 +253,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇫🇷 France
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={FRFlag}
+                    alt="France flag"
+                  />{" "}
+                  France
                 </td>
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
@@ -241,7 +270,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇪🇸 Spain
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={ESFlag}
+                    alt="Spain flag"
+                  />{" "}
+                  Spain
                 </td>
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
@@ -252,7 +286,15 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 <td className="fees-table__cell">0.36</td>
               </tr>
               <tr className="fees-table__row">
-                <td className="fees-table__cell"> 🇳🇱 Netherlands</td>
+                <td className="fees-table__cell">
+                  {" "}
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={NLFlag}
+                    alt="Netherlands flag"
+                  />{" "}
+                  Netherlands
+                </td>
                 <td className="fees-table__cell">0.40</td>
                 <td className="fees-table__cell">0.28</td>
                 <td className="fees-table__cell">0.26</td>
@@ -285,7 +327,12 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
               </tr>
               <tr className="fees-table__row">
                 <td className="fees-table__cell fees-table__cell--without-border">
-                  🇭🇰 Hong Kong
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={HKFlag}
+                    alt="Hong Kong flag"
+                  />{" "}
+                  Hong Kong
                 </td>
                 <td className="fees-table__cell" rowSpan={6}>
                   order volume (%)
@@ -299,7 +346,14 @@ const _FeesTrading: React.FC<Props> = ({ className }) => (
                 <td className="fees-table__cell">0.54</td>
               </tr>
               <tr className="fees-table__row">
-                <td className="fees-table__cell">🇯🇵 Japan</td>
+                <td className="fees-table__cell">
+                  <ImageBaseElement
+                    className="fees-table__flag-img"
+                    src={JPFlag}
+                    alt="Japan flag"
+                  />{" "}
+                  Japan
+                </td>
                 <td className="fees-table__cell">0.80</td>
                 <td className="fees-table__cell">0.56</td>
                 <td className="fees-table__cell">0.52</td>
