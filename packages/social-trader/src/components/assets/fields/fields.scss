@@ -13,6 +13,7 @@
 
   &__text {
     @include font-size($font-size-small);
+    @include adaptive-margin(bottom, $padding-xsmall);
     color: $label-color;
     letter-spacing: 0.4px;
     width: 100%;

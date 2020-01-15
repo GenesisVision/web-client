@@ -9,6 +9,8 @@ interface IPagingProps {
   updatePaging(opts: { currentPage: number }): void;
 }
 
+export const PAGING_FILTER_NAME = "page";
+
 const _Paging: React.FC<IPagingProps> = ({ paging, hidden, updatePaging }) => (
   <Pager
     total={paging.totalPages || 0}

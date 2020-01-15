@@ -64,7 +64,7 @@ const _TableColumns: React.FC<IColumnsProps> = ({
       }
       return updateSorting && updateSorting(name + SORTING_DIRECTION.ASC);
     },
-    [sorting]
+    [sorting, updateSorting]
   );
   return (
     <>

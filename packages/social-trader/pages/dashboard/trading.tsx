@@ -10,6 +10,6 @@ const Page: NextPage = () => {
 };
 
 export default compose(
-  withPrivateRoute,
-  withDefaultLayout
+  withDefaultLayout,
+  withPrivateRoute
 )(Page);

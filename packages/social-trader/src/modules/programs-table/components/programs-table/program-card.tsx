@@ -25,15 +25,14 @@ import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {
   program: ProgramDetailsListItem;
-  title: string;
 }
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-const _ProgramCard: React.FC<Props> = ({ program, title }) => {
+const _ProgramCard: React.FC<Props> = ({ program }) => {
   const { t } = useTranslation();
-  const { linkCreator } = useToLink();
+  const { linkCreator, contextTitle } = useToLink();
   const linkProps = linkCreator(
     composeProgramDetailsUrl(program.url),
     PROGRAM_DETAILS_FOLDER_ROUTE
@@ -67,7 +66,7 @@ const _ProgramCard: React.FC<Props> = ({ program, title }) => {
       title={program.title}
       subTitle={program.owner.username}
       logo={program.logo}
-      managerUrl={managerToPathCreator(program.owner.url, title)}
+      managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}

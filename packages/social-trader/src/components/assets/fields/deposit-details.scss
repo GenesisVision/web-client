@@ -9,13 +9,14 @@
     }
 
     &-value {
-      font-size: $font-size-h2;
+      @include font-size($font-size-h2);
       letter-spacing: 0.4px;
     }
   }
 
   &__available-amount {
-    font-size: $font-size-common;
+    @include font-size($font-size-common);
+    white-space: nowrap;
     margin-top: 4px;
     letter-spacing: 0.4px;
 
