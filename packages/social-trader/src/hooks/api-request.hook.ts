@@ -23,11 +23,14 @@ export type TUseApiRequestProps<T = any> = {
   fetchOnMount?: boolean;
 };
 
-type TUseApiRequestOutput<T = any> = {
+type TUseApiRequestOutput<T> = {
   errorMessage: TErrorMessage;
   isPending: boolean;
   data: T | TNullValue;
-  sendRequest: (props?: any, setSubmitting?: SetSubmittingType) => TRequest<T>;
+  sendRequest: (
+    props?: any,
+    setSubmitting?: SetSubmittingType
+  ) => TRequest<any>;
   cleanErrorMessage: () => void;
 };
 
