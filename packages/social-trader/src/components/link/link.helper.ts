@@ -54,7 +54,7 @@ export const useToLink = (): {
     title: string = ""
   ) => {
     const state = title || contextTitle;
-    return state ? createToUrl(as, pathname, title || contextTitle) : as;
+    return state ? createToUrl(as, pathname, state) : as;
   };
   return { contextTitle, linkCreator };
 };

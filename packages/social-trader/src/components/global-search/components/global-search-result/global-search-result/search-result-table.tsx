@@ -15,7 +15,7 @@ const SearchResultTable: React.FC<Props> = ({ data, children }) => {
     </>
   );
 };
-export default React.memo(SearchResultTable);
+export default SearchResultTable;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   data: boolean;

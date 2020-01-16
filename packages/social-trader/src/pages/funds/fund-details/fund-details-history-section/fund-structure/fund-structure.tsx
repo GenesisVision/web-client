@@ -7,6 +7,7 @@ import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { FundAssetInfo } from "gv-api-web";
 import { FUND_STRUCTURE_COLUMNS } from "pages/funds/fund-details/fund-details.constants";
 import React from "react";
@@ -30,9 +31,9 @@ const _FundStructure: React.FC = () => {
           <Tooltip
             horizontal={HORIZONTAL_POPOVER_POS.CENTER}
             render={() => (
-              <div className="tooltip__content">
+              <TooltipContent>
                 {t(`fund-details-page.tooltip.${column.name}`)}
-              </div>
+              </TooltipContent>
             )}
           >
             <span>

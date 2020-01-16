@@ -15,8 +15,5 @@
   }
   &__tabs {
     padding: 0 $padding-xsmall;
-    .gv-tab {
-      @include font-size($font-size-paragraph);
-    }
   }
 }

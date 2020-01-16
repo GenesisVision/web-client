@@ -1,4 +1,5 @@
-import AssetTitle from "components/assets/asset-fields/asset-title";
+import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
+import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -8,10 +9,10 @@ const _CreateFundContainer: React.FC = () => {
   const [t] = useTranslation();
   return (
     <>
-      <AssetTitle>{t("create-fund-page.title")}</AssetTitle>
-      <div className="create-asset__content">
+      <AssetTitleBlock>{t("create-fund-page.title")}</AssetTitleBlock>
+      <AssetContentBlock>
         <CreateFundSettingsSection />
-      </div>
+      </AssetContentBlock>
     </>
   );
 };

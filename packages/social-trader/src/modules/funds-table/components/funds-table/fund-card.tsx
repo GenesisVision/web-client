@@ -25,8 +25,8 @@ import { managerToPathCreator } from "routes/manager.routes";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
-  const { linkCreator } = useToLink();
+const _FundCard: React.FC<Props> = ({ fund }) => {
+  const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
@@ -58,7 +58,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
       logo={fund.logo}
       color={fund.color}
       detailsUrl={link}
-      managerUrl={managerToPathCreator(fund.owner.url, title)}
+      managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >
       <TableCardTable wrap>
@@ -95,6 +95,7 @@ const _FundCard: React.FC<Props> = ({ fund, title = "" }) => {
         <TableCardTableRow>
           {fund.topFundAssets && (
             <FundAssetContainer
+              noWrap
               assets={fund.topFundAssets as FundAssetType[]}
               type={FUND_ASSET_TYPE.SHORT}
               size={3}
@@ -112,5 +113,4 @@ export default FundCard;
 
 interface Props {
   fund: FundDetailsListItem;
-  title?: string;
 }

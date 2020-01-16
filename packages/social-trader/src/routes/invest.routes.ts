@@ -10,7 +10,7 @@ export const EXPLORE_TAB_NAME = "";
 
 export const FOLLOW = "follow";
 export const FOLLOWS = `${FOLLOW}s`;
-export const GV_FOLLOW_ROUTE = `${INVEST_ROUTE}/${FOLLOWS}`;
+export const GV_FOLLOW_ROUTE = `${INVEST_ROUTE}/${FOLLOW}`;
 export const FOLLOW_DETAILS_SLUG_ROUTE = `${GV_FOLLOW_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
 export const FOLLOW_DETAILS_FOLDER_ROUTE = `${GV_FOLLOW_ROUTE}/[id]`;
 export const FOLLOW_SETTINGS_FOLDER_ROUTE = `${GV_FOLLOW_ROUTE}/[id]/${SETTINGS}`;

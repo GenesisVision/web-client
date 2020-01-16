@@ -5,7 +5,6 @@
   margin-top: $padding-small/2;
   display: inline-flex;
   position: relative;
-  font-size: 1rem;
 
   &::before {
     left: 0;
@@ -58,10 +57,11 @@
   }
 
   &__error {
+    width: 100%;
     position: absolute;
     left: 0;
     top: 100%;
-    font-size: $font-size-xsmall;
+    @include font-size($font-size-xsmall);
     color: $negative-color;
   }
 
@@ -92,7 +92,7 @@
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
       -webkit-text-fill-color: $text-light-color;
-      -webkit-box-shadow: 0 0 0 30px $secondary-background-color inset;
+      -webkit-box-shadow: 0 0 0 30px $panel-background-color inset;
       caret-color: $text-light-color;
     }
     &::-webkit-outer-spin-button,
@@ -138,6 +138,20 @@
     display: inline-flex;
     flex-direction: column;
     min-width: 0;
-    margin: 0 $padding-xxsmall $padding-xsmall 0;
+    @include adaptive-margin(right, $padding-xxsmall);
+    @include adaptive-margin(bottom, $padding-xsmall);
+
+    &--wide {
+      margin-right: 0;
+      margin-left: 0;
+      width: 100%;
+    }
+
+    &--no-margin {
+      &,
+      & .gv-text-field {
+        margin: 0;
+      }
+    }
   }
 }

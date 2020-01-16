@@ -1,4 +1,3 @@
-import "components/deposit-details/deposit-details.scss";
 import "./attach-account-settings.scss";
 
 import AssetField, {
@@ -58,6 +57,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         <AssetFields>
           <AssetField>
             <GVFormikField
+              wide
               onChange={brokerNameChangeHandle}
               name={ATTACH_ACCOUNT_FIELDS.brokerName}
               component={GVTextField}
@@ -75,6 +75,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           {broker && broker.accountTypes.length > 1 && (
             <AssetField>
               <GVFormikField
+                wide
                 name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
                 component={GVTextField}
                 label={t("attach-account-page.settings.fields.account-type")}
@@ -98,6 +99,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         <AssetFields>
           <AssetField wide>
             <GVFormikField
+              wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.key}
@@ -108,6 +110,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           </AssetField>
           <AssetField wide>
             <GVFormikField
+              wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.secret}

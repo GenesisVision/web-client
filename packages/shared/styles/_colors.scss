@@ -79,3 +79,12 @@ $landing-color-icon: #1d1a3d;
 $landing-text: #c6c6c6;
 $primary-color-hover: #17c9bc;
 $landing-link-hover: #db2a7c;
+
+$popover-dark-background: #24323c;
+
+@mixin background-with-avatar-level($color) {
+  background: $color;
+  .program-avatar__level {
+    background: $color;
+  }
+}

@@ -1,6 +1,5 @@
 import "./tooltip.scss";
 
-import classNames from "classnames";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -9,7 +8,7 @@ import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 
-const _Tooltip: React.FC<Props> = ({
+const Tooltip: React.FC<Props> = ({
   render,
   vertical = VERTICAL_POPOVER_POS.TOP,
   horizontal = HORIZONTAL_POPOVER_POS.CENTER,
@@ -38,7 +37,7 @@ const _Tooltip: React.FC<Props> = ({
         noAbsolute
         noPadding
         anchorEl={anchor}
-        className={classNames("tooltip__popover", className)}
+        className={className}
         vertical={vertical}
         horizontal={horizontal}
       >
@@ -56,5 +55,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const Tooltip = React.memo(_Tooltip);
 export default Tooltip;

@@ -3,30 +3,29 @@ import "modules/programs-table/components/programs-table/programs.scss";
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { FollowDetailsListItem } from "gv-api-web";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
+import { useCallback } from "react";
 
-import FollowCard from "./follow-card";
 import FollowTableHeaderCell from "./follow-table-header-cell";
-import FollowTableRowShort from "./follow-table-row-short";
 import FollowTableSortingValue from "./follow-table-sorting";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
 
+const FollowTableRowShort = dynamic(() => import("./follow-table-row-short"));
+const FollowCard = dynamic(() => import("./follow-card"));
+
 export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IFollowsTableProps extends ITableProps {
-  showRating?: boolean;
   data?: FollowDetailsListItem[];
-  isAuthenticated?: boolean;
   title: string;
-  redirectToLogin?: () => void;
 }
 
 const _FollowsTable: React.FC<IFollowsTableProps> = ({
   renderMappings,
   disableTitle,
   columns,
-  showRating,
   showSwitchView,
   data,
   sorting,
@@ -36,7 +35,6 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  isAuthenticated,
   title
 }) => {
   return (
@@ -55,33 +53,29 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
       columns={columns || FOLLOW_COLUMNS}
       items={data}
       renderFilters={renderFilters}
-      renderHeader={column => (
-        <FollowTableHeaderCell
-          condition={
-            !isAuthenticated ||
-            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-          }
-          column={column}
-        />
+      renderHeader={useCallback(
+        column => (
+          <FollowTableHeaderCell column={column} />
+        ),
+        []
       )}
-      renderSorting={column => (
-        <FollowTableSortingValue
-          condition={
-            !isAuthenticated ||
-            (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-          }
-          column={column}
-        />
+      renderSorting={useCallback(
+        column => (
+          <FollowTableSortingValue column={column} />
+        ),
+        []
       )}
-      renderBodyRow={(follow: FollowDetailsListItem) => (
-        <FollowTableRowShort
-          withDispatch
-          showRating={Boolean(showRating)}
-          follow={follow}
-        />
+      renderBodyRow={useCallback(
+        (follow: FollowDetailsListItem) => (
+          <FollowTableRowShort withDispatch follow={follow} />
+        ),
+        []
       )}
-      renderBodyCard={(follow: FollowDetailsListItem) => (
-        <FollowCard title={title} follow={follow} />
+      renderBodyCard={useCallback(
+        (follow: FollowDetailsListItem) => (
+          <FollowCard follow={follow} />
+        ),
+        []
       )}
     />
   );

@@ -102,6 +102,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogField>
           <InputAmountField
+            wide
             isAllow={allowPositiveValuesNumberFormat(
               CURRENCY_FRACTIONS(currency)
             )}
@@ -124,6 +125,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         </DialogField>
         <DialogButtons>
           <GVButton
+            wide
             onClick={handleNext}
             className="invest-form__submit-button"
             disabled={disableButton}

@@ -3,7 +3,7 @@ import "./details.block.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-const _DetailsBlock: React.FC<Props> = ({
+const DetailsBlock: React.FC<Props> = ({
   landscapeTablet,
   tablet,
   landscapePhone = true,
@@ -52,5 +52,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   horizontalPaddings?: boolean;
 }
 
-const DetailsBlock = React.memo(_DetailsBlock);
 export default DetailsBlock;

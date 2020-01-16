@@ -18,7 +18,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
     filtering,
     defaultFilters,
     paging,
-    isAuthenticated,
     showRating,
     title,
     disableTitle,
@@ -37,15 +36,7 @@ const FollowsTableModule: React.FC<Props> = React.memo(
         paging={paging}
         title={title}
         columns={columns || FOLLOW_COLUMNS}
-        renderHeader={column => (
-          <FollowTableHeaderCell
-            condition={
-              !isAuthenticated ||
-              (isAuthenticated && column.name !== FAVORITE_COLUMN_NAME)
-            }
-            column={column}
-          />
-        )}
+        renderHeader={column => <FollowTableHeaderCell column={column} />}
         renderBodyRow={(
           follow,
           updateRow: any //TODO fix updateRow
@@ -62,7 +53,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
 );
 
 interface Props extends ITableModuleProps {
-  isAuthenticated?: boolean;
   showRating?: boolean;
   title: string;
 }

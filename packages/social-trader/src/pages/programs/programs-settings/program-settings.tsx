@@ -13,11 +13,9 @@ import InvestmentFees from "modules/asset-settings/investment-fees";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
 
 import CancelChangeBroker from "./cancel-change-broker/cancel-change-broker";
 import ChangeBroker from "./change-broker/change-broker";
-import { ChangeBrokerFormValues } from "./change-broker/change-broker-form";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
@@ -115,13 +113,19 @@ const _ProgramSettings: React.FC<Props> = ({
         description={description.publicInfo.description}
         onSubmit={editProgram}
       />
-      <SignalingEdit
-        id={description.id}
-        isSignalProgram={isSignalProgram}
-        onApply={updateDescription}
-        signalSuccessFee={signalSuccessFee}
-        signalVolumeFee={signalVolumeFee}
-      />
+      {(description.ownerActions.canMakeSignalProviderFromProgram ||
+        isSignalProgram) && (
+        <SignalingEdit
+          canMakeSignal={
+            description.ownerActions.canMakeSignalProviderFromProgram
+          }
+          id={description.id}
+          isSignalProgram={isSignalProgram}
+          onApply={updateDescription}
+          signalSuccessFee={signalSuccessFee}
+          signalVolumeFee={signalVolumeFee}
+        />
+      )}
       <CloseAssetBlock
         label={t(`asset-settings.close-${assetType.toLowerCase()}.title`)}
         asset={assetType}

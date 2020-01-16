@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import GVButton from "components/gv-button";
+import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
 
 const SelectItem: React.FC<Props> = React.memo(
@@ -12,13 +13,14 @@ const SelectItem: React.FC<Props> = React.memo(
       <GVButton
         variant="text"
         color="secondary"
+        noPadding
         className={classNames("select__option", className, {
           "select__option--selected": isSelected
         })}
         onClick={handleClick}
         name={name}
       >
-        {children}
+        <PopoverContentListItem>{children}</PopoverContentListItem>
       </GVButton>
     );
   }

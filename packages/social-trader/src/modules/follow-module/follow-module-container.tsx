@@ -1,8 +1,12 @@
 import Dialog from "components/dialog/dialog";
-import { BrokerTradeServerType, SignalSubscription } from "gv-api-web";
-import FollowPopupFormContainer from "modules/follow-module/follow-popup/follow-popup-form.container";
+import { BrokerTradeServerType } from "gv-api-web";
+import dynamic from "next/dynamic";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
+
+const FollowPopupFormContainer = dynamic(() =>
+  import("modules/follow-module/follow-popup/follow-popup-form.container")
+);
 
 const _FollowModuleContainer: React.FC<Props> = ({
   leverage,

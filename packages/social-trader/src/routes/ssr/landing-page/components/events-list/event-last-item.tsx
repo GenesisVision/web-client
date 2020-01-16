@@ -1,3 +1,4 @@
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 import { INVEST_ROUTE } from "routes/invest.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
@@ -6,7 +7,7 @@ import LogoIcon from "routes/ssr/landing-page/images/logos/logo.svg";
 const EventLastItem: React.FC = () => (
   <li className="events-list__item events-list__item--last">
     <div className="events-list__item-avatar">
-      <img
+      <ImageBaseElement
         className="events-list__item-image"
         src={LogoIcon}
         alt="Genesis Vision"

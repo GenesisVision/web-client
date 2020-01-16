@@ -9,10 +9,11 @@ $chip-small: 32px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
-  padding: 7px 13px;
+  @include adaptive-border-radius(8px);
+  @include vertical-paddings(7px);
+  @include horizontal-paddings(13px);
   box-sizing: border-box;
-  font-size: $font-size-common;
+  @include font-size($font-size-common);
   font-weight: 600;
   letter-spacing: 0.4px;
   background-color: $secondary-background-color;
@@ -23,9 +24,9 @@ $chip-small: 32px;
   }
 
   &--small {
-    width: $chip-small;
-    height: $chip-small;
-    font-size: $font-size-h3;
+    @include width($chip-small);
+    @include height($chip-small);
+    @include font-size($font-size-h3);
   }
 
   &--empty {

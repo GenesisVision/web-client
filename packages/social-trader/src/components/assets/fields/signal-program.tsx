@@ -11,6 +11,7 @@ const _SignalProgram: React.FC<Props> = ({ name }) => {
   return (
     <AssetField wide>
       <GVFormikField
+        wide
         type="checkbox"
         color="primary"
         name={name}

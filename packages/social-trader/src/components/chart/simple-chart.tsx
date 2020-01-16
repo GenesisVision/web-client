@@ -21,7 +21,7 @@ const _SimpleChart: React.FC<Props> = ({
   width = DEFAULT_WIDTH
 }) => {
   const length = data.length;
-
+  if (!length) return null;
   const minValue = min(data, point => point.value) || 0;
   const maxValue = max(data, point => point.value) || 0;
 

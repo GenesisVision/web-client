@@ -1,7 +1,7 @@
 import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
-import ProgramAbsoluteProfitChart from "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart";
+import dynamic from "next/dist/next-server/lib/dynamic";
 import { programAbsoluteProfitChartSelector } from "pages/programs/program-details/reducers/absolute-profit-chart.reducer";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -13,15 +13,29 @@ import { programBalanceChartSelector } from "../reducers/balance-chart.reducer";
 import { programStatusSelector } from "../reducers/description.reducer";
 import { programProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
-import ProgramBalanceChart from "./program-details-chart-section/program-balance-chart-section/program-balance-chart";
 import {
   useChartPeriod,
   useProgramChartStateValues
 } from "./program-details-chart-section/program-details.chart.helpers";
-import ProgramProfitChart from "./program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import ProgramDetailsStatisticsElements, {
   IProgramStatisticData
 } from "./program-details-statistics/program-details-statistics-elements";
+
+const ProgramBalanceChart = dynamic(() =>
+  import(
+    "./program-details-chart-section/program-balance-chart-section/program-balance-chart"
+  )
+);
+const ProgramAbsoluteProfitChart = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+  )
+);
+const ProgramProfitChart = dynamic(() =>
+  import(
+    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
+  )
+);
 
 const _ProgramDetailsStatisticSection: React.FC = () => {
   const status = useSelector(programStatusSelector);

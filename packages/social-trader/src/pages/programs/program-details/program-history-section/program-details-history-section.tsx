@@ -9,6 +9,7 @@ import {
 } from "components/table/components/table.types";
 import { CREATE_ASSET } from "constants/constants";
 import useTab from "hooks/tab.hook";
+import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +19,19 @@ import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { CurrencyEnum } from "utils/types";
 
-import ProgramFinancialStatistic from "./program-financial-statistic/program-financial-statistic";
-import ProgramOpenPositions from "./program-open-positions/program-open-positions";
-import ProgramPeriodHistory from "./program-period-history/program-period-history";
-import ProgramSubscriptions from "./program-subscriptions/program-subscriptions";
-import ProgramTrades from "./program-trades/program-trades";
+const ProgramFinancialStatistic = dynamic(() =>
+  import("./program-financial-statistic/program-financial-statistic")
+);
+const ProgramOpenPositions = dynamic(() =>
+  import("./program-open-positions/program-open-positions")
+);
+const ProgramPeriodHistory = dynamic(() =>
+  import("./program-period-history/program-period-history")
+);
+const ProgramSubscriptions = dynamic(() =>
+  import("./program-subscriptions/program-subscriptions")
+);
+const ProgramTrades = dynamic(() => import("./program-trades/program-trades"));
 
 const nullSelector = () => ({
   itemsData: { data: { total: 0 } }

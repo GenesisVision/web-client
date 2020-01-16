@@ -41,6 +41,12 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   children
 }) => {
   const { route } = useRouter();
+  const renderIconWithName = () => (
+    <>
+      <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
+      <span className="navigation__link">{children}</span>
+    </>
+  );
   return (
     (!!href && (
       <Link
@@ -49,13 +55,11 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
           "navigation__item--active": route.startsWith(normalizeLinkFrom(href))
         })}
       >
-        <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
-        <span className="navigation__link">{children}</span>
+        {renderIconWithName()}
       </Link>
     )) || (
       <div className="navigation__item" onClick={onClick}>
-        <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
-        <div className="navigation__link">{children}</div>
+        {renderIconWithName()}
       </div>
     )
   );

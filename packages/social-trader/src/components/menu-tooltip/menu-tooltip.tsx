@@ -11,7 +11,7 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 
-const _MenuTooltip: React.FC<Props> = ({
+const MenuTooltip: React.FC<Props> = ({
   render,
   className,
   children,
@@ -86,5 +86,4 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const MenuTooltip = React.memo(_MenuTooltip);
 export default MenuTooltip;

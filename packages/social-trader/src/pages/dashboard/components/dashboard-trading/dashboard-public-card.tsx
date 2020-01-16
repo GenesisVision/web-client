@@ -14,7 +14,7 @@ import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
 } from "constants/constants";
-import { AssetType, DashboardTradingAsset } from "gv-api-web";
+import { AssetTypeExt, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
@@ -47,7 +47,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       asset.assetTypeExt,
       asset.publicInfo && asset.publicInfo.url
     ),
-    getAssetFolderRoute(asset.assetType)
+    getAssetFolderRoute(asset.assetTypeExt)
   );
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
@@ -71,7 +71,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       id={asset.id}
       url={asset.publicInfo && asset.publicInfo.url}
       showClosePeriod={asset.assetType === ASSET.PROGRAM}
-      showTerminal={asset.assetType !== ASSET.FUND}
+      showTerminal={asset.actions.hasTerminal}
     />
   );
   const { programDetails, fundDetails } = asset.publicInfo;
@@ -144,6 +144,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       {topFundAssets && (
         <TableCardTableRow>
           <FundAssetContainer
+            noWrap
             assets={topFundAssets as FundAssetType[]}
             type={FUND_ASSET_TYPE.SHORT}
             size={3}
@@ -169,9 +170,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
 };
 
-export const getAssetFolderRoute = (assetType: AssetType) => {
+export const getAssetFolderRoute = (assetType: AssetTypeExt) => {
   switch (assetType) {
-    case "Follow":
+    case "SignalTradingAccount":
+    case "ExternalSignalTradingAccount":
+    case "SignalProgram":
       return FOLLOW_DETAILS_FOLDER_ROUTE;
     case "Fund":
       return FUND_DETAILS_FOLDER_ROUTE;

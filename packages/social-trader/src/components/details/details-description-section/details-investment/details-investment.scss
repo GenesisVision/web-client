@@ -13,22 +13,6 @@
     }
   }
 
-  &__short-statistic {
-    .gv-switch-wrapper {
-      margin: 0;
-      .tooltip__label {
-        letter-spacing: 0.6px;
-        white-space: nowrap;
-        font-weight: 600;
-        color: $text-light-color;
-        font-size: $font-size-common-mobile;
-        @include media-breakpoint-landscape-phone() {
-          font-size: $font-size-paragraph;
-        }
-      }
-    }
-  }
-
   &__withdraw-notice {
     color: $short-statistic-notice-color;
     line-height: $font-size-h3-mobile;

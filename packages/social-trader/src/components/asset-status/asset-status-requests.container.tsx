@@ -1,6 +1,7 @@
 import "./asset-status.scss";
 
 import AssetStatusRequests from "components/asset-status/asset-status-requests";
+import { PopoverContentListItem } from "components/popover/popover-content";
 import { AssetInvestmentRequest } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { getInRequestsLoadersData } from "pages/dashboard/dashboard.loaders-data";
@@ -28,7 +29,9 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
 
   if (requests && requests.length === 0)
     return (
-      <div>{t("program-details-page.description.requests-completed")}</div>
+      <PopoverContentListItem>
+        {t("program-details-page.description.requests-completed")}
+      </PopoverContentListItem>
     );
 
   return (

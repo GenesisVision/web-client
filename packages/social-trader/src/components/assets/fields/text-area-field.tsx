@@ -10,6 +10,7 @@ const _TextAreaField: React.FC<Props> = ({ name, value, label, caption }) => {
   return (
     <AssetField wide>
       <AssetFormField
+        wide
         className="text-area-field"
         value={value}
         type="textarea"

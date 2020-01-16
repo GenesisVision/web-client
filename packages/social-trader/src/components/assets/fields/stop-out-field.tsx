@@ -12,6 +12,7 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
   return (
     <AssetField>
       <AssetFormField
+        wide
         name={name}
         label={t("create-program-page.settings.fields.stop-out-level")}
         adornment="%"

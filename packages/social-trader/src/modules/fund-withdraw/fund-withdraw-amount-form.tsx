@@ -97,7 +97,7 @@ const _FundWithdrawAmountForm: React.FC<
         exitFee={exitFee}
       />
       <DialogButtons>
-        <GVButton type="submit" id="fundWithdrawAmountFormSubmit">
+        <GVButton wide type="submit" id="fundWithdrawAmountFormSubmit">
           {t("buttons.next")}
         </GVButton>
       </DialogButtons>

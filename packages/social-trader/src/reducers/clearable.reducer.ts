@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { ActionType } from "utils/types";
 
-const LOCATION_CHANGE = "LOCATION_CHANGE"; //TODO
+export const LOCATION_CHANGE = "LOCATION_CHANGE";
 
 const clearableReducer = <S = {}>(
   reducer: Reducer<any, ActionType>,

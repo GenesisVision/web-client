@@ -5,11 +5,10 @@ import { TDashboardRecommendations } from "pages/dashboard/dashboard.types";
 import React from "react";
 
 const _DashboardRecommendations: React.FC<Props> = ({ data }) => {
-  const title = "";
   return (
     <DashboardHorizontalList>
       {data.map(asset => (
-        <FollowCard withFollowButton title={title} follow={asset} />
+        <FollowCard withFollowButton follow={asset} />
       ))}
     </DashboardHorizontalList>
   );

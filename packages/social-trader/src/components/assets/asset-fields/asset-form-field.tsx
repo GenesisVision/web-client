@@ -11,6 +11,7 @@ import * as React from "react";
 export const _AssetFormField: React.FC<
   React.HTMLAttributes<HTMLDivElement> & Props
 > = ({
+  wide,
   isAllowed,
   max = 500,
   value,
@@ -29,6 +30,7 @@ export const _AssetFormField: React.FC<
   return (
     <div className={classNames("asset-form-field", className)}>
       <GVFormikField
+        wide={wide}
         isAllowed={isAllowed}
         adornment={adornment}
         type={type}
@@ -67,6 +69,7 @@ export const _AssetFormField: React.FC<
 };
 
 interface Props {
+  wide?: boolean;
   isAllowed?: (values: TextInputValues) => boolean;
   max?: number;
   value?: string | null;

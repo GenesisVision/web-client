@@ -1,6 +1,7 @@
 import "./tab-controls.scss";
 
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import React from "react";
 
 export type TTabsItem = {
@@ -41,7 +42,7 @@ const _TabControls: React.FC<Props> = ({
           >
             {tab.text && tab.text}
             {tab.image && (
-              <img
+              <ImageBaseElement
                 className="tab-controls__item-img"
                 src={tab.image.link}
                 alt={tab.image.title}

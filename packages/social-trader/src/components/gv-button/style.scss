@@ -20,25 +20,31 @@
   [stroke] {
     transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &--wide {
+    width: 100%;
+  }
+
   &--large {
     font-weight: 600;
-    font-size: $font-size-common;
-    min-height: 50px;
+    @include font-size($font-size-common);
+    @include height(50px);
+    @include horizontal-paddings($padding-small);
+    @include vertical-paddings($padding-xxsmall);
   }
 
   &--big {
     align-self: flex-end;
-    font-size: $font-size-paragraph-mobile;
+    @include font-size($font-size-paragraph);
     letter-spacing: 0.3px;
     font-weight: 600;
     box-sizing: border-box;
-    width: $btn-width-mobile;
-    height: $btn-height-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      width: $btn-width;
-      height: $btn-height;
-    }
+    @include width($btn-width);
+    @include height($btn-height);
   }
 
   &--small {

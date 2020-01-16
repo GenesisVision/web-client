@@ -20,7 +20,7 @@ const _StopOutLevel: React.FC<Props> = ({
     label={t("create-program-page.settings.fields.stop-out-level")}
   >
     <form id="edit-form" onSubmit={handleSubmit}>
-      <div className="program-settings__block-wrapper create-program-settings__row">
+      <div className="program-settings__block-wrapper">
         <StopOutField name={FIELDS.stopOutLevel} />
       </div>
       <GVButton

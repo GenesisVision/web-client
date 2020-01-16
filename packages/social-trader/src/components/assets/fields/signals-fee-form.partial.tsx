@@ -30,6 +30,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
       <AssetRow>
         <AssetField>
           <AssetFormField
+            wide
             disabled={isSignalProgram}
             name={volumeFeeFieldName}
             label={t("create-program-page.settings.fields.signal-volume-fee")}
@@ -46,6 +47,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
         </AssetField>
         <AssetField>
           <AssetFormField
+            wide
             disabled={isSignalProgram}
             name={successFeeFieldName}
             label={t("create-program-page.settings.fields.signal-success-fee")}

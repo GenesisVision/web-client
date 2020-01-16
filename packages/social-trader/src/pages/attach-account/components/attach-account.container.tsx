@@ -1,3 +1,5 @@
+import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
+import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import { Push } from "components/link/link";
 import { Broker } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
@@ -5,7 +7,7 @@ import {
   attachAccount,
   fetchExchanges
 } from "pages/attach-account/services/attach-account.service";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { SetSubmittingType } from "utils/types";
@@ -35,17 +37,15 @@ const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
   );
   return (
     <>
-      <div className="create-asset__header">
-        <h1>{t("attach-account-page.title")}</h1>
-      </div>
-      <div className="create-asset__content">
+      <AssetTitleBlock>{t("attach-account-page.title")}</AssetTitleBlock>
+      <AssetContentBlock>
         <AttachAccountSettings
           requestBrokerName={requestBrokerName}
           onSubmit={handleSubmit}
           data={exchanges!}
           loaderData={[]}
         />
-      </div>
+      </AssetContentBlock>
     </>
   );
 };

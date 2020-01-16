@@ -1,13 +1,17 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import withLoader from "decorators/with-loader";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-const _ProgramTableSortingValue: React.FC<
-  { column: SortingColumn } & WithTranslation
-> = ({ t, column }) => t(`programs-page.programs-header.${column.name}`);
+const _ProgramTableSortingValue: React.FC<{ column: SortingColumn }> = ({
+  column
+}) => {
+  const { t } = useTranslation();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  if (!isAuthenticated && column.name === "favorite") return null;
+  return t(`programs-page.programs-header.${column.name}`);
+};
 
-const ProgramTableSortingValue = withLoader(
-  translate()(React.memo(_ProgramTableSortingValue))
-);
+const ProgramTableSortingValue = React.memo(_ProgramTableSortingValue);
 export default ProgramTableSortingValue;

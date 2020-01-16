@@ -31,15 +31,16 @@ const _GeneralNotification: React.FC<Props> = ({
   const handleSwitch = useCallback(() => sendRequest(), [sendRequest]);
   return (
     <span className="notification-setting">
-      <GVSwitch
-        touched={false}
-        className="notification-setting__switch"
-        name={name}
-        value={!!setting}
-        disabled={isPending}
-        color="primary"
-        onChange={handleSwitch}
-      />
+      <div className="notification-setting__switch-wrapper">
+        <GVSwitch
+          touched={false}
+          name={name}
+          value={!!setting}
+          disabled={isPending}
+          color="primary"
+          onChange={handleSwitch}
+        />
+      </div>
       <span className="notification-setting__label">{label}</span>
     </span>
   );

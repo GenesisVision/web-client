@@ -1,16 +1,19 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
 
 $font-size: 13px;
 $line-height: 1.69;
+$ring-icon-size: 32px;
+$avatar-size: 32px;
 
 .notifications {
   width: 100%;
 
   &__group {
     .notification__content {
-      margin-bottom: 30px;
+      @include adaptive-margin(bottom, $padding-small);
       border-bottom: 1px solid $border-color;
     }
 
@@ -24,17 +27,17 @@ $line-height: 1.69;
     }
   }
 
-  &__count,
   &__link {
     margin: 0 auto;
   }
 
   &__title {
     letter-spacing: 1px;
-    margin: 0 0 30px 58px;
+    @include adaptive-margin(right, $padding-small);
+    @include adaptive-margin(bottom, $padding-big);
     color: $text-dark-color;
     font-weight: 600;
-    font-size: 11px;
+    @include font-size($font-size-xsmall);
   }
 
   &__link {
@@ -44,9 +47,9 @@ $line-height: 1.69;
   }
 
   &__ring {
-    height: 32px;
-    width: 32px;
-    margin-right: 25px;
+    @include height($ring-icon-size);
+    @include width($ring-icon-size);
+    @include adaptive-margin(right, $padding-xxsmall);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,23 +60,34 @@ $line-height: 1.69;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 32px;
-    padding: 20px 20px 0 20px;
-    @include media-breakpoint-landscape-phone {
-      padding: 32px 25px 0 25px;
+    @include adaptive-margin(bottom, $padding-small);
+    @include horizontal-paddings($padding-xsmall);
+    @include adaptive-padding(top, $padding-small);
+  }
+
+  &__count {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
+  &__header-title {
+    @include font-size($font-size-h4);
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
+  &__clear {
+    & button {
+      @include font-size($font-size-h4);
     }
+    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__content {
-    padding: 0 20px 20px 20px;
-    @include media-breakpoint-landscape-phone {
-      padding: 0 25px 32px 25px;
-    }
+    @include horizontal-paddings($padding-xsmall);
+    @include adaptive-padding(bottom, $padding-small);
   }
 }
 
 .notification {
-  $avatar-size: 32px;
   display: flex;
   flex-direction: row;
 
@@ -84,15 +98,15 @@ $line-height: 1.69;
   }
 
   &__description {
-    margin-bottom: 20px;
-    font-size: $font-size;
+    @include adaptive-margin(bottom, $padding-xsmall);
+    @include font-size($font-size);
     line-height: $line-height;
     letter-spacing: 0.2px;
   }
   &__date {
-    font-size: $font-size;
+    @include font-size($font-size);
     line-height: $line-height;
-    margin-bottom: 30px;
+    @include adaptive-margin(bottom, $padding-xsmall);
     color: $text-dark-color;
     letter-spacing: 0.4px;
   }
@@ -102,7 +116,7 @@ $line-height: 1.69;
       &:after {
         content: "\25CF";
         color: $negative-color;
-        margin-left: 10px;
+        @include adaptive-margin(left, $padding-xxsmall);
       }
     }
   }
@@ -113,16 +127,15 @@ $line-height: 1.69;
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-    margin-right: 25px;
-    margin-top: ($font-size * $line-height - $font-size) / 2;
-    height: $avatar-size;
-    width: $avatar-size;
+    @include adaptive-margin(right, $padding-xsmall);
+    @include adaptive-margin(top, ($font-size * $line-height - $font-size) / 2);
+
+    @include height($avatar-size);
+    @include width($avatar-size);
     flex-shrink: 0;
   }
 
   &__icon-logo {
-    max-height: $avatar-size;
-    max-width: $avatar-size;
     margin: auto;
   }
 

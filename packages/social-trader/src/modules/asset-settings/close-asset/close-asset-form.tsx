@@ -12,6 +12,7 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { twoFactorValidator } from "utils/validators/validators";
 import { object } from "yup";
+import { DialogField } from "components/dialog/dialog-field";
 
 const _CloseAssetForm: React.FC<
   InjectedFormikProps<FormProps, ICloseAssetFormValues>
@@ -32,17 +33,22 @@ const _CloseAssetForm: React.FC<
       subtitle={assetName}
     />
     <DialogBottom>
-      {t(
-        `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
-      )}
+      <DialogField>
+        {t(
+          `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+        )}
+      </DialogField>
       {twoFactorEnabled && (
-        <GVFormikField
-          type="tel"
-          name={FIELDS.twoFactorCode}
-          label={t("wallet-withdraw.two-factor-code-label")}
-          autoComplete="off"
-          component={GVTextField}
-        />
+        <DialogField>
+          <GVFormikField
+            wide
+            type="tel"
+            name={FIELDS.twoFactorCode}
+            label={t("wallet-withdraw.two-factor-code-label")}
+            autoComplete="off"
+            component={GVTextField}
+          />
+        </DialogField>
       )}
       <DialogButtons>
         <GVButton type="submit" disabled={isSubmitting}>

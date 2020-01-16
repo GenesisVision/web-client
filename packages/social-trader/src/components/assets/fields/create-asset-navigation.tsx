@@ -6,16 +6,14 @@ import { useTranslation } from "react-i18next";
 const _CreateAssetNavigation: React.FC<Props> = ({ asset, isSubmitting }) => {
   const [t] = useTranslation();
   return (
-    <div className="create-program-settings__navigation">
-      <GVButton
-        title={t(`buttons.create-${asset.toLowerCase()}`)}
-        color="primary"
-        type="submit"
-        disabled={isSubmitting}
-      >
-        {t(`buttons.create-${asset.toLowerCase()}`)}
-      </GVButton>
-    </div>
+    <GVButton
+      title={t(`buttons.create-${asset.toLowerCase()}`)}
+      color="primary"
+      type="submit"
+      disabled={isSubmitting}
+    >
+      {t(`buttons.create-${asset.toLowerCase()}`)}
+    </GVButton>
   );
 };
 

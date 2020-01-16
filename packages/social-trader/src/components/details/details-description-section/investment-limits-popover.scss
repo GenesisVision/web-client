@@ -2,9 +2,6 @@
 @import "~shared/styles/_sizes";
 
 .popover-levels {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   background: #25434d;
   &__text-block {
     background: #273642;

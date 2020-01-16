@@ -1,3 +1,4 @@
+import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import InputAmountField from "components/input-amount-field/input-amount-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,6 +34,7 @@ const _InputDepositAmount: React.FC<Props> = ({
   return (
     <AssetField className="deposit-amount-field">
       <InputAmountField
+        wide
         disabled={disabled}
         autoFocus={false}
         name={name}

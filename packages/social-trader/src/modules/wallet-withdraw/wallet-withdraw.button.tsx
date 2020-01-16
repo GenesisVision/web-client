@@ -1,5 +1,6 @@
 import "./wallet-withdraw.button.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
@@ -51,7 +52,7 @@ const FullButton: React.FC<{
       onClick={onClick}
     >
       <>
-        <img
+        <ImageBaseElement
           className="wallet-withdraw-button__full-button-icon"
           src={ArrowIcon}
           alt={t("wallet-page.buttons.withdraw")}
@@ -70,7 +71,10 @@ const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
         onClick={onClick}
         size={CHIP_SIZE.SMALL}
         chipLabel={
-          <img src={ArrowIcon} alt={t("wallet-page.buttons.withdraw")} />
+          <ImageBaseElement
+            src={ArrowIcon}
+            alt={t("wallet-page.buttons.withdraw")}
+          />
         }
       />
     );

@@ -11,12 +11,12 @@ const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
   return (
     <AssetField>
       <GVFormikField
+        wide
         name={name}
         component={GVTextField}
         label={t("create-program-page.settings.fields.brokers-leverage")}
         InputComponent={Select}
         disableIfSingle
-        className="create-program-settings__leverage"
       >
         {accountLeverages.map(leverage => (
           <option value={leverage} key={leverage}>

@@ -7,35 +7,12 @@ const isFollow = (description: ProgramDescriptionDataType) => {
   return !!description.followDetails;
 };
 
-export const getSchema = (description: ProgramDescriptionDataType) => {
-  return isFollow(description)
-    ? getFollowSchema(description)
-    : getProgramSchema(description);
-};
-
-const getProgramSchema = (details: ProgramDescriptionDataType) => ({
+export const getSchema = (description: ProgramDescriptionDataType) => ({
   "@context": "https://schema.org",
-  "@type": "DepositAccount",
-  name: details.publicInfo.title,
-  description: details.publicInfo.description,
-  broker: details.brokerDetails.name,
+  "@type": isFollow ? "FinancialProduct" : "DepositAccount",
+  name: description.publicInfo.title,
+  description: description.publicInfo.description,
+  broker: description.brokerDetails.name,
   feesAndCommissionsSpecification: "", //TODO
-  logo: filesService.getFileUrl(details.publicInfo.logo),
-  aggregateRating: details.programDetails
-    ? {
-        "@type": "AggregateRating",
-        bestRating: 7, //TODO
-        ratingValue: details.programDetails.level
-      }
-    : undefined //TODO
-});
-
-const getFollowSchema = (details: ProgramDescriptionDataType) => ({
-  "@context": "https://schema.org",
-  "@type": "FinancialProduct",
-  name: details.publicInfo.title,
-  description: details.publicInfo.description,
-  broker: details.brokerDetails.name,
-  feesAndCommissionsSpecification: "", //TODO
-  logo: filesService.getFileUrl(details.publicInfo.logo)
+  logo: filesService.getFileUrl(description.publicInfo.logo)
 });

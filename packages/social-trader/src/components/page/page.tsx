@@ -1,5 +1,6 @@
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
+import { useRefLink } from "hooks/ref-link";
 import Head from "next/head";
 import * as React from "react";
 import { PropsWithChildren } from "react";
@@ -14,7 +15,7 @@ import {
   urlMeta
 } from "utils/seo";
 
-const _Page = ({
+const Page = ({
   title,
   description,
   children,
@@ -22,6 +23,7 @@ const _Page = ({
   previewImage,
   url
 }: PropsWithChildren<Props>) => {
+  useRefLink();
   const [t] = useTranslation();
   const pageTitle = t("app.title") + title;
   return (
@@ -53,5 +55,4 @@ interface Props {
   url?: string;
 }
 
-const Page = React.memo(_Page);
 export default Page;

@@ -1,3 +1,4 @@
+import { changeLocationAction } from "actions/location.actions";
 import platformActions from "actions/platform-actions";
 import AppLayout from "components/app-layout/app-layout";
 import ServerErrorPage from "components/server-error-page/server-error-page";
@@ -11,6 +12,8 @@ import { getCookie } from "utils/cookie";
 import { addRequestAnimationFrame } from "utils/helpers";
 import { NextPageWithReduxContext } from "utils/types";
 
+// LogRocket.init("skegn6/genesis-vision");
+
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
     info: PlatformInfo;
@@ -19,25 +22,29 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
     static async getInitialProps(ctx: NextPageWithReduxContext) {
       let componentProps = {};
       try {
+        await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
+          await dispatch(platformActions.fetchPlatformSettings());
+          await dispatch(changeLocationAction());
+        });
+      } catch (e) {
+        componentProps = { e };
+      }
+      try {
         componentProps =
           WrappedComponent.getInitialProps &&
           (await WrappedComponent.getInitialProps(ctx));
       } catch (ex) {
         componentProps = { ex };
       }
-      try {
-        await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
-          await dispatch(platformActions.fetchPlatformSettings());
-        });
-      } catch (e) {
-        componentProps = { e };
-      }
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
       }
-
-      addRequestAnimationFrame();
+      try {
+        addRequestAnimationFrame();
+      } catch (e) {
+        console.log(e);
+      }
 
       return {
         namespacesRequired: ["translation"],

@@ -5,11 +5,6 @@
 .fees-info {
   &__wrapper {
     grid-column: 2/12;
-
-    &--padding {
-      padding: 30px;
-      background: $main-color;
-    }
   }
 
   &__section {
@@ -22,8 +17,12 @@
   }
 
   &__notes {
-    grid-column: 4/10;
+    grid-column: 2/12;
     margin-top: 100px;
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 4/10;
+    }
   }
 
   &__list-notes {
@@ -41,6 +40,13 @@
   &__note-item {
     margin-bottom: 30px;
     position: relative;
+    font-size: 13px;
+    padding-left: 40px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 16px;
+      //padding-left: 0;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -55,13 +61,12 @@
       border-radius: 50%;
       background: $primary-color;
       border: 7px solid #e8f8f7;
-      top: 2px;
-      left: -20px;
+      top: 0;
+      left: 0;
       box-sizing: border-box;
 
       @include media-breakpoint-tablet() {
-        font-size: 16px;
-        left: -43px;
+        top: 2px;
       }
     }
 
@@ -82,7 +87,7 @@
     &--bg-white {
       background: $main-color;
 
-      @include media-breakpoint-tablet() {
+      @include media-breakpoint-landscape-tablet() {
         padding: 30px;
       }
     }
@@ -94,10 +99,14 @@
 }
 
 .fees-table {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.3;
   width: 100%;
   border-collapse: collapse;
+
+  @include media-breakpoint-tablet() {
+    font-size: 14px;
+  }
 
   &__head {
     text-align: left;
@@ -116,21 +125,32 @@
     .fees-table__cell {
       font-size: 14px;
       font-weight: 400;
+      border-bottom: none;
     }
+  }
+
+  &__flag-img {
+    width: 16px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   &__cell {
     min-width: 50px;
-    padding: 18px 0;
+    padding: 18px;
+    border-bottom: 1px solid $landing-bg-gray;
 
     &:first-child {
       font-weight: 600;
-      padding-left: 20px;
       width: 200px;
     }
 
     &--colspan {
       text-align: center;
+    }
+
+    &--without-border {
+      border-bottom: none;
     }
 
     &--color-primary {
@@ -157,6 +177,10 @@
       .fees-table__row {
         background-color: transparent;
       }
+    }
+
+    .fees-table__cell {
+      border-bottom-color: rgba($main-color, 0.2);
     }
   }
 }

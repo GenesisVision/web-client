@@ -2,10 +2,14 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_hide";
+@import "~shared/styles/_transition";
 
 .header {
+  &,
+  & * {
+    box-sizing: border-box;
+  }
   display: flex;
-  justify-content: space-between;
   width: 100%;
   align-items: center;
 
@@ -19,7 +23,7 @@
   &__navigation,
   &__profile,
   &__wallet {
-    @include hide(flex);
+    @include hide-on-landscape-tablet(flex);
   }
 
   &__right,
@@ -29,12 +33,52 @@
     align-items: center;
   }
 
-  &__center {
-    flex-grow: 2;
+  &__navigation {
+    overflow: hidden;
+    @include transition();
+    width: 100%;
+    &--search {
+      width: 0;
+    }
+  }
+
+  &__search-container {
+    width: 40px;
+    @include transition();
+    &--search {
+      width: 100%;
+    }
+  }
+
+  &__search-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
     justify-content: flex-end;
+    width: 40%;
+  }
+
+  &__left {
+    width: 60%;
+    justify-content: space-between;
+    padding-right: $padding-medium;
+    @include transition();
+  }
+
+  &__center {
+    justify-content: flex-start;
+    width: 100%;
+    &--hide {
+      width: auto;
+    }
   }
 
   &__buttons {
+    width: 100%;
+    justify-content: flex-end;
     a + a {
       margin-left: $padding-xxsmall;
     }
@@ -45,7 +89,6 @@
       justify-content: space-between;
     }
     &__right {
-      flex-grow: 2;
       justify-content: space-between;
     }
     &__menu {

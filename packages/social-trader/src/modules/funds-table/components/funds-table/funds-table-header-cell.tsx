@@ -13,7 +13,7 @@ const _FundsTableHeaderCell: React.FC<Props> = ({ column }) => {
   const { t } = useTranslation();
   if (!isAuthenticated && column.name === "favorite") return null;
   return (
-    <span className={`funds-table__cell funds-table__cell--${column.name}`}>
+    <span className="funds-table__cell">
       {t(`funds-page.funds-header.${column.name}`)}
     </span>
   );

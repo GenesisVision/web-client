@@ -1,8 +1,8 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -40,6 +40,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
       >
         <DialogField>
           <GVFormikField
+            wide
             name={FIELDS.conditionType}
             component={GVTextField}
             label={t("notifications-page.create.type-label")}
@@ -80,9 +81,10 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             return true;
           }}
         />
-        <FormError error={errorMessage} />
+        <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            wide
             color="primary"
             type="submit"
             disabled={isSubmitting || !isValid || !dirty}

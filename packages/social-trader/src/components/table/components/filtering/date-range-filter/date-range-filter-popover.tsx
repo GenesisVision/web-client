@@ -1,4 +1,10 @@
 import GVButton from "components/gv-button";
+import {
+  PopoverContentCardBlock,
+  PopoverContentCardBlockItem
+} from "components/popover/popover-card.block";
+import { PopoverContent } from "components/popover/popover-content";
+import { FilterTitle } from "components/table/components/filtering/filter-title";
 import dayjs from "dayjs";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -13,6 +19,27 @@ const subtract: { [keys: string]: "month" | "week" } = {
   [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
   [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
 };
+
+const DateRangeItem: React.FC<{
+  onClick: VoidFunction;
+  disabled: boolean;
+  label: string;
+}> = React.memo(({ onClick, disabled, label }) => {
+  return (
+    <PopoverContentCardBlockItem>
+      <GVButton
+        className="date-range-filter__type-btn"
+        noPadding
+        variant="text"
+        color="secondary"
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {label}
+      </GVButton>
+    </PopoverContentCardBlockItem>
+  );
+});
 
 class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state = {
@@ -64,49 +91,31 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     const { type } = this.state;
     const { t, startLabel, cancel } = this.props;
     return (
-      <div className="date-range-filter">
-        <div className="date-range-filter__type">
-          <GVButton
-            className="date-range-filter__btn date-range-filter__btn--type"
-            variant="text"
-            color="secondary"
+      <PopoverContent className="date-range-filter">
+        <PopoverContentCardBlock dark className="date-range-filter__type">
+          <DateRangeItem
             onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.ALL)}
             disabled={type === DATA_RANGE_FILTER_TYPES.ALL}
-          >
-            {t("filters.date-range.all-time")}
-          </GVButton>
-          <GVButton
-            className="date-range-filter__btn date-range-filter__btn--type"
-            variant="text"
-            color="secondary"
+            label={t("filters.date-range.all-time")}
+          />
+          <DateRangeItem
             onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_MONTH)}
             disabled={type === DATA_RANGE_FILTER_TYPES.LAST_MONTH}
-          >
-            {t("filters.date-range.last-month")}
-          </GVButton>
-          <GVButton
-            className="date-range-filter__btn date-range-filter__btn--type"
-            variant="text"
-            color="secondary"
+            label={t("filters.date-range.last-month")}
+          />
+          <DateRangeItem
             onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.LAST_WEEK)}
             disabled={type === DATA_RANGE_FILTER_TYPES.LAST_WEEK}
-          >
-            {t("filters.date-range.last-week")}
-          </GVButton>
-          <GVButton
-            className="date-range-filter__btn date-range-filter__btn--type"
-            variant="text"
-            color="secondary"
+            label={t("filters.date-range.last-week")}
+          />
+          <DateRangeItem
             onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.CUSTOM)}
             disabled={type === DATA_RANGE_FILTER_TYPES.CUSTOM}
-          >
-            {t("filters.date-range.custom")}
-          </GVButton>
-        </div>
-        <div className="date-range-filter__dates">
-          <div className="date-range-filter__title">
-            {t("filters.date-range.label")}
-          </div>
+            label={t("filters.date-range.custom")}
+          />
+        </PopoverContentCardBlock>
+        <PopoverContentCardBlock className="date-range-filter__dates">
+          <FilterTitle>{t("filters.date-range.label")}</FilterTitle>
           <div className="date-range-filter__values">
             <DateRangeFilterValues
               {...this.state}
@@ -114,8 +123,9 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
               startLabel={startLabel}
             />
           </div>
-          <div className="date-range-filter__btns">
+          <div>
             <GVButton
+              noPadding
               className="date-range-filter__btn"
               variant="text"
               onClick={this.handleSubmit}
@@ -123,6 +133,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
               {t("buttons.apply")}
             </GVButton>
             <GVButton
+              noPadding
               className="date-range-filter__btn"
               variant="text"
               color="secondary"
@@ -131,8 +142,8 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
               {t("buttons.cancel")}
             </GVButton>
           </div>
-        </div>
-      </div>
+        </PopoverContentCardBlock>
+      </PopoverContent>
     );
   }
 }

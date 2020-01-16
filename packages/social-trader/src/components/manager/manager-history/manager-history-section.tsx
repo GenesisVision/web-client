@@ -5,14 +5,16 @@ import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
+import dynamic from "next/dynamic";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { MANAGER_HISTORY_TAB } from "../manager.constants";
 import { fetchManagerAssetsCount } from "../services/manager.service";
-import ManagerFunds from "./manager-funds-table";
-import ManagerPrograms from "./manager-programs-table";
+
+const ManagerFunds = dynamic(() => import("./manager-funds-table"));
+const ManagerPrograms = dynamic(() => import("./manager-programs-table"));
 
 const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
   const [t] = useTranslation();

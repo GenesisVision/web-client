@@ -20,9 +20,6 @@
 
   &__period-item {
     font-size: $font-size-paragraph;
-    &.gv-btn {
-      padding: 0;
-    }
     &:not(:last-of-type) {
       margin-right: $padding-xsmall;
     }

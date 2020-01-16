@@ -21,20 +21,22 @@ const _NotificationsWidget: React.FC<Props> = ({
   }, []);
   const hasNotifications: boolean = notificationsCount > 0;
   return (
-    <ChipButton
-      stretch
-      reverseOrder
-      onClick={handlerOpenNotifications}
-      type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
-      chipLabel={
-        <div className="notifications-count">{notificationsCount}</div>
-      }
-      label={
-        <HeaderIcon>
-          <RingIcon />
-        </HeaderIcon>
-      }
-    />
+    <HeaderIcon>
+      <ChipButton
+        stretch
+        reverseOrder
+        onClick={handlerOpenNotifications}
+        type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
+        chipLabel={
+          <div className="notifications-count">{notificationsCount}</div>
+        }
+        label={
+          <HeaderIcon>
+            <RingIcon />
+          </HeaderIcon>
+        }
+      />
+    </HeaderIcon>
   );
 };
 

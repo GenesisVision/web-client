@@ -8,6 +8,11 @@
       vertical-align: middle;
     }
 
+    &--amount {
+      display: flex;
+      justify-content: flex-end;
+    }
+
     @include media-breakpoint-landscape-phone() {
       &--wallet {
         padding-top: 0;

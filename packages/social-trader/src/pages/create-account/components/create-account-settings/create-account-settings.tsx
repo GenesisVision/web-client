@@ -1,6 +1,3 @@
-import "components/deposit-details/deposit-details.scss";
-import "./create-account-settings.scss";
-
 import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import {

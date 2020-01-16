@@ -1,4 +1,4 @@
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 
@@ -27,11 +27,10 @@ const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
         loaderData={FundWithdrawLoaderData}
         data={data!}
       />
-      <FormError error={errorMessage} />
+      <DialogError error={errorMessage} />
     </>
   );
 };
 
-export const FundWithdrawPopupContainer = React.memo(
-  _FundWithdrawPopupContainer
-);
+const FundWithdrawPopupContainer = React.memo(_FundWithdrawPopupContainer);
+export default FundWithdrawPopupContainer;

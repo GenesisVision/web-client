@@ -6,6 +6,7 @@ import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { FormikProps, withFormik } from "formik";
 import { SignalDetachMode } from "gv-api-web";
 import React from "react";
@@ -37,9 +38,7 @@ const _UnfollowForm: React.FC<Props> = ({
             >
               <Tooltip
                 render={() => (
-                  <div className="tooltip__content">
-                    {t(modes[mode].tooltip)}
-                  </div>
+                  <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
                 )}
               >
                 <span>{t(modes[mode].label)}</span>
@@ -49,6 +48,7 @@ const _UnfollowForm: React.FC<Props> = ({
         </GVFormikField>
         <DialogButtons>
           <GVButton
+            wide
             type="submit"
             className="invest-form__submit-button"
             disabled={isSubmitting}

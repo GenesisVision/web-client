@@ -1,6 +1,7 @@
 import FeeCommission from "components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import { FeeDetails } from "gv-api-web";
@@ -12,16 +13,18 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
       className="portfolio-event-details__popover"
-      render={() =>
-        notNullFees.map((fee, idx) => (
-          <FeeCommission
-            key={idx}
-            title={fee.title}
-            value={fee.amount}
-            currency={fee.currency}
-          />
-        ))
-      }
+      render={() => (
+        <TooltipContent>
+          {notNullFees.map((fee, idx) => (
+            <FeeCommission
+              key={idx}
+              title={fee.title}
+              value={fee.amount}
+              currency={fee.currency}
+            />
+          ))}
+        </TooltipContent>
+      )}
     >
       {children}
     </Tooltip>
@@ -31,7 +34,7 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
 };
 
 const PortfolioEventFeesTooltip = withLoader(
-  React.memo(Crashable(_PortfolioEventFeesTooltip))
+  Crashable(_PortfolioEventFeesTooltip)
 );
 export default PortfolioEventFeesTooltip;
 

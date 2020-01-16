@@ -52,6 +52,7 @@ const _ProgramWithdrawAmountForm: React.FC<
       {!isOwner && (
         <DialogField>
           <GVFormikField
+            wide
             type="checkbox"
             color="primary"
             name={FIELDS.withdrawAll}
@@ -61,6 +62,7 @@ const _ProgramWithdrawAmountForm: React.FC<
         </DialogField>
       )}
       <InputAmountField
+        wide
         emptyInit={emptyInit}
         name={FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
@@ -82,6 +84,7 @@ const _ProgramWithdrawAmountForm: React.FC<
       )}
       <DialogButtons>
         <GVButton
+          wide
           type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"

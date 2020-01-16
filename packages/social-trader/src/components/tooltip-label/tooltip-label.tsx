@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 
 export const TooltipLabel: React.FC<{
@@ -10,7 +11,7 @@ export const TooltipLabel: React.FC<{
 }> = React.memo(({ tooltipContent, labelText, className }) => (
   <Tooltip
     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-    render={() => <div className="tooltip__content">{tooltipContent}</div>}
+    render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
   >
     <span
       className={classNames(

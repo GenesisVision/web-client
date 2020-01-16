@@ -1,8 +1,8 @@
+import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
+import { AssetTabsBlock } from "components/assets/asset-fields/asset-tabs.block";
+import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
-import { CreateAssetBack } from "components/assets/create-asset/create-asset-back";
-import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import { ASSET } from "constants/constants";
 import { Broker } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import React, { useCallback, useState } from "react";
@@ -34,27 +34,19 @@ const _CreateAccountContainer: React.FC<Props> = ({
 
   return (
     <div>
-      <CreateAssetBack
-        condition={tab === TAB.SETTINGS}
-        asset={"ACCOUNT" as ASSET}
-        onApply={confirmNavigateToBroker}
-      />
-      <div className="create-asset__header">
-        <h1>{t("create-account-page.title")}</h1>
-      </div>
-      <div className="create-asset__tabs">
-        <GVTabs value={tab}>
-          <GVTab
-            value={TAB.BROKER}
-            label={t("create-account-page.tabs.select-broker")}
-          />
-          <GVTab
-            value={TAB.SETTINGS}
-            label={t("create-account-page.tabs.settings")}
-          />
-        </GVTabs>
-      </div>
-      <div className="create-asset__content">
+      <AssetTitleBlock>{t("create-account-page.title")}</AssetTitleBlock>
+      <AssetTabsBlock value={tab}>
+        <GVTab
+          onClick={confirmNavigateToBroker}
+          value={TAB.BROKER}
+          label={t("create-account-page.tabs.select-broker")}
+        />
+        <GVTab
+          value={TAB.SETTINGS}
+          label={t("create-account-page.tabs.settings")}
+        />
+      </AssetTabsBlock>
+      <AssetContentBlock>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
             brokers={brokers}
@@ -66,7 +58,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
         {tab === TAB.SETTINGS && (
           <CreateAccountSettingsSection broker={selectedBroker} />
         )}
-      </div>
+      </AssetContentBlock>
     </div>
   );
 };

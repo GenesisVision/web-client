@@ -6,6 +6,7 @@ import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramChartStatistic } from "gv-api-web";
 import * as React from "react";
@@ -56,9 +57,9 @@ const _ProgramDetailsStatisticsElements: React.FC<
             <Tooltip
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
-                <div className="tooltip__content">
+                <TooltipContent>
                   {t("program-details-page.tooltip.period")}
-                </div>
+                </TooltipContent>
               )}
             >
               <span className="details-statistics__label tooltip__label">

@@ -1,9 +1,8 @@
 import {
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
-  SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
+  DATE_RANGE_MIN_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -11,13 +10,12 @@ import {
   validateDateRange
 } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { fundAssetFilter } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
-import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
-
 import {
   FUND_ASSET_DEFAULT_VALUE,
   FUND_ASSET_FILTER_NAME
-} from "../../../../components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+} from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+import { fundAssetFilter } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
+import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
@@ -28,8 +26,8 @@ export const CURRENCY_MAP_VALUE = undefined;
 const fundsDateRangeFilter = {
   ...composeDefaultDateRangeFilter({
     composeApiRequestValue: composeRequestValueFunc(
-      SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
-      SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
+      DATE_RANGE_MIN_FILTER_NAME,
+      DATE_RANGE_MIN_FILTER_NAME
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,

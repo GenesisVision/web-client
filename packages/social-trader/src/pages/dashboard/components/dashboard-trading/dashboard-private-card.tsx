@@ -1,4 +1,5 @@
 import { useToLink } from "components/link/link.helper";
+import { PopoverContentListItem } from "components/popover/popover-content";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardRow,
@@ -8,8 +9,7 @@ import TableCard, {
 import {
   IRenderActionsArgs,
   TableCardActions,
-  TableCardActionsItem,
-  TableCardActionsItemContainer
+  TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
 import {
   DECIMAL_SCALE_BIG_VALUE,
@@ -65,9 +65,11 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   );
   const renderActions = ({ anchor, clearAnchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
-        {t("dashboard-page.trading.actions.terminal")}
-      </TableCardActionsItem>
+      {asset.actions.hasTerminal && (
+        <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
+          {t("dashboard-page.trading.actions.terminal")}
+        </TableCardActionsItem>
+      )}
       {asset.actions.canMakeSignalProviderFromPrivateExternalTradingAccount && (
         <TableCardActionsItem
           to={makeProgramExternalLink}
@@ -96,7 +98,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
         />
       )}
       {asset.actions.canClose && (
-        <TableCardActionsItemContainer>
+        <PopoverContentListItem>
           <CloseAssetButton
             noPadding
             assetName={asset.accountInfo.title}
@@ -105,7 +107,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
             id={asset.id}
             variant={"text"}
           />
-        </TableCardActionsItemContainer>
+        </PopoverContentListItem>
       )}
       {asset.actions.canConfirm2FA && (
         <ConfirmTFAButton onApply={updateItems} id={asset.id} />

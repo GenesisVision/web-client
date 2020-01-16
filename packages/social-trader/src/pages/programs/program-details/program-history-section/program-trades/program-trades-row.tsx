@@ -6,6 +6,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
@@ -36,7 +37,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
       <TableCell className="details-trades__cell">
         <Tooltip
           disable={trade.volume >= volume}
-          render={() => <div>{trade.volume}</div>}
+          render={() => <TooltipContent>{trade.volume}</TooltipContent>}
         >
           <span>{trade.volume < volume ? `< ${volume}` : volume}</span>
         </Tooltip>

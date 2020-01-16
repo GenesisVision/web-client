@@ -1,5 +1,3 @@
-import "components/assets/create-asset/create-asset.scss";
-
 import Page from "components/page/page";
 import { Broker } from "gv-api-web";
 import * as React from "react";

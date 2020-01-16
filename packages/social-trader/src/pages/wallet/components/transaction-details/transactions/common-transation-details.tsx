@@ -67,13 +67,13 @@ const TransactionDetailsItem: React.FC<
   {
     label: string;
   } & React.HTMLAttributes<HTMLDivElement>
-> = React.memo(({ label, children }) => {
+> = ({ label, children }) => {
   return (
     <DialogField>
       <StatisticItem label={label}>{children}</StatisticItem>
     </DialogField>
   );
-});
+};
 
 const TransactionStatusBlock: React.FC<{
   status: MultiWalletTransactionStatus;

@@ -1,5 +1,5 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import FormError from "components/form/form-error/form-error";
+import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { InjectedFormikProps, withFormik } from "formik";
 import useApiRequest from "hooks/api-request.hook";
@@ -90,7 +90,7 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         currency={currency}
         exitFee={exitFee}
       />
-      <FormError error={errorMessage} />
+      <DialogError error={errorMessage} />
       <DialogButtons>
         <GVButton
           onClick={onBackClick}
