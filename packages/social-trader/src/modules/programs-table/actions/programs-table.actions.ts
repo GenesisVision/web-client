@@ -8,7 +8,6 @@ export const fetchProgramsAction = (
   filters: FetchProgramsFiltersType // TODO change api to create interface to this
 ): ActionType<Promise<ItemsViewModelProgramDetailsListItem>> => ({
   type: PROGRAMS,
-  // @ts-ignore TODO fix
   payload: programApi.getPrograms(filters)
 });
 
