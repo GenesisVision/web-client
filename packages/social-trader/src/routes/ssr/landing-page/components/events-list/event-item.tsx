@@ -6,7 +6,16 @@ import React from "react";
 import { animated, useSpring } from "react-spring";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
-const _EventItem: React.FC<PlatformEvent> = ({
+interface Props extends PlatformEvent {
+  startIndex: number;
+  index: number;
+  countList: number;
+}
+
+const _EventItem: React.FC<Props> = ({
+  startIndex,
+  index,
+  countList,
   title,
   text,
   icon,
@@ -16,6 +25,18 @@ const _EventItem: React.FC<PlatformEvent> = ({
   assetType,
   value
 }) => {
+  let currentIndex = null;
+  switch (true) {
+    case index > startIndex:
+      currentIndex = index - startIndex;
+      break;
+    case index < startIndex:
+      currentIndex = countList - startIndex + index;
+      break;
+    default:
+      currentIndex = 0;
+  }
+  const isShow = currentIndex < 5;
   const linkAsset = assetUrl
     ? getAssetLink(assetUrl, assetType, title)
     : undefined;
@@ -26,11 +47,23 @@ const _EventItem: React.FC<PlatformEvent> = ({
       }
     : undefined;
   const props = useSpring({
-    to: { opacity: 1, transform: "translate3d(0,100%,0) scale(1)" },
-    from: { opacity: 0, transform: "translate3d(0,0%,0) scale(0.7)" }
+    to: {
+      opacity: isShow ? 1 : 0,
+      transform: `translate3d(0,${isShow ? 120 * currentIndex : 0}%,0) scale(${
+        isShow ? 1 : 0.7
+      }`
+    }
+    // from: {
+    //   opacity: isShow ? 1 : 0,
+    //   transform: `translate3d(0,0%,0) scale(${isShow ? 1 : 0.5})`
+    // }
   });
   return (
-    <animated.li className="events-list__item" style={props}>
+    <animated.li
+      className="events-list__item"
+      style={props}
+      data-index={currentIndex}
+    >
       <Link className="events-list__item-link" to={linkAsset}>
         <div className="events-list__item-avatar">
           <ImageBase

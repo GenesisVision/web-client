@@ -12,15 +12,25 @@ interface Props {
 }
 
 const _EventsList: React.FC<Props> = ({ className, events }) => {
-  const [index, setIndex] = useState(0);
-  const [showedEvents, setShowedEvents] = useState(events);
+  const counts = events.length;
+  const [startIndex, setStartIndex] = useState(0);
   useEffect(() => {
-    events.length && setShowedEvents(events.slice(index, index + 5));
+    const interval = setInterval(() => {
+      setStartIndex(state => (state === 0 ? counts - 1 : state - 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
   return (
     <ul className={classNames("events-list", className)}>
-      {showedEvents.map((event, index) => (
-        <EventItem key={index} {...event} />
+      {events.map((event, index) => (
+        <EventItem
+          key={index}
+          startIndex={startIndex}
+          countList={counts}
+          index={index}
+          {...event}
+        />
       ))}
       <EventLastItem />
     </ul>
