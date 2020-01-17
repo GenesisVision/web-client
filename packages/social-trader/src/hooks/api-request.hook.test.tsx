@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { CancelablePromise } from "gv-api-web";
 import React from "react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
@@ -17,8 +16,7 @@ describe("test useRequest hook", () => {
   describe("test init useRequest", () => {
     it("should be init useRequest", () => {
       const testValue = "testValue";
-      const request = () =>
-        Promise.resolve(testValue) as CancelablePromise<string>;
+      const request = () => Promise.resolve(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
@@ -33,7 +31,7 @@ describe("test useRequest hook", () => {
       const newTestValue = "newTestValue";
       const request = () => {
         testValue = newTestValue;
-        return Promise.resolve("") as CancelablePromise<string>;
+        return Promise.resolve("") as Promise<string>;
       };
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
@@ -45,8 +43,7 @@ describe("test useRequest hook", () => {
     });
     it("should be send data request", () => {
       const testValue = "testValue";
-      const request = () =>
-        Promise.resolve(testValue) as CancelablePromise<string>;
+      const request = () => Promise.resolve(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
@@ -58,8 +55,7 @@ describe("test useRequest hook", () => {
     });
     it("should be send isPending === false after send request", () => {
       const testValue = "testValue";
-      const request = () =>
-        Promise.resolve(testValue) as CancelablePromise<string>;
+      const request = () => Promise.resolve(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
@@ -71,8 +67,7 @@ describe("test useRequest hook", () => {
     });
     it("should be send error", () => {
       const testValue = "testValue";
-      const request = () =>
-        Promise.reject(testValue) as CancelablePromise<string>;
+      const request = () => Promise.reject(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
@@ -84,7 +79,7 @@ describe("test useRequest hook", () => {
     });
     it("should be set submitting is false", () => {
       const isSubmitting = { value: true };
-      const request = () => Promise.reject("") as CancelablePromise<string>;
+      const request = () => Promise.reject("") as Promise<string>;
       const setSubmitting = (value: boolean) => {
         isSubmitting.value = value;
       };
@@ -104,7 +99,7 @@ describe("test useRequest hook", () => {
       const testArg1 = "testArg1";
       const testArg2 = "testArg2";
       const request = (arg1: any, arg2: any) =>
-        Promise.reject(arg1 + arg2) as CancelablePromise<string>;
+        Promise.reject(arg1 + arg2) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });

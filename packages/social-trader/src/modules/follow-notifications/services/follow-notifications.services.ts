@@ -1,4 +1,3 @@
-import { CancelablePromise } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import {
   TAddNotification,
@@ -41,15 +40,15 @@ export const addFollowNotification: TAddNotification = (
     })
     .catch((data: ResponseError) => {
       dispatch(addErrorMessageAction(data.errorMessage));
-    }) as CancelablePromise<void>;
+    }) as Promise<void>;
 
 export const removeFollowNotification: TRemoveNotification = (
   { id, assetId },
   message
 ) => dispatch =>
-  ((dispatch(
-    removeNotificationSettingAction(id)
-  ) as unknown) as CancelablePromise<void>).then(() => {
+  ((dispatch(removeNotificationSettingAction(id)) as unknown) as Promise<
+    void
+  >).then(() => {
     dispatch(fetchFollowNotifications(assetId!));
     dispatch(alertMessageActions.success(message));
   });
@@ -61,6 +60,6 @@ export const toggleFollowNotification: TToggleNotification = ({
 }) => dispatch =>
   ((dispatch(
     toggleFollowNotificationsAction(id, enabled)
-  ) as unknown) as CancelablePromise<void>).then(() => {
+  ) as unknown) as Promise<void>).then(() => {
     dispatch(fetchFollowNotifications(assetId));
   });

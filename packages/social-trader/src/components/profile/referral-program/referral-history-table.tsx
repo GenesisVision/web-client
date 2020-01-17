@@ -66,9 +66,7 @@ const _DownloadReferralHistoryButton: React.FC<{
     const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
     filesService
       .getReferralHistoryFile(dateRange)
-      .then((blob: Blob) =>
-        saveAs(blob, `referral_history_statistic_${dateNow}.xlsx`)
-      );
+      .then(blob => saveAs(blob, `referral_history_statistic_${dateNow}.xlsx`));
   }, [dateRange]);
   return <DownloadButton authHandle={loadFile} />;
 };

@@ -8,7 +8,7 @@ import GVButton from "components/gv-button";
 import Page from "components/page/page";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise, LevelInfo } from "gv-api-web";
+import { LevelInfo } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { fetchInvestmentsLevels } from "pages/programs/program-details/service/program-details.service";
 import React, { useCallback, useEffect, useState } from "react";
@@ -33,7 +33,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   }, []);
 
   const getPrograms = useCallback(
-    (filters: ComposeFiltersAllType): CancelablePromise<IDataModel> =>
+    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
         ...filters,
         sorting: "ByLevelProgressDesc",

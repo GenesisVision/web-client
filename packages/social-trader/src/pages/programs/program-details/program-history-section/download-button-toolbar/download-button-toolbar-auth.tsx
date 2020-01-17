@@ -2,7 +2,6 @@ import DownloadButton from "components/download-button/download-button";
 import { DateRangeFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import dayjs from "dayjs";
 import { saveAs } from "file-saver";
-import { CancelablePromise } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -14,7 +13,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 }) => {
   const loadFile = useCallback(() => {
     const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
-    method(programId, dateRange).then((blob: Blob) =>
+    method(programId, dateRange).then((blob: string) =>
       saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
     );
   }, [programId, dateRange, title]);
@@ -22,10 +21,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 };
 
 interface Props {
-  method: (
-    id: string,
-    dateRange: DateRangeFilterType
-  ) => CancelablePromise<Blob>;
+  method: (id: string, dateRange: DateRangeFilterType) => Promise<string>;
   dateRange: DateRangeFilterType;
   programId: string;
   title: string;

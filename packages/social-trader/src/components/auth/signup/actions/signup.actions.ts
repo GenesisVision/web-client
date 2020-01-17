@@ -7,14 +7,14 @@ export const RESEND_CONFIRMATION_LINK = "RESEND_CONFIRMATION_LINK";
 
 const signUpMethod = authApi.register;
 
-export const signUpUserAction = (model: RegisterViewModel): ApiAction => ({
+export const signUpUserAction = (body: RegisterViewModel): ApiAction => ({
   type: SIGN_UP,
-  payload: signUpMethod({ model })
+  payload: signUpMethod({ body })
 });
 
 export const resendConfirmationLinkAction = (
-  model: ResendConfirmationViewModel
+  body: ResendConfirmationViewModel
 ): ApiAction => ({
   type: RESEND_CONFIRMATION_LINK,
-  payload: authApi.resendConfirmationLink({ model })
+  payload: authApi.resendConfirmationLink({ body })
 });

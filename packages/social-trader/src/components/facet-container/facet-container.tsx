@@ -3,7 +3,7 @@ import NotFoundPage from "components/not-found/not-found";
 import { IProgramsFacetTableProps } from "components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise, PlatformInfo } from "gv-api-web";
+import { PlatformInfo } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -76,7 +76,7 @@ interface Props {
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
-  getItems: (args: FilteringType) => CancelablePromise<IDataModel>;
+  getItems: (args: FilteringType) => Promise<IDataModel>;
   isAuthenticated?: boolean;
 }
 

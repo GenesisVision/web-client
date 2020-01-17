@@ -1,4 +1,4 @@
-import { CancelablePromise, SimpleChart, SimpleChartPoint } from "gv-api-web";
+import { SimpleChart, SimpleChartPoint } from "gv-api-web";
 import { getCookie, setCookie } from "utils/cookie";
 import { getRandomInteger } from "utils/helpers";
 

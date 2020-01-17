@@ -1,9 +1,5 @@
 import { CREATE_ASSET } from "constants/constants";
-import {
-  CancelablePromise,
-  NewFundRequest,
-  NewTradingAccountRequest
-} from "gv-api-web";
+import { NewFundRequest, NewTradingAccountRequest } from "gv-api-web";
 import { ICreateAccountSettingsFormValues } from "pages/create-account/components/create-account-settings/create-account-settings";
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
 import assetsApi from "services/api-client/assets-api";
@@ -22,14 +18,14 @@ export const createAsset = ({
 }: {
   data: ICreateAssetSettingsFormValues;
   asset: CREATE_ASSET;
-}): CancelablePromise<any> => {
+}): Promise<any> => {
   const authorization = authService.getAuthArg();
-  let promise = (Promise.resolve("") as unknown) as CancelablePromise<any>;
+  let promise = (Promise.resolve("") as unknown) as Promise<any>;
   if ("logo" in data && data.logo.image) {
     promise = filesService.uploadFile(
       data.logo.image.cropped,
       authorization
-    ) as CancelablePromise<any>;
+    ) as Promise<any>;
   }
   const method = getCreateMethod(asset);
   return promise.then(response =>
@@ -42,23 +38,21 @@ export const createAsset = ({
 
 const getCreateMethod = (
   asset: CREATE_ASSET
-): ((request: NewAssetRequest) => CancelablePromise<any>) => {
+): ((request: NewAssetRequest) => Promise<any>) => {
   const authorization = authService.getAuthArg();
   switch (asset) {
     case CREATE_ASSET.ACCOUNT:
       return (request: NewAssetRequest) =>
         assetsApi.createTradingAccount(authorization, {
-          request: request as NewTradingAccountRequest
+          body: request as NewTradingAccountRequest
         });
     case CREATE_ASSET.FUND:
     default:
       return (request: NewAssetRequest) =>
         assetsApi.createFund(authorization, {
-          request: request as NewFundRequest
+          body: request as NewFundRequest
         });
   }
 };
 
-type TGetCreateMethodReturn = (
-  request: NewAssetRequest
-) => CancelablePromise<any>; //ProgramCreateResult
+type TGetCreateMethodReturn = (request: NewAssetRequest) => Promise<any>; //ProgramCreateResult
