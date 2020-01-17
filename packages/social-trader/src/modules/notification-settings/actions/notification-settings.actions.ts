@@ -1,5 +1,4 @@
 import { NotificationSettingList } from "gv-api-web";
-import CancelablePromise from "gv-api-web/dist/cancelable-promise/CancelablePromise";
 import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 import { ActionType, ApiAction } from "utils/types";
@@ -32,7 +31,7 @@ export interface IAddNotificationSettingProps {
 
 export const addNotificationSettingAction = (
   opts: IAddNotificationSettingProps
-): ActionType<CancelablePromise<string>> => ({
+): ActionType<Promise<string>> => ({
   type: ADD_NOTIFICATION_SETTING,
   payload: notificationsApi.addNotificationsSettings(
     authService.getAuthArg(),
@@ -41,9 +40,7 @@ export const addNotificationSettingAction = (
   )
 });
 
-export const removeNotificationSettingAction = (
-  id: string
-): ApiAction<null> => ({
+export const removeNotificationSettingAction = (id: string): ApiAction => ({
   type: REMOVE_NOTIFICATION_SETTING,
   payload: notificationsApi.removeNotificationsSettings(
     id,

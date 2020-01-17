@@ -10,7 +10,7 @@ export const detachToSignalInternal = ({
   model?: DetachFromSignalProvider;
 }) =>
   signalApi.detachSlaveFromMasterInternal(id, authService.getAuthArg(), {
-    model
+    body: model
   });
 
 export const detachToSignalExternal = ({
@@ -21,5 +21,5 @@ export const detachToSignalExternal = ({
   model?: DetachFromSignalProvider;
 }) =>
   signalApi.detachSlaveFromMasterExternal(id, authService.getAuthArg(), {
-    model
+    body: model
   });

@@ -1,6 +1,5 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import {
-  CancelablePromise,
   Currency,
   FundAssetPart,
   PlatformAsset,
@@ -23,6 +22,8 @@ export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
+const r: Currency = "GVT";
+
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
   extends ActionType {
   errorMessage?: string;
@@ -34,7 +35,7 @@ export interface ActionType<T = any, U = any> extends Action {
   meta?: U;
 }
 
-export type ApiAction<T = any, U = any> = ActionType<CancelablePromise<T>, U>;
+export type ApiAction<T = any, U = any> = ActionType<Promise<T>, U>;
 
 export type RootThunkAction<R = any> = ThunkAction<R, AuthRootState, any, any>;
 
@@ -44,7 +45,7 @@ export interface DispatchType<R> {
 
 type UnpackApiAction<T> = T extends ApiAction<infer U> ? U : T;
 
-export type ApiActionResponse<T> = CancelablePromise<{
+export type ApiActionResponse<T> = Promise<{
   action: ApiAction<T>;
   value: T;
 }>;

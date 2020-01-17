@@ -5,7 +5,6 @@ import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { ASSET } from "constants/constants";
 import {
-  CancelablePromise,
   Currency,
   InvestmentEventViewModels,
   LevelInfo,
@@ -162,7 +161,7 @@ export const getSubscriptions = (programId: string) => (
 
 export const fetchInvestmentsLevels = (
   currency: Currency
-): CancelablePromise<LevelInfo[]> =>
+): Promise<LevelInfo[]> =>
   platformApi.getProgramLevels({ currency }).then(({ levels }) => levels);
 
 export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
@@ -227,7 +226,7 @@ export enum EVENT_LOCATION {
 export const fetchPortfolioEventsWithoutTable = (
   eventLocation: EVENT_LOCATION,
   filters?: any
-): CancelablePromise<InvestmentEventViewModels> => {
+): Promise<InvestmentEventViewModels> => {
   const authorization = authService.getAuthArg();
   return eventsApi.getEvents(authorization, { ...filters, eventLocation });
 };
@@ -236,7 +235,7 @@ export const fetchPortfolioEvents = (
   eventLocation: EVENT_LOCATION
 ): GetItemsFuncType => (
   filters?
-): CancelablePromise<TableItems<InvestmentEventViewModels>> => {
+): Promise<TableItems<InvestmentEventViewModels>> => {
   const authorization = authService.getAuthArg();
   return eventsApi
     .getEvents(authorization, { ...filters, eventLocation })

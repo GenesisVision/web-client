@@ -8,7 +8,7 @@ export const depositToDemo = ({ id, amount }: any): DemoDepositResponse => {
     id,
     authService.getAuthArg(),
     {
-      model: { amount }
+      body: { amount }
     }
   ) as unknown) as DemoDepositResponse;
 };

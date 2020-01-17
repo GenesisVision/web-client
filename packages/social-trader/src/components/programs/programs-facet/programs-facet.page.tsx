@@ -7,7 +7,6 @@ import FacetContainer, {
 import Page from "components/page/page";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -16,7 +15,7 @@ import ProgramsFacetTable from "./components/programs-facet-table";
 
 const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   const getPrograms = useCallback(
-    (filters: ComposeFiltersAllType): CancelablePromise<IDataModel> =>
+    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
         ...filters
       }),
