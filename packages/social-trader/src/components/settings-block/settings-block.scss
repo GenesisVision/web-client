@@ -15,11 +15,14 @@
   }
 
   &__line-block {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     & h3 {
       margin-left: -$font-size-h3/2;
+    }
+    @include media-breakpoint-landscape-phone() {
+      display: flex;
     }
   }
 

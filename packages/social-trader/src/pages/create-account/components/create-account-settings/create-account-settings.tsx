@@ -1,6 +1,3 @@
-import "components/deposit-details/deposit-details.scss";
-import "./create-account-settings.scss";
-
 import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import {
@@ -80,20 +77,22 @@ const _CreateAccountSettings: React.FC<Props> = ({
         <KycRequiredBlock />
       ) : (
         <>
-          <DepositDetailsBlock
-            setFieldTouched={setFieldTouched}
-            enterMinDeposit={enterMinDeposit}
-            enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
-            blockNumber={2}
-            availableName={CREATE_ACCOUNT_FIELDS.available}
-            rateName={CREATE_ACCOUNT_FIELDS.rate}
-            walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
-            inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
-            depositAmount={depositAmount}
-            minimumDepositAmount={minimumDepositAmount}
-            setFieldValue={setFieldValue}
-            assetCurrency={currency as CurrencyEnum}
-          />
+          {accountType.isDepositRequired && (
+            <DepositDetailsBlock
+              setFieldTouched={setFieldTouched}
+              enterMinDeposit={enterMinDeposit}
+              enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
+              blockNumber={2}
+              availableName={CREATE_ACCOUNT_FIELDS.available}
+              rateName={CREATE_ACCOUNT_FIELDS.rate}
+              walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
+              inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
+              depositAmount={depositAmount}
+              minimumDepositAmount={minimumDepositAmount}
+              setFieldValue={setFieldValue}
+              assetCurrency={currency as CurrencyEnum}
+            />
+          )}
           <CreateAssetNavigation
             asset={"ACCOUNT"}
             isSubmitting={isSubmitting}

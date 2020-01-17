@@ -39,6 +39,7 @@ const _SocialLinksContainer: React.FC = () => {
     SocialLinkViewModel[]
   >({ request: fetchSocialLinks });
   const { sendRequest: setSocialLinks } = useApiRequest<SocialLinkViewModel[]>({
+    middleware: [getSocialLinks],
     request: updateSocialLink,
     successMessage: "profile-page.social-links.notifications.edit-success"
   });
@@ -49,7 +50,7 @@ const _SocialLinksContainer: React.FC = () => {
   const _handleSubmitSocialLink: TOnEditLinkSubmitFunc = (
     { type, value }: UpdateSocialLinkViewModel,
     setSubmitting: SetSubmittingType
-  ) => setSocialLinks({ type, value }, setSubmitting).then(getSocialLinks);
+  ) => setSocialLinks({ type, value }, setSubmitting);
   const handleSubmitSocialLink = useCallback(_handleSubmitSocialLink, []);
 
   return (

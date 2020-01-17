@@ -4,4 +4,7 @@
 .form-error {
   @include font-size($font-size-h4);
   color: $negative-color;
+  &--small {
+    @include font-size($font-size-small);
+  }
 }

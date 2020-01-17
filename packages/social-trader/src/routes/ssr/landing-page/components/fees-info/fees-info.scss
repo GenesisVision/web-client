@@ -129,6 +129,12 @@
     }
   }
 
+  &__flag-img {
+    width: 16px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   &__cell {
     min-width: 50px;
     padding: 18px;
