@@ -57,10 +57,12 @@ export const _Dialog: React.FC<IDialogProps> = ({
 const Dialog = React.memo(_Dialog);
 export default Dialog;
 
-export interface IDialogProps {
+export interface IDialogProps extends IDialogOuterProps {
   children?: ReactNode;
-  open: boolean;
-  onClose: (param?: any) => void;
   className?: string;
   top?: boolean;
+}
+export interface IDialogOuterProps {
+  open: boolean;
+  onClose: (param?: any) => void;
 }
