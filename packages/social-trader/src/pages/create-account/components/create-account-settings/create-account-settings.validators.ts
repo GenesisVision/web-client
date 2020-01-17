@@ -38,24 +38,23 @@ const createAccountSettingsValidationSchema = ({
       [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string().required(
         t("create-program-page.settings.validation.account-type-required")
       ),
-      [CREATE_ACCOUNT_FIELDS.depositAmount]: currency
-        ? number()
-            .required(
-              t("create-program-page.settings.validation.amount-required")
-            )
-            .min(
-              minDeposit,
-              t("create-program-page.settings.validation.amount-is-zero", {
-                min: minDepositText
-              })
-            )
-            .max(
-              values[CREATE_ACCOUNT_FIELDS.available],
-              t("create-program-page.settings.validation.amount-is-large")
-            )
-        : number().required(
-            t("create-program-page.settings.validation.amount-required")
-          )
+      [CREATE_ACCOUNT_FIELDS.depositAmount]:
+        currency && accountType.isDepositRequired
+          ? number()
+              .required(
+                t("create-program-page.settings.validation.amount-required")
+              )
+              .min(
+                minDeposit,
+                t("create-program-page.settings.validation.amount-is-zero", {
+                  min: minDepositText
+                })
+              )
+              .max(
+                values[CREATE_ACCOUNT_FIELDS.available],
+                t("create-program-page.settings.validation.amount-is-large")
+              )
+          : number()
     });
   });
 };

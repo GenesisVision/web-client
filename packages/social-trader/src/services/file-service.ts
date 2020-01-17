@@ -1,7 +1,6 @@
 import { DateRangeFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeRequestValueFunc } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilteringType } from "components/table/components/filtering/filter.type";
-import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import accountsApi from "services/api-client/accounts-api";
 import fileApi from "services/api-client/file-api";
@@ -42,7 +41,7 @@ const getProgramTradesExportFileUrl = (
 const getAccountTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
-): CancelablePromise<Blob> => {
+): Promise<string> => {
   const opts = getDateFiltersForRequest(dateRange);
   return accountsApi
     .exportTrades(id, authService.getAuthArg(), opts)
@@ -61,7 +60,7 @@ const getPeriodExportFileUrl = (
 const getStatisticExportFile = (
   id: string,
   dateRange: DateRangeFilterType
-): CancelablePromise<Blob> => {
+): Promise<string> => {
   const authorization = authService.getAuthArg();
   const opts = getDateFiltersForRequest(dateRange);
   return programsApi
@@ -71,7 +70,7 @@ const getStatisticExportFile = (
 
 const getReferralHistoryFile = (
   dateRange: DateRangeFilterType
-): CancelablePromise<Blob> => {
+): Promise<string> => {
   const authorization = authService.getAuthArg();
   const opts = getDateFiltersForRequest(dateRange);
   return partnershipApi.exportHistory(authorization, opts).then(blob => blob);
@@ -85,16 +84,10 @@ const getFileUrl = (
     ? `${process.env.REACT_APP_API_URL}/v2.0/file/${id}?quality=${quality}`
     : "";
 
-const uploadFile = (
-  file: File,
-  authorization: string
-): CancelablePromise<string> =>
+const uploadFile = (file: File, authorization: string): Promise<string> =>
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
-const uploadDocument = (
-  file: File,
-  authorization: string
-): CancelablePromise<string> =>
+const uploadDocument = (file: File, authorization: string): Promise<string> =>
   fileApi.uploadFile(file, { authorization }).then(response => response.id);
 
 const filesService = {

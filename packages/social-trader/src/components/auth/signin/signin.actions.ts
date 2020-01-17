@@ -31,6 +31,6 @@ export const loginUserAction = (
 ): ApiAction<string> => ({
   type: LOGIN,
   payload: authApi.authorize({
-    model: loginData
+    body: loginData
   })
 });

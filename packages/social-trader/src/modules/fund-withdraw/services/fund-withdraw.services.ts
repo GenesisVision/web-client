@@ -1,5 +1,4 @@
 import { FUND_CURRENCY } from "constants/constants";
-import { CancelablePromise } from "gv-api-web";
 import investmentsApi from "services/api-client/investments-api";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
@@ -10,9 +9,9 @@ export const getFundWithdrawInfo = ({
   id
 }: {
   id: string;
-}): CancelablePromise<FundWithdrawInfoResponse> => {
+}): Promise<FundWithdrawInfoResponse> => {
   const auth = authService.getAuthArg();
-  return CancelablePromise.all([
+  return Promise.all([
     investmentsApi.getFundWithdrawInfo(id, auth, {
       currency: FUND_CURRENCY
     }),

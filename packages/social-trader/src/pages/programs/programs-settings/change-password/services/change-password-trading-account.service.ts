@@ -9,5 +9,5 @@ export const changePasswordTradingAccount = ({
   model?: any;
 }) =>
   assetsApi.changeTradingAccountPassword(id, authService.getAuthArg(), {
-    model
+    body: model
   });

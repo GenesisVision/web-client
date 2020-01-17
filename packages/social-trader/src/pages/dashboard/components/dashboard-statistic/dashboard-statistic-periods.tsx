@@ -52,14 +52,14 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   withProfitability?: boolean;
   item: TDashboardTotalField;
   label: string;
-}> = ({ item, label, currency }) => {
+}> = ({ item: { profit, profitPercent }, label, currency }) => {
   return (
     <StatisticItem label={label}>
       <div className="dashboard-statistic-periods-item__value-container">
         <ProfitabilityValuePercent
           currency={currency}
-          percent={item.profit}
-          value={item.profitPercent}
+          percent={profitPercent}
+          value={profit}
         />
       </div>
     </StatisticItem>

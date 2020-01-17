@@ -1,4 +1,5 @@
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EVENT_PROFITABILITY_VALUES } from "components/portfolio-events-table/portfolio-events-table.constants";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import Table from "components/table/components/table";
@@ -8,7 +9,9 @@ import Crashable from "decorators/crashable";
 import { TDashboardEvent } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { formatDate, humanizeDate } from "utils/dates";
+import { formatCurrencyValue } from "utils/formatter";
 
 const DASHBOARD_STATISTIC_COLUMNS = [
   {
@@ -54,14 +57,19 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
                 </div>
               </TableCell>
               <TableCell>
-                {event.amount && (
-                  <Profitability
-                    value={event.amount}
-                    prefix={PROFITABILITY_PREFIX.SIGN}
-                  >
-                    {Math.abs(event.amount)} {event.currency}
-                  </Profitability>
-                )}
+                <Profitability
+                  condition={!!event.amount}
+                  value={EVENT_PROFITABILITY_VALUES[event.changeState]}
+                  prefix={PROFITABILITY_PREFIX.SIGN}
+                >
+                  <NumberFormat
+                    value={formatCurrencyValue(event.amount, event.currency)}
+                    allowNegative={false}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={` ${event.currency}`}
+                  />
+                </Profitability>
               </TableCell>
             </TableRow>
           );

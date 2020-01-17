@@ -7,7 +7,6 @@ import { TStatisticPeriodAction } from "components/details/reducers/statistic-pe
 import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
-  CancelablePromise,
   InvestmentEventViewModels,
   ProgramBalanceChart,
   ProgramProfitPercentCharts,
@@ -45,7 +44,7 @@ const sendFollowChartRequest = (
   { start, end }: ChartDefaultPeriod,
   id: string,
   currency: CurrencyEnum
-): CancelablePromise<ProgramProfitPercentCharts> =>
+): Promise<ProgramProfitPercentCharts> =>
   // @ts-ignore
   programsApi.getProgramProfitPercentCharts(id, {
     dateFrom: start,
@@ -72,7 +71,7 @@ export const fetchEventsAction = (
   assetId: string,
   eventLocation: EVENT_LOCATION,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+): ActionType<Promise<InvestmentEventViewModels>> => ({
   type: EVENTS_ACTION_TYPE,
   payload: fetchPortfolioEventsWithoutTable(eventLocation, {
     ...filters,
@@ -133,7 +132,7 @@ export const fetchFollowDescriptionAction = (
 export const fetchOpenPositionsAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => ({
+): ActionType<Promise<TradesViewModel>> => ({
   type: FOLLOW_OPEN_POSITIONS,
   payload: programsApi.getProgramOpenTrades(id, filters)
 });
@@ -141,7 +140,7 @@ export const fetchOpenPositionsAction = (
 export const fetchTradesAction = (
   id: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesSignalViewModel>> => ({
+): ActionType<Promise<TradesSignalViewModel>> => ({
   type: FOLLOW_TRADES,
   payload: programsApi.getAssetTrades(id, filters)
 });
@@ -150,7 +149,7 @@ export const fetchSubscriptionsAction = (
   id: string,
   authorization: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalProviderSubscribers>> => ({
+): ActionType<Promise<SignalProviderSubscribers>> => ({
   type: FOLLOW_SUBSCRIPTIONS,
   payload: programsApi.getProgramSubscribers(id, authorization, filters)
 });
