@@ -10,6 +10,10 @@ const _FeesTradingDiscount: React.FC<{
   return (
     <>
       <div className="fees-info__notes">
+        <p>
+          Genesis Vision Token holders who select Genesis Markets as their
+          broker will receive discounted transaction fees.
+        </p>
         <h3>To be eligible for a trading discount</h3>
         <ul
           className={classNames("fees-info__list-notes", {

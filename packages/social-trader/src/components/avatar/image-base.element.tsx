@@ -33,10 +33,11 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     <DefaultImageComponent color={color} imageClassName={imgClassName} />
   ) : (
     <img
-      src={
+      /*src={
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
       }
-      data-src={currentSrc}
+      data-src={currentSrc}*/
+      src={currentSrc}
       title={title}
       alt={alt}
       className={classNames("lazyload", "blur-up", className, imgClassName)}
