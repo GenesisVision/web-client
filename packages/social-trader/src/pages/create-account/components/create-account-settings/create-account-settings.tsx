@@ -30,10 +30,11 @@ const _CreateAccountSettings: React.FC<Props> = ({
   broker,
   setFieldValue,
   handleSubmit,
-  isValid,
+  errors,
   isSubmitting,
   values: { brokerAccountTypeId, depositAmount, currency, enterMinDeposit }
 }) => {
+  const isValid = Object.values(errors).length === 0;
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const accountType = safeGetElemFromArray(
     broker.accountTypes,
@@ -137,6 +138,7 @@ type Props = InjectedFormikProps<
 const CreateAccountSettings = compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik<ICreateAccountSettingsProps, ICreateAccountSettingsFormValues>({
+    // isInitialValid: true,
     displayName: "CreateAccountSettingsForm",
     mapPropsToValues: ({ broker }) => ({
       [CREATE_ACCOUNT_FIELDS.available]: 0,
