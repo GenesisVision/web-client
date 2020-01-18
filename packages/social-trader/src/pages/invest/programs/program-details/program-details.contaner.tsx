@@ -43,16 +43,6 @@ import {
   getTrades
 } from "./service/program-details.service";
 
-/*const FollowDetailsStatisticSection = dynamic(() =>
-  import(
-    "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section"
-  )
-);
-const ProgramDetailsStatisticSection = dynamic(() =>
-  import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-statistic-section"
-  )
-);*/
 const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
 );
