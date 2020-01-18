@@ -89,6 +89,7 @@ const FullButton: React.FC<{
     const labelText = label || t("wallet-page.transfer");
     return (
       <GVButton
+        className={labelText}
         size={size}
         color={color || "secondary"}
         variant={variant || "outlined"}
@@ -113,13 +114,13 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     const [t] = useTranslation();
+    const label = t("wallet-page.transfer");
     return (
       <ChipButton
+        className={label}
         onClick={onClick}
         size={CHIP_SIZE.SMALL}
-        chipLabel={
-          <ImageBaseElement src={ConvertIcon} alt={t("wallet-page.transfer")} />
-        }
+        chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
       />
     );
   }
