@@ -58,9 +58,11 @@
 }
 
 .statistics-item-container {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
+  &--bottom-content {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
   &--with-padding {
     //@include adaptive-padding(right, $padding-xxxsmall);
     @include adaptive-padding(bottom, $padding-xsmall);
