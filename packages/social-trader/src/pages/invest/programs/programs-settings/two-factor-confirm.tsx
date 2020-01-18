@@ -4,7 +4,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import ConfirmContainer from "modules/confirm/confirm-container";
-import { dispatchProgramDescription } from "pages/programs/program-details/service/program-details.service";
+import { dispatchProgramDescription } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";

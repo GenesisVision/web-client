@@ -2,7 +2,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import ChangeBrokerFormContainer, {
   IChangeBrokerFormContainerProps
-} from "pages/programs/programs-settings/change-broker/change-broker-form.container";
+} from "pages/invest/programs/programs-settings/change-broker/change-broker-form.container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

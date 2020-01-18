@@ -12,7 +12,7 @@ import {
   getTrades
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";

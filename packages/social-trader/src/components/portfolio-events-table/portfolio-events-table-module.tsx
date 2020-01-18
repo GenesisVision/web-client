@@ -16,7 +16,7 @@ import TableModule from "components/table/components/table-module";
 import { GetItemsFuncType } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { InvestmentEventViewModel } from "gv-api-web";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import { useSelector } from "react-redux";
 import { allEventsSelector } from "reducers/platform-reducer";

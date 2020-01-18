@@ -5,7 +5,7 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "pages/programs/program-details/program-details.constants";
+import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "pages/invest/programs/program-details/program-details.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

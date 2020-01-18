@@ -13,7 +13,7 @@ import {
   ProgramFollowDetailsFullTradingAccountDetails
 } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
-import { ProgramDescriptionDataType } from "pages/programs/program-details/program-details.types";
+import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";

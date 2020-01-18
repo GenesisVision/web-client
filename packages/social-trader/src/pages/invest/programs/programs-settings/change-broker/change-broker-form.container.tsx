@@ -1,7 +1,7 @@
 import { getBrokersProgramInfoLoaderData } from "components/assets/asset.helpers";
 import useApiRequest from "hooks/api-request.hook";
-import { getProgramBrokersMethod } from "pages/programs/program-details/service/program-details.service";
-import { changeBrokerMethod } from "pages/programs/programs-settings/services/program-settings.service";
+import { getProgramBrokersMethod } from "pages/invest/programs/program-details/service/program-details.service";
+import { changeBrokerMethod } from "pages/invest/programs/programs-settings/services/program-settings.service";
 import React, { useCallback } from "react";
 import { SetSubmittingType } from "utils/types";
 

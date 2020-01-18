@@ -10,7 +10,7 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import TradesHistoryFeesTooltipWithOwner from "components/trades-history-fees-tooltip/trades-history-fees-tooltip-with-owner";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
-import { ProvidersButton } from "pages/programs/program-details/program-history-section/program-trades/providers-button";
+import { ProvidersButton } from "pages/invest/programs/program-details/program-history-section/program-trades/providers-button";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";

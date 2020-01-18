@@ -24,7 +24,7 @@ import {
   TDashboardTradingStatistic,
   TTrading
 } from "pages/dashboard/dashboard.types";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import { Dispatch } from "redux";
 import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";

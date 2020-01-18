@@ -30,7 +30,7 @@ const FundBalanceChart = dynamic(() =>
 );
 const ProgramAbsoluteProfitChart = dynamic(() =>
   import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+    "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
   )
 );
 

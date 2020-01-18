@@ -1,5 +1,5 @@
 import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 

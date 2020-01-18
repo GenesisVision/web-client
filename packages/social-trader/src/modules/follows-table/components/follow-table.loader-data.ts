@@ -6,7 +6,7 @@ import {
 import {
   personalProgramDetailsLoaderData,
   statisticListLoaderData
-} from "pages/programs/program-details/program-details.loader-data";
+} from "pages/invest/programs/program-details/program-details.loader-data";
 import {
   getRandomColor,
   getRandomInteger,

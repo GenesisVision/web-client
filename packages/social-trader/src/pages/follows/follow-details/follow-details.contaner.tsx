@@ -5,14 +5,14 @@ import { InvestmentBlockDetailsType } from "components/details/details-descripti
 import Page from "components/page/page";
 import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import ProgramDetailsHistorySection from "pages/programs/program-details/program-history-section/program-details-history-section";
-import { financialStatisticTableSelector } from "pages/programs/program-details/reducers/program-history.reducer";
+import ProgramDetailsHistorySection from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
+import { financialStatisticTableSelector } from "pages/invest/programs/program-details/reducers/program-history.reducer";
 import {
   getFinancialStatistics,
   getOpenPositions,
   getSubscriptions,
   getTrades
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";

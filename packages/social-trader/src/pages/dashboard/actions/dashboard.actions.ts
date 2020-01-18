@@ -52,7 +52,7 @@ import {
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import { Action } from "redux";
 import { ActionType, CurrencyEnum } from "utils/types";
 

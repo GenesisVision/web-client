@@ -1,8 +1,8 @@
 import { getBrokersProgramInfoLoaderData } from "components/assets/asset.helpers";
 import { MigrationRequest } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import { getProgramBrokersMethod } from "pages/programs/program-details/service/program-details.service";
-import { cancelChangeBrokerMethod } from "pages/programs/programs-settings/services/program-settings.service";
+import { getProgramBrokersMethod } from "pages/invest/programs/program-details/service/program-details.service";
+import { cancelChangeBrokerMethod } from "pages/invest/programs/programs-settings/services/program-settings.service";
 import React, { useCallback } from "react";
 
 import CancelChangeBrokerForm from "./cancel-change-broker-form";

@@ -11,7 +11,7 @@ import {
 } from "components/table/components/table.types";
 import { ASSET } from "constants/constants";
 import { InvestmentEventViewModel } from "gv-api-web";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import {

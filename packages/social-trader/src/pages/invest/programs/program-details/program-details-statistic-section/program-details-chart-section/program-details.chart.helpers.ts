@@ -4,7 +4,7 @@ import {
   useChartStateDataCreator,
   useFundChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
-import { programAbsoluteProfitChartSelector } from "pages/programs/program-details/reducers/absolute-profit-chart.reducer";
+import { programAbsoluteProfitChartSelector } from "pages/invest/programs/program-details/reducers/absolute-profit-chart.reducer";
 
 import {
   statisticCurrencyAction,

@@ -4,7 +4,7 @@ import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
-import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
+import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
