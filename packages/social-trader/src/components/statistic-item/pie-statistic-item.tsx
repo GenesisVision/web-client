@@ -1,5 +1,6 @@
 import PieContainer from "components/pie-container/pie-container";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import React from "react";
@@ -32,13 +33,13 @@ const _PieStatisticItem: React.FC<Props> = ({
   );
   return (
     <div className="pie-statistics-item">
-      <div className="pie-statistics-item__pie-block">
+      <StatisticItemContainerBlock className="pie-statistics-item__pie-block">
         <PieContainer
           value={percentValue}
           label={`${percentValue} %`}
           color={color}
         />
-      </div>
+      </StatisticItemContainerBlock>
       <StatisticItem accent label={renderLabel}>
         {renderValue}
       </StatisticItem>

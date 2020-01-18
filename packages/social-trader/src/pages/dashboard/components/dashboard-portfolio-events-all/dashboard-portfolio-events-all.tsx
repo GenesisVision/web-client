@@ -5,7 +5,7 @@ import Page from "components/page/page";
 import PortfolioEventsTableModule from "components/portfolio-events-table/portfolio-events-table-module";
 import { PORTFOLIO_EVENTS_COLUMNS } from "components/portfolio-events-table/portfolio-events-table.constants";
 import useTab from "hooks/tab.hook";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

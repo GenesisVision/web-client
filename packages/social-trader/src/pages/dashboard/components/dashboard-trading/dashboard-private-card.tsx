@@ -31,7 +31,7 @@ import {
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
+import ChangeAccountPasswordButton from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";

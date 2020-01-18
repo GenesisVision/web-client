@@ -48,7 +48,7 @@ import fundDetailsReducer, {
 } from "pages/funds/fund-details/reducers/fund-details.reducer";
 import programDetailsReducer, {
   ProgramDetailsState
-} from "pages/programs/program-details/reducers/program-details.reducer";
+} from "pages/invest/programs/program-details/reducers/program-details.reducer";
 import {
   walletReducer,
   WalletState

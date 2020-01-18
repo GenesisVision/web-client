@@ -16,7 +16,7 @@ const _ConvertAssetPage: React.FC<Props> = ({
     `convert-page.convert-${fromTo.assetFrom.toLowerCase()}-to-${fromTo.assetTo.toLowerCase()}`
   );
   return (
-    <Page title={title}>
+    <Page showTitle title={title}>
       <ConvertAssetContainer
         currency={currency}
         fromTo={fromTo}

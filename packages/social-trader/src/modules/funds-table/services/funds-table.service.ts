@@ -9,10 +9,7 @@ import {
 } from "components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "components/table/helpers/sorting.helpers";
 import { push } from "connected-react-router";
-import {
-  CancelablePromise,
-  ItemsViewModelFundDetailsListItem
-} from "gv-api-web";
+import { ItemsViewModelFundDetailsListItem } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -52,7 +49,7 @@ export const getFunds: GetFundsType = () => dispatch => {
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => CancelablePromise<ItemsViewModelFundDetailsListItem>;
+) => Promise<ItemsViewModelFundDetailsListItem>;
 export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();

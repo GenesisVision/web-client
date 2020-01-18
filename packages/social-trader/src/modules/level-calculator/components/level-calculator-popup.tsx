@@ -9,7 +9,7 @@ import {
   ProgramLevelInfo,
   ProgramsLevelsInfo
 } from "gv-api-web";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";

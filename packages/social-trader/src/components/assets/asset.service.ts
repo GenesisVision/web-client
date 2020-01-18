@@ -1,9 +1,9 @@
-import { Broker, CancelablePromise } from "gv-api-web";
+import { Broker } from "gv-api-web";
 import brokersApi from "services/api-client/brokers-api";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
-export const fetchBrokers = (): CancelablePromise<Broker[]> =>
+export const fetchBrokers = (): Promise<Broker[]> =>
   brokersApi
     .getBrokers()
     .then(data =>

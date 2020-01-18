@@ -4,7 +4,6 @@
 .sorting-filter {
   display: flex;
   align-items: center;
-  margin-right: $padding-xxsmall;
   @include media-breakpoint-desktop() {
     margin-right: $padding-big;
   }

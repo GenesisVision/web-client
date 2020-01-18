@@ -1,3 +1,5 @@
+import "./page.scss";
+
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
 import { useRefLink } from "hooks/ref-link";
@@ -16,6 +18,7 @@ import {
 } from "utils/seo";
 
 const Page = ({
+  showTitle,
   title,
   description,
   children,
@@ -41,6 +44,11 @@ const Page = ({
         <div>
           <BackButton />
         </div>
+        {showTitle && (
+          <div className="page__title">
+            <h1>{title}</h1>
+          </div>
+        )}
         {children}
       </>
     </TitleContext.Provider>
@@ -48,6 +56,7 @@ const Page = ({
 };
 
 interface Props {
+  showTitle?: boolean;
   title: string;
   schemas?: Array<SchemaType>;
   description?: string;

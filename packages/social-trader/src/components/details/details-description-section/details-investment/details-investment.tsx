@@ -16,7 +16,7 @@ import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
   getEvents
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

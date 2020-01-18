@@ -37,29 +37,26 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
   const [t] = useTranslation();
   const verified = useSelector(kycConfirmedSelector);
   return (
-    <Page title={t("profile-page.title")}>
-      <div className="app__main-wrapper">
-        <h1>{t("profile-page.title")}</h1>
-        <GVTabs value={route}>
-          {tabs
-            .filter(tab => !tab.hideable || !verified)
-            .map(({ value, pathname }) => (
-              <GVTab
-                key={value}
-                label={
-                  <Link
-                    to={{
-                      pathname
-                    }}
-                  >
-                    {t(`profile-page.tabs.${value}`)}
-                  </Link>
-                }
-                value={value}
-              />
-            ))}
-        </GVTabs>
-      </div>
+    <Page showTitle title={t("profile-page.title")}>
+      <GVTabs value={route}>
+        {tabs
+          .filter(tab => !tab.hideable || !verified)
+          .map(({ value, pathname }) => (
+            <GVTab
+              key={value}
+              label={
+                <Link
+                  to={{
+                    pathname
+                  }}
+                >
+                  {t(`profile-page.tabs.${value}`)}
+                </Link>
+              }
+              value={value}
+            />
+          ))}
+      </GVTabs>
       <div className="profile-layout">{children}</div>
     </Page>
   );

@@ -10,11 +10,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__section {
     @include background-with-avatar-level($background-color);
     @include adaptive-margin(bottom, $padding-xsmall);
-    padding: 0 $padding-small/$divider-padding;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: 0;
-    }
   }
 
   &__main {
@@ -100,10 +95,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       margin-left: $padding-controls-left;
       margin-right: 0;
     }
-  }
-
-  &__level-calculator {
-    align-self: flex-end;
   }
 
   &__statistic-container {

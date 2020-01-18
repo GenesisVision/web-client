@@ -1,7 +1,6 @@
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise } from "gv-api-web";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
 import programApi from "services/api-client/programs-api";
@@ -19,7 +18,7 @@ const DEFAULT_ITEMS_ON_PAGE = 12;
 
 export const fetchPrograms = (
   filters: any //FetchProgramsFiltersType TODO
-): CancelablePromise<IDataModel> => {
+): Promise<IDataModel> => {
   return programApi.getPrograms({
     ...filters,
     authorization: authService.getAuthArg()

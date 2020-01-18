@@ -5,7 +5,7 @@ import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import { dispatchProgramDescriptionWithId } from "pages/programs/program-details/service/program-details.service";
+import { dispatchProgramDescriptionWithId } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";

@@ -6,7 +6,6 @@ import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { ROLE, ROLE_ENV } from "constants/constants";
 import {
-  CancelablePromise,
   InvestmentEventViewModels,
   SignalProviderSubscribers,
   TradesSignalViewModel,
@@ -40,7 +39,7 @@ import { FollowStatisticResult } from "./follow-details.types";
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+): ActionType<Promise<InvestmentEventViewModels>> =>
   fetchEventsAction(id, eventLocation, filters);
 
 export const getFollowBrokers = (id: string) =>
@@ -81,16 +80,27 @@ export const getFollowStatistic = (
     // @ts-ignore
     programsApi.getProgramBalanceChart(followId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
+    //@ts-ignore
     const statistic = {
+      //@ts-ignore
       trades: profitChart.trades,
+      //@ts-ignore
       successTradesPercent: profitChart.successTradesPercent,
+      //@ts-ignore
       profitFactor: profitChart.profitFactor,
+      //@ts-ignore
       investors: profitChart.investors,
+      //@ts-ignore
       sharpeRatio: profitChart.sharpeRatio,
+      //@ts-ignore
       sortinoRatio: profitChart.sortinoRatio,
+      //@ts-ignore
       maxDrawdown: profitChart.maxDrawdown,
+      //@ts-ignore
       periodStarts: profitChart.lastPeriodStarts,
+      //@ts-ignore
       periodEnds: profitChart.lastPeriodEnds,
+      //@ts-ignore
       tradingVolume: profitChart.tradingVolume
     };
     return { statistic, profitChart, balanceChart };
@@ -99,19 +109,19 @@ export const getFollowStatistic = (
 
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => {
+): ActionType<Promise<TradesViewModel>> => {
   return fetchOpenPositionsAction(id, filters);
 };
 
 export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesSignalViewModel>> => {
+): ActionType<Promise<TradesSignalViewModel>> => {
   return fetchTradesAction(id, filters);
 };
 
 export const getSubscriptions = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<SignalProviderSubscribers>> => {
+): ActionType<Promise<SignalProviderSubscribers>> => {
   const authorization = authService.getAuthArg();
   return fetchSubscriptionsAction(id, authorization, filters);
 };
@@ -156,23 +166,21 @@ export enum EVENT_LOCATION {
 export const fetchPortfolioEventsWithoutTable = (
   eventLocation: EVENT_LOCATION,
   filters?: any
-): CancelablePromise<InvestmentEventViewModels> => {
+): Promise<InvestmentEventViewModels> => {
   const authorization = authService.getAuthArg();
   let request: (
     authorization: string,
     opts?: Object
-  ) => CancelablePromise<InvestmentEventViewModels>;
+  ) => Promise<InvestmentEventViewModels>;
   switch (
     ROLE_ENV || ROLE.MANAGER // TODO remove after union
   ) {
     case ROLE.INVESTOR:
-      request = () =>
-        new CancelablePromise<InvestmentEventViewModels>(() => {}); //TODO investorApi.getEvents;
+      request = () => new Promise<InvestmentEventViewModels>(() => {}); //TODO investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = () =>
-        new CancelablePromise<InvestmentEventViewModels>(() => {}); //TODO managerApi.getEvents;
+      request = () => new Promise<InvestmentEventViewModels>(() => {}); //TODO managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation });
@@ -182,23 +190,21 @@ export const fetchPortfolioEvents = (
   eventLocation: EVENT_LOCATION
 ): GetItemsFuncType => (
   filters?
-): CancelablePromise<TableItems<InvestmentEventViewModels>> => {
+): Promise<TableItems<InvestmentEventViewModels>> => {
   const authorization = authService.getAuthArg();
   let request: (
     authorization: string,
     opts?: Object
-  ) => CancelablePromise<InvestmentEventViewModels>;
+  ) => Promise<InvestmentEventViewModels>;
   switch (
     ROLE_ENV || ROLE.MANAGER // TODO remove after union
   ) {
     case ROLE.INVESTOR:
-      request = () =>
-        new CancelablePromise<InvestmentEventViewModels>(() => {}); // TODO investorApi.getEvents;
+      request = () => new Promise<InvestmentEventViewModels>(() => {}); // TODO investorApi.getEvents;
       break;
     case ROLE.MANAGER:
     default:
-      request = () =>
-        new CancelablePromise<InvestmentEventViewModels>(() => {}); // TODO managerApi.getEvents;
+      request = () => new Promise<InvestmentEventViewModels>(() => {}); // TODO managerApi.getEvents;
       break;
   }
   return request(authorization, { ...filters, eventLocation }).then(

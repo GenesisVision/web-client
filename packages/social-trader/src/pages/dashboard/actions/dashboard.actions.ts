@@ -3,7 +3,6 @@ import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDashboardAssetChart } from "constants/constants";
 import {
-  CancelablePromise,
   InvestmentEventViewModels,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem
@@ -53,7 +52,7 @@ import {
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import { Action } from "redux";
 import { ActionType, CurrencyEnum } from "utils/types";
 
@@ -77,7 +76,7 @@ export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 export const fetchEventsAction = (
   filters: ComposeFiltersAllType,
   eventLocation: EVENT_LOCATION
-): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+): ActionType<Promise<InvestmentEventViewModels>> => ({
   type: EVENTS_ACTION_TYPE,
   payload: fetchPortfolioEventsWithoutTable(eventLocation, filters)
 });
@@ -87,7 +86,7 @@ const managerApi: any = {};
 export const fetchPortfolioEventsAction = (
   auth: string,
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> => ({
+): ActionType<Promise<InvestmentEventViewModels>> => ({
   type: DASHBOARD_PORTFOLIO_EVENTS,
   payload: managerApi.getEvents(auth, filters)
 });
@@ -97,7 +96,7 @@ export const fetchInRequestsAction = (
   skip: number,
   take: number,
   assetType?: "All" | "Program" | "Fund" | "Signal"
-): ActionType<CancelablePromise<any>> => ({
+): ActionType<Promise<any>> => ({
   type: DASHBOARD_IN_REQUESTS,
   payload: managerApi.getRequests(skip, take, auth, {
     assetType
@@ -107,7 +106,7 @@ export const fetchInRequestsAction = (
 export const fetchDashboardProgramsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
+): ActionType<Promise<ItemsViewModelProgramDetailsListItem>> => ({
   type: DASHBOARD_PROGRAMS,
   payload: managerApi.getManagerPrograms(auth, filters)
 });
@@ -115,7 +114,7 @@ export const fetchDashboardProgramsAction = (
 export const fetchDashboardFundsAction = (
   auth: string,
   filters?: ComposeFiltersAllType
-): ActionType<CancelablePromise<ItemsViewModelFundDetailsListItem>> => ({
+): ActionType<Promise<ItemsViewModelFundDetailsListItem>> => ({
   type: DASHBOARD_FUNDS,
   payload: managerApi.getManagerFunds(auth, filters)
 });
@@ -123,7 +122,7 @@ export const fetchDashboardFundsAction = (
 export const cancelProgramRequestAction = (
   auth: string,
   id: string
-): ActionType<CancelablePromise<any>> => ({
+): ActionType<Promise<any>> => ({
   type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
   payload: managerApi.cancelRequest(id, auth)
 });
@@ -136,9 +135,7 @@ export const dashboardChartAction = (
   payload: assetChart
 });
 
-export const fetchAssetsAction = (
-  auth: string
-): ActionType<CancelablePromise<any>> => ({
+export const fetchAssetsAction = (auth: string): ActionType<Promise<any>> => ({
   type: DASHBOARD_ASSETS,
   payload: managerApi.getManagerAssets(auth)
 });

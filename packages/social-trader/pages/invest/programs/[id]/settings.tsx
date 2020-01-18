@@ -3,8 +3,8 @@ import withPrivateRoute from "decorators/with-private-route";
 import {
   dispatchProgramDescription,
   dispatchProgramId
-} from "pages/programs/program-details/service/program-details.service";
-import ProgramSettingsPage from "pages/programs/programs-settings/program-settings.page";
+} from "pages/invest/programs/program-details/service/program-details.service";
+import ProgramSettingsPage from "pages/invest/programs/programs-settings/program-settings.page";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";

@@ -2,7 +2,6 @@ import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.h
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import {
-  CancelablePromise,
   DashboardAssetChart,
   DashboardChartAsset,
   DashboardTradingAsset,
@@ -25,7 +24,7 @@ import {
   TDashboardTradingStatistic,
   TTrading
 } from "pages/dashboard/dashboard.types";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import { Dispatch } from "redux";
 import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
@@ -38,17 +37,17 @@ import { fetchEventsAction } from "../actions/dashboard.actions";
 
 export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<IDataModel> =>
+): Promise<IDataModel> =>
   dashboardApi.getInvestingFunds(authService.getAuthArg(), filters);
 
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<IDataModel> =>
+): Promise<IDataModel> =>
   dashboardApi.getInvestingPrograms(authService.getAuthArg(), filters);
 
 export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<IDataModel> =>
+): Promise<IDataModel> =>
   dashboardApi.getMostProfitableAssets(authService.getAuthArg(), filters);
 
 export const fetchRequests = (take: number = 100) =>
@@ -57,7 +56,7 @@ export const fetchRequests = (take: number = 100) =>
 export const getRequestsCount = () =>
   fetchRequests(0).then(({ total }) => total);
 
-export const fetchInRequests = (): CancelablePromise<TDashboardInRequests> =>
+export const fetchInRequests = (): Promise<TDashboardInRequests> =>
   fetchRequests().then(({ items }) => items);
 
 export const fetchMultiChartData = ({
@@ -68,7 +67,7 @@ export const fetchMultiChartData = ({
   assets: string[];
   period: ChartDefaultPeriod;
   currency: CurrencyEnum;
-}): CancelablePromise<DashboardAssetChart[]> =>
+}): Promise<DashboardAssetChart[]> =>
   dashboardApi
     .getChart(authService.getAuthArg(), {
       showIn: currency,
@@ -80,7 +79,7 @@ export const fetchMultiChartData = ({
 
 export const fetchAssets = (
   period: ChartDefaultPeriod
-): CancelablePromise<DashboardChartAsset[]> =>
+): Promise<DashboardChartAsset[]> =>
   dashboardApi
     .getChartAssets(authService.getAuthArg())
     .then(({ assets }) => assets);
@@ -89,25 +88,23 @@ export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<ItemsViewModelDashboardTradingAsset> =>
+): Promise<ItemsViewModelDashboardTradingAsset> =>
   dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), filters);
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
-): CancelablePromise<ItemsViewModelDashboardTradingAsset> =>
+): Promise<ItemsViewModelDashboardTradingAsset> =>
   dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
 
-export const getTradingData = (): CancelablePromise<TTrading> =>
-  (Promise.resolve(getTradingLoaderData()) as unknown) as CancelablePromise<
-    TTrading
-  >;
+export const getTradingData = (): Promise<TTrading> =>
+  (Promise.resolve(getTradingLoaderData()) as unknown) as Promise<TTrading>;
 
-export const getPortfolio = (): CancelablePromise<TDashboardPortfolio> =>
+export const getPortfolio = (): Promise<TDashboardPortfolio> =>
   dashboardApi
     .getPortfolio(authService.getAuthArg())
     .then(({ distribution }) => distribution);
 
-export const getAssetsPercents = (): CancelablePromise<TAssets> =>
+export const getAssetsPercents = (): Promise<TAssets> =>
   dashboardApi
     .getHoldings(authService.getAuthArg())
     .then(({ assets }) => assets);
@@ -116,7 +113,7 @@ export const getRecommendations = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<FollowDetailsListItem[]> =>
+}): Promise<FollowDetailsListItem[]> =>
   dashboardApi
     .getRecommendations(authService.getAuthArg(), {
       onlyFollows: true,
@@ -130,14 +127,14 @@ export const getTotal = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<TDashboardTotal> =>
+}): Promise<TDashboardTotal> =>
   dashboardApi.getSummary(authService.getAuthArg(), { currency });
 
 export const fetchTradingTotalStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<TDashboardTradingStatistic> =>
+}): Promise<TDashboardTradingStatistic> =>
   dashboardApi.getTradingDetails(authService.getAuthArg(), {
     currency,
     eventsTake: 4
@@ -147,7 +144,7 @@ export const getTotalInvestingStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<TDashboardInvestingStatistic> =>
+}): Promise<TDashboardInvestingStatistic> =>
   dashboardApi.getInvestingDetails(authService.getAuthArg(), {
     currency,
     eventsTake: 4
@@ -155,7 +152,7 @@ export const getTotalInvestingStatistic = ({
 
 export const getEvents = (eventLocation: EVENT_LOCATION) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<InvestmentEventViewModels>> =>
+): ActionType<Promise<InvestmentEventViewModels>> =>
   fetchEventsAction(filters, eventLocation);
 
 export const getPortfolioEvents = (dispatch: Dispatch) =>

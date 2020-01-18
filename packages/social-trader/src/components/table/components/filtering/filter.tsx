@@ -5,6 +5,7 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { TableToolbarItemBlock } from "components/table/components/table-toolbar-item.block";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
@@ -34,7 +35,7 @@ const _Filter: React.FC<Props> = ({
     cancel: clearAnchor
   });
   return (
-    <>
+    <TableToolbarItemBlock>
       <div className="filter" onClick={setAnchor}>
         <div className="filter__label">{label}</div>
         <div className="filter__value">{renderValueText(value)}</div>
@@ -50,7 +51,7 @@ const _Filter: React.FC<Props> = ({
       >
         {child}
       </Popover>
-    </>
+    </TableToolbarItemBlock>
   );
 };
 

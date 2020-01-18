@@ -9,7 +9,11 @@ import BackButtonBody from "./back-button-body";
 export const _BackButton: React.FC = () => {
   const { from } = useHistoryContext();
   if (!from) return null;
-  return <BackButtonBody onClick={() => Router.back()} backPath={from} />;
+  return (
+    <div className="page__back">
+      <BackButtonBody onClick={() => Router.back()} backPath={from} />
+    </div>
+  );
 };
 
 const BackButton = React.memo(_BackButton);

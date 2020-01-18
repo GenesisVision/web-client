@@ -3,51 +3,6 @@
 @import "~shared/styles/_breakpoint";
 
 .asset-settings {
-  padding-left: $padding-xsmall;
-  padding-right: $padding-xsmall;
-  box-sizing: border-box;
-  @include adaptive-padding(top, $padding-medium);
-  @include media-breakpoint-landscape-phone() {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  &__title {
-    &:first-letter {
-      text-transform: uppercase;
-    }
-  }
-
-  &__broker-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__signaling-edit-form-title-block {
-    display: flex;
-    align-items: center;
-    @include adaptive-padding(bottom, $padding-xsmall);
-    margin: 0 $padding-xsmall;
-  }
-
-  &__block {
-    @include adaptive-margin(bottom, $padding-large);
-    box-sizing: border-box;
-
-    @include media-breakpoint-landscape-phone() {
-      padding-left: 60px;
-      border-left: 2px solid $secondary-color;
-    }
-
-    &:first-child {
-      @include adaptive-margin(bottom, $padding-large);
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
   &__text {
     @include adaptive-padding(bottom, $padding-xsmall);
     color: rgba($text-light-color, 0.5);
@@ -74,22 +29,8 @@
       margin-bottom: 0;
     }
 
-    &--broker-list {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 0;
-    }
-
     @include media-breakpoint-landscape-phone() {
       max-width: 765px;
     }
-  }
-
-  .svg-loader {
-    max-width: 100%;
-  }
-
-  & .create-fund-settings__assets-and-line {
-    padding-top: 0;
   }
 }

@@ -1,6 +1,5 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
-  CancelablePromise,
   Currency,
   ItemsViewModelTransactionViewModel,
   WalletBaseData
@@ -43,7 +42,7 @@ export const fetchAvailableWallets = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): CancelablePromise<TWalletsAvailableData> => {
+}): Promise<TWalletsAvailableData> => {
   const authorization = authService.getAuthArg();
   return walletApi
     .getWalletAvailable(currency, authorization)
@@ -84,7 +83,7 @@ export type FetchTransactionsInternalFilterType = {
 export const fetchMultiTransactions = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsInternalFilterType
-): CancelablePromise<ItemsViewModelTransactionViewModel> => {
+): Promise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
 
   return walletApi.getTransactionsInternal(authorization, {
@@ -104,7 +103,7 @@ export type FetchTransactionsExternalFilterType = {
 export const fetchMultiTransactionsExternal = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsExternalFilterType
-): CancelablePromise<ItemsViewModelTransactionViewModel> => {
+): Promise<ItemsViewModelTransactionViewModel> => {
   const authorization = authService.getAuthArg();
   return walletApi.getTransactionsExternal(authorization, {
     ...filters,

@@ -2,6 +2,7 @@ import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Crashable from "decorators/crashable";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
@@ -61,7 +62,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   return (
     <StatisticItemList>
       {isOwnProgram && (
-        <StatisticItem className="asset-details-description__level-calculator">
+        <StatisticItemContainerBlock bottomContent>
           <LevelCalculator
             id={id}
             currency={currency}
@@ -69,7 +70,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
             levelsParameters={levelsParameters}
             isKycConfirmed={isKycConfirmed || false}
           />
-        </StatisticItem>
+        </StatisticItemContainerBlock>
       )}
       <StatisticItem
         label={

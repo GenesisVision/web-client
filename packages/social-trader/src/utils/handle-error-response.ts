@@ -7,16 +7,22 @@ export type ResponseError = {
 };
 
 export const SERVER_CONNECTION_ERROR_CODE = "ServerConnectionError";
+
 interface IResponse {
   statusCode: number;
   body: ErrorViewModel | null;
 }
 
 interface IHandleErrorResponseFunc {
-  (response: IResponse): ResponseError;
+  (response: IResponse | Error): ResponseError;
 }
+
+const isServerError = (response: IResponse | Error): response is Error => {
+  return response instanceof Error;
+};
+
 const handleErrorResponse: IHandleErrorResponseFunc = response => {
-  if (response) {
+  if (response && !isServerError(response)) {
     if (response.body !== null && response.body.errors) {
       return {
         errorMessage: response.body.errors

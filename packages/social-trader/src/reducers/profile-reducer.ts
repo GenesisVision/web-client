@@ -7,7 +7,7 @@ import { ItemsViewModelReferralFriend, PartnershipDetails } from "gv-api-web";
 import {
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_DATE_RANGE_MIN_FILTER_NAME
-} from "pages/programs/program-details/program-details.constants";
+} from "pages/invest/programs/program-details/program-details.constants";
 import { RootState } from "reducers/root-reducer";
 import { combineReducers } from "redux";
 import { apiSelector } from "utils/selectors";
