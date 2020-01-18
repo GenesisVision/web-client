@@ -62,7 +62,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   return (
     <StatisticItemList>
       {isOwnProgram && (
-        <StatisticItemContainerBlock>
+        <StatisticItemContainerBlock bottomContent>
           <LevelCalculator
             id={id}
             currency={currency}

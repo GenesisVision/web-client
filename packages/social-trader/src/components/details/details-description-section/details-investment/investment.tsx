@@ -143,7 +143,7 @@ const _Investment: React.FC<Props> = ({
           personalDetails.isInvested &&
           personalDetails.canInvest &&
           !isOwnAsset && (
-            <StatisticItemContainerBlock>
+            <StatisticItemContainerBlock bottomContent>
               <ProgramReinvestingContainer
                 id={id}
                 isReinvesting={personalDetails.isReinvest}
