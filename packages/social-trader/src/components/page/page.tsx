@@ -1,3 +1,5 @@
+import "./page.scss";
+
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
 import { useRefLink } from "hooks/ref-link";
