@@ -1,6 +1,7 @@
 import { CardsIcon } from "components/icon/cards-icon";
 import { TableIcon } from "components/icon/table-icon";
 import SortingFilter from "components/table/components/sorting/sorting-filter/sorting-filter";
+import { TableToolbarItemBlock } from "components/table/components/table-toolbar-item.block";
 import React, { useCallback } from "react";
 
 import { LIST_VIEW } from "../table.constants";
@@ -43,46 +44,52 @@ const _TableToolbar: React.FC<
 
   return (
     <div className="table__toolbar">
-      <div className="table__toolbar-heading">
-        {title && !disableTitle && <h3 className="table__title">{title}</h3>}
+      <TableToolbarItemBlock className="table__toolbar-heading">
+        {title && !disableTitle && (
+          <TableToolbarItemBlock>
+            <h3 className="table__title">{title}</h3>
+          </TableToolbarItemBlock>
+        )}
         {renderMappings && updateFilter && filtering && (
-          <div className="table__filters table__filters--mapping">
+          <TableToolbarItemBlock className="table__filters table__filters--mapping">
             {renderMappings(updateFilter, filtering)}
-          </div>
+          </TableToolbarItemBlock>
         )}
-      </div>
-      <div className="table__filters">
-        {view === LIST_VIEW.CARDS && sorting !== undefined && (
-          <SortingFilter
-            sorting={sorting}
-            columns={columns}
-            updateSorting={updateSorting}
-            renderValueText={renderSorting}
-          />
-        )}
-        {renderFilters &&
-          updateFilter &&
-          filtering &&
-          renderFilters(updateFilter, filtering)}
-        {createButtonToolbar}
-        {exportButtonToolbar}
-      </div>
-      {isViewSwitchEnabled && (
-        <div className="table__toggle">
-          <div
-            className="table__toggle-icon"
-            onClick={handleIconClick(LIST_VIEW.CARDS)}
-          >
-            <CardsIcon primary={view === LIST_VIEW.CARDS} />
-          </div>
-          <div
-            className="table__toggle-icon"
-            onClick={handleIconClick(LIST_VIEW.TABLE)}
-          >
-            <TableIcon primary={view === LIST_VIEW.TABLE} />
-          </div>
-        </div>
+      </TableToolbarItemBlock>
+      {view === LIST_VIEW.CARDS && sorting !== undefined && (
+        <SortingFilter
+          sorting={sorting}
+          columns={columns}
+          updateSorting={updateSorting}
+          renderValueText={renderSorting}
+        />
       )}
+      <TableToolbarItemBlock className="table__filters">
+        <TableToolbarItemBlock className="table__filters">
+          {renderFilters &&
+            updateFilter &&
+            filtering &&
+            renderFilters(updateFilter, filtering)}
+          {createButtonToolbar}
+          {exportButtonToolbar}
+        </TableToolbarItemBlock>
+        {isViewSwitchEnabled && (
+          <TableToolbarItemBlock className="table__toggle">
+            <div
+              className="table__toggle-icon"
+              onClick={handleIconClick(LIST_VIEW.CARDS)}
+            >
+              <CardsIcon primary={view === LIST_VIEW.CARDS} />
+            </div>
+            <div
+              className="table__toggle-icon"
+              onClick={handleIconClick(LIST_VIEW.TABLE)}
+            >
+              <TableIcon primary={view === LIST_VIEW.TABLE} />
+            </div>
+          </TableToolbarItemBlock>
+        )}
+      </TableToolbarItemBlock>
     </div>
   );
 };

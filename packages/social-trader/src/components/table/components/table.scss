@@ -31,12 +31,9 @@ $view-svg-size: 15px;
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     @include horizontal-paddings($padding-xsmall);
     flex-wrap: wrap;
-    @include media-breakpoint-desktop() {
-      justify-content: flex-end;
-    }
   }
 
   &__toggle {
@@ -53,7 +50,7 @@ $view-svg-size: 15px;
       height: 18px;
     }
     &:not(:last-child) {
-      padding: 0 $view-svg-size * 2;
+      @include adaptive-margin(right, $view-svg-size * 2);
     }
   }
 
@@ -66,7 +63,6 @@ $view-svg-size: 15px;
   &__title {
     padding: 0;
     justify-self: flex-start;
-    margin-right: auto;
     white-space: nowrap;
   }
 
@@ -74,11 +70,9 @@ $view-svg-size: 15px;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    @include adaptive-margin(left, $padding-xxsmall);
 
     &--mapping {
       flex-wrap: nowrap;
-      @include adaptive-margin(left, $padding-xsmall);
     }
   }
 
@@ -138,10 +132,6 @@ $view-svg-size: 15px;
   align-items: center;
   @include font-size($font-size-paragraph);
   font-weight: 600;
-
-  &:not(:last-child) {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
 }
 
 .message {

@@ -12,9 +12,6 @@
       stroke: $primary-color;
     }
   }
-  &:not(:last-child) {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
 
   &__label {
     opacity: 0.5;
