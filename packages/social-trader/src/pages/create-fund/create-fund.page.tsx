@@ -7,7 +7,7 @@ import CreateFundContainer from "./components/create-fund.container";
 const _CreateFundPage: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Page title={t("create-fund-page.title")}>
+    <Page showTitle title={t("create-fund-page.title")}>
       <CreateFundContainer />
     </Page>
   );

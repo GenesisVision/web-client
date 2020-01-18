@@ -1,5 +1,4 @@
 import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
-import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import { Push } from "components/link/link";
 import { Broker } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
@@ -36,17 +35,14 @@ const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
     []
   );
   return (
-    <>
-      <AssetTitleBlock>{t("attach-account-page.title")}</AssetTitleBlock>
-      <AssetContentBlock>
-        <AttachAccountSettings
-          requestBrokerName={requestBrokerName}
-          onSubmit={handleSubmit}
-          data={exchanges!}
-          loaderData={[]}
-        />
-      </AssetContentBlock>
-    </>
+    <AssetContentBlock>
+      <AttachAccountSettings
+        requestBrokerName={requestBrokerName}
+        onSubmit={handleSubmit}
+        data={exchanges!}
+        loaderData={[]}
+      />
+    </AssetContentBlock>
   );
 };
 

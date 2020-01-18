@@ -1,6 +1,5 @@
 import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
 import { AssetTabsBlock } from "components/assets/asset-fields/asset-tabs.block";
-import { AssetTitleBlock } from "components/assets/asset-fields/asset-title.block";
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Broker } from "gv-api-web";
@@ -34,7 +33,6 @@ const _CreateAccountContainer: React.FC<Props> = ({
 
   return (
     <div>
-      <AssetTitleBlock>{t("create-account-page.title")}</AssetTitleBlock>
       <AssetTabsBlock value={tab}>
         <GVTab
           onClick={confirmNavigateToBroker}

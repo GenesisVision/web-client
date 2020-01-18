@@ -63,9 +63,8 @@ const _AssetsEditPage: React.FC<Props> = ({
   ]);
   const title = t("asset-settings.title");
   return (
-    <Page title={title}>
+    <Page showTitle title={title}>
       <div className="asset-settings">
-        <h1 className="asset-settings__title">{title}</h1>
         {settingsBlocks(editAssetCallback, applyCloseAsset)}
       </div>
     </Page>

@@ -14,8 +14,8 @@ const Component: NextPage<IErrorPage> = ({
   const message =
     notFoundMessage || errorMessage || statusMessage || "error...";
   return (
-    <Page title={t("not-found-page.title")}>
-      <div className="app__main-wrapper">{message}</div>
+    <Page showTitle title={t("not-found-page.title")}>
+      {message}
     </Page>
   );
 };

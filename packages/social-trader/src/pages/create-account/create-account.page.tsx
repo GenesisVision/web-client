@@ -11,7 +11,7 @@ const _CreateAccountPage: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("create-account-page.title")}>
+    <Page showTitle title={t("create-account-page.title")}>
       <CreateAccountContainer
         brokers={brokers}
         requestBrokerName={requestBrokerName}
