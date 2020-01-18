@@ -192,3 +192,8 @@ $view-svg-size: 15px;
     width: 10px;
   }
 }
+.table-toolbar-item-block {
+  &:not(:last-child) {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+}
