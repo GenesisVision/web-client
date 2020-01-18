@@ -1,6 +1,5 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { TradesDelay } from "gv-api-web";
-import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
@@ -40,7 +39,6 @@ const _ProgramsEditPage: React.FC = () => {
           closeProgram={applyCloseAsset}
           description={description!}
           editProgram={editProgram}
-          loader={<AssetSettingsLoader />}
         />
       )}
     />
