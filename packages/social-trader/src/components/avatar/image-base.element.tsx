@@ -31,19 +31,17 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     setIsError();
   }, []);
   const currentSrc = isError ? (defaultImage ? defaultImage : emptyImg) : src;
-  return isError || !hasUrl ? (
-    <div>
-      {DefaultImageComponent ? (
-        <DefaultImageComponent
-          color={color}
-          imageClassName={defaultImageClassName}
-        />
-      ) : (
-        // eslint-disable-next-line jsx-a11y/img-redundant-alt
-        <img src={emptyImg} alt="Image not found" className={className} />
-      )}
-    </div>
-  ) : (
+  if (isError || !hasUrl)
+    return DefaultImageComponent ? (
+      <DefaultImageComponent
+        color={color}
+        imageClassName={classNames(defaultImageClassName, className)}
+      />
+    ) : (
+      // eslint-disable-next-line jsx-a11y/img-redundant-alt
+      <img src={emptyImg} alt="Image not found" className={className} />
+    );
+  return (
     <img
       src={emptyImg}
       data-src={currentSrc}
