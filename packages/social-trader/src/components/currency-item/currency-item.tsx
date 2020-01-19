@@ -28,7 +28,7 @@ const _CurrencyItem: React.FC<Props> = ({
   );
   const rateString = `1 ${name} = ${rate} $`;
   const renderItemContent = () => (
-    <div className="currency-item">
+    <div className="currency-item" data-test-id={symbol}>
       {logo && (
         <div
           className={classNames("currency-item__icon", {

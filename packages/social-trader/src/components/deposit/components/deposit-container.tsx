@@ -1,7 +1,9 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { ASSET } from "constants/constants";
+import { WalletBaseData } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dynamic";
+import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import {
   fetchAvailableWallets,
   TWalletsAvailableData
@@ -11,8 +13,6 @@ import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
-
-import { DepositInfoLoaderData } from "./deposit.loader";
 
 const DepositPopup = dynamic(() => import("./deposit-popup"));
 
@@ -30,6 +30,16 @@ const _DepositContainer: React.FC<Props> = ({
   onApply,
   ownAsset
 }) => {
+  const wallets: WalletBaseData[] = useSelector(walletsSelector).map(
+    ({ currency, available, id, logo, title }) => ({
+      currency,
+      available,
+      id,
+      logo,
+      rate: 1,
+      title
+    })
+  );
   const gvCommission = useSelector(gvInvestFeeSelector);
   const stateCurrency = useSelector(currencySelector);
   const { data, sendRequest: getInvestInfo } = useApiRequest<
@@ -41,6 +51,7 @@ const _DepositContainer: React.FC<Props> = ({
     id && open && getInvestInfo({ currency: stateCurrency });
   }, [open]);
   const fees = { gvCommission, entryFee };
+  if (!wallets.length) return null;
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopup
@@ -49,7 +60,7 @@ const _DepositContainer: React.FC<Props> = ({
         availableToInvest={availableToInvest}
         fees={fees}
         minDeposit={minDeposit}
-        loaderData={DepositInfoLoaderData}
+        loaderData={wallets}
         id={id}
         onClose={onClose}
         onApply={onApply}
