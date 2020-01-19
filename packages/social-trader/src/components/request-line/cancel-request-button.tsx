@@ -14,6 +14,7 @@ const _CancelRequestButton: React.FC<{
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { sendRequest, isPending: disabled } = useApiRequest({
+    successMessage: "request-line.success-message",
     request: (id: string) =>
       investmentsApi.cancelRequest(id, authService.getAuthArg()),
     middleware: [onApplyCancelRequest, setClosePopup]
