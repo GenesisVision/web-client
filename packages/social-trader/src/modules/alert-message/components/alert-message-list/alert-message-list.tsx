@@ -24,6 +24,8 @@ const AlertBox = posed.div({
   }
 });
 
+const CLEAR_ALL_ALERTS_ID = "CLEAR_ALL_ALERTS_ID";
+
 const _AlertMessageList: React.FC<Props> = props => {
   const { t } = useTranslation();
   const { messages, removeMessage, clearAllMessages } = props;
@@ -47,7 +49,11 @@ const _AlertMessageList: React.FC<Props> = props => {
   if (messages.length > 1) {
     children.push(
       <AlertBox key={"delete-button"}>
-        <GVButton color="primary" onClick={clearAllMessages}>
+        <GVButton
+          data-test-id={CLEAR_ALL_ALERTS_ID}
+          color="primary"
+          onClick={clearAllMessages}
+        >
           {t("alerts.clear-all")}
         </GVButton>
       </AlertBox>
