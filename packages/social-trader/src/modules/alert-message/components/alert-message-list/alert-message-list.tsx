@@ -24,7 +24,7 @@ const AlertBox = posed.div({
   }
 });
 
-const CLEAR_ALL_ALERTS_ID = "CLEAR_ALL_ALERTS_ID";
+export const CLEAR_ALL_ALERTS_ID = "CLEAR_ALL_ALERTS_ID";
 
 const _AlertMessageList: React.FC<Props> = props => {
   const { t } = useTranslation();
