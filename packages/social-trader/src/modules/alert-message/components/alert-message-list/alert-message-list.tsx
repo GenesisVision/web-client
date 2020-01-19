@@ -50,7 +50,7 @@ const _AlertMessageList: React.FC<Props> = props => {
     children.push(
       <AlertBox key={"delete-button"}>
         <GVButton
-          data-test-id={CLEAR_ALL_ALERTS_ID}
+          testId={CLEAR_ALL_ALERTS_ID}
           color="primary"
           onClick={clearAllMessages}
         >
