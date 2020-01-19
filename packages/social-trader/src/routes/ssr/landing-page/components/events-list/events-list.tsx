@@ -6,18 +6,20 @@ import React, { useEffect, useState } from "react";
 import EventItem from "routes/ssr/landing-page/components/events-list/event-item";
 import EventLastItem from "routes/ssr/landing-page/components/events-list/event-last-item";
 
+const TIME_DELAY = 5000;
+
 interface Props {
   className?: string;
   events: PlatformEvent[];
 }
 
 const _EventsList: React.FC<Props> = ({ className, events }) => {
-  const counts = events.length;
+  const countItems = events.length;
   const [startIndex, setStartIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setStartIndex(state => (state === 0 ? counts - 1 : state - 1));
-    }, 5000);
+      setStartIndex(state => (state === 0 ? countItems - 1 : state - 1));
+    }, TIME_DELAY);
 
     return () => clearInterval(interval);
   }, []);
@@ -27,7 +29,8 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
         <EventItem
           key={index}
           startIndex={startIndex}
-          countList={counts}
+          countItems={countItems}
+          countShowingItems={5}
           index={index}
           {...event}
         />

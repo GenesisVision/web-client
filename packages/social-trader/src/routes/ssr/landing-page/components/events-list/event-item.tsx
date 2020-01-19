@@ -3,19 +3,21 @@ import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-def
 import Link from "components/link/link";
 import { PlatformEvent } from "gv-api-web";
 import React from "react";
-import { animated, useSpring } from "react-spring";
+import { animated, config, useSpring } from "react-spring";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 interface Props extends PlatformEvent {
   startIndex: number;
   index: number;
-  countList: number;
+  countItems: number;
+  countShowingItems: number;
 }
 
 const _EventItem: React.FC<Props> = ({
   startIndex,
   index,
-  countList,
+  countItems,
+  countShowingItems,
   title,
   text,
   icon,
@@ -31,12 +33,13 @@ const _EventItem: React.FC<Props> = ({
       currentIndex = index - startIndex;
       break;
     case index < startIndex:
-      currentIndex = countList - startIndex + index;
+      currentIndex = countItems - startIndex + index;
       break;
     default:
       currentIndex = 0;
   }
-  const isShow = currentIndex < 5;
+  const isShow = currentIndex < countShowingItems;
+  const isLastShowing = currentIndex === countShowingItems;
   const linkAsset = assetUrl
     ? getAssetLink(assetUrl, assetType, title)
     : undefined;
@@ -46,17 +49,13 @@ const _EventItem: React.FC<Props> = ({
         state: `/ ${title}`
       }
     : undefined;
+  const translate3dProp = isShow || isLastShowing ? 120 * currentIndex : 60;
+  const scaleProp = isShow || isLastShowing ? 1 : 0.7;
   const props = useSpring({
     to: {
       opacity: isShow ? 1 : 0,
-      transform: `translate3d(0,${isShow ? 120 * currentIndex : 0}%,0) scale(${
-        isShow ? 1 : 0.7
-      }`
+      transform: `translate3d(0,${translate3dProp}%,0) scale(${scaleProp}`
     }
-    // from: {
-    //   opacity: isShow ? 1 : 0,
-    //   transform: `translate3d(0,0%,0) scale(${isShow ? 1 : 0.5})`
-    // }
   });
   return (
     <animated.li
