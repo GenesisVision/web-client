@@ -11,6 +11,7 @@ export enum GV_BTN_SIZE {
 }
 
 interface GVButtonProps {
+  testId?: string;
   bold?: boolean;
   wide?: boolean;
   size?: GV_BTN_SIZE;
@@ -28,6 +29,7 @@ interface GVButtonProps {
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
+  testId,
   bold,
   wide,
   size = GV_BTN_SIZE.MIDDLE,
@@ -60,6 +62,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   });
   return (
     <button
+      data-test-id={testId}
       id={id}
       disabled={disabled}
       className={classname}
