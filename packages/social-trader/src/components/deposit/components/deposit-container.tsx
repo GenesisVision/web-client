@@ -51,6 +51,7 @@ const _DepositContainer: React.FC<Props> = ({
     id && open && getInvestInfo({ currency: stateCurrency });
   }, [open]);
   const fees = { gvCommission, entryFee };
+  if (!wallets.length) return null;
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopup
