@@ -152,6 +152,8 @@ describe("Program details", () => {
         await openPopup(cancelButtonSelector);
         await submitForm();
 
+        await page.waitForSelector(activeAssetStatusSelector);
+
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
       },
@@ -282,6 +284,8 @@ describe("Program details", () => {
         await selectWallet(walletCurrency);
         await enterAmount(amountValue);
         await submitForm();
+
+        await page.waitForSelector(activeAssetStatusSelector);
 
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
