@@ -62,7 +62,8 @@ describe("Program details", () => {
           enterAmount,
           submitForm,
           getLastAlertMessage,
-          clearAlert
+          clearAlert,
+          safeClick
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
         const cancelButtonSelector = `.request-line .gv-btn`;
@@ -71,25 +72,17 @@ describe("Program details", () => {
           await openPopup(withdrawButtonSelector);
           await enterAmount(amountValue);
           await submitForm();
-          await page.waitForSelector(withdrawConfirmSelector);
-          await page.click(withdrawConfirmSelector);
-          await page.waitFor(1 * 1000);
+          await safeClick(withdrawConfirmSelector);
+
           await clearAlert();
         }
-        await page.waitForSelector(statusSelector);
-        await page.click(statusSelector);
-        await page.waitForSelector(cancelButtonSelector);
-
-        await page.waitFor(1 * 1000);
+        await safeClick(statusSelector);
 
         await openPopup(cancelButtonSelector);
         await submitForm();
 
-        await page.waitFor(1 * 1000);
-
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
-        // await clearAlert();
       },
       ASYNC_TEST_TIMEOUT
     );
@@ -101,7 +94,7 @@ describe("Program details", () => {
           openPopup,
           enterAmount,
           submitForm,
-          clearAlert,
+          safeClick,
           hasElement,
           getLastAlertMessage,
           getTextContent
@@ -119,16 +112,11 @@ describe("Program details", () => {
 
         await enterAmount(amountValue);
         await submitForm();
-        await page.waitForSelector(withdrawConfirmSelector);
-        await page.click(withdrawConfirmSelector);
-
-        await page.waitFor(1 * 1000);
+        await safeClick(withdrawConfirmSelector);
 
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
-        // await clearAlert();
 
-        await page.waitForSelector(statusSelector);
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(withdrawingStatusText);
       },
@@ -167,7 +155,8 @@ describe("Program details", () => {
           enterAmount,
           submitForm,
           getLastAlertMessage,
-          clearAlert
+          clearAlert,
+          safeClick
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
         const cancelButtonSelector = `.request-line .gv-btn`;
@@ -176,23 +165,16 @@ describe("Program details", () => {
           await openPopup(investButtonSelector);
           await enterAmount(amountValue);
           await submitForm();
-          await page.waitFor(1 * 1000);
+
           await clearAlert();
         }
-        await page.waitForSelector(statusSelector);
-        await page.click(statusSelector);
+        await safeClick(statusSelector);
 
-        await page.waitFor(1 * 1000);
-
-        await page.waitForSelector(cancelButtonSelector);
         await openPopup(cancelButtonSelector);
         await submitForm();
 
-        await page.waitFor(1 * 1000);
-
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
-        // await clearAlert();
       },
       ASYNC_TEST_TIMEOUT
     );
@@ -205,7 +187,6 @@ describe("Program details", () => {
           enterAmount,
           submitForm,
           getLastAlertMessage,
-          clearAlert,
           hasElement,
           getTextContent,
           selectWallet
@@ -228,13 +209,9 @@ describe("Program details", () => {
         await enterAmount(amountValue);
         await submitForm();
 
-        await page.waitFor(1 * 1000);
-
         const alertMessage = await getLastAlertMessage();
         expect(alertMessage).toBe(successMessage);
-        // await clearAlert();
 
-        await page.waitForSelector(statusSelector);
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(investingStatusText);
       },

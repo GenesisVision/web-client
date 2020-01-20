@@ -69,14 +69,18 @@ export const describeOnPage = (url: string, tests: ItFuncType[]) => () => {
 };
 
 export const useTestHelpers = (page: Page) => {
+  const safeClick = async (selector: string) => {
+    await page.waitForSelector(selector);
+    await page.click(selector);
+  };
   const authOnLoginForm = async () => {
     const login = getTestUserName();
     const password = getTestUserPassword();
-    await page.click("input[name=email]");
+    await safeClick("input[name=email]");
     await page.type("input[name=email]", login);
-    await page.click("input[name=password]");
+    await safeClick("input[name=password]");
     await page.type("input[name=password]", password);
-    await page.click("button[id=loginSubmit]");
+    await safeClick("button[id=loginSubmit]");
   };
   const authorize = async () => {
     await openPage(LOGIN_ROUTE);
@@ -95,8 +99,7 @@ export const useTestHelpers = (page: Page) => {
   };
 
   const openPopup = async (buttonSelector: string) => {
-    await page.waitForSelector(buttonSelector);
-    await page.click(buttonSelector);
+    await safeClick(buttonSelector);
     await page.waitForSelector(".dialog__header");
   };
 
@@ -104,25 +107,20 @@ export const useTestHelpers = (page: Page) => {
     walletCurrency: string,
     walletSelectName = DEPOSIT_FORM_FIELDS.walletId
   ) => {
-    await page.click(`button[name=${walletSelectName}]`);
-    await page.waitForSelector(
-      `.select__option div[${DATA_TEST_ATTR}=${walletCurrency}]`
-    );
-    await page.click(
-      `.select__option div[${DATA_TEST_ATTR}=${walletCurrency}]`
-    );
+    await safeClick(`button[name=${walletSelectName}]`);
+    await safeClick(`.select__option div[${DATA_TEST_ATTR}=${walletCurrency}]`);
   };
 
   const enterAmount = async (
     amountValue: string | number,
     amountName = "amount"
   ) => {
-    await page.click(`input[name=${amountName}]`);
+    await safeClick(`input[name=${amountName}]`);
     await page.type(`input[name=${amountName}]`, String(amountValue));
   };
 
   const submitForm = async () => {
-    await page.click(`button[type=submit]`);
+    await safeClick(`button[type=submit]`);
   };
 
   const getLastAlertMessage = async () => {
@@ -134,8 +132,10 @@ export const useTestHelpers = (page: Page) => {
     );
   };
 
-  const getTextContent = (selector: string) =>
-    page.$eval(selector, element => element.textContent);
+  const getTextContent = async (selector: string) => {
+    await page.waitForSelector(selector);
+    return await page.$eval(selector, element => element.textContent);
+  };
 
   const clearAllAlerts = async () => {
     // const selector = `button[${DATA_TEST_ATTR}=${CLEAR_ALL_ALERTS_ID}]`;
@@ -151,14 +151,14 @@ export const useTestHelpers = (page: Page) => {
 
   const clearAlert = async () => {
     const ALERT_CLOSE_CLASS_SELECTOR = `.${ALERT_CLOSE_CLASS}`;
-    await page.waitForSelector(ALERT_CLOSE_CLASS_SELECTOR);
-    await page.click(ALERT_CLOSE_CLASS_SELECTOR);
+    await safeClick(ALERT_CLOSE_CLASS_SELECTOR);
   };
 
   const hasElement = (selector: string) =>
     page.$eval(selector, element => !!element);
 
   return {
+    safeClick,
     hasElement,
     openPopup,
     clearAlert,
