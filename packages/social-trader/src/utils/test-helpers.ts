@@ -155,9 +155,20 @@ export const useTestHelpers = (page: Page) => {
   };
 
   const hasElement = (selector: string) =>
-    page.$eval(selector, element => !!element);
+    page
+      .$eval(selector, element => !!element)
+      .catch(
+        error =>
+          error.toString() !==
+          `Error: Error: failed to find element matching selector "${selector}"`
+      );
+
+  const isDisabled = async (selector: string) => {
+    return await hasElement(`${selector}[disabled]`);
+  };
 
   return {
+    isDisabled,
     safeClick,
     hasElement,
     openPopup,
