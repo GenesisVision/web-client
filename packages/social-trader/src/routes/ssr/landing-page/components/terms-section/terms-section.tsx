@@ -68,7 +68,7 @@ const TermsSection: React.FC = () => {
         </p>
         <p>
           1.2. By accepting these terms you accept the definitions stated in{" "}
-          <a href="/glossary.html">Glossary</a>.
+          <a href="/glossary">Glossary</a>.
         </p>
         <p>
           1.3. Words used in singular form include the plural, and vise versa,
