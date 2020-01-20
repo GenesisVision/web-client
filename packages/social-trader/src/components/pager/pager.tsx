@@ -1,5 +1,6 @@
 import "./pager.scss";
 
+import SeoPagination from "components/pager/seo";
 import React, { useCallback } from "react";
 
 import PagerButton from "./pager-button";
@@ -18,13 +19,16 @@ const _Pager: React.FC<Props> = ({
     [onPageChanged]
   );
   const half = Math.floor(countVisiblePages / 2);
+
   const firstPage =
     (current <= half + 1 && 1) ||
     (current >= total - half && total - countVisiblePages + 1) ||
     current - half;
+
   const visiblePages = generateVisiblePages(firstPage, countVisiblePages);
   return (
     <div className="pager">
+      {asLink && <SeoPagination total={total} current={current} />}
       {firstPage > 1 && (
         <div className="pager__pager-block">
           <PagerButton
