@@ -16,6 +16,8 @@ import { SetSubmittingType } from "utils/types";
 import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
+export const WITHDRAW_FORM_SUBMIT = "programWithdrawFormSubmit";
+
 const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   onApply = () => {},
   onClose,
@@ -97,7 +99,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         <GVButton
           title={"submit"}
           type={"submit"}
-          id="programWithdrawFormSubmit"
+          id={WITHDRAW_FORM_SUBMIT}
           disabled={isSubmitting}
         >
           {t("withdraw-program.submit")}
