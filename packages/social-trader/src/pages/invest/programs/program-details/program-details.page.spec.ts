@@ -135,6 +135,7 @@ describe("Program details", () => {
       "should be cancel withdraw request",
       async () => {
         const {
+          hasElement,
           openPopup,
           enterAmount,
           submitForm,
@@ -143,7 +144,7 @@ describe("Program details", () => {
           safeClick
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
-        const status = await page.$(statusSelector);
+        const status = await hasElement(statusSelector);
         if (!status) {
           await openPopup(withdrawButtonSelector);
           await enterAmount(amountValue);
@@ -235,6 +236,7 @@ describe("Program details", () => {
       "should be cancel invest request",
       async () => {
         const {
+          hasElement,
           openPopup,
           enterAmount,
           submitForm,
@@ -244,7 +246,7 @@ describe("Program details", () => {
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
         const cancelButtonSelector = `.request-line .gv-btn`;
-        const status = await page.$(statusSelector);
+        const status = await hasElement(statusSelector);
         if (!status) {
           await openPopup(investButtonSelector);
           await enterAmount(amountValue);
