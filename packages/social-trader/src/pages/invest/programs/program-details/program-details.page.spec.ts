@@ -1,3 +1,4 @@
+import { WITHDRAW_FORM_FIELDS } from "modules/program-withdraw/program-withdraw-amount-form";
 import { WITHDRAW_FORM_SUBMIT } from "modules/program-withdraw/program-withdraw-confirm-form";
 import { Browser, Page } from "puppeteer";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
@@ -11,6 +12,29 @@ import {
 } from "utils/test-helpers";
 
 describe("Program details", () => {
+  const cancelButtonSelector = `.request-line .gv-btn`;
+  const cancelRequest = async (
+    page: Page,
+    statusSelector: string = ".asset-status"
+  ) => {
+    const {
+      openPopup,
+      submitForm,
+      safeClick,
+      hasElement,
+      getLastAlertMessage
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+    } = useTestHelpers(page);
+    const hasWihdrawingRequest = await hasElement(".asset-status__withdrawing");
+    const hasInvestingRequest = await hasElement(".asset-status__investing");
+    if (hasWihdrawingRequest || hasInvestingRequest) {
+      await safeClick(statusSelector);
+      await openPopup(cancelButtonSelector);
+      await submitForm();
+      await getLastAlertMessage();
+    }
+  };
+
   describe("Page markup", () => {
     const programName = "entryfee0-10-20";
     const url = `${PROGRAMS_ROUTE}/${programName}`;
@@ -55,6 +79,49 @@ describe("Program details", () => {
     }, ASYNC_TEST_TIMEOUT);
 
     it(
+      "should be withdraw all",
+      async () => {
+        const { isDisabled, openPopup, submitForm, safeClick } = useTestHelpers(
+          page
+        );
+        const withdrawAllButtonSelector = `button[type=submit]`;
+        const withdrawAllSelector = `input[name=${WITHDRAW_FORM_FIELDS.withdrawAll}]`;
+        const withdrawInputSelector = `input[name=${WITHDRAW_FORM_FIELDS.amount}]`;
+
+        await openPopup(withdrawButtonSelector);
+        await page.waitForSelector(".dialog > .blur-container--loaded");
+
+        const isInputDisabled = await isDisabled(withdrawInputSelector);
+        expect(isInputDisabled).toBeFalsy();
+        const isSubmitDisabled = await isDisabled(withdrawAllButtonSelector);
+        expect(isSubmitDisabled).toBeTruthy();
+
+        await safeClick(withdrawAllSelector);
+
+        const isInputDisabledAfterClick = await isDisabled(
+          withdrawInputSelector
+        );
+        expect(isInputDisabledAfterClick).toBeTruthy();
+        const isSubmitDisabledAfterClick = await isDisabled(
+          withdrawAllButtonSelector
+        );
+        expect(isSubmitDisabledAfterClick).toBeFalsy();
+
+        await submitForm();
+        await safeClick(withdrawConfirmSelector);
+
+        const isWithdrawButtonDisableAfterClick = await isDisabled(
+          withdrawAllButtonSelector
+        );
+        expect(isWithdrawButtonDisableAfterClick).toBeTruthy();
+
+        await page.waitForSelector(".asset-status__withdrawing");
+        await cancelRequest(page);
+      },
+      ASYNC_TEST_TIMEOUT
+    );
+
+    it(
       "should be cancel withdraw request",
       async () => {
         const {
@@ -66,7 +133,6 @@ describe("Program details", () => {
           safeClick
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
-        const cancelButtonSelector = `.request-line .gv-btn`;
         const status = await page.$(statusSelector);
         if (!status) {
           await openPopup(withdrawButtonSelector);
@@ -119,6 +185,9 @@ describe("Program details", () => {
 
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(withdrawingStatusText);
+
+        await page.waitForSelector(".asset-status__withdrawing");
+        await cancelRequest(page);
       },
       ASYNC_TEST_TIMEOUT
     );
@@ -214,6 +283,9 @@ describe("Program details", () => {
 
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(investingStatusText);
+
+        await page.waitForSelector(".asset-status__investing");
+        await cancelRequest(page);
       },
       ASYNC_TEST_TIMEOUT
     );
