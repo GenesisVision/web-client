@@ -21,8 +21,7 @@ describe("Program details", () => {
       openPopup,
       submitForm,
       safeClick,
-      hasElement,
-      getLastAlertMessage
+      hasElement
       // eslint-disable-next-line react-hooks/rules-of-hooks
     } = useTestHelpers(page);
     const hasWihdrawingRequest = await hasElement(".asset-status__withdrawing");
@@ -31,7 +30,7 @@ describe("Program details", () => {
       await safeClick(statusSelector);
       await openPopup(cancelButtonSelector);
       await submitForm();
-      await getLastAlertMessage();
+      await page.waitForSelector(".asset-status__active");
     }
   };
 
