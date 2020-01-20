@@ -1,5 +1,6 @@
 import "components/auth/forgot-password/forgot-password/forgot-password.scss";
 
+import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import { ForgotPasswordViewModel } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -16,17 +17,19 @@ import { forgotPassword } from "../services/forgot-password.service";
 import ForgotPassword from "./forgot-password";
 
 const _ForgotPasswordPage: React.FC<Props> = ({ t, errorMessage, service }) => (
-  <div className="forgot-password">
-    <p className="forgot-password__text">
-      {t("auth.password-restore.forgot-password.text")}
-    </p>
-    <CaptchaContainer
-      request={service.forgotPassword}
-      renderForm={handle => (
-        <ForgotPassword errorMessage={errorMessage} onSubmit={handle} />
-      )}
-    />
-  </div>
+  <PageSeoWrapper title={t("auth.password-restore.title")}>
+    <div className="forgot-password">
+      <p className="forgot-password__text">
+        {t("auth.password-restore.forgot-password.text")}
+      </p>
+      <CaptchaContainer
+        request={service.forgotPassword}
+        renderForm={handle => (
+          <ForgotPassword errorMessage={errorMessage} onSubmit={handle} />
+        )}
+      />
+    </div>
+  </PageSeoWrapper>
 );
 
 const mapStateToProps = (state: AuthRootState): StateProps => {
