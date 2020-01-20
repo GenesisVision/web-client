@@ -12,10 +12,14 @@ import {
 } from "utils/test-helpers";
 
 describe("Program details", () => {
+  const assetStatusSelector = ".asset-status";
+  const investingAssetStatusSelector = `${assetStatusSelector}__investing`;
+  const withdrawingAssetStatusSelector = `${assetStatusSelector}__withdrawing`;
+  const activeAssetStatusSelector = `${assetStatusSelector}__active`;
   const cancelButtonSelector = `.request-line .gv-btn`;
   const cancelRequest = async (
     page: Page,
-    statusSelector: string = ".asset-status"
+    statusSelector: string = assetStatusSelector
   ) => {
     const {
       openPopup,
@@ -24,13 +28,15 @@ describe("Program details", () => {
       hasElement
       // eslint-disable-next-line react-hooks/rules-of-hooks
     } = useTestHelpers(page);
-    const hasWihdrawingRequest = await hasElement(".asset-status__withdrawing");
-    const hasInvestingRequest = await hasElement(".asset-status__investing");
-    if (hasWihdrawingRequest || hasInvestingRequest) {
+    const hasWithdrawingRequest = await hasElement(
+      withdrawingAssetStatusSelector
+    );
+    const hasInvestingRequest = await hasElement(investingAssetStatusSelector);
+    if (hasWithdrawingRequest || hasInvestingRequest) {
       await safeClick(statusSelector);
       await openPopup(cancelButtonSelector);
       await submitForm();
-      await page.waitForSelector(".asset-status__active");
+      await page.waitForSelector(activeAssetStatusSelector);
     }
   };
 
@@ -62,7 +68,7 @@ describe("Program details", () => {
     const withdrawButtonSelector = `button[${DATA_TEST_ATTR}=${withdrawButtonClass}]`;
     const withdrawConfirmSelector = `button[id=${WITHDRAW_FORM_SUBMIT}]`;
     const withdrawingStatusText = "Withdrawing";
-    const statusSelector = ".asset-status__withdrawing";
+    const statusSelector = withdrawingAssetStatusSelector;
     const programName = "entryfee0-10-20";
     const url = `${PROGRAMS_ROUTE}/${programName}`;
 
@@ -114,7 +120,7 @@ describe("Program details", () => {
         );
         expect(isWithdrawButtonDisableAfterClick).toBeTruthy();
 
-        await page.waitForSelector(".asset-status__withdrawing");
+        await page.waitForSelector(withdrawingAssetStatusSelector);
         await cancelRequest(page);
       },
       ASYNC_TEST_TIMEOUT
@@ -185,7 +191,7 @@ describe("Program details", () => {
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(withdrawingStatusText);
 
-        await page.waitForSelector(".asset-status__withdrawing");
+        await page.waitForSelector(withdrawingAssetStatusSelector);
         await cancelRequest(page);
       },
       ASYNC_TEST_TIMEOUT
@@ -200,7 +206,7 @@ describe("Program details", () => {
     const investButtonClass = testT("buttons.invest");
     const investButtonSelector = `button[${DATA_TEST_ATTR}=${investButtonClass}]`;
     const investingStatusText = "Investing";
-    const statusSelector = ".asset-status__investing";
+    const statusSelector = investingAssetStatusSelector;
     const programName = "2812-2019";
     const url = `${PROGRAMS_ROUTE}/${programName}`;
 
@@ -283,7 +289,7 @@ describe("Program details", () => {
         const statusText = await getTextContent(statusSelector);
         expect(statusText).toBe(investingStatusText);
 
-        await page.waitForSelector(".asset-status__investing");
+        await page.waitForSelector(investingAssetStatusSelector);
         await cancelRequest(page);
       },
       ASYNC_TEST_TIMEOUT
