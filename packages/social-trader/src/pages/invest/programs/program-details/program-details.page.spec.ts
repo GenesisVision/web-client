@@ -16,17 +16,22 @@ describe("Program details", () => {
   const withdrawingAssetStatusSelector = `${assetStatusSelector}__withdrawing`;
   const activeAssetStatusSelector = `${assetStatusSelector}__active`;
   const cancelButtonSelector = `.request-line .gv-btn`;
+
   const cancelRequest = async (
     page: Page,
     statusSelector: string = assetStatusSelector
   ) => {
     const {
+      clearAlert,
       openPopup,
       submitForm,
       safeClick,
       hasElement
       // eslint-disable-next-line react-hooks/rules-of-hooks
     } = useTestHelpers(page);
+    await page.waitForSelector(
+      ".details-investment-block.details-investment-block--investment"
+    );
     const hasWithdrawingRequest = await hasElement(
       withdrawingAssetStatusSelector
     );
@@ -36,6 +41,7 @@ describe("Program details", () => {
       await openPopup(cancelButtonSelector);
       await submitForm();
       await page.waitForSelector(activeAssetStatusSelector);
+      await clearAlert();
     }
   };
 
@@ -86,6 +92,7 @@ describe("Program details", () => {
     beforeEach(async () => {
       const { openPage } = useTestHelpers(page);
       await openPage(url);
+      await cancelRequest(page);
     }, ASYNC_TEST_TIMEOUT);
 
     it(
@@ -230,6 +237,7 @@ describe("Program details", () => {
     beforeEach(async () => {
       const { openPage } = useTestHelpers(page);
       await openPage(url);
+      await cancelRequest(page);
     }, ASYNC_TEST_TIMEOUT);
 
     it(
@@ -245,7 +253,6 @@ describe("Program details", () => {
           safeClick
         } = useTestHelpers(page);
         const successMessage = testT("request-line.success-message");
-        const cancelButtonSelector = `.request-line .gv-btn`;
         const status = await hasElement(statusSelector);
         if (!status) {
           await openPopup(investButtonSelector);
