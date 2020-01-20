@@ -49,7 +49,6 @@ describe("Program details", () => {
     beforeEach(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      await page.setViewport(VIEW_PORT);
       const { openAuthPage } = useTestHelpers(page);
       await openAuthPage(url);
     }, ASYNC_TEST_TIMEOUT);
@@ -78,7 +77,6 @@ describe("Program details", () => {
     beforeEach(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      await page.setViewport(VIEW_PORT);
       const { openAuthPage } = useTestHelpers(page);
       await openAuthPage(url);
     }, ASYNC_TEST_TIMEOUT);
@@ -218,7 +216,6 @@ describe("Program details", () => {
     beforeEach(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      await page.setViewport(VIEW_PORT);
       const { openAuthPage } = useTestHelpers(page);
       await openAuthPage(url);
     }, ASYNC_TEST_TIMEOUT);

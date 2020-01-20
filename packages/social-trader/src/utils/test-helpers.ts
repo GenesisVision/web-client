@@ -91,6 +91,7 @@ export const useTestHelpers = (page: Page) => {
   const openPage = async (url: string) => {
     const baseUrl = getBaseUrl();
     await page.goto(`${baseUrl}${url}`);
+    await page.setViewport(VIEW_PORT);
   };
 
   const openAuthPage = async (url: string) => {
