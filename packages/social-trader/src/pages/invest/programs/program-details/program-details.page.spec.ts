@@ -7,8 +7,7 @@ import {
   DATA_TEST_ATTR,
   getBrowser,
   testT,
-  useTestHelpers,
-  VIEW_PORT
+  useTestHelpers
 } from "utils/test-helpers";
 
 describe("Program details", () => {
@@ -46,18 +45,22 @@ describe("Program details", () => {
     let page: Page;
     let browser: Browser;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      const { openAuthPage } = useTestHelpers(page);
-      await openAuthPage(url);
+      const { authorize } = useTestHelpers(page);
+      await authorize();
+    }, ASYNC_TEST_TIMEOUT);
+    beforeEach(async () => {
+      const { openPage } = useTestHelpers(page);
+      await openPage(url);
     }, ASYNC_TEST_TIMEOUT);
     it("should be titled at program name", async () => {
       const title = await page.title();
       expect(title.toLowerCase()).toContain(programName.toLowerCase());
     });
 
-    afterEach(() => {
+    afterAll(() => {
       browser.close();
     });
   });
@@ -74,11 +77,15 @@ describe("Program details", () => {
     let page: Page;
     let browser: Browser;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      const { openAuthPage } = useTestHelpers(page);
-      await openAuthPage(url);
+      const { authorize } = useTestHelpers(page);
+      await authorize();
+    }, ASYNC_TEST_TIMEOUT);
+    beforeEach(async () => {
+      const { openPage } = useTestHelpers(page);
+      await openPage(url);
     }, ASYNC_TEST_TIMEOUT);
 
     it(
@@ -197,7 +204,7 @@ describe("Program details", () => {
       ASYNC_TEST_TIMEOUT
     );
 
-    afterEach(() => {
+    afterAll(() => {
       browser.close();
     });
   });
@@ -213,11 +220,15 @@ describe("Program details", () => {
     let page: Page;
     let browser: Browser;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
       browser = await getBrowser();
       page = await browser.newPage();
-      const { openAuthPage } = useTestHelpers(page);
-      await openAuthPage(url);
+      const { authorize } = useTestHelpers(page);
+      await authorize();
+    }, ASYNC_TEST_TIMEOUT);
+    beforeEach(async () => {
+      const { openPage } = useTestHelpers(page);
+      await openPage(url);
     }, ASYNC_TEST_TIMEOUT);
 
     it(
@@ -296,7 +307,7 @@ describe("Program details", () => {
       ASYNC_TEST_TIMEOUT
     );
 
-    afterEach(() => {
+    afterAll(() => {
       browser.close();
     });
   });
