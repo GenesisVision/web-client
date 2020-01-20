@@ -53,7 +53,8 @@ const _Table: React.FC<ITableProps> = ({
   emptyMessage,
   updateRow,
   showSwitchView,
-  hideToolbar
+  hideToolbar,
+  asLinkPagination
 }) => {
   const dispatch = useDispatch();
   const tableView = useSelector(globalTableViewSelector);
@@ -133,6 +134,7 @@ const _Table: React.FC<ITableProps> = ({
         )}
       </div>
       <TableFooter
+        asLinkPagination={asLinkPagination}
         condition={!!paging && !!(paging.totalPages && paging.totalPages >= 2)}
         paging={paging}
         updatePaging={updatePaging}

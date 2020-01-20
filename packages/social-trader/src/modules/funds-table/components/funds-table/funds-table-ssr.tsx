@@ -93,6 +93,7 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderFilters={renderFilters}
       paging={composePaging(data.total, page, DEFAULT_ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
+      asLinkPagination={true}
     />
   );
 };

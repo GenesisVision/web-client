@@ -36,10 +36,12 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  title
+  title,
+  asLinkPagination
 }) => {
   return (
     <Table
+      asLinkPagination={asLinkPagination}
       loaderData={programListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}

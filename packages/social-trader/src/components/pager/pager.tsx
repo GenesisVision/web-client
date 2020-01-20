@@ -8,10 +8,14 @@ const _Pager: React.FC<Props> = ({
   total,
   current,
   countVisiblePages = 3,
-  onPageChanged
+  onPageChanged,
+  asLink
 }) => {
   const handleChange = useCallback(
-    (page: number) => (): void => onPageChanged(page),
+    (page: number) => {
+      console.info(page, "_page");
+      onPageChanged(page);
+    },
     [onPageChanged]
   );
   const half = Math.floor(countVisiblePages / 2);
@@ -24,7 +28,12 @@ const _Pager: React.FC<Props> = ({
     <div className="pager">
       {firstPage > 1 && (
         <div className="pager__pager-block">
-          <PagerButton page={1} current={current} clickHandle={handleChange} />
+          <PagerButton
+            page={1}
+            current={current}
+            clickHandle={handleChange}
+            asLink={asLink}
+          />
           {firstPage > 2 && <PagerSeparator />}
         </div>
       )}
@@ -33,6 +42,7 @@ const _Pager: React.FC<Props> = ({
           .filter(page => page <= total)
           .map(page => (
             <PagerButton
+              asLink={asLink}
               key={page}
               page={page}
               current={current}
@@ -44,6 +54,7 @@ const _Pager: React.FC<Props> = ({
         <div className="pager__pager-block">
           {total - firstPage > countVisiblePages && <PagerSeparator />}
           <PagerButton
+            asLink={asLink}
             page={total}
             current={current}
             clickHandle={handleChange}
@@ -67,6 +78,7 @@ const generateVisiblePages = (first: number, count: number): number[] => {
 interface Props {
   total: number;
   current: number;
+  asLink?: boolean;
   onPageChanged(page: number): void;
   countVisiblePages?: number;
 }

@@ -6,13 +6,20 @@ import * as React from "react";
 interface IPagingProps {
   paging: IPaging;
   hidden?: boolean;
+  asLink?: boolean;
   updatePaging(opts: { currentPage: number }): void;
 }
 
 export const PAGING_FILTER_NAME = "page";
 
-const _Paging: React.FC<IPagingProps> = ({ paging, hidden, updatePaging }) => (
+const _Paging: React.FC<IPagingProps> = ({
+  paging,
+  hidden,
+  updatePaging,
+  asLink
+}) => (
   <Pager
+    asLink={asLink}
     total={paging.totalPages || 0}
     current={paging.currentPage || 1}
     countVisiblePages={3}
