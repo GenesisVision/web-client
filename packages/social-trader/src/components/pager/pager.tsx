@@ -13,7 +13,6 @@ const _Pager: React.FC<Props> = ({
 }) => {
   const handleChange = useCallback(
     (page: number) => {
-      console.info(page, "_page");
       onPageChanged(page);
     },
     [onPageChanged]
