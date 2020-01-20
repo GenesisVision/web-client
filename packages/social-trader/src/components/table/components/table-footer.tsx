@@ -10,16 +10,19 @@ export interface ITableFooterProps {
   isPending?: boolean;
   paging?: IPaging;
   updatePaging?: UpdatePagingFuncType;
+  asLinkPagination?: boolean;
 }
 
 const _TableFooter: React.FC<ITableFooterProps> = ({
   isPending,
   paging = {},
-  updatePaging
+  updatePaging,
+  asLinkPagination
 }) => (
   <div className="table__footer">
     <ItemsCounter {...paging} condition={!!paging.totalItems} />
     <Paging
+      asLink={asLinkPagination}
       condition={!isPending && paging.totalPages !== 0}
       paging={paging}
       hidden={isPending}

@@ -488,7 +488,9 @@ const PrivacyPolicySection: React.FC = () => {
           or legal entity. Any changes in your identifying details shall be
           notified to the Company immediately and in any case no later than the
           7th day from the date of such changes. If your data is incorrect or
-          incomplete, please contact support@genesis.vision to change your data.
+          incomplete, please contact{" "}
+          <a href="mailto:support@genesis.vision">support@genesis.vision</a> to
+          change your data.
         </p>
 
         <p>
@@ -1248,7 +1250,7 @@ const PrivacyPolicySection: React.FC = () => {
         </p>
         <p className="c3">
           <span className="c17 c26">Support: </span>
-          <a href="support@genesis.vision">support@genesis.vision</a>
+          <a href="mailto:support@genesis.vision">support@genesis.vision</a>
         </p>
         <p className="c2">
           <span className="c4"></span>

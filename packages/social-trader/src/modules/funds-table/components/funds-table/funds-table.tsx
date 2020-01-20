@@ -29,7 +29,8 @@ const _FundsTable: React.FC<Props> = ({
   renderMappings,
   paging,
   updatePaging,
-  title
+  title,
+  asLinkPagination
 }) => (
   <Table
     loaderData={fundListLoaderData}
@@ -42,6 +43,7 @@ const _FundsTable: React.FC<Props> = ({
     updatePaging={updatePaging}
     columns={FUNDS_TABLE_COLUMNS}
     items={data}
+    asLinkPagination={asLinkPagination}
     showSwitchView
     renderFilters={renderFilters}
     renderMappings={renderMappings}

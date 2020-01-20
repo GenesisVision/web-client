@@ -117,6 +117,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       paging={composePaging(data.total, page, ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
       currencies={programCurrencies}
+      asLinkPagination
     />
   );
 };

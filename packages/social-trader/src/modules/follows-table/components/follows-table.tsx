@@ -35,10 +35,12 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  title
+  title,
+  asLinkPagination
 }) => {
   return (
     <Table
+      asLinkPagination={asLinkPagination}
       loaderData={followListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}
