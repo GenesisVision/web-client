@@ -2,7 +2,8 @@ import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem,
-  PlatformEvent
+  PlatformEvent,
+  PlatformNews
 } from "gv-api-web";
 import { NextPage, NextPageContext } from "next";
 import React from "react";
@@ -23,18 +24,21 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
       events,
       follows,
       programs,
-      funds
+      funds,
+      news
     } = await platformApi.getPlatformLandingInfo({
       eventsTake: 5,
       followTake: 6,
       programsTake: 6,
-      fundsTake: 12
+      fundsTake: 12,
+      newsTake: 4
     });
     return {
       events,
       follows,
       programs,
       funds,
+      news,
       refLink: ref
     };
   } catch (e) {
@@ -55,6 +59,7 @@ IndexPage.getInitialProps = async (ctx: NextPageContext) => {
       follows,
       programs,
       funds,
+      news: [],
       refLink: ""
     };
   }
@@ -66,6 +71,7 @@ interface Props {
   follows: ItemsViewModelFollowDetailsListItem;
   programs: ItemsViewModelProgramDetailsListItem;
   funds: ItemsViewModelFundDetailsListItem;
+  news: Array<PlatformNews>;
 }
 
 export default IndexPage;
