@@ -72,6 +72,7 @@ export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Genesis Vision",
+  url: "https://genesis.vision/",
   logo: "https://genesis.vision/icon.png",
   sameAs: [
     "https://t.me/genesisvision/",
