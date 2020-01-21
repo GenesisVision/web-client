@@ -36,7 +36,7 @@ const _CurrencyItem: React.FC<Props> = ({
             "currency-item__icon--small": small
           })}
         >
-          <WalletImage url={logo} alt={name} />
+          <WalletImage url={logo} alt={name || symbol} />
         </div>
       )}
       {name && (
