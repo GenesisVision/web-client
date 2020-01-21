@@ -46,7 +46,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       src={emptyImg}
       data-src={currentSrc}
       title={title}
-      alt={alt}
+      alt={alt || "Image loading"}
       className={classNames("lazyload", className)}
       onError={handleError}
     />
