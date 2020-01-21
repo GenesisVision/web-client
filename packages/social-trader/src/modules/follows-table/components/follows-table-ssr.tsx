@@ -89,6 +89,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderFilters={renderFilters}
       paging={composePaging(data.total, page, ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
+      asLinkPagination={true}
     />
   );
 };

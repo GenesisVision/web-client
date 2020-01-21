@@ -6,7 +6,7 @@ import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import posed, { PoseGroup } from "react-pose";
+import posed from "react-pose";
 import { connect } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import { compose, Dispatch } from "redux";
@@ -41,30 +41,22 @@ const _AlertMessageList: React.FC<Props> = props => {
   }, []);
 
   const children = messages.map(message => (
-    <AlertBox key={message.id}>
-      <AlertMessage message={message} onClick={removeMessage} />
-    </AlertBox>
+    <AlertMessage message={message} onClick={removeMessage} />
   ));
 
   if (messages.length > 1) {
     children.push(
-      <AlertBox key={"delete-button"}>
-        <GVButton
-          data-test-id={CLEAR_ALL_ALERTS_ID}
-          color="primary"
-          onClick={clearAllMessages}
-        >
-          {t("alerts.clear-all")}
-        </GVButton>
-      </AlertBox>
+      <GVButton
+        testId={CLEAR_ALL_ALERTS_ID}
+        color="primary"
+        onClick={clearAllMessages}
+      >
+        {t("alerts.clear-all")}
+      </GVButton>
     );
   }
 
-  return (
-    <div className="alert-message-list">
-      <PoseGroup animateOnMount>{children}</PoseGroup>
-    </div>
-  );
+  return <div className="alert-message-list">{children}</div>;
 };
 
 const mapStateToProps = (state: RootState): StateProps => {

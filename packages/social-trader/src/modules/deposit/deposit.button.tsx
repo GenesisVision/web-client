@@ -74,6 +74,7 @@ const _DepositButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        testId={label}
         className={label}
         disabled={disabled}
         size={size}

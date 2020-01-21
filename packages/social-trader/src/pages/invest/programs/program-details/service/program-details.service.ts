@@ -231,6 +231,15 @@ export const fetchPortfolioEventsWithoutTable = (
   return eventsApi.getEvents(authorization, { ...filters, eventLocation });
 };
 
+export const fetchPortfolioEventsCount = (
+  eventLocation: EVENT_LOCATION,
+  filters?: any
+): Promise<number> => {
+  return fetchPortfolioEventsWithoutTable(eventLocation, filters).then(
+    ({ total }) => total
+  );
+};
+
 export const fetchPortfolioEvents = (
   eventLocation: EVENT_LOCATION
 ): GetItemsFuncType => (

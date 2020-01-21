@@ -48,6 +48,7 @@ const _WithdrawButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        testId={label}
         className={label}
         size={size}
         disabled={disabled}
