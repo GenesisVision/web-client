@@ -5,7 +5,8 @@ import {
   ItemsViewModelFollowDetailsListItem,
   ItemsViewModelFundDetailsListItem,
   ItemsViewModelProgramDetailsListItem,
-  PlatformEvent
+  PlatformEvent,
+  PlatformNews
 } from "gv-api-web";
 import React from "react";
 import FirstScreen from "routes/ssr/landing-page/components/first-screen/first-screen";
@@ -29,12 +30,13 @@ const _LandingPage: React.FC<Props> = ({
   funds,
   follows,
   events,
+  news,
   refLink
 }) => {
   return (
     <Layout title="Genesis Vision">
       <main className="home">
-        <FirstScreen />
+        <FirstScreen news={news} />
         <EventsContainer events={events} />
         <section className="home__section home__section--bg-gray">
           <div className="home__container">
@@ -87,5 +89,6 @@ interface Props {
   funds: ItemsViewModelFundDetailsListItem;
   follows: ItemsViewModelFollowDetailsListItem;
   events: Array<PlatformEvent>;
+  news: Array<PlatformNews>;
 }
 export const LandingPage = React.memo(_LandingPage);
