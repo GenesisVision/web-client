@@ -5,7 +5,7 @@
 .events-list {
   @include reset-list();
   position: relative;
-  min-height: 740px;
+  min-height: 720px;
 
   &__item {
     border: 1px solid $landing-bg-gray-2;

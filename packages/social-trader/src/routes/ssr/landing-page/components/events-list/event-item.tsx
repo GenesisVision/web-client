@@ -54,7 +54,7 @@ const _EventItem: React.FC<Props> = ({
   const props = useSpring({
     to: {
       opacity: isShow ? 1 : 0,
-      transform: `translate3d(0,${translate3dProp}%,0) scale(${scaleProp}`
+      transform: `translate3d(0,${translate3dProp}px,0) scale(${scaleProp}`
     }
   });
   return (
