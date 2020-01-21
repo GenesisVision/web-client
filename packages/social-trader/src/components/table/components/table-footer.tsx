@@ -1,5 +1,6 @@
 import withLoader from "decorators/with-loader";
 import * as React from "react";
+import { useCallback } from "react";
 
 import { IPaging } from "../helpers/paging.helpers";
 import Paging from "./paging/paging";
@@ -18,18 +19,24 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
   paging = {},
   updatePaging,
   asLinkPagination
-}) => (
-  <div className="table__footer">
-    <ItemsCounter {...paging} condition={!!paging.totalItems} />
-    <Paging
-      asLink={asLinkPagination}
-      condition={!isPending && paging.totalPages !== 0}
-      paging={paging}
-      hidden={isPending}
-      updatePaging={next => updatePaging && updatePaging(next.currentPage)}
-    />
-  </div>
-);
+}) => {
+  const handleUpdate = useCallback(
+    next => updatePaging && updatePaging(next.currentPage),
+    [updatePaging]
+  );
+  return (
+    <div className="table__footer">
+      <ItemsCounter {...paging} condition={!!paging.totalItems} />
+      <Paging
+        asLink={asLinkPagination}
+        condition={!isPending && paging.totalPages !== 0}
+        paging={paging}
+        hidden={isPending}
+        updatePaging={handleUpdate}
+      />
+    </div>
+  );
+};
 
 const TableFooter = withLoader(React.memo(_TableFooter));
 export default TableFooter;
