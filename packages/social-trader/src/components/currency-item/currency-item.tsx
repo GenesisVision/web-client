@@ -41,13 +41,15 @@ const _CurrencyItem: React.FC<Props> = ({
       )}
       {name && (
         <div>
-          <div
-            className={classNames("currency-item__name", className, {
-              "currency-item__name--big": big
-            })}
-          >
-            {name}
-          </div>
+          {big ? (
+            <h1 className={classNames("currency-item__name--big", className)}>
+              {name}
+            </h1>
+          ) : (
+            <div className={classNames("currency-item__name", className)}>
+              {name}
+            </div>
+          )}
           {rate && <div className="currency-item__rate">{rateString}</div>}
         </div>
       )}
