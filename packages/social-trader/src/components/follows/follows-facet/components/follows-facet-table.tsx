@@ -82,7 +82,7 @@ const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
 export interface IProgramsFacetTableProps {
   currency?: CurrencyEnum;
   currencies?: PlatformCurrencyInfo[];
-  title: string;
+  title?: string;
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;

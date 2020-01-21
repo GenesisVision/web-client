@@ -1,4 +1,11 @@
 {
+  "facets": {
+    "rating": "rating",
+    "weekly_top": "weekly top",
+    "top": "top",
+    "popular": "popular",
+    "new": "new"
+  },
   "trade": {
     "title": "Trade"
   },

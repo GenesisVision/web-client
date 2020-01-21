@@ -18,7 +18,7 @@ const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
     []
   );
   return (
-    <Page title={`${t("funds-page.title")} ${id}`}>
+    <Page showTitle title={`${t("funds-page.title")} ${t(`facets.${id}`)}`}>
       <DetailsBlock table>
         <FacetContainer
           id={id}

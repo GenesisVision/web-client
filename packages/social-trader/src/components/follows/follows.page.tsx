@@ -22,6 +22,7 @@ const FollowsPage: NextComponentType = () => {
   const title = t("follows-page.title");
   return (
     <Page
+      showTitle
       title={title}
       schemas={[
         ORGANIZATION_SCHEMA,

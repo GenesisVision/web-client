@@ -52,7 +52,7 @@ const _ProgramTableModule: React.FC<Props> = ({
 
 interface Props extends ITableModuleProps {
   showRating?: boolean;
-  title: string;
+  title?: string;
 }
 
 const ProgramTableModule = React.memo(_ProgramTableModule);

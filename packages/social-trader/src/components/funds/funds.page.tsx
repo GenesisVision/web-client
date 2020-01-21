@@ -22,6 +22,7 @@ const FundsPage: React.FC = () => {
   const title = t("funds-page.title");
   return (
     <Page
+      showTitle
       title={title}
       schemas={[
         ORGANIZATION_SCHEMA,

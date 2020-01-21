@@ -79,7 +79,6 @@ const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   return (
     <FollowsTable
       showSwitchView={showSwitchView}
-      title={title}
       data={data.items}
       sorting={sorting || SORTING_FILTER_VALUE}
       updateSorting={updateSorting}

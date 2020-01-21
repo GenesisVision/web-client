@@ -83,7 +83,7 @@ const _ProgramsFacetTable: React.FC<
 export interface IProgramsFacetTableProps {
   currency?: Currency;
   currencies?: PlatformCurrencyInfo[];
-  title: string;
+  title?: string;
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;
