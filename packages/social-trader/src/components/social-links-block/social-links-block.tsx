@@ -11,6 +11,7 @@ const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
         const value = "value" in socialLink ? socialLink.value : 0;
         return (
           <a
+            title={socialLink.name}
             key={socialLink.type}
             href={socialLink.url + value}
             target="_blank"

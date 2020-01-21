@@ -711,7 +711,11 @@ const AmlManualSection: React.FC = () => {
             compliance lists via the automated search program SUM&amp;SUM (
           </span>
           <span className="c29">
-            <a className="c42" href="https://sumsub.com/">
+            <a
+              title={"Go to sumsub"}
+              className="c42"
+              href="https://sumsub.com/"
+            >
               https://sumsub.com/
             </a>
           </span>

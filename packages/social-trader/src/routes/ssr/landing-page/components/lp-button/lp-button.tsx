@@ -35,8 +35,9 @@ const _LPButton: React.FC<LPButtonProps> = ({
     case href &&
       typeof href === "string" &&
       (href.includes("http") || href.includes("mailto")):
+      const title = typeof children === "string" ? children : String(href);
       return (
-        <a href={href as string} className={classname}>
+        <a title={title} href={href as string} className={classname}>
           {children}
         </a>
       );

@@ -38,10 +38,10 @@ const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
     },
     [normalizedTo, onClick]
   );
-
+  const title = typeof children === "string" ? children : "";
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
-      <a onClick={handleClick} {...other}>
+      <a title={title} onClick={handleClick} {...other}>
         {children}
       </a>
     </NextLink>

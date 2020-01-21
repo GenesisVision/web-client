@@ -69,6 +69,7 @@ const _ShareBlock: React.FC<{
       />
       <div className="referral-program__share-buttons--email at-icon-wrapper">
         <a
+          title={"Email"}
           target="_blank"
           href={`mailto:?body=${rawUrlEncode(`${shareMessage} ${refUrl}`)} `}
         >

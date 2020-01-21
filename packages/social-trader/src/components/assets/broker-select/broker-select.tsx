@@ -84,6 +84,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
             </div>
             <div className="broker-select__info-text">
               <a
+                title={t("create-program-page.broker-info.read-terms")}
                 href={selectedBroker.terms}
                 target="_blank"
                 rel="noopener noreferrer"
