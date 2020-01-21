@@ -8,6 +8,7 @@ const DownloadsSection: React.FC = () => {
   return (
     <section className="downloads-section">
       <article className="internal__article" id="pc">
+        <h1>Genesis Vision Downloads</h1>
         <h2>MetaTrader 5 for PC</h2>
         <p>
           One of the most technically advanced and popular in the world of
