@@ -2,6 +2,8 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
+$logo-text-size: 15px;
+
 .lp-header {
   @include transition(background-color);
   background-color: $landing-bg;
@@ -11,6 +13,21 @@
 
   @include media-breakpoint-desktop() {
     background-color: rgba($landing-bg, 0.5);
+  }
+
+  &__combo-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  & h1.lp-header__text-logo {
+    width: $logo-text-size;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: $logo-text-size;
+    line-height: $logo-text-size;
+    white-space: pre-wrap;
+    margin: 0 0 0 $logo-text-size;
   }
 
   &__container {
