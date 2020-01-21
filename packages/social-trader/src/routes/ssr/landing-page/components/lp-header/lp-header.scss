@@ -3,6 +3,14 @@
 @import "../../styles/grid";
 
 $logo-text-size: 15px;
+$combo-logo-width: 135px;
+$combo-logo-img-height: 27px;
+$text-logo-letter-spacing: 0.7px;
+$text-logo-font-size: 14.9px;
+$text-logo-line-height: 15.1px;
+$text-logo-width: 73px;
+$text-logo-margin: 15px;
+$logo-divider: 1.57;
 
 .lp-header {
   @include transition(background-color);
@@ -18,21 +26,34 @@ $logo-text-size: 15px;
   &__combo-logo {
     display: flex;
     align-items: center;
-    width: 135px;
+    width: $combo-logo-width/$logo-divider;
     & img {
-      height: 27px;
+      height: $combo-logo-img-height/$logo-divider;
+    }
+    @include media-breakpoint-tablet() {
+      width: $combo-logo-width;
+      & img {
+        height: $combo-logo-img-height;
+      }
     }
   }
 
   & h1.lp-header__text-logo {
-    letter-spacing: 0.7px;
-    width: 73px;
+    letter-spacing: $text-logo-letter-spacing/$logo-divider;
+    width: $text-logo-width/$logo-divider;
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 14.9px;
-    line-height: 15.1px;
+    font-size: $text-logo-font-size/$logo-divider;
+    line-height: $text-logo-line-height/$logo-divider;
     white-space: pre-wrap;
-    margin: 0 0 0 $logo-text-size;
+    margin: 0 0 0 $text-logo-margin/$logo-divider;
+    @include media-breakpoint-tablet() {
+      letter-spacing: $text-logo-letter-spacing;
+      font-size: $text-logo-font-size;
+      line-height: $text-logo-line-height;
+      width: $text-logo-width;
+      margin: 0 0 0 $text-logo-margin;
+    }
   }
 
   &__container {
