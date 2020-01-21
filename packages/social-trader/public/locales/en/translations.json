@@ -348,6 +348,7 @@
       "page-title": "Wallet withdraw confirm",
       "error": "An error occurred during confirmation of email: ",
       "deposit-success": "Deposit request is confirmed",
+      "withdraw-success": "Withdrawal request is confirmed",
       "success": "Withdrawal request is confirmed"
     },
     "validation": {
