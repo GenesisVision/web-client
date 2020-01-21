@@ -56,7 +56,7 @@ export type Setting = {
 };
 
 interface Props {
-  setting: Setting;
+  setting?: Setting;
   name: string;
   label: string;
   assetId?: string;
