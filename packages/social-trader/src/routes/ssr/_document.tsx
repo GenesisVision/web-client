@@ -4,7 +4,7 @@ import React from "react";
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="theme-color" content="#131e26" />
