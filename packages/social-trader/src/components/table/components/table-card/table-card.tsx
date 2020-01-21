@@ -72,22 +72,33 @@ export const TableCardTableButtons: React.FC<
 
 export const TableCardTitle: React.FC<
   { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, url }) =>
-  url ? (
-    <Link className="table-card__title" to={url}>
+> = ({ children, url }) => {
+  const title = typeof children === "string" ? children : "";
+  return url ? (
+    <Link
+      title={`Open ${title} details`}
+      className="table-card__title"
+      to={url}
+    >
       {children}
     </Link>
   ) : (
     <div className="table-card__title">{children}</div>
   );
+};
 
 export const TableCardSubTitle: React.FC<
   { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
 > = ({ children, url }) => {
+  const title = typeof children === "string" ? children : "";
   return (
     <div className="table-card__subtitle">
       {url ? (
-        <Link className=" table-card__name" to={url}>
+        <Link
+          title={`Open ${title} user page`}
+          className=" table-card__name"
+          to={url}
+        >
           {children}
         </Link>
       ) : (
@@ -116,7 +127,13 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
     );
     return (
       <div className="table-card__avatar">
-        {url ? <Link to={url}>{Avatar}</Link> : Avatar}
+        {url ? (
+          <Link title={`Open ${alt} details`} to={url}>
+            {Avatar}
+          </Link>
+        ) : (
+          Avatar
+        )}
       </div>
     );
   }
