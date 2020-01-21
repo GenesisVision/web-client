@@ -26,6 +26,7 @@ const LPHeader: React.FC = () => {
           </div>
           <div className="lp-header__logo">
             <Link
+              title={"Go to home page"}
               className="lp-header__logo-link"
               to={{
                 pathname: HOME_ROUTE

@@ -17,6 +17,7 @@ const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => (
       </a>
     ) : (
       <Link
+        title={name}
         onClick={onClick}
         to={{ pathname: href as string, state }}
         className="seo-list__link"

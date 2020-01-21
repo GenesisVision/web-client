@@ -26,7 +26,11 @@ const _EventItem: React.FC<PlatformEvent> = ({
     : undefined;
   return (
     <li className="events-list__item">
-      <Link className="events-list__item-link" to={linkAsset}>
+      <Link
+        title={`Go to ${title} details page`}
+        className="events-list__item-link"
+        to={linkAsset}
+      >
         <div className="events-list__item-avatar">
           <ImageBase
             DefaultImageComponent={GVProgramDefaultAvatar}
@@ -39,7 +43,11 @@ const _EventItem: React.FC<PlatformEvent> = ({
         </div>
       </Link>
       <div className="events-list__item-info">
-        <Link className="events-list__item-link" to={linkUser}>
+        <Link
+          title={`Go to ${userUrl} user page`}
+          className="events-list__item-link"
+          to={linkUser}
+        >
           <div className="events-list__item-title">{title}</div>
         </Link>
         <div className="events-list__item-text">{text}</div>

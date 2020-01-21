@@ -54,6 +54,7 @@ const _NavItem: React.FC<INavItemProps> = ({
           </a>
         ) : (
           <Link
+            title={name}
             onClick={onClick}
             to={{ pathname: href as string, state }}
             className="nav-list__link"
