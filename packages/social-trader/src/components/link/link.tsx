@@ -8,7 +8,13 @@ import {
   pushHistoryState
 } from "./link.helper";
 
-const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
+const Link: React.FC<LinkProps> = ({
+  title,
+  to,
+  onClick,
+  children,
+  ...other
+}) => {
   if (!to) {
     return <>{children}</>;
   }
@@ -38,10 +44,10 @@ const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
     },
     [normalizedTo, onClick]
   );
-  const title = typeof children === "string" ? children : "";
+  const linkTitle = title || (typeof children === "string" && children) || "";
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
-      <a title={title} onClick={handleClick} {...other}>
+      <a title={linkTitle} onClick={handleClick} {...other}>
         {children}
       </a>
     </NextLink>
@@ -51,6 +57,7 @@ const Link: React.FC<LinkProps> = ({ to, onClick, children, ...other }) => {
 export default Link;
 
 export interface LinkProps {
+  title?: string;
   to?: ToType | string;
   className?: string;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
