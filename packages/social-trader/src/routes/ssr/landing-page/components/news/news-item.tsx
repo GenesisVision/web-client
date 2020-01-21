@@ -4,9 +4,9 @@ import React from "react";
 const _NewsItem: React.FC<PlatformNews> = ({ title, body, isHot, url }) => (
   <li className="news-list__item">
     <a
+      title={title}
       href={url}
       className="news-list__item-link"
-      title={title}
       target="_blank"
     >
       <div className="news-list__item-title">
