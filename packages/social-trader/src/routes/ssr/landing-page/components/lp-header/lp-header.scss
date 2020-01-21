@@ -18,14 +18,19 @@ $logo-text-size: 15px;
   &__combo-logo {
     display: flex;
     align-items: center;
+    width: 135px;
+    & img {
+      height: 27px;
+    }
   }
 
   & h1.lp-header__text-logo {
-    width: $logo-text-size;
+    letter-spacing: 0.7px;
+    width: 73px;
     text-transform: uppercase;
-    font-weight: 900;
-    font-size: $logo-text-size;
-    line-height: $logo-text-size;
+    font-weight: 800;
+    font-size: 14.9px;
+    line-height: 15.1px;
     white-space: pre-wrap;
     margin: 0 0 0 $logo-text-size;
   }
@@ -115,6 +120,7 @@ $logo-text-size: 15px;
 
   &__start-btn-link,
   &__logo-link {
+    position: relative;
     @include transition(opacity);
     @include reset-link();
     display: block;
