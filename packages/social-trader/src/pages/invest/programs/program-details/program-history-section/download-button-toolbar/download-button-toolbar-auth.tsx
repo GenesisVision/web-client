@@ -13,7 +13,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 }) => {
   const loadFile = useCallback(() => {
     const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
-    method(programId, dateRange).then((blob: string) =>
+    method(programId, dateRange).then(blob =>
       saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
     );
   }, [programId, dateRange, title]);
@@ -21,7 +21,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 };
 
 interface Props {
-  method: (id: string, dateRange: DateRangeFilterType) => Promise<string>;
+  method: (id: string, dateRange: DateRangeFilterType) => Promise<Blob>;
   dateRange: DateRangeFilterType;
   programId: string;
   title: string;
