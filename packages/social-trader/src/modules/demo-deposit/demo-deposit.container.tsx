@@ -18,7 +18,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
   const [t] = useTranslation();
   const { sendRequest } = useApiRequest<DemoDepositResponse>({
     request: depositToDemo,
-    successMessage: t("transfer.confirmation.validation"),
+    successMessage: t("transfer.confirmation.deposit-success"),
     middleware: [() => onApply && onApply()]
   });
   const handleSubmit = useCallback((values, setSubmitting) => {
