@@ -1,0 +1,20 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+$hint-size: 15px;
+
+.notify-button {
+  &__hint {
+    margin: $hint-size;
+    border: 1px solid $main-color;
+    border-radius: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: $hint-size;
+    height: $hint-size;
+    font-size: 8px;
+    color: $main-color;
+    cursor: help;
+  }
+}
