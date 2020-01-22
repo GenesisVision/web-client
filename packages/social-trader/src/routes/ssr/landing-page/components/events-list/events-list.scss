@@ -100,6 +100,20 @@
     }
   }
 
+  &__item-info {
+    margin-right: 5px;
+  }
+
+  &__item-values {
+    display: none;
+
+    @include media-breakpoint-tablet() {
+      display: block;
+      margin-left: auto;
+      text-align: center;
+    }
+  }
+
   &__item-text {
     font-weight: 500;
     font-size: 13px;
@@ -115,8 +129,6 @@
   }
 
   &__item-number {
-    display: none;
-
     @include media-breakpoint-tablet() {
       display: block;
       background-color: $landing-bg-gray-2;
@@ -125,17 +137,22 @@
       font-size: 13px;
       line-height: 1;
       font-weight: 600;
-      padding: 14px 20px;
-      margin-left: auto;
-    }
-
-    @include media-breakpoint-desktop() {
-      font-size: 14px;
+      padding: 10px 15px;
+      margin-bottom: 5px;
     }
 
     @include media-breakpoint-large-desktop() {
       font-size: 16px;
-      padding: 18px;
+      padding: 15px;
+    }
+  }
+
+  &__item-date {
+    font-size: 11px;
+    line-height: 1.6;
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 13px;
     }
   }
 

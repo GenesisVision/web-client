@@ -18,7 +18,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
   const [startIndex, setStartIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setStartIndex(state => (state === 0 ? countItems - 1 : state - 1));
+      // setStartIndex(state => (state === 0 ? countItems - 1 : state - 1));
     }, TIME_DELAY);
 
     return () => clearInterval(interval);
