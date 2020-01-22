@@ -5,6 +5,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 const _NotificationEntity: React.FC<Props> = ({
+  levelProgress,
   href,
   logo,
   title,
@@ -19,6 +20,7 @@ const _NotificationEntity: React.FC<Props> = ({
     <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
       <div className="notification-entity">
         <AssetAvatarWithName
+          levelProgress={levelProgress}
           name={title}
           url={logo}
           alt={title}
@@ -38,6 +40,7 @@ interface Props {
   count: number;
   color?: string;
   level?: number;
+  levelProgress?: number;
   pathname: string;
 }
 

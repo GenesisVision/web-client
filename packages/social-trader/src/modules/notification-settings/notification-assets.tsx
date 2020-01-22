@@ -24,6 +24,9 @@ const _NotificationAssets: React.FC<Props> = ({ settings, asset }) => {
       <div className="program-notification__list">
         {settings.map(setting => (
           <NotificationEntity
+            levelProgress={
+              "levelProgress" in setting ? setting.levelProgress : undefined
+            }
             pathname={
               asset === ASSET.PROGRAM
                 ? PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
