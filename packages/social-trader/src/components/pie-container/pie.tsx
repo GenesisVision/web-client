@@ -27,7 +27,7 @@ export const MultiPie: React.FC<
   const circleCenter = circleSize / 2;
   return (
     <PieCircleContainer
-      color={$secondaryBackgroundColor}
+      color={circles.length ? circles[0].color : $secondaryBackgroundColor}
       circleSize={circleSize}
       withSubstrate={withSubstrate}
     >
