@@ -8,7 +8,7 @@ import React, { useCallback, useRef, useState } from "react";
 interface Props {
   className?: string;
   funds: FundDetailsListItem[];
-  onScroll: any;
+  onScroll: (posFirstItemLeft: number) => void;
 }
 
 const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
@@ -22,7 +22,7 @@ const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
         ? firstNodeList.getBoundingClientRect()
         : null;
       {
-        posFirstNodeList && onScroll(posFirstNodeList);
+        posFirstNodeList && onScroll(posFirstNodeList.left);
       }
     }
   }, [list.current]);

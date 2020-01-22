@@ -11,7 +11,6 @@ const FeesSection: React.FC = () => {
 
   const handleChange = useCallback(
     (id: number) => {
-      console.log(id);
       if (id !== undefined && id !== currentTabId) setCurrentTab(id);
     },
     [currentTabId]
