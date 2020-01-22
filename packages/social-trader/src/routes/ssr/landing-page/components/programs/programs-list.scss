@@ -228,7 +228,8 @@ $chart-width: 160px;
     }
   }
 
-  .program-avatar__level {
+  .program-avatar__level,
+  .program-avatar--medium .program-avatar__level {
     color: $main-color;
     font-size: 12px;
     width: 25px;
