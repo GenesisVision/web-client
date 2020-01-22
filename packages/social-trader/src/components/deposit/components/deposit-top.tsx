@@ -8,6 +8,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositTop: React.FC<DepositTopOwnProps> = ({
+  ownAsset,
   header,
   asset,
   title,
@@ -20,7 +21,7 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
       title={header || t("deposit-asset.title")}
       subtitle={title || asset}
     >
-      {asset === ASSET.PROGRAM && !!availableToInvest && (
+      {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
         <DialogField>
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
@@ -35,6 +36,7 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
 };
 
 export interface DepositTopOwnProps {
+  ownAsset?: boolean;
   currency?: CurrencyEnum;
   title?: string;
   availableToInvest?: number;
