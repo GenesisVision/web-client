@@ -17,7 +17,7 @@ interface Props {
 const _EventsList: React.FC<Props> = ({ className, events }) => {
   const countItems = events.length;
   const [startIndex, setStartIndex] = useState(0);
-  const [maxHeightItem, setMaxHeightItem] = useState(0);
+  const [maxHeightItem, setMaxHeightItem] = useState(90);
   const [heightList, setHeightList] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
