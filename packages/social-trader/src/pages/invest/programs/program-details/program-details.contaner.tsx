@@ -20,6 +20,7 @@ import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
+import { CurrencyEnum } from "utils/types";
 
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
@@ -159,13 +160,13 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           <>
             {programDetails && (
               <InvestmentProgramControls
+                currency={currency}
                 id={id}
                 programDetails={programDetails}
                 publicInfo={description.publicInfo}
                 brokerDetails={brokerDetails}
                 tradingAccountInfo={description.tradingAccountInfo}
                 onApply={handleDispatchDescription}
-                description={description}
                 isOwnProgram={isOwnAsset}
                 levelsParameters={levelsParameters!}
               />
