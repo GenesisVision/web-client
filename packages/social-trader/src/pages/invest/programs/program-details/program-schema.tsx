@@ -12,9 +12,6 @@ export const getSchema = (details: ProgramDescriptionDataType) => ({
   "@type": isFollow ? "FinancialProduct" : "DepositAccount",
   identifier: details.id,
   provider: details.owner.username,
-  hoursAvailable:
-    (details.programDetails && details.programDetails.ageDays * 24) ||
-    undefined,
   name: details.publicInfo.title,
   description: details.publicInfo.description,
   broker: details.brokerDetails.name,
