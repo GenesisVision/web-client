@@ -6,7 +6,7 @@ import { NotificationSettingList } from "gv-api-web";
 import AssetNotificationsGeneral from "modules/asset-notifications/asset-notifications-general";
 import { NOTIFICATIONS } from "modules/asset-notifications/asset-notifications.types";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";
@@ -15,13 +15,10 @@ import {
   removeNotification
 } from "./services/notification-settings.services";
 
-const _NotificationSettings: React.FC<Props> = ({ t, settings }) => {
-  const {
-    settingsGeneral,
-    settingsProgram,
-    settingsFund,
-    settingsManager
-  } = settings;
+const _NotificationSettings: React.FC<Props> = ({
+  settings: { settingsGeneral, settingsProgram, settingsFund, settingsManager }
+}) => {
+  const [t] = useTranslation();
   const notificationsGeneral = [
     {
       name: NOTIFICATIONS.PlatformNewsAndUpdates,
@@ -58,13 +55,9 @@ const _NotificationSettings: React.FC<Props> = ({ t, settings }) => {
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   settings: NotificationSettingList;
 }
 
-const NotificationSettings = React.memo(
-  withLoader(translate()(_NotificationSettings))
-);
+const NotificationSettings = React.memo(withLoader(_NotificationSettings));
 export default NotificationSettings;
