@@ -2,8 +2,9 @@ import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
 import { PlatformEvent } from "gv-api-web";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { animated, useSpring } from "react-spring";
+import { getElementHeight } from "routes/ssr/landing-page/utils";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 const timeConversion = (date: Date) => {
@@ -18,53 +19,75 @@ const timeConversion = (date: Date) => {
   const totalSeconds = ms / MS_IN_ONE_SEC;
 
   if (totalSeconds < 60) {
-    return `${Math.floor(totalSeconds)} sec`;
+    return `${Math.floor(totalSeconds)} sec ago`;
   }
 
   const totalMinutes = ms / MS_IN_ONE_MIN;
 
   if (totalMinutes < 60) {
-    const seconds = (ms % MS_IN_ONE_MIN) / MS_IN_ONE_SEC;
-    return `${Math.floor(totalMinutes)} min ${Math.floor(seconds)} sec`;
+    const seconds = Math.floor((ms % MS_IN_ONE_MIN) / MS_IN_ONE_SEC);
+    const secondsText = seconds ? `${seconds} sec` : ``;
+    return `${Math.floor(totalMinutes)} min ${secondsText} ago`;
   }
 
   const totalHours = ms / MS_IN_ONE_HRS;
 
   if (totalHours < 24) {
-    const minutes = (ms % MS_IN_ONE_HRS) / MS_IN_ONE_MIN;
-    return `${Math.floor(totalHours)} hrs ${Math.floor(minutes)} min`;
+    const minutes = Math.floor((ms % MS_IN_ONE_HRS) / MS_IN_ONE_MIN);
+    const minutesText = minutes ? `${minutes} min` : ``;
+    return `${Math.floor(totalHours)} hours ${minutesText} ago`;
   }
 
   const totalDays = ms / MS_IN_ONE_DAY;
-  const hours = (ms % MS_IN_ONE_DAY) / MS_IN_ONE_HRS;
-  return `${Math.floor(totalDays)} days ${Math.floor(hours)} hrs`;
+  const hours = Math.floor((ms % MS_IN_ONE_DAY) / MS_IN_ONE_HRS);
+  const hoursText = hours ? `${hours} hours` : ``;
+  return `${Math.floor(totalDays)} days ${hoursText} ago`;
 };
 
-const getPropsAnimation = (
+const getCurrentIndex = (
   index: number,
   startIndex: number,
   countShowingItems: number,
   countItems: number
 ) => {
-  let currentIndex = null;
   switch (true) {
     case index > startIndex:
-      currentIndex = index - startIndex;
-      break;
+      return index - startIndex;
     case index < startIndex:
-      currentIndex = countItems - startIndex + index;
-      break;
+      return countItems - startIndex + index;
     default:
-      currentIndex = 0;
+      return 0;
   }
-  const isShow = currentIndex < countShowingItems;
+};
+
+const isShowing = (
+  countShowingItems: number,
+  currentIndex: number
+): boolean => {
+  return currentIndex < countShowingItems;
+};
+
+const getPropsAnimation = (
+  countShowingItems: number,
+  maxHeight: number,
+  currentIndex: number,
+  isShow: boolean
+) => {
   const isLastShowing = currentIndex === countShowingItems;
-  const translate3dProp = isShow || isLastShowing ? 120 * currentIndex : 60;
+  const translate3dProp =
+    isShow || isLastShowing ? (maxHeight + 20) * currentIndex : 60;
   const scaleProp = isShow || isLastShowing ? 1 : 0.7;
   return {
-    to: {
-      opacity: isShow ? 1 : 0,
-      transform: `translate3d(0,${translate3dProp}px,0) scale(${scaleProp}`
+    to: async (next: any) => {
+      next({
+        opacity: isShow ? 1 : 0,
+        transform: `translate3d(0,${translate3dProp}px,0) scale(${scaleProp})`
+      });
+      next({ height: maxHeight, delay: 100 });
+    },
+    from: {
+      opacity: 0,
+      transform: `translate3d(0,0px,0) scale(1)`
     }
   };
 };
@@ -74,6 +97,8 @@ interface Props extends PlatformEvent {
   index: number;
   countItems: number;
   countShowingItems: number;
+  maxHeight: number;
+  updateMaxHeight: (currentHeight: number) => void;
 }
 
 const _EventItem: React.FC<Props> = ({
@@ -89,11 +114,11 @@ const _EventItem: React.FC<Props> = ({
   color,
   assetType,
   date,
-  value
+  value,
+  maxHeight,
+  updateMaxHeight
 }) => {
-  const props = useSpring(
-    getPropsAnimation(index, startIndex, countShowingItems, countItems)
-  );
+  const itemRef = useRef(null);
   const linkUser = userUrl
     ? {
         pathname: composeManagerDetailsUrl(userUrl),
@@ -103,8 +128,24 @@ const _EventItem: React.FC<Props> = ({
   const linkAsset = assetUrl
     ? getAssetLink(assetUrl, assetType, title)
     : undefined;
+  const currentIndex = getCurrentIndex(
+    index,
+    startIndex,
+    countShowingItems,
+    countItems
+  );
+  const isShow = isShowing(countShowingItems, currentIndex);
+  useEffect(() => {
+    if (!isShow) return;
+    const currentHeight = getElementHeight(itemRef);
+    if (maxHeight < currentHeight) updateMaxHeight(currentHeight);
+  }, [maxHeight]);
+  const props = useSpring(
+    getPropsAnimation(countShowingItems, maxHeight, currentIndex, isShow)
+  );
   return (
-    <animated.li className="events-list__item" style={props}>
+    //@ts-ignore
+    <animated.li className="events-list__item" style={props} ref={itemRef}>
       <Link className="events-list__item-link" to={linkAsset}>
         <div className="events-list__item-avatar">
           <ImageBase

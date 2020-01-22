@@ -5,7 +5,7 @@
 .events-list {
   @include reset-list();
   position: relative;
-  min-height: 720px;
+  min-height: 500px;
 
   &__item {
     border: 1px solid $landing-bg-gray-2;
@@ -18,6 +18,7 @@
     position: absolute;
     top: 0;
     width: 100%;
+    opacity: 0;
 
     @include media-breakpoint-large-desktop() {
       padding-left: 40px;
@@ -27,6 +28,7 @@
     &--last {
       top: auto;
       bottom: 0;
+      opacity: 1;
 
       .events-list__item-avatar {
         background-image: linear-gradient(0deg, #f7f7f7, #f7f7f7);
@@ -150,6 +152,10 @@
   &__item-date {
     font-size: 11px;
     line-height: 1.6;
+
+    @include media-breakpoint-desktop() {
+      font-size: 12px;
+    }
 
     @include media-breakpoint-large-desktop() {
       font-size: 13px;
