@@ -28,7 +28,7 @@ const _TabControls: React.FC<Props> = ({
 }) => {
   return (
     <ul className={classNames("tab-controls", className)}>
-      {tabsItems.map((tab: any, index: number) => (
+      {tabsItems.map((tab, index) => (
         <li
           key={index}
           className={classNames("tab-controls__item", {

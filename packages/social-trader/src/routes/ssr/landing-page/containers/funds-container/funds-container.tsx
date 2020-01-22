@@ -18,10 +18,10 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
   const [hide, setHide] = useState(false);
 
   const handleScroll = useCallback(
-    posFirstItem => {
+    posFirstItemLeft => {
       if (animate.current) {
         const posAnimate = animate.current.getBoundingClientRect();
-        setHide(posAnimate.right > posFirstItem.left);
+        setHide(posAnimate.right > posFirstItemLeft);
       }
     },
     [animate.current]
