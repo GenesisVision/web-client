@@ -146,7 +146,12 @@ const _EventItem: React.FC<Props> = ({
   return (
     //@ts-ignore
     <animated.li className="events-list__item" style={props} ref={itemRef}>
-      <Link className="events-list__item-link" to={linkAsset}>
+      <Link
+        //@ts-ignore
+        title={`Go to ${title} details page`}
+        className="events-list__item-link"
+        to={linkAsset}
+      >
         <div className="events-list__item-avatar">
           <ImageBase
             DefaultImageComponent={GVProgramDefaultAvatar}
@@ -159,7 +164,11 @@ const _EventItem: React.FC<Props> = ({
         </div>
       </Link>
       <div className="events-list__item-info">
-        <Link className="events-list__item-link" to={linkUser}>
+        <Link
+          title={`Go to ${userUrl} user page`}
+          className="events-list__item-link"
+          to={linkUser}
+        >
           <div className="events-list__item-title">{title}</div>
         </Link>
         <div className="events-list__item-text">{text}</div>
