@@ -11,6 +11,7 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
+import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -19,6 +20,7 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
+import { DemoDepositButton } from "modules/demo-deposit/demo-deposit.button";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
 import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
@@ -30,7 +32,7 @@ import {
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ChangeAccountPasswordButton from "pages/programs/programs-settings/change-password/change-password-trading-account.button";
+import ChangeAccountPasswordButton from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -127,6 +129,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       title={asset.accountInfo.title}
       logo={asset.broker.logo}
       renderActions={renderActions}
+      extraBlock={asset.tags && <TagProgramContainer tags={asset.tags} />}
     >
       <TableCardTable>
         {asset.accountInfo.currency && (
@@ -176,6 +179,13 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               accountType={asset.accountInfo.type}
             />
           </>
+        )}
+        {asset.actions.canMakeDemoDeposit && (
+          <DemoDepositButton
+            onApply={updateItems}
+            currency={asset.accountInfo.currency}
+            id={asset.id}
+          />
         )}
       </TableCardRow>
     </TableCard>

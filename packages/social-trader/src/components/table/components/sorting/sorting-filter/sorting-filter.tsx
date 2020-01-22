@@ -1,6 +1,7 @@
 import "./sorting-filter.scss";
 
 import GVButton from "components/gv-button";
+import { TableToolbarItemBlock } from "components/table/components/table-toolbar-item.block";
 import React, { useCallback } from "react";
 
 import {
@@ -55,7 +56,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   const columnValues = composeSortingColumnValues();
 
   return (
-    <span className="sorting-filter">
+    <TableToolbarItemBlock className="sorting-filter">
       <SelectFilter
         name={SORTING_FILTER_NAME}
         label="Order By"
@@ -71,7 +72,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
       >
         {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
       </GVButton>
-    </span>
+    </TableToolbarItemBlock>
   );
 };
 

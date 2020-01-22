@@ -1,9 +1,9 @@
 import { IFundsFacetTableProps } from "components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "components/not-found/not-found";
-import { IProgramsFacetTableProps } from "components/programs/programs-facet/components/programs-facet-table";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise, PlatformInfo } from "gv-api-web";
+import { PlatformInfo } from "gv-api-web";
+import { IProgramsFacetTableProps } from "pages/invest/programs/programs-facet/components/programs-facet-table";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
@@ -31,7 +31,7 @@ const _FacetContainer: React.FC<Props> = props => {
   const { title, sorting, timeframe } = facet!;
   return (
     <TableContainer
-      title={title}
+      // title={title}
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}
@@ -76,7 +76,7 @@ interface Props {
   TableContainer: React.ComponentType<
     IProgramsFacetTableProps | IFundsFacetTableProps
   >;
-  getItems: (args: FilteringType) => CancelablePromise<IDataModel>;
+  getItems: (args: FilteringType) => Promise<IDataModel>;
   isAuthenticated?: boolean;
 }
 

@@ -1,3 +1,5 @@
+import "./deposit-details.scss";
+
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import GVFormikField from "components/gv-formik-field";
 import { onSelectChange } from "components/select/select.test-helpers";

@@ -19,7 +19,7 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IFollowsTableProps extends ITableProps {
   data?: FollowDetailsListItem[];
-  title: string;
+  title?: string;
 }
 
 const _FollowsTable: React.FC<IFollowsTableProps> = ({
@@ -35,10 +35,12 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  title
+  title,
+  asLinkPagination
 }) => {
   return (
     <Table
+      asLinkPagination={asLinkPagination}
       loaderData={followListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}

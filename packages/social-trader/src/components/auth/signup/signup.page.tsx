@@ -1,8 +1,9 @@
 import "./signup.scss";
 
+import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
-import { withTranslation as translate } from "react-i18next";
+import { useTranslation, withTranslation as translate } from "react-i18next";
 import { connect, ResolveThunks } from "react-redux";
 import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
 import { AuthRootState, MiddlewareDispatch } from "utils/types";
@@ -15,19 +16,22 @@ const _SignUpPage: React.FC<Props> = ({
   errorMessage,
   service
 }) => {
+  const [t] = useTranslation();
   return (
-    <div className="signup">
-      <CaptchaContainer
-        request={service.signUp}
-        renderForm={handle => (
-          <SignUpForm
-            refCode={referralCode}
-            onSubmit={handle}
-            error={errorMessage}
-          />
-        )}
-      />
-    </div>
+    <PageSeoWrapper title={t("auth.signup.title")}>
+      <div className="signup">
+        <CaptchaContainer
+          request={service.signUp}
+          renderForm={handle => (
+            <SignUpForm
+              refCode={referralCode}
+              onSubmit={handle}
+              error={errorMessage}
+            />
+          )}
+        />
+      </div>
+    </PageSeoWrapper>
   );
 };
 

@@ -19,6 +19,7 @@ const _WithdrawButton: React.FC<Props> = ({
 }) => {
   const accountCurrency = useSelector(currencySelector);
   const [t] = useTranslation();
+  const label = t("buttons.withdraw");
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
   let withdraw;
   switch (type) {
@@ -47,13 +48,15 @@ const _WithdrawButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        testId={label}
+        className={label}
         size={size}
         disabled={disabled}
         color="secondary"
         variant="outlined"
         onClick={setIsOpenPopup}
       >
-        {t("buttons.withdraw")}
+        {label}
       </GVButton>
       {withdraw}
     </>

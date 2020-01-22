@@ -14,12 +14,7 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
       <div className="create-asset-settings__text">
         {t("create-fund-page.settings.fields.mandatory-assets")}
       </div>
-      <GVFormikField
-        wide
-        name={name}
-        component={ReallocateField}
-        assets={assets}
-      />
+      <GVFormikField name={name} component={ReallocateField} assets={assets} />
     </AssetField>
   );
 };

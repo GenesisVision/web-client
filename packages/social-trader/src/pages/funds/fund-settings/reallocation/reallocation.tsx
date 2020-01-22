@@ -1,8 +1,7 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
-import { PlatformAsset } from "gv-api-web";
-import { FundAssetInfo } from "gv-api-web/dist/model/FundAssetInfo";
+import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";

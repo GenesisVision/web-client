@@ -1,4 +1,7 @@
 .reinvesting-widget {
   display: flex;
   align-items: flex-end;
+  &__label {
+    white-space: nowrap;
+  }
 }

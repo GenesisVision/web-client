@@ -1,21 +1,17 @@
+import "./page.scss";
+
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
+import {
+  IPageSeoWrapperProps,
+  PageSeoWrapper
+} from "components/page/page-seo-wrapper";
 import { useRefLink } from "hooks/ref-link";
-import Head from "next/head";
 import * as React from "react";
 import { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  commonMeta,
-  descriptionMeta,
-  imageMeta,
-  schema,
-  SchemaType,
-  titleMeta,
-  urlMeta
-} from "utils/seo";
 
 const Page = ({
+  showTitle,
   title,
   description,
   children,
@@ -24,35 +20,29 @@ const Page = ({
   url
 }: PropsWithChildren<Props>) => {
   useRefLink();
-  const [t] = useTranslation();
-  const pageTitle = t("app.title") + title;
   return (
     <TitleContext.Provider value={title}>
-      <>
-        <Head>
-          <title>{pageTitle}</title>
-          {commonMeta()}
-          {urlMeta(url)}
-          {schema(schemas)}
-          {titleMeta(title)}
-          {descriptionMeta(description)}
-          {imageMeta(previewImage)}
-        </Head>
+      <PageSeoWrapper
+        url={url}
+        schemas={schemas}
+        title={title}
+        description={description}
+        previewImage={previewImage}
+      >
         <div>
           <BackButton />
         </div>
+        {showTitle && (
+          <div className="page__title">
+            <h1>{title}</h1>
+          </div>
+        )}
         {children}
-      </>
+      </PageSeoWrapper>
     </TitleContext.Provider>
   );
 };
 
-interface Props {
-  title: string;
-  schemas?: Array<SchemaType>;
-  description?: string;
-  previewImage?: string;
-  url?: string;
-}
+interface Props extends IPageSeoWrapperProps {}
 
 export default Page;

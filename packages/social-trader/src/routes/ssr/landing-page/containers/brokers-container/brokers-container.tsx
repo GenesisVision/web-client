@@ -49,7 +49,9 @@ const _BrokersContainer: React.FC<Props> = ({
         "brokers-container--dark": darkTheme
       })}
     >
-      {title && <h2 className="brokers-container__title">{title}</h2>}
+      {title !== undefined && (
+        <h2 className="brokers-container__title">{title}</h2>
+      )}
       <div className="brokers-container__wrapper-controls">
         <TabControls
           currentTabId={currentTabId}

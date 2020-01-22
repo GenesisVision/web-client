@@ -5,15 +5,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  @include adaptive-full-padding($padding-xxxsmall);
   @include font-size($font-size-common);
   &:hover {
     .filter__arrow {
       stroke: $primary-color;
     }
-  }
-  &:not(:last-child) {
-    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__label {

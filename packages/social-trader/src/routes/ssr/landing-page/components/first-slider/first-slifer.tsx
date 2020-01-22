@@ -17,6 +17,7 @@ interface Props {
 const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
+    initial: { opacity: 1, position: "static" },
     from: { opacity: 0, position: "absolute" },
     enter: { opacity: 1, position: "static" },
     leave: { opacity: 0, position: "absolute" },

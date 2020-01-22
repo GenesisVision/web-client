@@ -11,6 +11,7 @@ const TransferContainer = dynamic(() =>
 );
 
 const _TransferPopup: React.FC<Props> = ({
+  successMessage = "",
   singleCurrentItemContainer,
   onApply,
   title,
@@ -23,6 +24,7 @@ const _TransferPopup: React.FC<Props> = ({
 }) => (
   <Dialog open={open} onClose={onClose}>
     <TransferContainer
+      successMessage={successMessage}
       singleCurrentItemContainer={singleCurrentItemContainer}
       onApply={onApply}
       title={title}
@@ -36,6 +38,7 @@ const _TransferPopup: React.FC<Props> = ({
 );
 
 interface Props {
+  successMessage?: string;
   singleCurrentItemContainer: boolean;
   onApply: VoidFunction;
   currentItem: WalletItemType;

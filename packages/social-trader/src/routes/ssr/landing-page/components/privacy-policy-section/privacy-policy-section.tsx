@@ -192,12 +192,20 @@ const PrivacyPolicySection: React.FC = () => {
 
         <p>
           To comply the{" "}
-          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32005L0060&from=EN">
+          <a
+            title={
+              "DIRECTIVE 2005/60/EC OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL"
+            }
+            href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32005L0060&from=EN"
+          >
             DIRECTIVE 2005/60/EC OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL
             of 26 October 2005
           </a>{" "}
           and{" "}
-          <a href="http://www.irishstatutebook.ie/eli/2010/act/6/enacted/en/html">
+          <a
+            title={"Criminal Justice"}
+            href="http://www.irishstatutebook.ie/eli/2010/act/6/enacted/en/html"
+          >
             Criminal Justice (Money Laundering and Terrorist Financing) Act 2010
           </a>{" "}
           we use your data in KYC (Know your customer) Scoring Processing, in
@@ -233,7 +241,9 @@ const PrivacyPolicySection: React.FC = () => {
           opening an account or (ii) when receiving such advertising content or
           (iii) by logging in and going to My Account > Personal Details. You
           may also send to the Company, at any time, an email to{" "}
-          <a href="mailto:support@genesis.vision">support@genesis.vision</a>{" "}
+          <a title={"Write a email"} href="mailto:support@genesis.vision">
+            support@genesis.vision
+          </a>{" "}
           asking the Company to cease from sending such advertising content or
           sending your data to the third-parties in the marketing purposes. The
           aforesaid mark removal and/or e-mail receipt by the Company will
@@ -393,48 +403,85 @@ const PrivacyPolicySection: React.FC = () => {
         <p>
           For the subsequent provision of you with targeted and informative
           advertising we may transmit your data to{" "}
-          <a href="https://www.facebook.com/">Facebook</a> and{" "}
-          <a href="https://www.google.com/">Google</a>. Besides that, we use{" "}
-          <a href="https://www.google.com/">Google</a> services for analytics.
-          You may at any time chose to disable and/or restrict such transfers by
-          notifying us at the contact details listed below.
+          <a title={"Facebook"} href="https://www.facebook.com/">
+            Facebook
+          </a>{" "}
+          and{" "}
+          <a title={"Google"} href="https://www.google.com/">
+            Google
+          </a>
+          . Besides that, we use{" "}
+          <a title={"Google"} href="https://www.google.com/">
+            Google
+          </a>{" "}
+          services for analytics. You may at any time chose to disable and/or
+          restrict such transfers by notifying us at the contact details listed
+          below.
         </p>
 
         <p>
           For the recognition of the text specified in the documents in order to
           clarify the correctness of the Client’s data, which were previously
           personally indicated in the service profile, we use{" "}
-          <a href="https://cloud.google.com/vision/">Google Vision</a> and may
-          use <a href="https://www.jumio.com/">Jumio</a> and/or{" "}
-          <a href="https://sumsub.com/">Sub&Substance</a>. For the comparison of
-          the user first and last name contained in the recognized documents
-          with the user first and last name, which were previously personally
-          indicated in the service profile, we may use{" "}
-          <a href="https://www.rosette.com/">Rosette API</a>.
+          <a title={"Google Vision"} href="https://cloud.google.com/vision/">
+            Google Vision
+          </a>{" "}
+          and may use{" "}
+          <a title={"Jumio"} href="https://www.jumio.com/">
+            Jumio
+          </a>{" "}
+          and/or{" "}
+          <a title={"Sub&Substance"} href="https://sumsub.com/">
+            Sub&Substance
+          </a>
+          . For the comparison of the user first and last name contained in the
+          recognized documents with the user first and last name, which were
+          previously personally indicated in the service profile, we may use{" "}
+          <a title={"Rosette API"} href="https://www.rosette.com/">
+            Rosette API
+          </a>
+          .
         </p>
 
         <p>
-          <a href="https://sumsub.com/">Sum&Sub</a> may provide screening
-          service for the possible presence of the user in sanctions sheets, PEP
-          sheets (Politically exposed person), media references for
-          participation in criminal activities or presence in Interpol's and
-          other agencies search lists. This kind of user verification is one of
-          the requirements for fighting corruption and laundering of money,
-          obtained as part of criminal activity.
+          <a title={"Sum&Sub"} href="https://sumsub.com/">
+            Sum&Sub
+          </a>{" "}
+          may provide screening service for the possible presence of the user in
+          sanctions sheets, PEP sheets (Politically exposed person), media
+          references for participation in criminal activities or presence in
+          Interpol's and other agencies search lists. This kind of user
+          verification is one of the requirements for fighting corruption and
+          laundering of money, obtained as part of criminal activity.
         </p>
 
         <p>
           We may transmit your contact data only to{" "}
-          <a href="https://www.nexmo.com/">Nexmo</a> mass texting operator and{" "}
-          <a href="https://sendgrid.com/">Sendgrid</a> emailing operator for
-          efficient communication with our Clients.
+          <a title={"Nexmo"} href="https://www.nexmo.com/">
+            Nexmo
+          </a>{" "}
+          mass texting operator and{" "}
+          <a title={"Sendgrid"} href="https://sendgrid.com/">
+            Sendgrid
+          </a>{" "}
+          emailing operator for efficient communication with our Clients.
         </p>
 
         <p>
           In order to ensure safe storage of your personal data we locate our
-          equipment in the <a href="https://webzilla.com/">Webzilla</a>,{" "}
-          <a href="http://www.iptp.net">IPTP</a>
-          and <a href="https://www.rackspace.com/">Rackspace</a> datacenters.
+          equipment in the{" "}
+          <a title={"Webzilla"} href="https://webzilla.com/">
+            Webzilla
+          </a>
+          ,{" "}
+          <a title={"IPTP"} href="http://www.iptp.net">
+            IPTP
+          </a>
+          and{" "}
+          <a title={"Rackspace"} href="https://www.rackspace.com/">
+            Rackspace
+          </a>{" "}
+          datacenters.
         </p>
 
         <p>
@@ -488,7 +535,14 @@ const PrivacyPolicySection: React.FC = () => {
           or legal entity. Any changes in your identifying details shall be
           notified to the Company immediately and in any case no later than the
           7th day from the date of such changes. If your data is incorrect or
-          incomplete, please contact support@genesis.vision to change your data.
+          incomplete, please contact{" "}
+          <a
+            title={"Write a email to Genesis Vision"}
+            href="mailto:support@genesis.vision"
+          >
+            support@genesis.vision
+          </a>{" "}
+          to change your data.
         </p>
 
         <p>
@@ -750,7 +804,11 @@ const PrivacyPolicySection: React.FC = () => {
         </p>
         <p className="c12">
           <span className="c17 c23">
-            <a className="c14" href="https://www.dataprotection.ie">
+            <a
+              title={"dataprotection"}
+              className="c14"
+              href="https://www.dataprotection.ie"
+            >
               www.dataprotection.ie
             </a>
           </span>
@@ -1243,12 +1301,23 @@ const PrivacyPolicySection: React.FC = () => {
         </p>
         <p className="c3">
           <span className="c17">Email: </span>{" "}
-          <a href="mailto:official@genesis.vision"> official@genesis.vision</a>
+          <a
+            title={"Write a email to Genesis Vision"}
+            href="mailto:official@genesis.vision"
+          >
+            {" "}
+            official@genesis.vision
+          </a>
           <span className="c4">; or</span>
         </p>
         <p className="c3">
           <span className="c17 c26">Support: </span>
-          <a href="support@genesis.vision">support@genesis.vision</a>
+          <a
+            title={"Write a email to Genesis Vision support"}
+            href="mailto:support@genesis.vision"
+          >
+            support@genesis.vision
+          </a>
         </p>
         <p className="c2">
           <span className="c4"></span>

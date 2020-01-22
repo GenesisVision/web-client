@@ -1,5 +1,3 @@
-import "components/assets/create-asset/create-asset.scss";
-
 import Page from "components/page/page";
 import { Broker } from "gv-api-web";
 import * as React from "react";
@@ -13,7 +11,7 @@ const _CreateAccountPage: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("create-account-page.title")}>
+    <Page showTitle title={t("create-account-page.title")}>
       <CreateAccountContainer
         brokers={brokers}
         requestBrokerName={requestBrokerName}

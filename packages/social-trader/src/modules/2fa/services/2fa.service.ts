@@ -1,6 +1,5 @@
 import authActions from "actions/auth-actions";
 import {
-  CancelablePromise,
   PasswordModel,
   RecoveryCodesViewModel,
   TwoFactorAuthenticatorConfirm,
@@ -12,14 +11,14 @@ import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
 export const confirm2fa = (
-  model: TwoFactorAuthenticatorConfirm
-): RootThunk<CancelablePromise<RecoveryCodesViewModel>> => (
+  body: TwoFactorAuthenticatorConfirm
+): RootThunk<Promise<RecoveryCodesViewModel>> => (
   dispatch
-): CancelablePromise<RecoveryCodesViewModel> => {
+): Promise<RecoveryCodesViewModel> => {
   const authorization = authService.getAuthArg();
   return authApi
     .confirmTwoStepAuth(authorization, {
-      model
+      body
     })
     .then(response => {
       authService.storeToken(response.authToken);
@@ -28,11 +27,11 @@ export const confirm2fa = (
     });
 };
 
-export const sendPassword = (model: PasswordModel) =>
-  authApi.createTwoStepAuthRecoveryCodes(authService.getAuthArg(), { model });
+export const sendPassword = (body: PasswordModel) =>
+  authApi.createTwoStepAuthRecoveryCodes(authService.getAuthArg(), { body });
 
-export const disableTFA = (model: TwoFactorCodeWithPassword) =>
-  authApi.disableTwoStepAuth(authService.getAuthArg(), { model });
+export const disableTFA = (body: TwoFactorCodeWithPassword) =>
+  authApi.disableTwoStepAuth(authService.getAuthArg(), { body });
 
 export const fetchTFAData = () =>
   authApi.createTwoStepAuth(authService.getAuthArg());

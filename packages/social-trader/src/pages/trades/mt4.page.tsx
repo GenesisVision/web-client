@@ -8,8 +8,7 @@ const _Mt4: React.FC = () => {
   const [t] = useTranslation();
   const title = t("mt4-page.title");
   return (
-    <Page title={title}>
-      <h1>{title}</h1>
+    <Page showTitle title={title}>
       <div className="mt-frame">
         <iframe
           title={title}

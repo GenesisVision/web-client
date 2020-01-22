@@ -11,12 +11,14 @@ import {
   PersonalFundDetails,
   PersonalProgramDetails
 } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
+  fetchPortfolioEventsCount,
   getEvents
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -55,6 +57,13 @@ const _DetailsInvestment: React.FC<Props> = ({
   programPersonalDetails,
   followPersonalDetails
 }) => {
+  const { data: eventsCount = 0 } = useApiRequest({
+    request: () =>
+      fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
+        assetId: id
+      }),
+    fetchOnMount: true
+  });
   const subscriptionsCount = followPersonalDetails
     ? followPersonalDetails.subscribedAccounts
     : 0;
@@ -75,8 +84,8 @@ const _DetailsInvestment: React.FC<Props> = ({
       );
   }, [isAuthenticated, id]);
   useEffect(() => {
-    isAuthenticated && setHaveEvents(events.itemsData.data.total > 0);
-  }, [isAuthenticated, events]);
+    isAuthenticated && setHaveEvents(eventsCount > 0);
+  }, [isAuthenticated, eventsCount]);
 
   const showInvestment =
     !!investmentDetails && haveActiveInvestment(investmentDetails);

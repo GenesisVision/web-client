@@ -2,6 +2,7 @@ import "./statistic-item.scss";
 
 import classNames from "classnames";
 import { BlurContainer } from "components/blur-container/blur-container";
+import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -9,7 +10,7 @@ import { formatCurrencyValue } from "utils/formatter";
 
 const _StatisticItem: React.FC<Props> = ({
   noWrap = true,
-  withPadding = true,
+  withPadding,
   hideLabel,
   isPending,
   invert,
@@ -45,16 +46,11 @@ const _StatisticItem: React.FC<Props> = ({
   };
 
   return (
-    <div
-      className={classNames(
-        "statistics-item",
-        {
-          "statistics-item--with-padding": withPadding,
-          "statistics-item--half": half,
-          "statistics-item--small": small
-        },
-        className
-      )}
+    <StatisticItemContainerBlock
+      withPadding={withPadding}
+      half={half}
+      small={small}
+      className={className}
     >
       <div
         className={classNames(
@@ -79,7 +75,7 @@ const _StatisticItem: React.FC<Props> = ({
           />
         </div>
       ) : null}
-    </div>
+    </StatisticItemContainerBlock>
   );
 };
 

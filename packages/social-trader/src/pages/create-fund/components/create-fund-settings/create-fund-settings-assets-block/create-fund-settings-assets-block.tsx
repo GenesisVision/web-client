@@ -1,27 +1,28 @@
-import "../create-fund-settings.scss";
 import "./create-fund-settings-assets-block.scss";
 
 import AddButton from "components/add-button/add-button";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import FormError from "components/form/form-error/form-error";
 import FundAssetRatio from "components/fund-asset-ratio/fund-asset-ratio";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "components/fund-asset/fund-asset-container";
+import WalletWidgetContainer from "components/wallet-widget/wallet-widget-container";
 import React, { MouseEventHandler, useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { PlatformAssetFull } from "utils/types";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   touched,
   error,
   canChange = true,
-  t,
   assets = [],
   remainder,
   removeHandle = () => () => {},
   addHandle = () => {}
 }) => {
+  const [t] = useTranslation();
   const [hoveringAssetName, setHoveringAssetName] = useState<
     string | undefined
   >(undefined);
@@ -32,7 +33,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   const handleLeave = useCallback(() => setHoveringAssetName(undefined), []);
   return (
     <>
-      <div className="create-fund-settings__assets-and-line">
+      <div>
         <AssetRow>
           <FundAssetContainer
             assets={assets}
@@ -43,7 +44,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
             hoveringAsset={hoveringAssetName}
           />
         </AssetRow>
-        <div className="create-fund-settings__line">
+        <div className="assets-block__line">
           <FundAssetRatio
             values={assets}
             handleHover={handleHover}
@@ -52,17 +53,14 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
         </div>
       </div>
       {touched && (
-        <div className="create-fund-settings__assets-block__form-error">
-          {error}
+        <div className="assets-block__line">
+          <FormError small error={error} />
         </div>
       )}
       {canChange && (
-        <div className="create-fund-settings__add-assets">
-          <div
-            className="create-fund-settings__add-assets-button"
-            onClick={addHandle}
-          >
-            <div>
+        <div className="assets-block__add-block">
+          <div className="assets-block__add-assets-button" onClick={addHandle}>
+            <div className="assets-block__add-button">
               <AddButton />
             </div>
             <div>{t("buttons.add-assets")}</div>
@@ -73,7 +71,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation {
+interface Props {
   assets: PlatformAssetFull[];
   remainder: number;
   removeHandle?: FundAssetRemoveType;
@@ -83,7 +81,7 @@ interface Props extends WithTranslation {
   touched?: boolean;
 }
 
-const CreateFundSettingsAssetsComponent = translate()(
-  React.memo(_CreateFundSettingsAssetsComponent)
+const CreateFundSettingsAssetsComponent = React.memo(
+  _CreateFundSettingsAssetsComponent
 );
 export default CreateFundSettingsAssetsComponent;

@@ -3,15 +3,8 @@
 @import "~shared/styles/_sizes";
 
 .back-button {
-  margin-bottom: $padding-xxsmall;
   display: flex;
   align-items: center;
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-landscape-phone() {
-    margin-bottom: $padding-xsmall;
-    padding: 0;
-  }
 
   &__container {
     display: flex;

@@ -1,7 +1,6 @@
 import { ApiClient } from "gv-api-web";
+import fetch from "isomorphic-unfetch";
 
-const apiClient = ApiClient.instance;
-//@ts-ignore TODO fix types
-apiClient.basePath = process.env.REACT_APP_API_URL;
+const newClient = new ApiClient(process.env.REACT_APP_API_URL, fetch);
 
-export default apiClient;
+export default newClient;

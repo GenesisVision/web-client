@@ -16,6 +16,8 @@ import { useCallback, useMemo } from "react";
 const isExcluded = (filters: string[], currentFilter: string): boolean =>
   filters.filter(filter => filter === currentFilter).length !== 0;
 
+const FIRST_PAGE = 1;
+
 const useRouteFilters = (
   defaultFilter: any,
   safePagingFilters: string[] = []
@@ -23,7 +25,7 @@ const useRouteFilters = (
   const basename = process.env.REACT_ROOT_ROUTE;
   const { asPath, pathname } = useRouter();
   const queryParams = qs.parse(asPath.slice(pathname.length + 1));
-  const { sorting = "", page = 1, ...filtering } = queryParams;
+  const { sorting = "", page = FIRST_PAGE, ...filtering } = queryParams;
 
   const updateFilter: UpdateFilter = useCallback(
     filter => {
@@ -36,7 +38,7 @@ const useRouteFilters = (
         ...queryParams,
         [PAGING_FILTER_NAME]: isSafePagingFilter
           ? queryParams[PAGING_FILTER_NAME]
-          : 0,
+          : FIRST_PAGE,
         [filter.name]: filter.value
       });
       const route = query ? `${pathname}?${query}` : pathname;

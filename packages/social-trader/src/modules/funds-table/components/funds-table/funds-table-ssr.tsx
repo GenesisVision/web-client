@@ -82,7 +82,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   if (!data) return null;
   return (
     <FundsTable
-      title={title}
       data={data.items}
       showSwitchView={showSwitchView}
       sorting={sorting || SORTING_FILTER_VALUE}
@@ -93,6 +92,7 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
       renderFilters={renderFilters}
       paging={composePaging(data.total, page, DEFAULT_ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
+      asLinkPagination={true}
     />
   );
 };

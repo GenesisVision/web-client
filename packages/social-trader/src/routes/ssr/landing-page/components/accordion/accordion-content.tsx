@@ -1,12 +1,9 @@
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
+import { getElementHeight } from "routes/ssr/landing-page/utils";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
-
-const getElementHeight = (ref: React.RefObject<HTMLDivElement>) => {
-  return ref.current ? ref.current.getBoundingClientRect().height : 0;
-};
 
 export type TAccordionContent = {
   text?: string | JSX.Element;
@@ -31,8 +28,7 @@ const _AccordionContent: React.FC<Props> = ({
   const innerRef = useRef(null);
   //@ts-ignore
   const transitions = useTransition(isVisible, null, {
-    //@ts-ignore
-    enter: () => async (next, cancel) => {
+    enter: () => async (next: any, cancel: any) => {
       const height = getElementHeight(innerRef);
 
       cancel();
@@ -40,8 +36,7 @@ const _AccordionContent: React.FC<Props> = ({
       await next({ height, opacity: 1, overflow: "hidden" });
       await next(visibleStyle);
     },
-    //@ts-ignore
-    leave: () => async (next, cancel) => {
+    leave: () => async (next: any, cancel: any) => {
       const height = getElementHeight(containerRef);
 
       cancel();

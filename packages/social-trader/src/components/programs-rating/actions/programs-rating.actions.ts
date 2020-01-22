@@ -1,7 +1,4 @@
-import {
-  CancelablePromise,
-  ItemsViewModelProgramDetailsListItem
-} from "gv-api-web";
+import { ItemsViewModelProgramDetailsListItem } from "gv-api-web";
 import programApi from "services/api-client/programs-api";
 import { ActionType } from "utils/types";
 
@@ -11,7 +8,7 @@ export const LEVELUP_SUMMARY = "LEVELUP_SUMMARY";
 
 export const fetchProgramsRating = (
   filters: IProgramsGetFilters
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
+): ActionType<Promise<ItemsViewModelProgramDetailsListItem>> => ({
   type: PROGRAMS_RATING,
   //@ts-ignore
   payload: programApi.getPrograms(filters)
@@ -19,7 +16,7 @@ export const fetchProgramsRating = (
 
 export const fetchSelfProgramsRating = (
   filters: IProgramsGetFilters
-): ActionType<CancelablePromise<ItemsViewModelProgramDetailsListItem>> => ({
+): ActionType<Promise<ItemsViewModelProgramDetailsListItem>> => ({
   type: SELF_PROGRAMS_RATING,
   //@ts-ignore
   payload: programApi.getPrograms(filters)
@@ -27,11 +24,11 @@ export const fetchSelfProgramsRating = (
 //
 // export const fetchLevelUpSummary = (
 //   opts: IProgramsLevelupSummaryGetOpts
-// ): ActionType<CancelablePromise<any>> => ({  //LevelUpSummary
+// ): ActionType<Promise<any>> => ({  //LevelUpSummary
 //   type: LEVELUP_SUMMARY,
 //   payload: (Promise.resolve({
 //     levelData: []
-//   }) as unknown) as CancelablePromise<any> //LevelUpSummary
+//   }) as unknown) as Promise<any> //LevelUpSummary
 // });
 
 export interface IProgramsLevelupSummaryGetOpts {

@@ -1,9 +1,9 @@
 import { updateGlobalTableViewAction } from "actions/tables-view-actions";
-import ProgramsPage from "components/programs/programs.page";
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import * as programTableActions from "modules/programs-table/actions/programs-table.actions";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
+import ProgramsPage from "pages/invest/programs/programs.page";
 import React from "react";
 import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
 import authService from "services/auth-service";

@@ -1,4 +1,3 @@
-import AssetContent from "components/assets/asset-fields/asset-content";
 import useCreateAssetSubmit from "components/assets/create-asset/create-asset-submit.hook";
 import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
 import { CREATE_ASSET } from "constants/constants";
@@ -25,10 +24,10 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   });
 
   return (
-    <AssetContent>
+    <>
       <CreateAccountSettings onSubmit={handleCreate} broker={broker} />
       {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
-    </AssetContent>
+    </>
   );
 };
 

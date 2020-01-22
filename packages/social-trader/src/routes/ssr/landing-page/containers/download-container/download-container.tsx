@@ -40,7 +40,12 @@ const DownloadContainer: React.FC = () => (
         alt="Download app"
         className="download-container__img-iphone"
       />
-      <a href={VIDEO_LINK} className="download-container__play" target="_blank">
+      <a
+        title={"Download"}
+        href={VIDEO_LINK}
+        className="download-container__play"
+        target="_blank"
+      >
         <span className="download-container__play-btn" />
       </a>
     </div>

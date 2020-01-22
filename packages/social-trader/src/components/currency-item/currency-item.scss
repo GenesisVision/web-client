@@ -35,8 +35,7 @@
     letter-spacing: 0.6px;
     color: $text-light-color;
     &--big {
-      font-weight: 600;
-      @include font-size($font-size-h2);
+      padding: 0;
     }
   }
 }

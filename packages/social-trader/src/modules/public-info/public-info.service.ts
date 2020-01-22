@@ -4,5 +4,5 @@ import authService from "services/auth-service";
 
 export const updateProfile = ({ model }: { model?: UpdateProfileViewModel }) =>
   profileApi.updateProfile(authService.getAuthArg(), {
-    model
+    body: model
   });

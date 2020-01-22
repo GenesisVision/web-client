@@ -1,4 +1,4 @@
-import { closePeriod } from "pages/programs/program-details/service/program-details.service";
+import { closePeriod } from "pages/invest/programs/program-details/service/program-details.service";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 

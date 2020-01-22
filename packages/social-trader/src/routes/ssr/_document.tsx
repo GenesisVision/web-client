@@ -4,8 +4,10 @@ import React from "react";
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
+          <link rel="icon" sizes="192x192" href="/icon.png" />
+          <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="theme-color" content="#131e26" />
           <script

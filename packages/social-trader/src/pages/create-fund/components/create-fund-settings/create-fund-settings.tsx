@@ -1,6 +1,3 @@
-import "components/deposit-details/deposit-details.scss";
-import "./create-fund-settings.scss";
-
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";

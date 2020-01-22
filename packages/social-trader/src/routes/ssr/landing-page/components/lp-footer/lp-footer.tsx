@@ -17,7 +17,11 @@ const LPFooter: React.FC = () => {
         <div className="lp-footer__row">
           <h3 className="lp-footer__title">Have a question?</h3>
           <div className="lp-footer__email">
-            <a href={EMAIL_ROUTE} className="lp-footer__email-link">
+            <a
+              title={"Write email to Genesis Vision support"}
+              href={EMAIL_ROUTE}
+              className="lp-footer__email-link"
+            >
               support@genesis.vision
             </a>
             <LPButton color="secondary" href={EMAIL_ROUTE}>

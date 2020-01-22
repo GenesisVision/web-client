@@ -72,7 +72,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
 };
 
 export interface IFundsFacetTableProps {
-  title: string;
+  title?: string;
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;

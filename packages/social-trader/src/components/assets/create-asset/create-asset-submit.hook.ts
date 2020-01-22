@@ -47,7 +47,8 @@ const useCreateAssetSubmit = ({
     middleware: [checkConditionMiddleware]
   });
   return useCallback(
-    (data: ICreateAssetSettingsFormValues) => {
+    (data: ICreateAssetSettingsFormValues, setSubmitting) => {
+      setSubmitting(true);
       sendRequest({ data, asset });
     },
     [asset]

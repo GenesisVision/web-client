@@ -1,5 +1,5 @@
 import { ProgramLevelInfo, ProgramsLevelsInfo } from "gv-api-web";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
@@ -20,16 +20,12 @@ const _LevelCalculatorPopupContainer: React.FC<
     ProgramsLevelsInfo | undefined
   >(undefined);
   useEffect(() => {
-    const getProgramLevelsInfoPromise = getProgramLevelsInfo(id).then(
-      setProgramLevelInfo
-    );
-    const getPlatformLevelsPromise = getPlatformLevels(currency).then(
+    const abortController = new AbortController();
+    getProgramLevelsInfo(id, abortController.signal).then(setProgramLevelInfo);
+    getPlatformLevels(currency, abortController.signal).then(
       setPlatformLevelsInfo
     );
-    return () => {
-      getProgramLevelsInfoPromise.cancel();
-      getPlatformLevelsPromise.cancel();
-    };
+    return () => abortController.abort();
   }, []);
 
   const isDataReady = !!programLevelInfo && !!platformLevels;

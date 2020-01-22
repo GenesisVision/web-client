@@ -73,7 +73,13 @@ const _DepositButton: React.FC<Props> = ({
     : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton disabled={disabled} size={size} onClick={openPopupMethod}>
+      <GVButton
+        testId={label}
+        className={label}
+        disabled={disabled}
+        size={size}
+        onClick={openPopupMethod}
+      >
         {label}
       </GVButton>
       {deposit}

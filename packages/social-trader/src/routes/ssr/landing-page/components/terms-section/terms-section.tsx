@@ -45,7 +45,8 @@ const TermsSection: React.FC = () => {
           <br />
           as now or hereafter in effect.
           <br />
-          "Website" means <a href="https://genesis.vision/">
+          "Website" means{" "}
+          <a title={"Genesis Vision"} href="https://genesis.vision/">
             genesis.vision
           </a>{" "}
           <br />
@@ -68,7 +69,10 @@ const TermsSection: React.FC = () => {
         </p>
         <p>
           1.2. By accepting these terms you accept the definitions stated in{" "}
-          <a href="/glossary.html">Glossary</a>.
+          <a title={"Read Glossary"} href="/glossary">
+            Glossary
+          </a>
+          .
         </p>
         <p>
           1.3. Words used in singular form include the plural, and vise versa,

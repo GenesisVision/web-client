@@ -1,8 +1,4 @@
-import {
-  CancelablePromise,
-  FundAssetPlatformInfo,
-  ProgramAssetPlatformInfo
-} from "gv-api-web";
+import { FundAssetPlatformInfo, ProgramAssetPlatformInfo } from "gv-api-web";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 export type TFees = { gvCommission: number; entryFee?: number };
@@ -31,7 +27,7 @@ export type TAssetInvestFn = (
 
 export type TAssetInvestCreator = (
   assetInvestFn: TAssetInvestFn
-) => (args: TAssetInvestCreatorArgs) => CancelablePromise<null>;
+) => (args: TAssetInvestCreatorArgs) => Promise<null>;
 
 export type TAssetInvestCreatorArgs = {
   walletId: string;
@@ -43,4 +39,4 @@ export type TAssetInvestCreatorArgs = {
 export type TAssetDeposit = ({
   id,
   amount
-}: TAssetInvestCreatorArgs) => CancelablePromise<any>;
+}: TAssetInvestCreatorArgs) => Promise<any>;

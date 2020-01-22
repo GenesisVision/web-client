@@ -1,9 +1,6 @@
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
-import {
-  CancelablePromise,
-  ItemsViewModelFollowDetailsListItem
-} from "gv-api-web";
+import { ItemsViewModelFollowDetailsListItem } from "gv-api-web";
 import * as qs from "qs";
 import followApi from "services/api-client/follow-api";
 import authService from "services/auth-service";
@@ -44,7 +41,7 @@ export const getFiltersFromContext = ({
 
 export const fetchFollows = (
   filters: FetchSignalAssetsFilterType
-): CancelablePromise<ItemsViewModelFollowDetailsListItem> => {
+): Promise<ItemsViewModelFollowDetailsListItem> => {
   return followApi.getFollowAssets({
     ...filters,
     authorization: authService.getAuthArg()

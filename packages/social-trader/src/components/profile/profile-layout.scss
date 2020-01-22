@@ -3,20 +3,6 @@
 @import "~shared/styles/_breakpoint";
 
 .profile-layout {
-  padding-left: $padding-xsmall;
-  padding-right: $padding-xsmall;
   box-sizing: border-box;
   @include adaptive-padding(top, $padding-medium);
-  @include media-breakpoint-landscape-phone() {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .svg-loader {
-    max-width: 100%;
-  }
-
-  & .create-fund-settings__assets-and-line {
-    padding-top: 0;
-  }
 }

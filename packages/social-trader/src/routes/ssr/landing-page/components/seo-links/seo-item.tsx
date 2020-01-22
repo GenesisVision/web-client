@@ -12,11 +12,12 @@ interface ISeoItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
 const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => (
   <li className="seo-list__item">
     {href.includes("http") ? (
-      <a href={href} className="seo-list__link">
+      <a title={name} href={href} className="seo-list__link">
         {name}
       </a>
     ) : (
       <Link
+        title={name}
         onClick={onClick}
         to={{ pathname: href as string, state }}
         className="seo-list__link"

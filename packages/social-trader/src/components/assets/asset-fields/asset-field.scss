@@ -40,15 +40,6 @@
   }
 }
 
-.asset-title,
-.asset-content {
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-landscape-phone() {
-    padding: 0;
-  }
-}
-
 .asset-row {
   display: flex;
   flex-wrap: wrap;
@@ -94,4 +85,13 @@
       color: $text-light-color;
     }
   }
+}
+.asset-tabs {
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0;
+  }
+
+  @include adaptive-margin(bottom, $padding-small);
 }

@@ -4,7 +4,7 @@ import {
   TUseChartPeriod,
   TUseChartStateValues
 } from "components/details/details-statistic-section/details.chart.types";
-import { selectedCurrenciesLoaderData } from "pages/programs/program-details/program-details.loader-data";
+import { selectedCurrenciesLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import * as React from "react";
 import { useSelector } from "react-redux";
 

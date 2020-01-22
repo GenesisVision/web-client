@@ -5,7 +5,7 @@ import { PopoverContent } from "components/popover/popover-content";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { LevelInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
-import { fetchInvestmentsLevels } from "pages/programs/program-details/service/program-details.service";
+import { fetchInvestmentsLevels } from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

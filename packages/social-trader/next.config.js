@@ -29,6 +29,17 @@ function create(role, path) {
           r.options.sourceMaps = false;
         }
       }
+
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "lodash.throttle": "lodash/throttle",
+        "lodash.debounce": "lodash/debounce"
+      };
+
+      if (isProd) {
+        config.resolve.alias["lodash"] = "lodash-es";
+      }
+
       config.resolve.modules.push(path);
       config.plugins.push(new webpack.EnvironmentPlugin(process.env));
       return config;

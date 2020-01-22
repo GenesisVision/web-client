@@ -6,17 +6,17 @@ export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const PASSWORD_RESTORE = "PASSWORD_RESTORE";
 
 export const forgotPasswordAction = (
-  model: ForgotPasswordViewModel
-): ApiAction<null> => {
+  body: ForgotPasswordViewModel
+): ApiAction => {
   return {
     type: FORGOT_PASSWORD,
-    payload: authApi.forgotPassword({ model })
+    payload: authApi.forgotPassword({ body })
   };
 };
 
 export const restorePasswordAction = (
-  model: ResetPasswordViewModel
+  body: ResetPasswordViewModel
 ): ApiAction<string> => ({
   type: PASSWORD_RESTORE,
-  payload: authApi.resetPassword({ model })
+  payload: authApi.resetPassword({ body })
 });

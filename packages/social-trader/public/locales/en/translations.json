@@ -1,4 +1,12 @@
 {
+  "facets": {
+    "most_reliable": "most reliable",
+    "rating": "rating",
+    "weekly_top": "weekly top",
+    "top": "top",
+    "popular": "popular",
+    "new": "new"
+  },
   "trade": {
     "title": "Trade"
   },
@@ -69,6 +77,7 @@
     "follow": "You must be logged in to follow trades."
   },
   "request-line": {
+    "success-message": "Request successfully canceled.",
     "cancel-header": "Cancel request",
     "cancel-body": "Please confirm that you want to cancel the request."
   },
@@ -338,6 +347,8 @@
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
       "error": "An error occurred during confirmation of email: ",
+      "deposit-success": "Deposit request is confirmed",
+      "withdraw-success": "Withdrawal request is confirmed",
       "success": "Withdrawal request is confirmed"
     },
     "validation": {
@@ -1056,7 +1067,7 @@
       "volume-fee": "Volume fee",
       "invest": "Invest",
       "investment-details": "Investment details",
-      "reinvest": "Reinvest profit",
+      "reinvest": "Reinv. profit",
       "yourInvestment": "Current investment",
       "pending-input": "Pending input",
       "pending-output": "Pending output",

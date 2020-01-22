@@ -21,6 +21,7 @@ const _FollowButton: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
+  const label = t("program-details-page.description.follow-trade");
   const [isOpenFollow, setIsOpenFollow, setIsCloseFollow] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     dispatch(dispatchFollowDescription(id)());
@@ -29,6 +30,7 @@ const _FollowButton: React.FC<Props> = ({
   return (
     <>
       <GVButton
+        className={label}
         disabled={!canFollow}
         size={GV_BTN_SIZE.BIG}
         onClick={setIsOpenFollow}

@@ -1,11 +1,7 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import {
-  CancelablePromise,
-  TradesSignalViewModel,
-  TradesViewModel
-} from "gv-api-web";
+import { TradesSignalViewModel, TradesViewModel } from "gv-api-web";
 import { NextPageContext } from "next";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
@@ -29,7 +25,7 @@ import { tradesTableSelector } from "../reducers/account-history.reducer";
 
 export const fetchAccountSubscriptions = (
   id: string
-): CancelablePromise<AccountSubscriptionsType> => {
+): Promise<AccountSubscriptionsType> => {
   return followApi
     .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg(), {
       onlyActive: true
@@ -57,14 +53,14 @@ export const dispatchAccountId = (id: string) => async (
 
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesViewModel>> => {
+): ActionType<Promise<TradesViewModel>> => {
   const authorization = authService.getAuthArg();
   return fetchOpenPositionsAction(id, filters, authorization);
 };
 
 export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
-): ActionType<CancelablePromise<TradesSignalViewModel>> => {
+): ActionType<Promise<TradesSignalViewModel>> => {
   const authorization = authService.getAuthArg();
   return fetchTradesAction(id, filters, authorization);
 };

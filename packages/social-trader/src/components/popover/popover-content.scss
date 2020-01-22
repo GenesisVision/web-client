@@ -2,8 +2,6 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
 
-$tooltip-padding: 16px;
-
 .popover-content {
   box-sizing: border-box;
 
@@ -21,6 +19,8 @@ $tooltip-padding: 16px;
   }
 
   &__list-item {
+    box-sizing: border-box;
+    width: 100%;
     @include horizontal-paddings($padding-small);
     @include vertical-paddings($padding-xxsmall);
   }
@@ -33,21 +33,21 @@ $tooltip-padding: 16px;
     }
     &--small {
       @include font-size($font-size-common);
-      @include adaptive-full-padding($tooltip-padding);
+      @include adaptive-full-padding($popover-padding-small);
       &.popover-content__block--stretched {
-        @include horizontal-paddings($tooltip-padding);
+        @include horizontal-paddings($popover-padding-small);
         @include vertical-paddings($padding-xsmall);
       }
     }
     &--middle {
-      @include adaptive-full-padding($padding-xsmall);
+      @include adaptive-full-padding($popover-padding-medium);
       &.popover-content__block--stretched {
-        @include horizontal-paddings($padding-xsmall);
+        @include horizontal-paddings($popover-padding-medium);
         @include vertical-paddings($padding-small);
       }
     }
     &--big {
-      @include adaptive-full-padding($padding-small);
+      @include adaptive-full-padding($popover-padding-large);
       max-width: 100%;
       @include media-breakpoint-landscape-phone() {
         max-width: $modal-width;

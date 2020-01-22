@@ -4,7 +4,7 @@ import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
-import { TUpdateProgramFunc } from "pages/programs/programs-settings/program-settings.page";
+import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -63,9 +63,8 @@ const _AssetsEditPage: React.FC<Props> = ({
   ]);
   const title = t("asset-settings.title");
   return (
-    <Page title={title}>
+    <Page showTitle title={title}>
       <div className="asset-settings">
-        <h1 className="asset-settings__title">{title}</h1>
         {settingsBlocks(editAssetCallback, applyCloseAsset)}
       </div>
     </Page>

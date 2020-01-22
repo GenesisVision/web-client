@@ -1,10 +1,10 @@
 import { ASSET } from "constants/constants";
 import withDefaultLayout from "decorators/with-default-layout";
-import ProgramDetailsPage from "pages/programs/program-details/program-details.page";
+import ProgramDetailsPage from "pages/invest/programs/program-details/program-details.page";
 import {
   dispatchProgramDescription,
   dispatchProgramId
-} from "pages/programs/program-details/service/program-details.service";
+} from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";

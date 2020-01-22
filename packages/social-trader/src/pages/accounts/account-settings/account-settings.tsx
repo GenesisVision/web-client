@@ -4,7 +4,7 @@ import withLoader from "decorators/with-loader";
 import { PrivateTradingAccountFull } from "gv-api-web";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
-import ChangePassword from "pages/programs/programs-settings/change-password/change-password";
+import ChangePassword from "pages/invest/programs/programs-settings/change-password/change-password";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

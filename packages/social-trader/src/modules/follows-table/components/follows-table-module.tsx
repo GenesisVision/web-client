@@ -54,7 +54,7 @@ const FollowsTableModule: React.FC<Props> = React.memo(
 
 interface Props extends ITableModuleProps {
   showRating?: boolean;
-  title: string;
+  title?: string;
 }
 
 export default FollowsTableModule;

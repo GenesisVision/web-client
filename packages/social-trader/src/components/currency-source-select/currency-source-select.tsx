@@ -24,6 +24,7 @@ const _CurrencySourceSelect: React.FC<Props> = ({
     {items.map(({ logo, currency, title, id }) => (
       <option value={id} key={id}>
         <CurrencyItem
+          symbol={currency}
           logo={logo}
           name={`${title ? `${title} | ` : ""}${currency}`}
           small

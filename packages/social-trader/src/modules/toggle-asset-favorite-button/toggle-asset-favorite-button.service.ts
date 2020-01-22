@@ -27,8 +27,8 @@ import {
 export const toggleFavorite = (
   id: string,
   isFavorite: boolean,
-  addMethod: MethodType,
-  removeMethod: MethodType
+  addMethod: any,
+  removeMethod: any
 ) => {
   const method = isFavorite ? removeMethod : addMethod;
   return method(id, authService.getAuthArg());

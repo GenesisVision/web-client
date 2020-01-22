@@ -34,11 +34,17 @@ const FullButton: React.FC<{
   onClick: () => void;
 }> = React.memo(({ disabled, onClick }) => {
   const [t] = useTranslation();
+  const label = t("wallet-page.deposit");
   return (
-    <GVButton size={GV_BTN_SIZE.LARGE} disabled={disabled} onClick={onClick}>
+    <GVButton
+      className={label}
+      size={GV_BTN_SIZE.LARGE}
+      disabled={disabled}
+      onClick={onClick}
+    >
       <>
         <span className="wallet-deposit__full-button-icon">+</span>
-        {t("wallet-page.deposit")}
+        {label}
       </>
     </GVButton>
   );
@@ -46,8 +52,11 @@ const FullButton: React.FC<{
 
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
+    const [t] = useTranslation();
+    const label = t("wallet-page.deposit");
     return (
       <ChipButton
+        className={label}
         onClick={onClick}
         size={CHIP_SIZE.SMALL}
         chipLabel={"+"}

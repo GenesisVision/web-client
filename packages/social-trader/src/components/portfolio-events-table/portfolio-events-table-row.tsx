@@ -7,7 +7,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { InvestmentEventViewModel } from "gv-api-web";
-import { EVENT_LOCATION } from "pages/programs/program-details/service/program-details.service";
+import { EVENT_LOCATION } from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";

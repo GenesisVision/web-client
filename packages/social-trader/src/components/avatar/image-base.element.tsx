@@ -7,6 +7,9 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 
+const emptyImg =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";
+
 const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
   title,
   color,
@@ -27,19 +30,28 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     e.target.onerror = null;
     setIsError();
   }, []);
-  const currentSrc = isError ? defaultImage : src;
-  const imgClassName = isError ? defaultImageClassName : "";
-  return (isError || !hasUrl) && DefaultImageComponent ? (
-    <DefaultImageComponent color={color} imageClassName={imgClassName} />
-  ) : (
+  const currentSrc = isError ? (defaultImage ? defaultImage : emptyImg) : src;
+  if (isError || !hasUrl)
+    return DefaultImageComponent ? (
+      <DefaultImageComponent
+        color={color}
+        imageClassName={classNames(defaultImageClassName, className)}
+      />
+    ) : (
+      // eslint-disable-next-line jsx-a11y/img-redundant-alt
+      <img
+        src={defaultImage || emptyImg}
+        alt="Image not found"
+        className={classNames(defaultImageClassName, className)}
+      />
+    );
+  return (
     <img
-      src={
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII="
-      }
+      src={emptyImg}
       data-src={currentSrc}
       title={title}
-      alt={alt}
-      className={classNames("lazyload", "blur-up", className, imgClassName)}
+      alt={alt || "Image loading"}
+      className={classNames("lazyload", className)}
       onError={handleError}
     />
   );

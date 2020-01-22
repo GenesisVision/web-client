@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { OpUnitType } from "dayjs";
 import Calendar from "dayjs/plugin/calendar";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
@@ -13,6 +13,14 @@ export const localizedDate = (date: Date | number | string): string => {
 
 export const formatDate = (date: Date | number | string): string => {
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
+};
+
+export const diffDate = (
+  dateStart: Date | number | string,
+  dateEnd: Date | number | string = new Date(),
+  unit?: OpUnitType
+): number => {
+  return dayjs(dateEnd).diff(dayjs(dateStart), unit);
 };
 
 export const distanceDate = (

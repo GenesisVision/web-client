@@ -11,7 +11,9 @@ const _BlurContainer: React.FC<Props> = ({
   tag: Tag = "div"
 }) => (
   <Tag
-    className={classNames("blur-container", className)}
+    className={classNames("blur-container", className, {
+      "blur-container--loaded": !blur
+    })}
     style={{
       filter: `blur(${blur ? 7 : 0}px)`
     }}

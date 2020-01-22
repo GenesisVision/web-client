@@ -1,4 +1,4 @@
-import "components/programs/programs-facet/programs-facet.scss";
+import "pages/invest/programs/programs-facet/programs-facet.scss";
 
 import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
@@ -8,14 +8,14 @@ import GVButton from "components/gv-button";
 import Page from "components/page/page";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
-import { CancelablePromise, LevelInfo } from "gv-api-web";
+import { LevelInfo } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
-import { fetchInvestmentsLevels } from "pages/programs/program-details/service/program-details.service";
+import { fetchInvestmentsLevels } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback, useEffect, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
+import ProgramsFacetTable from "../../pages/invest/programs/programs-facet/components/programs-facet-table";
 import LevelIcon from "../details/details-description-section/about-levels/level-icon";
-import ProgramsFacetTable from "../programs/programs-facet/components/programs-facet-table";
 import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
 const RATING_FACET_NAME = "most_reliable";
@@ -33,7 +33,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   }, []);
 
   const getPrograms = useCallback(
-    (filters: ComposeFiltersAllType): CancelablePromise<IDataModel> =>
+    (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
         ...filters,
         sorting: "ByLevelProgressDesc",
@@ -44,7 +44,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   );
 
   return (
-    <Page title={t("programs-page.title")}>
+    <Page showTitle title={`${t("programs-page.title")} ${t(`facets.rating`)}`}>
       <div className="programs-facet__filter">
         {levels.map((lvl, i) => (
           <GVButton

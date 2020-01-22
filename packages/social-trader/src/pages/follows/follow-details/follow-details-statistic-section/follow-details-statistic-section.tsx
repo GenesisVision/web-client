@@ -5,7 +5,7 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import { followAbsoluteProfitChartSelector } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import ProgramDetailsStatisticsElements, {
   IProgramStatisticData
-} from "pages/programs/program-details/program-details-statistic-section/program-details-statistics/program-details-statistics-elements";
+} from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistics/program-details-statistics-elements";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
@@ -28,12 +28,12 @@ const FollowBalanceChart = dynamic(() =>
 );
 const ProgramAbsoluteProfitChart = dynamic(() =>
   import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+    "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
   )
 );
 const ProgramProfitChart = dynamic(() =>
   import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
+    "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
   )
 );
 

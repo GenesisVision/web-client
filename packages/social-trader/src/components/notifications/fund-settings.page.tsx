@@ -4,13 +4,8 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _FundNotificationPage: React.FC<Props> = ({ t, id }) => (
-  <Page title={t("notifications-page.program.title")}>
-    <div className="app__main-wrapper">
-      <h1 className="title-small-padding">
-        {t("notifications-page.fund.title")}
-      </h1>
-      <FundNotificationsContainer id={id} />
-    </div>
+  <Page showTitle title={t("notifications-page.fund.title")}>
+    <FundNotificationsContainer id={id} />
   </Page>
 );
 

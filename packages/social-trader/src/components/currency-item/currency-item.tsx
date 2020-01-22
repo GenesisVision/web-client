@@ -28,7 +28,7 @@ const _CurrencyItem: React.FC<Props> = ({
   );
   const rateString = `1 ${name} = ${rate} $`;
   const renderItemContent = () => (
-    <div className="currency-item">
+    <div className="currency-item" data-test-id={symbol}>
       {logo && (
         <div
           className={classNames("currency-item__icon", {
@@ -36,18 +36,20 @@ const _CurrencyItem: React.FC<Props> = ({
             "currency-item__icon--small": small
           })}
         >
-          <WalletImage url={logo} alt={name} />
+          <WalletImage url={logo} alt={name || symbol} />
         </div>
       )}
       {name && (
         <div>
-          <div
-            className={classNames("currency-item__name", className, {
-              "currency-item__name--big": big
-            })}
-          >
-            {name}
-          </div>
+          {big ? (
+            <h1 className={classNames("currency-item__name--big", className)}>
+              {name}
+            </h1>
+          ) : (
+            <div className={classNames("currency-item__name", className)}>
+              {name}
+            </div>
+          )}
           {rate && <div className="currency-item__rate">{rateString}</div>}
         </div>
       )}
@@ -57,7 +59,7 @@ const _CurrencyItem: React.FC<Props> = ({
   return (
     (clickable && (
       <>
-        <a href={getActiveUrl(active)} onClick={openPopup}>
+        <a title={active} href={getActiveUrl(active)} onClick={openPopup}>
           {renderItemContent()}
         </a>
         <ActivePopup

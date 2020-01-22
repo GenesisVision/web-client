@@ -1,6 +1,6 @@
 import ProgramsRatingContainer from "components/programs-rating/programs-rating-container";
-import ProgramsFacetPage from "components/programs/programs-facet/programs-facet.page";
 import withDefaultLayout from "decorators/with-default-layout";
+import ProgramsFacetPage from "pages/invest/programs/programs-facet/programs-facet.page";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";

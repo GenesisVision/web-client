@@ -1,4 +1,3 @@
-import AssetSettingsLoader from "modules/asset-settings/asset-settings.loader";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
@@ -23,7 +22,6 @@ const _AccountSettingsPage: React.FC = () => {
           condition={!!description}
           closeProgram={applyCloseAsset}
           details={description!}
-          loader={<AssetSettingsLoader />}
         />
       )}
     />

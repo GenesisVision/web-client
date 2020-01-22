@@ -10,6 +10,10 @@ const _FeesTradingDiscount: React.FC<{
   return (
     <>
       <div className="fees-info__notes">
+        <p>
+          Genesis Vision Token holders who select Genesis Markets as their
+          broker will receive discounted transaction fees.
+        </p>
         <h3>To be eligible for a trading discount</h3>
         <ul
           className={classNames("fees-info__list-notes", {
@@ -91,6 +95,12 @@ const _FeesTradingDiscount: React.FC<{
             If you have enabled the "Using GVT to pay for fees" function but
             have an insufficient amount of GVT stored in the wallet, this
             function will no longer work and the fee will become Regular.
+          </li>
+          <li className="fees-info__note-item">
+            For managers the commission for trading will be debited from the
+            manager’s GVT wallet. At the end of the reporting period, the
+            manager will receive a refund of the commission at the expense of
+            increasing the share of own funds in management.
           </li>
         </ul>
       </div>

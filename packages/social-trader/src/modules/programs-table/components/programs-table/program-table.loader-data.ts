@@ -3,7 +3,7 @@ import {
   ownerLoaderData
 } from "components/details/details.loader-data";
 import { ProgramDetailsListItem } from "gv-api-web";
-import { personalProgramDetailsLoaderData } from "pages/programs/program-details/program-details.loader-data";
+import { personalProgramDetailsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { getRandomColor, getRandomInteger } from "utils/helpers";
 import { tableLoaderCreator } from "utils/helpers";
 

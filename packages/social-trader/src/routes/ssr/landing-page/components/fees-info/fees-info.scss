@@ -23,6 +23,13 @@
     @include media-breakpoint-landscape-tablet() {
       grid-column: 4/10;
     }
+
+    & p {
+      font-size: 13px;
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
+      }
+    }
   }
 
   &__list-notes {
@@ -127,6 +134,12 @@
       font-weight: 400;
       border-bottom: none;
     }
+  }
+
+  &__flag-img {
+    width: 16px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   &__cell {

@@ -3,7 +3,6 @@ import {
   AttachToExternalSignalProviderExt,
   AttachToSignalProvider,
   BrokerTradeServerType,
-  CancelablePromise,
   NewExternalTradingAccountRequest,
   NewTradingAccountRequest,
   TradingAccountDetails,
@@ -18,7 +17,7 @@ export const fetchExternalAccounts = ({
   id
 }: {
   id: string;
-}): CancelablePromise<TradingAccountDetails[]> =>
+}): Promise<TradingAccountDetails[]> =>
   signalApi
     .getSubscriberAccountsForAsset(id, authService.getAuthArg())
     .then(({ items }) => items);
@@ -27,13 +26,13 @@ export const fetchAccounts = ({
   id
 }: {
   id: string;
-}): CancelablePromise<TradingAccountDetails[]> =>
+}): Promise<TradingAccountDetails[]> =>
   signalApi
     .getSubscriberAccountsForAsset(id, authService.getAuthArg())
     .then(({ items }) => items);
 
-export const getSignalInfo = (id: string): CancelablePromise<number> =>
-  (Promise.resolve(100) as unknown) as CancelablePromise<number>;
+export const getSignalInfo = (id: string): Promise<number> =>
+  (Promise.resolve(100) as unknown) as Promise<number>;
 
 export const attachToExternalSignal: TSignalRequest = async ({
   id,
@@ -43,14 +42,14 @@ export const attachToExternalSignal: TSignalRequest = async ({
   const tradingAccountId = requestParams.tradingAccountId
     ? requestParams.tradingAccountId
     : await assetsApi
-        .createExternalTradingAccount(auth, { request: requestParams })
+        .createExternalTradingAccount(auth, { body: requestParams })
         .then(({ id }) => id);
 
   return signalApi.attachSlaveToMasterExternalPrivateAccount(
     id,
     authService.getAuthArg(),
     {
-      model: { ...requestParams, tradingAccountId }
+      body: { ...requestParams, tradingAccountId }
     }
   );
 };
@@ -65,18 +64,18 @@ export const attachToSignal: TSignalRequest = async ({
     ? requestParams.tradingAccountId
     : await assetsApi
         .createTradingAccount(auth, {
-          request: { ...requestParams, leverage }
+          body: { ...requestParams, leverage }
         })
         .then(({ id }) => id);
 
   return signalApi.attachSlaveToMasterInternal(id, authService.getAuthArg(), {
-    model: { ...requestParams, tradingAccountId }
+    body: { ...requestParams, tradingAccountId }
   });
 };
 
 export const updateAttachToSignal: TSignalRequest = ({ id, requestParams }) =>
   signalApi.updateSubscriptionSettings(id, authService.getAuthArg(), {
-    model: requestParams
+    body: requestParams
   });
 
 export const updateExternalAttachToSignal: TSignalRequest = ({
@@ -84,7 +83,7 @@ export const updateExternalAttachToSignal: TSignalRequest = ({
   requestParams
 }) =>
   signalApi.updateExternalSubscriptionSettings(id, authService.getAuthArg(), {
-    model: requestParams
+    body: requestParams
   });
 
 export type TSignalRequest = (args: {

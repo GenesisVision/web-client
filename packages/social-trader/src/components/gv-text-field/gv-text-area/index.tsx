@@ -3,7 +3,7 @@ import "./style.scss";
 import classnames from "classnames";
 import React from "react";
 
-const ROWS_HEIGHT = 32;
+const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
   className?: string;

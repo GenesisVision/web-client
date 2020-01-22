@@ -1,5 +1,4 @@
 import { IDataModel } from "constants/constants";
-import { CancelablePromise } from "gv-api-web";
 import { Action } from "redux";
 import { MiddlewareDispatch, TGetState, VoidFuncType } from "utils/types";
 
@@ -29,7 +28,7 @@ export type UpdateRowFuncType = (row: any) => void;
 
 export type GetItemsFuncType = (
   filters?: ComposeFiltersAllType
-) => CancelablePromise<IDataModel>;
+) => Promise<IDataModel>;
 
 export type GetItemsFuncActionType = (filters: ComposeFiltersAllType) => Action;
 

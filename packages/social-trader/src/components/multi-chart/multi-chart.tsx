@@ -2,7 +2,6 @@ import "./multi-chart.scss";
 
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import { CancelablePromise } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useEffect, useState } from "react";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
@@ -59,7 +58,7 @@ interface Props {
     currency: CurrencyEnum;
     assets: string[];
     period: ChartDefaultPeriod;
-  }) => CancelablePromise<any>;
+  }) => Promise<any>;
   period: ChartDefaultPeriod;
   handleChangePeriod: HandlePeriodChangeType;
   data: TChartAsset[];

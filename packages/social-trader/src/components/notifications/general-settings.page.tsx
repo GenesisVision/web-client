@@ -4,11 +4,8 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _NotificationsPage: React.FC<WithTranslation> = ({ t }) => (
-  <Page title={t("notifications-page.title")}>
-    <div className="app__main-wrapper">
-      <h1>{t("notifications-page.title")}</h1>
-      <NotificationSettingsContainer />
-    </div>
+  <Page showTitle title={t("notifications-page.title")}>
+    <NotificationSettingsContainer />
   </Page>
 );
 

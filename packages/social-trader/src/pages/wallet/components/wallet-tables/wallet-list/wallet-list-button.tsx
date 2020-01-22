@@ -24,7 +24,11 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
     <div className="wallet-list__buttons">
       {depositUrlCoindirect && (
         <div className="wallet-list__button">
-          <a href={`${depositUrlCoindirect}&url=${location}`} target={"_blank"}>
+          <a
+            title={t("wallet-page.list.buy-with-card")}
+            href={`${depositUrlCoindirect}&url=${location}`}
+            target={"_blank"}
+          >
             {t("wallet-page.list.buy-with-card")}
           </a>
         </div>

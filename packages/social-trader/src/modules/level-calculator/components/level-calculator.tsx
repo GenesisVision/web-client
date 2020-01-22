@@ -5,7 +5,7 @@ import { CalculatorIcon } from "components/icon/calculator-icon";
 import Crashable from "decorators/crashable";
 import useIsOpen from "hooks/is-open.hook";
 import dynamic from "next/dynamic";
-import { ILevelCalculatorProps } from "pages/programs/program-details/program-details.types";
+import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 
 const LevelCalculatorPopupContainer = dynamic(() =>

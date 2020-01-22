@@ -1,4 +1,4 @@
-import { CancelablePromise, ProgramWithdrawInfo } from "gv-api-web";
+import { ProgramWithdrawInfo } from "gv-api-web";
 import { ProgramWithdrawType } from "modules/program-withdraw/program-withdraw-popup";
 import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
@@ -7,7 +7,7 @@ export const getProgramWithdrawInfo = ({
   id
 }: {
   id: string;
-}): CancelablePromise<ProgramWithdrawInfo> =>
+}): Promise<ProgramWithdrawInfo> =>
   investmentsApi.getProgramWithdrawInfo(id, authService.getAuthArg());
 
 export const withdrawProgramById = ({

@@ -1,9 +1,4 @@
-import {
-  CancelablePromise,
-  CaptchaDetails,
-  GeeTestDetails,
-  PowDetails
-} from "gv-api-web";
+import { CaptchaDetails, GeeTestDetails, PowDetails } from "gv-api-web";
 import platformApi from "services/api-client/platform-api";
 
 //@ts-ignore
@@ -44,7 +39,7 @@ export const checkPow: CheckPowFuncType = async props => {
   return 0;
 };
 
-type GetCaptchaFuncType = (login: string) => CancelablePromise<CaptchaDetails>;
+type GetCaptchaFuncType = (login: string) => Promise<CaptchaDetails>;
 type CalculatePrefixFuncType = (props: {
   difficulty: number;
   nonce: string;

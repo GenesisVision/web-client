@@ -14,6 +14,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _TransferButton: React.FC<Props> = ({
+  successMessage,
   singleCurrentItemContainer = false,
   size = GV_BTN_SIZE.LARGE,
   withIcon,
@@ -44,6 +45,7 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        successMessage={successMessage}
         singleCurrentItemContainer={singleCurrentItemContainer}
         currentItem={currentItem}
         sourceType={sourceType}
@@ -59,6 +61,7 @@ const _TransferButton: React.FC<Props> = ({
 };
 
 interface Props {
+  successMessage?: string;
   singleCurrentItemContainer?: boolean;
   size?: GV_BTN_SIZE;
   withIcon?: boolean;
@@ -89,6 +92,7 @@ const FullButton: React.FC<{
     const labelText = label || t("wallet-page.transfer");
     return (
       <GVButton
+        className={labelText}
         size={size}
         color={color || "secondary"}
         variant={variant || "outlined"}
@@ -113,13 +117,13 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     const [t] = useTranslation();
+    const label = t("wallet-page.transfer");
     return (
       <ChipButton
+        className={label}
         onClick={onClick}
         size={CHIP_SIZE.SMALL}
-        chipLabel={
-          <ImageBaseElement src={ConvertIcon} alt={t("wallet-page.transfer")} />
-        }
+        chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
       />
     );
   }

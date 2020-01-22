@@ -28,12 +28,12 @@ const FollowBalanceChart = dynamic(() =>
 );
 const ProgramAbsoluteProfitChart = dynamic(() =>
   import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
+    "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-chart"
   )
 );
 const ProgramProfitChart = dynamic(() =>
   import(
-    "pages/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
+    "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart"
   )
 );
 

@@ -20,7 +20,7 @@ export const FAVORITE_COLUMN_NAME = "favorite";
 interface IProgramsTableProps extends ITableProps {
   currencies?: string[];
   data?: ProgramDetailsListItem[];
-  title: string;
+  title?: string;
 }
 
 const _ProgramsTable: React.FC<IProgramsTableProps> = ({
@@ -36,10 +36,12 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
   renderFilters,
   paging,
   updatePaging,
-  title
+  title,
+  asLinkPagination
 }) => {
   return (
     <Table
+      asLinkPagination={asLinkPagination}
       loaderData={programListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}
