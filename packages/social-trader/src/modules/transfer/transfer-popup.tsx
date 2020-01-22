@@ -11,7 +11,7 @@ const TransferContainer = dynamic(() =>
 );
 
 const _TransferPopup: React.FC<Props> = ({
-  successMessage,
+  successMessage = "",
   singleCurrentItemContainer,
   onApply,
   title,
