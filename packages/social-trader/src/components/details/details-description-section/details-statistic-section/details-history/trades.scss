@@ -40,6 +40,10 @@
     color: $label-color;
   }
 
+  &__history-popup-item-value {
+    white-space: nowrap;
+  }
+
   &__cell,
   &__head-cell {
     height: 50px;
