@@ -3,21 +3,18 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_transition";
 
-.program-period-pie {
-  display: flex;
-  align-items: center;
-  width: 100%;
+$small-size: 24.5px;
+$middle-size: 43px;
 
-  &__text {
-    white-space: nowrap;
-    padding-left: 0.5rem;
-  }
-}
 .pie-container {
   position: relative;
-  @include width(43px);
-  @include height(43px);
+  @include width($middle-size);
+  @include height($middle-size);
   flex-shrink: 0;
+  &--small {
+    @include width($small-size);
+    @include height($small-size);
+  }
   &__value-container {
     @include font-size($font-size-small);
     position: absolute;
@@ -30,16 +27,10 @@
     align-items: center;
   }
 }
+
 .multi-pie-container {
   position: relative;
   height: 100%;
-  &__chart {
-    height: 100%;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 
 .pie-circle {
