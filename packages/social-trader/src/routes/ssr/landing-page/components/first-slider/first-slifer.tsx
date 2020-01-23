@@ -41,11 +41,24 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
             className="slider__img-animate"
             style={props as any}
           >
-            <ImageBaseElement
-              src={item.image}
-              alt={item.title}
-              className="slider__img"
-            />
+            {item.imageBg && (
+              <img
+                src={item.imageBg}
+                alt={item.title}
+                title={item.title}
+                className="slider__img slider__img--bg"
+              />
+            )}
+            {item.images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={item.title}
+                title={item.title}
+                style={{ animationDelay: `${500 * index + 500}ms` }}
+                className="slider__img"
+              />
+            ))}
           </animated.div>
         ))}
       </div>
@@ -57,8 +70,8 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
               key={key}
               style={props as any}
             >
-              <h2 className="slider__title">{item.title}</h2>
-              <p className="slider__text">{item.text}</p>
+              <animated.h2 className="slider__title">{item.title}</animated.h2>
+              <animated.p className="slider__text">{item.text}</animated.p>
             </animated.div>
           ))}
         </div>
