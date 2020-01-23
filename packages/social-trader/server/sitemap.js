@@ -1,6 +1,6 @@
 const sitemap = require("sitemap");
 const fetch = require("isomorphic-unfetch");
-const { gzipSync, brotliCompressSync } = require("zlib");
+const { brotliCompressSync } = require("zlib");
 const cacheableResponse = require("cacheable-response");
 
 const programRoute = program => `invest/programs/${program}`;
