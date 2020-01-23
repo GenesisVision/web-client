@@ -49,7 +49,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         levelsParameters={levelsParameters}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
-        {programDetails.availableInvestmentBase === 0 && isAuthenticated ? (
+        {programDetails.availableInvestmentBase === 0 &&
+        isAuthenticated &&
+        !isOwnProgram ? (
           <NotifyButton
             broker={brokerDetails.type}
             canInvest={programDetails.personalDetails.canInvest}
