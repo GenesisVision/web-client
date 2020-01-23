@@ -5,9 +5,9 @@ import Crashable from "decorators/crashable";
 import ProgramAbsoluteProfitTooltip from "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-tooltip";
 import * as React from "react";
 import {
-  Area,
-  AreaChart,
   CartesianGrid,
+  Line,
+  LineChart,
   ResponsiveContainer,
   Tooltip,
   YAxis
@@ -21,7 +21,7 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
 }) => {
   return (
     <ResponsiveContainer>
-      <AreaChart data={chart} margin={{ top: 20 }}>
+      <LineChart data={chart} margin={{ top: 20 }}>
         <defs>
           <pattern
             id="diagonalHatch"
@@ -47,19 +47,18 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
           width={60}
         />
         <CartesianGrid vertical={false} strokeWidth={0.1} />
-        <Area
+        <Line
           dataKey="value"
           type="monotone"
           connectNulls={true}
           stroke={color}
-          fill={`url(#equityProgramChartFill)`}
           strokeWidth={1}
           dot={false}
           unit={currency}
           isAnimationActive={false}
         />
         <Tooltip content={ProgramAbsoluteProfitTooltip} />
-      </AreaChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
