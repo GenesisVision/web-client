@@ -57,7 +57,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
             style={rest as any}
           >
             {item.imageBg && (
-              <img
+              <ImageBaseElement
                 src={item.imageBg}
                 alt={item.title}
                 title={item.title}
