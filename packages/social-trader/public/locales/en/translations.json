@@ -926,6 +926,7 @@
       }
     },
     "tooltip": {
+      "subscribers": "The current number of subscribers.",
       "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
       "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
       "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
