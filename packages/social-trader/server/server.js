@@ -3,6 +3,7 @@ const nextI18NextMiddleware = require("next-i18next/middleware");
 const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 const generateSitemap = require("./sitemap");
+const robotTxt = require("./robot");
 
 module.exports = async app => {
   const handle = app.getRequestHandler();
@@ -16,12 +17,18 @@ module.exports = async app => {
   });
 
   await app.prepare();
-
-  const sitemap = generateSitemap(process.env.NODE_ENV !== "production");
+  const dev = process.env.NODE_ENV !== "production";
+  const sitemap = generateSitemap(dev);
+  const robot = robotTxt(dev);
 
   const server = express();
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
+
+  server.get("/robot.txt", (req, res) =>
+    robot({ req, res, pagePath: "/robot.txt" })
+  );
+
   server.get("/sitemap.xml", (req, res) =>
     sitemap({ req, res, pagePath: "/sitemap.xml" })
   );

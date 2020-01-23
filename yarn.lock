@@ -1768,15 +1768,15 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.6.tgz#a47240c10d86a9a57bb0c633f0b2e0aea9ce9253"
   integrity sha512-FjsYUPzEJdGXjwKqSpE0/9QEh6kzhTAeObA54rn6j3rR4C/mzpI9L0KNfoeASSPMMdxIsoJuCLDWcM/rVjIsSA==
 
-"@types/node@^10.0.5", "@types/node@^10.12.18":
-  version "10.17.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.4.tgz#8993a4fe3c4022fda66bf4ea660d615fc5659c6f"
-  integrity sha512-F2pgg+LcIr/elguz+x+fdBX5KeZXGUOp7TV8M0TVIrDezYLFRNt8oMTyps0VQ1kj5WGGoR18RdxnRDHXrIFHMQ==
-
-"@types/node@^12.12.3":
+"@types/node@12.12.25", "@types/node@^12.12.3":
   version "12.12.25"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.25.tgz#792c0afb798f1dd681dce9c4b4c431f7245a0a42"
   integrity sha512-nf1LMGZvgFX186geVZR1xMZKKblJiRfiASTHw85zED2kI1yDKHDwTKMdkaCbTlXoRKlGKaDfYywt+V0As30q3w==
+
+"@types/node@^10.0.5":
+  version "10.17.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.4.tgz#8993a4fe3c4022fda66bf4ea660d615fc5659c6f"
+  integrity sha512-F2pgg+LcIr/elguz+x+fdBX5KeZXGUOp7TV8M0TVIrDezYLFRNt8oMTyps0VQ1kj5WGGoR18RdxnRDHXrIFHMQ==
 
 "@types/prop-types@*":
   version "15.7.3"
@@ -6566,6 +6566,11 @@ expect@^23.6.0:
     jest-matcher-utils "^23.6.0"
     jest-message-util "^23.4.0"
     jest-regex-util "^23.3.0"
+
+express-robots-txt@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/express-robots-txt/-/express-robots-txt-0.4.1.tgz#f3123a9875fd885d3c11cf4a7348b89a20f40ffc"
+  integrity sha512-qVffRP/YmwZEISWB/gAGfJ+Y85sUKcjGXtryCOZFRyKOvF2b/JaG2xpPKVT9NeNOMZYvNq000qHp/oBtLYgTnQ==
 
 express@^4.16.2, express@^4.16.3:
   version "4.17.1"
