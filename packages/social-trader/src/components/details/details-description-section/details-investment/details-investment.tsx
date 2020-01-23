@@ -57,12 +57,13 @@ const _DetailsInvestment: React.FC<Props> = ({
   programPersonalDetails,
   followPersonalDetails
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { data: eventsCount = 0 } = useApiRequest({
     request: () =>
       fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
         assetId: id
       }),
-    fetchOnMount: true
+    fetchOnMount: isAuthenticated
   });
   const subscriptionsCount = followPersonalDetails
     ? followPersonalDetails.subscribedAccounts
@@ -70,8 +71,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   const investmentDetails = personalFundDetails || programPersonalDetails;
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT);
   const [t] = useTranslation();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const events = useSelector(selector);
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
