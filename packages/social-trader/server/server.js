@@ -2,6 +2,7 @@ const express = require("express");
 const nextI18NextMiddleware = require("next-i18next/middleware");
 const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
+const generateSitemap = require("./sitemap");
 
 module.exports = async app => {
   const handle = app.getRequestHandler();
@@ -19,6 +20,9 @@ module.exports = async app => {
   const server = express();
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
+  server.get("/sitemap.xml", (req, res) =>
+    generateSitemap({ req, res, pagePath: "/sitemap.xml" })
+  );
   server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
