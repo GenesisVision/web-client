@@ -1,6 +1,6 @@
 const sitemap = require("sitemap");
 const fetch = require("isomorphic-unfetch");
-const { gzipSync } = require("zlib");
+const { gzipSync, brotliCompressSync } = require("zlib");
 const cacheableResponse = require("cacheable-response");
 
 const programRoute = program => `invest/programs/${program}`;
@@ -62,7 +62,7 @@ const generateSitemap = dev => {
         const data = await sitemap.streamToPromise(map);
 
         return {
-          data: gzipSync(data),
+          data: brotliCompressSync(data),
           ttl: TTL_OK
         };
       } catch (e) {
@@ -76,7 +76,7 @@ const generateSitemap = dev => {
       }
 
       res.header("Content-Type", "application/xml");
-      res.header("Content-Encoding", "gzip");
+      res.header("Content-Encoding", "br");
 
       res.send(data);
     }
