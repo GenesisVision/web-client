@@ -17,11 +17,13 @@ module.exports = async app => {
 
   await app.prepare();
 
+  const sitemap = generateSitemap(process.env.NODE_ENV !== "production");
+
   const server = express();
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
   server.get("/sitemap.xml", (req, res) =>
-    generateSitemap({ req, res, pagePath: "/sitemap.xml" })
+    sitemap({ req, res, pagePath: "/sitemap.xml" })
   );
   server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
   server.get("*", (req, res) => handle(req, res));
