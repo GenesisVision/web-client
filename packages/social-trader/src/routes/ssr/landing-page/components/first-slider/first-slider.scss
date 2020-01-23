@@ -11,8 +11,7 @@
 
   &__img-wrapper {
     position: relative;
-    height: 220px;
-    margin-bottom: 40px;
+    height: 250px;
 
     @include media-breakpoint-tablet() {
       height: 360px;
@@ -42,7 +41,7 @@
     left: 0;
     width: 100%;
     will-change: opacity;
-    height: 220px;
+    height: 250px;
     text-align: center;
     line-height: 0;
     position: relative;
@@ -69,16 +68,16 @@
     vertical-align: middle;
     position: absolute;
     max-width: 100%;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     opacity: 0;
-    transform: translateX(20%);
+    transform: translate3d(-30%, -50%, 0);
     animation: 0.5s slideLeft forwards;
 
     &--bg {
       animation-name: appear;
       animation-delay: 700ms;
-      transform: none;
+      transform: translate3d(-50%, -50%, 0);
     }
   }
 
@@ -95,7 +94,7 @@
 
   &__info {
     position: relative;
-    min-height: 205px;
+    min-height: 185px;
 
     @include media-breakpoint-tablet() {
       min-height: 170px;
@@ -111,13 +110,6 @@
     left: 0;
     width: 100%;
   }
-
-  //&__title,
-  //&__text {
-  //  opacity: 0;
-  //  transform: translateY(20%);
-  //  animation: 0.5s slideDown forwards;
-  //}
 
   &__text {
     font-weight: 500;
@@ -186,23 +178,11 @@
 @keyframes slideLeft {
   0% {
     opacity: 0;
-    transform: translateX(20%);
+    transform: translate3d(-30%, -50%, 0);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0%);
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(20%);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0%);
+    transform: translate3d(-50%, -50%, 0);
   }
 }

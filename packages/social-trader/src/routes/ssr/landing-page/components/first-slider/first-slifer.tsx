@@ -17,11 +17,26 @@ interface Props {
 const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
-    initial: { opacity: 1, position: "static" },
-    from: { opacity: 0, position: "absolute" },
-    enter: { opacity: 1, position: "static" },
-    leave: { opacity: 0, position: "absolute" },
-    config: { tension: 220, friction: 120 }
+    initial: {
+      opacity: 1,
+      position: "static",
+      transform: "translate3d(0,0px,0)"
+    },
+    from: {
+      opacity: 0,
+      position: "absolute",
+      transform: "translate3d(0,20px,0)"
+    },
+    enter: {
+      opacity: 1,
+      position: "static",
+      transform: "translate3d(0,0px,0)"
+    },
+    leave: {
+      opacity: 0,
+      position: "absolute",
+      transform: "translate3d(0,20px,0)"
+    }
   });
   const countsSlides = slidesItems.length;
   const onClickLeft = useCallback(
@@ -35,11 +50,11 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
   return (
     <div className={classNames("slider", className)}>
       <div className="slider__img-wrapper">
-        {transitions.map(({ item, props, key }) => (
+        {transitions.map(({ item, props: { transform, ...rest }, key }) => (
           <animated.div
             key={key}
             className="slider__img-animate"
-            style={props as any}
+            style={rest as any}
           >
             {item.imageBg && (
               <img
@@ -64,20 +79,24 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
       </div>
       <div className="slider__info-wrapper">
         <div className="slider__info">
-          {transitions.map(({ item, props, key }) => (
+          {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div
               className="slider__info-animate"
               key={key}
-              style={props as any}
+              style={rest as any}
             >
-              <animated.h2 className="slider__title">{item.title}</animated.h2>
-              <animated.p className="slider__text">{item.text}</animated.p>
+              <animated.h2 className="slider__title" style={{ transform }}>
+                {item.title}
+              </animated.h2>
+              <animated.p className="slider__text" style={{ transform }}>
+                {item.text}
+              </animated.p>
             </animated.div>
           ))}
         </div>
         <div className="slider__controls-wrapper">
-          {transitions.map(({ item, props, key }) => (
-            <animated.div key={key} style={props as any}>
+          {transitions.map(({ item, props: { transform, ...rest }, key }) => (
+            <animated.div key={key} style={rest as any}>
               <LPButton href={item.link}>Join</LPButton>
             </animated.div>
           ))}
