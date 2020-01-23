@@ -11,12 +11,10 @@ import {
   PersonalFundDetails,
   PersonalProgramDetails
 } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
-  fetchPortfolioEventsCount,
   getEvents
 } from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
@@ -57,13 +55,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   programPersonalDetails,
   followPersonalDetails
 }) => {
-  const { data: eventsCount = 0 } = useApiRequest({
-    request: () =>
-      fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
-        assetId: id
-      }),
-    fetchOnMount: true
-  });
   const subscriptionsCount = followPersonalDetails
     ? followPersonalDetails.subscribedAccounts
     : 0;
@@ -72,6 +63,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const events = useSelector(selector);
+  const eventsCount = events?.itemsData?.data?.total || 0;
   const dispatch = useDispatch();
   const [haveEvents, setHaveEvents] = useState<boolean>(false);
   useEffect(() => {
