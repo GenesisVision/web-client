@@ -27,7 +27,8 @@
 
   &__delay-hint {
     color: $label-color;
-    margin-right: $padding-xxsmall;
+    @include adaptive-margin(right, $padding-xxsmall);
+    @include font-size($font-size-common);
   }
 
   &__history-popup-item {
