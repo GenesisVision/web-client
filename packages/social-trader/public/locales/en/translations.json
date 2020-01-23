@@ -1150,6 +1150,9 @@
       "about-levels": "About levels"
     },
     "history": {
+      "my-history": {
+        "details": "Details"
+      },
       "heading": "History",
       "tabs": {
         "trades": "Trades",
