@@ -16,27 +16,24 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
 
   &__separator,
   &__button {
+    color: $text-light-color;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
     opacity: 0.4;
     font-weight: 700;
-    width: $pager-button-size-mobile;
-    height: $pager-button-size-mobile;
-    font-size: $font-size-common-mobile;
-    @include media-breakpoint-landscape-phone() {
-      width: $pager-button-size;
-      height: $pager-button-size;
-      font-size: $font-size-common;
-    }
+    @include width($pager-button-size);
+    @include height($pager-button-size);
+    @include font-size($font-size-common);
   }
 
   &__button {
     @include transition(opacity, background-color);
     align-items: center;
+    @include adaptive-border-radius(8px);
     border-radius: 8px;
     cursor: pointer;
-    margin-right: 5px;
+    @include adaptive-margin(right, 5px);
     &:last-child {
       margin-right: 0;
     }
