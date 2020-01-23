@@ -5,8 +5,11 @@ import {
   PlatformAsset,
   ProgramNotificationSettingList
 } from "gv-api-web";
-import { NextPage, NextPageContext } from "next";
-import { AppContextType } from "next/dist/next-server/lib/utils";
+import { NextPageContext } from "next";
+import {
+  AppContextType,
+  NextComponentType
+} from "next/dist/next-server/lib/utils";
 import React from "react";
 import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
@@ -103,14 +106,11 @@ export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
 }
 
-/*export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
+export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
   NextPageWithReduxContext,
   IP,
   P
->;*/
-export interface NextPageWithRedux<P = void, IP = P> extends NextPage<P, IP> {
-  getInitialProps?(ctx: NextPageWithReduxContext): Promise<IP>;
-}
+>;
 
 export type DispatchDescriptionType = () => (
   dispatch: MiddlewareDispatch,
