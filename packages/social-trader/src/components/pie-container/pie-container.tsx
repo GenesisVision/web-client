@@ -1,10 +1,12 @@
 import "./pie-container.scss";
 
+import classNames from "classnames";
 import * as React from "react";
 
 import Pie, { PIE_DIRECTION } from "./pie";
 
 export interface IPieContainer {
+  small?: boolean;
   color: string;
   label: string;
   value: Date | number;
@@ -13,12 +15,15 @@ export interface IPieContainer {
 }
 
 const _PieContainer: React.FC<IPieContainer> = ({
+  small,
   label,
   color,
   value,
   pieDirection
 }) => (
-  <div className="pie-container">
+  <div
+    className={classNames("pie-container", { "pie-container--small": small })}
+  >
     <Pie
       start={0}
       end={100}
