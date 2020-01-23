@@ -29,7 +29,7 @@ const _Active: React.FC<Props> = ({
         {tags && <TagItemList tags={tags} />}
       </div>
       <div className="active__block">
-        <div className="active__title">{t("active.chart")}</div>
+        <h2 className="active__title">{t("active.chart")}</h2>
         <div className="active__chart-container">
           {!isServer && (
             <TradingViewWidget
@@ -41,9 +41,9 @@ const _Active: React.FC<Props> = ({
         </div>
       </div>
       <div className="active__block">
-        <div className="active__title">
+        <h2 className="active__title">
           {t("active.about")} {name}
-        </div>
+        </h2>
         <div>{description}</div>
       </div>
       <div className="active__block">
