@@ -25,8 +25,8 @@ module.exports = async app => {
   const port = process.env.PORT || 3000;
   server.use(nextI18NextMiddleware(nextI18next));
 
-  server.get("/robot.txt", (req, res) =>
-    robot({ req, res, pagePath: "/robot.txt" })
+  server.get("/robots.txt", (req, res) =>
+    robot({ req, res, pagePath: "/robots.txt" })
   );
 
   server.get("/sitemap.xml", (req, res) =>
