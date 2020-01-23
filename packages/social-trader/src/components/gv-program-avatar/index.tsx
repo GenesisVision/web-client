@@ -50,6 +50,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
           className={"program-avatar__level"}
         >
           <PieContainer
+            small
             color={(GVColors as any)[`$levelColor${level}`]}
             label={String(level)}
             value={levelProgress}
