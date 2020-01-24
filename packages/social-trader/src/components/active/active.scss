@@ -25,7 +25,7 @@
     @include adaptive-padding(bottom, $padding-xsmall);
     text-transform: uppercase;
     color: $primary-color;
-    font-size: $font-size-paragraph;
+    @include font-size($font-size-paragraph);
     font-weight: 600;
   }
 }

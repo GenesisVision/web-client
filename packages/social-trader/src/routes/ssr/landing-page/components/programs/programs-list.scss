@@ -228,18 +228,14 @@ $chart-width: 160px;
     }
   }
 
-  .program-avatar__level {
+  .program-avatar__level,
+  .program-avatar--medium .program-avatar__level {
     color: $main-color;
     font-size: 12px;
     width: 25px;
     height: 25px;
     top: -2px;
     right: -2px;
-  }
-
-  .pie-container {
-    width: 23px;
-    height: 23px;
   }
 
   .tag-program-container {

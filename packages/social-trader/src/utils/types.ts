@@ -5,7 +5,7 @@ import {
   PlatformAsset,
   ProgramNotificationSettingList
 } from "gv-api-web";
-import { NextPage, NextPageContext } from "next";
+import { NextPageContext } from "next";
 import {
   AppContextType,
   NextComponentType

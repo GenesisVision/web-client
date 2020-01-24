@@ -17,7 +17,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   return (
     <div className="portfolio-event-details">
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
-        {t("Details")}
+        {t("program-details-page.history.my-history.details")}
       </GVButton>
       <Popover
         anchorEl={anchor}

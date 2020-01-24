@@ -4,7 +4,7 @@
 
 .error-message {
   color: $negative-color;
-  font-size: $font-size-small;
+  @include font-size($font-size-small);
   font-weight: 500;
   &--over {
     position: absolute;

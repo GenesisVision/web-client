@@ -1,3 +1,5 @@
+import "./programs.scss";
+
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
@@ -6,7 +8,6 @@ import * as React from "react";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row-short";
 import { programListLoaderData } from "./program-table.loader-data";
-import { FAVORITE_COLUMN_NAME } from "./programs-table";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 const _ProgramTableModule: React.FC<Props> = ({

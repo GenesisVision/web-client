@@ -33,7 +33,7 @@
   }
 
   &__wrapper {
-    margin-bottom: 16px;
+    @include adaptive-margin(bottom, 16px);
   }
 
   &__close {
@@ -135,11 +135,11 @@
   list-style-type: none;
   padding: 0;
   &:not(:first-child) {
-    margin: $padding-small 0 0;
+    @include adaptive-margin(top, $padding-small);
   }
 
   &__item {
-    font-size: $font-size-paragraph;
+    @include font-size($font-size-paragraph);
     font-weight: 300;
     margin-bottom: $padding-xsmall;
     display: flex;
@@ -148,7 +148,7 @@
     letter-spacing: 0.5px;
 
     &:last-child {
-      margin-bottom: $padding-medium;
+      @include adaptive-margin(bottom, $padding-medium);
     }
   }
 

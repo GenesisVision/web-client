@@ -1,3 +1,5 @@
+import "./funds-table.scss";
+
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
