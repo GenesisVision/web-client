@@ -7,16 +7,11 @@
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  align-items: flex-start;
   & .statistics-item__label {
     white-space: nowrap;
   }
-  & > div:not(:last-child) {
-    @include adaptive-margin(right, $padding-medium);
-  }
   &--vertical {
     flex-direction: column;
-    & > .statistics-item:last-child {
-      padding-bottom: 0;
-    }
   }
 }

@@ -18,6 +18,9 @@
     @include font-size($font-size-common);
     letter-spacing: 0.4px;
     font-weight: normal;
+    &--small {
+      @include font-size($font-size-small-mobile);
+    }
     &--loader {
       opacity: 0.5;
     }
@@ -30,6 +33,10 @@
     @include font-size($font-size-paragraph);
     letter-spacing: 0.6px;
     white-space: nowrap;
+
+    &--small {
+      @include font-size($font-size-common-mobile);
+    }
     &--accent {
       font-weight: 600;
     }
@@ -64,24 +71,17 @@
     flex-direction: column;
   }
   &--with-padding {
-    //@include adaptive-padding(right, $padding-xxxsmall);
-    @include adaptive-padding(bottom, $padding-xsmall);
+    &:not(:last-child) {
+      @include adaptive-margin(right, $padding-medium);
+      @include adaptive-padding(bottom, $padding-xsmall);
+    }
   }
   &--half {
+    margin-right: 0 !important;
     @include width(70px);
     @include media-breakpoint-landscape-phone() {
-      padding-right: 0;
       width: auto;
       box-sizing: border-box;
-    }
-  }
-  &--small {
-    & > .statistics-item__label {
-      @include font-size($font-size-small-mobile);
-    }
-
-    & > .statistics-item__value {
-      @include font-size($font-size-common-mobile);
     }
   }
 }
