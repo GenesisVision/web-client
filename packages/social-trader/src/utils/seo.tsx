@@ -54,7 +54,7 @@ export const commonMeta = () => {
     <>
       <meta key={"og-type"} property="og:type" content="website" />
       <meta key={"og-sn"} property="og:site_name" content="Genesis Vision" />
-      <meta key={"tw-site"} property="twitter:site" content="Genesis Vision" />
+      <meta key={"tw-site"} property="twitter:site" content="@genesis_vision" />
     </>
   );
 };
@@ -64,6 +64,7 @@ export const imageMeta = (image?: string) => {
     <>
       <meta property="og:image" key="og-image" content={image} />
       <meta name="twitter:image:src" key="twitter:image:src" content={image} />
+      <meta name="twitter:image" key="twitter:image" content={image} />
     </>
   ) : null;
 };
