@@ -11,6 +11,9 @@ const assetRoute = asset => `asset/${asset}`;
 
 const TTL_OK = 1000 * 60 * 60 * 24;
 const TTL_ERROR = 1000 * 3;
+const MONTHLY = "monthly";
+const ALWAYS = "always";
+const DAILY = "daily";
 
 const generateSitemap = dev => {
   if (dev) {
@@ -38,24 +41,55 @@ const generateSitemap = dev => {
         const pages = await response.json();
 
         pages.programs.forEach(program => {
-          map.write({ url: programRoute(program) });
+          map.write({ url: programRoute(program), changefreq: ALWAYS });
         });
 
         pages.funds.forEach(fund => {
-          map.write({ url: fundRoute(fund) });
+          map.write({ url: fundRoute(fund), changefreq: ALWAYS });
         });
 
         pages.follow.forEach(follow => {
-          map.write({ url: followRoute(follow) });
+          map.write({ url: followRoute(follow), changefreq: ALWAYS });
         });
 
         pages.users.forEach(user => {
-          map.write({ url: userRoute(user) });
+          map.write({ url: userRoute(user), changefreq: ALWAYS });
         });
 
         pages.actives.forEach(asset => {
-          map.write({ url: assetRoute(asset) });
+          map.write({
+            url: assetRoute(asset),
+            changefreq: MONTHLY,
+            priority: 0.8
+          });
         });
+
+        map.write({ url: "invest/funds", changefreq: ALWAYS, priority: 0.7 });
+        map.write({ url: "invest/follow", changefreq: ALWAYS, priority: 0.7 });
+        map.write({
+          url: "invest/programs",
+          changefreq: ALWAYS,
+          priority: 0.7
+        });
+
+        map.write({ url: "", changefreq: DAILY, priority: 0.9 });
+        map.write({ url: "invest", changefreq: DAILY, priority: 0.7 });
+        map.write({ url: "trading", changefreq: MONTHLY, priority: 0.7 });
+        map.write({
+          url: "referral-program",
+          changefreq: MONTHLY,
+          priority: 0.7
+        });
+        map.write({ url: "faq", changefreq: MONTHLY, priority: 0.8 });
+        map.write({ url: "glossary", changefreq: MONTHLY, priority: 0.8 });
+        map.write({ url: "aml-manual", changefreq: MONTHLY, priority: 0.8 });
+        map.write({
+          url: "privacy-policy",
+          changefreq: MONTHLY,
+          priority: 0.8
+        });
+        map.write({ url: "terms", changefreq: MONTHLY, priority: 0.8 });
+        map.write({ url: "downloads", changefreq: MONTHLY, priority: 0.7 });
 
         map.end();
 
