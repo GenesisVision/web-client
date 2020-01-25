@@ -1,11 +1,34 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
+export class CustomHead extends Head {
+  getCssLinks(): JSX.Element[] | null {
+    const { assetPrefix, files } = this.context._documentProps;
+    const cssFiles =
+      files && files.length ? files.filter(f => /\.css$/.test(f)) : [];
+    const cssLinkElements: JSX.Element[] = [];
+    cssFiles.forEach(file => {
+      cssLinkElements.push(
+        <link
+          key={file}
+          nonce={this.props.nonce}
+          rel="stylesheet"
+          href={`${assetPrefix}/_next/${encodeURI(file)}`}
+          // @ts-ignore
+          crossOrigin={this.props.crossOrigin || process.crossOrigin}
+        />
+      );
+    });
+
+    return cssLinkElements.length === 0 ? null : cssLinkElements;
+  }
+}
+
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
+        <CustomHead>
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
@@ -19,7 +42,7 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-NJLM6BD');}`
             }}
           />
-        </Head>
+        </CustomHead>
         <body>
           <Main />
           <NextScript />
