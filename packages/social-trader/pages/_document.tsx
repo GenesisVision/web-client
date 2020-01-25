@@ -10,10 +10,11 @@ export class CustomHead extends Head {
     cssFiles.forEach(file => {
       cssLinkElements.push(
         <link
-          key={file}
+          key={`${file}-preload`}
           nonce={this.props.nonce}
-          rel="stylesheet"
+          rel="preload"
           href={`${assetPrefix}/_next/${encodeURI(file)}`}
+          as="style"
           // @ts-ignore
           crossOrigin={this.props.crossOrigin || process.crossOrigin}
         />
