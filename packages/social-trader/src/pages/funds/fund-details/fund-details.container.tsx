@@ -41,7 +41,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     <Page
       title={title}
       schemas={[getFundSchema(description)]}
-      description={description.publicInfo.description}
+      description={`${t("funds-page.title")} ${
+        description.publicInfo.title
+      } - ${description.publicInfo.description}`}
       previewImage={filesService.getFileUrl(description.publicInfo.logo)}
     >
       <DetailsDescriptionSection

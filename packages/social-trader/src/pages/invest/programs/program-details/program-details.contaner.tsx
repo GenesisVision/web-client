@@ -119,7 +119,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           ? t("follows-page.title")
           : t("programs-page.title")
       } - ${title}`}
-      description={description.publicInfo.description}
+      description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={filesService.getFileUrl(description.publicInfo.logo)}
       schemas={[getSchema(description)]}
     >
