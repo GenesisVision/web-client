@@ -3,7 +3,8 @@ import "./programs.scss";
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { ProgramDetailsListItem } from "gv-api-web";
-import dynamic from "next/dist/next-server/lib/dynamic";
+import ProgramCard from "modules/programs-table/components/programs-table/program-card";
+import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -11,11 +12,6 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-
-const ProgramCard = dynamic(() => import("./program-card"));
-const ProgramTableRowShort = dynamic(() => import("./program-table-row-short"));
-
-export const FAVORITE_COLUMN_NAME = "favorite";
 
 interface IProgramsTableProps extends ITableProps {
   currencies?: string[];
