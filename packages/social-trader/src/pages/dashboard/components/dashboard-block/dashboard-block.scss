@@ -29,33 +29,7 @@
   }
 
   &__shadow-wrapper {
-    display: flex;
     @include details-block-left-margin();
-    position: relative;
-
-    &--left {
-      &:before {
-        @include leftShadow();
-      }
-
-      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
-        &:before {
-          @include leftDarkShadow();
-        }
-      }
-    }
-
-    &--right {
-      &:after {
-        @include rightShadow();
-      }
-
-      &.dashboard-horizontal-list__shadow-wrapper--dark-shadow {
-        &:after {
-          @include rightDarkShadow();
-        }
-      }
-    }
   }
 }
 
