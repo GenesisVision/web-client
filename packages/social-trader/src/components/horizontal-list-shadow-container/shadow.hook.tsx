@@ -18,9 +18,17 @@ export const useShadow = (): {
   const [scroll, setScroll] = useState(0);
   useEffect(() => {
     if (!ref.current) return;
-    console.log(ref.current.scrollWidth, ref.current.offsetWidth);
-    setEndOfList(ref.current.scrollWidth - ref.current.offsetWidth);
-  }, [ref.current, setEndOfList]);
+    ref.current.scrollTo(0, 0);
+    setScroll(0);
+  }, [ref.current, endOfList]);
+  useEffect(() => {
+    if (!ref.current) return;
+    setEndOfList(
+      Math.floor(
+        ref.current.scrollWidth - ref.current.getBoundingClientRect().width
+      )
+    );
+  }, [ref.current]);
   const handleScroll = useCallback(() => {
     if (!ref.current) return;
     setScroll(ref.current.scrollLeft);
