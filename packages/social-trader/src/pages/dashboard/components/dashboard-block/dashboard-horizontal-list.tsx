@@ -1,38 +1,30 @@
 import "./dashboard-block.scss";
 
-import { HorizontalListShadowContainer } from "pages/dashboard/components/dashboard-block/horizontal-list-shadow-container";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
+import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
+import React from "react";
 
 const _DashboardHorizontalList: React.FC<Props> = ({
   children,
   darkShadow
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [endOfList, setEndOfList] = useState(0);
-  const [scroll, setScroll] = useState(0);
-  useEffect(() => {
-    if (!ref.current) return;
-    setEndOfList(ref.current.scrollWidth - ref.current.offsetWidth);
-  }, [ref.current, setEndOfList]);
-  const handleScroll = useCallback(() => {
-    if (!ref.current) return;
-    setScroll(ref.current.scrollLeft);
-  }, [ref.current]);
+  const { scrollData, ref, handleScroll } = useShadow();
 
   return (
-    <HorizontalListShadowContainer
-      scroll={scroll}
-      endOfList={endOfList}
-      darkShadow={darkShadow}
-    >
-      <div
-        ref={ref}
-        onScroll={handleScroll}
-        className="dashboard-horizontal-list"
+    <div className="dashboard-horizontal-list__shadow-wrapper">
+      <HorizontalListShadowContainer
+        scrollData={scrollData}
+        darkShadow={darkShadow}
       >
-        {children}
-      </div>
-    </HorizontalListShadowContainer>
+        <div
+          ref={ref}
+          onScroll={handleScroll}
+          className="dashboard-horizontal-list"
+        >
+          {children}
+        </div>
+      </HorizontalListShadowContainer>
+    </div>
   );
 };
 
