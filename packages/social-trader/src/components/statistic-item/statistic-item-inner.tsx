@@ -7,6 +7,14 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
+const getTextContent = (node: React.ReactNode) => {
+  // @ts-ignore
+  return node?.props?.labelText;
+};
+
+const getTestId = (label: string | React.ReactNode) =>
+  typeof label === "string" ? label : getTextContent(label);
+
 const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
   noWrap = true,
   hideLabel,
@@ -22,6 +30,7 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
   equivalent,
   equivalentCurrency
 }) => {
+  const testId = getTestId(label);
   const generateClasses = (item: ITEM) =>
     (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
       ? classNames("statistics-item__value", {
@@ -47,7 +56,7 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
       >
         {label}
       </div>
-      <div className={generateClasses(ITEM.VALUE)} data-test-id={label}>
+      <div className={generateClasses(ITEM.VALUE)} data-test-id={testId}>
         <BlurContainer blur={!!isPending}>{children}</BlurContainer>
       </div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
