@@ -22,6 +22,7 @@ const FollowsPage: NextComponentType = () => {
   const title = t("follows-page.title");
   return (
     <Page
+      description={"List of follow"}
       showTitle
       title={title}
       schemas={[

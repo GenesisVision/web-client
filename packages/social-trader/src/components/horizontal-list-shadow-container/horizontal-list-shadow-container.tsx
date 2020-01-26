@@ -1,13 +1,12 @@
-import "./dashboard-block.scss";
+import "./horizontal-list-shadow-container.scss";
 
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 
 export const HorizontalListShadowContainer: React.FC<Props> = ({
-  scroll,
+  scrollData: { scroll, endOfList },
   darkShadow,
-  children,
-  endOfList
+  children
 }) => {
   const [leftShadow, setLeftShadow] = useState<boolean>(false);
   const [rightShadow, setRightShadow] = useState<boolean>(false);
@@ -19,10 +18,10 @@ export const HorizontalListShadowContainer: React.FC<Props> = ({
   }, [scroll, endOfList]);
   return (
     <div
-      className={classNames("dashboard-horizontal-list__shadow-wrapper", {
-        "dashboard-horizontal-list__shadow-wrapper--right": rightShadow,
-        "dashboard-horizontal-list__shadow-wrapper--left": leftShadow,
-        "dashboard-horizontal-list__shadow-wrapper--dark-shadow": darkShadow
+      className={classNames("horizontal-list-shadow-container", {
+        "horizontal-list-shadow-container--right": rightShadow,
+        "horizontal-list-shadow-container--left": leftShadow,
+        "horizontal-list-shadow-container--dark-shadow": darkShadow
       })}
     >
       {children}
@@ -30,8 +29,12 @@ export const HorizontalListShadowContainer: React.FC<Props> = ({
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export type ScrollDataType = {
   scroll: number;
   endOfList: number;
+};
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  scrollData: ScrollDataType;
   darkShadow?: boolean;
 }

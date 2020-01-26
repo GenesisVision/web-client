@@ -1,72 +1,60 @@
 import "./facet-cards.scss";
 
+import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
+import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetFacet } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
-import { RefObject } from "react";
+import { useCallback } from "react";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
 
-class _FacetCards extends React.PureComponent<Props> {
-  scroll: RefObject<HTMLDivElement> = React.createRef();
-  facetList: RefObject<HTMLDivElement> = React.createRef();
-
-  handleScroll = (): void => {
-    this.updateClassList();
-  };
-
-  componentDidMount = (): void => {
-    this.updateClassList();
-  };
-
-  updateClassList = (): void => {
-    const node = this.scroll.current;
-    const list = this.facetList.current;
-
-    const scrollLeft = node ? node.scrollLeft : 0;
-    const scrollWidth = node ? node.scrollWidth : 0;
-    const { width = 0 } = node ? node.getBoundingClientRect() : {};
-
-    if (scrollLeft > 0) {
-      list && list.classList.add("facets__shadow--left");
-    } else if (scrollLeft <= 0) {
-      list && list.classList.remove("facets__shadow--left");
+const _FacetCards: React.FC<Props> = ({
+  data,
+  composeFacetUrl,
+  title,
+  fileRoute
+}) => {
+  const [load, setLoad] = useIsOpen();
+  const { scrollData, ref, handleScroll } = useShadow();
+  const handleLoad = useCallback(() => {
+    if (!ref.current) return;
+    if (!load) {
+      setLoad();
+      ref.current.scrollTo(5, 0);
     }
-
-    if (scrollWidth - scrollLeft > width) {
-      list && list.classList.add("facets__shadow--right");
-    } else if (scrollWidth - scrollLeft <= width) {
-      list && list.classList.remove("facets__shadow--right");
-    }
-  };
-
-  render() {
-    const { facets, composeFacetUrl, title, fileRoute } = this.props;
-    return (
-      <div className="facets__wrapper facets__shadow" ref={this.facetList}>
-        <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
-          <div className="facets__carousel">
-            {facets.map(x => (
-              <FacetCard
-                title={title}
-                fileRoute={fileRoute}
-                key={x.id}
-                facet={x}
-                composeFacetUrl={composeFacetUrl}
-              />
-            ))}
-          </div>
+  }, [load]);
+  return (
+    <div className="facets__wrapper">
+      <HorizontalListShadowContainer darkShadow scrollData={scrollData}>
+        <div
+          className="facets__carousel"
+          ref={ref}
+          onLoad={handleLoad}
+          onScroll={handleScroll}
+        >
+          {data.map(facet => (
+            <FacetCard
+              title={title}
+              fileRoute={fileRoute}
+              key={facet.id}
+              facet={facet}
+              composeFacetUrl={composeFacetUrl}
+            />
+          ))}
         </div>
-      </div>
-    );
-  }
-}
+      </HorizontalListShadowContainer>
+    </div>
+  );
+};
 
 interface Props {
-  facets: Array<AssetFacet>;
+  data: Array<AssetFacet>;
   composeFacetUrl: composeFacetUrlFunc;
   title: string;
   fileRoute: string;
 }
 
-const FacetCards = _FacetCards;
+const FacetCards = withBlurLoader(React.memo(_FacetCards));
 export default FacetCards;

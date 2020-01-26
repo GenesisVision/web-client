@@ -36,11 +36,14 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dispatchFundDescriptionWithId(description.id, undefined, currency)
     );
   }, []);
+  const title = `${t("funds-page.title")} - ${description.publicInfo.title}`;
   return (
     <Page
-      title={description.publicInfo.title}
+      title={title}
       schemas={[getFundSchema(description)]}
-      description={description.publicInfo.description}
+      description={`${t("funds-page.title")} ${
+        description.publicInfo.title
+      } - ${description.publicInfo.description}`}
       previewImage={filesService.getFileUrl(description.publicInfo.logo)}
     >
       <DetailsDescriptionSection
