@@ -1,20 +1,16 @@
-import Surface from "components/surface/surface";
-import * as React from "react";
+import { AssetFacet } from "gv-api-web";
+import { tableLoaderCreator } from "utils/helpers";
 
-const facetsStub: number[] = [1, 2, 3, 4];
-const FacetCardsStub: React.FC = () => (
-  <div className="facets__wrapper facets__shadow facets__shadow--right">
-    <div className="facets__carousel">
-      <div className="facets">
-        {facetsStub.map((x: number) => (
-          <Surface
-            key={x}
-            className="surface--without-paddings facet facet--stub"
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-);
+export const getFacetLoaderData = (): AssetFacet => ({
+  id: "",
+  title: "",
+  description: "",
+  logo: "",
+  url: "",
+  sortType: "New",
+  timeframe: "Day",
+  sorting: ""
+});
 
-export default FacetCardsStub;
+export const getFacetsLoaderData = () =>
+  tableLoaderCreator(getFacetLoaderData, 4);

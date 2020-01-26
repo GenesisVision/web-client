@@ -3,118 +3,23 @@
 @import "~shared/styles/_constants";
 @import "~shared/styles/_sizes";
 
-@media (max-width: 1360px) {
-  .facets-shadow {
-    &:after {
-      background: linear-gradient(
-        90deg,
-        rgba($background-color, 0),
-        $background-color
-      );
-    }
-  }
-  .facets {
-    &:after {
-      content: "";
-    }
-    &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
-  }
-}
-@media (min-width: 1360px) {
-  .facets {
-    &:after {
-      content: "";
-    }
-  }
-}
-$__title-font-size: 24px;
-$__description-font-size: 14px;
-$facet-padding: 30px;
-$facet-margin: 33px;
+$translate-size: 10px;
+
 $facet-width: 315px;
 $facet-height: 280px;
-$padding-app: 20px;
 
 .facets {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  z-index: 0;
-
-  margin-bottom: -50px;
-  padding-bottom: 30px;
-
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-  & {
-    -ms-overflow-style: none;
-  }
-  &::after {
-    opacity: 0;
-  }
-
   &__wrapper {
-    position: relative;
-    overflow: hidden;
-    height: $facet-height/1.5 + $facet-margin;
-    z-index: 0;
-
-    @include media-breakpoint-landscape-phone() {
-      height: $facet-height + 2 * $facet-margin;
-      padding: 0;
-      margin: 0 0-$padding-app;
-    }
-  }
-
-  &__shadow {
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 70px;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 250ms;
-      pointer-events: none;
-    }
-
-    &:before {
-      left: 0;
-      background: linear-gradient(90deg, #131e26 20px, rgba(19, 30, 38, 0));
-    }
-
-    &:after {
-      right: 0;
-      background: linear-gradient(90deg, rgba(19, 30, 38, 0), #131e26 50px);
-    }
-
-    &--left:before,
-    &--right:after {
-      opacity: 1;
-    }
+    @include adaptive-margin(bottom, $padding-small);
   }
 
   &__carousel {
-    box-sizing: border-box;
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    padding: $facet-margin/2 $padding-app;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: $facet-margin $padding-app;
-    }
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: -($scroll-width * 2);
+    padding-bottom: $scroll-width + 2px;
+    padding-top: $translate-size;
+    overflow-y: hidden;
   }
 }
 
@@ -128,11 +33,11 @@ $padding-app: 20px;
   box-shadow: $box-shadow-1;
 
   &:not(:last-child) {
-    margin-right: $facet-margin/2;
+    @include adaptive-margin(right, $padding-small);
   }
 
   &--hovered {
-    transform: translateY(-10px);
+    transform: translateY(-$translate-size);
     box-shadow: $box-shadow-4;
   }
 
@@ -143,9 +48,6 @@ $padding-app: 20px;
   @include media-breakpoint-landscape-phone() {
     min-width: $facet-width;
     height: $facet-height;
-    &:not(:last-child) {
-      margin-right: $facet-margin;
-    }
   }
 
   &__logo-wrapper {
@@ -166,9 +68,9 @@ $padding-app: 20px;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: $facet-padding / 2;
+    padding: $padding-small / 2;
     @include media-breakpoint-landscape-phone() {
-      padding: $facet-padding;
+      padding: $padding-small;
     }
   }
 
@@ -185,12 +87,12 @@ $padding-app: 20px;
   }
 
   &__description {
-    font-size: $__description-font-size/1.3;
+    font-size: $font-size-paragraph/1.3;
     font-weight: 300;
     letter-spacing: 0.2px;
     color: $primary-color;
     @include media-breakpoint-landscape-phone() {
-      font-size: $__description-font-size;
+      font-size: $font-size-paragraph;
     }
   }
 
@@ -200,10 +102,5 @@ $padding-app: 20px;
 }
 
 .facets-tabs {
-  padding: 0 $padding-xsmall;
-  box-sizing: border-box;
-
-  @include media-breakpoint-landscape-phone() {
-    padding: 0;
-  }
+  @include adaptive-padding(bottom, $padding-small - $translate-size);
 }
