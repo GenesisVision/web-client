@@ -31,12 +31,13 @@ const _LPButton: React.FC<LPButtonProps> = ({
     "lp-button--primary": color === "primary",
     "lp-button--secondary": color === "secondary"
   });
+  const title = typeof children === "string" ? children : String(href);
   switch (true) {
     case href &&
       typeof href === "string" &&
       (href.includes("http") || href.includes("mailto")):
       return (
-        <a href={href as string} className={classname}>
+        <a title={title} href={href as string} className={classname}>
           {children}
         </a>
       );
@@ -54,7 +55,7 @@ const _LPButton: React.FC<LPButtonProps> = ({
       );
     case !!href:
       return (
-        <Link className={classname} onClick={onClick} to={href}>
+        <Link title={title} className={classname} onClick={onClick} to={href}>
           {children}
         </Link>
       );

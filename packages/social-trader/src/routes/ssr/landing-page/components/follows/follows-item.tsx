@@ -28,7 +28,11 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
   };
   return (
     <li className="follows-list__item">
-      <Link className="follows-list__item-link" to={linkProps}>
+      <Link
+        title={`Go to ${title} details page`}
+        className="follows-list__item-link"
+        to={linkProps}
+      >
         <div className="follows-list__item-avatar">
           <ImageBase
             DefaultImageComponent={GVProgramDefaultAvatar}

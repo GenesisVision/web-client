@@ -65,6 +65,7 @@ const _SignUpForm: React.FC<
         <span>
           {t("auth.signup.i-accept-text")}{" "}
           <a
+            title={t("auth.signup.privacy-policy-text")}
             target="_blank"
             rel="noopener noreferrer"
             href={PRIVACY_POLICY_ROUTE}
@@ -84,6 +85,7 @@ const _SignUpForm: React.FC<
         <span>
           {t("auth.signup.i-accept-text")}{" "}
           <a
+            title={t("auth.signup.accept-terms-text")}
             target="_blank"
             rel="noopener noreferrer"
             href={TERMS_ROUTE}

@@ -1,5 +1,4 @@
 import { updateGlobalTableViewAction } from "actions/tables-view-actions";
-import FollowsPage from "components/follows/follows.page";
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import {
@@ -7,6 +6,7 @@ import {
   FetchSignalAssetsFilterType
 } from "modules/follows-table/actions/follows-table.actions";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
+import FollowsPage from "pages/invest/follows/follows.page";
 import React from "react";
 import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
 import authService from "services/auth-service";

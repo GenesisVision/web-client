@@ -11,7 +11,11 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => (
     })}
   >
     {image && (
-      <ImageBaseElement src={image} alt="" className="info-list__item-image" />
+      <ImageBaseElement
+        src={image}
+        alt="Trade"
+        className="info-list__item-image"
+      />
     )}
     {texts && (
       <div className="info-list__item-text">

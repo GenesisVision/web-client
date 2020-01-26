@@ -8,6 +8,8 @@ export const getFundSchema = (
 ): SchemaType => ({
   context: "https://schema.org",
   "@type": "InvestmentFund",
+  identifier: details.id,
+  provider: details.owner.username,
   name: details.publicInfo.title,
   description: details.publicInfo.description,
   feesAndCommissionsSpecification: "", //TODO

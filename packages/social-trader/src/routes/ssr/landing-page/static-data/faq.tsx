@@ -41,6 +41,7 @@ export const faqGeneral: TAccordion[] = [
           <>
             Yes, we have{" "}
             <a
+              title={"Get iOS application"}
               href="https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
               target="_blank"
             >
@@ -48,6 +49,7 @@ export const faqGeneral: TAccordion[] = [
             </a>{" "}
             and{" "}
             <a
+              title={"Get Android application"}
               href="https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
               target="_blank"
             >
@@ -75,7 +77,13 @@ export const faqAccount: TAccordion[] = [
             First of all check all the folders in your inbox, including the spam
             folder. The email might be there, if it’s not there, kindly contact
             our Support team:{" "}
-            <a href="mailto:support@genesis.vision">support@genesis.vision</a>.
+            <a
+              title={"Write a email to Genesis Vision support"}
+              href="mailto:support@genesis.vision"
+            >
+              support@genesis.vision
+            </a>
+            .
           </>
         )
       }
@@ -143,8 +151,13 @@ export const faqAccount: TAccordion[] = [
             If you wish to terminate your account please send an official
             request using the e-mail address you have registered your account
             with to our Support team:{" "}
-            <a href="mailto:support@genesis.vision">support@genesis.vision</a>.{" "}
-            They will review your request within a 24 hour timeframe.
+            <a
+              title={"Write a email to Genesis Vision support"}
+              href="mailto:support@genesis.vision"
+            >
+              support@genesis.vision
+            </a>
+            . They will review your request within a 24 hour timeframe.
           </>
         )
       }
@@ -635,6 +648,7 @@ export const faqGVT: TAccordion[] = [
             We have received a conclusion on the Howey Test passage that our
             token cannot be deemed as a security.{" "}
             <a
+              title={"Read genesis vision memorandum"}
               href="https://genesis.vision/genesis-vision-memorandum.pdf"
               target="_blank"
             >

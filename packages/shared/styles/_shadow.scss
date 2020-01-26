@@ -6,10 +6,18 @@ $darkShadow: $background-color;
 
 @mixin shadow-background($side, $color) {
   @if $side == "left" {
-    background: linear-gradient(90deg, $color, transparent $shadow-width);
+    background: linear-gradient(
+      90deg,
+      $color,
+      rgba($color, 0.01) $shadow-width
+    );
   }
   @if $side == "right" {
-    background: linear-gradient(90deg, transparent, $color $shadow-width);
+    background: linear-gradient(
+      90deg,
+      rgba($color, 0.01),
+      $color $shadow-width
+    );
   }
 }
 @mixin shadow-main() {

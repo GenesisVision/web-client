@@ -21,7 +21,7 @@ export const _PagerButton: React.FC<Props> = ({
       e.preventDefault();
       clickHandle(page);
     },
-    [page]
+    [page, clickHandle]
   );
 
   const classname = classNames("pager__button", {

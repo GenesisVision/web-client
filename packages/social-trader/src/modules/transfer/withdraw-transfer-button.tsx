@@ -16,6 +16,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
+      successMessage={"transfer.confirmation.withdraw-success"}
       singleCurrentItemContainer
       size={size}
       label={t("buttons.withdraw")}

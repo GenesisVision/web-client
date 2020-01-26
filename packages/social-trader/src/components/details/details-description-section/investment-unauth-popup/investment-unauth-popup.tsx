@@ -35,10 +35,10 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
       <DialogBottom>
         <p className="unauth-popup__message">{message}</p>
         <DialogButtons>
-          <a href={LOGIN_ROUTE}>
+          <a title={t("auth.login.title")} href={LOGIN_ROUTE}>
             <GVButton>{t("auth.login.title")}</GVButton>
           </a>
-          <a href={SIGNUP_ROUTE}>
+          <a title={t("auth.signup.title")} href={SIGNUP_ROUTE}>
             <GVButton>{t("auth.signup.title")}</GVButton>
           </a>
         </DialogButtons>

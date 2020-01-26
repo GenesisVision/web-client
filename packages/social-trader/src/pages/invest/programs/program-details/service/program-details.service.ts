@@ -17,6 +17,7 @@ import { Dispatch } from "redux";
 import assetsApi from "services/api-client/assets-api";
 import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
+import notificationsApi from "services/api-client/notifications-api";
 import platformApi from "services/api-client/platform-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
@@ -274,3 +275,17 @@ export const getBalanceChart: TGetChartFunc = ({
 }) => async dispatch => {
   await dispatch(fetchProgramBalanceChartAction(id, period, currencies[0]));
 };
+
+export const addInvestNotify = ({
+  minDeposit,
+  assetId
+}: {
+  minDeposit: number;
+  assetId: string;
+}) =>
+  notificationsApi.addNotificationsSettings(authService.getAuthArg(), {
+    assetId,
+    conditionType: "AvailableToInvest",
+    type: "ProgramCondition",
+    conditionAmount: minDeposit
+  });

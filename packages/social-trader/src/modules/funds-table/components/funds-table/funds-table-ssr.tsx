@@ -82,7 +82,6 @@ const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   if (!data) return null;
   return (
     <FundsTable
-      title={title}
       data={data.items}
       showSwitchView={showSwitchView}
       sorting={sorting || SORTING_FILTER_VALUE}

@@ -23,24 +23,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: $padding-large;
-    margin-right: $padding-xsmall;
+    @include adaptive-margin(bottom, $padding-large);
+    @include adaptive-margin(right, $padding-xsmall);
     padding-left: 0;
     &--side {
-      padding-left: $padding-big;
+      @include adaptive-padding(left, $padding-big);
       align-items: flex-start;
     }
   }
   &__description {
     max-width: 500px;
     color: $text-dark-color;
-    font-size: $font-size-common;
-    margin-bottom: $padding-big;
+    @include font-size($font-size-common);
+    @include adaptive-margin(bottom, $padding-big);
     text-align: center;
     &--side {
       text-align: left;
     }
   }
-  padding-top: $padding-large;
-  padding-bottom: $padding-large;
+  @include adaptive-padding(top, $padding-large);
+  @include adaptive-padding(bottom, $padding-large);
 }

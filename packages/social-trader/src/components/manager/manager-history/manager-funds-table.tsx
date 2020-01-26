@@ -12,6 +12,8 @@ import FundsTableModule from "modules/funds-table/components/funds-table/funds-t
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/components/funds-table/funds-table.constants";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { currencySelector } from "reducers/account-settings-reducer";
 
 import {
   MANAGER_DEFAULT_FILTERS,
@@ -26,8 +28,9 @@ interface Props {
 
 const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
   const [t] = useTranslation();
+  const showIn = useSelector(currencySelector);
   const getManagerFunds: GetItemsFuncType = useCallback(
-    filters => fetchManagerFunds({ ...filters, ownerId }),
+    filters => fetchManagerFunds({ ...filters, ownerId, showIn }),
     [ownerId]
   );
 

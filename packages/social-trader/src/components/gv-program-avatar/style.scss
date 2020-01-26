@@ -60,10 +60,6 @@ $avatar-big-level-size: 36px;
     align-items: center;
     background-color: $panel-background-color;
     border-radius: 50%;
-    & .pie-container {
-      @include height(26px);
-      @include width(26px);
-    }
   }
 
   &__image {

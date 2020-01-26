@@ -44,7 +44,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   );
 
   return (
-    <Page title={t("programs-page.title")}>
+    <Page showTitle title={`${t("programs-page.title")} ${t(`facets.rating`)}`}>
       <div className="programs-facet__filter">
         {levels.map((lvl, i) => (
           <GVButton

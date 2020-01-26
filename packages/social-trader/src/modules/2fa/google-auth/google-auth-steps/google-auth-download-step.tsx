@@ -13,10 +13,18 @@ export const GoogleStep1: React.FC<WithTranslation> = ({ t }) => (
   <div className="google-auth__step">
     <div className="google-auth__count">01</div>
     <div className="google-auth__title">{t("2fa-page.download-app")}</div>
-    <a href={AuthAndroidLink} className="google-auth__link">
+    <a
+      title={"link to android market"}
+      href={AuthAndroidLink}
+      className="google-auth__link"
+    >
       <ImageBaseElement src={GooglePlay} alt={"link to android market"} />
     </a>
-    <a href={AuthIosLink} className="google-auth__link">
+    <a
+      title={"link to app store"}
+      href={AuthIosLink}
+      className="google-auth__link"
+    >
       <ImageBaseElement src={AppStore} alt={"link to app store"} />
     </a>
   </div>

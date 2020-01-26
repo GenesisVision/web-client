@@ -58,7 +58,9 @@ const _WalletAddFundsForm: React.FC<InjectedFormikProps<Props, FormValues>> = ({
             className="wallet-add-funds-popup__address"
             label={t("wallet-deposit.deposit-address")}
           >
-            {depositAddress}
+            <div className="wallet-add-funds-popup__address-value">
+              {depositAddress}
+            </div>
           </StatisticItem>
         </DialogField>
         <DialogButtons>

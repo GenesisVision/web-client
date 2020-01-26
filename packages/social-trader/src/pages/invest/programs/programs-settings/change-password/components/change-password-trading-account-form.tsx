@@ -59,6 +59,7 @@ const _ChangePasswordTradingAccountForm: React.FC<
       />
       <DialogBottom>
         <GVFormikField
+          wide
           component={GVTextField}
           label={t("password-change-trading-account.new-password")}
           type="password"
@@ -66,6 +67,7 @@ const _ChangePasswordTradingAccountForm: React.FC<
           autoComplete="off"
         />
         <GVFormikField
+          wide
           component={GVTextField}
           label={t("password-change-trading-account.confirm-password")}
           type="password"
@@ -74,6 +76,7 @@ const _ChangePasswordTradingAccountForm: React.FC<
         />
         {twoFactorEnabled && (
           <GVFormikField
+            wide
             type="text"
             name={FORM_FIELDS.twoFactorCode}
             label={t("wallet-withdraw.two-factor-code-label")}

@@ -8,7 +8,7 @@ import Layout from "routes/ssr/landing-page/layouts/_layout";
 
 export const Faq: NextPage = () => {
   return (
-    <Layout title="Genesis Vision Fees">
+    <Layout title="Genesis Vision FAQ">
       <main className="internal">
         <FaqSection />
       </main>

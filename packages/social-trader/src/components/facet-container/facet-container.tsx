@@ -31,7 +31,7 @@ const _FacetContainer: React.FC<Props> = props => {
   const { title, sorting, timeframe } = facet!;
   return (
     <TableContainer
-      title={title}
+      // title={title}
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}

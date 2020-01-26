@@ -4,6 +4,7 @@ import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -36,14 +37,14 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
           <StatisticItem label={t("wallet-widget.trading")}>
             {`${formatCurrencyValue(trading, currency)} ${currency}`}
           </StatisticItem>
-          <StatisticItem>
+          <StatisticItemContainerBlock>
             <Link
               to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)}
               onClick={clearAnchor}
             >
               {t("wallet-widget.details")} ›
             </Link>
-          </StatisticItem>
+          </StatisticItemContainerBlock>
         </StatisticItemList>
       </PopoverContentCardBlock>
     </PopoverContent>

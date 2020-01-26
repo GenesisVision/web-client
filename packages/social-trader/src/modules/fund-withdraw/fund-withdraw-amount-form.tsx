@@ -74,6 +74,7 @@ const _FundWithdrawAmountForm: React.FC<
         />
       </DialogField>
       <InputAmountField
+        wide
         name={FUND_WITHDRAW_FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}
         placeholder="%"

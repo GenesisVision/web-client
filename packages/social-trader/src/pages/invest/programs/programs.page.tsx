@@ -23,6 +23,8 @@ const ProgramsPage: NextPage = () => {
 
   return (
     <Page
+      description={"List of programs"}
+      showTitle
       title={title}
       schemas={[
         ORGANIZATION_SCHEMA,
@@ -46,10 +48,7 @@ const ProgramsPage: NextPage = () => {
         composeFacetUrl={composeProgramFacetUrl}
       />
       <DetailsBlock table key={"table"}>
-        <ProgramsTableSSR
-          showSwitchView
-          title={t("programs-page.programs-table")}
-        />
+        <ProgramsTableSSR showSwitchView />
       </DetailsBlock>
     </Page>
   );

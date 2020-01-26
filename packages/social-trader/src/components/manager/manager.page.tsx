@@ -5,6 +5,7 @@ import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
 import ManagerHistorySection from "components/manager/manager-history/manager-history-section";
+import { getManagerSchema } from "components/manager/manager.schema";
 import Page from "components/page/page";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Crashable from "decorators/crashable";
@@ -23,6 +24,7 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
   return (
     <Page
       title={title}
+      schemas={[getManagerSchema(profile)]}
       description={profile.about || title}
       previewImage={filesService.getFileUrl(profile.avatar)}
     >

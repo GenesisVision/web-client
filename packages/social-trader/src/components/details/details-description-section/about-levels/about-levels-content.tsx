@@ -105,7 +105,9 @@ const _AboutLevelsContent: React.FC<Props> = ({
             <p className="about-levels__paragraph">
               {t("about-levels-page.section.text-9")}{" "}
               <a
+                title={t("about-levels-page.section.link")}
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a"
               >
                 {t("about-levels-page.section.link")}

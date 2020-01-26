@@ -13,6 +13,7 @@ const _DownloadButton: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <a
+      title={title || t("program-details-page.history.trades.download")}
       className="download-button__container"
       href={getExportFileUrl && getExportFileUrl()}
     >

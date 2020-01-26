@@ -1,11 +1,12 @@
 import "./lp-header.scss";
 
+import ImageBaseElement from "components/avatar/image-base.element";
 import Link from "components/link/link";
+import logo from "media/logo.svg";
 import React from "react";
 import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import LPButton from "routes/ssr/landing-page/components/lp-button/lp-button";
-import { MainLogo } from "routes/ssr/landing-page/components/main-logo/main-logo";
 import MobileNav from "routes/ssr/landing-page/components/mobile-nav/mobile-nav";
 import NavList from "routes/ssr/landing-page/components/nav/nav-list";
 import {
@@ -25,12 +26,16 @@ const LPHeader: React.FC = () => {
           </div>
           <div className="lp-header__logo">
             <Link
+              title={"Go to home page"}
               className="lp-header__logo-link"
               to={{
                 pathname: HOME_ROUTE
               }}
             >
-              <MainLogo />
+              <div className="lp-header__combo-logo">
+                <ImageBaseElement src={logo} />
+                <h1 className="lp-header__text-logo">Genesis Vision</h1>
+              </div>
             </Link>
           </div>
           <NavList menuItems={navHeader} className="lp-header__nav" />

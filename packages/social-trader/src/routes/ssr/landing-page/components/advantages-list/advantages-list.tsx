@@ -9,7 +9,7 @@ import AdvantageItem from "./advantage-item";
 interface Props {
   className?: string;
   advantagesItems: TAdvantages[];
-  lastItem?: any;
+  lastItem?: JSX.Element;
 }
 
 const _AdvantagesList: React.FC<Props> = ({

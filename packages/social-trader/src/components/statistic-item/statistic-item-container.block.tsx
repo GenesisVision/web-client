@@ -3,7 +3,9 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import React from "react";
 
-export const StatisticItemContainerBlock: React.FC<Props> = ({
+export const StatisticItemContainerBlock: React.FC<
+  IStatisticItemContainerBlockProps
+> = ({
   bottomContent,
   className,
   children,
@@ -28,7 +30,8 @@ export const StatisticItemContainerBlock: React.FC<Props> = ({
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface IStatisticItemContainerBlockProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   bottomContent?: boolean;
   withPadding?: boolean;
   small?: boolean;

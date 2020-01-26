@@ -20,7 +20,7 @@ export const InvestPage: React.FC<Props> = ({
   const [t] = useTranslation();
   const title = t("invest.title");
   return (
-    <Page title={title}>
+    <Page description={t("invest.follows.text")} showTitle title={title}>
       <AssetBlock
         buttonLabel={t("invest.follow-button")}
         blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}

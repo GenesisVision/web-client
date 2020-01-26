@@ -16,6 +16,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
+      successMessage={"transfer.confirmation.deposit-success"}
       singleCurrentItemContainer
       size={size}
       color={"primary"}

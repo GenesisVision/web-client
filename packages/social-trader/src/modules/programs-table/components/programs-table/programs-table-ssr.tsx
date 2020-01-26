@@ -124,7 +124,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
 
 interface Props {
   showSwitchView: boolean;
-  title: string;
+  title?: string;
 }
 
 const ProgramsTableSSR = React.memo(_ProgramsTableSSR);

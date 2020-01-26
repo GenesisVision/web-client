@@ -38,9 +38,10 @@
 
   &__address {
     text-align: center;
-    & > .statistics-item__value {
-      font-size: $font-size-paragraph-mobile;
-    }
+  }
+
+  &__address-value {
+    @include font-size($font-size-paragraph-mobile);
   }
 
   &__right-text {

@@ -25,6 +25,7 @@ import {
 import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<Props> = ({
+  successMessage,
   singleCurrentItemContainer,
   onApply,
   title,
@@ -53,6 +54,7 @@ const _TransferContainer: React.FC<Props> = ({
     dispatch(updateWalletTimestampAction());
   };
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
+    successMessage,
     middleware: [updateWalletMiddleware],
     request: transferRequest
   });
@@ -110,6 +112,7 @@ const _TransferContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  successMessage?: string;
   singleCurrentItemContainer: boolean;
   onApply: VoidFunction;
   currentItem: WalletItemType;

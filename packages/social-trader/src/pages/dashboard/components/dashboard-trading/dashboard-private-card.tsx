@@ -11,6 +11,7 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
+import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -128,6 +129,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       title={asset.accountInfo.title}
       logo={asset.broker.logo}
       renderActions={renderActions}
+      extraBlock={asset.tags && <TagProgramContainer tags={asset.tags} />}
     >
       <TableCardTable>
         {asset.accountInfo.currency && (

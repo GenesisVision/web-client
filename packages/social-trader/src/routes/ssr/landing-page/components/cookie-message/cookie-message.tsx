@@ -23,7 +23,11 @@ const CookieMessage: React.FC = () => {
         <p className="cookie-message__text">
           This website uses cookies. By continuing to use this website, you
           consent to our use of these cookies.{" "}
-          <a href="/privacy-policy" target="_blank">
+          <a
+            title={"Read privacy policy"}
+            href="/privacy-policy"
+            target="_blank"
+          >
             Find out more
           </a>
         </p>

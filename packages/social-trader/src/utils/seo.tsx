@@ -52,9 +52,10 @@ export const descriptionMeta = (description?: string) => {
 export const commonMeta = () => {
   return (
     <>
+      <meta name="twitter:card" content="summary" />
       <meta key={"og-type"} property="og:type" content="website" />
       <meta key={"og-sn"} property="og:site_name" content="Genesis Vision" />
-      <meta key={"tw-site"} property="twitter:site" content="Genesis Vision" />
+      <meta key={"tw-site"} property="twitter:site" content="@genesis_vision" />
     </>
   );
 };
@@ -63,7 +64,7 @@ export const imageMeta = (image?: string) => {
   return image ? (
     <>
       <meta property="og:image" key="og-image" content={image} />
-      <meta name="twitter:image:src" key="twitter:image:src" content={image} />
+      <meta name="twitter:image" key="twitter:image" content={image} />
     </>
   ) : null;
 };
@@ -72,8 +73,15 @@ export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Genesis Vision",
-  logo: "",
+  url: "https://genesis.vision/",
+  logo: "https://genesis.vision/icon.png",
   sameAs: [
+    "https://t.me/genesisvision/",
+    "https://github.com/GenesisVision/",
+    "https://www.youtube.com/channel/UCnx2ja9luqWjgRt35tWR99w/",
+    "https://www.reddit.com/r/genesisvision/",
+    "https://www.linkedin.com/company/genesis-vision/",
+    "https://blog.genesis.vision/",
     "https://twitter.com/genesis_vision/",
     "https://www.facebook.com/GenesisVisionProject/"
   ]

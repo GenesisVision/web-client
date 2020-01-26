@@ -2,10 +2,10 @@ import GVColors from "components/gv-styles/gv-colors";
 import { FundAssetPartWithIcon, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
-  Area,
   CartesianGrid,
   ComposedChart,
   ContentRenderer,
+  Line,
   ResponsiveContainer,
   Tooltip,
   TooltipProps,
@@ -40,7 +40,7 @@ const _ProfitChart: React.FC<Props> = ({
           dataKey="value"
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-          tickFormatter={x => +x.toFixed(2)}
+          tickFormatter={(x: number) => +x.toFixed(2)}
           unit="%"
           width={35}
         />
@@ -48,15 +48,13 @@ const _ProfitChart: React.FC<Props> = ({
         {tooltip && <Tooltip content={tooltip} />}
         <CartesianGrid vertical={false} strokeWidth={0.1} />
         {equities.map((equity, i) => (
-          <Area
+          <Line
             key={i}
             dataKey="value"
             type="monotone"
-            // @ts-ignore
             data={equity}
             connectNulls={true}
             stroke={colors && colors[i] ? colors[i].color : areaStrokeColor}
-            fill={`url(#equityProgramChartFill)`}
             strokeWidth={1}
             dot={false}
             unit=" %"

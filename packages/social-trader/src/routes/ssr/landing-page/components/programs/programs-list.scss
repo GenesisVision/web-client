@@ -76,7 +76,7 @@ $chart-width: 160px;
   }
 
   .table-card {
-    background-color: $landing-item-bg;
+    @include background-with-avatar-level($landing-item-bg);
     color: $main-color;
     margin: 0;
     min-width: 260px;
@@ -228,8 +228,8 @@ $chart-width: 160px;
     }
   }
 
-  .program-avatar__level {
-    background-color: $landing-item-bg;
+  .program-avatar__level,
+  .program-avatar--medium .program-avatar__level {
     color: $main-color;
     font-size: 12px;
     width: 25px;
@@ -238,27 +238,7 @@ $chart-width: 160px;
     right: -2px;
   }
 
-  .pie-container {
-    width: 23px;
-    height: 23px;
-  }
-
   .tag-program-container {
     width: 100%;
-  }
-
-  .statistics-item__label {
-    @include media-breakpoint-landscape-tablet() {
-      font-size: 12px;
-    }
-  }
-
-  .statistics-item__value {
-    font-weight: 600;
-    line-height: 20px;
-
-    @include media-breakpoint-landscape-tablet() {
-      font-size: 12px;
-    }
   }
 }

@@ -1,7 +1,9 @@
 import { SocialLinkType } from "gv-api-web";
 import { getRandomWord } from "utils/helpers";
 
-export const ACTIVE_ROUTE = "/active";
+export const ACTIVE = "asset";
+
+export const ACTIVE_ROUTE = `/${ACTIVE}`;
 
 export const getActiveUrl = (active: string) => `${ACTIVE_ROUTE}/${active}`;
 

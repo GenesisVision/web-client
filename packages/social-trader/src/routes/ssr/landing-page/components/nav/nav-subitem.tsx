@@ -22,12 +22,13 @@ const _NavSubItem: React.FC<INavSubItemProps> = ({
       })}
     >
       {href && href.includes("http") ? (
-        <a href={href} className="nav-list__link">
+        <a title={name} href={href} className="nav-list__link">
           {icon && <span className="nav-list__link-icon">{icon}</span>}
           {name}
         </a>
       ) : (
         <Link
+          title={name}
           onClick={onClick}
           to={{ pathname: href as string, state }}
           className="nav-list__link"

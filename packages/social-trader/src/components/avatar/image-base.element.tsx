@@ -39,14 +39,18 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       />
     ) : (
       // eslint-disable-next-line jsx-a11y/img-redundant-alt
-      <img src={emptyImg} alt="Image not found" className={className} />
+      <img
+        src={defaultImage || emptyImg}
+        alt="Image not found"
+        className={classNames(defaultImageClassName, className)}
+      />
     );
   return (
     <img
       src={emptyImg}
       data-src={currentSrc}
       title={title}
-      alt={alt}
+      alt={alt || "Image loading"}
       className={classNames("lazyload", className)}
       onError={handleError}
     />

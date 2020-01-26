@@ -50,6 +50,7 @@ const _DepositPopup: React.FC<Props> = ({
   return (
     <>
       <DepositTop
+        ownAsset={ownAsset}
         title={title}
         availableToInvest={availableToInvest}
         asset={asset}
@@ -58,7 +59,7 @@ const _DepositPopup: React.FC<Props> = ({
       <DepositForm
         ownAsset={ownAsset}
         minDeposit={minDeposit}
-        availableToInvest={availableToInvest}
+        availableToInvest={ownAsset ? undefined : availableToInvest}
         fees={fees}
         wallets={wallets}
         hasEntryFee={hasEntryFee}

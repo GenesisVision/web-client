@@ -15,7 +15,7 @@ const _NavSubList: React.FC<Props> = ({ subNav, subNavOpen, onClick }) => (
     })}
   >
     {subNavOpen &&
-      subNav.map((item: any, index: number) => (
+      subNav.map((item, index) => (
         <NavSubItem
           key={index}
           name={item.name}

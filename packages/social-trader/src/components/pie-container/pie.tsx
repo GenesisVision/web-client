@@ -1,3 +1,4 @@
+import { $secondaryBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
 import { PieCircle } from "components/pie-container/pie-circle";
 import { PieCircleContainer } from "components/pie-container/pie-circle-container";
 import {
@@ -26,7 +27,7 @@ export const MultiPie: React.FC<
   const circleCenter = circleSize / 2;
   return (
     <PieCircleContainer
-      color={circles[0].color}
+      color={circles.length ? circles[0].color : $secondaryBackgroundColor}
       circleSize={circleSize}
       withSubstrate={withSubstrate}
     >

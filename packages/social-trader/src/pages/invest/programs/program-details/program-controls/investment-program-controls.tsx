@@ -13,12 +13,14 @@ import {
   ProgramFollowDetailsFullTradingAccountDetails
 } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
-import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
+import NotifyButton from "modules/notity-button/notify-button";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { CurrencyEnum } from "utils/types";
 
 const _InvestmentProgramControls: React.FC<Props> = ({
+  currency,
   onApply,
   isOwnProgram,
   id,
@@ -47,25 +49,37 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         levelsParameters={levelsParameters}
       />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
-        <DepositButton
-          disabled={!canInvest}
-          title={publicInfo.title}
-          onApply={onApply}
-          size={GV_BTN_SIZE.BIG}
-          ownAsset={isOwnProgram}
-          entryFee={programDetails.entryFeeCurrent}
-          availableToInvest={programDetails.availableInvestmentBase}
-          broker={brokerDetails.type}
-          type={ASSET.PROGRAM}
-          id={id}
-          currency={tradingAccountInfo.currency}
-        />
+        {programDetails.availableInvestmentBase === 0 &&
+        isAuthenticated &&
+        !isOwnProgram ? (
+          <NotifyButton
+            broker={brokerDetails.type}
+            canInvest={programDetails.personalDetails.canInvest}
+            currency={currency}
+            assetId={id}
+          />
+        ) : (
+          <DepositButton
+            disabled={!canInvest}
+            title={publicInfo.title}
+            onApply={onApply}
+            size={GV_BTN_SIZE.BIG}
+            ownAsset={isOwnProgram}
+            entryFee={programDetails.entryFeeCurrent}
+            availableToInvest={programDetails.availableInvestmentBase}
+            broker={brokerDetails.type}
+            type={ASSET.PROGRAM}
+            id={id}
+            currency={tradingAccountInfo.currency}
+          />
+        )}
       </div>
     </DetailsBlock>
   );
 };
 
 interface Props {
+  currency: CurrencyEnum;
   id: string;
   programDetails: ProgramDetailsFull;
   publicInfo: AssetPublicDetails;
@@ -73,7 +87,6 @@ interface Props {
   tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
   onApply: VoidFunction;
   isOwnProgram: boolean;
-  description: ProgramDescriptionDataType;
   levelsParameters: LevelsParamsInfo;
 }
 
