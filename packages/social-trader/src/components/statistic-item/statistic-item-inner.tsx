@@ -22,25 +22,18 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
   equivalent,
   equivalentCurrency
 }) => {
-  const generateClasses = (item: ITEM) => {
-    switch (
-      (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
-    ) {
-      case true:
-        return classNames("statistics-item__value", {
+  const generateClasses = (item: ITEM) =>
+    (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
+      ? classNames("statistics-item__value", {
           "statistics-item__value--accent": accent,
           "statistics-item__value--small": small,
           "statistics-item__value--big": big,
           "statistics-item__value--large": large
-        });
-      case false:
-      default:
-        return classNames("statistics-item__label", {
+        })
+      : classNames("statistics-item__label", {
           "statistics-item__label--small": small,
           "statistics-item__label--no-wrap": noWrap
         });
-    }
-  };
 
   return (
     <div>
@@ -54,7 +47,7 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
       >
         {label}
       </div>
-      <div className={generateClasses(ITEM.VALUE)}>
+      <div className={generateClasses(ITEM.VALUE)} data-test-id={label}>
         <BlurContainer blur={!!isPending}>{children}</BlurContainer>
       </div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
