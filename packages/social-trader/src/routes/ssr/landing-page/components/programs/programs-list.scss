@@ -241,19 +241,4 @@ $chart-width: 160px;
   .tag-program-container {
     width: 100%;
   }
-
-  .statistics-item__label {
-    @include media-breakpoint-landscape-tablet() {
-      font-size: 12px;
-    }
-  }
-
-  .statistics-item__value {
-    font-weight: 600;
-    line-height: 20px;
-
-    @include media-breakpoint-landscape-tablet() {
-      font-size: 12px;
-    }
-  }
 }

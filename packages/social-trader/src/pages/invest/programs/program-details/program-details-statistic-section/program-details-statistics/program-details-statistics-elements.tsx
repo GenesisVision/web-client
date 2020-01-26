@@ -27,6 +27,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
       Current={() => (
         <>
           <StatisticItem
+            half
             label={
               <TooltipLabel
                 tooltipContent={t("program-details-page.tooltip.equity")}
@@ -44,6 +45,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           </StatisticItem>
           {statistic.investors !== null && (
             <StatisticItem
+              half
               label={
                 <TooltipLabel
                   tooltipContent={t("program-details-page.tooltip.investors")}
@@ -60,6 +62,7 @@ const _ProgramDetailsStatisticsElements: React.FC<
           )}
           {statistic.subscribers !== null && (
             <StatisticItem
+              half
               label={
                 <TooltipLabel
                   tooltipContent={t("follow-details-page.tooltip.subscribers")}
