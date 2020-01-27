@@ -1,9 +1,7 @@
 import "./pager.scss";
 
 import classNames from "classnames";
-import Link from "components/link/link";
-import { useRouter } from "next/router";
-import * as querystring from "querystring";
+import PagerLinkButton from "components/pager/pager-link-button";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -14,8 +12,6 @@ export const _PagerButton: React.FC<Props> = ({
   current,
   clickHandle
 }) => {
-  const { pathname } = useRouter();
-
   const callback = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
@@ -31,13 +27,13 @@ export const _PagerButton: React.FC<Props> = ({
   const value = label || page;
 
   if (asLink) {
-    const query = querystring.stringify({ page });
-    const link = page === 1 ? pathname : `${pathname}?${query}`;
-
     return (
-      <Link className={classname} to={link} onClick={callback}>
-        {value}
-      </Link>
+      <PagerLinkButton
+        page={page}
+        value={value}
+        callback={callback}
+        classname={classname}
+      />
     );
   }
 
