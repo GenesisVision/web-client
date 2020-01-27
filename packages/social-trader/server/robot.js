@@ -16,7 +16,7 @@ const robotTxt = dev => {
         const url = process.env.HOSTNAME;
         return {
           ttl: TTL_OK,
-          data: brotliCompressSync(`User-agent * n\ ${
+          data: brotliCompressSync(`User-agent * \n${
             url ? `Sitemap: ${url}/sitemap.xml` : "Disallow: /"
           }
         `)
