@@ -12,7 +12,7 @@ import translates from "../../public/locales/en/translations.json";
 dotenv.config({ path: ".env" });
 dotenv.config({ path: ".env.local" });
 
-export const ASYNC_TEST_TIMEOUT = 15 * 1000;
+export const ASYNC_TEST_TIMEOUT = 20 * 1000;
 export const DATA_TEST_ATTR = "data-test-id";
 export const VIEW_PORT = { width: 1400, height: 1000 };
 
