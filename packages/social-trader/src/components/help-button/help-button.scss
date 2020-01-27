@@ -18,9 +18,4 @@
   font-weight: 700;
   outline: none;
   cursor: pointer;
-
-  &.gv-btn--text:hover:not(:disabled).gv-btn--secondary {
-    border-color: $main-color;
-    color: $main-color;
-  }
 }
