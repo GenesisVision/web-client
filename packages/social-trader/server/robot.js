@@ -14,12 +14,14 @@ const robotTxt = dev => {
     get: async () => {
       try {
         const url = process.env.HOSTNAME;
+        const userAgentLine = "User-agent *";
+        const siteMapLine = `Sitemap: ${url}/sitemap.xml`;
+        const disallowLine = "Disallow: /";
+        const text =
+          userAgentLine + lineBreak + (url ? siteMapLine : disallowLine);
         return {
           ttl: TTL_OK,
-          data: brotliCompressSync(`User-agent * \n${
-            url ? `Sitemap: ${url}/sitemap.xml` : "Disallow: /"
-          }
-        `)
+          data: brotliCompressSync(text)
         };
       } catch (e) {
         return { data: null, error: e.message, ttl: TTL_ERROR };
