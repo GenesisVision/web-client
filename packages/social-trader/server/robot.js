@@ -1,4 +1,3 @@
-const { brotliCompressSync } = require("zlib");
 const cacheableResponse = require("cacheable-response");
 
 const TTL_OK = 1000 * 60 * 60 * 24;
@@ -19,11 +18,11 @@ const robotTxt = dev => {
         const userAgentLine = "User-agent *";
         const siteMapLine = `Sitemap: ${url}/sitemap.xml`;
         const disallowLine = "Disallow: /";
-        const text =
+        const data =
           userAgentLine + lineBreak + (url ? siteMapLine : disallowLine);
         return {
           ttl: TTL_OK,
-          data: brotliCompressSync(text)
+          data
         };
       } catch (e) {
         return { data: null, error: e.message, ttl: TTL_ERROR };
@@ -36,7 +35,6 @@ const robotTxt = dev => {
       }
 
       res.header("Content-Type", "text/plain");
-      res.header("Content-Encoding", "br");
 
       res.send(data);
     }
