@@ -1,7 +1,0 @@
-import { ROLE, ROLE_ENV } from "constants/constants";
-
-const useRole = () => {
-  return ROLE_ENV.toLowerCase() as ROLE;
-};
-
-export default useRole;
