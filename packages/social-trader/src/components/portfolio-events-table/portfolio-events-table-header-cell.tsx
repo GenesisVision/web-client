@@ -7,9 +7,7 @@ const _PortfolioEventsTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <span
-      className={`portfolio-events-all-table__cell portfolio-events-all-table__head-cell--${column.name}`}
-    >
+    <span>
       {t(`dashboard-page.portfolio-events.table-header.${column.name}`)}
     </span>
   );

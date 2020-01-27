@@ -1,3 +1,5 @@
+import "./portfolio-events-table.scss";
+
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
