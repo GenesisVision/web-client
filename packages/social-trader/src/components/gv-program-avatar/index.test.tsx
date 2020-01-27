@@ -1,3 +1,4 @@
+import ImageBase from "components/avatar/image-base";
 import { mount, shallow } from "enzyme";
 import React from "react";
 
@@ -15,14 +16,16 @@ describe("GVProgramAvatar tests", () => {
     const programAvatar = shallow(
       <GVProgramAvatar url="example.com/image.jpg" alt="avatar" level={1} />
     );
-    expect(programAvatar.find("img").prop("src")).toBe("example.com/image.jpg");
+    expect(programAvatar.find(ImageBase).prop("src")).toBe(
+      "example.com/image.jpg"
+    );
   });
 
   test("should add alt prop", () => {
     const programAvatar = shallow(
       <GVProgramAvatar url="example.com/image.jpg" alt="avatar" level={1} />
     );
-    expect(programAvatar.find("img").prop("alt")).toBe("avatar");
+    expect(programAvatar.find(ImageBase).prop("alt")).toBe("avatar");
   });
 
   test("should add level prop", () => {
