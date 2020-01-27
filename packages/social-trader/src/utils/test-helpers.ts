@@ -9,7 +9,6 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 
 import translates from "../../public/locales/en/translations.json";
 
-dotenv.config({ path: ".env" });
 dotenv.config({ path: ".env.local" });
 
 export const ASYNC_TEST_TIMEOUT = 20 * 1000;
