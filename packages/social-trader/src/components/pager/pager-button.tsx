@@ -14,7 +14,7 @@ export const _PagerButton: React.FC<Props> = ({
 }) => {
   const callback = useCallback(
     (e: React.MouseEvent) => {
-      e.preventDefault();
+      e && e.preventDefault();
       clickHandle(page);
     },
     [page, clickHandle]
