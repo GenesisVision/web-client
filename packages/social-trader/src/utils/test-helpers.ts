@@ -39,7 +39,8 @@ export const getTranslates = () => translates;
 export const testT = (path: string) =>
   path
     .split(".")
-    .reduce((prev: any, curr: any) => prev && prev[curr], getTranslates());
+    .reduce((prev: any, curr: any) => prev && prev[curr], getTranslates()) ||
+  path;
 
 interface DoneCallback {
   (...args: any[]): any;
@@ -69,6 +70,15 @@ export const describeOnPage = (url: string, tests: ItFuncType[]) => () => {
 };
 
 export const useTestHelpers = (page: Page) => {
+  const waitForLoadBlurLoader = async (selector: string) => {
+    await page.waitForSelector(`${selector} > .blur-container--loaded`);
+  };
+  const getStatisticsItemValue = async (label: string, loadable?: boolean) => {
+    const selector = `div[${DATA_TEST_ATTR}="${testT(label)}"]`;
+    if (loadable) await waitForLoadBlurLoader(selector);
+    const value = (await getTextContent(selector)) || "";
+    return value.trim();
+  };
   const safeClick = async (selector: string) => {
     await page.waitForSelector(selector);
     await page.click(selector);
@@ -169,6 +179,8 @@ export const useTestHelpers = (page: Page) => {
   };
 
   return {
+    waitForLoadBlurLoader,
+    getStatisticsItemValue,
     isDisabled,
     safeClick,
     hasElement,
