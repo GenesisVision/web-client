@@ -15,7 +15,7 @@ const robotTxt = dev => {
     get: async () => {
       try {
         const url = process.env.HOSTNAME;
-        const userAgentLine = "User-agent *";
+        const userAgentLine = "User-agent: *";
         const siteMapLine = `Sitemap: ${url}/sitemap.xml`;
         const disallowLine = "Disallow: /";
         const data =
