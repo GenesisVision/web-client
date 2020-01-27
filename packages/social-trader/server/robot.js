@@ -4,6 +4,8 @@ const cacheableResponse = require("cacheable-response");
 const TTL_OK = 1000 * 60 * 60 * 24;
 const TTL_ERROR = 1000 * 3;
 
+const lineBreak = "\n";
+
 const robotTxt = dev => {
   if (dev) {
     return async ({ res }) => {
