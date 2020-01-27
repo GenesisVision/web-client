@@ -1,5 +1,3 @@
-import "./manager-history.scss";
-
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";

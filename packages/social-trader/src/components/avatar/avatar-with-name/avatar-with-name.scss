@@ -1,12 +1,12 @@
 @import "~shared/styles/_sizes";
 
-.asset-avatar-with-name {
+.avatar-with-name {
   display: flex;
   align-items: center;
   &__avatar {
     display: flex;
     align-items: center;
-    @include adaptive-padding(right, $padding-xsmall);
+    @include adaptive-margin(right, $padding-xsmall);
   }
   &__name {
     color: white;

@@ -6,7 +6,7 @@ import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import React, { ReactNode, useCallback, useState } from "react";
 
-export const _Dialog: React.FC<IDialogProps> = ({
+export const Dialog: React.FC<IDialogProps> = ({
   top,
   open,
   onClose,
@@ -54,7 +54,6 @@ export const _Dialog: React.FC<IDialogProps> = ({
   );
 };
 
-const Dialog = React.memo(_Dialog);
 export default Dialog;
 
 export interface IDialogProps extends IDialogOuterProps {

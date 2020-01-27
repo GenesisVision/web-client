@@ -44,7 +44,7 @@ const _Active: React.FC<Props> = ({
         <h2 className="active__title">
           {t("active.about")} {name}
         </h2>
-        <div>{description}</div>
+        <div className="active__description">{description}</div>
       </div>
       <div className="active__block">
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}

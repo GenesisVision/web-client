@@ -26,7 +26,7 @@ describe("test useRequest hook", () => {
     });
   });
   describe("test send request", () => {
-    it("should be run request", () => {
+    it("should be run request", async () => {
       let testValue = "testValue";
       const newTestValue = "newTestValue";
       const request = () => {
@@ -36,24 +36,24 @@ describe("test useRequest hook", () => {
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
-      act(() => {
+      await act(() => {
         result.current.sendRequest();
       });
       expect(testValue).toBe(newTestValue);
     });
-    it("should be send data request", () => {
+    it("should be send data request", async () => {
       const testValue = "testValue";
       const request = () => Promise.resolve(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
-      act(() => {
+      await act(() => {
         result.current.sendRequest().then(() => {
-          expect(result.current.data).toBe(123);
+          expect(result.current.data).toBe(testValue);
         });
       });
     });
-    it("should be send isPending === false after send request", () => {
+    it("should be send isPending === false after send request", async () => {
       const testValue = "testValue";
       const request = () => Promise.resolve(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
@@ -65,46 +65,47 @@ describe("test useRequest hook", () => {
         });
       });
     });
-    it("should be send error", () => {
+    it("should be send error", async () => {
       const testValue = "testValue";
       const request = () => Promise.reject(testValue) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
-      act(() => {
-        result.current.sendRequest().then(() => {
-          expect(result.current.errorMessage).toBe(testValue);
-        });
+      await act(async () => {
+        await result.current.sendRequest();
+        console.log(result.current);
+        expect(result.current.errorMessage).toBe(testValue);
       });
     });
-    it("should be set submitting is false", () => {
+    it("should be set submitting is false", async () => {
       const isSubmitting = { value: true };
       const request = () => Promise.reject("") as Promise<string>;
       const setSubmitting = (value: boolean) => {
         isSubmitting.value = value;
       };
-      const { result } = renderHook(
-        () => useApiRequest({ request, setSubmitting }),
-        {
-          wrapper
-        }
-      );
-      act(() => {
-        result.current.sendRequest().then(() => {
+      const { result } = renderHook(() => useApiRequest({ request }), {
+        wrapper
+      });
+      await act(() => {
+        result.current.sendRequest(null, setSubmitting).then(() => {
           expect(isSubmitting.value).toBe(false);
         });
       });
     });
-    it("should be set args to request", () => {
+    it("should be set args to request", async () => {
       const testArg1 = "testArg1";
       const testArg2 = "testArg2";
-      const request = (arg1: any, arg2: any) =>
-        Promise.reject(arg1 + arg2) as Promise<string>;
+      const request = ({ arg1, arg2 }: { arg1: any; arg2: any }) =>
+        Promise.resolve(arg1 + arg2) as Promise<string>;
       const { result } = renderHook(() => useApiRequest({ request }), {
         wrapper
       });
-      result.current.sendRequest(testArg1, testArg2).then(() => {
-        expect(result.current.data).toBe(" ");
+      await act(() => {
+        result.current
+          .sendRequest({ arg1: testArg1, arg2: testArg2 })
+          .then(() => {
+            expect(result.current.data).toBe(testArg1 + testArg2);
+          });
       });
     });
   });

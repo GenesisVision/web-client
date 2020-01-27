@@ -1,20 +1,12 @@
-import "./asset-avatar-with-name.scss";
-
 import AssetAvatar, {
   IAssetAvatarProps
 } from "components/avatar/asset-avatar/asset-avatar";
+import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import * as React from "react";
 
 const _AssetAvatarWithName: React.FC<Props> = props => {
   const { name } = props;
-  return (
-    <div className="asset-avatar-with-name">
-      <div className="asset-avatar-with-name__avatar">
-        <AssetAvatar {...props} />
-      </div>
-      <div className="asset-avatar-with-name__name">{name}</div>
-    </div>
-  );
+  return <AvatarWithName avatar={<AssetAvatar {...props} />} name={name} />;
 };
 
 interface Props extends IAssetAvatarProps {

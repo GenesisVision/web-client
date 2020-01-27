@@ -15,9 +15,7 @@ const _ActivePage: React.FC<Props> = ({ data }) => {
       previewImage={filesService.getFileUrl(data.logo)}
       title={data.name}
     >
-      <div className="active-page">
-        <Active loaderData={getActiveLoaderData} data={data} />
-      </div>
+      <Active loaderData={getActiveLoaderData} data={data} />
     </Page>
   );
 };
