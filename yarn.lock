@@ -10192,10 +10192,10 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
-majestic@^1.2.24:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/majestic/-/majestic-1.6.1.tgz#a18fd18c850db60ce47494cf6e2182ac16c22753"
-  integrity sha512-ogZ/5JcJLUZU51fKW8/sOdV5bwvsiK6rzE1Wju0nRmZoYACb77TZLeMONaltpJAC8Y7O9IDilz/dkzBEyz8mgg==
+majestic@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/majestic/-/majestic-1.6.2.tgz#a15ef6afd60cb6d00e7206e11ec556911981b6b0"
+  integrity sha512-dvpWciv7hHL5RMpDL98mwEcC3j9uuF7U6s5+A7gmQw4tNIRt+DD9SrWk+ZhWkTcG4y2B6lnq/LkAhSzw3zI5WQ==
   dependencies:
     node-fetch "^2.3.0"
     open "^6.0.0"
