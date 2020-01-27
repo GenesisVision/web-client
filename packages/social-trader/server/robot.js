@@ -17,7 +17,7 @@ const robotTxt = dev => {
         return {
           ttl: TTL_OK,
           data: brotliCompressSync(`User-agent: *
-${url ? "Sitemap: " + url + "/sitemap.xml" : "Disallow: /"}`)
+${url ? `Sitemap: ${url}/sitemap.xml` : "Disallow: /"}`)
         };
       } catch (e) {
         return { data: null, error: e.message, ttl: TTL_ERROR };
