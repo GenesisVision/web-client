@@ -50,7 +50,7 @@ describe("BackButton tests", () => {
     expect(component.find(GVButton)).toHaveLength(0);
   });
 
-  describe("should render", () => {
+  xdescribe("should render", () => {
     beforeEach(() => {
       store = mockStore(getInitialStore(routerWithState));
       component = mount(<App store={store} />);
