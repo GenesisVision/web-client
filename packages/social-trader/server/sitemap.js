@@ -26,7 +26,7 @@ const generateSitemap = dev => {
     get: async () => {
       console.log("generate simemap.xml");
       try {
-        const hostname = "https://genesis.vision"; //process.env.HOSTNAME;
+        const hostname = process.env.HOSTNAME;
         console.info(process.env.HOSTNAME);
         if (hostname === undefined || typeof hostname !== "string")
           throw Error("process.env.HOSTNAME is not defined");
