@@ -27,6 +27,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
       )}
     >
       <FundAsset
+        url={asset.url}
         current={asset.percent}
         target={asset.mandatoryFundPercent}
         symbol={asset.asset}
