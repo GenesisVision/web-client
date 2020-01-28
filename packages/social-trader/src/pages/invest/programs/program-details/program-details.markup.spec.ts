@@ -29,12 +29,21 @@ describe("Program details - Page markup", () => {
   beforeAll(async () => {
     browser = await getBrowser();
     page = await browser.newPage();
-    const { authorize, openPage, waitForLoadBlurLoader } = useTestHelpers(page);
+    const {
+      authorize,
+      openPage,
+      waitForLoadBlurLoader,
+      getAuth
+    } = useTestHelpers(page);
     await authorize();
+    const authorization = await getAuth();
     await openPage(url);
     await waitForLoadBlurLoader(".details-statistics");
-    details = await programsApi.getProgramDetails(programName);
+    details = await programsApi.getProgramDetails(programName, {
+      authorization
+    });
     statistic = await programsApi.getProgramProfitPercentCharts(details.id, {
+      authorization,
       dateFrom: subtractDate(new Date(), 1, "month"),
       currencies: [statisticCurrency]
     });
