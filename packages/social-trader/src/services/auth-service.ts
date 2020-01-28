@@ -25,6 +25,8 @@ const storeToken = (token: string): void => {
 
 const getTokenData = () => decodeToken(getAuthArg());
 
+const generateTokenString = (token: string): string => `Bearer ${token}`;
+
 const getAuthArg = (ctx?: NextPageContext): string => {
   const tokenName = getTokenName();
   const token = getCookie(tokenName, ctx);
@@ -32,7 +34,7 @@ const getAuthArg = (ctx?: NextPageContext): string => {
     return "";
   }
 
-  return `Bearer ${token}`;
+  return generateTokenString(token);
 };
 
 const isAuthenticated = (): boolean => {
@@ -50,6 +52,7 @@ const removeToken = (): void => {
 };
 
 const authService = {
+  generateTokenString,
   isAuthenticated,
   getAuthArg,
   getTokenData,

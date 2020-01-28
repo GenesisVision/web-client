@@ -9,7 +9,7 @@ import { formatCurrencyValue } from "utils/formatter";
 
 const getTextContent = (node: React.ReactNode) => {
   // @ts-ignore
-  return node?.props?.labelText;
+  return (node && node.props && node.props.labelText) || "";
 };
 
 const getTestId = (label: string | React.ReactNode) =>
