@@ -6,6 +6,7 @@ import {
 } from "modules/alert-message/components/alert-message-list/alert-message";
 import puppeteer, { Browser, Page } from "puppeteer";
 import { LOGIN_ROUTE } from "routes/app.routes";
+import authService from "services/auth-service";
 import { getTokenName } from "utils/get-token-name";
 
 import translates from "../../public/locales/en/translations.json";
@@ -44,8 +45,10 @@ export const testT = (path: string) =>
 
 interface DoneCallback {
   (...args: any[]): any;
+
   fail(error?: string | { message: string }): any;
 }
+
 type ProvidesCallback = (cb: DoneCallback) => any;
 export type ItFuncType = {
   title: string;
@@ -73,7 +76,10 @@ export const useTestHelpers = (page: Page) => {
   const getAuth = async () => {
     const cookies = await page.cookies();
     const tokenName = getTokenName();
-    return cookies.find(cookie => cookie.name === tokenName);
+    const tokenCookie = cookies.find(cookie => cookie.name === tokenName);
+    return String(
+      tokenCookie ? authService.generateTokenString(tokenCookie.value) : ""
+    );
   };
   const waitForLoadBlurLoader = async (selector: string) => {
     await page.waitForSelector(`${selector} > .blur-container--loaded`);
