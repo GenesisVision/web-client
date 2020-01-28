@@ -44,15 +44,19 @@ describe("Program details withdrawing", () => {
   it(
     "should be withdraw all",
     async () => {
-      const { isDisabled, openPopup, submitForm, safeClick } = useTestHelpers(
-        page
-      );
+      const {
+        waitForLoadBlurLoader,
+        isDisabled,
+        openPopup,
+        submitForm,
+        safeClick
+      } = useTestHelpers(page);
       const withdrawAllButtonSelector = `button[type=submit]`;
       const withdrawAllSelector = `input[name=${WITHDRAW_FORM_FIELDS.withdrawAll}]`;
       const withdrawInputSelector = `input[name=${WITHDRAW_FORM_FIELDS.amount}]`;
 
       await openPopup(withdrawButtonSelector);
-      await page.waitForSelector(".dialog > .blur-container--loaded");
+      await waitForLoadBlurLoader(".dialog");
 
       const isInputDisabled = await isDisabled(withdrawInputSelector);
       expect(isInputDisabled).toBeFalsy();
@@ -121,6 +125,7 @@ describe("Program details withdrawing", () => {
     "should be open withdraw popup and withdraw",
     async () => {
       const {
+        waitForLoadBlurLoader,
         openPopup,
         enterAmount,
         submitForm,
@@ -131,7 +136,7 @@ describe("Program details withdrawing", () => {
       } = useTestHelpers(page);
       const successMessage = testT("withdraw-program.success-alert-message");
       await openPopup(withdrawButtonSelector);
-      await page.waitForSelector(".dialog > .blur-container--loaded");
+      await waitForLoadBlurLoader(".dialog");
 
       const subtitle = await hasElement(".dialog__subtitle");
       expect(subtitle).toBeTruthy();

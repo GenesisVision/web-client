@@ -74,6 +74,7 @@ describe("Program details investing", () => {
     "should be open invest popup and invest",
     async () => {
       const {
+        waitForLoadBlurLoader,
         openPopup,
         enterAmount,
         submitForm,
@@ -87,7 +88,7 @@ describe("Program details investing", () => {
         `deposit-asset.program.success-alert-message`
       );
       await openPopup(investButtonSelector);
-      await page.waitForSelector(".dialog > .blur-container--loaded");
+      await waitForLoadBlurLoader(".dialog");
 
       const subtitle = await hasElement(".dialog__subtitle");
       expect(subtitle).toBeTruthy();
