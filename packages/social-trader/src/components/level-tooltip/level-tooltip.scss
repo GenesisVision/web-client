@@ -5,7 +5,7 @@
 .level-tooltip {
   &__level {
     @include adaptive-padding(bottom, $padding-xxsmall);
-    font-size: 16px;
+    @include font-size(16px);
     font-weight: 700;
     color: $primary-color;
     letter-spacing: 0.23px;
@@ -13,9 +13,5 @@
     &:last-child {
       padding-bottom: 0;
     }
-  }
-
-  .statistics-item {
-    padding-bottom: 0;
   }
 }

@@ -5,16 +5,15 @@ import { useToLink } from "components/link/link.helper";
 import isAuthenticated from "decorators/is-authenticated";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import replaceParams from "utils/replace-params";
 
 const _NavigationTabs: React.FC<Props> = ({
-  t,
   exploreTabName,
   tabRoute,
   favoritesTabName
 }) => {
+  const [t] = useTranslation();
   const { linkCreator } = useToLink();
   const { pathname } = useRouter();
   const tab = pathname.includes(favoritesTabName)
@@ -56,17 +55,11 @@ const _NavigationTabs: React.FC<Props> = ({
   );
 };
 
-interface OwnProps {
+interface Props {
   exploreTabName: string;
   tabRoute: string;
   favoritesTabName: string;
 }
 
-interface Props extends OwnProps, WithTranslation {}
-
-const NavigationTabs = compose<React.FC<OwnProps>>(
-  withTranslation(),
-  React.memo,
-  isAuthenticated
-)(_NavigationTabs);
+const NavigationTabs = React.memo(isAuthenticated(_NavigationTabs));
 export default NavigationTabs;

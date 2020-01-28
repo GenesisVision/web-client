@@ -4,15 +4,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: $padding-xsmall;
+  @include adaptive-margin(bottom, $padding-xsmall);
 
   &__switch-wrapper {
-    margin-right: $padding-xxsmall;
+    @include adaptive-margin(right, $padding-xxsmall);
   }
 
   &__label {
-    font-size: $font-size-paragraph;
-    line-height: 2;
+    @include font-size($font-size-paragraph);
+    @include line-height(2);
     letter-spacing: 0.2px;
   }
 }

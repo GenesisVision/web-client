@@ -8,7 +8,6 @@ import { GV_BTN_SIZE } from "components/gv-button";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
-import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
@@ -143,12 +142,12 @@ const _Investment: React.FC<Props> = ({
           personalDetails.isInvested &&
           personalDetails.canInvest &&
           !isOwnAsset && (
-            <StatisticItemContainerBlock bottomContent>
+            <StatisticItem label={"Reinvest"} hideLabel>
               <ProgramReinvestingContainer
                 id={id}
                 isReinvesting={personalDetails.isReinvest}
               />
-            </StatisticItemContainerBlock>
+            </StatisticItem>
           )}
         <StatisticItem
           condition={

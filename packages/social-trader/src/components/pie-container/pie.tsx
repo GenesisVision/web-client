@@ -31,12 +31,12 @@ export const MultiPie: React.FC<
       circleSize={circleSize}
       withSubstrate={withSubstrate}
     >
-      {circles.map(({ value, start = 0, end, begin = 0, color, name }) => {
+      {circles.map(({ value, start = 0, end, begin = 0, color, name }, i) => {
         const valuePercent = calcPercent(value, start, end);
         const strokeDasharray = calcDash(valuePercent);
         return (
           <PieCircle
-            key={name}
+            key={i}
             selected={!!over && over === name}
             onMouseLeave={onMouseLeave}
             onMouseOver={onMouseOver ? onMouseOver(name) : undefined}

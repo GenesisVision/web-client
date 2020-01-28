@@ -1,6 +1,9 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_sizes";
 
+$type-size: 18px;
+$transition-size: $type-size/$divider-text;
+
 .portfolio-event-logo {
   position: relative;
   &--with-asset {
@@ -18,11 +21,11 @@
     }
     &--with-asset {
       position: absolute;
-      top: 18px / $divider-text;
-      left: 18px / $divider-text;
+      top: $transition-size;
+      left: $transition-size;
       @include media-breakpoint-landscape-phone() {
-        top: 18px;
-        left: 18px;
+        top: $type-size;
+        left: $type-size;
       }
       z-index: 1;
     }
@@ -30,7 +33,7 @@
 
   &__photo {
     display: block;
-    @include adaptive-margin(right, 24px);
+    @include adaptive-margin(right, $transition-size);
     box-sizing: border-box;
     @include height(32px);
     @include width(32px);

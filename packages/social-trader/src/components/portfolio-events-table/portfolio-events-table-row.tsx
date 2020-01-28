@@ -1,6 +1,4 @@
-import "./portfolio-events-table.scss";
-import "./portfolio-events.scss";
-
+import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
@@ -23,23 +21,23 @@ const _PortfolioEventsTableRow: React.FC<Props> = ({
   hideFeeColumn
 }) => (
   <TableRow stripy>
-    <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-      {formatDate(event.date)}
-    </TableCell>
-    <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-      <div className="portfolio-events-all-table__description">
-        {event.assetDetails && (
-          <PortfolioEventLogo
-            withAsset={eventLocation !== EVENT_LOCATION.Asset}
-            assetDetails={event.assetDetails}
-            icon={event.icon}
-          />
-        )}
-        <div>{event.title}</div>
-      </div>
+    <TableCell>{formatDate(event.date)}</TableCell>
+    <TableCell>
+      <AvatarWithName
+        avatar={
+          event.assetDetails && (
+            <PortfolioEventLogo
+              withAsset={eventLocation !== EVENT_LOCATION.Asset}
+              assetDetails={event.assetDetails}
+              icon={event.icon}
+            />
+          )
+        }
+        name={event.title}
+      />
     </TableCell>
     {!hideFeeColumn && (
-      <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+      <TableCell>
         <PortfolioEventFeesTooltip
           fees={event.feesInfo}
           condition={event.totalFeesAmount !== null}
@@ -56,10 +54,10 @@ const _PortfolioEventsTableRow: React.FC<Props> = ({
         </PortfolioEventFeesTooltip>
       </TableCell>
     )}
-    <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--details">
+    <TableCell>
       <PortfolioEventsDetails extendedInfo={event.extendedInfo} />
     </TableCell>
-    <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
+    <TableCell>
       <Profitability
         condition={!!event.amount}
         value={EVENT_PROFITABILITY_VALUES[event.changeState]}

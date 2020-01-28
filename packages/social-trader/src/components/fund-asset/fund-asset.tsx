@@ -87,9 +87,9 @@ interface Props extends FundAssetInfo {
   type: FUND_ASSET_TYPE;
   last: boolean;
   removable?: boolean;
-  removeHandle?(
+  removeHandle?: (
     currency: Currency
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   className?: string;
 }
 

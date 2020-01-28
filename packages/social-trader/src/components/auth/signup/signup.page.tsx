@@ -18,7 +18,10 @@ const _SignUpPage: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <PageSeoWrapper title={t("auth.signup.title")}>
+    <PageSeoWrapper
+      description={"Sign up to the Genesis Vision"}
+      title={t("auth.signup.title")}
+    >
       <div className="signup">
         <CaptchaContainer
           request={service.signUp}

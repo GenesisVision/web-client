@@ -1,7 +1,5 @@
-import "./managers-table.scss";
-
+import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import TableCell from "components/table/components/table-cell";
@@ -18,17 +16,19 @@ interface IManagersTableRowProps {
 const _ManagersTableRow: React.FC<IManagersTableRowProps> = ({ manager }) => {
   const { contextTitle } = useToLink();
   return (
-    <TableRow className="managers-table__row">
-      <TableCell className="managers-table__cell--username">
-        <ProfileAvatar url={manager.avatar} alt={manager.username} />
+    <TableRow>
+      <TableCell>
         <Link to={managerToPathCreator(manager.url, contextTitle)}>
-          <GVButton variant="text" color="secondary">
-            {manager.username}
-          </GVButton>
+          <AvatarWithName
+            avatar={
+              <ProfileAvatar url={manager.avatar} alt={manager.username} />
+            }
+            name={manager.username}
+          />
         </Link>
       </TableCell>
-      <TableCell className="">{manager.assets.join(", ")}</TableCell>
-      <TableCell className="">{localizedDate(manager.regDate)}</TableCell>
+      <TableCell>{manager.assets.join(", ")}</TableCell>
+      <TableCell>{localizedDate(manager.regDate)}</TableCell>
     </TableRow>
   );
 };

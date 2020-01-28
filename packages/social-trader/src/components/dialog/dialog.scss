@@ -95,11 +95,6 @@
   }
 
   &__field {
-    &:last-child {
-      & .statistics-item {
-        padding-bottom: 0;
-      }
-    }
     &:not(:last-child) {
       @include adaptive-margin(bottom, $padding-xsmall);
     }

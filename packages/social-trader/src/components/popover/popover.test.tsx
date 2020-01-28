@@ -21,6 +21,6 @@ describe("Popover tests", () => {
     const component = shallow(
       <Popover className={anyClass} anchorEl={() => {}} />
     );
-    expect(component.find(`.${anyClass}`)).toHaveLength(1);
+    expect(component.find(`.${anyClass}`)).toHaveLength(2);
   });
 });

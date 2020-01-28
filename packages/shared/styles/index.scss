@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap");
 @import "./_colors.scss";
 @import "./_typography.scss";
+@import "./_sizes.scss";
 
 body {
   margin: 0;
@@ -42,7 +43,6 @@ a {
 
 $scroll-background: transparent;
 $scroll-thumb-color: $text-dark-color;
-$scroll-width: 6px;
 ::-webkit-scrollbar {
   width: $scroll-width;
   height: $scroll-width;

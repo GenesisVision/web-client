@@ -1,6 +1,3 @@
-import "./portfolio-events-table.scss";
-import "./portfolio-events.scss";
-
 import PortfolioEventsTableFiltering from "components/portfolio-events-table/portfolio-events-table-filtering";
 import PortfolioEventsTableHeaderCell from "components/portfolio-events-table/portfolio-events-table-header-cell";
 import {

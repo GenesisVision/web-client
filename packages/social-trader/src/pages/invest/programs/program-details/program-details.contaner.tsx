@@ -14,13 +14,13 @@ import { ProgramDescriptionDataType } from "pages/invest/programs/program-detail
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import filesService from "services/file-service";
 import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
-import { CurrencyEnum } from "utils/types";
 
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
@@ -58,6 +58,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   data: description,
   route
 }) => {
+  const [t] = useTranslation();
   const dispatch = useDispatch();
   const levelsParameters = useSelector(levelParametersSelector);
   const {
@@ -113,8 +114,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   return (
     <Page
-      title={title}
-      description={description.publicInfo.description}
+      title={`${
+        assetType === ASSET.FOLLOW
+          ? t("follows-page.title")
+          : t("programs-page.title")
+      } - ${title}`}
+      description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={filesService.getFileUrl(description.publicInfo.logo)}
       schemas={[getSchema(description)]}
     >
