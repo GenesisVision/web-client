@@ -1,6 +1,5 @@
 const sitemap = require("sitemap");
 const fetch = require("isomorphic-unfetch");
-const { brotliCompressSync } = require("zlib");
 const cacheableResponse = require("cacheable-response");
 
 const programRoute = program => `invest/programs/${program}`;
@@ -27,7 +26,7 @@ const generateSitemap = dev => {
       console.log("generate simemap.xml");
       try {
         const hostname = process.env.HOSTNAME;
-        console.info(process.env.HOSTNAME);
+        console.info(hostname);
         if (hostname === undefined || typeof hostname !== "string")
           throw Error("process.env.HOSTNAME is not defined");
 
