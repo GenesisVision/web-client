@@ -6,6 +6,7 @@ import {
 } from "modules/alert-message/components/alert-message-list/alert-message";
 import puppeteer, { Browser, Page } from "puppeteer";
 import { LOGIN_ROUTE } from "routes/app.routes";
+import { getTokenName } from "utils/get-token-name";
 
 import translates from "../../public/locales/en/translations.json";
 
@@ -69,6 +70,11 @@ export const describeOnPage = (url: string, tests: ItFuncType[]) => () => {
 };
 
 export const useTestHelpers = (page: Page) => {
+  const getAuth = async () => {
+    const cookies = await page.cookies();
+    const tokenName = getTokenName();
+    return cookies.find(cookie => cookie.name === tokenName);
+  };
   const waitForLoadBlurLoader = async (selector: string) => {
     await page.waitForSelector(`${selector} > .blur-container--loaded`);
   };
@@ -178,6 +184,7 @@ export const useTestHelpers = (page: Page) => {
   };
 
   return {
+    getAuth,
     waitForLoadBlurLoader,
     getStatisticsItemValue,
     isDisabled,
