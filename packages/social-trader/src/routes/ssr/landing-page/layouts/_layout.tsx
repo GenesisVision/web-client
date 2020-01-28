@@ -13,7 +13,7 @@ import {
   titleMeta
 } from "utils/seo";
 
-const _Layout: React.FC<Props> = ({ title, children }) => {
+const _Layout: React.FC<Props> = ({ description, title, children }) => {
   useRefLink();
   return (
     <div className="landing-page">
@@ -25,7 +25,9 @@ const _Layout: React.FC<Props> = ({ title, children }) => {
         {imageMeta("https://genesis.vision/platform.png")}
         <meta property="og:image:type" content="image/png" />
         {titleMeta("Genesis Vision")}
-        {descriptionMeta("Genesis Vision - Social Trading Platform")}
+        {descriptionMeta(
+          description || "Genesis Vision - Social Trading Platform"
+        )}
       </Head>
       <LPHeader />
       {children}
@@ -37,6 +39,7 @@ const _Layout: React.FC<Props> = ({ title, children }) => {
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  description?: string;
   title: string;
 }
 

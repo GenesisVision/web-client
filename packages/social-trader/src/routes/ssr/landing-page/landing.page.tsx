@@ -34,7 +34,10 @@ const _LandingPage: React.FC<Props> = ({
   refLink
 }) => {
   return (
-    <Layout title="Genesis Vision">
+    <Layout
+      description="Next generation social trading platform allows you to trade Crypto, Forex and Stocks, create and manage own funds, invest and follow best trading strategies."
+      title="Genesis Vision"
+    >
       <main className="home">
         <FirstScreen news={news} />
         <EventsContainer events={events} />
