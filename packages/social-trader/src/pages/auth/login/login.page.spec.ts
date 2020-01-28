@@ -1,5 +1,4 @@
 import { Browser, Page } from "puppeteer";
-import { getTokenName } from "utils/get-token-name";
 import {
   ASYNC_TEST_TIMEOUT,
   getBrowser,
@@ -16,9 +15,8 @@ describe("Login", () => {
     await authorize();
   }, ASYNC_TEST_TIMEOUT);
   it("should be log in on login form", async () => {
-    const cookies = await page.cookies();
-    const tokenName = getTokenName();
-    const tokenCookie = cookies.find(cookie => cookie.name === tokenName);
+    const { getAuth } = useTestHelpers(page);
+    const tokenCookie = await getAuth();
     expect(!!tokenCookie).toBe(true);
   });
   afterAll(() => {
