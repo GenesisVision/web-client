@@ -26,13 +26,13 @@ const generateSitemap = dev => {
     get: async () => {
       console.log("generate simemap.xml");
       try {
-        const url = process.env.HOSTNAME;
+        const hostname = "https://genesis.vision"; //process.env.HOSTNAME;
         console.info(process.env.HOSTNAME);
-        if (url === undefined || typeof url !== "string")
+        if (hostname === undefined || typeof hostname !== "string")
           throw Error("process.env.HOSTNAME is not defined");
 
         const map = new sitemap.SitemapStream({
-          hostname: process.env.HOSTNAME
+          hostname
         });
 
         const response = await fetch(
