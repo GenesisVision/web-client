@@ -17,7 +17,7 @@
     "production": "cross-env NODE_ENV=production node index.js",
     "build:analyze": "cross-env ANALYZE=true yarn build",
     "test": "react-scripts test --env=jsdom",
-    "test:ui": "majestic",
+    "test:ui": "majestic --port=4000",
     "eject": "react-scripts eject"
   },
   "majestic": {
