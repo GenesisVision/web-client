@@ -9,13 +9,14 @@ const ACCEPT_PARAM_NAME = "ACCEPTCONSENT";
 const CookieMessage: React.FC = () => {
   const [hasAcceptance, setAcceptance] = useState(true);
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const cookie = getCookie(ACCEPT_PARAM_NAME);
     if (!cookie) setAcceptance(false);
-  }, [hasAcceptance]);
+  }, [window]);
   const handleClick = useCallback(() => {
     setCookie(ACCEPT_PARAM_NAME, "y");
     setAcceptance(true);
-  }, [hasAcceptance]);
+  }, []);
   if (hasAcceptance) return null;
   return (
     <div className="cookie-message">
