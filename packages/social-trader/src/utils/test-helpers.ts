@@ -12,6 +12,7 @@ import { getTokenName } from "utils/get-token-name";
 import translates from "../../public/locales/en/translations.json";
 
 dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env.production" });
 
 export const ASYNC_TEST_TIMEOUT = 25 * 1000;
 export const DATA_TEST_ATTR = "data-test-id";
