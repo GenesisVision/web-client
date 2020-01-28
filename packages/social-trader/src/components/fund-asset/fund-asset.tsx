@@ -7,6 +7,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 
 const _FundAsset: React.FC<Props> = ({
+  url,
   current: percent,
   target: mandatoryFundPercent,
   currency,
@@ -53,6 +54,7 @@ const _FundAsset: React.FC<Props> = ({
           )}
         >
           <CurrencyItem
+            url={url}
             logo={icon}
             small
             name={!!currency && currencyName}
@@ -87,9 +89,9 @@ interface Props extends FundAssetInfo {
   type: FUND_ASSET_TYPE;
   last: boolean;
   removable?: boolean;
-  removeHandle?(
+  removeHandle?: (
     currency: Currency
-  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   className?: string;
 }
 

@@ -27,7 +27,12 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
                 key={idx}
                 onClick={() => handleClick(asset.asset)}
               >
-                <CurrencyItem logo={asset.icon} name={asset.name} small />
+                <CurrencyItem
+                  url={asset.url}
+                  logo={asset.icon}
+                  name={asset.name}
+                  small
+                />
               </li>
             ))}
           </ul>

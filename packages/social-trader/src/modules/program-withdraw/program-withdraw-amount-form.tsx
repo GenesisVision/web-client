@@ -41,7 +41,7 @@ const _ProgramWithdrawAmountForm: React.FC<
 
   const setMaxAmount = useCallback(() => {
     setFieldValue(
-      FIELDS.amount,
+      WITHDRAW_FORM_FIELDS.amount,
       formatCurrencyValue(availableToWithdraw, programCurrency)
     );
     setEmptyInit(false);
@@ -55,7 +55,7 @@ const _ProgramWithdrawAmountForm: React.FC<
             wide
             type="checkbox"
             color="primary"
-            name={FIELDS.withdrawAll}
+            name={WITHDRAW_FORM_FIELDS.withdrawAll}
             label={<span>{t("withdraw-program.withdraw-all")}</span>}
             component={GVCheckbox}
           />
@@ -64,24 +64,25 @@ const _ProgramWithdrawAmountForm: React.FC<
       <InputAmountField
         wide
         emptyInit={emptyInit}
-        name={FIELDS.amount}
+        name={WITHDRAW_FORM_FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
         isAllow={isAllow}
-        disabled={values[FIELDS.withdrawAll]}
+        disabled={values[WITHDRAW_FORM_FIELDS.withdrawAll]}
         setMax={isOwner ? setMaxAmount : undefined}
       />
-      {programCurrency !== accountCurrency && values[FIELDS.amount] !== 0 && (
-        <NumberFormat
-          value={formatCurrencyValue(
-            convertFromCurrency(values[FIELDS.amount]!, rate),
-            accountCurrency
-          )}
-          prefix="≈ "
-          suffix={` ${accountCurrency}`}
-          displayType="text"
-        />
-      )}
+      {programCurrency !== accountCurrency &&
+        values[WITHDRAW_FORM_FIELDS.amount] !== 0 && (
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(values[WITHDRAW_FORM_FIELDS.amount]!, rate),
+              accountCurrency
+            )}
+            prefix="≈ "
+            suffix={` ${accountCurrency}`}
+            displayType="text"
+          />
+        )}
       <DialogButtons>
         <GVButton
           wide
@@ -89,7 +90,8 @@ const _ProgramWithdrawAmountForm: React.FC<
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
           disabled={
-            (!values[FIELDS.amount] || !isValid) && !values[FIELDS.withdrawAll]
+            (!values[WITHDRAW_FORM_FIELDS.amount] || !isValid) &&
+            !values[WITHDRAW_FORM_FIELDS.withdrawAll]
           }
         >
           {t("withdraw-program.next")}
@@ -105,24 +107,31 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
     displayName: "withdraw-form",
     isInitialValid: true,
     mapPropsToValues: ({ formValues: { amount, withdrawAll } }) => ({
-      [FIELDS.amount]: amount,
-      [FIELDS.withdrawAll]: withdrawAll
+      [WITHDRAW_FORM_FIELDS.amount]: amount,
+      [WITHDRAW_FORM_FIELDS.withdrawAll]: withdrawAll
     }),
     validationSchema: ({ t, availableToWithdraw }: Props) =>
       object().shape({
-        [FIELDS.withdrawAll]: boolean(),
-        [FIELDS.amount]: mixed().when(FIELDS.withdrawAll, {
-          is: false,
-          then: number()
-            .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
-            .max(
-              availableToWithdraw,
-              t("withdraw-program.validation.amount-more-than-available")
-            )
-        })
+        [WITHDRAW_FORM_FIELDS.withdrawAll]: boolean(),
+        [WITHDRAW_FORM_FIELDS.amount]: mixed().when(
+          WITHDRAW_FORM_FIELDS.withdrawAll,
+          {
+            is: false,
+            then: number()
+              .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
+              .max(
+                availableToWithdraw,
+                t("withdraw-program.validation.amount-more-than-available")
+              )
+          }
+        )
       }),
     handleSubmit: (values, { props }) => {
-      if (!values[FIELDS.amount] && !values[FIELDS.withdrawAll]) return;
+      if (
+        !values[WITHDRAW_FORM_FIELDS.amount] &&
+        !values[WITHDRAW_FORM_FIELDS.withdrawAll]
+      )
+        return;
       props.onSubmit(values);
     }
   }),
@@ -130,7 +139,7 @@ const ProgramWithdrawAmountForm = compose<React.ComponentType<OwnProps>>(
 )(_ProgramWithdrawAmountForm);
 export default ProgramWithdrawAmountForm;
 
-enum FIELDS {
+export enum WITHDRAW_FORM_FIELDS {
   amount = "amount",
   withdrawAll = "withdrawAll"
 }
@@ -148,6 +157,6 @@ interface OwnProps {
 interface Props extends WithTranslation, OwnProps {}
 
 export interface IProgramWithdrawAmountFormValues {
-  [FIELDS.amount]: number;
-  [FIELDS.withdrawAll]: boolean;
+  [WITHDRAW_FORM_FIELDS.amount]: number;
+  [WITHDRAW_FORM_FIELDS.withdrawAll]: boolean;
 }

@@ -3,6 +3,11 @@ import { CurrencyEnum } from "utils/types";
 
 import { checkCurrencyValue, CURRENCY_FRACTIONS } from "./currency-converter";
 
+export const separateThousand = (
+  number: number | string,
+  separator: string = " "
+): string => number.toLocaleString("en").replace(/,/g, separator);
+
 const reverseString = (value: string | number): string =>
   String(value)
     .split("")

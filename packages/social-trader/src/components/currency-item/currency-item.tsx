@@ -9,6 +9,7 @@ import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
 
 const _CurrencyItem: React.FC<Props> = ({
+  url,
   symbol,
   big,
   rate,
@@ -59,7 +60,7 @@ const _CurrencyItem: React.FC<Props> = ({
   return (
     (clickable && (
       <>
-        <a title={active} href={getActiveUrl(active)} onClick={openPopup}>
+        <a title={active} href={getActiveUrl(url)} onClick={openPopup}>
           {renderItemContent()}
         </a>
         <ActivePopup
@@ -74,6 +75,7 @@ const _CurrencyItem: React.FC<Props> = ({
 };
 
 interface Props {
+  url?: string;
   symbol?: string | CurrencyEnum;
   big?: boolean;
   rate?: number;
