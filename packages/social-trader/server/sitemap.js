@@ -114,7 +114,7 @@ const generateSitemap = dev => {
         const data = await sitemap.streamToPromise(map);
 
         return {
-          data: brotliCompressSync(data),
+          data,
           ttl: TTL_OK
         };
       } catch (e) {
@@ -128,7 +128,6 @@ const generateSitemap = dev => {
       }
 
       res.header("Content-Type", "application/xml");
-      res.header("Content-Encoding", "br");
 
       res.send(data);
     }
