@@ -24,14 +24,10 @@ import {
   openPositionsTableSelector,
   tradesTableSelector
 } from "./reducers/account-history.reducer";
+import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 
 const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
-);
-const AccountDetailsSubscriptions = dynamic(() =>
-  import(
-    "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions"
-  )
 );
 
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
