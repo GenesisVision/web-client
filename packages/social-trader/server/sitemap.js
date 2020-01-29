@@ -84,7 +84,7 @@ const generateSitemap = dev => {
         // Invest page
         map.write({ url: "invest", changefreq: DAILY, priority: 0.7 });
         // Trading page
-        map.write({ url: "trading", changefreq: MONTHLY, priority: 0.7 });
+        map.write({ url: "trade", changefreq: MONTHLY, priority: 0.7 });
         // Referral program page
         map.write({
           url: "referral-program",
