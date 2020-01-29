@@ -5,11 +5,9 @@ import { FollowIcon } from "components/icon/follow-icon";
 import { FundsIcon } from "components/icon/funds-icon";
 import { HistoryIcon } from "components/icon/history-icon";
 import { InvestIcon } from "components/icon/invest-icon";
-import { Mt4Icon } from "components/icon/mt4-icon";
 import { Mt5Icon } from "components/icon/mt5-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
-import { StatisticIcon } from "components/icon/statistic-icon";
 import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
 import { TradeIcon } from "components/icon/trade-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
@@ -23,7 +21,6 @@ import * as React from "react";
 import { HOME_ROUTE } from "./app.routes";
 import {
   EVENTS_ROUTE,
-  FINANCIAL_STATISTIC_ROUTE,
   INVESTMENTS_ROUTE,
   OVERVIEW_ROUTE,
   TRADING_ROUTE
@@ -34,11 +31,7 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import {
-  META_TRADER_4_ROUTE,
-  META_TRADER_5_ROUTE,
-  TRADE_ROUTE
-} from "./trade.routes";
+import { META_TRADER_5_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
   route?: string;
@@ -96,12 +89,12 @@ const mainMenuItemsUnion = [
         label: "navigation.gv-follow"
       },
       {
-        Icon: FundsIcon,
+        Icon: ProgramsIcon,
         route: GV_FUNDS_ROUTE,
         label: "navigation.gv-funds"
       },
       {
-        Icon: ProgramsIcon,
+        Icon: FundsIcon,
         route: GV_PROGRAMS_ROUTE,
         label: "navigation.gv-programs"
       }
