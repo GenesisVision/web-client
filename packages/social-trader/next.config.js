@@ -45,6 +45,10 @@ function create(path) {
       return config;
     }
   };
+  nextConfig.experimental = {
+    ...nextConfig.experimental,
+    css: true
+  };
   return withPlugins(
     [
       analyzer,
