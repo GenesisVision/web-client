@@ -37,6 +37,7 @@ import {
   MANAGER_SLUG_URL_PARAM_NAME
 } from "routes/manager.routes";
 import {
+  PROGRAM_BANNERS_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SETTINGS,
@@ -85,6 +86,11 @@ export const composeFollowDetailsUrl = (slugUrl: string): string =>
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const composeProgramBannersUrl = (slugUrl: string): string =>
+  replaceParams(PROGRAM_BANNERS_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
