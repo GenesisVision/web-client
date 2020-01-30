@@ -9,7 +9,7 @@
     "logrocket": "^1.0.6",
     "logrocket-react": "^4.0.1",
     "next": "../../next-9.2.1.tgz",
-    "majestic": "../../majestic-1.6.2_2.tgz",
+    "majestic": "../../majestic.tgz",
     "shared": "^1.0.0"
   },
   "scripts": {
