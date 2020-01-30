@@ -11,10 +11,12 @@ import { restorePassword } from "../services/forgot-password.service";
 import PasswordRestore, {
   IRestorePasswordFormValues
 } from "./password-restore";
+import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 
 const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
   const dispatch = useDispatch();
   const { sendRequest, errorMessage } = useApiRequest({
+    middleware: [() => Push(DASHBOARD_ROUTE)],
     catchCallback: ({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
         Push(LOGIN_ROUTE);
