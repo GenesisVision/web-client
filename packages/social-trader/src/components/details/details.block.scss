@@ -5,7 +5,7 @@
 .details-block {
   box-sizing: border-box;
   margin-bottom: $padding-xsmall;
-  @include adaptive-border-radius($border-radius);
+  @include adaptive-border-radius($border-radius-middle);
 
   &--row {
     display: flex;
@@ -21,7 +21,7 @@
     @include vertical-paddings($padding-small);
     @include horizontal-paddings($padding-small);
     border: 1px solid rgba($main-color, 0.06);
-    @include adaptive-border-radius($border-radius);
+    @include adaptive-border-radius($border-radius-middle);
   }
 
   &--landscape-tablet {
