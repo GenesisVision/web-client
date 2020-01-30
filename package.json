@@ -142,7 +142,6 @@
     "jasmine-check": "^1.0.0-rc.0",
     "jest-environment-puppeteer": "^4.4.0",
     "lint-staged": "^7.1.0",
-    "majestic": "^1.6.2",
     "next-react-svg": "^1.1.0",
     "prettier": "^1.12.1",
     "puppeteer": "^2.0.0",
