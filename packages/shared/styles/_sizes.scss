@@ -189,7 +189,7 @@ $avatar-size-mobile: $avatar-size/$divider-title;
 }
 
 @mixin adaptive-border-radius($size) {
-  border-radius: $size/$divider-padding;
+  border-radius: $size/$divider-text;
   @include media-breakpoint-landscape-phone() {
     border-radius: $size;
   }
