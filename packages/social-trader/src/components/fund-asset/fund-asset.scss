@@ -42,18 +42,18 @@ $remove-button-color: #293842;
 
 .fund-asset {
   box-sizing: border-box;
-  height: $asset-height-mobile;
-  font-size: $font-size-small-mobile;
-  line-height: $font-size-small-mobile;
+  @include height($asset-height);
+  @include font-size($font-size-small);
+  @include line-height($font-size-small);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-xxsmall-mobile;
-  border-radius: $border-radius-middle-mobile;
+  @include adaptive-full-padding($padding-xxsmall);
+  @include adaptive-border-radius($border-radius-middle);
   font-weight: 400;
-  margin-right: $padding-xsmall/2/$divider-text;
-  margin-bottom: $padding-xsmall/2/$divider-text;
+  @include adaptive-margin(right, $padding-xsmall/2);
+  @include adaptive-margin(bottom, $padding-xsmall/2);
   position: relative;
   &:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -86,6 +86,14 @@ $remove-button-color: #293842;
     transform: rotate(45deg);
     cursor: pointer;
     user-select: none;
+    @include media-breakpoint-landscape-phone() {
+      top: -$remove-button-size/2;
+      right: -$remove-button-size/2;
+      width: $remove-button-size;
+      height: $remove-button-size;
+      border-radius: $remove-button-size;
+      font-size: 20px;
+    }
   }
   &--others-count {
     cursor: pointer;
@@ -120,24 +128,6 @@ $remove-button-color: #293842;
   &__container {
     &--others-count {
       cursor: pointer;
-    }
-  }
-
-  @include media-breakpoint-landscape-phone() {
-    height: $asset-height;
-    font-size: $font-size-paragraph;
-    padding: $padding-xxsmall;
-    margin-right: $padding-xsmall/2;
-    margin-bottom: $padding-xsmall/2;
-    border-radius: $border-radius-middle;
-
-    &__remove-button {
-      top: -$remove-button-size/2;
-      right: -$remove-button-size/2;
-      width: $remove-button-size;
-      height: $remove-button-size;
-      border-radius: $remove-button-size;
-      font-size: 20px;
     }
   }
   &--text {
