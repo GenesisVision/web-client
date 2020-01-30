@@ -18,7 +18,9 @@ const lineFunction = line()
 const _SimpleChart: React.FC<Props> = ({
   data,
   height = DEFAULT_HEIGHT,
-  width = DEFAULT_WIDTH
+  width = DEFAULT_WIDTH,
+  x = 0,
+  y = 0
 }) => {
   const length = data.length;
   if (!length) return null;
@@ -44,7 +46,7 @@ const _SimpleChart: React.FC<Props> = ({
 
   if (!path) return null;
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} x={x} y={y}>
       <path d={path} stroke={color} strokeWidth={1} fill="none" />
     </svg>
   );
@@ -54,6 +56,8 @@ interface Props {
   data: SimpleChartPoint[];
   width?: number;
   height?: number;
+  x?: number;
+  y?: number;
 }
 
 const SimpleChart = React.memo(_SimpleChart);
