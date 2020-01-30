@@ -123,7 +123,7 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: () => Promise<NotificationList>;
+  fetchNotifications: () => void;
   clearNotifications: () => void;
   closeNotifications: () => void;
   count: number;

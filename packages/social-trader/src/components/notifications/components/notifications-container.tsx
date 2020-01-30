@@ -4,84 +4,56 @@ import {
   serviceGetNotifications
 } from "components/notifications/services/notifications.services";
 import Sidebar, { SIDEBAR_POSITION } from "components/sidebar/sidebar";
-import { NotificationList, NotificationViewModel } from "gv-api-web";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
-import { connect } from "react-redux";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { notificationsCountSelector } from "reducers/header-reducer";
 import { RootState } from "reducers/root-reducer";
-import { compose } from "redux";
-import { MiddlewareDispatch } from "utils/types";
 
 const Notifications = dynamic(() =>
   import("components/notifications/components/notifications")
 );
 
-const _NotificationsContainer: React.FC<Props> = ({
-  service,
-  open,
-  notifications,
-  count,
-  total
-}) => {
+const _NotificationsContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const open = useSelector((state: RootState) => state.notifications.isOpen);
+  const total = useSelector((state: RootState) => state.notifications.total);
+  const count = useSelector(notificationsCountSelector);
+  const notifications = useSelector(
+    (state: RootState) => state.notifications.notifications
+  );
+
+  const toggleNotifications = useCallback(
+    () => dispatch(notificationsToggleAction(false)),
+    []
+  );
+  const getNotifications = useCallback(
+    () => dispatch(serviceGetNotifications()),
+    []
+  );
+  const clearNotifications = useCallback(
+    () => dispatch(serviceClearNotifications()),
+    []
+  );
+
   return (
     <Sidebar
       open={open}
       position={SIDEBAR_POSITION.RIGHT}
-      onClose={service.toggleNotifications}
+      onClose={toggleNotifications}
     >
       <Notifications
-        fetchNotifications={service.getNotifications}
+        fetchNotifications={getNotifications}
         count={count}
         total={total}
         notifications={notifications}
-        clearNotifications={service.clearNotifications}
-        closeNotifications={service.toggleNotifications}
+        clearNotifications={clearNotifications}
+        closeNotifications={toggleNotifications}
       />
     </Sidebar>
   );
 };
 
-const mapStateToProps = (state: RootState): StateProps => {
-  const { notifications } = state;
-  return {
-    open: notifications.isOpen,
-    total: notifications.total,
-    count: notificationsCountSelector(state),
-    notifications: notifications.notifications
-  };
-};
-
-const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  service: {
-    toggleNotifications: () => dispatch(notificationsToggleAction(false)),
-    getNotifications: () => dispatch(serviceGetNotifications()),
-    clearNotifications: () => dispatch(serviceClearNotifications())
-  }
-});
-
-const NotificationsContainer = compose<React.ComponentType>(
-  connect<StateProps, DispatchProps, null, RootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_NotificationsContainer);
+const NotificationsContainer = React.memo(_NotificationsContainer);
 export default NotificationsContainer;
-
-interface StateProps {
-  count: number;
-  open: boolean;
-  total: number;
-  notifications: NotificationViewModel[];
-}
-
-interface DispatchProps {
-  service: {
-    getNotifications(): Promise<NotificationList>;
-    clearNotifications(): void;
-    toggleNotifications(): void;
-  };
-}
-
-interface Props extends StateProps, DispatchProps {}
