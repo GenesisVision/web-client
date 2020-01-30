@@ -20,6 +20,7 @@ import authService from "services/auth-service";
 import { MiddlewareDispatch, SetSubmittingType, TGetState } from "utils/types";
 
 import { forgotPasswordAction } from "../actions/forgot-password.actions";
+import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 
 export const forgotPassword = (data: ForgotPasswordViewModel) => (
   dispatch: MiddlewareDispatch
@@ -35,7 +36,7 @@ export const restorePassword = (
   authApi.resetPassword({ body: model }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
-    // Push(HOME_ROUTE);
+    Push(DASHBOARD_ROUTE);
   });
 
 export const sendForgotPasswordEmail = (
