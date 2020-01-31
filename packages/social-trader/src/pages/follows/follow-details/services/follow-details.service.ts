@@ -1,12 +1,8 @@
 import { getDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "components/table/components/table.types";
-import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { ROLE, ROLE_ENV } from "constants/constants";
 import {
-  InvestmentEventViewModels,
   SignalProviderSubscribers,
   TradesSignalViewModel,
   TradesViewModel
@@ -14,14 +10,12 @@ import {
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import brokersApi from "services/api-client/brokers-api";
 import followApi from "services/api-client/follow-api";
 import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {
-  fetchEventsAction,
   fetchFollowAbsoluteProfitChartAction,
   fetchFollowBalanceChartAction,
   fetchFollowDescriptionAction,
@@ -36,14 +30,6 @@ import {
   tradesTableSelector
 } from "../reducers/follow-history.reducer";
 import { FollowStatisticResult } from "./follow-details.types";
-
-export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
-  filters?: ComposeFiltersAllType
-): ActionType<Promise<InvestmentEventViewModels>> =>
-  fetchEventsAction(id, eventLocation, filters);
-
-export const getFollowBrokers = (id: string) =>
-  brokersApi.getBrokersForProgram(id);
 
 export const fetchFollowDescriptionCtx = (id: string, ctx?: NextPageContext) =>
   followApi.getFollowAssetDetails(id, {
@@ -162,55 +148,6 @@ export enum EVENT_LOCATION {
   Dashboard = "Dashboard",
   EventsAll = "EventsAll"
 }
-
-export const fetchPortfolioEventsWithoutTable = (
-  eventLocation: EVENT_LOCATION,
-  filters?: any
-): Promise<InvestmentEventViewModels> => {
-  const authorization = authService.getAuthArg();
-  let request: (
-    authorization: string,
-    opts?: Object
-  ) => Promise<InvestmentEventViewModels>;
-  switch (
-    ROLE_ENV || ROLE.MANAGER // TODO remove after union
-  ) {
-    case ROLE.INVESTOR:
-      request = () => new Promise<InvestmentEventViewModels>(() => {}); //TODO investorApi.getEvents;
-      break;
-    case ROLE.MANAGER:
-    default:
-      request = () => new Promise<InvestmentEventViewModels>(() => {}); //TODO managerApi.getEvents;
-      break;
-  }
-  return request(authorization, { ...filters, eventLocation });
-};
-
-export const fetchPortfolioEvents = (
-  eventLocation: EVENT_LOCATION
-): GetItemsFuncType => (
-  filters?
-): Promise<TableItems<InvestmentEventViewModels>> => {
-  const authorization = authService.getAuthArg();
-  let request: (
-    authorization: string,
-    opts?: Object
-  ) => Promise<InvestmentEventViewModels>;
-  switch (
-    ROLE_ENV || ROLE.MANAGER // TODO remove after union
-  ) {
-    case ROLE.INVESTOR:
-      request = () => new Promise<InvestmentEventViewModels>(() => {}); // TODO investorApi.getEvents;
-      break;
-    case ROLE.MANAGER:
-    default:
-      request = () => new Promise<InvestmentEventViewModels>(() => {}); // TODO managerApi.getEvents;
-      break;
-  }
-  return request(authorization, { ...filters, eventLocation }).then(
-    mapToTableItems<InvestmentEventViewModels>("events")
-  );
-};
 
 export const getProfitChart: TGetChartFunc = ({
   id,

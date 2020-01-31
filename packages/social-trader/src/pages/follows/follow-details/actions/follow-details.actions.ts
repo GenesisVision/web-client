@@ -4,10 +4,8 @@ import {
 } from "components/chart/chart-period/chart-period.helpers";
 import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
-import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
-  InvestmentEventViewModels,
   ProgramBalanceChart,
   ProgramProfitPercentCharts,
   SignalProviderSubscribers,
@@ -35,10 +33,6 @@ import {
 import { FollowDetailsDataType } from "../follow-details.types";
 import { FollowIdState } from "../reducers/id.reducer";
 import { FollowProfitChartDataType } from "../reducers/profit-chart.reducer";
-import {
-  EVENT_LOCATION,
-  fetchPortfolioEventsWithoutTable
-} from "../services/follow-details.service";
 
 const sendFollowChartRequest = (
   { start, end }: ChartDefaultPeriod,
@@ -65,18 +59,6 @@ export const statisticPeriodAction = (
 ): TStatisticPeriodAction => ({
   type: SET_FOLLOW_STATISTIC_PERIOD,
   payload: period
-});
-
-export const fetchEventsAction = (
-  assetId: string,
-  eventLocation: EVENT_LOCATION,
-  filters?: ComposeFiltersAllType
-): ActionType<Promise<InvestmentEventViewModels>> => ({
-  type: EVENTS_ACTION_TYPE,
-  payload: fetchPortfolioEventsWithoutTable(eventLocation, {
-    ...filters,
-    assetId
-  })
 });
 
 export const fetchFollowProfitChartAction = (
