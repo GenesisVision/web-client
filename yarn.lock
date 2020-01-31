@@ -9938,9 +9938,9 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
-majestic@../../majestic-1.0.5.tgz:
+majestic@../../majestic-1.0.7.tgz:
   version "1.6.2"
-  resolved "../../majestic-1.0.5.tgz#8b4bde1f8f587e22648460baeb321bca1ea2ac84"
+  resolved "../../majestic-1.0.7.tgz#c3c4b6a4b3fca59ebdef5926812ca1df4f5edc63"
   dependencies:
     node-fetch "^2.3.0"
     open "^6.0.0"
