@@ -1,17 +1,7 @@
-import {
-  amountWithCurrencyLoaderData,
-  managerLoaderData,
-  mockDate
-} from "components/details/details.loader-data";
+import { mockDate } from "components/details/details.loader-data";
 import { LevelsParamsInfo } from "gv-api-web";
 import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
-import {
-  getRandomInteger,
-  getRandomWord,
-  getRandomWords,
-  tableLoaderCreator
-} from "utils/helpers";
-import { CurrencyEnum } from "utils/types";
+import { getRandomInteger } from "utils/helpers";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [
   { name: "GVT", color: "#f0f0f0" }
@@ -42,42 +32,6 @@ export const statisticDataLoaderData: any = {
     maxDrawdown: getRandomInteger(),
     rate: getRandomInteger()
   }
-};
-
-export const brokerDetailsLoaderData: any = {
-  //: BrokerDetails
-  logo: "",
-  name: getRandomWord(),
-  isForex: false,
-  showSwaps: false,
-  showTickets: false,
-  showCommissionRebate: false,
-  isForexSometime: false,
-  showSwapsSometime: false,
-  showTicketsSometime: false,
-  showCommissionRebateSometime: false
-};
-
-export const statisticLoaderData: any = {
-  //: ProgramStatistic
-  balanceBase: amountWithCurrencyLoaderData,
-  balanceGVT: amountWithCurrencyLoaderData,
-  balanceSecondary: amountWithCurrencyLoaderData,
-  currentValue: getRandomInteger(0, 100),
-  profitPercent: getRandomInteger(0, 100),
-  profitValue: getRandomInteger(0, 100),
-  drawdownPercent: getRandomInteger(0, 100),
-  investorsCount: getRandomInteger(0, 10),
-  hasNotifications: false,
-  startDate: mockDate,
-  startBalance: getRandomInteger(0, 100),
-  startCurrency: "GVT",
-  investedAmount: getRandomInteger(0, 100),
-  investedCurrency: "GVT",
-  tradesCount: getRandomInteger(0, 100),
-  tradesSuccessCount: getRandomInteger(0, 100),
-  profitFactorPercent: getRandomInteger(0, 100),
-  sharpeRatioPercent: getRandomInteger(0, 100)
 };
 
 export const statisticListLoaderData: any = {
@@ -151,50 +105,6 @@ export const personalProgramDetailsLoaderData: any = {
   status: "Pending"
 };
 
-export const programDetailsLoaderData: any = {
-  //: ProgramDetailsFullOld
-  currency: "" as CurrencyEnum,
-  level: getRandomInteger(0, 100),
-  levelProgress: getRandomInteger(0, 100),
-  periodDuration: getRandomInteger(0, 100),
-  periodStarts: mockDate,
-  periodEnds: mockDate,
-  entryFeeSelected: getRandomInteger(0, 100),
-  entryFeeCurrent: getRandomInteger(0, 100),
-  successFeeSelected: getRandomInteger(0, 100),
-  successFeeCurrent: getRandomInteger(0, 100),
-  stopOutLevelSelected: getRandomInteger(0, 100),
-  stopOutLevelCurrent: getRandomInteger(0, 100),
-  isReinvesting: false,
-  isSignalProgram: false,
-  signalSuccessFee: getRandomInteger(0, 100),
-  signalVolumeFee: getRandomInteger(0, 100),
-  leverageMin: getRandomInteger(0, 100),
-  leverageMax: getRandomInteger(0, 100),
-  ageDays: getRandomInteger(0, 100),
-  genesisRatio: getRandomInteger(0, 100),
-  investmentScale: getRandomInteger(0, 100),
-  volumeScale: getRandomInteger(0, 100),
-  tradesDelay: "None",
-  availableInvestmentBase: getRandomInteger(0, 100),
-  availableInvestmentLimit: getRandomInteger(0, 100),
-  totalAvailableInvestment: getRandomInteger(0, 100),
-  brokerDetails: brokerDetailsLoaderData,
-  statistic: statisticLoaderData,
-  personalProgramDetails: personalProgramDetailsLoaderData,
-  tags: [],
-  id: "",
-  logo: "",
-  url: "",
-  color: "#fff",
-  description: getRandomWords(15),
-  title: getRandomWord(),
-  ipfsHash: "",
-  creationDate: mockDate,
-  status: "None",
-  manager: managerLoaderData
-};
-
 export const levelsParamsLoaderData: LevelsParamsInfo = {
   minAvailableToInvest: getRandomInteger(0, 100),
   maxAvailableToInvest: getRandomInteger(0, 100),
@@ -209,37 +119,4 @@ export const levelsParamsLoaderData: LevelsParamsInfo = {
   investmentScaleMin: getRandomInteger(0, 100),
   investmentScaleMax: getRandomInteger(0, 100),
   investmentScaleHighRisk: getRandomInteger(0, 100)
-};
-
-export const tradeLoaderDataCreator = () => ({
-  //: OrderModel
-  id: "",
-  login: "",
-  ticket: "",
-  symbol: "",
-  volume: getRandomInteger(0, 100),
-  profit: getRandomInteger(0, 100),
-  direction: {},
-  date: new Date(),
-  price: getRandomInteger(0, 100),
-  priceCurrent: getRandomInteger(0, 100),
-  entry: {},
-  baseVolume: getRandomInteger(0, 100),
-  originalCommission: getRandomInteger(0, 100),
-  originalCommissionCurrency: "",
-  commission: getRandomInteger(0, 100),
-  swap: getRandomInteger(0, 100),
-  showOriginalCommission: false,
-  signalData: {
-    masters: []
-  }
-});
-
-export const tradesLoaderData: any = {
-  //: TradesViewModel
-  showSwaps: false,
-  showTickets: false,
-  trades: tableLoaderCreator(tradeLoaderDataCreator),
-  tradesDelay: {},
-  total: 10
 };

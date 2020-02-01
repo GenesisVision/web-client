@@ -1,6 +1,6 @@
 import "./button.css";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import Link from "components/link/link";
 import React from "react";
 
@@ -50,7 +50,7 @@ export default class Button extends React.PureComponent<IButton> {
       icon = null,
       ...other
     } = this.props;
-    const cn = classnames("gv-btn", className, {
+    const cn = classNames("gv-btn", className, {
       "gv-btn--full-width": fullWidth,
       "gv-btn--disabled": disabled,
       "gv-btn--primary": primary,

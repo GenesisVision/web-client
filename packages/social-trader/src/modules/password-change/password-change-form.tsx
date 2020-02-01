@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -33,7 +33,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   dirty,
   isSubmitting
 }) => {
-  const className = classnames({
+  const className = classNames({
     "change-password__equal":
       !errors[PASSWORD_CHANGE_FORM_FIELDS.password] &&
       !errors[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&

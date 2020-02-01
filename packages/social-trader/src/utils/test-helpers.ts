@@ -4,7 +4,7 @@ import {
   ALERT_CLOSE_CLASS,
   ALERT_TEXT_CLASS
 } from "modules/alert-message/components/alert-message-list/alert-message";
-import puppeteer, { Browser, Page } from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { getTokenName } from "utils/get-token-name";
@@ -43,35 +43,6 @@ export const testT = (path: string) =>
     .split(".")
     .reduce((prev: any, curr: any) => prev && prev[curr], getTranslates()) ||
   path;
-
-interface DoneCallback {
-  (...args: any[]): any;
-
-  fail(error?: string | { message: string }): any;
-}
-
-type ProvidesCallback = (cb: DoneCallback) => any;
-export type ItFuncType = {
-  title: string;
-  test: (page: Page) => ProvidesCallback;
-};
-
-export const describeOnPage = (url: string, tests: ItFuncType[]) => () => {
-  let page: Page;
-  let browser: Browser;
-  beforeAll(async () => {
-    browser = await getBrowser();
-    page = await browser.newPage();
-    const { openAuthPage } = useTestHelpers(page);
-    await openAuthPage(url);
-  }, ASYNC_TEST_TIMEOUT);
-  for (const { test, title } of tests) {
-    it(title, async () => test(page));
-  }
-  afterAll(() => {
-    browser.close();
-  });
-};
 
 export const useTestHelpers = (page: Page) => {
   const getAuth = async () => {
@@ -160,18 +131,6 @@ export const useTestHelpers = (page: Page) => {
     return await page.$eval(selector, element => element.textContent);
   };
 
-  const clearAllAlerts = async () => {
-    // const selector = `button[${DATA_TEST_ATTR}=${CLEAR_ALL_ALERTS_ID}]`;
-    // const hasAlerts = await hasElement(selector);
-    // if (hasAlerts) await page.click(selector);
-    // else {
-    //   const ALERT_CLOSE_CLASS_SELECTOR = `.${ALERT_CLOSE_CLASS}`;
-    //   while (await hasElement(ALERT_CLOSE_CLASS_SELECTOR)) {
-    //     await clearAlert();
-    //   }
-    // }
-  };
-
   const clearAlert = async () => {
     const ALERT_CLOSE_CLASS_SELECTOR = `.${ALERT_CLOSE_CLASS}`;
     await safeClick(ALERT_CLOSE_CLASS_SELECTOR);
@@ -206,7 +165,6 @@ export const useTestHelpers = (page: Page) => {
     enterAmount,
     submitForm,
     getLastAlertMessage,
-    getTextContent,
-    clearAllAlerts
+    getTextContent
   };
 };

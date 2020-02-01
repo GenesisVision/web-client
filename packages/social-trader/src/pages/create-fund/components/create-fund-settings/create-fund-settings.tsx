@@ -23,13 +23,12 @@ import createFundSettingsValidationSchema from "./create-fund-settings.validator
 
 const _CreateFundSettings: React.FC<Props> = ({
   setFieldTouched,
-  validateForm,
   setFieldValue,
   handleSubmit,
   isValid,
   t,
   isSubmitting,
-  values: { depositAmount, description, depositWalletId, enterMinDeposit },
+  values: { depositAmount, description, enterMinDeposit },
   data: { maxExitFee, maxEntryFee, minDeposit }
 }) => {
   const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });

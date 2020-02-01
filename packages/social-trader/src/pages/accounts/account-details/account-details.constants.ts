@@ -1,10 +1,8 @@
-import { ACTION_STATUS_FILTER_TYPES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc
 } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const SET_ACCOUNT_STATISTIC_PERIOD = "SET_ACCOUNT_STATISTIC_PERIOD";
 export const SET_ACCOUNT_STATISTIC_CURRENCY = "SET_ACCOUNT_STATISTIC_CURRENCY";
@@ -35,18 +33,3 @@ export const ACCOUNT_TRADES_DEFAULT_FILTERS = [
 export const ACCOUNT_TRADES_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
-
-export const SUBSCRIBERS_STATUS_TYPE = "status";
-
-export const ACCOUNT_SUBSCRIBERS_DEFAULT_FILTERS = [
-  {
-    name: SUBSCRIBERS_STATUS_TYPE,
-    type: FILTER_TYPE.GENERAL
-  }
-];
-
-export const ACCOUNT_SUBSCRIBERS_FILTERS = {
-  [SUBSCRIBERS_STATUS_TYPE]: ACTION_STATUS_FILTER_TYPES.ACTIVE
-};
-
-export const GM_NAME = "Genesis Markets";

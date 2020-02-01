@@ -18,7 +18,6 @@ import {
   removeFavoriteProgramAction
 } from "./actions/favorite-program.actions";
 import {
-  MethodType,
   TableToggleFavoriteType,
   ToggleableAssetListType,
   ToggleFavoriteDispatchableType

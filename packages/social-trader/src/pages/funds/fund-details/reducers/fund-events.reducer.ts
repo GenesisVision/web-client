@@ -4,10 +4,7 @@ import {
   EVENTS_ACTION_TYPE
 } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { tableSelectorCreator } from "components/table/helpers/table.selector";
-import {
-  DEFAULT_EVENTS_PAGING,
-  DEFAULT_PAGING
-} from "components/table/reducers/table-paging.reducer";
+import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";

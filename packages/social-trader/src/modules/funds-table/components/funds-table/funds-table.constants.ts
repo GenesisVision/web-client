@@ -17,7 +17,6 @@ import {
 import { fundAssetFilter } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
-export const FUND_CURRENCY_FILTER_NAME = "fundCurrency";
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_MAP_NAME = "showIn";
 
@@ -80,10 +79,6 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
     name: "chart"
   }
 ];
-
-export const sortableColumns: string[] = FUNDS_TABLE_COLUMNS.filter(
-  x => !!x.sortingName
-).map(x => x.sortingName as string);
 
 export const DEFAULT_ITEMS_ON_PAGE = 12;
 

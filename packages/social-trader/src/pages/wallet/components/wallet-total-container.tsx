@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "reducers/root-reducer";
 
 import { walletSelector } from "../reducers/wallet.reducers";
 import { walletMultiSummaryLoaderData } from "./wallet-container-loader";

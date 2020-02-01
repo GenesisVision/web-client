@@ -1,6 +1,6 @@
 import "./details-description-control.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { ToType } from "components/link/link";
 import React from "react";
 
@@ -22,7 +22,7 @@ const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
 }) => {
   return (
     <Tag
-      className={classnames("details-description-control", className)}
+      className={classNames("details-description-control", className)}
       onClick={onClick}
       to={to}
     >

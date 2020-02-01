@@ -23,7 +23,7 @@ interface FetchWalletByCurrencyAction
   type: typeof WALLET_BALANCE_BY_CURRENCY_AVAILABLE;
 }
 
-interface FetchTransactionsAction extends ApiAction<any> {
+interface FetchTransactionsAction extends ApiAction {
   // TODO declare ApiAction type
   type: typeof WALLET_TRANSACTIONS;
 }

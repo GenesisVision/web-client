@@ -7,7 +7,7 @@ import {
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
 
-const _TradePage: React.FC<Props> = ({}) => {
+const _TradePage: React.FC = () => {
   const [t] = useTranslation();
   const title = t("trade.title");
   return (
@@ -25,7 +25,5 @@ const _TradePage: React.FC<Props> = ({}) => {
     </Page>
   );
 };
-
-interface Props {}
 
 export const TradePage = React.memo(_TradePage);

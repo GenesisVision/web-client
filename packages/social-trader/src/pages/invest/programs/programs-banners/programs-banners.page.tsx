@@ -1,13 +1,12 @@
+import ImageBaseElement from "components/avatar/image-base.element";
+import DetailsBlock from "components/details/details-block";
+import Page from "components/page/page";
+import withDefaultLayout from "decorators/with-default-layout";
+import { ProgramFollowDetailsFull } from "gv-api-web";
+import { NextPage } from "next";
 import React from "react";
 import { compose } from "redux";
-import withDefaultLayout from "decorators/with-default-layout";
-import { NextPage } from "next";
-import { ProgramFollowDetailsFull } from "gv-api-web";
-import Page from "components/page/page";
-import DetailsBlock from "components/details/details-block";
 import programsApi from "services/api-client/programs-api";
-import ImageBase from "components/avatar/image-base";
-import ImageBaseElement from "components/avatar/image-base.element";
 
 const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   program

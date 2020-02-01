@@ -6,7 +6,6 @@ import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import posed from "react-pose";
 import { connect } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import { compose, Dispatch } from "redux";
@@ -14,15 +13,6 @@ import { ActionType } from "utils/types";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";
-
-const AlertBox = posed.div({
-  enter: {
-    x: "0%"
-  },
-  exit: {
-    x: "100%"
-  }
-});
 
 export const CLEAR_ALL_ALERTS_ID = "CLEAR_ALL_ALERTS_ID";
 
@@ -74,10 +64,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
 });
 
 const AlertMessageList = compose<React.FC>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   React.memo
 )(_AlertMessageList);
 

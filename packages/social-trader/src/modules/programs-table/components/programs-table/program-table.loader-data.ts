@@ -4,8 +4,11 @@ import {
 } from "components/details/details.loader-data";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { personalProgramDetailsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
-import { getRandomColor, getRandomInteger } from "utils/helpers";
-import { tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomColor,
+  getRandomInteger,
+  tableLoaderCreator
+} from "utils/helpers";
 
 const tagLoaderDataCreator = () /*: ProgramTag*/ => ({
   name: "program",
@@ -53,9 +56,3 @@ export const programListLoaderData = tableLoaderCreator(
   //: ProgramDetailsOld[]
   programDetailsLoaderDataCreator
 );
-
-export const programTableLoaderData = {
-  //: ProgramsListOld
-  programs: programListLoaderData,
-  total: programListLoaderData.length
-};

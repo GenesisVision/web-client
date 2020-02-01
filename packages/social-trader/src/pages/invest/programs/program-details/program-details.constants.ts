@@ -9,7 +9,6 @@ import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
-export const PROGRAM_TRADES_SORTING = "ByDateDesc";
 
 export const GET_PROGRAM_PERIOD_HISTORY = "GET_PROGRAM_PERIOD_HISTORY";
 export const SET_PROGRAM_STATISTIC_PERIOD = "SET_PROGRAM_STATISTIC_PERIOD";
@@ -239,5 +238,3 @@ export const PROGRAM_SUBSCRIBERS_DEFAULT_FILTERS = [
 export const PROGRAM_SUBSCRIBERS_FILTERS = {
   [SUBSCRIBERS_STATUS_TYPE]: ACTION_STATUS_FILTER_TYPES.ACTIVE
 };
-
-export const GM_NAME = "Genesis Markets";

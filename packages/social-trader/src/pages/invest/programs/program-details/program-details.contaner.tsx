@@ -18,7 +18,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import filesService from "services/file-service";
 import {
-  composeProgramBannersUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -44,8 +43,6 @@ import {
   getSubscriptions,
   getTrades
 } from "./service/program-details.service";
-import { PROGRAM_BANNERS_FOLDER_ROUTE } from "routes/programs.routes";
-import Link from "next/link";
 
 const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
@@ -203,12 +200,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         )}
       />
       <DetailsDivider />
-      <Link
-        as={composeProgramBannersUrl(url)}
-        href={PROGRAM_BANNERS_FOLDER_ROUTE}
-      >
-        <a>(banners)</a>
-      </Link>
 
       <DetailsDivider />
       <DetailsInvestment

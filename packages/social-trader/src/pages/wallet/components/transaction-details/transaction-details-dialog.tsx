@@ -1,7 +1,6 @@
 import "./transaction-details.scss";
 
 import useApiRequest from "hooks/api-request.hook";
-import i18next from "i18next";
 import CommonTransactionDetails from "pages/wallet/components/transaction-details/transactions/common-transation-details";
 import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
@@ -43,12 +42,6 @@ const _TransactionDetailsDialog: React.FC<Props> = ({
     />
   );
 };
-
-export interface TransactionDetailsProps extends i18next.WithT {
-  data: MultiWalletTransaction;
-  handleCancel?: () => void;
-  handleResend?: () => void;
-}
 
 interface Props {
   transaction: MultiWalletTransaction;

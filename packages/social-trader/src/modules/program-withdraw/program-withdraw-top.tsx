@@ -7,8 +7,6 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramWithdrawTop: React.FC<OwnProps> = ({
-  rate,
-  accountCurrency,
   availableToWithdraw,
   title,
   programCurrency

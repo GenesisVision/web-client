@@ -23,10 +23,8 @@ import {
   PROGRAMS_FACET_TABLE_FILTERS
 } from "./programs-facet.constants";
 
-const _ProgramsFacetTable: React.FC<
-  IProgramsFacetTableProps & WithTranslation
-> = ({
-  currency,
+const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
+  WithTranslation> = ({
   currencies,
   t,
   title,

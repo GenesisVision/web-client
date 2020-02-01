@@ -14,12 +14,6 @@ export const followDescriptionSelector = apiSelector<FollowDescriptionDataType>(
   state => state.followDetails.description
 );
 
-export const followIdSelector = apiFieldSelector(
-  followDescriptionSelector,
-  fieldSelector(state => state.id),
-  undefined
-);
-
 export const followStatusSelector = apiFieldSelector(
   followDescriptionSelector,
   fieldSelector(state => state.publicInfo.status),

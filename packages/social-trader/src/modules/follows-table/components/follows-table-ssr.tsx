@@ -26,7 +26,7 @@ import { DEFAULT_FOLLOW_TABLE_FILTERS } from "./follows.constants";
 
 const ITEMS_ON_PAGE = 12;
 
-const _FollowsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
+const _FollowsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
   const currencies = useSelector(platformCurrenciesSelector);
   const tags = useSelector(followTagsSelector);
   const data = useSelector(followsDataSelector);

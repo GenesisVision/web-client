@@ -66,7 +66,7 @@ const _DashboardInvestingTable: React.FC<Props> = ({
 
 interface Props {
   dataSelector: TableSelectorType;
-  action: (filters?: ComposeFiltersAllType) => ApiAction<any>;
+  action: (filters?: ComposeFiltersAllType) => ApiAction;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
 }

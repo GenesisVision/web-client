@@ -35,38 +35,32 @@ const _DepositButton: React.FC<Props> = ({
     setIsOpenUnAuthInvestPopup,
     setIsCloseUnAuthInvestPopup
   ] = useIsOpen();
-  let deposit;
-  switch (type) {
-    case ASSET.FUND:
-      deposit = (
-        <FundDepositContainer
-          title={title}
-          ownAsset={ownAsset}
-          onApply={onApply}
-          entryFee={entryFee}
-          availableToInvest={availableToInvest}
-          open={isOpenDepositPopup}
-          id={id}
-          onClose={setIsDepositClosePopup}
-        />
-      );
-      break;
-    default:
-      deposit = (
-        <ProgramDeposit
-          title={title}
-          onApply={onApply}
-          ownAsset={ownAsset}
-          entryFee={entryFee}
-          availableToInvest={availableToInvest}
-          broker={broker!}
-          currency={currency!}
-          open={isOpenDepositPopup}
-          id={id}
-          onClose={setIsDepositClosePopup}
-        />
-      );
-  }
+  const deposit =
+    type === ASSET.FUND ? (
+      <FundDepositContainer
+        title={title}
+        ownAsset={ownAsset}
+        onApply={onApply}
+        entryFee={entryFee}
+        availableToInvest={availableToInvest}
+        open={isOpenDepositPopup}
+        id={id}
+        onClose={setIsDepositClosePopup}
+      />
+    ) : (
+      <ProgramDeposit
+        title={title}
+        onApply={onApply}
+        ownAsset={ownAsset}
+        entryFee={entryFee}
+        availableToInvest={availableToInvest}
+        broker={broker!}
+        currency={currency!}
+        open={isOpenDepositPopup}
+        id={id}
+        onClose={setIsDepositClosePopup}
+      />
+    );
   const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
   const openPopupMethod = isAuthenticated
     ? setIsOpenDepositPopup

@@ -8,7 +8,6 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "components/fund-asset/fund-asset-container";
-import WalletWidgetContainer from "components/wallet-widget/wallet-widget-container";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlatformAssetFull } from "utils/types";
