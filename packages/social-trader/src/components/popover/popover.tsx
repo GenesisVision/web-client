@@ -126,7 +126,7 @@ const Popover: React.FC<Props> = props => {
     if (fixedVertical) return vertical;
     const anchorBounds = getAnchorBounds();
     const popoverBounds = getPopoverBounds();
-    const topAboveWindowBound = popoverBounds.top - MARGIN_OFFSET < 0;
+    // const topAboveWindowBound = popoverBounds.top - MARGIN_OFFSET < 0;
     const bottomBelowWindowBound =
       windowHeight - anchorBounds.bottom - MARGIN_OFFSET < popoverBounds.height;
     if (bottomBelowWindowBound) return VERTICAL_POPOVER_POS.TOP;

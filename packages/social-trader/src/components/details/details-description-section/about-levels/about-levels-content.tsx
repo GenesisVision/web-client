@@ -37,7 +37,7 @@ const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
     </>
   );
 };
-const Limits = React.memo(_Limits);
+const Limits = React.memo<ILimitsProps>(_Limits);
 
 const _AboutLevelsContent: React.FC<Props> = ({
   investmentsLimits,

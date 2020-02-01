@@ -54,18 +54,16 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   }, [id, prefix, values, isSubmit, captchaType, setSubmitting]);
   const handleSubmit = useCallback(
     (values: TValues, setSubmittingProp?: SetSubmittingType) => {
-      authService
-        .getCaptcha(values.email)
-        .then(({ captchaType, geeTest, id, pow }) => {
-          setEmail(values.email);
-          setCaptchaType(captchaType);
-          // setGeeTest(geeTest);
-          setId(id);
-          setPow(pow);
-          setValues(values);
-          setSetSubmitting({ func: setSubmittingProp });
-          setIsSubmit();
-        });
+      authService.getCaptcha(values.email).then(({ captchaType, id, pow }) => {
+        setEmail(values.email);
+        setCaptchaType(captchaType);
+        // setGeeTest(geeTest);
+        setId(id);
+        setPow(pow);
+        setValues(values);
+        setSetSubmitting({ func: setSubmittingProp });
+        setIsSubmit();
+      });
     },
     []
   );
