@@ -15,7 +15,7 @@ export interface GVTabProps {
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
 }
 
-const GVTab: React.SFC<GVTabProps> = ({
+const GVTab: React.FC<GVTabProps> = ({
   label,
   value,
   count,

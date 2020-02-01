@@ -1,14 +1,5 @@
 import { STATUS } from "constants/constants";
-import {
-  PersonalFollowDetailsFull,
-  PersonalFundDetails,
-  PersonalProgramDetails
-} from "gv-api-web";
-
-export type InvestmentBlockDetailsType =
-  | PersonalFundDetails
-  | PersonalProgramDetails
-  | PersonalFollowDetailsFull;
+import { PersonalFundDetails, PersonalProgramDetails } from "gv-api-web";
 
 export type InvestmentType = PersonalFundDetails & PersonalProgramDetails;
 

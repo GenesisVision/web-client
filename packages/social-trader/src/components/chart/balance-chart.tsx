@@ -20,9 +20,6 @@ const _BalanceChart: React.FC<Props> = ({
   balanceChart,
   currency
 }) => {
-  const chart = balanceChart.map(x => ({
-    ...x
-  }));
   return (
     <ResponsiveContainer>
       <AreaChart data={balanceChart} margin={{ top: 20 }}>
@@ -71,7 +68,7 @@ const _BalanceChart: React.FC<Props> = ({
 
 interface Props {
   tooltip?:
-    | React.ReactElement<any>
+    | React.ReactElement
     | React.StatelessComponent<any>
     | ContentRenderer<TooltipProps>;
   color: string;

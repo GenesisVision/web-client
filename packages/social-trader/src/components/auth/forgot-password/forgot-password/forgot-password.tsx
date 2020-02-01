@@ -11,9 +11,15 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import { SetSubmittingType } from "utils/types";
 import { object, string } from "yup";
 
-const _ForgotPasswordForm: React.FC<
-  InjectedFormikProps<Props, IForgotPasswordFormValues>
-> = ({ t, values, isSubmitting, handleSubmit, error }) => (
+export enum FORGOT_PASSWORD_FORM_FIELDS {
+  captchaCheckResult = "captchaCheckResult",
+  email = "email"
+}
+
+const _ForgotPasswordForm: React.FC<InjectedFormikProps<
+  Props,
+  IForgotPasswordFormValues
+>> = ({ t, isSubmitting, handleSubmit, error }) => (
   <form id="forgotPasswordForm" onSubmit={handleSubmit} noValidate>
     <GVFormikField
       type="email"
@@ -54,11 +60,6 @@ interface OwnProps {
     setSubmitting: SetSubmittingType
   ): void;
   errorMessage: string;
-}
-
-export enum FORGOT_PASSWORD_FORM_FIELDS {
-  captchaCheckResult = "captchaCheckResult",
-  email = "email"
 }
 
 export interface IForgotPasswordFormValues {

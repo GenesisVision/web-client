@@ -40,10 +40,6 @@ const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
   }
 });
 
-interface StateProps {
-  email: string;
-}
-
 interface DispatchProps {
   service: {
     sendForgotPasswordEmail: (values: {
@@ -56,10 +52,7 @@ interface Props extends DispatchProps, WithTranslation {}
 
 const EmailPendingPage = compose<React.ComponentType>(
   translate(),
-  connect<null, DispatchProps, AuthRootState>(
-    null,
-    mapDispatchToProps
-  ),
+  connect<null, DispatchProps, AuthRootState>(null, mapDispatchToProps),
   React.memo
 )(_EmailPendingPage);
 export default EmailPendingPage;

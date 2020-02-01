@@ -29,7 +29,7 @@ const _Filter: React.FC<Props> = ({
     },
     [updateFilter, name]
   );
-  const child = React.cloneElement(children as React.ReactElement<any>, {
+  const child = React.cloneElement(children as React.ReactElement, {
     value,
     changeFilter: handleChangeFilter,
     cancel: clearAnchor

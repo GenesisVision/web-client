@@ -1,5 +1,4 @@
 import PieContainer from "components/pie-container/pie-container";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";

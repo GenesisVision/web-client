@@ -1,9 +1,6 @@
-import { SimpleChart, SimpleChartPoint } from "gv-api-web";
+import { SimpleChartPoint } from "gv-api-web";
 import { getCookie, setCookie } from "utils/cookie";
 import { getRandomInteger } from "utils/helpers";
-
-import { ChartDefaultPeriod } from "../../chart/chart-period/chart-period.helpers";
-import { TChartAsset } from "../multi-chart.types";
 
 export const SELECTED_ASSETS = "SELECTED_ASSETS";
 

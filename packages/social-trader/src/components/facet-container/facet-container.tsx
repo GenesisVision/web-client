@@ -28,10 +28,9 @@ const _FacetContainer: React.FC<Props> = props => {
   );
   if (!facets) return null;
   if (!facet) return <NotFoundPage />;
-  const { title, sorting, timeframe } = facet!;
+  const { sorting, timeframe } = facet!;
   return (
     <TableContainer
-      // title={title}
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}
@@ -81,11 +80,6 @@ interface Props {
 }
 
 export type FacetType = any; // TODO declare type
-export type FacetDataType = {
-  isPending?: boolean;
-  notFound?: boolean;
-  facet?: FacetType;
-};
 export enum FACET_ASSET {
   PROGRAMS = "programInfo",
   FUNDS = "fundInfo",

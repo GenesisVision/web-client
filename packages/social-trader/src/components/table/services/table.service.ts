@@ -1,18 +1,11 @@
 import { composeFilters } from "components/table/helpers/filtering.helpers";
-import {
-  calculateSkipAndTake,
-  calculateTotalPages,
-  IPaging
-} from "components/table/helpers/paging.helpers";
+import { calculateSkipAndTake, calculateTotalPages, IPaging } from "components/table/helpers/paging.helpers";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { TGetState } from "utils/types";
 
 import { updateFiltersAction as updateFiltersActionCreator } from "../actions/table.actions";
-import {
-  ComposeFiltersAllType,
-  FilteringType
-} from "../components/filtering/filter.type";
+import { ComposeFiltersAllType, FilteringType } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 import { ITableState } from "../reducers/table.reducer";
 
@@ -42,11 +35,10 @@ export const composeRequestFiltersByTableState = (
   tableState: ITableState<any>
 ) => {
   const { filters, defaults } = tableState;
-  const requestFilters = composeRequestFilters({
+  return composeRequestFilters({
     ...filters,
     defaultFilters: defaults.defaultFilters
   });
-  return requestFilters;
 };
 
 export const updateFilters = (type: string, filters?: FilteringType) => (

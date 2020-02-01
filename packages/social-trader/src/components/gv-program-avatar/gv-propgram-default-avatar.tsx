@@ -6,7 +6,7 @@ export interface GVProgramDefaultAvatarProps {
   imageClassName?: string;
 }
 
-const GVProgramDefaultAvatar: React.SFC<GVProgramDefaultAvatarProps> = ({
+const GVProgramDefaultAvatar: React.FC<GVProgramDefaultAvatarProps> = ({
   color,
   imageClassName
 }) => {

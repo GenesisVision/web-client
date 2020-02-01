@@ -1,4 +1,4 @@
-import { ForgotPasswordViewModel, ResetPasswordViewModel } from "gv-api-web";
+import { ForgotPasswordViewModel } from "gv-api-web";
 import authApi from "services/api-client/auth-api";
 import { ApiAction } from "utils/types";
 
@@ -13,10 +13,3 @@ export const forgotPasswordAction = (
     payload: authApi.forgotPassword({ body })
   };
 };
-
-export const restorePasswordAction = (
-  body: ResetPasswordViewModel
-): ApiAction<string> => ({
-  type: PASSWORD_RESTORE,
-  payload: authApi.resetPassword({ body })
-});

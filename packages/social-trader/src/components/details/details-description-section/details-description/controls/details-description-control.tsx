@@ -12,7 +12,7 @@ interface IDetailsDescriptionControlProps
   to?: ToType;
   tag: React.ComponentType<any> | string;
 }
-const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({
+const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   children,
   text,
   tag: Tag,

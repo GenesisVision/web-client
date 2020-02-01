@@ -3,8 +3,8 @@ import { IImageValue } from "components/form/input-image/input-image";
 import { Dispatch } from "redux";
 import authApi from "services/api-client/auth-api";
 import profileApi from "services/api-client/profile-api";
-import filesService from "services/file-service";
 import authService from "services/auth-service";
+import filesService from "services/file-service";
 
 export const updateProfileAvatar = ({
   newImage

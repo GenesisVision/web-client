@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 
 import GlobalSearchInput from "./global-search-input";
 
-const _GlobalSearchContainer: React.FC<Props> = ({}) => {
+const _GlobalSearchContainer: React.FC = () => {
   const [query, setQuery] = useState<string>("");
 
   const handleOnChange = useCallback((query: string) => {
@@ -21,8 +21,6 @@ const _GlobalSearchContainer: React.FC<Props> = ({}) => {
     </>
   );
 };
-
-interface Props {}
 
 const GlobalSearchContainer = React.memo(_GlobalSearchContainer);
 export default GlobalSearchContainer;

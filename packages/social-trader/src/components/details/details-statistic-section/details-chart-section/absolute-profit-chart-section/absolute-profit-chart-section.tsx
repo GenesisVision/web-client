@@ -14,9 +14,7 @@ import AbsoluteProfitChartElements, {
   TRenderAbsoluteProfitChart
 } from "./absolute-profit-chart-elements";
 
-const _AbsoluteProfitChartSection: React.FC<
-  IAbsoluteProfitChartSectionProps
-> = ({
+const _AbsoluteProfitChartSection: React.FC<IAbsoluteProfitChartSectionProps> = ({
   loaderData,
   renderAbsoluteProfitChart,
   useChartStateValues,

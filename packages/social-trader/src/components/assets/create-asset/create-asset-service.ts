@@ -54,5 +54,3 @@ const getCreateMethod = (
         });
   }
 };
-
-type TGetCreateMethodReturn = (request: NewAssetRequest) => Promise<any>; //ProgramCreateResult

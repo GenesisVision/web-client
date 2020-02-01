@@ -14,9 +14,6 @@ const _TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
   data,
   renderBodyItem,
-  tag: Tag,
-  className,
-  isPending,
   view,
   updateRow
 }) => (

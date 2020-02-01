@@ -3,9 +3,6 @@ import "./error-message.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-export const DEFAULT = "DEFAULT";
-export const OVER = "OVER";
-
 export enum MESSAGE_TYPES {
   DEFAULT = "DEFAULT",
   OVER = "OVER"

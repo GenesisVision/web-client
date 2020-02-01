@@ -12,9 +12,15 @@ import { SetSubmittingType } from "utils/types";
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 import validationSchema from "./login-form.validators";
 
-const _LoginForm: React.FC<
-  InjectedFormikProps<Props, ILoginFormFormValues>
-> = ({ t, isSubmitting, handleSubmit, error, isValid }) => (
+enum FIELDS {
+  email = "email",
+  password = "password"
+}
+
+const _LoginForm: React.FC<InjectedFormikProps<
+  Props,
+  ILoginFormFormValues
+>> = ({ t, isSubmitting, handleSubmit, error, isValid }) => (
   <form
     id="loginForm"
     className="login-form"
@@ -57,11 +63,6 @@ const _LoginForm: React.FC<
     </div>
   </form>
 );
-
-enum FIELDS {
-  email = "email",
-  password = "password"
-}
 
 interface Props extends OwnProps, WithTranslation {}
 

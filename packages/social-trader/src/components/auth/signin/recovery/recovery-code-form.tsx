@@ -9,9 +9,15 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { object, string } from "yup";
 
-const _RecoveryCodeForm: React.FC<
-  InjectedFormikProps<Props, IRecoveryCodeFormValues>
-> = ({ t, handleSubmit, isSubmitting, error }) => (
+enum FIELDS {
+  code = "code",
+  email = "email"
+}
+
+const _RecoveryCodeForm: React.FC<InjectedFormikProps<
+  Props,
+  IRecoveryCodeFormValues
+>> = ({ t, handleSubmit, isSubmitting, error }) => (
   <form
     id="recoveryForm"
     className="recovery-form"
@@ -37,11 +43,6 @@ const _RecoveryCodeForm: React.FC<
     </GVButton>
   </form>
 );
-
-enum FIELDS {
-  code = "code",
-  email = "email"
-}
 
 interface Props extends OwnProps, WithTranslation {}
 

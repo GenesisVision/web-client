@@ -28,7 +28,6 @@ const GVLink: React.FC<IGVLinkProps> = ({
   href,
   ...other
 }) => {
-  const target = isExternal ? "_self" : "";
   return (
     <Link to={href} className={className} {...other}>
       {children}

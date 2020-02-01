@@ -3,6 +3,12 @@ import "./details.block.scss";
 import classNames from "classnames";
 import * as React from "react";
 
+export enum DETAILS_BLOCK_TYPE {
+  SOLID = "SOLID",
+  BORDERED = "BORDERED",
+  TRANSPARENT = "TRANSPARENT"
+}
+
 const DetailsBlock: React.FC<Props> = ({
   landscapeTablet,
   tablet,
@@ -20,7 +26,7 @@ const DetailsBlock: React.FC<Props> = ({
       "details-block--landscape-tablet": landscapeTablet,
       "details-block--tablet": tablet,
       "details-block--landscape-phone":
-        landscapePhone && (!landscapeTablet && !tablet),
+        landscapePhone && !landscapeTablet && !tablet,
       "details-block--row": row,
       "details-block--horizontal-paddings": !!horizontalPaddings,
       "details-block--table": !!table,
@@ -33,12 +39,6 @@ const DetailsBlock: React.FC<Props> = ({
     {children}
   </div>
 );
-
-export enum DETAILS_BLOCK_TYPE {
-  SOLID = "SOLID",
-  BORDERED = "BORDERED",
-  TRANSPARENT = "TRANSPARENT"
-}
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   landscapeTablet?: boolean;

@@ -12,7 +12,7 @@ export interface GVTabsProps {
   children: Array<React.ReactElement<GVTabProps>>;
 }
 
-const GVTabs: React.SFC<GVTabsProps> = ({
+const GVTabs: React.FC<GVTabsProps> = ({
   className,
   value,
   onChange,

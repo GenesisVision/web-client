@@ -25,7 +25,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   sorting
 }) => {
   const handleOnSelectChange = useCallback(
-    ({ value }: TFilter<any>): void =>
+    ({ value }: TFilter): void =>
       updateSorting &&
       updateSorting(
         value + (isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)

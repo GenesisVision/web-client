@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ID } from "routes/app.routes";
 import { FOLLOW, FUND, PROGRAM } from "routes/invest.routes";
 

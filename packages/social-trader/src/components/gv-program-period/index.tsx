@@ -17,8 +17,7 @@ export const calcPercent = (
   start: Date | number,
   end: Date | number
 ) => {
-  let progress = 0,
-    duration = 0;
+  let progress, duration;
   if (
     typeof value === "number" &&
     typeof start === "number" &&
@@ -41,7 +40,7 @@ export const calcPercent = (
 
 const calcDash = (percent: number) => `${percent} ${100 - percent}`;
 
-const GVProgramPeriod: React.SFC<GVProgramPeriodProps> = ({
+const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
   start,
   end,
   value,

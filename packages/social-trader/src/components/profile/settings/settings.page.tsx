@@ -7,8 +7,6 @@ import CurrencySelectContainer from "modules/currency-select/components/currency
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
-import PublicSelect from "./public-select/public-select";
-
 const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
   <ProfileLayout route={SETTINGS}>
     <SettingsBlock label={t("profile-page.settings.platform-currency")}>
