@@ -1820,11 +1820,6 @@
     "@types/jest" "*"
     "@types/puppeteer" "*"
 
-"@types/faker@^4.1.5":
-  version "4.1.9"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.9.tgz#5539f331eb66fc40f06ad307e52ed83f2a3fe1bb"
-  integrity sha512-4ZFqA3CEXB6MgT8sDV8E5LhW+O9ndONsHeQXMbEwfOsjoQ4UXKqTJKru+BjDBUfobYEpQz1WYF9/uzQsvbY2wA==
-
 "@types/file-saver@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/file-saver/-/file-saver-2.0.1.tgz#e18eb8b069e442f7b956d313f4fadd3ef887354e"
@@ -2111,7 +2106,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.22", "@types/react@^16.8.23":
+"@types/react@*", "@types/react@^16.8.22", "@types/react@^16.9.19":
   version "16.9.19"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.19.tgz#c842aa83ea490007d29938146ff2e4d9e4360c40"
   integrity sha512-LJV97//H+zqKWMms0kvxaKYJDG05U2TtQB3chRLF8MPNs+MQh/H1aGlyDUxjaHvu08EAGerdX2z4LTBc7ns77A==
