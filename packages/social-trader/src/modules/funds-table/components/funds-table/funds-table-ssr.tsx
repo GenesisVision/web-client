@@ -25,7 +25,7 @@ import {
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
 
-const _FundsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
+const _FundsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
   const currency = useSelector(currencySelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const data = useSelector(fundsDataSelector);

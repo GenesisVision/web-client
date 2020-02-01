@@ -15,14 +15,15 @@ import { FUND_STRUCTURE } from "../fund-details.constants";
 export type TFundStructureData = any;
 export type TFundStructureState = ITableState<TFundStructureData>;
 
-const fundStructureSelector = (state: RootState) =>
-  state.fundDetails.fundHistory.fundStructure;
-
 export const fundStructureTableSelector = apiFieldSelector<
   FundDescriptionDataType,
   FundAssetInfo[],
   RootState
->(fundDescriptionSelector, fieldSelector(state => state.assetsStructure), []);
+>(
+  fundDescriptionSelector,
+  fieldSelector(state => state.assetsStructure),
+  []
+);
 
 const fundStructureReducer = tableReducerFactory<TFundStructureData>({
   type: FUND_STRUCTURE,

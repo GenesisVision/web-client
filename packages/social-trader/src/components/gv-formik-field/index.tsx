@@ -7,7 +7,7 @@ interface GVFormikFieldProps {
   [key: string]: any;
 }
 
-const GVFormikField: React.SFC<GVFormikFieldProps> = ({
+const GVFormikField: React.FC<GVFormikFieldProps> = ({
   component: Component,
   name,
   ...props

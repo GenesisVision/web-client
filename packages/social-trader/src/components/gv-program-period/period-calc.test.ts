@@ -1,4 +1,4 @@
-import { calcPercent } from "./index";
+import { calcPercent } from "components/pie-container/pie.helpers";
 
 describe("Period calcs tests", () => {
   describe("number format", () => {

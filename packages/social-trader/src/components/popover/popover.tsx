@@ -5,6 +5,23 @@ import Modal from "components/modal/modal";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
 
+export enum VERTICAL_POPOVER_POS {
+  TOP = "top",
+  BOTTOM = "bottom",
+  CENTER = "center"
+}
+export enum HORIZONTAL_POPOVER_POS {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center",
+  RELATIVE = "relative"
+}
+export enum ORIENTATION_POPOVER {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center"
+}
+
 const Popover: React.FC<Props> = props => {
   const {
     fixedHorizontal,
@@ -109,7 +126,7 @@ const Popover: React.FC<Props> = props => {
     if (fixedVertical) return vertical;
     const anchorBounds = getAnchorBounds();
     const popoverBounds = getPopoverBounds();
-    const topAboveWindowBound = popoverBounds.top - MARGIN_OFFSET < 0;
+    // const topAboveWindowBound = popoverBounds.top - MARGIN_OFFSET < 0;
     const bottomBelowWindowBound =
       windowHeight - anchorBounds.bottom - MARGIN_OFFSET < popoverBounds.height;
     if (bottomBelowWindowBound) return VERTICAL_POPOVER_POS.TOP;
@@ -156,23 +173,6 @@ const Popover: React.FC<Props> = props => {
 };
 
 const MARGIN_OFFSET = 10;
-
-export enum VERTICAL_POPOVER_POS {
-  TOP = "top",
-  BOTTOM = "bottom",
-  CENTER = "center"
-}
-export enum HORIZONTAL_POPOVER_POS {
-  LEFT = "left",
-  RIGHT = "right",
-  CENTER = "center",
-  RELATIVE = "relative"
-}
-export enum ORIENTATION_POPOVER {
-  LEFT = "left",
-  RIGHT = "right",
-  CENTER = "center"
-}
 
 const getAnchorEl = (el?: anchorElType) =>
   typeof el === "function" ? el() : el;

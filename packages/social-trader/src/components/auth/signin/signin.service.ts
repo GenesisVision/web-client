@@ -10,7 +10,7 @@ import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middle
 import Router from "next/router";
 import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
-import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
+import { HOME_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { removeCookie } from "utils/cookie";
 import { ResponseError, SetSubmittingType } from "utils/types";
@@ -111,10 +111,3 @@ export type LoginFuncType = (
 export type clearLoginDataFuncType = (dispatch: Dispatch) => void;
 type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = (dispatch: Dispatch) => void;
-
-export interface LoginService {
-  login: LoginFuncType;
-  clearLoginData: clearLoginDataFuncType;
-  clearTwoFactorData: clearTwoFactorDataFuncType;
-  logout: logoutFuncType;
-}

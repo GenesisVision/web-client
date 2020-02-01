@@ -31,9 +31,6 @@ export const fetchAccounts = ({
     .getSubscriberAccountsForAsset(id, authService.getAuthArg())
     .then(({ items }) => items);
 
-export const getSignalInfo = (id: string): Promise<number> =>
-  (Promise.resolve(100) as unknown) as Promise<number>;
-
 export const attachToExternalSignal: TSignalRequest = async ({
   id,
   requestParams

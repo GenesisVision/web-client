@@ -22,8 +22,6 @@ export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
-const r: Currency = "GVT";
-
 export interface NotificationsActionType<T = ProgramNotificationSettingList>
   extends ActionType {
   errorMessage?: string;
@@ -63,9 +61,6 @@ export type RootThunk<R, S = AuthRootState> = (
   getState: () => S
 ) => R;
 
-export type InvestorThunk<R> = RootThunk<R, AuthRootState>;
-export type ManagerThunk<R> = RootThunk<R, AuthRootState>;
-
 export type Nullable<T> = T | null;
 
 export type ResponseError = {
@@ -81,13 +76,12 @@ export type CurrencyEnum = Currency;
 export type AuthRootState = SocialTraderAuthRootState;
 
 export type TGetState = () => RootState;
-export type TGetAuthState = () => AuthRootState;
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export type InitializeStoreType = (initialState?: {}) => Store<
   any,
-  ActionType<any, any>
+  ActionType
 > & {
   dispatch: any;
 };
@@ -111,11 +105,6 @@ export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
   IP,
   P
 >;
-
-export type DispatchDescriptionType = () => (
-  dispatch: MiddlewareDispatch,
-  getState: () => RootState
-) => ReturnType<MiddlewareDispatch>;
 
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
 

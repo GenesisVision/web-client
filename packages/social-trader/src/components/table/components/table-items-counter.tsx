@@ -7,7 +7,6 @@ import { IPaging } from "../helpers/paging.helpers";
 interface IItemsCounterProps extends IPaging {}
 
 const ItemsCounter: React.FC<IItemsCounterProps & WithTranslation> = ({
-  totalPages = 0,
   currentPage = 1,
   itemsOnPage = 0,
   totalItems = 0,

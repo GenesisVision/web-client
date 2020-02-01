@@ -1,12 +1,6 @@
 import authActions from "actions/auth-actions";
-import clearDataActionFactory from "actions/clear-data.factory";
-import emailPendingActions, {
-  EMAIL_PENDING
-} from "actions/email-pending-actions";
-import {
-  EMAIL_PENDING_ROUTE,
-  PASSWORD_RESTORE_ROUTE
-} from "components/auth/forgot-password/forgot-password.routes";
+import emailPendingActions from "actions/email-pending-actions";
+import { EMAIL_PENDING_ROUTE } from "components/auth/forgot-password/forgot-password.routes";
 import { Push } from "components/link/link";
 import {
   CaptchaCheckResult,
@@ -14,7 +8,6 @@ import {
   ResetPasswordViewModel
 } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import { Dispatch } from "redux";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
 import { MiddlewareDispatch, SetSubmittingType, TGetState } from "utils/types";
@@ -54,9 +47,4 @@ export const sendForgotPasswordEmail = (
       )
     );
   });
-};
-
-export const navigateToPasswordRestore = () => (dispatch: Dispatch) => {
-  dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
-  Push(PASSWORD_RESTORE_ROUTE);
 };

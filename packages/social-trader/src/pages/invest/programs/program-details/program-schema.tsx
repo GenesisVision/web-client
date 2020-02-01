@@ -1,4 +1,3 @@
-import * as React from "react";
 import filesService from "services/file-service";
 
 import { ProgramDescriptionDataType } from "./program-details.types";

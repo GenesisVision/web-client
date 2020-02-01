@@ -2,9 +2,8 @@ import "./details-description-control.scss";
 
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { ASSET } from "constants/constants";
-import useIsOpen from "hooks/is-open.hook";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import DetailsDescriptionControl from "./details-description-control";
@@ -15,12 +14,7 @@ const _DetailsFavorite: React.FC<Props> = ({
   isFavorite: isFavoriteProp
 }) => {
   const [t] = useTranslation();
-  const [
-    isFavorite,
-    setIsFavorite,
-    setIsNotFavorite,
-    setIsFavoriteValue
-  ] = useIsOpen(isFavoriteProp);
+  const [isFavorite, setIsFavoriteValue] = useState(isFavoriteProp);
 
   const onApply = useCallback(() => {
     setIsFavoriteValue(!isFavorite);

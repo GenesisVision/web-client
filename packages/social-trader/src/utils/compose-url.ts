@@ -1,14 +1,12 @@
 import { ToType } from "components/link/link";
 import { createToUrl } from "components/link/link.helper";
 import {
-  FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
   FOLLOW_NOTIFICATIONS_ROUTE,
   FUND_NOTIFICATIONS_FOLDER_ROUTE,
   FUND_NOTIFICATIONS_ROUTE,
   PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
   PROGRAM_NOTIFICATIONS_ROUTE
 } from "components/notifications/notifications.routes";
-import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import { ASSET } from "constants/constants";
 import { AssetType, AssetTypeExt } from "gv-api-web";
 import {
@@ -27,7 +25,6 @@ import {
   FOLLOW_DETAILS_FOLDER_ROUTE,
   FOLLOW_DETAILS_SLUG_ROUTE,
   FOLLOW_FACET_ROUTE,
-  FOLLOW_SETTINGS_FOLDER_ROUTE,
   FUND_SETTINGS_FOLDER_ROUTE,
   PROGRAM_SETTINGS_FOLDER_ROUTE,
   SETTINGS
@@ -53,11 +50,6 @@ export const composeUrl = (route: string, slugParamName: string) => (
   replaceParams(route, {
     [slugParamName]: slugUrl
   });
-
-export const composeAssetDetailsFolderUrl = (assetType: ASSETS_TYPES): string =>
-  assetType === ASSETS_TYPES.Program
-    ? PROGRAM_DETAILS_FOLDER_ROUTE
-    : FUND_DETAILS_FOLDER_ROUTE;
 
 export const composeAssetDetailsUrl = (
   assetType: AssetTypeExt,
@@ -167,13 +159,6 @@ export const composeFundFacetUrl = (slugUrl: string): string =>
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const createFollowSettingsToUrl = (url: string, title: string): ToType =>
-  createToUrl(
-    composeFollowSettingsUrl(url),
-    FOLLOW_SETTINGS_FOLDER_ROUTE,
-    title
-  );
-
 export const createFundSettingsToUrl = (url: string, title: string): ToType =>
   createToUrl(composeFundSettingsUrl(url), FUND_SETTINGS_FOLDER_ROUTE, title);
 
@@ -184,26 +169,6 @@ export const createProgramSettingsToUrl = (
   createToUrl(
     composeProgramSettingsUrl(url),
     PROGRAM_SETTINGS_FOLDER_ROUTE,
-    title
-  );
-
-export const createAccountSettingsToUrl = (
-  url: string,
-  title: string
-): ToType =>
-  createToUrl(
-    composeAccountSettingsUrl(url),
-    PROGRAM_SETTINGS_FOLDER_ROUTE,
-    title
-  );
-
-export const createFollowNotificationsToUrl = (
-  url: string,
-  title: string
-): ToType =>
-  createToUrl(
-    composeFollowNotificationsUrl(url),
-    FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
 

@@ -6,7 +6,7 @@ import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { FormikProps, InjectedFormikProps, withFormik } from "formik";
+import { InjectedFormikProps, withFormik } from "formik";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
@@ -17,9 +17,15 @@ import { object, string } from "yup";
 
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
-const _TwoFactorCodeForm: React.FC<
-  InjectedFormikProps<Props, ITwoFactorCodeFormValues>
-> = ({
+enum FIELDS {
+  code = "code",
+  email = "email"
+}
+
+const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
+  Props,
+  ITwoFactorCodeFormValues
+>> = ({
   t,
   handleSubmit,
   error,
@@ -84,11 +90,6 @@ const _TwoFactorCodeForm: React.FC<
     </form>
   );
 };
-
-enum FIELDS {
-  code = "code",
-  email = "email"
-}
 
 export interface ITwoFactorCodeFormValues {
   [FIELDS.code]: string;

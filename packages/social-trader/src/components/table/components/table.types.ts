@@ -20,7 +20,7 @@ export type Column = {
   name: string;
 };
 
-export type UpdateFilterFunc = (filter: TFilter<any>) => void;
+export type UpdateFilterFunc = (filter: TFilter) => void;
 
 export type UpdateItemsFuncType = VoidFuncType;
 

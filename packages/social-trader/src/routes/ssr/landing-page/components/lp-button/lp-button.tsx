@@ -1,6 +1,6 @@
 import "./lp-button.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import Link, { ToType } from "components/link/link";
 import React from "react";
 
@@ -27,7 +27,7 @@ const _LPButton: React.FC<LPButtonProps> = ({
   children,
   href
 }) => {
-  const classname = classnames("lp-button", className, {
+  const classname = classNames("lp-button", className, {
     "lp-button--primary": color === "primary",
     "lp-button--secondary": color === "secondary"
   });

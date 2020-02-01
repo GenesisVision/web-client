@@ -1,6 +1,6 @@
 import emailPendingActions from "actions/email-pending-actions";
 import { Push } from "components/link/link";
-import { CaptchaCheckResult, RegisterViewModel } from "gv-api-web";
+import { RegisterViewModel } from "gv-api-web";
 import { SetSubmittingType } from "utils/types";
 
 import { signUpUserAction } from "../actions/signup.actions";

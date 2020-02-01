@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
 
 const ROWS_HEIGHT = 22;
@@ -73,9 +73,9 @@ class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
   render() {
     const { textAreaClassName, onChange, ...props } = this.props;
     return (
-      <div className={classnames("gv-text-area", textAreaClassName)}>
+      <div className={classNames("gv-text-area", textAreaClassName)}>
         <textarea
-          className={classnames("gv-text-area__hidden", props.className)}
+          className={classNames("gv-text-area__hidden", props.className)}
           readOnly
           ref={this.shadowRef}
           rows={props.rows}

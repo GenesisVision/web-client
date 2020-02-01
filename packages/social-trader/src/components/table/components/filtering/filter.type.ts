@@ -47,10 +47,6 @@ export interface TFilter<T = any> extends TFilterMain {
   value: T;
 }
 
-export interface TDefaultFilter<T = any> extends TFilterMain {
-  defaultValue: T;
-}
-
 export interface SelectFilterValue<T = any> {
   value: T;
   label?: T;
@@ -114,20 +110,4 @@ export type ComposeFiltersTypeFlat = {
     | ComposedRequestLevelFilterValues;
 };
 
-export type ComposedFiltersType = {
-  [keys in
-    | ComposedSkipTakeName
-    | ComposedRequestSortingName
-    | ComposedRequestAssetName
-    | ComposedRequestDataRangeNames
-    | ComposedRequestEventTypeName
-    | ComposedRequestLevelFilterNames
-    | ComposedRequestTagName]?: number | string;
-};
-
 export type TDefaultFilters = IComposeDefaultFilter[];
-
-export type TDefaults = {
-  defaultFilters: TDefaultFilters;
-  type: string;
-};

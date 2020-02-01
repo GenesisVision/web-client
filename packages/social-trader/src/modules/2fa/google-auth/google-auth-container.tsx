@@ -2,7 +2,7 @@ import "./google-auth.scss";
 
 import { TwoFactorAuthenticator } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { SetSubmittingType } from "utils/types";
 

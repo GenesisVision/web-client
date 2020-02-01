@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { tableLoaderCreator } from "utils/helpers";
 
-const _DashboardRecommendationsContainer: React.FC<Props> = ({}) => {
+const _DashboardRecommendationsContainer: React.FC = () => {
   const currency = useSelector(currencySelector);
   const [t] = useTranslation();
   const { data } = useApiRequest<TDashboardRecommendations>({
@@ -32,8 +32,6 @@ const _DashboardRecommendationsContainer: React.FC<Props> = ({}) => {
     </DashboardBlock>
   );
 };
-
-interface Props {}
 
 const DashboardRecommendationsContainer = React.memo(
   _DashboardRecommendationsContainer

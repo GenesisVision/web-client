@@ -1,4 +1,4 @@
-import { CaptchaDetails, GeeTestDetails, PowDetails } from "gv-api-web";
+import { CaptchaDetails, PowDetails } from "gv-api-web";
 import platformApi from "services/api-client/platform-api";
 
 //@ts-ignore

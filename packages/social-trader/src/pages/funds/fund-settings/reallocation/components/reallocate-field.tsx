@@ -50,7 +50,7 @@ const _ReallocateField: React.FC<Props> = ({
     setRemainder(getRemainder(assets));
   }, [newAsset]);
   useEffect(() => {
-    if (!!!anchor && !!newAsset) {
+    if (!anchor && !!newAsset) {
       onBlur &&
         onBlur({
           target: {
@@ -61,7 +61,7 @@ const _ReallocateField: React.FC<Props> = ({
     }
   }, [anchor, name, newAsset, onBlur, submitChanges]);
   useEffect(() => {
-    !!!anchor &&
+    !anchor &&
       setStateAssets(stateAssets.sort((a, b) => b.percent - a.percent));
   }, [anchor, stateAssets]);
 

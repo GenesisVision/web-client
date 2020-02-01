@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
 
 export enum GV_BTN_SIZE {
@@ -45,7 +45,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   name,
   noPadding
 }) => {
-  const classname = classnames("gv-btn", className, {
+  const classname = classNames("gv-btn", className, {
     "gv-btn--bold": bold,
     "gv-btn--wide": wide,
     "gv-btn--large": size === GV_BTN_SIZE.LARGE,

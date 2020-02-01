@@ -13,9 +13,14 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { object, string } from "yup";
 
-const _ConfirmForm: React.FC<
-  InjectedFormikProps<Props, IConfirmFormValues>
-> = ({ t, handleSubmit, serverError, isSubmitting }) => (
+enum FIELDS {
+  code = "code"
+}
+
+const _ConfirmForm: React.FC<InjectedFormikProps<
+  Props,
+  IConfirmFormValues
+>> = ({ t, handleSubmit, serverError, isSubmitting }) => (
   <form id="confirm-form" onSubmit={handleSubmit}>
     <DialogTop title={"Confirm"} />
     <DialogBottom>
@@ -42,10 +47,6 @@ const _ConfirmForm: React.FC<
     </DialogBottom>
   </form>
 );
-
-enum FIELDS {
-  code = "code"
-}
 
 interface Props extends OwnProps, IConfirmFormValues, WithTranslation {}
 export interface IConfirmFormValues {

@@ -22,7 +22,6 @@ import ProgramSubscriptionsRow from "./program-subscriptions-row";
 const _ProgramSubscriptions: React.FC<Props> = ({
   getItems,
   dataSelector,
-  id,
   currency
 }) => {
   const [t] = useTranslation();

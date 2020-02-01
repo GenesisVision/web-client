@@ -4,7 +4,6 @@ import authService from "services/auth-service";
 import { ActionType, ApiAction } from "utils/types";
 
 export const NOTIFICATION_SETTINGS = "NOTIFICATION_SETTINGS";
-export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";
 export const REMOVE_NOTIFICATION_SETTING = "REMOVE_NOTIFICATION_SETTING";
 export const ADD_NOTIFICATION_SETTING = "ADD_NOTIFICATION_SETTING";
 

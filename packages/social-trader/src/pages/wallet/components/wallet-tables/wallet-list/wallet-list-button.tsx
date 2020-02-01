@@ -28,6 +28,7 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
             title={t("wallet-page.list.buy-with-card")}
             href={`${depositUrlCoindirect}&url=${location}`}
             target={"_blank"}
+            rel="noopener noreferrer"
           >
             {t("wallet-page.list.buy-with-card")}
           </a>

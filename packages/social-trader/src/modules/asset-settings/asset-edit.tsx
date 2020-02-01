@@ -16,6 +16,12 @@ import {
 } from "utils/validators/validators";
 import { object } from "yup";
 
+enum FIELDS {
+  title = "title",
+  logo = "logo",
+  description = "description"
+}
+
 const _AssetEdit: React.FC<Props> = ({
   t,
   values,
@@ -56,12 +62,6 @@ const _AssetEdit: React.FC<Props> = ({
     </form>
   </SettingsBlock>
 );
-
-enum FIELDS {
-  title = "title",
-  logo = "logo",
-  description = "description"
-}
 
 export interface AssetEditFormValues {
   [FIELDS.title]: string;

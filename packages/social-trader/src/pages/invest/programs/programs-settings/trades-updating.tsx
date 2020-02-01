@@ -10,7 +10,6 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
 const _TradesUpdating: React.FC<Props> = ({
-  values,
   handleSubmit,
   dirty,
   isValid,

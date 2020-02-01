@@ -43,7 +43,7 @@ const TileFilter: React.FC<Props> = ({
       removeTile: handleRemove
     })
   );
-  const child = React.cloneElement(children as React.ReactElement<any>, {
+  const child = React.cloneElement(children as React.ReactElement, {
     value,
     changeFilter: handleAdd,
     cancel: clearAnchor

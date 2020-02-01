@@ -10,7 +10,6 @@ import { number, object } from "yup";
 
 const _StopOutLevel: React.FC<Props> = ({
   t,
-  values,
   handleSubmit,
   dirty,
   isValid,

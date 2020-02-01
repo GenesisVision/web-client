@@ -1,5 +1,3 @@
-import "./account-settings.scss";
-
 import withLoader from "decorators/with-loader";
 import { PrivateTradingAccountFull } from "gv-api-web";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";

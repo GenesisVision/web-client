@@ -24,12 +24,6 @@ export const dispatchFollowDescription = (id: string) => (
   );
 };
 
-export enum EVENT_LOCATION {
-  Asset = "Asset",
-  Dashboard = "Dashboard",
-  EventsAll = "EventsAll"
-}
-
 export const getProfitChart: TGetChartFunc = ({
   id,
   period,

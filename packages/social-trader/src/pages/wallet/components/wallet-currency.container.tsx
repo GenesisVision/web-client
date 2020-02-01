@@ -4,10 +4,8 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
-import { CurrencyEnum } from "utils/types";
 
 import { walletSelector as walletDataSelector } from "../reducers/wallet.reducers";
-import { WalletRouteProps } from "../wallet.routes";
 import { walletDataCreator } from "./wallet-container-loader";
 import WalletCurrency from "./wallet-currency";
 

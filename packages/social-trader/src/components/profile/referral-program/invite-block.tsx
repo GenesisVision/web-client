@@ -71,6 +71,7 @@ const _ShareBlock: React.FC<{
         <a
           title={"Email"}
           target="_blank"
+          rel="noopener noreferrer"
           href={`mailto:?body=${rawUrlEncode(`${shareMessage} ${refUrl}`)} `}
         >
           <ImageBaseElement alt={"Email"} src={Email} />

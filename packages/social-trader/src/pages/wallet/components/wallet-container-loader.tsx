@@ -1,7 +1,6 @@
 import "./wallet-balance/wallet-balance.scss";
 
 import { WalletData, WalletSummary } from "gv-api-web";
-import * as React from "react";
 import { getRandomInteger, getRandomWord } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 

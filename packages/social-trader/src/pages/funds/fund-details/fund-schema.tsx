@@ -1,5 +1,4 @@
 import { FundDescriptionDataType } from "pages/funds/fund-details/reducers/description.reducer";
-import * as React from "react";
 import filesService from "services/file-service";
 import { SchemaType } from "utils/seo";
 

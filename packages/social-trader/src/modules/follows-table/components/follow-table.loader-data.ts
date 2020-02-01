@@ -51,8 +51,3 @@ export const followDetailsLoaderDataCreator = () => ({
 export const followListLoaderData = tableLoaderCreator(
   followDetailsLoaderDataCreator
 );
-
-export const followTableLoaderData = {
-  programs: followListLoaderData,
-  total: followListLoaderData.length
-};

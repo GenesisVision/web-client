@@ -26,6 +26,14 @@ import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { WalletField } from "./form-fields/wallet-field";
 
+export enum DEPOSIT_FORM_FIELDS {
+  rate = "rate",
+  amount = "amount",
+  walletCurrency = "walletCurrency",
+  walletId = "walletId",
+  availableInWallet = "availableInWallet"
+}
+
 const INIT_WALLET_CURRENCY = "GVT";
 
 const isAllow = (currency: string) => ({
@@ -34,10 +42,10 @@ const isAllow = (currency: string) => ({
 }: NumberFormatValues): boolean =>
   (formattedValue === "" || validateFraction(value, currency)) && value !== ".";
 
-const _DepositForm: React.FC<
-  InjectedFormikProps<Props, IDepositFormValues>
-> = ({
-  minDeposit,
+const _DepositForm: React.FC<InjectedFormikProps<
+  Props,
+  IDepositFormValues
+>> = ({
   fees,
   availableToInvest: availableToInvestProp = Number.MAX_SAFE_INTEGER,
   t,
@@ -178,14 +186,6 @@ const DepositForm = compose<React.FC<IDepositOwnProps>>(
   React.memo
 )(_DepositForm);
 export default DepositForm;
-
-export enum DEPOSIT_FORM_FIELDS {
-  rate = "rate",
-  amount = "amount",
-  walletCurrency = "walletCurrency",
-  walletId = "walletId",
-  availableInWallet = "availableInWallet"
-}
 
 export interface IDepositOwnProps {
   minDeposit: number;

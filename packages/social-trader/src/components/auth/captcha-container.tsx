@@ -1,4 +1,4 @@
-import { CaptchaType, GeeTestDetails, PowDetails } from "gv-api-web";
+import { CaptchaType, PowDetails } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useState } from "react";
 import { SetSubmittingType } from "utils/types";
@@ -8,7 +8,7 @@ import Pow from "./captcha/pow";
 
 const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   const [pow, setPow] = useState<PowDetails | undefined>(undefined);
-  const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
+  // const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
   const [captchaType, setCaptchaType] = useState<CaptchaType>("None");
   const [prefix, setPrefix] = useState<number | undefined>(undefined);
   const [id, setId] = useState<string>("");
@@ -54,18 +54,16 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   }, [id, prefix, values, isSubmit, captchaType, setSubmitting]);
   const handleSubmit = useCallback(
     (values: TValues, setSubmittingProp?: SetSubmittingType) => {
-      authService
-        .getCaptcha(values.email)
-        .then(({ captchaType, geeTest, id, pow }) => {
-          setEmail(values.email);
-          setCaptchaType(captchaType);
-          setGeeTest(geeTest);
-          setId(id);
-          setPow(pow);
-          setValues(values);
-          setSetSubmitting({ func: setSubmittingProp });
-          setIsSubmit();
-        });
+      authService.getCaptcha(values.email).then(({ captchaType, id, pow }) => {
+        setEmail(values.email);
+        setCaptchaType(captchaType);
+        // setGeeTest(geeTest);
+        setId(id);
+        setPow(pow);
+        setValues(values);
+        setSetSubmitting({ func: setSubmittingProp });
+        setIsSubmit();
+      });
     },
     []
   );

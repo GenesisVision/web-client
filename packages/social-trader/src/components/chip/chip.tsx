@@ -3,6 +3,17 @@ import "./chip.scss";
 import classNames from "classnames";
 import * as React from "react";
 
+export enum CHIP_TYPE {
+  EMPTY = "empty",
+  POSITIVE = "positive",
+  NEGATIVE = "negative",
+  WARNING = "warning"
+}
+
+export enum CHIP_SIZE {
+  SMALL = "SMALL"
+}
+
 const Chip: React.FC<Props> = React.memo(
   ({
     type,
@@ -29,17 +40,6 @@ const Chip: React.FC<Props> = React.memo(
     </div>
   )
 );
-
-export enum CHIP_SIZE {
-  SMALL = "SMALL"
-}
-
-export enum CHIP_TYPE {
-  EMPTY = "empty",
-  POSITIVE = "positive",
-  NEGATIVE = "negative",
-  WARNING = "warning"
-}
 
 interface Props {
   stretch?: boolean;

@@ -7,6 +7,11 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
+enum ITEM {
+  LABEL = "LABEL",
+  VALUE = "VALUE"
+}
+
 const getTextContent = (node: React.ReactNode) => {
   // @ts-ignore
   return (node && node.props && node.props.labelText) || "";
@@ -72,11 +77,6 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
     </div>
   );
 };
-
-enum ITEM {
-  LABEL = "LABEL",
-  VALUE = "VALUE"
-}
 
 export interface IStatisticItemInnerProps {
   noWrap?: boolean;

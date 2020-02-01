@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
 
 import { GVTabProps } from "./gv-tab";
@@ -12,7 +12,7 @@ export interface GVTabsProps {
   children: Array<React.ReactElement<GVTabProps>>;
 }
 
-const GVTabs: React.SFC<GVTabsProps> = ({
+const GVTabs: React.FC<GVTabsProps> = ({
   className,
   value,
   onChange,
@@ -30,7 +30,7 @@ const GVTabs: React.SFC<GVTabsProps> = ({
   const visibleTabs = children.filter(child => child.props.visible).length;
   return (
     <div
-      className={classnames(className, "gv-tabs", {
+      className={classNames(className, "gv-tabs", {
         "gv-tabs--title": visibleTabs === 1
       })}
     >

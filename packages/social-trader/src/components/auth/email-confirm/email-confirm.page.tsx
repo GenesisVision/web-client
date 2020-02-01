@@ -5,8 +5,6 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 
-export const EMAIL_CONFIRM_ROUTE = `/email-confirm`;
-
 const _EmailConfirmPage: React.FC<Props> = ({ userId, code }) => {
   const [t] = useTranslation();
   return (

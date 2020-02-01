@@ -1,5 +1,4 @@
 import {
-  Broker,
   MakeSignalProviderProgram,
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
@@ -7,7 +6,6 @@ import {
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
-import { getRandomInteger, getRandomWord, getRandomWords } from "utils/helpers";
 
 import { CONVERT_ASSET } from "../convert-asset.contants";
 import { TAssetFromTo } from "../convert-asset.types";
@@ -17,7 +15,6 @@ export type IConvertAssetSettingsFormValues = any;
 export type RequestType =
   | MakeSignalProviderProgram
   | MakeTradingAccountProgram
-  | MakeTradingAccountSignalProvider
   | MakeTradingAccountSignalProvider;
 
 export const convertAsset = ({
@@ -73,40 +70,3 @@ const getCovertMethod = ({
         });
   }
 };
-
-type TGetConvertMethodReturn = (request: RequestType) => Promise<any>; //ProgramCreateResult
-
-export const getBrokerLoaderData: () => any = () => ({
-  name: getRandomWord(),
-  description: getRandomWords(11),
-  logo: "",
-  terms: getRandomWord(),
-  assets: getRandomWord(),
-  fee: getRandomInteger(),
-  leverageMin: getRandomInteger(),
-  leverageMax: getRandomInteger(),
-  accountTypes: [
-    {
-      id: getRandomWord(),
-      name: getRandomWord(),
-      description: getRandomWords(11),
-      type: "MetaTrader4",
-      leverages: [10],
-      currencies: ["GVT"],
-      minimumDepositsAmount: {},
-      isForex: false,
-      isSignalsAvailable: false
-    }
-  ],
-  isForex: false,
-  isSignalsAvailable: false,
-  tags: [
-    {
-      name: "ANYANY",
-      color: "#FFF"
-    }
-  ]
-});
-export const convertAssetBrokerLoaderData: Broker[] = new Array(7)
-  .fill("")
-  .map(getBrokerLoaderData);

@@ -118,7 +118,6 @@ export type TUseFundChartStateDataMethods = {
   selectedCurrencies: TChartCurrency[];
   setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
 };
-export type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
 export type TUseFundChartStateDataCreator = (props: {
   view: DETAILS_CHART_TABS;
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;
