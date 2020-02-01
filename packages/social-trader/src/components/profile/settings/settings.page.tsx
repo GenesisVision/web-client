@@ -1,5 +1,3 @@
-import "./settings.scss";
-
 import ProfileLayout from "components/profile/profile-layout";
 import { SETTINGS } from "components/profile/profile.constants";
 import SettingsBlock from "components/settings-block/settings-block";
