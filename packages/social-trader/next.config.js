@@ -14,7 +14,7 @@ const analyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
 });
 
-function create(role, path) {
+function create(path) {
   if (isProd) {
     dotenv.config({ path: ".env.production" });
   }
@@ -68,4 +68,4 @@ function create(role, path) {
   );
 }
 
-module.exports = create("social-trader", path.resolve("./src"));
+module.exports = create(path.resolve("./src"));

@@ -12,9 +12,12 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { object } from "yup";
 
+enum FIELDS {
+  logo = "logo"
+}
+
 const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
   t,
-  avatar,
   handleSubmit,
   isValid,
   isSubmitting
@@ -49,10 +52,6 @@ const ProfileImage = compose<React.ComponentType<OwnProps>>(
   React.memo
 )(_ProfileImage);
 export default ProfileImage;
-
-enum FIELDS {
-  logo = "logo"
-}
 
 interface OwnProps {
   avatar: string;

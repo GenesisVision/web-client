@@ -72,7 +72,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
   );
 
   const handleUpdateFilter = useCallback(
-    (filter: TFilter<any>) => {
+    (filter: TFilter) => {
       if (!filtering || !paging) return;
       setFiltering(updateFilter(filtering, filter));
       setPaging({

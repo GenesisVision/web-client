@@ -9,9 +9,15 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { object, ref, string } from "yup";
 
-const _RestorePassword: React.FC<
-  InjectedFormikProps<Props, IRestorePasswordFormValues>
-> = ({ t, isSubmitting, handleSubmit, error }) => (
+enum FIELDS {
+  password = "password",
+  confirmPassword = "confirmPassword"
+}
+
+const _RestorePassword: React.FC<InjectedFormikProps<
+  Props,
+  IRestorePasswordFormValues
+>> = ({ t, isSubmitting, handleSubmit, error }) => (
   <form id="passwordRestoreForm" onSubmit={handleSubmit} noValidate>
     <GVFormikField
       type="password"
@@ -53,11 +59,6 @@ interface OwnProps {
 export interface IRestorePasswordFormValues {
   password: string;
   confirmPassword: string;
-}
-
-enum FIELDS {
-  password = "password",
-  confirmPassword = "confirmPassword"
 }
 
 const RestorePassword = compose<React.FC<OwnProps>>(

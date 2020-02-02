@@ -8,9 +8,8 @@ import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { TextInputValues } from "components/text-input-component/text-input-component";
 import * as React from "react";
 
-export const _AssetFormField: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & Props
-> = ({
+export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
+  Props> = ({
   wide,
   isAllowed,
   max = 500,

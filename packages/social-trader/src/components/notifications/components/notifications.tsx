@@ -10,7 +10,7 @@ import ClearButton from "components/notifications/components/ClearButton";
 import NotificationsGroup from "components/notifications/components/notification-group/notification-group";
 import Spinner from "components/spiner/spiner";
 import dayjs from "dayjs";
-import { NotificationList, NotificationViewModel } from "gv-api-web";
+import { NotificationViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -123,7 +123,7 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: () => Promise<NotificationList>;
+  fetchNotifications: () => void;
   clearNotifications: () => void;
   closeNotifications: () => void;
   count: number;

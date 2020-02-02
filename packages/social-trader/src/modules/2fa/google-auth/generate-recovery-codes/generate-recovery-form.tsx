@@ -2,7 +2,6 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
@@ -14,9 +13,10 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { object, string } from "yup";
 
-const GenerateRecoveryForm: React.FC<
-  InjectedFormikProps<Props, IFormValues>
-> = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
+const GenerateRecoveryForm: React.FC<InjectedFormikProps<
+  Props,
+  IFormValues
+>> = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
   <>
     <DialogTop title={t("2fa-page.codes.generate-recovery-codes")} />
     <DialogBottom>

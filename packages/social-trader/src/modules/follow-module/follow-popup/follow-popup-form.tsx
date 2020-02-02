@@ -9,7 +9,7 @@ import {
 } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import FollowCreateExternalAccount from "modules/follow-module/follow-popup/follow-popup-create-external-account";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";

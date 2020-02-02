@@ -26,7 +26,6 @@ import { useChartData } from "../../details.chart.helpers";
 
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,
-  renderProfitValue,
   period,
   setPeriod,
   data,

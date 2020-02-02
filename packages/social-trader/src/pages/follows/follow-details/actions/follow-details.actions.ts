@@ -4,19 +4,9 @@ import {
 } from "components/chart/chart-period/chart-period.helpers";
 import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
-import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
-import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import {
-  InvestmentEventViewModels,
-  ProgramBalanceChart,
-  ProgramProfitPercentCharts,
-  SignalProviderSubscribers,
-  TradesSignalViewModel,
-  TradesViewModel
-} from "gv-api-web";
+import { ProgramBalanceChart } from "gv-api-web";
 import { FollowAbsoluteProfitChartDataType } from "pages/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import followApi from "services/api-client/follow-api";
-import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
@@ -25,9 +15,6 @@ import {
   FETCH_FOLLOW_BALANCE_CHART,
   FETCH_FOLLOW_DESCRIPTION,
   FETCH_FOLLOW_PROFIT_CHART,
-  FOLLOW_OPEN_POSITIONS,
-  FOLLOW_SUBSCRIPTIONS,
-  FOLLOW_TRADES,
   SET_FOLLOW_ID,
   SET_FOLLOW_STATISTIC_CURRENCY,
   SET_FOLLOW_STATISTIC_PERIOD
@@ -35,23 +22,6 @@ import {
 import { FollowDetailsDataType } from "../follow-details.types";
 import { FollowIdState } from "../reducers/id.reducer";
 import { FollowProfitChartDataType } from "../reducers/profit-chart.reducer";
-import {
-  EVENT_LOCATION,
-  fetchPortfolioEventsWithoutTable
-} from "../services/follow-details.service";
-
-const sendFollowChartRequest = (
-  { start, end }: ChartDefaultPeriod,
-  id: string,
-  currency: CurrencyEnum
-): Promise<ProgramProfitPercentCharts> =>
-  // @ts-ignore
-  programsApi.getProgramProfitPercentCharts(id, {
-    dateFrom: start,
-    dateTo: end,
-    maxPointCount: 100,
-    currency
-  });
 
 export const statisticCurrencyAction = (
   currency: CurrencyEnum
@@ -65,18 +35,6 @@ export const statisticPeriodAction = (
 ): TStatisticPeriodAction => ({
   type: SET_FOLLOW_STATISTIC_PERIOD,
   payload: period
-});
-
-export const fetchEventsAction = (
-  assetId: string,
-  eventLocation: EVENT_LOCATION,
-  filters?: ComposeFiltersAllType
-): ActionType<Promise<InvestmentEventViewModels>> => ({
-  type: EVENTS_ACTION_TYPE,
-  payload: fetchPortfolioEventsWithoutTable(eventLocation, {
-    ...filters,
-    assetId
-  })
 });
 
 export const fetchFollowProfitChartAction = (
@@ -129,35 +87,6 @@ export const fetchFollowDescriptionAction = (
   payload: followApi.getFollowAssetDetails(id, { authorization })
 });
 
-export const fetchOpenPositionsAction = (
-  id: string,
-  filters: ComposeFiltersAllType
-): ActionType<Promise<TradesViewModel>> => ({
-  type: FOLLOW_OPEN_POSITIONS,
-  payload: programsApi.getProgramOpenTrades(id, filters)
-});
-
-export const fetchTradesAction = (
-  id: string,
-  filters: ComposeFiltersAllType
-): ActionType<Promise<TradesSignalViewModel>> => ({
-  type: FOLLOW_TRADES,
-  payload: programsApi.getAssetTrades(id, filters)
-});
-
-export const fetchSubscriptionsAction = (
-  id: string,
-  authorization: string,
-  filters: ComposeFiltersAllType
-): ActionType<Promise<SignalProviderSubscribers>> => ({
-  type: FOLLOW_SUBSCRIPTIONS,
-  payload: programsApi.getProgramSubscribers(id, authorization, filters)
-});
-
 export interface SetFollowIdAction extends ActionType<FollowIdState> {
   type: typeof SET_FOLLOW_ID;
 }
-export const setFollowIdAction = (id: string): SetFollowIdAction => ({
-  type: SET_FOLLOW_ID,
-  payload: id
-});

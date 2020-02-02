@@ -200,6 +200,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         )}
       />
       <DetailsDivider />
+
+      <DetailsDivider />
       <DetailsInvestment
         isOwnAsset={isOwnAsset}
         fees={{

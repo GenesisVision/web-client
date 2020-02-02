@@ -1,11 +1,10 @@
 import "./broker-card.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import TagBrokerContainer from "components/tags/tag-broker-container/tag-broker-container";
 import { Tag } from "gv-api-web";
 import * as React from "react";
-import filesService from "services/file-service";
 
 import BrokerCardAdornment from "./broker-card-adornment";
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
@@ -23,12 +22,12 @@ const _BrokerCard: React.FC<Props> = ({
     BROKER_CARD_EXTRA_STATE.NONE,
     BROKER_CARD_EXTRA_STATE.KYC_REQUIRED
   ].includes(cardState);
-  const className = classnames("broker-card", {
+  const className = classNames("broker-card", {
     "broker-card--clickable": !!onSelect,
     "broker-card--active": isActive,
     "broker-card--inactive": !isActive
   });
-  let logoClassName = classnames(
+  let logoClassName = classNames(
     "broker-card__logo",
     "broker-card__logo--" + slugBrokerName(brokerName)
   );

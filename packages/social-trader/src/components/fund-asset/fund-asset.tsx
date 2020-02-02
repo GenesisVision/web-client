@@ -6,7 +6,15 @@ import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
+export enum FUND_ASSET_TYPE {
+  LARGE = "large",
+  MIDDLE = "middle",
+  SHORT = "short",
+  TEXT = "text"
+}
+
 const _FundAsset: React.FC<Props> = ({
+  url,
   current: percent,
   target: mandatoryFundPercent,
   currency,
@@ -53,6 +61,7 @@ const _FundAsset: React.FC<Props> = ({
           )}
         >
           <CurrencyItem
+            url={url}
             logo={icon}
             small
             name={!!currency && currencyName}
@@ -74,13 +83,6 @@ const _FundAsset: React.FC<Props> = ({
       );
   }
 };
-
-export enum FUND_ASSET_TYPE {
-  LARGE = "large",
-  MIDDLE = "middle",
-  SHORT = "short",
-  TEXT = "text"
-}
 
 interface Props extends FundAssetInfo {
   currency: Currency;

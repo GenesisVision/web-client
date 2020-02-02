@@ -15,8 +15,6 @@ import { RootState } from "reducers/root-reducer";
 import { ApiAction } from "utils/types";
 
 export const DASHBOARD_TRADING_PRIVATE = "DASHBOARD_TRADING_PRIVATE";
-export const CLEAR_DASHBOARD_TRADING_PRIVATE =
-  "CLEAR_DASHBOARD_TRADING_PRIVATE";
 
 export type TTradingPrivateItems = DashboardTradingAsset;
 export type TTradingPrivateStateData = ItemsViewModelDashboardTradingAsset;

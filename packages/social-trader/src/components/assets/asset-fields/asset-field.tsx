@@ -3,9 +3,8 @@ import "./asset-field.scss";
 import classNames from "classnames";
 import * as React from "react";
 
-export const AssetField: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & Props
-> = ({ children, wide, className }) => {
+export const AssetField: React.FC<React.HTMLAttributes<HTMLDivElement> &
+  Props> = ({ children, wide, className }) => {
   return (
     <div
       className={classNames("asset-field", className, {

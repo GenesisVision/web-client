@@ -6,23 +6,11 @@ import {
 } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
-export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
-export const GENERAL_FILTER_TYPE = "GENERAL_FILTER_TYPE";
-
-export const FilterType = {
-  general: "general",
-  range: "range",
-  custom: "custom"
-};
-
 export enum FILTER_TYPE {
   GENERAL = "general",
   RANGE = "range",
   CUSTOM = "custom"
 }
-
-export const composeFilteringActionType = (actionType: string): string =>
-  `${actionType}_FILTERING`;
 
 export const composeFilters = (
   allFilters: IComposeDefaultFilter[],
@@ -47,7 +35,7 @@ export const composeFilters = (
   }, {});
 };
 
-const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
+const processFilterValue = (filter: TFilter): ComposeFiltersType => {
   let requestValue = undefined;
   switch (filter.type) {
     case FILTER_TYPE.RANGE:
@@ -81,7 +69,7 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
 //@ts-ignore
 export const updateFilter = (
   oldFilters: FilteringType,
-  newFilter: TFilter<any>
+  newFilter: TFilter
 ): FilteringType => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];

@@ -23,7 +23,6 @@ import ReallocateField, { composeSelectedAssets } from "./reallocate-field";
 const _ReallocateForm: React.FC<Props> = ({
   availableReallocationPercents,
   values: { currentAssets, assets },
-  fundAssets,
   t,
   handleSubmit,
   isValid,

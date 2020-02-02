@@ -78,7 +78,7 @@ interface Props {
   value: number;
   valueAdornment?: string;
   max: number;
-  maxLabel?: React.ReactElement<any>;
+  maxLabel?: React.ReactElement;
   title?: React.ReactNode;
   className?: string;
   tooltipContent?: string;

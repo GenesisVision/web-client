@@ -1,5 +1,6 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
@@ -12,11 +13,15 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { twoFactorValidator } from "utils/validators/validators";
 import { object } from "yup";
-import { DialogField } from "components/dialog/dialog-field";
 
-const _CloseAssetForm: React.FC<
-  InjectedFormikProps<FormProps, ICloseAssetFormValues>
-> = ({
+enum FIELDS {
+  twoFactorCode = "twoFactorCode"
+}
+
+const _CloseAssetForm: React.FC<InjectedFormikProps<
+  FormProps,
+  ICloseAssetFormValues
+>> = ({
   asset,
   t,
   onCancel,
@@ -82,10 +87,6 @@ const CloseAssetForm = compose<React.ComponentType<OwnProps>>(
   })
 )(_CloseAssetForm);
 export default CloseAssetForm;
-
-enum FIELDS {
-  twoFactorCode = "twoFactorCode"
-}
 
 interface OwnProps {
   assetName?: string;

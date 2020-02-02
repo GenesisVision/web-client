@@ -5,6 +5,7 @@ import Page from "components/page/page";
 import { ASSET, CREATE_ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
+import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
@@ -27,11 +28,6 @@ import {
 
 const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
-);
-const AccountDetailsSubscriptions = dynamic(() =>
-  import(
-    "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions"
-  )
 );
 
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {

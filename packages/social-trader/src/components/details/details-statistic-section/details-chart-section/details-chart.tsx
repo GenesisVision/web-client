@@ -18,6 +18,12 @@ import ProfitChartSection, {
   IProfitChartSectionProps
 } from "./profit-chart-section/profit-chart-section";
 
+export enum DETAILS_CHART_TABS {
+  ABSOLUTE_PROFIT = "absolute-profit",
+  PROFIT = "profit",
+  BALANCE = "balance"
+}
+
 const _DetailsChart: React.FC<IDetailsChartProps> = ({
   renderAbsoluteProfitChart,
   absoluteProfitChartSelector,
@@ -84,12 +90,6 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
     </DetailsBlock>
   );
 };
-
-export enum DETAILS_CHART_TABS {
-  ABSOLUTE_PROFIT = "absolute-profit",
-  PROFIT = "profit",
-  BALANCE = "balance"
-}
 
 export interface IDetailsChartProps
   extends IBalanceChartSectionProps,

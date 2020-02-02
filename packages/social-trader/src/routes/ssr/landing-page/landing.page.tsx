@@ -35,7 +35,7 @@ const _LandingPage: React.FC<Props> = ({
 }) => {
   return (
     <Layout
-      description="Next generation social trading platform allows you to trade Crypto, Forex and Stocks, create and manage own funds, invest and follow best trading strategies."
+      description="Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies."
       title="Genesis Vision - The Next Generation Social Trading Platform"
     >
       <main className="home">

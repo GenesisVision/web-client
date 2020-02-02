@@ -14,6 +14,13 @@ import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
 import SearchResultTable from "./search-result-table";
 
+export enum SEARCH_TABS {
+  FOLLOWS = "follows",
+  PROGRAMS = "programs",
+  FUNDS = "funds",
+  MANAGERS = "manages"
+}
+
 const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
@@ -84,13 +91,6 @@ const Tab: React.FC<ITabProps> = React.memo(({ data, tab }) => {
       return null;
   }
 });
-
-export enum SEARCH_TABS {
-  FOLLOWS = "follows",
-  PROGRAMS = "programs",
-  FUNDS = "funds",
-  MANAGERS = "manages"
-}
 
 export interface SearchTableProps<T> {
   data: T;

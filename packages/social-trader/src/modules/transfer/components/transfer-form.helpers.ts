@@ -7,13 +7,11 @@ import {
 } from "modules/transfer/services/transfer.services";
 import {
   TRANSFER_CONTAINER,
-  TransferFormItemsType,
-  TransferItemType
+  TransferFormItemsType
 } from "modules/transfer/transfer.types";
 import { WithTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { getRandomWord } from "utils/helpers";
 import { SetSubmittingType } from "utils/types";
 import { lazy, number, object, Schema } from "yup";
 
@@ -82,14 +80,6 @@ export const transferFormMapPropsToValues = ({
 
 export const formatWalletItemValue = (item: WalletItemType) =>
   formatCurrencyValue(item.available, item.currency);
-
-export const getTransferItemLoader = (): TransferItemType => ({
-  available: 0,
-  currency: "ETH",
-  id: "id",
-  logo: "",
-  title: getRandomWord()
-});
 
 export const getTransferFormLoaderData = (
   currentItem: WalletItemType,

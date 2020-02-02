@@ -17,7 +17,6 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   className,
   color,
   imageClassName,
-  levelClassName,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,

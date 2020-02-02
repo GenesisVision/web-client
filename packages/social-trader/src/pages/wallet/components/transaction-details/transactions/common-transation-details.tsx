@@ -63,11 +63,9 @@ const TransactionDetailsListItem: React.FC<{
   );
 });
 
-const TransactionDetailsItem: React.FC<
-  {
-    label: string;
-  } & React.HTMLAttributes<HTMLDivElement>
-> = ({ label, children }) => {
+const TransactionDetailsItem: React.FC<{
+  label: string;
+} & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
   return (
     <DialogField>
       <StatisticItem label={label}>{children}</StatisticItem>
@@ -91,7 +89,7 @@ const TransactionStatusBlock: React.FC<{
 const _TransactionAssetBlock: React.FC<{
   type: "investment" | "withdrawal";
   asset: TransactionAssetDetails;
-}> = ({ asset, type }) => {
+}> = ({ asset }) => {
   return (
     <TransactionDetailsItem label={asset.description}>
       <TransactionAsset url={asset.logo} data={asset} />

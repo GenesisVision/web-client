@@ -1,14 +1,5 @@
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
-import FundAssetContainer, {
-  FundAssetType
-} from "components/fund-asset/fund-asset-container";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
-import TableCard, {
-  TableCardTable,
-  TableCardTableColumn,
-  TableCardTableRow
-} from "components/table/components/table-card/table-card";
+import TableCard from "components/table/components/table-card/table-card";
 import {
   IRenderActionsArgs,
   TableCardActions,
@@ -18,14 +9,13 @@ import {
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import { ASSET, FUND_CURRENCY } from "constants/constants";
 import { FundInvestingDetailsList } from "gv-api-web";
+import { FundCardTable } from "modules/funds-table/components/funds-table/fund-card";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeFundsDetailsUrl } from "utils/compose-url";
-import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardFundCard: React.FC<Props> = ({
@@ -74,49 +64,14 @@ const _DashboardFundCard: React.FC<Props> = ({
       managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >
-      <TableCardTable wrap>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
-            <NumberFormat
-              value={formatCurrencyValue(
-                fund.personalDetails.value,
-                fund.balance.currency
-              )}
-              suffix={` ${fund.balance.currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
-            <NumberFormat
-              value={fund.investorsCount}
-              displayType="text"
-              decimalScale={0}
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
-            <NumberFormat
-              value={formatValue(fund.statistic.drawdown, 2)}
-              displayType="text"
-              suffix="%"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableRow>
-          {fund.topFundAssets && (
-            <FundAssetContainer
-              noWrap
-              assets={fund.topFundAssets as FundAssetType[]}
-              type={FUND_ASSET_TYPE.SHORT}
-              size={3}
-              length={fund.totalAssetsCount}
-            />
-          )}
-        </TableCardTableRow>
-      </TableCardTable>
+      <FundCardTable
+        amount={fund.balance.amount}
+        currency={fund.balance.currency}
+        investorsCount={fund.investorsCount}
+        drawdown={fund.statistic.drawdown}
+        topFundAssets={fund.topFundAssets}
+        totalAssetsCount={fund.totalAssetsCount}
+      />
       <DepositWithdrawButtons
         title={fund.title}
         onApply={updateItems}

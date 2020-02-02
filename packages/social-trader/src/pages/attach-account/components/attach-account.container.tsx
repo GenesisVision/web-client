@@ -7,7 +7,6 @@ import {
   fetchExchanges
 } from "pages/attach-account/services/attach-account.service";
 import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { SetSubmittingType } from "utils/types";
 
@@ -16,7 +15,6 @@ import AttachAccountSettings, {
 } from "./attach-account-settings/attach-account-settings";
 
 const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
-  const [t] = useTranslation();
   const pushMiddleware = () => Push(TRADING_ROUTE);
   const { sendRequest: attach } = useApiRequest({
     middleware: [pushMiddleware],

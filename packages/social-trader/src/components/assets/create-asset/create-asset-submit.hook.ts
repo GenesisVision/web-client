@@ -31,7 +31,7 @@ const useCreateAssetSubmit = ({
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const checkConditionMiddleware = (data: any) => {
-    if (!condition || !!condition(data)) {
+    if (!condition || condition(data)) {
       dispatch(fetchWallets(currency));
       dispatch(
         alertMessageActions.success(

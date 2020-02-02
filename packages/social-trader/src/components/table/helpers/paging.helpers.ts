@@ -13,9 +13,6 @@ export interface ISkipAndTake {
   take: number;
 }
 
-export const composePagingActionType = (actionType: string): string =>
-  `${actionType}_PAGING`;
-
 export const calculateTotalPages = (
   itemsCount: number,
   itemsOnPage: number = DEFAULT_PAGING.itemsOnPage

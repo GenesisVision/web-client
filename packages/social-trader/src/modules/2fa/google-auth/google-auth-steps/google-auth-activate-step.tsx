@@ -9,9 +9,10 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { number, object, string } from "yup";
 
-export const GoogleStep3: React.FC<
-  InjectedFormikProps<Props, IGoogleActivateStepFormValues>
-> = ({
+export const GoogleStep3: React.FC<InjectedFormikProps<
+  Props,
+  IGoogleActivateStepFormValues
+>> = ({
   t,
   handleSubmit,
   errorMessage,

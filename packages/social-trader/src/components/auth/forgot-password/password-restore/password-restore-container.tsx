@@ -5,13 +5,13 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
+import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 import { ResponseError, SetSubmittingType } from "utils/types";
 
 import { restorePassword } from "../services/forgot-password.service";
 import PasswordRestore, {
   IRestorePasswordFormValues
 } from "./password-restore";
-import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 
 const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
   const dispatch = useDispatch();

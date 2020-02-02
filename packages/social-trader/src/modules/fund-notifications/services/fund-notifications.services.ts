@@ -14,8 +14,7 @@ import { MiddlewareDispatch, ResponseError } from "utils/types";
 import {
   addErrorMessageAction,
   addFundNotificationsAction,
-  fetchFundNotificationsAction,
-  toggleFundNotificationsAction
+  fetchFundNotificationsAction
 } from "../actions/fund-notifications.actions";
 
 export const fetchFundNotifications = (
@@ -50,17 +49,4 @@ export const removeFundNotification: TRemoveNotification = (
   >).then(() => {
     dispatch(fetchFundNotifications(assetId!));
     dispatch(alertMessageActions.success(message));
-  });
-
-export const toggleFundNotificationsService = ({
-  id,
-  enabled,
-  assetId
-}: {
-  id: string;
-  enabled: boolean;
-  assetId: string;
-}) => (dispatch: MiddlewareDispatch) =>
-  dispatch(toggleFundNotificationsAction(id, enabled)).then(() => {
-    dispatch(fetchFundNotifications(assetId));
   });

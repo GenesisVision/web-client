@@ -13,7 +13,7 @@ import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-const _ProgramOpenPositionsRow: React.FC<Props> = ({ position, currency }) => (
+const _ProgramOpenPositionsRow: React.FC<Props> = ({ position }) => (
   <TableRow stripy>
     <TableCell className="details-trades__cell program-details-trades__cell--date">
       {formatDate(position.date)}

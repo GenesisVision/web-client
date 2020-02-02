@@ -7,11 +7,15 @@ import {
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
 
-const _TradePage: React.FC<Props> = ({}) => {
+const _TradePage: React.FC = () => {
   const [t] = useTranslation();
   const title = t("trade.title");
   return (
-    <Page showTitle title={title}>
+    <Page
+      description={"Information about trade brokers"}
+      showTitle
+      title={title}
+    >
       <BrokersContainer
         darkTheme
         brokersInfo={brokersInfo}
@@ -21,7 +25,5 @@ const _TradePage: React.FC<Props> = ({}) => {
     </Page>
   );
 };
-
-interface Props {}
 
 export const TradePage = React.memo(_TradePage);

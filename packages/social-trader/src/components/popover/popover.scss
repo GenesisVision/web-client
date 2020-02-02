@@ -1,11 +1,13 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
 .popover {
   opacity: 0;
   position: absolute;
   top: 0;
   background-color: $popover-background;
-  border-radius: $border-radius;
+  @include adaptive-border-radius($border-radius);
   overflow: hidden;
 
   box-shadow: $box-shadow-4;

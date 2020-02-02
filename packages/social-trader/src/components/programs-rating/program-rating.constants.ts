@@ -30,13 +30,4 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
   }
 ];
 
-export const COLUMNS = [
-  {
-    name: "position"
-  },
-  ...PROGRAMS_COLUMNS
-];
-
-export const SELF_PROGRAMS = "selfPrograms";
-
 export const PROGRAMS = "programs";

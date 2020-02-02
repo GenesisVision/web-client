@@ -1,3 +1,7 @@
+import {
+  FUND_NOTIFICATIONS_FOLDER_ROUTE,
+  PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
+} from "components/notifications/notifications.routes";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import {
@@ -8,10 +12,6 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { composeAssetNotificationsUrl } from "utils/compose-url";
 
-import {
-  FUND_NOTIFICATIONS_FOLDER_ROUTE,
-  PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
-} from "../../components/notifications/notifications.routes";
 import NotificationEntity from "./notification-entity";
 
 const _NotificationAssets: React.FC<Props> = ({ settings, asset }) => {

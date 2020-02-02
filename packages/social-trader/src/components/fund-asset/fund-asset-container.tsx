@@ -147,7 +147,6 @@ const renderFundAsset = ({
   type,
   removable,
   removeHandle,
-  hoveringAsset,
   assetsLength
 }: {
   type: FUND_ASSET_TYPE;

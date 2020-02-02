@@ -31,12 +31,6 @@ export const fetchWallets = (
   await dispatch(actions.fetchWalletsAction(currency, authorization));
 };
 
-export const fetchAccounts = (
-  ctx?: NextPageContext
-): RootThunk<void> => async dispatch => {
-  await dispatch(actions.updateAccountTimestampAction());
-};
-
 export type TWalletsAvailableData = WalletBaseData[];
 export const fetchAvailableWallets = ({
   currency

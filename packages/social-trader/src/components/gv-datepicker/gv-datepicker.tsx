@@ -71,7 +71,6 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       maxDate,
       name,
       disabled,
-      lng,
       className,
       onChange
     } = this.props;

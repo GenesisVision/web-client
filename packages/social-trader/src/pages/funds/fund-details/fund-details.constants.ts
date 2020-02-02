@@ -24,17 +24,6 @@ export const FUND_STRUCTURE_COLUMNS: SortingColumn[] = [
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
-export const FUND_REBALANCING_COLUMNS: SortingColumn[] = [
-  {
-    name: "from"
-  },
-  {
-    name: "to"
-  },
-  {
-    name: "assets"
-  }
-];
 
 export const FUND_REBALANCING_DEFAULT_FILTERS = [
   {

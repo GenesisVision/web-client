@@ -1,3 +1,4 @@
+import { ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import { IDataModel } from "constants/constants";
@@ -27,14 +28,13 @@ export const fetchPrograms = (
 
 export const getFiltersFromContext = ({
   asPath = "",
-  pathname,
-  reduxStore
+  pathname
 }: NextPageWithReduxContext): FetchProgramsFiltersType => {
   const showFavorites = pathname.includes(FAVORITES_TAB_NAME);
   const {
     page,
     sorting = SORTING_FILTER_VALUE,
-    dateRange = {},
+    dateRange = ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
     ...other
   } = qs.parse(asPath.slice(pathname.length + 1));
   const skipAndTake = calculateSkipAndTake({

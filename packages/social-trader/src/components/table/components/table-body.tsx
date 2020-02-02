@@ -14,9 +14,6 @@ const _TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
   data,
   renderBodyItem,
-  tag: Tag,
-  className,
-  isPending,
   view,
   updateRow
 }) => (
@@ -32,7 +29,6 @@ const TableBody = withBlurLoader(React.memo(_TableBody));
 
 const _TableItems: React.FC<ITableItemsProps> = ({
   data,
-  view,
   renderBodyItem,
   updateRow,
   updateItems
@@ -98,9 +94,8 @@ export interface ITableBodyExternalProps {
   className?: string;
 }
 
-const _TableBodyContainer: React.FC<
-  ITableBodyContainerExternalProps & ITableBodyInnerProps
-> = props => {
+const _TableBodyContainer: React.FC<ITableBodyContainerExternalProps &
+  ITableBodyInnerProps> = props => {
   const { items, view, loaderData, tag } = props;
   return (
     (items && items.length === 0 && <EmptyMessage view={view} />) || (

@@ -60,12 +60,6 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
 const ImageBaseElement = React.memo(_ImageBaseElement);
 export default ImageBaseElement;
 
-export interface IImageProps {
-  url: string;
-  alt?: string;
-  className?: string;
-}
-
 export interface IImageBaseElementProps {
   title?: string;
   color?: string;

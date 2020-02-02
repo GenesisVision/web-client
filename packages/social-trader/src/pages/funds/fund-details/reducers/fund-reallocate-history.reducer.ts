@@ -3,10 +3,7 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";
-import {
-  InvestmentEventViewModels,
-  ItemsViewModelReallocationModel
-} from "gv-api-web";
+import { ItemsViewModelReallocationModel } from "gv-api-web";
 import { RootState } from "reducers/root-reducer";
 
 import {

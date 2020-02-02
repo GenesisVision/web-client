@@ -1,4 +1,3 @@
-import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import InputAmountField from "components/input-amount-field/input-amount-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";

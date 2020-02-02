@@ -3,7 +3,6 @@ import {
   PasswordModel,
   RecoveryCodesViewModel,
   TwoFactorAuthenticatorConfirm,
-  TwoFactorCodeModel,
   TwoFactorCodeWithPassword
 } from "gv-api-web";
 import authApi from "services/api-client/auth-api";
