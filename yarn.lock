@@ -12597,10 +12597,10 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-hook-form@^4.5.3:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-4.5.3.tgz#3f9abac7bd78eedf0624d02aa9e1f8487d729e18"
-  integrity sha512-oQB6s3zzXbFwM8xaWEkZJZR+5KD2LwUUYTexQbpdUuFzrfs41Qg0UE3kzfzxG8shvVlzADdkYKLMXqOLWQSS/Q==
+react-hook-form@^4.8.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-4.8.0.tgz#8d1a4721fda8b27dcfeeb0b8c6303cf7441d8429"
+  integrity sha512-Q0fm5TF5UoJa9bHWp/LCqo/xYNLAtwOREIRGDHFxrv5bYUoCuliDAD60KBmi/V2Q7P5z/vM3Brx/JGbuvzqwGg==
 
 react-hot-loader@^4.11.0:
   version "4.12.19"
