@@ -1,31 +1,18 @@
 import "./style.scss";
 
 import classNames from "classnames";
+import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import React from "react";
 
 import GVTextArea from "./gv-text-area";
 
-export interface GVTextFieldProps {
-  noMargin?: boolean;
-  wide?: boolean;
+export interface GVTextFieldProps extends IPropsGvInput {
   name: string;
   type?: string;
-  label?: string;
-  value?: string | number;
   placeholder?: string;
   autoComplete?: string;
-  touched?: boolean;
-  error?: string;
   InputComponent: React.ComponentType<any> | string;
-  adornment?: React.ReactNode;
-  adornmentPosition?: "start" | "end";
-  disabled?: boolean;
-  className?: string;
-  wrapperClassName?: string;
   inputClassName?: string;
-  labelClassName?: string;
-  errorClassName?: string;
-  adornmentClassName?: string;
   onBlur?: (e: any) => void;
   onChange?: (e: React.ChangeEvent<any>) => void;
   form?: any;
@@ -47,7 +34,6 @@ class GVTextField extends React.PureComponent<
     adornmentPosition: "end",
     InputComponent: "input"
   };
-
   constructor(props: GVTextFieldProps) {
     super(props);
 
@@ -68,54 +54,6 @@ class GVTextField extends React.PureComponent<
     if (this.props.onBlur) this.props.onBlur(e);
   };
 
-  renderError = () =>
-    this.props.touched &&
-    this.props.error && (
-      <div
-        className={classNames(
-          "gv-text-field__error",
-          this.props.errorClassName
-        )}
-      >
-        {this.props.error}
-      </div>
-    );
-
-  renderLabel = () => {
-    if (!this.props.label) return null;
-    return (
-      <label
-        className={classNames(
-          "gv-text-field__label",
-          this.props.labelClassName,
-          {
-            "gv-text-field__label--shrink":
-              this.state.focused ||
-              this.props.adornment ||
-              (this.props.value !== undefined && this.props.value !== "")
-          }
-        )}
-      >
-        {this.props.label}
-      </label>
-    );
-  };
-
-  renderAdornment = () => {
-    const { adornment, adornmentPosition, adornmentClassName } = this.props;
-    if (!adornment) return null;
-    return (
-      <div
-        className={classNames("gv-text-field__adornment", adornmentClassName, {
-          "gv-text-field__adornment--start": adornmentPosition === "start",
-          "gv-text-field__adornment--end": adornmentPosition === "end"
-        })}
-      >
-        {adornment}
-      </div>
-    );
-  };
-
   componentDidMount() {
     if (this.props.autoFocus && this.input.current) {
       const input = this.input.current;
@@ -127,21 +65,12 @@ class GVTextField extends React.PureComponent<
 
   renderInput = () => {
     const {
-      type,
-      onBlur,
-      className,
-      wrapperClassName,
-      inputClassName,
-      labelClassName,
-      errorClassName,
-      adornmentClassName,
-      touched,
-      error,
-      InputComponent,
-      adornment,
       adornmentPosition,
-      form,
-      autoFocus,
+      type,
+      className,
+      inputClassName,
+      errorClassName,
+      InputComponent,
       ...otherProps
     } = this.props;
     let Input: React.ComponentType<any> | string;
@@ -163,37 +92,9 @@ class GVTextField extends React.PureComponent<
       />
     );
   };
+
   render() {
-    const {
-      noMargin,
-      wide,
-      className,
-      wrapperClassName,
-      disabled,
-      touched,
-      error
-    } = this.props;
-    return (
-      <div
-        className={classNames("gv-text-field__wrapper", wrapperClassName, {
-          "gv-text-field__wrapper--no-margin": noMargin,
-          "gv-text-field__wrapper--wide": wide
-        })}
-      >
-        {this.renderLabel()}
-        <div
-          className={classNames("gv-text-field", className, {
-            "gv-text-field--disabled": disabled,
-            "gv-text-field--invalid": touched && error,
-            "gv-text-field--focused": this.state.focused
-          })}
-        >
-          {this.renderInput()}
-          {this.renderAdornment()}
-        </div>
-        {this.renderError()}
-      </div>
-    );
+    return <GvInput {...this.props} inputElement={this.renderInput()} />;
   }
 }
 
