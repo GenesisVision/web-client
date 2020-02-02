@@ -1,54 +1,49 @@
 import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
 import { FormikActions } from "formik";
 import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
-class GVNumberField extends React.PureComponent<Props, State> {
-  state = {
-    init: true
-  };
-  handleOnChange = (value: NumberFormatValues) => {
-    const { form, name, onChange } = this.props;
-    if (onChange) onChange(value.value);
-    this.setState({ init: false });
-    form.setFieldValue(name, value.value);
-  };
+const _GVNumberField: React.FC<Props> = props => {
+  const { value, emptyInit, autoFocus, form, name } = props;
+  const [init, setInit] = useState(true);
 
-  input?: HTMLDivElement;
+  const handleOnChange = useCallback(
+    ({ value }: NumberFormatValues) => {
+      setInit(false);
+      form.setFieldValue(name, value);
+    },
+    [name]
+  );
 
-  componentDidMount() {
-    if (this.input && this.props.autoFocus) {
-      const input = this.input;
+  const [input, setInput] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (input !== null && autoFocus) {
       setImmediate(() => {
         input.focus && input.focus();
       });
     }
-  }
+  }, [input, autoFocus]);
 
-  render() {
-    const { emptyInit, name, value, autoFocus, ...props } = this.props;
-    const setEmpty = emptyInit && this.state.init;
-    return (
+  const setEmpty = emptyInit && init;
+  return (
+    <GVTextField
+      {...props}
+      value={setEmpty ? "" : value}
+      name={name}
       //@ts-ignore
-      <GVTextField
-        {...props}
-        value={setEmpty ? "" : value}
-        name={name}
-        //@ts-ignore
-        onValueChange={this.handleOnChange}
-        InputComponent={NumberFormat}
-        getInputRef={(ref: HTMLDivElement) => (this.input = ref)}
-      />
-    );
-  }
-}
-type Props = GVTextFieldProps & {
-  form: FormikActions<void>;
-  onChange(value: string): void;
-  emptyInit: boolean;
+      onValueChange={handleOnChange}
+      InputComponent={NumberFormat}
+      getInputRef={(ref: HTMLDivElement) => setInput(ref)}
+    />
+  );
 };
-interface State {
-  init: boolean;
+
+interface Props extends GVTextFieldProps {
+  form: FormikActions<void>;
+  emptyInit: boolean;
 }
 
+const GVNumberField = React.memo(_GVNumberField);
 export default GVNumberField;
