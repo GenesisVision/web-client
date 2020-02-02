@@ -21,7 +21,11 @@ export const VIEW_PORT = { width: 1400, height: 1000 };
 export const getBrowser = async () => {
   return await puppeteer.launch({
     headless: true,
-    args: [`--window-size=1920,1080`]
+    args: [
+      `--window-size=1920,1080`,
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
   });
 };
 
