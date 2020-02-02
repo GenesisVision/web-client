@@ -12,6 +12,7 @@ export const cancelRequest = async (
   statusSelector: string = assetStatusSelector
 ) => {
   const {
+    waitForSelector,
     clearAlert,
     openPopup,
     submitForm,
@@ -19,7 +20,7 @@ export const cancelRequest = async (
     hasElement
     // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useTestHelpers(page);
-  await page.waitForSelector(
+  await waitForSelector(
     ".details-investment-block.details-investment-block--investment"
   );
   const hasWithdrawingRequest = await hasElement(
@@ -30,7 +31,7 @@ export const cancelRequest = async (
     await safeClick(statusSelector);
     await openPopup(cancelButtonSelector);
     await submitForm();
-    await page.waitForSelector(activeAssetStatusSelector);
+    await waitForSelector(activeAssetStatusSelector);
     await clearAlert();
   }
 };
