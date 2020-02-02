@@ -49,6 +49,8 @@ export const testT = (path: string) =>
   path;
 
 export const useTestHelpers = (page: Page) => {
+  const getElement = (selector: string) => page.$(selector);
+  const waitForSelector = (selector: string) => page.waitForSelector(selector);
   const getAuth = async () => {
     const cookies = await page.cookies();
     const tokenName = getTokenName();
@@ -58,7 +60,7 @@ export const useTestHelpers = (page: Page) => {
     );
   };
   const waitForLoadBlurLoader = async (selector: string) => {
-    await page.waitForSelector(`${selector} > .blur-container--loaded`);
+    await waitForSelector(`${selector} > .blur-container--loaded`);
   };
   const getStatisticsItemValue = async (label: string, loadable?: boolean) => {
     const selector = `div[${DATA_TEST_ATTR}="${testT(label)}"]`;
@@ -67,7 +69,7 @@ export const useTestHelpers = (page: Page) => {
     return value.trim();
   };
   const safeClick = async (selector: string) => {
-    await page.waitForSelector(selector);
+    await waitForSelector(selector);
     await page.click(selector);
   };
   const authOnLoginForm = async () => {
@@ -82,7 +84,7 @@ export const useTestHelpers = (page: Page) => {
   const authorize = async () => {
     await openPage(LOGIN_ROUTE);
     await authOnLoginForm();
-    await page.waitForSelector(".header__profile");
+    await waitForSelector(".header__profile");
   };
 
   const openPage = async (url: string) => {
@@ -98,7 +100,7 @@ export const useTestHelpers = (page: Page) => {
 
   const openPopup = async (buttonSelector: string) => {
     await safeClick(buttonSelector);
-    await page.waitForSelector(".dialog__header");
+    await waitForSelector(".dialog__header");
   };
 
   const selectWallet = async (
@@ -123,16 +125,17 @@ export const useTestHelpers = (page: Page) => {
 
   const getLastAlertMessage = async () => {
     const ALERT_TEXT_CLASS_SELECTOR = `.${ALERT_TEXT_CLASS}`;
-    await page.waitForSelector(ALERT_TEXT_CLASS_SELECTOR);
-    return await page.$$eval(
-      ALERT_TEXT_CLASS_SELECTOR,
-      elements => elements[elements.length - 1].textContent
-    );
+    await waitForSelector(ALERT_TEXT_CLASS_SELECTOR);
+    return await getTextContent(ALERT_TEXT_CLASS_SELECTOR);
   };
 
-  const getTextContent = async (selector: string) => {
-    await page.waitForSelector(selector);
-    return await page.$eval(selector, element => element.textContent);
+  const getTextContent = async (selector: string): Promise<string> => {
+    await waitForSelector(selector);
+    const element = await getElement(selector);
+    if (!element) return "";
+    return (await (
+      await element.getProperty("textContent")
+    ).jsonValue()) as string;
   };
 
   const clearAlert = async () => {
@@ -141,19 +144,18 @@ export const useTestHelpers = (page: Page) => {
   };
 
   const hasElement = (selector: string) =>
-    page
-      .$eval(selector, element => !!element)
-      .catch(
-        error =>
-          error.toString() !==
-          `Error: Error: failed to find element matching selector "${selector}"`
-      );
+    getElement(selector).catch(
+      error =>
+        error.toString() !==
+        `Error: Error: failed to find element matching selector "${selector}"`
+    );
 
   const isDisabled = async (selector: string) => {
     return await hasElement(`${selector}[disabled]`);
   };
 
   return {
+    waitForSelector,
     getAuth,
     waitForLoadBlurLoader,
     getStatisticsItemValue,
