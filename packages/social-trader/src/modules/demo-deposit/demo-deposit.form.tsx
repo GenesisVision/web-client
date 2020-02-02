@@ -1,11 +1,10 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
-import { FormikProps } from "formik";
 import { DemoDepositResponse } from "modules/demo-deposit/demo-deposit.service";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation, WithTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({ currency }) => {
@@ -48,10 +47,13 @@ export enum FORM_FIELDS {
   amount = "amount"
 }
 
-interface Props
-  extends IDemoDepositFormProps,
-    WithTranslation,
-    FormikProps<IDemoDepositFormValues> {}
+interface Props {
+  currency: CurrencyEnum;
+  onSubmit: (
+    values: IDemoDepositFormValues,
+    setSubmitting: SetSubmittingType
+  ) => DemoDepositResponse;
+}
 
 export interface IDemoDepositFormValues {
   amount: string;
