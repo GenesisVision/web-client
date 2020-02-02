@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { dateFrom, dateTo } from "utils/dates";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
@@ -39,21 +40,6 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   }
   return true;
 };
-
-const dateFrom = (
-  subtract?: "month" | "week",
-  date: Date | number = new Date()
-): string =>
-  dayjs(date)
-    .subtract(1, subtract || "second")
-    .startOf("minute")
-    .toISOString();
-
-const dateTo = (): string =>
-  dayjs()
-    .add(1, "minute")
-    .startOf("minute")
-    .toISOString();
 
 export const dateToInput = (date?: Date | number | string) =>
   dayjs(date).format("YYYY-MM-DD");

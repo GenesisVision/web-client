@@ -1,6 +1,6 @@
 import {
-  DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
+  ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DATE_RANGE_FILTER_NAME
 } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import {
@@ -42,6 +42,6 @@ export const FOLLOW_COLUMNS: SortingColumn[] = [
 
 export const DEFAULT_FOLLOW_TABLE_FILTERS = {
   [CURRENCY_MAP_NAME]: CURRENCY_MAP_VALUE,
-  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [DATE_RANGE_FILTER_NAME]: ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
   [TAG_FILTER_NAME]: TAG_FILTER_DEFAULT_VALUE
 };

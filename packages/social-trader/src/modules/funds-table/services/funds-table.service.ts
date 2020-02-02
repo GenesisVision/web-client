@@ -1,3 +1,4 @@
+import { ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
@@ -33,7 +34,7 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
   const {
     page,
     sorting = SORTING_FILTER_VALUE,
-    dateRange = {},
+    dateRange = ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
     showIn,
     ...other
   } = qs.parse(asPath.slice(pathname.length + 1));

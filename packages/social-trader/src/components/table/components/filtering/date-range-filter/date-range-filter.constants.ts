@@ -1,3 +1,5 @@
+import { dateFrom, dateTo } from "utils/dates";
+
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
@@ -28,6 +30,12 @@ export interface IDataRangeFilterValue {
   dateStart?: Date | string | number;
   dateEnd?: Date | string | number;
 }
+
+export const ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
+  type: DATA_RANGE_FILTER_TYPES.LAST_MONTH,
+  dateStart: dateFrom("month"),
+  dateEnd: dateTo()
+};
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   type: DATA_RANGE_FILTER_TYPES.ALL,
