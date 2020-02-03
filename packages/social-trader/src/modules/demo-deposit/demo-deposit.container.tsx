@@ -21,11 +21,8 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
     successMessage: t("transfer.confirmation.deposit-success"),
     middleware: [() => onApply && onApply()]
   });
-  const handleSubmit = useCallback((values, setSubmitting) => {
-    return (sendRequest(
-      { ...values, id },
-      setSubmitting
-    ) as unknown) as DemoDepositResponse;
+  const handleSubmit = useCallback(values => {
+    return (sendRequest({ ...values, id }) as unknown) as DemoDepositResponse;
   }, []);
 
   return (
