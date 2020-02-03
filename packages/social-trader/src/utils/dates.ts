@@ -95,3 +95,18 @@ export const humanizeDate = (
     }, "")
     .trim();
 };
+
+export const dateFrom = (
+  subtract?: "month" | "week",
+  date: Date | number = new Date()
+): string =>
+  dayjs(date)
+    .subtract(1, subtract || "second")
+    .startOf("minute")
+    .toISOString();
+
+export const dateTo = (): string =>
+  dayjs()
+    .add(1, "minute")
+    .startOf("minute")
+    .toISOString();

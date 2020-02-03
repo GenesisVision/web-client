@@ -546,6 +546,7 @@
     "body": "Server error occurred. Please try again later or contact the support department."
   },
   "programs-page": {
+    "description": "Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at predefined intervals set by the program’s manager.",
     "title": "Programs",
     "tabs": {
       "explore": "Explore",
@@ -574,6 +575,7 @@
     }
   },
   "follows-page": {
+    "description": "Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
     "title": "Follow",
     "tabs": {
       "explore": "Explore",
@@ -594,6 +596,7 @@
     }
   },
   "funds-page": {
+    "description": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves.",
     "title": "Funds",
     "all-funds": "All funds",
     "tabs": {
