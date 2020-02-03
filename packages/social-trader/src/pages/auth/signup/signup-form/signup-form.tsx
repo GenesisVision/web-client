@@ -18,9 +18,10 @@ import validationSchema, {
   SIGN_UP_FORM_FIELDS
 } from "./signup-form.validators";
 
-const _SignUpForm: React.FC<
-  InjectedFormikProps<Props, ISignUpFormFormValues>
-> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
+const _SignUpForm: React.FC<InjectedFormikProps<
+  Props,
+  ISignUpFormFormValues
+>> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
   <form
     id="signUpForm"
     className="signup-form"
@@ -32,7 +33,6 @@ const _SignUpForm: React.FC<
       name={SIGN_UP_FORM_FIELDS.userName}
       label={t("auth.signup.username-field-text")}
       autoComplete="off"
-      className="signup-form__username"
       autoFocus
       component={GVTextField}
     />
