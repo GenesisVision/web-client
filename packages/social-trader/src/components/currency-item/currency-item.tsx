@@ -60,7 +60,11 @@ const _CurrencyItem: React.FC<Props> = ({
   return (
     (clickable && (
       <>
-        <a title={active} href={getActiveUrl(url)} onClick={openPopup}>
+        <a
+          title={active}
+          href={getActiveUrl(url || active)}
+          onClick={openPopup}
+        >
           {renderItemContent()}
         </a>
         <ActivePopup
