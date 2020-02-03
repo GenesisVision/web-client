@@ -15,9 +15,9 @@ describe("test dates functions", () => {
     const date2 = formatDate("2019-06-03T13:13:26.7498180+00:00");
     const date3 = formatDate("2019-06-03T12:33:13.1385000+00:00");
 
-    expect(date1).toBe("2019-09-06 14:09:45");
-    expect(date2).toBe("2019-06-03 16:13:26");
-    expect(date3).toBe("2019-06-03 15:33:13");
+    expect(date1).toBe("2019-09-06 11:09:45");
+    expect(date2).toBe("2019-06-03 13:13:26");
+    expect(date3).toBe("2019-06-03 12:33:13");
   });
 
   it("should format period into string", () => {
