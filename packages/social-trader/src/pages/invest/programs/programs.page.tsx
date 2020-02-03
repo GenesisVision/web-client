@@ -20,10 +20,10 @@ import { ORGANIZATION_SCHEMA } from "utils/seo";
 const ProgramsPage: NextPage = () => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
-
+  const description = t("programs-page.description");
   return (
     <Page
-      description={"List of programs"}
+      description={description}
       showTitle
       title={title}
       schemas={[
@@ -31,7 +31,7 @@ const ProgramsPage: NextPage = () => {
         {
           "@context": "https://schema.org",
           "@type": "Table",
-          about: "List of programs"
+          about: description
         }
       ]}
     >

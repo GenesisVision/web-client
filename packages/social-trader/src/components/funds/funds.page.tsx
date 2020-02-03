@@ -20,9 +20,10 @@ import NavigationTabs from "../navigation-tabs/navigation-tabs";
 const FundsPage: React.FC = () => {
   const { t } = useTranslation();
   const title = t("funds-page.title");
+  const description = t("funds-page.description");
   return (
     <Page
-      description={"List of funds"}
+      description={description}
       showTitle
       title={title}
       schemas={[
@@ -30,7 +31,7 @@ const FundsPage: React.FC = () => {
         {
           "@context": "https://schema.org",
           "@type": "Table",
-          about: "List of funds"
+          about: description
         }
       ]}
     >
