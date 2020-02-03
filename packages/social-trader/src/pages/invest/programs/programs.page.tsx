@@ -23,7 +23,7 @@ const ProgramsPage: NextPage = () => {
 
   return (
     <Page
-      description={"List of programs"}
+      description={t("programs-page.description")}
       showTitle
       title={title}
       schemas={[

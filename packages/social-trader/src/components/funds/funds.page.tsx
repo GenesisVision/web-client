@@ -22,7 +22,7 @@ const FundsPage: React.FC = () => {
   const title = t("funds-page.title");
   return (
     <Page
-      description={"List of funds"}
+      description={t("funds-page.description")}
       showTitle
       title={title}
       schemas={[
