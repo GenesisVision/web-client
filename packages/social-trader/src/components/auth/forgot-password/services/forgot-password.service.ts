@@ -35,7 +35,6 @@ export const restorePassword = (
   authApi.resetPassword({ body: model }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
-    // Push(HOME_ROUTE);
   });
 
 export const sendForgotPasswordEmail = (

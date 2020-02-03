@@ -1,6 +1,5 @@
 const sitemap = require("sitemap");
 const fetch = require("isomorphic-unfetch");
-const { brotliCompressSync } = require("zlib");
 const cacheableResponse = require("cacheable-response");
 
 const programRoute = program => `invest/programs/${program}`;
@@ -26,13 +25,13 @@ const generateSitemap = dev => {
     get: async () => {
       console.log("generate simemap.xml");
       try {
-        const url = process.env.HOSTNAME;
-        console.info(process.env.HOSTNAME);
-        if (url === undefined || typeof url !== "string")
+        const hostname = process.env.HOSTNAME;
+        console.info(hostname);
+        if (hostname === undefined || typeof hostname !== "string")
           throw Error("process.env.HOSTNAME is not defined");
 
         const map = new sitemap.SitemapStream({
-          hostname: process.env.HOSTNAME
+          hostname
         });
 
         const response = await fetch(
@@ -85,7 +84,7 @@ const generateSitemap = dev => {
         // Invest page
         map.write({ url: "invest", changefreq: DAILY, priority: 0.7 });
         // Trading page
-        map.write({ url: "trading", changefreq: MONTHLY, priority: 0.7 });
+        map.write({ url: "trade", changefreq: MONTHLY, priority: 0.7 });
         // Referral program page
         map.write({
           url: "referral-program",
@@ -114,7 +113,7 @@ const generateSitemap = dev => {
         const data = await sitemap.streamToPromise(map);
 
         return {
-          data: brotliCompressSync(data),
+          data,
           ttl: TTL_OK
         };
       } catch (e) {
@@ -128,7 +127,6 @@ const generateSitemap = dev => {
       }
 
       res.header("Content-Type", "application/xml");
-      res.header("Content-Encoding", "br");
 
       res.send(data);
     }

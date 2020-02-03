@@ -23,6 +23,10 @@ const isServerError = (response: IResponse | Error): response is Error => {
 
 const handleErrorResponse: IHandleErrorResponseFunc = response => {
   if (response && !isServerError(response)) {
+    if (response.statusCode === 401) {
+      authService.removeToken();
+      window.location.reload();
+    }
     if (response.body !== null && response.body.errors) {
       return {
         errorMessage: response.body.errors
@@ -31,10 +35,6 @@ const handleErrorResponse: IHandleErrorResponseFunc = response => {
           .join(", "),
         code: response.body.code
       };
-    }
-    if (response.statusCode === 401) {
-      authService.removeToken();
-      window.location.reload();
     }
   }
 
