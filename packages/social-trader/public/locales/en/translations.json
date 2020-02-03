@@ -1,4 +1,9 @@
 {
+  "demo-deposit": {
+    "validations": {
+      "amount": "Amount is required"
+    }
+  },
   "facets": {
     "most_reliable": "most reliable",
     "rating": "rating",
