@@ -3,6 +3,7 @@ import "./events-container.scss";
 import { PlatformEvent } from "gv-api-web";
 import React from "react";
 import EventsList from "routes/ssr/landing-page/components/events-list/events-list";
+import { isServer } from "utils/helpers";
 
 interface Props {
   events: PlatformEvent[];
@@ -15,7 +16,9 @@ const _FollowsContainer: React.FC<Props> = ({ events }) => {
       <div className="home__container">
         <div className="events-container">
           <h2 className="events-container__title">Genesis Vision Wall</h2>
-          <EventsList events={events} className="events-container__list" />
+          {!isServer() && (
+            <EventsList events={events} className="events-container__list" />
+          )}
         </div>
       </div>
     </section>

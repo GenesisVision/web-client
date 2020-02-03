@@ -53,7 +53,7 @@ const AdvantagesContainer: React.FC = () => {
           <LPButton href={TRADE_ROUTE}>Join</LPButton>
         </animated.div>
       ))}
-      <div className="home__container">
+      <div className="home__container" key="Our advantages">
         <div className="advantages-container">
           <h2 className="advantages-container__title">Our advantages</h2>
           <AdvantagesList

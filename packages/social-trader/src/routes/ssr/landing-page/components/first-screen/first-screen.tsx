@@ -5,6 +5,7 @@ import React from "react";
 import FirstSlider from "routes/ssr/landing-page/components/first-slider/first-slifer";
 import NewsList from "routes/ssr/landing-page/components/news/news-list";
 import { slides } from "routes/ssr/landing-page/static-data/slides";
+import { isServer } from "utils/helpers";
 
 interface Props {
   news: Array<PlatformNews>;
@@ -13,7 +14,9 @@ interface Props {
 const _FirstScreen: React.FC<Props> = ({ news }) => (
   <section className="home__section home__section--first-screen">
     <div className="home__container">
-      <FirstSlider className="home__grid-row" slidesItems={slides} />
+      {!isServer() && (
+        <FirstSlider className="home__grid-row" slidesItems={slides} />
+      )}
       <div className="home__grid-row home__grid-row--mob-wider">
         <NewsList className="home__grid-item" newsItems={news} />
       </div>

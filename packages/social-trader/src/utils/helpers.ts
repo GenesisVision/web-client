@@ -22,11 +22,6 @@ export const safeGetElemFromArray = <T>(
   return item;
 };
 
-export const addRequestAnimationFrame = () => {
-  if (typeof window !== undefined && !window.requestAnimationFrame)
-    window.requestAnimationFrame = () => -1;
-};
-
 export const getPercentageValue = (
   value: number,
   totalValue: number
@@ -127,7 +122,7 @@ const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
 const isServer = () => {
-  return global.hasOwnProperty("window");
+  return !global.hasOwnProperty("window") || typeof window === "undefined";
 };
 
 const getRandomInteger = (min: number = 0, max: number = 100): number =>

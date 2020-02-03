@@ -8,12 +8,11 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
-import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
 
-const _WalletTotal: React.FC<Props & WalletRouteProps> = ({ data: wallet }) => {
+const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
     <Page title={t("wallet-page.title")}>
