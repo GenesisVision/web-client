@@ -39,7 +39,7 @@ describe("Program details - Page markup", () => {
     const authorization = await getAuth();
     await openPage(url);
     await waitForLoadBlurLoader(".details-statistics");
-    details = await programsApi.getProgramDetails("createrefactoring", {
+    details = await programsApi.getProgramDetails(programName, {
       authorization
     });
     statistic = await programsApi.getProgramProfitPercentCharts(details.id, {
