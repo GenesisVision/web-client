@@ -120,7 +120,10 @@ export const fundAssetsSelector = apiFieldSelector(
 export const programsInfoSelector = apiFieldSelector<
   PlatformInfo,
   ProgramAssetPlatformInfo
->(platformDataSelector, fieldSelector(state => state.assetInfo.programInfo));
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.programInfo)
+);
 
 export const createProgramInfoSelector = apiFieldSelector<
   PlatformInfo,
@@ -157,10 +160,7 @@ export const allEventsSelector = createSelector<
   RootState,
   PlatformInfo | undefined,
   EventFilters | undefined
->(
-  platformDataSelector,
-  data => (data && data.filters.events) || undefined
-);
+>(platformDataSelector, data => (data && data.filters.events) || undefined);
 
 export const fundEventsSelector = createSelector<
   RootState,

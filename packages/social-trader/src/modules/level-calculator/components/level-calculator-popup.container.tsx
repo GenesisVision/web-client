@@ -10,9 +10,9 @@ import {
 import LevelCalculatorPopup from "./level-calculator-popup";
 import LevelCalculatorPopupLoader from "./level-calculator-popup.loader";
 
-const _LevelCalculatorPopupContainer: React.FC<
-  ILevelCalculatorProps & { onClose(): void }
-> = ({ id, title, currency, levelsParameters, onClose, isKycConfirmed }) => {
+const _LevelCalculatorPopupContainer: React.FC<ILevelCalculatorProps & {
+  onClose(): void;
+}> = ({ id, title, currency, levelsParameters, onClose, isKycConfirmed }) => {
   const [programLevelInfo, setProgramLevelInfo] = useState<
     ProgramLevelInfo | undefined
   >(undefined);

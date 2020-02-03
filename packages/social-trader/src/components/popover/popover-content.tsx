@@ -3,9 +3,13 @@ import "./popover-content.scss";
 import classNames from "classnames";
 import React from "react";
 
-export const PopoverContent: React.FC<
-  Props & React.HTMLAttributes<HTMLDivElement>
-> = ({ type, children, className, leftAlign }) => {
+export const PopoverContent: React.FC<Props &
+  React.HTMLAttributes<HTMLDivElement>> = ({
+  type,
+  children,
+  className,
+  leftAlign
+}) => {
   return (
     <div
       className={classNames("popover-content", className, {

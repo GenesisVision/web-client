@@ -18,9 +18,10 @@ import validationSchema, {
   SIGN_UP_FORM_FIELDS
 } from "./signup-form.validators";
 
-const _SignUpForm: React.FC<
-  InjectedFormikProps<Props, ISignUpFormFormValues>
-> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
+const _SignUpForm: React.FC<InjectedFormikProps<
+  Props,
+  ISignUpFormFormValues
+>> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
   <form
     id="signUpForm"
     className="signup-form"

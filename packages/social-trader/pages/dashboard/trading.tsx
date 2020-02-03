@@ -9,7 +9,4 @@ const Page: NextPage = () => {
   return <TradingPage />;
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

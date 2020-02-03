@@ -13,9 +13,8 @@ import {
   UpdateSortingFuncType
 } from "./table.types";
 
-const _TableToolbar: React.FC<
-  ITableToolbarExternalProps & ITableToolbarInnerProps
-> = ({
+const _TableToolbar: React.FC<ITableToolbarExternalProps &
+  ITableToolbarInnerProps> = ({
   onChange,
   disableTitle,
   createButtonToolbar,

@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <SettingsPage />;
 };
 
-export const Settings = compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export const Settings = compose(withDefaultLayout, withPrivateRoute)(Page);

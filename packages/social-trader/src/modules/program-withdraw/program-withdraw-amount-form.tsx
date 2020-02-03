@@ -13,9 +13,10 @@ import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { boolean, mixed, number, object } from "yup";
 
-const _ProgramWithdrawAmountForm: React.FC<
-  InjectedFormikProps<Props, IProgramWithdrawAmountFormValues>
-> = ({
+const _ProgramWithdrawAmountForm: React.FC<InjectedFormikProps<
+  Props,
+  IProgramWithdrawAmountFormValues
+>> = ({
   setFieldValue,
   availableToWithdraw,
   t,

@@ -13,11 +13,7 @@ interface IPagingProps {
 
 export const PAGING_FILTER_NAME = "page";
 
-const _Paging: React.FC<IPagingProps> = ({
-  paging,
-  updatePaging,
-  asLink
-}) => {
+const _Paging: React.FC<IPagingProps> = ({ paging, updatePaging, asLink }) => {
   const handlePageChange = useCallback(
     (nextPage: number) => updatePaging({ currentPage: nextPage - 1 }),
     [updatePaging]

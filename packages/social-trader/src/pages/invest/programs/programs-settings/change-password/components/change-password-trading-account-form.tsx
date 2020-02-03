@@ -39,9 +39,7 @@ type ChangePasswordTradingAccountFormProps = WithTranslation &
   IChangePasswordTradingAccountFormOwnProps &
   FormikProps<IChangePasswordTradingAccountFormValues>;
 
-const _ChangePasswordTradingAccountForm: React.FC<
-  ChangePasswordTradingAccountFormProps
-> = ({
+const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFormProps> = ({
   t,
   dirty,
   isValid,

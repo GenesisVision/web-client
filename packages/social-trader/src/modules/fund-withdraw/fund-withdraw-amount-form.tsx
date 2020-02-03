@@ -19,9 +19,10 @@ import { number, object } from "yup";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 
-const _FundWithdrawAmountForm: React.FC<
-  InjectedFormikProps<Props, FundWithDrawFormValues>
-> = ({
+const _FundWithdrawAmountForm: React.FC<InjectedFormikProps<
+  Props,
+  FundWithDrawFormValues
+>> = ({
   isPending,
   currency,
   setCurrency,

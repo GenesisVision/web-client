@@ -28,13 +28,13 @@ const TableCard: React.FC<ITableCardProps> = props => {
   );
 };
 
-export const TableCardContainer: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({ children }) => <div className="table-card">{children}</div>;
+export const TableCardContainer: React.FC<React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children }) => <div className="table-card">{children}</div>;
 
-export const TableCardRow: React.FC<
-  { center?: boolean } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, center }) => (
+export const TableCardRow: React.FC<{ center?: boolean } & React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children, center }) => (
   <div
     className={classNames("table-card__row", {
       "table-card__row--center": center
@@ -44,9 +44,9 @@ export const TableCardRow: React.FC<
   </div>
 );
 
-export const TableCardTable: React.FC<
-  { wrap?: boolean } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, wrap }) => (
+export const TableCardTable: React.FC<{ wrap?: boolean } & React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children, wrap }) => (
   <div
     className={classNames("table-card__table", {
       "table-card__table--flex-wrap": wrap
@@ -56,23 +56,23 @@ export const TableCardTable: React.FC<
   </div>
 );
 
-export const TableCardTableRow: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({ children }) => <div className="table-card__table-row">{children}</div>;
+export const TableCardTableRow: React.FC<React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children }) => <div className="table-card__table-row">{children}</div>;
 
-export const TableCardTableColumn: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({ children }) => (
+export const TableCardTableColumn: React.FC<React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children }) => (
   <div className="table-card__table-column">{children}</div>
 );
 
-export const TableCardTableButtons: React.FC<
-  React.HTMLAttributes<HTMLDivElement>
-> = ({ children }) => <div className="table-card__buttons">{children}</div>;
+export const TableCardTableButtons: React.FC<React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ children }) => <div className="table-card__buttons">{children}</div>;
 
-export const TableCardTitle: React.FC<
-  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, url }) => {
+export const TableCardTitle: React.FC<{
+  url?: ToType | string;
+} & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return url ? (
     <Link
@@ -87,9 +87,9 @@ export const TableCardTitle: React.FC<
   );
 };
 
-export const TableCardSubTitle: React.FC<
-  { url?: ToType | string } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, url }) => {
+export const TableCardSubTitle: React.FC<{
+  url?: ToType | string;
+} & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
     <div className="table-card__subtitle">
@@ -185,33 +185,33 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
   }
 );
 
-export const TableCardChartBlock: React.FC<
-  ITableCardChartBlockProps
-> = React.memo(({ chart, assetId, profit }) => (
-  <TableCardRow>
-    <div className="table-card__chart">
-      <ProgramSimpleChart data={chart} />
-    </div>
-    <div className="table-card__chart-info">
-      <div className="table-card__profit">
-        {profit !== undefined && (
-          <Profitability
-            value={formatValue(profit, 2)}
-            variant={PROFITABILITY_VARIANT.CHIPS}
-            prefix={PROFITABILITY_PREFIX.ARROW}
-          >
-            <NumberFormat
-              value={formatValue(profit, 2)}
-              suffix="%"
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
-        )}
+export const TableCardChartBlock: React.FC<ITableCardChartBlockProps> = React.memo(
+  ({ chart, assetId, profit }) => (
+    <TableCardRow>
+      <div className="table-card__chart">
+        <ProgramSimpleChart data={chart} />
       </div>
-    </div>
-  </TableCardRow>
-));
+      <div className="table-card__chart-info">
+        <div className="table-card__profit">
+          {profit !== undefined && (
+            <Profitability
+              value={formatValue(profit, 2)}
+              variant={PROFITABILITY_VARIANT.CHIPS}
+              prefix={PROFITABILITY_PREFIX.ARROW}
+            >
+              <NumberFormat
+                value={formatValue(profit, 2)}
+                suffix="%"
+                allowNegative={false}
+                displayType="text"
+              />
+            </Profitability>
+          )}
+        </div>
+      </div>
+    </TableCardRow>
+  )
+);
 
 interface ITableCardAvatarProps {
   url?: ToType | string;

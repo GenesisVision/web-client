@@ -38,9 +38,10 @@ const getInfoText = (currency: CurrencyEnum): string => {
   }
 };
 
-const _FollowParams: React.FC<
-  InjectedFormikProps<IFollowParamsProps, FollowParamsFormValues>
-> = ({
+const _FollowParams: React.FC<InjectedFormikProps<
+  IFollowParamsProps,
+  FollowParamsFormValues
+>> = ({
   subscribeFixedCurrencies,
   rate,
   currency,

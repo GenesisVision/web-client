@@ -3,9 +3,7 @@ import "./statistic-item.scss";
 import classNames from "classnames";
 import React from "react";
 
-export const StatisticItemContainerBlock: React.FC<
-  IStatisticItemContainerBlockProps
-> = ({
+export const StatisticItemContainerBlock: React.FC<IStatisticItemContainerBlockProps> = ({
   bottomContent,
   className,
   children,
