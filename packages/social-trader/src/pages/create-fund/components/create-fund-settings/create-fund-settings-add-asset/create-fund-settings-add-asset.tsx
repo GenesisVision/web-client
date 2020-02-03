@@ -96,6 +96,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
     <tr className="add-fund-asset-popover__asset">
       <td>
         <CurrencyItem
+          url={asset.url}
           logo={asset.icon}
           small
           name={asset.name}
