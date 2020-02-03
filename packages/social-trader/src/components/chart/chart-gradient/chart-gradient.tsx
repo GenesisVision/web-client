@@ -1,5 +1,4 @@
 import GVColors from "components/gv-styles/gv-colors";
-import * as React from "react";
 
 export const getStrokeColor = (data: number[]): string => {
   const dataMax = data[data.length - 1];
