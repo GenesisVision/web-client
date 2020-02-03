@@ -1,5 +1,6 @@
 import { CaptchaType, PowDetails } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import AlertMessageList from "modules/alert-message/components/alert-message-list/alert-message-list";
 import React, { useCallback, useEffect, useState } from "react";
 import { SetSubmittingType } from "utils/types";
 
@@ -69,6 +70,7 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   );
   return (
     <>
+      <AlertMessageList />
       {renderForm(handleSubmit)}
       {pow && <Pow {...pow} login={email} handleSuccess={setPrefix} />}
     </>
