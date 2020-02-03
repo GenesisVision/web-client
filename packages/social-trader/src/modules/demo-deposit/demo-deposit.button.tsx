@@ -43,9 +43,9 @@ const _DemoDepositButton: React.FC<Props> = ({
   );
 };
 
-export const FullButton: React.FC<
-  IFullButtonProps & { onClick: () => void }
-> = React.memo(
+export const FullButton: React.FC<IFullButtonProps & {
+  onClick: () => void;
+}> = React.memo(
   ({ disabled, onClick, label, color, variant, withIcon, size }) => {
     const [t] = useTranslation();
     const labelText = label || t("wallet-page.deposit");

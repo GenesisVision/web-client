@@ -48,12 +48,14 @@ interface Props {
   item: TMenuItem;
 }
 
-const MenuNavigationTooltipItem: React.FC<
-  {
-    havePopover?: boolean;
-    secondLevel?: JSX.Element[];
-  } & React.HTMLAttributes<HTMLDivElement>
-> = ({ children, secondLevel, havePopover }) => {
+const MenuNavigationTooltipItem: React.FC<{
+  havePopover?: boolean;
+  secondLevel?: JSX.Element[];
+} & React.HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  secondLevel,
+  havePopover
+}) => {
   switch (!!secondLevel && havePopover) {
     case true:
       return (

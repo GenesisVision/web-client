@@ -115,9 +115,10 @@ interface ProgramPeriodHistoryPopupProps
   onClose: () => void;
 }
 
-const _ProgramPeriodHistoryDetailsButton: React.FC<
-  IProgramPeriodHistoryDetailsButtonProps
-> = ({ period, currency }) => {
+const _ProgramPeriodHistoryDetailsButton: React.FC<IProgramPeriodHistoryDetailsButtonProps> = ({
+  period,
+  currency
+}) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const [t] = useTranslation();
   return (

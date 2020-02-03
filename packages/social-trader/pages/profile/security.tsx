@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <SecurityPage />;
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

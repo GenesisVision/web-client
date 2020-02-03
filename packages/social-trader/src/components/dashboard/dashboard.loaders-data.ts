@@ -28,6 +28,6 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   totalFeesCurrency: "GVT"
 });
 
-export const DashboardPortfolioEventsLoaderData: Array<
-  InvestmentEventViewModel
-> = tableLoaderCreator(investmentEventViewModelCreator);
+export const DashboardPortfolioEventsLoaderData: Array<InvestmentEventViewModel> = tableLoaderCreator(
+  investmentEventViewModelCreator
+);

@@ -13,9 +13,10 @@ import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-const _FundDetailsStatisticsElements: React.FC<
-  IFundDetailsStatisticsElementsProps
-> = ({ period, data: { statisticCurrency, statistic } }) => {
+const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsProps> = ({
+  period,
+  data: { statisticCurrency, statistic }
+}) => {
   const [t] = useTranslation();
   return (
     <DetailsStatisticsElements

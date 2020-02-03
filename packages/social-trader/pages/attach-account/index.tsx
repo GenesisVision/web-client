@@ -15,10 +15,7 @@ Page.getInitialProps = async ctx => {
   return { requestBrokerName };
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);
 
 interface Props {
   requestBrokerName: string;

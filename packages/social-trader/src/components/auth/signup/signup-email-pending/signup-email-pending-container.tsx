@@ -38,9 +38,6 @@ interface DispatchProps {
 
 const SignupEmailPendingContainer = compose<React.ComponentType<OwnProps>>(
   translate(),
-  connect(
-    null,
-    mapDispatchToProps
-  )
+  connect(null, mapDispatchToProps)
 )(SignupEmailPending);
 export default SignupEmailPendingContainer;

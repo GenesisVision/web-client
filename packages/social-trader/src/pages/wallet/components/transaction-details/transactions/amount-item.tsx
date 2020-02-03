@@ -27,9 +27,9 @@ const _AmountItem: React.FC<Props> = ({
   );
 };
 
-const ColoredAmount: React.FC<
-  { color: Color } & React.HTMLAttributes<HTMLDivElement>
-> = ({ color, children }) => {
+const ColoredAmount: React.FC<{ color: Color } & React.HTMLAttributes<
+  HTMLDivElement
+>> = ({ color, children }) => {
   return (
     <div
       className={classNames({

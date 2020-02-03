@@ -21,9 +21,6 @@ CreateFund.getInitialProps = async ctx => {
   return {};
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(CreateFund);
+export default compose(withDefaultLayout, withPrivateRoute)(CreateFund);
 
 interface Props {}
