@@ -1,6 +1,9 @@
 import "./guides.scss";
 
 import classNames from "classnames";
+import DetailsBlockTabs from "components/details/details-block-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
+import useTab from "hooks/tab.hook";
 import React, { useCallback, useState } from "react";
 
 const navGuides = {
@@ -90,6 +93,7 @@ const navGuides = {
 
 const _GuidesContent: React.FC = () => {
   const [title, setTitle] = useState("Trade Intro");
+  const { tab, setTab } = useTab<any>("Video");
   const handleClick = useCallback(
     e => {
       e.preventDefault();
@@ -181,34 +185,73 @@ const _GuidesContent: React.FC = () => {
         </nav>
         <div style={{ width: "80%" }}>
           <h2>{title}</h2>
-          <p>
-            Diversify your capital across hundreds of cryptocurrencies in one
-            click. Select a fund with a composition that matches your opinion on
-            the market and let the manager readjust while the market evolves.
-            You can withdraw your capital at any time you retain full control of
-            your investment.
-          </p>
-          <p>
-            Diversify your capital across hundreds of cryptocurrencies in one
-            click. Select a fund with a composition that matches your opinion on
-            the market and let the manager readjust while the market evolves.
-            You can withdraw your capital at any time you retain full control of
-            your investment.
-          </p>
-          <p>
-            Diversify your capital across hundreds of cryptocurrencies in one
-            click. Select a fund with a composition that matches your opinion on
-            the market and let the manager readjust while the market evolves.
-            You can withdraw your capital at any time you retain full control of
-            your investment.
-          </p>
-          <iframe
-            width="966"
-            height="543"
-            src="https://www.youtube.com/embed/MSSWM6BwigY"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          />
+          <DetailsBlockTabs value={tab} onChange={setTab}>
+            <GVTab value="Video" label="Video" />
+            <GVTab value="Descriptions" label="Descriptions" />
+            <GVTab value="Task" label="Task" />
+          </DetailsBlockTabs>
+          {tab === "Video" && (
+            <iframe
+              width="966"
+              height="543"
+              src="https://www.youtube.com/embed/MSSWM6BwigY"
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            />
+          )}
+
+          {tab === "Descriptions" && (
+            <>
+              <h3>Descriptions</h3>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+            </>
+          )}
+          {tab === "Task" && (
+            <>
+              <h3>Task</h3>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click. Select a fund with a composition that matches your
+                opinion on the market and let the manager readjust while the
+                market evolves. You can withdraw your capital at any time you
+                retain full control of your investment.
+              </p>
+            </>
+          )}
         </div>
       </div>
     </section>
