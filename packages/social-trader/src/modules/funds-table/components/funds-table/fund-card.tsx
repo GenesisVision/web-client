@@ -37,9 +37,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
   return (
     <TableCardTable wrap>
       <TableCardTableColumn>
-        <StatisticItem
-          label={t("funds-page.fundstotalAssetsCount,-header.balance")}
-        >
+        <StatisticItem label={t("funds-page.funds-header.balance")}>
           <NumberFormat
             value={formatCurrencyValue(amount, currency)}
             suffix={` ${currency}`}
