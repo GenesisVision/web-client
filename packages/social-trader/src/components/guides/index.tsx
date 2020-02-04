@@ -1,3 +1,6 @@
+import "./guides.scss";
+
+import classNames from "classnames";
 import React, { useCallback, useState } from "react";
 
 const navGuides = {
@@ -86,7 +89,7 @@ const navGuides = {
 };
 
 const _GuidesContent: React.FC = () => {
-  const [title, setTitle] = useState("Trade");
+  const [title, setTitle] = useState("Trade Intro");
   const handleClick = useCallback(
     e => {
       e.preventDefault();
@@ -95,10 +98,16 @@ const _GuidesContent: React.FC = () => {
         e.target.querySelector("input").disabled
       )
         return null;
-      const value = e.target.className.includes("input")
-        ? e.target.value
-        : e.target.querySelector("input").value;
-      setTitle(value);
+      const input = e.target.className.includes("input")
+        ? e.target
+        : e.target.querySelector("input");
+      const label = e.target.className.includes("input")
+        ? e.target.parentNode
+        : e.target;
+      const activeLabel = document.querySelector(".label--active");
+      if (activeLabel) activeLabel.classList.remove("label--active");
+      label.classList.add("label--active");
+      setTitle(input.value);
     },
     [setTitle]
   );
@@ -109,14 +118,19 @@ const _GuidesContent: React.FC = () => {
         <nav style={{ width: "20%" }}>
           <div>
             <h3>Trade</h3>
-            <ul>
+            <ul style={{ listStyleType: "none" }}>
               {navGuides.trade.map((item, index) => (
                 <li key={index}>
-                  <label onClick={handleClick}>
+                  <label
+                    onClick={handleClick}
+                    className={classNames("label", {
+                      "label--active": index === 0
+                    })}
+                  >
                     <input
                       className="input"
                       type="checkbox"
-                      value={item.lesson}
+                      value={`Trade ${item.lesson}`}
                       checked={item.isChecked}
                       disabled={!item.isAvailable}
                     />
@@ -128,14 +142,14 @@ const _GuidesContent: React.FC = () => {
           </div>
           <div>
             <h3>Invest</h3>
-            <ul>
+            <ul style={{ listStyleType: "none" }}>
               {navGuides.invest.map((item, index) => (
                 <li key={index}>
                   <label onClick={handleClick}>
                     <input
                       className="input"
                       type="checkbox"
-                      value={item.lesson}
+                      value={`Invest ${item.lesson}`}
                       checked={item.isChecked}
                       disabled={!item.isAvailable}
                     />
@@ -147,14 +161,14 @@ const _GuidesContent: React.FC = () => {
           </div>
           <div>
             <h3>Manage</h3>
-            <ul>
+            <ul style={{ listStyleType: "none" }}>
               {navGuides.manage.map((item, index) => (
                 <li key={index}>
                   <label onClick={handleClick}>
                     <input
                       className="input"
                       type="checkbox"
-                      value={item.lesson}
+                      value={`Manage ${item.lesson}`}
                       checked={item.isChecked}
                       disabled={!item.isAvailable}
                     />
