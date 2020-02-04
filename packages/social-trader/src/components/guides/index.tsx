@@ -1,21 +1,24 @@
 import "./guides.scss";
 
 import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
 import DetailsBlockTabs from "components/details/details-block-tabs";
+import GVButton from "components/gv-button";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
+import GuideImg from "media/guides/guide1.png";
 import React, { useCallback, useState } from "react";
 
 const navGuides = {
   trade: [
     {
       lesson: "Intro",
-      isChecked: true,
+      isDone: true,
       isAvailable: true
     },
     {
       lesson: "Step 1",
-      isChecked: false,
+      isDone: false,
       isAvailable: true
     },
     {
@@ -38,7 +41,7 @@ const navGuides = {
   invest: [
     {
       lesson: "Intro",
-      isChecked: false,
+      isDone: false,
       isAvailable: true
     },
     {
@@ -51,6 +54,7 @@ const navGuides = {
     },
     {
       lesson: "Step 3",
+      isDone: true,
       isAvailable: true
     },
     {
@@ -65,7 +69,7 @@ const navGuides = {
   manage: [
     {
       lesson: "Intro",
-      isChecked: true,
+      isDone: true,
       isAvailable: true
     },
     {
@@ -92,7 +96,7 @@ const navGuides = {
 };
 
 const _GuidesContent: React.FC = () => {
-  const [title, setTitle] = useState("Trade Intro");
+  const [title, setTitle] = useState("Trade Intro done");
   const { tab, setTab } = useTab<any>("Video");
   const handleClick = useCallback(
     e => {
@@ -134,8 +138,10 @@ const _GuidesContent: React.FC = () => {
                     <input
                       className="input"
                       type="checkbox"
-                      value={`Trade ${item.lesson}`}
-                      checked={item.isChecked}
+                      value={`Trade ${item.lesson} ${
+                        item.isDone ? "done!" : ""
+                      }`}
+                      checked={item.isDone}
                       disabled={!item.isAvailable}
                     />
                     {item.lesson}
@@ -153,8 +159,10 @@ const _GuidesContent: React.FC = () => {
                     <input
                       className="input"
                       type="checkbox"
-                      value={`Invest ${item.lesson}`}
-                      checked={item.isChecked}
+                      value={`Invest ${item.lesson} ${
+                        item.isDone ? "done" : ""
+                      }`}
+                      checked={item.isDone}
                       disabled={!item.isAvailable}
                     />
                     {item.lesson}
@@ -172,8 +180,10 @@ const _GuidesContent: React.FC = () => {
                     <input
                       className="input"
                       type="checkbox"
-                      value={`Manage ${item.lesson}`}
-                      checked={item.isChecked}
+                      value={`Manage ${item.lesson} ${
+                        item.isDone ? "done" : ""
+                      }`}
+                      checked={item.isDone}
                       disabled={!item.isAvailable}
                     />
                     {item.lesson}
@@ -210,6 +220,11 @@ const _GuidesContent: React.FC = () => {
                 market evolves. You can withdraw your capital at any time you
                 retain full control of your investment.
               </p>
+              <ImageBaseElement
+                className="guide__img"
+                src={GuideImg}
+                alt={"Guide"}
+              />
               <p>
                 Diversify your capital across hundreds of cryptocurrencies in
                 one click. Select a fund with a composition that matches your
@@ -217,6 +232,11 @@ const _GuidesContent: React.FC = () => {
                 market evolves. You can withdraw your capital at any time you
                 retain full control of your investment.
               </p>
+              <ImageBaseElement
+                className="guide__img"
+                src={GuideImg}
+                alt={"Guide"}
+              />
               <p>
                 Diversify your capital across hundreds of cryptocurrencies in
                 one click. Select a fund with a composition that matches your
@@ -236,20 +256,7 @@ const _GuidesContent: React.FC = () => {
                 market evolves. You can withdraw your capital at any time you
                 retain full control of your investment.
               </p>
-              <p>
-                Diversify your capital across hundreds of cryptocurrencies in
-                one click. Select a fund with a composition that matches your
-                opinion on the market and let the manager readjust while the
-                market evolves. You can withdraw your capital at any time you
-                retain full control of your investment.
-              </p>
-              <p>
-                Diversify your capital across hundreds of cryptocurrencies in
-                one click. Select a fund with a composition that matches your
-                opinion on the market and let the manager readjust while the
-                market evolves. You can withdraw your capital at any time you
-                retain full control of your investment.
-              </p>
+              <GVButton>I've done!</GVButton>
             </>
           )}
         </div>
