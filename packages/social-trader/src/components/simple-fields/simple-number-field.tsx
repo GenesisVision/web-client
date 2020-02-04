@@ -1,20 +1,15 @@
 import "./simple-text-field.scss";
 
 import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
 const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
-  const {
-    setFieldValue,
-    name,
-    triggerValidation,
-    emptyInit,
-    init,
-    value
-  } = props;
+  const { setFieldValue, name, triggerValidation, emptyInit, value } = props;
+  const [init, setInit] = useState(true);
   const handleOnChange = useCallback(
     ({ value }: NumberFormatValues) => {
+      setInit(false);
       setFieldValue(name, value);
       if (triggerValidation) triggerValidation(value);
     },
@@ -35,7 +30,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
 
 interface ISimpleNumberFieldProps extends GVTextFieldProps {
   refProp?: any;
-  triggerValidation: (name: string) => any;
+  triggerValidation?: (name: string) => any;
   setFieldValue: (name: string, value?: any) => void;
   [key: string]: any;
 }
