@@ -72,7 +72,7 @@ interface Props extends IPropsGvInput {
 
 export interface IPropsGvInput {
   adornment?: React.ReactNode;
-  label?: string;
+  label?: string | React.ReactNode;
   value?: string | number;
   error?: string;
   adornmentPosition?: "start" | "end";
