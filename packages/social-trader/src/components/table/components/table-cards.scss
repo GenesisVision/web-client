@@ -1,0 +1,16 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.table-cards {
+  @include adaptive-padding(top, $padding-xsmall);
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-left: $padding-small;
+    padding-right: $padding-small - $padding-small/2;
+  }
+}

@@ -1,0 +1,21 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.help-button {
+  @include transition(border-color, color);
+  background: none;
+  padding: 0;
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  border: 1px solid $icon-color;
+  border-radius: 50%;
+  color: $icon-color;
+  line-height: 15px;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}

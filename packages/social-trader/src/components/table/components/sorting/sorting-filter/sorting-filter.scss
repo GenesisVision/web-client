@@ -1,0 +1,14 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.sorting-filter {
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-desktop() {
+    margin-right: $padding-big;
+  }
+  &__btn {
+    @include font-size($font-size-common);
+    padding: 0 0 $padding-xxxsmall;
+  }
+}

@@ -1,0 +1,35 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.asset-status {
+  &__active {
+    color: $program-status-active-color;
+  }
+
+  &__investing,
+  &__withdrawing {
+    border-bottom: 1px dashed;
+    cursor: pointer;
+  }
+
+  &__investing {
+    color: $program-status-investing-color;
+    border-color: $program-status-investing-color;
+  }
+
+  &__withdrawing {
+    color: $program-status-withdrawing-color;
+    border-color: $program-status-withdrawing-color;
+  }
+
+  &__ended,
+  &__pending {
+    color: $program-status-ended-color;
+  }
+}
+
+.request-popover {
+  padding: 0 $padding-xsmall;
+  max-height: 300px;
+  overflow: auto;
+}

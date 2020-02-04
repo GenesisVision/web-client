@@ -1,0 +1,162 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+$chart-width: 160px;
+$card-width: 312px;
+$card-height: 372px;
+$card-avatar-size: 80px;
+
+.table-card {
+  margin-bottom: $padding-small/2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  @include height($card-height, 1.2);
+  padding: $padding-xsmall $padding-xsmall;
+  border-radius: 8px;
+  @include background-with-avatar-level($row-color);
+  flex-grow: 1;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-small $padding-xsmall;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__profit {
+    margin-bottom: 8px;
+    @include font-size($font-size-common);
+  }
+  &__profit-value {
+    @include font-size($font-size-common);
+    letter-spacing: 0.28px;
+  }
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &:first-child {
+      //margin-left: -$padding-xsmall;
+      //margin-right: -$padding-xsmall;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+  }
+  &__broker-avatar {
+    @include width($card-avatar-size);
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+  &__avatar {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    @include link($text-accent-color, $text-color);
+    padding: 3px 0;
+    @include font-size($font-size-paragraph);
+    word-break: break-all;
+    display: block;
+  }
+  &__title-wrapper {
+    max-width: calc(100% - 50px);
+    padding-right: $padding-small/4;
+    box-sizing: border-box;
+  }
+  &__name {
+    @include link($primary-color);
+    transition-property: color;
+  }
+  &__subtitle {
+    color: $label-color;
+    @include font-size($font-size-common);
+    margin-bottom: 10px;
+    display: block;
+  }
+  &__main-info {
+    margin-left: $padding-small/4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  &__actions {
+    text-align: right;
+    cursor: pointer;
+
+    & .icon,
+    & .icon svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__table {
+    display: flex;
+    justify-content: space-between;
+
+    &--flex-wrap {
+      flex-wrap: wrap;
+    }
+    @include media-breakpoint-landscape-tablet() {
+      &--title {
+        width: 45%;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
+    @include media-breakpoint-phone() {
+      & table {
+        td {
+          font-size: $font-size-common;
+        }
+      }
+    }
+  }
+  &__table-column {
+    display: flex;
+    flex-direction: column;
+  }
+  &__table-row {
+    width: 100%;
+  }
+  &__balance {
+    @include font-size($font-size-common);
+  }
+  &__chart {
+    width: $chart-width;
+    flex-grow: 1;
+    margin-right: $padding-small;
+  }
+
+  @include media-breakpoint-phone() {
+    margin-right: 0;
+  }
+  @include media-breakpoint-landscape-phone() {
+    min-width: $card-width;
+    width: calc(50% - #{$padding-small}/ 2);
+    margin-right: $padding-small/2;
+  }
+  @include media-breakpoint-tablet() {
+    flex-grow: 0;
+  }
+  @media (min-width: 1075px) {
+    width: calc(33.33% - #{$padding-small}/ 2);
+  }
+  @media (min-width: 1400px) {
+    width: $card-width;
+  }
+}

@@ -1,0 +1,26 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.programs-table__cell {
+  &.table__cell {
+    @include vertical-paddings($padding-xxsmall);
+  }
+
+  &--link {
+    margin-bottom: 3px;
+    word-break: break-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    @include font-size($font-size-paragraph);
+    @include link($text-accent-color, $text-color);
+  }
+
+  &--chart {
+    max-width: 136px;
+    width: 136px;
+  }
+}

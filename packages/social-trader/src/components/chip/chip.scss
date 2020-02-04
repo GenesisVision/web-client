@@ -1,0 +1,112 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+$chip-small: 32px;
+
+.chip {
+  @include transition(background-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  @include adaptive-border-radius(8px);
+  @include vertical-paddings(7px);
+  @include horizontal-paddings(13px);
+  box-sizing: border-box;
+  @include font-size($font-size-common);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  background-color: $secondary-background-color;
+  box-shadow: $box-shadow-1;
+
+  &--stretch {
+    width: auto !important;
+  }
+
+  &--small {
+    @include width($chip-small);
+    @include height($chip-small);
+    @include font-size($font-size-h3);
+  }
+
+  &--empty {
+    color: $text-light-color;
+    background-color: $popover-background;
+  }
+
+  &--negative {
+    color: $negative-color;
+    background-color: $background-chip-negative;
+  }
+
+  &--positive {
+    color: $primary-color;
+    background-color: $background-chip-positive;
+
+    &.chip--pointer:hover(.chip--disabled) {
+      background-color: lighten($background-chip-positive, 5%);
+    }
+
+    &.chip--negative:hover(.chip--disabled) {
+      background-color: lighten($background-chip-negative, 5%);
+    }
+  }
+
+  &--warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &--pointer {
+    cursor: pointer;
+
+    &:hover:not(.chip--disabled) {
+      background-color: lighten($secondary-background-color, 5%);
+    }
+  }
+
+  &--rounded {
+    border-radius: 2rem;
+  }
+
+  &--disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+.chip-button {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  &:hover {
+    svg [stroke] {
+      stroke: $primary-color;
+    }
+    .chip {
+      background-color: lighten($secondary-background-color, 5%);
+    }
+    .chip--negative {
+      background-color: lighten($background-chip-negative, 5%);
+    }
+  }
+
+  &--reversed {
+    flex-direction: row-reverse;
+    & .chip-button__label {
+      margin-left: 0;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+  }
+}

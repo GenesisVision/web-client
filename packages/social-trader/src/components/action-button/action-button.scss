@@ -1,0 +1,8 @@
+@import "~shared/styles/_sizes";
+
+.action-button {
+  margin-right: 25px;
+  &:last-child {
+    margin-right: 0;
+  }
+}

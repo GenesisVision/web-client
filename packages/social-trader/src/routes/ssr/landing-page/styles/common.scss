@@ -1,0 +1,121 @@
+@import "~shared/styles/breakpoint";
+
+.landing-page {
+  background-color: $landing-bg;
+  color: $main-color;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  .popover,
+  .dialog,
+  .tooltip__popover,
+  .popover-content__block {
+    background-color: $landing-color-icon;
+  }
+
+  a,
+  label {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    padding-bottom: 0;
+
+    @include media-breakpoint-tablet() {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 14px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 18px;
+    }
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 16px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 38px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 26px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 38px;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: inherit;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 16px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 38px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 26px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 38px;
+    }
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    padding-bottom: 0;
+
+    @include media-breakpoint-tablet() {
+      font-size: 24px;
+      line-height: 40px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      font-size: 20px;
+      line-height: 32px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 22px;
+    }
+  }
+}

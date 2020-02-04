@@ -1,0 +1,23 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+.sidebar {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90%;
+  background-color: $background-color;
+  display: flex;
+  box-sizing: border-box;
+  color: $main-color;
+  -webkit-overflow-scrolling: touch;
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}

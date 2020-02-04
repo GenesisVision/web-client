@@ -1,0 +1,21 @@
+@import "~shared/styles/_sizes.scss";
+
+.assets-block {
+  &__line {
+    width: 100%;
+    @include adaptive-margin(bottom, $padding-xsmall);
+  }
+  &__add-block {
+    display: flex;
+  }
+  &__add-assets-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    @include font-size($font-size-paragraph);
+    font-weight: 600;
+  }
+  &__add-button {
+    @include adaptive-margin(right, $padding-xxsmall);
+  }
+}

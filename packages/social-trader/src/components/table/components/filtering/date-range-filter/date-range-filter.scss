@@ -1,0 +1,48 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.date-range-filter {
+  display: flex;
+
+  &__type {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__values {
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    @include media-breakpoint-landscape-phone() {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__dates {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__date-input {
+    width: 140px;
+  }
+
+  &__btn {
+    @include font-size($font-size-paragraph);
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
+  &__type-btn {
+    @include font-size($font-size-paragraph);
+    &:not(:disabled) {
+      color: $text-dark-color;
+    }
+    &:disabled {
+      opacity: 1;
+    }
+  }
+}

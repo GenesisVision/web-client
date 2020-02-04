@@ -1,0 +1,16 @@
+@import "~shared/styles/_sizes";
+
+.avatar-with-name {
+  display: flex;
+  align-items: center;
+  &__avatar {
+    display: flex;
+    align-items: center;
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+  &__name {
+    color: white;
+    white-space: nowrap;
+    @include font-size($font-size-common);
+  }
+}

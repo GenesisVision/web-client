@@ -1,0 +1,58 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.gv-tab {
+  cursor: pointer;
+  color: $text-color;
+  @include font-size($font-size-common);
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.1px;
+  @include adaptive-padding(bottom, $padding-xxxsmall);
+  &:not(:last-child) {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+  white-space: nowrap;
+  &__count {
+    display: inline-block;
+    text-align: center;
+    min-width: 8px;
+    @include adaptive-margin(left, $padding-xxxsmall);
+    margin-bottom: -4px;
+    @include horizontal-paddings(7px);
+    @include vertical-paddings(4px);
+    @include adaptive-border-radius(6px);
+    line-height: 1;
+    background-color: rgba($secondary-color, 0.5);
+  }
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &--active {
+    color: $text-light-color;
+    .gv-tab__count {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+    }
+    &::after {
+      content: "";
+      display: block;
+      padding-top: 0.2em;
+      width: 1em;
+      border-bottom: 0.15em solid $primary-color;
+    }
+    a {
+      color: $text-light-color;
+    }
+  }
+  &--disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+}

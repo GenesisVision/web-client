@@ -1,0 +1,7 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.logout-container {
+  @include adaptive-padding(top, $padding-medium);
+}

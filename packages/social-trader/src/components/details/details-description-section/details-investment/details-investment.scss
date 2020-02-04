@@ -1,0 +1,27 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.details-investment {
+  &__block--subscription {
+    flex: 1;
+
+    @include media-breakpoint-landscape-tablet() {
+      .details__short-statistic-item {
+        min-width: 45%;
+      }
+    }
+  }
+
+  &__withdraw-notice {
+    color: $short-statistic-notice-color;
+    line-height: $font-size-h3-mobile;
+    font-size: $font-size-small-mobile;
+    letter-spacing: 0.15px;
+    margin-left: 5%;
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-h3;
+      font-size: $font-size-small;
+    }
+  }
+}

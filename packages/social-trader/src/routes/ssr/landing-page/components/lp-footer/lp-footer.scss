@@ -1,0 +1,129 @@
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.lp-footer {
+  background-color: $landing-bg;
+  color: $main-color;
+
+  &__container {
+    @include container();
+    padding-top: 40px;
+    padding-bottom: 150px;
+
+    @include media-breakpoint-large-desktop() {
+      padding-bottom: 200px;
+    }
+  }
+
+  &__row {
+    @include grid();
+    align-items: baseline;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 1/13;
+      margin-bottom: 40px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+      justify-self: start;
+      margin-bottom: 100px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 38px;
+      line-height: 50px;
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-bottom: 40px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__email {
+    border: 1px solid rgba($main-color, 0.1);
+    border-radius: 50px;
+    margin-bottom: 60px;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+      margin-bottom: 100px;
+      justify-content: space-between;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 6/12;
+      justify-self: end;
+    }
+
+    .lp-button {
+      display: none;
+
+      @include media-breakpoint-tablet() {
+        display: block;
+      }
+    }
+  }
+
+  &__email-link {
+    @include reset-link();
+    @include transition(color);
+    color: rgba($main-color, 0.5);
+    padding: 15px 30px;
+  }
+
+  &__app-links {
+    margin-bottom: 80px;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 1/13;
+      justify-self: center;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+      justify-self: start;
+    }
+  }
+
+  &__seo-links {
+    display: none;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-auto-flow: column;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 6/12;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+  }
+
+  &__social-list {
+    margin-bottom: 30px;
+  }
+}

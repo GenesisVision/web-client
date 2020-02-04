@@ -1,0 +1,41 @@
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.currency-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &__icon {
+    object-fit: cover;
+    box-shadow: $box-shadow-1;
+    border-radius: 100%;
+    & img {
+      width: 100%;
+      height: auto;
+    }
+    &--medium {
+      @include adaptive-margin(right, $padding-xsmall);
+      @include width($wallet-item-size);
+      @include height($wallet-item-size);
+    }
+    &--small {
+      @include adaptive-margin(right, $padding-xsmall/$divider-title);
+      @include width($wallet-item-size/$divider-title);
+      @include height($wallet-item-size/$divider-title);
+    }
+  }
+  &__rate {
+    @include font-size($font-size-small);
+    color: $text-light-color;
+  }
+  &__name {
+    @include font-size($font-size-paragraph);
+    white-space: nowrap;
+    letter-spacing: 0.6px;
+    color: $text-light-color;
+    &--big {
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_shadow.scss";
+
+.dashboard-block {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__link {
+    color: $text-light-color;
+    display: inline-block;
+    text-align: center;
+    font-size: $font-size-h1;
+    line-height: $font-size-h2;
+    width: $font-size-h2;
+  }
+}
+
+.dashboard-horizontal-list {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+
+  & .table-card {
+    margin-right: $padding-xsmall;
+  }
+
+  &__shadow-wrapper {
+    @include details-block-left-margin();
+  }
+}
+
+.dashboard-horizontal-window-list {
+  overflow-y: hidden !important;
+}

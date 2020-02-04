@@ -1,0 +1,1 @@
+export type FollowDetailsDataType = any;

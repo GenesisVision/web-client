@@ -1,0 +1,33 @@
+.modal {
+  &[class*="position"] {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1300;
+  }
+
+  &--position-absolute {
+    position: absolute;
+  }
+
+  &--position-fixed {
+    position: fixed;
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    &:not(&--transparent) {
+      background-color: black;
+      opacity: 0.7;
+    }
+  }
+}

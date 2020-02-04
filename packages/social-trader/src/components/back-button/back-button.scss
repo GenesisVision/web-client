@@ -1,0 +1,38 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.back-button {
+  display: flex;
+  align-items: center;
+
+  &__container {
+    display: flex;
+    align-items: stretch;
+    font-size: $font-size-small;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+
+  &__back {
+    font-weight: 600;
+    line-height: 5px;
+    padding-top: 6.5px;
+  }
+
+  &__back-arrow {
+    border: 1px solid transparent;
+    margin-right: 5px;
+    height: 16.5px;
+    font-family: "Times New Roman", serif;
+  }
+
+  &__path {
+    padding-left: $padding-xsmall;
+    opacity: 0.4;
+    font-size: $font-size-common;
+  }
+}

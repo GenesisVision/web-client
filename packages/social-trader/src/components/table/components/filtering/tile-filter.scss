@@ -1,0 +1,18 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.tile-filter {
+  cursor: default;
+  display: flex;
+
+  &__value {
+    display: flex;
+  }
+}
+
+.tile-filter-popover {
+  width: 236px;
+  &__search-wrapper {
+    margin: 0 0 $padding-xsmall;
+  }
+}

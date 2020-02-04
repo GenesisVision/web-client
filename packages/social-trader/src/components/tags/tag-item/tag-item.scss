@@ -1,0 +1,63 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.tag-item {
+  display: inline-block;
+  position: relative;
+  cursor: default;
+  &:not(:last-child) {
+    margin-right: $padding-xxsmall;
+  }
+
+  &__button-remove {
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #293842;
+    border: 2px solid $panel-background-color;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+
+    .icon {
+      height: 6px;
+      width: 6px;
+    }
+  }
+}
+
+.tag-item-tooltip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .tag-item {
+    margin-top: $padding-xxsmall/2;
+    margin-bottom: $padding-xxsmall/2;
+  }
+}
+
+.tag-button {
+  @include font-size($font-size-xsmall);
+  @include adaptive-border-radius(19.5px);
+  @include height(18px);
+  @include line-height(18px);
+  @include horizontal-paddings($padding-xxsmall);
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &--remainder {
+    color: $positive-color;
+    background-color: rgba($positive-color, 0.1);
+  }
+}
+
+.tag-circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}

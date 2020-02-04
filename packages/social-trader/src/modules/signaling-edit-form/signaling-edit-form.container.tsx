@@ -1,0 +1,62 @@
+import useApiRequest from "hooks/api-request.hook";
+import SignalingEdit, {
+  IProgramSignalFormValues
+} from "modules/signaling-edit-form/signaling-edit";
+import { editSignal } from "modules/signaling-edit-form/signaling-edit-form.service";
+import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { createFollowInfoSelector } from "reducers/platform-reducer";
+
+const _SignalingEditFormContainer: React.FC<Props> = ({
+  inDialog,
+  id,
+  onApply = () => {},
+  showFields = true,
+  successFee,
+  volumeFee,
+  isSignalProgram
+}) => {
+  const followInfo = useSelector(createFollowInfoSelector);
+  const { sendRequest: editSignalRequest } = useApiRequest({
+    middleware: [onApply],
+    request: editSignal,
+    successMessage: "program-edit-signal.success-alert-message"
+  });
+  const changeSignaling = useCallback(
+    ({ volumeFee, successFee }: IProgramSignalFormValues, setSubmitting) =>
+      editSignalRequest(
+        {
+          id,
+          successFee,
+          volumeFee
+        },
+        setSubmitting
+      ),
+    [id]
+  );
+  return (
+    <SignalingEdit
+      followInfo={followInfo}
+      isSignalProgram={isSignalProgram}
+      inDialog={inDialog}
+      showFields={showFields}
+      successFee={successFee}
+      volumeFee={volumeFee}
+      onSubmit={changeSignaling}
+    />
+  );
+};
+
+interface Props {
+  inDialog?: boolean;
+  id: string;
+  showFields?: boolean;
+  successFee?: number;
+  volumeFee?: number;
+  onApply?: VoidFunction;
+  isSignalProgram?: boolean;
+}
+
+export const SignalingEditFormContainer = React.memo(
+  _SignalingEditFormContainer
+);

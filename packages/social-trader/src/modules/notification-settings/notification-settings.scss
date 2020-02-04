@@ -1,0 +1,58 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+.notification-settings {
+  &__title {
+    @include adaptive-padding(bottom, $padding-medium);
+    overflow-wrap: break-word;
+    @include font-size($font-size-common);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: #3bcdbd;
+  }
+
+  &__subtitle {
+    @include font-size($font-size-small);
+    letter-spacing: 0.48px;
+    font-weight: 500;
+  }
+}
+
+.notification-entity {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 344px;
+  color: $main-color;
+  @include font-size($font-size-paragraph);
+  @include line-height(2);
+  letter-spacing: 0.2px;
+  @include vertical-paddings($padding-xxsmall, $padding-xsmall);
+  border-radius: $border-radius;
+  margin: 0 -16px;
+  @include background-with-avatar-level($background-color);
+
+  &:hover {
+    @include background-with-avatar-level($secondary-background-color);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__count {
+    margin-left: auto;
+  }
+}
+
+.program-notification {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+}

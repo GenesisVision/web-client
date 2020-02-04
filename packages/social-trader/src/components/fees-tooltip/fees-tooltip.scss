@@ -1,0 +1,28 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.fees-tooltip {
+  padding: 0;
+}
+
+.fees-tooltip-container {
+  @include font-size($font-size-paragraph);
+
+  &__header,
+  &__footer {
+    width: 100%;
+    box-sizing: border-box;
+    padding: $padding-xxsmall;
+
+    @include media-breakpoint-landscape-tablet() {
+      padding: $padding-xsmall $padding-upper-medium/2;
+    }
+  }
+
+  &__header {
+    background-color: $panel-background-color;
+  }
+  &__footer {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,4 @@
+@import "~shared/styles/_sizes";
+.details-block-title-box {
+  @include details-block-horizontal-paddings();
+}

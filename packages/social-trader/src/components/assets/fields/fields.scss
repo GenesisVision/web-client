@@ -1,0 +1,47 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.create-asset-settings {
+  &__row-title {
+    font-weight: 500;
+    font-size: $font-size-small;
+    letter-spacing: 0.4px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  &__text {
+    @include font-size($font-size-small);
+    @include adaptive-margin(bottom, $padding-xsmall);
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+  }
+}
+
+.text-area-field {
+  max-width: 500px;
+}
+
+.form-text-field {
+  &__container {
+    width: 100%;
+  }
+  &__text {
+    @include adaptive-padding(bottom, $padding-xsmall);
+    color: rgba($text-light-color, 0.5);
+    line-height: 24px;
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 500px;
+    }
+
+    &--padding-top {
+      @include adaptive-padding(top, $padding-xsmall);
+    }
+    &--color-accent {
+      color: $primary-color;
+    }
+  }
+}

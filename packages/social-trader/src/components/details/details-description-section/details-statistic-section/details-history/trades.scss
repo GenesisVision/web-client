@@ -1,0 +1,101 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.details-trades {
+  overflow: hidden;
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+  }
+
+  &__delay-question {
+    cursor: help;
+    box-sizing: border-box;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+    font-size: 8px;
+    border: 1px solid rgba($icon-color, 0.2);
+    color: rgba($icon-color, 0.2);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: 12px;
+  }
+
+  &__delay-hint {
+    color: $label-color;
+    @include adaptive-margin(right, $padding-xxsmall);
+    @include font-size($font-size-common);
+  }
+
+  &__history-popup-item {
+    display: flex;
+    @include font-size($font-size-common);
+  }
+
+  &__history-popup-item-name {
+    width: 200px;
+    color: $label-color;
+  }
+
+  &__history-popup-item-value {
+    white-space: nowrap;
+  }
+
+  &__cell,
+  &__head-cell {
+    height: 50px;
+    font-size: $font-size-paragraph-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+    }
+  }
+
+  &__cell {
+    @include adaptive-padding(right, $padding-medium);
+    @include vertical-paddings($padding-xxsmall);
+
+    &--direction {
+      width: 10%;
+      min-width: 83px;
+    }
+
+    &--symbol {
+      width: 16%;
+      min-width: 80px;
+    }
+
+    &--volume {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--price {
+      width: 16%;
+      min-width: 95px;
+    }
+
+    &--profit {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--date {
+      width: 23%;
+      min-width: 168px;
+    }
+
+    &--ticket {
+      width: 16%;
+      min-width: 83px;
+    }
+
+    &--entry {
+      width: 16%;
+      min-width: 62px;
+    }
+  }
+}

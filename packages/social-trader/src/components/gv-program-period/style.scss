@@ -1,0 +1,25 @@
+@import "~shared/styles/_colors";
+
+.gv-program-period {
+  display: block;
+  &--pie {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--line {
+    height: 2px;
+    background-color: #2a353f;
+    border-radius: 0.25rem;
+    width: 100%;
+    position: relative;
+
+    .gv-program-period__value {
+      position: absolute;
+      top: -1px;
+      height: 4px;
+      background-color: $primary-color;
+      border-radius: 0.25rem;
+    }
+  }
+}

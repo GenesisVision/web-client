@@ -1,0 +1,16 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.custom-notification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include adaptive-margin(bottom, $padding-small);
+
+  &__offset {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include adaptive-margin(left, $padding-upper-medium);
+  }
+}

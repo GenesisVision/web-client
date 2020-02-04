@@ -1,0 +1,24 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
+.calculator-output {
+  &__label {
+    @include font-size($font-size-small);
+    display: flex;
+    align-items: center;
+    color: #e6edf1;
+  }
+
+  &__value {
+    @include font-size(15px);
+    display: inline-block;
+    padding: 6px 22px;
+    background-color: rgba($panel-background-color, 0.3);
+    border-radius: 4px;
+    color: $main-color;
+  }
+
+  .tooltip__label {
+    margin-left: $padding-xxsmall;
+  }
+}

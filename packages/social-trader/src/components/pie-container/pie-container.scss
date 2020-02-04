@@ -1,0 +1,42 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_transition";
+
+$small-size: 24.5px;
+$middle-size: 43px;
+
+.pie-container {
+  position: relative;
+  @include width($middle-size);
+  @include height($middle-size);
+  flex-shrink: 0;
+  &--small {
+    @include width($small-size);
+    @include height($small-size);
+  }
+  &__value-container {
+    @include font-size($font-size-small);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.multi-pie-container {
+  position: relative;
+  height: 100%;
+}
+
+.pie-circle {
+  @include transition();
+  cursor: pointer;
+  &--selected {
+    stroke-width: 4;
+  }
+}

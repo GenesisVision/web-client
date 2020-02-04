@@ -1,0 +1,33 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.cookie-message {
+  padding: 30px 0;
+  background-color: $landing-bg;
+  box-shadow: 0 -23px 32px -31px rgba($primary-color, 0.7);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: $main-color;
+  z-index: 3;
+}
+
+.cookie-message__container {
+  @include container();
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie-message__text {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  a {
+    @include reset-link();
+    color: $primary-color;
+  }
+}

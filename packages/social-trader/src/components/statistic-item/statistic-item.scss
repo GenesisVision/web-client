@@ -1,0 +1,95 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.statistics-item {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    @include adaptive-margin(bottom, $padding-xsmall/2);
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__label {
+    color: $label-color;
+    @include font-size($font-size-common);
+    letter-spacing: 0.4px;
+    font-weight: normal;
+    &--small {
+      @include font-size($font-size-small-mobile);
+    }
+    &--loader {
+      opacity: 0.5;
+    }
+    &--no-wrap {
+      white-space: nowrap;
+    }
+  }
+
+  &__value {
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+
+    &--small {
+      @include font-size($font-size-common-mobile);
+    }
+    &--accent {
+      font-weight: 600;
+    }
+    &--big {
+      display: flex;
+      align-items: center;
+      @include font-size($font-size-h2);
+    }
+    &--large {
+      display: flex;
+      align-items: center;
+      @include font-size($font-size-h1);
+    }
+  }
+
+  &__equivalent {
+    @include font-size($font-size-common-mobile);
+    letter-spacing: 0.3px;
+    color: $label-color;
+    @include media-breakpoint-landscape-phone() {
+      @include font-size($font-size-common);
+      letter-spacing: 0.3px;
+      color: $label-color;
+    }
+  }
+}
+
+.statistics-item-container {
+  &--bottom-content {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+  &--with-padding {
+    &:not(:last-child) {
+      @include adaptive-margin(right, $padding-medium);
+      @include adaptive-padding(bottom, $padding-xsmall);
+    }
+  }
+  &--half {
+    margin-right: 0 !important;
+    @include width(70px);
+    @include media-breakpoint-landscape-phone() {
+      width: auto;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.pie-statistics-item {
+  display: flex;
+  align-items: center;
+  &__pie-block {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+}

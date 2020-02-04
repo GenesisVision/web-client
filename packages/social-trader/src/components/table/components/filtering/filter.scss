@@ -1,0 +1,41 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.filter {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  @include font-size($font-size-common);
+  &:hover {
+    .filter__arrow {
+      stroke: $primary-color;
+    }
+  }
+
+  &__label {
+    opacity: 0.5;
+    letter-spacing: 0.2px;
+    color: $text-color;
+    white-space: nowrap;
+  }
+
+  &__value {
+    letter-spacing: 0.2px;
+    color: $text-accent-color;
+    padding: 0 $padding-xxxsmall;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    stroke: $icon-color;
+    &__is-open {
+      stroke: $primary-color;
+    }
+  }
+}
+
+.filter-title {
+  @include font-size($font-size-paragraph);
+  font-weight: 600;
+  color: $main-color;
+}

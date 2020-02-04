@@ -1,0 +1,30 @@
+@import "~shared/styles/_sizes";
+
+.fund-asset-filter {
+  &__asset-name {
+    @include font-size($font-size-common);
+    @include adaptive-margin(right, $padding-xxsmall);
+  }
+
+  &__assets-block {
+    max-height: 180px;
+    overflow-y: auto;
+  }
+
+  &__assets {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin-block-start: 0;
+  }
+
+  &__asset-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    @include adaptive-margin(bottom, $padding-xxsmall);
+  }
+
+  &__asset-item-name {
+    @include adaptive-padding(left, $padding-xxsmall);
+  }
+}

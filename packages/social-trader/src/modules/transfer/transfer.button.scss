@@ -1,0 +1,11 @@
+@import "~shared/styles/_breakpoint";
+.transfer-button {
+  &__full-button-icon {
+    display: inline-block;
+    margin-right: 10px;
+    height: 8px;
+    @include media-breakpoint-landscape-phone() {
+      height: 12px;
+    }
+  }
+}

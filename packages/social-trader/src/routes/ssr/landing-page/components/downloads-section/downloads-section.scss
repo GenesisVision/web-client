@@ -1,0 +1,9 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.downloads-section {
+  @include horizontal-padding();
+  line-height: 2;
+}

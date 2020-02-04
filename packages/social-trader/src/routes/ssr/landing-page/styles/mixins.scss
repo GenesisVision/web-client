@@ -1,0 +1,88 @@
+@mixin transition($property...) {
+  transition-property: $property;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+@mixin visually-hidden() {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+@mixin text-transform($letter-spacing: 0.2em) {
+  text-transform: uppercase;
+
+  @if ($letter-spacing != false) {
+    letter-spacing: $letter-spacing;
+  }
+}
+
+@mixin reset-list() {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin reset-button() {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  text-align: inherit;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+@mixin reset-link() {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+  }
+}
+
+@mixin horizontal-padding {
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  @include media-breakpoint-large-desktop() {
+    padding-top: 140px;
+    padding-bottom: 140px;
+  }
+}

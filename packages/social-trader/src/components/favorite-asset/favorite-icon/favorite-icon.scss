@@ -1,0 +1,24 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.favorite-icon {
+  @include width(20px);
+  @include height(19px);
+  cursor: pointer;
+  path {
+    stroke: $label-color;
+  }
+  &:hover {
+    opacity: 1;
+    path {
+      stroke: $text-accent-color;
+    }
+  }
+  &__selected {
+    opacity: 1;
+    path {
+      fill: $primary-color;
+      stroke: none;
+    }
+  }
+}

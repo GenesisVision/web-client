@@ -1,0 +1,13 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-total {
+  &__values {
+    @include details-block-horizontal-paddings();
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

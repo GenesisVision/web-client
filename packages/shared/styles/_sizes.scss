@@ -1,14 +1,17 @@
 @import "./_breakpoint.scss";
 
 //paddings
+$padding-xxxxlarge: 190px;
 $padding-xxlarge: 108px;
 $padding-xlarge: 90px;
 $padding-large: 80px;
 $padding-big: 62px;
+$padding-upper-medium: 50px;
 $padding-medium: 40px;
 $padding-small: 32px;
 $padding-xsmall: 20px;
 $padding-xxsmall: 10px;
+$padding-xxxsmall: 5px;
 
 //fonts
 $font-size-h1: 32px;
@@ -18,20 +21,38 @@ $font-size-h4: 16px;
 $font-size-paragraph: 14px;
 $font-size-common: 13px;
 $font-size-small: 12px;
+$font-size-xsmall: 11px;
+$font-size-xxxxsmall: 7.5px;
 
 //others
+$scroll-width: 6px;
+$small-avatar-size: 44px;
+$button-icon-size: 20px;
+$input-line-height: 32px;
+$wallet-item-size: $small-avatar-size;
+$close-button-size: $button-icon-size;
+$details-block-padding: $padding-small;
+$tag-font-size: 11px;
 $border-radius: 5px;
 $border-radius-middle: 8px;
 $btn-height: 50px;
 $btn-width: 149px;
+$btn-height-small: 30px;
+$btn-width-small: 100px;
 $icon-size: 29px;
 $avatar-size: 120px;
 $asset-height: 40px;
+$modal-width: 360px;
+$details-statistic-section-width: 300px;
+$tooltip-padding: 16px;
+$popover-padding-small: $tooltip-padding;
+$popover-padding-medium: $padding-xsmall;
+$popover-padding-large: $padding-small;
 
-//dividers4
+//dividers
 $divider-padding: 3;
-$divider-text: 1.5;
 $divider-title: 2;
+$divider-text: 1.2;
 
 //paddings for mobile
 $padding-xxlarge-mobile: $padding-xxlarge/$divider-padding;
@@ -61,6 +82,41 @@ $icon-size-mobile: $icon-size/$divider-text;
 $avatar-size-mobile: $avatar-size/$divider-title;
 
 //mixins
+@mixin line-height($height) {
+  $divider: $divider-text;
+
+  line-height: $height/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    line-height: $height;
+  }
+}
+
+@mixin right($right, $divider: $divider-text) {
+  right: $right/$divider;
+  @include media-breakpoint-landscape-phone() {
+    right: $right;
+  }
+}
+
+@mixin height($height, $divider: $divider-text) {
+  height: $height/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    height: $height;
+  }
+}
+
+@mixin width($width) {
+  $divider: $divider-text;
+
+  width: $width/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    width: $width;
+  }
+}
+
 @mixin font-size($font-size) {
   $divider: $divider-text;
 
@@ -82,9 +138,14 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
-@mixin vertical-paddings($padding-top, $padding-bottom: $padding-top) {
-  @include adaptive-padding(top, $padding-top);
-  @include adaptive-padding(bottom, $padding-bottom);
+@mixin adaptive-full-padding($padding, $divider: $divider-padding) {
+  @include vertical-paddings($padding, $divider);
+  @include horizontal-paddings($padding, $divider);
+}
+
+@mixin vertical-paddings($vertical-padding, $divider: $divider-padding) {
+  @include adaptive-padding(top, $vertical-padding, $divider);
+  @include adaptive-padding(bottom, $vertical-padding, $divider);
 }
 
 @mixin horizontal-paddings($horizontal-padding, $divider: $divider-padding) {
@@ -92,10 +153,44 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   @include adaptive-padding(right, $horizontal-padding, $divider);
 }
 
+@mixin vertical-margins($vertical-margin) {
+  @include adaptive-margin(top, $vertical-margin);
+  @include adaptive-margin(bottom, $vertical-margin);
+}
+
+@mixin horizontal-margins($horizontal-margin) {
+  @include adaptive-margin(left, $horizontal-margin);
+  @include adaptive-margin(right, $horizontal-margin);
+}
+
 @mixin adaptive-margin($direction, $margin-size) {
   margin-#{$direction}: $margin-size/$divider-padding;
 
   @include media-breakpoint-landscape-phone() {
     margin-#{$direction}: $margin-size;
+  }
+}
+
+@mixin details-block-left-padding() {
+  @include adaptive-padding(left, $details-block-padding);
+}
+
+@mixin details-block-left-margin() {
+  @include adaptive-margin(left, $details-block-padding);
+}
+
+@mixin details-block-right-padding() {
+  @include adaptive-padding(right, $details-block-padding);
+}
+
+@mixin details-block-horizontal-paddings() {
+  @include details-block-left-padding();
+  @include details-block-right-padding();
+}
+
+@mixin adaptive-border-radius($size) {
+  border-radius: $size/$divider-text;
+  @include media-breakpoint-landscape-phone() {
+    border-radius: $size;
   }
 }

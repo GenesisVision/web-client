@@ -1,0 +1,65 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.global-search {
+  &-input {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+  &-hidden {
+    display: none;
+  }
+  &__input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  &__cancel-button {
+  }
+}
+
+.global-search-input {
+  padding: 0 $padding-xsmall;
+  @include adaptive-margin(bottom, $padding-xsmall);
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0;
+  }
+}
+
+.global-search-result {
+  @include adaptive-margin(top, $padding-xsmall);
+
+  & .table__toolbar {
+    padding: 0;
+  }
+
+  &__tabs {
+    padding: 0 $padding-xsmall;
+    height: 25px;
+
+    @include media-breakpoint-landscape-phone() {
+      height: auto;
+    }
+  }
+
+  &__heading {
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+  }
+
+  &__loading {
+    @include vertical-paddings($padding-small);
+    @include font-size($font-size-h4);
+    letter-spacing: 0.2px;
+    opacity: 0.4;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
+  }
+}

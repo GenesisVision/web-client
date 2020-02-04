@@ -1,0 +1,49 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.program-short {
+  @include background-with-avatar-level($landing-item-bg);
+  color: $main-color;
+  border-radius: 18px;
+  padding: 25px 30px;
+  text-align: center;
+
+  @include media-breakpoint-tablet() {
+    padding: 35px;
+  }
+
+  &__period {
+    color: rgba($main-color, 0.5);
+    font-size: 10px;
+    margin-bottom: 10px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 14px;
+    }
+
+    @include media-breakpoint-desktop() {
+      font-size: 15px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 16px;
+    }
+  }
+
+  &__balance {
+    flex-direction: row;
+    padding: 0;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  .table-card__avatar {
+    justify-content: center;
+  }
+
+  .program-avatar--medium {
+    margin-right: 0;
+  }
+}

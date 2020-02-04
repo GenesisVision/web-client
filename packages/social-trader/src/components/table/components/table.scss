@@ -1,0 +1,198 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_transition";
+
+$view-svg-size: 15px;
+
+.table {
+  @include adaptive-padding(bottom, $padding-xsmall, 2);
+  width: 100%;
+  border-spacing: 0;
+
+  &__scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  &__footer {
+    @include adaptive-padding(top, $padding-xxsmall, 2);
+    @include horizontal-paddings($padding-xsmall);
+    display: flex;
+    align-items: baseline;
+  }
+  &__footer-text {
+    @include font-size($font-size-paragraph);
+    color: rgba($text-light-color, 0.4);
+  }
+  &__toolbar {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    @include horizontal-paddings($padding-xsmall);
+    flex-wrap: wrap;
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__toggle-icon {
+    cursor: pointer;
+    line-height: 0;
+    .icon {
+      width: $view-svg-size/1.2;
+      height: 18px;
+    }
+    &:not(:last-child) {
+      @include adaptive-margin(right, $view-svg-size * 2);
+    }
+  }
+
+  &__toolbar-heading {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+  }
+
+  &__title {
+    padding: 0;
+    justify-self: flex-start;
+    white-space: nowrap;
+  }
+
+  &__filters {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    &--mapping {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__row {
+    @include transition(background-color);
+
+    &--clickable {
+      background-color: $background-chip-positive !important;
+      &:hover {
+        background-color: $background-pretender-level-hover !important;
+      }
+      & .table__cell {
+        cursor: pointer;
+      }
+    }
+    &:not(.table__row--head):hover {
+      @include background-with-avatar-level($row-color);
+    }
+
+    &--stripy:nth-child(2n + 1) {
+      @include background-with-avatar-level($table-background-subcolor);
+    }
+  }
+
+  &__cell {
+    @include vertical-paddings($padding-xsmall);
+    @include font-size($font-size-common);
+    @include adaptive-padding(right, $padding-xsmall, 2);
+    text-align: left;
+    cursor: default;
+    box-sizing: border-box;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-weight: normal;
+    white-space: nowrap;
+
+    &:first-child {
+      @include adaptive-padding(left, $padding-small);
+    }
+    &:last-child {
+      @include adaptive-padding(right, $padding-small);
+    }
+
+    &#{&} {
+      &--head {
+        @include adaptive-padding(right, $padding-small/2);
+        opacity: 0.3;
+
+        &:last-child {
+          @include adaptive-padding(right, $padding-small);
+        }
+      }
+      &--sortable {
+        cursor: pointer;
+        @include adaptive-padding(right, $padding-small/2);
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  @include font-size($font-size-paragraph);
+  font-weight: 600;
+}
+
+.message {
+  padding: $padding-small;
+  text-align: center;
+  width: 100%;
+  @include font-size($font-size-common);
+  box-sizing: border-box;
+}
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 3px;
+  content: "";
+  border-top: 1px solid white;
+}
+
+.sortable-asc,
+.sortable-desc {
+  span {
+    opacity: 1;
+  }
+  position: relative;
+  &::before {
+    @include transition(width);
+    @extend %sortable-border-icon;
+    height: 4px;
+  }
+  &::after {
+    @include transition(width);
+    @extend %sortable-border-icon;
+  }
+}
+.sortable-desc {
+  &::before {
+    width: 10px;
+  }
+  &::after {
+    width: 5px;
+  }
+}
+.sortable-asc {
+  &::before {
+    width: 5px;
+  }
+  &::after {
+    width: 10px;
+  }
+}
+.table-toolbar-item-block {
+  &:not(:last-child) {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+}

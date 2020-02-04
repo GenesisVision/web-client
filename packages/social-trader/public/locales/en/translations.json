@@ -1,0 +1,2585 @@
+{
+  "facets": {
+    "most_reliable": "most reliable",
+    "rating": "rating",
+    "weekly_top": "weekly top",
+    "top": "top",
+    "popular": "popular",
+    "new": "new"
+  },
+  "trade": {
+    "title": "Trade"
+  },
+  "copytrading-tables": {
+    "title": "Trades",
+    "open-trades": "Open trades",
+    "history": "Trades History",
+    "log": "Trading log",
+    "close-trade-confirm": {
+      "header": "Closing the trade",
+      "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
+      "success-message": "The trade has been successfully closed",
+      "error-message": "An error occurred while closing the trade"
+    },
+    "open-trades-header": {
+      "providers": "Providers",
+      "date-open": "Date open",
+      "symbol": "Symbol",
+      "direction": "Dir",
+      "volume": "Volume",
+      "price-open": "Price open",
+      "price": "Price",
+      "profit": "Profit"
+    },
+    "trades-history-header": {
+      "direction-entry": "Dir/Entry",
+      "symbol": "Symbol",
+      "volume": "Volume",
+      "price": "Price",
+      "profit": "Profit",
+      "commission": "Commission",
+      "date": "Date",
+      "providers": "Providers"
+    },
+    "trades-log-header": {
+      "date": "Date",
+      "message": "Message"
+    },
+    "fees": {
+      "trading": "Trading fee",
+      "ManagerSignalMasterVolumeFee": "Volume fee",
+      "ManagerSignalMasterSuccessFee": "Manager Success fee",
+      "SuccessFee": "Success fee",
+      "GvSignalSuccessFee": "Platform Success Fee",
+      "total": "Total"
+    }
+  },
+  "invest": {
+    "title": "Invest",
+    "follows": {
+      "title": "Follow",
+      "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time."
+    },
+    "programs": {
+      "title": "Programs",
+      "text": "Invest your money with the peace of mind of knowing that a manager’s track record is stored on the blockchain. Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at the predefined intervals."
+    },
+    "funds": {
+      "title": "Funds",
+      "text": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves. You can withdraw your capital at any time you retain full control of your investment."
+    },
+    "invest-button": "Invest",
+    "follow-button": "Follow"
+  },
+  "unauth-popup": {
+    "fund": "You must be logged in to invest in a fund",
+    "program": "You must be logged in to invest in a program",
+    "follow": "You must be logged in to follow trades."
+  },
+  "request-line": {
+    "success-message": "Request successfully canceled.",
+    "cancel-header": "Cancel request",
+    "cancel-body": "Please confirm that you want to cancel the request."
+  },
+  "convert-page": {
+    "convert-signal-to-program": "Make program from signal account",
+    "convert-account-to-program": "Make program from account",
+    "convert-account-to-signal": "Make signal account from account",
+    "convert-externalaccount-to-signal": "Make signal account from external account"
+  },
+  "mt4-page": {
+    "title": "MetaTrader 4"
+  },
+  "mt5-page": {
+    "title": "MetaTrader 5"
+  },
+  "active": {
+    "chart": "Chart",
+    "about": "About"
+  },
+  "table": {
+    "loading": "Loading...",
+    "no-items": "There are no items to display.",
+    "items-counter": "Showing {{from}}-{{to}} of {{total}}"
+  },
+  "alerts": {
+    "copy-success": "Successfully copied to the clipboard.",
+    "copy-error": "Failed to copy data to the clipboard.",
+    "clear-all": "Clear all",
+    "server-error": "Server error occurred. Please try again later or contact the support department."
+  },
+  "verification-status": {
+    "verified": "Verified",
+    "not-verified": "Not Verified",
+    "under-review": "Under Review",
+    "rejected": "Rejected"
+  },
+  "buttons": {
+    "create-signal": "Create signal account",
+    "create-account": "Create account",
+    "create-attach-external-account": "Attach external account",
+    "attach-external-account": "Attach external account",
+    "invest": "Invest",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "notify": "Notify",
+    "generate": "Generate",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back",
+    "close": "Close",
+    "copy": "Copy",
+    "confirm": "Confirm",
+    "activate": "Activate",
+    "disable": "Disable",
+    "create-program": "Create Program",
+    "continue": "Continue",
+    "create-fund": "Create Fund",
+    "add-assets": "Add assets",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "verify": "Verify",
+    "resend-email": "Resend email",
+    "reset": "Reset"
+  },
+  "filters": {
+    "level": {
+      "label": "Level"
+    },
+    "currency": {
+      "label": "Currency",
+      "show-in": "show in"
+    },
+    "date-range": {
+      "label": "Date Range",
+      "for": "for",
+      "all-time": "All time",
+      "last-month": "Last month",
+      "last-week": "Last week",
+      "custom": "Custom",
+      "account-creation": "Account creation",
+      "fund-start": "Fund start",
+      "program-start": "Program start",
+      "start": "Start",
+      "end": "End",
+      "today": "Today"
+    },
+    "tag": {
+      "add": "Tag",
+      "popover-header": "Add tag",
+      "popover-search-placeholder": "Search for tags"
+    },
+    "fund-asset": {
+      "add": "Asset",
+      "popover-header": "Add asset",
+      "popover-search-placeholder": "Search for assets"
+    }
+  },
+  "program-period": {
+    "day": "day",
+    "day_plural": "days",
+    "hour": "hour",
+    "hour_plural": "hours",
+    "minute": "minute",
+    "minute_plural": "minutes",
+    "second": "second",
+    "second_plural": "seconds",
+    "waiting-period-start": "Waiting for the period to start",
+    "period-is-over": "The period is over.",
+    "time-left": "Time left",
+    "period-ends": "Period ends",
+    "left": "left",
+    "program-closed": "Program is closed"
+  },
+  "chart-period": {
+    "day-short": "1D",
+    "day": "a Day",
+    "week-short": "1W",
+    "week": "a Week",
+    "month-short": "1M",
+    "month": "a Month",
+    "quarter-short": "3M",
+    "quarter": "a Quarter",
+    "year-short": "1Y",
+    "year": "a Year",
+    "all-short": "All",
+    "all": "All Time"
+  },
+  "pager": {
+    "first": "First",
+    "prev": "Prev",
+    "next": "Next",
+    "last": "Last"
+  },
+  "input-image": {
+    "drop-files": "Drop files...",
+    "drag-or-click": "Drag the image here or click ",
+    "upload": "upload",
+    "to-browse": " to browse your files",
+    "tap-to-upload": "Tap to upload the image",
+    "validation": {
+      "resolution": "The resolution of the uploaded image is too low.",
+      "file-is-large": "The uploaded image file is too large."
+    }
+  },
+  "navigation": {
+    "overview": "Overview",
+    "events": "History",
+    "investments": "Investments",
+    "trading": "Trading",
+    "financial-statistic": "Financial statistic",
+    "invest": "Invest",
+    "gv-follow": "Follow",
+    "gv-funds": "Funds",
+    "gv-programs": "Programs",
+    "trade": "Trade",
+    "mt4": "MetaTrader 4 Terminal",
+    "mt5": "MetaTrader 5 Terminal",
+    "coming-soon": "Coming soon",
+    "dashboard": "Dashboard",
+    "programs": "Programs",
+    "funds": "Funds",
+    "search": "Search",
+    "personal-details": "Personal Details",
+    "wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "notifications-aside": {
+    "clear": "Clear",
+    "header": "Notifications",
+    "today": "today",
+    "yesterday": "yesterday"
+  },
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended",
+    "Pending": "Pending"
+  },
+  "program-actions": {
+    "change-password": "Change password",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
+    "details": "Details",
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "create-program": "Create Program",
+    "create-tournament-account": "Create Tournament Account",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "close-period": "Close Period"
+  },
+  "fund-actions": {
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
+    "details": "Details"
+  },
+  "wallet-widget": {
+    "trading": "Trading",
+    "total-balance": "Total Balance",
+    "invested": "Invested",
+    "pending": "Pending",
+    "available": "Available",
+    "details": "Details"
+  },
+  "wallet-deposit": {
+    "title": "Deposit",
+    "select-currency": "Select a wallet currency",
+    "will-send": "You will send",
+    "will-get": "Approximate amount",
+    "will-get-gvt": "You will get",
+    "from": "From",
+    "external": "External address",
+    "deposit-address": "Deposit address",
+    "copy-to-clipboard-success": "Address is copied to the clipboard",
+    "copy-to-clipboard-error": "Failed to copy the data to the clipboard.",
+    "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market.",
+    "warning": "Send only {{currency}} to this deposit address. Sending any other coin or token to this address may result in the loss of your deposit."
+  },
+  "wallet-withdraw": {
+    "title": "Withdraw",
+    "available": "Available in wallet",
+    "select-currency": "Select a wallet currency",
+    "amount": "Enter correct amount",
+    "will-get": "You'll get",
+    "address": "Withdrawal address",
+    "to": "To",
+    "fee": "Fee",
+    "withdrawing": "Withdrawing",
+    "info": "Amount of withdrawal can vary depending on the fluctuating exchange rate.",
+    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
+    "two-factor-code-label": "Two factor authentication code",
+    "confirmation": {
+      "page-title": "Wallet withdrawal confirmed",
+      "error": "An error occurred during confirmation of email: ",
+      "success": "Withdrawal request has been confirmed"
+    },
+    "validation": {
+      "amount-more-than-available": "Amount requested is more than currently available in your wallet",
+      "address-is-required": "An address is required.",
+      "two-factor-6digits": "Authentication code should contain at least 6 digits.",
+      "two-factor-required": "Authentication code is required."
+    }
+  },
+  "transfer": {
+    "deposit-to": "Deposit to {{title}}",
+    "withdraw-from": "Withdraw from {{title}}",
+    "title": "Transfer",
+    "availableWalletTo": "Available in Wallet",
+    "availableWalletFrom": "Available in Wallet",
+    "availableTradingAccountTo": "Available in Account",
+    "availableTradingAccountFrom": "Available in Account",
+    "availableSignalTradingAccountTo": "Available in Account",
+    "availableSignalTradingAccountFrom": "Available in Account",
+    "availablePrivateTradingAccountTo": "Available in Account",
+    "availablePrivateTradingAccountFrom": "Available in Account",
+    "to": "To",
+    "from": "From",
+    "amount": "Enter correct amount",
+    "info": "The funds will be converted according to the current market price (via market order on Binance).",
+    "two-factor-code-label": "Two factor code",
+    "confirmation": {
+      "page-title": "Wallet withdraw confirm",
+      "error": "An error occurred during confirmation of email: ",
+      "deposit-success": "Deposit request is confirmed",
+      "withdraw-success": "Withdrawal request is confirmed",
+      "success": "Withdrawal request is confirmed"
+    },
+    "validation": {
+      "amount-more-than-available": "Amount is greater than the account balance",
+      "amount-is-zero": "Amount must be greater than zero"
+    }
+  },
+  "password-change-trading-account": {
+    "title": "Change trading account password",
+    "new-password": "New password",
+    "confirm-password": "Confirm password",
+    "success-alert-message": "Password for the trading account was changed",
+    "validators": {
+      "password-weak": "New password must contain at least one letter.",
+      "password-is-short": "New password must be at least 8 characters.",
+      "password-is-long": "New password must be shorter than 32 characters.",
+      "password-required": "New password is required.",
+      "password-dont-match": "Passwords don't match.",
+      "confirm-password-required": "Password confirmation is required."
+    }
+  },
+  "profile-widget": {
+    "security": "Security",
+    "personal-details": "Personal Details",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "managers-table": {
+    "username": "Username",
+    "assets": "Assets",
+    "memberSince": "Member Since"
+  },
+  "deposit-asset": {
+    "title": "Invest",
+    "gv-commission": "GV commission",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "investment-amount": "Investment amount",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
+    "confirm": "Confirm",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-exceeds-limit": "Amount exceeds the possible investment limit",
+      "amount-min-value": "Min amount is {{min}} {{currency}} ( ≈ {{walletMin}} {{walletCurrency}})"
+    },
+    "program": {
+      "available-to-invest": "Available to invest in program",
+      "success-alert-message": "Successful request for investment in the program."
+    },
+    "fund": {
+      "available-to-invest": "Available to invest in fund",
+      "success-alert-message": "Successful request for investment in the fund.",
+      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
+    }
+  },
+  "withdraw-program": {
+    "title": "Withdraw",
+    "available-to-withdraw": "Available for withdrawal",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Your request will be processed at the end of the reporting period.",
+    "withdrawing": "Withdrawing",
+    "all": "All",
+    "withdraw-all": "Withdraw all",
+    "withdrawing-all": "Withdrawing all",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "header": "Sell Tokens",
+    "invested": "Invested",
+    "how-much-withdraw": "How much would you like to withdraw?",
+    "enter-amount": "Enter {{token}} amount",
+    "success-alert-message": "Request to withdraw sent successfully.",
+    "validation": {
+      "amount-is-zero": "Amount must be greater than zero",
+      "amount-more-than-available": "Amount is greater than the account balance"
+    }
+  },
+  "unfollow-program": {
+    "title": "Unfollow Trades",
+    "submit": "Submit",
+    "type": "type",
+    "text": "Do you really want to unsubscribe?",
+    "success-alert-message": "You have been unsubscribed.",
+    "modes": {
+      "manual-closing": {
+        "label": "Manual closing",
+        "tooltip": "An investor at any time can perform a manual closing of all of the open positions."
+      },
+      "close-only": {
+        "label": "Close only",
+        "tooltip": "New trades do not open, open positions are closed as the manager closes them."
+      },
+      "close-all-immediately": {
+        "label": "Close all immediately",
+        "tooltip": "Instant closing of all open positions."
+      }
+    }
+  },
+  "subscription-details": {
+    "title": "Subscription details",
+    "tolerance-percentage": "Tolerance percentage",
+    "subscription-type": "Subscription Type",
+    "active": "Active",
+    "volume": "Volume",
+    "modes": {
+      "ByBalance": "By balance",
+      "Percent": "Percentage",
+      "Fixed": "Fixed"
+    },
+    "edit": "Edit"
+  },
+  "follow-program": {
+    "info": {
+      "ETH": "The minimum order size on Binance is 0.01 ETH ",
+      "BTC": "The minimum order size on Binance is 0.001 BTC",
+      "USDT": "The minimum order size on Binance is 10 USDT"
+    },
+    "modes": {
+      "bybalance": {
+        "label": "By balance",
+        "tooltip": "The volume of the opened positions is proportional to the balance of the signal provider and an investor."
+      },
+      "percent": {
+        "label": "Percentage",
+        "tooltip": "Positions are opened according to the percentage of the volume of positions opened by the signal provider."
+      },
+      "fixed": {
+        "label": "Fixed",
+        "tooltip": "Each new position is opened at a fixed amount."
+      }
+    },
+    "select-account": {
+      "title": "Select account"
+    },
+    "select-external-account": {
+      "title": "Select external account"
+    },
+    "create-account": {
+      "title": "Account creation",
+      "available": "Available in wallet",
+      "amount": "Deposit amount",
+      "from": "From",
+      "next": "Next",
+      "validation": {
+        "amount-required": "Amount is a required field",
+        "amount-more-than-min-deposit": "Amount must be greater than {{value}}",
+        "amount-more-than-available": "Amount is greater than the account balance"
+      }
+    },
+    "params": {
+      "fixed-currency": "Fixed currency",
+      "title": "Trading settings",
+      "type": "Type",
+      "tolerance-percent": "Tolerance percentage",
+      "tolerance-percent-tooltip": "This parameter shows the percentage of the maximum possible deviation of investors opening price from the price at which the managers transaction was opened. Deviation ranges from 0% to 20%. If the price at the time of opening the transaction changes by more than the specified percentage, then the transaction will not open.",
+      "volume-percent": "Volume percentage",
+      "fixed-currency-equivalent": "{{fixedCurrency}} equivalent",
+      "back": "Back",
+      "submit": "Subscribe",
+      "validation": {
+        "fixedVolume-min": "{{fixedCurrency}} equivalent must be greater than or equal to 0",
+        "fixedVolume-max": "{{fixedCurrency}} equivalent must be less than or equal to 99999",
+        "percent-min": "Percent must be greater than or equal to 1%",
+        "percent-max": "Percent must be less than or equal to 999%",
+        "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
+        "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
+        "tolerance-required": "Tolerance percent is required field"
+      }
+    },
+    "create-success-alert-message": "You have been subscribed.",
+    "edit-success-alert-message": "Subscription settings have been edited."
+  },
+  "withdraw-fund": {
+    "title": "Withdraw",
+    "exit-fee": "Exit fee",
+    "withdraw-amount": "Withdraw amount",
+    "available-to-withdraw": "Available for withdrawing",
+    "amount-to-withdraw": "Amount to withdraw",
+    "withdrawing": "Withdrawing",
+    "wallet": "Wallet",
+    "success-alert-message": "Withdrawal request sent successfully.",
+    "validation": {
+      "required": "Amount is required",
+      "min-value": "Amount must be greater than or equal to 0.01"
+    }
+  },
+  "not-found-page": {
+    "title": "Page Not Found",
+    "body": "Page Not Found"
+  },
+  "server-connection-error-page": {
+    "title": "Server Error",
+    "body": "Server error occurred. Please try again later or contact the support department."
+  },
+  "programs-page": {
+    "description": "Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at predefined intervals set by the program’s manager.",
+    "title": "Programs",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favourites"
+    },
+    "programs-table": "All programs",
+    "programs-header": {
+      "reinvest": "Reinvest",
+      "value": "Value",
+      "current-value": "Current value",
+      "share": "Share",
+      "status": "Status",
+      "position": "Pos.",
+      "title": "Name",
+      "equity": "Equity",
+      "currency": "Curr.",
+      "investors": "Investors",
+      "available-to-invest": "Av. to invest",
+      "trades": "Trades",
+      "age": "Age",
+      "period": "Period",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart",
+      "strategy": "Strategy"
+    }
+  },
+  "follows-page": {
+    "description": "Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
+    "title": "Follow",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favourites"
+    },
+    "table": "All follow",
+    "filters": {
+      "type": "Type"
+    },
+    "header": {
+      "subscribers": "Subscribers",
+      "trades": "Trades",
+      "name": "Name",
+      "age": "Age",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
+  },
+  "funds-page": {
+    "description": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves.",
+    "title": "Funds",
+    "all-funds": "All funds",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favourites"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Size",
+      "assets": "Assets",
+      "investors": "Investors",
+      "age": "Age",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart",
+      "value": "Value"
+    }
+  },
+  "about-levels-page": {
+    "title": "About levels",
+    "section": {
+      "text-1": "Genesis level reflects the experience and reliability of a manager.",
+      "text-2": "All of the investment programs of a non-verified manager are limited to the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager are levelled up to the second level.",
+      "text-3": "Starting from the second level, the level will depend on Av. to invest and is  subject to constant change.",
+      "text-4": "The available amount of money for investing in the manager is calculated as",
+      "text-5": "The Success of the trading manager is calculated with the help of the Genesis Ratio, which is the ratio of the program profit to its risk. The formula is similar to the Sharpe ratio and is set in a range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the Investment scale is limited to 1 meaning that the manager can attract no more than his own deposit.",
+      "text-6": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.",
+      "text-7": "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.",
+      "text-8": "The coefficient is designed so that trading more in one period can compensate for the lack of volume during another period, but one-time high volumes won’t compensate for the lack of trading.",
+      "text-9": "More information can be found in the",
+      "formula": "Investment Scale * Manager balance.",
+      "link": "article."
+    },
+    "list": {
+      "subtitle": "Investment Scale is calculated according to a formula that takes into account:",
+      "list-item-1": "The Age of the program",
+      "list-item-2": "The Success of the trading manager.",
+      "list-item-3": "The trading volume (Weighted volume scale)"
+    },
+    "notes": {
+      "title": "Notes:",
+      "note-1": "If the investor funds in the program exceed Av.to invest, then the Success Fee and Stop out Level are decreased until the investor funds in the program become less or equal to Av. to invest. This change takes effect in the new period.",
+      "note-2": "If the manager is not verified, the available investment limit is always $1000, translated into account currency. Otherwise, the available limit is set in the range from $5k to $300k."
+    },
+    "table-header": {
+      "level": "Level",
+      "age": "Age",
+      "avg-profit": "Avg. Profit",
+      "total-profit": "Total profit"
+    },
+    "titles": {
+      "main": "About Levels",
+      "table": "Requirements for Levels",
+      "limits": "Level limits",
+      "limit": "Investment limits"
+    },
+    "select": "Show in:"
+  },
+  "details-page": {
+    "investment": {
+      "tabs": {
+        "subscription": "Subscription details",
+        "investment": {
+          "follow": "Current period investment",
+          "program": "Current period investment",
+          "fund": "Current investment"
+        },
+        "events": "My history"
+      }
+    },
+    "statistics": {
+      "heading": "Statistics",
+      "current": "Current",
+      "calmarRatio": "Calmar ratio",
+      "rebalances": "Rebalances",
+      "profit-change": "Profit change",
+      "for": "For",
+      "balance": "Balance",
+      "investors": "Investors",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period"
+    },
+    "tooltip": {
+      "assets": "Objects that have an identifiable value and are traded on crypto markets.",
+      "structure": "The current allocation of funds selected by the Manager.",
+      "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "balance": "The current amount of funds in the fund.",
+      "status": {
+        "PROGRAM": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "FUND": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      },
+      "start-day": "Creation day of the fund.",
+      "investors": "The current number of investors in the fund.",
+      "calmar-ratio": "A comparison of the average annual compounded rate of return and the maximum drawdown risk of asset managers and hedge funds.The higher the score, the better the portfolio is formed.",
+      "profit-change": "How much in % has the profit changed in the current time period compared to the previous one in the same period.",
+      "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
+      "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
+      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
+      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+    },
+    "chart": {
+      "percent": "Percent",
+      "assets": "Assets",
+      "value": "Value",
+      "heading": "Chart",
+      "tabs": {
+        "absolute-profit": "Profit (Abs)",
+        "profit": "Profit (%)",
+        "balance": "Balance"
+      }
+    }
+  },
+  "asset-details-page": {
+    "tooltip": {
+      "status": {
+        "follow": "",
+        "program": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "fund": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      }
+    }
+  },
+  "fund-details-page": {
+    "title": "Program detail",
+    "description": {
+      "fund-settings": "Fund settings",
+      "disable-reallocation-message": "The next reallocation will be available on",
+      "reallocate": "Reallocate",
+      "edit-fund": "Edit details",
+      "strategy": "Strategy",
+      "assets": "Assets",
+      "addToFavorites": "Add to favourites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "exitFee": "Exit fee",
+      "invest": "Invest",
+      "reinvest": "Reinvest profit",
+      "yourInvestment": {
+        "Program": "Current period investment",
+        "Fund": "Current investment"
+      },
+      "pending-input": "Pending input",
+      "pending-output": "Pending output",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "withdraw": "Withdraw",
+      "close-fund": "Close Fund",
+      "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, but investors will still be able to withdraw their funds with a zero commission.",
+      "close-fund-notification-success": "Request to close the fund was sent successfully.",
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "unauth-popup": "To invest in the selected fund please login as an investor or create a new investor account.",
+      "auth-manager-popup": "In order to invest in investment funds of other managers please login as an investor or create a new investor account."
+    },
+    "statistics": {
+      "heading": "Statistics",
+      "current": "Current",
+      "calmarRatio": "Calmar ratio",
+      "rebalances": "Rebalances",
+      "profit-change": "Profit change",
+      "for": "For",
+      "balance": "Balance",
+      "investors": "Investors",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period"
+    },
+    "tooltip": {
+      "assets": "Objects that have an identifiable value and are traded on crypto markets.",
+      "structure": "The current allocation of funds selected by the Manager.",
+      "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
+      "balance": "The current amount of funds in the fund.",
+      "status": {
+        "PROGRAM": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+        "FUND": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+      },
+      "start-day": "Creation day of the fund.",
+      "investors": "The current number of investors in the fund.",
+      "calmar-ratio": "A comparison of the average annual compounded rate of return and the maximum drawdown risk of asset managers and hedge funds.The higher the score, the better the portfolio is formed.",
+      "profit-change": "How much in % has the profit changed in the current time period compared to the previous one in the same period.",
+      "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
+      "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
+      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
+      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+    },
+    "history": {
+      "heading": "History",
+      "subheading": "Rebalancing",
+      "tabs": {
+        "events": "Events",
+        "structure": "Structure",
+        "reallocate-history": "Reallocate History"
+      },
+      "structure": {
+        "asset": "Asset",
+        "symbol": "Symbol",
+        "target": "Target",
+        "current": "Current",
+        "date": "Date",
+        "reallocate-fund": "Reallocate Fund"
+      },
+      "rebalances": {
+        "assets": "Assets",
+        "from": "From",
+        "to": "To"
+      }
+    },
+    "chart": {
+      "assets": "Assets",
+      "value": "Value",
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "balance": "Balance"
+      }
+    }
+  },
+  "account-details-page": {
+    "subscriptions": {
+      "title": "Subscriptions",
+      "table": {
+        "buttons": "",
+        "value": "Value",
+        "provider": "Provider",
+        "profit": "Profit",
+        "subscription-date": "Subscription date",
+        "type": "Type",
+        "tolerance": "Tolerance"
+      }
+    }
+  },
+  "follow-details-page": {
+    "current-investment": {
+      "title": "Subscription details",
+      "fields": {
+        "fixed-volume": "Fixed volume",
+        "profit": "Profit",
+        "status": "Status",
+        "type": "Type",
+        "percent": "Percent",
+        "percentage": "Tolerance"
+      }
+    },
+    "title": "Follow detail",
+    "description": {
+      "currency": "Follow currency",
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Invest. scale",
+      "volume-scale": "Volume scale",
+      "notify-hint": "Notify me when the program is available for investment",
+      "stop-out-level": "Stop out",
+      "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+      "strategy": "Strategy",
+      "addToFavorites": "Add to favourites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "successFee": "Success fee",
+      "subscriptionFee": "Subscription fee",
+      "volume-fee": "Volume fee",
+      "invest": "Invest",
+      "investment-details": "Investment details",
+      "reinvest": "Reinvest profit",
+      "yourInvestment": "Current investment",
+      "pending-input": "Pending input",
+      "pending-output": "Pending output",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "withdraw": "Withdraw",
+      "withdraw-notice-text": "You can only withdraw the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "edit-program": "Edit Program",
+      "close-program": "Close Program",
+      "follow-trade": "Follow Trades",
+      "unfollow": "Unfollow",
+      "edit-subscription": "Edit subscription",
+      "signal-provider": {
+        "title": "Make a signal provider",
+        "disclaimer": "Parameters cannot be changed in the future."
+      },
+      "edit-signal-provider": {
+        "title": "Edit a signal provider"
+      },
+      "change-password": "Change password",
+      "program-settings": "Program settings",
+      "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+      "close-program-notification-success": "Request to close the program was sent successfully.",
+      "requests-completed": "All requests completed successfully",
+      "auth-manager-popup": "You must be logged in to invest in a program"
+    },
+    "statistics": {
+      "subscribers": "Subscribers",
+      "heading": "Statistics",
+      "current": "Current",
+      "for": "For",
+      "equity": "Equity",
+      "investors": "Investors",
+      "trades": "Trades",
+      "success-trades": "Success trades",
+      "profit-factor": "Profit factor",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period",
+      "trading-volume": "Trading Volume",
+      "tooltip": {
+        "profit": "Profit",
+        "investors-funds": "Investors Funds",
+        "managers-funds": "Managers Funds",
+        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
+      }
+    },
+    "tooltip": {
+      "subscribers": "The current number of subscribers.",
+      "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
+      "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+      "av-to-invest": "The amount available for investment up to the next period.",
+      "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
+      "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
+      "success-fee-signal": "Commission charged from copy trading profits. The fee is calculated according to the method of the High-water mark. With this method, the percentage is not taken from the profit for the period, but from the difference between the investors' investments and the previous maximum profit.",
+      "volume-fee": "A volume commission, charged only for opening a transaction.",
+      "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
+      "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
+      "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
+      "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
+      "investors": "The current number of investors in the program.",
+      "period": "The time interval in the program, which is set by the manager when creating the program. At the end of the period, profit/loss is distributed between the investors and the manager, according to the share in the program, and all received queries for investment and withdrawals are processed.",
+      "trades": "The number of trades the manager has performed during the selected date range.",
+      "success-trades": "The percentage of successful trades among the number of total trades during the selected date range.",
+      "profit-factor": "An indicator which is defined as the gross profit divided by the gross loss for the selected date range.",
+      "sharpe-ratio": "A measure of the effectiveness of a program, which is calculated as the mathematical ratio of the average yield to the average deviation of this yield. The higher the ratio, the lower the risk of investments, and higher the hypothetical profit.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The larger this indicator, the better and more effective the program in terms of combining risk and profitability.",
+      "max-drawdown": "The biggest drawdown of a program during the selected date range."
+    },
+    "popover": {
+      "genesis-level": "Genesis Level",
+      "invest-limit": "Total invest limit",
+      "text": "Genesis level shows the experience and reliability of the Manager",
+      "about-levels": "About levels"
+    },
+    "history": {
+      "heading": "History",
+      "tabs": {
+        "trades": "Trades",
+        "events": "My history",
+        "open-positions": "Open positions",
+        "subscriptions": "Subscriptions",
+        "financial-statistic": "Financial statistic",
+        "period-history": "Period History"
+      },
+      "trades": {
+        "download": "Export",
+        "swap": "Swap",
+        "providers": "Providers",
+        "direction-entry": "Dir/Entry",
+        "commission": "Commission",
+        "direction": "Dir",
+        "ticket": "Ticket",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "profit": "Profit",
+        "price": "Price",
+        "entry": "Entry",
+        "date": "Date"
+      },
+      "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
+        "date": "Date Open",
+        "symbol": "Symbol",
+        "direction": "Dir",
+        "volume": "Volume",
+        "price": "Price Open",
+        "priceCurrent": "Price",
+        "profit": "Profit",
+        "profitPercent": "Profit %"
+      },
+      "subscriptions": {
+        "number": "Number",
+        "trades": "Trades",
+        "profit": "Profit",
+        "volume": "Volume",
+        "subscriptionDate": "Subscription date",
+        "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
+        "status": "Status"
+      },
+      "financial-statistic": {
+        "period": "Period",
+        "date-start": "Date start",
+        "balance": "Balance",
+        "profit": "Profit",
+        "success-fee": "Success fee",
+        "entry-fee": "Entry fee",
+        "deposit-withdraw": "Deposit/Withdraw",
+        "commission-rebate": "GV commission rebate"
+      },
+      "period-history": {
+        "investors-deposit": "Investors Invest",
+        "investors-withdraw": "Investors Withdrawal",
+        "manager-deposit": "Manager Investment",
+        "manager-withdraw": "Manager Withdrawal",
+        "investors-profit-withdraw": "Investors Withdrawal Profit",
+        "platform-success-fee": "Platform Success Fee",
+        "manager-commission-rebate": "GV commission rebate",
+        "period": "Period",
+        "date-start": "Date start",
+        "period-length": "Period length",
+        "balance": "Program balance",
+        "profit": "Profit",
+        "investors": "Investors"
+      }
+    },
+    "chart": {
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "equity": "Equity"
+      }
+    },
+    "calculator": {
+      "level": "Level"
+    }
+  },
+  "program-details-page": {
+    "title": "Program detail",
+    "close-period": {
+      "title": "Close Period",
+      "body": "Do you really want to restart current period?",
+      "notification-success": "Request to restart the period was sent successfully."
+    },
+    "description": {
+      "creation-date": "Creation date",
+      "currency": "Currency",
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "period": "Period",
+      "age": "Age",
+      "genesis-ratio": "Genesis Ratio",
+      "investment-scale": "Invest. scale",
+      "volume-scale": "Volume scale",
+      "notify-hint": "Notify me when the program is available for investment",
+      "stop-out-level": "Stop out",
+      "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+      "strategy": "Strategy",
+      "addToFavorites": "Add to favourites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "successFee": "Success fee",
+      "subscriptionFee": "Subscription fee",
+      "volume-fee": "Volume fee",
+      "invest": "Invest",
+      "investment-details": "Investment details",
+      "reinvest": "Reinv. profit",
+      "yourInvestment": "Current investment",
+      "pending-input": "Pending input",
+      "pending-output": "Pending output",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "withdraw": "Withdraw",
+      "withdraw-notice-text": "You can only withdraw the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "edit-program": "Edit Program",
+      "close-program": "Close Program",
+      "follow-trade": "Follow Trades",
+      "unfollow": "Unfollow",
+      "edit-subscription": "Edit subscription",
+      "signal-provider": {
+        "title": "Make a signal provider",
+        "disclaimer": "Parameters cannot be changed in the future."
+      },
+      "edit-signal-provider": {
+        "title": "Edit a signal provider"
+      },
+      "change-password": "Change password",
+      "settings": "Settings",
+      "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+      "close-program-notification-success": "Request to close the program was sent successfully.",
+      "requests-completed": "All requests completed successfully",
+      "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
+      "unauth-follow-popup": "To Follow trades in the selected program please login as an investor or create a new investor account.",
+      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
+    },
+    "statistics": {
+      "heading": "Statistics",
+      "current": "Current",
+      "for": "For",
+      "equity": "Equity",
+      "investors": "Investors",
+      "trades": "Trades",
+      "success-trades": "Success trades",
+      "profit-factor": "Profit factor",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period",
+      "trading-volume": "Trading Volume",
+      "tooltip": {
+        "profit": "Profit",
+        "investors-funds": "Investors Funds",
+        "managers-funds": "Managers Funds",
+        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
+      }
+    },
+    "tooltip": {
+      "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
+      "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+      "av-to-invest": "The amount available for investment up to the next period.",
+      "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
+      "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
+      "success-fee-signal": "Commission charged from copy trading profits. The fee is calculated according to the method of the High-water mark. With this method, the percentage is not taken from the profit for the period, but from the difference between the investors' investments and the previous maximum profit.",
+      "volume-fee": "A volume commission, charged only for opening a transaction.",
+      "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
+      "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
+      "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
+      "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
+      "investors": "The current number of investors in the program.",
+      "period": "The time interval in the program, which is set by the manager when creating the program. At the end of the period, profit/loss is distributed between the investors and the manager, according to the share in the program, and all received queries for investment and withdrawals are processed.",
+      "trades": "The number of trades the manager has performed during the selected date range.",
+      "success-trades": "The percentage of successful trades among the number of total trades during the selected date range.",
+      "profit-factor": "An indicator which is defined as the gross profit divided by the gross loss for the selected date range.",
+      "sharpe-ratio": "A measure of the effectiveness of a program, which is calculated as the mathematical ratio of the average yield to the average deviation of this yield. The higher the ratio, the lower the risk of investments, and higher the hypothetical profit.",
+      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The larger this indicator, the better and more effective the program in terms of combining risk and profitability.",
+      "max-drawdown": "The biggest drawdown of a program during the selected date range."
+    },
+    "popover": {
+      "genesis-level": "Genesis Level",
+      "invest-limit": "Total invest limit",
+      "text": "Genesis level shows the experience and reliability of the Manager",
+      "about-levels": "About levels"
+    },
+    "history": {
+      "my-history": {
+        "details": "Details"
+      },
+      "heading": "History",
+      "tabs": {
+        "trades": "Trades",
+        "events": "My history",
+        "open-positions": "Open positions",
+        "subscriptions": "Subscriptions",
+        "financial-statistic": "Financial statistic",
+        "period-history": "Period History"
+      },
+      "trades": {
+        "buttons": "",
+        "download": "Export",
+        "swap": "Swap",
+        "providers": "Providers",
+        "direction-entry": "Dir/Entry",
+        "commission": "Commission",
+        "direction": "Dir",
+        "ticket": "Ticket",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "profit": "Profit",
+        "price": "Price",
+        "entry": "Entry",
+        "date": "Date"
+      },
+      "open-positions": {
+        "delay": "delay",
+        "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
+        "date": "Date Open",
+        "symbol": "Symbol",
+        "direction": "Dir",
+        "volume": "Volume",
+        "price": "Price Open",
+        "priceCurrent": "Price",
+        "profit": "Profit",
+        "profitPercent": "Profit %"
+      },
+      "subscriptions": {
+        "number": "Number",
+        "trades": "Trades",
+        "profit": "Profit",
+        "volume": "Volume",
+        "subscriptionDate": "Subscription date",
+        "unsubscriptionDate": "Unsubscription date",
+        "commission": "Commission",
+        "status": "Status"
+      },
+      "financial-statistic": {
+        "period": "Period",
+        "date-start": "Date start",
+        "balance": "Balance",
+        "profit": "Profit",
+        "success-fee": "Success fee",
+        "entry-fee": "Entry fee",
+        "deposit-withdraw": "Deposit/Withdraw",
+        "commission-rebate": "GV commission rebate"
+      },
+      "period-history": {
+        "investors-deposit": "Investors Invest",
+        "investors-withdraw": "Investors Withdrawal",
+        "manager-deposit": "Manager Investment",
+        "manager-withdraw": "Manager Withdrawal",
+        "investors-profit-withdraw": "Investors Withdrawal Profit",
+        "platform-success-fee": "Platform Success Fee",
+        "manager-commission-rebate": "GV commission rebate",
+        "period": "Period",
+        "date-start": "Date start",
+        "period-length": "Period length",
+        "balance": "Program balance",
+        "profit": "Profit",
+        "investors": "Investors"
+      }
+    },
+    "chart": {
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "equity": "Equity"
+      }
+    },
+    "calculator": {
+      "level": "Level"
+    }
+  },
+  "manager-page": {
+    "title": "Manager",
+    "about": "About",
+    "assets": "Assets",
+    "member-since": "Member since",
+    "history": {
+      "tabs": {
+        "programs": "Programs",
+        "funds": "Funds"
+      }
+    }
+  },
+  "global-search-page": {
+    "follows": "Follow",
+    "title": "Search",
+    "heading": "Search Results",
+    "programs": "Programs",
+    "funds": "Funds",
+    "managers": "Managers"
+  },
+  "profile-page": {
+    "id": "id",
+    "login": "Username",
+    "about": "About",
+    "title": "Profile",
+    "contacts": "Contacts",
+    "not-verified": "Not verified",
+    "phone-number": "Phone number",
+    "email": "Email address",
+    "public-info": "Public info",
+    "personal-info": "Personal info",
+    "forename": "Forename",
+    "family-name": "Family name",
+    "birthday": "Date of birth",
+    "citizen": "Citizenship",
+    "residential-address": "Residential address",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "index": "Index",
+    "success-copy": "Id copy is successful",
+    "success-edit": "Profile update is successful",
+    "success-verify": "Phone number verification is successful",
+    "tabs": {
+      "referral-program": "Referral program",
+      "security": "Security",
+      "profile": "Personal details",
+      "settings": "Settings",
+      "verify": "Verify",
+      "social-links": "Social links"
+    },
+    "referral-program": {
+      "title": "Invite your friends to Genesis vision",
+      "referral-link": "Referral link:",
+      "share-your-passion": "Share your passion",
+      "referral-friends-1lvl": "Referral friends level 1",
+      "referral-friends-2lvl": "Referral friends level 2",
+      "total-rewards": "Total rewards",
+      "referral-friends": {
+        "title": "Referral friends",
+        "header": {
+          "email": "Email",
+          "date": "Date"
+        }
+      },
+      "referral-history": {
+        "title": "History",
+        "header": {
+          "value": "Value",
+          "date": "Date"
+        }
+      }
+    },
+    "verification": {
+      "phone": {
+        "required": "Code is required",
+        "title": "Verify phone number",
+        "description": "We have sent you a verification code",
+        "number": "Phone number",
+        "code": "Verification code",
+        "resend": "Resend code"
+      }
+    },
+    "settings": {
+      "public": {
+        "label": "Public investor's profile",
+        "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Investors Rating."
+      },
+      "platform-currency": "Platform currency",
+      "title": "Settings",
+      "profile-image": "Profile image",
+      "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+      "save-photo": "Save photo",
+      "image-success-save-message": "The photo has just been successfully changed.",
+      "logout-from-another-devices": "Logout from other devices",
+      "change-password": "Change password"
+    },
+    "social-links": {
+      "validation": {
+        "link-max-length": "The maximum link length is 100 characters."
+      },
+      "notifications": {
+        "edit-success": "Your profile was successfully updated."
+      }
+    }
+  },
+  "transactions-details": {
+    "wallet": "Wallet",
+    "amount": "Amount",
+    "title": "Transaction details",
+    "entry-fee": "Entry fee",
+    "success-fee": "Success fee",
+    "gv-fee": "GV Commission",
+    "platform-fee": "Platform fee",
+    "deposit": "Deposit",
+    "converting": {
+      "title": "Converting",
+      "from": "Converting from",
+      "to": "Converting to"
+    },
+    "profit": "Profit program",
+    "copy": {
+      "error": "Copy failed",
+      "success": "Copy was successful"
+    },
+    "external": {
+      "from-wallet": "From",
+      "from": "From address",
+      "to": "To external address",
+      "to-wallet": "To",
+      "amount": "Amount"
+    },
+    "status": {
+      "title": "Status"
+    },
+    "Program": "Program",
+    "Fund": "Fund",
+    "Open": {
+      "Program": "Open program",
+      "Fund": "Open fund"
+    },
+    "Close": {
+      "Program": "Close program",
+      "Fund": "Close fund"
+    },
+    "investment": {
+      "amount": "Investment amount",
+      "program": "Program investment",
+      "fund": "Fund investment",
+      "direction-program": "To the program",
+      "direction-fund": "To the fund"
+    },
+    "withdrawal": {
+      "title": "Withdrawal",
+      "amount": "Withdrawal amount",
+      "program": "Program withdrawal",
+      "fund": "Fund withdrawal",
+      "direction-program": "From the program",
+      "direction-fund": "From the fund"
+    },
+    "signal": {
+      "SubscribeSignal": "Signal fee payment",
+      "ReceiveSignal": "Signal fee received",
+      "DepositSignal": "Deposit to signal account",
+      "WithdrawalSignal": "Withdrawal from signal account",
+      "Platform": "Platform transaction",
+      "amount": "Amount",
+      "to-signal-provider": "To the signal provider",
+      "signal-provider": "Signal provider"
+    }
+  },
+  "wallet-page": {
+    "title": "Wallet",
+    "wallet": "wallet",
+    "total-balance": "Total balance",
+    "invested": "Invested",
+    "available": "Available",
+    "trading": "Trading",
+    "pending": "Pending",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "transfer": "Transfer",
+    "tooltip": {
+      "total-balance": "The total value your funds on the platform.",
+      "available": "Your funds that are currently available for investment.",
+      "invested": "The funds that are currently invested in programs and / or funds. Invested GVT shows investment in funds. Invested USDT includes Forex.",
+      "pending": "Funds that are still being processed.",
+      "transactions": "Operation of funds transferring to/from or between wallets.",
+      "deposit": "A transaction involving a transfer of funds to another party.",
+      "withdrawals": "A transaction of taking funds out of the account.",
+      "transfer": "A transaction between accounts."
+    },
+    "tabs": {
+      "wallets": "My wallets",
+      "copytrading": "Copytrading accounts",
+      "transactions": "Transactions",
+      "deposit": "Deposit/",
+      "withdrawals": "withdrawals"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "empty-transactions": "There are no transactions",
+      "wallet": "Wallet",
+      "date": "Date",
+      "type": "",
+      "description": "Description",
+      "amount": "Amount"
+    },
+    "deposits-withdrawals": {
+      "status": "Status",
+      "title": "Deposits/withdrawals",
+      "empty-transactions": "There are no transactions",
+      "wallet": "Wallet",
+      "date": "Date",
+      "type": "",
+      "description": "Description",
+      "amount": "Amount"
+    },
+    "copytrading": {
+      "currency": "Currency",
+      "balance": "Balance",
+      "amount": "Amount",
+      "equity": "Equity",
+      "free-margin": "Free-margin",
+      "actions": ""
+    },
+    "list": {
+      "currency": "Currency",
+      "total-balance": "Total balance",
+      "invested": "Invested",
+      "available": "Available",
+      "trading": "Trading",
+      "pending": "Pending",
+      "buy-with-card": "Buy with card",
+      "buttons": ""
+    },
+    "buttons": {
+      "internal-transfer": "Internal transfer",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw"
+    },
+    "transaction-actions": {
+      "resend-email": "Resend confirmation email",
+      "cancel-request": "Cancel request"
+    },
+    "copytrading-actions": {
+      "transfer": "Transfer",
+      "trade-history": "Trade history"
+    },
+    "transaction-statuses": {
+      "Done": "Completed",
+      "InProcess": "Processing",
+      "New": "New",
+      "Error": "Error",
+      "Rejected": "Rejected",
+      "Cancelled": "Cancelled"
+    },
+    "alert-messages": {
+      "resend-email-success": "A withdrawal confirmation letter was resent to your email address.",
+      "cancel-request-success": "The withdrawal request was successfully cancelled."
+    },
+    "settings": {
+      "label": "Using GVT to pay for fees"
+    }
+  },
+  "gvt-fees": {
+    "title": "Fees and Discounts",
+    "section": {
+      "text-1": "Any Genesis Vision user who holds a certain amount of GVT receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
+      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held.",
+      "text-3": "For managers the commission for trading will be debited from the manager’s GVT wallet. At the end of the reporting period, the manager will receive a refund of the commission at the expense of increasing the share of own funds in management."
+    },
+    "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days",
+    "table-header": {
+      "amount": "Amount",
+      "discount": "Discount",
+      "fees": "Fees"
+    },
+    "table-row-1": {
+      "amount": "From 1 GVT up to 10",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-2": {
+      "amount": "Up to 25",
+      "discount": "35%",
+      "fees": "0.195%"
+    },
+    "table-row-3": {
+      "amount": "Up to 50 GVT",
+      "discount": "40%",
+      "fees": "0.180%"
+    },
+    "table-row-4": {
+      "amount": "Up to 100 GVT",
+      "discount": "45%",
+      "fees": "0.165%"
+    },
+    "table-row-5": {
+      "amount": "Up to 500 GVT",
+      "discount": "50%",
+      "fees": "0.150%"
+    },
+    "table-row-6": {
+      "amount": "500 GVT+",
+      "discount": "55%",
+      "fees": "0.135%"
+    },
+    "titles": {
+      "main": "Fees and Discounts"
+    }
+  },
+  "2fa-page": {
+    "title": "Two-factor authentication",
+    "none": "None",
+    "google": "Google Authenticator",
+    "type": "Type",
+    "download-app": "Download App",
+    "scan-code": "Scan code",
+    "enter-code": "Enter the 6-digit authentication code:",
+    "alt-code": "Or enter this secret key into your Google Authenticator device:",
+    "google-code": "6-digit code",
+    "password": "Enter your password",
+    "code-required": "Code is required",
+    "password-required": "Password is required",
+    "disable": {
+      "title": "Disable two-factor authentication",
+      "success": "You have successfully disabled the two-factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
+    },
+    "codes": {
+      "copy-success": "Recovery codes were successfully copied to the clipboard.",
+      "copy-error": "Failed to copy data to the clipboard.",
+      "generate-recovery-codes": "Generate recovery codes",
+      "title": "Please read carefully",
+      "successfully": "You have just successfully configured the two-factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
+      "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safer to ignore these codes.",
+      "warning": "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
+    }
+  },
+  "notifications-page": {
+    "title": "Notification settings",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "News and updates",
+      "emergency": "Emergency notifications",
+      "FundRebalancing": {
+        "disabled-alert": "Disabled rebalancing notifications",
+        "enabled-alert": "Enabled rebalancing notifications"
+      },
+      "FundNewsAndUpdates": {
+        "disabled-alert": "Disabled news and updates notifications",
+        "enabled-alert": "Enabled news and updates notifications"
+      },
+      "FundEndOfPeriod": {
+        "disabled-alert": "Disabled the end of period notifications",
+        "enabled-alert": "Enabled the end of period notifications"
+      },
+      "ProgramEndOfPeriod": {
+        "enabled-alert": "Enabled the end of period notifications",
+        "disabled-alert": "Disabled the end of period notifications"
+      },
+      "ProgramNewsAndUpdates": {
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
+      },
+      "PlatformEmergency": {
+        "enabled-alert": "Enabled emergency notifications",
+        "disabled-alert": "Disabled emergency notifications"
+      },
+      "PlatformNewsAndUpdates": {
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
+      }
+    },
+    "custom": {
+      "title": "CUSTOM",
+      "profit": "Profit notification",
+      "create": "Create notification",
+      "enabled-alert": "Enabled custom notification",
+      "disabled-alert": "Disabled custom notification",
+      "delete-alert": "Custom notification was deleted",
+      "create-alert": "Custom notification was created"
+    },
+    "create": {
+      "title": "Create notification",
+      "type-label": "Type",
+      "amount-label": "Enter amount",
+      "amount-required": "Amount is required",
+      "Level": {
+        "title": "Level notification",
+        "label": "Level"
+      },
+      "Profit": {
+        "title": "Profit notification",
+        "label": "Profit"
+      },
+      "AvailableToInvest": {
+        "title": "Investment availability notification",
+        "label": "Amount"
+      }
+    },
+    "follows": "FOLLOW",
+    "programs": "PROGRAMS",
+    "funds": "FUNDS",
+    "follow": {
+      "title": "Follow notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Follow news and updates",
+        "ProgramNewsAndUpdates": {
+          "enabled-alert": "Enabled follow news and updates notifications",
+          "disabled-alert": "Disabled follow news and updates notifications"
+        }
+      }
+    },
+    "program": {
+      "title": "Program notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Program news and updates",
+        "end-of-period": "Notifications for the end of the period",
+        "ProgramNewsAndUpdates": {
+          "enabled-alert": "Enabled program news and updates notifications",
+          "disabled-alert": "Disabled program news and updates notifications"
+        },
+        "ProgramEndOfPeriod": {
+          "enabled-alert": "Enabled the end of period notifications",
+          "disabled-alert": "Disabled the end of period notifications"
+        }
+      }
+    },
+    "fund": {
+      "title": "Fund notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Fund news and updates",
+        "end-of-period": "Notifications for the end of the period",
+        "fund-rebalancing": "Fund structure changing",
+        "FundRebalancing": {
+          "disabled-alert": "Disabled fund rebalancing notifications",
+          "enabled-alert": "Enabled fund rebalancing notifications"
+        },
+        "FundNewsAndUpdates": {
+          "disabled-alert": "Disabled fund news and updates notifications",
+          "enabled-alert": "Enabled fund news and updates notifications"
+        },
+        "FundEndOfPeriod": {
+          "disabled-alert": "Disabled the end of period notifications",
+          "enabled-alert": "Enabled the end of period notifications"
+        }
+      }
+    }
+  },
+  "auth": {
+    "tabs": {
+      "investor": "Investor",
+      "manager": "Manager"
+    },
+    "logout-from-another-devices": {
+      "success-message": "Successful logout on another devices."
+    },
+    "signup": {
+      "username-field-text": "Username",
+      "footer-text": "Already have an account?",
+      "title": "Sign up",
+      "email-field-text": "Email address",
+      "password-field-text": "Password",
+      "password-confirm-field-text": "Confirm password",
+      "email-confirm-title": "Confirm your Email",
+      "i-accept-text": "I accept the",
+      "accept-terms-text": "Terms of Service",
+      "privacy-policy-text": "Privacy Policy",
+      "resident-USA-text": "I certify that I am not a resident or a citizen of the USA"
+    },
+    "signup-email-pending": {
+      "text-section": "Please check your inbox for a confirmation email. Click the link in the email to confirm your email.",
+      "resend-button-text": "Resend email"
+    },
+    "login": {
+      "footer-text": "Don't have an account?",
+      "title": "Login",
+      "forgot": "Forgot?",
+      "confirm-button-text": "Login",
+      "placeholder": {
+        "email": "Email address",
+        "password": "Password"
+      },
+      "two-factor": {
+        "title": "Two-factor authentication",
+        "input-label": "Two factor code",
+        "verify": "Verify",
+        "recovery-info": "Don’t have access to the device?",
+        "link-to-recovery": "Enter a two-factor recovery code",
+        "text": "Open the two-factor authentication app on your device to view your authentication code and verify your identity.",
+        "validation": {
+          "two-factor-6digits": "Authentication code should contain 6 digits.",
+          "two-factor-required": "Authentication code is required."
+        }
+      },
+      "recovery": {
+        "title": "Recovery",
+        "text": "You can enter one of your recovery codes in case you lost access to your mobile device.",
+        "continue": "Continue",
+        "validation": {
+          "recovery-is-required": "Recovery code is required."
+        }
+      }
+    },
+    "password-restore": {
+      "title": "Restore password",
+      "success-alert-message": "Your password was successfully changed!",
+      "resend-email-alert-message": "Information has been re-sent to your email address.",
+      "forgot-password": {
+        "text": "Just enter the email address you've used to create your account.",
+        "email-field-text": "Email address",
+        "confirm-button-text": "Restore",
+        "back-button-text": "Back"
+      },
+      "new-password": {
+        "text": "Just enter new password.",
+        "password-field-text": "Password",
+        "password-confirm-field-text": "Confirm password",
+        "confirm-button-text": "Submit",
+        "back-button-text": "Back"
+      },
+      "validators": {
+        "password-weak": "Password is weak.",
+        "password-required": "Password is required.",
+        "password-dont-match": "Passwords don't match.",
+        "confirm-password-required": "Confirm password is required",
+        "email-invalid": "Invalid email address.",
+        "email-required": "Email is required."
+      },
+      "email-pending": {
+        "text-section-1": "If a user with this email address exists, we sent an email with a link to reset your password.",
+        "text-section-2": "Please check your inbox for a confirmation email. Click the link in the email to create a new password.",
+        "text-section-3": "If you didn't receive the email, please check your spam folder. Or recheck the email you specified for the password reset.",
+        "email-resend-button-text": "Resend email",
+        "confirm-button-text": "Continue",
+        "back-button-text": "Back"
+      }
+    },
+    "password-change": {
+      "title": "Change password",
+      "current-password": "Current password",
+      "password": "Password",
+      "confirm-password": "Confirm password",
+      "new-password": "New password",
+      "success-alert": "Password was successfully changed"
+    },
+    "email-confirm": {
+      "title": "Email confirm",
+      "success-alert-message": "Email address successfully verified",
+      "error-during-confirmation": "An error occurred during the confirmation of email:"
+    }
+  },
+  "level-tooltip": {
+    "genesis-level": "Genesis level",
+    "level-up": "Level Up",
+    "top10": "Top 10%"
+  },
+  "fund-settings": {
+    "reallocation": {
+      "confirm-title": "Reallocate fund",
+      "confirm-text": "Do you really want to Reallocate Fund?",
+      "title": "Reallocation",
+      "text-1": "Reallocation available* — ",
+      "text-2": "There is a mandatory 1% GVT allocation per Fund.",
+      "text-3": "* You are able to reallocate 3% of the Fund per day (cumulative). Example: you will be able to change 30% of the Fund's allocation after 10 days."
+    },
+    "close-fund": {
+      "title": "Closing"
+    },
+    "buttons": {
+      "reallocation": "Reallocate fund"
+    }
+  },
+  "asset-settings": {
+    "close-follow": {
+      "title": "Close follow"
+    },
+    "close-period": {
+      "title": "Close period"
+    },
+    "close-asset": {
+      "title": "Close asset",
+      "notifications": {
+        "fund": "Request to close the fund was sent successfully.",
+        "program": "Request to close the program was sent successfully.",
+        "trading-account": "Request to close the trading account was sent successfully."
+      }
+    },
+    "close-signaltradingaccount": {
+      "title": "Close trading account"
+    },
+    "close-externalsignaltradingaccount": {
+      "title": "Close trading account"
+    },
+    "close-signalprogram": {
+      "title": "Close program"
+    },
+    "close-fund": {
+      "title": "Close fund"
+    },
+    "close-program": {
+      "title": "Close program"
+    },
+    "close-account": {
+      "title": "Close account"
+    },
+    "title": "Settings",
+    "period-and-closing": {
+      "title": "Period and closing",
+      "text-signaltradingaccount": "The signal trading account will be terminated after confirmation. All open positions will be automatically closed.",
+      "text-externalsignaltradingaccount": "The signal trading account will be terminated after confirmation. All open positions will be automatically closed.",
+      "text-account": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+      "text-follow": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+      "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+      "text-signalprogram": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+      "text-fund": "The fund will be closed after pressing the button",
+      "text-period": "The current period of the program will end in one hour.",
+      "close-confirm-title-externalsignaltradingaccount": "Close trading account",
+      "close-confirm-notification-externalsignaltradingaccount": "Do you really want to close trading account?",
+      "close-confirm-title-signaltradingaccount": "Close trading account",
+      "close-confirm-notification-signaltradingaccount": "Do you really want to close trading account?",
+      "close-confirm-title-trading-account": "Close trading account",
+      "close-confirm-notification-trading-account": "Do you really want to close trading account?",
+      "close-confirm-title-fund": "Close Fund",
+      "close-confirm-notification-fund": "Are you sure you want to close this Fund? This action is irreversible.",
+      "close-confirm-title-program": "Close Program",
+      "close-confirm-notification-program": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares."
+    },
+    "strategy": {
+      "title": "Strategy"
+    },
+    "name": {
+      "title": "Title"
+    },
+    "avatar": {
+      "title": "Avatar"
+    },
+    "buttons": {
+      "close-externalsignaltradingaccount": "Close trading account",
+      "close-signaltradingaccount": "Close trading account",
+      "close-signalprogram": "Close signal program",
+      "close-trading-account": "Close trading account",
+      "close-account": "Close account",
+      "close-follow": "Close follow",
+      "close-program": "Close program",
+      "close-fund": "Close fund",
+      "save": "Save"
+    }
+  },
+  "program-settings": {
+    "trades-update": {
+      "title": "Trades and open positions delay",
+      "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+      "select": "Trades delay"
+    },
+    "two-factor-confirm": {
+      "title": "Two-factor authorization (2fa)",
+      "text": "You must confirm your 2fa code to access the Huobi native platform."
+    },
+    "title": "Program settings",
+    "investment-limit": {
+      "text": "At any time you can enter or cancel certain limitations on av. to invest, or even prohibit new investments if your Investment limit is 0. If the investment limit you've entered is larger than the av. to invest value calculated for your current level, then you will only be able to attract the av. to invest value."
+    },
+    "period-and-closing": {
+      "title": "Period and closing",
+      "text-program": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
+      "text-period": "The current period of the program will end in one hour."
+    },
+    "password": {
+      "title": "Password",
+      "text": "Change the password of your trading account."
+    },
+    "broker": {
+      "title": "Broker",
+      "text-warning": "Warning: all signal program subscriptions will be cancelled when switching from GM to Huobi (we do not currently offer copy trading on Huobi).",
+      "text-change": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+      "text-cancel": "Your broker will be changed from {{brokerFrom}} to {{brokerTo}} within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+      "text-cancel-confirm": "Do you really want to cancel the change from {{brokerFrom}} to {{brokerTo}}?",
+      "text-cancel-confirm-title": "Change broker",
+      "text-change-confirm": "Do you really want to change from {{brokerFrom}} to {{brokerTo}}?",
+      "text-change-confirm-title": "Change broker"
+    },
+    "strategy": {
+      "title": "Strategy"
+    },
+    "name": {
+      "title": "Title"
+    },
+    "avatar": {
+      "title": "Avatar"
+    },
+    "signaling-program": {
+      "title": "Signal provider"
+    },
+    "notifications": {
+      "cancel-broker-success": "Change broker has been canceled",
+      "broker-success": "Broker has been edited"
+    },
+    "buttons": {
+      "two-factor-confirm": "Confirm 2fa",
+      "cancel-broker": "Cancel",
+      "save": "Save",
+      "change-broker": "Change broker"
+    }
+  },
+  "program-make-signal": {
+    "success-alert-message": "Your program is a signal provider now"
+  },
+  "program-edit-signal": {
+    "success-alert-message": "Program has been edited"
+  },
+  "app": {
+    "title": "Genesis Vision: "
+  },
+  "auth-quotes": {
+    "0": {
+      "quote": "Rule No. 1: Never lose money. Rule No. 2: Never forget rule No.1",
+      "author": "Warren Buffett"
+    },
+    "1": {
+      "quote": "Successful investing is about managing risk, not avoiding it.",
+      "author": "Benjamin Graham"
+    },
+    "2": {
+      "quote": "Money is always eager and ready to work for anyone who is ready to employ it.",
+      "author": "Idowu Koyenikan"
+    },
+    "3": {
+      "quote": "Investing isn’t about beating others at their game. It’s about controlling yourself at your own game.",
+      "author": "Benjamin Graham"
+    },
+    "4": {
+      "quote": "The greatest investment we can ever make is to invest our life in the life of someone else.",
+      "author": "Scott Lee"
+    },
+    "5": {
+      "quote": "In any investment, you expect to have fun and make money.",
+      "author": "Michael Jordan"
+    }
+  },
+  "dashboard-page": {
+    "investing": {
+      "most-profitable": "The most profitable programs and funds",
+      "title": "Investments",
+      "public-page": "Public page",
+      "funds": "Funds",
+      "programs": "Programs"
+    },
+    "in-requests": {
+      "title": "In requests"
+    },
+    "trading": {
+      "tooltips": {
+        "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
+      },
+      "asset-types": {
+        "Fund": "Fund",
+        "Program": "Program",
+        "SignalProgram": "Signal Program",
+        "TradingAccount": "Trading account",
+        "SignalTradingAccount": "Signal trading account",
+        "ExternalSignalTradingAccount": "External trading account",
+        "ExternalTradingAccount": "External trading account"
+      },
+      "subscribers-count": "Subs.",
+      "title": "Trading",
+      "follow-them": "Follow them",
+      "actions": {
+        "make-signal": "Make a signal provider",
+        "make-program": "Make program",
+        "make-signal-account": "Make signal account",
+        "settings": "Open settings",
+        "terminal": "Terminal",
+        "close-period": "Close period",
+        "change-password": "Change password"
+      },
+      "ddown": "D.down",
+      "login": "Login",
+      "broker": "Broker",
+      "leverage": "Leverage",
+      "age": "Age",
+      "total": "Total",
+      "private": "Private",
+      "public": "Public"
+    },
+    "chart": "Chart",
+    "see-more": "See more",
+    "recommendations": {
+      "title": "Recommendations",
+      "fund": "Invest",
+      "program": "Invest",
+      "follow": "Follow"
+    },
+    "statistic": {
+      "get-started": {
+        "trading": {
+          "left-field": {
+            "text": "Create trading account ",
+            "text-2": "and start trading",
+            "button": "Create account"
+          },
+          "right-field": {
+            "text": "Create your first fund",
+            "button": "Create fund"
+          }
+        },
+        "investing": {
+          "left-field": {
+            "text": "",
+            "text-2": "Find programs",
+            "button": "Programs"
+          },
+          "right-field": {
+            "text": "Find funds",
+            "button": "Funds"
+          }
+        }
+      },
+      "see-all": "See all",
+      "get-started-title": "Get started.",
+      "get-started-invest": "There's no such data right now. Find programs or the funds to invest.",
+      "get-started-account": "Create trading account and start trading.",
+      "get-started-fund": "Create your first fund",
+      "total": "Total",
+      "AUM": "AUM",
+      "programs": "Programs",
+      "funds": "Funds",
+      "trading": "Trading",
+      "investing": "Investing",
+      "equity": "Your Equity",
+      "balance": "Balance",
+      "table": {
+        "date": "Date",
+        "description": "Description",
+        "amount": "Amount"
+      }
+    },
+    "total": {
+      "performance": "Performance",
+      "available": "Wallets",
+      "invested": "Invested",
+      "pending": "Trading",
+      "profits": "Profits",
+      "total": "Total balance",
+      "title": "Overview",
+      "day": "Day",
+      "week": "Week",
+      "month": "Month"
+    },
+    "fail-chart": "Error loading chart",
+    "title": "Dashboard overview",
+    "assets": {
+      "title": "Assets",
+      "programs": "Programs",
+      "funds": "Funds",
+      "copytrading": "Copytrading"
+    },
+    "programs": "Programs",
+    "pending-tooltip": "The program is being created.",
+    "portfolio": {
+      "title": "Portfolio",
+      "programs": "Programs",
+      "funds": "Funds",
+      "trading": "Trading",
+      "wallet": "Wallet"
+    },
+    "favorite-programs": "Favourite programs",
+    "create-program-text": "Do not have any programs yet",
+    "create-fund-text": "Do not have any fund yet",
+    "chart-section": {
+      "header": "Chart",
+      "my-assets": "My Assets",
+      "in-requests": "In Requests",
+      "programs": "Programs",
+      "funds": "Funds"
+    },
+    "requests": {
+      "success-cancel-request": "Request canceled successfully"
+    },
+    "actions-status-filter": {
+      "label": "Status",
+      "values": {
+        "all": "All",
+        "active": "Active"
+      }
+    },
+    "programs-header": {
+      "login": "Login",
+      "title": "Name",
+      "share": "Share",
+      "currency": "Curr.",
+      "time-left": "T. Left",
+      "value": "Value",
+      "profit": "Profit",
+      "chart": "Chart",
+      "status": "Status"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Balance",
+      "assets": "Assets",
+      "investors": "Investors",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart",
+      "value": "Value",
+      "status": "Status"
+    },
+    "get-started": {
+      "title": "Get started",
+      "text-1": "There's no such data right now.",
+      "text-2": "Create your first program or fund",
+      "deposit": "Deposit"
+    },
+    "portfolio-events": {
+      "investment-history": "Investment history",
+      "trading-history": "Trading history",
+      "title": "History",
+      "see-all-button": "See All",
+      "table-title": "Operations",
+      "balance": "Balance",
+      "profit": "Profit",
+      "empty-events": {
+        "text": "The following events will be displayed here",
+        "finished": "Fund/Program finished",
+        "started": "Fund/Program started",
+        "investor-left": "Investor left",
+        "new-investor": "New investor",
+        "interrupted": "Fund/Program interrupted"
+      },
+      "table-header": {
+        "date": "Date",
+        "type": "Type",
+        "description": "Description",
+        "fee": "Fee",
+        "amount": "Amount"
+      },
+      "types": {
+        "ProgramBrokerChanged": "Program broker changed",
+        "WithdrawByStopOut": "Withdraw by stop out",
+        "Invest": "Invest",
+        "Withdraw": "Withdraw",
+        "Profit": "Profit",
+        "Loss": "Loss",
+        "Reinvest": "Reinvest",
+        "Canceled": "Canceled",
+        "Ended": "Ended",
+        "ProgramSignalSubscribe": "Program signal subscribe",
+        "ProgramStopOut": "Program stop out",
+        "ProgramManagerTradingFeeAccrual": "Program manager trading fee accrual",
+        "all": "All",
+        "invest": "Invest",
+        "withdraw": "Withdraw",
+        "profit": "Profit",
+        "loss": "Loss",
+        "reinvest": "Reinvest",
+        "canceled": "Canceled",
+        "ended": "Ended",
+        "All": "All",
+        "ManagerInvest": "Manager invest",
+        "ManagerWithdraw": "Manager withdraw",
+        "EntranceFee": "Entrance fee",
+        "ExitFee": "ExitFee",
+        "AssetStarted": "Asset started",
+        "InvestorInvest": "Investor invest",
+        "InvestorWithdraw": "Investor withdraw",
+        "AssetFinished": "Asset finished",
+        "ProgramPeriodStarts": "Program period starts",
+        "ProgramPeriodEnds": "Program period ends"
+      }
+    }
+  },
+  "create-asset-page": {
+    "min-deposit": "Min deposit",
+    "go-back": "Go back"
+  },
+  "create-program-page": {
+    "title": "Create Program",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "broker-card": {
+      "COMING_SOON": "Coming soon",
+      "KYC_REQUIRED": "KYC required",
+      "FOREX_DISABLED": "Forex disabled"
+    },
+    "kyc-requirement-title": "KYC required",
+    "broker-info": {
+      "about": "About",
+      "terms": "Terms",
+      "read-terms": "Read Terms",
+      "leverage": "Leverage",
+      "fee": "Fee",
+      "assets": "Assets",
+      "account-type": "Account type",
+      "trading-platform": "Trading platform"
+    },
+    "settings": {
+      "main-settings": "Main settings",
+      "fees-settings": "Fees settings",
+      "deposit-details": "Deposit details",
+      "investment-program-fees": "Investment program fees",
+      "signal-provider-fees": "Signal provider fees",
+      "fields": {
+        "min-deposit": "Min. deposit",
+        "provide-signals": "Provide signals",
+        "subscription-fee": "Subscription fee",
+        "stop-out-level": "Stop out level",
+        "investment-limit": "Investment Limit",
+        "enter-correct-amount": "Enter correct amount",
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "account-type": "Account type",
+        "currency": "Currency",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "brokers-leverage": "Broker's leverage",
+        "period": "Period",
+        "period-option-notation": {
+          "day": "Day",
+          "day_plural": "Days"
+        },
+        "upload-logo": "Upload program logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "entry-fee": "Entry fee",
+        "success-fee": "Success fee",
+        "signal-success-fee": "Signal success fee",
+        "signal-volume-fee": "Volume fee",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in wallet"
+      },
+      "hints": {
+        "trades-delay": "Description about Trades delay is here",
+        "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+        "entry-fee": "Description about entry fee is here",
+        "entry-fee-description": "A fee charged upon each investment in the program.",
+        "success-fee": "Description about success fee is here",
+        "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
+        "subscription-fee": "Description about subscription fee is here",
+        "subscription-fee-description": "A fee for the subscription to the signal provider services.",
+        "signal-volume-fee": "Description about volume fee is here",
+        "signal-volume-fee-description": "A fee charged for the copied volume.",
+        "signal-success-fee": "Description about signal success fee is here",
+        "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
+        "stop-out-level": "Description about Stop Out is here",
+        "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
+      },
+      "validation": {
+        "stop-out-required": "Stop Out is required",
+        "stop-out-is-large": "Must be less than 100",
+        "stop-out-is-zero": "Must be more than 10",
+        "stop-out-less-ten": "Level cannot be less than 10",
+        "stop-out-more-current": "Level can't be more than a current value",
+        "amount-required": "Amount is required",
+        "amount-is-large": "Amount must be available in Wallet",
+        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "title-required": "Title is required",
+        "title-is-long": "Title is too long",
+        "title-is-short": "Title is too short",
+        "title-is-latin-and-numbers": "Latin letters and numbers only.",
+        "description-is-long": "Description is too long",
+        "description-is-short": "Description is too short",
+        "description-required": "Description is required",
+        "currency-required": "Currency is required",
+        "period-required": "Period is required",
+        "leverage-required": "Leverage is required",
+        "entry-fee-required": "Entry fee is required",
+        "entry-fee-min": "Entry fee must be greater than 0 % ",
+        "entry-fee-max": "Entry fee must be less than {{max}} %",
+        "success-fee-required": "Success fee is required",
+        "success-fee-min": "Success fee must be greater or equal than 0 % ",
+        "success-fee-max": "Success fee must be less than {{max}} % ",
+        "signal-volume-fee-required": "Volume fee is required",
+        "signal-volume-fee-min": "Volume fee must be greater than {{min}} %",
+        "signal-volume-fee-max": "Volume fee must be less than {{max}} %",
+        "account-type-required": "Account type is required",
+        "investment-limit-min": "Investment Limit must be greater than 0",
+        "investment-limit-required": "Investment Limit is required"
+      }
+    },
+    "notifications": {
+      "create-success": "Program was successfully created.",
+      "validate-error": "Please correct the errors on this form"
+    }
+  },
+  "create-account-page": {
+    "title": "Create Account",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "broker-card": {
+      "COMING_SOON": "Coming soon",
+      "KYC_REQUIRED": "KYC required",
+      "FOREX_DISABLED": "Forex disabled"
+    },
+    "settings": {
+      "kyc-required": "KYC required",
+      "kyc-required-text-1": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure.",
+      "kyc-required-text-2": "KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
+      "main-settings": "Main settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "min-deposit": "Min. deposit",
+        "currency": "Currency",
+        "brokers-leverage": "Broker's leverage",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in wallet"
+      },
+      "validation": {
+        "amount-required": "Amount is required",
+        "amount-is-large": "Amount must be available in Wallet",
+        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "currency-required": "Currency is required",
+        "leverage-required": "Leverage is required"
+      }
+    },
+    "notifications": {
+      "create-success": "Program was successfully created.",
+      "validate-error": "Please correct the errors on this form"
+    }
+  },
+  "create-fund-page": {
+    "title": "Create Fund",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
+    "notifications": {
+      "create-success": "Fund was successfully created.",
+      "validate-error": "Please fix all the errors on the screen before proceeding"
+    },
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "broker-info": {
+      "about": "About",
+      "terms": "Terms",
+      "leverage": "Leverage",
+      "fee": "Fee",
+      "assets": "Assets"
+    },
+    "settings": {
+      "investment-fund-fees": "Investment fund fees",
+      "main-settings": "Main settings",
+      "asset-selection": "Asset selection",
+      "fees-settings": "Fees settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
+        "asset-description": "Total share of all assets should be equal to 100%",
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "account-type": "Account type",
+        "currency": "Currency",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "brokers-leverage": "Broker's leverage",
+        "period": "Period",
+        "upload-logo": "Upload the fund logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "entry-fee": "Entry fee",
+        "success-fee": "Success fee",
+        "exit-fee": "Exit fee",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in the wallet"
+      },
+      "validation": {
+        "entry-fee-required": "Entry fee is required",
+        "exit-fee-required": "Exit fee is required",
+        "exit-fee-min": "Exit fee must be greater than 0 %",
+        "exit-fee-max": "Exit fee must be less than {{max}} %",
+        "assets-share": "Total share of all assets should be equal to 100%",
+        "assets-count": "Must be at least two assets.",
+        "deposit-min": "Not enough money."
+      },
+      "hints": {
+        "entry-fee": "Description about entry fee is here",
+        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
+        "exit-fee": "Description about exit fee is here",
+        "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
+      }
+    }
+  },
+  "attach-account-page": {
+    "title": "Attach external account",
+    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
+    "notifications": {
+      "create-success": "Account was successfully attached.",
+      "validate-error": "Please fix all the errors on the screen before proceeding"
+    },
+    "tabs": {
+      "select-broker": "Select broker",
+      "settings": "Settings"
+    },
+    "settings": {
+      "account-type": "Account type",
+      "exchange": "Exchange",
+      "api": "API",
+      "investment-fund-fees": "Investment fund fees",
+      "main-settings": "Main settings",
+      "fees-settings": "Fees settings",
+      "deposit-details": "Deposit details",
+      "fields": {
+        "exchange": "Exchange",
+        "api-secret": "API secret",
+        "api-key": "API key",
+        "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
+        "asset-description": "Total share of all assets should be equal to 100%",
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "account-type": "Account type",
+        "currency": "Currency",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "brokers-leverage": "Broker's leverage",
+        "period": "Period",
+        "upload-logo": "Upload the fund logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "entry-fee": "Entry fee",
+        "success-fee": "Success fee",
+        "exit-fee": "Exit fee",
+        "deposit-amount": "Deposit amount",
+        "available-in-wallet": "Available in the wallet"
+      },
+      "validation": {
+        "api-secret": "Api secret is required",
+        "api-key": "Api key is required",
+        "entry-fee-required": "Entry fee is required",
+        "exit-fee-required": "Exit fee is required",
+        "exit-fee-min": "Exit fee must be greater than 0 %",
+        "exit-fee-max": "Exit fee must be less than {{max}} %",
+        "assets-share": "Total share of all assets should be equal to 100%",
+        "assets-count": "Must be at least two assets.",
+        "deposit-min": "Not enough money."
+      },
+      "hints": {
+        "entry-fee": "Description about entry fee is here",
+        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
+        "exit-fee": "Description about exit fee is here",
+        "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
+      }
+    }
+  },
+  "edit-asset": {
+    "notifications": {
+      "edit-success": {
+        "trading-account": "Trading account has been edited.",
+        "follow": "Follow has been edited",
+        "program": "Program has been edited",
+        "fund": "Fund has been edited."
+      }
+    }
+  },
+  "edit-program": {
+    "title": "Edit program",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
+    "confirm": "Confirm",
+    "settings": {
+      "fields": {
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "upload-logo": "Upload program logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
+      },
+      "hints": {
+        "entry-fee": "Description about entry fee is here"
+      },
+      "validation": {
+        "title-required": "Title is required",
+        "title-is-long": "Title is too long",
+        "title-is-short": "Title is too short",
+        "title-is-latin-and-numbers": "Latin letters and numbers only.",
+        "description-is-long": "Description is too long",
+        "description-is-short": "Description is too short",
+        "description-required": "Description is required",
+        "account-type-required": "Account type is required"
+      }
+    }
+  },
+  "edit-fund": {
+    "title": "Edit details",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
+    "confirm": "Confirm",
+    "settings": {
+      "fields": {
+        "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
+        "description": "Description",
+        "description-requirements": "Requirement from 20 to 500 symbols",
+        "upload-logo": "Upload fund logo",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
+      },
+      "hints": {
+        "entry-fee": "Description about entry fee is here"
+      },
+      "validation": {
+        "title-required": "Title is required",
+        "title-is-long": "Title is too long",
+        "title-is-short": "Title is too short",
+        "title-is-latin-and-numbers": "Latin letters and numbers only.",
+        "description-is-long": "Description is too long",
+        "description-is-short": "Description is too short",
+        "description-required": "Description is required",
+        "account-type-required": "Account type is required"
+      }
+    }
+  },
+  "reallocate": {
+    "title": "Reallocate",
+    "apply": "Confirm",
+    "success-alert-message": "Your assets were successfully reallocated!"
+  },
+  "level-calculator": {
+    "title": "Calculator",
+    "program": "Program",
+    "genesis-ratio": "Genesis Ratio",
+    "age": "Age",
+    "weighted-volume-scale": "Weighted volume scale",
+    "manager-balance": "Manager balance",
+    "current-av-to-invest": "Av. to invest (current)",
+    "new-av-to-invest": "Av. to invest (new)",
+    "current-investment-scale": "Investment scale (current)",
+    "new-investment-scale": "Investment scale (new)",
+    "age-tooltip": "The age of the program.",
+    "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+    "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+    "manager-balance-tooltip": "The current value of manager funds in the program.",
+    "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
+    "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
+    "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+    "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+    "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
+  }
+}

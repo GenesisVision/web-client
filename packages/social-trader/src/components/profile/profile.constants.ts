@@ -1,0 +1,16 @@
+export const PROFILE = "profile";
+export const PROFILE_ROUTE = `/${PROFILE}`;
+export const EDIT = "edit";
+export const PROFILE_EDIT_ROUTE = `${PROFILE_ROUTE}/${EDIT}`;
+export const SETTINGS = "settings";
+export const SETTINGS_ROUTE = `${PROFILE_ROUTE}/${SETTINGS}`;
+export const PASSWORD = "password";
+export const PASSWORD_ROUTE = `${PROFILE_ROUTE}/${PASSWORD}`;
+export const VERIFY = "verify";
+export const KYC_ROUTE = `${PROFILE_ROUTE}/${VERIFY}`;
+export const SOCIAL_LINKS = "social-links";
+export const SOCIAL_LINKS_ROUTE = `${PROFILE_ROUTE}/${SOCIAL_LINKS}`;
+export const SECURITY = "security";
+export const SECURITY_ROUTE = `${PROFILE_ROUTE}/${SECURITY}`;
+export const REFERRAL_PROGRAM = "referral-program";
+export const REFERRAL_PROGRAM_ROUTE = `${PROFILE_ROUTE}/${REFERRAL_PROGRAM}`;

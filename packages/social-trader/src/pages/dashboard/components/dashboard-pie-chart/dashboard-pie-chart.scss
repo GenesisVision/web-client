@@ -1,0 +1,55 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_transition.scss";
+
+$pie-chart-size: 140px;
+$bullet-size: 8px;
+$bullet-size-selected: $bullet-size * 2;
+
+.dashboard-pie-chart {
+  &__pie-chart {
+    box-sizing: border-box;
+    @include width($pie-chart-size);
+    @include height($pie-chart-size);
+    margin: 0 $padding-big 0 0;
+    @include media-breakpoint-landscape-tablet() {
+      margin: 0 $padding-big;
+    }
+  }
+  &__container {
+    @include details-block-horizontal-paddings;
+    display: flex;
+  }
+  &__name-container {
+    display: flex;
+    align-items: center;
+    padding-bottom: $padding-xsmall;
+    cursor: pointer;
+    &--selected {
+      .dashboard-pie-chart__bullet {
+        width: $bullet-size-selected;
+        height: $bullet-size-selected;
+        min-width: $bullet-size-selected;
+      }
+      .dashboard-pie-chart__name {
+        opacity: 1;
+        font-weight: 500;
+      }
+    }
+  }
+  &__bullet {
+    border-radius: 50%;
+    @include adaptive-margin(right, $padding-xxsmall);
+    width: $bullet-size;
+    height: $bullet-size;
+    min-width: $bullet-size;
+    @include transition();
+  }
+  &__name {
+    @include font-size($font-size-paragraph);
+    opacity: 0.8;
+    letter-spacing: 0.47px;
+    @include transition(opacity);
+  }
+}

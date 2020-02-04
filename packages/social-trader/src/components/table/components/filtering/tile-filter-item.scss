@@ -1,0 +1,33 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.tile-filter-item {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-right: $padding-xsmall;
+  &__button-remove {
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    width: $close-button-size;
+    height: $close-button-size;
+    background-color: #293842;
+    border: 2px solid $panel-background-color;
+    border-radius: 50%;
+    top: -$close-button-size/2;
+    right: -$close-button-size/2;
+    &:hover:not(:disabled) {
+      background-color: #161b20;
+    }
+
+    .icon {
+      height: 6px;
+      width: 6px;
+    }
+  }
+}

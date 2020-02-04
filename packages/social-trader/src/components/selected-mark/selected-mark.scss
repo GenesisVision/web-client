@@ -1,0 +1,21 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+.selected-mark {
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  line-height: $padding-small;
+  width: $padding-small;
+  height: $padding-small;
+  border-radius: 50%;
+  content: "&#10004;";
+  background-color: #03bdaf40;
+  color: #e8eff340;
+  border: 2px solid $primary-color;
+  &--selected {
+    background-color: $primary-color;
+    color: $text-light-color;
+  }
+  cursor: pointer;
+  transition: 300ms ease-in-out;
+}

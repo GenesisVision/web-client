@@ -1,0 +1,123 @@
+@import "~shared/styles/breakpoint";
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.funds-container {
+  @include grid();
+  @include horizontal-padding();
+  position: relative;
+  align-items: center;
+
+  &__info {
+    margin-bottom: 60px;
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 3/11;
+      margin-bottom: 100px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      text-align: left;
+      grid-column: 2/6;
+      margin-bottom: 0;
+      position: absolute;
+      z-index: 1;
+      padding-bottom: 60px;
+      opacity: 1;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+
+      &--hide {
+        animation-name: hide;
+      }
+
+      &--show {
+        opacity: 0;
+        animation-name: show;
+      }
+    }
+
+    @include media-breakpoint-large-desktop() {
+      padding-bottom: 100px;
+    }
+  }
+
+  &__list {
+    @include reset-list();
+    grid-column: 1/13;
+    padding: 0 20px 40px;
+    margin-right: -20px;
+    margin-left: -20px;
+
+    @include media-breakpoint-tablet() {
+      padding-bottom: 100px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      position: relative;
+      padding-left: 50%;
+      padding-bottom: 60px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      padding-bottom: 100px;
+    }
+  }
+
+  &__img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+
+    @include media-breakpoint-tablet() {
+      width: 80px;
+      height: 80px;
+    }
+
+    @include media-breakpoint-desktop() {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__text {
+    color: rgba($row-color, 0.8);
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 2/7;
+    }
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

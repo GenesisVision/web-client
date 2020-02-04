@@ -1,0 +1,31 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.wallet-list {
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__button {
+    &:not(:last-child) {
+      margin-right: $padding-xsmall;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--wallet {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &--buttons {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
