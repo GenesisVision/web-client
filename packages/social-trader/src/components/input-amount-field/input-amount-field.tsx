@@ -3,14 +3,13 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVNumberField from "components/gv-number-field/gv-number-field";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation, WithTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _InputAmountField: React.FC<Props> = ({
   wide,
   emptyInit,
   onChange,
-  t,
   name,
   label,
   currency,
@@ -19,37 +18,40 @@ const _InputAmountField: React.FC<Props> = ({
   placeholder,
   autoFocus = true,
   disabled
-}) => (
-  <DialogField>
-    <GVFormikField
-      wide={wide}
-      emptyInit={emptyInit}
-      onChange={onChange}
-      name={name}
-      label={label}
-      placeholder={placeholder}
-      component={GVNumberField}
-      adornment={
-        setMax && (
-          <GVButton
-            onClick={setMax}
-            variant="text"
-            color="secondary"
-            className="gv-btn--no-padding"
-          >
-            {t("Max")}
-          </GVButton>
-        )
-      }
-      autoComplete="off"
-      autoFocus={autoFocus}
-      suffix={` ${currency}`}
-      allowNegative={false}
-      isAllowed={isAllow}
-      disabled={disabled}
-    />
-  </DialogField>
-);
+}) => {
+  const [t] = useTranslation();
+  return (
+    <DialogField>
+      <GVFormikField
+        wide={wide}
+        emptyInit={emptyInit}
+        onChange={onChange}
+        name={name}
+        label={label}
+        placeholder={placeholder}
+        component={GVNumberField}
+        adornment={
+          setMax && (
+            <GVButton
+              onClick={setMax}
+              variant="text"
+              color="secondary"
+              className="gv-btn--no-padding"
+            >
+              {t("Max")}
+            </GVButton>
+          )
+        }
+        autoComplete="off"
+        autoFocus={autoFocus}
+        suffix={` ${currency}`}
+        allowNegative={false}
+        isAllowed={isAllow}
+        disabled={disabled}
+      />
+    </DialogField>
+  );
+};
 
 interface Props extends WithTranslation {
   wide?: boolean;
@@ -65,5 +67,5 @@ interface Props extends WithTranslation {
   disabled?: boolean;
 }
 
-const InputAmountField = translate()(React.memo(_InputAmountField));
+const InputAmountField = React.memo(_InputAmountField);
 export default InputAmountField;
