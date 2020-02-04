@@ -3,7 +3,7 @@ import GVButton from "components/gv-button";
 import GVFormikField from "components/gv-formik-field";
 import GVNumberField from "components/gv-number-field/gv-number-field";
 import * as React from "react";
-import { useTranslation, WithTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _InputAmountField: React.FC<Props> = ({
@@ -53,7 +53,7 @@ const _InputAmountField: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation {
+interface Props {
   wide?: boolean;
   name: string;
   label: React.ReactNode;
