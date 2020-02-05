@@ -1,6 +1,6 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
-import { SimpleNumberField } from "components/simple-fields/simple-number-field";
+import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import {
   DEMO_DEPOSIT_FORM_FIELDS,
   DemoDepositResponse,
@@ -14,39 +14,20 @@ import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
   const [t] = useTranslation();
-  const {
-    triggerValidation,
-    watch,
-    errors,
-    setValue,
-    register,
-    handleSubmit,
-    formState: { isSubmitting, touched, isValid }
-  } = useForm<IDemoDepositFormValues>({
+  const form = useForm<IDemoDepositFormValues>({
     validationSchema: DemoDepositValidationSchema(t),
-    validateCriteriaMode: "firstError",
     mode: "onChange"
   });
+  const {
+    handleSubmit,
+    formState: { isSubmitting, isValid }
+  } = form;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <SimpleNumberField
-        autoFocus
-        triggerValidation={triggerValidation}
-        value={watch()[DEMO_DEPOSIT_FORM_FIELDS.amount]}
-        touched={!!touched[DEMO_DEPOSIT_FORM_FIELDS.amount]}
-        error={
-          errors[DEMO_DEPOSIT_FORM_FIELDS.amount] &&
-          errors[DEMO_DEPOSIT_FORM_FIELDS.amount]!.message
-        }
-        setFieldValue={setValue}
-        suffix={` ${currency}`}
-        wide
-        label={t("transfer.amount")}
-        refProp={register({
-          name: DEMO_DEPOSIT_FORM_FIELDS.amount,
-          type: "custom"
-        })}
+      <HookFormAmountField
+        form={form}
+        currency={currency}
         name={DEMO_DEPOSIT_FORM_FIELDS.amount}
       />
       <DialogButtons>
