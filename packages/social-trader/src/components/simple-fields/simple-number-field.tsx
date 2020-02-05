@@ -10,7 +10,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
   const handleOnChange = useCallback(
     ({ value }: NumberFormatValues) => {
       setInit(false);
-      setFieldValue(name, value);
+      if (setFieldValue) setFieldValue(name, value);
       if (triggerValidation) triggerValidation(value);
     },
     [name]
@@ -28,10 +28,10 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
   );
 };
 
-interface ISimpleNumberFieldProps extends GVTextFieldProps {
+export interface ISimpleNumberFieldProps extends GVTextFieldProps {
   refProp?: any;
   triggerValidation?: (name: string) => any;
-  setFieldValue: (name: string, value?: any) => void;
+  setFieldValue?: (name: string, value?: any) => void;
   [key: string]: any;
 }
 
