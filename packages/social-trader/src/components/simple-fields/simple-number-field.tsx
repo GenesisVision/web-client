@@ -11,7 +11,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
     ({ value }: NumberFormatValues) => {
       setInit(false);
       if (setFieldValue) setFieldValue(name, value);
-      if (triggerValidation) triggerValidation(value);
+      if (triggerValidation) triggerValidation(name);
     },
     [name]
   );
