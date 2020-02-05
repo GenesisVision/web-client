@@ -20,9 +20,10 @@ import { ORGANIZATION_SCHEMA } from "utils/seo";
 const FollowsPage: NextComponentType = () => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
+  const description = t("follows-page.description");
   return (
     <Page
-      description={"List of follow"}
+      description={description}
       showTitle
       title={title}
       schemas={[
@@ -30,7 +31,7 @@ const FollowsPage: NextComponentType = () => {
         {
           "@context": "https://schema.org",
           "@type": "Table",
-          about: "List of programs"
+          about: description
         }
       ]}
     >

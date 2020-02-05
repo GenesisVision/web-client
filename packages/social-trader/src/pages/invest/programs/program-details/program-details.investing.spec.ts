@@ -74,6 +74,7 @@ describe("Program details investing", () => {
     "should be open invest popup and invest",
     async () => {
       const {
+        waitForSelector,
         waitForLoadBlurLoader,
         openPopup,
         enterAmount,
@@ -101,7 +102,7 @@ describe("Program details investing", () => {
       await enterAmount(amountValue);
       await submitForm();
 
-      await page.waitForSelector(activeAssetStatusSelector);
+      await waitForSelector(activeAssetStatusSelector);
 
       const alertMessage = await getLastAlertMessage();
       expect(alertMessage).toBe(successMessage);
@@ -109,7 +110,7 @@ describe("Program details investing", () => {
       const statusText = await getTextContent(statusSelector);
       expect(statusText).toBe(investingStatusText);
 
-      await page.waitForSelector(investingAssetStatusSelector);
+      await waitForSelector(investingAssetStatusSelector);
       await cancelRequest(page);
     },
     ASYNC_TEST_TIMEOUT

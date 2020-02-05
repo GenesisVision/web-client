@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <KYCPage />;
 };
 
-export const Verify = compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export const Verify = compose(withDefaultLayout, withPrivateRoute)(Page);

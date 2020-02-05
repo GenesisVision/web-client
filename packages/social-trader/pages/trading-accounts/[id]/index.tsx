@@ -39,7 +39,4 @@ Page.getInitialProps = async ctx => {
   return {};
 };
 
-export default compose(
-  withPrivateRoute,
-  withDefaultLayout
-)(Page);
+export default compose(withPrivateRoute, withDefaultLayout)(Page);

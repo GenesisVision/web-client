@@ -37,7 +37,4 @@ interface Props {
   brokers: Broker[];
 }
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

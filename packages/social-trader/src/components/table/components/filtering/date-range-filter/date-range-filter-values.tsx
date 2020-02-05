@@ -10,9 +10,15 @@ import {
 } from "./date-range-filter.constants";
 import { dateToInput } from "./date-range-filter.helpers";
 
-const _DateRangeFilterValues: React.FC<
-  IDateRangeFilterValuesProps & WithTranslation
-> = ({ t, type, dateStart, dateEnd, startLabel, onChange }) => {
+const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps &
+  WithTranslation> = ({
+  t,
+  type,
+  dateStart,
+  dateEnd,
+  startLabel,
+  onChange
+}) => {
   const handleOnChange = useCallback(
     (type: keyof IDataRangeFilterValue) => (e: React.ChangeEvent<any>) =>
       onChange(type, e.target.value),

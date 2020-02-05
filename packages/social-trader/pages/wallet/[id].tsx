@@ -28,7 +28,4 @@ interface OwnProps {
 
 interface Props extends OwnProps {}
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

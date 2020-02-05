@@ -44,7 +44,4 @@ interface Props {
   accountCurrency: CurrencyEnum;
 }
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

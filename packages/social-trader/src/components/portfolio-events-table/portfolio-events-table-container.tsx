@@ -23,9 +23,7 @@ import {
   PORTFOLIO_EVENTS_MANAGER_COLUMNS
 } from "./portfolio-events-table.constants";
 
-const _PortfolioEventsTableContainer: React.FC<
-  IPortfolioEventsTableOwnProps
-> = ({
+const _PortfolioEventsTableContainer: React.FC<IPortfolioEventsTableOwnProps> = ({
   historyType,
   title,
   getItems,

@@ -13,9 +13,10 @@ import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 import { number, object, string } from "yup";
 
-const DisableAuth: React.FC<
-  InjectedFormikProps<Props, IDisableAuthFormFormValues>
-> = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
+const DisableAuth: React.FC<InjectedFormikProps<
+  Props,
+  IDisableAuthFormFormValues
+>> = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
   <form id="disable-auth" onSubmit={handleSubmit} autoComplete="off">
     <DialogTop title={t("2fa-page.disable.title")} />
     <DialogBottom>

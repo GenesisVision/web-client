@@ -9,7 +9,4 @@ const Page: NextPage = () => {
   return <FinancialStatisticPage />;
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

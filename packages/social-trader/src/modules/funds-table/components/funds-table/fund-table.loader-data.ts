@@ -13,7 +13,8 @@ const assetLoaderDataCreator = (): FundAssetPercent => ({
   asset: "GVT",
   name: "Genesis Vision",
   percent: getRandomInteger(0, 100),
-  icon: ""
+  icon: "",
+  url: "genesis-vision-token"
 });
 const assetsLoaderDataCreator = (): FundAssetPercent[] =>
   new Array(getRandomInteger(1, 5))

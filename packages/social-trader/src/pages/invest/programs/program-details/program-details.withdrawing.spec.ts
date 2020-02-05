@@ -45,6 +45,7 @@ describe("Program details withdrawing", () => {
     "should be withdraw all",
     async () => {
       const {
+        waitForSelector,
         waitForLoadBlurLoader,
         isDisabled,
         openPopup,
@@ -80,7 +81,7 @@ describe("Program details withdrawing", () => {
       );
       expect(isWithdrawButtonDisableAfterClick).toBeTruthy();
 
-      await page.waitForSelector(withdrawingAssetStatusSelector);
+      await waitForSelector(withdrawingAssetStatusSelector);
       await cancelRequest(page);
     },
     ASYNC_TEST_TIMEOUT
@@ -90,6 +91,7 @@ describe("Program details withdrawing", () => {
     "should be cancel withdraw request",
     async () => {
       const {
+        waitForSelector,
         hasElement,
         openPopup,
         enterAmount,
@@ -113,7 +115,7 @@ describe("Program details withdrawing", () => {
       await openPopup(cancelButtonSelector);
       await submitForm();
 
-      await page.waitForSelector(activeAssetStatusSelector);
+      await waitForSelector(activeAssetStatusSelector);
 
       const alertMessage = await getLastAlertMessage();
       expect(alertMessage).toBe(successMessage);
@@ -125,6 +127,7 @@ describe("Program details withdrawing", () => {
     "should be open withdraw popup and withdraw",
     async () => {
       const {
+        waitForSelector,
         waitForLoadBlurLoader,
         openPopup,
         enterAmount,
@@ -155,7 +158,7 @@ describe("Program details withdrawing", () => {
       const statusText = await getTextContent(statusSelector);
       expect(statusText).toBe(withdrawingStatusText);
 
-      await page.waitForSelector(withdrawingAssetStatusSelector);
+      await waitForSelector(withdrawingAssetStatusSelector);
       await cancelRequest(page);
     },
     ASYNC_TEST_TIMEOUT

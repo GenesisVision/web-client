@@ -6,8 +6,7 @@ import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
-  TableCardTableColumn,
-  TableCardTableRow
+  TableCardTableColumn
 } from "components/table/components/table-card/table-card";
 import {
   IRenderActionsArgs,
@@ -35,48 +34,46 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <TableCardTable wrap>
-      <TableCardTableColumn>
-        <StatisticItem
-          label={t("funds-page.fundstotalAssetsCount,-header.balance")}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(amount, currency)}
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-      </TableCardTableColumn>
-      <TableCardTableColumn>
-        <StatisticItem label={t("funds-page.funds-header.investors")}>
-          <NumberFormat
-            value={investorsCount}
-            displayType="text"
-            decimalScale={0}
-          />
-        </StatisticItem>
-      </TableCardTableColumn>
-      <TableCardTableColumn>
-        <StatisticItem label={t("funds-page.funds-header.drawdown")}>
-          <NumberFormat
-            value={formatValue(drawdown, 2)}
-            displayType="text"
-            suffix="%"
-          />
-        </StatisticItem>
-      </TableCardTableColumn>
-      <TableCardTableRow>
-        {topFundAssets && (
-          <FundAssetContainer
-            noWrap
-            assets={topFundAssets as FundAssetType[]}
-            type={FUND_ASSET_TYPE.SHORT}
-            size={3}
-            length={totalAssetsCount}
-          />
-        )}
-      </TableCardTableRow>
-    </TableCardTable>
+    <>
+      <TableCardTable wrap>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.balance")}>
+            <NumberFormat
+              value={formatCurrencyValue(amount, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.investors")}>
+            <NumberFormat
+              value={investorsCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+            <NumberFormat
+              value={formatValue(drawdown, 2)}
+              displayType="text"
+              suffix="%"
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+      </TableCardTable>
+      {topFundAssets && (
+        <FundAssetContainer
+          noWrap
+          assets={topFundAssets as FundAssetType[]}
+          type={FUND_ASSET_TYPE.SHORT}
+          size={3}
+          length={totalAssetsCount}
+        />
+      )}
+    </>
   );
 };
 

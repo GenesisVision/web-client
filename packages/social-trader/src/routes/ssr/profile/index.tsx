@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <ProfilePage />;
 };
 
-export const Profile = compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export const Profile = compose(withDefaultLayout, withPrivateRoute)(Page);

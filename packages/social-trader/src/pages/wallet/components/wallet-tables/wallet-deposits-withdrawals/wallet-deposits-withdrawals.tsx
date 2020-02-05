@@ -59,7 +59,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
     <TableModule
       className="wallet-deposits-withdrawals"
       loaderData={walletTransactionsLoaderData}
-      timestamp={(timestamp || new Date()).getMilliseconds()}
+      timestamp={new Date(timestamp || 0).getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}
       paging={DEFAULT_PAGING}
       filtering={{

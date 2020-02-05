@@ -6,9 +6,7 @@ import CancelChangeBrokerFormContainer, {
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const _ChangeChangeBroker: React.FC<
-  ICancelChangeBrokerFormContainerProps
-> = props => {
+const _ChangeChangeBroker: React.FC<ICancelChangeBrokerFormContainerProps> = props => {
   const [t] = useTranslation();
   return (
     <SettingsBlock label={t("program-settings.broker.title")}>

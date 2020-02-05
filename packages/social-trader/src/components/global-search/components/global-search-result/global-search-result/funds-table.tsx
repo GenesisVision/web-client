@@ -7,9 +7,8 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import { SearchTableProps } from "./global-search-result";
 
-const FundsTable: React.FC<
-  SearchTableProps<ItemsViewModelFundDetailsListItem> & WithTranslation
-> = ({ t, data }) => {
+const FundsTable: React.FC<SearchTableProps<ItemsViewModelFundDetailsListItem> &
+  WithTranslation> = ({ t, data }) => {
   return (
     <Table
       columns={FUNDS_TABLE_COLUMNS}
