@@ -1,34 +1,33 @@
 import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
-import { SimpleNumberField } from "components/simple-fields/simple-number-field";
+import {
+  ISimpleNumberFieldProps,
+  SimpleNumberField
+} from "components/simple-fields/simple-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
-const _SimpleInputAmountField: React.FC<Props> = ({
+const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
   setMin,
-  setFieldValue,
-  wide,
-  emptyInit,
-  name,
+  wide = true,
+  autoFocus = true,
   label,
   currency,
-  isAllow,
   setMax,
-  placeholder,
-  autoFocus = true,
-  disabled
+  ...props
 }) => {
   const [t] = useTranslation();
   return (
     <DialogField>
       <SimpleNumberField
-        setFieldValue={setFieldValue}
+        {...props}
         wide={wide}
-        emptyInit={emptyInit}
-        name={name}
-        label={label}
-        placeholder={placeholder}
+        autoFocus={autoFocus}
+        label={label || t("input-amount-field.label")}
+        autoComplete="off"
+        suffix={` ${currency}`}
+        allowNegative={false}
         adornment={
           <>
             {setMin && (
@@ -54,25 +53,18 @@ const _SimpleInputAmountField: React.FC<Props> = ({
             )}
           </>
         }
-        autoComplete="off"
-        autoFocus={autoFocus}
-        suffix={` ${currency}`}
-        allowNegative={false}
-        isAllowed={isAllow}
-        disabled={disabled}
       />
     </DialogField>
   );
 };
 
-interface Props {
-  setFieldValue: (name: string, value?: any) => void;
+export interface ISimpleInputAmountFieldProps extends ISimpleNumberFieldProps {
   wide?: boolean;
   name: string;
-  label: React.ReactNode;
+  label?: React.ReactNode;
   currency: string;
   placeholder?: string;
-  isAllow?: (values: NumberFormatValues) => boolean;
+  isAllowed?: (values: NumberFormatValues) => boolean;
   setMax?(): void;
   setMin?(): void;
   autoFocus?: boolean;
