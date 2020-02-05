@@ -120,6 +120,8 @@
     "rejected": "Rejected"
   },
   "buttons": {
+    "max": "Max",
+    "min": "Min",
     "create-signal": "Create signal account",
     "create-account": "Create account",
     "create-attach-external-account": "Attach external account",

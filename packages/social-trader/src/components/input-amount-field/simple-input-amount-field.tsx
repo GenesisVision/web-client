@@ -38,7 +38,7 @@ const _SimpleInputAmountField: React.FC<Props> = ({
                 variant="text"
                 color="secondary"
               >
-                {t("Min")}
+                {t("buttons.min")}
               </GVButton>
             )}
             {setMin && setMax && <>&nbsp;|&nbsp;</>}
@@ -49,7 +49,7 @@ const _SimpleInputAmountField: React.FC<Props> = ({
                 variant="text"
                 color="secondary"
               >
-                {t("Max")}
+                {t("buttons.max")}
               </GVButton>
             )}
           </>
