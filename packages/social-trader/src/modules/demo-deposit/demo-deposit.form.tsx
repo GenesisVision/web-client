@@ -1,13 +1,14 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { useGetRate } from "hooks/get-rate.hook";
 import {
   DEMO_DEPOSIT_FORM_FIELDS,
   DemoDepositResponse,
   DemoDepositValidationSchema,
   IDemoDepositFormValues
 } from "modules/demo-deposit/demo-deposit.service";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -15,7 +16,11 @@ import { minDemoDepositAmountSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
-  const maxAmount = useSelector(minDemoDepositAmountSelector);
+  const { rate, getRate } = useGetRate();
+  useEffect(() => {
+    getRate({ from: currency, to: "USDT" });
+  }, [currency]);
+  const maxAmount = useSelector(minDemoDepositAmountSelector) / rate;
   const [t] = useTranslation();
   const form = useForm<IDemoDepositFormValues>({
     validationSchema: DemoDepositValidationSchema(t, maxAmount),
