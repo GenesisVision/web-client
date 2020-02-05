@@ -1,4 +1,10 @@
+import GlobalSearchPage from "components/global-search/global-search.page";
+import withDefaultLayout from "decorators/with-default-layout";
 import React from "react";
-import { Search } from "routes/ssr/search";
+import { compose } from "redux";
 
-export default Search;
+const Page: React.FC = () => {
+  return <GlobalSearchPage />;
+};
+
+export default compose(withDefaultLayout)(Page);
