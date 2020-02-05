@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _SimpleInputAmountField: React.FC<Props> = ({
+  setMin,
   setFieldValue,
   wide,
   emptyInit,
@@ -30,17 +31,17 @@ const _SimpleInputAmountField: React.FC<Props> = ({
         placeholder={placeholder}
         adornment={
           <>
-            {false && (
+            {setMin && (
               <GVButton
                 noPadding
-                onClick={setMax}
+                onClick={setMin}
                 variant="text"
                 color="secondary"
               >
                 {t("Min")}
               </GVButton>
             )}
-            {false && setMax && <>&nbsp;|&nbsp;</>}
+            {setMin && setMax && <>&nbsp;|&nbsp;</>}
             {setMax && (
               <GVButton
                 noPadding
@@ -73,6 +74,7 @@ interface Props {
   placeholder?: string;
   isAllow?: (values: NumberFormatValues) => boolean;
   setMax?(): void;
+  setMin?(): void;
   autoFocus?: boolean;
   emptyInit?: boolean;
   disabled?: boolean;
