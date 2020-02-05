@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom/server";
+import SimpleChart from "components/chart/simple-chart";
 import {
   ProgramFollowDetailsFull,
   ProgramProfitPercentCharts
 } from "gv-api-web";
-import SimpleChart from "components/chart/simple-chart";
-import programsApi from "services/api-client/programs-api";
 import { NextApiRequest, NextApiResponse } from "next";
+import React from "react";
+import ReactDOM from "react-dom/server";
+import programsApi from "services/api-client/programs-api";
 
 type Position = { y: number };
 

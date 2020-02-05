@@ -11,9 +11,9 @@ import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
-export const serviceGetNotifications = (): RootThunk<
-  Promise<NotificationList>
-> => (dispatch, getState) => {
+export const serviceGetNotifications = (): RootThunk<Promise<
+  NotificationList
+>> => (dispatch, getState) => {
   const { notifications } = getState();
   return notificationsApi
     .getNotifications(authService.getAuthArg(), notifications.options)

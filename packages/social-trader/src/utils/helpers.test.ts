@@ -54,18 +54,19 @@ describe("test helpers functions", () => {
   });
   describe("test mergeArrays", () => {
     it("should be merge arrays", () => {
-      expect(mergeArrays([[1, 2, 3], [4, 5, 6]])).toEqual([1, 2, 3, 4, 5, 6]);
-      expect(mergeArrays([[1, 2, 3], [4, 5, 6], [7, 8, 9]])).toEqual([
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
-      ]);
+      expect(
+        mergeArrays([
+          [1, 2, 3],
+          [4, 5, 6]
+        ])
+      ).toEqual([1, 2, 3, 4, 5, 6]);
+      expect(
+        mergeArrays([
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]
+        ])
+      ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
       expect(mergeArrays([[1, 2, 3], [], [4, 5, 6]])).toEqual([
         1,
         2,

@@ -65,7 +65,7 @@ const _DashboardFundCard: React.FC<Props> = ({
       renderActions={renderActions}
     >
       <FundCardTable
-        amount={fund.balance.amount}
+        amount={fund.personalDetails.value}
         currency={fund.balance.currency}
         investorsCount={fund.investorsCount}
         drawdown={fund.statistic.drawdown}

@@ -14,7 +14,4 @@ Page.getInitialProps = async ctx => {
   await Promise.all([ctx.reduxStore.dispatch(fetchNotificationSettings(ctx))]);
 };
 
-export const Notifications = compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export const Notifications = compose(withDefaultLayout, withPrivateRoute)(Page);

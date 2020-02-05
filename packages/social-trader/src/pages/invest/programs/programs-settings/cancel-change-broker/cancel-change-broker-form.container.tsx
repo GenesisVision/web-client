@@ -7,9 +7,7 @@ import React, { useCallback } from "react";
 
 import CancelChangeBrokerForm from "./cancel-change-broker-form";
 
-const _CancelChangeBrokerFormContainer: React.FC<
-  ICancelChangeBrokerFormContainerProps
-> = props => {
+const _CancelChangeBrokerFormContainer: React.FC<ICancelChangeBrokerFormContainerProps> = props => {
   const { id, onApply } = props;
   const { sendRequest: cancelChangeBroker } = useApiRequest({
     middleware: [onApply],

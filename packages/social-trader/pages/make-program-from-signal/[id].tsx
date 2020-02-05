@@ -44,7 +44,4 @@ interface Props {
   broker: string;
 }
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

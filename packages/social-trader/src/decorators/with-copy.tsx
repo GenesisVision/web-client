@@ -45,10 +45,7 @@ const mapDispatchToProps: IDispatchMap = {
 };
 
 const Copy = compose<React.FC<ICopyProps>>(
-  connect<undefined, IDispatchMap, IOwnProps>(
-    undefined,
-    mapDispatchToProps
-  )
+  connect<undefined, IDispatchMap, IOwnProps>(undefined, mapDispatchToProps)
 )(CopyHOC);
 
 export default Copy;

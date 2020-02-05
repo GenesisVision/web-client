@@ -2,11 +2,11 @@ import "./multi-chart.scss";
 
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useEffect, useState } from "react";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
-import { withBlurLoader } from "decorators/with-blur-loader";
 import ChartAssetList from "./chart-asset-list";
 import { TChartAsset } from "./multi-chart.types";
 import MultiProfitChart from "./multi-profit-chart";

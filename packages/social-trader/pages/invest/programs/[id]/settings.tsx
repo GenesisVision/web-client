@@ -21,7 +21,4 @@ ProgramSettings.getInitialProps = async ctx => {
   ]);
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(ProgramSettings);
+export default compose(withDefaultLayout, withPrivateRoute)(ProgramSettings);

@@ -44,11 +44,9 @@ const _SwitchWithQuestion: React.FC<Props> = ({
   );
 };
 
-const HelpContainer: React.FC<
-  { tooltipContent?: string | JSX.Element } & React.HTMLAttributes<
-    HTMLDivElement
-  >
-> = ({ tooltipContent, children }) => {
+const HelpContainer: React.FC<{
+  tooltipContent?: string | JSX.Element;
+} & React.HTMLAttributes<HTMLDivElement>> = ({ tooltipContent, children }) => {
   switch (!!tooltipContent) {
     case true:
       return (

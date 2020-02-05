@@ -20,15 +20,12 @@ export const tableSelectorCreator = <
     total: number;
   } = defaultDataConst
 ) =>
-  createSelector(
-    selector,
-    (table: ITableState<TableState>) => {
-      const data = table.itemsData.data
-        ? mapToTableItems<ItemsType>(itemName)(table.itemsData.data)
-        : defaultData;
-      return {
-        ...table,
-        itemsData: { ...table.itemsData, data }
-      };
-    }
-  );
+  createSelector(selector, (table: ITableState<TableState>) => {
+    const data = table.itemsData.data
+      ? mapToTableItems<ItemsType>(itemName)(table.itemsData.data)
+      : defaultData;
+    return {
+      ...table,
+      itemsData: { ...table.itemsData, data }
+    };
+  });

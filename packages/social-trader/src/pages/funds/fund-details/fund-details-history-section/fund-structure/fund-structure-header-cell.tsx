@@ -5,11 +5,9 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
-export const _FundStructureHeaderCell: React.FC<
-  WithTranslation & {
-    column: SortingColumn;
-  }
-> = ({ t, column }) => (
+export const _FundStructureHeaderCell: React.FC<WithTranslation & {
+  column: SortingColumn;
+}> = ({ t, column }) => (
   <span
     className={classNames(
       `details-structure__head-cell fund-details-structure__cell--${column.name}`,

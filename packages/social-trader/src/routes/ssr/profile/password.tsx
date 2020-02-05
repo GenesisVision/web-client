@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <PasswordPage />;
 };
 
-export const Password = compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export const Password = compose(withDefaultLayout, withPrivateRoute)(Page);
