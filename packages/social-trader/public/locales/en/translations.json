@@ -1,4 +1,7 @@
 {
+  "input-amount-field": {
+    "label": "Amount"
+  },
   "demo-deposit": {
     "validations": {
       "amount": "Amount is required"
