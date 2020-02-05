@@ -1,7 +1,4 @@
 // import { connectRouter } from "connected-react-router";
-import passwordRestoreReducer from "components/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "components/auth/signin/reducers/login.reducers";
-import signUpReducer from "components/auth/signup/reducers/signup.reducers";
 import {
   globalSearchReducer,
   GlobalSearchState
@@ -37,6 +34,9 @@ import programsReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
+import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
+import loginReducer from "pages/auth/signin/reducers/login.reducers";
+import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";

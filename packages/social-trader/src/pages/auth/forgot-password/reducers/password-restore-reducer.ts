@@ -1,5 +1,5 @@
-import { PASSWORD_RESTORE } from "components/auth/forgot-password/actions/forgot-password.actions";
 import { ResetPasswordViewModel } from "gv-api-web";
+import { PASSWORD_RESTORE } from "pages/auth/forgot-password/actions/forgot-password.actions";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";

@@ -1,6 +1,6 @@
 import platformActions from "actions/platform-actions";
-import FundsFacetPage from "components/funds/funds-facet/funds-facet.page";
 import withDefaultLayout from "decorators/with-default-layout";
+import FundsFacetPage from "pages/invest/funds/funds-facet/funds-facet.page";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";

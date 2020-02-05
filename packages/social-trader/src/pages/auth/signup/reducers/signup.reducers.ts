@@ -1,4 +1,4 @@
-import { SIGN_UP } from "components/auth/signup/actions/signup.actions";
+import { SIGN_UP } from "pages/auth/signup/actions/signup.actions";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";

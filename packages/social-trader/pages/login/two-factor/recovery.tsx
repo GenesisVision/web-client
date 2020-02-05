@@ -1,7 +1,7 @@
-import LoginFooter from "components/auth/components/login-footer/login-footer";
-import RecoveryPage from "components/auth/signin/recovery/recovery.page";
 import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage } from "next";
+import LoginFooter from "pages/auth/components/login-footer/login-footer";
+import RecoveryPage from "pages/auth/signin/recovery/recovery.page";
 import React from "react";
 import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 

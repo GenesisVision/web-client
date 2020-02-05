@@ -1,4 +1,4 @@
-import "components/auth/forgot-password/forgot-password/forgot-password.scss";
+import "pages/auth/forgot-password/forgot-password/forgot-password.scss";
 
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import { ForgotPasswordViewModel } from "gv-api-web";

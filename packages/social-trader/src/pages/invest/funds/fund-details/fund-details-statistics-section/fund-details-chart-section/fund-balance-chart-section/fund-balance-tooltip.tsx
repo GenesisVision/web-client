@@ -1,9 +1,9 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { statisticCurrencySelector } from "pages/invest/funds/fund-details/reducers/statistic-currency.reducer";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { useSelector } from "react-redux";
-import { statisticCurrencySelector } from "reducers/statistic-currency.reducer";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({

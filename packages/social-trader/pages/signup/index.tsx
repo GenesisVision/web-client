@@ -1,10 +1,10 @@
-import SignUpFooter from "components/auth/components/signup-footer/signup-footer";
-import { REFERRAL_CODE } from "components/auth/signup/signup.constants";
-import SignUpPage from "components/auth/signup/signup.page";
 import withAuthLayout from "decorators/with-auth-layout";
 import cookie from "js-cookie";
 import { NextPage, NextPageContext } from "next";
 import nextCookie from "next-cookies";
+import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
+import { REFERRAL_CODE } from "pages/auth/signup/signup.constants";
+import SignUpPage from "pages/auth/signup/signup.page";
 import React from "react";
 import { LOGIN_ROUTE } from "routes/app.routes";
 

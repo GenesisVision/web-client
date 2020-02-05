@@ -1,6 +1,6 @@
-import AuthLayout from "components/auth/components/auth-layout/auth-layout";
-import SignUpFooter from "components/auth/components/signup-footer/signup-footer";
-import EmailConfirmContainer from "components/auth/email-confirm/email-confirm-container";
+import AuthLayout from "pages/auth/components/auth-layout/auth-layout";
+import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
+import EmailConfirmContainer from "pages/auth/email-confirm/email-confirm-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";

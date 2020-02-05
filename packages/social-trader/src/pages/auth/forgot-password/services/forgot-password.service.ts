@@ -1,6 +1,5 @@
 import authActions from "actions/auth-actions";
 import emailPendingActions from "actions/email-pending-actions";
-import { EMAIL_PENDING_ROUTE } from "components/auth/forgot-password/forgot-password.routes";
 import { Push } from "components/link/link";
 import {
   CaptchaCheckResult,
@@ -8,6 +7,7 @@ import {
   ResetPasswordViewModel
 } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import { EMAIL_PENDING_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
 import { MiddlewareDispatch, SetSubmittingType, TGetState } from "utils/types";

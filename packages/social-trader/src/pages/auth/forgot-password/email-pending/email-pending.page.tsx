@@ -1,4 +1,4 @@
-import "components/auth/forgot-password/email-pending/email-pending.scss";
+import "pages/auth/forgot-password/email-pending/email-pending.scss";
 
 import { CaptchaCheckResult } from "gv-api-web";
 import * as React from "react";

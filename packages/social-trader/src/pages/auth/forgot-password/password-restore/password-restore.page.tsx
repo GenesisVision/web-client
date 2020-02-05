@@ -1,6 +1,6 @@
-import "components/auth/forgot-password/password-restore/password-restore.scss";
+import "pages/auth/forgot-password/password-restore/password-restore.scss";
 
-import PasswordRestoreContainer from "components/auth/forgot-password/password-restore/password-restore-container";
+import PasswordRestoreContainer from "pages/auth/forgot-password/password-restore/password-restore-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 

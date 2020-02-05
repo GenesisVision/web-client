@@ -1,7 +1,7 @@
 import "./signup-email-pending.scss";
 
-import { sendConfirmationLink } from "components/auth/signup/services/signup-email-pending.service";
-import SignupEmailPendingContainer from "components/auth/signup/signup-email-pending/signup-email-pending-container";
+import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pending.service";
+import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/signup-email-pending-container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
