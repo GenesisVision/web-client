@@ -49,7 +49,7 @@ const useCreateAssetSubmit = ({
   return useCallback(
     (data: ICreateAssetSettingsFormValues, setSubmitting) => {
       setSubmitting(true);
-      sendRequest({ data, asset });
+      sendRequest({ data, asset }, setSubmitting);
     },
     [asset]
   );
