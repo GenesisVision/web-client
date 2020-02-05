@@ -4,7 +4,8 @@
   },
   "demo-deposit": {
     "validations": {
-      "amount": "Amount is required"
+      "max-amount": "Must be less than {{maxAmount}}",
+      "required": "Amount is required"
     }
   },
   "facets": {
