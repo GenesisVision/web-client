@@ -6,10 +6,6 @@
   min-width: 150px;
   @include height(22px);
 
-  &__options {
-    align-items: flex-start;
-  }
-
   &__content {
     display: flex;
     flex-direction: row;
