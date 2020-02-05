@@ -2,24 +2,24 @@ import "components/details/details-description-section/details-statistic-section
 
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
 import dynamic from "next/dist/next-server/lib/dynamic";
-import { accountAbsoluteProfitChartSelector } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
+import { followAbsoluteProfitChartSelector } from "pages/invest/follows/follow-details/reducers/absolute-profit-chart.reducer";
+import ProgramDetailsStatisticsElements, {
+  IProgramStatisticData
+} from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistics/program-details-statistics-elements";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { formatCurrencyValue } from "utils/formatter";
 
-import { statisticDataLoaderData } from "../account-details.loader-data";
-import { accountBalanceChartSelector } from "../reducers/balance-chart.reducer";
-import { accountStatusSelector } from "../reducers/description.reducer";
-import { accountProfitChartSelector } from "../reducers/profit-chart.reducer";
+import { statisticDataLoaderData } from "../follow-details.loader-data";
+import { followBalanceChartSelector } from "../reducers/balance-chart.reducer";
+import { followStatusSelector } from "../reducers/description.reducer";
+import { followProfitChartSelector } from "../reducers/profit-chart.reducer";
 import { statisticCurrencySelector } from "../reducers/statistic-currency.reducer";
-import AccountDetailsStatisticsElements, {
-  IAccountStatisticData
-} from "./account-details-statistics/account-details-statistics-elements";
 import {
-  useAccountChartStateValues,
-  useChartPeriod
-} from "./account-details.chart.helpers";
+  useChartPeriod,
+  useFollowChartStateValues
+} from "./follow-details.chart.helpers";
 
 const FollowBalanceChart = dynamic(() =>
   import(
@@ -37,26 +37,26 @@ const ProgramProfitChart = dynamic(() =>
   )
 );
 
-const _AccountDetailsStatisticSection: React.FC = () => {
-  const status = useSelector(accountStatusSelector);
+const _ProgramDetailsStatisticSection: React.FC = () => {
+  const status = useSelector(followStatusSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
   return (
     <DetailsStatisticSection
-      absoluteProfitChartSelector={accountAbsoluteProfitChartSelector}
-      balanceChartSelector={accountBalanceChartSelector}
-      profitChartSelector={accountProfitChartSelector}
+      absoluteProfitChartSelector={followAbsoluteProfitChartSelector}
+      balanceChartSelector={followBalanceChartSelector}
+      profitChartSelector={followProfitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
-      useChartStateValues={useAccountChartStateValues}
+      useChartStateValues={useFollowChartStateValues}
       useChartPeriod={useChartPeriod}
       renderProfitValue={({ statistic }) => (
         <NumberFormat
           value={formatCurrencyValue(
-            statistic.profitPercent,
+            "profitPercent" in statistic ? statistic.profitPercent : 0,
             statisticCurrency
           )}
           thousandSeparator={" "}
           displayType="text"
-          suffix={` %`}
+          suffix={` ${statisticCurrency}`}
         />
       )}
       renderBalanceChart={({ color, currency, balanceChart }) => (
@@ -66,9 +66,6 @@ const _AccountDetailsStatisticSection: React.FC = () => {
           currency={currency}
         />
       )}
-      renderProfitChart={({ profitChart, chartCurrencies }) => (
-        <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
-      )}
       renderAbsoluteProfitChart={({ color, currency, chart }) => (
         <ProgramAbsoluteProfitChart
           color={color}
@@ -76,11 +73,14 @@ const _AccountDetailsStatisticSection: React.FC = () => {
           currency={currency}
         />
       )}
+      renderProfitChart={({ profitChart, chartCurrencies }) => (
+        <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
+      )}
       renderDetailsStatisticsElements={({ period, statisticData }) => (
-        <AccountDetailsStatisticsElements
+        <ProgramDetailsStatisticsElements
           loaderData={statisticDataLoaderData}
           status={status}
-          data={statisticData! as IAccountStatisticData}
+          data={statisticData! as IProgramStatisticData}
           period={period}
         />
       )}
@@ -88,7 +88,7 @@ const _AccountDetailsStatisticSection: React.FC = () => {
   );
 };
 
-const AccountDetailsStatisticSection = React.memo(
-  _AccountDetailsStatisticSection
+const FollowDetailsStatisticSection = React.memo(
+  _ProgramDetailsStatisticSection
 );
-export default AccountDetailsStatisticSection;
+export default FollowDetailsStatisticSection;

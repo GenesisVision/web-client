@@ -1,6 +1,6 @@
 import AssetField from "components/assets/asset-fields/asset-field";
 import GVFormikField from "components/gv-formik-field";
-import ReallocateField from "pages/funds/fund-settings/reallocation/components/reallocate-field";
+import ReallocateField from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";

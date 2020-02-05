@@ -42,10 +42,10 @@ import dashboardReducer, {
 } from "pages/dashboard/reducers/dashboard.reducers";
 import followDetailsReducer, {
   FollowDetailsState
-} from "pages/follows/follow-details/reducers/follow-details.reducer";
+} from "pages/invest/follows/follow-details/reducers/follow-details.reducer";
 import fundDetailsReducer, {
   FundDetailsState
-} from "pages/funds/fund-details/reducers/fund-details.reducer";
+} from "pages/invest/funds/fund-details/reducers/fund-details.reducer";
 import programDetailsReducer, {
   ProgramDetailsState
 } from "pages/invest/programs/program-details/reducers/program-details.reducer";
