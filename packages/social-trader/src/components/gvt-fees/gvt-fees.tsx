@@ -8,7 +8,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 const FeesTradingDiscount = dynamic(() =>
-  import("routes/ssr/landing-page/components/fees-info/fees-trading-discount")
+  import("pages/landing-page/components/fees-info/fees-trading-discount")
 );
 
 const _GVTFees: React.FC<Props> = ({ open, onClose }) => {

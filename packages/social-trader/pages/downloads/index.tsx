@@ -1,4 +1,4 @@
+import { Downloads } from "pages/downloads";
 import React from "react";
-import { Downloads } from "routes/ssr/downloads";
 
 export default Downloads;
