@@ -5,13 +5,13 @@ import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import { CaptchaCheckResult } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
 import {
   PRIVACY_POLICY_ROUTE,
   TERMS_ROUTE
-} from "routes/ssr/landing-page/static-data/nav-links";
+} from "pages/landing-page/static-data/nav-links";
+import * as React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
 import validationSchema, {

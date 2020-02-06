@@ -10,7 +10,7 @@ import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { SignalSubscription } from "gv-api-web";
-import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
+import EditFollowButton from "pages/invest/follows/follow-details/edit-follow-button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";

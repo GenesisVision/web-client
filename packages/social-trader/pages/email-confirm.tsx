@@ -1,6 +1,6 @@
-import EmailConfirmPage from "components/auth/email-confirm/email-confirm.page";
 import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage, NextPageContext } from "next";
+import EmailConfirmPage from "pages/auth/email-confirm/email-confirm.page";
 import React from "react";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 

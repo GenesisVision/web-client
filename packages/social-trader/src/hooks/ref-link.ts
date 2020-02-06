@@ -1,5 +1,5 @@
-import { REFERRAL_CODE } from "components/auth/signup/signup.constants";
 import { useLocation } from "hooks/location";
+import { REFERRAL_CODE } from "pages/auth/signup/signup.constants";
 import * as qs from "qs";
 import { useEffect } from "react";
 import { setCookie } from "utils/cookie";

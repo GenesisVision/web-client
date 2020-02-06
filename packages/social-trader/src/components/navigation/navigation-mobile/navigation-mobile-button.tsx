@@ -1,8 +1,8 @@
-import { logout } from "components/auth/signin/signin.service";
 import { Icon } from "components/icon/icon";
 import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import { logout } from "pages/auth/signin/signin.service";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";

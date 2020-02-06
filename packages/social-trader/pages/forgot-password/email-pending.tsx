@@ -1,6 +1,6 @@
-import LoginFooter from "components/auth/components/login-footer/login-footer";
-import EmailPendingPage from "components/auth/forgot-password/email-pending/email-pending.page";
 import withAuthLayout from "decorators/with-auth-layout";
+import LoginFooter from "pages/auth/components/login-footer/login-footer";
+import EmailPendingPage from "pages/auth/forgot-password/email-pending/email-pending.page";
 import React from "react";
 import { SIGNUP_ROUTE } from "routes/app.routes";
 import { redirect } from "routes/redirect.helper";

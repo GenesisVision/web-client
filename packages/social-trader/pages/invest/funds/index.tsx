@@ -1,9 +1,9 @@
 import { updateGlobalTableViewAction } from "actions/tables-view-actions";
-import FundsPage from "components/funds/funds.page";
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import { fetchFundsAction } from "modules/funds-table/actions/funds-table.actions";
 import { getFiltersFromContext } from "modules/funds-table/services/funds-table.service";
+import FundsPage from "pages/invest/funds/funds.page";
 import React from "react";
 import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
 import authService from "services/auth-service";
