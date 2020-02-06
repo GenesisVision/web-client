@@ -27,10 +27,13 @@ const _SimpleChart: React.FC<Props> = ({
   const minValue = min(data, point => point.value) || 0;
   const maxValue = max(data, point => point.value) || 0;
 
-  const color = getChartColor(minValue, maxValue);
+  const firstPoint = data[0];
+  const lastPoint = data[length - 1];
+
+  const color = getChartColor(firstPoint.value, lastPoint.value);
 
   const timeScale = scaleLinear()
-    .domain([data[0].date, data[length - 1].date])
+    .domain([firstPoint.date, lastPoint.date])
     .range([OFFSET, width - OFFSET]);
 
   const valueScale = scaleLinear()
