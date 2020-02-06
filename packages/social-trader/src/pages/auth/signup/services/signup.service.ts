@@ -8,6 +8,7 @@ import { SIGNUP_ROUTE_PENDING } from "../signup.constants";
 
 export const signUp: SingUpFuncType = (
   {
+    utmSource,
     userName,
     email,
     password,
@@ -20,6 +21,7 @@ export const signUp: SingUpFuncType = (
 ) => (dispatch: any) =>
   dispatch(
     signUpUserAction({
+      utmSource,
       userName,
       email,
       password,
