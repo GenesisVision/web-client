@@ -1,4 +1,22 @@
+import LoginFooter from "components/auth/components/login-footer/login-footer";
+import EmailPendingPage from "components/auth/forgot-password/email-pending/email-pending.page";
+import withAuthLayout from "decorators/with-auth-layout";
 import React from "react";
-import { EmailPending } from "routes/ssr/forgot-password/email-pending";
+import { SIGNUP_ROUTE } from "routes/app.routes";
+import { redirect } from "routes/redirect.helper";
+import { NextPageWithRedux } from "utils/types";
 
-export default EmailPending;
+const Page: NextPageWithRedux<any> = () => {
+  return <EmailPendingPage />;
+};
+
+Page.getInitialProps = async ctx => {
+  const { email } = ctx.reduxStore.getState().emailPending;
+  redirect(ctx, email.length === 0);
+};
+
+export default withAuthLayout({
+  titleKey: "auth.password-restore.title",
+  footerAuthRoute: SIGNUP_ROUTE,
+  Footer: LoginFooter
+})(Page);

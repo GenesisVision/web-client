@@ -1,4 +1,11 @@
+import PasswordPage from "components/profile/password/password.page";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import React from "react";
-import { Password } from "routes/ssr/profile/password";
+import { compose } from "redux";
 
-export default Password;
+const Page: React.FC = () => {
+  return <PasswordPage />;
+};
+
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

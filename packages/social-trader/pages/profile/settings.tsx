@@ -1,4 +1,11 @@
+import SettingsPage from "components/profile/settings/settings.page";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import React from "react";
-import { Settings } from "routes/ssr/profile/settings";
+import { compose } from "redux";
 
-export default Settings;
+const Page: React.FC = () => {
+  return <SettingsPage />;
+};
+
+export default compose(withDefaultLayout, withPrivateRoute)(Page);
