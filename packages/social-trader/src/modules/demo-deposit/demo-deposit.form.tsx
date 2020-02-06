@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { minDemoDepositAmountSelector } from "reducers/platform-reducer";
+import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
@@ -39,10 +40,9 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
   }, [maxAmount]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
       <HookFormAmountField
         setMax={setMax}
-        form={form}
         currency={currency}
         name={DEMO_DEPOSIT_FORM_FIELDS.amount}
       />
@@ -51,7 +51,7 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
           {t("deposit-asset.confirm")}
         </GVButton>
       </DialogButtons>
-    </form>
+    </HookForm>
   );
 };
 
