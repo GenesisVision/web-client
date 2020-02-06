@@ -1,20 +1,19 @@
 import React from "react";
-import { FieldError } from "react-hook-form";
-import { FormContextValues } from "react-hook-form/dist/contextTypes";
+import { FieldError, useFormContext } from "react-hook-form";
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   component: Component,
-  form: {
+  name,
+  ...props
+}) => {
+  const {
     setValue,
     triggerValidation,
     watch,
     formState: { touched },
     errors,
     register
-  },
-  name,
-  ...props
-}) => {
+  } = useFormContext();
   const error = errors[name]
     ? Array.isArray(errors[name])
       ? (errors[name] as FieldError[])[0].message
@@ -38,7 +37,6 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
 };
 
 interface GVHookFormFieldProps {
-  form: FormContextValues<any>;
   component: React.ComponentType<any>;
   name: string;
   [key: string]: any;
