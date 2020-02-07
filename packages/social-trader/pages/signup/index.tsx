@@ -5,12 +5,18 @@ import nextCookie from "next-cookies";
 import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
 import { REFERRAL_CODE } from "pages/auth/signup/signup.constants";
 import SignUpPage from "pages/auth/signup/signup.page";
-import { getUtm } from "pages/landing-page/utils";
+import { getReferrer, getUtm } from "pages/landing-page/utils";
 import React from "react";
 import { LOGIN_ROUTE } from "routes/app.routes";
 
-const Page: NextPage<Props> = ({ referralCode, utmSource }) => {
-  return <SignUpPage referralCode={referralCode} utmSource={utmSource} />;
+const Page: NextPage<Props> = ({ referralCode, utmSource, referrer }) => {
+  return (
+    <SignUpPage
+      referralCode={referralCode}
+      utmSource={utmSource}
+      referrer={referrer}
+    />
+  );
 };
 
 Page.getInitialProps = async (ctx: NextPageContext) => {
@@ -18,8 +24,9 @@ Page.getInitialProps = async (ctx: NextPageContext) => {
     ? nextCookie(ctx)[REFERRAL_CODE]
     : cookie.get(REFERRAL_CODE);
   const utmSource = getUtm();
+  const referrer = getReferrer();
 
-  return { referralCode, utmSource };
+  return { referralCode, utmSource, referrer };
 };
 
 export default withAuthLayout({
@@ -29,6 +36,7 @@ export default withAuthLayout({
 })(Page);
 
 interface Props {
+  referrer?: string;
   referralCode?: string;
   utmSource?: string;
 }
