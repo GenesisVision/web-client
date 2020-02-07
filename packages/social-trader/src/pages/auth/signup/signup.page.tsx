@@ -12,6 +12,7 @@ import { AuthRootState, MiddlewareDispatch } from "utils/types";
 import { signUp } from "./services/signup.service";
 
 const _SignUpPage: React.FC<Props> = ({
+  referrer,
   utmSource,
   referralCode,
   errorMessage,
@@ -28,7 +29,8 @@ const _SignUpPage: React.FC<Props> = ({
           request={service.signUp}
           renderForm={handle => (
             <SignUpForm
-              utmSource={utmSource}
+              referer={referrer}
+              urlParams={utmSource}
               refCode={referralCode}
               onSubmit={handle}
               error={errorMessage}
@@ -67,6 +69,7 @@ interface ServiceThunks extends ActionCreatorsMapObject {
 }
 
 interface OwnProps {
+  referrer?: string;
   referralCode?: string;
   utmSource?: string;
 }
