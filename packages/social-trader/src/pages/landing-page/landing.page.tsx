@@ -23,6 +23,7 @@ import {
   brokersInfo,
   brokersTabs
 } from "pages/landing-page/static-data/brokers";
+import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
 const _LandingPage: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const _LandingPage: React.FC<Props> = ({
   news,
   refLink
 }) => {
+  useUtm();
   return (
     <Layout
       description="Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies."

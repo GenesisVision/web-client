@@ -9,3 +9,12 @@ export const useLocation = () => {
   }, [window]);
   return { location };
 };
+
+export const useParams = () => {
+  const [params, setParams] = useState<string | null>(null);
+  const { location } = useLocation();
+  useEffect(() => {
+    if (location) setParams(location.search.slice(1));
+  }, [location]);
+  return params;
+};
