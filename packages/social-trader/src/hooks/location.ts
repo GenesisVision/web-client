@@ -18,3 +18,11 @@ export const useParams = () => {
   }, [location]);
   return params;
 };
+
+export const useReferrer = () => {
+  const [referrer, setReferrer] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window !== undefined) setReferrer(window.document.referrer);
+  }, [window]);
+  return referrer;
+};
