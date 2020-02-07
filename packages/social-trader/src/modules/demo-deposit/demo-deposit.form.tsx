@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { minDemoDepositAmountSelector } from "reducers/platform-reducer";
+import { convertToCurrency } from "utils/currency-converter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
@@ -21,7 +22,10 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
   useEffect(() => {
     getRate({ from: currency, to: "USDT" });
   }, [currency]);
-  const maxAmount = useSelector(minDemoDepositAmountSelector) / rate;
+  const maxAmount = convertToCurrency(
+    useSelector(minDemoDepositAmountSelector),
+    rate
+  );
   const [t] = useTranslation();
   const form = useForm<IDemoDepositFormValues>({
     validationSchema: DemoDepositValidationSchema(t, maxAmount),
