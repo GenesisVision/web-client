@@ -1,4 +1,5 @@
 import CurrencySourceSelect from "components/currency-source-select/currency-source-select";
+import { CurrencySourceSelect as HookFormCurrencySourceSelect } from "components/currency-source-select/hook-form-currency-source-select";
 import { ISelectChangeEvent } from "components/select/select";
 import { WalletBaseData, WalletData } from "gv-api-web";
 import { TransferItemType } from "modules/transfer/transfer.types";
@@ -33,3 +34,20 @@ interface Props {
 
 const WalletSelect = React.memo(_WalletSelect);
 export default WalletSelect;
+
+const _HookFormWalletSelect: React.FC<Props> = ({
+  items,
+  onChange,
+  label,
+  name,
+  disabled
+}) => (
+  <HookFormCurrencySourceSelect
+    disabled={disabled}
+    label={label}
+    items={items}
+    name={name}
+    onChange={onChange}
+  />
+);
+export const HookFormWalletSelect = React.memo(_HookFormWalletSelect);
