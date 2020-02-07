@@ -1,4 +1,4 @@
-import { DEPOSIT_FORM_FIELDS } from "components/deposit/components/deposit-form";
+import { DEPOSIT_FORM_FIELDS } from "components/deposit/components/deposit.helpers";
 import dotenv from "dotenv";
 import {
   ALERT_CLOSE_CLASS,
