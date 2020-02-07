@@ -1,7 +1,7 @@
-import LoginFooter from "components/auth/components/login-footer/login-footer";
-import PasswordRestorePage from "components/auth/forgot-password/password-restore/password-restore.page";
 import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage, NextPageContext } from "next";
+import LoginFooter from "pages/auth/components/login-footer/login-footer";
+import PasswordRestorePage from "pages/auth/forgot-password/password-restore/password-restore.page";
 import React from "react";
 import { SIGNUP_ROUTE } from "routes/app.routes";
 import { getParamsFromCtx } from "utils/ssr-helpers";

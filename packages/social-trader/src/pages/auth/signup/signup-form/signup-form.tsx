@@ -5,13 +5,13 @@ import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
 import { CaptchaCheckResult } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
 import {
   PRIVACY_POLICY_ROUTE,
   TERMS_ROUTE
-} from "routes/ssr/landing-page/static-data/nav-links";
+} from "pages/landing-page/static-data/nav-links";
+import * as React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
 import validationSchema, {
@@ -116,6 +116,7 @@ interface OwnProps {
   onSubmit(data: ISignUpFormFormValues, setSubmitting: SetSubmittingType): void;
   error: string;
   refCode?: string;
+  utmSource?: string;
 }
 
 export interface ISignUpFormFormValues {
@@ -130,6 +131,7 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
+      [SIGN_UP_FORM_FIELDS.utmSource]: props.utmSource || "",
       [SIGN_UP_FORM_FIELDS.captchaCheckResult]: {
         id: "",
         pow: {

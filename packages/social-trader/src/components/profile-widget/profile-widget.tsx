@@ -1,7 +1,6 @@
 import "./profile-widget.scss";
 
 import classNames from "classnames";
-import { logout } from "components/auth/signin/signin.service";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import GVButton from "components/gv-button";
 import { DetailsIcon } from "components/icon/details-icon";
@@ -27,6 +26,7 @@ import FilterArrowIcon from "components/table/components/filtering/filter-arrow-
 import withLoader from "decorators/with-loader";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
+import { logout } from "pages/auth/signin/signin.service";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";

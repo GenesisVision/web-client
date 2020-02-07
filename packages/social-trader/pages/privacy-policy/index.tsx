@@ -1,4 +1,4 @@
+import { PrivacyPolicy } from "pages/privacy-policy";
 import React from "react";
-import { PrivacyPolicy } from "routes/ssr/privacy-policy";
 
 export default PrivacyPolicy;

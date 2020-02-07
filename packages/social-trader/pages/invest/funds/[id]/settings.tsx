@@ -3,8 +3,8 @@ import withPrivateRoute from "decorators/with-private-route";
 import {
   dispatchFundDescription,
   dispatchFundId
-} from "pages/funds/fund-details/services/fund-details.service";
-import FundSettingsPage from "pages/funds/fund-settings/fund-settings.page";
+} from "pages/invest/funds/fund-details/services/fund-details.service";
+import FundSettingsPage from "pages/invest/funds/fund-settings/fund-settings.page";
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";

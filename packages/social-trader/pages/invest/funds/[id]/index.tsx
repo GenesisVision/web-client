@@ -1,11 +1,11 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
-import { statisticCurrencyAction } from "pages/funds/fund-details/actions/fund-details.actions";
-import FundDetailsPage from "pages/funds/fund-details/fund-details.page";
+import { statisticCurrencyAction } from "pages/invest/funds/fund-details/actions/fund-details.actions";
+import FundDetailsPage from "pages/invest/funds/fund-details/fund-details.page";
 import {
   dispatchFundDescription,
   dispatchFundId
-} from "pages/funds/fund-details/services/fund-details.service";
+} from "pages/invest/funds/fund-details/services/fund-details.service";
 import React from "react";
 import { compose } from "redux";
 import { getCookie } from "utils/cookie";

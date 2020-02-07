@@ -1,4 +1,11 @@
+import ReferralProgramPage from "components/profile/referral-program/referral-program.page";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import React from "react";
-import { ReferralProgram } from "routes/ssr/profile/referral-program";
+import { compose } from "redux";
 
-export default ReferralProgram;
+const Page: React.FC = () => {
+  return <ReferralProgramPage />;
+};
+
+export default compose(withDefaultLayout, withPrivateRoute)(Page);
