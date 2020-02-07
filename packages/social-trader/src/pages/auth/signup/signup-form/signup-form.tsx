@@ -116,6 +116,7 @@ interface OwnProps {
   onSubmit(data: ISignUpFormFormValues, setSubmitting: SetSubmittingType): void;
   error: string;
   refCode?: string;
+  utmSource?: string;
 }
 
 export interface ISignUpFormFormValues {
@@ -130,6 +131,7 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
     mapPropsToValues: props => ({
+      [SIGN_UP_FORM_FIELDS.utmSource]: props.utmSource || "",
       [SIGN_UP_FORM_FIELDS.captchaCheckResult]: {
         id: "",
         pow: {
