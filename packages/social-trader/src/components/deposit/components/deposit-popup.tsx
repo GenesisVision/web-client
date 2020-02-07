@@ -12,7 +12,7 @@ import {
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
@@ -42,8 +42,7 @@ const _DepositPopup: React.FC<Props> = ({
     middleware: [onApply, onClose, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (amount: number, setSubmitting: SetSubmittingType, walletId: string) =>
-      sendRequest({ id, amount, walletId }, setSubmitting),
+    ({ amount, walletId }) => sendRequest({ id, amount, walletId }),
     [id]
   );
 
