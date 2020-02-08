@@ -24,6 +24,8 @@ import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
 
+export const BALANCE_CHART_TEST_ID = "BALANCE_CHART_TEST_ID";
+
 const _BalanceChartElements: React.FC<Props> = ({
   renderBalanceChart,
   period,
@@ -62,7 +64,10 @@ const _BalanceChartElements: React.FC<Props> = ({
         onRemove={removeCurrency}
         onChange={changeCurrency}
       />
-      <div className="details-chart__profit">
+      <div
+        data-test-id={BALANCE_CHART_TEST_ID}
+        className="details-chart__profit"
+      >
         {chart.length &&
           renderBalanceChart({
             balanceChart: chart,

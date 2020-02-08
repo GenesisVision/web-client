@@ -23,6 +23,8 @@ import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
 
+export const ABSOLUTE_PROFIT_CHART_TEST_ID = "ABSOLUTE_PROFIT_CHART_TEST_ID";
+
 const _AbsoluteProfitChartElements: React.FC<Props> = ({
   renderChart,
   period,
@@ -66,7 +68,10 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
         onRemove={removeCurrency}
         onChange={changeCurrency}
       />
-      <div className="details-chart__profit">
+      <div
+        data-test-id={ABSOLUTE_PROFIT_CHART_TEST_ID}
+        className="details-chart__profit"
+      >
         {chart.length &&
           renderChart({
             chart: chart,
