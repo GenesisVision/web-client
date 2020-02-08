@@ -5,6 +5,8 @@ import { AssetInfo } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
 
+export const config = { amp: "hybrid" };
+
 const Page: NextPage<Props> = ({ data }) => {
   return <ActivePage data={data} />;
 };
