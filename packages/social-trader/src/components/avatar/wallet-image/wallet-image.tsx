@@ -1,11 +1,17 @@
 import WalletCurrency from "media/wallet-currency.svg";
 import * as React from "react";
 
-import ImageBase, { IImageProps } from "../image-base";
+import ImageBase, { IAmpImgProps, IImageProps } from "../image-base";
 
-const _WalletImage: React.FC<Props> = ({ url, alt, imageClassName }) => {
+const _WalletImage: React.FC<Props> = ({
+  url,
+  alt,
+  imageClassName,
+  ampProps
+}) => {
   return (
     <ImageBase
+      ampProps={ampProps}
       src={url}
       alt={alt}
       defaultImage={WalletCurrency}
@@ -18,5 +24,6 @@ const WalletImage = React.memo(_WalletImage);
 export default WalletImage;
 
 interface Props extends IImageProps {
+  ampProps?: IAmpImgProps;
   imageClassName?: string;
 }

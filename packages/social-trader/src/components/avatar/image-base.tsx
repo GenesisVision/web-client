@@ -3,6 +3,7 @@ import useUrl, { ImageQualityType } from "hooks/url.hook";
 import * as React from "react";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
+  ampProps,
   quality,
   title,
   color,
@@ -17,6 +18,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   const fullUrl = getUrl(src, quality);
   return (
     <ImageBaseElement
+      ampProps={ampProps}
       defaultImageClassName={defaultImageClassName}
       defaultImage={defaultImage}
       color={color}
@@ -38,7 +40,13 @@ export interface IImageProps {
   className?: string;
 }
 
+export interface IAmpImgProps {
+  width?: number;
+  height?: number;
+}
+
 export interface IImageBaseProps {
+  ampProps?: IAmpImgProps;
   quality?: ImageQualityType;
   title?: string;
   color?: string;
