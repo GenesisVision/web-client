@@ -31,6 +31,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
       <div className="chart-period__period">
         {ChartPeriodTypeValues.map(period => (
           <GVButton
+            data-test-id={t(`chart-period.${ChartPeriodType[period]}-short`)}
             noPadding
             key={period}
             className={classNames("chart-period__period-item", {
