@@ -2,11 +2,25 @@ import "./social-links-block.scss";
 
 import SocialLinkImage from "components/avatar/social-link/social-link";
 import { SocialLinkViewModel } from "gv-api-web";
+import { useAmp } from "next/amp";
+import Head from "next/head";
 import * as React from "react";
 
 const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
+  const isAmp = useAmp();
   return (
     <div className="social-links-block">
+      {isAmp && (
+        <Head>
+          <style amp-custom={true}>
+            {`
+            .social-links-block__social-link {
+              margin-right: 10px;
+            }
+          `}
+          </style>
+        </Head>
+      )}
       {socialLinks.map(socialLink => {
         const value = "value" in socialLink ? socialLink.value : 0;
         return (

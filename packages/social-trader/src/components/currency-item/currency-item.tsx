@@ -3,12 +3,16 @@ import "./currency-item.scss";
 import classNames from "classnames";
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
+import { IAmpImgProps } from "components/avatar/image-base";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
 import useIsOpen from "hooks/is-open.hook";
+import { useAmp } from "next/amp";
+import Head from "next/head";
 import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
 
 const _CurrencyItem: React.FC<Props> = ({
+  ampProps,
   url,
   symbol,
   big,
@@ -19,6 +23,7 @@ const _CurrencyItem: React.FC<Props> = ({
   className,
   clickable = true
 }) => {
+  const isAmp = useAmp();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const openPopup = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -37,7 +42,7 @@ const _CurrencyItem: React.FC<Props> = ({
             "currency-item__icon--small": small
           })}
         >
-          <WalletImage url={logo} alt={name || symbol} />
+          <WalletImage ampProps={ampProps} url={logo} alt={name || symbol} />
         </div>
       )}
       {name && (
@@ -58,27 +63,46 @@ const _CurrencyItem: React.FC<Props> = ({
   );
   const active = symbol || name || "";
   return (
-    (clickable && (
-      <>
-        <a
-          title={active}
-          href={getActiveUrl(url || active)}
-          onClick={openPopup}
-        >
-          {renderItemContent()}
-        </a>
-        <ActivePopup
-          open={isOpenPopup}
-          onClose={setClosePopup}
-          active={active}
-        />
-      </>
-    )) ||
-    renderItemContent()
+    <>
+      {isAmp && (
+        <Head>
+          <style amp-custom={true}>
+            {`
+            .currency-item {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            .currency-item__icon {
+              padding-right: 10px;
+            }
+          `}
+          </style>
+        </Head>
+      )}
+      {(clickable && (
+        <>
+          <a
+            title={active}
+            href={getActiveUrl(url || active)}
+            onClick={openPopup}
+          >
+            {renderItemContent()}
+          </a>
+          <ActivePopup
+            open={isOpenPopup}
+            onClose={setClosePopup}
+            active={active}
+          />
+        </>
+      )) ||
+        renderItemContent()}
+    </>
   );
 };
 
 interface Props {
+  ampProps?: IAmpImgProps;
   url?: string;
   symbol?: string | CurrencyEnum;
   big?: boolean;
