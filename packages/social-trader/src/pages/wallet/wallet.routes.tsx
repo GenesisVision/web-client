@@ -1,3 +1,4 @@
+// Remove it file after fix https://github.com/faceyspacey/extract-css-chunks-webpack-plugin/issues/222
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 
