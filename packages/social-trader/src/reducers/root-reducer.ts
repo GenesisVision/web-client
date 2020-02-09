@@ -1,3 +1,4 @@
+// import { connectRouter } from "connected-react-router";
 import {
   globalSearchReducer,
   GlobalSearchState
@@ -76,6 +77,7 @@ export const sharedRootReducers = {
   fundDetails: fundDetailsReducer,
   followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
+  // router: connectRouter(history),
   platformData: platformReducer,
   followsData: followsReducer,
   programsData: programsReducer,
@@ -93,7 +95,9 @@ export const sharedRootReducers = {
   followNotifications: followNotificationsReducer,
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
+  // manager: managerReducer,
   wallet: walletReducer,
+  // copyTradingAccounts: CopyTradingAccountsReducer, TODO
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 };
@@ -120,8 +124,10 @@ export type RootState = Readonly<{
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;
   authData: AuthState;
+  // // router: RouterState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
+  // copyTradingAccounts: CopyTradingAccountsState;
   ui: IUiState;
 }>;
