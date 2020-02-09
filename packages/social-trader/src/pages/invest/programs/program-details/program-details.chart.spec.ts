@@ -129,7 +129,7 @@ describe("Program details - chart", () => {
       const value = await getStatisticsItemValue(
         testT("details-page.chart.percent")
       );
-      expect(value).toBe(`${profitPercentCharts?.statistic.profitPercent} %`);
+      expect(value).toBe(`${profitPercentCharts!.statistic.profitPercent} %`);
     });
     describe("Periods", () => {
       const getPeriodSelector = (period: TChartPeriod): string =>
