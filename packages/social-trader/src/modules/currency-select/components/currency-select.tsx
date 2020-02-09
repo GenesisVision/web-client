@@ -13,6 +13,7 @@ const _CurrencySelect: React.FC<Props> = ({
   currencyValues
 }) => (
   <Select
+    data-test-id={value}
     name="currency"
     className={classNames("currency-select", className)}
     value={value}
