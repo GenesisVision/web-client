@@ -127,7 +127,7 @@ const convertToArray = (value: any): any[] =>
   Array.isArray(value) ? value : [value];
 
 const isServer = () => {
-  return global.hasOwnProperty("window");
+  return global.hasOwnProperty("window") || typeof window === "undefined";
 };
 
 const getRandomInteger = (min: number = 0, max: number = 100): number =>
