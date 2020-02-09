@@ -5,6 +5,7 @@ import {
 import { ABSOLUTE_PROFIT_CHART_TEST_ID } from "components/details/details-statistic-section/details-chart-section/absolute-profit-chart-section/absolute-profit-chart-elements";
 import { BALANCE_CHART_TEST_ID } from "components/details/details-statistic-section/details-chart-section/balance-chart-section/balance-chart-elements";
 import { PROFIT_CHART_TEST_ID } from "components/details/details-statistic-section/details-chart-section/profit-chart-section/profit-chart-elements";
+import { getSelectItemSelector } from "components/select/select-item";
 import {
   AbsoluteProfitChart,
   ProgramBalanceChart,
@@ -38,17 +39,17 @@ describe("Program details - chart", () => {
     "details-page.chart.tabs.absolute-profit"
   );
   const balanceChartTabSelector = testT("details-page.chart.tabs.balance");
+  const chartOptions = {
+    dateFrom: subtractDate(new Date(), 1, "month")
+  };
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     browser = await getBrowser();
     page = await browser.newPage();
     const { openPage, waitForLoadBlurLoader } = useTestHelpers(page);
     await openPage(url);
     await waitForLoadBlurLoader(".details-statistics");
     details = await programsApi.getProgramDetails(programName);
-    const chartOptions = {
-      dateFrom: subtractDate(new Date(), 1, "month")
-    };
     profitPercentCharts = await programsApi.getProgramProfitPercentCharts(
       details.id,
       { ...chartOptions, currencies: [statisticCurrency] }
@@ -235,9 +236,47 @@ describe("Program details - chart", () => {
         );
       });
     });
+    describe("Currencies", () => {
+      const getCurrencySelectSelector = (dataId: string) =>
+        `${dataId}[name="currency"]`;
+      it("should has request currency", async () => {
+        const { getTextContent } = useTestHelpers(page);
+        const value = await getTextContent(getCurrencySelectSelector("button"));
+        expect(value).toBe(statisticCurrency);
+      });
+      it("should change currency", async () => {
+        const newCurrency = "ETH";
+        const {
+          getDataIdElementSelector,
+          waitForSelector,
+          getTextContent,
+          safeClick,
+          getStatisticsItemValue
+        } = useTestHelpers(page);
+        await safeClick(getCurrencySelectSelector("button"));
+        await waitForSelector(".select__options");
+        await safeClick(
+          getDataIdElementSelector(getSelectItemSelector(newCurrency), "button")
+        );
+        const currencyButtonText = await getTextContent(
+          getCurrencySelectSelector("button")
+        );
+        expect(currencyButtonText).toBe(newCurrency);
+        profitPercentCharts = await programsApi.getProgramProfitPercentCharts(
+          details!.id,
+          { ...chartOptions, currencies: [newCurrency] }
+        );
+        const percentValue = await getStatisticsItemValue(
+          testT("details-page.chart.percent")
+        );
+        expect(percentValue).toBe(
+          `${separateThousand(profitPercentCharts.statistic.profitPercent)} %`
+        );
+      });
+    });
   });
 
-  afterAll(() => {
+  afterEach(() => {
     browser.close();
   });
 });
