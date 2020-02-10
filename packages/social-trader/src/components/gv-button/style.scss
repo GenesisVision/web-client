@@ -1,5 +1,6 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
 
 @mixin box-shadow($color) {
   box-shadow: 0 0.2em 0.5em 0 $color;
@@ -13,12 +14,14 @@
   border: 0;
   outline: none;
   padding: $padding-xxsmall $padding-small;
-  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition-property: background-color, box-shadow, color, opacity;
+  @include transition(background-color, box-shadow, color, opacity);
   color: $text-accent-color;
   background-color: transparent;
   [stroke] {
     transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  &--pending {
+    animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   &--bold {
@@ -200,5 +203,14 @@
     &.gv-btn--secondary {
       border-color: $secondary-color;
     }
+  }
+}
+
+@keyframes pending {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
