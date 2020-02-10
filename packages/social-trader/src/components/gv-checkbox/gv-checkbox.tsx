@@ -5,6 +5,7 @@ import * as React from "react";
 import { useCallback, useRef } from "react";
 
 const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
+  setFieldValue,
   touched,
   error,
   name,
@@ -17,62 +18,49 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
 }) => {
   const checkbox = useRef<HTMLInputElement>(null);
 
-  const handleClick = useCallback(
+  const handleBlockClick = useCallback(
     (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+      e.stopPropagation();
+      if (setFieldValue) setFieldValue(name, !value, true);
       if (checkbox.current !== null) {
-        e.stopPropagation();
-        checkbox.current.click();
+        checkbox.current.click(); // TODO remove it
       }
     },
-    [checkbox.current]
-  );
-
-  const handleInputClick = useCallback(
-    (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-      e.stopPropagation();
-    },
-    []
+    [checkbox.current, setFieldValue, name, value]
   );
 
   return (
-    <span className="gv-checkbox-wrapper">
-      <span
+    <div className="gv-checkbox-wrapper" onClick={handleBlockClick}>
+      <div
         className={classNames("gv-checkbox", className, {
           "gv-checkbox--checked": value,
           "gv-checkbox--primary": color === "primary",
           "gv-checkbox--secondary": color === "secondary",
           "gv-checkbox--disabled": disabled
         })}
-        onClick={handleClick}
       >
-        <span className="gv-checkbox__input-wrapper">
-          <span className={"gv-checkbox__handler"}>
-            {value ? "✔" : "&nbsp;"}
-          </span>
+        <div className="gv-checkbox__input-wrapper">
+          <div className="gv-checkbox__handler">{value ? "✔" : "&nbsp;"}</div>
           <input
             ref={checkbox}
             type="checkbox"
             name={name}
             className={classNames("gv-checkbox__input")}
             checked={value}
-            onClick={handleInputClick}
             disabled={disabled}
             {...other}
           />
-        </span>
-        <span className={"gv-checkbox__track"} />
-      </span>
-      {label && (
-        <span className={"gv-checkbox__label"} onClick={handleClick}>
-          {label}
-        </span>
-      )}
-      {error && <span className={"gv-checkbox__error"}>{error}</span>}
-    </span>
+        </div>
+        <div className="gv-checkbox__track" />
+      </div>
+      {label && <div className="gv-checkbox__label">{label}</div>}
+      {error && <div className="gv-checkbox__error">{error}</div>}
+    </div>
   );
 };
 
 interface IGVCheckboxProps {
+  setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   name: string;
   className?: string;
   color: string;
