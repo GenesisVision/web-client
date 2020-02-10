@@ -18,6 +18,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({
+  currentDeposit,
   errorMessage,
   currency,
   onSubmit
@@ -26,10 +27,9 @@ const _DemoDepositForm: React.FC<Props> = ({
   useEffect(() => {
     getRate({ from: currency, to: "USDT" });
   }, [currency]);
-  const maxAmount = convertToCurrency(
-    useSelector(minDemoDepositAmountSelector),
-    rate
-  );
+  const maxAmount =
+    convertToCurrency(useSelector(minDemoDepositAmountSelector), rate) -
+    currentDeposit;
   const [t] = useTranslation();
   const form = useForm<IDemoDepositFormValues>({
     validationSchema: DemoDepositValidationSchema(t, maxAmount),
@@ -70,6 +70,7 @@ const _DemoDepositForm: React.FC<Props> = ({
 };
 
 interface Props {
+  currentDeposit: number;
   errorMessage?: string;
   currency: CurrencyEnum;
   onSubmit: (values: IDemoDepositFormValues) => DemoDepositResponse;

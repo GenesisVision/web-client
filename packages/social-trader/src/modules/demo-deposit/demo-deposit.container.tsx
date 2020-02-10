@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
+  currentDeposit,
   onApply,
   id,
   currency
@@ -40,6 +41,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
       />
       <DialogBottom>
         <DemoDepositForm
+          currentDeposit={currentDeposit}
           errorMessage={errorMessage}
           currency={currency}
           onSubmit={handleSubmit}
@@ -50,6 +52,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
 };
 
 export interface IDemoDepositContainerProps {
+  currentDeposit: number;
   onApply?: VoidFunction;
   currency: CurrencyEnum;
   id: string;
