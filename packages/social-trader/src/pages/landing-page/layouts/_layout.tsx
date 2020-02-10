@@ -1,3 +1,4 @@
+import { TitleContext } from "components/link/link.helper";
 import { useRefLink } from "hooks/ref-link";
 import Head from "next/head";
 import CookieMessage from "pages/landing-page/components/cookie-message/cookie-message";
@@ -29,9 +30,11 @@ const _Layout: React.FC<Props> = ({ description, title, children }) => {
           description || "Genesis Vision - Social Trading Platform"
         )}
       </Head>
-      <LPHeader />
-      {children}
-      <LPFooter />
+      <TitleContext.Provider value={title}>
+        <LPHeader />
+        {children}
+        <LPFooter />
+      </TitleContext.Provider>
       <CookieMessage />
       <div id="modal-root" />
     </div>
