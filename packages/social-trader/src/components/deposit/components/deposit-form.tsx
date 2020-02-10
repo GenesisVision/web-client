@@ -91,6 +91,11 @@ const _DepositForm: React.FC<Props> = ({
     setValue(DEPOSIT_FORM_FIELDS.amount, max, true);
   }, [availableToInvestInAsset, wallet]);
 
+  const setMinAmount = useCallback((): void => {
+    const min = convertToCurrency(minDeposit, rate);
+    setValue(DEPOSIT_FORM_FIELDS.amount, min, true);
+  }, [minDeposit, rate]);
+
   const onWalletChange = useCallback(
     ({ id }: WalletBaseData) => {
       reset({
@@ -117,6 +122,7 @@ const _DepositForm: React.FC<Props> = ({
           </StatisticItem>
         </DialogField>
         <InputAmountField
+          setMin={setMinAmount}
           name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}
           currency={wallet.currency}
