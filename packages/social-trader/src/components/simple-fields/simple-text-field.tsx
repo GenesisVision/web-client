@@ -28,7 +28,6 @@ const _SimpleTextField: React.FC<ISimpleTextFieldProps> = props => {
     onBlur,
     ...otherProps
   } = props;
-  console.log(error);
   const input = useRef(null);
 
   const [focused, setFocused, setBlur] = useIsOpen();
@@ -50,9 +49,9 @@ const _SimpleTextField: React.FC<ISimpleTextFieldProps> = props => {
             adornment ||
             (input.current &&
               // @ts-ignore
-              (input.current.state.value !== undefined &&
-                // @ts-ignore
-                input.current.state.value !== ""))
+              input.current.state.value !== undefined &&
+              // @ts-ignore
+              input.current.state.value !== "")
         })}
       >
         {label}
