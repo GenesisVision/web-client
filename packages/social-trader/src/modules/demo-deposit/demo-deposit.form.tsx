@@ -17,7 +17,11 @@ import { convertToCurrency } from "utils/currency-converter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
-const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
+const _DemoDepositForm: React.FC<Props> = ({
+  errorMessage,
+  currency,
+  onSubmit
+}) => {
   const { rate, getRate } = useGetRate();
   useEffect(() => {
     getRate({ from: currency, to: "USDT" });
@@ -34,12 +38,14 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
   const {
     setValue,
     handleSubmit,
-    formState: { isSubmitting, isValid }
+    formState: { isSubmitting, isValid, isSubmitted }
   } = form;
 
   const setMax = useCallback(() => {
     setValue(DEMO_DEPOSIT_FORM_FIELDS.amount, String(maxAmount), true);
   }, [maxAmount]);
+
+  const isSuccessful = isSubmitted && !errorMessage;
 
   return (
     <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
@@ -49,7 +55,13 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
         name={DEMO_DEPOSIT_FORM_FIELDS.amount}
       />
       <DialogButtons>
-        <GVButton wide type="submit" disabled={isSubmitting || !isValid}>
+        <GVButton
+          isSuccessful={isSuccessful}
+          isPending={isSubmitting}
+          wide
+          type="submit"
+          disabled={isSubmitting || !isValid || isSuccessful}
+        >
           {t("deposit-asset.confirm")}
         </GVButton>
       </DialogButtons>
@@ -58,6 +70,7 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
 };
 
 interface Props {
+  errorMessage?: string;
   currency: CurrencyEnum;
   onSubmit: (values: IDemoDepositFormValues) => DemoDepositResponse;
 }
