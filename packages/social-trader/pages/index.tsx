@@ -6,8 +6,8 @@ import {
   PlatformNews
 } from "gv-api-web";
 import { NextPage, NextPageContext } from "next";
+import { LandingPage } from "pages/landing-page/landing.page";
 import React from "react";
-import { LandingPage } from "routes/ssr/landing-page/landing.page";
 import platformApi from "services/api-client/platform-api";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 

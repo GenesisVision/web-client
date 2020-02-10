@@ -1,4 +1,11 @@
+import KYCPage from "components/profile/kyc/kyc.page";
+import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
 import React from "react";
-import { Verify } from "routes/ssr/profile/verify";
+import { compose } from "redux";
 
-export default Verify;
+const Page: React.FC = () => {
+  return <KYCPage />;
+};
+
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

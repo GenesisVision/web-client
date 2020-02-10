@@ -7,8 +7,8 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { AccountSubscriptionsDataType } from "pages/accounts/account-details/services/account-details.types";
-import EditFollowButton from "pages/follows/follow-details/edit-follow-button";
-import UnFollowButton from "pages/follows/follow-details/unfollow-button";
+import EditFollowButton from "pages/invest/follows/follow-details/edit-follow-button";
+import UnFollowButton from "pages/invest/follows/follow-details/unfollow-button";
 import React from "react";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";

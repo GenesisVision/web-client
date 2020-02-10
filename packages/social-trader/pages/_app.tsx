@@ -1,5 +1,31 @@
+import "shared/styles/index.scss";
+
+import withHistoryProvider from "decorators/history-provider/with-history-provider";
+import withReduxStore from "decorators/with-redux-store";
+import { appWithTranslation } from "i18n";
+import App from "next/app";
 import React from "react";
-import { _AppCreator } from "routes/ssr/_app";
+import { Provider } from "react-redux";
+import { compose, Store } from "redux";
 import { initializeStore } from "store";
 
-export default _AppCreator(initializeStore);
+class CustomApp extends App<Props> {
+  render() {
+    const { Component, pageProps, reduxStore } = this.props;
+    return (
+      <Provider store={reduxStore}>
+        <Component {...pageProps} />
+      </Provider>
+    );
+  }
+}
+
+export default compose(
+  withHistoryProvider,
+  appWithTranslation,
+  withReduxStore(initializeStore)
+)(CustomApp);
+
+interface Props {
+  reduxStore: Store;
+}

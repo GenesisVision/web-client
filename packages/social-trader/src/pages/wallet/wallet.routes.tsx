@@ -1,14 +1,24 @@
+// Remove it file after fix https://github.com/faceyspacey/extract-css-chunks-webpack-plugin/issues/222
 import * as React from "react";
-import { composeUrl } from "utils/compose-url";
+import { Route, Switch } from "react-router-dom";
+
+import WalletTotalContainer from "./components/wallet-total-container";
 
 export const WALLET_TOTAL_PAGE_NAME = "wallet";
 export const WALLET_TOTAL_PAGE_ROUTE = `/${WALLET_TOTAL_PAGE_NAME}`;
-export const CURRENCY_SLUG = ":currency";
-export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/${CURRENCY_SLUG}`;
 
-export const WALLET_CURRENCY_FOLDER_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/[id]`;
+interface DispatchProps {
+  fetchWallets(): void;
+}
 
-export const composeWalletCurrencyUrl = composeUrl(
-  WALLET_CURRENCY_PAGE_ROUTE,
-  CURRENCY_SLUG
-);
+const _WalletRoutes: React.FC<DispatchProps> = () => {
+  return (
+    <Switch>
+      <Route
+        exact
+        path={WALLET_TOTAL_PAGE_ROUTE}
+        component={WalletTotalContainer}
+      />
+    </Switch>
+  );
+};

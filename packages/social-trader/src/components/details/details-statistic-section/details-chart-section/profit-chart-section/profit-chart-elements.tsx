@@ -24,6 +24,8 @@ import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
 
+export const PROFIT_CHART_TEST_ID = "PROFIT_CHART_TEST_ID";
+
 const _ProfitChartElements: React.FC<Props> = ({
   renderProfitChart,
   period,
@@ -66,7 +68,10 @@ const _ProfitChartElements: React.FC<Props> = ({
         onRemove={removeCurrency}
         onChange={changeCurrency}
       />
-      <div className="details-chart__profit">
+      <div
+        data-test-id={PROFIT_CHART_TEST_ID}
+        className="details-chart__profit"
+      >
         {charts.length &&
           renderProfitChart({
             assets:

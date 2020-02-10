@@ -8,7 +8,7 @@ import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
@@ -51,7 +51,7 @@ const InvestmentProgramControls = dynamic(() =>
   import("./program-controls/investment-program-controls")
 );
 const FollowControls = dynamic(() =>
-  import("pages/follows/follow-details/follow-controls/follow-controls")
+  import("pages/invest/follows/follow-details/follow-controls/follow-controls")
 );
 
 const _ProgramDetailsContainer: React.FC<Props> = ({

@@ -1,6 +1,3 @@
-import passwordRestoreReducer from "components/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "components/auth/signin/reducers/login.reducers";
-import signUpReducer from "components/auth/signup/reducers/signup.reducers";
 import {
   globalSearchReducer,
   GlobalSearchState
@@ -36,15 +33,18 @@ import programsReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
+import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
+import loginReducer from "pages/auth/signin/reducers/login.reducers";
+import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
 import followDetailsReducer, {
   FollowDetailsState
-} from "pages/follows/follow-details/reducers/follow-details.reducer";
+} from "pages/invest/follows/follow-details/reducers/follow-details.reducer";
 import fundDetailsReducer, {
   FundDetailsState
-} from "pages/funds/fund-details/reducers/fund-details.reducer";
+} from "pages/invest/funds/fund-details/reducers/fund-details.reducer";
 import programDetailsReducer, {
   ProgramDetailsState
 } from "pages/invest/programs/program-details/reducers/program-details.reducer";

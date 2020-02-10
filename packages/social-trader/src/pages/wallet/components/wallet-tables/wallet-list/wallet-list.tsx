@@ -12,7 +12,7 @@ import {
   composeWalletCurrencyUrl,
   WALLET_CURRENCY_FOLDER_ROUTE,
   WALLET_TOTAL_PAGE_NAME
-} from "pages/wallet/wallet.routes";
+} from "pages/wallet/wallet.paths";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
