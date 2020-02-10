@@ -9,6 +9,7 @@ import { NextPage, NextPageContext } from "next";
 import React from "react";
 import { LandingPage } from "routes/ssr/landing-page/landing.page";
 import platformApi from "services/api-client/platform-api";
+import { addRequestAnimationFrame } from "utils/helpers";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
 const IndexPage: NextPage<Props> = props => {
@@ -18,6 +19,7 @@ const IndexPage: NextPage<Props> = props => {
 IndexPage.getInitialProps = async (ctx: NextPageContext) => {
   const { ref } = getParamsFromCtx(ctx);
   try {
+    addRequestAnimationFrame();
     const {
       events,
       follows,

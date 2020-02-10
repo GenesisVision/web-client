@@ -4,7 +4,7 @@ export const useLocalStorage = () => {
   const [isWindow, setIsWindow] = useState<boolean>(false);
   const [request, setRequest] = useState<Function | undefined>(undefined);
   useEffect(() => {
-    if (typeof window !== "undefined") setIsWindow(true);
+    if (typeof window !== undefined) setIsWindow(true);
   }, [window]);
   useEffect(() => {
     if (request && isWindow) {

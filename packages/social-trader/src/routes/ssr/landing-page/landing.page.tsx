@@ -24,7 +24,6 @@ import {
   brokersInfo,
   brokersTabs
 } from "routes/ssr/landing-page/static-data/brokers";
-import { isServer } from "utils/helpers";
 
 const _LandingPage: React.FC<Props> = ({
   programs,
@@ -34,7 +33,6 @@ const _LandingPage: React.FC<Props> = ({
   news,
   refLink
 }) => {
-  const isWindow = !isServer();
   return (
     <Layout
       description="Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies."
@@ -59,8 +57,8 @@ const _LandingPage: React.FC<Props> = ({
           </div>
         </section>
         <section id="info" className="home__section home__section--bg-white">
-          <div className="home__container" key="InfoContainer">
-            {isWindow && <InfoContainer />}
+          <div className="home__container">
+            <InfoContainer />
           </div>
         </section>
         <section className="home__section home__section--bg-gray">
@@ -68,20 +66,18 @@ const _LandingPage: React.FC<Props> = ({
             <DownloadContainer />
           </div>
         </section>
-        {isWindow && <AdvantagesContainer />}
+        <AdvantagesContainer />
         <section className="home__section home__section--bg-gray home__section--horizontal-padding">
-          <div className="home__container" key="Brokers and Exhanges">
-            {isWindow && (
-              <BrokersContainer
-                brokersInfo={brokersInfo}
-                brokersTabs={brokersTabs}
-                title="Brokers and Exhanges"
-              />
-            )}
+          <div className="home__container">
+            <BrokersContainer
+              brokersInfo={brokersInfo}
+              brokersTabs={brokersTabs}
+              title="Brokers and Exhanges"
+            />
           </div>
         </section>
         <section className="home__section home__section--last-screen">
-          <div className="home__container" key="SocialContainer">
+          <div className="home__container">
             <SocialContainer />
           </div>
         </section>

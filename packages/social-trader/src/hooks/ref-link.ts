@@ -11,5 +11,5 @@ export const useRefLink = () => {
       const { ref } = qs.parse(location.search.slice(1));
       if (ref) setCookie(REFERRAL_CODE, ref);
     }
-  }, [location]);
+  }, [window, location]);
 };

@@ -9,6 +9,7 @@ import { NextPage } from "next";
 import React, { Component } from "react";
 import { Dispatch } from "redux";
 import { getCookie } from "utils/cookie";
+import { addRequestAnimationFrame } from "utils/helpers";
 import { NextPageWithReduxContext } from "utils/types";
 
 // LogRocket.init("skegn6/genesis-vision");
@@ -38,6 +39,11 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
+      }
+      try {
+        addRequestAnimationFrame();
+      } catch (e) {
+        console.log(e);
       }
 
       return {
