@@ -1,6 +1,6 @@
-import SignUpFooter from "components/auth/components/signup-footer/signup-footer";
-import EmailPending from "components/auth/signup/signup-email-pending/signup-email-pending.page";
 import withAuthLayout from "decorators/with-auth-layout";
+import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
+import EmailPending from "pages/auth/signup/signup-email-pending/signup-email-pending.page";
 import React from "react";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { redirect } from "routes/redirect.helper";

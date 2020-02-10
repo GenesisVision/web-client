@@ -1,8 +1,8 @@
-import { IFundsFacetTableProps } from "components/funds/funds-facet/components/funds-facet-table";
 import NotFoundPage from "components/not-found/not-found";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import { PlatformInfo } from "gv-api-web";
+import { IFundsFacetTableProps } from "pages/invest/funds/funds-facet/components/funds-facet-table";
 import { IProgramsFacetTableProps } from "pages/invest/programs/programs-facet/components/programs-facet-table";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";

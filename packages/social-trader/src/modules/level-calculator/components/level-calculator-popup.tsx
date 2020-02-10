@@ -1,5 +1,6 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
+import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import Crashable from "decorators/crashable";
@@ -14,7 +15,6 @@ import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";

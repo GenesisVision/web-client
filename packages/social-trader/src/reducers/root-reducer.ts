@@ -1,7 +1,3 @@
-// import { connectRouter } from "connected-react-router";
-import passwordRestoreReducer from "components/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "components/auth/signin/reducers/login.reducers";
-import signUpReducer from "components/auth/signup/reducers/signup.reducers";
 import {
   globalSearchReducer,
   GlobalSearchState
@@ -37,15 +33,18 @@ import programsReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
+import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
+import loginReducer from "pages/auth/signin/reducers/login.reducers";
+import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
 import followDetailsReducer, {
   FollowDetailsState
-} from "pages/follows/follow-details/reducers/follow-details.reducer";
+} from "pages/invest/follows/follow-details/reducers/follow-details.reducer";
 import fundDetailsReducer, {
   FundDetailsState
-} from "pages/funds/fund-details/reducers/fund-details.reducer";
+} from "pages/invest/funds/fund-details/reducers/fund-details.reducer";
 import programDetailsReducer, {
   ProgramDetailsState
 } from "pages/invest/programs/program-details/reducers/program-details.reducer";
@@ -77,7 +76,6 @@ export const sharedRootReducers = {
   fundDetails: fundDetailsReducer,
   followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
-  // router: connectRouter(history),
   platformData: platformReducer,
   followsData: followsReducer,
   programsData: programsReducer,
@@ -95,9 +93,7 @@ export const sharedRootReducers = {
   followNotifications: followNotificationsReducer,
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
-  // manager: managerReducer,
   wallet: walletReducer,
-  // copyTradingAccounts: CopyTradingAccountsReducer, TODO
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 };
@@ -124,10 +120,8 @@ export type RootState = Readonly<{
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;
   authData: AuthState;
-  // // router: RouterState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
-  // copyTradingAccounts: CopyTradingAccountsState;
   ui: IUiState;
 }>;

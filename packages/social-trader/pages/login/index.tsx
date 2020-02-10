@@ -1,8 +1,8 @@
-import LoginFooter from "components/auth/components/login-footer/login-footer";
-import LoginPage from "components/auth/signin/login/login.page";
 import useHistoryContext from "decorators/history-provider/use-history-context";
 import withAuthLayout from "decorators/with-auth-layout";
 import { NextPage } from "next";
+import LoginFooter from "pages/auth/components/login-footer/login-footer";
+import LoginPage from "pages/auth/signin/login/login.page";
 import React from "react";
 import { SIGNUP_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";

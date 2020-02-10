@@ -62,8 +62,12 @@ export const useTestHelpers = (page: Page) => {
   const waitForLoadBlurLoader = async (selector: string) => {
     await waitForSelector(`${selector} > .blur-container--loaded`);
   };
+  const getDataIdElementSelector = (
+    selector: string,
+    element: string = "div"
+  ): string => `${element}[${DATA_TEST_ATTR}="${selector}"]`;
   const getStatisticsItemValue = async (label: string, loadable?: boolean) => {
-    const selector = `div[${DATA_TEST_ATTR}="${testT(label)}"]`;
+    const selector = getDataIdElementSelector(testT(label));
     if (loadable) await waitForLoadBlurLoader(selector);
     const value = (await getTextContent(selector)) || "";
     return value.trim();
@@ -155,6 +159,7 @@ export const useTestHelpers = (page: Page) => {
   };
 
   return {
+    getDataIdElementSelector,
     waitForSelector,
     getAuth,
     waitForLoadBlurLoader,
