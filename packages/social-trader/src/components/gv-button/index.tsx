@@ -11,6 +11,7 @@ export enum GV_BTN_SIZE {
 }
 
 interface GVButtonProps {
+  isSuccessful?: boolean;
   isPending?: boolean;
   testId?: string;
   bold?: boolean;
@@ -30,6 +31,7 @@ interface GVButtonProps {
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
+  isSuccessful,
   isPending,
   testId,
   bold,
@@ -48,6 +50,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classNames("gv-btn", className, {
+    "gv-btn--successful": isSuccessful,
     "gv-btn--pending": isPending,
     "gv-btn--bold": bold,
     "gv-btn--wide": wide,
