@@ -12,7 +12,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
       setInit(false);
       if (setFieldValue) setFieldValue(name, floatValue, true);
     },
-    [name]
+    [name, setFieldValue]
   );
 
   const setEmpty = emptyInit && init;
