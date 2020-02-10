@@ -148,6 +148,7 @@ const _DepositForm: React.FC<Props> = ({
         <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            isPending={isSubmitting}
             wide
             type="submit"
             className="invest-form__submit-button"
