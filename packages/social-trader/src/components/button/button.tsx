@@ -1,4 +1,4 @@
-import "./button.css";
+import "./button.scss";
 
 import classNames from "classnames";
 import Link from "components/link/link";

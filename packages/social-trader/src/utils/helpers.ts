@@ -22,11 +22,6 @@ export const safeGetElemFromArray = <T>(
   return item;
 };
 
-export const addRequestAnimationFrame = () => {
-  if (typeof window !== undefined && !window.requestAnimationFrame)
-    window.requestAnimationFrame = () => -1;
-};
-
 export const getPercentageValue = (
   value: number,
   totalValue: number
