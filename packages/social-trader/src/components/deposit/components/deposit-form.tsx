@@ -117,7 +117,6 @@ const _DepositForm: React.FC<Props> = ({
           </StatisticItem>
         </DialogField>
         <InputAmountField
-          wide
           name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}
           currency={wallet.currency}
