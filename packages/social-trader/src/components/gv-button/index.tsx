@@ -36,9 +36,9 @@ const GVButton: React.FC<GVButtonProps> = ({
   id,
   className,
   title,
-  variant,
-  color,
-  type,
+  variant = "contained",
+  color = "primary",
+  type = "button",
   disabled,
   onClick,
   children,
@@ -74,12 +74,6 @@ const GVButton: React.FC<GVButtonProps> = ({
       {children}
     </button>
   );
-};
-
-GVButton.defaultProps = {
-  variant: "contained",
-  color: "primary",
-  type: "button"
 };
 
 export default GVButton;
