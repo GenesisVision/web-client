@@ -6,15 +6,15 @@ import { useToLink } from "components/link/link.helper";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import {
+  composeWalletCurrencyUrl,
+  WALLET_CURRENCY_FOLDER_ROUTE
+} from "pages/wallet/wallet.paths";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 import useHashTab from "../../services/hashTab.hook";
-import {
-  composeWalletCurrencyUrl,
-  WALLET_CURRENCY_FOLDER_ROUTE
-} from "../../wallet.routes";
 import DepositsWithdrawalsRow from "./wallet-deposits-withdrawals/deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_DEPOSITS_WITHDRAWALS_COLUMNS } from "./wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";

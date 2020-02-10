@@ -9,7 +9,7 @@ import ImgPeople2 from "pages/landing-page/images/slider/people-2.svg";
 import ImgPeople3 from "pages/landing-page/images/slider/people-3.svg";
 import ImgPeopleBg from "pages/landing-page/images/slider/people-bg.svg";
 import { REFERRAL_PROGRAM_ROUTE } from "pages/landing-page/static-data/nav-links";
-import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 
 const CREATE_ACCOUNT_BROKER_ROUTE =
   "create-account?broker=Genesis%20Markets%20Demo";

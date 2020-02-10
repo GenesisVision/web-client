@@ -53,6 +53,7 @@ const GVTab: React.FC<GVTabProps> = ({
       className={classNames(className, "gv-tab", {
         "gv-tab--active": selected
       })}
+      data-test-id={label}
       onClick={handleChange}
     >
       {label}

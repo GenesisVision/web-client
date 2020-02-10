@@ -3,14 +3,17 @@ import GVButton from "components/gv-button";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
 
+export const getSelectItemSelector = (value: string) => `select-item-${value}`;
+
 const SelectItem: React.FC<Props> = React.memo(
-  ({ isSelected, className, children, name, onClick }) => {
+  ({ isSelected, className, children, name, onClick, value }) => {
     const handleClick = useCallback(
       (event: SelectItemClick) => onClick({ event, isSelected }),
       [onClick, isSelected]
     );
     return (
       <GVButton
+        testId={getSelectItemSelector(value)}
         variant="text"
         color="secondary"
         noPadding
