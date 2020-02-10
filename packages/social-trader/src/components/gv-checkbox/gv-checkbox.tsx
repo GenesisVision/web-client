@@ -40,7 +40,9 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
         })}
       >
         <div className="gv-checkbox__input-wrapper">
-          <div className="gv-checkbox__handler">{value ? "✔" : "&nbsp;"}</div>
+          <div>
+            {value ? "✔" : <div className="gv-checkbox__handler">&nbsp;</div>}
+          </div>
           <input
             ref={checkbox}
             type="checkbox"
