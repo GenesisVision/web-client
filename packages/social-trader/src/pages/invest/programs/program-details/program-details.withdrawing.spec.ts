@@ -1,5 +1,5 @@
-import { WITHDRAW_FORM_FIELDS } from "modules/program-withdraw/program-withdraw-amount-form";
 import { WITHDRAW_FORM_SUBMIT } from "modules/program-withdraw/program-withdraw-confirm-form";
+import { WITHDRAW_FORM_FIELDS } from "modules/program-withdraw/program-withdraw.helpers";
 import {
   activeAssetStatusSelector,
   cancelButtonSelector,
