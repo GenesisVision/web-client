@@ -32,15 +32,13 @@ const _DemoDepositForm: React.FC<Props> = ({ currency, onSubmit }) => {
     mode: "onChange"
   });
   const {
-    triggerValidation,
     setValue,
     handleSubmit,
     formState: { isSubmitting, isValid }
   } = form;
 
   const setMax = useCallback(() => {
-    setValue(DEMO_DEPOSIT_FORM_FIELDS.amount, String(maxAmount));
-    triggerValidation(DEMO_DEPOSIT_FORM_FIELDS.amount);
+    setValue(DEMO_DEPOSIT_FORM_FIELDS.amount, String(maxAmount), true);
   }, [maxAmount]);
 
   return (
