@@ -91,13 +91,16 @@ const _DepositForm: React.FC<Props> = ({
     setValue(DEPOSIT_FORM_FIELDS.amount, max, true);
   }, [availableToInvestInAsset, wallet]);
 
-  const onWalletChange = ({ id }: WalletBaseData) => {
-    reset({
-      [DEPOSIT_FORM_FIELDS.walletId]: id,
-      [DEPOSIT_FORM_FIELDS.amount]: ""
-    });
-    setWallet(safeGetElemFromArray(wallets, wallet => id === wallet.id));
-  };
+  const onWalletChange = useCallback(
+    ({ id }: WalletBaseData) => {
+      reset({
+        [DEPOSIT_FORM_FIELDS.walletId]: id,
+        [DEPOSIT_FORM_FIELDS.amount]: ""
+      });
+      setWallet(safeGetElemFromArray(wallets, wallet => id === wallet.id));
+    },
+    [wallets]
+  );
 
   return (
     <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
