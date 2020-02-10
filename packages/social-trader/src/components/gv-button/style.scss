@@ -13,6 +13,7 @@ $decreased-margin: $change-size-value;
 }
 
 .gv-btn {
+  will-change: padding, margin, opacity, background-color;
   position: relative;
   display: inline-flex;
   align-items: center;
