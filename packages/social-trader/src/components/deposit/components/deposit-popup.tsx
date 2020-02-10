@@ -2,7 +2,7 @@ import "./deposit.scss";
 
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
-import { ASSET } from "constants/constants";
+import { ASSET, SHOW_SUCCESS_TIME } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -34,12 +34,17 @@ const _DepositPopup: React.FC<Props> = ({
 }) => {
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
+  const onCloseMiddleware = () => {
+    setTimeout(() => {
+      onClose();
+    }, SHOW_SUCCESS_TIME);
+  };
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
-    middleware: [onApply, onClose, updateWalletInfoMiddleware]
+    middleware: [onApply, onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
     ({ amount, walletId }) => sendRequest({ id, amount, walletId }),

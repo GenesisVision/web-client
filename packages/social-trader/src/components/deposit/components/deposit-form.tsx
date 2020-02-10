@@ -71,9 +71,8 @@ const _DepositForm: React.FC<Props> = ({
     watch,
     setValue,
     handleSubmit,
-    formState: { isSubmitting, isValid }
+    formState: { isSubmitting, isValid, isSubmitted }
   } = form;
-
   const { amount = 0 } = watch();
 
   useEffect(() => {
@@ -106,6 +105,8 @@ const _DepositForm: React.FC<Props> = ({
     },
     [wallets]
   );
+
+  const isSuccessful = isSubmitted && !errorMessage;
 
   return (
     <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
@@ -148,11 +149,12 @@ const _DepositForm: React.FC<Props> = ({
         <DialogError error={errorMessage} />
         <DialogButtons>
           <GVButton
+            isSuccessful={isSuccessful}
             isPending={isSubmitting}
             wide
             type="submit"
             className="invest-form__submit-button"
-            disabled={isSubmitting || !isValid}
+            disabled={isSubmitting || !isValid || isSuccessful}
           >
             {t("deposit-asset.confirm")}
           </GVButton>
