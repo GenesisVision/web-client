@@ -1,4 +1,13 @@
 {
+  "input-amount-field": {
+    "label": "Amount"
+  },
+  "demo-deposit": {
+    "validations": {
+      "max-amount": "Must be less than {{maxAmount}}",
+      "required": "Amount is required"
+    }
+  },
   "facets": {
     "most_reliable": "most reliable",
     "rating": "rating",
@@ -115,6 +124,8 @@
     "rejected": "Rejected"
   },
   "buttons": {
+    "max": "Max",
+    "min": "Min",
     "create-signal": "Create signal account",
     "create-account": "Create account",
     "create-attach-external-account": "Attach external account",

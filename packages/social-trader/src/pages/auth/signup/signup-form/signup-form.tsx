@@ -33,7 +33,6 @@ const _SignUpForm: React.FC<InjectedFormikProps<
       name={SIGN_UP_FORM_FIELDS.userName}
       label={t("auth.signup.username-field-text")}
       autoComplete="off"
-      className="signup-form__username"
       autoFocus
       component={GVTextField}
     />

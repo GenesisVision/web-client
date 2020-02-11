@@ -1,48 +1,53 @@
-import { WithTranslation } from "react-i18next";
-import { convertToCurrency } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
-import { lazy, number, object } from "yup";
-
 import {
   DEPOSIT_FORM_FIELDS,
-  IDepositFormValues,
-  IDepositOwnProps
-} from "./deposit-form";
+  IDepositFormValues
+} from "components/deposit/components/deposit.helpers";
+import { WalletBaseData } from "gv-api-web";
+import { TFunction } from "i18next";
+import { convertToCurrency } from "utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
+import { lazy, number, object } from "yup";
 
 export const depositValidationSchema = ({
-  availableToInvest: availableToInvestProp,
+  rate,
+  wallets,
+  availableToInvestInAsset,
   minDeposit,
   t,
   currency
-}: WithTranslation & IDepositOwnProps) =>
+}: {
+  rate: number;
+  wallets: WalletBaseData[];
+  t: TFunction;
+  minDeposit: number;
+  availableToInvestInAsset: number;
+  currency: CurrencyEnum;
+}) =>
   lazy<IDepositFormValues>(values => {
-    const rate = values[DEPOSIT_FORM_FIELDS.rate];
-    const walletCurrency = values[DEPOSIT_FORM_FIELDS.walletCurrency];
-    const availableToInvestInAsset = convertToCurrency(
-      availableToInvestProp || Number.MAX_SAFE_INTEGER,
-      rate
-    );
-    const availableInWallet =
-      values[DEPOSIT_FORM_FIELDS.availableInWallet] || 0;
+    const walletId = values[DEPOSIT_FORM_FIELDS.walletId];
+    const wallet = safeGetElemFromArray(wallets, ({ id }) => id === walletId);
+    const walletCurrency = wallet.currency;
+    const availableInWallet = wallet.available;
     const availableToInvest = Math.min(
       availableInWallet,
-      availableToInvestInAsset
+      convertToCurrency(availableToInvestInAsset, rate)
+    );
+
+    const walletMin = formatCurrencyValue(
+      convertToCurrency(minDeposit, rate),
+      walletCurrency
     );
     return object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
-          +formatCurrencyValue(
-            convertToCurrency(minDeposit, rate),
-            walletCurrency
-          ),
+          +walletMin,
           t("deposit-asset.validation.amount-min-value", {
             min: formatCurrencyValue(minDeposit, currency),
             currency,
-            walletMin: formatCurrencyValue(
-              convertToCurrency(minDeposit, rate),
-              walletCurrency
-            ),
+            walletMin,
             walletCurrency
           })
         )

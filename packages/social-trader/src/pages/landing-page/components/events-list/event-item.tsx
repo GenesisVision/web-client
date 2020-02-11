@@ -1,6 +1,7 @@
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef } from "react";
@@ -118,6 +119,7 @@ const _EventItem: React.FC<Props> = ({
   maxHeight,
   updateMaxHeight
 }) => {
+  const { contextTitle } = useToLink();
   const itemRef = useRef(null);
   const linkUser = userUrl
     ? {
@@ -126,7 +128,7 @@ const _EventItem: React.FC<Props> = ({
       }
     : undefined;
   const linkAsset = assetUrl
-    ? getAssetLink(assetUrl, assetType, title)
+    ? getAssetLink(assetUrl, assetType, contextTitle)
     : undefined;
   const currentIndex = getCurrentIndex(
     index,

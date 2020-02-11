@@ -5,6 +5,7 @@ import { DialogListItem } from "components/dialog/dialog-list-item";
 import GVButton from "components/gv-button";
 import { InjectedFormikProps, withFormik } from "formik";
 import useApiRequest from "hooks/api-request.hook";
+import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +14,6 @@ import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { SetSubmittingType } from "utils/types";
 
-import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
 export const WITHDRAW_FORM_SUBMIT = "programWithdrawFormSubmit";
@@ -77,7 +77,7 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         <DialogListItem label={t("withdraw-program.withdrawing")}>
           {amount && !withdrawAll
             ? `${formatCurrencyValue(
-                amount,
+                +amount,
                 programCurrency
               )} ${programCurrency}`
             : t("withdraw-program.all")}
