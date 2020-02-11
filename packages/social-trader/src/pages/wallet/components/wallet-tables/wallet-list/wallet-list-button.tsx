@@ -17,9 +17,8 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
   const [t] = useTranslation();
   const [location, setLocation] = useState();
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location)
-      setLocation(window.location.href);
-  }, [window]);
+    if (window.location) setLocation(window.location.href);
+  }, []);
   return (
     <div className="wallet-list__buttons">
       {depositUrlCoindirect && (
