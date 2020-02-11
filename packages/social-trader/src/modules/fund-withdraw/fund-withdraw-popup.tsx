@@ -1,4 +1,5 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
+import { DialogError } from "components/dialog/dialog-error";
 import { FUND_CURRENCY } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -22,6 +23,7 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
+  errorMessage,
   onApply,
   onClose,
   data: { wallets, withdrawInfo },
@@ -86,6 +88,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
             onBackClick={goToEnterAmountStep}
           />
         )}
+        {errorMessage && <DialogError error={errorMessage} />}
       </DialogBottom>
     </>
   );
@@ -96,6 +99,7 @@ export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
 
 export interface IFundWithdrawPopupProps {
+  errorMessage?: string;
   onApply?: VoidFunction;
   onClose: (param?: any) => void;
   id: string;

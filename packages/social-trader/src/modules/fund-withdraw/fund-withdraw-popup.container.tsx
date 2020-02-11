@@ -1,4 +1,3 @@
-import { DialogError } from "components/dialog/dialog-error";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 
@@ -18,16 +17,17 @@ const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
     request: () => getFundWithdrawInfo({ id }),
     fetchOnMount: true
   });
+  if (!data) return null;
   return (
     <>
       <FundWithdrawPopup
+        errorMessage={errorMessage}
         onApply={onApply}
         onClose={onClose}
         id={id}
         loaderData={FundWithdrawLoaderData}
         data={data!}
       />
-      <DialogError error={errorMessage} />
     </>
   );
 };
