@@ -11,8 +11,6 @@ import { Dispatch } from "redux";
 import { getCookie } from "utils/cookie";
 import { NextPageWithReduxContext } from "utils/types";
 
-// LogRocket.init("skegn6/genesis-vision");
-
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
     info: PlatformInfo;
