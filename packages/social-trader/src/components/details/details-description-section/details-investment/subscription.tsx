@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";

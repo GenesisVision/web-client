@@ -57,8 +57,6 @@ $decreased-margin: $change-size-value;
 
   &--pending {
     animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    padding: $decreased-padding;
-    margin: $decreased-margin;
     filter: grayscale(50%);
   }
 
@@ -189,8 +187,6 @@ $decreased-margin: $change-size-value;
     }
 
     &:not(:disabled):active {
-      padding: $decreased-padding;
-      margin: $decreased-margin;
       &.gv-btn--danger {
         background-color: darken($negative-color, 10%);
       }
@@ -208,7 +204,7 @@ $decreased-margin: $change-size-value;
       }
     }
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not(.gv-btn--successful) {
       &.gv-btn--danger {
         background-color: darken($negative-color, 10%);
       }

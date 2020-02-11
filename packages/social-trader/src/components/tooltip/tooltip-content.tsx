@@ -1,5 +1,3 @@
-import "./tooltip.scss";
-
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import React from "react";
 

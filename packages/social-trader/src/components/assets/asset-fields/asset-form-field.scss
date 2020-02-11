@@ -1,0 +1,38 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.asset-form-field {
+  &__caption-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include width($padding-medium);
+  }
+  &__caption {
+    @include font-size($font-size-small);
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__hint {
+    @include font-size($font-size-small);
+    color: $label-color;
+    letter-spacing: 0.4px;
+    width: 100%;
+
+    &.hint {
+      cursor: pointer;
+    }
+
+    &-tooltip-content {
+      width: 248px;
+      @include font-size($font-size-small);
+      line-height: 1.6;
+      color: $text-light-color;
+    }
+  }
+}

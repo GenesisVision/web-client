@@ -1,5 +1,3 @@
-import "./google-auth.scss";
-
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";

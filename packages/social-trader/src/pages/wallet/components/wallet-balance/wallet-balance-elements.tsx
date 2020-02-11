@@ -1,5 +1,3 @@
-import "./wallet-balance.scss";
-
 import GVColors from "components/gv-styles/gv-colors";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";

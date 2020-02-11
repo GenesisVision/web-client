@@ -1,5 +1,3 @@
-import "../transaction-details.scss";
-
 import classNames from "classnames";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import Crashable from "decorators/crashable";

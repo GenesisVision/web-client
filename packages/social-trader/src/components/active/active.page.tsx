@@ -1,5 +1,3 @@
-import "./active.scss";
-
 import Page from "components/page/page";
 import { AssetInfo } from "gv-api-web";
 import React from "react";

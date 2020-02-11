@@ -1,4 +1,4 @@
-import "./asset-field.scss";
+import "./asset-form-field.scss";
 
 import classNames from "classnames";
 import GVFormikField from "components/gv-formik-field";

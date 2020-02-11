@@ -1,5 +1,3 @@
-import "./fields.scss";
-
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
 import GVNumberField from "components/gv-number-field/gv-number-field";

@@ -1,5 +1,3 @@
-import "./filter.scss";
-
 import React from "react";
 
 export const FilterTitle: React.FC = ({ children }) => {

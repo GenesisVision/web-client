@@ -23,25 +23,3 @@
 .text-area-field {
   max-width: 500px;
 }
-
-.form-text-field {
-  &__container {
-    width: 100%;
-  }
-  &__text {
-    @include adaptive-padding(bottom, $padding-xsmall);
-    color: rgba($text-light-color, 0.5);
-    line-height: 24px;
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 500px;
-    }
-
-    &--padding-top {
-      @include adaptive-padding(top, $padding-xsmall);
-    }
-    &--color-accent {
-      color: $primary-color;
-    }
-  }
-}

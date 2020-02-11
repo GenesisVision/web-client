@@ -1,5 +1,3 @@
-import "./dashboard-statistic.scss";
-
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";

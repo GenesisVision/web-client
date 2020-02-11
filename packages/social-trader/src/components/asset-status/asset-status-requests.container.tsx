@@ -1,5 +1,3 @@
-import "./asset-status.scss";
-
 import AssetStatusRequests from "components/asset-status/asset-status-requests";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import { AssetInvestmentRequest } from "gv-api-web";

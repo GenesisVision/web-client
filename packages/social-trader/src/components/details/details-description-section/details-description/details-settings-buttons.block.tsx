@@ -1,5 +1,3 @@
-import "./details-description.scss";
-
 import { ToType } from "components/link/link";
 import { ASSET } from "constants/constants";
 import * as React from "react";

@@ -1,5 +1,3 @@
-import "./2fa.scss";
-
 import { fetchTwoFactorAction } from "actions/2fa-actions";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,5 +1,3 @@
-import "./notification-settings.scss";
-
 import * as React from "react";
 import { useSelector } from "react-redux";
 

@@ -1,5 +1,3 @@
-import "./fund-asset-tooltip.scss";
-
 import Tooltip from "components/tooltip/tooltip";
 import * as React from "react";
 import { CurrencyEnum, PlatformAssetFull } from "utils/types";

@@ -1,13 +1,13 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SHOW_SUCCESS_TIME } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
 import { formatValue } from "utils/formatter";
-import { SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 import { withdrawFund } from "./services/fund-withdraw.services";
@@ -22,23 +22,23 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   exitFee,
   onBackClick
 }) => {
+  const onCloseMiddleware = () => {
+    setTimeout(() => onClose(), SHOW_SUCCESS_TIME);
+  };
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [onClose, onApply],
+    middleware: [onCloseMiddleware, onApply],
     request: withdrawFund,
     successMessage: "withdraw-fund.success-alert-message"
   });
   const handleSubmit = useCallback(
-    (setSubmitting: SetSubmittingType) =>
-      sendRequest(
-        {
-          id,
-          value: {
-            percent,
-            currency
-          }
-        },
-        setSubmitting
-      ),
+    () =>
+      sendRequest({
+        id,
+        value: {
+          percent,
+          currency
+        }
+      }),
     [percent, currency, id]
   );
   return (
@@ -67,19 +67,23 @@ interface IFundWithdrawConfirmProps {
 }
 export const FundWithdrawConfirm = React.memo(_FundWithdrawConfirm);
 
-const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
+const _FundWithdrawConfirmForm: React.FC<Props> = ({
+  onSubmit,
   availableToWithdraw,
   percent,
   currency,
   exitFee,
-  isSubmitting,
   errorMessage,
-  handleSubmit,
   onBackClick
 }) => {
   const [t] = useTranslation();
+  const form = useForm();
+  const {
+    handleSubmit,
+    formState: { isSubmitted, isSubmitting }
+  } = form;
   return (
-    <form id="withdraw-submit-form" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
       <div className="dialog-list__item">
         {t("withdraw-fund.withdrawing")}
         <span className="dialog-list__value">{formatValue(percent, 2)} %</span>
@@ -101,6 +105,8 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
           {t("buttons.back")}
         </GVButton>
         <GVButton
+          isSuccessful={isSubmitted && !errorMessage}
+          isPending={isSubmitting}
           type="submit"
           id="fundWithdrawFormSubmit"
           disabled={isSubmitting}
@@ -108,28 +114,18 @@ const _FundWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
           {t("buttons.confirm")}
         </GVButton>
       </DialogButtons>
-    </form>
+    </HookForm>
   );
 };
 
-interface OwnProps {
+interface Props {
   availableToWithdraw: number;
   percent: number;
   currency: string;
   exitFee: number;
   errorMessage?: string;
-  onSubmit: (setSubmitting: SetSubmittingType) => void;
+  onSubmit: () => void;
   onBackClick: () => void;
 }
 
-interface Props extends OwnProps {}
-
-const FundWithdrawConfirmForm = compose<React.ComponentType<OwnProps>>(
-  withFormik<Props, {}>({
-    displayName: "withdraw-form",
-    handleSubmit: (_, { props, setSubmitting }) => {
-      props.onSubmit(setSubmitting);
-    }
-  }),
-  React.memo
-)(_FundWithdrawConfirmForm);
+const FundWithdrawConfirmForm = React.memo(_FundWithdrawConfirmForm);

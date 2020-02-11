@@ -1,142 +1,141 @@
-import { BlurContainer } from "components/blur-container/blur-container";
+import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
-import InputAmountField from "components/input-amount-field/input-amount-field";
-import { ISelectChangeEvent } from "components/select/select";
-import WalletSelect from "components/wallet-select/wallet-select";
-import { InjectedFormikProps, withFormik } from "formik";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { WalletBaseData } from "gv-api-web";
-import React, { ComponentType, useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
-import { compose } from "redux";
-import { calculatePercentage } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
+import {
+  fundWithdrawAmountFormValidationSchema,
+  MIN_FUND_WITHDRAW_VALUE
+} from "modules/fund-withdraw/fund-withdraw-amount-form-validation-schema";
+import {
+  FUND_WITHDRAW_FIELDS,
+  FundWithDrawFormValues
+} from "modules/fund-withdraw/fund-withdraw.types";
+import React, { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { NumberFormatValues } from "react-number-format";
+import { useSelector } from "react-redux";
+import { fundMinWithdrawAmountSelector } from "reducers/platform-reducer";
 import { safeGetElemFromArray } from "utils/helpers";
+import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import { number, object } from "yup";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 
-const _FundWithdrawAmountForm: React.FC<InjectedFormikProps<
-  Props,
-  FundWithDrawFormValues
->> = ({
+const getMinPercent = (value: number, total: number) =>
+  Math.max((value / total) * 100, MIN_FUND_WITHDRAW_VALUE);
+
+const _FundWithdrawAmountForm: React.FC<Props> = ({
+  onSubmit,
   isPending,
   currency,
   setCurrency,
   wallets,
-  setFieldValue,
-  t,
   availableToWithdraw,
-  exitFee,
-  handleSubmit,
-  values
+  exitFee
 }) => {
+  const [t] = useTranslation();
+
+  const [minPercent, setMinPercent] = useState(0);
+  const fundMinWithdrawAmount = useSelector(fundMinWithdrawAmountSelector);
+  const fundMinWithdrawAmountInCur = safeGetElemFromArray(
+    fundMinWithdrawAmount,
+    amount => amount.currency === currency
+  ).amount;
+
+  const form = useForm<FundWithDrawFormValues>({
+    defaultValues: {
+      [FUND_WITHDRAW_FIELDS.walletId]: wallets[0].id,
+      [FUND_WITHDRAW_FIELDS.percent]: minPercent
+    },
+    validationSchema: fundWithdrawAmountFormValidationSchema(t, minPercent),
+    mode: "onChange"
+  });
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { isValid }
+  } = form;
+  const { percent } = watch();
+
+  useEffect(() => {
+    const min = getMinPercent(fundMinWithdrawAmountInCur, availableToWithdraw);
+    setMinPercent(min);
+    setValue(FUND_WITHDRAW_FIELDS.percent, min, true);
+  }, [availableToWithdraw, fundMinWithdrawAmountInCur]);
+
   const isAllow = useCallback(
     (values: NumberFormatValues) =>
       !values.floatValue ||
-      (values.floatValue >= 0.01 &&
+      (values.floatValue >= MIN_FUND_WITHDRAW_VALUE &&
         values.floatValue <= 100 &&
         values.value !== "."),
     []
   );
 
-  const setMaxAmount = useCallback(
-    () => setFieldValue(FUND_WITHDRAW_FIELDS.percent, "100"),
-    [setFieldValue]
+  const setMax = useCallback(
+    () => setValue(FUND_WITHDRAW_FIELDS.percent, 100, true),
+    [setValue]
   );
 
-  const amountToWithdrawCcy = calculatePercentage(
-    availableToWithdraw,
-    values[FUND_WITHDRAW_FIELDS.percent] || 0
+  const setMin = useCallback(
+    () => setValue(FUND_WITHDRAW_FIELDS.percent, minPercent, true),
+    [setValue, minPercent]
   );
 
   const changeWalletCallback = useCallback(
-    (_: ISelectChangeEvent, target: JSX.Element) => {
-      setFieldValue(FUND_WITHDRAW_FIELDS.walletId, target.props.value);
-      setCurrency(
-        safeGetElemFromArray(wallets, ({ id }) => id === target.props.value)
-          .currency
-      );
+    ({ id }: WalletBaseData) => {
+      setValue(FUND_WITHDRAW_FIELDS.walletId, id, true);
+      const currency = safeGetElemFromArray(wallets, wallet => id === wallet.id)
+        .currency;
+      setCurrency(currency);
     },
-    [wallets]
+    [wallets, setValue, setCurrency]
   );
 
   return (
-    <form id="withdraw-form" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
       <DialogField>
         <WalletSelect
           name={FUND_WITHDRAW_FIELDS.walletId}
-          label={t("withdraw-fund.wallet")}
-          items={wallets}
+          wallets={wallets}
           onChange={changeWalletCallback}
         />
       </DialogField>
       <InputAmountField
-        wide
         name={FUND_WITHDRAW_FIELDS.percent}
         label={t("withdraw-fund.amount-to-withdraw")}
         placeholder="%"
         currency="%"
         isAllow={isAllow}
-        setMax={setMaxAmount}
+        setMax={setMax}
+        setMin={setMin}
       />
-      <BlurContainer blur={isPending}>
-        <NumberFormat
-          value={formatCurrencyValue(amountToWithdrawCcy, currency)}
-          prefix="≈ "
-          suffix={` ${currency}`}
-          displayType="text"
-        />
-      </BlurContainer>
       <FundWithdrawResult
         isPending={isPending}
         availableToWithdraw={availableToWithdraw}
         currency={currency}
-        percent={values[FUND_WITHDRAW_FIELDS.percent] || 0}
+        percent={percent || 0}
         exitFee={exitFee}
       />
       <DialogButtons>
-        <GVButton wide type="submit" id="fundWithdrawAmountFormSubmit">
+        <GVButton
+          disabled={!isValid}
+          wide
+          type="submit"
+          id="fundWithdrawAmountFormSubmit"
+        >
           {t("buttons.next")}
         </GVButton>
       </DialogButtons>
-    </form>
+    </HookForm>
   );
 };
 
-const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
-  translate(),
-  withFormik<Props, FundWithDrawFormValues>({
-    enableReinitialize: true,
-    displayName: "withdraw-form",
-    mapPropsToValues: ({ wallets }) => ({
-      [FUND_WITHDRAW_FIELDS.walletId]: wallets[0].id,
-      [FUND_WITHDRAW_FIELDS.percent]: 0.01
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FUND_WITHDRAW_FIELDS.percent]: number()
-          .required(t("withdraw-fund.validation.required"))
-          .min(0.01, t("withdraw-fund.validation.min-value"))
-      }),
-    handleSubmit: (values, { props }) => {
-      if (!values[FUND_WITHDRAW_FIELDS.percent]) return;
-      props.onSubmit(values);
-    }
-  }),
-  React.memo
-)(_FundWithdrawAmountForm);
-export default FundWithdrawAmountForm;
-
-export enum FUND_WITHDRAW_FIELDS {
-  walletId = "walletId",
-  percent = "percent"
-}
-
-interface OwnProps {
+interface Props {
   isPending: boolean;
   currency: CurrencyEnum;
   setCurrency: (id: CurrencyEnum) => void;
@@ -146,9 +145,5 @@ interface OwnProps {
   availableToWithdraw: number;
 }
 
-interface Props extends WithTranslation, OwnProps {}
-
-export interface FundWithDrawFormValues {
-  [FUND_WITHDRAW_FIELDS.percent]: number;
-  [FUND_WITHDRAW_FIELDS.walletId]: string;
-}
+const FundWithdrawAmountForm = React.memo(_FundWithdrawAmountForm);
+export default FundWithdrawAmountForm;

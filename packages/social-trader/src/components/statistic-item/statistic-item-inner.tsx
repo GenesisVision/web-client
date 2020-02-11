@@ -1,5 +1,3 @@
-import "./statistic-item.scss";
-
 import classNames from "classnames";
 import { BlurContainer } from "components/blur-container/blur-container";
 import withLoader from "decorators/with-loader";

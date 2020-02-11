@@ -1,5 +1,3 @@
-import "./fields.scss";
-
 import TextAreaField from "components/assets/fields/text-area-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";

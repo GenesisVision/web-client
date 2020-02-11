@@ -1,0 +1,15 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.asset-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+  position: relative;
+  justify-content: space-between;
+
+  .select--disabled .select__value {
+    color: $text-light-color;
+  }
+}

@@ -1,5 +1,3 @@
-import "./pager.scss";
-
 import classNames from "classnames";
 import PagerLinkButton from "components/pager/pager-link-button";
 import * as React from "react";

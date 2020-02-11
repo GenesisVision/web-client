@@ -1,5 +1,3 @@
-import "./convert-fields.scss";
-
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { AmountRowCell } from "gv-api-web";
 import ConvertField from "pages/wallet/components/wallet-tables/wallet-transactions/convert-field";

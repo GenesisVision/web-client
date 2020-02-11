@@ -1,5 +1,3 @@
-import "./fees-info.scss";
-
 import classNames from "classnames";
 import React from "react";
 

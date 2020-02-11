@@ -1,5 +1,3 @@
-import "./details-description.scss";
-
 import Link, { ToType } from "components/link/link";
 import * as React from "react";
 
