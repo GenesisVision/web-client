@@ -6,9 +6,9 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
   const { setFieldValue, name, emptyInit, value } = props;
   const [init, setInit] = useState(true);
   const handleOnChange = useCallback(
-    ({ floatValue }: NumberFormatValues) => {
+    ({ value }: NumberFormatValues) => {
       setInit(false);
-      if (setFieldValue) setFieldValue(name, floatValue, true);
+      if (setFieldValue) setFieldValue(name, value, true);
     },
     [name, setFieldValue]
   );

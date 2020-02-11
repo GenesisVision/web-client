@@ -79,6 +79,15 @@ export const fundMinDepositAmountSelector = apiFieldSelector<
   []
 );
 
+export const fundMinWithdrawAmountSelector = apiFieldSelector<
+  PlatformInfo,
+  AmountWithCurrency[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.fundInfo.minWithdrawAmountFromFund),
+  []
+);
+
 export const programMinDepositAmountsSelector = apiFieldSelector<
   PlatformInfo,
   ProgramMinInvestAmount[]
