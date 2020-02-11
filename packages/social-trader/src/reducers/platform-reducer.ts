@@ -25,6 +25,18 @@ export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
 );
 
+export const minDemoDepositAmountSelector = apiFieldSelector<
+  PlatformInfo,
+  number
+>(
+  platformDataSelector,
+  fieldSelector(
+    state =>
+      state.assetInfo.tradingAccountInfo.maxAmounts[0].transferDemo[0].amount
+  ),
+  Number.MIN_SAFE_INTEGER
+);
+
 export const createFollowInfoSelector = apiFieldSelector<
   PlatformInfo,
   FollowCreateAssetPlatformInfo

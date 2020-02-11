@@ -182,6 +182,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
         )}
         {asset.actions.canMakeDemoDeposit && (
           <DemoDepositButton
+            currentDeposit={asset.accountInfo.balance}
             onApply={updateItems}
             currency={asset.accountInfo.currency}
             id={asset.id}

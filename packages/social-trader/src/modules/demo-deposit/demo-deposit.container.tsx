@@ -1,5 +1,6 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import { SHOW_SUCCESS_TIME } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import DemoDepositForm from "modules/demo-deposit/demo-deposit.form";
 import {
@@ -11,21 +12,24 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
+  currentDeposit,
   onApply,
   id,
   currency
 }) => {
   const [t] = useTranslation();
-  const { sendRequest } = useApiRequest<DemoDepositResponse>({
+  const onApplyMiddleware = () => {
+    setTimeout(() => {
+      onApply && onApply();
+    }, SHOW_SUCCESS_TIME);
+  };
+  const { sendRequest, errorMessage } = useApiRequest<DemoDepositResponse>({
     request: depositToDemo,
     successMessage: t("transfer.confirmation.deposit-success"),
-    middleware: [() => onApply && onApply()]
+    middleware: [onApplyMiddleware]
   });
-  const handleSubmit = useCallback((values, setSubmitting) => {
-    return (sendRequest(
-      { ...values, id },
-      setSubmitting
-    ) as unknown) as DemoDepositResponse;
+  const handleSubmit = useCallback(values => {
+    return (sendRequest({ ...values, id }) as unknown) as DemoDepositResponse;
   }, []);
 
   return (
@@ -36,13 +40,19 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
         })}
       />
       <DialogBottom>
-        <DemoDepositForm currency={currency} onSubmit={handleSubmit} />
+        <DemoDepositForm
+          currentDeposit={currentDeposit}
+          errorMessage={errorMessage}
+          currency={currency}
+          onSubmit={handleSubmit}
+        />
       </DialogBottom>
     </>
   );
 };
 
 export interface IDemoDepositContainerProps {
+  currentDeposit: number;
   onApply?: VoidFunction;
   currency: CurrencyEnum;
   id: string;

@@ -2,7 +2,7 @@ import {
   CurrencySourceSelectItemsType,
   getCurrencySourceSelectItems
 } from "components/currency-source-select/currency-source-select-items";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import React from "react";
@@ -13,19 +13,21 @@ const _CurrencySourceSelect: React.FC<Props> = ({
   onChange,
   label,
   name
-}) => (
-  <GVFormikField
-    wide
-    disabled={disabled}
-    name={name}
-    component={GVTextField}
-    label={label}
-    InputComponent={Select}
-    onChange={onChange}
-  >
-    {items && getCurrencySourceSelectItems(items)}
-  </GVFormikField>
-);
+}) => {
+  return (
+    <GVHookFormField
+      wide
+      disabled={disabled}
+      name={name}
+      component={GVTextField}
+      label={label}
+      InputComponent={Select}
+      onChange={onChange}
+    >
+      {items && getCurrencySourceSelectItems(items)}
+    </GVHookFormField>
+  );
+};
 
 interface Props {
   items: CurrencySourceSelectItemsType;
@@ -35,5 +37,4 @@ interface Props {
   disabled?: boolean;
 }
 
-const CurrencySourceSelect = React.memo(_CurrencySourceSelect);
-export default CurrencySourceSelect;
+export const CurrencySourceSelect = React.memo(_CurrencySourceSelect);

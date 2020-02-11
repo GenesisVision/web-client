@@ -2,7 +2,7 @@ import "./deposit.scss";
 
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
-import { ASSET } from "constants/constants";
+import { ASSET, SHOW_SUCCESS_TIME } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -12,7 +12,7 @@ import {
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
@@ -34,16 +34,20 @@ const _DepositPopup: React.FC<Props> = ({
 }) => {
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
+  const onCloseMiddleware = () => {
+    setTimeout(() => {
+      onClose();
+    }, SHOW_SUCCESS_TIME);
+  };
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
-    middleware: [onApply, onClose, updateWalletInfoMiddleware]
+    middleware: [onApply, onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (amount: number, setSubmitting: SetSubmittingType, walletId: string) =>
-      sendRequest({ id, amount, walletId }, setSubmitting),
+    ({ amount, walletId }) => sendRequest({ id, amount, walletId }),
     [id]
   );
 
