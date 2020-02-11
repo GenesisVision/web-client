@@ -8,12 +8,13 @@ import { useCallback, useEffect, useState } from "react";
 import { convertFromCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
-import FundWithdrawAmountForm, {
-  FundWithDrawFormValues
-} from "./fund-withdraw-amount-form";
+import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
 import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
 import { FundWithdrawTop } from "./fund-withdraw-top";
-import { FundWithdrawInfoResponse } from "./fund-withdraw.types";
+import {
+  FundWithDrawFormValues,
+  FundWithdrawInfoResponse
+} from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",

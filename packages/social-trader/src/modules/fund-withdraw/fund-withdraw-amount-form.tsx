@@ -7,6 +7,10 @@ import { ISelectChangeEvent } from "components/select/select";
 import WalletSelect from "components/wallet-select/wallet-select";
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletBaseData } from "gv-api-web";
+import {
+  FUND_WITHDRAW_FIELDS,
+  FundWithDrawFormValues
+} from "modules/fund-withdraw/fund-withdraw.types";
 import React, { ComponentType, useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -131,11 +135,6 @@ const FundWithdrawAmountForm = compose<ComponentType<OwnProps>>(
 )(_FundWithdrawAmountForm);
 export default FundWithdrawAmountForm;
 
-export enum FUND_WITHDRAW_FIELDS {
-  walletId = "walletId",
-  percent = "percent"
-}
-
 interface OwnProps {
   isPending: boolean;
   currency: CurrencyEnum;
@@ -147,8 +146,3 @@ interface OwnProps {
 }
 
 interface Props extends WithTranslation, OwnProps {}
-
-export interface FundWithDrawFormValues {
-  [FUND_WITHDRAW_FIELDS.percent]: number;
-  [FUND_WITHDRAW_FIELDS.walletId]: string;
-}
