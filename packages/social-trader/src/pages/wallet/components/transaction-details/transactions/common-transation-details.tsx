@@ -1,5 +1,3 @@
-import "../transaction-details.scss";
-
 import classNames from "classnames";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";

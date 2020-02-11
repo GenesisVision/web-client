@@ -1,5 +1,3 @@
-import "./fields.scss";
-
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import Hint from "components/hint/hint";

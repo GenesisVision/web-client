@@ -1,4 +1,4 @@
-import "./asset-field.scss";
+import "./asset-tabs.scss";
 
 import GVTabs, { GVTabsProps } from "components/gv-tabs";
 import React from "react";

@@ -1,5 +1,3 @@
-import "./details-description-control.scss";
-
 import { RingIcon } from "components/icon/ring-icon";
 import Link, { ToType } from "components/link/link";
 import * as React from "react";

@@ -1,5 +1,3 @@
-import "./fund-asset.scss";
-
 import classNames from "classnames";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {

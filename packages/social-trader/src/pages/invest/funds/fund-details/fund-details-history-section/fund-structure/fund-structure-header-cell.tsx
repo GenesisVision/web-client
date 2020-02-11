@@ -1,5 +1,3 @@
-import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
-
 import classNames from "classnames";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import * as React from "react";

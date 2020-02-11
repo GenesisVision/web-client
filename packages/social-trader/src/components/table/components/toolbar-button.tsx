@@ -1,5 +1,3 @@
-import "./table.scss";
-
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { TableToolbarItemBlock } from "components/table/components/table-toolbar-item.block";

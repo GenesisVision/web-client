@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import {
   fetchSubscriptions,
   SignalSubscriptionLoaderData

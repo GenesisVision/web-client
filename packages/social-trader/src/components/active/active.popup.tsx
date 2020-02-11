@@ -1,5 +1,3 @@
-import "./active.scss";
-
 import ActivePopupContainer from "components/active/active.popup.container";
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import React from "react";

@@ -1,5 +1,3 @@
-import "./details-description.scss";
-
 import { ToType } from "components/link/link";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";

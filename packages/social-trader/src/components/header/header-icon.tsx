@@ -1,5 +1,3 @@
-import "./header.scss";
-
 import React from "react";
 
 const HeaderIcon: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
