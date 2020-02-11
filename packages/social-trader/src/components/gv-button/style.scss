@@ -13,7 +13,6 @@ $decreased-margin: $change-size-value;
 }
 
 .gv-btn {
-  will-change: padding, margin, opacity, background-color;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -23,6 +22,7 @@ $decreased-margin: $change-size-value;
   outline: none;
   padding: $default-padding;
   @include transition(
+    filter,
     background-color,
     box-shadow,
     color,
@@ -33,7 +33,7 @@ $decreased-margin: $change-size-value;
   color: $text-accent-color;
   background-color: transparent;
   [stroke] {
-    transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    @include transition(stroke);
   }
 
   &::after {
@@ -59,6 +59,7 @@ $decreased-margin: $change-size-value;
     animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
     padding: $decreased-padding;
     margin: $decreased-margin;
+    filter: grayscale(50%);
   }
 
   &--bold {
