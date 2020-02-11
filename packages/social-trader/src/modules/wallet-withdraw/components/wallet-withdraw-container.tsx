@@ -1,4 +1,3 @@
-import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
 import { WalletData } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -37,7 +36,7 @@ const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
     },
     []
   );
-  if (!wallets.length) return <DialogLoader />;
+  if (!wallets.length) return null;
   const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
   return isSuccess ? (
     <WalletWithdrawRequest />

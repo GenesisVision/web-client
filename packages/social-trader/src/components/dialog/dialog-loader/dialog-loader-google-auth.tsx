@@ -1,5 +1,3 @@
-import "../dialog.scss";
-
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import * as React from "react";
 

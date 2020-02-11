@@ -1,6 +1,5 @@
 import "./wallet-add-funds-form.scss";
 
-import { DialogLoader } from "components/dialog/dialog-loader/dialog-loader";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -18,7 +17,6 @@ const _WalletAddFundsContainer: React.FC<Props> = ({ currentCurrency }) => {
   return (
     <WalletAddFundsForm
       condition={!!wallets.length && !!currentWallet}
-      loader={<DialogLoader />}
       wallets={wallets.filter(wallet => wallet.isDepositEnabled)}
       currentWallet={currentWallet}
     />

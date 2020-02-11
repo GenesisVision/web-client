@@ -1,5 +1,3 @@
-import "./dialog.scss";
-
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import * as React from "react";
 
