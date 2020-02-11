@@ -1,5 +1,3 @@
-import "./simple-text-field.scss";
-
 import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
 import React, { useCallback, useState } from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";

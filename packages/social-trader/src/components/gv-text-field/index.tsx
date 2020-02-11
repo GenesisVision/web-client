@@ -3,7 +3,7 @@ import "./style.scss";
 import classNames from "classnames";
 import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 
 import GVTextArea from "./gv-text-area";
 
@@ -66,6 +66,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 };
 
 export interface GVTextFieldProps extends IPropsGvInput {
+  children?: ReactNode;
   name: string;
   type?: string;
   placeholder?: string;
