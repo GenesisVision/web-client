@@ -15,7 +15,7 @@ import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE
 } from "components/profile/profile.constants";
-import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.routes";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
 
 import { HOME_ROUTE } from "./app.routes";

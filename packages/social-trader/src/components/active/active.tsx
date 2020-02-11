@@ -1,12 +1,13 @@
 import "./active.scss";
 
 import { CurrencyItem } from "components/currency-item/currency-item";
+import TradingViewWidget, {
+  Themes
+} from "components/trading-view/trading-view";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetInfo } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-// @ts-ignore
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
@@ -14,12 +15,11 @@ import TagItemList from "../tags/tag-item/tag-item-list";
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logo, socialLinks }
 }) => {
-  const [isServer, setIsServer] = useState(typeof window === "undefined");
+  const [isServer, setIsServer] = useState(true);
   const [t] = useTranslation();
   useEffect(() => {
-    if (typeof window === "undefined") setIsServer(true);
-    else setIsServer(false);
-  }, [window]);
+    setIsServer(false);
+  }, []);
   return (
     <div>
       <div className="active__block">
