@@ -21,22 +21,32 @@ import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
 import investmentsApi from "services/api-client/investments-api";
 import authService from "services/auth-service";
+import { getDefaultDateRange } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
 
 export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingFunds(authService.getAuthArg(), filters);
+  dashboardApi.getInvestingFunds(authService.getAuthArg(), {
+    ...filters,
+    ...getDefaultDateRange()
+  });
 
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingPrograms(authService.getAuthArg(), filters);
+  dashboardApi.getInvestingPrograms(authService.getAuthArg(), {
+    ...filters,
+    ...getDefaultDateRange()
+  });
 
 export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), filters);
+  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), {
+    ...filters,
+    ...getDefaultDateRange()
+  });
 
 export const fetchRequests = (take: number = 100) =>
   investmentsApi.getRequests(0, take, authService.getAuthArg());
@@ -52,12 +62,18 @@ export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
 ): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), filters);
+  dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), {
+    ...filters,
+    ...getDefaultDateRange()
+  });
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
 ): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), filters);
+  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), {
+    ...filters,
+    ...getDefaultDateRange()
+  });
 
 export const getPortfolio = (): Promise<TDashboardPortfolio> =>
   dashboardApi
