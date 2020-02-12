@@ -16,6 +16,7 @@ const _CurrencySourceSelect: React.FC<Props> = ({
 }) => {
   return (
     <GVHookFormField
+      disableIfSingle
       wide
       disabled={disabled}
       name={name}
