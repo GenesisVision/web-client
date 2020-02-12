@@ -5,10 +5,13 @@ import { FormContextValues } from "react-hook-form/dist/contextTypes";
 export const HookForm: React.FC<{
   form: FormContextValues<any>;
   onSubmit?: FormEventHandler<any>;
-}> = ({ form, onSubmit, children }) => {
+  className?: string;
+}> = ({ form, onSubmit, children, className }) => {
   return (
     <FormContext {...form}>
-      <form onSubmit={onSubmit}>{children}</form>
+      <form className={className} onSubmit={onSubmit}>
+        {children}
+      </form>
     </FormContext>
   );
 };
