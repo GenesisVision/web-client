@@ -12,6 +12,7 @@ import { DialogInfo } from "components/dialog/dialog-info";
 import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -96,7 +97,7 @@ const _DepositForm: React.FC<Props> = ({
   }, [minDeposit, rate]);
 
   const onWalletChange = useCallback(
-    ({ id }: WalletBaseData) => {
+    ({ id }: WalletItemType) => {
       reset({
         [DEPOSIT_FORM_FIELDS.walletId]: id,
         [DEPOSIT_FORM_FIELDS.amount]: ""
@@ -111,11 +112,13 @@ const _DepositForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
       <DialogBottom>
-        <WalletField
-          wallets={wallets}
-          name={DEPOSIT_FORM_FIELDS.walletId}
-          onChange={onWalletChange}
-        />
+        <DialogField>
+          <WalletField
+            wallets={wallets}
+            name={DEPOSIT_FORM_FIELDS.walletId}
+            onChange={onWalletChange}
+          />
+        </DialogField>
         <DialogField>
           <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
             {formatCurrencyValue(wallet.available, wallet.currency)}{" "}

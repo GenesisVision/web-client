@@ -3,6 +3,7 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletBaseData } from "gv-api-web";
 import {
   fundWithdrawAmountFormValidationSchema,
@@ -87,7 +88,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   );
 
   const changeWalletCallback = useCallback(
-    ({ id }: WalletBaseData) => {
+    ({ id }: WalletItemType) => {
       setValue(FUND_WITHDRAW_FIELDS.walletId, id, true);
       const currency = safeGetElemFromArray(wallets, wallet => id === wallet.id)
         .currency;
