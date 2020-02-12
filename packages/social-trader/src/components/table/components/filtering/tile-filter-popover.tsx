@@ -52,9 +52,7 @@ class TileFilterPopover<
           adornmentPosition="start"
           onChange={this.search}
         />
-        <div className="tile-filter-popover__items">
-          {children(filteredAssets, this.handleClick)}
-        </div>
+        {children(filteredAssets, this.handleClick)}
       </PopoverContentCardBlock>
     );
   }
