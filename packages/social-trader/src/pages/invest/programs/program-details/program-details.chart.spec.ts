@@ -15,7 +15,7 @@ import {
 import { Browser, Page } from "puppeteer";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 import programsApi from "services/api-client/programs-api";
-import { subtractDate } from "utils/dates";
+import { getDefaultDateRange, subtractDate } from "utils/dates";
 import { separateThousand } from "utils/formatter";
 import {
   ASYNC_TEST_TIMEOUT,
@@ -40,7 +40,7 @@ describe("Program details - chart", () => {
   );
   const balanceChartTabSelector = testT("details-page.chart.tabs.balance");
   const chartOptions = {
-    dateFrom: subtractDate(new Date(), 1, "month")
+    ...getDefaultDateRange()
   };
 
   beforeEach(async () => {
