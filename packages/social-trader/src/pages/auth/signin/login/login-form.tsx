@@ -28,6 +28,7 @@ const _LoginForm: React.FC<InjectedFormikProps<
     noValidate
   >
     <GVFormikField
+      autoFocus
       type="email"
       name={FIELDS.email}
       label={t("auth.login.placeholder.email")}
