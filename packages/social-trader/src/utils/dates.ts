@@ -3,6 +3,8 @@ import Calendar from "dayjs/plugin/calendar";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
 
+const DEFAULT_DATE_RANGE = "month";
+
 dayjs.extend(LocalizedFormat);
 dayjs.extend(RelativeTime);
 dayjs.extend(Calendar);
@@ -110,3 +112,7 @@ export const dateTo = (): string =>
     .add(1, "minute")
     .startOf("minute")
     .toISOString();
+
+export const getDefaultDateRange = () => ({
+  dateFrom: subtractDate(new Date(), 1, DEFAULT_DATE_RANGE)
+});
