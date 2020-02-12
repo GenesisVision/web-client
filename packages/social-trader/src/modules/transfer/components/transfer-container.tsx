@@ -1,11 +1,12 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { SHOW_SUCCESS_TIME } from "constants/constants";
 import Crashable from "decorators/crashable";
-import { InternalTransferRequestType } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
 import {
-  getTransferFormLoaderData,
-  TransferFormValues
-} from "modules/transfer/components/transfer-form.helpers";
+  InternalTransferRequest,
+  InternalTransferRequestType
+} from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
+import { getTransferFormLoaderData } from "modules/transfer/components/transfer-form.helpers";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
@@ -49,7 +50,9 @@ const _TransferContainer: React.FC<Props> = ({
   const currency = useSelector(currencySelector);
   const updateWalletMiddleware = () => {
     onApply && onApply();
-    onClose();
+    setTimeout(() => {
+      onClose();
+    }, SHOW_SUCCESS_TIME);
     dispatch(fetchWallets(currency));
     dispatch(updateWalletTimestampAction());
   };
@@ -59,7 +62,7 @@ const _TransferContainer: React.FC<Props> = ({
     request: transferRequest
   });
   const handleSubmit = useCallback(
-    (values: TransferFormValues) => sendTransferRequest(values),
+    (values: InternalTransferRequest) => sendTransferRequest(values),
     [destinationType, sourceType]
   );
   useEffect(() => {
