@@ -69,7 +69,7 @@ const Select: React.FC<Props> = ({
       clearAnchor();
       input.current && input.current.focus();
     },
-    [input.current]
+    [input.current, onChange]
   );
 
   const handleBlur = useCallback(
