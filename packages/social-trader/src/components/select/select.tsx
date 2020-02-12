@@ -146,7 +146,7 @@ class Select extends React.PureComponent<Props, State> {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <PopoverContent type={"list"} className="select__options">
+          <PopoverContent type={"list"} leftAlign>
             {items}
           </PopoverContent>
         </Popover>
