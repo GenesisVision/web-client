@@ -6,6 +6,7 @@ import {
   TableSelectorType
 } from "components/table/components/table.types";
 import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "pages/invest/programs/program-details/program-details.constants";
+import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
-      columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
+      columns={getOpenPositionsColumns(data)}
       renderHeader={column => (
         <span
           className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
@@ -43,7 +44,11 @@ const _ProgramOpenPositions: React.FC<Props> = ({
         </span>
       )}
       renderBodyRow={position => (
-        <ProgramOpenPositionsRow position={position} currency={currency} />
+        <ProgramOpenPositionsRow
+          data={data!}
+          position={position}
+          currency={currency}
+        />
       )}
     />
   );
