@@ -1,22 +1,12 @@
-import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
-import React, { useCallback, useState } from "react";
+import { GVTextFieldProps } from "components/gv-text-field";
+import { SimpleField } from "components/simple-fields/simple-field";
+import React from "react";
 
 const _SimpleTextField: React.FC<ISimpleTextFieldProps> = props => {
-  const { setFieldValue, name, emptyInit, value } = props;
-  const [init, setInit] = useState(true);
-  const handleOnChange = useCallback(
-    (event: React.ChangeEvent<any>) => {
-      setInit(false);
-      if (setFieldValue) setFieldValue(name, event.target.value, true);
-    },
-    [name, setFieldValue]
-  );
-  const setEmpty = emptyInit && init;
   return (
-    <GVTextField
+    <SimpleField
       {...props}
-      value={setEmpty ? "" : value}
-      onChange={handleOnChange}
+      valueCallback={({ target: { value } }: React.ChangeEvent<any>) => value}
     />
   );
 };
