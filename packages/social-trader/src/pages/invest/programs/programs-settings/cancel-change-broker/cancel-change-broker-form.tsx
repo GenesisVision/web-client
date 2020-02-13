@@ -10,11 +10,11 @@ import {
   MigrationRequest
 } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
+import { HuobiWarning } from "pages/invest/programs/programs-settings/change-broker/change-broker-form.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 
-import { HuobiWarning } from "../change-broker/change-broker-form";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 
 const _CancelChangeBrokerForm: React.FC<Props> = ({
