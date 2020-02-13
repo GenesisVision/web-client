@@ -41,7 +41,6 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
   const {
     watch,
     setValue,
-    handleSubmit,
     formState: { isSubmitting, isValid }
   } = form;
   const { amount, withdrawAll } = watch();
@@ -65,7 +64,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
   }, [availableToWithdraw, programCurrency, setValue]);
 
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       {!isOwner && (
         <DialogField>
           <GVHookFormField

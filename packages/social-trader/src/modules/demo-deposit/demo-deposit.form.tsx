@@ -37,7 +37,6 @@ const _DemoDepositForm: React.FC<Props> = ({
   });
   const {
     setValue,
-    handleSubmit,
     formState: { isSubmitting, isValid, isSubmitted }
   } = form;
 
@@ -48,7 +47,7 @@ const _DemoDepositForm: React.FC<Props> = ({
   const isSuccessful = isSubmitted && !errorMessage;
 
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <HookFormAmountField
         setMax={setMax}
         currency={currency}

@@ -79,11 +79,10 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
   const [t] = useTranslation();
   const form = useForm();
   const {
-    handleSubmit,
     formState: { isSubmitted, isSubmitting }
   } = form;
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <div className="dialog-list__item">
         {t("withdraw-fund.withdrawing")}
         <span className="dialog-list__value">{formatValue(percent, 2)} %</span>

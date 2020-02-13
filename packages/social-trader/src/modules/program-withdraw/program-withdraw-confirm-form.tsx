@@ -75,11 +75,10 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
 
   const form = useForm();
   const {
-    handleSubmit,
     formState: { isSubmitted, isSubmitting }
   } = form;
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogList>
         <DialogListItem label={t("withdraw-program.withdrawing")}>
           {amount && !withdrawAll

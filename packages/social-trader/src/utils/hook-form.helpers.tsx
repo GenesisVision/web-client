@@ -4,12 +4,15 @@ import { FormContextValues } from "react-hook-form/dist/contextTypes";
 
 export const HookForm: React.FC<{
   form: FormContextValues<any>;
-  onSubmit?: FormEventHandler<any>;
+  onSubmit: (
+    data: any,
+    event?: React.BaseSyntheticEvent
+  ) => void | Promise<void>;
   className?: string;
 }> = ({ form, onSubmit, children, className }) => {
   return (
     <FormContext {...form}>
-      <form className={className} onSubmit={onSubmit}>
+      <form className={className} onSubmit={form.handleSubmit(onSubmit)}>
         {children}
       </form>
     </FormContext>

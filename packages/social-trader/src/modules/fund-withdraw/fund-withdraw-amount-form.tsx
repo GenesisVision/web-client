@@ -57,7 +57,6 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   const {
     watch,
     setValue,
-    handleSubmit,
     formState: { isValid }
   } = form;
   const { percent } = watch();
@@ -98,7 +97,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   );
 
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogField>
         <WalletSelect
           name={FUND_WITHDRAW_FIELDS.walletId}

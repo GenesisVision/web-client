@@ -38,11 +38,10 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
     mode: "onBlur"
   });
   const {
-    handleSubmit,
     formState: { dirty, isValid, isSubmitting, isSubmitted }
   } = form;
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
         title={t("password-change-trading-account.title")}
         subtitle={programName}
