@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
+import { NumberFormatValues } from "react-number-format";
 
 import GVTextArea from "./gv-text-area";
 
@@ -45,12 +46,12 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 
     return (
       <Input
+        {...props}
         ref={input}
         type={type}
         className={classNames("gv-text-field", inputClassName)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        {...props}
       />
     );
   };
@@ -75,6 +76,7 @@ export interface GVTextFieldProps extends IPropsGvInput {
   inputClassName?: string;
   onBlur?: (e: any) => void;
   onChange?: (e: React.ChangeEvent<any>) => void;
+  onValueChange?: (e: NumberFormatValues) => void;
   form?: any;
   autoFocus?: boolean;
 }

@@ -4,7 +4,7 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
-import { SetSubmittingType } from "utils/types";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import { IChangePasswordTradingAccountFormValues } from "./components/change-password-trading-account-form";
 import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
@@ -19,23 +19,16 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   id,
   onClose
 }) => {
+  const onCloseMiddleware = getPostponedOnCallback(onClose);
   const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
     successMessage: "password-change-trading-account.success-alert-message",
-    middleware: [onClose],
+    middleware: [onCloseMiddleware],
     request: changePasswordTradingAccount
   });
   const handleApply = useCallback(
-    (
-      values: IChangePasswordTradingAccountFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      const model = {
-        password: values.password,
-        twoFactorCode: values.twoFactorCode
-      };
-      sendRequest({ id, model }, setSubmitting);
-    },
+    (model: IChangePasswordTradingAccountFormValues) =>
+      sendRequest({ id, model }),
     [id]
   );
   const handleClose = useCallback(() => {

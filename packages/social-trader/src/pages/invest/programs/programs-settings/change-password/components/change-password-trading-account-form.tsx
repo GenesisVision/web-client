@@ -3,30 +3,99 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import { FormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
-
-interface IChangePasswordTradingAccountFormOwnProps {
-  twoFactorEnabled: boolean;
-  errorMessage: string;
-  programName: string;
-  onSubmit(
-    values: IChangePasswordTradingAccountFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
-}
 
 enum FORM_FIELDS {
   password = "password",
   confirmPassword = "confirmPassword",
   twoFactorCode = "twoFactorCode"
+}
+
+const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFormProps> = ({
+  onSubmit,
+  programName,
+  errorMessage,
+  twoFactorEnabled
+}) => {
+  const [t] = useTranslation();
+  const form = useForm<IChangePasswordTradingAccountFormValues>({
+    defaultValues: {
+      [FORM_FIELDS.password]: "",
+      [FORM_FIELDS.confirmPassword]: "",
+      [FORM_FIELDS.twoFactorCode]: ""
+    },
+    validationSchema: ChangePasswordTradingAccountValidationSchema({
+      t,
+      twoFactorEnabled
+    }),
+    mode: "onBlur"
+  });
+  const {
+    formState: { dirty, isValid, isSubmitting, isSubmitted }
+  } = form;
+  return (
+    <HookForm form={form} onSubmit={onSubmit}>
+      <DialogTop
+        title={t("password-change-trading-account.title")}
+        subtitle={programName}
+      />
+      <DialogBottom>
+        <GVHookFormField
+          validateOnInput={false}
+          wide
+          component={SimpleTextField}
+          label={t("password-change-trading-account.new-password")}
+          type="password"
+          name={FORM_FIELDS.password}
+          autoComplete="off"
+        />
+        <GVHookFormField
+          wide
+          component={SimpleTextField}
+          label={t("password-change-trading-account.confirm-password")}
+          type="password"
+          name={FORM_FIELDS.confirmPassword}
+          autoComplete="off"
+        />
+        {twoFactorEnabled && (
+          <GVHookFormField
+            wide
+            type="text"
+            name={FORM_FIELDS.twoFactorCode}
+            label={t("wallet-withdraw.two-factor-code-label")}
+            autoComplete="off"
+            component={SimpleTextField}
+          />
+        )}
+        <DialogError error={errorMessage} />
+        <DialogButtons>
+          <GVButton
+            wide
+            type="submit"
+            isSuccessful={isSubmitted && !errorMessage}
+            isPending={isSubmitting}
+            disabled={!isValid || !dirty || isSubmitting}
+          >
+            {t("buttons.confirm")}
+          </GVButton>
+        </DialogButtons>
+      </DialogBottom>
+    </HookForm>
+  );
+};
+
+interface ChangePasswordTradingAccountFormProps {
+  twoFactorEnabled: boolean;
+  errorMessage: string;
+  programName: string;
+  onSubmit(values: IChangePasswordTradingAccountFormValues): void;
 }
 
 export interface IChangePasswordTradingAccountFormValues {
@@ -35,87 +104,7 @@ export interface IChangePasswordTradingAccountFormValues {
   [FORM_FIELDS.twoFactorCode]: string;
 }
 
-type ChangePasswordTradingAccountFormProps = WithTranslation &
-  IChangePasswordTradingAccountFormOwnProps &
-  FormikProps<IChangePasswordTradingAccountFormValues>;
-
-const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFormProps> = ({
-  t,
-  dirty,
-  isValid,
-  programName,
-  handleSubmit,
-  errorMessage,
-  twoFactorEnabled,
-  isSubmitting
-}) => {
-  return (
-    <form id="change-password-trading-account" onSubmit={handleSubmit}>
-      <DialogTop
-        title={t("password-change-trading-account.title")}
-        subtitle={programName}
-      />
-      <DialogBottom>
-        <GVFormikField
-          wide
-          component={GVTextField}
-          label={t("password-change-trading-account.new-password")}
-          type="password"
-          name={FORM_FIELDS.password}
-          autoComplete="off"
-        />
-        <GVFormikField
-          wide
-          component={GVTextField}
-          label={t("password-change-trading-account.confirm-password")}
-          type="password"
-          name={FORM_FIELDS.confirmPassword}
-          autoComplete="off"
-        />
-        {twoFactorEnabled && (
-          <GVFormikField
-            wide
-            type="text"
-            name={FORM_FIELDS.twoFactorCode}
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
-            component={GVTextField}
-          />
-        )}
-        <DialogError error={errorMessage} />
-        <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            disabled={!isValid || !dirty || isSubmitting}
-          >
-            {t("buttons.confirm")}
-          </GVButton>
-        </DialogButtons>
-      </DialogBottom>
-    </form>
-  );
-};
-
-const ChangePasswordTradingAccountForm = compose<
-  React.ComponentType<IChangePasswordTradingAccountFormOwnProps>
->(
-  translate(),
-  withFormik<
-    IChangePasswordTradingAccountFormOwnProps,
-    IChangePasswordTradingAccountFormValues
-  >({
-    displayName: "change-password",
-    mapPropsToValues: () => ({
-      [FORM_FIELDS.password]: "",
-      [FORM_FIELDS.confirmPassword]: "",
-      [FORM_FIELDS.twoFactorCode]: ""
-    }),
-    validationSchema: ChangePasswordTradingAccountValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_ChangePasswordTradingAccountForm);
+const ChangePasswordTradingAccountForm = React.memo(
+  _ChangePasswordTradingAccountForm
+);
 export default ChangePasswordTradingAccountForm;

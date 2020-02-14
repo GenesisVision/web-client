@@ -7,6 +7,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   ...props
 }) => {
   const {
+    triggerValidation,
     setValue,
     watch,
     formState: { touched },
@@ -21,6 +22,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   return (
     <Component
       {...props}
+      triggerValidation={triggerValidation}
       name={name}
       setFieldValue={setValue}
       value={watch()[name]}

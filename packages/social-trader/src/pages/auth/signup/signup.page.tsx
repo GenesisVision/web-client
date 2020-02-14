@@ -1,24 +1,30 @@
 import "./signup.scss";
 
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
+import { RegisterViewModel } from "gv-api-web";
 import CaptchaContainer from "pages/auth/captcha-container";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import * as React from "react";
-import { useTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import { ActionCreatorsMapObject, bindActionCreators, compose } from "redux";
-import { AuthRootState, MiddlewareDispatch } from "utils/types";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthRootState, ReduxDispatch } from "utils/types";
 
 import { signUp } from "./services/signup.service";
 
 const _SignUpPage: React.FC<Props> = ({
   referrer,
   utmSource,
-  referralCode,
-  errorMessage,
-  service
+  referralCode
 }) => {
+  const dispatch = useDispatch<ReduxDispatch>();
   const [t] = useTranslation();
+  const request = useCallback((values: RegisterViewModel) => {
+    return dispatch(signUp(values));
+  }, []);
+  const errorMessage = useSelector(
+    (state: AuthRootState) => state.signUpData.errorMessage
+  );
   return (
     <PageSeoWrapper
       description={"Sign up to the Genesis Vision"}
@@ -26,7 +32,7 @@ const _SignUpPage: React.FC<Props> = ({
     >
       <div className="signup">
         <CaptchaContainer
-          request={service.signUp}
+          request={request}
           renderForm={handle => (
             <SignUpForm
               referer={referrer}
@@ -42,46 +48,11 @@ const _SignUpPage: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: AuthRootState): StateProps => {
-  const { signUpData } = state;
-  const { errorMessage } = signUpData;
-  return { errorMessage };
-};
-
-const mapDispatchToProps = (dispatch: MiddlewareDispatch): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      signUp
-    },
-    dispatch
-  )
-});
-
-interface StateProps {
-  errorMessage: string;
-}
-
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-interface ServiceThunks extends ActionCreatorsMapObject {
-  signUp: typeof signUp;
-}
-
-interface OwnProps {
+interface Props {
   referrer?: string;
   referralCode?: string;
   utmSource?: string;
 }
 
-interface Props extends OwnProps, StateProps, DispatchProps {}
-
-const SignUpPage = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect<StateProps, DispatchProps, OwnProps, AuthRootState>(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  React.memo
-)(_SignUpPage);
+const SignUpPage = React.memo(_SignUpPage);
 export default SignUpPage;

@@ -71,7 +71,6 @@ const _DepositForm: React.FC<Props> = ({
     reset,
     watch,
     setValue,
-    handleSubmit,
     formState: { isSubmitting, isValid, isSubmitted }
   } = form;
   const { amount = 0 } = watch();
@@ -110,7 +109,7 @@ const _DepositForm: React.FC<Props> = ({
   const isSuccessful = isSubmitted && !errorMessage;
 
   return (
-    <HookForm form={form} onSubmit={handleSubmit(onSubmit)}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
         <DialogField>
           <WalletField

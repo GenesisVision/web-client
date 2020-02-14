@@ -2,17 +2,20 @@ import "./two-factor-code.scss";
 
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import useIsOpen from "hooks/is-open.hook";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
 import * as React from "react";
-import { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useCallback, useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
@@ -22,53 +25,66 @@ enum FIELDS {
   email = "email"
 }
 
-const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
-  Props,
-  ITwoFactorCodeFormValues
->> = ({
-  t,
-  handleSubmit,
-  error,
-  isSubmitting,
-  values,
-  setSubmitting,
-  onSubmit
-}) => {
+const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
+  const [t] = useTranslation();
+
+  const form = useForm<ITwoFactorCodeFormValues>({
+    defaultValues: { [FIELDS.code]: "", [FIELDS.email]: email },
+    validationSchema: object().shape({
+      [FIELDS.code]: string()
+        .trim()
+        .matches(
+          /^\d{6}$/,
+          t("auth.login.two-factor.validation.two-factor-6digits")
+        )
+        .required(t("auth.login.two-factor.validation.two-factor-required"))
+    }),
+    mode: "onChange"
+  });
+  const {
+    watch,
+    formState: { isSubmitting, isValid }
+  } = form;
+  const { code } = watch();
+
   const { linkCreator } = useToLink();
   const [isChecking, setIsChecking] = useIsOpen();
 
   useEffect(() => {
-    if (!isChecking && values[FIELDS.code].length === 6) {
+    if (!isChecking && code.length === 6) {
       checkTwoFactor();
     }
-  }, [values[FIELDS.code], isChecking]);
+  }, [code, isChecking]);
 
   const checkTwoFactor = useCallback(() => {
     if (isSubmitting) return;
     setIsChecking();
-    setSubmitting(true);
-    onSubmit(values, setSubmitting);
-  }, [isSubmitting, values]);
+    onSubmit(watch());
+  }, [isSubmitting, watch]);
+
+  const requestStatus = useContext(CaptchaStatusContext);
+
+  const isSuccessful = requestStatus === CAPTCHA_STATUS.SUCCESS;
+  const disabled =
+    isSubmitting ||
+    requestStatus === CAPTCHA_STATUS.PENDING ||
+    isSuccessful ||
+    !isValid;
 
   return (
-    <form
-      id="twoFactorForm"
-      className="login-two-factor"
-      onSubmit={handleSubmit}
-      noValidate
-    >
+    <HookForm className="login-two-factor" form={form} onSubmit={onSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
       <div className="login-two-factor__text">
         {t("auth.login.two-factor.text")}
       </div>
-      <GVFormikField
+      <GVHookFormField
         disabled={isSubmitting}
         type="tel"
         name={FIELDS.code}
         label={t("auth.login.two-factor.input-label")}
         autoComplete="off"
         autoFocus
-        component={GVTextField}
+        component={SimpleTextField}
         format="######"
       />
 
@@ -83,11 +99,17 @@ const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
 
       <FormError error={error} />
       <div className="login-two-factor__submit">
-        <GVButton type="submit" id="signUpFormSubmit" disabled={isSubmitting}>
+        <GVButton
+          type="submit"
+          id="signUpFormSubmit"
+          disabled={disabled}
+          isSuccessful={isSuccessful}
+          isPending={isSubmitting}
+        >
           {t("auth.login.two-factor.verify")}
         </GVButton>
       </div>
-    </form>
+    </HookForm>
   );
 };
 
@@ -96,41 +118,11 @@ export interface ITwoFactorCodeFormValues {
   [FIELDS.email]: string;
 }
 
-interface Props extends WithTranslation, OwnProps {}
-
-interface OwnProps {
+interface Props {
   email: string;
-  onSubmit: (
-    code: ITwoFactorCodeFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: ITwoFactorCodeFormValues) => void;
   error: string;
   isChecking?: boolean;
 }
-const TwoFactorCodeForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, ITwoFactorCodeFormValues>({
-    displayName: "twoFactorForm",
-    mapPropsToValues: ({ email }) => ({
-      [FIELDS.code]: "",
-      [FIELDS.email]: email
-    }),
-    validationSchema: (props: Props) =>
-      object().shape({
-        [FIELDS.code]: string()
-          .trim()
-          .matches(
-            /^\d{6}$/,
-            props.t("auth.login.two-factor.validation.two-factor-6digits")
-          )
-          .required(
-            props.t("auth.login.two-factor.validation.two-factor-required")
-          )
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      return props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_TwoFactorCodeForm);
+const TwoFactorCodeForm = React.memo(_TwoFactorCodeForm);
 export default TwoFactorCodeForm;

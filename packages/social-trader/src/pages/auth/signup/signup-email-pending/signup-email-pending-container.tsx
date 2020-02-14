@@ -7,6 +7,7 @@ import { MiddlewareDispatch, RootThunk } from "utils/types";
 
 const SignupEmailPending: React.FC<Props> = ({ t, service }) => (
   <GVButton
+    noPadding
     className="signup-email-pending__resend-btn"
     variant="text"
     onClick={service.sendConfirmationLink}

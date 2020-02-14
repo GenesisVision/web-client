@@ -3,41 +3,36 @@ import useApiRequest from "hooks/api-request.hook";
 import { getProgramBrokersMethod } from "pages/invest/programs/program-details/service/program-details.service";
 import { changeBrokerMethod } from "pages/invest/programs/programs-settings/services/program-settings.service";
 import React, { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
-import ChangeBrokerForm, { ChangeBrokerFormValues } from "./change-broker-form";
+import ChangeBrokerForm from "./change-broker-form";
+import { ChangeBrokerFormValues } from "./change-broker-form.helpers";
 
 const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
   const { id, onApply } = props;
-  const { sendRequest: changeBroker } = useApiRequest({
-    middleware: [onApply],
+  const onCloseMiddleware = getPostponedOnCallback(onApply);
+  const { sendRequest: changeBroker, errorMessage } = useApiRequest({
+    middleware: [onCloseMiddleware],
     request: changeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
   const handleChangeBroker = useCallback(
-    (
-      { brokerAccountTypeId, leverage }: ChangeBrokerFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      changeBroker(
-        {
-          id,
-          brokerAccountTypeId,
-          leverage
-        },
-        setSubmitting
-      );
-    },
+    (values: ChangeBrokerFormValues) =>
+      changeBroker({
+        ...values,
+        id
+      }),
     [id]
   );
   const { data } = useApiRequest({
-    fetchOnMountData: props.id,
+    fetchOnMountData: id,
     fetchOnMount: true,
     request: getProgramBrokersMethod
   });
   if (!data) return null;
   return (
     <ChangeBrokerForm
+      errorMessage={errorMessage}
       loaderData={getBrokersProgramInfoLoaderData()}
       data={data}
       onSubmit={handleChangeBroker}

@@ -7,7 +7,14 @@ import { SetSubmittingType } from "utils/types";
 import * as authService from "./auth.service";
 import Pow from "./captcha/pow";
 
+export enum CAPTCHA_STATUS {
+  WAIT = "WAIT",
+  PENDING = "PENDING",
+  SUCCESS = "SUCCESS"
+}
+
 const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
+  const [status, setStatus] = useState<CAPTCHA_STATUS>(CAPTCHA_STATUS.WAIT);
   const [pow, setPow] = useState<PowDetails | undefined>(undefined);
   // const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
   const [captchaType, setCaptchaType] = useState<CaptchaType>("None");
@@ -35,7 +42,11 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
           captchaCheckResult
         },
         setSubmitting.func!
-      );
+      )
+        .then(() => setStatus(CAPTCHA_STATUS.SUCCESS))
+        .catch(() => {
+          setStatus(CAPTCHA_STATUS.WAIT);
+        });
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -55,6 +66,7 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   }, [id, prefix, values, isSubmit, captchaType, setSubmitting]);
   const handleSubmit = useCallback(
     (values: TValues, setSubmittingProp?: SetSubmittingType) => {
+      setStatus(CAPTCHA_STATUS.PENDING);
       authService.getCaptcha(values.email).then(({ captchaType, id, pow }) => {
         setEmail(values.email);
         setCaptchaType(captchaType);
@@ -69,18 +81,22 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
     []
   );
   return (
-    <>
+    <CaptchaStatusContext.Provider value={status}>
       <AlertMessageList />
       {renderForm(handleSubmit)}
       {pow && <Pow {...pow} login={email} handleSuccess={setPrefix} />}
-    </>
+    </CaptchaStatusContext.Provider>
   );
 };
+
+export const CaptchaStatusContext = React.createContext<CAPTCHA_STATUS>(
+  CAPTCHA_STATUS.WAIT
+);
 
 export type TValues = any;
 
 interface OwnProps {
-  request: (values: TValues, setSubmitting: SetSubmittingType) => void;
+  request: (values: TValues, setSubmitting: SetSubmittingType) => Promise<any>;
   renderForm: (
     handle: (values: TValues, setSubmitting?: SetSubmittingType) => void
   ) => JSX.Element;

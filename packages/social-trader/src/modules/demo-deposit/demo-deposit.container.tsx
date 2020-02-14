@@ -1,6 +1,5 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import { SHOW_SUCCESS_TIME } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import DemoDepositForm from "modules/demo-deposit/demo-deposit.form";
 import {
@@ -9,6 +8,7 @@ import {
 } from "modules/demo-deposit/demo-deposit.service";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
@@ -18,11 +18,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const onApplyMiddleware = () => {
-    setTimeout(() => {
-      onApply && onApply();
-    }, SHOW_SUCCESS_TIME);
-  };
+  const onApplyMiddleware = getPostponedOnCallback(onApply);
   const { sendRequest, errorMessage } = useApiRequest<DemoDepositResponse>({
     request: depositToDemo,
     successMessage: t("transfer.confirmation.deposit-success"),

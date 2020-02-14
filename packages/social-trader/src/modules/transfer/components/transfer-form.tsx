@@ -61,7 +61,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     reset,
     watch,
     setValue,
-    handleSubmit,
     formState: { isSubmitting, isValid, isSubmitted, dirty }
   } = form;
   const { sourceId, destinationId, amount } = watch();
@@ -141,7 +140,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     <HookForm
       className="transfer-popup"
       form={form}
-      onSubmit={handleSubmit(setValuesFromPropsAndSubmit)}
+      onSubmit={setValuesFromPropsAndSubmit}
     >
       <DialogTop title={title}>
         <TransferSelectField

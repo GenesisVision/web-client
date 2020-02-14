@@ -1,25 +1,15 @@
-import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
-import React, { useCallback, useState } from "react";
+import { GVTextFieldProps } from "components/gv-text-field";
+import { SimpleField } from "components/simple-fields/simple-field";
+import React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
 const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
-  const { setFieldValue, name, emptyInit, value } = props;
-  const [init, setInit] = useState(true);
-  const handleOnChange = useCallback(
-    ({ value }: NumberFormatValues) => {
-      setInit(false);
-      if (setFieldValue) setFieldValue(name, value, true);
-    },
-    [name, setFieldValue]
-  );
-
-  const setEmpty = emptyInit && init;
   return (
-    <GVTextField
+    <SimpleField
       {...props}
-      value={setEmpty ? "" : value}
-      //@ts-ignore
-      onValueChange={handleOnChange}
+      valueCallback={({ value, floatValue }: NumberFormatValues) =>
+        value ? value : floatValue
+      }
       InputComponent={NumberFormat}
     />
   );

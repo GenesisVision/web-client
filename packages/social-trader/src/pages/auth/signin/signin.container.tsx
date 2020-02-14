@@ -3,7 +3,7 @@ import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthRootState, SetSubmittingType } from "utils/types";
+import { AuthRootState, ReduxDispatch, SetSubmittingType } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
 import { CODE_TYPE, loginUserAction } from "./signin.actions";
@@ -15,7 +15,7 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ReduxDispatch>();
   const { errorMessage } = useSelector(
     (state: AuthRootState) => state.loginData.login
   );
