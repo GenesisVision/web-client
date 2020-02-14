@@ -1,5 +1,4 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { SHOW_SUCCESS_TIME } from "constants/constants";
 import Crashable from "decorators/crashable";
 import {
   InternalTransferRequest,
@@ -13,6 +12,7 @@ import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import {
   fetchTradingAccounts,
@@ -50,15 +50,13 @@ const _TransferContainer: React.FC<Props> = ({
   const currency = useSelector(currencySelector);
   const updateWalletMiddleware = () => {
     onApply && onApply();
-    setTimeout(() => {
-      onClose();
-    }, SHOW_SUCCESS_TIME);
     dispatch(fetchWallets(currency));
     dispatch(updateWalletTimestampAction());
   };
+  const onCloseMiddleware = getPostponedOnCallback(onClose);
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     successMessage,
-    middleware: [updateWalletMiddleware],
+    middleware: [updateWalletMiddleware, onCloseMiddleware],
     request: transferRequest
   });
   const handleSubmit = useCallback(

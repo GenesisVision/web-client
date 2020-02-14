@@ -3,7 +3,6 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import GVButton from "components/gv-button";
-import { SHOW_SUCCESS_TIME } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
@@ -12,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
-import { HookForm } from "utils/hook-form.helpers";
+import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
 
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
@@ -27,9 +26,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   periodEnds,
   onBackClick
 }) => {
-  const onCloseMiddleware = () => {
-    setTimeout(() => onClose(), SHOW_SUCCESS_TIME);
-  };
+  const onCloseMiddleware = getPostponedOnCallback(onClose);
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [onCloseMiddleware, onApply],
     request: withdrawProgramById,
