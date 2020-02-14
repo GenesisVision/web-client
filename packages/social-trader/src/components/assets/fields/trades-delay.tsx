@@ -3,7 +3,7 @@ import GVTextField from "components/gv-text-field";
 import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Select from "components/select/select";
-import { DELAYS } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions";
+import { DELAYS } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
