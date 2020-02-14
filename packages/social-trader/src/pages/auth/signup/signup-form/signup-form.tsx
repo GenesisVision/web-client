@@ -72,6 +72,7 @@ const _SignUpForm: React.FC<Props> = ({
   return (
     <HookForm className="signup-form" form={form} onSubmit={onSubmit}>
       <GVHookFormField
+        showCorrect
         type="text"
         name={SIGN_UP_FORM_FIELDS.userName}
         label={t("auth.signup.username-field-text")}
@@ -80,6 +81,7 @@ const _SignUpForm: React.FC<Props> = ({
         component={SimpleTextField}
       />
       <GVHookFormField
+        showCorrect
         type="email"
         name={SIGN_UP_FORM_FIELDS.email}
         label={t("auth.signup.email-field-text")}
@@ -87,6 +89,7 @@ const _SignUpForm: React.FC<Props> = ({
         component={SimpleTextField}
       />
       <GVHookFormField
+        showCorrect
         type="password"
         name={SIGN_UP_FORM_FIELDS.password}
         label={t("auth.signup.password-field-text")}
@@ -94,6 +97,7 @@ const _SignUpForm: React.FC<Props> = ({
         autoComplete="new-password"
       />
       <GVHookFormField
+        showCorrect
         type="password"
         name={SIGN_UP_FORM_FIELDS.confirmPassword}
         label={t("auth.signup.password-confirm-field-text")}
