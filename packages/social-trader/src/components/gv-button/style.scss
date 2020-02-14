@@ -117,20 +117,6 @@ $decreased-margin: $change-size-value;
     background-image: none;
   }
 
-  &:hover:not(:disabled):not(.gv-btn--successful) {
-    &.gv-btn--danger {
-      background-color: rgba(darken($negative-color, 10%), 0.3);
-    }
-
-    &.gv-btn--primary {
-      background-color: rgba(darken($primary-color, 10%), 0.3);
-    }
-
-    &.gv-btn--secondary {
-      background-color: rgba(darken($secondary-color, 10%), 0.3);
-    }
-  }
-
   &--text {
     &.gv-btn--primary {
       color: $primary-color;
