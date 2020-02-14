@@ -124,6 +124,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          itemSelector={openPositions.itemSelector!}
           getItems={openPositions.getItems(programId)}
           dataSelector={openPositions.dataSelector}
           programId={programId}
@@ -187,6 +188,7 @@ interface Props {
 export type TProgramTableReduxData = {
   getItems: (id: string) => GetItemsFuncActionType;
   dataSelector: TableSelectorType;
+  itemSelector?: (state: RootState) => { [keys: string]: any };
 };
 
 export type TProgramTablesData = {
