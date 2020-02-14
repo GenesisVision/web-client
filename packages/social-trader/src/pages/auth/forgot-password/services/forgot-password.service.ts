@@ -34,7 +34,7 @@ export const sendForgotPasswordEmail = (
   captchaCheckResult: CaptchaCheckResult
 ) => (dispatch: MiddlewareDispatch, getState: TGetState) => {
   let { email } = getState().emailPending;
-  dispatch(
+  return dispatch(
     forgotPassword({
       email,
       captchaCheckResult
