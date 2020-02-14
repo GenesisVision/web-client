@@ -9,9 +9,9 @@ import { useTranslation } from "react-i18next";
 
 import { SearchTableProps } from "./global-search-result";
 
-const ProgramsTable: React.FC<
-  SearchTableProps<ItemsViewModelProgramDetailsListItem>
-> = ({ data }) => {
+const ProgramsTable: React.FC<SearchTableProps<
+  ItemsViewModelProgramDetailsListItem
+>> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <Table

@@ -1,7 +1,5 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import { GetItemsFuncType } from "components/table/components/table.types";
-import { mapToTableItems, TableItems } from "components/table/helpers/mapper";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { ASSET } from "constants/constants";
 import {
@@ -19,7 +17,6 @@ import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
 import notificationsApi from "services/api-client/notifications-api";
 import platformApi from "services/api-client/platform-api";
-import programsApi from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import {
   ApiActionResponse,
@@ -72,11 +69,6 @@ export const dispatchProgramDescriptionWithId = (
       : fetchProgramDescriptionAction;
   return dispatch(action(id, auth));
 };
-
-export const fetchProgramDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  programsApi.getProgramDetails(id, {
-    authorization: authService.getAuthArg(ctx)
-  });
 
 export const dispatchProgramDescription = (
   ctx?: NextPageContext,
@@ -239,17 +231,6 @@ export const fetchPortfolioEventsCount = (
   return fetchPortfolioEventsWithoutTable(eventLocation, filters).then(
     ({ total }) => total
   );
-};
-
-export const fetchPortfolioEvents = (
-  eventLocation: EVENT_LOCATION
-): GetItemsFuncType => (
-  filters?
-): Promise<TableItems<InvestmentEventViewModels>> => {
-  const authorization = authService.getAuthArg();
-  return eventsApi
-    .getEvents(authorization, { ...filters, eventLocation })
-    .then(mapToTableItems<InvestmentEventViewModels>("events"));
 };
 
 export const getProfitChart: TGetChartFunc = ({

@@ -28,7 +28,7 @@ export const fetchFollowNotificationsAction = (
 
 export const addErrorMessageAction = (
   payload: string
-): NotificationsActionType<ProgramNotificationSettingList> => ({
+): NotificationsActionType => ({
   type: ADD_ERROR_MESSAGE,
   payload
 });

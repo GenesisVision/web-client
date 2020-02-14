@@ -12,9 +12,9 @@ interface IDialogLoaderGoogleAuthStepsStateProps {
   innerWidth: number;
 }
 
-const _DialogLoaderGoogleAuthSteps: React.FC<
-  IDialogLoaderGoogleAuthStepsStateProps
-> = ({ innerWidth }) =>
+const _DialogLoaderGoogleAuthSteps: React.FC<IDialogLoaderGoogleAuthStepsStateProps> = ({
+  innerWidth
+}) =>
   isTablet(innerWidth) ? (
     <DialogLoaderGoogleAuthMobile />
   ) : (

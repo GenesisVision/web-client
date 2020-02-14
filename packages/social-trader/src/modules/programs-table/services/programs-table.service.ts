@@ -28,8 +28,7 @@ export const fetchPrograms = (
 
 export const getFiltersFromContext = ({
   asPath = "",
-  pathname,
-  reduxStore
+  pathname
 }: NextPageWithReduxContext): FetchProgramsFiltersType => {
   const showFavorites = pathname.includes(FAVORITES_TAB_NAME);
   const {

@@ -1,17 +1,21 @@
 import Page from "components/page/page";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import BrokersContainer from "routes/ssr/landing-page/containers/brokers-container/brokers-container";
+import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
 import {
   brokersInfo,
   brokersTabs
-} from "routes/ssr/landing-page/static-data/brokers";
+} from "pages/landing-page/static-data/brokers";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const _TradePage: React.FC<Props> = ({}) => {
+const _TradePage: React.FC = () => {
   const [t] = useTranslation();
   const title = t("trade.title");
   return (
-    <Page showTitle title={title}>
+    <Page
+      description={"Information about trade brokers"}
+      showTitle
+      title={title}
+    >
       <BrokersContainer
         darkTheme
         brokersInfo={brokersInfo}
@@ -21,7 +25,5 @@ const _TradePage: React.FC<Props> = ({}) => {
     </Page>
   );
 };
-
-interface Props {}
 
 export const TradePage = React.memo(_TradePage);

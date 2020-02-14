@@ -45,6 +45,12 @@ const PortfolioEventsTableContainer = dynamic(() =>
   import("components/portfolio-events-table/portfolio-events-table-container")
 );
 
+enum TABS {
+  SUBSCRIPTION = "SUBSCRIPTION",
+  INVESTMENT = "INVESTMENT",
+  EVENTS = "EVENTS"
+}
+
 const _DetailsInvestment: React.FC<Props> = ({
   isOwnAsset,
   fees,
@@ -77,7 +83,10 @@ const _DetailsInvestment: React.FC<Props> = ({
     isAuthenticated &&
       id &&
       dispatch(
-        getEvents(id, EVENT_LOCATION.Asset)({
+        getEvents(
+          id,
+          EVENT_LOCATION.Asset
+        )({
           take: DEFAULT_EVENTS_PAGING.itemsOnPage
         })
       );
@@ -149,11 +158,6 @@ const _DetailsInvestment: React.FC<Props> = ({
   );
 };
 
-enum TABS {
-  SUBSCRIPTION = "SUBSCRIPTION",
-  INVESTMENT = "INVESTMENT",
-  EVENTS = "EVENTS"
-}
 interface Props {
   isOwnAsset: boolean;
   fees: FeesType;

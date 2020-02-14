@@ -13,6 +13,10 @@ import { compose } from "redux";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 import { number, object } from "yup";
 
+export enum FORM_FIELDS {
+  amount = "amount"
+}
+
 const _DemoDepositForm: React.FC<Props> = ({
   isValid,
   isSubmitting,
@@ -36,10 +40,6 @@ const _DemoDepositForm: React.FC<Props> = ({
     </form>
   );
 };
-
-export enum FORM_FIELDS {
-  amount = "amount"
-}
 
 interface Props
   extends IDemoDepositFormProps,

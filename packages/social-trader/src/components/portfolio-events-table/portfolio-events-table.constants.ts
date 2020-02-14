@@ -78,42 +78,6 @@ export const ASSET_PORTFOLIO_EVENTS_DEFAULT_FILTERING: FilteringType = {
   [EVENT_TYPE_FILTER_NAME]: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
 
-export const PORTFOLIO_EVENTS_TYPES_ENUM = {
-  All: "all",
-  Invest: "invest",
-  Withdraw: "withdraw",
-  Profit: "profit",
-  Loss: "loss",
-  Reinvest: "reinvest",
-  Canceled: "canceled",
-  Ended: "ended",
-  ManagerInvest: "ManagerInvest",
-  EntranceFee: "EntranceFee",
-  AssetStarted: "AssetStarted",
-  InvestorInvest: "InvestorInvest",
-  AssetFinished: "AssetFinished",
-  ProgramPeriodStarts: "ProgramPeriodStarts",
-  ProgramPeriodEnds: "ProgramPeriodEnds"
-};
-
-export enum PORTFOLIO_EVENTS_TYPES {
-  All = "all",
-  Invest = "invest",
-  Withdraw = "withdraw",
-  Profit = "profit",
-  Loss = "loss",
-  Reinvest = "reinvest",
-  Canceled = "canceled",
-  Ended = "ended",
-  ManagerInvest = "ManagerInvest",
-  EntranceFee = "EntranceFee",
-  AssetStarted = "AssetStarted",
-  InvestorInvest = "InvestorInvest",
-  AssetFinished = "AssetFinished",
-  ProgramPeriodStarts = "ProgramPeriodStarts",
-  ProgramPeriodEnds = "ProgramPeriodEnds"
-}
-
 export const EVENT_PROFITABILITY_VALUES: {
   [t in InvestmentEventViewModelChangeStateEnum]: string;
 } = {

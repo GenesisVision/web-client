@@ -100,7 +100,7 @@
 
   &__label {
     cursor: pointer;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-size: 16px;
     font-weight: normal;
     line-height: 1.38;
@@ -113,7 +113,7 @@
   &__error {
     position: absolute;
     left: 0;
-    bottom: -24px;
+    bottom: -16px;
     font-size: 0.7em;
     color: #eb3b5a;
     white-space: nowrap;

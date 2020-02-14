@@ -7,7 +7,7 @@ export const SET_FAVORITE_FOLLOW = "SET_FAVORITE_FOLLOW";
 
 export const addFavoriteFollowAction = ({
   id
-}: FavoriteActionProps): FavoriteActionType<any> => ({
+}: FavoriteActionProps): FavoriteActionType => ({
   type: SET_FAVORITE_FOLLOW,
   meta: {
     id,
@@ -17,7 +17,7 @@ export const addFavoriteFollowAction = ({
 
 export const removeFavoriteFollowAction = ({
   id
-}: FavoriteActionProps): FavoriteActionType<any> => ({
+}: FavoriteActionProps): FavoriteActionType => ({
   type: SET_FAVORITE_FOLLOW,
   meta: {
     id,

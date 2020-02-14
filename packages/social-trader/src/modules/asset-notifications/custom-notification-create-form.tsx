@@ -19,6 +19,18 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+enum FIELDS {
+  type = "type",
+  conditionType = "conditionType",
+  conditionAmount = "conditionAmount"
+}
+
+enum CONDITION_TYPE_VALUES {
+  Profit = "Profit",
+  Level = "Level",
+  AvailableToInvest = "AvailableToInvest"
+}
+
 const _CustomNotificationCreateForm: React.FC<Props> = ({
   errorMessage,
   t,
@@ -132,18 +144,6 @@ interface OwnProps {
     setSubmitting: (isSubmitting: boolean) => void
   ) => void;
   errorMessage?: string;
-}
-
-enum FIELDS {
-  type = "type",
-  conditionType = "conditionType",
-  conditionAmount = "conditionAmount"
-}
-
-enum CONDITION_TYPE_VALUES {
-  Profit = "Profit",
-  Level = "Level",
-  AvailableToInvest = "AvailableToInvest"
 }
 
 export interface ICustomNotificationCreateFormValues {

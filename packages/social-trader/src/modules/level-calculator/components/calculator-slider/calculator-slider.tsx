@@ -1,6 +1,6 @@
 import "./calculator-slider.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import GVTextField from "components/gv-text-field";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Slider from "rc-slider";
@@ -63,9 +63,9 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       editableValue = false
     } = this.props;
     return (
-      <div className={classnames("calculator-slider", className)}>
+      <div className={classNames("calculator-slider", className)}>
         <div
-          className={classnames("calculator-slider__heading", {
+          className={classNames("calculator-slider__heading", {
             "calculator-slider__heading--editable-value": editableValue
           })}
         >
@@ -82,7 +82,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
                 onChange={this.handleValueChange}
                 adornment={valueAdornment}
                 adornmentPosition="end"
-                wrapperClassName={classnames(
+                wrapperClassName={classNames(
                   "calculator-slider__editable-value-wrapper",
                   valueClassName
                 )}
@@ -120,9 +120,9 @@ interface Props {
   editableValue?: boolean;
   valueAdornment?: string;
   min: number;
-  minLabel?: React.ReactElement<any>;
+  minLabel?: React.ReactElement;
   max: number;
-  maxLabel?: React.ReactElement<any>;
+  maxLabel?: React.ReactElement;
   step?: number;
   title?: React.ReactNode;
   className?: string;

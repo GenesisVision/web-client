@@ -31,9 +31,10 @@ import {
 } from "utils/validators/validators";
 import { lazy, object, Schema } from "yup";
 
-const _WalletWithdrawForm: React.FC<
-  InjectedFormikProps<Props, IWalletWithdrawFormValues>
-> = ({
+const _WalletWithdrawForm: React.FC<InjectedFormikProps<
+  Props,
+  IWalletWithdrawFormValues
+>> = ({
   t,
   twoFactorEnabled,
   handleSubmit,

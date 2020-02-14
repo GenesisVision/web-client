@@ -13,7 +13,7 @@ import {
   compose,
   Dispatch
 } from "redux";
-import { AuthRootState, SetSubmittingType } from "utils/types";
+import { SetSubmittingType } from "utils/types";
 
 import {
   TAddNotification,
@@ -84,7 +84,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: AuthRootState): StateProps => ({
+const mapStateToProps = (): StateProps => ({
   errorMessage: "" //state.programNotifications.errorMessage TODO
 });
 
@@ -123,10 +123,7 @@ const AssetNotificationsCustom = compose<
 >(
   withLoader,
   translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   React.memo
 )(_AssetNotificationsCustom);
 export default AssetNotificationsCustom;

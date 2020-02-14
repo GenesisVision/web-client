@@ -8,7 +8,7 @@ import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowDetailsStatisticSection from "pages/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
@@ -24,10 +24,13 @@ import {
 
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
-import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, {
+  TProgramTablesData
+} from "./program-history-section/program-details-history-section";
 import { levelParametersSelector } from "./reducers/level-parameters.reducer";
 import {
   financialStatisticTableSelector,
+  openPositionsSelector,
   openPositionsTableSelector,
   periodHistoryTableSelector,
   programEventsTableSelector,
@@ -51,7 +54,7 @@ const InvestmentProgramControls = dynamic(() =>
   import("./program-controls/investment-program-controls")
 );
 const FollowControls = dynamic(() =>
-  import("pages/follows/follow-details/follow-controls/follow-controls")
+  import("pages/invest/follows/follow-details/follow-controls/follow-controls")
 );
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
@@ -88,7 +91,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     dispatch(dispatchProgramDescriptionWithId(id, undefined, assetType));
   }, [id]);
 
-  const tablesData = {
+  const tablesData: TProgramTablesData = {
     financialStatistic: programDetails
       ? {
           dataSelector: financialStatisticTableSelector,
@@ -96,6 +99,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         }
       : undefined,
     openPositions: {
+      itemSelector: openPositionsSelector,
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
@@ -199,6 +203,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           </>
         )}
       />
+      <DetailsDivider />
+
       <DetailsDivider />
       <DetailsInvestment
         isOwnAsset={isOwnAsset}

@@ -9,9 +9,9 @@ import { useTranslation } from "react-i18next";
 
 import { SearchTableProps } from "./global-search-result";
 
-const _FollowsTable: React.FC<
-  SearchTableProps<ItemsViewModelFollowDetailsListItem>
-> = ({ data }) => {
+const _FollowsTable: React.FC<SearchTableProps<
+  ItemsViewModelFollowDetailsListItem
+>> = ({ data }) => {
   const [t] = useTranslation();
   return (
     <Table

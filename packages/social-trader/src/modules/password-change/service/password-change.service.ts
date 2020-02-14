@@ -1,7 +1,7 @@
 import authActions from "actions/auth-actions";
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
-import { SETTINGS_ROUTE } from "components/profile/profile.constants";
-import { push } from "connected-react-router";
+import { Push } from "components/link/link";
+import { SECURITY_ROUTE } from "components/profile/profile.constants";
 import { ChangePasswordViewModel } from "gv-api-web";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import authApi from "services/api-client/auth-api";
@@ -18,7 +18,7 @@ export const changePassword = (body: ChangePasswordViewModel) => (
     .then((response: string) => {
       authService.storeToken(response);
       dispatch(authActions.updateTokenAction(true));
-      dispatch(push(SETTINGS_ROUTE));
+      Push(SECURITY_ROUTE);
       dispatch(fetchProfileHeaderInfoAction());
       dispatch(
         alertMessageActions.success("auth.password-change.success-alert", true)

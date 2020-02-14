@@ -13,6 +13,11 @@ import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
+export enum TYPE_2FA {
+  GOOGLE = "google",
+  DISABLE = "disable"
+}
+
 const _TwoFactor: React.FC<Props> = ({
   handleSubmit,
   handleChange,
@@ -59,11 +64,6 @@ interface Props {
   handleChange: (event: React.ChangeEvent<any>) => void;
   handleClose: () => void;
   type?: TYPE_2FA;
-}
-
-export enum TYPE_2FA {
-  GOOGLE = "google",
-  DISABLE = "disable"
 }
 
 const TwoFactor = withLoader(React.memo(_TwoFactor));

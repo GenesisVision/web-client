@@ -1,6 +1,5 @@
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
-import { ASSETS_TYPES } from "components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { ASSET, IDashboardAssetChart } from "constants/constants";
+import { ASSET } from "constants/constants";
 import { AssetType, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
@@ -47,54 +46,12 @@ export const getInRequestsData = (): TDashboardRequest => ({
 export const getInRequestsLoadersData = (): TDashboardInRequests =>
   tableLoaderCreator(getInRequestsData, 3);
 
-export const getTradingTotalLoaderData = (): TDashboardTradingStatistic =>
-  ({
-    // total: getRandomInteger(-1000, 1000),
-    equity: getRandomInteger(-1000, 1000),
-    aum: getRandomInteger(-1000, 1000)
-  } as TDashboardTradingStatistic);
-
 export const getTradingEventsLoaderData = () => {
   const length = getRandomInteger(1, 4);
   return {
     items: tableLoaderCreator(getEventLoaderData, length),
     total: length
   };
-};
-
-export const getTradingPublicLoaderData = () => {
-  const length = getRandomInteger(5, 15);
-  return {
-    items: tableLoaderCreator(getRecommendationLoaderData, length),
-    total: length
-  };
-};
-
-export const getTradingFollowLoaderData = () => {
-  const length = getRandomInteger(5, 15);
-  return {
-    items: tableLoaderCreator(
-      () => ({ ...getRecommendationLoaderData(), type: ASSET.FOLLOW }),
-      getRandomInteger(5, 15)
-    ),
-    total: length
-  };
-};
-
-export const getTradingLoaderData = () => ({
-  total: getTradingTotalLoaderData(),
-  public: getTradingPublicLoaderData(),
-  personal: getTradingPublicLoaderData(),
-  followThem: getTradingFollowLoaderData()
-});
-
-export const DashboardChartValueLoaderData: IDashboardAssetChart = {
-  type: ASSETS_TYPES.Fund,
-  id: "",
-  title: "",
-  currency: "GVT",
-  equityChart: [],
-  pnLChart: []
 };
 
 export const assetsLoaderData = () => {

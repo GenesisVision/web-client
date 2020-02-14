@@ -31,7 +31,7 @@ const useCreateAssetSubmit = ({
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const checkConditionMiddleware = (data: any) => {
-    if (!condition || !!condition(data)) {
+    if (!condition || condition(data)) {
       dispatch(fetchWallets(currency));
       dispatch(
         alertMessageActions.success(
@@ -49,7 +49,7 @@ const useCreateAssetSubmit = ({
   return useCallback(
     (data: ICreateAssetSettingsFormValues, setSubmitting) => {
       setSubmitting(true);
-      sendRequest({ data, asset });
+      sendRequest({ data, asset }, setSubmitting);
     },
     [asset]
   );

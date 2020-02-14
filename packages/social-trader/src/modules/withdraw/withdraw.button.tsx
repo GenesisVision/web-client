@@ -21,30 +21,24 @@ const _WithdrawButton: React.FC<Props> = ({
   const [t] = useTranslation();
   const label = t("buttons.withdraw");
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
-  let withdraw;
-  switch (type) {
-    case ASSET.FUND:
-      withdraw = (
-        <FundWithdrawDialog
-          onApply={onApply}
-          open={isOpenPopup}
-          id={id}
-          onClose={setIsClosePopup}
-        />
-      );
-      break;
-    default:
-      withdraw = (
-        <ProgramWithdrawDialog
-          onApply={onApply}
-          open={isOpenPopup}
-          id={id}
-          accountCurrency={accountCurrency}
-          assetCurrency={currency}
-          onClose={setIsClosePopup}
-        />
-      );
-  }
+  const withdraw =
+    type === ASSET.FUND ? (
+      <FundWithdrawDialog
+        onApply={onApply}
+        open={isOpenPopup}
+        id={id}
+        onClose={setIsClosePopup}
+      />
+    ) : (
+      <ProgramWithdrawDialog
+        onApply={onApply}
+        open={isOpenPopup}
+        id={id}
+        accountCurrency={accountCurrency}
+        assetCurrency={currency}
+        onClose={setIsClosePopup}
+      />
+    );
   return (
     <>
       <GVButton

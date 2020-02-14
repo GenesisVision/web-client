@@ -23,7 +23,7 @@ import {
 
 const FollowBalanceChart = dynamic(() =>
   import(
-    "pages/follows/follow-details/follow-details-statistic-section/follow-balance-chart-section/follow-balance-chart"
+    "pages/invest/follows/follow-details/follow-details-statistic-section/follow-balance-chart-section/follow-balance-chart"
   )
 );
 const ProgramAbsoluteProfitChart = dynamic(() =>

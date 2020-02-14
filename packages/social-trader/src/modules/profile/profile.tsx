@@ -10,7 +10,6 @@ import SettingsBlock from "components/settings-block/settings-block";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
-import CopyButton from "modules/copy-button/copy-button";
 import PublicInfo from "modules/public-info/public-info";
 import * as React from "react";
 import { useTranslation } from "react-i18next";

@@ -1,6 +1,6 @@
 import "./details-description-control.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { ToType } from "components/link/link";
 import React from "react";
 
@@ -12,7 +12,7 @@ interface IDetailsDescriptionControlProps
   to?: ToType;
   tag: React.ComponentType<any> | string;
 }
-const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({
+const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   children,
   text,
   tag: Tag,
@@ -22,7 +22,7 @@ const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({
 }) => {
   return (
     <Tag
-      className={classnames("details-description-control", className)}
+      className={classNames("details-description-control", className)}
       onClick={onClick}
       to={to}
     >

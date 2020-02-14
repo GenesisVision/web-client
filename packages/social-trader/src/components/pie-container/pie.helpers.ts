@@ -12,8 +12,7 @@ export const calcPercent = (
   start: Date | number,
   end: Date | number
 ) => {
-  let progress = 0,
-    duration = 0;
+  let progress, duration;
   if (
     typeof value === "number" &&
     typeof start === "number" &&

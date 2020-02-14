@@ -1,6 +1,6 @@
-import "./button.css";
+import "./button.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import Link from "components/link/link";
 import React from "react";
 
@@ -28,7 +28,6 @@ const GVLink: React.FC<IGVLinkProps> = ({
   href,
   ...other
 }) => {
-  const target = isExternal ? "_self" : "";
   return (
     <Link to={href} className={className} {...other}>
       {children}
@@ -51,7 +50,7 @@ export default class Button extends React.PureComponent<IButton> {
       icon = null,
       ...other
     } = this.props;
-    const cn = classnames("gv-btn", className, {
+    const cn = classNames("gv-btn", className, {
       "gv-btn--full-width": fullWidth,
       "gv-btn--disabled": disabled,
       "gv-btn--primary": primary,

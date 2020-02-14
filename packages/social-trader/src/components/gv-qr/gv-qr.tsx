@@ -1,6 +1,6 @@
 import "./gv-qr.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import GVColors from "components/gv-styles/gv-colors";
 import QRCode from "qrcode.react";
 import * as React from "react";
@@ -21,7 +21,7 @@ const GVqr: React.FC<IGVqr> = ({
   className
 }) => (
   <div
-    className={classnames("gv-qr", className)}
+    className={classNames("gv-qr", className)}
     style={{
       background: backgroundColor,
       width: `${size}px`,

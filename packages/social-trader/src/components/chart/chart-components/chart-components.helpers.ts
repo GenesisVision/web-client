@@ -49,8 +49,3 @@ export const composeTicks = (
     x => (isOneDay ? new Date(start).getTime() : periodStart) + diff * x
   );
 };
-
-const MIN_CHART_VALUE = 1e-6;
-export const formartChartMinValue = (value: number): number => {
-  return Math.abs(value) < MIN_CHART_VALUE ? 0 : value;
-};

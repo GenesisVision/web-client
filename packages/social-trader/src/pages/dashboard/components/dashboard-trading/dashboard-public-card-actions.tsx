@@ -22,9 +22,7 @@ import {
   createProgramSettingsToUrl
 } from "utils/compose-url";
 
-const _DashboardPublicCardActions: React.FC<
-  IDashboardPublicCardActionsProps
-> = ({
+const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = ({
   brokerType,
   onApply,
   name,

@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
 
 import GVTextArea from "./gv-text-area";
@@ -72,7 +72,7 @@ class GVTextField extends React.PureComponent<
     this.props.touched &&
     this.props.error && (
       <div
-        className={classnames(
+        className={classNames(
           "gv-text-field__error",
           this.props.errorClassName
         )}
@@ -85,7 +85,7 @@ class GVTextField extends React.PureComponent<
     if (!this.props.label) return null;
     return (
       <label
-        className={classnames(
+        className={classNames(
           "gv-text-field__label",
           this.props.labelClassName,
           {
@@ -106,7 +106,7 @@ class GVTextField extends React.PureComponent<
     if (!adornment) return null;
     return (
       <div
-        className={classnames("gv-text-field__adornment", adornmentClassName, {
+        className={classNames("gv-text-field__adornment", adornmentClassName, {
           "gv-text-field__adornment--start": adornmentPosition === "start",
           "gv-text-field__adornment--end": adornmentPosition === "end"
         })}
@@ -156,7 +156,7 @@ class GVTextField extends React.PureComponent<
       <Input
         ref={this.input}
         type={type}
-        className={classnames("gv-text-field__input", inputClassName)}
+        className={classNames("gv-text-field__input", inputClassName)}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         {...otherProps}
@@ -175,14 +175,14 @@ class GVTextField extends React.PureComponent<
     } = this.props;
     return (
       <div
-        className={classnames("gv-text-field__wrapper", wrapperClassName, {
+        className={classNames("gv-text-field__wrapper", wrapperClassName, {
           "gv-text-field__wrapper--no-margin": noMargin,
           "gv-text-field__wrapper--wide": wide
         })}
       >
         {this.renderLabel()}
         <div
-          className={classnames("gv-text-field", className, {
+          className={classNames("gv-text-field", className, {
             "gv-text-field--disabled": disabled,
             "gv-text-field--invalid": touched && error,
             "gv-text-field--focused": this.state.focused

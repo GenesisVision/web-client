@@ -24,9 +24,9 @@ export const fetchProgramNotifications = (
   ctx?: NextPageContext
 ) => async (dispatch: MiddlewareDispatch) => {
   const authorization = authService.getAuthArg(ctx);
-  await dispatch(fetchProgramNotificationsAction(id, authorization)).then(
-    data => dispatch(addProgramNotificationsAction(data.value))
-  );
+  await dispatch(
+    fetchProgramNotificationsAction(id, authorization)
+  ).then(data => dispatch(addProgramNotificationsAction(data.value)));
 };
 
 export const addProgramNotification: TAddNotification = (

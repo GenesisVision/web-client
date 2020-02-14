@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import React from "react";
 
 class GVSwitch extends React.PureComponent<GVSwitchProps> {
@@ -50,7 +50,7 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
           </span>
         )}
         <span
-          className={classnames("gv-switch", className, {
+          className={classNames("gv-switch", className, {
             "gv-switch--checked": value,
             "gv-switch--primary": color === "primary",
             "gv-switch--secondary": color === "secondary",

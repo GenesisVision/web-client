@@ -7,6 +7,11 @@ import Router from "next/router";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 
+export enum SIDEBAR_POSITION {
+  LEFT = "left",
+  RIGHT = "right"
+}
+
 const _Sidebar: NextComponentType<{}, {}, Props> = ({
   open,
   onClose,
@@ -35,11 +40,6 @@ const _Sidebar: NextComponentType<{}, {}, Props> = ({
 
 const Sidebar = React.memo(_Sidebar);
 export default Sidebar;
-
-export enum SIDEBAR_POSITION {
-  LEFT = "left",
-  RIGHT = "right"
-}
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;

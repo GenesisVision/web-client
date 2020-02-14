@@ -1,9 +1,14 @@
 import classNames from "classnames";
 import React from "react";
 
-export const PopoverContentCardBlock: React.FC<
-  IPopoverContentCardBlockProps
-> = ({ children, dark, className, size = "middle", stretched, fixed }) => {
+export const PopoverContentCardBlock: React.FC<IPopoverContentCardBlockProps> = ({
+  children,
+  dark,
+  className,
+  size = "middle",
+  stretched,
+  fixed
+}) => {
   return (
     <div
       className={classNames("popover-content__block", className, {

@@ -7,7 +7,7 @@ export const SET_FAVORITE_PROGRAM = "SET_FAVORITE_PROGRAM";
 
 export const addFavoriteProgramAction = ({
   id
-}: FavoriteActionProps): FavoriteActionType<any> => ({
+}: FavoriteActionProps): FavoriteActionType => ({
   type: SET_FAVORITE_PROGRAM,
   meta: {
     id,
@@ -17,7 +17,7 @@ export const addFavoriteProgramAction = ({
 
 export const removeFavoriteProgramAction = ({
   id
-}: FavoriteActionProps): FavoriteActionType<any> => ({
+}: FavoriteActionProps): FavoriteActionType => ({
   type: SET_FAVORITE_PROGRAM,
   meta: {
     id,

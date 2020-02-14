@@ -17,9 +17,8 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
   const [t] = useTranslation();
   const [location, setLocation] = useState();
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location)
-      setLocation(window.location.href);
-  }, [window]);
+    if (window.location) setLocation(window.location.href);
+  }, []);
   return (
     <div className="wallet-list__buttons">
       {depositUrlCoindirect && (
@@ -28,6 +27,7 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
             title={t("wallet-page.list.buy-with-card")}
             href={`${depositUrlCoindirect}&url=${location}`}
             target={"_blank"}
+            rel="noopener noreferrer"
           >
             {t("wallet-page.list.buy-with-card")}
           </a>

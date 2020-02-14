@@ -7,7 +7,6 @@ import { AccountSubscriptionsType } from "pages/accounts/account-details/service
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import accountsApi from "services/api-client/accounts-api";
-import brokersApi from "services/api-client/brokers-api";
 import followApi from "services/api-client/follow-api";
 import authService from "services/auth-service";
 import { ActionType, MiddlewareDispatch } from "utils/types";
@@ -35,9 +34,6 @@ export const fetchAccountSubscriptions = (
 
 export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
   accountsApi.getTradingAccountDetails(id, authService.getAuthArg(ctx));
-
-export const getAccountBrokers = (id: string) =>
-  brokersApi.getBrokersForProgram(id);
 
 export const dispatchAccountDescription = (id: string) => (
   ctx?: NextPageContext
@@ -81,12 +77,6 @@ export const getAccountHistoryCounts = (id: string) => (
     })
   );
 };
-
-export enum EVENT_LOCATION {
-  Asset = "Asset",
-  Dashboard = "Dashboard",
-  EventsAll = "EventsAll"
-}
 
 export const getProfitChart: TGetChartFunc = ({
   id,

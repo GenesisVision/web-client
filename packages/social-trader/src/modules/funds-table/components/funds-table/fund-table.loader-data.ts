@@ -2,13 +2,12 @@ import {
   mockDate,
   ownerLoaderData
 } from "components/details/details.loader-data";
+import { FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import {
-  FundAssetPercent,
-  FundDetailsListItem,
-  ItemsViewModelFundDetailsListItem
-} from "gv-api-web";
-import { getRandomColor, getRandomInteger } from "utils/helpers";
-import { tableLoaderCreator } from "utils/helpers";
+  getRandomColor,
+  getRandomInteger,
+  tableLoaderCreator
+} from "utils/helpers";
 
 const assetLoaderDataCreator = (): FundAssetPercent => ({
   asset: "GVT",
@@ -53,8 +52,3 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsListItem => ({
 export const fundListLoaderData: FundDetailsListItem[] = tableLoaderCreator(
   fundDetailsLoaderDataCreator
 );
-
-export const fundTableLoaderData: ItemsViewModelFundDetailsListItem = {
-  items: fundListLoaderData,
-  total: fundListLoaderData.length
-};

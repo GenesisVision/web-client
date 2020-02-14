@@ -8,14 +8,20 @@ import {
 } from "components/pie-container/pie.helpers";
 import * as React from "react";
 
+export enum PIE_DIRECTION {
+  CLOCKWISE = "CLOCKWISE",
+  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
+}
+
 const Pie: React.FC<Props & CircleDataType> = props => {
   const circles: CircleDataType[] = [props];
   return <MultiPie {...props} circles={circles} />;
 };
 
-export const MultiPie: React.FC<
-  Props & { over?: string; circles: CircleDataType[] }
-> = ({
+export const MultiPie: React.FC<Props & {
+  over?: string;
+  circles: CircleDataType[];
+}> = ({
   over,
   circles,
   onMouseLeave,
@@ -52,11 +58,6 @@ export const MultiPie: React.FC<
     </PieCircleContainer>
   );
 };
-
-export enum PIE_DIRECTION {
-  CLOCKWISE = "CLOCKWISE",
-  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
-}
 
 export interface Props {
   onMouseOver?: (name?: string) => VoidFunction;

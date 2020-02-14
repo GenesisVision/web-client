@@ -1,5 +1,4 @@
 import { PublicProfile } from "gv-api-web";
-import * as React from "react";
 import filesService from "services/file-service";
 import { SchemaType } from "utils/seo";
 

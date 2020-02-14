@@ -26,7 +26,7 @@ import {
   TChartCurrency,
   TRemoveChartCurrency
 } from "modules/chart-currency-selector/chart-currency-selector";
-import { FundBalanceChartDataType } from "pages/funds/fund-details/reducers/balance-chart.reducer";
+import { FundBalanceChartDataType } from "pages/invest/funds/fund-details/reducers/balance-chart.reducer";
 import { ProgramBalanceChartDataType } from "pages/invest/programs/program-details/program-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
@@ -118,7 +118,6 @@ export type TUseFundChartStateDataMethods = {
   selectedCurrencies: TChartCurrency[];
   setSelectedCurrencies: (currencies: TChartCurrency[]) => void;
 };
-export type TUseFundChartStateData = () => TUseFundChartStateDataMethods;
 export type TUseFundChartStateDataCreator = (props: {
   view: DETAILS_CHART_TABS;
   statisticCurrencyAction: (currency: CurrencyEnum) => TStatisticCurrencyAction;

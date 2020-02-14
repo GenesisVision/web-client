@@ -5,6 +5,7 @@ import Page from "components/page/page";
 import { ASSET, CREATE_ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
+import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
@@ -12,7 +13,9 @@ import {
   getTrades
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ProgramDetailsHistorySection from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, {
+  TProgramTablesData
+} from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
@@ -21,6 +24,7 @@ import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
 import { AccountDetailsDataType } from "./account-details.types";
 import {
+  openPositionsSelector,
   openPositionsTableSelector,
   tradesTableSelector
 } from "./reducers/account-history.reducer";
@@ -28,16 +32,12 @@ import {
 const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
 );
-const AccountDetailsSubscriptions = dynamic(() =>
-  import(
-    "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions"
-  )
-);
 
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
-  const tablesData = {
+  const tablesData: TProgramTablesData = {
     openPositions: {
+      itemSelector: openPositionsSelector,
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },

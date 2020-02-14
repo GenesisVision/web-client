@@ -9,9 +9,10 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
-const _ConfirmPopupContent: React.ComponentType<
-  InjectedFormikProps<IConfirmPopupContentProps & WithTranslation, {}>
-> = ({
+const _ConfirmPopupContent: React.ComponentType<InjectedFormikProps<
+  IConfirmPopupContentProps & WithTranslation,
+  {}
+>> = ({
   t,
   onCancel,
   header,

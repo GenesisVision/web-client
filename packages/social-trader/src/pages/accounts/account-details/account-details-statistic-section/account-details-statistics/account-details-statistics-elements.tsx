@@ -12,9 +12,10 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-const _AccountDetailsStatisticsElements: React.FC<
-  IAccountDetailsStatisticsElementsProps
-> = ({ data: { statistic, statisticCurrency }, period, status }) => {
+const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsElementsProps> = ({
+  data: { statistic, statisticCurrency },
+  period
+}) => {
   const [t] = useTranslation();
   return (
     <DetailsStatisticsElements

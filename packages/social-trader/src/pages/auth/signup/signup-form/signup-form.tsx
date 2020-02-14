@@ -4,23 +4,24 @@ import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import GVFormikField from "components/gv-formik-field";
 import GVTextField from "components/gv-text-field";
 import { InjectedFormikProps, withFormik } from "formik";
-import { CaptchaCheckResult } from "gv-api-web";
-import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { CaptchaCheckResult, UtmSource } from "gv-api-web";
 import {
   PRIVACY_POLICY_ROUTE,
   TERMS_ROUTE
-} from "routes/ssr/landing-page/static-data/nav-links";
+} from "pages/landing-page/static-data/nav-links";
+import * as React from "react";
+import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { compose } from "redux";
 import { SetSubmittingType } from "utils/types";
 
 import validationSchema, {
   SIGN_UP_FORM_FIELDS
 } from "./signup-form.validators";
 
-const _SignUpForm: React.FC<
-  InjectedFormikProps<Props, ISignUpFormFormValues>
-> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
+const _SignUpForm: React.FC<InjectedFormikProps<
+  Props,
+  ISignUpFormFormValues
+>> = ({ isSubmitting, handleSubmit, error, t, isValid, dirty }) => (
   <form
     id="signUpForm"
     className="signup-form"
@@ -112,13 +113,16 @@ const _SignUpForm: React.FC<
 interface Props extends WithTranslation, OwnProps {}
 
 interface OwnProps {
+  referer?: string;
   onSubmit(data: ISignUpFormFormValues, setSubmitting: SetSubmittingType): void;
   error: string;
   refCode?: string;
+  urlParams?: string;
 }
 
 export interface ISignUpFormFormValues {
   //extends RegisterManagerViewModel {
+  [SIGN_UP_FORM_FIELDS.utmSource]: UtmSource;
   [SIGN_UP_FORM_FIELDS.privacyPolicy]: boolean;
   [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean;
   [SIGN_UP_FORM_FIELDS.captchaCheckResult]: CaptchaCheckResult;
@@ -128,7 +132,11 @@ const SignUpForm = compose<React.FC<OwnProps>>(
   translate(),
   withFormik<Props, ISignUpFormFormValues>({
     displayName: "signup-form",
-    mapPropsToValues: props => ({
+    mapPropsToValues: ({ referer = "", urlParams = "", refCode }) => ({
+      [SIGN_UP_FORM_FIELDS.utmSource]: {
+        referer,
+        urlParams
+      },
       [SIGN_UP_FORM_FIELDS.captchaCheckResult]: {
         id: "",
         pow: {
@@ -136,7 +144,7 @@ const SignUpForm = compose<React.FC<OwnProps>>(
         },
         geeTest: {}
       },
-      [SIGN_UP_FORM_FIELDS.refCode]: props.refCode || "",
+      [SIGN_UP_FORM_FIELDS.refCode]: refCode || "",
       [SIGN_UP_FORM_FIELDS.userName]: "",
       [SIGN_UP_FORM_FIELDS.email]: "",
       [SIGN_UP_FORM_FIELDS.password]: "",

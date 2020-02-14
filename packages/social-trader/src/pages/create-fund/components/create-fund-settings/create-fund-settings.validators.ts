@@ -65,7 +65,7 @@ export const assetsShape = (t: i18next.TFunction) => {
       CREATE_FUND_FIELDS.assets,
       t("create-fund-page.settings.validation.assets-share"),
       (val: FundAssetPart[]) => {
-        return val.reduce((acc, next) => acc + next.percent, 0) == 100;
+        return val.reduce((acc, next) => acc + next.percent, 0) === 100;
       }
     )
     .required(t("create-fund-page.settings.validation.assets-count"))

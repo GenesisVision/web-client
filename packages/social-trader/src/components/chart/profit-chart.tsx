@@ -68,7 +68,7 @@ const _ProfitChart: React.FC<Props> = ({
 
 interface Props {
   tooltip?:
-    | React.ReactElement<any>
+    | React.ReactElement
     | React.StatelessComponent<any>
     | ContentRenderer<TooltipProps>;
   equityCharts: EquityChartType[];

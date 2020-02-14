@@ -8,7 +8,4 @@ const Page: React.FC = () => {
   return <SocialLinksPage />;
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);

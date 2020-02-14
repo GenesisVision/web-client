@@ -23,7 +23,7 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
       const t = max * val;
       onChange(name, +formatValue(t, 4));
     },
-    [max]
+    [max, onChange]
   );
 
   const handleChangeValue = React.useCallback(
@@ -34,7 +34,7 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
       if (newValueGuard > max) newValueGuard = max;
       onChange(name, +formatValue(newValueGuard, 2));
     },
-    [max]
+    [max, onChange]
   );
 
   const logarithmicValue = React.useCallback(
@@ -78,7 +78,7 @@ interface Props {
   value: number;
   valueAdornment?: string;
   max: number;
-  maxLabel?: React.ReactElement<any>;
+  maxLabel?: React.ReactElement;
   title?: React.ReactNode;
   className?: string;
   tooltipContent?: string;

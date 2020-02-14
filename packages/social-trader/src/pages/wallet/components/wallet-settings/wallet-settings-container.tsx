@@ -4,7 +4,7 @@ import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
@@ -18,12 +18,9 @@ const _WalletSettingsContainer: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const [isOpenGVTFees, setOpenGVTFees, setCloseGVTFees] = useIsOpen();
-  const [
-    isPayFeesWithGvt,
-    setPayFeesWithGvt,
-    setNotPayFeesWithGvt,
-    setPayFeesWithGvtValue
-  ] = useIsOpen(isPayFeesWithGvtProp);
+  const [isPayFeesWithGvt, setPayFeesWithGvtValue] = useState(
+    isPayFeesWithGvtProp
+  );
   const setPayMiddleware = () => {
     setPayFeesWithGvtValue(!isPayFeesWithGvt);
   };

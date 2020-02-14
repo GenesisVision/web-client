@@ -28,7 +28,7 @@ const useConvertAssetSubmit = ({
 }: TUseConvertAssetSubmitProps): TUseConvertAssetSubmitOutput => {
   const dispatch = useDispatch();
   const checkConditionMiddleware = (data: any) => {
-    if (!data || !condition || !!condition(data)) {
+    if (!data || !condition || condition(data)) {
       dispatch(
         alertMessageActions.success(
           `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`,

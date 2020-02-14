@@ -1,8 +1,8 @@
 import React from "react";
 
-export const HistoryContext: React.Context<
+export const HistoryContext: React.Context<IHistoryContext> = React.createContext<
   IHistoryContext
-> = React.createContext<IHistoryContext>({
+>({
   from: undefined
 });
 

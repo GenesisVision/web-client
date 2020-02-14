@@ -5,7 +5,6 @@ import { ITableProps } from "components/table/components/table";
 import { FundDetailsListItem } from "gv-api-web";
 import FundCard from "modules/funds-table/components/funds-table/fund-card";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
-import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import { useCallback } from "react";
 

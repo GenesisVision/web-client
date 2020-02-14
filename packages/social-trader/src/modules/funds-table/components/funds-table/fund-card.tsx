@@ -6,8 +6,7 @@ import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
-  TableCardTableColumn,
-  TableCardTableRow
+  TableCardTableColumn
 } from "components/table/components/table-card/table-card";
 import {
   IRenderActionsArgs,
@@ -16,7 +15,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import { ASSET } from "constants/constants";
-import { FundDetailsListItem } from "gv-api-web";
+import { Currency, FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -24,6 +23,59 @@ import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+
+export const FundCardTable: React.FC<IFundCardTableProps> = ({
+  totalAssetsCount,
+  amount,
+  currency,
+  investorsCount,
+  drawdown,
+  topFundAssets
+}) => {
+  const [t] = useTranslation();
+  return (
+    <>
+      <TableCardTable wrap>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.balance")}>
+            <NumberFormat
+              value={formatCurrencyValue(amount, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.investors")}>
+            <NumberFormat
+              value={investorsCount}
+              displayType="text"
+              decimalScale={0}
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+        <TableCardTableColumn>
+          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+            <NumberFormat
+              value={formatValue(drawdown, 2)}
+              displayType="text"
+              suffix="%"
+            />
+          </StatisticItem>
+        </TableCardTableColumn>
+      </TableCardTable>
+      {topFundAssets && (
+        <FundAssetContainer
+          noWrap
+          assets={topFundAssets as FundAssetType[]}
+          type={FUND_ASSET_TYPE.SHORT}
+          size={3}
+          length={totalAssetsCount}
+        />
+      )}
+    </>
+  );
+};
 
 const _FundCard: React.FC<Props> = ({ fund }) => {
   const { linkCreator, contextTitle } = useToLink();
@@ -61,55 +113,29 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
       managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}
       renderActions={renderActions}
     >
-      <TableCardTable wrap>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
-            <NumberFormat
-              value={formatCurrencyValue(
-                fund.balance.amount,
-                fund.balance.currency
-              )}
-              suffix={` ${fund.balance.currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
-            <NumberFormat
-              value={fund.investorsCount}
-              displayType="text"
-              decimalScale={0}
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
-            <NumberFormat
-              value={formatValue(fund.statistic.drawdown, 2)}
-              displayType="text"
-              suffix="%"
-            />
-          </StatisticItem>
-        </TableCardTableColumn>
-        <TableCardTableRow>
-          {fund.topFundAssets && (
-            <FundAssetContainer
-              noWrap
-              assets={fund.topFundAssets as FundAssetType[]}
-              type={FUND_ASSET_TYPE.SHORT}
-              size={3}
-              length={fund.totalAssetsCount}
-            />
-          )}
-        </TableCardTableRow>
-      </TableCardTable>
+      <FundCardTable
+        amount={fund.balance.amount}
+        currency={fund.balance.currency}
+        investorsCount={fund.investorsCount}
+        drawdown={fund.statistic.drawdown}
+        topFundAssets={fund.topFundAssets}
+        totalAssetsCount={fund.totalAssetsCount}
+      />
     </TableCard>
   );
 };
 
 const FundCard = React.memo(_FundCard);
 export default FundCard;
+
+interface IFundCardTableProps {
+  amount: number;
+  currency: Currency;
+  investorsCount: number;
+  totalAssetsCount: number;
+  drawdown: number;
+  topFundAssets: Array<FundAssetPercent>;
+}
 
 interface Props {
   fund: FundDetailsListItem;

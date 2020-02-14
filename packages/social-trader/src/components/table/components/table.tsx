@@ -14,7 +14,7 @@ import TableToolbar, {
   ITableToolbarExternalProps
 } from "components/table/components/table-toolbar";
 import { LIST_VIEW } from "components/table/table.constants";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GLOBAL_TABLE_VIEW,

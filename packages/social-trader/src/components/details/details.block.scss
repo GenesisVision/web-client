@@ -5,9 +5,7 @@
 .details-block {
   box-sizing: border-box;
   margin-bottom: $padding-xsmall;
-  @include media-breakpoint-landscape-phone() {
-    border-radius: 0.5em;
-  }
+  @include adaptive-border-radius($border-radius-middle);
 
   &--row {
     display: flex;
@@ -23,7 +21,7 @@
     @include vertical-paddings($padding-small);
     @include horizontal-paddings($padding-small);
     border: 1px solid rgba($main-color, 0.06);
-    border-radius: 0.5em;
+    @include adaptive-border-radius($border-radius-middle);
   }
 
   &--landscape-tablet {

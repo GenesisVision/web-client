@@ -1,5 +1,4 @@
 import { Icon, IIconProps } from "components/icon/icon";
-import { ReactComponent as Security } from "media/security.svg";
 import * as React from "react";
 
 export const SecurityIcon: React.FC<IIconProps> = props => (

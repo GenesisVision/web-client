@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
@@ -74,7 +74,7 @@ const _Notification: React.FC<INotificationProps> = props => {
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (
     <div
-      className={classnames(
+      className={classNames(
         "notification",
         `notification--type-${type.toLowerCase()}`,
         {

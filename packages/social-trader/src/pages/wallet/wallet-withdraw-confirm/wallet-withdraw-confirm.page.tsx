@@ -3,8 +3,6 @@ import WalletWithdrawConfirm from "pages/wallet/wallet-withdraw-confirm/wallet-w
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-export const WALLET_WITHDRAW_CONFIRM_ROUTE = `/wallet-withdraw-confirm`;
-
 const _WalletWithdrawConfirmPage: React.FC<Props> = ({ requestId, code }) => {
   const [t] = useTranslation();
   return (

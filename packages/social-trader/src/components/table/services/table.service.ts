@@ -42,11 +42,10 @@ export const composeRequestFiltersByTableState = (
   tableState: ITableState<any>
 ) => {
   const { filters, defaults } = tableState;
-  const requestFilters = composeRequestFilters({
+  return composeRequestFilters({
     ...filters,
     defaultFilters: defaults.defaultFilters
   });
-  return requestFilters;
 };
 
 export const updateFilters = (type: string, filters?: FilteringType) => (

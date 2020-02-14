@@ -60,7 +60,7 @@ const _WalletTransactions: React.FC<Props> = ({
   return (
     <TableModule
       loaderData={walletTransactionsLoaderData}
-      timestamp={new Date(timestamp).getMilliseconds()}
+      timestamp={new Date(timestamp || 0).getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}
       paging={DEFAULT_PAGING}
       filtering={{

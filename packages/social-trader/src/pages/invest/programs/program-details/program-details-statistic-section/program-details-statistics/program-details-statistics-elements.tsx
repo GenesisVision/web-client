@@ -16,9 +16,11 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-const _ProgramDetailsStatisticsElements: React.FC<
-  IProgramDetailsStatisticsElementsProps
-> = ({ data, period, status }) => {
+const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsElementsProps> = ({
+  data,
+  period,
+  status
+}) => {
   const [t] = useTranslation();
   if (!data) return null;
   const { statistic, statisticCurrency } = data;

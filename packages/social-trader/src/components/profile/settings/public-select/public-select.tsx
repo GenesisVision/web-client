@@ -1,8 +1,7 @@
 import SwitchWithQuestion from "components/switch-with-question/switch-with-question";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import useApiRequest from "hooks/api-request.hook";
-import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isPublicInvestorSelector } from "reducers/header-reducer";
@@ -12,9 +11,7 @@ import { setPublicOff, setPublicOn } from "./public-select.service";
 const _PublicSelect: React.FC = () => {
   const isPublicInvestor = useSelector(isPublicInvestorSelector);
   const [t] = useTranslation();
-  const [isPublic, setPublic, setNotPublic, setPublicValue] = useIsOpen(
-    isPublicInvestor
-  );
+  const [isPublic, setPublicValue] = useState(isPublicInvestor);
   useEffect(() => {
     setPublicValue(isPublicInvestor);
   }, [isPublicInvestor]);

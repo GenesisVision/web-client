@@ -14,7 +14,7 @@ import {
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
-import FollowButton from "pages/follows/follow-details/follow-button";
+import FollowButton from "pages/invest/follows/follow-details/follow-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";

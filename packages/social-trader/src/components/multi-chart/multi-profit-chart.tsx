@@ -1,4 +1,3 @@
-import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import ProfitChart from "components/chart/profit-chart";
 import { DashboardAssetChart } from "gv-api-web";
 import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
