@@ -6,10 +6,13 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import { InjectedFormikProps } from "formik";
 import useIsOpen from "hooks/is-open.hook";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
 import * as React from "react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -22,10 +25,7 @@ enum FIELDS {
   email = "email"
 }
 
-const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
-  Props,
-  ITwoFactorCodeFormValues
->> = ({ email, error, values, setSubmitting, onSubmit }) => {
+const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   const [t] = useTranslation();
 
   const form = useForm<ITwoFactorCodeFormValues>({
@@ -43,7 +43,7 @@ const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
   });
   const {
     watch,
-    formState: { isSubmitting, isSubmitted, isValid }
+    formState: { isSubmitting, isValid }
   } = form;
   const { code } = watch();
 
@@ -59,9 +59,17 @@ const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
   const checkTwoFactor = useCallback(() => {
     if (isSubmitting) return;
     setIsChecking();
-    setSubmitting(true);
-    onSubmit(values);
-  }, [isSubmitting, values]);
+    onSubmit(watch());
+  }, [isSubmitting, watch]);
+
+  const requestStatus = useContext(CaptchaStatusContext);
+
+  const isSuccessful = requestStatus === CAPTCHA_STATUS.SUCCESS;
+  const disabled =
+    isSubmitting ||
+    requestStatus === CAPTCHA_STATUS.PENDING ||
+    isSuccessful ||
+    !isValid;
 
   return (
     <HookForm className="login-two-factor" form={form} onSubmit={onSubmit}>
@@ -94,8 +102,8 @@ const _TwoFactorCodeForm: React.FC<InjectedFormikProps<
         <GVButton
           type="submit"
           id="signUpFormSubmit"
-          disabled={isSubmitting || !isValid}
-          isSuccessful={isSubmitted && !error}
+          disabled={disabled}
+          isSuccessful={isSuccessful}
           isPending={isSubmitting}
         >
           {t("auth.login.two-factor.verify")}
