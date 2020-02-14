@@ -4,6 +4,8 @@ import React, { useCallback, useState } from "react";
 
 const _SimpleField: React.FC<ISimpleFieldProps> = props => {
   const {
+    error,
+    showCorrect,
     triggerValidation,
     setFieldValue,
     name,
@@ -12,6 +14,7 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
     InputComponent,
     valueCallback
   } = props;
+  const [correct, setCorrect, setNotCorrect] = useIsOpen();
   const [dirty, setDirty] = useIsOpen();
   const [init, setInit] = useState(true);
   const handleOnChange = useCallback(
@@ -22,16 +25,21 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
     [name, setFieldValue, valueCallback, dirty]
   );
   const handleOnBlur = useCallback(() => {
+    if (showCorrect && !!value)
+      if (error) setNotCorrect();
+      else setCorrect();
+
     if (!dirty) {
       setDirty();
       triggerValidation && triggerValidation(name);
     }
-  }, [name, triggerValidation, dirty]);
+  }, [name, triggerValidation, dirty, showCorrect, error, value]);
 
   const setEmpty = emptyInit && init;
   return (
     <GVTextField
       {...props}
+      correct={correct}
       value={setEmpty ? "" : value}
       onBlur={handleOnBlur}
       onChange={!InputComponent ? handleOnChange : undefined}
@@ -42,6 +50,7 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
 };
 
 export interface ISimpleFieldProps extends GVTextFieldProps {
+  showCorrect?: boolean;
   triggerValidation?: (name: string) => void;
   valueCallback: (value: any) => any;
   validateOnInput?: boolean;
