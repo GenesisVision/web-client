@@ -46,12 +46,12 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 
     return (
       <Input
+        {...props}
         ref={input}
         type={type}
         className={classNames("gv-text-field", inputClassName)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        {...props}
       />
     );
   };
