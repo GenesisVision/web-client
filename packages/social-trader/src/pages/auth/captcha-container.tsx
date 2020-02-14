@@ -42,7 +42,11 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
           captchaCheckResult
         },
         setSubmitting.func!
-      );
+      )
+        .then(() => setStatus(CAPTCHA_STATUS.SUCCESS))
+        .catch(() => {
+          setStatus(CAPTCHA_STATUS.WAIT);
+        });
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
@@ -51,7 +55,6 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
             setPow(undefined);
             setPrefix(undefined);
             setIsNotSubmit();
-            setStatus(CAPTCHA_STATUS.SUCCESS);
           }
           break;
         default:
@@ -93,7 +96,7 @@ export const CaptchaStatusContext = React.createContext<CAPTCHA_STATUS>(
 export type TValues = any;
 
 interface OwnProps {
-  request: (values: TValues, setSubmitting: SetSubmittingType) => void;
+  request: (values: TValues, setSubmitting: SetSubmittingType) => Promise<any>;
   renderForm: (
     handle: (values: TValues, setSubmitting?: SetSubmittingType) => void
   ) => JSX.Element;
