@@ -29,7 +29,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
       Current={() => (
         <>
           <StatisticItem
-            half
             label={
               <TooltipLabel
                 tooltipContent={t("program-details-page.tooltip.equity")}
