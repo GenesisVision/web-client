@@ -4,6 +4,7 @@ import classNames from "classnames";
 import React from "react";
 
 const _GvInput: React.FC<Props> = ({
+  correct,
   wrapperClassName,
   noMargin,
   wide,
@@ -40,6 +41,7 @@ const _GvInput: React.FC<Props> = ({
       )}
       <div
         className={classNames("gv-input", className, {
+          "gv-input--correct": correct,
           "gv-input--disabled": disabled,
           "gv-input--invalid": touched && error,
           "gv-input--focused": focused
@@ -71,6 +73,7 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  correct?: boolean;
   adornment?: React.ReactNode;
   label?: string | React.ReactNode;
   value?: string | number;
