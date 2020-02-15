@@ -2,7 +2,6 @@ import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
 
 import { disableTFA } from "../services/2fa.service";
 import DisableAuthForm, {
@@ -18,8 +17,7 @@ const _DisableAuthContainer: React.FC<Props> = ({ onSubmit }) => {
     catchCallback: setFail
   });
   const handleSubmit = useCallback(
-    (model: IDisableAuthFormFormValues, setSubmitting: SetSubmittingType) =>
-      sendRequest(model, setSubmitting),
+    (model: IDisableAuthFormFormValues) => sendRequest(model),
     []
   );
   return isSuccess ? (
