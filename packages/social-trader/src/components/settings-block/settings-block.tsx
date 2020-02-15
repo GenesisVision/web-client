@@ -7,6 +7,7 @@ import VerificationStatus, {
 import React from "react";
 
 const SettingsBlock: React.FC<Props> = ({
+  hide,
   withBorder = true,
   blockNumber,
   label,
@@ -14,7 +15,11 @@ const SettingsBlock: React.FC<Props> = ({
   checked,
   verificationStatus
 }) => (
-  <section className="asset-settings-block">
+  <section
+    className={classNames("asset-settings-block", {
+      "asset-settings-block--hidden": hide
+    })}
+  >
     <div className="asset-settings-block__line-block">
       {blockNumber && (
         <div className="asset-settings-block__title">
@@ -47,6 +52,7 @@ const SettingsBlock: React.FC<Props> = ({
 );
 
 interface OwnProps extends IStatusProps {
+  hide?: boolean;
   content?: JSX.Element;
   label?: string;
   blockNumber?: string;
