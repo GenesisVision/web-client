@@ -7,6 +7,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
   return (
     <SimpleField
       {...props}
+      number
       valueCallback={({ value, floatValue }: NumberFormatValues) =>
         value ? value : floatValue
       }
