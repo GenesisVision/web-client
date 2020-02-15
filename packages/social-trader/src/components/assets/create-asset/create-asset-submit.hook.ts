@@ -1,13 +1,13 @@
 import { Push } from "components/link/link";
 import { CREATE_ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
+import { TErrorMessage } from "hooks/error-message.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
-import { SetSubmittingType } from "utils/types";
 
 import {
   createAsset,
@@ -19,10 +19,11 @@ type TUseCreateAssetSubmitProps = {
   asset: CREATE_ASSET;
 };
 
-type TUseCreateAssetSubmitOutput = (
-  data: ICreateAssetSettingsFormValues,
-  setSubmitting: SetSubmittingType
-) => void;
+type TUseCreateAssetSubmitOutput = {
+  errorMessage: TErrorMessage;
+  handleCreate: (data: ICreateAssetSettingsFormValues) => void;
+  isPending: boolean;
+};
 
 const useCreateAssetSubmit = ({
   condition,
@@ -42,16 +43,16 @@ const useCreateAssetSubmit = ({
       Push(TRADING_ROUTE);
     }
   };
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, isPending, errorMessage } = useApiRequest({
     request: createAsset,
     middleware: [checkConditionMiddleware]
   });
-  return useCallback(
-    (data: ICreateAssetSettingsFormValues, setSubmitting) => {
-      setSubmitting(true);
-      sendRequest({ data, asset }, setSubmitting);
+  const handleCreate = useCallback(
+    (data: ICreateAssetSettingsFormValues) => {
+      return sendRequest({ data, asset });
     },
     [asset]
   );
+  return { handleCreate, isPending, errorMessage };
 };
 export default useCreateAssetSubmit;
