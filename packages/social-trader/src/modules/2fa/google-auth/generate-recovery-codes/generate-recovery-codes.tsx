@@ -5,21 +5,19 @@ import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { SetSubmittingType } from "utils/types";
 
 import { sendPassword } from "../../services/2fa.service";
 import GoogleAuthCodes from "../google-auth-codes";
 import GenerateRecoveryWithFormik from "./generate-recovery-form";
 
-const GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
+const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
   const [t] = useTranslation();
   const { errorMessage, data, sendRequest } = useApiRequest<
     RecoveryCodesViewModel
   >({ request: sendPassword });
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const handleSubmit = useCallback(
-    (values: PasswordModel, setSubmitting: SetSubmittingType) =>
-      sendRequest(values, setSubmitting),
+    (values: PasswordModel) => sendRequest(values),
     []
   );
   if (!disabled) return null;
@@ -46,4 +44,5 @@ interface Props {
   disabled: boolean;
 }
 
-export default React.memo(GenerateRecoveryCode);
+const GenerateRecoveryCode = React.memo(_GenerateRecoveryCode);
+export default GenerateRecoveryCode;
