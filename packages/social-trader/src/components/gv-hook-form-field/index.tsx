@@ -2,6 +2,7 @@ import React from "react";
 import { FieldError, useFormContext } from "react-hook-form";
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
+  onChange = () => {},
   component: Component,
   name,
   ...props
@@ -22,6 +23,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   return (
     <Component
       {...props}
+      onChange={onChange}
       triggerValidation={triggerValidation}
       name={name}
       setFieldValue={setValue}
