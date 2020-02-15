@@ -34,6 +34,10 @@
     color: $text-light-color;
   }
 
+  &--hidden {
+    display: none;
+  }
+
   &--wider {
     max-width: 100%;
     width: 100%;
