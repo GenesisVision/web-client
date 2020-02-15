@@ -2,7 +2,6 @@ import Dialog from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 import React, { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
 
 import { IConfirmFormValues } from "./components/confirm-form";
 import { confirm2fa, get2faInfo } from "./services/confirm.services";
@@ -32,8 +31,8 @@ const _ConfirmContainer: React.FC<Props> = ({
   }, [onClose]);
 
   const handleConfirm = useCallback(
-    (values: IConfirmFormValues, setSubmitting: SetSubmittingType) => {
-      confirm({ ...values, programId }, setSubmitting);
+    (values: IConfirmFormValues) => {
+      confirm({ ...values, programId });
     },
     [programId]
   );
