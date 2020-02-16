@@ -1,6 +1,8 @@
+import "./fields.scss";
+
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
-import GVNumberField from "components/gv-number-field/gv-number-field";
+import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
@@ -27,7 +29,7 @@ const _FeesSettings: React.FC<Props> = ({
             name={entryFeeName}
             label={t("create-program-page.settings.fields.entry-fee")}
             adornment="%"
-            component={GVNumberField}
+            component={SimpleNumberField}
             isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={entryFeeDescription}
             hintContent={t("create-program-page.settings.hints.entry-fee")}
@@ -39,7 +41,7 @@ const _FeesSettings: React.FC<Props> = ({
             name={secondFeeName}
             label={secondFeeLabel}
             adornment="%"
-            component={GVNumberField}
+            component={SimpleNumberField}
             isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={secondFeeDescription}
             hintContent={secondFeeUnderText}
