@@ -3,14 +3,21 @@ import { ASSET } from "constants/constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const _CreateAssetNavigation: React.FC<Props> = ({ asset, isSubmitting }) => {
+const _CreateAssetNavigation: React.FC<Props> = ({
+  asset,
+  isSubmitting,
+  disabled,
+  isSuccessful
+}) => {
   const [t] = useTranslation();
   return (
     <GVButton
       title={t(`buttons.create-${asset.toLowerCase()}`)}
       color="primary"
       type="submit"
-      disabled={isSubmitting}
+      isPending={isSubmitting}
+      isSuccessful={isSuccessful}
+      disabled={disabled}
     >
       {t(`buttons.create-${asset.toLowerCase()}`)}
     </GVButton>
@@ -19,6 +26,8 @@ const _CreateAssetNavigation: React.FC<Props> = ({ asset, isSubmitting }) => {
 
 interface Props {
   asset: ASSET | string;
+  disabled?: boolean;
+  isSuccessful?: boolean;
   isSubmitting?: boolean;
 }
 
