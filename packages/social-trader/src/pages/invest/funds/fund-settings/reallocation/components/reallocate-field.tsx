@@ -14,9 +14,9 @@ import { useCallback, useEffect, useState } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
-const _ReallocateField: React.FC<Props> = ({
+const _ReallocateField: React.FC<IReallocateFieldProps> = ({
   name,
-  value,
+  value = [],
   assets,
   error,
   touched,
@@ -161,7 +161,7 @@ const getRemainderWithoutSelected = (
     .filter(item => item.asset !== asset.asset)
     .reduce((sum, item) => sum + item.percent, 0);
 
-interface Props {
+export interface IReallocateFieldProps {
   name: string;
   value: FundAssetPart[];
   assets: PlatformAsset[];
