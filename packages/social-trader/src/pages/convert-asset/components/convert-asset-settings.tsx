@@ -73,7 +73,6 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
 
   const isSuccessful = isSubmitted && !errorMessage;
   const disabled = !isValid || isSubmitting || isSuccessful;
-  console.log(watch(), isValid, errors);
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
