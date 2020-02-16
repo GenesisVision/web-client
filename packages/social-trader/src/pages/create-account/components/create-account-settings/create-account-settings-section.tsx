@@ -11,7 +11,7 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
   const [programId, setProgramId] = useState<string | undefined>(undefined);
   const [twoFactorRequired, setTwoFactorRequired] = useIsOpen();
 
-  const handleCreate = useCreateAssetSubmit({
+  const { handleCreate, errorMessage } = useCreateAssetSubmit({
     condition: ({ twoFactorRequired, id }) => {
       if (twoFactorRequired) {
         setProgramId(id);
@@ -25,7 +25,11 @@ const _CreateAccountSettingsSection: React.FC<Props> = ({ broker }) => {
 
   return (
     <>
-      <CreateAccountSettings onSubmit={handleCreate} broker={broker} />
+      <CreateAccountSettings
+        errorMessage={errorMessage}
+        onSubmit={handleCreate}
+        broker={broker}
+      />
       {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
     </>
   );
