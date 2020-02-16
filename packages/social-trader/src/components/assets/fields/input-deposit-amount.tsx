@@ -1,4 +1,4 @@
-import InputAmountField from "components/input-amount-field/input-amount-field";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -26,13 +26,14 @@ const _InputDepositAmount: React.FC<Props> = ({
   );
   const setMaxAmount = useCallback(
     (available: number, currency: string) => () => {
-      setFieldValue(name, formatCurrencyValue(available, currency));
+      setFieldValue(name, formatCurrencyValue(available, currency), true);
     },
     [name, setFieldValue]
   );
   return (
     <AssetField className="deposit-amount-field">
       <InputAmountField
+        showCorrect
         wide
         disabled={disabled}
         autoFocus={false}
@@ -64,7 +65,7 @@ interface Props {
   assetCurrency: CurrencyEnum;
   walletAvailable: number;
   walletCurrency: CurrencyEnum;
-  depositAmount?: number;
+  depositAmount?: number | string;
   disabled?: boolean;
 }
 
