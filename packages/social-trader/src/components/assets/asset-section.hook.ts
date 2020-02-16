@@ -28,7 +28,7 @@ const useAssetSection = ({
   const wallets = useSelector(walletsAvailableSelector);
   const accountCurrency = useSelector(currencySelector);
   const [wallet, setWallet] = useState<AssetSectionWalletType>(
-    wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+    safeGetElemFromArray(wallets, ({ currency }) => currency === assetCurrency)
   );
   const { rate, getRate } = useGetRate();
 
@@ -38,7 +38,10 @@ const useAssetSection = ({
 
   useEffect(() => {
     setWallet(
-      wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+      safeGetElemFromArray(
+        wallets,
+        ({ currency }) => currency === assetCurrency
+      )
     );
   }, [wallets, assetCurrency]);
 
