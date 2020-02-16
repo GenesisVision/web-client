@@ -1,10 +1,10 @@
 import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
+import { TErrorMessage } from "hooks/error-message.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
-import { SetSubmittingType } from "utils/types";
 
 import { TAssetFromTo } from "./convert-asset.types";
 import {
@@ -13,16 +13,18 @@ import {
 } from "./services/convert-asset.service";
 
 type TUseConvertAssetSubmitProps = {
+  id: string;
   condition?: (data: any | null) => boolean;
   fromTo: TAssetFromTo;
 };
 
-type TUseConvertAssetSubmitOutput = (
-  data: IConvertAssetSettingsFormValues,
-  setSubmitting: SetSubmittingType
-) => void;
+type TUseConvertAssetSubmitOutput = {
+  handleCreate: (data: IConvertAssetSettingsFormValues) => void;
+  errorMessage: TErrorMessage;
+};
 
 const useConvertAssetSubmit = ({
+  id,
   condition,
   fromTo
 }: TUseConvertAssetSubmitProps): TUseConvertAssetSubmitOutput => {
@@ -38,18 +40,13 @@ const useConvertAssetSubmit = ({
       Push(TRADING_ROUTE);
     }
   };
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, errorMessage } = useApiRequest({
     middleware: [checkConditionMiddleware],
     request: convertAsset
   });
-  return useCallback(
-    (
-      data: IConvertAssetSettingsFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      sendRequest({ data, fromTo }, setSubmitting);
-    },
-    []
-  );
+  const handleCreate = useCallback((data: IConvertAssetSettingsFormValues) => {
+    return sendRequest({ data: { ...data, id }, fromTo });
+  }, []);
+  return { handleCreate, errorMessage };
 };
 export default useConvertAssetSubmit;
