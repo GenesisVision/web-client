@@ -25,6 +25,7 @@ import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
+  editError,
   updateDescription,
   createProgramInfo: { maxSuccessFee, maxEntryFee },
   description,
@@ -101,6 +102,7 @@ const _ProgramSettings: React.FC<Props> = ({
             onSubmit={editProgram}
           />
           <InvestmentLimit
+            editError={editError}
             currency={description.tradingAccountInfo.currency}
             investmentLimit={programDetails.availableInvestmentLimit}
             onSubmit={editProgram}
@@ -138,6 +140,7 @@ const _ProgramSettings: React.FC<Props> = ({
 };
 
 interface Props {
+  editError?: boolean;
   createProgramInfo: ProgramCreateAssetPlatformInfo;
   description: ProgramFollowDetailsFull;
   updateDescription: VoidFunction;
