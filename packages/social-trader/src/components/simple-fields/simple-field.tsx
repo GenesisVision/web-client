@@ -26,23 +26,33 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
     [name, setFieldValue, valueCallback, dirty]
   );
   const handleOnBlur = useCallback(() => {
-    if (showCorrect && !!value)
-      if (error) setNotCorrect();
-      else setCorrect();
-
     if (!dirty) {
       setDirty();
       triggerValidation && triggerValidation(name);
     }
-  }, [name, triggerValidation, dirty, showCorrect, error, value]);
-
+    if (value === undefined) {
+      setFieldValue && setFieldValue(name, undefined, true);
+      return;
+    }
+    if (showCorrect && !!value)
+      if (error) setNotCorrect();
+      else setCorrect();
+  }, [
+    name,
+    triggerValidation,
+    dirty,
+    showCorrect,
+    error,
+    value,
+    setFieldValue
+  ]);
   const setEmpty = emptyInit && init;
   return (
     <GVTextField
       {...props}
       error={dirty ? error : undefined}
       correct={correct}
-      value={setEmpty ? "" : value}
+      value={setEmpty || value === undefined ? "" : value}
       onBlur={handleOnBlur}
       onChange={number ? undefined : handleOnChange}
       onValueChange={handleOnChange}
