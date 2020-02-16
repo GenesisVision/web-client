@@ -78,11 +78,7 @@ interface OwnProps {
   logo: IImageValue;
   title: string;
   description: string;
-  onSubmit: (
-    values: AssetEditFormValues,
-    setSubmitting: SetSubmittingType,
-    resetForm?: () => void
-  ) => void;
+  onSubmit: (values: AssetEditFormValues) => void;
 }
 
 const AssetEdit = compose<React.ComponentType<OwnProps>>(

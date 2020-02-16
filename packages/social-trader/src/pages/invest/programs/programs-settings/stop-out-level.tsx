@@ -5,7 +5,6 @@ import { FormikProps, withFormik } from "formik";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
 import { number, object } from "yup";
 
 const _StopOutLevel: React.FC<Props> = ({
@@ -49,10 +48,7 @@ interface Props
 
 interface OwnProps {
   stopOutLevel: number;
-  onSubmit: (
-    values: StopOutLevelFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: StopOutLevelFormValues) => void;
 }
 
 const StopOutLevel = compose<React.ComponentType<OwnProps>>(

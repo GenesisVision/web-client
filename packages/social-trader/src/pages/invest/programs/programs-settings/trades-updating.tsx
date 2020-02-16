@@ -45,10 +45,7 @@ interface Props extends OwnProps, FormikProps<TradesUpdatingFormValues> {}
 
 interface OwnProps {
   tradesDelay: TradesDelayType;
-  onSubmit: (
-    values: TradesUpdatingFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: TradesUpdatingFormValues) => void;
 }
 
 const TradesUpdating = compose<React.ComponentType<OwnProps & WithLoaderProps>>(

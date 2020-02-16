@@ -105,10 +105,7 @@ interface OwnProps {
   exitFee?: number;
   entryFee: number;
   successFee?: number;
-  onSubmit: (
-    values: InvesmentLimitFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: InvesmentLimitFormValues) => void;
 }
 
 const InvestmentFees = compose<React.ComponentType<OwnProps>>(
