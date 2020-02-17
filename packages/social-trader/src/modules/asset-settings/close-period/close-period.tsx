@@ -1,11 +1,10 @@
 import GVButton from "components/gv-button";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
+import ConfirmClosePeriod from "modules/asset-settings/close-period/confirm-close-period";
 import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
-
-import ConfirmClosePeriodContainer from "./confirm-close-period-container";
 
 const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   const [
@@ -23,7 +22,7 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
           {t("program-details-page.close-period.title")}
         </GVButton>
       </div>
-      <ConfirmClosePeriodContainer
+      <ConfirmClosePeriod
         open={isClosePeriodOpen}
         onClose={setClosePeriodClose}
         onApply={onApply}
