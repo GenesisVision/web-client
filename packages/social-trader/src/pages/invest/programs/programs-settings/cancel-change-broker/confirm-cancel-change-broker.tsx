@@ -1,25 +1,25 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useTranslation } from "react-i18next";
 
 const _ConfirmCancelChangeBroker: React.FC<Props> = ({
-  t,
+  errorMessage,
   open,
   onApply,
   onClose,
   brokerFrom,
   brokerTo
 }) => {
-  const handleApplyClick = useCallback((setSubmitting: SetSubmittingType) => {
-    onApply();
-    onClose();
-    setSubmitting(false);
-  }, []);
+  const [t] = useTranslation();
+  const handleApplyClick = useCallback(() => {
+    return onApply().then(() => {
+      onClose();
+    });
+  }, [onApply, onClose]);
 
   return (
     <ConfirmPopup
+      errorMessage={errorMessage}
       open={open}
       onClose={onClose}
       onCancel={onClose}
@@ -35,18 +35,14 @@ const _ConfirmCancelChangeBroker: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation, OwnProps {}
-
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   open: boolean;
-  onApply(): void;
-  onClose(): void;
+  onApply: () => Promise<void>;
+  onClose: () => void;
   brokerFrom?: string;
   brokerTo?: string;
 }
 
-const ConfirmCancelChangeBroker = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_ConfirmCancelChangeBroker);
+const ConfirmCancelChangeBroker = React.memo(_ConfirmCancelChangeBroker);
 export default ConfirmCancelChangeBroker;

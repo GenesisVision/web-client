@@ -9,13 +9,13 @@ import CancelChangeBrokerForm from "./cancel-change-broker-form";
 
 const _CancelChangeBrokerFormContainer: React.FC<ICancelChangeBrokerFormContainerProps> = props => {
   const { id, onApply } = props;
-  const { sendRequest: cancelChangeBroker } = useApiRequest({
+  const { sendRequest: cancelChangeBroker, errorMessage } = useApiRequest({
     middleware: [onApply],
     request: cancelChangeBrokerMethod,
     successMessage: "program-settings.notifications.broker-success"
   });
   const handleCancelChangeBroker = useCallback(() => {
-    cancelChangeBroker(id);
+    return cancelChangeBroker(id);
   }, [id]);
   const { data } = useApiRequest({
     fetchOnMountData: props.id,
@@ -25,6 +25,7 @@ const _CancelChangeBrokerFormContainer: React.FC<ICancelChangeBrokerFormContaine
   if (!data) return null;
   return (
     <CancelChangeBrokerForm
+      errorMessage={errorMessage}
       onSubmit={handleCancelChangeBroker}
       loaderData={getBrokersProgramInfoLoaderData()}
       data={data}

@@ -18,6 +18,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import ConfirmCancelChangeBroker from "./confirm-cancel-change-broker";
 
 const _CancelChangeBrokerForm: React.FC<Props> = ({
+  errorMessage,
   isSignalProgram,
   onSubmit,
   data: { brokers, currentAccountTypeId },
@@ -106,6 +107,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         {t("program-settings.buttons.cancel-broker")}
       </GVButton>
       <ConfirmCancelChangeBroker
+        errorMessage={errorMessage}
         open={isCancelChangeBrokerOpen}
         onClose={setCancelChangeBrokerClose}
         onApply={onSubmit}
@@ -119,9 +121,10 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
 interface Props extends CancelChangeBrokerFormOwnProps {}
 
 export interface CancelChangeBrokerFormOwnProps {
+  errorMessage?: string;
   data: BrokersProgramInfo;
   isSignalProgram: boolean;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void>;
   leverage: number;
   migration: MigrationRequest;
 }
