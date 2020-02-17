@@ -11,7 +11,7 @@ declare global {
 
 export const sendMessageToGA = (...args: any) => {
   // @ts-ignore
-  if (typeof window !== "undefined") console.log(window);
+  if (typeof window !== "undefined") console.log(window.ga);
   if (typeof window !== "undefined" || !("ga" in window)) return;
   // @ts-ignore
   window.ga(...args);
@@ -50,7 +50,6 @@ export type GAEventType = {
 export const useGA = (): { sendEvent: (event: GAEventType) => void } => {
   const [event, sendEvent] = useState<GAEventType | undefined>();
   useEffect(() => {
-    console.log(event);
     if (event) sendEventToGA(event);
   }, [event, sendEventToGA]);
   return { sendEvent };
