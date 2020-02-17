@@ -46,7 +46,7 @@ const _AssetsEditPage: React.FC<Props> = ({
         description: description.publicInfo.description,
         logo: { src: description.publicInfo.logo }
       };
-      editRequest({
+      return editRequest({
         id: description.id,
         editAssetData: {
           ...currentValues,
