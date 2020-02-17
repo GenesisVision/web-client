@@ -19,11 +19,11 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   const [t] = useTranslation();
   const {
     handleSubmit,
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
+    formState: { isSubmitting, isSubmitted }
   } = useForm();
 
   const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+  const disabled = isSubmitting || isSuccessful;
   return (
     <form onSubmit={handleSubmit(onApply)} noValidate>
       <DialogTop title={header} />
