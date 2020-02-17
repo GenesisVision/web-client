@@ -8,16 +8,19 @@ export const sendMessageToGA = (...args: any) => {
 };
 
 export const sendEventToGA = ({
+  eventValue,
   eventCategory,
   eventAction,
   eventLabel
 }: {
+  eventValue?: number;
   eventCategory?: string;
   eventAction?: string;
   eventLabel?: string;
 }) =>
   sendMessageToGA("send", {
     hitType: "event",
+    eventValue,
     eventCategory,
     eventAction,
     eventLabel
