@@ -4,61 +4,61 @@ import { IImageValue } from "components/form/input-image/input-image";
 import imageValidationSchema from "components/form/input-image/input-image.validation";
 import GVButton from "components/gv-button";
 import LogoField from "components/logo-field/logo-field";
-import { InjectedFormikProps, withFormik } from "formik";
 import UserIcon from "media/user-avatar.svg";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
 
 enum FIELDS {
   logo = "logo"
 }
 
-const _ProfileImage: React.FC<InjectedFormikProps<Props, FormValues>> = ({
-  t,
-  handleSubmit,
-  isValid,
-  isSubmitting
-}) => (
-  <form onSubmit={handleSubmit}>
-    <div className="profile-image">
-      <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
-      <GVButton type="submit" disabled={isSubmitting || !isValid}>
-        {t("profile-page.settings.save-photo")}
-      </GVButton>
-    </div>
-  </form>
-);
-
-const ProfileImage = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik<Props, FormValues>({
-    displayName: "profile-image",
-    mapPropsToValues: props => ({
+const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
+  const [t] = useTranslation();
+  const form = useForm<FormValues>({
+    defaultValues: {
       [FIELDS.logo]: {
-        src: props.avatar
+        src: avatar
       }
+    },
+    validationSchema: object().shape({
+      [FIELDS.logo]: imageValidationSchema(t)
     }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FIELDS.logo]: imageValidationSchema(t)
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values[FIELDS.logo], setSubmitting);
-    }
-  }),
-  React.memo
-)(_ProfileImage);
+    mode: "onBlur"
+  });
+  const {
+    formState: { isValid, dirty, isSubmitting, isSubmitted }
+  } = form;
+
+  const isSuccessful = isSubmitted && !errorMessage;
+  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+
+  return (
+    <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
+      <div className="profile-image">
+        <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
+        <GVButton
+          type="submit"
+          isPending={isSubmitting}
+          isSuccessful={isSuccessful}
+          disabled={disabled}
+        >
+          {t("profile-page.settings.save-photo")}
+        </GVButton>
+      </div>
+    </HookForm>
+  );
+};
+const ProfileImage = React.memo(_ProfileImage);
 export default ProfileImage;
 
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   avatar: string;
-  onSubmit(image: IImageValue, setSubmitting: SetSubmittingType): void;
+  onSubmit: (image: IImageValue) => void;
 }
-
-interface Props extends OwnProps, WithTranslation {}
 
 interface FormValues {
   logo: IImageValue;
