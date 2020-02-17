@@ -1,3 +1,9 @@
+import { fetchRate } from "services/rate-service";
+import { convertToCurrency } from "utils/currency-converter";
+import { CurrencyEnum } from "utils/types";
+
+const STATISTIC_CURRENCY = "GVT";
+
 declare global {
   const ga: Function;
 }
@@ -25,3 +31,12 @@ export const sendEventToGA = ({
     eventAction,
     eventLabel
   });
+
+export const convertToStatisticCurrency = (
+  value: number,
+  currency: CurrencyEnum
+) => {
+  return fetchRate(currency, STATISTIC_CURRENCY).then(rate => {
+    return convertToCurrency(value, rate);
+  });
+};
