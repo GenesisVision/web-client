@@ -61,7 +61,7 @@ const _DepositPopup: React.FC<Props> = ({
         // });
         return value;
       }),
-    [id, asset]
+    [id, asset, sendEventToGA, sendRequest]
   );
 
   return (
