@@ -9,9 +9,10 @@ import {
   fetchWallets,
   TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
+import { sendEventToGA } from "utils/ga";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import DepositForm from "./deposit-form";
@@ -32,6 +33,9 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
+  useEffect(() => {
+    sendEventToGA({ eventCategory: "Button", eventAction: "ClickInvest" });
+  }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
   const updateWalletInfoMiddleware = () =>
