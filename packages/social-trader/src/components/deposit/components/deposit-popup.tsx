@@ -9,10 +9,10 @@ import {
   fetchWallets,
   TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { sendEventToGA } from "utils/ga";
+import { GAEventType, sendEventToGA } from "utils/ga";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import DepositForm from "./deposit-form";
@@ -33,8 +33,12 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
+  const [event, setEvent] = useState<GAEventType | undefined>();
   useEffect(() => {
-    sendEventToGA({
+    if (event) sendEventToGA(event);
+  }, [event]);
+  useEffect(() => {
+    setEvent({
       eventCategory: "Button",
       eventAction:
         asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
@@ -53,7 +57,7 @@ const _DepositPopup: React.FC<Props> = ({
     (amount: number, setSubmitting: SetSubmittingType, walletId: string) =>
       sendRequest({ id, amount, walletId }, setSubmitting).then(value => {
         // convertToStatisticCurrency(amount, currency).then(eventValue => {
-        sendEventToGA({
+        setEvent({
           eventCategory: "Button",
           eventAction:
             asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
@@ -61,7 +65,7 @@ const _DepositPopup: React.FC<Props> = ({
         // });
         return value;
       }),
-    [id, asset, sendEventToGA, sendRequest]
+    [id, asset, setEvent, sendRequest]
   );
 
   return (
