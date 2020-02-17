@@ -52,7 +52,7 @@ const _SignalingEdit: React.FC<Props> = ({
     </GVButton>
   );
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       {showFields && (
         <SignalsFeeFormPartial
           isSignalProgram={isSignalProgram}

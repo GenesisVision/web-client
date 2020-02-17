@@ -56,6 +56,7 @@ const _AssetEdit: React.FC<Props> = ({
   return (
     <SettingsBlock>
       <HookForm
+        resetOnSuccess
         className={"asset-settings-block__form"}
         form={form}
         onSubmit={onSubmit}

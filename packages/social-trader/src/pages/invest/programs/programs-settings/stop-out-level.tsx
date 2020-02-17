@@ -42,7 +42,7 @@ const _StopOutLevel: React.FC<Props> = ({
     <SettingsBlock
       label={t("create-program-page.settings.fields.stop-out-level")}
     >
-      <HookForm form={form} onSubmit={onSubmit}>
+      <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         <div className="program-settings__block-wrapper">
           <StopOutField name={FIELDS.stopOutLevel} />
         </div>
