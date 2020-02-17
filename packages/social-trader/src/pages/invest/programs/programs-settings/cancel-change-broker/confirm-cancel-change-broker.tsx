@@ -1,6 +1,7 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { postponeFunc } from "utils/hook-form.helpers";
 
 const _ConfirmCancelChangeBroker: React.FC<Props> = ({
   errorMessage,
@@ -13,7 +14,7 @@ const _ConfirmCancelChangeBroker: React.FC<Props> = ({
   const [t] = useTranslation();
   const handleApplyClick = useCallback(() => {
     return onApply().then(() => {
-      onClose();
+      postponeFunc(onClose);
     });
   }, [onApply, onClose]);
 
