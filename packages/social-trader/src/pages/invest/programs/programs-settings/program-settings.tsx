@@ -85,6 +85,7 @@ const _ProgramSettings: React.FC<Props> = ({
             currentLeverage={description.tradingAccountInfo.leverageMax}
           />
           <InvestmentFees
+            editError={editError}
             asset={ASSET.PROGRAM}
             maxSuccessFee={maxSuccessFee}
             maxEntryFee={maxEntryFee}
@@ -93,11 +94,13 @@ const _ProgramSettings: React.FC<Props> = ({
             onSubmit={editProgram}
           />
           <TradesUpdating
+            editError={editError}
             condition={!isSignalProgram}
             tradesDelay={programDetails.tradesDelay}
             onSubmit={editProgram}
           />
           <StopOutLevel
+            editError={editError}
             stopOutLevel={programDetails.stopOutLevelCurrent}
             onSubmit={editProgram}
           />
@@ -110,6 +113,7 @@ const _ProgramSettings: React.FC<Props> = ({
         </>
       )}
       <AssetEdit
+        editError={editError}
         title={description.publicInfo.title}
         logo={{ src: description.publicInfo.logo }}
         description={description.publicInfo.description}
