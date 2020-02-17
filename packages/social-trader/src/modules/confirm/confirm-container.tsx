@@ -2,6 +2,7 @@ import Dialog from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 import React, { useCallback } from "react";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import { IConfirmFormValues } from "./components/confirm-form";
 import { confirm2fa, get2faInfo } from "./services/confirm.services";
@@ -12,12 +13,13 @@ const _ConfirmContainer: React.FC<Props> = ({
   open,
   onApply
 }) => {
+  const onCloseMiddleware = getPostponedOnCallback(onClose);
   const {
     errorMessage,
     cleanErrorMessage,
     sendRequest: confirm
   } = useApiRequest({
-    middleware: [onClose, onApply],
+    middleware: [onCloseMiddleware, onApply],
     request: confirm2fa
   });
   const { data } = useApiRequest({
