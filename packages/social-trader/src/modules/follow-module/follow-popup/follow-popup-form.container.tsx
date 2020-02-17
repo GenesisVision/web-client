@@ -5,6 +5,7 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
+import { sendEventToGA } from "utils/ga";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import FollowPopupForm from "../follow-popup/follow-popup-form";
@@ -28,6 +29,9 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   onClose,
   onApply = () => {}
 }) => {
+  useEffect(() => {
+    sendEventToGA({ eventCategory: "Button", eventAction: "ClickFollow" });
+  }, []);
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
@@ -40,6 +44,13 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
     currency
   });
 
+  const sendEventMiddleware = () => {
+    sendEventToGA({
+      eventCategory: "Button",
+      eventAction: "FollowTo"
+    });
+  };
+
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
   const { data: accounts } = useApiRequest({
     request: () => getAccountsMethod({ id }),
@@ -49,7 +60,7 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   const { sendRequest: submitChanges } = useApiRequest({
     successMessage: "follow-program.create-success-alert-message",
     request: getApiRequest(isExternal),
-    middleware: [onApply, onClose]
+    middleware: [onApply, onClose, sendEventMiddleware]
   });
 
   const { rate, getRate } = useGetRate();

@@ -8,6 +8,7 @@ import {
 } from "pages/attach-account/services/attach-account.service";
 import React, { useCallback } from "react";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
+import { sendEventToGA } from "utils/ga";
 import { SetSubmittingType } from "utils/types";
 
 import AttachAccountSettings, {
@@ -15,9 +16,15 @@ import AttachAccountSettings, {
 } from "./attach-account-settings/attach-account-settings";
 
 const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
+  const sendEventMiddleware = () => {
+    sendEventToGA({
+      eventCategory: "Create",
+      eventAction: "AttachExternalAccount"
+    });
+  };
   const pushMiddleware = () => Push(TRADING_ROUTE);
   const { sendRequest: attach } = useApiRequest({
-    middleware: [pushMiddleware],
+    middleware: [sendEventMiddleware, pushMiddleware],
     request: attachAccount
   });
   const { data: exchanges } = useApiRequest<Broker[]>({
