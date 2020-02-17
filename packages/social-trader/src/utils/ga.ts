@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
@@ -9,8 +10,9 @@ declare global {
 }
 
 export const sendMessageToGA = (...args: any) => {
-  if (typeof ga === "undefined") return;
-  ga(...args);
+  if (typeof window === "undefined" || !("ga" in window)) return;
+  // @ts-ignore
+  window.ga(...args);
 };
 
 export const sendEventToGA = ({
@@ -41,4 +43,12 @@ export type GAEventType = {
   eventCategory?: string;
   eventAction?: string;
   eventLabel?: string;
+};
+
+export const useGA = (): { sendEvent: (event: GAEventType) => void } => {
+  const [event, sendEvent] = useState<GAEventType | undefined>();
+  useEffect(() => {
+    if (event) sendEventToGA(event);
+  }, [event, sendEventToGA]);
+  return { sendEvent };
 };
