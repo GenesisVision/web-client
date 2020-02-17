@@ -1,7 +1,7 @@
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -21,7 +21,9 @@ const _InvestmentLimit: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
 
-  const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
+  const [hasInvestmentLimit, setHasInvestmentLimit] = useState(
+    investmentLimit !== null
+  );
 
   const form = useForm<InvesmentLimitFormValues>({
     defaultValues: {
@@ -49,11 +51,17 @@ const _InvestmentLimit: React.FC<Props> = ({
   });
 
   const {
-    formState: { isSubmitting, isValid, isSubmitted }
+    setValue,
+    formState: { isSubmitting, isValid, isSubmitted, dirty }
   } = form;
 
+  useEffect(() => {
+    if (!hasInvestmentLimit) setValue(FIELDS.investmentLimit, undefined, true);
+    else setValue(FIELDS.investmentLimit, investmentLimit, true);
+  }, [hasInvestmentLimit]);
+
   const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || isSubmitting || isSuccessful;
+  const disabled = !isValid || isSubmitting || isSuccessful || !dirty;
 
   const handleSubmit = useCallback(
     (values: InvesmentLimitFormValues) =>
@@ -65,7 +73,7 @@ const _InvestmentLimit: React.FC<Props> = ({
     <SettingsBlock
       label={t("create-program-page.settings.fields.investment-limit")}
     >
-      <HookForm form={form} onSubmit={handleSubmit}>
+      <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
         <InvestmentLimitField
           setHasInvestmentLimit={setHasInvestmentLimit}
           checkboxName={"hasInvestmentLimit"}
@@ -90,7 +98,7 @@ const _InvestmentLimit: React.FC<Props> = ({
 
 export interface InvesmentLimitFormValues {
   [FIELDS.hasInvestmentLimit]: boolean;
-  [FIELDS.investmentLimit]: number;
+  [FIELDS.investmentLimit]?: number;
 }
 
 interface Props {
