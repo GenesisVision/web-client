@@ -2,25 +2,20 @@ import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { PlatformAssetFull, SetSubmittingType } from "utils/types";
+import { useTranslation } from "react-i18next";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { PlatformAssetFull } from "utils/types";
 
 const _ConfirmReallocate: React.FC<Props> = ({
-  t,
   open,
   onApply,
   onClose,
   assets
 }) => {
-  const handleApplyClick = useCallback(
-    (setSubmitting: SetSubmittingType) => {
-      onApply();
-      onClose();
-      setSubmitting(false);
-    },
-    [onApply, onClose]
-  );
+  const [t] = useTranslation();
+  const handleApplyClick = useCallback(() => {
+    return onApply().then(getPostponedOnCallback(onClose));
+  }, [onApply, onClose]);
   return (
     <ConfirmPopup
       open={open}
@@ -40,17 +35,12 @@ const _ConfirmReallocate: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation, OwnProps {}
-
-interface OwnProps {
+interface Props {
   open: boolean;
-  onApply(): void;
-  onClose(): void;
+  onApply: () => Promise<void>;
+  onClose: () => void;
   assets: PlatformAssetFull[];
 }
 
-const ConfirmReallocate = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_ConfirmReallocate);
+const ConfirmReallocate = React.memo(_ConfirmReallocate);
 export default ConfirmReallocate;
