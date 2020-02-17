@@ -18,12 +18,7 @@ export const sendEventToGA = ({
   eventCategory,
   eventAction,
   eventLabel
-}: {
-  eventValue?: number;
-  eventCategory?: string;
-  eventAction?: string;
-  eventLabel?: string;
-}) =>
+}: GAEventType) =>
   sendMessageToGA("send", {
     hitType: "event",
     eventValue,
@@ -39,4 +34,11 @@ export const convertToStatisticCurrency = (
   return fetchRate(currency, STATISTIC_CURRENCY).then(rate => {
     return convertToCurrency(value, rate);
   });
+};
+
+export type GAEventType = {
+  eventValue?: number;
+  eventCategory?: string;
+  eventAction?: string;
+  eventLabel?: string;
 };
