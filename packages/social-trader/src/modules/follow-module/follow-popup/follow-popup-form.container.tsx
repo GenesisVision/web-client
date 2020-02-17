@@ -44,6 +44,13 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
     currency
   });
 
+  const sendEventMiddleware = () => {
+    sendEventToGA({
+      eventCategory: "Button",
+      eventAction: "FollowTo"
+    });
+  };
+
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
   const { data: accounts } = useApiRequest({
     request: () => getAccountsMethod({ id }),
@@ -53,7 +60,7 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   const { sendRequest: submitChanges } = useApiRequest({
     successMessage: "follow-program.create-success-alert-message",
     request: getApiRequest(isExternal),
-    middleware: [onApply, onClose]
+    middleware: [onApply, onClose, sendEventMiddleware]
   });
 
   const { rate, getRate } = useGetRate();
