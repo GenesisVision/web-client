@@ -10,6 +10,8 @@ declare global {
 }
 
 export const sendMessageToGA = (...args: any) => {
+  // @ts-ignore
+  if (typeof window === "undefined") console.log(window, window.ga);
   if (typeof window === "undefined" || !("ga" in window)) return;
   // @ts-ignore
   window.ga(...args);
