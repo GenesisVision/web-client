@@ -179,3 +179,40 @@ export interface IReallocateFieldProps {
     };
   }): void;
 }
+
+export const mapToPercentWithAsset = ({
+  percent,
+  asset
+}: {
+  [key: string]: any;
+}): PercentWithAssetType => ({ percent, asset });
+
+export type AssetType =
+  | PlatformAsset
+  | FundAssetPart
+  | FundAssetPartWithIcon
+  | PlatformAssetFull;
+
+export type PercentWithAssetType = { percent: number; asset: string };
+
+export const compareAssets = (
+  first: Array<AssetType>,
+  second: Array<AssetType>
+): boolean => {
+  const mappedFirst = first.map(mapToPercentWithAsset);
+  const mappedSecond = second.map(mapToPercentWithAsset);
+  if (
+    !mappedFirst ||
+    !mappedSecond ||
+    mappedFirst.length !== mappedSecond.length
+  )
+    return false;
+  for (const i in mappedFirst) {
+    if (
+      mappedFirst[i].asset + mappedFirst[i].percent !==
+      mappedSecond[i].asset + mappedSecond[i].percent
+    )
+      return false;
+  }
+  return true;
+};
