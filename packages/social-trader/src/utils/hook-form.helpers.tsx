@@ -7,13 +7,14 @@ import { MiddlewareType } from "utils/promise-middleware";
 export const HookForm: React.FC<{
   resetOnSuccess?: boolean;
   form: FormContextValues<any>;
-  onSubmit: (
+  onSubmit?: (
     data: any,
     event?: React.BaseSyntheticEvent
   ) => void | Promise<void>;
   className?: string;
 }> = ({ resetOnSuccess, form, onSubmit, children, className }) => {
   const handleSubmit = form.handleSubmit((values: any) => {
+    if (!onSubmit) return;
     return (onSubmit(values) as Promise<void>).then(value => {
       if (resetOnSuccess) postponeFunc(form.reset);
       return value;
