@@ -8,7 +8,6 @@ import {
   LevelInfo,
   ProgramFollowDetailsFull
 } from "gv-api-web";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
@@ -93,27 +92,8 @@ export const dispatchProgramId = (id: string) => async (
   dispatch: MiddlewareDispatch
 ) => await dispatch(setProgramIdAction(id));
 
-export const closePeriod = (
-  programId: string,
-  onSuccess: () => void,
-  onError: () => void
-) => (dispatch: Dispatch): void => {
-  const authorization = authService.getAuthArg();
-  assetsApi
-    .closeCurrentPeriod(programId, authorization)
-    .then(() => {
-      onSuccess();
-      dispatch(
-        alertMessageActions.success(
-          "program-details-page.close-period.notification-success",
-          true
-        )
-      );
-    })
-    .catch((error: { errorMessage: string }) => {
-      onError();
-      dispatch(alertMessageActions.error(error.errorMessage));
-    });
+export const closePeriod = (programId: string) => {
+  return assetsApi.closeCurrentPeriod(programId, authService.getAuthArg());
 };
 
 export const getOpenPositions = (programId: string) => (

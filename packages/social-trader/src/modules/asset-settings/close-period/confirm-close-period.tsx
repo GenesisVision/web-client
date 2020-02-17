@@ -1,32 +1,30 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
+import useApiRequest from "hooks/api-request.hook";
+import { closePeriod } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { SetSubmittingType } from "utils/types";
+import { useTranslation } from "react-i18next";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
-const _ConfirmClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
-  t,
+const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
   open,
   id,
-  service,
   onApply,
   onClose
 }) => {
-  const handleApplyClick = useCallback(
-    (setSubmitting: SetSubmittingType) => {
-      const successFn = () => {
-        onApply();
-        onClose();
-      };
-      const errorFn = () => {
-        setSubmitting(false);
-      };
-      service.closePeriod(id, successFn, errorFn);
-    },
-    [service, onApply, onClose, id]
-  );
+  const [t] = useTranslation();
+  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const { sendRequest, errorMessage } = useApiRequest({
+    request: closePeriod,
+    successMessage: "program-details-page.close-period.notification-success",
+    middleware: [onCloseMiddleware, onApply]
+  });
+  const handleApplyClick = useCallback(() => {
+    return sendRequest(id);
+  }, [id]);
 
   return (
     <ConfirmPopup
+      errorMessage={errorMessage}
       open={open}
       onClose={onClose}
       onCancel={onClose}
@@ -39,19 +37,12 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps & WithTranslation> = ({
   );
 };
 
-const ConfirmClosePeriod = translate()(React.memo(_ConfirmClosePeriod));
+const ConfirmClosePeriod = React.memo(_ConfirmClosePeriod);
 export default ConfirmClosePeriod;
 
 export interface IClosePeriodProps {
   id: string;
-  service: {
-    closePeriod: (
-      assetId: string,
-      onSuccess: () => void,
-      onError: () => void
-    ) => void;
-  };
   open: boolean;
-  onApply(): void;
-  onClose(): void;
+  onApply: () => void;
+  onClose: () => void;
 }
