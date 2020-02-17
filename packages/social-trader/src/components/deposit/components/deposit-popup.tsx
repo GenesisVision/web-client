@@ -34,7 +34,11 @@ const _DepositPopup: React.FC<Props> = ({
   ownAsset
 }) => {
   useEffect(() => {
-    sendEventToGA({ eventCategory: "Button", eventAction: "ClickInvest" });
+    sendEventToGA({
+      eventCategory: "Button",
+      eventAction:
+        asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
+    });
   }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
