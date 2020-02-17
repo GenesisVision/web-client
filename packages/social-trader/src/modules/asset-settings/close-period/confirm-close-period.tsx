@@ -12,11 +12,14 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
   onClose
 }) => {
   const [t] = useTranslation();
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = getPostponedOnCallback(() => {
+    onClose();
+    onApply();
+  });
   const { sendRequest, errorMessage } = useApiRequest({
     request: closePeriod,
     successMessage: "program-details-page.close-period.notification-success",
-    middleware: [onCloseMiddleware, onApply]
+    middleware: [onCloseMiddleware]
   });
   const handleApplyClick = useCallback(() => {
     return sendRequest(id);
