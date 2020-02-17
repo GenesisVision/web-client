@@ -4,8 +4,11 @@ import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/
 import React, { useCallback } from "react";
 import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
-import { IConfirmFormValues } from "./components/confirm-form";
-import { confirm2fa, get2faInfo } from "./services/confirm.services";
+import {
+  confirm2fa,
+  get2faInfo,
+  IConfirmFormValues
+} from "./services/confirm.services";
 
 const _ConfirmContainer: React.FC<Props> = ({
   onClose,

@@ -2,7 +2,6 @@ import { TwoFactorAuthenticator } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 
-import { IConfirmFormValues } from "../components/confirm-form";
 import { IConfirmProgramProps } from "../confirm-container";
 
 export const confirm2fa = ({
@@ -21,3 +20,11 @@ export const get2faInfo = ({
   const authorization = authService.getAuthArg();
   return assetsApi.getProgram2FA(programId, authorization);
 };
+
+enum FIELDS {
+  code = "code"
+}
+
+export interface IConfirmFormValues {
+  [FIELDS.code]: string;
+}
