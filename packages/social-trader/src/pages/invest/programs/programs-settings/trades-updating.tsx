@@ -1,65 +1,62 @@
 import TradesDelay from "components/assets/fields/trades-delay";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { FormikProps, withFormik } from "formik";
+import withLoader from "decorators/with-loader";
 import { TradesDelay as TradesDelayType } from "gv-api-web";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
 
+enum FIELDS {
+  tradesDelay = "tradesDelay"
+}
 const _TradesUpdating: React.FC<Props> = ({
-  handleSubmit,
-  dirty,
-  isValid,
-  isSubmitting
+  onSubmit,
+  tradesDelay,
+  editError
 }) => {
   const [t] = useTranslation();
+  const form = useForm<TradesUpdatingFormValues>({
+    defaultValues: {
+      [FIELDS.tradesDelay]: tradesDelay
+    },
+    mode: "onBlur"
+  });
+  const {
+    formState: { isValid, dirty, isSubmitting, isSubmitted }
+  } = form;
+
+  const isSuccessful = isSubmitted && !editError;
+  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <SettingsBlock label={t("program-settings.trades-update.title")}>
-      <form id="edit-form" onSubmit={handleSubmit}>
+      <HookForm form={form} onSubmit={onSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
         <GVButton
           color="primary"
           type={"submit"}
           className="invest-form__submit-button"
-          disabled={!dirty || !isValid || isSubmitting}
+          isPending={isSubmitting}
+          isSuccessful={isSuccessful}
+          disabled={disabled}
         >
           {t("program-settings.buttons.save")}
         </GVButton>
-      </form>
+      </HookForm>
     </SettingsBlock>
   );
 };
-
-enum FIELDS {
-  tradesDelay = "tradesDelay"
-}
 
 export interface TradesUpdatingFormValues {
   [FIELDS.tradesDelay]: TradesDelayType;
 }
 
-interface Props extends OwnProps, FormikProps<TradesUpdatingFormValues> {}
-
-interface OwnProps {
+interface Props {
+  editError?: boolean;
   tradesDelay: TradesDelayType;
   onSubmit: (values: TradesUpdatingFormValues) => void;
 }
 
-const TradesUpdating = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  withLoader,
-  withFormik<OwnProps, TradesUpdatingFormValues>({
-    enableReinitialize: true,
-    displayName: "edit-form",
-    mapPropsToValues: ({ tradesDelay }) => ({
-      [FIELDS.tradesDelay]: tradesDelay
-    }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_TradesUpdating);
+const TradesUpdating = withLoader(React.memo(_TradesUpdating));
 export default TradesUpdating;
