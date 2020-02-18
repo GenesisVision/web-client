@@ -50,18 +50,16 @@ const _DepositPopup: React.FC<Props> = ({
     middleware: [onApply, onClose, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (amount: number, setSubmitting: SetSubmittingType, walletId: string) =>
-      sendRequest({ id, amount, walletId }, setSubmitting).then(value => {
-        // convertToStatisticCurrency(amount, currency).then(eventValue => {
+    (amount: number, setSubmitting: SetSubmittingType, walletId: string) => {
+      return sendRequest({ id, amount, walletId }, setSubmitting).then(() => {
         sendEventToGA({
           eventCategory: "Button",
           eventAction:
             asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
         });
-        // });
-        return value;
-      }),
-    [id, asset]
+      });
+    },
+    [id, asset, sendRequest, sendEventToGA]
   );
 
   return (

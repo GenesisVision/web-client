@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
@@ -18,13 +19,11 @@ export const sendEventToGA = ({
   eventCategory,
   eventAction,
   eventLabel
-}: {
-  eventValue?: number;
-  eventCategory?: string;
-  eventAction?: string;
-  eventLabel?: string;
-}) =>
+}: GAEventType) =>
   sendMessageToGA("send", {
+    hitCallback: () => {
+      console.log(`send ${eventValue} ${eventCategory}`);
+    },
     hitType: "event",
     eventValue,
     eventCategory,
@@ -39,4 +38,19 @@ export const convertToStatisticCurrency = (
   return fetchRate(currency, STATISTIC_CURRENCY).then(rate => {
     return convertToCurrency(value, rate);
   });
+};
+
+export type GAEventType = {
+  eventValue?: number;
+  eventCategory?: string;
+  eventAction?: string;
+  eventLabel?: string;
+};
+
+export const useGA = (): { sendEvent: (event: GAEventType) => void } => {
+  const [event, sendEvent] = useState<GAEventType | undefined>();
+  useEffect(() => {
+    if (event) sendEventToGA(event);
+  }, [event, sendEventToGA]);
+  return { sendEvent };
 };
