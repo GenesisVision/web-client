@@ -25,6 +25,9 @@ export const sendEventToGA = ({
   eventLabel
 }: GAEventType) =>
   sendMessageToGA("send", {
+    hitCallback: () => {
+      console.log(`send ${eventValue} ${eventCategory}`);
+    },
     hitType: "event",
     eventValue,
     eventCategory,
