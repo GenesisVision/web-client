@@ -9,11 +9,12 @@ import {
   fetchWallets,
   TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { sendEventToGA } from "utils/ga";
 import { CurrencyEnum } from "utils/types";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
@@ -33,6 +34,13 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
+  useEffect(() => {
+    sendEventToGA({
+      eventCategory: "Button",
+      eventAction:
+        asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
+    });
+  }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
   const onCloseMiddleware = getPostponedOnCallback(onClose);
@@ -44,8 +52,15 @@ const _DepositPopup: React.FC<Props> = ({
     middleware: [onApply, onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    ({ amount, walletId }) => sendRequest({ id, amount, walletId }),
-    [id]
+    ({ amount, walletId }) =>
+      sendRequest({ id, amount, walletId }).then(() => {
+        sendEventToGA({
+          eventCategory: "Button",
+          eventAction:
+            asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
+        });
+      }),
+    [id, asset, sendEventToGA]
   );
 
   return (
