@@ -36,7 +36,7 @@ export const convertToStatisticCurrency = (
   currency: CurrencyEnum
 ) => {
   return fetchRate(STATISTIC_CURRENCY, currency).then(rate => {
-    return convertToCurrency(value, rate);
+    return Math.round(convertToCurrency(value, rate) * 100);
   });
 };
 
