@@ -9,13 +9,9 @@ declare global {
   const ga: Function;
 }
 
-export const sendMessageToGA = (
-  operation: string,
-  fields: { [keys: string]: any }
-) => {
-  if (typeof window !== "undefined" || !("ga" in window)) return;
-  // @ts-ignore
-  window.ga(operation, fields);
+export const sendMessageToGA = (...args: any) => {
+  if (typeof ga === "undefined") return;
+  ga(...args);
 };
 
 export const sendEventToGA = ({
