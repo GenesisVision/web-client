@@ -12,7 +12,7 @@ import {
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { useGA } from "utils/ga";
+import { sendEventToGA } from "utils/ga";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import DepositForm from "./deposit-form";
@@ -33,9 +33,8 @@ const _DepositPopup: React.FC<Props> = ({
   data: wallets,
   ownAsset
 }) => {
-  const { sendEvent } = useGA();
   useEffect(() => {
-    sendEvent({
+    sendEventToGA({
       eventCategory: "Button",
       eventAction:
         asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
@@ -52,14 +51,15 @@ const _DepositPopup: React.FC<Props> = ({
   });
   const handleInvest = useCallback(
     (amount: number, setSubmitting: SetSubmittingType, walletId: string) => {
-      sendEvent({
-        eventCategory: "Button",
-        eventAction:
-          asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
+      return sendRequest({ id, amount, walletId }, setSubmitting).then(() => {
+        sendEventToGA({
+          eventCategory: "Button",
+          eventAction:
+            asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
+        });
       });
-      return sendRequest({ id, amount, walletId }, setSubmitting);
     },
-    [id, asset, sendEvent, sendRequest]
+    [id, asset, sendRequest, sendEventToGA]
   );
 
   return (
