@@ -12,7 +12,8 @@ import {
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { sendEventToGA } from "utils/ga";
+import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum, SetSubmittingType } from "utils/types";
 
 import DepositForm from "./deposit-form";
@@ -51,11 +52,19 @@ const _DepositPopup: React.FC<Props> = ({
   });
   const handleInvest = useCallback(
     (amount: number, setSubmitting: SetSubmittingType, walletId: string) => {
-      return sendRequest({ id, amount, walletId }, setSubmitting).then(() => {
-        sendEventToGA({
-          eventCategory: "Button",
-          eventAction:
-            asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
+      return sendRequest({ id, amount, walletId }, setSubmitting).then(res => {
+        if (!res) return;
+        const walletCurrency = safeGetElemFromArray(
+          wallets,
+          ({ id }) => id === walletId
+        ).currency;
+        convertToStatisticCurrency(amount, walletCurrency).then(eventValue => {
+          sendEventToGA({
+            eventValue,
+            eventCategory: "Button",
+            eventAction:
+              asset === ASSET.PROGRAM ? "InvestInProgram" : "InvestInFund"
+          });
         });
       });
     },
