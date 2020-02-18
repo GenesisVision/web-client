@@ -3,7 +3,7 @@ import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
-const STATISTIC_CURRENCY = "GVT";
+const STATISTIC_CURRENCY = "USD";
 
 declare global {
   const ga: Function;
