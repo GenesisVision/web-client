@@ -5,6 +5,7 @@ import { ICreateFundSettingsFormValues } from "pages/create-fund/components/crea
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
+import { sendEventToGA } from "utils/ga";
 
 export type ICreateAssetSettingsFormValues =
   | ICreateFundSettingsFormValues
@@ -28,12 +29,27 @@ export const createAsset = ({
     ) as Promise<any>;
   }
   const method = getCreateMethod(asset);
-  return promise.then(response =>
-    method({
-      ...data,
-      logo: response
-    } as NewAssetRequest)
-  );
+  return promise
+    .then(response =>
+      method({
+        ...data,
+        logo: response
+      } as NewAssetRequest)
+    )
+    .then(result => {
+      if (result) {
+        sendEventToGA({
+          eventCategory: "Create",
+          eventAction:
+            asset === CREATE_ASSET.ACCOUNT
+              ? data.depositAmount
+                ? "CreateAccount"
+                : "CreateDemoAccount"
+              : "CreateFund"
+        });
+      }
+      return result;
+    });
 };
 
 const getCreateMethod = (

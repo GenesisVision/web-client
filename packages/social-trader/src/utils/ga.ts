@@ -3,19 +3,15 @@ import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
-const STATISTIC_CURRENCY = "GVT";
+const STATISTIC_CURRENCY = "USD";
 
 declare global {
   const ga: Function;
 }
 
-export const sendMessageToGA = (
-  operation: string,
-  fields: { [keys: string]: any }
-) => {
-  if (typeof window !== "undefined" || !("ga" in window)) return;
-  // @ts-ignore
-  window.ga(operation, fields);
+export const sendMessageToGA = (...args: any) => {
+  if (typeof ga === "undefined") return;
+  ga(...args);
 };
 
 export const sendEventToGA = ({
@@ -39,8 +35,8 @@ export const convertToStatisticCurrency = (
   value: number,
   currency: CurrencyEnum
 ) => {
-  return fetchRate(currency, STATISTIC_CURRENCY).then(rate => {
-    return convertToCurrency(value, rate);
+  return fetchRate(STATISTIC_CURRENCY, currency).then(rate => {
+    return Math.round(convertToCurrency(value, rate) * 100);
   });
 };
 
