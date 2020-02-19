@@ -2,6 +2,7 @@ import Dialog, { IDialogProps } from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dynamic";
 import React, { useCallback } from "react";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import { IProgramUnfollowFormValues } from "./components/unfollow-form";
 import {
@@ -22,11 +23,16 @@ const _UnfollowContainer: React.FC<Props> = ({
   const { sendRequest } = useApiRequest({
     request: getDetachMethod(isExternal),
     successMessage: "unfollow-program.success-alert-message",
-    middleware: [onClose, onApply]
+    middleware: [
+      getPostponedOnCallback(() => {
+        onClose();
+        onApply();
+      })
+    ]
   });
   const handleSubmit = useCallback(
     ({ mode }: IProgramUnfollowFormValues) => {
-      sendRequest({ id, model: { mode, tradingAccountId } });
+      return sendRequest({ id, model: { mode, tradingAccountId } });
     },
     [id, tradingAccountId]
   );
