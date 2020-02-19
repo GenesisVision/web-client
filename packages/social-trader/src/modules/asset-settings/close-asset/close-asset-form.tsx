@@ -3,7 +3,7 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import { CloseableAssetType } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
@@ -55,7 +55,7 @@ const _CloseAssetForm: React.FC<Props> = ({
         </DialogField>
         {twoFactorEnabled && (
           <DialogField>
-            <GVFormikField
+            <GVHookFormField
               wide
               type="tel"
               name={FIELDS.twoFactorCode}
