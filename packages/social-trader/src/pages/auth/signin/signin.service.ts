@@ -28,7 +28,7 @@ export const client = "Web";
 export const login: LoginFuncType = (method, fromPath, type) => (
   dispatch,
   getState
-) => (props, setSubmitting) => {
+) => props => {
   const { code, captchaCheckResult } = props;
   const stateLoginData = getState().loginData.twoFactor;
   const email = props.email || stateLoginData.email;
@@ -61,8 +61,6 @@ export const login: LoginFuncType = (method, fromPath, type) => (
         );
         dispatch(setTwoFactorRequirementAction(true));
         Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
-      } else {
-        setSubmitting!(false);
       }
     });
 };

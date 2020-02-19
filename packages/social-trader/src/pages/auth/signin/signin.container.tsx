@@ -3,7 +3,7 @@ import Router from "next/router";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthRootState, ReduxDispatch, SetSubmittingType } from "utils/types";
+import { AuthRootState, ReduxDispatch } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
 import { CODE_TYPE, loginUserAction } from "./signin.actions";
@@ -41,7 +41,7 @@ const _SignInContainer: React.FC<Props> = ({
 
 interface Props {
   renderForm: (
-    handle: (values: ValuesType, setSubmitting?: SetSubmittingType) => void,
+    handle: (values: ValuesType) => void,
     email: string,
     errorMessage: string
   ) => JSX.Element;
