@@ -1,4 +1,5 @@
 import { WalletData } from "gv-api-web";
+import { TFunction } from "i18next";
 import { CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS } from "modules/follow-module/follow-popup/follow-popup-create-external-account";
 import {
   convertFromCurrency,
@@ -7,16 +8,12 @@ import {
 import { formatCurrencyValue } from "utils/formatter";
 import { lazy, number, object, Schema, string } from "yup";
 
-import {
-  CreateAccountFormProps,
-  CreateAccountFormValues
-} from "./follow-popup-create-account";
+import { CreateAccountFormValues } from "./follow-popup-create-account";
 
 export enum CREATE_ACCOUNT_FORM_FIELDS {
   depositWalletId = "depositWalletId",
   currency = "currency",
-  depositAmount = "depositAmount",
-  rate = "rate"
+  depositAmount = "depositAmount"
 }
 
 const getAvailable = (
@@ -31,13 +28,18 @@ const getAvailable = (
 };
 
 const CreateAccountFormValidationSchema = ({
+  rate,
   minDeposit,
   wallets,
   t
-}: CreateAccountFormProps) => {
+}: {
+  rate: number;
+  minDeposit: number;
+  wallets: WalletData[];
+  t: TFunction;
+}) => {
   return lazy(
     (values: CreateAccountFormValues): Schema<any> => {
-      const rate = values[CREATE_ACCOUNT_FORM_FIELDS.rate];
       const currency = values[CREATE_ACCOUNT_FORM_FIELDS.currency];
       const minDepositAmount = convertFromCurrency(minDeposit, rate);
       return object().shape({
@@ -74,7 +76,9 @@ const CreateAccountFormValidationSchema = ({
 
 export const CreateExternalAccountFormValidationSchema = ({
   t
-}: CreateAccountFormProps) =>
+}: {
+  t: TFunction;
+}) =>
   object<CreateAccountFormValues>().shape({
     [CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret]: string().required(
       t("attach-account-page.settings.validation.api-secret")
