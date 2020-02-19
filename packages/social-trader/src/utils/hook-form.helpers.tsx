@@ -30,7 +30,7 @@ export const HookForm: React.FC<{
   );
 };
 
-export const getPostponedOnCallback = (callback?: Function): MiddlewareType => {
+export const postponeCallback = (callback?: Function): MiddlewareType => {
   return () => {
     postponeFunc(callback);
   };

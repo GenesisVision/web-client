@@ -11,7 +11,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
+import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
 enum FORM_FIELD {
@@ -56,7 +56,7 @@ const _SocialLinkForm: React.FC<Props> = ({
   const handleSubmit = useCallback(
     (values: ISignalLinkFormValues) => {
       return onSubmit({ ...values, type }).then(
-        getPostponedOnCallback(setButtonHidden)
+        postponeCallback(setButtonHidden)
       );
     },
     [onSubmit, setButtonHidden]

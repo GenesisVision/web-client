@@ -6,7 +6,7 @@ import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { formatValue } from "utils/formatter";
-import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
+import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 import { withdrawFund } from "./services/fund-withdraw.services";
@@ -21,7 +21,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   exitFee,
   onBackClick
 }) => {
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = postponeCallback(onClose);
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [onCloseMiddleware, onApply],
     request: withdrawFund,

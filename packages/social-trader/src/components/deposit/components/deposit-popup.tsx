@@ -13,7 +13,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { sendEventToGA } from "utils/ga";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
@@ -43,7 +43,7 @@ const _DepositPopup: React.FC<Props> = ({
   }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = postponeCallback(onClose);
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({

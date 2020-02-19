@@ -6,7 +6,7 @@ import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { sendEventToGA } from "utils/ga";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import FollowPopupForm from "../follow-popup/follow-popup-form";
@@ -62,7 +62,7 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
     successMessage: "follow-program.create-success-alert-message",
     request: getApiRequest(isExternal),
     middleware: [
-      getPostponedOnCallback(() => {
+      postponeCallback(() => {
         onClose();
         onApply();
       }),

@@ -8,7 +8,7 @@ import {
 } from "modules/demo-deposit/demo-deposit.service";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
@@ -18,7 +18,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const onApplyMiddleware = getPostponedOnCallback(onApply);
+  const onApplyMiddleware = postponeCallback(onApply);
   const { sendRequest, errorMessage } = useApiRequest<DemoDepositResponse>({
     request: depositToDemo,
     successMessage: t("transfer.confirmation.deposit-success"),

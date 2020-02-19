@@ -7,7 +7,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
@@ -25,7 +25,7 @@ const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
     dispatch(updateWalletTimestampAction());
   };
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [getPostponedOnCallback(updateWalletMiddleware)],
+    middleware: [postponeCallback(updateWalletMiddleware)],
     request: values =>
       dispatch(walletWithdrawService.newWithdrawRequest(values)),
     catchCallback: () => setNotSuccess()

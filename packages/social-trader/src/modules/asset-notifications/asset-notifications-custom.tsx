@@ -9,7 +9,7 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
   TAddNotification,
@@ -37,7 +37,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
       return dispatch(addNotification(values));
     },
     successMessage: "notifications-page.custom.create-alert",
-    middleware: [getPostponedOnCallback(setClosePopup)]
+    middleware: [postponeCallback(setClosePopup)]
   });
 
   const handleSubmit = useCallback(

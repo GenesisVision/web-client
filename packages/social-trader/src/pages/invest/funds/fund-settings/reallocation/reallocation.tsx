@@ -5,7 +5,7 @@ import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import ReallocateForm, {
   IReallocateFormValues
@@ -22,7 +22,7 @@ const _Reallocation: React.FC<Props> = ({
   const [t] = useTranslation();
   const { errorMessage, sendRequest } = useApiRequest({
     successMessage: "reallocate.success-alert-message",
-    middleware: [getPostponedOnCallback(onApply)],
+    middleware: [postponeCallback(onApply)],
     request: args => updateAssets(args)
   });
   const handleApply = useCallback(

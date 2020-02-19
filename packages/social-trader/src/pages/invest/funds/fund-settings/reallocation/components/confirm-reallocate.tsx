@@ -3,7 +3,7 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 import { PlatformAssetFull } from "utils/types";
 
 const _ConfirmReallocate: React.FC<Props> = ({
@@ -14,7 +14,7 @@ const _ConfirmReallocate: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const handleApplyClick = useCallback(() => {
-    return onApply().then(getPostponedOnCallback(onClose));
+    return onApply().then(postponeCallback(onClose));
   }, [onApply, onClose]);
   return (
     <ConfirmPopup

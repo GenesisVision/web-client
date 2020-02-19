@@ -8,7 +8,7 @@ import FollowTop from "modules/follow-module/follow-popup/follow-popup-top";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import { getUpdateAttachMethod } from "../services/follow-module-service";
@@ -29,7 +29,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   const { sendRequest: submitChanges, errorMessage } = useApiRequest({
     request: getUpdateAttachMethod(signalSubscription.isExternal),
     successMessage: "follow-program.edit-success-alert-message",
-    middleware: [onApply, getPostponedOnCallback(onClose)]
+    middleware: [onApply, postponeCallback(onClose)]
   });
 
   const { rate, getRate } = useGetRate();

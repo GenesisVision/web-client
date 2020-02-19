@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
-import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
+import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
@@ -26,7 +26,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   periodEnds,
   onBackClick
 }) => {
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = postponeCallback(onClose);
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [onCloseMiddleware, onApply],
     request: withdrawProgramById,

@@ -12,7 +12,7 @@ import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
   fetchTradingAccounts,
@@ -53,7 +53,7 @@ const _TransferContainer: React.FC<Props> = ({
     dispatch(fetchWallets(currency));
     dispatch(updateWalletTimestampAction());
   };
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = postponeCallback(onClose);
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     successMessage,
     middleware: [updateWalletMiddleware, onCloseMiddleware],

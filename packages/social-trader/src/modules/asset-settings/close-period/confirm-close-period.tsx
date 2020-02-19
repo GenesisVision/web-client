@@ -3,7 +3,7 @@ import useApiRequest from "hooks/api-request.hook";
 import { closePeriod } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
   open,
@@ -12,7 +12,7 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
   onClose
 }) => {
   const [t] = useTranslation();
-  const onCloseMiddleware = getPostponedOnCallback(() => {
+  const onCloseMiddleware = postponeCallback(() => {
     onClose();
     onApply();
   });
