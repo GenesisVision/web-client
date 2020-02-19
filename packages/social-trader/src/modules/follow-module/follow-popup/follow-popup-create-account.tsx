@@ -83,7 +83,6 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     },
     [wallets]
   );
-  const handleNext = useCallback(values => onClick(values), [onClick]);
   const setMaxAmount = useCallback(() => {
     setValue(
       CREATE_ACCOUNT_FORM_FIELDS.depositAmount,
@@ -93,7 +92,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   }, [followCurrency, wallet]);
 
   return (
-    <HookForm form={form} onSubmit={handleNext}>
+    <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
         <DialogField>
           <WalletField
