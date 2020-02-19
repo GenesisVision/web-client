@@ -16,7 +16,7 @@ enum FIELDS {
   password = "password"
 }
 
-const GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
+const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
   const [t] = useTranslation();
 
   const form = useForm<IFormValues>({
@@ -74,5 +74,5 @@ interface Props {
 }
 interface IFormValues extends PasswordModel {}
 
-const GenerateRecoveryWithFormik = React.memo(GenerateRecoveryForm);
-export default GenerateRecoveryWithFormik;
+const GenerateRecoveryForm = React.memo(_GenerateRecoveryForm);
+export default GenerateRecoveryForm;

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 import { sendPassword } from "../../services/2fa.service";
 import GoogleAuthCodes from "../google-auth-codes";
-import GenerateRecoveryWithFormik from "./generate-recovery-form";
+import GenerateRecoveryForm from "./generate-recovery-form";
 
 const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
   const [t] = useTranslation();
@@ -30,7 +30,7 @@ const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
         {data ? (
           <GoogleAuthCodes codes={(data as RecoveryCodesViewModel).codes} />
         ) : (
-          <GenerateRecoveryWithFormik
+          <GenerateRecoveryForm
             onSubmit={handleSubmit}
             errorMessage={errorMessage}
           />
