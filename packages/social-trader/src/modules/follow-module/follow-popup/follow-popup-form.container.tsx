@@ -5,7 +5,9 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { sendEventToGA } from "utils/ga";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import FollowPopupForm from "../follow-popup/follow-popup-form";
 import {
@@ -28,6 +30,9 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   onClose,
   onApply = () => {}
 }) => {
+  useEffect(() => {
+    sendEventToGA({ eventCategory: "Button", eventAction: "ClickFollow" });
+  }, []);
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
@@ -40,16 +45,29 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
     currency
   });
 
+  const sendEventMiddleware = () => {
+    sendEventToGA({
+      eventCategory: "Button",
+      eventAction: "FollowTo"
+    });
+  };
+
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
   const { data: accounts } = useApiRequest({
     request: () => getAccountsMethod({ id }),
     fetchOnMount: true
   });
 
-  const { sendRequest: submitChanges } = useApiRequest({
+  const { sendRequest: submitChanges, errorMessage } = useApiRequest({
     successMessage: "follow-program.create-success-alert-message",
     request: getApiRequest(isExternal),
-    middleware: [onApply, onClose]
+    middleware: [
+      getPostponedOnCallback(() => {
+        onClose();
+        onApply();
+      }),
+      sendEventMiddleware
+    ]
   });
 
   const { rate, getRate } = useGetRate();
@@ -59,27 +77,21 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   }, [currency]);
 
   const handleSubmit = useCallback(
-    (
-      id: string,
-      requestParams: AttachToSignalProvider,
-      setSubmitting: SetSubmittingType
-    ) => {
-      submitChanges(
-        {
-          id,
-          requestParams: {
-            ...requestParams,
-            brokerAccountTypeId: brokerId
-          },
-          leverage
+    (id: string, requestParams: AttachToSignalProvider) => {
+      return submitChanges({
+        id,
+        requestParams: {
+          ...requestParams,
+          brokerAccountTypeId: brokerId
         },
-        setSubmitting
-      );
+        leverage
+      });
     },
     []
   );
   return (
     <FollowPopupForm
+      errorMessage={errorMessage}
       isExternal={isExternal}
       rate={rate}
       loaderData={[]}

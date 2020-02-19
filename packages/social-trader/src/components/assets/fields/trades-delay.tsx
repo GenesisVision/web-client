@@ -3,7 +3,7 @@ import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import { DELAYS } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions";
+import { DELAYS } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

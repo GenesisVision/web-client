@@ -1,4 +1,5 @@
 import { TwoFactorAuthenticator } from "gv-api-web";
+import { IGoogleActivateStepFormValues } from "modules/2fa/google-auth/google-auth-steps/google-auth-activate-step";
 import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 
@@ -7,7 +8,7 @@ import { IConfirmProgramProps } from "../confirm-container";
 export const confirm2fa = ({
   code,
   programId
-}: IConfirmFormValues & IConfirmProgramProps) => {
+}: IGoogleActivateStepFormValues & IConfirmProgramProps) => {
   const authorization = authService.getAuthArg();
   return assetsApi.confirmProgram2FA(programId, authorization, {
     body: { twoFactorCode: code }

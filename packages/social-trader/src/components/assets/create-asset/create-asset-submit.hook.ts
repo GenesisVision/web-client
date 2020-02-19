@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
+import { sendEventToGA } from "utils/ga";
 
 import {
   createAsset,
@@ -29,6 +30,13 @@ const useCreateAssetSubmit = ({
   condition,
   asset
 }: TUseCreateAssetSubmitProps): TUseCreateAssetSubmitOutput => {
+  const sendEventMiddleware = () => {
+    sendEventToGA({
+      eventCategory: "Create",
+      eventAction:
+        asset === CREATE_ASSET.ACCOUNT ? "CreateAccount" : "CreateFund"
+    });
+  };
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const checkConditionMiddleware = (data: any) => {
@@ -45,7 +53,7 @@ const useCreateAssetSubmit = ({
   };
   const { sendRequest, isPending, errorMessage } = useApiRequest({
     request: createAsset,
-    middleware: [checkConditionMiddleware]
+    middleware: [sendEventMiddleware, checkConditionMiddleware]
   });
   const handleCreate = useCallback(
     (data: ICreateAssetSettingsFormValues) => {

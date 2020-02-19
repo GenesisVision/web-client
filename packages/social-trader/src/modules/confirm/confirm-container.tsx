@@ -1,14 +1,11 @@
 import Dialog from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
+import { IGoogleActivateStepFormValues } from "modules/2fa/google-auth/google-auth-steps/google-auth-activate-step";
 import GoogleAuthStepsContainer from "modules/2fa/google-auth/google-auth-steps/google-auth-steps";
 import React, { useCallback } from "react";
 import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
-import {
-  confirm2fa,
-  get2faInfo,
-  IConfirmFormValues
-} from "./services/confirm.services";
+import { confirm2fa, get2faInfo } from "./services/confirm.services";
 
 const _ConfirmContainer: React.FC<Props> = ({
   onClose,
@@ -36,7 +33,7 @@ const _ConfirmContainer: React.FC<Props> = ({
   }, [onClose]);
 
   const handleConfirm = useCallback(
-    (values: IConfirmFormValues) => {
+    (values: IGoogleActivateStepFormValues) => {
       confirm({ ...values, programId });
     },
     [programId]

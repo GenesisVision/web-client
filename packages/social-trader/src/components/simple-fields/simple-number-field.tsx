@@ -17,7 +17,6 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
 };
 
 export interface ISimpleNumberFieldProps extends GVTextFieldProps {
-  refProp?: any;
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   [key: string]: any;
 }

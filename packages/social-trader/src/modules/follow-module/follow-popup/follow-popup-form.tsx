@@ -12,7 +12,7 @@ import FollowCreateExternalAccount from "modules/follow-module/follow-popup/foll
 import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
@@ -31,6 +31,7 @@ const initRequestParams = {
 };
 
 const _FollowForm: React.FC<Props> = ({
+  errorMessage,
   isExternal,
   data: accounts,
   id,
@@ -70,15 +71,12 @@ const _FollowForm: React.FC<Props> = ({
     []
   );
   const submit = useCallback(
-    (
-      {
-        mode,
-        openTolerancePercent,
-        percent,
-        fixedVolume
-      }: FollowParamsFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
+    ({
+      mode,
+      openTolerancePercent,
+      percent,
+      fixedVolume
+    }: FollowParamsFormValues) => {
       const params = {
         ...requestParams,
         tradingAccountId: tradingAccountId!,
@@ -88,7 +86,7 @@ const _FollowForm: React.FC<Props> = ({
         fixedVolume
       };
       setRequestParams(params);
-      submitMethod(id, params, setSubmitting);
+      return submitMethod(id, params);
     },
     [id, requestParams, submitMethod, tradingAccountId]
   );
@@ -124,6 +122,7 @@ const _FollowForm: React.FC<Props> = ({
         ))}
       {tab === TABS.PARAMS && (
         <FollowParams
+          errorMessage={errorMessage}
           subscribeFixedCurrencies={subscribeFixedCurrencies}
           rate={rate}
           currency={currency}
@@ -141,14 +140,14 @@ enum TABS {
 }
 
 interface Props {
+  errorMessage?: string;
   isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
   submitMethod: (
     programId: string,
-    requestParams: AttachToSignalProvider,
-    setSubmitting: SetSubmittingType
+    requestParams: AttachToSignalProvider
   ) => void;
   id: string;
   wallets: WalletData[];

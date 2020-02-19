@@ -14,7 +14,6 @@ const _SimpleTextField: React.FC<ISimpleTextFieldProps> = props => {
 export interface ISimpleTextFieldProps extends GVTextFieldProps {
   triggerValidation: (name: string) => void;
   validateOnInput?: boolean;
-  refProp?: any;
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   [key: string]: any;
 }

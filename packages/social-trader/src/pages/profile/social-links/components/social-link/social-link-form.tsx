@@ -2,56 +2,101 @@ import "./social-link.scss";
 
 import SocialLinkImage from "components/avatar/social-link/social-link";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import { FormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SocialLinkViewModel } from "gv-api-web";
+import useIsOpen from "hooks/is-open.hook";
+import { TOnEditLinkSubmitFunc } from "pages/profile/social-links/components/social-links.container";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
-import { TOnEditLinkSubmitFunc } from "../social-links.container";
+enum FORM_FIELD {
+  value = "value"
+}
 
 const _SocialLinkForm: React.FC<Props> = ({
-  t,
-  socialLink,
-  values,
-  handleSubmit,
-  setFieldValue
+  errorMessage,
+  onSubmit,
+  socialLink: { logo, name, type, url, value: valueProp }
 }) => {
-  const handleCancelClick = () => {
-    setFieldValue(FORM_FIELD.linkValue, socialLink.value || "");
-    setFieldValue(FORM_FIELD.isButtonsVisible, false);
-  };
+  const [isButtonsVisible, setButtonsVisible, setButtonHidden] = useIsOpen();
+  const [t] = useTranslation();
+  const form = useForm<ISignalLinkFormValues>({
+    defaultValues: {
+      [FORM_FIELD.value]: valueProp || ""
+    },
+    validationSchema: object().shape({
+      [FORM_FIELD.value]: string()
+        .trim()
+        .max(100, t("profile-page.social-links.validation.link-max-length"))
+    }),
+    mode: "onChange"
+  });
+
+  const {
+    setValue,
+    watch,
+    formState: { isValid, dirty, isSubmitting, isSubmitted }
+  } = form;
+
+  const { value } = watch();
+
+  const isSuccessful = isSubmitted && !errorMessage;
+  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+
+  const handleCancelClick = useCallback(() => {
+    setValue(FORM_FIELD.value, valueProp || "", true);
+    setButtonHidden();
+  }, [setValue, valueProp]);
+
+  const handleSubmit = useCallback(
+    (values: ISignalLinkFormValues) => {
+      return onSubmit({ ...values, type }).then(
+        getPostponedOnCallback(setButtonHidden)
+      );
+    },
+    [onSubmit, setButtonHidden]
+  );
 
   return (
     <div className="social-link">
       <div className="social-logo">
-        <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
+        <SocialLinkImage url={logo} alt={name} />
       </div>
-      <form className="social-link__form" onSubmit={handleSubmit}>
-        <GVFormikField
-          component={GVTextField}
+      <HookForm
+        resetOnSuccess
+        className="social-link__form"
+        form={form}
+        onSubmit={handleSubmit}
+      >
+        <GVHookFormField
+          component={SimpleTextField}
           wrapperClassName="social-input__wrapper"
           adornmentClassName="social-input__adornment"
           labelClassName="social-input__label"
           type="text"
-          name={FORM_FIELD.linkValue}
-          label={socialLink.name}
-          adornment={
-            values.linkValue || values.isButtonsVisible ? socialLink.url : ""
-          }
+          name={FORM_FIELD.value}
+          label={name}
+          adornment={value || isButtonsVisible ? url : ""}
           adornmentPosition="start"
           onClick={() => {
-            if (!values.isButtonsVisible)
-              setFieldValue(FORM_FIELD.isButtonsVisible, true);
+            if (!isButtonsVisible) setButtonsVisible();
           }}
           autoComplete="off"
         />
-        {values.isButtonsVisible && (
+        {isButtonsVisible && (
           <div>
-            <GVButton type="submit" className="social-button">
+            <GVButton
+              type="submit"
+              className="social-button"
+              isPending={isSubmitting}
+              isSuccessful={isSuccessful}
+              disabled={disabled}
+            >
               {t("buttons.save")}
             </GVButton>
             <GVButton
@@ -63,59 +108,20 @@ const _SocialLinkForm: React.FC<Props> = ({
             </GVButton>
           </div>
         )}
-      </form>
+      </HookForm>
     </div>
   );
 };
 
-const SocialLinkForm = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik<OwnProps, ISignalLinkFormValues>({
-    displayName: "social-link-form",
-    mapPropsToValues: props => ({
-      [FORM_FIELD.linkValue]: props.socialLink.value || "",
-      [FORM_FIELD.isButtonsVisible]: false
-    }),
-    validationSchema: (props: Props) =>
-      object().shape({
-        [FORM_FIELD.linkValue]: string()
-          .trim()
-          .max(
-            100,
-            props.t("profile-page.social-links.validation.link-max-length")
-          )
-      }),
-    handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
-      props
-        .onSubmit(
-          { type: props.socialLink.type, value: values.linkValue },
-          setSubmitting
-        )
-        .then(() => {
-          setFieldValue(FORM_FIELD.isButtonsVisible, false);
-        });
-    },
-    enableReinitialize: true
-  })
-)(_SocialLinkForm);
-export default SocialLinkForm;
-
-enum FORM_FIELD {
-  linkValue = "linkValue",
-  isButtonsVisible = "isButtonsVisible"
-}
-
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   socialLink: SocialLinkViewModel;
   onSubmit: TOnEditLinkSubmitFunc;
 }
 
 interface ISignalLinkFormValues {
-  [FORM_FIELD.linkValue]: string;
-  [FORM_FIELD.isButtonsVisible]: boolean;
+  [FORM_FIELD.value]: string;
 }
 
-interface Props
-  extends OwnProps,
-    FormikProps<ISignalLinkFormValues>,
-    WithTranslation {}
+const SocialLinkForm = React.memo(_SocialLinkForm);
+export default SocialLinkForm;

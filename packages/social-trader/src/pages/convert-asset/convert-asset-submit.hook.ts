@@ -2,9 +2,11 @@ import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import { TErrorMessage } from "hooks/error-message.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
+import { sendEventToGA } from "utils/ga";
 
 import { TAssetFromTo } from "./convert-asset.types";
 import {
@@ -28,6 +30,13 @@ const useConvertAssetSubmit = ({
   condition,
   fromTo
 }: TUseConvertAssetSubmitProps): TUseConvertAssetSubmitOutput => {
+  const sendEventMiddleware = () => {
+    if (fromTo.assetTo === CONVERT_ASSET.PROGRAM)
+      sendEventToGA({
+        eventCategory: "Create",
+        eventAction: "ConvertToProgram"
+      });
+  };
   const dispatch = useDispatch();
   const checkConditionMiddleware = (data: any) => {
     if (!data || !condition || condition(data)) {
@@ -41,7 +50,7 @@ const useConvertAssetSubmit = ({
     }
   };
   const { sendRequest, errorMessage } = useApiRequest({
-    middleware: [checkConditionMiddleware],
+    middleware: [sendEventMiddleware, checkConditionMiddleware],
     request: convertAsset
   });
   const handleCreate = useCallback((data: IConvertAssetSettingsFormValues) => {

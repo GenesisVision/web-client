@@ -30,10 +30,9 @@ export const removeNotification: TRemoveNotification = (
     dispatch(alertMessageActions.success(message));
   });
 
-export const addNotification: TAddNotification = (opts, message) => dispatch =>
+export const addNotification: TAddNotification = opts => dispatch =>
   ((dispatch(addNotificationSettingAction(opts)) as unknown) as Promise<
     void
   >).then(() => {
     dispatch(fetchNotificationSettings());
-    dispatch(alertMessageActions.success(message));
   });

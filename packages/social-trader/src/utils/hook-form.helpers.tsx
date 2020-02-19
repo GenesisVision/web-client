@@ -16,7 +16,7 @@ export const HookForm: React.FC<{
   const handleSubmit = form.handleSubmit((values: any) => {
     if (!onSubmit) return;
     return (onSubmit(values) as Promise<void>).then(value => {
-      if (resetOnSuccess) postponeFunc(form.reset);
+      if (resetOnSuccess) postponeFunc(() => form.reset(form.watch()));
       return value;
     });
   });

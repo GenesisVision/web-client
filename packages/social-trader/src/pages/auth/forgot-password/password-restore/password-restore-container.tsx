@@ -6,7 +6,8 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
-import { ResponseError, SetSubmittingType } from "utils/types";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
+import { ResponseError } from "utils/types";
 
 import { restorePassword } from "../services/forgot-password.service";
 import PasswordRestore, {
@@ -16,7 +17,7 @@ import PasswordRestore, {
 const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
   const dispatch = useDispatch();
   const { sendRequest, errorMessage } = useApiRequest({
-    middleware: [() => Push(DASHBOARD_ROUTE)],
+    middleware: [getPostponedOnCallback(() => Push(DASHBOARD_ROUTE))],
     catchCallback: ({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
         Push(LOGIN_ROUTE);
@@ -33,24 +34,22 @@ const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
   });
 
   const handleSubmit = useCallback(
-    (
-      formData: IRestorePasswordFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
+    (formData: IRestorePasswordFormValues) => {
       const params = {
         userId,
         code,
         ...formData
       };
-      sendRequest(params, setSubmitting);
+      return sendRequest(params);
     },
     [userId, code]
   );
 
-  if (!userId || !code) {
-    Push(NOT_FOUND_PAGE_ROUTE);
-  }
-  return <PasswordRestore error={errorMessage} onSubmit={handleSubmit} />;
+  if (!userId || !code) Push(NOT_FOUND_PAGE_ROUTE);
+
+  return (
+    <PasswordRestore errorMessage={errorMessage} onSubmit={handleSubmit} />
+  );
 };
 
 interface Props {

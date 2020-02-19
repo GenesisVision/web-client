@@ -24,10 +24,13 @@ import {
 
 import PerformanceData from "./program-details-description/performance-data";
 import { levelsParamsLoaderData } from "./program-details.loader-data";
-import ProgramDetailsHistorySection from "./program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, {
+  TProgramTablesData
+} from "./program-history-section/program-details-history-section";
 import { levelParametersSelector } from "./reducers/level-parameters.reducer";
 import {
   financialStatisticTableSelector,
+  openPositionsSelector,
   openPositionsTableSelector,
   periodHistoryTableSelector,
   programEventsTableSelector,
@@ -88,7 +91,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     dispatch(dispatchProgramDescriptionWithId(id, undefined, assetType));
   }, [id]);
 
-  const tablesData = {
+  const tablesData: TProgramTablesData = {
     financialStatistic: programDetails
       ? {
           dataSelector: financialStatisticTableSelector,
@@ -96,6 +99,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         }
       : undefined,
     openPositions: {
+      itemSelector: openPositionsSelector,
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },

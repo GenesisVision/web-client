@@ -36,8 +36,8 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
     (options: IAddNotificationSettingProps) =>
       dispatch(
         addNotification(
-          options,
-          t(`notifications-page.general.${options.type}.enabled-alert`)
+          options
+          // t(`notifications-page.general.${options.type}.enabled-alert`)
         )
       ),
     []

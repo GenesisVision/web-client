@@ -5,63 +5,28 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "pages/invest/programs/program-details/program-details.constants";
+import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { RootState } from "reducers/root-reducer";
 import { CurrencyEnum } from "utils/types";
 
-import { openPositionsSelector } from "../../reducers/program-history.reducer";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramOpenPositionsRow from "./program-open-positions-row";
 
-export const DELAYS_LABELS = {
-  None: "Without",
-  FiveMinutes: "5 minutes",
-  FifteenMinutes: "15 minutes",
-  ThirtyMinutes: "30 minutes",
-  OneHour: "1 hour",
-  SixHours: "6 hours"
-};
-
-type DelayType = { label: string; value: any };
-export const DELAYS: DelayType[] = [
-  {
-    label: DELAYS_LABELS["None"],
-    value: "None"
-  },
-  {
-    label: DELAYS_LABELS["FiveMinutes"],
-    value: "FiveMinutes"
-  },
-  {
-    label: DELAYS_LABELS["FifteenMinutes"],
-    value: "FifteenMinutes"
-  },
-  {
-    label: DELAYS_LABELS["ThirtyMinutes"],
-    value: "ThirtyMinutes"
-  },
-  {
-    label: DELAYS_LABELS["OneHour"],
-    value: "OneHour"
-  },
-  {
-    label: DELAYS_LABELS["SixHours"],
-    value: "SixHours"
-  }
-];
-
 const _ProgramOpenPositions: React.FC<Props> = ({
+  itemSelector,
   getItems,
   dataSelector,
   currency,
   programId
 }) => {
   const [t] = useTranslation();
+  const openPositions = useSelector(itemSelector);
   const {
     itemsData: { data }
-  } = useSelector(openPositionsSelector);
+  } = openPositions;
   const delay = data ? data.tradesDelay : "None";
   if (!programId) return null;
   return (
@@ -70,7 +35,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
-      columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
+      columns={getOpenPositionsColumns(data)}
       renderHeader={column => (
         <span
           className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
@@ -79,7 +44,11 @@ const _ProgramOpenPositions: React.FC<Props> = ({
         </span>
       )}
       renderBodyRow={position => (
-        <ProgramOpenPositionsRow position={position} currency={currency} />
+        <ProgramOpenPositionsRow
+          data={data!}
+          position={position}
+          currency={currency}
+        />
       )}
     />
   );
@@ -87,6 +56,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
 
 interface Props {
   getItems: GetItemsFuncActionType;
+  itemSelector: (state: RootState) => { [keys: string]: any };
   dataSelector: TableSelectorType;
   currency: CurrencyEnum;
   programId: string;

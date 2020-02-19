@@ -6,29 +6,36 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
-import { OrderSignalModel } from "gv-api-web";
+import { OrderSignalModel, TradesViewModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-const _ProgramOpenPositionsRow: React.FC<Props> = ({ position }) => (
+const _ProgramOpenPositionsRow: React.FC<Props> = ({
+  position,
+  data: { showDate, showDirection, showPrice, showPriceOpen, showProfit }
+}) => (
   <TableRow stripy>
-    <TableCell className="details-trades__cell program-details-trades__cell--date">
-      {formatDate(position.date)}
-    </TableCell>
+    {showDate && (
+      <TableCell className="details-trades__cell program-details-trades__cell--date">
+        {formatDate(position.date)}
+      </TableCell>
+    )}
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
       {position.symbol}
     </TableCell>
-    <TableCell className="details-trades__cell program-details-trades__cell--direction">
-      <BaseProfitability
-        isPositive={position.direction === "Buy"}
-        isNegative={position.direction === "Sell"}
-      >
-        {position.direction}
-      </BaseProfitability>
-    </TableCell>
+    {showDirection && (
+      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+        <BaseProfitability
+          isPositive={position.direction === "Buy"}
+          isNegative={position.direction === "Sell"}
+        >
+          {position.direction}
+        </BaseProfitability>
+      </TableCell>
+    )}
     <TableCell className="details-trades__cell program-details-trades__cell--volume">
       <NumberFormat
         value={formatValue(position.volume, DEFAULT_DECIMAL_SCALE / 2)}
@@ -36,38 +43,45 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({ position }) => (
         thousandSeparator=" "
       />
     </TableCell>
-    <TableCell className="details-trades__cell program-details-trades__cell--price">
-      <NumberFormat
-        value={formatValue(position.price, DEFAULT_DECIMAL_SCALE)}
-        displayType="text"
-        thousandSeparator=" "
-      />
-    </TableCell>
-    <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
-      <NumberFormat
-        value={formatValue(position.priceCurrent, DEFAULT_DECIMAL_SCALE)}
-        displayType="text"
-        thousandSeparator=" "
-      />
-    </TableCell>
-    <TableCell className="details-trades__cell program-details-trades__cell--profit">
-      <Profitability
-        value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
-        prefix={PROFITABILITY_PREFIX.SIGN}
-      >
+    {showPrice && (
+      <TableCell className="details-trades__cell program-details-trades__cell--price">
         <NumberFormat
-          value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
-          thousandSeparator=" "
+          value={formatValue(position.price, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
-          allowNegative={false}
-          suffix={` ${position.profitCurrency}`}
+          thousandSeparator=" "
         />
-      </Profitability>
-    </TableCell>
+      </TableCell>
+    )}
+    {showPriceOpen && (
+      <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
+        <NumberFormat
+          value={formatValue(position.priceCurrent, DEFAULT_DECIMAL_SCALE)}
+          displayType="text"
+          thousandSeparator=" "
+        />
+      </TableCell>
+    )}
+    {showProfit && (
+      <TableCell className="details-trades__cell program-details-trades__cell--profit">
+        <Profitability
+          value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
+          prefix={PROFITABILITY_PREFIX.SIGN}
+        >
+          <NumberFormat
+            value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
+            thousandSeparator=" "
+            displayType="text"
+            allowNegative={false}
+            suffix={` ${position.profitCurrency}`}
+          />
+        </Profitability>
+      </TableCell>
+    )}
   </TableRow>
 );
 
 interface Props {
+  data: TradesViewModel;
   currency: CurrencyEnum;
   position: OrderSignalModel;
 }
