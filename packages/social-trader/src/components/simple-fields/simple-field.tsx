@@ -67,7 +67,6 @@ export interface ISimpleFieldProps extends GVTextFieldProps {
   triggerValidation?: (name: string) => void;
   valueCallback: (value: any) => any;
   validateOnInput?: boolean;
-  refProp?: any;
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   [key: string]: any;
 }
