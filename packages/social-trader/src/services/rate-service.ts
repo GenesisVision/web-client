@@ -4,4 +4,7 @@ import { CurrencyEnum } from "utils/types";
 export const fetchRate = (
   from: CurrencyEnum,
   to: CurrencyEnum
-): Promise<number> => rateApi.getRate(from, to).then(({ rate }) => rate);
+): Promise<number> =>
+  from === to
+    ? Promise.resolve(1)
+    : rateApi.getRate(from, to).then(({ rate }) => rate);

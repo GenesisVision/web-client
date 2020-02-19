@@ -30,13 +30,6 @@ const useCreateAssetSubmit = ({
   condition,
   asset
 }: TUseCreateAssetSubmitProps): TUseCreateAssetSubmitOutput => {
-  const sendEventMiddleware = () => {
-    sendEventToGA({
-      eventCategory: "Create",
-      eventAction:
-        asset === CREATE_ASSET.ACCOUNT ? "CreateAccount" : "CreateFund"
-    });
-  };
   const dispatch = useDispatch();
   const currency = useSelector(currencySelector);
   const checkConditionMiddleware = (data: any) => {
@@ -53,7 +46,7 @@ const useCreateAssetSubmit = ({
   };
   const { sendRequest, isPending, errorMessage } = useApiRequest({
     request: createAsset,
-    middleware: [sendEventMiddleware, checkConditionMiddleware]
+    middleware: [checkConditionMiddleware]
   });
   const handleCreate = useCallback(
     (data: ICreateAssetSettingsFormValues) => {
