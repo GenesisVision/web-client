@@ -1,19 +1,15 @@
 import ChipButton from "components/chip/chip-button";
 import Dialog from "components/dialog/dialog";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { IAddNotificationSettingProps } from "modules/notification-settings/actions/notification-settings.actions";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { getPostponedOnCallback } from "utils/hook-form.helpers";
 
 import {
   TAddNotification,
@@ -28,31 +24,28 @@ const CustomNotificationCreateForm = dynamic(() =>
 );
 
 const _AssetNotificationsCustom: React.FC<Props> = ({
-  t,
-  service,
+  addNotification,
   asset,
-  errorMessage,
   removeNotification,
   toggleNotification
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
+  const dispatch = useDispatch();
+  const [t] = useTranslation();
+  const { sendRequest, errorMessage } = useApiRequest({
+    request: (values: IAddNotificationSettingProps) => {
+      return dispatch(addNotification(values));
+    },
+    successMessage: "notifications-page.custom.create-alert",
+    middleware: [getPostponedOnCallback(setClosePopup)]
+  });
+
   const handleSubmit = useCallback(
-    (
-      values: ICustomNotificationCreateFormValues,
-      setSubmitting: SetSubmittingType
-    ) =>
-      service
-        .addNotification(
-          {
-            assetId: asset.assetId,
-            ...values
-          },
-          t(`notifications-page.custom.create-alert`)
-        )
-        .then(setClosePopup)
-        .catch(() => {
-          setSubmitting(false);
-        }),
+    (values: ICustomNotificationCreateFormValues) =>
+      sendRequest({
+        assetId: asset.assetId,
+        ...values
+      }),
     [asset]
   );
   return (
@@ -84,46 +77,14 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (): StateProps => ({
-  errorMessage: "" //state.programNotifications.errorMessage TODO
-});
-
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { addNotification }: OwnProps
-): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { addNotification },
-    dispatch
-  )
-});
-
-interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
   asset: ProgramNotificationSettingList;
   addNotification: TAddNotification;
   removeNotification: TRemoveNotification;
   toggleNotification: TToggleNotification;
 }
 
-interface StateProps {
-  errorMessage?: string;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  addNotification: TAddNotification;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-const AssetNotificationsCustom = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  connect(mapStateToProps, mapDispatchToProps),
-  React.memo
-)(_AssetNotificationsCustom);
+const AssetNotificationsCustom = withLoader(
+  React.memo(_AssetNotificationsCustom)
+);
 export default AssetNotificationsCustom;

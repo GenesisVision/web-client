@@ -29,14 +29,10 @@ export const fetchFollowNotifications = (
   );
 };
 
-export const addFollowNotification: TAddNotification = (
-  opts,
-  message
-) => dispatch =>
+export const addFollowNotification: TAddNotification = opts => dispatch =>
   dispatch(addNotificationSettingAction(opts))
     .then(() => {
       dispatch(fetchFollowNotifications(opts.assetId!));
-      dispatch(alertMessageActions.success(message));
     })
     .catch((data: ResponseError) => {
       dispatch(addErrorMessageAction(data.errorMessage));

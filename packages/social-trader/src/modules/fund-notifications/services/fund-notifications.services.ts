@@ -27,14 +27,10 @@ export const fetchFundNotifications = (
   );
 };
 
-export const addFundNotification: TAddNotification = (
-  opts,
-  message
-) => dispatch =>
+export const addFundNotification: TAddNotification = opts => dispatch =>
   dispatch(addNotificationSettingAction(opts))
     .then(() => {
       dispatch(fetchFundNotifications(opts.assetId!));
-      dispatch(alertMessageActions.success(message));
     })
     .catch((data: ResponseError) => {
       dispatch(addErrorMessageAction(data.errorMessage));
