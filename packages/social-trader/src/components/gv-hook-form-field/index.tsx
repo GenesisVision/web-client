@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FieldError, useFormContext } from "react-hook-form";
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
@@ -8,6 +8,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   ...props
 }) => {
   const {
+    unregister,
     triggerValidation,
     setValue,
     watch,
@@ -20,6 +21,10 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
       ? (errors[name] as FieldError[])[0].message
       : (errors[name] as FieldError).message
     : undefined;
+  useEffect(() => {
+    register({ name });
+    return () => unregister(name);
+  }, [register]);
   return (
     <Component
       {...props}
@@ -30,10 +35,6 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
       value={watch()[name]}
       touched={!!touched[name]}
       error={error}
-      refProp={register({
-        name,
-        type: "custom"
-      })}
     />
   );
 };
