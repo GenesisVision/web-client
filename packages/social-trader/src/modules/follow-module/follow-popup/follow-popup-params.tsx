@@ -48,13 +48,13 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
   const {
     setValue,
     watch,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
+    formState: { isValid, isSubmitting, isSubmitted }
   } = form;
 
   const { mode, fixedCurrency, fixedVolume } = watch();
 
   const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+  const disabled = !isValid || isSubmitting || isSuccessful;
 
   const setMaxOpenTolerancePercent = useCallback(() => {
     setValue(FOLLOW_PARAMS_FIELDS.openTolerancePercent, 20, true);
