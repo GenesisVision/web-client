@@ -17,9 +17,7 @@ import { CurrencyEnum } from "utils/types";
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
-import FollowSelectAccount, {
-  SelectAccountFormValues
-} from "./follow-select-account";
+import FollowSelectAccount from "./follow-select-account";
 
 const initRequestParams = {
   tradingAccountId: "",
@@ -59,13 +57,10 @@ const _FollowForm: React.FC<Props> = ({
     },
     [requestParams]
   );
-  const selectCopytradingAccount = useCallback(
-    ({ account }: SelectAccountFormValues) => {
-      setTab(null, TABS.PARAMS);
-      setTradingAccountId(account);
-    },
-    []
-  );
+  const selectCopytradingAccount = useCallback((account: string) => {
+    setTab(null, TABS.PARAMS);
+    setTradingAccountId(account);
+  }, []);
   const returnToCreateCopytradingAccount = useCallback(
     () => setTab(null, TABS.SELECT_ACCOUNT),
     []
