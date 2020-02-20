@@ -1,3 +1,5 @@
+import "./details-investment-block.scss";
+
 import React from "react";
 
 const _DetailsInvestmentBlock: React.FC<React.HTMLAttributes<
