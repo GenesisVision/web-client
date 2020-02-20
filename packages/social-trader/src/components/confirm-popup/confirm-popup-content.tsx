@@ -7,6 +7,7 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 
 const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   errorMessage,
@@ -18,10 +19,10 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   cancelButtonText
 }) => {
   const [t] = useTranslation();
-  const { handleSubmit } = useForm();
+  const form = useForm();
 
   return (
-    <form onSubmit={handleSubmit(onApply)} noValidate>
+    <HookForm form={form} onSubmit={onApply}>
       <DialogTop title={header} />
       <DialogBottom>
         <div className="dialog__text">
@@ -30,6 +31,7 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
         <DialogButtons>
           <SubmitButton
             checkDirty={false}
+            checkValid={false}
             wide={!onCancel}
             isSuccessful={!errorMessage}
           >
@@ -42,7 +44,7 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
           )}
         </DialogButtons>
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
 
