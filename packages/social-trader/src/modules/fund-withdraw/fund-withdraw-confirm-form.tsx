@@ -99,7 +99,12 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
         >
           {t("buttons.back")}
         </GVButton>
-        <SubmitButton isSuccessful={!errorMessage} id="fundWithdrawFormSubmit">
+        <SubmitButton
+          checkValid={false}
+          checkDirty={false}
+          isSuccessful={!errorMessage}
+          id="fundWithdrawFormSubmit"
+        >
           {t("buttons.confirm")}
         </SubmitButton>
       </DialogButtons>
