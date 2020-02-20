@@ -26,7 +26,6 @@ import { CurrencyEnum } from "utils/types";
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
 export enum CREATE_ACCOUNT_FIELDS {
-  enterMinDeposit = "enterMinDeposit",
   depositWalletId = "depositWalletId",
   depositAmount = "depositAmount",
   currency = "currency",
@@ -66,12 +65,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
     setValue,
     formState: { isSubmitting, isValid, dirty, isSubmitted }
   } = form;
-  const {
-    brokerAccountTypeId,
-    depositAmount,
-    currency,
-    enterMinDeposit
-  } = watch();
+  const { brokerAccountTypeId, depositAmount, currency } = watch();
 
   const accountType = safeGetElemFromArray(
     broker.accountTypes,
@@ -131,8 +125,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
         <>
           <DepositDetailsBlock
             hide={!accountType.isDepositRequired}
-            enterMinDeposit={enterMinDeposit}
-            enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
             blockNumber={2}
             setAvailable={setAvailable}
             setRate={setRate}
@@ -156,7 +148,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
 };
 
 export interface ICreateAccountSettingsFormValues {
-  [CREATE_ACCOUNT_FIELDS.enterMinDeposit]?: boolean;
   [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
   [CREATE_ACCOUNT_FIELDS.leverage]: number;
   [CREATE_ACCOUNT_FIELDS.currency]: string;

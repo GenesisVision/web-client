@@ -1,7 +1,5 @@
 import "./deposit-details.scss";
 
-import GVCheckbox from "components/gv-checkbox/gv-checkbox";
-import { GVHookFormField } from "components/gv-hook-form-field";
 import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
 import { HookFormWalletSelect as WalletSelect } from "components/wallet-select/wallet-select";
@@ -17,8 +15,6 @@ import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
   hide,
-  enterMinDeposit,
-  enterMinDepositName,
   setAvailable,
   setRate,
   blockNumber = 3,
@@ -47,12 +43,6 @@ const _DepositDetailsBlock: React.FC<Props> = ({
     setFieldValue(walletFieldName, wallet.id, true);
   }, [wallet]);
 
-  useEffect(() => {
-    if (enterMinDeposit) {
-      setFieldValue(inputName, minimumDepositAmountInCurr, true);
-    } else if (!enterMinDeposit) setFieldValue(inputName, undefined, true);
-  }, [enterMinDeposit, minimumDepositAmountInCurr]);
-
   if (!wallet) return null;
   return (
     <SettingsBlock
@@ -69,7 +59,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           onChange={onSelectChange(handleWalletChange)}
         />
         <InputDepositAmount
-          disabled={enterMinDeposit}
+          minAmount={minimumDepositAmountInCurr}
           name={inputName}
           walletCurrency={wallet.currency}
           walletAvailable={wallet.available}
@@ -77,13 +67,6 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
-        />
-        <GVHookFormField
-          type="checkbox"
-          color="primary"
-          name={enterMinDepositName}
-          label={<>{t("create-asset-page.min-deposit")}</>}
-          component={GVCheckbox}
         />
         <AmountInfo
           assetCurrency={assetCurrency}
@@ -100,8 +83,6 @@ interface Props {
   hide?: boolean;
   setRate: (value: number) => void;
   setAvailable: (value: number) => void;
-  enterMinDeposit?: boolean;
-  enterMinDepositName: string;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
