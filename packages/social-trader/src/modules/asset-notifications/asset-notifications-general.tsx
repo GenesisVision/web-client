@@ -34,12 +34,7 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
 
   const handleAdd = useCallback(
     (options: IAddNotificationSettingProps) =>
-      dispatch(
-        addNotification(
-          options
-          // t(`notifications-page.general.${options.type}.enabled-alert`)
-        )
-      ),
+      dispatch(addNotification(options)),
     []
   );
 
