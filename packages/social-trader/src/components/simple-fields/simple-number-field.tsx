@@ -1,5 +1,7 @@
-import { GVTextFieldProps } from "components/gv-text-field";
-import { SimpleField } from "components/simple-fields/simple-field";
+import {
+  ISimpleFieldProps,
+  SimpleField
+} from "components/simple-fields/simple-field";
 import React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
@@ -16,7 +18,7 @@ const _SimpleNumberField: React.FC<ISimpleNumberFieldProps> = props => {
   );
 };
 
-export interface ISimpleNumberFieldProps extends GVTextFieldProps {
+export interface ISimpleNumberFieldProps extends ISimpleFieldProps {
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   [key: string]: any;
 }

@@ -2,8 +2,9 @@ import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 
-const _SimpleField: React.FC<ISimpleFieldProps> = props => {
+const _SimpleField: React.FC<Props> = props => {
   const {
+    externalDirty,
     number,
     error,
     showCorrect,
@@ -50,7 +51,7 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
   return (
     <GVTextField
       {...props}
-      error={dirty ? error : undefined}
+      error={dirty || externalDirty ? error : undefined}
       correct={correct}
       value={setEmpty || value === undefined ? "" : value}
       onBlur={handleOnBlur}
@@ -61,14 +62,20 @@ const _SimpleField: React.FC<ISimpleFieldProps> = props => {
   );
 };
 
+interface Props extends ISimpleFieldProps, ISimpleFieldOwnProps {}
+
 export interface ISimpleFieldProps extends GVTextFieldProps {
-  number?: boolean;
+  externalDirty?: boolean;
   showCorrect?: boolean;
   triggerValidation?: (name: string) => void;
-  valueCallback: (value: any) => any;
   validateOnInput?: boolean;
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   [key: string]: any;
+}
+
+interface ISimpleFieldOwnProps {
+  number?: boolean;
+  valueCallback: (value: any) => any;
 }
 
 export const SimpleField = React.memo(_SimpleField);
