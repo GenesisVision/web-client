@@ -23,12 +23,11 @@
     }
   }
 
-  &--investment {
+  &--investment--investment {
     flex: 2;
     min-width: 100%;
     @include media-breakpoint-landscape-tablet() {
       min-width: initial;
-      max-width: 70%;
     }
   }
 }
