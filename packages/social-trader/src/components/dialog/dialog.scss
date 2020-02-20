@@ -98,6 +98,9 @@
     &:not(:last-child) {
       @include adaptive-margin(bottom, $padding-xsmall);
     }
+    &--hidden {
+      display: none;
+    }
 
     font-weight: 300;
   }
