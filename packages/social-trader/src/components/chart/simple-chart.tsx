@@ -1,6 +1,6 @@
 import "../program-simple-chart/program-simple-chart.scss";
 
-import { getChartColor } from "components/chart/chart-gradient/chart-gradient";
+import GVColors from "components/gv-styles/gv-colors";
 import { max, min } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
@@ -9,11 +9,15 @@ import * as React from "react";
 
 const DEFAULT_WIDTH = 100;
 const DEFAULT_HEIGHT = 50;
-const OFFSET = 4;
+const OFFSET = 0;
 
 const lineFunction = line()
   .x(data => data[0])
   .y(data => data[1]);
+
+const getChartColor = (minValue: number, maxValue: number) => {
+  return maxValue - minValue >= 0 ? "#16B9AD" : GVColors.$negativeColor;
+};
 
 const _SimpleChart: React.FC<Props> = ({
   data,
@@ -50,7 +54,7 @@ const _SimpleChart: React.FC<Props> = ({
   if (!path) return null;
   return (
     <svg width={width} height={height} x={x} y={y}>
-      <path d={path} stroke={color} strokeWidth={1} fill="none" />
+      <path d={path} stroke={color} strokeWidth={2} fill="none" />
     </svg>
   );
 };

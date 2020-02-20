@@ -1,4 +1,3 @@
-import ImageBaseElement from "components/avatar/image-base.element";
 import DetailsBlock from "components/details/details-block";
 import Page from "components/page/page";
 import withDefaultLayout from "decorators/with-default-layout";
@@ -15,10 +14,7 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   return (
     <Page description={title} title={title}>
       <DetailsBlock horizontalPaddings>
-        <ImageBaseElement
-          src={`/api/programs/${program.publicInfo.url}/200x300`}
-          alt={"banner 200x300"}
-        />
+        <embed src={`/api/programs/${program.publicInfo.url}/250x250`} />
       </DetailsBlock>
     </Page>
   );
