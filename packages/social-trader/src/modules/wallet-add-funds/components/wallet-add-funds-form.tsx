@@ -57,11 +57,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
           </StatisticItem>
         </DialogField>
         <DialogButtons>
-          <CopyButton
-            wide
-            value={depositAddress}
-            successMessage={"wallet-deposit.copy-to-clipboard-success"}
-          />
+          <CopyButton wide value={depositAddress} />
         </DialogButtons>
       </DialogBottom>
     </div>
