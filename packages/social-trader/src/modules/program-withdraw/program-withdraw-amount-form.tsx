@@ -81,7 +81,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         name={WITHDRAW_FORM_FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
-        isAllow={isAllow}
+        isAllowed={isAllow}
         disabled={withdrawAll}
         setMax={isOwner ? setMaxAmount : undefined}
       />

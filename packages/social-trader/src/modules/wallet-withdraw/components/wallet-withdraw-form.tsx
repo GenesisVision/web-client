@@ -127,7 +127,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
           name={WALLET_WITHDRAW_FIELDS.amount}
           label={t("wallet-withdraw.amount")}
           currency={currency}
-          isAllow={isAllow}
+          isAllowed={isAllow}
           setMax={setMaxAmount}
         />
         <DialogField>

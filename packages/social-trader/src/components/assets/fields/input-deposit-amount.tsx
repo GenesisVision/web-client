@@ -45,7 +45,7 @@ const _InputDepositAmount: React.FC<Props> = ({
         name={name}
         label={t("transfer.amount")}
         currency={walletCurrency}
-        isAllow={isAmountAllow(walletCurrency)}
+        isAllowed={isAmountAllow(walletCurrency)}
         setMax={setMax}
         setMin={setMin}
       />

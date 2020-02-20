@@ -110,7 +110,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
         label={t("withdraw-fund.amount-to-withdraw")}
         placeholder="%"
         currency="%"
-        isAllow={isAllow}
+        isAllowed={isAllow}
         setMax={setMax}
         setMin={setMin}
       />

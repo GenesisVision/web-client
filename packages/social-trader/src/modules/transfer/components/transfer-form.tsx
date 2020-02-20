@@ -170,7 +170,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
             currency={selectedSourceItem.currency}
             setMax={setMax}
             setMin={setMin}
-            isAllow={isAmountAllow(sourceItems, sourceId)}
+            isAllowed={isAmountAllow(sourceItems, sourceId)}
           />
         </DialogField>
         {!!amount &&

@@ -37,7 +37,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
             showCorrect
             wide
             autoFocus={false}
-            isAllow={isAmountAllow(currency)}
+            isAllowed={isAmountAllow(currency)}
             name={inputName}
             label={t(
               "create-program-page.settings.fields.enter-correct-amount"

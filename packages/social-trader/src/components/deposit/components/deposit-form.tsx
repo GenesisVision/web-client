@@ -129,7 +129,7 @@ const _DepositForm: React.FC<Props> = ({
           name={DEPOSIT_FORM_FIELDS.amount}
           label={t("deposit-asset.amount")}
           currency={wallet.currency}
-          isAllow={isAllow(wallet.currency)}
+          isAllowed={isAllow(wallet.currency)}
           setMax={setMaxAmount}
         />
         <ConvertCurrency

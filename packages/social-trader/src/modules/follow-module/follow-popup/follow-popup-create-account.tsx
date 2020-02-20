@@ -114,7 +114,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         <DialogField>
           <InputAmountField
             wide
-            isAllow={allowPositiveValuesNumberFormat(
+            isAllowed={allowPositiveValuesNumberFormat(
               CURRENCY_FRACTIONS(currency)
             )}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
