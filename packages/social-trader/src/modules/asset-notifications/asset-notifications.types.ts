@@ -7,8 +7,7 @@ import { MiddlewareDispatch } from "utils/types";
 import { INotification } from "./asset-notifications-general";
 
 export type TAddNotification = (
-  opts: IAddNotificationSettingProps,
-  message: string
+  opts: IAddNotificationSettingProps
 ) => (dispatch: MiddlewareDispatch) => Promise<void>;
 
 export type TRemoveNotification = (

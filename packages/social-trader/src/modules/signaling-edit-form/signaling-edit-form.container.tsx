@@ -17,25 +17,23 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   isSignalProgram
 }) => {
   const followInfo = useSelector(createFollowInfoSelector);
-  const { sendRequest: editSignalRequest } = useApiRequest({
+  const { sendRequest: editSignalRequest, errorMessage } = useApiRequest({
     middleware: [onApply],
     request: editSignal,
     successMessage: "program-edit-signal.success-alert-message"
   });
   const changeSignaling = useCallback(
-    ({ volumeFee, successFee }: IProgramSignalFormValues, setSubmitting) =>
-      editSignalRequest(
-        {
-          id,
-          successFee,
-          volumeFee
-        },
-        setSubmitting
-      ),
+    ({ volumeFee, successFee }: IProgramSignalFormValues) =>
+      editSignalRequest({
+        id,
+        successFee,
+        volumeFee
+      }),
     [id]
   );
   return (
     <SignalingEdit
+      editError={!!errorMessage}
       followInfo={followInfo}
       isSignalProgram={isSignalProgram}
       inDialog={inDialog}

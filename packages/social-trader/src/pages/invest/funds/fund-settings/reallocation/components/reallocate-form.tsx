@@ -2,42 +2,78 @@ import "../reallocate.scss";
 
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import StatisticItem from "components/statistic-item/statistic-item";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { FormikProps, withFormik } from "formik";
+import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
+import {
+  compareAssets,
+  composeSelectedAssets
+} from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field";
+import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
-import { PlatformAssetFull, SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
+import { PlatformAssetFull } from "utils/types";
 import { object } from "yup";
 
 import ConfirmReallocate from "./confirm-reallocate";
-import ReallocateField, { composeSelectedAssets } from "./reallocate-field";
+
+enum FIELDS {
+  currentAssets = "currentAssets",
+  assets = "assets"
+}
 
 const _ReallocateForm: React.FC<Props> = ({
+  fundAssets,
+  onSubmit,
   availableReallocationPercents,
-  values: { currentAssets, assets },
-  t,
-  handleSubmit,
-  isValid,
-  dirty,
   errorMessage,
-  isSubmitting,
   platformAssets
 }) => {
+  const [t] = useTranslation();
+  const initAssets = fundAssets.map(fundAsset => {
+    const platformAsset = safeGetElemFromArray(
+      platformAssets,
+      x => x.asset === fundAsset.symbol
+    );
+    return { ...platformAsset, percent: fundAsset.target };
+  });
+  const [currentAssets] = useState([...initAssets]);
+
+  const form = useForm<IReallocateFormValues>({
+    defaultValues: {
+      [FIELDS.assets]: initAssets
+    },
+    validationSchema: object().shape({ [FIELDS.assets]: assetsShape(t) }),
+    mode: "onBlur"
+  });
+  const {
+    handleSubmit,
+    watch,
+    formState: { isValid, dirty, isSubmitting, isSubmitted }
+  } = form;
+
+  const { assets } = watch();
+
+  const savedCurrent = composeSelectedAssets(currentAssets, platformAssets)
+    .filter(item => item.percent > 0)
+    .sort((a, b) => b.percent - a.percent);
+  const equalWithCurrent = compareAssets(savedCurrent, assets);
+
+  const isSuccessful = isSubmitted && !errorMessage;
+  const disabled =
+    !isValid || !dirty || isSubmitting || isSuccessful || equalWithCurrent;
+
   const [isOpenConfirm, setIsOpenConfirm, setIsCloseConfirm] = useIsOpen();
   return (
-    <form
-      className="reallocate-container"
-      id="reallocate"
-      onSubmit={handleSubmit}
-    >
+    <HookForm className="reallocate-container" resetOnSuccess form={form}>
       <p className="asset-settings__text">
         {t("fund-settings.reallocation.text-1")}
         {availableReallocationPercents}%
@@ -45,21 +81,17 @@ const _ReallocateForm: React.FC<Props> = ({
       <p className="asset-settings__text">
         {t("fund-settings.reallocation.text-2")}
       </p>
-      <StatisticItem label={"Current"} condition={dirty}>
+      <StatisticItem label={"Current"} condition={dirty && !equalWithCurrent}>
         <CreateFundSettingsAssetsComponent
-          assets={
-            composeSelectedAssets(currentAssets, platformAssets)
-              .filter(item => item.percent > 0)
-              .sort((a, b) => b.percent - a.percent) || []
-          }
+          assets={savedCurrent || []}
           remainder={0}
           canChange={false}
         />
       </StatisticItem>
       <StatisticItem label={dirty ? "New" : "Current"}>
-        <GVFormikField
+        <GVHookFormField
           name={FIELDS.assets}
-          component={ReallocateField}
+          component={ReallocateFieldWrapper}
           assets={platformAssets}
         />
       </StatisticItem>
@@ -68,7 +100,9 @@ const _ReallocateForm: React.FC<Props> = ({
         {t("fund-settings.reallocation.text-3")}
       </p>
       <GVButton
-        disabled={!isValid || !dirty || isSubmitting}
+        isPending={isSubmitting}
+        isSuccessful={isSuccessful}
+        disabled={disabled}
         onClick={setIsOpenConfirm}
       >
         {t("fund-settings.buttons.reallocation")}
@@ -77,66 +111,23 @@ const _ReallocateForm: React.FC<Props> = ({
         assets={assets}
         open={isOpenConfirm}
         onClose={setIsCloseConfirm}
-        onApply={handleSubmit}
+        onApply={handleSubmit(onSubmit)}
       />
-    </form>
+    </HookForm>
   );
 };
 
-enum FIELDS {
-  currentAssets = "currentAssets",
-  assets = "assets"
-}
-
 export interface IReallocateFormValues {
-  [FIELDS.currentAssets]: PlatformAssetFull[];
   [FIELDS.assets]: PlatformAssetFull[];
 }
 
-export interface IReallocateFormOwnProps {
+export interface Props {
   availableReallocationPercents: number;
   fundAssets: FundAssetInfo[];
   platformAssets: PlatformAsset[];
-  onSubmit(
-    values: IReallocateFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit(values: IReallocateFormValues): void;
   errorMessage?: string;
 }
 
-interface Props
-  extends FormikProps<IReallocateFormValues>,
-    IReallocateFormOwnProps,
-    WithTranslation {}
-
-const ReallocateForm = compose<
-  React.FC<IReallocateFormOwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  withFormik<IReallocateFormOwnProps, IReallocateFormValues>({
-    displayName: "reallocate",
-    enableReinitialize: true,
-    mapPropsToValues: ({ fundAssets, platformAssets }) => {
-      const assets = fundAssets.map(fundAsset => {
-        const platformAsset = safeGetElemFromArray(
-          platformAssets,
-          x => x.asset === fundAsset.symbol
-        );
-        return { ...platformAsset, percent: fundAsset.target };
-      });
-
-      return {
-        [FIELDS.currentAssets]: [...assets],
-        [FIELDS.assets]: assets
-      };
-    },
-    validationSchema: (props: Props) =>
-      object().shape({ [FIELDS.assets]: assetsShape(props.t) }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_ReallocateForm);
+const ReallocateForm = withLoader(React.memo(_ReallocateForm));
 export default ReallocateForm;

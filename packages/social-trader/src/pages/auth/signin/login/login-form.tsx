@@ -3,6 +3,7 @@ import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import {
   CAPTCHA_STATUS,
   CaptchaStatusContext
@@ -31,15 +32,8 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     validationSchema: validationSchema,
     mode: "onChange"
   });
-  const {
-    formState: { isSubmitting }
-  } = form;
 
   const requestStatus = useContext(CaptchaStatusContext);
-
-  const isSuccessful = requestStatus === CAPTCHA_STATUS.SUCCESS;
-  const disabled =
-    isSubmitting || requestStatus === CAPTCHA_STATUS.PENDING || isSuccessful;
 
   return (
     <HookForm className="login-form" form={form} onSubmit={onSubmit}>
@@ -69,16 +63,17 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       <FormError error={errorMessage} />
 
       <div className="login__submit-block">
-        <GVButton
+        <SubmitButton
+          checkValid={false}
+          checkDirty={false}
           className="login__submit-button"
           id="loginSubmit"
-          disabled={disabled}
-          isSuccessful={isSuccessful}
-          isPending={isSubmitting || requestStatus === CAPTCHA_STATUS.PENDING}
-          type="submit"
+          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
         >
           {t("auth.login.confirm-button-text")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

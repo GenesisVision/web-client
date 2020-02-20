@@ -1,12 +1,13 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { formatValue } from "utils/formatter";
-import { getPostponedOnCallback, HookForm } from "utils/hook-form.helpers";
+import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 import { withdrawFund } from "./services/fund-withdraw.services";
@@ -21,7 +22,7 @@ const _FundWithdrawConfirm: React.FC<IFundWithdrawConfirmProps> = ({
   exitFee,
   onBackClick
 }) => {
-  const onCloseMiddleware = getPostponedOnCallback(onClose);
+  const onCloseMiddleware = postponeCallback(onClose);
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [onCloseMiddleware, onApply],
     request: withdrawFund,
@@ -75,9 +76,7 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const form = useForm();
-  const {
-    formState: { isSubmitted, isSubmitting }
-  } = form;
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <div className="dialog-list__item">
@@ -100,15 +99,14 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
         >
           {t("buttons.back")}
         </GVButton>
-        <GVButton
-          isSuccessful={isSubmitted && !errorMessage}
-          isPending={isSubmitting}
-          type="submit"
+        <SubmitButton
+          checkValid={false}
+          checkDirty={false}
+          isSuccessful={!errorMessage}
           id="fundWithdrawFormSubmit"
-          disabled={isSubmitting}
         >
           {t("buttons.confirm")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

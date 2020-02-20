@@ -26,7 +26,7 @@ export const convertAsset = ({
 }): Promise<any> => {
   const authorization = authService.getAuthArg();
   let promise = (Promise.resolve("") as unknown) as Promise<any>;
-  if ("logo" in data && data.logo.image) {
+  if ("logo" in data && data.logo.image && data.logo.image.cropped) {
     promise = filesService.uploadFile(
       data.logo.image.cropped,
       authorization

@@ -3,20 +3,21 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
-import { FormikProps, withFormik } from "formik";
+import { SimpleNumberField } from "components/simple-fields/simple-number-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import {
   NotificationSettingConditionType,
   NotificationType,
   ProgramNotificationSettingList
 } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import NumberFormat, { NumberFormatValues } from "react-number-format";
-import { compose } from "redux";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { NumberFormatValues } from "react-number-format";
+import { HookForm } from "utils/hook-form.helpers";
 import { number, object } from "yup";
 
 enum FIELDS {
@@ -32,29 +33,42 @@ enum CONDITION_TYPE_VALUES {
 }
 
 const _CustomNotificationCreateForm: React.FC<Props> = ({
+  onSubmit,
   errorMessage,
-  t,
-  asset,
-  handleSubmit,
-  values,
-  isValid,
-  dirty,
-  isSubmitting
+  asset
 }) => {
-  const { conditionType } = values;
+  const [t] = useTranslation();
+  const form = useForm<ICustomNotificationCreateFormValues>({
+    defaultValues: {
+      [FIELDS.type]: "ProgramCondition",
+      [FIELDS.conditionType]: CONDITION_TYPE_VALUES.Profit,
+      [FIELDS.conditionAmount]: undefined
+    },
+    validationSchema: object().shape({
+      [FIELDS.conditionAmount]: number().required(
+        t("notifications-page.create.amount-required")
+      )
+    }),
+    mode: "onChange"
+  });
+
+  const { watch } = form;
+
+  const { conditionType } = watch();
+
   const isProfit = conditionType === CONDITION_TYPE_VALUES.Profit;
   const isLevel = conditionType === CONDITION_TYPE_VALUES.Level;
   return (
-    <form id="create-notification" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
         title={t("notifications-page.create.title")}
         subtitle={asset.title}
       >
         <DialogField>
-          <GVFormikField
+          <GVHookFormField
             wide
             name={FIELDS.conditionType}
-            component={GVTextField}
+            component={SimpleTextField}
             label={t("notifications-page.create.type-label")}
             InputComponent={Select}
           >
@@ -67,17 +81,16 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             <option value={CONDITION_TYPE_VALUES.AvailableToInvest}>
               {t("notifications-page.create.AvailableToInvest.title")}
             </option>
-          </GVFormikField>
+          </GVHookFormField>
         </DialogField>
       </DialogTop>
       <DialogBottom>
-        <GVFormikField
+        <GVHookFormField
           name={FIELDS.conditionAmount}
           label={t("notifications-page.create.amount-label")}
-          component={GVTextField}
+          component={SimpleNumberField}
           adornment={isProfit ? "%" : null}
           autoComplete="off"
-          InputComponent={NumberFormat}
           isAllowed={(values: NumberFormatValues) => {
             const { floatValue, formattedValue } = values;
             if (isProfit) {
@@ -95,54 +108,21 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
         />
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            color="primary"
-            type="submit"
-            disabled={isSubmitting || !isValid || !dirty}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.create")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
 
-const CustomNotificationCreateForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, ICustomNotificationCreateFormValues>({
-    displayName: "create-notification",
-    mapPropsToValues: () => ({
-      [FIELDS.type]: "ProgramCondition",
-      [FIELDS.conditionType]: CONDITION_TYPE_VALUES.Profit,
-      [FIELDS.conditionAmount]: undefined
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FIELDS.conditionAmount]: number().required(
-          t("notifications-page.create.amount-required")
-        )
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_CustomNotificationCreateForm);
+const CustomNotificationCreateForm = React.memo(_CustomNotificationCreateForm);
 export default CustomNotificationCreateForm;
 
-interface Props
-  extends OwnProps,
-    WithTranslation,
-    FormikProps<ICustomNotificationCreateFormValues> {}
-
-interface OwnProps {
+interface Props {
   asset: ProgramNotificationSettingList;
-  onSubmit: (
-    values: ICustomNotificationCreateFormValues,
-    setSubmitting: (isSubmitting: boolean) => void
-  ) => void;
+  onSubmit: (values: ICustomNotificationCreateFormValues) => void;
   errorMessage?: string;
 }
 

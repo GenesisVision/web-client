@@ -1,7 +1,7 @@
 import "./logo-field.scss";
 
-import InputImage from "components/form/input-image/input-image";
-import GVFormikField from "components/gv-formik-field";
+import { InputImageWrapper } from "components/form/input-image/input-image-wrapper";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import ProgramDefaultImage from "media/program-default-image.svg";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -21,9 +21,9 @@ const _LogoField: React.FC<Props> = ({
         </div>
       </div>
       <div className="logo-field logo-field--wider">
-        <GVFormikField
+        <GVHookFormField
           name={name}
-          component={InputImage}
+          component={InputImageWrapper}
           defaultImage={defaultImage}
         />
       </div>

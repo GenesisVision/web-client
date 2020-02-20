@@ -6,6 +6,7 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import useIsOpen from "hooks/is-open.hook";
 import {
   CAPTCHA_STATUS,
@@ -43,7 +44,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   });
   const {
     watch,
-    formState: { isSubmitting, isValid }
+    formState: { isSubmitting }
   } = form;
   const { code } = watch();
 
@@ -63,13 +64,6 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   }, [isSubmitting, watch]);
 
   const requestStatus = useContext(CaptchaStatusContext);
-
-  const isSuccessful = requestStatus === CAPTCHA_STATUS.SUCCESS;
-  const disabled =
-    isSubmitting ||
-    requestStatus === CAPTCHA_STATUS.PENDING ||
-    isSuccessful ||
-    !isValid;
 
   return (
     <HookForm className="login-two-factor" form={form} onSubmit={onSubmit}>
@@ -99,15 +93,14 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
 
       <FormError error={error} />
       <div className="login-two-factor__submit">
-        <GVButton
-          type="submit"
+        <SubmitButton
           id="signUpFormSubmit"
-          disabled={disabled}
-          isSuccessful={isSuccessful}
-          isPending={isSubmitting}
+          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         >
           {t("auth.login.two-factor.verify")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

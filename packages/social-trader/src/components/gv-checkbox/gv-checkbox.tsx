@@ -67,9 +67,9 @@ interface IGVCheckboxProps {
   className?: string;
   color: string;
   value: any;
-  touched: boolean;
-  disabled: boolean;
-  error: any;
+  touched?: boolean;
+  disabled?: boolean;
+  error?: any;
   label: string;
 }
 

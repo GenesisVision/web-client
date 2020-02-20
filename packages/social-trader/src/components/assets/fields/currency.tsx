@@ -1,20 +1,25 @@
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
 
-const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
+const _Currency: React.FC<Props> = ({
+  name,
+  disabled,
+  accountCurrencies,
+  hide
+}) => {
   const [t] = useTranslation();
   return (
-    <AssetField>
-      <GVFormikField
+    <AssetField hide={hide}>
+      <GVHookFormField
         wide
         name={name}
-        component={GVTextField}
+        component={SimpleTextField}
         label={t("create-program-page.settings.fields.currency")}
         InputComponent={Select}
         disabled={disabled}
@@ -25,14 +30,15 @@ const _Currency: React.FC<Props> = ({ name, disabled, accountCurrencies }) => {
             {currency}
           </option>
         ))}
-      </GVFormikField>
+      </GVHookFormField>
     </AssetField>
   );
 };
 
 interface Props {
   name: string;
-  disabled: boolean;
+  hide?: boolean;
+  disabled?: boolean;
   accountCurrencies: CurrencyEnum[];
 }
 

@@ -4,7 +4,9 @@ import {
   ISimpleNumberFieldProps,
   SimpleNumberField
 } from "components/simple-fields/simple-number-field";
+import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
@@ -17,11 +19,20 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
   setMax,
   ...props
 }) => {
+  const [externalDirty, setExternalDirty] = useIsOpen();
   const [t] = useTranslation();
+  const handleSet = useCallback(
+    (callback: VoidFunction) => () => {
+      callback();
+      setExternalDirty();
+    },
+    []
+  );
   return (
     <DialogField>
       <SimpleNumberField
         {...props}
+        externalDirty={externalDirty}
         wide={wide}
         autoFocus={autoFocus}
         label={label || t("input-amount-field.label")}
@@ -33,7 +44,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
             {setMin && (
               <GVButton
                 noPadding
-                onClick={setMin}
+                onClick={handleSet(setMin)}
                 variant="text"
                 color="secondary"
               >
@@ -44,7 +55,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
             {setMax && (
               <GVButton
                 noPadding
-                onClick={setMax}
+                onClick={handleSet(setMax)}
                 variant="text"
                 color="secondary"
               >

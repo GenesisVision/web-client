@@ -3,10 +3,8 @@ import { fetchProfileHeaderInfoAction } from "components/header/actions/header-a
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { headerSelector } from "reducers/header-reducer";
-import { SetSubmittingType } from "utils/types";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
@@ -15,7 +13,7 @@ const _ProfileImageContainer: React.FC = () => {
   const fetchProfileMiddleware = () => {
     dispatch(fetchProfileHeaderInfoAction());
   };
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, errorMessage } = useApiRequest({
     middleware: [fetchProfileMiddleware],
     request: updateProfileAvatar,
     successMessage: "profile-page.settings.image-success-save-message"
@@ -23,14 +21,14 @@ const _ProfileImageContainer: React.FC = () => {
   const dispatch = useDispatch();
   const headerData = useSelector(headerSelector);
   const handleSubmit = useCallback(
-    (newImage: IImageValue, setSubmitting: SetSubmittingType) =>
-      sendRequest({ newImage }, setSubmitting),
+    (newImage: IImageValue) => sendRequest({ newImage }),
     []
   );
   if (headerData === undefined) return null;
 
   return (
     <ProfileImage
+      errorMessage={errorMessage}
       key={headerData.avatar}
       onSubmit={handleSubmit}
       avatar={headerData.avatar}

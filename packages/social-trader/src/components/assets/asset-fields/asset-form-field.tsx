@@ -1,7 +1,7 @@
 import "./asset-form-field.scss";
 
 import classNames from "classnames";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import GVProgramPeriod from "components/gv-program-period";
 import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
@@ -28,7 +28,8 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
     <div className={classNames("asset-form-field", className)}>
-      <GVFormikField
+      <GVHookFormField
+        showCorrect
         wide={wide}
         isAllowed={isAllowed}
         adornment={adornment}

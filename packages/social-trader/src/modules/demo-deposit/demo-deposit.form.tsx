@@ -1,6 +1,6 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { useGetRate } from "hooks/get-rate.hook";
 import {
   DEMO_DEPOSIT_FORM_FIELDS,
@@ -35,16 +35,11 @@ const _DemoDepositForm: React.FC<Props> = ({
     validationSchema: DemoDepositValidationSchema(t, maxAmount),
     mode: "onChange"
   });
-  const {
-    setValue,
-    formState: { isSubmitting, isValid, isSubmitted }
-  } = form;
+  const { setValue } = form;
 
   const setMax = useCallback(() => {
     setValue(DEMO_DEPOSIT_FORM_FIELDS.amount, String(maxAmount), true);
   }, [maxAmount]);
-
-  const isSuccessful = isSubmitted && !errorMessage;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -54,15 +49,9 @@ const _DemoDepositForm: React.FC<Props> = ({
         name={DEMO_DEPOSIT_FORM_FIELDS.amount}
       />
       <DialogButtons>
-        <GVButton
-          isSuccessful={isSuccessful}
-          isPending={isSubmitting}
-          wide
-          type="submit"
-          disabled={isSubmitting || !isValid || isSuccessful}
-        >
+        <SubmitButton isSuccessful={!errorMessage} wide>
           {t("deposit-asset.confirm")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

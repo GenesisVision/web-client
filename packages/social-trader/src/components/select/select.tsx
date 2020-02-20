@@ -78,7 +78,7 @@ const Select: React.FC<Props> = ({
         onBlur(event);
       }
     },
-    [isDisabled]
+    [isDisabled, onBlur]
   );
 
   const handleFocus = useCallback(
@@ -87,7 +87,7 @@ const Select: React.FC<Props> = ({
         onFocus(event);
       }
     },
-    [isDisabled]
+    [isDisabled, onFocus]
   );
 
   let displayValue = value;

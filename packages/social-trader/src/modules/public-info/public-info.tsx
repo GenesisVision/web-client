@@ -17,13 +17,10 @@ const _PublicInfo: React.FC<Props> = ({
     successMessage: "profile-page.success-edit"
   });
   const handleSubmit = useCallback(
-    (model: IAboutFormValues, setSubmitting: SetSubmittingType) =>
-      sendRequest(
-        {
-          model
-        },
-        setSubmitting
-      ),
+    (model: IAboutFormValues) =>
+      sendRequest({
+        model
+      }),
     []
   );
   return (

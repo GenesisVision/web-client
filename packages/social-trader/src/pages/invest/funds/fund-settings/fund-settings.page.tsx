@@ -11,7 +11,6 @@ import {
   createFundInfoSelector,
   fundAssetsSelector
 } from "reducers/platform-reducer";
-import { SetSubmittingType } from "utils/types";
 
 import FundSettings from "./fund-settings";
 import { redirectToFund } from "./services/fund-settings.service";
@@ -48,17 +47,14 @@ const _FundSettingsPage: React.FC = () => {
   );
 };
 
-export type TUpdateFundFunc = (
-  values: {
-    description?: string;
-    logo?: IImageValue;
-    investmentLimit?: number;
-    stopOutLevel?: number;
-    entryFee?: number;
-    exitFee?: number;
-  },
-  setSubmitting: SetSubmittingType
-) => void;
+export type TUpdateFundFunc = (values: {
+  description?: string;
+  logo?: IImageValue;
+  investmentLimit?: number;
+  stopOutLevel?: number;
+  entryFee?: number;
+  exitFee?: number;
+}) => void;
 
 const FundSettingsPage = React.memo(_FundSettingsPage);
 export default FundSettingsPage;

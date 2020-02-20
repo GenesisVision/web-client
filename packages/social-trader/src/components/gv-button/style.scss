@@ -42,7 +42,7 @@ $decreased-margin: $change-size-value;
     content: "✔";
     opacity: 0;
     @include transition(opacity);
-    font-size: 20px;
+    font-size: 13px;
   }
 
   &--successful {

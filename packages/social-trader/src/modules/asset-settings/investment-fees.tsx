@@ -1,12 +1,12 @@
 import FeesSettings from "components/assets/fields/fees-settings";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
-import { FormikProps, withFormik } from "formik";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import {
   entryFeeShape,
   exitFeeShape,
@@ -14,23 +14,48 @@ import {
 } from "utils/validators/validators";
 import { number, object } from "yup";
 
+enum FIELDS {
+  exitFee = "exitFee",
+  entryFee = "entryFee",
+  successFee = "successFee"
+}
+
 const _InvestmentFees: React.FC<Props> = ({
-  maxEntryFee,
-  maxExitFee,
-  asset,
-  t,
-  handleSubmit,
-  dirty,
-  isValid,
-  isSubmitting
+  onSubmit,
+  editError,
+  entryFee,
+  successFee,
+  exitFee,
+  maxSuccessFee = 0,
+  maxEntryFee = 0,
+  maxExitFee = 0,
+  asset
 }) => {
+  const [t] = useTranslation();
+
+  const form = useForm<InvesmentLimitFormValues>({
+    defaultValues: {
+      [FIELDS.exitFee]: exitFee,
+      [FIELDS.entryFee]: entryFee,
+      [FIELDS.successFee]: successFee
+    },
+    validationSchema: object().shape({
+      [FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
+      [FIELDS.exitFee]:
+        asset === ASSET.FUND ? exitFeeShape(t, maxExitFee) : number(),
+      [FIELDS.successFee]:
+        asset === ASSET.PROGRAM ? successFeeShape(t, maxSuccessFee) : number()
+    }),
+    mode: "onBlur"
+  });
+
   return (
     <SettingsBlock
       label={t(
         `create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
       )}
     >
-      <form id="edit-form" onSubmit={handleSubmit}>
+      <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         {asset === ASSET.PROGRAM && (
           <FeesSettings
             entryFeeName={FIELDS.entryFee}
@@ -67,24 +92,16 @@ const _InvestmentFees: React.FC<Props> = ({
             )}
           />
         )}
-        <GVButton
-          color="primary"
-          type={"submit"}
+        <SubmitButton
           className="invest-form__submit-button"
-          disabled={!dirty || !isValid || isSubmitting}
+          isSuccessful={!editError}
         >
           {t("program-settings.buttons.save")}
-        </GVButton>
-      </form>
+        </SubmitButton>
+      </HookForm>
     </SettingsBlock>
   );
 };
-
-enum FIELDS {
-  exitFee = "exitFee",
-  entryFee = "entryFee",
-  successFee = "successFee"
-}
 
 export interface InvesmentLimitFormValues {
   [FIELDS.exitFee]?: number;
@@ -92,12 +109,8 @@ export interface InvesmentLimitFormValues {
   [FIELDS.successFee]?: number;
 }
 
-interface Props
-  extends OwnProps,
-    WithTranslation,
-    FormikProps<InvesmentLimitFormValues> {}
-
-interface OwnProps {
+interface Props {
+  editError?: boolean;
   asset: ASSET;
   maxExitFee?: number;
   maxEntryFee?: number;
@@ -105,43 +118,8 @@ interface OwnProps {
   exitFee?: number;
   entryFee: number;
   successFee?: number;
-  onSubmit: (
-    values: InvesmentLimitFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: InvesmentLimitFormValues) => void;
 }
 
-const InvestmentFees = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik<OwnProps, InvesmentLimitFormValues>({
-    enableReinitialize: true,
-    displayName: "edit-form",
-    mapPropsToValues: ({ entryFee, successFee, exitFee }) => ({
-      [FIELDS.exitFee]: exitFee,
-      [FIELDS.entryFee]: entryFee,
-      [FIELDS.successFee]: successFee
-    }),
-    validationSchema: ({
-      maxExitFee = 0,
-      maxSuccessFee = 0,
-      maxEntryFee = 0,
-      t,
-      asset
-    }: Props) => {
-      const exitFee =
-        asset === ASSET.FUND ? exitFeeShape(t, maxExitFee) : number();
-      const successFee =
-        asset === ASSET.PROGRAM ? successFeeShape(t, maxSuccessFee) : number();
-      return object().shape({
-        [FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
-        [FIELDS.exitFee]: exitFee,
-        [FIELDS.successFee]: successFee
-      });
-    },
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_InvestmentFees);
+const InvestmentFees = React.memo(_InvestmentFees);
 export default InvestmentFees;

@@ -10,7 +10,7 @@ export enum GV_BTN_SIZE {
   MIDDLE = "MIDDLE"
 }
 
-interface GVButtonProps {
+export interface GVButtonProps {
   isSuccessful?: boolean;
   isPending?: boolean;
   testId?: string;

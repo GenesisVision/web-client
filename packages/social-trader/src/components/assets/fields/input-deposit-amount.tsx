@@ -1,4 +1,4 @@
-import InputAmountField from "components/input-amount-field/input-amount-field";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -9,6 +9,7 @@ import { CurrencyEnum } from "utils/types";
 import AssetField from "../asset-fields/asset-field";
 
 const _InputDepositAmount: React.FC<Props> = ({
+  minAmount,
   disabled,
   rate,
   name,
@@ -24,23 +25,29 @@ const _InputDepositAmount: React.FC<Props> = ({
       validateFraction(value, currency),
     []
   );
-  const setMaxAmount = useCallback(
-    (available: number, currency: string) => () => {
-      setFieldValue(name, formatCurrencyValue(available, currency));
-    },
-    [name, setFieldValue]
-  );
+  const setMax = useCallback(() => {
+    setFieldValue(
+      name,
+      formatCurrencyValue(walletAvailable, walletCurrency),
+      true
+    );
+  }, [name, setFieldValue, walletAvailable, walletCurrency]);
+  const setMin = useCallback(() => {
+    setFieldValue(name, minAmount, true);
+  }, [name, setFieldValue, minAmount, walletCurrency]);
   return (
     <AssetField className="deposit-amount-field">
       <InputAmountField
+        showCorrect
         wide
         disabled={disabled}
         autoFocus={false}
         name={name}
         label={t("transfer.amount")}
         currency={walletCurrency}
-        isAllow={isAmountAllow(walletCurrency)}
-        setMax={setMaxAmount(walletAvailable, walletCurrency)}
+        isAllowed={isAmountAllow(walletCurrency)}
+        setMax={setMax}
+        setMin={setMin}
       />
       {assetCurrency !== walletCurrency && depositAmount && (
         <NumberFormat
@@ -58,13 +65,14 @@ const _InputDepositAmount: React.FC<Props> = ({
 };
 
 interface Props {
+  minAmount: number;
   rate: number;
   name: string;
   setFieldValue: Function;
   assetCurrency: CurrencyEnum;
   walletAvailable: number;
   walletCurrency: CurrencyEnum;
-  depositAmount?: number;
+  depositAmount?: number | string;
   disabled?: boolean;
 }
 

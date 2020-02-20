@@ -46,6 +46,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     mode: "onBlur"
   });
   const {
+    handleSubmit,
     watch,
     setValue,
     formState: { dirty, isSubmitting, isSubmitted }
@@ -107,6 +108,9 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     },
     [selectedBroker, setValue]
   );
+  const handleOnApply = useCallback(() => {
+    return handleSubmit(onSubmit);
+  }, [handleSubmit, onSubmit]);
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <div className="program-settings__block-wrapper--broker-list">
@@ -170,6 +174,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         {t("program-settings.buttons.change-broker")}
       </GVButton>
       <ConfirmChangeBroker
+        onApply={handleOnApply}
         open={isChangeBrokerOpen}
         onClose={setChangeBrokerClose}
         brokerFrom={brokerFrom.name}

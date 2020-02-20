@@ -8,7 +8,7 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
-import { SetSubmittingType } from "utils/types";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
   closeFund,
@@ -28,23 +28,21 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   id
 }) => {
   const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, errorMessage } = useApiRequest({
     request: getMethod(asset),
     successMessage: `asset-settings.close-asset.notifications.${asset.toLowerCase()}`,
-    middleware: [onApply, onClose]
+    middleware: [onApply, postponeCallback(onClose)]
   });
   const handleSubmit = useCallback(
-    (
-      { twoFactorCode }: ICloseAssetFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
-      sendRequest({ id, twoFactorCode }, setSubmitting);
+    ({ twoFactorCode }: ICloseAssetFormValues) => {
+      return sendRequest({ id, twoFactorCode });
     },
     [id]
   );
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
       <CloseAssetForm
+        errorMessage={errorMessage}
         assetName={assetName}
         asset={asset}
         onSubmit={handleSubmit}

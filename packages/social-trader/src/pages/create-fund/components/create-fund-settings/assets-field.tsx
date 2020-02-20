@@ -1,6 +1,9 @@
+import "./assets-field.scss";
+
 import AssetField from "components/assets/asset-fields/asset-field";
-import GVFormikField from "components/gv-formik-field";
-import ReallocateField from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import Label from "components/label/label";
+import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -11,10 +14,14 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   const assets = useSelector(fundAssetsSelector);
   return (
     <AssetField wide>
-      <div className="create-asset-settings__text">
-        {t("create-fund-page.settings.fields.mandatory-assets")}
+      <div className="assets-field__text">
+        <Label>{t("create-fund-page.settings.fields.mandatory-assets")}</Label>
       </div>
-      <GVFormikField name={name} component={ReallocateField} assets={assets} />
+      <GVHookFormField
+        name={name}
+        component={ReallocateFieldWrapper}
+        assets={assets}
+      />
     </AssetField>
   );
 };

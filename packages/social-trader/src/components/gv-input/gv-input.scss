@@ -37,6 +37,13 @@
     }
   }
 
+  &--correct {
+    &::after {
+      border-bottom-color: $positive-color;
+      transform: scale(1);
+    }
+  }
+
   &--disabled {
     &::before {
       border: 0;

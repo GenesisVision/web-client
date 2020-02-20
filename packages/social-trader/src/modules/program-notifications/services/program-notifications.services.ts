@@ -29,14 +29,10 @@ export const fetchProgramNotifications = (
   ).then(data => dispatch(addProgramNotificationsAction(data.value)));
 };
 
-export const addProgramNotification: TAddNotification = (
-  opts,
-  message
-) => dispatch =>
+export const addProgramNotification: TAddNotification = opts => dispatch =>
   dispatch(addNotificationSettingAction(opts))
     .then(() => {
       dispatch(fetchProgramNotifications(opts.assetId!));
-      dispatch(alertMessageActions.success(message));
     })
     .catch((data: ResponseError) => {
       dispatch(addErrorMessageAction(data.errorMessage));

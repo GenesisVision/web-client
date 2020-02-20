@@ -4,7 +4,6 @@ import { TwoFactorAuthenticator } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { SetSubmittingType } from "utils/types";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
 import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
@@ -29,18 +28,12 @@ const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   });
 
   const handleSubmit = useCallback(
-    (
-      values: IGoogleActivateStepFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
+    (values: IGoogleActivateStepFormValues) => {
       if (!TFAData) return;
-      confirm2fa(
-        {
-          ...values,
-          sharedKey: TFAData.sharedKey
-        },
-        setSubmitting
-      );
+      return confirm2fa({
+        ...values,
+        sharedKey: TFAData.sharedKey
+      });
     },
     [TFAData]
   );

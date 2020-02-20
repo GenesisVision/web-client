@@ -7,7 +7,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
-import { SetSubmittingType } from "utils/types";
+import { postponeCallback } from "utils/hook-form.helpers";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
@@ -25,17 +25,14 @@ const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
     dispatch(updateWalletTimestampAction());
   };
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [updateWalletMiddleware],
+    middleware: [postponeCallback(updateWalletMiddleware)],
     request: values =>
       dispatch(walletWithdrawService.newWithdrawRequest(values)),
     catchCallback: () => setNotSuccess()
   });
-  const handleSubmit = useCallback(
-    (values: IWalletWithdrawFormValues, setSubmitting: SetSubmittingType) => {
-      sendRequest({ ...values, amount: Number(values.amount) }, setSubmitting);
-    },
-    []
-  );
+  const handleSubmit = useCallback((values: IWalletWithdrawFormValues) => {
+    return sendRequest({ ...values, amount: Number(values.amount) });
+  }, []);
   if (!wallets.length) return null;
   const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
   return isSuccess ? (

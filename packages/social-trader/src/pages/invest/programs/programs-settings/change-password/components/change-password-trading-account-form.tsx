@@ -2,9 +2,9 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -37,9 +37,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
     }),
     mode: "onBlur"
   });
-  const {
-    formState: { dirty, isValid, isSubmitting, isSubmitted }
-  } = form;
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
@@ -76,15 +74,9 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
         )}
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            isSuccessful={isSubmitted && !errorMessage}
-            isPending={isSubmitting}
-            disabled={!isValid || !dirty || isSubmitting}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

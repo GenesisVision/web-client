@@ -1,9 +1,9 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import {
   IProgramWithdrawAmountFormValues,
   programWithdrawAmountValidationSchema,
@@ -38,11 +38,8 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    watch,
-    setValue,
-    formState: { isSubmitting, isValid }
-  } = form;
+  const { watch, setValue } = form;
+
   const { amount, withdrawAll } = watch();
 
   const isAllow = useCallback(
@@ -81,7 +78,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         name={WITHDRAW_FORM_FIELDS.amount}
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
-        isAllow={isAllow}
+        isAllowed={isAllow}
         disabled={withdrawAll}
         setMax={isOwner ? setMaxAmount : undefined}
       />
@@ -97,15 +94,14 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         />
       )}
       <DialogButtons>
-        <GVButton
+        <SubmitButton
           wide
-          type="submit"
           id="programWithdrawAmountFormSubmit"
           className="invest-form__submit-button"
-          disabled={isSubmitting || ((!amount || !isValid) && !withdrawAll)}
+          disabled={!amount && !withdrawAll}
         >
           {t("withdraw-program.next")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

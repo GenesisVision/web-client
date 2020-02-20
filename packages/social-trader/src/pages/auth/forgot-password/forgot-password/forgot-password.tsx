@@ -1,14 +1,14 @@
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
-import { SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
 export enum FORGOT_PASSWORD_FORM_FIELDS {
@@ -16,49 +16,52 @@ export enum FORGOT_PASSWORD_FORM_FIELDS {
   email = "email"
 }
 
-const _ForgotPasswordForm: React.FC<InjectedFormikProps<
-  Props,
-  IForgotPasswordFormValues
->> = ({ t, isSubmitting, handleSubmit, error }) => (
-  <form id="forgotPasswordForm" onSubmit={handleSubmit} noValidate>
-    <GVFormikField
-      type="email"
-      name={FORGOT_PASSWORD_FORM_FIELDS.email}
-      label={t("auth.password-restore.forgot-password.email-field-text")}
-      addon="fas fa-envelope"
-      autoComplete="email"
-      autoFocus
-      component={GVTextField}
-    />
-    <DialogError error={error} />
-    <div className="forgot-password__navigation">
-      <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
-        <GVButton variant="text" color="secondary">
-          <>
-            &larr; {t("auth.password-restore.forgot-password.back-button-text")}
-          </>
-        </GVButton>
-      </Link>
-      <GVButton
-        id="forgotPassword"
-        color="primary"
-        variant="contained"
-        disabled={isSubmitting}
-        type="submit"
-      >
-        {t("auth.password-restore.forgot-password.confirm-button-text")}
-      </GVButton>
-    </div>
-  </form>
-);
+const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
+  const [t] = useTranslation();
 
-interface Props extends OwnProps, WithTranslation {}
+  const form = useForm<IForgotPasswordFormValues>({
+    defaultValues: {
+      [FORGOT_PASSWORD_FORM_FIELDS.email]: ""
+    },
+    validationSchema: object().shape({
+      [FORGOT_PASSWORD_FORM_FIELDS.email]: string()
+        .email(t("auth.password-restore.validators.email-invalid"))
+        .required(t("auth.password-restore.validators.email-required"))
+    }),
+    mode: "onChange"
+  });
 
-interface OwnProps {
-  onSubmit(
-    data: IForgotPasswordFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
+  return (
+    <HookForm form={form} onSubmit={onSubmit}>
+      <GVHookFormField
+        type="email"
+        name={FORGOT_PASSWORD_FORM_FIELDS.email}
+        label={t("auth.password-restore.forgot-password.email-field-text")}
+        addon="fas fa-envelope"
+        autoComplete="email"
+        autoFocus
+        component={SimpleTextField}
+      />
+      <DialogError error={errorMessage} />
+      <div className="forgot-password__navigation">
+        <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
+          <GVButton variant="text" color="secondary">
+            <>
+              &larr;{" "}
+              {t("auth.password-restore.forgot-password.back-button-text")}
+            </>
+          </GVButton>
+        </Link>
+        <SubmitButton id="forgotPassword" isSuccessful={!errorMessage}>
+          {t("auth.password-restore.forgot-password.confirm-button-text")}
+        </SubmitButton>
+      </div>
+    </HookForm>
+  );
+};
+
+interface Props {
+  onSubmit: (data: IForgotPasswordFormValues) => void;
   errorMessage: string;
 }
 
@@ -66,23 +69,5 @@ export interface IForgotPasswordFormValues {
   [FORGOT_PASSWORD_FORM_FIELDS.email]: string;
 }
 
-const ForgotPasswordForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, IForgotPasswordFormValues>({
-    displayName: "forgotPassword",
-    mapPropsToValues: () => ({
-      [FORGOT_PASSWORD_FORM_FIELDS.email]: ""
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FORGOT_PASSWORD_FORM_FIELDS.email]: string()
-          .email(t("auth.password-restore.validators.email-invalid"))
-          .required(t("auth.password-restore.validators.email-required"))
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_ForgotPasswordForm);
+const ForgotPasswordForm = React.memo(_ForgotPasswordForm);
 export default ForgotPasswordForm;

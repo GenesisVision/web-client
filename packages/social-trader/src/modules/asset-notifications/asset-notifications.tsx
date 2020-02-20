@@ -1,3 +1,5 @@
+import "../notification-settings/notification-settings.scss";
+
 import withLoader from "decorators/with-loader";
 import {
   FundNotificationSettingList,

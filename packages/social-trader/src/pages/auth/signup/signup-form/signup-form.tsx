@@ -1,8 +1,8 @@
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { RegisterViewModel } from "gv-api-web";
 import {
   CAPTCHA_STATUS,
@@ -56,22 +56,13 @@ const _SignUpForm: React.FC<Props> = ({
     validationSchema: validationSchema,
     mode: "onChange"
   });
-  const {
-    formState: { isSubmitting, dirty }
-  } = form;
 
   const requestStatus = useContext(CaptchaStatusContext);
-
-  const isSuccessful = requestStatus === CAPTCHA_STATUS.SUCCESS;
-  const disabled =
-    !dirty ||
-    isSubmitting ||
-    requestStatus === CAPTCHA_STATUS.PENDING ||
-    isSuccessful;
 
   return (
     <HookForm className="signup-form" form={form} onSubmit={onSubmit}>
       <GVHookFormField
+        showCorrect
         type="text"
         name={SIGN_UP_FORM_FIELDS.userName}
         label={t("auth.signup.username-field-text")}
@@ -80,6 +71,7 @@ const _SignUpForm: React.FC<Props> = ({
         component={SimpleTextField}
       />
       <GVHookFormField
+        showCorrect
         type="email"
         name={SIGN_UP_FORM_FIELDS.email}
         label={t("auth.signup.email-field-text")}
@@ -87,6 +79,7 @@ const _SignUpForm: React.FC<Props> = ({
         component={SimpleTextField}
       />
       <GVHookFormField
+        showCorrect
         type="password"
         name={SIGN_UP_FORM_FIELDS.password}
         label={t("auth.signup.password-field-text")}
@@ -94,6 +87,7 @@ const _SignUpForm: React.FC<Props> = ({
         autoComplete="new-password"
       />
       <GVHookFormField
+        showCorrect
         type="password"
         name={SIGN_UP_FORM_FIELDS.confirmPassword}
         label={t("auth.signup.password-confirm-field-text")}
@@ -141,16 +135,15 @@ const _SignUpForm: React.FC<Props> = ({
         component={GVCheckbox}
       />
       <FormError error={error} />
-      <GVButton
-        type="submit"
+      <SubmitButton
         id="signUpFormSubmit"
         className="signup-form__submit-button"
-        isPending={isSubmitting || requestStatus === CAPTCHA_STATUS.PENDING}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
+        isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+        isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+        disabled={requestStatus === CAPTCHA_STATUS.PENDING}
       >
         {t("auth.signup.title")}
-      </GVButton>
+      </SubmitButton>
     </HookForm>
   );
 };

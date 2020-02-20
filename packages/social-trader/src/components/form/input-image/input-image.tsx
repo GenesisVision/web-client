@@ -9,7 +9,9 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
 
-class _InputImage extends React.PureComponent<Props & WithTranslation> {
+class _InputImage extends React.PureComponent<
+  IInputImageProps & WithTranslation
+> {
   dropzone: React.RefObject<Dropzone> = React.createRef();
   cropper: React.RefObject<Cropper> = React.createRef();
 
@@ -117,7 +119,7 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
   };
 
   render() {
-    const { t, value, className, defaultImage, error } = this.props;
+    const { t, value = {}, className, defaultImage, error } = this.props;
     const { src, image } = value;
     const hasSizeError = error && error.image.size;
     return (
@@ -210,17 +212,17 @@ export interface IImageChangeEvent {
   target: { value: IImageValue; name: string };
 }
 
-export interface IImageValue {
+export type IImageValue = {
   src?: string;
   image?: INewImage;
   id?: string;
-}
+};
 
-interface Props {
+export interface IInputImageProps {
   name: string;
   className?: string;
   value: IImageValue;
   defaultImage: string;
   error?: { image: { [field: string]: string } };
-  onChange(event: IImageChangeEvent): void;
+  onChange: (event: IImageChangeEvent) => void;
 }
