@@ -44,13 +44,16 @@ const _DepositPopup: React.FC<Props> = ({
   }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  const onCloseMiddleware = postponeCallback(onClose);
+  const onCloseMiddleware = postponeCallback(() => {
+    onClose();
+    onApply();
+  });
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
-    middleware: [onApply, onCloseMiddleware, updateWalletInfoMiddleware]
+    middleware: [onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
     ({ amount, walletId }) => {
