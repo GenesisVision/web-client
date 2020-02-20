@@ -1,13 +1,8 @@
 import "./styles/index.scss";
 import "./styles/home.scss";
 
-import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
-  PlatformEvent,
-  PlatformNews
-} from "gv-api-web";
+import { LandingInfo } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -20,20 +15,23 @@ import ProgramsContainer from "pages/landing-page/containers/programs-container/
 import SocialContainer from "pages/landing-page/containers/social-container/social-container";
 import Layout from "pages/landing-page/layouts/_layout";
 import {
+  getLandingAssets,
+  landingAssetsDefaultData
+} from "pages/landing-page/services/landing.service";
+import {
   brokersInfo,
   brokersTabs
 } from "pages/landing-page/static-data/brokers";
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
-const _LandingPage: React.FC<Props> = ({
-  programs,
-  funds,
-  follows,
-  events,
-  news,
-  refLink
-}) => {
+const _LandingPage: React.FC = () => {
+  const { data } = useApiRequest({
+    request: getLandingAssets,
+    fetchOnMount: true,
+    defaultData: landingAssetsDefaultData
+  });
+  const { programs, funds, follows, events, news } = data as LandingInfo;
   useUtm();
   return (
     <Layout
@@ -88,12 +86,4 @@ const _LandingPage: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  refLink?: string;
-  programs: ItemsViewModelProgramDetailsListItem;
-  funds: ItemsViewModelFundDetailsListItem;
-  follows: ItemsViewModelFollowDetailsListItem;
-  events: Array<PlatformEvent>;
-  news: Array<PlatformNews>;
-}
 export const LandingPage = React.memo(_LandingPage);
