@@ -159,7 +159,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
             wide={!onPrevStep}
             className="invest-form__submit-button"
             isSuccessful={!errorMessage}
-            checkDirty={false}
+            checkDirty={!onPrevStep}
           >
             {t("follow-program.params.submit")}
           </SubmitButton>
