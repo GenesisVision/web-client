@@ -1,6 +1,6 @@
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -39,12 +39,6 @@ export const GoogleStep3: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   return (
     <div className="google-auth__step">
@@ -73,17 +67,12 @@ export const GoogleStep3: React.FC<Props> = ({
           />
         )}
         <div className="form-error">{errorMessage}</div>
-        <GVButton
+        <SubmitButton
           className="google-auth__button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!errorMessage}
         >
           {t("buttons.activate")}
-        </GVButton>
+        </SubmitButton>
       </HookForm>
     </div>
   );

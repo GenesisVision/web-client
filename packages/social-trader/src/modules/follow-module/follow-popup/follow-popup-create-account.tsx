@@ -2,9 +2,9 @@ import { HookFormWalletField as WalletField } from "components/deposit/component
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -55,14 +55,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     }),
     mode: "onChange"
   });
-  const {
-    reset,
-    watch,
-    setValue,
-    formState: { isValid, dirty }
-  } = form;
-
-  const disabled = !isValid || !dirty;
+  const { reset, watch, setValue } = form;
 
   const { currency, depositAmount } = watch();
   const wallet =
@@ -135,14 +128,9 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           )}
         </DialogField>
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            className="invest-form__submit-button"
-            disabled={disabled}
-          >
+          <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

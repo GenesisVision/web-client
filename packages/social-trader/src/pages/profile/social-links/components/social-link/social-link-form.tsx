@@ -4,6 +4,7 @@ import SocialLinkImage from "components/avatar/social-link/social-link";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { SocialLinkViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import { TOnEditLinkSubmitFunc } from "pages/profile/social-links/components/social-links.container";
@@ -37,16 +38,9 @@ const _SocialLinkForm: React.FC<Props> = ({
     mode: "onChange"
   });
 
-  const {
-    setValue,
-    watch,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
+  const { setValue, watch } = form;
 
   const { value } = watch();
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   const handleCancelClick = useCallback(() => {
     setValue(FORM_FIELD.value, valueProp || "", true);
@@ -90,15 +84,12 @@ const _SocialLinkForm: React.FC<Props> = ({
         />
         {isButtonsVisible && (
           <div>
-            <GVButton
-              type="submit"
+            <SubmitButton
               className="social-button"
-              isPending={isSubmitting}
-              isSuccessful={isSuccessful}
-              disabled={disabled}
+              isSuccessful={!errorMessage}
             >
               {t("buttons.save")}
-            </GVButton>
+            </SubmitButton>
             <GVButton
               color="secondary"
               variant="outlined"

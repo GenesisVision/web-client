@@ -63,7 +63,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
   const {
     watch,
     setValue,
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
+    formState: { isValid, dirty }
   } = form;
   const { brokerAccountTypeId, depositAmount, currency } = watch();
 
@@ -72,12 +72,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
     ({ id }) => brokerAccountTypeId === id
   );
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled =
-    !isValid ||
-    (accountType.isDepositRequired && !dirty) ||
-    isSubmitting ||
-    isSuccessful;
+  const disabled = accountType.isDepositRequired && !dirty;
 
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;
@@ -137,9 +132,8 @@ const _CreateAccountSettings: React.FC<Props> = ({
           />
           <CreateAssetNavigation
             asset={"ACCOUNT"}
-            isSuccessful={isSuccessful}
+            isSuccessful={!errorMessage}
             disabled={disabled}
-            isSubmitting={isSubmitting}
           />
         </>
       )}

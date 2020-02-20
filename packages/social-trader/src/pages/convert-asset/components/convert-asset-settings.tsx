@@ -59,11 +59,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     }),
     mode: "onChange"
   });
-  const {
-    errors,
-    watch,
-    formState: { isSubmitting, isValid, isSubmitted }
-  } = form;
+  const { watch } = form;
   const { description, currency } = watch();
 
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
@@ -71,8 +67,6 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
   const showCurrency = broker === "Huobi";
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || isSubmitting || isSuccessful;
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
@@ -153,12 +147,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         </SettingsBlock>
       )}
-      <CreateAssetNavigation
-        asset={assetTo}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-        isSubmitting={isSubmitting}
-      />
+      <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
     </HookForm>
   );
 };

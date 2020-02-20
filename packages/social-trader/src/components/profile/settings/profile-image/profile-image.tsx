@@ -2,8 +2,8 @@ import "./profile-image.scss";
 
 import { IImageValue } from "components/form/input-image/input-image";
 import imageValidationSchema from "components/form/input-image/input-image.validation";
-import GVButton from "components/gv-button";
 import LogoField from "components/logo-field/logo-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import UserIcon from "media/user-avatar.svg";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -28,25 +28,14 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
     }),
     mode: "onBlur"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       <div className="profile-image">
         <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
-        <GVButton
-          type="submit"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
-        >
+        <SubmitButton isSuccessful={!errorMessage}>
           {t("profile-page.settings.save-photo")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

@@ -1,6 +1,7 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -75,9 +76,7 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const form = useForm();
-  const {
-    formState: { isSubmitted, isSubmitting }
-  } = form;
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <div className="dialog-list__item">
@@ -100,15 +99,9 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
         >
           {t("buttons.back")}
         </GVButton>
-        <GVButton
-          isSuccessful={isSubmitted && !errorMessage}
-          isPending={isSubmitting}
-          type="submit"
-          id="fundWithdrawFormSubmit"
-          disabled={isSubmitting}
-        >
+        <SubmitButton isSuccessful={!errorMessage} id="fundWithdrawFormSubmit">
           {t("buttons.confirm")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

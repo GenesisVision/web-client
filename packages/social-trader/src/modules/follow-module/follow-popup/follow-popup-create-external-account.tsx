@@ -1,9 +1,9 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -27,11 +27,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
     }),
     mode: "onChange"
   });
-  const {
-    formState: { isValid, dirty }
-  } = form;
 
-  const disableButton = !dirty || !isValid;
   return (
     <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
@@ -56,14 +52,9 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
           />
         </DialogField>
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            className="invest-form__submit-button"
-            disabled={disableButton}
-          >
+          <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

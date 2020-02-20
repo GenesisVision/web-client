@@ -3,6 +3,7 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,13 +18,8 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   cancelButtonText
 }) => {
   const [t] = useTranslation();
-  const {
-    handleSubmit,
-    formState: { isSubmitting, isSubmitted }
-  } = useForm();
+  const { handleSubmit } = useForm();
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = isSubmitting || isSuccessful;
   return (
     <form onSubmit={handleSubmit(onApply)} noValidate>
       <DialogTop title={header} />
@@ -32,15 +28,13 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
           <p>{body}</p>
         </div>
         <DialogButtons>
-          <GVButton
+          <SubmitButton
+            checkDirty={false}
             wide={!onCancel}
-            type="submit"
-            disabled={disabled}
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
+            isSuccessful={!errorMessage}
           >
             {applyButtonText || t("buttons.apply")}
-          </GVButton>
+          </SubmitButton>
           {onCancel && (
             <GVButton color="secondary" variant="outlined" onClick={onCancel}>
               {cancelButtonText || t("buttons.cancel")}

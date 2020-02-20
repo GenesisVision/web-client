@@ -1,6 +1,7 @@
 import FeesSettings from "components/assets/fields/fees-settings";
 import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -47,12 +48,7 @@ const _InvestmentFees: React.FC<Props> = ({
     }),
     mode: "onBlur"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
 
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <SettingsBlock
       label={t(
@@ -96,16 +92,12 @@ const _InvestmentFees: React.FC<Props> = ({
             )}
           />
         )}
-        <GVButton
-          color="primary"
-          type={"submit"}
+        <SubmitButton
           className="invest-form__submit-button"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!editError}
         >
           {t("program-settings.buttons.save")}
-        </GVButton>
+        </SubmitButton>
       </HookForm>
     </SettingsBlock>
   );

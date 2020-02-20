@@ -2,9 +2,9 @@ import DescriptionField from "components/assets/fields/description-field";
 import TitleField from "components/assets/fields/title-field";
 import { IImageValue } from "components/form/input-image/input-image";
 import inputImageShape from "components/form/input-image/input-image.validation";
-import GVButton from "components/gv-button";
 import LogoField from "components/logo-field/logo-field";
 import SettingsBlock from "components/settings-block/settings-block";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -45,14 +45,9 @@ const _AssetEdit: React.FC<Props> = ({
     }),
     mode: "onBlur"
   });
-  const {
-    watch,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
+  const { watch } = form;
   const { description } = watch();
 
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <SettingsBlock>
       <HookForm
@@ -76,16 +71,12 @@ const _AssetEdit: React.FC<Props> = ({
             description={description}
           />
         </div>
-        <GVButton
-          color="primary"
-          type={"submit"}
+        <SubmitButton
           className="invest-form__submit-button"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!editError}
         >
           {t("asset-settings.buttons.save")}
-        </GVButton>
+        </SubmitButton>
       </HookForm>
     </SettingsBlock>
   );

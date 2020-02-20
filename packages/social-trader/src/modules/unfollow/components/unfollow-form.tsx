@@ -1,10 +1,10 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
+import { SubmitButton } from "components/submit-button/submit-button";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { SignalDetachMode } from "gv-api-web";
@@ -29,12 +29,6 @@ const _UnfollowForm: React.FC<Props> = ({
     },
     mode: "onBlur"
   });
-  const {
-    formState: { isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = isSubmitting || isSuccessful;
 
   const modesList = (isExternal && [MODE_NONE]) || Object.keys(modes);
   return (
@@ -64,16 +58,14 @@ const _UnfollowForm: React.FC<Props> = ({
           ))}
         </GVHookFormField>
         <DialogButtons>
-          <GVButton
+          <SubmitButton
             wide
-            type="submit"
+            checkDirty={false}
             className="invest-form__submit-button"
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
-            disabled={disabled}
+            isSuccessful={!errorMessage}
           >
             {t("unfollow-program.submit")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

@@ -7,6 +7,7 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -45,16 +46,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
     validationSchema: followParamsValidationSchema(t),
     mode: "onBlur"
   });
-  const {
-    setValue,
-    watch,
-    formState: { isValid, isSubmitting, isSubmitted }
-  } = form;
+  const { setValue, watch } = form;
 
   const { mode, fixedCurrency, fixedVolume } = watch();
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || isSubmitting || isSuccessful;
 
   const setMaxOpenTolerancePercent = useCallback(() => {
     setValue(FOLLOW_PARAMS_FIELDS.openTolerancePercent, 20, true);
@@ -161,16 +155,14 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               {t("follow-program.params.back")}
             </GVButton>
           )}
-          <GVButton
+          <SubmitButton
             wide={!onPrevStep}
-            type="submit"
             className="invest-form__submit-button"
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
-            disabled={disabled}
+            isSuccessful={!errorMessage}
+            checkDirty={false}
           >
             {t("follow-program.params.submit")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
         {mode === modes.fixed.value && currency && (
           <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>

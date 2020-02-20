@@ -3,6 +3,7 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
@@ -71,9 +72,7 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
   const [t] = useTranslation();
 
   const form = useForm();
-  const {
-    formState: { isSubmitted, isSubmitting }
-  } = form;
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogList>
@@ -99,16 +98,14 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
         >
           {t("withdraw-program.back")}
         </GVButton>
-        <GVButton
-          isSuccessful={isSubmitted && !errorMessage}
-          isPending={isSubmitting}
-          title={"submit"}
-          type={"submit"}
+        <SubmitButton
+          checkDirty={false}
+          checkValid={false}
+          isSuccessful={!errorMessage}
           id={WITHDRAW_FORM_SUBMIT}
-          disabled={isSubmitting}
         >
           {t("withdraw-program.submit")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

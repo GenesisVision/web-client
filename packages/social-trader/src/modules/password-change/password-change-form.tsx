@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { ChangePasswordViewModel } from "gv-api-web";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -38,7 +38,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
   const {
     errors,
     watch,
-    formState: { touched, dirty, isValid, isSubmitting, isSubmitted }
+    formState: { touched }
   } = form;
   const { password, confirmPassword } = watch();
   const className = classNames({
@@ -48,9 +48,6 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
       touched[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&
       password === confirmPassword
   });
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = isSubmitting || !dirty || !isValid || isSuccessful;
 
   return (
     <HookForm className="change-password" form={form} onSubmit={onSubmit}>
@@ -81,14 +78,9 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
         />
         <div className="form-error">{errorMessage}</div>
       </div>
-      <GVButton
-        type="submit"
-        isPending={isSubmitting}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-      >
+      <SubmitButton isSuccessful={!errorMessage}>
         {t("buttons.confirm")}
-      </GVButton>
+      </SubmitButton>
     </HookForm>
   );
 };

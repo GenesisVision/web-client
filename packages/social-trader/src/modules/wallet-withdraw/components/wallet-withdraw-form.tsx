@@ -8,11 +8,11 @@ import { DialogField } from "components/dialog/dialog-field";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
 import {
@@ -52,15 +52,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    reset,
-    watch,
-    setValue,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+  const { reset, watch, setValue } = form;
 
   const { amount, id } = watch();
 
@@ -169,17 +161,9 @@ const _WalletWithdrawForm: React.FC<Props> = ({
         </DialogList>
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            variant="contained"
-            color="primary"
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
-            disabled={disabled}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

@@ -1,7 +1,7 @@
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -36,12 +36,6 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     mode: "onChange"
   });
 
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <GVHookFormField
@@ -60,15 +54,9 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       />
       <FormError error={errorMessage} />
       <div className="password-restore__navigation">
-        <GVButton
-          type="submit"
-          id="passwordRestoreSubmit"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
-        >
+        <SubmitButton id="passwordRestoreSubmit" isSuccessful={!errorMessage}>
           {t("auth.password-restore.new-password.confirm-button-text")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

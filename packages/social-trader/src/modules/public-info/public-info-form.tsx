@@ -3,7 +3,7 @@ import "./public-info.scss";
 import AboutField from "components/assets/fields/about-field";
 import UserNameField from "components/assets/fields/user-name-field";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -33,16 +33,9 @@ const _PublicInfoForm: React.FC<Props> = ({
     validationSchema: object().shape({ [FIELDS.userName]: assetTitleShape(t) }),
     mode: "onBlur"
   });
-  const {
-    watch,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
+  const { watch } = form;
 
   const { about } = watch();
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled =
-    !isValid || !dirty || isSubmitting || isSuccessful || isPending;
 
   return (
     <HookForm resetOnSuccess form={form} className="about" onSubmit={onSubmit}>
@@ -50,14 +43,9 @@ const _PublicInfoForm: React.FC<Props> = ({
       <AboutField description={about} name={FIELDS.about} />
       <FormError error={errorMessage} />
       <div className="profile__row">
-        <GVButton
-          type="submit"
-          isPending={isSubmitting || isPending}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
-        >
+        <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
           {t("buttons.save")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

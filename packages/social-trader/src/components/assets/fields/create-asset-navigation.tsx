@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,16 +11,14 @@ const _CreateAssetNavigation: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <GVButton
+    <SubmitButton
       title={t(`buttons.create-${asset.toLowerCase()}`)}
-      color="primary"
-      type="submit"
       isPending={isSubmitting}
       isSuccessful={isSuccessful}
       disabled={disabled}
     >
       {t(`buttons.create-${asset.toLowerCase()}`)}
-    </GVButton>
+    </SubmitButton>
   );
 };
 

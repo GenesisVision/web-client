@@ -50,18 +50,12 @@ const _InvestmentLimit: React.FC<Props> = ({
     mode: "onChange"
   });
 
-  const {
-    setValue,
-    formState: { isSubmitting, isValid, isSubmitted, dirty }
-  } = form;
+  const { setValue } = form;
 
   useEffect(() => {
     if (!hasInvestmentLimit) setValue(FIELDS.investmentLimit, undefined, true);
     else setValue(FIELDS.investmentLimit, investmentLimit, true);
   }, [hasInvestmentLimit]);
-
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || isSubmitting || isSuccessful || !dirty;
 
   const handleSubmit = useCallback(
     (values: InvesmentLimitFormValues) =>
@@ -82,12 +76,8 @@ const _InvestmentLimit: React.FC<Props> = ({
           currency={currency}
         />
         <GVButton
-          color="primary"
-          type={"submit"}
           className="invest-form__submit-button"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!editError}
         >
           {t("program-settings.buttons.save")}
         </GVButton>

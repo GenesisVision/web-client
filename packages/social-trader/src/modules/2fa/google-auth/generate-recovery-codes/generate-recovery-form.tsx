@@ -2,9 +2,9 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { PasswordModel } from "gv-api-web";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -28,12 +28,6 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     }),
     mode: "onChange"
   });
-  const {
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   return (
     <>
@@ -49,18 +43,13 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           />
           <DialogError error={errorMessage} />
           <DialogButtons>
-            <GVButton
+            <SubmitButton
               wide
               className="google-auth__button"
-              variant="contained"
-              color="primary"
-              type="submit"
-              isPending={isSubmitting}
-              isSuccessful={isSuccessful}
-              disabled={disabled}
+              isSuccessful={!errorMessage}
             >
               {t("buttons.generate")}
-            </GVButton>
+            </SubmitButton>
           </DialogButtons>
         </HookForm>
       </DialogBottom>

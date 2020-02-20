@@ -1,7 +1,7 @@
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -31,12 +31,6 @@ const _RecoveryCodeForm: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   return (
     <HookForm className="recovery-form" form={form} onSubmit={onSubmit}>
@@ -49,16 +43,13 @@ const _RecoveryCodeForm: React.FC<Props> = ({
         component={SimpleTextField}
       />
       <FormError error={errorMessage} />
-      <GVButton
+      <SubmitButton
         id="recoverySubmit"
-        isPending={isSubmitting}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-        type="submit"
+        isSuccessful={!errorMessage}
         className="recovery-form__submit"
       >
         {t("auth.login.recovery.continue")}
-      </GVButton>
+      </SubmitButton>
     </HookForm>
   );
 };

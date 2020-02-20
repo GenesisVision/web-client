@@ -3,6 +3,7 @@ import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -29,12 +30,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
     }),
     mode: "onChange"
   });
-  const {
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
-  } = form;
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <GVHookFormField
@@ -56,17 +52,9 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             </>
           </GVButton>
         </Link>
-        <GVButton
-          id="forgotPassword"
-          color="primary"
-          variant="contained"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
-          type="submit"
-        >
+        <SubmitButton id="forgotPassword" isSuccessful={!errorMessage}>
           {t("auth.password-restore.forgot-password.confirm-button-text")}
-        </GVButton>
+        </SubmitButton>
       </div>
     </HookForm>
   );

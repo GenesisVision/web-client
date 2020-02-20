@@ -1,8 +1,8 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletBaseData } from "gv-api-web";
 import {
@@ -54,11 +54,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
     validationSchema: fundWithdrawAmountFormValidationSchema(t, minPercent),
     mode: "onChange"
   });
-  const {
-    watch,
-    setValue,
-    formState: { isValid }
-  } = form;
+  const { watch, setValue } = form;
   const { percent } = watch();
 
   useEffect(() => {
@@ -122,14 +118,9 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
         exitFee={exitFee}
       />
       <DialogButtons>
-        <GVButton
-          disabled={!isValid}
-          wide
-          type="submit"
-          id="fundWithdrawAmountFormSubmit"
-        >
+        <SubmitButton checkDirty={false} wide id="fundWithdrawAmountFormSubmit">
           {t("buttons.next")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
     </HookForm>
   );

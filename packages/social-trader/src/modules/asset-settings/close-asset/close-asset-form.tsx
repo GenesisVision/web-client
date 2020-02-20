@@ -5,6 +5,7 @@ import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { CloseableAssetType } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -35,10 +36,9 @@ const _CloseAssetForm: React.FC<Props> = ({
     })
   });
   const {
-    formState: { isSubmitting, isValid, dirty, isSubmitted }
+    formState: { isSubmitting }
   } = form;
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
@@ -66,14 +66,9 @@ const _CloseAssetForm: React.FC<Props> = ({
           </DialogField>
         )}
         <DialogButtons>
-          <GVButton
-            type="submit"
-            disabled={disabled}
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
-          >
+          <SubmitButton isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
-          </GVButton>
+          </SubmitButton>
           <GVButton
             color="secondary"
             variant="outlined"

@@ -1,6 +1,6 @@
 import TradesDelay from "components/assets/fields/trades-delay";
-import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
+import { SubmitButton } from "components/submit-button/submit-button";
 import withLoader from "decorators/with-loader";
 import { TradesDelay as TradesDelayType } from "gv-api-web";
 import React from "react";
@@ -23,26 +23,17 @@ const _TradesUpdating: React.FC<Props> = ({
     },
     mode: "onBlur"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
 
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <SettingsBlock label={t("program-settings.trades-update.title")}>
       <HookForm form={form} onSubmit={onSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
-        <GVButton
-          color="primary"
-          type={"submit"}
+        <SubmitButton
           className="invest-form__submit-button"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!editError}
         >
           {t("program-settings.buttons.save")}
-        </GVButton>
+        </SubmitButton>
       </HookForm>
     </SettingsBlock>
   );

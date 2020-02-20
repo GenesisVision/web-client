@@ -50,12 +50,10 @@ const _AttachAccountSettings: React.FC<Props> = ({
   });
   const {
     setValue,
-    formState: { isSubmitting, isValid, dirty }
+    formState: { isValid }
   } = form;
 
   const isSuccessful = success;
-  const disabled =
-    !isValid || !dirty || isSubmitting || isSuccessful || isPending;
 
   const [broker, setBroker] = useState<Broker>(exchanges[0]);
   const validateAndSubmit = useAssetValidate({
@@ -152,7 +150,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
       <CreateAssetNavigation
         asset={"attach-external-account"}
         isSuccessful={isSuccessful}
-        disabled={disabled}
         isSubmitting={isPending}
       />
     </HookForm>

@@ -1,6 +1,6 @@
 import StopOutField from "components/assets/fields/stop-out-field";
-import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -32,12 +32,7 @@ const _StopOutLevel: React.FC<Props> = ({
     }),
     mode: "onBlur"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
 
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
   return (
     <SettingsBlock
       label={t("create-program-page.settings.fields.stop-out-level")}
@@ -46,16 +41,12 @@ const _StopOutLevel: React.FC<Props> = ({
         <div className="program-settings__block-wrapper">
           <StopOutField name={FIELDS.stopOutLevel} />
         </div>
-        <GVButton
-          color="primary"
-          type={"submit"}
+        <SubmitButton
           className="invest-form__submit-button"
-          isPending={isSubmitting}
-          isSuccessful={isSuccessful}
-          disabled={disabled}
+          isSuccessful={!editError}
         >
           {t("program-settings.buttons.save")}
-        </GVButton>
+        </SubmitButton>
       </HookForm>
     </SettingsBlock>
   );

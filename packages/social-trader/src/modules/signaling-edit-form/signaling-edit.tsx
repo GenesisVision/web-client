@@ -1,6 +1,6 @@
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { FollowCreateAssetPlatformInfo } from "gv-api-web";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -33,23 +33,11 @@ const _SignalingEdit: React.FC<Props> = ({
     validationSchema: SignalValidationSchema({ followInfo, t }),
     mode: "onBlur"
   });
-  const {
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
-
-  const isSuccessful = isSubmitted && !editError;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   const renderButton = () => (
-    <GVButton
-      wide={inDialog}
-      type="submit"
-      isPending={isSubmitting}
-      isSuccessful={isSuccessful}
-      disabled={disabled}
-    >
+    <SubmitButton wide={inDialog} isSuccessful={!editError}>
       {t("buttons.save")}
-    </GVButton>
+    </SubmitButton>
   );
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>

@@ -59,18 +59,9 @@ const _CreateFundSettings: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    errors,
-    watch,
-    setValue,
-    formState: { isSubmitting, isValid, isSubmitted }
-  } = form;
+  const { watch, setValue } = form;
   const { depositAmount, description } = watch();
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || isSubmitting || isSuccessful;
-
-  console.log(errors);
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
@@ -123,12 +114,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         setFieldValue={setValue}
         assetCurrency={FUND_CURRENCY}
       />
-      <CreateAssetNavigation
-        asset={ASSET.FUND}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-        isSubmitting={isSubmitting}
-      />
+      <CreateAssetNavigation asset={ASSET.FUND} isSuccessful={!errorMessage} />
     </HookForm>
   );
 };

@@ -9,9 +9,9 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
-import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
@@ -67,12 +67,7 @@ const _DepositForm: React.FC<Props> = ({
     }),
     mode: "onChange"
   });
-  const {
-    reset,
-    watch,
-    setValue,
-    formState: { isSubmitting, isValid, isSubmitted }
-  } = form;
+  const { reset, watch, setValue } = form;
   const { amount = 0 } = watch();
 
   useEffect(() => {
@@ -105,8 +100,6 @@ const _DepositForm: React.FC<Props> = ({
     },
     [wallets]
   );
-
-  const isSuccessful = isSubmitted && !errorMessage;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -150,16 +143,13 @@ const _DepositForm: React.FC<Props> = ({
         )}
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            isSuccessful={isSuccessful}
-            isPending={isSubmitting}
+          <SubmitButton
+            isSuccessful={!errorMessage}
             wide
-            type="submit"
             className="invest-form__submit-button"
-            disabled={isSubmitting || !isValid || isSuccessful}
           >
             {t("deposit-asset.confirm")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
         {asset === ASSET.FUND && (
           <DialogInfo>{t("deposit-asset.fund.disclaimer")}</DialogInfo>

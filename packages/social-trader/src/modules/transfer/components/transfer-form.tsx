@@ -6,8 +6,8 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -57,12 +57,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     validationSchema: transferFormValidationSchema({ sourceItems, t }),
     mode: "onChange"
   });
-  const {
-    reset,
-    watch,
-    setValue,
-    formState: { isSubmitting, isValid, isSubmitted, dirty }
-  } = form;
+  const { reset, watch, setValue } = form;
   const { sourceId, destinationId, amount } = watch();
 
   const destinationItemsWithoutCurrent = getOtherItems(
@@ -124,9 +119,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     [setValue]
   );
 
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disableButton = isSubmitting || !isValid || !dirty || isSuccessful;
-
   const setValuesFromPropsAndSubmit = useCallback(
     values => {
       const { amount, sourceId } = values;
@@ -182,17 +174,9 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
           )}
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            variant="contained"
-            color="primary"
-            isSuccessful={isSuccessful}
-            isPending={isSubmitting}
-            disabled={disableButton}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
         <DialogInfo>{t("transfer.info")}</DialogInfo>
       </DialogBottom>

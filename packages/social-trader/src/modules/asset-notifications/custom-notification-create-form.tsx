@@ -3,11 +3,11 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import {
   NotificationSettingConditionType,
   NotificationType,
@@ -52,15 +52,9 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
     mode: "onChange"
   });
 
-  const {
-    watch,
-    formState: { isValid, dirty, isSubmitting, isSubmitted }
-  } = form;
+  const { watch } = form;
 
   const { conditionType } = watch();
-
-  const isSuccessful = isSubmitted && !errorMessage;
-  const disabled = !isValid || !dirty || isSubmitting || isSuccessful;
 
   const isProfit = conditionType === CONDITION_TYPE_VALUES.Profit;
   const isLevel = conditionType === CONDITION_TYPE_VALUES.Level;
@@ -114,16 +108,9 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
         />
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            color="primary"
-            type="submit"
-            isPending={isSubmitting}
-            isSuccessful={isSuccessful}
-            disabled={disabled}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.create")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
     </HookForm>
