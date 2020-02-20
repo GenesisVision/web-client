@@ -63,7 +63,9 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     wallets[0];
 
   useEffect(() => {
-    getRate({ from: followCurrency as CurrencyEnum, to: currency });
+    followCurrency &&
+      currency &&
+      getRate({ from: followCurrency as CurrencyEnum, to: currency });
   }, [followCurrency, currency]);
 
   const onChangeCurrencyFrom = useCallback(
