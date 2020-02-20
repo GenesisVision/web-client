@@ -23,7 +23,7 @@ export const TransferSelectField: React.FC<{
     const [t] = useTranslation();
     return (
       <>
-        <DialogField>
+        <DialogField hide={sourceType !== "Wallet"}>
           <WalletSelect
             name={name}
             label={label}
