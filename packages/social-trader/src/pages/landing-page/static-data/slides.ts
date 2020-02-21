@@ -14,7 +14,7 @@ import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 const CREATE_ACCOUNT_BROKER_ROUTE =
   "create-account?broker=Genesis%20Markets%20Demo";
 
-export type TSlides = {
+export type TSlide = {
   id: number;
   title: string;
   text: string;
@@ -23,7 +23,7 @@ export type TSlides = {
   link: string;
 };
 
-export const slides: TSlides[] = [
+export const slides: TSlide[] = [
   {
     id: 0,
     title: "Trade on Demo",
