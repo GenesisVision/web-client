@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import FirstSlider from "pages/landing-page/components/first-slider/first-slider";
 import NewsList from "pages/landing-page/components/news/news-list";
 import { slides } from "pages/landing-page/static-data/slides";
-import React from "react";
+import React, { useCallback } from "react";
 
 const FirstSliderWithAnimation = dynamic(() =>
   import(
@@ -20,7 +20,7 @@ interface Props {
 
 const _FirstScreen: React.FC<Props> = ({ news }) => {
   const { effectiveConnectionType } = useNetworkStatus();
-  const renderSlider = () => {
+  const renderSlider = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":
       case "3g":
@@ -33,7 +33,7 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
       default:
         return <FirstSlider className="home__grid-row" slidesItems={slides} />;
     }
-  };
+  }, [effectiveConnectionType, slides]);
   return (
     <section className="home__section home__section--first-screen">
       <div className="home__container">
