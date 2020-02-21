@@ -12418,11 +12418,6 @@ rc-util@^4.0.4, rc-util@^4.15.3, rc-util@^4.4.0:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
 
-react-adaptive-hooks@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/react-adaptive-hooks/-/react-adaptive-hooks-0.0.8.tgz#f23d9232eb7f6f4d782c631bbf029f15b4d01eb1"
-  integrity sha512-akbhO9JrE3ACpjNJpvHKgeWtM9YSNH73tBuBeSCxECGG8SkXMm1ZW51Dr2957zUMK3Mxx8G/MYejoHGWZNCQAg==
-
 react-app-polyfill@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.6.tgz#890f8d7f2842ce6073f030b117de9130a5f385f0"
