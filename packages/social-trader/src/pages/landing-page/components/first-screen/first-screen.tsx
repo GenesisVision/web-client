@@ -1,12 +1,12 @@
 import "pages/landing-page/styles/home.scss";
 
 import { PlatformNews } from "gv-api-web";
+import { useNetworkStatus } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import FirstSlider from "pages/landing-page/components/first-slider/first-slider";
 import NewsList from "pages/landing-page/components/news/news-list";
 import { slides } from "pages/landing-page/static-data/slides";
 import React from "react";
-import { useNetworkStatus } from "react-adaptive-hooks/network";
 
 const FirstSliderWithAnimation = dynamic(() =>
   import(
