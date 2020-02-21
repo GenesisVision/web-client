@@ -23,7 +23,6 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
   const renderSlider = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":
-      case "3g":
         return (
           <FirstSliderWithAnimation
             className="home__grid-row"
