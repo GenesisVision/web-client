@@ -32,6 +32,7 @@ export const MANAGER_FILTERING = {
 export const MANAGER_SORTING = "ByProfitDesc";
 
 export enum MANAGER_HISTORY_TAB {
+  FOLLOW = "follow",
   PROGRAMS = "programs",
   FUNDS = "funds"
 }

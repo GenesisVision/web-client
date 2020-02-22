@@ -14,6 +14,7 @@ export enum FUND_ASSET_TYPE {
 }
 
 const _FundAsset: React.FC<Props> = ({
+  bottomOffset = true,
   url,
   current: percent,
   target: mandatoryFundPercent,
@@ -56,6 +57,7 @@ const _FundAsset: React.FC<Props> = ({
             "fund-asset--default",
             className,
             {
+              "fund-asset--bottom-offset": bottomOffset,
               "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
             }
           )}
@@ -85,6 +87,7 @@ const _FundAsset: React.FC<Props> = ({
 };
 
 interface Props extends FundAssetInfo {
+  bottomOffset?: boolean;
   currency: Currency;
   type: FUND_ASSET_TYPE;
   last: boolean;

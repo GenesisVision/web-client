@@ -7,6 +7,7 @@ import { IFundAssetContainerProps } from "../fund-asset-container";
 import FundAssetTooltip from "./fund-asset-tooltip";
 
 const _FundAssetTooltipContainer: React.FC<Props> = ({
+  bottomOffset,
   asset,
   idx,
   assetsLength,
@@ -25,6 +26,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
       )}
     >
       <FundAsset
+        bottomOffset={bottomOffset}
         url={asset.url}
         current={asset.percent}
         target={asset.mandatoryFundPercent}
@@ -48,6 +50,7 @@ const FundAssetTooltipContainer = React.memo(_FundAssetTooltipContainer);
 export default FundAssetTooltipContainer;
 
 interface OwnProps {
+  bottomOffset?: boolean;
   assetsLength: number;
   asset: PlatformAssetFull;
   idx: number;

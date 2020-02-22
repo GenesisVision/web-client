@@ -43,8 +43,9 @@ const _ProgramOpenPositions: React.FC<Props> = ({
           {t(`program-details-page.history.open-positions.${column.name}`)}
         </span>
       )}
-      renderBodyRow={position => (
+      renderBodyRow={(position, _, updateItems) => (
         <ProgramOpenPositionsRow
+          updateItems={updateItems}
           data={data!}
           position={position}
           currency={currency}
