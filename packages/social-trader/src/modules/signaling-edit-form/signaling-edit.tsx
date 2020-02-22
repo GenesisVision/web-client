@@ -20,7 +20,6 @@ const _SignalingEdit: React.FC<Props> = ({
   followInfo,
   inDialog,
   showFields,
-  isSignalProgram,
   onSubmit
 }) => {
   const [t] = useTranslation();
@@ -43,19 +42,16 @@ const _SignalingEdit: React.FC<Props> = ({
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       {showFields && (
         <SignalsFeeFormPartial
-          isSignalProgram={isSignalProgram}
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
         />
       )}
 
-      {!isSignalProgram ? (
-        inDialog ? (
-          <DialogButtons>{renderButton()}</DialogButtons>
-        ) : (
-          renderButton()
-        )
-      ) : null}
+      {inDialog ? (
+        <DialogButtons>{renderButton()}</DialogButtons>
+      ) : (
+        renderButton()
+      )}
     </HookForm>
   );
 };
@@ -68,7 +64,6 @@ export interface IProgramSignalFormValues {
 interface Props {
   editError?: boolean;
   followInfo: FollowCreateAssetPlatformInfo;
-  isSignalProgram?: boolean;
   inDialog?: boolean;
   showFields: boolean;
   successFee?: number;

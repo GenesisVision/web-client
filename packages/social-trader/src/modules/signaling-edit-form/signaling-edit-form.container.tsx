@@ -13,8 +13,7 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   onApply = () => {},
   showFields = true,
   successFee,
-  volumeFee,
-  isSignalProgram
+  volumeFee
 }) => {
   const followInfo = useSelector(createFollowInfoSelector);
   const { sendRequest: editSignalRequest, errorMessage } = useApiRequest({
@@ -35,7 +34,6 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
     <SignalingEdit
       editError={!!errorMessage}
       followInfo={followInfo}
-      isSignalProgram={isSignalProgram}
       inDialog={inDialog}
       showFields={showFields}
       successFee={successFee}
@@ -52,7 +50,6 @@ interface Props {
   successFee?: number;
   volumeFee?: number;
   onApply?: VoidFunction;
-  isSignalProgram?: boolean;
 }
 
 export const SignalingEditFormContainer = React.memo(
