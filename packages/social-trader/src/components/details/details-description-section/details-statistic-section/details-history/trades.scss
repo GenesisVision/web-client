@@ -55,47 +55,9 @@
   }
 
   &__cell {
-    @include adaptive-padding(right, $padding-medium);
-    @include vertical-paddings($padding-xxsmall);
-
-    &--direction {
-      width: 10%;
-      min-width: 83px;
-    }
-
-    &--symbol {
-      width: 16%;
-      min-width: 80px;
-    }
-
-    &--volume {
-      width: 16%;
-      min-width: 90px;
-    }
-
-    &--price {
-      width: 16%;
-      min-width: 95px;
-    }
-
     &--profit {
-      width: 16%;
-      min-width: 90px;
-    }
-
-    &--date {
-      width: 23%;
-      min-width: 168px;
-    }
-
-    &--ticket {
-      width: 16%;
-      min-width: 83px;
-    }
-
-    &--entry {
-      width: 16%;
-      min-width: 62px;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
