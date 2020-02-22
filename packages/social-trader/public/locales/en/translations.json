@@ -1248,6 +1248,7 @@
     "member-since": "Member since",
     "history": {
       "tabs": {
+        "follow": "Follow",
         "programs": "Programs",
         "funds": "Funds"
       }

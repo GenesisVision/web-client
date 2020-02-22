@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { MANAGER_HISTORY_TAB } from "../manager.constants";
 import { fetchManagerAssetsCount } from "../services/manager.service";
 
+const ManagerFollow = dynamic(() => import("./manager-follow-table"));
 const ManagerFunds = dynamic(() => import("./manager-funds-table"));
 
 const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
@@ -43,12 +44,20 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
           label={t("manager-page.history.tabs.funds")}
           count={fundsCount}
         />
+        <GVTab
+          value={MANAGER_HISTORY_TAB.FOLLOW}
+          label={t("manager-page.history.tabs.follow")}
+          count={fundsCount}
+        />
       </DetailsBlockTabs>
       {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
         <ManagerPrograms title={title} ownerId={ownerId} />
       )}
       {tab === MANAGER_HISTORY_TAB.FUNDS && (
         <ManagerFunds title={title} ownerId={ownerId} />
+      )}
+      {tab === MANAGER_HISTORY_TAB.FOLLOW && (
+        <ManagerFollow title={title} ownerId={ownerId} />
       )}
     </DetailsBlock>
   );
