@@ -1,4 +1,9 @@
-import { ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME
+} from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { composeRequestValueFunc } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
@@ -47,14 +52,17 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
     currentPage: page
   });
 
+  const dateRangeValues = composeRequestValueFunc(
+    DATE_RANGE_MIN_FILTER_NAME,
+    DATE_RANGE_MAX_FILTER_NAME
+  )(dateRange);
   return {
     ...composeFilters(FUNDS_TABLE_FILTERS, {
       ...DEFAULT_FUND_TABLE_FILTERS,
       ...other
     }),
     ...skipAndTake,
-    dateFrom: dateRange.dateStart,
-    dateTo: dateRange.dateEnd,
+    ...dateRangeValues,
     showIn: showIn || accountCurrency,
     sorting,
     showFavorites
