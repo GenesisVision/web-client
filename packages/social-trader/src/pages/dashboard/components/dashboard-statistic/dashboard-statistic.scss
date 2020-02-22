@@ -24,6 +24,10 @@
   &__event-description {
     display: flex;
     align-items: center;
+    white-space: normal;
+  }
+  &__event-description-logo {
+    @include adaptive-margin(right, $padding-xxsmall);
   }
   &__create-block {
     display: flex;
