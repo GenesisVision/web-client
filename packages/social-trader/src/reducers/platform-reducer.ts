@@ -5,6 +5,7 @@ import {
   EventFilters,
   FollowCreateAssetPlatformInfo,
   FundCreateAssetPlatformInfo,
+  PlatformCurrencyInfo,
   PlatformInfo,
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
@@ -90,17 +91,10 @@ export const fundMinWithdrawAmountSelector = apiFieldSelector<
 
 export const minTransferAmountsSelector = apiFieldSelector<
   PlatformInfo,
-  AmountWithCurrency[]
+  PlatformCurrencyInfo[]
 >(
   platformDataSelector,
-  fieldSelector(state => [
-    { currency: "BTC", amount: 0.00000001 },
-    { currency: "ETH", amount: 0.00000001 },
-    { currency: "USD", amount: 0.01 },
-    { currency: "EUR", amount: 0.01 },
-    { currency: "USDT", amount: 0.0001 },
-    { currency: "GVT", amount: 0.0001 }
-  ]),
+  fieldSelector(state => state.commonInfo.platformCurrencies),
   []
 );
 

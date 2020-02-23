@@ -89,8 +89,8 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
   const minAmountInCur = formatCurrencyValue(
     safeGetElemFromArray(
       minAmounts,
-      amount => amount.currency === selectedSourceItem.currency
-    ).amount,
+      amount => amount.name === selectedSourceItem.currency
+    ).minConvertAmount,
     selectedSourceItem.currency
   );
 
