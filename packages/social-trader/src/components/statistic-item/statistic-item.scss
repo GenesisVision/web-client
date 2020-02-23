@@ -78,7 +78,6 @@
   }
   &--half {
     margin-right: 0 !important;
-    @include width(70px);
     @include media-breakpoint-landscape-phone() {
       width: auto;
       box-sizing: border-box;
