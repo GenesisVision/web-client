@@ -68,14 +68,14 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
         </BlurContainer>
       </div>
       {equivalent !== undefined && equivalentCurrency !== undefined ? (
-        <div className="statistics-item__equivalent">
+        <MutedText>
           <NumberFormat
             value={formatCurrencyValue(equivalent, equivalentCurrency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${equivalentCurrency}`}
           />
-        </div>
+        </MutedText>
       ) : null}
     </div>
   );
