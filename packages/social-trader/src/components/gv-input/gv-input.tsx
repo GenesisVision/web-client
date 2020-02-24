@@ -1,6 +1,7 @@
 import "./gv-input.scss";
 
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import React from "react";
 
 const _GvInput: React.FC<Props> = ({
@@ -36,7 +37,7 @@ const _GvInput: React.FC<Props> = ({
               focused || adornment || (value !== undefined && value !== "")
           })}
         >
-          {label}
+          <MutedText big>{label}</MutedText>
         </label>
       )}
       <div
