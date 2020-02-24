@@ -32,12 +32,8 @@ $avatar-size: 32px;
   }
 
   &__title {
-    letter-spacing: 1px;
     @include adaptive-margin(right, $padding-small);
     @include adaptive-margin(bottom, $padding-big);
-    color: $text-dark-color;
-    font-weight: 600;
-    @include font-size($font-size-xsmall);
   }
 
   &__link {
@@ -104,11 +100,8 @@ $avatar-size: 32px;
     letter-spacing: 0.2px;
   }
   &__date {
-    @include font-size($font-size);
     line-height: $line-height;
     @include adaptive-margin(bottom, $padding-xsmall);
-    color: $text-dark-color;
-    letter-spacing: 0.4px;
   }
 
   &--is-unread {
