@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
@@ -19,21 +20,21 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
 }) => {
   return (
     <th
-      className={classNames("table__cell table__cell--head", className, {
-        "table__cell--sortable": sortable
-      })}
+      className={classNames("table__cell table__cell--head", className)}
       onClick={sortable ? onClick : undefined}
     >
-      <span
-        className={classNames({
-          "sortable-asc":
-            sortable && sortingDirection === SORTING_DIRECTION.ASC,
-          "sortable-desc":
-            sortable && sortingDirection === SORTING_DIRECTION.DESC
-        })}
-      >
-        {children}
-      </span>
+      {sortable ? (
+        <span
+          className={classNames({
+            "sortable-asc": sortingDirection === SORTING_DIRECTION.ASC,
+            "sortable-desc": sortingDirection === SORTING_DIRECTION.DESC
+          })}
+        >
+          {children}
+        </span>
+      ) : (
+        <MutedText>{children}</MutedText>
+      )}
     </th>
   );
 };

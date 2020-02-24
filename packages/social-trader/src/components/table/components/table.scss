@@ -121,7 +121,6 @@ $view-svg-size: 15px;
     &#{&} {
       &--head {
         @include adaptive-padding(right, $padding-small/2);
-        opacity: 0.3;
 
         &:last-child {
           @include adaptive-padding(right, $padding-small);
@@ -129,7 +128,6 @@ $view-svg-size: 15px;
       }
       &--sortable {
         cursor: pointer;
-        @include adaptive-padding(right, $padding-small/2);
         opacity: 0.6;
       }
     }
