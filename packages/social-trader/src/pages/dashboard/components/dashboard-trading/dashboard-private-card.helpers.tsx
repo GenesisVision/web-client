@@ -1,6 +1,7 @@
 import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
 import { useToLink } from "components/link/link.helper";
+import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import { BrokerTradeServerType, ProgramMinInvestAmount } from "gv-api-web";
@@ -33,15 +34,16 @@ export const MakeProgramButton: React.FC<{
     </TableCardActionsItem>
   ) : (
     <GVButton variant="text" color="secondary">
-      <Hint
-        content={label}
-        className="dashboard-trading__disable-button"
-        vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t(
-          "dashboard-page.trading.tooltips.is-not-enough-money",
-          { value: necessaryMoney }
-        )}
-      />
+      <MutedText>
+        <Hint
+          content={label}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
+          tooltipContent={t(
+            "dashboard-page.trading.tooltips.is-not-enough-money",
+            { value: necessaryMoney }
+          )}
+        />
+      </MutedText>
     </GVButton>
   );
 });
