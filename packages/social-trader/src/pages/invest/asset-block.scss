@@ -33,8 +33,6 @@
   }
   &__description {
     max-width: 500px;
-    color: $text-dark-color;
-    @include font-size($font-size-common);
     @include adaptive-margin(bottom, $padding-big);
     text-align: center;
     &--side {

@@ -6,6 +6,7 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link, { ToType } from "components/link/link";
+import { MutedText } from "components/muted-text/muted-text";
 import DashboardHorizontalWindowList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-window-list";
 import { InvestAssetType } from "pages/invest/invest.types";
 import React from "react";
@@ -50,7 +51,7 @@ export const AssetBlock: React.FC<Props> = ({
             "asset-block__description--side": side
           })}
         >
-          {description}
+          <MutedText>{description}</MutedText>
         </div>
         <Link to={investLink}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
