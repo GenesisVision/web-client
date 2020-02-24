@@ -1,6 +1,7 @@
 import "./gv-checkbox.scss";
 
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
 
@@ -55,7 +56,11 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
         </div>
         <div className="gv-checkbox__track" />
       </div>
-      {label && <div className="gv-checkbox__label">{label}</div>}
+      {label && (
+        <div className="gv-checkbox__label">
+          <MutedText big>{label}</MutedText>
+        </div>
+      )}
       {error && <div className="gv-checkbox__error">{error}</div>}
     </div>
   );
