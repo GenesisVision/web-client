@@ -2,15 +2,6 @@
 @import "~shared/styles/_sizes";
 
 .profile-image {
-  &__requirements {
-    font-size: $font-size-common;
-    color: $label-color;
-    letter-spacing: 0.2px;
-    margin-bottom: 16px;
-    width: 250px;
-    line-height: 1.4;
-  }
-
   &__submit-btn {
     margin-top: 40px;
     color: $primary-color;

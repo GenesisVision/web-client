@@ -33,9 +33,6 @@
       flex: 1;
     }
   }
-  &__table-header {
-    @include details-block-horizontal-paddings();
-  }
   &__title,
   &__link-block {
     @include adaptive-padding(bottom, $padding-xsmall);

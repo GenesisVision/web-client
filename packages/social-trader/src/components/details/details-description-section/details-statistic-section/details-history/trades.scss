@@ -26,9 +26,7 @@
   }
 
   &__delay-hint {
-    color: $label-color;
     @include adaptive-margin(right, $padding-xxsmall);
-    @include font-size($font-size-common);
   }
 
   &__history-popup-item {
@@ -38,7 +36,6 @@
 
   &__history-popup-item-name {
     width: 200px;
-    color: $label-color;
   }
 
   &__history-popup-item-value {
