@@ -1,19 +1,29 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
 
 .gv-tab {
+  @extend .muted;
   cursor: pointer;
-  color: $text-color;
-  @include font-size($font-size-common);
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0.1px;
   @include adaptive-padding(bottom, $padding-xxxsmall);
+  @include transition(color);
+  &::after {
+    @include transition(width);
+    content: "";
+    display: block;
+    padding-top: 0.2em;
+    width: 0;
+    border-bottom: 0.15em solid $primary-color;
+  }
   &:not(:last-child) {
     @include adaptive-margin(right, $padding-xsmall);
   }
   white-space: nowrap;
   &__count {
+    @include transition(color, background-color);
     display: inline-block;
     text-align: center;
     min-width: 8px;
@@ -27,7 +37,6 @@
   }
 
   a {
-    color: $text-color;
     text-decoration: none;
     &:hover {
       text-decoration: none;
@@ -35,17 +44,14 @@
   }
 
   &--active {
+    cursor: default;
     color: $text-light-color;
     .gv-tab__count {
       background-color: rgba($primary-color, 0.1);
       color: $primary-color;
     }
     &::after {
-      content: "";
-      display: block;
-      padding-top: 0.2em;
-      width: 1em;
-      border-bottom: 0.15em solid $primary-color;
+      width: 13px;
     }
     a {
       color: $text-light-color;
