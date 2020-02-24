@@ -76,10 +76,7 @@ $card-avatar-size: 80px;
     transition-property: color;
   }
   &__subtitle {
-    color: $label-color;
-    @include font-size($font-size-common);
     margin-bottom: 10px;
-    display: block;
   }
   &__main-info {
     margin-left: $padding-small/4;
