@@ -1,3 +1,4 @@
+import { MutedText } from "components/muted-text/muted-text";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -13,7 +14,9 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
   return (
     <>
       <div className="details-trades__delay-hint">
-        {label} {t("program-details-page.history.open-positions.delay")}
+        <MutedText>
+          {label} {t("program-details-page.history.open-positions.delay")}
+        </MutedText>
       </div>
       <Tooltip
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
