@@ -1,0 +1,15 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.muted-text {
+  @include font-size($font-size-common);
+  color: $label-color;
+  letter-spacing: 0.4px;
+  &--no-wrap {
+    white-space: nowrap;
+  }
+  &--bold {
+    font-weight: 600;
+  }
+}
