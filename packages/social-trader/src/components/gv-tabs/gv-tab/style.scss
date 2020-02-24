@@ -37,6 +37,8 @@
   }
 
   a {
+    @extend .muted;
+    @include transition(color);
     text-decoration: none;
     &:hover {
       text-decoration: none;
