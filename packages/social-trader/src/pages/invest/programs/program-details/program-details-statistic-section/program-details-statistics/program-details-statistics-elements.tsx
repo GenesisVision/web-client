@@ -2,6 +2,7 @@ import "components/details/details-description-section/details-statistic-section
 
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
+import { MutedText } from "components/muted-text/muted-text";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -89,7 +90,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 )}
               >
                 <span className="details-statistics__label tooltip__label">
-                  {t("program-details-page.statistics.period")}
+                  <MutedText>
+                    {t("program-details-page.statistics.period")}
+                  </MutedText>
                 </span>
               </Tooltip>
               <ProgramPeriodLine
