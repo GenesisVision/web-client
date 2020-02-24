@@ -35,15 +35,4 @@
       opacity: 1;
     }
   }
-
-  &__date-range {
-    color: $text-color;
-    font-size: $font-size-small-mobile;
-    font-weight: 600;
-    letter-spacing: 0;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      letter-spacing: 0.2px;
-    }
-  }
 }

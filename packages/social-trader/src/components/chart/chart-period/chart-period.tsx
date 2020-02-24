@@ -2,6 +2,7 @@ import "./chart-period.scss";
 
 import classNames from "classnames";
 import GVButton from "components/gv-button";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -46,11 +47,11 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
           </GVButton>
         ))}
       </div>
-      <div className="chart-period__date-range">
+      <MutedText bold>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
-      </div>
+      </MutedText>
     </div>
   );
 };
