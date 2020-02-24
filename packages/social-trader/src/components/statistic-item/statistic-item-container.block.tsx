@@ -8,8 +8,7 @@ export const StatisticItemContainerBlock: React.FC<IStatisticItemContainerBlockP
   className,
   children,
   withPadding = true,
-  half,
-  small
+  half
 }) => {
   return (
     <div
@@ -17,8 +16,7 @@ export const StatisticItemContainerBlock: React.FC<IStatisticItemContainerBlockP
         {
           "statistics-item-container--bottom-content": bottomContent,
           "statistics-item-container--with-padding": withPadding,
-          "statistics-item-container--half": half,
-          "statistics-item-container--small": small
+          "statistics-item-container--half": half
         },
         className
       )}
@@ -32,7 +30,6 @@ export interface IStatisticItemContainerBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
   bottomContent?: boolean;
   withPadding?: boolean;
-  small?: boolean;
   half?: boolean;
   className?: string;
 }

@@ -13,30 +13,11 @@
     }
   }
 
-  &__label {
-    color: $label-color;
-    @include font-size($font-size-common);
-    letter-spacing: 0.4px;
-    font-weight: normal;
-    &--small {
-      @include font-size($font-size-small-mobile);
-    }
-    &--loader {
-      opacity: 0.5;
-    }
-    &--no-wrap {
-      white-space: nowrap;
-    }
-  }
-
   &__value {
     @include font-size($font-size-paragraph);
     letter-spacing: 0.6px;
     white-space: nowrap;
 
-    &--small {
-      @include font-size($font-size-common-mobile);
-    }
     &--accent {
       font-weight: 600;
     }
