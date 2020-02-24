@@ -60,11 +60,7 @@ $arrow-font-size: $font-size-h4;
   }
 
   &__adornment-text {
-    font-size: 11px;
-    color: $text-color;
-    letter-spacing: 0.14px;
     font-weight: 600;
-    opacity: 0.3;
     position: absolute;
     top: $padding-upper-medium/2;
     display: flex;
