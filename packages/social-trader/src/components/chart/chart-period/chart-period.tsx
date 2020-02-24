@@ -29,7 +29,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   );
   return (
     <div className="chart-period">
-      <div className="chart-period__period">
+      <MutedText>
         {ChartPeriodTypeValues.map(period => (
           <GVButton
             testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
@@ -46,7 +46,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
             {t(`chart-period.${ChartPeriodType[period]}-short`)}
           </GVButton>
         ))}
-      </div>
+      </MutedText>
       <MutedText bold>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
