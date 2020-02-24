@@ -1,6 +1,7 @@
 import "rc-slider/assets/index.css";
 import "./filter.scss";
 
+import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -37,7 +38,7 @@ const _Filter: React.FC<Props> = ({
   return (
     <TableToolbarItemBlock>
       <div className="filter" onClick={setAnchor}>
-        <div className="filter__label">{label}</div>
+        <MutedText>{label}</MutedText>
         <div className="filter__value">{renderValueText(value)}</div>
         <FilterArrowIcon isOpen={anchor !== undefined} />
       </div>
