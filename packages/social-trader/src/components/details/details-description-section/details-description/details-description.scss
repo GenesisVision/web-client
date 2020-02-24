@@ -75,14 +75,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
-  &__author-btn {
-    padding: 0;
-    @include font-size($font-size-common);
-    letter-spacing: 0.19px;
-    font-weight: bold;
-    color: $text-color;
-  }
-
   &__controls {
     display: flex;
     flex-wrap: wrap;
