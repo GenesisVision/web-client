@@ -15,25 +15,6 @@
     @include adaptive-margin(bottom, $padding-medium);
   }
 
-  &-caption {
-    @include adaptive-padding(top, $padding-xsmall);
-    @include font-size($font-size-small);
-    color: $label-color;
-    letter-spacing: 0.4px;
-    width: 100%;
-
-    &.hint {
-      cursor: pointer;
-    }
-  }
-
-  &-caption-tooltip-content {
-    width: 248px;
-    @include font-size($font-size-small);
-    line-height: 1.6;
-    color: $text-light-color;
-  }
-
   &--hidden {
     display: none;
   }

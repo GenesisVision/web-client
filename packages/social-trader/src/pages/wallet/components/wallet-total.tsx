@@ -1,3 +1,5 @@
+import "./wallet-title-block.scss";
+
 import Page from "components/page/page";
 import {
   withBlurLoader,
@@ -16,9 +18,9 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
     <Page title={t("wallet-page.title")}>
-      <div className="wallet-balance">
-        <div className="wallet-balance__wrapper">
-          <div className="wallet-balance__title">
+      <div className="wallet-title-block">
+        <div className="wallet-title-block__wrapper">
+          <div className="wallet-title-block__title">
             <h1>{t("wallet-page.title")}</h1>
           </div>
           <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />

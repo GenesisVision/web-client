@@ -29,24 +29,6 @@
   &__event-description-logo {
     @include adaptive-margin(right, $padding-xxsmall);
   }
-  &__create-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  &__create-block-text {
-    font-size: $font-size-small;
-    color: $text-dark-color;
-    margin-bottom: $padding-small;
-  }
-  &__create-block-link:not(:last-child) {
-    margin-right: $padding-small;
-  }
-  &__create-block-links {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: $padding-small;
-  }
   &__container.details-block,
   &__container .table {
     padding-bottom: 0;

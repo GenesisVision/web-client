@@ -2,7 +2,7 @@ import "./assets-field.scss";
 
 import AssetField from "components/assets/asset-fields/asset-field";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import Label from "components/label/label";
+import { MutedText } from "components/muted-text/muted-text";
 import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,9 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   return (
     <AssetField wide>
       <div className="assets-field__text">
-        <Label>{t("create-fund-page.settings.fields.mandatory-assets")}</Label>
+        <MutedText small>
+          {t("create-fund-page.settings.fields.mandatory-assets")}
+        </MutedText>
       </div>
       <GVHookFormField
         name={name}

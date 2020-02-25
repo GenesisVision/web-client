@@ -33,13 +33,7 @@
 }
 
 .details-investment-heading {
-  @include font-size($font-size-small);
   text-transform: uppercase;
-  letter-spacing: 0.15px;
-  color: $label-color;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .details-investment-footer {

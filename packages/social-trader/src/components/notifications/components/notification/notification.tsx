@@ -3,6 +3,7 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { MutedText } from "components/muted-text/muted-text";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 import NewsIcon from "media/news.svg";
@@ -96,7 +97,9 @@ const _Notification: React.FC<INotificationProps> = props => {
 
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">{dayjs(date).format("HH:mm")}</div>
+        <div className="notification__date">
+          <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
+        </div>
       </div>
     </div>
   );

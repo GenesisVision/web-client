@@ -1,4 +1,5 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
@@ -21,7 +22,9 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
 }> = ({ label, value, currency }) => (
   <PopoverContentListItem>
     <div className="details-trades__history-popup-item">
-      <div className="details-trades__history-popup-item-name">{label}</div>
+      <div className="details-trades__history-popup-item-name">
+        <MutedText>{label}</MutedText>
+      </div>
       <div className="details-trades__history-popup-item-value">
         {value} {currency}
       </div>

@@ -10,18 +10,12 @@
     @include width($padding-medium);
   }
   &__caption {
-    @include font-size($font-size-small);
-    color: $label-color;
-    letter-spacing: 0.4px;
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
 
   &__hint {
-    @include font-size($font-size-small);
-    color: $label-color;
-    letter-spacing: 0.4px;
     width: 100%;
 
     &.hint {

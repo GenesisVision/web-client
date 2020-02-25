@@ -83,9 +83,6 @@
 
   &__kyc-disclaimer {
     @include vertical-paddings($padding-xsmall);
-    font-size: $font-size-small;
-    color: $label-color;
-    letter-spacing: 0.4px;
   }
 
   &__btn-verify {

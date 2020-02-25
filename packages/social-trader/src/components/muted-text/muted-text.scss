@@ -1,11 +1,17 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
 
 .muted-text {
-  @include font-size($font-size-common);
-  color: $label-color;
+  @extend .muted;
   letter-spacing: 0.4px;
+  &--small {
+    @include font-size($font-size-small);
+  }
+  &--big {
+    @include font-size($font-size-h4);
+  }
   &--no-wrap {
     white-space: nowrap;
   }

@@ -1,3 +1,5 @@
+import "./wallet-title-block.scss";
+
 import WalletImage from "components/avatar/wallet-image/wallet-image";
 import Page from "components/page/page";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -13,16 +15,16 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
   const [t] = useTranslation();
   return (
     <Page title={info.title}>
-      <div className="wallet-balance">
-        <div className="wallet-balance__wrapper">
-          <div className="wallet-balance__title">
+      <div className="wallet-title-block">
+        <div className="wallet-title-block__wrapper">
+          <div className="wallet-title-block__title">
             <h1>
               {info.title}
               <span>&nbsp;{t("wallet-page.wallet")}</span>
             </h1>
             <WalletImage
               url={info.logo}
-              imageClassName="wallet-balance__title-icon"
+              imageClassName="wallet-title-block__title-icon"
               alt={info.currency}
             />
           </div>

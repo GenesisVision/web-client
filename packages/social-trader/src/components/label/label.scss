@@ -1,9 +1,0 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_sizes";
-
-.label {
-  @include font-size($font-size-small);
-  color: $label-color;
-  letter-spacing: 0.4px;
-}

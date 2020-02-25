@@ -32,17 +32,6 @@
       @include font-size($font-size-h1);
     }
   }
-
-  &__equivalent {
-    @include font-size($font-size-common-mobile);
-    letter-spacing: 0.3px;
-    color: $label-color;
-    @include media-breakpoint-landscape-phone() {
-      @include font-size($font-size-common);
-      letter-spacing: 0.3px;
-      color: $label-color;
-    }
-  }
 }
 
 .statistics-item-container {

@@ -25,10 +25,7 @@
 
   &__info {
     @include adaptive-margin(top, $padding-upper-medium);
-    opacity: 0.5;
-    @include font-size($font-size-xsmall);
     line-height: 1.64;
-    letter-spacing: 0.2px;
     text-align: center;
   }
 
