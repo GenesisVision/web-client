@@ -8,6 +8,7 @@ const _NewsItem: React.FC<PlatformNews> = ({ title, body, isHot, url }) => (
       href={url}
       className="news-list__item-link"
       target="_blank"
+      rel="noopener noreferrer"
     >
       <div className="news-list__item-title">
         {isHot && <span className="news-list__item-tag">HOT</span>}
