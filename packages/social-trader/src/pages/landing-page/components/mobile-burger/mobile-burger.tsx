@@ -10,6 +10,7 @@ interface Props {
 
 export const MobileBurger: React.FC<Props> = ({ onClick, menuOpen }) => (
   <button
+    aria-label="Menu"
     onClick={onClick}
     className={classNames("mobile-burger", {
       "mobile-burger--open-menu": menuOpen

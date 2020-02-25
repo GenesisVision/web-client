@@ -64,13 +64,19 @@ export const SliderControls: React.FC<{
   return (
     <div className="slider__controls">
       <button
+        aria-label="Left"
         type="button"
         className="slider__arrow  slider__arrow--left"
         onClick={onClickLeft}
       >
         <Arrow />
       </button>
-      <button type="button" className="slider__arrow" onClick={onClickRight}>
+      <button
+        aria-label="Right"
+        type="button"
+        className="slider__arrow"
+        onClick={onClickRight}
+      >
         <Arrow />
       </button>
     </div>
