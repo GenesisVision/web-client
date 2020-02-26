@@ -19,7 +19,7 @@ interface Props {
 }
 
 const _FirstScreen: React.FC<Props> = ({ news }) => {
-  const { effectiveConnectionType } = useNetworkStatus();
+  const { effectiveConnectionType = "4g" } = useNetworkStatus();
   const renderSlider = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":

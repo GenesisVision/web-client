@@ -63,21 +63,30 @@
     }
   }
   &__img {
-    will-change: opacity, transform;
     max-height: 100%;
     vertical-align: middle;
     position: absolute;
     max-width: 100%;
     top: 50%;
     left: 50%;
-    opacity: 0;
-    transform: translate3d(-30%, -50%, 0);
-    animation: 0.5s slideLeft forwards;
+    transform: translate3d(-50%, -50%, 0);
+    //opacity: 0;
+    //transform: translate3d(-30%, -50%, 0);
+    //animation: 0.5s slideLeft forwards;
 
-    &--bg {
+    &--animation {
+      will-change: opacity, transform;
+      transform: translate3d(-30%, -50%, 0);
+      opacity: 0;
+      animation: 0.5s slideLeft forwards;
+    }
+
+    &--animation-bg {
+      will-change: opacity, transform;
+      opacity: 0;
       animation-name: appear;
       animation-delay: 700ms;
-      transform: translate3d(-50%, -50%, 0);
+      //transform: translate3d(-50%, -50%, 0);
     }
   }
 

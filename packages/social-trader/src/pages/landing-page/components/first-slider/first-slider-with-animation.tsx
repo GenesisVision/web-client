@@ -66,7 +66,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
             className="slider__img-animate"
             style={rest as any}
           >
-            <SliderImg item={item} />
+            <SliderImg item={item} animation />
           </animated.div>
         ))}
       </SliderImgWrapper>
