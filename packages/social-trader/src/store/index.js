@@ -1,6 +1,4 @@
 import apiErrorHandlerMiddleware from "middlewares/api-error-handler-middleware/api-error-handler-middleware";
-import clearOnceMetaMiddleware from "middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
-import gtmMiddleware from "middlewares/gtm-middleware/gtm-middleware";
 import refreshTokenMiddleware from "middlewares/refresh-token-middleware/refresh-token-middleware";
 import { updateAccountCurrencyMiddleware } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import {
@@ -28,8 +26,6 @@ if (reduxDevTools) {
 }
 const middleware = [
   debounceMiddleware(),
-  gtmMiddleware(),
-  clearOnceMetaMiddleware(),
   thunk,
   refreshTokenMiddleware(authService, authApi.updateAuthToken.bind(authApi)),
   createPromise({ promiseTypeSuffixes: suffixes }),
