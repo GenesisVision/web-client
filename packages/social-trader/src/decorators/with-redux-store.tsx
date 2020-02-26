@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
 import authService from "services/auth-service";
+import refreshToken from "utils/auth";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
 const isServer = typeof window === "undefined";
@@ -40,6 +41,7 @@ const withReduxStore = (
       const token = authService.getAuthArg(ctx.ctx);
       if (token) {
         reduxStore.dispatch(authActions.updateTokenAction(true));
+        refreshToken(ctx.ctx, token);
       }
 
       if (initialActions) {
