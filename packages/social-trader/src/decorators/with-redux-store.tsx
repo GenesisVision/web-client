@@ -15,11 +15,12 @@ const withReduxStore = (
 ) => (WrappedComponent: AppType | any) => {
   const getOrCreateStore = (initialState?: RootState) => {
     const state = initializeStore(initialState);
+    if (isServer) return state;
 
-    if (!isServer && !(window as any)[__NEXT_REDUX_STORE__]) {
+    if (!(window as any)[__NEXT_REDUX_STORE__])
       (window as any)[__NEXT_REDUX_STORE__] = state;
-    }
-    return state as any;
+
+    return (window as any)[__NEXT_REDUX_STORE__];
   };
 
   return class extends Component<{
