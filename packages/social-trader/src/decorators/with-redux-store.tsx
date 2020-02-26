@@ -1,10 +1,8 @@
 import authActions from "actions/auth-actions";
-import platformActions from "actions/platform-actions";
 import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
-import { Dispatch } from "redux";
 import authService from "services/auth-service";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
@@ -15,16 +13,15 @@ const withReduxStore = (
   initializeStore: InitializeStoreType,
   initialActions?: any[]
 ) => (WrappedComponent: AppType | any) => {
-  function getOrCreateStore(initialState?: RootState) {
-    if (isServer) {
-      return initializeStore(initialState);
-    }
+  const getOrCreateStore = (initialState?: RootState) => {
+    const state = initializeStore(initialState);
 
-    if (!(window as any)[__NEXT_REDUX_STORE__]) {
-      (window as any)[__NEXT_REDUX_STORE__] = initializeStore(initialState);
+    if (!isServer && !(window as any)[__NEXT_REDUX_STORE__]) {
+      (window as any)[__NEXT_REDUX_STORE__] = state;
     }
-    return (window as any)[__NEXT_REDUX_STORE__];
-  }
+    return state as any;
+  };
+
   return class extends Component<{
     initialReduxState: RootState;
     actions: any;
