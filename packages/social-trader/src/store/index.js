@@ -1,5 +1,4 @@
 import apiErrorHandlerMiddleware from "middlewares/api-error-handler-middleware/api-error-handler-middleware";
-import refreshTokenMiddleware from "middlewares/refresh-token-middleware/refresh-token-middleware";
 import { updateAccountCurrencyMiddleware } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import {
   FAILURE_SUFFIX,
@@ -11,8 +10,6 @@ import debounceMiddleware from "redux-debounced";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
-import authApi from "services/api-client/auth-api";
-import authService from "services/auth-service";
 
 import rootReducer from "../reducers";
 
@@ -27,7 +24,6 @@ if (reduxDevTools) {
 const middleware = [
   debounceMiddleware(),
   thunk,
-  refreshTokenMiddleware(authService, authApi.updateAuthToken.bind(authApi)),
   createPromise({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX }),
   updateAccountCurrencyMiddleware
