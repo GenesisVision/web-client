@@ -1,5 +1,4 @@
 import apiErrorHandlerMiddleware from "middlewares/api-error-handler-middleware/api-error-handler-middleware";
-import { updateAccountCurrencyMiddleware } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX,
@@ -25,8 +24,7 @@ const middleware = [
   debounceMiddleware(),
   thunk,
   createPromise({ promiseTypeSuffixes: suffixes }),
-  apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX }),
-  updateAccountCurrencyMiddleware
+  apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX })
 ];
 
 const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
