@@ -12,15 +12,17 @@ import filesService from "services/file-service";
 type Position = { y: number };
 
 const Title: React.FC<Position> = ({ children, y }) => {
+  const fontSize = 14;
+  const x = 20;
   return (
     <text
-      fontSize={12}
+      fontSize={fontSize}
       fill="rgba(255,255,255,0.5)"
       fontFamily={
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={20} y={y}>
+      <tspan x={x} y={y}>
         {children}
       </tspan>
     </text>
@@ -28,9 +30,11 @@ const Title: React.FC<Position> = ({ children, y }) => {
 };
 
 const Value: React.FC<Position> = ({ children, y }) => {
+  const fontSize = 16;
+  const x = 220;
   return (
     <text
-      fontSize={16}
+      fontSize={fontSize}
       fill="#fff"
       textAnchor="end"
       fontWeight={"bold"}
@@ -38,7 +42,7 @@ const Value: React.FC<Position> = ({ children, y }) => {
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={230} y={y}>
+      <tspan x={x} y={y}>
         {children}
       </tspan>
     </text>
@@ -46,15 +50,18 @@ const Value: React.FC<Position> = ({ children, y }) => {
 };
 
 const Label: React.FC = ({ children }) => {
+  const fontSize = 14;
+  const x = 56;
+  const y = 31 + fontSize - 3;
   return (
     <text
-      fontSize={12}
+      fontSize={fontSize}
       fill="#fff"
       fontFamily={
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={51} y={31}>
+      <tspan x={x} y={y}>
         {children}
       </tspan>
     </text>
@@ -63,10 +70,14 @@ const Label: React.FC = ({ children }) => {
 
 const Logo: React.FC<{ href?: string }> = ({ href }) => {
   if (!href) return null;
+  const size = 26;
+  const x = 20;
+  const y = 25;
+  const radius = 7;
   return (
     <svg xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <rect id="rect" x="20" y="16" width="21" height="21" rx="7" />
+        <rect id="rect" x={x} y={y} width={size} height={size} rx={radius} />
         <clipPath id="clip">
           <use xlinkHref="#rect" />
         </clipPath>
@@ -74,11 +85,11 @@ const Logo: React.FC<{ href?: string }> = ({ href }) => {
 
       <use xlinkHref="#rect" strokeWidth="0" stroke="black" />
       <image
-        x="20"
-        y="16"
+        x={x}
+        y={y}
         href={filesService.getFileUrl(href)}
-        width="21"
-        height="21"
+        width={size}
+        height={size}
         clipPath="url(#clip)"
       />
     </svg>
@@ -94,20 +105,26 @@ const Banner1 = (props: {
   return (
     <svg
       width="240"
-      height="440"
+      height="400"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="240" height="440" fill="#1F2B35" />
-      <rect y={377} width="240" height="63" fill="#131E26" />
+      <rect width="240" height="400" fill="#1F2B35" />
+      <rect y={337} width="240" height="63" fill="#131E26" />
       <Logo href={props.details.publicInfo.logo} />
       <GV />
       <Label>{props.details.publicInfo.title}</Label>
-      <Title y={62}>Monthly Profit</Title>
-      <Value y={62}>{`${statistic.profitPercent}%`}</Value>
-      <Title y={87}>Equity</Title>
-      <Value y={87}>{`${points.currency}${statistic.balance}`}</Value>
-      <SimpleChart data={points.chart} width={210} height={82} x={20} y={108} />
+      <Title y={92}>Monthly Profit</Title>
+      <Value y={92}>{`${statistic.profitPercent}%`}</Value>
+      <Title y={122}>Equity</Title>
+      <Value y={122}>{`${points.currency}${statistic.balance}`}</Value>
+      <SimpleChart
+        data={points.chart}
+        width={200}
+        height={165}
+        x={20}
+        y={152}
+      />
     </svg>
   );
 };

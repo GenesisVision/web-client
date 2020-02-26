@@ -91,6 +91,12 @@ const Banner1 = (props: {
 }) => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
+
+  let title = props.details.publicInfo.title;
+  if (title.length > 10) {
+    title = title.slice(0, 10) + "...";
+  }
+
   return (
     <svg
       width="728"
@@ -102,7 +108,7 @@ const Banner1 = (props: {
       <rect x="588" width="140" height="89" fill="#131E26" />
       <Logo href={props.details.publicInfo.logo} />
       <GV />
-      <Label>{props.details.publicInfo.title}</Label>
+      <Label>{title}</Label>
       <Title y={39}>Monthly Profit</Title>
       <Value y={39}>{`${statistic.profitPercent} %`}</Value>
       <Title y={66}>Equity</Title>
