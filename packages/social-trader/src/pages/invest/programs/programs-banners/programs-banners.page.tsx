@@ -15,6 +15,8 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
     <Page description={title} title={title}>
       <DetailsBlock horizontalPaddings>
         <embed src={`/api/programs/${program.publicInfo.url}/250x250`} />
+        <embed src={`/api/programs/${program.publicInfo.url}/728x89`} />
+        <embed src={`/api/programs/${program.publicInfo.url}/240x440`} />
       </DetailsBlock>
     </Page>
   );

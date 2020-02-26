@@ -93,13 +93,13 @@ const Banner1 = (props: {
   const statistic = props.chart.statistic;
   return (
     <svg
-      width="250"
-      height="250"
+      width="240"
+      height="440"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="250" height="205" fill="#1F2B35" />
-      <rect y={205} width="250" height="45" fill="#131E26" />
+      <rect width="240" height="440" fill="#1F2B35" />
+      <rect y={377} width="240" height="63" fill="#131E26" />
       <Logo href={props.details.publicInfo.logo} />
       <GV />
       <Label>{props.details.publicInfo.title}</Label>
@@ -146,8 +146,8 @@ const GV = () => {
       height="19"
       viewBox="0 0 97 19"
       fill="none"
-      y={219}
-      x={77}
+      y={359}
+      x={69}
       xmlns="http://www.w3.org/2000/svg"
     >
       <svg

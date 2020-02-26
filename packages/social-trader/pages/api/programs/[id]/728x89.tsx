@@ -20,7 +20,7 @@ const Title: React.FC<Position> = ({ children, y }) => {
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={20} y={y}>
+      <tspan x={138} y={y}>
         {children}
       </tspan>
     </text>
@@ -38,7 +38,7 @@ const Value: React.FC<Position> = ({ children, y }) => {
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={230} y={y}>
+      <tspan x={300} y={y}>
         {children}
       </tspan>
     </text>
@@ -48,13 +48,13 @@ const Value: React.FC<Position> = ({ children, y }) => {
 const Label: React.FC = ({ children }) => {
   return (
     <text
-      fontSize={12}
+      fontSize={14}
       fill="#fff"
       fontFamily={
         "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
       }
     >
-      <tspan x={51} y={31}>
+      <tspan x={25} y={66}>
         {children}
       </tspan>
     </text>
@@ -66,7 +66,7 @@ const Logo: React.FC<{ href?: string }> = ({ href }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <rect id="rect" x="20" y="16" width="21" height="21" rx="7" />
+        <rect id="rect" x="25" y="19" width="25" height="25" rx="7" />
         <clipPath id="clip">
           <use xlinkHref="#rect" />
         </clipPath>
@@ -74,11 +74,11 @@ const Logo: React.FC<{ href?: string }> = ({ href }) => {
 
       <use xlinkHref="#rect" strokeWidth="0" stroke="black" />
       <image
-        x="20"
-        y="16"
+        x="25"
+        y="19"
         href={filesService.getFileUrl(href)}
-        width="21"
-        height="21"
+        width="25"
+        height="25"
         clipPath="url(#clip)"
       />
     </svg>
@@ -93,21 +93,21 @@ const Banner1 = (props: {
   const statistic = props.chart.statistic;
   return (
     <svg
-      width="250"
-      height="250"
+      width="728"
+      height="89"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="250" height="205" fill="#1F2B35" />
-      <rect y={205} width="250" height="45" fill="#131E26" />
+      <rect width="728" height="89" fill="#1F2B35" />
+      <rect x="588" width="140" height="89" fill="#131E26" />
       <Logo href={props.details.publicInfo.logo} />
       <GV />
       <Label>{props.details.publicInfo.title}</Label>
-      <Title y={62}>Monthly Profit</Title>
-      <Value y={62}>{`${statistic.profitPercent}%`}</Value>
-      <Title y={87}>Equity</Title>
-      <Value y={87}>{`${points.currency}${statistic.balance}`}</Value>
-      <SimpleChart data={points.chart} width={210} height={82} x={20} y={108} />
+      <Title y={39}>Monthly Profit</Title>
+      <Value y={39}>{`${statistic.profitPercent} %`}</Value>
+      <Title y={66}>Equity</Title>
+      <Value y={66}>{`${statistic.balance} ${points.currency}`}</Value>
+      <SimpleChart data={points.chart} width={259} height={66} x={329} y={12} />
     </svg>
   );
 };
@@ -146,8 +146,8 @@ const GV = () => {
       height="19"
       viewBox="0 0 97 19"
       fill="none"
-      y={219}
-      x={77}
+      y={35}
+      x={611}
       xmlns="http://www.w3.org/2000/svg"
     >
       <svg
