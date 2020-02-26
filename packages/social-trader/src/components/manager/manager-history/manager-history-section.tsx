@@ -20,13 +20,17 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
   const { tab, setTab } = useTab<MANAGER_HISTORY_TAB>(
     MANAGER_HISTORY_TAB.PROGRAMS
   );
+  const [followCount, setFollowCount] = useState(0);
   const [fundsCount, setFundsCount] = useState(0);
   const [programsCount, setProgramsCount] = useState(0);
   useEffect(() => {
-    fetchManagerAssetsCount(ownerId).then(({ fundsCount, programsCount }) => {
-      setProgramsCount(programsCount);
-      setFundsCount(fundsCount);
-    });
+    fetchManagerAssetsCount(ownerId).then(
+      ({ followCount, fundsCount, programsCount }) => {
+        setFollowCount(followCount);
+        setProgramsCount(programsCount);
+        setFundsCount(fundsCount);
+      }
+    );
   }, [ownerId]);
   return (
     <DetailsBlock table>
@@ -47,7 +51,7 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
         <GVTab
           value={MANAGER_HISTORY_TAB.FOLLOW}
           label={t("manager-page.history.tabs.follow")}
-          count={fundsCount}
+          count={followCount}
         />
       </DetailsBlockTabs>
       {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
