@@ -19,7 +19,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
-import { formatValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   updateRow,
@@ -28,6 +28,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
+    equity,
     logo,
     personalDetails,
     id,
@@ -44,6 +45,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
+  const { currency, amount } = equity;
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
@@ -62,6 +64,13 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             }
           />
         </Link>
+      </TableCell>
+      <TableCell className="programs-table__cell">
+        <NumberFormat
+          value={formatCurrencyValue(amount, currency)}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
       </TableCell>
       <TableCell className="programs-table__cell">{subscribersCount}</TableCell>
       <TableCell className="programs-table__cell">
