@@ -26,6 +26,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
     )}
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
       <CurrencyItem
+        clickable={position.assetData.hasAssetInfo}
         url={position.assetData.url}
         logo={position.assetData.icon}
         small
