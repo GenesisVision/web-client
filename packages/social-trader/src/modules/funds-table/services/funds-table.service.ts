@@ -2,7 +2,10 @@ import { ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/co
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
-import { ItemsViewModelFundDetailsListItem } from "gv-api-web";
+import {
+  FundDetailsListItem,
+  ItemsViewModelFundDetailsListItem
+} from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
@@ -18,14 +21,20 @@ import {
   SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
 
+export const fetchFundsChallengeWinner = (): Promise<Array<
+  FundDetailsListItem
+>> => {
+  return fundsApi.getLastChallengeWinner().then(item => [item]);
+};
+
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
 ) => Promise<ItemsViewModelFundDetailsListItem>;
 export const fetchFunds: FetchFundsType = filters => {
-  if (authService.getAuthArg()) {
-    filters.authorization = authService.getAuthArg();
-  }
-  return fundsApi.getFunds(filters);
+  return fundsApi.getFunds({
+    ...filters,
+    authorization: authService.getAuthArg()
+  });
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
