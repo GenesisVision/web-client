@@ -586,6 +586,7 @@
       "type": "Type"
     },
     "header": {
+      "equity": "Equity",
       "subscribers": "Subscribers",
       "trades": "Trades",
       "name": "Name",
