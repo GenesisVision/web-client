@@ -76,29 +76,37 @@ const Banner1 = (props: {
   );
 };
 
-const App = (props: {
+interface BannerApiContext extends NextApiRequest {
+  query: { id: string };
+}
+
+type BannerProps = {
   chart: ProgramProfitPercentCharts;
   details: ProgramFollowDetailsFull;
-}) => {
-  return ReactDOM.renderToStaticNodeStream(
-    <Banner1 chart={props.chart} details={props.details} />
-  );
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    query: { id }
-  } = req;
+const renderBanner = (Banner: React.ComponentType<BannerProps>) => {
+  return async (req: BannerApiContext, res: NextApiResponse) => {
+    const {
+      query: { id }
+    } = req;
 
-  try {
-    const details = await programsApi.getProgramDetails(id as string);
-    const chart = await programsApi.getProgramProfitPercentCharts(details.id);
+    try {
+      const details = await programsApi.getProgramDetails(id as string);
+      const chart = await programsApi.getProgramProfitPercentCharts(details.id);
 
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "image/svg+xml");
-    res.send(App({ chart, details }));
-  } catch (e) {
-    res.statusCode = 500;
-    res.end();
-  }
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "image/svg+xml");
+      res.send(
+        ReactDOM.renderToStaticNodeStream(
+          <Banner chart={chart} details={details} />
+        )
+      );
+    } catch (e) {
+      res.statusCode = 500;
+      res.end();
+    }
+  };
 };
+
+export default renderBanner(Banner1);
