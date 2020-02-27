@@ -137,7 +137,7 @@ const getRandomAsset = () =>
 
 export const getRecommendationLoaderData = (): TRecommendation => {
   return {
-    equity: 0,
+    balance: { amount: 0, currency: "GVT" },
     brokerType: "MetaTrader5",
     tags: [],
     personalDetails: {

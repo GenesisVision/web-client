@@ -28,7 +28,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
-    equity,
+    balance,
     logo,
     personalDetails,
     id,
@@ -45,7 +45,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
-  const { currency, amount } = equity;
+  const { currency, amount } = balance;
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
