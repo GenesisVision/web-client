@@ -80,7 +80,6 @@
     "@testing-library/react-hooks": "^1.1.0",
     "@types/classnames": "^2.2.7",
     "@types/d3": "^5.7.2",
-    "@types/debounce": "^1.2.0",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/expect-puppeteer": "^3.3.3",
