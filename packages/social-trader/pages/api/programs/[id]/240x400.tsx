@@ -2,14 +2,8 @@ import GV from "components/banners/GV";
 import Logo from "components/banners/Logo";
 import Text from "components/banners/Text";
 import SimpleChart from "components/chart/simple-chart";
-import {
-  ProgramFollowDetailsFull,
-  ProgramProfitPercentCharts
-} from "gv-api-web";
-import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
-import ReactDOM from "react-dom/server";
-import programsApi from "services/api-client/programs-api";
+import createBannerApi, { BannerComponent } from "components/banners/utils";
 
 type Position = { y: number };
 
@@ -37,10 +31,7 @@ const Label: React.FC = ({ children }) => {
   );
 };
 
-const Banner1 = (props: {
-  chart: ProgramProfitPercentCharts;
-  details: ProgramFollowDetailsFull;
-}) => {
+const Banner: BannerComponent = props => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
   return (
@@ -76,29 +67,4 @@ const Banner1 = (props: {
   );
 };
 
-const App = (props: {
-  chart: ProgramProfitPercentCharts;
-  details: ProgramFollowDetailsFull;
-}) => {
-  return ReactDOM.renderToStaticNodeStream(
-    <Banner1 chart={props.chart} details={props.details} />
-  );
-};
-
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    query: { id }
-  } = req;
-
-  try {
-    const details = await programsApi.getProgramDetails(id as string);
-    const chart = await programsApi.getProgramProfitPercentCharts(details.id);
-
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "image/svg+xml");
-    res.send(App({ chart, details }));
-  } catch (e) {
-    res.statusCode = 500;
-    res.end();
-  }
-};
+export default createBannerApi(Banner);

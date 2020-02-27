@@ -2,14 +2,8 @@ import GV from "components/banners/GV";
 import Logo from "components/banners/Logo";
 import Text from "components/banners/Text";
 import SimpleChart from "components/chart/simple-chart";
-import {
-  ProgramFollowDetailsFull,
-  ProgramProfitPercentCharts
-} from "gv-api-web";
-import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
-import ReactDOM from "react-dom/server";
-import programsApi from "services/api-client/programs-api";
+import createBannerApi, { BannerComponent } from "components/banners/utils";
 
 type Position = { y: number };
 
@@ -37,10 +31,7 @@ const Title: React.FC = ({ children }) => {
   );
 };
 
-const Banner1 = (props: {
-  chart: ProgramProfitPercentCharts;
-  details: ProgramFollowDetailsFull;
-}) => {
+const Banner: BannerComponent = props => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
 
@@ -59,11 +50,11 @@ const Banner1 = (props: {
       <rect width={728} height={89} fill="#1F2B35" />
       <rect x={588} width={140} height={89} fill="#131E26" />
       <Logo
-        size={25}
         x={25}
         y={19}
+        size={25}
         href={props.details.publicInfo.logo}
-        color={props.details.publicInfo.logo}
+        color={props.details.publicInfo.color}
       />
       <GV y={35} x={611} />
       <Title>{title}</Title>
@@ -76,37 +67,4 @@ const Banner1 = (props: {
   );
 };
 
-interface BannerApiContext extends NextApiRequest {
-  query: { id: string };
-}
-
-type BannerProps = {
-  chart: ProgramProfitPercentCharts;
-  details: ProgramFollowDetailsFull;
-};
-
-const renderBanner = (Banner: React.ComponentType<BannerProps>) => {
-  return async (req: BannerApiContext, res: NextApiResponse) => {
-    const {
-      query: { id }
-    } = req;
-
-    try {
-      const details = await programsApi.getProgramDetails(id as string);
-      const chart = await programsApi.getProgramProfitPercentCharts(details.id);
-
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.send(
-        ReactDOM.renderToStaticNodeStream(
-          <Banner chart={chart} details={details} />
-        )
-      );
-    } catch (e) {
-      res.statusCode = 500;
-      res.end();
-    }
-  };
-};
-
-export default renderBanner(Banner1);
+export default createBannerApi(Banner);
