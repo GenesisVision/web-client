@@ -1,11 +1,19 @@
 import "./accordion.scss";
 
 import classNames from "classnames";
+import { useNetworkStatus } from "hooks/network-status";
+import dynamic from "next/dynamic";
 import AccordionContent, {
   TAccordionContent
-} from "pages/landing-page/components/accordion/accordion-content";
+} from "pages/landing-page/components/accordion-content/accordion-content";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import React, { useCallback, useEffect, useState } from "react";
+
+const AccordionContentWithAnimation = dynamic(() =>
+  import(
+    "pages/landing-page/components/accordion-content/accordion-content-with-animation"
+  )
+);
 
 export type TAccordion = {
   id: string | number;
@@ -19,11 +27,30 @@ interface Props {
 }
 
 const _Accordion: React.FC<Props> = ({ accordion, className }) => {
+  const { effectiveConnectionType = "4g" } = useNetworkStatus();
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleClick = useCallback(event => setIsVisible(!isVisible), [
-    isVisible
-  ]);
+  const handleClick = useCallback(() => setIsVisible(!isVisible), [isVisible]);
+
+  const renderAccordionContent = useCallback(() => {
+    switch (effectiveConnectionType) {
+      case "4g":
+        return (
+          <AccordionContentWithAnimation
+            contents={accordion.contents}
+            isVisible={isVisible}
+          />
+        );
+      default:
+        return (
+          <AccordionContent
+            contents={accordion.contents}
+            isVisible={isVisible}
+          />
+        );
+    }
+  }, [effectiveConnectionType, isVisible]);
+
   return (
     <div className="accordion" id={String(accordion.id)}>
       <header className="accordion__header" onClick={handleClick}>
@@ -36,7 +63,7 @@ const _Accordion: React.FC<Props> = ({ accordion, className }) => {
         </span>
         <span className="accordion__title">{accordion.title}</span>
       </header>
-      <AccordionContent contents={accordion.contents} isVisible={isVisible} />
+      {renderAccordionContent()}
     </div>
   );
 };
