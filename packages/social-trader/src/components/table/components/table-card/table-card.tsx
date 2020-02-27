@@ -94,7 +94,7 @@ export const TableCardSubTitle: React.FC<{
   const title = typeof children === "string" ? children : "";
   return (
     <div className="table-card__subtitle">
-      <MutedText>
+      <MutedText noWrap={false}>
         {url ? (
           <Link
             title={`Open ${title} user page`}
