@@ -2,11 +2,13 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_constants";
+@import "~shared/styles/_hide";
 
 $chart-width: 160px;
 $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
+$action-size: 30px;
 
 .table-card {
   margin-bottom: $padding-small/2;
@@ -42,11 +44,6 @@ $card-avatar-size: 80px;
     justify-content: space-between;
     align-items: flex-start;
 
-    &:first-child {
-      //margin-left: -$padding-xsmall;
-      //margin-right: -$padding-xsmall;
-    }
-
     &--center {
       justify-content: center;
     }
@@ -61,13 +58,17 @@ $card-avatar-size: 80px;
   }
   &__title {
     @include link($text-accent-color, $text-color);
-    padding: 3px 0;
+    padding-top: 3px;
     @include font-size($font-size-paragraph);
     word-break: break-all;
     display: block;
+    padding-bottom: 40px;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: 3px;
+    }
   }
   &__title-wrapper {
-    max-width: calc(100% - 50px);
+    max-width: calc(100% - #{$action-size});
     padding-right: $padding-small/4;
     box-sizing: border-box;
   }
@@ -76,6 +77,7 @@ $card-avatar-size: 80px;
     transition-property: color;
   }
   &__subtitle {
+    @include hide-on-landscape-phone();
     margin-bottom: 10px;
   }
   &__main-info {
@@ -91,8 +93,8 @@ $card-avatar-size: 80px;
 
     & .icon,
     & .icon svg {
-      width: 30px;
-      height: 30px;
+      width: $action-size;
+      height: $action-size;
     }
   }
   &__table {

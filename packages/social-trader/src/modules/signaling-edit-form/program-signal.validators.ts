@@ -11,8 +11,8 @@ export const SignalValidationSchema = ({
   t
 }: SignalValidationSchemaProps) =>
   object().shape({
-    successFee: signalSuccessFeeShape(t, minVolumeFee, maxVolumeFee),
-    volumeFee: signalVolumeFeeShape(t, minSuccessFee, maxSuccessFee)
+    successFee: signalSuccessFeeShape(t, minSuccessFee, maxSuccessFee),
+    volumeFee: signalVolumeFeeShape(t, minVolumeFee, maxVolumeFee)
   });
 
 interface SignalValidationSchemaProps {

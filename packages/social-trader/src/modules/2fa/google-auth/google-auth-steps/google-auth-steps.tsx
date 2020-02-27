@@ -1,6 +1,6 @@
+import { debounce } from "lodash";
 import * as React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "reducers/root-reducer";
+import { useEffect, useState } from "react";
 import { isTablet } from "utils/breakpoints";
 
 import GoogleAuthDesktop, {
@@ -9,9 +9,10 @@ import GoogleAuthDesktop, {
 import GoogleAuthMobile from "./google-auth-steps-mobile";
 
 const GoogleAuthSteps: React.FC<Props> = props => {
-  const innerWidth = useSelector(
-    (state: RootState) => state.ui.size.innerWidth
-  );
+  const [innerWidth, setInnerWidth] = useState(0);
+  useEffect(() => {
+    window.onresize = debounce(() => setInnerWidth(window.innerWidth), 166);
+  }, []);
   return isTablet(innerWidth) ? (
     <GoogleAuthMobile {...props} />
   ) : (

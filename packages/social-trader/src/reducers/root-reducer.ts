@@ -5,9 +5,6 @@ import {
 import notificationsReducer, {
   NotificationsState
 } from "components/notifications/reducers/notifications.reducers";
-import programsRatingReducer, {
-  ProgramsRatingState
-} from "components/programs-rating/reducers/programs-rating.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
@@ -65,7 +62,6 @@ import profileReducer, { ProfileState } from "reducers/profile-reducer";
 import tablesViewReducer, {
   TablesViewState
 } from "reducers/tables-view-reducer";
-import uiReducer, { IUiState } from "reducers/ui-reducer";
 
 export const sharedRootReducers = {
   globalSearch: globalSearchReducer,
@@ -79,7 +75,6 @@ export const sharedRootReducers = {
   platformData: platformReducer,
   followsData: followsReducer,
   programsData: programsReducer,
-  programsRating: programsRatingReducer,
   fundsData: fundsReducer,
   loginData: loginReducer,
   signUpData: signUpReducer,
@@ -94,8 +89,7 @@ export const sharedRootReducers = {
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
   wallet: walletReducer,
-  accountSettings: accountSettingsReducer,
-  ui: uiReducer
+  accountSettings: accountSettingsReducer
 };
 
 export type RootState = Readonly<{
@@ -113,7 +107,6 @@ export type RootState = Readonly<{
   platformData: PlatformState;
   followsData: FollowsListState;
   programsData: ProgramsListState;
-  programsRating: ProgramsRatingState;
   fundsData: FundsTableState;
   emailPending: EmailPendingState;
   followNotifications: ProgramNotificationsState;
@@ -123,5 +116,4 @@ export type RootState = Readonly<{
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
-  ui: IUiState;
 }>;

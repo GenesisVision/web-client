@@ -28,7 +28,7 @@ import {
   PROGRAM_DETAILS_FOLDER_ROUTE
 } from "routes/invest.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
-import { distanceDate } from "utils/dates";
+import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
@@ -132,7 +132,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
-            {distanceDate(asset.accountInfo.creationDate)}
+            {convertDateToShortFormat(
+              distanceDate(asset.accountInfo.creationDate)
+            )}
           </StatisticItem>
           {asset.accountInfo && asset.accountInfo.login && (
             <StatisticItem label={t("dashboard-page.trading.login")}>

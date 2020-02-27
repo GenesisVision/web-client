@@ -48,15 +48,18 @@ export const fetchManagerAssetsCount = (
     authorization: authService.getAuthArg()
   };
   return Promise.all([
+    followApi.getFollowAssets(options),
     programsApi.getPrograms(options),
     fundsApi.getFunds(options)
-  ]).then(([programsData, fundsData]) => ({
+  ]).then(([followData, programsData, fundsData]) => ({
+    followCount: followData.total,
     programsCount: programsData.total,
     fundsCount: fundsData.total
   }));
 };
 
 export interface IAssetsCountModel {
+  followCount: number;
   programsCount: number;
   fundsCount: number;
 }

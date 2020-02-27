@@ -123,5 +123,6 @@ export const shortDateField = (dateField: string) =>
 export const convertDateToShortFormat = (date: string) =>
   date
     .split(" ")
+    .map(word => (word === "a" ? "1" : word))
     .map(word => (isNaN(+word) ? shortDateField(word) : word))
     .join(" ");

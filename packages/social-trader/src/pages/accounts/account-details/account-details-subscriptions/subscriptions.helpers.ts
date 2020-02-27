@@ -20,6 +20,12 @@ export const SUBSCRIPTIONS_COLUMNS: SortingColumn[] = [
     name: "value"
   },
   {
+    name: "volume-fee"
+  },
+  {
+    name: "success-fee"
+  },
+  {
     name: "buttons"
   }
 ];

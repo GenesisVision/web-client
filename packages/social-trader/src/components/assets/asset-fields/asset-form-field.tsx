@@ -42,8 +42,8 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
         disabled={disabled}
       />
       {caption && (
-        <div className="asset-form-field__caption">
-          <MutedText small>
+        <MutedText small>
+          <div className="asset-form-field__caption">
             <span>{caption}</span>
             {trimmedLength > 0 && (
               <div className="asset-form-field__caption-count">
@@ -56,8 +56,8 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
                 />
               </div>
             )}
-          </MutedText>
-        </div>
+          </div>
+        </MutedText>
       )}
       {hintContent && (
         <MutedText small>

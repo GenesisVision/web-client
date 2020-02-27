@@ -51,7 +51,7 @@ export const AssetBlock: React.FC<Props> = ({
             "asset-block__description--side": side
           })}
         >
-          <MutedText>{description}</MutedText>
+          <MutedText noWrap={false}>{description}</MutedText>
         </div>
         <Link to={investLink}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">

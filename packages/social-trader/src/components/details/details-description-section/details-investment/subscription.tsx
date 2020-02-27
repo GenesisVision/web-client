@@ -107,6 +107,28 @@ const _Subscription: React.FC<Props> = ({
             displayType="text"
           />
         </StatisticItem>
+        <StatisticItem
+          condition={!!subscriptionInfo.volumeFeePersonal}
+          accent
+          label={t("follow-details-page.current-investment.fields.volume-fee")}
+        >
+          <NumberFormat
+            value={subscriptionInfo.volumeFeePersonal}
+            suffix={` %`}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={!!subscriptionInfo.successFeePersonal}
+          accent
+          label={t("follow-details-page.current-investment.fields.success-fee")}
+        >
+          <NumberFormat
+            value={subscriptionInfo.successFeePersonal}
+            suffix={` %`}
+            displayType="text"
+          />
+        </StatisticItem>
       </StatisticItemList>
       <DetailsInvestmentFooter>
         <EditFollowButton
