@@ -2,14 +2,14 @@ import "./info-container.scss";
 
 import { useNetworkStatus } from "hooks/network-status";
 import dynamic from "next/dynamic";
-import InfoListWrapper from "pages/landing-page/components/info-list/info-list-wrapper";
+import InfoListWrapper from "pages/landing-page/components/info-list-wrapper/info-list-wrapper";
 import TabControls from "pages/landing-page/components/tab-controls/tab-controls";
 import { infoList, infoTabs } from "pages/landing-page/static-data/info";
 import React, { useCallback, useState } from "react";
 
 const InfoListWrapperWithAnimation = dynamic(() =>
   import(
-    "pages/landing-page/components/info-list/info-list-wrapper-with-animation"
+    "pages/landing-page/components/info-list-wrapper/info-list-wrapper-with-animation"
   )
 );
 
