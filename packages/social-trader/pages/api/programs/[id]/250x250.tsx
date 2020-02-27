@@ -93,52 +93,34 @@ const Banner1 = (props: {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
 
-  // console.info(
-  //   BannerChart({ data: points.chart, width: 210, height: 82, x: 20, y: 108 })
-  // );
-
-  return BannerChart({
-    data: points.chart,
-    width: 210,
-    height: 82,
-    x: 20,
-    y: 108
-  });
-
-  // return (
-  //   <svg
-  //     width="250"
-  //     height="250"
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     xmlnsXlink="http://www.w3.org/1999/xlink"
-  //   >
-  //     <rect width="250" height="205" fill="#1F2B35" />
-  //     <rect y={205} width="250" height="45" fill="#131E26" />
-  //     <Logo href={props.details.publicInfo.logo} />
-  //     <GV />
-  //     <Label>{props.details.publicInfo.title}</Label>
-  //     <Title y={62}>Monthly Profit</Title>
-  //     <Value y={62}>{`${statistic.profitPercent}%`}</Value>
-  //     <Title y={87}>Equity</Title>
-  //     <Value y={87}>{`${points.currency}${statistic.balance}`}</Value>
-  //     <SimpleChart data={points.chart} width={210} height={82} x={20} y={108} />
-  //   </svg>
-  // );
+  return (
+    <svg
+      width="250"
+      height="250"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <rect width="250" height="205" fill="#1F2B35" />
+      <rect y={205} width="250" height="45" fill="#131E26" />
+      <Logo href={props.details.publicInfo.logo} />
+      <GV />
+      <Label>{props.details.publicInfo.title}</Label>
+      <Title y={62}>Monthly Profit</Title>
+      <Value y={62}>{`${statistic.profitPercent}%`}</Value>
+      <Title y={87}>Equity</Title>
+      <Value y={87}>{`${points.currency}${statistic.balance}`}</Value>
+      <SimpleChart data={points.chart} width={210} height={82} x={20} y={108} />
+    </svg>
+  );
 };
 
 const App = (props: {
   chart: ProgramProfitPercentCharts;
   details: ProgramFollowDetailsFull;
 }) => {
-  // const banner = ReactDOM.renderToStaticMarkup(
-  //   <Banner1 chart={props.chart} details={props.details} />
-  // );
-
-  // const yA = axisLeft();
-
-  // svg?.append("g").call()
-
-  return Banner1(props);
+  return ReactDOM.renderToStaticMarkup(
+    <Banner1 chart={props.chart} details={props.details} />
+  );
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

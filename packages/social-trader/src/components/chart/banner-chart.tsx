@@ -109,7 +109,7 @@ const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
 
     svg
       .append("g")
-      .attr("style", "color: rgba(0,0,0,0.2);stroke-dasharray: 1;")
+      .attr("style", "color: rgba(255,255,255,0.2);stroke-dasharray: 1;")
       .attr("transform", `translate(${MARGIN_LEFT}, 0)`)
       .call(
         axisLeft(valueScale)
