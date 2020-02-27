@@ -8,6 +8,7 @@ $chart-width: 160px;
 $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
+$action-size: 30px;
 
 .table-card {
   margin-bottom: $padding-small/2;
@@ -67,7 +68,7 @@ $card-avatar-size: 80px;
     }
   }
   &__title-wrapper {
-    max-width: calc(100% - 50px);
+    max-width: calc(100% - #{$action-size});
     padding-right: $padding-small/4;
     box-sizing: border-box;
   }
@@ -92,8 +93,8 @@ $card-avatar-size: 80px;
 
     & .icon,
     & .icon svg {
-      width: 30px;
-      height: 30px;
+      width: $action-size;
+      height: $action-size;
     }
   }
   &__table {
