@@ -3,7 +3,6 @@ import { updateAccountSettingsCurrencyAction } from "actions/account-settings-ac
 import authActions from "actions/auth-actions";
 import clearDataActionFactory from "actions/clear-data.factory";
 import platformActions from "actions/platform-actions";
-import { windowResizeAction } from "actions/ui-actions";
 import { Push } from "components/link/link";
 import { CaptchaCheckResult } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
@@ -82,7 +81,6 @@ export const logout: logoutFuncType = dispatch => {
   dispatch(updateAccountSettingsCurrencyAction(DEFAULT_ACCOUNT_CURRENCY));
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
-  dispatch(windowResizeAction());
 };
 
 export type LoginFuncType = (
