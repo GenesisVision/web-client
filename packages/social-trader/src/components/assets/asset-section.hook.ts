@@ -1,5 +1,6 @@
 import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
+import { debounce } from "lodash";
 import { fetchWalletsByCurrencyAvailableAction } from "pages/wallet/actions/wallet.actions";
 import { walletsAvailableSelector } from "pages/wallet/reducers/wallet.reducers";
 import { useCallback, useEffect, useState } from "react";
@@ -46,7 +47,8 @@ const useAssetSection = ({
   }, [wallets, assetCurrency]);
 
   useEffect(() => {
-    wallet && getRate({ from: wallet.currency, to: assetCurrency });
+    wallet &&
+      debounce(() => getRate({ from: wallet.currency, to: assetCurrency }));
   }, [wallet, assetCurrency]);
 
   const handleWalletChange = useCallback(
