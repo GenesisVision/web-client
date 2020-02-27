@@ -1,7 +1,6 @@
 import "./program-period-history-row.scss";
 
-import Profitability from "components/profitability/profitability";
-import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { TableCell, TableRow } from "components/table/components";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import { ProgramPeriodHistoryDetailsButton } from "pages/invest/programs/program-details/program-history-section/program-period-history/program-period-history-details.button";
@@ -36,18 +35,11 @@ export const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = R
             />
           </TableCell>
           <TableCell>
-            <Profitability
+            <ProfitabilityValuePercent
+              currency={currency}
+              percent={period.profitPercent}
               value={period.profit}
-              prefix={PROFITABILITY_PREFIX.SIGN}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(period.profit, currency)}
-                thousandSeparator=" "
-                displayType="text"
-                allowNegative={false}
-                suffix={` ${currency}`}
-              />
-            </Profitability>
+            />
           </TableCell>
           <TableCell className="program-period-history-row__details-cell">
             <div className="program-period-history-row__investors-container">
