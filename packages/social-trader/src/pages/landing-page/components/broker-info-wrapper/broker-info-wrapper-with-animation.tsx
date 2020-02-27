@@ -22,7 +22,7 @@ const _BrokerInfoWrapperWithAnimation: React.FC<Props> = ({
     <>
       {transitions.map(({ item, props, key }) => (
         <animated.div
-          className="brokers-container__tab-info"
+          className="brokers-container__tab-info brokers-container__tab-info--animation"
           key={key}
           style={props as any}
         >

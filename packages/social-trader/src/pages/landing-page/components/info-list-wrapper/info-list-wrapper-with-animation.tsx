@@ -20,7 +20,7 @@ const _InfoListWrapperWithAnimation: React.FC<Props> = ({
     <>
       {transitions.map(({ item, props, key }) => (
         <animated.div
-          className="info-container__tab-info"
+          className="info-container__tab-info info-container__tab-info--animation"
           key={key}
           style={props as any}
         >
