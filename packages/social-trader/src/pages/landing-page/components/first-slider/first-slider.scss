@@ -40,7 +40,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    will-change: opacity;
     height: 250px;
     text-align: center;
     line-height: 0;
@@ -72,14 +71,12 @@
     transform: translate3d(-50%, -50%, 0);
 
     &--animation {
-      will-change: opacity, transform;
       transform: translate3d(-30%, -50%, 0);
       opacity: 0;
       animation: 0.5s slideLeft forwards;
     }
 
     &--animation-bg {
-      will-change: opacity, transform;
       opacity: 0;
       animation: 0.5s appear forwards 0.7s;
     }
