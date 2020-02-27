@@ -1,4 +1,6 @@
 import GV from "components/banners/GV";
+import Logo from "components/banners/Logo";
+import Text from "components/banners/Text";
 import SimpleChart from "components/chart/simple-chart";
 import {
   ProgramFollowDetailsFull,
@@ -8,81 +10,30 @@ import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
 import ReactDOM from "react-dom/server";
 import programsApi from "services/api-client/programs-api";
-import filesService from "services/file-service";
 
 type Position = { y: number };
 
-const Title: React.FC<Position> = ({ children, y }) => {
+const Label: React.FC<Position> = ({ children, y }) => {
   return (
-    <text
-      fontSize={12}
-      fill="rgba(255,255,255,0.5)"
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={138} y={y}>
-        {children}
-      </tspan>
-    </text>
+    <Text x={138} y={y} fontSize={12} color="rgba(255,255,255,0.5)">
+      {children}
+    </Text>
   );
 };
 
 const Value: React.FC<Position> = ({ children, y }) => {
   return (
-    <text
-      fontSize={16}
-      fill="#fff"
-      textAnchor="end"
-      fontWeight={"bold"}
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={300} y={y}>
-        {children}
-      </tspan>
-    </text>
+    <Text fontSize={16} color="#fff" position="end" bold x={300} y={y}>
+      {children}
+    </Text>
   );
 };
 
-const Label: React.FC = ({ children }) => {
+const Title: React.FC = ({ children }) => {
   return (
-    <text
-      fontSize={14}
-      fill="#fff"
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={25} y={66}>
-        {children}
-      </tspan>
-    </text>
-  );
-};
-
-const Logo: React.FC<{ href?: string }> = ({ href }) => {
-  if (!href) return null;
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <rect id="rect" x="25" y="19" width="25" height="25" rx="7" />
-        <clipPath id="clip">
-          <use xlinkHref="#rect" />
-        </clipPath>
-      </defs>
-
-      <use xlinkHref="#rect" strokeWidth="0" stroke="black" />
-      <image
-        x="25"
-        y="19"
-        href={filesService.getFileUrl(href)}
-        width="25"
-        height="25"
-        clipPath="url(#clip)"
-      />
-    </svg>
+    <Text fontSize={14} color="#fff" x={25} y={66}>
+      {children}
+    </Text>
   );
 };
 
@@ -100,19 +51,25 @@ const Banner1 = (props: {
 
   return (
     <svg
-      width="728"
-      height="89"
+      width={728}
+      height={89}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="728" height="89" fill="#1F2B35" />
-      <rect x="588" width="140" height="89" fill="#131E26" />
-      <Logo href={props.details.publicInfo.logo} />
+      <rect width={728} height={89} fill="#1F2B35" />
+      <rect x={588} width={140} height={89} fill="#131E26" />
+      <Logo
+        size={25}
+        x={25}
+        y={19}
+        href={props.details.publicInfo.logo}
+        color={props.details.publicInfo.logo}
+      />
       <GV y={35} x={611} />
-      <Label>{title}</Label>
-      <Title y={39}>Monthly Profit</Title>
+      <Title>{title}</Title>
+      <Label y={39}>Monthly Profit</Label>
       <Value y={39}>{`${statistic.profitPercent} %`}</Value>
-      <Title y={66}>Equity</Title>
+      <Label y={66}>Equity</Label>
       <Value y={66}>{`${statistic.balance} ${points.currency}`}</Value>
       <SimpleChart data={points.chart} width={259} height={66} x={329} y={12} />
     </svg>
