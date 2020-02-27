@@ -831,6 +831,8 @@
     "subscriptions": {
       "title": "Subscriptions",
       "table": {
+        "volume-fee": "Volume fee",
+        "success-fee": "Success fee",
         "buttons": "",
         "value": "Value",
         "provider": "Provider",
