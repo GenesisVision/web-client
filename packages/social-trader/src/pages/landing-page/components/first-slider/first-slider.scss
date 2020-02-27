@@ -70,9 +70,6 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
-    //opacity: 0;
-    //transform: translate3d(-30%, -50%, 0);
-    //animation: 0.5s slideLeft forwards;
 
     &--animation {
       will-change: opacity, transform;
@@ -84,9 +81,7 @@
     &--animation-bg {
       will-change: opacity, transform;
       opacity: 0;
-      animation-name: appear;
-      animation-delay: 700ms;
-      //transform: translate3d(-50%, -50%, 0);
+      animation: 0.5s appear forwards 0.7s;
     }
   }
 
