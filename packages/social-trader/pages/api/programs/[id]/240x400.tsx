@@ -1,4 +1,6 @@
 import GV from "components/banners/GV";
+import Logo from "components/banners/Logo";
+import Text from "components/banners/Text";
 import SimpleChart from "components/chart/simple-chart";
 import {
   ProgramFollowDetailsFull,
@@ -8,92 +10,30 @@ import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
 import ReactDOM from "react-dom/server";
 import programsApi from "services/api-client/programs-api";
-import filesService from "services/file-service";
 
 type Position = { y: number };
 
 const Title: React.FC<Position> = ({ children, y }) => {
-  const fontSize = 14;
-  const x = 20;
   return (
-    <text
-      fontSize={fontSize}
-      fill="rgba(255,255,255,0.5)"
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={x} y={y}>
-        {children}
-      </tspan>
-    </text>
+    <Text fontSize={14} x={20} y={y} color="rgba(255,255,255,0.5)">
+      {children}
+    </Text>
   );
 };
 
 const Value: React.FC<Position> = ({ children, y }) => {
-  const fontSize = 16;
-  const x = 220;
   return (
-    <text
-      fontSize={fontSize}
-      fill="#fff"
-      textAnchor="end"
-      fontWeight={"bold"}
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={x} y={y}>
-        {children}
-      </tspan>
-    </text>
+    <Text x={220} y={y} fontSize={16} color="#fff" position="end" bold>
+      {children}
+    </Text>
   );
 };
 
 const Label: React.FC = ({ children }) => {
-  const fontSize = 14;
-  const x = 56;
-  const y = 31 + fontSize - 3;
   return (
-    <text
-      fontSize={fontSize}
-      fill="#fff"
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
-    >
-      <tspan x={x} y={y}>
-        {children}
-      </tspan>
-    </text>
-  );
-};
-
-const Logo: React.FC<{ href?: string }> = ({ href }) => {
-  if (!href) return null;
-  const size = 26;
-  const x = 20;
-  const y = 25;
-  const radius = 7;
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <rect id="rect" x={x} y={y} width={size} height={size} rx={radius} />
-        <clipPath id="clip">
-          <use xlinkHref="#rect" />
-        </clipPath>
-      </defs>
-
-      <use xlinkHref="#rect" strokeWidth="0" stroke="black" />
-      <image
-        x={x}
-        y={y}
-        href={filesService.getFileUrl(href)}
-        width={size}
-        height={size}
-        clipPath="url(#clip)"
-      />
-    </svg>
+    <Text fontSize={14} color="#fff" x={56} y={42}>
+      {children}
+    </Text>
   );
 };
 
@@ -105,14 +45,20 @@ const Banner1 = (props: {
   const statistic = props.chart.statistic;
   return (
     <svg
-      width="240"
-      height="400"
+      width={240}
+      height={400}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="240" height="400" fill="#1F2B35" />
-      <rect y={337} width="240" height="63" fill="#131E26" />
-      <Logo href={props.details.publicInfo.logo} />
+      <rect width={240} height={400} fill="#1F2B35" />
+      <rect y={337} width={240} height={63} fill="#131E26" />
+      <Logo
+        href={props.details.publicInfo.logo}
+        size={25}
+        x={20}
+        y={25}
+        color={props.details.publicInfo.color}
+      />
       <GV y={359} x={69} />
       <Label>{props.details.publicInfo.title}</Label>
       <Title y={92}>Monthly Profit</Title>

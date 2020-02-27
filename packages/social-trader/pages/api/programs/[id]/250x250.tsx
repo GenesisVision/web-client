@@ -51,8 +51,8 @@ const Banner1 = (props: {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="250" height="205" fill="#1F2B35" />
-      <rect y={205} width="250" height="45" fill="#131E26" />
+      <rect width={250} height={205} fill="#1F2B35" />
+      <rect y={205} width={250} height={45} fill="#131E26" />
       <Logo
         href={props.details.publicInfo.logo}
         x={20}
