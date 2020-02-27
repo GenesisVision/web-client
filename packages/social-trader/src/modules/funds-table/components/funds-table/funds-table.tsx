@@ -9,15 +9,18 @@ import * as React from "react";
 import { useCallback } from "react";
 
 import FundTableSortingValue from "./fund-table-sorting";
-import { fundListLoaderData } from "./fund-table.loader-data";
+import { fundListLoaderDataWithCount } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
+  loaderCount?: number;
   data?: FundDetailsListItem[];
 }
 
 const _FundsTable: React.FC<Props> = ({
+  loaderCount,
+  showSwitchView = true,
   data,
   sorting,
   updateSorting,
@@ -31,7 +34,7 @@ const _FundsTable: React.FC<Props> = ({
   asLinkPagination
 }) => (
   <Table
-    loaderData={fundListLoaderData}
+    loaderData={fundListLoaderDataWithCount(loaderCount)}
     filtering={filtering}
     updateFilter={updateFilter}
     title={title}
@@ -42,7 +45,7 @@ const _FundsTable: React.FC<Props> = ({
     columns={FUNDS_TABLE_COLUMNS}
     items={data}
     asLinkPagination={asLinkPagination}
-    showSwitchView
+    showSwitchView={showSwitchView}
     renderFilters={renderFilters}
     renderMappings={renderMappings}
     renderHeader={useCallback(
