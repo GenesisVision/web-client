@@ -23,23 +23,11 @@ const _SignInContainer: React.FC<Props> = ({
 }) => {
   const dispatch = useDispatch<ReduxDispatch>();
   const successMiddleware = (value: string) => {
+    if (!value) return;
     authService.storeToken(value);
     dispatch(authActions.updateTokenAction(true));
     if (type) dispatch(clearTwoFactorData());
     Router.push(redirectFrom);
-  };
-  const catchCallback = (e: ResponseError) => {
-    if (e.code === "RequiresTwoFactor") {
-      dispatch(
-        storeTwoFactorAction({
-          email,
-          password,
-          from: redirectFrom
-        })
-      );
-      dispatch(setTwoFactorRequirementAction(true));
-      Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
-    }
   };
 
   const { email, password } = useSelector(
@@ -48,13 +36,24 @@ const _SignInContainer: React.FC<Props> = ({
 
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [successMiddleware],
-    catchCallback,
     request: values => {
       return login({
         ...values,
         type,
         email: values.email || email,
         password: values.password || password
+      }).catch((e: ResponseError) => {
+        if (e.code === "RequiresTwoFactor") {
+          dispatch(
+            storeTwoFactorAction({
+              email: values.email,
+              password: values.password,
+              from: redirectFrom
+            })
+          );
+          dispatch(setTwoFactorRequirementAction(true));
+          Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
+        }
       });
     }
   });
