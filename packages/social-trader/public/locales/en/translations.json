@@ -2654,8 +2654,26 @@
       "get-started": "Get started",
       "send": "SEND"
     },
-    "link": {
-      "title": "Go to {{title}} details page"
+    "links": {
+      "title": "Go to {{title}} details page",
+      "invest": "Invest",
+      "follow": "Follow",
+      "programs": "Programs",
+      "funds": "Funds",
+      "trade": "Trade",
+      "info": "Info",
+      "blog": "Blog",
+      "fees": "Fees",
+      "referral-program": "Referral program",
+      "faq": "FAQ",
+      "feedback": "Feedback",
+      "knowledge-base": "Knowledge base",
+      "glossary": "Glossary",
+      "aml-manual": "AML Manual",
+      "white-paper": "White paper",
+      "privacy-policy": "Privacy policy",
+      "terms": "Terms and conditions",
+      "download": "Download terminal"
     },
     "footer": {
       "title": "Have a question?",
