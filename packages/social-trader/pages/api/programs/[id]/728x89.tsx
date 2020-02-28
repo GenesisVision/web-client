@@ -1,9 +1,12 @@
 import GV from "components/banners/GV";
 import Logo from "components/banners/Logo";
 import Text from "components/banners/Text";
+import createBannerApi, {
+  BannerComponent,
+  LogoOptions
+} from "components/banners/utils";
 import SimpleChart from "components/chart/simple-chart";
 import React from "react";
-import createBannerApi, { BannerComponent } from "components/banners/utils";
 
 type Position = { y: number };
 
@@ -31,6 +34,14 @@ const Title: React.FC = ({ children }) => {
   );
 };
 
+const LOGO_OPTIONS: LogoOptions = {
+  size: 25,
+  position: {
+    x: 25,
+    y: 19
+  }
+};
+
 const Banner: BannerComponent = props => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
@@ -50,9 +61,7 @@ const Banner: BannerComponent = props => {
       <rect width={728} height={89} fill="#1F2B35" />
       <rect x={588} width={140} height={89} fill="#131E26" />
       <Logo
-        x={25}
-        y={19}
-        size={25}
+        {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
@@ -67,4 +76,4 @@ const Banner: BannerComponent = props => {
   );
 };
 
-export default createBannerApi(Banner);
+export default createBannerApi(Banner, LOGO_OPTIONS);

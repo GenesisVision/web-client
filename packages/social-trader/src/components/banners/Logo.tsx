@@ -1,11 +1,17 @@
 import Logo21 from "components/banners/defaultLogos/Logo21";
 import Logo25 from "components/banners/defaultLogos/Logo25";
+import { LogoOptions } from "components/banners/utils";
 import React from "react";
 import filesService from "services/file-service";
 
 const BANNER_LOGO_RADIUS = 7;
 
-export default function Logo({ href, size, color = "white", x, y }: LogoType) {
+export default function Logo({
+  href,
+  size,
+  color = "white",
+  position: { x, y }
+}: LogoProps) {
   if (!href) {
     switch (size) {
       case 21:
@@ -43,10 +49,7 @@ export default function Logo({ href, size, color = "white", x, y }: LogoType) {
   );
 }
 
-type LogoType = {
+type LogoProps = LogoOptions & {
   href?: string;
-  x: number;
-  y: number;
-  size: 21 | 25;
   color: string;
 };
