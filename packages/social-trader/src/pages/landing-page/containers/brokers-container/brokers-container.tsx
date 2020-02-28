@@ -1,7 +1,10 @@
 import "./brokers-container.scss";
 
 import classNames from "classnames";
-import { useNetworkStatus } from "hooks/network-status";
+import {
+  initialEffectiveConnectionType,
+  useNetworkStatus
+} from "hooks/network-status";
 import dynamic from "next/dynamic";
 import BrokerInfoWrapper from "pages/landing-page/components/broker-info-wrapper/broker-info-wrapper";
 import TabControls, {
@@ -31,7 +34,6 @@ const _BrokersContainer: React.FC<Props> = ({
   brokersTabs,
   title
 }) => {
-  const initialEffectiveConnectionType = "4g";
   const { effectiveConnectionType } = useNetworkStatus(
     initialEffectiveConnectionType
   );

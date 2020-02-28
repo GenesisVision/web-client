@@ -1,6 +1,9 @@
 import "./info-container.scss";
 
-import { useNetworkStatus } from "hooks/network-status";
+import {
+  initialEffectiveConnectionType,
+  useNetworkStatus
+} from "hooks/network-status";
 import dynamic from "next/dynamic";
 import InfoListWrapper from "pages/landing-page/components/info-list-wrapper/info-list-wrapper";
 import TabControls from "pages/landing-page/components/tab-controls/tab-controls";
@@ -14,7 +17,6 @@ const InfoListWrapperWithAnimation = dynamic(() =>
 );
 
 const InfoContainer: React.FC = () => {
-  const initialEffectiveConnectionType = "4g";
   const { effectiveConnectionType } = useNetworkStatus(
     initialEffectiveConnectionType
   );

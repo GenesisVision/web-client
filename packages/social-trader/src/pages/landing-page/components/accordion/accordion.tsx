@@ -1,13 +1,16 @@
 import "./accordion.scss";
 
 import classNames from "classnames";
-import { useNetworkStatus } from "hooks/network-status";
+import {
+  initialEffectiveConnectionType,
+  useNetworkStatus
+} from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AccordionContent, {
   TAccordionContent
 } from "pages/landing-page/components/accordion-content/accordion-content";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 const AccordionContentWithAnimation = dynamic(() =>
   import(
@@ -27,7 +30,6 @@ interface Props {
 }
 
 const _Accordion: React.FC<Props> = ({ accordion, className }) => {
-  const initialEffectiveConnectionType = "4g";
   const { effectiveConnectionType } = useNetworkStatus(
     initialEffectiveConnectionType
   );
