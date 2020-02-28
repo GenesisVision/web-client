@@ -1745,7 +1745,7 @@
     "login": {
       "footer-text": "Don't have an account?",
       "title": "Login",
-      "forgot": "Forgot?",
+      "forgot": "Forgot password?",
       "confirm-button-text": "Login",
       "placeholder": {
         "email": "Email address",
