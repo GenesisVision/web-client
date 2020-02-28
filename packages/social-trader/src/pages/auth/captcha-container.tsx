@@ -35,11 +35,11 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
       request({
         ...values,
         captchaCheckResult
-      })
-        .then(() => setStatus(CAPTCHA_STATUS.SUCCESS))
-        .catch(() => {
-          setStatus(CAPTCHA_STATUS.WAIT);
-        });
+      }).then(res => {
+        if (res) setStatus(CAPTCHA_STATUS.SUCCESS);
+        else setStatus(CAPTCHA_STATUS.WAIT);
+        return res;
+      });
     if (isSubmit) {
       switch (captchaType) {
         case "Pow":
