@@ -1,7 +1,7 @@
 import "./advantages-section.scss";
 
 import { AdvantagesListContainer } from "pages/landing-page/components/advantages-section/advantages.blocks";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import React, { useCallback, useEffect, useRef } from "react";
 import { animated, useTrail } from "react-spring";
 import { TRADE_ROUTE } from "routes/trade.routes";
@@ -50,7 +50,7 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
             //@ts-ignore
             style={{ transform: props.xy.interpolate(translate) }}
           >
-            <LPButton href={TRADE_ROUTE}>Join</LPButton>
+            <JoinButton href={TRADE_ROUTE}>Join</JoinButton>
           </animated.div>
         ))}
         <AdvantagesListContainer animation />
