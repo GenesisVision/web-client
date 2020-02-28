@@ -11,7 +11,6 @@ import {
   SliderText,
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
@@ -90,7 +89,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
         <SliderControlsWrapper>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <LPButton href={item.link}>Join</LPButton>
+              <JoinButton href={item.link}>Join</JoinButton>
             </animated.div>
           ))}
           <SliderControls
