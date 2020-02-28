@@ -1,5 +1,6 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Hint from "components/hint/hint";
+import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -26,12 +27,14 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
           </option>
         ))}
       </GVHookFormField>
-      <Hint
-        content={t("create-program-page.settings.hints.trades-delay")}
-        className="asset-form-field__hint"
-        vertical={VERTICAL_POPOVER_POS.BOTTOM}
-        tooltipContent={t("program-settings.trades-update.text")}
-      />
+      <MutedText small>
+        <Hint
+          content={t("create-program-page.settings.hints.trades-delay")}
+          className="asset-form-field__hint"
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
+          tooltipContent={t("program-settings.trades-update.text")}
+        />
+      </MutedText>
     </AssetField>
   );
 };
