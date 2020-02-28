@@ -66,7 +66,11 @@ const _CloseAssetForm: React.FC<Props> = ({
           </DialogField>
         )}
         <DialogButtons>
-          <SubmitButton isSuccessful={!errorMessage}>
+          <SubmitButton
+            checkValid={false}
+            checkDirty={false}
+            isSuccessful={!errorMessage}
+          >
             {t("buttons.confirm")}
           </SubmitButton>
           <GVButton
