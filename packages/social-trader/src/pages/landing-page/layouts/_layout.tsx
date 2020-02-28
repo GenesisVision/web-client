@@ -1,5 +1,6 @@
 import { TitleContext } from "components/link/link.helper";
 import { useRefLink } from "hooks/ref-link";
+import { useTranslation } from "i18n";
 import Head from "next/head";
 import CookieMessage from "pages/landing-page/components/cookie-message/cookie-message";
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
@@ -15,6 +16,7 @@ import {
 } from "utils/seo";
 
 const _Layout: React.FC<Props> = ({ description, title, children }) => {
+  const { t } = useTranslation();
   useRefLink();
   return (
     <div className="landing-page">
@@ -25,10 +27,8 @@ const _Layout: React.FC<Props> = ({ description, title, children }) => {
         <meta property="og:url" content="https://genesis.vision" />
         {imageMeta("https://genesis.vision/platform.png")}
         <meta property="og:image:type" content="image/png" />
-        {titleMeta("Genesis Vision")}
-        {descriptionMeta(
-          description || "Genesis Vision - Social Trading Platform"
-        )}
+        {titleMeta(t("landing-page.genesis-vision"))}
+        {descriptionMeta(description || t("landing-page.short-description"))}
       </Head>
       <TitleContext.Provider value={title}>
         <LPHeader />

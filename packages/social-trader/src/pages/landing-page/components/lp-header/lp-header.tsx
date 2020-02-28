@@ -2,6 +2,7 @@ import "./lp-header.scss";
 
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link from "components/link/link";
+import { useTranslation } from "i18n";
 import logo from "media/logo.svg";
 import { JoinButton } from "pages/landing-page/components/join-button";
 import MobileNav from "pages/landing-page/components/mobile-nav/mobile-nav";
@@ -13,6 +14,7 @@ import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 
 const LPHeader: React.FC = () => {
+  const { t } = useTranslation();
   const isAuthenticated = authService.isAuthenticated();
   return (
     <header className="lp-header">
@@ -31,18 +33,26 @@ const LPHeader: React.FC = () => {
             >
               <div className="lp-header__combo-logo">
                 <ImageBaseElement src={logo} />
-                <h1 className="lp-header__text-logo">Genesis Vision</h1>
+                <h1 className="lp-header__text-logo">
+                  {t("landing-page.genesis-vision")}
+                </h1>
               </div>
             </Link>
           </div>
           <NavList menuItems={navHeader} className="lp-header__nav" />
           <div className="lp-header__start-btn">
             <JoinButton
-              eventLabel={isAuthenticated ? "Dashboard" : "Get started"}
+              eventLabel={
+                isAuthenticated
+                  ? t("landing-page.buttons.dashboard")
+                  : t("landing-page.buttons.get-started")
+              }
               color="secondary"
               href={isAuthenticated ? OVERVIEW_ROUTE : SIGNUP_ROUTE}
             >
-              {isAuthenticated ? "Dashboard" : "Get started"}
+              {isAuthenticated
+                ? t("landing-page.buttons.dashboard")
+                : t("landing-page.buttons.get-started")}
             </JoinButton>
           </div>
         </div>
