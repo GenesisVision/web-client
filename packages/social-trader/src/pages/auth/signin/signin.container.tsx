@@ -13,7 +13,7 @@ import { AuthRootState, ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
 import { CODE_TYPE, storeTwoFactorAction } from "./signin.actions";
-import { clearLoginData, clearTwoFactorData, login } from "./signin.service";
+import { clearTwoFactorData, login } from "./signin.service";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -59,9 +59,6 @@ const _SignInContainer: React.FC<Props> = ({
     }
   });
 
-  useEffect(() => {
-    dispatch(clearLoginData);
-  }, []);
   useEffect(() => {
     if (type && (email === "" || password === ""))
       Router.replace(NOT_FOUND_PAGE_ROUTE);

@@ -12,7 +12,7 @@ import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
 import { removeCookie } from "utils/cookie";
 
-import { CODE_TYPE, LOGIN, LOGIN_TWO_FACTOR } from "./signin.actions";
+import { CODE_TYPE, LOGIN_TWO_FACTOR } from "./signin.actions";
 
 export const client = "Web";
 
@@ -38,11 +38,6 @@ export const login: LoginFuncType = ({
     recoveryCode: (type === CODE_TYPE.RECOVERY && code) || "",
     captchaCheckResult
   });
-};
-
-export const clearLoginData: clearLoginDataFuncType = dispatch => {
-  const clearLoginDataAction = clearDataActionFactory(LOGIN);
-  dispatch(clearLoginDataAction.clearData());
 };
 
 export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => {
