@@ -11,6 +11,7 @@ import {
   SliderText,
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
