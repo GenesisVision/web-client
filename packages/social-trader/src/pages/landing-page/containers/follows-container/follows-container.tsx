@@ -19,10 +19,10 @@ const _FollowsContainer: React.FC<Props> = ({ follows }) => {
       <div className="follows-container__info">
         <div className="follows-container__wrapper-fixed">
           <h2 className="follows-container__title">
-            {t("landing-page.follows-container.title")}
+            {t("landing-page.follows.title")}
           </h2>
           <p className="follows-container__text">
-            {t("landing-page.follows-container.text")}
+            {t("landing-page.follows.text")}
           </p>
           <JoinButton
             eventLabel={t("landing-page.buttons.discover")}

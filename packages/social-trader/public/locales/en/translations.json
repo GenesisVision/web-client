@@ -2663,18 +2663,25 @@
       "email-title": "Write email to Genesis Vision support",
       "subtitle": "Get Our mobile app"
     },
-    "follows-container": {
+    "follows": {
       "title": "Follow",
       "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
       "followers": "Followers"
     },
-    "programs-container": {
+    "programs": {
       "title": "Programs",
       "text": "Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at predefined intervals set by the program’s manager."
     },
-    "funds-container": {
+    "funds": {
       "title": "Funds",
       "text": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves. You can withdraw your capital at any time you retain full control of your investment."
+    },
+    "download": {
+      "title": "Download app",
+      "text": "The best social trading experience.\n Download the Genesis Vision app today."
+    },
+    "social": {
+      "title": "Join the Genesis Vision\n Community"
     }
   }
 }

@@ -41,15 +41,13 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
       >
         <ImageBaseElement
           src={FundsIcon}
-          alt={t("landing-page.funds-container.title")}
+          alt={t("landing-page.funds.title")}
           className="funds-container__img"
         />
         <h2 className="funds-container__title">
-          {t("landing-page.funds-container.title")}
+          {t("landing-page.funds.title")}
         </h2>
-        <p className="funds-container__text">
-          {t("landing-page.funds-container.text")}
-        </p>
+        <p className="funds-container__text">{t("landing-page.funds.text")}</p>
         <JoinButton
           eventLabel={t("landing-page.buttons.discover")}
           href={FUNDS_ROUTE}

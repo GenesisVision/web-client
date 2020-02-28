@@ -52,7 +52,7 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
         <div className="follows-list__item-data">
           <div className="follows-list__item-number">{count}</div>
           <span className="follows-list__item-label">
-            {t("landing-page.follows-container.followers")}
+            {t("landing-page.follows.followers")}
           </span>
         </div>
       </Link>

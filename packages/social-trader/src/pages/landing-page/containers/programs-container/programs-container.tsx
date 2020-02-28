@@ -13,7 +13,7 @@ interface Props {
   programs: ProgramDetailsListItem[];
 }
 
-const ProgramsContainer: React.FC<Props> = ({ programs }) => {
+const _ProgramsContainer: React.FC<Props> = ({ programs }) => {
   const { t } = useTranslation();
   if (!programs.length) return null;
   return (
@@ -21,14 +21,14 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
       <div className="programs-container__info">
         <ImageBaseElement
           src={ProgramIcon}
-          alt={t("landing-page.programs-container.title")}
+          alt={t("landing-page.programs.title")}
           className="programs-container__img"
         />
         <h2 className="programs-container__title">
-          {t("landing-page.programs-container.title")}
+          {t("landing-page.programs.title")}
         </h2>
         <p className="programs-container__text">
-          {t("landing-page.programs-container.text")}
+          {t("landing-page.programs.text")}
         </p>
         <JoinButton
           eventLabel={t("landing-page.buttons.discover")}
@@ -42,4 +42,5 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
   );
 };
 
+const ProgramsContainer = React.memo(_ProgramsContainer);
 export default ProgramsContainer;
