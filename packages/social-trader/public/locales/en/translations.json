@@ -2678,10 +2678,24 @@
     },
     "download": {
       "title": "Download app",
-      "text": "The best social trading experience.\n Download the Genesis Vision app today."
+      "text": "The best social trading experience.\n Download the Genesis Vision app today.",
+      "links": {
+        "apple-store": "Apple Store",
+        "google-play": "Google Play"
+      }
     },
     "social": {
-      "title": "Join the Genesis Vision\n Community"
+      "title": "Join the Genesis Vision\n Community",
+      "links": {
+        "telegram": "Telegram",
+        "twitter": "Twitter",
+        "facebook": "Facebook",
+        "github": "Github",
+        "youtube": "Youtube",
+        "reddit": "Reddit",
+        "linkedin": "Linkedin",
+        "medium-blog": "Medium Blog"
+      }
     }
   }
 }
