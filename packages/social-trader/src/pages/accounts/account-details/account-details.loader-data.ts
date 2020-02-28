@@ -34,6 +34,8 @@ export const statisticDataLoaderData = {
 };
 
 export const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType => ({
+  volumeFeePersonal: 0,
+  successFeePersonal: 0,
   detachMode: "None",
   unsubscriptionDate: new Date(),
   isExternal: false,
