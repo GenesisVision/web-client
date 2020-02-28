@@ -3,6 +3,7 @@ import authActions from "actions/auth-actions";
 import { Push } from "components/link/link";
 import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
 import useApiRequest from "hooks/api-request.hook";
+import useErrorMessage from "hooks/error-message.hook";
 import Router from "next/router";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
@@ -21,6 +22,7 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const { errorMessage, setErrorMessage } = useErrorMessage();
   const dispatch = useDispatch<ReduxDispatch>();
   const successMiddleware = (value: string) => {
     if (!value) return;
@@ -34,7 +36,7 @@ const _SignInContainer: React.FC<Props> = ({
     (state: AuthRootState) => state.loginData.twoFactor
   );
 
-  const { sendRequest, errorMessage } = useApiRequest({
+  const { sendRequest } = useApiRequest({
     middleware: [successMiddleware],
     request: values => {
       return login({
@@ -43,6 +45,7 @@ const _SignInContainer: React.FC<Props> = ({
         email: values.email || email,
         password: values.password || password
       }).catch((e: ResponseError) => {
+        setErrorMessage(e);
         if (e.code === "RequiresTwoFactor") {
           dispatch(
             storeTwoFactorAction({
