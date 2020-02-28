@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { TInfoItem } from "pages/landing-page/static-data/info";
 import React from "react";
 
@@ -30,7 +30,7 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => (
     )}
     {button && (
       <div className="info-list__item-btn">
-        <LPButton href={button.link}>{button.text}</LPButton>
+        <JoinButton href={button.link}>{button.text}</JoinButton>
       </div>
     )}
   </li>

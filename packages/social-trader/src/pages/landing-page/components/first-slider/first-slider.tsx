@@ -11,7 +11,7 @@ import {
   SliderText,
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 
@@ -46,7 +46,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
           </div>
         </SliderInfo>
         <SliderControlsWrapper>
-          <LPButton href={slidesItems[index].link}>Join</LPButton>
+          <JoinButton href={slidesItems[index].link}>Join</JoinButton>
           <SliderControls
             onClickLeft={onClickLeft}
             onClickRight={onClickRight}

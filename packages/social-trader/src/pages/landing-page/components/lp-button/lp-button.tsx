@@ -7,7 +7,7 @@ import React from "react";
 interface LPButtonProps {
   id?: string;
   type?: "button" | "submit";
-  color?: "primary" | "secondary";
+  color?: "primary" | "secondary" | "pink";
   className?: string;
   disabled?: boolean;
   onClick?: (
@@ -28,6 +28,7 @@ const _LPButton: React.FC<LPButtonProps> = ({
   href
 }) => {
   const classname = classNames("lp-button", className, {
+    "lp-button--pink": color === "pink",
     "lp-button--primary": color === "primary",
     "lp-button--secondary": color === "secondary"
   });
