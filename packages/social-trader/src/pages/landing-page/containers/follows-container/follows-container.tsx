@@ -2,7 +2,7 @@ import "./follows-container.scss";
 
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowsList from "pages/landing-page/components/follows/follows-list";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import React from "react";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 
@@ -23,7 +23,9 @@ const _FollowsContainer: React.FC<Props> = ({ follows }) => {
             automatically copy the trades from your account. You will be able to
             withdraw your investment or exit trades at any point in time.
           </p>
-          <LPButton href={GV_FOLLOW_ROUTE}>Discover</LPButton>
+          <JoinButton eventLabel={"Discover"} href={GV_FOLLOW_ROUTE}>
+            Discover
+          </JoinButton>
         </div>
       </div>
       <FollowsList follows={follows} className="follows-container__list" />

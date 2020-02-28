@@ -4,7 +4,7 @@ import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { FundDetailsListItem } from "gv-api-web";
 import FundsList from "pages/landing-page/components/funds/funds-list";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import FundsIcon from "pages/landing-page/images/common/funds-icon.svg";
 import React, { useCallback, useRef, useState } from "react";
 import { FUNDS_ROUTE } from "routes/funds.routes";
@@ -50,7 +50,9 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
           can withdraw your capital at any time you retain full control of your
           investment.
         </p>
-        <LPButton href={FUNDS_ROUTE}>Discover</LPButton>
+        <JoinButton eventLabel={"Discover"} href={FUNDS_ROUTE}>
+          Discover
+        </JoinButton>
       </div>
       <FundsList
         funds={funds}
