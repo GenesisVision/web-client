@@ -14,14 +14,27 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   return (
     <Page description={title} title={title}>
       <DetailsBlock horizontalPaddings>
+        <h3>PNG banners</h3>
         <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/250x250`}
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/250x250.png`}
         />
         <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/728x89`}
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/728x89.png`}
         />
         <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/240x400`}
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/240x400.png`}
+        />
+      </DetailsBlock>
+      <DetailsBlock horizontalPaddings>
+        <h3>SVG banners</h3>
+        <embed
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/250x250.svg`}
+        />
+        <embed
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/728x89.svg`}
+        />
+        <embed
+          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/240x400.svg`}
         />
       </DetailsBlock>
     </Page>
