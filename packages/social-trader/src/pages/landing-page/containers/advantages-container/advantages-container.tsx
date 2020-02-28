@@ -1,7 +1,4 @@
-import {
-  initialEffectiveConnectionType,
-  useNetworkStatus
-} from "hooks/network-status";
+import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AdvantagesSection from "pages/landing-page/components/advantages-section/advantages-section";
 import React, { useCallback } from "react";
@@ -13,9 +10,7 @@ const AdvantagesSectionWithAnimation = dynamic(() =>
 );
 
 const AdvantagesContainer: React.FC = () => {
-  const { effectiveConnectionType } = useNetworkStatus(
-    initialEffectiveConnectionType
-  );
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const renderSection = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":

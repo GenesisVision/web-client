@@ -1,10 +1,7 @@
 import "./accordion.scss";
 
 import classNames from "classnames";
-import {
-  initialEffectiveConnectionType,
-  useNetworkStatus
-} from "hooks/network-status";
+import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AccordionContent, {
   TAccordionContent
@@ -30,9 +27,7 @@ interface Props {
 }
 
 const _Accordion: React.FC<Props> = ({ accordion, className }) => {
-  const { effectiveConnectionType } = useNetworkStatus(
-    initialEffectiveConnectionType
-  );
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = useCallback(() => setIsVisible(!isVisible), [isVisible]);
