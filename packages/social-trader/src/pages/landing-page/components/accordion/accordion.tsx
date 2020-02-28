@@ -27,7 +27,10 @@ interface Props {
 }
 
 const _Accordion: React.FC<Props> = ({ accordion, className }) => {
-  const { effectiveConnectionType = "4g" } = useNetworkStatus();
+  const initialEffectiveConnectionType = "4g";
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = useCallback(() => setIsVisible(!isVisible), [isVisible]);

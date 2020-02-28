@@ -14,7 +14,10 @@ const InfoListWrapperWithAnimation = dynamic(() =>
 );
 
 const InfoContainer: React.FC = () => {
-  const { effectiveConnectionType = "4g" } = useNetworkStatus();
+  const initialEffectiveConnectionType = "4g";
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
   const [currentTabId, setCurrentTab] = useState(0);
 
   const handleChange = useCallback(

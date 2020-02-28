@@ -10,7 +10,10 @@ const AdvantagesSectionWithAnimation = dynamic(() =>
 );
 
 const AdvantagesContainer: React.FC = () => {
-  const { effectiveConnectionType = "4g" } = useNetworkStatus();
+  const initialEffectiveConnectionType = "4g";
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
   const renderSection = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":

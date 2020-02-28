@@ -31,7 +31,10 @@ const _BrokersContainer: React.FC<Props> = ({
   brokersTabs,
   title
 }) => {
-  const { effectiveConnectionType = "4g" } = useNetworkStatus();
+  const initialEffectiveConnectionType = "4g";
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
   const [currentTabId, setCurrentTab] = useState(0);
 
   const handleChange = useCallback(
