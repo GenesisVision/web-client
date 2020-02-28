@@ -2642,5 +2642,20 @@
     "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
     "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
     "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
+  },
+  "landing-page": {
+    "description": "Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies.",
+    "title": "Genesis Vision - The Next Generation Social Trading Platform",
+    "buttons": {
+      "discover": "Discover"
+    },
+    "link": {
+      "title": "Go to {{title}} details page"
+    },
+    "follows-container": {
+      "title": "Follow",
+      "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
+      "followers": "Followers"
+    }
   }
 }

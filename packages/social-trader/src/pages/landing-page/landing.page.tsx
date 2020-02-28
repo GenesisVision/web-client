@@ -3,6 +3,7 @@ import "./styles/home.scss";
 
 import { LandingInfo } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
+import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -26,6 +27,7 @@ import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
 const _LandingPage: React.FC = () => {
+  const { t } = useTranslation();
   const { data } = useApiRequest({
     request: getLandingAssets,
     fetchOnMount: true,
@@ -35,8 +37,8 @@ const _LandingPage: React.FC = () => {
   useUtm();
   return (
     <Layout
-      description="Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies."
-      title="Genesis Vision - The Next Generation Social Trading Platform"
+      description={t("landing-page.description")}
+      title={t("landing-page.title")}
     >
       <main className="home">
         <FirstScreen news={news} />
