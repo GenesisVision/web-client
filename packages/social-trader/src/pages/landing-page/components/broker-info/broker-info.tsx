@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { useToLink } from "components/link/link.helper";
 import { composeAttachAccountRouteWithBroker } from "pages/attach-account/attach-account.constants";
 import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React from "react";
 
@@ -36,7 +36,9 @@ const _BrokerInfo: React.FC<Props> = ({
     >
       <h3 className="broker-info__subtitle">{title}</h3>
       {description && <p className="broker-info__description">{description}</p>}
-      <LPButton href={linkCreator(tradingLink)}>Start trading</LPButton>
+      <JoinButton eventLabel={"Start trading"} href={linkCreator(tradingLink)}>
+        Start trading
+      </JoinButton>
       <ul className="broker-info__list-advantages">
         {listItems.map((item, index) => (
           <BrokerAdvantage

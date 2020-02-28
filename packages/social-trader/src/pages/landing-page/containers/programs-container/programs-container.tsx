@@ -2,7 +2,7 @@ import "./programs-container.scss";
 
 import ImageBaseElement from "components/avatar/image-base.element";
 import { ProgramDetailsListItem } from "gv-api-web";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import ProgramsList from "pages/landing-page/components/programs/programs-list";
 import ProgramIcon from "pages/landing-page/images/common/program-icon.svg";
 import React from "react";
@@ -29,7 +29,9 @@ const ProgramsContainer: React.FC<Props> = ({ programs }) => {
           investment or profits only at predefined intervals set by the
           program’s manager.
         </p>
-        <LPButton href={PROGRAMS_ROUTE}>Discover</LPButton>
+        <JoinButton eventLabel={"Discover"} href={PROGRAMS_ROUTE}>
+          Discover
+        </JoinButton>
       </div>
       <ProgramsList className="programs-container__list" programs={programs} />
     </div>

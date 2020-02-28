@@ -2,6 +2,9 @@
 @import "~shared/styles/breakpoint";
 @import "../../styles/mixins";
 
+$pink-color: #cf2877;
+$pink-color-hover: lighten(#cf2877, 10%);
+
 .lp-button {
   @include transition(color, background-color);
   @include reset-button();
@@ -28,6 +31,21 @@
     line-height: 14px;
     font-size: 14px;
     border-radius: 100px;
+  }
+
+  &--pink {
+    background-color: $pink-color;
+
+    &:hover {
+      background-color: $pink-color-hover;
+      color: $main-color;
+    }
+
+    &:focus,
+    &:active {
+      background-color: $pink-color;
+      color: $main-color;
+    }
   }
 
   &--primary {
