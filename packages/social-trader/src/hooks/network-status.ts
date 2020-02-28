@@ -50,4 +50,19 @@ const useNetworkStatus = (initialEffectiveConnectionType?: any) => {
   return { ...networkStatus, setNetworkStatus };
 };
 
-export { useNetworkStatus, initialEffectiveConnectionType };
+const useNetworkStatusInWindow = () => {
+  const [type, setType] = useState();
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
+  useEffect(() => {
+    setType(effectiveConnectionType);
+  }, []);
+  return { effectiveConnectionType: type };
+};
+
+export {
+  useNetworkStatusInWindow,
+  useNetworkStatus,
+  initialEffectiveConnectionType
+};
