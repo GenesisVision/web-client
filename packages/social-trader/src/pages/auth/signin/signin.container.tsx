@@ -47,7 +47,6 @@ const _SignInContainer: React.FC<Props> = ({
         email: values.email || email,
         password: values.password || password
       }).catch((e: ResponseError) => {
-        setErrorMessage(e);
         if (e.code === "RequiresTwoFactor") {
           setDisable();
           dispatch(
@@ -59,7 +58,7 @@ const _SignInContainer: React.FC<Props> = ({
           );
           dispatch(setTwoFactorRequirementAction(true));
           Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
-        }
+        } else setErrorMessage(e);
       });
     }
   });
