@@ -60,13 +60,17 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   const checkTwoFactor = useCallback(() => {
     if (isSubmitting) return;
     setIsChecking();
-    onSubmit(watch());
-  }, [isSubmitting, watch]);
+    onSubmit({ code, email });
+  }, [isSubmitting, code, email]);
 
   const requestStatus = useContext(CaptchaStatusContext);
 
+  const handleSubmit = useCallback(() => {
+    onSubmit({ code, email });
+  }, [code, email]);
+
   return (
-    <HookForm className="login-two-factor" form={form} onSubmit={onSubmit}>
+    <HookForm className="login-two-factor" form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
       <div className="login-two-factor__text">
         {t("auth.login.two-factor.text")}
