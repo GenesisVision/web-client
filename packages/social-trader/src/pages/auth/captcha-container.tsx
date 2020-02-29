@@ -29,7 +29,7 @@ const _CaptchaContainer: React.FC<Props> = ({
 
   useEffect(() => {
     if (disable) setStatus(CAPTCHA_STATUS.PENDING);
-  }, [disable]);
+  }, [disable, status]);
 
   useEffect(() => {
     const captchaCheckResult = {
