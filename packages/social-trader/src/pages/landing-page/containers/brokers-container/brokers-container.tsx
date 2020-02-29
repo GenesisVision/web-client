@@ -1,13 +1,14 @@
 import "./brokers-container.scss";
 
 import classNames from "classnames";
-import BrokerInfo from "pages/landing-page/components/broker-info/broker-info";
+import { useNetworkStatusInWindow } from "hooks/network-status";
+import dynamic from "next/dynamic";
+import BrokerInfoWrapper from "pages/landing-page/components/broker-info-wrapper/broker-info-wrapper";
 import TabControls, {
   TTabsItem
 } from "pages/landing-page/components/tab-controls/tab-controls";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React, { useCallback, useState } from "react";
-import { animated, config, useTransition } from "react-spring";
 
 interface Props {
   darkTheme?: boolean;
@@ -17,6 +18,12 @@ interface Props {
   brokersTabs: TTabsItem[];
 }
 
+const BrokerInfoWrapperWithAnimation = dynamic(() =>
+  import(
+    "pages/landing-page/components/broker-info-wrapper/broker-info-wrapper-with-animation"
+  )
+);
+
 const _BrokersContainer: React.FC<Props> = ({
   className,
   darkTheme,
@@ -24,6 +31,7 @@ const _BrokersContainer: React.FC<Props> = ({
   brokersTabs,
   title
 }) => {
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const [currentTabId, setCurrentTab] = useState(0);
 
   const handleChange = useCallback(
@@ -33,16 +41,20 @@ const _BrokersContainer: React.FC<Props> = ({
     [currentTabId]
   );
 
-  const transitions = useTransition(
-    brokersInfo[currentTabId],
-    item => item.id,
-    {
-      from: { opacity: 0, position: "absolute" },
-      enter: { opacity: 1, position: "static" },
-      leave: { opacity: 0, position: "absolute" },
-      config: config.slow
+  const renderBrokersInfo = useCallback(() => {
+    switch (effectiveConnectionType) {
+      case "4g":
+        return (
+          <BrokerInfoWrapperWithAnimation
+            currentBrokersInfo={brokersInfo[currentTabId]}
+          />
+        );
+      default:
+        return (
+          <BrokerInfoWrapper currentBrokersInfo={brokersInfo[currentTabId]} />
+        );
     }
-  );
+  }, [effectiveConnectionType, currentTabId]);
   return (
     <div
       className={classNames("brokers-container", className, {
@@ -60,22 +72,7 @@ const _BrokersContainer: React.FC<Props> = ({
           className="brokers-container__controls"
         />
       </div>
-      {transitions.map(({ item, props, key }) => (
-        <animated.div
-          className="brokers-container__tab-info"
-          key={key}
-          style={props as any}
-        >
-          <BrokerInfo
-            type={item.type}
-            darkTheme={darkTheme}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            listItems={item.listItems}
-          />
-        </animated.div>
-      ))}
+      {renderBrokersInfo()}
     </div>
   );
 };

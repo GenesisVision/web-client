@@ -31,10 +31,7 @@
 
   @include media-breakpoint-landscape-tablet() {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include media-breakpoint-large-desktop() {
-    //grid-template-rows: 265px auto;
+    grid-template-rows: 1fr 50px;
   }
 
   &__item {
@@ -74,9 +71,6 @@
       @include media-breakpoint-landscape-tablet() {
         grid-column: 1/4;
         text-align: center;
-      }
-      @include media-breakpoint-desktop() {
-        display: none;
       }
     }
   }
