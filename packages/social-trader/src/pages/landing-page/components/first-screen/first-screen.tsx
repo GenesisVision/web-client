@@ -29,8 +29,11 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
             slidesItems={slides}
           />
         );
-      default:
+      case "3g":
+      case "2g":
         return <FirstSlider className="home__grid-row" slidesItems={slides} />;
+      default:
+        return null;
     }
   }, [effectiveConnectionType, slides]);
   return (
