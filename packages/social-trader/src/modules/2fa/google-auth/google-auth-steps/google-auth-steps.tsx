@@ -12,6 +12,7 @@ const GoogleAuthSteps: React.FC<Props> = props => {
   const [innerWidth, setInnerWidth] = useState(0);
   useEffect(() => {
     window.onresize = debounce(() => setInnerWidth(window.innerWidth), 166);
+    setInnerWidth(window.innerWidth);
   }, []);
   return isTablet(innerWidth) ? (
     <GoogleAuthMobile {...props} />

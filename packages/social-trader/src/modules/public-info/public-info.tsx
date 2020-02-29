@@ -1,6 +1,5 @@
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
 
 import PublicInfoForm, { IAboutFormValues } from "./public-info-form";
 import { updateProfile } from "./public-info.service";

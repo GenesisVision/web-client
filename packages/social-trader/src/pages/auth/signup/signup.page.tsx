@@ -1,14 +1,16 @@
 import "./signup.scss";
 
+import emailPendingActions from "actions/email-pending-actions";
+import { Push } from "components/link/link";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
-import { RegisterViewModel } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import CaptchaContainer from "pages/auth/captcha-container";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
+import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
 import * as React from "react";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { AuthRootState, ReduxDispatch } from "utils/types";
+import { useDispatch } from "react-redux";
+import { ReduxDispatch } from "utils/types";
 
 import { signUp } from "./services/signup.service";
 
@@ -17,14 +19,16 @@ const _SignUpPage: React.FC<Props> = ({
   utmSource,
   referralCode
 }) => {
-  const dispatch = useDispatch<ReduxDispatch>();
   const [t] = useTranslation();
-  const request = useCallback((values: RegisterViewModel) => {
-    return dispatch(signUp(values));
-  }, []);
-  const errorMessage = useSelector(
-    (state: AuthRootState) => state.signUpData.errorMessage
-  );
+  const dispatch = useDispatch<ReduxDispatch>();
+  const successMiddleware = (email: string) => {
+    dispatch(emailPendingActions.saveEmail({ email }));
+    Push(SIGNUP_ROUTE_PENDING);
+  };
+  const { sendRequest: request, errorMessage } = useApiRequest({
+    request: signUp,
+    middleware: [successMiddleware]
+  });
   return (
     <PageSeoWrapper
       description={"Sign up to the Genesis Vision"}

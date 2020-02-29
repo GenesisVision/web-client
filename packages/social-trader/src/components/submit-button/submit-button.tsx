@@ -3,6 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 export const SubmitButton: React.FC<Props> = ({
+  checkSubmitted = true,
   checkValid = true,
   checkDirty = true,
   children,
@@ -16,7 +17,8 @@ export const SubmitButton: React.FC<Props> = ({
     formState: { isSubmitted, isValid, dirty, isSubmitting }
   } = useFormContext();
   const isPendingInner = isSubmitting || isPending;
-  const isSuccessfulInner = isSubmitted && isSuccessful;
+  const isSuccessfulInner =
+    (checkSubmitted ? isSubmitted : true) && isSuccessful;
   const disabledInner =
     (checkValid && !isValid) ||
     (checkDirty && !dirty) ||
@@ -37,6 +39,7 @@ export const SubmitButton: React.FC<Props> = ({
 };
 
 interface Props extends GVButtonProps {
+  checkSubmitted?: boolean;
   checkValid?: boolean;
   checkDirty?: boolean;
   isSuccessful?: boolean;

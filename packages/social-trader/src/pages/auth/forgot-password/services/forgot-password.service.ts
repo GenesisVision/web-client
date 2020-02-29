@@ -10,7 +10,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import { EMAIL_PENDING_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import { MiddlewareDispatch, SetSubmittingType, TGetState } from "utils/types";
+import { MiddlewareDispatch, TGetState } from "utils/types";
 
 import { forgotPasswordAction } from "../actions/forgot-password.actions";
 
@@ -22,9 +22,9 @@ export const forgotPassword = (data: ForgotPasswordViewModel) => (
     Push(EMAIL_PENDING_ROUTE);
   });
 
-export const restorePassword = (
-  model: ResetPasswordViewModel & { setSubmitting: SetSubmittingType }
-) => (dispatch: MiddlewareDispatch) =>
+export const restorePassword = (model: ResetPasswordViewModel) => (
+  dispatch: MiddlewareDispatch
+) =>
   authApi.resetPassword({ body: model }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));

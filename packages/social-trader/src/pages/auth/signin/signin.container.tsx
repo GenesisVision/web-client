@@ -1,13 +1,21 @@
+import { setTwoFactorRequirementAction } from "actions/2fa-actions";
+import authActions from "actions/auth-actions";
+import { Push } from "components/link/link";
 import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
+import useApiRequest from "hooks/api-request.hook";
+import useErrorMessage from "hooks/error-message.hook";
+import useIsOpen from "hooks/is-open.hook";
 import Router from "next/router";
+import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthRootState, ReduxDispatch } from "utils/types";
+import authService from "services/auth-service";
+import { AuthRootState, ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
-import { CODE_TYPE, loginUserAction } from "./signin.actions";
-import { clearLoginData, login } from "./signin.service";
+import { CODE_TYPE, storeTwoFactorAction } from "./signin.actions";
+import { clearTwoFactorData, login } from "./signin.service";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -15,16 +23,46 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const [disable, setDisable] = useIsOpen();
+  const { errorMessage, setErrorMessage } = useErrorMessage();
   const dispatch = useDispatch<ReduxDispatch>();
-  const { errorMessage } = useSelector(
-    (state: AuthRootState) => state.loginData.login
-  );
+  const successMiddleware = (value: string) => {
+    if (!value) return;
+    authService.storeToken(value);
+    dispatch(authActions.updateTokenAction(true));
+    if (type) dispatch(clearTwoFactorData());
+    Router.push(redirectFrom);
+  };
+
   const { email, password } = useSelector(
     (state: AuthRootState) => state.loginData.twoFactor
   );
-  useEffect(() => {
-    dispatch(clearLoginData);
-  }, []);
+
+  const { sendRequest } = useApiRequest({
+    middleware: [successMiddleware],
+    request: values => {
+      return login({
+        ...values,
+        type,
+        email: values.email || email,
+        password: values.password || password
+      }).catch((e: ResponseError) => {
+        if (e.code === "RequiresTwoFactor") {
+          setDisable();
+          dispatch(
+            storeTwoFactorAction({
+              email: values.email,
+              password: values.password,
+              from: redirectFrom
+            })
+          );
+          dispatch(setTwoFactorRequirementAction(true));
+          Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
+        } else setErrorMessage(e);
+      });
+    }
+  });
+
   useEffect(() => {
     if (type && (email === "" || password === ""))
       Router.replace(NOT_FOUND_PAGE_ROUTE);
@@ -32,7 +70,8 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       <CaptchaContainer
-        request={dispatch(login(loginUserAction, redirectFrom, type))}
+        disable={disable}
+        request={sendRequest}
         renderForm={handle => renderForm(handle, email, errorMessage)}
       />
     </div>

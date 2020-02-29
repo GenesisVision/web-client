@@ -1,7 +1,6 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import { useTranslation } from "i18n";
 import React, { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
 
 const _ConfirmChangeBroker: React.FC<Props> = ({
   open,
