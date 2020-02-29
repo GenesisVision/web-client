@@ -8,7 +8,6 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
 import { number, object, string } from "yup";
 
@@ -42,7 +41,6 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
           label={t("2fa-page.google-code")}
           component={SimpleTextField}
           autoComplete="off"
-          InputComponent={NumberFormat}
           allowNegative={false}
           format="######"
         />
