@@ -2,18 +2,9 @@
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
-.advantages-container {
+.advantages-section {
   @include grid();
   @include horizontal-padding();
-
-  @include media-breakpoint-desktop() {
-    padding-bottom: 200px;
-  }
-
-  @include media-breakpoint-large-desktop() {
-    padding-top: 240px;
-    padding-bottom: 140px;
-  }
 
   &__title {
     margin-bottom: 60px;
@@ -28,6 +19,12 @@
   &__list {
     @include media-breakpoint-tablet() {
       grid-column: 2/12;
+    }
+
+    &--animation .advantages-list__item--last {
+      @include media-breakpoint-desktop() {
+        display: none;
+      }
     }
   }
 
@@ -68,5 +65,9 @@
         line-height: 100px;
       }
     }
+  }
+
+  &__button {
+    order: 2;
   }
 }

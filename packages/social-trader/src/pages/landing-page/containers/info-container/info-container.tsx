@@ -1,12 +1,20 @@
 import "./info-container.scss";
 
-import InfoList from "pages/landing-page/components/info-list/info-list";
+import { useNetworkStatusInWindow } from "hooks/network-status";
+import dynamic from "next/dynamic";
+import InfoListWrapper from "pages/landing-page/components/info-list-wrapper/info-list-wrapper";
 import TabControls from "pages/landing-page/components/tab-controls/tab-controls";
 import { infoList, infoTabs } from "pages/landing-page/static-data/info";
 import React, { useCallback, useState } from "react";
-import { animated, config, useTransition } from "react-spring";
+
+const InfoListWrapperWithAnimation = dynamic(() =>
+  import(
+    "pages/landing-page/components/info-list-wrapper/info-list-wrapper-with-animation"
+  )
+);
 
 const InfoContainer: React.FC = () => {
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const [currentTabId, setCurrentTab] = useState(0);
 
   const handleChange = useCallback(
@@ -16,12 +24,19 @@ const InfoContainer: React.FC = () => {
     [currentTabId]
   );
 
-  const transitions = useTransition(infoList[currentTabId], item => item.id, {
-    from: { opacity: 0, position: "absolute" },
-    enter: { opacity: 1, position: "static" },
-    leave: { opacity: 0, position: "absolute" },
-    config: config.slow
-  });
+  const renderInfoTabs = useCallback(() => {
+    switch (effectiveConnectionType) {
+      case "4g":
+        return (
+          <InfoListWrapperWithAnimation
+            currentInfoList={infoList[currentTabId]}
+          />
+        );
+      default:
+        return <InfoListWrapper currentInfoList={infoList[currentTabId]} />;
+    }
+  }, [effectiveConnectionType, currentTabId]);
+
   return (
     <div className="info-container">
       <div className="info-container__wrapper-controls">
@@ -32,15 +47,7 @@ const InfoContainer: React.FC = () => {
           className="info-container__controls"
         />
       </div>
-      {transitions.map(({ item, props, key }) => (
-        <animated.div
-          className="info-container__tab-info"
-          key={key}
-          style={props as any}
-        >
-          <InfoList id={item.id} listItems={item.listItems} />
-        </animated.div>
-      ))}
+      {renderInfoTabs()}
     </div>
   );
 };
