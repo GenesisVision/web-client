@@ -4,6 +4,7 @@ import { Push } from "components/link/link";
 import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
+import useIsOpen from "hooks/is-open.hook";
 import Router from "next/router";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
@@ -22,6 +23,7 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const [disable, setDisable] = useIsOpen();
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const dispatch = useDispatch<ReduxDispatch>();
   const successMiddleware = (value: string) => {
@@ -47,6 +49,7 @@ const _SignInContainer: React.FC<Props> = ({
       }).catch((e: ResponseError) => {
         setErrorMessage(e);
         if (e.code === "RequiresTwoFactor") {
+          setDisable();
           dispatch(
             storeTwoFactorAction({
               email: values.email,
@@ -68,6 +71,7 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       <CaptchaContainer
+        disable={disable}
         request={sendRequest}
         renderForm={handle => renderForm(handle, email, errorMessage)}
       />

@@ -12,7 +12,11 @@ export enum CAPTCHA_STATUS {
   SUCCESS = "SUCCESS"
 }
 
-const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
+const _CaptchaContainer: React.FC<Props> = ({
+  renderForm,
+  request,
+  disable
+}) => {
   const [status, setStatus] = useState<CAPTCHA_STATUS>(CAPTCHA_STATUS.WAIT);
   const [pow, setPow] = useState<PowDetails | undefined>(undefined);
   // const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
@@ -22,6 +26,10 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   const [email, setEmail] = useState<string>("");
   const [values, setValues] = useState<TValues | undefined>(undefined);
   const [isSubmit, setIsSubmit, setIsNotSubmit] = useIsOpen();
+
+  useEffect(() => {
+    if (disable) setStatus(CAPTCHA_STATUS.PENDING);
+  }, [disable]);
 
   useEffect(() => {
     const captchaCheckResult = {
@@ -85,6 +93,7 @@ export const CaptchaStatusContext = React.createContext<CAPTCHA_STATUS>(
 export type TValues = any;
 
 interface OwnProps {
+  disable?: boolean;
   request: (values: TValues) => Promise<any>;
   renderForm: (handle: (values: TValues) => void) => JSX.Element;
 }
