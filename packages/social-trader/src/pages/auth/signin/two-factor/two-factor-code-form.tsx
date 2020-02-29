@@ -66,7 +66,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   const requestStatus = useContext(CaptchaStatusContext);
 
   const handleSubmit = useCallback(() => {
-    onSubmit({ code, email });
+    return onSubmit({ code, email });
   }, [code, email]);
 
   return (
@@ -102,6 +102,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
       <FormError error={error} />
       <div className="login-two-factor__submit">
         <SubmitButton
+          checkSubmitted={false}
           id="signUpFormSubmit"
           isPending={requestStatus === CAPTCHA_STATUS.PENDING}
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}

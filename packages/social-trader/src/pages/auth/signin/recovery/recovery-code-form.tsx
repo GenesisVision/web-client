@@ -41,7 +41,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
   const requestStatus = useContext(CaptchaStatusContext);
 
   const handleSubmit = useCallback(() => {
-    onSubmit({ code, email });
+    return onSubmit({ code, email });
   }, [code, email]);
 
   return (
