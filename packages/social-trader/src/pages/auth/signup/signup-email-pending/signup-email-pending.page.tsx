@@ -4,9 +4,12 @@ import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pe
 import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/signup-email-pending-container";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "reducers/root-reducer";
 
 const _EmailPending: React.FC = () => {
   const [t] = useTranslation();
+  const { email } = useSelector((state: RootState) => state.emailPending);
   return (
     <div className="signup-email">
       <h1>{t("auth.signup.email-confirm-title")}</h1>
@@ -14,7 +17,7 @@ const _EmailPending: React.FC = () => {
         {t("auth.signup-email-pending.text-section")}
       </p>
       <SignupEmailPendingContainer
-        sendConfirmationLink={sendConfirmationLink}
+        sendConfirmationLink={sendConfirmationLink(email)}
       />
     </div>
   );
