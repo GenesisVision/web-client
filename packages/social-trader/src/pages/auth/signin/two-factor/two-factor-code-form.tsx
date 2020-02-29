@@ -89,7 +89,11 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
       <div className="login-two-factor__recovery-info">
         {t("auth.login.two-factor.recovery-info")}
       </div>
-      <GVButton className="login-two-factor__recovery-link" variant="text">
+      <GVButton
+        noPadding
+        className="login-two-factor__recovery-link"
+        variant="text"
+      >
         <Link to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}>
           {t("auth.login.two-factor.link-to-recovery")}
         </Link>
