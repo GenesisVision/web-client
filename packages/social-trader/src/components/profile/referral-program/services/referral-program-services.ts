@@ -4,8 +4,6 @@ import profileApi from "services/api-client/profile-api";
 import authService from "services/auth-service";
 import { CurrencyEnum } from "utils/types";
 
-import { referralHistoryTableAction } from "../actions/referral-history-table.actions";
-
 export const getReferralDetails = (currency: CurrencyEnum) => {
   const authorization = authService.getAuthArg();
   return partnershipApi.getDetails(authorization, { currency });
@@ -20,7 +18,7 @@ export const getFriendsTable = (
 
 export const getHistoryTable = (filters: any) => {
   const authorization = authService.getAuthArg();
-  return referralHistoryTableAction(authorization, filters);
+  return partnershipApi.getRewardsHistory(authorization, filters);
 };
 
 export const getProfile = () =>
