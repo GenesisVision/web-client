@@ -1,5 +1,6 @@
 import "./first-slider.scss";
 
+import { useTranslation } from "i18n";
 import {
   SliderControls,
   SliderControlsWrapper,
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const countsSlides = slidesItems.length;
   const onClickLeft = useCallback(
@@ -41,8 +43,8 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
       <SliderInfoWrapper>
         <SliderInfo>
           <div className="slider__info-animate">
-            <SliderTitle>{slidesItems[index].title}</SliderTitle>
-            <SliderText>{slidesItems[index].text}</SliderText>
+            <SliderTitle>{t(slidesItems[index].title)}</SliderTitle>
+            <SliderText>{t(slidesItems[index].text)}</SliderText>
           </div>
         </SliderInfo>
         <SliderControlsWrapper>

@@ -2648,6 +2648,7 @@
     "title": "Genesis Vision - The Next Generation Social Trading Platform",
     "short-description": "Genesis Vision - Social Trading Platform",
     "genesis-vision": "Genesis Vision",
+    "tag-hot": "HOT",
     "buttons": {
       "discover": "Discover",
       "dashboard": "Dashboard",
@@ -2714,6 +2715,17 @@
         "linkedin": "Linkedin",
         "medium-blog": "Medium Blog"
       }
+    },
+    "slider": {
+      "slide-1-title": "Trade on Demo",
+      "slide-1-text": "Learn to trade or test your strategies without any financial risks and limitations",
+      "slide-2-title": "Pay with card",
+      "slide-2-text": "Use your credit or debit card to buy crypto - get started right away as a trader, an investor or a manager on the Genesis Vision platform.",
+      "slide-3-title": "Enticing invitations",
+      "slide-3-text": "Use the Genesis Vision two-level Affiliate Network to receive a percentage of the commission paid by your referrals… and your referrals’ referrals!"
+    },
+    "events": {
+      "title": "Genesis Vision Wall"
     }
   }
 }
