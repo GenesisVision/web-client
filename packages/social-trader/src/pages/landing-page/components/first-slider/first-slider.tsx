@@ -48,7 +48,9 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
           </div>
         </SliderInfo>
         <SliderControlsWrapper>
-          <JoinButton href={slidesItems[index].link}>Join</JoinButton>
+          <JoinButton href={slidesItems[index].link}>
+            {t("landing-page.buttons.join")}
+          </JoinButton>
           <SliderControls
             onClickLeft={onClickLeft}
             onClickRight={onClickRight}

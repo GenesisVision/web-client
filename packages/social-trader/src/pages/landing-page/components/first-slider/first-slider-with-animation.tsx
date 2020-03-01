@@ -92,7 +92,9 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
         <SliderControlsWrapper>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <JoinButton href={item.link}>Join</JoinButton>
+              <JoinButton href={item.link}>
+                {t("landing-page.buttons.join")}
+              </JoinButton>
             </animated.div>
           ))}
           <SliderControls

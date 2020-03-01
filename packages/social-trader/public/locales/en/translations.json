@@ -2788,6 +2788,15 @@
       "text-huobi-1": "crypto trading pairs",
       "text-huobi-2": "BTC, ETH, USDT Accounts",
       "text-huobi-3": "Huobi Web Trading Terminal"
+    },
+    "advantages": {
+      "title": "Our advantages",
+      "title-1": "Access all financial markets",
+      "text-1": "Open multi broker trading platform. Wide range of instruments and asset classes including Forex, Crypto and Stock markets.",
+      "title-2": "Control your exposure",
+      "text-2": "Wide range of investment opportunities broken by risk tolerance and profitability. Access to risk analysis and management tools. The products offered include Asset Management, Funds and Copytrading.",
+      "title-3": "Choose the best tool to make money",
+      "text-3": "Choose your role or combine them - Trade, Invest, Manage, Follow or Lead"
     }
   }
 }
