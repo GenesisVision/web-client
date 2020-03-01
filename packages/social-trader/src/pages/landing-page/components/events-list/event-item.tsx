@@ -3,6 +3,7 @@ import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-def
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef } from "react";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
@@ -93,6 +94,7 @@ const _EventItem: React.FC<Props> = ({
   maxHeight,
   updateMaxHeight
 }) => {
+  const { t } = useTranslation();
   const { contextTitle } = useToLink();
   const itemRef = useRef(null);
   const linkUser = userUrl
@@ -132,7 +134,7 @@ const _EventItem: React.FC<Props> = ({
       ref={itemRef}
     >
       <Link
-        title={`Go to ${title} details page`}
+        title={t("landing-page.links.title", { title, page: "details" })}
         className="events-list__item-link"
         to={linkAsset}
       >
@@ -149,7 +151,10 @@ const _EventItem: React.FC<Props> = ({
       </Link>
       <div className="events-list__item-info">
         <Link
-          title={`Go to ${userUrl} user page`}
+          title={t("landing-page.links.title", {
+            title: userUrl,
+            page: "user"
+          })}
           className="events-list__item-link"
           to={linkUser}
         >

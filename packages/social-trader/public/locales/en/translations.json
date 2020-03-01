@@ -2656,7 +2656,7 @@
       "send": "SEND"
     },
     "links": {
-      "title": "Go to {{title}} details page",
+      "title": "Go to {{title}} {{page}} page",
       "invest": "Invest",
       "follow": "Follow",
       "programs": "Programs",

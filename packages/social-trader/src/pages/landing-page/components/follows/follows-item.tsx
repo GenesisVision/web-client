@@ -34,7 +34,7 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
   return (
     <li className="follows-list__item">
       <Link
-        title={t("landing-page.links.title", { title })}
+        title={t("landing-page.links.title", { title, page: "details" })}
         className="follows-list__item-link"
         to={linkProps}
       >
