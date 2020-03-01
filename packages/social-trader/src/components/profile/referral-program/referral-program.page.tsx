@@ -25,12 +25,12 @@ import {
 const _ReferralProgramPage: React.FC = () => {
   const currency = useSelector(currencySelector);
   const dispatch = useDispatch();
-  const { sendRequest, data } = useApiRequest<ProfileFullViewModel>({
+  const { data } = useApiRequest<ProfileFullViewModel>({
+    fetchOnMount: true,
     request: getProfile
   });
   useEffect(() => {
     dispatch(getReferralDetails(currency));
-    sendRequest();
   }, []);
   const rewards = useSelector(referralDetailsSelector);
   return (
