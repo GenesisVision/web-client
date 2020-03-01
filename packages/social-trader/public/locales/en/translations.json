@@ -2651,6 +2651,7 @@
     "tag-hot": "HOT",
     "buttons": {
       "discover": "Discover",
+      "join": "Join",
       "dashboard": "Dashboard",
       "get-started": "Get started",
       "send": "SEND"
@@ -2726,6 +2727,30 @@
     },
     "events": {
       "title": "Genesis Vision Wall"
+    },
+    "info": {
+      "tab-trade": "Trade",
+      "tab-invest": "Invest",
+      "tab-partake": "Partake",
+      "text-trade-1": "Trade on your favorite",
+      "text-trade-2": " Brokerage or Exchange",
+      "text-trade-3": "Trade on any market",
+      "text-trade-4": " Crypto, Forex or Stocks",
+      "text-trade-5": "Follow",
+      "text-trade-6": " the most successful traders’ strategies",
+      "text-invest-1": "Invest in",
+      "text-invest-2": " the best performing managers",
+      "text-invest-3": "Automatically copy",
+      "text-invest-4": " professionals' trades",
+      "text-invest-5": "Choose your perfect investment opportunity, based on risk and profitability levels analysis",
+      "text-partake-1": "Provide trading signals and build an",
+      "text-partake-2": " army of followers around your strategies",
+      "text-partake-3": "Create your own",
+      "text-partake-4": " Fund",
+      "text-partake-5": " or an",
+      "text-partake-6": " Asset Management Program",
+      "text-partake-7": "Step in the actively growing",
+      "text-partake-8": " multimarket social trading network"
     }
   }
 }
