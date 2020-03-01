@@ -3,7 +3,6 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";
-import { ItemsViewModelReferralFriend } from "gv-api-web";
 import {
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
   SERVER_DATE_RANGE_MIN_FILTER_NAME
@@ -20,28 +19,13 @@ import {
   composeRequestValueFunc
 } from "../components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
-export const REFERRAL_FRIENDS = "referralFriends";
 export const REFERRAL_HISTORY = "referralHistory";
 
-export type TReferralFriends = ItemsViewModelReferralFriend;
 export type TReferralHistory = any; // TODO declare type
 
 export type ProfileState = Readonly<{
-  [REFERRAL_FRIENDS]: ITableState<TReferralFriends>;
   [REFERRAL_HISTORY]: ITableState<TReferralHistory>;
 }>;
-
-const referralFriendsSelector = (state: RootState) =>
-  state.profile.referralFriends;
-
-export const referralFriendsTableSelector = tableSelectorCreator<
-  RootState,
-  TReferralFriends,
-  TReferralFriends
->(referralFriendsSelector, "items", {
-  items: undefined,
-  total: 0
-});
 
 export const referralHistorySelector = (state: RootState) =>
   state.profile.referralHistory;
@@ -53,11 +37,6 @@ export const referralHistoryTableSelector = tableSelectorCreator<
 >(referralHistorySelector, "items", {
   items: undefined,
   total: 0
-});
-
-const referralFriendsReducer = tableReducerFactory<TReferralFriends>({
-  type: REFERRAL_FRIENDS,
-  paging: DEFAULT_PAGING
 });
 
 export const REFERRAL_HISTORY_DEFAULT_FILTERS = [
@@ -83,7 +62,6 @@ const referralHistory = tableReducerFactory<TReferralHistory>({
 });
 
 const profileReducer = combineReducers<ProfileState>({
-  [REFERRAL_FRIENDS]: referralFriendsReducer,
   [REFERRAL_HISTORY]: referralHistory
 });
 
