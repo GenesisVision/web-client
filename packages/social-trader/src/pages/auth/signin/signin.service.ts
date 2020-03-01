@@ -1,6 +1,5 @@
 import { updateAccountSettingsCurrencyAction } from "actions/account-settings-actions";
 import authActions from "actions/auth-actions";
-import clearDataActionFactory from "actions/clear-data.factory";
 import platformActions from "actions/platform-actions";
 import { Push } from "components/link/link";
 import { CaptchaCheckResult, LoginViewModel } from "gv-api-web";
@@ -10,9 +9,14 @@ import { Dispatch } from "redux";
 import { HOME_ROUTE } from "routes/app.routes";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import { removeCookie } from "utils/cookie";
+import { getCookie, removeCookie, setCookie } from "utils/cookie";
 
-import { CODE_TYPE, LOGIN_TWO_FACTOR } from "./signin.actions";
+export enum CODE_TYPE {
+  TWO_FACTOR = "twoFactorCode",
+  RECOVERY = "recoveryCode"
+}
+
+export const TWO_FACTOR_KEY = "TWO_FACTOR_KEY";
 
 export const client = "Web";
 
@@ -40,11 +44,6 @@ export const login: LoginFuncType = ({
   });
 };
 
-export const clearTwoFactorData: clearTwoFactorDataFuncType = () => dispatch => {
-  const clearTwoFactorAction = clearDataActionFactory(LOGIN_TWO_FACTOR);
-  dispatch(clearTwoFactorAction.clearData());
-};
-
 export const logout: logoutFuncType = dispatch => {
   Push(HOME_ROUTE);
   authService.removeToken();
@@ -52,6 +51,32 @@ export const logout: logoutFuncType = dispatch => {
   dispatch(updateAccountSettingsCurrencyAction(DEFAULT_ACCOUNT_CURRENCY));
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
+};
+
+export const initialTwoFactorState = {
+  email: "",
+  password: "",
+  from: { HOME_ROUTE }
+};
+
+export const clearTwoFactorState = () => {
+  setCookie(TWO_FACTOR_KEY, "");
+};
+
+export const storeTwoFactorState = (state: TwoFactorStateType) => {
+  const JSONState = JSON.stringify(state);
+  setCookie(TWO_FACTOR_KEY, JSONState);
+};
+
+export const getTwoFactorState = (): TwoFactorStateType => {
+  const JSONState = getCookie(TWO_FACTOR_KEY);
+  return JSONState ? JSON.parse(JSONState) : initialTwoFactorState;
+};
+
+export type TwoFactorStateType = {
+  email: string;
+  password: string;
+  from: string | object;
 };
 
 export type LoginFuncType = (props: {
@@ -66,6 +91,4 @@ export type LoginFuncType = (props: {
   code: string;
 }) => Promise<string>;
 
-export type clearLoginDataFuncType = (dispatch: Dispatch) => void;
-type clearTwoFactorDataFuncType = () => (dispatch: Dispatch) => void;
 type logoutFuncType = (dispatch: Dispatch) => void;

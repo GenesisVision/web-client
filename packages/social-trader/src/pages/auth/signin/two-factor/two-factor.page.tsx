@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { CODE_TYPE } from "../signin.actions";
 import SignInContainer from "../signin.container";
+import { CODE_TYPE } from "../signin.service";
 import TwoFactorCodeForm from "./two-factor-code-form";
 
 const _TwoFactorPage: React.FC<Props> = ({ redirectFrom }) => (

@@ -9,13 +9,18 @@ import Router from "next/router";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import authService from "services/auth-service";
-import { AuthRootState, ReduxDispatch, ResponseError } from "utils/types";
+import { ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
-import { CODE_TYPE, storeTwoFactorAction } from "./signin.actions";
-import { clearTwoFactorData, login } from "./signin.service";
+import {
+  clearTwoFactorState,
+  CODE_TYPE,
+  getTwoFactorState,
+  login,
+  storeTwoFactorState
+} from "./signin.service";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -30,13 +35,10 @@ const _SignInContainer: React.FC<Props> = ({
     if (!value) return;
     authService.storeToken(value);
     dispatch(authActions.updateTokenAction(true));
-    if (type) dispatch(clearTwoFactorData());
     Router.push(redirectFrom);
   };
 
-  const { email, password } = useSelector(
-    (state: AuthRootState) => state.loginData.twoFactor
-  );
+  const { email, password } = getTwoFactorState();
 
   const { sendRequest } = useApiRequest({
     middleware: [successMiddleware],
@@ -49,13 +51,11 @@ const _SignInContainer: React.FC<Props> = ({
       }).catch((e: ResponseError) => {
         if (e.code === "RequiresTwoFactor") {
           setDisable();
-          dispatch(
-            storeTwoFactorAction({
-              email: values.email,
-              password: values.password,
-              from: redirectFrom
-            })
-          );
+          storeTwoFactorState({
+            email: values.email,
+            password: values.password,
+            from: redirectFrom
+          });
           dispatch(setTwoFactorRequirementAction(true));
           Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
         } else setErrorMessage(e);
@@ -66,6 +66,7 @@ const _SignInContainer: React.FC<Props> = ({
   useEffect(() => {
     if (type && (email === "" || password === ""))
       Router.replace(NOT_FOUND_PAGE_ROUTE);
+    clearTwoFactorState();
   }, []);
   return (
     <div className={className}>
