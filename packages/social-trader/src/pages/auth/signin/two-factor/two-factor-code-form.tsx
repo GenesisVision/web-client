@@ -60,13 +60,17 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
   const checkTwoFactor = useCallback(() => {
     if (isSubmitting) return;
     setIsChecking();
-    onSubmit(watch());
-  }, [isSubmitting, watch]);
+    onSubmit({ code, email });
+  }, [isSubmitting, code, email]);
 
   const requestStatus = useContext(CaptchaStatusContext);
 
+  const handleSubmit = useCallback(() => {
+    return onSubmit({ code, email });
+  }, [code, email]);
+
   return (
-    <HookForm className="login-two-factor" form={form} onSubmit={onSubmit}>
+    <HookForm className="login-two-factor" form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
       <div className="login-two-factor__text">
         {t("auth.login.two-factor.text")}
@@ -85,7 +89,11 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
       <div className="login-two-factor__recovery-info">
         {t("auth.login.two-factor.recovery-info")}
       </div>
-      <GVButton className="login-two-factor__recovery-link" variant="text">
+      <GVButton
+        noPadding
+        className="login-two-factor__recovery-link"
+        variant="text"
+      >
         <Link to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}>
           {t("auth.login.two-factor.link-to-recovery")}
         </Link>
@@ -94,6 +102,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
       <FormError error={error} />
       <div className="login-two-factor__submit">
         <SubmitButton
+          checkSubmitted={false}
           id="signUpFormSubmit"
           isPending={requestStatus === CAPTCHA_STATUS.PENDING}
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}

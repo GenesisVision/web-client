@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const initialEffectiveConnectionType = "4g";
+
 let unsupported: any;
 
 declare const navigator: {
@@ -48,4 +50,19 @@ const useNetworkStatus = (initialEffectiveConnectionType?: any) => {
   return { ...networkStatus, setNetworkStatus };
 };
 
-export { useNetworkStatus };
+const useNetworkStatusInWindow = () => {
+  const [type, setType] = useState();
+  const { effectiveConnectionType } = useNetworkStatus(
+    initialEffectiveConnectionType
+  );
+  useEffect(() => {
+    setType(effectiveConnectionType);
+  }, []);
+  return { effectiveConnectionType: type };
+};
+
+export {
+  useNetworkStatusInWindow,
+  useNetworkStatus,
+  initialEffectiveConnectionType
+};

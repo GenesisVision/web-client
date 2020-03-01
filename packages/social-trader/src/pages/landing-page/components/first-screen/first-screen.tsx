@@ -1,7 +1,7 @@
 import "pages/landing-page/styles/home.scss";
 
 import { PlatformNews } from "gv-api-web";
-import { useNetworkStatus } from "hooks/network-status";
+import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import FirstSlider from "pages/landing-page/components/first-slider/first-slider";
 import NewsList from "pages/landing-page/components/news/news-list";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const _FirstScreen: React.FC<Props> = ({ news }) => {
-  const { effectiveConnectionType } = useNetworkStatus();
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const renderSlider = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":
@@ -29,8 +29,11 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
             slidesItems={slides}
           />
         );
-      default:
+      case "3g":
+      case "2g":
         return <FirstSlider className="home__grid-row" slidesItems={slides} />;
+      default:
+        return null;
     }
   }, [effectiveConnectionType, slides]);
   return (

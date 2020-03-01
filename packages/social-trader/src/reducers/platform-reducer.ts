@@ -193,51 +193,6 @@ export const allEventsSelector = createSelector<
   EventFilters | undefined
 >(platformDataSelector, data => (data && data.filters.events) || undefined);
 
-export const fundEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.investmentHistory.fund.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
-
-export const programEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.investmentHistory.program.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
-
-export const followEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.tradingHistory.follow.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
-
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS
 });

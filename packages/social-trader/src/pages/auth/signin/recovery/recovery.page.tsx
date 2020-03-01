@@ -2,8 +2,8 @@ import "./recovery.scss";
 
 import React from "react";
 
-import { CODE_TYPE } from "../signin.actions";
 import SignInContainer from "../signin.container";
+import { CODE_TYPE } from "../signin.service";
 import RecoveryCodeForm from "./recovery-code-form";
 
 const _RecoveryPage: React.FC<Props> = ({ redirectFrom }) => (

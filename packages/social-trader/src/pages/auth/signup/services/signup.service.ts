@@ -1,9 +1,5 @@
-import emailPendingActions from "actions/email-pending-actions";
-import { Push } from "components/link/link";
 import { RegisterViewModel } from "gv-api-web";
-
-import { signUpUserAction } from "../actions/signup.actions";
-import { SIGNUP_ROUTE_PENDING } from "../signup.constants";
+import authApi from "services/api-client/auth-api";
 
 export const signUp: SingUpFuncType = ({
   utmSource,
@@ -14,23 +10,20 @@ export const signUp: SingUpFuncType = ({
   refCode,
   isAuto,
   captchaCheckResult
-}) => (dispatch: any) =>
-  dispatch(
-    signUpUserAction({
-      utmSource,
-      userName,
-      email,
-      password,
-      confirmPassword,
-      refCode,
-      isAuto,
-      captchaCheckResult
+}) =>
+  authApi
+    .register({
+      body: {
+        utmSource,
+        userName,
+        email,
+        password,
+        confirmPassword,
+        refCode,
+        isAuto,
+        captchaCheckResult
+      }
     })
-  ).then(() => {
-    dispatch(emailPendingActions.saveEmail({ email }));
-    Push(SIGNUP_ROUTE_PENDING);
-  });
+    .then(() => email);
 
-export type SingUpFuncType = (
-  props: RegisterViewModel
-) => (dispatch: any, getState: any) => Promise<void>;
+export type SingUpFuncType = (props: RegisterViewModel) => Promise<any>;

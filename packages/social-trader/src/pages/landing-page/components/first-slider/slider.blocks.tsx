@@ -4,15 +4,15 @@ import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React from "react";
 
-const _SliderImg: React.FC<ISliderImgProps> = ({ item }) => {
-  return (
+const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
+  return animation ? (
     <>
       {item.imageBg && (
         <ImageBaseElement
           src={item.imageBg}
           alt={item.title}
           title={item.title}
-          className="slider__img slider__img--bg"
+          className="slider__img slider__img--animation-bg"
         />
       )}
       {item.images.map((image, index) => (
@@ -22,14 +22,23 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item }) => {
           alt={item.title}
           title={item.title}
           style={{ animationDelay: `${500 * index + 500}ms` }}
-          className="slider__img"
+          className="slider__img slider__img--animation"
         />
       ))}
     </>
+  ) : (
+    <ImageBaseElement
+      src={item.imageOptimization}
+      alt={item.title}
+      title={item.title}
+      className="slider__img"
+    />
   );
 };
+
 interface ISliderImgProps {
   item: TSlide;
+  animation?: boolean;
 }
 export const SliderImg = React.memo(_SliderImg);
 

@@ -6,7 +6,6 @@ import {
   ProgramDetailsFull,
   ProgramFollowDetailsFull
 } from "gv-api-web";
-import { SetSubmittingType } from "utils/types";
 
 export type AssetDescriptionType = ProgramDetailsFull &
   FundDetailsFull &

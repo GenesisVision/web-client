@@ -5,7 +5,7 @@ import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
 const renderLastItem = () => (
-  <p className="advantages-container__text">
+  <p className="advantages-section__text">
     A 2-level partner program is utilized by the Genesis Vision platform. Invite
     your friends to sign up for the Genesis Vision platform and you will be
     eligible to receive up to 30% commission from their paid fees for the 1st

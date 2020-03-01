@@ -2,7 +2,12 @@ import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
 import * as React from "react";
+import { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -21,8 +26,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
   const [t] = useTranslation();
   const form = useForm<IRecoveryCodeFormValues>({
     defaultValues: {
-      [FIELDS.code]: "",
-      [FIELDS.email]: email
+      [FIELDS.code]: ""
     },
     validationSchema: object().shape({
       [FIELDS.code]: string()
@@ -32,8 +36,16 @@ const _RecoveryCodeForm: React.FC<Props> = ({
     mode: "onChange"
   });
 
+  const { code } = form.watch();
+
+  const requestStatus = useContext(CaptchaStatusContext);
+
+  const handleSubmit = useCallback(() => {
+    return onSubmit({ code, email });
+  }, [code, email]);
+
   return (
-    <HookForm className="recovery-form" form={form} onSubmit={onSubmit}>
+    <HookForm className="recovery-form" form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.recovery.title")}</h3>
       <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
       <GVHookFormField
@@ -45,7 +57,9 @@ const _RecoveryCodeForm: React.FC<Props> = ({
       <FormError error={errorMessage} />
       <SubmitButton
         id="recoverySubmit"
-        isSuccessful={!errorMessage}
+        isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+        isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+        disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         className="recovery-form__submit"
       >
         {t("auth.login.recovery.continue")}
