@@ -2654,6 +2654,7 @@
       "join": "Join",
       "dashboard": "Dashboard",
       "get-started": "Get started",
+      "start-trading": "Start trading",
       "send": "SEND"
     },
     "links": {
@@ -2751,6 +2752,42 @@
       "text-partake-6": " Asset Management Program",
       "text-partake-7": "Step in the actively growing",
       "text-partake-8": " multimarket social trading network"
+    },
+    "brokers": {
+      "title": "Brokers and Exhanges",
+      "description-gm": "Genesis Markets is a Forex and Crypto broker that offers trading on the most popular trading terminal in the world — MetaTrader. Genesis Markets allows you to access the best liquidity on traditional markets and multiple crypto exchanges within a single account.\n",
+      "text-gm-1": "Forex, Metals, Commodities, Indices, Shares, Crypto",
+      "text-gm-2": "MetaTrader 5",
+      "text-gm-3": "BTC, USD Accounts",
+      "text-gm-4": "Crypto Margin Trading",
+      "number-gm-1": "500+",
+      "text-gm-5": "Altcoins",
+      "number-gm-2": "74",
+      "text-gm-6": "Forex Instruments",
+      "description-binance": "Binance is one of the largest global cryptocurrency exchanges that provides an ecosystem for trading a wide range of different crypto assets.\n",
+      "number-binance": "600+",
+      "text-binance-1": "Crypto Assets",
+      "text-binance-2": "Binance Web Trading Terminal",
+      "text-binance-3": "GV Follow functionality",
+      "text-binance-4": "Plug-in your existing accounts",
+      "description-rf": "RoboForex Ltd is an international IFSC Belize regulated broker which is a member of the RoboForex group. RoboForex provides an access to a wide range of financial instruments and account types.",
+      "number-rf": "9400+",
+      "text-rf-1": "assets",
+      "text-rf-2": "Forex, Stocks, Indices, ETFs, Commodities, Metals, Energies, Crypto",
+      "text-rf-3": "MetaTrader 4",
+      "text-rf-4": "Pro-Standard, ECN Accounts",
+      "text-rf-5": "Leverage 1:10-1:100",
+      "description-exante": "EXANTE is a European investment services company established in 2011 that offers global multi-asset financial services, including direct access to a wide range of financial markets in the US, European Union and Asia-Pacific",
+      "number-exante": "10000+",
+      "text-exante-1": "assets",
+      "text-exante-2": "Forex, Stocks, ETFs, global futures markets, bonds, metals, options, funds, crypto",
+      "text-exante-3": "Unique EXANTE Trading Platform",
+      "text-exante-4": "Leverage 1:50",
+      "description-huobi": "Huobi is one of the largest Singapore-based cryptocurrency exchanges,  judging by 24-hour period volume. Founded in China, the company now has offices in Hong Kong, Korea, Japan and the United States.",
+      "number-huobi": "400+",
+      "text-huobi-1": "crypto trading pairs",
+      "text-huobi-2": "BTC, ETH, USDT Accounts",
+      "text-huobi-3": "Huobi Web Trading Terminal"
     }
   }
 }

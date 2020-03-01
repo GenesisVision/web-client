@@ -74,7 +74,7 @@ const _LandingPage: React.FC = () => {
             <BrokersContainer
               brokersInfo={brokersInfo}
               brokersTabs={brokersTabs}
-              title="Brokers and Exhanges"
+              title={t("landing-page.brokers.title")}
             />
           </div>
         </section>
