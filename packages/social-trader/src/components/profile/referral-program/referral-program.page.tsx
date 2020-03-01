@@ -7,10 +7,8 @@ import SettingsBlock from "components/settings-block/settings-block";
 import { ProfileFullViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
-import { referralDetailsSelector } from "reducers/profile-reducer";
 import { getRandomInteger } from "utils/helpers";
 
 import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
@@ -24,19 +22,19 @@ import {
 
 const _ReferralProgramPage: React.FC = () => {
   const currency = useSelector(currencySelector);
-  const dispatch = useDispatch();
-  const { data } = useApiRequest<ProfileFullViewModel>({
+  const { data: profile } = useApiRequest<ProfileFullViewModel>({
     fetchOnMount: true,
     request: getProfile
   });
-  useEffect(() => {
-    dispatch(getReferralDetails(currency));
-  }, []);
-  const rewards = useSelector(referralDetailsSelector);
+  const { data: rewards } = useApiRequest({
+    fetchOnMount: true,
+    fetchOnMountData: currency,
+    request: getReferralDetails
+  });
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <SettingsBlock>
-        <InviteBlock data={data!} loaderData={inviteBlockLoaderData} />
+        <InviteBlock data={profile!} loaderData={inviteBlockLoaderData} />
       </SettingsBlock>
       <SettingsBlock>
         <ReferralRewardsBlock
