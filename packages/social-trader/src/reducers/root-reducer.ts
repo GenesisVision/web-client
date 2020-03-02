@@ -30,7 +30,6 @@ import programsReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
-import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
 import dashboardReducer, {
   DashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
@@ -51,9 +50,6 @@ import accountSettingsReducer, {
   AccountSettingsState
 } from "reducers/account-settings-reducer";
 import authReducer, { AuthState } from "reducers/auth-reducer";
-import emailPendingReducer, {
-  EmailPendingState
-} from "reducers/email-pending-reducer";
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
 import tablesViewReducer, {
@@ -73,10 +69,8 @@ export const sharedRootReducers = {
   programsData: programsReducer,
   fundsData: fundsReducer,
   authData: authReducer,
-  passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
   followNotifications: followNotificationsReducer,
@@ -101,7 +95,6 @@ export type RootState = Readonly<{
   followsData: FollowsListState;
   programsData: ProgramsListState;
   fundsData: FundsTableState;
-  emailPending: EmailPendingState;
   followNotifications: ProgramNotificationsState;
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;

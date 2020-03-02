@@ -4,7 +4,11 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
-import React from "react";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
@@ -18,6 +22,8 @@ export enum FORGOT_PASSWORD_FORM_FIELDS {
 
 const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
   const [t] = useTranslation();
+
+  const requestStatus = useContext(CaptchaStatusContext);
 
   const form = useForm<IForgotPasswordFormValues>({
     defaultValues: {
@@ -52,7 +58,12 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             </>
           </GVButton>
         </Link>
-        <SubmitButton id="forgotPassword" isSuccessful={!errorMessage}>
+        <SubmitButton
+          id="forgotPassword"
+          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+        >
           {t("auth.password-restore.forgot-password.confirm-button-text")}
         </SubmitButton>
       </div>

@@ -1,4 +1,5 @@
 import withAuthLayout from "decorators/with-auth-layout";
+import { getEmailPendingState } from "pages/auth/auth.service";
 import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
 import EmailPending from "pages/auth/signup/signup-email-pending/signup-email-pending.page";
 import React from "react";
@@ -11,7 +12,7 @@ const Page: NextPageWithRedux<any> = () => {
 };
 
 Page.getInitialProps = async ctx => {
-  const { email } = ctx.reduxStore.getState().emailPending;
+  const { email } = getEmailPendingState(ctx);
   redirect(ctx, email.length === 0);
 };
 
