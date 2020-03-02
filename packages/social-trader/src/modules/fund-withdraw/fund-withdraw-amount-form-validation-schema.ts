@@ -11,5 +11,5 @@ export const fundWithdrawAmountFormValidationSchema = (
   object().shape({
     [FUND_WITHDRAW_FIELDS.percent]: number()
       .required(t("withdraw-fund.validation.required"))
-      .min(minAmount, t("withdraw-fund.validation.min-value"))
+      .min(minAmount, t("withdraw-fund.validation.min-value", { minAmount }))
   });

@@ -551,7 +551,7 @@
     "success-alert-message": "Withdrawal request sent successfully.",
     "validation": {
       "required": "Amount is required",
-      "min-value": "Amount must be greater than or equal to 0.01"
+      "min-value": "Amount must be greater than or equal to {{minAmount}}"
     }
   },
   "not-found-page": {
