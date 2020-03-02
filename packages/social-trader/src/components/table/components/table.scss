@@ -28,18 +28,13 @@ $view-svg-size: 15px;
   }
   &__toolbar {
     box-sizing: border-box;
-    display: flex;
     width: 100%;
-    align-items: center;
     justify-content: space-between;
     @include horizontal-paddings($padding-xsmall);
-    flex-wrap: wrap;
   }
 
   &__toggle {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
   &__toggle-icon {
@@ -54,26 +49,10 @@ $view-svg-size: 15px;
     }
   }
 
-  &__toolbar-heading {
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-  }
-
   &__title {
     padding: 0;
     justify-self: flex-start;
     white-space: nowrap;
-  }
-
-  &__filters {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-
-    &--mapping {
-      flex-wrap: nowrap;
-    }
   }
 
   &__row {
@@ -135,8 +114,6 @@ $view-svg-size: 15px;
 }
 
 .toolbar-button {
-  display: flex;
-  align-items: center;
   @include font-size($font-size-paragraph);
   font-weight: 600;
 }

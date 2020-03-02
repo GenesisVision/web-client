@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
+import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
@@ -29,31 +30,33 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   );
   const rateString = `1 ${name} = ${rate} $`;
   const renderItemContent = () => (
-    <div className="currency-item" data-test-id={symbol}>
-      {logo && (
-        <div
-          className={classNames("currency-item__icon", {
-            "currency-item__icon--medium": !small,
-            "currency-item__icon--small": small
-          })}
-        >
-          <WalletImage url={logo} alt={name || symbol} />
-        </div>
-      )}
-      {name && (
-        <div>
-          {big ? (
-            <h1 className={classNames("currency-item__name--big", className)}>
-              {name}
-            </h1>
-          ) : (
-            <div className={classNames("currency-item__name", className)}>
-              {name}
-            </div>
-          )}
-          {rate && <div className="currency-item__rate">{rateString}</div>}
-        </div>
-      )}
+    <div data-test-id={symbol}>
+      <Row>
+        {logo && (
+          <div
+            className={classNames("currency-item__icon", {
+              "currency-item__icon--medium": !small,
+              "currency-item__icon--small": small
+            })}
+          >
+            <WalletImage url={logo} alt={name || symbol} />
+          </div>
+        )}
+        {name && (
+          <div>
+            {big ? (
+              <h1 className={classNames("currency-item__name--big", className)}>
+                {name}
+              </h1>
+            ) : (
+              <div className={classNames("currency-item__name", className)}>
+                {name}
+              </div>
+            )}
+            {rate && <div className="currency-item__rate">{rateString}</div>}
+          </div>
+        )}
+      </Row>
     </div>
   );
   const active = symbol || name || "";

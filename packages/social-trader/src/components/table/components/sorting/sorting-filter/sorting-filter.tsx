@@ -1,7 +1,7 @@
 import "./sorting-filter.scss";
 
 import GVButton from "components/gv-button";
-import { TableToolbarItemBlock } from "components/table/components/table-toolbar-item.block";
+import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 
 import {
@@ -56,23 +56,25 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   const columnValues = composeSortingColumnValues();
 
   return (
-    <TableToolbarItemBlock className="sorting-filter">
-      <SelectFilter
-        name={SORTING_FILTER_NAME}
-        label="Order By"
-        value={composeSortingColumnName()}
-        values={columnValues}
-        onChange={handleOnSelectChange}
-      />
-      <GVButton
-        variant="text"
-        color="secondary"
-        className="sorting-filter__btn"
-        onClick={handleOnDirectionChange(!isAsc())}
-      >
-        {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
-      </GVButton>
-    </TableToolbarItemBlock>
+    <RowItem>
+      <div className="sorting-filter">
+        <SelectFilter
+          name={SORTING_FILTER_NAME}
+          label="Order By"
+          value={composeSortingColumnName()}
+          values={columnValues}
+          onChange={handleOnSelectChange}
+        />
+        <GVButton
+          variant="text"
+          color="secondary"
+          className="sorting-filter__btn"
+          onClick={handleOnDirectionChange(!isAsc())}
+        >
+          {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
+        </GVButton>
+      </div>
+    </RowItem>
   );
 };
 
