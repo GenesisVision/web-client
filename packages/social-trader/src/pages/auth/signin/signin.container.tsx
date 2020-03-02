@@ -14,13 +14,7 @@ import authService from "services/auth-service";
 import { ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
-import {
-  clearTwoFactorState,
-  CODE_TYPE,
-  getTwoFactorState,
-  login,
-  storeTwoFactorState
-} from "./signin.service";
+import { CODE_TYPE, login, useTwoFactorState } from "./signin.service";
 
 const _SignInContainer: React.FC<Props> = ({
   className,
@@ -28,6 +22,11 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const {
+    clearTwoFactorState,
+    storeTwoFactorState,
+    getTwoFactorState
+  } = useTwoFactorState();
   const [disable, setDisable] = useIsOpen();
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const dispatch = useDispatch<ReduxDispatch>();
