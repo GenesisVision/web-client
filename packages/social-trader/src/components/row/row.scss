@@ -11,6 +11,9 @@
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);
   }
+  &--wrap {
+    flex-wrap: wrap;
+  }
   &--ladge:not(:first-child) {
     @include adaptive-margin(top, $padding-small);
   }
