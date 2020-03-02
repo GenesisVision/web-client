@@ -45,10 +45,6 @@
   }
 }
 .dashboard-statistic-periods-item {
-  &__value-container {
-    display: flex;
-    align-items: center;
-  }
   &__value {
     padding-right: $padding-xxsmall;
   }

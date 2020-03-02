@@ -58,24 +58,22 @@ const _DashboardStatisticPeriodsItem: React.FC<{
 }> = ({ item: { profit, profitPercent }, label, currency }) => {
   return (
     <StatisticItem label={label}>
-      <div className="dashboard-statistic-periods-item__value-container">
-        <Profitability
+      <Profitability
+        value={formatCurrencyValue(profit, currency)}
+        prefix={PROFITABILITY_PREFIX.SIGN}
+      >
+        <NumberFormat
           value={formatCurrencyValue(profit, currency)}
-          prefix={PROFITABILITY_PREFIX.SIGN}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(profit, currency)}
-            suffix={` ${currency}`}
-            allowNegative={false}
-            displayType="text"
-          />
-        </Profitability>
-        {/*<ProfitabilityValuePercent
+          suffix={` ${currency}`}
+          allowNegative={false}
+          displayType="text"
+        />
+      </Profitability>
+      {/*<ProfitabilityValuePercent
           currency={currency}
           percent={profitPercent}
           value={profit}
         />*/}
-      </div>
     </StatisticItem>
   );
 };
