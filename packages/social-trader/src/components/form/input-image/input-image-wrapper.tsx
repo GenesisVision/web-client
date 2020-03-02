@@ -6,9 +6,12 @@ import React, { useCallback } from "react";
 
 const _InputImageWrapper: React.FC<Props> = props => {
   const { setFieldValue, name } = props;
-  const onChange = useCallback((e: IImageChangeEvent) => {
-    setFieldValue(name, e.target.value, true);
-  }, []);
+  const onChange = useCallback(
+    (e: IImageChangeEvent) => {
+      setFieldValue(name, e.target.value, true);
+    },
+    [setFieldValue, name]
+  );
   return <InputImage {...props} onChange={onChange} />;
 };
 
