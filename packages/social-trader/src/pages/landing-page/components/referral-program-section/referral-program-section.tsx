@@ -1,35 +1,34 @@
 import "./referral-program-section.scss";
 
+import { useTranslation } from "i18n";
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
 import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
-const renderLastItem = () => (
+const renderLastItem = (t: any) => (
   <p className="advantages-section__text">
-    A 2-level partner program is utilized by the Genesis Vision platform. Invite
-    your friends to sign up for the Genesis Vision platform and you will be
-    eligible to receive up to 30% commission from their paid fees for the 1st
-    level referrals and up to 3% for the 2nd level referrals.
+    {t("landing-page.referral-program.text-4")}
   </p>
 );
 
 const ReferralProgramSection: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className="referral-program-section">
       <div className="internal__container">
         <h1 className="referral-program-section__title">
-          Genesis Vision Referral program
+          {t("landing-page.referral-program.title")}
         </h1>
         <h2 className="referral-program-section__subtitle">
-          How to invite your friends
+          {t("landing-page.referral-program.subtitle-1")}
         </h2>
         <AdvantagesList
           advantagesItems={refProgItems}
           className="referral-program-section__adv-list"
-          lastItem={renderLastItem()}
+          lastItem={renderLastItem(t)}
         />
         <h2 className="referral-program-section__subtitle">
-          2-level partner program implementation principle
+          {t("landing-page.referral-program.subtitle-2")}
         </h2>
         <div className="referral-program-section__img" />
       </div>

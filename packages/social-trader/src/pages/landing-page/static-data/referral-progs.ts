@@ -10,19 +10,18 @@ export type TAdvantages = {
 
 export const refProgItems: TAdvantages[] = [
   {
-    title: "Get Link",
-    text: "Go to “Profile” and get your personal link",
+    title: "landing-page.referral-program.title-1",
+    text: "landing-page.referral-program.text-1",
     image: ImgAccess
   },
   {
-    title: "Invite Friends",
-    text:
-      "Invite your friends to sign in via referral link to get the agent’s commission",
+    title: "landing-page.referral-program.title-2",
+    text: "landing-page.referral-program.text-2",
     image: ImgChoose
   },
   {
-    title: "Get Rewards",
-    text: "Get up to 30% of the agent’s commission",
+    title: "landing-page.referral-program.title-3",
+    text: "landing-page.referral-program.text-3",
     image: ImgControl
   }
 ];
