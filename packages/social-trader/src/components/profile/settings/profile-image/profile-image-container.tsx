@@ -1,4 +1,3 @@
-import { IImageValue } from "components/form/input-image/input-image";
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
@@ -7,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { headerSelector } from "reducers/header-reducer";
 
 import { updateProfileAvatar } from "../services/profile-settings.service";
-import ProfileImage from "./profile-image";
+import ProfileImage, { IProfileImageFormValues } from "./profile-image";
 
 const _ProfileImageContainer: React.FC = () => {
   const fetchProfileMiddleware = () => {
@@ -21,7 +20,7 @@ const _ProfileImageContainer: React.FC = () => {
   const dispatch = useDispatch();
   const headerData = useSelector(headerSelector);
   const handleSubmit = useCallback(
-    (newImage: IImageValue) => sendRequest({ newImage }),
+    ({ logo }: IProfileImageFormValues) => sendRequest({ newImage: logo }),
     []
   );
   if (headerData === undefined) return null;

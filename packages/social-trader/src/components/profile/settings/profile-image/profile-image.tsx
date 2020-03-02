@@ -17,7 +17,7 @@ enum FIELDS {
 
 const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
   const [t] = useTranslation();
-  const form = useForm<FormValues>({
+  const form = useForm<IProfileImageFormValues>({
     defaultValues: {
       [FIELDS.logo]: {
         src: avatar
@@ -46,9 +46,9 @@ export default ProfileImage;
 interface Props {
   errorMessage?: string;
   avatar: string;
-  onSubmit: (image: IImageValue) => void;
+  onSubmit: (image: IProfileImageFormValues) => void;
 }
 
-interface FormValues {
+export interface IProfileImageFormValues {
   logo: IImageValue;
 }
