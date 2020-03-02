@@ -1,8 +1,10 @@
 import authActions from "actions/auth-actions";
+import platformActions from "actions/platform-actions";
 import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
+import { Dispatch } from "redux";
 import authService from "services/auth-service";
 import refreshToken from "utils/auth";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
