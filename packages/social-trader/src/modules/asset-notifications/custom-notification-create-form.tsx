@@ -86,6 +86,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
       </DialogTop>
       <DialogBottom>
         <GVHookFormField
+          wide
           name={FIELDS.conditionAmount}
           label={t("notifications-page.create.amount-label")}
           component={SimpleNumberField}
