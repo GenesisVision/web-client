@@ -8,7 +8,7 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
 
-const _CurrencyItem: React.FC<Props> = ({
+const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   url,
   symbol,
   big,
@@ -78,7 +78,7 @@ const _CurrencyItem: React.FC<Props> = ({
   );
 };
 
-interface Props {
+export interface ICurrencyItemProps {
   url?: string;
   symbol?: string | CurrencyEnum;
   big?: boolean;
