@@ -12,12 +12,17 @@ import React from "react";
 const _CurrencyItemWithAmount: React.FC<Props> = ({
   available,
   symbol,
+  name,
   ...props
 }) => {
   return (
     <Row>
       <RowItem className="currency-item-with-amount__name">
-        <CurrencyItem {...props} symbol={symbol} name={symbol} />
+        <CurrencyItem
+          {...props}
+          symbol={symbol}
+          name={available ? symbol : name}
+        />
       </RowItem>
       <RowItem>
         <MutedText>{available}</MutedText>
