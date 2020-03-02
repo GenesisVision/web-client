@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { FieldError, useFormContext } from "react-hook-form";
 
+const getErrorMessage = (obj: FieldError) =>
+  "message" in obj ? obj.message : obj;
+
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   onChange = () => {},
   component: Component,
@@ -18,8 +21,8 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   } = useFormContext();
   const error = errors[name]
     ? Array.isArray(errors[name])
-      ? (errors[name] as FieldError[])[0].message
-      : (errors[name] as FieldError).message
+      ? getErrorMessage((errors[name] as FieldError[])[0])
+      : getErrorMessage(errors[name] as FieldError)
     : undefined;
   useEffect(() => {
     register({ name });

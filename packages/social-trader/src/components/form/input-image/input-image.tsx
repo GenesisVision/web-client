@@ -118,6 +118,18 @@ class _InputImage extends React.PureComponent<
     onChange(e);
   };
 
+  renderErrors = () => {
+    if (!this.props.error) return null;
+    const errors = Object.values(this.props.error.image);
+    return (
+      <div>
+        {errors.map(error => (
+          <div className="input-image__error">{error.message}</div>
+        ))}
+      </div>
+    );
+  };
+
   render() {
     const { t, value = {}, className, defaultImage, error } = this.props;
     const { src, image } = value;
@@ -185,11 +197,7 @@ class _InputImage extends React.PureComponent<
             &#10006;
           </div>
         )}
-        {error !== undefined && (
-          <div className="input-image__error">
-            {error.image[Object.keys(error.image)[0]]}
-          </div>
-        )}
+        {this.renderErrors()}
       </div>
     );
   }
@@ -223,6 +231,6 @@ export interface IInputImageProps {
   className?: string;
   value: IImageValue;
   defaultImage: string;
-  error?: { image: { [field: string]: string } };
+  error?: { image: { [field: string]: { message: string } } };
   onChange: (event: IImageChangeEvent) => void;
 }
