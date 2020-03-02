@@ -19,20 +19,22 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
     static async getInitialProps(ctx: NextPageWithReduxContext) {
       let componentProps = {};
       try {
-        await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
-          await dispatch(platformActions.fetchPlatformSettings());
-          await dispatch(changeLocationAction());
-        });
-      } catch (e) {
-        componentProps = { e };
-      }
-      try {
-        componentProps =
+        await Promise.all([
+          ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
+            await dispatch(platformActions.fetchPlatformSettings());
+            await dispatch(changeLocationAction());
+          }),
           WrappedComponent.getInitialProps &&
-          (await WrappedComponent.getInitialProps(ctx));
+            WrappedComponent.getInitialProps(ctx)
+        ]).then(data => {
+          if (data[1] !== undefined) {
+            componentProps = data[1];
+          }
+        });
       } catch (ex) {
         componentProps = { ex };
       }
+
       const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
       if (currencyFromCookie) {
         ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
