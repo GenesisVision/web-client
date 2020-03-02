@@ -9,7 +9,7 @@ import {
   programWithdrawAmountValidationSchema,
   WITHDRAW_FORM_FIELDS
 } from "modules/program-withdraw/program-withdraw.helpers";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -59,6 +59,10 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
       true
     );
   }, [availableToWithdraw, programCurrency, setValue]);
+
+  useEffect(() => {
+    if (withdrawAll) setMaxAmount();
+  }, [withdrawAll]);
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
