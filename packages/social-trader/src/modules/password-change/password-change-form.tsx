@@ -50,7 +50,12 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
   });
 
   return (
-    <HookForm className="change-password" form={form} onSubmit={onSubmit}>
+    <HookForm
+      resetOnSuccess
+      className="change-password"
+      form={form}
+      onSubmit={onSubmit}
+    >
       <GVHookFormField
         component={SimpleTextField}
         label={t("auth.password-change.current-password")}
