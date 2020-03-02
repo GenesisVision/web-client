@@ -23,19 +23,14 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  min-width: 344px;
+  max-width: 344px;
   color: $main-color;
   @include font-size($font-size-paragraph);
   @include line-height(2);
   letter-spacing: 0.2px;
   @include vertical-paddings($padding-xxsmall, $padding-xsmall);
   border-radius: $border-radius;
-  margin: 0 -16px;
   @include background-with-avatar-level($background-color);
-
-  &:hover {
-    @include background-with-avatar-level($secondary-background-color);
-  }
 
   &__list {
     display: flex;
