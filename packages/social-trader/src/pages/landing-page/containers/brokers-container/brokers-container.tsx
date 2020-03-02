@@ -47,12 +47,19 @@ const _BrokersContainer: React.FC<Props> = ({
         return (
           <BrokerInfoWrapperWithAnimation
             currentBrokersInfo={brokersInfo[currentTabId]}
+            darkTheme={darkTheme}
+          />
+        );
+      case "3g":
+      case "2g":
+        return (
+          <BrokerInfoWrapper
+            currentBrokersInfo={brokersInfo[currentTabId]}
+            darkTheme={darkTheme}
           />
         );
       default:
-        return (
-          <BrokerInfoWrapper currentBrokersInfo={brokersInfo[currentTabId]} />
-        );
+        return null;
     }
   }, [effectiveConnectionType, currentTabId]);
   return (
