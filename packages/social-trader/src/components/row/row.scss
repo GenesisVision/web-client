@@ -1,0 +1,17 @@
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &:not(:first-child) {
+    @include adaptive-margin(top, $padding-xsmall);
+  }
+  &--small:not(:first-child) {
+    @include adaptive-margin(top, $padding-xxsmall);
+  }
+  &--ladge:not(:first-child) {
+    @include adaptive-margin(top, $padding-small);
+  }
+}
