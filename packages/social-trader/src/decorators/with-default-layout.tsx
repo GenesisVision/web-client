@@ -25,7 +25,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
             await dispatch(changeLocationAction());
           }),
           WrappedComponent.getInitialProps &&
-            WrappedComponent.getInitialProps(ctx)
+            (await WrappedComponent.getInitialProps(ctx))
         ]).then(data => {
           if (data[1] !== undefined) {
             componentProps = data[1];
