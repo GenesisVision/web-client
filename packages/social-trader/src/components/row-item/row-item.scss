@@ -1,0 +1,14 @@
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+.row-item {
+  &:not(:first-child) {
+    @include adaptive-margin(left, $padding-xsmall);
+  }
+  &--small:not(:first-child) {
+    @include adaptive-margin(left, $padding-xxsmall);
+  }
+  &--ladge:not(:first-child) {
+    @include adaptive-margin(left, $padding-small);
+  }
+}
