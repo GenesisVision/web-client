@@ -48,7 +48,7 @@ const useAssetSection = ({
 
   useEffect(() => {
     wallet &&
-      debounce(() => getRate({ from: wallet.currency, to: assetCurrency }));
+      debounce(() => getRate({ from: wallet.currency, to: assetCurrency }))();
   }, [wallet, assetCurrency]);
 
   const handleWalletChange = useCallback(
