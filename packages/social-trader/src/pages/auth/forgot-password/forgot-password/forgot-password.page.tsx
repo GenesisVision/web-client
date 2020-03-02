@@ -4,7 +4,7 @@ import { Push } from "components/link/link";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import { ForgotPasswordViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import { storeEmailPendingState } from "pages/auth/auth.service";
+import { useEmailPendingState } from "pages/auth/auth.service";
 import { EMAIL_PENDING_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,7 @@ import ForgotPassword from "./forgot-password";
 
 const ForgotPasswordPage: React.FC = () => {
   const [t] = useTranslation();
+  const { storeEmailPendingState } = useEmailPendingState();
 
   const successMiddleware = (body: ForgotPasswordViewModel) => {
     storeEmailPendingState(body);

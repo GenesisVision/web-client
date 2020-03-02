@@ -3,7 +3,7 @@ import "./signup.scss";
 import { Push } from "components/link/link";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import useApiRequest from "hooks/api-request.hook";
-import { storeEmailPendingState } from "pages/auth/auth.service";
+import { useEmailPendingState } from "pages/auth/auth.service";
 import CaptchaContainer from "pages/auth/captcha-container";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
@@ -18,6 +18,8 @@ const _SignUpPage: React.FC<Props> = ({
   referralCode
 }) => {
   const [t] = useTranslation();
+  const { storeEmailPendingState } = useEmailPendingState();
+
   const successMiddleware = (email: string) => {
     storeEmailPendingState({ email });
     Push(SIGNUP_ROUTE_PENDING);

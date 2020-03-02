@@ -1,7 +1,7 @@
 import { CaptchaDetails, PowDetails } from "gv-api-web";
+import { useCookieState } from "hooks/cookie-state";
 import { NextPageContext } from "next";
 import platformApi from "services/api-client/platform-api";
-import { getCookie, setCookie } from "utils/cookie";
 
 //@ts-ignore
 import SHAWorker from "./sha.worker";
@@ -47,20 +47,17 @@ export const initialEmailPendingState: EmailPendingStateType = {
   email: ""
 };
 
-export const clearEmailPendingState = () => {
-  setCookie(EMAIL_PENDING_KEY, "");
-};
-
-export const storeEmailPendingState = (state: EmailPendingStateType) => {
-  const JSONState = JSON.stringify(state);
-  setCookie(EMAIL_PENDING_KEY, JSONState);
-};
-
-export const getEmailPendingState = (
-  ctx?: NextPageContext
-): EmailPendingStateType => {
-  const JSONState = getCookie(EMAIL_PENDING_KEY, ctx);
-  return JSONState ? JSON.parse(JSONState) : initialEmailPendingState;
+export const useEmailPendingState = (ctx?: NextPageContext) => {
+  const { clear, get, set } = useCookieState<EmailPendingStateType>({
+    ctx,
+    initialState: initialEmailPendingState,
+    key: EMAIL_PENDING_KEY
+  });
+  return {
+    clearEmailPendingState: clear,
+    storeEmailPendingState: set,
+    getEmailPendingState: get
+  };
 };
 
 export type EmailPendingStateType = {

@@ -1,7 +1,7 @@
 import "pages/auth/forgot-password/email-pending/email-pending.scss";
 
 import useApiRequest from "hooks/api-request.hook";
-import { getEmailPendingState } from "pages/auth/auth.service";
+import { useEmailPendingState } from "pages/auth/auth.service";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,6 +11,7 @@ import EmailPending from "./email-pending";
 
 const EmailPendingPage: React.FC = () => {
   const [t] = useTranslation();
+  const { getEmailPendingState } = useEmailPendingState();
   const { email } = getEmailPendingState();
   const { sendRequest: request } = useApiRequest({
     request: values => {
