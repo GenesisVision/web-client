@@ -31,9 +31,7 @@ const _PieContainer: React.FC<IPieContainer> = ({
       color={color}
       pieDirection={pieDirection}
     />
-    <div className="pie-container__value-container">
-      <div className="pie-container__value">{label}</div>
-    </div>
+    <div className="pie-container__value-container">{label}</div>
   </div>
 );
 

@@ -17,6 +17,7 @@ $middle-size: 43px;
   }
   &__value-container {
     @include font-size($font-size-small);
+    color: $text-light-color;
     position: absolute;
     width: 100%;
     height: 100%;
