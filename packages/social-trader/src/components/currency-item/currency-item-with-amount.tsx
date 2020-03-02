@@ -16,7 +16,7 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
 }) => {
   return (
     <Row>
-      <RowItem>
+      <RowItem className="currency-item-with-amount__name">
         <CurrencyItem {...props} symbol={symbol} name={symbol} />
       </RowItem>
       <RowItem>
