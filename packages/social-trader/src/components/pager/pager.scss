@@ -7,20 +7,13 @@ $pager-button-size: 40px;
 $pager-button-size-mobile: $pager-button-size/$divider-text;
 
 .pager {
-  display: flex;
-  margin-left: auto;
-  &__pager-block {
-    display: flex;
-    align-items: baseline;
-  }
-
   &__separator,
   &__button {
-    color: $text-light-color;
+    @extend .muted;
     display: flex;
+    align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    opacity: 0.4;
     font-weight: 700;
     @include width($pager-button-size);
     @include height($pager-button-size);
@@ -28,22 +21,17 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
   }
 
   &__button {
-    @include transition(opacity, background-color);
+    @include transition(color, background-color);
     align-items: center;
     @include adaptive-border-radius(8px);
-    border-radius: 8px;
     cursor: pointer;
-    @include adaptive-margin(right, 5px);
-    &:last-child {
-      margin-right: 0;
-    }
     &:hover {
-      opacity: 1;
+      color: $text-light-color;
       background-color: #1b2a35;
     }
     &--current {
       background-color: #1b2a35;
-      opacity: 1;
+      color: $text-light-color;
     }
   }
 }

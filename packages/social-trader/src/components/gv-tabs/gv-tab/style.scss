@@ -18,9 +18,7 @@
     width: 0;
     border-bottom: 0.15em solid $primary-color;
   }
-  &:not(:last-child) {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
+
   white-space: nowrap;
   &__count {
     @include transition(color, background-color);

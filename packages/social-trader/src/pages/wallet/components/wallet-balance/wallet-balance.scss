@@ -8,12 +8,4 @@
     border-right: 1px solid rgba($text-dark-color, 0.3);
     @include height($padding-upper-medium);
   }
-  &__buttons {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    & > div {
-      margin: $padding-xxsmall $padding-small $padding-xxsmall 0;
-    }
-  }
 }

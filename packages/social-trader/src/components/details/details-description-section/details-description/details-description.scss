@@ -37,6 +37,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
+  &__heading {
+    padding: 0;
+  }
+
   &__subheading {
     @include adaptive-padding(bottom, $padding-small);
     @include font-size($font-size-h4);

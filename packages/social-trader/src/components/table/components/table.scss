@@ -6,7 +6,6 @@
 $view-svg-size: 15px;
 
 .table {
-  @include adaptive-padding(bottom, $padding-xsmall, 2);
   width: 100%;
   border-spacing: 0;
 
@@ -17,20 +16,16 @@ $view-svg-size: 15px;
     -webkit-overflow-scrolling: touch;
   }
   &__footer {
-    @include adaptive-padding(top, $padding-xxsmall, 2);
-    @include horizontal-paddings($padding-xsmall);
-    display: flex;
-    align-items: baseline;
+    @include horizontal-paddings($padding-small);
   }
-  &__footer-text {
-    @include font-size($font-size-paragraph);
-    color: rgba($text-light-color, 0.4);
+  &__paging {
+    margin-left: auto;
   }
   &__toolbar {
     box-sizing: border-box;
     width: 100%;
     justify-content: space-between;
-    @include horizontal-paddings($padding-xsmall);
+    @include horizontal-paddings($padding-small);
   }
 
   &__toggle {

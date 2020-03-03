@@ -11,18 +11,7 @@ $remove-button-size-mobile: $remove-button-size/1.2;
 $remove-button-color: #293842;
 
 .fund-assets {
-  display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-
-  @include media-breakpoint-landscape-phone() {
-    align-items: center;
-  }
-
-  &--no-wrap {
-    flex-wrap: nowrap;
-  }
 
   &__container {
     padding: $padding-xsmall;

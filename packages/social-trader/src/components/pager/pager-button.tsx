@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import PagerLinkButton from "components/pager/pager-link-button";
+import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -24,22 +25,26 @@ export const _PagerButton: React.FC<Props> = ({
 
   const value = label || page;
 
-  if (asLink) {
-    return (
-      <PagerLinkButton
-        page={page}
-        value={value}
-        callback={callback}
-        classname={classname}
-      />
-    );
-  }
+  const renderButtonContent = () => {
+    if (asLink) {
+      return (
+        <PagerLinkButton
+          page={page}
+          value={value}
+          callback={callback}
+          classname={classname}
+        />
+      );
+    } else {
+      return (
+        <div className={classname} onClick={callback}>
+          {value}
+        </div>
+      );
+    }
+  };
 
-  return (
-    <div className={classname} onClick={callback}>
-      {value}
-    </div>
-  );
+  return <RowItem small>{renderButtonContent()}</RowItem>;
 };
 
 export const PagerButton = React.memo(_PagerButton);

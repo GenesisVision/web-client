@@ -3,6 +3,8 @@ import BrokerCard from "components/assets/broker-select/broker-card/broker-card"
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -113,19 +115,20 @@ const _ChangeBrokerForm: React.FC<Props> = ({
   }, [handleSubmit, onSubmit]);
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <div className="program-settings__block-wrapper--broker-list">
+      <Row wrap>
         {brokers.map(broker => (
-          <BrokerCard
-            logo={broker.logo}
-            key={broker.name}
-            brokerName={broker.name}
-            isSelected={broker.name === selectedBroker.name}
-            onSelect={selectBroker}
-            cardState={BROKER_CARD_EXTRA_STATE.NONE}
-            tags={broker.tags}
-          />
+          <RowItem bottomOffset key={broker.name}>
+            <BrokerCard
+              logo={broker.logo}
+              brokerName={broker.name}
+              isSelected={broker.name === selectedBroker.name}
+              onSelect={selectBroker}
+              cardState={BROKER_CARD_EXTRA_STATE.NONE}
+              tags={broker.tags}
+            />
+          </RowItem>
         ))}
-      </div>
+      </Row>
       <GVHookFormField
         name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
         component={SimpleTextField}

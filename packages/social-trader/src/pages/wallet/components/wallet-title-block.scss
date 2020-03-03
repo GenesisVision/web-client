@@ -9,10 +9,6 @@
     padding: 0 0 $padding-medium;
   }
   &__title {
-    @include adaptive-padding(right, $padding-medium);
-    padding-bottom: 0;
-    display: flex;
-    align-items: center;
     span {
       font-weight: 300;
     }
@@ -27,12 +23,5 @@
     margin-left: 15px;
     vertical-align: middle;
     display: inline-block;
-  }
-
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    @include adaptive-margin(bottom, $padding-medium);
   }
 }

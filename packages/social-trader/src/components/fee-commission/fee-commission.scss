@@ -4,25 +4,10 @@
 .fee-commission {
   white-space: nowrap;
   letter-spacing: 0.4px;
-  display: flex;
   width: 100%;
   justify-content: space-between;
   &:not(:last-child) {
     margin-bottom: $padding-xxsmall;
-  }
-  &__title {
-    margin-right: $padding-xsmall;
-  }
-
-  &__currency {
-    color: $main-color;
-  }
-  &__currency,
-  &__title {
-    opacity: 0.4;
-  }
-  &__total {
-    font-weight: 600;
   }
   &--green-value {
     & .fee-commission__value {
