@@ -12,6 +12,7 @@ $avatar-size: 32px;
   width: 100%;
 
   &__group {
+    @include adaptive-margin(bottom, $padding-small);
     .notification__content {
       @include adaptive-margin(bottom, $padding-small);
       border-bottom: 1px solid $border-color;
@@ -32,8 +33,7 @@ $avatar-size: 32px;
   }
 
   &__title {
-    @include adaptive-margin(right, $padding-small);
-    @include adaptive-margin(bottom, $padding-big);
+    @include adaptive-margin(bottom, $padding-upper-medium);
   }
 
   &__link {
@@ -45,7 +45,6 @@ $avatar-size: 32px;
   &__ring {
     @include height($ring-icon-size);
     @include width($ring-icon-size);
-    @include adaptive-margin(right, $padding-xxsmall);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,28 +52,14 @@ $avatar-size: 32px;
   }
 
   &__header {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
     @include adaptive-margin(bottom, $padding-small);
     @include horizontal-paddings($padding-xsmall);
     @include adaptive-padding(top, $padding-small);
   }
 
-  &__count {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
-
   &__header-title {
     @include font-size($font-size-h4);
-    @include adaptive-margin(right, $padding-xsmall);
-  }
-
-  &__clear {
-    & button {
-      @include font-size($font-size-h4);
-    }
-    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__content {
@@ -84,9 +69,6 @@ $avatar-size: 32px;
 }
 
 .notification {
-  display: flex;
-  flex-direction: row;
-
   &__content {
     display: flex;
     flex-direction: column;
@@ -120,7 +102,6 @@ $avatar-size: 32px;
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-    @include adaptive-margin(right, $padding-xsmall);
     @include adaptive-margin(top, ($font-size * $line-height - $font-size) / 2);
 
     @include height($avatar-size);

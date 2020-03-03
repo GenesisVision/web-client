@@ -76,9 +76,7 @@ const TransactionStatusBlock: React.FC<{
   const [t] = useTranslation();
   return (
     <TransactionDetailsItem label={t(`transactions-details.status.title`)}>
-      <div className="external-transaction__status">
-        <Status withText status={status} />
-      </div>
+      <Status withText status={status} />
     </TransactionDetailsItem>
   );
 });
