@@ -1,5 +1,6 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { Row } from "components/row/row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "components/table/components/table-container";
@@ -41,7 +42,7 @@ const _ProgramTrades: React.FC<Props> = ({
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
-        <div className="details-trades__toolbar">
+        <Row>
           {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
             {assetType === CREATE_ASSET.PROGRAM ? (
@@ -59,7 +60,7 @@ const _ProgramTrades: React.FC<Props> = ({
               />
             )}
           </div>
-        </div>
+        </Row>
       )}
       getItems={getItems}
       dataSelector={dataSelector}
