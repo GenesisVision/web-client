@@ -72,7 +72,7 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
                 updateFilter &&
                 filtering &&
                 renderFilters(updateFilter, filtering)}
-              {createButtonToolbar}
+              {createButtonToolbar && <RowItem>{createButtonToolbar}</RowItem>}
               {exportButtonToolbar && <RowItem>{exportButtonToolbar}</RowItem>}
             </Row>
           </RowItem>
