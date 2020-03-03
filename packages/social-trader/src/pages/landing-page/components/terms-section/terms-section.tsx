@@ -8,9 +8,9 @@ const TermsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className="terms-section internal--font-small">
-      <h1>TERMS AND CONDITIONS</h1>
+      <h1>{t("landing-page.terms.title")}</h1>
       <article className="internal__article">
-        <p>1. DEFINITIONS</p>
+        <p>{t("landing-page.terms.text-1")}</p>
         <p>
           {t("landing-page.terms.text-2")
             .split("\n")
