@@ -7,9 +7,7 @@ import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
 const renderLastItem = (t: i18next.TFunction) => (
-  <p className="advantages-section__text">
-    {t("landing-page.referral-program.text-4")}
-  </p>
+  <p className="advantages-section__text">{t("referral-program.text-4")}</p>
 );
 
 const ReferralProgramSection: React.FC = () => {
@@ -18,10 +16,10 @@ const ReferralProgramSection: React.FC = () => {
     <section className="referral-program-section">
       <div className="internal__container">
         <h1 className="referral-program-section__title">
-          {t("landing-page.referral-program.title")}
+          {t("referral-program.title")}
         </h1>
         <h2 className="referral-program-section__subtitle">
-          {t("landing-page.referral-program.subtitle-1")}
+          {t("referral-program.subtitle-1")}
         </h2>
         <AdvantagesList
           advantagesItems={refProgItems}
@@ -29,46 +27,46 @@ const ReferralProgramSection: React.FC = () => {
           lastItem={renderLastItem(t)}
         />
         <h2 className="referral-program-section__subtitle">
-          {t("landing-page.referral-program.subtitle-2")}
+          {t("referral-program.subtitle-2")}
         </h2>
         <div className="referral-program-section__img" />
       </div>
       <div className="referral-program-section__wrapper">
         <div className="internal__container">
           <div className="referral-program-section__list">
-            <h3>{t("landing-page.referral-program.title-list-1")}</h3>
+            <h3>{t("referral-program.title-list-1")}</h3>
             <ul className="internal__list">
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-1")}
+                {t("referral-program.text-list-1")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-2")}
+                {t("referral-program.text-list-2")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-3")}
+                {t("referral-program.text-list-3")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-4")}
+                {t("referral-program.text-list-4")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-5")}
+                {t("referral-program.text-list-5")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-6")}
+                {t("referral-program.text-list-6")}
               </li>
             </ul>
           </div>
           <div className="referral-program-section__list">
-            <h3>{t("landing-page.referral-program.title-list-2")}</h3>
+            <h3>{t("referral-program.title-list-2")}</h3>
             <ul className="internal__list">
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-7")}
+                {t("referral-program.text-list-7")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-8")}
+                {t("referral-program.text-list-8")}
               </li>
               <li className="internal__list-item">
-                {t("landing-page.referral-program.text-list-9")}
+                {t("referral-program.text-list-9")}
               </li>
             </ul>
           </div>

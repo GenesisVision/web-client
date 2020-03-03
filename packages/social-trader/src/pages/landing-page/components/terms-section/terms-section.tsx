@@ -8,11 +8,11 @@ const TermsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className="terms-section internal--font-small">
-      <h1>{t("landing-page.terms.title")}</h1>
+      <h1>{t("terms.title")}</h1>
       <article className="internal__article">
-        <p>{t("landing-page.terms.text-1")}</p>
+        <p>{t("terms.text-1")}</p>
         <p>
-          {t("landing-page.terms.text-2")
+          {t("terms.text-2")
             .split("\n")
             .map((line, index) => (
               <span key={index}>
@@ -27,7 +27,7 @@ const TermsSection: React.FC = () => {
             {t("landing-page.links.genesis-vision")}
           </a>{" "}
           <br />
-          {t("landing-page.terms.text-3")
+          {t("terms.text-3")
             .split("\n")
             .map((line, index) => (
               <span key={index}>
@@ -37,40 +37,40 @@ const TermsSection: React.FC = () => {
             ))}
         </p>
         <p>
-          {t("landing-page.terms.text-4")}
+          {t("terms.text-4")}
           <a title={t("landing-page.links.glossary")} href={GLOSSARY_ROUTE}>
             {t("landing-page.links.glossary")}
           </a>
           .
         </p>
-        {t("landing-page.terms.paragraphs-1")
+        {t("terms.paragraphs-1")
           .split("\n")
           .map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         <p>
-          {t("landing-page.terms.text-5")}
+          {t("terms.text-5")}
           <ul>
-            {t("landing-page.terms.list-1")
+            {t("terms.list-1")
               .split("\n")
               .map((line, index) => (
                 <li key={index}>{line}</li>
               ))}
           </ul>
         </p>
-        {t("landing-page.terms.paragraphs-2")
+        {t("terms.paragraphs-2")
           .split("\n")
           .map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         <p>
-          {t("landing-page.terms.paragraphs-3")
+          {t("terms.paragraphs-3")
             .split("\n")
             .map((line, index) => (
               <p key={index}>{line}</p>
             ))}
         </p>
-        {t("landing-page.terms.paragraphs-4")
+        {t("terms.paragraphs-4")
           .split("\n")
           .map((line, index) => (
             <p key={index}>{line}</p>
