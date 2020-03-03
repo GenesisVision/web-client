@@ -22,27 +22,23 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     assetDetails.assetType,
     contextTitle
   );
+  const renderAvatar = () => (
+    <AssetAvatar
+      url={assetDetails.logo}
+      alt={assetDetails.title}
+      className="portfolio-event-logo__logo"
+      color={assetDetails.color}
+    />
+  );
   return (
     <div className="portfolio-event-logo">
       {withAsset &&
         ((assetDetails.url && (
           <Link to={to} className="portfolio-event-logo__photo">
-            <AssetAvatar
-              url={assetDetails.logo}
-              alt={assetDetails.title}
-              className="portfolio-event-logo__logo"
-              color={assetDetails.color}
-            />
+            {renderAvatar()}
           </Link>
         )) || (
-          <div className="portfolio-event-logo__photo">
-            <AssetAvatar
-              url={assetDetails.logo}
-              alt={assetDetails.title}
-              className="portfolio-event-logo__logo"
-              color={assetDetails.color}
-            />
-          </div>
+          <div className="portfolio-event-logo__photo">{renderAvatar()}</div>
         ))}
       {icon && (
         <div
