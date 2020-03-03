@@ -16,6 +16,10 @@
     flex-direction: column;
   }
 
+  &__broker {
+    @include adaptive-margin(bottom, $padding-xsmall);
+  }
+
   &__signaling-edit-form-title-block {
     display: flex;
     align-items: center;
@@ -64,12 +68,6 @@
     width: 100%;
 
     &:last-child {
-      margin-bottom: 0;
-    }
-
-    &--broker-list {
-      display: flex;
-      flex-wrap: wrap;
       margin-bottom: 0;
     }
 

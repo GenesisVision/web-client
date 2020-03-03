@@ -1,5 +1,6 @@
 import "./broker-select.scss";
 
+import { RowItem } from "components/row-item/row-item";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Surface from "components/surface/surface";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -29,19 +30,20 @@ const _BrokerSelectBroker: React.FC<Props> = ({
       <div className="broker-select">
         <div className="broker-select__list">
           {data.map((broker, i) => (
-            <BrokerCard
-              logo={broker.logo}
-              key={i}
-              brokerName={broker.name}
-              isSelected={broker === selectedBroker}
-              onSelect={selectBrokerHandle}
-              cardState={getBrokerState(
-                broker.isKycRequired,
-                isForexAllowed,
-                isKycConfirmed
-              )}
-              tags={broker.tags}
-            />
+            <RowItem bottomOffset key={i}>
+              <BrokerCard
+                logo={broker.logo}
+                brokerName={broker.name}
+                isSelected={broker === selectedBroker}
+                onSelect={selectBrokerHandle}
+                cardState={getBrokerState(
+                  broker.isKycRequired,
+                  isForexAllowed,
+                  isKycConfirmed
+                )}
+                tags={broker.tags}
+              />
+            </RowItem>
           ))}
           <div className="broker-select__navigation">
             <NavigateToSettings

@@ -8,7 +8,7 @@ import { currencySelector } from "reducers/account-settings-reducer";
 
 import { WalletWidgetLoaderData } from "./wallet-widget.txt-loader";
 
-const _WalletWidgetContainer: React.FC<Props> = ({ className }) => {
+const _WalletWidgetContainer: React.FC = () => {
   const currency = useSelector(currencySelector);
   const info = useSelector(grandTotalSelector);
   const dispatch = useDispatch();
@@ -16,18 +16,8 @@ const _WalletWidgetContainer: React.FC<Props> = ({ className }) => {
     dispatch(fetchWallets(currency));
   }, [currency]);
 
-  return (
-    <WalletWidget
-      className={className}
-      loaderData={WalletWidgetLoaderData}
-      data={info!}
-    />
-  );
+  return <WalletWidget loaderData={WalletWidgetLoaderData} data={info!} />;
 };
-
-interface Props {
-  className?: string;
-}
 
 const WalletWidgetContainer = React.memo(_WalletWidgetContainer);
 export default WalletWidgetContainer;

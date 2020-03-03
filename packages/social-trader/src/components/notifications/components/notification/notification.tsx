@@ -4,6 +4,8 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 import NewsIcon from "media/news.svg";
@@ -74,7 +76,8 @@ const _Notification: React.FC<INotificationProps> = props => {
   const { date, text, isUnread, type } = props;
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (
-    <div
+    <Row
+      center={false}
       className={classNames(
         "notification",
         `notification--type-${type.toLowerCase()}`,
@@ -83,25 +86,29 @@ const _Notification: React.FC<INotificationProps> = props => {
         }
       )}
     >
-      {staticIconUrl ? (
-        <div className="notification__icon">
-          <ImageBaseElement
-            src={staticIconUrl}
-            alt={type}
-            className="notification__icon-logo"
-          />
-        </div>
-      ) : (
-        <NotificationAssetAvatar {...props} />
-      )}
+      <RowItem>
+        {staticIconUrl ? (
+          <div className="notification__icon">
+            <ImageBaseElement
+              src={staticIconUrl}
+              alt={type}
+              className="notification__icon-logo"
+            />
+          </div>
+        ) : (
+          <NotificationAssetAvatar {...props} />
+        )}
+      </RowItem>
 
-      <div className="notification__content">
-        <div className="notification__description">{text}</div>
-        <div className="notification__date">
-          <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
+      <RowItem>
+        <div className="notification__content">
+          <div className="notification__description">{text}</div>
+          <div className="notification__date">
+            <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
+          </div>
         </div>
-      </div>
-    </div>
+      </RowItem>
+    </Row>
   );
 };
 

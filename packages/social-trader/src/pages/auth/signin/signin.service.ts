@@ -3,13 +3,15 @@ import authActions from "actions/auth-actions";
 import platformActions from "actions/platform-actions";
 import { Push } from "components/link/link";
 import { CaptchaCheckResult, LoginViewModel } from "gv-api-web";
+import { useCookieState } from "hooks/cookie-state";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import { NextPageContext } from "next";
 import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
 import { HOME_ROUTE } from "routes/app.routes";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import { getCookie, removeCookie, setCookie } from "utils/cookie";
+import { removeCookie } from "utils/cookie";
 
 export enum CODE_TYPE {
   TWO_FACTOR = "twoFactorCode",
@@ -59,24 +61,23 @@ export const initialTwoFactorState = {
   from: { HOME_ROUTE }
 };
 
-export const clearTwoFactorState = () => {
-  setCookie(TWO_FACTOR_KEY, "");
-};
-
-export const storeTwoFactorState = (state: TwoFactorStateType) => {
-  const JSONState = JSON.stringify(state);
-  setCookie(TWO_FACTOR_KEY, JSONState);
-};
-
-export const getTwoFactorState = (): TwoFactorStateType => {
-  const JSONState = getCookie(TWO_FACTOR_KEY);
-  return JSONState ? JSON.parse(JSONState) : initialTwoFactorState;
-};
-
 export type TwoFactorStateType = {
   email: string;
   password: string;
   from: string | object;
+};
+
+export const useTwoFactorState = (ctx?: NextPageContext) => {
+  const { clear, get, set } = useCookieState<TwoFactorStateType>({
+    ctx,
+    initialState: initialTwoFactorState,
+    key: TWO_FACTOR_KEY
+  });
+  return {
+    clearTwoFactorState: clear,
+    storeTwoFactorState: set,
+    getTwoFactorState: get
+  };
 };
 
 export type LoginFuncType = (props: {

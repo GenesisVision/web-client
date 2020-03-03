@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import { AmountItem as AmountItemType, Color } from "gv-api-web";
@@ -11,16 +13,16 @@ const _AmountItem: React.FC<Props> = ({
 }) => {
   return (
     <ColoredAmount color={color}>
-      <div className="amount-item">
-        <div className="amount-item__amount">
+      <Row>
+        <RowItem small>
           <NumberFormat
             value={formatValue(amount, DEFAULT_DECIMAL_SCALE)}
             allowNegative={true}
             displayType="text"
           />
-        </div>
-        {currency}
-      </div>
+        </RowItem>
+        <RowItem small>{currency}</RowItem>
+      </Row>
     </ColoredAmount>
   );
 };

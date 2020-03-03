@@ -2,8 +2,8 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -39,15 +39,12 @@ const _UnfollowForm: React.FC<Props> = ({
           wide
           disableIfSingle
           name={FIELDS.mode}
-          component={GVTextField}
+          component={SimpleTextField}
           label={t("unfollow-program.type")}
           InputComponent={Select}
         >
           {modesList.map((mode: string) => (
-            <option
-              value={String(modes[mode].value as string)}
-              key={String(modes[mode].value)}
-            >
+            <option value={modes[mode].value} key={modes[mode].value}>
               <Tooltip
                 render={() => (
                   <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>

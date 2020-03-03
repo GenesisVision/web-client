@@ -1,16 +1,14 @@
 import "./signup.scss";
 
-import emailPendingActions from "actions/email-pending-actions";
 import { Push } from "components/link/link";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import useApiRequest from "hooks/api-request.hook";
+import { useEmailPendingState } from "pages/auth/auth.service";
 import CaptchaContainer from "pages/auth/captcha-container";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { ReduxDispatch } from "utils/types";
 
 import { signUp } from "./services/signup.service";
 
@@ -20,9 +18,10 @@ const _SignUpPage: React.FC<Props> = ({
   referralCode
 }) => {
   const [t] = useTranslation();
-  const dispatch = useDispatch<ReduxDispatch>();
+  const { storeEmailPendingState } = useEmailPendingState();
+
   const successMiddleware = (email: string) => {
-    dispatch(emailPendingActions.saveEmail({ email }));
+    storeEmailPendingState({ email });
     Push(SIGNUP_ROUTE_PENDING);
   };
   const { sendRequest: request, errorMessage } = useApiRequest({

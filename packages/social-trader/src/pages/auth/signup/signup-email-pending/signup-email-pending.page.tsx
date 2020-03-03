@@ -1,15 +1,15 @@
 import "./signup-email-pending.scss";
 
+import { useEmailPendingState } from "pages/auth/auth.service";
 import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pending.service";
 import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/signup-email-pending-container";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { RootState } from "reducers/root-reducer";
 
 const _EmailPending: React.FC = () => {
   const [t] = useTranslation();
-  const { email } = useSelector((state: RootState) => state.emailPending);
+  const { getEmailPendingState } = useEmailPendingState();
+  const { email } = getEmailPendingState();
   return (
     <div className="signup-email">
       <h1>{t("auth.signup.email-confirm-title")}</h1>

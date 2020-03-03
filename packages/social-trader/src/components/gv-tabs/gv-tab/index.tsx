@@ -1,6 +1,7 @@
 import "./style.scss";
 
 import classNames from "classnames";
+import { RowItem } from "components/row-item/row-item";
 import React from "react";
 
 export interface GVTabProps {
@@ -49,16 +50,18 @@ const GVTab: React.FC<GVTabProps> = ({
   }
 
   return (
-    <div
-      className={classNames(className, "gv-tab", {
-        "gv-tab--active": selected
-      })}
-      data-test-id={label}
-      onClick={handleChange}
-    >
-      {label}
-      {renderCount()}
-    </div>
+    <RowItem>
+      <div
+        className={classNames(className, "gv-tab", {
+          "gv-tab--active": selected
+        })}
+        data-test-id={label}
+        onClick={handleChange}
+      >
+        {label}
+        {renderCount()}
+      </div>
+    </RowItem>
   );
 };
 

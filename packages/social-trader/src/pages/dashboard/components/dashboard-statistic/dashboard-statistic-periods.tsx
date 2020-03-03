@@ -1,10 +1,13 @@
-import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
+import Profitability from "components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Crashable from "decorators/crashable";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _DashboardStatisticPeriods: React.FC<Props> = ({
@@ -55,13 +58,22 @@ const _DashboardStatisticPeriodsItem: React.FC<{
 }> = ({ item: { profit, profitPercent }, label, currency }) => {
   return (
     <StatisticItem label={label}>
-      <div className="dashboard-statistic-periods-item__value-container">
-        <ProfitabilityValuePercent
+      <Profitability
+        value={formatCurrencyValue(profit, currency)}
+        prefix={PROFITABILITY_PREFIX.SIGN}
+      >
+        <NumberFormat
+          value={formatCurrencyValue(profit, currency)}
+          suffix={` ${currency}`}
+          allowNegative={false}
+          displayType="text"
+        />
+      </Profitability>
+      {/*<ProfitabilityValuePercent
           currency={currency}
           percent={profitPercent}
           value={profit}
-        />
-      </div>
+        />*/}
     </StatisticItem>
   );
 };

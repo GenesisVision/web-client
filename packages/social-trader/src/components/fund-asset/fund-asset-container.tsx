@@ -1,9 +1,9 @@
-import classNames from "classnames";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { Row } from "components/row/row";
 import {
   FundAssetInfo,
   FundAssetPartWithIcon,
@@ -34,12 +34,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     if (hasPopoverList) setSize(sizeProp);
   });
   return (
-    <div
-      className={classNames("fund-assets", {
-        "fund-assets--no-wrap": noWrap,
-        "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
-      })}
-    >
+    <Row wrap={!noWrap} className="fund-assets">
       {assets.filter(getVisibleAssets(size || assets.length)).map(
         renderFundAsset({
           bottomOffset: !noWrap,
@@ -69,7 +64,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
           <NumberFormat value={remainder} suffix="%" displayType="text" />
         </div>
       )}
-    </div>
+    </Row>
   );
 };
 

@@ -1,6 +1,8 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { Range } from "rc-slider";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -35,25 +37,29 @@ const _LevelFilterPopover: React.FC<Props> = ({
             pushable={false}
           />
         </div>
-        <div className="level-filter__btns">
-          <GVButton
-            noPadding
-            className="level-filter__btn"
-            variant="text"
-            onClick={handleSubmit}
-          >
-            {t("buttons.apply")}
-          </GVButton>
-          <GVButton
-            noPadding
-            className="level-filter__btn"
-            variant="text"
-            color="secondary"
-            onClick={cancel}
-          >
-            {t("buttons.cancel")}
-          </GVButton>
-        </div>
+        <Row>
+          <RowItem>
+            <GVButton
+              size={GV_BTN_SIZE.BIG}
+              noPadding
+              variant="text"
+              onClick={handleSubmit}
+            >
+              {t("buttons.apply")}
+            </GVButton>
+          </RowItem>
+          <RowItem>
+            <GVButton
+              size={GV_BTN_SIZE.BIG}
+              noPadding
+              variant="text"
+              color="secondary"
+              onClick={cancel}
+            >
+              {t("buttons.cancel")}
+            </GVButton>
+          </RowItem>
+        </Row>
       </PopoverContentCardBlock>
     </PopoverContent>
   );

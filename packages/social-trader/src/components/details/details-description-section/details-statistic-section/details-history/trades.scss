@@ -5,11 +5,6 @@
 .details-trades {
   overflow: hidden;
 
-  &__toolbar {
-    display: flex;
-    align-items: center;
-  }
-
   &__delay-question {
     cursor: help;
     box-sizing: border-box;
@@ -22,11 +17,6 @@
     border-radius: 50%;
     width: 15px;
     height: 15px;
-    margin-left: 12px;
-  }
-
-  &__delay-hint {
-    @include adaptive-margin(right, $padding-xxsmall);
   }
 
   &__history-popup-item {

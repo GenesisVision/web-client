@@ -11,7 +11,7 @@ export const MutedText: React.FC<Props> = ({
   bold
 }) => {
   return (
-    <div
+    <span
       className={classNames("muted-text", {
         "muted-text--small": small,
         "muted-text--big": big,
@@ -20,7 +20,7 @@ export const MutedText: React.FC<Props> = ({
       })}
     >
       {children}
-    </div>
+    </span>
   );
 };
 

@@ -1,4 +1,5 @@
 import { ToType } from "components/link/link";
+import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -17,9 +18,17 @@ const _DetailsInfo: React.FC<Props> = ({
 }) => {
   return (
     <div className="details-description__info">
-      <h1 className="title-small-padding">{title}</h1>
-      {subtitle && <DetailsSubtitle to={subtitleUrl} text={subtitle} />}
-      {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
+      <h1 className="details-description__heading">{title}</h1>
+      {subtitle && (
+        <Row>
+          <DetailsSubtitle to={subtitleUrl} text={subtitle} />
+        </Row>
+      )}
+      {socialLinks && (
+        <Row>
+          <SocialLinksBlock socialLinks={socialLinks} />
+        </Row>
+      )}
       {children && (
         <div className="details-description__info-block">{children}</div>
       )}

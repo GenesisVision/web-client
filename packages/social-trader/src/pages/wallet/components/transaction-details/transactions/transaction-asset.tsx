@@ -9,9 +9,7 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
   const { contextTitle } = useToLink();
   const programLinkProps = getAssetLink(data.url, data.assetType, contextTitle);
   return (
-    <div
-      className={`transaction-asset transaction-asset--${data.assetType.toLowerCase()}`}
-    >
+    <div className={`transaction-asset--${data.assetType.toLowerCase()}`}>
       <Link to={programLinkProps}>
         <AssetAvatarWithName
           name={

@@ -1,5 +1,7 @@
 import "./wallet-balance.scss";
 
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import { WalletData } from "gv-api-web";
 import TransferButton from "modules/transfer/transfer-button";
@@ -20,17 +22,17 @@ const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
     dispatch(fetchWallets(profileCurrency));
   }, [profileCurrency]);
   return (
-    <div className="wallet-balance__buttons">
-      <div>
+    <Row wrap>
+      <RowItem>
         <WalletDeposit currency={currency} disabled={!isDepositEnabled} />
-      </div>
-      <div>
+      </RowItem>
+      <RowItem>
         <WalletWithdrawButton
           currency={currency}
           disabled={!isWithdrawalEnabled}
         />
-      </div>
-      <div>
+      </RowItem>
+      <RowItem>
         <TransferButton
           onApply={updateWalletInfo}
           withIcon
@@ -39,8 +41,8 @@ const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
           sourceType={"Wallet"}
           destinationType={"Wallet"}
         />
-      </div>
-    </div>
+      </RowItem>
+    </Row>
   );
 };
 

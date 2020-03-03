@@ -1,4 +1,6 @@
 import { CaptchaDetails, PowDetails } from "gv-api-web";
+import { useCookieState } from "hooks/cookie-state";
+import { NextPageContext } from "next";
 import platformApi from "services/api-client/platform-api";
 
 //@ts-ignore
@@ -37,6 +39,29 @@ export const checkPow: CheckPowFuncType = async props => {
     });
   }
   return 0;
+};
+
+export const EMAIL_PENDING_KEY = "EMAIL_PENDING_KEY";
+
+export const initialEmailPendingState: EmailPendingStateType = {
+  email: ""
+};
+
+export const useEmailPendingState = (ctx?: NextPageContext) => {
+  const { clear, get, set } = useCookieState<EmailPendingStateType>({
+    ctx,
+    initialState: initialEmailPendingState,
+    key: EMAIL_PENDING_KEY
+  });
+  return {
+    clearEmailPendingState: clear,
+    storeEmailPendingState: set,
+    getEmailPendingState: get
+  };
+};
+
+export type EmailPendingStateType = {
+  email: string;
 };
 
 type GetCaptchaFuncType = (login: string) => Promise<CaptchaDetails>;

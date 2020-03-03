@@ -2,20 +2,16 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_hide";
-@import "~shared/styles/_transition";
+@import "~shared/styles/_constants";
 
 .header {
   &,
   & * {
     box-sizing: border-box;
   }
-  display: flex;
   width: 100%;
-  align-items: center;
 
   &__icon {
-    display: flex;
-    align-items: center;
     margin-right: $padding-small/2;
   }
 
@@ -27,8 +23,7 @@
   }
 
   &__right,
-  &__left,
-  &__center {
+  &__left {
     display: flex;
     align-items: center;
   }
@@ -68,14 +63,6 @@
     @include transition();
   }
 
-  &__center {
-    justify-content: flex-start;
-    width: 100%;
-    &--hide {
-      width: auto;
-    }
-  }
-
   &__buttons {
     width: 100%;
     justify-content: flex-end;
@@ -85,9 +72,6 @@
   }
 
   @include media-breakpoint-landscape-tablet() {
-    &__center {
-      justify-content: space-between;
-    }
     &__right {
       justify-content: space-between;
     }

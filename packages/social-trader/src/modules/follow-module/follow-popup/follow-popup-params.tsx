@@ -93,23 +93,21 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
         )}
         {mode === modes.fixed.value && (
           <>
-            {subscribeFixedCurrencies.length > 1 && (
-              <DialogField>
-                <GVHookFormField
-                  wide
-                  name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
-                  component={SimpleTextField}
-                  label={t("follow-program.params.fixed-currency")}
-                  InputComponent={Select}
-                >
-                  {subscribeFixedCurrencies.map((currency: string) => (
-                    <option value={currency} key={currency}>
-                      {currency}
-                    </option>
-                  ))}
-                </GVHookFormField>
-              </DialogField>
-            )}
+            <DialogField hide={subscribeFixedCurrencies.length < 2}>
+              <GVHookFormField
+                wide
+                name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
+                component={SimpleTextField}
+                label={t("follow-program.params.fixed-currency")}
+                InputComponent={Select}
+              >
+                {subscribeFixedCurrencies.map((currency: string) => (
+                  <option value={currency} key={currency}>
+                    {currency}
+                  </option>
+                ))}
+              </GVHookFormField>
+            </DialogField>
             <DialogField>
               <InputAmountField
                 wide

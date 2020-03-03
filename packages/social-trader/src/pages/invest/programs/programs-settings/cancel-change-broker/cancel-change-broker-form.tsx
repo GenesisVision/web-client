@@ -2,6 +2,8 @@ import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
@@ -41,15 +43,17 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
   );
   return (
     <div>
-      <div className="program-settings__block-wrapper--broker-list">
-        <div className="program-settings__broker-info">
-          <BrokerCard
-            logo={brokerFrom.logo}
-            key={brokerFrom.name}
-            brokerName={brokerFrom.name}
-            cardState={BROKER_CARD_EXTRA_STATE.NONE}
-            tags={brokerFrom.tags}
-          />
+      <Row wrap center={false}>
+        <RowItem className="program-settings__broker-info">
+          <div className="program-settings__broker">
+            <BrokerCard
+              logo={brokerFrom.logo}
+              key={brokerFrom.name}
+              brokerName={brokerFrom.name}
+              cardState={BROKER_CARD_EXTRA_STATE.NONE}
+              tags={brokerFrom.tags}
+            />
+          </div>
           <StatisticItem
             label={t("create-program-page.settings.fields.account-type")}
           >
@@ -66,16 +70,18 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           >
             {leverage}
           </StatisticItem>
-        </div>
-        <div className="broker-card__next-arrow">&rarr;</div>
-        <div className="program-settings__broker-info">
-          <BrokerCard
-            logo={brokerTo.logo}
-            key={brokerTo.name}
-            brokerName={brokerTo.name}
-            cardState={BROKER_CARD_EXTRA_STATE.NONE}
-            tags={brokerTo.tags}
-          />
+        </RowItem>
+        <RowItem className="broker-card__next-arrow">&rarr;</RowItem>
+        <RowItem className="program-settings__broker-info">
+          <div className="program-settings__broker">
+            <BrokerCard
+              logo={brokerTo.logo}
+              key={brokerTo.name}
+              brokerName={brokerTo.name}
+              cardState={BROKER_CARD_EXTRA_STATE.NONE}
+              tags={brokerTo.tags}
+            />
+          </div>
           <StatisticItem
             label={t("create-program-page.settings.fields.account-type")}
           >
@@ -86,8 +92,8 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           >
             {newLeverage}
           </StatisticItem>
-        </div>
-      </div>
+        </RowItem>
+      </Row>
       <HuobiWarning
         from={brokerFrom.name}
         to={brokerTo.name}

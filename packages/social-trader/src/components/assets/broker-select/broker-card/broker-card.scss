@@ -7,8 +7,6 @@ $radius: 12px;
 $arrow-font-size: $font-size-h4;
 
 .broker-card {
-  @include adaptive-margin(right, $padding-upper-medium/2);
-  @include adaptive-margin(bottom, $padding-upper-medium/2);
   box-sizing: border-box;
   width: $size/$divider-text;
   height: $size/$divider-text;
@@ -24,10 +22,9 @@ $arrow-font-size: $font-size-h4;
   padding-bottom: $padding-medium;
 
   &__next-arrow {
-    @include adaptive-margin(right, $padding-upper-medium/2);
     display: flex;
     justify-content: center;
-    margin-top: ($size/$divider-text/2)- ($arrow-font-size/2);
+    margin-top: ($size/$divider-text/2) - ($arrow-font-size/2);
     font-size: $arrow-font-size;
     @include media-breakpoint-landscape-phone() {
       margin-top: ($size/2)- ($arrow-font-size/2);

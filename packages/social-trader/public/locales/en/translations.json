@@ -340,7 +340,7 @@
     "validation": {
       "amount-more-than-available": "Amount requested is more than currently available in your wallet",
       "address-is-required": "An address is required.",
-      "two-factor-6digits": "Authentication code should contain at least 6 digits.",
+      "two-factor-6digits": "Should contain at least 6 digits.",
       "two-factor-required": "Authentication code is required."
     }
   },
@@ -551,7 +551,7 @@
     "success-alert-message": "Withdrawal request sent successfully.",
     "validation": {
       "required": "Amount is required",
-      "min-value": "Amount must be greater than or equal to 0.01"
+      "min-value": "Amount must be greater than or equal to {{minAmount}}"
     }
   },
   "not-found-page": {
@@ -1759,7 +1759,7 @@
         "link-to-recovery": "Enter a two-factor recovery code",
         "text": "Open the two-factor authentication app on your device to view your authentication code and verify your identity.",
         "validation": {
-          "two-factor-6digits": "Authentication code should contain 6 digits.",
+          "two-factor-6digits": "Should contain 6 digits.",
           "two-factor-required": "Authentication code is required."
         }
       },

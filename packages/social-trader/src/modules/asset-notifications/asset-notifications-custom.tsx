@@ -34,7 +34,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
   const [t] = useTranslation();
   const { sendRequest, errorMessage } = useApiRequest({
     request: (values: IAddNotificationSettingProps) => {
-      return dispatch(addNotification(values));
+      return dispatch(addNotification({ ...values, type: "ProgramCondition" }));
     },
     successMessage: "notifications-page.custom.create-alert",
     middleware: [postponeCallback(setClosePopup)]

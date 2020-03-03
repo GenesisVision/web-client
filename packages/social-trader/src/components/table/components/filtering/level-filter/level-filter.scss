@@ -3,13 +3,6 @@
 
 .level-filter {
   width: 250px;
-  &__btns {
-    display: flex;
-  }
-  &__btn {
-    @include font-size($font-size-paragraph);
-    @include adaptive-margin(right, $padding-xsmall);
-  }
   &__slider {
     padding: 0 0 $padding-small;
   }
