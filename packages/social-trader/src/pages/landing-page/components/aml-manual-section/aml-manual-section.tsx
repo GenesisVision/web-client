@@ -144,7 +144,6 @@ const AmlManualSection: React.FC = () => {
             value goods such as property or businesses.
           </span>
         </p>
-        <a id="id.3znysh7"></a>
         <ol className="c12 lst-kix_list_2-1">
           <li className="c39">
             <span className="c2">Layering</span>
@@ -159,7 +158,6 @@ const AmlManualSection: React.FC = () => {
             overseas, reselling goods previously with cash.
           </span>
         </p>
-        <a id="id.2et92p0"></a>
         <ol className="c12 lst-kix_list_2-1">
           <li className="c22">
             <span className="c2">Integration</span>
@@ -208,7 +206,6 @@ const AmlManualSection: React.FC = () => {
             advantage of their services products.
           </span>
         </p>
-        <a id="id.tyjcwt"></a>
         <ol className="c12 lst-kix_list_2-1">
           <li className="c22">
             <span className="c2">
@@ -228,9 +225,6 @@ const AmlManualSection: React.FC = () => {
             the International Money-Laundering Information Network (IMoLIN).
           </span>
         </p>
-        <p className="c37">
-          <span className="c13"></span>
-        </p>
         <ol className="c12 lst-kix_list_2-0">
           <li className="c31">
             <span className="c2">OUR POLICY</span>
@@ -247,7 +241,6 @@ const AmlManualSection: React.FC = () => {
         </p>
         <p className="c65">
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             has adopted an Anti-Money Laundering (AML) Compliance Policy
             according to the International Money-Laundering Information Network
@@ -259,7 +252,6 @@ const AmlManualSection: React.FC = () => {
             Based on the requirement of the above-mentioned Act,{" "}
           </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             is committed to the maintenance of a compliance program which shall
             include:-
@@ -298,7 +290,6 @@ const AmlManualSection: React.FC = () => {
             at being used for those purposes.
           </span>
         </p>
-        <a id="id.3dy6vkm"></a>
         <ol className="c12 lst-kix_list_4-0 start">
           <li className="c48">
             <span className="c2">Scope and Objectives of Policy</span>
@@ -307,15 +298,12 @@ const AmlManualSection: React.FC = () => {
         <p className="c52">
           <span className="c2">This policy applies to all </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             officers, employees and products and services offered by{" "}
           </span>
           <span className="c9">GENESIS VISION LP.</span>
-          <span className="c5"> </span>
           <span className="c2">All business units and locations within </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             will cooperate to create a cohesive effort in the fight against
             money laundering. These procedures are established to guide staff in
@@ -328,7 +316,6 @@ const AmlManualSection: React.FC = () => {
             of{" "}
           </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             are not used to launder the proceeds of crime and that all of the
             staff is aware of their obligations and the need for vigilance in
@@ -348,7 +335,6 @@ const AmlManualSection: React.FC = () => {
             issued from time to time regulators of the countries where{" "}
           </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             operates. The AML Compliance Committee is responsible for initiating
             Suspicious Activity Reports (&quot;SARs&quot;) or other required
@@ -391,7 +377,6 @@ const AmlManualSection: React.FC = () => {
             <span className="c2">Keep records of what we do</span>
           </li>
         </ul>
-        <a id="id.1t3h5sf"></a>
         <ol className="c12 lst-kix_list_4-0">
           <li className="c53">
             <span className="c2">
@@ -471,12 +456,10 @@ const AmlManualSection: React.FC = () => {
         </ol>
         <p className="c54">
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             has adopted a Customer Identification program.{" "}
           </span>
           <span className="c9">GENESIS VISION LP,</span>
-          <span className="c5"> </span>
           <span className="c2">
             will provide notice that they will seek identification, collect
             certain minimum customer identification information from each
@@ -545,9 +528,7 @@ const AmlManualSection: React.FC = () => {
             <span className="c2">Selfie with passport or ID</span>
           </li>
         </ol>
-        <p className="c70 c109">
-          <span className="c2"></span>
-        </p>
+        <p className="c70 c109"></p>
         <p className="c82">
           <span className="c2">
             In addition to identification information as described above, it is

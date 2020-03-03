@@ -1,51 +1,24 @@
 import "./terms-section.scss";
 
+import { useTranslation } from "i18n";
 import React from "react";
 
 const TermsSection: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className="terms-section internal--font-small">
       <h1>TERMS AND CONDITIONS</h1>
       <article className="internal__article">
         <p>1. DEFINITIONS</p>
         <p>
-          1.1. For purposes of these Terms of Use, the following terms shall
-          have the meanings as specified below:
-          <br />
-          "GV" or "We", "us" or derivatives of this words mean the
-          <br />
-          company Genesis Vision LP which is the copyright owner of the Website
-          and has registered address Office 29, Clifton House, Fitzwilliam
-          street lower, Dublin 2,
-          <br />
-          Ireland.
-          <br />
-          "Services" means the technical services reflected in clause 4.3 of
-          this Terms and Conditions, provided on the Web-site controlled by GV
-          which are allowed to the
-          <br />
-          Users under certain terms of service.
-          <br />
-          "User" or "You" or derivatives of this words means You or any person
-          or entity who uses the Website and is one of the Parties
-          <br />
-          to the present Terms of Use and who is not FATCA REPORTABLE PERSON.
-          User shall accept and comply with all the conditions of the present
-          Terms of Use.
-          <br />
-          "FATCA REPORTABLE PERSON" – is a citizen of the United States of
-          America or a US resident.
-          <br />
-          "You" means You as a Website User ('Your' and 'Yours' shall be
-          construed accordingly).
-          <br />
-          "Terms" means these Terms of Use which constitute the entire agreement
-          between GV and the User, as well as updated, modified and/or amended
-          future versions thereof
-          <br />
-          as now or hereafter in effect.
-          <br />
-          "Website" means{" "}
+          {t("landing-page.terms.text-2")
+            .split("\n")
+            .map(line => (
+              <>
+                {line}
+                <br />
+              </>
+            ))}
           <a title={"Genesis Vision"} href="https://genesis.vision/">
             genesis.vision
           </a>{" "}

@@ -2820,6 +2820,11 @@
       "text-list-7": "Trading Fee commission: generated from each transaction if the referral is trading on Genesis Markets Crypto.",
       "text-list-8": "Entry Fee commission: the Entry Fee that is charged to investors entering the referrals' programs created with any trading account other than Genesis Markets Crypto.",
       "text-list-9": "Platform Success fee commission: It is calculated according to the HWM system as a percentage of the profit received from a program during the reporting period or from a trade transaction when copy trading. No profit means no Platform Success fee is charged."
+    },
+    "terms": {
+      "title": "TERMS AND CONDITIONS",
+      "text-1": "1. DEFINITIONS",
+      "text-2": "1.1. For purposes of these Terms of Use, the following terms shall have the meanings as specified below: \n 'GV', or 'We', 'us' or derivatives of this words mean the \n company Genesis Vision LP which is the copyright owner of the Website and has registered address Office 29, Clifton House, Fitzwilliam street lower, Dublin 2, \n  Ireland. \n 'Services', means the technical services reflected in clause 4.3 of this Terms and Conditions, provided on the Web-site controlled by GV  which are allowed to the \n Users under certain terms of service. \n 'User' or 'You', or derivatives of this words means You or any person or entity who uses the Website and is one of the Parties \n to the present Terms of Use and who is not FATCA REPORTABLE PERSON. User shall accept and comply with all the conditions of the present Terms of Use. \n 'FATCA REPORTABLE PERSON', – is a citizen of the United States of America or a US resident. \n 'You' means You as a Website User ('Your' and 'Yours' shall be construed accordingly).\n 'Terms' means these Terms of Use which constitute the entire agreement between GV and the User, as well as updated, modified and/or amended future versions thereof \n as now or hereafter in effect.\n 'Website' means "
     }
   }
 }
