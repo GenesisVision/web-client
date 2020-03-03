@@ -19,10 +19,6 @@
     height: 15px;
   }
 
-  &__delay-hint {
-    @include adaptive-margin(right, $padding-xxsmall);
-  }
-
   &__history-popup-item {
     display: flex;
     @include font-size($font-size-common);
