@@ -2879,5 +2879,18 @@
     "paragraphs-14": "Upon notification to the AML Compliance committee an investigation will be commenced to determine if a report should be made to appropriate law enforcement or regulatory agencies. The investigation will include, but not necessarily be limited to, review of all available information, such as payment history, birthdates and address. With the results of the investigation warrant, a recommendation will be made to the AML Compliance Committee to file a blocked assets and/or a SAR with the appropriate law enforcement or regulatory agency.\nThe AML Compliance Committee is responsible for any notice or filing with law enforcement or regulatory agency.\nInvestigation results will not be disclosed or discussed with anyone other than those who have a legitimate need to know. Under no circumstances shall any officer, employee or appointed agent disclose or discuss any AML concern, investigation, notice or SAR filing with the person or persons subject of such, or any other person, including members of the officer's , employee's or appointed agent's family. Confidentiality whilst and investigation is ongoing is of the utmost importance and employees are reminded of the offence of \"tipping- off\". GENESIS VISION LP., has the right to terminate the agreement with the client immediately and to prohibit the client from withdrawing any assets if the explanations provided are inadequate or in conflict with the AML Policy.",
     "point-10": "INTERNAL AUDIT",
     "text-4": "The AML Compliance Committee and the audit functions are segregated to ensure that the activities of the compliance function are subject to an independent review. The Compliance officer will periodically arrange for this manual to be reviewed by and independent person for compliance and adequacy. The audit function, should of course, keep the compliance informed of any audit findings relating to compliance. The Compliance Officer cannot do this review, nor can a member of her or his staff. The report of the independent review will be provided to the owner as the Compliance Officer and the Compliance officer will undertake required remediation actions identified in the report if they are practicable and appropriate."
+  },
+  "downloads": {
+    "title": "Genesis Vision Downloads",
+    "subtitle-1": "MetaTrader 5 for PC",
+    "text-1": "One of the most technically advanced and popular in the world of terminals for exchange trading with direct access to the order books and other new features.",
+    "link-1": "Download for PC",
+    "subtitle-2": "Mobile terminal",
+    "text-2": "The application provides advanced mobile trading through your favourite gadget. It supports all of the basic functionality of MetaTrader 5, user alerts for events on transactions, and is easy to connect and install.",
+    "link-2": "Version for IOS",
+    "link-3": "Version for Android",
+    "subtitle-3": "Web platform",
+    "text-3": "All the advanced functionality of the MetaTrader 5 platform right in your browser. No need to download and install. Compatible with any operating system (Windows, Mac OS, Linux).",
+    "link-4": "Login to platform"
   }
 }
