@@ -1,14 +1,35 @@
 @import "~shared/styles/_constants";
 @import "~shared/styles/_sizes";
 
+@mixin row-item-offset($direction, $size) {
+  @include adaptive-margin($direction, $size);
+}
+
+@mixin row-item-side-offset($size) {
+  &:not(:last-child) {
+    @include row-item-offset(right, $size);
+  }
+}
+
+@mixin row-item-bottom-offset($size) {
+  @include row-item-offset(bottom, $size);
+}
+
 .row-item {
-  &:not(:first-child) {
-    @include adaptive-margin(left, $padding-xsmall);
+  @include row-item-side-offset($padding-xsmall);
+  &--bottom-offset {
+    @include row-item-bottom-offset($padding-xsmall);
   }
-  &--small:not(:first-child) {
-    @include adaptive-margin(left, $padding-xxsmall);
+  &--small {
+    @include row-item-side-offset($padding-xxsmall);
+    .row-item--bottom-offset {
+      @include row-item-bottom-offset($padding-xxsmall);
+    }
   }
-  &--ladge:not(:first-child) {
-    @include adaptive-margin(left, $padding-small);
+  &--large {
+    @include row-item-side-offset($padding-small);
+    .row-item--bottom-offset {
+      @include row-item-bottom-offset($padding-small);
+    }
   }
 }
