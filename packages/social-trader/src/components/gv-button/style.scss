@@ -71,9 +71,11 @@ $decreased-margin: $change-size-value;
   &--large {
     font-weight: 600;
     @include font-size($font-size-common);
-    @include height(50px);
-    @include horizontal-paddings($padding-small);
-    @include vertical-paddings($padding-xxsmall);
+    &:not(.gv-btn--no-padding) {
+      @include height(50px);
+      @include horizontal-paddings($padding-small);
+      @include vertical-paddings($padding-xxsmall);
+    }
   }
 
   &--big {
@@ -82,14 +84,18 @@ $decreased-margin: $change-size-value;
     letter-spacing: 0.3px;
     font-weight: 600;
     box-sizing: border-box;
-    @include width($btn-width);
-    @include height($btn-height);
+    &:not(.gv-btn--no-padding) {
+      @include width($btn-width);
+      @include height($btn-height);
+    }
   }
 
   &--small {
     @include font-size($font-size-common);
-    @include width($btn-width-small);
-    @include height($btn-height-small);
+    &:not(.gv-btn--no-padding) {
+      @include width($btn-width-small);
+      @include height($btn-height-small);
+    }
     letter-spacing: 0.3px;
     font-weight: 300;
     box-sizing: border-box;
