@@ -111,12 +111,6 @@ const _DepositForm: React.FC<Props> = ({
             onChange={onWalletChange}
           />
         </DialogField>
-        <DialogField>
-          <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-            {formatCurrencyValue(wallet.available, wallet.currency)}{" "}
-            {wallet.currency}
-          </StatisticItem>
-        </DialogField>
         <InputAmountField
           setMin={setMinAmount}
           name={DEPOSIT_FORM_FIELDS.amount}
