@@ -10,7 +10,6 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
@@ -86,9 +85,13 @@ const _DepositForm: React.FC<Props> = ({
   }, [availableToInvestInAsset, wallet]);
 
   const setMinAmount = useCallback((): void => {
-    const min = convertToCurrency(minDeposit, rate);
+    const min = formatCurrencyValue(
+      convertToCurrency(minDeposit, rate),
+      wallet.currency,
+      { up: true }
+    );
     setValue(DEPOSIT_FORM_FIELDS.amount, min, true);
-  }, [minDeposit, rate]);
+  }, [minDeposit, rate, wallet]);
 
   const onWalletChange = useCallback(
     ({ id }: WalletItemType) => {
