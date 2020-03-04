@@ -77,7 +77,20 @@ const GVButton: React.FC<GVButtonProps> = ({
       type={type}
       name={name}
     >
-      {isSuccessful ? "✔" : children}
+      <span
+        className={classNames("gv-btn__label", {
+          "gv-btn__label--success": isSuccessful
+        })}
+      >
+        {children}
+      </span>
+      <span
+        className={classNames("gv-btn__success-symbol", {
+          "gv-btn__success-symbol--success": isSuccessful
+        })}
+      >
+        ✔
+      </span>
     </button>
   );
 };

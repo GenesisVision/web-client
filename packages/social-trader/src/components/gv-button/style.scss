@@ -36,6 +36,22 @@ $decreased-margin: $change-size-value;
     @include transition(stroke);
   }
 
+  &__label {
+    @include transition(opacity);
+    position: relative;
+    &--success {
+      opacity: 0;
+    }
+  }
+  &__success-symbol {
+    @include transition(opacity);
+    opacity: 0;
+    position: absolute;
+    &--success {
+      opacity: 1;
+    }
+  }
+
   &--successful {
     &.gv-btn.gv-btn--contained {
       opacity: 1;
