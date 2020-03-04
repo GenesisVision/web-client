@@ -6,11 +6,11 @@ type RuntimeConfig = {
   apiUrl: string;
 };
 
-const getServerRuntimeConfig = (): RuntimeConfig => {
+export const getServerRuntimeConfig = (): RuntimeConfig => {
   return serverRuntimeConfig;
 };
 
-const getPublicRuntimeConfig = (): RuntimeConfig => {
+export const getPublicRuntimeConfig = (): RuntimeConfig => {
   return publicRuntimeConfig;
 };
 
