@@ -29,7 +29,9 @@ import {
 export const fetchFundsChallengeWinner = (): Promise<Array<
   FundDetailsListItem
 >> => {
-  return fundsApi.getLastChallengeWinner().then(item => [item]);
+  return fundsApi
+    .getLastChallengeWinner({ authorization: authService.getAuthArg() })
+    .then(item => [item]);
 };
 
 export type FetchFundsType = (

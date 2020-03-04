@@ -2,6 +2,7 @@ import "./funds-table.scss";
 
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import { FundDetailsListItem } from "gv-api-web";
 import FundCard from "modules/funds-table/components/funds-table/fund-card";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
@@ -14,11 +15,15 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 interface Props extends ITableProps {
+  withDispatch?: boolean;
+  updateRow?: UpdateRowFuncType;
   loaderCount?: number;
   data?: FundDetailsListItem[];
 }
 
 const _FundsTable: React.FC<Props> = ({
+  withDispatch,
+  updateRow,
   loaderCount,
   showSwitchView = true,
   data,
@@ -62,7 +67,11 @@ const _FundsTable: React.FC<Props> = ({
     )}
     renderBodyRow={useCallback(
       fund => (
-        <FundsTableRow withDispatch fund={fund} />
+        <FundsTableRow
+          updateRow={updateRow}
+          withDispatch={withDispatch}
+          fund={fund}
+        />
       ),
       []
     )}
