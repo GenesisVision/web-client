@@ -6,7 +6,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <style>{"body, a, a:visited {color: white}"}</style>
+          <style>{"body {color: white}; a, a:visited {color: #03bdaf}"}</style>
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
