@@ -22,6 +22,12 @@ function create(path) {
   dotenv.config({ path: ".env" });
 
   const nextConfig = {
+    serverRuntimeConfig: {
+      apiUrl: process.env.SERVER_API_URL
+    },
+    publicRuntimeConfig: {
+      apiUrl: process.env.REACT_APP_API_URL
+    },
     webpack(config, { dev, webpack }) {
       config.devtool = false;
       for (const r of config.module.rules) {
