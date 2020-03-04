@@ -77,7 +77,7 @@ const GVButton: React.FC<GVButtonProps> = ({
       type={type}
       name={name}
     >
-      {children}
+      {isSuccessful ? "✔" : children}
     </button>
   );
 };
