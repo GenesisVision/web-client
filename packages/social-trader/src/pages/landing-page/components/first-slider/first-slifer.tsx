@@ -2,7 +2,7 @@ import "./first-slider.scss";
 
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { TSlides } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
@@ -97,7 +97,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
         <div className="slider__controls-wrapper">
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <LPButton href={item.link}>Join</LPButton>
+              <JoinButton href={item.link}>Join</JoinButton>
             </animated.div>
           ))}
           <div className="slider__controls">

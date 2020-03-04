@@ -1,7 +1,7 @@
 import "./advantages-container.scss";
 
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
-import LPButton from "pages/landing-page/components/lp-button/lp-button";
+import { JoinButton } from "pages/landing-page/components/join-button";
 import { advantagesItems } from "pages/landing-page/static-data/advantages";
 import React, { useCallback, useEffect, useRef } from "react";
 import { animated, useTrail } from "react-spring";
@@ -50,7 +50,7 @@ const AdvantagesContainer: React.FC = () => {
           //@ts-ignore
           style={{ transform: props.xy.interpolate(translate) }}
         >
-          <LPButton href={TRADE_ROUTE}>Join</LPButton>
+          <JoinButton href={TRADE_ROUTE}>Join</JoinButton>
         </animated.div>
       ))}
       <div className="home__container">
@@ -59,7 +59,7 @@ const AdvantagesContainer: React.FC = () => {
           <AdvantagesList
             advantagesItems={advantagesItems}
             className="advantages-container__list"
-            lastItem={<LPButton href={TRADE_ROUTE}>Join</LPButton>}
+            lastItem={<JoinButton href={TRADE_ROUTE}>Join</JoinButton>}
           />
         </div>
       </div>
