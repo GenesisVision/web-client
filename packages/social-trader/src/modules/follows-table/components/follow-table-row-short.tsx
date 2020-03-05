@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
@@ -20,16 +19,16 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
-import { formatValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   updateRow,
   withDispatch,
-  showRating,
   follow
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
+    balance,
     logo,
     personalDetails,
     id,
@@ -46,13 +45,9 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
+  const { currency, amount } = balance;
   return (
-    <TableRow
-      className={classNames({
-        "table__row--pretender": false
-      })}
-    >
-      {showRating && <TableCell>{}</TableCell>}
+    <TableRow>
       <TableCell className="programs-table__cell">
         <Link to={linkProps}>
           <AssetAvatarWithName
@@ -60,7 +55,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             alt={follow.title}
             color={color}
             name={
-              <div className="programs-table__cell--title">
+              <div>
                 <Link className="programs-table__cell--link" to={linkProps}>
                   {follow.title}
                 </Link>
@@ -70,23 +65,26 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Link>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--subscribers">
-        {subscribersCount}
+      <TableCell className="programs-table__cell">
+        <NumberFormat
+          value={formatCurrencyValue(amount, currency)}
+          suffix={` ${currency}`}
+          displayType="text"
+        />
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--subscribers">
+      <TableCell className="programs-table__cell">{subscribersCount}</TableCell>
+      <TableCell className="programs-table__cell">
         {distanceDate(creationDate)}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--trades">
-        {tradesCount}
-      </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--drawdown">
+      <TableCell className="programs-table__cell">{tradesCount}</TableCell>
+      <TableCell className="programs-table__cell">
         <NumberFormat
           value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--profit">
+      <TableCell className="programs-table__cell">
         <Profitability
           value={formatValue(statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -103,7 +101,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         <ProgramSimpleChart data={statistic?.chart} />
       </TableCell>
       {isAuthenticated && personalDetails && (
-        <TableCell className="programs-table__cell programs-table__cell--favorite">
+        <TableCell className="programs-table__cell">
           <ToggleAssetFavoriteButton
             asset={follow}
             updateRow={updateRow}
@@ -123,7 +121,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  showRating?: boolean;
   follow: FollowDetailsListItem;
 }
 

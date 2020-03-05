@@ -592,6 +592,7 @@
       "type": "Type"
     },
     "header": {
+      "equity": "Equity",
       "subscribers": "Subscribers",
       "trades": "Trades",
       "name": "Name",
@@ -836,6 +837,8 @@
     "subscriptions": {
       "title": "Subscriptions",
       "table": {
+        "volume-fee": "Volume fee",
+        "success-fee": "Success fee",
         "buttons": "",
         "value": "Value",
         "provider": "Provider",
@@ -850,6 +853,8 @@
     "current-investment": {
       "title": "Subscription details",
       "fields": {
+        "volume-fee": "Volume fee",
+        "success-fee": "Success fee",
         "fixed-volume": "Fixed volume",
         "profit": "Profit",
         "status": "Status",

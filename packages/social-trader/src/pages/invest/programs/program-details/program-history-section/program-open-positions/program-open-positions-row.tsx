@@ -1,5 +1,6 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { CurrencyItem } from "components/currency-item/currency-item";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
@@ -24,7 +25,14 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
-      {position.symbol}
+      <CurrencyItem
+        clickable={position.assetData.hasAssetInfo}
+        url={position.assetData.url}
+        logo={position.assetData.icon}
+        small
+        name={position.symbol}
+        symbol={position.symbol}
+      />
     </TableCell>
     {showDirection && (
       <TableCell className="details-trades__cell program-details-trades__cell--direction">
