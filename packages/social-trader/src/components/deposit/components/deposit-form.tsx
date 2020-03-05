@@ -1,5 +1,6 @@
 import {
   DEPOSIT_FORM_FIELDS,
+  getMinDepositFromAmounts,
   IDepositFormValues,
   INIT_WALLET_CURRENCY,
   isAllow
@@ -26,7 +27,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import { depositValidationSchema } from "./deposit-form-validation-schema";
-import { TFees } from "./deposit.types";
+import { MinDepositType, TFees } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { HookFormWalletField as WalletField } from "./form-fields/wallet-field";
@@ -85,11 +86,7 @@ const _DepositForm: React.FC<Props> = ({
   }, [availableToInvestInAsset, wallet]);
 
   const setMinAmount = useCallback((): void => {
-    const min = formatCurrencyValue(
-      convertToCurrency(minDeposit, rate),
-      wallet.currency,
-      { up: true }
-    );
+    const min = getMinDepositFromAmounts(minDeposit, wallet.currency);
     setValue(DEPOSIT_FORM_FIELDS.amount, min, true);
   }, [minDeposit, rate, wallet]);
 
@@ -160,7 +157,7 @@ const DepositForm = React.memo(_DepositForm);
 export default DepositForm;
 
 export interface Props {
-  minDeposit: number;
+  minDeposit: MinDepositType;
   ownAsset?: boolean;
   fees: TFees;
   availableToInvest?: number;

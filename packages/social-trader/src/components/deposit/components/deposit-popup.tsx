@@ -19,7 +19,7 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TFees } from "./deposit.types";
+import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
   title,
@@ -108,7 +108,7 @@ interface Props {
   title: string;
   availableToInvest?: number;
   fees: TFees;
-  minDeposit: number;
+  minDeposit: MinDepositType;
   id: string;
   onClose: (param?: any) => void;
   onApply: () => void;

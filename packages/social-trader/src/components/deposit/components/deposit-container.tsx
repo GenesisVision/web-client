@@ -1,3 +1,4 @@
+import { MinDepositType } from "components/deposit/components/deposit.types";
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
@@ -77,7 +78,7 @@ interface Props extends IDialogProps {
   title: string;
   availableToInvest?: number;
   entryFee?: number;
-  minDeposit: number;
+  minDeposit: MinDepositType;
   asset: ASSET;
   id: string;
   onApply: () => void;
