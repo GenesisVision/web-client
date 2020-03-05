@@ -15,7 +15,7 @@ import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
 
 const _FacetContainer: React.FC<Props> = props => {
-  const { TableContainer, getItems } = props;
+  const { TableContainer, getItems, title } = props;
   const facets = useSelector((state: RootState) =>
     facetsSelector(state, props)
   );
@@ -31,6 +31,7 @@ const _FacetContainer: React.FC<Props> = props => {
   const { sorting, timeframe } = facet!;
   return (
     <TableContainer
+      title={title}
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}
@@ -70,6 +71,7 @@ const facetSelector = createSelector<
 );
 
 interface Props {
+  title?: string;
   id: string;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<
