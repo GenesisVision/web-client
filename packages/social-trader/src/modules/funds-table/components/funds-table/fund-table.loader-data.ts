@@ -49,6 +49,9 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsListItem => ({
   }
 });
 
-export const fundListLoaderData: FundDetailsListItem[] = tableLoaderCreator(
-  fundDetailsLoaderDataCreator
-);
+export const fundListLoaderDataWithCount = (
+  count?: number
+): FundDetailsListItem[] =>
+  tableLoaderCreator(fundDetailsLoaderDataCreator, count);
+
+export const fundListLoaderData: FundDetailsListItem[] = fundListLoaderDataWithCount();
