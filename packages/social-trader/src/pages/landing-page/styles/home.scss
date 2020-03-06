@@ -73,7 +73,7 @@
       }
 
       .home__container {
-        height: 100vh;
+        height: 100%;
 
         @include media-breakpoint-landscape-tablet() {
           display: grid;
