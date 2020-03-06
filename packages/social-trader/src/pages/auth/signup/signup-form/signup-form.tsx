@@ -1,6 +1,10 @@
 import FormError from "components/form/form-error/form-error";
+import GVButton from "components/gv-button";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import Link from "components/link/link";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { RegisterViewModel } from "gv-api-web";
@@ -16,6 +20,7 @@ import * as React from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { LOGIN_ROUTE } from "routes/app.routes";
 import { HookForm } from "utils/hook-form.helpers";
 
 import validationSchema, {
@@ -23,6 +28,7 @@ import validationSchema, {
 } from "./signup-form.validators";
 
 const _SignUpForm: React.FC<Props> = ({
+  showLogin,
   onSubmit,
   error,
   referer,
@@ -135,20 +141,33 @@ const _SignUpForm: React.FC<Props> = ({
         component={GVCheckbox}
       />
       <FormError error={error} />
-      <SubmitButton
-        id="signUpFormSubmit"
-        className="signup-form__submit-button"
-        isPending={requestStatus === CAPTCHA_STATUS.PENDING}
-        isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
-        disabled={requestStatus === CAPTCHA_STATUS.PENDING}
-      >
-        {t("auth.signup.title")}
-      </SubmitButton>
+      <Row>
+        <RowItem large>
+          <SubmitButton
+            id="signUpFormSubmit"
+            isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+            isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+            disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+          >
+            {t("auth.signup.title")}
+          </SubmitButton>
+        </RowItem>
+        {showLogin && (
+          <RowItem>
+            <Link to={LOGIN_ROUTE}>
+              <GVButton variant="outlined" color="secondary">
+                {t("auth.login.title")}
+              </GVButton>
+            </Link>
+          </RowItem>
+        )}
+      </Row>
     </HookForm>
   );
 };
 
 interface Props {
+  showLogin?: boolean;
   referer?: string;
   onSubmit: (data: ISignUpFormFormValues) => void;
   error: string;

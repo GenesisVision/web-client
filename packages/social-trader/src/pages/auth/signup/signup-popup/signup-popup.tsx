@@ -15,6 +15,7 @@ const SignupDialog: React.FC = () => {
       <DialogTop title={t("auth.signup.title")} />
       <DialogBottom>
         <SignupContainer
+          showLogin
           referralCode={referralCode}
           utmSource={utmSource}
           referrer={referrer}

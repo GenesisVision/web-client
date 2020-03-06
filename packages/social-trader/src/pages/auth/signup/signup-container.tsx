@@ -10,6 +10,7 @@ import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
 import React from "react";
 
 const _SignupContainer: React.FC<ISignupContainerProps> = ({
+  showLogin,
   referrer,
   utmSource,
   referralCode
@@ -30,6 +31,7 @@ const _SignupContainer: React.FC<ISignupContainerProps> = ({
         request={request}
         renderForm={handle => (
           <SignUpForm
+            showLogin={showLogin}
             referer={referrer}
             urlParams={utmSource}
             refCode={referralCode}
@@ -43,6 +45,7 @@ const _SignupContainer: React.FC<ISignupContainerProps> = ({
 };
 
 export interface ISignupContainerProps {
+  showLogin?: boolean;
   referrer?: string;
   referralCode?: string;
   utmSource?: string;
