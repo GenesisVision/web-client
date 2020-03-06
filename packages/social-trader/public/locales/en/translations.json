@@ -1577,6 +1577,10 @@
     }
   },
   "2fa-page": {
+    "tabs": {
+      "tfa": "Two-factor code",
+      "recovery": "Recovery code"
+    },
     "title": "Two-factor authentication",
     "none": "None",
     "google": "Google Authenticator",
