@@ -15,10 +15,16 @@ export default function Text({
       fill={color}
       textAnchor={position}
       fontWeight={bold ? "bold" : undefined}
-      fontFamily={
-        "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif"
-      }
+      fontFamily={"Montserrat"}
     >
+      <defs>
+        <style
+          type="text/css"
+          dangerouslySetInnerHTML={{
+            __html: `@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');`
+          }}
+        />
+      </defs>
       <tspan x={x} y={y}>
         {children}
       </tspan>
