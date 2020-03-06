@@ -91,45 +91,43 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
             />
           </DialogField>
         )}
+        <DialogField hide={subscribeFixedCurrencies.length < 2}>
+          <GVHookFormField
+            wide
+            name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
+            component={SimpleTextField}
+            label={t("follow-program.params.fixed-currency")}
+            InputComponent={Select}
+          >
+            {subscribeFixedCurrencies.map((currency: string) => (
+              <option value={currency} key={currency}>
+                {currency}
+              </option>
+            ))}
+          </GVHookFormField>
+        </DialogField>
         {mode === modes.fixed.value && (
-          <>
-            <DialogField hide={subscribeFixedCurrencies.length < 2}>
-              <GVHookFormField
-                wide
-                name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
-                component={SimpleTextField}
-                label={t("follow-program.params.fixed-currency")}
-                InputComponent={Select}
-              >
-                {subscribeFixedCurrencies.map((currency: string) => (
-                  <option value={currency} key={currency}>
-                    {currency}
-                  </option>
-                ))}
-              </GVHookFormField>
-            </DialogField>
-            <DialogField>
-              <InputAmountField
-                wide
-                name={FOLLOW_PARAMS_FIELDS.fixedVolume}
-                label={`${t("follow-program.params.fixed-currency-equivalent", {
-                  fixedCurrency: fixedCurrency
-                })} *`}
-                currency={fixedCurrency}
+          <DialogField>
+            <InputAmountField
+              wide
+              name={FOLLOW_PARAMS_FIELDS.fixedVolume}
+              label={`${t("follow-program.params.fixed-currency-equivalent", {
+                fixedCurrency: fixedCurrency
+              })} *`}
+              currency={fixedCurrency}
+            />
+            {currency && (
+              <NumberFormat
+                value={formatCurrencyValue(
+                  convertFromCurrency(fixedVolume!, rate),
+                  currency
+                )}
+                prefix="≈ "
+                suffix={` ${currency}`}
+                displayType="text"
               />
-              {currency && (
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    convertFromCurrency(fixedVolume!, rate),
-                    currency
-                  )}
-                  prefix="≈ "
-                  suffix={` ${currency}`}
-                  displayType="text"
-                />
-              )}
-            </DialogField>
-          </>
+            )}
+          </DialogField>
         )}
         <DialogField>
           <InputAmountField
