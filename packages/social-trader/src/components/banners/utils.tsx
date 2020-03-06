@@ -48,12 +48,10 @@ const Mask: React.FC<{ size: 21 | 25 }> = ({ size }) => {
 };
 
 export const createPng = async (
-  svgReactStream: NodeJS.ReadableStream,
+  svgReactStream: string,
   pngOptions: PngOptions
 ): Promise<Buffer> => {
-  const buffer = svgReactStream.read();
-  const image = sharp(buffer);
-
+  const image = sharp(Buffer.from(svgReactStream));
   if (pngOptions.href !== null && pngOptions.href !== undefined) {
     try {
       const req = await unfetch(filesService.getFileUrl(pngOptions.href));
@@ -87,23 +85,31 @@ export const createPng = async (
         }
       ]);
     } catch (e) {
-      console.error(e);
+      console.error("error 1:", e);
     }
   }
-  return image.png().toBuffer();
+
+  return await image.toBuffer();
 };
 
 async function createBanner(
   Banner: React.ReactElement,
   pngOptions?: PngOptions
 ): Promise<Buffer | string> {
-  const svgReactStream = ReactDOM.renderToStaticNodeStream(Banner);
+  const svgReactStream = `
+  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+  ${ReactDOM.renderToStaticMarkup(Banner)}
+  `;
 
   if (pngOptions !== undefined) {
-    return await createPng(svgReactStream, pngOptions);
+    try {
+      return await createPng(svgReactStream, pngOptions);
+    } catch (e) {
+      console.error("Error 3: ", e.stack);
+    }
   }
 
-  return await svgReactStream.read();
+  return svgReactStream;
 }
 
 export default function createBannerApi(
@@ -133,7 +139,7 @@ export default function createBannerApi(
       res.setHeader("Content-Type", `image/${logoOptions ? "png" : "svg+xml"}`);
       res.send(banner);
     } catch (e) {
-      console.error(e);
+      console.error("error 2: ", e);
       res.statusCode = 500;
       res.end();
     }

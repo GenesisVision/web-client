@@ -5,7 +5,7 @@ import createBannerApi, {
   BannerComponent,
   LogoOptions
 } from "components/banners/utils";
-import SimpleChart from "components/chart/simple-chart";
+import BannerChart from "components/chart/banner-chart";
 import React from "react";
 
 type Position = { y: number };
@@ -45,6 +45,13 @@ const LOGO_OPTIONS: LogoOptions = {
 const Banner: BannerComponent = props => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
+  const chart = BannerChart({
+    data: points.chart,
+    width: 200,
+    height: 165,
+    x: 20,
+    y: 152
+  });
   return (
     <svg
       width={240}
@@ -65,13 +72,18 @@ const Banner: BannerComponent = props => {
       <Value y={92}>{`${statistic.profitPercent}%`}</Value>
       <Title y={122}>Equity</Title>
       <Value y={122}>{`${points.currency}${statistic.balance}`}</Value>
-      <SimpleChart
-        data={points.chart}
-        width={200}
-        height={165}
-        x={20}
-        y={152}
-      />
+      {chart && (
+        <svg
+          height={165}
+          width={200}
+          x={20}
+          y={152}
+          xmlns="http://www.w3.org/2000/svg"
+          dangerouslySetInnerHTML={{
+            __html: chart
+          }}
+        />
+      )}
     </svg>
   );
 };

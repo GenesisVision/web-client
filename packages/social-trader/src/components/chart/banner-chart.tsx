@@ -3,7 +3,6 @@ import "../program-simple-chart/program-simple-chart.scss";
 import GVColors from "components/gv-styles/gv-colors";
 import { select } from "d3";
 import { max, min } from "d3-array";
-import { axisLeft } from "d3-axis";
 import { scaleLinear } from "d3-scale";
 import { area, line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
@@ -14,12 +13,6 @@ const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {
   return maxValue - minValue >= 0 ? "#16B9AD" : GVColors.$negativeColor;
-};
-
-const getPoints = (min: number, max: number) => {
-  const a = min + 30;
-  const b = max - 30;
-  return [a, (a + b) / 2, b];
 };
 
 const lineFunction = line()
@@ -33,11 +26,14 @@ const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
 
   const container = document.querySelector(".svg");
 
-  const svg = select(container!)
+  select(container!)
     .append("svg")
     .attr("xmlns", "http://www.w3.org/2000/svg")
+    .attr("version", 1.1)
     .attr("width", width)
     .attr("height", height);
+
+  const svg = select(document.querySelector("svg")!);
 
   const length = data.length;
   if (!length) return null;
@@ -81,8 +77,8 @@ const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
       .attr("y2", valueScale(maxValue))
       .selectAll("stop")
       .data([
-        { offset: "0%", color: "transparent" },
-        { offset: "100%", color: "#00BDAF" }
+        { offset: "0%", color: "rgba(0,189,175,0.01)" },
+        { offset: "100%", color: "rgba(0,189,175,0.3)" }
       ])
       .enter()
       .append("stop")
@@ -95,32 +91,20 @@ const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
 
     svg
       .append("path")
-      .attr("d", areaPath!)
-      .attr("stroke", "none")
-      .attr("stroke-width", 2)
-      .attr("fill", "url(#temperature-gradient)");
-
-    svg
-      .append("path")
       .attr("d", linePath!)
-      .attr("stroke", "#16B9AD")
+      .attr("stroke", color)
       .attr("stroke-width", 2)
       .attr("fill", "none");
 
     svg
-      .append("g")
-      .attr("style", "color: rgba(255,255,255,0.2);stroke-dasharray: 1;")
-      .attr("transform", `translate(${MARGIN_LEFT}, 0)`)
-      .call(
-        axisLeft(valueScale)
-          .tickValues(getPoints(minValue, maxValue))
-          .tickSize(-width + MARGIN_LEFT)
-      )
-      .select(".domain")
-      .remove();
+      .append("path")
+      .attr("d", areaPath!)
+      .attr("stroke", "none")
+      .attr("stroke-width", 2)
+      .attr("fill", "url(#temperature-gradient)");
   } catch (e) {}
 
-  return container?.innerHTML;
+  return document.querySelector("svg")?.innerHTML;
 };
 
 interface Props {
