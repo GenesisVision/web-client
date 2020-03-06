@@ -10,6 +10,7 @@ import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { ReduxDispatch, ResponseError } from "utils/types";
 
@@ -63,8 +64,7 @@ const _SignInContainer: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    if (type && (email === "" || password === ""))
-      Router.replace(NOT_FOUND_PAGE_ROUTE);
+    if (type && (email === "" || password === "")) Router.replace(LOGIN_ROUTE);
     clearTwoFactorState();
   }, []);
   return (
