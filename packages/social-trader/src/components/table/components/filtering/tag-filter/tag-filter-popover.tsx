@@ -1,3 +1,5 @@
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import TagItem from "components/tags/tag-item/tag-item";
 import { Tag } from "gv-api-web";
 import * as React from "react";
@@ -25,17 +27,13 @@ const _TagFilterPopover: React.FC<Props> = ({ values, changeFilter }) => {
       changeFilter={changeFilter!}
     >
       {(filteredTags, handleClick) => (
-        <div className="tag-filter">
+        <Row wrap>
           {filteredTags.map(tag => (
-            <div
-              key={tag.id}
-              className="tag-filter__tag"
-              onClick={() => handleClick(tag.id)}
-            >
+            <RowItem bottomOffset small onClick={() => handleClick(tag.id)}>
               <TagItem name={tag.name} color={tag.color} />
-            </div>
+            </RowItem>
           ))}
-        </div>
+        </Row>
       )}
     </TileFilterPopover>
   );

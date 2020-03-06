@@ -78,7 +78,6 @@ $action-size: 30px;
   }
   &__subtitle {
     @include hide-on-landscape-phone();
-    margin-bottom: 10px;
   }
   &__main-info {
     margin-left: $padding-small/4;

@@ -18,24 +18,4 @@
     height: 18px;
     line-height: 9px;
   }
-
-  &__tooltip.tag-item-tooltip {
-    .tag-item {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .tag-button {
-    margin-top: 0;
-    margin-bottom: 0;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
 }
