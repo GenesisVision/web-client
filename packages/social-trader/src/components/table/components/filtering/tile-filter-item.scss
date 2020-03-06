@@ -2,10 +2,7 @@
 @import "~shared/styles/_sizes";
 
 .tile-filter-item {
-  display: flex;
   position: relative;
-  align-items: center;
-  margin-right: $padding-xsmall;
   &__button-remove {
     cursor: pointer;
     box-sizing: border-box;
