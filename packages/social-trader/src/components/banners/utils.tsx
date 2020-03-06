@@ -22,7 +22,7 @@ type PngOptions = LogoOptions & {
   href?: string | null;
 };
 
-interface BannerApiContext extends NextApiRequest {
+export interface BannerApiContext extends NextApiRequest {
   query: { id: string };
 }
 
@@ -33,6 +33,19 @@ export type BannerProps = {
 };
 
 export type BannerComponent = React.ComponentType<BannerProps>;
+
+const Mask: React.FC<{ size: 21 | 25 }> = ({ size }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width={size} height={size} rx="7" fill="white" />
+    </svg>
+  );
+};
 
 export const createPng = async (
   svgReactStream: NodeJS.ReadableStream,
@@ -46,13 +59,29 @@ export const createPng = async (
       const req = await unfetch(filesService.getFileUrl(pngOptions.href));
       const result = await req.arrayBuffer();
       const buffer = Buffer.from(result);
-      const logoFromBuffer = sharp(buffer).resize(
-        pngOptions.size,
-        pngOptions.size
-      );
+
+      const logo = await sharp(buffer)
+        .resize(pngOptions.size, pngOptions.size)
+        .toBuffer();
+
+      const mask = ReactDOM.renderToStaticNodeStream(
+        <Mask size={pngOptions.size} />
+      ).read();
+
+      const maskPng = sharp(mask).png();
+
+      maskPng
+        .composite([
+          {
+            input: logo,
+            blend: "in"
+          }
+        ])
+        .withMetadata();
+
       image.composite([
         {
-          input: await logoFromBuffer.toBuffer(),
+          input: await maskPng.toBuffer(),
           top: pngOptions.position.y,
           left: pngOptions.position.x
         }
