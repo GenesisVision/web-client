@@ -37,7 +37,7 @@ const _SignInContainer: React.FC<Props> = ({
     Router.push(redirectFrom);
   };
 
-  const { email, password } = getTwoFactorState();
+  const { email, password = "" } = getTwoFactorState();
 
   const { sendRequest } = useApiRequest({
     middleware: [successMiddleware],
@@ -72,18 +72,21 @@ const _SignInContainer: React.FC<Props> = ({
       <CaptchaContainer
         disable={disable}
         request={sendRequest}
-        renderForm={handle => renderForm(handle, email, errorMessage)}
+        renderForm={handle =>
+          renderForm({ handle, email, errorMessage, password })
+        }
       />
     </div>
   );
 };
 
 interface Props {
-  renderForm: (
-    handle: (values: ValuesType) => void,
-    email: string,
-    errorMessage: string
-  ) => JSX.Element;
+  renderForm: (args: {
+    password: string;
+    handle: (values: ValuesType) => void;
+    email: string;
+    errorMessage: string;
+  }) => JSX.Element;
   className: string;
   type?: CODE_TYPE;
   redirectFrom: string;

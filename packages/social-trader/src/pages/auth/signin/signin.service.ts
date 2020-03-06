@@ -63,8 +63,8 @@ export const initialTwoFactorState = {
 
 export type TwoFactorStateType = {
   email: string;
-  password: string;
-  from: string | object;
+  password?: string;
+  from?: string | object;
 };
 
 export const useTwoFactorState = (ctx?: NextPageContext) => {

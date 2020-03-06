@@ -12,6 +12,7 @@ import {
   CAPTCHA_STATUS,
   CaptchaStatusContext
 } from "pages/auth/captcha-container";
+import { useTwoFactorState } from "pages/auth/signin/signin.service";
 import * as React from "react";
 import { useCallback, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -26,7 +27,13 @@ enum FIELDS {
   email = "email"
 }
 
-const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
+const _TwoFactorCodeForm: React.FC<Props> = ({
+  email,
+  error,
+  onSubmit,
+  password
+}) => {
+  const { storeTwoFactorState } = useTwoFactorState();
   const [t] = useTranslation();
 
   const form = useForm<ITwoFactorCodeFormValues>({
@@ -69,6 +76,10 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
     return onSubmit({ code, email });
   }, [code, email]);
 
+  const handleRecoveryClick = useCallback(() => {
+    storeTwoFactorState({ email, password });
+  }, [storeTwoFactorState]);
+
   return (
     <HookForm className="login-two-factor" form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
@@ -94,7 +105,10 @@ const _TwoFactorCodeForm: React.FC<Props> = ({ email, error, onSubmit }) => {
         className="login-two-factor__recovery-link"
         variant="text"
       >
-        <Link to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}>
+        <Link
+          onClick={handleRecoveryClick}
+          to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
+        >
           {t("auth.login.two-factor.link-to-recovery")}
         </Link>
       </GVButton>
@@ -121,6 +135,7 @@ export interface ITwoFactorCodeFormValues {
 }
 
 interface Props {
+  password: string;
   email: string;
   onSubmit: (values: ITwoFactorCodeFormValues) => void;
   error: string;
