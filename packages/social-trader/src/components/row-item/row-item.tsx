@@ -4,6 +4,7 @@ import classNames from "classnames";
 import React from "react";
 
 export const RowItem: React.FC<Props> = ({
+  onClick,
   middle = true,
   bottomOffset,
   className,
@@ -13,6 +14,7 @@ export const RowItem: React.FC<Props> = ({
 }) => {
   return (
     <div
+      onClick={onClick}
       className={classNames("row-item", className, {
         "row-item--bottom-offset": bottomOffset,
         "row-item--small": small,
@@ -26,6 +28,7 @@ export const RowItem: React.FC<Props> = ({
 };
 
 interface Props {
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   bottomOffset?: boolean;
   className?: string;
   small?: boolean;
