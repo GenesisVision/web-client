@@ -4,6 +4,7 @@ import classNames from "classnames";
 import React from "react";
 
 export const RowItem: React.FC<Props> = ({
+  middle = true,
   bottomOffset,
   className,
   small,
@@ -15,6 +16,7 @@ export const RowItem: React.FC<Props> = ({
       className={classNames("row-item", className, {
         "row-item--bottom-offset": bottomOffset,
         "row-item--small": small,
+        "row-item--middle": middle && !(small || large),
         "row-item--large": large
       })}
     >
@@ -27,5 +29,6 @@ interface Props {
   bottomOffset?: boolean;
   className?: string;
   small?: boolean;
+  middle?: boolean;
   large?: boolean;
 }
