@@ -1,0 +1,7 @@
+@import "~shared/styles/_sizes";
+
+.tooltip-content {
+  &--small {
+    min-width: $small-width;
+  }
+}
