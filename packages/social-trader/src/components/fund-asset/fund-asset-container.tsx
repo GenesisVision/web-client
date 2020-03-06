@@ -3,6 +3,7 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import {
   FundAssetInfo,
@@ -60,9 +61,13 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         />
       )}
       {remainder > 0 && (
-        <div className="fund-asset fund-asset--remainder">
+        <RowItem
+          small
+          bottomOffset
+          className="fund-asset fund-asset--remainder"
+        >
           <NumberFormat value={remainder} suffix="%" displayType="text" />
-        </div>
+        </RowItem>
       )}
     </Row>
   );

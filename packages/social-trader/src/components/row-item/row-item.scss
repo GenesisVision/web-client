@@ -16,19 +16,21 @@
 }
 
 .row-item {
-  @include row-item-side-offset($padding-xsmall);
-  &--bottom-offset {
-    @include row-item-bottom-offset($padding-xsmall);
+  &--middle {
+    @include row-item-side-offset($padding-xsmall);
+    &.row-item--bottom-offset {
+      @include row-item-bottom-offset($padding-xsmall);
+    }
   }
   &--small {
     @include row-item-side-offset($padding-xxsmall);
-    .row-item--bottom-offset {
+    &.row-item--bottom-offset {
       @include row-item-bottom-offset($padding-xxsmall);
     }
   }
   &--large {
     @include row-item-side-offset($padding-small);
-    .row-item--bottom-offset {
+    &.row-item--bottom-offset {
       @include row-item-bottom-offset($padding-small);
     }
   }

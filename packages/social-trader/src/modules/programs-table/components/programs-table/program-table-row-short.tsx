@@ -65,12 +65,14 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             color={color}
             tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             name={
-              <div>
+              <>
                 <div className="programs-table__cell--link">
                   {program.title}
                 </div>
-                <TagProgramContainer tags={tags} />
-              </div>
+                <div>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              </>
             }
           />
         </Link>

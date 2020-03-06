@@ -1,7 +1,6 @@
-import "./tile-filter.scss";
-
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
@@ -50,14 +49,16 @@ const TileFilter: React.FC<Props> = ({
   });
   return (
     <RowItem>
-      <div className="filter tile-filter">
-        <div className="tile-filter__value">{selectedItems}</div>
+      <Row>
+        <RowItem>
+          <Row>{selectedItems}</Row>
+        </RowItem>
         <TileFilterButton
           isActive={!!anchor}
           onClick={setAnchor}
           title={buttonTitle}
         />
-      </div>
+      </Row>
       <Popover
         anchorEl={anchor}
         onClose={clearAnchor}

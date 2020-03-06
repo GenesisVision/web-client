@@ -41,16 +41,12 @@ $remove-button-color: #293842;
   @include adaptive-full-padding($padding-xxsmall);
   @include adaptive-border-radius($border-radius-middle);
   font-weight: 400;
-  @include adaptive-margin(right, $padding-xsmall/2);
   position: relative;
   &:hover {
     background: rgba(255, 255, 255, 0.06);
   }
   &--hover {
     background: rgba(255, 255, 255, 0.06) !important;
-  }
-  &--bottom-offset {
-    @include adaptive-margin(bottom, $padding-xsmall/2);
   }
   &--default {
     background: rgba(255, 255, 255, 0.02);
