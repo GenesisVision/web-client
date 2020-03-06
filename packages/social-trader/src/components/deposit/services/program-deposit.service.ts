@@ -34,11 +34,12 @@ export const getMinProgramDeposits = async ({
   );
   return currencies.map((currency, i) => {
     const rate = rates[i];
-    const amount = +formatCurrencyValue(
-      convertToCurrency(minDeposit, rate),
-      currency,
-      { up: true }
-    );
+    const amount =
+      currency === programCurrency
+        ? minDeposit
+        : +formatCurrencyValue(convertToCurrency(minDeposit, rate), currency, {
+            up: true
+          });
     return { amount, currency };
   });
 };
