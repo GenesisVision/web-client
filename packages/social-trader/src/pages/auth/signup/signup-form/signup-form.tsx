@@ -54,7 +54,6 @@ const _SignUpForm: React.FC<Props> = ({
       [SIGN_UP_FORM_FIELDS.userName]: "",
       [SIGN_UP_FORM_FIELDS.email]: "",
       [SIGN_UP_FORM_FIELDS.password]: "",
-      [SIGN_UP_FORM_FIELDS.confirmPassword]: "",
       [SIGN_UP_FORM_FIELDS.privacyPolicy]: false,
       [SIGN_UP_FORM_FIELDS.acceptTerms]: false,
       [SIGN_UP_FORM_FIELDS.isAuto]: false //TODO remove when upgrade api
@@ -89,14 +88,6 @@ const _SignUpForm: React.FC<Props> = ({
         type="password"
         name={SIGN_UP_FORM_FIELDS.password}
         label={t("auth.signup.password-field-text")}
-        component={SimpleTextField}
-        autoComplete="new-password"
-      />
-      <GVHookFormField
-        showCorrect
-        type="password"
-        name={SIGN_UP_FORM_FIELDS.confirmPassword}
-        label={t("auth.signup.password-confirm-field-text")}
         component={SimpleTextField}
         autoComplete="new-password"
       />

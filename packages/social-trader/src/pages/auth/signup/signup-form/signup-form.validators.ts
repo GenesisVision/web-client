@@ -12,7 +12,6 @@ export enum SIGN_UP_FORM_FIELDS {
   userName = "userName",
   email = "email",
   password = "password",
-  confirmPassword = "confirmPassword",
   privacyPolicy = "privacyPolicy",
   acceptTerms = "acceptTerms",
   isAuto = "isAuto"
@@ -27,7 +26,6 @@ const validationSchema = object().shape({
     .required("Name is required"),
   [SIGN_UP_FORM_FIELDS.email]: emailValidator,
   [SIGN_UP_FORM_FIELDS.password]: passwordValidator,
-  [SIGN_UP_FORM_FIELDS.confirmPassword]: confirmPasswordValidator,
   [SIGN_UP_FORM_FIELDS.acceptTerms]: boolean().oneOf(
     [true],
     "Must Accept the Terms of Service"

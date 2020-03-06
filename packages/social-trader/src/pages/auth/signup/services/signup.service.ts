@@ -18,7 +18,7 @@ export const signUp: SingUpFuncType = ({
         userName,
         email,
         password,
-        confirmPassword,
+        confirmPassword: password,
         refCode,
         isAuto,
         captchaCheckResult
