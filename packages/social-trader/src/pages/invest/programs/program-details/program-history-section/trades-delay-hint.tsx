@@ -23,7 +23,7 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
           <Tooltip
             horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
             render={() => (
-              <TooltipContent>
+              <TooltipContent small>
                 {t(
                   "program-details-page.history.open-positions.delay-tooltip",
                   {
