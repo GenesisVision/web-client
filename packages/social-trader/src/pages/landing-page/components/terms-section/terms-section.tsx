@@ -342,29 +342,25 @@ const TermsSection: React.FC = () => (
         conditions.
       </p>
       <p>4.2 User is entitled to create a GV note.</p>
-      <p>
-        4.3. After the creation of the GV note the client is entitled to
-        <ul>
-          <li>
-            Receive technical service of the Website to be connected to the
-            cryptocurrency exchanges with the usage of the Website;
-          </li>
-          <li>
-            Use the services of the cryptocurrency exchanges subject to the
-            rules of the cryptocurrency exchanges and these Terms and
-            conditions;
-          </li>
-          <li>
-            Receive the technical solution of the cryptocurrency wallet from GV;
-          </li>
-          <li>Collaboration with other Users of the Website;</li>
-          <li>
-            Possibility to make any deeds with usage of the Website
-            functionality;
-          </li>
-          <li>Use other functionality of the Website.</li>
-        </ul>
-      </p>
+      <p>4.3. After the creation of the GV note the client is entitled to</p>
+      <ul>
+        <li>
+          Receive technical service of the Website to be connected to the
+          cryptocurrency exchanges with the usage of the Website;
+        </li>
+        <li>
+          Use the services of the cryptocurrency exchanges subject to the rules
+          of the cryptocurrency exchanges and these Terms and conditions;
+        </li>
+        <li>
+          Receive the technical solution of the cryptocurrency wallet from GV;
+        </li>
+        <li>Collaboration with other Users of the Website;</li>
+        <li>
+          Possibility to make any deeds with usage of the Website functionality;
+        </li>
+        <li>Use other functionality of the Website.</li>
+      </ul>
       <p>
         4.4. User is entitled to use the Website subject to following the AML
         laws applicable to the User in the country of the User.
@@ -386,28 +382,26 @@ const TermsSection: React.FC = () => (
         applicable:
       </p>
       <p>
-        <p>
-          A) You use the services of the Website for the money laundering
-          purposes or other fraudulent means;
-        </p>
-        <p>
-          B) You fail to comply with any significant provision of these Terms;
-        </p>
-        <p>C) You provided the incorrect guarantees mentioned in this Terms;</p>
-        <p>D) GV will be obliged to do so pursuant to the applicable law;</p>
-        <p>E) GV decides to terminate the operation of the Website;</p>
-        <p>
-          F) You cease to be the User. <br />
-          Should GV terminate the relationship with you basing on clauses 5.2
-          (A) or 5.3 (C) above, GV reserves the right not to assist you to
-          return you cryptocurrency from the cryptocurrency exchanges.
-        </p>
-        <p>
-          G) You use your account in GV for any sort of spam and/ or advertising
-          of any financial services. (e.g. instead of a description of the
-          investment program you put some links to any websites or do any other
-          actions which may be considered as an advertisement)
-        </p>
+        A) You use the services of the Website for the money laundering purposes
+        or other fraudulent means;
+      </p>
+      <p>
+        B) You fail to comply with any significant provision of these Terms;
+      </p>
+      <p>C) You provided the incorrect guarantees mentioned in this Terms;</p>
+      <p>D) GV will be obliged to do so pursuant to the applicable law;</p>
+      <p>E) GV decides to terminate the operation of the Website;</p>
+      <p>
+        F) You cease to be the User. <br />
+        Should GV terminate the relationship with you basing on clauses 5.2 (A)
+        or 5.3 (C) above, GV reserves the right not to assist you to return you
+        cryptocurrency from the cryptocurrency exchanges.
+      </p>
+      <p>
+        G) You use your account in GV for any sort of spam and/ or advertising
+        of any financial services. (e.g. instead of a description of the
+        investment program you put some links to any websites or do any other
+        actions which may be considered as an advertisement)
       </p>
       <p>
         5.3. These Terms, as well as Your relationship with GV hereunder shall
