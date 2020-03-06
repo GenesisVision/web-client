@@ -1,61 +1,24 @@
-import "./signup.scss";
-
-import { Push } from "components/link/link";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
-import useApiRequest from "hooks/api-request.hook";
-import { useEmailPendingState } from "pages/auth/auth.service";
-import CaptchaContainer from "pages/auth/captcha-container";
-import SignUpForm from "pages/auth/signup/signup-form/signup-form";
-import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
+import SignupContainer, {
+  ISignupContainerProps
+} from "pages/auth/signup/signup-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import { signUp } from "./services/signup.service";
-
-const _SignUpPage: React.FC<Props> = ({
-  referrer,
-  utmSource,
-  referralCode
-}) => {
+const _SignUpPage: React.FC<Props> = props => {
   const [t] = useTranslation();
-  const { storeEmailPendingState } = useEmailPendingState();
 
-  const successMiddleware = (email: string) => {
-    storeEmailPendingState({ email });
-    Push(SIGNUP_ROUTE_PENDING);
-  };
-  const { sendRequest: request, errorMessage } = useApiRequest({
-    request: signUp,
-    middleware: [successMiddleware]
-  });
   return (
     <PageSeoWrapper
       description={"Sign up to the Genesis Vision"}
       title={t("auth.signup.title")}
     >
-      <div className="signup">
-        <CaptchaContainer
-          request={request}
-          renderForm={handle => (
-            <SignUpForm
-              referer={referrer}
-              urlParams={utmSource}
-              refCode={referralCode}
-              onSubmit={handle}
-              error={errorMessage}
-            />
-          )}
-        />
-      </div>
+      <SignupContainer {...props} />
     </PageSeoWrapper>
   );
 };
 
-interface Props {
-  referrer?: string;
-  referralCode?: string;
-  utmSource?: string;
-}
+interface Props extends ISignupContainerProps {}
 
 const SignUpPage = React.memo(_SignUpPage);
 export default SignUpPage;
