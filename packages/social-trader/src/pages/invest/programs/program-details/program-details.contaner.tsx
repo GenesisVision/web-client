@@ -35,6 +35,7 @@ import {
   periodHistoryTableSelector,
   programEventsTableSelector,
   subscriptionsTableSelector,
+  tradesSelector,
   tradesTableSelector
 } from "./reducers/program-history.reducer";
 import {
@@ -113,7 +114,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       dataSelector: subscriptionsTableSelector,
       getItems: getSubscriptions
     },
-    trades: { dataSelector: tradesTableSelector, getItems: getTrades }
+    trades: {
+      itemSelector: tradesSelector,
+      dataSelector: tradesTableSelector,
+      getItems: getTrades
+    }
   };
 
   return (
