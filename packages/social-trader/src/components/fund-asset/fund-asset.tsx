@@ -2,6 +2,7 @@ import "./fund-asset.scss";
 
 import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { RowItem } from "components/row-item/row-item";
 import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -50,38 +51,39 @@ const _FundAsset: React.FC<Props> = ({
       );
     default:
       return (
-        <div
-          {...other}
-          className={classNames(
-            "fund-asset",
-            "fund-asset--default",
-            className,
-            {
-              "fund-asset--bottom-offset": bottomOffset,
-              "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
-            }
-          )}
-        >
-          <CurrencyItem
-            url={url}
-            logo={icon}
-            small
-            name={!!currency && currencyName}
-            symbol={currency}
-            className={classNames("fund-asset__currency", currencyClassName)}
-          />
-          <div className="fund-asset__percent">
-            <NumberFormat value={percent} suffix="%" displayType="text" />
-          </div>
-          {percent > mandatoryFundPercent && removable && removeHandle && (
-            <div
-              className="fund-asset__remove-button"
-              onClick={removeHandle(currency)}
-            >
-              +
+        <RowItem small bottomOffset={bottomOffset}>
+          <div
+            {...other}
+            className={classNames(
+              "fund-asset",
+              "fund-asset--default",
+              className,
+              {
+                "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
+              }
+            )}
+          >
+            <CurrencyItem
+              url={url}
+              logo={icon}
+              small
+              name={!!currency && currencyName}
+              symbol={currency}
+              className={classNames("fund-asset__currency", currencyClassName)}
+            />
+            <div className="fund-asset__percent">
+              <NumberFormat value={percent} suffix="%" displayType="text" />
             </div>
-          )}
-        </div>
+            {percent > mandatoryFundPercent && removable && removeHandle && (
+              <div
+                className="fund-asset__remove-button"
+                onClick={removeHandle(currency)}
+              >
+                +
+              </div>
+            )}
+          </div>
+        </RowItem>
       );
   }
 };
