@@ -14,27 +14,30 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
   if (delay === "None") return null;
   const label = DELAYS_LABELS[delay];
   return (
-    <>
-      <Row>
-        <RowItem small>
-          <MutedText>
+    <RowItem>
+      <MutedText>
+        <Row>
+          <RowItem small>
             {label} {t("program-details-page.history.open-positions.delay")}
-          </MutedText>
-        </RowItem>
-        <Tooltip
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          render={() => (
-            <TooltipContent>
-              {t("program-details-page.history.open-positions.delay-tooltip", {
-                delay: label
-              })}
-            </TooltipContent>
-          )}
-        >
-          <div className="details-trades__delay-question">?</div>
-        </Tooltip>
-      </Row>
-    </>
+          </RowItem>
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            render={() => (
+              <TooltipContent>
+                {t(
+                  "program-details-page.history.open-positions.delay-tooltip",
+                  {
+                    delay: label
+                  }
+                )}
+              </TooltipContent>
+            )}
+          >
+            <div className="details-trades__delay-question">?</div>
+          </Tooltip>
+        </Row>
+      </MutedText>
+    </RowItem>
   );
 };
 export const TradesDelayHint = React.memo(_TradesDelayHint);
