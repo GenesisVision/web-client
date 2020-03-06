@@ -22,9 +22,6 @@ $bullet-size-selected: $bullet-size * 2;
     display: flex;
   }
   &__name-container {
-    display: flex;
-    align-items: center;
-    padding-bottom: $padding-xsmall;
     cursor: pointer;
     &--selected {
       .dashboard-pie-chart__bullet {
@@ -40,7 +37,6 @@ $bullet-size-selected: $bullet-size * 2;
   }
   &__bullet {
     border-radius: 50%;
-    @include adaptive-margin(right, $padding-xxsmall);
     width: $bullet-size;
     height: $bullet-size;
     min-width: $bullet-size;

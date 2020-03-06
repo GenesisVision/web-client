@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import MultiPieContainer from "components/pie-container/multi-pie.container";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import React, { useState } from "react";
 
@@ -14,25 +16,27 @@ const _DashboardPieChart: React.FC<Props> = ({ data }) => {
           data={data.map(item => ({ ...item, value: item.percent }))}
         />
       </div>
-      <div className="dashboard-pie-chart__names">
+      <div>
         {data.map(({ name, color, percent }) => (
-          <div
+          <Row
             className={classNames("dashboard-pie-chart__name-container", {
               "dashboard-pie-chart__name-container--selected": name === overItem
             })}
             onMouseEnter={() => setOverItem(name)}
             onMouseLeave={() => setOverItem(undefined)}
           >
-            <div
-              className="dashboard-pie-chart__bullet"
-              style={{
-                background: color
-              }}
-            />
+            <RowItem>
+              <div
+                className="dashboard-pie-chart__bullet"
+                style={{
+                  background: color
+                }}
+              />
+            </RowItem>
             <div className="dashboard-pie-chart__name">
               {name} - {percent} %
             </div>
-          </div>
+          </Row>
         ))}
       </div>
     </div>
