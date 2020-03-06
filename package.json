@@ -12,7 +12,6 @@
     "dayjs": "^1.8.16",
     "dom-css": "^2.1.0",
     "dotenv": "^8.0.0",
-    "fast-memoize": "^2.5.1",
     "file-saver": "^2.0.2",
     "history": "^4.7.2",
     "i18next": "^17.0.4",

@@ -98,10 +98,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     setValue(TRANSFER_FORM_FIELDS.amount, +formattedAvailableSourceItem, true);
   }, [formattedAvailableSourceItem]);
 
-  const setMin = useCallback(() => {
-    setValue(TRANSFER_FORM_FIELDS.amount, minAmountInCur, true);
-  }, [minAmountInCur]);
-
   const onChangeSourceId = useCallback(
     ({ id }: WalletItemType) => {
       reset({
@@ -161,7 +157,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
             label={t("transfer.amount")}
             currency={selectedSourceItem.currency}
             setMax={setMax}
-            setMin={setMin}
             isAllowed={isAmountAllow(sourceItems, sourceId)}
           />
         </DialogField>

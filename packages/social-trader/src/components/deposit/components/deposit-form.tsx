@@ -1,5 +1,6 @@
 import {
   DEPOSIT_FORM_FIELDS,
+  getMinDepositFromAmounts,
   IDepositFormValues,
   INIT_WALLET_CURRENCY,
   isAllow
@@ -10,7 +11,6 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
@@ -27,7 +27,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import { depositValidationSchema } from "./deposit-form-validation-schema";
-import { TFees } from "./deposit.types";
+import { MinDepositType, TFees } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { HookFormWalletField as WalletField } from "./form-fields/wallet-field";
@@ -86,9 +86,9 @@ const _DepositForm: React.FC<Props> = ({
   }, [availableToInvestInAsset, wallet]);
 
   const setMinAmount = useCallback((): void => {
-    const min = convertToCurrency(minDeposit, rate);
+    const min = getMinDepositFromAmounts(minDeposit, wallet.currency);
     setValue(DEPOSIT_FORM_FIELDS.amount, min, true);
-  }, [minDeposit, rate]);
+  }, [minDeposit, rate, wallet]);
 
   const onWalletChange = useCallback(
     ({ id }: WalletItemType) => {
@@ -110,12 +110,6 @@ const _DepositForm: React.FC<Props> = ({
             name={DEPOSIT_FORM_FIELDS.walletId}
             onChange={onWalletChange}
           />
-        </DialogField>
-        <DialogField>
-          <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
-            {formatCurrencyValue(wallet.available, wallet.currency)}{" "}
-            {wallet.currency}
-          </StatisticItem>
         </DialogField>
         <InputAmountField
           setMin={setMinAmount}
@@ -163,7 +157,7 @@ const DepositForm = React.memo(_DepositForm);
 export default DepositForm;
 
 export interface Props {
-  minDeposit: number;
+  minDeposit: MinDepositType;
   ownAsset?: boolean;
   fees: TFees;
   availableToInvest?: number;

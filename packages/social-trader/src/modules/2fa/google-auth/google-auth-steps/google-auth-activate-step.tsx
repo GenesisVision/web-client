@@ -1,5 +1,6 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
 import { useForm } from "react-hook-form";
@@ -62,7 +63,7 @@ export const GoogleStep3: React.FC<Props> = ({
             name={FIELDS.password}
             type="password"
             label={t("2fa-page.password")}
-            component={SimpleNumberField}
+            component={SimpleTextField}
             autocomplete="new-password"
           />
         )}

@@ -21,7 +21,7 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
         <CurrencyItem
           {...props}
           symbol={symbol}
-          name={available ? symbol : name}
+          name={available !== undefined ? symbol : name}
         />
       </RowItem>
       <RowItem>

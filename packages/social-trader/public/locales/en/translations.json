@@ -410,7 +410,7 @@
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-exceeds-limit": "Amount exceeds the possible investment limit",
-      "amount-min-value": "Min amount is {{min}} {{currency}} ( ≈ {{walletMin}} {{walletCurrency}})"
+      "amount-min-value": "Min amount is {{min}} {{currency}}"
     },
     "program": {
       "available-to-invest": "Available to invest in program",
@@ -1577,6 +1577,10 @@
     }
   },
   "2fa-page": {
+    "tabs": {
+      "tfa": "Two-factor code",
+      "recovery": "Recovery code"
+    },
     "title": "Two-factor authentication",
     "none": "None",
     "google": "Google Authenticator",

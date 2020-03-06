@@ -25,7 +25,11 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
                 {info.title}
                 <span>&nbsp;{t("wallet-page.wallet")}</span>
               </h1>
-              <WalletImage url={info.logo} alt={info.currency} />
+              <WalletImage
+                url={info.logo}
+                imageClassName="wallet-title-block__title-icon"
+                alt={info.currency}
+              />
             </Row>
           </RowItem>
           <RowItem large>

@@ -23,7 +23,7 @@ export const FUNDS_WEEKLY_FACET_NAME = "challenge";
 const _FundsWeeklyContainer: React.FC = () => {
   const [t] = useTranslation();
 
-  const { data } = useApiRequest({
+  const { data, sendRequest: getFundsChallengeWinner } = useApiRequest({
     request: fetchFundsChallengeWinner,
     fetchOnMount: true
   });
@@ -45,6 +45,7 @@ const _FundsWeeklyContainer: React.FC = () => {
       <FundsWeeklyHeader />
       <DetailsBlock wide table>
         <FundsTable
+          updateRow={getFundsChallengeWinner}
           loaderCount={1}
           showSwitchView={false}
           title={t("facets.texts.last-week-challenge-winner")}

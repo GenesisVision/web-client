@@ -11,7 +11,7 @@ const _RecoveryPage: React.FC<Props> = ({ redirectFrom }) => (
     redirectFrom={redirectFrom}
     type={CODE_TYPE.RECOVERY}
     className="recovery-page"
-    renderForm={(handle, email, errorMessage) => (
+    renderForm={({ handle, email, errorMessage }) => (
       <RecoveryCodeForm
         onSubmit={handle}
         errorMessage={errorMessage}

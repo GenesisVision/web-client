@@ -131,6 +131,15 @@ describe("test formatter functions", () => {
       expect(formatValue(1001.00001, 3)).toBe("1001.001");
 
       expect(formatValue(0.119, 2)).toBe("0.11");
+
+      expect(formatValue(1.146, 4, false, { up: true })).toBe("1.1461");
+      expect(formatValue(1.1465, 4, false, { up: true })).toBe("1.1466");
+      expect(formatValue(1.1469, 4, false, { up: true })).toBe("1.147");
+
+      expect(formatValue(0.0001, 2, false, { up: true })).toBe("0.02");
+      expect(formatValue(0.0001, 4, false, { up: true })).toBe("0.0002");
+      expect(formatValue(0.0005, 4, false, { up: true })).toBe("0.0006");
+      expect(formatValue(0.0009, 4, false, { up: true })).toBe("0.001");
     });
   });
   describe("test formatPercent", () => {

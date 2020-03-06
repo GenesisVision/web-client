@@ -10,6 +10,7 @@ import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { ReduxDispatch, ResponseError } from "utils/types";
 
@@ -37,7 +38,7 @@ const _SignInContainer: React.FC<Props> = ({
     Router.push(redirectFrom);
   };
 
-  const { email, password } = getTwoFactorState();
+  const { email, password = "" } = getTwoFactorState();
 
   const { sendRequest } = useApiRequest({
     middleware: [successMiddleware],
@@ -63,8 +64,7 @@ const _SignInContainer: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    if (type && (email === "" || password === ""))
-      Router.replace(NOT_FOUND_PAGE_ROUTE);
+    if (type && (email === "" || password === "")) Router.replace(LOGIN_ROUTE);
     clearTwoFactorState();
   }, []);
   return (
@@ -72,18 +72,21 @@ const _SignInContainer: React.FC<Props> = ({
       <CaptchaContainer
         disable={disable}
         request={sendRequest}
-        renderForm={handle => renderForm(handle, email, errorMessage)}
+        renderForm={handle =>
+          renderForm({ handle, email, errorMessage, password })
+        }
       />
     </div>
   );
 };
 
 interface Props {
-  renderForm: (
-    handle: (values: ValuesType) => void,
-    email: string,
-    errorMessage: string
-  ) => JSX.Element;
+  renderForm: (args: {
+    password: string;
+    handle: (values: ValuesType) => void;
+    email: string;
+    errorMessage: string;
+  }) => JSX.Element;
   className: string;
   type?: CODE_TYPE;
   redirectFrom: string;

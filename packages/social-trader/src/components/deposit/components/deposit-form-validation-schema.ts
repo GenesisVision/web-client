@@ -1,11 +1,12 @@
 import {
   DEPOSIT_FORM_FIELDS,
+  getMinDepositFromAmounts,
   IDepositFormValues
 } from "components/deposit/components/deposit.helpers";
+import { MinDepositType } from "components/deposit/components/deposit.types";
 import { WalletBaseData } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 import { lazy, number, object } from "yup";
@@ -21,7 +22,7 @@ export const depositValidationSchema = ({
   rate: number;
   wallets: WalletBaseData[];
   t: TFunction;
-  minDeposit: number;
+  minDeposit: MinDepositType;
   availableToInvestInAsset: number;
   currency: CurrencyEnum;
 }) =>
@@ -35,20 +36,16 @@ export const depositValidationSchema = ({
       convertToCurrency(availableToInvestInAsset, rate)
     );
 
-    const walletMin = formatCurrencyValue(
-      convertToCurrency(minDeposit, rate),
-      walletCurrency
-    );
+    const min = getMinDepositFromAmounts(minDeposit, walletCurrency);
+
     return object<IDepositFormValues>().shape({
       [DEPOSIT_FORM_FIELDS.amount]: number()
         .required()
         .min(
-          +walletMin,
+          +min,
           t("deposit-asset.validation.amount-min-value", {
-            min: formatCurrencyValue(minDeposit, currency),
-            currency,
-            walletMin,
-            walletCurrency
+            min,
+            currency
           })
         )
         .max(
