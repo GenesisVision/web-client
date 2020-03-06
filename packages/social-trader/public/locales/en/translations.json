@@ -2653,6 +2653,16 @@
     "short-description": "Genesis Vision - Social Trading Platform",
     "genesis-vision": "Genesis Vision",
     "tag-hot": "HOT",
+    "page-titles": {
+      "fees": "Genesis Vision Fees",
+      "aml-manual": "Genesis Vision Aml Manual",
+      "downloads": "Genesis Vision Downloads",
+      "faq": "Genesis Vision FAQ",
+      "glossary": "Genesis Vision Glossary",
+      "privacy-policy": "Genesis Vision Privacy Policy",
+      "referral-program": "Genesis Vision Referral Program",
+      "terms": "Genesis Vision Terms and conditions"
+    },
     "buttons": {
       "discover": "Discover",
       "join": "Join",
