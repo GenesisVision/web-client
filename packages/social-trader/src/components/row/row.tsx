@@ -3,18 +3,11 @@ import "./row.scss";
 import classNames from "classnames";
 import React from "react";
 
-export const Row: React.FC<Props> = ({
-  center = true,
-  onClick,
-  className,
-  wrap,
-  small,
-  large,
-  children
-}) => {
+export const Row: React.FC<Props> = props => {
+  const { center = true, className, wrap, small, large, children } = props;
   return (
     <div
-      onClick={onClick}
+      {...props}
       className={classNames("row", className, {
         "row--center": center,
         "row--wrap": wrap,
@@ -27,9 +20,8 @@ export const Row: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   center?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   className?: string;
   wrap?: boolean;
   small?: boolean;
