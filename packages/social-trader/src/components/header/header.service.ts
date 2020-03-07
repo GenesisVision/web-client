@@ -1,4 +1,3 @@
-import { fetchTwoFactorAction } from "actions/2fa-actions";
 import { notificationsToggleAction } from "components/notifications/actions/notifications.actions";
 import { Dispatch } from "redux";
 
@@ -11,7 +10,4 @@ export const notificationsToggle = (isOpen: boolean) => (
   dispatch: Dispatch
 ) => {
   dispatch(notificationsToggleAction(!isOpen));
-};
-export const fetchTwoFactor = (dispatch: Dispatch) => {
-  dispatch(fetchTwoFactorAction());
 };

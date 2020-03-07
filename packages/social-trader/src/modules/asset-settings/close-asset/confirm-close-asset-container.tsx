@@ -6,8 +6,7 @@ import {
 } from "modules/asset-settings/close-asset/close-asset";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
-import { useSelector } from "react-redux";
-import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
+import { useTFAStatus } from "utils/2fa";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
@@ -27,7 +26,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   onApply,
   id
 }) => {
-  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const { twoFactorEnabled } = useTFAStatus();
   const { sendRequest, errorMessage } = useApiRequest({
     request: getMethod(asset),
     successMessage: `asset-settings.close-asset.notifications.${asset.toLowerCase()}`,

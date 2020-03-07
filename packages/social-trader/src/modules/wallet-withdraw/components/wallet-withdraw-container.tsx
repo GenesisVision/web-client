@@ -6,7 +6,7 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
+import { useTFAStatus } from "utils/2fa";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
@@ -16,7 +16,7 @@ import WalletWithdrawForm, {
 import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
 
 const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
-  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const { twoFactorEnabled } = useTFAStatus();
   const wallets = useSelector(walletsSelector);
   const dispatch = useDispatch();
   const [isSuccess, setSuccess, setNotSuccess] = useIsOpen();

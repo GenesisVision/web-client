@@ -1,7 +1,5 @@
-import { setTwoFactorRequirementAction } from "actions/2fa-actions";
 import authActions from "actions/auth-actions";
 import { Push } from "components/link/link";
-import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -56,7 +54,6 @@ const _SignInContainer: React.FC<Props> = ({
             password: values.password,
             from: redirectFrom
           });
-          dispatch(setTwoFactorRequirementAction(true));
           Push(LOGIN_ROUTE_TWO_FACTOR_ROUTE);
         } else setErrorMessage(e);
       });
