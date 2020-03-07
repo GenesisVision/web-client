@@ -4,18 +4,15 @@ import withLoader from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import { IAddNotificationSettingProps } from "modules/notification-settings/actions/notification-settings.actions";
+import {
+  addNotificationMethod,
+  IAddNotificationSettingProps
+} from "modules/notification-settings/services/notification-settings.services";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import {
-  TAddNotification,
-  TRemoveNotification,
-  TToggleNotification
-} from "./asset-notifications.types";
 import CustomNotification from "./custom-notification";
 import { ICustomNotificationCreateFormValues } from "./custom-notification-create-form";
 
@@ -23,21 +20,15 @@ const CustomNotificationCreateForm = dynamic(() =>
   import("./custom-notification-create-form")
 );
 
-const _AssetNotificationsCustom: React.FC<Props> = ({
-  addNotification,
-  asset,
-  removeNotification,
-  toggleNotification
-}) => {
+const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const dispatch = useDispatch();
   const [t] = useTranslation();
   const { sendRequest, errorMessage } = useApiRequest({
     request: (values: IAddNotificationSettingProps) => {
-      return dispatch(addNotification({ ...values, type: "ProgramCondition" }));
+      return addNotificationMethod({ ...values, type: "ProgramCondition" });
     },
     successMessage: "notifications-page.custom.create-alert",
-    middleware: [postponeCallback(setClosePopup)]
+    middleware: [postponeCallback(setClosePopup), onSuccess]
   });
 
   const handleSubmit = useCallback(
@@ -55,10 +46,9 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
       </h3>
       {asset.settingsCustom.map(settings => (
         <CustomNotification
+          onSuccess={onSuccess}
           settings={settings}
           key={settings.id}
-          removeNotification={removeNotification}
-          toggleNotifications={toggleNotification}
         />
       ))}
       <ChipButton
@@ -78,10 +68,8 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
 };
 
 interface Props {
+  onSuccess: VoidFunction;
   asset: ProgramNotificationSettingList;
-  addNotification: TAddNotification;
-  removeNotification: TRemoveNotification;
-  toggleNotification: TToggleNotification;
 }
 
 const AssetNotificationsCustom = withLoader(
