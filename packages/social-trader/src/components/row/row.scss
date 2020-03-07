@@ -4,8 +4,11 @@
 .row {
   display: flex;
   flex-direction: row;
-  &:not(:first-child) {
-    @include adaptive-margin(top, $padding-xsmall);
+  &--hidden {
+    display: none;
+  }
+  &--wrap {
+    flex-wrap: wrap;
   }
   &--center {
     align-items: center;
@@ -13,8 +16,8 @@
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);
   }
-  &--wrap {
-    flex-wrap: wrap;
+  &--middle:not(:first-child) {
+    @include adaptive-margin(top, $padding-xsmall);
   }
   &--large:not(:first-child) {
     @include adaptive-margin(top, $padding-small);
