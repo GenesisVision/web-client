@@ -1,5 +1,5 @@
-import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import {
   ISimpleNumberFieldProps,
   SimpleNumberField
@@ -29,7 +29,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
     []
   );
   return (
-    <DialogField>
+    <Row>
       <SimpleNumberField
         {...props}
         externalDirty={externalDirty}
@@ -65,7 +65,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
           </>
         }
       />
-    </DialogField>
+    </Row>
   );
 };
 

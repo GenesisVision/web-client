@@ -1,10 +1,10 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { CloseableAssetType } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
@@ -48,13 +48,13 @@ const _CloseAssetForm: React.FC<Props> = ({
         subtitle={assetName}
       />
       <DialogBottom>
-        <DialogField>
+        <Row>
           {t(
             `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
           )}
-        </DialogField>
+        </Row>
         {twoFactorEnabled && (
-          <DialogField>
+          <Row>
             <GVHookFormField
               wide
               type="tel"
@@ -63,7 +63,7 @@ const _CloseAssetForm: React.FC<Props> = ({
               autoComplete="off"
               component={GVTextField}
             />
-          </DialogField>
+          </Row>
         )}
         <DialogButtons>
           <SubmitButton

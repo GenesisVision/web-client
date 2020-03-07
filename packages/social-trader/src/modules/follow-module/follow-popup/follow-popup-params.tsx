@@ -1,10 +1,10 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
@@ -59,7 +59,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <GVHookFormField
             wide
             name={FOLLOW_PARAMS_FIELDS.mode}
@@ -79,9 +79,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               </option>
             ))}
           </GVHookFormField>
-        </DialogField>
+        </Row>
         {mode === modes.percentage.value && (
-          <DialogField>
+          <Row>
             <InputAmountField
               wide
               name={FOLLOW_PARAMS_FIELDS.percent}
@@ -89,9 +89,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               currency={"%"}
               setMax={setMaxVolumePercent}
             />
-          </DialogField>
+          </Row>
         )}
-        <DialogField hide={subscribeFixedCurrencies.length < 2}>
+        <Row hide={subscribeFixedCurrencies.length < 2}>
           <GVHookFormField
             wide
             name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
@@ -105,9 +105,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               </option>
             ))}
           </GVHookFormField>
-        </DialogField>
+        </Row>
         {mode === modes.fixed.value && (
-          <DialogField>
+          <Row>
             <InputAmountField
               wide
               name={FOLLOW_PARAMS_FIELDS.fixedVolume}
@@ -127,9 +127,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
                 displayType="text"
               />
             )}
-          </DialogField>
+          </Row>
         )}
-        <DialogField>
+        <Row>
           <InputAmountField
             wide
             name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
@@ -144,7 +144,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
             currency={"%"}
             setMax={setMaxOpenTolerancePercent}
           />
-        </DialogField>
+        </Row>
         <DialogButtons>
           {onPrevStep && (
             <GVButton onClick={onPrevStep} color="secondary" variant="outlined">

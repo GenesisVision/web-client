@@ -1,5 +1,5 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
-import { DialogField } from "components/dialog/dialog-field";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import {
   ItemsType,
@@ -23,19 +23,19 @@ export const TransferSelectField: React.FC<{
     const [t] = useTranslation();
     return (
       <>
-        <DialogField hide={sourceType !== "Wallet"}>
+        <Row hide={sourceType !== "Wallet"}>
           <WalletSelect
             name={name}
             label={label}
             wallets={items}
             onChange={onChange}
           />
-        </DialogField>
-        <DialogField>
+        </Row>
+        <Row>
           <StatisticItem label={t(`transfer.available${sourceType}From`)} big>
             {`${value} ${currency}`}
           </StatisticItem>
-        </DialogField>
+        </Row>
       </>
     );
   }

@@ -2,7 +2,6 @@ import classNames from "classnames";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -64,9 +63,9 @@ const TransactionDetailsItem: React.FC<{
   label: string;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
   return (
-    <DialogField>
+    <Row>
       <StatisticItem label={label}>{children}</StatisticItem>
-    </DialogField>
+    </Row>
   );
 };
 
@@ -136,7 +135,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
         {data.details && <TransactionDetailsItemsBlock items={data.details} />}
         <TransactionStatusBlock status={data.status} />
         {data.actions && (
-          <DialogField>
+          <Row>
             <Row className="external-transaction__actions">
               {data.actions.canCancel && (
                 <ActionButton
@@ -151,7 +150,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
                 />
               )}
             </Row>
-          </DialogField>
+          </Row>
         )}
       </DialogBottom>
     </>

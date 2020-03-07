@@ -1,8 +1,8 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
   IProgramWithdrawAmountFormValues,
@@ -67,7 +67,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       {!isOwner && (
-        <DialogField>
+        <Row>
           <GVHookFormField
             wide
             type="checkbox"
@@ -76,7 +76,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
             label={<span>{t("withdraw-program.withdraw-all")}</span>}
             component={GVCheckbox}
           />
-        </DialogField>
+        </Row>
       )}
       <InputAmountField
         name={WITHDRAW_FORM_FIELDS.amount}

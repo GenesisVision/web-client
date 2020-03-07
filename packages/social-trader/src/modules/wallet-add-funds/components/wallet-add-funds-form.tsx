@@ -1,9 +1,9 @@
 import { CurrencySourceSelectElement } from "components/currency-source-select/currency-source-select.element";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVqr from "components/gv-qr/gv-qr";
+import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
@@ -31,7 +31,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
   return (
     <div className="wallet-add-funds-popup">
       <DialogTop title={t("wallet-deposit.title")}>
-        <DialogField>
+        <Row large>
           <CurrencySourceSelectElement
             name=""
             items={wallets}
@@ -40,13 +40,13 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
             label={t("wallet-deposit.select-currency")}
             onChange={onChangeWallet}
           />
-        </DialogField>
+        </Row>
       </DialogTop>
       <DialogBottom className="wallet-add-funds-popup__bottom">
-        <DialogField>
+        <Row>
           <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
-        </DialogField>
-        <DialogField>
+        </Row>
+        <Row>
           <StatisticItem
             className="wallet-add-funds-popup__address"
             label={t("wallet-deposit.deposit-address")}
@@ -55,7 +55,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
               {depositAddress}
             </div>
           </StatisticItem>
-        </DialogField>
+        </Row>
         <DialogButtons>
           <CopyButton wide value={depositAddress} />
         </DialogButtons>
