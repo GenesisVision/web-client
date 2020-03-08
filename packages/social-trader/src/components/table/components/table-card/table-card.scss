@@ -25,6 +25,12 @@ $action-size: 30px;
   @include media-breakpoint-landscape-phone() {
     padding: $padding-small $padding-xsmall;
   }
+  &__extra-block {
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-xxsmall;
+    }
+    width: 100%;
+  }
   &__buttons {
     display: flex;
     flex-direction: row;
@@ -62,7 +68,7 @@ $action-size: 30px;
     @include font-size($font-size-paragraph);
     word-break: break-all;
     display: block;
-    padding-bottom: 40px;
+    padding-bottom: 33px;
     @include media-breakpoint-landscape-phone() {
       padding-bottom: 3px;
     }
