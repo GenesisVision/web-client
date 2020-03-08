@@ -44,18 +44,16 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
 
   return (
     <Row className="table__toolbar">
-      <Row>
-        {title && !disableTitle && (
-          <RowItem>
-            <h3 className="table__title">{title}</h3>
-          </RowItem>
-        )}
-        {renderMappings && updateFilter && filtering && (
-          <RowItem>
-            <Row>{renderMappings(updateFilter, filtering)}</Row>
-          </RowItem>
-        )}
-      </Row>
+      {title && !disableTitle && (
+        <RowItem>
+          <h3 className="table__title">{title}</h3>
+        </RowItem>
+      )}
+      {renderMappings && updateFilter && filtering && (
+        <RowItem>
+          <Row wrap>{renderMappings(updateFilter, filtering)}</Row>
+        </RowItem>
+      )}
       {view === LIST_VIEW.CARDS && sorting !== undefined && (
         <SortingFilter
           sorting={sorting}
