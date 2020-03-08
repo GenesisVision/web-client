@@ -181,7 +181,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-          {extraBlock}
+          <div className="table-card__extra-block">{extraBlock}</div>
         </div>
       </TableCardRow>
     );
