@@ -2,8 +2,7 @@ import Dialog, { IDialogProps } from "components/dialog/dialog";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
-import { useSelector } from "react-redux";
-import { twoFactorEnabledSelector } from "reducers/2fa-reducer";
+import { useTFAStatus } from "utils/2fa";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import { IChangePasswordTradingAccountFormValues } from "./components/change-password-trading-account-form";
@@ -20,7 +19,7 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   onClose
 }) => {
   const onCloseMiddleware = postponeCallback(onClose);
-  const twoFactorEnabled = useSelector(twoFactorEnabledSelector);
+  const { twoFactorEnabled } = useTFAStatus();
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
     successMessage: "password-change-trading-account.success-alert-message",
     middleware: [onCloseMiddleware],

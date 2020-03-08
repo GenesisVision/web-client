@@ -4,50 +4,51 @@ import GVButton from "components/gv-button";
 import GVSwitch from "components/gv-selection/gv-switch";
 import GVTextField from "components/gv-text-field";
 import { NotificationSettingViewModel } from "gv-api-web";
-import useIsOpen from "hooks/is-open.hook";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import useApiRequest from "hooks/api-request.hook";
+import {
+  removeNotificationMethod,
+  toggleNotificationMethod
+} from "modules/notification-settings/services/notification-settings.services";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
 
-import {
-  TRemoveNotification,
-  TToggleNotification
-} from "./asset-notifications.types";
+const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
+  const [t] = useTranslation();
+  const status = !settings.isEnabled;
+  const {
+    sendRequest: removeNotification,
+    isPending: isRemovePending
+  } = useApiRequest({
+    request: removeNotificationMethod,
+    successMessage: `notifications-page.custom.delete-alert`,
+    middleware: [onSuccess]
+  });
 
-const CustomNotification: React.FC<Props> = ({ service, settings, t }) => {
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+  const {
+    sendRequest: toggleNotification,
+    isPending: isTogglePending
+  } = useApiRequest({
+    request: toggleNotificationMethod,
+    successMessage: `notifications-page.custom.${
+      status ? "enabled" : "disabled"
+    }-alert`,
+    middleware: [onSuccess]
+  });
+
+  const isPending = isTogglePending || isRemovePending;
+
   const handleSwitch = useCallback(() => {
-    setIsPending();
-    const status = !Boolean(settings.isEnabled);
-    service
-      .toggleNotifications({
-        id: settings.id,
-        assetId: settings.assetId,
-        enabled: status
-      })
-      .then(() =>
-        service.success(
-          t(
-            `notifications-page.custom.${status ? "enabled" : "disabled"}-alert`
-          )
-        )
-      )
-      .finally(setIsNotPending);
+    return toggleNotification({
+      id: settings.id,
+      assetId: settings.assetId,
+      enabled: status
+    });
   }, [settings]);
   const handleDelete = useCallback(() => {
-    setIsPending();
-    service
-      .removeNotification(settings, t(`notifications-page.custom.delete-alert`))
-      .finally(setIsNotPending);
+    return removeNotification(settings);
   }, [settings]);
+
   return (
     <div className="custom-notification">
       <label className="notification-setting">
@@ -87,39 +88,10 @@ const CustomNotification: React.FC<Props> = ({ service, settings, t }) => {
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { removeNotification, toggleNotifications }: OwnProps
-): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    {
-      success: alertMessageActions.success,
-      removeNotification,
-      toggleNotifications
-    },
-    dispatch
-  )
-});
-
-interface Props extends DispatchProps, OwnProps, WithTranslation {}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  success: typeof alertMessageActions.success;
-  removeNotification: TRemoveNotification;
-  toggleNotifications: TToggleNotification;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-interface OwnProps {
+interface Props {
+  onSuccess: VoidFunction;
   settings: NotificationSettingViewModel;
-  removeNotification: TRemoveNotification;
-  toggleNotifications: TToggleNotification;
 }
 
-export default compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect(undefined, mapDispatchToProps),
-  React.memo
-)(CustomNotification);
+const CustomNotification = React.memo(_CustomNotification);
+export default CustomNotification;

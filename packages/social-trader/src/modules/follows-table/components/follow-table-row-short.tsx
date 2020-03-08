@@ -45,7 +45,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
-  const { currency, amount } = balance;
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
@@ -66,11 +65,13 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Link>
       </TableCell>
       <TableCell className="programs-table__cell">
-        <NumberFormat
-          value={formatCurrencyValue(amount, currency)}
-          suffix={` ${currency}`}
-          displayType="text"
-        />
+        {balance && (
+          <NumberFormat
+            value={formatCurrencyValue(balance.amount, balance.currency)}
+            suffix={` ${balance.currency}`}
+            displayType="text"
+          />
+        )}
       </TableCell>
       <TableCell className="programs-table__cell">{subscribersCount}</TableCell>
       <TableCell className="programs-table__cell">

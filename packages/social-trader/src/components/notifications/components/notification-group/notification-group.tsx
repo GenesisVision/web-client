@@ -27,7 +27,7 @@ const _NotificationsGroup: React.FC<Props> = ({
 interface Props {
   title: string;
   notifications: NotificationViewModel[];
-  closeNotifications(): void;
+  closeNotifications: VoidFunction;
 }
 
 const NotificationsGroup = React.memo(_NotificationsGroup);

@@ -8,22 +8,12 @@ import notificationsReducer, {
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
-import followNotificationsReducer from "modules/follow-notifications/reducers/follow-notifications.reducers";
 import followsReducer, {
   FollowsListState
 } from "modules/follows-table/reducers/follows-table.reducers";
-import fundNotificationsReducer, {
-  FundNotificationsState
-} from "modules/fund-notifications/reducers/fund-notifications.reducers";
 import fundsReducer, {
   FundsTableState
 } from "modules/funds-table/reducers/funds-table.reducers";
-import notificationSettingsReducer, {
-  NotificationSettingsState
-} from "modules/notification-settings/reducers/notification-settings.reducers";
-import programNotificationsReducer, {
-  ProgramNotificationsState
-} from "modules/program-notifications/reducers/program-notifications.reducers";
 import programsReducer, {
   ProgramsListState
 } from "modules/programs-table/reducers/programs-table.reducers";
@@ -72,10 +62,6 @@ export const sharedRootReducers = {
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
   notifications: notificationsReducer,
-  notificationSettings: notificationSettingsReducer,
-  followNotifications: followNotificationsReducer,
-  programNotifications: programNotificationsReducer,
-  fundNotifications: fundNotificationsReducer,
   wallet: walletReducer,
   accountSettings: accountSettingsReducer
 };
@@ -90,14 +76,10 @@ export type RootState = Readonly<{
   programDetails: ProgramDetailsState;
   notifications: NotificationsState;
   profileHeader: HeaderState;
-  notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
   followsData: FollowsListState;
   programsData: ProgramsListState;
   fundsData: FundsTableState;
-  followNotifications: ProgramNotificationsState;
-  programNotifications: ProgramNotificationsState;
-  fundNotifications: FundNotificationsState;
   authData: AuthState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;

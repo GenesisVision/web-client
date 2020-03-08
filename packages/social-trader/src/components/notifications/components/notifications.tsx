@@ -101,7 +101,7 @@ const _Notifications: React.FC<Props> = ({
           <RowItem>{count !== 0 && <ClearButton />}</RowItem>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}
-            onClick={() => closeNotifications()}
+            onClick={closeNotifications}
           >
             <div className="profile-avatar notifications__link">
               <Icon type={"controls"} />
@@ -123,9 +123,9 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: () => void;
-  clearNotifications: () => void;
-  closeNotifications: () => void;
+  fetchNotifications: VoidFunction;
+  clearNotifications: VoidFunction;
+  closeNotifications: VoidFunction;
   count: number;
   total: number;
   notifications: NotificationViewModel[];

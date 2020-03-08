@@ -10,12 +10,9 @@ import { useTranslation } from "react-i18next";
 
 import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";
-import {
-  addNotification,
-  removeNotification
-} from "./services/notification-settings.services";
 
 const _NotificationSettings: React.FC<Props> = ({
+  onSuccess,
   settings: { settingsGeneral, settingsProgram, settingsFund, settingsManager }
 }) => {
   const [t] = useTranslation();
@@ -32,10 +29,9 @@ const _NotificationSettings: React.FC<Props> = ({
   return (
     <div>
       <AssetNotificationsGeneral
+        onSuccess={onSuccess}
         notifications={notificationsGeneral}
         settings={settingsGeneral}
-        addNotification={addNotification}
-        removeNotification={removeNotification}
       />
       <NotificationAssets
         condition={!!settingsProgram.length}
@@ -56,6 +52,7 @@ const _NotificationSettings: React.FC<Props> = ({
 };
 
 interface Props {
+  onSuccess: VoidFunction;
   settings: NotificationSettingList;
 }
 

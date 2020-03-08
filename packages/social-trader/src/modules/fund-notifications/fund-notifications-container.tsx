@@ -1,21 +1,14 @@
-import { FundNotificationSettingList } from "gv-api-web";
-import AssetNotifications from "modules/asset-notifications/asset-notifications";
+import { ASSETS_TYPES } from "constants/constants";
+import AssetNotificationsContainer from "modules/asset-notifications/asset-notifications.container";
 import {
   NOTIFICATIONS,
   NotificationsList
 } from "modules/asset-notifications/asset-notifications.types";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { AuthRootState } from "utils/types";
+import { useTranslation } from "react-i18next";
 
-import {
-  addFundNotification,
-  removeFundNotification
-} from "./services/fund-notifications.services";
-
-const _FundNotificationsContainer: React.FC<Props> = ({ t, fund }) => {
+const _FundNotificationsContainer: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
   const notifications: NotificationsList = {
     general: [
       {
@@ -30,36 +23,17 @@ const _FundNotificationsContainer: React.FC<Props> = ({ t, fund }) => {
     custom: false
   };
   return (
-    <AssetNotifications
-      condition={!!fund}
-      asset={fund!}
+    <AssetNotificationsContainer
+      assetType={ASSETS_TYPES.Fund}
+      id={id}
       notifications={notifications}
-      addNotification={addFundNotification}
-      removeNotification={removeFundNotification}
     />
   );
 };
 
-const mapStateToProps = (
-  { fundNotifications }: AuthRootState,
-  { id }: OwnProps
-): StateProps => ({
-  fund: fundNotifications[id]
-});
-
-interface Props extends OwnProps, StateProps, WithTranslation {}
-
-interface StateProps {
-  fund?: FundNotificationSettingList;
-}
-
-interface OwnProps {
+interface Props {
   id: string;
 }
 
-const FundNotificationsContainer = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  connect<StateProps, null, OwnProps, AuthRootState>(mapStateToProps),
-  React.memo
-)(_FundNotificationsContainer);
+const FundNotificationsContainer = React.memo(_FundNotificationsContainer);
 export default FundNotificationsContainer;
