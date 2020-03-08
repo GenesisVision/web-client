@@ -1,4 +1,3 @@
-import { notificationsToggleAction } from "components/notifications/actions/notifications.actions";
 import {
   serviceClearNotifications,
   serviceGetNotifications
@@ -15,19 +14,14 @@ const Notifications = dynamic(() =>
   import("components/notifications/components/notifications")
 );
 
-const _NotificationsContainer: React.FC = () => {
+const _NotificationsContainer: React.FC<Props> = ({ isOpen, setClose }) => {
   const dispatch = useDispatch();
-  const open = useSelector((state: RootState) => state.notifications.isOpen);
   const total = useSelector((state: RootState) => state.notifications.total);
   const count = useSelector(notificationsCountSelector);
   const notifications = useSelector(
     (state: RootState) => state.notifications.notifications
   );
 
-  const toggleNotifications = useCallback(
-    () => dispatch(notificationsToggleAction(false)),
-    []
-  );
   const getNotifications = useCallback(
     () => dispatch(serviceGetNotifications()),
     []
@@ -38,22 +32,23 @@ const _NotificationsContainer: React.FC = () => {
   );
 
   return (
-    <Sidebar
-      open={open}
-      position={SIDEBAR_POSITION.RIGHT}
-      onClose={toggleNotifications}
-    >
+    <Sidebar open={isOpen} position={SIDEBAR_POSITION.RIGHT} onClose={setClose}>
       <Notifications
         fetchNotifications={getNotifications}
         count={count}
         total={total}
         notifications={notifications}
         clearNotifications={clearNotifications}
-        closeNotifications={toggleNotifications}
+        closeNotifications={setClose}
       />
     </Sidebar>
   );
 };
+
+interface Props {
+  isOpen: boolean;
+  setClose: VoidFunction;
+}
 
 const NotificationsContainer = React.memo(_NotificationsContainer);
 export default NotificationsContainer;
