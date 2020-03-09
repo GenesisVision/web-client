@@ -9,6 +9,7 @@ $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
 $action-size: 30px;
+$action-offset-size: 5px;
 
 .table-card {
   margin-bottom: $padding-small/2;
@@ -68,7 +69,7 @@ $action-size: 30px;
   }
   &__title-wrapper {
     padding-top: 3px;
-    max-width: calc(100% - #{$action-size});
+    max-width: calc(100% - #{$action-size + $action-offset-size});
   }
   &__name {
     @include link($primary-color);
