@@ -13,6 +13,7 @@ import {
   PROFITABILITY_VARIANT
 } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { Row } from "components/row/row";
 import { SimpleChartPoint } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
@@ -93,7 +94,7 @@ export const TableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <div className="table-card__subtitle">
+    <Row middle={false} className="table-card__subtitle">
       <MutedText noWrap={false}>
         {url ? (
           <Link
@@ -107,7 +108,7 @@ export const TableCardSubTitle: React.FC<{
           children
         )}
       </MutedText>
-    </div>
+    </Row>
   );
 };
 
@@ -170,10 +171,13 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         />
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
-            <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            <Row>
+              <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            </Row>
             {subTitle && (
               <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
+            <Row small>{extraBlock}</Row>{" "}
           </div>
           {renderActions && (
             <div className="table-card__actions">
@@ -181,7 +185,6 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-          <div className="table-card__extra-block">{extraBlock}</div>
         </div>
       </TableCardRow>
     );
