@@ -1,0 +1,54 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.guides-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__title {
+    width: 100%;
+  }
+
+  &__nav {
+    width: 100%;
+
+    @include media-breakpoint-tablet() {
+      width: 200px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      width: 347px;
+    }
+
+    h3 {
+      cursor: pointer;
+
+      &:last-child {
+        padding-bottom: 5px;
+      }
+    }
+  }
+
+  &__nav-item:last-child {
+    @include media-breakpoint-tablet() {
+      margin-right: $padding-xsmall;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding-left: $padding-small;
+    padding-right: $padding-small;
+
+    @include media-breakpoint-tablet() {
+      width: calc(100% - 200px);
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      padding-left: $padding-xxlarge;
+      padding-right: $padding-xxlarge;
+      width: calc(100% - 347px);
+    }
+  }
+}
