@@ -44,8 +44,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
 
   const form = useForm<CreateAccountFormValues>({
     defaultValues: {
-      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: followCurrencyWalletId,
-      [CREATE_ACCOUNT_FORM_FIELDS.currency]: followCurrency
+      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: followCurrencyWalletId
     },
     validationSchema: CreateAccountFormValidationSchema({
       rate,
@@ -57,10 +56,13 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   });
   const { reset, watch, setValue } = form;
 
-  const { currency, depositAmount } = watch();
-  const wallet =
-    wallets.find((wallet: WalletData) => wallet.currency === currency) ||
-    wallets[0];
+  const { depositWalletId, depositAmount } = watch();
+
+  const wallet = safeGetElemFromArray(
+    wallets,
+    ({ id }) => id === depositWalletId
+  );
+  const { currency } = wallet;
 
   useEffect(() => {
     followCurrency &&
@@ -69,9 +71,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   }, [followCurrency, currency]);
 
   const onChangeCurrencyFrom = useCallback(
-    ({ id, currency }: WalletItemType) => {
+    ({ id }: WalletItemType) => {
       reset({
-        [CREATE_ACCOUNT_FORM_FIELDS.currency]: currency,
         [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: id,
         [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: ""
       });
@@ -148,7 +149,6 @@ export interface CreateAccountFormProps {
 
 export interface CreateAccountFormValues {
   [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.currency]: CurrencyEnum;
   [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number | string;
 }
 
