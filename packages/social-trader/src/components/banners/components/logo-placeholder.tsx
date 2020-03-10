@@ -1,12 +1,13 @@
-import Logo21 from "components/banners/defaultLogos/Logo21";
-import Logo25 from "components/banners/defaultLogos/Logo25";
-import { LogoOptions } from "components/banners/utils";
 import React from "react";
 import filesService from "services/file-service";
 
+import { LogoOptions } from "../utils";
+import Logo21 from "./defaultLogos/Logo21";
+import Logo25 from "./defaultLogos/Logo25";
+
 const BANNER_LOGO_RADIUS = 7;
 
-export default function Logo({
+export default function LogoPlaceholder({
   href,
   size,
   color = "white",

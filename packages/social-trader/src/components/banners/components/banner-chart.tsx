@@ -1,4 +1,4 @@
-import "../program-simple-chart/program-simple-chart.scss";
+import "../../program-simple-chart/program-simple-chart.scss";
 
 import GVColors from "components/gv-styles/gv-colors";
 import { select } from "d3";
@@ -7,8 +7,8 @@ import { scaleLinear } from "d3-scale";
 import { area, line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
 import { JSDOM } from "jsdom";
+import React from "react";
 
-const MARGIN_LEFT = 20;
 const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {
@@ -19,7 +19,13 @@ const lineFunction = line()
   .x(data => data[0])
   .y(data => data[1]);
 
-const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
+const BannerChart: React.FC<Props> = ({
+  data,
+  height,
+  width,
+  x = 0,
+  y = 0
+}) => {
   const {
     window: { document }
   } = new JSDOM(`<div class='svg'></div>`);
@@ -104,7 +110,20 @@ const BannerChart = ({ data, height, width, x = 0, y = 0 }: Props) => {
       .attr("fill", "url(#temperature-gradient)");
   } catch (e) {}
 
-  return document.querySelector("svg")?.innerHTML;
+  const __html = document.querySelector("svg")?.innerHTML;
+  if (!__html) return null;
+  return (
+    <svg
+      height={height}
+      width={width}
+      x={x}
+      y={y}
+      xmlns="http://www.w3.org/2000/svg"
+      dangerouslySetInnerHTML={{
+        __html
+      }}
+    />
+  );
 };
 
 interface Props {

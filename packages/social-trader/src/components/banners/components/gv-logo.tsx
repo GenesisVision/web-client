@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function GV(props: Props) {
+export default function GvLogo(props: Props) {
   return (
     <svg
       width="97"
