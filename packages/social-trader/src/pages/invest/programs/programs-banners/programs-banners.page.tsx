@@ -1,3 +1,4 @@
+import BannerPreview from "components/banner-preview/banner-preview";
 import DetailsBlock from "components/details/details-block";
 import Page from "components/page/page";
 import withDefaultLayout from "decorators/with-default-layout";
@@ -11,30 +12,38 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   program
 }) => {
   const title = `Banners for program: ${program.publicInfo.title}`;
+  const baseUrl = process.env.REACT_APP_API_URL;
+  const banner250png = `${baseUrl}/programs/${program.publicInfo.url}/250x250.png`;
+  const banner250svg = `${baseUrl}/programs/${program.publicInfo.url}/250x250.svg`;
+  const banner728png = `${baseUrl}/programs/${program.publicInfo.url}/728x89.png`;
+  const banner728svg = `${baseUrl}/programs/${program.publicInfo.url}/728x89.svg`;
+  const banner240png = `${baseUrl}/programs/${program.publicInfo.url}/240x400.png`;
+  const banner240svg = `${baseUrl}/programs/${program.publicInfo.url}/240x400.svg`;
+
   return (
     <Page description={title} title={title}>
       <DetailsBlock horizontalPaddings>
         <h3>PNG banners</h3>
-        <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/250x250.png`}
-        />
-        <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/728x89.png`}
-        />
-        <img
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/240x400.png`}
-        />
+        <BannerPreview url={banner250png} title={program.publicInfo.title} />
+        <BannerPreview url={banner728png} title={program.publicInfo.title} />
+        <BannerPreview url={banner240png} title={program.publicInfo.title} />
       </DetailsBlock>
       <DetailsBlock horizontalPaddings>
         <h3>SVG banners</h3>
-        <embed
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/250x250.svg`}
+        <BannerPreview
+          url={banner250svg}
+          title={program.publicInfo.title}
+          type={"svg"}
         />
-        <embed
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/728x89.svg`}
+        <BannerPreview
+          url={banner728svg}
+          title={program.publicInfo.title}
+          type={"svg"}
         />
-        <embed
-          src={`http://localhost:3000/api/programs/${program.publicInfo.url}/240x400.svg`}
+        <BannerPreview
+          url={banner240svg}
+          title={program.publicInfo.title}
+          type={"svg"}
         />
       </DetailsBlock>
     </Page>
