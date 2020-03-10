@@ -4,21 +4,28 @@ import Page from "components/page/page";
 import withDefaultLayout from "decorators/with-default-layout";
 import { ProgramFollowDetailsFull } from "gv-api-web";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { compose } from "redux";
 import programsApi from "services/api-client/programs-api";
 
 const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   program
 }) => {
+  const [origin, setOrigin] = useState<string | null>(null);
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  if (!origin) return null;
+
   const title = `Banners for program: ${program.publicInfo.title}`;
-  const baseUrl = process.env.REACT_APP_API_URL;
-  const banner250png = `${baseUrl}/programs/${program.publicInfo.url}/250x250.png`;
-  const banner250svg = `${baseUrl}/programs/${program.publicInfo.url}/250x250.svg`;
-  const banner728png = `${baseUrl}/programs/${program.publicInfo.url}/728x89.png`;
-  const banner728svg = `${baseUrl}/programs/${program.publicInfo.url}/728x89.svg`;
-  const banner240png = `${baseUrl}/programs/${program.publicInfo.url}/240x400.png`;
-  const banner240svg = `${baseUrl}/programs/${program.publicInfo.url}/240x400.svg`;
+  const banner250png = `${origin}/api/programs/${program.publicInfo.url}/250x250.png`;
+  const banner250svg = `${origin}/api/programs/${program.publicInfo.url}/250x250.svg`;
+  const banner728png = `${origin}/api/programs/${program.publicInfo.url}/728x89.png`;
+  const banner728svg = `${origin}/api/programs/${program.publicInfo.url}/728x89.svg`;
+  const banner240png = `${origin}/api/programs/${program.publicInfo.url}/240x400.png`;
+  const banner240svg = `${origin}/api/programs/${program.publicInfo.url}/240x400.svg`;
 
   return (
     <Page description={title} title={title}>

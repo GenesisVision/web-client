@@ -5,7 +5,7 @@ const BannerPreview: React.FC<Props> = ({ url, title, type = "png" }) => (
   <div>
     {type === "png" && <img src={url} alt={title} />}
     {type === "svg" && <embed src={url} />}
-    <GVTextField wide value={url} />
+    <GVTextField wide value={url} name={"src"} />
   </div>
 );
 
