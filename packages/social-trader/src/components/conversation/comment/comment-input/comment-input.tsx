@@ -11,7 +11,9 @@ const _CommentInput: React.FC<Props> = ({}) => {
       <RowItem className="comment-input__input-row-item">
         <input className="comment-input__input" type="text" />
       </RowItem>
-      <MutedText>Enter to send</MutedText>
+      <div>
+        <MutedText>Enter to send</MutedText>
+      </div>
     </Row>
   );
 };
