@@ -4,6 +4,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import DetailsBlock from "components/details/details-block";
 import GuidesList from "components/guides/guides-list";
 import GVButton from "components/gv-button";
+import useHashTab from "pages/wallet/services/hashTab.hook";
 import React, { useCallback, useEffect, useState } from "react";
 
 interface Props {
@@ -11,6 +12,12 @@ interface Props {
 }
 
 const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
+  const initialTab =
+    navGuides.trade && navGuides.trade.lessons.length
+      ? `#${navGuides.trade.lessons[0].id}`
+      : "#";
+  const { tab } = useHashTab(initialTab);
+  const [idItemActive, setIdItemActive] = useState("");
   return (
     <section className="guides-container">
       <h1 className="guides-container__title">
@@ -22,24 +29,21 @@ const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
           horizontalPaddings
           tablet
         >
-          <GuidesList
-            guideList={navGuides.trade}
-            lessonActive={navGuides.trade.lessons[0]}
-          />
+          <GuidesList {...navGuides.trade} tab={tab} isVisible />
         </DetailsBlock>
         <DetailsBlock
           className="guides-container__nav-item"
           horizontalPaddings
           tablet
         >
-          <GuidesList guideList={navGuides.invest} />
+          <GuidesList {...navGuides.invest} tab={tab} />
         </DetailsBlock>
         <DetailsBlock
           className="guides-container__nav-item"
           horizontalPaddings
           tablet
         >
-          <GuidesList guideList={navGuides.manage} />
+          <GuidesList {...navGuides.manage} tab={tab} />
         </DetailsBlock>
       </nav>
       <DetailsBlock className="guides-container__content">
@@ -58,11 +62,6 @@ const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
           can withdraw your capital at any time you retain full control of your
           investment.
         </p>
-        <ImageBaseElement
-          className="guide__img"
-          // src={GuideImg}
-          alt={"Guide"}
-        />
         <p>
           Diversify your capital across hundreds of cryptocurrencies in one
           click. Select a fund with a composition that matches your opinion on
@@ -70,11 +69,6 @@ const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
           can withdraw your capital at any time you retain full control of your
           investment.
         </p>
-        <ImageBaseElement
-          className="guide__img"
-          // src={GuideImg}
-          alt={"Guide"}
-        />
         <p>
           Diversify your capital across hundreds of cryptocurrencies in one
           click. Select a fund with a composition that matches your opinion on

@@ -12,19 +12,13 @@
     margin-bottom: $padding-xxsmall;
   }
 
-  &__item-button {
+  &__item-link {
     @include transition(background-color);
     @include adaptive-border-radius(25px);
-    border: none;
-    margin: 0;
-    width: 100%;
-    overflow: visible;
-    text-align: inherit;
-    outline: none;
-    background-color: transparent;
-    color: inherit;
     @include horizontal-paddings(16px);
     @include vertical-paddings(13px);
+    background-color: transparent;
+    color: inherit;
     display: flex;
     font-size: 14px;
     line-height: 24px;
@@ -32,7 +26,7 @@
     justify-content: space-between;
     cursor: pointer;
 
-    &:hover:not(:disabled) {
+    &:hover:not(.guides-list__item-link--disabled) {
       background-color: rgba($main-color, 0.02);
     }
 
@@ -41,7 +35,7 @@
       cursor: default;
     }
 
-    &:disabled {
+    &--disabled {
       opacity: 0.3;
       cursor: default;
     }

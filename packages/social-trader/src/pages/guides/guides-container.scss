@@ -14,7 +14,7 @@
     width: 100%;
 
     @include media-breakpoint-tablet() {
-      width: 200px;
+      width: 250px;
     }
 
     @include media-breakpoint-landscape-tablet() {
@@ -30,6 +30,19 @@
     }
   }
 
+  &__nav-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__nav-number {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba($main-color, 0.3);
+  }
+
   &__nav-item:last-child {
     @include media-breakpoint-tablet() {
       margin-right: $padding-xsmall;
@@ -42,7 +55,7 @@
     padding-right: $padding-small;
 
     @include media-breakpoint-tablet() {
-      width: calc(100% - 200px);
+      width: calc(100% - 250px);
     }
 
     @include media-breakpoint-landscape-tablet() {

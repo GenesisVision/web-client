@@ -2,44 +2,45 @@ import "./guides-list.scss";
 
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
+import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import Ok from "media/ok.svg";
-import React, { useCallback, useEffect, useState } from "react";
+import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
+import React, { useCallback, useState } from "react";
 
 interface Props {
-  guideList: any;
-  lessonActive?: any;
+  lessons: any;
+  title: string;
+  tab?: any;
+  isVisible?: boolean;
 }
 
-const _GuidesList: React.FC<Props> = ({ guideList, lessonActive }) => {
-  const [idActive, setIdActive] = useState(
-    lessonActive ? lessonActive.id : null
-  );
-  const [isVisibleList, setIsVisibleList] = useState(!!lessonActive);
-  const handleClickItem = useCallback(
-    (item: any) => {
-      if (item.id === idActive) return null;
-      setIdActive(item.id);
-    },
-    [idActive]
-  );
+const _GuidesList: React.FC<Props> = ({ lessons, title, tab, isVisible }) => {
+  const { linkCreator } = useToLink();
+  const [isVisibleList, setIsVisibleList] = useState(isVisible);
   const handleClickTitle = useCallback(() => {
     setIsVisibleList(!isVisibleList);
   }, [isVisibleList]);
   return (
     <>
-      <h3 onClick={handleClickTitle}>{guideList.title}</h3>
+      <h3 className="guides-container__nav-subtitle" onClick={handleClickTitle}>
+        {title}
+        {!isVisibleList && (
+          <span className="guides-container__nav-number">{`${lessons.length} steps`}</span>
+        )}
+      </h3>
       {isVisibleList && (
         <ul className="guides-list">
-          {guideList.lessons.map((item: any) => (
+          {lessons.map((item: any) => (
             <li key={item.id} className="guides-list__item">
-              <button
-                type="button"
-                onClick={() => handleClickItem(item)}
-                className={classNames("guides-list__item-button", {
-                  "guides-list__item-button--active": item.id === idActive,
-                  "guides-list__item-button--done": item.isDone
+              <Link
+                className={classNames("guides-list__item-link", {
+                  "guides-list__item-link--active":
+                    String(item.id) === tab.slice(1, tab.length),
+                  "guides-list__item-link--done": item.isDone,
+                  "guides-list__item-link--disabled": !item.isAvailable
                 })}
-                disabled={!item.isAvailable}
+                to={linkCreator(`${GUIDES_TOTAL_PAGE_ROUTE}#${item.id}`)}
               >
                 {item.lesson}
                 {item.isDone && (
@@ -49,7 +50,7 @@ const _GuidesList: React.FC<Props> = ({ guideList, lessonActive }) => {
                     alt="Done"
                   />
                 )}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
