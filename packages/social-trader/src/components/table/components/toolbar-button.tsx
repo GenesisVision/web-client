@@ -10,7 +10,7 @@ export const ToolbarButton: React.FC<{
   const { linkCreator } = useToLink();
   return (
     <RowItem>
-      <Link to={linkCreator(route)} className="toolbar-button">
+      <Link to={linkCreator(route, route)} className="toolbar-button">
         {text}
       </Link>
     </RowItem>
