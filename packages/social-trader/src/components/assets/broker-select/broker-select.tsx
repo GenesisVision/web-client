@@ -55,7 +55,10 @@ const _BrokerSelectBroker: React.FC<Props> = ({
         </div>
         <Surface className="surface--horizontal-paddings broker-select__description">
           <h3>{selectedBroker.name}</h3>
-          <StatisticItem label={t("create-program-page.broker-info.about")}>
+          <StatisticItem
+            half
+            label={t("create-program-page.broker-info.about")}
+          >
             {selectedBroker.description}
           </StatisticItem>
           <StatisticItem
