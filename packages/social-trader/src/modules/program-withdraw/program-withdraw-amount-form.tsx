@@ -3,13 +3,14 @@ import { DialogField } from "components/dialog/dialog-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { MutedText } from "components/muted-text/muted-text";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
   IProgramWithdrawAmountFormValues,
   programWithdrawAmountValidationSchema,
   WITHDRAW_FORM_FIELDS
 } from "modules/program-withdraw/program-withdraw.helpers";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
@@ -60,10 +61,6 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
     );
   }, [availableToWithdraw, programCurrency, setValue]);
 
-  useEffect(() => {
-    if (withdrawAll) setMaxAmount();
-  }, [withdrawAll]);
-
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       {!isOwner && (
@@ -78,25 +75,31 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
           />
         </DialogField>
       )}
-      <InputAmountField
-        name={WITHDRAW_FORM_FIELDS.amount}
-        label={t("withdraw-program.amount-to-withdraw")}
-        currency={programCurrency}
-        isAllowed={isAllow}
-        disabled={withdrawAll}
-        setMax={isOwner ? setMaxAmount : undefined}
-      />
-      {programCurrency !== accountCurrency && amount !== 0 && (
-        <NumberFormat
-          value={formatCurrencyValue(
-            convertFromCurrency(amount!, rate),
-            accountCurrency
-          )}
-          prefix="≈ "
-          suffix={` ${accountCurrency}`}
-          displayType="text"
-        />
+      {withdrawAll && (
+        <DialogField>
+          <MutedText noWrap={false}>{t("withdraw-program.all-text")}</MutedText>
+        </DialogField>
       )}
+      <DialogField hide={withdrawAll}>
+        <InputAmountField
+          name={WITHDRAW_FORM_FIELDS.amount}
+          label={t("withdraw-program.amount-to-withdraw")}
+          currency={programCurrency}
+          isAllowed={isAllow}
+          setMax={isOwner ? setMaxAmount : undefined}
+        />
+        {programCurrency !== accountCurrency && amount !== 0 && (
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(amount!, rate),
+              accountCurrency
+            )}
+            prefix="≈ "
+            suffix={` ${accountCurrency}`}
+            displayType="text"
+          />
+        )}
+      </DialogField>
       <DialogButtons>
         <SubmitButton
           wide
