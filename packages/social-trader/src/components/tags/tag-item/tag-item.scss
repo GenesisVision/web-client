@@ -39,6 +39,10 @@
   text-transform: uppercase;
   white-space: nowrap;
 
+  &--clickable {
+    cursor: pointer;
+  }
+
   &--remainder {
     color: $positive-color;
     background-color: rgba($positive-color, 0.1);
