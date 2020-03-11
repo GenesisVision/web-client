@@ -70,8 +70,11 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
       { up: true }
     );
     setMinPercent(min);
-    setValue(FUND_WITHDRAW_FIELDS.percent, min, true);
   }, [availableToWithdraw, fundMinWithdrawAmountInCur]);
+
+  useEffect(() => {
+    setValue(FUND_WITHDRAW_FIELDS.percent, minPercent, true);
+  }, [minPercent]);
 
   const isAllow = useCallback(
     (values: NumberFormatValues) =>
