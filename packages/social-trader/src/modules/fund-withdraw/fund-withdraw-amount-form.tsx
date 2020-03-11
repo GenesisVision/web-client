@@ -109,6 +109,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogField>
         <WalletSelect
+          label={t("wallet-withdraw.to")}
           name={FUND_WITHDRAW_FIELDS.walletId}
           wallets={wallets}
           onChange={changeWalletCallback}
