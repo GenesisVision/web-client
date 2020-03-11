@@ -1,22 +1,16 @@
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { SetSubmittingType } from "utils/types";
+
+type handleSubmitValue = any;
 
 type TUseAssetValidateProps = {
-  handleSubmit: (
-    e?: React.FormEvent<HTMLFormElement>,
-    setSubmitting?: SetSubmittingType
-  ) => void;
+  handleSubmit: (e?: handleSubmitValue) => void;
   isValid: boolean;
 };
 
-type TUseAssetValidateOutput = (
-  e?: React.FormEvent<HTMLFormElement> | undefined,
-  setSubmitting?: SetSubmittingType
-) => void;
+type TUseAssetValidateOutput = (e?: handleSubmitValue) => void;
 
 const useAssetValidate = ({
   handleSubmit,
@@ -25,18 +19,14 @@ const useAssetValidate = ({
   const [t] = useTranslation();
   const dispatch = useDispatch();
   return useCallback(
-    (
-      e?: React.FormEvent<HTMLFormElement> | undefined,
-      setSubmitting?: SetSubmittingType
-    ): void => {
-      if (isValid) handleSubmit(e, setSubmitting);
+    (e?: handleSubmitValue): void => {
+      if (isValid) return handleSubmit(e);
       else
         dispatch(
           alertMessageActions.error(
             t("create-program-page.notifications.validate-error")
           )
         );
-      if (e) e.preventDefault();
     },
     [handleSubmit, isValid]
   );

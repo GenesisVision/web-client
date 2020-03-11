@@ -11,13 +11,6 @@
   width: 100%;
   min-height: 1em;
 
-  &__period {
-    color: $text-dark-color;
-    font-size: $font-size-small;
-    font-weight: bold;
-    letter-spacing: 0.2px;
-  }
-
   &__period-item {
     font-size: $font-size-paragraph;
     &:not(:last-of-type) {
@@ -33,17 +26,6 @@
     }
     &:disabled {
       opacity: 1;
-    }
-  }
-
-  &__date-range {
-    color: $text-color;
-    font-size: $font-size-small-mobile;
-    font-weight: 600;
-    letter-spacing: 0;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      letter-spacing: 0.2px;
     }
   }
 }

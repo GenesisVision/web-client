@@ -11,8 +11,6 @@ import { NotificationViewModel } from "gv-api-web";
 import defaultReducer from "reducers/reducer-creators/default-reducer";
 import { combineReducers } from "redux";
 
-import isOpenReducer, { IsOpenState } from "./is-open.reducer";
-
 type SkipTake = {
   skip: number;
   take: number;
@@ -58,14 +56,12 @@ const addTotalCount = (
 
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
-  isOpen: IsOpenState;
   total: number;
   options: SkipTake;
 }>;
 
 const notificationsReducer = combineReducers<NotificationsState>({
   notifications: addNotificationsReducer,
-  isOpen: isOpenReducer,
   options: optionsReducer,
   total: addTotalCount
 });

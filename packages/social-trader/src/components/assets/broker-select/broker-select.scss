@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors.scss";
-@import "~shared/styles/_breakpoint.scss";
-@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
 
 .broker-select {
   margin-top: $padding-upper-medium;
@@ -43,39 +43,14 @@
   }
 
   &__description {
+    &#{&} div {
+      white-space: normal;
+    }
     width: 100%;
 
     @include media-breakpoint-landscape-phone() {
       max-width: 300px;
     }
-
-    &-heading {
-      padding-bottom: 0;
-    }
-  }
-
-  &__info-title {
-    margin-bottom: 14px;
-    font-size: $font-size-common;
-    color: $short-statistic-subheading-color;
-    letter-spacing: 0.4px;
-  }
-
-  &__info-text {
-    @include font-size($font-size-paragraph);
-    line-height: 1.9;
-    letter-spacing: 0.3px;
-    color: $text-light-color;
-  }
-
-  &__row {
-    @include adaptive-padding(top, $padding-small);
-  }
-
-  &__row--small {
-    display: inline-block;
-    box-sizing: border-box;
-    width: 50%;
   }
 
   &__navigation {

@@ -13,7 +13,7 @@ export const editAsset = ({
 }): Promise<Response> => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve("");
-  if (editAssetData.logo.image)
+  if (editAssetData.logo.image && editAssetData.logo.image.cropped)
     promise = filesService.uploadFile(
       editAssetData.logo.image.cropped,
       authorization

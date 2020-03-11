@@ -116,3 +116,27 @@ export const dateTo = (): string =>
 export const getDefaultDateRange = () => ({
   dateFrom: subtractDate(new Date(), 1, DEFAULT_DATE_RANGE)
 });
+
+export const shortDateField = (dateField: string): string => {
+  const letter = dateField[0];
+  switch (dateField) {
+    case "few":
+      return "";
+    case "hours":
+    case "hour":
+    case "seconds":
+    case "second":
+    case "minutes":
+    case "minute":
+      return letter;
+    default:
+      return letter.toLocaleUpperCase();
+  }
+};
+
+export const convertDateToShortFormat = (date: string) =>
+  date
+    .split(" ")
+    .map(word => (word === "a" ? "1" : word))
+    .map(word => (isNaN(+word) ? shortDateField(word) : word))
+    .join(" ");

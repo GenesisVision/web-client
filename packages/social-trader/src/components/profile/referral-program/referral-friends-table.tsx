@@ -1,10 +1,10 @@
 import TableCell from "components/table/components/table-cell";
-import TableContainer from "components/table/components/table-container";
+import TableModule from "components/table/components/table-module";
 import TableRow from "components/table/components/table-row";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { ReferralFriend } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { referralFriendsTableSelector } from "reducers/profile-reducer";
 import { formatDate } from "utils/dates";
 import { getRandomEmail, tableLoaderCreator } from "utils/helpers";
 
@@ -13,12 +13,11 @@ import { getFriendsTable } from "./services/referral-program-services";
 const _ReferralFriendsTable: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <TableContainer
+    <TableModule
       loaderData={ReferralFriendsLoaderData}
       title={t("profile-page.referral-program.referral-friends.title")}
       getItems={getFriendsTable}
-      dataSelector={referralFriendsTableSelector}
-      isFetchOnMount={true}
+      paging={DEFAULT_PAGING}
       columns={COLUMNS}
       renderHeader={column =>
         t(

@@ -1,6 +1,8 @@
 import "./tile-filter-item.scss";
 
 import { CloseIcon } from "components/icon/close-icon";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import * as React from "react";
 
 const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
@@ -11,17 +13,19 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
   children
 }) => {
   return (
-    <div className="tile-filter-item">
-      {children}
-      {!mandatory && removable && (
-        <div
-          className="tile-filter-item__button-remove"
-          onClick={() => removeTile!(id)}
-        >
-          <CloseIcon />
-        </div>
-      )}
-    </div>
+    <RowItem>
+      <Row className="tile-filter-item">
+        {children}
+        {!mandatory && removable && (
+          <div
+            className="tile-filter-item__button-remove"
+            onClick={() => removeTile!(id)}
+          >
+            <CloseIcon />
+          </div>
+        )}
+      </Row>
+    </RowItem>
   );
 };
 

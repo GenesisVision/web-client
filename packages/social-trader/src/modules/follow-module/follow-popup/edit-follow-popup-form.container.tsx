@@ -8,7 +8,8 @@ import FollowTop from "modules/follow-module/follow-popup/follow-popup-top";
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { postponeCallback } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import { getUpdateAttachMethod } from "../services/follow-module-service";
 
@@ -25,10 +26,10 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   const subscribeFixedCurrencies = useSelector(
     subscribeFixedCurrenciesSelector
   );
-  const { sendRequest: submitChanges } = useApiRequest({
+  const { sendRequest: submitChanges, errorMessage } = useApiRequest({
     request: getUpdateAttachMethod(signalSubscription.isExternal),
     successMessage: "follow-program.edit-success-alert-message",
-    middleware: [onApply, onClose]
+    middleware: [onApply, postponeCallback(onClose)]
   });
 
   const { rate, getRate } = useGetRate();
@@ -38,12 +39,12 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   }, [currency]);
 
   const submit = useCallback(
-    (values: FollowParamsFormValues, setSubmitting: SetSubmittingType) => {
+    (values: FollowParamsFormValues) => {
       const requestParams = {
         ...values,
         tradingAccountId
       };
-      submitChanges({ id, requestParams }, setSubmitting);
+      return submitChanges({ id, requestParams });
     },
     [id, tradingAccountId]
   );
@@ -51,6 +52,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
     <>
       <FollowTop step={"params"} />
       <FollowParams
+        errorMessage={errorMessage}
         subscribeFixedCurrencies={subscribeFixedCurrencies}
         rate={rate}
         currency={currency}

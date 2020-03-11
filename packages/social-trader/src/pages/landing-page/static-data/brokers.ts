@@ -4,7 +4,6 @@ import ExanteLogo from "pages/landing-page/images/brokers/exante.png";
 import GMBg from "pages/landing-page/images/brokers/gm-bg.svg";
 import GMLogo from "pages/landing-page/images/brokers/gm.svg";
 import HuobiLogo from "pages/landing-page/images/brokers/huobi.png";
-import Just2tradeLogo from "pages/landing-page/images/brokers/just-2-trade.svg";
 import RoboforexLogo from "pages/landing-page/images/brokers/roboforex.svg";
 
 enum BROKERS {
@@ -12,8 +11,7 @@ enum BROKERS {
   BINANCE = "Binance",
   ROBOFOREX = "Roboforex",
   EXANTE = "Exante",
-  HUOBI = "Huobi",
-  JUST2TRADE = "Just2Trade"
+  HUOBI = "Huobi"
 }
 
 export type TBrokerInfo = {
@@ -64,13 +62,6 @@ export const brokersTabs: TTabsItem[] = [
     image: {
       link: HuobiLogo,
       title: BROKERS.HUOBI
-    }
-  },
-  {
-    id: 5,
-    image: {
-      link: Just2tradeLogo,
-      title: BROKERS.JUST2TRADE
     }
   }
 ];
@@ -189,23 +180,6 @@ export const brokersInfo: TBrokerInfo[] = [
       },
       {
         text: "Huobi Web Trading Terminal"
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: BROKERS.JUST2TRADE,
-    description:
-      "Just2Trade Inc. is a US-based financial services company with offices in New York and Cyprus and a subsidiary of Russian broker Finam Holdings. Just2Trade is a member of FINRA & SIPC, NFA regulatory organizations",
-    listItems: [
-      {
-        text: "Forex, Metals, CFD, Indices"
-      },
-      {
-        text: "MetaTrader 4"
-      },
-      {
-        text: "Leverage 1:10-1:100"
       }
     ]
   }

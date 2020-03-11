@@ -5,35 +5,61 @@ import AssetField, {
 } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import SettingsBlock from "components/settings-block/settings-block";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import withLoader from "decorators/with-loader";
 import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
-import { SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
 
-import attachAccountSettingsValidationSchema from "./attach-account-settings.validators";
+import {
+  attachAccountSettingsMapPropsToValues,
+  attachAccountSettingsValidationSchema
+} from "./attach-account-settings.validators";
+
+export enum ATTACH_ACCOUNT_FIELDS {
+  brokerName = "brokerName",
+  brokerAccountTypeId = "brokerAccountTypeId",
+  secret = "secret",
+  key = "key"
+}
 
 const _AttachAccountSettings: React.FC<Props> = ({
-  setFieldValue,
+  success,
+  isPending,
   data: exchanges,
-  handleSubmit,
-  isValid,
-  t,
-  isSubmitting
+  onSubmit,
+  requestBrokerName
 }) => {
+  const [t] = useTranslation();
+
+  const form = useForm<IAttachAccountSettingsFormValues>({
+    defaultValues: attachAccountSettingsMapPropsToValues({
+      exchanges,
+      requestBrokerName
+    }),
+    validationSchema: attachAccountSettingsValidationSchema(t),
+    mode: "onChange"
+  });
+  const {
+    setValue,
+    formState: { isValid }
+  } = form;
+
+  const isSuccessful = success;
+
   const [broker, setBroker] = useState<Broker>(exchanges[0]);
-  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
+  const validateAndSubmit = useAssetValidate({
+    handleSubmit: onSubmit,
+    isValid
+  });
   const brokerNameChangeHandle = useCallback(
     ({ target: { value } }: ISelectChangeEvent) => {
       const broker = safeGetElemFromArray(
@@ -41,22 +67,22 @@ const _AttachAccountSettings: React.FC<Props> = ({
         ({ name }) => name === value
       );
       setBroker(broker);
-      setFieldValue(ATTACH_ACCOUNT_FIELDS.brokerName, value);
+      setValue(ATTACH_ACCOUNT_FIELDS.brokerName, value, true);
     },
-    []
+    [setValue]
   );
   useEffect(() => {
     setBroker(exchanges[0]);
   }, [exchanges]);
   return (
-    <form onSubmit={validateAndSubmit}>
+    <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock
         label={t("attach-account-page.settings.exchange")}
         blockNumber={"01"}
       >
         <AssetFields>
           <AssetField>
-            <GVFormikField
+            <GVHookFormField
               wide
               onChange={brokerNameChangeHandle}
               name={ATTACH_ACCOUNT_FIELDS.brokerName}
@@ -70,26 +96,24 @@ const _AttachAccountSettings: React.FC<Props> = ({
                   {name}
                 </option>
               ))}
-            </GVFormikField>
+            </GVHookFormField>
           </AssetField>
-          {broker && broker.accountTypes.length > 1 && (
-            <AssetField>
-              <GVFormikField
-                wide
-                name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
-                component={GVTextField}
-                label={t("attach-account-page.settings.fields.account-type")}
-                InputComponent={Select}
-                disableIfSingle
-              >
-                {broker.accountTypes.map(({ name, id }) => (
-                  <option value={id} key={id}>
-                    {name}
-                  </option>
-                ))}
-              </GVFormikField>
-            </AssetField>
-          )}
+          <AssetField hide={!broker || broker.accountTypes.length < 2}>
+            <GVHookFormField
+              wide
+              name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
+              component={GVTextField}
+              label={t("attach-account-page.settings.fields.account-type")}
+              InputComponent={Select}
+              disableIfSingle
+            >
+              {broker.accountTypes.map(({ name, id }) => (
+                <option value={id} key={id}>
+                  {name}
+                </option>
+              ))}
+            </GVHookFormField>
+          </AssetField>
         </AssetFields>
       </SettingsBlock>
       <SettingsBlock
@@ -98,43 +122,39 @@ const _AttachAccountSettings: React.FC<Props> = ({
       >
         <AssetFields>
           <AssetField wide>
-            <GVFormikField
+            <GVHookFormField
+              showCorrect
               wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.key}
               label={t("attach-account-page.settings.fields.api-key")}
               autoComplete="off"
-              component={GVTextField}
+              component={SimpleTextField}
             />
           </AssetField>
           <AssetField wide>
-            <GVFormikField
+            <GVHookFormField
+              showCorrect
               wide
               className="attach-account-settings__api-field"
               type="text"
               name={ATTACH_ACCOUNT_FIELDS.secret}
               label={t("attach-account-page.settings.fields.api-secret")}
               autoComplete="off"
-              component={GVTextField}
+              component={SimpleTextField}
             />
           </AssetField>
         </AssetFields>
       </SettingsBlock>
       <CreateAssetNavigation
         asset={"attach-external-account"}
-        isSubmitting={isSubmitting}
+        isSuccessful={isSuccessful}
+        isSubmitting={isPending}
       />
-    </form>
+    </HookForm>
   );
 };
-
-export enum ATTACH_ACCOUNT_FIELDS {
-  brokerName = "brokerName",
-  brokerAccountTypeId = "brokerAccountTypeId",
-  secret = "secret",
-  key = "key"
-}
 
 export interface IAttachAccountSettingsFormValues {
   [ATTACH_ACCOUNT_FIELDS.brokerName]: string;
@@ -143,52 +163,14 @@ export interface IAttachAccountSettingsFormValues {
   [ATTACH_ACCOUNT_FIELDS.key]: string;
 }
 
-export interface ICreateFundSettingsProps extends WithTranslation, OwnProps {}
-
-type Props = InjectedFormikProps<
-  ICreateFundSettingsProps,
-  IAttachAccountSettingsFormValues
->;
-
-interface OwnProps {
+interface Props {
+  isPending?: boolean;
+  success?: boolean;
+  errorMessage?: string;
   requestBrokerName?: string;
   data: Broker[];
-  onSubmit: (
-    values: IAttachAccountSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: IAttachAccountSettingsFormValues) => void;
 }
 
-const AttachAccountSettings = compose<
-  React.ComponentType<OwnProps & WithBlurLoaderProps<any[]>>
->(
-  withBlurLoader,
-  translate(),
-  withFormik<ICreateFundSettingsProps, IAttachAccountSettingsFormValues>({
-    enableReinitialize: true,
-    displayName: "AttachAccountSettingsForm",
-    mapPropsToValues: ({ data, requestBrokerName = "" }) => {
-      const requestBroker = data.find(
-        ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
-      );
-      const requestBrokerAccountTypeId = requestBroker
-        ? requestBroker.accountTypes[0].id
-        : "";
-      const firstBrokerAccountTypeId = data.length
-        ? data[0].accountTypes[0].id
-        : "";
-      return {
-        [ATTACH_ACCOUNT_FIELDS.secret]: "",
-        [ATTACH_ACCOUNT_FIELDS.brokerName]: data.length ? data[0].name : "",
-        [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]:
-          requestBrokerAccountTypeId || firstBrokerAccountTypeId,
-        [ATTACH_ACCOUNT_FIELDS.key]: ""
-      };
-    },
-    validationSchema: attachAccountSettingsValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(_AttachAccountSettings);
+const AttachAccountSettings = withLoader(React.memo(_AttachAccountSettings));
 export default AttachAccountSettings;

@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
@@ -110,7 +108,10 @@ const _Subscription: React.FC<Props> = ({
           />
         </StatisticItem>
         <StatisticItem
-          condition={!!subscriptionInfo.volumeFeePersonal}
+          condition={
+            subscriptionInfo.volumeFeePersonal !== undefined &&
+            subscriptionInfo.volumeFeePersonal !== null
+          }
           accent
           label={t("follow-details-page.current-investment.fields.volume-fee")}
         >
@@ -121,7 +122,10 @@ const _Subscription: React.FC<Props> = ({
           />
         </StatisticItem>
         <StatisticItem
-          condition={!!subscriptionInfo.successFeePersonal}
+          condition={
+            subscriptionInfo.successFeePersonal !== undefined &&
+            subscriptionInfo.successFeePersonal !== null
+          }
           accent
           label={t("follow-details-page.current-investment.fields.success-fee")}
         >

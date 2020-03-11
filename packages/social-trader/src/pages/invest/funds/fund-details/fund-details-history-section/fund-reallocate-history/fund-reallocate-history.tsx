@@ -52,6 +52,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
           <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
             <div className="details-structure__funds-asset">
               <FundAssetContainer
+                noWrap
                 assets={item.parts}
                 type={FUND_ASSET_TYPE.SHORT}
                 size={13}

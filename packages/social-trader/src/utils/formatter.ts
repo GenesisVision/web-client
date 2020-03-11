@@ -14,10 +14,30 @@ const reverseString = (value: string | number): string =>
     .reverse()
     .join("");
 
-const addOne = (item: string[]): string[] =>
-  item[1]
-    ? [item[0], +item[1] === 0 ? item[1].slice(0, -1) + "1" : item[1]]
+const addOneWrapper = (up?: boolean) => (item: string[]): string[] => {
+  const result = addOne(item);
+  return up ? addOneUp(result) : result;
+};
+
+const addOne = (item: string[]): string[] => {
+  const [whole, fraction] = item;
+  return fraction
+    ? [whole, +fraction === 0 ? fraction.slice(0, -1) + "1" : fraction]
     : item;
+};
+
+export const addOneUp = (item: string[]): string[] => {
+  const [whole, fraction] = item;
+  if (!fraction) return item;
+  const uppedFraction = String(+fraction + 1);
+  return fraction
+    ? [
+        whole,
+        new Array(fraction.length - uppedFraction.length).fill("0").join("") +
+          uppedFraction
+      ]
+    : item;
+};
 
 const cleanNulls = (item: string[]): string[] =>
   item[1] ? [item[0], reverseString(+reverseString(item[1]))] : item;
@@ -39,16 +59,17 @@ const checkEmptyFraction = (item: string[]): string =>
 const formatValue = (
   value: any,
   decimalScale?: number,
-  abs?: boolean
+  abs?: boolean,
+  options?: { up?: boolean }
 ): string => {
   value = typeof value !== "number" ? +value : value;
   value = abs ? Math.abs(value) : value;
   if (value === undefined || isNaN(value) || value.toFixed(0) == value)
     return String(value);
 
-  return [...[value.toFixed(10).split(".")]]
+  return [value.toFixed(10).split(".")]
     .map(sliceFraction(decimalScale))
-    .map(addOne)
+    .map(addOneWrapper(options?.up))
     .map(cleanNulls)
     .map(checkEmptyFraction)
     .join();
@@ -72,11 +93,14 @@ const validateFraction = (value: string, currency: string): boolean => {
 
 const formatCurrencyValue = (
   value: number,
-  currency: string | CurrencyEnum
+  currency: string | CurrencyEnum,
+  options?: { up: boolean }
 ): string =>
   formatValue(
     checkCurrencyValue(value, currency),
-    CURRENCY_FRACTIONS(currency)
+    CURRENCY_FRACTIONS(currency),
+    false,
+    { up: options?.up }
   );
 
 const formatValueDifferentDecimalScale = (

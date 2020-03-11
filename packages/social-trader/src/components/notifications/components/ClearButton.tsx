@@ -22,7 +22,7 @@ const ClearButton = () => {
 
   return (
     <GVButton
-      size={GV_BTN_SIZE.MIDDLE}
+      size={GV_BTN_SIZE.BIG}
       noPadding
       variant={"text"}
       onClick={handleClick}

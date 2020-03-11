@@ -38,7 +38,7 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { composeAccountDetailsUrl } from "utils/compose-url";
-import { distanceDate } from "utils/dates";
+import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
 const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
@@ -161,7 +161,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("dashboard-page.trading.age")}>
-            {distanceDate(asset.accountInfo.creationDate)}
+            {convertDateToShortFormat(
+              distanceDate(asset.accountInfo.creationDate)
+            )}
           </StatisticItem>
         </TableCardTableColumn>
       </TableCardTable>
@@ -182,6 +184,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
         )}
         {asset.actions.canMakeDemoDeposit && (
           <DemoDepositButton
+            currentDeposit={asset.accountInfo.balance}
             onApply={updateItems}
             currency={asset.accountInfo.currency}
             id={asset.id}

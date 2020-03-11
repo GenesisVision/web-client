@@ -1,4 +1,4 @@
-import { CurrencySourceSelectItemType } from "components/currency-source-select/currency-source-select";
+import { CurrencySourceSelectItemType } from "components/currency-source-select/currency-source-select-items";
 import { ItemsType } from "components/wallet-select/wallet-select";
 
 export enum TRANSFER_DIRECTION {

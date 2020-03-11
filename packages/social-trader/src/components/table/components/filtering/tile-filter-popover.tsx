@@ -42,11 +42,10 @@ class TileFilterPopover<
     const { filteredItems: filteredAssets } = this.state;
     const { header, placeholder, children } = this.props;
     return (
-      <PopoverContentCardBlock className="tile-filter-popover">
+      <PopoverContentCardBlock>
         <FilterTitle>{header}</FilterTitle>
         <GVTextField
           name="queryValue"
-          wrapperClassName="tile-filter-popover__search-wrapper"
           placeholder={placeholder}
           autoComplete="off"
           adornmentPosition="start"

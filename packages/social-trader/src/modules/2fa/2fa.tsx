@@ -5,7 +5,6 @@ import Dialog from "components/dialog/dialog";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
 import withLoader from "decorators/with-loader";
-import { TwoFactorStatus } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +20,7 @@ export enum TYPE_2FA {
 const _TwoFactor: React.FC<Props> = ({
   handleSubmit,
   handleChange,
-  twoFactorAuth,
+  twoFactorEnabled,
   type,
   handleClose
 }) => {
@@ -31,19 +30,17 @@ const _TwoFactor: React.FC<Props> = ({
       <GVTextField
         name="2fa"
         label={t("2fa-page.type")}
-        value={
-          twoFactorAuth.twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE
-        }
+        value={twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE}
         onChange={handleChange}
         InputComponent={Select}
       >
         <option value={TYPE_2FA.DISABLE}>{t("2fa-page.none")}</option>
         <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
       </GVTextField>
-      <GenerateRecoveryCode disabled={twoFactorAuth.twoFactorEnabled} />
+      <GenerateRecoveryCode disabled={twoFactorEnabled} />
       <Dialog
         className={classNames({
-          "dialog--width-auto": !twoFactorAuth.twoFactorEnabled
+          "dialog--width-auto": !twoFactorEnabled
         })}
         open={Boolean(type)}
         onClose={handleClose}
@@ -59,7 +56,7 @@ const _TwoFactor: React.FC<Props> = ({
 };
 
 interface Props {
-  twoFactorAuth: TwoFactorStatus;
+  twoFactorEnabled: boolean;
   handleSubmit: () => void;
   handleChange: (event: React.ChangeEvent<any>) => void;
   handleClose: () => void;

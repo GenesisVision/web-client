@@ -4,7 +4,7 @@ import * as React from "react";
 export const TableIcon: React.FC<IIconProps> = React.memo(props => (
   <Icon type={"table"} {...props}>
     <svg width="14" height="15" viewBox="0 0 14 15">
-      <g id="ui" fill="none" fillRule="evenodd" strokeLinejoin="round">
+      <g fill="none" fillRule="evenodd" strokeLinejoin="round">
         <g
           id="1600_0_1_dashboard"
           transform="translate(-1406 -963)"

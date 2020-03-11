@@ -1,5 +1,3 @@
-import "./tag-item.scss";
-
 import * as React from "react";
 
 const _TagCircle: React.FC<Props> = ({ backgroundColor }) => (

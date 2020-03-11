@@ -12,7 +12,6 @@ import {
 import {
   getRandomColor,
   getRandomInteger,
-  getRandomText,
   getRandomWords,
   tableLoaderCreator
 } from "utils/helpers";
@@ -60,7 +59,7 @@ export const assetsLoaderData = () => {
     const value = getRandomInteger(Math.round(sum / 4), Math.round(sum / 3));
     sum -= value;
     return {
-      name: getRandomText({ length: 3 }),
+      name: getRandomWords(3),
       percent: i === length - 1 ? sum + value : value,
       color: getRandomColor()
     };
@@ -166,7 +165,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     },
     id: "",
     logo: "",
-    title: getRandomText({ length: 7 }),
+    title: getRandomWords(7),
     url: "",
     color: getRandomColor()
   };

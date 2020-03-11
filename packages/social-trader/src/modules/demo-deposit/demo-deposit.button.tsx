@@ -6,6 +6,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 const _DemoDepositButton: React.FC<Props> = ({
+  currentDeposit,
   onApply,
   currency,
   id,
@@ -33,6 +34,7 @@ const _DemoDepositButton: React.FC<Props> = ({
         onClick={setIsOpen}
       />
       <DemoDepositDialog
+        currentDeposit={currentDeposit}
         onApply={handleOnApply}
         currency={currency}
         id={id}

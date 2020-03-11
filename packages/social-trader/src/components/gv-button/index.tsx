@@ -10,7 +10,9 @@ export enum GV_BTN_SIZE {
   MIDDLE = "MIDDLE"
 }
 
-interface GVButtonProps {
+export interface GVButtonProps {
+  isSuccessful?: boolean;
+  isPending?: boolean;
   testId?: string;
   bold?: boolean;
   wide?: boolean;
@@ -29,6 +31,8 @@ interface GVButtonProps {
 }
 
 const GVButton: React.FC<GVButtonProps> = ({
+  isSuccessful,
+  isPending,
   testId,
   bold,
   wide,
@@ -36,9 +40,9 @@ const GVButton: React.FC<GVButtonProps> = ({
   id,
   className,
   title,
-  variant,
-  color,
-  type,
+  variant = "contained",
+  color = "primary",
+  type = "button",
   disabled,
   onClick,
   children,
@@ -46,6 +50,8 @@ const GVButton: React.FC<GVButtonProps> = ({
   noPadding
 }) => {
   const classname = classNames("gv-btn", className, {
+    "gv-btn--successful": isSuccessful,
+    "gv-btn--pending": isPending,
     "gv-btn--bold": bold,
     "gv-btn--wide": wide,
     "gv-btn--large": size === GV_BTN_SIZE.LARGE,
@@ -71,15 +77,22 @@ const GVButton: React.FC<GVButtonProps> = ({
       type={type}
       name={name}
     >
-      {children}
+      <span
+        className={classNames("gv-btn__label", {
+          "gv-btn__label--success": isSuccessful
+        })}
+      >
+        {children}
+      </span>
+      <span
+        className={classNames("gv-btn__success-symbol", {
+          "gv-btn__success-symbol--success": isSuccessful
+        })}
+      >
+        ✔
+      </span>
     </button>
   );
-};
-
-GVButton.defaultProps = {
-  variant: "contained",
-  color: "primary",
-  type: "button"
 };
 
 export default GVButton;

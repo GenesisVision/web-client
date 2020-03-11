@@ -1,5 +1,3 @@
-import "./tag-item.scss";
-
 import { Tag } from "gv-api-web";
 import React from "react";
 

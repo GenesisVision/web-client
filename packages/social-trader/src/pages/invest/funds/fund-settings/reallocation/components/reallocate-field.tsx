@@ -14,9 +14,9 @@ import { useCallback, useEffect, useState } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
-const _ReallocateField: React.FC<Props> = ({
+const _ReallocateField: React.FC<IReallocateFieldProps> = ({
   name,
-  value,
+  value = [],
   assets,
   error,
   touched,
@@ -161,7 +161,7 @@ const getRemainderWithoutSelected = (
     .filter(item => item.asset !== asset.asset)
     .reduce((sum, item) => sum + item.percent, 0);
 
-interface Props {
+export interface IReallocateFieldProps {
   name: string;
   value: FundAssetPart[];
   assets: PlatformAsset[];
@@ -179,3 +179,40 @@ interface Props {
     };
   }): void;
 }
+
+export const mapToPercentWithAsset = ({
+  percent,
+  asset
+}: {
+  [key: string]: any;
+}): PercentWithAssetType => ({ percent, asset });
+
+export type AssetType =
+  | PlatformAsset
+  | FundAssetPart
+  | FundAssetPartWithIcon
+  | PlatformAssetFull;
+
+export type PercentWithAssetType = { percent: number; asset: string };
+
+export const compareAssets = (
+  first: Array<AssetType>,
+  second: Array<AssetType>
+): boolean => {
+  const mappedFirst = first.map(mapToPercentWithAsset);
+  const mappedSecond = second.map(mapToPercentWithAsset);
+  if (
+    !mappedFirst ||
+    !mappedSecond ||
+    mappedFirst.length !== mappedSecond.length
+  )
+    return false;
+  for (const i in mappedFirst) {
+    if (
+      mappedFirst[i].asset + mappedFirst[i].percent !==
+      mappedSecond[i].asset + mappedSecond[i].percent
+    )
+      return false;
+  }
+  return true;
+};

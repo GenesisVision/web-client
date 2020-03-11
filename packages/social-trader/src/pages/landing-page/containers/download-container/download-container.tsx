@@ -45,6 +45,7 @@ const DownloadContainer: React.FC = () => (
         href={VIDEO_LINK}
         className="download-container__play"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <span className="download-container__play-btn" />
       </a>

@@ -3,9 +3,6 @@
 @import "~shared/styles/_colors";
 
 .currency-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   &__icon {
     object-fit: cover;
     box-shadow: $box-shadow-1;
@@ -37,5 +34,11 @@
     &--big {
       padding: 0;
     }
+  }
+}
+
+.currency-item-with-amount {
+  &__name {
+    min-width: 80px;
   }
 }

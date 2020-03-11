@@ -1,19 +1,18 @@
+import { HookFormWalletField as WalletField } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogField } from "components/dialog/dialog-field";
-import GVButton from "components/gv-button";
-import InputAmountField from "components/input-amount-field/input-amount-field";
-import { ISelectChangeEvent } from "components/select/select";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import StatisticItem from "components/statistic-item/statistic-item";
-import WalletSelect from "components/wallet-select/wallet-select";
-import { FormikProps, withFormik } from "formik";
+import { SubmitButton } from "components/submit-button/submit-button";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
+import { useGetRate } from "hooks/get-rate.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
-import { fetchRate as fetchRateMethod } from "services/rate-service";
 import {
   convertToCurrency,
   CURRENCY_FRACTIONS
@@ -23,6 +22,7 @@ import {
   allowPositiveValuesNumberFormat,
   safeGetElemFromArray
 } from "utils/helpers";
+import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
 import CreateAccountFormValidationSchema, {
@@ -30,64 +30,71 @@ import CreateAccountFormValidationSchema, {
 } from "./follow-popup-create-account.validators";
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
-  handleSubmit,
+  minDeposit,
   onClick,
-  isValid,
-  dirty,
   wallets,
-  t,
-  followCurrency,
-  values,
-  setFieldTouched,
-  setFieldValue
+  followCurrency
 }) => {
-  const { currency, depositAmount, rate } = values;
-  const wallet =
-    wallets.find((wallet: WalletData) => wallet.currency === currency) ||
-    wallets[0];
-  const disableButton = !dirty || !isValid;
+  const { rate, getRate } = useGetRate();
+  const followCurrencyWalletId = safeGetElemFromArray(
+    wallets,
+    wallet => wallet.currency === followCurrency
+  ).id;
+  const [t] = useTranslation();
+
+  const form = useForm<CreateAccountFormValues>({
+    defaultValues: {
+      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: followCurrencyWalletId
+    },
+    validationSchema: CreateAccountFormValidationSchema({
+      rate,
+      minDeposit,
+      wallets,
+      t
+    }),
+    mode: "onChange"
+  });
+  const { reset, watch, setValue } = form;
+
+  const { depositWalletId, depositAmount } = watch();
+
+  const wallet = safeGetElemFromArray(
+    wallets,
+    ({ id }) => id === depositWalletId
+  );
+  const { currency } = wallet;
 
   useEffect(() => {
-    fetchRateMethod(followCurrency as CurrencyEnum, currency).then(
-      (rate: number) => {
-        setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.rate, rate);
-      }
-    );
+    followCurrency &&
+      currency &&
+      getRate({ from: followCurrency as CurrencyEnum, to: currency });
   }, [followCurrency, currency]);
 
   const onChangeCurrencyFrom = useCallback(
-    (event: ISelectChangeEvent, target: JSX.Element) => {
-      const wallet = safeGetElemFromArray(
-        wallets,
-        ({ id }) => target.props.value === id
-      );
-      const depositCurrencyNew = wallet.currency;
-      setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.currency, depositCurrencyNew);
-      setFieldValue(
-        CREATE_ACCOUNT_FORM_FIELDS.depositWalletId,
-        target.props.value
-      );
-      setFieldValue(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, "");
-      setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, false);
+    ({ id }: WalletItemType) => {
+      reset({
+        [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: id,
+        [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: ""
+      });
     },
-    [setFieldTouched, setFieldValue, wallets]
+    [wallets]
   );
-  const handleNext = useCallback(() => onClick(values), [onClick, values]);
   const setMaxAmount = useCallback(() => {
-    setFieldValue(
+    setValue(
       CREATE_ACCOUNT_FORM_FIELDS.depositAmount,
-      formatCurrencyValue(wallet.available, followCurrency)
+      formatCurrencyValue(wallet.available, followCurrency),
+      true
     );
-    setFieldTouched(CREATE_ACCOUNT_FORM_FIELDS.depositAmount, true);
   }, [followCurrency, wallet]);
+
   return (
-    <form id="follow-create-account" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
         <DialogField>
-          <WalletSelect
+          <WalletField
+            wallets={wallets}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
             label={t("follow-program.create-account.from")}
-            items={wallets}
             onChange={onChangeCurrencyFrom}
           />
         </DialogField>
@@ -103,7 +110,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         <DialogField>
           <InputAmountField
             wide
-            isAllow={allowPositiveValuesNumberFormat(
+            isAllowed={allowPositiveValuesNumberFormat(
               CURRENCY_FRACTIONS(currency)
             )}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
@@ -114,7 +121,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           {followCurrency !== currency && (
             <NumberFormat
               value={formatCurrencyValue(
-                convertToCurrency(depositAmount, rate),
+                convertToCurrency(+depositAmount, rate),
                 followCurrency
               )}
               prefix="≈ "
@@ -124,57 +131,26 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           )}
         </DialogField>
         <DialogButtons>
-          <GVButton
-            wide
-            onClick={handleNext}
-            className="invest-form__submit-button"
-            disabled={disableButton}
-          >
+          <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
 
-interface OwnProps {
+export interface CreateAccountFormProps {
   minDeposit: number;
   wallets: WalletData[];
-  followCurrency: string;
+  followCurrency: CurrencyEnum;
   onClick: (values: CreateAccountFormValues) => void;
 }
 
 export interface CreateAccountFormValues {
   [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.currency]: any;
-  [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number;
-  [CREATE_ACCOUNT_FORM_FIELDS.rate]: number;
+  [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number | string;
 }
 
-export interface CreateAccountFormProps
-  extends OwnProps,
-    WithTranslation,
-    FormikProps<CreateAccountFormValues> {}
-
-const FollowCreateAccount = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik({
-    displayName: "follow-create-account",
-    mapPropsToValues: ({ wallets, followCurrency }: CreateAccountFormProps) => {
-      const wallet = wallets.find(wallet => wallet.currency === followCurrency);
-      return {
-        [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: wallet
-          ? wallet.id
-          : wallets[0].id,
-        [CREATE_ACCOUNT_FORM_FIELDS.currency]: followCurrency,
-        [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: "",
-        [CREATE_ACCOUNT_FORM_FIELDS.rate]: 1
-      };
-    },
-    validationSchema: CreateAccountFormValidationSchema,
-    handleSubmit: () => {}
-  }),
-  React.memo
-)(_FollowCreateAccount);
+const FollowCreateAccount = React.memo(_FollowCreateAccount);
 export default FollowCreateAccount;

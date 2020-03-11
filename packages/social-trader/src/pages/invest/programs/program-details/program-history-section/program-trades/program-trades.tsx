@@ -1,5 +1,6 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { Row } from "components/row/row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "components/table/components/table-container";
@@ -15,6 +16,7 @@ import DownloadButtonToolbarAuth from "pages/invest/programs/program-details/pro
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { RootState } from "reducers/root-reducer";
 import filesService from "services/file-service";
 
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
@@ -22,6 +24,7 @@ import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramTradesRow from "./program-trades-row";
 
 const _ProgramTrades: React.FC<Props> = ({
+  itemSelector,
   title,
   assetType = CREATE_ASSET.PROGRAM,
   haveDelay,
@@ -35,13 +38,12 @@ const _ProgramTrades: React.FC<Props> = ({
   const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
   const {
     itemsData: { data }
-  } = useSelector(dataSelector);
+  } = useSelector(itemSelector);
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
-
   return (
     <TableContainer
       exportButtonToolbarRender={(filtering: any) => (
-        <div className="details-trades__toolbar">
+        <Row>
           {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
             {assetType === CREATE_ASSET.PROGRAM ? (
@@ -59,7 +61,7 @@ const _ProgramTrades: React.FC<Props> = ({
               />
             )}
           </div>
-        </div>
+        </Row>
       )}
       getItems={getItems}
       dataSelector={dataSelector}
@@ -93,6 +95,7 @@ const _ProgramTrades: React.FC<Props> = ({
 };
 
 interface Props {
+  itemSelector: (state: RootState) => { [keys: string]: any };
   title: string;
   assetType?: CREATE_ASSET;
   haveDelay: boolean;

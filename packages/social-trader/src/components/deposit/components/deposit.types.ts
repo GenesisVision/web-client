@@ -1,3 +1,4 @@
+import { AmountWithCurrency } from "gv-api-web";
 import { CurrencyEnum } from "utils/types";
 
 export type TFees = { gvCommission: number; entryFee?: number };
@@ -13,3 +14,5 @@ export type TAssetDeposit = ({
   id,
   amount
 }: TAssetInvestCreatorArgs) => Promise<any>;
+
+export type MinDepositType = AmountWithCurrency[];

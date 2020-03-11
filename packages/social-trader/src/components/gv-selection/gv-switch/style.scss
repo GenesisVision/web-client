@@ -99,14 +99,11 @@
   }
 
   &__label {
-    @include font-size($font-size-h4);
     cursor: pointer;
     font-weight: normal;
     line-height: 1.38;
-    letter-spacing: 0.2px;
     user-select: none;
     margin-right: 10px;
-    color: $label-color;
   }
 
   &__error {

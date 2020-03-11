@@ -1,5 +1,3 @@
-import "./dialog.scss";
-
 import * as React from "react";
 
 export const _DialogListItem: React.FC<React.HTMLAttributes<HTMLDivElement> &

@@ -8,6 +8,8 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import ClearButton from "components/notifications/components/ClearButton";
 import NotificationsGroup from "components/notifications/components/notification-group/notification-group";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Spinner from "components/spiner/spiner";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
@@ -84,30 +86,28 @@ const _Notifications: React.FC<Props> = ({
   return (
     <div className="notifications">
       <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-        <div className="notifications__header">
-          <div className="notifications__ring">
+        <Row className="notifications__header">
+          <RowItem className="notifications__ring">
             <RingIcon />
-          </div>
-          <div className="notifications__header-title">
+          </RowItem>
+          <RowItem className="notifications__header-title">
             {t("notifications-aside.header")}
-          </div>
-          <div className="notifications__count">
+          </RowItem>
+          <RowItem>
             <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
               {count}
             </Chip>
-          </div>
-          <div className="notifications__clear">
-            {count !== 0 && <ClearButton />}
-          </div>
+          </RowItem>
+          <RowItem>{count !== 0 && <ClearButton />}</RowItem>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}
-            onClick={() => closeNotifications()}
+            onClick={closeNotifications}
           >
             <div className="profile-avatar notifications__link">
               <Icon type={"controls"} />
             </div>
           </Link>
-        </div>
+        </Row>
         <div className="notifications__content">
           {Object.keys(groups)
             .sort(sortGroups)
@@ -123,9 +123,9 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: () => void;
-  clearNotifications: () => void;
-  closeNotifications: () => void;
+  fetchNotifications: VoidFunction;
+  clearNotifications: VoidFunction;
+  closeNotifications: VoidFunction;
   count: number;
   total: number;
   notifications: NotificationViewModel[];

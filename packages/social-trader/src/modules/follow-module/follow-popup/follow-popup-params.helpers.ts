@@ -1,8 +1,10 @@
-import { SubscriptionMode } from "gv-api-web";
+import { SignalSubscription, SubscriptionMode } from "gv-api-web";
+import { TFunction } from "i18next";
 import {
   FollowParamsFormValues,
   IFollowParamsProps
 } from "modules/follow-module/follow-popup/follow-popup-params";
+import { CurrencyEnum } from "utils/types";
 import { lazy, number, object } from "yup";
 
 export enum FOLLOW_PARAMS_FIELDS {
@@ -40,7 +42,10 @@ export const modes: { [key: string]: mode } = {
 export const followParamsMapPropsToValues = ({
   paramsSubscription,
   subscribeFixedCurrencies
-}: IFollowParamsProps) => {
+}: {
+  subscribeFixedCurrencies: string[];
+  paramsSubscription?: SignalSubscription;
+}) => {
   return {
     [FOLLOW_PARAMS_FIELDS.fixedCurrency]: subscribeFixedCurrencies[0],
     [FOLLOW_PARAMS_FIELDS.mode]: paramsSubscription
@@ -60,7 +65,7 @@ export const followParamsMapPropsToValues = ({
   };
 };
 
-export const followParamsValidationSchema = ({ t }: IFollowParamsProps) =>
+export const followParamsValidationSchema = (t: TFunction) =>
   lazy<FollowParamsFormValues>(values => {
     const fixedCurrency = values[FOLLOW_PARAMS_FIELDS.fixedCurrency];
     const mode = values[FOLLOW_PARAMS_FIELDS.mode];
@@ -93,3 +98,15 @@ export const followParamsValidationSchema = ({ t }: IFollowParamsProps) =>
         .max(20, t("follow-program.params.validation.tolerance-percent-max"))
     });
   });
+
+export const getInfoText = (currency: CurrencyEnum): string => {
+  switch (currency) {
+    case "ETH":
+      return "follow-program.info.ETH";
+    case "BTC":
+      return "follow-program.info.BTC";
+    case "USDT":
+    default:
+      return "follow-program.info.USDT";
+  }
+};

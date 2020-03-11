@@ -4,8 +4,8 @@
 
 .active {
   &__description {
-    @include font-size($font-size-paragraph);
-    @include line-height($font-size-paragraph * 1.8);
+    font-size: $font-size-paragraph;
+    line-height: $font-size-paragraph * 1.8;
   }
   &__popup {
     box-sizing: border-box;

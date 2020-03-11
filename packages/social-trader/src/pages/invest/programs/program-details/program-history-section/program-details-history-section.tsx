@@ -112,6 +112,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       </DetailsBlockTabs>
       {tab === TABS.TRADES && (
         <ProgramTrades
+          itemSelector={trades.itemSelector!}
           title={title}
           assetType={assetType}
           haveDelay={haveDelay}

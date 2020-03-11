@@ -6,7 +6,6 @@ import {
   ProgramDetailsFull,
   ProgramFollowDetailsFull
 } from "gv-api-web";
-import { SetSubmittingType } from "utils/types";
 
 export type AssetDescriptionType = ProgramDetailsFull &
   FundDetailsFull &
@@ -22,6 +21,5 @@ export type TUpdateAssetFunc = (
     hasInvestmentLimit?: number;
     stopOutLevel?: number;
   },
-  setSubmitting: SetSubmittingType,
   resetForm?: () => void
 ) => void;

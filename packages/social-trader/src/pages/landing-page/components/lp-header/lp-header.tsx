@@ -2,13 +2,15 @@ import "./lp-header.scss";
 
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link from "components/link/link";
+import useIsOpen from "hooks/is-open.hook";
 import logo from "media/logo.svg";
+import SignupDialog from "pages/auth/signup/signup-popup/signup-dialog";
 import { JoinButton } from "pages/landing-page/components/join-button";
 import MobileNav from "pages/landing-page/components/mobile-nav/mobile-nav";
 import NavList from "pages/landing-page/components/nav/nav-list";
 import { navFooter, navHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
-import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import { HOME_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 
@@ -37,17 +39,37 @@ const LPHeader: React.FC = () => {
           </div>
           <NavList menuItems={navHeader} className="lp-header__nav" />
           <div className="lp-header__start-btn">
-            <JoinButton
-              eventLabel={isAuthenticated ? "Dashboard" : "Get started"}
-              color="secondary"
-              href={isAuthenticated ? OVERVIEW_ROUTE : SIGNUP_ROUTE}
-            >
-              {isAuthenticated ? "Dashboard" : "Get started"}
-            </JoinButton>
+            {isAuthenticated ? (
+              <JoinButton
+                eventLabel={"Dashboard"}
+                color="secondary"
+                href={OVERVIEW_ROUTE}
+              >
+                Dashboard
+              </JoinButton>
+            ) : (
+              <SignupButton />
+            )}
           </div>
         </div>
       </div>
     </header>
+  );
+};
+
+const SignupButton: React.FC = () => {
+  const [isOpen, setOpen, setClose] = useIsOpen();
+  return (
+    <>
+      <JoinButton
+        eventLabel={"Get started"}
+        color="secondary"
+        onClick={setOpen}
+      >
+        Get started
+      </JoinButton>
+      <SignupDialog open={isOpen} onClose={setClose} />
+    </>
   );
 };
 

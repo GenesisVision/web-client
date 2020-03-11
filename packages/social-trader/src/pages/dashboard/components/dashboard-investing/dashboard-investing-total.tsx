@@ -3,6 +3,7 @@ import "./dashboard-investing.scss";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
+import { hasProfits } from "pages/dashboard/dashboard.helpers";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
@@ -12,10 +13,6 @@ const _DashboardInvestingTotal: React.FC<Props> = ({
   currency,
   data: { profits, equity, fundsCount, programsCount }
 }) => {
-  const hasProfits =
-    Object.values(profits)
-      .map(({ profit }) => profit)
-      .reduce((prev, cur) => prev + cur, 0) !== 0;
   return (
     <div className="dashboard-investing__values">
       <DashboardInvestingCounts
@@ -24,7 +21,7 @@ const _DashboardInvestingTotal: React.FC<Props> = ({
         programs={programsCount}
         funds={fundsCount}
       />
-      {hasProfits && (
+      {hasProfits(profits) && (
         <DashboardStatisticPeriods
           data={profits}
           currency={currency}

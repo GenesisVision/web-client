@@ -1,5 +1,3 @@
-import "./active.scss";
-
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 

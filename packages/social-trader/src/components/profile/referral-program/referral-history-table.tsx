@@ -5,7 +5,7 @@ import {
   DateRangeFilterType
 } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "components/table/components/table-cell";
-import TableContainer from "components/table/components/table-container";
+import TableModule from "components/table/components/table-module";
 import TableRow from "components/table/components/table-row";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import dayjs from "dayjs";
@@ -13,7 +13,10 @@ import { saveAs } from "file-saver";
 import { RewardDetails } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { referralHistoryTableSelector } from "reducers/profile-reducer";
+import {
+  REFERRAL_HISTORY_DEFAULT_FILTERS,
+  REFERRAL_HISTORY_FILTERING
+} from "reducers/profile-reducer";
 import filesService from "services/file-service";
 import { formatDate } from "utils/dates";
 import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
@@ -23,15 +26,15 @@ import { getHistoryTable } from "./services/referral-program-services";
 const _ReferralHistoryTable: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <TableContainer
-      loaderData={ReferralFriendsLoaderData}
+    <TableModule
+      loaderData={ReferralHistoryLoaderData}
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadReferralHistoryButton dateRange={filtering!.dateRange} />
       )}
       title={t("profile-page.referral-program.referral-history.title")}
       getItems={getHistoryTable}
-      dataSelector={referralHistoryTableSelector}
-      isFetchOnMount={true}
+      filtering={REFERRAL_HISTORY_FILTERING}
+      defaultFilters={REFERRAL_HISTORY_DEFAULT_FILTERS}
       columns={COLUMNS}
       renderFilters={(updateFilter, filtering) => (
         <DateRangeFilter
@@ -83,14 +86,14 @@ const COLUMNS = [
   }
 ];
 
-const getReferralFriendLoaderData = (): RewardDetails => ({
+const getReferralHistoryLoaderData = (): RewardDetails => ({
   date: (new Date().toString() as unknown) as Date,
   currency: "GVT",
   amount: getRandomInteger(1, 100)
 });
 
-export const ReferralFriendsLoaderData = tableLoaderCreator(
-  getReferralFriendLoaderData
+export const ReferralHistoryLoaderData = tableLoaderCreator(
+  getReferralHistoryLoaderData
 );
 
 export const ReferralHistoryTable = React.memo(_ReferralHistoryTable);

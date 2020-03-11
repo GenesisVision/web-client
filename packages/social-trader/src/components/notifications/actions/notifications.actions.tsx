@@ -3,17 +3,10 @@ import { NotificationViewModel } from "gv-api-web";
 import { Action } from "redux";
 import { ActionType } from "utils/types";
 
-import { IsOpenState } from "../reducers/is-open.reducer";
-
-export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
 export const SET_NOTIFICATIONS_OPTIONS = "SET_NOTIFICATIONS_OPTIONS";
 export const ADD_TOTAL_NOTIFICATIONS = "ADD_TOTAL_NOTIFICATIONS";
 export const TAKE_COUNT = 10;
-
-export interface NotificationToggleAction extends ActionType<IsOpenState> {
-  type: typeof NOTIFICATIONS_TOGGLE;
-}
 
 export interface AddNotificationsAction
   extends ActionType<Array<NotificationViewModel>> {
@@ -36,13 +29,6 @@ export type SkipTake = Readonly<{
   skip: number;
   take: number;
 }>;
-
-export const notificationsToggleAction = (
-  payload: IsOpenState
-): NotificationToggleAction => ({
-  type: NOTIFICATIONS_TOGGLE,
-  payload
-});
 
 export const addNotificationsAction = (
   payload: Array<NotificationViewModel>

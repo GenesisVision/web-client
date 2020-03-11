@@ -1,5 +1,5 @@
-import "./tag-program-container.scss";
-
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Tooltip from "components/tooltip/tooltip";
 import { Tag } from "gv-api-web";
 import * as React from "react";
@@ -13,23 +13,25 @@ const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
   const length = tags.length;
   const remainder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
   return (
-    <div className="tag-program-container">
+    <Row small>
       {tags.map(
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
-            <TagItem name={tag.name} color={tag.color} key={idx} />
+            <RowItem small>
+              <TagItem name={tag.name} color={tag.color} key={idx} />
+            </RowItem>
           )
       )}
       {remainder && (
-        <Tooltip render={() => <TagItemTooltip tags={tags} />}>
-          <div className="tag-program-container__others">
-            <div className="tag-button tag-button--remainder">
+        <RowItem>
+          <Tooltip render={() => <TagItemTooltip tags={tags} />}>
+            <div className="tag-item tag-button tag-button--remainder">
               + {remainder}
             </div>
-          </div>
-        </Tooltip>
+          </Tooltip>
+        </RowItem>
       )}
-    </div>
+    </Row>
   );
 });
 

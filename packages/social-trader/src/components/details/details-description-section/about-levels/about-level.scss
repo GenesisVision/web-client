@@ -28,10 +28,6 @@ $mobile-title-divider: 2;
     justify-content: flex-start;
     align-items: stretch;
   }
-  &__description {
-    font-size: $large-font-size/$mobile-title-divider;
-    color: $label-color;
-  }
   &__row {
     display: flex;
     flex-direction: column;
@@ -45,11 +41,6 @@ $mobile-title-divider: 2;
   &__paragraph {
     & b {
       font-weight: 600;
-    }
-    &--mute {
-      padding-top: $padding-small/$mobile-padding-divider;
-      padding-bottom: $padding-large/$mobile-padding-divider;
-      color: $label-color;
     }
   }
   &__subtitle {
@@ -83,30 +74,6 @@ $mobile-title-divider: 2;
       padding-bottom: $small-padding;
     }
   }
-  &__table {
-    padding-bottom: $padding-big/$mobile-padding-divider;
-    font-size: $middle-font-size/$mobile-text-divider;
-    table {
-      border-spacing: 0;
-      width: 100%;
-      th {
-        font-weight: 200;
-        color: $label-color;
-        text-align: left;
-      }
-      tbody {
-        tr {
-          background: rgba(232, 239, 243, 0.04);
-        }
-        tr:nth-child(even) {
-          background: none;
-        }
-      }
-      .total-profit {
-        text-align: right;
-      }
-    }
-  }
   &__right-block {
     padding: $padding-small/$mobile-title-divider;
     background: rgba(232, 239, 243, 0.04);
@@ -129,13 +96,6 @@ $mobile-title-divider: 2;
   }
   &__select {
     padding: 0 $small-padding;
-  }
-  &__mute-title {
-    color: $label-color;
-    font-size: $small-font-size/$mobile-text-divider;
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-    padding-bottom: 5px;
   }
   &__values {
     padding: 0 $small-padding;
@@ -167,9 +127,6 @@ $mobile-title-divider: 2;
       margin-left: $padding-small;
       padding: $padding-small;
       max-width: 300px;
-    }
-    &__mute-title {
-      font-size: $small-font-size;
     }
     &__value {
       font-size: $middle-font-size;

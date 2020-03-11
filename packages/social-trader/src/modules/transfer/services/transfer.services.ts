@@ -14,11 +14,9 @@ export const fetchTradingAccounts = (currency: CurrencyEnum) =>
     .getAccountsAvailable(currency, authService.getAuthArg())
     .then(({ wallets }) => wallets);
 
-export const transferRequest = (
-  request: Pick<TransferFormValues, keyof InternalTransferRequest>
-): Promise<any> =>
+export const transferRequest = (body: InternalTransferRequest): Promise<any> =>
   walletApi.transfer(authService.getAuthArg(), {
-    body: request as InternalTransferRequest
+    body
   });
 
 export const getTransferAll = (

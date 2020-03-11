@@ -1,41 +1,50 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import { FormikProps, withFormik } from "formik";
 import { SignalDetachMode } from "gv-api-web";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
+import { HookForm } from "utils/hook-form.helpers";
+
+enum FIELDS {
+  mode = "mode"
+}
 
 const _UnfollowForm: React.FC<Props> = ({
-  isExternal,
-  handleSubmit,
-  isSubmitting
+  onSubmit,
+  errorMessage,
+  isExternal
 }) => {
   const [t] = useTranslation();
+  const form = useForm<IProgramUnfollowFormValues>({
+    defaultValues: {
+      [FIELDS.mode]: modes.none.value as SignalDetachMode
+    },
+    mode: "onBlur"
+  });
+
   const modesList = (isExternal && [MODE_NONE]) || Object.keys(modes);
   return (
-    <form id="unfollow-form" onSubmit={handleSubmit} noValidate>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop title={t("unfollow-program.title")} />
       <DialogBottom>
-        <GVFormikField
+        <GVHookFormField
+          wide
           disableIfSingle
           name={FIELDS.mode}
-          component={GVTextField}
+          component={SimpleTextField}
           label={t("unfollow-program.type")}
           InputComponent={Select}
         >
           {modesList.map((mode: string) => (
-            <option
-              value={String(modes[mode].value as string)}
-              key={String(modes[mode].value)}
-            >
+            <option value={modes[mode].value} key={modes[mode].value}>
               <Tooltip
                 render={() => (
                   <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
@@ -45,25 +54,21 @@ const _UnfollowForm: React.FC<Props> = ({
               </Tooltip>
             </option>
           ))}
-        </GVFormikField>
+        </GVHookFormField>
         <DialogButtons>
-          <GVButton
+          <SubmitButton
             wide
-            type="submit"
+            checkDirty={false}
             className="invest-form__submit-button"
-            disabled={isSubmitting}
+            isSuccessful={!errorMessage}
           >
             {t("unfollow-program.submit")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
-
-enum FIELDS {
-  mode = "mode"
-}
 
 type mode = {
   label: string;
@@ -93,7 +98,8 @@ const modes: { [key: string]: mode } = {
   }
 };
 
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   isExternal: boolean;
   onSubmit: (values: IProgramUnfollowFormValues) => void;
 }
@@ -102,18 +108,5 @@ export interface IProgramUnfollowFormValues {
   [FIELDS.mode]: SignalDetachMode;
 }
 
-interface Props extends OwnProps, FormikProps<IProgramUnfollowFormValues> {}
-
-const UnfollowForm = compose<React.ComponentType<OwnProps>>(
-  withFormik<OwnProps, IProgramUnfollowFormValues>({
-    displayName: "confirm-form",
-    mapPropsToValues: () => ({
-      [FIELDS.mode]: modes.none.value as SignalDetachMode
-    }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
-    }
-  }),
-  React.memo
-)(_UnfollowForm);
+const UnfollowForm = React.memo(_UnfollowForm);
 export default UnfollowForm;

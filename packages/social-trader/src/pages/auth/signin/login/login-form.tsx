@@ -1,13 +1,17 @@
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
-import { InjectedFormikProps, withFormik } from "formik";
-import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 import validationSchema from "./login-form.validators";
@@ -17,59 +21,67 @@ enum FIELDS {
   password = "password"
 }
 
-const _LoginForm: React.FC<InjectedFormikProps<
-  Props,
-  ILoginFormFormValues
->> = ({ t, isSubmitting, handleSubmit, error, isValid }) => (
-  <form
-    id="loginForm"
-    className="login-form"
-    onSubmit={handleSubmit}
-    noValidate
-  >
-    <GVFormikField
-      autoFocus
-      type="email"
-      name={FIELDS.email}
-      label={t("auth.login.placeholder.email")}
-      autoComplete="email"
-      component={GVTextField}
-    />
-    <GVFormikField
-      type="password"
-      name={FIELDS.password}
-      label={t("auth.login.placeholder.password")}
-      autoComplete="current-password"
-      component={GVTextField}
-    />
+const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
+  const [t] = useTranslation();
 
-    <div className="login-form__forgot">
-      <Link to={FORGOT_PASSWORD_ROUTE}>
-        <GVButton noPadding variant="text">
-          {t("auth.login.forgot")}
-        </GVButton>
-      </Link>
-    </div>
-    <FormError error={error} />
+  const form = useForm<ILoginFormFormValues>({
+    defaultValues: {
+      [FIELDS.email]: "",
+      [FIELDS.password]: ""
+    },
+    validationSchema: validationSchema,
+    mode: "onChange"
+  });
 
-    <div className="login__submit-block">
-      <GVButton
-        className="login__submit-button"
-        id="loginSubmit"
-        disabled={isSubmitting || !isValid}
-        type="submit"
-      >
-        {t("auth.login.confirm-button-text")}
-      </GVButton>
-    </div>
-  </form>
-);
+  const requestStatus = useContext(CaptchaStatusContext);
 
-interface Props extends OwnProps, WithTranslation {}
+  return (
+    <HookForm className="login-form" form={form} onSubmit={onSubmit}>
+      <GVHookFormField
+        autoFocus
+        type="email"
+        name={FIELDS.email}
+        label={t("auth.login.placeholder.email")}
+        autoComplete="email"
+        component={SimpleTextField}
+      />
+      <GVHookFormField
+        type="password"
+        name={FIELDS.password}
+        label={t("auth.login.placeholder.password")}
+        autoComplete="current-password"
+        component={SimpleTextField}
+      />
 
-interface OwnProps {
-  onSubmit(data: ILoginFormFormValues, setSubmitting: SetSubmittingType): void;
-  error: string;
+      <div className="login-form__forgot">
+        <Link to={FORGOT_PASSWORD_ROUTE}>
+          <GVButton noPadding variant="text">
+            {t("auth.login.forgot")}
+          </GVButton>
+        </Link>
+      </div>
+      <FormError error={errorMessage} />
+
+      <div className="login__submit-block">
+        <SubmitButton
+          checkValid={false}
+          checkDirty={false}
+          className="login__submit-button"
+          id="loginSubmit"
+          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+        >
+          {t("auth.login.confirm-button-text")}
+        </SubmitButton>
+      </div>
+    </HookForm>
+  );
+};
+
+interface Props {
+  onSubmit: (data: ILoginFormFormValues) => void;
+  errorMessage: string;
 }
 
 export interface ILoginFormFormValues {
@@ -77,20 +89,5 @@ export interface ILoginFormFormValues {
   [FIELDS.password]: string;
 }
 
-const LoginForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, ILoginFormFormValues>({
-    displayName: "loginForm",
-    isInitialValid: true,
-    mapPropsToValues: () => ({
-      [FIELDS.email]: "",
-      [FIELDS.password]: ""
-    }),
-    validationSchema: validationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_LoginForm);
+const LoginForm = React.memo(_LoginForm);
 export default LoginForm;

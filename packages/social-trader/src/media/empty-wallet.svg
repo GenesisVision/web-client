@@ -10,7 +10,7 @@
             <stop stop-color="#1B252D" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="ui" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="1600_3_1_0_wallet-" transform="translate(-765.000000, -754.000000)">
             <g id="Group-6" transform="translate(702.000000, 756.000000)">
                 <g id="Group-2">
@@ -19,7 +19,7 @@
                         <path d="M-3.57402996e-12,9.04166667 L-3.57402996e-12,54.6365851 C-3.57402996e-12,58.7033438 3.28002668,62 7.32627111,62 L64.3930271,62 C68.4392716,62 71.7192982,58.7033438 71.7192982,54.6365851 C71.7192982,51.8117996 71.7192982,27.1673007 71.7192982,25.754908 M71.7192982,29.7083333 C71.7192982,28.262091 71.7192982,25.9608461 71.7192982,22.8045987 C71.7192982,18.7387309 68.4392681,15.4427969 64.3930193,15.4427969 L8.11876658,15.4427969 C3.95835347,15.4427969 0.228252214,12.3123213 0.0109008167,8.13614783 C-0.221818861,3.68421011 3.30190834,0 7.68406379,0 L66.7192982,0" id="Stroke-1" stroke="#00BDAF" stroke-width="3" stroke-linejoin="round"></path>
                     </g>
                     <g id="Group-18" transform="translate(0.000000, 35.000000)" fill="#1C373D" stroke="#00BDAF" stroke-width="2.8">
-                        <g id="Group-16">
+                        <g>
                             <g id="Group-3" transform="translate(115.000000, 0.000000)">
                                 <circle id="Oval" cx="17.5" cy="17.5" r="18.9"></circle>
                             </g>

@@ -1,95 +1,82 @@
 import "./gv-checkbox.scss";
 
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
-import { RefObject } from "react";
+import { useCallback, useRef } from "react";
+
+const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
+  setFieldValue,
+  touched,
+  error,
+  name,
+  className,
+  color,
+  value,
+  label,
+  disabled,
+  ...other
+}) => {
+  const checkbox = useRef<HTMLInputElement>(null);
+
+  const handleBlockClick = useCallback(
+    (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+      e.stopPropagation();
+      if (setFieldValue) setFieldValue(name, !value, true);
+      if (checkbox.current !== null) {
+        checkbox.current.click(); // TODO remove it
+      }
+    },
+    [checkbox.current, setFieldValue, name, value]
+  );
+
+  return (
+    <div className="gv-checkbox-wrapper" onClick={handleBlockClick}>
+      <div
+        className={classNames("gv-checkbox", className, {
+          "gv-checkbox--checked": value,
+          "gv-checkbox--primary": color === "primary",
+          "gv-checkbox--secondary": color === "secondary",
+          "gv-checkbox--disabled": disabled
+        })}
+      >
+        <div className="gv-checkbox__input-wrapper">
+          <div>
+            {value ? "✔" : <div className="gv-checkbox__handler">&nbsp;</div>}
+          </div>
+          <input
+            ref={checkbox}
+            type="checkbox"
+            name={name}
+            className={classNames("gv-checkbox__input")}
+            checked={value}
+            disabled={disabled}
+            {...other}
+          />
+        </div>
+        <div className="gv-checkbox__track" />
+      </div>
+      {label && (
+        <div className="gv-checkbox__label">
+          <MutedText big>{label}</MutedText>
+        </div>
+      )}
+      {error && <div className="gv-checkbox__error">{error}</div>}
+    </div>
+  );
+};
 
 interface IGVCheckboxProps {
+  setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   name: string;
   className?: string;
   color: string;
   value: any;
-  touched: boolean;
-  disabled: boolean;
-  error: any;
+  touched?: boolean;
+  disabled?: boolean;
+  error?: any;
   label: string;
 }
 
-class GVCheckbox extends React.PureComponent<IGVCheckboxProps> {
-  checkbox: RefObject<HTMLInputElement> = React.createRef();
-
-  handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    if (this.checkbox.current !== null) {
-      e.stopPropagation();
-      this.checkbox.current.click();
-    }
-  };
-
-  handleInputClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.stopPropagation();
-  };
-
-  renderLabel = (): React.ReactNode => {
-    const { label } = this.props;
-    if (!label) return null;
-
-    return (
-      <span className={"gv-checkbox__label"} onClick={this.handleClick}>
-        {label}
-      </span>
-    );
-  };
-
-  renderError = (): React.ReactNode => {
-    const { touched, error } = this.props;
-    if (!touched || !error) return null;
-
-    return <span className={"gv-checkbox__error"}>{error}</span>;
-  };
-
-  render() {
-    const {
-      name,
-      className,
-      color,
-      value,
-      touched,
-      disabled,
-      ...other
-    } = this.props;
-    return (
-      <span className={"gv-checkbox-wrapper"}>
-        <span
-          className={classNames("gv-checkbox", className, {
-            "gv-checkbox--checked": value,
-            "gv-checkbox--primary": color === "primary",
-            "gv-checkbox--secondary": color === "secondary",
-            "gv-checkbox--disabled": disabled
-          })}
-          onClick={this.handleClick}
-        >
-          <span className={"gv-checkbox__input-wrapper"}>
-            <span className={"gv-checkbox__handler"}>
-              {value ? "✔" : "&nbsp;"}
-            </span>
-            <input
-              ref={this.checkbox}
-              type="checkbox"
-              name={name}
-              className={classNames("gv-checkbox__input")}
-              checked={value}
-              onClick={this.handleInputClick}
-              disabled={disabled}
-              {...other}
-            />
-          </span>
-          <span className={"gv-checkbox__track"} />
-        </span>
-        {this.renderLabel()}
-        {this.renderError()}
-      </span>
-    );
-  }
-}
-
+const GVCheckbox = React.memo(_GVCheckbox);
 export default GVCheckbox;

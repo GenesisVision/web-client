@@ -1,4 +1,5 @@
 import withAuthLayout from "decorators/with-auth-layout";
+import { useEmailPendingState } from "pages/auth/auth.service";
 import LoginFooter from "pages/auth/components/login-footer/login-footer";
 import EmailPendingPage from "pages/auth/forgot-password/email-pending/email-pending.page";
 import React from "react";
@@ -11,7 +12,9 @@ const Page: NextPageWithRedux<any> = () => {
 };
 
 Page.getInitialProps = async ctx => {
-  const { email } = ctx.reduxStore.getState().emailPending;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getEmailPendingState } = useEmailPendingState(ctx);
+  const { email } = getEmailPendingState();
   redirect(ctx, email.length === 0);
 };
 

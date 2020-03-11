@@ -1,4 +1,8 @@
+import "./wallet-title-block.scss";
+
 import Page from "components/page/page";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import {
   withBlurLoader,
   WithBlurLoaderProps
@@ -16,13 +20,15 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
     <Page title={t("wallet-page.title")}>
-      <div className="wallet-balance">
-        <div className="wallet-balance__wrapper">
-          <div className="wallet-balance__title">
+      <div className="wallet-title-block">
+        <Row wrap>
+          <RowItem className="wallet-title-block__title">
             <h1>{t("wallet-page.title")}</h1>
-          </div>
-          <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
-        </div>
+          </RowItem>
+          <RowItem>
+            <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
+          </RowItem>
+        </Row>
         <WalletBalanceElements
           available={wallet.grandTotal.available}
           pending={wallet.grandTotal.trading}

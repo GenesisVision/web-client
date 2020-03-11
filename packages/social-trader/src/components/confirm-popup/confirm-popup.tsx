@@ -1,7 +1,6 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React from "react";
-import { SetSubmittingType } from "utils/types";
 
 const ConfirmPopupContent = dynamic(() =>
   import("components/confirm-popup/confirm-popup-content")
@@ -20,12 +19,12 @@ const ConfirmPopup = React.memo(_ConfirmPopup);
 export default ConfirmPopup;
 
 export interface Props extends IDialogProps {
-  onApply(setSubmitting: SetSubmittingType): void;
-  onCancel?(): void;
+  errorMessage?: string;
+  onApply: () => void;
+  onCancel?: () => void;
   header?: string;
   body?: React.ReactNode;
   applyButtonText?: string;
   cancelButtonText?: string;
-  className?: string;
   disabled?: boolean;
 }

@@ -1,4 +1,7 @@
 import { ApiClient } from "gv-api-web";
+import { getApiUrl } from "utils/config-helpers";
 
-const newClient = new ApiClient(process.env.REACT_APP_API_URL);
+const apiUrl = getApiUrl();
+
+const newClient = new ApiClient(apiUrl);
 export default newClient;

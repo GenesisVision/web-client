@@ -11,8 +11,6 @@ import { Dispatch } from "redux";
 import { getCookie } from "utils/cookie";
 import { NextPageWithReduxContext } from "utils/types";
 
-// LogRocket.init("skegn6/genesis-vision");
-
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
     info: PlatformInfo;
@@ -20,26 +18,30 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   }> {
     static async getInitialProps(ctx: NextPageWithReduxContext) {
       let componentProps = {};
-      try {
-        await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
+      await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
+        await dispatch(changeLocationAction());
+      });
+      await Promise.all([
+        WrappedComponent.getInitialProps &&
+          WrappedComponent.getInitialProps(ctx),
+        ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
           await dispatch(platformActions.fetchPlatformSettings());
-          await dispatch(changeLocationAction());
+        }),
+        () => {
+          const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
+          if (currencyFromCookie) {
+            ctx.reduxStore.dispatch(
+              updateCurrency(currencyFromCookie as Currency)
+            );
+          }
+        }
+      ])
+        .then(([data]) => {
+          if (data) componentProps = data;
+        })
+        .catch(ex => {
+          componentProps = { ex };
         });
-      } catch (e) {
-        componentProps = { e };
-      }
-      try {
-        componentProps =
-          WrappedComponent.getInitialProps &&
-          (await WrappedComponent.getInitialProps(ctx));
-      } catch (ex) {
-        componentProps = { ex };
-      }
-      const currencyFromCookie = getCookie(ACCOUNT_CURRENCY_KEY, ctx);
-      if (currencyFromCookie) {
-        ctx.reduxStore.dispatch(updateCurrency(currencyFromCookie as Currency));
-      }
-
       return {
         namespacesRequired: ["translation"],
         ...componentProps

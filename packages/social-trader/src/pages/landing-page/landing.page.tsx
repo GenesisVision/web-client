@@ -31,8 +31,7 @@ const _LandingPage: React.FC<Props> = ({
   funds,
   follows,
   events,
-  news,
-  refLink
+  news
 }) => {
   useUtm();
   return (

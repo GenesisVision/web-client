@@ -37,6 +37,7 @@ const DownloadsSection: React.FC = () => {
             title={"Download Metatrader for IOS"}
             href="https://itunes.apple.com/app/metatrader-5-forex-stocks/id413251709"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Version for IOS
           </a>
@@ -45,6 +46,7 @@ const DownloadsSection: React.FC = () => {
             title={"Download Metatrader for Android"}
             href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Version for Android
           </a>
@@ -61,6 +63,7 @@ const DownloadsSection: React.FC = () => {
             title={"Login to platform"}
             href="https://genesismarkets.io/profile/webterminal"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Login to platform
           </a>

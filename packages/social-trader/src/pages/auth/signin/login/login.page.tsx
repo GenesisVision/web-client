@@ -14,8 +14,8 @@ const _LoginPage: React.FC<Props> = ({ redirectFrom }) => {
       <SignInContainer
         redirectFrom={redirectFrom}
         className="login"
-        renderForm={(handle, email, errorMessage) => (
-          <LoginForm onSubmit={handle} error={errorMessage} />
+        renderForm={({ handle, errorMessage }) => (
+          <LoginForm onSubmit={handle} errorMessage={errorMessage} />
         )}
       />
     </PageSeoWrapper>

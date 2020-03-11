@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { MANAGER_HISTORY_TAB } from "../manager.constants";
 import { fetchManagerAssetsCount } from "../services/manager.service";
 
+const ManagerFollow = dynamic(() => import("./manager-follow-table"));
 const ManagerFunds = dynamic(() => import("./manager-funds-table"));
 
 const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
@@ -19,13 +20,17 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
   const { tab, setTab } = useTab<MANAGER_HISTORY_TAB>(
     MANAGER_HISTORY_TAB.PROGRAMS
   );
+  const [followCount, setFollowCount] = useState(0);
   const [fundsCount, setFundsCount] = useState(0);
   const [programsCount, setProgramsCount] = useState(0);
   useEffect(() => {
-    fetchManagerAssetsCount(ownerId).then(({ fundsCount, programsCount }) => {
-      setProgramsCount(programsCount);
-      setFundsCount(fundsCount);
-    });
+    fetchManagerAssetsCount(ownerId).then(
+      ({ followCount, fundsCount, programsCount }) => {
+        setFollowCount(followCount);
+        setProgramsCount(programsCount);
+        setFundsCount(fundsCount);
+      }
+    );
   }, [ownerId]);
   return (
     <DetailsBlock table>
@@ -43,12 +48,20 @@ const _ManagerHistorySection: React.FC<Props> = ({ ownerId, title }) => {
           label={t("manager-page.history.tabs.funds")}
           count={fundsCount}
         />
+        <GVTab
+          value={MANAGER_HISTORY_TAB.FOLLOW}
+          label={t("manager-page.history.tabs.follow")}
+          count={followCount}
+        />
       </DetailsBlockTabs>
       {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
         <ManagerPrograms title={title} ownerId={ownerId} />
       )}
       {tab === MANAGER_HISTORY_TAB.FUNDS && (
         <ManagerFunds title={title} ownerId={ownerId} />
+      )}
+      {tab === MANAGER_HISTORY_TAB.FOLLOW && (
+        <ManagerFollow title={title} ownerId={ownerId} />
       )}
     </DetailsBlock>
   );

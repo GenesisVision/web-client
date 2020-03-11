@@ -1,7 +1,7 @@
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
-import ConfirmClosePeriodContainer from "modules/asset-settings/close-period/confirm-close-period-container";
+import ConfirmClosePeriod from "modules/asset-settings/close-period/confirm-close-period";
 import React from "react";
 
 const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({
@@ -19,7 +19,7 @@ const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({
       <TableCardActionsItem onClick={setClosePeriodOpen}>
         {t("dashboard-page.trading.actions.close-period")}
       </TableCardActionsItem>
-      <ConfirmClosePeriodContainer
+      <ConfirmClosePeriod
         open={isClosePeriodOpen}
         onClose={setClosePeriodClose}
         onApply={onApply}

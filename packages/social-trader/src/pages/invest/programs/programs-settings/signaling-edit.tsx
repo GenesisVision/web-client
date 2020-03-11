@@ -31,7 +31,6 @@ const _SignalingEdit: React.FC<Props> = ({
           )}
         </div>
         <SignalingEditFormContainer
-          isSignalProgram={isSignalProgram}
           id={id}
           showFields={isSignal}
           onApply={onApply}

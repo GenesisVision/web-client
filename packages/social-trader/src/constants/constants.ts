@@ -66,3 +66,5 @@ export interface IDashboardAssetChart {
 
 export const DECIMAL_SCALE_SMALL_VALUE = 4;
 export const DECIMAL_SCALE_BIG_VALUE = 2;
+
+export const SHOW_SUCCESS_TIME = 1000;

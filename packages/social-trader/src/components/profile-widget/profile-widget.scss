@@ -29,14 +29,10 @@
 
   &__item {
     min-width: 200px;
-    display: flex;
-    align-items: center;
-    font-size: $font-size-common;
 
     .icon {
       opacity: 0.2;
       background-position: center;
-      margin-right: $padding-xsmall;
       height: 13px;
       width: 13px;
     }
@@ -49,6 +45,7 @@
   }
 
   &__item-label {
+    font-size: $font-size-common;
     color: $text-light-color;
     white-space: nowrap;
   }

@@ -4,7 +4,7 @@ import * as React from "react";
 export const CardsIcon: React.FC<IIconProps> = React.memo(props => (
   <Icon type={"cards"} {...props}>
     <svg width="15" height="15" viewBox="0 0 15 15">
-      <g id="ui" fill="none" fillRule="evenodd" strokeLinejoin="round">
+      <g fill="none" fillRule="evenodd" strokeLinejoin="round">
         <g
           id="1600_0_1_dashboard"
           transform="translate(-1434 -963)"

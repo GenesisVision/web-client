@@ -25,7 +25,8 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   const programsInfo = useSelector(programsInfoSelector);
   const followInfo = useSelector(createFollowInfoSelector);
 
-  const handleCreate = useConvertAssetSubmit({
+  const { handleCreate, errorMessage } = useConvertAssetSubmit({
+    id,
     fromTo,
     condition: ({ twoFactorRequired, programId }) => {
       if (twoFactorRequired) {
@@ -40,6 +41,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   return (
     <AssetContentBlock>
       <ConvertAssetSettings
+        errorMessage={errorMessage}
         followInfo={followInfo}
         currency={currency}
         id={id}
