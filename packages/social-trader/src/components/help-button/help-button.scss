@@ -18,4 +18,9 @@
   font-weight: 700;
   outline: none;
   cursor: pointer;
+
+  &--muted {
+    border-color: $label-color;
+    color: $label-color;
+  }
 }
