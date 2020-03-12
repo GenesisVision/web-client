@@ -18,30 +18,28 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Spinner from "components/spiner/spiner";
 import { NotificationViewModel } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
 const _Notifications: React.FC<Props> = ({
+  isPending,
   notifications = [],
   total = 0,
   count,
-  fetchNotifications,
+  getNotifications,
   closeNotifications
 }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const { isPending, sendRequest } = useApiRequest({
-    request: fetchNotifications
-  });
   useEffect(() => {
     fetchNotification();
   }, []);
-  const fetchNotification = useCallback(() => !isPending && sendRequest(), [
-    isPending
-  ]);
+  const fetchNotification = useCallback(
+    () => !isPending && getNotifications(),
+    [isPending]
+  );
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
@@ -74,7 +72,9 @@ const _Notifications: React.FC<Props> = ({
               {count}
             </Chip>
           </RowItem>
-          <RowItem>{count !== 0 && <ClearButton />}</RowItem>
+          <RowItem>
+            {count !== 0 && <ClearButton onApply={getNotifications} />}
+          </RowItem>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}
             onClick={closeNotifications}
@@ -99,9 +99,10 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: VoidFunction;
+  isPending: boolean;
+  getNotifications: VoidFunction;
   closeNotifications: VoidFunction;
   count: number;
   total: number;
-  notifications: NotificationViewModel[];
+  notifications?: NotificationViewModel[];
 }

@@ -1,42 +1,43 @@
-import { calculateOptions } from "components/notifications/actions/notifications.actions";
 import Notifications from "components/notifications/components/notifications";
-import { initialOptions } from "components/notifications/components/notifications.helpers";
-import { serviceGetNotifications } from "components/notifications/services/notifications.services";
+import {
+  calculateOptions,
+  initialOptions
+} from "components/notifications/components/notifications.helpers";
+import { fetchNotifications } from "components/notifications/services/notifications.services";
 import { NotificationList } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { notificationsCountSelector } from "reducers/header-reducer";
-import { RootState } from "reducers/root-reducer";
-import { ReduxDispatch } from "utils/types";
 
 const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
   const [options, setOptions] = useState(initialOptions);
   const [total, setTotal] = useState(0);
-  const dispatch = useDispatch<ReduxDispatch>();
   const count = useSelector(notificationsCountSelector);
-  const notifications = useSelector(
-    (state: RootState) => state.notifications.notifications
-  );
+  const updateStateMiddleware = (res: NotificationList) => {
+    const newOptions = calculateOptions(options, res.total);
+    setOptions(newOptions);
+    setTotal(res.total);
+  };
+  const { data, sendRequest, isPending } = useApiRequest({
+    request: fetchNotifications,
+    fetchOnMount: true,
+    fetchOnMountData: options,
+    middleware: [updateStateMiddleware]
+  });
 
-  const getNotifications = useCallback(
-    () =>
-      dispatch(serviceGetNotifications(options)).then(
-        (res: NotificationList) => {
-          const newOptions = calculateOptions(options, res.total);
-          setOptions(newOptions);
-          setTotal(res.total);
-        }
-      ),
-    [options]
-  );
+  const getNotifications = useCallback(() => {
+    return sendRequest(options);
+  }, [options]);
 
   return (
     <Notifications
-      fetchNotifications={getNotifications}
+      isPending={isPending}
+      getNotifications={getNotifications}
       count={count}
       total={total}
-      notifications={notifications}
+      notifications={data?.notifications}
       closeNotifications={setClose}
     />
   );
