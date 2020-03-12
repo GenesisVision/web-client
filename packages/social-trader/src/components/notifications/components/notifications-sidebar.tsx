@@ -14,7 +14,7 @@ const Notifications = dynamic(() =>
   import("components/notifications/components/notifications")
 );
 
-const _NotificationsContainer: React.FC<Props> = ({ isOpen, setClose }) => {
+const _NotificationsSidebar: React.FC<Props> = ({ isOpen, setClose }) => {
   const dispatch = useDispatch();
   const total = useSelector((state: RootState) => state.notifications.total);
   const count = useSelector(notificationsCountSelector);
@@ -50,5 +50,5 @@ interface Props {
   setClose: VoidFunction;
 }
 
-const NotificationsContainer = React.memo(_NotificationsContainer);
-export default NotificationsContainer;
+const NotificationsSidebar = React.memo(_NotificationsSidebar);
+export default NotificationsSidebar;
