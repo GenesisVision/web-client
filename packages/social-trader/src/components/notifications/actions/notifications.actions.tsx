@@ -4,7 +4,6 @@ import { Action } from "redux";
 import { ActionType } from "utils/types";
 
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
-export const SET_NOTIFICATIONS_OPTIONS = "SET_NOTIFICATIONS_OPTIONS";
 export const TAKE_COUNT = 10;
 
 export interface AddNotificationsAction
@@ -14,10 +13,6 @@ export interface AddNotificationsAction
 
 export interface ClearNotificationsAction extends Action {
   type: ReturnType<typeof composeClearDataActionType>;
-}
-
-export interface SetNotificationsOptionsAction extends ActionType<SkipTake> {
-  type: typeof SET_NOTIFICATIONS_OPTIONS;
 }
 
 export type SkipTake = Readonly<{
@@ -34,13 +29,6 @@ export const addNotificationsAction = (
 
 export const clearNotificationsAction = (): ClearNotificationsAction => ({
   type: composeClearDataActionType(ADD_NOTIFICATIONS)
-});
-
-export const setNotificationsOptionsAction = (
-  payload: SkipTake
-): SetNotificationsOptionsAction => ({
-  type: SET_NOTIFICATIONS_OPTIONS,
-  payload
 });
 
 export const calculateOptions = (

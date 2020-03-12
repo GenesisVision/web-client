@@ -1,30 +1,10 @@
 import {
   ADD_NOTIFICATIONS,
-  AddNotificationsAction,
-  SET_NOTIFICATIONS_OPTIONS,
-  SetNotificationsOptionsAction,
-  TAKE_COUNT
+  AddNotificationsAction
 } from "components/notifications/actions/notifications.actions";
 import { NotificationViewModel } from "gv-api-web";
 import defaultReducer from "reducers/reducer-creators/default-reducer";
 import { combineReducers } from "redux";
-
-type SkipTake = {
-  skip: number;
-  take: number;
-};
-
-const initialOptionsState = { take: TAKE_COUNT, skip: 0 };
-const optionsReducer = (
-  state: SkipTake = initialOptionsState,
-  action: SetNotificationsOptionsAction
-) =>
-  defaultReducer<SetNotificationsOptionsAction, SkipTake>(
-    action,
-    state,
-    initialOptionsState,
-    SET_NOTIFICATIONS_OPTIONS
-  );
 
 const initialNotificationsState: NotificationViewModel[] = [];
 // TODO: добавить нормализацию, когда буду уникальные ID
@@ -42,12 +22,10 @@ const addNotificationsReducer = (
 
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
-  options: SkipTake;
 }>;
 
 const notificationsReducer = combineReducers<NotificationsState>({
-  notifications: addNotificationsReducer,
-  options: optionsReducer
+  notifications: addNotificationsReducer
 });
 
 export default notificationsReducer;

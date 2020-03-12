@@ -1,4 +1,5 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { initialOptions } from "components/notifications/components/notifications.helpers";
 import {
   clearAll,
   serviceGetNotifications
@@ -11,7 +12,7 @@ import { useDispatch } from "react-redux";
 const ClearButton = () => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
-  const middleware = [() => dispatch(serviceGetNotifications())];
+  const middleware = [() => dispatch(serviceGetNotifications(initialOptions))];
   const { sendRequest, isPending } = useApiRequest({
     request: clearAll,
     middleware

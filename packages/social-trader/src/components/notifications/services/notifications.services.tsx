@@ -1,32 +1,27 @@
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import {
   addNotificationsAction,
-  calculateOptions,
   clearNotificationsAction,
-  setNotificationsOptionsAction
+  SkipTake
 } from "components/notifications/actions/notifications.actions";
 import { NotificationList } from "gv-api-web";
 import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
-export const serviceGetNotifications = (): RootThunk<Promise<
-  NotificationList
->> => (dispatch, getState) => {
-  const { notifications } = getState();
+export const serviceGetNotifications = (
+  options: SkipTake
+): RootThunk<Promise<NotificationList>> => dispatch => {
   return notificationsApi
-    .getNotifications(authService.getAuthArg(), notifications.options)
+    .getNotifications(authService.getAuthArg(), options)
     .then(response => {
-      const options = calculateOptions(notifications.options, response.total);
       dispatch(addNotificationsAction(response.notifications));
-      dispatch(setNotificationsOptionsAction(options));
       return response;
     });
 };
 
 export const serviceClearNotifications = (): RootThunk<void> => dispatch => {
   dispatch(clearNotificationsAction());
-  dispatch(setNotificationsOptionsAction(calculateOptions()));
   dispatch(fetchProfileHeaderInfoAction());
 };
 

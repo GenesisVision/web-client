@@ -1,7 +1,10 @@
+import { TAKE_COUNT } from "components/notifications/actions/notifications.actions";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 
 export type NotificationGroups = { [name: number]: NotificationViewModel[] };
+
+export const initialOptions = { take: TAKE_COUNT, skip: 0 };
 
 export const parseDate = (
   unix: number,
