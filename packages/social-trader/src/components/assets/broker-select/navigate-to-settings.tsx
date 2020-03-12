@@ -15,7 +15,7 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
   if (isForex && !isKycConfirmed)
     return (
       <Link
-        to={linkCreator(KYC_ROUTE, KYC_ROUTE, t("create-program-page.title"))}
+        to={linkCreator(KYC_ROUTE, KYC_ROUTE, t("create-account-page.title"))}
       >
         <GVButton color="primary" variant="outlined">
           {t("buttons.verify")}
