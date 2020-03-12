@@ -83,12 +83,12 @@ const _DepositForm: React.FC<Props> = ({
       wallet.currency
     );
     setValue(DEPOSIT_FORM_FIELDS.amount, max, true);
-  }, [availableToInvestInAsset, wallet]);
+  }, [availableToInvestInAsset, wallet, setValue]);
 
   const setMinAmount = useCallback((): void => {
     const min = getMinDepositFromAmounts(minDeposit, wallet.currency);
     setValue(DEPOSIT_FORM_FIELDS.amount, min, true);
-  }, [minDeposit, rate, wallet]);
+  }, [minDeposit, rate, wallet, setValue]);
 
   const onWalletChange = useCallback(
     ({ id }: WalletItemType) => {
@@ -98,7 +98,7 @@ const _DepositForm: React.FC<Props> = ({
       });
       setWallet(safeGetElemFromArray(wallets, wallet => id === wallet.id));
     },
-    [wallets]
+    [wallets, reset]
   );
 
   return (
