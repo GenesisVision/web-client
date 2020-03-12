@@ -1,8 +1,6 @@
 import {
   ADD_NOTIFICATIONS,
-  ADD_TOTAL_NOTIFICATIONS,
   AddNotificationsAction,
-  AddTotalNotificationsAction,
   SET_NOTIFICATIONS_OPTIONS,
   SetNotificationsOptionsAction,
   TAKE_COUNT
@@ -42,28 +40,14 @@ const addNotificationsReducer = (
     true
   );
 
-const initialCountState = 0;
-const addTotalCount = (
-  state: number = initialCountState,
-  action: AddTotalNotificationsAction
-): number =>
-  defaultReducer<AddTotalNotificationsAction, number>(
-    action,
-    state,
-    initialCountState,
-    ADD_TOTAL_NOTIFICATIONS
-  );
-
 export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
-  total: number;
   options: SkipTake;
 }>;
 
 const notificationsReducer = combineReducers<NotificationsState>({
   notifications: addNotificationsReducer,
-  options: optionsReducer,
-  total: addTotalCount
+  options: optionsReducer
 });
 
 export default notificationsReducer;

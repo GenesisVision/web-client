@@ -5,16 +5,11 @@ import { ActionType } from "utils/types";
 
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
 export const SET_NOTIFICATIONS_OPTIONS = "SET_NOTIFICATIONS_OPTIONS";
-export const ADD_TOTAL_NOTIFICATIONS = "ADD_TOTAL_NOTIFICATIONS";
 export const TAKE_COUNT = 10;
 
 export interface AddNotificationsAction
   extends ActionType<Array<NotificationViewModel>> {
   type: typeof ADD_NOTIFICATIONS;
-}
-
-export interface AddTotalNotificationsAction extends ActionType<number> {
-  type: typeof ADD_TOTAL_NOTIFICATIONS;
 }
 
 export interface ClearNotificationsAction extends Action {
@@ -34,13 +29,6 @@ export const addNotificationsAction = (
   payload: Array<NotificationViewModel>
 ): AddNotificationsAction => ({
   type: ADD_NOTIFICATIONS,
-  payload
-});
-
-export const addTotalNotificationsAction = (
-  payload: number
-): AddTotalNotificationsAction => ({
-  type: ADD_TOTAL_NOTIFICATIONS,
   payload
 });
 
