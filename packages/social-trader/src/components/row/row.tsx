@@ -1,7 +1,7 @@
-import "./row.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import "./row.scss";
 
 export const Row: React.FC<Props> = props => {
   const {
@@ -12,11 +12,12 @@ export const Row: React.FC<Props> = props => {
     wrap,
     small,
     large,
-    children
+    children,
+    ...tail
   } = props;
   return (
     <div
-      {...props}
+      {...tail}
       className={classNames("row", className, {
         "row--hidden": hide,
         "row--center": center,

@@ -1,5 +1,3 @@
-import "./notifications.scss";
-
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
@@ -18,6 +16,7 @@ import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
+import "./notifications.scss";
 
 const parseDate = (unix: number, sameDay: string, lastDay: string): string =>
   dayjs(unix)
@@ -123,7 +122,7 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: VoidFunction;
+  fetchNotifications: () => Promise<any>;
   clearNotifications: VoidFunction;
   closeNotifications: VoidFunction;
   count: number;

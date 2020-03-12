@@ -19,7 +19,7 @@ const _SubscriptionsContainer: React.FC<Props> = ({ id, assetCurrency }) => {
     <SubscriptionsTable
       assetCurrency={assetCurrency}
       onApply={updateInfo}
-      data={data}
+      data={data!}
       loaderData={getAccountSubscriptionsLoaderData()}
       id={id}
     />

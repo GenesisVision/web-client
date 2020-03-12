@@ -8,7 +8,6 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
-import { sendEventToGA } from "utils/ga";
 
 import {
   createAsset,

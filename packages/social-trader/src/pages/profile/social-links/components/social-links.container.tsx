@@ -1,5 +1,3 @@
-import "./social-links.scss";
-
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
@@ -13,6 +11,7 @@ import {
 } from "../services/social-links.service";
 import SocialLinkForm from "./social-link/social-link-form";
 import SocialLinksLoader from "./social-links-loader";
+import "./social-links.scss";
 
 const _Links: React.FC<ILinksProps> = ({
   socialLinks,
@@ -46,9 +45,7 @@ const _SocialLinksContainer: React.FC = () => {
   const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest<
     SocialLinkViewModel[]
   >({ request: fetchSocialLinks, fetchOnMount: true });
-  const { sendRequest: setSocialLinks, errorMessage } = useApiRequest<
-    SocialLinkViewModel[]
-  >({
+  const { sendRequest: setSocialLinks, errorMessage } = useApiRequest({
     middleware: [getSocialLinks],
     request: updateSocialLink,
     successMessage: "profile-page.social-links.notifications.edit-success"

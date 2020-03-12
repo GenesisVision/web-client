@@ -9,13 +9,14 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationsCountSelector } from "reducers/header-reducer";
 import { RootState } from "reducers/root-reducer";
+import { MiddlewareDispatch } from "utils/types";
 
 const Notifications = dynamic(() =>
   import("components/notifications/components/notifications")
 );
 
 const _NotificationsContainer: React.FC<Props> = ({ isOpen, setClose }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<MiddlewareDispatch>();
   const total = useSelector((state: RootState) => state.notifications.total);
   const count = useSelector(notificationsCountSelector);
   const notifications = useSelector(

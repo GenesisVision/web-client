@@ -1,9 +1,7 @@
-import "./google-auth.scss";
-
-import { TwoFactorAuthenticator } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import { MiddlewareDispatch } from "utils/types";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
 import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
@@ -11,9 +9,10 @@ import * as twoFactorServices from "../services/2fa.service";
 import { fetchTFAData } from "../services/2fa.service";
 import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
+import "./google-auth.scss";
 
 const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<MiddlewareDispatch>();
   const {
     data: recoveryCodesView,
     errorMessage,
@@ -22,7 +21,7 @@ const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
     middleware: [onSubmit],
     request: values => dispatch(twoFactorServices.confirm2fa(values))
   });
-  const { data: TFAData } = useApiRequest<TwoFactorAuthenticator>({
+  const { data: TFAData } = useApiRequest({
     request: fetchTFAData,
     fetchOnMount: true
   });
