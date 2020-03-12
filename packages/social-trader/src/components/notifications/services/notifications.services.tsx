@@ -1,7 +1,5 @@
-import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import {
   addNotificationsAction,
-  clearNotificationsAction,
   SkipTake
 } from "components/notifications/actions/notifications.actions";
 import { NotificationList } from "gv-api-web";
@@ -18,11 +16,6 @@ export const serviceGetNotifications = (
       dispatch(addNotificationsAction(response.notifications));
       return response;
     });
-};
-
-export const serviceClearNotifications = (): RootThunk<void> => dispatch => {
-  dispatch(clearNotificationsAction());
-  dispatch(fetchProfileHeaderInfoAction());
 };
 
 export const clearAll = () =>

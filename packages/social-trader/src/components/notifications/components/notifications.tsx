@@ -29,8 +29,7 @@ const _Notifications: React.FC<Props> = ({
   total = 0,
   count,
   fetchNotifications,
-  closeNotifications,
-  clearNotifications
+  closeNotifications
 }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
@@ -39,7 +38,6 @@ const _Notifications: React.FC<Props> = ({
   });
   useEffect(() => {
     fetchNotification();
-    return clearNotifications;
   }, []);
   const fetchNotification = useCallback(() => !isPending && sendRequest(), [
     isPending
@@ -102,7 +100,6 @@ export default Notifications;
 
 interface Props {
   fetchNotifications: VoidFunction;
-  clearNotifications: VoidFunction;
   closeNotifications: VoidFunction;
   count: number;
   total: number;

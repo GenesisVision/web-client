@@ -1,6 +1,4 @@
-import { composeClearDataActionType } from "actions/clear-data.factory";
 import { NotificationViewModel } from "gv-api-web";
-import { Action } from "redux";
 import { ActionType } from "utils/types";
 
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
@@ -9,10 +7,6 @@ export const TAKE_COUNT = 10;
 export interface AddNotificationsAction
   extends ActionType<Array<NotificationViewModel>> {
   type: typeof ADD_NOTIFICATIONS;
-}
-
-export interface ClearNotificationsAction extends Action {
-  type: ReturnType<typeof composeClearDataActionType>;
 }
 
 export type SkipTake = Readonly<{
@@ -25,10 +19,6 @@ export const addNotificationsAction = (
 ): AddNotificationsAction => ({
   type: ADD_NOTIFICATIONS,
   payload
-});
-
-export const clearNotificationsAction = (): ClearNotificationsAction => ({
-  type: composeClearDataActionType(ADD_NOTIFICATIONS)
 });
 
 export const calculateOptions = (

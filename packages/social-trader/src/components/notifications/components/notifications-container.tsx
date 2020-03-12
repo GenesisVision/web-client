@@ -1,10 +1,7 @@
 import { calculateOptions } from "components/notifications/actions/notifications.actions";
 import Notifications from "components/notifications/components/notifications";
 import { initialOptions } from "components/notifications/components/notifications.helpers";
-import {
-  serviceClearNotifications,
-  serviceGetNotifications
-} from "components/notifications/services/notifications.services";
+import { serviceGetNotifications } from "components/notifications/services/notifications.services";
 import { NotificationList } from "gv-api-web";
 import * as React from "react";
 import { useCallback, useState } from "react";
@@ -33,12 +30,6 @@ const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
       ),
     [options]
   );
-  const clearNotifications = useCallback(() => {
-    const newOptions = calculateOptions();
-    setOptions(newOptions);
-    setTotal(0);
-    return dispatch(serviceClearNotifications());
-  }, []);
 
   return (
     <Notifications
@@ -46,7 +37,6 @@ const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
       count={count}
       total={total}
       notifications={notifications}
-      clearNotifications={clearNotifications}
       closeNotifications={setClose}
     />
   );
