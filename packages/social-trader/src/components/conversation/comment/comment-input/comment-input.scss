@@ -1,0 +1,46 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+$input-height: 43px;
+
+.comment-input {
+  &__send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $input-height;
+    height: $input-height;
+    border-radius: 50%;
+    background: $separator-color;
+    cursor: pointer;
+    font-weight: 600;
+    @include transition(color);
+    &--disable {
+      cursor: default;
+      color: $label-color;
+    }
+  }
+  &__send-text {
+    @include transition(opacity);
+    & > span {
+      @include font-size($font-size-small);
+      @include line-height($font-size-small);
+    }
+    &--disable {
+      opacity: 0;
+    }
+  }
+  &__block {
+    width: 100%;
+  }
+  &__input-row-item,
+  &__input-container-row-item {
+    width: 100%;
+  }
+  &__input-container {
+    padding: 4px $padding-xxsmall 4px $padding-xsmall;
+    border-radius: $input-height/2;
+    border: 1px solid $border-color;
+  }
+}

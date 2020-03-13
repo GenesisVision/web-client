@@ -6,6 +6,13 @@
   display: inline-flex;
   position: relative;
 
+  &--bottom-line {
+    &::before,
+    &::after {
+      border-bottom: 1px solid $text-color;
+    }
+  }
+
   &::before {
     left: 0;
     right: 0;
@@ -14,7 +21,6 @@
     position: absolute;
     transition: 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition-property: border-bottom-color, opacity;
-    border-bottom: 1px solid $text-color;
     opacity: 0.1;
     pointer-events: none;
   }
@@ -27,7 +33,6 @@
     position: absolute;
     transform: scaleX(0);
     transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-    border-bottom: 1px solid $text-color;
     pointer-events: none;
   }
 

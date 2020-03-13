@@ -1,0 +1,7 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.comment {
+  @include vertical-paddings($padding-xsmall);
+  border-top: 1px solid $border-color;
+}

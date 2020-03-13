@@ -49,13 +49,13 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
 }) => {
   switch (view) {
     case LIST_VIEW.CARDS:
-      return <div className="message">{t("table.no-items")}</div>;
+      return <div className="table-message">{t("table.no-items")}</div>;
     case LIST_VIEW.TABLE:
     default:
       return (
         <tr>
           <td colSpan={11}>
-            <div className="message">{t("table.no-items")}</div>
+            <div className="table-message">{t("table.no-items")}</div>
           </td>
         </tr>
       );
