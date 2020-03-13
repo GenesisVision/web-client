@@ -1,3 +1,5 @@
+import { getConversationPostListLoaderData } from "components/conversation/conversation.loader";
+import { PostList } from "components/conversation/post-list/post-list";
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DETAILS_TYPE } from "components/details/details.types";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
@@ -28,6 +30,7 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
       description={profile.about || title}
       previewImage={filesService.getFileUrl(profile.avatar)}
     >
+      <PostList posts={getConversationPostListLoaderData()} />
       <DetailsDescriptionSection
         descriptionTitle={t("manager-page.about")}
         subtitle={memberSince}
