@@ -18,7 +18,10 @@ ProgramSettings.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
-  ]);
+  ]).then(([id, description]) => {
+    if (description.value.publicInfo.status === "Closed")
+      throw "Program is closed";
+  });
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(ProgramSettings);
