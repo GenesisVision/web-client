@@ -8,7 +8,7 @@ const ServerErrorPage: React.FC<Props> = ({ ex }) => {
     case "InternalServerError":
       return <NotFoundPage />;
     default:
-      return <ServerConnectionErrorPage />;
+      return <ServerConnectionErrorPage message={String(ex)} />;
   }
 };
 
