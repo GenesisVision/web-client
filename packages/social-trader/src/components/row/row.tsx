@@ -1,13 +1,13 @@
 import "./row.scss";
 
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import React from "react";
 
 export const Row: React.FC<Props> = props => {
   const {
     middle = true,
     hide,
-    center = true,
     className,
     wrap,
     small,
@@ -15,11 +15,10 @@ export const Row: React.FC<Props> = props => {
     children
   } = props;
   return (
-    <div
+    <Center
       {...props}
       className={classNames("row", className, {
         "row--hidden": hide,
-        "row--center": center,
         "row--wrap": wrap,
         "row--small": small,
         "row--middle": middle && !(small || large),
@@ -27,7 +26,7 @@ export const Row: React.FC<Props> = props => {
       })}
     >
       {children}
-    </div>
+    </Center>
   );
 };
 
