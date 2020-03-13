@@ -20,8 +20,8 @@ export const getPostDetailListLoaderData = (): MessageDetailType[] =>
   tableLoaderCreator(getPostDetailLoaderData, 3);
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationPersonalDetails => ({
-  canComment: !!getRandomInteger(0, 1),
-  canLike: !!getRandomInteger(0, 1),
+  canComment: true,
+  canLike: true,
   liked: !!getRandomInteger(0, 1)
 });
 
@@ -29,8 +29,8 @@ export const getConversationMessageLoaderData = (): ConversationMessage => ({
   avatar: "",
   date: new Date().toLocaleString(),
   likesCount: getRandomInteger(1, 10),
-  name: getRandomWord(),
-  text: getRandomWords(getRandomInteger(10, 20)),
+  name: getRandomWord(getRandomInteger(8, 50)),
+  text: getRandomWords(getRandomInteger(3, 50)),
   personalDetails: getConversationPersonalDetailsLoaderData()
 });
 

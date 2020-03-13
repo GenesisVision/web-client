@@ -1,15 +1,41 @@
 import "./post-input.scss";
 
+import classNames from "classnames";
+import GVTextField from "components/gv-text-field";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import React from "react";
 
-const _PostInput: React.FC<Props> = ({}) => {
+const _PostInput: React.FC<Props> = ({ onSubmit, disable }) => {
   return (
-    <div>
-      <input className="post-input" type="text" />
-    </div>
+    <Row className="post-input__input-container">
+      <RowItem className="post-input__input-row-item">
+        <GVTextField
+          placeholder={"What's new?"}
+          bottomLine={false}
+          wide
+          noMargin
+          name={""}
+          type={"textarea"}
+        />
+      </RowItem>
+      <RowItem className="post-input__button-row-item">
+        <div
+          onClick={onSubmit}
+          className={classNames("post-input__button", {
+            "post-input__button--disable": disable
+          })}
+        >
+          >
+        </div>
+      </RowItem>
+    </Row>
   );
 };
 
-interface Props {}
+interface Props {
+  disable?: boolean;
+  onSubmit: () => void;
+}
 
 export const PostInput = React.memo(_PostInput);

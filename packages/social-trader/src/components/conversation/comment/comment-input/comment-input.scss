@@ -1,49 +1,46 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+$input-height: 43px;
 
 .comment-input {
-  &__input-row-item {
+  &__send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $input-height;
+    height: $input-height;
+    border-radius: 50%;
+    background: $separator-color;
+    cursor: pointer;
+    font-weight: 600;
+    @include transition(color);
+    &--disable {
+      cursor: default;
+      color: $label-color;
+    }
+  }
+  &__send-text {
+    @include transition(opacity);
+    & > span {
+      @include font-size($font-size-small);
+      @include line-height($font-size-small);
+    }
+    &--disable {
+      opacity: 0;
+    }
+  }
+  &__block {
     width: 100%;
   }
-  &__container {
+  &__input-row-item,
+  &__input-container-row-item {
     width: 100%;
-    padding: $padding-xxsmall;
-    border-radius: 1000px;
+  }
+  &__input-container {
+    padding: 4px $padding-xxsmall 4px $padding-xsmall;
+    border-radius: $input-height/2;
     border: 1px solid $border-color;
-  }
-  &__input {
-    width: 100%;
-    order: 1;
-    color: $text-light-color;
-    font-family: Montserrat, sans-serif;
-    font-size: $font-size-h4;
-    font-weight: normal;
-    letter-spacing: 0.2px;
-    border: 0;
-    margin: 0;
-    display: block;
-    min-width: 0;
-    flex-grow: 1;
-    box-sizing: content-box;
-    background: none;
-    -webkit-tap-highlight-color: transparent;
-    &:focus {
-      outline: none;
-    }
-    &:disabled {
-      color: $text-dark-color;
-    }
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus {
-      -webkit-text-fill-color: $text-light-color;
-      -webkit-box-shadow: 0 0 0 30px $panel-background-color inset;
-      caret-color: $text-light-color;
-    }
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
   }
 }

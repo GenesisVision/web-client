@@ -2,7 +2,7 @@ import "./post.scss";
 
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Comment } from "components/conversation/comment/comment";
-import { CommentInput } from "components/conversation/comment/comment-input/comment-input";
+import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
@@ -13,7 +13,7 @@ import { Row } from "components/row/row";
 import React from "react";
 
 const _Post: React.FC<Props> = ({ post }) => {
-  const { comments, personalDetails, details, avatar, name } = post;
+  const { comments, personalDetails, details, avatar, name, likesCount } = post;
   return (
     <DetailsBlock horizontalPaddings wide>
       {details ? (
@@ -30,7 +30,11 @@ const _Post: React.FC<Props> = ({ post }) => {
       ) : (
         <Message message={post} />
       )}
-      <PostButtons canLike={personalDetails && personalDetails.canLike} />
+      <PostButtons
+        liked={personalDetails?.canLike}
+        likesCount={likesCount}
+        canLike={personalDetails?.canLike}
+      />
       <Row large>
         <div className="post__comments">
           {comments.map(comment => (
@@ -40,7 +44,7 @@ const _Post: React.FC<Props> = ({ post }) => {
       </Row>
       {personalDetails && personalDetails.canComment && (
         <Row>
-          <CommentInput />
+          <CommentInputContainer />
         </Row>
       )}
     </DetailsBlock>

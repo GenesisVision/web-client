@@ -1,39 +1,37 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+$post-input-height: 83px;
 
 .post-input {
-  order: 1;
-  color: $text-light-color;
-  font-family: Montserrat, sans-serif;
-  font-size: $font-size-h4;
-  font-weight: normal;
-  line-height: 1.38;
-  letter-spacing: 0.2px;
-  border: 0;
-  margin: 0;
-  padding: 6px 0 7px;
-  display: block;
-  min-width: 0;
-  flex-grow: 1;
-  box-sizing: content-box;
-  background: none;
-  -webkit-tap-highlight-color: transparent;
-  &:focus {
-    outline: none;
+  &__input-row-item {
+    @include vertical-paddings($padding-xsmall);
+    @include horizontal-paddings($padding-small);
   }
-  &:disabled {
-    color: $text-dark-color;
+  &__input-row-item,
+  &__input-container-row-item {
+    width: 100%;
   }
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus {
-    -webkit-text-fill-color: $text-light-color;
-    -webkit-box-shadow: 0 0 0 30px $panel-background-color inset;
-    caret-color: $text-light-color;
+  &__input-container {
+    background-color: darken($panel-background-color, 1.5);
+    @include adaptive-border-radius($border-radius-middle);
+    margin-bottom: $padding-xsmall;
   }
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  &__button {
+    @include adaptive-border-radius($border-radius-middle);
+    background-color: $panel-background-color;
+    height: $post-input-height;
+    width: $post-input-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    @include transition(color);
+    &--disable {
+      cursor: default;
+      color: $label-color;
+    }
   }
 }
