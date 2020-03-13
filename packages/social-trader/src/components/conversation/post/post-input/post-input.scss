@@ -17,11 +17,16 @@ $post-input-height: 83px;
     background-color: darken($panel-background-color, 1.5);
     @include adaptive-border-radius($border-radius-middle);
     margin-bottom: $padding-xsmall;
+    align-items: stretch;
+  }
+  &__button-row-item {
+    display: flex;
+    align-items: stretch;
   }
   &__button {
     @include adaptive-border-radius($border-radius-middle);
     background-color: $panel-background-color;
-    height: $post-input-height;
+    height: 100%;
     width: $post-input-height;
     display: flex;
     align-items: center;
