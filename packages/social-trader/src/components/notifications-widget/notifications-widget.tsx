@@ -4,7 +4,7 @@ import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import HeaderIcon from "components/header/header-icon";
 import { RingIcon } from "components/icon/ring-icon";
-import NotificationsContainer from "components/notifications/components/notifications-container";
+import NotificationsSidebar from "components/notifications/components/notifications-sidebar";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
@@ -32,7 +32,7 @@ const _NotificationsWidget: React.FC<Props> = ({
           }
         />
       </HeaderIcon>
-      <NotificationsContainer isOpen={isOpen} setClose={setClose} />
+      <NotificationsSidebar isOpen={isOpen} setClose={setClose} />
     </>
   );
 };

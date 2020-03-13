@@ -2,6 +2,7 @@ import { StatisticItemList } from "components/statistic-item-list/statistic-item
 import { withBlurLoader } from "decorators/with-blur-loader";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
+import { hasProfits } from "pages/dashboard/dashboard.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
@@ -32,11 +33,13 @@ const _DashboardTradingTotal: React.FC<Props> = ({
           currency={currency}
         />
       </StatisticItemList>
-      <DashboardStatisticPeriods
-        withProfitability
-        currency={currency}
-        data={profits}
-      />
+      {hasProfits(profits) && (
+        <DashboardStatisticPeriods
+          withProfitability
+          currency={currency}
+          data={profits}
+        />
+      )}
     </div>
   );
 };

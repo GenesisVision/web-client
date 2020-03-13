@@ -10,8 +10,8 @@ import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
 import useAssetSection from "../asset-section.hook";
-import AmountInfo from "./amount-info";
 import InputDepositAmount from "./input-deposit-amount";
+import { formatCurrencyValue } from "utils/formatter";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
   hide,
@@ -44,6 +44,13 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   }, [wallet]);
 
   if (!wallet) return null;
+
+  const minimumDepositAmountInCurrFormatted =
+    wallet.currency === assetCurrency
+      ? minimumDepositAmountInCurr
+      : +formatCurrencyValue(minimumDepositAmountInCurr, wallet.currency, {
+          up: true
+        });
   return (
     <SettingsBlock
       hide={hide}
@@ -59,7 +66,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           onChange={onSelectChange(handleWalletChange)}
         />
         <InputDepositAmount
-          minAmount={minimumDepositAmountInCurr}
+          minAmount={minimumDepositAmountInCurrFormatted}
           name={inputName}
           walletCurrency={wallet.currency}
           walletAvailable={wallet.available}
@@ -67,12 +74,6 @@ const _DepositDetailsBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
-        />
-        <AmountInfo
-          assetCurrency={assetCurrency}
-          minimumDepositsAmount={minimumDepositAmount}
-          walletAvailable={wallet.available}
-          walletCurrency={wallet.currency}
         />
       </AssetField>
     </SettingsBlock>

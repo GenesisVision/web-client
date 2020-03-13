@@ -35,7 +35,7 @@ const useAssetSection = ({
 
   useEffect(() => {
     dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
-  }, [assetCurrency]);
+  }, []);
 
   useEffect(() => {
     setWallet(
@@ -46,10 +46,11 @@ const useAssetSection = ({
     );
   }, [wallets, assetCurrency]);
 
+  const fetchRate = useCallback(debounce(getRate, 100), []);
+
   useEffect(() => {
-    wallet &&
-      debounce(() => getRate({ from: wallet.currency, to: assetCurrency }))();
-  }, [wallet, assetCurrency]);
+    if (wallet) fetchRate({ from: wallet.currency, to: assetCurrency });
+  }, [assetCurrency, wallet]);
 
   const handleWalletChange = useCallback(
     (walletId: string) =>
