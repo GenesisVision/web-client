@@ -1,8 +1,11 @@
+@import "~shared/styles/_sizes";
+
 .message {
   &__user {
     width: 350px;
   }
   &__text {
+    @include font-size($font-size-paragraph);
     width: 100%;
   }
 }
