@@ -22,7 +22,7 @@ const _Post: React.FC<Props> = ({ post }) => {
             <ProfileAvatar url={avatar} alt={name} />
           </RowItem>
           {details.map(detail => (
-            <RowItem large>
+            <RowItem key={String(detail.title)} large>
               <PostDetail detail={detail} />
             </RowItem>
           ))}
@@ -35,13 +35,15 @@ const _Post: React.FC<Props> = ({ post }) => {
         likesCount={likesCount}
         canLike={personalDetails?.canLike}
       />
-      <Row large>
-        <div className="post__comments">
-          {comments.map(comment => (
-            <Comment comment={comment} />
-          ))}
-        </div>
-      </Row>
+      {!!comments.length && (
+        <Row large>
+          <div className="post__comments">
+            {comments.map(comment => (
+              <Comment key={String(comment.date)} comment={comment} />
+            ))}
+          </div>
+        </Row>
+      )}
       {personalDetails && personalDetails.canComment && (
         <Row>
           <CommentInputContainer />
