@@ -15,7 +15,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
     triggerValidation,
     setValue,
     watch,
-    formState: { touched },
+    formState: { touched, isSubmitting },
     errors,
     register
   } = useFormContext();
@@ -35,6 +35,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   return (
     <Component
       {...props}
+      disabled={isSubmitting}
       onChange={onChange}
       triggerValidation={triggerValidation}
       name={name}
