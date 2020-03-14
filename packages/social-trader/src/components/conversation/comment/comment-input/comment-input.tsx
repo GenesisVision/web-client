@@ -59,21 +59,10 @@ const _CommentInput: React.FC<Props> = ({ onSubmit }) => {
       <Row className="comment-input__block" center={false}>
         <RowItem className="comment-input__input-container-row-item">
           <Row className="comment-input__input-container">
-            <RowItem className="comment-input__input-row-item">
-              <ConversationInput
-                submitForm={inputSubmit()}
-                name={FORM_FIELDS.TEXT}
-              />
-            </RowItem>
-            <RowItem>
-              <Center
-                className={classNames("comment-input__send-text", {
-                  "comment-input__send-text--disable": disabled
-                })}
-              >
-                <MutedText>Enter to send</MutedText>
-              </Center>
-            </RowItem>
+            <ConversationInput
+              submitForm={inputSubmit()}
+              name={FORM_FIELDS.TEXT}
+            />
           </Row>
         </RowItem>
         <RowItem>
@@ -87,6 +76,15 @@ const _CommentInput: React.FC<Props> = ({ onSubmit }) => {
             >
           </button>
         </RowItem>
+      </Row>
+      <Row small className="comment-input__send-text-container">
+        <Center
+          className={classNames("comment-input__send-text", {
+            "comment-input__send-text--disable": disabled
+          })}
+        >
+          <MutedText>Enter to send</MutedText>
+        </Center>
       </Row>
     </HookForm>
   );
