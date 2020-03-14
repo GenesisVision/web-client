@@ -10,7 +10,7 @@ const _PostList: React.FC<Props> = ({ posts }) => {
     <div>
       <PostInputContainer />
       {posts.map(post => (
-        <Post post={post} />
+        <Post key={post.date.toString()} post={post} />
       ))}
     </div>
   );
