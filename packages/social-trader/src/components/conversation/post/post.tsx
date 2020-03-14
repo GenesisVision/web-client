@@ -39,7 +39,7 @@ const _Post: React.FC<Props> = ({ post }) => {
         <Row large>
           <div className="post__comments">
             {comments.map(comment => (
-              <Comment key={String(comment.date)} comment={comment} />
+              <Comment key={comment.id} comment={comment} />
             ))}
           </div>
         </Row>
