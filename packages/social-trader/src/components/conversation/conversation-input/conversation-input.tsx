@@ -1,20 +1,24 @@
-import GVTextField from "components/gv-text-field";
+import { ConversationInputComponent } from "components/conversation/conversation-input/conversation-input-component";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import React from "react";
 
-const ConversationInput: React.FC<Props> = ({ name = "" }) => {
+export const ConversationInput: React.FC<Props> = ({
+  name,
+  submitForm,
+  placeholder
+}) => {
   return (
-    <GVTextField
-      bottomLine={false}
-      wide
-      noMargin
+    <GVHookFormField
+      placeholder={placeholder}
+      submitForm={submitForm}
       name={name}
-      type={"textarea"}
+      component={ConversationInputComponent}
     />
   );
 };
 
 interface Props {
-  name?: string;
+  placeholder?: string;
+  submitForm: VoidFunction;
+  name: string;
 }
-
-export default ConversationInput;
