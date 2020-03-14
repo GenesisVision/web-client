@@ -52,6 +52,7 @@ export const ConversationInputComponent: React.FC<Props> = ({
   return (
     <GVTextField
       {...props}
+      showError={false}
       value={value}
       onChange={handleOnChange}
       onKeyDown={handleKeyDown}
