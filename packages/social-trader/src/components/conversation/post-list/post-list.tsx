@@ -7,7 +7,7 @@ import React from "react";
 
 const _PostList: React.FC<Props> = ({ posts }) => {
   return (
-    <div>
+    <div className="post-list">
       <PostInputContainer />
       {posts.map(post => (
         <Post key={post.date.toString()} post={post} />
