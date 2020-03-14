@@ -3,14 +3,15 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 export const PostInputContainer: React.FC = () => {
-  const { sendRequest, isPending } = useApiRequest({
-    request: () => {
+  const { sendRequest } = useApiRequest({
+    request: values => {
       return new Promise(resolve =>
         setTimeout(() => {
+          console.log(values);
           resolve();
         }, 1000)
       );
     }
   });
-  return <PostInput onSubmit={sendRequest} disable={isPending} />;
+  return <PostInput onSubmit={sendRequest} />;
 };

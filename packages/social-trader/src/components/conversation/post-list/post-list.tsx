@@ -7,10 +7,10 @@ import React from "react";
 
 const _PostList: React.FC<Props> = ({ posts }) => {
   return (
-    <div>
+    <div className="post-list">
       <PostInputContainer />
       {posts.map(post => (
-        <Post post={post} />
+        <Post key={post.id} post={post} />
       ))}
     </div>
   );

@@ -4,12 +4,8 @@ import {
   ConversationPost,
   MessageDetailType
 } from "components/conversation/conversation.types";
-import {
-  getRandomInteger,
-  getRandomWord,
-  getRandomWords,
-  tableLoaderCreator
-} from "utils/helpers";
+import { getRandomInteger, getRandomWord, getRandomWords, tableLoaderCreator } from "utils/helpers";
+import uuid from "uuid";
 
 export const getPostDetailLoaderData = (): MessageDetailType => ({
   title: getRandomWord(),
@@ -26,6 +22,7 @@ export const getConversationPersonalDetailsLoaderData = (): ConversationPersonal
 });
 
 export const getConversationMessageLoaderData = (): ConversationMessage => ({
+  id: uuid.v4(),
   avatar: "",
   date: new Date().toLocaleString(),
   likesCount: getRandomInteger(1, 10),

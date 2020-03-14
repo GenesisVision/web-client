@@ -1,3 +1,5 @@
+export type OnMessageSendFunc = (values: { text: string }) => Promise<void>;
+
 export interface MessageDetailType {
   value: string;
   title: string;
@@ -10,6 +12,7 @@ export interface ConversationPersonalDetails {
 }
 
 export interface ConversationMessage {
+  id: string;
   avatar: string;
   name: string;
   text?: string;

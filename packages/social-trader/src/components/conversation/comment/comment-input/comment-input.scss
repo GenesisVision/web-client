@@ -6,6 +6,9 @@ $input-height: 43px;
 
 .comment-input {
   &__send-button {
+    outline: none;
+    border: 0;
+    color: $text-light-color;
     display: flex;
     align-items: center;
     justify-content: center;

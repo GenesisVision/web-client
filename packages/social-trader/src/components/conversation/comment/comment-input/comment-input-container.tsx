@@ -3,16 +3,17 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 const _CommentInputContainer: React.FC<Props> = ({}) => {
-  const { sendRequest, isPending } = useApiRequest({
-    request: () => {
+  const { sendRequest } = useApiRequest({
+    request: values => {
       return new Promise(resolve =>
         setTimeout(() => {
+          console.log(values);
           resolve();
         }, 1000)
       );
     }
   });
-  return <CommentInput onSend={sendRequest} disable={isPending} />;
+  return <CommentInput onSubmit={sendRequest} />;
 };
 
 interface Props {}

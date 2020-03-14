@@ -76,6 +76,8 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  ref?: any;
+  onKeyDown?: (e: any) => any;
   bottomLine?: boolean;
   correct?: boolean;
   adornment?: React.ReactNode;
