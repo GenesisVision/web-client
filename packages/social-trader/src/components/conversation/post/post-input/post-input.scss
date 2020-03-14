@@ -24,6 +24,9 @@ $post-input-height: 83px;
     align-items: stretch;
   }
   &__button {
+    border-width: 0;
+    outline: none;
+    color: $text-light-color;
     @include adaptive-border-radius($border-radius-middle);
     background-color: $panel-background-color;
     height: 100%;
