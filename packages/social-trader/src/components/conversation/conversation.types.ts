@@ -10,6 +10,7 @@ export interface ConversationPersonalDetails {
 }
 
 export interface ConversationMessage {
+  id: string;
   avatar: string;
   name: string;
   text?: string;
