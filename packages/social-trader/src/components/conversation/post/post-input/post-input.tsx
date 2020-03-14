@@ -1,7 +1,7 @@
 import "./post-input.scss";
 
 import classNames from "classnames";
-import GVTextField from "components/gv-text-field";
+import ConversationInput from "components/conversation/conversation-input/conversation-input";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
@@ -10,14 +10,7 @@ const _PostInput: React.FC<Props> = ({ onSubmit, disable }) => {
   return (
     <Row className="post-input__input-container">
       <RowItem className="post-input__input-row-item">
-        <GVTextField
-          placeholder={"What's new?"}
-          bottomLine={false}
-          wide
-          noMargin
-          name={""}
-          type={"textarea"}
-        />
+        <ConversationInput />
       </RowItem>
       <RowItem className="post-input__button-row-item">
         <div

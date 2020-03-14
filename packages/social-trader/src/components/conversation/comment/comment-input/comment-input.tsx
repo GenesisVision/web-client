@@ -2,7 +2,7 @@ import "./comment-input.scss";
 
 import classNames from "classnames";
 import { Center } from "components/center/center";
-import GVTextField from "components/gv-text-field";
+import ConversationInput from "components/conversation/conversation-input/conversation-input";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -14,13 +14,7 @@ const _CommentInput: React.FC<Props> = ({ onSend, disable }) => {
       <RowItem className="comment-input__input-container-row-item">
         <Row className="comment-input__input-container">
           <RowItem className="comment-input__input-row-item">
-            <GVTextField
-              bottomLine={false}
-              wide
-              noMargin
-              name={""}
-              type={"textarea"}
-            />
+            <ConversationInput />
           </RowItem>
           <RowItem>
             <Center
