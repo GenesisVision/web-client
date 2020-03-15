@@ -1,13 +1,15 @@
 import { getConversationPostListLoaderData } from "components/conversation/conversation.loader";
 import { ConversationPost } from "components/conversation/conversation.types";
+import { getRandomBoolean } from "utils/helpers";
 
 const mockRequest = (values: any) =>
-  new Promise(resolve =>
+  new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log(values);
-      resolve();
-    }, 1000)
-  );
+      const success = getRandomBoolean();
+      success ? resolve() : reject({ errorMessage: "Failed" });
+    }, 1000);
+  });
 
 export const sendComment = (values: { text: string; id: string }) => {
   return mockRequest(values);
