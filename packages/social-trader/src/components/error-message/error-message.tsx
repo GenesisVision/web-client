@@ -13,13 +13,13 @@ interface IErrorMessage {
   className?: string;
 }
 const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
-  <div
+  <span
     className={classNames("error-message", className, {
       "error-message--over": type === MESSAGE_TYPES.OVER
     })}
   >
     {error}
-  </div>
+  </span>
 );
 
 export default ErrorMessage;
