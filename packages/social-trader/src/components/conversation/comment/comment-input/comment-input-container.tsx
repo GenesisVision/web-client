@@ -4,10 +4,11 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 const _CommentInputContainer: React.FC<Props> = ({}) => {
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, status } = useApiRequest({
+    successMessage: "Success",
     request: sendComment
   });
-  return <CommentInput onSubmit={sendRequest} />;
+  return <CommentInput onSubmit={sendRequest} status={status} />;
 };
 
 interface Props {

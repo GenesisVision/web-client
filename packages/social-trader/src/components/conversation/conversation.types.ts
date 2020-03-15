@@ -1,28 +1,47 @@
 export type OnMessageSendFunc = (values: { text: string }) => Promise<void>;
 
+export interface Achievement {}
+
+export interface ConversationUserPersonalDetails {
+  followed: boolean;
+}
+
+export interface ConversationUser {
+  id: string;
+  avatar: string;
+  name: string;
+  link: string;
+  achievements?: Achievement[];
+  personalDetails?: ConversationUserPersonalDetails;
+}
+
 export interface MessageDetailType {
   value: string;
   title: string;
 }
 
-export interface ConversationPersonalDetails {
+export interface ConversationMessagePersonalDetails {
   canLike?: boolean;
   canComment?: boolean;
   liked?: boolean;
 }
 
 export interface ConversationMessage {
-  id: string;
-  avatar: string;
-  name: string;
+  user: ConversationUser;
   text?: string;
   date: string | Date;
   likesCount: number;
-  personalDetails?: ConversationPersonalDetails;
+  personalDetails?: ConversationMessagePersonalDetails;
 }
 
-export interface ConversationPost extends ConversationMessage {
+export interface ConversationComment {
+  id: string;
+  message: ConversationMessage;
+}
+
+export interface ConversationPost {
+  id: string;
+  message: ConversationMessage;
   details?: MessageDetailType[];
-  comments: ConversationMessage[];
-  personalDetails?: ConversationPersonalDetails;
+  comments: ConversationComment[];
 }
