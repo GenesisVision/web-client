@@ -13,7 +13,15 @@ import { Row } from "components/row/row";
 import React from "react";
 
 const _Post: React.FC<Props> = ({ post }) => {
-  const { comments, personalDetails, details, avatar, name, likesCount } = post;
+  const {
+    id,
+    comments,
+    personalDetails,
+    details,
+    avatar,
+    name,
+    likesCount
+  } = post;
   return (
     <DetailsBlock horizontalPaddings wide>
       {details ? (
@@ -22,7 +30,7 @@ const _Post: React.FC<Props> = ({ post }) => {
             <ProfileAvatar url={avatar} alt={name} />
           </RowItem>
           {details.map(detail => (
-            <RowItem key={String(detail.title)} large>
+            <RowItem key={String(id + detail.title)} large>
               <PostDetail detail={detail} />
             </RowItem>
           ))}
@@ -31,6 +39,7 @@ const _Post: React.FC<Props> = ({ post }) => {
         <Message message={post} />
       )}
       <PostButtons
+        id={id}
         liked={personalDetails?.canLike}
         likesCount={likesCount}
         canLike={personalDetails?.canLike}
@@ -46,7 +55,7 @@ const _Post: React.FC<Props> = ({ post }) => {
       )}
       {personalDetails && personalDetails.canComment && (
         <Row>
-          <CommentInputContainer />
+          <CommentInputContainer id={id} />
         </Row>
       )}
     </DetailsBlock>

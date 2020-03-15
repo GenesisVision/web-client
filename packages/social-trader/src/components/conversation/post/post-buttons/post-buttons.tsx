@@ -6,20 +6,26 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-const _PostButtons: React.FC<Props> = ({ canLike, likesCount, liked }) => {
+const _PostButtons: React.FC<Props> = ({ id, canLike, likesCount, liked }) => {
   return (
     <Row large>
       <RowItem>
         <ShareButton />
       </RowItem>
       <RowItem>
-        <LikeContainer canLike={canLike} count={likesCount} liked={liked} />
+        <LikeContainer
+          id={id}
+          canLike={canLike}
+          count={likesCount}
+          liked={liked}
+        />
       </RowItem>
     </Row>
   );
 };
 
 interface Props {
+  id: string;
   liked?: boolean;
   likesCount: number;
   canLike?: boolean;

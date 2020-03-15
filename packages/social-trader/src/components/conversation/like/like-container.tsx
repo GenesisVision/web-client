@@ -24,6 +24,7 @@ export const _LikeContainer: React.FC<Props> = ({ count, canLike, liked }) => {
 };
 
 interface Props {
+  id: string;
   count: number;
   liked?: boolean;
   canLike?: boolean;

@@ -16,6 +16,8 @@ const _CommentInputContainer: React.FC<Props> = ({}) => {
   return <CommentInput onSubmit={sendRequest} />;
 };
 
-interface Props {}
+interface Props {
+  id: string;
+}
 
 export const CommentInputContainer = React.memo(_CommentInputContainer);
