@@ -1,5 +1,5 @@
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,12 +14,12 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
   const [t] = useTranslation();
   return (
     <DialogTop title={t("withdraw-program.title")} subtitle={title}>
-      <DialogField>
+      <Row large>
         <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
           {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
           {programCurrency}
         </StatisticItem>
-      </DialogField>
+      </Row>
     </DialogTop>
   );
 };

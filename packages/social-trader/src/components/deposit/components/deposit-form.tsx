@@ -8,9 +8,9 @@ import {
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
@@ -104,13 +104,13 @@ const _DepositForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <WalletField
             wallets={wallets}
             name={DEPOSIT_FORM_FIELDS.walletId}
             onChange={onWalletChange}
           />
-        </DialogField>
+        </Row>
         <InputAmountField
           setMin={setMinAmount}
           name={DEPOSIT_FORM_FIELDS.amount}

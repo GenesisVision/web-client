@@ -79,9 +79,6 @@
 
   &__header {
     @include adaptive-margin(top, $padding-xsmall);
-    &:not(:last-child) {
-      @include adaptive-padding(bottom, $padding-small);
-    }
   }
 
   &__subtitle {
@@ -89,17 +86,6 @@
     font-weight: 300;
     letter-spacing: 0.4px;
     color: #e8eff3;
-  }
-
-  &__field {
-    &:not(:last-child) {
-      @include adaptive-margin(bottom, $padding-xsmall);
-    }
-    &--hidden {
-      display: none;
-    }
-
-    font-weight: 300;
   }
 
   &__buttons {

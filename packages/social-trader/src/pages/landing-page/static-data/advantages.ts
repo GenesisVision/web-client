@@ -10,21 +10,18 @@ export type TAdvantages = {
 
 export const advantagesItems: TAdvantages[] = [
   {
-    title: "Access all financial markets",
-    text:
-      "Open multi broker trading platform. Wide range of instruments and asset classes including Forex, Crypto and Stock markets.",
+    title: "landing-page.advantages.title-1",
+    text: "landing-page.advantages.text-1",
     image: ImgAccess
   },
   {
-    title: "Control your exposure",
-    text:
-      "Wide range of investment opportunities broken by risk tolerance and profitability. Access to risk analysis and management tools. The products offered include Asset Management, Funds and Copytrading.",
+    title: "landing-page.advantages.title-2",
+    text: "landing-page.advantages.text-2",
     image: ImgChoose
   },
   {
-    title: "Choose the best tool to make money",
-    text:
-      "Choose your role or combine them - Trade, Invest, Manage, Follow or Lead",
+    title: "landing-page.advantages.title-3",
+    text: "landing-page.advantages.text-3",
     image: ImgControl
   }
 ];

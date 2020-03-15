@@ -34,53 +34,53 @@ export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
   {
-    name: "Invest",
+    name: "landing-page.links.invest",
     href: INVEST_ROUTE,
     subNav: [
       {
-        name: "Follow",
+        name: "landing-page.links.follow",
         href: GV_FOLLOW_ROUTE
       },
       {
-        name: "Programs",
+        name: "landing-page.links.programs",
         href: GV_PROGRAMS_ROUTE
       },
       {
-        name: "Funds",
+        name: "landing-page.links.funds",
         href: GV_FUNDS_ROUTE
       }
     ]
   },
   {
-    name: "Trade",
+    name: "landing-page.links.trade",
     href: TRADE_ROUTE
   },
   {
-    name: "Info",
+    name: "landing-page.links.info",
     href: "#info",
     subNav: [
       {
-        name: "Blog",
+        name: "landing-page.links.blog",
         hideMobile: true,
         href: "https://blog.genesis.vision"
       },
       {
-        name: "Fees",
+        name: "landing-page.links.fees",
         hideMobile: true,
         href: FEES_ROUTE
       },
       {
-        name: "Referral program",
+        name: "landing-page.links.referral-program",
         hideMobile: true,
         href: REFERRAL_PROGRAM_ROUTE
       },
       {
-        name: "FAQ",
+        name: "landing-page.links.faq",
         hideMobile: true,
         href: FAQ_ROUTE
       },
       {
-        name: "Feedback",
+        name: "landing-page.links.feedback",
         hideMobile: true,
         href: "https://feedback.genesis.vision/"
       }
@@ -90,51 +90,51 @@ export const navHeader: TNavHeader[] = [
 
 export const navFooter: TNavHeader[] = [
   {
-    name: "Referral program",
+    name: "landing-page.links.referral-program",
     href: REFERRAL_PROGRAM_ROUTE
   },
   {
-    name: "Fees",
+    name: "landing-page.links.fees",
     href: FEES_ROUTE
   },
   {
-    name: "FAQ",
+    name: "landing-page.links.faq",
     href: FAQ_ROUTE
   },
   {
-    name: "Blog",
+    name: "landing-page.links.blog",
     href: "https://blog.genesis.vision/"
   },
   {
-    name: "Feedback",
+    name: "landing-page.links.feedback",
     href: "https://feedback.genesis.vision/"
   },
   {
-    name: "Knowledge base",
+    name: "landing-page.links.knowledge-base",
     href: "https://feedback.genesis.vision/knowledge-bases/2-knowledge-base"
   },
   {
-    name: "Glossary",
+    name: "landing-page.links.glossary",
     href: GLOSSARY_ROUTE
   },
   {
-    name: "AML Manual",
+    name: "landing-page.links.aml-manual",
     href: AML_MANUAL_ROUTE
   },
   {
-    name: "White paper",
+    name: "landing-page.links.white-paper",
     href: WHITE_PAPER_ROUTE
   },
   {
-    name: "Privacy policy",
+    name: "landing-page.links.privacy-policy",
     href: PRIVACY_POLICY_ROUTE
   },
   {
-    name: "Terms and conditions",
+    name: "landing-page.links.terms",
     href: TERMS_ROUTE
   },
   {
-    name: "Download terminal",
+    name: "landing-page.links.download",
     href: DOWNLOADS_ROUTE
   }
 ];

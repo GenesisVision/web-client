@@ -3,6 +3,7 @@ import "./fund-asset.scss";
 import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
@@ -52,7 +53,7 @@ const _FundAsset: React.FC<Props> = ({
     default:
       return (
         <RowItem small bottomOffset={bottomOffset}>
-          <div
+          <Row
             {...other}
             className={classNames(
               "fund-asset",
@@ -63,17 +64,22 @@ const _FundAsset: React.FC<Props> = ({
               }
             )}
           >
-            <CurrencyItem
-              url={url}
-              logo={icon}
-              small
-              name={!!currency && currencyName}
-              symbol={currency}
-              className={classNames("fund-asset__currency", currencyClassName)}
-            />
-            <div className="fund-asset__percent">
+            <RowItem small>
+              <CurrencyItem
+                url={url}
+                logo={icon}
+                small
+                name={!!currency && currencyName}
+                symbol={currency}
+                className={classNames(
+                  "fund-asset__currency",
+                  currencyClassName
+                )}
+              />
+            </RowItem>
+            {percent !== undefined && (
               <NumberFormat value={percent} suffix="%" displayType="text" />
-            </div>
+            )}
             {percent > mandatoryFundPercent && removable && removeHandle && (
               <div
                 className="fund-asset__remove-button"
@@ -82,7 +88,7 @@ const _FundAsset: React.FC<Props> = ({
                 +
               </div>
             )}
-          </div>
+          </Row>
         </RowItem>
       );
   }
