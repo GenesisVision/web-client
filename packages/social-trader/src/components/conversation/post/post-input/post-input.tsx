@@ -6,7 +6,8 @@ import { ConversationInputShape } from "components/conversation/conversation-inp
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import React, { useCallback } from "react";
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -21,10 +22,11 @@ interface PostInputFormValues {
 }
 
 interface Props {
+  status?: API_REQUEST_STATUS;
   onSubmit: OnMessageSendFunc;
 }
 
-const _PostInput: React.FC<Props> = ({ onSubmit }) => {
+const _PostInput: React.FC<Props> = ({ onSubmit, status }) => {
   const [t] = useTranslation();
   const form = useForm<PostInputFormValues>({
     validationSchema: object().shape({
@@ -37,12 +39,14 @@ const _PostInput: React.FC<Props> = ({ onSubmit }) => {
     handleSubmit,
     formState: { isValid, isSubmitting }
   } = form;
+
+  useEffect(() => {
+    if (status === API_REQUEST_STATUS.SUCCESS) reset({ text: "" });
+  }, [status]);
+
   const formSubmit = useCallback(
     values => {
-      return onSubmit(values).then(value => {
-        reset({ text: "" });
-        return value;
-      });
+      return onSubmit(values);
     },
     [onSubmit, reset]
   );

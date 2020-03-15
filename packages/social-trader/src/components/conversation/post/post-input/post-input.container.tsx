@@ -4,8 +4,9 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 export const PostInputContainer: React.FC = () => {
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, status } = useApiRequest({
+    successMessage: "Success",
     request: sendPost
   });
-  return <PostInput onSubmit={sendRequest} />;
+  return <PostInput onSubmit={sendRequest} status={status} />;
 };
