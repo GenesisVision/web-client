@@ -12,7 +12,7 @@ import React from "react";
 
 const _Message: React.FC<IMessageProps> = ({
   showLike,
-  message: { avatar, name, text, date, likesCount, personalDetails }
+  message: { id, avatar, name, text, date, likesCount, personalDetails }
 }) => {
   return (
     <Row center={false} className="message">
@@ -23,6 +23,7 @@ const _Message: React.FC<IMessageProps> = ({
       {showLike && (
         <RowItem className="message__like">
           <LikeContainer
+            id={id}
             canLike={personalDetails?.canLike}
             count={likesCount}
             liked={personalDetails?.liked}

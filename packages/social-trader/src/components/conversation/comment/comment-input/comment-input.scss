@@ -5,6 +5,10 @@
 $input-height: 43px;
 
 .comment-input {
+  &__send-text-container {
+    padding-left: $padding-xsmall;
+    position: absolute;
+  }
   &__send-button {
     outline: none;
     border: 0;

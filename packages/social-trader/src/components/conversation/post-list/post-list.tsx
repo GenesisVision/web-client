@@ -3,13 +3,14 @@ import "./post-list.scss";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Post } from "components/conversation/post/post";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import React from "react";
 
-const _PostList: React.FC<Props> = ({ posts }) => {
+const _PostList: React.FC<Props> = ({ data }) => {
   return (
     <div className="post-list">
       <PostInputContainer />
-      {posts.map(post => (
+      {data.map(post => (
         <Post key={post.id} post={post} />
       ))}
     </div>
@@ -17,7 +18,7 @@ const _PostList: React.FC<Props> = ({ posts }) => {
 };
 
 interface Props {
-  posts: ConversationPost[];
+  data: ConversationPost[];
 }
 
-export const PostList = React.memo(_PostList);
+export const PostList = withBlurLoader(React.memo(_PostList));
