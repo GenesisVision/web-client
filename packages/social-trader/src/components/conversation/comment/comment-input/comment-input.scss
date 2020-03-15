@@ -6,6 +6,7 @@ $input-height: 43px;
 
 .comment-input {
   &__send-text-container {
+    @include adaptive-margin(top, $padding-xxsmall);
     padding-left: $padding-xsmall;
     position: absolute;
   }
