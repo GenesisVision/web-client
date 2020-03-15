@@ -112,6 +112,4 @@ const CommentInputMessage: React.FC<{ disable: boolean }> = ({
   );
 };
 
-export default CommentInputMessage;
-
 export const CommentInput = React.memo(_CommentInput);
