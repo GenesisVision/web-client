@@ -1,8 +1,8 @@
 import { CurrencySourceSelectElement } from "components/currency-source-select/currency-source-select.element";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
 import { TradingAccountDetails } from "gv-api-web";
 import React, { useCallback, useState } from "react";
@@ -21,7 +21,7 @@ const _FollowSelectAccount: React.FC<Props> = ({ accounts, onSelect }) => {
   return (
     <form id="follow-select-account">
       <DialogBottom>
-        <DialogField>
+        <Row>
           <CurrencySourceSelectElement
             wide
             value={account}
@@ -30,7 +30,7 @@ const _FollowSelectAccount: React.FC<Props> = ({ accounts, onSelect }) => {
             items={accounts.map(item => ({ ...item, title: item.login }))}
             onChange={onChange}
           />
-        </DialogField>
+        </Row>
         <DialogButtons>
           <GVButton
             wide

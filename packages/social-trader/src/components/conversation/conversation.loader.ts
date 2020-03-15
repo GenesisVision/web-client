@@ -4,7 +4,12 @@ import {
   ConversationPost,
   MessageDetailType
 } from "components/conversation/conversation.types";
-import { getRandomInteger, getRandomWord, getRandomWords, tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomInteger,
+  getRandomWord,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 import uuid from "uuid";
 
 export const getPostDetailLoaderData = (): MessageDetailType => ({

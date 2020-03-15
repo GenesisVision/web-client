@@ -1,5 +1,5 @@
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { ASSET } from "constants/constants";
 import * as React from "react";
@@ -22,14 +22,14 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
       subtitle={title || asset}
     >
       {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
-        <DialogField>
+        <Row large>
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
             {`${formatCurrencyValue(availableToInvest, currency!)} ${currency}`}
           </StatisticItem>
-        </DialogField>
+        </Row>
       )}
     </DialogTop>
   );

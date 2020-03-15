@@ -3,7 +3,6 @@ import "./transfer-form.scss";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -151,15 +150,13 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
           items={destinationItemsWithoutCurrent}
           sourceType={destinationType}
         />
-        <DialogField>
-          <InputAmountField
-            name={TRANSFER_FORM_FIELDS.amount}
-            label={t("transfer.amount")}
-            currency={selectedSourceItem.currency}
-            setMax={setMax}
-            isAllowed={isAmountAllow(sourceItems, sourceId)}
-          />
-        </DialogField>
+        <InputAmountField
+          name={TRANSFER_FORM_FIELDS.amount}
+          label={t("transfer.amount")}
+          currency={selectedSourceItem.currency}
+          setMax={setMax}
+          isAllowed={isAmountAllow(sourceItems, sourceId)}
+        />
         {!!amount &&
           selectedDestinationItem.currency !== selectedSourceItem.currency && (
             <span>{`≈ ${formatCurrencyValue(

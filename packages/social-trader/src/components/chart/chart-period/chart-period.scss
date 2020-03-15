@@ -3,19 +3,11 @@
 @import "~shared/styles/_sizes";
 
 .chart-period {
-  box-sizing: border-box;
   @include adaptive-padding(bottom, $padding-xsmall);
-  display: inline-flex;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  min-height: 1em;
 
   &__period-item {
     font-size: $font-size-paragraph;
-    &:not(:last-of-type) {
-      margin-right: $padding-xsmall;
-    }
     &:not(&--active) {
       cursor: pointer;
       color: $text-color;

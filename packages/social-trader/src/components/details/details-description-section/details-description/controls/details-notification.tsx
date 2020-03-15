@@ -9,7 +9,6 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
   const [t] = useTranslation();
   return (
     <DetailsDescriptionControl
-      tag={Link}
       to={to}
       text={t("fund-details-page.description.notifications")}
     >
