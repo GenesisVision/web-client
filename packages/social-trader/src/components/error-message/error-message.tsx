@@ -9,7 +9,7 @@ export enum MESSAGE_TYPES {
 }
 interface IErrorMessage {
   error: string | string[];
-  type: MESSAGE_TYPES;
+  type?: MESSAGE_TYPES;
   className?: string;
 }
 const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
