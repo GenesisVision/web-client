@@ -29,9 +29,9 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
     )}
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
       <CurrencyItem
-        clickable={position.assetData.hasAssetInfo}
-        url={position.assetData.url}
-        logo={position.assetData.icon}
+        clickable={position.assetData ? position.assetData.hasAssetInfo : false}
+        url={position.assetData ? position.assetData.url : ""}
+        logo={position.assetData ? position.assetData.icon : ""}
         small
         name={position.symbol}
         symbol={position.symbol}
@@ -86,12 +86,14 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
             suffix={` ${position.profitCurrency}`}
           />
         </Profitability>
-        <ClosePositionButton
-          onApplyCancelRequest={updateItems}
-          volume={position.volume}
-          symbol={position.symbol}
-          id={position.id}
-        />
+        {false && (
+          <ClosePositionButton
+            onApplyCancelRequest={updateItems}
+            volume={position.volume}
+            symbol={position.symbol}
+            id={position.id}
+          />
+        )}
       </TableCell>
     )}
   </TableRow>

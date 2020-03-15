@@ -57,15 +57,8 @@ $arrow-font-size: $font-size-h4;
   }
 
   &__adornment-text {
-    font-weight: 600;
     position: absolute;
     top: $padding-upper-medium/2;
-    display: flex;
-    justify-content: space-between;
-    padding-left: $padding-small/2;
-    padding-right: $padding-small/2;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   &__logo {

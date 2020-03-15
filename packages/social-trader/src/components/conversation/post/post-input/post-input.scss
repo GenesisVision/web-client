@@ -1,0 +1,45 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+$post-input-height: 83px;
+
+.post-input {
+  &__input-row-item {
+    @include vertical-paddings($padding-xsmall);
+    @include horizontal-paddings($padding-small);
+  }
+  &__input-row-item,
+  &__input-container-row-item {
+    width: 100%;
+  }
+  &__input-container {
+    background-color: darken($panel-background-color, 1.5);
+    @include adaptive-border-radius($border-radius-middle);
+    margin-bottom: $padding-xsmall;
+    align-items: stretch;
+  }
+  &__button-row-item {
+    display: flex;
+    align-items: stretch;
+  }
+  &__button {
+    border-width: 0;
+    outline: none;
+    color: $text-light-color;
+    @include adaptive-border-radius($border-radius-middle);
+    background-color: $panel-background-color;
+    height: 100%;
+    width: $post-input-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    @include transition(color);
+    &--disable {
+      cursor: default;
+      color: $label-color;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Link from "components/link/link";
+import { useTranslation } from "i18n";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
@@ -15,6 +16,7 @@ const _NavSubItem: React.FC<INavSubItemProps> = ({
   hideMobile,
   onClick
 }) => {
+  const { t } = useTranslation();
   return (
     <li
       className={classNames("nav-list__item", {
@@ -24,17 +26,17 @@ const _NavSubItem: React.FC<INavSubItemProps> = ({
       {href && href.includes("http") ? (
         <a title={name} href={href} className="nav-list__link">
           {icon && <span className="nav-list__link-icon">{icon}</span>}
-          {name}
+          {t(name)}
         </a>
       ) : (
         <Link
-          title={name}
+          title={t(name)}
           onClick={onClick}
           to={{ pathname: href as string, state }}
           className="nav-list__link"
         >
           {icon && <span className="nav-list__link-icon">{icon}</span>}
-          {name}
+          {t(name)}
         </Link>
       )}
     </li>

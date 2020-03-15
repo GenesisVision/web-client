@@ -1,7 +1,9 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogField } from "components/dialog/dialog-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
+import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletBaseData } from "gv-api-web";
@@ -19,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { useSelector } from "react-redux";
 import { fundMinWithdrawAmountSelector } from "reducers/platform-reducer";
+import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
@@ -58,10 +61,21 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   const { percent } = watch();
 
   useEffect(() => {
-    const min = getMinPercent(fundMinWithdrawAmountInCur, availableToWithdraw);
+    const min = +formatValue(
+      getMinPercent(
+        Math.min(fundMinWithdrawAmountInCur, availableToWithdraw),
+        availableToWithdraw
+      ),
+      2,
+      false,
+      { up: true }
+    );
     setMinPercent(min);
-    setValue(FUND_WITHDRAW_FIELDS.percent, min, true);
   }, [availableToWithdraw, fundMinWithdrawAmountInCur]);
+
+  useEffect(() => {
+    setValue(FUND_WITHDRAW_FIELDS.percent, minPercent, true);
+  }, [minPercent]);
 
   const isAllow = useCallback(
     (values: NumberFormatValues) =>
@@ -96,20 +110,30 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
         <WalletSelect
+          label={t("wallet-withdraw.to")}
           name={FUND_WITHDRAW_FIELDS.walletId}
           wallets={wallets}
           onChange={changeWalletCallback}
         />
       </Row>
-      <InputAmountField
-        name={FUND_WITHDRAW_FIELDS.percent}
-        label={t("withdraw-fund.amount-to-withdraw")}
-        placeholder="%"
-        currency="%"
-        isAllowed={isAllow}
-        setMax={setMax}
-        setMin={setMin}
-      />
+      <DialogField hide={minPercent === 100}>
+        <InputAmountField
+          name={FUND_WITHDRAW_FIELDS.percent}
+          label={t("withdraw-fund.amount-to-withdraw")}
+          placeholder="%"
+          currency="%"
+          isAllowed={isAllow}
+          setMax={setMax}
+          setMin={setMin}
+        />
+      </DialogField>
+      {minPercent === 100 && (
+        <DialogField>
+          <StatisticItem label={t("withdraw-fund.amount-to-withdraw")}>
+            {percent} %
+          </StatisticItem>
+        </DialogField>
+      )}
       <FundWithdrawResult
         isPending={isPending}
         availableToWithdraw={availableToWithdraw}

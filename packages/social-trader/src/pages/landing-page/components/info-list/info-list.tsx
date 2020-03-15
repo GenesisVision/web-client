@@ -23,11 +23,6 @@ const _InfoList: React.FC<Props> = ({ className, listItems }) => (
         button={item.button}
       />
     ))}
-    {/*<InfoItem*/}
-    {/*  image={TradeTab}*/}
-    {/*  textBold={"William is here, you can too"}*/}
-    {/*  button={{ link: TRADE, text: "Join" }}*/}
-    {/*/>*/}
   </ul>
 );
 

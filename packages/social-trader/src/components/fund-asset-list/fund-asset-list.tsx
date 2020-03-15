@@ -11,7 +11,7 @@ const _FundAssetList: React.FC<Props> = ({ values }) => (
     {values.map((item: FundAssetPartWithIcon) => (
       <RowItem key={item.name}>
         <Row>
-          <RowItem>
+          <RowItem small>
             <div
               className="fund-asset-list__bubble"
               style={{ background: item.color }}

@@ -75,6 +75,7 @@ const _FollowForm: React.FC<Props> = ({
       const params = {
         ...requestParams,
         tradingAccountId: tradingAccountId!,
+        currency,
         mode,
         openTolerancePercent,
         percent,
