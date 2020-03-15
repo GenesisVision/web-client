@@ -1,5 +1,4 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -77,11 +76,11 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         </Row>
       )}
       {withdrawAll && (
-        <DialogField>
+        <Row>
           <MutedText noWrap={false}>{t("withdraw-program.all-text")}</MutedText>
-        </DialogField>
+        </Row>
       )}
-      <DialogField hide={withdrawAll}>
+      <Row hide={withdrawAll}>
         <InputAmountField
           name={WITHDRAW_FORM_FIELDS.amount}
           label={t("withdraw-program.amount-to-withdraw")}
@@ -100,7 +99,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
             displayType="text"
           />
         )}
-      </DialogField>
+      </Row>
       <DialogButtons>
         <SubmitButton
           wide

@@ -1,6 +1,5 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -116,7 +115,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
           onChange={changeWalletCallback}
         />
       </Row>
-      <DialogField hide={minPercent === 100}>
+      <Row hide={minPercent === 100}>
         <InputAmountField
           name={FUND_WITHDRAW_FIELDS.percent}
           label={t("withdraw-fund.amount-to-withdraw")}
@@ -126,13 +125,13 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
           setMax={setMax}
           setMin={setMin}
         />
-      </DialogField>
+      </Row>
       {minPercent === 100 && (
-        <DialogField>
+        <Row>
           <StatisticItem label={t("withdraw-fund.amount-to-withdraw")}>
             {percent} %
           </StatisticItem>
-        </DialogField>
+        </Row>
       )}
       <FundWithdrawResult
         isPending={isPending}
