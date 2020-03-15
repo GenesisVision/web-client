@@ -177,7 +177,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
             {subTitle && (
               <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
-            <Row small>{extraBlock}</Row>{" "}
+            <Row small>{extraBlock}</Row>
           </div>
           {renderActions && (
             <div className="table-card__actions">
