@@ -7,6 +7,7 @@ import {
   MessageDetailType
 } from "components/conversation/conversation.types";
 import {
+  getRandomBoolean,
   getRandomInteger,
   getRandomWord,
   getRandomWords,
@@ -25,7 +26,7 @@ export const getPostDetailListLoaderData = (): MessageDetailType[] =>
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
   canComment: true,
   canLike: true,
-  liked: !!getRandomInteger(0, 1)
+  liked: getRandomBoolean()
 });
 
 export const getConversationUserLoaderData = (): ConversationUser => ({
@@ -49,7 +50,7 @@ export const getConversationComment = (): ConversationComment => ({
 });
 
 export const getConversationPostLoaderData = (): ConversationPost => {
-  const hasEvent = getRandomInteger(0, 1);
+  const hasEvent = getRandomBoolean();
   return {
     id: uuid.v4(),
     message: getConversationMessageLoaderData(),
