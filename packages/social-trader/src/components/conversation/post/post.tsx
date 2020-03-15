@@ -12,16 +12,14 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-const _Post: React.FC<Props> = ({ post }) => {
+const _Post: React.FC<Props> = ({
+  post: { id, comments, details, message }
+}) => {
   const {
-    id,
-    comments,
     personalDetails,
-    details,
-    avatar,
-    name,
-    likesCount
-  } = post;
+    likesCount,
+    user: { avatar, name }
+  } = message;
   return (
     <DetailsBlock horizontalPaddings wide>
       {details ? (
@@ -36,7 +34,7 @@ const _Post: React.FC<Props> = ({ post }) => {
           ))}
         </Row>
       ) : (
-        <Message message={post} />
+        <Message id={id} message={message} />
       )}
       <PostButtons
         id={id}

@@ -1,10 +1,17 @@
 import {
+  ConversationComment,
   ConversationMessage,
-  ConversationPersonalDetails,
+  ConversationMessagePersonalDetails,
   ConversationPost,
+  ConversationUser,
   MessageDetailType
 } from "components/conversation/conversation.types";
-import { getRandomInteger, getRandomWord, getRandomWords, tableLoaderCreator } from "utils/helpers";
+import {
+  getRandomInteger,
+  getRandomWord,
+  getRandomWords,
+  tableLoaderCreator
+} from "utils/helpers";
 import uuid from "uuid";
 
 export const getPostDetailLoaderData = (): MessageDetailType => ({
@@ -15,33 +22,39 @@ export const getPostDetailLoaderData = (): MessageDetailType => ({
 export const getPostDetailListLoaderData = (): MessageDetailType[] =>
   tableLoaderCreator(getPostDetailLoaderData, 3);
 
-export const getConversationPersonalDetailsLoaderData = (): ConversationPersonalDetails => ({
+export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
   canComment: true,
   canLike: true,
   liked: !!getRandomInteger(0, 1)
 });
 
-export const getConversationMessageLoaderData = (): ConversationMessage => ({
+export const getConversationUserLoaderData = (): ConversationUser => ({
   id: uuid.v4(),
   avatar: "",
+  name: getRandomWord(getRandomInteger(8, 50)),
+  link: ""
+});
+
+export const getConversationMessageLoaderData = (): ConversationMessage => ({
+  user: getConversationUserLoaderData(),
   date: new Date().toLocaleString(),
   likesCount: getRandomInteger(1, 10),
-  name: getRandomWord(getRandomInteger(8, 50)),
   text: getRandomWords(getRandomInteger(3, 50)),
   personalDetails: getConversationPersonalDetailsLoaderData()
 });
 
+export const getConversationComment = (): ConversationComment => ({
+  id: uuid.v4(),
+  message: getConversationMessageLoaderData()
+});
+
 export const getConversationPostLoaderData = (): ConversationPost => {
   const hasEvent = getRandomInteger(0, 1);
-  const message = getConversationMessageLoaderData();
   return {
-    ...message,
+    id: uuid.v4(),
+    message: getConversationMessageLoaderData(),
     details: hasEvent ? getPostDetailListLoaderData() : undefined,
-    comments: tableLoaderCreator(
-      getConversationMessageLoaderData,
-      getRandomInteger(0, 5)
-    ),
-    personalDetails: getConversationPersonalDetailsLoaderData()
+    comments: tableLoaderCreator(getConversationComment, getRandomInteger(0, 5))
   };
 };
 
