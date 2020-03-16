@@ -1,5 +1,9 @@
 export type OnMessageSendFunc = (values: { text: string }) => Promise<void>;
 
+export interface IConversationImage {
+  url: string;
+}
+
 export interface Achievement {}
 
 export interface ConversationUserPersonalDetails {
@@ -28,6 +32,7 @@ export interface ConversationMessagePersonalDetails {
 }
 
 export interface ConversationMessage {
+  images: IConversationImage[];
   user: ConversationUser;
   text?: string;
   date: string | Date;
