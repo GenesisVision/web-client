@@ -1,0 +1,19 @@
+@import "~shared/styles/_sizes";
+
+$image-height: 100px;
+$image-height-full: 90vh;
+
+.conversation-image {
+  @include adaptive-border-radius($border-radius);
+  max-height: $image-height;
+}
+.conversation-image-full {
+  max-height: $image-height-full;
+  &__wrapper {
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
