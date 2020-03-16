@@ -76,21 +76,6 @@ describe("test useRequest hook", () => {
         expect(result.current.errorMessage).toBe(testValue);
       });
     });
-    it("should be set submitting is false", async () => {
-      const isSubmitting = { value: true };
-      const request = () => Promise.reject("") as Promise<string>;
-      const setSubmitting = (value: boolean) => {
-        isSubmitting.value = value;
-      };
-      const { result } = renderHook(() => useApiRequest({ request }), {
-        wrapper
-      });
-      await act(() => {
-        result.current.sendRequest(null, setSubmitting).then(() => {
-          expect(isSubmitting.value).toBe(false);
-        });
-      });
-    });
     it("should be set args to request", async () => {
       const testArg1 = "testArg1";
       const testArg2 = "testArg2";

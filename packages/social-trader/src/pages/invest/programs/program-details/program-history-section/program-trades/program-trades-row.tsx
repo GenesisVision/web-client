@@ -1,5 +1,3 @@
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
-
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";

@@ -6,6 +6,7 @@ import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
 import { Dispatch } from "redux";
 import authService from "services/auth-service";
+import refreshToken from "utils/auth";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
 const isServer = typeof window === "undefined";
@@ -15,16 +16,16 @@ const withReduxStore = (
   initializeStore: InitializeStoreType,
   initialActions?: any[]
 ) => (WrappedComponent: AppType | any) => {
-  function getOrCreateStore(initialState?: RootState) {
-    if (isServer) {
-      return initializeStore(initialState);
-    }
+  const getOrCreateStore = (initialState?: RootState) => {
+    const state = initializeStore(initialState);
+    if (isServer) return state;
 
-    if (!(window as any)[__NEXT_REDUX_STORE__]) {
-      (window as any)[__NEXT_REDUX_STORE__] = initializeStore(initialState);
-    }
+    if (!(window as any)[__NEXT_REDUX_STORE__])
+      (window as any)[__NEXT_REDUX_STORE__] = state;
+
     return (window as any)[__NEXT_REDUX_STORE__];
-  }
+  };
+
   return class extends Component<{
     initialReduxState: RootState;
     actions: any;
@@ -42,6 +43,7 @@ const withReduxStore = (
       const token = authService.getAuthArg(ctx.ctx);
       if (token) {
         reduxStore.dispatch(authActions.updateTokenAction(true));
+        refreshToken(ctx.ctx, token);
       }
 
       if (initialActions) {

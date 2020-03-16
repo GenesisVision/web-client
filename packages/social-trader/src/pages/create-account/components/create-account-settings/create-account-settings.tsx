@@ -11,40 +11,80 @@ import Currency from "components/assets/fields/currency";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import Leverage from "components/assets/fields/leverage";
 import SettingsBlock from "components/settings-block/settings-block";
-import { InjectedFormikProps, withFormik } from "formik";
 import { Broker } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
-import { compose } from "redux";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
+export enum CREATE_ACCOUNT_FIELDS {
+  depositWalletId = "depositWalletId",
+  depositAmount = "depositAmount",
+  currency = "currency",
+  leverage = "leverage",
+  brokerAccountTypeId = "brokerAccountTypeId"
+}
+
 const _CreateAccountSettings: React.FC<Props> = ({
-  setFieldTouched,
-  t,
+  errorMessage,
   broker,
-  setFieldValue,
-  handleSubmit,
-  errors,
-  isSubmitting,
-  values: { brokerAccountTypeId, depositAmount, currency, enterMinDeposit }
+  onSubmit
 }) => {
-  const isValid = Object.values(errors).length === 0;
-  const isKycConfirmed = useSelector(kycConfirmedSelector);
+  const [available, setAvailable] = useState(0);
+  const [rate, setRate] = useState(1);
+  const [t] = useTranslation();
+
+  const form = useForm<ICreateAccountSettingsFormValues>({
+    defaultValues: {
+      [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: getBrokerId(
+        broker.accountTypes
+      ),
+      [CREATE_ACCOUNT_FIELDS.currency]: getCurrency(broker.accountTypes[0]),
+      [CREATE_ACCOUNT_FIELDS.leverage]: getLeverage(broker.accountTypes[0]),
+      [CREATE_ACCOUNT_FIELDS.depositWalletId]: "",
+      [CREATE_ACCOUNT_FIELDS.depositAmount]: undefined
+    },
+    validationSchema: createAccountSettingsValidationSchema({
+      rate,
+      t,
+      broker,
+      available
+    }),
+    mode: "onChange"
+  });
+  const {
+    watch,
+    setValue,
+    formState: { isValid, dirty }
+  } = form;
+  const { brokerAccountTypeId, depositAmount, currency } = watch();
+
   const accountType = safeGetElemFromArray(
     broker.accountTypes,
     ({ id }) => brokerAccountTypeId === id
   );
-  const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
-  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
+
+  const disabled = accountType.isDepositRequired && !dirty;
+
+  const isKycConfirmed = useSelector(kycConfirmedSelector);
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;
+
+  const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
+  const validateAndSubmit = useAssetValidate({
+    handleSubmit: onSubmit,
+    isValid
+  });
+
   return (
-    <form onSubmit={validateAndSubmit}>
+    <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock
         label={t("create-account-page.settings.main-settings")}
         blockNumber={"01"}
@@ -52,13 +92,13 @@ const _CreateAccountSettings: React.FC<Props> = ({
         <AssetFields>
           <BrokerAccount
             setAccountType={(value: string) =>
-              setFieldValue(CREATE_ACCOUNT_FIELDS.brokerAccountTypeId, value)
+              setValue(CREATE_ACCOUNT_FIELDS.brokerAccountTypeId, value)
             }
             setLeverage={(value: number) =>
-              setFieldValue(CREATE_ACCOUNT_FIELDS.leverage, value)
+              setValue(CREATE_ACCOUNT_FIELDS.leverage, value)
             }
             setCurrency={(value: string) =>
-              setFieldValue(CREATE_ACCOUNT_FIELDS.currency, value)
+              setValue(CREATE_ACCOUNT_FIELDS.currency, value)
             }
             name={CREATE_ACCOUNT_FIELDS.brokerAccountTypeId}
             accountTypes={broker.accountTypes}
@@ -78,91 +118,42 @@ const _CreateAccountSettings: React.FC<Props> = ({
         <KycRequiredBlock />
       ) : (
         <>
-          {accountType.isDepositRequired && (
-            <DepositDetailsBlock
-              setFieldTouched={setFieldTouched}
-              enterMinDeposit={enterMinDeposit}
-              enterMinDepositName={CREATE_ACCOUNT_FIELDS.enterMinDeposit}
-              blockNumber={2}
-              availableName={CREATE_ACCOUNT_FIELDS.available}
-              rateName={CREATE_ACCOUNT_FIELDS.rate}
-              walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
-              inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
-              depositAmount={depositAmount}
-              minimumDepositAmount={minimumDepositAmount}
-              setFieldValue={setFieldValue}
-              assetCurrency={currency as CurrencyEnum}
-            />
-          )}
+          <DepositDetailsBlock
+            hide={!accountType.isDepositRequired}
+            blockNumber={2}
+            setAvailable={setAvailable}
+            setRate={setRate}
+            walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
+            inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
+            depositAmount={depositAmount}
+            minimumDepositAmount={minimumDepositAmount}
+            setFieldValue={setValue}
+            assetCurrency={currency as CurrencyEnum}
+          />
           <CreateAssetNavigation
             asset={"ACCOUNT"}
-            isSubmitting={isSubmitting}
+            isSuccessful={!errorMessage}
+            disabled={disabled}
           />
         </>
       )}
-    </form>
+    </HookForm>
   );
 };
 
-export enum CREATE_ACCOUNT_FIELDS {
-  enterMinDeposit = "enterMinDeposit",
-  available = "available",
-  rate = "rate",
-  depositWalletId = "depositWalletId",
-  depositAmount = "depositAmount",
-  currency = "currency",
-  leverage = "leverage",
-  brokerAccountTypeId = "brokerAccountTypeId"
-}
-
 export interface ICreateAccountSettingsFormValues {
-  [CREATE_ACCOUNT_FIELDS.enterMinDeposit]?: boolean;
-  [CREATE_ACCOUNT_FIELDS.available]: number;
-  [CREATE_ACCOUNT_FIELDS.rate]: number;
+  [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
   [CREATE_ACCOUNT_FIELDS.leverage]: number;
   [CREATE_ACCOUNT_FIELDS.currency]: string;
-  [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
-  [CREATE_ACCOUNT_FIELDS.depositAmount]?: number;
   [CREATE_ACCOUNT_FIELDS.depositWalletId]: string;
+  [CREATE_ACCOUNT_FIELDS.depositAmount]?: number | string;
 }
 
-export interface ICreateAccountSettingsProps
-  extends WithTranslation,
-    OwnProps {}
-
-type Props = InjectedFormikProps<
-  ICreateAccountSettingsProps,
-  ICreateAccountSettingsFormValues
->;
-
-const CreateAccountSettings = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik<ICreateAccountSettingsProps, ICreateAccountSettingsFormValues>({
-    // isInitialValid: true,
-    displayName: "CreateAccountSettingsForm",
-    mapPropsToValues: ({ broker }) => ({
-      [CREATE_ACCOUNT_FIELDS.available]: 0,
-      [CREATE_ACCOUNT_FIELDS.rate]: 1,
-      [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: getBrokerId(
-        broker.accountTypes
-      ),
-      [CREATE_ACCOUNT_FIELDS.currency]: getCurrency(broker.accountTypes[0]),
-      [CREATE_ACCOUNT_FIELDS.leverage]: getLeverage(broker.accountTypes[0]),
-      [CREATE_ACCOUNT_FIELDS.depositWalletId]: "",
-      [CREATE_ACCOUNT_FIELDS.depositAmount]: undefined
-    }),
-    validationSchema: createAccountSettingsValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(_CreateAccountSettings);
-export default CreateAccountSettings;
-
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   broker: Broker;
-  onSubmit: (
-    values: ICreateAccountSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: ICreateAccountSettingsFormValues) => void;
 }
+
+const CreateAccountSettings = React.memo(_CreateAccountSettings);
+export default CreateAccountSettings;

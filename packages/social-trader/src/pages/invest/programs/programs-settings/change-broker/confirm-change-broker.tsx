@@ -1,7 +1,6 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import { useTranslation } from "i18n";
 import React, { useCallback } from "react";
-import { SetSubmittingType } from "utils/types";
 
 const _ConfirmChangeBroker: React.FC<Props> = ({
   open,
@@ -10,9 +9,8 @@ const _ConfirmChangeBroker: React.FC<Props> = ({
   brokerTo
 }) => {
   const [t] = useTranslation();
-  const handleApplyClick = useCallback((setSubmitting: SetSubmittingType) => {
-    onClose();
-    setSubmitting(false);
+  const handleApplyClick = useCallback(() => {
+    return onClose();
   }, []);
 
   return (
@@ -34,6 +32,7 @@ const _ConfirmChangeBroker: React.FC<Props> = ({
 
 interface Props {
   open: boolean;
+  onApply(): void;
   onClose(): void;
   brokerFrom?: string;
   brokerTo?: string;

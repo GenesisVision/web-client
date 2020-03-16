@@ -1,3 +1,4 @@
+import { Row } from "components/row/row";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
@@ -32,7 +33,7 @@ const _DashboardPrivate: React.FC = () => {
     <DashboardTradingTable
       dataSelector={dashboardTradingPrivateSelector}
       createButtonToolbar={
-        <>
+        <Row>
           <ToolbarButton
             text={t("buttons.create-account")}
             route={CREATE_ACCOUNT_PAGE_ROUTE}
@@ -41,7 +42,7 @@ const _DashboardPrivate: React.FC = () => {
             text={t("buttons.attach-external-account")}
             route={ATTACH_ACCOUNT_PAGE_ROUTE}
           />
-        </>
+        </Row>
       }
       getItems={getItems}
       title={t("dashboard-page.trading.private")}

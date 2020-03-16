@@ -2,7 +2,7 @@ import { alertMessageActions } from "modules/alert-message/actions/alert-message
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { MiddlewareType, setPromiseMiddleware } from "utils/promise-middleware";
-import { ResponseError, SetSubmittingType } from "utils/types";
+import { ResponseError } from "utils/types";
 
 import useErrorMessage, { TErrorMessage } from "./error-message.hook";
 import useIsOpen from "./is-open.hook";
@@ -26,10 +26,7 @@ type TUseApiRequestOutput<T> = {
   errorMessage: TErrorMessage;
   isPending: boolean;
   data: T | TNullValue;
-  sendRequest: (
-    props?: any,
-    setSubmitting?: SetSubmittingType
-  ) => TRequest<any>;
+  sendRequest: (props?: any) => TRequest<any>;
   cleanErrorMessage: () => void;
 };
 
@@ -64,7 +61,7 @@ const useApiRequest = <T>({
     sendSuccessMessage
   ];
 
-  const sendRequest = (props?: any, setSubmitting?: SetSubmittingType) => {
+  const sendRequest = (props?: any) => {
     setIsPending();
     return ((setPromiseMiddleware(
       request(props),
@@ -77,7 +74,6 @@ const useApiRequest = <T>({
       })
       .finally(() => {
         setIsNotPending();
-        setSubmitting && setSubmitting(false);
       }) as TRequest<T>;
   };
 

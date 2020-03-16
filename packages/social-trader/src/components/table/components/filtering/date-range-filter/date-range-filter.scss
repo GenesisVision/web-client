@@ -31,11 +31,6 @@
     width: 140px;
   }
 
-  &__btn {
-    @include font-size($font-size-paragraph);
-    @include adaptive-margin(right, $padding-xsmall);
-  }
-
   &__type-btn {
     @include font-size($font-size-paragraph);
     &:not(:disabled) {

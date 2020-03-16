@@ -4,14 +4,13 @@ import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
+import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
-import ProgramWithdrawAmountForm, {
-  IProgramWithdrawAmountFormValues
-} from "./program-withdraw-amount-form";
+import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
 import { ProgramWithdrawConfirm } from "./program-withdraw-confirm-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 
@@ -38,7 +37,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   );
   const [formValues, setFormValues] = useState<
     IProgramWithdrawAmountFormValues
-  >({ amount: 0, withdrawAll: false });
+  >({ amount: "", withdrawAll: false });
 
   const handleEnterAmountSubmit = useCallback(
     (values: IProgramWithdrawAmountFormValues) => {

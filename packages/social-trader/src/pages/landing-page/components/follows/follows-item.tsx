@@ -2,7 +2,9 @@ import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import React from "react";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 
 interface ITraderItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
@@ -22,10 +24,11 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
   logo,
   imageClassName
 }) => {
-  const linkProps = {
-    pathname: composeFollowDetailsUrl(url),
-    state: `/ ${title}`
-  };
+  const { linkCreator } = useToLink();
+  const linkProps = linkCreator(
+    composeFollowDetailsUrl(url),
+    FOLLOW_DETAILS_FOLDER_ROUTE
+  );
   return (
     <li className="follows-list__item">
       <Link

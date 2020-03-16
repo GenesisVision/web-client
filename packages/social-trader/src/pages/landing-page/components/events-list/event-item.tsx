@@ -1,10 +1,10 @@
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef } from "react";
-import { animated, useSpring } from "react-spring";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 const timeConversion = (date: Date) => {
@@ -67,31 +67,6 @@ const isShowing = (
   return currentIndex < countShowingItems;
 };
 
-const getPropsAnimation = (
-  countShowingItems: number,
-  maxHeight: number,
-  currentIndex: number,
-  isShow: boolean
-) => {
-  const isLastShowing = currentIndex === countShowingItems;
-  const translate3dProp =
-    isShow || isLastShowing ? (maxHeight + 20) * currentIndex : 60;
-  const scaleProp = isShow || isLastShowing ? 1 : 0.7;
-  return {
-    to: async (next: any) => {
-      next({
-        opacity: isShow ? 1 : 0,
-        transform: `translate3d(0,${translate3dProp}px,0) scale(${scaleProp})`
-      });
-      next({ height: maxHeight, delay: 100 });
-    },
-    from: {
-      opacity: 0,
-      transform: `translate3d(0,0px,0) scale(1)`
-    }
-  };
-};
-
 interface Props extends PlatformEvent {
   startIndex: number;
   index: number;
@@ -118,6 +93,7 @@ const _EventItem: React.FC<Props> = ({
   maxHeight,
   updateMaxHeight
 }) => {
+  const { contextTitle } = useToLink();
   const itemRef = useRef(null);
   const linkUser = userUrl
     ? {
@@ -126,7 +102,7 @@ const _EventItem: React.FC<Props> = ({
       }
     : undefined;
   const linkAsset = assetUrl
-    ? getAssetLink(assetUrl, assetType, title)
+    ? getAssetLink(assetUrl, assetType, contextTitle)
     : undefined;
   const currentIndex = getCurrentIndex(
     index,
@@ -140,12 +116,21 @@ const _EventItem: React.FC<Props> = ({
     const currentHeight = getElementHeight(itemRef);
     if (maxHeight < currentHeight) updateMaxHeight(currentHeight);
   }, [maxHeight]);
-  const props = useSpring(
-    getPropsAnimation(countShowingItems, maxHeight, currentIndex, isShow)
-  );
+  const isLastShowing = currentIndex === countShowingItems;
+  const translate3d =
+    isShow || isLastShowing ? (maxHeight + 20) * currentIndex : 60;
+  const scale = isShow || isLastShowing ? 1 : 0.7;
   return (
-    //@ts-ignore
-    <animated.li className="events-list__item" style={props} ref={itemRef}>
+    <li
+      className="events-list__item"
+      style={{
+        transition: `transform 0.5s, opacity 0.5s`,
+        opacity: isShow ? "1" : "0",
+        transform: `translate3d(0,${translate3d}px,0) scale(${scale})`,
+        height: `${maxHeight}px`
+      }}
+      ref={itemRef}
+    >
       <Link
         title={`Go to ${title} details page`}
         className="events-list__item-link"
@@ -178,7 +163,7 @@ const _EventItem: React.FC<Props> = ({
           <div className="events-list__item-date">{timeConversion(date)}</div>
         )}
       </div>
-    </animated.li>
+    </li>
   );
 };
 const EventItem = React.memo(_EventItem);

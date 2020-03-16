@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
@@ -9,9 +9,7 @@ export const _LineWalletButton: React.FC<Props> = ({
   children
 }) => (
   <Tooltip render={() => <TooltipContent>{title}</TooltipContent>}>
-    <div className={classNames(className, "wallet-list__button")}>
-      {children}
-    </div>
+    <RowItem className={className}>{children}</RowItem>
   </Tooltip>
 );
 

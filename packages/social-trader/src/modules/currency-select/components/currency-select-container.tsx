@@ -1,5 +1,3 @@
-import "./currency-select.scss";
-
 import classNames from "classnames";
 import { ISelectChangeEvent } from "components/select/select";
 import React, { useCallback } from "react";

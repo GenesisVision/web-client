@@ -1,3 +1,6 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
 $header-height: 70px;
 
 $warning-color: #f5a623;
@@ -12,9 +15,10 @@ $box-shadow-4: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
 
 @mixin transition($property...) {
   transition-property: $property;
-  transition-duration: 250ms;
+  transition-duration: 400ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: 0s;
+  will-change: $property;
 }
 
 @mixin link($color-link, $color-link-hover: $color-link) {
@@ -33,4 +37,9 @@ $box-shadow-4: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
   opacity: 0.3;
   color: white;
   text-align: left;
+}
+
+.muted {
+  @include font-size($font-size-common);
+  color: $label-color;
 }

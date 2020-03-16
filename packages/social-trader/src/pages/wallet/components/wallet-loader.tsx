@@ -1,5 +1,3 @@
-import "./wallet-balance/wallet-balance.scss";
-
 import { WalletBaseData } from "gv-api-web";
 import { getRandomInteger, getRandomWord } from "utils/helpers";
 

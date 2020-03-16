@@ -9,7 +9,9 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
 
-class _InputImage extends React.PureComponent<Props & WithTranslation> {
+class _InputImage extends React.PureComponent<
+  IInputImageProps & WithTranslation
+> {
   dropzone: React.RefObject<Dropzone> = React.createRef();
   cropper: React.RefObject<Cropper> = React.createRef();
 
@@ -116,8 +118,20 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
     onChange(e);
   };
 
+  renderErrors = () => {
+    if (!this.props.error) return null;
+    const errors = Object.values(this.props.error.image);
+    return (
+      <div>
+        {errors.map(error => (
+          <div className="input-image__error">{error.message}</div>
+        ))}
+      </div>
+    );
+  };
+
   render() {
-    const { t, value, className, defaultImage, error } = this.props;
+    const { t, value = {}, className, defaultImage, error } = this.props;
     const { src, image } = value;
     const hasSizeError = error && error.image.size;
     return (
@@ -183,11 +197,7 @@ class _InputImage extends React.PureComponent<Props & WithTranslation> {
             &#10006;
           </div>
         )}
-        {error !== undefined && (
-          <div className="input-image__error">
-            {error.image[Object.keys(error.image)[0]]}
-          </div>
-        )}
+        {this.renderErrors()}
       </div>
     );
   }
@@ -210,17 +220,17 @@ export interface IImageChangeEvent {
   target: { value: IImageValue; name: string };
 }
 
-export interface IImageValue {
+export type IImageValue = {
   src?: string;
   image?: INewImage;
   id?: string;
-}
+};
 
-interface Props {
+export interface IInputImageProps {
   name: string;
   className?: string;
   value: IImageValue;
   defaultImage: string;
-  error?: { image: { [field: string]: string } };
-  onChange(event: IImageChangeEvent): void;
+  error?: { image: { [field: string]: { message: string } } };
+  onChange: (event: IImageChangeEvent) => void;
 }

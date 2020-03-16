@@ -1,5 +1,3 @@
-import "./fees-info.scss";
-
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
 

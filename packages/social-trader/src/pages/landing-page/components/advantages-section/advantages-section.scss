@@ -1,0 +1,73 @@
+@import "~shared/styles/breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.advantages-section {
+  @include grid();
+  @include horizontal-padding();
+
+  &__title {
+    margin-bottom: 60px;
+    position: relative;
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 3/11;
+    }
+  }
+
+  &__list {
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+
+    &--animation .advantages-list__item--last {
+      @include media-breakpoint-desktop() {
+        display: none;
+      }
+    }
+  }
+
+  &__text {
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 2/7;
+    }
+  }
+
+  &__sticky-button {
+    display: none;
+
+    @include media-breakpoint-desktop() {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      margin-left: -50px;
+      margin-top: -50px;
+      will-change: transform;
+
+      .lp-button {
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        padding: 0;
+        line-height: 100px;
+      }
+    }
+  }
+
+  &__button {
+    order: 2;
+  }
+}

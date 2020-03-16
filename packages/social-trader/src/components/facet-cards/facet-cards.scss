@@ -16,7 +16,6 @@ $facet-height: 280px;
   &__carousel {
     display: flex;
     overflow-x: scroll;
-    padding-bottom: 2px;
     padding-top: $translate-size;
     overflow-y: hidden;
     &::-webkit-scrollbar {
@@ -37,10 +36,6 @@ $facet-height: 280px;
   min-width: $facet-width/1.5;
   overflow: hidden;
   box-shadow: $box-shadow-1;
-
-  &:not(:last-child) {
-    @include adaptive-margin(right, $padding-small);
-  }
 
   &--hovered {
     transform: translateY(-$translate-size);

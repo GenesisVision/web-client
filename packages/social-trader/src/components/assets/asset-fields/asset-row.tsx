@@ -1,4 +1,4 @@
-import "./asset-field.scss";
+import "./asset-row.scss";
 
 import * as React from "react";
 

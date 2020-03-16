@@ -1,3 +1,5 @@
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useCallback } from "react";
@@ -25,16 +27,18 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
     [updatePaging]
   );
   return (
-    <div className="table__footer">
+    <Row className="table__footer">
       <ItemsCounter {...paging} condition={!!paging.totalItems} />
-      <Paging
-        asLink={asLinkPagination}
-        condition={!isPending && paging.totalPages !== 0}
-        paging={paging}
-        hidden={isPending}
-        updatePaging={handleUpdate}
-      />
-    </div>
+      <RowItem className="table__paging">
+        <Paging
+          asLink={asLinkPagination}
+          condition={paging.totalPages !== 0}
+          paging={paging}
+          hidden={isPending}
+          updatePaging={handleUpdate}
+        />
+      </RowItem>
+    </Row>
   );
 };
 

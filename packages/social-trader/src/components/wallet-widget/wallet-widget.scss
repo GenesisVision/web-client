@@ -3,18 +3,12 @@
 @import "~shared/styles/_sizes";
 
 .wallet-widget {
-  display: flex;
-  align-items: center;
-
   &__amount {
     white-space: nowrap;
   }
 
   &__wallet {
     font-size: $font-size-common;
-    display: flex;
-    align-items: center;
-    margin-right: $padding-xsmall;
     cursor: pointer;
 
     &:hover {

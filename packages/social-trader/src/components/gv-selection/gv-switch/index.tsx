@@ -1,6 +1,7 @@
 import "./style.scss";
 
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import React from "react";
 
 class GVSwitch extends React.PureComponent<GVSwitchProps> {
@@ -46,7 +47,7 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
       <span className="gv-switch-wrapper">
         {label && (
           <span className="gv-switch__label" onClick={this.handleClick}>
-            {label}
+            <MutedText big>{label}</MutedText>
           </span>
         )}
         <span

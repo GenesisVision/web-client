@@ -1,8 +1,7 @@
 import AssetField from "components/assets/asset-fields/asset-field";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
-import GVFormikField from "components/gv-formik-field";
-import InputAmountField from "components/input-amount-field/input-amount-field";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -14,6 +13,7 @@ const isAmountAllow = (currency: CurrencyEnum) => ({
 }: NumberFormatValues) => validateFraction(value, currency);
 
 const _InvestmentLimitField: React.FC<Props> = ({
+  setHasInvestmentLimit,
   checkboxName,
   inputName,
   hasInvestmentLimit,
@@ -23,25 +23,21 @@ const _InvestmentLimitField: React.FC<Props> = ({
   return (
     <>
       <AssetField wide>
-        <GVFormikField
-          wide
-          type="checkbox"
+        <GVCheckbox
+          value={hasInvestmentLimit}
+          setFieldValue={(_, value) => setHasInvestmentLimit(value)}
           color="primary"
           name={checkboxName}
-          label={
-            <span>
-              {t("create-program-page.settings.fields.investment-limit")}
-            </span>
-          }
-          component={GVCheckbox}
+          label={t("create-program-page.settings.fields.investment-limit")}
         />
       </AssetField>
       {hasInvestmentLimit && (
         <AssetField>
           <InputAmountField
+            showCorrect
             wide
             autoFocus={false}
-            isAllow={isAmountAllow(currency)}
+            isAllowed={isAmountAllow(currency)}
             name={inputName}
             label={t(
               "create-program-page.settings.fields.enter-correct-amount"
@@ -60,6 +56,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
 };
 
 interface Props {
+  setHasInvestmentLimit: (value: boolean) => void;
   checkboxName: string;
   inputName: string;
   currency: CurrencyEnum;

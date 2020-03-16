@@ -1,0 +1,25 @@
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+.row {
+  display: flex;
+  flex-direction: row;
+  &--hidden {
+    display: none;
+  }
+  &--wrap {
+    flex-wrap: wrap;
+  }
+  &--center {
+    align-items: center;
+  }
+  &--small:not(:first-child) {
+    @include adaptive-margin(top, $padding-xxsmall);
+  }
+  &--middle:not(:first-child) {
+    @include adaptive-margin(top, $padding-xsmall);
+  }
+  &--large:not(:first-child) {
+    @include adaptive-margin(top, $padding-small);
+  }
+}

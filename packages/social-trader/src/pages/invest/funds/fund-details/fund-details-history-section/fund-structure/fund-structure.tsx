@@ -1,5 +1,3 @@
-import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
-
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";

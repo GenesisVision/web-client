@@ -5,61 +5,30 @@ import {
   PlatformEvent,
   PlatformNews
 } from "gv-api-web";
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import { LandingPage } from "pages/landing-page/landing.page";
+import {
+  getLandingAssets,
+  landingAssetsDefaultData
+} from "pages/landing-page/services/landing.service";
 import React from "react";
-import platformApi from "services/api-client/platform-api";
-import { getParamsFromCtx } from "utils/ssr-helpers";
 
 const IndexPage: NextPage<Props> = props => {
   return <LandingPage {...props} />;
 };
 
-IndexPage.getInitialProps = async (ctx: NextPageContext) => {
-  const { ref } = getParamsFromCtx(ctx);
+IndexPage.getInitialProps = async () => {
   try {
-    const {
+    const { events, follows, programs, funds, news } = await getLandingAssets();
+    return {
       events,
       follows,
       programs,
       funds,
       news
-    } = await platformApi.getPlatformLandingInfo({
-      eventsTake: 15,
-      followTake: 6,
-      programsTake: 6,
-      fundsTake: 12,
-      newsTake: 4
-    });
-    return {
-      events,
-      follows,
-      programs,
-      funds,
-      news,
-      refLink: ref
     };
   } catch (e) {
-    const funds = {
-      total: 0,
-      items: []
-    };
-    const follows = {
-      total: 0,
-      items: []
-    };
-    const programs = {
-      total: 0,
-      items: []
-    };
-    return {
-      events: [],
-      follows,
-      programs,
-      funds,
-      news: [],
-      refLink: ""
-    };
+    return landingAssetsDefaultData;
   }
 };
 

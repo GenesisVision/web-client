@@ -1,81 +1,68 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
-import InputAmountField from "components/input-amount-field/input-amount-field";
-import { FormikProps, withFormik } from "formik";
-import { DemoDepositResponse } from "modules/demo-deposit/demo-deposit.service";
-import React from "react";
+import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import { useGetRate } from "hooks/get-rate.hook";
 import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
-import { compose } from "redux";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
-import { number, object } from "yup";
-
-export enum FORM_FIELDS {
-  amount = "amount"
-}
+  DEMO_DEPOSIT_FORM_FIELDS,
+  DemoDepositResponse,
+  DemoDepositValidationSchema,
+  IDemoDepositFormValues
+} from "modules/demo-deposit/demo-deposit.service";
+import React, { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { minDemoDepositAmountSelector } from "reducers/platform-reducer";
+import { convertToCurrency } from "utils/currency-converter";
+import { HookForm } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 const _DemoDepositForm: React.FC<Props> = ({
-  isValid,
-  isSubmitting,
-  handleSubmit,
-  currency
+  currentDeposit,
+  errorMessage,
+  currency,
+  onSubmit
 }) => {
+  const { rate, getRate } = useGetRate();
+  useEffect(() => {
+    getRate({ from: currency, to: "USDT" });
+  }, [currency]);
+  const maxAmount =
+    convertToCurrency(useSelector(minDemoDepositAmountSelector), rate) -
+    currentDeposit;
   const [t] = useTranslation();
+  const form = useForm<IDemoDepositFormValues>({
+    validationSchema: DemoDepositValidationSchema(t, maxAmount),
+    mode: "onChange"
+  });
+  const { setValue } = form;
+
+  const setMax = useCallback(() => {
+    setValue(DEMO_DEPOSIT_FORM_FIELDS.amount, String(maxAmount), true);
+  }, [maxAmount]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <InputAmountField
-        wide
-        name={FORM_FIELDS.amount}
-        label={t("transfer.amount")}
+    <HookForm form={form} onSubmit={onSubmit}>
+      <HookFormAmountField
+        setMax={setMax}
         currency={currency}
+        name={DEMO_DEPOSIT_FORM_FIELDS.amount}
       />
       <DialogButtons>
-        <GVButton wide type="submit" disabled={isSubmitting || !isValid}>
+        <SubmitButton isSuccessful={!errorMessage} wide>
           {t("deposit-asset.confirm")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
-    </form>
+    </HookForm>
   );
 };
 
-interface Props
-  extends IDemoDepositFormProps,
-    WithTranslation,
-    FormikProps<IDemoDepositFormValues> {}
-
-export interface IDemoDepositFormValues {
-  amount: string;
-}
-
-export interface IDemoDepositFormProps {
+interface Props {
+  currentDeposit: number;
+  errorMessage?: string;
   currency: CurrencyEnum;
-  onSubmit: (
-    values: IDemoDepositFormValues,
-    setSubmitting: SetSubmittingType
-  ) => DemoDepositResponse;
+  onSubmit: (values: IDemoDepositFormValues) => DemoDepositResponse;
 }
 
-const DemoDepositForm = compose<React.ComponentType<IDemoDepositFormProps>>(
-  translate(),
-  withFormik<Props, IDemoDepositFormValues>({
-    enableReinitialize: true,
-    displayName: "demo-deposit-form",
-    mapPropsToValues: () => ({
-      [FORM_FIELDS.amount]: ""
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FORM_FIELDS.amount]: number().required(
-          t("withdraw-fund.validation.required")
-        )
-      }),
-    handleSubmit: (values, { props: { onSubmit }, setSubmitting }) => {
-      onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_DemoDepositForm);
+const DemoDepositForm = React.memo(_DemoDepositForm);
 export default DemoDepositForm;

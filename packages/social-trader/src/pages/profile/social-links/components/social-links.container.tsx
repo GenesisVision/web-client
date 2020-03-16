@@ -5,8 +5,7 @@ import withLoader from "decorators/with-loader";
 import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
-import { useCallback, useEffect } from "react";
-import { SetSubmittingType } from "utils/types";
+import { useCallback } from "react";
 
 import {
   fetchSocialLinks,
@@ -15,21 +14,30 @@ import {
 import SocialLinkForm from "./social-link/social-link-form";
 import SocialLinksLoader from "./social-links-loader";
 
-const _Links: React.FC<ILinksProps> = ({ socialLinks, onSubmit }) => (
+const _Links: React.FC<ILinksProps> = ({
+  socialLinks,
+  onSubmit,
+  errorMessage
+}) => (
   <div>
-    {socialLinks.map(x => (
-      <SocialLinkForm key={x.type} socialLink={x} onSubmit={onSubmit} />
+    {socialLinks.map(link => (
+      <SocialLinkForm
+        errorMessage={errorMessage}
+        key={link.type}
+        socialLink={link}
+        onSubmit={onSubmit}
+      />
     ))}
   </div>
 );
 const Links = React.memo(withLoader(_Links));
 
 export type TOnEditLinkSubmitFunc = (
-  values: UpdateSocialLinkViewModel,
-  setSubmitting: SetSubmittingType
+  values: UpdateSocialLinkViewModel
 ) => Promise<void>;
 
 interface ILinksProps {
+  errorMessage?: string;
   socialLinks: SocialLinkViewModel[];
   onSubmit: TOnEditLinkSubmitFunc;
 }
@@ -37,25 +45,25 @@ interface ILinksProps {
 const _SocialLinksContainer: React.FC = () => {
   const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest<
     SocialLinkViewModel[]
-  >({ request: fetchSocialLinks });
-  const { sendRequest: setSocialLinks } = useApiRequest<SocialLinkViewModel[]>({
+  >({ request: fetchSocialLinks, fetchOnMount: true });
+  const { sendRequest: setSocialLinks, errorMessage } = useApiRequest<
+    SocialLinkViewModel[]
+  >({
     middleware: [getSocialLinks],
     request: updateSocialLink,
     successMessage: "profile-page.social-links.notifications.edit-success"
   });
-  useEffect(() => {
-    getSocialLinks();
-  }, []);
 
-  const _handleSubmitSocialLink: TOnEditLinkSubmitFunc = (
-    { type, value }: UpdateSocialLinkViewModel,
-    setSubmitting: SetSubmittingType
-  ) => setSocialLinks({ type, value }, setSubmitting);
-  const handleSubmitSocialLink = useCallback(_handleSubmitSocialLink, []);
+  const handleSubmitSocialLink = useCallback(
+    ({ type, value }: UpdateSocialLinkViewModel) =>
+      setSocialLinks({ type, value }),
+    []
+  );
 
   return (
     <SettingsBlock>
       <Links
+        errorMessage={errorMessage}
         condition={socialLinks !== undefined}
         loader={<SocialLinksLoader />}
         socialLinks={socialLinks!}

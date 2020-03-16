@@ -1,5 +1,3 @@
-import "./table-card.scss";
-
 import GVButton from "components/gv-button";
 import Link, { ToType } from "components/link/link";
 import Popover, {

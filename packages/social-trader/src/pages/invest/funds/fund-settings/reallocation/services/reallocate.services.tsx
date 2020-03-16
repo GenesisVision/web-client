@@ -13,17 +13,10 @@ export const updateAssets = ({
 }: {
   id: string;
   assets: FundAssetPart[];
-}) => (dispatch: MiddlewareDispatch): Promise<void> => {
-  const authorization = authService.getAuthArg();
-  return assetsApi
-    .updateFundAssets(id, authorization, {
-      body: assets
-    })
-    .then(() => {
-      dispatch(
-        alertMessageActions.success("reallocate.success-alert-message", true)
-      );
-    });
+}) => {
+  return assetsApi.updateFundAssets(id, authService.getAuthArg(), {
+    body: assets
+  });
 };
 export const alert = (
   // TODO What is it?..

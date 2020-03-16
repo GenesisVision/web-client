@@ -68,7 +68,6 @@ export type ResponseError = {
   code: string;
 };
 
-export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
 export type CurrencyEnum = Currency;

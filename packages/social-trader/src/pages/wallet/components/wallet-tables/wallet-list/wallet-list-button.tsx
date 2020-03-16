@@ -1,3 +1,5 @@
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { WalletData } from "gv-api-web";
 import LineTransferButton from "pages/wallet/components/wallet-tables/buttons/line-transfer-button";
 import * as React from "react";
@@ -15,9 +17,9 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
   } = wallet;
   const [t] = useTranslation();
   return (
-    <div className="wallet-list__buttons">
+    <Row className="wallet-list__buttons">
       {depositUrlCoindirect && (
-        <div className="wallet-list__button">
+        <RowItem>
           <a
             title={t("wallet-page.list.buy-with-card")}
             href={depositUrlCoindirect}
@@ -26,12 +28,12 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
           >
             {t("wallet-page.list.buy-with-card")}
           </a>
-        </div>
+        </RowItem>
       )}
       <LineTransferButton wallet={wallet} />
       <LineWithdrawButton currency={currency} disabled={!isWithdrawalEnabled} />
       <LineDepositButton currency={currency} disabled={!isDepositEnabled} />
-    </div>
+    </Row>
   );
 };
 

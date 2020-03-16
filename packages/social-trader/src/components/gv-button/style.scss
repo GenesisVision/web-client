@@ -1,24 +1,67 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+$change-size-value: 1px;
+$default-padding: $padding-xxsmall $padding-small;
+$decreased-padding: $padding-xxsmall - $change-size-value $padding-small -
+  $change-size-value;
+$decreased-margin: $change-size-value;
 
 @mixin box-shadow($color) {
   box-shadow: 0 0.2em 0.5em 0 $color;
 }
 
 .gv-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
   border: 0;
   outline: none;
-  padding: $padding-xxsmall $padding-small;
-  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition-property: background-color, box-shadow, color;
+  padding: $default-padding;
+  @include transition(
+    filter,
+    background-color,
+    box-shadow,
+    color,
+    opacity,
+    margin,
+    padding
+  );
   color: $text-accent-color;
   background-color: transparent;
   [stroke] {
-    transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    @include transition(stroke);
+  }
+
+  &__label {
+    @include transition(opacity);
+    position: relative;
+    &--success {
+      opacity: 0;
+    }
+  }
+  &__success-symbol {
+    @include transition(opacity);
+    opacity: 0;
+    position: absolute;
+    &--success {
+      opacity: 1;
+    }
+  }
+
+  &--successful {
+    &.gv-btn.gv-btn--contained {
+      opacity: 1;
+      background-color: $positive-color;
+    }
+  }
+
+  &--pending {
+    animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    filter: grayscale(50%);
   }
 
   &--bold {
@@ -32,9 +75,11 @@
   &--large {
     font-weight: 600;
     @include font-size($font-size-common);
-    @include height(50px);
-    @include horizontal-paddings($padding-small);
-    @include vertical-paddings($padding-xxsmall);
+    &:not(.gv-btn--no-padding) {
+      @include height(50px);
+      @include horizontal-paddings($padding-small);
+      @include vertical-paddings($padding-xxsmall);
+    }
   }
 
   &--big {
@@ -43,14 +88,18 @@
     letter-spacing: 0.3px;
     font-weight: 600;
     box-sizing: border-box;
-    @include width($btn-width);
-    @include height($btn-height);
+    &:not(.gv-btn--no-padding) {
+      @include width($btn-width);
+      @include height($btn-height);
+    }
   }
 
   &--small {
     @include font-size($font-size-common);
-    @include width($btn-width-small);
-    @include height($btn-height-small);
+    &:not(.gv-btn--no-padding) {
+      @include width($btn-width-small);
+      @include height($btn-height-small);
+    }
     letter-spacing: 0.3px;
     font-weight: 300;
     box-sizing: border-box;
@@ -76,20 +125,6 @@
 
   &:not(:disabled):active {
     background-image: none;
-  }
-
-  &:hover:not(:disabled) {
-    &.gv-btn--danger {
-      background-color: rgba(darken($negative-color, 10%), 0.3);
-    }
-
-    &.gv-btn--primary {
-      background-color: rgba(darken($primary-color, 10%), 0.3);
-    }
-
-    &.gv-btn--secondary {
-      background-color: rgba(darken($secondary-color, 10%), 0.3);
-    }
   }
 
   &--text {
@@ -165,7 +200,7 @@
       }
     }
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not(.gv-btn--successful) {
       &.gv-btn--danger {
         background-color: darken($negative-color, 10%);
       }
@@ -200,5 +235,14 @@
     &.gv-btn--secondary {
       border-color: $secondary-color;
     }
+  }
+}
+
+@keyframes pending {
+  0% {
+    color: rgba(255, 255, 255, 8);
+  }
+  50% {
+    color: rgba(255, 255, 255, 0.3);
   }
 }

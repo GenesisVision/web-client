@@ -1,5 +1,6 @@
 import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
+import { debounce } from "lodash";
 import { fetchWalletsByCurrencyAvailableAction } from "pages/wallet/actions/wallet.actions";
 import { walletsAvailableSelector } from "pages/wallet/reducers/wallet.reducers";
 import { useCallback, useEffect, useState } from "react";
@@ -28,23 +29,28 @@ const useAssetSection = ({
   const wallets = useSelector(walletsAvailableSelector);
   const accountCurrency = useSelector(currencySelector);
   const [wallet, setWallet] = useState<AssetSectionWalletType>(
-    wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+    safeGetElemFromArray(wallets, ({ currency }) => currency === assetCurrency)
   );
   const { rate, getRate } = useGetRate();
 
   useEffect(() => {
     dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
-  }, [assetCurrency]);
+  }, []);
 
   useEffect(() => {
     setWallet(
-      wallets.find(({ currency }) => currency === assetCurrency) || wallets[0]
+      safeGetElemFromArray(
+        wallets,
+        ({ currency }) => currency === assetCurrency
+      )
     );
   }, [wallets, assetCurrency]);
 
+  const fetchRate = useCallback(debounce(getRate, 100), []);
+
   useEffect(() => {
-    wallet && getRate({ from: wallet.currency, to: assetCurrency });
-  }, [wallet, assetCurrency]);
+    if (wallet) fetchRate({ from: wallet.currency, to: assetCurrency });
+  }, [assetCurrency, wallet]);
 
   const handleWalletChange = useCallback(
     (walletId: string) =>

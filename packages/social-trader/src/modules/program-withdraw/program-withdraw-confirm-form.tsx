@@ -3,17 +3,17 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import GVButton from "components/gv-button";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
+import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
 import { useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
 import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
-import { SetSubmittingType } from "utils/types";
+import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
-import { IProgramWithdrawAmountFormValues } from "./program-withdraw-amount-form";
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
 export const WITHDRAW_FORM_SUBMIT = "programWithdrawFormSubmit";
@@ -27,14 +27,14 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
   periodEnds,
   onBackClick
 }) => {
+  const onCloseMiddleware = postponeCallback(onClose);
   const { errorMessage, sendRequest } = useApiRequest({
-    middleware: [onClose, onApply],
+    middleware: [onCloseMiddleware, onApply],
     request: withdrawProgramById,
     successMessage: "withdraw-program.success-alert-message"
   });
   const handleSubmit = useCallback(
-    (setSubmitting: SetSubmittingType) =>
-      sendRequest({ id, value: formValues }, setSubmitting).then(onClose),
+    () => sendRequest({ id, value: formValues }),
     [formValues]
   );
 
@@ -61,23 +61,25 @@ interface ProgramWithdrawConfirmProps {
   programCurrency: string;
 }
 
-const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
+const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
+  onSubmit,
   programCurrency,
   formValues: { amount, withdrawAll },
   periodEnds,
-  isSubmitting,
   errorMessage,
-  handleSubmit,
   onBackClick
 }) => {
   const [t] = useTranslation();
+
+  const form = useForm();
+
   return (
-    <form id="withdraw-submit-form" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogList>
         <DialogListItem label={t("withdraw-program.withdrawing")}>
           {amount && !withdrawAll
             ? `${formatCurrencyValue(
-                amount,
+                +amount,
                 programCurrency
               )} ${programCurrency}`
             : t("withdraw-program.all")}
@@ -96,36 +98,27 @@ const _ProgramWithdrawConfirmForm: React.FC<InjectedFormikProps<Props, {}>> = ({
         >
           {t("withdraw-program.back")}
         </GVButton>
-        <GVButton
-          title={"submit"}
-          type={"submit"}
+        <SubmitButton
+          checkDirty={false}
+          checkValid={false}
+          isSuccessful={!errorMessage}
           id={WITHDRAW_FORM_SUBMIT}
-          disabled={isSubmitting}
         >
           {t("withdraw-program.submit")}
-        </GVButton>
+        </SubmitButton>
       </DialogButtons>
-    </form>
+    </HookForm>
   );
 };
-
-const ProgramWithdrawConfirmForm = compose<React.ComponentType<Props>>(
-  withFormik<Props, {}>({
-    displayName: "withdraw-submit-form",
-    handleSubmit: (_, { props, setSubmitting }) => {
-      props.onSubmit(setSubmitting);
-    }
-  }),
-  React.memo
-)(_ProgramWithdrawConfirmForm);
-
-export default ProgramWithdrawConfirmForm;
 
 interface Props {
   formValues: IProgramWithdrawAmountFormValues;
   errorMessage?: string;
-  onSubmit: (setSubmitting: SetSubmittingType) => void;
+  onSubmit: (e: any) => void;
   onBackClick: () => void;
   periodEnds: Date;
   programCurrency: string;
 }
+
+const ProgramWithdrawConfirmForm = React.memo(_ProgramWithdrawConfirmForm);
+export default ProgramWithdrawConfirmForm;

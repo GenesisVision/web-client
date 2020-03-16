@@ -6,9 +6,6 @@
   display: inline-block;
   position: relative;
   cursor: default;
-  &:not(:last-child) {
-    margin-right: $padding-xxsmall;
-  }
 
   &__button-remove {
     padding: 0;
@@ -29,14 +26,7 @@
 }
 
 .tag-item-tooltip {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  .tag-item {
-    margin-top: $padding-xxsmall/2;
-    margin-bottom: $padding-xxsmall/2;
-  }
+  padding: $padding-xxsmall/2 0;
 }
 
 .tag-button {
@@ -48,6 +38,10 @@
   font-weight: 500;
   text-transform: uppercase;
   white-space: nowrap;
+
+  &--clickable {
+    cursor: pointer;
+  }
 
   &--remainder {
     color: $positive-color;

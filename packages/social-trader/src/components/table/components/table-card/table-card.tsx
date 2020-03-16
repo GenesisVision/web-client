@@ -6,6 +6,7 @@ import ImageBase from "components/avatar/image-base";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
+import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -93,17 +94,19 @@ export const TableCardSubTitle: React.FC<{
   const title = typeof children === "string" ? children : "";
   return (
     <div className="table-card__subtitle">
-      {url ? (
-        <Link
-          title={`Open ${title} user page`}
-          className=" table-card__name"
-          to={url}
-        >
-          {children}
-        </Link>
-      ) : (
-        children
-      )}
+      <MutedText noWrap={false}>
+        {url ? (
+          <Link
+            title={`Open ${title} user page`}
+            className=" table-card__name"
+            to={url}
+          >
+            {children}
+          </Link>
+        ) : (
+          children
+        )}
+      </MutedText>
     </div>
   );
 };
@@ -178,7 +181,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-          {extraBlock}
+          <div className="table-card__extra-block">{extraBlock}</div>
         </div>
       </TableCardRow>
     );

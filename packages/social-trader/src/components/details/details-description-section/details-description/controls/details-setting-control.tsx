@@ -1,5 +1,3 @@
-import "./details-description-control.scss";
-
 import { SettingsIcon } from "components/icon/settings-icon";
 import Link, { ToType } from "components/link/link";
 import React from "react";

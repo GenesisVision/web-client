@@ -1,7 +1,6 @@
+import { debounce } from "lodash";
 import * as React from "react";
-import { connect } from "react-redux";
-import { RootState } from "reducers/root-reducer";
-import { compose } from "redux";
+import { useEffect, useState } from "react";
 import { isTablet } from "utils/breakpoints";
 
 import GoogleAuthDesktop, {
@@ -9,26 +8,20 @@ import GoogleAuthDesktop, {
 } from "./google-auth-steps-desktop";
 import GoogleAuthMobile from "./google-auth-steps-mobile";
 
-const GoogleAuthSteps: React.FC<Props> = props =>
-  isTablet(props.innerWidth) ? (
+const GoogleAuthSteps: React.FC<Props> = props => {
+  const [innerWidth, setInnerWidth] = useState(0);
+  useEffect(() => {
+    window.onresize = debounce(() => setInnerWidth(window.innerWidth), 166);
+    setInnerWidth(window.innerWidth);
+  }, []);
+  return isTablet(innerWidth) ? (
     <GoogleAuthMobile {...props} />
   ) : (
     <GoogleAuthDesktop {...props} />
   );
+};
 
-const mapStateToProps = ({ ui }: RootState) => ({
-  innerWidth: ui.size.innerWidth
-});
+interface Props extends IGoogleAuthProps {}
 
-interface Props extends IGoogleAuthProps, StateProps {}
-
-interface StateProps {
-  innerWidth: number;
-}
-
-const GoogleAuthStepsContainer = compose<React.ComponentType<IGoogleAuthProps>>(
-  connect(mapStateToProps),
-  React.memo
-)(GoogleAuthSteps);
-
+const GoogleAuthStepsContainer = React.memo(GoogleAuthSteps);
 export default GoogleAuthStepsContainer;

@@ -1,5 +1,6 @@
 import "./wallet-withdraw-form.scss";
 
+import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
@@ -7,119 +8,130 @@ import { DialogField } from "components/dialog/dialog-field";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import InputAmountField from "components/input-amount-field/input-amount-field";
-import { ISelectChangeEvent } from "components/select/select";
-import StatisticItem from "components/statistic-item/statistic-item";
-import WalletSelect from "components/wallet-select/wallet-select";
-import { InjectedFormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
+import {
+  WALLET_WITHDRAW_FIELDS,
+  walletWithdrawValidationSchema
+} from "modules/wallet-withdraw/components/wallet-withdraw-form.helpers";
 import * as React from "react";
-import { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
-import { compose } from "redux";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
-import {
-  btcWalletValidator,
-  ethGvtWalletValidator,
-  twoFactorValidator
-} from "utils/validators/validators";
-import { lazy, object, Schema } from "yup";
+import { HookForm } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
-const _WalletWithdrawForm: React.FC<InjectedFormikProps<
-  Props,
-  IWalletWithdrawFormValues
->> = ({
-  t,
+const _WalletWithdrawForm: React.FC<Props> = ({
+  onSubmit,
   twoFactorEnabled,
-  handleSubmit,
   wallets,
-  values,
-  isValid,
-  dirty,
   errorMessage,
-  setFieldValue,
-  isSubmitting
+  currentWallet
 }) => {
-  const { currency, amount } = values;
-  const [selected, setSelected] = useState<WalletData>(
-    safeGetElemFromArray(wallets, wallet => wallet.currency === currency)
-  );
-  const onChangeCurrency = useCallback(
-    (event: ISelectChangeEvent, target: JSX.Element) => {
-      const wallet = safeGetElemFromArray(
-        wallets,
-        wallet => wallet.id === target.props.value
-      );
-      setSelected(wallet);
-      setFieldValue(FIELDS.currency, wallet.currency);
-      setFieldValue(FIELDS.id, wallet.id);
-      setFieldValue(FIELDS.amount, "");
+  const [selected, setSelected] = useState<WalletData>(currentWallet);
+  const { withdrawalCommission, available, currency } = selected;
+
+  const [t] = useTranslation();
+  const form = useForm<IWalletWithdrawFormValues>({
+    defaultValues: {
+      [WALLET_WITHDRAW_FIELDS.id]: selected.id,
+      [WALLET_WITHDRAW_FIELDS.currency]: selected.currency
     },
-    [setFieldValue, selected, setSelected, wallets]
+    validationSchema: walletWithdrawValidationSchema({
+      t,
+      twoFactorEnabled,
+      currency
+    }),
+    mode: "onChange"
+  });
+  const { reset, watch, setValue } = form;
+
+  const { amount, id } = watch();
+
+  useEffect(() => {
+    setSelected(safeGetElemFromArray(wallets, wallet => wallet.id === id));
+  }, [id]);
+
+  const onChangeCurrency = useCallback(
+    (wallet: WalletItemType) => {
+      reset({
+        [WALLET_WITHDRAW_FIELDS.currency]: wallet.currency,
+        [WALLET_WITHDRAW_FIELDS.id]: wallet.id,
+        [WALLET_WITHDRAW_FIELDS.amount]: ""
+      });
+      setSelected(wallet as WalletData);
+    },
+    [setValue, setSelected]
   );
-  const { withdrawalCommission, available } = selected;
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
-  const isAllow = (inputValues: NumberFormatValues) => {
-    const { floatValue, formattedValue, value } = inputValues;
-    const { currency } = values;
-    return (
-      formattedValue === "" ||
-      (validateFraction(value, currency) && floatValue <= available)
+  const isAllow = useCallback(
+    (inputValues: NumberFormatValues) => {
+      const { floatValue, formattedValue, value } = inputValues;
+      return (
+        formattedValue === "" ||
+        (validateFraction(value, currency) && floatValue <= available)
+      );
+    },
+    [currency, available]
+  );
+  const setMaxAmount = useCallback(() => {
+    setValue(
+      WALLET_WITHDRAW_FIELDS.amount,
+      formatCurrencyValue(available, currency),
+      true
     );
-  };
-  const setMaxAmount = () => {
-    setFieldValue(FIELDS.amount, formatCurrencyValue(available, currency));
-  };
+  }, [setValue, available, currency]);
+
+  const handleSubmit = useCallback(
+    (values: IWalletWithdrawFormValues) => {
+      return onSubmit({ ...values, currency });
+    },
+    [currency]
+  );
 
   return (
-    <form id="wallet-withdraw" onSubmit={handleSubmit} noValidate>
+    <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <DialogField>
-          <WalletSelect
-            name={FIELDS.id}
-            label={t("wallet-withdraw.select-currency")}
-            items={wallets}
-            onChange={onChangeCurrency}
-          />
-        </DialogField>
-        <DialogField>
-          <StatisticItem label={t("wallet-withdraw.available")} big>
-            {`${formatCurrencyValue(available, currency)} ${currency}`}
-          </StatisticItem>
-        </DialogField>
+        <WalletSelect
+          name={WALLET_WITHDRAW_FIELDS.id}
+          label={t("wallet-withdraw.select-currency")}
+          wallets={wallets}
+          onChange={onChangeCurrency}
+        />
       </DialogTop>
       <DialogBottom>
         <InputAmountField
-          name={FIELDS.amount}
+          name={WALLET_WITHDRAW_FIELDS.amount}
           label={t("wallet-withdraw.amount")}
           currency={currency}
-          isAllow={isAllow}
+          isAllowed={isAllow}
           setMax={setMaxAmount}
         />
         <DialogField>
-          <GVFormikField
+          <GVHookFormField
             wide
-            name={FIELDS.address}
+            name={WALLET_WITHDRAW_FIELDS.address}
             label={t("wallet-withdraw.address")}
-            component={GVTextField}
+            component={SimpleTextField}
             autoComplete="off"
           />
         </DialogField>
         {twoFactorEnabled && (
           <DialogField>
-            <GVFormikField
+            <GVHookFormField
               wide
               type="text"
-              name={FIELDS.twoFactorCode}
+              name={WALLET_WITHDRAW_FIELDS.twoFactorCode}
               label={t("wallet-withdraw.two-factor-code-label")}
               autoComplete="off"
-              component={GVTextField}
+              component={SimpleTextField}
             />
           </DialogField>
         )}
@@ -141,87 +153,30 @@ const _WalletWithdrawForm: React.FC<InjectedFormikProps<
         </DialogList>
         <DialogError error={errorMessage} />
         <DialogButtons>
-          <GVButton
-            wide
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting || !isValid || !dirty}
-          >
+          <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
 
-enum FIELDS {
-  id = "id",
-  currency = "currency",
-  amount = "amount",
-  address = "address",
-  twoFactorCode = "twoFactorCode"
-}
-
 export interface IWalletWithdrawFormValues {
-  [FIELDS.currency]: CurrencyEnum;
-  [FIELDS.id]: string;
-  [FIELDS.amount]: string;
-  [FIELDS.address]: string;
-  [FIELDS.twoFactorCode]: string;
+  [WALLET_WITHDRAW_FIELDS.currency]: CurrencyEnum;
+  [WALLET_WITHDRAW_FIELDS.id]: string;
+  [WALLET_WITHDRAW_FIELDS.amount]: string;
+  [WALLET_WITHDRAW_FIELDS.address]: string;
+  [WALLET_WITHDRAW_FIELDS.twoFactorCode]: string;
 }
 
-interface Props extends WithTranslation, OwnProps {}
-
-interface OwnProps {
+interface Props {
   twoFactorEnabled: boolean;
   wallets: WalletData[];
   currentWallet: WalletData;
-  onSubmit(
-    data: IWalletWithdrawFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit: (data: IWalletWithdrawFormValues) => void;
   errorMessage?: string;
 }
 
-const WalletWithdrawForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, IWalletWithdrawFormValues>({
-    displayName: "wallet-withdraw",
-    mapPropsToValues: ({ currentWallet: { id, currency } }) => ({
-      [FIELDS.id]: id,
-      [FIELDS.currency]: currency,
-      [FIELDS.amount]: "",
-      [FIELDS.address]: "",
-      [FIELDS.twoFactorCode]: ""
-    }),
-    validationSchema: ({ t, twoFactorEnabled }: Props) =>
-      lazy(
-        (values: IWalletWithdrawFormValues): Schema<any> => {
-          switch (values[FIELDS.currency]) {
-            case "GVT":
-            case "ETH":
-            case "USDT":
-              return object().shape({
-                [FIELDS.address]: ethGvtWalletValidator.required(
-                  t("wallet-withdraw.validation.address-is-required")
-                ),
-                [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
-              });
-            default:
-              return object().shape({
-                [FIELDS.address]: btcWalletValidator.required(
-                  t("wallet-withdraw.validation.address-is-required")
-                ),
-                [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
-              });
-          }
-        }
-      ),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(_WalletWithdrawForm);
+const WalletWithdrawForm = React.memo(_WalletWithdrawForm);
 export default WalletWithdrawForm;

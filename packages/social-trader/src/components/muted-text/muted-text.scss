@@ -1,0 +1,21 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.muted-text {
+  @extend .muted;
+  letter-spacing: 0.4px;
+  &--small {
+    @include font-size($font-size-small);
+  }
+  &--big {
+    @include font-size($font-size-h4);
+  }
+  &--no-wrap {
+    white-space: nowrap;
+  }
+  &--bold {
+    font-weight: 600;
+  }
+}

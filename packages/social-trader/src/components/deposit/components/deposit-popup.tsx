@@ -14,11 +14,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { currencySelector } from "reducers/account-settings-reducer";
 import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { postponeCallback } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TFees } from "./deposit.types";
+import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
   title,
@@ -43,16 +44,20 @@ const _DepositPopup: React.FC<Props> = ({
   }, []);
   const profileCurrency = useSelector(currencySelector);
   const dispatch = useDispatch();
+  const onCloseMiddleware = postponeCallback(() => {
+    onClose();
+    onApply();
+  });
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
-    middleware: [onApply, onClose, updateWalletInfoMiddleware]
+    middleware: [onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (amount: number, setSubmitting: SetSubmittingType, walletId: string) => {
-      return sendRequest({ id, amount, walletId }, setSubmitting).then(res => {
+    ({ amount, walletId }) => {
+      return sendRequest({ id, amount, walletId }).then(res => {
         if (!res) return;
         const walletCurrency = safeGetElemFromArray(
           wallets,
@@ -68,7 +73,7 @@ const _DepositPopup: React.FC<Props> = ({
         });
       });
     },
-    [id, asset, sendRequest, sendEventToGA]
+    [id, asset, sendEventToGA]
   );
 
   return (
@@ -103,7 +108,7 @@ interface Props {
   title: string;
   availableToInvest?: number;
   fees: TFees;
-  minDeposit: number;
+  minDeposit: MinDepositType;
   id: string;
   onClose: (param?: any) => void;
   onApply: () => void;

@@ -5,28 +5,9 @@
 $fund-asset-bubble-size: 5px;
 
 .fund-asset-list {
-  display: flex;
-  flex-wrap: wrap;
-  @include adaptive-padding(top, $padding-xxsmall);
-
-  &__item {
-    display: flex;
-    align-items: center;
-    @include adaptive-padding(right, $padding-xsmall);
-  }
-
   &__bubble {
     width: $fund-asset-bubble-size;
     height: $fund-asset-bubble-size;
     border-radius: 50%;
-    @include adaptive-margin(right, 5px);
-  }
-
-  &__text {
-    font-size: $font-size-small;
-    font-weight: 400;
-    color: $text-accent-color;
-    opacity: 0.4;
-    white-space: nowrap;
   }
 }

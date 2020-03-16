@@ -17,8 +17,8 @@ const _NotificationEntity: React.FC<Props> = ({
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
   return (
-    <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
-      <div className="notification-entity">
+    <div className="notification-entity">
+      <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
         <AssetAvatarWithName
           levelProgress={levelProgress}
           name={title}
@@ -27,9 +27,9 @@ const _NotificationEntity: React.FC<Props> = ({
           level={level}
           color={color}
         />
-        <div className="notification-entity__count">{count}</div>
-      </div>
-    </Link>
+      </Link>
+      <div className="notification-entity__count">{count}</div>
+    </div>
   );
 };
 

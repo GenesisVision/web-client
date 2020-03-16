@@ -3,67 +3,61 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
-import { InjectedFormikProps, withFormik } from "formik";
+import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 
-const _ConfirmPopupContent: React.ComponentType<InjectedFormikProps<
-  IConfirmPopupContentProps & WithTranslation,
-  {}
->> = ({
-  t,
+const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
+  errorMessage,
+  onApply,
   onCancel,
   header,
   body,
-  applyButtonText = t("buttons.apply"),
-  cancelButtonText = t("buttons.cancel"),
-  handleSubmit,
-  isSubmitting
-}) => (
-  <form onSubmit={handleSubmit} noValidate>
-    <DialogTop title={header} />
-    <DialogBottom>
-      <div className="dialog__text">
-        <p>{body}</p>
-      </div>
-      <DialogButtons>
-        <GVButton wide={!onCancel} type="submit" disabled={isSubmitting}>
-          {applyButtonText}
-        </GVButton>
-        {onCancel && (
-          <GVButton color="secondary" variant="outlined" onClick={onCancel}>
-            {cancelButtonText}
-          </GVButton>
-        )}
-      </DialogButtons>
-    </DialogBottom>
-  </form>
-);
+  applyButtonText,
+  cancelButtonText
+}) => {
+  const [t] = useTranslation();
+  const form = useForm();
 
-const ConfirmPopupContent = compose<
-  React.ComponentType<IConfirmPopupContentProps>
->(
-  translate(),
-  withFormik<IConfirmPopupContentProps, {}>({
-    displayName: "confirm-form",
-    mapPropsToValues: () => ({}),
-    handleSubmit: (_, { props, setSubmitting }) => {
-      props.onApply(setSubmitting);
-    }
-  }),
-  React.memo
-)(_ConfirmPopupContent);
+  return (
+    <HookForm form={form} onSubmit={onApply}>
+      <DialogTop title={header} />
+      <DialogBottom>
+        <div className="dialog__text">
+          <p>{body}</p>
+        </div>
+        <DialogButtons>
+          <SubmitButton
+            checkDirty={false}
+            checkValid={false}
+            wide={!onCancel}
+            isSuccessful={!errorMessage}
+          >
+            {applyButtonText || t("buttons.apply")}
+          </SubmitButton>
+          {onCancel && (
+            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+              {cancelButtonText || t("buttons.cancel")}
+            </GVButton>
+          )}
+        </DialogButtons>
+      </DialogBottom>
+    </HookForm>
+  );
+};
+
+const ConfirmPopupContent = React.memo(_ConfirmPopupContent);
 export default ConfirmPopupContent;
 
 export interface IConfirmPopupContentProps extends IDialogProps {
-  onApply(setSubmitting: SetSubmittingType): void;
-  onCancel?(): void;
+  errorMessage?: string;
+  onApply: () => void;
+  onCancel?: () => void;
   header?: string;
   body?: React.ReactNode;
   applyButtonText?: string;
   cancelButtonText?: string;
-  className?: string;
   disabled?: boolean;
 }

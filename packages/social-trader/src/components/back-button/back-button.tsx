@@ -1,5 +1,3 @@
-import "./back-button.scss";
-
 import useHistoryContext from "decorators/history-provider/use-history-context";
 import Router from "next/router";
 import React from "react";

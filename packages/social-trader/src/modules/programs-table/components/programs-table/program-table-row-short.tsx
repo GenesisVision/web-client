@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
@@ -28,7 +27,6 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   withDispatch,
   updateRow,
-  showRating,
   program
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -56,12 +54,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   );
   const { currency, amount } = balance;
   return (
-    <TableRow
-      className={classNames({
-        "table__row--pretender": false
-      })}
-    >
-      {showRating && <TableCell>{}</TableCell>}
+    <TableRow>
       <TableCell className="programs-table__cell">
         <Link to={programLinkProps}>
           <AssetAvatarWithName
@@ -72,12 +65,14 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             color={color}
             tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             name={
-              <div>
+              <>
                 <div className="programs-table__cell--link">
                   {program.title}
                 </div>
-                <TagProgramContainer tags={tags} />
-              </div>
+                <div>
+                  <TagProgramContainer tags={tags} />
+                </div>
+              </>
             }
           />
         </Link>
@@ -156,7 +151,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 interface IProgramTableRowShortProps {
   updateRow?: UpdateRowFuncType;
   withDispatch?: boolean;
-  showRating?: boolean;
   program: ProgramDetailsListItem;
 }
 

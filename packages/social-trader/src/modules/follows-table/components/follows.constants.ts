@@ -17,6 +17,10 @@ export const FOLLOW_COLUMNS: SortingColumn[] = [
     sortingName: "ByTitle"
   },
   {
+    name: "equity",
+    sortingName: "ByEquity"
+  },
+  {
     name: "subscribers",
     sortingName: "BySubscribers"
   },

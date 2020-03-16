@@ -1,12 +1,15 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
+import { CurrencyItem } from "components/currency-item/currency-item";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { UpdateItemsFuncType } from "components/table/components/table.types";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { OrderSignalModel, TradesViewModel } from "gv-api-web";
+import { ClosePositionButton } from "pages/invest/programs/program-details/program-history-section/program-open-positions/closePositionButton";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";
@@ -14,6 +17,7 @@ import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramOpenPositionsRow: React.FC<Props> = ({
+  updateItems,
   position,
   data: { showDate, showDirection, showPrice, showPriceOpen, showProfit }
 }) => (
@@ -24,10 +28,17 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     <TableCell className="details-trades__cell program-details-trades__cell--symbol">
-      {position.symbol}
+      <CurrencyItem
+        clickable={position.assetData ? position.assetData.hasAssetInfo : false}
+        url={position.assetData ? position.assetData.url : ""}
+        logo={position.assetData ? position.assetData.icon : ""}
+        small
+        name={position.symbol}
+        symbol={position.symbol}
+      />
     </TableCell>
     {showDirection && (
-      <TableCell className="details-trades__cell program-details-trades__cell--direction">
+      <TableCell>
         <BaseProfitability
           isPositive={position.direction === "Buy"}
           isNegative={position.direction === "Sell"}
@@ -36,7 +47,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
         </BaseProfitability>
       </TableCell>
     )}
-    <TableCell className="details-trades__cell program-details-trades__cell--volume">
+    <TableCell>
       <NumberFormat
         value={formatValue(position.volume, DEFAULT_DECIMAL_SCALE / 2)}
         displayType="text"
@@ -44,7 +55,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       />
     </TableCell>
     {showPrice && (
-      <TableCell className="details-trades__cell program-details-trades__cell--price">
+      <TableCell>
         <NumberFormat
           value={formatValue(position.price, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
@@ -53,7 +64,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     {showPriceOpen && (
-      <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
+      <TableCell>
         <NumberFormat
           value={formatValue(position.priceCurrent, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
@@ -62,7 +73,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     {showProfit && (
-      <TableCell className="details-trades__cell program-details-trades__cell--profit">
+      <TableCell className="details-trades__cell--profit">
         <Profitability
           value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -75,12 +86,21 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
             suffix={` ${position.profitCurrency}`}
           />
         </Profitability>
+        {false && (
+          <ClosePositionButton
+            onApplyCancelRequest={updateItems}
+            volume={position.volume}
+            symbol={position.symbol}
+            id={position.id}
+          />
+        )}
       </TableCell>
     )}
   </TableRow>
 );
 
 interface Props {
+  updateItems?: UpdateItemsFuncType;
   data: TradesViewModel;
   currency: CurrencyEnum;
   position: OrderSignalModel;

@@ -1,14 +1,8 @@
-import { RootThunk } from "utils/types";
+import authApi from "services/api-client/auth-api";
 
-import { resendConfirmationLinkAction } from "../actions/signup.actions";
-
-export const sendConfirmationLink = (): RootThunk<void> => (
-  dispatch,
-  getState
-) => {
-  let { email } = getState().emailPending;
-  dispatch(
-    resendConfirmationLinkAction({
+export const sendConfirmationLink = (email: string) => () =>
+  authApi.resendConfirmationLink({
+    body: {
       email,
       captchaCheckResult: {
         id: "",
@@ -17,6 +11,5 @@ export const sendConfirmationLink = (): RootThunk<void> => (
         },
         geeTest: {}
       }
-    })
-  );
-};
+    }
+  });

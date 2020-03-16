@@ -1,6 +1,5 @@
-import "./details-description.scss";
-
 import Link, { ToType } from "components/link/link";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 
 const _DetailsSubtitle: React.FC<{
@@ -8,9 +7,9 @@ const _DetailsSubtitle: React.FC<{
   text: string;
 }> = ({ to, text }) => {
   return (
-    <div className="asset-details-description__author-btn">
+    <MutedText bold>
       <Link to={to}>{text}</Link>
-    </div>
+    </MutedText>
   );
 };
 

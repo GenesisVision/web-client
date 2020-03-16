@@ -1,5 +1,3 @@
-import "./profile-widget.scss";
-
 import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";

@@ -2,33 +2,22 @@ import {
   DialogLoaderGoogleAuthDesktop,
   DialogLoaderGoogleAuthMobile
 } from "components/dialog/dialog-loader/dialog-loader-google-auth";
+import { debounce } from "lodash";
 import * as React from "react";
-import { connect } from "react-redux";
-import { RootState } from "reducers/root-reducer";
-import { compose } from "redux";
+import { useEffect, useState } from "react";
 import { isTablet } from "utils/breakpoints";
 
-interface IDialogLoaderGoogleAuthStepsStateProps {
-  innerWidth: number;
-}
-
-const _DialogLoaderGoogleAuthSteps: React.FC<IDialogLoaderGoogleAuthStepsStateProps> = ({
-  innerWidth
-}) =>
-  isTablet(innerWidth) ? (
+const _DialogLoaderGoogleAuthSteps: React.FC = () => {
+  const [innerWidth, setInnerWidth] = useState(0);
+  useEffect(() => {
+    window.onresize = debounce(() => setInnerWidth(window.innerWidth), 166);
+  }, []);
+  return isTablet(innerWidth) ? (
     <DialogLoaderGoogleAuthMobile />
   ) : (
     <DialogLoaderGoogleAuthDesktop />
   );
+};
 
-const mapStateToProps = ({
-  ui
-}: RootState): IDialogLoaderGoogleAuthStepsStateProps => ({
-  innerWidth: ui.size.innerWidth
-});
-
-const DialogLoaderGoogleAuthSteps = compose<React.ComponentType>(
-  connect(mapStateToProps),
-  React.memo
-)(_DialogLoaderGoogleAuthSteps);
+const DialogLoaderGoogleAuthSteps = React.memo(_DialogLoaderGoogleAuthSteps);
 export default DialogLoaderGoogleAuthSteps;

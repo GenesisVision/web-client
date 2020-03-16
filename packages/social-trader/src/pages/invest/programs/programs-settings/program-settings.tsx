@@ -25,6 +25,7 @@ import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
 
 const _ProgramSettings: React.FC<Props> = ({
+  editError,
   updateDescription,
   createProgramInfo: { maxSuccessFee, maxEntryFee },
   description,
@@ -84,6 +85,7 @@ const _ProgramSettings: React.FC<Props> = ({
             currentLeverage={description.tradingAccountInfo.leverageMax}
           />
           <InvestmentFees
+            editError={editError}
             asset={ASSET.PROGRAM}
             maxSuccessFee={maxSuccessFee}
             maxEntryFee={maxEntryFee}
@@ -92,15 +94,18 @@ const _ProgramSettings: React.FC<Props> = ({
             onSubmit={editProgram}
           />
           <TradesUpdating
+            editError={editError}
             condition={!isSignalProgram}
             tradesDelay={programDetails.tradesDelay}
             onSubmit={editProgram}
           />
           <StopOutLevel
+            editError={editError}
             stopOutLevel={programDetails.stopOutLevelCurrent}
             onSubmit={editProgram}
           />
           <InvestmentLimit
+            editError={editError}
             currency={description.tradingAccountInfo.currency}
             investmentLimit={programDetails.availableInvestmentLimit}
             onSubmit={editProgram}
@@ -108,6 +113,7 @@ const _ProgramSettings: React.FC<Props> = ({
         </>
       )}
       <AssetEdit
+        editError={editError}
         title={description.publicInfo.title}
         logo={{ src: description.publicInfo.logo }}
         description={description.publicInfo.description}
@@ -138,6 +144,7 @@ const _ProgramSettings: React.FC<Props> = ({
 };
 
 interface Props {
+  editError?: boolean;
   createProgramInfo: ProgramCreateAssetPlatformInfo;
   description: ProgramFollowDetailsFull;
   updateDescription: VoidFunction;

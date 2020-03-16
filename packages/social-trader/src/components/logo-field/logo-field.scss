@@ -7,25 +7,6 @@
   margin-bottom: $padding-medium;
   max-width: 230px;
 
-  &-caption {
-    padding-top: $padding-xsmall;
-    font-size: $font-size-small;
-    color: $label-color;
-    letter-spacing: 0.4px;
-    width: 100%;
-
-    &.hint {
-      cursor: pointer;
-    }
-  }
-
-  &-caption-tooltip-content {
-    width: 248px;
-    font-size: 12px;
-    line-height: 1.6;
-    color: $text-light-color;
-  }
-
   &--wider {
     max-width: 100%;
     width: 100%;
@@ -39,9 +20,6 @@
   }
 
   &__notice {
-    font-size: 11px;
-    color: $label-color;
-    letter-spacing: 0.2px;
     width: 210px;
     line-height: 1.4;
   }

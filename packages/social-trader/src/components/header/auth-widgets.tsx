@@ -9,7 +9,9 @@ import { getRandomInteger } from "utils/helpers";
 const AuthWidgets: React.FC<Props> = ({ profileHeader }) => {
   return (
     <>
-      <WalletWidgetContainer className="header__wallet" />
+      <div className="header__wallet">
+        <WalletWidgetContainer />
+      </div>
       <NotificationsWidget
         loaderData={getRandomInteger(0, 1000)}
         data={profileHeader && profileHeader.notificationsCount}

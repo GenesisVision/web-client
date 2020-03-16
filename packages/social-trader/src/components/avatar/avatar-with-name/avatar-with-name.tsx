@@ -1,13 +1,19 @@
 import "./avatar-with-name.scss";
 
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import * as React from "react";
 
 const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
   return (
-    <div className="avatar-with-name">
-      {avatar && <div className="avatar-with-name__avatar">{avatar}</div>}
-      <div className="avatar-with-name__name">{name}</div>
-    </div>
+    <Row>
+      {avatar && (
+        <RowItem>
+          <Row>{avatar}</Row>
+        </RowItem>
+      )}
+      <RowItem className="avatar-with-name__name">{name}</RowItem>
+    </Row>
   );
 };
 

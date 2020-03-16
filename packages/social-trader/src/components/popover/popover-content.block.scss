@@ -1,0 +1,44 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.popover-content {
+  &__block {
+    box-sizing: border-box;
+    background-color: lighten($secondary-background-color, 2%);
+    &--fixed {
+      max-width: 400px;
+    }
+    &--small {
+      @include font-size($font-size-common);
+      @include adaptive-full-padding($popover-padding-small);
+      &.popover-content__block--stretched {
+        @include horizontal-paddings($popover-padding-small);
+        @include vertical-paddings($padding-xsmall);
+      }
+    }
+    &--middle {
+      @include adaptive-full-padding($popover-padding-medium);
+      &.popover-content__block--stretched {
+        @include horizontal-paddings($popover-padding-medium);
+        @include vertical-paddings($padding-small);
+      }
+    }
+    &--big {
+      @include adaptive-full-padding($popover-padding-large);
+      max-width: 100%;
+      @include media-breakpoint-landscape-phone() {
+        max-width: $modal-width;
+      }
+    }
+    &--dark {
+      background-color: $secondary-background-color;
+    }
+  }
+
+  &__block-item {
+    &:not(:last-child) {
+      @include adaptive-padding(bottom, $padding-xsmall);
+    }
+  }
+}

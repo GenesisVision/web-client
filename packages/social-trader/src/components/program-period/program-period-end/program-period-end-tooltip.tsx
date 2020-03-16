@@ -1,26 +1,28 @@
+import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 
-const _PropgramPeriodEndTooltip: React.FC<Props> = ({ t, periodEnds }) => (
-  <TooltipContent>
-    <div className="program-period-tooltip__header">
-      {t("program-period.period-ends")}
-    </div>
-    <div className="program-period-tooltip__content">
-      {periodEnds
-        ? formatDate(periodEnds)
-        : t("program-period.waiting-period-start")}
-    </div>
-  </TooltipContent>
-);
+const _PropgramPeriodEndTooltip: React.FC<Props> = ({ periodEnds }) => {
+  const [t] = useTranslation();
+  return (
+    <TooltipContent>
+      <StatisticItem
+        withPadding={false}
+        label={t("program-period.period-ends")}
+      >
+        {periodEnds
+          ? formatDate(periodEnds)
+          : t("program-period.waiting-period-start")}
+      </StatisticItem>
+    </TooltipContent>
+  );
+};
 
-interface Props extends WithTranslation {
+interface Props {
   periodEnds: Date;
 }
 
-const PropgramPeriodEndTooltip = React.memo(
-  translate()(_PropgramPeriodEndTooltip)
-);
+const PropgramPeriodEndTooltip = React.memo(_PropgramPeriodEndTooltip);
 export default PropgramPeriodEndTooltip;

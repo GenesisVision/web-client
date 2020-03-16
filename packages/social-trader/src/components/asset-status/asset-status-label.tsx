@@ -1,5 +1,3 @@
-import "./asset-status.scss";
-
 import classNames from "classnames";
 import { STATUS } from "constants/constants";
 import * as React from "react";

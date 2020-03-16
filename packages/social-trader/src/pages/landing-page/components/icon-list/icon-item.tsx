@@ -3,7 +3,13 @@ import React from "react";
 
 const _IconItem: React.FC<TIconLinks> = ({ href, name, icon }) => (
   <li className="icon-list__item">
-    <a href={href} className="icon-list__link" target="_blank" title={name}>
+    <a
+      href={href}
+      className="icon-list__link"
+      target="_blank"
+      rel="noopener noreferrer"
+      title={name}
+    >
       {icon}
     </a>
   </li>

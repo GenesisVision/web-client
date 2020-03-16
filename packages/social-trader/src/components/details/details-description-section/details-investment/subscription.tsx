@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
@@ -106,6 +104,34 @@ const _Subscription: React.FC<Props> = ({
           <NumberFormat
             value={subscriptionInfo.fixedVolume}
             suffix={` ${subscriptionInfo.fixedCurrency}`}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={
+            subscriptionInfo.volumeFeePersonal !== undefined &&
+            subscriptionInfo.volumeFeePersonal !== null
+          }
+          accent
+          label={t("follow-details-page.current-investment.fields.volume-fee")}
+        >
+          <NumberFormat
+            value={subscriptionInfo.volumeFeePersonal}
+            suffix={` %`}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={
+            subscriptionInfo.successFeePersonal !== undefined &&
+            subscriptionInfo.successFeePersonal !== null
+          }
+          accent
+          label={t("follow-details-page.current-investment.fields.success-fee")}
+        >
+          <NumberFormat
+            value={subscriptionInfo.successFeePersonal}
+            suffix={` %`}
             displayType="text"
           />
         </StatisticItem>

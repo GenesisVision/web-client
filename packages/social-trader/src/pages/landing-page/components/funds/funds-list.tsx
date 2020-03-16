@@ -29,7 +29,7 @@ const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
   return (
     <div
       className={classNames("funds-list", className, {
-        "funds-list--active": activeScroll
+        "funds-list--active": true
       })}
       onScroll={handleScroll}
       ref={list}
