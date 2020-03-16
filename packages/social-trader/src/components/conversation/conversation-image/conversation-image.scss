@@ -6,6 +6,7 @@ $image-height-full: 90vh;
 .conversation-image {
   @include adaptive-border-radius($border-radius);
   max-height: $image-height;
+  cursor: pointer;
 }
 .conversation-image-full {
   max-height: $image-height-full;
