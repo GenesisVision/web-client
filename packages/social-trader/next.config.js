@@ -1,6 +1,5 @@
 const path = require("path");
 const dotenv = require("dotenv");
-// const tm = require("next-transpile-modules");
 const sass = require("@zeit/next-sass");
 const css = require("@zeit/next-css");
 const withPlugins = require("next-compose-plugins");
