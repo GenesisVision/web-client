@@ -142,15 +142,17 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         />
       </DialogTop>
       <DialogBottom>
-        <TransferSelectField
-          currency={selectedDestinationItem.currency}
-          name={TRANSFER_FORM_FIELDS.destinationId}
-          value={formattedAvailableDestinationItem}
-          label={t("transfer.to")}
-          onChange={onChangeDestinationId}
-          items={destinationItemsWithoutCurrent}
-          sourceType={destinationType}
-        />
+        <DialogField>
+          <TransferSelectField
+            currency={selectedDestinationItem.currency}
+            name={TRANSFER_FORM_FIELDS.destinationId}
+            value={formattedAvailableDestinationItem}
+            label={t("transfer.to")}
+            onChange={onChangeDestinationId}
+            items={destinationItemsWithoutCurrent}
+            sourceType={destinationType}
+          />
+        </DialogField>
         <DialogField>
           <InputAmountField
             name={TRANSFER_FORM_FIELDS.amount}
