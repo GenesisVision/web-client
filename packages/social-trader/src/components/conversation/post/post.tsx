@@ -3,6 +3,7 @@ import "./post.scss";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
+import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
@@ -34,7 +35,14 @@ const _Post: React.FC<Props> = ({
           ))}
         </Row>
       ) : (
-        <Message message={message} />
+        <Row center={false}>
+          <Message message={message} />
+          {message.personalDetails?.canClose && (
+            <RowItem>
+              <ConversationRemoveButton id={id} onSuccess={() => {}} />
+            </RowItem>
+          )}
+        </Row>
       )}
       <PostButtons
         id={id}
