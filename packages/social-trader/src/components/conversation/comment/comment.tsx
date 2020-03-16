@@ -8,7 +8,10 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-const _Comment: React.FC<Props> = ({ comment: { id, message } }) => {
+const _Comment: React.FC<Props> = ({
+  updateData,
+  comment: { id, message }
+}) => {
   return (
     <Row className="comment">
       <Row className="comment__message" center={false}>
@@ -17,7 +20,7 @@ const _Comment: React.FC<Props> = ({ comment: { id, message } }) => {
         </RowItem>
         {message.personalDetails?.canClose && (
           <RowItem>
-            <ConversationRemoveButton id={id} onSuccess={() => {}} />
+            <ConversationRemoveButton id={id} onSuccess={updateData} />
           </RowItem>
         )}
       </Row>
@@ -34,6 +37,7 @@ const _Comment: React.FC<Props> = ({ comment: { id, message } }) => {
 };
 
 interface Props {
+  updateData: VoidFunction;
   comment: ConversationComment;
 }
 

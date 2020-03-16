@@ -6,18 +6,19 @@ import { PostInputContainer } from "components/conversation/post/post-input/post
 import { withBlurLoader } from "decorators/with-blur-loader";
 import React from "react";
 
-const _PostList: React.FC<Props> = ({ data }) => {
+const _PostList: React.FC<Props> = ({ data, updateData }) => {
   return (
     <div className="post-list">
-      <PostInputContainer />
+      <PostInputContainer onSuccess={updateData} />
       {data.map(post => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} updateData={updateData} />
       ))}
     </div>
   );
 };
 
 interface Props {
+  updateData: VoidFunction;
   data: ConversationPost[];
 }
 

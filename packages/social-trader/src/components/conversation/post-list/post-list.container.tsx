@@ -5,13 +5,16 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 export const PostListContainer: React.FC<Props> = ({ id }) => {
-  const { data } = useApiRequest({
-    request: getPosts,
-    fetchOnMount: true,
-    fetchOnMountData: { id }
+  const { data, sendRequest } = useApiRequest({
+    request: () => getPosts({ id }),
+    fetchOnMount: true
   });
   return (
-    <PostList data={data} loaderData={getConversationPostListLoaderData()} />
+    <PostList
+      data={data}
+      loaderData={getConversationPostListLoaderData()}
+      updateData={sendRequest}
+    />
   );
 };
 

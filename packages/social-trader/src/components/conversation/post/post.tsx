@@ -14,6 +14,7 @@ import { Row } from "components/row/row";
 import React from "react";
 
 const _Post: React.FC<Props> = ({
+  updateData,
   post: { id, comments, details, message }
 }) => {
   const {
@@ -39,7 +40,7 @@ const _Post: React.FC<Props> = ({
           <Message message={message} />
           {message.personalDetails?.canClose && (
             <RowItem>
-              <ConversationRemoveButton id={id} onSuccess={() => {}} />
+              <ConversationRemoveButton id={id} onSuccess={updateData} />
             </RowItem>
           )}
         </Row>
@@ -54,14 +55,18 @@ const _Post: React.FC<Props> = ({
         <Row large>
           <div className="post__comments">
             {comments.map(comment => (
-              <Comment key={comment.id} comment={comment} />
+              <Comment
+                updateData={updateData}
+                key={comment.id}
+                comment={comment}
+              />
             ))}
           </div>
         </Row>
       )}
       {personalDetails && personalDetails.canComment && (
         <Row>
-          <CommentInputContainer id={id} />
+          <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>
       )}
     </DetailsBlock>
@@ -69,6 +74,7 @@ const _Post: React.FC<Props> = ({
 };
 
 interface Props {
+  updateData: VoidFunction;
   post: ConversationPost;
 }
 
