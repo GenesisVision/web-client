@@ -23,6 +23,10 @@ export const toggleLike = (values: { id: string }) => {
   return mockRequest(values);
 };
 
+export const remove = (values: { id: string }) => {
+  return mockRequest(values);
+};
+
 export const getPosts = (values: {
   id: string;
 }): Promise<ConversationPost[]> => {

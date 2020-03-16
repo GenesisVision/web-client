@@ -11,7 +11,7 @@ export interface ConversationUser {
   avatar: string;
   name: string;
   link: string;
-  achievements?: Achievement[];
+  achievements: Achievement[];
   personalDetails?: ConversationUserPersonalDetails;
 }
 
@@ -21,9 +21,10 @@ export interface MessageDetailType {
 }
 
 export interface ConversationMessagePersonalDetails {
-  canLike?: boolean;
-  canComment?: boolean;
-  liked?: boolean;
+  canClose: boolean;
+  canLike: boolean;
+  canComment: boolean;
+  liked: boolean;
 }
 
 export interface ConversationMessage {

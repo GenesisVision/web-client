@@ -3,10 +3,12 @@ import { sendComment } from "components/conversation/conversation.service";
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
-const _CommentInputContainer: React.FC<Props> = ({}) => {
+const _CommentInputContainer: React.FC<Props> = ({ onSuccess, id }) => {
+  const successMiddleware = () => onSuccess();
   const { sendRequest, status, errorMessage } = useApiRequest({
+    middleware: [successMiddleware],
     successMessage: "Success",
-    request: sendComment
+    request: values => sendComment({ ...values, id })
   });
   return (
     <CommentInput
@@ -18,6 +20,7 @@ const _CommentInputContainer: React.FC<Props> = ({}) => {
 };
 
 interface Props {
+  onSuccess: VoidFunction;
   id: string;
 }
 

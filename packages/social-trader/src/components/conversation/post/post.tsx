@@ -3,6 +3,7 @@ import "./post.scss";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
+import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
@@ -13,6 +14,7 @@ import { Row } from "components/row/row";
 import React from "react";
 
 const _Post: React.FC<Props> = ({
+  updateData,
   post: { id, comments, details, message }
 }) => {
   const {
@@ -34,7 +36,14 @@ const _Post: React.FC<Props> = ({
           ))}
         </Row>
       ) : (
-        <Message id={id} message={message} />
+        <Row center={false}>
+          <Message message={message} />
+          {message.personalDetails?.canClose && (
+            <RowItem>
+              <ConversationRemoveButton id={id} onSuccess={updateData} />
+            </RowItem>
+          )}
+        </Row>
       )}
       <PostButtons
         id={id}
@@ -46,14 +55,18 @@ const _Post: React.FC<Props> = ({
         <Row large>
           <div className="post__comments">
             {comments.map(comment => (
-              <Comment key={comment.id} comment={comment} />
+              <Comment
+                updateData={updateData}
+                key={comment.id}
+                comment={comment}
+              />
             ))}
           </div>
         </Row>
       )}
       {personalDetails && personalDetails.canComment && (
         <Row>
-          <CommentInputContainer id={id} />
+          <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>
       )}
     </DetailsBlock>
@@ -61,6 +74,7 @@ const _Post: React.FC<Props> = ({
 };
 
 interface Props {
+  updateData: VoidFunction;
   post: ConversationPost;
 }
 
