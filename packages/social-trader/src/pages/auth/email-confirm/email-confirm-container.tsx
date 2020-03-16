@@ -30,9 +30,9 @@ const _EmailConfirmContainer: React.FC<Props> = ({ userId, code }) => {
   }, [userId, code]);
   return errorMessage ? (
     <EmailConfirmFailure errorMessage={errorMessage} />
-  ) : (
-    data && <EmailConfirmSuccess />
-  );
+  ) : data ? (
+    <EmailConfirmSuccess />
+  ) : null;
 };
 
 interface Props {
