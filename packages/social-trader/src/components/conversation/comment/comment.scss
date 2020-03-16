@@ -5,10 +5,12 @@
   @include adaptive-padding(top, $padding-xsmall);
   border-top: 1px solid $border-color;
   flex-direction: column;
-
   &__message,
   &__buttons {
     width: 100%;
+  }
+  &__message {
+    justify-content: space-between;
   }
   &__buttons {
     justify-content: flex-end;
