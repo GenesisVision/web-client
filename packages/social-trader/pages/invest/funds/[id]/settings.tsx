@@ -5,6 +5,7 @@ import FundSettingsPage from "pages/invest/funds/fund-settings/fund-settings.pag
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
+import { checkClosed } from "modules/asset-settings/services/asset-settings.service";
 
 const Page: NextPageWithRedux<void> = () => {
   return <FundSettingsPage />;
@@ -19,10 +20,7 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]).then(([id, description]) => {
-    if (
-      description.value.publicInfo.status === "Closed" ||
-      description.value.publicInfo.status === "Archived"
-    )
+    if (checkClosed(description.value.publicInfo.status))
       throw "Fund is closed";
   });
 };
