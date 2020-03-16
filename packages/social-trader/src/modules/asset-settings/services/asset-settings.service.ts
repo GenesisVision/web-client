@@ -4,6 +4,17 @@ import assetsApi from "services/api-client/assets-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
 
+export const checkClosed = (status: string) => {
+  switch (status) {
+    case "Closed":
+    case "Archived":
+    case "Disabled":
+      return true;
+    default:
+      return false;
+  }
+};
+
 export const editAsset = ({
   editAssetData,
   id
