@@ -34,7 +34,7 @@ const _Post: React.FC<Props> = ({
           ))}
         </Row>
       ) : (
-        <Message id={id} message={message} />
+        <Message message={message} />
       )}
       <PostButtons
         id={id}

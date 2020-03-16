@@ -24,6 +24,7 @@ export const getPostDetailListLoaderData = (): MessageDetailType[] =>
   tableLoaderCreator(getPostDetailLoaderData, 3);
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
+  canClose: getRandomBoolean(),
   canComment: true,
   canLike: true,
   liked: getRandomBoolean()
@@ -31,6 +32,7 @@ export const getConversationPersonalDetailsLoaderData = (): ConversationMessageP
 
 export const getConversationUserLoaderData = (): ConversationUser => ({
   id: uuid.v4(),
+  achievements: [],
   avatar: "",
   name: getRandomWord(getRandomInteger(8, 50)),
   link: ""
