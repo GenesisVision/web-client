@@ -19,7 +19,10 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]).then(([id, description]) => {
-    if (description.value.publicInfo.status === "Closed")
+    if (
+      description.value.publicInfo.status === "Closed" ||
+      description.value.publicInfo.status === "Archived"
+    )
       throw "Fund is closed";
   });
 };
