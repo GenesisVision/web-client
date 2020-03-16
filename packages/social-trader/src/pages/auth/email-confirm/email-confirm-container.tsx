@@ -1,3 +1,4 @@
+import authActions from "actions/auth-actions";
 import { Push } from "components/link/link";
 import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
 import useApiRequest from "hooks/api-request.hook";
@@ -12,9 +13,13 @@ import { confirmEmail } from "./service/email-confirm.service";
 
 const _EmailConfirmContainer: React.FC<Props> = ({ userId, code }) => {
   const dispatch = useDispatch();
+  const updateTokenMiddleware = () => {
+    dispatch(authActions.updateTokenAction(true));
+  };
   const { errorMessage, sendRequest, data } = useApiRequest({
+    middleware: [updateTokenMiddleware],
     successMessage: "auth.email-confirm.success-alert-message",
-    request: props => dispatch(confirmEmail(props))
+    request: props => confirmEmail(props)
   });
   useEffect(() => {
     if (data) Push(DASHBOARD_ROUTE);

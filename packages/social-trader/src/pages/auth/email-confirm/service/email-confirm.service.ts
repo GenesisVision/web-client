@@ -1,7 +1,5 @@
-import authActions from "actions/auth-actions";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import { MiddlewareDispatch } from "utils/types";
 
 export const confirmEmail = ({
   userId,
@@ -9,9 +7,8 @@ export const confirmEmail = ({
 }: {
   userId: string;
   code: string;
-}) => (dispatch: MiddlewareDispatch): Promise<string> =>
+}) =>
   authApi.confirmEmail({ userId, code }).then(response => {
     authService.storeToken(response);
-    dispatch(authActions.updateTokenAction(true));
     return response;
   });
