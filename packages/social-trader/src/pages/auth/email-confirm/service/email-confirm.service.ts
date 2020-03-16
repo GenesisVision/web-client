@@ -9,8 +9,9 @@ export const confirmEmail = ({
 }: {
   userId: string;
   code: string;
-}) => (dispatch: MiddlewareDispatch): Promise<void> =>
+}) => (dispatch: MiddlewareDispatch): Promise<string> =>
   authApi.confirmEmail({ userId, code }).then(response => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
+    return response;
   });
