@@ -11,7 +11,6 @@ import { DialogTop } from "components/dialog/dialog-top";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
@@ -100,19 +99,12 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <DialogField>
-          <WalletSelect
-            name={WALLET_WITHDRAW_FIELDS.id}
-            label={t("wallet-withdraw.select-currency")}
-            wallets={wallets}
-            onChange={onChangeCurrency}
-          />
-        </DialogField>
-        <DialogField>
-          <StatisticItem label={t("wallet-withdraw.available")} big>
-            {`${formatCurrencyValue(available, currency)} ${currency}`}
-          </StatisticItem>
-        </DialogField>
+        <WalletSelect
+          name={WALLET_WITHDRAW_FIELDS.id}
+          label={t("wallet-withdraw.select-currency")}
+          wallets={wallets}
+          onChange={onChangeCurrency}
+        />
       </DialogTop>
       <DialogBottom>
         <InputAmountField
