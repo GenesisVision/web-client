@@ -1,3 +1,5 @@
+import "./google-auth.scss";
+
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
@@ -9,7 +11,6 @@ import * as twoFactorServices from "../services/2fa.service";
 import { fetchTFAData } from "../services/2fa.service";
 import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
-import "./google-auth.scss";
 
 const _GoogleAuthContainer: React.FC<Props> = ({ onSubmit }) => {
   const dispatch = useDispatch<MiddlewareDispatch>();

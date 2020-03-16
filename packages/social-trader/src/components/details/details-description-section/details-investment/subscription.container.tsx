@@ -8,7 +8,7 @@ import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
 
 const _Subscription: React.FC<Props> = ({ id, assetCurrency }) => {
-  const { data, sendRequest } = useApiRequest<any[]>({
+  const { data, sendRequest } = useApiRequest({
     request: fetchSubscriptions,
     fetchOnMount: true,
     fetchOnMountData: id
@@ -20,7 +20,7 @@ const _Subscription: React.FC<Props> = ({ id, assetCurrency }) => {
   return (
     <Subscription
       loaderData={SignalSubscriptionLoaderData}
-      data={data && data[0]!}
+      data={data! && data![0]!}
       updateInfo={updateInfo}
       id={id}
       assetCurrency={assetCurrency}

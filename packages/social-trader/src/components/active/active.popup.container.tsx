@@ -5,13 +5,13 @@ import Active from "./active";
 import { fetchActive, getActiveLoaderData } from "./service/active.service";
 
 const _ActivePopupContainer: React.FC<Props> = ({ active }) => {
-  const { data } = useApiRequest<any>({
+  const { data } = useApiRequest({
     request: () => fetchActive({ active }),
     fetchOnMount: true
   });
   return (
     <div className="active__popup">
-      <Active loaderData={getActiveLoaderData} data={data} />
+      <Active loaderData={getActiveLoaderData} data={data!} />
     </div>
   );
 };
