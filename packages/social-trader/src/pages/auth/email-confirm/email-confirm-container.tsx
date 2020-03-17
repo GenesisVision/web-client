@@ -4,12 +4,13 @@ import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { MiddlewareDispatch } from "utils/types";
 
 import EmailConfirmFailure from "./email-confirm-failure";
 import { confirmEmail } from "./service/email-confirm.service";
 
 const _EmailConfirmContainer: React.FC<Props> = ({ userId, code }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<MiddlewareDispatch>();
   const { errorMessage, sendRequest } = useApiRequest({
     successMessage: "auth.email-confirm.success-alert-message",
     request: props => dispatch(confirmEmail(props))

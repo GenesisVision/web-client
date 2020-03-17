@@ -11,7 +11,7 @@ const _ActivePopupContainer: React.FC<Props> = ({ active }) => {
   });
   return (
     <div className="active__popup">
-      <Active loaderData={getActiveLoaderData} data={data} />
+      <Active loaderData={getActiveLoaderData} data={data!} />
     </div>
   );
 };

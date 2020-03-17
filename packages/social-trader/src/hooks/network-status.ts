@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-const initialEffectiveConnectionType = "4g";
+const initialEffectiveConnectionType: ConnectionType = "4g";
+type ConnectionType = "4g" | "3g" | "2g";
 
 let unsupported: any;
 
@@ -8,7 +9,7 @@ declare const navigator: {
   [key: string]: any;
 };
 
-const useNetworkStatus = (initialEffectiveConnectionType?: any) => {
+const useNetworkStatus = (initialEffectiveConnectionType?: ConnectionType) => {
   if (
     typeof navigator !== "undefined" &&
     "connection" in navigator &&
@@ -51,7 +52,7 @@ const useNetworkStatus = (initialEffectiveConnectionType?: any) => {
 };
 
 const useNetworkStatusInWindow = () => {
-  const [type, setType] = useState();
+  const [type, setType] = useState<ConnectionType>();
   const { effectiveConnectionType } = useNetworkStatus(
     initialEffectiveConnectionType
   );

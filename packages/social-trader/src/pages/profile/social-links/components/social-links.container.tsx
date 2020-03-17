@@ -43,12 +43,11 @@ interface ILinksProps {
 }
 
 const _SocialLinksContainer: React.FC = () => {
-  const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest<
-    SocialLinkViewModel[]
-  >({ request: fetchSocialLinks, fetchOnMount: true });
-  const { sendRequest: setSocialLinks, errorMessage } = useApiRequest<
-    SocialLinkViewModel[]
-  >({
+  const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest({
+    request: fetchSocialLinks,
+    fetchOnMount: true
+  });
+  const { sendRequest: setSocialLinks, errorMessage } = useApiRequest({
     middleware: [getSocialLinks],
     request: updateSocialLink,
     successMessage: "profile-page.social-links.notifications.edit-success"

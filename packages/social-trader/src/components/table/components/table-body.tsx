@@ -53,11 +53,13 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
     case LIST_VIEW.TABLE:
     default:
       return (
-        <tr>
-          <td colSpan={11}>
-            <div className="table-message">{t("table.no-items")}</div>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td colSpan={11}>
+              <div className="table-message">{t("table.no-items")}</div>
+            </td>
+          </tr>
+        </tbody>
       );
   }
 };

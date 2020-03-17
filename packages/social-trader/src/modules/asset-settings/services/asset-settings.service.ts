@@ -48,7 +48,7 @@ export const closeTradingAccount: TCloseAsset = ({ id }) => {
 export type TCloseAsset = (opts: {
   id: string;
   twoFactorCode?: string;
-}) => void;
+}) => Promise<any>;
 
 export enum ASSET_EDIT_FIELDS {
   stopOutLevel = "stopOutLevel",

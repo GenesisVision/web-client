@@ -90,7 +90,7 @@ export type TSignalRequest = (args: {
     NewTradingAccountRequest &
     NewExternalTradingAccountRequest;
   leverage: number;
-}) => PromiseLike<any>;
+}) => Promise<any>;
 
 export const getUpdateAttachMethod = (isExternal: boolean) =>
   isExternal ? updateExternalAttachToSignal : updateAttachToSignal;
