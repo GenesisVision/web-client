@@ -43,3 +43,9 @@ $box-shadow-4: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
   @include font-size($font-size-common);
   color: $label-color;
 }
+
+@mixin unselectable() {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
