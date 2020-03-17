@@ -1,5 +1,6 @@
 import GVButton from "components/gv-button";
 import CopyIcon from "components/icon/copy-icon";
+import { Row } from "components/row/row";
 import useCopy from "hooks/copy.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,11 +20,11 @@ const _CopyButton: React.FC<Props> = ({ value, text, wide }) => {
       onClick={onCopy}
       variant={text ? "text" : undefined}
     >
-      <>
+      <Row>
         <CopyIcon />
         &nbsp;
         {t("buttons.copy")}
-      </>
+      </Row>
     </GVButton>
   );
 };

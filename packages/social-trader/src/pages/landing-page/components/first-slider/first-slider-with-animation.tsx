@@ -1,5 +1,6 @@
 import "./first-slider.scss";
 
+import { useTranslation } from "i18n";
 import {
   SliderControls,
   SliderControlsWrapper,
@@ -25,6 +26,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
   className,
   slidesItems
 }) => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
     initial: {
@@ -79,10 +81,10 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
               style={rest as any}
             >
               <animated.div style={{ transform }}>
-                <SliderTitle>{item.title}</SliderTitle>
+                <SliderTitle>{t(item.title)}</SliderTitle>
               </animated.div>
               <animated.div style={{ transform }}>
-                <SliderText>{item.text}</SliderText>
+                <SliderText>{t(item.text)}</SliderText>
               </animated.div>
             </animated.div>
           ))}
@@ -90,7 +92,9 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
         <SliderControlsWrapper>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <JoinButton href={item.link}>Join</JoinButton>
+              <JoinButton href={item.link}>
+                {t("landing-page.buttons.join")}
+              </JoinButton>
             </animated.div>
           ))}
           <SliderControls

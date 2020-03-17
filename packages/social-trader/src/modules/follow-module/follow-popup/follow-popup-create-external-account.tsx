@@ -1,7 +1,7 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
@@ -31,7 +31,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
   return (
     <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <GVHookFormField
             wide
             type="text"
@@ -40,8 +40,8 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             autoComplete="off"
             component={SimpleTextField}
           />
-        </DialogField>
-        <DialogField>
+        </Row>
+        <Row>
           <GVHookFormField
             wide
             type="text"
@@ -50,7 +50,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             autoComplete="off"
             component={SimpleTextField}
           />
-        </DialogField>
+        </Row>
         <DialogButtons>
           <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}

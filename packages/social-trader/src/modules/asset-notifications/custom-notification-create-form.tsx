@@ -1,9 +1,9 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -64,7 +64,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
         title={t("notifications-page.create.title")}
         subtitle={asset.title}
       >
-        <DialogField>
+        <Row large>
           <GVHookFormField
             wide
             name={FIELDS.conditionType}
@@ -82,7 +82,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
               {t("notifications-page.create.AvailableToInvest.title")}
             </option>
           </GVHookFormField>
-        </DialogField>
+        </Row>
       </DialogTop>
       <DialogBottom>
         <GVHookFormField

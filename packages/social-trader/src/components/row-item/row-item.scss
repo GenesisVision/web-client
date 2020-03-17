@@ -16,6 +16,7 @@
 }
 
 .row-item {
+  box-sizing: border-box;
   &--middle {
     @include row-item-side-offset($padding-xsmall);
     &.row-item--bottom-offset {

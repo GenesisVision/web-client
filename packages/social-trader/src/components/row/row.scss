@@ -3,15 +3,12 @@
 
 .row {
   display: flex;
-  flex-direction: row;
+  box-sizing: border-box;
   &--hidden {
     display: none;
   }
   &--wrap {
     flex-wrap: wrap;
-  }
-  &--center {
-    align-items: center;
   }
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);

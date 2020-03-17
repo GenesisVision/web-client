@@ -3,6 +3,7 @@ import "./lp-header.scss";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link from "components/link/link";
 import useIsOpen from "hooks/is-open.hook";
+import { useTranslation } from "i18n";
 import logo from "media/logo.svg";
 import SignupDialog from "pages/auth/signup/signup-popup/signup-dialog";
 import { JoinButton } from "pages/landing-page/components/join-button";
@@ -15,6 +16,7 @@ import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 
 const LPHeader: React.FC = () => {
+  const { t } = useTranslation();
   const isAuthenticated = authService.isAuthenticated();
   return (
     <header className="lp-header">
@@ -33,7 +35,9 @@ const LPHeader: React.FC = () => {
             >
               <div className="lp-header__combo-logo">
                 <ImageBaseElement src={logo} />
-                <h1 className="lp-header__text-logo">Genesis Vision</h1>
+                <h1 className="lp-header__text-logo">
+                  {t("landing-page.genesis-vision")}
+                </h1>
               </div>
             </Link>
           </div>
@@ -41,11 +45,11 @@ const LPHeader: React.FC = () => {
           <div className="lp-header__start-btn">
             {isAuthenticated ? (
               <JoinButton
-                eventLabel={"Dashboard"}
+                eventLabel={t("landing-page.buttons.dashboard")}
                 color="secondary"
                 href={OVERVIEW_ROUTE}
               >
-                Dashboard
+                {t("landing-page.buttons.dashboard")}
               </JoinButton>
             ) : (
               <SignupButton />

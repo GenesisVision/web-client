@@ -2,9 +2,6 @@ import {
   globalSearchReducer,
   GlobalSearchState
 } from "components/global-search/reducers/global-search.reducer";
-import notificationsReducer, {
-  NotificationsState
-} from "components/notifications/reducers/notifications.reducers";
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
@@ -61,7 +58,6 @@ export const sharedRootReducers = {
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  notifications: notificationsReducer,
   wallet: walletReducer,
   accountSettings: accountSettingsReducer
 };
@@ -74,7 +70,6 @@ export type RootState = Readonly<{
   fundDetails: FundDetailsState;
   followDetails: FollowDetailsState;
   programDetails: ProgramDetailsState;
-  notifications: NotificationsState;
   profileHeader: HeaderState;
   platformData: PlatformState;
   followsData: FollowsListState;

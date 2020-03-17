@@ -1,53 +1,49 @@
+import Notifications from "components/notifications/components/notifications";
 import {
-  serviceClearNotifications,
-  serviceGetNotifications
-} from "components/notifications/services/notifications.services";
-import Sidebar, { SIDEBAR_POSITION } from "components/sidebar/sidebar";
-import dynamic from "next/dist/next-server/lib/dynamic";
+  calculateOptions,
+  initialOptions
+} from "components/notifications/components/notifications.helpers";
+import { fetchNotifications } from "components/notifications/services/notifications.services";
+import { NotificationList } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import { notificationsCountSelector } from "reducers/header-reducer";
-import { RootState } from "reducers/root-reducer";
-import { MiddlewareDispatch } from "utils/types";
 
-const Notifications = dynamic(() =>
-  import("components/notifications/components/notifications")
-);
-
-const _NotificationsContainer: React.FC<Props> = ({ isOpen, setClose }) => {
-  const dispatch = useDispatch<MiddlewareDispatch>();
-  const total = useSelector((state: RootState) => state.notifications.total);
+const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
+  const [options, setOptions] = useState(initialOptions);
+  const [total, setTotal] = useState(0);
   const count = useSelector(notificationsCountSelector);
-  const notifications = useSelector(
-    (state: RootState) => state.notifications.notifications
-  );
+  const updateStateMiddleware = (res: NotificationList) => {
+    const newOptions = calculateOptions(options, res.total);
+    setOptions(newOptions);
+    setTotal(res.total);
+  };
+  const { data, sendRequest, isPending } = useApiRequest({
+    request: fetchNotifications,
+    fetchOnMount: true,
+    fetchOnMountData: options,
+    middleware: [updateStateMiddleware]
+  });
 
-  const getNotifications = useCallback(
-    () => dispatch(serviceGetNotifications()),
-    []
-  );
-  const clearNotifications = useCallback(
-    () => dispatch(serviceClearNotifications()),
-    []
-  );
+  const getNotifications = useCallback(() => {
+    return sendRequest(options);
+  }, [options]);
 
   return (
-    <Sidebar open={isOpen} position={SIDEBAR_POSITION.RIGHT} onClose={setClose}>
-      <Notifications
-        fetchNotifications={getNotifications}
-        count={count}
-        total={total}
-        notifications={notifications}
-        clearNotifications={clearNotifications}
-        closeNotifications={setClose}
-      />
-    </Sidebar>
+    <Notifications
+      isPending={isPending}
+      getNotifications={getNotifications}
+      count={count}
+      total={total}
+      notifications={data?.notifications}
+      closeNotifications={setClose}
+    />
   );
 };
 
 interface Props {
-  isOpen: boolean;
   setClose: VoidFunction;
 }
 

@@ -24,15 +24,15 @@ export type TInfoList = {
 export const infoTabs: TTabsItem[] = [
   {
     id: 0,
-    text: "Trade"
+    text: "landing-page.info.tab-trade"
   },
   {
     id: 1,
-    text: "Invest"
+    text: "landing-page.info.tab-invest"
   },
   {
     id: 2,
-    text: "Partake"
+    text: "landing-page.info.tab-partake"
   }
 ];
 
@@ -43,10 +43,10 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Trade on your favorite"
+            text: "landing-page.info.text-trade-1"
           },
           {
-            text: " Brokerage or Exchange",
+            text: "landing-page.info.text-trade-2",
             bold: true
           }
         ]
@@ -54,25 +54,25 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Trade on any market"
+            text: "landing-page.info.text-trade-3"
           },
           {
-            text: " Crypto, Forex or Stocks",
+            text: "landing-page.info.text-trade-4",
             bold: true
           }
         ]
       },
       {
         image: TradeTab,
-        button: { link: TRADE_ROUTE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "landing-page.buttons.join" }
       },
       {
         texts: [
           {
-            text: "Follow"
+            text: "landing-page.info.text-trade-5"
           },
           {
-            text: " the most successful traders’ strategies",
+            text: "landing-page.info.text-trade-6",
             bold: true
           }
         ]
@@ -85,10 +85,10 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Invest in"
+            text: "landing-page.info.text-invest-1"
           },
           {
-            text: " the best performing managers",
+            text: "landing-page.info.text-invest-2",
             bold: true
           }
         ]
@@ -96,10 +96,10 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Automatically copy"
+            text: "landing-page.info.text-invest-3"
           },
           {
-            text: " professionals' trades",
+            text: "landing-page.info.text-invest-4",
             bold: true
           }
         ]
@@ -107,14 +107,13 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text:
-              "Choose your perfect investment opportunity, based on risk and profitability levels analysis"
+            text: "landing-page.info.text-invest-5"
           }
         ]
       },
       {
         image: TradeTab,
-        button: { link: TRADE_ROUTE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "landing-page.buttons.join" }
       }
     ]
   },
@@ -124,10 +123,10 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Provide trading signals and build an"
+            text: "landing-page.info.text-partake-1"
           },
           {
-            text: " army of followers around your strategies",
+            text: "landing-page.info.text-partake-2",
             bold: true
           }
         ]
@@ -135,32 +134,32 @@ export const infoList: TInfoList[] = [
       {
         texts: [
           {
-            text: "Create your own"
+            text: "landing-page.info.text-partake-3"
           },
           {
-            text: " Fund",
+            text: "landing-page.info.text-partake-4",
             bold: true
           },
           {
-            text: " or an"
+            text: "landing-page.info.text-partake-5"
           },
           {
-            text: " Asset Management Program",
+            text: "landing-page.info.text-partake-6",
             bold: true
           }
         ]
       },
       {
         image: TradeTab,
-        button: { link: TRADE_ROUTE, text: "Join" }
+        button: { link: TRADE_ROUTE, text: "landing-page.buttons.join" }
       },
       {
         texts: [
           {
-            text: "Step in the actively growing"
+            text: "landing-page.info.text-partake-7"
           },
           {
-            text: " multimarket social trading network",
+            text: "landing-page.info.text-partake-8",
             bold: true
           }
         ]

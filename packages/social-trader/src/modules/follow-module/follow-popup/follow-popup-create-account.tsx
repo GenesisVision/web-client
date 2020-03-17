@@ -1,8 +1,8 @@
 import { HookFormWalletField as WalletField } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
@@ -90,15 +90,15 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   return (
     <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <WalletField
             wallets={wallets}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
             label={t("follow-program.create-account.from")}
             onChange={onChangeCurrencyFrom}
           />
-        </DialogField>
-        <DialogField>
+        </Row>
+        <Row>
           <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
               value={wallet.available}
@@ -106,8 +106,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               displayType="text"
             />
           </StatisticItem>
-        </DialogField>
-        <DialogField>
+        </Row>
+        <Row>
           <InputAmountField
             wide
             isAllowed={allowPositiveValuesNumberFormat(
@@ -129,7 +129,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               displayType="text"
             />
           )}
-        </DialogField>
+        </Row>
         <DialogButtons>
           <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}

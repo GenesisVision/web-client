@@ -86,12 +86,14 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
             suffix={` ${position.profitCurrency}`}
           />
         </Profitability>
-        <ClosePositionButton
-          onApplyCancelRequest={updateItems}
-          volume={position.volume}
-          symbol={position.symbol}
-          id={position.id}
-        />
+        {false && (
+          <ClosePositionButton
+            onApplyCancelRequest={updateItems}
+            volume={position.volume}
+            symbol={position.symbol}
+            id={position.id}
+          />
+        )}
       </TableCell>
     )}
   </TableRow>

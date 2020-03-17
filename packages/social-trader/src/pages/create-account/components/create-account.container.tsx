@@ -1,4 +1,3 @@
-import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
 import { AssetTabsBlock } from "components/assets/asset-fields/asset-tabs.block";
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -44,19 +43,17 @@ const _CreateAccountContainer: React.FC<Props> = ({
           label={t("create-account-page.tabs.settings")}
         />
       </AssetTabsBlock>
-      <AssetContentBlock>
-        {tab === TAB.BROKER && (
-          <BrokerSelectContainer
-            brokers={brokers}
-            setSelectedBroker={setSelectedBroker}
-            navigateToSettings={navigateToSettings}
-            selectedBroker={selectedBroker}
-          />
-        )}
-        {tab === TAB.SETTINGS && (
-          <CreateAccountSettingsSection broker={selectedBroker} />
-        )}
-      </AssetContentBlock>
+      {tab === TAB.BROKER && (
+        <BrokerSelectContainer
+          brokers={brokers}
+          setSelectedBroker={setSelectedBroker}
+          navigateToSettings={navigateToSettings}
+          selectedBroker={selectedBroker}
+        />
+      )}
+      {tab === TAB.SETTINGS && (
+        <CreateAccountSettingsSection broker={selectedBroker} />
+      )}
     </div>
   );
 };

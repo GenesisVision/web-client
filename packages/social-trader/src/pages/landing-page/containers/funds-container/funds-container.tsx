@@ -3,6 +3,7 @@ import "./funds-container.scss";
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { FundDetailsListItem } from "gv-api-web";
+import { useTranslation } from "i18n";
 import FundsList from "pages/landing-page/components/funds/funds-list";
 import { JoinButton } from "pages/landing-page/components/join-button";
 import FundsIcon from "pages/landing-page/images/common/funds-icon.svg";
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const _FundsContainer: React.FC<Props> = ({ funds }) => {
+  const { t } = useTranslation();
   const animate = useRef<HTMLDivElement>(null);
   const [hide, setHide] = useState(false);
 
@@ -39,19 +41,18 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
       >
         <ImageBaseElement
           src={FundsIcon}
-          alt="Funds"
+          alt={t("landing-page.funds.title")}
           className="funds-container__img"
         />
-        <h2 className="funds-container__title">Funds</h2>
-        <p className="funds-container__text">
-          Diversify your capital across hundreds of cryptocurrencies in one
-          click. Select a fund with a composition that matches your opinion on
-          the market and let the manager readjust while the market evolves. You
-          can withdraw your capital at any time you retain full control of your
-          investment.
-        </p>
-        <JoinButton eventLabel={"Discover"} href={FUNDS_ROUTE}>
-          Discover
+        <h2 className="funds-container__title">
+          {t("landing-page.funds.title")}
+        </h2>
+        <p className="funds-container__text">{t("landing-page.funds.text")}</p>
+        <JoinButton
+          eventLabel={t("landing-page.buttons.discover")}
+          href={FUNDS_ROUTE}
+        >
+          {t("landing-page.buttons.discover")}
         </JoinButton>
       </div>
       <FundsList

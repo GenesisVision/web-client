@@ -9,6 +9,7 @@ $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
 $action-size: 30px;
+$action-offset-size: 5px;
 
 .table-card {
   margin-bottom: $padding-small/2;
@@ -24,12 +25,6 @@ $action-size: 30px;
   flex-grow: 1;
   @include media-breakpoint-landscape-phone() {
     padding: $padding-small $padding-xsmall;
-  }
-  &__extra-block {
-    @include media-breakpoint-landscape-phone() {
-      margin-top: $padding-xxsmall;
-    }
-    width: 100%;
   }
   &__buttons {
     display: flex;
@@ -64,19 +59,17 @@ $action-size: 30px;
   }
   &__title {
     @include link($text-accent-color, $text-color);
-    padding-top: 3px;
     @include font-size($font-size-paragraph);
     word-break: break-all;
     display: block;
-    padding-bottom: 33px;
+    padding-bottom: 26px;
     @include media-breakpoint-landscape-phone() {
-      padding-bottom: 3px;
+      padding-bottom: 0;
     }
   }
   &__title-wrapper {
-    max-width: calc(100% - #{$action-size});
-    padding-right: $padding-small/4;
-    box-sizing: border-box;
+    padding-top: 3px;
+    max-width: calc(100% - #{$action-size + $action-offset-size});
   }
   &__name {
     @include link($primary-color);
@@ -86,6 +79,7 @@ $action-size: 30px;
     @include hide-on-landscape-phone();
   }
   &__main-info {
+    position: relative;
     margin-left: $padding-small/4;
     display: flex;
     flex-wrap: wrap;
@@ -93,7 +87,9 @@ $action-size: 30px;
     flex-grow: 1;
   }
   &__actions {
-    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     cursor: pointer;
 
     & .icon,

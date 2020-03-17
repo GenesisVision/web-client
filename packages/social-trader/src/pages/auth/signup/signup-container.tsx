@@ -7,7 +7,7 @@ import CaptchaContainer from "pages/auth/captcha-container";
 import { signUp } from "pages/auth/signup/services/signup.service";
 import SignUpForm from "pages/auth/signup/signup-form/signup-form";
 import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.constants";
-import React from "react";
+import React, { useCallback } from "react";
 
 const _SignupContainer: React.FC<ISignupContainerProps> = ({
   showLogin,
@@ -25,10 +25,23 @@ const _SignupContainer: React.FC<ISignupContainerProps> = ({
     request: signUp,
     middleware: [successMiddleware]
   });
+  const requestHandle = useCallback(
+    values => {
+      return request({
+        ...values,
+        refCode: referralCode,
+        utmSource: {
+          urlParams: utmSource,
+          referer: referrer
+        }
+      });
+    },
+    [referralCode, utmSource]
+  );
   return (
     <div className="signup">
       <CaptchaContainer
-        request={request}
+        request={requestHandle}
         renderForm={handle => (
           <SignUpForm
             showLogin={showLogin}

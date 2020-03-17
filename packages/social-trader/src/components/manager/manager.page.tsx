@@ -1,3 +1,4 @@
+import { PostListContainer } from "components/conversation/post-list/post-list.container";
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DETAILS_TYPE } from "components/details/details.types";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
@@ -28,6 +29,7 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
       description={profile.about || title}
       previewImage={filesService.getFileUrl(profile.avatar)}
     >
+      <PostListContainer id={profile.id} />
       <DetailsDescriptionSection
         descriptionTitle={t("manager-page.about")}
         subtitle={memberSince}

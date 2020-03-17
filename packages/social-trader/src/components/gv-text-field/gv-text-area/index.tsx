@@ -3,9 +3,18 @@ import "./style.scss";
 import classNames from "classnames";
 import React from "react";
 
+export type TextareaChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
+
+export type TextareaKeyDownEvent = React.KeyboardEvent<HTMLTextAreaElement>;
+export type TextareaKeyDownEventExtended = TextareaKeyDownEvent & {
+  ref: HTMLTextAreaElement;
+};
+
 const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
+  onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
+  ref?: any;
   className?: string;
   textAreaClassName?: string;
   value: string;
@@ -23,10 +32,12 @@ class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
   };
 
   shadowRef: React.RefObject<HTMLTextAreaElement>;
+  textareaRef: React.RefObject<HTMLTextAreaElement>;
 
   constructor(props: GVTextAreaProps) {
     super(props);
     this.shadowRef = React.createRef();
+    this.textareaRef = React.createRef();
 
     this.state = {
       height: props.rows! * ROWS_HEIGHT
@@ -41,7 +52,17 @@ class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
     this.syncHeightWithShadow();
   }
 
-  handleChange = (event: any) => {
+  handleKeyDown = (event: TextareaKeyDownEvent) => {
+    if (this.props.onKeyDown && this.textareaRef.current) {
+      this.props.onKeyDown({
+        ...event,
+        ref: this.textareaRef.current,
+        preventDefault: () => event.preventDefault()
+      });
+    }
+  };
+
+  handleChange = (event: TextareaChangeEvent) => {
     const value = event.target.value;
 
     if (this.shadowRef.current) {
@@ -83,9 +104,11 @@ class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
           value={props.value}
         />
         <textarea
+          ref={this.textareaRef}
           style={{ height: this.state.height }}
           onChange={this.handleChange}
           {...props}
+          onKeyDown={this.handleKeyDown}
         />
       </div>
     );

@@ -3,10 +3,10 @@ import { TTabsItem } from "pages/landing-page/components/tab-controls/tab-contro
 export const feesTabs: TTabsItem[] = [
   {
     id: 0,
-    text: "General"
+    text: "fees.tab-general"
   },
   {
     id: 1,
-    text: "Trading fees on GM & GM Global"
+    text: "fees.tab-trading"
   }
 ];
