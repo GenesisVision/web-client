@@ -17,7 +17,7 @@ const _Message: React.FC<IMessageProps> = ({
   author: { avatar, name }
 }) => {
   return (
-    <Row center={false}>
+    <Row center={false} className="message">
       <RowItem className="message__user">
         <ConversationUser avatar={avatar} username={name} date={date} />
       </RowItem>
