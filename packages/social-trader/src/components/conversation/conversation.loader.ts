@@ -14,6 +14,12 @@ import {
 import uuid from "uuid";
 
 const mockImages = [
+  "https://lh3.google.com/u/0/d/1Z1CtoXnDiIpxPVi-DanRaoKeRy0szwkb=w2880-h990-iv1",
+  "https://lh3.google.com/u/0/d/18eDqPiguyjOHmJRNgWIwVsq351UmvhI7=w2880-h990-iv1",
+  "https://lh3.google.com/u/0/d/1AFhKdEm71ybkV9RTqKLLf81JOby_L6WF=w2880-h990-iv1",
+  "https://lh3.google.com/u/0/d/1jEB3mQ5NH689eOqHaAv2GwbIr2-XUfro=w2880-h990-iv1",
+  "https://lh3.google.com/u/0/d/1fM4TkucwqAf1DFTI5HR6CTHryXaxzacw=w2880-h990-iv1",
+  "https://lh3.google.com/u/0/d/1CU4k2_WWNtvTVKbKkETuBr2tWN8RknJP=w2880-h1596-iv1",
   "https://lh3.google.com/u/0/d/1GySQdlSH4CBgbNxu0pIyXiVPJkYfVZgy=w2880-h976-iv1",
   "https://lh3.google.com/u/0/d/119p-NEzY17aqq7XVrCQ4mRdeBU-EfCcn=w2880-h976-iv1",
   "https://lh3.google.com/u/0/d/1wrjTP-3O9ncltXfXTzbno0-p-QmlQpH7=w2880-h976-iv1",
