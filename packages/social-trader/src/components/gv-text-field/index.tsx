@@ -10,6 +10,7 @@ import GVTextArea from "./gv-text-area";
 
 const _GVTextField: React.FC<GVTextFieldProps> = props => {
   const {
+    onFocus,
     adornmentPosition = "end",
     onBlur,
     autoFocus,
@@ -22,6 +23,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 
   const handleFocus = useCallback(() => {
     setFocused();
+    if (onFocus) onFocus();
   }, []);
 
   const handleBlur = useCallback(

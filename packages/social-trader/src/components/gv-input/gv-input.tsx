@@ -77,6 +77,7 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  onFocus?: VoidFunction;
   showError?: boolean;
   ref?: any;
   onKeyDown?: (e: any) => any;
