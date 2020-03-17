@@ -1,4 +1,5 @@
 @import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
 
 $image-height-small: 100px;
 $image-height-middle: 200px;
@@ -27,6 +28,8 @@ $image-height-full: 90vh;
     }
   }
   &__empty {
+    @include unselectable();
+    cursor: default;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
