@@ -4,6 +4,7 @@
 $image-height-small: 100px;
 $image-height-middle: 200px;
 $image-height-full: 90vh;
+$image-width-full: 90vw;
 
 .conversation-image {
   display: block;
@@ -41,6 +42,7 @@ $image-height-full: 90vh;
 }
 .conversation-image-full {
   max-height: $image-height-full;
+  max-width: $image-width-full;
   &__wrapper {
     height: 100vh;
     overflow-y: auto;
