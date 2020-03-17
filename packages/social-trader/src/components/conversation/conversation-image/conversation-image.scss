@@ -4,9 +4,23 @@ $image-height: 100px;
 $image-height-full: 90vh;
 
 .conversation-image {
+  box-sizing: border-box;
   @include adaptive-border-radius($border-radius);
   max-height: $image-height;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  &__empty {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include adaptive-border-radius($border-radius);
+    @include font-size($font-size-xsmall);
+    height: $image-height;
+    background: rgba(255, 255, 255, 0.1);
+    @include adaptive-full-padding($padding-xxsmall);
+  }
 }
 .conversation-image-full {
   max-height: $image-height-full;

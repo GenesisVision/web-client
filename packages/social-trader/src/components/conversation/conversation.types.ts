@@ -10,13 +10,13 @@ export interface ConversationUserPersonalDetails {
   followed: boolean;
 }
 
-export interface ConversationUser {
+export interface IConversationUser {
   id: string;
   avatar: string;
   name: string;
   link: string;
   achievements: Achievement[];
-  personalDetails?: ConversationUserPersonalDetails;
+  actions?: ConversationUserPersonalDetails;
 }
 
 export interface MessageDetailType {
@@ -31,23 +31,15 @@ export interface ConversationMessagePersonalDetails {
   liked: boolean;
 }
 
-export interface ConversationMessage {
-  images: IConversationImage[];
-  user: ConversationUser;
-  text?: string;
-  date: string | Date;
-  likesCount: number;
-  personalDetails?: ConversationMessagePersonalDetails;
-}
-
-export interface ConversationComment {
-  id: string;
-  message: ConversationMessage;
-}
+export type ConversationComment = ConversationPost;
 
 export interface ConversationPost {
   id: string;
-  message: ConversationMessage;
-  details?: MessageDetailType[];
+  images: IConversationImage[];
+  author: IConversationUser;
+  text?: string;
+  date: string | Date;
+  likesCount: number;
+  actions?: ConversationMessagePersonalDetails;
   comments: ConversationComment[];
 }

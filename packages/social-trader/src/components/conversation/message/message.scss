@@ -1,6 +1,10 @@
 @import "~shared/styles/_sizes";
 
 .message {
+  flex-wrap: wrap;
+  @include media-breakpoint-landscape-phone() {
+    flex-wrap: nowrap;
+  }
   &__user {
     width: 350px;
   }

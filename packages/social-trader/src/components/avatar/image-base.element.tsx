@@ -11,6 +11,7 @@ const emptyImg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";
 
 const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
+  onClick,
   title,
   color,
   DefaultImageComponent,
@@ -47,6 +48,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     );
   return (
     <img
+      onClick={onClick}
       src={emptyImg}
       data-src={currentSrc}
       title={title}
@@ -61,6 +63,7 @@ const ImageBaseElement = React.memo(_ImageBaseElement);
 export default ImageBaseElement;
 
 export interface IImageBaseElementProps {
+  onClick?: VoidFunction;
   title?: string;
   color?: string;
   DefaultImageComponent?: React.ComponentType<any>;
