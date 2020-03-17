@@ -1,3 +1,5 @@
+import "./password-change.scss";
+
 import GVButton from "components/gv-button";
 import { ChangePasswordViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
@@ -8,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { MiddlewareDispatch } from "utils/types";
 
 import PasswordChangeForm from "./password-change-form";
-import "./password-change.scss";
 import { changePassword } from "./service/password-change.service";
 
 const _PasswordChange: React.FC = () => {
