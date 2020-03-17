@@ -25,7 +25,7 @@ const _AssetNotifications: React.FC<Props> = ({
     <AssetNotifications
       notifications={notifications}
       onSuccess={handleSuccess}
-      data={data}
+      data={data!}
       loaderData={assetNotificationsLoaderData}
     />
   );

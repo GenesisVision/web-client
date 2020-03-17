@@ -46,7 +46,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
         asset={asset}
         onSubmit={handleSubmit}
         onCancel={onClose}
-        twoFactorEnabled={twoFactorEnabled}
+        twoFactorEnabled={twoFactorEnabled!}
       />
     </Dialog>
   );

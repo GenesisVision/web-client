@@ -34,7 +34,7 @@ const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
           />
         </Row>
       </RowItem>
-      {withText && <RowItem>status</RowItem>}
+      {withText && <RowItem>{status}</RowItem>}
     </Row>
   );
 };

@@ -11,7 +11,7 @@ export const PostListContainer: React.FC<Props> = ({ id }) => {
   });
   return (
     <PostList
-      data={data}
+      data={data!}
       loaderData={getConversationPostListLoaderData()}
       updateData={sendRequest}
     />

@@ -98,7 +98,7 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
       minDeposit={minDeposit!}
       id={id}
       currency={currency}
-      data={accounts}
+      data={accounts!}
       wallets={wallets}
       submitMethod={handleSubmit}
     />

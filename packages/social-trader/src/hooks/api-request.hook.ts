@@ -21,7 +21,7 @@ type TRequest<T> = Promise<T>;
 
 export type TUseApiRequestProps<T = any> = {
   fetchOnMountData?: any;
-  request: (...args: any) => any;
+  request: (...args: any) => TRequest<T>;
   defaultData?: T;
   catchCallback?: (error: ResponseError) => void;
   successMessage?: string;
@@ -38,7 +38,7 @@ type TUseApiRequestOutput<T> = {
   cleanErrorMessage: () => void;
 };
 
-const useApiRequest = <T>({
+const useApiRequest = <T extends any>({
   fetchOnMountData,
   fetchOnMount,
   middleware = [],

@@ -6,7 +6,7 @@ import { withBlurLoader } from "decorators/with-blur-loader";
 import React, { useState } from "react";
 
 const _DashboardPieChart: React.FC<Props> = ({ data }) => {
-  const [overItem, setOverItem] = useState();
+  const [overItem, setOverItem] = useState<string>();
   return (
     <div className="dashboard-pie-chart__container">
       <div className="dashboard-pie-chart__pie-chart">

@@ -38,7 +38,7 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
     <Dialog open={open} onClose={handleClose}>
       <ChangePasswordTradingAccountForm
         programName={programName}
-        twoFactorEnabled={twoFactorEnabled}
+        twoFactorEnabled={twoFactorEnabled!}
         errorMessage={errorMessage}
         onSubmit={handleApply}
       />
