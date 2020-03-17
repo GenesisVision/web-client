@@ -7,6 +7,7 @@ import {
 import React, { useCallback } from "react";
 
 interface Props {
+  setFocused?: (value: boolean) => void;
   submitType?: CONVERSATION_SUBMIT_TYPE;
   submitForm: VoidFunction;
   value: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const ConversationInputComponent: React.FC<Props> = ({
+  setFocused,
   submitType = CONVERSATION_SUBMIT_TYPE.ENTER,
   submitForm,
   name,
@@ -22,6 +24,13 @@ export const ConversationInputComponent: React.FC<Props> = ({
   value,
   ...props
 }) => {
+  const handleOnFocus = useCallback(() => {
+    if (setFocused) setFocused(true);
+  }, [setFocused]);
+  const handleOnBlur = useCallback(() => {
+    if (setFocused) setFocused(false);
+  }, [setFocused]);
+
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEventExtended) => {
       const { keyCode, metaKey, ctrlKey, ref, preventDefault } = event;
@@ -52,6 +61,8 @@ export const ConversationInputComponent: React.FC<Props> = ({
   return (
     <GVTextField
       {...props}
+      onFocus={handleOnFocus}
+      onBlur={handleOnBlur}
       showError={false}
       value={value}
       onChange={handleOnChange}
