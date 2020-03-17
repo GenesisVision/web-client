@@ -2,18 +2,19 @@ import "./message.scss";
 
 import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
-import { ConversationMessage } from "components/conversation/conversation.types";
+import {
+  IConversationImage,
+  IConversationUser
+} from "components/conversation/conversation.types";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
 const _Message: React.FC<IMessageProps> = ({
-  message: {
-    images,
-    text,
-    date,
-    user: { avatar, name }
-  }
+  images,
+  text,
+  date,
+  author: { avatar, name }
 }) => {
   return (
     <Row center={false}>
@@ -37,7 +38,10 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
-  message: ConversationMessage;
+  images: IConversationImage[];
+  author: IConversationUser;
+  text?: string;
+  date: string | Date;
 }
 
 export const Message = React.memo(_Message);

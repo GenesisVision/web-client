@@ -10,15 +10,15 @@ import React from "react";
 
 const _Comment: React.FC<Props> = ({
   updateData,
-  comment: { id, message }
+  comment: { images, date, text, id, actions, likesCount, author }
 }) => {
   return (
     <Row className="comment">
       <Row className="comment__message" center={false}>
         <RowItem>
-          <Message message={message} />
+          <Message images={images} date={date} text={text} author={author} />
         </RowItem>
-        {message.personalDetails?.canClose && (
+        {actions?.canClose && (
           <RowItem>
             <ConversationRemoveButton id={id} onSuccess={updateData} />
           </RowItem>
@@ -27,9 +27,9 @@ const _Comment: React.FC<Props> = ({
       <Row className="comment__buttons">
         <LikeContainer
           id={id}
-          canLike={message.personalDetails?.canLike}
-          count={message.likesCount}
-          liked={message.personalDetails?.liked}
+          canLike={actions?.canLike}
+          count={likesCount}
+          liked={actions?.liked}
         />
       </Row>
     </Row>

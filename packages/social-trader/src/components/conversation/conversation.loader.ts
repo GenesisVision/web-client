@@ -1,11 +1,8 @@
 import {
-  ConversationComment,
-  ConversationMessage,
   ConversationMessagePersonalDetails,
   ConversationPost,
-  ConversationUser,
   IConversationImage,
-  MessageDetailType
+  IConversationUser
 } from "components/conversation/conversation.types";
 import {
   getRandomBoolean,
@@ -33,14 +30,6 @@ export const getConversationImageLoaderData = (): IConversationImage => ({
   url: mockImages[getRandomInteger(0, mockImages.length - 1)]
 });
 
-export const getPostDetailLoaderData = (): MessageDetailType => ({
-  title: getRandomWord(),
-  value: getRandomWord()
-});
-
-export const getPostDetailListLoaderData = (): MessageDetailType[] =>
-  tableLoaderCreator(getPostDetailLoaderData, 3);
-
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
   canClose: getRandomBoolean(),
   canComment: true,
@@ -48,7 +37,7 @@ export const getConversationPersonalDetailsLoaderData = (): ConversationMessageP
   liked: getRandomBoolean()
 });
 
-export const getConversationUserLoaderData = (): ConversationUser => ({
+export const getConversationUserLoaderData = (): IConversationUser => ({
   id: uuid.v4(),
   achievements: [],
   avatar: "",
@@ -56,37 +45,35 @@ export const getConversationUserLoaderData = (): ConversationUser => ({
   link: ""
 });
 
-export const getConversationMessageLoaderData = (
-  imagesCount?: number
-): ConversationMessage => {
+export const getConversationPostLoaderData = (
+  imagesCount: number,
+  commentsCount: number
+): ConversationPost => {
   const images = new Array(imagesCount)
     .fill("")
     .map(getConversationImageLoaderData);
 
   return {
+    comments: tableLoaderCreator(
+      () => getConversationPostLoaderData(getRandomInteger(0, 2), 0),
+      commentsCount
+    ),
+    id: uuid.v4(),
     images,
-    user: getConversationUserLoaderData(),
+    author: getConversationUserLoaderData(),
     date: new Date().toLocaleString(),
     likesCount: getRandomInteger(1, 10),
     text: getRandomWords(getRandomInteger(3, 50)),
-    personalDetails: getConversationPersonalDetailsLoaderData()
-  };
-};
-
-export const getConversationComment = (): ConversationComment => ({
-  id: uuid.v4(),
-  message: getConversationMessageLoaderData(getRandomInteger(0, 2))
-});
-
-export const getConversationPostLoaderData = (): ConversationPost => {
-  const hasEvent = getRandomBoolean();
-  return {
-    id: uuid.v4(),
-    message: getConversationMessageLoaderData(getRandomInteger(0, 10)),
-    details: hasEvent ? getPostDetailListLoaderData() : undefined,
-    comments: tableLoaderCreator(getConversationComment, getRandomInteger(0, 5))
+    actions: getConversationPersonalDetailsLoaderData()
   };
 };
 
 export const getConversationPostListLoaderData = (): ConversationPost[] =>
-  tableLoaderCreator(getConversationPostLoaderData, getRandomInteger(2, 5));
+  tableLoaderCreator(
+    () =>
+      getConversationPostLoaderData(
+        getRandomInteger(0, 10),
+        getRandomInteger(0, 5)
+      ),
+    getRandomInteger(2, 5)
+  );
