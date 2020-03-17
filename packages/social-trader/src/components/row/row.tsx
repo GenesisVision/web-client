@@ -4,19 +4,19 @@ import classNames from "classnames";
 import { Center } from "components/center/center";
 import React from "react";
 
-export const Row: React.FC<Props> = props => {
-  const {
-    middle = true,
-    hide,
-    className,
-    wrap,
-    small,
-    large,
-    children
-  } = props;
+export const Row: React.FC<Props> = ({
+  middle = true,
+  hide,
+  className,
+  wrap,
+  small,
+  large,
+  children,
+  ...otherProps
+}) => {
   return (
     <Center
-      {...props}
+      {...otherProps}
       className={classNames("row", className, {
         "row--hidden": hide,
         "row--wrap": wrap,
