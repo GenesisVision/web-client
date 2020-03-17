@@ -4,6 +4,7 @@ $image-height: 100px;
 $image-height-full: 90vh;
 
 .conversation-image {
+  display: block;
   box-sizing: border-box;
   @include adaptive-border-radius($border-radius);
   max-height: $image-height;
