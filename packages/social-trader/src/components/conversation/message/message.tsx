@@ -1,6 +1,9 @@
 import "./message.scss";
 
-import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
+import {
+  ConversationImage,
+  getImageSize
+} from "components/conversation/conversation-image/conversation-image";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import {
   IConversationImage,
@@ -27,7 +30,10 @@ const _Message: React.FC<IMessageProps> = ({
           <Row wrap small className="message__images">
             {images.map(image => (
               <RowItem bottomOffset>
-                <ConversationImage image={image} />
+                <ConversationImage
+                  image={image}
+                  size={getImageSize(images.length)}
+                />
               </RowItem>
             ))}
           </Row>
