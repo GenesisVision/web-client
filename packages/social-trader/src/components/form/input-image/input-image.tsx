@@ -1,8 +1,8 @@
 import classNames from "classnames";
+import { InputImageCropper } from "components/form/input-image/input-image-cropper";
 import "cropperjs/dist/cropper.css";
 import * as React from "react";
-import { useCallback, useRef } from "react";
-import Cropper from "react-cropper";
+import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 
@@ -102,8 +102,8 @@ const _InputImage: React.FC<IInputImageProps> = ({
           <div className="input-image__image-container">
             {image && !hasSizeError && (
               <InputImageCropper
+                error={error}
                 image={image}
-                name={name}
                 onChange={onChange}
               />
             )}
@@ -144,63 +144,6 @@ const _InputImage: React.FC<IInputImageProps> = ({
         </div>
       )}
     </div>
-  );
-};
-
-const InputImageCropper: React.FC<{
-  name: string;
-  image: INewImage;
-  onChange: (event: IImageChangeEvent) => void;
-}> = ({ image, onChange, name }) => {
-  const cropper = useRef<Cropper>(null);
-
-  const onCrop = useCallback(() => {
-    if (!image || !cropper.current) return;
-
-    const croppedCanvas = cropper.current.getCroppedCanvas({
-      imageSmoothingEnabled: true,
-      imageSmoothingQuality: "high"
-    });
-
-    croppedCanvas.toBlob(
-      // @ts-ignore
-      blob => {
-        let croppedImg;
-        if (!blob) {
-          croppedImg = {
-            ...image,
-            width: 0,
-            height: 0,
-            size: 0
-          };
-        } else {
-          croppedImg = {
-            ...image,
-            cropped: new File([blob], image.name, {
-              type: blob.type
-            }),
-            width: croppedCanvas.width,
-            height: croppedCanvas.height,
-            size: blob.size
-          };
-        }
-        onChange({
-          target: { value: { image: croppedImg }, name }
-        });
-      },
-      image.type,
-      1
-    );
-  }, [cropper, cropper.current, onChange, image, image.name]);
-  return (
-    <Cropper
-      ref={cropper as React.RefObject<Cropper> & string}
-      src={image.src}
-      aspectRatio={1}
-      autoCropArea={1}
-      // ready={onCropReady}
-      cropend={onCrop}
-    />
   );
 };
 
