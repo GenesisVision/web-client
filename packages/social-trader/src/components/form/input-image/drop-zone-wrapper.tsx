@@ -1,6 +1,6 @@
 import {
   IImageChangeEvent,
-  INewImage
+  IImageValue
 } from "components/form/input-image/input-image";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
@@ -21,33 +21,33 @@ export const DropZoneWrapper: React.FC<Props> = ({
   const onDrop = useCallback(
     (files: FileWithPreview[]) => {
       if (files.length === 0) return;
+      const croppedFiles: IImageValue[] = [];
 
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        let src = reader.result as string;
-        let img = new Image();
-        img.src = src;
-        img.onload = () => {
-          const croppedFiles = files.map(file => {
-            reader.readAsDataURL(file);
-            const image: INewImage = {
-              cropped: file,
-              name: file.name,
-              type: file.type,
-              size: file.size,
-              height: img.height,
-              width: img.width,
-              src
-            };
-            return { image };
-          });
-
-          onChange({
-            target: { value: croppedFiles, name }
-          });
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          let src = e.target?.result as string;
+          let img = new Image();
+          img.src = src;
+          img.onload = () => {
+            croppedFiles.push({
+              image: {
+                cropped: file,
+                name: file.name,
+                type: file.type,
+                size: file.size,
+                height: img.height,
+                width: img.width,
+                src
+              }
+            });
+            onChange({
+              target: { value: croppedFiles, name }
+            });
+          };
         };
-      };
+        reader.readAsDataURL(file);
+      });
     },
     [onChange, name]
   );
