@@ -24,7 +24,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
   const clear = useCallback(
     (event: React.SyntheticEvent) => {
       const e: IImageChangeEvent = {
-        target: { value: {}, name }
+        target: { value: [{}], name }
       };
       onChange(e);
       event.stopPropagation();
@@ -108,7 +108,7 @@ export interface INewImage {
 }
 
 export interface IImageChangeEvent {
-  target: { value: IImageValue; name: string };
+  target: { value: IImageValue[]; name: string };
 }
 
 export type IImageValue = {

@@ -22,7 +22,6 @@ export const DropZoneWrapper: React.FC<Props> = ({
     (files: FileWithPreview[]) => {
       if (files.length === 0) return;
 
-      const file = files[0];
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -30,22 +29,25 @@ export const DropZoneWrapper: React.FC<Props> = ({
         let img = new Image();
         img.src = src;
         img.onload = () => {
-          const cropped: INewImage = {
-            cropped: file,
-            name: file.name,
-            type: file.type,
-            size: file.size,
-            height: img.height,
-            width: img.width,
-            src
-          };
+          const croppedFiles = files.map(file => {
+            reader.readAsDataURL(file);
+            const image: INewImage = {
+              cropped: file,
+              name: file.name,
+              type: file.type,
+              size: file.size,
+              height: img.height,
+              width: img.width,
+              src
+            };
+            return { image };
+          });
 
           onChange({
-            target: { value: { image: cropped }, name }
+            target: { value: croppedFiles, name }
           });
         };
       };
-      reader.readAsDataURL(file);
     },
     [onChange, name]
   );

@@ -52,7 +52,7 @@ export class InputImageCropper extends React.PureComponent<{
           };
         }
         onChange({
-          target: { value: { image: croppedImg }, name: image.name }
+          target: { value: [{ image: croppedImg }], name: image.name }
         });
       },
       image.type,
