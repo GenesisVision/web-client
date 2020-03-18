@@ -15,7 +15,7 @@ const _Pow: React.FC<Props> = props => {
         setTotal
       })
       .then(res => {
-        props.handleSuccess(res);
+        props.handleSuccess(String(res));
       });
   }, []);
   if (!total) return null;
@@ -28,7 +28,7 @@ const _Pow: React.FC<Props> = props => {
 };
 
 interface Props extends PowDetails {
-  handleSuccess: (prefix: number) => void;
+  handleSuccess: (prefix: string) => void;
   login: string;
 }
 
