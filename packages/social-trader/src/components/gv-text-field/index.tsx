@@ -36,9 +36,11 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 
   useEffect(() => {
     if (autoFocus && input.current) {
-      setImmediate(() => {
+      const focusInput = () => {
         input.current!.focus && input.current!.focus();
-      });
+      };
+      if (typeof setImmediate !== "undefined") setImmediate(focusInput);
+      else focusInput();
     }
   }, [autoFocus, input.current]);
 
