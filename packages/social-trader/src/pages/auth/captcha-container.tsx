@@ -11,7 +11,7 @@ const _CaptchaContainer: React.FC<Props> = ({ renderForm, request }) => {
   const [pow, setPow] = useState<PowDetails | undefined>(undefined);
   // const [geeTest, setGeeTest] = useState<GeeTestDetails | undefined>(undefined);
   const [captchaType, setCaptchaType] = useState<CaptchaType>("None");
-  const [prefix, setPrefix] = useState<number | undefined>(undefined);
+  const [prefix, setPrefix] = useState<string | undefined>(undefined);
   const [id, setId] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [values, setValues] = useState<TValues | undefined>(undefined);
