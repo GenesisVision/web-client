@@ -3,7 +3,7 @@ import {
   FollowCreateAssetPlatformInfo,
   ProgramAssetPlatformInfo
 } from "gv-api-web";
-import i18next, { TFunction } from "i18next";
+import { TFunction } from "i18next";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import {
   assetDescriptionShape,
@@ -120,10 +120,7 @@ export enum CONVERT_ASSET_FIELDS {
   investmentLimit = "investmentLimit"
 }
 
-const investmentLimitShape = (
-  hasInvestmentLimit: boolean,
-  t: i18next.TFunction
-) =>
+const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
   hasInvestmentLimit
     ? number()
         .min(
@@ -136,23 +133,23 @@ const investmentLimitShape = (
         )
     : number();
 
-const stopOutLevelShape = (t: i18next.TFunction) =>
+const stopOutLevelShape = (t: TFunction) =>
   number()
     .required(t("create-program-page.settings.validation.stop-out-required"))
     .min(10, t("create-program-page.settings.validation.stop-out-is-zero"))
     .max(100, t("create-program-page.settings.validation.stop-out-is-large"));
 
-const currencyShape = (t: i18next.TFunction) =>
+const currencyShape = (t: TFunction) =>
   string().required(
     t("create-program-page.settings.validation.currency-required")
   );
 
-const periodLengthShape = (t: i18next.TFunction) =>
+const periodLengthShape = (t: TFunction) =>
   number().required(
     t("create-program-page.settings.validation.period-required")
   );
 
-const getPublicInfoShapes = (t: i18next.TFunction) => ({
+const getPublicInfoShapes = (t: TFunction) => ({
   [CONVERT_ASSET_FIELDS.logo]: inputImageShape(t),
   [CONVERT_ASSET_FIELDS.title]: assetTitleShape(t),
   [CONVERT_ASSET_FIELDS.description]: assetDescriptionShape(t)
@@ -167,7 +164,7 @@ const getSignalShapes = ({
   maxVolumeFee
 }: {
   isSignalProgram: boolean;
-  t: i18next.TFunction;
+  t: TFunction;
   minSuccessFee: number;
   maxSuccessFee: number;
   minVolumeFee: number;
@@ -188,7 +185,7 @@ const getProgramShapes = ({
   maxSuccessFee
 }: {
   hasInvestmentLimit: boolean;
-  t: i18next.TFunction;
+  t: TFunction;
   maxEntryFee: number;
   maxSuccessFee: number;
 }) => ({

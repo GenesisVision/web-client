@@ -18,7 +18,7 @@ const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
 
       return {
         quoteNo,
-        namespacesRequired: ["translation"],
+        namespacesRequired: ["translations"],
         ...componentProps
       };
     }
