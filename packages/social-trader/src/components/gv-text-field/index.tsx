@@ -1,5 +1,3 @@
-import "./style.scss";
-
 import classNames from "classnames";
 import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
@@ -7,6 +5,7 @@ import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { NumberFormatValues } from "react-number-format";
 
 import GVTextArea from "./gv-text-area";
+import "./style.scss";
 
 const _GVTextField: React.FC<GVTextFieldProps> = props => {
   const {
@@ -36,9 +35,11 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 
   useEffect(() => {
     if (autoFocus && input.current) {
-      setImmediate(() => {
+      const focusInput = () => {
         input.current!.focus && input.current!.focus();
-      });
+      };
+      if (typeof setImmediate !== "undefined") setImmediate(focusInput);
+      else focusInput();
     }
   }, [autoFocus, input.current]);
 

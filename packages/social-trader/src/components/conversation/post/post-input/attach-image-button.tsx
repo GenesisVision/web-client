@@ -2,8 +2,10 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { PostInputButton } from "components/conversation/post/post-input/post-input-button";
 import React, { useCallback } from "react";
 
-const AttachImageButton = () => {
-  const handleClick = useCallback(() => {}, []);
+const AttachImageButton: React.FC<Props> = ({ onClick }) => {
+  const handleClick = useCallback(() => {
+    onClick();
+  }, [onClick]);
 
   return (
     <PostInputButton onClick={handleClick}>
@@ -15,5 +17,9 @@ const AttachImageButton = () => {
     </PostInputButton>
   );
 };
+
+interface Props {
+  onClick: VoidFunction;
+}
 
 export default AttachImageButton;
