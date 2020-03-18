@@ -13,6 +13,7 @@ $post-input-button-size: 30px;
     box-sizing: border-box;
   }
   &__container {
+    position: relative;
     @include adaptive-border-radius($border-radius-middle);
     background-color: $panel-background-color;
     margin-bottom: $padding-xsmall;
