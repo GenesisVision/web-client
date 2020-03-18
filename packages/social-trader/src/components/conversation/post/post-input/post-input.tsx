@@ -1,11 +1,10 @@
-import "./post-input.scss";
-
 import { Center } from "components/center/center";
 import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
 import { ConversationInputShape } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import AttachImageButton from "components/conversation/post/post-input/attach-image-button";
 import ErrorMessage from "components/error-message/error-message";
+import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
@@ -15,6 +14,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
+
+import "./post-input.scss";
 
 enum FORM_FIELDS {
   TEXT = "text"
@@ -69,31 +70,46 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
   const errorText = errorMessage || errors[FORM_FIELDS.TEXT]?.message;
   return (
     <HookForm form={form} onSubmit={formSubmit}>
-      <div className="post-input__container">
-        <div className="post-input__input-container">
-          <ConversationInput
-            setFocused={setFocused}
-            submitForm={inputSubmit()}
-            name={"text"}
-            placeholder={"What's new?"}
-          />
-        </div>
-        {isOpenPanel && (
-          <Center className="post-input__edit-panel-container">
-            <RowItem className="post-input__add-buttons">
-              <AttachImageButton />
-            </RowItem>
-            <RowItem className="post-input__errors">
-              {errorText && <ErrorMessage error={errorText} />}
-            </RowItem>
-            <RowItem className="post-input__send-buttons">
-              <GVButton type="submit" disabled={disabled}>
-                Send
-              </GVButton>
-            </RowItem>
-          </Center>
+      <DropZoneWrapper
+        className="post-input__container"
+        name={"image"}
+        onChange={() => {}}
+        content={open => (
+          <>
+            <div className="post-input__input-container">
+              <ConversationInput
+                setFocused={setFocused}
+                submitForm={inputSubmit()}
+                name={"text"}
+                placeholder={"What's new?"}
+              />
+            </div>
+            {isOpenPanel && (
+              <Center className="post-input__edit-panel-container">
+                <RowItem className="post-input__add-buttons">
+                  <AttachImageButton
+                    onClick={() => {
+                      setFocused(true);
+                      open();
+                    }}
+                  />
+                </RowItem>
+                <RowItem className="post-input__errors">
+                  {errorText && <ErrorMessage error={errorText} />}
+                </RowItem>
+                <RowItem className="post-input__send-buttons">
+                  <GVButton type="submit" disabled={disabled}>
+                    Send
+                  </GVButton>
+                </RowItem>
+              </Center>
+            )}
+          </>
         )}
-      </div>
+      />
+      {/*<div className="post-input__container">
+
+      </div>*/}
     </HookForm>
   );
 };

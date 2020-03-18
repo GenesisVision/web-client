@@ -1,168 +1,56 @@
-import "cropperjs/dist/cropper.css";
-import "./input-image.scss";
-
 import classNames from "classnames";
+import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
+import { InputImageCropper } from "components/form/input-image/input-image-cropper";
+import "cropperjs/dist/cropper.css";
 import * as React from "react";
-import Cropper from "react-cropper";
-import Dropzone, { FileWithPreview } from "react-dropzone";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
+import "./input-image.scss";
 
-class _InputImage extends React.PureComponent<
-  IInputImageProps & WithTranslation
-> {
-  dropzone: React.RefObject<Dropzone> = React.createRef();
-  cropper: React.RefObject<Cropper> = React.createRef();
+const _InputImage: React.FC<IInputImageProps> = ({
+  value = {},
+  className,
+  defaultImage,
+  error,
+  onChange,
+  name
+}) => {
+  const { src, image } = value;
 
-  onDrop = (files: FileWithPreview[]) => {
-    const { name, onChange } = this.props;
-    if (files.length === 0) return;
+  const [t] = useTranslation();
 
-    if (this.cropper.current) {
-      // @ts-ignore
-      this.cropper.current.reset();
-    }
-
-    const file = files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      let src = reader.result as string;
-      let img = new Image();
-      img.src = src;
-      img.onload = () => {
-        const cropped: INewImage = {
-          cropped: file,
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          height: img.height,
-          width: img.width,
-          src
-        };
-
-        onChange({
-          target: { value: { image: cropped }, name }
-        });
+  const clear = useCallback(
+    (event: React.SyntheticEvent) => {
+      const e: IImageChangeEvent = {
+        target: { value: [{}], name }
       };
-    };
-    reader.readAsDataURL(file);
-  };
+      onChange(e);
+      event.stopPropagation();
+    },
+    [onChange]
+  );
 
-  onCropReady = () => {
-    const { error } = this.props;
-    if (error) return;
-    this.onCrop();
-  };
-
-  onCrop = () => {
-    const { onChange, name, value } = this.props;
-    const { image } = value;
-
-    if (!image || !this.cropper.current) return;
-
-    // @ts-ignore
-    const croppedCanvas = this.cropper.current.getCroppedCanvas({
-      imageSmoothingEnabled: true,
-      imageSmoothingQuality: "high"
-    });
-
-    croppedCanvas.toBlob(
-      // @ts-ignore
-      blob => {
-        let croppedImg;
-        if (!blob) {
-          croppedImg = {
-            ...image,
-            width: 0,
-            height: 0,
-            size: 0
-          };
-        } else {
-          croppedImg = {
-            ...image,
-            cropped: new File([blob], image.name, {
-              type: blob.type
-            }),
-            width: croppedCanvas.width,
-            height: croppedCanvas.height,
-            size: blob.size
-          };
-        }
-        onChange({
-          target: { value: { image: croppedImg }, name }
-        });
-      },
-      image.type,
-      1
-    );
-  };
-
-  openFileDialog = () => {
-    if (!this.dropzone.current) return;
-    this.dropzone.current.open();
-  };
-
-  clear = (event: React.SyntheticEvent) => {
-    this.setDefaultImage();
-    event.stopPropagation();
-  };
-
-  setDefaultImage = () => {
-    const { onChange, name } = this.props;
-    this.setState({ newImage: undefined, isDefault: true });
-    const e: IImageChangeEvent = {
-      target: { value: {}, name }
-    };
-    onChange(e);
-  };
-
-  renderErrors = () => {
-    if (!this.props.error) return null;
-    const errors = Object.values(this.props.error.image);
-    return (
-      <div>
-        {errors.map(error => (
-          <div className="input-image__error">{error.message}</div>
-        ))}
-      </div>
-    );
-  };
-
-  render() {
-    const { t, value = {}, className, defaultImage, error } = this.props;
-    const { src, image } = value;
-    const hasSizeError = error && error.image.size;
-    return (
-      <div
-        className={classNames("input-image", className, {
-          "input-image--error": error !== undefined
-        })}
-      >
-        <Dropzone
-          disableClick
-          className="input-image__dropzone"
-          activeClassName="input-image__dropzone--active"
-          accept="image/jpeg, image/png"
-          ref={this.dropzone}
-          onDrop={this.onDrop}
-        >
-          <div className="input-image__dropzone-helper">
-            {t("input-image.drop-files")}
-          </div>
+  const hasSizeError = error && error.image.size;
+  return (
+    <div
+      className={classNames("input-image", className, {
+        "input-image--error": error !== undefined
+      })}
+    >
+      <DropZoneWrapper
+        className="input-image__dropzone"
+        name={name}
+        onChange={onChange}
+        content={open => (
           <div className="input-image__dropzone-content">
             <div className="input-image__image-container">
               {image && !hasSizeError && (
-                // @ts-ignore
-                <Cropper
-                  ref={this.cropper as React.RefObject<Cropper> & string}
-                  src={image.src}
-                  // @ts-ignore
-                  aspectRatio={1}
-                  autoCropArea={1}
-                  ready={this.onCropReady}
-                  cropend={this.onCrop}
+                <InputImageCropper
+                  error={error}
+                  image={image}
+                  onChange={onChange}
                 />
               )}
 
@@ -176,34 +64,37 @@ class _InputImage extends React.PureComponent<
             </div>
             <p className="input-image__text input-image__text--big">
               {t("input-image.drag-or-click")}
-              <span
-                className="input-image__text-upload"
-                onClick={this.openFileDialog}
-              >
+              <span className="input-image__text-upload" onClick={open}>
                 {t("input-image.upload")}
               </span>
               {t("input-image.to-browse")}
             </p>
             <p
               className="input-image__text input-image__text--small"
-              onClick={this.openFileDialog}
+              onClick={open}
             >
               {t("input-image.tap-to-upload")}
             </p>
           </div>
-        </Dropzone>
-        {(image || src) && (
-          <div className="input-image__clear-btn" onClick={this.clear}>
-            &#10006;
-          </div>
         )}
-        {this.renderErrors()}
-      </div>
-    );
-  }
-}
+      />
+      {(image || src) && (
+        <div className="input-image__clear-btn" onClick={clear}>
+          &#10006;
+        </div>
+      )}
+      {error && (
+        <div>
+          {Object.values(error.image).map((error: any) => (
+            <div className="input-image__error">{error.message}</div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-const InputImage = translate()(_InputImage);
+const InputImage = React.memo(_InputImage);
 export default InputImage;
 
 export interface INewImage {
@@ -217,7 +108,7 @@ export interface INewImage {
 }
 
 export interface IImageChangeEvent {
-  target: { value: IImageValue; name: string };
+  target: { value: IImageValue[]; name: string };
 }
 
 export type IImageValue = {
