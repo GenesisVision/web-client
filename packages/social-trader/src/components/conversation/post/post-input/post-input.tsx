@@ -5,7 +5,7 @@ import {
   postMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
-import AttachImageButton from "components/conversation/post/post-input/attach-image-button";
+import { AttachImagePostButton } from "components/conversation/post/post-input/attach-image-post-button";
 import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
@@ -93,7 +93,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
                 name={"text"}
                 placeholder={"What's new?"}
               />
-              {!disabledImages && <AttachImageButton onClick={open} />}
+              {!disabledImages && <AttachImagePostButton onClick={open} />}
             </Center>
             {isOpenPanel && (
               <Center className="post-input__edit-panel-container">
