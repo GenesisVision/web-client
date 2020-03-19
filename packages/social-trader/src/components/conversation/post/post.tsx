@@ -18,7 +18,9 @@ const _Post: React.FC<Props> = ({
   return (
     <DetailsBlock horizontalPaddings wide>
       <Row center={false}>
-        <Message images={images} date={date} text={text} author={author} />
+        <RowItem wide>
+          <Message images={images} date={date} text={text} author={author} />
+        </RowItem>
         {actions?.canDelete && (
           <RowItem>
             <ConversationRemoveButton id={id} onSuccess={updateData} />
