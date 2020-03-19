@@ -4,6 +4,9 @@
 .row {
   display: flex;
   box-sizing: border-box;
+  &--wide {
+    width: 100%;
+  }
   &--hidden {
     display: none;
   }

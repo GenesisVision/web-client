@@ -1,10 +1,11 @@
-import "./row.scss";
-
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import React from "react";
 
+import "./row.scss";
+
 export const Row: React.FC<Props> = ({
+  wide,
   middle = true,
   hide,
   className,
@@ -18,6 +19,7 @@ export const Row: React.FC<Props> = ({
     <Center
       {...otherProps}
       className={classNames("row", className, {
+        "row--wide": wide,
         "row--hidden": hide,
         "row--wrap": wrap,
         "row--small": small,
@@ -31,6 +33,7 @@ export const Row: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  wide?: boolean;
   hide?: boolean;
   center?: boolean;
   className?: string;
