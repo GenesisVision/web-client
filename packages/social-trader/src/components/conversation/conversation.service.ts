@@ -1,6 +1,5 @@
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
-import { getConversationPostListLoaderData } from "components/conversation/conversation.loader";
-import { ConversationPost } from "components/conversation/conversation.types";
+import { ConversationFeed } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
 import socialApi from "services/api-client/social-api";
 import authService from "services/auth-service";
@@ -47,16 +46,18 @@ export const sendPost = (values: IPostMessageValues) => {
   return sendMessage(values);
 };
 
-export const toggleLike = (values: { id: string }) => {
-  return mockRequest(values);
+export const toggleLike = ({ id, liked }: { id: string; liked?: boolean }) => {
+  const authorization = authService.getAuthArg();
+  const method = liked ? socialApi.unlikePost : socialApi.likePost;
+  return method(id, authorization);
 };
 
-export const remove = (values: { id: string }) => {
-  return mockRequest(values);
+export const remove = ({ id }: { id: string }) => {
+  const authorization = authService.getAuthArg();
+  return socialApi.deletePost(id, authorization);
 };
 
-export const getPosts = (values: {
-  id: string;
-}): Promise<ConversationPost[]> => {
-  return Promise.resolve(getConversationPostListLoaderData());
+export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
+  const authorization = authService.getAuthArg();
+  return socialApi.getFeed({ authorization, userId: id });
 };

@@ -1,4 +1,3 @@
-import { getConversationPostListLoaderData } from "components/conversation/conversation.loader";
 import { getPosts } from "components/conversation/conversation.service";
 import { PostList } from "components/conversation/post-list/post-list";
 import useApiRequest from "hooks/api-request.hook";
@@ -9,13 +8,8 @@ export const PostListContainer: React.FC<Props> = ({ id }) => {
     request: () => getPosts({ id }),
     fetchOnMount: true
   });
-  return (
-    <PostList
-      data={data!}
-      loaderData={getConversationPostListLoaderData()}
-      updateData={sendRequest}
-    />
-  );
+  if (!data) return null;
+  return <PostList data={data.items} updateData={sendRequest} />;
 };
 
 interface Props {

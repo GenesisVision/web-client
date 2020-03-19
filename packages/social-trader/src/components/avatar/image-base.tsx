@@ -3,6 +3,7 @@ import useUrl, { ImageQualityType } from "hooks/url.hook";
 import * as React from "react";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
+  onClick,
   quality,
   title,
   color,
@@ -17,6 +18,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   const fullUrl = getUrl(src, quality);
   return (
     <ImageBaseElement
+      onClick={onClick}
       defaultImageClassName={defaultImageClassName}
       defaultImage={defaultImage}
       color={color}
@@ -39,6 +41,7 @@ export interface IImageProps {
 }
 
 export interface IImageBaseProps {
+  onClick?: VoidFunction;
   quality?: ImageQualityType;
   title?: string;
   color?: string;

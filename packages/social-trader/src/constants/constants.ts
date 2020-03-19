@@ -37,8 +37,11 @@ export enum SORTING {
   DESC = "Desc",
   ASC = "Asc"
 }
-export interface IDataModel {
-  items: any;
+
+export type TableDataType<T> = IDataModel<Array<T>>;
+
+export interface IDataModel<T = any> {
+  items: T;
   total: number;
 }
 
