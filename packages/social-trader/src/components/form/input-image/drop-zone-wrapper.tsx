@@ -5,12 +5,14 @@ import {
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
+import uuid from "uuid";
 
 import "./input-image.scss";
 
 type FileWithPreview = any;
 
-export const DropZoneWrapper: React.FC<Props> = ({
+export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
+  disabled,
   onChange,
   name,
   content,
@@ -31,6 +33,8 @@ export const DropZoneWrapper: React.FC<Props> = ({
           img.src = src;
           img.onload = () => {
             croppedFiles.push({
+              src,
+              id: uuid.v4(),
               image: {
                 cropped: file,
                 name: file.name,
@@ -41,9 +45,10 @@ export const DropZoneWrapper: React.FC<Props> = ({
                 src
               }
             });
-            onChange({
-              target: { value: croppedFiles, name }
-            });
+            onChange &&
+              onChange({
+                target: { value: croppedFiles, name }
+              });
           };
         };
         reader.readAsDataURL(file);
@@ -59,6 +64,7 @@ export const DropZoneWrapper: React.FC<Props> = ({
     isDragAccept,
     isDragReject
   } = useDropzone({
+    disabled,
     noClick: true,
     onDrop,
     accept: "image/jpeg, image/png"
@@ -81,9 +87,10 @@ export const DropZoneWrapper: React.FC<Props> = ({
   );
 };
 
-interface Props {
+export interface IDropZoneWrapperProps {
+  disabled?: boolean;
   className?: string;
   name: string;
-  onChange: (event: IImageChangeEvent) => void;
+  onChange?: (event: IImageChangeEvent) => void;
   content: (open: VoidFunction) => JSX.Element;
 }
