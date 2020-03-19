@@ -16,6 +16,7 @@ export type IPostMessageValues = NewPost & {
 };
 
 export const postMessageDefaultOptions: IPostMessageValues = {
+  userId: (undefined as unknown) as string,
   postId: (undefined as unknown) as string,
   images: [],
   tags: [],
