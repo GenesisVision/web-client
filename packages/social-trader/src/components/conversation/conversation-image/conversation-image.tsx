@@ -6,6 +6,7 @@ import { IConversationImage } from "components/conversation/conversation.types";
 import { MutedText } from "components/muted-text/muted-text";
 import { SIZES } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
+import { ImageQualityType } from "hooks/url.hook";
 import React from "react";
 
 import "./conversation-image.scss";
@@ -18,6 +19,17 @@ export const getImageSize = (count: number): SIZES => {
       return SIZES.MIDDLE;
     default:
       return SIZES.SMALL;
+  }
+};
+
+const getImageQuality = (size: SIZES): ImageQualityType => {
+  switch (size) {
+    case SIZES.LARGE:
+      return "High";
+    case SIZES.MIDDLE:
+      return "Medium";
+    case SIZES.SMALL:
+      return "Low";
   }
 };
 
@@ -37,6 +49,7 @@ const _ConversationImage: React.FC<Props> = ({ image, size }) => {
   return (
     <>
       <ImageBase
+        quality={getImageQuality(size)}
         onClick={setOpen}
         DefaultImageComponent={EmptyImage}
         defaultImageClassName={"conversation-image__empty"}
