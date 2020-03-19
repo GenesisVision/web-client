@@ -12,6 +12,7 @@ import "./input-image.scss";
 type FileWithPreview = any;
 
 export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
+  noDrag,
   disabled,
   onChange,
   name,
@@ -64,6 +65,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
     isDragAccept,
     isDragReject
   } = useDropzone({
+    noDrag,
     disabled,
     noClick: true,
     onDrop,
@@ -88,6 +90,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
 };
 
 export interface IDropZoneWrapperProps {
+  noDrag?: boolean;
   disabled?: boolean;
   className?: string;
   name: string;
