@@ -25,7 +25,7 @@ const _Message: React.FC<IMessageProps> = ({
         <ConversationUser avatar={""} username={username} date={date} />
       </RowItem>
       <RowItem className="message__text">
-        <Row>{text}</Row>
+        {text && <Row>{text}</Row>}
         {!!images.length && (
           <Row wrap small className="message__images">
             {images.map(image => (
