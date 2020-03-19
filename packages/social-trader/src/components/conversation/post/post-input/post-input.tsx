@@ -116,6 +116,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
                 <RowItem className="post-input__send-buttons">
                   <SubmitButton
                     isSuccessful={isSuccessful}
+                    checkDirty={false}
                     checkValid={false}
                     disabled={disabled}
                   >
