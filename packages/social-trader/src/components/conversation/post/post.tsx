@@ -1,5 +1,3 @@
-import "./post.scss";
-
 import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
@@ -11,6 +9,8 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
+import "./post.scss";
+
 const _Post: React.FC<Props> = ({
   updateData,
   post: { images, date, text, id, comments, actions, likesCount, author }
@@ -19,7 +19,7 @@ const _Post: React.FC<Props> = ({
     <DetailsBlock horizontalPaddings wide>
       <Row center={false}>
         <Message images={images} date={date} text={text} author={author} />
-        {actions?.canClose && (
+        {actions?.canDelete && (
           <RowItem>
             <ConversationRemoveButton id={id} onSuccess={updateData} />
           </RowItem>
@@ -27,9 +27,9 @@ const _Post: React.FC<Props> = ({
       </Row>
       <PostButtons
         id={id}
-        liked={actions?.canLike}
+        liked={actions?.isLiked}
         likesCount={likesCount}
-        canLike={actions?.canLike}
+        canLike={!!actions}
       />
       {!!comments.length && (
         <Row large>
@@ -44,7 +44,7 @@ const _Post: React.FC<Props> = ({
           </div>
         </Row>
       )}
-      {actions && actions.canComment && (
+      {actions && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>

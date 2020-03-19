@@ -1,5 +1,3 @@
-import "./message.scss";
-
 import {
   ConversationImage,
   getImageSize
@@ -13,16 +11,18 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
+import "./message.scss";
+
 const _Message: React.FC<IMessageProps> = ({
   images,
   text,
   date,
-  author: { avatar, name }
+  author: { username }
 }) => {
   return (
     <Row center={false} className="message">
       <RowItem className="message__user">
-        <ConversationUser avatar={avatar} username={name} date={date} />
+        <ConversationUser avatar={""} username={username} date={date} />
       </RowItem>
       <RowItem className="message__text">
         <Row>{text}</Row>

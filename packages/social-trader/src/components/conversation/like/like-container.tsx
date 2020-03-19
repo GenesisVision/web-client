@@ -18,7 +18,7 @@ export const _LikeContainer: React.FC<Props> = ({
   };
   const { sendRequest, isPending } = useApiRequest({
     middleware: [successMiddleware],
-    request: () => toggleLike({ id })
+    request: () => toggleLike({ id, liked })
   });
 
   return (

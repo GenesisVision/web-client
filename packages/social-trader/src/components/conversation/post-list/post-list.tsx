@@ -1,10 +1,9 @@
-import "./post-list.scss";
-
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Post } from "components/conversation/post/post";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
-import { withBlurLoader } from "decorators/with-blur-loader";
 import React from "react";
+
+import "./post-list.scss";
 
 const _PostList: React.FC<Props> = ({ data, updateData }) => {
   return (
@@ -22,4 +21,4 @@ interface Props {
   data: ConversationPost[];
 }
 
-export const PostList = withBlurLoader(React.memo(_PostList));
+export const PostList = React.memo(_PostList);

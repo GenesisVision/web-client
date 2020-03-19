@@ -36,22 +36,19 @@ const mockImages = [
 ];
 
 export const getConversationImageLoaderData = (): IConversationImage => ({
-  url: mockImages[getRandomInteger(0, mockImages.length - 1)]
+  image: mockImages[getRandomInteger(0, mockImages.length - 1)]
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
-  canClose: getRandomBoolean(),
-  canComment: true,
-  canLike: true,
-  liked: getRandomBoolean()
+  canEdit: getRandomBoolean(),
+  canDelete: getRandomBoolean(),
+  isLiked: getRandomBoolean()
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
   id: uuid.v4(),
-  achievements: [],
-  avatar: "",
-  name: getRandomWord(getRandomInteger(8, 50)),
-  link: ""
+  username: getRandomWord(getRandomInteger(8, 50)),
+  url: ""
 });
 
 export const getConversationPostLoaderData = (
@@ -63,6 +60,8 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    isPinned: false,
+    tags: [],
     comments: tableLoaderCreator(
       () => getConversationPostLoaderData(getRandomInteger(0, 2), 0),
       commentsCount
@@ -70,7 +69,7 @@ export const getConversationPostLoaderData = (
     id: uuid.v4(),
     images,
     author: getConversationUserLoaderData(),
-    date: new Date().toLocaleString(),
+    date: new Date(),
     likesCount: getRandomInteger(1, 10),
     text: getRandomWords(getRandomInteger(3, 50)),
     actions: getConversationPersonalDetailsLoaderData()
