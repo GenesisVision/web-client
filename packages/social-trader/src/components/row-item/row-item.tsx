@@ -1,9 +1,10 @@
-import "./row-item.scss";
-
 import classNames from "classnames";
 import React from "react";
 
+import "./row-item.scss";
+
 export const RowItem: React.FC<Props> = ({
+  wide,
   onClick,
   middle = true,
   bottomOffset,
@@ -16,6 +17,7 @@ export const RowItem: React.FC<Props> = ({
     <div
       onClick={onClick}
       className={classNames("row-item", className, {
+        "row-item--wide": wide,
         "row-item--bottom-offset": bottomOffset,
         "row-item--small": small,
         "row-item--middle": middle && !(small || large),
@@ -29,6 +31,7 @@ export const RowItem: React.FC<Props> = ({
 
 interface Props {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  wide?: boolean;
   bottomOffset?: boolean;
   className?: string;
   small?: boolean;
