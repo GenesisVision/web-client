@@ -30,17 +30,21 @@ const mockRequest = (values: any) =>
     }, 1000);
   });
 
-export const sendComment = (values: { text: string; id: string }) => {
-  return mockRequest(values);
-};
-
-export const sendPost = (values: IPostMessageValues) => {
+const sendMessage = (values: IPostMessageValues) => {
   const authorization = authService.getAuthArg();
   return uploadImages(values.images).then(images => {
     return socialApi.addPost(authorization, {
       body: { ...values, images }
     });
   });
+};
+
+export const sendComment = (values: IPostMessageValues) => {
+  return sendMessage(values);
+};
+
+export const sendPost = (values: IPostMessageValues) => {
+  return sendMessage(values);
 };
 
 export const toggleLike = (values: { id: string }) => {
