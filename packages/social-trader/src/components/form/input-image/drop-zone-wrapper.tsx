@@ -1,16 +1,19 @@
 import {
   IImageChangeEvent,
-  INewImage
+  IImageValue
 } from "components/form/input-image/input-image";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
+import uuid from "uuid";
 
 import "./input-image.scss";
 
 type FileWithPreview = any;
 
-export const DropZoneWrapper: React.FC<Props> = ({
+export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
+  noDrag,
+  disabled,
   onChange,
   name,
   content,
@@ -21,33 +24,36 @@ export const DropZoneWrapper: React.FC<Props> = ({
   const onDrop = useCallback(
     (files: FileWithPreview[]) => {
       if (files.length === 0) return;
+      const croppedFiles: IImageValue[] = [];
 
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        let src = reader.result as string;
-        let img = new Image();
-        img.src = src;
-        img.onload = () => {
-          const croppedFiles = files.map(file => {
-            reader.readAsDataURL(file);
-            const image: INewImage = {
-              cropped: file,
-              name: file.name,
-              type: file.type,
-              size: file.size,
-              height: img.height,
-              width: img.width,
-              src
-            };
-            return { image };
-          });
-
-          onChange({
-            target: { value: croppedFiles, name }
-          });
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          let src = e.target?.result as string;
+          let img = new Image();
+          img.src = src;
+          img.onload = () => {
+            croppedFiles.push({
+              src,
+              id: uuid.v4(),
+              image: {
+                cropped: file,
+                name: file.name,
+                type: file.type,
+                size: file.size,
+                height: img.height,
+                width: img.width,
+                src
+              }
+            });
+            onChange &&
+              onChange({
+                target: { value: croppedFiles, name }
+              });
+          };
         };
-      };
+        reader.readAsDataURL(file);
+      });
     },
     [onChange, name]
   );
@@ -59,6 +65,8 @@ export const DropZoneWrapper: React.FC<Props> = ({
     isDragAccept,
     isDragReject
   } = useDropzone({
+    noDrag,
+    disabled,
     noClick: true,
     onDrop,
     accept: "image/jpeg, image/png"
@@ -81,9 +89,11 @@ export const DropZoneWrapper: React.FC<Props> = ({
   );
 };
 
-interface Props {
+export interface IDropZoneWrapperProps {
+  noDrag?: boolean;
+  disabled?: boolean;
   className?: string;
   name: string;
-  onChange: (event: IImageChangeEvent) => void;
+  onChange?: (event: IImageChangeEvent) => void;
   content: (open: VoidFunction) => JSX.Element;
 }
