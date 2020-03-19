@@ -10,7 +10,6 @@ import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import { NewPostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
@@ -20,6 +19,12 @@ import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
 
 import "./comment-input.scss";
+import { AttachImageCommentButton } from "components/conversation/comment/comment-input/attach-image-comment-button";
+import { HookFormInputImages } from "components/form/input-image/input-images";
+import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
+import { Row } from "components/row/row";
+
+const MAX_IMAGES = 2;
 
 enum FORM_FIELDS {
   tags = "tags",
@@ -27,7 +32,7 @@ enum FORM_FIELDS {
   text = "text"
 }
 
-interface CommentInputFormValues {
+export interface CommentInputFormValues {
   [FORM_FIELDS.text]: string;
   [FORM_FIELDS.tags]: NewPostTag[];
   [FORM_FIELDS.images]: IImageValue[];
@@ -49,11 +54,14 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
     mode: "onChange"
   });
   const {
+    setValue,
+    watch,
     errors,
     reset,
     handleSubmit,
-    formState: { isValid, isSubmitting, touched, dirty }
+    formState: { isSubmitting }
   } = form;
+  const { text, images } = watch();
   const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
 
   useEffect(() => {
@@ -71,31 +79,75 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
       return formSubmit(values);
     });
   }, [onSubmit, handleSubmit]);
-  const disabled = isSubmitting || !isValid;
+  const handleRemoveImage = useCallback(
+    id => {
+      const newImages = images.filter(image => image.id !== id);
+      setValue(FORM_FIELDS.images, newImages, true);
+    },
+    [images, setValue]
+  );
+
+  const disabledImages = images?.length >= MAX_IMAGES;
+  const disabled = (!text && !images?.length) || isSubmitting;
+  const isOpenPanel = !!images?.length;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
     <HookForm form={form} onSubmit={formSubmit}>
-      <Row className="comment-input__block" center={false}>
-        <RowItem className="comment-input__input-container-row-item">
-          <Row className="comment-input__input-container">
-            <ConversationInput
-              submitForm={inputSubmit()}
-              name={FORM_FIELDS.text}
-            />
+      <HookFormInputImages
+        noDrag
+        maxImages={MAX_IMAGES}
+        disabled={disabledImages}
+        className="comment-input__drop-zone"
+        name={FORM_FIELDS.images}
+        content={open => (
+          <Row className="comment-input__block" center={false}>
+            <RowItem className="comment-input__input-container-row-item">
+              <div
+                className={classNames(
+                  "comment-input__input-and-panel-container",
+                  {
+                    "comment-input__input-and-panel-container--open": isOpenPanel
+                  }
+                )}
+              >
+                <Center className="comment-input__input-container">
+                  <ConversationInput
+                    submitForm={inputSubmit()}
+                    name={FORM_FIELDS.text}
+                  />
+                  {!disabledImages && (
+                    <AttachImageCommentButton onClick={open} />
+                  )}
+                </Center>
+                {isOpenPanel && (
+                  <Center wrap className="comment-input__panel-container">
+                    {images &&
+                      images.map(image => (
+                        <RowItem key={image.id}>
+                          <PostInputImagePreview
+                            onRemove={handleRemoveImage}
+                            image={image}
+                          />
+                        </RowItem>
+                      ))}
+                  </Center>
+                )}
+              </div>
+            </RowItem>
+            <RowItem>
+              <button
+                type="submit"
+                disabled={disabled}
+                className={classNames("comment-input__send-button", {
+                  "comment-input__send-button--disable": disabled
+                })}
+              >
+                >
+              </button>
+            </RowItem>
           </Row>
-        </RowItem>
-        <RowItem>
-          <button
-            type="submit"
-            disabled={disabled}
-            className={classNames("comment-input__send-button", {
-              "comment-input__send-button--disable": disabled
-            })}
-          >
-            >
-          </button>
-        </RowItem>
-      </Row>
+        )}
+      />
       <CommentInputMessage disable={disabled || !!errorText}>
         <MutedText>Enter to send</MutedText>
       </CommentInputMessage>
