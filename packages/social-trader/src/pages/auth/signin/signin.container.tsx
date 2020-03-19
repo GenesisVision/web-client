@@ -19,7 +19,7 @@ const _SignInContainer: React.FC<Props> = ({
   const { errorMessage } = useSelector(
     (state: AuthRootState) => state.loginData.login
   );
-  const { email, password } = useSelector(
+  const { email, password, from } = useSelector(
     (state: AuthRootState) => state.loginData.twoFactor
   );
   useEffect(() => {
@@ -32,7 +32,15 @@ const _SignInContainer: React.FC<Props> = ({
   return (
     <div className={className}>
       <CaptchaContainer
-        request={dispatch(login(loginUserAction, redirectFrom, type))}
+        request={dispatch(
+          login({
+            method: loginUserAction,
+            fromPath: redirectFrom || String(from),
+            type,
+            email,
+            password
+          })
+        )}
         renderForm={handle => renderForm(handle, email, errorMessage)}
       />
     </div>

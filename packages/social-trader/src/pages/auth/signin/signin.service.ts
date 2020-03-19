@@ -25,15 +25,17 @@ import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "./signin.constants";
 
 export const client = "Web";
 
-export const login: LoginFuncType = (method, fromPath, type) => (
-  dispatch,
-  getState
-) => (props, setSubmitting) => {
+export const login: LoginFuncType = ({
+  method,
+  fromPath,
+  type,
+  email: argEmail,
+  password: argPassword
+}) => dispatch => (props, setSubmitting) => {
   const { code, captchaCheckResult } = props;
-  const stateLoginData = getState().loginData.twoFactor;
-  const email = props.email || stateLoginData.email;
-  const password = props.password || stateLoginData.password;
-  const from = fromPath || stateLoginData.from;
+  const email = props.email || argEmail;
+  const password = props.password || argPassword;
+  const from = fromPath;
   return dispatch(
     method({
       email,
@@ -87,11 +89,13 @@ export const logout: logoutFuncType = dispatch => {
   dispatch(windowResizeAction());
 };
 
-export type LoginFuncType = (
-  method: any,
-  from?: string,
-  type?: CODE_TYPE
-) => (
+export type LoginFuncType = (ars: {
+  email: string;
+  password: string;
+  method: any;
+  fromPath: string;
+  type?: CODE_TYPE;
+}) => (
   dispatch: any,
   getState: any
 ) => (
