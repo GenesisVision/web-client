@@ -8,6 +8,7 @@ import ProgramSettingsPage from "pages/invest/programs/programs-settings/program
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
+import { checkClosed } from "modules/asset-settings/services/asset-settings.service";
 
 const ProgramSettings: NextPageWithRedux<void> = () => {
   return <ProgramSettingsPage />;
@@ -19,7 +20,7 @@ ProgramSettings.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
   ]).then(([id, description]) => {
-    if (description.value.publicInfo.status === "Closed")
+    if (checkClosed(description.value.publicInfo.status))
       throw "Program is closed";
   });
 };

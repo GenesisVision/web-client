@@ -26,6 +26,7 @@ import { AccountDetailsDataType } from "./account-details.types";
 import {
   openPositionsSelector,
   openPositionsTableSelector,
+  tradesSelector,
   tradesTableSelector
 } from "./reducers/account-history.reducer";
 
@@ -41,7 +42,11 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
-    trades: { dataSelector: tradesTableSelector, getItems: getTrades }
+    trades: {
+      itemSelector: tradesSelector,
+      dataSelector: tradesTableSelector,
+      getItems: getTrades
+    }
   };
   const title = description.publicInfo.title;
 

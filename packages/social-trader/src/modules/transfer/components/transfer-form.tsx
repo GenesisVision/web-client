@@ -141,22 +141,22 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         />
       </DialogTop>
       <DialogBottom>
-        <TransferSelectField
-          currency={selectedDestinationItem.currency}
-          name={TRANSFER_FORM_FIELDS.destinationId}
-          value={formattedAvailableDestinationItem}
-          label={t("transfer.to")}
-          onChange={onChangeDestinationId}
-          items={destinationItemsWithoutCurrent}
-          sourceType={destinationType}
-        />
-        <InputAmountField
-          name={TRANSFER_FORM_FIELDS.amount}
-          label={t("transfer.amount")}
-          currency={selectedSourceItem.currency}
-          setMax={setMax}
-          isAllowed={isAmountAllow(sourceItems, sourceId)}
-        />
+          <TransferSelectField
+            currency={selectedDestinationItem.currency}
+            name={TRANSFER_FORM_FIELDS.destinationId}
+            value={formattedAvailableDestinationItem}
+            label={t("transfer.to")}
+            onChange={onChangeDestinationId}
+            items={destinationItemsWithoutCurrent}
+            sourceType={destinationType}
+          />
+          <InputAmountField
+            name={TRANSFER_FORM_FIELDS.amount}
+            label={t("transfer.amount")}
+            currency={selectedSourceItem.currency}
+            setMax={setMax}
+            isAllowed={isAmountAllow(sourceItems, sourceId)}
+          />
         {!!amount &&
           selectedDestinationItem.currency !== selectedSourceItem.currency && (
             <span>{`≈ ${formatCurrencyValue(
