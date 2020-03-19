@@ -9,7 +9,7 @@ export const PostListContainer: React.FC<Props> = ({ id }) => {
     fetchOnMount: true
   });
   if (!data) return null;
-  return <PostList data={data.items} updateData={sendRequest} />;
+  return <PostList id={id} data={data.items} updateData={sendRequest} />;
 };
 
 interface Props {
