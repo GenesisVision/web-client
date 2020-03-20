@@ -3,6 +3,7 @@
 
 $image-height-small: 100px;
 $image-height-middle: 200px;
+$image-height-large: 600px;
 $image-height-full: 90vh;
 $image-width-full: 90vw;
 
@@ -24,6 +25,7 @@ $image-width-full: 90vw;
   }
   &--large {
     max-width: 100%;
+    max-height: $image-height-large;
     &.conversation-image__empty {
       height: 100%;
     }
