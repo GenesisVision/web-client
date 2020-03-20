@@ -35,10 +35,11 @@ const _Message: React.FC<IMessageProps> = ({
         {text && <Row>{text}</Row>}
         {!!images.length && (
           <Row wrap small className="message__images">
-            {images.map(image => (
-              <RowItem bottomOffset>
+            {images.map((image, index) => (
+              <RowItem bottomOffset key={image.image}>
                 <ConversationImage
-                  image={image}
+                  index={index}
+                  images={images}
                   size={getImageSize(images.length)}
                 />
               </RowItem>

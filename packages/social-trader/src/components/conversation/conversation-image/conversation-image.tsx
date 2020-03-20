@@ -2,6 +2,7 @@ import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { ConversationImageFull } from "components/conversation/conversation-image/conversation-image-full";
+import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { MutedText } from "components/muted-text/muted-text";
 import { SIZES } from "constants/constants";
@@ -43,7 +44,7 @@ const EmptyImage: React.FC<{ imageClassName: string }> = ({
   );
 };
 
-const _ConversationImage: React.FC<Props> = ({ image, size }) => {
+const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
   const [open, setOpen, setClose] = useIsOpen();
 
   return (
@@ -58,16 +59,22 @@ const _ConversationImage: React.FC<Props> = ({ image, size }) => {
           "conversation-image--middle": size === SIZES.MIDDLE,
           "conversation-image--large": size === SIZES.LARGE
         })}
-        src={image.image}
+        src={images[index].image}
       />
-      <ConversationImageFull open={open} onClose={setClose} image={image} />
+      <ConversationImagesFull
+        open={open}
+        onClose={setClose}
+        images={images}
+        initIndex={index}
+      />
     </>
   );
 };
 
 interface Props {
+  index: number;
   size: SIZES;
-  image: IConversationImage;
+  images: IConversationImage[];
 }
 
 export const ConversationImage = React.memo(_ConversationImage);

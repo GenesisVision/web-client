@@ -42,9 +42,20 @@ $image-width-full: 90vw;
     @include adaptive-full-padding($padding-xxsmall);
   }
 }
+
 .conversation-image-full {
+  cursor: pointer;
   max-height: $image-height-full;
   max-width: $image-width-full;
+  &__wrapper {
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.conversation-images-full {
   &__wrapper {
     height: 100vh;
     overflow-y: auto;
