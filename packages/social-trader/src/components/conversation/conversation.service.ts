@@ -1,10 +1,14 @@
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
-import { ConversationFeed } from "components/conversation/conversation.types";
+import { getConversationPostLoaderData } from "components/conversation/conversation.loader";
+import {
+  ConversationFeed,
+  ConversationPost
+} from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
 import socialApi from "services/api-client/social-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
-import { getRandomBoolean } from "utils/helpers";
+import { getRandomBoolean, getRandomInteger } from "utils/helpers";
 
 const uploadImages = async (images?: IImageValue[]) => {
   const ids: string[] = [];
@@ -60,4 +64,14 @@ export const remove = ({ id }: { id: string }) => {
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
   const authorization = authService.getAuthArg();
   return socialApi.getFeed({ authorization, userId: id });
+};
+
+export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
+  const authorization = authService.getAuthArg();
+  return Promise.resolve(
+    getConversationPostLoaderData(
+      getRandomInteger(0, 10),
+      getRandomInteger(0, 5)
+    )
+  );
 };
