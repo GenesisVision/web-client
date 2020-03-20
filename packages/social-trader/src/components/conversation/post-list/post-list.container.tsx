@@ -1,13 +1,16 @@
 import { getPosts } from "components/conversation/conversation.service";
 import { PostList } from "components/conversation/post-list/post-list";
 import useApiRequest from "hooks/api-request.hook";
-import React from "react";
+import React, { useEffect } from "react";
 
-export const PostListContainer: React.FC<Props> = ({ id }) => {
+const _PostListContainer: React.FC<Props> = ({ id }) => {
   const { data, sendRequest } = useApiRequest({
     request: () => getPosts({ id }),
     fetchOnMount: true
   });
+  useEffect(() => {
+    sendRequest();
+  }, [id]);
   if (!data) return null;
   return <PostList id={id} data={data.items} updateData={sendRequest} />;
 };
@@ -15,3 +18,5 @@ export const PostListContainer: React.FC<Props> = ({ id }) => {
 interface Props {
   id: string;
 }
+
+export const PostListContainer = React.memo(_PostListContainer);

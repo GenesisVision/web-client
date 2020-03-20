@@ -1,4 +1,7 @@
 .post {
+  & form {
+    width: 100%;
+  }
   &__comments {
     width: 100%;
   }

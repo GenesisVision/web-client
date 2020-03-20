@@ -16,10 +16,16 @@ const _Post: React.FC<Props> = ({
   post: { images, date, text, id, comments, actions, likesCount, author }
 }) => {
   return (
-    <DetailsBlock horizontalPaddings wide>
+    <DetailsBlock horizontalPaddings wide className="post">
       <Row center={false}>
         <RowItem wide>
-          <Message images={images} date={date} text={text} author={author} />
+          <Message
+            postId={id}
+            images={images}
+            date={date}
+            text={text}
+            author={author}
+          />
         </RowItem>
         {actions?.canDelete && (
           <RowItem>

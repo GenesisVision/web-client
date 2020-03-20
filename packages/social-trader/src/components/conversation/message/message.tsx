@@ -14,15 +14,22 @@ import React from "react";
 import "./message.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  postId,
   images,
   text,
   date,
-  author: { username }
+  author: { username, url }
 }) => {
   return (
     <Row center={false} className="message">
       <RowItem className="message__user">
-        <ConversationUser avatar={""} username={username} date={date} />
+        <ConversationUser
+          postId={postId}
+          url={url}
+          avatar={""}
+          username={username}
+          date={date}
+        />
       </RowItem>
       <RowItem className="message__text">
         {text && <Row>{text}</Row>}
@@ -44,6 +51,7 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  postId?: string;
   images: IConversationImage[];
   author: IConversationUser;
   text?: string;
