@@ -51,7 +51,7 @@ export const asyncLoadFiles = async ({
   onProgress?: (progress: number) => void;
 }): Promise<void> => {
   asyncCompressImages(files, {
-    maxWidthOrHeight: 1200,
+    maxWidthOrHeight: 800,
     maxSizeMB: 1,
     useWebWorker: true,
     onProgress
