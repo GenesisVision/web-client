@@ -24,7 +24,7 @@ import { object } from "yup";
 
 import "./comment-input.scss";
 
-const MAX_IMAGES = 2;
+const MAX_IMAGES = 1;
 
 enum FORM_FIELDS {
   tags = "tags",
