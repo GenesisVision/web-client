@@ -9,7 +9,6 @@ export const Row: React.FC<Props> = ({
   middle = true,
   hide,
   className,
-  wrap,
   small,
   large,
   children,
@@ -21,7 +20,6 @@ export const Row: React.FC<Props> = ({
       className={classNames("row", className, {
         "row--wide": wide,
         "row--hidden": hide,
-        "row--wrap": wrap,
         "row--small": small,
         "row--middle": middle && !(small || large),
         "row--large": large

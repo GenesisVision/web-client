@@ -10,9 +10,6 @@
   &--hidden {
     display: none;
   }
-  &--wrap {
-    flex-wrap: wrap;
-  }
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);
   }
