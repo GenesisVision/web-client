@@ -50,7 +50,12 @@ export const asyncLoadFiles = async ({
   onChange?: (event: IImageChangeEvent) => void;
   onProgress?: (progress: number) => void;
 }): Promise<void> => {
-  asyncCompressImages(files, { maxSizeMB: 2, useWebWorker: true, onProgress })
+  asyncCompressImages(files, {
+    maxWidthOrHeight: 1200,
+    maxSizeMB: 1,
+    useWebWorker: true,
+    onProgress
+  })
     .then(compressedFiles => {
       compressedFiles.forEach(file => {
         const reader = new FileReader();
