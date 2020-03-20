@@ -14,19 +14,20 @@ $image-full-button-size: 30px;
   @include adaptive-border-radius($border-radius);
   cursor: pointer;
   &--small {
-    max-height: $image-height-small;
+    height: $image-height-small;
     &.conversation-image__empty {
       height: $image-height-small;
     }
   }
   &--middle {
-    max-height: $image-height-middle;
+    height: $image-height-middle;
     &.conversation-image__empty {
       height: $image-height-middle;
     }
   }
   &--large {
     max-width: 100%;
+    min-height: $image-height-small;
     max-height: $image-height-large;
     &.conversation-image__empty {
       height: 100%;
@@ -47,6 +48,7 @@ $image-full-button-size: 30px;
 
 .conversation-image-full {
   cursor: pointer;
+  min-height: $image-height-middle;
   max-height: $image-height-full;
   max-width: $image-width-full;
   &__button {

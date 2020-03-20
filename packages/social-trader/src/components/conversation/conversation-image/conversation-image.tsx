@@ -1,7 +1,5 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
-import ImageBaseElement from "components/avatar/image-base.element";
-import { ConversationImageFull } from "components/conversation/conversation-image/conversation-image-full";
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { MutedText } from "components/muted-text/muted-text";
