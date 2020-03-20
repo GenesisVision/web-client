@@ -2,10 +2,10 @@ import {
   IImageChangeEvent,
   IImageValue
 } from "components/form/input-image/input-image";
+import { loadFiles } from "components/form/input-image/input-image.helpers";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
-import uuid from "uuid";
 
 import "./input-image.scss";
 
@@ -26,34 +26,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
       if (files.length === 0) return;
       const croppedFiles: IImageValue[] = [];
 
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          let src = e.target?.result as string;
-          let img = new Image();
-          img.src = src;
-          img.onload = () => {
-            croppedFiles.push({
-              src,
-              id: uuid.v4(),
-              image: {
-                cropped: file,
-                name: file.name,
-                type: file.type,
-                size: file.size,
-                height: img.height,
-                width: img.width,
-                src
-              }
-            });
-            onChange &&
-              onChange({
-                target: { value: croppedFiles, name }
-              });
-          };
-        };
-        reader.readAsDataURL(file);
-      });
+      loadFiles({ onChange, croppedFiles, files });
     },
     [onChange, name]
   );
