@@ -8,7 +8,7 @@ $comment-input-button-size: 30px;
 .comment-input {
   &__input-and-panel-container {
     border-radius: $input-height/2;
-    background-color: darken($panel-background-color, 3);
+    background-color: $border-color;
     &--open {
       border-radius: $input-height/2 $input-height/2 $border-radius-middle
         $border-radius-middle;
