@@ -1,6 +1,8 @@
+import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import { IConversationImage } from "components/conversation/conversation.types";
 import Modal, { BodyFix } from "components/modal/modal";
+import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import EventListener from "react-event-listener";
 
@@ -50,6 +52,7 @@ const ConversationImagesFullContent: React.FC<{
   initIndex: number;
   images: IConversationImage[];
 }> = ({ initIndex, images }) => {
+  const [isOver, setOver, setLeave] = useIsOpen();
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(initIndex);
 
   const handleNext = useCallback(() => {
@@ -60,7 +63,7 @@ const ConversationImagesFullContent: React.FC<{
 
   const handlePrev = useCallback(() => {
     const newIndex =
-      currentImageIndex - 1 === 0 ? images.length - 1 : currentImageIndex - 1;
+      currentImageIndex - 1 < 0 ? images.length - 1 : currentImageIndex - 1;
     setCurrentImageIndex(newIndex);
   }, [currentImageIndex, images]);
 
@@ -71,14 +74,38 @@ const ConversationImagesFullContent: React.FC<{
     },
     [handleNext, handlePrev]
   );
+
+  const isButtonsShow = isOver && images.length > 1;
   return (
     <EventListener target={"document"} onKeyUp={handleKeyPress}>
-      <ImageBase
-        onClick={handleNext}
-        quality={"High"}
-        className="conversation-image-full"
-        src={images[currentImageIndex].image}
-      />
+      <div onMouseEnter={setOver} onMouseLeave={setLeave}>
+        <ImageBase
+          onClick={handleNext}
+          quality={"High"}
+          className="conversation-image-full"
+          src={images[currentImageIndex].image}
+        />
+        <div
+          onClick={handlePrev}
+          className={classNames(
+            "conversation-image-full__button conversation-image-full__button--left",
+            {
+              "conversation-image-full__button--show": isButtonsShow
+            }
+          )}
+        >
+          {"<"}
+        </div>
+        <div
+          onClick={handleNext}
+          className={classNames(
+            "conversation-image-full__button conversation-image-full__button--right",
+            { "conversation-image-full__button--show": isButtonsShow }
+          )}
+        >
+          {">"}
+        </div>
+      </div>
     </EventListener>
   );
 };
