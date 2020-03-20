@@ -101,7 +101,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
                   <Center wrap>
                     {images &&
                       images.map(image => (
-                        <RowItem key={image.id}>
+                        <RowItem key={image.id} bottomOffset>
                           <PostInputImagePreview
                             onRemove={handleRemoveImage}
                             image={image}

@@ -3,12 +3,18 @@
 @import "~shared/styles/_constants";
 
 $post-input-height: 83px;
+$post-input-width: 60px;
 $post-input-button-size: 40px;
 $post-input-image-preview-size: 40px;
 
 .post-input {
   &__image-preview-container {
     position: relative;
+  }
+  &__image-fixed-container {
+    max-width: $post-input-width;
+    overflow-x: hidden;
+    @include adaptive-border-radius($border-radius);
   }
   &__image-preview-remove {
     cursor: pointer;
@@ -35,7 +41,7 @@ $post-input-image-preview-size: 40px;
   &__image-preview {
     display: block;
     height: $post-input-image-preview-size;
-    @include adaptive-border-radius($border-radius);
+    //@include adaptive-border-radius($border-radius);
   }
   &__container,
   &__input-container,
