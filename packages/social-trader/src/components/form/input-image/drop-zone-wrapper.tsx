@@ -13,6 +13,7 @@ import "./input-image.scss";
 type FileWithPreview = any;
 
 export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
+  showIndicator = true,
   noDrag,
   disabled,
   onChange,
@@ -56,13 +57,15 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
   return (
     <div
       {...getRootProps({
-        className: classNames("input-images__dropzone-container", className)
+        className: classNames("input-image__dropzone-container", className)
       })}
     >
-      <div
-        className="input-image__indicator"
-        style={{ width: `${indicatorValue}%` }}
-      />
+      {showIndicator && (
+        <div
+          className="input-image__indicator"
+          style={{ width: `${indicatorValue}%` }}
+        />
+      )}
       <input {...getInputProps()} />
       {isDragAccept && (
         <div className="input-image__dropzone-helper">
@@ -80,6 +83,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
 };
 
 export interface IDropZoneWrapperProps {
+  showIndicator?: boolean;
   noDrag?: boolean;
   disabled?: boolean;
   className?: string;

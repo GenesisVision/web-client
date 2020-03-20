@@ -1,15 +1,19 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
+import { AttachImageCommentButton } from "components/conversation/comment/comment-input/attach-image-comment-button";
 import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
 import {
   ConversationInputShape,
   postMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
+import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
+import { HookFormInputImages } from "components/form/input-image/input-images";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { NewPostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
@@ -19,10 +23,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
 
 import "./comment-input.scss";
-import { AttachImageCommentButton } from "components/conversation/comment/comment-input/attach-image-comment-button";
-import { HookFormInputImages } from "components/form/input-image/input-images";
-import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
-import { Row } from "components/row/row";
 
 const MAX_IMAGES = 2;
 
@@ -94,6 +94,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   return (
     <HookForm form={form} onSubmit={formSubmit}>
       <HookFormInputImages
+        showIndicator={false}
         noDrag
         maxImages={MAX_IMAGES}
         disabled={disabledImages}
