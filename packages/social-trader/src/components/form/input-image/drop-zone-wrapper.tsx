@@ -1,9 +1,10 @@
+import classNames from "classnames";
 import {
   IImageChangeEvent,
   IImageValue
 } from "components/form/input-image/input-image";
-import { loadFiles } from "components/form/input-image/input-image.helpers";
-import React, { useCallback } from "react";
+import { asyncLoadFiles } from "components/form/input-image/input-image.helpers";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 
@@ -20,13 +21,21 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
   className
 }) => {
   const [t] = useTranslation();
+  const [indicatorValue, setIndicatorValue] = useState<number>(0);
+  const handleUploadProgress = useCallback(value => {
+    setIndicatorValue(value === 100 ? 0 : value);
+  }, []);
 
   const onDrop = useCallback(
     (files: FileWithPreview[]) => {
       if (files.length === 0) return;
       const croppedFiles: IImageValue[] = [];
-
-      loadFiles({ onChange, croppedFiles, files });
+      asyncLoadFiles({
+        onChange,
+        croppedFiles,
+        files,
+        onProgress: handleUploadProgress
+      });
     },
     [onChange, name]
   );
@@ -45,7 +54,15 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
     accept: "image/jpeg, image/png"
   });
   return (
-    <div {...getRootProps({ className })}>
+    <div
+      {...getRootProps({
+        className: classNames("input-images__dropzone-container", className)
+      })}
+    >
+      <div
+        className="input-image__indicator"
+        style={{ width: `${indicatorValue}%` }}
+      />
       <input {...getInputProps()} />
       {isDragAccept && (
         <div className="input-image__dropzone-helper">
