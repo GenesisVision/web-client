@@ -1,10 +1,13 @@
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
 import { getConversationPostLoaderData } from "components/conversation/conversation.loader";
 import {
+  AssetSearchResult,
   ConversationFeed,
-  ConversationPost
+  ConversationPost,
+  SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
+import searchApi from "services/api-client/search-api";
 import socialApi from "services/api-client/social-api";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
@@ -74,4 +77,52 @@ export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
       getRandomInteger(0, 5)
     )
   );
+};
+
+type RequestFilters = {
+  mask: string;
+  take?: number;
+  authorization?: string;
+};
+
+const getAssetSearchResult = (type: SEARCH_ASSET_TYPE) => (
+  data: any
+): AssetSearchResult => {
+  return {
+    type,
+    avatar: data.avatar || data.logo,
+    name: data.url,
+    id: data.id
+  };
+};
+
+export const searchAsset = (text: string): Promise<AssetSearchResult[]> => {
+  const trimmedQuery = text.trim();
+  const filters: RequestFilters = {
+    take: 10,
+    mask: trimmedQuery,
+    authorization: authService.getAuthArg()
+  };
+  return searchApi
+    .search(filters)
+    .then(({ programs, funds, follows, managers }) => {
+      const programsNames: AssetSearchResult[] = programs.items.map(
+        getAssetSearchResult(SEARCH_ASSET_TYPE.program)
+      );
+      const followNames: AssetSearchResult[] = follows.items.map(
+        getAssetSearchResult(SEARCH_ASSET_TYPE.follow)
+      );
+      const fundsNames: AssetSearchResult[] = funds.items.map(
+        getAssetSearchResult(SEARCH_ASSET_TYPE.fund)
+      );
+      const managersNames: AssetSearchResult[] = managers.items.map(
+        getAssetSearchResult(SEARCH_ASSET_TYPE.user)
+      );
+      return [
+        ...programsNames,
+        ...followNames,
+        ...fundsNames,
+        ...managersNames
+      ];
+    });
 };
