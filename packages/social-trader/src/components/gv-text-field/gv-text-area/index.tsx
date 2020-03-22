@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import "./style.scss";
@@ -10,9 +11,14 @@ export type TextareaKeyDownEventExtended = TextareaKeyDownEvent & {
   ref: HTMLTextAreaElement;
 };
 
+const ARROW_KEYS = [37, 38, 39, 40];
+const CHANGE_CARET_KEYS = [...ARROW_KEYS];
+
 const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
+  outerCaret?: number;
+  onChangeCaret?: (position: number) => void;
   onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
   ref?: any;
   className?: string;
@@ -23,6 +29,8 @@ interface GVTextAreaProps {
 }
 
 const _GVTextArea: React.FC<GVTextAreaProps> = ({
+  outerCaret,
+  onChangeCaret,
   rows = 1,
   onKeyDown,
   textAreaClassName,
@@ -31,6 +39,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   value,
   ...otherProps
 }) => {
+  const [isCaretChange, setCaretChanged, setCaretNotChanged] = useIsOpen();
   const shadowRef = useRef<HTMLTextAreaElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -53,6 +62,22 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
     syncHeightWithShadow();
   }, [value, syncHeightWithShadow]);
 
+  useEffect(() => {
+    if (textareaRef.current && isCaretChange) {
+      onChangeCaret && onChangeCaret(textareaRef.current.selectionEnd);
+      setCaretNotChanged();
+    }
+  }, [isCaretChange, textareaRef.current, onChangeCaret]);
+
+  useEffect(() => {
+    if (textareaRef.current && outerCaret) {
+      textareaRef.current.focus();
+      textareaRef.current.selectionEnd = outerCaret;
+      textareaRef.current.selectionStart = outerCaret;
+      setCaretChanged();
+    }
+  }, [outerCaret]);
+
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEvent) => {
       if (onKeyDown && textareaRef.current) {
@@ -62,6 +87,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
           preventDefault: () => event.preventDefault()
         });
       }
+      if (CHANGE_CARET_KEYS.includes(event.keyCode)) setCaretChanged();
     },
     [onKeyDown, textareaRef.current]
   );
@@ -74,9 +100,14 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
         syncHeightWithShadow();
       }
       if (onChange) onChange(event);
+      setCaretChanged();
     },
     [onChange, shadowRef.current, syncHeightWithShadow]
   );
+
+  const handleClick = useCallback(() => {
+    setCaretChanged();
+  }, []);
 
   return (
     <div className={classNames("gv-text-area", textAreaClassName)}>
@@ -89,6 +120,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
         value={value}
       />
       <textarea
+        onClick={handleClick}
         rows={rows}
         className={className}
         value={value}
