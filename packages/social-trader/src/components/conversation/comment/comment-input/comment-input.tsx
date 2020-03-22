@@ -8,6 +8,8 @@ import {
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
+import { SearchPanel } from "components/conversation/search-panel/search-panel";
+import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
@@ -64,6 +66,18 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   const { text, images } = watch();
   const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
 
+  const {
+    isSearchPending,
+    fixedCaretPosition,
+    handleSearchItemSelect,
+    isOpenSearchPanel,
+    searchResult,
+    onChangeCaret
+  } = useSearchPanel({
+    text,
+    setValue: value => setValue(FORM_FIELDS.text, value, true)
+  });
+
   useEffect(() => {
     if (isSuccessful) reset({ text: "", images: [] });
   }, [isSuccessful]);
@@ -89,7 +103,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
 
   const disabledImages = images?.length >= MAX_IMAGES;
   const disabled = (!text && !images?.length) || isSubmitting;
-  const isOpenPanel = !!images?.length;
+  const isOpenPanel = !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
     <HookForm form={form} onSubmit={formSubmit}>
@@ -113,6 +127,8 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
               >
                 <Center className="comment-input__input-container">
                   <ConversationInput
+                    outerCaret={fixedCaretPosition}
+                    onChangeCaret={onChangeCaret}
                     submitForm={inputSubmit()}
                     name={FORM_FIELDS.text}
                   />
@@ -121,17 +137,27 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                   )}
                 </Center>
                 {isOpenPanel && (
-                  <Center wrap className="comment-input__panel-container">
-                    {images &&
-                      images.map(image => (
-                        <RowItem key={image.id}>
-                          <PostInputImagePreview
-                            onRemove={handleRemoveImage}
-                            image={image}
-                          />
-                        </RowItem>
-                      ))}
-                  </Center>
+                  <div>
+                    {isOpenSearchPanel && (
+                      <SearchPanel
+                        isSearchPending={isSearchPending}
+                        onClick={handleSearchItemSelect}
+                        searchResult={searchResult}
+                      />
+                    )}
+                    {!!images?.length && (
+                      <Center wrap className="comment-input__panel-container">
+                        {images.map(image => (
+                          <RowItem key={image.id}>
+                            <PostInputImagePreview
+                              onRemove={handleRemoveImage}
+                              image={image}
+                            />
+                          </RowItem>
+                        ))}
+                      </Center>
+                    )}
+                  </div>
                 )}
               </div>
             </RowItem>
