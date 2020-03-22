@@ -7,6 +7,8 @@ import {
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import { AttachImagePostButton } from "components/conversation/post/post-input/attach-image-post-button";
 import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
+import { SearchPanel } from "components/conversation/search-panel/search-panel";
+import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
@@ -57,6 +59,18 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
   const { text, images } = watch();
   const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
 
+  const {
+    isSearchPending,
+    fixedCaretPosition,
+    handleSearchItemSelect,
+    isOpenSearchPanel,
+    searchResult,
+    onChangeCaret
+  } = useSearchPanel({
+    text,
+    setValue: value => setValue(FORM_FIELDS.text, value, true)
+  });
+
   useEffect(() => {
     if (isSuccessful) postponeFunc(() => reset({ text: "", images: [] }));
   }, [isSuccessful]);
@@ -75,7 +89,8 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
   );
   const disabledImages = images?.length >= MAX_IMAGES;
   const disabled = !text && !images?.length;
-  const isOpenPanel = isFocused || !!text || !!images?.length;
+  const isOpenEditPanel =
+    isFocused || !!text || !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -88,42 +103,53 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
           <>
             <Center className="post-input__input-container">
               <ConversationInput
+                outerCaret={fixedCaretPosition}
+                onChangeCaret={onChangeCaret}
                 setFocused={setFocused}
                 submitForm={inputSubmit()}
-                name={"text"}
+                name={FORM_FIELDS.text}
                 placeholder={"What's new?"}
               />
               {!disabledImages && <AttachImagePostButton onClick={open} />}
             </Center>
-            {isOpenPanel && (
-              <Center className="post-input__edit-panel-container">
-                <RowItem className="post-input__add-buttons">
-                  <Center wrap>
-                    {images &&
-                      images.map(image => (
-                        <RowItem key={image.id} bottomOffset>
-                          <PostInputImagePreview
-                            onRemove={handleRemoveImage}
-                            image={image}
-                          />
-                        </RowItem>
-                      ))}
-                  </Center>
-                </RowItem>
-                <RowItem className="post-input__errors">
-                  {errorText && <ErrorMessage error={errorText} />}
-                </RowItem>
-                <RowItem className="post-input__send-buttons">
-                  <SubmitButton
-                    isSuccessful={isSuccessful}
-                    checkDirty={false}
-                    checkValid={false}
-                    disabled={disabled}
-                  >
-                    Send
-                  </SubmitButton>
-                </RowItem>
-              </Center>
+            {isOpenEditPanel && (
+              <div>
+                {isOpenSearchPanel && (
+                  <SearchPanel
+                    isSearchPending={isSearchPending}
+                    onClick={handleSearchItemSelect}
+                    searchResult={searchResult}
+                  />
+                )}
+                <Center className="post-input__edit-panel-container">
+                  <RowItem className="post-input__add-buttons">
+                    <Center wrap>
+                      {images &&
+                        images.map(image => (
+                          <RowItem key={image.id} bottomOffset>
+                            <PostInputImagePreview
+                              onRemove={handleRemoveImage}
+                              image={image}
+                            />
+                          </RowItem>
+                        ))}
+                    </Center>
+                  </RowItem>
+                  <RowItem className="post-input__errors">
+                    {errorText && <ErrorMessage error={errorText} />}
+                  </RowItem>
+                  <RowItem className="post-input__send-buttons">
+                    <SubmitButton
+                      isSuccessful={isSuccessful}
+                      checkDirty={false}
+                      checkValid={false}
+                      disabled={disabled}
+                    >
+                      Send
+                    </SubmitButton>
+                  </RowItem>
+                </Center>
+              </div>
             )}
           </>
         )}
