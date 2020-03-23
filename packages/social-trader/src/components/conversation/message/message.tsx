@@ -9,11 +9,14 @@ import {
 } from "components/conversation/conversation.types";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { PostTag } from "gv-api-web";
 import React from "react";
+import { componentsMap, parseToTsx } from "utils/parse-to-tsx";
 
 import "./message.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  tags,
   postId,
   images,
   text,
@@ -32,7 +35,17 @@ const _Message: React.FC<IMessageProps> = ({
         />
       </RowItem>
       <RowItem className="message__text">
-        {text && <Row>{text}</Row>}
+        {text && (
+          <Row>
+            <div>
+              {parseToTsx({
+                tags,
+                text,
+                map: componentsMap
+              })}
+            </div>
+          </Row>
+        )}
         {!!images.length && (
           <Row wrap small className="message__images">
             {images.map((image, index) => (
@@ -52,6 +65,7 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  tags?: PostTag[];
   postId?: string;
   images: IConversationImage[];
   author: IConversationUser;
