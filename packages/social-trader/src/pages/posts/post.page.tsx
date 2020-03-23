@@ -4,6 +4,7 @@ import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { testParse } from "utils/parse-to-tsx";
 
 export const PostPage: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
@@ -18,6 +19,7 @@ export const PostPage: React.FC<Props> = ({ id }) => {
   if (!data) return null;
   return (
     <Page title={title}>
+      {testParse}
       <Post post={data} updateData={sendRequest} />
     </Page>
   );
