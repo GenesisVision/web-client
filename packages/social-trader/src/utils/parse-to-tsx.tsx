@@ -17,11 +17,8 @@ type TagToComponentType = {
   Component: React.FC<IAssetLinkProps>;
 };
 
-const AnyLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
-  const { linkCreator, contextTitle } = useToLink();
-  const route = url;
-  const folderRoute = undefined;
-  return <Link to={linkCreator(route, folderRoute, contextTitle)}>{name}</Link>;
+const AnyTag: React.FC<IAssetLinkProps> = ({ name }) => {
+  return <>{name}</>;
 };
 
 const ProgramLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
@@ -52,7 +49,7 @@ const UserLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
 };
 
 export const componentsMap: TagToComponentType[] = [
-  { tagType: "Undefined", Component: AnyLink },
+  { tagType: "Undefined", Component: AnyTag },
   { tagType: "Program", Component: ProgramLink },
   { tagType: "Follow", Component: FollowLink },
   { tagType: "Fund", Component: FundLink },
@@ -60,14 +57,14 @@ export const componentsMap: TagToComponentType[] = [
 ];
 
 const convertAssetTagToComponent = (
-  { type, assetDetails: { url, title } }: PostTag,
+  { type, assetDetails }: PostTag,
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   const { Component } = safeGetElemFromArray(
     componentsMap,
     ({ tagType }) => tagType === type
   );
-  return <Component url={url} name={title} />;
+  return <Component url={assetDetails?.url} name={assetDetails?.title} />;
 };
 
 const mergeArrays = (first: any[], second: any[]): any[] => {
@@ -94,7 +91,8 @@ export const parseToTsx = ({
       return result ? +result[0] : 0;
     })
     .map((number: number) => {
-      return convertAssetTagToComponent(tags[number], map);
+      const tag = safeGetElemFromArray(tags, tag => tag.number === number);
+      return convertAssetTagToComponent(tag, map);
     });
   const otherWords = text.split(regex);
   const mergedText = mergeArrays(otherWords, parsedTags);
