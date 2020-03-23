@@ -5,7 +5,7 @@ import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-tradin
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
-import { getRandomWord, safeGetElemFromArray } from "utils/helpers";
+import { safeGetElemFromArray } from "utils/helpers";
 
 interface IAssetLinkProps {
   url: string;
@@ -51,7 +51,7 @@ const UserLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
   return <Link to={to}>{name}</Link>;
 };
 
-const componentsMap: TagToComponentType[] = [
+export const componentsMap: TagToComponentType[] = [
   { tagType: "Undefined", Component: AnyLink },
   { tagType: "Program", Component: ProgramLink },
   { tagType: "Follow", Component: FollowLink },
@@ -70,67 +70,33 @@ const convertAssetTagToComponent = (
   return <Component url={url} name={title} />;
 };
 
-const mockText = "test @tag-0 test.test @tag-1 test. test .@tag-2.test";
-const getMockTag = (): PostTag => ({
-  title: "",
-  number: 0,
-  assetDetails: {
-    url: "dasf",
-    assetType: "Program",
-    title: getRandomWord(),
-    id: "",
-    color: "",
-    logo: "",
-    programDetails: { level: 0, levelProgress: 0 }
-  },
-  type: "Program",
-  userDetails: {
-    id: "",
-    username: "",
-    url: ""
-  },
-  platformAssetDetails: {
-    id: "string",
-    name: "string",
-    asset: "string",
-    description: "string",
-    icon: "string",
-    color: "string",
-    mandatoryFundPercent: 0,
-    url: "string"
-  }
-});
+const mergeArrays = (first: any[], second: any[]): any[] => {
+  const result = [];
+  for (const i in first) result.push(first[i], second[i]);
+  return result;
+};
 
 export const parseToTsx = ({
   tags,
   map,
   text
 }: {
-  tags: PostTag[];
+  tags?: PostTag[];
   map: TagToComponentType[];
   text: string;
 }): JSX.Element => {
-  const parsedWords: any[] = [];
-  for (let i = 0; i < text.length; i++) {
-    const letter = text[i];
-    const tagEnd = i + 5;
-    if (letter === "@" && text.slice(i, tagEnd) === "@tag-") {
-      const tagNumber = text.slice(
-        tagEnd,
-        tagEnd + text.slice(tagEnd).search(/\W/)
-      );
-      parsedWords.push(
-        <>{convertAssetTagToComponent(tags[+tagNumber], map)}</>
-      );
-      i = i + 4 + tagNumber.length;
-    } else parsedWords.push(letter);
-  }
-
-  return <>{parsedWords}</>;
+  if (!tags) return <>{text}</>;
+  const regex = /@tag-[\d]+/g;
+  const tagStrings = text.match(regex) || [];
+  const parsedTags = tagStrings
+    .map(tag => {
+      const result = tag.match(/[\d]+/g);
+      return result ? +result[0] : 0;
+    })
+    .map((number: number) => {
+      return convertAssetTagToComponent(tags[number], map);
+    });
+  const otherWords = text.split(regex);
+  const mergedText = mergeArrays(otherWords, parsedTags);
+  return <>{mergedText}</>;
 };
-
-export const testParse = parseToTsx({
-  tags: [getMockTag(), getMockTag(), getMockTag()],
-  map: componentsMap,
-  text: mockText
-});
