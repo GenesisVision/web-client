@@ -10,13 +10,19 @@ import "./comment.scss";
 
 const _Comment: React.FC<Props> = ({
   updateData,
-  comment: { images, date, text, id, actions, likesCount, author }
+  comment: { tags, images, date, text, id, actions, likesCount, author }
 }) => {
   return (
     <Row className="comment">
       <Row className="comment__message" center={false}>
         <RowItem>
-          <Message images={images} date={date} text={text} author={author} />
+          <Message
+            tags={tags}
+            images={images}
+            date={date}
+            text={text}
+            author={author}
+          />
         </RowItem>
         {actions?.canDelete && (
           <RowItem>
