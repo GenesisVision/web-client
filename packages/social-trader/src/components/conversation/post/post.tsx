@@ -13,13 +13,14 @@ import "./post.scss";
 
 const _Post: React.FC<Props> = ({
   updateData,
-  post: { images, date, text, id, comments, actions, likesCount, author }
+  post: { images, date, text, id, comments, actions, likesCount, author, tags }
 }) => {
   return (
     <DetailsBlock horizontalPaddings wide className="post">
       <Row center={false}>
         <RowItem wide>
           <Message
+            tags={tags}
             postId={id}
             images={images}
             date={date}
