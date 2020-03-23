@@ -101,6 +101,15 @@ const getMockTag = (): PostTag => ({
   }
 });
 
+const mergeArrays = (first: any[], second: any[]): any[] => {
+  const result = [];
+  for (const i in first) {
+    result.push(first[i]);
+    result.push(second[i]);
+  }
+  return result;
+};
+
 export const parseToTsx = ({
   tags,
   map,
@@ -110,6 +119,29 @@ export const parseToTsx = ({
   map: TagToComponentType[];
   text: string;
 }): JSX.Element => {
+  // Use split to tags and other words arrays and merge its
+  const tagStrings = text.match(/@tag-[\d]/g) || [];
+  const parsedTags = tagStrings
+    .map(tag => {
+      const result = tag.match(/[\d]/g);
+      return result ? +result[0] : 0;
+    })
+    .map((number: number) => {
+      return <>{convertAssetTagToComponent(tags[number], map)}</>;
+    });
+  const otherWords = text.split(/@tag-[\d]/);
+  const mergedText = mergeArrays(otherWords, parsedTags);
+
+  // Use replace
+  const newText = text.replace(/@tag-[\d]/g, (tag: string) => {
+    const tagNumber = +tag.match(/[\d]/g)![0];
+    return ((
+      <>{convertAssetTagToComponent(tags[tagNumber], map)}</>
+    ) as unknown) as string;
+  });
+  console.log(newText);
+
+  // Use cycle
   const parsedWords: any[] = [];
   for (let i = 0; i < text.length; i++) {
     const letter = text[i];
@@ -125,8 +157,9 @@ export const parseToTsx = ({
       i = i + 4 + tagNumber.length;
     } else parsedWords.push(letter);
   }
+  console.log(parsedWords);
 
-  return <>{parsedWords}</>;
+  return <>{mergedText}</>;
 };
 
 export const testParse = parseToTsx({
