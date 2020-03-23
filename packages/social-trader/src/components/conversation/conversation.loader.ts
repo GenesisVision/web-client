@@ -4,6 +4,7 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { PostTag } from "gv-api-web";
 import {
   getRandomBoolean,
   getRandomInteger,
@@ -12,6 +13,60 @@ import {
   tableLoaderCreator
 } from "utils/helpers";
 import uuid from "uuid";
+
+const getTagLoaderData = (): PostTag => ({
+  title: "",
+  number: 0,
+  assetDetails: {
+    url: getRandomWord(),
+    assetType: "Program",
+    title: getRandomWord(),
+    id: "",
+    color: "",
+    logo: "",
+    programDetails: { level: 0, levelProgress: 0 }
+  },
+  type: "Program",
+  userDetails: {
+    id: "",
+    username: "",
+    url: ""
+  },
+  platformAssetDetails: {
+    id: "string",
+    name: "string",
+    asset: "string",
+    description: "string",
+    icon: "string",
+    color: "string",
+    mandatoryFundPercent: 0,
+    url: "string"
+  }
+});
+
+const getRandomTextString = (tagNumber: number): string => {
+  const strings = [
+    `${getRandomWords(
+      getRandomInteger(1, 5)
+    )} (@tag-${tagNumber}) ${getRandomWords(getRandomInteger(1, 5))}`,
+    `${getRandomWords(
+      getRandomInteger(1, 5)
+    )} @tag-${tagNumber}. ${getRandomWords(getRandomInteger(1, 5))}`,
+    `${getRandomWords(
+      getRandomInteger(1, 5)
+    )},@tag-${tagNumber},${getRandomWords(getRandomInteger(1, 5))}`,
+    `${getRandomWords(
+      getRandomInteger(1, 5)
+    )} "@tag-${tagNumber}" ${getRandomWords(getRandomInteger(1, 5))}`
+  ];
+  return strings[getRandomInteger(0, strings.length - 1)];
+};
+
+const getMockTextAndTags = () => {
+  const tags = tableLoaderCreator(getTagLoaderData, getRandomInteger(1, 30));
+  const text = tags.map((_, i) => getRandomTextString(i)).join(". ");
+  return { tags, text };
+};
 
 const mockImages = [
   "",
@@ -55,13 +110,14 @@ export const getConversationPostLoaderData = (
   imagesCount: number,
   commentsCount: number
 ): ConversationPost => {
+  const { tags, text } = getMockTextAndTags();
   const images = new Array(imagesCount)
     .fill("")
     .map(getConversationImageLoaderData);
 
   return {
     isPinned: false,
-    tags: [],
+    tags,
     comments: tableLoaderCreator(
       () => getConversationPostLoaderData(getRandomInteger(0, 2), 0),
       commentsCount
@@ -71,7 +127,7 @@ export const getConversationPostLoaderData = (
     author: getConversationUserLoaderData(),
     date: new Date(),
     likesCount: getRandomInteger(1, 10),
-    text: getRandomWords(getRandomInteger(3, 50)),
+    text,
     actions: getConversationPersonalDetailsLoaderData()
   };
 };
