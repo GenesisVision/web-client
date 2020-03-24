@@ -9,6 +9,7 @@ import {
   FollowTagCard,
   FundLink,
   FundTagCard,
+  PlatformAssetTagComponent,
   ProgramLink,
   ProgramTagCard,
   RepostTagComponent,
@@ -29,6 +30,7 @@ export const underTextComponentsMap: TagToComponentType[] = [
   { tagType: "Undefined", Component: EmptyTag },
   // @ts-ignore
   { tagType: "Post", Component: RepostTagComponent },
+  { tagType: "Asset", Component: PlatformAssetTagComponent },
   { tagType: "Program", Component: ProgramTagCard },
   { tagType: "Follow", Component: FollowTagCard },
   { tagType: "Fund", Component: FundTagCard },
@@ -40,6 +42,8 @@ export const convertTagToComponent = (
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   switch (tag.type) {
+    case "Asset":
+      return convertPlatformAssetTagToComponent(tag, componentsMap);
     case "Program":
     case "Fund":
     case "Follow":
@@ -53,6 +57,17 @@ export const convertTagToComponent = (
     default:
       return convertUndefinedTagToComponent(tag);
   }
+};
+
+const convertPlatformAssetTagToComponent = (
+  { platformAssetDetails, type }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  return <Component platformAssetDetails={platformAssetDetails} />;
 };
 
 const convertRepostTagToComponent = (

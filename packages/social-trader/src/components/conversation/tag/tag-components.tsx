@@ -2,11 +2,13 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { TagBlock } from "components/conversation/tag/tag.block";
+import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Crashable from "decorators/crashable";
 import {
   AssetDetails,
+  PlatformAsset,
   Post as PostType,
   ProfilePublicShort,
   SocialPostTagType
@@ -15,6 +17,10 @@ import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-tradin
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
+
+export interface IPlatformAssetTagProps {
+  platformAssetDetails: PlatformAsset;
+}
 
 export interface IUserTagProps {
   userDetails: ProfilePublicShort;
@@ -37,6 +43,17 @@ export type TagToComponentType = {
   tagType: SocialPostTagType;
   Component: React.FC<any>;
 };
+
+const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
+  platformAssetDetails: { name, icon, url }
+}) => {
+  return (
+    <TagBlock>
+      <CurrencyItem name={name} url={url} logo={icon} />
+    </TagBlock>
+  );
+};
+export const PlatformAssetTagComponent = React.memo(_PlatformAssetTagComponent);
 
 const _RepostTagComponent: React.FC<IRepostTagProps> = ({ post }) => {
   return null;
