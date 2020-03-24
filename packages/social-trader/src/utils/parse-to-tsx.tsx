@@ -56,6 +56,35 @@ export const componentsMap: TagToComponentType[] = [
   { tagType: "User", Component: UserLink }
 ];
 
+const convertTagToComponent = (
+  post: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  switch (post.type) {
+    case "User":
+      return convertUserTagToComponent(post, componentsMap);
+    case "Undefined":
+      return convertUndefinedTagToComponent(post);
+    default:
+      return convertAssetTagToComponent(post, componentsMap);
+  }
+};
+
+const convertUserTagToComponent = (
+  { type, userDetails }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  return <Component url={userDetails?.url} name={userDetails?.username} />;
+};
+
+const convertUndefinedTagToComponent = ({ title }: PostTag): JSX.Element => {
+  return <AnyTag name={title} url={""} />;
+};
+
 const convertAssetTagToComponent = (
   { type, assetDetails }: PostTag,
   componentsMap: TagToComponentType[]
@@ -92,7 +121,7 @@ export const parseToTsx = ({
     })
     .map((number: number) => {
       const tag = safeGetElemFromArray(tags, tag => tag.number === number);
-      return convertAssetTagToComponent(tag, map);
+      return convertTagToComponent(tag, map);
     });
   const otherWords = text.split(regex);
   const mergedText = mergeArrays(otherWords, parsedTags);
