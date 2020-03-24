@@ -3,14 +3,20 @@ import React from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import {
   AnyTag,
+  EmptyTag,
   FollowLink,
+  FollowTagCard,
   FundLink,
+  FundTagCard,
   ProgramLink,
+  ProgramTagCard,
+  RepostTagComponent,
   TagToComponentType,
-  UserLink
+  UserLink,
+  UserTagCard
 } from "utils/tag-components";
 
-export const componentsMap: TagToComponentType[] = [
+export const inTextComponentsMap: TagToComponentType[] = [
   { tagType: "Undefined", Component: AnyTag },
   { tagType: "Program", Component: ProgramLink },
   { tagType: "Follow", Component: FollowLink },
@@ -18,18 +24,43 @@ export const componentsMap: TagToComponentType[] = [
   { tagType: "User", Component: UserLink }
 ];
 
-const convertTagToComponent = (
-  post: PostTag,
+export const underTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Undefined", Component: EmptyTag },
+  // @ts-ignore
+  { tagType: "Post", Component: RepostTagComponent },
+  { tagType: "Program", Component: ProgramTagCard },
+  { tagType: "Follow", Component: FollowTagCard },
+  { tagType: "Fund", Component: FundTagCard },
+  { tagType: "User", Component: UserTagCard }
+];
+
+export const convertTagToComponent = (
+  tag: PostTag,
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
-  switch (post.type) {
+  switch (tag.type) {
+    // @ts-ignore
+    case "Post":
+      return convertRepostTagToComponent(tag, componentsMap);
     case "User":
-      return convertUserTagToComponent(post, componentsMap);
+      return convertUserTagToComponent(tag, componentsMap);
     case "Undefined":
-      return convertUndefinedTagToComponent(post);
+      return convertUndefinedTagToComponent(tag);
     default:
-      return convertAssetTagToComponent(post, componentsMap);
+      return convertAssetTagToComponent(tag, componentsMap);
   }
+};
+
+const convertRepostTagToComponent = (
+  tag: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === tag.type
+  );
+  // @ts-ignore
+  return <Component post={tag.post} />;
 };
 
 const convertUserTagToComponent = (
@@ -40,7 +71,7 @@ const convertUserTagToComponent = (
     componentsMap,
     ({ tagType }) => tagType === type
   );
-  return <Component url={userDetails?.url} name={userDetails?.username} />;
+  return <Component userDetails={userDetails} />;
 };
 
 const convertUndefinedTagToComponent = ({ title }: PostTag): JSX.Element => {
@@ -55,7 +86,7 @@ const convertAssetTagToComponent = (
     componentsMap,
     ({ tagType }) => tagType === type
   );
-  return <Component url={assetDetails?.url} name={assetDetails?.title} />;
+  return <Component assetDetails={assetDetails} />;
 };
 
 const mergeArrays = (first: any[], second: any[]): any[] => {
