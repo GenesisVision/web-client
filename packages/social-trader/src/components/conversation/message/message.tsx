@@ -7,11 +7,12 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { generateTagsComponents } from "components/conversation/message/message.helpers";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React from "react";
-import { componentsMap, parseToTsx } from "utils/parse-to-tsx";
+import { inTextComponentsMap, parseToTsx } from "utils/parse-to-tsx";
 
 import "./message.scss";
 
@@ -41,7 +42,7 @@ const _Message: React.FC<IMessageProps> = ({
               {parseToTsx({
                 tags,
                 text,
-                map: componentsMap
+                map: inTextComponentsMap
               })}
             </div>
           </Row>
@@ -57,6 +58,11 @@ const _Message: React.FC<IMessageProps> = ({
                 />
               </RowItem>
             ))}
+          </Row>
+        )}
+        {!!tags?.length && (
+          <Row wrap small>
+            {generateTagsComponents(tags)}
           </Row>
         )}
       </RowItem>
