@@ -4,10 +4,8 @@ import classNames from "classnames";
 import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useApiRequest from "hooks/api-request.hook";
-import { dispatchProgramDescriptionWithId } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 
@@ -15,16 +13,13 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
   isReinvesting: propIsReinvesting,
   id
 }) => {
-  const dispatch = useDispatch();
   const [t] = useTranslation();
   const [isReinvesting, setIsReinvestingValue] = useState(propIsReinvesting);
-  const dispatchDescription = () =>
-    dispatch(dispatchProgramDescriptionWithId(id));
   const setValue = () => setIsReinvestingValue(!isReinvesting);
   const { isPending, sendRequest } = useApiRequest({
     request: toggleReinvesting,
     catchCallback: () => setIsReinvestingValue(isReinvesting),
-    middleware: [dispatchDescription, setValue]
+    middleware: [setValue]
   });
   const onReinvestingLabelClick = useCallback(
     () => sendRequest({ id, isReinvesting: !isReinvesting }),
