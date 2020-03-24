@@ -8,11 +8,14 @@ import {
   IConversationUser
 } from "components/conversation/conversation.types";
 import { generateTagsComponents } from "components/conversation/message/message.helpers";
+import {
+  inTextComponentsMap,
+  parseToTsx
+} from "components/conversation/tag/parse-to-tsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React from "react";
-import { inTextComponentsMap, parseToTsx } from "utils/parse-to-tsx";
 
 import "./message.scss";
 

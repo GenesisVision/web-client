@@ -1,6 +1,7 @@
 import { PostTag } from "gv-api-web";
 import React from "react";
 import { safeGetElemFromArray } from "utils/helpers";
+
 import {
   AnyTag,
   EmptyTag,
@@ -14,7 +15,7 @@ import {
   TagToComponentType,
   UserLink,
   UserTagCard
-} from "utils/tag-components";
+} from "./tag-components";
 
 export const inTextComponentsMap: TagToComponentType[] = [
   { tagType: "Undefined", Component: AnyTag },
