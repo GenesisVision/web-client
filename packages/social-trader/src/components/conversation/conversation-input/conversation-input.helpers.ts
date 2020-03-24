@@ -3,8 +3,7 @@ import { NewPost } from "gv-api-web";
 import { TFunction } from "i18next";
 import { string } from "yup";
 
-export const ConversationInputShape = (t: TFunction) =>
-  string().max(100, t("Max count 100"));
+export const ConversationInputShape = (t: TFunction) => string();
 
 export enum CONVERSATION_SUBMIT_TYPE {
   ENTER = "ENTER",
