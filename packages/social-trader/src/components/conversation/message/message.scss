@@ -10,7 +10,6 @@
     width: auto;
     margin-bottom: $padding-xsmall-mobile;
     @include media-breakpoint-landscape-phone() {
-      width: 350px;
       margin-bottom: 0;
     }
   }
