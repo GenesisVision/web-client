@@ -13,6 +13,26 @@ import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean, getRandomInteger } from "utils/helpers";
 
+export const sharePost = (id: string) => {
+  const authorization = authService.getAuthArg();
+  return mockRequest(id);
+};
+
+export const pinPost = (id: string) => {
+  const authorization = authService.getAuthArg();
+  return socialApi.pinPost(id, authorization);
+};
+
+export const unpinPost = (id: string) => {
+  const authorization = authService.getAuthArg();
+  return socialApi.unpinPost(id, authorization);
+};
+
+export const togglePin = ({ id, value }: { id: string; value: boolean }) => {
+  const method = value ? unpinPost : pinPost;
+  return method(id);
+};
+
 const uploadImages = async (images?: IImageValue[]) => {
   const ids: string[] = [];
   if (!images?.length) return [];
