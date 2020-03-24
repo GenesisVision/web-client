@@ -9,7 +9,7 @@ import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import {
   FundDetailsListItem,
-  ItemsViewModelFundDetailsListItem
+  FundDetailsListItemItemsViewModel
 } from "gv-api-web";
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
@@ -29,19 +29,14 @@ import {
 export const fetchFundsChallengeWinner = (): Promise<Array<
   FundDetailsListItem
 >> => {
-  return fundsApi
-    .getLastChallengeWinner({ authorization: authService.getAuthArg() })
-    .then(item => [item]);
+  return fundsApi.getLastChallengeWinner().then(item => [item]);
 };
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<ItemsViewModelFundDetailsListItem>;
+) => Promise<FundDetailsListItemItemsViewModel>;
 export const fetchFunds: FetchFundsType = filters => {
-  return fundsApi.getFunds({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+  return fundsApi.getFunds(filters);
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {

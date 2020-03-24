@@ -1,12 +1,12 @@
 import { PlatformInfo } from "gv-api-web";
-import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
 import { ApiAction } from "utils/types";
 
 export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";
 
 const fetchPlatformSettingsAction = (): ApiAction<PlatformInfo> => ({
   type: PLATFORM_SETTINGS,
-  payload: platformApi.getPlatformInfo()
+  payload: api.platform().getPlatformInfo()
 });
 
 const platformActions = {

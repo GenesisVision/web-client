@@ -90,15 +90,15 @@ const getFileUrl = (
   quality: "Low" | "Medium" | "High" = "Low"
 ): string => (id ? `${clientUrl}/v2.0/file/${id}?quality=${quality}` : "");
 
-const uploadFile = (file: File, authorization: string): Promise<string> =>
+const uploadFile = (uploadedFile: File): Promise<string> =>
   fileApi
-    .uploadFile(file, { authorization })
+    .uploadFile({
+      uploadedFile
+    })
     .then((response: any) => response.id);
 
-const uploadDocument = (file: File, authorization: string): Promise<string> =>
-  fileApi
-    .uploadFile(file, { authorization })
-    .then((response: any) => response.id);
+const uploadDocument = (uploadedFile: File): Promise<string> =>
+  fileApi.uploadFile({ uploadedFile }).then((response: any) => response.id);
 
 const filesService = {
   getAccountTradesExportFileUrl,

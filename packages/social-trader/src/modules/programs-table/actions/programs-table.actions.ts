@@ -1,24 +1,28 @@
-import { Currency, ItemsViewModelProgramDetailsListItem } from "gv-api-web";
-import programApi from "services/api-client/programs-api";
+import {
+  Currency,
+  ProgramDetailsListItemItemsViewModel,
+  ProgramsFilterSorting
+} from "gv-api-web";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { ActionType } from "utils/types";
 
 export const PROGRAMS = "PROGRAMS";
 
 export const fetchProgramsAction = (
-  filters: FetchProgramsFiltersType // TODO change api to create interface to this
-): ActionType<Promise<ItemsViewModelProgramDetailsListItem>> => ({
+  filters: FetchProgramsFiltersType,
+  token?: Token
+): ActionType<Promise<ProgramDetailsListItemItemsViewModel>> => ({
   type: PROGRAMS,
-  payload: programApi.getPrograms(filters)
+  payload: api.programs(token).getPrograms(filters)
 });
 
 export type FetchProgramsFiltersType = {
-  authorization?: string;
   levelMin?: number;
   levelMax?: number;
   levelsSet?: number[];
   profitAvgMin?: number;
   profitAvgMax?: number;
-  sorting?: string;
+  sorting?: ProgramsFilterSorting;
   programCurrency?: Currency;
   currency?: Currency;
   levelUpFrom?: number;

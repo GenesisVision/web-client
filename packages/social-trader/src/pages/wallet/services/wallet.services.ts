@@ -1,12 +1,12 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
   Currency,
-  ItemsViewModelTransactionViewModel,
+  TransactionViewModelItemsViewModel,
   WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
+import { Token } from "services/api-client/swagger-custom-client";
 import walletApi from "services/api-client/wallet-api";
-import authService from "services/auth-service";
 import { CurrencyEnum, RootThunk } from "utils/types";
 
 import * as actions from "../actions/wallet.actions";
@@ -14,21 +14,19 @@ import * as actions from "../actions/wallet.actions";
 export const fetchWalletsWithCtx = (
   ctx?: NextPageContext
 ): RootThunk<void> => async (dispatch, getState) => {
-  const authorization = authService.getAuthArg(ctx);
   const { info } = getState().wallet;
   if (info.isPending) return;
   const { currency } = getState().accountSettings;
   await dispatch(actions.updateWalletTimestampAction());
-  await dispatch(actions.fetchWalletsAction(currency, authorization));
+  await dispatch(actions.fetchWalletsAction(currency, Token.create(ctx)));
 };
 
 export const fetchWallets = (
   currency: CurrencyEnum,
   ctx?: NextPageContext
 ): RootThunk<void> => async dispatch => {
-  const authorization = authService.getAuthArg(ctx);
   await dispatch(actions.updateWalletTimestampAction());
-  await dispatch(actions.fetchWalletsAction(currency, authorization));
+  await dispatch(actions.fetchWalletsAction(currency, Token.create(ctx)));
 };
 
 export type TWalletsAvailableData = WalletBaseData[];
@@ -37,23 +35,15 @@ export const fetchAvailableWallets = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TWalletsAvailableData> => {
-  const authorization = authService.getAuthArg();
-  return walletApi
-    .getWalletAvailable(currency, authorization)
-    .then(({ wallets }) => wallets);
+  return walletApi.getWalletAvailable(currency).then(({ wallets }) => wallets);
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
-  actions.fetchWalletTransactionsAction(
-    authService.getAuthArg(),
-    requestFilters
-  );
+  actions.fetchWalletTransactionsAction(requestFilters);
 
-export const offPayFeesWithGvt = () =>
-  walletApi.switchPayFeeInGvtOff(authService.getAuthArg());
+export const offPayFeesWithGvt = () => walletApi.switchPayFeeInGvtOff();
 
-export const onPayFeesWithGvt = () =>
-  walletApi.switchPayFeeInGvtOn(authService.getAuthArg());
+export const onPayFeesWithGvt = () => walletApi.switchPayFeeInGvtOn();
 
 export type FetchTransactionsInternalFilterType = {
   transactionType?:
@@ -77,10 +67,8 @@ export type FetchTransactionsInternalFilterType = {
 export const fetchMultiTransactions = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsInternalFilterType
-): Promise<ItemsViewModelTransactionViewModel> => {
-  const authorization = authService.getAuthArg();
-
-  return walletApi.getTransactionsInternal(authorization, {
+): Promise<TransactionViewModelItemsViewModel> => {
+  return walletApi.getTransactionsInternal({
     ...filters,
     currency
   });
@@ -97,9 +85,8 @@ export type FetchTransactionsExternalFilterType = {
 export const fetchMultiTransactionsExternal = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsExternalFilterType
-): Promise<ItemsViewModelTransactionViewModel> => {
-  const authorization = authService.getAuthArg();
-  return walletApi.getTransactionsExternal(authorization, {
+): Promise<TransactionViewModelItemsViewModel> => {
+  return walletApi.getTransactionsExternal({
     ...filters,
     currency
   });

@@ -7,7 +7,6 @@ import { TStatisticPeriodAction } from "components/details/reducers/statistic-pe
 import { ProgramBalanceChart } from "gv-api-web";
 import { FollowAbsoluteProfitChartDataType } from "pages/invest/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import followApi from "services/api-client/follow-api";
-import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -44,7 +43,6 @@ export const fetchFollowProfitChartAction = (
 ): ApiAction<FollowProfitChartDataType> => ({
   type: FETCH_FOLLOW_PROFIT_CHART,
   payload: followApi.getProfitPercentCharts(id, {
-    authorization: authService.getAuthArg(),
     dateFrom: period.start,
     dateTo: period.end,
     currencies

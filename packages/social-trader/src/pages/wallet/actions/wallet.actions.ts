@@ -2,6 +2,7 @@ import { FilteringType } from "components/table/components/filtering/filter.type
 import { Currency, WalletSummary } from "gv-api-web";
 import { WalletsAvailableStateType } from "pages/wallet/reducers/wallet.reducers";
 import { fetchAvailableWallets } from "pages/wallet/services/wallet.services";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import walletApi from "services/api-client/wallet-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
@@ -39,12 +40,13 @@ interface UpdateAccountTimestampAction extends ActionType<Date> {
 
 export const fetchWalletsAction = (
   currency: Currency,
-  authorization: string
-): FetchWalletAction => ({
-  type: WALLET_BALANCE,
-  //@ts-ignore
-  payload: walletApi.getWalletSummary(currency, authorization)
-});
+  token: Token
+): FetchWalletAction => {
+  return {
+    type: WALLET_BALANCE,
+    payload: api.wallet(token).getWalletSummary(currency)
+  };
+};
 
 export const fetchWalletsByCurrencyAvailableAction = (
   currency: CurrencyEnum
@@ -54,11 +56,10 @@ export const fetchWalletsByCurrencyAvailableAction = (
 });
 
 export const fetchWalletTransactionsAction = (
-  authorization: string,
   filters?: FilteringType
 ): FetchTransactionsAction => ({
   type: WALLET_TRANSACTIONS,
-  payload: walletApi.getTransactionsInternal(authorization, filters)
+  payload: walletApi.getTransactionsInternal(filters)
 });
 
 export const updateWalletTimestampAction = (): UpdateTimestampAction => ({

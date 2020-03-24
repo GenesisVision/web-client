@@ -41,10 +41,10 @@ const withReduxStore = (
         (await WrappedComponent.getInitialProps(ctx));
 
       const token = authService.getAuthArg(ctx.ctx);
-      if (token) {
-        reduxStore.dispatch(authActions.updateTokenAction(true));
-        refreshToken(ctx.ctx, token);
-      }
+      // if (token) {
+      //   reduxStore.dispatch(authActions.updateTokenAction(true));
+      //   refreshToken(ctx.ctx, token);
+      // }
 
       if (initialActions) {
         await Promise.all(initialActions);

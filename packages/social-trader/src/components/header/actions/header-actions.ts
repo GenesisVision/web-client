@@ -1,10 +1,11 @@
 import { PROFILE_HEADER } from "components/header/header.constants";
 import { ProfileHeaderViewModel } from "gv-api-web";
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { ApiAction } from "utils/types";
 
-export const fetchProfileHeaderInfoAction = (): ApiAction<ProfileHeaderViewModel> => ({
-  type: PROFILE_HEADER,
-  payload: profileApi.getProfileHeader(authService.getAuthArg())
-});
+export const fetchProfileHeaderInfoAction = (): ApiAction<ProfileHeaderViewModel> => {
+  return {
+    type: PROFILE_HEADER,
+    payload: api.profile().getProfileHeader()
+  };
+};

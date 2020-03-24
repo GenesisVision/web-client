@@ -2,8 +2,8 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { IDataModel } from "constants/constants";
 import {
   DashboardTradingAsset,
+  DashboardTradingAssetItemsViewModel,
   FollowDetailsListItem,
-  ItemsViewModelDashboardTradingAsset,
   PrivateTradingAccountFull,
   ProgramFollowDetailsFull
 } from "gv-api-web";
@@ -27,7 +27,7 @@ import { CurrencyEnum } from "utils/types";
 export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingFunds(authService.getAuthArg(), {
+  dashboardApi.getInvestingFunds({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -35,7 +35,7 @@ export const getInvestingFunds = (
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingPrograms(authService.getAuthArg(), {
+  dashboardApi.getInvestingPrograms({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -43,7 +43,7 @@ export const getInvestingPrograms = (
 export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), {
+  dashboardApi.getMostProfitableAssets({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -61,16 +61,16 @@ export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
-): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), {
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  dashboardApi.getPrivateTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
-): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), {
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  dashboardApi.getPublicTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -81,9 +81,7 @@ export const getPortfolio = (): Promise<TDashboardPortfolio> =>
     .then(({ distribution }) => distribution);
 
 export const getAssetsPercents = (): Promise<TAssets> =>
-  dashboardApi
-    .getHoldings(authService.getAuthArg())
-    .then(({ assets }) => assets);
+  dashboardApi.getHoldings().then(({ assets }) => assets);
 
 export const getRecommendations = ({
   currency
@@ -91,7 +89,7 @@ export const getRecommendations = ({
   currency: CurrencyEnum;
 }): Promise<FollowDetailsListItem[]> =>
   dashboardApi
-    .getRecommendations(authService.getAuthArg(), {
+    .getRecommendations({
       onlyFollows: true,
       currency,
       take: 15
@@ -103,15 +101,14 @@ export const getTotal = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): Promise<TDashboardTotal> =>
-  dashboardApi.getSummary(authService.getAuthArg(), { currency });
+}): Promise<TDashboardTotal> => dashboardApi.getDashboardSummary({ currency });
 
 export const fetchTradingTotalStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardTradingStatistic> =>
-  dashboardApi.getTradingDetails(authService.getAuthArg(), {
+  dashboardApi.getTradingDetails({
     currency,
     eventsTake: 4
   });
@@ -121,14 +118,14 @@ export const getTotalInvestingStatistic = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardInvestingStatistic> =>
-  dashboardApi.getInvestingDetails(authService.getAuthArg(), {
+  dashboardApi.getInvestingDetails({
     currency,
     eventsTake: 4
   });
 
 export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
   eventsApi
-    .getEvents(authService.getAuthArg(), {
+    .getEvents({
       ...filters,
       eventGroup: "InvestmentHistory",
       eventLocation: "Dashboard"
@@ -137,7 +134,7 @@ export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
 
 export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
   eventsApi
-    .getEvents(authService.getAuthArg(), {
+    .getEvents({
       ...filters,
       eventGroup: "TradingHistory",
       eventLocation: "Dashboard"

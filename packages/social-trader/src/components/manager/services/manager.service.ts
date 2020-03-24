@@ -1,8 +1,8 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
@@ -11,29 +11,24 @@ import authService from "services/auth-service";
 
 export const fetchManagerFollow = (
   filter: FilteringType
-): Promise<ItemsViewModelFollowDetailsListItem> => {
-  return followApi.getFollowAssets({
-    ...filter,
-    authorization: authService.getAuthArg()
-  });
+): Promise<FollowDetailsListItemItemsViewModel> => {
+  return followApi.getFollowAssets(filter);
 };
 
 export const fetchManagerPrograms = (
   filter: FilteringType
-): Promise<ItemsViewModelProgramDetailsListItem> => {
+): Promise<ProgramDetailsListItemItemsViewModel> => {
   return programsApi.getPrograms({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };
 
 export const fetchManagerFunds = (
   filter: FilteringType
-): Promise<ItemsViewModelFundDetailsListItem> => {
+): Promise<FundDetailsListItemItemsViewModel> => {
   return fundsApi.getFunds({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };

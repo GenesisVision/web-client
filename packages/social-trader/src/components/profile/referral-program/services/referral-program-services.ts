@@ -1,25 +1,20 @@
-import { ItemsViewModelReferralFriend } from "gv-api-web";
+import { ReferralFriendItemsViewModel } from "gv-api-web";
 import partnershipApi from "services/api-client/partnership-api";
 import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
 import { CurrencyEnum } from "utils/types";
 
 export const getReferralDetails = (currency: CurrencyEnum) => {
-  const authorization = authService.getAuthArg();
-  return partnershipApi.getDetails(authorization, { currency });
+  return partnershipApi.getDetails({ currency });
 };
 
 export const getFriendsTable = (
   filters: any
-): Promise<ItemsViewModelReferralFriend> => {
-  const authorization = authService.getAuthArg();
-  return partnershipApi.getReferrals(authorization, filters);
+): Promise<ReferralFriendItemsViewModel> => {
+  return partnershipApi.getReferrals(filters);
 };
 
 export const getHistoryTable = (filters: any) => {
-  const authorization = authService.getAuthArg();
-  return partnershipApi.getRewardsHistory(authorization, filters);
+  return partnershipApi.getRewardsHistory(filters);
 };
 
-export const getProfile = () =>
-  profileApi.getProfileFull(authService.getAuthArg());
+export const getProfile = () => profileApi.getProfileFull();

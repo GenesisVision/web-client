@@ -1,4 +1,4 @@
-import { ItemsViewModelFollowDetailsListItem } from "gv-api-web";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import followApi from "services/api-client/follow-api";
 import { ActionType } from "utils/types";
 
@@ -6,7 +6,7 @@ export const FOLLOWS = "FOLLOWS";
 
 export const fetchFollowsAction = (
   filters: FetchSignalAssetsFilterType
-): ActionType<Promise<ItemsViewModelFollowDetailsListItem>> => ({
+): ActionType<Promise<FollowDetailsListItemItemsViewModel>> => ({
   type: FOLLOWS,
   payload: followApi.getFollowAssets(filters)
 });
