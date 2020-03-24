@@ -9,6 +9,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
+import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
@@ -144,6 +145,17 @@ const _Investment: React.FC<Props> = ({
               <ProgramReinvestingContainer
                 id={id}
                 isReinvesting={personalDetails.isReinvest}
+              />
+            </StatisticItem>
+          )}
+        {"isReinvest" in personalDetails &&
+          personalDetails.isInvested &&
+          personalDetails.canInvest &&
+          !isOwnAsset && (
+            <StatisticItem label={"Ignore SO"} hideLabel>
+              <ProgramAutoJoin
+                id={id}
+                isAutoJoin={personalDetails.isAutoJoin}
               />
             </StatisticItem>
           )}
