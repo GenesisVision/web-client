@@ -6,6 +6,9 @@ import { debounce } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 import { getTagFromInputText } from "utils/parse";
 
+export const generateTagName = (name: string, type: string): string =>
+  `${name} (${type})`;
+
 export const useSearchPanel = ({
   text,
   setValue
@@ -52,7 +55,7 @@ export const useSearchPanel = ({
 
   const handleSearchItemSelect = useCallback(
     ({ name, type }: AssetSearchResult) => {
-      const fullTagName = `${name} (${type})`;
+      const fullTagName = generateTagName(name, type);
       const tagIndex = text.lastIndexOf(`@${tag}`, caretPosition) + 1;
       const replacedTag = text.slice(0, tagIndex) + fullTagName;
       const newText = replacedTag + text.slice(tagIndex + tag.length);
