@@ -12,7 +12,7 @@ const _TooltipContent: React.FC<Props> = ({
   return (
     <PopoverContentCardBlock size={"small"} fixed={fixed}>
       <div
-        className={classNames({
+        className={classNames("tooltip-content", {
           "tooltip-content--small": small
         })}
       >
