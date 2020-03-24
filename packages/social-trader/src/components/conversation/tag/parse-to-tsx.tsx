@@ -40,15 +40,18 @@ export const convertTagToComponent = (
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   switch (tag.type) {
+    case "Program":
+    case "Fund":
+    case "Follow":
+      return convertAssetTagToComponent(tag, componentsMap);
     // @ts-ignore
     case "Post":
       return convertRepostTagToComponent(tag, componentsMap);
     case "User":
       return convertUserTagToComponent(tag, componentsMap);
     case "Undefined":
-      return convertUndefinedTagToComponent(tag);
     default:
-      return convertAssetTagToComponent(tag, componentsMap);
+      return convertUndefinedTagToComponent(tag);
   }
 };
 
