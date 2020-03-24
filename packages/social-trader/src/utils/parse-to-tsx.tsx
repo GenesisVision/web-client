@@ -1,52 +1,14 @@
-import Link from "components/link/link";
-import { useToLink } from "components/link/link.helper";
-import { PostTag, SocialPostTagType } from "gv-api-web";
-import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
+import { PostTag } from "gv-api-web";
 import React from "react";
-import { managerToPathCreator } from "routes/manager.routes";
-import { composeAssetDetailsUrl } from "utils/compose-url";
 import { safeGetElemFromArray } from "utils/helpers";
-
-interface IAssetLinkProps {
-  url: string;
-  name: string;
-}
-
-type TagToComponentType = {
-  tagType: SocialPostTagType;
-  Component: React.FC<IAssetLinkProps>;
-};
-
-const AnyTag: React.FC<IAssetLinkProps> = ({ name }) => {
-  return <>{name}</>;
-};
-
-const ProgramLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
-  const { linkCreator, contextTitle } = useToLink();
-  const route = composeAssetDetailsUrl("Program", url);
-  const folderRoute = getAssetFolderRoute("Program");
-  return <Link to={linkCreator(route, folderRoute, contextTitle)}>{name}</Link>;
-};
-
-const FundLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
-  const { linkCreator, contextTitle } = useToLink();
-  const route = composeAssetDetailsUrl("Fund", url);
-  const folderRoute = getAssetFolderRoute("Fund");
-  return <Link to={linkCreator(route, folderRoute, contextTitle)}>{name}</Link>;
-};
-
-const FollowLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
-  const { linkCreator, contextTitle } = useToLink();
-  const route = composeAssetDetailsUrl("SignalProgram", url);
-  const folderRoute = getAssetFolderRoute("SignalProgram");
-  return <Link to={linkCreator(route, folderRoute, contextTitle)}>{name}</Link>;
-};
-
-const UserLink: React.FC<IAssetLinkProps> = ({ url, name }) => {
-  const { contextTitle } = useToLink();
-  const to = managerToPathCreator(url, contextTitle);
-  return <Link to={to}>{name}</Link>;
-};
+import {
+  AnyTag,
+  FollowLink,
+  FundLink,
+  ProgramLink,
+  TagToComponentType,
+  UserLink
+} from "utils/tag-components";
 
 export const componentsMap: TagToComponentType[] = [
   { tagType: "Undefined", Component: AnyTag },
