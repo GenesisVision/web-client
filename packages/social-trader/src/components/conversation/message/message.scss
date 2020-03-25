@@ -10,15 +10,11 @@
     width: auto;
     margin-bottom: $padding-xsmall-mobile;
     @include media-breakpoint-landscape-phone() {
-      width: 350px;
       margin-bottom: 0;
     }
   }
   &__text {
     @include font-size($font-size-paragraph);
     width: 100%;
-  }
-  &__images {
-    //margin-bottom: -$padding-xsmall;
   }
 }

@@ -55,7 +55,14 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
     }),
     mode: "onChange"
   });
-  const { setValue, errors, watch, reset, handleSubmit } = form;
+  const {
+    setValue,
+    errors,
+    watch,
+    reset,
+    handleSubmit,
+    formState: { isSubmitted }
+  } = form;
   const { text, images } = watch();
   const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
 
@@ -103,6 +110,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
           <>
             <Center className="post-input__input-container">
               <ConversationInput
+                disabled={isSubmitted}
                 outerCaret={fixedCaretPosition}
                 onChangeCaret={onChangeCaret}
                 setFocused={setFocused}

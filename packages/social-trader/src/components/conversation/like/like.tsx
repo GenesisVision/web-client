@@ -1,9 +1,9 @@
-import "./like.scss";
-
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
+
+import "./like.scss";
 
 export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   const clickHandle = useCallback(() => {
@@ -26,7 +26,7 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
           ♥
         </div>
       </RowItem>
-      <RowItem>{count}</RowItem>
+      {count > 0 && <RowItem>{count}</RowItem>}
     </Center>
   );
 };

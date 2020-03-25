@@ -5,6 +5,8 @@ import React from "react";
 import "./row.scss";
 
 export const Row: React.FC<Props> = ({
+  onlyOffset,
+  center = true,
   wide,
   middle = true,
   hide,
@@ -17,7 +19,9 @@ export const Row: React.FC<Props> = ({
   return (
     <Center
       {...otherProps}
+      center={center && !onlyOffset}
       className={classNames("row", className, {
+        "row--flex": !onlyOffset,
         "row--wide": wide,
         "row--hidden": hide,
         "row--small": small,
@@ -31,6 +35,7 @@ export const Row: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  onlyOffset?: boolean;
   wide?: boolean;
   hide?: boolean;
   center?: boolean;

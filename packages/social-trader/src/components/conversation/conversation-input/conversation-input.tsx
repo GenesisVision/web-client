@@ -7,6 +7,7 @@ export const ConversationInput: React.FC<Props> = props => {
 };
 
 interface Props {
+  disabled?: boolean;
   outerCaret?: number;
   onChangeCaret?: (position: number) => void;
   setFocused?: (value: boolean) => void;

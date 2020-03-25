@@ -89,7 +89,6 @@ $decreased-margin: $change-size-value;
     font-weight: 600;
     box-sizing: border-box;
     &:not(.gv-btn--no-padding) {
-      @include width($btn-width);
       @include height($btn-height);
     }
   }

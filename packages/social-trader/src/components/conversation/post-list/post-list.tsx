@@ -1,28 +1,27 @@
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Post } from "components/conversation/post/post";
-import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
+import DetailsBlock from "components/details/details-block";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import React from "react";
-import { useSelector } from "react-redux";
-import { idSelector } from "reducers/header-reducer";
 
-import "./post-list.scss";
-
-const _PostList: React.FC<Props> = ({ id, data, updateData }) => {
-  const selfId = useSelector(idSelector);
+const _PostList: React.FC<Props> = ({ data, updateData }) => {
   return (
-    <div className="post-list">
-      {selfId === id && <PostInputContainer onSuccess={updateData} />}
+    <div>
       {data.map(post => (
         <Post key={post.id} post={post} updateData={updateData} />
       ))}
+      {!data.length && (
+        <DetailsBlock horizontalPaddings wide className="post">
+          Feed is empty
+        </DetailsBlock>
+      )}
     </div>
   );
 };
 
 interface Props {
-  id: string;
   updateData: VoidFunction;
   data: ConversationPost[];
 }
 
-export const PostList = React.memo(_PostList);
+export const PostList = withBlurLoader(React.memo(_PostList));
