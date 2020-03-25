@@ -30,8 +30,8 @@ const _ManagerHistorySection: React.FC<Props> = ({
       {!!followCount && (
         <Row onlyOffset>
           <DetailsBlock wide table>
-            <ManagerFunds
-              title={t("manager-page.history.tabs.funds")}
+            <ManagerFollow
+              title={t("manager-page.history.tabs.follow")}
               ownerId={id}
             />
           </DetailsBlock>
@@ -40,8 +40,8 @@ const _ManagerHistorySection: React.FC<Props> = ({
       {!!fundsCount && (
         <Row onlyOffset>
           <DetailsBlock wide table>
-            <ManagerFollow
-              title={t("manager-page.history.tabs.follow")}
+            <ManagerFunds
+              title={t("manager-page.history.tabs.funds")}
               ownerId={id}
             />
           </DetailsBlock>
