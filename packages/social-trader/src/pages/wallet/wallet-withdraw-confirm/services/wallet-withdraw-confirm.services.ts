@@ -1,4 +1,4 @@
-import walletApi from "services/api-client/wallet-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const confirmWithdraw = ({
   requestId,
@@ -7,7 +7,7 @@ export const confirmWithdraw = ({
   requestId: string;
   code: string;
 }) =>
-  walletApi.confirmWithdrawalRequestByCode({
+  api.wallet(Token.create()).confirmWithdrawalRequestByCode({
     requestId,
     code
   });

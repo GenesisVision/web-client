@@ -1,10 +1,10 @@
 import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
-import followApi from "services/api-client/follow-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 import { FetchSignalAssetsFilterType } from "../actions/follows-table.actions";
 
 export const fetchFollows = (
   filters: FetchSignalAssetsFilterType
 ): Promise<FollowDetailsListItemItemsViewModel> => {
-  return followApi.getFollowAssets(filters);
+  return api.follows().getFollowAssets(filters);
 };

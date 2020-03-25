@@ -1,9 +1,8 @@
-import { ReferralFriendItemsViewModel } from "gv-api-web";
+import { Currency, ReferralFriendItemsViewModel } from "gv-api-web";
 import partnershipApi from "services/api-client/partnership-api";
-import profileApi from "services/api-client/profile-api";
-import { CurrencyEnum } from "utils/types";
+import { api } from "services/api-client/swagger-custom-client";
 
-export const getReferralDetails = (currency: CurrencyEnum) => {
+export const getReferralDetails = (currency: Currency) => {
   return partnershipApi.getDetails({ currency });
 };
 
@@ -17,4 +16,4 @@ export const getHistoryTable = (filters: any) => {
   return partnershipApi.getRewardsHistory(filters);
 };
 
-export const getProfile = () => profileApi.getProfileFull();
+export const getProfile = () => api.profile().getProfileFull();

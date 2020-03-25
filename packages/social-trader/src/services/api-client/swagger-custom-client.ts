@@ -12,6 +12,7 @@ import {
   PlatformApi,
   ProfileApi,
   ProgramsApi,
+  TradingaccountApi,
   WalletApi
 } from "gv-api-web";
 import fetch from "isomorphic-unfetch";
@@ -131,6 +132,9 @@ export class Api {
 
   assets = (token?: Token): AssetsApi =>
     withApiProxy(new AssetsApi(Client.create(token, this.auth(token))));
+
+  accounts = (token?: Token): TradingaccountApi =>
+    withApiProxy(new TradingaccountApi(Client.create(token, this.auth(token))));
 
   wallet = (token: Token = Token.create()): WalletApi =>
     withApiProxy(new WalletApi(Client.create(token, this.auth(token))));

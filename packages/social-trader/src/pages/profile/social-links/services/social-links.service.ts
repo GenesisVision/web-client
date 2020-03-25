@@ -1,15 +1,14 @@
 import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const fetchSocialLinks = (): Promise<SocialLinkViewModel[]> => {
-  const authorization = authService.getAuthArg();
-  return profileApi
-    .getSocialLinks(authorization)
+  return api
+    .profile(Token.create())
+    .getSocialLinks()
     .then(({ socialLinks }) => socialLinks);
 };
 
 export const updateSocialLink = (body: UpdateSocialLinkViewModel) =>
-  profileApi.updateSocialLinks(authService.getAuthArg(), {
+  api.profile(Token.create()).updateSocialLinks({
     body
   });

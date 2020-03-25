@@ -3,7 +3,6 @@ import { Currency, WalletSummary } from "gv-api-web";
 import { WalletsAvailableStateType } from "pages/wallet/reducers/wallet.reducers";
 import { fetchAvailableWallets } from "pages/wallet/services/wallet.services";
 import { api, Token } from "services/api-client/swagger-custom-client";
-import walletApi from "services/api-client/wallet-api";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import { WalletLastUpdateState } from "../reducers/wallet-last-update";
@@ -59,7 +58,7 @@ export const fetchWalletTransactionsAction = (
   filters?: FilteringType
 ): FetchTransactionsAction => ({
   type: WALLET_TRANSACTIONS,
-  payload: walletApi.getTransactionsInternal(filters)
+  payload: api.wallet(Token.create()).getTransactionsInternal(filters)
 });
 
 export const updateWalletTimestampAction = (): UpdateTimestampAction => ({

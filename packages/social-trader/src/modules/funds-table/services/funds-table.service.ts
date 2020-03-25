@@ -14,8 +14,7 @@ import {
 import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
-import fundsApi from "services/api-client/funds-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { getCookie } from "utils/cookie";
 import { CurrencyEnum, NextPageWithReduxContext } from "utils/types";
 
@@ -29,14 +28,17 @@ import {
 export const fetchFundsChallengeWinner = (): Promise<Array<
   FundDetailsListItem
 >> => {
-  return fundsApi.getLastChallengeWinner().then(item => [item]);
+  return api
+    .funds()
+    .getLastChallengeWinner()
+    .then(item => [item]);
 };
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
 ) => Promise<FundDetailsListItemItemsViewModel>;
 export const fetchFunds: FetchFundsType = filters => {
-  return fundsApi.getFunds(filters);
+  return api.funds().getFunds(filters);
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {

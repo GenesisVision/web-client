@@ -1,8 +1,7 @@
-import walletApi from "services/api-client/wallet-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const cancelWithdrawalRequestMethod = (id: string) =>
-  walletApi.cancelWithdrawalRequest(id, authService.getAuthArg());
+  api.wallet(Token.create()).cancelWithdrawalRequest(id);
 
 export const resendWithdrawalRequestEmailMethod = (id: string) =>
-  walletApi.resendWithdrawalRequestEmail(id, authService.getAuthArg());
+  api.wallet(Token.create()).resendWithdrawalRequestEmail(id);

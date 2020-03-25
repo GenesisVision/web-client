@@ -6,9 +6,7 @@ import { NextPageContext } from "next";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import accountsApi from "services/api-client/accounts-api";
-import followApi from "services/api-client/follow-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { ActionType, MiddlewareDispatch } from "utils/types";
 
 import {
@@ -25,22 +23,21 @@ import { tradesTableSelector } from "../reducers/account-history.reducer";
 export const fetchAccountSubscriptions = (
   id: string
 ): Promise<AccountSubscriptionsType> => {
-  return followApi
-    .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg(), {
+  return api
+    .follows(Token.create())
+    .getFollowSubscriptionsForOwnAccount(id, {
       onlyActive: true
     })
     .then(({ items }) => items);
 };
 
 export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  accountsApi.getTradingAccountDetails(id, authService.getAuthArg(ctx));
+  api.accounts(Token.create()).getTradingAccountDetails(id);
 
 export const dispatchAccountDescription = (id: string) => (
   ctx?: NextPageContext
 ) => async (dispatch: MiddlewareDispatch) => {
-  return await dispatch(
-    fetchAccountDescriptionAction(id, authService.getAuthArg(ctx))
-  );
+  return await dispatch(fetchAccountDescriptionAction(id, Token.create(ctx)));
 };
 
 export const dispatchAccountId = (id: string) => async (

@@ -5,8 +5,7 @@ import {
   WalletBaseData
 } from "gv-api-web";
 import { NextPageContext } from "next";
-import { Token } from "services/api-client/swagger-custom-client";
-import walletApi from "services/api-client/wallet-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { CurrencyEnum, RootThunk } from "utils/types";
 
 import * as actions from "../actions/wallet.actions";
@@ -35,15 +34,20 @@ export const fetchAvailableWallets = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TWalletsAvailableData> => {
-  return walletApi.getWalletAvailable(currency).then(({ wallets }) => wallets);
+  return api
+    .wallet(Token.create())
+    .getWalletAvailable(currency)
+    .then(({ wallets }) => wallets);
 };
 
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
   actions.fetchWalletTransactionsAction(requestFilters);
 
-export const offPayFeesWithGvt = () => walletApi.switchPayFeeInGvtOff();
+export const offPayFeesWithGvt = () =>
+  api.wallet(Token.create()).switchPayFeeInGvtOff();
 
-export const onPayFeesWithGvt = () => walletApi.switchPayFeeInGvtOn();
+export const onPayFeesWithGvt = () =>
+  api.wallet(Token.create()).switchPayFeeInGvtOn();
 
 export type FetchTransactionsInternalFilterType = {
   transactionType?:
@@ -68,7 +72,7 @@ export const fetchMultiTransactions = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsInternalFilterType
 ): Promise<TransactionViewModelItemsViewModel> => {
-  return walletApi.getTransactionsInternal({
+  return api.wallet(Token.create()).getTransactionsInternal({
     ...filters,
     currency
   });
@@ -86,7 +90,7 @@ export const fetchMultiTransactionsExternal = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsExternalFilterType
 ): Promise<TransactionViewModelItemsViewModel> => {
-  return walletApi.getTransactionsExternal({
+  return api.wallet(Token.create()).getTransactionsExternal({
     ...filters,
     currency
   });

@@ -1,8 +1,7 @@
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const setPublicOn = () =>
-  profileApi.switchPublicInvestorOn(authService.getAuthArg());
+  api.profile(Token.create()).switchPublicInvestorOn();
 
 export const setPublicOff = () =>
-  profileApi.switchPublicInvestorOff(authService.getAuthArg());
+  api.profile(Token.create()).switchPublicInvestorOff();
