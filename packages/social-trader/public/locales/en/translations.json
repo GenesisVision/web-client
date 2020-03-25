@@ -1271,6 +1271,10 @@
     }
   },
   "manager-page": {
+    "follow-user": "Follow",
+    "followers": "Followers",
+    "following": "Following",
+    "social-links": "Social Links",
     "title": "Manager",
     "about": "About",
     "assets": "Assets",
