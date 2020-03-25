@@ -1,9 +1,6 @@
 import { ASSET } from "constants/constants";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
-import followApi from "services/api-client/follow-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 import {
   addFavoriteFollowAction,
@@ -26,36 +23,42 @@ import {
 export const toggleFavorite = (
   id: string,
   isFavorite: boolean,
-  addMethod: any,
-  removeMethod: any
+  addMethod: (id: string) => any,
+  removeMethod: (id: string) => any
 ) => {
   const method = isFavorite ? removeMethod : addMethod;
-  return method(id, authService.getAuthArg());
+  return method(id);
 };
 
-export const toggleFavoriteFund = (id: string, isFavorite: boolean) =>
-  toggleFavorite(
+export const toggleFavoriteFund = (id: string, isFavorite: boolean) => {
+  const fundsApi = api.funds(Token.create());
+  return toggleFavorite(
     id,
     isFavorite,
     fundsApi.addToFavorites,
     fundsApi.removeFromFavorites
   );
+};
 
-export const toggleFavoriteProgram = (id: string, isFavorite: boolean) =>
-  toggleFavorite(
+export const toggleFavoriteProgram = (id: string, isFavorite: boolean) => {
+  const programsApi = api.programs(Token.create());
+  return toggleFavorite(
     id,
     isFavorite,
     programsApi.addToFavorites,
     programsApi.removeFromFavorites
   );
+};
 
-export const toggleFavoriteFollow = (id: string, isFavorite: boolean) =>
-  toggleFavorite(
+export const toggleFavoriteFollow = (id: string, isFavorite: boolean) => {
+  const followApi = api.follows(Token.create());
+  return toggleFavorite(
     id,
     isFavorite,
     followApi.addToFavorites,
     followApi.removeFromFavorites
   );
+};
 
 export const toggleFavoriteAsset = ({
   id,

@@ -20,14 +20,17 @@ import {
 import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
 import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
+// import authService from "services/auth-service";
 import { getDefaultDateRange } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
+
+const token = Token.create();
 
 export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingFunds({
+  api.dashboard(token).getInvestingFunds({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -35,7 +38,7 @@ export const getInvestingFunds = (
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingPrograms({
+  api.dashboard(token).getInvestingPrograms({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -43,13 +46,13 @@ export const getInvestingPrograms = (
 export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getMostProfitableAssets({
+  api.dashboard(token).getMostProfitableAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const fetchRequests = (take: number = 100) =>
-  investmentsApi.getRequests(0, take, authService.getAuthArg());
+  api.investments(token).getRequests(0, take);
 
 export const getRequestsCount = () =>
   fetchRequests(0).then(({ total }) => total);
@@ -62,7 +65,7 @@ export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
 ): Promise<DashboardTradingAssetItemsViewModel> =>
-  dashboardApi.getPrivateTradingAssets({
+  api.dashboard(token).getPrivateTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -70,25 +73,30 @@ export const getPrivateAssets = (
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
 ): Promise<DashboardTradingAssetItemsViewModel> =>
-  dashboardApi.getPublicTradingAssets({
+  api.dashboard(token).getPublicTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const getPortfolio = (): Promise<TDashboardPortfolio> =>
-  dashboardApi
-    .getPortfolio(authService.getAuthArg())
+  api
+    .dashboard(token)
+    .getPortfolio()
     .then(({ distribution }) => distribution);
 
 export const getAssetsPercents = (): Promise<TAssets> =>
-  dashboardApi.getHoldings().then(({ assets }) => assets);
+  api
+    .dashboard(token)
+    .getHoldings()
+    .then(({ assets }) => assets);
 
 export const getRecommendations = ({
   currency
 }: {
   currency: CurrencyEnum;
 }): Promise<FollowDetailsListItem[]> =>
-  dashboardApi
+  api
+    .dashboard(token)
     .getRecommendations({
       onlyFollows: true,
       currency,
@@ -101,14 +109,15 @@ export const getTotal = ({
   currency
 }: {
   currency: CurrencyEnum;
-}): Promise<TDashboardTotal> => dashboardApi.getDashboardSummary({ currency });
+}): Promise<TDashboardTotal> =>
+  api.dashboard(token).getDashboardSummary({ currency });
 
 export const fetchTradingTotalStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardTradingStatistic> =>
-  dashboardApi.getTradingDetails({
+  api.dashboard(token).getTradingDetails({
     currency,
     eventsTake: 4
   });
@@ -118,7 +127,7 @@ export const getTotalInvestingStatistic = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardInvestingStatistic> =>
-  dashboardApi.getInvestingDetails({
+  api.dashboard(token).getInvestingDetails({
     currency,
     eventsTake: 4
   });

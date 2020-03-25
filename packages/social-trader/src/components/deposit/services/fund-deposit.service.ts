@@ -1,5 +1,4 @@
-import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 import {
   TAssetDeposit,
@@ -11,7 +10,7 @@ export const fundInvest: TAssetDeposit = ({
   amount,
   walletId
 }: TAssetInvestCreatorArgs) =>
-  investmentsApi.investIntoFund(id, authService.getAuthArg(), {
+  api.investments(Token.create()).investIntoFund(id, {
     walletId,
     amount
   });

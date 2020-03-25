@@ -4,8 +4,11 @@ import { composeRequestFiltersByTableState } from "components/table/services/tab
 import { ASSET } from "constants/constants";
 import {
   Currency,
+  InvestmentEventLocation,
   InvestmentEventViewModels,
   LevelInfo,
+  NotificationSettingConditionType,
+  NotificationType,
   ProgramFollowDetailsFull
 } from "gv-api-web";
 import { NextPageContext } from "next";
@@ -16,6 +19,7 @@ import brokersApi from "services/api-client/brokers-api";
 import eventsApi from "services/api-client/events-api";
 import notificationsApi from "services/api-client/notifications-api";
 import platformApi from "services/api-client/platform-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import {
   ApiActionResponse,
@@ -59,14 +63,14 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
 
 export const dispatchProgramDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg(),
+  token = Token.create(),
   asset: ASSET = ASSET.PROGRAM
 ): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => dispatch => {
   const action =
     asset === ASSET.FOLLOW
       ? fetchFollowProgramDescriptionAction
       : fetchProgramDescriptionAction;
-  return dispatch(action(id, auth));
+  return dispatch(action(id, token));
 };
 
 export const dispatchProgramDescription = (
@@ -82,7 +86,7 @@ export const dispatchProgramDescription = (
   return dispatch(
     dispatchProgramDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx),
+      Token.create(ctx),
       asset
     )
   );
@@ -128,8 +132,7 @@ export const getFinancialStatistics = (programId: string) => (
 export const getSubscriptions = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchSubscriptionsAction(programId, authorization, filters);
+  return fetchSubscriptionsAction(programId, Token.create(), filters);
 };
 
 export const fetchInvestmentsLevels = (
@@ -197,11 +200,10 @@ export enum EVENT_LOCATION {
 }
 
 export const fetchPortfolioEventsWithoutTable = (
-  eventLocation: EVENT_LOCATION,
+  eventLocation: InvestmentEventLocation,
   filters?: any
 ): Promise<InvestmentEventViewModels> => {
-  const authorization = authService.getAuthArg();
-  return eventsApi.getEvents(authorization, { ...filters, eventLocation });
+  return api.events(Token.create()).getEvents({ ...filters, eventLocation });
 };
 
 export const fetchPortfolioEventsCount = (
@@ -244,9 +246,9 @@ export const addInvestNotify = ({
   minDeposit: number;
   assetId: string;
 }) =>
-  notificationsApi.addNotificationsSettings(authService.getAuthArg(), {
+  api.notifications(Token.create()).addNotificationsSettings({
     assetId,
-    conditionType: "AvailableToInvest",
-    type: "ProgramCondition",
+    conditionType: "AvailableToInvest" as NotificationSettingConditionType,
+    type: "ProgramCondition" as NotificationType,
     conditionAmount: minDeposit
   });

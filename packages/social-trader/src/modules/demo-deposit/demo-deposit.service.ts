@@ -1,18 +1,13 @@
 import { TFunction } from "i18next";
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { number, object, string } from "yup";
 
 export type DemoDepositResponse = Promise<void>;
 
 export const depositToDemo = ({ id, amount }: any): DemoDepositResponse => {
-  return (assetsApi.makeDemoTradingAccountDeposit(
-    id,
-    authService.getAuthArg(),
-    {
-      body: { amount }
-    }
-  ) as unknown) as DemoDepositResponse;
+  return (api.assets(Token.create()).makeDemoTradingAccountDeposit(id, {
+    body: { amount, id }
+  }) as unknown) as DemoDepositResponse;
 };
 
 export enum DEMO_DEPOSIT_FORM_FIELDS {

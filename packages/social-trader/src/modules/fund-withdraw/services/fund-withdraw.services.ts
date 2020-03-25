@@ -1,7 +1,5 @@
 import { FUND_CURRENCY } from "constants/constants";
-import investmentsApi from "services/api-client/investments-api";
-import walletApi from "services/api-client/wallet-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 import { FundWithdraw, FundWithdrawInfoResponse } from "../fund-withdraw.types";
 
@@ -10,12 +8,12 @@ export const getFundWithdrawInfo = ({
 }: {
   id: string;
 }): Promise<FundWithdrawInfoResponse> => {
-  const auth = authService.getAuthArg();
+  const token = Token.create();
   return Promise.all([
-    investmentsApi.getFundWithdrawInfo(id, auth, {
+    api.investments(token).getFundWithdrawInfo(id, {
       currency: FUND_CURRENCY
     }),
-    walletApi.getWalletAvailable(FUND_CURRENCY, auth)
+    api.wallet(token).getWalletAvailable(FUND_CURRENCY)
   ]).then(([withdrawInfo, walletMulti]) => ({
     withdrawInfo,
     wallets: walletMulti.wallets
@@ -28,4 +26,4 @@ export const withdrawFund = ({
 }: {
   value: FundWithdraw;
   id: string;
-}): any => investmentsApi.withdrawFromFund(id, authService.getAuthArg(), value);
+}): any => api.investments(Token.create()).withdrawFromFund(id, value);

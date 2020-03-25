@@ -14,7 +14,7 @@ import {
 } from "gv-api-web";
 import { Browser, Page } from "puppeteer";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
-import programsApi from "services/api-client/programs-api";
+import { api } from "services/api-client/swagger-custom-client";
 import { getDefaultDateRange, subtractDate } from "utils/dates";
 import { separateThousand } from "utils/formatter";
 import {
@@ -49,6 +49,7 @@ describe("Program details - chart", () => {
     const { openPage, waitForLoadBlurLoader } = useTestHelpers(page);
     await openPage(url);
     await waitForLoadBlurLoader(".details-statistics");
+    const programsApi = api.programs();
     details = await programsApi.getProgramDetails(programName);
     profitPercentCharts = await programsApi.getProgramProfitPercentCharts(
       details.id,

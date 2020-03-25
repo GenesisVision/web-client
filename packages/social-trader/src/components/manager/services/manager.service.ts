@@ -4,21 +4,18 @@ import {
   FundDetailsListItemItemsViewModel,
   ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import followApi from "services/api-client/follow-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const fetchManagerFollow = (
   filter: FilteringType
 ): Promise<FollowDetailsListItemItemsViewModel> => {
-  return followApi.getFollowAssets(filter);
+  return api.follows().getFollowAssets(filter);
 };
 
 export const fetchManagerPrograms = (
   filter: FilteringType
 ): Promise<ProgramDetailsListItemItemsViewModel> => {
-  return programsApi.getPrograms({
+  return api.programs().getPrograms({
     ...filter,
     includeWithInvestments: true
   });
@@ -27,7 +24,7 @@ export const fetchManagerPrograms = (
 export const fetchManagerFunds = (
   filter: FilteringType
 ): Promise<FundDetailsListItemItemsViewModel> => {
-  return fundsApi.getFunds({
+  return api.funds().getFunds({
     ...filter,
     includeWithInvestments: true
   });
@@ -39,13 +36,13 @@ export const fetchManagerAssetsCount = (
   const options = {
     ownerId,
     take: 0,
-    includeWithInvestments: true,
-    authorization: authService.getAuthArg()
+    includeWithInvestments: true
   };
+  const token = Token.create();
   return Promise.all([
-    followApi.getFollowAssets(options),
-    programsApi.getPrograms(options),
-    fundsApi.getFunds(options)
+    api.follows(token).getFollowAssets(options),
+    api.programs(token).getPrograms(options),
+    api.funds(token).getFunds(options)
   ]).then(([followData, programsData, fundsData]) => ({
     followCount: followData.total,
     programsCount: programsData.total,

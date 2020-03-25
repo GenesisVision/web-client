@@ -1,8 +1,14 @@
 import {
   ApiClient,
+  AssetsApi,
   AuthApi,
   DashboardApi,
+  EventsApi,
+  FileApi,
+  FollowApi,
   FundsApi,
+  InvestmentsApi,
+  NotificationsApi,
   PlatformApi,
   ProfileApi,
   ProgramsApi,
@@ -17,6 +23,10 @@ import withApiProxy from "./api-proxy";
 
 const apiUrl = getApiUrl();
 
+const isBrowser = () => {
+  return process.browser;
+};
+
 class AuthClient extends ApiClient {
   token?: Token;
 
@@ -26,7 +36,7 @@ class AuthClient extends ApiClient {
   }
   fetch(input: RequestInfo, init?: RequestInit) {
     const auth = this.token?.getHeader();
-    console.info("Auth: ", auth);
+
     return fetch(input, {
       ...init,
       headers: {
@@ -56,7 +66,7 @@ class Client extends ApiClient {
   }
 
   async fetch(input: RequestInfo, init?: RequestInit) {
-    if (this.token.isExpiring()) {
+    if (this.token.isExpiring() && isBrowser()) {
       const token = await this.authApi.updateAuthToken();
       this.token.restore(token);
     }
@@ -97,9 +107,30 @@ export class Api {
     );
   };
 
+  investments = (token: Token): InvestmentsApi => {
+    return withApiProxy(
+      new InvestmentsApi(Client.create(token, this.auth(token)))
+    );
+  };
+
   funds = (token?: Token): FundsApi => {
     return withApiProxy(new FundsApi(Client.create(token, this.auth(token))));
   };
+
+  notifications = (token?: Token): NotificationsApi =>
+    withApiProxy(new NotificationsApi(Client.create(token, this.auth(token))));
+
+  events = (token?: Token): EventsApi =>
+    withApiProxy(new EventsApi(Client.create(token, this.auth(token))));
+
+  follows = (token?: Token): FollowApi =>
+    withApiProxy(new FollowApi(Client.create(token, this.auth(token))));
+
+  files = (token?: Token): FileApi =>
+    withApiProxy(new FileApi(Client.create(token, this.auth(token))));
+
+  assets = (token?: Token): AssetsApi =>
+    withApiProxy(new AssetsApi(Client.create(token, this.auth(token))));
 
   wallet = (token: Token = Token.create()): WalletApi =>
     withApiProxy(new WalletApi(Client.create(token, this.auth(token))));
@@ -118,20 +149,22 @@ export class Token {
   isExist = (): boolean => {
     return this.token.length >= 0;
   };
-  get value() {
-    return this.token;
-  }
+
   getHeader = () => {
     return {
-      Authorization: this.isExist() ? `Bearer ${this.value}` : ""
+      Authorization: this.isExist() ? `Bearer ${this.token}` : ""
     };
   };
 
+  get value() {
+    return this.token;
+  }
+
   restore = (token: string) => {
-    console.info(token);
+    authService.storeToken(token);
   };
 
   isExpiring = (): boolean => {
-    return true;
+    return false;
   };
 }
