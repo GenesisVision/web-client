@@ -2,7 +2,6 @@
 
 h1 {
   @include font-size($font-size-h1);
-  @include adaptive-padding(bottom, $padding-medium);
   font-weight: 600;
   color: $text-light-color;
   margin-top: 0;
@@ -11,7 +10,6 @@ h1 {
 
 h2 {
   @include font-size($font-size-h2);
-  @include adaptive-padding(bottom, $padding-xxsmall);
   font-weight: 500;
   color: $text-light-color;
   margin-top: 0;
@@ -20,7 +18,6 @@ h2 {
 
 h3 {
   @include font-size($font-size-h3);
-  @include adaptive-padding(bottom, $padding-xsmall);
   font-weight: 600;
   color: $text-light-color;
   margin-top: 0;

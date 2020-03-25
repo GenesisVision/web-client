@@ -132,6 +132,19 @@ export const getConversationPostLoaderData = (
   };
 };
 
+export const getEmptyPostLoaderData = (): ConversationPost => ({
+  isPinned: false,
+  tags: [],
+  comments: [],
+  id: uuid.v4(),
+  images: [],
+  author: getConversationUserLoaderData(),
+  date: new Date(),
+  likesCount: 0,
+  text: "",
+  actions: getConversationPersonalDetailsLoaderData()
+});
+
 export const getConversationPostListLoaderData = (): ConversationPost[] =>
   tableLoaderCreator(
     () =>

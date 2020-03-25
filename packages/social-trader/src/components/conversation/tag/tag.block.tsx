@@ -1,7 +1,11 @@
+import { DefaultBlock } from "components/default.block/default.block";
+import { SIZES } from "constants/constants";
 import React from "react";
 
-import "./tag.block.scss";
-
 export const TagBlock: React.FC = ({ children }) => {
-  return <div className="tag-block">{children}</div>;
+  return (
+    <DefaultBlock bordered size={SIZES.SMALL}>
+      {children}
+    </DefaultBlock>
+  );
 };

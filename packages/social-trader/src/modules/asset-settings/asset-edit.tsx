@@ -3,6 +3,7 @@ import TitleField from "components/assets/fields/title-field";
 import { IImageValue } from "components/form/input-image/input-image";
 import inputImageShape from "components/form/input-image/input-image.validation";
 import LogoField from "components/logo-field/logo-field";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
@@ -56,27 +57,32 @@ const _AssetEdit: React.FC<Props> = ({
         form={form}
         onSubmit={onSubmit}
       >
-        <div className="asset-settings__block-wrapper">
+        <Row onlyOffset className="asset-settings__block-wrapper">
           <h3>{t("asset-settings.avatar.title")}</h3>
-          <LogoField name={FIELDS.logo} />
-        </div>
-        <h3>{t("asset-settings.name.title")}</h3>
-        <div className="asset-settings__block-wrapper">
-          <TitleField name={FIELDS.title} />
-        </div>
-        <h3>{t("asset-settings.strategy.title")}</h3>
-        <div className="asset-settings__block-wrapper asset-settings__block-wrapper--wide">
-          <DescriptionField
-            name={FIELDS.description}
-            description={description}
-          />
-        </div>
-        <SubmitButton
-          className="invest-form__submit-button"
-          isSuccessful={!editError}
-        >
-          {t("asset-settings.buttons.save")}
-        </SubmitButton>
+          <Row onlyOffset>
+            <LogoField name={FIELDS.logo} />
+          </Row>
+        </Row>
+        <Row large onlyOffset className="asset-settings__block-wrapper">
+          <h3>{t("asset-settings.name.title")}</h3>
+          <Row onlyOffset>
+            <TitleField name={FIELDS.title} />
+          </Row>
+        </Row>
+        <Row large onlyOffset className="asset-settings__block-wrapper">
+          <h3>{t("asset-settings.strategy.title")}</h3>
+          <Row onlyOffset>
+            <DescriptionField
+              name={FIELDS.description}
+              description={description}
+            />
+          </Row>
+        </Row>
+        <Row large onlyOffset>
+          <SubmitButton isSuccessful={!editError}>
+            {t("asset-settings.buttons.save")}
+          </SubmitButton>
+        </Row>
       </HookForm>
     </SettingsBlock>
   );
