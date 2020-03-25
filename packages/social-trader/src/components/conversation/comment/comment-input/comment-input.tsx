@@ -16,7 +16,7 @@ import { HookFormInputImages } from "components/form/input-image/input-images";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { NewPostTag } from "gv-api-web";
+import { PostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -36,7 +36,7 @@ enum FORM_FIELDS {
 
 export interface CommentInputFormValues {
   [FORM_FIELDS.text]: string;
-  [FORM_FIELDS.tags]: NewPostTag[];
+  [FORM_FIELDS.tags]: PostTag[];
   [FORM_FIELDS.images]: IImageValue[];
 }
 

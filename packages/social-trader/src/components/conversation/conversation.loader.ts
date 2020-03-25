@@ -4,6 +4,7 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { managerLoaderData } from "components/details/details.loader-data";
 import { PostTag } from "gv-api-web";
 import {
   getRandomBoolean,
@@ -16,6 +17,23 @@ import uuid from "uuid";
 
 const getTagLoaderData = (): PostTag => ({
   title: "",
+  post: {
+    id: getRandomWord(),
+    text: getRandomWord(),
+    date: new Date(),
+    likesCount: getRandomInteger(1, 5),
+    isPinned: false,
+    images: [],
+    tags: [],
+    author: managerLoaderData,
+    actions: {
+      isLiked: true,
+      canEdit: false,
+      canDelete: false,
+      canPin: false
+    },
+    comments: []
+  },
   number: 0,
   assetDetails: {
     url: getRandomWord(),

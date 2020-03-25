@@ -8,10 +8,9 @@ import { FilteringType } from "components/table/components/filtering/filter.type
 import {
   FundBalanceChart,
   FundDetailsFull,
-  ItemsViewModelReallocationModel
+  ReallocationModelItemsViewModel
 } from "gv-api-web";
 import { FundAbsoluteProfitChartDataType } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";
-import fundsApi from "services/api-client/funds-api";
 import { api, Token } from "services/api-client/swagger-custom-client";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
@@ -94,7 +93,7 @@ export const statisticPeriodAction = (
 export const fundReallocateHistoryAction = (
   id: string,
   filters?: FilteringType
-): ApiAction<ItemsViewModelReallocationModel> => ({
+): ApiAction<ReallocationModelItemsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
   payload: api.funds().getReallocatingHistory(id, filters)
 });

@@ -12,6 +12,8 @@ import {
   PlatformApi,
   ProfileApi,
   ProgramsApi,
+  SignalApi,
+  SocialApi,
   TradingaccountApi,
   WalletApi
 } from "gv-api-web";
@@ -138,6 +140,12 @@ export class Api {
 
   wallet = (token: Token = Token.create()): WalletApi =>
     withApiProxy(new WalletApi(Client.create(token, this.auth(token))));
+
+  social = (token?: Token): SocialApi =>
+    withApiProxy(new SocialApi(Client.create(token, this.auth(token))));
+
+  signal = (token: Token = Token.create()): SignalApi =>
+    withApiProxy(new SignalApi(Client.create(token, this.auth(token))));
 }
 
 export const api = new Api();
