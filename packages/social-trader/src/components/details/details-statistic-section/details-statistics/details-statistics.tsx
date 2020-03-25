@@ -1,13 +1,13 @@
-import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
-
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsBlock from "components/details/details-block";
+import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 import {
   StatisticDataType,
   TProfitChartSelector,
   TStatisticCurrencySelector,
   TUseChartPeriod
 } from "components/details/details-statistic-section/details.chart.types";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,11 +34,15 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   }, [profitChart, statisticCurrency]);
   return (
     <DetailsBlock horizontalPaddings className="details-statistics">
-      <h3>{t("details-page.statistics.heading")}</h3>
-      {renderDetailsStatisticsElements({
-        period,
-        statisticData
-      })}
+      <Row>
+        <h3>{t("details-page.statistics.heading")}</h3>
+      </Row>
+      <Row>
+        {renderDetailsStatisticsElements({
+          period,
+          statisticData
+        })}
+      </Row>
     </DetailsBlock>
   );
 };
