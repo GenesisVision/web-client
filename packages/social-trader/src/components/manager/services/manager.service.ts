@@ -7,7 +7,25 @@ import {
 import followApi from "services/api-client/follow-api";
 import fundsApi from "services/api-client/funds-api";
 import programsApi from "services/api-client/programs-api";
+import socialApi from "services/api-client/social-api";
 import authService from "services/auth-service";
+
+export const followUser = (id: string) =>
+  socialApi.followUser(id, authService.getAuthArg());
+
+export const unFollowUser = (id: string) =>
+  socialApi.unfollowUser(id, authService.getAuthArg());
+
+export const toggleFollowUser = ({
+  id,
+  value
+}: {
+  id: string;
+  value: boolean;
+}) => {
+  const method = value ? unFollowUser : followUser;
+  return method(id);
+};
 
 export const fetchManagerFollow = (
   filter: FilteringType
@@ -48,10 +66,12 @@ export const fetchManagerAssetsCount = (
     authorization: authService.getAuthArg()
   };
   return Promise.all([
+    socialApi.getFeed({ ...options, userId: ownerId }),
     followApi.getFollowAssets(options),
     programsApi.getPrograms(options),
     fundsApi.getFunds(options)
-  ]).then(([followData, programsData, fundsData]) => ({
+  ]).then(([feedData, followData, programsData, fundsData]) => ({
+    postsCount: feedData.total,
     followCount: followData.total,
     programsCount: programsData.total,
     fundsCount: fundsData.total
@@ -59,7 +79,8 @@ export const fetchManagerAssetsCount = (
 };
 
 export interface IAssetsCountModel {
-  followCount: number;
-  programsCount: number;
-  fundsCount: number;
+  postsCount?: number;
+  followCount?: number;
+  programsCount?: number;
+  fundsCount?: number;
 }
