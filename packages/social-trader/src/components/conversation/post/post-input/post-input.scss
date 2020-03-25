@@ -50,6 +50,7 @@ $post-input-image-preview-size: 40px;
     box-sizing: border-box;
   }
   &__container {
+    width: 100%;
     outline: none;
     position: relative;
     @include adaptive-border-radius($border-radius-middle);
