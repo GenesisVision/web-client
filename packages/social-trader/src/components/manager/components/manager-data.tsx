@@ -9,7 +9,7 @@ import {
 import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 enum TABS {
@@ -23,12 +23,16 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
   const { tab, setTab } = useTab<TABS>(TABS.FEED);
 
   const {
+    sendRequest,
     data = { postsCount: 0, followCount: 0, programsCount: 0, fundsCount: 0 }
   } = useApiRequest<IAssetsCountModel>({
-    request: fetchManagerAssetsCount,
-    fetchOnMount: true,
-    fetchOnMountData: id
+    request: fetchManagerAssetsCount
   });
+
+  useEffect(() => {
+    sendRequest(id);
+  }, [id]);
+
   const {
     postsCount = 0,
     followCount = 0,

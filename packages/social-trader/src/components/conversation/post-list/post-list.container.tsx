@@ -12,8 +12,7 @@ import "./post-list.scss";
 const _PostListContainer: React.FC<Props> = ({ id }) => {
   const selfId = useSelector(idSelector);
   const { data, sendRequest } = useApiRequest({
-    request: () => getPosts({ id }),
-    fetchOnMount: true
+    request: () => getPosts({ id })
   });
   useEffect(() => {
     sendRequest();
