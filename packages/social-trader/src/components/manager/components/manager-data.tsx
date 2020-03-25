@@ -35,6 +35,7 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
     programsCount = 0,
     fundsCount = 0
   } = data;
+  const tradingCount = followCount + programsCount + fundsCount;
 
   return (
     <div>
@@ -42,9 +43,10 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.FEED} label={t("Feed")} count={postsCount} />
           <GVTab
+            visible={tradingCount > 0}
             value={TABS.TRADING}
             label={t("Trading")}
-            count={followCount + programsCount + fundsCount}
+            count={tradingCount}
           />
           {/*<GVTab value={TABS.INVESTING} label={t("Investing")} />*/}
         </GVTabs>
