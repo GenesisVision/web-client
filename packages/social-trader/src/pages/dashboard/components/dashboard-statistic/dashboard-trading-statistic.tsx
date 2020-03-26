@@ -18,7 +18,6 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const currency = useAccountCurrency();
-  console.log(currency);
   return (
     <DashboardStatisticContainer
       landscapeTablet={landscapeTablet}
