@@ -11,13 +11,12 @@ import {
   FundDetailsListItem,
   ItemsViewModelFundDetailsListItem
 } from "gv-api-web";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
 import fundsApi from "services/api-client/funds-api";
 import authService from "services/auth-service";
-import { getCookie } from "utils/cookie";
-import { CurrencyEnum, NextPageWithReduxContext } from "utils/types";
+import { getAccountCurrency } from "utils/account-currency";
+import { NextPageWithReduxContext } from "utils/types";
 
 import {
   DEFAULT_FUND_TABLE_FILTERS,
@@ -46,7 +45,7 @@ export const fetchFunds: FetchFundsType = filters => {
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
   const showFavorites = ctx.pathname.includes(FAVORITES_TAB_NAME);
-  const { asPath = "", pathname, reduxStore } = ctx;
+  const { asPath = "", pathname } = ctx;
   const {
     page,
     sorting = SORTING_FILTER_VALUE,
@@ -54,9 +53,7 @@ export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
     showIn,
     ...other
   } = qs.parse(asPath.slice(pathname.length + 1));
-  const accountCurrency =
-    (getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum) ||
-    reduxStore.getState().accountSettings.currency;
+  const accountCurrency = getAccountCurrency(ctx);
 
   const skipAndTake = calculateSkipAndTake({
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,

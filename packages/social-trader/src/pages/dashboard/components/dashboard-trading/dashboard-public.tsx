@@ -1,5 +1,6 @@
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import {
   fetchDashboardPublicAction,
@@ -10,14 +11,13 @@ import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/
 import { dashboardTradingPublicSelector } from "pages/dashboard/reducers/dashboard-trading-public.reducer";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 
 const _DashboardPublic: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
-  const showIn = useSelector(currencySelector);
+  const showIn = useAccountCurrency();
   const getItems = useCallback(filters => {
     return fetchDashboardPublicAction({
       ...filters,
