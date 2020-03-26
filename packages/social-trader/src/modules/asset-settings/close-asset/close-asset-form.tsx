@@ -4,7 +4,7 @@ import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import GVTextField from "components/gv-text-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { CloseableAssetType } from "modules/asset-settings/close-asset/close-asset";
 import * as React from "react";
@@ -61,7 +61,7 @@ const _CloseAssetForm: React.FC<Props> = ({
               name={FIELDS.twoFactorCode}
               label={t("wallet-withdraw.two-factor-code-label")}
               autoComplete="off"
-              component={GVTextField}
+              component={SimpleTextField}
             />
           </DialogField>
         )}
