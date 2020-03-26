@@ -24,7 +24,7 @@ export const fetchAccountSubscriptions = (
   id: string
 ): Promise<AccountSubscriptionsType> => {
   return api
-    .follows(Token.create())
+    .follows()
     .getFollowSubscriptionsForOwnAccount(id, {
       onlyActive: true
     })
@@ -32,7 +32,7 @@ export const fetchAccountSubscriptions = (
 };
 
 export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  api.accounts(Token.create()).getTradingAccountDetails(id);
+  api.accounts().getTradingAccountDetails(id);
 
 export const dispatchAccountDescription = (id: string) => (
   ctx?: NextPageContext
@@ -47,15 +47,13 @@ export const dispatchAccountId = (id: string) => async (
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchOpenPositionsAction(id, filters, authorization);
+  return fetchOpenPositionsAction(id, filters);
 };
 
 export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesSignalViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchTradesAction(id, filters, authorization);
+  return fetchTradesAction(id, filters);
 };
 
 export const getAccountHistoryCounts = (id: string) => (

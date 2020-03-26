@@ -10,6 +10,7 @@ import {
 } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
 import signalApi from "services/api-client/signal-api";
+import { api } from "services/api-client/swagger-custom-client";
 import { CurrencyEnum } from "utils/types";
 
 export const fetchExternalAccounts = ({
@@ -17,14 +18,20 @@ export const fetchExternalAccounts = ({
 }: {
   id: string;
 }): Promise<TradingAccountDetails[]> =>
-  signalApi.getSubscriberAccountsForAsset(id).then(({ items }) => items);
+  api
+    .signal()
+    .getSubscriberAccountsForAsset(id)
+    .then(({ items }) => items);
 
 export const fetchAccounts = ({
   id
 }: {
   id: string;
 }): Promise<TradingAccountDetails[]> =>
-  signalApi.getSubscriberAccountsForAsset(id).then(({ items }) => items);
+  api
+    .signal()
+    .getSubscriberAccountsForAsset(id)
+    .then(({ items }) => items);
 
 export const attachToExternalSignal: TSignalRequest = async ({
   id,
@@ -36,7 +43,7 @@ export const attachToExternalSignal: TSignalRequest = async ({
         .createExternalTradingAccount({ body: requestParams })
         .then(({ id }) => id);
 
-  return signalApi.attachSlaveToMasterExternalPrivateAccount(id, {
+  return api.signal().attachSlaveToMasterExternalPrivateAccount(id, {
     body: { ...requestParams, tradingAccountId }
   });
 };
@@ -54,13 +61,13 @@ export const attachToSignal: TSignalRequest = async ({
         })
         .then(({ id }) => id);
 
-  return signalApi.attachSlaveToMasterInternal(id, {
+  return api.signal().attachSlaveToMasterInternal(id, {
     body: { ...requestParams, tradingAccountId }
   });
 };
 
 export const updateAttachToSignal: TSignalRequest = ({ id, requestParams }) =>
-  signalApi.updateSubscriptionSettings(id, {
+  api.signal().updateSubscriptionSettings(id, {
     body: requestParams
   });
 
@@ -68,7 +75,7 @@ export const updateExternalAttachToSignal: TSignalRequest = ({
   id,
   requestParams
 }) =>
-  signalApi.updateExternalSubscriptionSettings(id, {
+  api.signal().updateExternalSubscriptionSettings(id, {
     body: requestParams
   });
 

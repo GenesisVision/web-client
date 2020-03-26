@@ -7,7 +7,7 @@ export const newWithdrawRequest = (data: CreateWithdrawalRequestModel) => (
   dispatch: MiddlewareDispatch
 ): Promise<any> => {
   return api
-    .wallet(Token.create())
+    .wallet()
     .createWithdrawalRequest({ body: data })
     .then(response => {
       dispatch(fetchWalletTransactions());

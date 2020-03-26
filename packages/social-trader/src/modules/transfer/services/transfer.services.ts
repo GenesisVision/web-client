@@ -9,12 +9,12 @@ import { CurrencyEnum } from "utils/types";
 
 export const fetchTradingAccounts = (currency: CurrencyEnum) =>
   api
-    .wallet(Token.create())
+    .wallet()
     .getAccountsAvailable(currency)
     .then(({ wallets }) => wallets);
 
 export const transferRequest = (body: InternalTransferRequest): Promise<any> =>
-  api.wallet(Token.create()).transfer({
+  api.wallet().transfer({
     body
   });
 

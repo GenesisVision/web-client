@@ -9,7 +9,7 @@ import { NextPageContext } from "next";
 import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
 import { HOME_ROUTE } from "routes/app.routes";
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import { removeCookie } from "utils/cookie";
 
@@ -23,7 +23,7 @@ export const TWO_FACTOR_KEY = "TWO_FACTOR_KEY";
 export const client = "Web";
 
 export const loginMethod = (body: LoginViewModel) =>
-  authApi.authorize({
+  api.auth().authorize({
     body
   });
 

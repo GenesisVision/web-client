@@ -1,6 +1,7 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { NextPageContext } from "next";
 import followApi from "services/api-client/follow-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
@@ -12,16 +13,14 @@ import {
 } from "../actions/follow-details.actions";
 
 export const fetchFollowDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  followApi.getFollowAssetDetails(id, {
+  api.follows(Token.create(ctx)).getFollowAssetDetails(id, {
     authorization: authService.getAuthArg(ctx)
   });
 
 export const dispatchFollowDescription = (id: string) => (
   ctx?: NextPageContext
 ) => async (dispatch: MiddlewareDispatch) => {
-  return await dispatch(
-    fetchFollowDescriptionAction(id, authService.getAuthArg(ctx))
-  );
+  return await dispatch(fetchFollowDescriptionAction(id, Token.create(ctx)));
 };
 
 export const getProfitChart: TGetChartFunc = ({

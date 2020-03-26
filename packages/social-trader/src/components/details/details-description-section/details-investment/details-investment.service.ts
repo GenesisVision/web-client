@@ -4,7 +4,7 @@ import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const fetchSubscriptions = (id: string) =>
   api
-    .follows(Token.create())
+    .follows()
     .getFollowSubscriptionsForAsset(id)
     .then(({ items }) => items);
 

@@ -31,7 +31,7 @@ export const toggleFavorite = (
 };
 
 export const toggleFavoriteFund = (id: string, isFavorite: boolean) => {
-  const fundsApi = api.funds(Token.create());
+  const fundsApi = api.funds();
   return toggleFavorite(
     id,
     isFavorite,
@@ -41,7 +41,7 @@ export const toggleFavoriteFund = (id: string, isFavorite: boolean) => {
 };
 
 export const toggleFavoriteProgram = (id: string, isFavorite: boolean) => {
-  const programsApi = api.programs(Token.create());
+  const programsApi = api.programs();
   return toggleFavorite(
     id,
     isFavorite,
@@ -51,7 +51,7 @@ export const toggleFavoriteProgram = (id: string, isFavorite: boolean) => {
 };
 
 export const toggleFavoriteFollow = (id: string, isFavorite: boolean) => {
-  const followApi = api.follows(Token.create());
+  const followApi = api.follows();
   return toggleFavorite(
     id,
     isFavorite,

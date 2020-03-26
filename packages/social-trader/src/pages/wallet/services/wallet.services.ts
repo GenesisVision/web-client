@@ -35,7 +35,7 @@ export const fetchAvailableWallets = ({
   currency: CurrencyEnum;
 }): Promise<TWalletsAvailableData> => {
   return api
-    .wallet(Token.create())
+    .wallet()
     .getWalletAvailable(currency)
     .then(({ wallets }) => wallets);
 };
@@ -43,11 +43,9 @@ export const fetchAvailableWallets = ({
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
   actions.fetchWalletTransactionsAction(requestFilters);
 
-export const offPayFeesWithGvt = () =>
-  api.wallet(Token.create()).switchPayFeeInGvtOff();
+export const offPayFeesWithGvt = () => api.wallet().switchPayFeeInGvtOff();
 
-export const onPayFeesWithGvt = () =>
-  api.wallet(Token.create()).switchPayFeeInGvtOn();
+export const onPayFeesWithGvt = () => api.wallet().switchPayFeeInGvtOn();
 
 export type FetchTransactionsInternalFilterType = {
   transactionType?:
@@ -72,7 +70,7 @@ export const fetchMultiTransactions = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsInternalFilterType
 ): Promise<TransactionViewModelItemsViewModel> => {
-  return api.wallet(Token.create()).getTransactionsInternal({
+  return api.wallet().getTransactionsInternal({
     ...filters,
     currency
   });
@@ -90,7 +88,7 @@ export const fetchMultiTransactionsExternal = (
   currency?: CurrencyEnum,
   filters?: FetchTransactionsExternalFilterType
 ): Promise<TransactionViewModelItemsViewModel> => {
-  return api.wallet(Token.create()).getTransactionsExternal({
+  return api.wallet().getTransactionsExternal({
     ...filters,
     currency
   });

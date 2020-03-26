@@ -58,7 +58,7 @@ export const fetchWalletTransactionsAction = (
   filters?: FilteringType
 ): FetchTransactionsAction => ({
   type: WALLET_TRANSACTIONS,
-  payload: api.wallet(Token.create()).getTransactionsInternal(filters)
+  payload: api.wallet().getTransactionsInternal(filters)
 });
 
 export const updateWalletTimestampAction = (): UpdateTimestampAction => ({

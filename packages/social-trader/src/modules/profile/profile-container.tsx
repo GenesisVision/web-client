@@ -8,7 +8,7 @@ import Profile from "./profile";
 const _ProfileContainer: React.FC = () => {
   const { sendRequest, data, isPending } = useApiRequest<ProfileFullViewModel>({
     fetchOnMount: true,
-    request: () => api.profile(Token.create()).getProfileFull()
+    request: () => api.profile().getProfileFull()
   });
   const onUpdate = useCallback(async () => await sendRequest(), []);
   return (

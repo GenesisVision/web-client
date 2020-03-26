@@ -58,7 +58,7 @@ const convertSignalToProgramValidationSchema = ({
   t,
   hasInvestmentLimit,
   programsInfo: {
-    createProgramInfo: { maxEntryFee, maxSuccessFee }
+    createProgramInfo: { maxManagementFee, maxSuccessFee }
   }
 }: {
   t: TFunction;
@@ -66,14 +66,19 @@ const convertSignalToProgramValidationSchema = ({
   hasInvestmentLimit: boolean;
 }) =>
   object<IConvertAssetSettingsFormValues>().shape({
-    ...getProgramShapes({ t, maxEntryFee, maxSuccessFee, hasInvestmentLimit })
+    ...getProgramShapes({
+      t,
+      maxManagementFee,
+      maxSuccessFee,
+      hasInvestmentLimit
+    })
   });
 
 const convertAccountToProgramValidationSchema = ({
   t,
   hasInvestmentLimit,
   programsInfo: {
-    createProgramInfo: { maxEntryFee, maxSuccessFee }
+    createProgramInfo: { maxManagementFee, maxSuccessFee }
   }
 }: {
   t: TFunction;
@@ -82,7 +87,12 @@ const convertAccountToProgramValidationSchema = ({
 }) =>
   object<IConvertAssetSettingsFormValues>().shape({
     ...getPublicInfoShapes(t),
-    ...getProgramShapes({ hasInvestmentLimit, t, maxEntryFee, maxSuccessFee })
+    ...getProgramShapes({
+      hasInvestmentLimit,
+      t,
+      maxManagementFee,
+      maxSuccessFee
+    })
   });
 
 const convertToSignalValidationSchema = ({
@@ -184,18 +194,18 @@ const getSignalShapes = ({
 const getProgramShapes = ({
   hasInvestmentLimit,
   t,
-  maxEntryFee,
+  maxManagementFee,
   maxSuccessFee
 }: {
   hasInvestmentLimit: boolean;
   t: i18next.TFunction;
-  maxEntryFee: number;
+  maxManagementFee: number;
   maxSuccessFee: number;
 }) => ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
   [CONVERT_ASSET_FIELDS.periodLength]: periodLengthShape(t),
   [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
-  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
+  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
   [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
     hasInvestmentLimit,

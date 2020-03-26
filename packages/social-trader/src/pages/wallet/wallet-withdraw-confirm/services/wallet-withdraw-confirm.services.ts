@@ -7,7 +7,7 @@ export const confirmWithdraw = ({
   requestId: string;
   code: string;
 }) =>
-  api.wallet(Token.create()).confirmWithdrawalRequestByCode({
+  api.wallet().confirmWithdrawalRequestByCode({
     requestId,
     code
   });

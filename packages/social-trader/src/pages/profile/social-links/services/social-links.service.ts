@@ -3,12 +3,12 @@ import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const fetchSocialLinks = (): Promise<SocialLinkViewModel[]> => {
   return api
-    .profile(Token.create())
+    .profile()
     .getSocialLinks()
     .then(({ socialLinks }) => socialLinks);
 };
 
 export const updateSocialLink = (body: UpdateSocialLinkViewModel) =>
-  api.profile(Token.create()).updateSocialLinks({
+  api.profile().updateSocialLinks({
     body
   });

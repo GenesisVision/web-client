@@ -8,6 +8,6 @@ export const changePasswordTradingAccount = ({
   id: string;
   model?: TradingAccountPwdUpdate;
 }) =>
-  api.assets(Token.create()).changeTradingAccountPassword(id, {
+  api.assets().changeTradingAccountPassword(id, {
     body: model
   });

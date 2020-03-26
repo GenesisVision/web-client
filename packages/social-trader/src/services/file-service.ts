@@ -90,7 +90,7 @@ const getFileUrl = (
 
 const uploadFile = (uploadedFile: File): Promise<string> =>
   api
-    .files(Token.create())
+    .files()
     .uploadFile({
       uploadedFile
     })
@@ -98,7 +98,7 @@ const uploadFile = (uploadedFile: File): Promise<string> =>
 
 const uploadDocument = (uploadedFile: File): Promise<string> =>
   api
-    .files(Token.create())
+    .files()
     .uploadFile({ uploadedFile })
     .then((response: any) => response.id);
 

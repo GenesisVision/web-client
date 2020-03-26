@@ -51,7 +51,7 @@ export const fetchAccountProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<AccountProfitChartDataType> => ({
   type: FETCH_ACCOUNT_PROFIT_CHART,
-  payload: api.accounts(Token.create()).getProfitPercentCharts(id, {
+  payload: api.accounts().getProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -64,7 +64,7 @@ export const fetchAccountAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountAbsoluteProfitChartDataType> => ({
   type: FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
-  payload: api.accounts(Token.create()).getAbsoluteProfitChart(id, {
+  payload: api.accounts().getAbsoluteProfitChart(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -77,7 +77,7 @@ export const fetchAccountBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountBalanceChart> => ({
   type: FETCH_ACCOUNT_BALANCE_CHART,
-  payload: api.accounts(Token.create()).getBalanceChart(id, {
+  payload: api.accounts().getBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -95,20 +95,18 @@ export const fetchAccountDescriptionAction = (
 
 export const fetchOpenPositionsAction = (
   id: string,
-  filters: ComposeFiltersAllType,
-  token: Token
+  filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesViewModel>> => ({
   type: ACCOUNT_OPEN_POSITIONS,
-  payload: api.accounts(token).getOpenTrades(id, filters)
+  payload: api.accounts().getOpenTrades(id, filters)
 });
 
 export const fetchTradesAction = (
   id: string,
-  filters: ComposeFiltersAllType,
-  token: Token
+  filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesSignalViewModel>> => ({
   type: ACCOUNT_TRADES,
-  payload: api.accounts(token).getTrades(id, filters)
+  payload: api.accounts().getTrades(id, filters)
 });
 
 export interface SetAccountIdAction extends ActionType<AccountIdState> {

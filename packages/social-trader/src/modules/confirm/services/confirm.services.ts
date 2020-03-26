@@ -10,7 +10,7 @@ export const confirm2fa = ({
   code,
   programId
 }: IGoogleActivateStepFormValues & IConfirmProgramProps) => {
-  return api.assets(Token.create()).confirmProgram2FA(programId, {
+  return api.assets().confirmProgram2FA(programId, {
     body: { twoFactorCode: code }
   });
 };
@@ -18,7 +18,7 @@ export const confirm2fa = ({
 export const get2faInfo = ({
   programId
 }: IConfirmProgramProps): Promise<TwoFactorAuthenticator> => {
-  return api.assets(Token.create()).getProgram2FA(programId);
+  return api.assets().getProgram2FA(programId);
 };
 
 enum FIELDS {

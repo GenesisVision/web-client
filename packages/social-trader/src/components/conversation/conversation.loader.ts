@@ -115,7 +115,8 @@ export const getConversationImageLoaderData = (): IConversationImage => ({
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
   canEdit: getRandomBoolean(),
   canDelete: getRandomBoolean(),
-  isLiked: getRandomBoolean()
+  isLiked: getRandomBoolean(),
+  canPin: getRandomBoolean()
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
@@ -142,7 +143,7 @@ export const getConversationPostLoaderData = (
     ),
     id: uuid.v4(),
     images,
-    author: getConversationUserLoaderData(),
+    author: managerLoaderData,
     date: new Date(),
     likesCount: getRandomInteger(1, 10),
     text,
@@ -156,7 +157,7 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
   comments: [],
   id: uuid.v4(),
   images: [],
-  author: getConversationUserLoaderData(),
+  author: managerLoaderData,
   date: new Date(),
   likesCount: 0,
   text: "",

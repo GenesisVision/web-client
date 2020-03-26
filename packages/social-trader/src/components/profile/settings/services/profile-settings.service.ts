@@ -12,13 +12,12 @@ export const updateProfileAvatar = ({
 }: {
   newImage: IImageValue;
 }) => {
-  const token = Token.create();
   let promise;
   if (!newImage.src && !newImage.image) {
-    promise = api.profile(token).removeAvatar();
+    promise = api.profile().removeAvatar();
   } else {
     promise = filesService.uploadFile(newImage.image!.cropped).then(logoId => {
-      return api.profile(token).updateAvatar(logoId);
+      return api.profile().updateAvatar(logoId);
     });
   }
 
@@ -27,7 +26,7 @@ export const updateProfileAvatar = ({
 
 export const logoutFromDevices = (dispatch: Dispatch) =>
   api
-    .auth(Token.create())
+    .auth()
     .logoutFromAnotherDevices()
     .then(response => {
       authService.storeToken(response);

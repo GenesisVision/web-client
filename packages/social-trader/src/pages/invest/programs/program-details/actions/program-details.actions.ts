@@ -74,7 +74,7 @@ export const fetchProgramProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<ProgramProfitChartDataType> => ({
   type: FETCH_PROGRAM_PROFIT_CHART,
-  payload: api.programs(Token.create()).getProgramProfitPercentCharts(id, {
+  payload: api.programs().getProgramProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -117,11 +117,10 @@ export const fetchProgramDescriptionAction = (
 });
 
 export const fetchFollowProgramDescriptionAction = (
-  id: string,
-  token: Token
+  id: string
 ): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
-  payload: api.follows(token).getFollowAssetDetails(id)
+  payload: api.follows().getFollowAssetDetails(id)
 });
 
 export const fetchLevelParametersAction = (
@@ -165,11 +164,10 @@ export const fetchFinancialStatisticAction = (
 
 export const fetchSubscriptionsAction = (
   id: string,
-  token: Token,
   filters: ComposeFiltersAllType
 ): ApiAction<SignalProviderSubscribersDataType> => ({
   type: PROGRAM_SUBSCRIPTIONS,
-  payload: api.programs(token).getProgramSubscribers(id, filters)
+  payload: api.programs().getProgramSubscribers(id, filters)
 });
 
 export interface SetProgramIdAction extends ActionType<ProgramIdState> {

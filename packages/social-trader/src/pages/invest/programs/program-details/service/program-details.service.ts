@@ -55,7 +55,7 @@ export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
 ) => fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokersMethod = (id: string) =>
-  brokersApi.getBrokersForProgram(id);
+  api.brokers().getBrokersForProgram(id);
 
 export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
@@ -97,7 +97,7 @@ export const dispatchProgramId = (id: string) => async (
 ) => await dispatch(setProgramIdAction(id));
 
 export const closePeriod = (programId: string) => {
-  return assetsApi.closeCurrentPeriod(programId, authService.getAuthArg());
+  return api.assets().closeCurrentPeriod(programId);
 };
 
 export const getOpenPositions = (programId: string) => (
@@ -115,8 +115,7 @@ export const getTrades = (programId: string) => (
 export const getPeriodHistory = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
+  return fetchPeriodHistoryAction(programId, filters);
 };
 
 export const getFinancialStatistics = (programId: string) => (
@@ -132,13 +131,16 @@ export const getFinancialStatistics = (programId: string) => (
 export const getSubscriptions = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  return fetchSubscriptionsAction(programId, Token.create(), filters);
+  return fetchSubscriptionsAction(programId, filters);
 };
 
 export const fetchInvestmentsLevels = (
   currency: Currency
 ): Promise<LevelInfo[]> =>
-  platformApi.getProgramLevels({ currency }).then(({ levels }) => levels);
+  api
+    .platform()
+    .getProgramLevels({ currency })
+    .then(({ levels }) => levels);
 
 export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
   dispatch: Dispatch,
@@ -203,7 +205,7 @@ export const fetchPortfolioEventsWithoutTable = (
   eventLocation: InvestmentEventLocation,
   filters?: any
 ): Promise<InvestmentEventViewModels> => {
-  return api.events(Token.create()).getEvents({ ...filters, eventLocation });
+  return api.events().getEvents({ ...filters, eventLocation });
 };
 
 export const fetchPortfolioEventsCount = (
@@ -246,7 +248,7 @@ export const addInvestNotify = ({
   minDeposit: number;
   assetId: string;
 }) =>
-  api.notifications(Token.create()).addNotificationsSettings({
+  api.notifications().addNotificationsSettings({
     assetId,
     conditionType: "AvailableToInvest" as NotificationSettingConditionType,
     type: "ProgramCondition" as NotificationType,

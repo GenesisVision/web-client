@@ -4,18 +4,14 @@ import {
   FundDetailsListItemItemsViewModel,
   ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import followApi from "services/api-client/follow-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import socialApi from "services/api-client/social-api";
 import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 
 export const followUser = (id: string) =>
-  api.social(Token.create()).followUser(id, authService.getAuthArg());
+  api.social().followUser(id, authService.getAuthArg());
 
 export const unFollowUser = (id: string) =>
-  api.social(Token.create()).unfollowUser(id, authService.getAuthArg());
+  api.social().unfollowUser(id, authService.getAuthArg());
 
 export const toggleFollowUser = ({
   id,
@@ -60,12 +56,11 @@ export const fetchManagerAssetsCount = (
     take: 0,
     includeWithInvestments: true
   };
-  const token = Token.create();
   return Promise.all([
-    api.social(token).getFeed({ ...options, userId: ownerId }),
-    api.follows(token).getFollowAssets(options),
-    api.programs(token).getPrograms(options),
-    api.funds(token).getFunds(options)
+    api.social().getFeed({ ...options, userId: ownerId }),
+    api.follows().getFollowAssets(options),
+    api.programs().getPrograms(options),
+    api.funds().getFunds(options)
   ]).then(([feedData, followData, programsData, fundsData]) => ({
     postsCount: feedData.total,
     followCount: followData.total,

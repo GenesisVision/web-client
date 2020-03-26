@@ -1,10 +1,10 @@
 import { api, Token } from "services/api-client/swagger-custom-client";
 
 const enableReinvesting = (id: string) =>
-  api.investments(Token.create()).switchReinvestOn(id);
+  api.investments().switchReinvestOn(id);
 
 const disableReinvesting = (id: string) =>
-  api.investments(Token.create()).switchReinvestOff(id);
+  api.investments().switchReinvestOff(id);
 
 export const toggleReinvesting = ({
   id,

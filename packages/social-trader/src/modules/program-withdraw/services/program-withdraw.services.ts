@@ -8,7 +8,7 @@ export const getProgramWithdrawInfo = ({
 }: {
   id: string;
 }): Promise<ProgramWithdrawInfo> =>
-  api.investments(Token.create()).getProgramWithdrawInfo(id);
+  api.investments().getProgramWithdrawInfo(id);
 
 export const withdrawProgramById = ({
   id,
@@ -16,4 +16,4 @@ export const withdrawProgramById = ({
 }: {
   id: string;
   value: ProgramWithdrawType;
-}) => api.investments(Token.create()).withdrawFromProgram(id, value);
+}) => api.investments().withdrawFromProgram(id, value);

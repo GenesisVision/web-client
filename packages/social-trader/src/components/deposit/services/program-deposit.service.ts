@@ -71,7 +71,7 @@ export const programInvest: TAssetDeposit = ({
   amount,
   walletId
 }: TAssetInvestCreatorArgs) =>
-  api.investments(Token.create()).investIntoProgram(id, {
+  api.investments().investIntoProgram(id, {
     walletId,
     amount
   });

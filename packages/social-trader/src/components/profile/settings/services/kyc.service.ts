@@ -4,11 +4,10 @@ import authService from "services/auth-service";
 
 export const loadKycIFrame = () => {
   const $script = require("scriptjs");
-  const token = Token.create();
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
     if (!(window as any).idensic.init) return;
     api
-      .profile(token)
+      .profile()
       .getVerificationToken()
       .then(data => {
         (window as any).idensic.init(

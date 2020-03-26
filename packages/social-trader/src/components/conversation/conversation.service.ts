@@ -19,11 +19,11 @@ export const sharePost = (id: string) => {
 };
 
 export const pinPost = (id: string) => {
-  return api.social(Token.create()).pinPost(id);
+  return api.social().pinPost(id);
 };
 
 export const unpinPost = (id: string) => {
-  return api.social(Token.create()).unpinPost(id);
+  return api.social().unpinPost(id);
 };
 
 export const togglePin = ({ id, value }: { id: string; value: boolean }) => {
@@ -52,7 +52,7 @@ const mockRequest = (values: any) =>
 
 const sendMessage = (values: IPostMessageValues) => {
   return uploadImages(values.images).then(images => {
-    return api.social(Token.create()).addPost({
+    return api.social().addPost({
       body: { ...values, images }
     });
   });
@@ -67,17 +67,17 @@ export const sendPost = (values: IPostMessageValues) => {
 };
 
 export const toggleLike = ({ id, liked }: { id: string; liked?: boolean }) => {
-  const socialApi = api.social(Token.create());
+  const socialApi = api.social();
   const method = liked ? socialApi.unlikePost : socialApi.likePost;
   return method(id);
 };
 
 export const remove = ({ id }: { id: string }) => {
-  return api.social(Token.create()).deletePost(id);
+  return api.social().deletePost(id);
 };
 
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
-  return api.social(Token.create()).getFeed({ userId: id });
+  return api.social().getFeed({ userId: id });
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {

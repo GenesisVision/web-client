@@ -25,7 +25,7 @@ export const editAsset = ({
 }): Promise<Response> => {
   let promise = Promise.resolve({});
   if (editAssetData.logo.image && editAssetData.logo.image.cropped)
-    promise = api.files(Token.create()).uploadFile({
+    promise = api.files().uploadFile({
       uploadedFile: editAssetData.logo.image.cropped
     });
   return promise.then(response => {
@@ -33,26 +33,26 @@ export const editAsset = ({
       ...editAssetData,
       logo: response || editAssetData.logo.src
     } as ProgramUpdate;
-    return api.assets(Token.create()).updateAsset(id, {
+    return api.assets().updateAsset(id, {
       body
     }); //TODO ask backend to change ProgramUpdate logo type
   });
 };
 
 export const closeProgram: TCloseAsset = ({ id, twoFactorCode }) => {
-  return api.assets(Token.create()).closeInvestmentProgram(id, {
+  return api.assets().closeInvestmentProgram(id, {
     body: { twoFactorCode: twoFactorCode! }
   });
 };
 
 export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
-  return api.assets(Token.create()).closeFund(id, {
+  return api.assets().closeFund(id, {
     body: { twoFactorCode: twoFactorCode! }
   });
 };
 
 export const closeTradingAccount: TCloseAsset = ({ id }) => {
-  return assetsApi.closeTradingAccount(id, authService.getAuthArg());
+  return api.assets().closeTradingAccount(id);
 };
 
 export type TCloseAsset = (opts: {

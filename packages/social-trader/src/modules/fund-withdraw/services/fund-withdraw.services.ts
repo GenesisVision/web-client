@@ -8,12 +8,11 @@ export const getFundWithdrawInfo = ({
 }: {
   id: string;
 }): Promise<FundWithdrawInfoResponse> => {
-  const token = Token.create();
   return Promise.all([
-    api.investments(token).getFundWithdrawInfo(id, {
+    api.investments().getFundWithdrawInfo(id, {
       currency: FUND_CURRENCY
     }),
-    api.wallet(token).getWalletAvailable(FUND_CURRENCY)
+    api.wallet().getWalletAvailable(FUND_CURRENCY)
   ]).then(([withdrawInfo, walletMulti]) => ({
     withdrawInfo,
     wallets: walletMulti.wallets
@@ -26,4 +25,4 @@ export const withdrawFund = ({
 }: {
   value: FundWithdraw;
   id: string;
-}): any => api.investments(Token.create()).withdrawFromFund(id, value);
+}): any => api.investments().withdrawFromFund(id, value);

@@ -10,7 +10,7 @@ export const fundInvest: TAssetDeposit = ({
   amount,
   walletId
 }: TAssetInvestCreatorArgs) =>
-  api.investments(Token.create()).investIntoFund(id, {
+  api.investments().investIntoFund(id, {
     walletId,
     amount
   });
