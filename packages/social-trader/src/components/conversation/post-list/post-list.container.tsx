@@ -18,7 +18,7 @@ const _PostListContainer: React.FC<Props> = ({ id }) => {
     sendRequest();
   }, [id]);
   return (
-    <div className="post-list">
+    <div>
       {selfId === id && <PostInputContainer onSuccess={sendRequest} />}
       <PostList
         loaderData={[getEmptyPostLoaderData()]}

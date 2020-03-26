@@ -8,6 +8,9 @@ $post-input-button-size: 40px;
 $post-input-image-preview-size: 40px;
 
 .post-input {
+  &__form {
+    width: 100%;
+  }
   &__image-preview-container {
     position: relative;
   }

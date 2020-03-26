@@ -100,7 +100,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
     isFocused || !!text || !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm form={form} onSubmit={onSubmit} className="post-input__form">
       <HookFormInputImages
         maxImages={MAX_IMAGES}
         disabled={disabledImages}

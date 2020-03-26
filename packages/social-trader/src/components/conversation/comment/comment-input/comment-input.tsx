@@ -106,7 +106,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   const isOpenPanel = !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm form={form} onSubmit={formSubmit}>
+    <HookForm form={form} onSubmit={formSubmit} className="comment-input__form">
       <HookFormInputImages
         showIndicator={false}
         noDrag
