@@ -5,12 +5,12 @@ import FundAssetFilter from "components/table/components/filtering/fund-asset-fi
 import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { composePaging } from "components/table/helpers/paging.helpers";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useRouteFilters from "hooks/route-filters.hook";
 import { useTranslation } from "i18n";
 import * as React from "react";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import {
   fundAssetsSelector,
   platformCurrenciesSelector
@@ -26,7 +26,7 @@ import {
 } from "./funds-table.constants";
 
 const _FundsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const currencies = useSelector(platformCurrenciesSelector);
   const data = useSelector(fundsDataSelector);
   const fundAssets = useSelector(fundAssetsSelector);

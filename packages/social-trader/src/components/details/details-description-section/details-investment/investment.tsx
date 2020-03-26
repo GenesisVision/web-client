@@ -10,13 +10,12 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
 import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
 
@@ -32,7 +31,7 @@ const _Investment: React.FC<Props> = ({
   personalDetails
 }) => {
   const { successFeePersonal, exitFee, exitFeePersonal } = fees;
-  const accountCurrency = useSelector(currencySelector);
+  const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const profitValue = "profit" in personalDetails ? personalDetails.profit : 0;
   const profitPercentValue =

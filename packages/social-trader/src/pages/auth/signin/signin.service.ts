@@ -1,17 +1,14 @@
-import { updateAccountSettingsCurrencyAction } from "actions/account-settings-actions";
 import authActions from "actions/auth-actions";
 import platformActions from "actions/platform-actions";
 import { Push } from "components/link/link";
 import { CaptchaCheckResult, LoginViewModel } from "gv-api-web";
 import { useCookieState } from "hooks/cookie-state";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { NextPageContext } from "next";
-import { DEFAULT_ACCOUNT_CURRENCY } from "reducers/account-settings-reducer";
 import { Dispatch } from "redux";
 import { HOME_ROUTE } from "routes/app.routes";
 import authApi from "services/api-client/auth-api";
 import authService from "services/auth-service";
-import { removeCookie } from "utils/cookie";
+import { cleanAccountCurrency } from "utils/account-currency";
 
 export enum CODE_TYPE {
   TWO_FACTOR = "twoFactorCode",
@@ -49,8 +46,7 @@ export const login: LoginFuncType = ({
 export const logout: logoutFuncType = dispatch => {
   Push(HOME_ROUTE);
   authService.removeToken();
-  removeCookie(ACCOUNT_CURRENCY_KEY);
-  dispatch(updateAccountSettingsCurrencyAction(DEFAULT_ACCOUNT_CURRENCY));
+  cleanAccountCurrency();
   dispatch(authActions.updateTokenAction(false));
   dispatch(platformActions.fetchPlatformSettings());
 };
