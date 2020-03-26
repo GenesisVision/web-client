@@ -12,6 +12,7 @@ const _HeaderContainer: React.FC<Props & WithRouterProps> = ({ router }) => {
   const dispatch = useDispatch();
   const info = useSelector(headerSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+  console.info(isAuthenticated);
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchProfileHeaderInfo);

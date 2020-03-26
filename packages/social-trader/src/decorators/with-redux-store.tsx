@@ -42,7 +42,7 @@ const withReduxStore = (
         (await WrappedComponent.getInitialProps(ctx));
 
       const token = Token.create(ctx.ctx);
-      if (token.isExpiring()) {
+      if (token.isExist()) {
         reduxStore.dispatch(authActions.updateTokenAction(true));
       }
 
