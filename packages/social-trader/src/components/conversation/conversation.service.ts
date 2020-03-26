@@ -84,9 +84,23 @@ export const remove = ({ id }: { id: string }) => {
   return socialApi.deletePost(id, authorization);
 };
 
-export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
+export const getFeedMethod = (values: Object) => {
   const authorization = authService.getAuthArg();
-  return socialApi.getFeed({ authorization, userId: id });
+  return socialApi.getFeed({ authorization, ...values });
+};
+
+export const getGlobalFeed = ({
+  id,
+  tags
+}: {
+  id: string;
+  tags: string[];
+}): Promise<ConversationFeed> => {
+  return getFeedMethod({ id, tags });
+};
+
+export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
+  return getFeedMethod({ id });
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
