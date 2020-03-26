@@ -7,6 +7,7 @@ import {
 import { NextPageContext } from "next";
 import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
+import { getAccountCurrency } from "utils/account-currency";
 import { CurrencyEnum, RootThunk } from "utils/types";
 
 import * as actions from "../actions/wallet.actions";
@@ -17,7 +18,7 @@ export const fetchWalletsWithCtx = (
   const authorization = authService.getAuthArg(ctx);
   const { info } = getState().wallet;
   if (info.isPending) return;
-  const { currency } = getState().accountSettings;
+  const currency = getAccountCurrency(ctx);
   await dispatch(actions.updateWalletTimestampAction());
   await dispatch(actions.fetchWalletsAction(currency, authorization));
 };

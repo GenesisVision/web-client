@@ -1,4 +1,5 @@
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
@@ -7,8 +8,6 @@ import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/d
 import { TDashboardTradingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 
 import { fetchTradingTotalStatistic } from "../../services/dashboard.service";
@@ -18,7 +17,7 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
   tablet
 }) => {
   const [t] = useTranslation();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   return (
     <DashboardStatisticContainer
       landscapeTablet={landscapeTablet}

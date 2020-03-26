@@ -1,4 +1,5 @@
 import authActions from "actions/auth-actions";
+import { getHeader } from "components/header/services/header.service";
 import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
+import { setAccountCurrency } from "utils/account-currency";
 import { ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
@@ -39,6 +41,11 @@ const _SignInContainer: React.FC<Props> = ({
     dispatch(authActions.updateTokenAction(true));
     Router.push(redirectFrom);
   };
+  const saveAccountCurrencyMiddleware = () => {
+    getHeader().then(({ platformCurrency }) => {
+      setAccountCurrency(platformCurrency);
+    });
+  };
 
   const { email, password = "" } = getTwoFactorState();
 
@@ -47,7 +54,7 @@ const _SignInContainer: React.FC<Props> = ({
   }, [email, password]);
 
   const { sendRequest } = useApiRequest({
-    middleware: [successMiddleware],
+    middleware: [successMiddleware, saveAccountCurrencyMiddleware],
     request: values => {
       return login({
         ...values,
