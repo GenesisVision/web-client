@@ -1,4 +1,5 @@
 import { ProgramInvestingDetailsList } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import {
   fetchDashboardInvestmentsProgramsAction,
   fetchDashboardInvestmentsTotalAction
@@ -8,12 +9,11 @@ import DashboardProgramCard from "pages/dashboard/components/dashboard-investing
 import { dashboardInvestmentsProgramsSelector } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 
 const _DashboardInvestingPrograms: React.FC = () => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   const handleUpdateItems = useCallback(
     updateItems => () => {

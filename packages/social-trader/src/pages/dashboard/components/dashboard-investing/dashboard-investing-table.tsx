@@ -15,11 +15,10 @@ import {
   UpdateFilterFunc
 } from "components/table/components/table.types";
 import { LIST_VIEW } from "components/table/table.constants";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { ApiAction } from "utils/types";
 
 const _DashboardInvestingTable: React.FC<Props> = ({
@@ -29,7 +28,7 @@ const _DashboardInvestingTable: React.FC<Props> = ({
   renderBodyCard
 }) => {
   const [t] = useTranslation();
-  const showIn = useSelector(currencySelector);
+  const showIn = useAccountCurrency();
   const getItems = useCallback(filters => {
     return action({
       ...filters,

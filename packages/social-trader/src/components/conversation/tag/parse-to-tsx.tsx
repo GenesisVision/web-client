@@ -1,3 +1,5 @@
+import { getActiveUrl } from "components/active/active.helpers";
+import Link from "components/link/link";
 import { PostTag } from "gv-api-web";
 import React from "react";
 import { safeGetElemFromArray } from "utils/helpers";
@@ -36,6 +38,10 @@ export const underTextComponentsMap: TagToComponentType[] = [
   { tagType: "Fund", Component: FundTagCard },
   { tagType: "User", Component: UserTagCard }
 ];
+
+export const convertHashTagToComponent = (symbol: string): JSX.Element => {
+  return <Link to={getActiveUrl(symbol)}>#{symbol}</Link>;
+};
 
 export const convertTagToComponent = (
   tag: PostTag,
@@ -124,18 +130,23 @@ export const parseToTsx = ({
   text: string;
 }): JSX.Element => {
   if (!tags) return <>{text}</>;
-  const regex = /@tag-[\d]+/g;
-  const tagStrings = text.match(regex) || [];
+  const commonRegex = /#[a-zA-Z]+|@tag-[\d]+/g;
+  const tagStrings = text.match(commonRegex) || [];
   const parsedTags = tagStrings
     .map(tag => {
-      const result = tag.match(/[\d]+/g);
-      return result ? +result[0] : 0;
+      const tagNumber = tag.match(/[\d]+/g);
+      const tagSymbol = tag.match(/[a-zA-Z]+/g);
+      return tagNumber ? +tagNumber[0] : tagSymbol![0];
     })
-    .map((number: number) => {
-      const tag = safeGetElemFromArray(tags, tag => tag.number === number);
-      return convertTagToComponent(tag, map);
+    .map((tagId: number | string) => {
+      if (typeof tagId === "number") {
+        const tag = safeGetElemFromArray(tags, tag => tag.number === tagId);
+        return convertTagToComponent(tag, map);
+      } else {
+        return convertHashTagToComponent(tagId);
+      }
     });
-  const otherWords = text.split(regex);
+  const otherWords = text.split(commonRegex);
   const mergedText = mergeArrays(otherWords, parsedTags);
   return <>{mergedText}</>;
 };

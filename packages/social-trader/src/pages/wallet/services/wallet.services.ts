@@ -6,6 +6,7 @@ import {
 } from "gv-api-web";
 import { NextPageContext } from "next";
 import { api, Token } from "services/api-client/swagger-custom-client";
+import { getAccountCurrency } from "utils/account-currency";
 import { CurrencyEnum, RootThunk } from "utils/types";
 
 import * as actions from "../actions/wallet.actions";
@@ -15,7 +16,7 @@ export const fetchWalletsWithCtx = (
 ): RootThunk<void> => async (dispatch, getState) => {
   const { info } = getState().wallet;
   if (info.isPending) return;
-  const { currency } = getState().accountSettings;
+  const currency = getAccountCurrency(ctx);
   await dispatch(actions.updateWalletTimestampAction());
   await dispatch(actions.fetchWalletsAction(currency, Token.create(ctx)));
 };

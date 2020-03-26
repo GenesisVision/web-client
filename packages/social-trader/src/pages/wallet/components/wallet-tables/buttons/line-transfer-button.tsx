@@ -1,4 +1,5 @@
 import { WalletData } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import TransferButton, {
   WALLET_BUTTON_TYPE
 } from "modules/transfer/transfer-button";
@@ -7,14 +8,13 @@ import { fetchWallets } from "pages/wallet/services/wallet.services";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 
 import LineWalletButton from "./line-wallet-button";
 
 export const _LineTransferButton: React.FC<Props> = ({ wallet }) => {
   const [t] = useTranslation();
-  const profileCurrency = useSelector(currencySelector);
+  const profileCurrency = useAccountCurrency();
   const dispatch = useDispatch();
   const updateWalletInfo = useCallback(() => {
     dispatch(fetchWallets(profileCurrency));

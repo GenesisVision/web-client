@@ -6,6 +6,9 @@ $input-height: 43px;
 $comment-input-button-size: 30px;
 
 .comment-input {
+  &__form {
+    width: 100%;
+  }
   &__input-and-panel-container {
     border-radius: $input-height/2;
     background-color: $border-color;

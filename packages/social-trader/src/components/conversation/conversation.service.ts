@@ -76,8 +76,22 @@ export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
 
+export const getFeedMethod = (values: Object) => {
+  return api.social().getFeed(values);
+};
+
+export const getGlobalFeed = ({
+  id,
+  tags
+}: {
+  id: string;
+  tags: string[];
+}): Promise<ConversationFeed> => {
+  return getFeedMethod({ id, tags });
+};
+
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
-  return api.social().getFeed({ userId: id });
+  return getFeedMethod({ id });
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {

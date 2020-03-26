@@ -1,24 +1,39 @@
 import classNames from "classnames";
+import { fetchProfileHeaderInfo } from "components/header/header.service";
 import { ISelectChangeEvent } from "components/select/select";
+import { useAccountCurrency } from "hooks/account-currency.hook";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { currenciesSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-import { updateCurrency } from "../services/currency-select.service";
+import {
+  postAccountCurrency,
+  updateCurrency
+} from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
 import { CurrencySelectLoader } from "./currency-select.loader";
 
 const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
+  const updateCookieMiddleware = (currency: CurrencyEnum) => {
+    updateCurrency(currency);
+  };
+  const updateHeaderMiddleware = () => {
+    dispatch(fetchProfileHeaderInfo);
+  };
+
+  const { sendRequest } = useApiRequest({
+    request: postAccountCurrency,
+    middleware: [updateCookieMiddleware, updateHeaderMiddleware]
+  });
   const currencyValues = useSelector(currenciesSelector);
-  const currency = useSelector(currencySelector);
-  const handleChange = useCallback(
-    (event: ISelectChangeEvent) =>
-      dispatch(updateCurrency(event.target.value as CurrencyEnum)),
-    []
-  );
+  const currency = useAccountCurrency();
+  const handleChange = useCallback((event: ISelectChangeEvent) => {
+    const currency = event.target.value as CurrencyEnum;
+    sendRequest(currency);
+  }, []);
   return (
     <CurrencySelect
       condition={!!currency && !!currencyValues}
