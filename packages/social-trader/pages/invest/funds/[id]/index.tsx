@@ -1,5 +1,4 @@
 import withDefaultLayout from "decorators/with-default-layout";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { statisticCurrencyAction } from "pages/invest/funds/fund-details/actions/fund-details.actions";
 import FundDetailsPage from "pages/invest/funds/fund-details/fund-details.page";
 import {
@@ -8,8 +7,8 @@ import {
 } from "pages/invest/funds/fund-details/services/fund-details.service";
 import React from "react";
 import { compose } from "redux";
-import { getCookie } from "utils/cookie";
-import { CurrencyEnum, NextPageWithRedux } from "utils/types";
+import { getAccountCurrency } from "utils/account-currency";
+import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
   return <FundDetailsPage />;
@@ -17,18 +16,13 @@ const Page: NextPageWithRedux<{}> = () => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const {
-    accountSettings: { currency }
-  } = ctx.reduxStore.getState();
-  const cookiesCurrency = getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum;
+  const currency = getAccountCurrency(ctx);
   await Promise.all([
     ctx.reduxStore.dispatch(dispatch =>
-      dispatch(statisticCurrencyAction(cookiesCurrency || currency))
+      dispatch(statisticCurrencyAction(currency))
     ),
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
-    ctx.reduxStore.dispatch(
-      dispatchFundDescription(ctx, cookiesCurrency || currency)
-    )
+    ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]);
   return {};
 };

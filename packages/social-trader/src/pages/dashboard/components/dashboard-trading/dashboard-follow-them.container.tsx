@@ -1,3 +1,4 @@
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import {
   fetchDashboardFollowThemAction,
   fetchDashboardTradingTotalAction
@@ -8,11 +9,10 @@ import { dashboardTradingFollowThemItemsSelector } from "pages/dashboard/reducer
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 
 const _DashboardFollowThemContainer: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   const data = useSelector(dashboardTradingFollowThemItemsSelector);
   useEffect(() => {

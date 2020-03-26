@@ -2,11 +2,11 @@ import NotFoundPage from "components/not-found/not-found";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import { PlatformInfo } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { IFundsFacetTableProps } from "pages/invest/funds/funds-facet/components/funds-facet-table";
 import { IProgramsFacetTableProps } from "pages/invest/programs/programs-facet/components/programs-facet-table";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import {
   platformCurrenciesSelector,
   platformDataSelector
@@ -21,7 +21,7 @@ const _FacetContainer: React.FC<Props> = props => {
   );
   const facet = useSelector((state: RootState) => facetSelector(state, props));
   const currencies = useSelector(platformCurrenciesSelector);
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
     [facet, getItems]

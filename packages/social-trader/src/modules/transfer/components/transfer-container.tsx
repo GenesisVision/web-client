@@ -4,6 +4,7 @@ import {
   InternalTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import { getTransferFormLoaderData } from "modules/transfer/components/transfer-form.helpers";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
@@ -11,7 +12,6 @@ import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
@@ -47,7 +47,7 @@ const _TransferContainer: React.FC<Props> = ({
   });
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const updateWalletMiddleware = () => {
     onApply && onApply();
     dispatch(fetchWallets(currency));

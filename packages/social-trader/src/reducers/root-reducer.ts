@@ -36,9 +36,6 @@ import {
   walletReducer,
   WalletState
 } from "pages/wallet/reducers/wallet.reducers";
-import accountSettingsReducer, {
-  AccountSettingsState
-} from "reducers/account-settings-reducer";
 import authReducer, { AuthState } from "reducers/auth-reducer";
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
@@ -62,8 +59,7 @@ export const sharedRootReducers = {
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
   notifications: notificationsReducer,
-  wallet: walletReducer,
-  accountSettings: accountSettingsReducer
+  wallet: walletReducer
 };
 
 export type RootState = Readonly<{
@@ -82,6 +78,5 @@ export type RootState = Readonly<{
   fundsData: FundsTableState;
   authData: AuthState;
   alertMessages: AlertMessagesState;
-  accountSettings: AccountSettingsState;
   wallet: WalletState;
 }>;

@@ -1,10 +1,12 @@
-import { initialAccountCurrencyState } from "reducers/account-settings-reducer";
 import defaultReducer from "reducers/reducer-creators/default-reducer";
+import { getAccountCurrency } from "utils/account-currency";
 import { ActionType, CurrencyEnum } from "utils/types";
 
 export type StatisticCurrencyDataType = CurrencyEnum;
 export type TStatisticCurrencyAction = ActionType<StatisticCurrencyDataType>;
 export type StatisticCurrencyState = StatisticCurrencyDataType;
+
+export const initialAccountCurrencyState = getAccountCurrency();
 
 const initialState: StatisticCurrencyState = initialAccountCurrencyState;
 
