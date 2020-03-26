@@ -5,7 +5,7 @@
 .events-list {
   @include reset-list();
   position: relative;
-  min-height: 650px;
+  min-height: 600px;
 
   &__item {
     border: 1px solid $landing-bg-gray-2;
@@ -19,6 +19,7 @@
     top: 0;
     width: 100%;
     opacity: 0;
+    min-height: 80px;
 
     @include media-breakpoint-large-desktop() {
       padding-left: 40px;
