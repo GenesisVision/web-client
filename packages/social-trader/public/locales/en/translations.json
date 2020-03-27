@@ -1271,6 +1271,7 @@
     }
   },
   "manager-page": {
+    "unfollow-user": "Unfollow",
     "follow-user": "Follow",
     "followers": "Followers",
     "following": "Following",
