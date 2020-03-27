@@ -175,7 +175,7 @@ export class Token {
     return new Token(ctx);
   }
   isExist = (): boolean => {
-    return this.token.length >= 0;
+    return this.token.length > 0;
   };
 
   getHeader = () => {
