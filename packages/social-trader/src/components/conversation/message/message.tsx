@@ -25,7 +25,7 @@ const _Message: React.FC<IMessageProps> = ({
   images,
   text,
   date,
-  author: { username, url }
+  author: { username, url, avatar }
 }) => {
   return (
     <Row center={false} className="message">
@@ -33,7 +33,7 @@ const _Message: React.FC<IMessageProps> = ({
         <ConversationUser
           postId={postId}
           url={url}
-          avatar={""}
+          avatar={avatar}
           username={username}
           date={date}
         />
