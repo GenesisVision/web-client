@@ -94,12 +94,7 @@ export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
-  return Promise.resolve(
-    getConversationPostLoaderData(
-      getRandomInteger(0, 10),
-      getRandomInteger(0, 5)
-    )
-  );
+  return api.social().getPost(id);
 };
 
 type RequestFilters = {
