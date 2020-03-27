@@ -120,6 +120,9 @@ export const getConversationPersonalDetailsLoaderData = (): ConversationMessageP
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
+  socialLinks: [],
+  registrationDate: new Date(),
+  avatar: "",
   id: uuid.v4(),
   username: getRandomWord(getRandomInteger(8, 50)),
   url: ""
