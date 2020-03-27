@@ -1,6 +1,6 @@
-import { getActiveUrl } from "components/active/active.helpers";
 import Link from "components/link/link";
 import { PostTag } from "gv-api-web";
+import { getFeedUrl } from "pages/feed/feed.routes";
 import React from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
@@ -40,7 +40,7 @@ export const underTextComponentsMap: TagToComponentType[] = [
 ];
 
 export const convertHashTagToComponent = (symbol: string): JSX.Element => {
-  return <Link to={getActiveUrl(symbol)}>#{symbol}</Link>;
+  return <Link to={getFeedUrl({ tags: [symbol] })}>#{symbol}</Link>;
 };
 
 export const convertTagToComponent = (
