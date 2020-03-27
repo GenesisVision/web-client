@@ -8,8 +8,7 @@ import {
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
 import searchApi from "services/api-client/search-api";
-import socialApi from "services/api-client/social-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean, getRandomInteger } from "utils/helpers";
@@ -87,7 +86,7 @@ export const getGlobalFeed = ({
   id: string;
   tags: string[];
 }): Promise<ConversationFeed> => {
-  return getFeedMethod({ userId: id, tags });
+  return getFeedMethod({ hashTags: tags });
 };
 
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
