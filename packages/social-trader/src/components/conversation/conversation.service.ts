@@ -87,11 +87,11 @@ export const getGlobalFeed = ({
   id: string;
   tags: string[];
 }): Promise<ConversationFeed> => {
-  return getFeedMethod({ id, tags });
+  return getFeedMethod({ userId: id, tags });
 };
 
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
-  return getFeedMethod({ id });
+  return getFeedMethod({ userId: id });
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
