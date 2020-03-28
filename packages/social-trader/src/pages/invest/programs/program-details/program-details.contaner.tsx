@@ -212,9 +212,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsInvestment
         isOwnAsset={isOwnAsset}
         fees={{
-          successFee: programDetails && programDetails.successFeeCurrent,
-          successFeePersonal:
-            programPersonalDetails && programPersonalDetails.successFeePersonal
+          managementFeePersonal: programPersonalDetails?.managementFeePersonal,
+          successFee: programDetails?.successFeeCurrent,
+          successFeePersonal: programPersonalDetails?.successFeePersonal
         }}
         dispatchDescription={handleDispatchDescription}
         asset={assetType}
