@@ -9,7 +9,7 @@ const _ClosePositionButton: React.FC<Props> = ({
   id,
   symbol,
   volume,
-  onApplyCancelRequest
+  onApply
 }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -18,7 +18,7 @@ const _ClosePositionButton: React.FC<Props> = ({
     request: async (id: string) => {},
     middleware: [
       () => {
-        onApplyCancelRequest && onApplyCancelRequest();
+        onApply && onApply();
       },
       setClosePopup
     ]
@@ -51,7 +51,7 @@ const _ClosePositionButton: React.FC<Props> = ({
 };
 
 interface Props {
-  onApplyCancelRequest?: () => void;
+  onApply?: () => void;
   symbol: string;
   volume: number;
   id: string;
