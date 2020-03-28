@@ -50,6 +50,12 @@ export enum FOLLOW_TYPE {
   EDIT = "EDIT"
 }
 
+export enum TRADE_ASSET_TYPE {
+  ACCOUNT = "Account",
+  PROGRAM = "Program",
+  FOLLOW = "Follow"
+}
+
 export enum ASSET {
   FOLLOW = "Follow",
   PROGRAM = "Program",
