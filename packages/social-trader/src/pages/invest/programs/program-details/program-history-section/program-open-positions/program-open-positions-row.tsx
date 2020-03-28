@@ -6,9 +6,9 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateItemsFuncType } from "components/table/components/table.types";
-import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
+import { DEFAULT_DECIMAL_SCALE, TRADE_ASSET_TYPE } from "constants/constants";
 import { OrderSignalModel, TradesViewModel } from "gv-api-web";
-import { ClosePositionButton } from "pages/invest/programs/program-details/program-history-section/program-open-positions/closePositionButton";
+import { ClosePositionButton } from "pages/invest/programs/program-details/program-history-section/program-open-positions/close-position-button";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";
@@ -16,6 +16,8 @@ import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramOpenPositionsRow: React.FC<Props> = ({
+  assetType,
+  canCloseOpenPositions,
   updateItems,
   position,
   data: { showDate, showDirection, showPrice, showPriceOpen, showProfit }
@@ -85,8 +87,9 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
             suffix={` ${position.profitCurrency}`}
           />
         </Profitability>
-        {false && (
+        {canCloseOpenPositions && (
           <ClosePositionButton
+            assetType={assetType}
             onApply={updateItems}
             volume={position.volume}
             symbol={position.symbol}
@@ -99,6 +102,8 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
 );
 
 interface Props {
+  assetType: TRADE_ASSET_TYPE;
+  canCloseOpenPositions?: boolean;
   updateItems?: UpdateItemsFuncType;
   data: TradesViewModel;
   currency: CurrencyEnum;
