@@ -9,7 +9,7 @@ export const passwordChangeValidationSchema = (t: TFunction) =>
     [PASSWORD_CHANGE_FORM_FIELDS.oldPassword]: string().required(
       t("Password is required")
     ),
-    [PASSWORD_CHANGE_FORM_FIELDS.password]: passwordValidator,
+    [PASSWORD_CHANGE_FORM_FIELDS.password]: passwordValidator(t),
     [PASSWORD_CHANGE_FORM_FIELDS.confirmPassword]: string()
       .oneOf(
         [ref(PASSWORD_CHANGE_FORM_FIELDS.password)],
