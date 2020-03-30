@@ -129,7 +129,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           : t("programs-page.title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
-      previewImage={filesService.getFileUrl(description.publicInfo.logo)}
+      previewImage={description.publicInfo.logoUrl}
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection

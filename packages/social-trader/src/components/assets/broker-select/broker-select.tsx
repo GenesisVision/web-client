@@ -1,5 +1,3 @@
-import "./broker-select.scss";
-
 import { RowItem } from "components/row-item/row-item";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Surface from "components/surface/surface";
@@ -14,6 +12,7 @@ import {
   getLeverageDescription
 } from "../asset.helpers";
 import BrokerCard from "./broker-card/broker-card";
+import "./broker-select.scss";
 import NavigateToSettings from "./navigate-to-settings";
 
 const _BrokerSelectBroker: React.FC<Props> = ({
@@ -32,7 +31,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           {data.map((broker, i) => (
             <RowItem bottomOffset key={i}>
               <BrokerCard
-                logo={broker.logo}
+                logo={broker.logoUrl}
                 brokerName={broker.name}
                 isSelected={broker === selectedBroker}
                 onSelect={selectBrokerHandle}

@@ -108,7 +108,7 @@ const getAssetSearchResult = (type: SEARCH_ASSET_TYPE) => (
 ): AssetSearchResult => {
   return {
     type,
-    avatar: data.avatar || data.logo,
+    avatar: data.logoUrl, //TODO check
     name: data.url,
     id: data.id
   };

@@ -67,7 +67,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
       hasAvatar
       title={program.title}
       subTitle={program.owner.username}
-      logo={program.logo}
+      logo={program.logoUrl}
       managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}

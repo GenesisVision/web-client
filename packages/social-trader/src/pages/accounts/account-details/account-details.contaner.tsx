@@ -58,7 +58,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
         isOwnAsset={true}
-        logo={description.brokerDetails.logo}
+        logo={description.brokerDetails.logoUrl}
         title={title}
         id={description.id}
         currency={description.tradingAccountInfo.currency}

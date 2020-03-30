@@ -31,7 +31,7 @@ const _FacetCard: React.FC<Props> = ({
           <div className="facet__logo-wrapper">
             <ImageBase
               quality={"Medium"}
-              src={facet.logo}
+              src={facet.logoUrl}
               alt={facet.title}
               defaultImage={facetImg}
               className="facet__logo"

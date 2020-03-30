@@ -114,7 +114,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <AssetEdit
         editError={editError}
         title={description.publicInfo.title}
-        logo={{ src: description.publicInfo.logo }}
+        logo={{ src: description.publicInfo.logoUrl }}
         description={description.publicInfo.description}
         onSubmit={editProgram}
       />

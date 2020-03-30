@@ -20,7 +20,7 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
       title={title}
       schemas={[getManagerSchema(profile)]}
       description={profile.about || title}
-      previewImage={filesService.getFileUrl(profile.avatar)}
+      previewImage={profile.logoUrl}
     >
       <Row className="manager-page__container" center={false} wide>
         <RowItem className="manager-page__info" bottomOffset>

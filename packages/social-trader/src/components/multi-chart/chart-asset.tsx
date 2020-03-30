@@ -29,7 +29,7 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
         )}
       >
         <div className="multi-chart__asset-name">
-          <AssetAvatar url={asset.logo} alt={asset.title} />
+          <AssetAvatar url={asset.logoUrl} alt={asset.title} />
           <div className="multi-chart__asset-name">{asset.title}</div>
         </div>
       </Link>

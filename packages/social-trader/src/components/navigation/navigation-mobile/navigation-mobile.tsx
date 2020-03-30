@@ -25,7 +25,7 @@ const _NavigationMobile: React.FC<Props> = ({
       {isAuthenticated && profileHeader && (
         <div className="mobile__header">
           <ProfileAvatar
-            url={profileHeader.avatar}
+            url={profileHeader.logoUrl}
             alt={profileHeader.email}
             className="mobile__avatar"
           />

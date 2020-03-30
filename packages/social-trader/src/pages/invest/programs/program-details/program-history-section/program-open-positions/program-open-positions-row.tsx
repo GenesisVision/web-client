@@ -32,7 +32,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       <CurrencyItem
         clickable={position.assetData ? position.assetData.hasAssetInfo : false}
         url={position.assetData ? position.assetData.url : ""}
-        logo={position.assetData ? position.assetData.icon : ""}
+        logo={position.assetData ? position.assetData.logoUrl : ""}
         small
         name={position.symbol}
         symbol={position.symbol}

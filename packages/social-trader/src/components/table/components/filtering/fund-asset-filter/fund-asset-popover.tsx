@@ -33,7 +33,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
               <RowItem>
                 <CurrencyItem
                   url={asset.url}
-                  logo={asset.icon}
+                  logo={asset.logoUrl}
                   name={asset.name}
                   small
                 />

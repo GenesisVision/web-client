@@ -29,7 +29,7 @@ const _PortfolioEventsTableRow: React.FC<Props> = ({
             <PortfolioEventLogo
               withAsset={eventLocation !== EVENT_LOCATION.Asset}
               assetDetails={event.assetDetails}
-              icon={event.icon}
+              icon={event.logoUrl}
             />
           )
         }

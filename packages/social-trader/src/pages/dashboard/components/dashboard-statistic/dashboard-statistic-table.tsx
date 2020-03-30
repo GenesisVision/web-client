@@ -50,7 +50,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
                     <PortfolioEventLogo
                       withAsset={true}
                       assetDetails={event.assetDetails}
-                      icon={event.icon}
+                      icon={event.logoUrl}
                     />
                   )}
                 </div>

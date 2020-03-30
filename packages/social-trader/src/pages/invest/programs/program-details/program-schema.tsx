@@ -15,5 +15,5 @@ export const getSchema = (details: ProgramDescriptionDataType) => ({
   description: details.publicInfo.description,
   broker: details.brokerDetails.name,
   feesAndCommissionsSpecification: "", //TODO
-  logo: filesService.getFileUrl(details.publicInfo.logo)
+  logo: details.publicInfo.logoUrl
 });

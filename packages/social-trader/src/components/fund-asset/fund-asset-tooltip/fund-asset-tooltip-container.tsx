@@ -33,7 +33,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
         target={asset.mandatoryFundPercent}
         symbol={asset.asset}
         asset={asset.asset}
-        icon={asset.icon}
+        icon={asset.logoUrl}
         currency={asset.asset as CurrencyEnum} //TODO remove when api update
         type={type}
         last={idx === assetsLength - 1}
