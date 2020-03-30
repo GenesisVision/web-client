@@ -96,7 +96,7 @@ const _Investment: React.FC<Props> = ({
             managementFeePersonal !== undefined &&
             managementFeePersonal !== null
           }
-          label={t("program-details-page.description.managementFee")}
+          label={t("program-details-page.description.personal-management-fee")}
           accent
         >
           <NumberFormat
