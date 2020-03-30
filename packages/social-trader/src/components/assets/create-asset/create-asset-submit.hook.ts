@@ -1,14 +1,13 @@
 import { Push } from "components/link/link";
 import { CREATE_ASSET } from "constants/constants";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import { TErrorMessage } from "hooks/error-message.hook";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
-import { sendEventToGA } from "utils/ga";
 
 import {
   createAsset,
@@ -31,7 +30,7 @@ const useCreateAssetSubmit = ({
   asset
 }: TUseCreateAssetSubmitProps): TUseCreateAssetSubmitOutput => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const checkConditionMiddleware = (data: any) => {
     if (!condition || condition(data)) {
       dispatch(fetchWallets(currency));

@@ -8,12 +8,12 @@ import {
   TableSelectorType
 } from "components/table/components/table.types";
 import { CREATE_ASSET } from "constants/constants";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
@@ -56,7 +56,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   isOwnProgram,
   title
 }) => {
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);

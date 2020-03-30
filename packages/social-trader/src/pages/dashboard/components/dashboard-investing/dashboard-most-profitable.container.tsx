@@ -1,3 +1,4 @@
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import {
   fetchDashboardInvestmentsFundsAction,
   fetchDashboardInvestmentsMostProfitableAction,
@@ -10,12 +11,11 @@ import { dashboardInvestmentsMostProfitableItemsSelector } from "pages/dashboard
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 
 const _DashboardInvestingMostProfitableContainer: React.FC = () => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const data = useSelector(dashboardInvestmentsMostProfitableItemsSelector);
   useEffect(() => {
     dispatch(

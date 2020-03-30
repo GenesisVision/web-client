@@ -9,10 +9,10 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import { FundDetailsFull } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 import filesService from "services/file-service";
 import {
   createFundNotificationsToUrl,
@@ -30,7 +30,7 @@ import { dispatchFundDescriptionWithId } from "./services/fund-details.service";
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const handleDispatchDescription = useCallback(() => {
     dispatch(
       dispatchFundDescriptionWithId(description.id, undefined, currency)

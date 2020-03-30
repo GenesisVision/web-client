@@ -1,12 +1,15 @@
-import { updateAccountSettingsCurrencyAction } from "actions/account-settings-actions";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
-import { Dispatch } from "redux";
-import { setCookie } from "utils/cookie";
-import { ActionType, CurrencyEnum } from "utils/types";
+import profileApi from "services/api-client/profile-api";
+import authService from "services/auth-service";
+import { setAccountCurrency } from "utils/account-currency";
+import { CurrencyEnum } from "utils/types";
 
-export const updateCurrency = (currency: CurrencyEnum) => (
-  dispatch: Dispatch<ActionType>
-) => {
-  setCookie(ACCOUNT_CURRENCY_KEY, currency);
-  dispatch(updateAccountSettingsCurrencyAction(currency));
+export const updateCurrency = (currency: CurrencyEnum) => {
+  setAccountCurrency(currency);
+};
+
+export const postAccountCurrency = (currency: CurrencyEnum) => {
+  const authorization = authService.getAuthArg();
+  return profileApi
+    .updateUserPlatformCurrency(authorization, { currency })
+    .then(() => currency);
 };

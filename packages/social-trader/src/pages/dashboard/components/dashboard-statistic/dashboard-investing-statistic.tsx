@@ -1,11 +1,10 @@
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
 import { TDashboardInvestingStatistic } from "pages/dashboard/dashboard.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { INVESTMENTS_ROUTE } from "routes/dashboard.routes";
 import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "routes/invest.routes";
 
@@ -15,7 +14,7 @@ const _DashboardInvestingStatistic: React.FC<Props> = ({
   landscapeTablet,
   tablet
 }) => {
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   return (
     <DashboardStatisticContainer
