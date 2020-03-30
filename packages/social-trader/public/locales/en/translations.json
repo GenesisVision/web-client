@@ -399,6 +399,7 @@
     "memberSince": "Member Since"
   },
   "deposit-asset": {
+    "management-fee": "Management fee",
     "title": "Invest",
     "gv-commission": "GV commission",
     "available-in-wallet": "Available in wallet",
@@ -1033,6 +1034,7 @@
         "balance": "Balance",
         "profit": "Profit",
         "success-fee": "Success fee",
+        "management-fee": "Management fee",
         "entry-fee": "Entry fee",
         "deposit-withdraw": "Deposit/Withdraw",
         "commission-rebate": "GV commission rebate"
@@ -1152,6 +1154,7 @@
       }
     },
     "tooltip": {
+      "management-fee": "The сommission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
       "auto-join": {
         "text": "In the event a program hits the Stop-Out limit:",
         "li-1": "“Ignore SO” is turned off → your investment (minus losses) is returned to your wallet.",
@@ -2353,7 +2356,7 @@
         },
         "upload-logo": "Upload program logo",
         "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
-        "entry-fee": "Entry fee",
+        "management-fee": "Management fee",
         "success-fee": "Success fee",
         "signal-success-fee": "Signal success fee",
         "signal-volume-fee": "Volume fee",
@@ -2363,8 +2366,8 @@
       "hints": {
         "trades-delay": "Description about Trades delay is here",
         "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
-        "entry-fee": "Description about entry fee is here",
-        "entry-fee-description": "A fee charged upon each investment in the program.",
+        "management-fee": "Description about management fee is here",
+        "management-fee-description": "A fee charged charged for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
         "success-fee": "Description about success fee is here",
         "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
         "subscription-fee": "Description about subscription fee is here",
