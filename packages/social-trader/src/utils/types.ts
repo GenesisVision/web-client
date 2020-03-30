@@ -108,6 +108,7 @@ export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
 
 export type FeesType = {
+  managementFeePersonal?: number;
   entryFee?: number;
   entryFeeSelected?: number;
   entryFeeCurrent?: number;

@@ -1,7 +1,7 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { ASSET } from "constants/constants";
+import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import {
   Currency,
   InvestmentEventLocation,
@@ -14,11 +14,6 @@ import {
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import assetsApi from "services/api-client/assets-api";
-import brokersApi from "services/api-client/brokers-api";
-import eventsApi from "services/api-client/events-api";
-import notificationsApi from "services/api-client/notifications-api";
-import platformApi from "services/api-client/platform-api";
 import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import {
@@ -49,6 +44,34 @@ import {
   subscriptionsTableSelector,
   tradesTableSelector
 } from "../reducers/program-history.reducer";
+
+type ClosePositionMethodType = (
+  id: string,
+  options: {
+    symbol?: string;
+  }
+) => Promise<any>;
+
+export const getCloseOpenPositionMethod = (
+  assetType?: TRADE_ASSET_TYPE
+): ClosePositionMethodType => {
+  switch (assetType) {
+    case TRADE_ASSET_TYPE.FOLLOW:
+      return api.follows().closeAssetTrade;
+    case TRADE_ASSET_TYPE.ACCOUNT:
+      return api.accounts().closeAccountAssetTrade;
+    case TRADE_ASSET_TYPE.PROGRAM:
+    default:
+      return api.programs().closeAssetTrade;
+  }
+};
+
+export const closePosition = (assetType?: TRADE_ASSET_TYPE) => {
+  const method = getCloseOpenPositionMethod(assetType);
+  return ({ id, symbol }: { id: string; symbol?: string }) => {
+    return method(id, { symbol });
+  };
+};
 
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType

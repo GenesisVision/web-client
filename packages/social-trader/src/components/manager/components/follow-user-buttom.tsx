@@ -14,7 +14,7 @@ const _FollowUserButton: React.FC<Props> = ({ id, value, disabled }) => {
   });
   const handleClick = useCallback(() => {
     return sendRequest({ id, value: innerValue });
-  }, []);
+  }, [id, innerValue]);
   return (
     <GVButton
       variant={innerValue ? "outlined" : "contained"}
@@ -24,7 +24,9 @@ const _FollowUserButton: React.FC<Props> = ({ id, value, disabled }) => {
       onClick={handleClick}
       disabled={isPending || disabled}
     >
-      {t("manager-page.follow-user")}
+      {innerValue
+        ? t("manager-page.unfollow-user")
+        : t("manager-page.follow-user")}
     </GVButton>
   );
 };

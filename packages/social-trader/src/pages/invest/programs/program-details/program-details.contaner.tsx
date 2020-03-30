@@ -4,7 +4,7 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
-import { ASSET } from "constants/constants";
+import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
@@ -212,9 +212,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsInvestment
         isOwnAsset={isOwnAsset}
         fees={{
-          successFee: programDetails && programDetails.successFeeCurrent,
-          successFeePersonal:
-            programPersonalDetails && programPersonalDetails.successFeePersonal
+          managementFeePersonal: isOwnAsset
+            ? programPersonalDetails?.managementFeePersonal
+            : undefined,
+          successFee: programDetails?.successFeeCurrent,
+          successFeePersonal: programPersonalDetails?.successFeePersonal
         }}
         dispatchDescription={handleDispatchDescription}
         asset={assetType}
@@ -227,6 +229,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       {showFollowStatistic && <FollowDetailsStatisticSection />}
       {showProgramStatistic && <ProgramDetailsStatisticSection />}
       <ProgramDetailsHistorySection
+        assetType={(route as unknown) as TRADE_ASSET_TYPE}
+        canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
         getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
         tablesData={tablesData}
         showCommissionRebateSometime={

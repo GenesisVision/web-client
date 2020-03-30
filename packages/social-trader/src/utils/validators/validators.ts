@@ -5,9 +5,15 @@ export const emailValidator = string()
   .email("Invalid email address.")
   .required("Email is required.");
 
-export const passwordValidator = string()
-  .min(8, "Password must be at least 8 characters.")
-  .required("Password is required.");
+export const passwordValidator = (t: i18next.TFunction) =>
+  string()
+    .min(
+      6,
+      t("auth.password-restore.validators.password-is-short", {
+        count: 6
+      })
+    )
+    .required(t("auth.password-restore.validators.password-required"));
 
 export const ethGvtWalletValidator = string().matches(
   /^0x[a-fA-F0-9]{40}$/,

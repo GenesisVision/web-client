@@ -4,14 +4,11 @@ import {
   FundDetailsListItemItemsViewModel,
   ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
-export const followUser = (id: string) =>
-  api.social().followUser(id, authService.getAuthArg());
+export const followUser = (id: string) => api.social().followUser(id);
 
-export const unFollowUser = (id: string) =>
-  api.social().unfollowUser(id, authService.getAuthArg());
+export const unFollowUser = (id: string) => api.social().unfollowUser(id);
 
 export const toggleFollowUser = ({
   id,

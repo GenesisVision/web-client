@@ -19,9 +19,8 @@ const calcDelay = (token: any) => {
 
 const refreshToken = (ctx?: NextPageContext, token?: any) => {
   const isAuth = authService.isAuthenticated(ctx, token);
-  const innerToken = token || authService.getTokenData(ctx);
   if (isAuth && !isDelayed) {
-    const delay = calcDelay(innerToken);
+    const delay = calcDelay(authService.getTokenData(ctx));
 
     timeoutId = setTimeout(() => {
       if (isAuth) {
