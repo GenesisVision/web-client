@@ -75,7 +75,7 @@ const _EventItem: React.FC<Props> = ({
   countShowingItems,
   title,
   text,
-  icon,
+  logoUrl,
   assetUrl,
   userUrl,
   color,
@@ -145,7 +145,7 @@ const _EventItem: React.FC<Props> = ({
             alt={title}
             color={color}
             className="events-list__item-image"
-            src={icon}
+            src={logoUrl}
           />
         </div>
       </Link>

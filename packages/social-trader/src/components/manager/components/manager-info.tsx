@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
-  profile: { username, about, avatar, regDate, id, socialLinks }
+  profile: { username, about, logoUrl, regDate, id, socialLinks }
 }) => {
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
@@ -25,7 +25,7 @@ const _ManagerInfo: React.FC<Props> = ({
       <Row>
         <DefaultBlock solid wide size={SIZES.LARGE}>
           <Row>
-            <ProfileAvatar url={avatar} big />
+            <ProfileAvatar url={logoUrl} big />
           </Row>
           <Row onlyOffset large>
             <Row>

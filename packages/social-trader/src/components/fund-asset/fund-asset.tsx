@@ -1,5 +1,3 @@
-import "./fund-asset.scss";
-
 import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { RowItem } from "components/row-item/row-item";
@@ -7,6 +5,8 @@ import { Row } from "components/row/row";
 import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+
+import "./fund-asset.scss";
 
 export enum FUND_ASSET_TYPE {
   LARGE = "large",
@@ -25,7 +25,7 @@ const _FundAsset: React.FC<Props> = ({
   last,
   removable,
   removeHandle,
-  icon,
+  logoUrl,
   className,
   asset: name,
   ...other
@@ -67,7 +67,7 @@ const _FundAsset: React.FC<Props> = ({
             <RowItem small>
               <CurrencyItem
                 url={url}
-                logo={icon}
+                logo={logoUrl}
                 small
                 name={!!currency && currencyName}
                 symbol={currency}

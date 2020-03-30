@@ -34,7 +34,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { t } = useTranslation();
   const {
     status,
-    logo,
+    logoUrl,
     level,
     levelProgress,
     color,
@@ -58,7 +58,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell">
         <Link to={programLinkProps}>
           <AssetAvatarWithName
-            url={logo}
+            url={logoUrl}
             level={level}
             levelProgress={levelProgress}
             alt={program.title}

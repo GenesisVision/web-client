@@ -33,7 +33,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     totalProfit,
     openTolerancePercent,
     mode,
-    asset: { url, title, logo, color, programDetails }
+    asset: { url, title, logoUrl, color, programDetails }
   } = provider;
   const { linkCreator } = useToLink();
   const level = programDetails ? programDetails.level : undefined;
@@ -51,7 +51,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
         >
           <div className="subscriptions-table__center-cell">
             <AssetAvatarWithName
-              url={logo}
+              url={logoUrl}
               alt={title}
               color={color}
               level={level}

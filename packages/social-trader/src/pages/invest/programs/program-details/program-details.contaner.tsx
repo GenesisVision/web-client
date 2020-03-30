@@ -68,7 +68,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const {
     programDetails,
     followDetails,
-    publicInfo: { isOwnAsset, title, status, url, logo, color },
+    publicInfo: { isOwnAsset, title, status, url, logoUrl, color },
     owner: { username, url: ownerUrl, socialLinks },
     tradingAccountInfo: { currency, leverageMax, leverageMin },
     tags,
@@ -136,7 +136,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         detailsType={DETAILS_TYPE.ASSET}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
-        logo={logo}
+        logo={logoUrl}
         title={title}
         id={id}
         subtitle={username}

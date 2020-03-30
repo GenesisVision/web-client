@@ -45,11 +45,11 @@ export type TagToComponentType = {
 };
 
 const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
-  platformAssetDetails: { name, icon, url }
+  platformAssetDetails: { name, logoUrl, url }
 }) => {
   return (
     <TagBlock>
-      <CurrencyItem name={name} url={url} logo={icon} />
+      <CurrencyItem name={name} url={url} logo={logoUrl} />
     </TagBlock>
   );
 };
@@ -84,7 +84,7 @@ const _ProgramLink: React.FC<IAssetTagProps> = ({
 export const ProgramLink = React.memo(_ProgramLink);
 
 const _ProgramTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logo, title, url }
+  assetDetails: { logoUrl: logo, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -115,7 +115,7 @@ const _FundLink: React.FC<IAssetTagProps> = ({
 export const FundLink = React.memo(_FundLink);
 
 const _FundTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logo, title, url }
+  assetDetails: { logoUrl: logo, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -146,7 +146,7 @@ const _FollowLink: React.FC<IAssetTagProps> = ({
 export const FollowLink = React.memo(_FollowLink);
 
 const _FollowTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logo, title, url }
+  assetDetails: { logoUrl: logo, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (

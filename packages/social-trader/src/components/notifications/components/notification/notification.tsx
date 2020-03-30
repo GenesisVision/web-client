@@ -36,7 +36,7 @@ const getStaticIconUrl = (type: string): string | null => {
 const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   type,
   url,
-  logo,
+  logoUrl,
   color,
   closeNotifications,
   assetType
@@ -56,7 +56,7 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   return (
     <Tag to={to} onClick={closeNotifications} className="notification__icon">
       <AssetAvatar
-        url={logo}
+        url={logoUrl}
         alt={type}
         className="notification__icon-logo"
         color={color}
