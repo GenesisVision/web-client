@@ -41,10 +41,11 @@ const _SignInContainer: React.FC<Props> = ({
     dispatch(authActions.updateTokenAction(true));
     Router.push(redirectFrom);
   };
-  const saveAccountCurrencyMiddleware = () => {
-    getHeader().then(({ platformCurrency }) => {
-      setAccountCurrency(platformCurrency);
-    });
+  const saveAccountCurrencyMiddleware = (res: any) => {
+    if (res)
+      getHeader().then(({ platformCurrency }) => {
+        setAccountCurrency(platformCurrency);
+      });
   };
 
   const { email, password = "" } = getTwoFactorState();
