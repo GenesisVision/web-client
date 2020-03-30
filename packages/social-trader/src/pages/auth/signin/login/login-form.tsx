@@ -29,7 +29,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.email]: "",
       [FIELDS.password]: ""
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 

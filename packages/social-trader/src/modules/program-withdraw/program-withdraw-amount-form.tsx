@@ -80,7 +80,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
           <MutedText noWrap={false}>{t("withdraw-program.all-text")}</MutedText>
         </Row>
       )}
-      <Row hide={withdrawAll}>
+      <Row onlyOffset hide={withdrawAll}>
         <InputAmountField
           name={WITHDRAW_FORM_FIELDS.amount}
           label={t("withdraw-program.amount-to-withdraw")}

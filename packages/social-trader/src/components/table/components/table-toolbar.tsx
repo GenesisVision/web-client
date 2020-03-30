@@ -42,19 +42,23 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
 
   if (hide) return null;
 
+  const showTitle = title && !disableTitle;
+  const showMappings = renderMappings && updateFilter && filtering;
+  const showSortingFilter = view === LIST_VIEW.CARDS && sorting !== undefined;
   return (
     <Row className="table__toolbar">
-      {title && !disableTitle && (
+      {!showTitle && !showMappings && !showSortingFilter && <div />}
+      {showTitle && (
         <RowItem>
           <h3 className="table__title">{title}</h3>
         </RowItem>
       )}
-      {renderMappings && updateFilter && filtering && (
+      {showMappings && (
         <RowItem>
-          <Row wrap>{renderMappings(updateFilter, filtering)}</Row>
+          <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
         </RowItem>
       )}
-      {view === LIST_VIEW.CARDS && sorting !== undefined && (
+      {showSortingFilter && (
         <SortingFilter
           sorting={sorting}
           columns={columns}

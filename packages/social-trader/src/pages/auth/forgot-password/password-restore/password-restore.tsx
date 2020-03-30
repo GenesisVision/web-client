@@ -6,6 +6,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { passwordValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
 enum FIELDS {
@@ -21,9 +22,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.confirmPassword]: ""
     },
     validationSchema: object().shape({
-      [FIELDS.password]: string()
-        .min(6, t("auth.password-restore.validators.password-weak"))
-        .required(t("auth.password-restore.validators.password-required")),
+      [FIELDS.password]: passwordValidator(t),
       [FIELDS.confirmPassword]: string()
         .oneOf(
           [ref(FIELDS.password)],
