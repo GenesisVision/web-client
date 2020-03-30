@@ -34,6 +34,7 @@ export const followDetailsLoaderDataCreator = (): FollowDetailsListItem => ({
   tags: tagsLoaderDataCreator(),
   id: "",
   logo: "",
+  logoUrl: "",
   url: "",
   color: "#858585",
   title: getRandomWord(),

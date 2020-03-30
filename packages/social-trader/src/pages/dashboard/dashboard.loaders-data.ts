@@ -32,6 +32,7 @@ export const getInRequestsData = (): TDashboardRequest => ({
     withdrawPercent: 0,
     id: "",
     logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -103,9 +104,11 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
 
 const getEventLoaderData = (): TDashboardEvent => ({
   icon: "",
+  logoUrl: "",
   assetDetails: {
     id: "",
     logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -165,6 +168,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     },
     id: "",
     logo: "",
+    logoUrl: "",
     title: getRandomWords(7),
     url: "",
     color: getRandomColor()

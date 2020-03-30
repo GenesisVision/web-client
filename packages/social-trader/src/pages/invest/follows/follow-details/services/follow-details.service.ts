@@ -1,8 +1,6 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { NextPageContext } from "next";
-import followApi from "services/api-client/follow-api";
 import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
 import { MiddlewareDispatch } from "utils/types";
 
 import {
@@ -13,9 +11,7 @@ import {
 } from "../actions/follow-details.actions";
 
 export const fetchFollowDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  api.follows(Token.create(ctx)).getFollowAssetDetails(id, {
-    authorization: authService.getAuthArg(ctx)
-  });
+  api.follows(Token.create(ctx)).getFollowAssetDetails(id);
 
 export const dispatchFollowDescription = (id: string) => (
   ctx?: NextPageContext

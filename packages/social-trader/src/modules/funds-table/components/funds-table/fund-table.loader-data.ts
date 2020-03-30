@@ -14,6 +14,7 @@ const assetLoaderDataCreator = (): FundAssetPercent => ({
   name: "Genesis Vision",
   percent: getRandomInteger(0, 100),
   icon: "",
+  logoUrl: "",
   url: "genesis-vision-token"
 });
 const assetsLoaderDataCreator = (): FundAssetPercent[] =>
@@ -36,6 +37,7 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsListItem => ({
   },
   id: "",
   logo: "",
+  logoUrl: "",
   url: "",
   color: getRandomColor(),
   title: "Fund name",

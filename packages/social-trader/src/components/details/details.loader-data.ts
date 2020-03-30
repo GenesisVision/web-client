@@ -6,6 +6,7 @@ export const managerLoaderData: ProfilePublic = {
   id: "",
   username: "Manager name",
   avatar: "",
+  logoUrl: "",
   registrationDate: mockDate,
   url: "",
   socialLinks: []

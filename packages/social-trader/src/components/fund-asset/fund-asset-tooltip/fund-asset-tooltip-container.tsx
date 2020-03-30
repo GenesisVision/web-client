@@ -28,6 +28,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
       <FundAsset
         bottomOffset={bottomOffset}
         url={asset.url}
+        logoUrl={asset.logoUrl}
         current={asset.percent}
         target={asset.mandatoryFundPercent}
         symbol={asset.asset}

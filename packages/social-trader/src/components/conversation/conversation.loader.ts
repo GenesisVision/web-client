@@ -42,6 +42,7 @@ const getTagLoaderData = (): PostTag => ({
     id: "",
     color: "",
     logo: "",
+    logoUrl: "",
     programDetails: { level: 0, levelProgress: 0 }
   },
   type: "Program",
@@ -57,6 +58,7 @@ const getTagLoaderData = (): PostTag => ({
     description: "string",
     icon: "string",
     color: "string",
+    logoUrl: "",
     mandatoryFundPercent: 0,
     url: "string"
   }
@@ -109,7 +111,8 @@ const mockImages = [
 ];
 
 export const getConversationImageLoaderData = (): IConversationImage => ({
-  image: mockImages[getRandomInteger(0, mockImages.length - 1)]
+  image: mockImages[getRandomInteger(0, mockImages.length - 1)],
+  resizes: []
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
@@ -123,6 +126,7 @@ export const getConversationUserLoaderData = (): IConversationUser => ({
   socialLinks: [],
   registrationDate: new Date(),
   avatar: "",
+  logoUrl: "",
   id: uuid.v4(),
   username: getRandomWord(getRandomInteger(8, 50)),
   url: ""

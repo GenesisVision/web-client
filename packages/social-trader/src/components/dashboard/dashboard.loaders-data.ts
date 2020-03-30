@@ -9,11 +9,13 @@ import {
 const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   title: getRandomWords(6),
   icon: "",
+  logoUrl: "",
   date: new Date(),
   assetDetails: {
     programDetails: { level: 0, levelProgress: 0 },
     id: "",
     logo: "",
+    logoUrl: "",
     color: getRandomColor(),
     title: getRandomWord(),
     url: "",

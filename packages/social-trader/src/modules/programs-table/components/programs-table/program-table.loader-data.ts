@@ -35,6 +35,7 @@ export const programDetailsLoaderDataCreator = (): ProgramDetailsListItem => ({
   tags: tagsLoaderDataCreator(),
   id: "",
   logo: "",
+  logoUrl: "",
   url: "",
   color: getRandomColor(),
   title: "Program",
