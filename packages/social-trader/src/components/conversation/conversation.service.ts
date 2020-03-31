@@ -13,8 +13,8 @@ import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
-export const sharePost = (values: RePost) => {
-  return api.social().rePost({ body: values });
+export const rePost = (body: RePost) => {
+  return api.social().rePost({ body });
 };
 
 export const pinPost = (id: string) => {
