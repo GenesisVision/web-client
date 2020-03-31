@@ -11,15 +11,16 @@ import {
   NotificationType,
   ProgramFollowDetailsFull
 } from "gv-api-web";
-import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import authService from "services/auth-service";
 import {
   ApiActionResponse,
   CurrencyEnum,
   MiddlewareDispatch,
+  NextPageWithReduxContext,
   RootThunk
 } from "utils/types";
 
@@ -86,7 +87,7 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
 
 export const dispatchProgramDescriptionWithId = (
   id: string,
-  token = Token.create(),
+  token?: Token,
   asset: ASSET = ASSET.PROGRAM
 ): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => dispatch => {
   const action =
@@ -97,7 +98,7 @@ export const dispatchProgramDescriptionWithId = (
 };
 
 export const dispatchProgramDescription = (
-  ctx?: NextPageContext,
+  ctx?: NextPageWithReduxContext,
   asset?: ASSET
 ): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => (
   dispatch,
@@ -109,7 +110,7 @@ export const dispatchProgramDescription = (
   return dispatch(
     dispatchProgramDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      Token.create(ctx),
+      ctx?.token,
       asset
     )
   );

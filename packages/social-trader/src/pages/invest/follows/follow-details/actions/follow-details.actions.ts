@@ -4,10 +4,10 @@ import {
 } from "components/chart/chart-period/chart-period.helpers";
 import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
-import { AccountBalanceChart, ProgramBalanceChart } from "gv-api-web";
+import { AccountBalanceChart } from "gv-api-web";
 import { FollowAbsoluteProfitChartDataType } from "pages/invest/follows/follow-details/reducers/absolute-profit-chart.reducer";
-import followApi from "services/api-client/follow-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -79,7 +79,7 @@ export const fetchFollowBalanceChartAction = (
 
 export const fetchFollowDescriptionAction = (
   id: string,
-  token: Token
+  token?: Token
 ): ApiAction<FollowDetailsDataType> => ({
   type: FETCH_FOLLOW_DESCRIPTION,
   payload: api.follows(token).getFollowAssetDetails(id)

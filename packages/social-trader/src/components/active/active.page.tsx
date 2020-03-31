@@ -1,7 +1,6 @@
 import Page from "components/page/page";
 import { AssetInfo } from "gv-api-web";
 import React from "react";
-import filesService from "services/file-service";
 
 import Active from "./active";
 import { getActiveLoaderData } from "./service/active.service";

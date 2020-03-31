@@ -1,7 +1,6 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { ProgramWithdrawType } from "modules/program-withdraw/program-withdraw-popup";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const getProgramWithdrawInfo = ({
   id

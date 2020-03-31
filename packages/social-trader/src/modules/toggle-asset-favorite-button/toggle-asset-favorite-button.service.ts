@@ -1,6 +1,6 @@
 import { ASSET } from "constants/constants";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 
 import {
   addFavoriteFollowAction,

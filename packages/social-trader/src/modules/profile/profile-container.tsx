@@ -1,7 +1,7 @@
 import { ProfileFullViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 
 import Profile from "./profile";
 

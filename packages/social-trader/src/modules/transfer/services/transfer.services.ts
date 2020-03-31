@@ -3,7 +3,7 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import { InternalTransferRequest } from "gv-api-web";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 

@@ -6,7 +6,6 @@ import { getFiltersFromContext } from "modules/programs-table/services/programs-
 import ProgramsPage from "pages/invest/programs/programs.page";
 import React from "react";
 import { GLOBAL_TABLE_VIEW } from "reducers/tables-view-reducer";
-import { Token } from "services/api-client/swagger-custom-client";
 import { getCookie } from "utils/cookie";
 import { NextPageWithRedux } from "utils/types";
 
@@ -16,14 +15,13 @@ const Page: NextPageWithRedux<{}> = () => {
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  const token = Token.create(ctx);
 
   const tableView =
     (getCookie(GLOBAL_TABLE_VIEW, ctx) as LIST_VIEW) || LIST_VIEW.CARDS;
   try {
     await Promise.all([
       ctx.reduxStore.dispatch(
-        programTableActions.fetchProgramsAction(filtering, token)
+        programTableActions.fetchProgramsAction(filtering, ctx.token)
       ),
       ctx.reduxStore.dispatch(updateGlobalTableViewAction(tableView))
     ]);

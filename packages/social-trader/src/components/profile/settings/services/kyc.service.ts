@@ -1,6 +1,4 @@
-import profileApi from "services/api-client/profile-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const loadKycIFrame = () => {
   const $script = require("scriptjs");

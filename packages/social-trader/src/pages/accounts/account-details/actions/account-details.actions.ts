@@ -11,9 +11,8 @@ import {
   TradesViewModel
 } from "gv-api-web";
 import { AccountAbsoluteProfitChartDataType } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
-import accountsApi from "services/api-client/accounts-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -87,7 +86,7 @@ export const fetchAccountBalanceChartAction = (
 
 export const fetchAccountDescriptionAction = (
   id: string,
-  token: Token
+  token?: Token
 ): ApiAction<AccountDetailsDataType> => ({
   type: FETCH_ACCOUNT_DESCRIPTION,
   payload: api.accounts(token).getTradingAccountDetails(id)

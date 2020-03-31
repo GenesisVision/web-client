@@ -8,7 +8,6 @@ import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import filesService from "services/file-service";
 
 import "./manager.page.scss";
 

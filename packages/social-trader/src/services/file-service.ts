@@ -3,9 +3,10 @@ import { composeRequestValueFunc } from "components/table/components/filtering/d
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { handleErrors } from "gv-api-web/src/utils";
 import * as qs from "qs";
+import Token from "services/api-client/token";
 import { getApiUrl, getPublicRuntimeConfig } from "utils/config-helpers";
 
-import { api, Token } from "./api-client/swagger-custom-client";
+import { api } from "./api-client/swagger-custom-client";
 
 const SERVER_QUERY_DATE_RANGE_MIN_FILTER_NAME = "DateFrom";
 const SERVER_QUERY_DATE_RANGE_MAX_FILTER_NAME = "DateTo";

@@ -6,8 +6,12 @@ import { NextPageContext } from "next";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import { ActionType, MiddlewareDispatch } from "utils/types";
+import { api } from "services/api-client/swagger-custom-client";
+import {
+  ActionType,
+  MiddlewareDispatch,
+  NextPageWithReduxContext
+} from "utils/types";
 
 import {
   fetchAccountAbsoluteProfitChartAction,
@@ -35,9 +39,9 @@ export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
   api.accounts().getTradingAccountDetails(id);
 
 export const dispatchAccountDescription = (id: string) => (
-  ctx?: NextPageContext
+  ctx?: NextPageWithReduxContext
 ) => async (dispatch: MiddlewareDispatch) => {
-  return await dispatch(fetchAccountDescriptionAction(id, Token.create(ctx)));
+  return await dispatch(fetchAccountDescriptionAction(id, ctx?.token));
 };
 
 export const dispatchAccountId = (id: string) => async (

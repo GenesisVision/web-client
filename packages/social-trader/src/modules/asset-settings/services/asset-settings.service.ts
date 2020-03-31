@@ -1,9 +1,6 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { ProgramUpdate } from "gv-api-web";
-import assetsApi from "services/api-client/assets-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
-import filesService from "services/file-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const checkClosed = (status: string) => {
   switch (status) {

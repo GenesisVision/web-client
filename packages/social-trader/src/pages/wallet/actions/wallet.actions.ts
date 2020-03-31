@@ -2,7 +2,8 @@ import { FilteringType } from "components/table/components/filtering/filter.type
 import { Currency, WalletSummary } from "gv-api-web";
 import { WalletsAvailableStateType } from "pages/wallet/reducers/wallet.reducers";
 import { fetchAvailableWallets } from "pages/wallet/services/wallet.services";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import { WalletLastUpdateState } from "../reducers/wallet-last-update";
@@ -39,7 +40,7 @@ interface UpdateAccountTimestampAction extends ActionType<Date> {
 
 export const fetchWalletsAction = (
   currency: Currency,
-  token: Token
+  token?: Token
 ): FetchWalletAction => {
   return {
     type: WALLET_BALANCE,

@@ -1,4 +1,3 @@
-import platformApi from "services/api-client/platform-api";
 import { api } from "services/api-client/swagger-custom-client";
 
 export const getLandingAssets = () =>

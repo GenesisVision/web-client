@@ -11,7 +11,8 @@ import {
   ReallocationModelItemsViewModel
 } from "gv-api-web";
 import { FundAbsoluteProfitChartDataType } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {

@@ -1,8 +1,6 @@
 import { TwoFactorAuthenticator } from "gv-api-web";
 import { IGoogleActivateStepFormValues } from "modules/2fa/google-auth/google-auth-steps/google-auth-activate-step";
-import assetsApi from "services/api-client/assets-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 import { IConfirmProgramProps } from "../confirm-container";
 

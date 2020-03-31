@@ -1,5 +1,5 @@
 import { AmountWithCurrency, ProgramMinInvestAmount } from "gv-api-web";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";

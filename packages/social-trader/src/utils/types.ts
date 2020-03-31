@@ -15,7 +15,7 @@ import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
 import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { Token } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 

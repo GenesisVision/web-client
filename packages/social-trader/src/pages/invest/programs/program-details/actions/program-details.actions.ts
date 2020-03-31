@@ -6,7 +6,8 @@ import { TStatisticCurrencyAction } from "components/details/reducers/statistic-
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
 import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-events-table.constants";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -110,7 +111,7 @@ export const fetchProgramBalanceChartAction = (
 
 export const fetchProgramDescriptionAction = (
   id: string,
-  token: Token
+  token?: Token
 ): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
   payload: api.programs(token).getProgramDetails(id)

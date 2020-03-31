@@ -16,7 +16,6 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import filesService from "services/file-service";
 import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl

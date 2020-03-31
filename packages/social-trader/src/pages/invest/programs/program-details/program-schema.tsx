@@ -1,5 +1,3 @@
-import filesService from "services/file-service";
-
 import { ProgramDescriptionDataType } from "./program-details.types";
 
 const isFollow = (description: ProgramDescriptionDataType) => {

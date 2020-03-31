@@ -1,4 +1,4 @@
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 
 const enableReinvesting = (id: string) =>
   api.investments().switchReinvestOn(id);

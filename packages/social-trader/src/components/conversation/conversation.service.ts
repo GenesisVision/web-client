@@ -11,7 +11,7 @@ import searchApi from "services/api-client/search-api";
 import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
-import { getRandomBoolean, getRandomInteger } from "utils/helpers";
+import { getRandomBoolean } from "utils/helpers";
 
 export const sharePost = (id: string) => {
   return mockRequest(id);

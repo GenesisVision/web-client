@@ -1,6 +1,6 @@
 import { TFunction } from "i18next";
-import { api, Token } from "services/api-client/swagger-custom-client";
-import { number, object, string } from "yup";
+import { api } from "services/api-client/swagger-custom-client";
+import { number, object } from "yup";
 
 export type DemoDepositResponse = Promise<void>;
 

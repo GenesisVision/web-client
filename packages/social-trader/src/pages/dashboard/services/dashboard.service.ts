@@ -17,11 +17,8 @@ import {
   TDashboardTotal,
   TDashboardTradingStatistic
 } from "pages/dashboard/dashboard.types";
-import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
-import investmentsApi from "services/api-client/investments-api";
-import { api, Token } from "services/api-client/swagger-custom-client";
-// import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { getDefaultDateRange } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
 

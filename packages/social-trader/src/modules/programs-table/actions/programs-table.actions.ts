@@ -3,7 +3,8 @@ import {
   ProgramDetailsListItemItemsViewModel,
   ProgramsFilterSorting
 } from "gv-api-web";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ActionType } from "utils/types";
 
 export const PROGRAMS = "PROGRAMS";

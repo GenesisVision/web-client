@@ -4,7 +4,7 @@ import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
 
 const _CancelRequestButton: React.FC<{
   onApplyCancelRequest: () => void;
