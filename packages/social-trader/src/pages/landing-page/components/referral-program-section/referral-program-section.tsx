@@ -1,12 +1,12 @@
-import "./referral-program-section.scss";
-
 import { useTranslation } from "i18n";
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
 import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
-const renderLastItem = (t: i18next.TFunction) => (
+import "./referral-program-section.scss";
+
+const renderLastItem = (t: TFunction) => (
   <p className="advantages-section__text">{t("referral-program.text-4")}</p>
 );
 

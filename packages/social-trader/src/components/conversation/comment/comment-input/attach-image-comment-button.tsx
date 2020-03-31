@@ -1,6 +1,6 @@
 import ImageBaseElement from "components/avatar/image-base.element";
-import React, { useCallback } from "react";
 import { CommentInputButton } from "components/conversation/comment/comment-input/comment-input-button";
+import React, { useCallback } from "react";
 
 const _AttachImageCommentButton: React.FC<Props> = ({ onClick }) => {
   const handleClick = useCallback(() => {

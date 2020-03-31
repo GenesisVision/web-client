@@ -1,8 +1,8 @@
-import "./tooltip-content.scss";
-
 import classNames from "classnames";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import React from "react";
+
+import "./tooltip-content.scss";
 
 const _TooltipContent: React.FC<Props> = ({
   small,

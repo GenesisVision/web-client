@@ -1,7 +1,7 @@
-import "./email-confirm-failure.scss";
-
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+
+import "./email-confirm-failure.scss";
 
 const _EmailConfirmSuccess: React.FC = () => {
   const [t] = useTranslation();

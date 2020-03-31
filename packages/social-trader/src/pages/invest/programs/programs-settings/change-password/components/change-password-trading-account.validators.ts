@@ -1,4 +1,4 @@
-import i18next, { TFunction } from "i18next";
+import { TFunction, WithT } from "i18next";
 import { twoFactorValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
@@ -6,7 +6,7 @@ interface IChangePasswordTradingAccountValidationSchema {
   twoFactorEnabled: boolean;
 }
 
-const passwordValidator = ({ t }: i18next.WithT) => {
+const passwordValidator = ({ t }: WithT) => {
   return string()
     .min(8, t("password-change-trading-account.validators.password-is-short"))
     .max(32, t("password-change-trading-account.validators.password-is-long"))

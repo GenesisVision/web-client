@@ -9,7 +9,7 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { getTokenName } from "utils/get-token-name";
 
-import translates from "../../public/locales/en/translations.json";
+import translates from "../../public/static/locales/en/translations.json";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env.production" });
