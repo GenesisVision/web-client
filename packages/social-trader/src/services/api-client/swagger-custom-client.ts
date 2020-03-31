@@ -15,6 +15,7 @@ import {
   ProfileApi,
   ProgramsApi,
   RateApi,
+  SearchApi,
   SignalApi,
   SocialApi,
   TradingaccountApi,
@@ -33,42 +34,15 @@ export const isBrowser = () => {
   return process.browser;
 };
 
-class AuthClient extends ApiClient {
-  token?: Token;
-
-  constructor(apiUrl?: string, token?: Token) {
-    super(apiUrl);
-    this.token = token;
-  }
-  fetch(input: RequestInfo, init?: RequestInit) {
-    const auth = this.token?.getHeader();
-
-    return fetch(input, {
-      ...init,
-      headers: {
-        ...init?.headers,
-        ...auth
-      }
-    });
-  }
-
-  public static create(token?: Token) {
-    return new AuthClient(apiUrl, token);
-  }
-}
-
 class Client extends ApiClient {
   token: Token;
-  authApi: AuthApi;
 
   constructor(
     apiUrl: string = "https://localhost/api",
-    token: Token,
-    authApi: AuthApi
+    token: Token = Token.create()
   ) {
     super(apiUrl);
     this.token = token;
-    this.authApi = authApi;
   }
 
   async fetch(input: RequestInfo, init?: RequestInit) {
@@ -82,8 +56,8 @@ class Client extends ApiClient {
     });
   }
 
-  public static create(token: Token = Token.create(), authApi: AuthApi) {
-    return new Client(apiUrl, token, authApi);
+  public static create(token?: Token) {
+    return new Client(apiUrl, token);
   }
 }
 
@@ -91,67 +65,68 @@ const client = new ApiClient(apiUrl);
 export default client;
 
 export class Api {
-  token: Token = Token.create();
+  auth = (token?: Token): AuthApi =>
+    withApiProxy(new AuthApi(Client.create(token)));
 
-  auth = (token: Token = this.token): AuthApi =>
-    withApiProxy(new AuthApi(AuthClient.create(token)));
+  profile = (token?: Token): ProfileApi =>
+    withApiProxy(new ProfileApi(Client.create(token)));
 
-  profile = (token: Token = this.token): ProfileApi =>
-    withApiProxy(new ProfileApi(Client.create(token, this.auth(token))));
+  dashboard = (token?: Token): DashboardApi =>
+    withApiProxy(new DashboardApi(Client.create(token)));
 
-  dashboard = (token: Token = this.token): DashboardApi =>
-    withApiProxy(new DashboardApi(Client.create(token, this.auth(token))));
+  platform = (token?: Token): PlatformApi =>
+    withApiProxy(new PlatformApi(Client.create(token)));
 
-  platform = (token: Token = this.token): PlatformApi =>
-    withApiProxy(new PlatformApi(Client.create(token, this.auth(token))));
+  programs = (token?: Token): ProgramsApi =>
+    withApiProxy(new ProgramsApi(Client.create(token)));
 
-  programs = (token: Token = this.token): ProgramsApi =>
-    withApiProxy(new ProgramsApi(Client.create(token, this.auth(token))));
+  investments = (token?: Token): InvestmentsApi =>
+    withApiProxy(new InvestmentsApi(Client.create(token)));
 
-  investments = (token: Token = this.token): InvestmentsApi =>
-    withApiProxy(new InvestmentsApi(Client.create(token, this.auth(token))));
+  funds = (token?: Token): FundsApi =>
+    withApiProxy(new FundsApi(Client.create(token)));
 
-  funds = (token: Token = this.token): FundsApi =>
-    withApiProxy(new FundsApi(Client.create(token, this.auth(token))));
+  notifications = (token?: Token): NotificationsApi =>
+    withApiProxy(new NotificationsApi(Client.create(token)));
 
-  notifications = (token: Token = this.token): NotificationsApi =>
-    withApiProxy(new NotificationsApi(Client.create(token, this.auth(token))));
+  events = (token?: Token): EventsApi =>
+    withApiProxy(new EventsApi(Client.create(token)));
 
-  events = (token: Token = this.token): EventsApi =>
-    withApiProxy(new EventsApi(Client.create(token, this.auth(token))));
+  follows = (token?: Token): FollowApi =>
+    withApiProxy(new FollowApi(Client.create(token)));
 
-  follows = (token: Token = this.token): FollowApi =>
-    withApiProxy(new FollowApi(Client.create(token, this.auth(token))));
+  files = (token?: Token): FileApi =>
+    withApiProxy(new FileApi(Client.create(token)));
 
-  files = (token: Token = this.token): FileApi =>
-    withApiProxy(new FileApi(Client.create(token, this.auth(token))));
+  assets = (token?: Token): AssetsApi =>
+    withApiProxy(new AssetsApi(Client.create(token)));
 
-  assets = (token: Token = this.token): AssetsApi =>
-    withApiProxy(new AssetsApi(Client.create(token, this.auth(token))));
+  accounts = (token?: Token): TradingaccountApi =>
+    withApiProxy(new TradingaccountApi(Client.create(token)));
 
-  accounts = (token: Token = this.token): TradingaccountApi =>
-    withApiProxy(new TradingaccountApi(Client.create(token, this.auth(token))));
+  wallet = (token?: Token): WalletApi =>
+    withApiProxy(new WalletApi(Client.create(token)));
 
-  wallet = (token: Token = this.token): WalletApi =>
-    withApiProxy(new WalletApi(Client.create(token, this.auth(token))));
+  social = (token?: Token): SocialApi =>
+    withApiProxy(new SocialApi(Client.create(token)));
 
-  social = (token: Token = this.token): SocialApi =>
-    withApiProxy(new SocialApi(Client.create(token, this.auth(token))));
+  signal = (token?: Token): SignalApi =>
+    withApiProxy(new SignalApi(Client.create(token)));
 
-  signal = (token: Token = this.token): SignalApi =>
-    withApiProxy(new SignalApi(Client.create(token, this.auth(token))));
+  users = (token?: Token): UsersApi =>
+    withApiProxy(new UsersApi(Client.create(token)));
 
-  users = (token: Token = this.token): UsersApi =>
-    withApiProxy(new UsersApi(Client.create(token, this.auth(token))));
+  partnership = (token?: Token): PartnershipApi =>
+    withApiProxy(new PartnershipApi(Client.create(token)));
 
-  partnership = (token: Token = this.token): PartnershipApi =>
-    withApiProxy(new PartnershipApi(Client.create(token, this.auth(token))));
+  brokers = (token?: Token): BrokersApi =>
+    withApiProxy(new BrokersApi(Client.create(token)));
 
-  brokers = (token: Token = this.token): BrokersApi =>
-    withApiProxy(new BrokersApi(Client.create(token, this.auth(token))));
+  rate = (token?: Token): RateApi =>
+    withApiProxy(new RateApi(Client.create(token)));
 
-  rate = (token: Token = this.token): RateApi =>
-    withApiProxy(new RateApi(Client.create(token, this.auth(token))));
+  search = (token?: Token): SearchApi =>
+    withApiProxy(new SearchApi(Client.create(token)));
 }
 
 export const api = new Api();

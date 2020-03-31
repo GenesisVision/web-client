@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { NextPageContext } from "next";
+import { isBrowser } from "services/api-client/swagger-custom-client";
 import authService, { TokenDto } from "services/auth-service";
 
 const EXPIRE_TIME = 60 * 60;
@@ -11,8 +12,16 @@ export default class Token {
     this.token = authService.getAuthArg(ctx);
   }
   public static create(ctx?: NextPageContext) {
+    if (!isBrowser() && typeof ctx === "undefined") {
+      try {
+        new Error("Attention!!! Token was defined on server without ctx!!!");
+      } catch (e) {
+        console.warn(e.stack);
+      }
+    }
     return new Token(ctx);
   }
+
   isExist = (): boolean => {
     return this.token.length > 0;
   };

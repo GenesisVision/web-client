@@ -145,11 +145,7 @@ export const getPeriodHistory = (programId: string) => (
 export const getFinancialStatistics = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchFinancialStatisticAction(programId, {
-    authorization,
-    ...filters
-  });
+  return fetchFinancialStatisticAction(programId, filters);
 };
 
 export const getSubscriptions = (programId: string) => (

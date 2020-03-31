@@ -118,10 +118,10 @@ export const searchAsset = (text: string): Promise<AssetSearchResult[]> => {
   const trimmedQuery = text.trim();
   const filters: RequestFilters = {
     take: 10,
-    mask: trimmedQuery,
-    authorization: authService.getAuthArg()
+    mask: trimmedQuery
   };
-  return searchApi
+  return api
+    .search()
     .search(filters)
     .then(({ programs, funds, follows, managers }) => {
       const programsNames: AssetSearchResult[] = programs.items.map(

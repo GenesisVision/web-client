@@ -9,8 +9,7 @@ import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import { IDataModel } from "constants/constants";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
-import programApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { NextPageWithReduxContext } from "utils/types";
 
 import { FetchProgramsFiltersType } from "../actions/programs-table.actions";
@@ -25,10 +24,7 @@ const DEFAULT_ITEMS_ON_PAGE = 12;
 export const fetchPrograms = (
   filters: any //FetchProgramsFiltersType TODO
 ): Promise<IDataModel> => {
-  return programApi.getPrograms({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+  return api.programs().getPrograms(filters);
 };
 
 export const getFiltersFromContext = ({

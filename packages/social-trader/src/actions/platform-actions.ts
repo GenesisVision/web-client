@@ -4,10 +4,12 @@ import { ApiAction } from "utils/types";
 
 export const PLATFORM_SETTINGS = "PLATFORM_SETTINGS";
 
-const fetchPlatformSettingsAction = (): ApiAction<PlatformInfo> => ({
-  type: PLATFORM_SETTINGS,
-  payload: api.platform().getPlatformInfo()
-});
+const fetchPlatformSettingsAction = (): ApiAction<PlatformInfo> => {
+  return {
+    type: PLATFORM_SETTINGS,
+    payload: api.platform().getPlatformInfo()
+  };
+};
 
 const platformActions = {
   fetchPlatformSettings: fetchPlatformSettingsAction
