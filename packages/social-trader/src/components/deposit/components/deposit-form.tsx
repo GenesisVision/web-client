@@ -127,6 +127,7 @@ const _DepositForm: React.FC<Props> = ({
         />
         {!ownAsset && (
           <InvestorFees
+            asset={asset}
             fees={fees}
             hasEntryFee={hasEntryFee}
             amount={+amount}
