@@ -25,10 +25,10 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
         onAction={handleAction}
       />
       <TableRow stripy onClick={setOpenPopup}>
-        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
+        <TableCell className="wallet-deposits-withdrawals__cell">
           {formatDate(transaction.date)}
         </TableCell>
-        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
+        <TableCell className="wallet-deposits-withdrawals__cell">
           <Status withText status={transaction.status} />
         </TableCell>
         <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">

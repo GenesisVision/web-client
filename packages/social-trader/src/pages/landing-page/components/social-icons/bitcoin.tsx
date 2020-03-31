@@ -9,9 +9,9 @@ export const BitcoinIcon: React.FC = () => (
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="Page-1" stroke="none" strokeWidth="1" fillRule="evenodd">
-        <g id="main_1600" transform="translate(-1248.000000, -8078.000000)">
-          <g id="Group-16-Copy" transform="translate(671.000000, 8064.000000)">
+      <g stroke="none" strokeWidth="1" fillRule="evenodd">
+        <g transform="translate(-1248.000000, -8078.000000)">
+          <g transform="translate(671.000000, 8064.000000)">
             <g id="Group-3" transform="translate(560.000000, 0.000000)">
               <g
                 id="Group-12-Copy-3"

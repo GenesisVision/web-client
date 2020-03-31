@@ -1,39 +1,41 @@
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
-import {
-  TAddNotification,
-  TRemoveNotification
-} from "modules/asset-notifications/asset-notifications.types";
-import {
-  addNotificationSettingAction,
-  fetchNotificationSettingsAction,
-  removeNotificationSettingAction
-} from "modules/notification-settings/actions/notification-settings.actions";
-import { NextPageContext } from "next";
+import { ASSETS_TYPES } from "constants/constants";
+import { NotificationSettingConditionType, NotificationType } from "gv-api-web";
+import notificationsApi from "services/api-client/notifications-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
-import { MiddlewareDispatch } from "utils/types";
 
-export const fetchNotificationSettings = (ctx?: NextPageContext) => async (
-  dispatch: MiddlewareDispatch
-) => {
-  const authorization = authService.getAuthArg(ctx);
-  await dispatch(fetchNotificationSettingsAction(authorization));
+export const fetchNotificationSettings = () => {
+  return api.notifications().getNotificationsSettings();
 };
 
-export const removeNotification: TRemoveNotification = (
-  { id },
-  message
-) => dispatch =>
-  ((dispatch(removeNotificationSettingAction(id)) as unknown) as Promise<
-    void
-  >).then(() => {
-    dispatch(fetchNotificationSettings());
-    dispatch(alertMessageActions.success(message));
-  });
+export const removeNotificationMethod = ({ id }: { id: string }) =>
+  api.notifications().removeNotificationsSettings(id);
 
-export const addNotification: TAddNotification = (opts, message) => dispatch =>
-  ((dispatch(addNotificationSettingAction(opts)) as unknown) as Promise<
-    void
-  >).then(() => {
-    dispatch(fetchNotificationSettings());
-    dispatch(alertMessageActions.success(message));
-  });
+export interface IAddNotificationSettingProps {
+  assetId?: string;
+  managerId?: string;
+  type?: NotificationType;
+  conditionType?: NotificationSettingConditionType;
+  conditionAmount?: number;
+}
+export const addNotificationMethod = (opts: IAddNotificationSettingProps) =>
+  api.notifications().addNotificationsSettings(opts);
+
+export const toggleNotificationMethod = ({
+  id,
+  enabled
+}: {
+  id: string;
+  enabled: boolean;
+}) => api.notifications().toggleNotificationSettings(id, enabled);
+
+export const getFundNotifications = (id: string) =>
+  api.notifications().getNotificationsFundSettings(id);
+
+export const getProgramNotifications = (id: string) =>
+  api.notifications().getNotificationsProgramSettings(id);
+
+export const getAssetNotifications = (assetType: ASSETS_TYPES) =>
+  assetType === ASSETS_TYPES.Fund
+    ? getFundNotifications
+    : getProgramNotifications;

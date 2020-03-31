@@ -5,7 +5,7 @@ import tableReducerFactory, {
 } from "components/table/reducers/table.reducer";
 import {
   DashboardTradingAsset,
-  ItemsViewModelDashboardTradingAsset
+  DashboardTradingAssetItemsViewModel
 } from "gv-api-web";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
@@ -15,7 +15,7 @@ export const DASHBOARD_INVESTMENTS_MOST_PROFITABLE =
   "DASHBOARD_INVESTMENTS_MOST_PROFITABLE";
 
 export type TInvestmentsMostProfitableItems = DashboardTradingAsset;
-export type TInvestmentsMostProfitableStateData = ItemsViewModelDashboardTradingAsset;
+export type TInvestmentsMostProfitableStateData = DashboardTradingAssetItemsViewModel;
 export type TInvestmentsMostProfitableState = ITableState<
   TInvestmentsMostProfitableStateData
 >;

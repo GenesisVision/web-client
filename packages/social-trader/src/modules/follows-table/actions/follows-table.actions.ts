@@ -1,14 +1,14 @@
-import { ItemsViewModelFollowDetailsListItem } from "gv-api-web";
-import followApi from "services/api-client/follow-api";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
+import { api } from "services/api-client/swagger-custom-client";
 import { ActionType } from "utils/types";
 
 export const FOLLOWS = "FOLLOWS";
 
 export const fetchFollowsAction = (
   filters: FetchSignalAssetsFilterType
-): ActionType<Promise<ItemsViewModelFollowDetailsListItem>> => ({
+): ActionType<Promise<FollowDetailsListItemItemsViewModel>> => ({
   type: FOLLOWS,
-  payload: followApi.getFollowAssets(filters)
+  payload: api.follows().getFollowAssets(filters)
 });
 
 export type FetchSignalAssetsFilterType = {

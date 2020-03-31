@@ -1,13 +1,13 @@
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { TradingAccountPwdUpdate } from "gv-api-web";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const changePasswordTradingAccount = ({
   id,
   model
 }: {
   id: string;
-  model?: any;
+  model?: TradingAccountPwdUpdate;
 }) =>
-  assetsApi.changeTradingAccountPassword(id, authService.getAuthArg(), {
+  api.assets().changeTradingAccountPassword(id, {
     body: model
   });

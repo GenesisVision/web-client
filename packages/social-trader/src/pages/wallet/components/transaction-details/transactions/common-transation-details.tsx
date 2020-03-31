@@ -1,13 +1,12 @@
-import "../transaction-details.scss";
-
 import classNames from "classnames";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogTop } from "components/dialog/dialog-top";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import Crashable from "decorators/crashable";
@@ -45,20 +44,17 @@ const TransactionDetailsListItem: React.FC<{
   const { linkCreator } = useToLink();
   return (
     <StatisticItem label={title}>
-      <div className="transaction-details__details-list-statistic-item">
-        <div
-          className={classNames(
-            "transaction-details__details-list-statistic-item-value",
-            {
-              "transaction-details__details-list-statistic-item-value--long":
-                details.length > 40
-            }
-          )}
+      <Row>
+        <RowItem
+          className={classNames({
+            "transaction-details__details-list-statistic-item-value--long":
+              details.length > 40
+          })}
         >
           {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
-        </div>
-        {canCopy && <CopyButton value={details} text />}
-      </div>
+        </RowItem>
+        <RowItem>{canCopy && <CopyButton value={details} text />}</RowItem>
+      </Row>
     </StatisticItem>
   );
 });
@@ -67,9 +63,9 @@ const TransactionDetailsItem: React.FC<{
   label: string;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
   return (
-    <DialogField>
+    <Row>
       <StatisticItem label={label}>{children}</StatisticItem>
-    </DialogField>
+    </Row>
   );
 };
 
@@ -79,9 +75,7 @@ const TransactionStatusBlock: React.FC<{
   const [t] = useTranslation();
   return (
     <TransactionDetailsItem label={t(`transactions-details.status.title`)}>
-      <div className="external-transaction__status">
-        <Status withText status={status} />
-      </div>
+      <Status withText status={status} />
     </TransactionDetailsItem>
   );
 });
@@ -92,7 +86,7 @@ const _TransactionAssetBlock: React.FC<{
 }> = ({ asset }) => {
   return (
     <TransactionDetailsItem label={asset.description}>
-      <TransactionAsset url={asset.logo} data={asset} />
+      <TransactionAsset url={asset.logoUrl} data={asset} />
     </TransactionDetailsItem>
   );
 };
@@ -110,7 +104,7 @@ const _TransactionWalletBlock: React.FC<{
         <WalletConvert wallets={wallets} />
       ) : (
         <CurrencyItem
-          logo={walletFirst.logo}
+          logo={walletFirst.logoUrl}
           name={walletFirst.currency}
           clickable={false}
         />
@@ -141,8 +135,8 @@ const _CommonTransactionDetails: React.FC<Props> = ({
         {data.details && <TransactionDetailsItemsBlock items={data.details} />}
         <TransactionStatusBlock status={data.status} />
         {data.actions && (
-          <DialogField>
-            <div className="external-transaction__actions">
+          <Row>
+            <Row className="external-transaction__actions">
               {data.actions.canCancel && (
                 <ActionButton
                   onClick={handleCancel}
@@ -155,8 +149,8 @@ const _CommonTransactionDetails: React.FC<Props> = ({
                   text={t("buttons.resend-email")}
                 />
               )}
-            </div>
-          </DialogField>
+            </Row>
+          </Row>
         )}
       </DialogBottom>
     </>

@@ -3,7 +3,7 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";
-import { ItemsViewModelReallocationModel } from "gv-api-web";
+import { ReallocationModelItemsViewModel } from "gv-api-web";
 import { RootState } from "reducers/root-reducer";
 
 import {
@@ -12,7 +12,7 @@ import {
   FUND_REBALANCING_FILTERS
 } from "../fund-details.constants";
 
-type TFundReallocateHistoryData = ItemsViewModelReallocationModel;
+type TFundReallocateHistoryData = ReallocationModelItemsViewModel;
 export type TReallocateHistoryState = ITableState<TFundReallocateHistoryData>;
 
 const fundReallocateHistorySelector = (state: RootState) =>

@@ -1,12 +1,16 @@
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import { InjectedFormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import {
+  CAPTCHA_STATUS,
+  CaptchaStatusContext
+} from "pages/auth/captcha-container";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useCallback, useContext } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
 enum FIELDS {
@@ -14,45 +18,60 @@ enum FIELDS {
   email = "email"
 }
 
-const _RecoveryCodeForm: React.FC<InjectedFormikProps<
-  Props,
-  IRecoveryCodeFormValues
->> = ({ t, handleSubmit, isSubmitting, error }) => (
-  <form
-    id="recoveryForm"
-    className="recovery-form"
-    onSubmit={handleSubmit}
-    noValidate
-  >
-    <h3>{t("auth.login.recovery.title")}</h3>
-    <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
-    <GVFormikField
-      name={FIELDS.code}
-      placeholder="Recovery code"
-      autoFocus
-      component={GVTextField}
-    />
-    <FormError error={error} />
-    <GVButton
-      id="recoverySubmit"
-      disabled={isSubmitting}
-      type="submit"
-      className="recovery-form__submit"
-    >
-      {t("auth.login.recovery.continue")}
-    </GVButton>
-  </form>
-);
+const _RecoveryCodeForm: React.FC<Props> = ({
+  errorMessage,
+  email,
+  onSubmit
+}) => {
+  const [t] = useTranslation();
+  const form = useForm<IRecoveryCodeFormValues>({
+    defaultValues: {
+      [FIELDS.code]: ""
+    },
+    validationSchema: object().shape({
+      [FIELDS.code]: string()
+        .trim()
+        .required(t("auth.login.recovery.validation.recovery-is-required"))
+    }),
+    mode: "onChange"
+  });
 
-interface Props extends OwnProps, WithTranslation {}
+  const { code } = form.watch();
 
-interface OwnProps {
+  const requestStatus = useContext(CaptchaStatusContext);
+
+  const handleSubmit = useCallback(() => {
+    return onSubmit({ code, email });
+  }, [code, email]);
+
+  return (
+    <HookForm className="recovery-form" form={form} onSubmit={handleSubmit}>
+      <h3>{t("auth.login.recovery.title")}</h3>
+      <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
+      <GVHookFormField
+        name={FIELDS.code}
+        placeholder="Recovery code"
+        autoFocus
+        component={SimpleTextField}
+      />
+      <FormError error={errorMessage} />
+      <SubmitButton
+        id="recoverySubmit"
+        isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+        isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+        disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+        className="recovery-form__submit"
+      >
+        {t("auth.login.recovery.continue")}
+      </SubmitButton>
+    </HookForm>
+  );
+};
+
+interface Props {
   email: string;
-  onSubmit(
-    data: IRecoveryCodeFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
-  error: string;
+  onSubmit: (data: IRecoveryCodeFormValues) => void;
+  errorMessage: string;
 }
 
 export interface IRecoveryCodeFormValues {
@@ -60,24 +79,5 @@ export interface IRecoveryCodeFormValues {
   [FIELDS.email]: string;
 }
 
-const RecoveryCodeForm = compose<React.FC<OwnProps>>(
-  translate(),
-  withFormik<Props, IRecoveryCodeFormValues>({
-    displayName: "recoveryForm",
-    mapPropsToValues: ({ email }) => ({
-      [FIELDS.code]: "",
-      [FIELDS.email]: email
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({
-        [FIELDS.code]: string()
-          .trim()
-          .required(t("auth.login.recovery.validation.recovery-is-required"))
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_RecoveryCodeForm);
+const RecoveryCodeForm = React.memo(_RecoveryCodeForm);
 export default RecoveryCodeForm;

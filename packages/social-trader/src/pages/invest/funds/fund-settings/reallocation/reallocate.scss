@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors.scss";
-@import "~shared/styles/_breakpoint.scss";
-@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
 
 .reallocate-container {
   &__header {
@@ -20,12 +20,9 @@
     }
   }
 
-  .fund-assets {
-    flex-direction: row;
-    .fund-asset {
-      &--default {
-        background: rgba(255, 255, 255, 0.06);
-      }
+  .fund-asset {
+    &--default {
+      background: rgba(255, 255, 255, 0.06);
     }
   }
 }

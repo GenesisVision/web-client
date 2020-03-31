@@ -11,18 +11,7 @@ $remove-button-size-mobile: $remove-button-size/1.2;
 $remove-button-color: #293842;
 
 .fund-assets {
-  display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-
-  @include media-breakpoint-landscape-phone() {
-    align-items: center;
-  }
-
-  &--no-wrap {
-    flex-wrap: nowrap;
-  }
 
   &__container {
     padding: $padding-xsmall;
@@ -45,15 +34,9 @@ $remove-button-color: #293842;
   @include height($asset-height);
   @include font-size($font-size-small);
   @include line-height($font-size-small);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   @include adaptive-full-padding($padding-xxsmall);
   @include adaptive-border-radius($border-radius-middle);
   font-weight: 400;
-  @include adaptive-margin(right, $padding-xsmall/2);
-  @include adaptive-margin(bottom, $padding-xsmall/2);
   position: relative;
   &:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -111,10 +94,6 @@ $remove-button-color: #293842;
     flex-direction: row;
     align-items: center;
     width: 100%;
-  }
-
-  &__currency {
-    @include adaptive-padding(right, $padding-xxsmall);
   }
 
   &__currency-full {

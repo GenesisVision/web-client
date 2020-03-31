@@ -1,15 +1,15 @@
-import "./auth-layout.scss";
-
 import GvBrand from "components/gv-brand/gv-brand";
 import GvLogo from "components/gv-logo/gv-logo";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { Row } from "components/row/row";
 import { NextPage } from "next";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { HOME_ROUTE } from "routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
+import "./auth-layout.scss";
 
 const _AuthLayout: NextPage<Props> = ({
   quoteNo,
@@ -46,7 +46,9 @@ const _AuthLayout: NextPage<Props> = ({
       <div className="auth__right">
         <div className="auth__content">
           {titleKey && <h1>{t(titleKey)}</h1>}
-          {children}
+          <Row large onlyOffset>
+            {children}
+          </Row>
         </div>
         {Footer && (
           <div className="auth__footer">

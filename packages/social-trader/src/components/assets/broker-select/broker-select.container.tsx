@@ -1,5 +1,3 @@
-import "./broker-select.scss";
-
 import { BrokerSelectLoaderData } from "components/assets/asset.helpers";
 import Crashable from "decorators/crashable";
 import { Broker } from "gv-api-web";

@@ -3,10 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .details-description-control {
-  @include adaptive-margin(bottom, $padding-xsmall);
-  text-align: center;
-  display: flex;
-  align-items: center;
   justify-content: flex-end;
   &--button {
     cursor: pointer;
@@ -51,7 +47,6 @@
   }
   &__text {
     @include font-size($font-size-common);
-    @include adaptive-padding(right, $padding-xsmall);
     color: $main-color;
     font-weight: 600;
     letter-spacing: 0.3px;

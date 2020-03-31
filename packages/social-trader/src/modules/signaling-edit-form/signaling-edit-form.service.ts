@@ -1,10 +1,8 @@
 import { CreateSignalProvider } from "gv-api-web";
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const editSignal = (body: CreateSignalProvider) => {
-  const authorization = authService.getAuthArg();
-  return assetsApi.updateSignalProviderSettings(authorization, {
+  return api.assets().updateSignalProviderSettings({
     body
   });
 };

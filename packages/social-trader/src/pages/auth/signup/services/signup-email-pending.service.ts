@@ -1,14 +1,8 @@
-import { RootThunk } from "utils/types";
+import { api } from "services/api-client/swagger-custom-client";
 
-import { resendConfirmationLinkAction } from "../actions/signup.actions";
-
-export const sendConfirmationLink = (): RootThunk<void> => (
-  dispatch,
-  getState
-) => {
-  let { email } = getState().emailPending;
-  dispatch(
-    resendConfirmationLinkAction({
+export const sendConfirmationLink = (email: string) => () =>
+  api.auth().resendConfirmationLink({
+    body: {
       email,
       captchaCheckResult: {
         id: "",
@@ -17,6 +11,5 @@ export const sendConfirmationLink = (): RootThunk<void> => (
         },
         geeTest: {}
       }
-    })
-  );
-};
+    }
+  });

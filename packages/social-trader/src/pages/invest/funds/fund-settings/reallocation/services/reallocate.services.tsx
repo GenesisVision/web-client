@@ -3,8 +3,7 @@ import {
   ALERT_ACTIONS_FIELDS,
   alertMessageActions
 } from "modules/alert-message/actions/alert-message-actions";
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { MiddlewareDispatch } from "utils/types";
 
 export const updateAssets = ({
@@ -13,17 +12,10 @@ export const updateAssets = ({
 }: {
   id: string;
   assets: FundAssetPart[];
-}) => (dispatch: MiddlewareDispatch): Promise<void> => {
-  const authorization = authService.getAuthArg();
-  return assetsApi
-    .updateFundAssets(id, authorization, {
-      body: assets
-    })
-    .then(() => {
-      dispatch(
-        alertMessageActions.success("reallocate.success-alert-message", true)
-      );
-    });
+}) => {
+  return api.assets().updateFundAssets(id, {
+    body: assets
+  });
 };
 export const alert = (
   // TODO What is it?..

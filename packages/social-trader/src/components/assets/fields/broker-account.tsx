@@ -1,5 +1,5 @@
 import AssetField from "components/assets/asset-fields/asset-field";
-import GVFormikField from "components/gv-formik-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import Select from "components/select/select";
 import { onSelectChange } from "components/select/select.test-helpers";
@@ -33,7 +33,7 @@ const _BrokerAccount: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <AssetField>
-      <GVFormikField
+      <GVHookFormField
         wide
         name={name}
         component={GVTextField}
@@ -47,7 +47,7 @@ const _BrokerAccount: React.FC<Props> = ({
             {accountType.name}
           </option>
         ))}
-      </GVFormikField>
+      </GVHookFormField>
     </AssetField>
   );
 };

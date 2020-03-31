@@ -2,39 +2,58 @@ import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import Select from "components/select/select";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
-import { FormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
+import Select, { ISelectChangeEvent } from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback, useState } from "react";
 import {
-  useTranslation,
-  WithTranslation,
-  withTranslation as translate
-} from "react-i18next";
-import { compose } from "redux";
+  CHANGE_BROKER_FORM_FIELDS,
+  ChangeBrokerFormValues,
+  HuobiWarning
+} from "pages/invest/programs/programs-settings/change-broker/change-broker-form.helpers";
+import React, { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
-import { SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
 
 import ConfirmChangeBroker from "./confirm-change-broker";
 
 const _ChangeBrokerForm: React.FC<Props> = ({
+  errorMessage,
   isSignalProgram,
   currentLeverage,
-  handleSubmit,
-  values,
-  dirty,
-  isSubmitting,
-  setFieldValue,
-  t,
+  onSubmit,
   data: { brokers, currentAccountTypeId }
 }) => {
+  const [t] = useTranslation();
+  const [brokerFrom] = useState<Broker>(
+    safeGetElemFromArray(
+      brokers,
+      broker =>
+        !!broker.accountTypes.find(
+          accountType => accountType.id === currentAccountTypeId
+        )
+    )
+  );
+  const form = useForm<ChangeBrokerFormValues>({
+    defaultValues: {
+      [CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId]: currentAccountTypeId,
+      [CHANGE_BROKER_FORM_FIELDS.leverage]: currentLeverage
+    },
+    mode: "onBlur"
+  });
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { dirty, isSubmitting, isSubmitted }
+  } = form;
+  const { brokerAccountTypeId } = watch();
   const [
     isChangeBrokerOpen,
     setChangeBrokerOpen,
@@ -59,84 +78,88 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     (brokerName: string) => () => {
       const broker = safeGetElemFromArray(brokers, x => x.name === brokerName);
       const account =
-        brokerName === values[FIELDS.brokerFrom].name
+        brokerName === brokerFrom.name
           ? safeGetElemFromArray(
               broker.accountTypes,
               accountType => accountType.id === currentAccountTypeId
             )
           : broker.accountTypes[0];
       const leverage =
-        brokerName === values[FIELDS.brokerFrom].name
-          ? currentLeverage
-          : account.leverages[0];
+        brokerName === brokerFrom.name ? currentLeverage : account.leverages[0];
       setSelectedBroker(broker);
       setAccount(account);
-      setFieldValue(FIELDS.brokerAccountTypeId, account.id);
-      setFieldValue(FIELDS.leverage, leverage);
+      setValue(CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId, account.id, true);
+      setValue(CHANGE_BROKER_FORM_FIELDS.leverage, leverage, true);
     },
-    [brokers, values, currentLeverage, setFieldValue, currentAccountTypeId]
+    [brokers, currentLeverage, setValue, currentAccountTypeId]
   );
   const changeAccount = useCallback(
-    ({ target }) => {
+    ({ target: { value } }: ISelectChangeEvent) => {
       setAccount(
         safeGetElemFromArray(
           selectedBroker.accountTypes,
-          account => account.id === target.value
+          account => account.id === value
         )
       );
     },
     [selectedBroker]
   );
-  const { brokerAccountTypeId, brokerFrom } = values;
+  const changeLeverage = useCallback(
+    ({ target: { value } }: ISelectChangeEvent) => {
+      setValue(CHANGE_BROKER_FORM_FIELDS.leverage, +value, true);
+    },
+    [selectedBroker, setValue]
+  );
+  const handleOnApply = useCallback(() => {
+    return handleSubmit(onSubmit);
+  }, [handleSubmit, onSubmit]);
   return (
-    <form id="change-broker-form" onSubmit={handleSubmit}>
-      <div className="program-settings__block-wrapper--broker-list">
+    <HookForm form={form} onSubmit={onSubmit}>
+      <Row wrap>
         {brokers.map(broker => (
-          <BrokerCard
-            logo={broker.logo}
-            key={broker.name}
-            brokerName={broker.name}
-            isSelected={broker.name === selectedBroker.name}
-            onSelect={selectBroker}
-            cardState={BROKER_CARD_EXTRA_STATE.NONE}
-            tags={broker.tags}
-          />
+          <RowItem bottomOffset key={broker.name}>
+            <BrokerCard
+              logo={broker.logoUrl}
+              brokerName={broker.name}
+              isSelected={broker.name === selectedBroker.name}
+              onSelect={selectBroker}
+              cardState={BROKER_CARD_EXTRA_STATE.NONE}
+              tags={broker.tags}
+            />
+          </RowItem>
         ))}
-      </div>
-      <div className="gv-text-field__wrapper">
-        <GVFormikField
-          name={FIELDS.brokerAccountTypeId}
-          component={GVTextField}
-          label={t("create-program-page.settings.fields.account-type")}
-          InputComponent={Select}
-          disableIfSingle
-          onChange={changeAccount}
-        >
-          {selectedBroker.accountTypes.map(account => (
-            <option value={account.id} key={account.id}>
-              {account.name}
-            </option>
-          ))}
-        </GVFormikField>
-      </div>
-      <div className="gv-text-field__wrapper">
-        <GVFormikField
-          disabled={currentAccountTypeId === values[FIELDS.brokerAccountTypeId]}
-          name={FIELDS.leverage}
-          component={GVTextField}
-          label={t("create-program-page.settings.fields.brokers-leverage")}
-          InputComponent={Select}
-          disableIfSingle
-        >
-          {account.leverages.map(leverage => (
-            <option value={leverage} key={leverage}>
-              {leverage}
-            </option>
-          ))}
-        </GVFormikField>
-      </div>
+      </Row>
+      <GVHookFormField
+        name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
+        component={SimpleTextField}
+        label={t("create-program-page.settings.fields.account-type")}
+        InputComponent={Select}
+        disableIfSingle
+        onChange={changeAccount}
+      >
+        {selectedBroker.accountTypes.map(account => (
+          <option value={account.id} key={account.id}>
+            {account.name}
+          </option>
+        ))}
+      </GVHookFormField>
+      <GVHookFormField
+        onChange={changeLeverage}
+        disabled={currentAccountTypeId === brokerAccountTypeId}
+        name={CHANGE_BROKER_FORM_FIELDS.leverage}
+        component={SimpleTextField}
+        label={t("create-program-page.settings.fields.brokers-leverage")}
+        InputComponent={Select}
+        disableIfSingle
+      >
+        {account.leverages.map(leverage => (
+          <option value={leverage} key={leverage}>
+            {leverage}
+          </option>
+        ))}
+      </GVHookFormField>
       <HuobiWarning
-        from={values[FIELDS.brokerFrom].name}
+        from={brokerFrom.name}
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
@@ -145,15 +168,16 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         onClick={setChangeBrokerOpen}
         color="primary"
         className="invest-form__submit-button"
+        isSuccessful={isSubmitted && !errorMessage}
+        isPending={isSubmitting}
         disabled={
-          !dirty ||
-          currentAccountTypeId === values[FIELDS.brokerAccountTypeId] ||
-          isSubmitting
+          !dirty || currentAccountTypeId === brokerAccountTypeId || isSubmitting
         }
       >
         {t("program-settings.buttons.change-broker")}
       </GVButton>
       <ConfirmChangeBroker
+        onApply={handleOnApply}
         open={isChangeBrokerOpen}
         onClose={setChangeBrokerClose}
         brokerFrom={brokerFrom.name}
@@ -167,84 +191,18 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           ).name
         }
       />
-    </form>
+    </HookForm>
   );
 };
 
-interface Props
-  extends ChangeBrokerFormOwnProps,
-    WithTranslation,
-    FormikProps<ChangeBrokerFormValues> {}
-
-export interface ChangeBrokerFormOwnProps {
+export interface Props {
+  errorMessage?: string;
   data: BrokersProgramInfo;
   isSignalProgram: boolean;
-  onSubmit: (
-    values: ChangeBrokerFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: ChangeBrokerFormValues) => void;
   id: string;
   currentLeverage: number;
 }
 
-enum FIELDS {
-  brokerFrom = "brokerFrom",
-  brokerAccountTypeId = "brokerAccountTypeId",
-  leverage = "leverage"
-}
-
-export interface ChangeBrokerFormValues {
-  [FIELDS.brokerAccountTypeId]: string;
-  [FIELDS.leverage]: number;
-  [FIELDS.brokerFrom]: Broker;
-}
-
-const ChangeBrokerForm = compose<
-  React.ComponentType<
-    ChangeBrokerFormOwnProps & WithBlurLoaderProps<BrokersProgramInfo>
-  >
->(
-  withBlurLoader,
-  translate(),
-  withFormik<ChangeBrokerFormOwnProps, ChangeBrokerFormValues>({
-    enableReinitialize: true,
-    displayName: "edit-form",
-    mapPropsToValues: ({
-      data: { brokers, currentAccountTypeId },
-      currentLeverage
-    }) => ({
-      [FIELDS.brokerFrom]: safeGetElemFromArray(
-        brokers,
-        broker =>
-          !!broker.accountTypes.find(
-            accountType => accountType.id === currentAccountTypeId
-          )
-      ),
-      [FIELDS.brokerAccountTypeId]: currentAccountTypeId,
-      [FIELDS.leverage]: currentLeverage
-    }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_ChangeBrokerForm);
+const ChangeBrokerForm = withBlurLoader(React.memo(_ChangeBrokerForm));
 export default ChangeBrokerForm;
-
-interface IHuobiWarningProps {
-  from: string;
-  to: string;
-  isSignalProgram: boolean;
-}
-export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
-  from,
-  to,
-  isSignalProgram
-}) => {
-  const [t] = useTranslation();
-  return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
-    <FormTextField topPadding accent>
-      {t("program-settings.broker.text-warning")}
-    </FormTextField>
-  ) : null;
-};

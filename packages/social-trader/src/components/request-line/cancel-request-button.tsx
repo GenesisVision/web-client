@@ -4,8 +4,7 @@ import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 const _CancelRequestButton: React.FC<{
   onApplyCancelRequest: () => void;
@@ -15,8 +14,7 @@ const _CancelRequestButton: React.FC<{
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { sendRequest, isPending: disabled } = useApiRequest({
     successMessage: "request-line.success-message",
-    request: (id: string) =>
-      investmentsApi.cancelRequest(id, authService.getAuthArg()),
+    request: (id: string) => api.investments().cancelRequest(id),
     middleware: [onApplyCancelRequest, setClosePopup]
   });
   const handleApplyCancelRequest = useCallback(() => {

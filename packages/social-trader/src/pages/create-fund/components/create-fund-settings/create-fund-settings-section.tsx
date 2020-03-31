@@ -10,11 +10,14 @@ import CreateFundSettings from "./create-fund-settings";
 
 const _CreateFundSettingsSection: React.FC = () => {
   const createFundInfo = useSelector(createFundInfoSelector);
-  const handleCreate = useCreateAssetSubmit({ asset: CREATE_ASSET.FUND });
+  const { handleCreate, errorMessage } = useCreateAssetSubmit({
+    asset: CREATE_ASSET.FUND
+  });
   const wallets = useSelector(walletsSelector);
 
   return (
     <CreateFundSettings
+      errorMessage={errorMessage}
       wallets={wallets}
       loaderData={PlatformDataLoaderData}
       data={createFundInfo!}

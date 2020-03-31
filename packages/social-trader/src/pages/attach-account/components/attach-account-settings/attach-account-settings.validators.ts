@@ -1,20 +1,15 @@
-import { WithTranslation } from "react-i18next";
+import { Broker } from "gv-api-web";
+import { TFunction } from "i18next";
 import { object, string } from "yup";
 
 import {
   ATTACH_ACCOUNT_FIELDS,
-  IAttachAccountSettingsFormValues,
-  ICreateFundSettingsProps
+  IAttachAccountSettingsFormValues
 } from "./attach-account-settings";
 
-const attachAccountSettingsValidationSchema = ({
-  t
-}: ICreateFundSettingsProps & WithTranslation) =>
+export const attachAccountSettingsValidationSchema = (t: TFunction) =>
   object<IAttachAccountSettingsFormValues>().shape({
     [ATTACH_ACCOUNT_FIELDS.secret]: string().required(
-      t("attach-account-page.settings.validation.api-secret")
-    ),
-    [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string().required(
       t("attach-account-page.settings.validation.api-secret")
     ),
     [ATTACH_ACCOUNT_FIELDS.key]: string().required(
@@ -22,4 +17,29 @@ const attachAccountSettingsValidationSchema = ({
     )
   });
 
-export default attachAccountSettingsValidationSchema;
+export const attachAccountSettingsMapPropsToValues = ({
+  exchanges,
+  requestBrokerName = ""
+}: {
+  requestBrokerName?: string;
+  exchanges: Broker[];
+}) => {
+  const requestBroker = exchanges.find(
+    ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
+  );
+  const requestBrokerAccountTypeId = requestBroker
+    ? requestBroker.accountTypes[0].id
+    : "";
+  const firstBrokerAccountTypeId = exchanges.length
+    ? exchanges[0].accountTypes[0].id
+    : "";
+  return {
+    [ATTACH_ACCOUNT_FIELDS.secret]: "",
+    [ATTACH_ACCOUNT_FIELDS.brokerName]: exchanges.length
+      ? exchanges[0].name
+      : "",
+    [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]:
+      requestBrokerAccountTypeId || firstBrokerAccountTypeId,
+    [ATTACH_ACCOUNT_FIELDS.key]: ""
+  };
+};

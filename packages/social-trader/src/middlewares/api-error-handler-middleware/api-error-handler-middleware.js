@@ -6,20 +6,21 @@ const REJECTED_SUFFIX = "FAILURE";
 const apiErrorHandlerMiddleware = (
   config = { failureSuffix: REJECTED_SUFFIX }
 ) => ({ dispatch }) => next => action => {
-  const REJECTED = config.failureSuffix;
-  const isRejected = new RegExp(REJECTED + "$", "g");
-
-  if (isRejected && action.error) {
-    const handledError = action.payload;
-    if (handledError.code === SERVER_CONNECTION_ERROR_CODE) {
-      dispatch(
-        alertMessageActions.error(
-          action.payload.errorMessage || "alerts.server-error",
-          true
-        )
-      );
-    } else {
-      next({ ...action, payload: handledError });
+  if (action.error) {
+    const REJECTED = config.failureSuffix;
+    const isRejected = new RegExp(REJECTED + "$", "g");
+    if (isRejected) {
+      const handledError = action.payload;
+      if (handledError.code === SERVER_CONNECTION_ERROR_CODE) {
+        dispatch(
+          alertMessageActions.error(
+            action.payload.errorMessage || "alerts.server-error",
+            true
+          )
+        );
+      } else {
+        next({ ...action, payload: handledError });
+      }
     }
   }
 

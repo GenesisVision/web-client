@@ -1,24 +1,24 @@
-import "./deposit.scss";
-
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import {
   fetchWallets,
   TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { postponeCallback } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { TFees } from "./deposit.types";
+import "./deposit.scss";
+import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
   title,
@@ -41,18 +41,22 @@ const _DepositPopup: React.FC<Props> = ({
         asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
     });
   }, []);
-  const profileCurrency = useSelector(currencySelector);
+  const profileCurrency = useAccountCurrency();
   const dispatch = useDispatch();
+  const onCloseMiddleware = postponeCallback(() => {
+    onClose();
+    onApply();
+  });
   const updateWalletInfoMiddleware = () =>
     dispatch(fetchWallets(profileCurrency));
   const { sendRequest, errorMessage } = useApiRequest({
     successMessage: `deposit-asset.${asset.toLowerCase()}.success-alert-message`,
     request: getRequestMethod(asset),
-    middleware: [onApply, onClose, updateWalletInfoMiddleware]
+    middleware: [onCloseMiddleware, updateWalletInfoMiddleware]
   });
   const handleInvest = useCallback(
-    (amount: number, setSubmitting: SetSubmittingType, walletId: string) => {
-      return sendRequest({ id, amount, walletId }, setSubmitting).then(res => {
+    ({ amount, walletId }) => {
+      return sendRequest({ id, amount, walletId }).then(res => {
         if (!res) return;
         const walletCurrency = safeGetElemFromArray(
           wallets,
@@ -68,7 +72,7 @@ const _DepositPopup: React.FC<Props> = ({
         });
       });
     },
-    [id, asset, sendRequest, sendEventToGA]
+    [id, asset, sendEventToGA]
   );
 
   return (
@@ -103,7 +107,7 @@ interface Props {
   title: string;
   availableToInvest?: number;
   fees: TFees;
-  minDeposit: number;
+  minDeposit: MinDepositType;
   id: string;
   onClose: (param?: any) => void;
   onApply: () => void;

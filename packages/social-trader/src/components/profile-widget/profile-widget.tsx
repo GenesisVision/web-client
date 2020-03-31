@@ -1,5 +1,3 @@
-import "./profile-widget.scss";
-
 import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import GVButton from "components/gv-button";
@@ -11,10 +9,7 @@ import { SettingsIcon } from "components/icon/settings-icon";
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
-import {
-  PopoverContentCardBlock,
-  PopoverContentCardBlockItem
-} from "components/popover/popover-card.block";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import {
   PROFILE_ROUTE,
@@ -22,6 +17,8 @@ import {
   SECURITY_ROUTE,
   SETTINGS_ROUTE
 } from "components/profile/profile.constants";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import withLoader from "decorators/with-loader";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -32,6 +29,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import "./profile-widget.scss";
+
 const ProfileMenuItem: React.FC<{
   to?: ToType | string;
   onClick: VoidFunction;
@@ -39,10 +38,14 @@ const ProfileMenuItem: React.FC<{
   Icon: React.ComponentType;
 }> = React.memo(({ Icon, to, onClick, label }) => {
   const renderLabel = () => (
-    <div className={classNames("profile-menu__item")}>
-      <Icon />
-      <div className="profile-menu__item-label">{label}</div>
-    </div>
+    <Row>
+      <RowItem>
+        <Row>
+          <Icon />
+        </Row>
+      </RowItem>
+      <RowItem className="profile-menu__item-label">{label}</RowItem>
+    </Row>
   );
   const renderButton = () =>
     to ? (
@@ -54,9 +57,7 @@ const ProfileMenuItem: React.FC<{
         {renderLabel()}
       </GVButton>
     );
-  return (
-    <PopoverContentCardBlockItem>{renderButton()}</PopoverContentCardBlockItem>
-  );
+  return <Row className="profile-menu__item">{renderButton()}</Row>;
 });
 
 const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
@@ -69,7 +70,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
     <div className={classNames("profile-widget", className)}>
       <div className="profile-widget__content" onClick={setAnchor}>
         <ProfileAvatar
-          url={profileHeader.avatar}
+          url={profileHeader.logoUrl}
           alt={profileHeader.email}
           className="profile-widget__avatar"
         />

@@ -1,5 +1,7 @@
+import { Row } from "components/row/row";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import {
@@ -11,12 +13,11 @@ import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/
 import { dashboardTradingPrivateSelector } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 
 const _DashboardPrivate: React.FC = () => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   const getItems = useCallback(filters => {
     return fetchDashboardPrivateAction(filters);
@@ -32,7 +33,7 @@ const _DashboardPrivate: React.FC = () => {
     <DashboardTradingTable
       dataSelector={dashboardTradingPrivateSelector}
       createButtonToolbar={
-        <>
+        <Row>
           <ToolbarButton
             text={t("buttons.create-account")}
             route={CREATE_ACCOUNT_PAGE_ROUTE}
@@ -41,7 +42,7 @@ const _DashboardPrivate: React.FC = () => {
             text={t("buttons.attach-external-account")}
             route={ATTACH_ACCOUNT_PAGE_ROUTE}
           />
-        </>
+        </Row>
       }
       getItems={getItems}
       title={t("dashboard-page.trading.private")}

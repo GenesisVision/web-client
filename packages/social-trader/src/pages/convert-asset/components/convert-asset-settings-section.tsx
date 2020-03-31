@@ -1,4 +1,3 @@
-import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
 import { TFAConfirmBlock } from "components/assets/tfa-confirm-block";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useState } from "react";
@@ -25,7 +24,8 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   const programsInfo = useSelector(programsInfoSelector);
   const followInfo = useSelector(createFollowInfoSelector);
 
-  const handleCreate = useConvertAssetSubmit({
+  const { handleCreate, errorMessage } = useConvertAssetSubmit({
+    id,
     fromTo,
     condition: ({ twoFactorRequired, programId }) => {
       if (twoFactorRequired) {
@@ -38,8 +38,9 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
   });
 
   return (
-    <AssetContentBlock>
+    <div>
       <ConvertAssetSettings
+        errorMessage={errorMessage}
         followInfo={followInfo}
         currency={currency}
         id={id}
@@ -49,7 +50,7 @@ const _ConvertAssetSettingsSection: React.FC<Props> = ({
         onSubmit={handleCreate}
       />
       {twoFactorRequired && <TFAConfirmBlock id={programId!} />}
-    </AssetContentBlock>
+    </div>
   );
 };
 

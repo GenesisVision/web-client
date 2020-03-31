@@ -19,7 +19,6 @@ const FollowsTableModule: React.FC<Props> = React.memo(
     filtering,
     defaultFilters,
     paging,
-    showRating,
     title,
     disableTitle,
     columns
@@ -41,20 +40,13 @@ const FollowsTableModule: React.FC<Props> = React.memo(
         renderBodyRow={(
           follow,
           updateRow: any //TODO fix updateRow
-        ) => (
-          <FollowTableRow
-            updateRow={updateRow}
-            showRating={showRating}
-            follow={follow}
-          />
-        )}
+        ) => <FollowTableRow updateRow={updateRow} follow={follow} />}
       />
     );
   }
 );
 
 interface Props extends ITableModuleProps {
-  showRating?: boolean;
   title?: string;
 }
 

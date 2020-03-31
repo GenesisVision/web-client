@@ -1,4 +1,3 @@
-import "modules/asset-settings/asset-settings.scss";
 import "./profile.scss";
 
 import GVButton from "components/gv-button";

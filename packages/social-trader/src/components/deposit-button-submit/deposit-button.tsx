@@ -16,13 +16,7 @@ interface IDepositButtonProps {
 
 const DepositButton: React.FC<IDepositButtonProps &
   IDepositButtonStateProps> = ({ onSubmit, children, title, disabled }) => (
-  <GVButton
-    title={title}
-    color="primary"
-    type="submit"
-    onClick={onSubmit}
-    disabled={disabled}
-  >
+  <GVButton title={title} onClick={onSubmit} disabled={disabled}>
     {children}
   </GVButton>
 );

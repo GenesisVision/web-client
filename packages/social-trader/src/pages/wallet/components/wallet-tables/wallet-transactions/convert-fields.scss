@@ -1,8 +1,6 @@
 @import "~shared/styles/_sizes";
 
 .convert-field {
-  display: flex;
-  align-items: center;
   &__arrow {
     @include horizontal-paddings($padding-xxsmall);
     display: inline-block;

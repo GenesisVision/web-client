@@ -5,6 +5,7 @@ import {
   EventFilters,
   FollowCreateAssetPlatformInfo,
   FundCreateAssetPlatformInfo,
+  PlatformCurrencyInfo,
   PlatformInfo,
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
@@ -23,6 +24,18 @@ export type PlatformState = IApiState<PlatformInfo>;
 
 export const platformDataSelector = apiSelector<PlatformInfo>(
   state => state.platformData
+);
+
+export const minDemoDepositAmountSelector = apiFieldSelector<
+  PlatformInfo,
+  number
+>(
+  platformDataSelector,
+  fieldSelector(
+    state =>
+      state.assetInfo.tradingAccountInfo.maxAmounts[0].transferDemo[0].amount
+  ),
+  Number.MIN_SAFE_INTEGER
 );
 
 export const createFollowInfoSelector = apiFieldSelector<
@@ -64,6 +77,24 @@ export const fundMinDepositAmountSelector = apiFieldSelector<
 >(
   platformDataSelector,
   fieldSelector(state => state.assetInfo.fundInfo.minInvestAmountIntoFund),
+  []
+);
+
+export const fundMinWithdrawAmountSelector = apiFieldSelector<
+  PlatformInfo,
+  AmountWithCurrency[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.fundInfo.minWithdrawAmountFromFund),
+  []
+);
+
+export const minTransferAmountsSelector = apiFieldSelector<
+  PlatformInfo,
+  PlatformCurrencyInfo[]
+>(
+  platformDataSelector,
+  fieldSelector(state => state.commonInfo.platformCurrencies),
   []
 );
 
@@ -161,51 +192,6 @@ export const allEventsSelector = createSelector<
   PlatformInfo | undefined,
   EventFilters | undefined
 >(platformDataSelector, data => (data && data.filters.events) || undefined);
-
-export const fundEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.investmentHistory.fund.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
-
-export const programEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.investmentHistory.program.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
-
-export const followEventsSelector = createSelector<
-  RootState,
-  EventFilters | undefined,
-  SelectFilterValue<string>[]
->(
-  allEventsSelector,
-  data =>
-    (data &&
-      data.tradingHistory.follow.map(({ key, title }) => ({
-        value: key,
-        labelKey: title
-      }))) ||
-    []
-);
 
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS

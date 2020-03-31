@@ -1,5 +1,3 @@
-import "./chip.scss";
-
 import classNames from "classnames";
 import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";

@@ -6,7 +6,7 @@ import { ProgramFollowDetailsFull } from "gv-api-web";
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { compose } from "redux";
-import programsApi from "services/api-client/programs-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   program
@@ -59,7 +59,7 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
 
 _Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const program = await programsApi.getProgramDetails(id as string);
+  const program = await api.programs().getProgramDetails(id as string);
 
   return {
     program

@@ -1,4 +1,4 @@
-import { ItemsViewModelFollowDetailsListItem } from "gv-api-web";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -9,11 +9,11 @@ import { FOLLOWS } from "../actions/follows-table.actions";
 import followsFavoritesReducer from "./follows-favorites.reducer";
 
 export type FollowsListState = Readonly<{
-  items: IApiState<ItemsViewModelFollowDetailsListItem>;
+  items: IApiState<FollowDetailsListItemItemsViewModel>;
 }>;
 
 export const followsDataSelector = apiSelector<
-  ItemsViewModelFollowDetailsListItem
+  FollowDetailsListItemItemsViewModel
 >(state => state.followsData.items);
 
 const followsReducer = combineReducers<FollowsListState>({

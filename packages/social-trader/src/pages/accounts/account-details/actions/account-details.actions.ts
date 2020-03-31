@@ -12,6 +12,7 @@ import {
 } from "gv-api-web";
 import { AccountAbsoluteProfitChartDataType } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
 import accountsApi from "services/api-client/accounts-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
@@ -50,7 +51,7 @@ export const fetchAccountProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<AccountProfitChartDataType> => ({
   type: FETCH_ACCOUNT_PROFIT_CHART,
-  payload: accountsApi.getProfitPercentCharts(id, authService.getAuthArg(), {
+  payload: api.accounts().getProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -63,7 +64,7 @@ export const fetchAccountAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountAbsoluteProfitChartDataType> => ({
   type: FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
-  payload: accountsApi.getAbsoluteProfitChart(id, authService.getAuthArg(), {
+  payload: api.accounts().getAbsoluteProfitChart(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -76,7 +77,7 @@ export const fetchAccountBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<AccountBalanceChart> => ({
   type: FETCH_ACCOUNT_BALANCE_CHART,
-  payload: accountsApi.getBalanceChart(id, authService.getAuthArg(), {
+  payload: api.accounts().getBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -86,28 +87,26 @@ export const fetchAccountBalanceChartAction = (
 
 export const fetchAccountDescriptionAction = (
   id: string,
-  authorization: string
+  token: Token
 ): ApiAction<AccountDetailsDataType> => ({
   type: FETCH_ACCOUNT_DESCRIPTION,
-  payload: accountsApi.getTradingAccountDetails(id, authorization)
+  payload: api.accounts(token).getTradingAccountDetails(id)
 });
 
 export const fetchOpenPositionsAction = (
   id: string,
-  filters: ComposeFiltersAllType,
-  authorization: string
+  filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesViewModel>> => ({
   type: ACCOUNT_OPEN_POSITIONS,
-  payload: accountsApi.getOpenTrades(id, authorization, filters)
+  payload: api.accounts().getOpenTrades(id, filters)
 });
 
 export const fetchTradesAction = (
   id: string,
-  filters: ComposeFiltersAllType,
-  authorization: string
+  filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesSignalViewModel>> => ({
   type: ACCOUNT_TRADES,
-  payload: accountsApi.getTrades(id, authorization, filters)
+  payload: api.accounts().getTrades(id, filters)
 });
 
 export interface SetAccountIdAction extends ActionType<AccountIdState> {

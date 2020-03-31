@@ -4,15 +4,7 @@
 
 .wallet-list {
   &__buttons {
-    display: flex;
     justify-content: flex-end;
-    align-items: center;
-  }
-
-  &__button {
-    &:not(:last-child) {
-      margin-right: $padding-xsmall;
-    }
   }
 
   @include media-breakpoint-landscape-phone() {

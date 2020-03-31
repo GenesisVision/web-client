@@ -1,5 +1,6 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
+import { checkClosed } from "modules/asset-settings/services/asset-settings.service";
 import {
   dispatchProgramDescription,
   dispatchProgramId
@@ -18,7 +19,10 @@ ProgramSettings.getInitialProps = async ctx => {
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
-  ]);
+  ]).then(([id, description]) => {
+    if (checkClosed(description.value.publicInfo.status))
+      throw "Program is closed";
+  });
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(ProgramSettings);

@@ -1,21 +1,17 @@
-import "./referral-program.scss";
-
 import DetailsBlock from "components/details/details-block";
 import ProfileLayout from "components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "components/profile/profile.constants";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ProfileFullViewModel } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
-import { referralDetailsSelector } from "reducers/profile-reducer";
 import { getRandomInteger } from "utils/helpers";
 
 import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
 import { ReferralFriendsTable } from "./referral-friends-table";
 import { ReferralHistoryTable } from "./referral-history-table";
+import "./referral-program.scss";
 import { ReferralRewardsBlock } from "./referral-reward-block";
 import {
   getProfile,
@@ -23,20 +19,20 @@ import {
 } from "./services/referral-program-services";
 
 const _ReferralProgramPage: React.FC = () => {
-  const currency = useSelector(currencySelector);
-  const dispatch = useDispatch();
-  const { sendRequest, data } = useApiRequest<ProfileFullViewModel>({
+  const currency = useAccountCurrency();
+  const { data: profile } = useApiRequest<ProfileFullViewModel>({
+    fetchOnMount: true,
     request: getProfile
   });
-  useEffect(() => {
-    dispatch(getReferralDetails(currency));
-    sendRequest();
-  }, []);
-  const rewards = useSelector(referralDetailsSelector);
+  const { data: rewards } = useApiRequest({
+    fetchOnMount: true,
+    fetchOnMountData: currency,
+    request: getReferralDetails
+  });
   return (
     <ProfileLayout route={REFERRAL_PROGRAM}>
       <SettingsBlock>
-        <InviteBlock data={data!} loaderData={inviteBlockLoaderData} />
+        <InviteBlock data={profile!} loaderData={inviteBlockLoaderData} />
       </SettingsBlock>
       <SettingsBlock>
         <ReferralRewardsBlock

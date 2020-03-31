@@ -1,73 +1,69 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import InputAmountField from "components/input-amount-field/input-amount-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import Select from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import { InjectedFormikProps, withFormik } from "formik";
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import {
   FOLLOW_PARAMS_FIELDS,
   followParamsMapPropsToValues,
   followParamsValidationSchema,
+  getInfoText,
   modes
 } from "modules/follow-module/follow-popup/follow-popup-params.helpers";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
 import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { HookForm } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
-const getInfoText = (currency: CurrencyEnum): string => {
-  switch (currency) {
-    case "ETH":
-      return "follow-program.info.ETH";
-    case "BTC":
-      return "follow-program.info.BTC";
-    case "USDT":
-    default:
-      return "follow-program.info.USDT";
-  }
-};
-
-const _FollowParams: React.FC<InjectedFormikProps<
-  IFollowParamsProps,
-  FollowParamsFormValues
->> = ({
+const _FollowParams: React.FC<IFollowParamsProps> = ({
+  errorMessage,
+  onSubmit,
+  paramsSubscription,
   subscribeFixedCurrencies,
   rate,
   currency,
-  t,
-  setFieldValue,
-  isSubmitting,
-  onPrevStep,
-  isValid,
-  values,
-  handleSubmit
+  onPrevStep
 }) => {
+  const [t] = useTranslation();
+  const form = useForm<FollowParamsFormValues>({
+    defaultValues: followParamsMapPropsToValues({
+      paramsSubscription,
+      subscribeFixedCurrencies
+    }),
+    validationSchema: followParamsValidationSchema(t),
+    mode: "onBlur"
+  });
+  const { setValue, watch } = form;
+
+  const { mode, fixedCurrency, fixedVolume } = watch();
+
   const setMaxOpenTolerancePercent = useCallback(() => {
-    setFieldValue(FOLLOW_PARAMS_FIELDS.openTolerancePercent, "20");
-  }, [setFieldValue]);
+    setValue(FOLLOW_PARAMS_FIELDS.openTolerancePercent, 20, true);
+  }, [setValue]);
   const setMaxVolumePercent = useCallback(() => {
-    setFieldValue(FOLLOW_PARAMS_FIELDS.percent, "999");
-  }, [setFieldValue]);
-  const disableButton = isSubmitting || !isValid;
+    setValue(FOLLOW_PARAMS_FIELDS.percent, 999, true);
+  }, [setValue]);
   return (
-    <form id="follow-params" onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
-        <DialogField>
-          <GVFormikField
+        <Row>
+          <GVHookFormField
             wide
             name={FOLLOW_PARAMS_FIELDS.mode}
-            component={GVTextField}
+            component={SimpleTextField}
             label={t("follow-program.params.type")}
             InputComponent={Select}
           >
@@ -82,10 +78,10 @@ const _FollowParams: React.FC<InjectedFormikProps<
                 </Tooltip>
               </option>
             ))}
-          </GVFormikField>
-        </DialogField>
-        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.percentage.value && (
-          <DialogField>
+          </GVHookFormField>
+        </Row>
+        {mode === modes.percentage.value && (
+          <Row>
             <InputAmountField
               wide
               name={FOLLOW_PARAMS_FIELDS.percent}
@@ -93,54 +89,47 @@ const _FollowParams: React.FC<InjectedFormikProps<
               currency={"%"}
               setMax={setMaxVolumePercent}
             />
-          </DialogField>
+          </Row>
         )}
-        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.fixed.value && (
-          <>
-            {subscribeFixedCurrencies.length > 1 && (
-              <DialogField>
-                <GVFormikField
-                  wide
-                  name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
-                  component={GVTextField}
-                  label={t("follow-program.params.fixed-currency")}
-                  InputComponent={Select}
-                >
-                  {subscribeFixedCurrencies.map((currency: string) => (
-                    <option value={currency} key={currency}>
-                      {currency}
-                    </option>
-                  ))}
-                </GVFormikField>
-              </DialogField>
-            )}
-            <DialogField>
-              <InputAmountField
-                wide
-                name={FOLLOW_PARAMS_FIELDS.fixedVolume}
-                label={`${t("follow-program.params.fixed-currency-equivalent", {
-                  fixedCurrency: values[FOLLOW_PARAMS_FIELDS.fixedCurrency]
-                })} *`}
-                currency={values[FOLLOW_PARAMS_FIELDS.fixedCurrency]}
+        <Row hide={subscribeFixedCurrencies.length < 2}>
+          <GVHookFormField
+            wide
+            name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
+            component={SimpleTextField}
+            label={t("follow-program.params.fixed-currency")}
+            InputComponent={Select}
+          >
+            {subscribeFixedCurrencies.map((currency: string) => (
+              <option value={currency} key={currency}>
+                {currency}
+              </option>
+            ))}
+          </GVHookFormField>
+        </Row>
+        {mode === modes.fixed.value && (
+          <Row>
+            <InputAmountField
+              wide
+              name={FOLLOW_PARAMS_FIELDS.fixedVolume}
+              label={`${t("follow-program.params.fixed-currency-equivalent", {
+                fixedCurrency: fixedCurrency
+              })} *`}
+              currency={fixedCurrency}
+            />
+            {currency && (
+              <NumberFormat
+                value={formatCurrencyValue(
+                  convertFromCurrency(fixedVolume!, rate),
+                  currency
+                )}
+                prefix="≈ "
+                suffix={` ${currency}`}
+                displayType="text"
               />
-              {currency && (
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    convertFromCurrency(
-                      values[FOLLOW_PARAMS_FIELDS.fixedVolume]!,
-                      rate
-                    ),
-                    currency
-                  )}
-                  prefix="≈ "
-                  suffix={` ${currency}`}
-                  displayType="text"
-                />
-              )}
-            </DialogField>
-          </>
+            )}
+          </Row>
         )}
-        <DialogField>
+        <Row>
           <InputAmountField
             wide
             name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
@@ -155,26 +144,27 @@ const _FollowParams: React.FC<InjectedFormikProps<
             currency={"%"}
             setMax={setMaxOpenTolerancePercent}
           />
-        </DialogField>
+        </Row>
         <DialogButtons>
           {onPrevStep && (
             <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
               {t("follow-program.params.back")}
             </GVButton>
           )}
-          <GVButton
+          <SubmitButton
             wide={!onPrevStep}
-            type="submit"
             className="invest-form__submit-button"
-            disabled={disableButton}
+            isSuccessful={!errorMessage}
+            checkDirty={!onPrevStep}
           >
             {t("follow-program.params.submit")}
-          </GVButton>
+          </SubmitButton>
         </DialogButtons>
-        {values[FOLLOW_PARAMS_FIELDS.mode] === modes.fixed.value &&
-          currency && <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>}
+        {mode === modes.fixed.value && currency && (
+          <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>
+        )}
       </DialogBottom>
-    </form>
+    </HookForm>
   );
 };
 
@@ -186,31 +176,15 @@ export interface FollowParamsFormValues {
   [FOLLOW_PARAMS_FIELDS.fixedVolume]: number;
 }
 
-interface OwnProps {
+export interface IFollowParamsProps {
+  errorMessage?: string;
   subscribeFixedCurrencies: string[];
   rate: number;
   currency?: CurrencyEnum;
   paramsSubscription?: SignalSubscription;
-  onSubmit: (
-    values: FollowParamsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: FollowParamsFormValues) => void;
   onPrevStep?: () => void;
 }
 
-export interface IFollowParamsProps extends OwnProps, WithTranslation {}
-
-const FollowParams = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  withFormik<IFollowParamsProps, FollowParamsFormValues>({
-    isInitialValid: true,
-    displayName: "follow-params",
-    mapPropsToValues: followParamsMapPropsToValues,
-    validationSchema: followParamsValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_FollowParams);
+const FollowParams = React.memo(_FollowParams);
 export default FollowParams;

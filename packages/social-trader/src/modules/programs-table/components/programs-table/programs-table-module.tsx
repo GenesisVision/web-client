@@ -18,7 +18,6 @@ const _ProgramTableModule: React.FC<Props> = ({
   filtering,
   defaultFilters,
   paging,
-  showRating,
   title,
   disableTitle,
   columns
@@ -40,19 +39,12 @@ const _ProgramTableModule: React.FC<Props> = ({
       renderBodyRow={(
         program,
         updateRow: any //TODO fix updateRow
-      ) => (
-        <ProgramTableRow
-          updateRow={updateRow}
-          showRating={showRating}
-          program={program}
-        />
-      )}
+      ) => <ProgramTableRow updateRow={updateRow} program={program} />}
     />
   );
 };
 
 interface Props extends ITableModuleProps {
-  showRating?: boolean;
   title?: string;
 }
 

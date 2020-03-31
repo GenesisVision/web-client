@@ -47,7 +47,7 @@ const _FundSettings: React.FC<Props> = ({
       />
       <AssetEdit
         title={details.publicInfo.title}
-        logo={{ src: details.publicInfo.logo }}
+        logo={{ src: details.publicInfo.logoUrl }}
         description={details.publicInfo.description}
         onSubmit={editAsset}
       />

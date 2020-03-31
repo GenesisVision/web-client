@@ -1,10 +1,12 @@
-import "./fund-asset.scss";
-
 import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+
+import "./fund-asset.scss";
 
 export enum FUND_ASSET_TYPE {
   LARGE = "large",
@@ -14,6 +16,7 @@ export enum FUND_ASSET_TYPE {
 }
 
 const _FundAsset: React.FC<Props> = ({
+  bottomOffset = true,
   url,
   current: percent,
   target: mandatoryFundPercent,
@@ -22,7 +25,7 @@ const _FundAsset: React.FC<Props> = ({
   last,
   removable,
   removeHandle,
-  icon,
+  logoUrl,
   className,
   asset: name,
   ...other
@@ -49,42 +52,50 @@ const _FundAsset: React.FC<Props> = ({
       );
     default:
       return (
-        <div
-          {...other}
-          className={classNames(
-            "fund-asset",
-            "fund-asset--default",
-            className,
-            {
-              "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
-            }
-          )}
-        >
-          <CurrencyItem
-            url={url}
-            logo={icon}
-            small
-            name={!!currency && currencyName}
-            symbol={currency}
-            className={classNames("fund-asset__currency", currencyClassName)}
-          />
-          <div className="fund-asset__percent">
-            <NumberFormat value={percent} suffix="%" displayType="text" />
-          </div>
-          {percent > mandatoryFundPercent && removable && removeHandle && (
-            <div
-              className="fund-asset__remove-button"
-              onClick={removeHandle(currency)}
-            >
-              +
-            </div>
-          )}
-        </div>
+        <RowItem small bottomOffset={bottomOffset}>
+          <Row
+            {...other}
+            className={classNames(
+              "fund-asset",
+              "fund-asset--default",
+              className,
+              {
+                "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
+              }
+            )}
+          >
+            <RowItem small>
+              <CurrencyItem
+                url={url}
+                logo={logoUrl}
+                small
+                name={!!currency && currencyName}
+                symbol={currency}
+                className={classNames(
+                  "fund-asset__currency",
+                  currencyClassName
+                )}
+              />
+            </RowItem>
+            {percent !== undefined && (
+              <NumberFormat value={percent} suffix="%" displayType="text" />
+            )}
+            {percent > mandatoryFundPercent && removable && removeHandle && (
+              <div
+                className="fund-asset__remove-button"
+                onClick={removeHandle(currency)}
+              >
+                +
+              </div>
+            )}
+          </Row>
+        </RowItem>
       );
   }
 };
 
 interface Props extends FundAssetInfo {
+  bottomOffset?: boolean;
   currency: Currency;
   type: FUND_ASSET_TYPE;
   last: boolean;

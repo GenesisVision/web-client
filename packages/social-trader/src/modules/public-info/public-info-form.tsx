@@ -3,81 +3,62 @@ import "./public-info.scss";
 import AboutField from "components/assets/fields/about-field";
 import UserNameField from "components/assets/fields/user-name-field";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
-import { FormikProps, withFormik } from "formik";
+import { SubmitButton } from "components/submit-button/submit-button";
 import { UpdateProfileViewModel } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import { assetTitleShape } from "utils/validators/validators";
 import { object } from "yup";
-
-const _PublicInfoForm: React.FC<Props> = ({
-  values: { about },
-  isPending,
-  t,
-  handleSubmit,
-  errorMessage,
-  isValid,
-  dirty,
-  isSubmitting
-}) => {
-  return (
-    <form id="about-manager" onSubmit={handleSubmit} className="about">
-      <UserNameField name={FIELDS.userName} />
-      <AboutField description={about} name={FIELDS.about} />
-      <FormError error={errorMessage} />
-      <div className="profile__row">
-        <GVButton
-          type="submit"
-          disabled={isPending || isSubmitting || !isValid || !dirty}
-        >
-          {t("buttons.save")}
-        </GVButton>
-      </div>
-    </form>
-  );
-};
 
 enum FIELDS {
   userName = "userName",
   about = "about"
 }
 
+const _PublicInfoForm: React.FC<Props> = ({
+  onSubmit,
+  userName = "",
+  about: aboutProp = "",
+  isPending,
+  errorMessage
+}) => {
+  const [t] = useTranslation();
+  const form = useForm<IAboutFormValues>({
+    defaultValues: {
+      [FIELDS.userName]: userName,
+      [FIELDS.about]: aboutProp
+    },
+    validationSchema: object().shape({ [FIELDS.userName]: assetTitleShape(t) }),
+    mode: "onBlur"
+  });
+  const { watch } = form;
+
+  const { about } = watch();
+
+  return (
+    <HookForm resetOnSuccess form={form} className="about" onSubmit={onSubmit}>
+      <UserNameField name={FIELDS.userName} />
+      <AboutField description={about} name={FIELDS.about} />
+      <FormError error={errorMessage} />
+      <div className="profile__row">
+        <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
+          {t("buttons.save")}
+        </SubmitButton>
+      </div>
+    </HookForm>
+  );
+};
+
 export interface IAboutFormValues extends UpdateProfileViewModel {}
 
-interface IAboutFormOwnProps {
+interface Props {
   isPending: boolean;
-  onSubmit: (
-    values: IAboutFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: IAboutFormValues) => void;
   userName: string;
   about: string;
   errorMessage?: string;
 }
-
-interface Props
-  extends WithTranslation,
-    FormikProps<IAboutFormValues>,
-    IAboutFormOwnProps {}
-
-const PublicInfoForm = compose<React.ComponentType<IAboutFormOwnProps>>(
-  translate(),
-  withFormik<IAboutFormOwnProps, IAboutFormValues>({
-    enableReinitialize: true,
-    displayName: "about-manager",
-    mapPropsToValues: ({ userName = "", about = "" }) => ({
-      [FIELDS.userName]: userName,
-      [FIELDS.about]: about
-    }),
-    validationSchema: ({ t }: Props) =>
-      object().shape({ [FIELDS.userName]: assetTitleShape(t) }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  }),
-  React.memo
-)(_PublicInfoForm);
+const PublicInfoForm = React.memo(_PublicInfoForm);
 export default PublicInfoForm;

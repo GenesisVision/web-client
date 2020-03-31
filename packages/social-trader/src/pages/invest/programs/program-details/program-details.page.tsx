@@ -1,7 +1,7 @@
 import { ASSET } from "constants/constants";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
 import ProgramDetailsContainer from "./program-details.contaner";
@@ -11,7 +11,7 @@ import { dispatchPlatformLevelsParameters } from "./service/program-details.serv
 const _ProgramDetailsPage: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
   const description = useSelector(programDescriptionSelector);
-  const profileCurrency = useSelector(currencySelector);
+  const profileCurrency = useAccountCurrency();
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;

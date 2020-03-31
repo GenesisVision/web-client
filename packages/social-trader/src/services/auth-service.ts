@@ -23,7 +23,7 @@ const storeToken = (token: string): void => {
   setCookie(tokenName, token);
 };
 
-const getTokenData = () => decodeToken(getAuthArg());
+const getTokenData = (ctx?: NextPageContext) => decodeToken(getAuthArg(ctx));
 
 const generateTokenString = (token: string): string => `Bearer ${token}`;
 
@@ -34,12 +34,13 @@ const getAuthArg = (ctx?: NextPageContext): string => {
     return "";
   }
 
-  return generateTokenString(token);
+  return token;
 };
 
-const isAuthenticated = (): boolean => {
-  const token = getAuthArg();
-
+const isAuthenticated = (
+  ctx?: NextPageContext,
+  token: any = getAuthArg(ctx)
+): boolean => {
   if (!canParseToken(token)) return false;
   const dateNowSec = Math.floor(Date.now() / 1000);
   const decodedToken = jwt_decode(token);

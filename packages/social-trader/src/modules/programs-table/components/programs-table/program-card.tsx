@@ -20,7 +20,7 @@ import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import { composeProgramDetailsUrl } from "utils/compose-url";
-import { distanceDate } from "utils/dates";
+import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValue, formatValueDifferentDecimalScale } from "utils/formatter";
 
 interface Props {
@@ -65,7 +65,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       hasAvatar
       title={program.title}
       subTitle={program.owner.username}
-      logo={program.logo}
+      logo={program.logoUrl}
       managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}
@@ -115,7 +115,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <StatisticItem label={t("programs-page.programs-header.age")}>
-            {distanceDate(program.creationDate)}
+            {convertDateToShortFormat(distanceDate(program.creationDate))}
           </StatisticItem>
           <StatisticItem label={t("programs-page.programs-header.drawdown")}>
             <NumberFormat

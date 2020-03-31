@@ -1,4 +1,3 @@
-import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage, NextPageContext } from "next";
 import EmailConfirmPage from "pages/auth/email-confirm/email-confirm.page";
 import React from "react";
@@ -16,4 +15,4 @@ interface Props {
   code: string;
 }
 
-export default withDefaultLayout(Page);
+export default Page;

@@ -8,62 +8,38 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import ClearButton from "components/notifications/components/ClearButton";
 import NotificationsGroup from "components/notifications/components/notification-group/notification-group";
+import {
+  getGroups,
+  NotificationGroups,
+  parseDate,
+  sortGroups
+} from "components/notifications/components/notifications.helpers";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Spinner from "components/spiner/spiner";
-import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 
-const parseDate = (unix: number, sameDay: string, lastDay: string): string =>
-  dayjs(unix)
-    .calendar(undefined, {
-      sameDay: `[${sameDay}], DD MMMM`,
-      lastDay: `[${lastDay}], DD MMMM`,
-      lastWeek: "dddd, DD MMMM",
-      sameElse: "dddd, DD MMMM"
-    })
-    .toUpperCase();
-
-const sortGroups = (a: string, b: string) => parseInt(b) - parseInt(a);
-
-const getGroups = (
-  notifications: NotificationViewModel[]
-): NotificationGroups =>
-  notifications.reduce<NotificationGroups>((acc, notification) => {
-    const key = dayjs(notification.date)
-      .startOf("day")
-      .toDate()
-      .getTime();
-    if (!Array.isArray(acc[key])) {
-      acc[key] = [];
-    }
-    acc[key].push(notification);
-    return acc;
-  }, {});
-
 const _Notifications: React.FC<Props> = ({
+  isPending,
   notifications = [],
   total = 0,
   count,
-  fetchNotifications,
-  closeNotifications,
-  clearNotifications
+  getNotifications,
+  closeNotifications
 }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  const { isPending, sendRequest } = useApiRequest({
-    request: fetchNotifications
-  });
   useEffect(() => {
     fetchNotification();
-    return clearNotifications;
   }, []);
-  const fetchNotification = useCallback(() => !isPending && sendRequest(), [
-    isPending
-  ]);
+  const fetchNotification = useCallback(
+    () => !isPending && getNotifications(),
+    [isPending]
+  );
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
@@ -84,30 +60,30 @@ const _Notifications: React.FC<Props> = ({
   return (
     <div className="notifications">
       <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-        <div className="notifications__header">
-          <div className="notifications__ring">
+        <Row className="notifications__header">
+          <RowItem className="notifications__ring">
             <RingIcon />
-          </div>
-          <div className="notifications__header-title">
+          </RowItem>
+          <RowItem className="notifications__header-title">
             {t("notifications-aside.header")}
-          </div>
-          <div className="notifications__count">
+          </RowItem>
+          <RowItem>
             <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
               {count}
             </Chip>
-          </div>
-          <div className="notifications__clear">
-            {count !== 0 && <ClearButton />}
-          </div>
+          </RowItem>
+          <RowItem>
+            {count !== 0 && <ClearButton onApply={getNotifications} />}
+          </RowItem>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}
-            onClick={() => closeNotifications()}
+            onClick={closeNotifications}
           >
             <div className="profile-avatar notifications__link">
               <Icon type={"controls"} />
             </div>
           </Link>
-        </div>
+        </Row>
         <div className="notifications__content">
           {Object.keys(groups)
             .sort(sortGroups)
@@ -123,12 +99,10 @@ const Notifications = React.memo(_Notifications);
 export default Notifications;
 
 interface Props {
-  fetchNotifications: () => void;
-  clearNotifications: () => void;
-  closeNotifications: () => void;
+  isPending: boolean;
+  getNotifications: VoidFunction;
+  closeNotifications: VoidFunction;
   count: number;
   total: number;
-  notifications: NotificationViewModel[];
+  notifications?: NotificationViewModel[];
 }
-
-type NotificationGroups = { [name: number]: NotificationViewModel[] };

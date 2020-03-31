@@ -4,87 +4,30 @@ import classNames from "classnames";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
+import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
-import { RefObject } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import SelectItem from "./select-item";
 
-class Select extends React.PureComponent<Props, State> {
-  state = {
-    anchor: undefined
-  };
+const Select: React.FC<Props> = ({
+  className,
+  name,
+  onBlur,
+  onFocus,
+  onChange,
+  value,
+  children,
+  disabled,
+  disableIfSingle
+}) => {
+  const isDisabled = (disableIfSingle && children.length === 1) || disabled;
+  const { anchor, setAnchor, clearAnchor } = useAnchor();
 
-  input: RefObject<HTMLButtonElement> = React.createRef();
+  const input = useRef<HTMLButtonElement>(null);
 
-  componentDidMount() {
-    this.setDefaultValue();
-  }
-
-  componentDidUpdate() {
-    this.setDefaultValue();
-  }
-
-  isDisabled = () => {
-    const { disabled, disableIfSingle, children } = this.props;
-    return (disableIfSingle && children.length === 1) || disabled;
-  };
-
-  handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
-    event.preventDefault();
-    if (this.isDisabled()) return;
-    this.input.current && this.input.current.focus();
-    this.setState({ anchor: event.currentTarget });
-  };
-
-  handleChildClick = (child: SelectChild) => ({
-    event,
-    isSelected
-  }: {
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-    isSelected: boolean;
-  }): void => {
-    const { onChange, name } = this.props;
-    const { value } = child.props;
-    if (!isSelected) {
-      event.persist();
-      const ChangeEvent: ISelectChangeEvent = {
-        target: { value, name }
-      };
-      if (onChange) {
-        onChange(ChangeEvent, child);
-      }
-    }
-
-    this.handleClose();
-    this.input.current && this.input.current.focus();
-  };
-
-  handleBlur = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { onBlur } = this.props;
-    if (this.isDisabled()) return;
-    if (onBlur) {
-      onBlur(event);
-    }
-  };
-
-  handleFocus = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    const { onFocus } = this.props;
-    if (this.isDisabled()) return;
-    if (onFocus) {
-      onFocus(event);
-    }
-  };
-
-  handleClose = (): void => {
-    this.setState({ anchor: undefined });
-  };
-
-  setDefaultValue(): void {
-    const { name, onChange, value } = this.props;
+  useEffect(() => {
     if (value !== undefined) return;
-    const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
       const event: ISelectChangeEvent = {
@@ -92,70 +35,116 @@ class Select extends React.PureComponent<Props, State> {
       };
       onChange(event, child);
     }
-  }
+  }, [value, children, name, onChange]);
 
-  render() {
-    const isDisabled = this.isDisabled();
-    let displayValue = this.props.value;
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+      event.preventDefault();
+      if (isDisabled) return;
+      input.current && input.current.focus();
+      setAnchor(event);
+    },
+    [isDisabled, input.current]
+  );
 
-    const items = this.props.children.map(child => {
-      const isSelected =
-        this.props.value !== undefined &&
-        child.props.value.toString().toLowerCase() ===
-          this.props.value.toString().toLowerCase();
-      if (isSelected) displayValue = child.props.children;
-      const { name } = this.props;
-      return (
-        <SelectItem
-          key={child.props.value}
-          isSelected={isSelected}
-          onClick={this.handleChildClick(child)}
-          {...child.props}
-          name={name}
-        >
-          {child.props.children}
-        </SelectItem>
-      );
-    });
+  const handleChildClick = useCallback(
+    (child: SelectChild) => ({
+      event,
+      isSelected
+    }: {
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+      isSelected: boolean;
+    }): void => {
+      const { value } = child.props;
+      if (!isSelected) {
+        event.persist();
+        const ChangeEvent: ISelectChangeEvent = {
+          target: { value, name }
+        };
+        if (onChange) {
+          onChange(ChangeEvent, child);
+        }
+      }
+
+      clearAnchor();
+      input.current && input.current.focus();
+    },
+    [input.current, onChange]
+  );
+
+  const handleBlur = useCallback(
+    (event: React.FocusEvent<HTMLButtonElement>): void => {
+      if (onBlur && !isDisabled) {
+        onBlur(event);
+      }
+    },
+    [isDisabled, onBlur]
+  );
+
+  const handleFocus = useCallback(
+    (event: React.FocusEvent<HTMLButtonElement>): void => {
+      if (onFocus && !isDisabled) {
+        onFocus(event);
+      }
+    },
+    [isDisabled, onFocus]
+  );
+
+  let displayValue = value;
+
+  const items = children.map(child => {
+    const isSelected =
+      value !== undefined &&
+      child.props.value.toString().toLowerCase() ===
+        value.toString().toLowerCase();
+    if (isSelected) displayValue = child.props.children;
     return (
-      <div
-        className={classNames("select", this.props.className, {
-          "select--disabled": isDisabled
-        })}
+      <SelectItem
+        key={child.props.value}
+        isSelected={isSelected}
+        onClick={handleChildClick(child)}
+        {...child.props}
+        name={name}
       >
-        <button
-          name={this.props.name}
-          onClick={this.handleClick}
-          className="select__value"
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-          ref={this.input}
-          type="button"
-        >
-          {displayValue && <span className="select__text">{displayValue}</span>}
-          <span className="select__icon">
-            {!isDisabled && (
-              <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
-            )}
-          </span>
-        </button>
-        <input type="hidden" value={this.props.value} name={this.props.name} />
-        <Popover
-          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-          noPadding
-          anchorEl={this.state.anchor}
-          onClose={this.handleClose}
-        >
-          <PopoverContent type={"list"} leftAlign>
-            {items}
-          </PopoverContent>
-        </Popover>
-      </div>
+        {child.props.children}
+      </SelectItem>
     );
-  }
-}
+  });
 
-export default Select;
+  return (
+    <div
+      className={classNames("select", className, {
+        "select--disabled": isDisabled
+      })}
+    >
+      <button
+        name={name}
+        onClick={handleClick}
+        className="select__value"
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        ref={input}
+        type="button"
+      >
+        {displayValue && <span className="select__text">{displayValue}</span>}
+        <span className="select__icon">
+          {!isDisabled && <FilterArrowIcon isOpen={Boolean(anchor)} />}
+        </span>
+      </button>
+      <input type="hidden" value={value} name={name} />
+      <Popover
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        noPadding
+        anchorEl={anchor}
+        onClose={clearAnchor}
+      >
+        <PopoverContent leftAlign type={"list"}>
+          {items}
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
 
 export interface ISelectChangeEvent {
   target: { value: string; name: string };
@@ -182,6 +171,4 @@ interface Props {
   onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
 }
 
-interface State {
-  anchor?: EventTarget;
-}
+export default Select;

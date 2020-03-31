@@ -1,5 +1,3 @@
-import "./details-description-control.scss";
-
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { ASSET } from "constants/constants";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
@@ -27,8 +25,6 @@ const _DetailsFavorite: React.FC<Props> = ({
       isFavorite={isFavorite}
     >
       <DetailsDescriptionControl
-        tag="button"
-        className="details-description-control--button"
         text={t("fund-details-page.description.addToFavorites")}
       >
         <FavoriteIcon

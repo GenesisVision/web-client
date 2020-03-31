@@ -4,10 +4,10 @@ import {
 } from "components/chart/chart-period/chart-period.helpers";
 import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
-import { ProgramBalanceChart } from "gv-api-web";
+import { AccountBalanceChart, ProgramBalanceChart } from "gv-api-web";
 import { FollowAbsoluteProfitChartDataType } from "pages/invest/follows/follow-details/reducers/absolute-profit-chart.reducer";
 import followApi from "services/api-client/follow-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -43,8 +43,7 @@ export const fetchFollowProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FollowProfitChartDataType> => ({
   type: FETCH_FOLLOW_PROFIT_CHART,
-  payload: followApi.getProfitPercentCharts(id, {
-    authorization: authService.getAuthArg(),
+  payload: api.follows().getProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -57,7 +56,7 @@ export const fetchFollowAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<FollowAbsoluteProfitChartDataType> => ({
   type: FETCH_FOLLOW_ABSOLUTE_PROFIT_CHART,
-  payload: followApi.getAbsoluteProfitChart(id, {
+  payload: api.follows().getAbsoluteProfitChart(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -68,10 +67,9 @@ export const fetchFollowBalanceChartAction = (
   id: string,
   period = getDefaultPeriod(),
   currency: CurrencyEnum
-): ApiAction<ProgramBalanceChart> => ({
+): ApiAction<AccountBalanceChart> => ({
   type: FETCH_FOLLOW_BALANCE_CHART,
-  // @ts-ignore
-  payload: followApi.getBalanceChart(id, {
+  payload: api.follows().getBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -81,10 +79,10 @@ export const fetchFollowBalanceChartAction = (
 
 export const fetchFollowDescriptionAction = (
   id: string,
-  authorization: string
+  token: Token
 ): ApiAction<FollowDetailsDataType> => ({
   type: FETCH_FOLLOW_DESCRIPTION,
-  payload: followApi.getFollowAssetDetails(id, { authorization })
+  payload: api.follows(token).getFollowAssetDetails(id)
 });
 
 export interface SetFollowIdAction extends ActionType<FollowIdState> {

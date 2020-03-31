@@ -4,7 +4,6 @@ import ExanteLogo from "pages/landing-page/images/brokers/exante.png";
 import GMBg from "pages/landing-page/images/brokers/gm-bg.svg";
 import GMLogo from "pages/landing-page/images/brokers/gm.svg";
 import HuobiLogo from "pages/landing-page/images/brokers/huobi.png";
-import Just2tradeLogo from "pages/landing-page/images/brokers/just-2-trade.svg";
 import RoboforexLogo from "pages/landing-page/images/brokers/roboforex.svg";
 
 enum BROKERS {
@@ -12,8 +11,7 @@ enum BROKERS {
   BINANCE = "Binance",
   ROBOFOREX = "Roboforex",
   EXANTE = "Exante",
-  HUOBI = "Huobi",
-  JUST2TRADE = "Just2Trade"
+  HUOBI = "Huobi"
 }
 
 export type TBrokerInfo = {
@@ -65,13 +63,6 @@ export const brokersTabs: TTabsItem[] = [
       link: HuobiLogo,
       title: BROKERS.HUOBI
     }
-  },
-  {
-    id: 5,
-    image: {
-      link: Just2tradeLogo,
-      title: BROKERS.JUST2TRADE
-    }
   }
 ];
 
@@ -79,29 +70,28 @@ export const brokersInfo: TBrokerInfo[] = [
   {
     id: 0,
     title: BROKERS.GM,
-    description:
-      "Genesis Markets is a Forex and Crypto broker that offers trading on the most popular trading terminal in the world — MetaTrader. Genesis Markets allows you to access the best liquidity on traditional markets and multiple crypto exchanges within a single account.\n",
+    description: "landing-page.brokers.description-gm",
     listItems: [
       {
-        text: "Forex, Metals, Commodities, Indices, Shares, Crypto"
+        text: "landing-page.brokers.text-gm-1"
       },
       {
-        text: "MetaTrader 5"
+        text: "landing-page.brokers.text-gm-2"
       },
       {
-        text: "BTC, USD Accounts",
+        text: "landing-page.brokers.text-gm-3",
         imageBg: GMBg
       },
       {
-        text: "Crypto Margin Trading"
+        text: "landing-page.brokers.text-gm-4"
       },
       {
-        number: "500+",
-        text: "Altcoins"
+        number: "landing-page.brokers.number-gm-1",
+        text: "landing-page.brokers.text-gm-5"
       },
       {
-        number: "74",
-        text: "Forex Instruments"
+        number: "landing-page.brokers.number-gm-2",
+        text: "landing-page.brokers.text-gm-6"
       }
     ]
   },
@@ -109,103 +99,80 @@ export const brokersInfo: TBrokerInfo[] = [
     type: "Attach",
     id: 1,
     title: BROKERS.BINANCE,
-    description:
-      "Binance is one of the largest global cryptocurrency exchanges that provides an ecosystem for trading a wide range of different crypto assets.\n",
+    description: "landing-page.brokers.description-binance",
     listItems: [
       {
-        number: "600+",
-        text: "Crypto Assets"
+        number: "landing-page.brokers.number-binance",
+        text: "landing-page.brokers.text-binance-1"
       },
       {
-        text: "Binance Web Trading Terminal"
+        text: "landing-page.brokers.text-binance-2"
       },
       {
-        text: "GV Follow functionality"
+        text: "landing-page.brokers.text-binance-3"
       },
       {
-        text: "Plug-in your existing accounts"
+        text: "landing-page.brokers.text-binance-4"
       }
     ]
   },
   {
     id: 2,
     title: BROKERS.ROBOFOREX,
-    description:
-      "RoboForex Ltd is an international IFSC Belize regulated broker which is a member of the RoboForex group. RoboForex provides an access to a wide range of financial instruments and account types.",
+    description: "landing-page.brokers.description-rf",
     listItems: [
       {
-        number: "9400+",
-        text: "assets"
+        number: "landing-page.brokers.number-rf",
+        text: "landing-page.brokers.text-rf-1"
       },
       {
-        text:
-          "Forex, Stocks, Indices, ETFs, Commodities, Metals, Energies, Crypto"
+        text: "landing-page.brokers.text-rf-2"
       },
       {
-        text: "MetaTrader 4"
+        text: "landing-page.brokers.text-rf-3"
       },
       {
-        text: "Pro-Standard, ECN Accounts"
+        text: "landing-page.brokers.text-rf-4"
       },
       {
-        text: "Leverage 1:10-1:100"
+        text: "landing-page.brokers.text-rf-5"
       }
     ]
   },
   {
     id: 3,
     title: BROKERS.EXANTE,
-    description:
-      "EXANTE is a European investment services company established in 2011 that offers global multi-asset financial services, including direct access to a wide range of financial markets in the US, European Union and Asia-Pacific",
+    description: "landing-page.brokers.description-exante",
     listItems: [
       {
-        number: "10000+",
-        text: "assets"
+        number: "landing-page.brokers.number-exante",
+        text: "landing-page.brokers.text-exante-1"
       },
       {
-        text:
-          "Forex, Stocks, ETFs, global futures markets, bonds, metals, options, funds, crypto"
+        text: "landing-page.brokers.text-exante-2"
       },
       {
-        text: "Unique EXANTE Trading Platform"
+        text: "landing-page.brokers.text-exante-3"
       },
       {
-        text: "Leverage 1:50"
+        text: "landing-page.brokers.text-exante-4"
       }
     ]
   },
   {
     id: 4,
     title: BROKERS.HUOBI,
-    description:
-      "Huobi is one of the largest Singapore-based cryptocurrency exchanges,  judging by 24-hour period volume. Founded in China, the company now has offices in Hong Kong, Korea, Japan and the United States.",
+    description: "landing-page.brokers.description-huobi",
     listItems: [
       {
-        number: "400+",
-        text: "crypto trading pairs"
+        number: "landing-page.brokers.number-huobi",
+        text: "landing-page.brokers.text-huobi-1"
       },
       {
-        text: "BTC, ETH, USDT Accounts"
+        text: "landing-page.brokers.text-huobi-2"
       },
       {
-        text: "Huobi Web Trading Terminal"
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: BROKERS.JUST2TRADE,
-    description:
-      "Just2Trade Inc. is a US-based financial services company with offices in New York and Cyprus and a subsidiary of Russian broker Finam Holdings. Just2Trade is a member of FINRA & SIPC, NFA regulatory organizations",
-    listItems: [
-      {
-        text: "Forex, Metals, CFD, Indices"
-      },
-      {
-        text: "MetaTrader 4"
-      },
-      {
-        text: "Leverage 1:10-1:100"
+        text: "landing-page.brokers.text-huobi-3"
       }
     ]
   }

@@ -90,8 +90,8 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.entry-fee")}
-            labelText={t("program-details-page.description.entryFee")}
+            tooltipContent={t("program-details-page.tooltip.management-fee")}
+            labelText={t("program-details-page.description.management-fee")}
           />
         }
         accent

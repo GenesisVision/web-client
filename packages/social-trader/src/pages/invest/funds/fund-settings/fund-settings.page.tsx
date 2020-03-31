@@ -1,4 +1,5 @@
 import { IImageValue } from "components/form/input-image/input-image";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import AssetSettingsPage from "modules/asset-settings/asset-settings.page";
 import { AssetDescriptionType } from "modules/asset-settings/asset-settings.types";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
@@ -6,19 +7,17 @@ import { fundDescriptionSelector } from "pages/invest/funds/fund-details/reducer
 import { dispatchFundDescriptionWithId } from "pages/invest/funds/fund-details/services/fund-details.service";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import {
   createFundInfoSelector,
   fundAssetsSelector
 } from "reducers/platform-reducer";
-import { SetSubmittingType } from "utils/types";
 
 import FundSettings from "./fund-settings";
 import { redirectToFund } from "./services/fund-settings.service";
 
 const _FundSettingsPage: React.FC = () => {
   const dispatch = useDispatch();
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const createFundInfo = useSelector(createFundInfoSelector);
   const description = useSelector(fundDescriptionSelector);
   const platformAssets = useSelector(fundAssetsSelector);
@@ -48,17 +47,14 @@ const _FundSettingsPage: React.FC = () => {
   );
 };
 
-export type TUpdateFundFunc = (
-  values: {
-    description?: string;
-    logo?: IImageValue;
-    investmentLimit?: number;
-    stopOutLevel?: number;
-    entryFee?: number;
-    exitFee?: number;
-  },
-  setSubmitting: SetSubmittingType
-) => void;
+export type TUpdateFundFunc = (values: {
+  description?: string;
+  logo?: IImageValue;
+  investmentLimit?: number;
+  stopOutLevel?: number;
+  entryFee?: number;
+  exitFee?: number;
+}) => void;
 
 const FundSettingsPage = React.memo(_FundSettingsPage);
 export default FundSettingsPage;

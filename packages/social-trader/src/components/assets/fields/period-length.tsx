@@ -1,6 +1,6 @@
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
+import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,10 +10,10 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
   const [t] = useTranslation();
   return (
     <AssetField>
-      <GVFormikField
+      <GVHookFormField
         wide
         name={name}
-        component={GVTextField}
+        component={SimpleTextField}
         label={t("create-program-page.settings.fields.period")}
         InputComponent={Select}
       >
@@ -25,7 +25,7 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
             )}`}
           </option>
         ))}
-      </GVFormikField>
+      </GVHookFormField>
     </AssetField>
   );
 };

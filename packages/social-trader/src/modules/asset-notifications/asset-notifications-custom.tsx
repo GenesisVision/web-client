@@ -1,25 +1,18 @@
 import ChipButton from "components/chip/chip-button";
 import Dialog from "components/dialog/dialog";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import {
+  addNotificationMethod,
+  IAddNotificationSettingProps
+} from "modules/notification-settings/services/notification-settings.services";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { connect, ResolveThunks } from "react-redux";
-import {
-  ActionCreatorsMapObject,
-  bindActionCreators,
-  compose,
-  Dispatch
-} from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useTranslation } from "react-i18next";
+import { postponeCallback } from "utils/hook-form.helpers";
 
-import {
-  TAddNotification,
-  TRemoveNotification,
-  TToggleNotification
-} from "./asset-notifications.types";
 import CustomNotification from "./custom-notification";
 import { ICustomNotificationCreateFormValues } from "./custom-notification-create-form";
 
@@ -27,32 +20,23 @@ const CustomNotificationCreateForm = dynamic(() =>
   import("./custom-notification-create-form")
 );
 
-const _AssetNotificationsCustom: React.FC<Props> = ({
-  t,
-  service,
-  asset,
-  errorMessage,
-  removeNotification,
-  toggleNotification
-}) => {
+const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
+  const [t] = useTranslation();
+  const { sendRequest, errorMessage } = useApiRequest({
+    request: (values: IAddNotificationSettingProps) => {
+      return addNotificationMethod({ ...values, type: "ProgramCondition" });
+    },
+    successMessage: "notifications-page.custom.create-alert",
+    middleware: [postponeCallback(setClosePopup), onSuccess]
+  });
+
   const handleSubmit = useCallback(
-    (
-      values: ICustomNotificationCreateFormValues,
-      setSubmitting: SetSubmittingType
-    ) =>
-      service
-        .addNotification(
-          {
-            assetId: asset.assetId,
-            ...values
-          },
-          t(`notifications-page.custom.create-alert`)
-        )
-        .then(setClosePopup)
-        .catch(() => {
-          setSubmitting(false);
-        }),
+    (values: ICustomNotificationCreateFormValues) =>
+      sendRequest({
+        assetId: asset.assetId,
+        ...values
+      }),
     [asset]
   );
   return (
@@ -62,10 +46,9 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
       </h3>
       {asset.settingsCustom.map(settings => (
         <CustomNotification
+          onSuccess={onSuccess}
           settings={settings}
           key={settings.id}
-          removeNotification={removeNotification}
-          toggleNotifications={toggleNotification}
         />
       ))}
       <ChipButton
@@ -84,46 +67,12 @@ const _AssetNotificationsCustom: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (): StateProps => ({
-  errorMessage: "" //state.programNotifications.errorMessage TODO
-});
-
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { addNotification }: OwnProps
-): DispatchProps => ({
-  service: bindActionCreators<ServiceThunks, ResolveThunks<ServiceThunks>>(
-    { addNotification },
-    dispatch
-  )
-});
-
-interface Props extends OwnProps, StateProps, DispatchProps, WithTranslation {}
-
-interface OwnProps {
+interface Props {
+  onSuccess: VoidFunction;
   asset: ProgramNotificationSettingList;
-  addNotification: TAddNotification;
-  removeNotification: TRemoveNotification;
-  toggleNotification: TToggleNotification;
 }
 
-interface StateProps {
-  errorMessage?: string;
-}
-
-interface ServiceThunks extends ActionCreatorsMapObject {
-  addNotification: TAddNotification;
-}
-interface DispatchProps {
-  service: ResolveThunks<ServiceThunks>;
-}
-
-const AssetNotificationsCustom = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  connect(mapStateToProps, mapDispatchToProps),
-  React.memo
-)(_AssetNotificationsCustom);
+const AssetNotificationsCustom = withLoader(
+  React.memo(_AssetNotificationsCustom)
+);
 export default AssetNotificationsCustom;

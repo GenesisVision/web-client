@@ -1,9 +1,11 @@
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import {
   PopoverContentCardBlock,
   PopoverContentCardBlockItem
 } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { FilterTitle } from "components/table/components/filtering/filter-title";
 import dayjs from "dayjs";
 import * as React from "react";
@@ -123,25 +125,29 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
               startLabel={startLabel}
             />
           </div>
-          <div>
-            <GVButton
-              noPadding
-              className="date-range-filter__btn"
-              variant="text"
-              onClick={this.handleSubmit}
-            >
-              {t("buttons.apply")}
-            </GVButton>
-            <GVButton
-              noPadding
-              className="date-range-filter__btn"
-              variant="text"
-              color="secondary"
-              onClick={cancel}
-            >
-              {t("buttons.cancel")}
-            </GVButton>
-          </div>
+          <Row>
+            <RowItem>
+              <GVButton
+                size={GV_BTN_SIZE.BIG}
+                noPadding
+                variant="text"
+                onClick={this.handleSubmit}
+              >
+                {t("buttons.apply")}
+              </GVButton>
+            </RowItem>
+            <RowItem>
+              <GVButton
+                size={GV_BTN_SIZE.BIG}
+                noPadding
+                variant="text"
+                color="secondary"
+                onClick={cancel}
+              >
+                {t("buttons.cancel")}
+              </GVButton>
+            </RowItem>
+          </Row>
         </PopoverContentCardBlock>
       </PopoverContent>
     );

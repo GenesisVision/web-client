@@ -1,3 +1,4 @@
+import { Row } from "components/row/row";
 import * as React from "react";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
@@ -8,14 +9,12 @@ const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {
       return <div>... +{count}</div>;
     default:
       return (
-        <>
-          <div
-            className="fund-asset__container fund-asset__container--others-count"
-            onClick={handleOpen}
-          >
-            <div className="fund-asset fund-asset--others-count">+{count}</div>
-          </div>
-        </>
+        <div
+          className="fund-asset__container--others-count"
+          onClick={handleOpen}
+        >
+          <Row className="fund-asset fund-asset--others-count">+{count}</Row>
+        </div>
       );
   }
 };

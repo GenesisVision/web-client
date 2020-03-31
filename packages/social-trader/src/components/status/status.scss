@@ -1,9 +1,6 @@
 @import "~shared/styles/_sizes";
 .status {
-  display: flex;
-  align-items: center;
   &__image {
-    @include adaptive-margin(right, $padding-xsmall);
     @include width(24px);
     @include height(24px);
   }

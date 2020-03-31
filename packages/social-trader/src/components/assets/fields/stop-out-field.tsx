@@ -1,7 +1,5 @@
-import "./fields.scss";
-
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
-import GVTextField from "components/gv-text-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,7 +14,7 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
         name={name}
         label={t("create-program-page.settings.fields.stop-out-level")}
         adornment="%"
-        component={GVTextField}
+        component={SimpleTextField}
         type="number"
         hintTooltipContent={t(
           "create-program-page.settings.hints.stop-out-level-description"

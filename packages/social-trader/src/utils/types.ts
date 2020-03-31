@@ -68,7 +68,6 @@ export type ResponseError = {
   code: string;
 };
 
-export type SetSubmittingType = (isSubmitting: boolean) => void;
 export type HandlePeriodChangeType = (period: ChartDefaultPeriod) => void;
 
 export type CurrencyEnum = Currency;
@@ -109,6 +108,7 @@ export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
 
 export type FeesType = {
+  managementFeePersonal?: number;
   entryFee?: number;
   entryFeeSelected?: number;
   entryFeeCurrent?: number;

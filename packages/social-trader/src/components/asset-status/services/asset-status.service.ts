@@ -1,7 +1,7 @@
-import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const getAssetRequests = (id: string) =>
-  investmentsApi
-    .getRequestsByProgram(id, 0, 100, authService.getAuthArg())
+  api
+    .investments()
+    .getRequestsByProgram(id, 0, 100)
     .then(({ items }) => items);

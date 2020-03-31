@@ -2,98 +2,116 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
-import GVFormikField from "components/gv-formik-field";
-import GVTextField from "components/gv-text-field";
-import { InjectedFormikProps, withFormik } from "formik";
+import { GVHookFormField } from "components/gv-hook-form-field";
+import GVTabs from "components/gv-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import useTab from "hooks/tab.hook";
 import * as React from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
 import { number, object, string } from "yup";
 
-const DisableAuth: React.FC<InjectedFormikProps<
-  Props,
-  IDisableAuthFormFormValues
->> = ({ t, handleSubmit, errorMessage, isSubmitting }) => (
-  <form id="disable-auth" onSubmit={handleSubmit} autoComplete="off">
-    <DialogTop title={t("2fa-page.disable.title")} />
-    <DialogBottom>
-      <GVFormikField
-        name={FIELDS.twoFactorCode}
-        type="tel"
-        label={t("2fa-page.google-code")}
-        component={GVTextField}
-        autoComplete="off"
-        InputComponent={NumberFormat}
-        allowNegative={false}
-        format="######"
-      />
-      <GVFormikField
-        name={FIELDS.password}
-        type="password"
-        label={t("2fa-page.password")}
-        component={GVTextField}
-        autoComplete="new-password"
-      />
-      <DialogError error={errorMessage} />
-      <DialogButtons>
-        <GVButton
-          wide
-          className="google-auth__button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {t("buttons.disable")}
-        </GVButton>
-      </DialogButtons>
-    </DialogBottom>
-  </form>
-);
-
-const DisableAuthForm = compose<React.ComponentType<OwnProps>>(
-  withTranslation(),
-  withFormik<Props, IDisableAuthFormFormValues>({
-    displayName: "disable-auth",
-    mapPropsToValues: () => ({
-      [FIELDS.twoFactorCode]: "",
-      [FIELDS.password]: ""
-    }),
-    validationSchema: (props: Props) =>
-      object().shape({
-        [FIELDS.twoFactorCode]: number().required(
-          props.t("2fa-page.code-required")
-        ),
-        [FIELDS.password]: string().required(
-          props.t("2fa-page.password-required")
-        )
-      }),
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(DisableAuth);
-
 enum FIELDS {
+  recoveryCode = "recoveryCode",
   twoFactorCode = "twoFactorCode",
   password = "password"
 }
 
-interface Props extends WithTranslation, OwnProps {}
-interface OwnProps {
+enum TAB {
+  TFA = "TFA",
+  RECOVERY = "RECOVERY"
+}
+
+const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
+  const [t] = useTranslation();
+
+  const { tab, setTab } = useTab<TAB>(TAB.TFA);
+
+  const form = useForm<IDisableAuthFormFormValues>({
+    defaultValues: {
+      [FIELDS.recoveryCode]: "",
+      [FIELDS.twoFactorCode]: "",
+      [FIELDS.password]: ""
+    },
+    validationSchema: object().shape({
+      [FIELDS.recoveryCode]:
+        tab === TAB.RECOVERY
+          ? number().required(t("2fa-page.code-required"))
+          : number(),
+      [FIELDS.twoFactorCode]:
+        tab === TAB.TFA
+          ? number().required(t("2fa-page.code-required"))
+          : number(),
+      [FIELDS.password]: string().required(t("2fa-page.password-required"))
+    }),
+    mode: "onChange"
+  });
+
+  return (
+    <HookForm form={form} onSubmit={onSubmit}>
+      <DialogTop title={t("2fa-page.disable.title")} />
+      <DialogBottom>
+        <GVTabs value={tab} onChange={setTab}>
+          <GVTab value={TAB.TFA} label={t("2fa-page.tabs.tfa")} />
+          <GVTab value={TAB.RECOVERY} label={t("2fa-page.tabs.recovery")} />
+        </GVTabs>
+        {tab === TAB.TFA && (
+          <GVHookFormField
+            name={FIELDS.twoFactorCode}
+            type="tel"
+            label={t("2fa-page.google-code")}
+            component={SimpleTextField}
+            autoComplete="off"
+            allowNegative={false}
+            format="######"
+          />
+        )}
+        {tab === TAB.RECOVERY && (
+          <GVHookFormField
+            name={FIELDS.recoveryCode}
+            type="tel"
+            label={t("2fa-page.tabs.recovery")}
+            component={SimpleTextField}
+            autoComplete="off"
+            allowNegative={false}
+            format="######"
+          />
+        )}
+        <GVHookFormField
+          name={FIELDS.password}
+          type="password"
+          label={t("2fa-page.password")}
+          component={SimpleTextField}
+          autoComplete="new-password"
+        />
+        <DialogError error={errorMessage} />
+        <DialogButtons>
+          <SubmitButton
+            wide
+            className="google-auth__button"
+            isSuccessful={!errorMessage}
+          >
+            {t("buttons.disable")}
+          </SubmitButton>
+        </DialogButtons>
+      </DialogBottom>
+    </HookForm>
+  );
+};
+
+interface Props {
   errorMessage?: string;
-  onSubmit(
-    twoFactorCode: IDisableAuthFormFormValues,
-    setSubmitting: SetSubmittingType
-  ): void;
+  onSubmit: (twoFactorCode: IDisableAuthFormFormValues) => void;
 }
 
 export interface IDisableAuthFormFormValues {
+  [FIELDS.recoveryCode]: string;
   [FIELDS.twoFactorCode]: string;
   [FIELDS.password]: string;
 }
 
+const DisableAuthForm = React.memo(_DisableAuthForm);
 export default DisableAuthForm;

@@ -2,12 +2,7 @@
 @import "~shared/styles/_colors";
 
 .transaction-details {
-  &__details-list-statistic-item {
-    display: flex;
-    align-items: center;
-  }
   &__details-list-statistic-item-value {
-    padding-right: $padding-xsmall;
     &--long {
       font-size: $font-size-xxxxsmall;
     }
@@ -15,8 +10,6 @@
 }
 
 .transaction-asset {
-  display: flex;
-  flex-direction: row;
   @include background-with-avatar-level($secondary-background-color);
 
   &__title {
@@ -29,16 +22,12 @@
 
 .external-transaction {
   &__actions {
-    display: flex;
     justify-content: stretch;
   }
 }
 
 .amount-item {
-  display: flex;
-  align-items: center;
   &__amount {
-    padding-right: $padding-xxsmall;
     &--red {
       color: $negative-color;
     }

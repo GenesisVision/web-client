@@ -36,7 +36,7 @@ const _NotificationAssets: React.FC<Props> = ({ settings, asset }) => {
             level={"level" in setting ? setting.level : undefined}
             key={setting.assetId}
             title={setting.title}
-            logo={setting.logo}
+            logo={setting.logoUrl}
             color={setting.color}
             count={
               ("settingsCustom" in setting

@@ -5,7 +5,7 @@ import tableReducerFactory, {
 } from "components/table/reducers/table.reducer";
 import {
   FollowDetailsListItem,
-  ItemsViewModelFollowDetailsListItem
+  FollowDetailsListItemItemsViewModel
 } from "gv-api-web";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
@@ -20,7 +20,7 @@ export const CLEAR_DASHBOARD_TRADING_FOLLOW_THEM =
   "CLEAR_DASHBOARD_TRADING_FOLLOW_THEM";
 
 export type TTradingFollowThemItems = FollowDetailsListItem;
-export type TTradingFollowThemStateData = ItemsViewModelFollowDetailsListItem;
+export type TTradingFollowThemStateData = FollowDetailsListItemItemsViewModel;
 export type TTradingFollowThemState = ITableState<TTradingFollowThemStateData>;
 export type TTradingFollowThemAction = ApiAction<TTradingFollowThemStateData>;
 

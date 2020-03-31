@@ -1,5 +1,3 @@
-import "./details-description.scss";
-
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
 import { DETAILS_TYPE } from "components/details/details.types";

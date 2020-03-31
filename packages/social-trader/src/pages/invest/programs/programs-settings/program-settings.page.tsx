@@ -8,7 +8,6 @@ import { dispatchProgramDescriptionWithId } from "pages/invest/programs/program-
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProgramInfoSelector } from "reducers/platform-reducer";
-import { SetSubmittingType } from "utils/types";
 
 import ProgramSettings from "./program-settings";
 import { redirectToProgram } from "./services/program-settings.service";
@@ -31,8 +30,13 @@ const _ProgramsEditPage: React.FC = () => {
       asset={isProgram ? CLOSEABLE_ASSET.PROGRAM : CLOSEABLE_ASSET.FOLLOW}
       description={description as AssetDescriptionType}
       dispatchDescription={updateDescription}
-      settingsBlocks={(editProgram: any, applyCloseAsset: any) => (
+      settingsBlocks={(
+        editProgram: any,
+        applyCloseAsset: any,
+        errorMessage?: string
+      ) => (
         <ProgramSettings
+          editError={!!errorMessage}
           updateDescription={updateDescription}
           condition={!!description && !!createProgramInfo}
           createProgramInfo={createProgramInfo}
@@ -55,7 +59,6 @@ export type TUpdateProgramFunc = (
     entryFee?: number;
     successFee?: number;
   },
-  setSubmitting: SetSubmittingType,
   resetForm?: () => void
 ) => void;
 

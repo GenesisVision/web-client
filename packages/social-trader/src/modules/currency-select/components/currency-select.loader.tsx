@@ -1,5 +1,3 @@
-import "./currency-select.scss";
-
 import SvgLoader from "components/svg-loader/svg-loader";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import * as React from "react";

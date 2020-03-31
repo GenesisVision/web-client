@@ -1,7 +1,7 @@
-import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
 import { Push } from "components/link/link";
 import { Broker } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
+import useIsOpen from "hooks/is-open.hook";
 import {
   attachAccount,
   fetchExchanges
@@ -9,22 +9,27 @@ import {
 import React, { useCallback } from "react";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { sendEventToGA } from "utils/ga";
-import { SetSubmittingType } from "utils/types";
 
 import AttachAccountSettings, {
   IAttachAccountSettingsFormValues
 } from "./attach-account-settings/attach-account-settings";
 
 const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
+  const [success, setSuccess] = useIsOpen();
+  const pushMiddleware = () => {
+    Push(TRADING_ROUTE);
+  };
+  const successMiddleware = () => {
+    setSuccess();
+  };
   const sendEventMiddleware = () => {
     sendEventToGA({
       eventCategory: "Create",
       eventAction: "AttachExternalAccount"
     });
   };
-  const pushMiddleware = () => Push(TRADING_ROUTE);
-  const { sendRequest: attach } = useApiRequest({
-    middleware: [sendEventMiddleware, pushMiddleware],
+  const { sendRequest: attach, errorMessage, isPending } = useApiRequest({
+    middleware: [successMiddleware, sendEventMiddleware, pushMiddleware],
     request: attachAccount
   });
   const { data: exchanges } = useApiRequest<Broker[]>({
@@ -33,21 +38,19 @@ const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
   });
 
   const handleSubmit = useCallback(
-    (
-      values: IAttachAccountSettingsFormValues,
-      setSubmitting: SetSubmittingType
-    ) => attach(values, setSubmitting),
+    (values: IAttachAccountSettingsFormValues) => attach(values),
     []
   );
   return (
-    <AssetContentBlock>
-      <AttachAccountSettings
-        requestBrokerName={requestBrokerName}
-        onSubmit={handleSubmit}
-        data={exchanges!}
-        loaderData={[]}
-      />
-    </AssetContentBlock>
+    <AttachAccountSettings
+      isPending={isPending}
+      success={success}
+      errorMessage={errorMessage}
+      requestBrokerName={requestBrokerName}
+      onSubmit={handleSubmit}
+      data={exchanges!}
+      condition={!!exchanges}
+    />
   );
 };
 

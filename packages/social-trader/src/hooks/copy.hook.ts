@@ -1,22 +1,25 @@
-import copy from "copy-to-clipboard";
+import copyToClipboard from "copy-to-clipboard";
 import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import { postponeFunc } from "utils/hook-form.helpers";
 
-const useCopy = (successMessage?: string): ((value: string) => void) => {
+const useCopy = (): { copy: (value: string) => void; isSuccess: boolean } => {
+  const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useDispatch();
-  return (value: string) => {
-    try {
-      copy(value);
-      dispatch(
-        alertMessageActions.success(
-          successMessage || "alerts.copy-success",
-          true
-        )
-      );
-    } catch (error) {
-      dispatch(alertMessageActions.error("alerts.copy-error", true));
-    }
-  };
+  const copy = useCallback(
+    (value: string) => {
+      try {
+        setIsSuccess(true);
+        copyToClipboard(value);
+      } catch (error) {
+        dispatch(alertMessageActions.error("alerts.copy-error", true));
+      }
+      postponeFunc(() => setIsSuccess(false));
+    },
+    [setIsSuccess]
+  );
+  return { isSuccess, copy };
 };
 
 export default useCopy;

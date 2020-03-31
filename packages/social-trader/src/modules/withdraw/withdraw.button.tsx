@@ -1,12 +1,11 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { ASSET } from "constants/constants";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { CurrencyEnum } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({
@@ -17,7 +16,7 @@ const _WithdrawButton: React.FC<Props> = ({
   currency,
   disabled
 }) => {
-  const accountCurrency = useSelector(currencySelector);
+  const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const label = t("buttons.withdraw");
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();

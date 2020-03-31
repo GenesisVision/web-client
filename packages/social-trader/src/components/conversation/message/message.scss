@@ -1,0 +1,20 @@
+@import "~shared/styles/_sizes";
+
+.message {
+  width: 100%;
+  flex-wrap: wrap;
+  @include media-breakpoint-landscape-phone() {
+    flex-wrap: nowrap;
+  }
+  &__user {
+    width: auto;
+    margin-bottom: $padding-xsmall-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-bottom: 0;
+    }
+  }
+  &__text {
+    @include font-size($font-size-paragraph);
+    width: 100%;
+  }
+}

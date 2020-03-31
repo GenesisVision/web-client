@@ -1,5 +1,3 @@
-import "./profitability.scss";
-
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,

@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import {
   fetchSubscriptions,
   SignalSubscriptionLoaderData
@@ -22,7 +20,7 @@ const _Subscription: React.FC<Props> = ({ id, assetCurrency }) => {
   return (
     <Subscription
       loaderData={SignalSubscriptionLoaderData}
-      data={data && data[0]}
+      data={data! && data![0]!}
       updateInfo={updateInfo}
       id={id}
       assetCurrency={assetCurrency}

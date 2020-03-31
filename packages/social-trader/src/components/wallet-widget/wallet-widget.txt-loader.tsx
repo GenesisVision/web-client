@@ -1,5 +1,3 @@
-import "./wallet-widget.scss";
-
 import { WalletsGrandTotal } from "gv-api-web";
 import { getRandomInteger } from "utils/helpers";
 

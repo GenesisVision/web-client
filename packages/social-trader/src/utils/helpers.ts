@@ -1,6 +1,11 @@
-import randomString from "randomstring";
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
+
+const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+export const getRandomChar = () => {
+  return characters.charAt(Math.floor(Math.random() * characters.length));
+};
 
 export const safeGetElemFromArray = <T>(
   arr: T[],
@@ -125,21 +130,16 @@ const isServer = () => {
   return global.hasOwnProperty("window");
 };
 
+export const getRandomBoolean = (): boolean => !!getRandomInteger(0, 1);
+
 const getRandomInteger = (min: number = 0, max: number = 100): number =>
   Math.floor(min + Math.random() * (max + 1 - min));
 
-const getRandomText = (params: Object) => randomString.generate(params);
+export const getRandomWord = (length: number = getRandomInteger(3, 8)) =>
+  tableLoaderCreator(getRandomChar, length).join("");
 
-export const getRandomWord = (params?: Object) =>
-  randomString.generate({
-    length: getRandomInteger(3, 8),
-    readable: true,
-    charset: "alphabetic",
-    ...params
-  });
-
-export const getRandomWords = (length: number) =>
-  tableLoaderCreator(getRandomWord, length).join(" ");
+export const getRandomWords = (length: number = getRandomInteger(3, 8)) =>
+  tableLoaderCreator(() => getRandomWord(), length).join(" ");
 
 export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
@@ -166,7 +166,6 @@ export const rawUrlEncode = (str: string): string =>
     .replace(/\*/g, "%2A");
 
 export {
-  getRandomText,
   getRandomInteger,
   getType,
   getArrayType,

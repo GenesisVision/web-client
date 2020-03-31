@@ -5,7 +5,7 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 
 export const TooltipLabel: React.FC<{
-  tooltipContent: string;
+  tooltipContent: string | JSX.Element;
   labelText?: string;
   className?: string;
 }> = React.memo(({ tooltipContent, labelText, className }) => (

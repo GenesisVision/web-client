@@ -1,4 +1,3 @@
-import memoize from "fast-memoize";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
 import { RootState } from "reducers/root-reducer";
 
@@ -13,8 +12,7 @@ export const apiErrorSelector = <T, U = RootState>(
 export const apiSelector = <T, U = RootState>(
   selector: (state: U) => IApiState<T>
 ) => {
-  const func = memoize((data: TSelectorData<T>) => data);
-  return (state: U): TSelectorData<T> => func(selector(state).data);
+  return (state: U): TSelectorData<T> => selector(state).data;
 };
 
 export const fieldSelector = <R1, S = RootState>(

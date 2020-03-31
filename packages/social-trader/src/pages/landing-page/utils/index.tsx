@@ -1,6 +1,10 @@
 import { useParams, useReferrer } from "hooks/location";
 import { NextPageContext } from "next";
-import { REFERRER, UTM_SOURCE } from "pages/auth/signup/signup.constants";
+import {
+  REFERRAL_CODE,
+  REFERRER,
+  UTM_SOURCE
+} from "pages/auth/signup/signup.constants";
 import React, { useEffect } from "react";
 import { getCookie, setCookie } from "utils/cookie";
 
@@ -25,3 +29,5 @@ export const useUtm = () => {
 
 export const getUtm = (ctx?: NextPageContext) => getCookie(UTM_SOURCE, ctx);
 export const getReferrer = (ctx?: NextPageContext) => getCookie(REFERRER, ctx);
+export const getRefCode = (ctx?: NextPageContext) =>
+  getCookie(REFERRAL_CODE, ctx);

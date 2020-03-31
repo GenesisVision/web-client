@@ -4,7 +4,7 @@ import { ILoginFooterProps } from "pages/auth/components/login-footer/login-foot
 import React, { Component } from "react";
 import { WithTranslation } from "react-i18next";
 
-const QUOTES_COUNT = 5;
+const QUOTES_COUNT = 14;
 
 const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
   WrappedComponent: NextPage<any>
@@ -18,7 +18,7 @@ const withAuthLayout = ({ footerAuthRoute, titleKey, Footer }: IAuthLayout) => (
 
       return {
         quoteNo,
-        namespacesRequired: ["translation"],
+        namespacesRequired: ["translations"],
         ...componentProps
       };
     }

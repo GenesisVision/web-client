@@ -12,14 +12,12 @@ import FollowCreateExternalAccount from "modules/follow-module/follow-popup/foll
 import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams, { FollowParamsFormValues } from "./follow-popup-params";
 import FollowTop from "./follow-popup-top";
-import FollowSelectAccount, {
-  SelectAccountFormValues
-} from "./follow-select-account";
+import FollowSelectAccount from "./follow-select-account";
 
 const initRequestParams = {
   tradingAccountId: "",
@@ -31,6 +29,7 @@ const initRequestParams = {
 };
 
 const _FollowForm: React.FC<Props> = ({
+  errorMessage,
   isExternal,
   data: accounts,
   id,
@@ -58,37 +57,32 @@ const _FollowForm: React.FC<Props> = ({
     },
     [requestParams]
   );
-  const selectCopytradingAccount = useCallback(
-    ({ account }: SelectAccountFormValues) => {
-      setTab(null, TABS.PARAMS);
-      setTradingAccountId(account);
-    },
-    []
-  );
+  const selectCopytradingAccount = useCallback((account: string) => {
+    setTab(null, TABS.PARAMS);
+    setTradingAccountId(account);
+  }, []);
   const returnToCreateCopytradingAccount = useCallback(
     () => setTab(null, TABS.SELECT_ACCOUNT),
     []
   );
   const submit = useCallback(
-    (
-      {
-        mode,
-        openTolerancePercent,
-        percent,
-        fixedVolume
-      }: FollowParamsFormValues,
-      setSubmitting: SetSubmittingType
-    ) => {
+    ({
+      mode,
+      openTolerancePercent,
+      percent,
+      fixedVolume
+    }: FollowParamsFormValues) => {
       const params = {
         ...requestParams,
         tradingAccountId: tradingAccountId!,
+        currency,
         mode,
         openTolerancePercent,
         percent,
         fixedVolume
       };
       setRequestParams(params);
-      submitMethod(id, params, setSubmitting);
+      return submitMethod(id, params);
     },
     [id, requestParams, submitMethod, tradingAccountId]
   );
@@ -124,6 +118,7 @@ const _FollowForm: React.FC<Props> = ({
         ))}
       {tab === TABS.PARAMS && (
         <FollowParams
+          errorMessage={errorMessage}
           subscribeFixedCurrencies={subscribeFixedCurrencies}
           rate={rate}
           currency={currency}
@@ -141,14 +136,14 @@ enum TABS {
 }
 
 interface Props {
+  errorMessage?: string;
   isExternal: boolean;
   data: TradingAccountDetails[];
   rate: number;
   minDeposit: number;
   submitMethod: (
     programId: string,
-    requestParams: AttachToSignalProvider,
-    setSubmitting: SetSubmittingType
+    requestParams: AttachToSignalProvider
   ) => void;
   id: string;
   wallets: WalletData[];

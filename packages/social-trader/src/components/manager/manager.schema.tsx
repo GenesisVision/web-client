@@ -1,5 +1,4 @@
 import { PublicProfile } from "gv-api-web";
-import filesService from "services/file-service";
 import { SchemaType } from "utils/seo";
 
 export const getManagerSchema = (details: PublicProfile): SchemaType => ({
@@ -9,6 +8,6 @@ export const getManagerSchema = (details: PublicProfile): SchemaType => ({
   identifier: details.id,
   jobTitle: "Financial Manager",
   description: details.about,
-  image: filesService.getFileUrl(details.avatar),
+  image: details.logoUrl,
   sameAs: details.socialLinks.map(({ url }) => url)
 });

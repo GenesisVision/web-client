@@ -11,42 +11,42 @@ import { TIconLinks } from "pages/landing-page/static-data/app-links";
 
 export const socialLinks: TIconLinks[] = [
   {
-    name: "Telegram",
+    name: "landing-page.social.links.telegram",
     href: "https://t.me/genesisvision",
     icon: TelegramIcon
   },
   {
-    name: "Twitter",
+    name: "landing-page.social.links.twitter",
     href: "https://twitter.com/genesis_vision/",
     icon: TwitterIcon
   },
   {
-    name: "Facebook",
+    name: "landing-page.social.links.facebook",
     href: "https://www.facebook.com/GenesisVisionProject/",
     icon: FacebookIcon
   },
   {
-    name: "Github",
+    name: "landing-page.social.links.github",
     href: "https://github.com/GenesisVision/",
     icon: GithubIcon
   },
   {
-    name: "Youtube",
+    name: "landing-page.social.links.youtube",
     href: "https://www.youtube.com/channel/UCnx2ja9luqWjgRt35tWR99w",
     icon: YoutubeIcon
   },
   {
-    name: "Reddit",
+    name: "landing-page.social.links.reddit",
     href: "https://www.reddit.com/r/genesisvision/",
     icon: RedditIcon
   },
   {
-    name: "Linkedin",
+    name: "landing-page.social.links.linkedin",
     href: "https://www.linkedin.com/company/genesis-vision/",
     icon: LinkedinIcon
   },
   {
-    name: "Medium Blog",
+    name: "landing-page.social.links.medium-blog",
     href: "https://blog.genesis.vision/",
     icon: MediumIcon
   }

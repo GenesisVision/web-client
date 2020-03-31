@@ -1,0 +1,7 @@
+@import "~shared/styles/_sizes";
+
+.assets-field {
+  &__text {
+    @include adaptive-margin(bottom, $padding-xsmall);
+  }
+}

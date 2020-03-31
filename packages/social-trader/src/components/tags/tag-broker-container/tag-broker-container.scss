@@ -3,11 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .tag-broker-container {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   &__others {
     background-color: rgba($primary-color, 0.05);
     color: $primary-color;
@@ -17,25 +12,5 @@
     width: 18px;
     height: 18px;
     line-height: 9px;
-  }
-
-  &__tooltip.tag-item-tooltip {
-    .tag-item {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .tag-button {
-    margin-top: 0;
-    margin-bottom: 0;
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 }

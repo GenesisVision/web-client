@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import AssetStatus from "components/asset-status/asset-status";
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
@@ -11,13 +9,13 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
+import { useAccountCurrency } from "hooks/account-currency.hook";
+import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, FeesType } from "utils/types";
 
@@ -32,8 +30,13 @@ const _Investment: React.FC<Props> = ({
   asset,
   personalDetails
 }) => {
-  const { successFeePersonal, exitFee, exitFeePersonal } = fees;
-  const accountCurrency = useSelector(currencySelector);
+  const {
+    successFeePersonal,
+    exitFee,
+    exitFeePersonal,
+    managementFeePersonal
+  } = fees;
+  const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const profitValue = "profit" in personalDetails ? personalDetails.profit : 0;
   const profitPercentValue =
@@ -83,6 +86,21 @@ const _Investment: React.FC<Props> = ({
         >
           <NumberFormat
             value={successFeePersonal}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={
+            managementFeePersonal !== undefined &&
+            managementFeePersonal !== null
+          }
+          label={t("program-details-page.description.personal-management-fee")}
+          accent
+        >
+          <NumberFormat
+            value={managementFeePersonal}
             suffix={` %`}
             allowNegative={false}
             displayType="text"
@@ -146,6 +164,17 @@ const _Investment: React.FC<Props> = ({
               <ProgramReinvestingContainer
                 id={id}
                 isReinvesting={personalDetails.isReinvest}
+              />
+            </StatisticItem>
+          )}
+        {"isReinvest" in personalDetails &&
+          personalDetails.isInvested &&
+          personalDetails.canInvest &&
+          !isOwnAsset && (
+            <StatisticItem label={"Ignore SO"} hideLabel>
+              <ProgramAutoJoin
+                id={id}
+                isAutoJoin={personalDetails.isAutoJoin}
               />
             </StatisticItem>
           )}

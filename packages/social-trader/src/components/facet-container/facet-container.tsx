@@ -2,11 +2,11 @@ import NotFoundPage from "components/not-found/not-found";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import { PlatformInfo } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { IFundsFacetTableProps } from "pages/invest/funds/funds-facet/components/funds-facet-table";
 import { IProgramsFacetTableProps } from "pages/invest/programs/programs-facet/components/programs-facet-table";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import {
   platformCurrenciesSelector,
   platformDataSelector
@@ -15,13 +15,13 @@ import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
 
 const _FacetContainer: React.FC<Props> = props => {
-  const { TableContainer, getItems } = props;
+  const { TableContainer, getItems, title } = props;
   const facets = useSelector((state: RootState) =>
     facetsSelector(state, props)
   );
   const facet = useSelector((state: RootState) => facetSelector(state, props));
   const currencies = useSelector(platformCurrenciesSelector);
-  const currency = useSelector(currencySelector);
+  const currency = useAccountCurrency();
   const getFacetItems = useCallback(
     filtering => getItems({ ...filtering, facetId: facet!.id }),
     [facet, getItems]
@@ -31,6 +31,7 @@ const _FacetContainer: React.FC<Props> = props => {
   const { sorting, timeframe } = facet!;
   return (
     <TableContainer
+      title={title}
       sorting={sorting}
       timeframe={timeframe}
       getItems={getFacetItems}
@@ -70,6 +71,7 @@ const facetSelector = createSelector<
 );
 
 interface Props {
+  title?: string;
   id: string;
   asset: FACET_ASSET;
   TableContainer: React.ComponentType<

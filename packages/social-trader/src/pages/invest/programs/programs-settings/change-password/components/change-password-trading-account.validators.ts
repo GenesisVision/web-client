@@ -1,4 +1,4 @@
-import i18next from "i18next";
+import { TFunction, WithT } from "i18next";
 import { twoFactorValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
@@ -6,7 +6,7 @@ interface IChangePasswordTradingAccountValidationSchema {
   twoFactorEnabled: boolean;
 }
 
-const passwordValidator = ({ t }: i18next.WithT) => {
+const passwordValidator = ({ t }: WithT) => {
   return string()
     .min(8, t("password-change-trading-account.validators.password-is-short"))
     .max(32, t("password-change-trading-account.validators.password-is-long"))
@@ -19,21 +19,23 @@ const passwordValidator = ({ t }: i18next.WithT) => {
     );
 };
 
-export const ChangePasswordTradingAccountValidationSchema = (
-  params: i18next.WithT & IChangePasswordTradingAccountValidationSchema
-) =>
+export const ChangePasswordTradingAccountValidationSchema = ({
+  t,
+  twoFactorEnabled
+}: {
+  t: TFunction;
+  twoFactorEnabled: boolean;
+}) =>
   object().shape({
-    twoFactorCode: twoFactorValidator(params.t, params.twoFactorEnabled),
-    password: passwordValidator({ t: params.t }),
+    twoFactorCode: twoFactorValidator(t, twoFactorEnabled),
+    password: passwordValidator({ t }),
     confirmPassword: string()
       .oneOf(
         [ref("password")],
-        params.t(
-          "password-change-trading-account.validators.password-dont-match"
-        )
+        t("password-change-trading-account.validators.password-dont-match")
       )
       .required(
-        params.t(
+        t(
           "password-change-trading-account.validators.confirm-password-required"
         )
       )

@@ -9,17 +9,17 @@ export enum MESSAGE_TYPES {
 }
 interface IErrorMessage {
   error: string | string[];
-  type: MESSAGE_TYPES;
+  type?: MESSAGE_TYPES;
   className?: string;
 }
 const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
-  <div
+  <span
     className={classNames("error-message", className, {
       "error-message--over": type === MESSAGE_TYPES.OVER
     })}
   >
     {error}
-  </div>
+  </span>
 );
 
 export default ErrorMessage;

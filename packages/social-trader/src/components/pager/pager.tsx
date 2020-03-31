@@ -1,6 +1,8 @@
 import "./pager.scss";
 
 import SeoPagination from "components/pager/seo";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import React, { useCallback } from "react";
 
 import PagerButton from "./pager-button";
@@ -27,10 +29,10 @@ const _Pager: React.FC<Props> = ({
 
   const visiblePages = generateVisiblePages(firstPage, countVisiblePages);
   return (
-    <div className="pager">
+    <Row>
       {asLink && <SeoPagination total={total} current={current} />}
       {firstPage > 1 && (
-        <div className="pager__pager-block">
+        <>
           <PagerButton
             page={1}
             current={current}
@@ -38,38 +40,44 @@ const _Pager: React.FC<Props> = ({
             asLink={asLink}
           />
           {firstPage > 2 && <PagerSeparator />}
-        </div>
+        </>
       )}
-      <div className="pager__pager-block">
-        {visiblePages
-          .filter(page => page <= total)
-          .map(page => (
+      <>
+        <>
+          {visiblePages
+            .filter(page => page <= total)
+            .map(page => (
+              <PagerButton
+                asLink={asLink}
+                key={page}
+                page={page}
+                current={current}
+                clickHandle={handleChange}
+              />
+            ))}
+        </>
+      </>
+      {total - firstPage >= countVisiblePages && (
+        <>
+          <>
+            {total - firstPage > countVisiblePages && <PagerSeparator />}
             <PagerButton
               asLink={asLink}
-              key={page}
-              page={page}
+              page={total}
               current={current}
               clickHandle={handleChange}
             />
-          ))}
-      </div>
-      {total - firstPage >= countVisiblePages && (
-        <div className="pager__pager-block">
-          {total - firstPage > countVisiblePages && <PagerSeparator />}
-          <PagerButton
-            asLink={asLink}
-            page={total}
-            current={current}
-            clickHandle={handleChange}
-          />
-        </div>
+          </>
+        </>
       )}
-    </div>
+    </Row>
   );
 };
 
 export const PagerSeparator: React.FC = () => (
-  <div className="pager__separator">...</div>
+  <RowItem small className="pager__separator">
+    ...
+  </RowItem>
 );
 
 const generateVisiblePages = (first: number, count: number): number[] => {

@@ -37,6 +37,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     }
   }
 
+  &__heading {
+    padding: 0;
+  }
+
   &__subheading {
     @include adaptive-padding(bottom, $padding-small);
     @include font-size($font-size-h4);
@@ -61,11 +65,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 }
 
 .asset-details-description {
-  &__tag {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   &__settings {
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 
@@ -73,14 +72,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       margin-left: auto;
       padding: 0;
     }
-  }
-
-  &__author-btn {
-    padding: 0;
-    @include font-size($font-size-common);
-    letter-spacing: 0.19px;
-    font-weight: bold;
-    color: $text-color;
   }
 
   &__controls {

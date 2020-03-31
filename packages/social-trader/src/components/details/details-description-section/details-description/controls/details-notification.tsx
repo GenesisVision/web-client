@@ -1,5 +1,3 @@
-import "./details-description-control.scss";
-
 import { RingIcon } from "components/icon/ring-icon";
 import Link, { ToType } from "components/link/link";
 import * as React from "react";
@@ -11,7 +9,6 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
   const [t] = useTranslation();
   return (
     <DetailsDescriptionControl
-      tag={Link}
       to={to}
       text={t("fund-details-page.description.notifications")}
     >

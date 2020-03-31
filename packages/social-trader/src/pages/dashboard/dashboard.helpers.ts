@@ -1,4 +1,4 @@
-import { BrokerTradeServerType } from "gv-api-web";
+import { BrokerTradeServerType, DashboardProfits } from "gv-api-web";
 import { META_TRADER_4_ROUTE, META_TRADER_5_ROUTE } from "routes/trade.routes";
 
 export const getTerminalLink = (brokerType: BrokerTradeServerType): string => {
@@ -16,3 +16,8 @@ export const getTerminalLink = (brokerType: BrokerTradeServerType): string => {
       return META_TRADER_4_ROUTE;
   }
 };
+
+export const hasProfits = (profits: DashboardProfits) =>
+  Object.values(profits)
+    .map(({ profit }) => profit)
+    .reduce((prev, cur) => prev + cur, 0) !== 0;

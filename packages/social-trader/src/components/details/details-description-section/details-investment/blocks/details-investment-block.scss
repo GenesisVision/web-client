@@ -23,24 +23,17 @@
     }
   }
 
-  &--investment {
+  &--investment--investment {
     flex: 2;
     min-width: 100%;
     @include media-breakpoint-landscape-tablet() {
       min-width: initial;
-      max-width: 70%;
     }
   }
 }
 
 .details-investment-heading {
-  @include font-size($font-size-small);
   text-transform: uppercase;
-  letter-spacing: 0.15px;
-  color: $label-color;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .details-investment-footer {

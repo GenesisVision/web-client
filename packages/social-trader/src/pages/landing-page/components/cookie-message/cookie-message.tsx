@@ -27,6 +27,7 @@ const CookieMessage: React.FC = () => {
             title={"Read privacy policy"}
             href="/privacy-policy"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Find out more
           </a>

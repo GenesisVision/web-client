@@ -1,5 +1,4 @@
 import { AssetFields } from "components/assets/asset-fields/asset-field";
-import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import Currency from "components/assets/fields/currency";
 import DescriptionBlock from "components/assets/fields/description-block";
@@ -12,8 +11,7 @@ import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
-import { InjectedFormikProps, withFormik } from "formik";
+import withLoader from "decorators/with-loader";
 import {
   FollowCreateAssetPlatformInfo,
   ProgramAssetPlatformInfo,
@@ -22,32 +20,55 @@ import {
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { CurrencyEnum, SetSubmittingType } from "utils/types";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
 import convertAssetSettingsValidationSchema, {
-  CONVERT_ASSET_FIELDS,
-  convertAssetMapPropsToValues
+  CONVERT_ASSET_FIELDS
 } from "./convert-asset-settings.helpers";
 
-const _ConvertAssetSettings: React.FC<Props> = ({
-  broker,
-  fromTo: { assetTo, assetFrom },
-  programsInfo: { periods },
-  t,
-  isValid,
-  handleSubmit,
-  isSubmitting,
-  values: { hasInvestmentLimit, description, currency }
-}) => {
-  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
+const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
+  const [isSignalProgram] = useState(true);
+  const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
+  const {
+    currency: currencyProp,
+    onSubmit,
+    broker,
+    fromTo: { assetTo, assetFrom },
+    programsInfo: { periods },
+    errorMessage
+  } = props;
+  const [t] = useTranslation();
+
+  const form = useForm<IConvertAssetSettingsFormValues>({
+    defaultValues: {
+      [CONVERT_ASSET_FIELDS.tradesDelay]: "None",
+      [CONVERT_ASSET_FIELDS.stopOutLevel]: 100,
+      [CONVERT_ASSET_FIELDS.currency]: currencyProp || "GVT",
+      [CONVERT_ASSET_FIELDS.periodLength]:
+        periods.length === 1 ? periods[0] : undefined
+    },
+    validationSchema: convertAssetSettingsValidationSchema({
+      ...props,
+      t,
+      hasInvestmentLimit,
+      isSignalProgram
+    }),
+    mode: "onChange"
+  });
+  const { watch } = form;
+  const { description, currency } = watch();
+
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
   const showCurrency = broker === "Huobi";
+
   return (
-    <form onSubmit={validateAndSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
         label={t("create-program-page.settings.main-settings")}
         blockNumber={"01"}
@@ -63,13 +84,11 @@ const _ConvertAssetSettings: React.FC<Props> = ({
         )}
         {showProgramFields && (
           <AssetFields>
-            {showCurrency && (
-              <Currency
-                name={CONVERT_ASSET_FIELDS.currency}
-                disabled={false}
-                accountCurrencies={["GVT", "BTC", "ETH"]}
-              />
-            )}
+            <Currency
+              hide={!showCurrency}
+              name={CONVERT_ASSET_FIELDS.currency}
+              accountCurrencies={["GVT", "BTC", "ETH"]}
+            />
             <PeriodLength
               periods={periods}
               name={CONVERT_ASSET_FIELDS.periodLength}
@@ -108,7 +127,8 @@ const _ConvertAssetSettings: React.FC<Props> = ({
             blockNumber={"03"}
           >
             <InvestmentLimitField
-              checkboxName={CONVERT_ASSET_FIELDS.hasInvestmentLimit}
+              setHasInvestmentLimit={setHasInvestmentLimit}
+              checkboxName={"hasInvestmentLimit"}
               inputName={CONVERT_ASSET_FIELDS.investmentLimit}
               hasInvestmentLimit={hasInvestmentLimit}
               currency={currency as CurrencyEnum}
@@ -127,8 +147,8 @@ const _ConvertAssetSettings: React.FC<Props> = ({
           />
         </SettingsBlock>
       )}
-      <CreateAssetNavigation asset={assetTo} isSubmitting={isSubmitting} />
-    </form>
+      <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
+    </HookForm>
   );
 };
 
@@ -139,30 +159,22 @@ export interface IConvertAssetSettingsFormOwnProps {
   fromTo: TAssetFromTo;
 }
 
-interface OwnProps extends IConvertAssetSettingsFormOwnProps {
+export interface IConvertAssetSettingsProps
+  extends IConvertAssetSettingsFormOwnProps {
+  errorMessage?: string;
   followInfo: FollowCreateAssetPlatformInfo;
   programsInfo: ProgramAssetPlatformInfo;
-  onSubmit: (
-    data: IConvertAssetSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (data: IConvertAssetSettingsFormValues) => void;
 }
 
-export interface IConvertAssetSettingsProps extends OwnProps, WithTranslation {}
-
 export interface IConvertAssetSettingsFormValues {
-  [CONVERT_ASSET_FIELDS.id]?: string;
   [CONVERT_ASSET_FIELDS.currency]: string;
-  [CONVERT_ASSET_FIELDS.available]: number;
-  [CONVERT_ASSET_FIELDS.rate]: number;
   [CONVERT_ASSET_FIELDS.tradesDelay]: TradesDelayType;
   [CONVERT_ASSET_FIELDS.periodLength]?: number;
   [CONVERT_ASSET_FIELDS.successFee]?: number;
   [CONVERT_ASSET_FIELDS.stopOutLevel]: number;
   [CONVERT_ASSET_FIELDS.successFee]?: number;
   [CONVERT_ASSET_FIELDS.volumeFee]?: number;
-  [CONVERT_ASSET_FIELDS.isSignalProgram]: boolean;
-  [CONVERT_ASSET_FIELDS.hasInvestmentLimit]: boolean;
   [CONVERT_ASSET_FIELDS.title]: string;
   [CONVERT_ASSET_FIELDS.description]: string;
   [CONVERT_ASSET_FIELDS.logo]: IImageValue;
@@ -170,24 +182,5 @@ export interface IConvertAssetSettingsFormValues {
   [CONVERT_ASSET_FIELDS.investmentLimit]?: number;
 }
 
-type Props = InjectedFormikProps<
-  IConvertAssetSettingsProps,
-  IConvertAssetSettingsFormValues
->;
-
-const ConvertAssetSettings = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  withLoader,
-  translate(),
-  withFormik<IConvertAssetSettingsProps, IConvertAssetSettingsFormValues>({
-    displayName: "ConvertAssetSettingsForm",
-    mapPropsToValues: convertAssetMapPropsToValues,
-    validationSchema: convertAssetSettingsValidationSchema,
-    handleSubmit: (values, { props: { id, onSubmit }, setSubmitting }) => {
-      onSubmit({ ...values, id }, setSubmitting);
-    }
-  }),
-  React.memo
-)(_ConvertAssetSettings);
+const ConvertAssetSettings = withLoader(React.memo(_ConvertAssetSettings));
 export default ConvertAssetSettings;

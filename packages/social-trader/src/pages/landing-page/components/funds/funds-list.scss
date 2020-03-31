@@ -18,6 +18,13 @@ $font-color: #100e3b;
   @include media-breakpoint-tablet() {
     grid-column-gap: 40px;
   }
+  .profitability--positive {
+    color: #00804f;
+  }
+
+  .muted-text {
+    color: #6d767e;
+  }
 
   .table-card {
     background-color: $main-color;

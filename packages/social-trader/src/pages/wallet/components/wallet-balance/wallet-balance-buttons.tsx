@@ -1,7 +1,8 @@
-import "./wallet-balance.scss";
-
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import { WalletData } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
@@ -9,28 +10,29 @@ import WalletWithdrawButton from "modules/wallet-withdraw/wallet-withdraw.button
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import * as React from "react";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
+
+import "./wallet-balance.scss";
 
 const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
   const { currency, isDepositEnabled, isWithdrawalEnabled } = currentItem;
-  const profileCurrency = useSelector(currencySelector);
+  const profileCurrency = useAccountCurrency();
   const dispatch = useDispatch();
   const updateWalletInfo = useCallback(() => {
     dispatch(fetchWallets(profileCurrency));
   }, [profileCurrency]);
   return (
-    <div className="wallet-balance__buttons">
-      <div>
+    <Row wrap>
+      <RowItem>
         <WalletDeposit currency={currency} disabled={!isDepositEnabled} />
-      </div>
-      <div>
+      </RowItem>
+      <RowItem>
         <WalletWithdrawButton
           currency={currency}
           disabled={!isWithdrawalEnabled}
         />
-      </div>
-      <div>
+      </RowItem>
+      <RowItem>
         <TransferButton
           onApply={updateWalletInfo}
           withIcon
@@ -39,8 +41,8 @@ const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
           sourceType={"Wallet"}
           destinationType={"Wallet"}
         />
-      </div>
-    </div>
+      </RowItem>
+    </Row>
   );
 };
 

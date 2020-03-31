@@ -1,7 +1,5 @@
-import "./fields.scss";
-
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
-import GVTextField from "components/gv-text-field";
+import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,7 +14,7 @@ const _UserNameField: React.FC<Props> = ({ name }) => {
         type="text"
         name={name}
         label={t("profile-page.login")}
-        component={GVTextField}
+        component={SimpleTextField}
         caption={t("create-program-page.settings.fields.name-requirements")}
       />
     </AssetField>

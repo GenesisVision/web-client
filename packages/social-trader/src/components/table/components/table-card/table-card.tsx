@@ -6,12 +6,14 @@ import ImageBase from "components/avatar/image-base";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
+import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT
 } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { Row } from "components/row/row";
 import { SimpleChartPoint } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
@@ -92,19 +94,21 @@ export const TableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <div className="table-card__subtitle">
-      {url ? (
-        <Link
-          title={`Open ${title} user page`}
-          className=" table-card__name"
-          to={url}
-        >
-          {children}
-        </Link>
-      ) : (
-        children
-      )}
-    </div>
+    <Row middle={false} className="table-card__subtitle">
+      <MutedText noWrap={false}>
+        {url ? (
+          <Link
+            title={`Open ${title} user page`}
+            className=" table-card__name"
+            to={url}
+          >
+            {children}
+          </Link>
+        ) : (
+          children
+        )}
+      </MutedText>
+    </Row>
   );
 };
 
@@ -167,10 +171,13 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
         />
         <div className="table-card__main-info">
           <div className="table-card__title-wrapper">
-            <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            <Row>
+              <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            </Row>
             {subTitle && (
               <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
+            <Row small>{extraBlock}</Row>
           </div>
           {renderActions && (
             <div className="table-card__actions">
@@ -178,7 +185,6 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-          {extraBlock}
         </div>
       </TableCardRow>
     );

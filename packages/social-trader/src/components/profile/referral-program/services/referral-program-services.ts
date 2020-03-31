@@ -1,25 +1,18 @@
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
-import { CurrencyEnum } from "utils/types";
+import { Currency, ReferralFriendItemsViewModel } from "gv-api-web";
+import { api } from "services/api-client/swagger-custom-client";
 
-import { referralDetailsAction } from "../actions/referral-details.actions";
-import { referralFriendsTableAction } from "../actions/referral-friends-table.actions";
-import { referralHistoryTableAction } from "../actions/referral-history-table.actions";
-
-export const getReferralDetails = (currency: CurrencyEnum) => {
-  const authorization = authService.getAuthArg();
-  return referralDetailsAction(authorization, currency);
+export const getReferralDetails = (currency: Currency) => {
+  return api.partnership().getDetails({ currency });
 };
 
-export const getFriendsTable = (filters: any) => {
-  const authorization = authService.getAuthArg();
-  return referralFriendsTableAction(authorization, filters);
+export const getFriendsTable = (
+  filters: any
+): Promise<ReferralFriendItemsViewModel> => {
+  return api.partnership().getReferrals(filters);
 };
 
 export const getHistoryTable = (filters: any) => {
-  const authorization = authService.getAuthArg();
-  return referralHistoryTableAction(authorization, filters);
+  return api.partnership().getRewardsHistory(filters);
 };
 
-export const getProfile = () =>
-  profileApi.getProfileFull(authService.getAuthArg());
+export const getProfile = () => api.profile().getProfileFull();

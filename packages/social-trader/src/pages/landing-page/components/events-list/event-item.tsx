@@ -1,10 +1,11 @@
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { getElementHeight } from "pages/landing-page/utils";
-import React, { useEffect, useRef } from "react";
-import { animated, useSpring } from "react-spring";
+import React, { useEffect, useRef, useState } from "react";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 const timeConversion = (date: Date) => {
@@ -67,40 +68,6 @@ const isShowing = (
   return currentIndex < countShowingItems;
 };
 
-const getPropsAnimation = (
-  countShowingItems: number,
-  maxHeight: number,
-  currentIndex: number,
-  isShow: boolean
-) => {
-  const isLastShowing = currentIndex === countShowingItems;
-  const translate3dProp =
-    isShow || isLastShowing ? (maxHeight + 20) * currentIndex : 60;
-  const scaleProp = isShow || isLastShowing ? 1 : 0.7;
-  return {
-    to: async (next: any) => {
-      next({
-        opacity: isShow ? 1 : 0,
-        transform: `translate3d(0,${translate3dProp}px,0) scale(${scaleProp})`
-      });
-      next({ height: maxHeight, delay: 100 });
-    },
-    from: {
-      opacity: 0,
-      transform: `translate3d(0,0px,0) scale(1)`
-    }
-  };
-};
-
-interface Props extends PlatformEvent {
-  startIndex: number;
-  index: number;
-  countItems: number;
-  countShowingItems: number;
-  maxHeight: number;
-  updateMaxHeight: (currentHeight: number) => void;
-}
-
 const _EventItem: React.FC<Props> = ({
   startIndex,
   index,
@@ -108,16 +75,22 @@ const _EventItem: React.FC<Props> = ({
   countShowingItems,
   title,
   text,
-  icon,
+  logoUrl,
   assetUrl,
   userUrl,
   color,
   assetType,
   date,
   value,
-  maxHeight,
-  updateMaxHeight
+  minHeight,
+  updateMinHeight
 }) => {
+  const { t } = useTranslation();
+  const { contextTitle } = useToLink();
+  const [currentHeight, setCurrentHeight] = useState(0);
+  const [transformElement, setTransformElement] = useState(
+    "translate3d(0,0px,0) scale(1)"
+  );
   const itemRef = useRef(null);
   const linkUser = userUrl
     ? {
@@ -126,7 +99,7 @@ const _EventItem: React.FC<Props> = ({
       }
     : undefined;
   const linkAsset = assetUrl
-    ? getAssetLink(assetUrl, assetType, title)
+    ? getAssetLink(assetUrl, assetType, contextTitle)
     : undefined;
   const currentIndex = getCurrentIndex(
     index,
@@ -135,19 +108,33 @@ const _EventItem: React.FC<Props> = ({
     countItems
   );
   const isShow = isShowing(countShowingItems, currentIndex);
+  const isLastShowing = currentIndex === countShowingItems;
   useEffect(() => {
-    if (!isShow) return;
-    const currentHeight = getElementHeight(itemRef);
-    if (maxHeight < currentHeight) updateMaxHeight(currentHeight);
-  }, [maxHeight]);
-  const props = useSpring(
-    getPropsAnimation(countShowingItems, maxHeight, currentIndex, isShow)
-  );
+    const heightElement = getElementHeight(itemRef);
+    setCurrentHeight(heightElement);
+    if (minHeight < heightElement) {
+      updateMinHeight(heightElement);
+    }
+  }, [minHeight, currentHeight]);
+  useEffect(() => {
+    const translate3d =
+      isShow || isLastShowing ? (minHeight + 20) * currentIndex : 60;
+    const scale = isShow || isLastShowing ? 1 : 0.7;
+    setTransformElement(`translate3d(0,${translate3d}px,0) scale(${scale})`);
+  }, [currentHeight, currentIndex]);
   return (
-    //@ts-ignore
-    <animated.li className="events-list__item" style={props} ref={itemRef}>
+    <li
+      className="events-list__item"
+      style={{
+        transition: `transform 0.5s, opacity 0.5s`,
+        opacity: isShow ? "1" : "0",
+        transform: transformElement,
+        minHeight: `${minHeight}px`
+      }}
+      ref={itemRef}
+    >
       <Link
-        title={`Go to ${title} details page`}
+        title={t("landing-page.links.title", { title, page: "details" })}
         className="events-list__item-link"
         to={linkAsset}
       >
@@ -158,13 +145,16 @@ const _EventItem: React.FC<Props> = ({
             alt={title}
             color={color}
             className="events-list__item-image"
-            src={icon}
+            src={logoUrl}
           />
         </div>
       </Link>
       <div className="events-list__item-info">
         <Link
-          title={`Go to ${userUrl} user page`}
+          title={t("landing-page.links.title", {
+            title: userUrl,
+            page: "user"
+          })}
           className="events-list__item-link"
           to={linkUser}
         >
@@ -178,8 +168,18 @@ const _EventItem: React.FC<Props> = ({
           <div className="events-list__item-date">{timeConversion(date)}</div>
         )}
       </div>
-    </animated.li>
+    </li>
   );
 };
+
+interface Props extends PlatformEvent {
+  startIndex: number;
+  index: number;
+  countItems: number;
+  countShowingItems: number;
+  minHeight: number;
+  updateMinHeight: (currentHeight: number) => void;
+}
+
 const EventItem = React.memo(_EventItem);
 export default EventItem;

@@ -1,28 +1,46 @@
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
+
+export const followUser = (id: string) => api.social().followUser(id);
+
+export const unFollowUser = (id: string) => api.social().unfollowUser(id);
+
+export const toggleFollowUser = ({
+  id,
+  value
+}: {
+  id: string;
+  value: boolean;
+}) => {
+  const method = value ? unFollowUser : followUser;
+  return method(id);
+};
+
+export const fetchManagerFollow = (
+  filter: FilteringType
+): Promise<FollowDetailsListItemItemsViewModel> => {
+  return api.follows().getFollowAssets(filter);
+};
 
 export const fetchManagerPrograms = (
   filter: FilteringType
-): Promise<ItemsViewModelProgramDetailsListItem> => {
-  return programsApi.getPrograms({
+): Promise<ProgramDetailsListItemItemsViewModel> => {
+  return api.programs().getPrograms({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };
 
 export const fetchManagerFunds = (
   filter: FilteringType
-): Promise<ItemsViewModelFundDetailsListItem> => {
-  return fundsApi.getFunds({
+): Promise<FundDetailsListItemItemsViewModel> => {
+  return api.funds().getFunds({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };
@@ -33,19 +51,24 @@ export const fetchManagerAssetsCount = (
   const options = {
     ownerId,
     take: 0,
-    includeWithInvestments: true,
-    authorization: authService.getAuthArg()
+    includeWithInvestments: true
   };
   return Promise.all([
-    programsApi.getPrograms(options),
-    fundsApi.getFunds(options)
-  ]).then(([programsData, fundsData]) => ({
+    api.social().getFeed({ ...options, userId: ownerId }),
+    api.follows().getFollowAssets(options),
+    api.programs().getPrograms(options),
+    api.funds().getFunds(options)
+  ]).then(([feedData, followData, programsData, fundsData]) => ({
+    postsCount: feedData.total,
+    followCount: followData.total,
     programsCount: programsData.total,
     fundsCount: fundsData.total
   }));
 };
 
 export interface IAssetsCountModel {
-  programsCount: number;
-  fundsCount: number;
+  postsCount?: number;
+  followCount?: number;
+  programsCount?: number;
+  fundsCount?: number;
 }

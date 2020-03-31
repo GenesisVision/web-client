@@ -2,8 +2,7 @@ import { CREATE_ASSET } from "constants/constants";
 import { NewFundRequest, NewTradingAccountRequest } from "gv-api-web";
 import { ICreateAccountSettingsFormValues } from "pages/create-account/components/create-account-settings/create-account-settings";
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import filesService from "services/file-service";
 import { sendEventToGA } from "utils/ga";
 
@@ -20,13 +19,9 @@ export const createAsset = ({
   data: ICreateAssetSettingsFormValues;
   asset: CREATE_ASSET;
 }): Promise<any> => {
-  const authorization = authService.getAuthArg();
   let promise = (Promise.resolve("") as unknown) as Promise<any>;
-  if ("logo" in data && data.logo.image) {
-    promise = filesService.uploadFile(
-      data.logo.image.cropped,
-      authorization
-    ) as Promise<any>;
+  if ("logo" in data && data.logo.image && data.logo.image.cropped) {
+    promise = filesService.uploadFile(data.logo.image.cropped) as Promise<any>;
   }
   const method = getCreateMethod(asset);
   return promise
@@ -55,17 +50,17 @@ export const createAsset = ({
 const getCreateMethod = (
   asset: CREATE_ASSET
 ): ((request: NewAssetRequest) => Promise<any>) => {
-  const authorization = authService.getAuthArg();
+  const assetsApi = api.assets();
   switch (asset) {
     case CREATE_ASSET.ACCOUNT:
       return (request: NewAssetRequest) =>
-        assetsApi.createTradingAccount(authorization, {
+        assetsApi.createTradingAccount({
           body: request as NewTradingAccountRequest
         });
     case CREATE_ASSET.FUND:
     default:
       return (request: NewAssetRequest) =>
-        assetsApi.createFund(authorization, {
+        assetsApi.createFund({
           body: request as NewFundRequest
         });
   }

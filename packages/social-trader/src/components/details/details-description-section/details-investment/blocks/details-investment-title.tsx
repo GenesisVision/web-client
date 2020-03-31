@@ -1,5 +1,4 @@
-import "./details-investment-block.scss";
-
+import { MutedText } from "components/muted-text/muted-text";
 import React from "react";
 
 const _DetailsInvestmentHeading: React.FC<React.HTMLAttributes<
@@ -7,7 +6,9 @@ const _DetailsInvestmentHeading: React.FC<React.HTMLAttributes<
 >> = ({ children }) => {
   return (
     <div className="details-investment-heading">
-      <h5>{children}</h5>
+      <MutedText>
+        <h5>{children}</h5>
+      </MutedText>
     </div>
   );
 };

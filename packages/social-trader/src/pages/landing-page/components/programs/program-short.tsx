@@ -1,6 +1,4 @@
-import "./program-short.scss";
-
-import classNames from "classnames";
+import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import {
   TableCardAvatar,
@@ -14,9 +12,12 @@ import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
+
+import "./program-short.scss";
 
 interface Props {
   program: ProgramDetailsListItem;
@@ -24,14 +25,15 @@ interface Props {
 
 const _ProgramShort: React.FC<Props> = ({ program }) => {
   const { t } = useTranslation();
-  const linkProps = {
-    pathname: composeProgramDetailsUrl(program.url),
-    state: `/ ${program.title}`
-  };
+  const { linkCreator } = useToLink();
+  const linkProps = linkCreator(
+    composeProgramDetailsUrl(program.url),
+    PROGRAM_DETAILS_FOLDER_ROUTE
+  );
   return (
     <div className="program-short">
       <TableCardAvatar
-        logo={program.logo}
+        logo={program.logoUrl}
         hasAvatar
         alt={program.title}
         color={program.color}

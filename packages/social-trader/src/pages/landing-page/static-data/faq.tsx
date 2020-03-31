@@ -44,6 +44,7 @@ export const faqGeneral: TAccordion[] = [
               title={"Get iOS application"}
               href="https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
               target="_blank"
+              rel="noopener noreferrer"
             >
               iOS application
             </a>{" "}
@@ -52,6 +53,7 @@ export const faqGeneral: TAccordion[] = [
               title={"Get Android application"}
               href="https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
               target="_blank"
+              rel="noopener noreferrer"
             >
               {" "}
               Android application{" "}
@@ -651,6 +653,7 @@ export const faqGVT: TAccordion[] = [
               title={"Read genesis vision memorandum"}
               href="https://genesis.vision/genesis-vision-memorandum.pdf"
               target="_blank"
+              rel="noopener noreferrer"
             >
               https://genesis.vision/genesis-vision-memorandum.pdf
             </a>

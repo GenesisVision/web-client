@@ -1,10 +1,10 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
-
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import { TRADE_ASSET_TYPE } from "constants/constants";
 import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,8 @@ import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramOpenPositionsRow from "./program-open-positions-row";
 
 const _ProgramOpenPositions: React.FC<Props> = ({
+  assetType,
+  canCloseOpenPositions,
   itemSelector,
   getItems,
   dataSelector,
@@ -43,8 +45,11 @@ const _ProgramOpenPositions: React.FC<Props> = ({
           {t(`program-details-page.history.open-positions.${column.name}`)}
         </span>
       )}
-      renderBodyRow={position => (
+      renderBodyRow={(position, _, updateItems) => (
         <ProgramOpenPositionsRow
+          assetType={assetType}
+          canCloseOpenPositions={canCloseOpenPositions}
+          updateItems={updateItems}
           data={data!}
           position={position}
           currency={currency}
@@ -55,6 +60,8 @@ const _ProgramOpenPositions: React.FC<Props> = ({
 };
 
 interface Props {
+  assetType: TRADE_ASSET_TYPE;
+  canCloseOpenPositions?: boolean;
   getItems: GetItemsFuncActionType;
   itemSelector: (state: RootState) => { [keys: string]: any };
   dataSelector: TableSelectorType;

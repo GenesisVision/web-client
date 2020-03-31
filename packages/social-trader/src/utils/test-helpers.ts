@@ -1,4 +1,4 @@
-import { DEPOSIT_FORM_FIELDS } from "components/deposit/components/deposit-form";
+import { DEPOSIT_FORM_FIELDS } from "components/deposit/components/deposit.helpers";
 import dotenv from "dotenv";
 import {
   ALERT_CLOSE_CLASS,
@@ -9,7 +9,7 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
 import { getTokenName } from "utils/get-token-name";
 
-import translates from "../../public/locales/en/translations.json";
+import translates from "../../public/static/locales/en/translations.json";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env.production" });

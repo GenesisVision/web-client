@@ -1,11 +1,10 @@
-import "./fund-asset.scss";
-
-import classNames from "classnames";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import {
   FundAssetInfo,
   FundAssetPartWithIcon,
@@ -36,14 +35,10 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     if (hasPopoverList) setSize(sizeProp);
   });
   return (
-    <div
-      className={classNames("fund-assets", {
-        "fund-assets--no-wrap": noWrap,
-        "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
-      })}
-    >
+    <Row wrap={!noWrap} className="fund-assets">
       {assets.filter(getVisibleAssets(size || assets.length)).map(
         renderFundAsset({
+          bottomOffset: !noWrap,
           type,
           removable,
           removeHandle,
@@ -53,6 +48,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
       )}
       {size && size < (length || assets.length) && (
         <HidedFundAssets
+          bottomOffset={!noWrap}
           assets={assets}
           setSize={setSize}
           size={size}
@@ -65,16 +61,21 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         />
       )}
       {remainder > 0 && (
-        <div className="fund-asset fund-asset--remainder">
+        <RowItem
+          small
+          bottomOffset
+          className="fund-asset fund-asset--remainder"
+        >
           <NumberFormat value={remainder} suffix="%" displayType="text" />
-        </div>
+        </RowItem>
       )}
-    </div>
+    </Row>
   );
 };
 
 const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
   ({
+    bottomOffset,
     length,
     assets,
     size,
@@ -109,6 +110,7 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
           <div className="fund-assets__container">
             {assets.filter(getHidedAssets(size)).map(
               renderFundAsset({
+                bottomOffset,
                 type,
                 removable,
                 removeHandle,
@@ -124,6 +126,7 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
 );
 
 interface IHidedFundAssetsProps {
+  bottomOffset?: boolean;
   length?: number;
   assets: Array<FundAssetType>;
   type: FUND_ASSET_TYPE;
@@ -144,11 +147,13 @@ const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
   idx >= size;
 
 const renderFundAsset = ({
+  bottomOffset,
   type,
   removable,
   removeHandle,
   assetsLength
 }: {
+  bottomOffset?: boolean;
   type: FUND_ASSET_TYPE;
   removable?: boolean;
   removeHandle?: FundAssetRemoveType;
@@ -156,6 +161,7 @@ const renderFundAsset = ({
   assetsLength: number;
 }) => (asset: FundAssetType, idx: number) => (
   <FundAssetTooltipContainer
+    bottomOffset={bottomOffset}
     key={idx}
     asset={asset as PlatformAssetFull}
     idx={idx}

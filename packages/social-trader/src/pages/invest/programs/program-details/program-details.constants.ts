@@ -156,7 +156,7 @@ export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
     name: "success-fee"
   },
   {
-    name: "entry-fee"
+    name: "management-fee"
   },
   {
     name: "deposit-withdraw"
@@ -164,27 +164,7 @@ export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
 ];
 
 export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
-  {
-    name: "period"
-  },
-  {
-    name: "date-start"
-  },
-  {
-    name: "balance"
-  },
-  {
-    name: "profit"
-  },
-  {
-    name: "success-fee"
-  },
-  {
-    name: "entry-fee"
-  },
-  {
-    name: "deposit-withdraw"
-  },
+  ...PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   {
     name: "commission-rebate"
   }

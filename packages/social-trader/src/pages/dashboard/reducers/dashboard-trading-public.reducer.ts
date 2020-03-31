@@ -5,7 +5,7 @@ import tableReducerFactory, {
 } from "components/table/reducers/table.reducer";
 import {
   DashboardTradingAsset,
-  ItemsViewModelDashboardTradingAsset
+  DashboardTradingAssetItemsViewModel
 } from "gv-api-web";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
@@ -17,7 +17,7 @@ import { ApiAction } from "utils/types";
 export const DASHBOARD_TRADING_PUBLIC = "DASHBOARD_TRADING_PUBLIC";
 
 export type TTradingPublicItems = DashboardTradingAsset;
-export type TTradingPublicStateData = ItemsViewModelDashboardTradingAsset;
+export type TTradingPublicStateData = DashboardTradingAssetItemsViewModel;
 export type TTradingPublicState = ITableState<TTradingPublicStateData>;
 export type TTradingPublicAction = ApiAction<TTradingPublicStateData>;
 

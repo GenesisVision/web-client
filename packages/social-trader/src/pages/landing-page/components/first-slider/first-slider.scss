@@ -40,7 +40,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    will-change: opacity;
     height: 250px;
     text-align: center;
     line-height: 0;
@@ -63,21 +62,23 @@
     }
   }
   &__img {
-    will-change: opacity, transform;
     max-height: 100%;
     vertical-align: middle;
     position: absolute;
     max-width: 100%;
     top: 50%;
     left: 50%;
-    opacity: 0;
-    transform: translate3d(-30%, -50%, 0);
-    animation: 0.5s slideLeft forwards;
+    transform: translate3d(-50%, -50%, 0);
 
-    &--bg {
-      animation-name: appear;
-      animation-delay: 700ms;
-      transform: translate3d(-50%, -50%, 0);
+    &--animation {
+      transform: translate3d(-30%, -50%, 0);
+      opacity: 0;
+      animation: 0.5s slideLeft forwards;
+    }
+
+    &--animation-bg {
+      opacity: 0;
+      animation: 0.5s appear forwards 0.7s;
     }
   }
 

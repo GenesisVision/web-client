@@ -1,9 +1,15 @@
 import DepositContainer from "components/deposit/components/deposit-container";
-import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
+import {
+  getMinProgramDeposit,
+  getMinProgramDeposits,
+  minProgramDepositsDefaultData
+} from "components/deposit/services/program-deposit.service";
 import { IDialogProps } from "components/dialog/dialog";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
+import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
@@ -20,19 +26,27 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
   onClose,
   ownAsset
 }) => {
-  let programMinDepositAmounts = useSelector(programMinDepositAmountsSelector);
+  const programMinDepositAmounts = useSelector(
+    programMinDepositAmountsSelector
+  );
   const minDeposit = getMinProgramDeposit(
     programMinDepositAmounts,
     currency,
     broker
   );
+  const { data: minDeposits, sendRequest } = useApiRequest({
+    request: getMinProgramDeposits
+  });
+  useEffect(() => {
+    open && sendRequest({ minDeposit, programCurrency: currency });
+  }, [open]);
   return (
     <DepositContainer
       title={title}
       ownAsset={ownAsset}
       availableToInvest={availableToInvest}
       entryFee={entryFee}
-      minDeposit={minDeposit}
+      minDeposit={minDeposits || minProgramDepositsDefaultData}
       asset={ASSET.PROGRAM}
       id={id}
       hasEntryFee

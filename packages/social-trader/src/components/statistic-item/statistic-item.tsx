@@ -11,14 +11,12 @@ import withLoader from "decorators/with-loader";
 import * as React from "react";
 
 const _StatisticItem: React.FC<Props> = ({
-  noWrap = true,
   withPadding,
   hideLabel,
   isPending,
   invert,
   large,
   big,
-  small,
   label,
   children,
   accent,
@@ -32,17 +30,14 @@ const _StatisticItem: React.FC<Props> = ({
     <StatisticItemContainerBlock
       withPadding={withPadding}
       half={half}
-      small={small}
       className={className}
     >
       <StatisticItemInner
-        noWrap={noWrap}
         hideLabel={hideLabel}
         isPending={isPending}
         label={label}
         equivalent={equivalent}
         equivalentCurrency={equivalentCurrency}
-        small={small}
         big={big}
         large={large}
         accent={accent}

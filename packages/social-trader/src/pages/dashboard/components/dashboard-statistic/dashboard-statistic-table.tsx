@@ -44,17 +44,17 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
               <TableCell>
                 {humanizeDate(formatDate(event.date))} {event.date && "ago"}
               </TableCell>
-              <TableCell>
-                <div className="dashboard-statistic__event-description">
+              <TableCell className="dashboard-statistic__event-description">
+                <div className="dashboard-statistic__event-description-logo">
                   {event.assetDetails && (
                     <PortfolioEventLogo
                       withAsset={true}
                       assetDetails={event.assetDetails}
-                      icon={event.icon}
+                      icon={event.logoUrl}
                     />
                   )}
-                  <div>{event.title}</div>
                 </div>
+                {event.title}
               </TableCell>
               <TableCell>
                 <Profitability

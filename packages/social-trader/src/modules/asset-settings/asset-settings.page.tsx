@@ -1,5 +1,3 @@
-import "./asset-settings.scss";
-
 import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
@@ -8,6 +6,7 @@ import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/prog
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import "./asset-settings.scss";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
@@ -19,7 +18,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   description
 }) => {
   const successMessage = `edit-asset.notifications.edit-success.${asset.toLowerCase()}`;
-  const { sendRequest: editRequest } = useApiRequest({
+  const { sendRequest: editRequest, errorMessage } = useApiRequest({
     middleware: [dispatchDescription],
     request: editAsset,
     successMessage
@@ -29,13 +28,9 @@ const _AssetsEditPage: React.FC<Props> = ({
     dispatchDescription();
   }, []);
   const editAssetCallback: TUpdateAssetFunc = useCallback(
-    (values, setSubmitting, resetForm) => {
+    (values, resetForm) => {
       const investmentLimit =
-        "hasInvestmentLimit" in values
-          ? values.hasInvestmentLimit
-            ? values.investmentLimit || null
-            : null
-          : description.availableInvestmentLimit;
+        values.investmentLimit !== undefined ? values.investmentLimit : null;
       const currentValues = {
         tradesDelay: description.tradesDelay,
         exitFee: description.exitFeeSelected, //exitFee
@@ -44,9 +39,9 @@ const _AssetsEditPage: React.FC<Props> = ({
         title: description.publicInfo.title,
         stopOutLevel: description.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
         description: description.publicInfo.description,
-        logo: { src: description.publicInfo.logo }
+        logo: { src: description.publicInfo.logoUrl }
       };
-      editRequest({
+      return editRequest({
         id: description.id,
         editAssetData: {
           ...currentValues,
@@ -65,7 +60,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   return (
     <Page showTitle title={title}>
       <div className="asset-settings">
-        {settingsBlocks(editAssetCallback, applyCloseAsset)}
+        {settingsBlocks(editAssetCallback, applyCloseAsset, errorMessage)}
       </div>
     </Page>
   );
@@ -78,7 +73,8 @@ interface Props {
   dispatchDescription: () => void;
   settingsBlocks: (
     editAsset: TUpdateProgramFunc,
-    closeAsset: () => void
+    closeAsset: () => void,
+    errorMessage?: string
   ) => JSX.Element;
 }
 

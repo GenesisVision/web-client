@@ -22,27 +22,13 @@ const _InvestorFees: React.FC<Props> = ({
   walletCurrency
 }) => {
   const gvCommissionValue = calculatePercentage(amount, gvCommission);
-  const entryFeeValue = calculatePercentage(
-    amount - gvCommissionValue,
-    entryFee
-  );
-  const investAmount =
-    amount - gvCommissionValue - entryFeeValue * +hasEntryFee;
+  const investAmount = amount - gvCommissionValue;
   const [t] = useTranslation();
   return (
     <DialogList>
       {hasEntryFee && (
-        <DialogListItem label={t("deposit-asset.entry-fee")}>
-          {entryFee} %
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(entryFeeValue, rate),
-              currency
-            )}
-            prefix=" ("
-            suffix={` ${currency})`}
-            displayType="text"
-          />
+        <DialogListItem label={t("deposit-asset.management-fee")}>
+          {entryFee} % (annual)
         </DialogListItem>
       )}
       <DialogListItem label={t("deposit-asset.gv-commission")}>

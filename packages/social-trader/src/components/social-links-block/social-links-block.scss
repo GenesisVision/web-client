@@ -1,14 +1,8 @@
 @import "~shared/styles/_sizes";
 
 .social-links-block {
-  display: flex;
-  flex-wrap: wrap;
-  @include adaptive-padding(top, $padding-xsmall, 2);
-
   &__social-link {
     display: inline-flex;
-    margin-right: $padding-xxsmall;
-    margin-bottom: $padding-xxsmall;
 
     &:hover {
       transform: translateY(-0.5px);

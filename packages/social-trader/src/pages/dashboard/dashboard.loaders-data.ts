@@ -12,7 +12,6 @@ import {
 import {
   getRandomColor,
   getRandomInteger,
-  getRandomText,
   getRandomWords,
   tableLoaderCreator
 } from "utils/helpers";
@@ -33,6 +32,7 @@ export const getInRequestsData = (): TDashboardRequest => ({
     withdrawPercent: 0,
     id: "",
     logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -60,7 +60,7 @@ export const assetsLoaderData = () => {
     const value = getRandomInteger(Math.round(sum / 4), Math.round(sum / 3));
     sum -= value;
     return {
-      name: getRandomText({ length: 3 }),
+      name: getRandomWords(3),
       percent: i === length - 1 ? sum + value : value,
       color: getRandomColor()
     };
@@ -104,9 +104,11 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
 
 const getEventLoaderData = (): TDashboardEvent => ({
   icon: "",
+  logoUrl: "",
   assetDetails: {
     id: "",
     logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -137,6 +139,7 @@ const getRandomAsset = () =>
 
 export const getRecommendationLoaderData = (): TRecommendation => {
   return {
+    balance: { amount: 0, currency: "GVT" },
     brokerType: "MetaTrader5",
     tags: [],
     personalDetails: {
@@ -165,7 +168,8 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     },
     id: "",
     logo: "",
-    title: getRandomText({ length: 7 }),
+    logoUrl: "",
+    title: getRandomWords(7),
     url: "",
     color: getRandomColor()
   };

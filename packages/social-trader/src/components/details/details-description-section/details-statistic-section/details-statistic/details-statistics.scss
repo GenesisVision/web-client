@@ -83,15 +83,7 @@
   }
 
   &__label {
-    color: $label-color;
-    font-size: $font-size-paragraph-mobile;
-    letter-spacing: 0.4px;
-    margin-bottom: $padding-xsmall-mobile/2;
-    font-weight: normal;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      margin-bottom: $padding-xsmall/2;
-    }
+    @include adaptive-margin(bottom, $padding-xsmall/2);
   }
 
   &__value {

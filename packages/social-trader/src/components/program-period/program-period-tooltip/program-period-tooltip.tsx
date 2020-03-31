@@ -1,5 +1,3 @@
-import "./program-period-tooltip.scss";
-
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";

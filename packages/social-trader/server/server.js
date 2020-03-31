@@ -1,5 +1,5 @@
 const express = require("express");
-const nextI18NextMiddleware = require("next-i18next/middleware");
+const nextI18NextMiddleware = require("next-i18next/middleware").default;
 const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 const generateSitemap = require("./sitemap");
@@ -23,6 +23,7 @@ module.exports = async app => {
 
   const server = express();
   const port = process.env.PORT || 3000;
+  await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 
   server.get("/robots.txt", (req, res) =>

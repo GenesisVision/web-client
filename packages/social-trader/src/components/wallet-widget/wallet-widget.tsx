@@ -1,9 +1,10 @@
 import "./wallet-widget.scss";
 
-import classNames from "classnames";
 import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { WalletsGrandTotal } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
@@ -19,26 +20,29 @@ const WalletWidgetPopoverContent = dynamic(() =>
 );
 
 const _WalletWidget: React.FC<Props> = ({
-  data: { currency, available, invested, trading, total },
-  className
+  data: { currency, available, invested, trading, total }
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
     <>
-      <div className={classNames("wallet-widget", className)}>
-        <div className="wallet-widget__wallet" onClick={setAnchor}>
+      <Row>
+        <RowItem>
+          <Row className="wallet-widget__wallet" onClick={setAnchor}>
+            <HeaderIcon>
+              <WalletIcon primary={anchor !== undefined} />
+            </HeaderIcon>
+            <div className="wallet-widget__amount">{`${formatCurrencyValue(
+              available,
+              currency
+            )} ${currency}`}</div>
+          </Row>
+        </RowItem>
+        <RowItem>
           <HeaderIcon>
-            <WalletIcon primary={anchor !== undefined} />
+            <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
           </HeaderIcon>
-          <div className="wallet-widget__amount">{`${formatCurrencyValue(
-            available,
-            currency
-          )} ${currency}`}</div>
-        </div>
-        <HeaderIcon>
-          <WalletDeposit type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL} />
-        </HeaderIcon>
-      </div>
+        </RowItem>
+      </Row>
       <Popover anchorEl={anchor} onClose={clearAnchor}>
         <WalletWidgetPopoverContent
           currency={currency}
@@ -55,7 +59,6 @@ const _WalletWidget: React.FC<Props> = ({
 
 interface Props {
   data: WalletsGrandTotal;
-  className?: string;
 }
 
 const WalletWidget = withBlurLoader(React.memo(_WalletWidget));

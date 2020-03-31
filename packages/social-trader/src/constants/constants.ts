@@ -1,5 +1,11 @@
 import { Currency, SimpleChart } from "gv-api-web";
 
+export enum SIZES {
+  SMALL = "SMALL",
+  MIDDLE = "MIDDLE",
+  LARGE = "LARGE"
+}
+
 export enum ASSETS_TYPES {
   All = "All",
   Signal = "Signal",
@@ -31,14 +37,23 @@ export enum SORTING {
   DESC = "Desc",
   ASC = "Asc"
 }
-export interface IDataModel {
-  items: any;
+
+export type TableDataType<T> = IDataModel<Array<T>>;
+
+export interface IDataModel<T = any> {
+  items: T;
   total: number;
 }
 
 export enum FOLLOW_TYPE {
   CREATE = "CREATE",
   EDIT = "EDIT"
+}
+
+export enum TRADE_ASSET_TYPE {
+  ACCOUNT = "Account",
+  PROGRAM = "Program",
+  FOLLOW = "Follow"
 }
 
 export enum ASSET {
@@ -66,3 +81,5 @@ export interface IDashboardAssetChart {
 
 export const DECIMAL_SCALE_SMALL_VALUE = 4;
 export const DECIMAL_SCALE_BIG_VALUE = 2;
+
+export const SHOW_SUCCESS_TIME = 1000;

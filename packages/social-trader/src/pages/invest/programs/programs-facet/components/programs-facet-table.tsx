@@ -30,7 +30,6 @@ const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
   title,
   sorting,
   getItems,
-  showRating,
   timeframe,
   columns
 }) => {
@@ -72,7 +71,6 @@ const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
       filtering={composeFiltering()}
       defaultFilters={PROGRAMS_FACET_TABLE_FILTERS}
       getItems={getItems}
-      showRating={showRating}
       columns={columns}
     />
   );
@@ -85,7 +83,6 @@ export interface IProgramsFacetTableProps {
   sorting: string;
   timeframe: Timeframe;
   getItems: GetItemsFuncType;
-  showRating?: boolean;
   level?: number;
   columns?: SortingColumn[];
 }

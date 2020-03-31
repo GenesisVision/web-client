@@ -1,5 +1,3 @@
-import "./dialog.scss";
-
 import FormError, {
   IFormErrorProps
 } from "components/form/form-error/form-error";

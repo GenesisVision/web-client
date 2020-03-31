@@ -1,4 +1,9 @@
-import { ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME
+} from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { composeRequestValueFunc } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import { IDataModel } from "constants/constants";
@@ -41,14 +46,17 @@ export const getFiltersFromContext = ({
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE,
     currentPage: page
   });
+  const dateRangeValues = composeRequestValueFunc(
+    DATE_RANGE_MIN_FILTER_NAME,
+    DATE_RANGE_MAX_FILTER_NAME
+  )(dateRange);
   return {
     ...skipAndTake,
     ...composeFilters(PROGRAMS_TABLE_FILTERS, {
       ...DEFAULT_PROGRAM_TABLE_FILTERS,
       ...other
     }),
-    dateFrom: dateRange.dateStart,
-    dateTo: dateRange.dateEnd,
+    ...dateRangeValues,
     sorting,
     showFavorites
   } as FetchProgramsFiltersType;

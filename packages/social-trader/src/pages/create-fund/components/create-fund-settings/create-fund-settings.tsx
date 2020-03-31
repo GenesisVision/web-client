@@ -1,4 +1,3 @@
-import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import DescriptionBlock from "components/assets/fields/description-block";
@@ -6,34 +5,65 @@ import FeesSettings from "components/assets/fields/fees-settings";
 import { IImageValue } from "components/form/input-image/input-image";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
-import { InjectedFormikProps, withFormik } from "formik";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { FundCreateAssetPlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
-import { SetSubmittingType } from "utils/types";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
+import { HookForm } from "utils/hook-form.helpers";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
 import { AssetsField } from "./assets-field";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
+export enum CREATE_FUND_FIELDS {
+  available = "available",
+  rate = "rate",
+  depositWalletId = "depositWalletId",
+  depositAmount = "depositAmount",
+  entryFee = "entryFee",
+  logo = "logo",
+  description = "description",
+  title = "title",
+  assets = "assets",
+  exitFee = "exitFee"
+}
+
 const _CreateFundSettings: React.FC<Props> = ({
-  setFieldTouched,
-  setFieldValue,
-  handleSubmit,
-  isValid,
-  t,
-  isSubmitting,
-  values: { depositAmount, description, enterMinDeposit },
-  data: { maxExitFee, maxEntryFee, minDeposit }
+  wallets,
+  data,
+  onSubmit,
+  errorMessage
 }) => {
-  const validateAndSubmit = useAssetValidate({ handleSubmit, isValid });
+  const { maxExitFee, maxEntryFee, minDeposit } = data;
+  const [available, setAvailable] = useState(0);
+  const [rate, setRate] = useState(1);
+
+  const [t] = useTranslation();
+
+  const form = useForm<ICreateFundSettingsFormValues>({
+    defaultValues: {
+      [CREATE_FUND_FIELDS.depositWalletId]: safeGetElemFromArray(
+        wallets,
+        ({ currency }) => currency === "GVT"
+      ).id
+    },
+    validationSchema: createFundSettingsValidationSchema({
+      available,
+      rate,
+      wallets,
+      t,
+      data
+    }),
+    mode: "onChange"
+  });
+  const { watch, setValue } = form;
+  const { depositAmount, description } = watch();
+
   return (
-    <form onSubmit={validateAndSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
         label={t("create-fund-page.settings.main-settings")}
         blockNumber={"01"}
@@ -74,40 +104,22 @@ const _CreateFundSettings: React.FC<Props> = ({
         />
       </SettingsBlock>
       <DepositDetailsBlock
-        setFieldTouched={setFieldTouched}
-        enterMinDeposit={enterMinDeposit}
-        enterMinDepositName={CREATE_FUND_FIELDS.enterMinDeposit}
-        availableName={CREATE_FUND_FIELDS.available}
-        rateName={CREATE_FUND_FIELDS.rate}
+        setAvailable={setAvailable}
+        setRate={setRate}
         blockNumber={4}
         walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
         inputName={CREATE_FUND_FIELDS.depositAmount}
         depositAmount={depositAmount}
         minimumDepositAmount={minDeposit}
-        setFieldValue={setFieldValue}
+        setFieldValue={setValue}
         assetCurrency={FUND_CURRENCY}
       />
-      <CreateAssetNavigation asset={ASSET.FUND} isSubmitting={isSubmitting} />
-    </form>
+      <CreateAssetNavigation asset={ASSET.FUND} isSuccessful={!errorMessage} />
+    </HookForm>
   );
 };
 
-export enum CREATE_FUND_FIELDS {
-  enterMinDeposit = "enterMinDeposit",
-  available = "available",
-  rate = "rate",
-  depositWalletId = "depositWalletId",
-  depositAmount = "depositAmount",
-  entryFee = "entryFee",
-  logo = "logo",
-  description = "description",
-  title = "title",
-  assets = "assets",
-  exitFee = "exitFee"
-}
-
 export interface ICreateFundSettingsFormValues {
-  [CREATE_FUND_FIELDS.enterMinDeposit]?: boolean;
   [CREATE_FUND_FIELDS.available]: number;
   [CREATE_FUND_FIELDS.rate]: number;
   [CREATE_FUND_FIELDS.depositWalletId]: string;
@@ -120,47 +132,12 @@ export interface ICreateFundSettingsFormValues {
   [CREATE_FUND_FIELDS.exitFee]?: number;
 }
 
-export interface ICreateFundSettingsProps extends WithTranslation, OwnProps {}
-
-type Props = InjectedFormikProps<
-  ICreateFundSettingsProps,
-  ICreateFundSettingsFormValues
->;
-
-const CreateFundSettings = compose<
-  React.ComponentType<
-    OwnProps & WithBlurLoaderProps<FundCreateAssetPlatformInfo>
-  >
->(
-  withBlurLoader,
-  translate(),
-  withFormik<ICreateFundSettingsProps, ICreateFundSettingsFormValues>({
-    displayName: "CreateFundSettingsForm",
-    mapPropsToValues: () => ({
-      [CREATE_FUND_FIELDS.available]: 0,
-      [CREATE_FUND_FIELDS.rate]: 1,
-      [CREATE_FUND_FIELDS.depositWalletId]: "",
-      [CREATE_FUND_FIELDS.depositAmount]: undefined,
-      [CREATE_FUND_FIELDS.entryFee]: undefined,
-      [CREATE_FUND_FIELDS.logo]: {},
-      [CREATE_FUND_FIELDS.description]: "",
-      [CREATE_FUND_FIELDS.title]: "",
-      [CREATE_FUND_FIELDS.assets]: [],
-      [CREATE_FUND_FIELDS.exitFee]: undefined
-    }),
-    validationSchema: createFundSettingsValidationSchema,
-    handleSubmit: (values, { props, setSubmitting }) => {
-      props.onSubmit(values, setSubmitting);
-    }
-  })
-)(_CreateFundSettings);
+const CreateFundSettings = withBlurLoader(React.memo(_CreateFundSettings));
 export default CreateFundSettings;
 
-interface OwnProps {
+interface Props {
+  errorMessage?: string;
   wallets: WalletData[];
   data: FundCreateAssetPlatformInfo;
-  onSubmit: (
-    values: ICreateFundSettingsFormValues,
-    setSubmitting: SetSubmittingType
-  ) => void;
+  onSubmit: (values: ICreateFundSettingsFormValues) => void;
 }

@@ -1,4 +1,7 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -20,22 +23,24 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
     >
       {(filteredAssets, handleClick) => (
         <div className="fund-asset-filter__assets-block">
-          <ul className="fund-asset-filter__assets">
-            {filteredAssets.map((asset, idx) => (
-              <li
-                className="fund-asset-filter__asset-item"
-                key={idx}
-                onClick={() => handleClick(asset.asset)}
-              >
+          {filteredAssets.map((asset, idx) => (
+            <Row
+              small
+              className="fund-asset-filter__asset-item"
+              key={idx}
+              onClick={() => handleClick(asset.asset)}
+            >
+              <RowItem>
                 <CurrencyItem
                   url={asset.url}
-                  logo={asset.icon}
+                  logo={asset.logoUrl}
                   name={asset.name}
                   small
                 />
-              </li>
-            ))}
-          </ul>
+              </RowItem>
+              <MutedText>{asset.asset}</MutedText>
+            </Row>
+          ))}
         </div>
       )}
     </TileFilterPopover>
