@@ -1,8 +1,8 @@
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import { emailValidator, passwordValidator } from "utils/validators/validators";
 import { object } from "yup";
 
-const validationSchema = (t: i18next.TFunction) =>
+const validationSchema = (t: TFunction) =>
   object().shape({
     email: emailValidator,
     password: passwordValidator(t)
