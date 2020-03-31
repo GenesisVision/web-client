@@ -4,7 +4,7 @@ import {
   FundCreateAssetPlatformInfo,
   WalletData
 } from "gv-api-web";
-import i18next, { TFunction } from "i18next";
+import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
@@ -65,7 +65,7 @@ const createFundSettingsValidationSchema = ({
     });
   });
 
-export const assetsShape = (t: i18next.TFunction) => {
+export const assetsShape = (t: TFunction) => {
   return array()
     .test(
       CREATE_FUND_FIELDS.assets,

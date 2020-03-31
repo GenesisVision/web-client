@@ -1,4 +1,8 @@
 {
+  "conversation": {
+    "repost": "Share",
+    "your-message": "Your message: "
+  },
   "input-amount-field": {
     "label": "Amount"
   },

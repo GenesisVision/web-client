@@ -3,7 +3,7 @@ import * as React from "react";
 
 export const DialogTop: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({ title, subtitle, children }) => (
-  <PopoverContentCardBlock dark size={"big"}>
+  <PopoverContentCardBlock dark size={"big"} fixed>
     <div className="dialog__header">
       {title && <h2>{title}</h2>}
       {subtitle && <div className="dialog__subtitle">{subtitle}</div>}

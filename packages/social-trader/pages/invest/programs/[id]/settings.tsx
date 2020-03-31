@@ -1,5 +1,6 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
+import { checkClosed } from "modules/asset-settings/services/asset-settings.service";
 import {
   dispatchProgramDescription,
   dispatchProgramId
@@ -8,7 +9,6 @@ import ProgramSettingsPage from "pages/invest/programs/programs-settings/program
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
-import { checkClosed } from "modules/asset-settings/services/asset-settings.service";
 
 const ProgramSettings: NextPageWithRedux<void> = () => {
   return <ProgramSettingsPage />;

@@ -1,6 +1,7 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { ProgramUpdate } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
+import filesService from "services/file-service";
 
 export const checkClosed = (status: string) => {
   switch (status) {
@@ -20,11 +21,9 @@ export const editAsset = ({
   id: string;
   editAssetData: IAssetEditFormValues;
 }): Promise<Response> => {
-  let promise = Promise.resolve({});
+  let promise = Promise.resolve("");
   if (editAssetData.logo.image && editAssetData.logo.image.cropped)
-    promise = api.files().uploadFile({
-      uploadedFile: editAssetData.logo.image.cropped
-    });
+    promise = filesService.uploadFile(editAssetData.logo.image.cropped);
   return promise.then(response => {
     const body = {
       ...editAssetData,

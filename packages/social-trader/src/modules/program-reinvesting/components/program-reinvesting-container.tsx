@@ -1,5 +1,3 @@
-import "./program-reinvesting-container.scss";
-
 import classNames from "classnames";
 import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -8,6 +6,7 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
+import "./program-reinvesting-container.scss";
 
 const _ProgramReinvestingContainer: React.FC<Props> = ({
   isReinvesting: propIsReinvesting,

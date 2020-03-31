@@ -1,6 +1,7 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { Message } from "components/conversation/message/message";
 import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
@@ -10,7 +11,7 @@ import {
   AssetDetails,
   PlatformAsset,
   Post as PostType,
-  ProfilePublicShort,
+  ProfilePublic,
   SocialPostTagType
 } from "gv-api-web";
 import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
@@ -18,12 +19,14 @@ import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 
+import "./tag-components.scss";
+
 export interface IPlatformAssetTagProps {
   platformAssetDetails: PlatformAsset;
 }
 
 export interface IUserTagProps {
-  userDetails: ProfilePublicShort;
+  userDetails: ProfilePublic;
 }
 
 export interface IAssetTagProps {
@@ -55,9 +58,22 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
 };
 export const PlatformAssetTagComponent = React.memo(_PlatformAssetTagComponent);
 
-const _RepostTagComponent: React.FC<IRepostTagProps> = ({ post }) => {
-  return null;
-  // return <Post post={post} updateData={() => {}} />;
+const _RepostTagComponent: React.FC<IRepostTagProps> = ({
+  post: { tags, id, images, date, text, author }
+}) => {
+  return (
+    <div className="repost-tag-container">
+      <Message
+        row={false}
+        tags={tags}
+        postId={id}
+        images={images}
+        date={date}
+        text={text}
+        author={author}
+      />
+    </div>
+  );
 };
 export const RepostTagComponent = React.memo(_RepostTagComponent);
 
@@ -84,7 +100,7 @@ const _ProgramLink: React.FC<IAssetTagProps> = ({
 export const ProgramLink = React.memo(_ProgramLink);
 
 const _ProgramTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl: logo, title, url }
+  assetDetails: { logoUrl, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -92,7 +108,7 @@ const _ProgramTagCard: React.FC<IAssetTagProps> = ({
       <AvatarWithName
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logo} alt={title} />
+            <AssetAvatar url={logoUrl} alt={title} />
           </Link>
         }
         name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
@@ -115,7 +131,7 @@ const _FundLink: React.FC<IAssetTagProps> = ({
 export const FundLink = React.memo(_FundLink);
 
 const _FundTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl: logo, title, url }
+  assetDetails: { logoUrl, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -123,7 +139,7 @@ const _FundTagCard: React.FC<IAssetTagProps> = ({
       <AvatarWithName
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logo} alt={title} />
+            <AssetAvatar url={logoUrl} alt={title} />
           </Link>
         }
         name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
@@ -146,7 +162,7 @@ const _FollowLink: React.FC<IAssetTagProps> = ({
 export const FollowLink = React.memo(_FollowLink);
 
 const _FollowTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl: logo, title, url }
+  assetDetails: { logoUrl, title, url }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -154,7 +170,7 @@ const _FollowTagCard: React.FC<IAssetTagProps> = ({
       <AvatarWithName
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logo} alt={title} />
+            <AssetAvatar url={logoUrl} alt={title} />
           </Link>
         }
         name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
@@ -174,7 +190,7 @@ const _UserLink: React.FC<IUserTagProps> = ({
 export const UserLink = React.memo(_UserLink);
 
 const _UserTagCard: React.FC<IUserTagProps> = ({
-  userDetails: { username, url }
+  userDetails: { username, url, logoUrl }
 }) => {
   const { contextTitle } = useToLink();
   return (
@@ -182,7 +198,7 @@ const _UserTagCard: React.FC<IUserTagProps> = ({
       <AvatarWithName
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <ProfileAvatar url={""} alt={username} />
+            <ProfileAvatar url={logoUrl} alt={username} />
           </Link>
         }
         name={

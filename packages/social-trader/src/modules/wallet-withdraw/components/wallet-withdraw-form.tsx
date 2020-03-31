@@ -1,5 +1,3 @@
-import "./wallet-withdraw-form.scss";
-
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
@@ -27,6 +25,8 @@ import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-withdraw-form.scss";
 
 const _WalletWithdrawForm: React.FC<Props> = ({
   onSubmit,

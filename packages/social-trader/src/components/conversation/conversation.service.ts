@@ -1,5 +1,4 @@
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
-import { getConversationPostLoaderData } from "components/conversation/conversation.loader";
 import {
   AssetSearchResult,
   ConversationFeed,
@@ -7,14 +6,15 @@ import {
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
+import { RePost } from "gv-api-web";
 import searchApi from "services/api-client/search-api";
 import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
-export const sharePost = (id: string) => {
-  return mockRequest(id);
+export const rePost = (body: RePost) => {
+  return api.social().rePost({ body });
 };
 
 export const pinPost = (id: string) => {

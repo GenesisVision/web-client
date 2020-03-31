@@ -31,7 +31,7 @@ Component.getInitialProps = async ({ res, err }) => {
     code,
     statusMessage,
     errorMessage,
-    namespacesRequired: ["translation"]
+    namespacesRequired: ["translations"]
   };
 };
 

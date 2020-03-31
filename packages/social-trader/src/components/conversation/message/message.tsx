@@ -1,7 +1,6 @@
-import {
-  ConversationImage,
-  getImageSize
-} from "components/conversation/conversation-image/conversation-image";
+import classNames from "classnames";
+import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
+import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import {
   IConversationImage,
@@ -20,60 +19,64 @@ import React from "react";
 import "./message.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  row = true,
   tags,
   postId,
   images,
   text,
   date,
-  author: { username, url, avatar }
+  author: { username, url, logoUrl }
 }) => {
   return (
-    <Row center={false} className="message">
-      <RowItem className="message__user">
-        <ConversationUser
-          postId={postId}
-          url={url}
-          avatar={avatar}
-          username={username}
-          date={date}
-        />
-      </RowItem>
-      <RowItem className="message__text">
-        {text && (
-          <Row>
-            <div>
-              {parseToTsx({
-                tags,
-                text,
-                map: inTextComponentsMap
-              })}
-            </div>
-          </Row>
-        )}
-        {!!images.length && (
-          <Row wrap small className="message__images">
-            {images.map((image, index) => (
-              <RowItem bottomOffset key={image.image}>
-                <ConversationImage
-                  index={index}
-                  images={images}
-                  size={getImageSize(images.length)}
-                />
-              </RowItem>
-            ))}
-          </Row>
-        )}
-        {!!tags?.length && (
-          <Row wrap small>
-            {generateTagsComponents(tags)}
-          </Row>
-        )}
-      </RowItem>
-    </Row>
+    <div>
+      <div className={classNames("message", { "message--row": row })}>
+        <RowItem className="message__user">
+          <ConversationUser
+            postId={postId}
+            url={url}
+            avatar={logoUrl}
+            username={username}
+            date={date}
+          />
+        </RowItem>
+        <RowItem className="message__text">
+          {text && (
+            <Row>
+              <div>
+                {parseToTsx({
+                  tags,
+                  text,
+                  map: inTextComponentsMap
+                })}
+              </div>
+            </Row>
+          )}
+          {!!images.length && (
+            <Row wrap small className="message__images">
+              {images.map((image, index) => (
+                <RowItem bottomOffset key={index}>
+                  <ConversationImage
+                    index={index}
+                    images={images}
+                    size={getImageSize(images.length)}
+                  />
+                </RowItem>
+              ))}
+            </Row>
+          )}
+        </RowItem>
+      </div>
+      {!!tags?.length && (
+        <Row wrap small>
+          {generateTagsComponents(tags)}
+        </Row>
+      )}
+    </div>
   );
 };
 
 export interface IMessageProps {
+  row?: boolean;
   tags?: PostTag[];
   postId?: string;
   images: IConversationImage[];

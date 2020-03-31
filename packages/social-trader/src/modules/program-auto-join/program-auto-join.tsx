@@ -1,5 +1,3 @@
-import "./program-auto-join.scss";
-
 import classNames from "classnames";
 import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -7,6 +5,7 @@ import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import "./program-auto-join.scss";
 import { toggleAutoJoin } from "./program-auto-join.service";
 
 const ProgramAutoJoinTooltip = () => {

@@ -6,12 +6,14 @@
   @include media-breakpoint-landscape-phone() {
     flex-wrap: nowrap;
   }
+  &--row {
+    display: flex;
+  }
+  &__tags {
+  }
   &__user {
     width: auto;
     margin-bottom: $padding-xsmall-mobile;
-    @include media-breakpoint-landscape-phone() {
-      margin-bottom: 0;
-    }
   }
   &__text {
     @include font-size($font-size-paragraph);

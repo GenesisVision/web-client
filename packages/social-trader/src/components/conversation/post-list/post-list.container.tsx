@@ -2,15 +2,14 @@ import { getEmptyPostLoaderData } from "components/conversation/conversation.loa
 import { getPosts } from "components/conversation/conversation.service";
 import { PostList } from "components/conversation/post-list/post-list";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
+import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { idSelector } from "reducers/header-reducer";
 
 import "./post-list.scss";
 
 const _PostListContainer: React.FC<Props> = ({ id }) => {
-  const selfId = useSelector(idSelector);
+  const isOwnPage = useIsOwnPage(id);
   const { data, sendRequest } = useApiRequest({
     request: () => getPosts({ id })
   });
@@ -19,7 +18,7 @@ const _PostListContainer: React.FC<Props> = ({ id }) => {
   }, [id]);
   return (
     <div>
-      {selfId === id && <PostInputContainer onSuccess={sendRequest} />}
+      {isOwnPage && <PostInputContainer onSuccess={sendRequest} />}
       <PostList
         loaderData={[getEmptyPostLoaderData()]}
         data={data!?.items}

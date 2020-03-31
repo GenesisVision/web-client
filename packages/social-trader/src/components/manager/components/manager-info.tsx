@@ -1,8 +1,8 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
 import { ManagerStatisticItem } from "components/manager/components/manager-statistic-item";
+import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -14,8 +14,18 @@ import { useTranslation } from "react-i18next";
 import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
-  profile: { username, about, logoUrl, regDate, id, socialLinks }
+  profile: {
+    followers,
+    following,
+    username,
+    about,
+    logoUrl,
+    regDate,
+    id,
+    socialLinks
+  }
 }) => {
+  const isOwnPage = useIsOwnPage(id);
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
     regDate
@@ -37,20 +47,22 @@ const _ManagerInfo: React.FC<Props> = ({
               </MutedText>
             </Row>
           </Row>
-          <Row onlyOffset large>
-            <FollowUserButton id={id} value={false} />
-          </Row>
+          {isOwnPage === false && (
+            <Row onlyOffset large>
+              <FollowUserButton id={id} value={false} />
+            </Row>
+          )}
           <Row large>
             <RowItem>
               <ManagerStatisticItem
                 label={t("manager-page.followers")}
-                value={1536}
+                value={followers}
               />
             </RowItem>
             <RowItem>
               <ManagerStatisticItem
                 label={t("manager-page.following")}
-                value={44}
+                value={following}
               />
             </RowItem>
           </Row>
