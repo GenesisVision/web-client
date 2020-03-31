@@ -14,7 +14,7 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
         <ImageBaseElement
           alt={"broker"}
           className={"asset-details-description__broker"}
-          src={description.brokerDetails.logo}
+          src={description.brokerDetails.logoUrl}
         />
       </StatisticItem>
       <StatisticItem label={t("program-details-page.description.currency")}>

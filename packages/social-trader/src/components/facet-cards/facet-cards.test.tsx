@@ -18,6 +18,7 @@ describe("Facet Cards tests", () => {
     description: "",
     id: "",
     logo: "",
+    logoUrl: "",
     sortType: "New",
     timeframe: "AllTime",
     title: "",

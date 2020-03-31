@@ -1,5 +1,3 @@
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
-export const getHeader = () =>
-  profileApi.getProfileHeader(authService.getAuthArg());
+export const getHeader = () => api.profile().getProfileHeader();

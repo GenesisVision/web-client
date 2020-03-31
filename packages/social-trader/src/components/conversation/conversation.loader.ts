@@ -4,6 +4,7 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { managerLoaderData } from "components/details/details.loader-data";
 import { PostTag } from "gv-api-web";
 import {
   getRandomBoolean,
@@ -16,6 +17,23 @@ import uuid from "uuid";
 
 const getTagLoaderData = (): PostTag => ({
   title: "",
+  post: {
+    id: getRandomWord(),
+    text: getRandomWord(),
+    date: new Date(),
+    likesCount: getRandomInteger(1, 5),
+    isPinned: false,
+    images: [],
+    tags: [],
+    author: managerLoaderData,
+    actions: {
+      isLiked: true,
+      canEdit: false,
+      canDelete: false,
+      canPin: false
+    },
+    comments: []
+  },
   number: 0,
   assetDetails: {
     url: getRandomWord(),
@@ -24,6 +42,7 @@ const getTagLoaderData = (): PostTag => ({
     id: "",
     color: "",
     logo: "",
+    logoUrl: "",
     programDetails: { level: 0, levelProgress: 0 }
   },
   type: "Program",
@@ -39,6 +58,7 @@ const getTagLoaderData = (): PostTag => ({
     description: "string",
     icon: "string",
     color: "string",
+    logoUrl: "",
     mandatoryFundPercent: 0,
     url: "string"
   }
@@ -91,16 +111,22 @@ const mockImages = [
 ];
 
 export const getConversationImageLoaderData = (): IConversationImage => ({
-  image: mockImages[getRandomInteger(0, mockImages.length - 1)]
+  image: mockImages[getRandomInteger(0, mockImages.length - 1)],
+  resizes: []
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
   canEdit: getRandomBoolean(),
   canDelete: getRandomBoolean(),
-  isLiked: getRandomBoolean()
+  isLiked: getRandomBoolean(),
+  canPin: getRandomBoolean()
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
+  socialLinks: [],
+  registrationDate: new Date(),
+  avatar: "",
+  logoUrl: "",
   id: uuid.v4(),
   username: getRandomWord(getRandomInteger(8, 50)),
   url: ""
@@ -124,7 +150,7 @@ export const getConversationPostLoaderData = (
     ),
     id: uuid.v4(),
     images,
-    author: getConversationUserLoaderData(),
+    author: managerLoaderData,
     date: new Date(),
     likesCount: getRandomInteger(1, 10),
     text,
@@ -138,7 +164,7 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
   comments: [],
   id: uuid.v4(),
   images: [],
-  author: getConversationUserLoaderData(),
+  author: managerLoaderData,
   date: new Date(),
   likesCount: 0,
   text: "",

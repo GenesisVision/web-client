@@ -1,8 +1,7 @@
 import { UpdateProfileViewModel } from "gv-api-web";
-import profileApi from "services/api-client/profile-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const updateProfile = ({ model }: { model?: UpdateProfileViewModel }) =>
-  profileApi.updateProfile(authService.getAuthArg(), {
+  api.profile().updateProfile({
     body: model
   });

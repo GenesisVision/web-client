@@ -12,6 +12,7 @@ export const walletDataCreator = (): WalletData => ({
   id: getRandomWord(),
   title: getRandomWord(),
   logo: getRandomWord(),
+  logoUrl: "",
   isDepositEnabled: false,
   isWithdrawalEnabled: false,
   withdrawalCommission: getRandomInteger(1, 1000),

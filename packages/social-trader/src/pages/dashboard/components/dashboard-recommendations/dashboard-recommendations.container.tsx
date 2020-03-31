@@ -1,5 +1,3 @@
-import "./dashboard-recommendations.scss";
-
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
@@ -10,6 +8,8 @@ import { getRecommendations } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { tableLoaderCreator } from "utils/helpers";
+
+import "./dashboard-recommendations.scss";
 
 const _DashboardRecommendationsContainer: React.FC = () => {
   const currency = useAccountCurrency();

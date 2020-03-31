@@ -1,7 +1,7 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage } from "next";
-import React from "react";
 import { FeedPage } from "pages/feed/feed.page";
+import React from "react";
 
 const Page: NextPage<Props> = ({ tags }) => {
   return <FeedPage tags={tags} />;

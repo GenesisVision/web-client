@@ -1,5 +1,3 @@
-import "./profile-widget.scss";
-
 import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import GVButton from "components/gv-button";
@@ -30,6 +28,8 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import "./profile-widget.scss";
 
 const ProfileMenuItem: React.FC<{
   to?: ToType | string;
@@ -70,7 +70,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
     <div className={classNames("profile-widget", className)}>
       <div className="profile-widget__content" onClick={setAnchor}>
         <ProfileAvatar
-          url={profileHeader.avatar}
+          url={profileHeader.logoUrl}
           alt={profileHeader.email}
           className="profile-widget__avatar"
         />

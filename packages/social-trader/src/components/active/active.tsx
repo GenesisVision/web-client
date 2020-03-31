@@ -1,5 +1,3 @@
-import "./active.scss";
-
 import { CurrencyItem } from "components/currency-item/currency-item";
 import TradingViewWidget, {
   Themes
@@ -11,9 +9,10 @@ import { useTranslation } from "react-i18next";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
+import "./active.scss";
 
 const _Active: React.FC<Props> = ({
-  data: { name, description, tags, chartSymbol, logo, socialLinks }
+  data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
 }) => {
   const [isServer, setIsServer] = useState(true);
   const [t] = useTranslation();
@@ -23,7 +22,7 @@ const _Active: React.FC<Props> = ({
   return (
     <div>
       <div className="active__block">
-        <CurrencyItem logo={logo} name={name} clickable={false} big />
+        <CurrencyItem logo={logoUrl} name={name} clickable={false} big />
       </div>
       <div className="active__block active__tags">
         {tags && <TagItemList tags={tags} />}

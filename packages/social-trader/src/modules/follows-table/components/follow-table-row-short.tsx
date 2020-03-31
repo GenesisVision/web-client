@@ -29,7 +29,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
     balance,
-    logo,
+    logoUrl,
     personalDetails,
     id,
     tags,
@@ -50,7 +50,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       <TableCell className="programs-table__cell">
         <Link to={linkProps}>
           <AssetAvatarWithName
-            url={logo}
+            url={logoUrl}
             alt={follow.title}
             color={color}
             name={

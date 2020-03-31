@@ -1,5 +1,3 @@
-import "./social-link.scss";
-
 import SocialLinkImage from "components/avatar/social-link/social-link";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -15,6 +13,8 @@ import { useTranslation } from "react-i18next";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
+import "./social-link.scss";
+
 enum FORM_FIELD {
   value = "value"
 }
@@ -22,7 +22,7 @@ enum FORM_FIELD {
 const _SocialLinkForm: React.FC<Props> = ({
   errorMessage,
   onSubmit,
-  socialLink: { logo, name, type, url, value: valueProp }
+  socialLink: { logoUrl, name, type, url, value: valueProp }
 }) => {
   const [isButtonsVisible, setButtonsVisible, setButtonHidden] = useIsOpen();
   const [t] = useTranslation();
@@ -59,7 +59,7 @@ const _SocialLinkForm: React.FC<Props> = ({
   return (
     <div className="social-link">
       <div className="social-logo">
-        <SocialLinkImage url={logo} alt={name} />
+        <SocialLinkImage url={logoUrl} alt={name} />
       </div>
       <HookForm
         resetOnSuccess

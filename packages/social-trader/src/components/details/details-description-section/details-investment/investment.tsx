@@ -9,8 +9,8 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import Crashable from "decorators/crashable";
-import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
@@ -30,7 +30,12 @@ const _Investment: React.FC<Props> = ({
   asset,
   personalDetails
 }) => {
-  const { successFeePersonal, exitFee, exitFeePersonal } = fees;
+  const {
+    successFeePersonal,
+    exitFee,
+    exitFeePersonal,
+    managementFeePersonal
+  } = fees;
   const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const profitValue = "profit" in personalDetails ? personalDetails.profit : 0;
@@ -81,6 +86,21 @@ const _Investment: React.FC<Props> = ({
         >
           <NumberFormat
             value={successFeePersonal}
+            suffix={` %`}
+            allowNegative={false}
+            displayType="text"
+          />
+        </StatisticItem>
+        <StatisticItem
+          condition={
+            managementFeePersonal !== undefined &&
+            managementFeePersonal !== null
+          }
+          label={t("program-details-page.description.personal-management-fee")}
+          accent
+        >
+          <NumberFormat
+            value={managementFeePersonal}
             suffix={` %`}
             allowNegative={false}
             displayType="text"

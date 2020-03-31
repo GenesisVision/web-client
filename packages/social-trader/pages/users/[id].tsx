@@ -3,7 +3,7 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { PublicProfile } from "gv-api-web";
 import { NextPage } from "next";
 import React from "react";
-import usersApi from "services/api-client/users-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 const Page: NextPage<Props> = ({ profile }) => {
   return <ManagerPage profile={profile} />;
@@ -11,7 +11,7 @@ const Page: NextPage<Props> = ({ profile }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const profile = await usersApi.getManagerProfile(id as string);
+  const profile = await api.users().getManagerProfile(id as string);
   return {
     profile
   };

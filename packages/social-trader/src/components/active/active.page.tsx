@@ -10,7 +10,7 @@ const _ActivePage: React.FC<Props> = ({ data }) => {
   return (
     <Page
       description={data.description}
-      previewImage={filesService.getFileUrl(data.logo)}
+      previewImage={data.logoUrl}
       title={data.name}
     >
       <Active loaderData={getActiveLoaderData} data={data} />

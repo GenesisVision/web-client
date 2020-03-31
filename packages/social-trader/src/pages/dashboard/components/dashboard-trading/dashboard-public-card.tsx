@@ -52,7 +52,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
-  const assetLogo = asset.publicInfo ? asset.publicInfo.logo : "";
+  const assetLogo = asset.publicInfo ? asset.publicInfo.logoUrl : "";
   const renderActions = ({
     anchor,
     clearAnchor

@@ -8,24 +8,21 @@ import {
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
 import searchApi from "services/api-client/search-api";
-import socialApi from "services/api-client/social-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean, getRandomInteger } from "utils/helpers";
 
 export const sharePost = (id: string) => {
-  const authorization = authService.getAuthArg();
   return mockRequest(id);
 };
 
 export const pinPost = (id: string) => {
-  const authorization = authService.getAuthArg();
-  return socialApi.pinPost(id, authorization);
+  return api.social().pinPost(id);
 };
 
 export const unpinPost = (id: string) => {
-  const authorization = authService.getAuthArg();
-  return socialApi.unpinPost(id, authorization);
+  return api.social().unpinPost(id);
 };
 
 export const togglePin = ({ id, value }: { id: string; value: boolean }) => {
@@ -36,12 +33,8 @@ export const togglePin = ({ id, value }: { id: string; value: boolean }) => {
 const uploadImages = async (images?: IImageValue[]) => {
   const ids: string[] = [];
   if (!images?.length) return [];
-  const authorization = authService.getAuthArg();
   for (const image of images) {
-    const id = await filesService.uploadFile(
-      image.image!.cropped,
-      authorization
-    );
+    const id = await filesService.uploadFile(image.image!.cropped);
     ids.push(id);
   }
   return ids.map((image, position) => ({ image, position }));
@@ -57,9 +50,8 @@ const mockRequest = (values: any) =>
   });
 
 const sendMessage = (values: IPostMessageValues) => {
-  const authorization = authService.getAuthArg();
   return uploadImages(values.images).then(images => {
-    return socialApi.addPost(authorization, {
+    return api.social().addPost({
       body: { ...values, images }
     });
   });
@@ -74,19 +66,17 @@ export const sendPost = (values: IPostMessageValues) => {
 };
 
 export const toggleLike = ({ id, liked }: { id: string; liked?: boolean }) => {
-  const authorization = authService.getAuthArg();
+  const socialApi = api.social();
   const method = liked ? socialApi.unlikePost : socialApi.likePost;
-  return method(id, authorization);
+  return method(id);
 };
 
 export const remove = ({ id }: { id: string }) => {
-  const authorization = authService.getAuthArg();
-  return socialApi.deletePost(id, authorization);
+  return api.social().deletePost(id);
 };
 
 export const getFeedMethod = (values: Object) => {
-  const authorization = authService.getAuthArg();
-  return socialApi.getFeed({ authorization, ...values });
+  return api.social().getFeed(values);
 };
 
 export const getGlobalFeed = ({
@@ -96,7 +86,7 @@ export const getGlobalFeed = ({
   id: string;
   tags: string[];
 }): Promise<ConversationFeed> => {
-  return getFeedMethod({ userId: id, tags });
+  return getFeedMethod({ hashTags: tags });
 };
 
 export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
@@ -104,13 +94,7 @@ export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
-  const authorization = authService.getAuthArg();
-  return Promise.resolve(
-    getConversationPostLoaderData(
-      getRandomInteger(0, 10),
-      getRandomInteger(0, 5)
-    )
-  );
+  return api.social().getPost(id);
 };
 
 type RequestFilters = {
@@ -124,7 +108,7 @@ const getAssetSearchResult = (type: SEARCH_ASSET_TYPE) => (
 ): AssetSearchResult => {
   return {
     type,
-    avatar: data.avatar || data.logo,
+    avatar: data.logoUrl, //TODO check
     name: data.url,
     id: data.id
   };

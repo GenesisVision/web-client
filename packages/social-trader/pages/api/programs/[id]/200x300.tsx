@@ -6,7 +6,7 @@ import {
 import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
 import ReactDOM from "react-dom/server";
-import programsApi from "services/api-client/programs-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 type Position = { y: number };
 
@@ -189,6 +189,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } = req;
 
   try {
+    const programsApi = api.programs();
     const details = await programsApi.getProgramDetails(id as string);
     const chart = await programsApi.getProgramProfitPercentCharts(details.id);
 

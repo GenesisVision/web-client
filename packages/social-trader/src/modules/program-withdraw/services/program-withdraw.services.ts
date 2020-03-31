@@ -1,6 +1,6 @@
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { ProgramWithdrawType } from "modules/program-withdraw/program-withdraw-popup";
-import investmentsApi from "services/api-client/investments-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 
 export const getProgramWithdrawInfo = ({
@@ -8,7 +8,7 @@ export const getProgramWithdrawInfo = ({
 }: {
   id: string;
 }): Promise<ProgramWithdrawInfo> =>
-  investmentsApi.getProgramWithdrawInfo(id, authService.getAuthArg());
+  api.investments().getProgramWithdrawInfo(id);
 
 export const withdrawProgramById = ({
   id,
@@ -16,4 +16,4 @@ export const withdrawProgramById = ({
 }: {
   id: string;
   value: ProgramWithdrawType;
-}) => investmentsApi.withdrawFromProgram(id, authService.getAuthArg(), value);
+}) => api.investments().withdrawFromProgram(id, value);

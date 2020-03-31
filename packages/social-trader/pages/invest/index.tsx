@@ -2,7 +2,7 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { InvestPage } from "pages/invest/invest.page";
 import { InvestAssetsType } from "pages/invest/invest.types";
 import React from "react";
-import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
 import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<Props, {}> = ({ assets }) => {
@@ -12,7 +12,8 @@ const Page: NextPageWithRedux<Props, {}> = ({ assets }) => {
 Page.getInitialProps = async ctx => {
   let assets;
   const take = 20;
-  await platformApi
+  await api
+    .platform()
     .getPlatformLandingInfo({
       eventsTake: 0,
       followTake: take,

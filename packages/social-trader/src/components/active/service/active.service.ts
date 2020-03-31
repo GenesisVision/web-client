@@ -1,5 +1,5 @@
 import { AssetInfo } from "gv-api-web";
-import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
 import {
   getRandomWord,
   getRandomWords,
@@ -11,6 +11,7 @@ const getTag = () => ({ label: getRandomWord() });
 export const getActiveLoaderData = (active?: string): AssetInfo => ({
   socialLinks: [],
   logo: "",
+  logoUrl: "",
   symbol: "",
   chartSymbol: "",
   name: active || getRandomWord(3),
@@ -19,4 +20,4 @@ export const getActiveLoaderData = (active?: string): AssetInfo => ({
 });
 
 export const fetchActive = ({ active }: { active: string }) =>
-  platformApi.getPlatformAssetInfo(active);
+  api.platform().getPlatformAssetInfo(active);

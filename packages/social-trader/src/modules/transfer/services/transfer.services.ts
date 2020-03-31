@@ -3,19 +3,18 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import { InternalTransferRequest } from "gv-api-web";
-import { TransferFormValues } from "modules/transfer/components/transfer-form.helpers";
-import walletApi from "services/api-client/wallet-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 export const fetchTradingAccounts = (currency: CurrencyEnum) =>
-  walletApi
-    .getAccountsAvailable(currency, authService.getAuthArg())
+  api
+    .wallet()
+    .getAccountsAvailable(currency)
     .then(({ wallets }) => wallets);
 
 export const transferRequest = (body: InternalTransferRequest): Promise<any> =>
-  walletApi.transfer(authService.getAuthArg(), {
+  api.wallet().transfer({
     body
   });
 

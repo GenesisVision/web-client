@@ -1,5 +1,5 @@
 import { TableDataType } from "constants/constants";
-import { Post, PostActions, PostImage, ProfilePublicShort } from "gv-api-web";
+import { Post, PostActions, PostImage, ProfilePublic } from "gv-api-web";
 
 export enum SEARCH_ASSET_TYPE {
   program = "program",
@@ -19,7 +19,7 @@ export type OnMessageSendFunc = (values: { text: string }) => Promise<void>;
 
 export type IConversationImage = PostImage;
 
-export type IConversationUser = ProfilePublicShort;
+export type IConversationUser = ProfilePublic;
 
 export interface MessageDetailType {
   value: string;

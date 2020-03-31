@@ -55,7 +55,7 @@ const _DashboardFundCard: React.FC<Props> = ({
       hasAvatar
       title={fund.title}
       subTitle={fund.owner.username}
-      logo={fund.logo}
+      logo={fund.logoUrl}
       color={fund.color}
       detailsUrl={linkCreator(
         composeFundsDetailsUrl(fund.url),

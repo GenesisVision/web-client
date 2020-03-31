@@ -1,5 +1,3 @@
-import "./deposit.scss";
-
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { ASSET } from "constants/constants";
@@ -19,6 +17,7 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
+import "./deposit.scss";
 import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({

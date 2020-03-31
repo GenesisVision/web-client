@@ -14,7 +14,6 @@ import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
 import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
-import { NewPostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
@@ -35,7 +34,6 @@ enum FORM_FIELDS {
 
 export interface PostInputFormValues {
   [FORM_FIELDS.text]: string;
-  [FORM_FIELDS.tags]: NewPostTag[];
   [FORM_FIELDS.images]: IImageValue[];
 }
 

@@ -1,11 +1,8 @@
-import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
-const enableAutoJoin = (id: string) =>
-  investmentsApi.switchAutoJoinOn(id, authService.getAuthArg());
+const enableAutoJoin = (id: string) => api.investments().switchAutoJoinOn(id);
 
-const disableAutoJoin = (id: string) =>
-  investmentsApi.switchAutoJoinOff(id, authService.getAuthArg());
+const disableAutoJoin = (id: string) => api.investments().switchAutoJoinOff(id);
 
 export const toggleAutoJoin = ({
   id,

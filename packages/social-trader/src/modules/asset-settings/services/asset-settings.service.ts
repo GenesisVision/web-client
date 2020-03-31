@@ -1,6 +1,7 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { ProgramUpdate } from "gv-api-web";
 import assetsApi from "services/api-client/assets-api";
+import { api, Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import filesService from "services/file-service";
 
@@ -22,38 +23,36 @@ export const editAsset = ({
   id: string;
   editAssetData: IAssetEditFormValues;
 }): Promise<Response> => {
-  const authorization = authService.getAuthArg();
-  let promise = Promise.resolve("");
+  let promise = Promise.resolve({});
   if (editAssetData.logo.image && editAssetData.logo.image.cropped)
-    promise = filesService.uploadFile(
-      editAssetData.logo.image.cropped,
-      authorization
-    );
+    promise = api.files().uploadFile({
+      uploadedFile: editAssetData.logo.image.cropped
+    });
   return promise.then(response => {
     const body = {
       ...editAssetData,
       logo: response || editAssetData.logo.src
     } as ProgramUpdate;
-    return assetsApi.updateAsset(id, authorization, {
+    return api.assets().updateAsset(id, {
       body
     }); //TODO ask backend to change ProgramUpdate logo type
   });
 };
 
 export const closeProgram: TCloseAsset = ({ id, twoFactorCode }) => {
-  return assetsApi.closeInvestmentProgram(id, authService.getAuthArg(), {
+  return api.assets().closeInvestmentProgram(id, {
     body: { twoFactorCode: twoFactorCode! }
   });
 };
 
 export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
-  return assetsApi.closeFund(id, authService.getAuthArg(), {
+  return api.assets().closeFund(id, {
     body: { twoFactorCode: twoFactorCode! }
   });
 };
 
 export const closeTradingAccount: TCloseAsset = ({ id }) => {
-  return assetsApi.closeTradingAccount(id, authService.getAuthArg());
+  return api.assets().closeTradingAccount(id);
 };
 
 export type TCloseAsset = (opts: {

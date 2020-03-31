@@ -1,9 +1,9 @@
 import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
   PlatformEvent,
-  PlatformNews
+  PlatformNews,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
 import { NextPage } from "next";
 import { LandingPage } from "pages/landing-page/landing.page";
@@ -35,9 +35,9 @@ IndexPage.getInitialProps = async () => {
 interface Props {
   refLink?: string;
   events: Array<PlatformEvent>;
-  follows: ItemsViewModelFollowDetailsListItem;
-  programs: ItemsViewModelProgramDetailsListItem;
-  funds: ItemsViewModelFundDetailsListItem;
+  follows: FollowDetailsListItemItemsViewModel;
+  programs: ProgramDetailsListItemItemsViewModel;
+  funds: FundDetailsListItemItemsViewModel;
   news: Array<PlatformNews>;
 }
 

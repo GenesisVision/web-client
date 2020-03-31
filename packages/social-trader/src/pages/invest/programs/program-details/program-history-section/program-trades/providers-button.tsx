@@ -1,5 +1,3 @@
-import "./providers-button.scss";
-
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
@@ -20,6 +18,8 @@ import useAnchor from "hooks/anchor.hook";
 import React from "react";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
+
+import "./providers-button.scss";
 
 const _ProvidersButton: React.FC<Props> = ({ providers }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
@@ -49,7 +49,7 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
 
 const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
   provider: {
-    program: { logo, level, color, levelProgress, title, url }
+    program: { logoUrl, level, color, levelProgress, title, url }
   }
 }) => {
   const { linkCreator } = useToLink();
@@ -63,7 +63,7 @@ const ProviderItem: React.FC<{ provider: OrderSignalProgramInfo }> = ({
       >
         <AssetAvatarWithName
           name={title}
-          url={logo}
+          url={logoUrl}
           level={level}
           levelProgress={levelProgress}
           alt={title}

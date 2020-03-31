@@ -50,7 +50,7 @@ const _FundStructure: React.FC = () => {
           <TableCell className="details-structure__cell">
             <CurrencyItem
               url={item.url}
-              logo={item.icon}
+              logo={item.logoUrl}
               name={item.symbol}
               small
             />

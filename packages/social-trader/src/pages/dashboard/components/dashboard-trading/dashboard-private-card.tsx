@@ -127,7 +127,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       profit={asset.statistic.profit}
       chart={asset.statistic.chart}
       title={asset.accountInfo.title}
-      logo={asset.broker.logo}
+      logo={asset.broker.logoUrl}
       renderActions={renderActions}
       extraBlock={asset.tags && <TagProgramContainer tags={asset.tags} />}
     >

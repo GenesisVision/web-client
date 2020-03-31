@@ -9,12 +9,11 @@ import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
 import {
   FundDetailsListItem,
-  ItemsViewModelFundDetailsListItem
+  FundDetailsListItemItemsViewModel
 } from "gv-api-web";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
-import fundsApi from "services/api-client/funds-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { getAccountCurrency } from "utils/account-currency";
 import { NextPageWithReduxContext } from "utils/types";
 
@@ -28,19 +27,17 @@ import {
 export const fetchFundsChallengeWinner = (): Promise<Array<
   FundDetailsListItem
 >> => {
-  return fundsApi
-    .getLastChallengeWinner({ authorization: authService.getAuthArg() })
+  return api
+    .funds()
+    .getLastChallengeWinner()
     .then(item => [item]);
 };
 
 export type FetchFundsType = (
   filters: ComposeFiltersAllType
-) => Promise<ItemsViewModelFundDetailsListItem>;
+) => Promise<FundDetailsListItemItemsViewModel>;
 export const fetchFunds: FetchFundsType = filters => {
-  return fundsApi.getFunds({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+  return api.funds().getFunds(filters);
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {

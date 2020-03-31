@@ -1,13 +1,12 @@
-import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
-
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
+import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import GVTab from "components/gv-tabs/gv-tab";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { CREATE_ASSET } from "constants/constants";
+import { TRADE_ASSET_TYPE } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
@@ -38,6 +37,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  canCloseOpenPositions,
   assetType,
   haveDelay = true,
   getHistoryCounts,
@@ -125,6 +125,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          assetType={assetType}
+          canCloseOpenPositions={canCloseOpenPositions}
           itemSelector={openPositions.itemSelector!}
           getItems={openPositions.getItems(programId)}
           dataSelector={openPositions.dataSelector}
@@ -171,7 +173,8 @@ enum TABS {
 }
 
 interface Props {
-  assetType?: CREATE_ASSET;
+  canCloseOpenPositions?: boolean;
+  assetType: TRADE_ASSET_TYPE;
   haveDelay?: boolean;
   getHistoryCounts: (
     id: string

@@ -1,16 +1,13 @@
 import { Currency } from "gv-api-web";
-import assetsApi from "services/api-client/assets-api";
-import platformApi from "services/api-client/platform-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
 
 export const getProgramLevelsInfo = (id: string, signal?: AbortSignal) => {
-  const authorization = authService.getAuthArg();
-  return assetsApi.getLevelsCalculator(id, authorization, {}, { signal });
+  return api.assets().getLevelsCalculator(id, {}, { signal });
 };
 
 export const getPlatformLevels = (
   currency?: Currency,
   signal?: AbortSignal
 ) => {
-  return platformApi.getProgramLevels({ currency }, { signal });
+  return api.platform().getProgramLevels({ currency }, { signal });
 };
