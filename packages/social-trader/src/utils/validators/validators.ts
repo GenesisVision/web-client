@@ -5,7 +5,7 @@ export const emailValidator = string()
   .email("Invalid email address.")
   .required("Email is required.");
 
-export const passwordValidator = (t: i18next.TFunction) =>
+export const passwordValidator = (t: TFunction) =>
   string()
     .min(
       6,
