@@ -15,6 +15,7 @@ import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
 import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { Token } from "services/api-client/swagger-custom-client";
 
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 
@@ -91,6 +92,7 @@ export interface RootStore<S = any, A extends Action = AnyAction>
 }
 
 export interface NextPageWithReduxContext extends NextPageContext {
+  token: Token;
   // @ts-ignore
   reduxStore: RootStore<AuthRootState, RootThunkAction>; //TODO error
 }

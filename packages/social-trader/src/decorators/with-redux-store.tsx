@@ -1,13 +1,10 @@
 import authActions from "actions/auth-actions";
-import platformActions from "actions/platform-actions";
 import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
-import { Dispatch } from "redux";
-import { Token } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
-import refreshToken from "utils/auth";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
 const isServer = typeof window === "undefined";
@@ -34,17 +31,27 @@ const withReduxStore = (
     reduxStore: Store;
     static async getInitialProps(ctx: AppWithReduxContext) {
       const reduxStore = getOrCreateStore();
+      const token = Token.create(ctx.ctx);
+
+      if (token.isExpiring()) {
+        try {
+          const newToken = await api.auth(token).updateAuthToken();
+          token.restore(newToken);
+        } catch (e) {
+          token.restore("");
+        }
+      }
+
+      if (token.isExist()) {
+        reduxStore.dispatch(authActions.updateTokenAction(true));
+      }
 
       ctx.ctx.reduxStore = reduxStore;
+      ctx.ctx.token = token;
 
       const componentProps =
         WrappedComponent.getInitialProps &&
         (await WrappedComponent.getInitialProps(ctx));
-
-      const token = Token.create(ctx.ctx);
-      if (token.isExist()) {
-        reduxStore.dispatch(authActions.updateTokenAction(true));
-      }
 
       if (initialActions) {
         await Promise.all(initialActions);

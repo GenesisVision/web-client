@@ -83,6 +83,7 @@
     "@types/puppeteer": "^2.0.0",
     "@types/qrcode.react": "^0.8.2",
     "@types/qs": "^6.5.2",
+    "@types/jwt-decode": "^2.2.1",
     "@types/rc-slider": "^8.6.3",
     "@types/react": "^16.9.19",
     "@types/react-cropper": "^0.10.7",
