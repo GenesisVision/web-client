@@ -38,12 +38,20 @@ export interface PostInputFormValues {
 }
 
 interface Props {
+  allowEmptyMessage?: boolean;
+  placeholder?: string;
   errorMessage?: string;
   status?: API_REQUEST_STATUS;
   onSubmit: OnMessageSendFunc;
 }
 
-const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
+const _PostInput: React.FC<Props> = ({
+  allowEmptyMessage,
+  placeholder = "What's new?",
+  errorMessage,
+  onSubmit,
+  status
+}) => {
   const [t] = useTranslation();
   const [isFocused, _, __, setFocused] = useIsOpen();
   const form = useForm<PostInputFormValues>({
@@ -93,9 +101,13 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
     [images, setValue]
   );
   const disabledImages = images?.length >= MAX_IMAGES;
-  const disabled = !text && !images?.length;
+  const disabled = allowEmptyMessage ? false : !text && !images?.length;
   const isOpenEditPanel =
-    isFocused || !!text || !!images?.length || isOpenSearchPanel;
+    allowEmptyMessage ||
+    isFocused ||
+    !!text ||
+    !!images?.length ||
+    isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
     <HookForm form={form} onSubmit={onSubmit} className="post-input__form">
@@ -114,7 +126,7 @@ const _PostInput: React.FC<Props> = ({ errorMessage, onSubmit, status }) => {
                 setFocused={setFocused}
                 submitForm={inputSubmit()}
                 name={FORM_FIELDS.text}
-                placeholder={"What's new?"}
+                placeholder={placeholder}
               />
               {!disabledImages && <AttachImagePostButton onClick={open} />}
             </Center>
