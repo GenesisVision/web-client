@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { Center } from "components/center/center";
 import React, { useCallback } from "react";
 
-import "./like.scss";
+import "./share.scss";
 
 export const _Share: React.FC<Props> = ({ onClick, disable }) => {
   const clickHandle = useCallback(() => {

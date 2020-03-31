@@ -5,7 +5,7 @@ import React from "react";
 
 export const _ShareContainer: React.FC<Props> = ({ id }) => {
   const { sendRequest, isPending } = useApiRequest({
-    request: () => sharePost(id)
+    request: () => sharePost({ id, text: "", images: [] })
   });
 
   return <Share onClick={sendRequest} disable={isPending} />;

@@ -51,7 +51,7 @@ const _Message: React.FC<IMessageProps> = ({
         {!!images.length && (
           <Row wrap small className="message__images">
             {images.map((image, index) => (
-              <RowItem bottomOffset key={image.image}>
+              <RowItem bottomOffset key={index}>
                 <ConversationImage
                   index={index}
                   images={images}

@@ -46,11 +46,7 @@ const getTagLoaderData = (): PostTag => ({
     programDetails: { level: 0, levelProgress: 0 }
   },
   type: "Program",
-  userDetails: {
-    id: "",
-    username: "",
-    url: ""
-  },
+  userDetails: managerLoaderData,
   platformAssetDetails: {
     id: "string",
     name: "string",
@@ -111,7 +107,6 @@ const mockImages = [
 ];
 
 export const getConversationImageLoaderData = (): IConversationImage => ({
-  image: mockImages[getRandomInteger(0, mockImages.length - 1)],
   resizes: []
 });
 
