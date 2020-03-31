@@ -17,7 +17,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={"Download Metatrader for PC"}
-            href="https://download.mql5.com/cdn/web/11830/mt5/genesismarketslp5setup.exe"
+            href="https://download.mql5.com/cdn/web/15879/mt5/genesismarketsltd5setup.exe"
           >
             Download for PC
             <br />
@@ -35,7 +35,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={"Download Metatrader for IOS"}
-            href="https://itunes.apple.com/app/metatrader-5-forex-stocks/id413251709"
+            href="https://download.mql5.com/cdn/mobile/mt5/ios?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +44,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={"Download Metatrader for Android"}
-            href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"
+            href="https://download.mql5.com/cdn/mobile/mt5/android?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live"
             target="_blank"
             rel="noopener noreferrer"
           >
