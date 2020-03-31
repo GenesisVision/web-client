@@ -14,7 +14,16 @@ import { useTranslation } from "react-i18next";
 import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
-  profile: { username, about, logoUrl, regDate, id, socialLinks }
+  profile: {
+    followers,
+    following,
+    username,
+    about,
+    logoUrl,
+    regDate,
+    id,
+    socialLinks
+  }
 }) => {
   const isOwnPage = useIsOwnPage(id);
   const [t] = useTranslation();
@@ -47,13 +56,13 @@ const _ManagerInfo: React.FC<Props> = ({
             <RowItem>
               <ManagerStatisticItem
                 label={t("manager-page.followers")}
-                value={1536}
+                value={followers}
               />
             </RowItem>
             <RowItem>
               <ManagerStatisticItem
                 label={t("manager-page.following")}
-                value={44}
+                value={following}
               />
             </RowItem>
           </Row>
