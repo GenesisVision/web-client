@@ -59,6 +59,7 @@ const _Post: React.FC<Props> = ({
         )}
       </Row>
       <PostButtons
+        repostCount={0}
         onApply={updateData}
         id={id}
         liked={actions?.isLiked}

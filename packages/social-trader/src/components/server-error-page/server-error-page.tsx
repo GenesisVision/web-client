@@ -5,6 +5,7 @@ import React from "react";
 
 const getErrorMessage = (error: ErrorViewModel): string | undefined => {
   if (typeof error === "string") return error;
+  console.log(error);
   if (error.errors)
     return error.errors.map(({ message }) => message).join(", ");
 };

@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import { RePostDialog } from "components/conversation/repost/repost.dialog";
+import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 
 import "./share.scss";
 
-export const _Share: React.FC<Props> = ({ id, disable, onApply }) => {
+export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
   const handleOnApply = useCallback(() => {
     setIsClose();
@@ -21,7 +22,8 @@ export const _Share: React.FC<Props> = ({ id, disable, onApply }) => {
           "share--disable": disable
         })}
       >
-        Share
+        <RowItem small>Share</RowItem>
+        {count > 0 && <RowItem>{count}</RowItem>}
       </Center>
       <RePostDialog
         open={isOpen}
@@ -34,6 +36,7 @@ export const _Share: React.FC<Props> = ({ id, disable, onApply }) => {
 };
 
 interface Props {
+  count: number;
   id: string;
   onApply: VoidFunction;
   disable?: boolean;

@@ -7,6 +7,7 @@ import React from "react";
 import "./post-buttons.scss";
 
 const _PostButtons: React.FC<Props> = ({
+  repostCount,
   onApply,
   id,
   canLike,
@@ -16,7 +17,7 @@ const _PostButtons: React.FC<Props> = ({
   return (
     <Row large>
       <RowItem>
-        <Share onApply={onApply} id={id} />
+        <Share onApply={onApply} id={id} count={repostCount} />
       </RowItem>
       <RowItem>
         <LikeContainer
@@ -31,6 +32,7 @@ const _PostButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  repostCount: number;
   onApply: VoidFunction;
   id: string;
   liked?: boolean;
