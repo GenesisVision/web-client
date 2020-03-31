@@ -1,7 +1,7 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
 
-.like {
+.share {
   cursor: pointer;
   @include transition(color);
   &--disable {

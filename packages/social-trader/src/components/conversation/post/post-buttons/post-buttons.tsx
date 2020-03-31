@@ -1,16 +1,22 @@
 import { LikeContainer } from "components/conversation/like/like-container";
-import { ShareContainer } from "components/conversation/share/share-container";
+import { Share } from "components/conversation/share/share";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
 import "./post-buttons.scss";
 
-const _PostButtons: React.FC<Props> = ({ id, canLike, likesCount, liked }) => {
+const _PostButtons: React.FC<Props> = ({
+  onApply,
+  id,
+  canLike,
+  likesCount,
+  liked
+}) => {
   return (
     <Row large>
       <RowItem>
-        <ShareContainer id={id} />
+        <Share onApply={onApply} id={id} />
       </RowItem>
       <RowItem>
         <LikeContainer
@@ -25,6 +31,7 @@ const _PostButtons: React.FC<Props> = ({ id, canLike, likesCount, liked }) => {
 };
 
 interface Props {
+  onApply: VoidFunction;
   id: string;
   liked?: boolean;
   likesCount: number;
