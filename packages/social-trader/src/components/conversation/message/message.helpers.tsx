@@ -8,7 +8,7 @@ import React from "react";
 
 export const generateTagsComponents = (tags: PostTag[]): JSX.Element[] => {
   return tags.map(tag => (
-    <RowItem bottomOffset>
+    <RowItem bottomOffset wide={tag.type === "Post"}>
       {convertTagToComponent(tag, underTextComponentsMap)}
     </RowItem>
   ));

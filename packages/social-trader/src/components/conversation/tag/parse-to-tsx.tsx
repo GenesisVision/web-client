@@ -54,7 +54,6 @@ export const convertTagToComponent = (
     case "Fund":
     case "Follow":
       return convertAssetTagToComponent(tag, componentsMap);
-    // @ts-ignore
     case "Post":
       return convertRepostTagToComponent(tag, componentsMap);
     case "User":
@@ -84,7 +83,6 @@ const convertRepostTagToComponent = (
     componentsMap,
     ({ tagType }) => tagType === tag.type
   );
-  // @ts-ignore
   return <Component post={tag.post} />;
 };
 
