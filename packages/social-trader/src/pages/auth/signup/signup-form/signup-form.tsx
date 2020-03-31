@@ -58,7 +58,7 @@ const _SignUpForm: React.FC<Props> = ({
       [SIGN_UP_FORM_FIELDS.acceptTerms]: false,
       [SIGN_UP_FORM_FIELDS.isAuto]: false //TODO remove when upgrade api
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 

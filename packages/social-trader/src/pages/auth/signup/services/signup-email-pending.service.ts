@@ -1,7 +1,7 @@
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const sendConfirmationLink = (email: string) => () =>
-  authApi.resendConfirmationLink({
+  api.auth().resendConfirmationLink({
     body: {
       email,
       captchaCheckResult: {

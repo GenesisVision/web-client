@@ -6,12 +6,11 @@ import {
   UpdateFilterFunc
 } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import FundsTableModule from "modules/funds-table/components/funds-table/funds-table-module";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/components/funds-table/funds-table.constants";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 
 import {
   MANAGER_DEFAULT_FILTERS,
@@ -26,7 +25,7 @@ interface Props {
 
 const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
   const [t] = useTranslation();
-  const showIn = useSelector(currencySelector);
+  const showIn = useAccountCurrency();
   const getManagerFunds: GetItemsFuncType = useCallback(
     filters => fetchManagerFunds({ ...filters, ownerId, showIn }),
     [ownerId]
@@ -34,7 +33,6 @@ const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
 
   return (
     <FundsTableModule
-      disableTitle
       title={title}
       getItems={getManagerFunds}
       defaultFilters={MANAGER_DEFAULT_FILTERS}

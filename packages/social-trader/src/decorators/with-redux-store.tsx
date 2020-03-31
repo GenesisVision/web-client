@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
 import { Dispatch } from "redux";
+import { Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import refreshToken from "utils/auth";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
@@ -40,10 +41,9 @@ const withReduxStore = (
         WrappedComponent.getInitialProps &&
         (await WrappedComponent.getInitialProps(ctx));
 
-      const token = authService.getAuthArg(ctx.ctx);
-      if (token) {
+      const token = Token.create(ctx.ctx);
+      if (token.isExist()) {
         reduxStore.dispatch(authActions.updateTokenAction(true));
-        refreshToken(ctx.ctx, token);
       }
 
       if (initialActions) {

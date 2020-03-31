@@ -1,7 +1,5 @@
-import authActions from "actions/auth-actions";
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
-import { MiddlewareDispatch } from "utils/types";
 
 export const confirmEmail = ({
   userId,
@@ -9,8 +7,11 @@ export const confirmEmail = ({
 }: {
   userId: string;
   code: string;
-}) => (dispatch: MiddlewareDispatch): Promise<void> =>
-  authApi.confirmEmail({ userId, code }).then(response => {
-    authService.storeToken(response);
-    dispatch(authActions.updateTokenAction(true));
-  });
+}) =>
+  api
+    .auth()
+    .confirmEmail({ userId, code })
+    .then(response => {
+      authService.storeToken(response);
+      return response;
+    });

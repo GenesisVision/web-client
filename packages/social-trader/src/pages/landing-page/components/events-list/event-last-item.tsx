@@ -5,10 +5,15 @@ import LogoIcon from "pages/landing-page/images/logos/logo.svg";
 import React from "react";
 import { INVEST_ROUTE } from "routes/invest.routes";
 
-const EventLastItem: React.FC = () => {
+const _EventLastItem: React.FC<Props> = ({ minHeight }) => {
   const { t } = useTranslation();
   return (
-    <li className="events-list__item events-list__item--last">
+    <li
+      className="events-list__item events-list__item--last"
+      style={{
+        minHeight: `${minHeight}px`
+      }}
+    >
       <div className="events-list__item-avatar">
         <ImageBaseElement
           className="events-list__item-image"
@@ -34,4 +39,9 @@ const EventLastItem: React.FC = () => {
     </li>
   );
 };
+interface Props {
+  minHeight: number;
+}
+
+const EventLastItem = React.memo(_EventLastItem);
 export default EventLastItem;

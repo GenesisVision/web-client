@@ -2,7 +2,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { PostInputButton } from "components/conversation/post/post-input/post-input-button";
 import React, { useCallback } from "react";
 
-const AttachImageButton: React.FC<Props> = ({ onClick }) => {
+const _AttachImagePostButton: React.FC<Props> = ({ onClick }) => {
   const handleClick = useCallback(() => {
     onClick();
   }, [onClick]);
@@ -22,4 +22,4 @@ interface Props {
   onClick: VoidFunction;
 }
 
-export default AttachImageButton;
+export const AttachImagePostButton = React.memo(_AttachImagePostButton);

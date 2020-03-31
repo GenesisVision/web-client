@@ -1,7 +1,8 @@
-import "./style.scss";
-
 import classNames from "classnames";
-import React from "react";
+import useIsOpen from "hooks/is-open.hook";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+
+import "./style.scss";
 
 export type TextareaChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
@@ -10,9 +11,14 @@ export type TextareaKeyDownEventExtended = TextareaKeyDownEvent & {
   ref: HTMLTextAreaElement;
 };
 
+const ARROW_KEYS = [37, 38, 39, 40];
+const CHANGE_CARET_KEYS = [...ARROW_KEYS];
+
 const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
+  outerCaret?: number;
+  onChangeCaret?: (position: number) => void;
   onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
   ref?: any;
   className?: string;
@@ -22,97 +28,111 @@ interface GVTextAreaProps {
   onChange: (e: any) => void;
 }
 
-interface GVTextAreaState {
-  height: number;
-}
+const _GVTextArea: React.FC<GVTextAreaProps> = ({
+  outerCaret,
+  onChangeCaret,
+  rows = 1,
+  onKeyDown,
+  textAreaClassName,
+  onChange,
+  className,
+  value,
+  ...otherProps
+}) => {
+  const [isCaretChange, setCaretChanged, setCaretNotChanged] = useIsOpen();
+  const shadowRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-class GVTextArea extends React.PureComponent<GVTextAreaProps, GVTextAreaState> {
-  static defaultProps: Partial<GVTextAreaProps> = {
-    rows: 1
-  };
+  const [height, setHeight] = useState(rows * ROWS_HEIGHT);
 
-  shadowRef: React.RefObject<HTMLTextAreaElement>;
-  textareaRef: React.RefObject<HTMLTextAreaElement>;
-
-  constructor(props: GVTextAreaProps) {
-    super(props);
-    this.shadowRef = React.createRef();
-    this.textareaRef = React.createRef();
-
-    this.state = {
-      height: props.rows! * ROWS_HEIGHT
-    };
-  }
-
-  componentDidMount() {
-    this.syncHeightWithShadow();
-  }
-
-  componentDidUpdate() {
-    this.syncHeightWithShadow();
-  }
-
-  handleKeyDown = (event: TextareaKeyDownEvent) => {
-    if (this.props.onKeyDown && this.textareaRef.current) {
-      this.props.onKeyDown({
-        ...event,
-        ref: this.textareaRef.current,
-        preventDefault: () => event.preventDefault()
-      });
-    }
-  };
-
-  handleChange = (event: TextareaChangeEvent) => {
-    const value = event.target.value;
-
-    if (this.shadowRef.current) {
-      this.shadowRef.current.value = value;
-      this.syncHeightWithShadow();
-    }
-
-    if (this.props.onChange) {
-      this.props.onChange(event);
-    }
-  };
-
-  syncHeightWithShadow() {
-    const shadowRef = this.shadowRef.current;
-    if (!shadowRef) return;
-
+  const syncHeightWithShadow = () => {
+    const shadowRefElem = shadowRef.current;
+    if (!shadowRefElem) return;
     const lineHeight = parseFloat(
-      window.getComputedStyle(shadowRef).lineHeight || ROWS_HEIGHT.toString()
+      window.getComputedStyle(shadowRefElem).lineHeight ||
+        ROWS_HEIGHT.toString()
     );
-    const newHeight = Math.max(shadowRef.scrollHeight, lineHeight);
-
-    if (Math.abs(this.state.height - newHeight) > 1) {
-      this.setState({
-        height: newHeight
-      });
+    const newHeight = Math.max(shadowRefElem.scrollHeight, lineHeight);
+    if (Math.abs(height - newHeight) > 1) {
+      setHeight(newHeight);
     }
-  }
+  };
 
-  render() {
-    const { textAreaClassName, onChange, ...props } = this.props;
-    return (
-      <div className={classNames("gv-text-area", textAreaClassName)}>
-        <textarea
-          className={classNames("gv-text-area__hidden", props.className)}
-          readOnly
-          ref={this.shadowRef}
-          rows={props.rows}
-          tabIndex={-1}
-          value={props.value}
-        />
-        <textarea
-          ref={this.textareaRef}
-          style={{ height: this.state.height }}
-          onChange={this.handleChange}
-          {...props}
-          onKeyDown={this.handleKeyDown}
-        />
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    syncHeightWithShadow();
+  }, [value, syncHeightWithShadow]);
 
+  useEffect(() => {
+    if (textareaRef.current && isCaretChange) {
+      onChangeCaret && onChangeCaret(textareaRef.current.selectionEnd);
+      setCaretNotChanged();
+    }
+  }, [isCaretChange, textareaRef.current, onChangeCaret]);
+
+  useEffect(() => {
+    if (textareaRef.current && outerCaret) {
+      textareaRef.current.focus();
+      textareaRef.current.selectionEnd = outerCaret;
+      textareaRef.current.selectionStart = outerCaret;
+      setCaretChanged();
+    }
+  }, [outerCaret]);
+
+  const handleKeyDown = useCallback(
+    (event: TextareaKeyDownEvent) => {
+      if (onKeyDown && textareaRef.current) {
+        onKeyDown({
+          ...event,
+          ref: textareaRef.current,
+          preventDefault: () => event.preventDefault()
+        });
+      }
+      if (CHANGE_CARET_KEYS.includes(event.keyCode)) setCaretChanged();
+    },
+    [onKeyDown, textareaRef.current]
+  );
+
+  const handleChange = useCallback(
+    (event: TextareaChangeEvent) => {
+      const value = event.target.value;
+      if (shadowRef.current) {
+        shadowRef.current.value = value;
+        syncHeightWithShadow();
+      }
+      if (onChange) onChange(event);
+      setCaretChanged();
+    },
+    [onChange, shadowRef.current, syncHeightWithShadow]
+  );
+
+  const handleClick = useCallback(() => {
+    setCaretChanged();
+  }, []);
+
+  return (
+    <div className={classNames("gv-text-area", textAreaClassName)}>
+      <textarea
+        className={classNames("gv-text-area__hidden", className)}
+        readOnly
+        ref={shadowRef}
+        rows={rows}
+        tabIndex={-1}
+        value={value}
+      />
+      <textarea
+        onClick={handleClick}
+        rows={rows}
+        className={className}
+        value={value}
+        ref={textareaRef}
+        style={{ height }}
+        onChange={handleChange}
+        {...otherProps}
+        onKeyDown={handleKeyDown}
+      />
+    </div>
+  );
+};
+
+const GVTextArea = React.memo(_GVTextArea);
 export default GVTextArea;

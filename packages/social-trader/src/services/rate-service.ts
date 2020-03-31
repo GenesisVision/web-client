@@ -1,5 +1,6 @@
-import { rateApi } from "services/api-client/rate-api";
 import { CurrencyEnum } from "utils/types";
+
+import { api } from "./api-client/swagger-custom-client";
 
 export const fetchRate = (
   from: CurrencyEnum,
@@ -7,4 +8,7 @@ export const fetchRate = (
 ): Promise<number> =>
   from === to
     ? Promise.resolve(1)
-    : rateApi.getRate(from, to).then(({ rate }) => rate);
+    : api
+        .rate()
+        .getRate(from, to)
+        .then(({ rate }) => rate);

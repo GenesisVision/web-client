@@ -1,7 +1,6 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import { PrivateTradingAccountFull } from "gv-api-web";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import AccountDetailsPage from "pages/accounts/account-details/account-details.page";
 import { statisticCurrencyAction } from "pages/accounts/account-details/actions/account-details.actions";
 import {
@@ -10,8 +9,8 @@ import {
 } from "pages/accounts/account-details/services/account-details.service";
 import React from "react";
 import { compose } from "redux";
-import { getCookie } from "utils/cookie";
-import { CurrencyEnum, NextPageWithRedux } from "utils/types";
+import { getAccountCurrency } from "utils/account-currency";
+import { NextPageWithRedux } from "utils/types";
 
 const Page: NextPageWithRedux<{}> = () => {
   return <AccountDetailsPage />;
@@ -19,10 +18,7 @@ const Page: NextPageWithRedux<{}> = () => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const {
-    accountSettings: { currency }
-  } = ctx.reduxStore.getState();
-  const cookiesCurrency = getCookie(ACCOUNT_CURRENCY_KEY, ctx) as CurrencyEnum;
+  const cookiesCurrency = getAccountCurrency(ctx);
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchAccountId(id as string)),
     ctx.reduxStore.dispatch(dispatchAccountDescription(id as string)(ctx))
@@ -31,7 +27,7 @@ Page.getInitialProps = async ctx => {
       value: PrivateTradingAccountFull;
     }).value;
     const statisticCurrency =
-      description.tradingAccountInfo.currency || currency || cookiesCurrency;
+      description.tradingAccountInfo.currency || cookiesCurrency;
     ctx.reduxStore.dispatch(dispatch =>
       dispatch(statisticCurrencyAction(statisticCurrency))
     );

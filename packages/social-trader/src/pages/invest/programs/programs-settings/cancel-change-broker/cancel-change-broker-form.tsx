@@ -47,7 +47,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         <RowItem className="program-settings__broker-info">
           <div className="program-settings__broker">
             <BrokerCard
-              logo={brokerFrom.logo}
+              logo={brokerFrom.logoUrl}
               key={brokerFrom.name}
               brokerName={brokerFrom.name}
               cardState={BROKER_CARD_EXTRA_STATE.NONE}
@@ -75,7 +75,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         <RowItem className="program-settings__broker-info">
           <div className="program-settings__broker">
             <BrokerCard
-              logo={brokerTo.logo}
+              logo={brokerTo.logoUrl}
               key={brokerTo.name}
               brokerName={brokerTo.name}
               cardState={BROKER_CARD_EXTRA_STATE.NONE}

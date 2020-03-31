@@ -1,29 +1,34 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_constants";
+@import "~shared/styles/_colors";
 
 $image-height-small: 100px;
 $image-height-middle: 200px;
+$image-height-large: 600px;
 $image-height-full: 90vh;
 $image-width-full: 90vw;
+$image-full-button-size: 30px;
 
 .conversation-image {
   display: block;
   @include adaptive-border-radius($border-radius);
   cursor: pointer;
   &--small {
-    max-height: $image-height-small;
+    height: $image-height-small;
     &.conversation-image__empty {
       height: $image-height-small;
     }
   }
   &--middle {
-    max-height: $image-height-middle;
+    height: $image-height-middle;
     &.conversation-image__empty {
       height: $image-height-middle;
     }
   }
   &--large {
     max-width: 100%;
+    min-height: $image-height-small;
+    max-height: $image-height-large;
     &.conversation-image__empty {
       height: 100%;
     }
@@ -40,9 +45,50 @@ $image-width-full: 90vw;
     @include adaptive-full-padding($padding-xxsmall);
   }
 }
+
 .conversation-image-full {
+  cursor: pointer;
+  min-height: $image-height-middle;
   max-height: $image-height-full;
   max-width: $image-width-full;
+  &__button {
+    cursor: pointer;
+    position: absolute;
+    top: calc(50% - #{$image-full-button-size}/ 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $image-full-button-size;
+    height: $image-full-button-size;
+    border-radius: 50%;
+    background: $panel-background-color;
+    font-size: $image-full-button-size;
+    font-weight: bold;
+    opacity: 0;
+    @include transition(opacity);
+    &--show {
+      opacity: 0.5;
+    }
+    &--left {
+      left: $image-full-button-size/4;
+    }
+    &--right {
+      right: $image-full-button-size/4;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &__wrapper {
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.conversation-images-full {
   &__wrapper {
     height: 100vh;
     overflow-y: auto;

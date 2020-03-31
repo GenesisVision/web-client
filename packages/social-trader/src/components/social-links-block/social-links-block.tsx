@@ -1,10 +1,10 @@
-import "./social-links-block.scss";
-
 import SocialLinkImage from "components/avatar/social-link/social-link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
+
+import "./social-links-block.scss";
 
 const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
   return (
@@ -21,7 +21,7 @@ const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
               rel="noopener noreferrer"
               className="social-links-block__social-link"
             >
-              <SocialLinkImage url={socialLink.logo} alt={socialLink.name} />
+              <SocialLinkImage url={socialLink.logoUrl} alt={socialLink.name} />
             </a>
           </RowItem>
         );

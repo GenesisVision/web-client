@@ -2,6 +2,7 @@ import { MinDepositType } from "components/deposit/components/deposit.types";
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dynamic";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
@@ -11,7 +12,6 @@ import {
 } from "pages/wallet/services/wallet.services";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
@@ -32,17 +32,18 @@ const _DepositContainer: React.FC<Props> = ({
   ownAsset
 }) => {
   const wallets: WalletBaseData[] = useSelector(walletsSelector).map(
-    ({ currency, available, id, logo, title }) => ({
+    ({ currency, available, id, logo, title, logoUrl }) => ({
       currency,
       available,
       id,
+      logoUrl,
       logo,
       rate: 1,
       title
     })
   );
   const gvCommission = useSelector(gvInvestFeeSelector);
-  const stateCurrency = useSelector(currencySelector);
+  const stateCurrency = useAccountCurrency();
   const { data, sendRequest: getInvestInfo } = useApiRequest<
     TWalletsAvailableData
   >({

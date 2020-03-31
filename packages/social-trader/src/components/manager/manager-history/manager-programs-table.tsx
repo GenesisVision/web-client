@@ -1,5 +1,4 @@
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
-
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { GetItemsFuncType } from "components/table/components/table.types";
@@ -24,7 +23,6 @@ const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
 
   return (
     <ProgramTableModule
-      disableTitle
       title={title}
       getItems={getManagerPrograms}
       defaultFilters={MANAGER_DEFAULT_FILTERS}

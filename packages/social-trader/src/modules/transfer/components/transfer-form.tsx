@@ -1,5 +1,3 @@
-import "./transfer-form.scss";
-
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
@@ -33,6 +31,8 @@ import { minTransferAmountsSelector } from "reducers/platform-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
+
+import "./transfer-form.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
   currentItem,

@@ -2,7 +2,7 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
-import { ASSET, CREATE_ASSET } from "constants/constants";
+import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
 import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
@@ -26,6 +26,7 @@ import { AccountDetailsDataType } from "./account-details.types";
 import {
   openPositionsSelector,
   openPositionsTableSelector,
+  tradesSelector,
   tradesTableSelector
 } from "./reducers/account-history.reducer";
 
@@ -41,7 +42,11 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dataSelector: openPositionsTableSelector,
       getItems: getOpenPositions
     },
-    trades: { dataSelector: tradesTableSelector, getItems: getTrades }
+    trades: {
+      itemSelector: tradesSelector,
+      dataSelector: tradesTableSelector,
+      getItems: getTrades
+    }
   };
   const title = description.publicInfo.title;
 
@@ -53,7 +58,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
         isOwnAsset={true}
-        logo={description.brokerDetails.logo}
+        logo={description.brokerDetails.logoUrl}
         title={title}
         id={description.id}
         currency={description.tradingAccountInfo.currency}
@@ -78,7 +83,8 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       )}
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
-        assetType={CREATE_ASSET.ACCOUNT}
+        canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}
+        assetType={TRADE_ASSET_TYPE.ACCOUNT}
         haveDelay={false}
         getHistoryCounts={getAccountHistoryCounts}
         tablesData={tablesData}

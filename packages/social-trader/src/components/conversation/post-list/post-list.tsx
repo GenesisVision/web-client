@@ -1,18 +1,20 @@
-import "./post-list.scss";
-
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Post } from "components/conversation/post/post";
-import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
+import DetailsBlock from "components/details/details-block";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import React from "react";
 
 const _PostList: React.FC<Props> = ({ data, updateData }) => {
   return (
-    <div className="post-list">
-      <PostInputContainer onSuccess={updateData} />
+    <div>
       {data.map(post => (
         <Post key={post.id} post={post} updateData={updateData} />
       ))}
+      {!data.length && (
+        <DetailsBlock horizontalPaddings wide className="post">
+          Feed is empty
+        </DetailsBlock>
+      )}
     </div>
   );
 };

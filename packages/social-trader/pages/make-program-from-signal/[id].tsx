@@ -27,15 +27,11 @@ const Page: NextPageWithRedux<Props, {}> = ({
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  let broker;
-  let accountCurrency;
-  await fetchFollowDescriptionCtx(id as string, ctx).then(
-    ({ brokerDetails, tradingAccountInfo: { currency } }) => {
-      broker = brokerDetails.type;
-      accountCurrency = currency;
-    }
-  );
-  return { id, broker, accountCurrency };
+  const {
+    brokerDetails: { type },
+    tradingAccountInfo: { currency }
+  } = await fetchFollowDescriptionCtx(id as string, ctx);
+  return { id, broker: type, accountCurrency: currency };
 };
 
 interface Props {

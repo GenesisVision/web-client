@@ -1,17 +1,15 @@
-import "./deposit.scss";
-
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
 import {
   fetchWallets,
   TWalletsAvailableData
 } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currencySelector } from "reducers/account-settings-reducer";
+import { useDispatch } from "react-redux";
 import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
 import { safeGetElemFromArray } from "utils/helpers";
 import { postponeCallback } from "utils/hook-form.helpers";
@@ -19,6 +17,7 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
+import "./deposit.scss";
 import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
@@ -42,7 +41,7 @@ const _DepositPopup: React.FC<Props> = ({
         asset === ASSET.PROGRAM ? "ClickInvestInProgram" : "ClickInvestInFund"
     });
   }, []);
-  const profileCurrency = useSelector(currencySelector);
+  const profileCurrency = useAccountCurrency();
   const dispatch = useDispatch();
   const onCloseMiddleware = postponeCallback(() => {
     onClose();

@@ -11,7 +11,7 @@ const _WalletConvert: React.FC<{
       first={
         <CurrencyItem
           name={first.currency}
-          logo={first.logo}
+          logo={first.logoUrl}
           small
           clickable={false}
         />
@@ -20,7 +20,7 @@ const _WalletConvert: React.FC<{
         second && (
           <CurrencyItem
             name={second.currency}
-            logo={second.logo}
+            logo={second.logoUrl}
             small
             clickable={false}
           />

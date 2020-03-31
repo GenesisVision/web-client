@@ -1,5 +1,5 @@
 import { Table } from "components/table/components";
-import { ItemsViewModelFundDetailsListItem } from "gv-api-web";
+import { FundDetailsListItemItemsViewModel } from "gv-api-web";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/components/funds-table/funds-table.constants";
 import * as React from "react";
@@ -7,7 +7,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import { SearchTableProps } from "./global-search-result";
 
-const FundsTable: React.FC<SearchTableProps<ItemsViewModelFundDetailsListItem> &
+const FundsTable: React.FC<SearchTableProps<FundDetailsListItemItemsViewModel> &
   WithTranslation> = ({ t, data }) => {
   return (
     <Table

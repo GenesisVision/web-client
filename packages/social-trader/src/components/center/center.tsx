@@ -1,9 +1,10 @@
-import "./center.scss";
-
 import classNames from "classnames";
 import React from "react";
 
+import "./center.scss";
+
 export const Center: React.FC<Props> = ({
+  wrap,
   className,
   children,
   center = true,
@@ -13,7 +14,8 @@ export const Center: React.FC<Props> = ({
     <div
       {...otherProps}
       className={classNames(className, {
-        center: center
+        center: center,
+        "center--wrap": wrap
       })}
     >
       {children}

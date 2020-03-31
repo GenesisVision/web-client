@@ -1,5 +1,3 @@
-import "./message.scss";
-
 import {
   ConversationImage,
   getImageSize
@@ -9,33 +7,65 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { generateTagsComponents } from "components/conversation/message/message.helpers";
+import {
+  inTextComponentsMap,
+  parseToTsx
+} from "components/conversation/tag/parse-to-tsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { PostTag } from "gv-api-web";
 import React from "react";
 
+import "./message.scss";
+
 const _Message: React.FC<IMessageProps> = ({
+  tags,
+  postId,
   images,
   text,
   date,
-  author: { avatar, name }
+  author: { username, url, avatar }
 }) => {
   return (
     <Row center={false} className="message">
       <RowItem className="message__user">
-        <ConversationUser avatar={avatar} username={name} date={date} />
+        <ConversationUser
+          postId={postId}
+          url={url}
+          avatar={avatar}
+          username={username}
+          date={date}
+        />
       </RowItem>
       <RowItem className="message__text">
-        <Row>{text}</Row>
+        {text && (
+          <Row>
+            <div>
+              {parseToTsx({
+                tags,
+                text,
+                map: inTextComponentsMap
+              })}
+            </div>
+          </Row>
+        )}
         {!!images.length && (
           <Row wrap small className="message__images">
-            {images.map(image => (
-              <RowItem bottomOffset>
+            {images.map((image, index) => (
+              <RowItem bottomOffset key={image.image}>
                 <ConversationImage
-                  image={image}
+                  index={index}
+                  images={images}
                   size={getImageSize(images.length)}
                 />
               </RowItem>
             ))}
+          </Row>
+        )}
+        {!!tags?.length && (
+          <Row wrap small>
+            {generateTagsComponents(tags)}
           </Row>
         )}
       </RowItem>
@@ -44,6 +74,8 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  tags?: PostTag[];
+  postId?: string;
   images: IConversationImage[];
   author: IConversationUser;
   text?: string;

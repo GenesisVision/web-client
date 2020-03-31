@@ -1,10 +1,27 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+
+$indicator-height: 2px;
 
 .input-image {
   width: 200px;
   height: 200px;
   position: relative;
+
+  &__dropzone-container {
+    position: relative;
+  }
+
+  &__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $indicator-height;
+    background: $primary-color;
+    opacity: 0.5;
+    width: 0;
+  }
 
   &--error {
     border-color: $text-error;

@@ -18,7 +18,7 @@ const _NotificationManagers: React.FC<Props> = ({ t, settings }) => (
             ":id": setting.managerId
           })}
           title={setting.username}
-          logo={setting.avatar}
+          logo={setting.logoUrl}
           count={setting.settingsGeneral.length}
         />
       ))}

@@ -4,8 +4,8 @@ import tableReducerFactory, {
   ITableState
 } from "components/table/reducers/table.reducer";
 import {
-  ItemsViewModelProgramInvestingDetailsList,
-  ProgramInvestingDetailsList
+  ProgramInvestingDetailsList,
+  ProgramInvestingDetailsListItemsViewModel
 } from "gv-api-web";
 import {
   DASHBOARD_INVESTMENTS_DEFAULT_FILTERS,
@@ -17,7 +17,7 @@ import { ApiAction } from "utils/types";
 export const DASHBOARD_INVESTMENTS_PROGRAMS = "DASHBOARD_INVESTMENTS_PROGRAMS";
 
 export type TInvestmentsProgramsItems = ProgramInvestingDetailsList;
-export type TInvestmentsProgramsStateData = ItemsViewModelProgramInvestingDetailsList;
+export type TInvestmentsProgramsStateData = ProgramInvestingDetailsListItemsViewModel;
 export type TInvestmentsProgramsState = ITableState<
   TInvestmentsProgramsStateData
 >;

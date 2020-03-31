@@ -3338,6 +3338,11 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
+browser-image-compression@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/browser-image-compression/-/browser-image-compression-1.0.8.tgz#367e1a03d71328c894246a875c63e3a4fefbb808"
+  integrity sha512-Bc6AY16gweH9BzVFeaD4n6QmVvzDFyT4vxoNuVGNDCaHEmuehsobuYYY2yIVzHW9SHefRjShXOzs8Fj+3DUIew==
+
 browser-process-hrtime@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz#3c9b4b7d782c8121e56f10106d84c0d0ffc94626"

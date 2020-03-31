@@ -64,7 +64,7 @@ const _FollowCard: React.FC<Props> = ({
       color={follow.color}
       hasAvatar
       subTitle={follow.owner.username}
-      logo={follow.logo}
+      logo={follow.logoUrl}
       managerUrl={managerToPathCreator(follow.owner.url, contextTitle)}
       title={follow.title}
       detailsUrl={linkProps}

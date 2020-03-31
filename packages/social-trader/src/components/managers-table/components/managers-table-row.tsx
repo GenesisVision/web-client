@@ -21,7 +21,7 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps> = ({ manager }) => {
         <Link to={managerToPathCreator(manager.url, contextTitle)}>
           <AvatarWithName
             avatar={
-              <ProfileAvatar url={manager.avatar} alt={manager.username} />
+              <ProfileAvatar url={manager.logoUrl} alt={manager.username} />
             }
             name={manager.username}
           />

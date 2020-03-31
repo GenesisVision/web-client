@@ -30,6 +30,7 @@ export type TUseApiRequestProps<T = any> = {
 };
 
 type TUseApiRequestOutput<T> = {
+  setData: (data: T | TNullValue) => void;
   status: API_REQUEST_STATUS;
   errorMessage: TErrorMessage;
   isPending: boolean;
@@ -96,6 +97,7 @@ const useApiRequest = <T extends any>({
   }, []);
 
   return {
+    setData,
     status,
     errorMessage,
     cleanErrorMessage,

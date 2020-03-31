@@ -119,7 +119,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         {brokers.map(broker => (
           <RowItem bottomOffset key={broker.name}>
             <BrokerCard
-              logo={broker.logo}
+              logo={broker.logoUrl}
               brokerName={broker.name}
               isSelected={broker.name === selectedBroker.name}
               onSelect={selectBroker}

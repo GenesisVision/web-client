@@ -1,10 +1,10 @@
-import "./events-list.scss";
-
 import classNames from "classnames";
 import { PlatformEvent } from "gv-api-web";
 import EventItem from "pages/landing-page/components/events-list/event-item";
 import EventLastItem from "pages/landing-page/components/events-list/event-last-item";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+
+import "./events-list.scss";
 
 const TIME_DELAY = 5000;
 const COUNT_SHOWING_ITEMS = 5;
@@ -17,7 +17,7 @@ interface Props {
 const _EventsList: React.FC<Props> = ({ className, events }) => {
   const countItems = events.length;
   const [startIndex, setStartIndex] = useState(0);
-  const [maxHeightItem, setMaxHeightItem] = useState(90);
+  const [minHeightItem, setMinHeightItem] = useState(0);
   const [heightList, setHeightList] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,21 +26,19 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
 
     return () => clearInterval(interval);
   }, []);
-  const updateMaxHeight = useCallback(
+  const updateMinHeight = useCallback(
     (currentHeight: number) => {
-      if (maxHeightItem < currentHeight) {
-        setMaxHeightItem(state =>
-          state < currentHeight ? currentHeight : state
-        );
-        setHeightList((maxHeightItem + 20) * (COUNT_SHOWING_ITEMS + 1));
-      }
+      setMinHeightItem(state =>
+        state < currentHeight ? currentHeight : state
+      );
+      setHeightList((minHeightItem + 20) * (COUNT_SHOWING_ITEMS + 1));
     },
-    [maxHeightItem, heightList]
+    [minHeightItem, heightList]
   );
 
   useEffect(() => {
-    setHeightList((maxHeightItem + 20) * (COUNT_SHOWING_ITEMS + 1));
-  }, [maxHeightItem, heightList]);
+    setHeightList((minHeightItem + 20) * (COUNT_SHOWING_ITEMS + 1));
+  }, [minHeightItem, heightList]);
 
   return (
     <ul
@@ -54,12 +52,12 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
           countItems={countItems}
           countShowingItems={COUNT_SHOWING_ITEMS}
           index={index}
-          maxHeight={maxHeightItem}
-          updateMaxHeight={updateMaxHeight}
+          minHeight={minHeightItem}
+          updateMinHeight={updateMinHeight}
           {...event}
         />
       ))}
-      <EventLastItem />
+      <EventLastItem minHeight={minHeightItem} />
     </ul>
   );
 };

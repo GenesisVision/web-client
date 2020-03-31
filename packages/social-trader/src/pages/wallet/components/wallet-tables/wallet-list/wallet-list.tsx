@@ -1,5 +1,3 @@
-import "./wallet-list.scss";
-
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -20,6 +18,7 @@ import { formatCurrencyValue } from "utils/formatter";
 
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
+import "./wallet-list.scss";
 
 const _WalletList: React.FC<Props> = ({ wallets }) => {
   const [t] = useTranslation();
@@ -47,7 +46,7 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
                 )}
               >
                 <CurrencyItem
-                  logo={wallet.logo}
+                  logo={wallet.logoUrl}
                   name={wallet.currency}
                   small
                   clickable={false}

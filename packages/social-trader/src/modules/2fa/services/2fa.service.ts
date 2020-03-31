@@ -5,7 +5,7 @@ import {
   TwoFactorAuthenticatorConfirm,
   TwoFactorCodeWithPassword
 } from "gv-api-web";
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import { RootThunk } from "utils/types";
 
@@ -14,9 +14,9 @@ export const confirm2fa = (
 ): RootThunk<Promise<RecoveryCodesViewModel>> => (
   dispatch
 ): Promise<RecoveryCodesViewModel> => {
-  const authorization = authService.getAuthArg();
-  return authApi
-    .confirmTwoStepAuth(authorization, {
+  return api
+    .auth()
+    .confirmTwoStepAuth({
       body
     })
     .then(response => {
@@ -27,10 +27,19 @@ export const confirm2fa = (
 };
 
 export const sendPassword = (body: PasswordModel) =>
-  authApi.createTwoStepAuthRecoveryCodes(authService.getAuthArg(), { body });
+  api.auth().createTwoStepAuthRecoveryCodes({ body });
 
-export const disableTFA = (body: TwoFactorCodeWithPassword) =>
-  authApi.disableTwoStepAuth(authService.getAuthArg(), { body });
+export const disableTFA = ({
+  twoFactorCode,
+  recoveryCode,
+  password
+}: TwoFactorCodeWithPassword) =>
+  api.auth().disableTwoStepAuth({
+    body: {
+      twoFactorCode: String(twoFactorCode),
+      recoveryCode: String(recoveryCode),
+      password: String(password)
+    }
+  });
 
-export const fetchTFAData = () =>
-  authApi.createTwoStepAuth(authService.getAuthArg());
+export const fetchTFAData = () => api.auth().createTwoStepAuth();

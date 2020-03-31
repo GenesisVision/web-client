@@ -1,12 +1,14 @@
-import { updateAccountSettingsCurrencyAction } from "actions/account-settings-actions";
-import { ACCOUNT_CURRENCY_KEY } from "middlewares/update-account-settings-middleware/update-account-settings-middleware";
-import { Dispatch } from "redux";
-import { setCookie } from "utils/cookie";
-import { ActionType, CurrencyEnum } from "utils/types";
+import { api } from "services/api-client/swagger-custom-client";
+import { setAccountCurrency } from "utils/account-currency";
+import { CurrencyEnum } from "utils/types";
 
-export const updateCurrency = (currency: CurrencyEnum) => (
-  dispatch: Dispatch<ActionType>
-) => {
-  setCookie(ACCOUNT_CURRENCY_KEY, currency);
-  dispatch(updateAccountSettingsCurrencyAction(currency));
+export const updateCurrency = (currency: CurrencyEnum) => {
+  setAccountCurrency(currency);
+};
+
+export const postAccountCurrency = (currency: CurrencyEnum) => {
+  return api
+    .profile()
+    .updateUserPlatformCurrency({ currency })
+    .then(() => currency);
 };

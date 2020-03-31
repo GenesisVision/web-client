@@ -1,5 +1,3 @@
-import "./asset-settings.scss";
-
 import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
@@ -8,6 +6,7 @@ import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/prog
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import "./asset-settings.scss";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
@@ -40,7 +39,7 @@ const _AssetsEditPage: React.FC<Props> = ({
         title: description.publicInfo.title,
         stopOutLevel: description.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
         description: description.publicInfo.description,
-        logo: { src: description.publicInfo.logo }
+        logo: { src: description.publicInfo.logoUrl }
       };
       return editRequest({
         id: description.id,

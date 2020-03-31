@@ -65,7 +65,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       hasAvatar
       title={program.title}
       subTitle={program.owner.username}
-      logo={program.logo}
+      logo={program.logoUrl}
       managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
       renderActions={renderActions}

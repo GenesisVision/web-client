@@ -86,7 +86,7 @@ const _TransactionAssetBlock: React.FC<{
 }> = ({ asset }) => {
   return (
     <TransactionDetailsItem label={asset.description}>
-      <TransactionAsset url={asset.logo} data={asset} />
+      <TransactionAsset url={asset.logoUrl} data={asset} />
     </TransactionDetailsItem>
   );
 };
@@ -104,7 +104,7 @@ const _TransactionWalletBlock: React.FC<{
         <WalletConvert wallets={wallets} />
       ) : (
         <CurrencyItem
-          logo={walletFirst.logo}
+          logo={walletFirst.logoUrl}
           name={walletFirst.currency}
           clickable={false}
         />

@@ -4,6 +4,7 @@ import { composeRequestFiltersByTableState } from "components/table/services/tab
 import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
+import { Token } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
 
@@ -19,7 +20,7 @@ import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-
 
 export const dispatchFundDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg(),
+  auth = Token.create(),
   currency: CurrencyEnum = "GVT"
 ) => async (dispatch: MiddlewareDispatch) =>
   await dispatch(fetchFundDescriptionAction(id, auth, currency));
@@ -34,7 +35,7 @@ export const dispatchFundDescription = (
   return await dispatch(
     dispatchFundDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx),
+      Token.create(ctx),
       currency
     )
   );

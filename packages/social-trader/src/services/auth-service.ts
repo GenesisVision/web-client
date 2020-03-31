@@ -34,7 +34,7 @@ const getAuthArg = (ctx?: NextPageContext): string => {
     return "";
   }
 
-  return generateTokenString(token);
+  return token;
 };
 
 const isAuthenticated = (

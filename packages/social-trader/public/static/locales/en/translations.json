@@ -399,6 +399,7 @@
     "memberSince": "Member Since"
   },
   "deposit-asset": {
+    "management-fee": "Management fee",
     "title": "Invest",
     "gv-commission": "GV commission",
     "available-in-wallet": "Available in wallet",
@@ -1033,6 +1034,7 @@
         "balance": "Balance",
         "profit": "Profit",
         "success-fee": "Success fee",
+        "management-fee": "Management fee",
         "entry-fee": "Entry fee",
         "deposit-withdraw": "Deposit/Withdraw",
         "commission-rebate": "GV commission rebate"
@@ -1072,6 +1074,9 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
+      "personal-management-fee": "Personal management fee",
+      "management-fee": "Management fee",
+      "auto-join": "Ignore SO",
       "creation-date": "Creation date",
       "currency": "Currency",
       "broker": "Broker",
@@ -1149,6 +1154,12 @@
       }
     },
     "tooltip": {
+      "management-fee": "The сommission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
+      "auto-join": {
+        "text": "In the event a program hits the Stop-Out limit:",
+        "li-1": "“Ignore SO” is turned off → your investment (minus losses) is returned to your wallet.",
+        "li-2": "“Ignore SO” is turned on → your investment (minus losses) is reinvested in the program keeping all configured conditions saved."
+      },
       "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
       "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
       "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
@@ -1265,6 +1276,11 @@
     }
   },
   "manager-page": {
+    "unfollow-user": "Unfollow",
+    "follow-user": "Follow",
+    "followers": "Followers",
+    "following": "Following",
+    "social-links": "Social Links",
     "title": "Manager",
     "about": "About",
     "assets": "Assets",
@@ -1795,6 +1811,7 @@
         "back-button-text": "Back"
       },
       "validators": {
+        "password-is-short": "Password must be at least {{count}} characters.",
         "password-weak": "Password is weak.",
         "password-required": "Password is required.",
         "password-dont-match": "Passwords don't match.",
@@ -1857,6 +1874,8 @@
       "title": "Close asset",
       "notifications": {
         "fund": "Request to close the fund was sent successfully.",
+        "signaltradingaccount": "Request to close the trading account was sent successfully.",
+        "signalprogram": "Request to close the program was sent successfully.",
         "program": "Request to close the program was sent successfully.",
         "trading-account": "Request to close the trading account was sent successfully."
       }
@@ -2337,7 +2356,7 @@
         },
         "upload-logo": "Upload program logo",
         "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
-        "entry-fee": "Entry fee",
+        "management-fee": "Management fee",
         "success-fee": "Success fee",
         "signal-success-fee": "Signal success fee",
         "signal-volume-fee": "Volume fee",
@@ -2347,8 +2366,8 @@
       "hints": {
         "trades-delay": "Description about Trades delay is here",
         "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
-        "entry-fee": "Description about entry fee is here",
-        "entry-fee-description": "A fee charged upon each investment in the program.",
+        "management-fee": "Description about management fee is here",
+        "management-fee-description": "A fee charged charged for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
         "success-fee": "Description about success fee is here",
         "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
         "subscription-fee": "Description about subscription fee is here",
@@ -2364,11 +2383,11 @@
         "stop-out-required": "Stop Out is required",
         "stop-out-is-large": "Must be less than 100",
         "stop-out-is-zero": "Must be more than 10",
-        "stop-out-less-ten": "Level cannot be less than 10",
-        "stop-out-more-current": "Level can't be more than a current value",
+        "stop-out-less-ten": "Can't be less than 10",
+        "stop-out-more-current": "Can't be more than a current value",
         "amount-required": "Amount is required",
-        "amount-is-large": "Amount must be available in Wallet",
-        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "amount-is-large": "Must be available in Wallet",
+        "amount-is-zero": "Must be greater or equal {{min}}",
         "title-required": "Title is required",
         "title-is-long": "Title is too long",
         "title-is-short": "Title is too short",
@@ -2380,16 +2399,16 @@
         "period-required": "Period is required",
         "leverage-required": "Leverage is required",
         "entry-fee-required": "Entry fee is required",
-        "entry-fee-min": "Entry fee must be greater than 0 % ",
-        "entry-fee-max": "Entry fee must be less than {{max}} %",
+        "entry-fee-min": "Must be greater than 0 % ",
+        "entry-fee-max": "Must be less than {{max}} %",
         "success-fee-required": "Success fee is required",
-        "success-fee-min": "Success fee must be greater or equal than 0 % ",
-        "success-fee-max": "Success fee must be less than {{max}} % ",
+        "success-fee-min": "Must be greater or equal than 0 % ",
+        "success-fee-max": "Must be less than {{max}} % ",
         "signal-volume-fee-required": "Volume fee is required",
-        "signal-volume-fee-min": "Volume fee must be greater than {{min}} %",
-        "signal-volume-fee-max": "Volume fee must be less than {{max}} %",
+        "signal-volume-fee-min": "Must be greater than {{min}} %",
+        "signal-volume-fee-max": "Must be less than {{max}} %",
         "account-type-required": "Account type is required",
-        "investment-limit-min": "Investment Limit must be greater than 0",
+        "investment-limit-min": "Must be greater than 0",
         "investment-limit-required": "Investment Limit is required"
       }
     },

@@ -22,7 +22,6 @@ const _NavItem: React.FC<INavItemProps> = ({
   onClick
 }) => {
   const { t } = useTranslation();
-  const { route } = useRouter();
   const [subOpen, setSubOpen] = useState(subNavOpen);
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

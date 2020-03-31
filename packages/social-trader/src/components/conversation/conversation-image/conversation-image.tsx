@@ -1,13 +1,14 @@
-import "./conversation-image.scss";
-
 import classNames from "classnames";
-import ImageBaseElement from "components/avatar/image-base.element";
-import { ConversationImageFull } from "components/conversation/conversation-image/conversation-image-full";
+import ImageBase from "components/avatar/image-base";
+import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { MutedText } from "components/muted-text/muted-text";
 import { SIZES } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
+import { ImageQualityType } from "hooks/url.hook";
 import React from "react";
+
+import "./conversation-image.scss";
 
 export const getImageSize = (count: number): SIZES => {
   switch (count) {
@@ -17,6 +18,17 @@ export const getImageSize = (count: number): SIZES => {
       return SIZES.MIDDLE;
     default:
       return SIZES.SMALL;
+  }
+};
+
+const getImageQuality = (size: SIZES): ImageQualityType => {
+  switch (size) {
+    case SIZES.LARGE:
+      return "High";
+    case SIZES.MIDDLE:
+      return "Medium";
+    case SIZES.SMALL:
+      return "Low";
   }
 };
 
@@ -30,12 +42,13 @@ const EmptyImage: React.FC<{ imageClassName: string }> = ({
   );
 };
 
-const _ConversationImage: React.FC<Props> = ({ image, size }) => {
+const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
   const [open, setOpen, setClose] = useIsOpen();
 
   return (
     <>
-      <ImageBaseElement
+      <ImageBase
+        quality={getImageQuality(size)}
         onClick={setOpen}
         DefaultImageComponent={EmptyImage}
         defaultImageClassName={"conversation-image__empty"}
@@ -44,16 +57,22 @@ const _ConversationImage: React.FC<Props> = ({ image, size }) => {
           "conversation-image--middle": size === SIZES.MIDDLE,
           "conversation-image--large": size === SIZES.LARGE
         })}
-        src={image.url}
+        src={images[index].image}
       />
-      <ConversationImageFull open={open} onClose={setClose} image={image} />
+      <ConversationImagesFull
+        open={open}
+        onClose={setClose}
+        images={images}
+        initIndex={index}
+      />
     </>
   );
 };
 
 interface Props {
+  index: number;
   size: SIZES;
-  image: IConversationImage;
+  images: IConversationImage[];
 }
 
 export const ConversationImage = React.memo(_ConversationImage);

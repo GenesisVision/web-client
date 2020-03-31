@@ -8,7 +8,7 @@ const _CommentInputContainer: React.FC<Props> = ({ onSuccess, id }) => {
   const { sendRequest, status, errorMessage } = useApiRequest({
     middleware: [successMiddleware],
     successMessage: "Success",
-    request: values => sendComment({ ...values, id })
+    request: values => sendComment({ ...values, postId: id })
   });
   return (
     <CommentInput

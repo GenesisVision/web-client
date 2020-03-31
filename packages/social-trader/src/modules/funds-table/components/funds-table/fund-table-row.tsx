@@ -34,7 +34,7 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
       <TableCell className="funds-table__cell">
         <Link to={link}>
           <AssetAvatarWithName
-            url={fund.logo}
+            url={fund.logoUrl}
             alt={fund.title}
             color={fund.color}
             name={fund.title}

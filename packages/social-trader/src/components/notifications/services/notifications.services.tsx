@@ -1,9 +1,7 @@
 import { SkipTake } from "components/notifications/components/notifications.helpers";
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const fetchNotifications = (options: SkipTake) =>
-  notificationsApi.getNotifications(authService.getAuthArg(), options);
+  api.notifications().getNotifications(options);
 
-export const clearAll = () =>
-  notificationsApi.readAllNotification(authService.getAuthArg());
+export const clearAll = () => api.notifications().readAllNotification();

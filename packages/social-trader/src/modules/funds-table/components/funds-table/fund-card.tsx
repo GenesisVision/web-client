@@ -107,7 +107,7 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
       hasAvatar
       title={fund.title}
       subTitle={fund.owner.username}
-      logo={fund.logo}
+      logo={fund.logoUrl}
       color={fund.color}
       detailsUrl={link}
       managerUrl={managerToPathCreator(fund.owner.url, contextTitle)}

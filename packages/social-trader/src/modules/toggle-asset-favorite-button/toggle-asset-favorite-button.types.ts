@@ -1,12 +1,12 @@
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import {
   FollowDetailsListItem,
+  FollowDetailsListItemItemsViewModel,
   FundDetailsListItem,
+  FundDetailsListItemItemsViewModel,
   FundInvestingDetailsList,
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
   ProgramDetailsListItem,
+  ProgramDetailsListItemItemsViewModel,
   ProgramInvestingDetailsList
 } from "gv-api-web";
 import { ApiAction, MiddlewareDispatch } from "utils/types";
@@ -22,9 +22,9 @@ export type TableToggleFavoriteType = (
 ) => void;
 
 export type ToggleableAssetListType =
-  | ItemsViewModelFollowDetailsListItem
-  | ItemsViewModelProgramDetailsListItem
-  | ItemsViewModelFundDetailsListItem;
+  | FollowDetailsListItemItemsViewModel
+  | ProgramDetailsListItemItemsViewModel
+  | FundDetailsListItemItemsViewModel;
 
 export type ToggleableAssetType =
   | FollowDetailsListItem

@@ -28,9 +28,9 @@ const _ProfileImageContainer: React.FC = () => {
   return (
     <ProfileImage
       errorMessage={errorMessage}
-      key={headerData.avatar}
+      key={headerData.logoUrl}
       onSubmit={handleSubmit}
-      avatar={headerData.avatar}
+      avatar={headerData.logoUrl}
     />
   );
 };

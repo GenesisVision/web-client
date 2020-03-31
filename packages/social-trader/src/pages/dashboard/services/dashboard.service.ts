@@ -2,8 +2,8 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { IDataModel } from "constants/constants";
 import {
   DashboardTradingAsset,
+  DashboardTradingAssetItemsViewModel,
   FollowDetailsListItem,
-  ItemsViewModelDashboardTradingAsset,
   PrivateTradingAccountFull,
   ProgramFollowDetailsFull
 } from "gv-api-web";
@@ -20,14 +20,15 @@ import {
 import dashboardApi from "services/api-client/dashboard-api";
 import eventsApi from "services/api-client/events-api";
 import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api, Token } from "services/api-client/swagger-custom-client";
+// import authService from "services/auth-service";
 import { getDefaultDateRange } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
 
 export const getInvestingFunds = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingFunds(authService.getAuthArg(), {
+  api.dashboard().getInvestingFunds({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -35,7 +36,7 @@ export const getInvestingFunds = (
 export const getInvestingPrograms = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getInvestingPrograms(authService.getAuthArg(), {
+  api.dashboard().getInvestingPrograms({
     ...filters,
     ...getDefaultDateRange()
   });
@@ -43,13 +44,13 @@ export const getInvestingPrograms = (
 export const getInvestingMostProfitable = (
   filters?: ComposeFiltersAllType
 ): Promise<IDataModel> =>
-  dashboardApi.getMostProfitableAssets(authService.getAuthArg(), {
+  api.dashboard().getMostProfitableAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const fetchRequests = (take: number = 100) =>
-  investmentsApi.getRequests(0, take, authService.getAuthArg());
+  api.investments().getRequests(0, take);
 
 export const getRequestsCount = () =>
   fetchRequests(0).then(({ total }) => total);
@@ -61,28 +62,30 @@ export const getFollowThem = () => fetchFollows({ facetId: "Top" });
 
 export const getPrivateAssets = (
   filters?: ComposeFiltersAllType
-): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPrivateTradingAssets(authService.getAuthArg(), {
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  api.dashboard().getPrivateTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
-): Promise<ItemsViewModelDashboardTradingAsset> =>
-  dashboardApi.getPublicTradingAssets(authService.getAuthArg(), {
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  api.dashboard().getPublicTradingAssets({
     ...filters,
     ...getDefaultDateRange()
   });
 
 export const getPortfolio = (): Promise<TDashboardPortfolio> =>
-  dashboardApi
-    .getPortfolio(authService.getAuthArg())
+  api
+    .dashboard()
+    .getPortfolio()
     .then(({ distribution }) => distribution);
 
 export const getAssetsPercents = (): Promise<TAssets> =>
-  dashboardApi
-    .getHoldings(authService.getAuthArg())
+  api
+    .dashboard()
+    .getHoldings()
     .then(({ assets }) => assets);
 
 export const getRecommendations = ({
@@ -90,8 +93,9 @@ export const getRecommendations = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<FollowDetailsListItem[]> =>
-  dashboardApi
-    .getRecommendations(authService.getAuthArg(), {
+  api
+    .dashboard()
+    .getRecommendations({
       onlyFollows: true,
       currency,
       take: 15
@@ -104,14 +108,14 @@ export const getTotal = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardTotal> =>
-  dashboardApi.getSummary(authService.getAuthArg(), { currency });
+  api.dashboard().getDashboardSummary({ currency });
 
 export const fetchTradingTotalStatistic = ({
   currency
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardTradingStatistic> =>
-  dashboardApi.getTradingDetails(authService.getAuthArg(), {
+  api.dashboard().getTradingDetails({
     currency,
     eventsTake: 4
   });
@@ -121,14 +125,14 @@ export const getTotalInvestingStatistic = ({
 }: {
   currency: CurrencyEnum;
 }): Promise<TDashboardInvestingStatistic> =>
-  dashboardApi.getInvestingDetails(authService.getAuthArg(), {
+  api.dashboard().getInvestingDetails({
     currency,
     eventsTake: 4
   });
 
 export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
   eventsApi
-    .getEvents(authService.getAuthArg(), {
+    .getEvents({
       ...filters,
       eventGroup: "InvestmentHistory",
       eventLocation: "Dashboard"
@@ -137,7 +141,7 @@ export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
 
 export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
   eventsApi
-    .getEvents(authService.getAuthArg(), {
+    .getEvents({
       ...filters,
       eventGroup: "TradingHistory",
       eventLocation: "Dashboard"

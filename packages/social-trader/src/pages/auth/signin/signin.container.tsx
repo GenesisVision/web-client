@@ -1,4 +1,5 @@
 import authActions from "actions/auth-actions";
+import { getHeader } from "components/header/services/header.service";
 import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
@@ -6,10 +7,11 @@ import useIsOpen from "hooks/is-open.hook";
 import Router from "next/router";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
+import { setAccountCurrency } from "utils/account-currency";
 import { ReduxDispatch, ResponseError } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
@@ -21,6 +23,10 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const [innerFields, setInnerFields] = useState<{
+    email?: string;
+    password?: string;
+  }>({});
   const {
     clearTwoFactorState,
     storeTwoFactorState,
@@ -35,17 +41,27 @@ const _SignInContainer: React.FC<Props> = ({
     dispatch(authActions.updateTokenAction(true));
     Router.push(redirectFrom);
   };
+  const saveAccountCurrencyMiddleware = (res: any) => {
+    if (res)
+      getHeader().then(({ platformCurrency }) => {
+        setAccountCurrency(platformCurrency);
+      });
+  };
 
   const { email, password = "" } = getTwoFactorState();
 
+  useEffect(() => {
+    if (!!email && !!password) setInnerFields({ email, password });
+  }, [email, password]);
+
   const { sendRequest } = useApiRequest({
-    middleware: [successMiddleware],
+    middleware: [successMiddleware, saveAccountCurrencyMiddleware],
     request: values => {
       return login({
         ...values,
         type,
-        email: values.email || email,
-        password: values.password || password
+        email: values.email || innerFields.email,
+        password: values.password || innerFields.password
       }).catch((e: ResponseError) => {
         if (e.code === "RequiresTwoFactor") {
           setDisable();
@@ -70,7 +86,12 @@ const _SignInContainer: React.FC<Props> = ({
         disable={disable}
         request={sendRequest}
         renderForm={handle =>
-          renderForm({ handle, email, errorMessage, password })
+          renderForm({
+            handle,
+            email: innerFields.email!,
+            errorMessage,
+            password: innerFields.password!
+          })
         }
       />
     </div>

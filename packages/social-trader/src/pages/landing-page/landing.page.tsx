@@ -1,12 +1,9 @@
-import "./styles/index.scss";
-import "./styles/home.scss";
-
 import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
   PlatformEvent,
-  PlatformNews
+  PlatformNews,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
 import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
@@ -26,6 +23,9 @@ import {
 } from "pages/landing-page/static-data/brokers";
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
+
+import "./styles/home.scss";
+import "./styles/index.scss";
 
 const _LandingPage: React.FC<Props> = ({
   programs,
@@ -91,9 +91,9 @@ const _LandingPage: React.FC<Props> = ({
 
 interface Props {
   refLink?: string;
-  programs: ItemsViewModelProgramDetailsListItem;
-  funds: ItemsViewModelFundDetailsListItem;
-  follows: ItemsViewModelFollowDetailsListItem;
+  programs: ProgramDetailsListItemItemsViewModel;
+  funds: FundDetailsListItemItemsViewModel;
+  follows: FollowDetailsListItemItemsViewModel;
   events: Array<PlatformEvent>;
   news: Array<PlatformNews>;
 }

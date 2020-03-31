@@ -1,5 +1,3 @@
-import "./wallet-withdraw-form.scss";
-
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
@@ -11,7 +9,6 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";
@@ -28,6 +25,8 @@ import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-withdraw-form.scss";
 
 const _WalletWithdrawForm: React.FC<Props> = ({
   onSubmit,
@@ -100,19 +99,12 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <Row large>
-          <WalletSelect
-            name={WALLET_WITHDRAW_FIELDS.id}
-            label={t("wallet-withdraw.select-currency")}
-            wallets={wallets}
-            onChange={onChangeCurrency}
-          />
-        </Row>
-        <Row>
-          <StatisticItem label={t("wallet-withdraw.available")} big>
-            {`${formatCurrencyValue(available, currency)} ${currency}`}
-          </StatisticItem>
-        </Row>
+        <WalletSelect
+          name={WALLET_WITHDRAW_FIELDS.id}
+          label={t("wallet-withdraw.select-currency")}
+          wallets={wallets}
+          onChange={onChangeCurrency}
+        />
       </DialogTop>
       <DialogBottom>
         <InputAmountField

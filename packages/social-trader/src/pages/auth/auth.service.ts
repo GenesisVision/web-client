@@ -2,6 +2,7 @@ import { CaptchaDetails, PowDetails } from "gv-api-web";
 import { useCookieState } from "hooks/cookie-state";
 import { NextPageContext } from "next";
 import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 //@ts-ignore
 import SHAWorker from "./sha.worker";
@@ -24,7 +25,7 @@ export const calculatePrefix: CalculatePrefixFuncType = props => {
 };
 
 export const getCaptcha: GetCaptchaFuncType = login => {
-  return platformApi.getRiskControlInfo(login, { client });
+  return api.platform().getRiskControlInfo(login, { client });
 };
 
 export const checkPow: CheckPowFuncType = async props => {
