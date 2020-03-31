@@ -1,7 +1,5 @@
-import {
-  ConversationImage,
-  getImageSize
-} from "components/conversation/conversation-image/conversation-image";
+import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
+import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import {
   IConversationImage,

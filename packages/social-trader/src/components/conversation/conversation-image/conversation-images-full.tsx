@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
+import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IConversationImage } from "components/conversation/conversation.types";
 import Modal, { BodyFix } from "components/modal/modal";
 import useIsOpen from "hooks/is-open.hook";
@@ -83,7 +84,7 @@ const ConversationImagesFullContent: React.FC<{
           onClick={handleNext}
           quality={"High"}
           className="conversation-image-full"
-          src={images[currentImageIndex].image}
+          src={getImageUrlByQuality(images[currentImageIndex].resizes, "High")}
         />
         <div
           onClick={handlePrev}
