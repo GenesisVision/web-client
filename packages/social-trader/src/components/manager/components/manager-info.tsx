@@ -38,7 +38,7 @@ const _ManagerInfo: React.FC<Props> = ({
               </MutedText>
             </Row>
           </Row>
-          {!isOwnPage && (
+          {isOwnPage === false && (
             <Row onlyOffset large>
               <FollowUserButton id={id} value={false} />
             </Row>
