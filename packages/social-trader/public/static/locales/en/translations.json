@@ -1,4 +1,11 @@
 {
+  "news-page": {
+    "title": "News",
+    "tabs": {
+      "my": "My",
+      "all": "All"
+    }
+  },
   "conversation": {
     "repost": "Share",
     "your-message": "Your message: "
@@ -247,6 +254,10 @@
     }
   },
   "navigation": {
+    "social": "Social",
+    "news": "News",
+    "my-profile": "My profile",
+    "rating": "Rating",
     "overview": "Overview",
     "events": "History",
     "investments": "Investments",
