@@ -15,7 +15,7 @@ import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
   profile: {
-    personalDetails: { canFollow, isFollow },
+    personalDetails: { isFollow },
     followers,
     following,
     username,
@@ -48,7 +48,7 @@ const _ManagerInfo: React.FC<Props> = ({
               </MutedText>
             </Row>
           </Row>
-          {isOwnPage === false && canFollow && (
+          {isOwnPage === false && (
             <Row onlyOffset large>
               <FollowUserButton id={id} value={isFollow} />
             </Row>
