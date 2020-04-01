@@ -1,3 +1,5 @@
+import "./post.scss";
+
 import { Center } from "components/center/center";
 import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
@@ -11,11 +13,10 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-import "./post.scss";
-
 const _Post: React.FC<Props> = ({
   updateData,
   post: {
+    rePostsCount,
     isPinned,
     images,
     date,
@@ -59,7 +60,7 @@ const _Post: React.FC<Props> = ({
         )}
       </Row>
       <PostButtons
-        repostCount={0}
+        rePostsCount={rePostsCount}
         onApply={updateData}
         id={id}
         liked={actions?.isLiked}
