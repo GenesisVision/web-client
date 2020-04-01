@@ -2,7 +2,6 @@ import { TGetChartFunc } from "components/details/details-statistic-section/deta
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
 import { TradesSignalViewModel, TradesViewModel } from "gv-api-web";
-import { NextPageContext } from "next";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
@@ -35,8 +34,10 @@ export const fetchAccountSubscriptions = (
     .then(({ items }) => items);
 };
 
-export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  api.accounts().getTradingAccountDetails(id);
+export const fetchAccountDescriptionCtx = (
+  id: string,
+  ctx?: NextPageWithReduxContext
+) => api.accounts(ctx?.token).getTradingAccountDetails(id);
 
 export const dispatchAccountDescription = (id: string) => (
   ctx?: NextPageWithReduxContext
