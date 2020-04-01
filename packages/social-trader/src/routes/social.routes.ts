@@ -3,17 +3,17 @@ import { createToUrl } from "components/link/link.helper";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
 import replaceParams from "utils/replace-params";
 
-export const SOCIAL = "rating";
+export const SOCIAL = "social";
 export const SOCIAL_ROUTE = `/${SOCIAL}`;
 
 export const RATING = "rating";
-export const RATING_ROUTE = `/${RATING}`;
+export const RATING_ROUTE = `${SOCIAL_ROUTE}/${RATING}`;
 
 export const MY_PROFILE = "my-profile";
-export const MY_PROFILE_ROUTE = `/${MY_PROFILE}`;
+export const MY_PROFILE_ROUTE = `${SOCIAL_ROUTE}/${MY_PROFILE}`;
 
 export const NEWS = "news";
-export const NEWS_ROUTE = `/${NEWS}`;
+export const NEWS_ROUTE = `${SOCIAL_ROUTE}/${NEWS}`;
 
 export const POSTS = "posts";
 export const POSTS_ROUTE = `/${POSTS}`;
