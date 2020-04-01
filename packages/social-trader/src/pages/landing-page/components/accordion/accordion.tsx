@@ -18,7 +18,8 @@ const AccordionContentWithAnimation = dynamic(() =>
 export type TAccordion = {
   id: string | number;
   title: string;
-  contents: TAccordionContent[];
+  content?: JSX.Element;
+  contents?: TAccordionContent[];
 };
 
 interface Props {
@@ -37,16 +38,13 @@ const _Accordion: React.FC<Props> = ({ accordion, className }) => {
       case "4g":
         return (
           <AccordionContentWithAnimation
-            contents={accordion.contents}
+            content={accordion.content}
             isVisible={isVisible}
           />
         );
       default:
         return (
-          <AccordionContent
-            contents={accordion.contents}
-            isVisible={isVisible}
-          />
+          <AccordionContent content={accordion.content} isVisible={isVisible} />
         );
     }
   }, [effectiveConnectionType, isVisible]);

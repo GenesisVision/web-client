@@ -5,16 +5,30 @@ export const faqGeneral: TAccordion[] = [
   {
     id: 0,
     title: "What is Genesis Vision?",
-    contents: [
-      {
-        text:
-          "Genesis Vision is a decentralized asset management platform built on blockchain technology. It’s designed to connect people who want to trade (or access the investment landscape) with individuals who actually know how to trade. Genesis Vision investors trust their funds to Genesis Vision managers, who trade using the pool of attracted funds, subsequently sharing the resulting profit with all of their investors at the end of a set period (set individually by the manager)."
-      }
-    ]
+    content: (
+      <>
+        <p>
+          Genesis Vision is a multimarket social trading platform that provides
+          a wide variety of opportunities for both traders and investors,
+          including:
+        </p>
+        <ul>
+          <li>
+            Trade Cryptocurrencies, Forex, Metals, Stocks, Indices and
+            Commodities on any brokerage/exchange within the Genesis Vision
+            partnership network
+          </li>
+          <li>Create and manage asset management Programs or Funds</li>
+          <li>Provide copy trading signals with GV Follow</li>
+          <li>Invest in Programs or Funds</li>
+          <li>Copy successful trading strategies with GV Follow</li>
+        </ul>
+      </>
+    )
   },
   {
     id: 1,
-    title: "Who are GV managers?",
+    title: "What is this platform for?",
     contents: [
       {
         text:
