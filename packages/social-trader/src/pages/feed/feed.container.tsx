@@ -1,23 +1,36 @@
 import { getEmptyPostLoaderData } from "components/conversation/conversation.loader";
-import { getGlobalFeed } from "components/conversation/conversation.service";
+import {
+  getGlobalFeed,
+  getNewsFeed
+} from "components/conversation/conversation.service";
 import { PostList } from "components/conversation/post-list/post-list";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { idSelector } from "reducers/header-reducer";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-const _FeedContainer: React.FC<Props> = ({ tags }) => {
-  const id = useSelector(idSelector);
+export enum FEED_TYPE {
+  ALL = "ALL",
+  PERSONAL = "PERSONAL"
+}
+
+interface Props {
+  feedType: FEED_TYPE;
+}
+
+const _FeedContainer: React.FC<Props> = ({ feedType }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { data, sendRequest } = useApiRequest({
-    request: () => getGlobalFeed({ id, tags })
+    request: () =>
+      feedType === FEED_TYPE.ALL ? getGlobalFeed() : getNewsFeed()
   });
   useEffect(() => {
     sendRequest();
-  }, [id]);
+  }, []);
   return (
     <div>
-      {!tags && <PostInputContainer onSuccess={sendRequest} />}
+      {isAuthenticated && <PostInputContainer onSuccess={sendRequest} />}
       <PostList
         loaderData={[getEmptyPostLoaderData()]}
         data={data!?.items}
@@ -26,9 +39,5 @@ const _FeedContainer: React.FC<Props> = ({ tags }) => {
     </div>
   );
 };
-
-interface Props {
-  tags: string[];
-}
 
 export const FeedContainer = React.memo(_FeedContainer);
