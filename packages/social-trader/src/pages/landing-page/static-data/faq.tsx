@@ -29,55 +29,293 @@ export const faqGeneral: TAccordion[] = [
   {
     id: 1,
     title: "What is this platform for?",
-    contents: [
-      {
-        text:
-          "GV managers are companies/individuals with proven trading history, ready to acquire investors' money for management on the investors behalf. The profit, received as a result of management of the total funds, is shared proportionally between the managers and investors. Managers charge commissions for their service and they can select these themselves."
-      }
-    ]
+    content: (
+      <>
+        <p>
+          Genesis Vision helps traders monetize their skills while providing a
+          wide variety of investment opportunities. Our clients can be both
+          traders and/or investors on our platform.
+        </p>
+        <p>
+          If you are already familiar with trading, you can create your own
+          asset management Program or Fund and attract investors to join. You
+          can also create a signal trading account so other users can subscribe
+          and copy your trades.
+        </p>
+        <p>
+          If you are an inexperienced trader, you can practice trading on your
+          personal trading account and/or copy trading strategies of Follow
+          Leaders, or you can choose any Program or Fund to invest in.
+        </p>
+      </>
+    )
   },
   {
     id: 2,
-    title: "Who are GV investors?",
-    contents: [
-      {
-        text:
-          "GV investors are the market participants who do not trade within the market directly. Instead, investors transfer their funds to experienced traders who manage the funds for them. Investors get their shares from their managers’ profits."
-      }
-    ]
+    title: "What assets can I trade?",
+    content: (
+      <>
+        <p>
+          Through our partners and liquidity providers, Genesis Vision traders
+          and managers have a wide variety of assets available for trading.
+          Users can trade:
+        </p>
+        <ul>
+          <li>Forex</li>
+          <li>Crypto (including all Binance and Huobi assets)</li>
+          <li>CFD</li>
+          <li>Stocks</li>
+          <li>Metals</li>
+          <li>Indices</li>
+          <li>Commodities</li>
+        </ul>
+      </>
+    )
   },
   {
     id: 3,
+    title: "Where can I invest?",
+    content: (
+      <p>
+        If you don’t want to trade, you can invest your money in Programs and
+        Funds under the management of Traders. Because of the transparent nature
+        of the Genesis Vision platform, you can always keep track of your
+        capital investments.
+      </p>
+    )
+  },
+  {
+    id: 4,
+    title: "What is Genesis Markets?",
+    content: (
+      <p>
+        Genesis Markets is our own broker that provides direct access to crypto
+        exchanges, Forex and CFD through the popular MetaTrader 5 terminal.
+      </p>
+    )
+  },
+  {
+    id: 5,
+    title: "What is MetaTrader 5? Where can I get it?",
+    content: (
+      <p>
+        MetaTrader 5 is the most popular trading terminal.
+        <br />
+        You can download it here:{" "}
+        <a href="https://genesis.vision/downloads">
+          https://genesis.vision/downloads
+        </a>
+        <br />
+        Or you can use a web version (you need to disable your ad blocker for
+        trading)
+        <a href="https://genesis.vision/trade/mt5">
+          https://genesis.vision/trade/mt5
+        </a>
+      </p>
+    )
+  },
+  {
+    id: 6,
+    title: "Is MetaTrader 5 the only option for trading?",
+    content: (
+      <>
+        <p>
+          No, apart from MetaTrader you can use the trading platforms of our
+          partners, such as:
+        </p>
+        <ul>
+          <li>MetaTrader 4</li>
+          <li>Exante Trading Terminal</li>
+          <li>Binance</li>
+          <li>Huobi</li>
+        </ul>
+      </>
+    )
+  },
+  {
+    id: 7,
     title: "Does Genesis Vision have mobile apps?",
-    contents: [
-      {
-        text: (
-          <>
-            Yes, we have{" "}
-            <a
-              title={"Get iOS application"}
-              href="https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              iOS application
-            </a>{" "}
-            and{" "}
-            <a
-              title={"Get Android application"}
-              href="https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {" "}
-              Android application{" "}
-            </a>
-            for investors. For managers there is only a web version available at
-            the moment.
-          </>
-        )
-      }
-    ]
+    content: (
+      <p>
+        Yes, we have an{" "}
+        <a
+          title={"iOS application"}
+          href="https://apps.apple.com/app/genesis-vision-investor/id1369865290"
+        >
+          iOS application
+        </a>{" "}
+        and an{" "}
+        <a
+          title={"Android application"}
+          href="https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
+        >
+          {" "}
+          Android application.
+        </a>
+      </p>
+    )
+  },
+  {
+    id: 8,
+    title: "How do I create a Genesis Vision account?",
+    content: (
+      <p>
+        To become a Genesis Vision client, you need to register on our{" "}
+        <a
+          title={"Link to genesis.vision"}
+          href="https://genesis.vision/signup"
+        >
+          website
+        </a>{" "}
+        or the Genesis Vision app (download the{" "}
+        <a
+          title={"Android application"}
+          href="https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
+        >
+          Android
+        </a>{" "}
+        or{" "}
+        <a
+          title={"iOS application"}
+          href="https://apps.apple.com/app/genesis-vision-investor/id1369865290"
+        >
+          iOS
+        </a>{" "}
+        app).
+      </p>
+    )
+  },
+  {
+    id: 9,
+    title: "What currencies can I deposit into my Genesis Vision Wallet?",
+    content: (
+      <p>
+        You can deposit using one of the following cryptocurrencies: BTC, ETH,
+        GVT, or USDT.
+      </p>
+    )
+  },
+  {
+    id: 10,
+    title: "Can I deposit with a credit card?",
+    content: (
+      <p>
+        Yes, you can deposit BTC, ETH, or USDT directly into your Genesis Vision
+        account using your credit/debit card through our payment processor
+        MoonPay. It holds the transaction in EUR and then converts to the
+        cryptocurrency you choose to deposit. The option «Buy with card» can be
+        found in your wallet.
+      </p>
+    )
+  },
+  {
+    id: 11,
+    title:
+      "I haven’t received a confirmation email after a successful registration. What should I do?",
+    content: (
+      <p>
+        Please check all folders in your inbox, including the spam folder. If
+        it’s not there, please contact our support team:{" "}
+        <a
+          title={"Write a email to Genesis Vision support"}
+          href="mailto:support@genesis.vision"
+        >
+          support@genesis.vision
+        </a>
+        .
+      </p>
+    )
+  },
+  {
+    id: 12,
+    title: "Does Genesis Vision have a KYC procedure?",
+    content: (
+      <>
+        <p>Without KYC you can:</p>
+        <ul>
+          <li>Deposit and withdraw crypto without limits</li>
+          <li>Exchange cryptocurrencies</li>
+          <li>Create crypto trading accounts</li>
+          <li>
+            Create Programs (with a maximum investment amount equivalent to
+            $1,000) and Funds
+          </li>
+          <li>
+            Bind your external trading account and use copy trading
+            functionality (Follow)
+          </li>
+          <li>Invest in Programs and Funds up to $1,000 in total</li>
+        </ul>
+        <p>After you pass KYC you also can:</p>
+        <ul>
+          <li>Create Forex trading accounts</li>
+          <li>Invest in Programs and Funds without limits</li>
+          <li>Attract investments in your Programs beyond the KYC limit</li>
+        </ul>
+        <p>Our KYC solution is provided by Sum&Substance</p>
+      </>
+    )
+  },
+  {
+    id: 13,
+    title: "Does Genesis Vision have a referral program?",
+    content: (
+      <>
+        <p>
+          Yes, Genesis Vision has a two-level referral program. You can find the
+          referral link in your personal account menu.
+        </p>
+
+        <p>
+          Information about your own referral accounts can be found there as
+          well.
+        </p>
+
+        <p>
+          Referral program rules you can find{" "}
+          <a href="https://genesis.vision/referral-program">here</a>
+        </p>
+      </>
+    )
+  },
+  {
+    id: 14,
+    title: "How can I secure my account?",
+    content: (
+      <p>
+        Genesis Vision highly recommends securing your trading account with
+        two-factor authentication. You can enable two-factor authentication in
+        your profile security settings.
+      </p>
+    )
+  },
+  {
+    id: 15,
+    title: "What do I do if I forgot my password?",
+    content: (
+      <p>
+        When you sign in, you can click the forgot your password link and enter
+        the email address you have used to create an account with us. You will
+        receive an email with a link for resetting your password.
+      </p>
+    )
+  },
+  {
+    id: 16,
+    title: "Can I close my account?",
+    content: (
+      <p>
+        If you wish to close your account, please send a request using the email
+        address you have registered your account with to our support team:
+        <a
+          title={"Write a email to Genesis Vision support"}
+          href="mailto:support@genesis.vision"
+        >
+          support@genesis.vision
+        </a>
+        . They will review your request within 24 hours.
+      </p>
+    )
   }
 ];
 
