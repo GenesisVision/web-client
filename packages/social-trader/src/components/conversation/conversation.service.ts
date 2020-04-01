@@ -7,6 +7,7 @@ import {
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
 import { RePost } from "gv-api-web";
+import { UserFeedMode } from "gv-api-web";
 import searchApi from "services/api-client/search-api";
 import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
@@ -75,22 +76,33 @@ export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
 
-export const getFeedMethod = (values: Object) => {
+export const getFeedMethod = (values?: Object) => {
   return api.social().getFeed(values);
 };
 
-export const getGlobalFeed = ({
-  id,
-  tags
-}: {
-  id: string;
-  tags: string[];
-}): Promise<ConversationFeed> => {
-  return getFeedMethod({ hashTags: tags });
+export const getGlobalFeed = (): Promise<ConversationFeed> => {
+  return getFeedMethod();
 };
 
-export const getPosts = ({ id }: { id: string }): Promise<ConversationFeed> => {
-  return getFeedMethod({ userId: id });
+export const searchInFeed = (values: {
+  hashTags?: Array<string>;
+  mask?: string;
+}): Promise<ConversationFeed> => {
+  return getFeedMethod(values);
+};
+
+export const getNewsFeed = (): Promise<ConversationFeed> => {
+  return getFeedMethod({ userMode: "FriendsPosts" });
+};
+
+export const getPosts = ({
+  id,
+  userMode
+}: {
+  id: string;
+  userMode?: UserFeedMode;
+}): Promise<ConversationFeed> => {
+  return getFeedMethod({ userId: id, userMode });
 };
 
 export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {

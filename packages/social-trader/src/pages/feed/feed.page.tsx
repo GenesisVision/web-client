@@ -1,18 +1,42 @@
+import GVTabs from "components/gv-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
 import Page from "components/page/page";
-import { FeedContainer } from "pages/feed/feed.container";
+import { Row } from "components/row/row";
+import useTab from "hooks/tab.hook";
+import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-export const FeedPage: React.FC<Props> = ({ tags }) => {
+enum TABS {
+  ALL = "ALL",
+  MY = "MY"
+}
+
+export const FeedPage: React.FC = () => {
   const [t] = useTranslation();
-  const title = t(`Feed`);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const { tab, setTab } = useTab<TABS>(TABS.MY);
+  const title = t(`news-page.title`);
   return (
     <Page title={title}>
-      <FeedContainer tags={tags} />
+      {isAuthenticated && (
+        <Row>
+          <GVTabs value={tab} onChange={setTab}>
+            <GVTab value={TABS.MY} label={t("news-page.tabs.my")} />
+            <GVTab value={TABS.ALL} label={t("news-page.tabs.all")} />
+          </GVTabs>
+        </Row>
+      )}
+      <Row onlyOffset wide>
+        {tab === TABS.MY && isAuthenticated && (
+          <FeedContainer feedType={FEED_TYPE.PERSONAL} />
+        )}
+        {(tab === TABS.ALL || !isAuthenticated) && (
+          <FeedContainer feedType={FEED_TYPE.ALL} />
+        )}
+      </Row>
     </Page>
   );
 };
-
-interface Props {
-  tags: string[];
-}
