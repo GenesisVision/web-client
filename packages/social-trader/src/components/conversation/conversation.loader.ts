@@ -18,6 +18,7 @@ import uuid from "uuid";
 const getTagLoaderData = (): PostTag => ({
   title: "",
   post: {
+    rePostsCount: getRandomInteger(),
     id: getRandomWord(),
     text: getRandomWord(),
     date: new Date(),
@@ -137,6 +138,7 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    rePostsCount: getRandomInteger(),
     isPinned: false,
     tags,
     comments: tableLoaderCreator(
@@ -160,6 +162,7 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
   id: uuid.v4(),
   images: [],
   author: managerLoaderData,
+  rePostsCount: getRandomInteger(),
   date: new Date(),
   likesCount: 0,
   text: "",

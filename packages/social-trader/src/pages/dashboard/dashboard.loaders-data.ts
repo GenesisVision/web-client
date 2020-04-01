@@ -30,6 +30,7 @@ export const getInRequestsData = (): TDashboardRequest => ({
     successFee: 0,
     exitFee: 0,
     withdrawPercent: 0,
+    managementFee: getRandomInteger(),
     id: "",
     logo: "",
     logoUrl: "",

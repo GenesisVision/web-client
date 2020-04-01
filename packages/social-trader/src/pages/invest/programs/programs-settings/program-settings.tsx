@@ -88,7 +88,7 @@ const _ProgramSettings: React.FC<Props> = ({
             asset={ASSET.PROGRAM}
             maxSuccessFee={maxSuccessFee}
             maxEntryFee={maxManagementFee} //TODO check it
-            entryFee={programDetails.entryFeeSelected}
+            entryFee={programDetails.managementFeeSelected}
             successFee={programDetails.successFeeSelected}
             onSubmit={editProgram}
           />

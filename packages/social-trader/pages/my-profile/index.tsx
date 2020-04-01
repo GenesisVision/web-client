@@ -3,21 +3,21 @@ import ManagerPage from "components/manager/manager.page";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import { PublicProfile } from "gv-api-web";
-import { NextPage } from "next";
 import React from "react";
 import { compose } from "redux";
-import { api, Token } from "services/api-client/swagger-custom-client";
+import { api } from "services/api-client/swagger-custom-client";
+import { NextPageWithRedux } from "utils/types";
 
 interface Props {
   profile: PublicProfile;
 }
 
-const Page: NextPage<Props> = ({ profile }) => {
+const Page: NextPageWithRedux<Props> = ({ profile }) => {
   return <ManagerPage profile={profile} />;
 };
 
 Page.getInitialProps = async ctx => {
-  const { id } = await getHeader(Token.create(ctx));
+  const { id } = await getHeader(ctx.token);
   const profile = await api.users().getManagerProfile(id as string);
   return {
     profile

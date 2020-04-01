@@ -43,12 +43,12 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   programDetails: {
     availableInvestmentBase,
     availableInvestmentLimit,
-    entryFeeSelected,
-    entryFeeCurrent,
     successFeeCurrent,
     successFeeSelected,
     stopOutLevelCurrent,
-    stopOutLevelSelected
+    stopOutLevelSelected,
+    managementFeeCurrent,
+    managementFeeSelected
   },
   levelsParameters
 }) => {
@@ -96,13 +96,13 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
         }
         accent
       >
-        {entryFeeSelected !== entryFeeCurrent ? (
+        {managementFeeSelected !== managementFeeCurrent ? (
           <Hint
             content={
               <NumberFormat
-                value={formatValue(entryFeeSelected, 2)}
+                value={formatValue(managementFeeSelected, 2)}
                 displayType="text"
-                prefix={`${entryFeeCurrent} % (`}
+                prefix={`${managementFeeCurrent} % (`}
                 suffix=" %)"
               />
             }
@@ -113,7 +113,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
           />
         ) : (
           <NumberFormat
-            value={formatValue(entryFeeCurrent, 2)}
+            value={formatValue(managementFeeCurrent, 2)}
             displayType="text"
             suffix=" %"
           />
