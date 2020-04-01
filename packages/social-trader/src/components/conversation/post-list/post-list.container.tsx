@@ -11,7 +11,7 @@ import "./post-list.scss";
 const _PostListContainer: React.FC<Props> = ({ id }) => {
   const isOwnPage = useIsOwnPage(id);
   const { data, sendRequest } = useApiRequest({
-    request: () => getPosts({ id })
+    request: () => getPosts({ id, userMode: "ProfileOnlyOwnerPosts" })
   });
   useEffect(() => {
     sendRequest();
