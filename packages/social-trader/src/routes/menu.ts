@@ -17,6 +17,12 @@ import {
 } from "components/profile/profile.constants";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
+import {
+  MY_PROFILE_ROUTE,
+  NEWS_ROUTE,
+  RATING_ROUTE,
+  SOCIAL_ROUTE
+} from "routes/social.routes";
 
 import { HOME_ROUTE } from "./app.routes";
 import {
@@ -109,6 +115,28 @@ const mainMenuItemsUnion = [
         Icon: Mt5Icon,
         route: META_TRADER_5_ROUTE,
         label: "navigation.mt5"
+      }
+    ]
+  },
+  {
+    Icon: TradeIcon,
+    label: "navigation.social",
+    route: SOCIAL_ROUTE,
+    children: [
+      {
+        Icon: TradeIcon,
+        route: NEWS_ROUTE,
+        label: "navigation.news"
+      },
+      {
+        Icon: TradeIcon,
+        route: MY_PROFILE_ROUTE,
+        label: "navigation.my-profile"
+      },
+      {
+        Icon: TradeIcon,
+        route: RATING_ROUTE,
+        label: "navigation.rating"
       }
     ]
   }
