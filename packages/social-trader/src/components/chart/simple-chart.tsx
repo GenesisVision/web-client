@@ -16,7 +16,9 @@ const lineFunction = line()
   .y(data => data[1]);
 
 const getChartColor = (minValue: number, maxValue: number) => {
-  return maxValue - minValue >= 0 ? "#16B9AD" : GVColors.$negativeColor;
+  return maxValue - minValue >= 0
+    ? GVColors.$positiveColor
+    : GVColors.$negativeColor;
 };
 
 const _SimpleChart: React.FC<Props> = ({
