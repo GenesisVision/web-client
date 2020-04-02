@@ -51,19 +51,6 @@ const _AccordionContent: React.FC<Props> = ({
       <animated.div ref={containerRef} key={key} style={props}>
         <div ref={innerRef} className="accordion__content">
           {content}
-          {/*{contents.map((content, index) => (*/}
-          {/*  <div key={index}>*/}
-          {/*    {content.element && content.element}*/}
-          {/*    {content.text && <p>{content.text}</p>}*/}
-          {/*    {content.list && (*/}
-          {/*      <ul>*/}
-          {/*        {content.list.map((item, index) => (*/}
-          {/*          <li key={index}>{item.text}</li>*/}
-          {/*        ))}*/}
-          {/*      </ul>*/}
-          {/*    )}*/}
-          {/*  </div>*/}
-          {/*))}*/}
         </div>
       </animated.div>
     ) : null;
