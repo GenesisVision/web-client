@@ -47,6 +47,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       )}
       renderBodyRow={(position, _, updateItems) => (
         <ProgramOpenPositionsRow
+          programId={programId}
           assetType={assetType}
           canCloseOpenPositions={canCloseOpenPositions}
           updateItems={updateItems}

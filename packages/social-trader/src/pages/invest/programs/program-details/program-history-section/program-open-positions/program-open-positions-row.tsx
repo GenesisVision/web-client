@@ -16,6 +16,7 @@ import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramOpenPositionsRow: React.FC<Props> = ({
+  programId,
   assetType,
   canCloseOpenPositions,
   updateItems,
@@ -93,7 +94,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
             onApply={updateItems}
             volume={position.volume}
             symbol={position.symbol}
-            id={position.id}
+            id={programId}
           />
         )}
       </TableCell>
@@ -102,6 +103,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
 );
 
 interface Props {
+  programId: string;
   assetType: TRADE_ASSET_TYPE;
   canCloseOpenPositions?: boolean;
   updateItems?: UpdateItemsFuncType;
