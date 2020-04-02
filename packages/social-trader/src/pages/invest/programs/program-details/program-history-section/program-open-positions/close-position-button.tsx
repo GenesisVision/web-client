@@ -16,7 +16,7 @@ const _ClosePositionButton: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
-  const { sendRequest, isPending: disabled } = useApiRequest({
+  const { sendRequest, isPending: disabled, errorMessage } = useApiRequest({
     successMessage: "copytrading-tables.close-trade-confirm.success-message",
     request: closePosition(assetType),
     middleware: [
@@ -36,6 +36,7 @@ const _ClosePositionButton: React.FC<Props> = ({
     <>
       <CloseCircleButton onClick={handleOpenClose} />
       <ConfirmPopup
+        errorMessage={errorMessage}
         open={isOpenPopup}
         onClose={setClosePopup}
         onCancel={setClosePopup}
