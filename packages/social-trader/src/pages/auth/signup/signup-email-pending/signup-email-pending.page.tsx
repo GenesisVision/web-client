@@ -1,10 +1,11 @@
-import "./signup-email-pending.scss";
-
 import { useEmailPendingState } from "pages/auth/auth.service";
+import CaptchaContainer from "pages/auth/captcha-container";
 import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pending.service";
 import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/signup-email-pending-container";
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import "./signup-email-pending.scss";
 
 const _EmailPending: React.FC = () => {
   const [t] = useTranslation();
@@ -16,8 +17,13 @@ const _EmailPending: React.FC = () => {
       <p className="signup-email-pending__text">
         {t("auth.signup-email-pending.text-section")}
       </p>
-      <SignupEmailPendingContainer
-        sendConfirmationLink={sendConfirmationLink(email)}
+      <CaptchaContainer
+        request={sendConfirmationLink(email)}
+        renderForm={handle => (
+          <SignupEmailPendingContainer
+            sendConfirmationLink={() => handle({ email })}
+          />
+        )}
       />
     </div>
   );
