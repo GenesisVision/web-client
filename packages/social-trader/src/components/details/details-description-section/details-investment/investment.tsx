@@ -93,6 +93,7 @@ const _Investment: React.FC<Props> = ({
         </StatisticItem>
         <StatisticItem
           condition={
+            !isOwnAsset &&
             managementFeePersonal !== undefined &&
             managementFeePersonal !== null
           }
