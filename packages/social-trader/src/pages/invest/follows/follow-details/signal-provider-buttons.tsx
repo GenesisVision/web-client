@@ -1,4 +1,5 @@
 import { fetchSubscriptions } from "components/details/details-description-section/details-investment/details-investment.service";
+import Crashable from "decorators/crashable";
 import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
@@ -74,5 +75,5 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-const SignalProviderButtons = React.memo(_SignalProviderButtons);
+const SignalProviderButtons = React.memo(Crashable(_SignalProviderButtons));
 export default SignalProviderButtons;
