@@ -17,7 +17,6 @@ import {
   TDashboardTotal,
   TDashboardTradingStatistic
 } from "pages/dashboard/dashboard.types";
-import eventsApi from "services/api-client/events-api";
 import { api } from "services/api-client/swagger-custom-client";
 import { getDefaultDateRange } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
@@ -128,7 +127,8 @@ export const getTotalInvestingStatistic = ({
   });
 
 export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
-  eventsApi
+  api
+    .events()
     .getEvents({
       ...filters,
       eventGroup: "InvestmentHistory",
@@ -137,7 +137,8 @@ export const fetchInvestmentHistory = (filters?: ComposeFiltersAllType) =>
     .then(({ events, total }) => ({ items: events, total }));
 
 export const fetchTradingHistory = (filters?: ComposeFiltersAllType) =>
-  eventsApi
+  api
+    .events()
     .getEvents({
       ...filters,
       eventGroup: "TradingHistory",
