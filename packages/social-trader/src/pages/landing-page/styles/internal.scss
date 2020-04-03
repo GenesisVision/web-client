@@ -102,6 +102,23 @@
     }
   }
 
+  &__table {
+    border-collapse: collapse;
+    min-width: 100%;
+    margin-bottom: 20px;
+
+    th,
+    td {
+      border: 1px solid rgba($row-color, 0.3);
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    @include media-breakpoint-tablet() {
+      min-width: 500px;
+    }
+  }
+
   &--font-small {
     h2,
     h3,
