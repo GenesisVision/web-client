@@ -1190,7 +1190,7 @@ export const faqGVT: TAccordion[] = [
           <tbody>
             <tr>
               <td>From 1 GVT up to 10</td>
-              <td>10%</td>
+              <td>30%</td>
             </tr>
             <tr>
               <td>Up to 25 GVT</td>
