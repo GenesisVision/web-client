@@ -16,6 +16,11 @@ import {
   fetchTradingHistory
 } from "../../services/dashboard.service";
 
+enum TABS {
+  INVESTMENT_HISTORY = "Investment history",
+  TRADING_HISTORY = "Trading history"
+}
+
 const _PortfolioEventsAllComponent: React.FC = () => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT_HISTORY);
   const [t] = useTranslation();
@@ -61,11 +66,6 @@ const _PortfolioEventsAllComponent: React.FC = () => {
     </Page>
   );
 };
-
-enum TABS {
-  INVESTMENT_HISTORY = "Investment history",
-  TRADING_HISTORY = "Trading history"
-}
 
 const PortfolioEventsAllComponent = React.memo(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;
