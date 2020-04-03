@@ -3,9 +3,7 @@ import "./accordion.scss";
 import classNames from "classnames";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
-import AccordionContent, {
-  TAccordionContent
-} from "pages/landing-page/components/accordion-content/accordion-content";
+import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import React, { useCallback, useState } from "react";
 
@@ -19,7 +17,6 @@ export type TAccordion = {
   id: string | number;
   title: string;
   content?: JSX.Element;
-  contents?: TAccordionContent[];
 };
 
 interface Props {

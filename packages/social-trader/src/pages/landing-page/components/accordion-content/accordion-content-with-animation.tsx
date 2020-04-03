@@ -1,4 +1,3 @@
-import { TAccordionContent } from "pages/landing-page/components/accordion-content/accordion-content";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
@@ -10,7 +9,6 @@ interface Props {
   forceSlideIn?: boolean;
   isVisible: boolean;
   content?: JSX.Element;
-  contents?: TAccordionContent[];
 }
 
 const _AccordionContent: React.FC<Props> = ({
