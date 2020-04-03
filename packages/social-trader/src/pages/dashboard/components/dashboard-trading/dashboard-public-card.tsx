@@ -61,6 +61,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
+      currency={asset.accountInfo.currency}
       brokerType={asset.broker && asset.broker.type}
       onApply={updateItems}
       name={asset.publicInfo.title}
