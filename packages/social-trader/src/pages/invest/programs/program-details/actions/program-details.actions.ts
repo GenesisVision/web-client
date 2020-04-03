@@ -118,10 +118,11 @@ export const fetchProgramDescriptionAction = (
 });
 
 export const fetchFollowProgramDescriptionAction = (
-  id: string
+  id: string,
+  token?: Token
 ): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
-  payload: api.follows().getFollowAssetDetails(id)
+  payload: api.follows(token).getFollowAssetDetails(id)
 });
 
 export const fetchLevelParametersAction = (
