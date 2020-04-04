@@ -141,11 +141,9 @@
     display: inline-flex;
     flex-direction: column;
     min-width: 0;
-    @include adaptive-margin(right, $padding-xxsmall);
     @include adaptive-margin(bottom, $padding-xsmall);
 
     &--wide {
-      margin-right: 0;
       margin-left: 0;
       width: 100%;
     }
