@@ -12,8 +12,6 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import "./wallet-balance.scss";
-
 const _WalletBalanceButtons: React.FC<Props> = ({ currentItem }) => {
   const { currency, isDepositEnabled, isWithdrawalEnabled } = currentItem;
   const profileCurrency = useAccountCurrency();

@@ -1,4 +1,5 @@
 import GVColors from "components/gv-styles/gv-colors";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
@@ -8,6 +9,8 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-balance.scss";
 
 export const $piePendingColor = "#f7931a";
 export const $pieAvailableColor = "#5758a5";
@@ -41,7 +44,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
             displayType="text"
           />
         </StatisticItem>
-        <div className="wallet-balance__divider" />
+        <RowItem large className="wallet-balance__divider" />
         <PieStatisticItem
           condition={available !== undefined}
           value={available!}
