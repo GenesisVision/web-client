@@ -1259,6 +1259,7 @@
         "balance": "Balance",
         "profit": "Profit",
         "success-fee": "Success fee",
+        "management-fee": "Management fee",
         "entry-fee": "Entry fee",
         "deposit-withdraw": "Deposit/Withdraw",
         "commission-rebate": "GV commission rebate"
