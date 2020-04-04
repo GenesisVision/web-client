@@ -1,6 +1,7 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +18,7 @@ const _NotificationEntity: React.FC<Props> = ({
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
   return (
-    <div className="notification-entity">
+    <Row className="notification-entity" wide>
       <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
         <AssetAvatarWithName
           levelProgress={levelProgress}
@@ -29,7 +30,7 @@ const _NotificationEntity: React.FC<Props> = ({
         />
       </Link>
       <div className="notification-entity__count">{count}</div>
-    </div>
+    </Row>
   );
 };
 

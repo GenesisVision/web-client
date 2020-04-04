@@ -1,8 +1,7 @@
-import "./custom-notification.scss";
-
 import GVButton from "components/gv-button";
 import GVSwitch from "components/gv-selection/gv-switch";
 import GVTextField from "components/gv-text-field";
+import { Row } from "components/row/row";
 import { NotificationSettingViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -12,6 +11,8 @@ import {
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+
+import "./custom-notification.scss";
 
 const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
   const [t] = useTranslation();
@@ -50,10 +51,10 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
   }, [settings]);
 
   return (
-    <div className="custom-notification">
-      <label className="notification-setting">
+    <div>
+      <Row>
         <GVSwitch
-          className="notification-setting__switch"
+          label={t(`notifications-page.create.${settings.conditionType}.title`)}
           name={settings.type}
           value={settings.isEnabled}
           disabled={isPending}
@@ -61,29 +62,30 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
           onChange={handleSwitch}
           touched={false}
         />
-        <span className="notification-setting__label">
-          {t(`notifications-page.create.${settings.conditionType}.title`)}
-        </span>
-      </label>
-      <div className="custom-notification__offset">
-        <GVTextField
-          name="conditionAmount"
-          value={settings.conditionAmount.toString()}
-          disabled
-          label={t(`notifications-page.create.${settings.conditionType}.label`)}
-          adornment={settings.conditionType === "Profit" ? "%" : undefined}
-          InputComponent={NumberFormat}
-        />
-        <GVButton
-          noPadding
-          variant="text"
-          color="danger"
-          disabled={isPending}
-          onClick={handleDelete}
-        >
-          {t("buttons.delete")}
-        </GVButton>
-      </div>
+      </Row>
+      <Row>
+        <div className="custom-notification__offset">
+          <GVTextField
+            name="conditionAmount"
+            value={settings.conditionAmount.toString()}
+            disabled
+            label={t(
+              `notifications-page.create.${settings.conditionType}.label`
+            )}
+            adornment={settings.conditionType === "Profit" ? "%" : undefined}
+            InputComponent={NumberFormat}
+          />
+          <GVButton
+            noPadding
+            variant="text"
+            color="danger"
+            disabled={isPending}
+            onClick={handleDelete}
+          >
+            {t("buttons.delete")}
+          </GVButton>
+        </div>
+      </Row>
     </div>
   );
 };

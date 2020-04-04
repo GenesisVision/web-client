@@ -1,12 +1,14 @@
-import "./general-notification.scss";
-
+import { Center } from "components/center/center";
 import GVSwitch from "components/gv-selection/gv-switch";
+import { RowItem } from "components/row-item/row-item";
 import useApiRequest from "hooks/api-request.hook";
 import {
   addNotificationMethod,
   removeNotificationMethod
 } from "modules/notification-settings/services/notification-settings.services";
 import React, { useCallback } from "react";
+
+import "./general-notification.scss";
 
 const _GeneralNotification: React.FC<Props> = ({
   onSuccess,
@@ -51,8 +53,8 @@ const _GeneralNotification: React.FC<Props> = ({
   const handleSwitch = useCallback(() => request(), [request]);
 
   return (
-    <span className="notification-setting">
-      <div className="notification-setting__switch-wrapper">
+    <Center>
+      <RowItem>
         <GVSwitch
           touched={false}
           name={name}
@@ -61,9 +63,9 @@ const _GeneralNotification: React.FC<Props> = ({
           color="primary"
           onChange={handleSwitch}
         />
-      </div>
-      <span className="notification-setting__label">{label}</span>
-    </span>
+      </RowItem>
+      <RowItem className="notification-setting__label">{label}</RowItem>
+    </Center>
   );
 };
 
