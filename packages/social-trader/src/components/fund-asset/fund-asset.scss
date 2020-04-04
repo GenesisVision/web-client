@@ -49,6 +49,9 @@ $remove-button-color: #293842;
     color: $text-light-color;
   }
   &--remainder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: rgba(59, 205, 189, 0.1);
     color: #14beb4;
   }
