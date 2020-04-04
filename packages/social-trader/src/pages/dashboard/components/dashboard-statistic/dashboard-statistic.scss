@@ -21,14 +21,6 @@
     padding: $padding-xsmall;
     font-size: $font-size-common;
   }
-  &__event-description {
-    display: flex;
-    align-items: center;
-    white-space: normal;
-  }
-  &__event-description-logo {
-    @include adaptive-margin(right, $padding-xxsmall);
-  }
   &__container.details-block,
   &__container .table {
     padding-bottom: 0;

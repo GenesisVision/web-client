@@ -1,7 +1,9 @@
+import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { EVENT_PROFITABILITY_VALUES } from "components/portfolio-events-table/portfolio-events-table.constants";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { RowItem } from "components/row-item/row-item";
 import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -44,17 +46,19 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
               <TableCell>
                 {humanizeDate(formatDate(event.date))} {event.date && "ago"}
               </TableCell>
-              <TableCell className="dashboard-statistic__event-description">
-                <div className="dashboard-statistic__event-description-logo">
+              <TableCell>
+                <Center>
                   {event.assetDetails && (
-                    <PortfolioEventLogo
-                      withAsset={true}
-                      assetDetails={event.assetDetails}
-                      icon={event.logoUrl}
-                    />
+                    <RowItem>
+                      <PortfolioEventLogo
+                        withAsset={true}
+                        assetDetails={event.assetDetails}
+                        icon={event.logoUrl}
+                      />
+                    </RowItem>
                   )}
-                </div>
-                {event.title}
+                  <RowItem>{event.title}</RowItem>
+                </Center>
               </TableCell>
               <TableCell>
                 <Profitability
