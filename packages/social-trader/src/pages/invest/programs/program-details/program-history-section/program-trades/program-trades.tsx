@@ -45,18 +45,18 @@ const _ProgramTrades: React.FC<Props> = ({
         <Row>
           {haveDelay && <TradesDelayHint delay={delay} />}
           <div>
-            {assetType === TRADE_ASSET_TYPE.PROGRAM ? (
-              <DownloadButtonToolbar
-                filtering={filtering!.dateRange}
-                programId={programId}
-                getExportFileUrl={filesService.getProgramTradesExportFileUrl}
-              />
-            ) : (
+            {assetType === TRADE_ASSET_TYPE.ACCOUNT ? (
               <DownloadButtonToolbarAuth
                 method={filesService.getAccountTradesExportFileUrl}
                 dateRange={filtering!.dateRange}
                 programId={programId}
                 title={title}
+              />
+            ) : (
+              <DownloadButtonToolbar
+                filtering={filtering!.dateRange}
+                programId={programId}
+                getExportFileUrl={filesService.getProgramTradesExportFileUrl}
               />
             )}
           </div>
