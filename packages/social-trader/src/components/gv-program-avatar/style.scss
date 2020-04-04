@@ -16,9 +16,8 @@ $avatar-big-level-size: 36px;
   align-items: center;
 
   &--with-level {
-    @include adaptive-margin(right, $padding-xsmall);
-    &.program-avatar--big {
-      margin-right: 0;
+    &.program-avatar--small {
+      @include adaptive-margin(right, $padding-xsmall);
     }
   }
 
@@ -35,7 +34,6 @@ $avatar-big-level-size: 36px;
   &--medium {
     @include height($avatar-medium-size);
     @include width($avatar-medium-size);
-    margin-right: $padding-xsmall;
     .program-avatar__level {
       @include right(-($avatar-medium-level-size/2));
       @include height($avatar-medium-level-size);

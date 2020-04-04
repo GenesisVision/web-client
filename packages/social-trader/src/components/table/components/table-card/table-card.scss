@@ -51,7 +51,6 @@ $action-offset-size: 5px;
   }
   &__broker-avatar {
     @include width($card-avatar-size);
-    @include adaptive-margin(right, $padding-xsmall);
   }
   &__avatar {
     display: flex;

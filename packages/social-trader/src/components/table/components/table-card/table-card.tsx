@@ -1,5 +1,3 @@
-import "./table-card.scss";
-
 import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
@@ -13,12 +11,15 @@ import {
   PROFITABILITY_VARIANT
 } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SimpleChartPoint } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
+
+import "./table-card.scss";
 
 const TableCard: React.FC<ITableCardProps> = props => {
   return (
@@ -160,16 +161,18 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
     const { anchor, setAnchor, clearAnchor } = useAnchor();
     return (
       <TableCardRow>
-        <TableCardAvatar
-          logo={logo}
-          hasAvatar={hasAvatar}
-          alt={title}
-          color={color}
-          level={level}
-          levelProgress={levelProgress}
-          url={detailsUrl}
-        />
-        <div className="table-card__main-info">
+        <RowItem>
+          <TableCardAvatar
+            logo={logo}
+            hasAvatar={hasAvatar}
+            alt={title}
+            color={color}
+            level={level}
+            levelProgress={levelProgress}
+            url={detailsUrl}
+          />
+        </RowItem>
+        <RowItem className="table-card__main-info">
           <div className="table-card__title-wrapper">
             <Row>
               <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
@@ -185,7 +188,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-        </div>
+        </RowItem>
       </TableCardRow>
     );
   }
