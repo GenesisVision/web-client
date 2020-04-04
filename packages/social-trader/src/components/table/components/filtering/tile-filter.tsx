@@ -50,14 +50,16 @@ const TileFilter: React.FC<Props> = ({
   return (
     <RowItem>
       <Row>
-        <RowItem>
+        <RowItem large>
           <Row>{selectedItems}</Row>
         </RowItem>
-        <TileFilterButton
-          isActive={!!anchor}
-          onClick={setAnchor}
-          title={buttonTitle}
-        />
+        <RowItem>
+          <TileFilterButton
+            isActive={!!anchor}
+            onClick={setAnchor}
+            title={buttonTitle}
+          />
+        </RowItem>
       </Row>
       <Popover
         anchorEl={anchor}
