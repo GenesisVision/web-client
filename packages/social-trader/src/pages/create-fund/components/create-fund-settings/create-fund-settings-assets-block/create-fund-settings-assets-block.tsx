@@ -1,16 +1,19 @@
-import "./create-fund-settings-assets-block.scss";
-
 import AddButton from "components/add-button/add-button";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import { Center } from "components/center/center";
 import FormError from "components/form/form-error/form-error";
 import FundAssetRatio from "components/fund-asset-ratio/fund-asset-ratio";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "components/fund-asset/fund-asset-container";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlatformAssetFull } from "utils/types";
+
+import "./create-fund-settings-assets-block.scss";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   touched,
@@ -32,7 +35,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
   const handleLeave = useCallback(() => setHoveringAssetName(undefined), []);
   return (
     <>
-      <div>
+      <Row onlyOffset wide>
         <AssetRow>
           <FundAssetContainer
             assets={assets}
@@ -43,28 +46,29 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
             hoveringAsset={hoveringAssetName}
           />
         </AssetRow>
-        <div className="assets-block__line">
-          <FundAssetRatio
-            values={assets}
-            handleHover={handleHover}
-            handleLeave={handleLeave}
-          />
-        </div>
-      </div>
+        <FundAssetRatio
+          values={assets}
+          handleHover={handleHover}
+          handleLeave={handleLeave}
+        />
+      </Row>
       {touched && (
-        <div className="assets-block__line">
+        <Row>
           <FormError small error={error} />
-        </div>
+        </Row>
       )}
       {canChange && (
-        <div className="assets-block__add-block">
-          <div className="assets-block__add-assets-button" onClick={addHandle}>
-            <div className="assets-block__add-button">
+        <Row>
+          <Center
+            className="assets-block__add-assets-button"
+            onClick={addHandle}
+          >
+            <RowItem>
               <AddButton />
-            </div>
+            </RowItem>
             <div>{t("buttons.add-assets")}</div>
-          </div>
-        </div>
+          </Center>
+        </Row>
       )}
     </>
   );
