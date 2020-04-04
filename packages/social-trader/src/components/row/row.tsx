@@ -5,6 +5,7 @@ import React from "react";
 import "./row.scss";
 
 export const Row: React.FC<Props> = ({
+  xlarge,
   onlyOffset,
   center = true,
   wide,
@@ -26,6 +27,7 @@ export const Row: React.FC<Props> = ({
         "row--hidden": hide,
         "row--small": small,
         "row--middle": middle && !(small || large),
+        "row--xlarge": xlarge,
         "row--large": large
       })}
     >
@@ -35,6 +37,7 @@ export const Row: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  xlarge?: boolean;
   onlyOffset?: boolean;
   wide?: boolean;
   hide?: boolean;

@@ -21,4 +21,7 @@
   &--large:not(:first-child) {
     @include adaptive-margin(top, $padding-small);
   }
+  &--xlarge:not(:first-child) {
+    @include adaptive-margin(top, $padding-medium);
+  }
 }
