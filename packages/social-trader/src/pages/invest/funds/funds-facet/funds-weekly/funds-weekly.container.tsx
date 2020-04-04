@@ -1,5 +1,3 @@
-import "pages/invest/programs/programs-facet/programs-facet.scss";
-
 import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET

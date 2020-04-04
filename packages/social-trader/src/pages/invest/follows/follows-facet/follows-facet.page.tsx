@@ -10,7 +10,6 @@ import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 import FollowsFacetTable from "./components/follows-facet-table";
-import "./follows-facet.scss";
 
 const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   const getFollows = useCallback(

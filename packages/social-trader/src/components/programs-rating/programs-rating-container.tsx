@@ -1,11 +1,11 @@
-import "pages/invest/programs/programs-facet/programs-facet.scss";
-
 import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
 import GVButton from "components/gv-button";
 import Page from "components/page/page";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import { LevelInfo } from "gv-api-web";
@@ -49,19 +49,19 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
       showTitle
       title={`${t("programs-page.title")} ${t(`facets.rating`)}`}
     >
-      <div className="programs-facet__filter">
+      <Row>
         {levels.map((lvl, i) => (
-          <GVButton
-            className={"programs-facet__button"}
-            key={i}
-            onClick={() => updateLevel(lvl.level)}
-            noPadding
-            variant={"text"}
-          >
-            <LevelIcon levelInfo={lvl} current={lvl.level === level} />
-          </GVButton>
+          <RowItem bottomOffset key={i}>
+            <GVButton
+              onClick={() => updateLevel(lvl.level)}
+              noPadding
+              variant={"text"}
+            >
+              <LevelIcon levelInfo={lvl} current={lvl.level === level} />
+            </GVButton>
+          </RowItem>
         ))}
-      </div>
+      </Row>
       <DetailsBlock table>
         <FacetContainer
           id={RATING_FACET_NAME}
