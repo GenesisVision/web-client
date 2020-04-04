@@ -2,7 +2,6 @@ import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
 import AssetField from "../asset-fields/asset-field";
@@ -10,14 +9,15 @@ import "./fields.scss";
 
 const _FeesSettings: React.FC<Props> = ({
   title,
-  entryFeeName,
-  entryFeeDescription,
+  firstFeeLabel,
+  firstFeeUnderText,
+  firstFeeName,
+  firstFeeDescription,
   secondFeeName,
   secondFeeLabel,
   secondFeeUnderText,
   secondFeeDescription
 }) => {
-  const { t } = useTranslation();
   return (
     <>
       {title && <div className="create-asset-settings__row-title">{title}</div>}
@@ -25,13 +25,13 @@ const _FeesSettings: React.FC<Props> = ({
         <AssetField>
           <AssetFormField
             wide
-            name={entryFeeName}
-            label={t("create-program-page.settings.fields.management-fee")}
+            name={firstFeeName}
+            label={firstFeeLabel}
             adornment="%"
             component={SimpleNumberField}
             isAllowed={allowPositiveValuesNumberFormat(4)}
-            hintTooltipContent={entryFeeDescription}
-            hintContent={t("create-program-page.settings.hints.entry-fee")}
+            hintTooltipContent={firstFeeDescription}
+            hintContent={firstFeeUnderText}
           />
         </AssetField>
         <AssetField>
@@ -52,8 +52,10 @@ const _FeesSettings: React.FC<Props> = ({
 };
 
 interface Props {
-  entryFeeName: string;
-  entryFeeDescription: string;
+  firstFeeLabel: string;
+  firstFeeUnderText: string;
+  firstFeeName: string;
+  firstFeeDescription: string;
   secondFeeName: string;
   secondFeeLabel: string;
   secondFeeUnderText: string;

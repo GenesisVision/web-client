@@ -1,5 +1,4 @@
 import FeesSettings from "components/assets/fields/fees-settings";
-import GVButton from "components/gv-button";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
@@ -58,9 +57,15 @@ const _InvestmentFees: React.FC<Props> = ({
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         {asset === ASSET.PROGRAM && (
           <FeesSettings
-            entryFeeName={FIELDS.entryFee}
-            entryFeeDescription={t(
-              "create-program-page.settings.hints.entry-fee-description"
+            firstFeeLabel={t(
+              "create-program-page.settings.fields.management-fee"
+            )}
+            firstFeeUnderText={t(
+              "create-program-page.settings.hints.management-fee"
+            )}
+            firstFeeName={FIELDS.entryFee}
+            firstFeeDescription={t(
+              "create-program-page.settings.hints.management-fee-description"
             )}
             secondFeeName={FIELDS.successFee}
             secondFeeLabel={t(
@@ -76,8 +81,12 @@ const _InvestmentFees: React.FC<Props> = ({
         )}
         {asset === ASSET.FUND && (
           <FeesSettings
-            entryFeeName={FIELDS.entryFee}
-            entryFeeDescription={t(
+            firstFeeLabel={t("create-program-page.settings.fields.entry-fee")}
+            firstFeeUnderText={t(
+              "create-program-page.settings.hints.entry-fee"
+            )}
+            firstFeeName={FIELDS.entryFee}
+            firstFeeDescription={t(
               "create-fund-page.settings.hints.entry-fee-description",
               { maxFee: maxEntryFee }
             )}
