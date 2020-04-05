@@ -1,5 +1,3 @@
-import "./subscriptions-table.scss";
-
 import Table from "components/table/components/table";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import SubscriptionsTableRow from "pages/accounts/account-details/account-details-subscriptions/subscriptions-table-row";
