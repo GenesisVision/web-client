@@ -1,5 +1,3 @@
-import "./signup-email-pending.scss";
-
 import { useEmailPendingState } from "pages/auth/auth.service";
 import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pending.service";
 import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/signup-email-pending-container";
