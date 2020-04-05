@@ -3,6 +3,7 @@
 @import "~shared/styles/_breakpoint";
 
 $text-size: 13px;
+
 .profitability {
   display: inline-block;
   &--positive {
@@ -35,9 +36,4 @@ $text-size: 13px;
 }
 .profitability-value-percent {
   margin-top: -4px;
-  display: flex;
-  align-items: center;
-  &__value {
-    margin-right: $padding-xxsmall;
-  }
 }
