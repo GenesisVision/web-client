@@ -1,14 +1,15 @@
-import "./select.scss";
-
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
+import { RowItem } from "components/row-item/row-item";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback, useEffect, useRef } from "react";
 
 import SelectItem from "./select-item";
+import "./select.scss";
 
 const Select: React.FC<Props> = ({
   className,
@@ -126,10 +127,16 @@ const Select: React.FC<Props> = ({
         ref={input}
         type="button"
       >
-        {displayValue && <span className="select__text">{displayValue}</span>}
-        <span className="select__icon">
-          {!isDisabled && <FilterArrowIcon isOpen={Boolean(anchor)} />}
-        </span>
+        <Center>
+          {displayValue && (
+            <RowItem>
+              <span className="select__text">{displayValue}</span>
+            </RowItem>
+          )}
+          <RowItem className="select__icon">
+            {!isDisabled && <FilterArrowIcon isOpen={Boolean(anchor)} />}
+          </RowItem>
+        </Center>
       </button>
       <input type="hidden" value={value} name={name} />
       <Popover
