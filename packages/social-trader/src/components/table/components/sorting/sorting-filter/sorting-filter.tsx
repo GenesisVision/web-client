@@ -1,5 +1,4 @@
-import "./sorting-filter.scss";
-
+import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
@@ -15,6 +14,7 @@ import {
   TFilter
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
+import "./sorting-filter.scss";
 
 export const SORTING_FILTER_NAME = "sorting";
 
@@ -57,7 +57,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
 
   return (
     <RowItem>
-      <div className="sorting-filter">
+      <Center>
         <SelectFilter
           name={SORTING_FILTER_NAME}
           label="Order By"
@@ -73,7 +73,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
         >
           {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
         </GVButton>
-      </div>
+      </Center>
     </RowItem>
   );
 };
