@@ -138,16 +138,20 @@ const _CommonTransactionDetails: React.FC<Props> = ({
           <Row>
             <Row className="external-transaction__actions">
               {data.actions.canCancel && (
-                <ActionButton
-                  onClick={handleCancel}
-                  text={t("buttons.cancel")}
-                />
+                <RowItem>
+                  <ActionButton
+                    onClick={handleCancel}
+                    text={t("buttons.cancel")}
+                  />
+                </RowItem>
               )}
               {data.actions.canResend && (
-                <ActionButton
-                  onClick={handleResend}
-                  text={t("buttons.resend-email")}
-                />
+                <RowItem>
+                  <ActionButton
+                    onClick={handleResend}
+                    text={t("buttons.resend-email")}
+                  />
+                </RowItem>
               )}
             </Row>
           </Row>
