@@ -1,7 +1,9 @@
+import { Center } from "components/center/center";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -49,24 +51,28 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         component={SimpleTextField}
       />
       <DialogError error={errorMessage} />
-      <div className="forgot-password__navigation">
-        <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
-          <GVButton variant="text" color="secondary">
-            <>
-              &larr;{" "}
-              {t("auth.password-restore.forgot-password.back-button-text")}
-            </>
-          </GVButton>
-        </Link>
-        <SubmitButton
-          id="forgotPassword"
-          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
-          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
-          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
-        >
-          {t("auth.password-restore.forgot-password.confirm-button-text")}
-        </SubmitButton>
-      </div>
+      <Center className="forgot-password__navigation">
+        <RowItem>
+          <Link to={LOGIN_ROUTE}>
+            <GVButton variant="text" color="secondary">
+              <>
+                &larr;{" "}
+                {t("auth.password-restore.forgot-password.back-button-text")}
+              </>
+            </GVButton>
+          </Link>
+        </RowItem>
+        <RowItem>
+          <SubmitButton
+            id="forgotPassword"
+            disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+            isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+            isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+          >
+            {t("auth.password-restore.forgot-password.confirm-button-text")}
+          </SubmitButton>
+        </RowItem>
+      </Center>
     </HookForm>
   );
 };
