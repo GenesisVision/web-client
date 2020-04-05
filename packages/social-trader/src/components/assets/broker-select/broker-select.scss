@@ -18,27 +18,17 @@
   }
 
   &__list {
-    display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     align-content: flex-start;
-    flex-wrap: wrap;
     min-width: 280px;
 
-    @include media-breakpoint-landscape-phone {
-      margin-right: 1%;
-      padding: 0;
-    }
-
     @include media-breakpoint-tablet() {
-      margin-right: 4%;
       min-width: 324px;
       width: 59%;
     }
 
     @include media-breakpoint-desktop() {
       min-width: 352px;
-      margin-right: 6%;
     }
   }
 

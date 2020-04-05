@@ -1,4 +1,5 @@
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import Surface from "components/surface/surface";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -27,7 +28,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
   return (
     <div className="broker-select-container">
       <div className="broker-select">
-        <div className="broker-select__list">
+        <Row wrap className="broker-select__list">
           {data.map((broker, i) => (
             <RowItem bottomOffset key={i}>
               <BrokerCard
@@ -51,7 +52,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               navigateToSettings={navigateToSettings}
             />
           </div>
-        </div>
+        </Row>
         <Surface className="surface--horizontal-paddings broker-select__description">
           <h3>{selectedBroker.name}</h3>
           <StatisticItem
