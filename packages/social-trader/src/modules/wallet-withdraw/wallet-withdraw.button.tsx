@@ -1,9 +1,9 @@
-import "./wallet-withdraw.button.scss";
-
 import ImageBaseElement from "components/avatar/image-base.element";
+import { Center } from "components/center/center";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ArrowIcon from "media/arrow-up.svg";
 import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
@@ -13,6 +13,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-withdraw.button.scss";
 
 const _WalletWithdrawButton: React.FC<Props> = ({
   type,
@@ -53,14 +55,16 @@ const FullButton: React.FC<{
       disabled={disabled}
       onClick={onClick}
     >
-      <>
-        <ImageBaseElement
-          className="wallet-withdraw-button__full-button-icon"
-          src={ArrowIcon}
-          alt={t("wallet-page.buttons.withdraw")}
-        />
-        {label}
-      </>
+      <Center>
+        <RowItem small>
+          <ImageBaseElement
+            className="wallet-withdraw-button__full-button-icon"
+            src={ArrowIcon}
+            alt={t("wallet-page.buttons.withdraw")}
+          />
+        </RowItem>
+        <RowItem>{label}</RowItem>
+      </Center>
     </GVButton>
   );
 });
