@@ -45,7 +45,9 @@ const FullButton: React.FC<{
       onClick={onClick}
     >
       <Center>
-        <RowItem className="wallet-deposit__full-button-icon">+</RowItem>
+        <RowItem small className="wallet-deposit__full-button-icon">
+          +
+        </RowItem>
         <RowItem>{label}</RowItem>
       </Center>
     </GVButton>
