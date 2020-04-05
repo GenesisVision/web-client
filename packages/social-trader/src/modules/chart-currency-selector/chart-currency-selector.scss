@@ -3,8 +3,6 @@
 
 .chart-currency-selector {
   &__container {
-    display: flex;
-    align-items: center;
     & .tag-button {
       margin-right: 0;
     }
@@ -23,7 +21,5 @@
     & .select__text {
       @include font-size($tag-font-size);
     }
-    display: flex;
-    align-items: center;
   }
 }
