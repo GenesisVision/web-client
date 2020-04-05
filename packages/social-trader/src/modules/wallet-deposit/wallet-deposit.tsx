@@ -1,13 +1,15 @@
-import "./wallet-deposit.scss";
-
+import { Center } from "components/center/center";
 import { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-deposit.scss";
 
 const _WalletDeposit: React.FC<Props> = ({
   type,
@@ -42,10 +44,10 @@ const FullButton: React.FC<{
       disabled={disabled}
       onClick={onClick}
     >
-      <>
-        <span className="wallet-deposit__full-button-icon">+</span>
-        {label}
-      </>
+      <Center>
+        <RowItem className="wallet-deposit__full-button-icon">+</RowItem>
+        <RowItem>{label}</RowItem>
+      </Center>
     </GVButton>
   );
 });
