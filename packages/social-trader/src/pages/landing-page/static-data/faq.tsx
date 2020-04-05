@@ -623,7 +623,7 @@ export const faqPrograms: TAccordion[] = [
     content: (
       <p>
         You will first need to create a private trading account. You can do that
-        in the Trade section on the platform. Once this is created, you can
+        in the <b>Trade</b> section on the platform. Once this is created, you can
         upgrade your private trading account to either: Program or signal
         account (Follow). Now your trading account is public and can attract
         investments or followers.
@@ -739,8 +739,6 @@ export const faqPrograms: TAccordion[] = [
         <p>
           You can get the exact number by using the calculator available on the
           Program’s Settings page.
-          <br />
-          More details and formulas can be found here.
         </p>
       </>
     )
@@ -1154,9 +1152,9 @@ export const faqGVT: TAccordion[] = [
         be deemed as a security.{" "}
         <a
           title={"Download memorandum"}
-          href="https://genesis.vision/genesis-vision-memorandum.pdf"
+          href="https://storage-s3.genesis.vision/assets/genesis-vision-memorandum.pdf"
         >
-          https://genesis.vision/genesis-vision-memorandum.pdf
+          genesis-vision-memorandum.pdf
         </a>
       </p>
     )
