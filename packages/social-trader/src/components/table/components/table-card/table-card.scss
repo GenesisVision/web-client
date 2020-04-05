@@ -138,7 +138,6 @@ $action-offset-size: 5px;
   &__chart {
     width: $chart-width;
     flex-grow: 1;
-    margin-right: $padding-small;
   }
 
   @include media-breakpoint-phone() {

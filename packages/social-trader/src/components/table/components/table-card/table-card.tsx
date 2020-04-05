@@ -197,10 +197,10 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
 export const TableCardChartBlock: React.FC<ITableCardChartBlockProps> = React.memo(
   ({ chart, assetId, profit }) => (
     <TableCardRow>
-      <div className="table-card__chart">
+      <RowItem className="table-card__chart">
         <ProgramSimpleChart data={chart} />
-      </div>
-      <div className="table-card__chart-info">
+      </RowItem>
+      <RowItem className="table-card__chart-info">
         <div className="table-card__profit">
           {profit !== undefined && (
             <Profitability
@@ -217,7 +217,7 @@ export const TableCardChartBlock: React.FC<ITableCardChartBlockProps> = React.me
             </Profitability>
           )}
         </div>
-      </div>
+      </RowItem>
     </TableCardRow>
   )
 );
