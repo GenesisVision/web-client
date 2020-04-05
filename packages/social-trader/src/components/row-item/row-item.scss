@@ -20,16 +20,22 @@
   &--wide {
     width: 100%;
   }
-  &--middle {
-    @include row-item-side-offset($padding-xsmall);
+  &--xsmall {
+    @include row-item-side-offset($padding-xxxsmall);
     &.row-item--bottom-offset {
-      @include row-item-bottom-offset($padding-xsmall);
+      @include row-item-bottom-offset($padding-xxxsmall);
     }
   }
   &--small {
     @include row-item-side-offset($padding-xxsmall);
     &.row-item--bottom-offset {
       @include row-item-bottom-offset($padding-xxsmall);
+    }
+  }
+  &--middle {
+    @include row-item-side-offset($padding-xsmall);
+    &.row-item--bottom-offset {
+      @include row-item-bottom-offset($padding-xsmall);
     }
   }
   &--large {

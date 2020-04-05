@@ -9,6 +9,7 @@ export const RowItem: React.FC<Props> = ({
   middle = true,
   bottomOffset,
   className,
+  xsmall,
   small,
   large,
   children
@@ -19,6 +20,7 @@ export const RowItem: React.FC<Props> = ({
       className={classNames("row-item", className, {
         "row-item--wide": wide,
         "row-item--bottom-offset": bottomOffset,
+        "row-item--xsmall": xsmall,
         "row-item--small": small,
         "row-item--middle": middle && !(small || large),
         "row-item--large": large
@@ -34,6 +36,7 @@ interface Props {
   wide?: boolean;
   bottomOffset?: boolean;
   className?: string;
+  xsmall?: boolean;
   small?: boolean;
   middle?: boolean;
   large?: boolean;
