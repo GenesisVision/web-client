@@ -3,13 +3,9 @@
 @import "~shared/styles/_constants";
 
 .switch-with-question {
-  display: flex;
-  align-items: center;
-
   &__label {
     @include font-size($font-size-common);
     font-weight: 600;
-    margin-right: $padding-xxsmall;
   }
   &__question-container {
     display: flex;
@@ -17,7 +13,6 @@
   &__question {
     border: 1px solid rgba($icon-color, 0.2);
     color: rgba($icon-color, 0.2);
-    margin-right: 12px;
     &.switch-with-question__question-button {
       cursor: help;
     }

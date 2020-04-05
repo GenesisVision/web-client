@@ -1,14 +1,16 @@
-import "./switch-with-question.scss";
-
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import GVSwitch from "components/gv-selection/gv-switch";
 import HelpButton from "components/help-button/help-button";
 import {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import * as React from "react";
+
+import "./switch-with-question.scss";
 
 const _SwitchWithQuestion: React.FC<Props> = ({
   tooltipContent,
@@ -20,16 +22,20 @@ const _SwitchWithQuestion: React.FC<Props> = ({
   isPending
 }) => {
   return (
-    <div className="switch-with-question">
-      <HelpContainer tooltipContent={tooltipContent}>
-        <HelpButton
-          className={classNames("switch-with-question__question", {
-            "switch-with-question__question-button": !!tooltipContent
-          })}
-          onClick={onClickHelp}
-        />
-      </HelpContainer>
-      <div className="switch-with-question__label">{label}</div>
+    <Center>
+      <RowItem small>
+        <HelpContainer tooltipContent={tooltipContent}>
+          <HelpButton
+            className={classNames("switch-with-question__question", {
+              "switch-with-question__question-button": !!tooltipContent
+            })}
+            onClick={onClickHelp}
+          />
+        </HelpContainer>
+      </RowItem>
+      <RowItem small className="switch-with-question__label">
+        {label}
+      </RowItem>
       {value !== undefined && (
         <GVSwitch
           touched={false}
@@ -40,7 +46,7 @@ const _SwitchWithQuestion: React.FC<Props> = ({
           onChange={onChange}
         />
       )}
-    </div>
+    </Center>
   );
 };
 
