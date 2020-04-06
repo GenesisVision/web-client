@@ -1,7 +1,7 @@
 import profileApi from "services/api-client/profile-api";
 import authService from "services/auth-service";
 
-export const loadKycIFrame = () => {
+export const loadKycIFrame = (externalUserId: string) => {
   const $script = require("scriptjs");
   const authorization = authService.getAuthArg();
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
@@ -12,6 +12,8 @@ export const loadKycIFrame = () => {
         "#idensic",
         // configuration object (see preparation steps)
         {
+          clientId: "Genesis",
+          externalUserId,
           accessToken: data,
           excludedCountries: ["USA"],
           lang: "en",
