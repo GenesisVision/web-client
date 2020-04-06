@@ -1,7 +1,3 @@
-import "./table.scss";
-import "./table-cards.scss";
-
-import { updateGlobalTableViewAction } from "actions/tables-view-actions";
 import classNames from "classnames";
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
 import TableFooter, {
@@ -15,15 +11,12 @@ import TableToolbar, {
 } from "components/table/components/table-toolbar";
 import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  GLOBAL_TABLE_VIEW,
-  globalTableViewSelector
-} from "reducers/tables-view-reducer";
-import { setCookie } from "utils/cookie";
+import { getTableView, setTableView } from "utils/table-view";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";
+import "./table-cards.scss";
+import "./table.scss";
 import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
@@ -56,8 +49,7 @@ const _Table: React.FC<ITableProps> = ({
   hideToolbar,
   asLinkPagination
 }) => {
-  const dispatch = useDispatch();
-  const tableView = useSelector(globalTableViewSelector);
+  const tableView = getTableView();
   const isViewSwitchEnabled =
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
@@ -66,8 +58,7 @@ const _Table: React.FC<ITableProps> = ({
     isViewSwitchEnabled ? tableView : outerView || LIST_VIEW.TABLE
   );
   const changeView = useCallback((view: LIST_VIEW) => {
-    dispatch(updateGlobalTableViewAction(view));
-    setCookie(GLOBAL_TABLE_VIEW, view);
+    setTableView(view);
     setView(view);
   }, []);
   if (!items && emptyMessage) return emptyMessage;

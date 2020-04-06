@@ -36,13 +36,9 @@ import {
 import authReducer, { AuthState } from "reducers/auth-reducer";
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
-import tablesViewReducer, {
-  TablesViewState
-} from "reducers/tables-view-reducer";
 
 export const sharedRootReducers = {
   globalSearch: globalSearchReducer,
-  tablesView: tablesViewReducer,
   dashboard: dashboardReducer,
   accountDetails: accountDetailsReducer,
   fundDetails: fundDetailsReducer,
@@ -60,7 +56,6 @@ export const sharedRootReducers = {
 
 export type RootState = Readonly<{
   globalSearch: GlobalSearchState;
-  tablesView: TablesViewState;
   dashboard: DashboardState;
   accountDetails: AccountDetailsState;
   fundDetails: FundDetailsState;
