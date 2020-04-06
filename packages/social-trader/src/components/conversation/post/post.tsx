@@ -1,5 +1,3 @@
-import "./post.scss";
-
 import { Center } from "components/center/center";
 import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
@@ -8,10 +6,12 @@ import { ConversationRemoveButton } from "components/conversation/conversation-r
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
+
+import "./post.scss";
 
 const _Post: React.FC<Props> = ({
   updateData,
@@ -30,7 +30,7 @@ const _Post: React.FC<Props> = ({
   }
 }) => {
   return (
-    <DetailsBlock horizontalPaddings wide className="post">
+    <DefaultBlock solid wide className="post">
       <Row center={false}>
         <RowItem wide>
           <Message
@@ -85,7 +85,7 @@ const _Post: React.FC<Props> = ({
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>
       )}
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 
