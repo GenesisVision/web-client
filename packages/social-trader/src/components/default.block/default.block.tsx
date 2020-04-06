@@ -4,7 +4,8 @@ import * as React from "react";
 
 import "./default.block.scss";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface IDefaultBlockProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   size?: SIZES;
   className?: string;
   wide?: boolean;
@@ -15,7 +16,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   table?: boolean;
 }
 
-export const DefaultBlock: React.FC<Props> = ({
+export const DefaultBlock: React.FC<IDefaultBlockProps> = ({
   wide,
   solid,
   bordered,
