@@ -33,6 +33,11 @@
     @include default-block-offsets($padding-small);
   }
 
+  &--xlarge {
+    @include adaptive-border-radius($border-radius-middle);
+    @include default-block-offsets($padding-medium);
+  }
+
   &--solid {
     background-color: $panel-background-color;
   }
