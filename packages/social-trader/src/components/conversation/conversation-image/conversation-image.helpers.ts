@@ -16,6 +16,7 @@ export const getImageUrlBySize = (
   size: SIZES
 ): string => {
   switch (size) {
+    case SIZES.XLARGE:
     case SIZES.LARGE:
       return getImageUrlByQuality(image.resizes, "High");
     case SIZES.MIDDLE:
@@ -38,6 +39,7 @@ export const getImageSize = (count: number): SIZES => {
 
 export const getImageQuality = (size: SIZES): ImageQualityType => {
   switch (size) {
+    case SIZES.XLARGE:
     case SIZES.LARGE:
       return "High";
     case SIZES.MIDDLE:
