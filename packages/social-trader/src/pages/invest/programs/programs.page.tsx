@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
@@ -47,9 +47,9 @@ const ProgramsPage: NextPage = () => {
         assetsFacets={ASSETS_FACETS.PROGRAMS}
         composeFacetUrl={composeProgramFacetUrl}
       />
-      <DetailsBlock table key={"table"}>
+      <DefaultTableBlock>
         <ProgramsTableSSR showSwitchView />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

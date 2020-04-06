@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
@@ -45,9 +45,9 @@ const FundsPage: React.FC = () => {
         composeFacetUrl={composeFundFacetUrl}
         fileRoute={FUNDS_FACET_FOLDER_ROUTE}
       />
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <FundsTableSSR title={t("funds-page.all-funds")} showSwitchView />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

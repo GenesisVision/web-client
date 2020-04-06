@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
@@ -28,14 +28,14 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
       showTitle
       title={`${t("follows-page.title")} ${t(`facets.${id}`)}`}
     >
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <FacetContainer
           id={id}
           asset={FACET_ASSET.FOLLOWS}
           TableContainer={FollowsFacetTable}
           getItems={getFollows}
         />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

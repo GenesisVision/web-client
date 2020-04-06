@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import ManagerPrograms from "components/manager/manager-history/manager-programs-table";
 import { Row } from "components/row/row";
 import dynamic from "next/dynamic";
@@ -19,32 +19,32 @@ const _ManagerHistorySection: React.FC<Props> = ({
     <>
       {!!programsCount && (
         <Row onlyOffset>
-          <DetailsBlock wide table>
+          <DefaultTableBlock wide>
             <ManagerPrograms
               title={t("manager-page.history.tabs.programs")}
               ownerId={id}
             />
-          </DetailsBlock>
+          </DefaultTableBlock>
         </Row>
       )}
       {!!followCount && (
         <Row onlyOffset>
-          <DetailsBlock wide table>
+          <DefaultTableBlock wide>
             <ManagerFollow
               title={t("manager-page.history.tabs.follow")}
               ownerId={id}
             />
-          </DetailsBlock>
+          </DefaultTableBlock>
         </Row>
       )}
       {!!fundsCount && (
         <Row onlyOffset>
-          <DetailsBlock wide table>
+          <DefaultTableBlock wide>
             <ManagerFunds
               title={t("manager-page.history.tabs.funds")}
               ownerId={id}
             />
-          </DetailsBlock>
+          </DefaultTableBlock>
         </Row>
       )}
     </>

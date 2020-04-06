@@ -1,7 +1,6 @@
-import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
-
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
+import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import GVTab from "components/gv-tabs/gv-tab";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useTab from "hooks/tab.hook";
@@ -34,7 +33,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
   }, [dispatch, id]);
 
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           value={TABS.STRUCTURE}
@@ -56,7 +55,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
         {tab === TABS.STRUCTURE && <FundStructure />}
         {tab === TABS.REALLOCATE_HISTORY && <FundReallocateHistory id={id} />}
       </div>
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

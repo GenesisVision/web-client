@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
@@ -28,7 +28,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
   const [t] = useTranslation();
   const { tab } = useHashTab<TABS>(TABS.TRANSACTIONS_TAB);
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab}>
         <GVTab
           className={"gv-tab"}
@@ -127,7 +127,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
           currency={currency}
         />
       )}
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

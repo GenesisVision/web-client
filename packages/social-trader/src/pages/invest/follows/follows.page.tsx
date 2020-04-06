@@ -1,3 +1,4 @@
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlock from "components/details/details-block";
 import FacetCardsContainer, {
   ASSETS_FACETS
@@ -47,9 +48,9 @@ const FollowsPage: NextComponentType = () => {
         assetsFacets={ASSETS_FACETS.FOLLOWS}
         composeFacetUrl={composeFollowFacetUrl}
       />
-      <DetailsBlock table key={"table"}>
+      <DefaultTableBlock>
         <FollowsTableSsr showSwitchView title={t("follows-page.table")} />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

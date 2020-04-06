@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
@@ -62,7 +62,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
           </RowItem>
         ))}
       </Row>
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <FacetContainer
           id={RATING_FACET_NAME}
           asset={FACET_ASSET.PROGRAMS}
@@ -75,7 +75,7 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
           )}
           getItems={getPrograms}
         />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

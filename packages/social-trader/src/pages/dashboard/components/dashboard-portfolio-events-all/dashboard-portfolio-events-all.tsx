@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Page from "components/page/page";
@@ -27,7 +27,7 @@ const _PortfolioEventsAllComponent: React.FC = () => {
   const assetTypeValues = useSelector(assetTypeValuesSelector);
   return (
     <Page title={t(`dashboard-page.portfolio-events.title`)}>
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <DetailsBlockTabs value={tab} onChange={setTab}>
           <GVTab
             value={TABS.INVESTMENT_HISTORY}
@@ -62,7 +62,7 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             dateRangeStartLabel={t("filters.date-range.account-creation")}
           />
         )}
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

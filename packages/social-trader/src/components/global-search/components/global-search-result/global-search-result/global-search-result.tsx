@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -26,7 +26,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTitleBox>
         <h3>{t("global-search-page.heading")}</h3>
       </DetailsBlockTitleBox>
@@ -55,7 +55,7 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
         </DetailsBlockTabs>
       </Row>
       <Tab data={data} tab={tab} />
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

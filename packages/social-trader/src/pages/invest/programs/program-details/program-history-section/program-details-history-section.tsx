@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -79,7 +79,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   }, [dispatch, programId]);
 
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           value={TABS.OPEN_POSITIONS}
@@ -160,7 +160,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           currency={programCurrency}
         />
       )}
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 
