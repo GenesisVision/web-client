@@ -36,7 +36,7 @@ export const DefaultBlock: React.FC<Props> = ({
       "default-block--small": size === SIZES.SMALL,
       "default-block--middle": size === SIZES.MIDDLE,
       "default-block--large": size === SIZES.LARGE,
-      "default-block--table": !!table
+      "default-block--table": table
     })}
   >
     {children}
