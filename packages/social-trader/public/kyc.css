@@ -20,7 +20,7 @@ body {
     color: #e8eff3;
 }
 
-.section {
+.section, section.content {
     background: transparent;
     box-shadow: none;
 }
@@ -39,8 +39,12 @@ body {
     color: #03bdaf;
 }
 
-button[type="submit"],
-button[type="submit"]:hover {
+button.submit,
+button.submit:hover,
+button.submit:active,
+button.back,
+button.back:hover,
+button.back:active  {
     background: #03bdaf;
     box-shadow: none;
 }
@@ -57,4 +61,10 @@ button[type="submit"]:hover {
 .upload-item,
 .mobile-button {
     border-color: gray;
+}
+
+.step.pending .bullet,
+.step.pending .line {
+    border-color: #2ebd85;
+    background :#2ebd85;
 }
