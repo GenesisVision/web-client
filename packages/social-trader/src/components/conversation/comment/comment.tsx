@@ -13,7 +13,7 @@ const _Comment: React.FC<Props> = ({
   comment: { tags, images, date, text, id, actions, likesCount, author }
 }) => {
   return (
-    <Row className="comment">
+    <div className="comment">
       <Row className="comment__message" center={false}>
         <RowItem>
           <Message
@@ -38,7 +38,7 @@ const _Comment: React.FC<Props> = ({
           liked={actions?.isLiked}
         />
       </Row>
-    </Row>
+    </div>
   );
 };
 
