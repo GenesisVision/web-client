@@ -5,22 +5,15 @@ import { animated, useTransition } from "react-spring";
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
 
-export type TAccordionContent = {
-  text?: string | JSX.Element;
-  list?: Array<{
-    text: string | JSX.Element;
-  }>;
-};
-
 interface Props {
   forceSlideIn?: boolean;
   isVisible: boolean;
-  contents: TAccordionContent[];
+  content?: JSX.Element;
 }
 
 const _AccordionContent: React.FC<Props> = ({
   isVisible,
-  contents,
+  content,
   forceSlideIn
 }) => {
   const isVisibleOnMount = useRef(isVisible && !forceSlideIn);
@@ -55,18 +48,7 @@ const _AccordionContent: React.FC<Props> = ({
     return item ? (
       <animated.div ref={containerRef} key={key} style={props}>
         <div ref={innerRef} className="accordion__content">
-          {contents.map((content, index) => (
-            <div key={index}>
-              {content.text && <p>{content.text}</p>}
-              {content.list && (
-                <ul>
-                  {content.list.map((item, index) => (
-                    <li key={index}>{item.text}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
+          {content}
         </div>
       </animated.div>
     ) : null;
