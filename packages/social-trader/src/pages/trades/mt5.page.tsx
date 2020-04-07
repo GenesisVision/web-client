@@ -12,7 +12,7 @@ const _Mt5: React.FC = () => {
       <div className="mt-frame">
         <iframe
           title={title}
-          src="https://trade.mql5.com/trade?servers=GenesisMarketsLp-Demo,GenesisMarketsLp-Live&amp;trade_server=GenesisMarketsLp-Live&amp;demo_server=GenesisMarketsLp-Demo&amp;lang=en&amp;save_password=on"
+          src="https://trade.mql5.com/trade?servers=GenesisMarketsLTD-Demo,GenesisMarketsLTD-Live&amp;trade_server=GenesisMarketsLTD-Live&amp;demo_server=GenesisMarketsLTD-Demo&amp;lang=en&amp;save_password=on"
           allowFullScreen
         >
           {title}

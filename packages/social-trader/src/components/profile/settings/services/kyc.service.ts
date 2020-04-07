@@ -1,7 +1,7 @@
 import profileApi from "services/api-client/profile-api";
 import authService from "services/auth-service";
 
-export const loadKycIFrame = () => {
+export const loadKycIFrame = (externalUserId: string) => {
   const $script = require("scriptjs");
   const authorization = authService.getAuthArg();
   $script(process.env.REACT_APP_IDENSIC_SRC, function() {
@@ -12,6 +12,8 @@ export const loadKycIFrame = () => {
         "#idensic",
         // configuration object (see preparation steps)
         {
+          clientId: "Genesis",
+          externalUserId,
           accessToken: data,
           excludedCountries: ["USA"],
           lang: "en",
@@ -42,7 +44,7 @@ export const loadKycIFrame = () => {
           },
           requiredDocuments: "IDENTITY:PASSPORT,ID_CARD,DRIVERS;SELFIE:SELFIE",
           uiConf: {
-            customCssUrl: "https://genesis.vision/assets/kyc/style.css?v=1",
+            customCss: "https://genesis.vision/assets/kyc/style.css?v=2",
             steps: {}
           }
         },

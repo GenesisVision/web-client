@@ -4,6 +4,14 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
 
+const MetatraderPCLink =
+  "https://download.mql5.com/cdn/web/15879/mt5/genesismarketsltd5setup.exe";
+const MetatraderIOSLink =
+  "https://download.mql5.com/cdn/mobile/mt5/ios?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live";
+const MetatraderAndroidLink =
+  "https://download.mql5.com/cdn/mobile/mt5/android?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live";
+const MetatraderLoginLink = "https://genesis.vision/trade/mt5";
+
 const DownloadsSection: React.FC = () => {
   return (
     <section className="downloads-section">
@@ -15,10 +23,7 @@ const DownloadsSection: React.FC = () => {
           terminals for exchange trading with direct access to the order books
           and other new features.
           <br />
-          <a
-            title={"Download Metatrader for PC"}
-            href="https://download.mql5.com/cdn/web/11830/mt5/genesismarketslp5setup.exe"
-          >
+          <a title={"Download Metatrader for PC"} href={MetatraderPCLink}>
             Download for PC
             <br />
             <ImageBaseElement src={MetatraderLogo} alt="metatrader logo" />
@@ -35,7 +40,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={"Download Metatrader for IOS"}
-            href="https://itunes.apple.com/app/metatrader-5-forex-stocks/id413251709"
+            href={MetatraderIOSLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +49,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={"Download Metatrader for Android"}
-            href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"
+            href={MetatraderAndroidLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,8 +65,8 @@ const DownloadsSection: React.FC = () => {
           operating system (Windows, Mac OS, Linux).
           <br />
           <a
-            title={"Login to platform"}
-            href="https://genesismarkets.io/profile/webterminal"
+            title={"Login to MetaTrader platform"}
+            href={MetatraderLoginLink}
             target="_blank"
             rel="noopener noreferrer"
           >

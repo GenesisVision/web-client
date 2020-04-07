@@ -2,13 +2,11 @@ import "./faq-section.scss";
 
 import AccordionContainer from "pages/landing-page/containers/accordion-container/accordion-container";
 import {
-  faqAccount,
+  faqFollow,
   faqFunds,
   faqGeneral,
   faqGVT,
   faqICO,
-  faqInvestorAccount,
-  faqManagerAccount,
   faqPrograms
 } from "pages/landing-page/static-data/faq";
 import React from "react";
@@ -23,27 +21,19 @@ const FaqSection: React.FC = () => {
           <AccordionContainer accordions={faqGeneral} />
         </article>
         <article className="internal__article">
-          <h2>Account</h2>
-          <AccordionContainer accordions={faqAccount} />
-        </article>
-        <article className="internal__article">
-          <h2>Investment programs</h2>
+          <h2>Genesis Vision Program</h2>
           <AccordionContainer accordions={faqPrograms} />
         </article>
         <article className="internal__article">
-          <h2>GV Funds</h2>
+          <h2>Genesis Vision Funds</h2>
           <AccordionContainer accordions={faqFunds} />
         </article>
         <article className="internal__article">
-          <h2>Investor’s account</h2>
-          <AccordionContainer accordions={faqInvestorAccount} />
+          <h2>Genesis Vision Follow</h2>
+          <AccordionContainer accordions={faqFollow} />
         </article>
         <article className="internal__article">
-          <h2>Manager’s account</h2>
-          <AccordionContainer accordions={faqManagerAccount} />
-        </article>
-        <article className="internal__article">
-          <h2>GVT</h2>
+          <h2>Genesis Vision Token</h2>
           <AccordionContainer accordions={faqGVT} />
         </article>
         <article className="internal__article">
