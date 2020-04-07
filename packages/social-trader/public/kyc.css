@@ -32,7 +32,7 @@ body {
 .iframe2 p,
 .iframe2 .checkmark,
 .mobile-button .fa-icon,
-.iframe2 .active.title,
+.step.active .title,
 .iframe2 .title,
 .iframe2 .radio-item {
     color: #e8eff3;
@@ -47,7 +47,7 @@ button.submit:hover,
 button.submit:active,
 button.back,
 button.back:hover,
-button.back:active  {
+button.back:active {
     box-shadow: none !important;
 }
 
@@ -61,6 +61,7 @@ button.submit:active {
 button.back,
 button.back:hover,
 button.back:active {
+    color: white !important;
     background: transparent !important;
     border: 1px solid #2a353f !important;
 }
@@ -82,5 +83,5 @@ button.back:active {
 .step.pending .bullet,
 .step.pending .line {
     border-color: #2ebd85;
-    background :#2ebd85;
+    background: #2ebd85;
 }
