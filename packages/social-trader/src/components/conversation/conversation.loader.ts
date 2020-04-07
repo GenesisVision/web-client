@@ -18,6 +18,7 @@ import uuid from "uuid";
 const getTagLoaderData = (): PostTag => ({
   title: "",
   post: {
+    impressionsCount: 0,
     rePostsCount: getRandomInteger(),
     id: getRandomWord(),
     text: getRandomWord(),
@@ -28,6 +29,7 @@ const getTagLoaderData = (): PostTag => ({
     tags: [],
     author: managerLoaderData,
     actions: {
+      canComment: true,
       isLiked: true,
       canEdit: false,
       canDelete: false,
@@ -112,6 +114,7 @@ export const getConversationImageLoaderData = (): IConversationImage => ({
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
+  canComment: getRandomBoolean(),
   canEdit: getRandomBoolean(),
   canDelete: getRandomBoolean(),
   isLiked: getRandomBoolean(),
@@ -138,6 +141,7 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    impressionsCount: 0,
     rePostsCount: getRandomInteger(),
     isPinned: false,
     tags,
@@ -156,6 +160,7 @@ export const getConversationPostLoaderData = (
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  impressionsCount: 0,
   isPinned: false,
   tags: [],
   comments: [],
