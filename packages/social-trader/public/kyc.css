@@ -4,6 +4,11 @@ gray #6b747b
 background-color: #131e26;
 */
 
+* {
+    color: #e8eff3 !important;
+    background: transparent !important;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -25,6 +30,8 @@ body {
     box-shadow: none;
 }
 
+.error-message .close-icon,
+.error-message.warn .message-content, .error-message.warn .message-title,
 .iframe2 h1,
 .iframe2 h2,
 .iframe2 h3,
@@ -36,7 +43,7 @@ body {
 .step.active .title,
 .iframe2 .title,
 .iframe2 .radio-item {
-    color: #e8eff3;
+    /*color: #e8eff3;*/
 }
 
 .section a {
