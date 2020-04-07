@@ -116,10 +116,6 @@
   "mt4-page": {
     "title": "MetaTrader 4"
   },
-  "mt5-page": {
-    "title": "MetaTrader 5",
-    "warning": "Ad blocking software is preventing the Trading Terminal from loading.\nPlease disable your ad blocker, or add genesis.vision to the exception list, and reload the Trading Terminal to continue."
-  },
   "active": {
     "chart": "Chart",
     "about": "About"
