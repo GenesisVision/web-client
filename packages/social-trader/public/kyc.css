@@ -83,6 +83,7 @@ button.back:active {
     border-color: gray !important;
 }
 
+.step.active.pending .bullet:before,
 .step.pending .bullet,
 .step.pending .line {
     border-color: #2ebd85;
