@@ -30,6 +30,7 @@ body {
 .iframe2 h3,
 .iframe2 h4,
 .iframe2 p,
+.iframe2 .active.title,
 .iframe2 .title,
 .iframe2 .radio-item {
     color: #e8eff3;
@@ -46,7 +47,20 @@ button.back,
 button.back:hover,
 button.back:active  {
     background: #03bdaf;
-    box-shadow: none;
+    box-shadow: none !important;
+}
+
+button.submit,
+button.submit:hover,
+button.submit:active {
+    background: #03bdaf;
+}
+
+button.back,
+button.back:hover,
+button.back:active {
+    background: transparent;
+    border: 1px solid #2a353f;
 }
 
 .mobile-button,
