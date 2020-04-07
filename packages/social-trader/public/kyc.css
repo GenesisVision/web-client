@@ -48,21 +48,21 @@ button.submit:active,
 button.back,
 button.back:hover,
 button.back:active  {
-    background: #03bdaf;
     box-shadow: none !important;
 }
 
 button.submit,
+button.submit.disabled,
 button.submit:hover,
 button.submit:active {
-    background: #03bdaf;
+    background: #03bdaf !important;
 }
 
 button.back,
 button.back:hover,
 button.back:active {
-    background: transparent;
-    border: 1px solid #2a353f;
+    background: transparent !important;
+    border: 1px solid #2a353f !important;
 }
 
 .mobile-button,
