@@ -1,0 +1,94 @@
+/*
+white #e8eff3
+gray #6b747b
+background-color: #131e26;
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat, sans-serif !important;
+    background-color: #131e26;
+    color: #e8eff3;
+}
+
+.list li {
+    color: #333;
+}
+
+.help-button {
+    color: #e8eff3;
+}
+
+.section, section.content {
+    background: transparent;
+    box-shadow: none;
+}
+
+.error-message .close-icon,
+.error-message.warn .message-content, .error-message.warn .message-title,
+.iframe2 h1,
+.iframe2 h2,
+.iframe2 h3,
+.iframe2 h4,
+.iframe2 p,
+.iframe2 .checkmark,
+.iframe2 .checkbox,
+.mobile-button .fa-icon,
+.step.active .title,
+.iframe2 .title,
+.iframe2 .radio-item {
+    color: #e8eff3;
+}
+
+.section a {
+    color: #03bdaf;
+}
+
+button.submit,
+button.submit:hover,
+button.submit:active,
+button.back,
+button.back:hover,
+button.back:active {
+    box-shadow: none !important;
+}
+
+button.submit,
+button.submit.disabled,
+button.submit:hover,
+button.submit:active {
+    background: #03bdaf !important;
+}
+
+button.back,
+button.back:hover,
+button.back:active {
+    color: white !important;
+    background: transparent !important;
+    border: 1px solid #2a353f !important;
+}
+
+.error-message.warn,
+.mobile-button,
+.mobile-button:hover,
+.upload-item,
+.upload-payment-item .upload-item,
+.upload-item .drag-drop {
+    background: transparent;
+    box-shadow: none;
+}
+
+.error-message.warn,
+.upload-item,
+.mobile-button {
+    border-color: gray !important;
+}
+
+.steps.mobile .step.pending,
+.step.active.pending .bullet:before,
+.step.pending .bullet,
+.step.pending .line {
+    border-color: #2ebd85;
+    background: #2ebd85;
+}

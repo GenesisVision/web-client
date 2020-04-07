@@ -5,6 +5,14 @@ import { useTranslation } from "i18n";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
 
+const MetatraderPCLink =
+  "https://download.mql5.com/cdn/web/15879/mt5/genesismarketsltd5setup.exe";
+const MetatraderIOSLink =
+  "https://download.mql5.com/cdn/mobile/mt5/ios?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live";
+const MetatraderAndroidLink =
+  "https://download.mql5.com/cdn/mobile/mt5/android?server=GenesisMarketsLtd-Demo,GenesisMarketsLtd-Live";
+const MetatraderLoginLink = "https://genesis.vision/trade/mt5";
+
 const DownloadsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -17,7 +25,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={t("downloads.link-1")}
-            href="https://download.mql5.com/cdn/web/11830/mt5/genesismarketslp5setup.exe"
+            href={MetatraderPCLink}
           >
             {t("downloads.link-1")}
             <br />
@@ -35,7 +43,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={t("downloads.link-2")}
-            href="https://itunes.apple.com/app/metatrader-5-forex-stocks/id413251709"
+            href={MetatraderIOSLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +52,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={t("downloads.link-3")}
-            href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5"
+            href={MetatraderAndroidLink}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -59,7 +67,7 @@ const DownloadsSection: React.FC = () => {
           <br />
           <a
             title={t("downloads.link-4")}
-            href="https://genesismarkets.io/profile/webterminal"
+            href={MetatraderLoginLink}
             target="_blank"
             rel="noopener noreferrer"
           >
