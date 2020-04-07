@@ -66,6 +66,7 @@ button.back:active {
     border: 1px solid #2a353f !important;
 }
 
+.error-message.warn,
 .mobile-button,
 .mobile-button:hover,
 .upload-item,
@@ -75,9 +76,10 @@ button.back:active {
     box-shadow: none;
 }
 
+.error-message.warn,
 .upload-item,
 .mobile-button {
-    border-color: gray;
+    border-color: gray !important;
 }
 
 .step.pending .bullet,
