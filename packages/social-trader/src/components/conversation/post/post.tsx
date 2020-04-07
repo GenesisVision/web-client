@@ -1,10 +1,10 @@
 import { Center } from "components/center/center";
-import { Comment } from "components/conversation/comment/comment";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { ConversationPinButton } from "components/conversation/conversation-pin-button/conversation-pin-button";
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
+import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
@@ -69,15 +69,7 @@ const _Post: React.FC<Props> = ({
       />
       {!!comments.length && (
         <Row large>
-          <div className="post__comments">
-            {comments.map(comment => (
-              <Comment
-                updateData={updateData}
-                key={comment.id}
-                comment={comment}
-              />
-            ))}
-          </div>
+          <CommentsList comments={comments} updateData={updateData} />
         </Row>
       )}
       {actions && (
