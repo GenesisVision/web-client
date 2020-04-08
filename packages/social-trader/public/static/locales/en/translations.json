@@ -416,6 +416,7 @@
   "deposit-asset": {
     "management-fee": "Management fee",
     "title": "Invest",
+    "own-title": "Deposit",
     "gv-commission": "GV commission",
     "available-in-wallet": "Available in wallet",
     "amount": "Amount to invest",
