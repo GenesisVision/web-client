@@ -6,6 +6,9 @@ import replaceParams from "utils/replace-params";
 export const SOCIAL = "social";
 export const SOCIAL_ROUTE = `/${SOCIAL}`;
 
+export const USERS = "users";
+export const USERS_ROUTE = `${SOCIAL_ROUTE}/${USERS}`;
+
 export const RATING = "rating";
 export const RATING_ROUTE = `${SOCIAL_ROUTE}/${RATING}`;
 

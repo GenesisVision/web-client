@@ -20,8 +20,8 @@ import * as React from "react";
 import {
   MY_PROFILE_ROUTE,
   NEWS_ROUTE,
-  RATING_ROUTE,
-  SOCIAL_ROUTE
+  SOCIAL_ROUTE,
+  USERS
 } from "routes/social.routes";
 
 import { HOME_ROUTE } from "./app.routes";
@@ -135,8 +135,8 @@ const mainMenuItemsUnion = [
       },
       {
         Icon: TradeIcon,
-        route: RATING_ROUTE,
-        label: "navigation.rating"
+        route: USERS,
+        label: "navigation.users"
       }
     ]
   }

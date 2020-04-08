@@ -254,6 +254,7 @@
     }
   },
   "navigation": {
+    "users": "Users",
     "social": "Social",
     "news": "News",
     "my-profile": "My profile",
