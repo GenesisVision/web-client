@@ -40,11 +40,14 @@ import {
 import { META_TRADER_5_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
+  isBeta?: boolean;
   route?: string;
   Icon: React.ComponentType<any>;
   label?: string;
   children?: TMenuItem[];
 };
+
+export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
 const advancedMobileMenuItems: TMenuItem[] = [
   {
@@ -119,6 +122,7 @@ const mainMenuItemsUnion = [
     ]
   },
   {
+    isBeta: true,
     Icon: TradeIcon,
     label: "navigation.social",
     route: SOCIAL_ROUTE,
