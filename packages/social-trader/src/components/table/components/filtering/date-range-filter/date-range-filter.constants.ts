@@ -27,8 +27,8 @@ export enum DATA_RANGE_FILTER_TYPES {
 
 export interface IDataRangeFilterValue {
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart?: Date | string | number;
-  dateEnd?: Date | string | number;
+  dateStart?: string;
+  dateEnd?: string;
 }
 
 export const ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
