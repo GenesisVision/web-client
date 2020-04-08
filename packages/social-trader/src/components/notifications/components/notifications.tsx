@@ -1,5 +1,3 @@
-import "./notifications.scss";
-
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
@@ -18,10 +16,11 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Spinner from "components/spiner/spiner";
 import { NotificationViewModel } from "gv-api-web";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
+import "./notifications.scss";
 
 const _Notifications: React.FC<Props> = ({
   isPending,
@@ -31,6 +30,14 @@ const _Notifications: React.FC<Props> = ({
   getNotifications,
   closeNotifications
 }) => {
+  const [mergedNotifications, setMergedNotifications] = useState<
+    NotificationViewModel[]
+  >([]);
+
+  useEffect(() => {
+    setMergedNotifications([...mergedNotifications, ...notifications]);
+  }, [notifications]);
+
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   useEffect(() => {
@@ -54,8 +61,8 @@ const _Notifications: React.FC<Props> = ({
       closeNotifications={closeNotifications}
     />
   );
-  const groups = getGroups(notifications);
-  const hasMore = total > notifications.length;
+  const groups = getGroups(mergedNotifications);
+  const hasMore = total > mergedNotifications.length;
   const hasNotifications = count > 0;
   return (
     <div className="notifications">
