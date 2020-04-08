@@ -11,6 +11,11 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
   state => state.profileHeader
 );
 
+export const isBetaTesterSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.isBetaTester)
+);
+
 export const headerAccountCurrencySelector = apiFieldSelector(
   headerSelector,
   fieldSelector(state => state.platformCurrency)
