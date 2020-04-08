@@ -11,6 +11,8 @@ import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { isBetaTesterSelector } from "reducers/header-reducer";
 
 enum TABS {
   FEED = "FEED",
@@ -20,7 +22,12 @@ enum TABS {
 
 const _ManagerData: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<TABS>(TABS.FEED);
+  const isBetaTester = useSelector(isBetaTesterSelector);
+  const { tab, setTab } = useTab<TABS>(TABS.TRADING);
+
+  useEffect(() => {
+    setTab(null, isBetaTester ? TABS.FEED : TABS.TRADING);
+  }, [isBetaTester]);
 
   const {
     sendRequest,
@@ -45,7 +52,12 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
     <div>
       <Row onlyOffset>
         <GVTabs value={tab} onChange={setTab}>
-          <GVTab value={TABS.FEED} label={t("Feed")} count={postsCount} />
+          <GVTab
+            visible={!!isBetaTester}
+            value={TABS.FEED}
+            label={t("Feed")}
+            count={postsCount}
+          />
           <GVTab
             visible={tradingCount > 0}
             value={TABS.TRADING}
