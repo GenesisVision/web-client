@@ -1,5 +1,3 @@
-import "./header.scss";
-
 import classNames from "classnames";
 import HeaderIcon from "components/header/header-icon";
 import { SearchIcon } from "components/icon/search-icon";
@@ -13,7 +11,10 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { mobileMenuItems, topMenuItems } from "routes/menu";
+import { isBetaTesterSelector } from "reducers/header-reducer";
+import { filterBeta, mobileMenuItems, topMenuItems } from "routes/menu";
+
+import "./header.scss";
 
 const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
 const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
@@ -26,17 +27,25 @@ const HeaderLeft: React.FC<{
   profileHeader?: ProfileHeaderViewModel;
 }> = React.memo(({ backPath, profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isBetaTester = useSelector(isBetaTesterSelector);
+  const showedMobileMenuItems = isBetaTester
+    ? mobileMenuItems
+    : mobileMenuItems.filter(filterBeta);
+  const showedTopMenuItems = isBetaTester
+    ? topMenuItems
+    : topMenuItems.filter(filterBeta);
+
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   return (
     <div className="header__left">
       <NavigationMobileButton
-        mobileMenuItems={mobileMenuItems}
+        mobileMenuItems={showedMobileMenuItems}
         backPath={backPath}
         profileHeader={profileHeader}
         isAuthenticated={isAuthenticated}
       />
       <Navigation
-        menuItems={topMenuItems}
+        menuItems={showedTopMenuItems}
         className={classNames("header__navigation", {
           "header__navigation--search": openSearch
         })}
