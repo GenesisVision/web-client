@@ -21,7 +21,7 @@ import {
   MY_PROFILE_ROUTE,
   NEWS_ROUTE,
   SOCIAL_ROUTE,
-  USERS
+  USERS_ROUTE
 } from "routes/social.routes";
 
 import { HOME_ROUTE } from "./app.routes";
@@ -139,7 +139,7 @@ const mainMenuItemsUnion = [
       },
       {
         Icon: TradeIcon,
-        route: USERS,
+        route: USERS_ROUTE,
         label: "navigation.users"
       }
     ]
