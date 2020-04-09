@@ -116,9 +116,6 @@
   "mt4-page": {
     "title": "MetaTrader 4"
   },
-  "mt5-page": {
-    "title": "MetaTrader 5"
-  },
   "active": {
     "chart": "Chart",
     "about": "About"
