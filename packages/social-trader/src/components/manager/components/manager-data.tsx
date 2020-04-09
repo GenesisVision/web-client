@@ -1,4 +1,4 @@
-import { PostListContainer } from "components/conversation/post-list/post-list.container";
+import { UserFeed } from "components/conversation/user-feed/user-feed";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import ManagerHistorySection from "components/manager/manager-history/manager-history-section";
@@ -69,7 +69,7 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
       </Row>
       {tab === TABS.FEED && (
         <Row large onlyOffset>
-          <PostListContainer id={id} />
+          <UserFeed id={id} />
         </Row>
       )}
       {tab === TABS.TRADING && (
