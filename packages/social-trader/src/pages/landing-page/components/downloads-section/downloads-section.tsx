@@ -64,12 +64,7 @@ const DownloadsSection: React.FC = () => {
           your browser. No need to download and install. Compatible with any
           operating system (Windows, Mac OS, Linux).
           <br />
-          <a
-            title={"Login to MetaTrader platform"}
-            href={MetatraderLoginLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a title={"Login to MetaTrader platform"} href={MetatraderLoginLink}>
             Login to platform
           </a>
         </p>
