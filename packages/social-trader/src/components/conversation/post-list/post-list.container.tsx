@@ -1,35 +1,75 @@
-import { getEmptyPostLoaderData } from "components/conversation/conversation.loader";
-import { getPosts } from "components/conversation/conversation.service";
 import { PostList } from "components/conversation/post-list/post-list";
-import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
-import { useIsOwnPage } from "components/manager/manager.page.helpers";
-import useApiRequest from "hooks/api-request.hook";
-import React, { useEffect } from "react";
+import {
+  initialOptions,
+  SkipTake,
+  TAKE_COUNT
+} from "components/notifications/components/notifications.helpers";
+import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import useIsOpen from "hooks/is-open.hook";
+import React, { useCallback, useEffect, useState } from "react";
 
 import "./post-list.scss";
 
-const _PostListContainer: React.FC<Props> = ({ id }) => {
-  const isOwnPage = useIsOwnPage(id);
-  const { data, sendRequest } = useApiRequest({
-    request: () => getPosts({ id, userMode: "ProfileOnlyOwnerPosts" })
-  });
-  useEffect(() => {
-    sendRequest();
-  }, [id]);
-  return (
-    <div>
-      {isOwnPage && <PostInputContainer onSuccess={sendRequest} />}
-      <PostList
-        loaderData={[getEmptyPostLoaderData()]}
-        data={data!?.items}
-        updateData={sendRequest}
-      />
-    </div>
-  );
+export interface IPostListContainerProps {
+  reset?: boolean;
+  fetchMethod: (values: Object) => Promise<any>;
+  id?: string;
+}
+
+export const calculateOptions = (
+  options?: SkipTake,
+  total: number = 0
+): SkipTake => {
+  if (!options) return { take: TAKE_COUNT, skip: 0 };
+  const { take = 0, skip = 0 } = options;
+  const newSkip = skip + take;
+  const newTake = Math.max(Math.min(TAKE_COUNT, total - newSkip), 0);
+  return { take: newTake, skip: newSkip };
 };
 
-interface Props {
-  id: string;
-}
+const _PostListContainer: React.FC<IPostListContainerProps> = ({
+  reset,
+  id,
+  fetchMethod
+}) => {
+  const [isUpdatingPage, updatePage, setNotUpdatingPage] = useIsOpen();
+  const [options, setOptions] = useState(initialOptions);
+  const { data, sendRequest, status } = useApiRequest({
+    request: values => fetchMethod(values)
+  });
+
+  useEffect(() => {
+    sendRequest(options);
+  }, [id, options]);
+
+  useEffect(() => {
+    if (reset) setOptions({ ...initialOptions });
+  }, [reset]);
+
+  useEffect(() => {
+    if (isUpdatingPage) {
+      const newOptions = calculateOptions(options, data.total);
+      setOptions(newOptions);
+      setNotUpdatingPage();
+    }
+  }, [isUpdatingPage, options]);
+
+  const handleScroll = useCallback(() => {
+    updatePage();
+  }, []);
+
+  const hasMore = data ? data.total > options.skip : false;
+  const canLoadMore = hasMore && status !== API_REQUEST_STATUS.PENDING;
+
+  return (
+    <PostList
+      skip={options.skip}
+      hasMore={canLoadMore}
+      loaderData={[]}
+      data={data!?.items}
+      onScroll={handleScroll}
+    />
+  );
+};
 
 export const PostListContainer = React.memo(_PostListContainer);
