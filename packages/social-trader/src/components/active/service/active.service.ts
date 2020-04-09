@@ -10,7 +10,6 @@ const getTag = () => ({ label: getRandomWord() });
 
 export const getActiveLoaderData = (active?: string): AssetInfo => ({
   socialLinks: [],
-  logo: "",
   logoUrl: "",
   symbol: "",
   chartSymbol: "",

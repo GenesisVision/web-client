@@ -14,7 +14,6 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   assetDetails: {
     programDetails: { level: 0, levelProgress: 0 },
     id: "",
-    logo: "",
     logoUrl: "",
     color: getRandomColor(),
     title: getRandomWord(),

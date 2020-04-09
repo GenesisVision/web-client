@@ -33,7 +33,6 @@ export const followDetailsLoaderDataCreator = (): FollowDetailsListItem => ({
   personalDetails: personalProgramDetailsLoaderData,
   tags: tagsLoaderDataCreator(),
   id: "",
-  logo: "",
   logoUrl: "",
   url: "",
   color: "#858585",
