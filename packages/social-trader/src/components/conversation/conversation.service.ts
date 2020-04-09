@@ -2,15 +2,11 @@ import { IPostMessageValues } from "components/conversation/conversation-input/c
 import {
   AssetSearchResult,
   ConversationFeed,
-  ConversationPost,
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
-import { RePost } from "gv-api-web";
-import { UserFeedMode } from "gv-api-web";
-import searchApi from "services/api-client/search-api";
+import { EditablePost, RePost, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
-import authService from "services/auth-service";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
@@ -72,6 +68,10 @@ export const toggleLike = ({ id, liked }: { id: string; liked?: boolean }) => {
   return method(id);
 };
 
+export const restorePost = ({ id }: { id: string }) => {
+  return api.social().revertDeletingPost(id);
+};
+
 export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
@@ -80,8 +80,8 @@ export const getFeedMethod = (values?: Object) => {
   return api.social().getFeed(values);
 };
 
-export const getGlobalFeed = (): Promise<ConversationFeed> => {
-  return getFeedMethod();
+export const getGlobalFeed = (values?: Object): Promise<ConversationFeed> => {
+  return getFeedMethod(values);
 };
 
 export const searchInFeed = (values: {
@@ -91,21 +91,18 @@ export const searchInFeed = (values: {
   return getFeedMethod(values);
 };
 
-export const getNewsFeed = (): Promise<ConversationFeed> => {
-  return getFeedMethod({ userMode: "FriendsPosts" });
+export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {
+  return getFeedMethod({ ...values, userMode: "FriendsPosts" });
 };
 
-export const getPosts = ({
-  id,
-  userMode
-}: {
+export const getPosts = (values: {
   id: string;
   userMode?: UserFeedMode;
 }): Promise<ConversationFeed> => {
-  return getFeedMethod({ userId: id, userMode });
+  return getFeedMethod({ ...values, userId: values.id });
 };
 
-export const getPost = ({ id }: { id: string }): Promise<ConversationPost> => {
+export const getPost = ({ id }: { id: string }): Promise<EditablePost> => {
   return api.social().getPost(id);
 };
 
