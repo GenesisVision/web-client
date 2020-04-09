@@ -5,7 +5,6 @@ export const getFacetLoaderData = (): AssetFacet => ({
   id: "",
   title: "",
   description: "",
-  logo: "",
   logoUrl: "",
   url: "",
   sortType: "New",

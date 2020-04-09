@@ -32,7 +32,6 @@ export const getInRequestsData = (): TDashboardRequest => ({
     withdrawPercent: 0,
     managementFee: getRandomInteger(),
     id: "",
-    logo: "",
     logoUrl: "",
     color: "",
     title: "",
@@ -104,11 +103,9 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
 });
 
 const getEventLoaderData = (): TDashboardEvent => ({
-  icon: "",
   logoUrl: "",
   assetDetails: {
     id: "",
-    logo: "",
     logoUrl: "",
     color: "",
     title: "",
@@ -168,7 +165,6 @@ export const getRecommendationLoaderData = (): TRecommendation => {
       drawdown: getRandomInteger(-10000, 10000)
     },
     id: "",
-    logo: "",
     logoUrl: "",
     title: getRandomWords(7),
     url: "",

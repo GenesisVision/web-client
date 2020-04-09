@@ -46,7 +46,6 @@ export const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType
   },
   asset: {
     id: "",
-    logo: "",
     logoUrl: "",
     color: "",
     title: "",

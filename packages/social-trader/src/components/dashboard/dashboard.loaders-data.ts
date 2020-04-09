@@ -8,7 +8,6 @@ import {
 
 const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   title: getRandomWords(6),
-  icon: "",
   logoUrl: "",
   date: new Date(),
   assetDetails: {

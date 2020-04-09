@@ -6,7 +6,6 @@ export const assetNotificationsLoaderData: ProgramNotificationSettingList = {
   color: "",
   level: 0,
   levelProgress: 0,
-  logo: "",
   logoUrl: "",
   settingsCustom: [],
   settingsGeneral: [],

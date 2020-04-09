@@ -50,7 +50,6 @@ export const getBrokerState = (
 export const getBrokerLoaderData = (): Broker => ({
   name: getRandomWord(),
   description: getRandomWords(11),
-  logo: "",
   logoUrl: "",
   terms: getRandomWord(),
   assets: getRandomWord(),
