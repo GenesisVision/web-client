@@ -11,16 +11,16 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
   ownAsset,
   header,
   asset,
-  title,
+  title: subtitle,
   currency,
   availableToInvest
 }) => {
   const [t] = useTranslation();
-  const ttt = ownAsset
+  const title = ownAsset
     ? t("deposit-asset.own-title")
     : t("deposit-asset.title");
   return (
-    <DialogTop title={header || ttt} subtitle={title || asset}>
+    <DialogTop title={header || title} subtitle={subtitle || asset}>
       {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
         <Row large>
           <StatisticItem
