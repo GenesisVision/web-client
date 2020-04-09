@@ -18,6 +18,7 @@ import uuid from "uuid";
 const getTagLoaderData = (): PostTag => ({
   title: "",
   post: {
+    isDeleted: false,
     impressionsCount: 0,
     rePostsCount: getRandomInteger(),
     id: getRandomWord(),
@@ -44,7 +45,6 @@ const getTagLoaderData = (): PostTag => ({
     title: getRandomWord(),
     id: "",
     color: "",
-    logo: "",
     logoUrl: "",
     programDetails: { level: 0, levelProgress: 0 }
   },
@@ -55,7 +55,6 @@ const getTagLoaderData = (): PostTag => ({
     name: "string",
     asset: "string",
     description: "string",
-    icon: "string",
     color: "string",
     logoUrl: "",
     mandatoryFundPercent: 0,
@@ -124,7 +123,6 @@ export const getConversationPersonalDetailsLoaderData = (): ConversationMessageP
 export const getConversationUserLoaderData = (): IConversationUser => ({
   socialLinks: [],
   registrationDate: new Date(),
-  avatar: "",
   logoUrl: "",
   id: uuid.v4(),
   username: getRandomWord(getRandomInteger(8, 50)),
@@ -132,8 +130,8 @@ export const getConversationUserLoaderData = (): IConversationUser => ({
 });
 
 export const getConversationPostLoaderData = (
-  imagesCount: number,
-  commentsCount: number
+  imagesCount: number = 0,
+  commentsCount: number = 0
 ): ConversationPost => {
   const { tags, text } = getMockTextAndTags();
   const images = new Array(imagesCount)
@@ -141,6 +139,7 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    isDeleted: false,
     impressionsCount: 0,
     rePostsCount: getRandomInteger(),
     isPinned: false,
@@ -160,6 +159,7 @@ export const getConversationPostLoaderData = (
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  isDeleted: false,
   impressionsCount: 0,
   isPinned: false,
   tags: [],
