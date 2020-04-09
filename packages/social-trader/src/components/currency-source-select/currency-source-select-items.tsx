@@ -5,12 +5,12 @@ import { CurrencyEnum } from "utils/types";
 export const getCurrencySourceSelectItems = (
   items: CurrencySourceSelectItemsType
 ): JSX.Element[] =>
-  items.map(({ logo, currency, title, id, available }) => (
+  items.map(({ logoUrl, currency, title, id, available }) => (
     <option value={id} key={id}>
       <CurrencyItemWithAmount
         available={available}
         symbol={currency}
-        logo={logo}
+        logo={logoUrl}
         name={`${title ? `${title} | ` : ""}${currency}`}
         small
         clickable={false}
@@ -23,6 +23,6 @@ export interface CurrencySourceSelectItemType {
   available?: number;
   id: string;
   currency: CurrencyEnum;
-  logo?: string;
+  logoUrl?: string;
   title?: string;
 }

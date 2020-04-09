@@ -62,12 +62,12 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps &
               type="text"
               name="dateStart"
               label={t("filters.date-range.start")}
-              value={dateToInput(dateStart)}
+              value={dateStart}
               InputComponent={GVDatePicker}
               //@ts-ignore
               horizontal="right"
               //@ts-ignore
-              maxDate={new Date()}
+              maxDate={dateToInput(new Date())}
               onChange={handleOnChange("dateStart")}
             />
           }
@@ -78,13 +78,13 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps &
               type="text"
               name="dateEnd"
               label={t("filters.date-range.end")}
-              value={dateToInput(dateEnd)}
+              value={dateEnd}
               //@ts-ignore
               horizontal="right"
               InputComponent={GVDatePicker}
               minDate={dateStart}
               //@ts-ignore
-              maxDate={new Date()}
+              maxDate={dateToInput(new Date())}
               onChange={handleOnChange("dateEnd")}
             />
           }
@@ -127,7 +127,7 @@ export default DateRangeFilterValues;
 interface IDateRangeFilterValuesProps {
   onChange(type: keyof IDataRangeFilterValue, date: string): void;
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart?: Date | string | number;
-  dateEnd?: Date | string | number;
+  dateStart?: string;
+  dateEnd?: string;
   startLabel: string;
 }

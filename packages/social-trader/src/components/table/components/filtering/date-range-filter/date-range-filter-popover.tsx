@@ -70,8 +70,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {
-    const value = date.length === 0 ? date : dayjs(date).toISOString();
-    this.setState({ [type]: value } as Pick<State, keyof State>);
+    this.setState({ [type]: date } as Pick<State, keyof State>);
   };
   handleSubmit = () => {
     if (this.props.changeFilter) {

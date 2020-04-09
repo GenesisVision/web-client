@@ -152,7 +152,7 @@ export const mapAccountToTransferItemType = ({
 }: DashboardTradingAsset): TransferItemType => ({
   id,
   title,
-  logo: "",
+  logoUrl: "",
   currency: currency || "ETH",
   available: balance || 0
 });
@@ -164,7 +164,7 @@ export const mapProgramFollowToTransferItemType = ({
 }: ProgramFollowDetailsFull | PrivateTradingAccountFull): TransferItemType => ({
   id,
   title,
-  logo: "",
+  logoUrl: "",
   currency: currency || "ETH",
   available: balance || 0
 });
