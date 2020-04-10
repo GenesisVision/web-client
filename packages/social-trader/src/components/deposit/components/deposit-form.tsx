@@ -62,8 +62,7 @@ const _DepositForm: React.FC<Props> = ({
       wallets,
       availableToInvestInAsset,
       minDeposit,
-      t,
-      currency
+      t
     }),
     mode: "onChange"
   });
