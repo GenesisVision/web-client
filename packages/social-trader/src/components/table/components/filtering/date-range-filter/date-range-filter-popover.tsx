@@ -14,6 +14,8 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import DateRangeFilterValues from "./date-range-filter-values";
 import {
   DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
@@ -48,8 +50,12 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     type: this.props.value
       ? this.props.value.type
       : DATA_RANGE_FILTER_TYPES.ALL,
-    dateStart: this.props.value ? this.props.value.dateStart : undefined,
-    dateEnd: this.props.value ? this.props.value.dateEnd : undefined
+    [DATE_RANGE_MIN_FILTER_NAME]: this.props.value
+      ? this.props.value[DATE_RANGE_MIN_FILTER_NAME]
+      : undefined,
+    [DATE_RANGE_MAX_FILTER_NAME]: this.props.value
+      ? this.props.value[DATE_RANGE_MAX_FILTER_NAME]
+      : undefined
   };
 
   getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
@@ -65,8 +71,8 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
       type,
-      dateStart: this.getDateStart(type),
-      dateEnd: dayjs().toISOString()
+      [DATE_RANGE_MIN_FILTER_NAME]: this.getDateStart(type),
+      [DATE_RANGE_MAX_FILTER_NAME]: dayjs().toISOString()
     });
   };
   handleChangeDate = (type: keyof IDataRangeFilterValue, date: string) => {
@@ -76,14 +82,14 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     if (this.props.changeFilter) {
       this.props.changeFilter({
         type: this.state.type,
-        dateStart:
-          String(this.state.dateStart).length === 0
+        [DATE_RANGE_MIN_FILTER_NAME]:
+          String(this.state[DATE_RANGE_MIN_FILTER_NAME]).length === 0
             ? dayjs(0).toISOString()
-            : this.state.dateStart,
-        dateEnd:
-          String(this.state.dateEnd).length === 0
+            : this.state[DATE_RANGE_MIN_FILTER_NAME],
+        [DATE_RANGE_MAX_FILTER_NAME]:
+          String(this.state[DATE_RANGE_MAX_FILTER_NAME]).length === 0
             ? dayjs().toISOString()
-            : this.state.dateEnd
+            : this.state[DATE_RANGE_MAX_FILTER_NAME]
       });
     }
   };

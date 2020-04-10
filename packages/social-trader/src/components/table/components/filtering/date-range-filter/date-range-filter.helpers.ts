@@ -7,6 +7,8 @@ import {
   ComposedRequestDataRangeValue,
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   IDataRangeFilterValue,
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
@@ -34,8 +36,8 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   )
     return false;
   if (value.type === DATA_RANGE_FILTER_TYPES.CUSTOM) {
-    const start = dayjs(value.dateStart);
-    const end = dayjs(value.dateEnd);
+    const start = dayjs(value[DATE_RANGE_MIN_FILTER_NAME]);
+    const end = dayjs(value[DATE_RANGE_MAX_FILTER_NAME]);
     if (!start.isValid() || !end.isValid() || start.isAfter(end)) return false;
   }
   return true;
@@ -67,10 +69,10 @@ export const composeRequestValueFunc = (
     case DATA_RANGE_FILTER_TYPES.CUSTOM:
     default:
       return {
-        [fromFilterName]: dayjs(value.dateStart)
+        [fromFilterName]: dayjs(value[DATE_RANGE_MIN_FILTER_NAME])
           .startOf("day")
           .toISOString(),
-        [toFilterName]: dayjs(value.dateEnd)
+        [toFilterName]: dayjs(value[DATE_RANGE_MAX_FILTER_NAME])
           .add(1, "day")
           .startOf("day")
           .toISOString()
