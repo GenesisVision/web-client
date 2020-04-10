@@ -107,18 +107,18 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
             />
           </StatisticItem>
         </Row>
-        <Row>
-          <InputAmountField
-            wide
-            isAllowed={allowPositiveValuesNumberFormat(
-              CURRENCY_FRACTIONS(currency)
-            )}
-            name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
-            label={t("follow-program.create-account.amount")}
-            currency={currency}
-            setMax={setMaxAmount}
-          />
-          {followCurrency !== currency && (
+        <InputAmountField
+          wide
+          isAllowed={allowPositiveValuesNumberFormat(
+            CURRENCY_FRACTIONS(currency)
+          )}
+          name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
+          label={t("follow-program.create-account.amount")}
+          currency={currency}
+          setMax={setMaxAmount}
+        />
+        {followCurrency !== currency && (
+          <Row small>
             <NumberFormat
               value={formatCurrencyValue(
                 convertToCurrency(+depositAmount, rate),
@@ -128,8 +128,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               suffix={` ${followCurrency}`}
               displayType="text"
             />
-          )}
-        </Row>
+          </Row>
+        )}
         <DialogButtons>
           <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}
