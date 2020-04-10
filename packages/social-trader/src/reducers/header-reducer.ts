@@ -12,7 +12,7 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
 );
 
 export const isBetaTesterByType = (selectType: BetaTestingType) => (
-  types: Array<BetaTestingType>
+  types: Array<BetaTestingType> = []
 ): boolean => !!types.find(type => type === selectType);
 
 export const isSocialBetaTester = isBetaTesterByType("Social");
