@@ -5,6 +5,7 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
 import { KYC_ROUTE } from "components/profile/profile.constants";
+import { RowItem } from "components/row-item/row-item";
 import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import {
@@ -103,17 +104,20 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           {t("level-calculator.title")}
         </h2>
         <Center>
-          <GVButton
-            size={GV_BTN_SIZE.SMALL}
-            color={"secondary"}
-            onClick={handleResetForm}
-          >
-            <span className="level-calculator-popup__reset-button-text">
-              {t("buttons.reset")}
-            </span>
-          </GVButton>
+          <RowItem>
+            <GVButton
+              size={GV_BTN_SIZE.SMALL}
+              color={"secondary"}
+              onClick={handleResetForm}
+            >
+              <span className="level-calculator-popup__reset-button-text">
+                {t("buttons.reset")}
+              </span>
+            </GVButton>
+          </RowItem>
           <GVButton
             className="level-calculator-popup__close-button"
+            noPadding
             variant="text"
             color="secondary"
             onClick={onClose}

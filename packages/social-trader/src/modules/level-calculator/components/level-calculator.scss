@@ -30,8 +30,9 @@
   }
 
   &__close-button {
-    padding: 0;
-    @include adaptive-margin("left", $padding-xxsmall);
+    & .icon {
+      width: auto;
+    }
   }
 
   &__reset-button-text {
