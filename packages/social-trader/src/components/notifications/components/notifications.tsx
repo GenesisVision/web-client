@@ -40,9 +40,7 @@ const _Notifications: React.FC<Props> = ({
 
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
-  useEffect(() => {
-    fetchNotification();
-  }, []);
+
   const fetchNotification = useCallback(
     () => !isPending && getNotifications(),
     [isPending]
