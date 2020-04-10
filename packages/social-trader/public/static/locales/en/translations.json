@@ -2390,7 +2390,7 @@
         "entry-fee": "Description about entry fee is here",
         "entry-fee-description": "A fee charged upon each investment in the program.",
         "management-fee": "Description about management fee is here",
-        "management-fee-description": "A fee charged charged for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
+        "management-fee-description": "A fee charged for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
         "success-fee": "Description about success fee is here",
         "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
         "subscription-fee": "Description about subscription fee is here",
