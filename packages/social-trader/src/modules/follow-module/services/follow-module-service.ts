@@ -55,7 +55,8 @@ export const attachToSignal: TSignalRequest = async ({
 }) => {
   const tradingAccountId = requestParams.tradingAccountId
     ? requestParams.tradingAccountId
-    : await assetsApi
+    : await api
+        .assets()
         .createTradingAccount({
           body: { ...requestParams, leverage }
         })
