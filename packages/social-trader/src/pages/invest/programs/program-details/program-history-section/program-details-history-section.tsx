@@ -40,6 +40,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  isFollower,
   canCloseOpenPositions,
   assetType,
   haveDelay = true,
@@ -120,7 +121,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           value={TABS.TRADING_LOG}
           label={t("program-details-page.history.tabs.trading-log")}
           count={tradingLogCount}
-          visible={isAuthenticated && isOwnProgram && !!tradingLog}
+          visible={isAuthenticated && isFollower && !!tradingLog}
         />
       </DetailsBlockTabs>
       {tab === TABS.TRADING_LOG && tradingLog && (
@@ -193,6 +194,7 @@ enum TABS {
 }
 
 interface Props {
+  isFollower?: boolean;
   canCloseOpenPositions?: boolean;
   assetType: TRADE_ASSET_TYPE;
   haveDelay?: boolean;
