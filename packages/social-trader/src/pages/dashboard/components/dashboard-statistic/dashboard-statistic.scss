@@ -4,7 +4,7 @@
 
 .dashboard-statistic {
   &__event-description {
-    white-space: normal;
+    white-space: normal !important;
   }
   &__container {
     display: flex;
