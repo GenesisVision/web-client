@@ -39,7 +39,8 @@ export const attachToExternalSignal: TSignalRequest = async ({
 }) => {
   const tradingAccountId = requestParams.tradingAccountId
     ? requestParams.tradingAccountId
-    : await assetsApi
+    : await api
+        .assets()
         .createExternalTradingAccount({ body: requestParams })
         .then(({ id }) => id);
 
