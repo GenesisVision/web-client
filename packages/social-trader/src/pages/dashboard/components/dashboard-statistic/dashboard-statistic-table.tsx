@@ -39,12 +39,12 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
           <span>{t(`dashboard-page.statistic.table.${column.name}`)}</span>
         )}
         renderBodyRow={(event: TDashboardEvent) => {
-          if (!humanizeDate(formatDate(event.date)))
-            console.log(event.date, new Date());
+          const humanizedDate = humanizeDate(formatDate(event.date));
+          if (!humanizedDate) console.log(event.date, new Date());
           return (
             <TableRow stripy>
               <TableCell>
-                {humanizeDate(formatDate(event.date))} {event.date && "ago"}
+                {humanizedDate ? <>{humanizedDate} ago</> : "Less minute ago"}
               </TableCell>
               <TableCell className="dashboard-statistic__event-description">
                 <Center>
