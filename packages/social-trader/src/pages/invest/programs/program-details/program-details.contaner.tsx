@@ -211,7 +211,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsInvestment
         isOwnAsset={isOwnAsset}
         fees={{
-          managementFeePersonal: isOwnAsset
+          managementFeePersonal: !isOwnAsset
             ? programPersonalDetails?.managementFeePersonal
             : undefined,
           successFee: programDetails?.successFeeCurrent,
