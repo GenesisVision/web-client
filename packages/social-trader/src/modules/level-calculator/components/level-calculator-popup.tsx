@@ -1,3 +1,4 @@
+import { Center } from "components/center/center";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Link from "components/link/link";
@@ -97,11 +98,11 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
   return (
     <div>
-      <div className="level-calculator-popup__header">
+      <Center className="level-calculator-popup__header">
         <h2 className="level-calculator-popup__heading">
           {t("level-calculator.title")}
         </h2>
-        <div>
+        <Center>
           <GVButton
             size={GV_BTN_SIZE.SMALL}
             color={"secondary"}
@@ -119,8 +120,8 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           >
             <CloseIcon />
           </GVButton>
-        </div>
-      </div>
+        </Center>
+      </Center>
 
       <div className="level-calculator-popup__program-name">
         <div className="level-calculator-popup__program-label">
