@@ -54,9 +54,9 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
         </RowItem>
       )}
       {showMappings && (
-        <RowItem>
+        <div className="table__mapping">
           <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
-        </RowItem>
+        </div>
       )}
       {showSortingFilter && (
         <SortingFilter

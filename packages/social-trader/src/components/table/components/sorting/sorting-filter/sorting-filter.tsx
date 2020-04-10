@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
-import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 
 import {
@@ -56,7 +55,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   const columnValues = composeSortingColumnValues();
 
   return (
-    <RowItem>
+    <div className="table__sorting-filter">
       <Center>
         <SelectFilter
           name={SORTING_FILTER_NAME}
@@ -74,7 +73,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
           {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
         </GVButton>
       </Center>
-    </RowItem>
+    </div>
   );
 };
 
