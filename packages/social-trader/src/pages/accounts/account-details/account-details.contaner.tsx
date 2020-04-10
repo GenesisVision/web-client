@@ -91,7 +91,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       )}
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
-        isFollower={!!description.tradingAccountInfo.subscriptions}
+        isFollower={description.tradingAccountInfo.showTradingLog}
         canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}
         assetType={TRADE_ASSET_TYPE.ACCOUNT}
         haveDelay={false}
