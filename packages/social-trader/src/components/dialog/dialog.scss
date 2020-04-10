@@ -33,9 +33,11 @@
     @include adaptive-margin(bottom, 16px);
   }
 
-  &__close {
+  button.dialog__close {
     position: absolute;
     @include adaptive-full-padding($padding-xxsmall);
+  }
+  &__close {
     z-index: 2;
 
     .icon {
