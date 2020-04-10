@@ -1088,7 +1088,7 @@
       "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
-      "personal-management-fee": "Personal management fee",
+      "personal-management-fee": "Management fee",
       "management-fee": "Management fee",
       "auto-join": "Ignore SO",
       "creation-date": "Creation date",
