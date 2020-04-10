@@ -1,5 +1,3 @@
-import "./broker-info.scss";
-
 import classNames from "classnames";
 import { useToLink } from "components/link/link.helper";
 import { useTranslation } from "i18n";
@@ -8,8 +6,12 @@ import { composeCreateAccountRouteWithBroker } from "pages/create-account/create
 import { JoinButton } from "pages/landing-page/components/join-button";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { LOGIN_ROUTE } from "routes/app.routes";
 
 import BrokerAdvantage from "./broker-advantage";
+import "./broker-info.scss";
 
 interface Props extends TBrokerInfo {
   className?: string;
@@ -25,11 +27,13 @@ const _BrokerInfo: React.FC<Props> = ({
   listItems
 }) => {
   const { t } = useTranslation();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
-  const tradingLink =
-    type === "Attach"
+  const tradingLink = isAuthenticated
+    ? type === "Attach"
       ? composeAttachAccountRouteWithBroker(title)
-      : composeCreateAccountRouteWithBroker(title);
+      : composeCreateAccountRouteWithBroker(title)
+    : LOGIN_ROUTE;
   return (
     <div
       className={classNames("broker-info", className, {
