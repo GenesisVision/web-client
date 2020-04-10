@@ -383,7 +383,7 @@
     },
     "validation": {
       "amount-more-than-available": "Amount is greater than the account balance",
-      "amount-is-zero": "Amount must be greater than zero"
+      "amount-is-zero": "Must be greater than zero"
     }
   },
   "password-change-trading-account": {
@@ -457,7 +457,7 @@
     "enter-amount": "Enter {{token}} amount",
     "success-alert-message": "Request to withdraw sent successfully.",
     "validation": {
-      "amount-is-zero": "Amount must be greater than zero",
+      "amount-is-zero": "Must be greater than zero",
       "amount-more-than-available": "Amount is greater than the account balance"
     }
   },
@@ -529,7 +529,7 @@
       "next": "Next",
       "validation": {
         "amount-required": "Amount is a required field",
-        "amount-more-than-min-deposit": "Amount must be greater than {{value}}",
+        "amount-more-than-min-deposit": "Must be greater than {{value}}",
         "amount-more-than-available": "Amount is greater than the account balance"
       }
     },
@@ -567,7 +567,7 @@
     "success-alert-message": "Withdrawal request sent successfully.",
     "validation": {
       "required": "Amount is required",
-      "min-value": "Amount must be greater than or equal to {{minAmount}}"
+      "min-value": "Must be greater than or equal to {{minAmount}}"
     }
   },
   "not-found-page": {
@@ -2462,8 +2462,8 @@
       },
       "validation": {
         "amount-required": "Amount is required",
-        "amount-is-large": "Amount must be available in Wallet",
-        "amount-is-zero": "Amount must be greater or equal {{min}}",
+        "amount-is-large": "Must be available in Wallet",
+        "amount-is-zero": "Must be greater or equal {{min}}",
         "currency-required": "Currency is required",
         "leverage-required": "Leverage is required"
       }
