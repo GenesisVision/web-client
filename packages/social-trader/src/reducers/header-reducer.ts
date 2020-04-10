@@ -1,5 +1,5 @@
 import { PROFILE_HEADER } from "components/header/header.constants";
-import { ProfileHeaderViewModel } from "gv-api-web";
+import { BetaTestingType, ProfileHeaderViewModel } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -11,9 +11,12 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
   state => state.profileHeader
 );
 
-export const isBetaTesterSelector = apiFieldSelector(
+export const isSocialBetaTester = (types: Array<BetaTestingType>): boolean =>
+  !!types.find(type => type === "Social");
+
+export const betaTesterSelector = apiFieldSelector(
   headerSelector,
-  fieldSelector(state => state.isBetaTester)
+  fieldSelector(state => state.betaTester)
 );
 
 export const headerAccountCurrencySelector = apiFieldSelector(

@@ -11,7 +11,10 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { isBetaTesterSelector } from "reducers/header-reducer";
+import {
+  betaTesterSelector,
+  isSocialBetaTester
+} from "reducers/header-reducer";
 import { filterBeta, mobileMenuItems, topMenuItems } from "routes/menu";
 
 import "./header.scss";
@@ -27,7 +30,8 @@ const HeaderLeft: React.FC<{
   profileHeader?: ProfileHeaderViewModel;
 }> = React.memo(({ backPath, profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const isBetaTester = useSelector(isBetaTesterSelector);
+  const betaTester = useSelector(betaTesterSelector);
+  const isBetaTester = isSocialBetaTester(betaTester);
   const showedMobileMenuItems = isBetaTester
     ? mobileMenuItems
     : mobileMenuItems.filter(filterBeta);

@@ -12,7 +12,10 @@ import useTab from "hooks/tab.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { isBetaTesterSelector } from "reducers/header-reducer";
+import {
+  betaTesterSelector,
+  isSocialBetaTester
+} from "reducers/header-reducer";
 
 enum TABS {
   FEED = "FEED",
@@ -22,7 +25,8 @@ enum TABS {
 
 const _ManagerData: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-  const isBetaTester = useSelector(isBetaTesterSelector);
+  const betaTester = useSelector(betaTesterSelector);
+  const isBetaTester = isSocialBetaTester(betaTester);
   const { tab, setTab } = useTab<TABS>(TABS.TRADING);
 
   useEffect(() => {
