@@ -1,10 +1,12 @@
-import "./settings-block.scss";
-
 import classNames from "classnames";
+import { Center } from "components/center/center";
+import { RowItem } from "components/row-item/row-item";
 import VerificationStatus, {
   IStatusProps
 } from "components/verification-status/verification-status";
 import React from "react";
+
+import "./settings-block.scss";
 
 const SettingsBlock: React.FC<Props> = ({
   hide,
@@ -34,17 +36,21 @@ const SettingsBlock: React.FC<Props> = ({
     </div>
     <div className="asset-settings-block__content-block">
       {(label || verificationStatus) && (
-        <div className="asset-settings-block__title">
-          {label && <h3>{label}</h3>}
+        <Center className="asset-settings-block__title">
+          {label && (
+            <RowItem>
+              <h3>{label}</h3>
+            </RowItem>
+          )}
           {(checked || !!verificationStatus) && (
-            <div className="asset-settings-block__status">
+            <RowItem>
               <VerificationStatus
                 checked={checked}
                 verificationStatus={verificationStatus}
               />
-            </div>
+            </RowItem>
           )}
-        </div>
+        </Center>
       )}
       <div className="asset-settings-block__wrapper">{children}</div>
     </div>
