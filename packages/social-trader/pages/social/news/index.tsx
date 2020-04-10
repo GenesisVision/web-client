@@ -9,4 +9,4 @@ const Page: NextPage = () => {
   return <FeedPage />;
 };
 
-export default compose(withDefaultLayout, withBetaTesting)(Page);
+export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

@@ -1,3 +1,4 @@
+import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage } from "next";
 import { UsersPage } from "pages/social/users/users.page";
@@ -12,4 +13,4 @@ Page.getInitialProps = async () => ({
   namespacesRequired: ["users-page"]
 });
 
-export default compose(withDefaultLayout)(Page);
+export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

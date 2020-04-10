@@ -28,5 +28,5 @@ Page.getInitialProps = async ctx => {
 export default compose(
   withDefaultLayout,
   withPrivateRoute,
-  withBetaTesting
+  withBetaTesting("Social")
 )(Page);

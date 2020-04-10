@@ -9,4 +9,4 @@ const Page: NextPage = () => {
   return <RatingPage />;
 };
 
-export default compose(withDefaultLayout, withBetaTesting)(Page);
+export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

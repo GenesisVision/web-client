@@ -11,8 +11,11 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
   state => state.profileHeader
 );
 
-export const isSocialBetaTester = (types: Array<BetaTestingType>): boolean =>
-  !!types.find(type => type === "Social");
+export const isBetaTesterByType = (selectType: BetaTestingType) => (
+  types: Array<BetaTestingType>
+): boolean => !!types.find(type => type === selectType);
+
+export const isSocialBetaTester = isBetaTesterByType("Social");
 
 export const betaTesterSelector = apiFieldSelector(
   headerSelector,
