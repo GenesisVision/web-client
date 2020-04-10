@@ -5,7 +5,6 @@ $hint-size: 15px;
 
 .notify-button {
   &__hint {
-    margin: $hint-size;
     border: 1px solid $main-color;
     border-radius: 100%;
     display: inline-flex;
