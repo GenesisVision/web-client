@@ -46,7 +46,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
               <TableCell>
                 {humanizeDate(formatDate(event.date))} {event.date && "ago"}
               </TableCell>
-              <TableCell>
+              <TableCell className="dashboard-statistic__event-description">
                 <Center>
                   {event.assetDetails && (
                     <RowItem>

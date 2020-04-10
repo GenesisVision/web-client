@@ -3,6 +3,9 @@
 @import "~shared/styles/_sizes";
 
 .dashboard-statistic {
+  &__event-description {
+    white-space: normal;
+  }
   &__container {
     display: flex;
     flex-direction: column;
