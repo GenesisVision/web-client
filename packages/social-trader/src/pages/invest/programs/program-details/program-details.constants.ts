@@ -36,6 +36,15 @@ export const generateProgramTradesColumns = (
       (hideTickets ? column.name !== "ticket" : true)
   );
 
+export const PROGRAM_TRADING_LOG_COLUMNS: SortingColumn[] = [
+  {
+    name: "date",
+    sortingName: "ByDate"
+  },
+  {
+    name: "message"
+  }
+];
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry",

@@ -31,6 +31,9 @@ const ProgramSubscriptions = dynamic(() =>
   import("./program-subscriptions/program-subscriptions")
 );
 const ProgramTrades = dynamic(() => import("./program-trades/program-trades"));
+const ProgramTradingLog = dynamic(() =>
+  import("./program-trading-log/program-trading-log")
+);
 
 const nullSelector = () => ({
   itemsData: { data: { total: 0 } }
@@ -42,6 +45,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   haveDelay = true,
   getHistoryCounts,
   tablesData: {
+    tradingLog,
     financialStatistic,
     openPositions,
     periodHistory,
@@ -61,6 +65,9 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
   const dispatch = useDispatch();
+  const tradingLogCount = useSelector(
+    tradingLog ? tradingLog.dataSelector : nullSelector
+  ).itemsData.data.total;
   const openPositionsCount = useSelector(openPositions.dataSelector).itemsData
     .data.total;
   const periodHistoryCount = useSelector(
@@ -109,7 +116,19 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={financialStatisticCount}
           visible={isAuthenticated && isOwnProgram && !!financialStatistic}
         />
+        <GVTab
+          value={TABS.TRADING_LOG}
+          label={t("program-details-page.history.tabs.trading-log")}
+          count={tradingLogCount}
+          visible={isAuthenticated && isOwnProgram && !!tradingLog}
+        />
       </DetailsBlockTabs>
+      {tab === TABS.TRADING_LOG && tradingLog && (
+        <ProgramTradingLog
+          getItems={tradingLog.getItems(programId)}
+          dataSelector={tradingLog.dataSelector}
+        />
+      )}
       {tab === TABS.TRADES && (
         <ProgramTrades
           itemSelector={trades.itemSelector!}
@@ -165,6 +184,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
 };
 
 enum TABS {
+  TRADING_LOG = "tradingLog",
   TRADES = "trades",
   OPEN_POSITIONS = "openPositions",
   SUBSCRIBERS = "subscribers",
@@ -196,6 +216,7 @@ export type TProgramTableReduxData = {
 };
 
 export type TProgramTablesData = {
+  tradingLog?: TProgramTableReduxData;
   trades: TProgramTableReduxData;
   openPositions: TProgramTableReduxData;
   subscriptions?: TProgramTableReduxData;

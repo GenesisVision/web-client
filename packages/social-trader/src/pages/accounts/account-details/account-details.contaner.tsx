@@ -10,7 +10,8 @@ import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
   getOpenPositions,
-  getTrades
+  getTrades,
+  getTradingLog
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ProgramDetailsHistorySection, {
@@ -27,7 +28,9 @@ import {
   openPositionsSelector,
   openPositionsTableSelector,
   tradesSelector,
-  tradesTableSelector
+  tradesTableSelector,
+  tradingLogSelector,
+  tradingLogTableSelector
 } from "./reducers/account-history.reducer";
 
 const InvestmentAccountControls = dynamic(() =>
@@ -37,6 +40,11 @@ const InvestmentAccountControls = dynamic(() =>
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
   const tablesData: TProgramTablesData = {
+    tradingLog: {
+      itemSelector: tradingLogSelector,
+      dataSelector: tradingLogTableSelector,
+      getItems: getTradingLog
+    },
     openPositions: {
       itemSelector: openPositionsSelector,
       dataSelector: openPositionsTableSelector,
@@ -86,7 +94,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}
         assetType={TRADE_ASSET_TYPE.ACCOUNT}
         haveDelay={false}
-        getHistoryCounts={getAccountHistoryCounts}
+        getHistoryCounts={getAccountHistoryCounts(true)}
         tablesData={tablesData}
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime

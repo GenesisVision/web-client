@@ -7,6 +7,7 @@ import { TStatisticPeriodAction } from "components/details/reducers/statistic-pe
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
   AccountBalanceChart,
+  SignalTradingEventItemsViewModel,
   TradesSignalViewModel,
   TradesViewModel
 } from "gv-api-web";
@@ -18,6 +19,7 @@ import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
 import {
   ACCOUNT_OPEN_POSITIONS,
   ACCOUNT_TRADES,
+  ACCOUNT_TRADING_LOG,
   FETCH_ACCOUNT_ABSOLUTE_PROFIT_CHART,
   FETCH_ACCOUNT_BALANCE_CHART,
   FETCH_ACCOUNT_DESCRIPTION,
@@ -90,6 +92,14 @@ export const fetchAccountDescriptionAction = (
 ): ApiAction<AccountDetailsDataType> => ({
   type: FETCH_ACCOUNT_DESCRIPTION,
   payload: api.accounts(token).getTradingAccountDetails(id)
+});
+
+export const fetchTradingLogAction = (
+  accountId: string,
+  filters: ComposeFiltersAllType
+): ActionType<Promise<SignalTradingEventItemsViewModel>> => ({
+  type: ACCOUNT_TRADING_LOG,
+  payload: api.signal().getSignalTradingLog({ ...filters, accountId })
 });
 
 export const fetchOpenPositionsAction = (

@@ -1,7 +1,11 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { TradesSignalViewModel, TradesViewModel } from "gv-api-web";
+import {
+  SignalTradingEventItemsViewModel,
+  TradesSignalViewModel,
+  TradesViewModel
+} from "gv-api-web";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
@@ -19,9 +23,13 @@ import {
   fetchAccountProfitChartAction,
   fetchOpenPositionsAction,
   fetchTradesAction,
+  fetchTradingLogAction,
   setAccountIdAction
 } from "../actions/account-details.actions";
-import { tradesTableSelector } from "../reducers/account-history.reducer";
+import {
+  tradesTableSelector,
+  tradingLogTableSelector
+} from "../reducers/account-history.reducer";
 
 export const fetchAccountSubscriptions = (
   id: string
@@ -49,6 +57,12 @@ export const dispatchAccountId = (id: string) => async (
   dispatch: MiddlewareDispatch
 ) => await dispatch(setAccountIdAction(id));
 
+export const getTradingLog = (id: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<Promise<SignalTradingEventItemsViewModel>> => {
+  return fetchTradingLogAction(id, filters);
+};
+
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesViewModel>> => {
@@ -61,10 +75,9 @@ export const getTrades = (id: string) => (
   return fetchTradesAction(id, filters);
 };
 
-export const getAccountHistoryCounts = (id: string) => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
+export const getAccountHistoryCounts = (hasTradingLog: boolean) => (
+  id: string
+) => (dispatch: Dispatch, getState: () => RootState) => {
   const commonFiltering = { take: 0 };
 
   const tradesFilters = composeRequestFiltersByTableState(
@@ -76,6 +89,17 @@ export const getAccountHistoryCounts = (id: string) => (
       ...commonFiltering
     })
   );
+  if (hasTradingLog) {
+    const tradingLogFilters = composeRequestFiltersByTableState(
+      tradingLogTableSelector(getState())
+    );
+    dispatch(
+      getTradingLog(id)({
+        ...tradingLogFilters,
+        ...commonFiltering
+      })
+    );
+  }
 };
 
 export const getProfitChart: TGetChartFunc = ({
