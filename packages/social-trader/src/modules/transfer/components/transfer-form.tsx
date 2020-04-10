@@ -4,6 +4,7 @@ import { DialogError } from "components/dialog/dialog-error";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -130,15 +131,17 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit={setValuesFromPropsAndSubmit}
     >
       <DialogTop title={title}>
-        <TransferSelectField
-          currency={selectedSourceItem.currency}
-          name={TRANSFER_FORM_FIELDS.sourceId}
-          value={formattedAvailableSourceItem}
-          label={t("transfer.from")}
-          onChange={onChangeSourceId}
-          items={sourceItems}
-          sourceType={sourceType}
-        />
+        <Row large>
+          <TransferSelectField
+            currency={selectedSourceItem.currency}
+            name={TRANSFER_FORM_FIELDS.sourceId}
+            value={formattedAvailableSourceItem}
+            label={t("transfer.from")}
+            onChange={onChangeSourceId}
+            items={sourceItems}
+            sourceType={sourceType}
+          />
+        </Row>
       </DialogTop>
       <DialogBottom>
         <TransferSelectField

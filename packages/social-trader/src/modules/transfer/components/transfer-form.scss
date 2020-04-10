@@ -12,6 +12,12 @@
 
   &-popup {
     max-width: $modal-width;
+    & .popover-content__block--dark {
+      // Temp. REMOVE!
+      & .gv-input__wrapper {
+        margin: 0;
+      }
+    }
     &__two-factor-input {
       margin-bottom: 20px;
     }
