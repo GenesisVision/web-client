@@ -7,8 +7,6 @@ export const SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
 
 export const DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 export const DATE_RANGE_MAX_FILTER_NAME = "dateTo";
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
 
 export type SERVER_DATE_NAME =
   | "from"
