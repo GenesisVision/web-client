@@ -24,6 +24,9 @@ const _StopOutLevel: React.FC<Props> = ({
     },
     validationSchema: object().shape({
       [FIELDS.stopOutLevel]: number()
+        .required(
+          t("create-program-page.settings.validation.stop-out-required")
+        )
         .min(10, t("create-program-page.settings.validation.stop-out-less-ten"))
         .max(
           stopOutLevel || 100,
