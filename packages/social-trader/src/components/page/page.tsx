@@ -38,7 +38,9 @@ const Page = ({
             <h1>{title}</h1>
           </div>
         )}
-        <Row onlyOffset>{children}</Row>
+        <Row onlyOffset large>
+          {children}
+        </Row>
       </PageSeoWrapper>
     </TitleContext.Provider>
   );
