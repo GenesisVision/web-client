@@ -1,10 +1,9 @@
-import AssetField, {
-  AssetFields
-} from "components/assets/asset-fields/asset-field";
+import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import SettingsBlock from "components/settings-block/settings-block";
@@ -81,7 +80,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         blockNumber={"01"}
       >
         <AssetFields>
-          <AssetField>
+          <RowItem>
             <GVHookFormField
               wide
               onChange={brokerNameChangeHandle}
@@ -97,8 +96,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
                 </option>
               ))}
             </GVHookFormField>
-          </AssetField>
-          <AssetField hide={!broker || broker.accountTypes.length < 2}>
+          </RowItem>
+          <RowItem hide={!broker || broker.accountTypes.length < 2}>
             <GVHookFormField
               wide
               name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
@@ -113,39 +112,37 @@ const _AttachAccountSettings: React.FC<Props> = ({
                 </option>
               ))}
             </GVHookFormField>
-          </AssetField>
+          </RowItem>
         </AssetFields>
       </SettingsBlock>
       <SettingsBlock
         label={t("attach-account-page.settings.api")}
         blockNumber={"02"}
       >
-        <AssetFields>
-          <AssetField wide>
-            <GVHookFormField
-              showCorrect
-              wide
-              className="attach-account-settings__api-field"
-              type="text"
-              name={ATTACH_ACCOUNT_FIELDS.key}
-              label={t("attach-account-page.settings.fields.api-key")}
-              autoComplete="off"
-              component={SimpleTextField}
-            />
-          </AssetField>
-          <AssetField wide>
-            <GVHookFormField
-              showCorrect
-              wide
-              className="attach-account-settings__api-field"
-              type="text"
-              name={ATTACH_ACCOUNT_FIELDS.secret}
-              label={t("attach-account-page.settings.fields.api-secret")}
-              autoComplete="off"
-              component={SimpleTextField}
-            />
-          </AssetField>
-        </AssetFields>
+        <Row wide>
+          <GVHookFormField
+            showCorrect
+            wide
+            className="attach-account-settings__api-field"
+            type="text"
+            name={ATTACH_ACCOUNT_FIELDS.key}
+            label={t("attach-account-page.settings.fields.api-key")}
+            autoComplete="off"
+            component={SimpleTextField}
+          />
+        </Row>
+        <Row wide>
+          <GVHookFormField
+            showCorrect
+            wide
+            className="attach-account-settings__api-field"
+            type="text"
+            name={ATTACH_ACCOUNT_FIELDS.secret}
+            label={t("attach-account-page.settings.fields.api-secret")}
+            autoComplete="off"
+            component={SimpleTextField}
+          />
+        </Row>
       </SettingsBlock>
       <Row large>
         <CreateAssetNavigation
