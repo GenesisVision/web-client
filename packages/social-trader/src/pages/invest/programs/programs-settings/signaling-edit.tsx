@@ -1,4 +1,5 @@
 import GVSwitch from "components/gv-selection/gv-switch";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SignalingEditFormContainer } from "modules/signaling-edit-form/signaling-edit-form.container";
 import React, { useCallback, useState } from "react";
@@ -18,25 +19,25 @@ const _SignalingEdit: React.FC<Props> = ({
   return (
     <SettingsBlock label={t("program-settings.signaling-program.title")}>
       <div>
-        <div className="program-settings__signaling-edit-form-title-block">
-          {!isSignalProgram && canMakeSignal && (
-            <GVSwitch
-              touched={false}
-              className="notification-setting__switch"
-              name={"isSignal"}
-              value={isSignal}
-              color="primary"
-              onChange={changeIsSignal}
-            />
-          )}
-        </div>
-        <SignalingEditFormContainer
-          id={id}
-          showFields={isSignal}
-          onApply={onApply}
-          successFee={signalSuccessFee}
-          volumeFee={signalVolumeFee}
-        />
+        {!isSignalProgram && canMakeSignal && (
+          <GVSwitch
+            touched={false}
+            className="notification-setting__switch"
+            name={"isSignal"}
+            value={isSignal}
+            color="primary"
+            onChange={changeIsSignal}
+          />
+        )}
+        <Row>
+          <SignalingEditFormContainer
+            id={id}
+            showFields={isSignal}
+            onApply={onApply}
+            successFee={signalSuccessFee}
+            volumeFee={signalVolumeFee}
+          />
+        </Row>
       </div>
     </SettingsBlock>
   );

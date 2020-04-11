@@ -44,54 +44,54 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
   return (
     <div>
       <Row wrap center={false}>
-        <RowItem className="program-settings__broker-info">
-          <div className="program-settings__broker">
-            <BrokerCard
-              logo={brokerFrom.logoUrl}
-              key={brokerFrom.name}
-              brokerName={brokerFrom.name}
-              cardState={BROKER_CARD_EXTRA_STATE.NONE}
-              tags={brokerFrom.tags}
-            />
-          </div>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.account-type")}
-          >
-            {
-              safeGetElemFromArray(
-                brokerFrom.accountTypes,
-                (account: BrokerAccountType) =>
-                  account.id === currentAccountTypeId
-              ).name
-            }
-          </StatisticItem>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.brokers-leverage")}
-          >
-            {leverage}
-          </StatisticItem>
+        <RowItem>
+          <BrokerCard
+            logo={brokerFrom.logoUrl}
+            key={brokerFrom.name}
+            brokerName={brokerFrom.name}
+            cardState={BROKER_CARD_EXTRA_STATE.NONE}
+            tags={brokerFrom.tags}
+          />
+          <Row onlyOffset>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.account-type")}
+            >
+              {
+                safeGetElemFromArray(
+                  brokerFrom.accountTypes,
+                  (account: BrokerAccountType) =>
+                    account.id === currentAccountTypeId
+                ).name
+              }
+            </StatisticItem>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.brokers-leverage")}
+            >
+              {leverage}
+            </StatisticItem>
+          </Row>
         </RowItem>
         <RowItem className="broker-card__next-arrow">&rarr;</RowItem>
-        <RowItem className="program-settings__broker-info">
-          <div className="program-settings__broker">
-            <BrokerCard
-              logo={brokerTo.logoUrl}
-              key={brokerTo.name}
-              brokerName={brokerTo.name}
-              cardState={BROKER_CARD_EXTRA_STATE.NONE}
-              tags={brokerTo.tags}
-            />
-          </div>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.account-type")}
-          >
-            {brokerTo.accountTypes[0].name}
-          </StatisticItem>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.brokers-leverage")}
-          >
-            {newLeverage}
-          </StatisticItem>
+        <RowItem>
+          <BrokerCard
+            logo={brokerTo.logoUrl}
+            key={brokerTo.name}
+            brokerName={brokerTo.name}
+            cardState={BROKER_CARD_EXTRA_STATE.NONE}
+            tags={brokerTo.tags}
+          />
+          <Row onlyOffset>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.account-type")}
+            >
+              {brokerTo.accountTypes[0].name}
+            </StatisticItem>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.brokers-leverage")}
+            >
+              {newLeverage}
+            </StatisticItem>
+          </Row>
         </RowItem>
       </Row>
       <HuobiWarning
