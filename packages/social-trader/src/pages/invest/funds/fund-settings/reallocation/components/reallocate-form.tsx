@@ -3,7 +3,7 @@ import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -82,23 +82,31 @@ const _ReallocateForm: React.FC<Props> = ({
       <Row>
         <FormTextField>{t("fund-settings.reallocation.text-2")}</FormTextField>
       </Row>
-      <Row>
-        <StatisticItem label={"Current"} condition={dirty && !equalWithCurrent}>
-          <CreateFundSettingsAssetsComponent
-            assets={savedCurrent || []}
-            remainder={0}
-            canChange={false}
+      {dirty && !equalWithCurrent && (
+        <Row wide>
+          <StatisticItemInner label={"Current"}>
+            <CreateFundSettingsAssetsComponent
+              assets={savedCurrent || []}
+              remainder={0}
+              canChange={false}
+            />
+          </StatisticItemInner>
+        </Row>
+      )}
+      <Row wide>
+        <StatisticItemInner label={dirty ? "New" : "Current"}>
+          <GVHookFormField
+            name={FIELDS.assets}
+            component={ReallocateFieldWrapper}
+            assets={platformAssets}
           />
-        </StatisticItem>
+        </StatisticItemInner>
       </Row>
-      <StatisticItem label={dirty ? "New" : "Current"}>
-        <GVHookFormField
-          name={FIELDS.assets}
-          component={ReallocateFieldWrapper}
-          assets={platformAssets}
-        />
-      </StatisticItem>
-      {errorMessage && <DialogError error={errorMessage} />}
+      {errorMessage && (
+        <Row>
+          <DialogError error={errorMessage} />
+        </Row>
+      )}
       <Row>
         <FormTextField>{t("fund-settings.reallocation.text-3")}</FormTextField>
       </Row>
@@ -130,9 +138,7 @@ export interface Props {
   availableReallocationPercents: number;
   fundAssets: FundAssetInfo[];
   platformAssets: PlatformAsset[];
-
   onSubmit(values: IReallocateFormValues): void;
-
   errorMessage?: string;
 }
 

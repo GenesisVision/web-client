@@ -52,7 +52,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           handleLeave={handleLeave}
         />
       </Row>
-      {touched && (
+      {error && (
         <Row>
           <FormError small error={error} />
         </Row>
