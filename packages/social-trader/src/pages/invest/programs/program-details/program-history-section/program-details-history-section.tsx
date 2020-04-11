@@ -121,7 +121,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           value={TABS.TRADING_LOG}
           label={t("program-details-page.history.tabs.trading-log")}
           count={tradingLogCount}
-          visible={isAuthenticated && isFollower && !!tradingLog}
+          visible={!!isAuthenticated && !!isFollower && !!tradingLog}
         />
       </DetailsBlockTabs>
       {tab === TABS.TRADING_LOG && tradingLog && (
