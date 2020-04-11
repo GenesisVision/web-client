@@ -14,7 +14,7 @@ $level-border: ($avatar-small-level-size - 24.5px)/2;
 
 .program-avatar {
   position: relative;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   &__container {
