@@ -1,8 +1,8 @@
-import "../reallocate.scss";
-
+import FormTextField from "components/assets/fields/form-text-field";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
@@ -23,6 +23,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import { PlatformAssetFull } from "utils/types";
 import { object } from "yup";
 
+import "../reallocate.scss";
 import ConfirmReallocate from "./confirm-reallocate";
 
 enum FIELDS {
@@ -74,20 +75,22 @@ const _ReallocateForm: React.FC<Props> = ({
   const [isOpenConfirm, setIsOpenConfirm, setIsCloseConfirm] = useIsOpen();
   return (
     <HookForm className="reallocate-container" resetOnSuccess form={form}>
-      <p className="asset-settings__text">
+      <FormTextField>
         {t("fund-settings.reallocation.text-1")}
         {availableReallocationPercents}%
-      </p>
-      <p className="asset-settings__text">
-        {t("fund-settings.reallocation.text-2")}
-      </p>
-      <StatisticItem label={"Current"} condition={dirty && !equalWithCurrent}>
-        <CreateFundSettingsAssetsComponent
-          assets={savedCurrent || []}
-          remainder={0}
-          canChange={false}
-        />
-      </StatisticItem>
+      </FormTextField>
+      <Row>
+        <FormTextField>{t("fund-settings.reallocation.text-2")}</FormTextField>
+      </Row>
+      <Row>
+        <StatisticItem label={"Current"} condition={dirty && !equalWithCurrent}>
+          <CreateFundSettingsAssetsComponent
+            assets={savedCurrent || []}
+            remainder={0}
+            canChange={false}
+          />
+        </StatisticItem>
+      </Row>
       <StatisticItem label={dirty ? "New" : "Current"}>
         <GVHookFormField
           name={FIELDS.assets}
@@ -96,17 +99,19 @@ const _ReallocateForm: React.FC<Props> = ({
         />
       </StatisticItem>
       {errorMessage && <DialogError error={errorMessage} />}
-      <p className="asset-settings__text">
-        {t("fund-settings.reallocation.text-3")}
-      </p>
-      <GVButton
-        isPending={isSubmitting}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-        onClick={setIsOpenConfirm}
-      >
-        {t("fund-settings.buttons.reallocation")}
-      </GVButton>
+      <Row>
+        <FormTextField>{t("fund-settings.reallocation.text-3")}</FormTextField>
+      </Row>
+      <Row large>
+        <GVButton
+          isPending={isSubmitting}
+          isSuccessful={isSuccessful}
+          disabled={disabled}
+          onClick={setIsOpenConfirm}
+        >
+          {t("fund-settings.buttons.reallocation")}
+        </GVButton>
+      </Row>
       <ConfirmReallocate
         assets={assets}
         open={isOpenConfirm}
@@ -125,7 +130,9 @@ export interface Props {
   availableReallocationPercents: number;
   fundAssets: FundAssetInfo[];
   platformAssets: PlatformAsset[];
+
   onSubmit(values: IReallocateFormValues): void;
+
   errorMessage?: string;
 }
 

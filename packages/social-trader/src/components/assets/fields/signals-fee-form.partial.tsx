@@ -1,5 +1,6 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   const [t] = useTranslation();
   return (
     <AssetRow>
-      <AssetField>
+      <RowItem>
         <AssetFormField
           wide
           name={volumeFeeFieldName}
@@ -35,8 +36,8 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-program-page.settings.hints.signal-volume-fee"
           )}
         />
-      </AssetField>
-      <AssetField>
+      </RowItem>
+      <RowItem>
         <AssetFormField
           wide
           name={successFeeFieldName}
@@ -51,7 +52,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-program-page.settings.hints.signal-success-fee"
           )}
         />
-      </AssetField>
+      </RowItem>
     </AssetRow>
   );
 };

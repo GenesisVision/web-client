@@ -99,19 +99,19 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         to={brokerTo.name}
         isSignalProgram={isSignalProgram}
       />
-      <FormTextField topPadding>
-        {t("program-settings.broker.text-cancel", {
-          brokerFrom: brokerFrom.name,
-          brokerTo: brokerTo.name
-        })}
-      </FormTextField>
-      <GVButton
-        color="primary"
-        className="invest-form__submit-button"
-        onClick={setCancelChangeBrokerOpen}
-      >
-        {t("program-settings.buttons.cancel-broker")}
-      </GVButton>
+      <Row>
+        <FormTextField>
+          {t("program-settings.broker.text-cancel", {
+            brokerFrom: brokerFrom.name,
+            brokerTo: brokerTo.name
+          })}
+        </FormTextField>
+      </Row>
+      <Row large>
+        <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
+          {t("program-settings.buttons.cancel-broker")}
+        </GVButton>
+      </Row>
       <ConfirmCancelChangeBroker
         errorMessage={errorMessage}
         open={isCancelChangeBrokerOpen}

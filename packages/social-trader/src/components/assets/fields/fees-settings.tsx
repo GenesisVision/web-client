@@ -1,11 +1,10 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import React from "react";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
-
-import AssetField from "../asset-fields/asset-field";
-import "./fields.scss";
 
 const _FeesSettings: React.FC<Props> = ({
   title,
@@ -20,9 +19,13 @@ const _FeesSettings: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {title && <div className="create-asset-settings__row-title">{title}</div>}
+      {title && (
+        <Row>
+          <h3>{title}</h3>
+        </Row>
+      )}
       <AssetRow>
-        <AssetField>
+        <RowItem>
           <AssetFormField
             wide
             name={firstFeeName}
@@ -33,8 +36,8 @@ const _FeesSettings: React.FC<Props> = ({
             hintTooltipContent={firstFeeDescription}
             hintContent={firstFeeUnderText}
           />
-        </AssetField>
-        <AssetField>
+        </RowItem>
+        <RowItem>
           <AssetFormField
             wide
             name={secondFeeName}
@@ -45,7 +48,7 @@ const _FeesSettings: React.FC<Props> = ({
             hintTooltipContent={secondFeeDescription}
             hintContent={secondFeeUnderText}
           />
-        </AssetField>
+        </RowItem>
       </AssetRow>
     </>
   );
