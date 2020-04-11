@@ -36,7 +36,7 @@ const _InputDepositAmount: React.FC<Props> = ({
     setFieldValue(name, minAmount, true);
   }, [name, setFieldValue, minAmount, walletCurrency]);
   return (
-    <AssetField className="deposit-amount-field">
+    <>
       <InputAmountField
         showCorrect
         wide
@@ -60,7 +60,7 @@ const _InputDepositAmount: React.FC<Props> = ({
           displayType="text"
         />
       )}
-    </AssetField>
+    </>
   );
 };
 

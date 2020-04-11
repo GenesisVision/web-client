@@ -99,21 +99,16 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <WalletSelect
-          name={WALLET_WITHDRAW_FIELDS.id}
-          label={t("wallet-withdraw.select-currency")}
-          wallets={wallets}
-          onChange={onChangeCurrency}
-        />
+        <Row large>
+          <WalletSelect
+            name={WALLET_WITHDRAW_FIELDS.id}
+            label={t("wallet-withdraw.select-currency")}
+            wallets={wallets}
+            onChange={onChangeCurrency}
+          />
+        </Row>
       </DialogTop>
       <DialogBottom>
-        <InputAmountField
-          name={WALLET_WITHDRAW_FIELDS.amount}
-          label={t("wallet-withdraw.amount")}
-          currency={currency}
-          isAllowed={isAllow}
-          setMax={setMaxAmount}
-        />
         <Row>
           <GVHookFormField
             wide
@@ -123,6 +118,13 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             autoComplete="off"
           />
         </Row>
+        <InputAmountField
+          name={WALLET_WITHDRAW_FIELDS.amount}
+          label={t("wallet-withdraw.amount")}
+          currency={currency}
+          isAllowed={isAllow}
+          setMax={setMaxAmount}
+        />
         {twoFactorEnabled && (
           <Row>
             <GVHookFormField
@@ -151,7 +153,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             />
           </DialogListItem>
         </DialogList>
-        <DialogError error={errorMessage} />
+        {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}

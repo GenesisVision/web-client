@@ -17,7 +17,6 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import "./deposit.scss";
 import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({

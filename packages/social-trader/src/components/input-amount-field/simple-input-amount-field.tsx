@@ -29,7 +29,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
     []
   );
   return (
-    <Row wide={wide}>
+    <Row large wide={wide}>
       <SimpleNumberField
         {...props}
         externalDirty={externalDirty}

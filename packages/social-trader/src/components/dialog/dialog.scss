@@ -24,7 +24,6 @@
   }
 
   &__info {
-    @include adaptive-margin(top, $padding-upper-medium);
     line-height: 1.64;
     text-align: center;
   }
@@ -91,8 +90,6 @@
   }
 
   &__buttons {
-    display: flex;
-    @include adaptive-margin(top, $padding-small);
     justify-content: space-between;
   }
 
@@ -115,31 +112,15 @@
 }
 
 .dialog-list {
-  list-style-type: none;
-  padding: 0;
-  &:not(:first-child) {
-    @include adaptive-margin(top, $padding-small);
-  }
+  width: 100%;
 
   &__item {
     @include font-size($font-size-paragraph);
     font-weight: 300;
-    margin-bottom: $padding-xsmall;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    letter-spacing: 0.5px;
-
-    &:last-child {
-      @include adaptive-margin(bottom, $padding-medium);
-    }
   }
 
   &__title {
     opacity: 0.5;
-  }
-
-  &__value {
-    opacity: 1;
   }
 }

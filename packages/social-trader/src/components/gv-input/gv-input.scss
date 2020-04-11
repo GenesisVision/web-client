@@ -141,7 +141,6 @@
     display: inline-flex;
     flex-direction: column;
     min-width: 0;
-    @include adaptive-margin(bottom, $padding-xsmall);
 
     &--wide {
       margin-left: 0;

@@ -1,13 +1,14 @@
-import "./asset-form-field.scss";
-
 import classNames from "classnames";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVProgramPeriod from "components/gv-program-period";
 import Hint from "components/hint/hint";
 import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { Row } from "components/row/row";
 import { TextInputValues } from "components/text-input-component/text-input-component";
 import * as React from "react";
+
+import "./asset-form-field.scss";
 
 export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({
@@ -42,32 +43,36 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
         disabled={disabled}
       />
       {caption && (
-        <MutedText small>
-          <div className="asset-form-field__caption">
-            <span>{caption}</span>
-            {trimmedLength > 0 && (
-              <div className="asset-form-field__caption-count">
-                {trimmedLength}
-                <GVProgramPeriod
-                  start={0}
-                  end={max}
-                  value={trimmedLength}
-                  variant="pie"
-                />
-              </div>
-            )}
-          </div>
-        </MutedText>
+        <Row>
+          <MutedText small>
+            <div className="asset-form-field__caption">
+              <span>{caption}</span>
+              {trimmedLength > 0 && (
+                <div className="asset-form-field__caption-count">
+                  {trimmedLength}
+                  <GVProgramPeriod
+                    start={0}
+                    end={max}
+                    value={trimmedLength}
+                    variant="pie"
+                  />
+                </div>
+              )}
+            </div>
+          </MutedText>
+        </Row>
       )}
       {hintContent && (
-        <MutedText small>
-          <Hint
-            content={hintContent}
-            className="asset-form-field__hint"
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={hintTooltipContent}
-          />
-        </MutedText>
+        <Row>
+          <MutedText small>
+            <Hint
+              content={hintContent}
+              className="asset-form-field__hint"
+              vertical={VERTICAL_POPOVER_POS.BOTTOM}
+              tooltipContent={hintTooltipContent}
+            />
+          </MutedText>
+        </Row>
       )}
     </div>
   );

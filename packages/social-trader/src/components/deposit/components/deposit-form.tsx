@@ -118,12 +118,11 @@ const _DepositForm: React.FC<Props> = ({
           isAllowed={isAllow(wallet.currency)}
           setMax={setMaxAmount}
         />
-        <ConvertCurrency
-          condition={currency !== wallet.currency}
-          amount={+amount}
-          rate={rate}
-          currency={currency}
-        />
+        {currency !== wallet.currency && (
+          <Row>
+            <ConvertCurrency amount={+amount} rate={rate} currency={currency} />
+          </Row>
+        )}
         {!ownAsset && (
           <InvestorFees
             asset={asset}
@@ -135,7 +134,7 @@ const _DepositForm: React.FC<Props> = ({
             walletCurrency={wallet.currency}
           />
         )}
-        <DialogError error={errorMessage} />
+        {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton
             isSuccessful={!errorMessage}

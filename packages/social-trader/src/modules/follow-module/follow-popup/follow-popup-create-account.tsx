@@ -98,15 +98,6 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
             onChange={onChangeCurrencyFrom}
           />
         </Row>
-        <Row>
-          <StatisticItem label={t("follow-program.create-account.available")}>
-            <NumberFormat
-              value={wallet.available}
-              suffix={` ${currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </Row>
         <InputAmountField
           wide
           isAllowed={allowPositiveValuesNumberFormat(
