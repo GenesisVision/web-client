@@ -19,6 +19,7 @@ const SettingsBlock: React.FC<Props> = ({
 }) => (
   <section
     className={classNames("asset-settings-block", {
+      "asset-settings-block--with-number": blockNumber,
       "asset-settings-block--hidden": hide
     })}
   >
