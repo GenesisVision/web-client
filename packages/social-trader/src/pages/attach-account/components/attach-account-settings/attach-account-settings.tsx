@@ -1,6 +1,6 @@
-import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import { Center } from "components/center/center";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import { RowItem } from "components/row-item/row-item";
@@ -79,7 +79,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         label={t("attach-account-page.settings.exchange")}
         blockNumber={"01"}
       >
-        <AssetFields>
+        <Center>
           <RowItem>
             <GVHookFormField
               wide
@@ -113,7 +113,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
               ))}
             </GVHookFormField>
           </RowItem>
-        </AssetFields>
+        </Center>
       </SettingsBlock>
       <SettingsBlock
         label={t("attach-account-page.settings.api")}
