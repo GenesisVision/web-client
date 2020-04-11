@@ -55,25 +55,23 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   const columnValues = composeSortingColumnValues();
 
   return (
-    <div className="table__sorting-filter">
-      <Center>
-        <SelectFilter
-          name={SORTING_FILTER_NAME}
-          label="Order By"
-          value={composeSortingColumnName()}
-          values={columnValues}
-          onChange={handleOnSelectChange}
-        />
-        <GVButton
-          variant="text"
-          color="secondary"
-          className="sorting-filter__btn"
-          onClick={handleOnDirectionChange(!isAsc())}
-        >
-          {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
-        </GVButton>
-      </Center>
-    </div>
+    <Center>
+      <SelectFilter
+        name={SORTING_FILTER_NAME}
+        label="Order By"
+        value={composeSortingColumnName()}
+        values={columnValues}
+        onChange={handleOnSelectChange}
+      />
+      <GVButton
+        variant="text"
+        color="secondary"
+        className="sorting-filter__btn"
+        onClick={handleOnDirectionChange(!isAsc())}
+      >
+        {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
+      </GVButton>
+    </Center>
   );
 };
 

@@ -58,14 +58,16 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
           <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
         </div>
       )}
-      {showSortingFilter && (
-        <SortingFilter
-          sorting={sorting}
-          columns={columns}
-          updateSorting={updateSorting}
-          renderValueText={renderSorting}
-        />
-      )}
+      <div className="table__sorting-filter">
+        {showSortingFilter && (
+          <SortingFilter
+            sorting={sorting}
+            columns={columns}
+            updateSorting={updateSorting}
+            renderValueText={renderSorting}
+          />
+        )}
+      </div>
       <RowItem>
         <Row wrap>
           <RowItem>
@@ -105,7 +107,9 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
 interface ITableToolbarInnerProps {
   view: LIST_VIEW;
   isViewSwitchEnabled: boolean;
+
   onChange(view: LIST_VIEW): any;
+
   exportButtonToolbar?: JSX.Element;
 }
 
