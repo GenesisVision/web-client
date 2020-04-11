@@ -1,5 +1,3 @@
-import "./attach-account-settings.scss";
-
 import AssetField, {
   AssetFields
 } from "components/assets/asset-fields/asset-field";
@@ -7,6 +5,7 @@ import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
+import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -19,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
+import "./attach-account-settings.scss";
 import {
   attachAccountSettingsMapPropsToValues,
   attachAccountSettingsValidationSchema
@@ -147,11 +147,13 @@ const _AttachAccountSettings: React.FC<Props> = ({
           </AssetField>
         </AssetFields>
       </SettingsBlock>
-      <CreateAssetNavigation
-        asset={"attach-external-account"}
-        isSuccessful={isSuccessful}
-        isSubmitting={isPending}
-      />
+      <Row large>
+        <CreateAssetNavigation
+          asset={"attach-external-account"}
+          isSuccessful={isSuccessful}
+          isSubmitting={isPending}
+        />
+      </Row>
     </HookForm>
   );
 };

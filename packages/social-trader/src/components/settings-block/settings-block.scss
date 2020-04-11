@@ -3,21 +3,8 @@
 @import "~shared/styles/_breakpoint";
 
 .asset-settings-block {
-  @include adaptive-margin(bottom, $padding-xsmall * 2);
   box-sizing: border-box;
-  display: flex;
 
-  &--with-number {
-    @include adaptive-margin(bottom, $padding-xsmall);
-  }
-
-  &--hidden {
-    display: none;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
   &__content-block {
     width: 100%;
   }

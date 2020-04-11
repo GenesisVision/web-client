@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import VerificationStatus, {
   IStatusProps
 } from "components/verification-status/verification-status";
@@ -17,11 +18,11 @@ const SettingsBlock: React.FC<Props> = ({
   checked,
   verificationStatus
 }) => (
-  <section
-    className={classNames("asset-settings-block", {
-      "asset-settings-block--with-number": blockNumber,
-      "asset-settings-block--hidden": hide
-    })}
+  <Row
+    xlarge={!blockNumber}
+    center={false}
+    hide={hide}
+    className="asset-settings-block"
   >
     <div className="asset-settings-block__line-block">
       {blockNumber && (
@@ -55,7 +56,7 @@ const SettingsBlock: React.FC<Props> = ({
       )}
       <div className="asset-settings-block__wrapper">{children}</div>
     </div>
-  </section>
+  </Row>
 );
 
 interface OwnProps extends IStatusProps {
@@ -65,6 +66,7 @@ interface OwnProps extends IStatusProps {
   blockNumber?: string;
   withBorder?: boolean;
 }
+
 interface Props extends OwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
 export default SettingsBlock;
