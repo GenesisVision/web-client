@@ -63,19 +63,6 @@
     }
   }
 
-  &__block-wrapper {
-    @include adaptive-margin(bottom, $padding-upper-medium);
-    width: 100%;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 765px;
-    }
-  }
-
   .svg-loader {
     max-width: 100%;
   }
