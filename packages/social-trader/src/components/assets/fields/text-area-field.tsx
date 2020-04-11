@@ -3,6 +3,7 @@ import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
 
 import AssetField from "../asset-fields/asset-field";
+import "./text-area-field.scss";
 
 const _TextAreaField: React.FC<Props> = ({ name, value, label, caption }) => {
   return (
