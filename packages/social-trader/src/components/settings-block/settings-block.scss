@@ -7,6 +7,7 @@
 
   &__content-block {
     width: 100%;
+    @include adaptive-padding(bottom, $padding-small);
   }
 
   &__line-block {
