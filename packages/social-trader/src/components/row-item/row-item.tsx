@@ -4,6 +4,7 @@ import React from "react";
 import "./row-item.scss";
 
 export const RowItem: React.FC<Props> = ({
+  hide,
   wide,
   onClick,
   middle = true,
@@ -18,6 +19,7 @@ export const RowItem: React.FC<Props> = ({
     <div
       onClick={onClick}
       className={classNames("row-item", className, {
+        "row-item--hide": hide,
         "row-item--wide": wide,
         "row-item--bottom-offset": bottomOffset,
         "row-item--xsmall": xsmall,
@@ -32,6 +34,7 @@ export const RowItem: React.FC<Props> = ({
 };
 
 interface Props {
+  hide?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   wide?: boolean;
   bottomOffset?: boolean;
