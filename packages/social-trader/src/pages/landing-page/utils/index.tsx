@@ -1,12 +1,9 @@
 import { useParams, useReferrer } from "hooks/location";
 import { NextPageContext } from "next";
-import {
-  REFERRAL_CODE,
-  REFERRER,
-  UTM_SOURCE
-} from "pages/auth/signup/signup.constants";
+import { REFERRER, UTM_SOURCE } from "pages/auth/signup/signup.constants";
 import React, { useEffect } from "react";
-import { getCookie, setCookie } from "utils/cookie";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
+import { getRef } from "utils/ref";
 
 export const getElementHeight = (ref: React.RefObject<HTMLDivElement>) => {
   return ref.current ? ref.current.getBoundingClientRect().height : 0;
@@ -17,17 +14,24 @@ export const useUtm = () => {
   const params = useParams();
   useEffect(() => {
     if (params) {
-      setCookie(UTM_SOURCE, params);
+      setUtm(params);
     }
   }, [params]);
   useEffect(() => {
     if (referer) {
-      setCookie(REFERRER, referer);
+      setReferrer(referer);
     }
   }, [referer]);
 };
 
-export const getUtm = (ctx?: NextPageContext) => getCookie(UTM_SOURCE, ctx);
-export const getReferrer = (ctx?: NextPageContext) => getCookie(REFERRER, ctx);
-export const getRefCode = (ctx?: NextPageContext) =>
-  getCookie(REFERRAL_CODE, ctx);
+export const { get: getUtm, set: setUtm } = cookieServiceCreator<string>({
+  key: UTM_SOURCE,
+  initialState: undefined
+});
+export const { get: getReferrer, set: setReferrer } = cookieServiceCreator<
+  string
+>({
+  key: REFERRER,
+  initialState: undefined
+});
+export const getRefCode = (ctx?: NextPageContext) => getRef(ctx);
