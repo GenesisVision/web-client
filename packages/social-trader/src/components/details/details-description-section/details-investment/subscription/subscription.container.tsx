@@ -1,22 +1,23 @@
-import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
-import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { fetchSubscriptions } from "components/details/details-description-section/details-investment/details-investment.service";
 import SubscriptionTable from "components/details/details-description-section/details-investment/subscription/subscription-table";
 import useApiRequest from "hooks/api-request.hook";
-import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useEffect } from "react";
 import { CurrencyEnum } from "utils/types";
 
-const _Subscription: React.FC<Props> = ({ id, assetCurrency }) => {
-  const [t] = useTranslation();
+const _SubscriptionContainer: React.FC<Props> = ({
+  id,
+  assetCurrency,
+  subscribedAccounts
+}) => {
   const { data, sendRequest } = useApiRequest({
-    request: fetchSubscriptions,
-    fetchOnMount: true,
-    fetchOnMountData: id
+    request: fetchSubscriptions
   });
   const updateInfo = useCallback(() => {
     sendRequest(id);
   }, [id]);
+  useEffect(() => {
+    sendRequest(id);
+  }, [id, subscribedAccounts]);
 
   return (
     <SubscriptionTable
@@ -30,9 +31,10 @@ const _Subscription: React.FC<Props> = ({ id, assetCurrency }) => {
 };
 
 interface Props {
+  subscribedAccounts?: number;
   id: string;
   assetCurrency: CurrencyEnum;
 }
 
-const SubscriptionContainer = React.memo(_Subscription);
+const SubscriptionContainer = React.memo(_SubscriptionContainer);
 export default SubscriptionContainer;
