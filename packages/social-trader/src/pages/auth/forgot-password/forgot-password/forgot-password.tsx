@@ -1,9 +1,9 @@
-import { Center } from "components/center/center";
-import { DialogError } from "components/dialog/dialog-error";
+import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -50,11 +50,15 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         autoFocus
         component={SimpleTextField}
       />
-      <DialogError error={errorMessage} />
-      <Center className="forgot-password__navigation">
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row large>
         <RowItem>
           <Link to={LOGIN_ROUTE}>
-            <GVButton variant="text" color="secondary">
+            <GVButton noPadding variant="text" color="secondary">
               <>
                 &larr;{" "}
                 {t("auth.password-restore.forgot-password.back-button-text")}
@@ -72,7 +76,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             {t("auth.password-restore.forgot-password.confirm-button-text")}
           </SubmitButton>
         </RowItem>
-      </Center>
+      </Row>
     </HookForm>
   );
 };

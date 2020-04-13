@@ -4,7 +4,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _EmailPending: React.FC<Props> = ({ onSubmit, t, email }) => (
   <div className="password-pending__resend">
-    <GVButton variant="text" onClick={() => onSubmit({ email })}>
+    <GVButton noPadding variant="text" onClick={() => onSubmit({ email })}>
       {t("auth.password-restore.email-pending.email-resend-button-text")}
     </GVButton>
   </div>
