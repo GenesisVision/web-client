@@ -1,3 +1,4 @@
+import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import {
   fetchFollowsAction,
@@ -7,10 +8,15 @@ import { getFiltersFromContext } from "modules/programs-table/services/programs-
 import FollowsPage from "pages/invest/follows/follows.page";
 import React from "react";
 import authService from "services/auth-service";
+import { getTableView } from "utils/table-view";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<any> = () => {
-  return <FollowsPage />;
+interface Props {
+  outerView?: LIST_VIEW;
+}
+
+const Page: NextPageWithRedux<Props> = ({ outerView }) => {
+  return <FollowsPage outerView={outerView} />;
 };
 
 Page.getInitialProps = async ctx => {
@@ -25,6 +31,9 @@ Page.getInitialProps = async ctx => {
       )
     ]);
   } catch (e) {}
+
+  const outerView = getTableView(ctx);
+  return { outerView };
 };
 
 export default withDefaultLayout(Page);

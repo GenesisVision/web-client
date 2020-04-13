@@ -1,10 +1,9 @@
-import "modules/programs-table/components/programs-table/programs.scss";
-
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowCard from "modules/follows-table/components/follow-card";
 import FollowTableRowShort from "modules/follows-table/components/follow-table-row-short";
+import "modules/programs-table/components/programs-table/programs.scss";
 import * as React from "react";
 import { useCallback } from "react";
 
@@ -19,6 +18,7 @@ interface IFollowsTableProps extends ITableProps {
 }
 
 const _FollowsTable: React.FC<IFollowsTableProps> = ({
+  outerView,
   renderMappings,
   disableTitle,
   columns,
@@ -36,6 +36,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
 }) => {
   return (
     <Table
+      outerView={outerView}
       asLinkPagination={asLinkPagination}
       loaderData={followListLoaderData}
       renderMappings={renderMappings}
