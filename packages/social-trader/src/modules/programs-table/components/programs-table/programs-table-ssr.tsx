@@ -8,6 +8,7 @@ import { SelectFilterType } from "components/table/components/filtering/select-f
 import TagFilter from "components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import { composePaging } from "components/table/helpers/paging.helpers";
+import { LIST_VIEW } from "components/table/table.constants";
 import useRouteFilters from "hooks/route-filters.hook";
 import { useTranslation } from "i18n";
 import {
@@ -37,7 +38,11 @@ import {
 
 const ITEMS_ON_PAGE = 12;
 
-const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
+const _ProgramsTableSSR: React.FC<Props> = ({
+  outerView,
+  title,
+  showSwitchView
+}) => {
   const programCurrencies = useSelector(programCurrenciesSelector);
   const currencies = useSelector(platformCurrenciesSelector);
   const programTags = useSelector(programTagsSelector);
@@ -105,6 +110,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
   if (!data) return null;
   return (
     <ProgramsTable
+      outerView={outerView}
       showSwitchView={showSwitchView}
       title={title}
       data={data.items}
@@ -123,6 +129,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({ title, showSwitchView }) => {
 };
 
 interface Props {
+  outerView?: LIST_VIEW;
   showSwitchView: boolean;
   title?: string;
 }

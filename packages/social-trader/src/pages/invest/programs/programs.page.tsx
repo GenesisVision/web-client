@@ -4,6 +4,7 @@ import FacetCardsContainer, {
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
+import { LIST_VIEW } from "components/table/table.constants";
 import { useTranslation } from "i18n";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
@@ -17,7 +18,11 @@ import {
 import { composeProgramFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
-const ProgramsPage: NextPage = () => {
+interface Props {
+  outerView?: LIST_VIEW;
+}
+
+const ProgramsPage: NextPage<Props> = ({ outerView }) => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
   const description = t("programs-page.description");
@@ -48,7 +53,7 @@ const ProgramsPage: NextPage = () => {
         composeFacetUrl={composeProgramFacetUrl}
       />
       <DefaultTableBlock>
-        <ProgramsTableSSR showSwitchView />
+        <ProgramsTableSSR outerView={outerView} showSwitchView />
       </DefaultTableBlock>
     </Page>
   );

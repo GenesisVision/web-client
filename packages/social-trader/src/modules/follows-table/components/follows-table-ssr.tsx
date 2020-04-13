@@ -5,6 +5,7 @@ import SelectFilter from "components/table/components/filtering/select-filter/se
 import TagFilter from "components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "components/table/components/filtering/tag-filter/tag-filter.constants";
 import { composePaging } from "components/table/helpers/paging.helpers";
+import { LIST_VIEW } from "components/table/table.constants";
 import useRouteFilters from "hooks/route-filters.hook";
 import { composeCurrencyMap } from "modules/programs-table/components/programs-table/program-table.helpers";
 import {
@@ -26,7 +27,7 @@ import { DEFAULT_FOLLOW_TABLE_FILTERS } from "./follows.constants";
 
 const ITEMS_ON_PAGE = 12;
 
-const _FollowsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
+const _FollowsTableSSR: React.FC<Props> = ({ outerView, showSwitchView }) => {
   const currencies = useSelector(platformCurrenciesSelector);
   const tags = useSelector(followTagsSelector);
   const data = useSelector(followsDataSelector);
@@ -78,6 +79,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
   if (!data) return null;
   return (
     <FollowsTable
+      outerView={outerView}
       showSwitchView={showSwitchView}
       data={data.items}
       sorting={sorting || SORTING_FILTER_VALUE}
@@ -94,6 +96,7 @@ const _FollowsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
 };
 
 interface Props {
+  outerView?: LIST_VIEW;
   showSwitchView: boolean;
   title: string;
 }

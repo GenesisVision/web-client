@@ -4,6 +4,7 @@ import FacetCardsContainer, {
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
+import { LIST_VIEW } from "components/table/table.constants";
 import { useTranslation } from "i18n";
 import FundsTableSSR from "modules/funds-table/components/funds-table/funds-table-ssr";
 import * as React from "react";
@@ -16,7 +17,11 @@ import {
 import { composeFundFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
-const FundsPage: React.FC = () => {
+interface Props {
+  outerView?: LIST_VIEW;
+}
+
+const FundsPage: React.FC<Props> = ({ outerView }) => {
   const { t } = useTranslation();
   const title = t("funds-page.title");
   const description = t("funds-page.description");
@@ -46,7 +51,11 @@ const FundsPage: React.FC = () => {
         fileRoute={FUNDS_FACET_FOLDER_ROUTE}
       />
       <DefaultTableBlock>
-        <FundsTableSSR title={t("funds-page.all-funds")} showSwitchView />
+        <FundsTableSSR
+          outerView={outerView}
+          title={t("funds-page.all-funds")}
+          showSwitchView
+        />
       </DefaultTableBlock>
     </Page>
   );

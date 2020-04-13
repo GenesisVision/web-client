@@ -5,6 +5,7 @@ import FundAssetFilter from "components/table/components/filtering/fund-asset-fi
 import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { composePaging } from "components/table/helpers/paging.helpers";
+import { LIST_VIEW } from "components/table/table.constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useRouteFilters from "hooks/route-filters.hook";
 import { useTranslation } from "i18n";
@@ -25,7 +26,7 @@ import {
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
 
-const _FundsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
+const _FundsTableSSR: React.FC<Props> = ({ outerView, showSwitchView }) => {
   const currency = useAccountCurrency();
   const currencies = useSelector(platformCurrenciesSelector);
   const data = useSelector(fundsDataSelector);
@@ -82,6 +83,7 @@ const _FundsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
   if (!data) return null;
   return (
     <FundsTable
+      outerView={outerView}
       withDispatch
       data={data.items}
       showSwitchView={showSwitchView}
@@ -99,6 +101,7 @@ const _FundsTableSSR: React.FC<Props> = ({ showSwitchView }) => {
 };
 
 interface Props {
+  outerView?: LIST_VIEW;
   showSwitchView: boolean;
   title: string;
 }

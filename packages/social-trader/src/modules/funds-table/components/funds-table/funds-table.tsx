@@ -1,5 +1,3 @@
-import "./funds-table.scss";
-
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { UpdateRowFuncType } from "components/table/components/table.types";
@@ -13,6 +11,7 @@ import FundTableSortingValue from "./fund-table-sorting";
 import { fundListLoaderDataWithCount } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
+import "./funds-table.scss";
 
 interface Props extends ITableProps {
   withDispatch?: boolean;
@@ -22,6 +21,7 @@ interface Props extends ITableProps {
 }
 
 const _FundsTable: React.FC<Props> = ({
+  outerView,
   withDispatch,
   updateRow,
   loaderCount,
@@ -39,6 +39,7 @@ const _FundsTable: React.FC<Props> = ({
   asLinkPagination
 }) => (
   <Table
+    outerView={outerView}
     loaderData={fundListLoaderDataWithCount(loaderCount)}
     filtering={filtering}
     updateFilter={updateFilter}
