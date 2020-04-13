@@ -1,4 +1,5 @@
 import { mockDate } from "components/details/details.loader-data";
+import { AssetDetails } from "gv-api-web";
 import { AccountSubscriptionsDataType } from "pages/accounts/account-details/services/account-details.types";
 import {
   getRandomInteger,
@@ -33,6 +34,19 @@ export const statisticDataLoaderData = {
   }
 };
 
+export const assetInfoLoaderData: AssetDetails = {
+  id: "",
+  logoUrl: "",
+  color: "",
+  title: "",
+  url: "",
+  assetType: "Follow",
+  programDetails: {
+    level: 0,
+    levelProgress: 0
+  }
+};
+
 export const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType => ({
   successFeePersonal: 0,
   volumeFeePersonal: 0,
@@ -41,21 +55,11 @@ export const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType
   isExternal: false,
   subscriptionDate: new Date(),
   subscriberInfo: {
+    asset: assetInfoLoaderData,
     tradingAccountId: getRandomWord(),
     tradingAccountLogin: getRandomWord()
   },
-  asset: {
-    id: "",
-    logoUrl: "",
-    color: "",
-    title: "",
-    url: "",
-    assetType: "Follow",
-    programDetails: {
-      level: 0,
-      levelProgress: 0
-    }
-  },
+  asset: assetInfoLoaderData,
   status: "",
   hasSignalAccount: false,
   hasActiveSubscription: false,
