@@ -1,3 +1,4 @@
+import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { Center } from "components/center/center";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
@@ -14,7 +15,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ACCOUNT_DETAILS_FOLDER_ROUTE } from "routes/accounts.routes";
-import { composeAccountDetailsUrl } from "utils/compose-url";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import {
+  composeAccountDetailsUrl,
+  composeFollowDetailsUrl
+} from "utils/compose-url";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
@@ -26,18 +31,36 @@ const _SubscriptionTableRow: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
+  const link = subscriptionInfo.subscriberInfo.asset
+    ? linkCreator(
+        composeFollowDetailsUrl(subscriptionInfo.asset.url),
+        FOLLOW_DETAILS_FOLDER_ROUTE
+      )
+    : linkCreator(
+        composeAccountDetailsUrl(
+          subscriptionInfo.subscriberInfo.tradingAccountId
+        ),
+        ACCOUNT_DETAILS_FOLDER_ROUTE
+      );
+  const name = subscriptionInfo.subscriberInfo.asset ? (
+    <AssetAvatarWithName
+      url={subscriptionInfo.subscriberInfo.asset.logoUrl}
+      alt={subscriptionInfo.subscriberInfo.asset.title}
+      color={subscriptionInfo.subscriberInfo.asset.color}
+      level={subscriptionInfo.subscriberInfo.asset.programDetails?.level}
+      levelProgress={
+        subscriptionInfo.subscriberInfo.asset.programDetails?.levelProgress
+      }
+      name={subscriptionInfo.subscriberInfo.asset.title}
+    />
+  ) : (
+    subscriptionInfo.subscriberInfo.tradingAccountLogin
+  );
   return (
     <TableRow>
       <TableCell>
-        <Link
-          to={linkCreator(
-            composeAccountDetailsUrl(
-              subscriptionInfo.subscriberInfo.tradingAccountId
-            ),
-            ACCOUNT_DETAILS_FOLDER_ROUTE
-          )}
-        >
-          {subscriptionInfo.subscriberInfo.tradingAccountLogin}
+        <Link white to={link}>
+          {name}
         </Link>
       </TableCell>
       <TableCell>
