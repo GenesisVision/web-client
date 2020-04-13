@@ -130,7 +130,11 @@ const _DetailsInvestment: React.FC<Props> = ({
         />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (
-        <SubscriptionContainer id={id} assetCurrency={currency} />
+        <SubscriptionContainer
+          subscribedAccounts={followPersonalDetails?.subscribedAccounts}
+          id={id}
+          assetCurrency={currency}
+        />
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
         <Investment
