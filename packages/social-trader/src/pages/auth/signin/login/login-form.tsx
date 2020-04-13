@@ -57,16 +57,20 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         />
       </Row>
 
-      <div className="login-form__forgot">
+      <Row large className="login-form__forgot">
         <Link to={FORGOT_PASSWORD_ROUTE}>
           <GVButton noPadding variant="text">
             {t("auth.login.forgot")}
           </GVButton>
         </Link>
-      </div>
-      <FormError error={errorMessage} />
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
 
-      <div className="login__submit-block">
+      <Row large>
         <SubmitButton
           checkValid={false}
           checkDirty={false}
@@ -78,7 +82,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         >
           {t("auth.login.confirm-button-text")}
         </SubmitButton>
-      </div>
+      </Row>
     </HookForm>
   );
 };
