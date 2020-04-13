@@ -5,9 +5,8 @@ export const SUBSCRIPTION_COLUMNS: SortingColumn[] = [
   { name: "profit" },
   { name: "status" },
   { name: "type" },
-  { name: "percent" },
-  { name: "percentage" },
-  { name: "fixed-volume" },
+  { name: "value" },
+  { name: "tolerance" },
   { name: "volume-fee" },
   { name: "success-fee" },
   {

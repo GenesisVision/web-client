@@ -64,32 +64,16 @@ const _SubscriptionTableRow: React.FC<Props> = ({
           <div className="tooltip__label">{subscriptionInfo.mode}</div>
         </Tooltip>
       </TableCell>
+      <TableCell>{subscriptionInfo.openTolerancePercent} %</TableCell>
       <TableCell>
-        {!!subscriptionInfo.percent && (
-          <NumberFormat
-            value={subscriptionInfo.percent}
-            suffix={` %`}
-            displayType="text"
-          />
+        {subscriptionInfo.percent && <>{subscriptionInfo.percent} %</>}
+        {subscriptionInfo.fixedVolume && (
+          <>
+            {subscriptionInfo.fixedVolume} {subscriptionInfo.fixedCurrency}
+          </>
         )}
-      </TableCell>
-      <TableCell>
-        {!!subscriptionInfo.openTolerancePercent && (
-          <NumberFormat
-            value={subscriptionInfo.openTolerancePercent}
-            suffix={` %`}
-            displayType="text"
-          />
-        )}
-      </TableCell>
-      <TableCell>
-        {!!subscriptionInfo.fixedVolume && (
-          <NumberFormat
-            value={subscriptionInfo.fixedVolume}
-            suffix={` ${subscriptionInfo.fixedCurrency}`}
-            displayType="text"
-          />
-        )}
+        {subscriptionInfo.percent === null &&
+          subscriptionInfo.fixedVolume === null && <> - </>}
       </TableCell>
       <TableCell>
         {subscriptionInfo.volumeFeePersonal !== undefined &&
