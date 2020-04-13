@@ -1,5 +1,3 @@
-import "./details-investment.scss";
-
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -30,10 +28,11 @@ import {
   haveActiveInvestment,
   InvestmentType
 } from "./details-investment.helpers";
+import "./details-investment.scss";
 
 const SubscriptionContainer = dynamic(() =>
   import(
-    "components/details/details-description-section/details-investment/subscription.container"
+    "components/details/details-description-section/details-investment/subscription/subscription.container"
   )
 );
 const Investment = dynamic(() =>
