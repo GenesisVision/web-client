@@ -880,6 +880,8 @@
     "current-investment": {
       "title": "Subscription details",
       "fields": {
+        "name": "Name",
+        "buttons": "",
         "volume-fee": "Volume fee",
         "success-fee": "Success fee",
         "fixed-volume": "Fixed volume",
