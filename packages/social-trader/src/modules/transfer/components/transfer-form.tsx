@@ -1,8 +1,8 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogError } from "components/dialog/dialog-error";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
@@ -162,12 +162,14 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         />
         {!!amount &&
           selectedDestinationItem.currency !== selectedSourceItem.currency && (
-            <span>{`≈ ${formatCurrencyValue(
-              +amount / rate,
-              selectedDestinationItem.currency
-            )} ${selectedDestinationItem.currency}`}</span>
+            <Row>
+              <span>{`≈ ${formatCurrencyValue(
+                +amount / rate,
+                selectedDestinationItem.currency
+              )} ${selectedDestinationItem.currency}`}</span>
+            </Row>
           )}
-        <DialogError error={errorMessage} />
+        {errorMessage && <FormError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
