@@ -27,8 +27,8 @@ const _Layout: React.FC<Props> = ({ description, title, children }) => {
         <meta property="og:url" content="https://genesis.vision" />
         {imageMeta("https://genesis.vision/platform.png")}
         <meta property="og:image:type" content="image/png" />
-        {titleMeta(t("landing-page.genesis-vision"))}
-        {descriptionMeta(description || t("landing-page.short-description"))}
+        {titleMeta(t("landing-page:genesis-vision"))}
+        {descriptionMeta(description || t("landing-page:short-description"))}
       </Head>
       <TitleContext.Provider value={title}>
         <LPHeader />

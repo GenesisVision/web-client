@@ -16,7 +16,7 @@ const _NewsItem: React.FC<PlatformNews> = ({ title, body, isHot, url }) => {
         <div className="news-list__item-title">
           {isHot && (
             <span className="news-list__item-tag">
-              {t("landing-page.tag-hot")}
+              {t("landing-page:tag-hot")}
             </span>
           )}
           {title}

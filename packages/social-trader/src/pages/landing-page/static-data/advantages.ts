@@ -10,18 +10,18 @@ export type TAdvantages = {
 
 export const advantagesItems: TAdvantages[] = [
   {
-    title: "landing-page.advantages.title-1",
-    text: "landing-page.advantages.text-1",
+    title: "landing-page:advantages.title-1",
+    text: "landing-page:advantages.text-1",
     image: ImgAccess
   },
   {
-    title: "landing-page.advantages.title-2",
-    text: "landing-page.advantages.text-2",
+    title: "landing-page:advantages.title-2",
+    text: "landing-page:advantages.text-2",
     image: ImgChoose
   },
   {
-    title: "landing-page.advantages.title-3",
-    text: "landing-page.advantages.text-3",
+    title: "landing-page:advantages.title-3",
+    text: "landing-page:advantages.text-3",
     image: ImgControl
   }
 ];
