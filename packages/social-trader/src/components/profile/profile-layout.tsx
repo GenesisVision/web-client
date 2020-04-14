@@ -1,9 +1,8 @@
-import "./profile-layout.scss";
-
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
 import Page from "components/page/page";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -57,7 +56,9 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
             />
           ))}
       </GVTabs>
-      <div className="profile-layout">{children}</div>
+      <Row onlyOffset large>
+        {children}
+      </Row>
     </Page>
   );
 };
