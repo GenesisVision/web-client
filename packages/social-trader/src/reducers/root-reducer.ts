@@ -5,15 +5,6 @@ import {
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
-import followsReducer, {
-  FollowsListState
-} from "modules/follows-table/reducers/follows-table.reducers";
-import fundsReducer, {
-  FundsTableState
-} from "modules/funds-table/reducers/funds-table.reducers";
-import programsReducer, {
-  ProgramsListState
-} from "modules/programs-table/reducers/programs-table.reducers";
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
@@ -45,9 +36,6 @@ export const sharedRootReducers = {
   followDetails: followDetailsReducer,
   programDetails: programDetailsReducer,
   platformData: platformReducer,
-  followsData: followsReducer,
-  programsData: programsReducer,
-  fundsData: fundsReducer,
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
@@ -63,9 +51,6 @@ export type RootState = Readonly<{
   programDetails: ProgramDetailsState;
   profileHeader: HeaderState;
   platformData: PlatformState;
-  followsData: FollowsListState;
-  programsData: ProgramsListState;
-  fundsData: FundsTableState;
   authData: AuthState;
   alertMessages: AlertMessagesState;
   wallet: WalletState;

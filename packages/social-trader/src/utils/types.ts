@@ -53,7 +53,9 @@ export interface MiddlewareDispatch {
   <A extends ApiAction = ApiAction>(apiAction: A): ApiActionResponse<
     UnpackApiAction<A>
   >;
+
   <A extends ActionType = ActionType>(action: A): A;
+
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
 

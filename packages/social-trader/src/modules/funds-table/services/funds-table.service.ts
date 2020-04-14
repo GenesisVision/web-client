@@ -14,6 +14,7 @@ import {
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
 import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { getAccountCurrency } from "utils/account-currency";
 import { NextPageWithReduxContext } from "utils/types";
 
@@ -34,10 +35,11 @@ export const fetchFundsChallengeWinner = (): Promise<Array<
 };
 
 export type FetchFundsType = (
-  filters: ComposeFiltersAllType
+  filters: ComposeFiltersAllType,
+  token?: Token
 ) => Promise<FundDetailsListItemItemsViewModel>;
-export const fetchFunds: FetchFundsType = filters => {
-  return api.funds().getFunds(filters);
+export const fetchFunds: FetchFundsType = (filters, token) => {
+  return api.funds(token).getFunds(filters);
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {

@@ -67,7 +67,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
       )}
       renderBodyRow={useCallback(
         (program: ProgramDetailsListItem) => (
-          <ProgramTableRowShort withDispatch program={program} />
+          <ProgramTableRowShort program={program} />
         ),
         []
       )}

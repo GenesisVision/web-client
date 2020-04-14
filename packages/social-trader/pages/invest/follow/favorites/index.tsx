@@ -1,27 +1,39 @@
+import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
-import { fetchFollowsAction } from "modules/follows-table/actions/follows-table.actions";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
+import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import FollowsPage from "pages/invest/follows/follows.page";
 import React from "react";
 import { compose } from "redux";
-import authService from "services/auth-service";
+import { getTableView } from "utils/table-view";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<void> = () => {
-  return <FollowsPage />;
+interface Props {
+  data: FollowDetailsListItemItemsViewModel;
+  outerView?: LIST_VIEW;
+}
+
+const Page: NextPageWithRedux<Props> = ({ data, outerView }) => {
+  return <FollowsPage data={data} outerView={outerView} />;
 };
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  await ctx.reduxStore.dispatch(
-    // @ts-ignore TODO why there is error
-    fetchFollowsAction({
-      ...filtering,
-      authorization: authService.getAuthArg(ctx),
-      isFavorite: true
-    })
-  );
+  const filters = {
+    ...filtering,
+    isFavorite: true
+  };
+  let data;
+  try {
+    data = await fetchFollows(filters, ctx.token);
+  } catch (e) {
+    data = { items: [], total: 0 };
+    console.error(e);
+  }
+  const outerView = getTableView(ctx);
+  return { outerView, data };
 };
 
 export default compose(withPrivateRoute, withDefaultLayout)(Page);

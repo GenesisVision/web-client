@@ -66,7 +66,7 @@ const _FollowsTable: React.FC<IFollowsTableProps> = ({
       )}
       renderBodyRow={useCallback(
         (follow: FollowDetailsListItem) => (
-          <FollowTableRowShort withDispatch follow={follow} />
+          <FollowTableRowShort follow={follow} />
         ),
         []
       )}

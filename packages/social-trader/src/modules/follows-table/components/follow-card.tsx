@@ -16,6 +16,8 @@ import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/invest/follows/follow-details/follow-button";
 import * as React from "react";
+import { useState } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
@@ -28,6 +30,7 @@ const _FollowCard: React.FC<Props> = ({
   withFollowButton,
   onApply
 }) => {
+  const [followState, setFollowState] = useState(follow);
   const {
     tags,
     tradesCount,
@@ -41,6 +44,9 @@ const _FollowCard: React.FC<Props> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
+  const handleUpdateRow = useCallback(follow => {
+    setFollowState(follow);
+  }, []);
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
@@ -48,10 +54,11 @@ const _FollowCard: React.FC<Props> = ({
       </TableCardActionsItem>
       {follow.personalDetails && (
         <TableCardFavoriteActionItem
-          withDispatch
+          updateRow={handleUpdateRow}
+          asset={followState}
           assetType={ASSET.FOLLOW}
           id={follow.id}
-          isFavorite={follow.personalDetails.isFavorite}
+          isFavorite={followState.personalDetails.isFavorite}
         />
       )}
     </TableCardActions>

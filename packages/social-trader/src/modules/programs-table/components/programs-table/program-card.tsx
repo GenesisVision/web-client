@@ -16,6 +16,7 @@ import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
@@ -31,6 +32,7 @@ const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
 const _ProgramCard: React.FC<Props> = ({ program }) => {
+  const [programState, setProgramState] = useState(program);
   const { t } = useTranslation();
   const { linkCreator, contextTitle } = useToLink();
   const linkProps = linkCreator(
@@ -39,6 +41,10 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
   );
   const requestCurrency = program.balance.currency;
 
+  const handleUpdateRow = useCallback(program => {
+    setProgramState(program);
+  }, []);
+
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
@@ -46,10 +52,11 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
-          withDispatch
+          updateRow={handleUpdateRow}
+          asset={programState}
           assetType={ASSET.PROGRAM}
           id={program.id}
-          isFavorite={program.personalDetails.isFavorite}
+          isFavorite={programState.personalDetails.isFavorite}
         />
       )}
     </TableCardActions>
