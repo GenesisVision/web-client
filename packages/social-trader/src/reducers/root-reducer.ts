@@ -1,7 +1,3 @@
-import {
-  globalSearchReducer,
-  GlobalSearchState
-} from "components/global-search/reducers/global-search.reducer";
 import alertMessagesReducer, {
   AlertMessagesState
 } from "modules/alert-message/reducers/alert-message-reducers";
@@ -29,7 +25,6 @@ import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
 
 export const sharedRootReducers = {
-  globalSearch: globalSearchReducer,
   dashboard: dashboardReducer,
   accountDetails: accountDetailsReducer,
   fundDetails: fundDetailsReducer,
@@ -43,7 +38,6 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
-  globalSearch: GlobalSearchState;
   dashboard: DashboardState;
   accountDetails: AccountDetailsState;
   fundDetails: FundDetailsState;
