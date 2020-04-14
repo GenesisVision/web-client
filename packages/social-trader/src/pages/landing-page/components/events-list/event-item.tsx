@@ -134,7 +134,7 @@ const _EventItem: React.FC<Props> = ({
       ref={itemRef}
     >
       <Link
-        title={t("landing-page.links.title", { title, page: "details" })}
+        title={t("landing-page:links.title", { title, page: "details" })}
         className="events-list__item-link"
         to={linkAsset}
       >
@@ -151,7 +151,7 @@ const _EventItem: React.FC<Props> = ({
       </Link>
       <div className="events-list__item-info">
         <Link
-          title={t("landing-page.links.title", {
+          title={t("landing-page:links.title", {
             title: userUrl,
             page: "user"
           })}

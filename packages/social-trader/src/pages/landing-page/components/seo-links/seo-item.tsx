@@ -12,20 +12,21 @@ interface ISeoItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
 
 const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => {
   const { t } = useTranslation();
+  const title = t(name);
   return (
     <li className="seo-list__item">
       {href.includes("http") ? (
-        <a title={name} href={href} className="seo-list__link">
-          {t(name)}
+        <a title={title} href={href} className="seo-list__link">
+          {title}
         </a>
       ) : (
         <Link
-          title={t(name)}
+          title={title}
           onClick={onClick}
           to={{ pathname: href as string, state }}
           className="seo-list__link"
         >
-          {t(name)}
+          {title}
         </Link>
       )}
     </li>
