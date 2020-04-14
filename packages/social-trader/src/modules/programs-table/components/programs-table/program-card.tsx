@@ -1,6 +1,6 @@
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import StatisticItem from "components/statistic-item/statistic-item";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -80,7 +80,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.equity")}>
+          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 program.balance.amount,
@@ -90,8 +90,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               suffix={` ${requestCurrency}`}
               displayType="text"
             />
-          </StatisticItem>
-          <StatisticItem
+          </StatisticItemInner>
+          <StatisticItemInner
             label={t("programs-page.programs-header.available-to-invest")}
           >
             <NumberFormat
@@ -103,34 +103,38 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               displayType="text"
               suffix={` ${requestCurrency}`}
             />
-          </StatisticItem>
+          </StatisticItemInner>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.investors")}>
+          <StatisticItemInner
+            label={t("programs-page.programs-header.investors")}
+          >
             <NumberFormat
               value={program.investorsCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
+          </StatisticItemInner>
+          <StatisticItemInner label={t("programs-page.programs-header.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
             />
-          </StatisticItem>
+          </StatisticItemInner>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.age")}>
+          <StatisticItemInner label={t("programs-page.programs-header.age")}>
             {convertDateToShortFormat(distanceDate(program.creationDate))}
-          </StatisticItem>
-          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+          </StatisticItemInner>
+          <StatisticItemInner
+            label={t("programs-page.programs-header.drawdown")}
+          >
             <NumberFormat
               value={formatValue(program.statistic.drawdown, 2)}
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </StatisticItemInner>
         </TableCardTableColumn>
       </TableCardTable>
     </TableCard>
