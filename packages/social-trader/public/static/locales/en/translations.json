@@ -1349,9 +1349,10 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
+      "personal-details": "Personal details",
       "referral-program": "Referral program",
       "security": "Security",
-      "profile": "Personal details",
+      "profile": "Profile details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
