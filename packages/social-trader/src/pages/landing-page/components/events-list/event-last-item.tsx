@@ -28,10 +28,10 @@ const _EventLastItem: React.FC<Props> = ({ minHeight }) => {
         <JoinButton href={INVEST_ROUTE}>
           <>
             <span className="events-list__only-mob">
-              {t("landing-page.buttons.join")}
+              {t("landing-page:buttons.join")}
             </span>
             <span className="events-list__only-desktop">
-              {t("landing-page.buttons.discover")}
+              {t("landing-page:buttons.discover")}
             </span>
           </>
         </JoinButton>

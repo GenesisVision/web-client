@@ -45,7 +45,7 @@ const _BrokerInfo: React.FC<Props> = ({
         <p className="broker-info__description">{t(description)}</p>
       )}
       <JoinButton eventLabel={"Start trading"} href={linkCreator(tradingLink)}>
-        {t("landing-page.buttons.start-trading")}
+        {t("landing-page:buttons.start-trading")}
       </JoinButton>
       <ul className="broker-info__list-advantages">
         {listItems.map((item, index) => (

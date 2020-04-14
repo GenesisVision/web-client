@@ -38,8 +38,8 @@ const _LandingPage: React.FC<Props> = ({
   useUtm();
   return (
     <Layout
-      description={t("landing-page.description")}
-      title={t("landing-page.title")}
+      description={t("landing-page:description")}
+      title={t("landing-page:title")}
     >
       <main className="home">
         <FirstScreen news={news} />
@@ -75,7 +75,7 @@ const _LandingPage: React.FC<Props> = ({
             <BrokersContainer
               brokersInfo={brokersInfo}
               brokersTabs={brokersTabs}
-              title={t("landing-page.brokers.title")}
+              title={t("landing-page:brokers.title")}
             />
           </div>
         </section>

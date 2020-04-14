@@ -1,5 +1,3 @@
-import "./first-slider.scss";
-
 import { useTranslation } from "i18n";
 import {
   SliderControls,
@@ -16,6 +14,8 @@ import { JoinButton } from "pages/landing-page/components/join-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
+
+import "./first-slider.scss";
 
 interface Props {
   className?: string;
@@ -93,7 +93,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
               <JoinButton href={item.link}>
-                {t("landing-page.buttons.join")}
+                {t("landing-page:buttons.join")}
               </JoinButton>
             </animated.div>
           ))}
