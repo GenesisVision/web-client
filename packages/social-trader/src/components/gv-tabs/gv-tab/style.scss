@@ -3,7 +3,7 @@
 @import "~shared/styles/_constants";
 
 .gv-tab {
-  @extend .muted;
+  @include muted();
   cursor: pointer;
   font-weight: 600;
   font-style: normal;
@@ -35,7 +35,7 @@
   }
 
   a {
-    @extend .muted;
+    @include muted();
     @include transition(color);
     text-decoration: none;
     &:hover {
