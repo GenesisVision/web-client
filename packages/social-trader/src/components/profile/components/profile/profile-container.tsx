@@ -1,14 +1,14 @@
+import { fetchProfile } from "components/profile/services/profile.service";
 import { ProfileFullViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
-import { api } from "services/api-client/swagger-custom-client";
 
 import Profile from "./profile";
 
 const _ProfileContainer: React.FC = () => {
   const { sendRequest, data, isPending } = useApiRequest<ProfileFullViewModel>({
     fetchOnMount: true,
-    request: () => api.profile().getProfileFull()
+    request: fetchProfile
   });
   const onUpdate = useCallback(async () => await sendRequest(), []);
   return (
