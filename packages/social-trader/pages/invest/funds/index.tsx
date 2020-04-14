@@ -24,7 +24,6 @@ Page.getInitialProps = async ctx => {
   } catch (e) {}
 
   const outerView = getTableView(ctx);
-  console.log("getInitialProps", outerView);
   return { outerView };
 };
 
