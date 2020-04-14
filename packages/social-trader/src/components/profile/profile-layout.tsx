@@ -10,6 +10,8 @@ import { kycConfirmedSelector } from "reducers/header-reducer";
 
 import {
   KYC_ROUTE,
+  PERSONAL_DETAILS,
+  PERSONAL_DETAILS_ROUTE,
   PROFILE,
   PROFILE_ROUTE,
   REFERRAL_PROGRAM,
@@ -25,6 +27,7 @@ import {
 
 const tabs = [
   { pathname: PROFILE_ROUTE, value: PROFILE },
+  { pathname: PERSONAL_DETAILS_ROUTE, value: PERSONAL_DETAILS },
   { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
   { pathname: SETTINGS_ROUTE, value: SETTINGS },
   { pathname: SECURITY_ROUTE, value: SECURITY },
