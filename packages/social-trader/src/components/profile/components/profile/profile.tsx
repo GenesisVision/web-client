@@ -1,5 +1,3 @@
-import "./profile.scss";
-
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -12,6 +10,8 @@ import { ProfileFullViewModel } from "gv-api-web";
 import PublicInfo from "modules/public-info/public-info";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+
+import "./profile.scss";
 
 const _Profile: React.FC<IProfileOwnProps> = ({
   info,
