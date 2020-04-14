@@ -33,6 +33,7 @@ h4 {
 }
 
 h5 {
+  margin: 0;
   @include font-size($font-size-common);
 }
 
