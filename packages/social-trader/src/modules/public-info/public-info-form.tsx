@@ -1,5 +1,3 @@
-import "./public-info.scss";
-
 import AboutField from "components/assets/fields/about-field";
 import UserNameField from "components/assets/fields/user-name-field";
 import FormError from "components/form/form-error/form-error";
@@ -11,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { assetTitleShape } from "utils/validators/validators";
 import { object } from "yup";
+
+import "./public-info.scss";
 
 enum FIELDS {
   userName = "userName",
@@ -42,11 +42,9 @@ const _PublicInfoForm: React.FC<Props> = ({
       <UserNameField name={FIELDS.userName} />
       <AboutField description={about} name={FIELDS.about} />
       <FormError error={errorMessage} />
-      <div className="profile__row">
-        <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
-          {t("buttons.save")}
-        </SubmitButton>
-      </div>
+      <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
+        {t("buttons.save")}
+      </SubmitButton>
     </HookForm>
   );
 };
