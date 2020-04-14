@@ -1,6 +1,7 @@
 import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import PublicSelect from "components/profile/components/personal-details/public-select/public-select";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import SettingsBlock from "components/settings-block/settings-block";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -8,10 +9,17 @@ import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import {
+  betaTesterSelector,
+  isSocialBetaTester
+} from "reducers/header-reducer";
 
 const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
+  const betaTester = useSelector(betaTesterSelector);
+  const isBetaTester = isSocialBetaTester(betaTester);
   return (
     <>
       <SettingsBlock label={t("profile-page.contacts")} checked={true}>
@@ -34,6 +42,11 @@ const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
           </Link>
         )}
       </SettingsBlock>
+      {isBetaTester && (
+        <SettingsBlock>
+          <PublicSelect />
+        </SettingsBlock>
+      )}
     </>
   );
 };
