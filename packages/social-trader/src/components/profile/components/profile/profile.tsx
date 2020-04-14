@@ -11,8 +11,6 @@ import PublicInfo from "modules/public-info/public-info";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import "./profile.scss";
-
 const _Profile: React.FC<IProfileOwnProps> = ({
   info,
   onUpdate,
