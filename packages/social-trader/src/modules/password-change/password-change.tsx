@@ -1,5 +1,3 @@
-import "./password-change.scss";
-
 import GVButton from "components/gv-button";
 import { ChangePasswordViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
