@@ -1,5 +1,6 @@
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
 import TileFilterItem from "components/table/components/filtering/tile-filter-item";
 import TagBubble from "components/tags/tag-item/tag-bubble";
@@ -21,7 +22,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
   onChange
 }) => {
   return (
-    <Center className="chart-currency-selector__container">
+    <Row className="chart-currency-selector__container">
       {chartCurrencies.map(({ name, color }, i) => (
         <TileFilterItem
           removable={i > 0}
@@ -61,7 +62,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
       {chartCurrencies.length < maxCharts && (
         <AddCurrencyButton onAdd={onAdd} currencies={selectCurrencies} />
       )}
-    </Center>
+    </Row>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   ProfitChartDataType,
   StatisticDataType
 } from "components/details/details-statistic-section/details.chart.types";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ChartCurrencySelector, {
@@ -44,7 +45,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   const { statistic, charts } = chartData.chart;
   return (
     <>
-      <div className="details-chart__value">
+      <Row>
         <StatisticItem big accent label={t("details-page.chart.percent")}>
           <NumberFormat
             value={formatCurrencyValue(statistic.profitPercent, name)}
@@ -53,7 +54,7 @@ const _ProfitChartElements: React.FC<Props> = ({
             suffix={` %`}
           />
         </StatisticItem>
-      </div>
+      </Row>
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         fullSelectCurrencies={platformCurrencies.map(
