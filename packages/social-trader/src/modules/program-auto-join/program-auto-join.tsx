@@ -1,11 +1,10 @@
-import classNames from "classnames";
+import { Center } from "components/center/center";
 import GVSwitch from "components/gv-selection/gv-switch";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import "./program-auto-join.scss";
 import { toggleAutoJoin } from "./program-auto-join.service";
 
 const ProgramAutoJoinTooltip = () => {
@@ -38,12 +37,7 @@ const _ProgramAutoJoin: React.FC<Props> = ({
     [id, isAutoJoin]
   );
   return (
-    <span
-      className={classNames("auto-join-widget", {
-        "auto-join-widget--active": isAutoJoin
-      })}
-      onClick={onLabelClick}
-    >
+    <Center onClick={onLabelClick}>
       <GVSwitch
         name="auto-join"
         touched={false}
@@ -54,12 +48,12 @@ const _ProgramAutoJoin: React.FC<Props> = ({
           <TooltipLabel
             tooltipContent={<ProgramAutoJoinTooltip />}
             labelText={t("program-details-page.description.auto-join")}
-            className="auto-join-widget__label tooltip__label--cursor-pointer"
+            className="tooltip__label--cursor-pointer"
           />
         }
         disabled={isPending}
       />
-    </span>
+    </Center>
   );
 };
 
