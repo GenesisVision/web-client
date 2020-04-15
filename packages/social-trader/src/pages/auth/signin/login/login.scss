@@ -4,19 +4,6 @@
 @import "~shared/styles/_sizes";
 
 .login {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 70%;
-
-  &-form {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 70%;
-  }
-  &__submit-button {
-    align-self: flex-start;
-    margin-top: auto;
-  }
   &__top-counter {
     height: 3px;
     background: $primary-color;
