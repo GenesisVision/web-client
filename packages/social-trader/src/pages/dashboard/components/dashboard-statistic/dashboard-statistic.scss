@@ -39,11 +39,6 @@
     justify-content: space-between;
   }
 }
-.dashboard-statistic-periods-item {
-  &__value {
-    padding-right: $padding-xxsmall;
-  }
-}
 
 .dashboard-new-user-block {
   display: flex;
@@ -63,10 +58,6 @@
     font-weight: 500;
     width: 150px;
     color: $text-light-color;
-    margin-bottom: $padding-xsmall;
-    &--muted {
-      color: $text-dark-color;
-    }
   }
   &__button {
     margin-bottom: $padding-xxxxlarge;
