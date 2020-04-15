@@ -1,5 +1,3 @@
-import "./currency-select.scss";
-
 import classNames from "classnames";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import withLoader from "decorators/with-loader";
