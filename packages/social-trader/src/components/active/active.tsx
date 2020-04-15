@@ -4,6 +4,7 @@ import TradingViewWidget, {
 } from "components/trading-view/trading-view";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetInfo } from "gv-api-web";
+import { useNetworkStatusInWindow } from "hooks/network-status";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,11 +15,13 @@ import "./active.scss";
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
 }) => {
+  const { effectiveConnectionType } = useNetworkStatusInWindow();
   const [isServer, setIsServer] = useState(true);
   const [t] = useTranslation();
   useEffect(() => {
     setIsServer(false);
   }, []);
+  const isGoodNetwork = effectiveConnectionType === "4g";
   return (
     <div>
       <div className="active__block">
@@ -30,7 +33,7 @@ const _Active: React.FC<Props> = ({
       <div className="active__block">
         <h2 className="active__title">{t("active.chart")}</h2>
         <div className="active__chart-container">
-          {!isServer && (
+          {!isServer && isGoodNetwork && (
             <TradingViewWidget
               symbol={chartSymbol}
               autosize
