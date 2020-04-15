@@ -65,7 +65,7 @@ const _SignUpForm: React.FC<Props> = ({
   const requestStatus = useContext(CaptchaStatusContext);
 
   return (
-    <HookForm className="signup-form" form={form} onSubmit={onSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <Row onlyOffset>
         <GVHookFormField
           wide

@@ -1,5 +1,3 @@
-import "./signup.scss";
-
 import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import { useEmailPendingState } from "pages/auth/auth.service";
