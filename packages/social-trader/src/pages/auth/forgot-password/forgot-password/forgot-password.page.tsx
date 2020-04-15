@@ -1,11 +1,11 @@
 import { Push } from "components/link/link";
+import { MutedText } from "components/muted-text/muted-text";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import { Row } from "components/row/row";
 import { ForgotPasswordViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { useEmailPendingState } from "pages/auth/auth.service";
 import { EMAIL_PENDING_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
-import "pages/auth/forgot-password/forgot-password/forgot-password.scss";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -28,19 +28,19 @@ const ForgotPasswordPage: React.FC = () => {
 
   return (
     <PageSeoWrapper title={t("auth.password-restore.title")}>
-      <div className="forgot-password">
-        <p className="forgot-password__text">
+      <Row>
+        <MutedText noWrap={false}>
           {t("auth.password-restore.forgot-password.text")}
-        </p>
-        <Row large>
-          <CaptchaContainer
-            request={request}
-            renderForm={handle => (
-              <ForgotPassword errorMessage={errorMessage} onSubmit={handle} />
-            )}
-          />
-        </Row>
-      </div>
+        </MutedText>
+      </Row>
+      <Row large>
+        <CaptchaContainer
+          request={request}
+          renderForm={handle => (
+            <ForgotPassword errorMessage={errorMessage} onSubmit={handle} />
+          )}
+        />
+      </Row>
     </PageSeoWrapper>
   );
 };

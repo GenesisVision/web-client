@@ -42,6 +42,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <GVHookFormField
+        wide
         type="email"
         name={FORGOT_PASSWORD_FORM_FIELDS.email}
         label={t("auth.password-restore.forgot-password.email-field-text")}
