@@ -1,6 +1,7 @@
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
+import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -27,115 +28,121 @@ const _Subscription: React.FC<Props> = ({
       <DetailsInvestmentHeading>
         {t("follow-details-page.current-investment.title")}
       </DetailsInvestmentHeading>
-      <StatisticItemList>
-        <StatisticItem
-          accent
-          label={t("follow-details-page.current-investment.fields.profit")}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(
-              subscriptionInfo.totalProfit,
-              assetCurrency
-            )}
-            suffix={` ${assetCurrency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          accent
-          label={t("follow-details-page.current-investment.fields.status")}
-        >
-          {subscriptionInfo.status}
-        </StatisticItem>
-        <StatisticItem
-          accent
-          label={t("follow-details-page.current-investment.fields.type")}
-        >
-          <Tooltip
-            render={() => (
-              <TooltipContent>
-                {t(
-                  `follow-program.modes.${subscriptionInfo.mode.toLowerCase()}.tooltip`
+      <Row>
+        <StatisticItemList>
+          <StatisticItem
+            accent
+            label={t("follow-details-page.current-investment.fields.profit")}
+          >
+            <NumberFormat
+              value={formatCurrencyValue(
+                subscriptionInfo.totalProfit,
+                assetCurrency
+              )}
+              suffix={` ${assetCurrency}`}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            accent
+            label={t("follow-details-page.current-investment.fields.status")}
+          >
+            {subscriptionInfo.status}
+          </StatisticItem>
+          <StatisticItem
+            accent
+            label={t("follow-details-page.current-investment.fields.type")}
+          >
+            <Tooltip
+              render={() => (
+                <TooltipContent>
+                  {t(
+                    `follow-program.modes.${subscriptionInfo.mode.toLowerCase()}.tooltip`
+                  )}
+                </TooltipContent>
+              )}
+            >
+              <div className="tooltip__label">{subscriptionInfo.mode}</div>
+            </Tooltip>
+          </StatisticItem>
+          <StatisticItem
+            condition={!!subscriptionInfo.percent}
+            accent
+            label={t("follow-details-page.current-investment.fields.percent")}
+          >
+            <NumberFormat
+              value={subscriptionInfo.percent}
+              suffix={` %`}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={!!subscriptionInfo.openTolerancePercent}
+            accent
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "follow-program.params.tolerance-percent-tooltip"
                 )}
-              </TooltipContent>
+                labelText={t(
+                  "follow-details-page.current-investment.fields.percentage"
+                )}
+              />
+            }
+          >
+            <NumberFormat
+              value={subscriptionInfo.openTolerancePercent}
+              suffix={` %`}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={!!subscriptionInfo.fixedVolume}
+            accent
+            label={t(
+              "follow-details-page.current-investment.fields.fixed-volume"
             )}
           >
-            <div className="tooltip__label">{subscriptionInfo.mode}</div>
-          </Tooltip>
-        </StatisticItem>
-        <StatisticItem
-          condition={!!subscriptionInfo.percent}
-          accent
-          label={t("follow-details-page.current-investment.fields.percent")}
-        >
-          <NumberFormat
-            value={subscriptionInfo.percent}
-            suffix={` %`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={!!subscriptionInfo.openTolerancePercent}
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t(
-                "follow-program.params.tolerance-percent-tooltip"
-              )}
-              labelText={t(
-                "follow-details-page.current-investment.fields.percentage"
-              )}
+            <NumberFormat
+              value={subscriptionInfo.fixedVolume}
+              suffix={` ${subscriptionInfo.fixedCurrency}`}
+              displayType="text"
             />
-          }
-        >
-          <NumberFormat
-            value={subscriptionInfo.openTolerancePercent}
-            suffix={` %`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={!!subscriptionInfo.fixedVolume}
-          accent
-          label={t(
-            "follow-details-page.current-investment.fields.fixed-volume"
-          )}
-        >
-          <NumberFormat
-            value={subscriptionInfo.fixedVolume}
-            suffix={` ${subscriptionInfo.fixedCurrency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            subscriptionInfo.volumeFeePersonal !== undefined &&
-            subscriptionInfo.volumeFeePersonal !== null
-          }
-          accent
-          label={t("follow-details-page.current-investment.fields.volume-fee")}
-        >
-          <NumberFormat
-            value={subscriptionInfo.volumeFeePersonal}
-            suffix={` %`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            subscriptionInfo.successFeePersonal !== undefined &&
-            subscriptionInfo.successFeePersonal !== null
-          }
-          accent
-          label={t("follow-details-page.current-investment.fields.success-fee")}
-        >
-          <NumberFormat
-            value={subscriptionInfo.successFeePersonal}
-            suffix={` %`}
-            displayType="text"
-          />
-        </StatisticItem>
-      </StatisticItemList>
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              subscriptionInfo.volumeFeePersonal !== undefined &&
+              subscriptionInfo.volumeFeePersonal !== null
+            }
+            accent
+            label={t(
+              "follow-details-page.current-investment.fields.volume-fee"
+            )}
+          >
+            <NumberFormat
+              value={subscriptionInfo.volumeFeePersonal}
+              suffix={` %`}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              subscriptionInfo.successFeePersonal !== undefined &&
+              subscriptionInfo.successFeePersonal !== null
+            }
+            accent
+            label={t(
+              "follow-details-page.current-investment.fields.success-fee"
+            )}
+          >
+            <NumberFormat
+              value={subscriptionInfo.successFeePersonal}
+              suffix={` %`}
+              displayType="text"
+            />
+          </StatisticItem>
+        </StatisticItemList>
+      </Row>
     </DetailsInvestmentBlock>
   );
 };

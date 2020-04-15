@@ -4,6 +4,7 @@ import { DetailsInvestmentFooter } from "components/details/details-description-
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { GV_BTN_SIZE } from "components/gv-button";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
+import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -51,156 +52,163 @@ const _Investment: React.FC<Props> = ({
       <DetailsInvestmentHeading>
         {t("program-details-page.description.investment-details")}
       </DetailsInvestmentHeading>
-      <StatisticItemList>
-        <StatisticItem accent label={t("fund-details-page.description.value")}>
-          <NumberFormat
-            value={formatCurrencyValue(personalDetails.value, currency)}
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={asset === ASSET.PROGRAM}
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.profit")}
-              labelText={t("fund-details-page.description.profit")}
+      <Row>
+        <StatisticItemList>
+          <StatisticItem
+            accent
+            label={t("fund-details-page.description.value")}
+          >
+            <NumberFormat
+              value={formatCurrencyValue(personalDetails.value, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
             />
-          }
-        >
-          <ProfitabilityValuePercent
-            currency={assetCurrency}
-            value={profitValue}
-            percent={profitPercentValue}
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            personalDetails.isInvested &&
-            successFeePersonal !== undefined &&
-            successFeePersonal !== null
-          }
-          label={t("program-details-page.description.successFee")}
-          accent
-        >
-          <NumberFormat
-            value={successFeePersonal}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            !isOwnAsset &&
-            managementFeePersonal !== undefined &&
-            managementFeePersonal !== null
-          }
-          label={t("program-details-page.description.personal-management-fee")}
-          accent
-        >
-          <NumberFormat
-            value={managementFeePersonal}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            exitFeePersonal !== null &&
-            exitFeePersonal !== undefined &&
-            exitFee !== exitFeePersonal
-          }
-          label={t("fund-details-page.description.exitFee")}
-          accent
-        >
-          <NumberFormat
-            value={exitFeePersonal}
-            suffix={` %`}
-            allowNegative={false}
-            displayType="text"
-          />
-        </StatisticItem>
-        <StatisticItem
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t(
-                `asset-details-page.tooltip.status.${asset.toLowerCase()}`
-              )}
-              labelText={t("fund-details-page.description.status")}
+          </StatisticItem>
+          <StatisticItem
+            condition={asset === ASSET.PROGRAM}
+            accent
+            label={
+              <TooltipLabel
+                tooltipContent={t("program-details-page.tooltip.profit")}
+                labelText={t("fund-details-page.description.profit")}
+              />
+            }
+          >
+            <ProfitabilityValuePercent
+              currency={assetCurrency}
+              value={profitValue}
+              percent={profitPercentValue}
             />
-          }
-        >
-          <AssetStatus
-            status={personalDetails.status as STATUS}
-            id={id}
-            onCancel={updateDescription}
-          />
-        </StatisticItem>
-        <StatisticItem
-          condition={
-            personalDetails.pendingInput !== undefined &&
-            personalDetails.pendingInput !== 0
-          }
-          accent
-          label={t("fund-details-page.description.pending-input")}
-        >
-          <NumberFormat
-            value={formatCurrencyValue(
-              personalDetails.pendingInput,
-              pendingCurrency
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              personalDetails.isInvested &&
+              successFeePersonal !== undefined &&
+              successFeePersonal !== null
+            }
+            label={t("program-details-page.description.successFee")}
+            accent
+          >
+            <NumberFormat
+              value={successFeePersonal}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              !isOwnAsset &&
+              managementFeePersonal !== undefined &&
+              managementFeePersonal !== null
+            }
+            label={t(
+              "program-details-page.description.personal-management-fee"
             )}
-            suffix={` ${pendingCurrency}`}
-            displayType="text"
-          />
-        </StatisticItem>
-        {"isReinvest" in personalDetails &&
-          personalDetails.isInvested &&
-          personalDetails.canInvest &&
-          !isOwnAsset && (
-            <StatisticItem label={"Reinvest"} hideLabel>
-              <ProgramReinvestingContainer
-                id={id}
-                isReinvesting={personalDetails.isReinvest}
+            accent
+          >
+            <NumberFormat
+              value={managementFeePersonal}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              exitFeePersonal !== null &&
+              exitFeePersonal !== undefined &&
+              exitFee !== exitFeePersonal
+            }
+            label={t("fund-details-page.description.exitFee")}
+            accent
+          >
+            <NumberFormat
+              value={exitFeePersonal}
+              suffix={` %`}
+              allowNegative={false}
+              displayType="text"
+            />
+          </StatisticItem>
+          <StatisticItem
+            accent
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  `asset-details-page.tooltip.status.${asset.toLowerCase()}`
+                )}
+                labelText={t("fund-details-page.description.status")}
               />
-            </StatisticItem>
-          )}
-        {"isReinvest" in personalDetails &&
-          personalDetails.isInvested &&
-          personalDetails.canInvest &&
-          !isOwnAsset && (
-            <StatisticItem label={"Ignore SO"} hideLabel>
-              <ProgramAutoJoin
-                id={id}
-                isAutoJoin={personalDetails.isAutoJoin}
-              />
-            </StatisticItem>
-          )}
-        <StatisticItem
-          condition={
-            personalDetails.pendingOutput !== undefined &&
-            personalDetails.pendingOutput !== 0
-          }
-          accent
-          label={t("fund-details-page.description.pending-output")}
-        >
-          {personalDetails.pendingOutputIsWithdrawAll ? (
-            t("withdraw-program.withdrawing-all")
-          ) : (
+            }
+          >
+            <AssetStatus
+              status={personalDetails.status as STATUS}
+              id={id}
+              onCancel={updateDescription}
+            />
+          </StatisticItem>
+          <StatisticItem
+            condition={
+              personalDetails.pendingInput !== undefined &&
+              personalDetails.pendingInput !== 0
+            }
+            accent
+            label={t("fund-details-page.description.pending-input")}
+          >
             <NumberFormat
               value={formatCurrencyValue(
-                personalDetails.pendingOutput,
+                personalDetails.pendingInput,
                 pendingCurrency
               )}
               suffix={` ${pendingCurrency}`}
               displayType="text"
             />
-          )}
-        </StatisticItem>
-      </StatisticItemList>
+          </StatisticItem>
+          {"isReinvest" in personalDetails &&
+            personalDetails.isInvested &&
+            personalDetails.canInvest &&
+            !isOwnAsset && (
+              <StatisticItem label={"Reinvest"} hideLabel>
+                <ProgramReinvestingContainer
+                  id={id}
+                  isReinvesting={personalDetails.isReinvest}
+                />
+              </StatisticItem>
+            )}
+          {"isReinvest" in personalDetails &&
+            personalDetails.isInvested &&
+            personalDetails.canInvest &&
+            !isOwnAsset && (
+              <StatisticItem label={"Ignore SO"} hideLabel>
+                <ProgramAutoJoin
+                  id={id}
+                  isAutoJoin={personalDetails.isAutoJoin}
+                />
+              </StatisticItem>
+            )}
+          <StatisticItem
+            condition={
+              personalDetails.pendingOutput !== undefined &&
+              personalDetails.pendingOutput !== 0
+            }
+            accent
+            label={t("fund-details-page.description.pending-output")}
+          >
+            {personalDetails.pendingOutputIsWithdrawAll ? (
+              t("withdraw-program.withdrawing-all")
+            ) : (
+              <NumberFormat
+                value={formatCurrencyValue(
+                  personalDetails.pendingOutput,
+                  pendingCurrency
+                )}
+                suffix={` ${pendingCurrency}`}
+                displayType="text"
+              />
+            )}
+          </StatisticItem>
+        </StatisticItemList>
+      </Row>
       <DetailsInvestmentFooter>
         <WithdrawButton
           size={GV_BTN_SIZE.BIG}
