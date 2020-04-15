@@ -88,6 +88,29 @@ const mainMenuItemsUnion = [
     ]
   },
   {
+    isBeta: true,
+    Icon: TradeIcon,
+    label: "navigation.social",
+    route: SOCIAL_ROUTE,
+    children: [
+      {
+        Icon: TradeIcon,
+        route: NEWS_ROUTE,
+        label: "navigation.news"
+      },
+      {
+        Icon: TradeIcon,
+        route: MY_PROFILE_ROUTE,
+        label: "navigation.my-profile"
+      },
+      {
+        Icon: TradeIcon,
+        route: USERS_ROUTE,
+        label: "navigation.users"
+      }
+    ]
+  },
+  {
     Icon: InvestIcon,
     label: "navigation.invest",
     route: INVEST_ROUTE,
@@ -118,29 +141,6 @@ const mainMenuItemsUnion = [
         Icon: Mt5Icon,
         route: META_TRADER_5_ROUTE,
         label: "navigation.mt5"
-      }
-    ]
-  },
-  {
-    isBeta: true,
-    Icon: TradeIcon,
-    label: "navigation.social",
-    route: SOCIAL_ROUTE,
-    children: [
-      {
-        Icon: TradeIcon,
-        route: NEWS_ROUTE,
-        label: "navigation.news"
-      },
-      {
-        Icon: TradeIcon,
-        route: MY_PROFILE_ROUTE,
-        label: "navigation.my-profile"
-      },
-      {
-        Icon: TradeIcon,
-        route: USERS_ROUTE,
-        label: "navigation.users"
       }
     ]
   }

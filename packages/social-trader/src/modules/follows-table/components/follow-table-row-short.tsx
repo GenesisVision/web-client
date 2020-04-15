@@ -7,12 +7,12 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -22,10 +22,9 @@ import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
-  updateRow,
-  withDispatch,
   follow
 }) => {
+  const [followState, setFollowState] = useState(follow);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const {
     balance,
@@ -45,6 +44,9 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     composeFollowDetailsUrl(url),
     FOLLOW_DETAILS_FOLDER_ROUTE
   );
+  const handleUpdateRow = useCallback(follow => {
+    setFollowState(follow);
+  }, []);
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
@@ -104,14 +106,13 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell">
           <ToggleAssetFavoriteButton
-            asset={follow}
-            updateRow={updateRow}
-            withDispatch={withDispatch}
+            asset={followState}
+            updateRow={handleUpdateRow}
             assetType={ASSET.FOLLOW}
             id={id}
-            isFavorite={personalDetails.isFavorite}
+            isFavorite={followState.personalDetails.isFavorite}
           >
-            <FavoriteIcon id={id} selected={personalDetails.isFavorite} />
+            <FavoriteIcon selected={followState.personalDetails.isFavorite} />
           </ToggleAssetFavoriteButton>
         </TableCell>
       )}
@@ -120,8 +121,6 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 };
 
 interface IProgramTableRowShortProps {
-  updateRow?: UpdateRowFuncType;
-  withDispatch?: boolean;
   follow: FollowDetailsListItem;
 }
 

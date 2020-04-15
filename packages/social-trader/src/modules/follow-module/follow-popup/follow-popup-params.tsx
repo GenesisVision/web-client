@@ -107,7 +107,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
           </GVHookFormField>
         </Row>
         {mode === modes.fixed.value && (
-          <Row>
+          <Row onlyOffset>
             <InputAmountField
               wide
               name={FOLLOW_PARAMS_FIELDS.fixedVolume}
@@ -117,15 +117,17 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               currency={fixedCurrency}
             />
             {currency && (
-              <NumberFormat
-                value={formatCurrencyValue(
-                  convertFromCurrency(fixedVolume!, rate),
-                  currency
-                )}
-                prefix="≈ "
-                suffix={` ${currency}`}
-                displayType="text"
-              />
+              <Row wide>
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    convertFromCurrency(fixedVolume!, rate),
+                    currency
+                  )}
+                  prefix="≈ "
+                  suffix={` ${currency}`}
+                  displayType="text"
+                />
+              </Row>
             )}
           </Row>
         )}

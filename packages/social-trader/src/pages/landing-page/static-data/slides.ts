@@ -30,8 +30,8 @@ export type TSlide = {
 export const slides: TSlide[] = [
   {
     id: 0,
-    title: "landing-page.slider.slide-1-title",
-    text: "landing-page.slider.slide-1-text",
+    title: "landing-page:slider.slide-1-title",
+    text: "landing-page:slider.slide-1-text",
     imageBg: ImgBoxingBg,
     images: [ImgBoxing1, ImgBoxing2, ImgBoxing3],
     imageOptimization: ImgBoxingOptimization,
@@ -39,8 +39,8 @@ export const slides: TSlide[] = [
   },
   {
     id: 1,
-    title: "landing-page.slider.slide-2-title",
-    text: "landing-page.slider.slide-2-text",
+    title: "landing-page:slider.slide-2-title",
+    text: "landing-page:slider.slide-2-text",
     imageBg: ImgCreditCardBg,
     images: [ImgCreditCard],
     imageOptimization: ImgCreditCardOptimization,
@@ -48,8 +48,8 @@ export const slides: TSlide[] = [
   },
   {
     id: 2,
-    title: "landing-page.slider.slide-3-title",
-    text: "landing-page.slider.slide-3-text",
+    title: "landing-page:slider.slide-3-title",
+    text: "landing-page:slider.slide-3-text",
     imageBg: ImgPeopleBg,
     images: [ImgPeople1, ImgPeople2, ImgPeople3],
     imageOptimization: ImgPeopleOptimization,

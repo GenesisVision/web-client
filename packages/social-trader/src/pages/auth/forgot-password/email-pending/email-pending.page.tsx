@@ -1,7 +1,8 @@
-import "pages/auth/forgot-password/email-pending/email-pending.scss";
-
+import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import { useEmailPendingState } from "pages/auth/auth.service";
+import "pages/auth/forgot-password/email-pending/email-pending.scss";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,19 +22,29 @@ const EmailPendingPage: React.FC = () => {
   });
   return (
     <div className="password-pending">
-      <p className="password-pending__text">
-        {t("auth.password-restore.email-pending.text-section-1")}
-      </p>
-      <p className="password-pending__text">
-        {t("auth.password-restore.email-pending.text-section-2")}
-      </p>
-      <p className="password-pending__text">
-        {t("auth.password-restore.email-pending.text-section-3")}
-      </p>
-      <CaptchaContainer
-        request={request}
-        renderForm={handle => <EmailPending onSubmit={handle} email={email} />}
-      />
+      <Row small>
+        <MutedText noWrap={false}>
+          {t("auth.password-restore.email-pending.text-section-1")}
+        </MutedText>
+      </Row>
+      <Row small>
+        <MutedText noWrap={false}>
+          {t("auth.password-restore.email-pending.text-section-2")}
+        </MutedText>
+      </Row>
+      <Row small>
+        <MutedText noWrap={false}>
+          {t("auth.password-restore.email-pending.text-section-3")}
+        </MutedText>
+      </Row>
+      <Row>
+        <CaptchaContainer
+          request={request}
+          renderForm={handle => (
+            <EmailPending onSubmit={handle} email={email} />
+          )}
+        />
+      </Row>
     </div>
   );
 };

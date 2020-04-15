@@ -1,13 +1,13 @@
 import { DefaultTableBlock } from "components/default.block/default-table.block";
-import DetailsBlock from "components/details/details-block";
 import FacetCardsContainer, {
   ASSETS_FACETS
 } from "components/facet-cards/faset-cards-container";
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
+import { LIST_VIEW } from "components/table/table.constants";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import { useTranslation } from "i18n";
 import FollowsTableSsr from "modules/follows-table/components/follows-table-ssr";
-import { NextComponentType } from "next";
 import React from "react";
 import {
   EXPLORE_TAB_NAME,
@@ -18,7 +18,12 @@ import {
 import { composeFollowFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
-const FollowsPage: NextComponentType = () => {
+interface Props {
+  data: FollowDetailsListItemItemsViewModel;
+  outerView?: LIST_VIEW;
+}
+
+const FollowsPage: React.FC<Props> = ({ data, outerView }) => {
   const { t } = useTranslation();
   const title = t("follows-page.title");
   const description = t("follows-page.description");
@@ -49,7 +54,12 @@ const FollowsPage: NextComponentType = () => {
         composeFacetUrl={composeFollowFacetUrl}
       />
       <DefaultTableBlock>
-        <FollowsTableSsr showSwitchView title={t("follows-page.table")} />
+        <FollowsTableSsr
+          data={data}
+          outerView={outerView}
+          showSwitchView
+          title={t("follows-page.table")}
+        />
       </DefaultTableBlock>
     </Page>
   );

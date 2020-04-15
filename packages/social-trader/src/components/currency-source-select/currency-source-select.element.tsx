@@ -7,7 +7,7 @@ import Select from "components/select/select";
 import React from "react";
 
 const _CurrencySourceSelect: React.FC<Props> = props => (
-  <GVTextField {...props} InputComponent={Select}>
+  <GVTextField {...props} fixedVertical InputComponent={Select}>
     {getCurrencySourceSelectItems(props.items)}
   </GVTextField>
 );

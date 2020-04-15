@@ -12,6 +12,7 @@ import SelectItem from "./select-item";
 import "./select.scss";
 
 const Select: React.FC<Props> = ({
+  fixedVertical,
   className,
   name,
   onBlur,
@@ -140,6 +141,7 @@ const Select: React.FC<Props> = ({
       </button>
       <input type="hidden" value={value} name={name} />
       <Popover
+        fixedVertical={fixedVertical}
         horizontal={HORIZONTAL_POPOVER_POS.LEFT}
         noPadding
         anchorEl={anchor}
@@ -166,6 +168,7 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface Props {
+  fixedVertical?: boolean;
   value: string;
   name: string;
   className?: string;

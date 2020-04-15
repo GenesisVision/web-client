@@ -136,15 +136,6 @@ const _Subscription: React.FC<Props> = ({
           />
         </StatisticItem>
       </StatisticItemList>
-      <DetailsInvestmentFooter>
-        <EditFollowButton
-          signalSubscription={subscriptionInfo}
-          onApply={updateInfo}
-          currency={assetCurrency}
-          tradingAccountId={subscriptionInfo.subscriberInfo.tradingAccountId}
-          id={id}
-        />
-      </DetailsInvestmentFooter>
     </DetailsInvestmentBlock>
   );
 };

@@ -3,7 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .broker-select {
-  margin-top: $padding-upper-medium;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -11,10 +10,6 @@
 
   @include media-breakpoint-landscape-phone() {
     flex-direction: row;
-  }
-
-  &-container {
-    margin-bottom: 20px;
   }
 
   &__list {

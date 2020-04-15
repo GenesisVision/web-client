@@ -109,7 +109,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           setMax={setMaxAmount}
         />
         {followCurrency !== currency && (
-          <Row small>
+          <Row>
             <NumberFormat
               value={formatCurrencyValue(
                 convertToCurrency(+depositAmount, rate),

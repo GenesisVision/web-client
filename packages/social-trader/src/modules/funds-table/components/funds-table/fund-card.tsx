@@ -17,6 +17,7 @@ import {
 import { ASSET } from "constants/constants";
 import { Currency, FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
@@ -78,6 +79,10 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
 };
 
 const _FundCard: React.FC<Props> = ({ fund }) => {
+  const [fundState, setFundState] = useState(fund);
+  const handleUpdateRow = useCallback(fund => {
+    setFundState(fund);
+  }, []);
   const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
   const link = linkCreator(
@@ -91,10 +96,11 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem
-          withDispatch
+          updateRow={handleUpdateRow}
+          asset={fundState}
           assetType={ASSET.FUND}
           id={fund.id}
-          isFavorite={fund.personalDetails.isFavorite}
+          isFavorite={fundState.personalDetails.isFavorite}
         />
       )}
     </TableCardActions>

@@ -11,7 +11,7 @@ import TableToolbar, {
 } from "components/table/components/table-toolbar";
 import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
-import { getTableView, setTableView } from "utils/table-view";
+import { setTableView } from "utils/table-view";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";
@@ -49,14 +49,11 @@ const _Table: React.FC<ITableProps> = ({
   hideToolbar,
   asLinkPagination
 }) => {
-  const tableView = getTableView();
   const isViewSwitchEnabled =
     renderBodyRow !== undefined &&
     renderBodyCard !== undefined &&
     !!showSwitchView;
-  const [view, setView] = useState<LIST_VIEW>(
-    isViewSwitchEnabled ? tableView : outerView || LIST_VIEW.TABLE
-  );
+  const [view, setView] = useState<LIST_VIEW>(outerView || LIST_VIEW.TABLE);
   const changeView = useCallback((view: LIST_VIEW) => {
     setTableView(view);
     setView(view);
