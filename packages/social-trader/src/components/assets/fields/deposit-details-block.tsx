@@ -8,7 +8,6 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import useAssetSection from "../asset-section.hook";
-import "./deposit-details.scss";
 import InputDepositAmount from "./input-deposit-amount";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
