@@ -3,37 +3,11 @@
 @import "~shared/styles/_sizes";
 
 .wallet-add-funds-popup {
-  &__title {
-    font-size: $font-size-small;
-    opacity: 0.3;
-    letter-spacing: 0.4px;
-    color: $main-color;
-    margin-bottom: 12px;
-  }
-  &__value {
-    font-size: $font-size-h4-mobile;
-    letter-spacing: 0.4px;
-    margin-bottom: 32px;
-    text-align: center;
-
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-small;
-    }
-  }
   &__bottom {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  &__will-get {
-    &:before {
-      content: none;
-    }
-    &:after {
-      content: none;
-    }
   }
 
   &__address {
@@ -42,9 +16,5 @@
 
   &__address-value {
     @include font-size($font-size-paragraph-mobile);
-  }
-
-  &__right-text {
-    align-self: flex-start;
   }
 }
