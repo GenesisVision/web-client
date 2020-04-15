@@ -53,7 +53,9 @@ export interface MiddlewareDispatch {
   <A extends ApiAction = ApiAction>(apiAction: A): ApiActionResponse<
     UnpackApiAction<A>
   >;
+
   <A extends ActionType = ActionType>(action: A): A;
+
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
 
@@ -91,8 +93,11 @@ export interface RootStore<S = any, A extends Action = AnyAction>
   dispatch: MiddlewareDispatch;
 }
 
-export interface NextPageWithReduxContext extends NextPageContext {
+export interface NextPageWithTokenContext extends NextPageContext {
   token: Token;
+}
+
+export interface NextPageWithReduxContext extends NextPageWithTokenContext {
   // @ts-ignore
   reduxStore: RootStore<AuthRootState, RootThunkAction>; //TODO error
 }
@@ -100,6 +105,12 @@ export interface NextPageWithReduxContext extends NextPageContext {
 export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
 }
+
+export type NextPageWithToken<P = void, IP = P> = NextComponentType<
+  NextPageWithTokenContext,
+  IP,
+  P
+>;
 
 export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
   NextPageWithReduxContext,

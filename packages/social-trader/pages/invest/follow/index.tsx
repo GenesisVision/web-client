@@ -1,39 +1,33 @@
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
-import {
-  fetchFollowsAction,
-  FetchSignalAssetsFilterType
-} from "modules/follows-table/actions/follows-table.actions";
+import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
+import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import FollowsPage from "pages/invest/follows/follows.page";
 import React from "react";
-import authService from "services/auth-service";
 import { getTableView } from "utils/table-view";
 import { NextPageWithRedux } from "utils/types";
 
 interface Props {
+  data: FollowDetailsListItemItemsViewModel;
   outerView?: LIST_VIEW;
 }
 
-const Page: NextPageWithRedux<Props> = ({ outerView }) => {
-  return <FollowsPage outerView={outerView} />;
+const Page: NextPageWithRedux<Props> = ({ data, outerView }) => {
+  return <FollowsPage data={data} outerView={outerView} />;
 };
 
 Page.getInitialProps = async ctx => {
-  const filtering = getFiltersFromContext(ctx) as FetchSignalAssetsFilterType;
+  const filtering = getFiltersFromContext(ctx);
+  let data;
   try {
-    await Promise.all([
-      ctx.reduxStore.dispatch(
-        fetchFollowsAction({
-          ...filtering,
-          authorization: authService.getAuthArg(ctx)
-        })
-      )
-    ]);
-  } catch (e) {}
-
+    data = await fetchFollows(filtering, ctx.token);
+  } catch (e) {
+    data = { items: [], total: 0 };
+    console.error(e);
+  }
   const outerView = getTableView(ctx);
-  return { outerView };
+  return { outerView, data };
 };
 
 export default withDefaultLayout(Page);

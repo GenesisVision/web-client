@@ -880,6 +880,10 @@
     "current-investment": {
       "title": "Subscription details",
       "fields": {
+        "tolerance": "Tolerance",
+        "value": "Value",
+        "name": "Name",
+        "buttons": "",
         "volume-fee": "Volume fee",
         "success-fee": "Success fee",
         "fixed-volume": "Fixed volume",
@@ -1345,12 +1349,18 @@
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
     "tabs": {
+      "personal-details": "Personal details",
       "referral-program": "Referral program",
       "security": "Security",
-      "profile": "Personal details",
+      "profile": "Profile details",
       "settings": "Settings",
       "verify": "Verify",
       "social-links": "Social links"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "post": "Who can post to my wall",
+      "view": "Who can view comments on my posts"
     },
     "referral-program": {
       "title": "Invite your friends to Genesis vision",
@@ -2689,173 +2699,6 @@
     "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
     "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
     "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
-  },
-  "landing-page": {
-    "description": "Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies.",
-    "title": "Genesis Vision - The Next Generation Social Trading Platform",
-    "short-description": "Genesis Vision - Social Trading Platform",
-    "genesis-vision": "Genesis Vision",
-    "tag-hot": "HOT",
-    "page-titles": {
-      "fees": "Genesis Vision Fees",
-      "aml-manual": "Genesis Vision Aml Manual",
-      "downloads": "Genesis Vision Downloads",
-      "faq": "Genesis Vision FAQ",
-      "glossary": "Genesis Vision Glossary",
-      "privacy-policy": "Genesis Vision Privacy Policy",
-      "referral-program": "Genesis Vision Referral Program",
-      "terms": "Genesis Vision Terms and conditions"
-    },
-    "buttons": {
-      "discover": "Discover",
-      "join": "Join",
-      "dashboard": "Dashboard",
-      "get-started": "Get started",
-      "start-trading": "Start trading",
-      "send": "SEND"
-    },
-    "links": {
-      "genesis-vision": "genesis.vision",
-      "title": "Go to {{title}} {{page}} page",
-      "invest": "Invest",
-      "follow": "Follow",
-      "programs": "Programs",
-      "funds": "Funds",
-      "trade": "Trade",
-      "info": "Info",
-      "blog": "Blog",
-      "fees": "Fees",
-      "referral-program": "Referral program",
-      "faq": "FAQ",
-      "feedback": "Feedback",
-      "knowledge-base": "Knowledge base",
-      "glossary": "Glossary",
-      "aml-manual": "AML Manual",
-      "white-paper": "White paper",
-      "privacy-policy": "Privacy policy",
-      "terms": "Terms and conditions",
-      "download": "Download terminal"
-    },
-    "footer": {
-      "title": "Have a question?",
-      "email-support": "support@genesis.vision",
-      "email-title": "Write email to Genesis Vision support",
-      "subtitle": "Get Our mobile app"
-    },
-    "follows": {
-      "title": "Follow",
-      "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
-      "followers": "Followers"
-    },
-    "programs": {
-      "title": "Programs",
-      "text": "Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at predefined intervals set by the program’s manager."
-    },
-    "funds": {
-      "title": "Funds",
-      "text": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves. You can withdraw your capital at any time you retain full control of your investment."
-    },
-    "download": {
-      "title": "Download app",
-      "text": "The best social trading experience.\n Download the Genesis Vision app today.",
-      "links": {
-        "apple-store": "Apple Store",
-        "google-play": "Google Play"
-      }
-    },
-    "social": {
-      "title": "Join the Genesis Vision\n Community",
-      "links": {
-        "telegram": "Telegram",
-        "twitter": "Twitter",
-        "facebook": "Facebook",
-        "github": "Github",
-        "youtube": "Youtube",
-        "reddit": "Reddit",
-        "linkedin": "Linkedin",
-        "medium-blog": "Medium Blog"
-      }
-    },
-    "slider": {
-      "slide-1-title": "Trade on Demo",
-      "slide-1-text": "Learn to trade or test your strategies without any financial risks and limitations",
-      "slide-2-title": "Pay with card",
-      "slide-2-text": "Use your credit or debit card to buy crypto - get started right away as a trader, an investor or a manager on the Genesis Vision platform.",
-      "slide-3-title": "Enticing invitations",
-      "slide-3-text": "Use the Genesis Vision two-level Affiliate Network to receive a percentage of the commission paid by your referrals… and your referrals’ referrals!"
-    },
-    "events": {
-      "title": "Genesis Vision Wall"
-    },
-    "info": {
-      "tab-trade": "Trade",
-      "tab-invest": "Invest",
-      "tab-partake": "Partake",
-      "text-trade-1": "Trade on your favorite",
-      "text-trade-2": " Brokerage or Exchange",
-      "text-trade-3": "Trade on any market",
-      "text-trade-4": " Crypto, Forex or Stocks",
-      "text-trade-5": "Follow",
-      "text-trade-6": " the most successful traders’ strategies",
-      "text-invest-1": "Invest in",
-      "text-invest-2": " the best performing managers",
-      "text-invest-3": "Automatically copy",
-      "text-invest-4": " professionals' trades",
-      "text-invest-5": "Choose your perfect investment opportunity, based on risk and profitability levels analysis",
-      "text-partake-1": "Provide trading signals and build an",
-      "text-partake-2": " army of followers around your strategies",
-      "text-partake-3": "Create your own",
-      "text-partake-4": " Fund",
-      "text-partake-5": " or an",
-      "text-partake-6": " Asset Management Program",
-      "text-partake-7": "Step in the actively growing",
-      "text-partake-8": " multimarket social trading network"
-    },
-    "brokers": {
-      "title": "Brokers and Exhanges",
-      "description-gm": "Genesis Markets is a Forex and Crypto broker that offers trading on the most popular trading terminal in the world — MetaTrader. Genesis Markets allows you to access the best liquidity on traditional markets and multiple crypto exchanges within a single account.\n",
-      "text-gm-1": "Forex, Metals, Commodities, Indices, Shares, Crypto",
-      "text-gm-2": "MetaTrader 5",
-      "text-gm-3": "BTC, USD Accounts",
-      "text-gm-4": "Crypto Margin Trading",
-      "number-gm-1": "500+",
-      "text-gm-5": "Altcoins",
-      "number-gm-2": "74",
-      "text-gm-6": "Forex Instruments",
-      "description-binance": "Binance is one of the largest global cryptocurrency exchanges that provides an ecosystem for trading a wide range of different crypto assets.\n",
-      "number-binance": "600+",
-      "text-binance-1": "Crypto Assets",
-      "text-binance-2": "Binance Web Trading Terminal",
-      "text-binance-3": "GV Follow functionality",
-      "text-binance-4": "Plug-in your existing accounts",
-      "description-rf": "RoboForex Ltd is an international IFSC Belize regulated broker which is a member of the RoboForex group. RoboForex provides an access to a wide range of financial instruments and account types.",
-      "number-rf": "9400+",
-      "text-rf-1": "assets",
-      "text-rf-2": "Forex, Stocks, Indices, ETFs, Commodities, Metals, Energies, Crypto",
-      "text-rf-3": "MetaTrader 4",
-      "text-rf-4": "Pro-Standard, ECN Accounts",
-      "text-rf-5": "Leverage 1:10-1:100",
-      "description-exante": "EXANTE is a European investment services company established in 2011 that offers global multi-asset financial services, including direct access to a wide range of financial markets in the US, European Union and Asia-Pacific",
-      "number-exante": "10000+",
-      "text-exante-1": "assets",
-      "text-exante-2": "Forex, Stocks, ETFs, global futures markets, bonds, metals, options, funds, crypto",
-      "text-exante-3": "Unique EXANTE Trading Platform",
-      "text-exante-4": "Leverage 1:50",
-      "description-huobi": "Huobi is one of the largest Singapore-based cryptocurrency exchanges,  judging by 24-hour period volume. Founded in China, the company now has offices in Hong Kong, Korea, Japan and the United States.",
-      "number-huobi": "400+",
-      "text-huobi-1": "crypto trading pairs",
-      "text-huobi-2": "BTC, ETH, USDT Accounts",
-      "text-huobi-3": "Huobi Web Trading Terminal"
-    },
-    "advantages": {
-      "title": "Our advantages",
-      "title-1": "Access all financial markets",
-      "text-1": "Open multi broker trading platform. Wide range of instruments and asset classes including Forex, Crypto and Stock markets.",
-      "title-2": "Control your exposure",
-      "text-2": "Wide range of investment opportunities broken by risk tolerance and profitability. Access to risk analysis and management tools. The products offered include Asset Management, Funds and Copytrading.",
-      "title-3": "Choose the best tool to make money",
-      "text-3": "Choose your role or combine them - Trade, Invest, Manage, Follow or Lead"
-    }
   },
   "referral-program": {
     "title": "Genesis Vision Referral program",

@@ -29,7 +29,6 @@ const _DetailsFavorite: React.FC<Props> = ({
       >
         <FavoriteIcon
           className="details-description-control__icon"
-          id={id}
           selected={isFavorite}
         />
       </DetailsDescriptionControl>

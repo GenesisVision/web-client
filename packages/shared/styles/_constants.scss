@@ -39,7 +39,7 @@ $box-shadow-4: 0 6px 6px -3px rgba(0, 0, 0, 0.2),
   text-align: left;
 }
 
-.muted {
+@mixin muted() {
   @include font-size($font-size-common);
   color: $label-color;
 }

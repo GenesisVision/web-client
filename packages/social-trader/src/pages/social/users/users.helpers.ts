@@ -16,12 +16,12 @@ export const USERS_TABLE_COLUMNS: SortingColumn[] = [
   { name: "profit", sortingName: "byProfit" }
 ];
 
-export const USERS_DATE_RANGE_FILTER_NAME = "dateRange";
-export const USERS_DATE_RANGE_DEFAULT_VALUE = "month";
+export const USERS_DATE_RANGE_FILTER_NAME = "timeframe";
+export const USERS_DATE_RANGE_DEFAULT_VALUE = "Month";
 export const USERS_DATE_RANGE_VALUES: SelectFilterValue<string>[] = [
-  { label: "Month", value: "month" },
-  { label: "Week", value: "week" },
-  { label: "Day", value: "day" }
+  { label: "Month", value: "Month" },
+  { label: "Week", value: "Week" },
+  { label: "Day", value: "Day" }
 ];
 
 export const composeDefaultUsersDateRangeFilter = (): IComposeDefaultFilter => ({

@@ -9,11 +9,11 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { UpdateRowFuncType } from "components/table/components/table.types";
 import { ASSET } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -22,13 +22,17 @@ import { composeFundsDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
+const _FundsTableRow: React.FC<Props> = ({ fund }) => {
+  const [fundState, setFundState] = useState(fund);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const link = linkCreator(
     composeFundsDetailsUrl(fund.url),
     FUND_DETAILS_FOLDER_ROUTE
   );
+  const handleUpdateRow = useCallback(fund => {
+    setFundState(fund);
+  }, []);
   return (
     <TableRow>
       <TableCell className="funds-table__cell">
@@ -90,17 +94,13 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
       {isAuthenticated && fund.personalDetails && (
         <TableCell className="funds-table__cell">
           <ToggleAssetFavoriteButton
-            asset={fund}
-            updateRow={updateRow}
-            withDispatch={withDispatch}
+            asset={fundState}
+            updateRow={handleUpdateRow}
             assetType={ASSET.FUND}
             id={fund.id}
-            isFavorite={fund.personalDetails.isFavorite}
+            isFavorite={fundState.personalDetails.isFavorite}
           >
-            <FavoriteIcon
-              id={fund.id}
-              selected={fund.personalDetails.isFavorite}
-            />
+            <FavoriteIcon selected={fundState.personalDetails.isFavorite} />
           </ToggleAssetFavoriteButton>
         </TableCell>
       )}
@@ -109,8 +109,6 @@ const _FundsTableRow: React.FC<Props> = ({ withDispatch, fund, updateRow }) => {
 };
 
 interface Props {
-  updateRow?: UpdateRowFuncType;
-  withDispatch?: boolean;
   fund: FundDetailsListItem;
 }
 

@@ -9,13 +9,13 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
+import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -25,10 +25,9 @@ import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
-  withDispatch,
-  updateRow,
   program
 }) => {
+  const [programState, setProgramState] = useState(program);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
@@ -53,6 +52,9 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const { currency, amount } = balance;
+  const handleUpdateRow = useCallback(program => {
+    setProgramState(program);
+  }, []);
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
@@ -133,14 +135,13 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
           <ToggleAssetFavoriteButton
-            asset={program}
-            updateRow={updateRow}
-            withDispatch={withDispatch}
+            asset={programState}
+            updateRow={handleUpdateRow}
             assetType={ASSET.PROGRAM}
             id={id}
-            isFavorite={personalDetails.isFavorite}
+            isFavorite={programState.personalDetails.isFavorite}
           >
-            <FavoriteIcon id={id} selected={personalDetails.isFavorite} />
+            <FavoriteIcon selected={programState.personalDetails.isFavorite} />
           </ToggleAssetFavoriteButton>
         </TableCell>
       )}
@@ -149,8 +150,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
 };
 
 interface IProgramTableRowShortProps {
-  updateRow?: UpdateRowFuncType;
-  withDispatch?: boolean;
   program: ProgramDetailsListItem;
 }
 

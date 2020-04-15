@@ -1,8 +1,0 @@
-@import "~shared/styles/_sizes";
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-
-.profile-layout {
-  box-sizing: border-box;
-  @include adaptive-padding(top, $padding-medium);
-}

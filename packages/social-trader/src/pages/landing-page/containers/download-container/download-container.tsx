@@ -1,5 +1,3 @@
-import "./download-container.scss";
-
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import IconList from "pages/landing-page/components/icon-list/icon-list";
@@ -10,16 +8,18 @@ import { appLinks } from "pages/landing-page/static-data/app-links";
 import { VIDEO_LINK } from "pages/landing-page/static-data/download";
 import React from "react";
 
+import "./download-container.scss";
+
 const DownloadContainer: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="download-container">
       <div className="download-container__info">
         <h2 className="download-container__title">
-          {t("landing-page.download.title")}
+          {t("landing-page:download.title")}
         </h2>
         <p className="download-container__text">
-          {t("landing-page.download.text")}
+          {t("landing-page:download.text")}
         </p>
         <IconList
           items={appLinks}

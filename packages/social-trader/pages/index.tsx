@@ -25,10 +25,14 @@ IndexPage.getInitialProps = async () => {
       follows,
       programs,
       funds,
-      news
+      news,
+      namespacesRequired: ["landing-page"]
     };
   } catch (e) {
-    return landingAssetsDefaultData;
+    return {
+      namespacesRequired: ["landing-page"],
+      ...landingAssetsDefaultData
+    };
   }
 };
 

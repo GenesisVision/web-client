@@ -1,8 +1,7 @@
-import "modules/programs-table/components/programs-table/programs.scss";
-
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
+import "modules/programs-table/components/programs-table/programs.scss";
 import * as React from "react";
 
 import FollowTableHeaderCell from "./follow-table-header-cell";
@@ -37,10 +36,7 @@ const FollowsTableModule: React.FC<Props> = React.memo(
         title={title}
         columns={columns || FOLLOW_COLUMNS}
         renderHeader={column => <FollowTableHeaderCell column={column} />}
-        renderBodyRow={(
-          follow,
-          updateRow: any //TODO fix updateRow
-        ) => <FollowTableRow updateRow={updateRow} follow={follow} />}
+        renderBodyRow={follow => <FollowTableRow follow={follow} />}
       />
     );
   }

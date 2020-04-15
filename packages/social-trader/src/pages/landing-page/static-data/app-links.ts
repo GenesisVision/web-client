@@ -10,12 +10,12 @@ export type TIconLinks = {
 
 export const appLinks: TIconLinks[] = [
   {
-    name: "landing-page.download.links.apple-store",
+    name: "landing-page:download.links.apple-store",
     href: "https://itunes.apple.com/app/genesis-vision-investor/id1369865290",
     icon: AppleIcon
   },
   {
-    name: "landing-page.download.links.google-play",
+    name: "landing-page:download.links.google-play",
     href:
       "https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor",
     icon: AndroidIcon

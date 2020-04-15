@@ -1,31 +1,35 @@
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
-import { fetchFundsAction } from "modules/funds-table/actions/funds-table.actions";
-import { getFiltersFromContext } from "modules/funds-table/services/funds-table.service";
+import { FundDetailsListItemItemsViewModel } from "gv-api-web";
+import {
+  fetchFunds,
+  getFiltersFromContext
+} from "modules/funds-table/services/funds-table.service";
 import FundsPage from "pages/invest/funds/funds.page";
 import React from "react";
 import { getTableView } from "utils/table-view";
 import { NextPageWithRedux } from "utils/types";
 
 interface Props {
+  data: FundDetailsListItemItemsViewModel;
   outerView?: LIST_VIEW;
 }
 
-const Page: NextPageWithRedux<Props> = ({ outerView }) => {
-  return <FundsPage outerView={outerView} />;
+const Page: NextPageWithRedux<Props> = ({ data, outerView }) => {
+  return <FundsPage data={data} outerView={outerView} />;
 };
 
 Page.getInitialProps = async ctx => {
-  const filters = getFiltersFromContext(ctx);
+  const filtering = getFiltersFromContext(ctx);
+  let data;
   try {
-    await Promise.all([
-      ctx.reduxStore.dispatch(fetchFundsAction(filters, ctx.token))
-    ]);
-  } catch (e) {}
-
+    data = await fetchFunds(filtering, ctx.token);
+  } catch (e) {
+    data = { items: [], total: 0 };
+    console.error(e);
+  }
   const outerView = getTableView(ctx);
-  console.log("getInitialProps", outerView);
-  return { outerView };
+  return { outerView, data };
 };
 
 export default withDefaultLayout(Page);

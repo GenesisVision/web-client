@@ -4,6 +4,8 @@
 
 .popover-content {
   box-sizing: border-box;
+  max-height: 50vh;
+  overflow: auto;
 
   &__list {
     display: flex;

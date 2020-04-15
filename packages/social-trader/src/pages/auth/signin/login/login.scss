@@ -12,19 +12,6 @@
     display: flex;
     flex-direction: column;
     flex: 1 0 70%;
-
-    &__forgot {
-      margin-bottom: 30px;
-    }
-    & .form-error {
-      padding-bottom: $padding-small;
-    }
-  }
-  &__submit-block {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    height: 36px;
   }
   &__submit-button {
     align-self: flex-start;

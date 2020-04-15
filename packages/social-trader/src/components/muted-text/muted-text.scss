@@ -4,7 +4,7 @@
 @import "~shared/styles/_constants";
 
 .muted-text {
-  @extend .muted;
+  @include muted();
   letter-spacing: 0.4px;
   &--small {
     @include font-size($font-size-small);

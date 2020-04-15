@@ -22,8 +22,6 @@ interface Props extends ITableProps {
 
 const _FundsTable: React.FC<Props> = ({
   outerView,
-  withDispatch,
-  updateRow,
   loaderCount,
   showSwitchView = true,
   data,
@@ -68,11 +66,7 @@ const _FundsTable: React.FC<Props> = ({
     )}
     renderBodyRow={useCallback(
       fund => (
-        <FundsTableRow
-          updateRow={updateRow}
-          withDispatch={withDispatch}
-          fund={fund}
-        />
+        <FundsTableRow fund={fund} />
       ),
       []
     )}

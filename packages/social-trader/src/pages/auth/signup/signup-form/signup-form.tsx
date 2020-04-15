@@ -66,31 +66,40 @@ const _SignUpForm: React.FC<Props> = ({
 
   return (
     <HookForm className="signup-form" form={form} onSubmit={onSubmit}>
-      <GVHookFormField
-        showCorrect
-        type="text"
-        name={SIGN_UP_FORM_FIELDS.userName}
-        label={t("auth.signup.username-field-text")}
-        autoComplete="off"
-        autoFocus
-        component={SimpleTextField}
-      />
-      <GVHookFormField
-        showCorrect
-        type="email"
-        name={SIGN_UP_FORM_FIELDS.email}
-        label={t("auth.signup.email-field-text")}
-        autoComplete="email"
-        component={SimpleTextField}
-      />
-      <GVHookFormField
-        showCorrect
-        type="password"
-        name={SIGN_UP_FORM_FIELDS.password}
-        label={t("auth.signup.password-field-text")}
-        component={SimpleTextField}
-        autoComplete="new-password"
-      />
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="text"
+          name={SIGN_UP_FORM_FIELDS.userName}
+          label={t("auth.signup.username-field-text")}
+          autoComplete="off"
+          autoFocus
+          component={SimpleTextField}
+        />
+      </Row>
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="email"
+          name={SIGN_UP_FORM_FIELDS.email}
+          label={t("auth.signup.email-field-text")}
+          autoComplete="email"
+          component={SimpleTextField}
+        />
+      </Row>
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="password"
+          name={SIGN_UP_FORM_FIELDS.password}
+          label={t("auth.signup.password-field-text")}
+          component={SimpleTextField}
+          autoComplete="new-password"
+        />
+      </Row>
       <Row>
         <GVHookFormField
           type="checkbox"

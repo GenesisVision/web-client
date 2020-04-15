@@ -5,6 +5,7 @@ import FacetCardsContainer, {
 import NavigationTabs from "components/navigation-tabs/navigation-tabs";
 import Page from "components/page/page";
 import { LIST_VIEW } from "components/table/table.constants";
+import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
 import { useTranslation } from "i18n";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
@@ -19,10 +20,11 @@ import { composeProgramFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 interface Props {
+  data: ProgramDetailsListItemItemsViewModel;
   outerView?: LIST_VIEW;
 }
 
-const ProgramsPage: NextPage<Props> = ({ outerView }) => {
+const ProgramsPage: NextPage<Props> = ({ data, outerView }) => {
   const { t } = useTranslation();
   const title = t("programs-page.title");
   const description = t("programs-page.description");
@@ -53,7 +55,7 @@ const ProgramsPage: NextPage<Props> = ({ outerView }) => {
         composeFacetUrl={composeProgramFacetUrl}
       />
       <DefaultTableBlock>
-        <ProgramsTableSSR outerView={outerView} showSwitchView />
+        <ProgramsTableSSR data={data} outerView={outerView} showSwitchView />
       </DefaultTableBlock>
     </Page>
   );

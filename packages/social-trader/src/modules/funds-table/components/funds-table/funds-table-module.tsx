@@ -1,5 +1,3 @@
-import "./funds-table.scss";
-
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
@@ -9,6 +7,7 @@ import FundsTableRow from "./fund-table-row";
 import { fundListLoaderData } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
+import "./funds-table.scss";
 
 interface Props extends ITableModuleProps {}
 
@@ -36,9 +35,7 @@ const FundsTableModule: React.FC<Props> = React.memo(
         title={title}
         columns={FUNDS_TABLE_COLUMNS}
         renderHeader={column => <FundsTableHeaderCell column={column} />}
-        renderBodyRow={(fund, updateRow = () => {}) => (
-          <FundsTableRow updateRow={updateRow} fund={fund} />
-        )}
+        renderBodyRow={fund => <FundsTableRow fund={fund} />}
       />
     );
   }

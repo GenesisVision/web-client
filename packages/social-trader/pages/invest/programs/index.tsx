@@ -1,33 +1,35 @@
 import { LIST_VIEW } from "components/table/table.constants";
 import withDefaultLayout from "decorators/with-default-layout";
-import * as programTableActions from "modules/programs-table/actions/programs-table.actions";
-import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
+import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
+import {
+  fetchPrograms,
+  getFiltersFromContext
+} from "modules/programs-table/services/programs-table.service";
 import ProgramsPage from "pages/invest/programs/programs.page";
 import React from "react";
 import { getTableView } from "utils/table-view";
-import { NextPageWithRedux } from "utils/types";
+import { NextPageWithToken } from "utils/types";
 
 interface Props {
+  data: ProgramDetailsListItemItemsViewModel;
   outerView?: LIST_VIEW;
 }
 
-const Page: NextPageWithRedux<Props> = ({ outerView }) => {
-  return <ProgramsPage outerView={outerView} />;
+const Page: NextPageWithToken<Props> = ({ data, outerView }) => {
+  return <ProgramsPage data={data} outerView={outerView} />;
 };
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
+  let data;
   try {
-    await Promise.all([
-      ctx.reduxStore.dispatch(
-        programTableActions.fetchProgramsAction(filtering, ctx.token)
-      )
-    ]);
+    data = await fetchPrograms(filtering, ctx.token);
   } catch (e) {
+    data = { items: [], total: 0 };
     console.error(e);
   }
   const outerView = getTableView(ctx);
-  return { outerView };
+  return { outerView, data };
 };
 
 export default withDefaultLayout(Page);

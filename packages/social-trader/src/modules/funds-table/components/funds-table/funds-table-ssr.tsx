@@ -6,6 +6,7 @@ import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fu
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { composePaging } from "components/table/helpers/paging.helpers";
 import { LIST_VIEW } from "components/table/table.constants";
+import { FundDetailsListItemItemsViewModel } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useRouteFilters from "hooks/route-filters.hook";
 import { useTranslation } from "i18n";
@@ -17,7 +18,6 @@ import {
   platformCurrenciesSelector
 } from "reducers/platform-reducer";
 
-import { fundsDataSelector } from "../../reducers/funds-table.reducers";
 import FundsTable from "./funds-table";
 import {
   CURRENCY_MAP_NAME,
@@ -26,10 +26,13 @@ import {
   SORTING_FILTER_VALUE
 } from "./funds-table.constants";
 
-const _FundsTableSSR: React.FC<Props> = ({ outerView, showSwitchView }) => {
+const _FundsTableSSR: React.FC<Props> = ({
+  data,
+  outerView,
+  showSwitchView
+}) => {
   const currency = useAccountCurrency();
   const currencies = useSelector(platformCurrenciesSelector);
-  const data = useSelector(fundsDataSelector);
   const fundAssets = useSelector(fundAssetsSelector);
   const { t } = useTranslation();
   const [
@@ -84,7 +87,6 @@ const _FundsTableSSR: React.FC<Props> = ({ outerView, showSwitchView }) => {
   return (
     <FundsTable
       outerView={outerView}
-      withDispatch
       data={data.items}
       showSwitchView={showSwitchView}
       sorting={sorting || SORTING_FILTER_VALUE}
@@ -101,6 +103,7 @@ const _FundsTableSSR: React.FC<Props> = ({ outerView, showSwitchView }) => {
 };
 
 interface Props {
+  data: FundDetailsListItemItemsViewModel;
   outerView?: LIST_VIEW;
   showSwitchView: boolean;
   title: string;
