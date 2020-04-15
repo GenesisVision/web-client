@@ -1,4 +1,5 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
+import { Center } from "components/center/center";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import CopyIcon from "components/icon/copy-icon";
@@ -24,7 +25,7 @@ import "./providers-button.scss";
 const _ProvidersButton: React.FC<Props> = ({ providers }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className="providers-button__container">
+    <Center className="providers-button__container">
       <Popover
         anchorEl={anchor}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -43,7 +44,7 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
         chipLabel={<CopyIcon />}
       />
       <div className="providers-button__count">{providers.length}</div>
-    </div>
+    </Center>
   );
 };
 
