@@ -23,7 +23,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import { PlatformAssetFull } from "utils/types";
 import { object } from "yup";
 
-import "../reallocate.scss";
 import ConfirmReallocate from "./confirm-reallocate";
 
 enum FIELDS {
