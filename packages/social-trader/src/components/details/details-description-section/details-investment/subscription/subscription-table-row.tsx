@@ -33,7 +33,7 @@ const _SubscriptionTableRow: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const link = subscriptionInfo.subscriberInfo.asset
     ? linkCreator(
-        composeFollowDetailsUrl(subscriptionInfo.asset.url),
+        composeFollowDetailsUrl(subscriptionInfo.subscriberInfo.asset.url),
         FOLLOW_DETAILS_FOLDER_ROUTE
       )
     : linkCreator(
