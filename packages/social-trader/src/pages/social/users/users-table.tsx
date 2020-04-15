@@ -20,7 +20,7 @@ import { getUsers } from "pages/social/users/users.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { managerToPathCreator } from "routes/manager.routes";
-import { distanceDate, localizedDate } from "utils/dates";
+import { distanceDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 const UsersTableHeaderCell: React.FC<{ column: SortingColumn }> = React.memo(
@@ -60,7 +60,9 @@ const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
       </TableCell>
       <TableCell>{investorsCount}</TableCell>
       <TableCell>{followersCount}</TableCell>
-      <TableCell>{totalProfit} %</TableCell>
+      <TableCell>
+        {formatCurrencyValue(totalProfit, currency)} {currency}
+      </TableCell>
     </TableRow>
   );
 };
