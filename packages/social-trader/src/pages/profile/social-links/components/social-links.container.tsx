@@ -10,7 +10,6 @@ import {
   updateSocialLink
 } from "../services/social-links.service";
 import SocialLinkForm from "./social-link/social-link-form";
-import SocialLinksLoader from "./social-links-loader";
 
 const _Links: React.FC<ILinksProps> = ({
   socialLinks,
@@ -62,7 +61,6 @@ const _SocialLinksContainer: React.FC = () => {
       <Links
         errorMessage={errorMessage}
         condition={socialLinks !== undefined}
-        loader={<SocialLinksLoader />}
         socialLinks={socialLinks!}
         onSubmit={handleSubmitSocialLink}
       />
