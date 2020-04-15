@@ -1,4 +1,5 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { Row } from "components/row/row";
 import TradingViewWidget, {
   Themes
 } from "components/trading-view/trading-view";
@@ -24,15 +25,15 @@ const _Active: React.FC<Props> = ({
   const isGoodNetwork = effectiveConnectionType === "4g";
   return (
     <div>
-      <div className="active__block">
+      <Row large>
         <CurrencyItem logo={logoUrl} name={name} clickable={false} big />
-      </div>
-      <div className="active__block active__tags">
-        {tags && <TagItemList tags={tags} />}
-      </div>
-      <div className="active__block">
-        <h2 className="active__title">{t("active.chart")}</h2>
-        <div className="active__chart-container">
+      </Row>
+      <Row large>{tags && <TagItemList tags={tags} />}</Row>
+      <Row large onlyOffset>
+        <Row>
+          <h2 className="active__title">{t("active.chart")}</h2>
+        </Row>
+        <Row className="active__chart-container">
           {!isServer && isGoodNetwork && (
             <TradingViewWidget
               symbol={chartSymbol}
@@ -40,17 +41,19 @@ const _Active: React.FC<Props> = ({
               theme={Themes.DARK}
             />
           )}
-        </div>
-      </div>
-      <div className="active__block">
-        <h2 className="active__title">
-          {t("active.about")} {name}
-        </h2>
-        <div className="active__description">{description}</div>
-      </div>
-      <div className="active__block">
+        </Row>
+      </Row>
+      <Row large onlyOffset>
+        <Row>
+          <h2 className="active__title">
+            {t("active.about")} {name}
+          </h2>
+        </Row>
+        <Row className="active__description">{description}</Row>
+      </Row>
+      <Row large>
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
-      </div>
+      </Row>
     </div>
   );
 };
