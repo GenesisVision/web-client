@@ -1,5 +1,3 @@
-import "./recovery.scss";
-
 import React from "react";
 
 import SignInContainer from "../signin.container";
@@ -10,7 +8,6 @@ const _RecoveryPage: React.FC<Props> = ({ redirectFrom }) => (
   <SignInContainer
     redirectFrom={redirectFrom}
     type={CODE_TYPE.RECOVERY}
-    className="recovery-page"
     renderForm={({ handle, email, errorMessage }) => (
       <RecoveryCodeForm
         onSubmit={handle}
