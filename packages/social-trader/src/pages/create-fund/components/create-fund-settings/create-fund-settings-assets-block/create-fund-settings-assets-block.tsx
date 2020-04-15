@@ -16,7 +16,6 @@ import { PlatformAssetFull } from "utils/types";
 import "./create-fund-settings-assets-block.scss";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
-  touched,
   error,
   canChange = true,
   assets = [],

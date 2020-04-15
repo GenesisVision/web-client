@@ -3,11 +3,7 @@
 @import "~shared/styles/_sizes";
 
 .add-fund-asset-popover {
-  display: flex;
-  flex-direction: column;
   &__regulator-indicator {
-    display: flex;
-    align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   &__regulator-input {
@@ -27,12 +23,7 @@
       color: rgba(255, 255, 255, 0.3);
     }
   }
-  &__asset-currency-short {
-    opacity: 0.4;
-    @include font-size($font-size-small);
-  }
   &__assets {
-    display: flex;
     @include adaptive-padding(bottom, $popover-padding-medium);
     max-height: 180px;
     overflow: auto;
@@ -50,8 +41,5 @@
   }
   &__search {
     @include adaptive-full-padding($popover-padding-medium);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
   }
 }
