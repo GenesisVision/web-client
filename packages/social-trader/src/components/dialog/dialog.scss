@@ -28,10 +28,6 @@
     text-align: center;
   }
 
-  &__wrapper {
-    @include adaptive-margin(bottom, 16px);
-  }
-
   button.dialog__close {
     position: absolute;
     @include adaptive-full-padding($padding-xxsmall);
@@ -54,25 +50,11 @@
       top: 15px;
     }
 
-    &--outside {
-      position: fixed;
-      display: none;
-      top: 10%;
-      right: 10%;
-    }
-
-    @include media-breakpoint-tablet() {
-      &--outside {
-        display: inherit;
-      }
-
-      &--wider {
+    &--wider {
+      @include media-breakpoint-tablet() {
         display: none;
       }
-    }
-
-    @media (min-width: 1600px) {
-      &--wider {
+      @media (min-width: 1600px) {
         display: inherit;
       }
     }
@@ -93,34 +75,15 @@
     justify-content: space-between;
   }
 
-  &__text {
-    @include adaptive-padding(top, $padding-xsmall);
-
-    &:first-child {
-      padding-top: 0;
-    }
-
-    p {
-      padding-bottom: 0;
-    }
-  }
-
   &__error {
-    @include adaptive-margin(bottom, $padding-xsmall);
     @include font-size($font-size-common);
   }
 }
 
 .dialog-list {
-  width: 100%;
-
   &__item {
     @include font-size($font-size-paragraph);
     font-weight: 300;
     justify-content: space-between;
-  }
-
-  &__title {
-    opacity: 0.5;
   }
 }
