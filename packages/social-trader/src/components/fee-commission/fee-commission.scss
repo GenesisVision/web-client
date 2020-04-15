@@ -6,9 +6,6 @@
   letter-spacing: 0.4px;
   width: 100%;
   justify-content: space-between;
-  &:not(:last-child) {
-    margin-bottom: $padding-xxsmall;
-  }
   &--green-value {
     & .fee-commission__value {
       color: $positive-color;

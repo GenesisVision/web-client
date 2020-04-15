@@ -1,5 +1,6 @@
 import FeeCommission from "components/fee-commission/fee-commission";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { Row } from "components/row/row";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import Crashable from "decorators/crashable";
@@ -16,12 +17,13 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
       render={() => (
         <TooltipContent>
           {notNullFees.map((fee, idx) => (
-            <FeeCommission
-              key={idx}
-              title={fee.title}
-              value={fee.amount}
-              currency={fee.currency}
-            />
+            <Row small key={idx}>
+              <FeeCommission
+                title={fee.title}
+                value={fee.amount}
+                currency={fee.currency}
+              />
+            </Row>
           ))}
         </TooltipContent>
       )}
