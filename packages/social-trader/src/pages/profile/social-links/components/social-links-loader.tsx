@@ -10,7 +10,7 @@ const SocialLinkLoader: React.FC = () => (
 );
 
 const SocialLinksLoader: React.FC = () => (
-  <div className="social-links-loader">
+  <div>
     <SocialLinkLoader />
     <SocialLinkLoader />
     <SocialLinkLoader />

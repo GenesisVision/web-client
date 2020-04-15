@@ -1,5 +1,3 @@
-import "./social-links.scss";
-
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
