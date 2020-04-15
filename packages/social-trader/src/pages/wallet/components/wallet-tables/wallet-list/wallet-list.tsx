@@ -37,7 +37,7 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
         )}
         renderBodyRow={(wallet: WalletData) => (
           <TableRow key={wallet.id}>
-            <TableCell className="wallet-list__cell--wallet">
+            <TableCell>
               <Link
                 to={linkCreator(
                   composeWalletCurrencyUrl(wallet.currency.toLowerCase()),
