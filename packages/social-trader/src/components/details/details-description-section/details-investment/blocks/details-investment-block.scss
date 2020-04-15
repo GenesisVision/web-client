@@ -22,14 +22,6 @@
       padding-left: $padding-large;
     }
   }
-
-  &--investment--investment {
-    flex: 2;
-    min-width: 100%;
-    @include media-breakpoint-landscape-tablet() {
-      min-width: initial;
-    }
-  }
 }
 
 .details-investment-heading {
