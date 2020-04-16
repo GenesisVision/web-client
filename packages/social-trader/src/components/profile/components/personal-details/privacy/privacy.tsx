@@ -1,9 +1,16 @@
 import PrivacyForm, {
   IPrivacyFormValues
 } from "components/profile/components/personal-details/privacy/privacy.form";
+import { IPrivacyData } from "components/profile/components/personal-details/privacy/privacy.types";
 import { updatePrivacy } from "components/profile/services/profile.service";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
+
+interface Props {
+  isPending: boolean;
+  onUpdate: () => void;
+  data: IPrivacyData;
+}
 
 const _Privacy: React.FC<Props> = ({ data, onUpdate, isPending }) => {
   const { sendRequest, errorMessage } = useApiRequest({
@@ -24,11 +31,5 @@ const _Privacy: React.FC<Props> = ({ data, onUpdate, isPending }) => {
     />
   );
 };
-
-interface Props {
-  isPending: boolean;
-  onUpdate: () => void;
-  data: any;
-}
 
 export const Privacy = React.memo(_Privacy);

@@ -1,4 +1,5 @@
 import { Privacy } from "components/profile/components/personal-details/privacy/privacy";
+import { PRIVACY_FORM_VALUES } from "components/profile/components/personal-details/privacy/privacy.types";
 import PublicSelect from "components/profile/components/personal-details/public-select/public-select";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
 import { Row } from "components/row/row";
@@ -45,7 +46,16 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           </Row>
           <Row large>
             <SettingsBlock>
-              <Privacy data={{}} onUpdate={onUpdate} isPending={isPending} />
+              <Privacy
+                data={{
+                  [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
+                    info.whoCanViewCommentsOnMyPosts,
+                  [PRIVACY_FORM_VALUES.whoCanPostToMayWall]:
+                    info.whoCanPostToMayWall
+                }}
+                onUpdate={onUpdate}
+                isPending={isPending}
+              />
             </SettingsBlock>
           </Row>
         </>

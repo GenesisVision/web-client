@@ -1,5 +1,9 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import {
+  IPrivacyData,
+  PRIVACY_FORM_VALUES
+} from "components/profile/components/personal-details/privacy/privacy.types";
 import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -9,23 +13,25 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-type PrivacyValueType = "all" | "me";
+export type IPrivacyFormValues = IPrivacyData;
+
+interface Props {
+  isPending: boolean;
+  onSubmit: (values: IPrivacyFormValues) => void;
+  data: IPrivacyData;
+  errorMessage?: string;
+}
 
 const SELECT_VALUES = [
   {
-    value: "all",
+    value: "AllUsers",
     label: "All users"
   },
   {
-    value: "me",
+    value: "OnlyMe",
     label: "Only me"
   }
 ];
-
-enum FIELDS {
-  view = "view",
-  post = "post"
-}
 
 const PrivacySelect: React.FC<{
   name: string;
@@ -54,6 +60,7 @@ const PrivacySelect: React.FC<{
 };
 
 const _PublicInfoForm: React.FC<Props> = ({
+  data: { whoCanViewCommentsOnMyPosts, whoCanPostToMayWall },
   onSubmit,
   isPending,
   errorMessage
@@ -61,8 +68,8 @@ const _PublicInfoForm: React.FC<Props> = ({
   const [t] = useTranslation();
   const form = useForm<IPrivacyFormValues>({
     defaultValues: {
-      [FIELDS.view]: "all",
-      [FIELDS.post]: "me"
+      [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]: whoCanViewCommentsOnMyPosts,
+      [PRIVACY_FORM_VALUES.whoCanPostToMayWall]: whoCanPostToMayWall
     },
     mode: "onBlur"
   });
@@ -72,13 +79,13 @@ const _PublicInfoForm: React.FC<Props> = ({
       <Row>
         <PrivacySelect
           title={t("profile-page.privacy.view")}
-          name={FIELDS.view}
+          name={PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts}
         />
       </Row>
       <Row large>
         <PrivacySelect
           title={t("profile-page.privacy.post")}
-          name={FIELDS.post}
+          name={PRIVACY_FORM_VALUES.whoCanPostToMayWall}
         />
       </Row>
       <Row>
@@ -92,18 +99,6 @@ const _PublicInfoForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface IPrivacyFormValues {
-  [FIELDS.view]: PrivacyValueType;
-  [FIELDS.post]: PrivacyValueType;
-}
-
-interface Props {
-  isPending: boolean;
-  onSubmit: (values: IPrivacyFormValues) => void;
-  data: any;
-  errorMessage?: string;
-}
 
 const PrivacyForm = React.memo(_PublicInfoForm);
 export default PrivacyForm;
