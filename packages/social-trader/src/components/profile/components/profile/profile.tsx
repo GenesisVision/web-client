@@ -2,7 +2,6 @@ import { Privacy } from "components/profile/components/personal-details/privacy/
 import { PRIVACY_FORM_VALUES } from "components/profile/components/personal-details/privacy/privacy.types";
 import PublicSelect from "components/profile/components/personal-details/public-select/public-select";
 import ProfileImageContainer from "components/profile/settings/profile-image/profile-image-container";
-import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
@@ -41,23 +40,18 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           <SettingsBlock>
             <PublicSelect />
           </SettingsBlock>
-          <Row large>
-            <h3>{t("profile-page.privacy.title")}</h3>
-          </Row>
-          <Row large>
-            <SettingsBlock>
-              <Privacy
-                data={{
-                  [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
-                    info.whoCanViewCommentsOnMyPosts,
-                  [PRIVACY_FORM_VALUES.whoCanPostToMayWall]:
-                    info.whoCanPostToMayWall
-                }}
-                onUpdate={onUpdate}
-                isPending={isPending}
-              />
-            </SettingsBlock>
-          </Row>
+          <SettingsBlock label={t("profile-page.privacy.title")}>
+            <Privacy
+              data={{
+                [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
+                  info.whoCanViewCommentsOnMyPosts,
+                [PRIVACY_FORM_VALUES.whoCanPostToMayWall]:
+                  info.whoCanPostToMayWall
+              }}
+              onUpdate={onUpdate}
+              isPending={isPending}
+            />
+          </SettingsBlock>
         </>
       )}
     </>
