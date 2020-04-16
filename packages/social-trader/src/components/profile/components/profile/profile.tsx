@@ -6,6 +6,7 @@ import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import PublicInfo from "modules/public-info/public-info";
+import SocialLinksContainer from "pages/profile/social-links/components/social-links.container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -54,6 +55,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           </SettingsBlock>
         </>
       )}
+      <SocialLinksContainer />
     </>
   );
 };
