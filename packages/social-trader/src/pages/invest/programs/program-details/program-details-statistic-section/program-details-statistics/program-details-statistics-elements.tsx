@@ -1,10 +1,10 @@
-import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
-
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
+import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 import { MutedText } from "components/muted-text/muted-text";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
@@ -95,11 +95,13 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   </MutedText>
                 </span>
               </Tooltip>
-              <ProgramPeriodLine
-                start={statistic.lastPeriodStarts}
-                end={statistic.lastPeriodEnds}
-                status={status}
-              />
+              <Row small onlyOffset>
+                <ProgramPeriodLine
+                  start={statistic.lastPeriodStarts}
+                  end={statistic.lastPeriodEnds}
+                  status={status}
+                />
+              </Row>
             </div>
           )}
         </>

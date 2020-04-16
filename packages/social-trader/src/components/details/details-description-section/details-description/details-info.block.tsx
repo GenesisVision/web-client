@@ -29,11 +29,11 @@ const _DetailsInfo: React.FC<Props> = ({
           <SocialLinksBlock socialLinks={socialLinks} />
         </Row>
       )}
-      {children && (
-        <div className="details-description__info-block">{children}</div>
-      )}
+      {children && <Row onlyOffset>{children}</Row>}
       {description && (
-        <DetailsStrategy title={descriptionTitle} description={description} />
+        <Row xlarge onlyOffset>
+          <DetailsStrategy title={descriptionTitle} description={description} />
+        </Row>
       )}
     </div>
   );

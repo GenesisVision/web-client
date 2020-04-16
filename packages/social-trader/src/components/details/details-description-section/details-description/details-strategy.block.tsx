@@ -1,3 +1,5 @@
+import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,10 +12,10 @@ const _DetailsStrategy: React.FC<{
     title || t("program-details-page.description.strategy");
   return (
     <>
-      <h4 className="asset-details-description__subheading details-description__subheading">
-        {descriptionTitle}
-      </h4>
-      <div className="asset-details-description__text">{description}</div>
+      <h4>{descriptionTitle}</h4>
+      <Row className="asset-details-description__text">
+        <MutedText noWrap={false}>{description}</MutedText>
+      </Row>
     </>
   );
 };

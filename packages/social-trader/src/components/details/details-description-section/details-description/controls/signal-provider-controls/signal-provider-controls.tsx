@@ -5,12 +5,7 @@ import * as React from "react";
 
 const SignalProviderControls: React.FC<Props> = ({ children }) => {
   return (
-    <DetailsBlock
-      type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="details-description__control-elements-block"
-    >
-      {children}
-    </DetailsBlock>
+    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>{children}</DetailsBlock>
   );
 };
 

@@ -1,11 +1,11 @@
-import "components/details/details-description-section/details-description/details-description.scss";
-
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
+import "components/details/details-description-section/details-description/details-description.scss";
 import {
   DETAILS_TYPE,
   PersonalDetailsType
 } from "components/details/details.types";
 import { ToType } from "components/link/link";
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
@@ -55,11 +55,20 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
       />
-      {PerformanceData && <PerformanceData />}
+      {PerformanceData && (
+        <Row xlarge>
+          <PerformanceData />
+        </Row>
+      )}
       {Controls && (
-        <div className="asset-details-description__controls">
+        <Row
+          center={false}
+          xlarge
+          wrap
+          className="asset-details-description__controls"
+        >
           <Controls />
-        </div>
+        </Row>
       )}
     </div>
   );
