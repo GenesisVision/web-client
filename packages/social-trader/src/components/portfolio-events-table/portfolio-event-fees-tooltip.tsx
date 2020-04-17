@@ -13,7 +13,6 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
   return notNullFees.length > 0 ? (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-      className="portfolio-event-details__popover"
       render={() => (
         <TooltipContent>
           {notNullFees.map((fee, idx) => (

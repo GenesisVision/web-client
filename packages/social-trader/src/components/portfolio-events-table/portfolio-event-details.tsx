@@ -25,7 +25,6 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
         anchorEl={anchor}
         onClose={clearAnchor}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-        className="portfolio-event-details__popover"
       >
         <PopoverContent>
           <PopoverContentCardBlock size={"small"}>
