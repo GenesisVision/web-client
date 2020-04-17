@@ -1,7 +1,8 @@
+import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
-import Surface from "components/surface/surface";
+import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { Broker } from "gv-api-web";
 import * as React from "react";
@@ -54,7 +55,12 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           />
         </Row>
       </RowItem>
-      <Surface className="surface--horizontal-paddings broker-select__description">
+      <DefaultBlock
+        size={SIZES.LARGE}
+        solid
+        wide
+        className="broker-select__description"
+      >
         <Row>
           <h3>{selectedBroker.name}</h3>
         </Row>
@@ -95,7 +101,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
             {selectedBroker.assets}
           </StatisticItem>
         </Row>
-      </Surface>
+      </DefaultBlock>
     </Row>
   );
 };

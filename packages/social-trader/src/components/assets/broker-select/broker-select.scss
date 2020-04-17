@@ -15,7 +15,6 @@
     &#{&} div {
       white-space: normal;
     }
-    width: 100%;
 
     @include media-breakpoint-landscape-phone() {
       max-width: 300px;
