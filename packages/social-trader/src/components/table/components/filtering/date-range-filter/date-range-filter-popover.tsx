@@ -1,3 +1,4 @@
+import { Center } from "components/center/center";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import {
   PopoverContentCardBlock,
@@ -123,13 +124,13 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
         </PopoverContentCardBlock>
         <PopoverContentCardBlock className="date-range-filter__dates">
           <FilterTitle>{t("filters.date-range.label")}</FilterTitle>
-          <div className="date-range-filter__values">
+          <Center className="date-range-filter__values">
             <DateRangeFilterValues
               {...this.state}
               onChange={this.handleChangeDate}
               startLabel={startLabel}
             />
-          </div>
+          </Center>
           <Row>
             <RowItem>
               <GVButton

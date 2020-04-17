@@ -13,7 +13,6 @@
   }
 
   &__values {
-    display: inline-flex;
     flex-wrap: wrap;
 
     @include media-breakpoint-landscape-phone() {

@@ -60,9 +60,11 @@ const _RecoveryCodeForm: React.FC<Props> = ({
           component={SimpleTextField}
         />
       </Row>
-      <Row>
-        <FormError error={errorMessage} />
-      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
       <Row>
         <SubmitButton
           id="recoverySubmit"

@@ -82,7 +82,7 @@ const _SocialLinkForm: React.FC<Props> = ({
             autoComplete="off"
           />
           {isButtonsVisible && (
-            <Center>
+            <Row>
               <RowItem>
                 <SubmitButton isSuccessful={!errorMessage}>
                   {t("buttons.save")}
@@ -97,7 +97,7 @@ const _SocialLinkForm: React.FC<Props> = ({
                   {t("buttons.cancel")}
                 </GVButton>
               </RowItem>
-            </Center>
+            </Row>
           )}
         </HookForm>
       </RowItem>

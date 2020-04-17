@@ -4,6 +4,7 @@ import { SocialLinkViewModel, UpdateSocialLinkViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import {
   fetchSocialLinks,
@@ -40,6 +41,7 @@ interface ILinksProps {
 }
 
 const _SocialLinksContainer: React.FC = () => {
+  const [t] = useTranslation();
   const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest({
     request: fetchSocialLinks,
     fetchOnMount: true
@@ -57,7 +59,7 @@ const _SocialLinksContainer: React.FC = () => {
   );
 
   return (
-    <SettingsBlock>
+    <SettingsBlock label={t("profile-page.tabs.social-links")}>
       <Links
         errorMessage={errorMessage}
         condition={socialLinks !== undefined}
