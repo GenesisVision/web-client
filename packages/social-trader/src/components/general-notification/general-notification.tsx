@@ -1,5 +1,5 @@
 import { Center } from "components/center/center";
-import GVSwitch from "components/gv-selection/gv-switch";
+import GVSwitch from "components/gv-switch";
 import { RowItem } from "components/row-item/row-item";
 import useApiRequest from "hooks/api-request.hook";
 import {

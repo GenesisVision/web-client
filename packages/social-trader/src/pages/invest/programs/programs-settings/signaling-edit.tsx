@@ -1,4 +1,4 @@
-import GVSwitch from "components/gv-selection/gv-switch";
+import GVSwitch from "components/gv-switch";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SignalingEditFormContainer } from "modules/signaling-edit-form/signaling-edit-form.container";
