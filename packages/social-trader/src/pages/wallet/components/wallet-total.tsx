@@ -1,5 +1,3 @@
-import "./wallet-title-block.scss";
-
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -13,8 +11,8 @@ import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
+import "./wallet-title-block.scss";
 
 const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
@@ -25,9 +23,9 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
           <RowItem className="wallet-title-block__title">
             <h1>{t("wallet-page.title")}</h1>
           </RowItem>
-          <RowItem>
+          {/*<RowItem>
             <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
-          </RowItem>
+          </RowItem>*/}
         </Row>
         <WalletBalanceElements
           available={wallet.grandTotal.available}
