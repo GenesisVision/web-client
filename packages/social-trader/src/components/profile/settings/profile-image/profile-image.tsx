@@ -1,5 +1,3 @@
-import "./profile-image.scss";
-
 import { IImageValue } from "components/form/input-image/input-image";
 import imageValidationSchema from "components/form/input-image/input-image.validation";
 import LogoField from "components/logo-field/logo-field";
