@@ -1,6 +1,7 @@
 import DetailsBlock from "components/details/details-block";
 import ProfileLayout from "components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "components/profile/profile.constants";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ProfileFullViewModel } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
@@ -45,14 +46,14 @@ const _ReferralProgramPage: React.FC = () => {
           currency={currency}
         />
       </SettingsBlock>
-      <div className="referral-program__tables">
+      <Row large className="referral-program__tables">
         <DetailsBlock table>
           <ReferralFriendsTable />
         </DetailsBlock>
         <DetailsBlock table>
           <ReferralHistoryTable />
         </DetailsBlock>
-      </div>
+      </Row>
     </ProfileLayout>
   );
 };

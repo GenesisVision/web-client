@@ -1,4 +1,5 @@
 import ImageBaseElement from "components/avatar/image-base.element";
+import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import Email from "media/email.svg";
@@ -14,15 +15,15 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   const [t] = useTranslation();
   return (
     <div>
-      <div className="referral-program__title">
+      <Row>
         <h4>{t("profile-page.referral-program.title")}</h4>
-      </div>
-      <div className="referral-program__link-block">
+      </Row>
+      <Row className="referral-program__link-block">
         {t("profile-page.referral-program.referral-link")}
         <div className="referral-program__link">{refUrl}</div>
         <CopyButton value={refUrl} />
-      </div>
-      <div className="referral-program__share-block">
+      </Row>
+      <Row onlyOffset className="referral-program__share-block">
         {t("profile-page.referral-program.share-your-passion")}
         {refUrl && (
           <ShareBlock
@@ -32,7 +33,7 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
             refUrl={refUrl}
           />
         )}
-      </div>
+      </Row>
     </div>
   );
 };
