@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import GlobalSearchResultContainer from "components/global-search/components/global-search-result/global-search-result-container";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useCallback, useState } from "react";
 
@@ -15,9 +15,11 @@ const _GlobalSearchContainer: React.FC = () => {
   return (
     <>
       <GlobalSearchInput query={query} onChange={handleOnChange} />
-      <div className={classNames({ "global-search-hidden": !query })}>
-        <GlobalSearchResultContainer query={query} />
-      </div>
+      {query && (
+        <Row onlyOffset>
+          <GlobalSearchResultContainer query={query} />
+        </Row>
+      )}
     </>
   );
 };
