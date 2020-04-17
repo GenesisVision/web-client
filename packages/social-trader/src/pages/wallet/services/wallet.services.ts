@@ -43,9 +43,9 @@ export const fetchAvailableWallets = ({
 export const fetchWalletTransactions = (requestFilters?: FilteringType) =>
   actions.fetchWalletTransactionsAction(requestFilters);
 
-export const offPayFeesWithGvt = () => api.wallet().switchPayFeeInGvtOff();
+export const offPayFeesWithGvt = () => Promise.resolve();
 
-export const onPayFeesWithGvt = () => api.wallet().switchPayFeeInGvtOn();
+export const onPayFeesWithGvt = () => Promise.resolve();
 
 export type FetchTransactionsInternalFilterType = {
   transactionType?:
