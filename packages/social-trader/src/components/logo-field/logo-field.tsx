@@ -14,7 +14,7 @@ const _LogoField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <h5>{title}</h5>
+      {title && <h5>{title}</h5>}
       <Row wide>
         <MutedText small>
           {t("create-program-page.settings.fields.upload-logo-rules")}
