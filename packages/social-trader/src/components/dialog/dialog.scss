@@ -61,7 +61,7 @@
   }
 
   &__header {
-    @include adaptive-margin(top, $padding-xsmall);
+    @include adaptive-padding(top, $padding-xsmall);
   }
 
   &__subtitle {
