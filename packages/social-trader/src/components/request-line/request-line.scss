@@ -2,8 +2,6 @@
 @import "~shared/styles/_sizes";
 
 .request-line {
-  display: flex;
-  align-items: center;
   color: $text-accent-color;
 
   .portfolio-event-logo__photo {
@@ -13,11 +11,7 @@
   &:not(:last-of-type) {
     border-bottom: 1px solid $border-color;
   }
-  &__logo {
-    padding-right: $padding-xxsmall;
-  }
   &__values {
     padding-top: $padding-xsmall;
-    padding-right: $padding-small;
   }
 }

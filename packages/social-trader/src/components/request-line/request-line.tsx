@@ -1,5 +1,7 @@
+import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
+import { RowItem } from "components/row-item/row-item";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { AssetInvestmentRequest } from "gv-api-web";
@@ -25,52 +27,38 @@ const _RequestLine: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <div className="request-line">
-      <div className="request-line__logo">
+    <Center className="request-line">
+      <RowItem small>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
-      </div>
-      <StatisticItemList className="request-line__values">
-        <StatisticItem label={title} invert accent>
-          {type}
-        </StatisticItem>
-        <StatisticItem
-          label={
-            assetDetails.isWithdrawAll ? (
-              t("withdraw-program.withdrawing-all")
-            ) : (
-              <NumberFormat
-                value={formatCurrencyValue(amount, currency)}
-                decimalScale={8}
-                displayType="text"
-                allowNegative={false}
-                suffix={` ${currency}`}
-              />
-            )
-          }
-          invert
-        >
-          {localizedDate(date)}
-        </StatisticItem>
-        <StatisticItem
-          condition={successFee !== null}
-          label={
-            <NumberFormat
-              value={successFee}
-              suffix={` %`}
-              allowNegative={false}
-              displayType="text"
-            />
-          }
-          invert
-        >
-          {t("program-details-page.description.successFee")}
-        </StatisticItem>
-        {assetType === "Fund" ? (
+      </RowItem>
+      <RowItem large>
+        <StatisticItemList className="request-line__values">
+          <StatisticItem label={title} invert accent>
+            {type}
+          </StatisticItem>
           <StatisticItem
-            condition={entryFee !== null}
+            label={
+              assetDetails.isWithdrawAll ? (
+                t("withdraw-program.withdrawing-all")
+              ) : (
+                <NumberFormat
+                  value={formatCurrencyValue(amount, currency)}
+                  decimalScale={8}
+                  displayType="text"
+                  allowNegative={false}
+                  suffix={` ${currency}`}
+                />
+              )
+            }
+            invert
+          >
+            {localizedDate(date)}
+          </StatisticItem>
+          <StatisticItem
+            condition={successFee !== null}
             label={
               <NumberFormat
-                value={entryFee}
+                value={successFee}
                 suffix={` %`}
                 allowNegative={false}
                 displayType="text"
@@ -78,14 +66,44 @@ const _RequestLine: React.FC<Props> = ({
             }
             invert
           >
-            {t("fund-details-page.description.entryFee")}
+            {t("program-details-page.description.successFee")}
           </StatisticItem>
-        ) : (
+          {assetType === "Fund" ? (
+            <StatisticItem
+              condition={entryFee !== null}
+              label={
+                <NumberFormat
+                  value={entryFee}
+                  suffix={` %`}
+                  allowNegative={false}
+                  displayType="text"
+                />
+              }
+              invert
+            >
+              {t("fund-details-page.description.entryFee")}
+            </StatisticItem>
+          ) : (
+            <StatisticItem
+              condition={managementFee !== null}
+              label={
+                <NumberFormat
+                  value={managementFee}
+                  suffix={` %`}
+                  allowNegative={false}
+                  displayType="text"
+                />
+              }
+              invert
+            >
+              {t("program-details-page.description.management-fee")}
+            </StatisticItem>
+          )}
           <StatisticItem
-            condition={managementFee !== null}
+            condition={exitFee !== null}
             label={
               <NumberFormat
-                value={managementFee}
+                value={exitFee}
                 suffix={` %`}
                 allowNegative={false}
                 displayType="text"
@@ -93,31 +111,19 @@ const _RequestLine: React.FC<Props> = ({
             }
             invert
           >
-            {t("program-details-page.description.management-fee")}
+            {t("fund-details-page.description.exitFee")}
           </StatisticItem>
-        )}
-        <StatisticItem
-          condition={exitFee !== null}
-          label={
-            <NumberFormat
-              value={exitFee}
-              suffix={` %`}
-              allowNegative={false}
-              displayType="text"
-            />
-          }
-          invert
-        >
-          {t("fund-details-page.description.exitFee")}
-        </StatisticItem>
-      </StatisticItemList>
+        </StatisticItemList>
+      </RowItem>
       {canCancelRequest && (
-        <CancelRequestButton
-          onApplyCancelRequest={onApplyCancelRequest}
-          id={id}
-        />
+        <RowItem>
+          <CancelRequestButton
+            onApplyCancelRequest={onApplyCancelRequest}
+            id={id}
+          />
+        </RowItem>
       )}
-    </div>
+    </Center>
   );
 };
 
