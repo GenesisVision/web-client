@@ -34,6 +34,5 @@ export const walletMultiSummaryLoaderData: WalletSummary = {
   },
   wallets: Array(4)
     .fill("")
-    .map(walletDataCreator),
-  payFeesWithGvt: false
+    .map(walletDataCreator)
 };

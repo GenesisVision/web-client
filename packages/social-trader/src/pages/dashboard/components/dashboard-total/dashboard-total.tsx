@@ -1,4 +1,5 @@
 import GVColors from "components/gv-styles/gv-colors";
+import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
 import StatisticItem from "components/statistic-item/statistic-item";
@@ -65,11 +66,13 @@ const _DashboardTotal: React.FC<Props> = ({
       {hasProfits && (
         <>
           <h5>{t("dashboard-page.total.performance")}</h5>
-          <DashboardStatisticPeriods
-            data={profits}
-            currency={currency}
-            withProfitability
-          />
+          <Row small>
+            <DashboardStatisticPeriods
+              data={profits}
+              currency={currency}
+              withProfitability
+            />
+          </Row>
         </>
       )}
     </div>

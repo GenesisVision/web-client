@@ -11,6 +11,11 @@ import { SIZES } from "constants/constants";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import {
+  betaTesterSelector,
+  isSocialBetaTester
+} from "reducers/header-reducer";
 import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
@@ -26,6 +31,8 @@ const _ManagerInfo: React.FC<Props> = ({
     socialLinks
   }
 }) => {
+  const betaTester = useSelector(betaTesterSelector);
+  const isBetaTester = isSocialBetaTester(betaTester);
   const isOwnPage = useIsOwnPage(id);
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
@@ -48,25 +55,29 @@ const _ManagerInfo: React.FC<Props> = ({
               </MutedText>
             </Row>
           </Row>
-          {isOwnPage === false && (
-            <Row onlyOffset large>
-              <FollowUserButton id={id} value={isFollow} />
-            </Row>
+          {isBetaTester && (
+            <>
+              {isOwnPage === false && (
+                <Row onlyOffset large>
+                  <FollowUserButton id={id} value={isFollow} />
+                </Row>
+              )}
+              <Row large>
+                <RowItem>
+                  <ManagerStatisticItem
+                    label={t("manager-page.followers")}
+                    value={followers}
+                  />
+                </RowItem>
+                <RowItem>
+                  <ManagerStatisticItem
+                    label={t("manager-page.following")}
+                    value={following}
+                  />
+                </RowItem>
+              </Row>
+            </>
           )}
-          <Row large>
-            <RowItem>
-              <ManagerStatisticItem
-                label={t("manager-page.followers")}
-                value={followers}
-              />
-            </RowItem>
-            <RowItem>
-              <ManagerStatisticItem
-                label={t("manager-page.following")}
-                value={following}
-              />
-            </RowItem>
-          </Row>
         </DefaultBlock>
       </Row>
       <Row>
