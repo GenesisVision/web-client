@@ -33,30 +33,7 @@
     }
   }
 
-  &__title {
-    @include adaptive-padding(right, $padding-xsmall);
-    padding-bottom: $padding-xsmall;
-  }
-
   &__wrapper {
-    @include adaptive-margin(bottom, $padding-upper-medium);
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &--broker-list {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 0;
-    }
-  }
-
-  &__form {
-    width: 100%;
   }
 }
