@@ -38,7 +38,7 @@ const _TwoFactor: React.FC<Props> = ({
         <option value={TYPE_2FA.GOOGLE}>{t("2fa-page.google")}</option>
       </GVTextField>
       <Row>
-        <GenerateRecoveryCode disabled={false} />
+        <GenerateRecoveryCode disabled={twoFactorEnabled} />
       </Row>
       <Dialog
         className={classNames({
