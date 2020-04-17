@@ -1,6 +1,6 @@
+import { Center } from "components/center/center";
 import GVProgramPeriod from "components/gv-program-period";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
@@ -12,7 +12,7 @@ import "./program-period-pie.scss";
 const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
   return (
     <Tooltip render={() => <ProgramPeriodTooltip end={end} />}>
-      <Row wide className={className}>
+      <Center className={className}>
         <RowItem small>
           <GVProgramPeriod
             start={start}
@@ -24,7 +24,7 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
         <RowItem className="program-period-pie__text">
           {convertDateToShortFormat(distanceDate(start, end))}
         </RowItem>
-      </Row>
+      </Center>
     </Tooltip>
   );
 };
