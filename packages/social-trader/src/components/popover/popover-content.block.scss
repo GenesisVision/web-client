@@ -31,10 +31,4 @@
       background-color: $secondary-background-color;
     }
   }
-
-  &__block-item {
-    &:not(:last-child) {
-      @include adaptive-padding(bottom, $padding-xsmall);
-    }
-  }
 }
