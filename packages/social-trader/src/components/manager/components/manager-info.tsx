@@ -1,7 +1,10 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
-import { ManagerStatisticItem } from "components/manager/components/manager-statistic-item";
+import {
+  FollowersCountItem,
+  FollowingCountItem
+} from "components/manager/components/users-popups/users-count-item";
 import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
@@ -64,16 +67,10 @@ const _ManagerInfo: React.FC<Props> = ({
               )}
               <Row large>
                 <RowItem>
-                  <ManagerStatisticItem
-                    label={t("manager-page.followers")}
-                    value={followers}
-                  />
+                  <FollowersCountItem id={id} count={followers} />
                 </RowItem>
                 <RowItem>
-                  <ManagerStatisticItem
-                    label={t("manager-page.following")}
-                    value={following}
-                  />
+                  <FollowingCountItem id={id} count={following} />
                 </RowItem>
               </Row>
             </>
