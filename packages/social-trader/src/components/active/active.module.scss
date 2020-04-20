@@ -13,7 +13,7 @@
     @include horizontal-paddings($padding-large);
     max-width: 768px;
   }
-  &__chart-container {
+  &__chart_container {
     height: 300px;
     .theme-dark {
       background: red !important;
