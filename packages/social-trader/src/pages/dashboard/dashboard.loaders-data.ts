@@ -173,6 +173,11 @@ export const getRecommendationLoaderData = (): TRecommendation => {
 };
 
 export const getTotalLoaderData = (): TDashboardTotal => ({
+  limitWithoutKyc: {
+    limit: 0,
+    currency: "GVT",
+    invested: 0
+  },
   total: getRandomInteger(1, 10000),
   trading: getRandomInteger(-10000, 10000),
   invested: getRandomInteger(-10000, 10000),

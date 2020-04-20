@@ -22,7 +22,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
       changeFilter={changeFilter!}
     >
       {(filteredAssets, handleClick) => (
-        <div className="fund-asset-filter__assets-block">
+        <Row onlyOffset className="fund-asset-filter__assets-block">
           {filteredAssets.map((asset, idx) => (
             <Row
               small
@@ -41,7 +41,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
               <MutedText>{asset.asset}</MutedText>
             </Row>
           ))}
-        </div>
+        </Row>
       )}
     </TileFilterPopover>
   );

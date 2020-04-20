@@ -14,10 +14,10 @@ export const SUBSCRIPTIONS_COLUMNS: SortingColumn[] = [
     name: "type"
   },
   {
-    name: "tolerance"
+    name: "value"
   },
   {
-    name: "value"
+    name: "tolerance"
   },
   {
     name: "volume-fee"

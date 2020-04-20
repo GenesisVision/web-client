@@ -1,5 +1,7 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -47,23 +49,34 @@ const _RecoveryCodeForm: React.FC<Props> = ({
   return (
     <HookForm className="recovery-form" form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.recovery.title")}</h3>
-      <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
-      <GVHookFormField
-        name={FIELDS.code}
-        placeholder="Recovery code"
-        autoFocus
-        component={SimpleTextField}
-      />
-      <FormError error={errorMessage} />
-      <SubmitButton
-        id="recoverySubmit"
-        isPending={requestStatus === CAPTCHA_STATUS.PENDING}
-        isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
-        disabled={requestStatus === CAPTCHA_STATUS.PENDING}
-        className="recovery-form__submit"
-      >
-        {t("auth.login.recovery.continue")}
-      </SubmitButton>
+      <Row>
+        <MutedText noWrap={false}>{t("auth.login.recovery.text")}</MutedText>
+      </Row>
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          name={FIELDS.code}
+          placeholder="Recovery code"
+          autoFocus
+          component={SimpleTextField}
+        />
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row xlarge>
+        <SubmitButton
+          id="recoverySubmit"
+          isPending={requestStatus === CAPTCHA_STATUS.PENDING}
+          isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
+          disabled={requestStatus === CAPTCHA_STATUS.PENDING}
+          className="recovery-form__submit"
+        >
+          {t("auth.login.recovery.continue")}
+        </SubmitButton>
+      </Row>
     </HookForm>
   );
 };

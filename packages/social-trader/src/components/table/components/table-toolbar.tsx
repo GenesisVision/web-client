@@ -69,7 +69,7 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
         )}
       </div>
       <RowItem>
-        <Row wrap>
+        <Row>
           <RowItem>
             <Row wrap>
               {renderFilters &&

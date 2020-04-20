@@ -20,8 +20,6 @@ import {
   SECURITY_ROUTE,
   SETTINGS,
   SETTINGS_ROUTE,
-  SOCIAL_LINKS,
-  SOCIAL_LINKS_ROUTE,
   VERIFY
 } from "./profile.constants";
 
@@ -31,8 +29,7 @@ const tabs = [
   { pathname: KYC_ROUTE, value: VERIFY, hideable: true },
   { pathname: SETTINGS_ROUTE, value: SETTINGS },
   { pathname: SECURITY_ROUTE, value: SECURITY },
-  { pathname: REFERRAL_PROGRAM_ROUTE, value: REFERRAL_PROGRAM },
-  { pathname: SOCIAL_LINKS_ROUTE, value: SOCIAL_LINKS }
+  { pathname: REFERRAL_PROGRAM_ROUTE, value: REFERRAL_PROGRAM }
 ];
 
 const ProfileLayout: React.FC<Props> = ({ route, children }) => {

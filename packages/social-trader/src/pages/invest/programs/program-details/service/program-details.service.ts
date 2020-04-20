@@ -180,6 +180,18 @@ export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
     })
   );
 
+  if (isProgram) {
+    const periodHistoryFilters = composeRequestFiltersByTableState(
+      periodHistoryTableSelector(getState())
+    );
+    dispatch(
+      getPeriodHistory(id)({
+        ...periodHistoryFilters,
+        ...commonFiltering
+      })
+    );
+  }
+
   if (isAuthenticated) {
     const subscriptionFilters = composeRequestFiltersByTableState(
       subscriptionsTableSelector(getState())
@@ -192,16 +204,6 @@ export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
     );
 
     if (isProgram) {
-      const periodHistoryFilters = composeRequestFiltersByTableState(
-        periodHistoryTableSelector(getState())
-      );
-      dispatch(
-        getPeriodHistory(id)({
-          ...periodHistoryFilters,
-          ...commonFiltering
-        })
-      );
-
       const financialStatisticsFilters = composeRequestFiltersByTableState(
         financialStatisticTableSelector(getState())
       );

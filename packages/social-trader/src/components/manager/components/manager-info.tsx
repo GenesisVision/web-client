@@ -1,7 +1,10 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
-import { ManagerStatisticItem } from "components/manager/components/manager-statistic-item";
+import {
+  FollowersCountItem,
+  FollowingCountItem
+} from "components/manager/components/users-popups/users-count-item";
 import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
@@ -11,6 +14,11 @@ import { SIZES } from "constants/constants";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import {
+  betaTesterSelector,
+  isSocialBetaTester
+} from "reducers/header-reducer";
 import { localizedDate } from "utils/dates";
 
 const _ManagerInfo: React.FC<Props> = ({
@@ -26,6 +34,8 @@ const _ManagerInfo: React.FC<Props> = ({
     socialLinks
   }
 }) => {
+  const betaTester = useSelector(betaTesterSelector);
+  const isBetaTester = isSocialBetaTester(betaTester);
   const isOwnPage = useIsOwnPage(id);
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
@@ -48,25 +58,23 @@ const _ManagerInfo: React.FC<Props> = ({
               </MutedText>
             </Row>
           </Row>
-          {isOwnPage === false && (
-            <Row onlyOffset large>
-              <FollowUserButton id={id} value={isFollow} />
-            </Row>
+          {isBetaTester && (
+            <>
+              {isOwnPage === false && (
+                <Row onlyOffset large>
+                  <FollowUserButton id={id} value={isFollow} />
+                </Row>
+              )}
+              <Row large>
+                <RowItem>
+                  <FollowersCountItem id={id} count={followers} />
+                </RowItem>
+                <RowItem>
+                  <FollowingCountItem id={id} count={following} />
+                </RowItem>
+              </Row>
+            </>
           )}
-          <Row large>
-            <RowItem>
-              <ManagerStatisticItem
-                label={t("manager-page.followers")}
-                value={followers}
-              />
-            </RowItem>
-            <RowItem>
-              <ManagerStatisticItem
-                label={t("manager-page.following")}
-                value={following}
-              />
-            </RowItem>
-          </Row>
         </DefaultBlock>
       </Row>
       <Row>

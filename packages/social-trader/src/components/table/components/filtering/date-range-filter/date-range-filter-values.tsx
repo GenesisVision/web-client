@@ -1,5 +1,6 @@
 import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import GVTextField from "components/gv-text-field";
+import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { localizedDate, subtractDate } from "utils/dates";
@@ -51,8 +52,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
     default:
       return (
         <>
-          {
-            //@ts-ignore
+          <RowItem>
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
@@ -66,9 +66,8 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MIN_FILTER_NAME)}
             />
-          }
-          {
-            //@ts-ignore
+          </RowItem>
+          <RowItem>
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
@@ -83,7 +82,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MAX_FILTER_NAME)}
             />
-          }
+          </RowItem>
         </>
       );
   }
@@ -93,14 +92,16 @@ const _FirstInput: React.FC<{ value: string }> = ({ value }) => {
   const [t] = useTranslation();
   return (
     //@ts-ignore TODO сделать фикс GVTextField
-    <GVTextField
-      wrapperClassName="date-range-filter__date-input"
-      type="text"
-      name="startDate"
-      label={t("filters.date-range.start")}
-      value={value}
-      disabled
-    />
+    <RowItem>
+      <GVTextField
+        wrapperClassName="date-range-filter__date-input"
+        type="text"
+        name="startDate"
+        label={t("filters.date-range.start")}
+        value={value}
+        disabled
+      />
+    </RowItem>
   );
 };
 const FirstInput = React.memo(_FirstInput);
@@ -108,14 +109,16 @@ const FirstInput = React.memo(_FirstInput);
 const _SecondInput: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <GVTextField
-      wrapperClassName="date-range-filter__date-input"
-      type="text"
-      name="endDate"
-      label={t("filters.date-range.end")}
-      value={t<string>("filters.date-range.today")}
-      disabled
-    />
+    <RowItem>
+      <GVTextField
+        wrapperClassName="date-range-filter__date-input"
+        type="text"
+        name="endDate"
+        label={t("filters.date-range.end")}
+        value={t<string>("filters.date-range.today")}
+        disabled
+      />
+    </RowItem>
   );
 };
 const SecondInput = React.memo(_SecondInput);

@@ -1,8 +1,9 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
@@ -45,34 +46,44 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
         subtitle={programName}
       />
       <DialogBottom>
-        <GVHookFormField
-          validateOnInput={false}
-          wide
-          component={SimpleTextField}
-          label={t("password-change-trading-account.new-password")}
-          type="password"
-          name={FORM_FIELDS.password}
-          autoComplete="off"
-        />
-        <GVHookFormField
-          wide
-          component={SimpleTextField}
-          label={t("password-change-trading-account.confirm-password")}
-          type="password"
-          name={FORM_FIELDS.confirmPassword}
-          autoComplete="off"
-        />
-        {twoFactorEnabled && (
+        <Row onlyOffset>
+          <GVHookFormField
+            validateOnInput={false}
+            wide
+            component={SimpleTextField}
+            label={t("password-change-trading-account.new-password")}
+            type="password"
+            name={FORM_FIELDS.password}
+            autoComplete="off"
+          />
+        </Row>
+        <Row onlyOffset>
           <GVHookFormField
             wide
-            type="text"
-            name={FORM_FIELDS.twoFactorCode}
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
             component={SimpleTextField}
+            label={t("password-change-trading-account.confirm-password")}
+            type="password"
+            name={FORM_FIELDS.confirmPassword}
+            autoComplete="off"
           />
+        </Row>
+        {twoFactorEnabled && (
+          <Row onlyOffset>
+            <GVHookFormField
+              wide
+              type="text"
+              name={FORM_FIELDS.twoFactorCode}
+              label={t("wallet-withdraw.two-factor-code-label")}
+              autoComplete="off"
+              component={SimpleTextField}
+            />
+          </Row>
         )}
-        <DialogError error={errorMessage} />
+        {errorMessage && (
+          <Row>
+            <FormError error={errorMessage} />
+          </Row>
+        )}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}

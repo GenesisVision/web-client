@@ -16,17 +16,19 @@ const _ProgramDetailsPage: React.FC<Props> = ({ route }) => {
   const [programCurrency, setProgramCurrency] = useState<
     CurrencyEnum | undefined
   >();
+  const [programId, setProgramId] = useState<string | undefined>();
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;
     setProgramCurrency(currency);
+    setProgramId(description.id);
   }, [description]);
   useEffect(() => {
     dispatch(
       dispatchPlatformLevelsParameters(programCurrency || profileCurrency)
     );
     dispatch(statisticCurrencyAction(programCurrency || profileCurrency));
-  }, [programCurrency]);
+  }, [programId]);
   return <ProgramDetailsContainer route={route} data={description!} />;
 };
 

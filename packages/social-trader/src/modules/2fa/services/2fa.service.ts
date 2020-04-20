@@ -29,6 +29,9 @@ export const confirm2fa = (
 export const sendPassword = (body: PasswordModel) =>
   api.auth().createTwoStepAuthRecoveryCodes({ body });
 
+const getCodeValue = (value?: string): string =>
+  value !== undefined ? String(value) : ((value as unknown) as string);
+
 export const disableTFA = ({
   twoFactorCode,
   recoveryCode,
@@ -36,8 +39,8 @@ export const disableTFA = ({
 }: TwoFactorCodeWithPassword) =>
   api.auth().disableTwoStepAuth({
     body: {
-      twoFactorCode: String(twoFactorCode),
-      recoveryCode: String(recoveryCode),
+      twoFactorCode: getCodeValue(twoFactorCode),
+      recoveryCode: getCodeValue(recoveryCode),
       password: String(password)
     }
   });
