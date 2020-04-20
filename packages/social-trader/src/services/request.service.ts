@@ -43,7 +43,7 @@ export const BINANCE_API_KEY_HEADER = "x-mbx-apikey";
 
 const parseOptions = (options: OrderRequest) =>
   Object.entries(options)
-    .map(item => `${item[0]}=${String(item[1]).toUpperCase()}`)
+    .map(([name, value]) => `${name}=${String(value).toUpperCase()}`)
     .join("&");
 
 const signOptions = (options: OrderRequest, privateKey?: string): string =>
