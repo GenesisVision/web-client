@@ -1,8 +1,10 @@
+import * as crypto from "crypto-js";
 import fetch from "isomorphic-unfetch";
 import { from, Observable } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
 export interface RequestOptions {
+  privateKey?: string;
   publicKey?: string;
   url: string;
   params?: OrderRequest;
@@ -39,7 +41,16 @@ export enum HTTP_METHODS {
 
 export const BINANCE_API_KEY_HEADER = "x-mbx-apikey";
 
+const parseOptions = (options: OrderRequest) =>
+  Object.entries(options)
+    .map(item => `${item[0]}=${String(item[1]).toUpperCase()}`)
+    .join("&");
+
+const signOptions = (options: OrderRequest, privateKey?: string): string =>
+  String(crypto.HmacSHA256(parseOptions(options), privateKey));
+
 export const sendRequest = ({
+  privateKey,
   publicKey,
   method = HTTP_METHODS.GET,
   params,
@@ -58,6 +69,7 @@ export const sendRequest = ({
   }
   if (type && type.includes(REQUEST_TYPE.SIGNED)) {
     body["timestamp"] = String(Date.now());
+    body["signature"] = signOptions(body, privateKey);
   }
   return from(
     fetch(url, {
