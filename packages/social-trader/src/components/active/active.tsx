@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
-import "./active.scss";
+import styles from "./active.module.scss";
 
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
@@ -21,15 +21,15 @@ const _Active: React.FC<Props> = ({
   }, []);
   return (
     <div>
-      <div className="active__block">
+      <div className={styles.active__block}>
         <CurrencyItem logo={logoUrl} name={name} clickable={false} big />
       </div>
-      <div className="active__block active__tags">
+      <div className={styles.active__block}>
         {tags && <TagItemList tags={tags} />}
       </div>
-      <div className="active__block">
-        <h2 className="active__title">{t("active.chart")}</h2>
-        <div className="active__chart-container">
+      <div className={styles.active__block}>
+        <h2 className={styles.active__title}>{t("active.chart")}</h2>
+        <div className={styles.active__chart_container}>
           {!isServer && (
             <TradingViewWidget
               symbol={chartSymbol}
@@ -39,13 +39,13 @@ const _Active: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="active__block">
-        <h2 className="active__title">
+      <div className={styles.active__block}>
+        <h2 className={styles.active__title}>
           {t("active.about")} {name}
         </h2>
-        <div className="active__description">{description}</div>
+        <div className={styles.active__description}>{description}</div>
       </div>
-      <div className="active__block">
+      <div className={styles.active__block}>
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
       </div>
     </div>
