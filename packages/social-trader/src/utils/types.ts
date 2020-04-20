@@ -17,6 +17,8 @@ import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import Token from "services/api-client/token";
 
+export type SizesType = "xsmall" | "small" | "middle" | "large" | "xlarge";
+
 export type AnyObjectType = { [keys: string]: any };
 
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
