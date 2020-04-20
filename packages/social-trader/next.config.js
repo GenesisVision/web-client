@@ -54,7 +54,16 @@ function create(path) {
   return withPlugins(
     [
       analyzer,
-      sass,
+      [
+        sass,
+        {
+          cssModules: true,
+          cssLoaderOptions: {
+            importLoaders: 1,
+            localIdentName: "[local]"
+          }
+        }
+      ],
       css,
       images,
       [
