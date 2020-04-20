@@ -4,7 +4,12 @@ import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const _FollowUserButton: React.FC<Props> = ({ id, value, disabled }) => {
+const _FollowUserButton: React.FC<Props> = ({
+  size = GV_BTN_SIZE.BIG,
+  id,
+  value,
+  disabled
+}) => {
   const [t] = useTranslation();
   const [innerValue, setInnerValue] = useState<boolean>(value);
   const successMiddleware = () => setInnerValue(!innerValue);
@@ -20,7 +25,7 @@ const _FollowUserButton: React.FC<Props> = ({ id, value, disabled }) => {
       variant={innerValue ? "outlined" : "contained"}
       color={innerValue ? "secondary" : "primary"}
       wide
-      size={GV_BTN_SIZE.BIG}
+      size={size}
       onClick={handleClick}
       disabled={isPending || disabled}
     >
@@ -32,6 +37,7 @@ const _FollowUserButton: React.FC<Props> = ({ id, value, disabled }) => {
 };
 
 interface Props {
+  size?: GV_BTN_SIZE;
   disabled?: boolean;
   id: string;
   value: boolean;

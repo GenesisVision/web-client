@@ -30,7 +30,7 @@ interface IPopoverContentCardBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
   dark?: boolean;
   className?: string;
-  size?: "small" | "middle" | "big";
+  size?: "small" | "middle" | "big" | null;
   stretched?: boolean;
   fixed?: boolean;
 }
