@@ -71,13 +71,12 @@ export const sendRequest = ({
     body["timestamp"] = String(Date.now());
     body["signature"] = signOptions(body, privateKey);
   }
-  return from(
-    fetch(url, {
-      method,
-      headers,
-      body: JSON.stringify(body)
-    })
-  );
+  const options = {
+    method,
+    headers,
+    ...body
+  };
+  return from(fetch(url, options));
 };
 
 const get = (options: RequestOptions): Observable<any> =>
