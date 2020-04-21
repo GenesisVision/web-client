@@ -17,7 +17,7 @@ export type ConnectSocketMethodType = (
   url: string
 ) => Observable<any>;
 
-const useSockets = () => {
+export const useSockets = () => {
   const [sockets, setSockets] = useState<{ [key: string]: SocketInterface }>(
     {}
   );
