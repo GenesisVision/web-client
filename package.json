@@ -13,6 +13,7 @@
     "d3": "^5.15.0",
     "dayjs": "^1.8.16",
     "dotenv": "^8.0.0",
+    "http-proxy-middleware": "^1.0.3",
     "file-saver": "^2.0.2",
     "i18next": "19.3.3",
     "i18next-browser-languagedetector": "4.0.2",
