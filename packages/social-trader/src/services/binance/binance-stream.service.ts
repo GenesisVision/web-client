@@ -1,10 +1,11 @@
+import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import {
   getAccountInformation,
   getAllOrders,
-  getOpenOrders,
-  getTrades
+  getBinanceTrades,
+  getOpenOrders
 } from "services/binance/binance-http.service";
 import {
   getAccountInformationSocket,
@@ -15,30 +16,36 @@ import { generateStream, REQUEST_TYPE } from "services/stream.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const getUserDataStream = (
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ): Observable<any> =>
   generateStream([
-    getAccountInformation(),
-    getAccountInformationSocket(connectSocketMethod)
+    getAccountInformation(authData)
+    // getAccountInformationSocket(connectSocketMethod, authData)
   ]);
 
 export const getOpenOrdersStream = (
   symbol: string,
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ): Observable<any> =>
   generateStream(
-    [getOpenOrders(symbol), getOpenOrdersSocket(connectSocketMethod)],
+    [
+      getOpenOrders(symbol, authData),
+      getOpenOrdersSocket(connectSocketMethod, authData)
+    ],
     REQUEST_TYPE.ARRAY
   );
 
 export const getAllOrdersStream = (
   symbol: string,
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ): Observable<any> =>
   generateStream(
     [
-      getAllOrders(symbol).pipe(map(item => item.reverse())),
-      getAllOrdersSocket(symbol, connectSocketMethod)
+      getAllOrders(symbol, authData).pipe(map(item => item.reverse())),
+      getAllOrdersSocket(symbol, connectSocketMethod, authData)
     ],
     REQUEST_TYPE.ARRAY
   );
@@ -49,7 +56,7 @@ export const getSymbolTradeStream = (
 ): Observable<any> =>
   generateStream(
     [
-      getTrades(symbol).pipe(map(item => item.reverse()))
+      getBinanceTrades(symbol).pipe(map(item => item.reverse()))
       // chainSocket({ symbol: symbol }).pipe(
       //   filter(item => item.stream === `${symbol.toLowerCase()}@trade`),
       //   map(item => item.data)

@@ -1,8 +1,10 @@
+import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { filter, map, switchMap } from "rxjs/operators";
 import { getUserStreamKey } from "services/binance/binance-http.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
+
 export enum BINANCE_WS_API_TYPE {
   WS = "WS",
   STREAM = "STREAM"
@@ -26,10 +28,11 @@ export const marketTicketsSocket = (
 };
 
 export const getAccountInformationSocket = (
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ) => {
   const socketName = "accountInformation";
-  return getUserStreamKey().pipe(
+  return getUserStreamKey(authData).pipe(
     switchMap((key: any) => {
       const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
       return connectSocketMethod(socketName, url).pipe(
@@ -43,10 +46,11 @@ export const getAccountInformationSocket = (
 };
 
 export const getOpenOrdersSocket = (
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ) => {
   const socketName = "accountInformation";
-  return getUserStreamKey().pipe(
+  return getUserStreamKey(authData).pipe(
     switchMap((key: any) => {
       const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
       return connectSocketMethod(socketName, url).pipe(
@@ -64,10 +68,11 @@ export const getOpenOrdersSocket = (
 
 export const getAllOrdersSocket = (
   symbol: string,
-  connectSocketMethod: ConnectSocketMethodType
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
 ) => {
   const socketName = "accountInformation";
-  return getUserStreamKey().pipe(
+  return getUserStreamKey(authData).pipe(
     switchMap((key: any) => {
       const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
       return connectSocketMethod(socketName, url).pipe(
