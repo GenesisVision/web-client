@@ -4,6 +4,7 @@ const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 const generateSitemap = require("./sitemap");
 const robotTxt = require("./robot");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = async app => {
   const handle = app.getRequestHandler();
@@ -37,6 +38,7 @@ module.exports = async app => {
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
 
+  server.use(createProxyMiddleware("https://api.binance.com/api/v3"));
   server.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
