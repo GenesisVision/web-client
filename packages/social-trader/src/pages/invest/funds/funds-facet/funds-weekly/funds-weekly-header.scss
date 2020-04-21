@@ -4,7 +4,7 @@
 .funds-weekly-header {
   @include height(350px);
   width: 100%;
-  background: url("media/background.svg") no-repeat center;
+  background: url("./media/background.svg") no-repeat center;
   @include adaptive-padding(bottom, $padding-small);
   display: flex;
   flex-direction: column;
