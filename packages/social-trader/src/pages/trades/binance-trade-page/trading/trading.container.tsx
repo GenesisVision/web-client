@@ -1,5 +1,5 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   getBinanceTrades,
   pingBinanceApi
@@ -19,10 +19,12 @@ const _TradingContainer: React.FC<Props> = ({ authData }) => {
   userDataStream.subscribe(data => {
     console.log(data);
   });*/
-  const ping = pingBinanceApi();
-  ping.subscribe(data => {
-    console.log(data);
-  });
+  useEffect(() => {
+    const ping = pingBinanceApi();
+    ping.subscribe(data => {
+      console.log(data);
+    });
+  }, []);
   return <div>{/*{publicKey} {privateKey}*/}</div>;
 };
 
