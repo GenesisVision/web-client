@@ -27,8 +27,7 @@ export const useSockets = () => {
       return sockets[type].subscribe();
     } else {
       const socket = new Socket(url);
-      setSockets({ ...sockets, [type]: new Socket(url) });
-      sockets[type] = socket;
+      setSockets({ ...sockets, [type]: socket });
       return socket.subscribe();
     }
   };
