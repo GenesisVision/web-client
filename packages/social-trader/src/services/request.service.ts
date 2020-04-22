@@ -74,9 +74,11 @@ export const sendRequest = ({
   const options = {
     method,
     headers,
-    ...body
+    body: method === HTTP_METHODS.POST ? JSON.stringify(body) : undefined
   };
-  return from(fetch(url, options));
+  const getParams = new URLSearchParams(body).toString();
+  const fetchUrl = method === HTTP_METHODS.GET ? `${url}?${getParams}` : url;
+  return from(fetch(fetchUrl, options).then(response => response.json()));
 };
 
 const get = (options: RequestOptions): Observable<any> =>
