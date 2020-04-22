@@ -1,4 +1,5 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { formatValue } from "utils/formatter";
 
@@ -18,6 +19,11 @@ export interface TradeRequest {
 
 // export const BINANCE_HTTP_API = "https://www.binance.com/api";
 export const BINANCE_HTTP_API = "/api";
+
+export const getExchangeInfo = (): Observable<any[]> =>
+  requestService.get({
+    url: "/api/v3/exchangeInfo"
+  });
 
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
@@ -70,7 +76,7 @@ export const getBinanceTrades = (symbol: string): Observable<any[]> =>
     params: { symbol: symbol.toUpperCase(), limit: "20" }
   });
 
-export const getTickers = (symbol?: string): Observable<any[]> =>
+export const getTickers = (symbol?: string): Observable<Ticker[]> =>
   requestService.get({
     url: "/api/v3/ticker/24hr",
     params: symbol ? { symbol: symbol.toUpperCase() } : {}
