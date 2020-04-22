@@ -1,17 +1,18 @@
-import "./global-search-input.scss";
-
 import GVButton from "components/gv-button";
 import GVTextField from "components/gv-text-field";
 import { CloseIcon } from "components/icon/close-icon";
 import SearchIcon from "components/icon/search-icon/search-icon";
 import React, { useCallback } from "react";
 
+import "./global-search-input.scss";
+
 export const SearchInputField: React.FC<{
+  canClose?: boolean;
   onBlur?: VoidFunction;
   value: string;
   onCancel?: VoidFunction;
   onChange: (event: React.ChangeEvent<any>) => void;
-}> = ({ value, onChange, onCancel, onBlur }) => {
+}> = ({ canClose = true, value, onChange, onCancel, onBlur }) => {
   return (
     <div className="global-search__input-container">
       <GVTextField
@@ -27,35 +28,44 @@ export const SearchInputField: React.FC<{
         onChange={onChange}
         autoFocus
       />
-      <GVButton
-        noPadding
-        variant="text"
-        color="secondary"
-        className="global-search__cancel-button"
-        onClick={onCancel}
-      >
-        <CloseIcon />
-      </GVButton>
+      {canClose && (
+        <GVButton
+          noPadding
+          variant="text"
+          color="secondary"
+          className="global-search__cancel-button"
+          onClick={onCancel}
+        >
+          <CloseIcon />
+        </GVButton>
+      )}
     </div>
   );
 };
 
-const GlobalSearchInput: React.FC<Props> = React.memo(({ query, onChange }) => {
-  const handleOnChange = useCallback(
-    (event: React.ChangeEvent<any>) => onChange(event.target.value),
-    [onChange]
-  );
+const GlobalSearchInput: React.FC<Props> = React.memo(
+  ({ canClose, query, onChange }) => {
+    const handleOnChange = useCallback(
+      (event: React.ChangeEvent<any>) => onChange(event.target.value),
+      [onChange]
+    );
 
-  return (
-    <div className="global-search-input">
-      {/*
+    return (
+      <div className="global-search-input">
+        {/*
       //@ts-ignore TODO сделать фикс GVTextField*/}
-      <SearchInputField value={query} onChange={handleOnChange} />
-    </div>
-  );
-});
+        <SearchInputField
+          canClose={canClose}
+          value={query}
+          onChange={handleOnChange}
+        />
+      </div>
+    );
+  }
+);
 
 interface Props {
+  canClose?: boolean;
   onChange(value: string): void;
   query: string;
 }
