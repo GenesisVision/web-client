@@ -23,6 +23,14 @@ module.exports = async app => {
   const robot = robotTxt(dev);
 
   const server = express();
+
+  server.use(
+    createProxyMiddleware("/api/v3", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+
   const port = process.env.PORT || 3000;
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
@@ -38,7 +46,6 @@ module.exports = async app => {
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
 
-  server.use(createProxyMiddleware("https://api.binance.com/api/v3"));
   server.listen(port, err => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
