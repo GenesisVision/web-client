@@ -1,31 +1,17 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import React, { useEffect } from "react";
-import {
-  getBinanceTrades,
-  pingBinanceApi
-} from "services/binance/binance-http.service";
-import { getUserDataStream } from "services/binance/binance-stream.service";
-import { useSockets } from "services/websocket.service";
-import { date } from "yup";
+import { MarketWatchContainer } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.container";
+import React from "react";
 
 interface Props {
   authData: TradeAuthDataType;
 }
 
 const _TradingContainer: React.FC<Props> = ({ authData }) => {
-  // const { publicKey, privateKey } = authData;
-  const { connectSocket } = useSockets();
-  /*const userDataStream = getUserDataStream(connectSocket, authData);
-  userDataStream.subscribe(data => {
-    console.log(data);
-  });*/
-  useEffect(() => {
-    const ping = pingBinanceApi();
-    ping.subscribe(data => {
-      console.log(data);
-    });
-  }, []);
-  return <div>{/*{publicKey} {privateKey}*/}</div>;
+  return (
+    <div>
+      <MarketWatchContainer />
+    </div>
+  );
 };
 
 export const TradingContainer = React.memo(_TradingContainer);
