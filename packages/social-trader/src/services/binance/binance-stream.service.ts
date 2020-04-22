@@ -1,19 +1,27 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import {
   getAccountInformation,
   getAllOrders,
   getBinanceTrades,
-  getOpenOrders
+  getOpenOrders,
+  getTickers
 } from "services/binance/binance-http.service";
 import {
   getAccountInformationSocket,
   getAllOrdersSocket,
-  getOpenOrdersSocket
+  getOpenOrdersSocket,
+  marketTicketsSocket
 } from "services/binance/binance-ws.service";
 import { generateStream, REQUEST_TYPE } from "services/stream.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
+
+export const getTickersStream = (
+  connectSocketMethod: ConnectSocketMethodType
+): Observable<Ticker[]> =>
+  generateStream([getTickers(), marketTicketsSocket(connectSocketMethod)]);
 
 export const getUserDataStream = (
   connectSocketMethod: ConnectSocketMethodType,
