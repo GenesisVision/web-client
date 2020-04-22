@@ -1,13 +1,16 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import { Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
 import { getUserStreamKey } from "services/binance/binance-http.service";
+import { tickerTransform } from "services/binance/binance-ws.helpers";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
 
 export enum BINANCE_WS_API_TYPE {
-  WS = "WS",
-  STREAM = "STREAM"
+  WS = "ws",
+  STREAM = "stream"
 }
 
 export enum ORDER_STATUSES {
@@ -21,10 +24,12 @@ export enum ORDER_STATUSES {
 
 export const marketTicketsSocket = (
   connectSocketMethod: ConnectSocketMethodType
-) => {
+): Observable<Ticker[]> => {
   const socketName = "!ticker@arr";
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketName, url);
+  return connectSocketMethod(socketName, url).pipe(
+    map(items => items.map(tickerTransform))
+  );
 };
 
 export const getAccountInformationSocket = (
