@@ -1,3 +1,5 @@
+export type MergedTickerSymbolType = Ticker & Symbol;
+
 export enum ErrorCodes {
   UNKNOWN = -1000,
   DISCONNECTED = -1001,
