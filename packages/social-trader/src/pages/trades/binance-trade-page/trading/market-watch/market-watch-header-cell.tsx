@@ -8,22 +8,23 @@ import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/
 import React, { useCallback } from "react";
 
 interface Props {
+  dataType: "number" | "string";
   setSorting: (sorting: SortingType) => void;
   field: keyof MergedTickerSymbolType;
   sorting: SortingType;
 }
 
 export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
-  ({ field, sorting, children, setSorting }) => {
+  ({ dataType, field, sorting, children, setSorting }) => {
     const handleChangeSorting = useCallback(
       (field: keyof MergedTickerSymbolType) => () => {
         const direction =
           field !== sorting.field
             ? sorting.direction
             : switchDirection(sorting.direction);
-        setSorting({ field, direction });
+        setSorting({ dataType, field, direction });
       },
-      [setSorting, sorting]
+      [setSorting, sorting, dataType]
     );
     const isSelected = field === sorting.field;
     return (

@@ -30,6 +30,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
     "margin"
   );
   const [sorting, setSorting] = useState<SortingType>({
+    dataType: "string",
     direction: SORTING_DIRECTION.ASC,
     field: "symbol"
   });
@@ -106,6 +107,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         <table>
           <thead>
             <MarketWatchHeaderCell
+              dataType={"string"}
               sorting={sorting}
               setSorting={setSorting}
               field={"symbol"}
@@ -113,6 +115,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               Symbol
             </MarketWatchHeaderCell>
             <MarketWatchHeaderCell
+              dataType={"number"}
               sorting={sorting}
               setSorting={setSorting}
               field={"lastPrice"}
@@ -121,6 +124,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
             </MarketWatchHeaderCell>
             {column === CHANGE_COLUMN ? (
               <MarketWatchHeaderCell
+                dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
                 field={"priceChangePercent"}
@@ -129,6 +133,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
+                dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
                 field={"volume"}

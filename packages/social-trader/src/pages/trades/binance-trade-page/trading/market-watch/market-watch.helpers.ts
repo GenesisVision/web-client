@@ -7,6 +7,7 @@ import {
 import { AnyObjectType } from "utils/types";
 
 export type SortingType = {
+  dataType: "number" | "string";
   field: keyof MergedTickerSymbolType;
   direction: SORTING_DIRECTION;
 };
@@ -37,11 +38,12 @@ export const normalizeMarketList = (list: Ticker[]) => {
   return initObject;
 };
 
-const getCorrectValue = (value: any) => {
-  return typeof value === "string" ? value.toLowerCase() : value;
+const getCorrectValue = (value: any, dataType: "number" | "string") => {
+  return dataType === "string" ? value.toLowerCase() : +value;
 };
 
 export const sortMarketWatchItems = ({
+  dataType,
   field,
   direction = SORTING_DIRECTION.NONE
 }: SortingType) => (
@@ -49,8 +51,8 @@ export const sortMarketWatchItems = ({
   b: MergedTickerSymbolType
 ): number => {
   if (!field) return 0;
-  const correctA = getCorrectValue(a[field]);
-  const correctB = getCorrectValue(b[field]);
+  const correctA = getCorrectValue(a[field], dataType);
+  const correctB = getCorrectValue(b[field], dataType);
   switch (direction) {
     case SORTING_DIRECTION.ASC:
       if (correctA < correctB) return -1;
