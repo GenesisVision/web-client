@@ -1,79 +1,169 @@
-import {
-  ColoredText,
-  ColoredTextColor
-} from "components/colored-text/colored-text";
-import { DefaultBlock } from "components/default.block/default.block";
-import { MutedText } from "components/muted-text/muted-text";
+import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import Select, { ISelectChangeEvent } from "components/select/select";
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
-import { sortMarketWatchItems } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useState } from "react";
-
-import "./market-watch.scss";
+import { MarketWatchHeaderCell } from "pages/trades/binance-trade-page/trading/market-watch/market-watch-header-cell";
+import { MarketWatchRow } from "pages/trades/binance-trade-page/trading/market-watch/market-watch-row";
+import {
+  CHANGE_COLUMN,
+  COLUMN_VALUES,
+  filterForSearch,
+  FILTERING_CURRENCIES,
+  FilteringType,
+  getFilteringFunction,
+  SortingType,
+  sortMarketWatchItems
+} from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import React, { useMemo, useState } from "react";
 
 interface Props {
-  items: Ticker[];
+  items: MergedTickerSymbolType[];
 }
 
-const getTextColor = (value: number): ColoredTextColor | undefined => {
-  if (value > 0) return "green";
-  if (value < 0) return "red";
-  return;
-};
-
-const MarketWatchRow: React.FC<{
-  symbol: string;
-  lastPrice: string;
-  priceChange: string;
-  priceChangePercent: string;
-}> = React.memo(({ symbol, lastPrice, priceChange, priceChangePercent }) => {
-  return (
-    <tr key={symbol}>
-      <td className="market-watch__name">
-        <MutedText>{symbol}</MutedText>
-      </td>
-      <td className="market-watch__name">
-        <ColoredText color={getTextColor(+priceChange)}>
-          {lastPrice}
-        </ColoredText>
-      </td>
-      <td className="market-watch__name">
-        <ColoredText color={getTextColor(+priceChangePercent)}>
-          {priceChangePercent} %
-        </ColoredText>
-      </td>
-    </tr>
-  );
-});
-
 const _MarketWatch: React.FC<Props> = ({ items }) => {
-  const [sortingField, setSortingField] = useState<keyof Ticker | undefined>(
-    "symbol"
+  const [column, setColumn] = useState<string>(CHANGE_COLUMN);
+  const [search, setSearch] = useState<string>("");
+  const [filteringType, setFilteringType] = useState<"margin" | "symbol">(
+    "margin"
   );
-  const [sortingDirection, setSortingDirection] = useState<
-    SORTING_DIRECTION | undefined
-  >(SORTING_DIRECTION.ASC);
+  const [sorting, setSorting] = useState<SortingType>({
+    direction: SORTING_DIRECTION.ASC,
+    field: "symbol"
+  });
+  const [filtering, setFiltering] = useState<FilteringType>({
+    field: "symbol",
+    value: "BTC"
+  });
+
+  const filteringFunction = useMemo(
+    () => getFilteringFunction(filteringType, filtering),
+    [filteringType, filtering]
+  );
+
   return (
-    <DefaultBlock solid>
+    <>
       <Row>
-        <h2>Market watch</h2>
+        <RowItem>
+          <GVButton
+            disabled={filteringType === "margin"}
+            variant={filteringType === "margin" ? "outlined" : "contained"}
+            size={GV_BTN_SIZE.SMALL}
+            onClick={() => {
+              setFilteringType("margin");
+            }}
+          >
+            Margin
+          </GVButton>
+        </RowItem>
+        {FILTERING_CURRENCIES.map(currency => (
+          <RowItem>
+            <GVButton
+              disabled={
+                filteringType === "symbol" && filtering.value === currency
+              }
+              variant={
+                filteringType === "symbol" && filtering.value === currency
+                  ? "outlined"
+                  : "contained"
+              }
+              size={GV_BTN_SIZE.SMALL}
+              onClick={() => {
+                setFilteringType("symbol");
+                setFiltering({ value: currency });
+              }}
+            >
+              {currency}
+            </GVButton>
+          </RowItem>
+        ))}
+      </Row>
+      <Row>
+        <RowItem>
+          <GlobalSearchInput
+            query={search}
+            onChange={setSearch}
+            canClose={false}
+          />
+        </RowItem>
+        <RowItem>
+          <Select
+            name="column"
+            value={column}
+            onChange={(e: ISelectChangeEvent) => setColumn(e.target.value)}
+          >
+            {COLUMN_VALUES.map(({ value, label }) => (
+              <option value={value} key={value}>
+                {label}
+              </option>
+            ))}
+          </Select>
+        </RowItem>
       </Row>
       <Row onlyOffset className="market-watch__items-container">
         <table>
-          {items
-            .sort(sortMarketWatchItems(sortingField, sortingDirection))
-            .map(({ symbol, lastPrice, priceChange, priceChangePercent }) => (
-              <MarketWatchRow
-                symbol={symbol}
-                lastPrice={lastPrice}
-                priceChange={priceChange}
-                priceChangePercent={priceChangePercent}
-              />
-            ))}
+          <thead>
+            <MarketWatchHeaderCell
+              sorting={sorting}
+              setSorting={setSorting}
+              field={"symbol"}
+            >
+              Symbol
+            </MarketWatchHeaderCell>
+            <MarketWatchHeaderCell
+              sorting={sorting}
+              setSorting={setSorting}
+              field={"lastPrice"}
+            >
+              Last price
+            </MarketWatchHeaderCell>
+            {column === CHANGE_COLUMN ? (
+              <MarketWatchHeaderCell
+                sorting={sorting}
+                setSorting={setSorting}
+                field={"priceChangePercent"}
+              >
+                Change
+              </MarketWatchHeaderCell>
+            ) : (
+              <MarketWatchHeaderCell
+                sorting={sorting}
+                setSorting={setSorting}
+                field={"volume"}
+              >
+                Volume
+              </MarketWatchHeaderCell>
+            )}
+          </thead>
+          <tbody>
+            {items
+              .filter(filteringFunction)
+              .filter(filterForSearch(search))
+              .sort(sortMarketWatchItems(sorting))
+              .map(
+                ({
+                  volume,
+                  symbol,
+                  lastPrice,
+                  priceChange,
+                  priceChangePercent
+                }) => (
+                  <MarketWatchRow
+                    column={column}
+                    volume={volume}
+                    symbol={symbol}
+                    lastPrice={lastPrice}
+                    priceChange={priceChange}
+                    priceChangePercent={priceChangePercent}
+                  />
+                )
+              )}
+          </tbody>
         </table>
       </Row>
-    </DefaultBlock>
+    </>
   );
 };
 

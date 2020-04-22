@@ -1,23 +1,40 @@
 import { MarketWatch } from "pages/trades/binance-trade-page/trading/market-watch/market-watch";
-import { normalizeMarketList } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  normalizeMarketList,
+  normalizeSymbolsList
+} from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import {
+  MergedTickerSymbolType,
+  Ticker
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useEffect, useState } from "react";
 import { map } from "rxjs/operators";
+import { getSymbols } from "services/binance/binance-http.service";
 import { getTickersStream } from "services/binance/binance-stream.service";
-import { marketTicketsSocket } from "services/binance/binance-ws.service";
 import { useSockets } from "services/websocket.service";
 
 interface Props {}
 
 const _MarketWatchContainer: React.FC<Props> = () => {
+  const [symbols, setSymbols] = useState<{
+    [key: string]: Symbol;
+  }>({});
   const [list, setList] = useState<{
-    [key: string]: Ticker;
+    [key: string]: MergedTickerSymbolType;
   }>({});
   const [socketData, setSocketData] = useState<{
     [key: string]: Ticker;
   }>({});
   const { connectSocket } = useSockets();
+
   useEffect(() => {
+    const symbols = getSymbols().pipe(
+      map(items => normalizeSymbolsList(items))
+    );
+    symbols.subscribe(data => {
+      setSymbols(data);
+    });
+
     const marketTickets = getTickersStream(connectSocket).pipe(
       map(items => normalizeMarketList(items))
     );
@@ -26,9 +43,23 @@ const _MarketWatchContainer: React.FC<Props> = () => {
     });
   }, []);
   useEffect(() => {
-    setList({ ...list, ...socketData });
+    const updatedList = { ...list };
+    Object.keys(socketData).forEach(name => {
+      updatedList[name] = { ...updatedList[name], ...socketData[name] };
+    });
+    setList(updatedList);
   }, [socketData]);
-  return <MarketWatch items={Object.values(list)} />;
+  useEffect(() => {
+    const updatedList = { ...list };
+    Object.keys(symbols).forEach(name => {
+      updatedList[name] = { ...updatedList[name], ...symbols[name] };
+    });
+    setList(updatedList);
+  }, [symbols]);
+
+  return Object.values(socketData).length ? (
+    <MarketWatch items={Object.values(list)} />
+  ) : null;
 };
 
 export const MarketWatchContainer = React.memo(_MarketWatchContainer);

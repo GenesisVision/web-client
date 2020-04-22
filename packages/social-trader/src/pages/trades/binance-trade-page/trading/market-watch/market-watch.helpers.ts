@@ -1,6 +1,35 @@
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  MergedTickerSymbolType,
+  Symbol,
+  Ticker
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import { AnyObjectType } from "utils/types";
+
+export type SortingType = {
+  field: keyof MergedTickerSymbolType;
+  direction: SORTING_DIRECTION;
+};
+
+export type FilteringType = {
+  field?: keyof MergedTickerSymbolType;
+  value?: any;
+};
+
+export const FILTERING_CURRENCIES = ["BTC", "BNB"];
+
+export const CHANGE_COLUMN = "CHANGE_COLUMN";
+export const VOLUME_COLUMN = "VOLUME_COLUMN";
+export const COLUMN_VALUES = [
+  { label: "Change", value: CHANGE_COLUMN },
+  { label: "Volume", value: VOLUME_COLUMN }
+];
+
+export const normalizeSymbolsList = (list: Symbol[]) => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => (initObject[item.symbol] = item));
+  return initObject;
+};
 
 export const normalizeMarketList = (list: Ticker[]) => {
   const initObject: AnyObjectType = {};
@@ -8,18 +37,20 @@ export const normalizeMarketList = (list: Ticker[]) => {
   return initObject;
 };
 
-const getCorrectValue = (value: string | number) => {
+const getCorrectValue = (value: any) => {
   return typeof value === "string" ? value.toLowerCase() : value;
 };
 
-export const sortMarketWatchItems = (
-  field?: keyof Ticker,
-  direction: SORTING_DIRECTION = SORTING_DIRECTION.NONE
-) => (a: Ticker, b: Ticker): number => {
+export const sortMarketWatchItems = ({
+  field,
+  direction = SORTING_DIRECTION.NONE
+}: SortingType) => (
+  a: MergedTickerSymbolType,
+  b: MergedTickerSymbolType
+): number => {
   if (!field) return 0;
   const correctA = getCorrectValue(a[field]);
   const correctB = getCorrectValue(b[field]);
-  // console.log(correctA, correctB);
   switch (direction) {
     case SORTING_DIRECTION.ASC:
       if (correctA < correctB) return -1;
@@ -30,4 +61,39 @@ export const sortMarketWatchItems = (
     case SORTING_DIRECTION.NONE:
       return 0;
   }
+};
+
+export const filterForSymbol = (value: string) => (
+  item: MergedTickerSymbolType
+): boolean => {
+  if (value === undefined) return true;
+  return item.quoteAsset === value;
+};
+
+export const filterMarketWatchItemsForMargin = (
+  item: MergedTickerSymbolType
+): boolean => {
+  return item.isMarginTradingAllowed;
+};
+
+export const getFilteringFunction = (
+  filteringType: "margin" | "symbol",
+  filtering: FilteringType
+): ((item: MergedTickerSymbolType) => boolean) => {
+  switch (filteringType) {
+    case "margin":
+      return filterMarketWatchItemsForMargin;
+    case "symbol":
+      return filterForSymbol(filtering.value);
+  }
+};
+
+export const filterForSearch = (
+  query: string,
+  field: keyof MergedTickerSymbolType = "baseAsset"
+) => (item: MergedTickerSymbolType): boolean => {
+  if (!query) return true;
+  return String(item[field])
+    .toLowerCase()
+    .includes(query.toLowerCase());
 };
