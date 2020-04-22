@@ -1,0 +1,11 @@
+.market-watch {
+  &__items-container {
+    height: 500px;
+    overflow-y: auto;
+  }
+  &__table {
+  }
+  &__name {
+    min-width: 150px;
+  }
+}
