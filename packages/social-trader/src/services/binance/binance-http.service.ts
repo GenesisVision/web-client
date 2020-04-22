@@ -1,6 +1,11 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  ExchangeInfo,
+  Symbol,
+  Ticker
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { formatValue } from "utils/formatter";
 
 import {
@@ -20,7 +25,10 @@ export interface TradeRequest {
 // export const BINANCE_HTTP_API = "https://www.binance.com/api";
 export const BINANCE_HTTP_API = "/api";
 
-export const getExchangeInfo = (): Observable<any[]> =>
+export const getSymbols = (): Observable<Symbol[]> =>
+  getExchangeInfo().pipe(map(({ symbols }: ExchangeInfo) => symbols));
+
+export const getExchangeInfo = (): Observable<ExchangeInfo> =>
   requestService.get({
     url: "/api/v3/exchangeInfo"
   });
