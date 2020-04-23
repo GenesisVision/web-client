@@ -23,9 +23,13 @@ const getTextColor = (value: number): ColoredTextColor | undefined => {
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({ column, volume, symbol, lastPrice, priceChange, priceChangePercent }) => {
-    const [firstLastPrice, setPrevLastPrice] = useState(lastPrice);
+    const [prevLastPrice, setPrevLastPrice] = useState(lastPrice);
+    const [currentLastPrice, setCurrentLastPrice] = useState(lastPrice);
     useEffect(() => {
-      if (!firstLastPrice) setPrevLastPrice(lastPrice);
+      if (lastPrice !== currentLastPrice) {
+        setPrevLastPrice(currentLastPrice);
+        setCurrentLastPrice(lastPrice);
+      }
     }, [lastPrice]);
     return (
       <tr key={symbol}>
@@ -33,7 +37,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
           <MutedText>{symbol}</MutedText>
         </td>
         <td className="market-watch__name">
-          <ColoredText color={getTextColor(+firstLastPrice - +lastPrice)}>
+          <ColoredText color={getTextColor(+prevLastPrice - +currentLastPrice)}>
             {lastPrice}
           </ColoredText>
         </td>
