@@ -8,13 +8,13 @@ import {
   getBinanceTrades,
   getOpenOrders,
   getTickers
-} from "services/binance/binance-http.service";
+} from "./binance-http.service";
 import {
   getAccountInformationSocket,
   getAllOrdersSocket,
   getOpenOrdersSocket,
   marketTicketsSocket
-} from "services/binance/binance-ws.service";
+} from "./binance-ws.service";
 import { generateStream, REQUEST_TYPE } from "services/stream.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
 

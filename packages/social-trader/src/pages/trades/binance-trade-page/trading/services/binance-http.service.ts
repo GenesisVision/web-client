@@ -13,7 +13,7 @@ import {
   REQUEST_TYPE,
   requestService,
   TimeInForce
-} from "../request.service";
+} from "services/request.service";
 
 export interface TradeRequest {
   symbol: string;

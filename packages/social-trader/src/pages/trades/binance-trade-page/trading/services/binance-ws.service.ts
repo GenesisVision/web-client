@@ -2,8 +2,8 @@ import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade
 import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
-import { getUserStreamKey } from "services/binance/binance-http.service";
-import { tickerTransform } from "services/binance/binance-ws.helpers";
+import { getUserStreamKey } from "./binance-http.service";
+import { tickerTransform } from "./binance-ws.helpers";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";

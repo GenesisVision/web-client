@@ -9,8 +9,8 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
-import { getSymbols } from "services/binance/binance-http.service";
-import { getTickersStream } from "services/binance/binance-stream.service";
+import { getSymbols } from "../services/binance-http.service";
+import { getTickersStream } from "../services/binance-stream.service";
 import { useSockets } from "services/websocket.service";
 
 interface Props {}
