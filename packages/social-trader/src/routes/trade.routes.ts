@@ -1,6 +1,8 @@
 export const TRADE = "trade";
 export const TRADE_ROUTE = `/${TRADE}`;
 
+export const BINANCE = "binance";
+export const BINANCE_ROUTE = `${TRADE_ROUTE}/${BINANCE}`;
 export const META_TRADER_4 = "mt4";
 export const META_TRADER_4_ROUTE = `${TRADE_ROUTE}/${META_TRADER_4}`;
 export const META_TRADER_5 = "mt5";

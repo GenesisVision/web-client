@@ -1,0 +1,58 @@
+@import "~shared/styles/_constants";
+
+.market-watch {
+  &__items-container {
+    height: 500px;
+    overflow-y: auto;
+  }
+  &__th {
+    text-align: left;
+    cursor: pointer;
+    &--asc,
+    &--desc {
+      span {
+        opacity: 1;
+      }
+      position: relative;
+      &::before {
+        @include transition(width);
+        @extend %sortable-border-icon;
+        height: 4px;
+      }
+      &::after {
+        @include transition(width);
+        @extend %sortable-border-icon;
+      }
+    }
+
+    &--desc {
+      &::before {
+        width: 10px;
+      }
+      &::after {
+        width: 5px;
+      }
+    }
+    &--asc {
+      &::before {
+        width: 5px;
+      }
+      &::after {
+        width: 10px;
+      }
+    }
+  }
+  &__table {
+  }
+  &__name {
+    min-width: 150px;
+  }
+}
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 5px;
+  content: "";
+  border-top: 1px solid white;
+}

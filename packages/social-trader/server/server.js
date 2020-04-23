@@ -4,6 +4,7 @@ const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 const generateSitemap = require("./sitemap");
 const robotTxt = require("./robot");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = async app => {
   const handle = app.getRequestHandler();
@@ -22,6 +23,14 @@ module.exports = async app => {
   const robot = robotTxt(dev);
 
   const server = express();
+
+  server.use(
+    createProxyMiddleware("/api/v3", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+
   const port = process.env.PORT || 3000;
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));

@@ -7,11 +7,12 @@ import { Row } from "components/row/row";
 import React, { useCallback } from "react";
 
 export const SearchInputField: React.FC<{
+  canClose?: boolean;
   onBlur?: VoidFunction;
   value: string;
   onCancel?: VoidFunction;
   onChange: (event: React.ChangeEvent<any>) => void;
-}> = ({ value, onChange, onCancel, onBlur }) => {
+}> = ({ canClose = true, value, onChange, onCancel, onBlur }) => {
   return (
     <Row wide>
       <RowItem wide>
@@ -29,35 +30,44 @@ export const SearchInputField: React.FC<{
           autoFocus
         />
       </RowItem>
-      <GVButton
-        noPadding
-        variant="text"
-        color="secondary"
-        className="global-search__cancel-button"
-        onClick={onCancel}
-      >
-        <CloseIcon />
-      </GVButton>
+      {canClose && (
+        <GVButton
+          noPadding
+          variant="text"
+          color="secondary"
+          className="global-search__cancel-button"
+          onClick={onCancel}
+        >
+          <CloseIcon />
+        </GVButton>
+      )}
     </Row>
   );
 };
 
-const GlobalSearchInput: React.FC<Props> = React.memo(({ query, onChange }) => {
-  const handleOnChange = useCallback(
-    (event: React.ChangeEvent<any>) => onChange(event.target.value),
-    [onChange]
-  );
+const GlobalSearchInput: React.FC<Props> = React.memo(
+  ({ canClose, query, onChange }) => {
+    const handleOnChange = useCallback(
+      (event: React.ChangeEvent<any>) => onChange(event.target.value),
+      [onChange]
+    );
 
-  return (
-    <div className="global-search-input">
-      {/*
+    return (
+      <div className="global-search-input">
+        {/*
       //@ts-ignore TODO сделать фикс GVTextField*/}
-      <SearchInputField value={query} onChange={handleOnChange} />
-    </div>
-  );
-});
+        <SearchInputField
+          canClose={canClose}
+          value={query}
+          onChange={handleOnChange}
+        />
+      </div>
+    );
+  }
+);
 
 interface Props {
+  canClose?: boolean;
   onChange(value: string): void;
   query: string;
 }
