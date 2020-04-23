@@ -109,7 +109,7 @@ const _Investment: React.FC<Props> = ({
           >
             <NumberFormat
               value={managementFeePersonal}
-              suffix={` %`}
+              suffix={` % (annual)`}
               allowNegative={false}
               displayType="text"
             />
