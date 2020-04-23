@@ -1,4 +1,4 @@
-// prettier-ignore-start
+/* eslint-disable */
 (function(cjs, an) {
   var p; // shortcut to reference prototypes
   var lib = {};
@@ -8712,4 +8712,3 @@
   };
 })((createjs = createjs || {}), (AdobeAn = AdobeAn || {}));
 var createjs, AdobeAn;
-//prettier-ignore-end
