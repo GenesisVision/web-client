@@ -2,14 +2,6 @@
 @import "~shared/styles/_breakpoint";
 
 .dashboard {
-  &__public-page-block {
-    @include details-block-horizontal-paddings;
-    display: flex;
-    align-items: center;
-  }
-  &__public-page-select {
-    padding-right: $padding-xsmall;
-  }
   &__statistic-block {
     width: 100%;
     display: flex;

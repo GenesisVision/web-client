@@ -1,5 +1,6 @@
 import FeeCommission from "components/fee-commission/fee-commission";
 import FeesTooltip from "components/fees-tooltip/fees-tooltip";
+import { Row } from "components/row/row";
 import { OrderSignalModel } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -25,12 +26,13 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({
             currency={originalCommissionCurrency}
           />
           {totalCommissionByType.map((commission, index) => (
-            <FeeCommission
-              key={index}
-              title={commission.title}
-              value={commission.amount}
-              currency={commission.currency}
-            />
+            <Row key={index} small>
+              <FeeCommission
+                title={commission.title}
+                value={commission.amount}
+                currency={commission.currency}
+              />
+            </Row>
           ))}
         </>
       }

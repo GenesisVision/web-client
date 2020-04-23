@@ -6,7 +6,7 @@ export const _DialogListItem: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({ label, children }) => (
   <Row className="dialog-list__item">
     <MutedText>{label}</MutedText>
-    <span className="dialog-list__value">{children}</span>
+    <span>{children}</span>
   </Row>
 );
 

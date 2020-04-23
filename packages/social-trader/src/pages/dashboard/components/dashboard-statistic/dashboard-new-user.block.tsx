@@ -1,6 +1,7 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { Row } from "components/row/row";
 import React from "react";
 
 const _DashboardNewUserBlock: React.FC<Props> = ({ leftField, rightField }) => {
@@ -19,13 +20,13 @@ const DashboardNewUserBlockField: React.FC<{
   return (
     <div className="dashboard-new-user-block__field">
       <div className="dashboard-new-user-block__text">{text}</div>
-      <div className="dashboard-new-user-block__button">
+      <Row className="dashboard-new-user-block__button">
         <Link to={linkCreator(link)}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
             {linkLabel}
           </GVButton>
         </Link>
-      </div>
+      </Row>
     </div>
   );
 });

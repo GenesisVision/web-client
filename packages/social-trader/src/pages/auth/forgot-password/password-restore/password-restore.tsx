@@ -1,5 +1,6 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
@@ -38,27 +39,35 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <GVHookFormField
+        wide
         showCorrect
         type="password"
         name={FIELDS.password}
         label={t("auth.password-restore.new-password.password-field-text")}
         component={SimpleTextField}
       />
-      <GVHookFormField
-        showCorrect
-        type="password"
-        name={FIELDS.confirmPassword}
-        label={t(
-          "auth.password-restore.new-password.password-confirm-field-text"
-        )}
-        component={SimpleTextField}
-      />
-      <FormError error={errorMessage} />
-      <div className="password-restore__navigation">
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="password"
+          name={FIELDS.confirmPassword}
+          label={t(
+            "auth.password-restore.new-password.password-confirm-field-text"
+          )}
+          component={SimpleTextField}
+        />
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row xlarge>
         <SubmitButton id="passwordRestoreSubmit" isSuccessful={!errorMessage}>
           {t("auth.password-restore.new-password.confirm-button-text")}
         </SubmitButton>
-      </div>
+      </Row>
     </HookForm>
   );
 };

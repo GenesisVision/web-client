@@ -5,12 +5,7 @@ import { useTranslation } from "react-i18next";
 const SignupEmailPending: React.FC<Props> = ({ sendConfirmationLink }) => {
   const [t] = useTranslation();
   return (
-    <GVButton
-      noPadding
-      className="signup-email-pending__resend-btn"
-      variant="text"
-      onClick={sendConfirmationLink}
-    >
+    <GVButton noPadding variant="text" onClick={sendConfirmationLink}>
       {t("auth.signup-email-pending.resend-button-text")}
     </GVButton>
   );

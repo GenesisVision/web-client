@@ -30,7 +30,7 @@ const _AssetNotifications: React.FC<Props> = ({
         />
       </Row>
       {notifications.custom && (
-        <Row large>
+        <Row large onlyOffset>
           <AssetNotificationsCustom
             onSuccess={onSuccess}
             condition={notifications.custom}

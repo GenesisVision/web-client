@@ -1,5 +1,3 @@
-import "./follow-popup.scss";
-
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   AttachToSignalProvider,

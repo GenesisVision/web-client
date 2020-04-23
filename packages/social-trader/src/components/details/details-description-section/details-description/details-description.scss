@@ -9,7 +9,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 .details-description {
   &__section {
     @include background-with-avatar-level($background-color);
-    @include adaptive-margin(bottom, $padding-xsmall);
   }
 
   &__main {
@@ -21,11 +20,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       flex-wrap: nowrap;
       justify-content: flex-start;
     }
-  }
-
-  &__control-elements-block {
-    display: flex;
-    flex-direction: column;
   }
 
   &__avatar {
@@ -41,13 +35,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     padding: 0;
   }
 
-  &__subheading {
-    @include adaptive-padding(bottom, $padding-small);
-    @include font-size($font-size-h4);
-    font-weight: bold;
-    letter-spacing: 0.21px;
-  }
-
   &__info {
     order: 99;
     width: 100%;
@@ -57,10 +44,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
       width: auto;
       margin-left: $padding-info-left;
     }
-  }
-
-  &__info-block {
-    @include adaptive-padding(top, $padding-xsmall, 2);
   }
 }
 
@@ -75,9 +58,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__controls {
-    display: flex;
-    flex-wrap: wrap;
-
     @include media-breakpoint-desktop() {
       margin-left: (-$padding-xxsmall/2);
       flex-wrap: nowrap;
@@ -89,7 +69,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   }
 
   &__statistic-container {
-    @include adaptive-margin(bottom, 15px);
     display: inline-flex;
     min-width: 50%;
     box-sizing: border-box;
@@ -97,7 +76,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
     &--btn {
       min-width: 100%;
-      margin-bottom: 0;
     }
 
     @include media-breakpoint-desktop() {
@@ -108,8 +86,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
   &__performance-data {
     padding-left: 0;
 
-    @include adaptive-padding(top, $padding-xxsmall);
-    @include adaptive-padding(bottom, $padding-upper-medium);
     @include media-breakpoint-tablet() {
       padding-left: $padding-small;
       margin-left: $padding-controls-left;
@@ -120,16 +96,8 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     height: 20px;
   }
 
-  &__subheading {
-    @include adaptive-padding(top, $padding-big);
-  }
-
   &__text {
     line-height: $font-size-paragraph-mobile * 2;
-    letter-spacing: 0.2px;
-    text-align: left;
-    color: $text-color;
-    padding-bottom: $padding-small;
     word-break: break-word;
     white-space: pre-wrap;
     @include font-size($font-size-paragraph);

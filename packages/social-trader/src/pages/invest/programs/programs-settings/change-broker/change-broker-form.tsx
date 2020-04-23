@@ -174,18 +174,21 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           {t("program-settings.broker.text-change")}
         </FormTextField>
       </Row>
-      <GVButton
-        onClick={setChangeBrokerOpen}
-        color="primary"
-        className="invest-form__submit-button"
-        isSuccessful={isSubmitted && !errorMessage}
-        isPending={isSubmitting}
-        disabled={
-          !dirty || currentAccountTypeId === brokerAccountTypeId || isSubmitting
-        }
-      >
-        {t("program-settings.buttons.change-broker")}
-      </GVButton>
+      <Row large>
+        <GVButton
+          onClick={setChangeBrokerOpen}
+          color="primary"
+          isSuccessful={isSubmitted && !errorMessage}
+          isPending={isSubmitting}
+          disabled={
+            !dirty ||
+            currentAccountTypeId === brokerAccountTypeId ||
+            isSubmitting
+          }
+        >
+          {t("program-settings.buttons.change-broker")}
+        </GVButton>
+      </Row>
       <ConfirmChangeBroker
         onApply={handleOnApply}
         open={isChangeBrokerOpen}

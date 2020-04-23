@@ -65,12 +65,7 @@ const _SocialLinkForm: React.FC<Props> = ({
         <SocialLinkImage url={logoUrl} alt={name} />
       </RowItem>
       <RowItem>
-        <HookForm
-          resetOnSuccess
-          className="social-link__form"
-          form={form}
-          onSubmit={handleSubmit}
-        >
+        <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
           <GVHookFormField
             component={SimpleTextField}
             wrapperClassName="social-input__wrapper"

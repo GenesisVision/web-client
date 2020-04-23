@@ -4,6 +4,13 @@ export enum SORTING_DIRECTION {
   DESC = "Desc"
 }
 
+export const switchDirection = (
+  direction: SORTING_DIRECTION
+): SORTING_DIRECTION =>
+  direction === SORTING_DIRECTION.ASC
+    ? SORTING_DIRECTION.DESC
+    : SORTING_DIRECTION.ASC;
+
 export const getSortingColumnName = (value?: string): string => {
   //@ts-ignore TODO
   if (value === undefined) return undefined;

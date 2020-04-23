@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { Center } from "components/center/center";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVProgramPeriod from "components/gv-program-period";
@@ -31,7 +30,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
 }) => {
   const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
-    <div className={classNames("asset-form-field", className)}>
+    <div className={className}>
       <GVHookFormField
         showCorrect
         wide={wide}

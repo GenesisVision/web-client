@@ -2,6 +2,7 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
+import { Row } from "components/row/row";
 import { RecoveryCode } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
 import * as React from "react";
@@ -32,11 +33,11 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
     <div className="recovery-codes-container">
       <DialogTop title={t("2fa-page.codes.title")} />
       <DialogBottom>
-        <div className="dialog__text">
-          <p>{t("2fa-page.codes.successfully")}</p>
-          <p>{t("2fa-page.codes.recovery_codes")}</p>
-        </div>
-        <CodeList codes={codes} />
+        <Row>{t("2fa-page.codes.recovery_codes")}</Row>
+        <Row>{t("2fa-page.codes.successfully")}</Row>
+        <Row>
+          <CodeList codes={codes} />
+        </Row>
         <DialogButtons>
           <CopyButton wide value={getCodesString(codes)} />
         </DialogButtons>

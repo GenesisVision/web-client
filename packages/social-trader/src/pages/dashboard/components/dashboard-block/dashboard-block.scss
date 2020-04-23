@@ -25,10 +25,6 @@
   overflow-x: scroll;
   width: 100%;
 
-  & .table-card {
-    margin-right: $padding-xsmall;
-  }
-
   &__shadow-wrapper {
     @include details-block-left-margin();
   }

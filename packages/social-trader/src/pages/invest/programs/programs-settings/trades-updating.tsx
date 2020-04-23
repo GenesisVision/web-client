@@ -1,4 +1,5 @@
 import TradesDelay from "components/assets/fields/trades-delay";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import withLoader from "decorators/with-loader";
@@ -28,12 +29,14 @@ const _TradesUpdating: React.FC<Props> = ({
     <SettingsBlock label={t("program-settings.trades-update.title")}>
       <HookForm form={form} onSubmit={onSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
-        <SubmitButton
-          className="invest-form__submit-button"
-          isSuccessful={!editError}
-        >
-          {t("program-settings.buttons.save")}
-        </SubmitButton>
+        <Row large>
+          <SubmitButton
+            className="invest-form__submit-button"
+            isSuccessful={!editError}
+          >
+            {t("program-settings.buttons.save")}
+          </SubmitButton>
+        </Row>
       </HookForm>
     </SettingsBlock>
   );

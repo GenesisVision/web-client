@@ -13,7 +13,6 @@ import {
   updateCurrency
 } from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
-import { CurrencySelectLoader } from "./currency-select.loader";
 
 const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
   return (
     <CurrencySelect
       condition={!!currency && !!currencyValues}
-      loader={<CurrencySelectLoader />}
       className={classNames("currency-select", className)}
       value={currency}
       onChange={handleChange}

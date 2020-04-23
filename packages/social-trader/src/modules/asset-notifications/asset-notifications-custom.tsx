@@ -46,7 +46,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
     [asset]
   );
   return (
-    <div className="notification-settings">
+    <div>
       <Row>
         <h3 className="notification-settings__subtitle">
           {t("notifications-page.custom.title")}

@@ -3,15 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .notification-settings {
-  width: 100%;
-  &__title {
-    overflow-wrap: break-word;
-    @include font-size($font-size-common);
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    color: #3bcdbd;
-  }
-
   &__subtitle {
     @include font-size($font-size-small);
     letter-spacing: 0.48px;
@@ -20,28 +11,7 @@
 }
 
 .notification-entity {
-  max-width: 344px;
-  color: $main-color;
-  @include font-size($font-size-paragraph);
-  @include line-height(2);
-  letter-spacing: 0.2px;
+  justify-content: space-between;
+  width: 344px;
   @include background-with-avatar-level($background-color);
-
-  &__list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  &__count {
-    margin-left: auto;
-  }
-}
-
-.program-notification {
-  &__list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
 }

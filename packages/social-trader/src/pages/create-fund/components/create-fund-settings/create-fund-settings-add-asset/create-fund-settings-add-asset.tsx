@@ -1,7 +1,9 @@
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import GVTextField from "components/gv-text-field";
 import { SearchIcon } from "components/icon/search-icon";
+import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -57,7 +59,6 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
             <GVTextField
               noMargin
               name="queryValue"
-              wrapperClassName="add-fund-asset-popover__search-input"
               placeholder="Search for assets"
               autoComplete="off"
               adornment={<SearchIcon secondary />}
@@ -103,8 +104,8 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
           symbol={asset.name}
         />
       </td>
-      <td className="add-fund-asset-popover__asset-currency-short">
-        {asset.asset}
+      <td>
+        <MutedText>{asset.asset}</MutedText>
       </td>
       <td>
         <Regulator
@@ -114,7 +115,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
           handleDown={handleDown(asset)}
           handleUp={handleUp(asset)}
         >
-          <div className="add-fund-asset-popover__regulator-indicator">
+          <Center className="add-fund-asset-popover__regulator-indicator">
             <input
               value={asset.percent}
               onChange={handlePercentChange(asset)}
@@ -124,7 +125,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
               })}
             />
             %
-          </div>
+          </Center>
         </Regulator>
       </td>
     </tr>

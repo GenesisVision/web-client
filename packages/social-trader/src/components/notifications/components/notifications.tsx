@@ -48,16 +48,17 @@ const _Notifications: React.FC<Props> = ({
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
-    <NotificationsGroup
-      key={group}
-      title={parseDate(
-        parseInt(group),
-        t("notifications-aside.today"),
-        t("notifications-aside.yesterday")
-      )}
-      notifications={groups[parseInt(group)]}
-      closeNotifications={closeNotifications}
-    />
+    <Row onlyOffset key={group}>
+      <NotificationsGroup
+        title={parseDate(
+          parseInt(group),
+          t("notifications-aside.today"),
+          t("notifications-aside.yesterday")
+        )}
+        notifications={groups[parseInt(group)]}
+        closeNotifications={closeNotifications}
+      />
+    </Row>
   );
   const groups = getGroups(mergedNotifications);
   const hasMore = total > mergedNotifications.length;
@@ -69,8 +70,8 @@ const _Notifications: React.FC<Props> = ({
           <RowItem className="notifications__ring">
             <RingIcon />
           </RowItem>
-          <RowItem className="notifications__header-title">
-            {t("notifications-aside.header")}
+          <RowItem>
+            <h4>{t("notifications-aside.header")}</h4>
           </RowItem>
           <RowItem>
             <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>

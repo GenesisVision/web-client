@@ -1,4 +1,6 @@
 import LevelIcon from "components/details/details-description-section/about-levels/level-icon";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { LevelInfo } from "gv-api-web";
 import { CURRENCIES } from "modules/currency-select/currency-select.constants";
@@ -18,13 +20,11 @@ const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
   return (
     <>
       {investmentsLimits.map(levelInfo => (
-        <div key={levelInfo.level} className="about-levels__limit">
-          <LevelIcon levelInfo={levelInfo} />
-          <StatisticItem
-            className="about-levels__info"
-            accent
-            label={t("about-levels-page.titles.limit")}
-          >
+        <Row key={levelInfo.level}>
+          <RowItem>
+            <LevelIcon levelInfo={levelInfo} />
+          </RowItem>
+          <StatisticItem accent label={t("about-levels-page.titles.limit")}>
             <NumberFormat
               value={formatCurrencyValue(levelInfo.investmentLimit, currency)}
               thousandSeparator={" "}
@@ -32,7 +32,7 @@ const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
               suffix={` ${currency}`}
             />
           </StatisticItem>
-        </div>
+        </Row>
       ))}
     </>
   );
@@ -46,29 +46,19 @@ const _AboutLevelsContent: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <div className="about-levels__container">
-      <div className="about-levels__header">
+      <Row>
         <h1>{t("about-levels-page.titles.main")}</h1>
-      </div>
-      <div className="about-levels__row">
-        <div className="about-levels__left-block">
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-1")}
-          </p>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-2")}
-          </p>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-3")}
-          </p>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.section.text-4")}
-          </p>
-          <h4 className="about-levels__subtitle">
-            {t("about-levels-page.section.formula")}
-          </h4>
-          <p className="about-levels__paragraph">
-            {t("about-levels-page.list.subtitle")}
-          </p>
+      </Row>
+      <Row className="about-levels__content">
+        <RowItem className="about-levels__left-block">
+          <Row small>{t("about-levels-page.section.text-1")}</Row>
+          <Row small>{t("about-levels-page.section.text-2")}</Row>
+          <Row small>{t("about-levels-page.section.text-3")}</Row>
+          <Row small>{t("about-levels-page.section.text-4")}</Row>
+          <Row>
+            <h4>{t("about-levels-page.section.formula")}</h4>
+          </Row>
+          <Row small>{t("about-levels-page.list.subtitle")}</Row>
           <div className="about-levels__list">
             <h4 className="about-levels__list-item">
               {t("about-levels-page.list.list-item-1")}
@@ -76,21 +66,13 @@ const _AboutLevelsContent: React.FC<Props> = ({
             <h4 className="about-levels__list-item">
               {t("about-levels-page.list.list-item-2")}
             </h4>
-            <p className="about-levels__paragraph">
-              {t("about-levels-page.section.text-5")}
-            </p>
+            <p>{t("about-levels-page.section.text-5")}</p>
             <h4 className="about-levels__list-item">
               {t("about-levels-page.list.list-item-3")}
             </h4>
-            <p className="about-levels__paragraph">
-              {t("about-levels-page.section.text-6")}
-            </p>
-            <p className="about-levels__paragraph">
-              {t("about-levels-page.section.text-7")}
-            </p>
-            <p className="about-levels__paragraph">
-              {t("about-levels-page.section.text-8")}
-            </p>
+            <p>{t("about-levels-page.section.text-6")}</p>
+            <p>{t("about-levels-page.section.text-7")}</p>
+            <p>{t("about-levels-page.section.text-8")}</p>
             <h4 className="about-levels__notes">
               {t("about-levels-page.notes.title")}
             </h4>
@@ -102,7 +84,7 @@ const _AboutLevelsContent: React.FC<Props> = ({
                 <p>{t("about-levels-page.notes.note-2")}</p>
               </li>
             </ul>
-            <p className="about-levels__paragraph">
+            <p>
               {t("about-levels-page.section.text-9")}{" "}
               <a
                 title={t("about-levels-page.section.link")}
@@ -114,21 +96,21 @@ const _AboutLevelsContent: React.FC<Props> = ({
               </a>
             </p>
           </div>
-        </div>
-        <div className="about-levels__right-block">
-          <h4 className="about-levels__subtitle">
-            {t("about-levels-page.titles.limits")}
-          </h4>
-          <div className="about-levels__limits">
+        </RowItem>
+        <RowItem className="about-levels__right-block">
+          <Row>
+            <h4>{t("about-levels-page.titles.limits")}</h4>
+          </Row>
+          <Row onlyOffset>
             {investmentsLimits.length && (
               <Limits
                 investmentsLimits={investmentsLimits}
                 currency={currency}
               />
             )}
-          </div>
-        </div>
-      </div>
+          </Row>
+        </RowItem>
+      </Row>
     </div>
   );
 };

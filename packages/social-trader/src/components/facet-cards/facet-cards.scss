@@ -31,7 +31,6 @@ $facet-height: 280px;
 .facet {
   @include transition(transform, box-shadow);
   display: inline-block;
-  box-sizing: border-box;
   height: $facet-height/1.5;
   min-width: $facet-width/1.5;
   overflow: hidden;

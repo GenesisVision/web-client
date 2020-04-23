@@ -52,7 +52,7 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
   };
 
   return (
-    <div>
+    <div className="statistics-item__inner">
       <div
         className={classNames(
           { "statistics-item__top--hidden": hideLabel },

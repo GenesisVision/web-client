@@ -1,5 +1,6 @@
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
@@ -19,9 +20,11 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
     <SettingsBlock label={t("program-settings.password.title")}>
       <div>
         <FormTextField>{t("program-settings.password.text")}</FormTextField>
-        <GVButton color="primary" onClick={setChangePasswordOpen}>
-          {t("program-details-page.description.change-password")}
-        </GVButton>
+        <Row large>
+          <GVButton color="primary" onClick={setChangePasswordOpen}>
+            {t("program-details-page.description.change-password")}
+          </GVButton>
+        </Row>
       </div>
       <ChangePasswordTradingAccountPopup
         programName={title}

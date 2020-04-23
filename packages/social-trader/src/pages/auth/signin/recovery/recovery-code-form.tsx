@@ -47,14 +47,13 @@ const _RecoveryCodeForm: React.FC<Props> = ({
   }, [code, email]);
 
   return (
-    <HookForm className="recovery-form" form={form} onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.recovery.title")}</h3>
       <Row>
         <MutedText noWrap={false}>{t("auth.login.recovery.text")}</MutedText>
       </Row>
-      <Row onlyOffset>
+      <Row>
         <GVHookFormField
-          wide
           name={FIELDS.code}
           placeholder="Recovery code"
           autoFocus
@@ -66,13 +65,12 @@ const _RecoveryCodeForm: React.FC<Props> = ({
           <FormError error={errorMessage} />
         </Row>
       )}
-      <Row xlarge>
+      <Row>
         <SubmitButton
           id="recoverySubmit"
           isPending={requestStatus === CAPTCHA_STATUS.PENDING}
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
-          className="recovery-form__submit"
         >
           {t("auth.login.recovery.continue")}
         </SubmitButton>

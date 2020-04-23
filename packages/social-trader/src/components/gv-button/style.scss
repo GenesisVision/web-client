@@ -2,11 +2,7 @@
 @import "~shared/styles/_sizes";
 @import "~shared/styles/_constants";
 
-$change-size-value: 1px;
 $default-padding: $padding-xxsmall $padding-small;
-$decreased-padding: $padding-xxsmall - $change-size-value $padding-small -
-  $change-size-value;
-$decreased-margin: $change-size-value;
 
 @mixin box-shadow($color) {
   box-shadow: 0 0.2em 0.5em 0 $color;
@@ -27,7 +23,6 @@ $decreased-margin: $change-size-value;
     box-shadow,
     color,
     opacity,
-    margin,
     padding
   );
   color: $text-accent-color;

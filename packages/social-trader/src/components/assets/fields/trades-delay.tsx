@@ -9,12 +9,10 @@ import { DELAYS } from "pages/invest/programs/program-details/program-history-se
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import AssetField from "../asset-fields/asset-field";
-
 const _TradesDelay: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
   return (
-    <AssetField>
+    <>
       <GVHookFormField
         wide
         name={name}
@@ -38,7 +36,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
           />
         </MutedText>
       </Row>
-    </AssetField>
+    </>
   );
 };
 

@@ -3,23 +3,11 @@
 @import "~shared/styles/_breakpoint";
 
 .asset-settings-block {
-  @include adaptive-margin(bottom, $padding-xsmall * 2);
   box-sizing: border-box;
-  display: flex;
 
-  &--with-number {
-    @include adaptive-margin(bottom, $padding-xsmall);
-  }
-
-  &--hidden {
-    display: none;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
   &__content-block {
     width: 100%;
+    @include adaptive-padding(bottom, $padding-small);
   }
 
   &__line-block {
@@ -45,30 +33,7 @@
     }
   }
 
-  &__title {
-    @include adaptive-padding(right, $padding-xsmall);
-    padding-bottom: $padding-xsmall;
-  }
-
   &__wrapper {
-    @include adaptive-margin(bottom, $padding-upper-medium);
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &--broker-list {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 0;
-    }
-  }
-
-  &__form {
-    width: 100%;
   }
 }

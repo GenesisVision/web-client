@@ -36,10 +36,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       programDetails.personalDetails.canInvest
     : true;
   return (
-    <DetailsBlock
-      type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="details-description__control-elements-block"
-    >
+    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentProgramInfo
         id={id}
         currency={tradingAccountInfo.currency}

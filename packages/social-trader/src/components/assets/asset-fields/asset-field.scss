@@ -4,23 +4,8 @@
 
 .asset-fields {
   max-width: 700px;
-  display: flex;
-  flex-wrap: wrap;
 }
 .asset-field {
   position: relative;
   min-width: 230px;
-  @include adaptive-padding(right, $padding-xsmall);
-  &:not(:last-child) {
-    @include adaptive-margin(bottom, $padding-medium);
-  }
-
-  &--hidden {
-    display: none;
-  }
-
-  &--wider {
-    max-width: 100%;
-    width: 100%;
-  }
 }

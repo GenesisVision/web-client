@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
@@ -16,12 +17,14 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   return (
     <>
       <Row onlyOffset className="asset-settings__block-wrapper">
-        <p className="asset-settings__text">
+        <FormTextField>
           {t("program-settings.period-and-closing.text-period")}
-        </p>
-        <GVButton color="primary" onClick={setClosePeriodOpen}>
-          {t("program-details-page.close-period.title")}
-        </GVButton>
+        </FormTextField>
+        <Row large>
+          <GVButton color="primary" onClick={setClosePeriodOpen}>
+            {t("program-details-page.close-period.title")}
+          </GVButton>
+        </Row>
       </Row>
       <ConfirmClosePeriod
         open={isClosePeriodOpen}

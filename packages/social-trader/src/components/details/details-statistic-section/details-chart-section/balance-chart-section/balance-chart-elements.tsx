@@ -4,6 +4,7 @@ import {
   BalanceChartElementType,
   BalanceChartType
 } from "components/details/details-statistic-section/details.chart.types";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import {
@@ -45,7 +46,7 @@ const _BalanceChartElements: React.FC<Props> = ({
   const { chart, balance } = chartData.chart;
   return (
     <>
-      <div className="details-chart__value">
+      <Row>
         <StatisticItem label={t("details-page.chart.value")} big accent>
           <NumberFormat
             value={formatCurrencyValue(balance, name)}
@@ -54,7 +55,7 @@ const _BalanceChartElements: React.FC<Props> = ({
             suffix={` ${name}`}
           />
         </StatisticItem>
-      </div>
+      </Row>
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector
         maxCharts={1}

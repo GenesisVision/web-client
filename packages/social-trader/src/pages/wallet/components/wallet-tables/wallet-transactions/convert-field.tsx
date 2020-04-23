@@ -1,14 +1,13 @@
-import "./convert-fields.scss";
-
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
 const _ConvertField: React.FC<Props> = ({ first, second }) => {
   return (
     <Row>
-      {first}
-      {second && <span className="convert-field__arrow">&rarr;</span>}
-      {second}
+      <RowItem small>{first}</RowItem>
+      {second && <RowItem small>&rarr;</RowItem>}
+      <RowItem small>{second}</RowItem>
     </Row>
   );
 };

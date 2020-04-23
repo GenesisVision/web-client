@@ -21,10 +21,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       fundDescription.personalDetails.canInvest
     : true;
   return (
-    <DetailsBlock
-      type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="details-description__control-elements-block"
-    >
+    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentFundInfo fundDescription={fundDescription} />
       <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
         <DepositButton
