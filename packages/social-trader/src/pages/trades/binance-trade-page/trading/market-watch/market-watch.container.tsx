@@ -7,7 +7,7 @@ import {
   MergedTickerSymbolType,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 import { getSymbols } from "services/binance/binance-http.service";
 import { getTickersStream } from "services/binance/binance-stream.service";
@@ -56,9 +56,10 @@ const _MarketWatchContainer: React.FC<Props> = () => {
     });
     setList(updatedList);
   }, [symbols]);
+  const items = useMemo(() => Object.values(list), [list]);
 
   return Object.values(socketData).length ? (
-    <MarketWatch items={Object.values(list)} />
+    <MarketWatch items={items} />
   ) : null;
 };
 
