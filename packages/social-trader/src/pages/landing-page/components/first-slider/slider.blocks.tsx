@@ -9,6 +9,7 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
   const { t } = useTranslation();
   return animation ? (
     <>
+      {item.iframe && <iframe className="slider__iframe" src={item.iframe} />}
       {item.imageBg && (
         <ImageBaseElement
           src={item.imageBg}
@@ -17,16 +18,17 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
           className="slider__img slider__img--animation-bg"
         />
       )}
-      {item.images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={t(item.title)}
-          title={t(item.title)}
-          style={{ animationDelay: `${500 * index + 500}ms` }}
-          className="slider__img slider__img--animation"
-        />
-      ))}
+      {item.images &&
+        item.images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={t(item.title)}
+            title={t(item.title)}
+            style={{ animationDelay: `${500 * index + 500}ms` }}
+            className="slider__img slider__img--animation"
+          />
+        ))}
     </>
   ) : (
     <ImageBaseElement

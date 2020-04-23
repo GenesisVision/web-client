@@ -1,3 +1,4 @@
+import ImgBannerOptimization from "pages/landing-page/images/slider/banner.jpeg";
 import ImgBoxing1 from "pages/landing-page/images/slider/boxing-1.svg";
 import ImgBoxing2 from "pages/landing-page/images/slider/boxing-2.svg";
 import ImgBoxing3 from "pages/landing-page/images/slider/boxing-3.svg";
@@ -22,14 +23,22 @@ export type TSlide = {
   title: string;
   text: string;
   imageBg?: string;
+  iframe?: string;
   imageOptimization?: string;
-  images: Array<string>;
-  link: string;
+  images?: Array<string>;
+  link?: string;
 };
 
 export const slides: TSlide[] = [
   {
     id: 0,
+    title: "landing-page:slider.slide-0-title",
+    text: "landing-page:slider.slide-0-text",
+    iframe: "/main-banner/GV_MainBanner.html",
+    imageOptimization: ImgBannerOptimization
+  },
+  {
+    id: 1,
     title: "landing-page:slider.slide-1-title",
     text: "landing-page:slider.slide-1-text",
     imageBg: ImgBoxingBg,
@@ -38,7 +47,7 @@ export const slides: TSlide[] = [
     link: CREATE_ACCOUNT_BROKER_ROUTE
   },
   {
-    id: 1,
+    id: 2,
     title: "landing-page:slider.slide-2-title",
     text: "landing-page:slider.slide-2-text",
     imageBg: ImgCreditCardBg,
@@ -47,7 +56,7 @@ export const slides: TSlide[] = [
     link: WALLET_TOTAL_PAGE_ROUTE
   },
   {
-    id: 2,
+    id: 3,
     title: "landing-page:slider.slide-3-title",
     text: "landing-page:slider.slide-3-text",
     imageBg: ImgPeopleBg,
