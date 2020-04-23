@@ -1,19 +1,17 @@
-import "./cookie-message.scss";
-
 import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import React, { useCallback, useEffect, useState } from "react";
-import { getCookie, setCookie } from "utils/cookie";
 
-const ACCEPT_PARAM_NAME = "ACCEPTCONSENT";
+import { getAccept, setAccept } from "./cookie-message.helpers";
+import "./cookie-message.scss";
 
 const CookieMessage: React.FC = () => {
   const [hasAcceptance, setAcceptance] = useState(true);
   useEffect(() => {
-    const cookie = getCookie(ACCEPT_PARAM_NAME);
+    const cookie = getAccept();
     if (!cookie) setAcceptance(false);
   }, []);
   const handleClick = useCallback(() => {
-    setCookie(ACCEPT_PARAM_NAME, "y");
+    setAccept("y");
     setAcceptance(true);
   }, []);
   if (hasAcceptance) return null;
