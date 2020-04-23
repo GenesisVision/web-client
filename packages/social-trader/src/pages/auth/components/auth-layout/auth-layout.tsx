@@ -1,7 +1,9 @@
+import { Center } from "components/center/center";
 import GvBrand from "components/gv-brand/gv-brand";
 import GvLogo from "components/gv-logo/gv-logo";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { NextPage } from "next";
 import React from "react";
@@ -21,18 +23,18 @@ const _AuthLayout: NextPage<Props> = ({
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <div className="root auth page">
+    <div className="auth">
       <div className="auth__left">
-        <Link
-          className="navigation__link auth__logo"
-          to={linkCreator(HOME_ROUTE)}
-        >
-          <>
-            <GvLogo />
-            <GvBrand />
-          </>
+        <Link className="auth__logo" to={linkCreator(HOME_ROUTE)}>
+          <Center>
+            <RowItem small>
+              <GvLogo />
+            </RowItem>
+            <RowItem small>
+              <GvBrand />
+            </RowItem>
+          </Center>
         </Link>
-
         <blockquote className="auth__quote">
           {t(`auth-quotes.${quoteNo}.quote`)}
           <footer className="auth__quote-footer">
@@ -51,9 +53,9 @@ const _AuthLayout: NextPage<Props> = ({
           </Row>
         </div>
         {Footer && (
-          <div className="auth__footer">
+          <Center className="auth__footer">
             <Footer ROUTE={footerAuthRoute} />
-          </div>
+          </Center>
         )}
       </div>
     </div>

@@ -3,6 +3,10 @@
 @import "./_typography.scss";
 @import "./_sizes.scss";
 
+div {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;

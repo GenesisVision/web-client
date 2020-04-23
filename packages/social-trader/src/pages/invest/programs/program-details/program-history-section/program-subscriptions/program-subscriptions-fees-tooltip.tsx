@@ -1,5 +1,6 @@
 import FeeCommission from "components/fee-commission/fee-commission";
 import FeesTooltip from "components/fees-tooltip/fees-tooltip";
+import { Row } from "components/row/row";
 import { SignalSubscriber } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -18,12 +19,14 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
           value={subscription.totalSuccessFeeAmount}
           currency={subscription.totalSuccessFeeCurrency}
         />
-        <FeeCommission
-          className="fee-commission--green-value"
-          title={t(`copytrading-tables.fees.ManagerSignalMasterVolumeFee`)}
-          value={subscription.totalVolumeFeeAmount}
-          currency={subscription.totalVolumeFeeCurrency}
-        />
+        <Row small>
+          <FeeCommission
+            className="fee-commission--green-value"
+            title={t(`copytrading-tables.fees.ManagerSignalMasterVolumeFee`)}
+            value={subscription.totalVolumeFeeAmount}
+            currency={subscription.totalVolumeFeeCurrency}
+          />
+        </Row>
       </>
     }
     footer={

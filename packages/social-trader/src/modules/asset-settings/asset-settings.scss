@@ -3,24 +3,6 @@
 @import "~shared/styles/_breakpoint";
 
 .asset-settings {
-  &__text {
-    @include adaptive-padding(bottom, $padding-xsmall);
-    color: rgba($text-light-color, 0.5);
-    line-height: 24px;
-
-    &--color-accent {
-      color: $primary-color;
-    }
-
-    &--padding-top {
-      @include adaptive-padding(top, $padding-xsmall);
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 500px;
-    }
-  }
-
   &__block-wrapper {
     width: 100%;
 

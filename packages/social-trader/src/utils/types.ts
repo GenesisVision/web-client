@@ -19,6 +19,8 @@ import Token from "services/api-client/token";
 
 export type AnyObjectType = { [keys: string]: any };
 
+export type SizesType = "xsmall" | "small" | "middle" | "large" | "xlarge";
+
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 
 export interface IDispatchable<T> {

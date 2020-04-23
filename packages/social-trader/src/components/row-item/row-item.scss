@@ -17,6 +17,9 @@
 
 .row-item {
   box-sizing: border-box;
+  &--hide {
+    display: none;
+  }
   &--wide {
     width: 100%;
   }

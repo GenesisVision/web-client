@@ -1,9 +1,6 @@
 import { Center } from "components/center/center";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import {
-  PopoverContentCardBlock,
-  PopoverContentCardBlockItem
-} from "components/popover/popover-card.block";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -31,7 +28,7 @@ const DateRangeItem: React.FC<{
   label: string;
 }> = React.memo(({ onClick, disabled, label }) => {
   return (
-    <PopoverContentCardBlockItem>
+    <Row>
       <GVButton
         className="date-range-filter__type-btn"
         noPadding
@@ -42,7 +39,7 @@ const DateRangeItem: React.FC<{
       >
         {label}
       </GVButton>
-    </PopoverContentCardBlockItem>
+    </Row>
   );
 });
 

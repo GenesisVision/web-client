@@ -24,32 +24,30 @@ const _NotificationAssets: React.FC<Props> = ({ settings, asset }) => {
           {t(`notifications-page.${asset.toLowerCase()}s`)}
         </h3>
       </Row>
-      <Row wide>
-        <div className="program-notification__list">
-          {settings.map(setting => (
-            <NotificationEntity
-              levelProgress={
-                "levelProgress" in setting ? setting.levelProgress : undefined
-              }
-              pathname={
-                asset === ASSET.PROGRAM
-                  ? PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
-                  : FUND_NOTIFICATIONS_FOLDER_ROUTE
-              }
-              href={composeAssetNotificationsUrl(setting.url, asset)}
-              level={"level" in setting ? setting.level : undefined}
-              key={setting.assetId}
-              title={setting.title}
-              logo={setting.logoUrl}
-              color={setting.color}
-              count={
-                ("settingsCustom" in setting
-                  ? setting.settingsCustom.length
-                  : 0) + setting.settingsGeneral.length
-              }
-            />
-          ))}
-        </div>
+      <Row wide onlyOffset>
+        {settings.map(setting => (
+          <NotificationEntity
+            levelProgress={
+              "levelProgress" in setting ? setting.levelProgress : undefined
+            }
+            pathname={
+              asset === ASSET.PROGRAM
+                ? PROGRAM_NOTIFICATIONS_FOLDER_ROUTE
+                : FUND_NOTIFICATIONS_FOLDER_ROUTE
+            }
+            href={composeAssetNotificationsUrl(setting.url, asset)}
+            level={"level" in setting ? setting.level : undefined}
+            key={setting.assetId}
+            title={setting.title}
+            logo={setting.logoUrl}
+            color={setting.color}
+            count={
+              ("settingsCustom" in setting
+                ? setting.settingsCustom.length
+                : 0) + setting.settingsGeneral.length
+            }
+          />
+        ))}
       </Row>
     </div>
   );

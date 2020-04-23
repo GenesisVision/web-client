@@ -29,7 +29,7 @@ const _NotificationEntity: React.FC<Props> = ({
           color={color}
         />
       </Link>
-      <div className="notification-entity__count">{count}</div>
+      <div>{count}</div>
     </Row>
   );
 };

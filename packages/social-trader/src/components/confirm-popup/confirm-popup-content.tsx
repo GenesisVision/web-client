@@ -3,6 +3,7 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -25,9 +26,7 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
     <HookForm form={form} onSubmit={onApply}>
       <DialogTop title={header} />
       <DialogBottom>
-        <div className="dialog__text">
-          <p>{body}</p>
-        </div>
+        <Row>{body}</Row>
         <DialogButtons>
           <SubmitButton
             checkDirty={false}

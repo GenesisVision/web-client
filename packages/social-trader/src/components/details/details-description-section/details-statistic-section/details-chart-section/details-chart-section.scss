@@ -15,17 +15,6 @@
     height: 490px;
   }
 
-  & .chart-period {
-    margin-top: 0;
-  }
-
-  &__value {
-    padding-top: $padding-xsmall-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-xsmall;
-    }
-  }
-
   &__profit {
     height: 350px;
     width: 100%;

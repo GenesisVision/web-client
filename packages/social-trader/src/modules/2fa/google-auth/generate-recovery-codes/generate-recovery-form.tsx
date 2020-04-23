@@ -41,7 +41,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
             component={SimpleTextField}
             autoComplete="new-password"
           />
-          <DialogError error={errorMessage} />
+          {errorMessage && <DialogError error={errorMessage} />}
           <DialogButtons>
             <SubmitButton
               wide

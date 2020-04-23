@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
@@ -13,16 +14,18 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
   return (
     <>
       <Row onlyOffset className="asset-settings__block-wrapper">
-        <p className="asset-settings__text">
+        <FormTextField>
           {t(`asset-settings.period-and-closing.text-${asset.toLowerCase()}`)}
-        </p>
-        <GVButton
-          color="danger"
-          disabled={!canClose}
-          onClick={setCloseAssetOpen}
-        >
-          {t(`asset-settings.buttons.close-${asset.toLowerCase()}`)}
-        </GVButton>
+        </FormTextField>
+        <Row large>
+          <GVButton
+            color="danger"
+            disabled={!canClose}
+            onClick={setCloseAssetOpen}
+          >
+            {t(`asset-settings.buttons.close-${asset.toLowerCase()}`)}
+          </GVButton>
+        </Row>
       </Row>
       <ConfirmCloseAssetContainer
         asset={asset}

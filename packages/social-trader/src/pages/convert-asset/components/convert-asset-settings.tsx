@@ -9,6 +9,7 @@ import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.par
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
@@ -153,7 +154,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         </SettingsBlock>
       )}
-      <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
+      <Row large>
+        <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
+      </Row>
     </HookForm>
   );
 };

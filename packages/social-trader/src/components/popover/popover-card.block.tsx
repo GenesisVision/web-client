@@ -34,7 +34,3 @@ interface IPopoverContentCardBlockProps
   stretched?: boolean;
   fixed?: boolean;
 }
-
-export const PopoverContentCardBlockItem: React.FC = ({ children }) => {
-  return <div className="popover-content__block-item">{children}</div>;
-};

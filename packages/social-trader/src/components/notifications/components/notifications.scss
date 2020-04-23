@@ -3,39 +3,11 @@
 @import "~shared/styles/_constants";
 @import "~shared/styles/_sizes";
 
-$font-size: 13px;
 $line-height: 1.69;
 $ring-icon-size: 32px;
 $avatar-size: 32px;
 
 .notifications {
-  width: 100%;
-
-  &__group {
-    @include adaptive-margin(bottom, $padding-small);
-    .notification__content {
-      @include adaptive-margin(bottom, $padding-small);
-      border-bottom: 1px solid $border-color;
-    }
-
-    &:last-child {
-      .notification:last-child {
-        .notification__content {
-          border-bottom: none;
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
-  &__link {
-    margin: 0 auto;
-  }
-
-  &__title {
-    @include adaptive-margin(bottom, $padding-upper-medium);
-  }
-
   &__link {
     &:hover {
       background-color: lighten($secondary-color, 5%);
@@ -53,37 +25,25 @@ $avatar-size: 32px;
 
   &__header {
     justify-content: space-between;
-    @include adaptive-margin(bottom, $padding-small);
-    @include horizontal-paddings($padding-xsmall);
-    @include adaptive-padding(top, $padding-small);
+    @include adaptive-full-padding($padding-xsmall);
   }
-
-  &__header-title {
-    @include font-size($font-size-h4);
-  }
-
   &__content {
     @include horizontal-paddings($padding-xsmall);
-    @include adaptive-padding(bottom, $padding-small);
   }
 }
 
 .notification {
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+  }
   &__content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    line-height: $line-height;
+    @include adaptive-padding(bottom, $padding-xsmall);
   }
 
   &__description {
-    @include adaptive-margin(bottom, $padding-xsmall);
-    @include font-size($font-size);
-    line-height: $line-height;
+    @include font-size($font-size-common);
     letter-spacing: 0.2px;
-  }
-  &__date {
-    line-height: $line-height;
-    @include adaptive-margin(bottom, $padding-xsmall);
   }
 
   &--is-unread {
@@ -102,15 +62,10 @@ $avatar-size: 32px;
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-    @include adaptive-margin(top, ($font-size * $line-height - $font-size) / 2);
 
     @include height($avatar-size);
     @include width($avatar-size);
     flex-shrink: 0;
-  }
-
-  &__icon-logo {
-    margin: auto;
   }
 
   &[class*="--type-profile"] {

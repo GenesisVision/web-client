@@ -105,7 +105,7 @@ interface Props {
     email: string;
     errorMessage: string;
   }) => JSX.Element;
-  className: string;
+  className?: string;
   type?: CODE_TYPE;
   redirectFrom: string;
 }

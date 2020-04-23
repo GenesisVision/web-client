@@ -39,6 +39,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
   return (
     <HookForm className="login-form" form={form} onSubmit={onSubmit}>
       <GVHookFormField
+        wide
         autoFocus
         type="email"
         name={FIELDS.email}
@@ -57,7 +58,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         />
       </Row>
 
-      <Row large className="login-form__forgot">
+      <Row large>
         <Link to={FORGOT_PASSWORD_ROUTE}>
           <GVButton noPadding variant="text">
             {t("auth.login.forgot")}
@@ -74,7 +75,6 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         <SubmitButton
           checkValid={false}
           checkDirty={false}
-          className="login__submit-button"
           id="loginSubmit"
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}

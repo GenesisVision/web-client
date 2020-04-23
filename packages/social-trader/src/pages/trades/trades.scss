@@ -1,3 +1,5 @@
+@import "~shared/styles/_colors";
+
 .mt-frame {
   position: relative;
   & iframe {
@@ -13,7 +15,7 @@
     margin-left: 50%;
     transform: translate(-50%, 0);
     padding: 50px;
-    border: 1px solid orange;
-    color: orange;
+    border: 1px solid $negative-color;
+    color: $negative-color;
   }
 }

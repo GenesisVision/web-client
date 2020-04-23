@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
+import { DefaultBlock } from "components/default.block/default.block";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
-import Surface from "components/surface/surface";
 import { AssetFacet } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
@@ -19,8 +19,11 @@ const _FacetCard: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const [isHovered, setHovered, setNotHovered] = useIsOpen();
   return (
-    <Surface
-      className={classNames("surface--without-paddings facet", {
+    <DefaultBlock
+      solid
+      horizontalOffsets={false}
+      verticalOffsets={false}
+      className={classNames("facet", {
         "facet--hovered": isHovered
       })}
       onMouseEnter={setHovered}
@@ -45,7 +48,7 @@ const _FacetCard: React.FC<Props> = ({
           </div>
         </div>
       </Link>
-    </Surface>
+    </DefaultBlock>
   );
 };
 

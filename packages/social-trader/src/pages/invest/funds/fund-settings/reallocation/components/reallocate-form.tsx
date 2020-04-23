@@ -1,9 +1,9 @@
-import "../reallocate.scss";
-
+import FormTextField from "components/assets/fields/form-text-field";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Row } from "components/row/row";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -74,39 +74,51 @@ const _ReallocateForm: React.FC<Props> = ({
   const [isOpenConfirm, setIsOpenConfirm, setIsCloseConfirm] = useIsOpen();
   return (
     <HookForm className="reallocate-container" resetOnSuccess form={form}>
-      <p className="asset-settings__text">
+      <FormTextField>
         {t("fund-settings.reallocation.text-1")}
         {availableReallocationPercents}%
-      </p>
-      <p className="asset-settings__text">
-        {t("fund-settings.reallocation.text-2")}
-      </p>
-      <StatisticItem label={"Current"} condition={dirty && !equalWithCurrent}>
-        <CreateFundSettingsAssetsComponent
-          assets={savedCurrent || []}
-          remainder={0}
-          canChange={false}
-        />
-      </StatisticItem>
-      <StatisticItem label={dirty ? "New" : "Current"}>
-        <GVHookFormField
-          name={FIELDS.assets}
-          component={ReallocateFieldWrapper}
-          assets={platformAssets}
-        />
-      </StatisticItem>
-      {errorMessage && <DialogError error={errorMessage} />}
-      <p className="asset-settings__text">
-        {t("fund-settings.reallocation.text-3")}
-      </p>
-      <GVButton
-        isPending={isSubmitting}
-        isSuccessful={isSuccessful}
-        disabled={disabled}
-        onClick={setIsOpenConfirm}
-      >
-        {t("fund-settings.buttons.reallocation")}
-      </GVButton>
+      </FormTextField>
+      <Row>
+        <FormTextField>{t("fund-settings.reallocation.text-2")}</FormTextField>
+      </Row>
+      {dirty && !equalWithCurrent && (
+        <Row wide>
+          <StatisticItemInner label={"Current"}>
+            <CreateFundSettingsAssetsComponent
+              assets={savedCurrent || []}
+              remainder={0}
+              canChange={false}
+            />
+          </StatisticItemInner>
+        </Row>
+      )}
+      <Row wide>
+        <StatisticItemInner label={dirty ? "New" : "Current"}>
+          <GVHookFormField
+            name={FIELDS.assets}
+            component={ReallocateFieldWrapper}
+            assets={platformAssets}
+          />
+        </StatisticItemInner>
+      </Row>
+      {errorMessage && (
+        <Row>
+          <DialogError error={errorMessage} />
+        </Row>
+      )}
+      <Row>
+        <FormTextField>{t("fund-settings.reallocation.text-3")}</FormTextField>
+      </Row>
+      <Row large>
+        <GVButton
+          isPending={isSubmitting}
+          isSuccessful={isSuccessful}
+          disabled={disabled}
+          onClick={setIsOpenConfirm}
+        >
+          {t("fund-settings.buttons.reallocation")}
+        </GVButton>
+      </Row>
       <ConfirmReallocate
         assets={assets}
         open={isOpenConfirm}

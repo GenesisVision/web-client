@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
+import { Center } from "components/center/center";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
@@ -21,9 +22,13 @@ import { formatValue } from "utils/formatter";
 
 import "./table-card.scss";
 
-const TableCard: React.FC<ITableCardProps> = props => {
+export interface IWithOffset {
+  withOffset?: boolean;
+}
+
+const TableCard: React.FC<ITableCardProps & IWithOffset> = props => {
   return (
-    <TableCardContainer>
+    <TableCardContainer withOffset={props.withOffset}>
       <TableCardTopBlock {...props} />
       <TableCardChartBlock {...props} />
       {props.children}
@@ -31,9 +36,16 @@ const TableCard: React.FC<ITableCardProps> = props => {
   );
 };
 
-export const TableCardContainer: React.FC<React.HTMLAttributes<
-  HTMLDivElement
->> = ({ children }) => <div className="table-card">{children}</div>;
+export const TableCardContainer: React.FC<React.HTMLAttributes<HTMLDivElement> &
+  IWithOffset> = ({ withOffset = true, children }) => (
+  <div
+    className={classNames("table-card", {
+      "table-card--with-offset": withOffset
+    })}
+  >
+    {children}
+  </div>
+);
 
 export const TableCardRow: React.FC<{ center?: boolean } & React.HTMLAttributes<
   HTMLDivElement
@@ -71,7 +83,9 @@ export const TableCardTableColumn: React.FC<React.HTMLAttributes<
 
 export const TableCardTableButtons: React.FC<React.HTMLAttributes<
   HTMLDivElement
->> = ({ children }) => <div className="table-card__buttons">{children}</div>;
+>> = ({ children }) => (
+  <Center className="table-card__buttons">{children}</Center>
+);
 
 export const TableCardTitle: React.FC<{
   url?: ToType | string;
@@ -131,7 +145,7 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
       <ImageBase className="table-card__broker-avatar" src={logo} alt={alt} />
     );
     return (
-      <div className="table-card__avatar">
+      <Center className="table-card__avatar">
         {url ? (
           <Link title={`Open ${alt} details`} to={url}>
             {Avatar}
@@ -139,7 +153,7 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
         ) : (
           Avatar
         )}
-      </div>
+      </Center>
     );
   }
 );

@@ -1,8 +1,9 @@
-import "./fund-assets-ratio.scss";
-
 import classNames from "classnames";
+import { Row } from "components/row/row";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
+
+import "./fund-assets-ratio.scss";
 
 const _FundAssetRatio: React.FC<Props> = ({
   showBounds = true,
@@ -31,7 +32,7 @@ const _FundAssetRatio: React.FC<Props> = ({
         })}
       </div>
       {showBounds && (
-        <div className="fund-asset-ratio__values">
+        <Row small className="fund-asset-ratio__values">
           <div className="fund-asset-ratio__value">0%</div>
           <div
             className={classNames("fund-asset-ratio__value", {
@@ -45,7 +46,7 @@ const _FundAssetRatio: React.FC<Props> = ({
           >
             100%
           </div>
-        </div>
+        </Row>
       )}
     </>
   );

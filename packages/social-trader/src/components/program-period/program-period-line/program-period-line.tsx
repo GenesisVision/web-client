@@ -1,12 +1,13 @@
-import "./program-period-line.scss";
-
 import classNames from "classnames";
 import GVProgramPeriod from "components/gv-program-period";
+import { Row } from "components/row/row";
 import { STATUS } from "constants/constants";
 import { PeriodStatus } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { distanceDate } from "utils/dates";
+
+import "./program-period-line.scss";
 
 const _ProgramPeriodLine: React.FC<Props> = ({
   start,
@@ -25,14 +26,18 @@ const _ProgramPeriodLine: React.FC<Props> = ({
         value={new Date()}
         variant="line"
       />
-      <div className="program-period-line__description">
-        <div>{duration}</div>
+      <Row small className="program-period-line__description">
         <div>
-          {status === STATUS.CLOSED
-            ? t("program-period.program-closed")
-            : timeLeft && `${timeLeft} ${t("program-period.left")}`}{" "}
+          <b>{duration}</b>
         </div>
-      </div>
+        <div>
+          <b>
+            {status === STATUS.CLOSED
+              ? t("program-period.program-closed")
+              : timeLeft && `${timeLeft} ${t("program-period.left")}`}
+          </b>
+        </div>
+      </Row>
     </div>
   );
 };

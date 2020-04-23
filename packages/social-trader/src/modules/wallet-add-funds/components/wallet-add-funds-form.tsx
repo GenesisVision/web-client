@@ -29,7 +29,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
     [wallets, setSelected]
   );
   return (
-    <div className="wallet-add-funds-popup">
+    <div>
       <DialogTop title={t("wallet-deposit.title")}>
         <Row large>
           <CurrencySourceSelectElement
@@ -44,7 +44,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
       </DialogTop>
       <DialogBottom className="wallet-add-funds-popup__bottom">
         <Row>
-          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
+          <GVqr value={depositAddress} />
         </Row>
         <Row>
           <StatisticItem

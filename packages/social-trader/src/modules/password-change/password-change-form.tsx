@@ -1,5 +1,7 @@
 import classNames from "classnames";
+import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { ChangePasswordViewModel } from "gv-api-web";
@@ -50,21 +52,18 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
   });
 
   return (
-    <HookForm
-      resetOnSuccess
-      className="change-password"
-      form={form}
-      onSubmit={onSubmit}
-    >
-      <GVHookFormField
-        component={SimpleTextField}
-        label={t("auth.password-change.current-password")}
-        name={PASSWORD_CHANGE_FORM_FIELDS.oldPassword}
-        type="password"
-        autoComplete="new-password"
-        autoFocus
-      />
-      <div className="change-password__new">
+    <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
+      <Row>
+        <GVHookFormField
+          component={SimpleTextField}
+          label={t("auth.password-change.current-password")}
+          name={PASSWORD_CHANGE_FORM_FIELDS.oldPassword}
+          type="password"
+          autoComplete="new-password"
+          autoFocus
+        />
+      </Row>
+      <Row>
         <GVHookFormField
           className={className}
           component={SimpleTextField}
@@ -73,6 +72,8 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           name={PASSWORD_CHANGE_FORM_FIELDS.password}
           autoComplete="new-password"
         />
+      </Row>
+      <Row>
         <GVHookFormField
           className={className}
           component={SimpleTextField}
@@ -81,11 +82,17 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
           autoComplete="new-password"
         />
-        <div className="form-error">{errorMessage}</div>
-      </div>
-      <SubmitButton isSuccessful={!errorMessage}>
-        {t("buttons.confirm")}
-      </SubmitButton>
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row>
+        <SubmitButton isSuccessful={!errorMessage}>
+          {t("buttons.confirm")}
+        </SubmitButton>
+      </Row>
     </HookForm>
   );
 };

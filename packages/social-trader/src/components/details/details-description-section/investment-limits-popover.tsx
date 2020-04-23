@@ -1,8 +1,9 @@
-import "./investment-limits-popover.scss";
-
-import GVButton from "components/gv-button";
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { MutedText } from "components/muted-text/muted-text";
+import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Row } from "components/row/row";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { LevelInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import { fetchInvestmentsLevels } from "pages/invest/programs/program-details/service/program-details.service";
@@ -14,6 +15,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import AboutLevelsComponent from "./about-levels/about-levels";
+import "./investment-limits-popover.scss";
 
 const _InvestmentLimitsPopover: React.FC<Props> = ({
   level,
@@ -31,44 +33,52 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
   }, [currency]);
   return (
     <>
-      <PopoverContent type={"list"} className="popover-levels">
-        <div className="popover-levels__block">
-          <h4 className="popover-levels__title">
-            {t("program-details-page.popover.genesis-level")} {level}
-          </h4>
-          <StatisticItem
-            condition={canLevelUp}
-            accent
-            label={t("level-tooltip.level-up")}
-          >
-            {t("level-tooltip.top10")}
-          </StatisticItem>
-
-          <StatisticItem
-            accent
-            label={t("program-details-page.popover.invest-limit")}
-          >
-            <NumberFormat
-              value={formatCurrencyValue(limit, currency)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${currency}`}
-            />
-          </StatisticItem>
-        </div>
-        <div className="popover-levels__block popover-levels__text-block">
-          <div className="popover-levels__text">
-            {t("program-details-page.popover.text")}
-          </div>
-          <GVButton
-            variant="text"
-            onClick={setOpen}
-            color="secondary"
-            className="popover-levels__about"
-          >
-            <>{t("program-details-page.popover.about-levels")} &#8250;</>
-          </GVButton>
-        </div>
+      <PopoverContent className="popover-levels">
+        <PopoverContentCardBlock className="popover-levels__block">
+          <Row>
+            <h4>
+              {t("program-details-page.popover.genesis-level")} {level}
+            </h4>
+          </Row>
+          {canLevelUp && (
+            <Row>
+              <StatisticItemInner accent label={t("level-tooltip.level-up")}>
+                {t("level-tooltip.top10")}
+              </StatisticItemInner>
+            </Row>
+          )}
+          <Row>
+            <StatisticItemInner
+              accent
+              label={t("program-details-page.popover.invest-limit")}
+            >
+              <NumberFormat
+                value={formatCurrencyValue(limit, currency)}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={` ${currency}`}
+              />
+            </StatisticItemInner>
+          </Row>
+        </PopoverContentCardBlock>
+        <PopoverContentCardBlock dark className="popover-levels__block">
+          <Row>
+            <MutedText noWrap={false}>
+              {t("program-details-page.popover.text")}
+            </MutedText>
+          </Row>
+          <Row>
+            <GVButton
+              size={GV_BTN_SIZE.BIG}
+              noPadding
+              variant="text"
+              onClick={setOpen}
+              color="secondary"
+            >
+              <>{t("program-details-page.popover.about-levels")} &#8250;</>
+            </GVButton>
+          </Row>
+        </PopoverContentCardBlock>
       </PopoverContent>
       <AboutLevelsComponent
         condition={!!investmentsLimits}

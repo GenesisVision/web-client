@@ -2,9 +2,9 @@ import GVButton from "components/gv-button";
 import GVTextField from "components/gv-text-field";
 import { CloseIcon } from "components/icon/close-icon";
 import SearchIcon from "components/icon/search-icon/search-icon";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import React, { useCallback } from "react";
-
-import "./global-search-input.scss";
 
 export const SearchInputField: React.FC<{
   canClose?: boolean;
@@ -14,20 +14,22 @@ export const SearchInputField: React.FC<{
   onChange: (event: React.ChangeEvent<any>) => void;
 }> = ({ canClose = true, value, onChange, onCancel, onBlur }) => {
   return (
-    <div className="global-search__input-container">
-      <GVTextField
-        onBlur={onBlur}
-        wide
-        noMargin
-        name="queryValue"
-        placeholder="Search"
-        autoComplete="off"
-        adornment={<SearchIcon primary />}
-        adornmentPosition="start"
-        value={value}
-        onChange={onChange}
-        autoFocus
-      />
+    <Row wide>
+      <RowItem wide>
+        <GVTextField
+          onBlur={onBlur}
+          wide
+          noMargin
+          name="queryValue"
+          placeholder="Search"
+          autoComplete="off"
+          adornment={<SearchIcon primary />}
+          adornmentPosition="start"
+          value={value}
+          onChange={onChange}
+          autoFocus
+        />
+      </RowItem>
       {canClose && (
         <GVButton
           noPadding
@@ -39,7 +41,7 @@ export const SearchInputField: React.FC<{
           <CloseIcon />
         </GVButton>
       )}
-    </div>
+    </Row>
   );
 };
 

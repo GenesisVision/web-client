@@ -55,12 +55,7 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
     : null;
   return (
     <Tag to={to} onClick={closeNotifications} className="notification__icon">
-      <AssetAvatar
-        url={logoUrl}
-        alt={type}
-        className="notification__icon-logo"
-        color={color}
-      />
+      <AssetAvatar url={logoUrl} alt={type} color={color} />
     </Tag>
   );
 };
@@ -89,11 +84,7 @@ const _Notification: React.FC<INotificationProps> = props => {
       <RowItem>
         {staticIconUrl ? (
           <div className="notification__icon">
-            <ImageBaseElement
-              src={staticIconUrl}
-              alt={type}
-              className="notification__icon-logo"
-            />
+            <ImageBaseElement src={staticIconUrl} alt={type} />
           </div>
         ) : (
           <NotificationAssetAvatar {...props} />
@@ -102,10 +93,10 @@ const _Notification: React.FC<INotificationProps> = props => {
 
       <RowItem>
         <div className="notification__content">
-          <div className="notification__description">{text}</div>
-          <div className="notification__date">
+          <Row className="notification__description">{text}</Row>
+          <Row className="notification__date">
             <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
-          </div>
+          </Row>
         </div>
       </RowItem>
     </Row>

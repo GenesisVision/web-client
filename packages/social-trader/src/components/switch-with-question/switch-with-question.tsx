@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
-import GVSwitch from "components/gv-selection/gv-switch";
+import GVSwitch from "components/gv-switch";
 import HelpButton from "components/help-button/help-button";
 import {
   HORIZONTAL_POPOVER_POS,

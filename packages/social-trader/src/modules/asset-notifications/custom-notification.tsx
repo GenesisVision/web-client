@@ -1,5 +1,5 @@
 import GVButton from "components/gv-button";
-import GVSwitch from "components/gv-selection/gv-switch";
+import GVSwitch from "components/gv-switch";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";
 import { NotificationSettingViewModel } from "gv-api-web";

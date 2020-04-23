@@ -18,12 +18,16 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
     <Page title={info.title}>
       <div className="wallet-title-block">
         <Row wrap>
-          <RowItem className="wallet-title-block__title">
+          <RowItem>
             <Row>
-              <h1>
-                {info.title}
-                <span>&nbsp;{t("wallet-page.wallet")}</span>
-              </h1>
+              <RowItem>
+                <h1>
+                  {info.title}
+                  <span className="wallet-title-block__title-wallet">
+                    &nbsp;{t("wallet-page.wallet")}
+                  </span>
+                </h1>
+              </RowItem>
               <WalletImage
                 url={info.logoUrl}
                 imageClassName="wallet-title-block__title-icon"

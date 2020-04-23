@@ -28,7 +28,6 @@ import {
   haveActiveInvestment,
   InvestmentType
 } from "./details-investment.helpers";
-import "./details-investment.scss";
 
 const SubscriptionContainer = dynamic(() =>
   import(

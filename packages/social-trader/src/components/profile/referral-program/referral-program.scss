@@ -22,8 +22,6 @@
     }
   }
   &__tables {
-    @include adaptive-padding(top, $padding-small);
-    display: flex;
     justify-content: stretch;
     flex-direction: column;
     @include media-breakpoint-landscape-phone() {
@@ -33,17 +31,9 @@
       flex: 1;
     }
   }
-  &__title,
-  &__link-block {
-    @include adaptive-padding(bottom, $padding-xsmall);
-  }
   &__link-block,
   &__share-block {
     @include font-size($font-size-paragraph);
-  }
-  &__link-block {
-    display: flex;
-    align-items: center;
   }
   &__link {
     @include horizontal-paddings($padding-xxsmall);

@@ -3,7 +3,6 @@
 @import "~shared/styles/_sizes";
 
 .chart-period {
-  @include adaptive-padding(bottom, $padding-xsmall);
   justify-content: space-between;
 
   &__period-item {
