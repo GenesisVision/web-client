@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
-import "./active.scss";
+import styles from "./active.module.scss";
 
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
@@ -31,9 +31,9 @@ const _Active: React.FC<Props> = ({
       <Row large>{tags && <TagItemList tags={tags} />}</Row>
       <Row large onlyOffset>
         <Row>
-          <h2 className="active__title">{t("active.chart")}</h2>
+          <h2 className={styles.active__title}>{t("active.chart")}</h2>
         </Row>
-        <Row className="active__chart-container">
+        <Row className={styles.active__chart_container}>
           {!isServer && isGoodNetwork && (
             <TradingViewWidget
               symbol={chartSymbol}
@@ -45,11 +45,11 @@ const _Active: React.FC<Props> = ({
       </Row>
       <Row large onlyOffset>
         <Row>
-          <h2 className="active__title">
+          <h2 className={styles.active__title}>
             {t("active.about")} {name}
           </h2>
         </Row>
-        <Row className="active__description">{description}</Row>
+        <Row className={styles.active__description}>{description}</Row>
       </Row>
       <Row large>
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
