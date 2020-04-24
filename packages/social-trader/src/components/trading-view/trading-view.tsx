@@ -94,7 +94,7 @@ export default class TradingViewWidget extends PureComponent<TradingViewProps> {
     script.id = SCRIPT_ID;
     script.type = "text/javascript";
     script.async = true;
-    script.src = "/tv.js";
+    script.src = "https://s3.tradingview.com/tv.js";
     script.onload = onload;
     document.getElementsByTagName("head")[0].appendChild(script);
   };
