@@ -2,7 +2,7 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
 
-.switch-with-question {
+.text-with-question {
   &__label {
     @include font-size($font-size-common);
     font-weight: 600;
