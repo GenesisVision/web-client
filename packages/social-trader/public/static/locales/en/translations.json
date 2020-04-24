@@ -1573,7 +1573,7 @@
       "cancel-request-success": "The withdrawal request was successfully cancelled."
     },
     "settings": {
-      "label": "Using GVT to pay for fees"
+      "label": "Your Genesis Markets Discount is {{percent}}%"
     }
   },
   "gvt-fees": {
@@ -2431,10 +2431,10 @@
         "currency-required": "Currency is required",
         "period-required": "Period is required",
         "leverage-required": "Leverage is required",
-        "entry-fee-required": "Entry fee is required",
+        "entry-fee-required": "Field is required",
         "entry-fee-min": "Must be greater than 0 % ",
         "entry-fee-max": "Must be less than {{max}} %",
-        "success-fee-required": "Success fee is required",
+        "success-fee-required": "Field is required",
         "success-fee-min": "Must be greater or equal than 0 % ",
         "success-fee-max": "Must be less than {{max}} % ",
         "signal-volume-fee-required": "Volume fee is required",
@@ -2532,8 +2532,8 @@
         "available-in-wallet": "Available in the wallet"
       },
       "validation": {
-        "entry-fee-required": "Entry fee is required",
-        "exit-fee-required": "Exit fee is required",
+        "entry-fee-required": "Field is required",
+        "exit-fee-required": "Field is required",
         "exit-fee-min": "Exit fee must be greater than 0 %",
         "exit-fee-max": "Exit fee must be less than {{max}} %",
         "assets-share": "Total share of all assets should be equal to 100%",
@@ -2592,8 +2592,8 @@
       "validation": {
         "api-secret": "Api secret is required",
         "api-key": "Api key is required",
-        "entry-fee-required": "Entry fee is required",
-        "exit-fee-required": "Exit fee is required",
+        "entry-fee-required": "Field is required",
+        "exit-fee-required": "Field is required",
         "exit-fee-min": "Exit fee must be greater than 0 %",
         "exit-fee-max": "Exit fee must be less than {{max}} %",
         "assets-share": "Total share of all assets should be equal to 100%",
@@ -2800,7 +2800,7 @@
     "list-3": "Regular: Trading fee rate depends on the tool used.The list of available tools and the associated fees.\nGVT holders: 30-55% discount depending on the amount of GVT stored in the wallet.",
     "text-3": "Genesis Vision Token holders who select Genesis Markets as their broker will receive discounted transaction fees.",
     "trading-discount": "To be eligible for a trading discount",
-    "list-4": "There must be more than 1 GVT stored in the wallet\nThe \"Using GVT to pay for fees\" function must be enabled. The fee will be charged at a discount depending on the amount of GVT stored in the wallet.\nThe discounted fee will be charged from the GVT wallet, not from the trading account.",
+    "list-4": "There must be more than 1 GVT stored in the wallet\nThe discounted fee will be charged from the GVT wallet, not from the trading account.",
     "conditions": "Conditions for obtaining discounts",
     "wallet": "Wallet",
     "discounts-table": "From 1 GVT up to 10\t30%\nUp to 25 GVT\t35%\nUp to 50 GVT\t40%\nUp to 100 GVT\t45%\nUp to 500 GVT\t50%\n500 GVT+\t55%",

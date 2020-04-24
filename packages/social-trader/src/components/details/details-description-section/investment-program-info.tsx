@@ -115,7 +115,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
           <NumberFormat
             value={formatValue(managementFeeCurrent, 2)}
             displayType="text"
-            suffix=" %"
+            suffix=" % (annual)"
           />
         )}
       </StatisticItem>
