@@ -1573,7 +1573,7 @@
       "cancel-request-success": "The withdrawal request was successfully cancelled."
     },
     "settings": {
-      "label": "Using GVT to pay for fees"
+      "label": "Your Genesis Markets Discount is {{percent}}%"
     }
   },
   "gvt-fees": {
