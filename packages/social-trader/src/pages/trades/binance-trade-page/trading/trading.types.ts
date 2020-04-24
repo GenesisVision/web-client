@@ -1,3 +1,5 @@
+export type TradeCurrency = string;
+
 export type MergedTickerSymbolType = Ticker & Symbol;
 
 export enum ErrorCodes {
@@ -510,7 +512,7 @@ export type ExecutionType =
   | "TRADE"
   | "EXPIRED";
 
-export type EventType = "executionReport" | "account";
+export type EventType = "executionReport" | "account" | "outboundAccountInfo";
 
 export interface Depth {
   eventType: string;
@@ -628,12 +630,13 @@ export interface Message {
   eventTime: number;
 }
 
-export interface Balances {
-  [key: string]: {
-    available: string;
-    locked: string;
-  };
+export interface Balance {
+  asset: string;
+  free: string;
+  locked: string;
 }
+
+export type Balances = Balance[];
 
 export interface OutboundAccountInfo extends Message {
   balances: Balances;
@@ -662,7 +665,8 @@ export interface ExecutionReport extends Message {
   orderStatus: OrderStatus;
   orderRejectReason: string;
   orderId: number;
-  orderTime: number;
+  transactionTime: number;
+  orderCreationTime: number;
   lastTradeQuantity: string;
   totalTradeQuantity: string;
   priceLastTrade: string;
@@ -699,6 +703,8 @@ export interface MyTrade {
 }
 
 export interface QueryOrderResult {
+  origQuoteOrderQty: string;
+  orderListId: number;
   clientOrderId: string;
   cummulativeQuoteQty: string;
   executedQty: string;
