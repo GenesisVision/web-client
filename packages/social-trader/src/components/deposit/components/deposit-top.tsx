@@ -36,6 +36,7 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
 };
 
 export interface DepositTopOwnProps {
+  from?: string;
   ownAsset?: boolean;
   currency?: CurrencyEnum;
   title?: string;

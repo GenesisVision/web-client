@@ -10,7 +10,9 @@ const _InvestmentUnauthButton: React.FC<Props> = ({
   message,
   label,
   title,
-  currency
+  currency,
+  asset,
+  from
 }) => {
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   return (
@@ -20,8 +22,9 @@ const _InvestmentUnauthButton: React.FC<Props> = ({
       </GVButton>
       <InvestmentUnauthPopup
         header={header}
+        from={from}
         message={message}
-        asset={ASSET.PROGRAM}
+        asset={asset}
         title={title}
         currency={currency}
         open={isOpenUnAuth}

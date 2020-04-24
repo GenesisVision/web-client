@@ -12,6 +12,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { composeFollowDetailsUrl } from "utils/compose-url";
 
 import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
@@ -19,7 +20,7 @@ import SignalProviderButtons from "../signal-provider-buttons";
 const _FollowControls: React.FC<Props> = ({
   isOwnAsset,
   onApply,
-  publicInfo: { title },
+  publicInfo: { title, url },
   tradingAccountInfo: { currency, leverageMax },
   followDetails: { personalDetails, signalSettings },
   id,
@@ -50,6 +51,7 @@ const _FollowControls: React.FC<Props> = ({
           <InvestmentUnauthButton
             label={t("program-details-page.description.follow-trade")}
             asset={ASSET.FOLLOW}
+            from={composeFollowDetailsUrl(url)}
             header={t("program-details-page.description.follow-trade")}
             message={t("unauth-popup.follow")}
             title={title}

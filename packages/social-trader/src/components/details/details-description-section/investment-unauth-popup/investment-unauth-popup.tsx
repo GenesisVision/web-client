@@ -5,6 +5,7 @@ import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
+import Link from "components/link/link";
 import { Row } from "components/row/row";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -18,9 +19,11 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
   currency,
   asset,
   availableToInvest,
-  message
+  message,
+  from
 }) => {
   const [t] = useTranslation();
+  const redirect = from ? `?from=${from}` : "";
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -34,12 +37,15 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
       <DialogBottom>
         <Row>{message}</Row>
         <DialogButtons>
-          <a title={t("auth.login.title")} href={LOGIN_ROUTE}>
+          <Link title={t("auth.login.title")} to={`${LOGIN_ROUTE}${redirect}`}>
             <GVButton>{t("auth.login.title")}</GVButton>
-          </a>
-          <a title={t("auth.signup.title")} href={SIGNUP_ROUTE}>
+          </Link>
+          <Link
+            title={t("auth.signup.title")}
+            to={`${SIGNUP_ROUTE}${redirect}`}
+          >
             <GVButton>{t("auth.signup.title")}</GVButton>
-          </a>
+          </Link>
         </DialogButtons>
       </DialogBottom>
     </Dialog>
@@ -51,4 +57,5 @@ export default InvestmentUnauthPopup;
 
 interface Props extends DepositTopOwnProps, IDialogProps {
   message: string;
+  from?: string;
 }
