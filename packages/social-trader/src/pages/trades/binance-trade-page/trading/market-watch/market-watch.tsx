@@ -149,6 +149,8 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               .sort(sortMarketWatchItems(sorting))
               .map(
                 ({
+                  quoteAsset,
+                  baseAsset,
                   volume,
                   symbol,
                   lastPrice,
@@ -156,6 +158,8 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   priceChangePercent
                 }) => (
                   <MarketWatchRow
+                    quoteAsset={quoteAsset}
+                    baseAsset={baseAsset}
                     column={column}
                     volume={volume}
                     symbol={symbol}

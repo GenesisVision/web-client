@@ -3,20 +3,22 @@ import {
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   MergedTickerSymbolType,
+  Symbol,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
-import { getSymbols } from "../services/binance-http.service";
-import { getTickersStream } from "../services/binance-stream.service";
 import { useSockets } from "services/websocket.service";
+
+import { getTickersStream } from "../services/binance-stream.service";
 
 interface Props {}
 
-const _MarketWatchContainer: React.FC<Props> = () => {
-  const [symbols, setSymbols] = useState<{
+const _MarketWatchContainer: React.FC<Props> = ({}) => {
+  const [normalizedSymbols, setNormalizedSymbols] = useState<{
     [key: string]: Symbol;
   }>({});
   const [list, setList] = useState<{
@@ -27,14 +29,14 @@ const _MarketWatchContainer: React.FC<Props> = () => {
   }>({});
   const { connectSocket } = useSockets();
 
-  useEffect(() => {
-    const symbols = getSymbols().pipe(
-      map(items => normalizeSymbolsList(items))
-    );
-    symbols.subscribe(data => {
-      setSymbols(data);
-    });
+  const { exchangeInfo } = useContext(TradingInfoContext);
 
+  useEffect(() => {
+    if (exchangeInfo)
+      setNormalizedSymbols(normalizeSymbolsList(exchangeInfo.symbols));
+  }, [exchangeInfo]);
+
+  useEffect(() => {
     const marketTickets = getTickersStream(connectSocket).pipe(
       map(items => normalizeMarketList(items))
     );
@@ -51,11 +53,11 @@ const _MarketWatchContainer: React.FC<Props> = () => {
   }, [socketData]);
   useEffect(() => {
     const updatedList = { ...list };
-    Object.keys(symbols).forEach(name => {
-      updatedList[name] = { ...updatedList[name], ...symbols[name] };
+    Object.keys(normalizedSymbols).forEach(name => {
+      updatedList[name] = { ...updatedList[name], ...normalizedSymbols[name] };
     });
     setList(updatedList);
-  }, [symbols]);
+  }, [normalizedSymbols]);
   const items = useMemo(() => Object.values(list), [list]);
 
   return Object.values(socketData).length ? (
