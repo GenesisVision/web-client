@@ -6,6 +6,7 @@ import {
   WithBlurLoaderProps
 } from "decorators/with-blur-loader";
 import { WalletSummary } from "gv-api-web";
+import WalletSettingsContainer from "pages/wallet/components/wallet-settings/wallet-settings-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -23,9 +24,13 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
           <RowItem className="wallet-title-block__title">
             <h1>{t("wallet-page.title")}</h1>
           </RowItem>
-          {/*<RowItem>
-            <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
-          </RowItem>*/}
+          <RowItem>
+            <WalletSettingsContainer
+              genesisMarketsDiscountPercent={
+                wallet.genesisMarketsDiscountPercent
+              }
+            />
+          </RowItem>
         </Row>
         <WalletBalanceElements
           available={wallet.grandTotal.available}

@@ -25,6 +25,7 @@ export const walletDataCreator = (): WalletData => ({
 });
 
 export const walletMultiSummaryLoaderData: WalletSummary = {
+  genesisMarketsDiscountPercent: 0,
   grandTotal: {
     currency: "GVT",
     available: getRandomInteger(1, 1000),
