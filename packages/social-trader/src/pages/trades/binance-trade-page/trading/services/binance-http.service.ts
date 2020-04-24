@@ -1,19 +1,20 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
+  Account,
+  CancelOrderResult,
   ExchangeInfo,
-  Symbol,
+  OrderSide,
+  QueryOrderResult,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { formatValue } from "utils/formatter";
-
 import {
   OrderRequest,
   REQUEST_TYPE,
   requestService,
   TimeInForce
 } from "services/request.service";
+import { formatValue } from "utils/formatter";
 
 export interface TradeRequest {
   symbol: string;
@@ -25,13 +26,13 @@ export interface TradeRequest {
 // export const BINANCE_HTTP_API = "https://www.binance.com/api";
 export const BINANCE_HTTP_API = "/api";
 
-export const getSymbols = (): Observable<Symbol[]> =>
-  getExchangeInfo().pipe(map(({ symbols }: ExchangeInfo) => symbols));
-
-export const getExchangeInfo = (): Observable<ExchangeInfo> =>
-  requestService.get({
-    url: "/api/v3/exchangeInfo"
-  });
+export const getExchangeInfo = (): Promise<ExchangeInfo> =>
+  requestService.get(
+    {
+      url: "/api/v3/exchangeInfo"
+    },
+    value => value
+  );
 
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
@@ -41,7 +42,7 @@ export const pingBinanceApi = (): Observable<any[]> =>
 export const getOpenOrders = (
   symbol: string,
   authData: TradeAuthDataType
-): Observable<any[]> =>
+): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
     url: "/api/v3/openOrders",
@@ -71,7 +72,7 @@ export const getUserStreamKey = (
 
 export const getAccountInformation = (
   authData: TradeAuthDataType
-): Observable<any[]> =>
+): Observable<Account> =>
   requestService.get({
     ...authData,
     url: "/api/v3/account",
@@ -99,18 +100,35 @@ export const getDepth = (symbol?: string): Observable<any[]> =>
 export const newOrder = (
   options: OrderRequest,
   authData: TradeAuthDataType
-): Observable<any> =>
-  requestService.post({
+): Promise<any> =>
+  requestService.post(
+    {
+      ...authData,
+      url: "/api/v3/order",
+      params: options,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
+export const cancelOrder = (
+  options: { symbol: string; orderId: string; useServerTime?: boolean },
+  authData: TradeAuthDataType
+): Observable<CancelOrderResult> =>
+  requestService.deleteRequest({
     ...authData,
     url: "/api/v3/order",
     params: options,
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const postBuy = (
-  { symbol, price, quantity, type }: TradeRequest,
-  authData: TradeAuthDataType
-): Observable<any[]> =>
+export const postBuy = ({
+  authData,
+  symbol,
+  price,
+  quantity,
+  type
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
   newOrder(
     {
       symbol,
@@ -123,10 +141,13 @@ export const postBuy = (
     authData
   );
 
-export const postSell = (
-  { symbol, price, quantity, type }: TradeRequest,
-  authData: TradeAuthDataType
-): Observable<any[]> =>
+export const postSell = ({
+  authData,
+  symbol,
+  price,
+  quantity,
+  type
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
   newOrder(
     {
       symbol,
@@ -138,3 +159,6 @@ export const postSell = (
     },
     authData
   );
+
+export const getTradeMethod = (side: OrderSide) =>
+  side === "BUY" ? postBuy : postSell;

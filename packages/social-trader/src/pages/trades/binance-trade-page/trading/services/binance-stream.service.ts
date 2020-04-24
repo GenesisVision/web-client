@@ -1,7 +1,13 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  QueryOrderResult,
+  Ticker
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { generateStream, REQUEST_TYPE } from "services/stream.service";
+import { ConnectSocketMethodType } from "services/websocket.service";
+
 import {
   getAccountInformation,
   getAllOrders,
@@ -15,8 +21,6 @@ import {
   getOpenOrdersSocket,
   marketTicketsSocket
 } from "./binance-ws.service";
-import { generateStream, REQUEST_TYPE } from "services/stream.service";
-import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const getTickersStream = (
   connectSocketMethod: ConnectSocketMethodType
@@ -36,7 +40,7 @@ export const getOpenOrdersStream = (
   symbol: string,
   connectSocketMethod: ConnectSocketMethodType,
   authData: TradeAuthDataType
-): Observable<any> =>
+): Observable<QueryOrderResult[]> =>
   generateStream(
     [
       getOpenOrders(symbol, authData),

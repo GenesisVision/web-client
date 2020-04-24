@@ -1,10 +1,14 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { Ticker } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  QueryOrderResult,
+  Ticker
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
+import { ConnectSocketMethodType } from "services/websocket.service";
+
 import { getUserStreamKey } from "./binance-http.service";
 import { tickerTransform } from "./binance-ws.helpers";
-import { ConnectSocketMethodType } from "services/websocket.service";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
 
@@ -32,7 +36,7 @@ export const marketTicketsSocket = (
   );
 };
 
-export const getAccountInformationSocket = (
+export const getUserStreamSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   authData: TradeAuthDataType
 ) => {
@@ -40,12 +44,19 @@ export const getAccountInformationSocket = (
   return getUserStreamKey(authData).pipe(
     switchMap((key: any) => {
       const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
-      return connectSocketMethod(socketName, url).pipe(
-        filter(info => info.e === "outboundAccountInfo"),
-        map(info => {
-          return { ...info, balances: info.B };
-        })
-      );
+      return connectSocketMethod(socketName, url);
+    })
+  );
+};
+
+export const getAccountInformationSocket = (
+  connectSocketMethod: ConnectSocketMethodType,
+  authData: TradeAuthDataType
+) => {
+  return getUserStreamSocket(connectSocketMethod, authData).pipe(
+    filter(info => info.e === "outboundAccountInfo"),
+    map(info => {
+      return { ...info, balances: info.B };
     })
   );
 };
@@ -53,21 +64,15 @@ export const getAccountInformationSocket = (
 export const getOpenOrdersSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   authData: TradeAuthDataType
-) => {
-  const socketName = "accountInformation";
-  return getUserStreamKey(authData).pipe(
-    switchMap((key: any) => {
-      const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
-      return connectSocketMethod(socketName, url).pipe(
-        filter(info => info.e === "executionReport"),
-        filter(
-          item =>
-            item.X !== ORDER_STATUSES.FILLED &&
-            item.X !== ORDER_STATUSES.PARTIALLY_FILLED &&
-            item.X !== ORDER_STATUSES.REJECTED
-        )
-      );
-    })
+): Observable<QueryOrderResult[]> => {
+  return getUserStreamSocket(connectSocketMethod, authData).pipe(
+    filter(info => info.e === "executionReport"),
+    filter(
+      item =>
+        item.X !== ORDER_STATUSES.FILLED &&
+        item.X !== ORDER_STATUSES.PARTIALLY_FILLED &&
+        item.X !== ORDER_STATUSES.REJECTED
+    )
   );
 };
 
@@ -76,19 +81,13 @@ export const getAllOrdersSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   authData: TradeAuthDataType
 ) => {
-  const socketName = "accountInformation";
-  return getUserStreamKey(authData).pipe(
-    switchMap((key: any) => {
-      const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
-      return connectSocketMethod(socketName, url).pipe(
-        filter(info => info.e === "executionReport"),
-        filter(
-          item =>
-            item.X === ORDER_STATUSES.FILLED ||
-            item.X === ORDER_STATUSES.PARTIALLY_FILLED
-        ),
-        filter(info => info.s === symbol.toUpperCase())
-      );
-    })
+  return getUserStreamSocket(connectSocketMethod, authData).pipe(
+    filter(info => info.e === "executionReport"),
+    filter(
+      item =>
+        item.X === ORDER_STATUSES.FILLED ||
+        item.X === ORDER_STATUSES.PARTIALLY_FILLED
+    ),
+    filter(info => info.s === symbol.toUpperCase())
   );
 };
