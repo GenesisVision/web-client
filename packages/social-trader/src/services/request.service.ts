@@ -1,6 +1,6 @@
 import * as crypto from "crypto-js";
 import fetch from "isomorphic-unfetch";
-import { from, Observable } from "rxjs";
+import { from } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
 export interface RequestOptions {
@@ -35,6 +35,7 @@ export enum TimeInForce {
 }
 
 export enum HTTP_METHODS {
+  DELETE = "DELETE",
   POST = "POST",
   GET = "GET"
 }
@@ -56,7 +57,7 @@ export const sendRequest = ({
   params,
   type,
   url
-}: RequestOptions): Observable<any> => {
+}: RequestOptions): Promise<any> => {
   const headers: AnyObjectType = {};
   const body: AnyObjectType = {};
 
@@ -71,20 +72,32 @@ export const sendRequest = ({
     body["timestamp"] = String(Date.now());
     body["signature"] = signOptions(body, privateKey);
   }
+  const getParams = new URLSearchParams(body).toString();
   const options = {
     method,
     headers,
-    body: method === HTTP_METHODS.POST ? JSON.stringify(body) : undefined
+    body:
+      method === HTTP_METHODS.POST && Object.values(body).length
+        ? getParams
+        : undefined
   };
-  const getParams = new URLSearchParams(body).toString();
-  const fetchUrl = method === HTTP_METHODS.GET ? `${url}?${getParams}` : url;
-  return from(fetch(fetchUrl, options).then(response => response.json()));
+  const fetchUrl = method !== HTTP_METHODS.POST ? `${url}?${getParams}` : url;
+  return fetch(fetchUrl, options).then(response => response.json());
 };
 
-const get = (options: RequestOptions): Observable<any> =>
-  sendRequest({ ...options, method: HTTP_METHODS.GET });
+const deleteRequest = (
+  options: RequestOptions,
+  wrapper: (input: any) => any = from
+): any => wrapper(sendRequest({ ...options, method: HTTP_METHODS.DELETE }));
 
-const post = (options: RequestOptions): Observable<any> =>
-  sendRequest({ ...options, method: HTTP_METHODS.POST });
+const get = (
+  options: RequestOptions,
+  wrapper: (input: any) => any = from
+): any => wrapper(sendRequest({ ...options, method: HTTP_METHODS.GET }));
 
-export const requestService = { get, post };
+const post = (
+  options: RequestOptions,
+  wrapper: (input: any) => any = from
+): any => wrapper(sendRequest({ ...options, method: HTTP_METHODS.POST }));
+
+export const requestService = { deleteRequest, get, post };
