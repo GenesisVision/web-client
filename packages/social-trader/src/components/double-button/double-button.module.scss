@@ -4,17 +4,17 @@
   width: 100%;
   &--first,
   &--second {
-    border: 0.1em solid $primary-color;
+    border: 0.1em solid $primary-color !important; // TODO
     opacity: 1 !important;
-    width: 50%;
+    width: 50% !important;
   }
   &--first {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 
   &--second {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
   }
 }
