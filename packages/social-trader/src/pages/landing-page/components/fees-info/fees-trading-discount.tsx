@@ -59,22 +59,6 @@ const _FeesTradingDiscount: React.FC<{
           </table>
         </div>
       </div>
-      <div className="fees-info__notes">
-        <h3>{t("fees.note")}</h3>
-        <ul
-          className={classNames("fees-info__list-notes", {
-            "fees-info__list-notes--dark": dark
-          })}
-        >
-          {t("fees.list-5")
-            .split("\n")
-            .map((line, index) => (
-              <li key={index} className="fees-info__note-item">
-                {line}
-              </li>
-            ))}
-        </ul>
-      </div>
     </>
   );
 };
