@@ -20,7 +20,7 @@ import SignalProviderButtons from "../signal-provider-buttons";
 const _FollowControls: React.FC<Props> = ({
   isOwnAsset,
   onApply,
-  publicInfo: { title, url },
+  publicInfo: { title },
   tradingAccountInfo: { currency, leverageMax },
   followDetails: { personalDetails, signalSettings },
   id,
@@ -51,7 +51,6 @@ const _FollowControls: React.FC<Props> = ({
           <InvestmentUnauthButton
             label={t("program-details-page.description.follow-trade")}
             asset={ASSET.FOLLOW}
-            from={composeFollowDetailsUrl(url)}
             header={t("program-details-page.description.follow-trade")}
             message={t("unauth-popup.follow")}
             title={title}
