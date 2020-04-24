@@ -12,7 +12,6 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { composeFollowDetailsUrl } from "utils/compose-url";
 
 import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
