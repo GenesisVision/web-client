@@ -54,8 +54,12 @@ const _LimitTradeForm: React.FC<Props> = ({
     defaultValues: { price: outerPrice },
     mode: "onChange"
   });
-  const { watch, setValue } = form;
+  const { watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
+
+  useEffect(() => {
+    reset({ price: outerPrice, quantity, total });
+  }, [outerPrice]);
 
   useEffect(() => {
     const value = (formatCurrencyValue(
