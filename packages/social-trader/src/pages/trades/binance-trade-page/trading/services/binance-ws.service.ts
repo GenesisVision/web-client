@@ -1,14 +1,21 @@
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
+  Depth,
   QueryOrderResult,
-  Ticker
+  Ticker,
+  Trade,
+  TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { filter, map, switchMap } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
 import { getUserStreamKey } from "./binance-http.service";
-import { tickerTransform } from "./binance-ws.helpers";
+import {
+  depthTransform,
+  tickerTransform,
+  tradeTransform
+} from "./binance-ws.helpers";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
 
@@ -25,6 +32,24 @@ export enum ORDER_STATUSES {
   PENDING = "PENDING",
   REJECTED = "REJECTED"
 }
+
+export const tradeSocket = (
+  connectSocketMethod: ConnectSocketMethodType,
+  symbol: TradeCurrency
+): Observable<Trade> => {
+  const socketName = `${symbol.toLowerCase()}@trade`;
+  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketName, url).pipe(map(tradeTransform));
+};
+
+export const depthSocket = (
+  connectSocketMethod: ConnectSocketMethodType,
+  symbol: TradeCurrency
+): Observable<Depth> => {
+  const socketName = `${symbol.toLowerCase()}@depth`;
+  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketName, url).pipe(map(depthTransform));
+};
 
 export const marketTicketsSocket = (
   connectSocketMethod: ConnectSocketMethodType
