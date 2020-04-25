@@ -1,6 +1,7 @@
 import { Row } from "components/row/row";
 import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
+import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import {
   normalizeDepthList,
   updateDepthList
@@ -27,6 +28,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
+  const [tickValue, setTickValue] = useState<string | undefined>();
   const [list, setList] = useState<NormalizedDepth | undefined>();
   const [depthSocketData, setDepthSocketData] = useState<Depth | undefined>();
   const [depthSocketDataBuffer, setDepthSocketDataBuffer] = useState<Depth[]>(
@@ -84,6 +86,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   return (
     <>
+      <Row>
+        <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
+      </Row>
       <Row>
         <OrderBook reverse color={"red"} items={asks} />
       </Row>
