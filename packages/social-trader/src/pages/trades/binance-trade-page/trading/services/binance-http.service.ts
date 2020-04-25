@@ -2,6 +2,7 @@ import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade
 import {
   Account,
   CancelOrderResult,
+  Depth,
   ExchangeInfo,
   OrderSide,
   QueryOrderResult,
@@ -91,10 +92,10 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
     params: symbol ? { symbol: symbol.toUpperCase() } : {}
   });
 
-export const getDepth = (symbol?: string): Observable<any[]> =>
+export const getDepth = (symbol: string, limit: number): Observable<Depth> =>
   requestService.get({
     url: "/api/v3/depth",
-    params: { symbol: symbol ? symbol.toUpperCase() : "", limit: "5" }
+    params: { symbol, limit: String(limit) }
   });
 
 export const newOrder = (
