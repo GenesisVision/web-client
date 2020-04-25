@@ -1,10 +1,8 @@
-import {
-  ColoredText,
-  ColoredTextColor
-} from "components/colored-text/colored-text";
+import { ColoredText } from "components/colored-text/colored-text";
 import { MutedText } from "components/muted-text/muted-text";
 import { CHANGE_COLUMN } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
@@ -18,12 +16,6 @@ interface Props {
   priceChange: string;
   priceChangePercent: string;
 }
-
-const getTextColor = (value: number): ColoredTextColor | undefined => {
-  if (value > 0) return "green";
-  if (value < 0) return "red";
-  return;
-};
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({
