@@ -12,6 +12,7 @@ import {
   LimitTradeForm
 } from "pages/trades/binance-trade-page/trading/trade/limit-trade-form";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   OrderSide,
@@ -23,7 +24,10 @@ import { safeGetElemFromArray } from "utils/helpers";
 interface Props {}
 
 const _Trade: React.FC<Props> = () => {
+  const { price } = useContext(TradingPriceContext);
+
   const {
+    accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
@@ -31,7 +35,6 @@ const _Trade: React.FC<Props> = () => {
   const { tab, setTab } = useTab<OrderType>("LIMIT");
 
   const { authData } = useTradeAuth();
-  const { accountInfo } = useContext(TradingInfoContext);
 
   const { sendRequest } = useApiRequest({ request: getTradeMethod(side) });
 
@@ -83,7 +86,7 @@ const _Trade: React.FC<Props> = () => {
       <Row>
         {tab === "LIMIT" && (
           <LimitTradeForm
-            outerPrice={1000}
+            outerPrice={+price}
             onSubmit={handleSubmit}
             direction={side}
             baseAsset={baseAsset}
