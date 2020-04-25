@@ -29,27 +29,41 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   const [list, setList] = useState<NormalizedDepth | undefined>();
   const [depthSocketData, setDepthSocketData] = useState<Depth | undefined>();
+  const [depthSocketDataBuffer, setDepthSocketDataBuffer] = useState<Depth[]>(
+    []
+  );
 
   useEffect(() => {
     const symbol = getSymbol(baseAsset, quoteAsset);
-    const depth = getDepth(symbol, count);
-    depth.subscribe(data => {
-      const asks = normalizeDepthList(data.asks);
-      const bids = normalizeDepthList(data.bids);
-      setList({ ...data, asks, bids });
-    });
     const depthStream = depthSocket(connectSocket, symbol);
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
+    const depth = getDepth(symbol, count);
+    depth.subscribe(data => {
+      let asks = normalizeDepthList(data.asks);
+      let bids = normalizeDepthList(data.bids);
+      const updates = depthSocketDataBuffer.filter(
+        ({ lastUpdateId }) => lastUpdateId > data.lastUpdateId
+      );
+      updates.forEach(event => {
+        asks = updateDepthList(asks, event.asks);
+        bids = updateDepthList(bids, event.bids);
+      });
+      setList({ ...data, asks, bids });
+    });
   }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
-    if (!depthSocketData || !list) return;
-    const asks = updateDepthList(list.asks, depthSocketData.asks);
-    const bids = updateDepthList(list.bids, depthSocketData.bids);
-
-    setList({ ...list, asks, bids });
+    if (!depthSocketData && !list) return;
+    if (!list && depthSocketData) {
+      setDepthSocketDataBuffer([...depthSocketDataBuffer, depthSocketData]);
+    }
+    if (list && depthSocketData) {
+      const asks = updateDepthList(list.asks, depthSocketData.asks);
+      const bids = updateDepthList(list.bids, depthSocketData.bids);
+      setList({ ...list, asks, bids });
+    }
   }, [depthSocketData]);
 
   const asks = useMemo(
