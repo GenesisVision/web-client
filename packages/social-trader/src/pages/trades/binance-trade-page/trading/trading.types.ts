@@ -56,15 +56,18 @@ export interface Account {
   takerCommission: number;
   updateTime: number;
 }
+
 export interface TradeFee {
   symbol: string;
   maker: number;
   taker: number;
 }
+
 export interface TradeFeeResult {
   tradeFee: TradeFee[];
   success: boolean;
 }
+
 export interface AggregatedTrade {
   aggId: number;
   symbol: string;
@@ -514,15 +517,27 @@ export type ExecutionType =
 
 export type EventType = "executionReport" | "account" | "outboundAccountInfo";
 
-export interface Depth {
+export interface DepthMain {
   eventType: string;
   eventTime: number;
   symbol: string;
   firstUpdateId: number;
-  finalUpdateId: number;
-  bidDepth: BidDepth[];
-  askDepth: BidDepth[];
+  lastUpdateId: number;
 }
+
+export type NormalizedDepthList = { [keys: string]: StringBidDepth };
+
+export interface NormalizedDepth extends DepthMain {
+  bids: NormalizedDepthList;
+  asks: NormalizedDepthList;
+}
+
+export interface Depth extends DepthMain {
+  bids: StringBidDepth[];
+  asks: StringBidDepth[];
+}
+
+export type StringBidDepth = Array<string>;
 
 export interface BidDepth {
   price: string;
@@ -615,6 +630,9 @@ export interface Candle {
 }
 
 export interface Trade {
+  buyerOrderId: string;
+  sellerOrderId: string;
+  tradeTime: number;
   eventType: string;
   eventTime: number;
   symbol: string;
