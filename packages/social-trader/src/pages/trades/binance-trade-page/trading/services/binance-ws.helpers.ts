@@ -1,13 +1,54 @@
 import { ORDER_STATUSES } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
 import {
   Account,
+  Depth,
   ExecutionReport,
   Ticker,
-  TickerWS
+  TickerWS,
+  Trade
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
 
+export const tradeTransform = ({
+  e,
+  E,
+  T,
+  s,
+  p,
+  q,
+  m,
+  M,
+  t,
+  a,
+  b
+}: any): Trade => {
+  return {
+    eventType: e,
+    eventTime: E,
+    tradeTime: T,
+    symbol: s,
+    price: p,
+    quantity: q,
+    isBuyerMaker: m,
+    maker: M,
+    tradeId: t,
+    sellerOrderId: a,
+    buyerOrderId: b
+  };
+};
+
+export const depthTransform = ({ e, E, s, U, u, b, a }: any): Depth => {
+  return {
+    eventType: e,
+    eventTime: E,
+    symbol: s,
+    firstUpdateId: U,
+    lastUpdateId: u,
+    bids: b,
+    asks: a
+  };
+};
 export const transformOutboundAccountInfo = (m: any): Account => ({
   makerCommission: m.m,
   takerCommission: m.t,
