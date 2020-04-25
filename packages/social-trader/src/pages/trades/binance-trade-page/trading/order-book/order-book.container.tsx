@@ -53,11 +53,18 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   }, [depthSocketData]);
 
   const asks = useMemo(
-    () => Object.values(list ? list.asks : {}).slice(0, count),
+    () =>
+      Object.values(list ? list.asks : {})
+        .sort(([priceA], [priceB]) => +priceA - +priceB)
+        .slice(0, count),
     [list?.asks]
   );
   const bids = useMemo(
-    () => Object.values(list ? list.bids : {}).slice(0, count),
+    () =>
+      Object.values(list ? list.bids : {})
+        .sort(([priceA], [priceB]) => +priceA - +priceB)
+        .reverse()
+        .slice(0, count),
     [list?.bids]
   );
 

@@ -16,8 +16,6 @@ interface Props {
 }
 
 const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
-  const renderItems = reverse ? [...items].reverse() : items;
-
   const [hoveredRow, setHoveredRow] = useState<number | undefined>();
   const [levelSum, setLevelSum] = useState<LevelsSum>({
     avgPrice: 0,
@@ -28,8 +26,8 @@ const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
   useEffect(() => {
     if (hoveredRow !== undefined) {
       const first = reverse ? hoveredRow : 0;
-      const last = reverse ? renderItems.length : hoveredRow + 1;
-      const selectedItems = renderItems.slice(first, last);
+      const last = reverse ? items.length : hoveredRow + 1;
+      const selectedItems = items.slice(first, last);
       const avgPrice =
         selectedItems.reduce((sum, [price]) => sum + +price, 0) /
         (last - first);
@@ -53,7 +51,7 @@ const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
         ))}
       </thead>
       <tbody>
-        {renderItems.map(([price, amount], i) => {
+        {items.map(([price, amount], i) => {
           return (
             <OrderBookRow
               hovered={
