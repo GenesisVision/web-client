@@ -37,26 +37,29 @@ export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   symbol: TradeCurrency
 ): Observable<Trade> => {
-  const socketName = `${symbol.toLowerCase()}@trade`;
+  const socketType = "trade";
+  const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketName, url).pipe(map(tradeTransform));
+  return connectSocketMethod(socketType, url).pipe(map(tradeTransform));
 };
 
 export const depthSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   symbol: TradeCurrency
 ): Observable<Depth> => {
-  const socketName = `${symbol.toLowerCase()}@depth`;
+  const socketType = "depth";
+  const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketName, url).pipe(map(depthTransform));
+  return connectSocketMethod(socketType, url).pipe(map(depthTransform));
 };
 
 export const marketTicketsSocket = (
   connectSocketMethod: ConnectSocketMethodType
 ): Observable<Ticker[]> => {
-  const socketName = "!ticker@arr";
+  const socketType = "arr";
+  const socketName = `!ticker@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketName, url).pipe(
+  return connectSocketMethod(socketType, url).pipe(
     map(items => items.map(tickerTransform))
   );
 };
