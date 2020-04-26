@@ -31,6 +31,7 @@ export const TradingPriceContext = createContext<TradingPriceState>(
 );
 
 export const TradingPriceContextProvider: React.FC = ({ children }) => {
+  const TRADE_LIST_SIZE = 50;
   const {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
@@ -63,7 +64,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setSocketDataBuffer([socketData, ...socketDataBuffer]);
     }
     if (list && socketData) {
-      const newList = [socketData, ...list];
+      const newList = [socketData, ...list].slice(0, TRADE_LIST_SIZE);
       setList(newList);
     }
   }, [socketData]);
