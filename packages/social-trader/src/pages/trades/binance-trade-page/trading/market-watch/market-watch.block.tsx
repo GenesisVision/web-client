@@ -7,7 +7,7 @@ import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trad
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useContext } from "react";
 
-import "./market-watch.scss";
+import styles from "./market-watch.module.scss";
 
 interface Props {}
 
@@ -16,7 +16,7 @@ export const MarketWatchBlock: React.FC<Props> = () => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
   return (
-    <DefaultBlock solid>
+    <DefaultBlock solid className={styles["market-watch"]}>
       <Row>
         <RowItem>
           <h2>Market watch</h2>

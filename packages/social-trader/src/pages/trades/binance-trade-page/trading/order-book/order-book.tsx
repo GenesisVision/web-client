@@ -45,11 +45,6 @@ const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
 
   return (
     <table className={styles["order-book__table"]}>
-      <thead>
-        {ORDER_BOOK_COLUMNS.map(({ name }) => (
-          <th key={name}>{name}</th>
-        ))}
-      </thead>
       <tbody>
         {items.map(([price, amount], i) => {
           return (

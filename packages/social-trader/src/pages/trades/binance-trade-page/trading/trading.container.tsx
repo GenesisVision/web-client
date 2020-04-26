@@ -9,6 +9,8 @@ import { TradingInfoContextProvider } from "pages/trades/binance-trade-page/trad
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React from "react";
 
+import styles from "./trading.module.scss";
+
 interface Props {
   authData: TradeAuthDataType;
 }
@@ -16,7 +18,7 @@ interface Props {
 const _TradingContainer: React.FC<Props> = ({ authData }) => {
   return (
     <TradingInfoContextProvider>
-      <Row>
+      <Row center={false} className={styles["trading"]}>
         <RowItem>
           <MarketWatchBlock />
         </RowItem>
@@ -24,14 +26,10 @@ const _TradingContainer: React.FC<Props> = ({ authData }) => {
           <RowItem>
             <OrderBookBlock />
           </RowItem>
-          <RowItem>
-            <Trade />
-          </RowItem>
+          <RowItem>{/*<Trade />*/}</RowItem>
         </TradingPriceContextProvider>
       </Row>
-      <Row onlyOffset>
-        <OpenOrdersBlock />
-      </Row>
+      <Row onlyOffset>{/*<OpenOrdersBlock />*/}</Row>
     </TradingInfoContextProvider>
   );
 };

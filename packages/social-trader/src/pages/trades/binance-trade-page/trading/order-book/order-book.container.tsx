@@ -19,10 +19,12 @@ import {
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useSockets } from "services/websocket.service";
 
+import styles from "./order-book.module.scss";
+
 interface Props {}
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
-  const count = 20;
+  const count = 13;
 
   const { connectSocket } = useSockets();
 
@@ -40,6 +42,8 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const dividerParts = getDividerParts(tickValue);
 
   useEffect(() => {
+    setList(undefined);
+    setDepthSocketData(undefined);
     const symbol = getSymbol(baseAsset, quoteAsset);
     const depthStream = depthSocket(connectSocket, symbol);
     depthStream.subscribe(data => {
@@ -57,6 +61,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         bids = updateDepthList(bids, event.bids);
       });
       setList({ ...data, asks, bids });
+      setDepthSocketDataBuffer([]);
     });
   }, [baseAsset, quoteAsset]);
 
@@ -93,14 +98,16 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       <Row>
         <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
       </Row>
-      <Row>
-        <OrderBook reverse color={"red"} items={asks} />
-      </Row>
-      <Row>
-        <OrderBookCurrentPriceContainer />
-      </Row>
-      <Row>
-        <OrderBook color={"green"} items={bids} />
+      <Row className={styles["order-book__tables-block"]}>
+        <Row>
+          <OrderBook reverse color={"red"} items={asks} />
+        </Row>
+        <Row>
+          <OrderBookCurrentPriceContainer />
+        </Row>
+        <Row>
+          <OrderBook color={"green"} items={bids} />
+        </Row>
       </Row>
     </>
   );
