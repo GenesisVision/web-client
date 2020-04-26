@@ -99,7 +99,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       <Row>
         <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
       </Row>
-      <Row className={styles["order-book__tables-block"]}>
+      <Row center={false} className={styles["order-book__tables-block"]}>
         <Row
           className={classNames(
             styles["order-book__table-block"],
