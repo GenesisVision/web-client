@@ -3,6 +3,8 @@ import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/or
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import {
+  collapseItems,
+  getDividerParts,
   normalizeDepthList,
   updateDepthList
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
@@ -35,13 +37,15 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     []
   );
 
+  const dividerParts = getDividerParts(tickValue);
+
   useEffect(() => {
     const symbol = getSymbol(baseAsset, quoteAsset);
     const depthStream = depthSocket(connectSocket, symbol);
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    const depth = getDepth(symbol, count);
+    const depth = getDepth(symbol);
     depth.subscribe(data => {
       let asks = normalizeDepthList(data.asks);
       let bids = normalizeDepthList(data.bids);
@@ -70,18 +74,18 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   const asks = useMemo(
     () =>
-      Object.values(list ? list.asks : {})
+      Object.values(collapseItems(list ? list.asks : {}, dividerParts))
         .sort(([priceA], [priceB]) => +priceA - +priceB)
         .slice(0, count),
-    [list?.asks]
+    [list?.asks, dividerParts]
   );
   const bids = useMemo(
     () =>
-      Object.values(list ? list.bids : {})
+      Object.values(collapseItems(list ? list.bids : {}, dividerParts))
         .sort(([priceA], [priceB]) => +priceA - +priceB)
         .reverse()
         .slice(0, count),
-    [list?.bids]
+    [list?.bids, dividerParts]
   );
 
   return (
