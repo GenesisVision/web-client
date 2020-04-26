@@ -7,6 +7,7 @@ import {
   StringBidDepth
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { useContext } from "react";
+import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
@@ -66,10 +67,10 @@ export const useSymbolTick = () => {
 };
 
 export const getTickValues = (tick: number) => [
-  String(tick),
-  String(tick * 10),
-  String(tick * 100),
-  String(tick * 1000)
+  formatValue(tick),
+  formatValue(tick * 10),
+  formatValue(tick * 100),
+  formatValue(tick * 1000)
 ];
 
 export const updateDepthList = (
