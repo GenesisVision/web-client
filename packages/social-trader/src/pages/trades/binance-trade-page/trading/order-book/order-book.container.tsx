@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { Row } from "components/row/row";
 import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
@@ -99,13 +100,18 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
       </Row>
       <Row className={styles["order-book__tables-block"]}>
-        <Row>
+        <Row
+          className={classNames(
+            styles["order-book__table-block"],
+            styles["order-book__table-block--reverse"]
+          )}
+        >
           <OrderBook reverse color={"red"} items={asks} />
         </Row>
         <Row>
           <OrderBookCurrentPriceContainer />
         </Row>
-        <Row>
+        <Row className={styles["order-book__table-block"]}>
           <OrderBook color={"green"} items={bids} />
         </Row>
       </Row>

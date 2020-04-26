@@ -2,6 +2,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  &__table-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    &--reverse {
+      justify-content: flex-end;
+    }
+  }
   &__tables-block {
     display: flex;
     flex-direction: column;

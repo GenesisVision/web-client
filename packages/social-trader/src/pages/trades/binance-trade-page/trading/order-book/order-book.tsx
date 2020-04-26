@@ -1,5 +1,4 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
-import { ORDER_BOOK_COLUMNS } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   LevelsSum,
   OrderBookRow
