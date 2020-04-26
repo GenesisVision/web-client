@@ -81,15 +81,14 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const asks = useMemo(
     () =>
       Object.values(collapseItems(list ? list.asks : {}, dividerParts))
-        .sort(([priceA], [priceB]) => +priceA - +priceB)
+        .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(0, count),
     [list?.asks, dividerParts]
   );
   const bids = useMemo(
     () =>
       Object.values(collapseItems(list ? list.bids : {}, dividerParts))
-        .sort(([priceA], [priceB]) => +priceA - +priceB)
-        .reverse()
+        .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(0, count),
     [list?.bids, dividerParts]
   );
