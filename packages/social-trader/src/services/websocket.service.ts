@@ -56,6 +56,7 @@ class Socket implements SocketInterface {
   private connect = (url: string) => {
     this.websocket = new WebSocketSubject(url);
     this.wsMessages = new Subject<any>();
+    this.url = url;
     this.websocket.subscribe(
       message => this.wsMessages && this.wsMessages.next(message),
       error => {
