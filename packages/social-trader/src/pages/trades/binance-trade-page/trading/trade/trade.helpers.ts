@@ -7,19 +7,19 @@ import {
 import { NumberFormatValues } from "react-number-format";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const getMinNotional = (filters: SymbolFilter[]) =>
+export const getMinNotionalFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(
     filters,
     ({ filterType }) => filterType === "MIN_NOTIONAL"
   ) as SymbolMinNotionalFilter;
 
-export const getSymbolPrice = (filters: SymbolFilter[]) =>
+export const getSymbolPriceFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(
     filters,
     ({ filterType }) => filterType === "PRICE_FILTER"
   ) as SymbolPriceFilter;
 
-export const getLotSize = (filters: SymbolFilter[]) =>
+export const getLotSizeFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(
     filters,
     ({ filterType }) => filterType === "LOT_SIZE"

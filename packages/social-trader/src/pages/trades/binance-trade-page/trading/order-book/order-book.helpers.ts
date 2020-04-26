@@ -1,5 +1,5 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { getSymbolPrice } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
+import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
@@ -61,7 +61,7 @@ export const useSymbolTick = () => {
     exchangeInfo!.symbols,
     symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
   );
-  const { tickSize } = getSymbolPrice(filters);
+  const { tickSize } = getSymbolPriceFilter(filters);
   return tickSize;
 };
 

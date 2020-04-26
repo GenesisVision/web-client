@@ -4,8 +4,8 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
-  getLotSize,
-  getSymbolPrice,
+  getLotSizeFilter,
+  getSymbolPriceFilter,
   isMinMaxAllow
 } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
@@ -90,8 +90,8 @@ const _LimitTradeForm: React.FC<Props> = ({
     exchangeInfo.symbols,
     symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
   ).filters;
-  const { minPrice, maxPrice, tickSize } = getSymbolPrice(filters);
-  const { minQty, maxQty } = getLotSize(filters);
+  const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
+  const { minQty, maxQty } = getLotSizeFilter(filters);
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
