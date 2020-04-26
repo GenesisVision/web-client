@@ -155,7 +155,9 @@ export interface AssetDetail {
 
 export interface Binance {
   accountInfo(options?: { useServerTime: boolean }): Promise<Account>;
+
   tradeFee(): Promise<TradeFeeResult>;
+
   aggTrades(options?: {
     symbol: string;
     fromId?: string;
@@ -163,67 +165,92 @@ export interface Binance {
     endTime?: number;
     limit?: number;
   }): Promise<AggregatedTrade[]>;
+
   allBookTickers(): Promise<{ [key: string]: Ticker }>;
+
   book(options: { symbol: string; limit?: number }): Promise<OrderBook>;
+
   exchangeInfo(): Promise<ExchangeInfo>;
+
   order(options: NewOrder): Promise<Order>;
+
   orderTest(options: NewOrder): Promise<Order>;
+
   orderOco(options: NewOcoOrder): Promise<OcoOrder>;
+
   ping(): Promise<boolean>;
+
   prices(): Promise<{ [index: string]: string }>;
+
   avgPrice(options?: {
     symbol: string;
   }): Promise<AvgPriceResult | AvgPriceResult[]>;
+
   time(): Promise<number>;
+
   trades(options: { symbol: string; limit?: number }): Promise<TradeResult[]>;
+
   ws: WebSocket;
+
   myTrades(options: {
     symbol: string;
     limit?: number;
     fromId?: number;
     useServerTime?: boolean;
   }): Promise<MyTrade[]>;
+
   getOrder(options: {
     symbol: string;
     orderId: number;
     useServerTime?: boolean;
   }): Promise<QueryOrderResult>;
+
   cancelOrder(options: {
     symbol: string;
     orderId: number;
     useServerTime?: boolean;
   }): Promise<CancelOrderResult>;
+
   openOrders(options: {
     symbol?: string;
     useServerTime?: boolean;
   }): Promise<QueryOrderResult[]>;
+
   allOrders(options: {
     symbol?: string;
     useServerTime?: boolean;
   }): Promise<QueryOrderResult[]>;
+
   dailyStats(options?: {
     symbol: string;
   }): Promise<DailyStatsResult | DailyStatsResult[]>;
+
   candles(options: CandlesOptions): Promise<CandleChartResult[]>;
+
   tradesHistory(options: {
     symbol: string;
     limit?: number;
     fromId?: number;
   }): Promise<Trade[]>;
+
   depositAddress(options: { asset: string }): Promise<DepositAddress>;
+
   withdraw(options: {
     asset: string;
     address: string;
     amount: number;
     name?: string;
   }): Promise<WithdrawResponse>;
+
   assetDetail(): Promise<AssetDetail>;
+
   withdrawHistory(options: {
     asset: string;
     status?: number;
     startTime?: number;
     endTime?: number;
   }): Promise<WithdrawHistoryResponse>;
+
   depositHistory(options: {
     asset: string;
     status?: number;
@@ -629,20 +656,6 @@ export interface Candle {
   quoteBuyVolume: string;
 }
 
-export interface Trade {
-  buyerOrderId: string;
-  sellerOrderId: string;
-  tradeTime: number;
-  eventType: string;
-  eventTime: number;
-  symbol: string;
-  price: string;
-  quantity: string;
-  maker: boolean;
-  isBuyerMaker: boolean;
-  tradeId: number;
-}
-
 export interface Message {
   eventType: EventType;
   eventTime: number;
@@ -700,9 +713,19 @@ export interface TradeResult {
   id: number;
   price: string;
   qty: string;
+  quoteQty?: string;
   time: number;
   isBuyerMaker: boolean;
-  isBestMatch: boolean;
+  isBestMatch?: boolean;
+}
+
+export interface Trade extends TradeResult {
+  buyerOrderId: string;
+  sellerOrderId: string;
+  eventType: string;
+  eventTime: number;
+  symbol: string;
+  maker: boolean;
 }
 
 export interface MyTrade {
