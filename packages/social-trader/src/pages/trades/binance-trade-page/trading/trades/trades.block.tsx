@@ -13,7 +13,9 @@ export const TradesBlock: React.FC<Props> = () => {
       <Row>
         <h2>Trades</h2>
       </Row>
-      <TradesContainer />
+      <Row>
+        <TradesContainer />
+      </Row>
     </DefaultBlock>
   );
 };
