@@ -47,11 +47,12 @@ const getNewPriceWithDivider = (
 export const collapseItems = (
   items: { [keys: string]: StringBidDepth },
   dividerParts: DividerPartsType,
-  add?: boolean
+  options?: { add?: boolean; enable?: boolean }
 ): { [keys: string]: StringBidDepth } => {
+  if (!options?.enable) return items;
   const collapsedItems: { [keys: string]: StringBidDepth } = {};
   Object.values(items).forEach(([price, amount]) => {
-    const newPrice = getNewPriceWithDivider(price, dividerParts, add);
+    const newPrice = getNewPriceWithDivider(price, dividerParts, options?.add);
     if (collapsedItems[newPrice]) {
       collapsedItems[newPrice] = [
         newPrice,

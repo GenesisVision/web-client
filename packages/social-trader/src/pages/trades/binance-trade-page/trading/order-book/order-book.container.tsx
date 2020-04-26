@@ -33,14 +33,16 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
-  const [tickValue, setTickValue] = useState<string | undefined>();
+  const [tickValue, setTickValue] = useState<
+    { value: string; default: boolean } | undefined
+  >();
   const [list, setList] = useState<NormalizedDepth | undefined>();
   const [depthSocketData, setDepthSocketData] = useState<Depth | undefined>();
   const [depthSocketDataBuffer, setDepthSocketDataBuffer] = useState<Depth[]>(
     []
   );
 
-  const dividerParts = getDividerParts(tickValue);
+  const dividerParts = getDividerParts(tickValue?.value);
 
   useEffect(() => {
     setList(undefined);
@@ -80,17 +82,26 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   const asks = useMemo(
     () =>
-      Object.values(collapseItems(list ? list.asks : {}, dividerParts, true))
+      Object.values(
+        collapseItems(list ? list.asks : {}, dividerParts, {
+          add: true,
+          enable: !tickValue?.default
+        })
+      )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(-count),
     [list?.asks, dividerParts]
   );
   const bids = useMemo(
     () =>
-      Object.values(collapseItems(list ? list.bids : {}, dividerParts))
+      Object.values(
+        collapseItems(list ? list.bids : {}, dividerParts, {
+          enable: !tickValue?.default
+        })
+      )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(0, count),
-    [list?.bids, dividerParts]
+    [list?.bids, dividerParts, tickValue]
   );
 
   return (

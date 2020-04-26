@@ -5,22 +5,24 @@ import { formatValue } from "utils/formatter";
 import { getTickValues, useSymbolTick } from "./order-book.helpers";
 
 interface Props {
-  value?: string;
-  setValue: (value: string) => void;
+  value?: { value: string; default: boolean };
+  setValue: (value: { value: string; default: boolean }) => void;
 }
 
 const _OrderBookTickSizeSelect: React.FC<Props> = ({ value, setValue }) => {
   const tickSize = useSymbolTick();
   useEffect(() => {
-    if (tickSize) setValue(formatValue(tickSize));
+    if (tickSize) setValue({ value: formatValue(tickSize), default: true });
   }, [tickSize]);
-  if (!tickSize) return null;
+  if (!tickSize || !value) return null;
   const tickValues = getTickValues(+tickSize);
   return (
     <Select
       name="column"
-      value={value!}
-      onChange={(e: ISelectChangeEvent) => setValue(e.target.value)}
+      value={value.value}
+      onChange={({ target: { value } }: ISelectChangeEvent) =>
+        setValue({ value, default: value === tickSize })
+      }
     >
       {tickValues.map(value => (
         <option value={value} key={value}>

@@ -10,6 +10,7 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
+import { formatValue } from "utils/formatter";
 
 import styles from "./order-book.module.scss";
 
@@ -70,7 +71,7 @@ const _OrderBookRow: React.FC<Props> = ({
         })}
       >
         <td>
-          <ColoredText color={color}>{price}</ColoredText>
+          <ColoredText color={color}>{formatValue(price)}</ColoredText>
         </td>
         <td>{amount}</td>
         <td>{total}</td>
