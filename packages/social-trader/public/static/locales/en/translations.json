@@ -2800,7 +2800,7 @@
     "list-3": "Regular: Trading fee rate depends on the tool used.The list of available tools and the associated fees.\nGVT holders: 30-55% discount depending on the amount of GVT stored in the wallet.",
     "text-3": "Genesis Vision Token holders who select Genesis Markets as their broker will receive discounted transaction fees.",
     "trading-discount": "To be eligible for a trading discount",
-    "list-4": "There must be more than 1 GVT stored in the wallet\nThe discounted fee will be charged from the GVT wallet, not from the trading account.",
+    "list-4": "There must be more than 1 GVT stored in the wallet",
     "conditions": "Conditions for obtaining discounts",
     "wallet": "Wallet",
     "discounts-table": "From 1 GVT up to 10\t30%\nUp to 25 GVT\t35%\nUp to 50 GVT\t40%\nUp to 100 GVT\t45%\nUp to 500 GVT\t50%\n500 GVT+\t55%",
