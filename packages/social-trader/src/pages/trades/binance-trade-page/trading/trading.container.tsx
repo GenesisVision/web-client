@@ -26,10 +26,14 @@ const _TradingContainer: React.FC<Props> = ({ authData }) => {
           <RowItem>
             <OrderBookBlock />
           </RowItem>
-          <RowItem>{/*<Trade />*/}</RowItem>
+          <RowItem>
+            <Trade />
+          </RowItem>
         </TradingPriceContextProvider>
       </Row>
-      <Row onlyOffset>{/*<OpenOrdersBlock />*/}</Row>
+      <Row onlyOffset>
+        <OpenOrdersBlock />
+      </Row>
     </TradingInfoContextProvider>
   );
 };
