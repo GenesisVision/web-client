@@ -92,7 +92,10 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
     params: symbol ? { symbol: symbol.toUpperCase() } : {}
   });
 
-export const getDepth = (symbol: string, limit: number): Observable<Depth> =>
+export const getDepth = (
+  symbol: string,
+  limit: number = 1000
+): Observable<Depth> =>
   requestService.get({
     url: "/api/v3/depth",
     params: { symbol, limit: String(limit) }
