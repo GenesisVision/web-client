@@ -6,7 +6,8 @@ import {
   ExchangeInfo,
   OrderSide,
   QueryOrderResult,
-  Ticker
+  Ticker,
+  Trade
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import {
@@ -80,10 +81,13 @@ export const getAccountInformation = (
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const getBinanceTrades = (symbol: string): Observable<any[]> =>
+export const getBinanceTrades = (
+  symbol: string,
+  limit: number = 50
+): Observable<Trade[]> =>
   requestService.get({
     url: "/api/v3/trades",
-    params: { symbol: symbol.toUpperCase(), limit: "20" }
+    params: { symbol: symbol.toUpperCase(), limit: String(limit) }
   });
 
 export const getTickers = (symbol?: string): Observable<Ticker[]> =>

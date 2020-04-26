@@ -26,13 +26,13 @@ export const tradeTransform = ({
   return {
     eventType: e,
     eventTime: E,
-    tradeTime: T,
+    time: T,
     symbol: s,
     price: p,
-    quantity: q,
+    qty: q,
     isBuyerMaker: m,
     maker: M,
-    tradeId: t,
+    id: t,
     sellerOrderId: a,
     buyerOrderId: b
   };

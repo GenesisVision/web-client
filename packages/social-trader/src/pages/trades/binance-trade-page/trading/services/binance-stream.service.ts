@@ -68,7 +68,7 @@ export const getSymbolTradeStream = (
 ): Observable<any> =>
   generateStream(
     [
-      getBinanceTrades(symbol).pipe(map(item => item.reverse()))
+      // getBinanceTrades(symbol).pipe(map(item => item.reverse()))
       // chainSocket({ symbol: symbol }).pipe(
       //   filter(item => item.stream === `${symbol.toLowerCase()}@trade`),
       //   map(item => item.data)
