@@ -30,9 +30,10 @@ const getNewPriceWithDivider = (
 ): string => {
   const [int, frac] = price.split(".");
   if (fracLength) {
-    const addValue = +(1 / Math.pow(10, fracLength)).toFixed(fracLength);
     const value = `${int}.${frac.slice(0, fracLength)}`;
-    return add ? formatValue(+value + addValue, fracLength) : value;
+    return add
+      ? formatValue(+value, fracLength, undefined, { up: true })
+      : value;
   }
   if (intLength) {
     const addValue = +Math.pow(10, intLength - 1);
