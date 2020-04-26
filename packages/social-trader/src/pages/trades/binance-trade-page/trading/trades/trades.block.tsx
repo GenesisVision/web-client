@@ -13,7 +13,7 @@ export const TradesBlock: React.FC<Props> = () => {
       <Row>
         <h2>Trades</h2>
       </Row>
-      <Row>
+      <Row onlyOffset className={styles["trades__items-container"]}>
         <TradesContainer />
       </Row>
     </DefaultBlock>
