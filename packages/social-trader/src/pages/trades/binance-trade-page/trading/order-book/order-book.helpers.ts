@@ -10,6 +10,46 @@ import { useContext } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
+type DividerPartsType = { intLength?: number; fracLength?: number };
+
+export const getDividerParts = (
+  divider: string = "0.00001"
+): DividerPartsType => {
+  const dottedDivider = divider.trim().split(".");
+  const intLength = dottedDivider.length > 1 ? undefined : divider.length;
+  const fracLength =
+    dottedDivider.length > 1 ? dottedDivider[1].length : undefined;
+  return { intLength, fracLength };
+};
+
+const getNewPriceWithDivider = (
+  price: string,
+  { intLength, fracLength }: DividerPartsType
+): string => {
+  const [int, frac] = price.split(".");
+  if (fracLength) return [int, frac.slice(0, fracLength)].join(".");
+  if (intLength)
+    return int.slice(0, int.length - intLength + 1) + "0".repeat(intLength - 1);
+  return price;
+};
+
+export const collapseItems = (
+  items: { [keys: string]: StringBidDepth },
+  dividerParts: DividerPartsType
+): { [keys: string]: StringBidDepth } => {
+  const collapsedItems: { [keys: string]: any } = {};
+  Object.values(items).forEach(([price, amount]) => {
+    const newPrice = getNewPriceWithDivider(price, dividerParts);
+    if (collapsedItems[newPrice]) {
+      collapsedItems[newPrice] = [
+        newPrice,
+        +collapsedItems[newPrice][1] + +amount
+      ];
+    } else collapsedItems[newPrice] = [newPrice, amount];
+  });
+  return collapsedItems;
+};
+
 export const useSymbolTick = () => {
   const {
     exchangeInfo,
