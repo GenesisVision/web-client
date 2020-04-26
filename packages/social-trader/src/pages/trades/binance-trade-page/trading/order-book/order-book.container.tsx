@@ -80,7 +80,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   const asks = useMemo(
     () =>
-      Object.values(collapseItems(list ? list.asks : {}, dividerParts))
+      Object.values(collapseItems(list ? list.asks : {}, dividerParts, true))
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(-count),
     [list?.asks, dividerParts]
