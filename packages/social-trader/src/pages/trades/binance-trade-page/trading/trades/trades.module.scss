@@ -1,0 +1,8 @@
+.trades {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__items-container {
+    overflow-y: auto;
+  }
+}
