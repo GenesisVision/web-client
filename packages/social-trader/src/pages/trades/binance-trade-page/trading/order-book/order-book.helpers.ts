@@ -25,26 +25,36 @@ export const getDividerParts = (
 
 const getNewPriceWithDivider = (
   price: string,
-  { intLength, fracLength }: DividerPartsType
+  { intLength, fracLength }: DividerPartsType,
+  add?: boolean
 ): string => {
   const [int, frac] = price.split(".");
-  if (fracLength) return [int, frac.slice(0, fracLength)].join(".");
-  if (intLength)
-    return int.slice(0, int.length - intLength + 1) + "0".repeat(intLength - 1);
+  if (fracLength) {
+    const addValue = +(1 / Math.pow(10, fracLength)).toFixed(fracLength);
+    const value = `${int}.${frac.slice(0, fracLength)}`;
+    return add ? formatValue(+value + addValue, fracLength) : value;
+  }
+  if (intLength) {
+    const addValue = +Math.pow(10, intLength - 1);
+    const value =
+      int.slice(0, int.length - intLength + 1) + "0".repeat(intLength - 1);
+    return add ? String(+value + addValue) : value;
+  }
   return price;
 };
 
 export const collapseItems = (
   items: { [keys: string]: StringBidDepth },
-  dividerParts: DividerPartsType
+  dividerParts: DividerPartsType,
+  add?: boolean
 ): { [keys: string]: StringBidDepth } => {
-  const collapsedItems: { [keys: string]: any } = {};
+  const collapsedItems: { [keys: string]: StringBidDepth } = {};
   Object.values(items).forEach(([price, amount]) => {
-    const newPrice = getNewPriceWithDivider(price, dividerParts);
+    const newPrice = getNewPriceWithDivider(price, dividerParts, add);
     if (collapsedItems[newPrice]) {
       collapsedItems[newPrice] = [
         newPrice,
-        +collapsedItems[newPrice][1] + +amount
+        String(+collapsedItems[newPrice][1] + +amount)
       ];
     } else collapsedItems[newPrice] = [newPrice, amount];
   });
