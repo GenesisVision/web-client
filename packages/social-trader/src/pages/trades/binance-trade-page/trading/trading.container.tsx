@@ -5,6 +5,7 @@ import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market
 import { OpenOrdersBlock } from "pages/trades/binance-trade-page/trading/open-orders/open-orders.block";
 import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
 import { Trade } from "pages/trades/binance-trade-page/trading/trade/trade";
+import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import { TradingInfoContextProvider } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React from "react";
@@ -18,16 +19,19 @@ interface Props {
 const _TradingContainer: React.FC<Props> = ({ authData }) => {
   return (
     <TradingInfoContextProvider>
+      <Row className={styles["trading"]}>
+        <MarketWatchBlock />
+      </Row>
       <Row center={false} className={styles["trading"]}>
-        <RowItem>
-          <MarketWatchBlock />
-        </RowItem>
         <TradingPriceContextProvider>
           <RowItem>
             <OrderBookBlock />
           </RowItem>
           <RowItem>
             <Trade />
+          </RowItem>
+          <RowItem>
+            <TradesBlock />
           </RowItem>
         </TradingPriceContextProvider>
       </Row>
