@@ -59,10 +59,12 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       const updates = depthSocketDataBuffer.filter(
         ({ lastUpdateId }) => lastUpdateId > data.lastUpdateId
       );
-      updates.forEach(event => {
-        asks = updateDepthList(asks, event.asks);
-        bids = updateDepthList(bids, event.bids);
-      });
+      updates
+        .filter(event => event.lastUpdateId > data.lastUpdateId)
+        .forEach(event => {
+          asks = updateDepthList(asks, event.asks);
+          bids = updateDepthList(bids, event.bids);
+        });
       setList({ ...data, asks, bids });
       setDepthSocketDataBuffer([]);
     });
