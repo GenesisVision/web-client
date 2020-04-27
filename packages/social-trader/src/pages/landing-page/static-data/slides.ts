@@ -1,4 +1,4 @@
-import ImgFirstBanner from "pages/landing-page/images/slider/banner.jpeg";
+import ImgFirstBanner from "pages/landing-page/images/slider/banner.png";
 import ImgBoxing1 from "pages/landing-page/images/slider/boxing-1.svg";
 import ImgBoxing2 from "pages/landing-page/images/slider/boxing-2.svg";
 import ImgBoxing3 from "pages/landing-page/images/slider/boxing-3.svg";
