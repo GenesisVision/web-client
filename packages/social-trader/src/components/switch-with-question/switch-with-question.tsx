@@ -1,16 +1,8 @@
-import classNames from "classnames";
 import { Center } from "components/center/center";
 import GVSwitch from "components/gv-selection/gv-switch";
-import HelpButton from "components/help-button/help-button";
-import {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
-import Tooltip from "components/tooltip/tooltip";
+import TextWithQuestion from "components/text-with-question/text-with-question";
 import * as React from "react";
-
-import "./switch-with-question.scss";
 
 const _SwitchWithQuestion: React.FC<Props> = ({
   tooltipContent,
@@ -24,17 +16,11 @@ const _SwitchWithQuestion: React.FC<Props> = ({
   return (
     <Center>
       <RowItem small>
-        <HelpContainer tooltipContent={tooltipContent}>
-          <HelpButton
-            className={classNames("switch-with-question__question", {
-              "switch-with-question__question-button": !!tooltipContent
-            })}
-            onClick={onClickHelp}
-          />
-        </HelpContainer>
-      </RowItem>
-      <RowItem small className="switch-with-question__label">
-        {label}
+        <TextWithQuestion
+          label={label}
+          onClickHelp={onClickHelp}
+          tooltipContent={tooltipContent}
+        />
       </RowItem>
       {value !== undefined && (
         <GVSwitch
@@ -48,28 +34,6 @@ const _SwitchWithQuestion: React.FC<Props> = ({
       )}
     </Center>
   );
-};
-
-const HelpContainer: React.FC<{
-  tooltipContent?: string | JSX.Element;
-} & React.HTMLAttributes<HTMLDivElement>> = ({ tooltipContent, children }) => {
-  switch (!!tooltipContent) {
-    case true:
-      return (
-        <Tooltip
-          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          render={() => tooltipContent}
-        >
-          <div className="switch-with-question__question-container">
-            {children}
-          </div>
-        </Tooltip>
-      );
-    case false:
-    default:
-      return <>{children}</>;
-  }
 };
 
 interface Props {
