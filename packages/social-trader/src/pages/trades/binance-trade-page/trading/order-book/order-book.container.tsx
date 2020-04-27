@@ -90,7 +90,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(-count),
-    [list?.asks, dividerParts]
+    [list, dividerParts]
   );
   const bids = useMemo(
     () =>
@@ -101,7 +101,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(0, count),
-    [list?.bids, dividerParts, tickValue]
+    [list, dividerParts, tickValue]
   );
 
   return (
