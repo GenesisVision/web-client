@@ -57,7 +57,6 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    setDepthSnapshot(getDepth(getSymbol(baseAsset, quoteAsset)));
   }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
@@ -85,7 +84,10 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
             setDepthSocketDataBuffer([]);
           });
         }
-        if (isSubscribeDepth === "none") setSubscribeDepth("pending");
+        if (isSubscribeDepth === "none") {
+          setDepthSnapshot(getDepth(getSymbol(baseAsset, quoteAsset)));
+          setSubscribeDepth("pending");
+        }
       }
     }
     if (list && depthSocketData) {
