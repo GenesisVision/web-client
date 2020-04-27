@@ -1,6 +1,4 @@
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { OpenOrders } from "pages/trades/binance-trade-page/trading/open-orders/open-orders";
-import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/open-orders/open-orders.helpers";
 import { getOpenOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { filterOpenOrdersStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
@@ -13,6 +11,9 @@ import {
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
+
+import { OpenOrders } from "./open-orders";
+import { normalizeOpenOrdersList } from "./open-orders.helpers";
 
 interface Props {}
 
