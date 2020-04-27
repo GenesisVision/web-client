@@ -18,6 +18,7 @@ import {
   NormalizedDepth
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 import styles from "./order-book.module.scss";
@@ -25,6 +26,7 @@ import styles from "./order-book.module.scss";
 interface Props {}
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
+  const [isSubscribeDepth, setSubscribeDepth] = useState<string>("none");
   const count = 13;
 
   const { connectSocket } = useSockets();
@@ -33,6 +35,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
+  const [depthSnapshot, setDepthSnapshot] = useState<
+    Observable<Depth> | undefined
+  >();
   const [tickValue, setTickValue] = useState<
     { value: string; default: boolean } | undefined
   >();
@@ -52,30 +57,42 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    const depth = getDepth(symbol);
-    depth.subscribe(data => {
-      let asks = normalizeDepthList(data.asks);
-      let bids = normalizeDepthList(data.bids);
-      // const updates = depthSocketDataBuffer.filter(
-      //   ({ lastUpdateId }) => lastUpdateId > data.lastUpdateId
-      // );
-      // updates
-      //   .filter(event => event.lastUpdateId > data.lastUpdateId)
-      //   .forEach(event => {
-      //     asks = updateDepthList(asks, event.asks);
-      //     bids = updateDepthList(bids, event.bids);
-      //   });
-      setList({ ...data, asks, bids });
-      setDepthSocketDataBuffer([]);
-    });
+    setDepthSnapshot(getDepth(getSymbol(baseAsset, quoteAsset)));
   }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
-    if (!depthSocketData && !list) return;
-    if (!list && depthSocketData) {
-      setDepthSocketDataBuffer([...depthSocketDataBuffer, depthSocketData]);
+    if (!list) {
+      if (depthSocketData) {
+        const newBuffer = [...depthSocketDataBuffer, depthSocketData];
+        setDepthSocketDataBuffer(newBuffer);
+        if (isSubscribeDepth === "pending" && depthSnapshot) {
+          setSubscribeDepth("done");
+          depthSnapshot.subscribe(data => {
+            let asks = normalizeDepthList(data.asks);
+            let bids = normalizeDepthList(data.bids);
+            newBuffer
+              .filter(event => event.lastUpdateId > data.lastUpdateId)
+              .forEach(event => {
+                asks = updateDepthList(asks, event.asks);
+                bids = updateDepthList(bids, event.bids);
+              });
+            setList({
+              ...data,
+              asks,
+              bids,
+              lastUpdateId: newBuffer[newBuffer.length - 1].lastUpdateId
+            });
+            setDepthSocketDataBuffer([]);
+          });
+        }
+        if (isSubscribeDepth === "none") setSubscribeDepth("pending");
+      }
     }
     if (list && depthSocketData) {
+      if (depthSocketData.firstUpdateId !== list.lastUpdateId + 1) {
+        console.log(`new event id failed`);
+        return;
+      }
       const asks = updateDepthList(list.asks, depthSocketData.asks);
       const bids = updateDepthList(list.bids, depthSocketData.bids);
       const ask = Object.values(asks).sort(
@@ -88,7 +105,13 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         if (+ask[0] < +bid[0])
           console.log("Update: ask is less than bid", ask[0], bid[0]);
       }
-      setList({ ...list, asks, bids });
+      setList({
+        ...list,
+        asks,
+        bids,
+        lastUpdateId: depthSocketData.lastUpdateId,
+        firstUpdateId: depthSocketData.firstUpdateId
+      });
     }
   }, [depthSocketData]);
 
@@ -113,13 +136,6 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     [list, dividerParts]
   );
   const { asks, bids } = listForRender;
-
-  const ask = asks[asks.length - 1];
-  const bid = bids[0];
-  if (ask && bid) {
-    if (+ask[0] < +bid[0])
-      console.log("Render: ask is less than bid", ask[0], bid[0]);
-  }
 
   return (
     <>
