@@ -106,6 +106,11 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     [list, dividerParts, tickValue]
   );
 
+  const ask = asks[asks.length - 1];
+  const bid = bids[0];
+  if (ask && bid)
+    if (+ask[0] < +bid[0]) console.log("ask is less than bid", ask[0], bid[0]);
+
   return (
     <>
       <Row>
