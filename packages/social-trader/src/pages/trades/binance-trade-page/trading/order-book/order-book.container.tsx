@@ -78,6 +78,11 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     if (list && depthSocketData) {
       const asks = updateDepthList(list.asks, depthSocketData.asks);
       const bids = updateDepthList(list.bids, depthSocketData.bids);
+      const ask = Object.values(asks)[Object.values(asks).length - 1];
+      const bid = Object.values(bids)[0];
+      if (ask && bid)
+        if (+ask[0] < +bid[0])
+          console.log("Update: ask is less than bid", ask[0], bid[0]);
       setList({ ...list, asks, bids });
     }
   }, [depthSocketData]);
