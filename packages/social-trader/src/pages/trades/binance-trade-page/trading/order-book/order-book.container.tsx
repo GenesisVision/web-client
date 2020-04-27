@@ -82,9 +82,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     }
   }, [depthSocketData]);
 
-  const asks = useMemo(
-    () =>
-      Object.values(
+  const listForRender = useMemo(
+    () => ({
+      asks: Object.values(
         collapseItems(list ? list.asks : {}, dividerParts, {
           add: true,
           enable: !tickValue?.default
@@ -92,19 +92,17 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
         .slice(-count),
-    [list, dividerParts]
-  );
-  const bids = useMemo(
-    () =>
-      Object.values(
+      bids: Object.values(
         collapseItems(list ? list.bids : {}, dividerParts, {
           enable: !tickValue?.default
         })
       )
         .sort(([priceA], [priceB]) => +priceB - +priceA)
-        .slice(0, count),
-    [list, dividerParts, tickValue]
+        .slice(0, count)
+    }),
+    [list, dividerParts]
   );
+  const { asks, bids } = listForRender;
 
   const ask = asks[asks.length - 1];
   const bid = bids[0];
