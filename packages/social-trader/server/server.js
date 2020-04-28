@@ -7,6 +7,7 @@ const robotTxt = require("./robot");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = async app => {
+  const port = process.env.PORT || 3000;
   const handle = app.getRequestHandler();
 
   const ssrCache = cacheableResponse({
@@ -31,7 +32,13 @@ module.exports = async app => {
     })
   );
 
-  const port = process.env.PORT || 3000;
+  server.use(
+    createProxyMiddleware("/banners", {
+      target: `http://localhost:${port}/api`,
+      changeOrigin: true
+    })
+  );
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 

@@ -120,6 +120,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     }
   };
 
+  const banner =
+    assetType === ASSET.FOLLOW
+      ? logoUrl
+      : `/banners/programs/${url}/250x250.png`;
+
   return (
     <Page
       title={`${
@@ -128,7 +133,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           : t("programs-page.title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
-      previewImage={description.publicInfo.logoUrl}
+      previewImage={banner}
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection
