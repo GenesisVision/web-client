@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 
 enum TABS {
   OPEN_ORDERS = "OPEN_ORDERS",
+  ORDERS_HISTORY = "ORDERS_HISTORY",
+  TRADE_HISTORY = "TRADE_HISTORY",
   FUNDS = "FUNDS"
 }
 
@@ -19,6 +21,9 @@ const _TradingTables: React.FC<Props> = () => {
   return (
     <DefaultTableBlock solid>
       <DetailsBlockTabs value={tab} onChange={setTab}>
+        <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
+        <GVTab value={TABS.ORDERS_HISTORY} label={t("Orders history")} />
+        <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
         <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
         <GVTab value={TABS.FUNDS} label={t("Funds")} />
       </DetailsBlockTabs>
