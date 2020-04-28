@@ -58,14 +58,20 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    getDepth(getSymbol(baseAsset, quoteAsset)).subscribe(data => {
-      console.log("get snapshot");
-      setList({
-        ...data,
-        asks: normalizeDepthList(data.asks),
-        bids: normalizeDepthList(data.bids)
+    timer(1000)
+      .pipe(
+        switchMap(() => {
+          console.log("get snapshot");
+          return getDepth(getSymbol(baseAsset, quoteAsset));
+        })
+      )
+      .subscribe(data => {
+        setList({
+          ...data,
+          asks: normalizeDepthList(data.asks),
+          bids: normalizeDepthList(data.bids)
+        });
       });
-    });
   }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
