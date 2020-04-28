@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import HeaderIcon from "components/header/header-icon";
 import { SearchIcon } from "components/icon/search-icon";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
-import { Row } from "components/row/row";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -79,7 +79,7 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
-    <Row className="header">
+    <Center className="header">
       <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
       <div className="header__right">
         {isAuthenticated ? (
@@ -88,7 +88,7 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
           <UnauthLinks backPath={backPath} />
         )}
       </div>
-    </Row>
+    </Center>
   );
 };
 
