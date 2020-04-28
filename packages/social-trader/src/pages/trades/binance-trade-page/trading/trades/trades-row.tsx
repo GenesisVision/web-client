@@ -1,7 +1,7 @@
 import { ColoredText } from "components/colored-text/colored-text";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React from "react";
-import { formatDate } from "utils/dates";
+import { formatTime } from "utils/dates";
 import { formatValue } from "utils/formatter";
 
 interface Props {
@@ -22,7 +22,7 @@ const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
         </ColoredText>
       </td>
       <td>{amount}</td>
-      <td>{formatDate(time)}</td>
+      <td>{formatTime(time)}</td>
     </tr>
   );
 };

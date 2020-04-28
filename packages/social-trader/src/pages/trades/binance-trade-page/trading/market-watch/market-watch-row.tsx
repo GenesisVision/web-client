@@ -42,7 +42,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     return (
       <tr key={symbol} onClick={handleClick}>
         <td className="market-watch__name">
-          <MutedText>{symbol}</MutedText>
+          <MutedText small>{symbol}</MutedText>
         </td>
         <td className="market-watch__name">
           <ColoredText color={getTextColor(+firstLastPrice - +lastPrice)}>
