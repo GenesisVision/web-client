@@ -19,22 +19,30 @@
   }
 
   &--small {
-    @include adaptive-border-radius($border-radius);
+    &.default-block--rounded-border {
+      @include adaptive-border-radius($border-radius);
+    }
     @include default-block-offsets($padding-xxsmall);
   }
 
   &--middle {
-    @include adaptive-border-radius($border-radius-middle);
+    &.default-block--rounded-border {
+      @include adaptive-border-radius($border-radius-middle);
+    }
     @include default-block-offsets($padding-xsmall);
   }
 
   &--large {
-    @include adaptive-border-radius($border-radius-middle);
+    &.default-block--rounded-border {
+      @include adaptive-border-radius($border-radius-middle);
+    }
     @include default-block-offsets($padding-small);
   }
 
   &--xlarge {
-    @include adaptive-border-radius($border-radius-middle);
+    &.default-block--rounded-border {
+      @include adaptive-border-radius($border-radius-middle);
+    }
     @include default-block-offsets($padding-medium);
   }
 
