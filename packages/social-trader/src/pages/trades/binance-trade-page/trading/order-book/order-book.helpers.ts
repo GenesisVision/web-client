@@ -3,6 +3,8 @@ import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/tr
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
+  Depth,
+  NormalizedDepth,
   NormalizedDepthList,
   StringBidDepth
 } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -12,6 +14,56 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
+
+export const updateOrderBookFromBufferLogger = ({
+  list,
+  event
+}: {
+  list: NormalizedDepth;
+  event: Depth;
+}) => {
+  if (
+    !(
+      event.firstUpdateId <= list.lastUpdateId + 1 &&
+      event.lastUpdateId >= list.lastUpdateId + 1
+    )
+  )
+    console.log(
+      `${event.firstUpdateId} <= ${list.lastUpdateId + 1}`,
+      `${event.lastUpdateId} >= ${list.lastUpdateId + 1}`
+    );
+};
+
+export const updateOrderBookFromSocketLogger = ({
+  list,
+  depthSocketData,
+  asks,
+  bids
+}: {
+  list: NormalizedDepth;
+  depthSocketData: Depth;
+  bids: NormalizedDepthList;
+  asks: NormalizedDepthList;
+}) => {
+  const ask = Object.values(asks).sort(
+    ([priceA], [priceB]) => +priceB - +priceA
+  )[Object.values(asks).length - 1];
+  const bid = Object.values(bids).sort(
+    ([priceA], [priceB]) => +priceB - +priceA
+  )[0];
+  if (ask && bid) {
+    if (+ask[0] < +bid[0])
+      console.log("Update: ask is less than bid", ask[0], bid[0]);
+  }
+  if (depthSocketData.firstUpdateId !== list.lastUpdateId + 1) {
+    console.log(
+      `new event id failed`,
+      depthSocketData.firstUpdateId,
+      list.lastUpdateId
+    );
+    // return;
+  }
+};
 
 export const getDividerParts = (
   divider: string = "0.00001"
