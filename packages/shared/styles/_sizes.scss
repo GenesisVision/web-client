@@ -197,3 +197,10 @@ $avatar-size-mobile: $avatar-size/$divider-title;
     border-radius: $size;
   }
 }
+
+@mixin trade-table() {
+  & th,
+  & td {
+    font-size: $font-size-xsmall;
+  }
+}
