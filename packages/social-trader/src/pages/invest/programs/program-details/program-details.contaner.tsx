@@ -17,6 +17,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  composeProgramBannerUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -120,10 +121,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     }
   };
 
-  const banner =
-    assetType === ASSET.FOLLOW
-      ? logoUrl
-      : `/banners/programs/${url}/250x250.png`;
+  const banner = composeProgramBannerUrl(url);
 
   return (
     <Page

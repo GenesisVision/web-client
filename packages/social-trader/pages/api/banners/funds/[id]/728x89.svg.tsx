@@ -3,4 +3,4 @@ import createBannerApi from "components/banners/utils";
 import { ASSET } from "constants/constants";
 import React from "react";
 
-export default createBannerApi(Banner, ASSET.PROGRAM);
+export default createBannerApi(Banner, ASSET.FUND);

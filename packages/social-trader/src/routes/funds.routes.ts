@@ -20,3 +20,5 @@ export const FUNDS_FACET_FOLDER_ROUTE = `${FUNDS_ROUTE}/${FACETS}/[id]`;
 export const FUNDS_TAB_ROUTE = `${FUNDS_ROUTE}/:tab`;
 export const FUNDS_EXPLORE_TAB_ROUTE = `${FUNDS_ROUTE}/:tab(${FUNDS_EXPLORE_TAB_NAME})`;
 export const FUNDS_FAVORITES_TAB_ROUTE = `${FUNDS_ROUTE}/:tab(${FUNDS_FAVORITES_TAB_NAME})`;
+
+export const FUND_BANNER_ROUTE = `/banners/funds/:${FUNDS_SLUG_URL_PARAM_NAME}/250x250.png`;

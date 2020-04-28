@@ -4,7 +4,7 @@ import Chart from "./components/banner-chart";
 import GvLogo from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
-import { BannerComponent, LogoOptions } from "./utils";
+import { BannerComponent, BannerProps, LogoOptions } from "./utils";
 
 type Position = { y: number };
 
@@ -40,7 +40,7 @@ export const LOGO_OPTIONS: LogoOptions = {
   size: 21
 };
 
-export const Banner: BannerComponent = props => {
+export const Banner: BannerComponent = (props: BannerProps) => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
 
