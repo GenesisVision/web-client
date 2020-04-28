@@ -1,9 +1,12 @@
+@import "~shared/styles/_sizes";
 @import "~shared/styles/_constants";
 
 .market-watch {
+  @include trade-table();
   height: 100%;
   display: flex;
   flex-direction: column;
+  width: 420px;
 
   &__items-container {
     overflow-y: auto;
@@ -48,7 +51,7 @@
   &__table {
   }
   &__name {
-    min-width: 150px;
+    //min-width: 150px;
     cursor: pointer;
   }
 }

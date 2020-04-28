@@ -9,10 +9,11 @@ interface Props {}
 
 export const OrderBookBlock: React.FC<Props> = () => {
   return (
-    <DefaultBlock solid className={styles["order-book"]}>
-      <Row>
-        <h2>Order book</h2>
-      </Row>
+    <DefaultBlock
+      roundedBorder={false}
+      bordered
+      className={styles["order-book"]}
+    >
       <OrderBookContainer />
     </DefaultBlock>
   );

@@ -29,7 +29,7 @@ import styles from "./order-book.module.scss";
 interface Props {}
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
-  const count = 13;
+  const count = 12;
 
   const { connectSocket } = useSockets();
 

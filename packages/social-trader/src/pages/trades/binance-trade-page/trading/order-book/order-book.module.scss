@@ -1,9 +1,12 @@
+@import "~shared/styles/_sizes";
+
 .order-book {
-  width: 500px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   &__table-block {
+    @include trade-table();
     height: 100%;
     display: flex;
     flex-direction: column;

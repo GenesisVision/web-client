@@ -16,11 +16,12 @@ export const MarketWatchBlock: React.FC<Props> = () => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
   return (
-    <DefaultBlock solid className={styles["market-watch"]}>
+    <DefaultBlock
+      roundedBorder={false}
+      bordered
+      className={styles["market-watch"]}
+    >
       <Row>
-        <RowItem>
-          <h2>Market watch</h2>
-        </RowItem>
         <RowItem>
           <MutedText>{getSymbol(baseAsset, quoteAsset)}</MutedText>
         </RowItem>

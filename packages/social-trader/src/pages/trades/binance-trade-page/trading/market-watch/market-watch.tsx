@@ -49,8 +49,9 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
       <Row>
         <RowItem>
           <GVButton
+            noPadding
             disabled={filteringType === "margin"}
-            variant={filteringType === "margin" ? "outlined" : "contained"}
+            variant={"text"}
             size={GV_BTN_SIZE.SMALL}
             onClick={() => {
               setFilteringType("margin");
@@ -62,14 +63,11 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         {FILTERING_CURRENCIES.map(currency => (
           <RowItem>
             <GVButton
+              noPadding
               disabled={
                 filteringType === "symbol" && filtering.value === currency
               }
-              variant={
-                filteringType === "symbol" && filtering.value === currency
-                  ? "outlined"
-                  : "contained"
-              }
+              variant={"text"}
               size={GV_BTN_SIZE.SMALL}
               onClick={() => {
                 setFilteringType("symbol");
@@ -82,26 +80,24 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         ))}
       </Row>
       <Row>
-        <RowItem>
-          <GlobalSearchInput
-            query={search}
-            onChange={setSearch}
-            canClose={false}
-          />
-        </RowItem>
-        <RowItem>
-          <Select
-            name="column"
-            value={column}
-            onChange={(e: ISelectChangeEvent) => setColumn(e.target.value)}
-          >
-            {COLUMN_VALUES.map(({ value, label }) => (
-              <option value={value} key={value}>
-                {label}
-              </option>
-            ))}
-          </Select>
-        </RowItem>
+        <GlobalSearchInput
+          query={search}
+          onChange={setSearch}
+          canClose={false}
+        />
+      </Row>
+      <Row>
+        <Select
+          name="column"
+          value={column}
+          onChange={(e: ISelectChangeEvent) => setColumn(e.target.value)}
+        >
+          {COLUMN_VALUES.map(({ value, label }) => (
+            <option value={value} key={value}>
+              {label}
+            </option>
+          ))}
+        </Select>
       </Row>
       <Row onlyOffset className="market-watch__items-container">
         <table>

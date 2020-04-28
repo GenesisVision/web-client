@@ -51,7 +51,7 @@ const _Trade: React.FC<Props> = () => {
   );
 
   return (
-    <DefaultBlock solid>
+    <DefaultBlock roundedBorder={false} bordered>
       <Row>
         <h3>Place order</h3>
       </Row>

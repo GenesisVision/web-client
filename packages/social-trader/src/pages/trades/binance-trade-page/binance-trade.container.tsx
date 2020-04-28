@@ -7,12 +7,12 @@ export const BinanceTradeContainer: React.FC = () => {
   const { authData, set } = useTradeAuth();
   const { privateKey, publicKey } = authData;
   return (
-    <div>
+    <>
       {privateKey && publicKey ? (
         <TradingContainer authData={authData} />
       ) : (
         <BinanceTradeLogin onSubmit={set} />
       )}
-    </div>
+    </>
   );
 };

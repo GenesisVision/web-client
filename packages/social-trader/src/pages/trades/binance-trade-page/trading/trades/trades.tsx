@@ -3,6 +3,8 @@ import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trad
 import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 
+import styles from "./trades.module.scss";
+
 interface Props {
   items: Trade[];
 }
@@ -13,7 +15,7 @@ const _Trades: React.FC<Props> = ({ items }) => {
   } = useContext(TradingInfoContext);
   return (
     <div>
-      <table>
+      <table className={styles["trades__table"]}>
         <thead>
           <th>Price ({baseAsset})</th>
           <th>Amount ({quoteAsset})</th>
