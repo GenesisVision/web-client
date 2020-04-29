@@ -43,6 +43,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const [socketDataBuffer, setSocketDataBuffer] = useState<Trade[]>([]);
 
   useEffect(() => {
+    setPrice(PriceInitialState);
     setList([]);
     setSocketData(undefined);
     const symbol = getSymbol(baseAsset, quoteAsset);
