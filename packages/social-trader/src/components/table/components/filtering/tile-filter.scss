@@ -1,0 +1,8 @@
+@import "~shared/styles/_sizes";
+
+.tile-filter {
+  &__items {
+    margin-bottom: -$padding-xxsmall;
+    flex-wrap: wrap;
+  }
+}

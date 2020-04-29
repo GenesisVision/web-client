@@ -3,6 +3,7 @@ import DepositDetailsBlock from "components/assets/fields/deposit-details-block"
 import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
 import { IImageValue } from "components/form/input-image/input-image";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -87,8 +88,10 @@ const _CreateFundSettings: React.FC<Props> = ({
         blockNumber={"03"}
       >
         <FeesSettings
-          entryFeeName={CREATE_FUND_FIELDS.entryFee}
-          entryFeeDescription={t(
+          firstFeeLabel={t("create-program-page.settings.fields.entry-fee")}
+          firstFeeUnderText={t("create-program-page.settings.hints.entry-fee")}
+          firstFeeName={CREATE_FUND_FIELDS.entryFee}
+          firstFeeDescription={t(
             "create-fund-page.settings.hints.entry-fee-description",
             { maxFee: maxEntryFee }
           )}
@@ -114,7 +117,12 @@ const _CreateFundSettings: React.FC<Props> = ({
         setFieldValue={setValue}
         assetCurrency={FUND_CURRENCY}
       />
-      <CreateAssetNavigation asset={ASSET.FUND} isSuccessful={!errorMessage} />
+      <Row>
+        <CreateAssetNavigation
+          asset={ASSET.FUND}
+          isSuccessful={!errorMessage}
+        />
+      </Row>
     </HookForm>
   );
 };

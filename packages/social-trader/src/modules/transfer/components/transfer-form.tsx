@@ -1,12 +1,10 @@
-import "./transfer-form.scss";
-
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -34,6 +32,8 @@ import { minTransferAmountsSelector } from "reducers/platform-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
+
+import "./transfer-form.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
   currentItem,
@@ -131,45 +131,45 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit={setValuesFromPropsAndSubmit}
     >
       <DialogTop title={title}>
-        <TransferSelectField
-          currency={selectedSourceItem.currency}
-          name={TRANSFER_FORM_FIELDS.sourceId}
-          value={formattedAvailableSourceItem}
-          label={t("transfer.from")}
-          onChange={onChangeSourceId}
-          items={sourceItems}
-          sourceType={sourceType}
-        />
+        <Row large>
+          <TransferSelectField
+            currency={selectedSourceItem.currency}
+            name={TRANSFER_FORM_FIELDS.sourceId}
+            value={formattedAvailableSourceItem}
+            label={t("transfer.from")}
+            onChange={onChangeSourceId}
+            items={sourceItems}
+            sourceType={sourceType}
+          />
+        </Row>
       </DialogTop>
       <DialogBottom>
-        <DialogField>
-          <TransferSelectField
-            currency={selectedDestinationItem.currency}
-            name={TRANSFER_FORM_FIELDS.destinationId}
-            value={formattedAvailableDestinationItem}
-            label={t("transfer.to")}
-            onChange={onChangeDestinationId}
-            items={destinationItemsWithoutCurrent}
-            sourceType={destinationType}
-          />
-        </DialogField>
-        <DialogField>
-          <InputAmountField
-            name={TRANSFER_FORM_FIELDS.amount}
-            label={t("transfer.amount")}
-            currency={selectedSourceItem.currency}
-            setMax={setMax}
-            isAllowed={isAmountAllow(sourceItems, sourceId)}
-          />
-        </DialogField>
+        <TransferSelectField
+          currency={selectedDestinationItem.currency}
+          name={TRANSFER_FORM_FIELDS.destinationId}
+          value={formattedAvailableDestinationItem}
+          label={t("transfer.to")}
+          onChange={onChangeDestinationId}
+          items={destinationItemsWithoutCurrent}
+          sourceType={destinationType}
+        />
+        <InputAmountField
+          name={TRANSFER_FORM_FIELDS.amount}
+          label={t("transfer.amount")}
+          currency={selectedSourceItem.currency}
+          setMax={setMax}
+          isAllowed={isAmountAllow(sourceItems, sourceId)}
+        />
         {!!amount &&
           selectedDestinationItem.currency !== selectedSourceItem.currency && (
-            <span>{`≈ ${formatCurrencyValue(
-              +amount / rate,
-              selectedDestinationItem.currency
-            )} ${selectedDestinationItem.currency}`}</span>
+            <Row>
+              <span>{`≈ ${formatCurrencyValue(
+                +amount / rate,
+                selectedDestinationItem.currency
+              )} ${selectedDestinationItem.currency}`}</span>
+            </Row>
           )}
-        <DialogError error={errorMessage} />
+        {errorMessage && <FormError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}

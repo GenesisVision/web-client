@@ -7,8 +7,6 @@ export const SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
 
 export const DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 export const DATE_RANGE_MAX_FILTER_NAME = "dateTo";
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
 
 export type SERVER_DATE_NAME =
   | "from"
@@ -27,20 +25,20 @@ export enum DATA_RANGE_FILTER_TYPES {
 
 export interface IDataRangeFilterValue {
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart?: Date | string | number;
-  dateEnd?: Date | string | number;
+  [DATE_RANGE_MIN_FILTER_NAME]?: string;
+  [DATE_RANGE_MAX_FILTER_NAME]?: string;
 }
 
 export const ASSET_TABLE_DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   type: DATA_RANGE_FILTER_TYPES.LAST_MONTH,
-  dateStart: dateFrom("month"),
-  dateEnd: dateTo()
+  [DATE_RANGE_MIN_FILTER_NAME]: dateFrom("month"),
+  [DATE_RANGE_MAX_FILTER_NAME]: dateTo()
 };
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   type: DATA_RANGE_FILTER_TYPES.ALL,
-  dateStart: undefined,
-  dateEnd: undefined
+  [DATE_RANGE_MIN_FILTER_NAME]: undefined,
+  [DATE_RANGE_MAX_FILTER_NAME]: undefined
 };
 
 export type DateRangeFilterType = IDataRangeFilterValue;

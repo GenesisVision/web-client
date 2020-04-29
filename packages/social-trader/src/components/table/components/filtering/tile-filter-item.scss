@@ -3,6 +3,7 @@
 
 .tile-filter-item {
   position: relative;
+  padding-bottom: $padding-xxsmall;
   &__button-remove {
     cursor: pointer;
     box-sizing: border-box;

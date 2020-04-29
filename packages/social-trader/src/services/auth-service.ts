@@ -1,8 +1,11 @@
-//@ts-ignore TODO fix types
-import * as jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 import { NextPageContext } from "next";
 import { getCookie, removeCookie, setCookie } from "utils/cookie";
 import { getTokenName } from "utils/get-token-name";
+
+export type TokenDto = {
+  exp: number;
+};
 
 const canParseToken = (token: string): boolean => {
   try {
@@ -13,9 +16,9 @@ const canParseToken = (token: string): boolean => {
   }
 };
 
-const decodeToken = (token: string): any => {
-  if (!canParseToken(token)) return false;
-  return jwt_decode(token);
+const decodeToken = (token: string): TokenDto | null => {
+  if (!canParseToken(token)) return null;
+  return jwt_decode<TokenDto>(token);
 };
 
 const storeToken = (token: string): void => {
@@ -34,7 +37,7 @@ const getAuthArg = (ctx?: NextPageContext): string => {
     return "";
   }
 
-  return generateTokenString(token);
+  return token;
 };
 
 const isAuthenticated = (
@@ -43,7 +46,7 @@ const isAuthenticated = (
 ): boolean => {
   if (!canParseToken(token)) return false;
   const dateNowSec = Math.floor(Date.now() / 1000);
-  const decodedToken = jwt_decode(token);
+  const decodedToken = jwt_decode<TokenDto>(token);
   return decodedToken.exp > dateNowSec;
 };
 

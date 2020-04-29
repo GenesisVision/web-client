@@ -7,7 +7,7 @@
     box-sizing: border-box;
     background-color: lighten($secondary-background-color, 2%);
     &--fixed {
-      max-width: 400px;
+      max-width: $modal-width;
     }
     &--small {
       @include font-size($font-size-common);
@@ -26,10 +26,6 @@
     }
     &--big {
       @include adaptive-full-padding($popover-padding-large);
-      max-width: 100%;
-      @include media-breakpoint-landscape-phone() {
-        max-width: $modal-width;
-      }
     }
     &--dark {
       background-color: $secondary-background-color;

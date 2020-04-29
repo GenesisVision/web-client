@@ -8,7 +8,6 @@ import { WalletBaseData } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum } from "utils/types";
 import { lazy, number, object } from "yup";
 
 export const depositValidationSchema = ({
@@ -16,15 +15,13 @@ export const depositValidationSchema = ({
   wallets,
   availableToInvestInAsset,
   minDeposit,
-  t,
-  currency
+  t
 }: {
   rate: number;
   wallets: WalletBaseData[];
   t: TFunction;
   minDeposit: MinDepositType;
   availableToInvestInAsset: number;
-  currency: CurrencyEnum;
 }) =>
   lazy<IDepositFormValues>(values => {
     const walletId = values[DEPOSIT_FORM_FIELDS.walletId];
@@ -45,7 +42,7 @@ export const depositValidationSchema = ({
           +min,
           t("deposit-asset.validation.amount-min-value", {
             min,
-            currency
+            currency: walletCurrency
           })
         )
         .max(

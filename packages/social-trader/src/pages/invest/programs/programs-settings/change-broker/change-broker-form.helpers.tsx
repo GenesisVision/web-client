@@ -1,4 +1,5 @@
 import FormTextField from "components/assets/fields/form-text-field";
+import { Row } from "components/row/row";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -25,8 +26,10 @@ export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
 }) => {
   const [t] = useTranslation();
   return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
-    <FormTextField topPadding accent>
-      {t("program-settings.broker.text-warning")}
-    </FormTextField>
+    <Row>
+      <FormTextField topPadding accent>
+        {t("program-settings.broker.text-warning")}
+      </FormTextField>
+    </Row>
   ) : null;
 };

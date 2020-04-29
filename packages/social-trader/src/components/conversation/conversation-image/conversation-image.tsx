@@ -1,0 +1,55 @@
+import classNames from "classnames";
+import ImageBaseElement from "components/avatar/image-base.element";
+import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
+import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
+import { IConversationImage } from "components/conversation/conversation.types";
+import { MutedText } from "components/muted-text/muted-text";
+import { SIZES } from "constants/constants";
+import useIsOpen from "hooks/is-open.hook";
+import React from "react";
+
+import "./conversation-image.scss";
+
+const EmptyImage: React.FC<{ imageClassName: string }> = ({
+  imageClassName
+}) => {
+  return (
+    <div className={imageClassName}>
+      <MutedText>Image not found</MutedText>
+    </div>
+  );
+};
+
+const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
+  const [open, setOpen, setClose] = useIsOpen();
+
+  return (
+    <>
+      <ImageBaseElement
+        onClick={setOpen}
+        DefaultImageComponent={EmptyImage}
+        defaultImageClassName={"conversation-image__empty"}
+        className={classNames("conversation-image", {
+          "conversation-image--small": size === SIZES.SMALL,
+          "conversation-image--middle": size === SIZES.MIDDLE,
+          "conversation-image--large": size === SIZES.LARGE
+        })}
+        src={getImageUrlBySize(images[index], size)}
+      />
+      <ConversationImagesFull
+        open={open}
+        onClose={setClose}
+        images={images}
+        initIndex={index}
+      />
+    </>
+  );
+};
+
+interface Props {
+  index: number;
+  size: SIZES;
+  images: IConversationImage[];
+}
+
+export const ConversationImage = React.memo(_ConversationImage);

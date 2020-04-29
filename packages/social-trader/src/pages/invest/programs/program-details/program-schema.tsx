@@ -1,5 +1,3 @@
-import filesService from "services/file-service";
-
 import { ProgramDescriptionDataType } from "./program-details.types";
 
 const isFollow = (description: ProgramDescriptionDataType) => {
@@ -15,5 +13,5 @@ export const getSchema = (details: ProgramDescriptionDataType) => ({
   description: details.publicInfo.description,
   broker: details.brokerDetails.name,
   feesAndCommissionsSpecification: "", //TODO
-  logo: filesService.getFileUrl(details.publicInfo.logo)
+  logo: details.publicInfo.logoUrl
 });

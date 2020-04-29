@@ -1,7 +1,7 @@
-import { AssetContentBlock } from "components/assets/asset-fields/asset-content.block";
-import { AssetTabsBlock } from "components/assets/asset-fields/asset-tabs.block";
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
+import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { Row } from "components/row/row";
 import { Broker } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import React, { useCallback, useState } from "react";
@@ -33,7 +33,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
 
   return (
     <div>
-      <AssetTabsBlock value={tab}>
+      <GVTabs value={tab}>
         <GVTab
           onClick={confirmNavigateToBroker}
           value={TAB.BROKER}
@@ -43,8 +43,8 @@ const _CreateAccountContainer: React.FC<Props> = ({
           value={TAB.SETTINGS}
           label={t("create-account-page.tabs.settings")}
         />
-      </AssetTabsBlock>
-      <AssetContentBlock>
+      </GVTabs>
+      <Row large>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
             brokers={brokers}
@@ -56,7 +56,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
         {tab === TAB.SETTINGS && (
           <CreateAccountSettingsSection broker={selectedBroker} />
         )}
-      </AssetContentBlock>
+      </Row>
     </div>
   );
 };

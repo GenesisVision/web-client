@@ -34,7 +34,7 @@ const _ToggleAssetFavoriteButton: React.FC<IToggleAssetFavoriteButtonProps> = ({
         assetType
       });
     onApply && onApply();
-  }, [id, isFavorite, assetType]);
+  }, [id, isFavorite, assetType, asset, updateRow]);
   const { sendRequest, isPending } = useApiRequest({
     request: toggleFavoriteAsset,
     middleware: [middleware]

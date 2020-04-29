@@ -1,5 +1,3 @@
-import "./asset-settings.scss";
-
 import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
@@ -8,6 +6,7 @@ import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/prog
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import "./asset-settings.scss";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
@@ -31,7 +30,13 @@ const _AssetsEditPage: React.FC<Props> = ({
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, resetForm) => {
       const investmentLimit =
-        values.investmentLimit !== undefined ? values.investmentLimit : null;
+        values.investmentLimit !== undefined
+          ? values.investmentLimit
+          : description.programDetails.availableInvestmentLimit;
+      const logo =
+        values.logo?.image?.cropped !== undefined
+          ? values.logo
+          : { src: description.publicInfo.logo };
       const currentValues = {
         tradesDelay: description.tradesDelay,
         exitFee: description.exitFeeSelected, //exitFee
@@ -39,14 +44,14 @@ const _AssetsEditPage: React.FC<Props> = ({
         successFee: description.successFeeSelected,
         title: description.publicInfo.title,
         stopOutLevel: description.stopOutLevelSelected, // TODO current != selected ? current (selected) : current
-        description: description.publicInfo.description,
-        logo: { src: description.publicInfo.logo }
+        description: description.publicInfo.description
       };
       return editRequest({
         id: description.id,
         editAssetData: {
           ...currentValues,
           ...values,
+          logo,
           investmentLimit
         }
       }).finally(resetForm);

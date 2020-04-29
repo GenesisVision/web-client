@@ -1,5 +1,4 @@
-import "./first-slider.scss";
-
+import { useTranslation } from "i18n";
 import {
   SliderControls,
   SliderControlsWrapper,
@@ -12,9 +11,12 @@ import {
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
+import { SignupButton } from "pages/landing-page/components/signup-button/signup-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
+
+import "./first-slider.scss";
 
 interface Props {
   className?: string;
@@ -25,6 +27,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
   className,
   slidesItems
 }) => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
     initial: {
@@ -79,10 +82,10 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
               style={rest as any}
             >
               <animated.div style={{ transform }}>
-                <SliderTitle>{item.title}</SliderTitle>
+                <SliderTitle>{t(item.title)}</SliderTitle>
               </animated.div>
               <animated.div style={{ transform }}>
-                <SliderText>{item.text}</SliderText>
+                <SliderText>{t(item.text)}</SliderText>
               </animated.div>
             </animated.div>
           ))}
@@ -90,7 +93,18 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
         <SliderControlsWrapper>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <JoinButton href={item.link}>Join</JoinButton>
+              {item.link ? (
+                <JoinButton href={item.link}>
+                  {t("landing-page:buttons.join")}
+                </JoinButton>
+              ) : (
+                <SignupButton
+                  color="primary"
+                  eventLabel={t("landing-page:buttons.join")}
+                >
+                  {t("landing-page:buttons.join")}
+                </SignupButton>
+              )}
             </animated.div>
           ))}
           <SliderControls

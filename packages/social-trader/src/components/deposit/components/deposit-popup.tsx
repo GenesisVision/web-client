@@ -1,5 +1,3 @@
-import "./deposit.scss";
-
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { ASSET } from "constants/constants";

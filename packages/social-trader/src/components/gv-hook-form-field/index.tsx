@@ -5,6 +5,7 @@ const getErrorMessage = (obj: FieldError) =>
   "message" in obj ? obj.message : obj;
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
+  disabled,
   onChange = () => {},
   component: Component,
   name,
@@ -15,7 +16,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
     triggerValidation,
     setValue,
     watch,
-    formState: { touched },
+    formState: { touched, isSubmitting },
     errors,
     register
   } = useFormContext();
@@ -35,6 +36,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   return (
     <Component
       {...props}
+      disabled={isSubmitting || disabled}
       onChange={onChange}
       triggerValidation={triggerValidation}
       name={name}

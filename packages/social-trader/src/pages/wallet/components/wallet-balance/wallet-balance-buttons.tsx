@@ -1,5 +1,3 @@
-import "./wallet-balance.scss";
-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";

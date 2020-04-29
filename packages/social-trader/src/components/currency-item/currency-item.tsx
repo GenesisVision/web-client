@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
@@ -33,17 +34,18 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
     <div data-test-id={symbol}>
       <Row>
         {logo && (
-          <div
+          <RowItem
+            small={small}
             className={classNames("currency-item__icon", {
               "currency-item__icon--medium": !small,
               "currency-item__icon--small": small
             })}
           >
             <WalletImage url={logo} alt={name || symbol} />
-          </div>
+          </RowItem>
         )}
         {name && (
-          <div>
+          <RowItem>
             {big ? (
               <h1 className={classNames("currency-item__name--big", className)}>
                 {name}
@@ -54,7 +56,7 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
               </div>
             )}
             {rate && <div className="currency-item__rate">{rateString}</div>}
-          </div>
+          </RowItem>
         )}
       </Row>
     </div>

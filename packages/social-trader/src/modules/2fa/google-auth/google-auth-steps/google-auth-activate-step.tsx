@@ -1,4 +1,6 @@
+import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
@@ -46,34 +48,41 @@ export const GoogleStep3: React.FC<Props> = ({
       <div className="google-auth__count">03</div>
       <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
       <HookForm form={form} onSubmit={onSubmit}>
-        <GVHookFormField
-          showCorrect
-          name={FIELDS.code}
-          type="tel"
-          label={t("2fa-page.google-code")}
-          component={SimpleNumberField}
-          autoComplete="off"
-          autoFocus
-          InputComponent={NumberFormat}
-          allowNegative={false}
-          format="######"
-        />
-        {enablePassword && (
+        <Row>
           <GVHookFormField
-            name={FIELDS.password}
-            type="password"
-            label={t("2fa-page.password")}
-            component={SimpleTextField}
-            autocomplete="new-password"
+            showCorrect
+            name={FIELDS.code}
+            type="tel"
+            label={t("2fa-page.google-code")}
+            component={SimpleNumberField}
+            autoComplete="off"
+            autoFocus
+            InputComponent={NumberFormat}
+            allowNegative={false}
+            format="######"
           />
+        </Row>
+        {enablePassword && (
+          <Row>
+            <GVHookFormField
+              name={FIELDS.password}
+              type="password"
+              label={t("2fa-page.password")}
+              component={SimpleTextField}
+              autocomplete="new-password"
+            />
+          </Row>
         )}
-        <div className="form-error">{errorMessage}</div>
-        <SubmitButton
-          className="google-auth__button"
-          isSuccessful={!errorMessage}
-        >
-          {t("buttons.activate")}
-        </SubmitButton>
+        {errorMessage && (
+          <Row>
+            <FormError error={errorMessage} />
+          </Row>
+        )}
+        <Row>
+          <SubmitButton isSuccessful={!errorMessage}>
+            {t("buttons.activate")}
+          </SubmitButton>
+        </Row>
       </HookForm>
     </div>
   );

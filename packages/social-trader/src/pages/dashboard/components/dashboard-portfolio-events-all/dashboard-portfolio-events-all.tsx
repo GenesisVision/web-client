@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Page from "components/page/page";
@@ -16,13 +16,18 @@ import {
   fetchTradingHistory
 } from "../../services/dashboard.service";
 
+enum TABS {
+  INVESTMENT_HISTORY = "Investment history",
+  TRADING_HISTORY = "Trading history"
+}
+
 const _PortfolioEventsAllComponent: React.FC = () => {
   const { tab, setTab } = useTab<TABS>(TABS.INVESTMENT_HISTORY);
   const [t] = useTranslation();
   const assetTypeValues = useSelector(assetTypeValuesSelector);
   return (
     <Page title={t(`dashboard-page.portfolio-events.title`)}>
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <DetailsBlockTabs value={tab} onChange={setTab}>
           <GVTab
             value={TABS.INVESTMENT_HISTORY}
@@ -57,15 +62,10 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             dateRangeStartLabel={t("filters.date-range.account-creation")}
           />
         )}
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };
-
-enum TABS {
-  INVESTMENT_HISTORY = "Investment history",
-  TRADING_HISTORY = "Trading history"
-}
 
 const PortfolioEventsAllComponent = React.memo(_PortfolioEventsAllComponent);
 export default PortfolioEventsAllComponent;

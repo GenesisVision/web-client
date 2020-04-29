@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTFAStatus } from "utils/2fa";
 import { postponeCallback } from "utils/hook-form.helpers";
+import { MiddlewareDispatch } from "utils/types";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm, {
@@ -18,7 +19,7 @@ import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-req
 const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
   const { twoFactorEnabled } = useTFAStatus();
   const wallets = useSelector(walletsSelector);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<MiddlewareDispatch>();
   const [isSuccess, setSuccess, setNotSuccess] = useIsOpen();
   const updateWalletMiddleware = () => {
     setSuccess();
@@ -43,7 +44,7 @@ const _WalletWithdrawContainer: React.FC<Props> = ({ currentWallet }) => {
       currentWallet={currentWallet}
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
-      twoFactorEnabled={twoFactorEnabled}
+      twoFactorEnabled={twoFactorEnabled!}
     />
   );
 };

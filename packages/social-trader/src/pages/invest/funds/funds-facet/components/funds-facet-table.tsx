@@ -21,6 +21,7 @@ import {
 } from "./funds-facet.constants";
 
 const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
+  initCurrency,
   title,
   sorting,
   getItems,
@@ -32,7 +33,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
   const composeFiltering = useCallback(
     () =>
       ({
-        [CURRENCY_MAP_NAME]: currency,
+        [CURRENCY_MAP_NAME]: initCurrency || currency,
         dateRange: {
           ...DEFAULT_DATE_RANGE_FILTER_VALUE,
           type: mapServerTimeFrameToFilterType(timeframe)
@@ -72,6 +73,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
 };
 
 export interface IFundsFacetTableProps {
+  initCurrency?: CurrencyEnum;
   title?: string;
   sorting: string;
   timeframe: Timeframe;

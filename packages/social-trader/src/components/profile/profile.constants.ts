@@ -1,5 +1,8 @@
 export const PROFILE = "profile";
 export const PROFILE_ROUTE = `/${PROFILE}`;
+
+export const PERSONAL_DETAILS = "personal-details";
+export const PERSONAL_DETAILS_ROUTE = `${PROFILE_ROUTE}/${PERSONAL_DETAILS}`;
 export const EDIT = "edit";
 export const PROFILE_EDIT_ROUTE = `${PROFILE_ROUTE}/${EDIT}`;
 export const SETTINGS = "settings";

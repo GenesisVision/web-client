@@ -130,6 +130,8 @@ const isServer = () => {
   return global.hasOwnProperty("window");
 };
 
+export const getRandomBoolean = (): boolean => !!getRandomInteger(0, 1);
+
 const getRandomInteger = (min: number = 0, max: number = 100): number =>
   Math.floor(min + Math.random() * (max + 1 - min));
 

@@ -1,7 +1,7 @@
-import "./notify-button.scss";
-
+import { Center } from "components/center/center";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import useApiRequest from "hooks/api-request.hook";
@@ -11,6 +11,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
+
+import "./notify-button.scss";
 
 const _NotifyButton: React.FC<Props> = ({
   broker,
@@ -32,15 +34,16 @@ const _NotifyButton: React.FC<Props> = ({
   });
   const handleClick = useCallback(() => sendRequest(), []);
   return (
-    <div className="notify-button">
-      <GVButton
-        size={GV_BTN_SIZE.BIG}
-        className="asset-details-description__invest-btn"
-        onClick={handleClick}
-        disabled={Boolean(data || isPending || !canInvest)}
-      >
-        {t("buttons.notify")}
-      </GVButton>
+    <Center>
+      <RowItem>
+        <GVButton
+          size={GV_BTN_SIZE.BIG}
+          onClick={handleClick}
+          disabled={Boolean(data || isPending || !canInvest)}
+        >
+          {t("buttons.notify")}
+        </GVButton>
+      </RowItem>
       <Tooltip
         render={() => (
           <TooltipContent>
@@ -50,7 +53,7 @@ const _NotifyButton: React.FC<Props> = ({
       >
         <div className="notify-button__hint">?</div>
       </Tooltip>
-    </div>
+    </Center>
   );
 };
 

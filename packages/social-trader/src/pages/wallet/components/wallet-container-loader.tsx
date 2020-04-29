@@ -11,7 +11,7 @@ export const walletDataCreator = (): WalletData => ({
   totalCcy: getRandomInteger(1, 1000),
   id: getRandomWord(),
   title: getRandomWord(),
-  logo: getRandomWord(),
+  logoUrl: "",
   isDepositEnabled: false,
   isWithdrawalEnabled: false,
   withdrawalCommission: getRandomInteger(1, 1000),
@@ -25,6 +25,7 @@ export const walletDataCreator = (): WalletData => ({
 });
 
 export const walletMultiSummaryLoaderData: WalletSummary = {
+  genesisMarketsDiscountPercent: 0,
   grandTotal: {
     currency: "GVT",
     available: getRandomInteger(1, 1000),
@@ -34,6 +35,5 @@ export const walletMultiSummaryLoaderData: WalletSummary = {
   },
   wallets: Array(4)
     .fill("")
-    .map(walletDataCreator),
-  payFeesWithGvt: false
+    .map(walletDataCreator)
 };

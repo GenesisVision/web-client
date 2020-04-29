@@ -1,5 +1,5 @@
+import ProfileContainer from "components/profile/components/profile/profile-container";
 import ProfileLayout from "components/profile/profile-layout";
-import ProfileContainer from "modules/profile/profile-container";
 import * as React from "react";
 
 const _ProfileEditPage: React.FC = () => (

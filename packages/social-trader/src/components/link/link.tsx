@@ -7,8 +7,10 @@ import {
   normalizeUrlString,
   pushHistoryState
 } from "./link.helper";
+import "./link.scss";
 
 const Link: React.FC<LinkProps> = ({
+  white,
   title,
   to,
   onClick,
@@ -47,7 +49,12 @@ const Link: React.FC<LinkProps> = ({
   const linkTitle = title || (typeof children === "string" && children) || "";
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
-      <a title={linkTitle} onClick={handleClick} {...other}>
+      <a
+        className={white ? "link--white" : ""}
+        title={linkTitle}
+        onClick={handleClick}
+        {...other}
+      >
         {children}
       </a>
     </NextLink>
@@ -57,6 +64,7 @@ const Link: React.FC<LinkProps> = ({
 export default Link;
 
 export interface LinkProps {
+  white?: boolean;
   title?: string;
   to?: ToType | string;
   className?: string;

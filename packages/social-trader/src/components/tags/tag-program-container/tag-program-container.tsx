@@ -17,8 +17,8 @@ const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
       {tags.map(
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
-            <RowItem small>
-              <TagItem name={tag.name} color={tag.color} key={idx} />
+            <RowItem small key={idx}>
+              <TagItem name={tag.name} color={tag.color} />
             </RowItem>
           )
       )}

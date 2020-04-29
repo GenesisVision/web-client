@@ -3,15 +3,17 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
+  const { t } = useTranslation();
   return animation ? (
     <>
       {item.imageBg && (
         <ImageBaseElement
           src={item.imageBg}
-          alt={item.title}
-          title={item.title}
+          alt={t(item.title)}
+          title={t(item.title)}
           className="slider__img slider__img--animation-bg"
         />
       )}
@@ -19,8 +21,8 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
         <img
           key={index}
           src={image}
-          alt={item.title}
-          title={item.title}
+          alt={t(item.title)}
+          title={t(item.title)}
           style={{ animationDelay: `${500 * index + 500}ms` }}
           className="slider__img slider__img--animation"
         />
@@ -29,8 +31,8 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
   ) : (
     <ImageBaseElement
       src={item.imageOptimization}
-      alt={item.title}
-      title={item.title}
+      alt={t(item.title)}
+      title={t(item.title)}
       className="slider__img"
     />
   );

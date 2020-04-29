@@ -1,5 +1,3 @@
-import "./referral-program.scss";
-
 import DetailsBlock from "components/details/details-block";
 import ProfileLayout from "components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "components/profile/profile.constants";
@@ -13,6 +11,7 @@ import { getRandomInteger } from "utils/helpers";
 import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
 import { ReferralFriendsTable } from "./referral-friends-table";
 import { ReferralHistoryTable } from "./referral-history-table";
+import "./referral-program.scss";
 import { ReferralRewardsBlock } from "./referral-reward-block";
 import {
   getProfile,

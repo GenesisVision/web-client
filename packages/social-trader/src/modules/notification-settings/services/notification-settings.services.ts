@@ -1,24 +1,25 @@
 import { ASSETS_TYPES } from "constants/constants";
+import { NotificationSettingConditionType, NotificationType } from "gv-api-web";
 import notificationsApi from "services/api-client/notifications-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 
 export const fetchNotificationSettings = () => {
-  const authorization = authService.getAuthArg();
-  return notificationsApi.getNotificationsSettings(authorization);
+  return api.notifications().getNotificationsSettings();
 };
 
 export const removeNotificationMethod = ({ id }: { id: string }) =>
-  notificationsApi.removeNotificationsSettings(id, authService.getAuthArg());
+  api.notifications().removeNotificationsSettings(id);
 
 export interface IAddNotificationSettingProps {
   assetId?: string;
   managerId?: string;
-  type?: string;
-  conditionType?: string;
+  type?: NotificationType;
+  conditionType?: NotificationSettingConditionType;
   conditionAmount?: number;
 }
 export const addNotificationMethod = (opts: IAddNotificationSettingProps) =>
-  notificationsApi.addNotificationsSettings(authService.getAuthArg(), opts);
+  api.notifications().addNotificationsSettings(opts);
 
 export const toggleNotificationMethod = ({
   id,
@@ -26,21 +27,13 @@ export const toggleNotificationMethod = ({
 }: {
   id: string;
   enabled: boolean;
-}) =>
-  notificationsApi.toggleNotificationSettings(
-    id,
-    enabled,
-    authService.getAuthArg()
-  );
+}) => api.notifications().toggleNotificationSettings(id, enabled);
 
 export const getFundNotifications = (id: string) =>
-  notificationsApi.getNotificationsFundSettings(id, authService.getAuthArg());
+  api.notifications().getNotificationsFundSettings(id);
 
 export const getProgramNotifications = (id: string) =>
-  notificationsApi.getNotificationsProgramSettings(
-    id,
-    authService.getAuthArg()
-  );
+  api.notifications().getNotificationsProgramSettings(id);
 
 export const getAssetNotifications = (assetType: ASSETS_TYPES) =>
   assetType === ASSETS_TYPES.Fund

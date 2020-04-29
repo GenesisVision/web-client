@@ -1,7 +1,9 @@
 import "./details-description-control.scss";
 
 import classNames from "classnames";
-import { ToType } from "components/link/link";
+import Link, { ToType } from "components/link/link";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import React from "react";
 
 interface IDetailsDescriptionControlProps
@@ -10,25 +12,25 @@ interface IDetailsDescriptionControlProps
   className?: string;
   onClick?(): void;
   to?: ToType;
-  tag: React.ComponentType<any> | string;
 }
 const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   children,
   text,
-  tag: Tag,
   className,
   onClick,
   to
 }) => {
   return (
-    <Tag
-      className={classNames("details-description-control", className)}
+    <Link
+      className={classNames("details-description-control--button", className)}
       onClick={onClick}
       to={to}
     >
-      <div className="details-description-control__text">{text}</div>
-      {children}
-    </Tag>
+      <Row className="details-description-control">
+        <RowItem className="details-description-control__text">{text}</RowItem>
+        {children}
+      </Row>
+    </Link>
   );
 };
 

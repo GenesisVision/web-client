@@ -4,9 +4,6 @@
 
 .profile-widget {
   &__content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     cursor: pointer;
 
     &:hover {
@@ -14,10 +11,6 @@
         background-color: lighten($secondary-color, 5%);
       }
     }
-  }
-
-  &__avatar {
-    margin-right: $padding-xxsmall;
   }
 }
 

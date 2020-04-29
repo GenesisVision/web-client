@@ -1,17 +1,17 @@
-import "./deposit-details.scss";
-
+import { Row } from "components/row/row";
 import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
 import { HookFormWalletSelect as WalletSelect } from "components/wallet-select/wallet-select";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { convertToCurrency } from "utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
 import useAssetSection from "../asset-section.hook";
+import "./deposit-details.scss";
 import InputDepositAmount from "./input-deposit-amount";
-import { formatCurrencyValue } from "utils/formatter";
 
 const _DepositDetailsBlock: React.FC<Props> = ({
   hide,

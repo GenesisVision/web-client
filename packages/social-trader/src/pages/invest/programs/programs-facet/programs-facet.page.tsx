@@ -1,6 +1,4 @@
-import "./programs-facet.scss";
-
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
@@ -30,14 +28,14 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
       showTitle
       title={`${t("programs-page.title")} ${t(`facets.${id}`)}`}
     >
-      <DetailsBlock table>
+      <DefaultTableBlock>
         <FacetContainer
           id={id}
           asset={FACET_ASSET.PROGRAMS}
           TableContainer={ProgramsFacetTable}
           getItems={getPrograms}
         />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </Page>
   );
 };

@@ -8,9 +8,9 @@ import {
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { ASSET } from "constants/constants";
@@ -62,8 +62,7 @@ const _DepositForm: React.FC<Props> = ({
       wallets,
       availableToInvestInAsset,
       minDeposit,
-      t,
-      currency
+      t
     }),
     mode: "onChange"
   });
@@ -104,13 +103,13 @@ const _DepositForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <WalletField
             wallets={wallets}
             name={DEPOSIT_FORM_FIELDS.walletId}
             onChange={onWalletChange}
           />
-        </DialogField>
+        </Row>
         <InputAmountField
           setMin={setMinAmount}
           name={DEPOSIT_FORM_FIELDS.amount}
@@ -119,14 +118,14 @@ const _DepositForm: React.FC<Props> = ({
           isAllowed={isAllow(wallet.currency)}
           setMax={setMaxAmount}
         />
-        <ConvertCurrency
-          condition={currency !== wallet.currency}
-          amount={+amount}
-          rate={rate}
-          currency={currency}
-        />
+        {currency !== wallet.currency && (
+          <Row>
+            <ConvertCurrency amount={+amount} rate={rate} currency={currency} />
+          </Row>
+        )}
         {!ownAsset && (
           <InvestorFees
+            asset={asset}
             fees={fees}
             hasEntryFee={hasEntryFee}
             amount={+amount}
@@ -135,7 +134,7 @@ const _DepositForm: React.FC<Props> = ({
             walletCurrency={wallet.currency}
           />
         )}
-        <DialogError error={errorMessage} />
+        {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton
             isSuccessful={!errorMessage}

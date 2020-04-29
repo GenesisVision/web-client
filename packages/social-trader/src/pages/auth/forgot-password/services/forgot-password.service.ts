@@ -3,13 +3,16 @@ import {
   ForgotPasswordViewModel,
   ResetPasswordViewModel
 } from "gv-api-web";
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const forgotPassword = (body: ForgotPasswordViewModel) =>
-  authApi.forgotPassword({ body }).then(() => body);
+  api
+    .auth()
+    .forgotPassword({ body })
+    .then(() => body);
 
 export const restorePassword = (model: ResetPasswordViewModel) =>
-  authApi.resetPassword({ body: model });
+  api.auth().resetPassword({ body: model });
 
 export const sendForgotPasswordEmail = (values: {
   captchaCheckResult: CaptchaCheckResult;

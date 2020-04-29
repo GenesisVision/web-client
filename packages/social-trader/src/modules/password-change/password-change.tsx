@@ -7,12 +7,13 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { MiddlewareDispatch } from "utils/types";
 
 import PasswordChangeForm from "./password-change-form";
 import { changePassword } from "./service/password-change.service";
 
 const _PasswordChange: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<MiddlewareDispatch>();
   const { errorMessage, sendRequest } = useApiRequest({
     request: values => dispatch(changePassword(values))
   });

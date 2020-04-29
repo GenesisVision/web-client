@@ -1,5 +1,3 @@
-import "./program-short.scss";
-
 import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import {
@@ -19,6 +17,8 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
+import "./program-short.scss";
+
 interface Props {
   program: ProgramDetailsListItem;
 }
@@ -33,7 +33,7 @@ const _ProgramShort: React.FC<Props> = ({ program }) => {
   return (
     <div className="program-short">
       <TableCardAvatar
-        logo={program.logo}
+        logo={program.logoUrl}
         hasAvatar
         alt={program.title}
         color={program.color}

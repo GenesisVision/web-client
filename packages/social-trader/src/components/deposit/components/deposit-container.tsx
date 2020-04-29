@@ -32,11 +32,11 @@ const _DepositContainer: React.FC<Props> = ({
   ownAsset
 }) => {
   const wallets: WalletBaseData[] = useSelector(walletsSelector).map(
-    ({ currency, available, id, logo, title }) => ({
+    ({ currency, available, id, title, logoUrl }) => ({
       currency,
       available,
       id,
-      logo,
+      logoUrl,
       rate: 1,
       title
     })

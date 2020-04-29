@@ -1,7 +1,7 @@
-import "./popover-content.block.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import "./popover-content.block.scss";
 
 export const PopoverContentCardBlock: React.FC<IPopoverContentCardBlockProps> = ({
   children,
@@ -30,7 +30,7 @@ interface IPopoverContentCardBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
   dark?: boolean;
   className?: string;
-  size?: "small" | "middle" | "big";
+  size?: "small" | "middle" | "big" | null;
   stretched?: boolean;
   fixed?: boolean;
 }

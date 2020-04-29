@@ -1,13 +1,7 @@
-import "./switch-with-question.scss";
-
-import classNames from "classnames";
+import { Center } from "components/center/center";
 import GVSwitch from "components/gv-selection/gv-switch";
-import HelpButton from "components/help-button/help-button";
-import {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
-import Tooltip from "components/tooltip/tooltip";
+import { RowItem } from "components/row-item/row-item";
+import TextWithQuestion from "components/text-with-question/text-with-question";
 import * as React from "react";
 
 const _SwitchWithQuestion: React.FC<Props> = ({
@@ -20,16 +14,14 @@ const _SwitchWithQuestion: React.FC<Props> = ({
   isPending
 }) => {
   return (
-    <div className="switch-with-question">
-      <HelpContainer tooltipContent={tooltipContent}>
-        <HelpButton
-          className={classNames("switch-with-question__question", {
-            "switch-with-question__question-button": !!tooltipContent
-          })}
-          onClick={onClickHelp}
+    <Center>
+      <RowItem small>
+        <TextWithQuestion
+          label={label}
+          onClickHelp={onClickHelp}
+          tooltipContent={tooltipContent}
         />
-      </HelpContainer>
-      <div className="switch-with-question__label">{label}</div>
+      </RowItem>
       {value !== undefined && (
         <GVSwitch
           touched={false}
@@ -40,30 +32,8 @@ const _SwitchWithQuestion: React.FC<Props> = ({
           onChange={onChange}
         />
       )}
-    </div>
+    </Center>
   );
-};
-
-const HelpContainer: React.FC<{
-  tooltipContent?: string | JSX.Element;
-} & React.HTMLAttributes<HTMLDivElement>> = ({ tooltipContent, children }) => {
-  switch (!!tooltipContent) {
-    case true:
-      return (
-        <Tooltip
-          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          render={() => tooltipContent}
-        >
-          <div className="switch-with-question__question-container">
-            {children}
-          </div>
-        </Tooltip>
-      );
-    case false:
-    default:
-      return <>{children}</>;
-  }
 };
 
 interface Props {

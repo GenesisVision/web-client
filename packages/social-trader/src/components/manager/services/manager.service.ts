@@ -1,39 +1,76 @@
+import { getConversationUserLoaderData } from "components/conversation/conversation.loader";
+import {
+  UsersListDataType,
+  UsersListItemType
+} from "components/manager/components/users-popups/users-popups.types";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import followApi from "services/api-client/follow-api";
-import fundsApi from "services/api-client/funds-api";
-import programsApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
+import { tableLoaderCreator } from "utils/helpers";
+
+export const getMockUsers = (): UsersListItemType[] =>
+  tableLoaderCreator(getConversationUserLoaderData);
+
+const getMockUsersPromise = (): Promise<UsersListDataType> =>
+  Promise.resolve({
+    items: getMockUsers(),
+    total: 100
+  });
+
+export const getFollowers = (args: {
+  id: string;
+  take: number;
+  count: number;
+}): Promise<UsersListDataType> => {
+  console.log(args);
+  return getMockUsersPromise();
+};
+
+export const getFollowing = (args: {
+  id: string;
+  take: number;
+  count: number;
+}): Promise<UsersListDataType> => getMockUsersPromise();
+
+export const followUser = (id: string) => api.social().followUser(id);
+
+export const unFollowUser = (id: string) => api.social().unfollowUser(id);
+
+export const toggleFollowUser = ({
+  id,
+  value
+}: {
+  id: string;
+  value: boolean;
+}) => {
+  const method = value ? unFollowUser : followUser;
+  return method(id);
+};
 
 export const fetchManagerFollow = (
   filter: FilteringType
-): Promise<ItemsViewModelFollowDetailsListItem> => {
-  return followApi.getFollowAssets({
-    ...filter,
-    authorization: authService.getAuthArg()
-  });
+): Promise<FollowDetailsListItemItemsViewModel> => {
+  return api.follows().getFollowAssets(filter);
 };
 
 export const fetchManagerPrograms = (
   filter: FilteringType
-): Promise<ItemsViewModelProgramDetailsListItem> => {
-  return programsApi.getPrograms({
+): Promise<ProgramDetailsListItemItemsViewModel> => {
+  return api.programs().getPrograms({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };
 
 export const fetchManagerFunds = (
   filter: FilteringType
-): Promise<ItemsViewModelFundDetailsListItem> => {
-  return fundsApi.getFunds({
+): Promise<FundDetailsListItemItemsViewModel> => {
+  return api.funds().getFunds({
     ...filter,
-    authorization: authService.getAuthArg(),
     includeWithInvestments: true
   });
 };
@@ -44,14 +81,15 @@ export const fetchManagerAssetsCount = (
   const options = {
     ownerId,
     take: 0,
-    includeWithInvestments: true,
-    authorization: authService.getAuthArg()
+    includeWithInvestments: true
   };
   return Promise.all([
-    followApi.getFollowAssets(options),
-    programsApi.getPrograms(options),
-    fundsApi.getFunds(options)
-  ]).then(([followData, programsData, fundsData]) => ({
+    api.social().getFeed({ ...options, userId: ownerId }),
+    api.follows().getFollowAssets(options),
+    api.programs().getPrograms(options),
+    api.funds().getFunds(options)
+  ]).then(([feedData, followData, programsData, fundsData]) => ({
+    postsCount: feedData.total,
     followCount: followData.total,
     programsCount: programsData.total,
     fundsCount: fundsData.total
@@ -59,7 +97,8 @@ export const fetchManagerAssetsCount = (
 };
 
 export interface IAssetsCountModel {
-  followCount: number;
-  programsCount: number;
-  fundsCount: number;
+  postsCount?: number;
+  followCount?: number;
+  programsCount?: number;
+  fundsCount?: number;
 }

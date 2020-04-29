@@ -1,0 +1,20 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.text-with-question {
+  &__label {
+    @include font-size($font-size-common);
+    font-weight: 600;
+  }
+  &__question-container {
+    display: flex;
+  }
+  &__question {
+    border: 1px solid rgba($icon-color, 0.2);
+    color: rgba($icon-color, 0.2);
+    &.switch-with-question__question-button {
+      cursor: help;
+    }
+  }
+}

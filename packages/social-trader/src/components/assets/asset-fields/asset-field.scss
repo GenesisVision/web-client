@@ -9,7 +9,7 @@
 }
 .asset-field {
   position: relative;
-  width: 230px;
+  min-width: 230px;
   @include adaptive-padding(right, $padding-xsmall);
   &:not(:last-child) {
     @include adaptive-margin(bottom, $padding-medium);

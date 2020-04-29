@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import Link from "components/link/link";
-import { normalizeUrlString } from "components/link/link.helper";
+import { useTranslation } from "i18n";
 import { useRouter } from "next/router";
 import NavSubList from "pages/landing-page/components/nav/nav-sublist";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
@@ -21,7 +21,7 @@ const _NavItem: React.FC<INavItemProps> = ({
   subNavOpen,
   onClick
 }) => {
-  const { route } = useRouter();
+  const { t } = useTranslation();
   const [subOpen, setSubOpen] = useState(subNavOpen);
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -50,17 +50,17 @@ const _NavItem: React.FC<INavItemProps> = ({
         {href && href.includes("http") ? (
           <a title={name} href={href} className="nav-list__link">
             {icon && <span className="nav-list__link-icon">{icon}</span>}
-            {name}
+            {t(name)}
           </a>
         ) : (
           <Link
-            title={name}
+            title={t(name)}
             onClick={onClick}
             to={{ pathname: href as string, state }}
             className="nav-list__link"
           >
             {icon && <span className="nav-list__link-icon">{icon}</span>}
-            {name}
+            {t(name)}
           </Link>
         )}
         {subNav && (

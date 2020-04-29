@@ -2,9 +2,6 @@
 @import "~shared/styles/_sizes";
 
 .gv-switch-wrapper {
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
   position: relative;
 }
 
@@ -103,7 +100,6 @@
     font-weight: normal;
     line-height: 1.38;
     user-select: none;
-    margin-right: 10px;
   }
 
   &__error {

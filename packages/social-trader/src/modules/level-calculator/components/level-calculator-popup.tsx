@@ -1,9 +1,11 @@
+import { Center } from "components/center/center";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
 import { KYC_ROUTE } from "components/profile/profile.constants";
+import { RowItem } from "components/row-item/row-item";
 import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import {
@@ -97,30 +99,33 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
   return (
     <div>
-      <div className="level-calculator-popup__header">
+      <Center className="level-calculator-popup__header">
         <h2 className="level-calculator-popup__heading">
           {t("level-calculator.title")}
         </h2>
-        <div>
-          <GVButton
-            size={GV_BTN_SIZE.SMALL}
-            color={"secondary"}
-            onClick={handleResetForm}
-          >
-            <span className="level-calculator-popup__reset-button-text">
-              {t("buttons.reset")}
-            </span>
-          </GVButton>
+        <Center>
+          <RowItem>
+            <GVButton
+              size={GV_BTN_SIZE.SMALL}
+              color={"secondary"}
+              onClick={handleResetForm}
+            >
+              <span className="level-calculator-popup__reset-button-text">
+                {t("buttons.reset")}
+              </span>
+            </GVButton>
+          </RowItem>
           <GVButton
             className="level-calculator-popup__close-button"
+            noPadding
             variant="text"
             color="secondary"
             onClick={onClose}
           >
             <CloseIcon />
           </GVButton>
-        </div>
-      </div>
+        </Center>
+      </Center>
 
       <div className="level-calculator-popup__program-name">
         <div className="level-calculator-popup__program-label">

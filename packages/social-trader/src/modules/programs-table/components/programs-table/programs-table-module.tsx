@@ -1,5 +1,3 @@
-import "./programs.scss";
-
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
@@ -9,6 +7,7 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row-short";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import "./programs.scss";
 
 const _ProgramTableModule: React.FC<Props> = ({
   renderMappings,
@@ -36,10 +35,7 @@ const _ProgramTableModule: React.FC<Props> = ({
       title={title}
       columns={columns || PROGRAMS_COLUMNS}
       renderHeader={column => <ProgramTableHeaderCell column={column} />}
-      renderBodyRow={(
-        program,
-        updateRow: any //TODO fix updateRow
-      ) => <ProgramTableRow updateRow={updateRow} program={program} />}
+      renderBodyRow={program => <ProgramTableRow program={program} />}
     />
   );
 };

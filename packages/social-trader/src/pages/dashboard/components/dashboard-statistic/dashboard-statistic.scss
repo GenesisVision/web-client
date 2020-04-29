@@ -3,6 +3,9 @@
 @import "~shared/styles/_sizes";
 
 .dashboard-statistic {
+  &__event-description {
+    white-space: normal !important;
+  }
   &__container {
     display: flex;
     flex-direction: column;
@@ -20,14 +23,6 @@
     justify-content: center;
     padding: $padding-xsmall;
     font-size: $font-size-common;
-  }
-  &__event-description {
-    display: flex;
-    align-items: center;
-    white-space: normal;
-  }
-  &__event-description-logo {
-    @include adaptive-margin(right, $padding-xxsmall);
   }
   &__container.details-block,
   &__container .table {

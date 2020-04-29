@@ -1,7 +1,7 @@
-import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const getLandingAssets = () =>
-  platformApi.getPlatformLandingInfo({
+  api.platform().getPlatformLandingInfo({
     eventsTake: 15,
     followTake: 6,
     programsTake: 6,

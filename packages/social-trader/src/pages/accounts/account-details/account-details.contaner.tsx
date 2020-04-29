@@ -2,7 +2,7 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
-import { ASSET, CREATE_ASSET } from "constants/constants";
+import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
 import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
@@ -10,7 +10,8 @@ import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
   getOpenPositions,
-  getTrades
+  getTrades,
+  getTradingLog
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import ProgramDetailsHistorySection, {
@@ -27,7 +28,9 @@ import {
   openPositionsSelector,
   openPositionsTableSelector,
   tradesSelector,
-  tradesTableSelector
+  tradesTableSelector,
+  tradingLogSelector,
+  tradingLogTableSelector
 } from "./reducers/account-history.reducer";
 
 const InvestmentAccountControls = dynamic(() =>
@@ -37,6 +40,11 @@ const InvestmentAccountControls = dynamic(() =>
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
   const tablesData: TProgramTablesData = {
+    tradingLog: {
+      itemSelector: tradingLogSelector,
+      dataSelector: tradingLogTableSelector,
+      getItems: getTradingLog
+    },
     openPositions: {
       itemSelector: openPositionsSelector,
       dataSelector: openPositionsTableSelector,
@@ -58,7 +66,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
         isOwnAsset={true}
-        logo={description.brokerDetails.logo}
+        logo={description.brokerDetails.logoUrl}
         title={title}
         id={description.id}
         currency={description.tradingAccountInfo.currency}
@@ -83,9 +91,11 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
       )}
       <AccountDetailsStatisticSection />
       <ProgramDetailsHistorySection
-        assetType={CREATE_ASSET.ACCOUNT}
+        isFollower={description.tradingAccountInfo.showTradingLog}
+        canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}
+        assetType={TRADE_ASSET_TYPE.ACCOUNT}
         haveDelay={false}
-        getHistoryCounts={getAccountHistoryCounts}
+        getHistoryCounts={getAccountHistoryCounts(true)}
         tablesData={tablesData}
         showCommissionRebateSometime={
           description.brokerDetails.showCommissionRebateSometime

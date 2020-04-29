@@ -1,6 +1,5 @@
 import { AmountWithCurrency, ProgramMinInvestAmount } from "gv-api-web";
-import investmentsApi from "services/api-client/investments-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { fetchRate } from "services/rate-service";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
@@ -72,7 +71,7 @@ export const programInvest: TAssetDeposit = ({
   amount,
   walletId
 }: TAssetInvestCreatorArgs) =>
-  investmentsApi.investIntoProgram(id, authService.getAuthArg(), {
+  api.investments().investIntoProgram(id, {
     walletId,
     amount
   });

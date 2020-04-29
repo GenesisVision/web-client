@@ -1,4 +1,5 @@
 import { ToType } from "components/link/link";
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -20,23 +21,31 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
   return (
     <div className="asset-details-description__settings">
       {personalDetails && (
-        <DetailsFavorite
-          asset={asset}
-          id={id}
-          isFavorite={personalDetails && personalDetails.isFavorite}
-        />
+        <Row>
+          <DetailsFavorite
+            asset={asset}
+            id={id}
+            isFavorite={personalDetails && personalDetails.isFavorite}
+          />
+        </Row>
       )}
       {personalDetails && notificationsUrl && (
-        <DetailsNotification
-          to={notificationsUrl}
-          hasNotifications={personalDetails && personalDetails.hasNotifications}
-        />
+        <Row>
+          <DetailsNotification
+            to={notificationsUrl}
+            hasNotifications={
+              personalDetails && personalDetails.hasNotifications
+            }
+          />
+        </Row>
       )}
       {isOwnAsset && !!settingsUrl && (
-        <DetailsSettingControl
-          to={settingsUrl}
-          text={t("program-details-page.description.settings")}
-        />
+        <Row>
+          <DetailsSettingControl
+            to={settingsUrl}
+            text={t("program-details-page.description.settings")}
+          />
+        </Row>
       )}
     </div>
   );

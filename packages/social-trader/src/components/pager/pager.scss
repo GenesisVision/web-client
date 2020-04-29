@@ -9,7 +9,7 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
 .pager {
   &__separator,
   &__button {
-    @extend .muted;
+    @include muted();
     display: flex;
     align-items: center;
     justify-content: center;

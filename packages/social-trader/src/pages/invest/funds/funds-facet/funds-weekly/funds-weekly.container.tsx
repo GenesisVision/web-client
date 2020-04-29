@@ -1,5 +1,3 @@
-import "pages/invest/programs/programs-facet/programs-facet.scss";
-
 import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
@@ -19,6 +17,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 export const FUNDS_WEEKLY_FACET_NAME = "challenge";
+const MAPPING_INIT_CURRENCY = "USD";
 
 const _FundsWeeklyContainer: React.FC = () => {
   const [t] = useTranslation();
@@ -54,6 +53,7 @@ const _FundsWeeklyContainer: React.FC = () => {
       </DetailsBlock>
       <DetailsBlock table>
         <FacetContainer
+          initCurrency={MAPPING_INIT_CURRENCY}
           title={t("facets.texts.all-funds")}
           id={FUNDS_WEEKLY_FACET_NAME}
           asset={FACET_ASSET.FUNDS}

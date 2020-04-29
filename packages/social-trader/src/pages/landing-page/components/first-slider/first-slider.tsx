@@ -1,5 +1,4 @@
-import "./first-slider.scss";
-
+import { useTranslation } from "i18n";
 import {
   SliderControls,
   SliderControlsWrapper,
@@ -12,8 +11,11 @@ import {
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
+import { SignupButton } from "pages/landing-page/components/signup-button/signup-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
+
+import "./first-slider.scss";
 
 interface Props {
   className?: string;
@@ -21,6 +23,7 @@ interface Props {
 }
 
 const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const countsSlides = slidesItems.length;
   const onClickLeft = useCallback(
@@ -41,12 +44,23 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
       <SliderInfoWrapper>
         <SliderInfo>
           <div className="slider__info-animate">
-            <SliderTitle>{slidesItems[index].title}</SliderTitle>
-            <SliderText>{slidesItems[index].text}</SliderText>
+            <SliderTitle>{t(slidesItems[index].title)}</SliderTitle>
+            <SliderText>{t(slidesItems[index].text)}</SliderText>
           </div>
         </SliderInfo>
         <SliderControlsWrapper>
-          <JoinButton href={slidesItems[index].link}>Join</JoinButton>
+          {slidesItems[index].link ? (
+            <JoinButton href={slidesItems[index].link}>
+              {t("landing-page:buttons.join")}
+            </JoinButton>
+          ) : (
+            <SignupButton
+              color="primary"
+              eventLabel={t("landing-page:buttons.join")}
+            >
+              {t("landing-page:buttons.join")}
+            </SignupButton>
+          )}
           <SliderControls
             onClickLeft={onClickLeft}
             onClickRight={onClickRight}

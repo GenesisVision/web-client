@@ -1,7 +1,7 @@
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import { number, object } from "yup";
 
-const inputImageShape = (t: i18next.TFunction) =>
+const inputImageShape = (t: TFunction) =>
   object().shape({
     image: object().shape({
       width: number().min(300, t("input-image.validation.resolution")),

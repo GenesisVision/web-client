@@ -58,7 +58,7 @@ const _SignUpForm: React.FC<Props> = ({
       [SIGN_UP_FORM_FIELDS.acceptTerms]: false,
       [SIGN_UP_FORM_FIELDS.isAuto]: false //TODO remove when upgrade api
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 
@@ -66,73 +66,90 @@ const _SignUpForm: React.FC<Props> = ({
 
   return (
     <HookForm className="signup-form" form={form} onSubmit={onSubmit}>
-      <GVHookFormField
-        showCorrect
-        type="text"
-        name={SIGN_UP_FORM_FIELDS.userName}
-        label={t("auth.signup.username-field-text")}
-        autoComplete="off"
-        autoFocus
-        component={SimpleTextField}
-      />
-      <GVHookFormField
-        showCorrect
-        type="email"
-        name={SIGN_UP_FORM_FIELDS.email}
-        label={t("auth.signup.email-field-text")}
-        autoComplete="email"
-        component={SimpleTextField}
-      />
-      <GVHookFormField
-        showCorrect
-        type="password"
-        name={SIGN_UP_FORM_FIELDS.password}
-        label={t("auth.signup.password-field-text")}
-        component={SimpleTextField}
-        autoComplete="new-password"
-      />
-      <GVHookFormField
-        type="checkbox"
-        color="primary"
-        name={SIGN_UP_FORM_FIELDS.privacyPolicy}
-        label={
-          <span>
-            {t("auth.signup.i-accept-text")}{" "}
-            <a
-              title={t("auth.signup.privacy-policy-text")}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={PRIVACY_POLICY_ROUTE}
-              onClick={e => e.stopPropagation()}
-            >
-              {t("auth.signup.privacy-policy-text")}
-            </a>
-          </span>
-        }
-        component={GVCheckbox}
-      />
-      <GVHookFormField
-        type="checkbox"
-        color="primary"
-        name={SIGN_UP_FORM_FIELDS.acceptTerms}
-        label={
-          <span>
-            {t("auth.signup.i-accept-text")}{" "}
-            <a
-              title={t("auth.signup.accept-terms-text")}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={TERMS_ROUTE}
-              onClick={e => e.stopPropagation()}
-            >
-              {t("auth.signup.accept-terms-text")}
-            </a>
-          </span>
-        }
-        component={GVCheckbox}
-      />
-      <FormError error={error} />
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="text"
+          name={SIGN_UP_FORM_FIELDS.userName}
+          label={t("auth.signup.username-field-text")}
+          autoComplete="off"
+          autoFocus
+          component={SimpleTextField}
+        />
+      </Row>
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="email"
+          name={SIGN_UP_FORM_FIELDS.email}
+          label={t("auth.signup.email-field-text")}
+          autoComplete="email"
+          component={SimpleTextField}
+        />
+      </Row>
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          showCorrect
+          type="password"
+          name={SIGN_UP_FORM_FIELDS.password}
+          label={t("auth.signup.password-field-text")}
+          component={SimpleTextField}
+          autoComplete="new-password"
+        />
+      </Row>
       <Row>
+        <GVHookFormField
+          type="checkbox"
+          color="primary"
+          name={SIGN_UP_FORM_FIELDS.privacyPolicy}
+          label={
+            <span>
+              {t("auth.signup.i-accept-text")}{" "}
+              <a
+                title={t("auth.signup.privacy-policy-text")}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={PRIVACY_POLICY_ROUTE}
+                onClick={e => e.stopPropagation()}
+              >
+                {t("auth.signup.privacy-policy-text")}
+              </a>
+            </span>
+          }
+          component={GVCheckbox}
+        />
+      </Row>
+      <Row>
+        <GVHookFormField
+          type="checkbox"
+          color="primary"
+          name={SIGN_UP_FORM_FIELDS.acceptTerms}
+          label={
+            <span>
+              {t("auth.signup.i-accept-text")}{" "}
+              <a
+                title={t("auth.signup.accept-terms-text")}
+                target="_blank"
+                rel="noopener noreferrer"
+                href={TERMS_ROUTE}
+                onClick={e => e.stopPropagation()}
+              >
+                {t("auth.signup.accept-terms-text")}
+              </a>
+            </span>
+          }
+          component={GVCheckbox}
+        />
+      </Row>
+      {error && (
+        <Row>
+          <FormError error={error} />
+        </Row>
+      )}
+      <Row xlarge>
         <RowItem large>
           <SubmitButton
             id="signUpFormSubmit"

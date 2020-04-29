@@ -1,6 +1,6 @@
-import "./program-period-history-row.scss";
-
+import { Center } from "components/center/center";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
+import { RowItem } from "components/row-item/row-item";
 import { TableCell, TableRow } from "components/table/components";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import { ProgramPeriodHistoryDetailsButton } from "pages/invest/programs/program-details/program-history-section/program-period-history/program-period-history-details.button";
@@ -9,6 +9,8 @@ import NumberFormat from "react-number-format";
 import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
+
+import "./program-period-history-row.scss";
 
 export const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = React.memo(
   ({ period, currency }) => {
@@ -41,16 +43,20 @@ export const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = R
               value={period.profit}
             />
           </TableCell>
-          <TableCell className="program-period-history-row__details-cell">
-            <div className="program-period-history-row__investors-container">
-              <NumberFormat value={period.investors} displayType="text" />
-            </div>
-            {haveInfo && (
-              <ProgramPeriodHistoryDetailsButton
-                currency={currency}
-                period={period}
-              />
-            )}
+          <TableCell>
+            <Center className="program-period-history-row__details-cell">
+              <RowItem>
+                <NumberFormat value={period.investors} displayType="text" />
+              </RowItem>
+              {haveInfo && (
+                <RowItem>
+                  <ProgramPeriodHistoryDetailsButton
+                    currency={currency}
+                    period={period}
+                  />
+                </RowItem>
+              )}
+            </Center>
           </TableCell>
         </TableRow>
       </>

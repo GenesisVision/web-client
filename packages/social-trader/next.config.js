@@ -1,12 +1,12 @@
 const path = require("path");
 const dotenv = require("dotenv");
-const tm = require("next-transpile-modules");
 const sass = require("@zeit/next-sass");
 const css = require("@zeit/next-css");
 const withPlugins = require("next-compose-plugins");
 const images = require("next-images");
 const workers = require("@zeit/next-workers");
 const withBundleAnalyzer = require("@next/bundle-analyzer");
+const withTM = require("next-transpile-modules")(["shared", "gv-api-web"]);
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -63,12 +63,7 @@ function create(path) {
           workerLoaderOptions: { inline: true }
         }
       ],
-      [
-        tm,
-        {
-          transpileModules: ["shared", "gv-api-web"]
-        }
-      ]
+      [withTM]
     ],
     nextConfig
   );

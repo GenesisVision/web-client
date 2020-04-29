@@ -43,12 +43,12 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   programDetails: {
     availableInvestmentBase,
     availableInvestmentLimit,
-    entryFeeSelected,
-    entryFeeCurrent,
     successFeeCurrent,
     successFeeSelected,
     stopOutLevelCurrent,
-    stopOutLevelSelected
+    stopOutLevelSelected,
+    managementFeeCurrent,
+    managementFeeSelected
   },
   levelsParameters
 }) => {
@@ -90,19 +90,19 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.entry-fee")}
-            labelText={t("program-details-page.description.entryFee")}
+            tooltipContent={t("program-details-page.tooltip.management-fee")}
+            labelText={t("program-details-page.description.management-fee")}
           />
         }
         accent
       >
-        {entryFeeSelected !== entryFeeCurrent ? (
+        {managementFeeSelected !== managementFeeCurrent ? (
           <Hint
             content={
               <NumberFormat
-                value={formatValue(entryFeeSelected, 2)}
+                value={formatValue(managementFeeSelected, 2)}
                 displayType="text"
-                prefix={`${entryFeeCurrent} % (`}
+                prefix={`${managementFeeCurrent} % (`}
                 suffix=" %)"
               />
             }
@@ -113,9 +113,9 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
           />
         ) : (
           <NumberFormat
-            value={formatValue(entryFeeCurrent, 2)}
+            value={formatValue(managementFeeCurrent, 2)}
             displayType="text"
-            suffix=" %"
+            suffix=" % (annual)"
           />
         )}
       </StatisticItem>

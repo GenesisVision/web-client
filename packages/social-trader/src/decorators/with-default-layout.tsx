@@ -32,7 +32,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
           componentProps = { ex };
         });
       return {
-        namespacesRequired: ["translation"],
+        namespacesRequired: ["translations"],
         ...componentProps
       };
     }

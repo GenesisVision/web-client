@@ -17,7 +17,7 @@ describe("Facet Cards tests", () => {
     sorting: "ByProfitAsc",
     description: "",
     id: "",
-    logo: "",
+    logoUrl: "",
     sortType: "New",
     timeframe: "AllTime",
     title: "",
