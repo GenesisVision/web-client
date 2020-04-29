@@ -114,7 +114,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         </Select>
       </Row>
       <Row small onlyOffset className="market-watch__items-container">
-        <table>
+        <table className="market-watch__table">
           <thead>
             <MarketWatchHeaderCell
               dataType={"string"}
