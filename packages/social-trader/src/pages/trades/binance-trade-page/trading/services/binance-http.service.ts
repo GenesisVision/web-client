@@ -122,13 +122,16 @@ export const newOrder = (
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
   authData: TradeAuthDataType
-): Observable<CancelOrderResult> =>
-  requestService.deleteRequest({
-    ...authData,
-    url: "/api/v3/order",
-    params: options,
-    type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
-  });
+): Promise<CancelOrderResult> =>
+  requestService.deleteRequest(
+    {
+      ...authData,
+      url: "/api/v3/order",
+      params: options,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
 
 export const postBuy = ({
   authData,
