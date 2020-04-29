@@ -4,7 +4,8 @@
   width: 100%;
   &--first,
   &--second {
-    border: 0.1em solid $primary-color !important; // TODO
+    border-width: 0.1em !important; // TODO
+    border-style: solid !important;
     opacity: 1 !important;
     width: 50% !important;
   }

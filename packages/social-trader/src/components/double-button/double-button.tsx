@@ -4,44 +4,42 @@ import React from "react";
 
 import styles from "./double-button.module.scss";
 
+export type DoubleButtonSideParams = {
+  selected: boolean;
+  color?: "primary" | "secondary" | "primary-dark" | "danger";
+  enable: boolean;
+  handleClick: VoidFunction;
+  label: string;
+};
+
 interface Props {
   size?: GV_BTN_SIZE;
-  firstEnable: boolean;
-  firstHandleClick: VoidFunction;
-  firstLabel: string;
-  secondEnable: boolean;
-  secondHandleClick: VoidFunction;
-  secondLabel: string;
+  first: DoubleButtonSideParams;
+  second: DoubleButtonSideParams;
 }
 
-const _DoubleButton: React.FC<Props> = ({
-  size,
-  firstEnable,
-  firstHandleClick,
-  firstLabel,
-  secondEnable,
-  secondHandleClick,
-  secondLabel
-}) => {
+const _DoubleButton: React.FC<Props> = ({ size, first, second }) => {
   return (
     <Center className={styles["double-button"]}>
       <GVButton
+        color={first.color}
         className={styles["double-button--first"]}
-        disabled={!firstEnable}
-        variant={firstEnable ? "contained" : "outlined"}
+        disabled={!first.enable}
+        variant={first.selected ? "contained" : "outlined"}
         size={size}
-        onClick={firstHandleClick}
+        onClick={first.handleClick}
       >
-        {firstLabel}
+        {first.label}
       </GVButton>
       <GVButton
+        color={second.color}
         className={styles["double-button--second"]}
-        disabled={!secondEnable}
-        variant={secondEnable ? "contained" : "outlined"}
+        disabled={!second.enable}
+        variant={second.selected ? "contained" : "outlined"}
         size={size}
-        onClick={secondHandleClick}
+        onClick={second.handleClick}
       >
-        {secondLabel}
+        {second.label}
       </GVButton>
     </Center>
   );
