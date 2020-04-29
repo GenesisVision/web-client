@@ -106,12 +106,6 @@ export const filterOpenOrdersStream = (
 ): Observable<ExecutionReport> =>
   userStream.pipe(
     filter(info => info.e === "executionReport"),
-    filter(
-      item =>
-        item.X !== ORDER_STATUSES.FILLED &&
-        item.X !== ORDER_STATUSES.PARTIALLY_FILLED &&
-        item.X !== ORDER_STATUSES.REJECTED
-    ),
     map(transformExecutionReport)
   );
 
