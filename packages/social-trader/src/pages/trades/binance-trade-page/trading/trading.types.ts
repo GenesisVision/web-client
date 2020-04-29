@@ -686,6 +686,7 @@ export interface ExecutionReport extends Message {
   newClientOrderId: string;
   originalClientOrderId: string;
   side: OrderSide;
+  type: OrderType;
   orderType: OrderType;
   timeInForce: TimeInForce;
   quantity: string;

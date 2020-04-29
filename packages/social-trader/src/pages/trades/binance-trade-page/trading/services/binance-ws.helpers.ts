@@ -68,6 +68,7 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   newClientOrderId: m.c,
   originalClientOrderId: m.C,
   side: m.S,
+  type: m.o,
   orderType: m.o,
   timeInForce: m.f,
   quantity: m.q,
