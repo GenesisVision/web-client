@@ -67,7 +67,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       minPrice: +minPrice,
       maxQuantity: Math.min(
         +maxQty,
-        +getBalance(accountInfo.balances, baseAsset)
+        +getBalance(
+          accountInfo.balances,
+          direction === "BUY" ? quoteAsset : baseAsset
+        )
       ),
       minQuantity: +minQty,
       minNotional: +minNotional
@@ -75,9 +78,8 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     defaultValues: { price: outerPrice },
     mode: "onChange"
   });
-  const { watch, setValue, reset, errors } = form;
+  const { watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
-  console.log(errors);
 
   useEffect(() => {
     reset({ price: outerPrice, quantity, total });

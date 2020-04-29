@@ -51,7 +51,7 @@ const _Trade: React.FC<Props> = () => {
     [authData, baseAsset, quoteAsset]
   );
 
-  const walletAsset = side === "BUY" ? baseAsset : quoteAsset;
+  const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
