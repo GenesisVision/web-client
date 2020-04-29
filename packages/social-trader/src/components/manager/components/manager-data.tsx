@@ -41,8 +41,8 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
   });
 
   useEffect(() => {
-    sendRequest(id);
-  }, [id]);
+    sendRequest({ ownerId: id, isBetaTester });
+  }, [id, isBetaTester]);
 
   const {
     postsCount = 0,
