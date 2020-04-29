@@ -689,6 +689,7 @@ export interface ExecutionReport extends Message {
   orderType: OrderType;
   timeInForce: TimeInForce;
   quantity: string;
+  origQty: string;
   price: string;
   executionType: ExecutionType;
   stopPrice: string;
@@ -698,6 +699,7 @@ export interface ExecutionReport extends Message {
   orderId: number;
   transactionTime: number;
   orderCreationTime: number;
+  executedQty: string;
   lastTradeQuantity: string;
   totalTradeQuantity: string;
   priceLastTrade: string;
