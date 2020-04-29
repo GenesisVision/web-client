@@ -50,10 +50,16 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
   useEffect(() => {
     if (!socketData) return;
     const updatedList = { ...list };
-    updatedList[socketData.orderId] = {
-      ...updatedList[socketData.orderId],
-      ...socketData
-    };
+    if (
+      socketData.executionType === "CANCELED" ||
+      socketData.executionType === "EXPIRED"
+    )
+      delete updatedList[socketData.orderId];
+    else
+      updatedList[socketData.orderId] = {
+        ...updatedList[socketData.orderId],
+        ...socketData
+      };
     setList(updatedList);
   }, [socketData]);
 
