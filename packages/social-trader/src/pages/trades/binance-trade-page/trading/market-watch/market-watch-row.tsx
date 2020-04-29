@@ -5,6 +5,7 @@ import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trad
 import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   quoteAsset: TradeCurrency;
@@ -46,7 +47,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
         </td>
         <td className="market-watch__name">
           <ColoredText color={getTextColor(+firstLastPrice - +lastPrice)}>
-            {lastPrice}
+            {formatCurrencyValue(+lastPrice, quoteAsset)}
           </ColoredText>
         </td>
         <td className="market-watch__name">

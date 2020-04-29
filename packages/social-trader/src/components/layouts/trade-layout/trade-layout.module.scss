@@ -1,7 +1,7 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 
-$header-height: 44px + $padding-xsmall * 2;
+$header-height: 44px + $padding-xxsmall * 2;
 
 .trade-layout {
   &__wrapper {
@@ -13,7 +13,8 @@ $header-height: 44px + $padding-xsmall * 2;
   &__header {
     box-sizing: border-box;
     height: $header-height;
-    @include adaptive-full-padding($padding-xsmall);
+    @include horizontal-paddings($padding-xsmall);
+    @include vertical-paddings($padding-xxsmall);
   }
   &__main {
     box-sizing: border-box;

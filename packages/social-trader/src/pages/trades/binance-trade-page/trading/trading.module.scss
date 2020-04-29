@@ -1,6 +1,6 @@
 @import "~shared/styles/_sizes";
 
-$bottom-block-height: 200px;
+$bottom-block-height: 300px;
 
 .trading {
   &__main-block {
@@ -25,7 +25,7 @@ $bottom-block-height: 200px;
   }
 
   &__right-list-block {
-    width: 300px;
+    width: 250px;
   }
 
   &__top-group {

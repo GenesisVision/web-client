@@ -3,6 +3,7 @@ import { DoubleButton } from "components/double-button/double-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
+import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
@@ -51,7 +52,7 @@ const _Trade: React.FC<Props> = () => {
   );
 
   return (
-    <DefaultBlock roundedBorder={false} bordered>
+    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
         <h3>Place order</h3>
       </Row>

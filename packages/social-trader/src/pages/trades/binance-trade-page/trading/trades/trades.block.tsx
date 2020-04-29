@@ -1,4 +1,5 @@
 import { DefaultBlock } from "components/default.block/default.block";
+import { SIZES } from "constants/constants";
 import { TradesContainer } from "pages/trades/binance-trade-page/trading/trades/trades.container";
 import React from "react";
 
@@ -8,10 +9,13 @@ interface Props {}
 
 export const TradesBlock: React.FC<Props> = () => {
   return (
-    <DefaultBlock roundedBorder={false} bordered className={styles["trades"]}>
-      <div className={styles["trades__items-container"]}>
-        <TradesContainer />
-      </div>
+    <DefaultBlock
+      size={SIZES.SMALL}
+      roundedBorder={false}
+      bordered
+      className={styles["trades"]}
+    >
+      <TradesContainer />
     </DefaultBlock>
   );
 };

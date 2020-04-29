@@ -1,31 +1,56 @@
 @import "~shared/styles/_sizes";
 
+$order-book-row-height: 16px;
+
 .order-book {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  &__current-price {
+    font-size: $font-size-xsmall;
+  }
+
   &__table-block {
-    @include trade-table();
     height: 100%;
     display: flex;
     flex-direction: column;
+
     &--reverse {
       justify-content: flex-end;
     }
   }
+
+  &__tables-row {
+    height: 100%;
+    overflow: hidden;
+  }
+
   &__tables-block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     height: 100%;
+    width: 100%;
   }
+
   &__table {
+    @include trade-table();
+    width: 100%;
     border-spacing: 0;
+
+    & td,
+    th {
+      width: 33.3%;
+    }
   }
+
   &__table-row {
     cursor: pointer;
+    height: $order-book-row-height;
+
     &--hovered {
       background: rgba(255, 255, 255, 0.1);
     }

@@ -7,6 +7,7 @@ import {
   collapseItems,
   getDividerParts,
   normalizeDepthList,
+  ORDER_BOOK_COLUMNS,
   updateDepthList,
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
@@ -19,7 +20,7 @@ import {
   Depth,
   NormalizedDepth
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { timer } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
@@ -28,8 +29,11 @@ import styles from "./order-book.module.scss";
 
 interface Props {}
 
+const ROW_HEIGHT = 16;
+
 const _OrderBookContainer: React.FC<Props> = ({}) => {
-  const count = 12;
+  const ref = useRef<HTMLDivElement>(null);
+  const [count, setCount] = useState<number>(0);
 
   const { connectSocket } = useSockets();
 
@@ -47,6 +51,15 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   >([]);
 
   const dividerParts = getDividerParts(tickValue?.value);
+
+  useEffect(() => {
+    if (ref.current) {
+      const height = ref.current.clientHeight;
+      const count = Math.floor((height / ROW_HEIGHT - 2) / 2);
+      setCount(count);
+      console.log(height, count);
+    }
+  }, [ref.current?.clientHeight]);
 
   useEffect(() => {
     setList(undefined);
@@ -143,24 +156,36 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   return (
     <>
-      <Row>
+      <Row small>
         <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
       </Row>
-      <Row center={false} className={styles["order-book__tables-block"]}>
-        <Row
-          className={classNames(
-            styles["order-book__table-block"],
-            styles["order-book__table-block--reverse"]
-          )}
-        >
-          <OrderBook reverse color={"red"} items={asks} />
-        </Row>
-        <Row>
-          <OrderBookCurrentPriceContainer />
-        </Row>
-        <Row className={styles["order-book__table-block"]}>
-          <OrderBook color={"green"} items={bids} />
-        </Row>
+      <Row small>
+        <table className={styles["order-book__table"]}>
+          <thead>
+            <th>Price ({baseAsset})</th>
+            <th>Amount ({quoteAsset})</th>
+            <th>Total</th>
+          </thead>
+        </table>
+      </Row>
+      <Row small className={styles["order-book__tables-row"]}>
+        <div ref={ref} className={styles["order-book__tables-block"]}>
+          <Row
+            wide
+            className={classNames(
+              styles["order-book__table-block"],
+              styles["order-book__table-block--reverse"]
+            )}
+          >
+            <OrderBook reverse color={"red"} items={asks} />
+          </Row>
+          <Row small>
+            <OrderBookCurrentPriceContainer />
+          </Row>
+          <Row wide small className={styles["order-book__table-block"]}>
+            <OrderBook color={"green"} items={bids} />
+          </Row>
+        </div>
       </Row>
     </>
   );

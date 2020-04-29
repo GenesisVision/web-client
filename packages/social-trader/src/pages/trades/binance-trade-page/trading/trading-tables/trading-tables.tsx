@@ -1,7 +1,7 @@
-import { DefaultTableBlock } from "components/default.block/default-table.block";
 import { DefaultBlock } from "components/default.block/default.block";
-import DetailsBlockTabs from "components/details/details-block-tabs";
+import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
 import React from "react";
@@ -23,17 +23,20 @@ const _TradingTables: React.FC<Props> = () => {
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_ORDERS);
   return (
     <DefaultBlock
+      size={SIZES.SMALL}
       horizontalOffsets={false}
       roundedBorder={false}
       bordered
       className={styles["trading-tables"]}
     >
-      <DetailsBlockTabs value={tab} onChange={setTab}>
-        <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
-        <GVTab value={TABS.ORDERS_HISTORY} label={t("Orders history")} />
-        <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
-        <GVTab value={TABS.FUNDS} label={t("Funds")} />
-      </DetailsBlockTabs>
+      <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
+        <GVTabs value={tab} onChange={setTab}>
+          <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
+          <GVTab value={TABS.ORDERS_HISTORY} label={t("Orders history")} />
+          <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
+          <GVTab value={TABS.FUNDS} label={t("Funds")} />
+        </GVTabs>
+      </DefaultBlock>
       {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
     </DefaultBlock>
   );

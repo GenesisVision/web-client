@@ -5,6 +5,8 @@ import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.he
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useEffect, useState } from "react";
 
+import styles from "./order-book.module.scss";
+
 interface Props {
   tradeId?: number;
   price: string;
@@ -28,7 +30,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
   }, [tradeId]);
 
   return (
-    <Center>
+    <Center className={styles["order-book__current-price"]}>
       <RowItem large>
         <ColoredText color={getTextColor(+price - +prevLastPrice)}>
           {price}

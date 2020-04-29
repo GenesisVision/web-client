@@ -1,5 +1,6 @@
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
@@ -16,14 +17,20 @@ import {
   SortingType,
   sortMarketWatchItems
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 
 interface Props {
   items: MergedTickerSymbolType[];
 }
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {
+  const {
+    symbol: { baseAsset, quoteAsset }
+  } = useContext(TradingInfoContext);
+
   const [column, setColumn] = useState<string>(CHANGE_COLUMN);
   const [search, setSearch] = useState<string>("");
   const [filteringType, setFilteringType] = useState<"margin" | "symbol">(
@@ -46,7 +53,20 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
 
   return (
     <>
-      <Row>
+      <Row small>
+        <RowItem>
+          <MutedText>{getSymbol(baseAsset, quoteAsset)}</MutedText>
+        </RowItem>
+        <RowItem>
+          <GlobalSearchInput
+            size={"small"}
+            query={search}
+            onChange={setSearch}
+            canClose={false}
+          />
+        </RowItem>
+      </Row>
+      <Row small>
         <RowItem>
           <GVButton
             noPadding
@@ -79,15 +99,9 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           </RowItem>
         ))}
       </Row>
-      <Row>
-        <GlobalSearchInput
-          query={search}
-          onChange={setSearch}
-          canClose={false}
-        />
-      </Row>
-      <Row>
+      <Row small>
         <Select
+          size={"small"}
           name="column"
           value={column}
           onChange={(e: ISelectChangeEvent) => setColumn(e.target.value)}
@@ -99,7 +113,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           ))}
         </Select>
       </Row>
-      <Row onlyOffset className="market-watch__items-container">
+      <Row small onlyOffset className="market-watch__items-container">
         <table>
           <thead>
             <MarketWatchHeaderCell

@@ -1,5 +1,5 @@
 import { DefaultBlock } from "components/default.block/default.block";
-import { Row } from "components/row/row";
+import { SIZES } from "constants/constants";
 import { OrderBookContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book.container";
 import React from "react";
 
@@ -10,6 +10,7 @@ interface Props {}
 export const OrderBookBlock: React.FC<Props> = () => {
   return (
     <DefaultBlock
+      size={SIZES.SMALL}
       roundedBorder={false}
       bordered
       className={styles["order-book"]}
