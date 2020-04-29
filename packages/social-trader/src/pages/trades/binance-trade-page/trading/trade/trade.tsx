@@ -7,7 +7,7 @@ import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { getTradeMethod } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { tradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { LimitTradeFormContainer } from "pages/trades/binance-trade-page/trading/trade/limit-trade-form.container";
 import {
   getBalance,
@@ -37,18 +37,19 @@ const _Trade: React.FC<Props> = () => {
 
   const { authData } = useTradeAuth();
 
-  const { sendRequest } = useApiRequest({ request: getTradeMethod(side) });
+  const { sendRequest } = useApiRequest({ request: tradeRequest });
 
   const handleSubmit = useCallback(
     (values: ILimitTradeFormValues) => {
       return sendRequest({
         ...values,
+        side,
         type: tab,
         symbol: getSymbol(baseAsset, quoteAsset),
         authData
       });
     },
-    [authData, baseAsset, quoteAsset]
+    [authData, baseAsset, quoteAsset, side]
   );
 
   const walletAsset = side === "BUY" ? quoteAsset : baseAsset;

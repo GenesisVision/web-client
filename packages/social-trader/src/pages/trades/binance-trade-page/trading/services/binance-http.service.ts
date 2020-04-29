@@ -170,3 +170,11 @@ export const postSell = ({
 
 export const getTradeMethod = (side: OrderSide) =>
   side === "BUY" ? postBuy : postSell;
+
+export const tradeRequest = ({
+  side,
+  ...options
+}: TradeRequest & { authData: TradeAuthDataType; side: OrderSide }) => {
+  const method = getTradeMethod(side);
+  return method(options);
+};
