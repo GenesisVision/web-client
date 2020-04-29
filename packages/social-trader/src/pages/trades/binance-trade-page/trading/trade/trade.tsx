@@ -8,10 +8,11 @@ import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getTradeMethod } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { LimitTradeFormContainer } from "pages/trades/binance-trade-page/trading/trade/limit-trade-form.container";
 import {
-  ILimitTradeFormValues,
-  LimitTradeForm
-} from "pages/trades/binance-trade-page/trading/trade/limit-trade-form";
+  getBalance,
+  ILimitTradeFormValues
+} from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -20,7 +21,6 @@ import {
   OrderType
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useState } from "react";
-import { safeGetElemFromArray } from "utils/helpers";
 
 interface Props {}
 
@@ -83,18 +83,12 @@ const _Trade: React.FC<Props> = () => {
       </Row>
       {accountInfo && (
         <Row>
-          {
-            safeGetElemFromArray(
-              accountInfo?.balances,
-              ({ asset }) => asset === walletAsset
-            ).free
-          }{" "}
-          {walletAsset}
+          {getBalance(accountInfo?.balances, walletAsset)} {walletAsset}
         </Row>
       )}
       <Row>
         {tab === "LIMIT" && (
-          <LimitTradeForm
+          <LimitTradeFormContainer
             outerPrice={+price}
             onSubmit={handleSubmit}
             direction={side}

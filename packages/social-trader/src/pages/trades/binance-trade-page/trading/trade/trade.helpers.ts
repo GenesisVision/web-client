@@ -1,11 +1,31 @@
+import { TFunction } from "i18next";
 import {
+  AssetBalance,
   SymbolFilter,
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
-  SymbolPriceFilter
+  SymbolPriceFilter,
+  TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { NumberFormatValues } from "react-number-format";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { number, object } from "yup";
+
+export enum LIMIT_FORM_FIELDS {
+  price = "price",
+  quantity = "quantity",
+  total = "total"
+}
+
+export interface ILimitTradeFormValues {
+  [LIMIT_FORM_FIELDS.price]: number;
+  [LIMIT_FORM_FIELDS.quantity]: number;
+  [LIMIT_FORM_FIELDS.total]: number;
+}
+
+export const getBalance = (balances: AssetBalance[], currency: TradeCurrency) =>
+  safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
 
 export const getMinNotionalFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(
@@ -25,16 +45,120 @@ export const getLotSizeFilter = (filters: SymbolFilter[]) =>
     ({ filterType }) => filterType === "LOT_SIZE"
   ) as SymbolLotSizeFilter;
 
-export const isMinMaxAllow = (min: number, max: number) => ({
+const defaultAllows = ({
   floatValue,
   formattedValue,
   value
 }: NumberFormatValues): boolean => {
   return (
-    (formattedValue === "" ||
-      formattedValue === "0." ||
-      floatValue === 0 ||
-      (floatValue >= min && floatValue <= max)) &&
+    (formattedValue === "" || formattedValue === "0." || floatValue === 0) &&
     value !== "."
   );
 };
+
+export const isTickSizeAllow = (min: number, tick: number) => ({
+  floatValue
+}: NumberFormatValues): boolean => {
+  return (floatValue - min) % tick === 0;
+};
+
+export const isMinMaxAllow = (min: number, max: number) => ({
+  floatValue
+}: NumberFormatValues): boolean => {
+  return floatValue >= min && floatValue <= max;
+};
+
+export const isTradeFieldAllow = (min: number, max: number, tick: number) => (
+  values: NumberFormatValues
+): boolean => {
+  return (
+    defaultAllows(values) ||
+    (isTickSizeAllow(min, tick)(values) && isMinMaxAllow(min, max)(values))
+  );
+};
+
+export const limitValidationSchema = ({
+  t,
+  baseAsset,
+  quoteAsset,
+  tickSize,
+  maxPrice,
+  minPrice,
+  maxQuantity,
+  minQuantity,
+  minNotional
+}: {
+  t: TFunction;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  tickSize: number;
+  maxPrice: number;
+  minPrice: number;
+  maxQuantity: number;
+  minQuantity: number;
+  minNotional: number;
+}) =>
+  object().shape({
+    [LIMIT_FORM_FIELDS.price]: number()
+      .required(t("Field is required"))
+      .min(
+        minPrice,
+        t(
+          `Must be more or equal than ${formatCurrencyValue(
+            minPrice,
+            quoteAsset
+          )}`,
+          { minPrice }
+        )
+      )
+      .max(
+        maxPrice,
+        t(
+          `Must be less or equal than ${formatCurrencyValue(
+            maxPrice,
+            quoteAsset
+          )}`,
+          { maxPrice }
+        )
+      ),
+    /*.test({
+        message: `Must be multiply of ${formatValue(tickSize)}`,
+        test: value => (value - minPrice) % tickSize === 0
+      })*/
+    [LIMIT_FORM_FIELDS.quantity]: number()
+      .required(t("Field is required"))
+      .min(
+        minQuantity,
+        t(
+          `Must be more or equal than ${formatCurrencyValue(
+            minQuantity,
+            baseAsset
+          )}`,
+          { minQuantity }
+        )
+      )
+      .max(
+        maxQuantity,
+        t(
+          `Must be less or equal than ${formatCurrencyValue(
+            maxQuantity,
+            baseAsset
+          )}`,
+          { maxQuantity }
+        )
+      ),
+    /*.test({
+        message: `Must be multiply of ${formatValue(tickSize)}`,
+        test: value => (value - minQuantity) % tickSize === 0
+      })*/
+    [LIMIT_FORM_FIELDS.total]: number().min(
+      minNotional,
+      t(
+        `Must be more or equal than ${formatCurrencyValue(
+          minNotional,
+          quoteAsset
+        )}`,
+        { minNotional }
+      )
+    )
+  });

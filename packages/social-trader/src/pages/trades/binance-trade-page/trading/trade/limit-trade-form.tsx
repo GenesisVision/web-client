@@ -4,36 +4,29 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
+  getBalance,
   getLotSizeFilter,
+  getMinNotionalFilter,
   getSymbolPriceFilter,
-  isMinMaxAllow
+  ILimitTradeFormValues,
+  LIMIT_FORM_FIELDS,
+  limitValidationSchema
 } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
+  Account,
+  ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
-enum FIELDS {
-  price = "price",
-  quantity = "quantity",
-  total = "total"
-}
-
-export interface ILimitTradeFormValues {
-  [FIELDS.price]: number;
-  [FIELDS.quantity]: number;
-  [FIELDS.total]: number;
-}
-
-interface Props {
+export interface ILimitTradeFormProps {
   outerPrice: number;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -41,7 +34,12 @@ interface Props {
   onSubmit: (values: ILimitTradeFormValues) => any;
 }
 
-const _LimitTradeForm: React.FC<Props> = ({
+const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
+  accountInfo: Account;
+  exchangeInfo: ExchangeInfo;
+}> = ({
+  accountInfo,
+  exchangeInfo,
   outerPrice,
   onSubmit,
   quoteAsset,
@@ -49,42 +47,7 @@ const _LimitTradeForm: React.FC<Props> = ({
   direction
 }) => {
   const [t] = useTranslation();
-
-  const form = useForm<ILimitTradeFormValues>({
-    defaultValues: { price: outerPrice },
-    mode: "onChange"
-  });
-  const { watch, setValue, reset } = form;
-  const { quantity, total, price } = watch();
-
-  useEffect(() => {
-    reset({ price: outerPrice, quantity, total });
-  }, [outerPrice]);
-
-  useEffect(() => {
-    const value = (formatCurrencyValue(
-      total / price,
-      "BTC"
-    ) as unknown) as number;
-    if (value > 0) setValue(FIELDS.quantity, value);
-  }, [total]);
-  useEffect(() => {
-    const value = (formatCurrencyValue(
-      quantity * price,
-      "BTC"
-    ) as unknown) as number;
-    if (value > 0) setValue(FIELDS.total, value);
-  }, [quantity]);
-  useEffect(() => {
-    if (quantity)
-      setValue(
-        FIELDS.total,
-        (formatCurrencyValue(quantity * price, "BTC") as unknown) as number
-      );
-  }, [price]);
-
-  const { exchangeInfo } = useContext(TradingInfoContext);
-  if (!exchangeInfo) return null;
+  const [autoFill, setAutoFill] = useState<boolean>(false);
 
   const filters = safeGetElemFromArray(
     exchangeInfo.symbols,
@@ -92,23 +55,85 @@ const _LimitTradeForm: React.FC<Props> = ({
   ).filters;
   const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
   const { minQty, maxQty } = getLotSizeFilter(filters);
+  const { minNotional } = getMinNotionalFilter(filters);
+
+  const form = useForm<ILimitTradeFormValues>({
+    validationSchema: limitValidationSchema({
+      t,
+      quoteAsset,
+      baseAsset,
+      tickSize: +tickSize,
+      maxPrice: +maxPrice,
+      minPrice: +minPrice,
+      maxQuantity: Math.min(
+        +maxQty,
+        +getBalance(accountInfo.balances, baseAsset)
+      ),
+      minQuantity: +minQty,
+      minNotional: +minNotional
+    }),
+    defaultValues: { price: outerPrice },
+    mode: "onChange"
+  });
+  const { watch, setValue, reset, errors } = form;
+  const { quantity, total, price } = watch();
+  console.log(errors);
+
+  useEffect(() => {
+    reset({ price: outerPrice, quantity, total });
+  }, [outerPrice]);
+
+  useEffect(() => {
+    if (!autoFill) {
+      const value = (formatCurrencyValue(
+        total / price,
+        "BTC"
+      ) as unknown) as number;
+      if (value > 0) {
+        setValue(LIMIT_FORM_FIELDS.quantity, value, true);
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [total]);
+  useEffect(() => {
+    if (!autoFill) {
+      const value = (formatCurrencyValue(
+        quantity * price,
+        "BTC"
+      ) as unknown) as number;
+      if (value > 0) {
+        setValue(LIMIT_FORM_FIELDS.total, value, true);
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [quantity]);
+  useEffect(() => {
+    if (!autoFill) {
+      if (quantity) {
+        setValue(
+          LIMIT_FORM_FIELDS.total,
+          (formatCurrencyValue(quantity * price, "BTC") as unknown) as number,
+          true
+        );
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [price]);
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
         <HookFormAmountField
-          isAllowed={isMinMaxAllow(+minPrice, +maxPrice)}
           label={t("Price")}
           currency={quoteAsset}
-          name={FIELDS.price}
+          name={LIMIT_FORM_FIELDS.price}
         />
       </Row>
       <Row>
         <HookFormAmountField
-          isAllowed={isMinMaxAllow(+minQty, +maxQty)}
           label={t("Amount")}
           currency={baseAsset}
-          name={FIELDS.quantity}
+          name={LIMIT_FORM_FIELDS.quantity}
         />
       </Row>
       <Row>
@@ -116,7 +141,7 @@ const _LimitTradeForm: React.FC<Props> = ({
           isAllowed={isAllow("BTC")}
           label={t("Total")}
           currency={quoteAsset}
-          name={FIELDS.total}
+          name={LIMIT_FORM_FIELDS.total}
         />
       </Row>
       <DialogButtons>
