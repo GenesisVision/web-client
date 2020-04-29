@@ -53,12 +53,8 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const dividerParts = getDividerParts(tickValue?.value);
 
   useEffect(() => {
-    if (ref.current) {
-      const height = ref.current.clientHeight;
-      const count = Math.floor((height / ROW_HEIGHT - 2) / 2);
-      setCount(count);
-      console.log(height, count);
-    }
+    if (ref.current)
+      setCount(Math.floor((ref.current.clientHeight / ROW_HEIGHT - 2) / 2));
   }, [ref.current?.clientHeight]);
 
   useEffect(() => {
