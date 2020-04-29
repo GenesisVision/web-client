@@ -51,6 +51,9 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
     if (!socketData) return;
     const updatedList = { ...list };
     if (
+      socketData.orderStatus === "EXPIRED" ||
+      socketData.orderStatus === "FILLED" ||
+      socketData.orderStatus === "CANCELED" ||
       socketData.executionType === "CANCELED" ||
       socketData.executionType === "EXPIRED"
     )
