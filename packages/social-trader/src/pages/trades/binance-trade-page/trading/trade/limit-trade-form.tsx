@@ -57,21 +57,26 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { minQty, maxQty } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
+  const maxQuantityWithWallet =
+    direction === "BUY"
+      ? +maxQty
+      : Math.min(+maxQty, +getBalance(accountInfo.balances, baseAsset));
+
+  const maxTotalWithWallet =
+    direction === "BUY"
+      ? +getBalance(accountInfo.balances, quoteAsset)
+      : Number.MAX_SAFE_INTEGER;
+
   const form = useForm<ILimitTradeFormValues>({
     validationSchema: limitValidationSchema({
       t,
       quoteAsset,
       baseAsset,
       tickSize: +tickSize,
+      maxTotal: maxTotalWithWallet,
       maxPrice: +maxPrice,
       minPrice: +minPrice,
-      maxQuantity: Math.min(
-        +maxQty,
-        +getBalance(
-          accountInfo.balances,
-          direction === "BUY" ? quoteAsset : baseAsset
-        )
-      ),
+      maxQuantity: maxQuantityWithWallet,
       minQuantity: +minQty,
       minNotional: +minNotional
     }),

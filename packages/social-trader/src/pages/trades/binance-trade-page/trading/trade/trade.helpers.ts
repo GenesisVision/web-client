@@ -82,6 +82,7 @@ export const limitValidationSchema = ({
   baseAsset,
   quoteAsset,
   tickSize,
+  maxTotal,
   maxPrice,
   minPrice,
   maxQuantity,
@@ -92,6 +93,7 @@ export const limitValidationSchema = ({
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
   tickSize: number;
+  maxTotal: number;
   maxPrice: number;
   minPrice: number;
   maxQuantity: number;
@@ -151,14 +153,25 @@ export const limitValidationSchema = ({
         message: `Must be multiply of ${formatValue(tickSize)}`,
         test: value => (value - minQuantity) % tickSize === 0
       })*/
-    [LIMIT_FORM_FIELDS.total]: number().min(
-      minNotional,
-      t(
-        `Must be more or equal than ${formatCurrencyValue(
-          minNotional,
-          quoteAsset
-        )}`,
-        { minNotional }
+    [LIMIT_FORM_FIELDS.total]: number()
+      .min(
+        minNotional,
+        t(
+          `Must be more or equal than ${formatCurrencyValue(
+            minNotional,
+            quoteAsset
+          )}`,
+          { minNotional }
+        )
       )
-    )
+      .max(
+        maxTotal,
+        t(
+          `Must be less or equal than ${formatCurrencyValue(
+            maxTotal,
+            quoteAsset
+          )}`,
+          { maxQuantity }
+        )
+      )
   });
