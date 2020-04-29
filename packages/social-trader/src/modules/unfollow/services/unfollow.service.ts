@@ -1,6 +1,5 @@
 import { DetachFromSignalProvider } from "gv-api-web";
-import signalApi from "services/api-client/signal-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const detachToSignalInternal = ({
   id,
@@ -9,7 +8,7 @@ export const detachToSignalInternal = ({
   id: string;
   model?: DetachFromSignalProvider;
 }) =>
-  signalApi.detachSlaveFromMasterInternal(id, authService.getAuthArg(), {
+  api.signal().detachSlaveFromMasterInternal(id, {
     body: model
   });
 
@@ -20,6 +19,6 @@ export const detachToSignalExternal = ({
   id: string;
   model?: DetachFromSignalProvider;
 }) =>
-  signalApi.detachSlaveFromMasterExternal(id, authService.getAuthArg(), {
+  api.signal().detachSlaveFromMasterExternal(id, {
     body: model
   });

@@ -1,4 +1,5 @@
 import StopOutField from "components/assets/fields/stop-out-field";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
@@ -24,6 +25,9 @@ const _StopOutLevel: React.FC<Props> = ({
     },
     validationSchema: object().shape({
       [FIELDS.stopOutLevel]: number()
+        .required(
+          t("create-program-page.settings.validation.stop-out-required")
+        )
         .min(10, t("create-program-page.settings.validation.stop-out-less-ten"))
         .max(
           stopOutLevel || 100,
@@ -38,15 +42,12 @@ const _StopOutLevel: React.FC<Props> = ({
       label={t("create-program-page.settings.fields.stop-out-level")}
     >
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-        <div className="program-settings__block-wrapper">
-          <StopOutField name={FIELDS.stopOutLevel} />
-        </div>
-        <SubmitButton
-          className="invest-form__submit-button"
-          isSuccessful={!editError}
-        >
-          {t("program-settings.buttons.save")}
-        </SubmitButton>
+        <StopOutField name={FIELDS.stopOutLevel} />
+        <Row>
+          <SubmitButton isSuccessful={!editError}>
+            {t("program-settings.buttons.save")}
+          </SubmitButton>
+        </Row>
       </HookForm>
     </SettingsBlock>
   );

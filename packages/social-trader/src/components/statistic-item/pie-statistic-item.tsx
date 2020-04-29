@@ -1,4 +1,6 @@
+import { Center } from "components/center/center";
 import PieContainer from "components/pie-container/pie-container";
+import { RowItem } from "components/row-item/row-item";
 import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
@@ -32,17 +34,19 @@ const _PieStatisticItem: React.FC<Props> = ({
     value
   );
   return (
-    <StatisticItemContainerBlock className="pie-statistics-item">
-      <div className="pie-statistics-item__pie-block">
-        <PieContainer
-          value={percentValue}
-          label={`${percentValue} %`}
-          color={color}
-        />
-      </div>
-      <StatisticItemInner accent label={renderLabel}>
-        {renderValue}
-      </StatisticItemInner>
+    <StatisticItemContainerBlock>
+      <Center>
+        <RowItem>
+          <PieContainer
+            value={percentValue}
+            label={`${percentValue} %`}
+            color={color}
+          />
+        </RowItem>
+        <StatisticItemInner accent label={renderLabel}>
+          {renderValue}
+        </StatisticItemInner>
+      </Center>
     </StatisticItemContainerBlock>
   );
 };

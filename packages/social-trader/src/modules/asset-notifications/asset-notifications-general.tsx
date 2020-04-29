@@ -1,4 +1,5 @@
 import GeneralNotification from "components/general-notification/general-notification";
+import { Row } from "components/row/row";
 import { NotificationSettingViewModel } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,18 +24,22 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
 
   return (
     <div className="notification-settings">
-      <h3 className="notification-settings__subtitle">
-        {t("notifications-page.general.title")}
-      </h3>
+      <Row>
+        <h3 className="notification-settings__subtitle">
+          {t("notifications-page.general.title")}
+        </h3>
+      </Row>
       {notifications.map(notification => (
-        <GeneralNotification
-          onSuccess={onSuccess}
-          key={notification.name}
-          name={notification.name}
-          label={notification.label}
-          assetId={assetId}
-          setting={getNotification(notification.name)}
-        />
+        <Row>
+          <GeneralNotification
+            onSuccess={onSuccess}
+            key={notification.name}
+            name={notification.name}
+            label={notification.label}
+            assetId={assetId}
+            setting={getNotification(notification.name)}
+          />
+        </Row>
       ))}
     </div>
   );

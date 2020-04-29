@@ -33,7 +33,6 @@ const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
 
   return (
     <FundsTableModule
-      disableTitle
       title={title}
       getItems={getManagerFunds}
       defaultFilters={MANAGER_DEFAULT_FILTERS}

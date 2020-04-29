@@ -1,9 +1,11 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
+import { Center } from "components/center/center";
 import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { AccountSubscriptionsDataType } from "pages/accounts/account-details/services/account-details.types";
@@ -33,7 +35,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     totalProfit,
     openTolerancePercent,
     mode,
-    asset: { url, title, logo, color, programDetails }
+    asset: { url, title, logoUrl, color, programDetails }
   } = provider;
   const { linkCreator } = useToLink();
   const level = programDetails ? programDetails.level : undefined;
@@ -49,16 +51,14 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
             FOLLOW_DETAILS_FOLDER_ROUTE
           )}
         >
-          <div className="subscriptions-table__center-cell">
-            <AssetAvatarWithName
-              url={logo}
-              alt={title}
-              color={color}
-              level={level}
-              levelProgress={levelProgress}
-              name={title}
-            />
-          </div>
+          <AssetAvatarWithName
+            url={logoUrl}
+            alt={title}
+            color={color}
+            level={level}
+            levelProgress={levelProgress}
+            name={title}
+          />
         </Link>
       </TableCell>
       <TableCell>
@@ -69,13 +69,6 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
       <TableCell>{formatDate(subscriptionDate)}</TableCell>
       <TableCell>{mode}</TableCell>
       <TableCell>
-        <div className="subscriptions-table__center-cell subscriptions-table__center-cell--buttons">
-          <div className="subscriptions-table__buttons-cell-item--first">
-            {openTolerancePercent} %
-          </div>
-        </div>
-      </TableCell>
-      <TableCell>
         {percent && <>{percent} %</>}
         {fixedVolume && (
           <>
@@ -84,12 +77,13 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
         )}
         {percent === null && fixedVolume === null && <> - </>}
       </TableCell>
+      <TableCell>{openTolerancePercent} %</TableCell>
       <TableCell>{volumeFeePersonal} %</TableCell>
       <TableCell>{successFeePersonal} %</TableCell>
       <TableCell>
         {status !== "Canceled" && (
-          <div className="subscriptions-table__center-cell">
-            <div className="subscriptions-table__buttons-cell-item">
+          <Center>
+            <RowItem large>
               <EditFollowButton
                 size={GV_BTN_SIZE.MIDDLE}
                 signalSubscription={provider}
@@ -98,8 +92,8 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
                 id={provider.asset.id}
                 tradingAccountId={id}
               />
-            </div>
-            <div className="subscriptions-table__buttons-cell-item ">
+            </RowItem>
+            <RowItem large>
               <UnFollowButton
                 size={GV_BTN_SIZE.MIDDLE}
                 onApply={onApply}
@@ -107,8 +101,8 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
                 tradingAccountId={id}
                 isExternal={isExternal}
               />
-            </div>
-          </div>
+            </RowItem>
+          </Center>
         )}
       </TableCell>
     </TableRow>

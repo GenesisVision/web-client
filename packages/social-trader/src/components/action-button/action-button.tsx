@@ -1,5 +1,3 @@
-import "./action-button.scss";
-
 import GVButton from "components/gv-button";
 import React from "react";
 
@@ -9,11 +7,9 @@ interface IActionButtonProps {
 }
 
 const ActionButton: React.FC<IActionButtonProps> = ({ onClick, text }) => (
-  <div className="action-button">
-    <GVButton color="secondary" onClick={onClick}>
-      {text}
-    </GVButton>
-  </div>
+  <GVButton color="secondary" onClick={onClick}>
+    {text}
+  </GVButton>
 );
 
 export default ActionButton;

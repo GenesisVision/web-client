@@ -3,6 +3,8 @@ import "./chart-period.scss";
 import classNames from "classnames";
 import GVButton from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,31 +30,35 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
     []
   );
   return (
-    <div className="chart-period">
+    <Row className="chart-period">
       <MutedText>
-        {ChartPeriodTypeValues.map(period => (
-          <GVButton
-            testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
-            noPadding
-            key={period}
-            className={classNames("chart-period__period-item", {
-              "chart-period__period-item--active": type === period
-            })}
-            onClick={handleChangePeriod(period)}
-            variant="text"
-            color="secondary"
-            disabled={type === period}
-          >
-            {t(`chart-period.${ChartPeriodType[period]}-short`)}
-          </GVButton>
-        ))}
+        <Row>
+          {ChartPeriodTypeValues.map(period => (
+            <RowItem>
+              <GVButton
+                testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
+                noPadding
+                key={period}
+                className={classNames("chart-period__period-item", {
+                  "chart-period__period-item--active": type === period
+                })}
+                onClick={handleChangePeriod(period)}
+                variant="text"
+                color="secondary"
+                disabled={type === period}
+              >
+                {t(`chart-period.${ChartPeriodType[period]}-short`)}
+              </GVButton>
+            </RowItem>
+          ))}
+        </Row>
       </MutedText>
       <MutedText bold>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
       </MutedText>
-    </div>
+    </Row>
   );
 };
 

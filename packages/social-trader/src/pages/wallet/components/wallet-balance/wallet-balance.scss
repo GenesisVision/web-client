@@ -4,7 +4,6 @@
 
 .wallet-balance {
   &__divider {
-    @include adaptive-margin(right, $padding-small);
     border-right: 1px solid rgba($text-dark-color, 0.3);
     @include height($padding-upper-medium);
   }

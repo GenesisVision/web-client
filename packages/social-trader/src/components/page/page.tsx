@@ -1,14 +1,15 @@
-import "./page.scss";
-
 import BackButton from "components/back-button/back-button";
 import { TitleContext } from "components/link/link.helper";
 import {
   IPageSeoWrapperProps,
   PageSeoWrapper
 } from "components/page/page-seo-wrapper";
+import { Row } from "components/row/row";
 import { useRefLink } from "hooks/ref-link";
 import * as React from "react";
 import { PropsWithChildren } from "react";
+
+import "./page.scss";
 
 const Page = ({
   showTitle,
@@ -37,7 +38,9 @@ const Page = ({
             <h1>{title}</h1>
           </div>
         )}
-        {children}
+        <Row onlyOffset large>
+          {children}
+        </Row>
       </PageSeoWrapper>
     </TitleContext.Provider>
   );

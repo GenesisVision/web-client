@@ -15,10 +15,6 @@
       width: 70%;
     }
   }
-
-  &__title {
-    margin-bottom: $padding-xsmall;
-  }
   &__description-block {
     display: flex;
     flex-direction: column;
@@ -33,7 +29,7 @@
   }
   &__description {
     max-width: 500px;
-    @include adaptive-margin(bottom, $padding-big);
+    @include line-height($font-size-common * 1.5);
     text-align: center;
     &--side {
       text-align: left;

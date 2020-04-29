@@ -3,8 +3,9 @@
 
 .chart-currency-selector {
   &__container {
-    display: flex;
-    align-items: center;
+    & .tile-filter-item {
+      padding-bottom: 0;
+    }
     & .tag-button {
       margin-right: 0;
     }
@@ -23,7 +24,5 @@
     & .select__text {
       @include font-size($tag-font-size);
     }
-    display: flex;
-    align-items: center;
   }
 }

@@ -8,7 +8,7 @@ const _InputImageWrapper: React.FC<Props> = props => {
   const { setFieldValue, name } = props;
   const onChange = useCallback(
     (e: IImageChangeEvent) => {
-      setFieldValue(name, e.target.value, true);
+      setFieldValue(name, e.target.value[0], true);
     },
     [setFieldValue, name]
   );

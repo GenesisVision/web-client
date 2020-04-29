@@ -1,8 +1,8 @@
-import "./tooltip-content.scss";
-
 import classNames from "classnames";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import React from "react";
+
+import "./tooltip-content.scss";
 
 const _TooltipContent: React.FC<Props> = ({
   small,
@@ -12,7 +12,7 @@ const _TooltipContent: React.FC<Props> = ({
   return (
     <PopoverContentCardBlock size={"small"} fixed={fixed}>
       <div
-        className={classNames({
+        className={classNames("tooltip-content", {
           "tooltip-content--small": small
         })}
       >

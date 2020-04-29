@@ -1,10 +1,9 @@
-import "./follows-list.scss";
-
 import classNames from "classnames";
 import { FollowDetailsListItem } from "gv-api-web";
 import React from "react";
 
 import FollowsItem from "./follows-item";
+import "./follows-list.scss";
 
 interface Props {
   className?: string;
@@ -17,7 +16,7 @@ const _FollowsList: React.FC<Props> = ({ className, follows }) => (
       <FollowsItem
         key={follow.id}
         title={follow.title}
-        logo={follow.logo}
+        logo={follow.logoUrl}
         color={follow.color}
         count={follow.subscribersCount}
         url={follow.url}

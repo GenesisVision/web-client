@@ -3,7 +3,7 @@
 .fund-asset-filter {
   &__asset-name {
     @include font-size($font-size-common);
-    @include adaptive-margin(right, $padding-xxsmall);
+    @include adaptive-padding(right, $padding-xxsmall);
   }
 
   &__assets-block {

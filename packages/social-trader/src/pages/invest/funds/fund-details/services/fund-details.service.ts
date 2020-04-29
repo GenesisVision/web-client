@@ -1,11 +1,15 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import authService from "services/auth-service";
-import { CurrencyEnum, MiddlewareDispatch, TGetState } from "utils/types";
+import Token from "services/api-client/token";
+import {
+  CurrencyEnum,
+  MiddlewareDispatch,
+  NextPageWithReduxContext,
+  TGetState
+} from "utils/types";
 
 import {
   fetchFundAbsoluteProfitChartAction,
@@ -19,13 +23,13 @@ import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-
 
 export const dispatchFundDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg(),
+  auth = Token.create(),
   currency: CurrencyEnum = "GVT"
 ) => async (dispatch: MiddlewareDispatch) =>
   await dispatch(fetchFundDescriptionAction(id, auth, currency));
 
 export const dispatchFundDescription = (
-  ctx?: NextPageContext,
+  ctx?: NextPageWithReduxContext,
   currency?: CurrencyEnum
 ) => async (dispatch: MiddlewareDispatch, getState: TGetState) => {
   const {
@@ -34,7 +38,7 @@ export const dispatchFundDescription = (
   return await dispatch(
     dispatchFundDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx),
+      ctx?.token,
       currency
     )
   );

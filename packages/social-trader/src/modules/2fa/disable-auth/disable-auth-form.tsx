@@ -2,9 +2,11 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useTab from "hooks/tab.hook";
@@ -58,45 +60,58 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
           <GVTab value={TAB.TFA} label={t("2fa-page.tabs.tfa")} />
           <GVTab value={TAB.RECOVERY} label={t("2fa-page.tabs.recovery")} />
         </GVTabs>
-        {tab === TAB.TFA && (
+        <Row onlyOffset>
+          {tab === TAB.TFA && (
+            <GVHookFormField
+              wide
+              name={FIELDS.twoFactorCode}
+              type="tel"
+              label={t("2fa-page.google-code")}
+              component={SimpleTextField}
+              autoComplete="off"
+              allowNegative={false}
+              format="######"
+            />
+          )}
+          {tab === TAB.RECOVERY && (
+            <GVHookFormField
+              wide
+              name={FIELDS.recoveryCode}
+              type="tel"
+              label={t("2fa-page.tabs.recovery")}
+              component={SimpleTextField}
+              autoComplete="off"
+              allowNegative={false}
+              format="######"
+            />
+          )}
+        </Row>
+        <Row onlyOffset>
           <GVHookFormField
-            name={FIELDS.twoFactorCode}
-            type="tel"
-            label={t("2fa-page.google-code")}
-            component={SimpleTextField}
-            autoComplete="off"
-            allowNegative={false}
-            format="######"
-          />
-        )}
-        {tab === TAB.RECOVERY && (
-          <GVHookFormField
-            name={FIELDS.recoveryCode}
-            type="tel"
-            label={t("2fa-page.tabs.recovery")}
-            component={SimpleTextField}
-            autoComplete="off"
-            allowNegative={false}
-            format="######"
-          />
-        )}
-        <GVHookFormField
-          name={FIELDS.password}
-          type="password"
-          label={t("2fa-page.password")}
-          component={SimpleTextField}
-          autoComplete="new-password"
-        />
-        <DialogError error={errorMessage} />
-        <DialogButtons>
-          <SubmitButton
             wide
-            className="google-auth__button"
-            isSuccessful={!errorMessage}
-          >
-            {t("buttons.disable")}
-          </SubmitButton>
-        </DialogButtons>
+            name={FIELDS.password}
+            type="password"
+            label={t("2fa-page.password")}
+            component={SimpleTextField}
+            autoComplete="new-password"
+          />
+        </Row>
+        {errorMessage && (
+          <Row>
+            <FormError error={errorMessage} />
+          </Row>
+        )}
+        <Row large>
+          <DialogButtons>
+            <SubmitButton
+              wide
+              className="google-auth__button"
+              isSuccessful={!errorMessage}
+            >
+              {t("buttons.disable")}
+            </SubmitButton>
+          </DialogButtons>
+        </Row>
       </DialogBottom>
     </HookForm>
   );

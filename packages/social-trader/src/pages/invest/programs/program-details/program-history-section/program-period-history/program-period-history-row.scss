@@ -2,11 +2,6 @@
 
 .program-period-history-row {
   &__details-cell {
-    display: flex;
-    line-height: 30px;
     justify-content: space-between;
-  }
-  &__investors-container {
-    @include adaptive-margin(right, $padding-xsmall);
   }
 }

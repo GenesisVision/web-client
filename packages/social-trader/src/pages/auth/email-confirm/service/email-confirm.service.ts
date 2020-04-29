@@ -1,4 +1,4 @@
-import authApi from "services/api-client/auth-api";
+import { api } from "services/api-client/swagger-custom-client";
 import authService from "services/auth-service";
 
 export const confirmEmail = ({
@@ -8,7 +8,10 @@ export const confirmEmail = ({
   userId: string;
   code: string;
 }) =>
-  authApi.confirmEmail({ userId, code }).then(response => {
-    authService.storeToken(response);
-    return response;
-  });
+  api
+    .auth()
+    .confirmEmail({ userId, code })
+    .then(response => {
+      authService.storeToken(response);
+      return response;
+    });

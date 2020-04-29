@@ -1,9 +1,9 @@
-import "./transfer.button.scss";
-
 import ImageBaseElement from "components/avatar/image-base.element";
+import { Center } from "components/center/center";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { RowItem } from "components/row-item/row-item";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { InternalTransferRequestType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -12,6 +12,8 @@ import TransferPopup from "modules/transfer/transfer-popup";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import "./transfer.button.scss";
 
 const _TransferButton: React.FC<Props> = ({
   successMessage,
@@ -99,16 +101,18 @@ const FullButton: React.FC<{
         disabled={disabled}
         onClick={onClick}
       >
-        <>
+        <Center>
           {withIcon && (
-            <ImageBaseElement
-              className="transfer-button__full-button-icon"
-              src={ConvertIcon}
-              alt={labelText}
-            />
+            <RowItem small>
+              <ImageBaseElement
+                className="transfer-button__full-button-icon"
+                src={ConvertIcon}
+                alt={labelText}
+              />
+            </RowItem>
           )}
-          {labelText}
-        </>
+          <RowItem>{labelText}</RowItem>
+        </Center>
       </GVButton>
     );
   }

@@ -1,5 +1,3 @@
-import "./asset-block.scss";
-
 import classNames from "classnames";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
@@ -7,11 +5,14 @@ import DetailsBlock, {
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link, { ToType } from "components/link/link";
 import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import DashboardHorizontalWindowList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-window-list";
 import { InvestAssetType } from "pages/invest/invest.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ListChildComponentProps } from "react-window";
+
+import "./asset-block.scss";
 
 const ASSET_WIDTH = 312;
 const ASSET_HEIGHT = 390;
@@ -45,19 +46,23 @@ export const AssetBlock: React.FC<Props> = ({
           "asset-block__description-block--side": side
         })}
       >
-        <h2 className="asset-block__title">{title}</h2>
-        <div
+        <Row>
+          <h2>{title}</h2>
+        </Row>
+        <Row
           className={classNames("asset-block__description", {
             "asset-block__description--side": side
           })}
         >
           <MutedText noWrap={false}>{description}</MutedText>
-        </div>
-        <Link to={investLink}>
-          <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
-            {buttonLabel || t("invest.invest-button")}
-          </GVButton>
-        </Link>
+        </Row>
+        <Row xlarge>
+          <Link to={investLink}>
+            <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
+              {buttonLabel || t("invest.invest-button")}
+            </GVButton>
+          </Link>
+        </Row>
       </div>
       <div className="asset-block__assets-block">
         <DashboardHorizontalWindowList

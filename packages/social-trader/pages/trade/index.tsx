@@ -8,4 +8,8 @@ const Page: NextPage = () => {
   return <TradePage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["landing-page"]
+});
+
 export default compose(withDefaultLayout)(Page);

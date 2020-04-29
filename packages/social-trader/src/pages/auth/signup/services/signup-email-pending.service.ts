@@ -1,12 +1,12 @@
+import { api } from "services/api-client/swagger-custom-client";
 import { CaptchaCheckResult } from "gv-api-web";
-import authApi from "services/api-client/auth-api";
 
 export const sendConfirmationLink = (email: string) => ({
   captchaCheckResult
 }: {
   captchaCheckResult: CaptchaCheckResult;
 }) =>
-  authApi.resendConfirmationLink({
+  api.auth().resendConfirmationLink({
     body: {
       email,
       captchaCheckResult

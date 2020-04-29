@@ -5,6 +5,8 @@ import { MutedText } from "components/muted-text/muted-text";
 import React from "react";
 
 const _GvInput: React.FC<Props> = ({
+  showError = true,
+  bottomLine = true,
   correct,
   wrapperClassName,
   noMargin,
@@ -42,6 +44,7 @@ const _GvInput: React.FC<Props> = ({
       )}
       <div
         className={classNames("gv-input", className, {
+          "gv-input--bottom-line": bottomLine,
           "gv-input--correct": correct,
           "gv-input--disabled": disabled,
           "gv-input--invalid": touched && error,
@@ -60,7 +63,7 @@ const _GvInput: React.FC<Props> = ({
           </div>
         )}
       </div>
-      {touched && error && (
+      {showError && touched && error && (
         <div className={classNames("gv-input__error", errorClassName)}>
           {error}
         </div>
@@ -74,6 +77,11 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  onFocus?: VoidFunction;
+  showError?: boolean;
+  ref?: any;
+  onKeyDown?: (e: any) => any;
+  bottomLine?: boolean;
   correct?: boolean;
   adornment?: React.ReactNode;
   label?: string | React.ReactNode;

@@ -50,7 +50,7 @@ export const getBrokerState = (
 export const getBrokerLoaderData = (): Broker => ({
   name: getRandomWord(),
   description: getRandomWords(11),
-  logo: "",
+  logoUrl: "",
   terms: getRandomWord(),
   assets: getRandomWord(),
   fee: getRandomInteger(0, 100),
@@ -58,6 +58,7 @@ export const getBrokerLoaderData = (): Broker => ({
   leverageMax: getRandomInteger(0, 100),
   accountTypes: [
     {
+      isCountryNotUSRequired: false,
       isDepositRequired: false,
       isKycRequired: false,
       id: getRandomWord(),

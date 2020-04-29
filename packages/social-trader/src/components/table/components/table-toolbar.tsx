@@ -42,30 +42,34 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
 
   if (hide) return null;
 
+  const showTitle = title && !disableTitle;
+  const showMappings = renderMappings && updateFilter && filtering;
+  const showSortingFilter = view === LIST_VIEW.CARDS && sorting !== undefined;
   return (
     <Row className="table__toolbar">
-      <Row>
-        {title && !disableTitle && (
-          <RowItem>
-            <h3 className="table__title">{title}</h3>
-          </RowItem>
-        )}
-        {renderMappings && updateFilter && filtering && (
-          <RowItem>
-            <Row>{renderMappings(updateFilter, filtering)}</Row>
-          </RowItem>
-        )}
-      </Row>
-      {view === LIST_VIEW.CARDS && sorting !== undefined && (
-        <SortingFilter
-          sorting={sorting}
-          columns={columns}
-          updateSorting={updateSorting}
-          renderValueText={renderSorting}
-        />
+      {!showTitle && !showMappings && !showSortingFilter && <div />}
+      {showTitle && (
+        <RowItem>
+          <h3 className="table__title">{title}</h3>
+        </RowItem>
       )}
+      {showMappings && (
+        <div className="table__mapping">
+          <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
+        </div>
+      )}
+      <div className="table__sorting-filter">
+        {showSortingFilter && (
+          <SortingFilter
+            sorting={sorting}
+            columns={columns}
+            updateSorting={updateSorting}
+            renderValueText={renderSorting}
+          />
+        )}
+      </div>
       <RowItem>
-        <Row wrap>
+        <Row>
           <RowItem>
             <Row wrap>
               {renderFilters &&
@@ -103,7 +107,9 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
 interface ITableToolbarInnerProps {
   view: LIST_VIEW;
   isViewSwitchEnabled: boolean;
+
   onChange(view: LIST_VIEW): any;
+
   exportButtonToolbar?: JSX.Element;
 }
 

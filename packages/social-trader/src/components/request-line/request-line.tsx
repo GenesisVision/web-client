@@ -1,5 +1,3 @@
-import "./request-line.scss";
-
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
@@ -11,11 +9,20 @@ import NumberFormat from "react-number-format";
 import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
+import "./request-line.scss";
+
 const _RequestLine: React.FC<Props> = ({
   request: { assetDetails, type, amount, currency, date, canCancelRequest, id },
   onApplyCancelRequest
 }) => {
-  const { title, successFee, entryFee, exitFee } = assetDetails;
+  const {
+    title,
+    successFee,
+    entryFee,
+    exitFee,
+    managementFee,
+    assetType
+  } = assetDetails;
   const [t] = useTranslation();
   return (
     <div className="request-line">
@@ -58,20 +65,37 @@ const _RequestLine: React.FC<Props> = ({
         >
           {t("program-details-page.description.successFee")}
         </StatisticItem>
-        <StatisticItem
-          condition={entryFee !== null}
-          label={
-            <NumberFormat
-              value={entryFee}
-              suffix={` %`}
-              allowNegative={false}
-              displayType="text"
-            />
-          }
-          invert
-        >
-          {t("fund-details-page.description.entryFee")}
-        </StatisticItem>
+        {assetType === "Fund" ? (
+          <StatisticItem
+            condition={entryFee !== null}
+            label={
+              <NumberFormat
+                value={entryFee}
+                suffix={` %`}
+                allowNegative={false}
+                displayType="text"
+              />
+            }
+            invert
+          >
+            {t("fund-details-page.description.entryFee")}
+          </StatisticItem>
+        ) : (
+          <StatisticItem
+            condition={managementFee !== null}
+            label={
+              <NumberFormat
+                value={managementFee}
+                suffix={` %`}
+                allowNegative={false}
+                displayType="text"
+              />
+            }
+            invert
+          >
+            {t("program-details-page.description.management-fee")}
+          </StatisticItem>
+        )}
         <StatisticItem
           condition={exitFee !== null}
           label={

@@ -1,14 +1,13 @@
 import Page from "components/page/page";
+import CreateFundSettingsSection from "pages/create-fund/components/create-fund-settings/create-fund-settings-section";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-import CreateFundContainer from "./components/create-fund.container";
 
 const _CreateFundPage: React.FC = () => {
   const [t] = useTranslation();
   return (
     <Page showTitle title={t("create-fund-page.title")}>
-      <CreateFundContainer />
+      <CreateFundSettingsSection />
     </Page>
   );
 };

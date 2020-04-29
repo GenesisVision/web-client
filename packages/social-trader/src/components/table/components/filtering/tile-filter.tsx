@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
 import { ITileFilterItemProps } from "./tile-filter-item";
+import "./tile-filter.scss";
 
 const TileFilter: React.FC<Props> = ({
   selectedTiles,
@@ -50,14 +51,16 @@ const TileFilter: React.FC<Props> = ({
   return (
     <RowItem>
       <Row>
-        <RowItem>
-          <Row>{selectedItems}</Row>
+        <RowItem large>
+          <Row className="tile-filter__items">{selectedItems}</Row>
         </RowItem>
-        <TileFilterButton
-          isActive={!!anchor}
-          onClick={setAnchor}
-          title={buttonTitle}
-        />
+        <RowItem>
+          <TileFilterButton
+            isActive={!!anchor}
+            onClick={setAnchor}
+            title={buttonTitle}
+          />
+        </RowItem>
       </Row>
       <Popover
         anchorEl={anchor}

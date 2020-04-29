@@ -1,13 +1,19 @@
-import i18next from "i18next";
+import { TFunction } from "i18next";
 import { number, string } from "yup";
 
 export const emailValidator = string()
   .email("Invalid email address.")
   .required("Email is required.");
 
-export const passwordValidator = string()
-  .min(8, "Password must be at least 8 characters.")
-  .required("Password is required.");
+export const passwordValidator = (t: TFunction) =>
+  string()
+    .min(
+      6,
+      t("auth.password-restore.validators.password-is-short", {
+        count: 6
+      })
+    )
+    .required(t("auth.password-restore.validators.password-required"));
 
 export const ethGvtWalletValidator = string().matches(
   /^0x[a-fA-F0-9]{40}$/,
@@ -19,7 +25,7 @@ export const btcWalletValidator = string().matches(
   "Invalid wallet address"
 );
 
-export const assetTitleShape = (t: i18next.TFunction) => {
+export const assetTitleShape = (t: TFunction) => {
   return string()
     .trim()
     .required(t("create-program-page.settings.validation.title-required"))
@@ -31,7 +37,7 @@ export const assetTitleShape = (t: i18next.TFunction) => {
     );
 };
 
-export const assetDescriptionShape = (t: i18next.TFunction) => {
+export const assetDescriptionShape = (t: TFunction) => {
   return string()
     .trim()
     .required(t("create-program-page.settings.validation.description-required"))
@@ -40,7 +46,7 @@ export const assetDescriptionShape = (t: i18next.TFunction) => {
 };
 
 export const signalSuccessFeeShape = (
-  t: i18next.TFunction,
+  t: TFunction,
   min: number,
   max: number
 ) => {
@@ -56,7 +62,7 @@ export const signalSuccessFeeShape = (
 };
 
 export const signalVolumeFeeShape = (
-  t: i18next.TFunction,
+  t: TFunction,
   min: number = 0,
   max: number = 0.1
 ) => {
@@ -78,7 +84,7 @@ export const signalVolumeFeeShape = (
     );
 };
 
-export const entryFeeShape = (t: i18next.TFunction, max: number) =>
+export const entryFeeShape = (t: TFunction, max: number) =>
   number()
     .required(t("create-program-page.settings.validation.entry-fee-required"))
     .min(0, t("create-program-page.settings.validation.entry-fee-min"))
@@ -89,7 +95,7 @@ export const entryFeeShape = (t: i18next.TFunction, max: number) =>
       })
     );
 
-export const successFeeShape = (t: i18next.TFunction, max: number) =>
+export const successFeeShape = (t: TFunction, max: number) =>
   number()
     .required(t("create-program-page.settings.validation.success-fee-required"))
     .min(0, t("create-program-page.settings.validation.success-fee-min"))
@@ -100,7 +106,7 @@ export const successFeeShape = (t: i18next.TFunction, max: number) =>
       })
     );
 
-export const exitFeeShape = (t: i18next.TFunction, max: number) =>
+export const exitFeeShape = (t: TFunction, max: number) =>
   number()
     .required(t("create-fund-page.settings.validation.exit-fee-required"))
     .min(0, t("create-fund-page.settings.validation.exit-fee-min"))
@@ -111,10 +117,7 @@ export const exitFeeShape = (t: i18next.TFunction, max: number) =>
       })
     );
 
-export const twoFactorValidator = (
-  t: i18next.TFunction,
-  twoFactorEnabled: boolean
-) => {
+export const twoFactorValidator = (t: TFunction, twoFactorEnabled: boolean) => {
   return twoFactorEnabled
     ? string()
         .trim()

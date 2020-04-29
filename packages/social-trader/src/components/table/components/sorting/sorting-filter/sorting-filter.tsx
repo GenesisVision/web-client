@@ -1,7 +1,5 @@
-import "./sorting-filter.scss";
-
+import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
-import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 
 import {
@@ -15,6 +13,7 @@ import {
   TFilter
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
+import "./sorting-filter.scss";
 
 export const SORTING_FILTER_NAME = "sorting";
 
@@ -56,25 +55,23 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
   const columnValues = composeSortingColumnValues();
 
   return (
-    <RowItem>
-      <div className="sorting-filter">
-        <SelectFilter
-          name={SORTING_FILTER_NAME}
-          label="Order By"
-          value={composeSortingColumnName()}
-          values={columnValues}
-          onChange={handleOnSelectChange}
-        />
-        <GVButton
-          variant="text"
-          color="secondary"
-          className="sorting-filter__btn"
-          onClick={handleOnDirectionChange(!isAsc())}
-        >
-          {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
-        </GVButton>
-      </div>
-    </RowItem>
+    <Center>
+      <SelectFilter
+        name={SORTING_FILTER_NAME}
+        label="Order By"
+        value={composeSortingColumnName()}
+        values={columnValues}
+        onChange={handleOnSelectChange}
+      />
+      <GVButton
+        variant="text"
+        color="secondary"
+        className="sorting-filter__btn"
+        onClick={handleOnDirectionChange(!isAsc())}
+      >
+        {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
+      </GVButton>
+    </Center>
   );
 };
 

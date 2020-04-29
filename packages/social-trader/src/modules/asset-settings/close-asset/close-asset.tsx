@@ -1,4 +1,5 @@
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import { AssetTypeExt, PrivateTradingAccountType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
@@ -11,7 +12,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
   const [isCloseAssetOpen, setCloseAssetOpen, setCloseAssetClose] = useIsOpen();
   return (
     <>
-      <div className="asset-settings__block-wrapper">
+      <Row onlyOffset className="asset-settings__block-wrapper">
         <p className="asset-settings__text">
           {t(`asset-settings.period-and-closing.text-${asset.toLowerCase()}`)}
         </p>
@@ -22,7 +23,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
         >
           {t(`asset-settings.buttons.close-${asset.toLowerCase()}`)}
         </GVButton>
-      </div>
+      </Row>
       <ConfirmCloseAssetContainer
         asset={asset}
         open={isCloseAssetOpen}

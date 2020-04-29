@@ -1,7 +1,8 @@
-import "./form-text-field.scss";
-
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
+
+import "./form-text-field.scss";
 
 const _FormTextField: React.FC<Props> = ({ children, topPadding, accent }) => {
   return (
@@ -12,7 +13,7 @@ const _FormTextField: React.FC<Props> = ({ children, topPadding, accent }) => {
           "form-text-field__text--color-accent": accent
         })}
       >
-        {children}
+        <MutedText noWrap={false}>{children}</MutedText>
       </p>
     </div>
   );

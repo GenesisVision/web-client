@@ -3,7 +3,7 @@ import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn,
@@ -52,7 +52,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
 
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
-  const assetLogo = asset.publicInfo ? asset.publicInfo.logo : "";
+  const assetLogo = asset.publicInfo ? asset.publicInfo.logoUrl : "";
   const renderActions = ({
     anchor,
     clearAnchor
@@ -61,6 +61,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
+      currency={asset.accountInfo.currency}
       brokerType={asset.broker && asset.broker.type}
       onApply={updateItems}
       name={asset.publicInfo.title}
@@ -94,7 +95,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.equity")}>
+          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,
@@ -104,15 +105,15 @@ const _DashboardPublicCard: React.FC<Props> = ({
               suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </StatisticItemInner>
           {asset.broker && (
-            <StatisticItem label={t("dashboard-page.trading.broker")}>
+            <StatisticItemInner label={t("dashboard-page.trading.broker")}>
               {asset.broker.name}
-            </StatisticItem>
+            </StatisticItemInner>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.ddown")}>
+          <StatisticItemInner label={t("dashboard-page.trading.ddown")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
@@ -121,25 +122,25 @@ const _DashboardPublicCard: React.FC<Props> = ({
               )}
               displayType="text"
             />
-          </StatisticItem>
+          </StatisticItemInner>
           {!!asset.signalInfo && (
-            <StatisticItem
+            <StatisticItemInner
               label={t("dashboard-page.trading.subscribers-count")}
             >
               {asset.signalInfo.subscribersCount}
-            </StatisticItem>
+            </StatisticItemInner>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.age")}>
+          <StatisticItemInner label={t("dashboard-page.trading.age")}>
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItem>
+          </StatisticItemInner>
           {asset.accountInfo && asset.accountInfo.login && (
-            <StatisticItem label={t("dashboard-page.trading.login")}>
+            <StatisticItemInner label={t("dashboard-page.trading.login")}>
               {asset.accountInfo.login}
-            </StatisticItem>
+            </StatisticItemInner>
           )}
         </TableCardTableColumn>
       </TableCardTable>
@@ -158,7 +159,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         accountType={asset.assetTypeExt}
         canTransfer={asset.actions.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
-        title={asset.accountInfo.title}
+        title={asset.publicInfo.title}
         onApply={updateItems}
         ownAsset={ownAsset}
         canWithdraw={asset.actions.canAddRequestWithdraw && showWithdraw}

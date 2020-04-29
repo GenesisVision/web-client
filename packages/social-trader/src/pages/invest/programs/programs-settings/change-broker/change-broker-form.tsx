@@ -119,7 +119,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         {brokers.map(broker => (
           <RowItem bottomOffset key={broker.name}>
             <BrokerCard
-              logo={broker.logo}
+              logo={broker.logoUrl}
               brokerName={broker.name}
               isSelected={broker.name === selectedBroker.name}
               onSelect={selectBroker}
@@ -129,41 +129,51 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           </RowItem>
         ))}
       </Row>
-      <GVHookFormField
-        name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
-        component={SimpleTextField}
-        label={t("create-program-page.settings.fields.account-type")}
-        InputComponent={Select}
-        disableIfSingle
-        onChange={changeAccount}
-      >
-        {selectedBroker.accountTypes.map(account => (
-          <option value={account.id} key={account.id}>
-            {account.name}
-          </option>
-        ))}
-      </GVHookFormField>
-      <GVHookFormField
-        onChange={changeLeverage}
-        disabled={currentAccountTypeId === brokerAccountTypeId}
-        name={CHANGE_BROKER_FORM_FIELDS.leverage}
-        component={SimpleTextField}
-        label={t("create-program-page.settings.fields.brokers-leverage")}
-        InputComponent={Select}
-        disableIfSingle
-      >
-        {account.leverages.map(leverage => (
-          <option value={leverage} key={leverage}>
-            {leverage}
-          </option>
-        ))}
-      </GVHookFormField>
+      <Row>
+        <RowItem>
+          <GVHookFormField
+            name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
+            component={SimpleTextField}
+            label={t("create-program-page.settings.fields.account-type")}
+            InputComponent={Select}
+            disableIfSingle
+            onChange={changeAccount}
+          >
+            {selectedBroker.accountTypes.map(account => (
+              <option value={account.id} key={account.id}>
+                {account.name}
+              </option>
+            ))}
+          </GVHookFormField>
+        </RowItem>
+        <RowItem>
+          <GVHookFormField
+            onChange={changeLeverage}
+            disabled={currentAccountTypeId === brokerAccountTypeId}
+            name={CHANGE_BROKER_FORM_FIELDS.leverage}
+            component={SimpleTextField}
+            label={t("create-program-page.settings.fields.brokers-leverage")}
+            InputComponent={Select}
+            disableIfSingle
+          >
+            {account.leverages.map(leverage => (
+              <option value={leverage} key={leverage}>
+                {leverage}
+              </option>
+            ))}
+          </GVHookFormField>
+        </RowItem>
+      </Row>
       <HuobiWarning
         from={brokerFrom.name}
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
-      <FormTextField>{t("program-settings.broker.text-change")}</FormTextField>
+      <Row>
+        <FormTextField>
+          {t("program-settings.broker.text-change")}
+        </FormTextField>
+      </Row>
       <GVButton
         onClick={setChangeBrokerOpen}
         color="primary"

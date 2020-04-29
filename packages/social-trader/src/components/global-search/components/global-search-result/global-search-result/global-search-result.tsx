@@ -1,7 +1,8 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import GVTab from "components/gv-tabs/gv-tab";
+import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { CommonPublicAssetsViewModel } from "gv-api-web";
 import useTab from "hooks/tab.hook";
@@ -25,34 +26,36 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTitleBox>
         <h3>{t("global-search-page.heading")}</h3>
       </DetailsBlockTitleBox>
-      <DetailsBlockTabs value={tab} onChange={setTab}>
-        <GVTab
-          value={SEARCH_TABS.PROGRAMS}
-          label={t("global-search-page.programs")}
-          count={data.programs && data.programs.total}
-        />
-        <GVTab
-          value={SEARCH_TABS.FUNDS}
-          label={t("global-search-page.funds")}
-          count={data.funds && data.funds.total}
-        />
-        <GVTab
-          value={SEARCH_TABS.FOLLOWS}
-          label={t("global-search-page.follows")}
-          count={data.follows && data.follows.total}
-        />
-        <GVTab
-          value={SEARCH_TABS.MANAGERS}
-          label={t("global-search-page.managers")}
-          count={data.managers && data.managers.total}
-        />
-      </DetailsBlockTabs>
+      <Row>
+        <DetailsBlockTabs value={tab} onChange={setTab}>
+          <GVTab
+            value={SEARCH_TABS.PROGRAMS}
+            label={t("global-search-page.programs")}
+            count={data.programs && data.programs.total}
+          />
+          <GVTab
+            value={SEARCH_TABS.FUNDS}
+            label={t("global-search-page.funds")}
+            count={data.funds && data.funds.total}
+          />
+          <GVTab
+            value={SEARCH_TABS.FOLLOWS}
+            label={t("global-search-page.follows")}
+            count={data.follows && data.follows.total}
+          />
+          <GVTab
+            value={SEARCH_TABS.MANAGERS}
+            label={t("global-search-page.managers")}
+            count={data.managers && data.managers.total}
+          />
+        </DetailsBlockTabs>
+      </Row>
       <Tab data={data} tab={tab} />
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

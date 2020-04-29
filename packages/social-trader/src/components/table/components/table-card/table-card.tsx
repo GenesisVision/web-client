@@ -1,5 +1,3 @@
-import "./table-card.scss";
-
 import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
@@ -13,11 +11,15 @@ import {
   PROFITABILITY_VARIANT
 } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { SimpleChartPoint } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
+
+import "./table-card.scss";
 
 const TableCard: React.FC<ITableCardProps> = props => {
   return (
@@ -93,7 +95,7 @@ export const TableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <div className="table-card__subtitle">
+    <Row middle={false} className="table-card__subtitle">
       <MutedText noWrap={false}>
         {url ? (
           <Link
@@ -107,7 +109,7 @@ export const TableCardSubTitle: React.FC<{
           children
         )}
       </MutedText>
-    </div>
+    </Row>
   );
 };
 
@@ -159,21 +161,26 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
     const { anchor, setAnchor, clearAnchor } = useAnchor();
     return (
       <TableCardRow>
-        <TableCardAvatar
-          logo={logo}
-          hasAvatar={hasAvatar}
-          alt={title}
-          color={color}
-          level={level}
-          levelProgress={levelProgress}
-          url={detailsUrl}
-        />
-        <div className="table-card__main-info">
+        <RowItem>
+          <TableCardAvatar
+            logo={logo}
+            hasAvatar={hasAvatar}
+            alt={title}
+            color={color}
+            level={level}
+            levelProgress={levelProgress}
+            url={detailsUrl}
+          />
+        </RowItem>
+        <RowItem className="table-card__main-info">
           <div className="table-card__title-wrapper">
-            <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            <Row>
+              <TableCardTitle url={detailsUrl}>{title}</TableCardTitle>
+            </Row>
             {subTitle && (
               <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
+            <Row small>{extraBlock}</Row>
           </div>
           {renderActions && (
             <div className="table-card__actions">
@@ -181,8 +188,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}
-          <div className="table-card__extra-block">{extraBlock}</div>
-        </div>
+        </RowItem>
       </TableCardRow>
     );
   }
@@ -191,10 +197,10 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
 export const TableCardChartBlock: React.FC<ITableCardChartBlockProps> = React.memo(
   ({ chart, assetId, profit }) => (
     <TableCardRow>
-      <div className="table-card__chart">
+      <RowItem className="table-card__chart">
         <ProgramSimpleChart data={chart} />
-      </div>
-      <div className="table-card__chart-info">
+      </RowItem>
+      <RowItem className="table-card__chart-info">
         <div className="table-card__profit">
           {profit !== undefined && (
             <Profitability
@@ -211,7 +217,7 @@ export const TableCardChartBlock: React.FC<ITableCardChartBlockProps> = React.me
             </Profitability>
           )}
         </div>
-      </div>
+      </RowItem>
     </TableCardRow>
   )
 );

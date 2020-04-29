@@ -1,26 +1,26 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { ASSET } from "constants/constants";
+import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import {
   Currency,
+  InvestmentEventLocation,
   InvestmentEventViewModels,
   LevelInfo,
+  NotificationSettingConditionType,
+  NotificationType,
   ProgramFollowDetailsFull
 } from "gv-api-web";
-import { NextPageContext } from "next";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import assetsApi from "services/api-client/assets-api";
-import brokersApi from "services/api-client/brokers-api";
-import eventsApi from "services/api-client/events-api";
-import notificationsApi from "services/api-client/notifications-api";
-import platformApi from "services/api-client/platform-api";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import authService from "services/auth-service";
 import {
   ApiActionResponse,
   CurrencyEnum,
   MiddlewareDispatch,
+  NextPageWithReduxContext,
   RootThunk
 } from "utils/types";
 
@@ -46,12 +46,40 @@ import {
   tradesTableSelector
 } from "../reducers/program-history.reducer";
 
+type ClosePositionMethodType = (
+  id: string,
+  options: {
+    symbol?: string;
+  }
+) => Promise<any>;
+
+export const getCloseOpenPositionMethod = (
+  assetType?: TRADE_ASSET_TYPE
+): ClosePositionMethodType => {
+  switch (assetType) {
+    case TRADE_ASSET_TYPE.FOLLOW:
+      return api.follows().closeAssetTrade;
+    case TRADE_ASSET_TYPE.ACCOUNT:
+      return api.accounts().closeAccountAssetTrade;
+    case TRADE_ASSET_TYPE.PROGRAM:
+    default:
+      return api.programs().closeAssetTrade;
+  }
+};
+
+export const closePosition = (assetType?: TRADE_ASSET_TYPE) => {
+  const method = getCloseOpenPositionMethod(assetType);
+  return ({ id, symbol }: { id: string; symbol?: string }) => {
+    return method(id, { symbol });
+  };
+};
+
 export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
   filters?: ComposeFiltersAllType
 ) => fetchEventsAction(id, eventLocation, filters);
 
 export const getProgramBrokersMethod = (id: string) =>
-  brokersApi.getBrokersForProgram(id);
+  api.brokers().getBrokersForProgram(id);
 
 export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
   dispatch: Dispatch
@@ -59,18 +87,18 @@ export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
 
 export const dispatchProgramDescriptionWithId = (
   id: string,
-  auth = authService.getAuthArg(),
+  token?: Token,
   asset: ASSET = ASSET.PROGRAM
 ): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => dispatch => {
   const action =
     asset === ASSET.FOLLOW
       ? fetchFollowProgramDescriptionAction
       : fetchProgramDescriptionAction;
-  return dispatch(action(id, auth));
+  return dispatch(action(id, token));
 };
 
 export const dispatchProgramDescription = (
-  ctx?: NextPageContext,
+  ctx?: NextPageWithReduxContext,
   asset?: ASSET
 ): RootThunk<ApiActionResponse<ProgramFollowDetailsFull>> => (
   dispatch,
@@ -82,7 +110,7 @@ export const dispatchProgramDescription = (
   return dispatch(
     dispatchProgramDescriptionWithId(
       ctx ? (ctx.query.id as string) : stateId,
-      authService.getAuthArg(ctx),
+      ctx?.token,
       asset
     )
   );
@@ -93,7 +121,7 @@ export const dispatchProgramId = (id: string) => async (
 ) => await dispatch(setProgramIdAction(id));
 
 export const closePeriod = (programId: string) => {
-  return assetsApi.closeCurrentPeriod(programId, authService.getAuthArg());
+  return api.assets().closeCurrentPeriod(programId);
 };
 
 export const getOpenPositions = (programId: string) => (
@@ -111,31 +139,28 @@ export const getTrades = (programId: string) => (
 export const getPeriodHistory = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchPeriodHistoryAction(programId, { authorization, ...filters });
+  return fetchPeriodHistoryAction(programId, filters);
 };
 
 export const getFinancialStatistics = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchFinancialStatisticAction(programId, {
-    authorization,
-    ...filters
-  });
+  return fetchFinancialStatisticAction(programId, filters);
 };
 
 export const getSubscriptions = (programId: string) => (
   filters: ComposeFiltersAllType
 ) => {
-  const authorization = authService.getAuthArg();
-  return fetchSubscriptionsAction(programId, authorization, filters);
+  return fetchSubscriptionsAction(programId, filters);
 };
 
 export const fetchInvestmentsLevels = (
   currency: Currency
 ): Promise<LevelInfo[]> =>
-  platformApi.getProgramLevels({ currency }).then(({ levels }) => levels);
+  api
+    .platform()
+    .getProgramLevels({ currency })
+    .then(({ levels }) => levels);
 
 export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
   dispatch: Dispatch,
@@ -155,6 +180,18 @@ export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
     })
   );
 
+  if (isProgram) {
+    const periodHistoryFilters = composeRequestFiltersByTableState(
+      periodHistoryTableSelector(getState())
+    );
+    dispatch(
+      getPeriodHistory(id)({
+        ...periodHistoryFilters,
+        ...commonFiltering
+      })
+    );
+  }
+
   if (isAuthenticated) {
     const subscriptionFilters = composeRequestFiltersByTableState(
       subscriptionsTableSelector(getState())
@@ -167,16 +204,6 @@ export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
     );
 
     if (isProgram) {
-      const periodHistoryFilters = composeRequestFiltersByTableState(
-        periodHistoryTableSelector(getState())
-      );
-      dispatch(
-        getPeriodHistory(id)({
-          ...periodHistoryFilters,
-          ...commonFiltering
-        })
-      );
-
       const financialStatisticsFilters = composeRequestFiltersByTableState(
         financialStatisticTableSelector(getState())
       );
@@ -197,11 +224,10 @@ export enum EVENT_LOCATION {
 }
 
 export const fetchPortfolioEventsWithoutTable = (
-  eventLocation: EVENT_LOCATION,
+  eventLocation: InvestmentEventLocation,
   filters?: any
 ): Promise<InvestmentEventViewModels> => {
-  const authorization = authService.getAuthArg();
-  return eventsApi.getEvents(authorization, { ...filters, eventLocation });
+  return api.events().getEvents({ ...filters, eventLocation });
 };
 
 export const fetchPortfolioEventsCount = (
@@ -244,9 +270,9 @@ export const addInvestNotify = ({
   minDeposit: number;
   assetId: string;
 }) =>
-  notificationsApi.addNotificationsSettings(authService.getAuthArg(), {
+  api.notifications().addNotificationsSettings({
     assetId,
-    conditionType: "AvailableToInvest",
-    type: "ProgramCondition",
+    conditionType: "AvailableToInvest" as NotificationSettingConditionType,
+    type: "ProgramCondition" as NotificationType,
     conditionAmount: minDeposit
   });

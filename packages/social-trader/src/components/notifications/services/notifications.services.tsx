@@ -1,37 +1,7 @@
-import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
-import {
-  addNotificationsAction,
-  addTotalNotificationsAction,
-  calculateOptions,
-  clearNotificationsAction,
-  setNotificationsOptionsAction
-} from "components/notifications/actions/notifications.actions";
-import { NotificationList } from "gv-api-web";
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
-import { RootThunk } from "utils/types";
+import { SkipTake } from "components/notifications/components/notifications.helpers";
+import { api } from "services/api-client/swagger-custom-client";
 
-export const serviceGetNotifications = (): RootThunk<Promise<
-  NotificationList
->> => (dispatch, getState) => {
-  const { notifications } = getState();
-  return notificationsApi
-    .getNotifications(authService.getAuthArg(), notifications.options)
-    .then(response => {
-      const options = calculateOptions(notifications.options, response.total);
-      dispatch(addTotalNotificationsAction(response.total));
-      dispatch(addNotificationsAction(response.notifications));
-      dispatch(setNotificationsOptionsAction(options));
-      return response;
-    });
-};
+export const fetchNotifications = (options: SkipTake) =>
+  api.notifications().getNotifications(options);
 
-export const serviceClearNotifications = (): RootThunk<void> => dispatch => {
-  dispatch(clearNotificationsAction());
-  dispatch(addTotalNotificationsAction(0));
-  dispatch(setNotificationsOptionsAction(calculateOptions()));
-  dispatch(fetchProfileHeaderInfoAction());
-};
-
-export const clearAll = () =>
-  notificationsApi.readAllNotification(authService.getAuthArg());
+export const clearAll = () => api.notifications().readAllNotification();

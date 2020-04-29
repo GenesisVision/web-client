@@ -1,17 +1,16 @@
 import Router from "next/router";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
-import assetsApi from "services/api-client/assets-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const cancelChangeBrokerMethod = (programId: string) =>
-  assetsApi.cancelChangeBroker(programId, authService.getAuthArg());
+  api.assets().cancelChangeBroker(programId);
 
 export const changeBrokerMethod = (props: {
   id: string;
   brokerAccountTypeId: string;
   leverage: number;
 }) => {
-  return assetsApi.changeBroker(props.id, authService.getAuthArg(), {
+  return api.assets().changeBroker(props.id, {
     body: {
       newBrokerAccountTypeId: props.brokerAccountTypeId,
       newLeverage: props.leverage

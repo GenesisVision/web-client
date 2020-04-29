@@ -10,6 +10,7 @@ import CreateAssetNavigation from "components/assets/fields/create-asset-navigat
 import Currency from "components/assets/fields/currency";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import Leverage from "components/assets/fields/leverage";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { Broker } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
@@ -130,11 +131,13 @@ const _CreateAccountSettings: React.FC<Props> = ({
             setFieldValue={setValue}
             assetCurrency={currency as CurrencyEnum}
           />
-          <CreateAssetNavigation
-            asset={"ACCOUNT"}
-            isSuccessful={!errorMessage}
-            disabled={disabled}
-          />
+          <Row>
+            <CreateAssetNavigation
+              asset={"ACCOUNT"}
+              isSuccessful={!errorMessage}
+              disabled={disabled}
+            />
+          </Row>
         </>
       )}
     </HookForm>

@@ -32,7 +32,7 @@ const _PerformanceData: React.FC<Props> = ({
         <ImageBase
           alt={brokerDetails.name}
           className={"asset-details-description__broker"}
-          src={brokerDetails.logo}
+          src={brokerDetails.logoUrl}
         />
       </StatisticItem>
       {currency && (

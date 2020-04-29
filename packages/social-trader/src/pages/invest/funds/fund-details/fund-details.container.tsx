@@ -13,7 +13,6 @@ import { useAccountCurrency } from "hooks/account-currency.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import filesService from "services/file-service";
 import {
   createFundNotificationsToUrl,
   createFundSettingsToUrl
@@ -44,7 +43,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page.title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={filesService.getFileUrl(description.publicInfo.logo)}
+      previewImage={description.publicInfo.logoUrl}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
@@ -52,7 +51,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         isOwnAsset={description.publicInfo.isOwnAsset}
         id={description.id}
         title={description.publicInfo.title}
-        logo={description.publicInfo.logo}
+        logo={description.publicInfo.logoUrl}
         color={description.publicInfo.color}
         subtitleUrl={description.owner.url}
         socialLinks={description.owner.socialLinks}

@@ -1,8 +1,8 @@
 import { HookFormWalletField as WalletField } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogField } from "components/dialog/dialog-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
@@ -90,35 +90,26 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   return (
     <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
-        <DialogField>
+        <Row>
           <WalletField
             wallets={wallets}
             name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
             label={t("follow-program.create-account.from")}
             onChange={onChangeCurrencyFrom}
           />
-        </DialogField>
-        <DialogField>
-          <StatisticItem label={t("follow-program.create-account.available")}>
-            <NumberFormat
-              value={wallet.available}
-              suffix={` ${currency}`}
-              displayType="text"
-            />
-          </StatisticItem>
-        </DialogField>
-        <DialogField>
-          <InputAmountField
-            wide
-            isAllowed={allowPositiveValuesNumberFormat(
-              CURRENCY_FRACTIONS(currency)
-            )}
-            name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
-            label={t("follow-program.create-account.amount")}
-            currency={currency}
-            setMax={setMaxAmount}
-          />
-          {followCurrency !== currency && (
+        </Row>
+        <InputAmountField
+          wide
+          isAllowed={allowPositiveValuesNumberFormat(
+            CURRENCY_FRACTIONS(currency)
+          )}
+          name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
+          label={t("follow-program.create-account.amount")}
+          currency={currency}
+          setMax={setMaxAmount}
+        />
+        {followCurrency !== currency && (
+          <Row>
             <NumberFormat
               value={formatCurrencyValue(
                 convertToCurrency(+depositAmount, rate),
@@ -128,8 +119,8 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
               suffix={` ${followCurrency}`}
               displayType="text"
             />
-          )}
-        </DialogField>
+          </Row>
+        )}
         <DialogButtons>
           <SubmitButton wide className="invest-form__submit-button">
             {t("follow-program.create-account.next")}

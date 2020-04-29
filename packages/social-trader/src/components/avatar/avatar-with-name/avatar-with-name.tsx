@@ -19,7 +19,7 @@ const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
 
 interface Props {
   avatar?: React.ReactNode;
-  name: string | JSX.Element;
+  name: string | JSX.Element | React.ReactNode;
 }
 
 export const AvatarWithName = React.memo(_AvatarWithName);

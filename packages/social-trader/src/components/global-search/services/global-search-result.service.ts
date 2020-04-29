@@ -1,6 +1,5 @@
 import { CommonPublicAssetsViewModel } from "gv-api-web";
-import searchApi from "services/api-client/search-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
 import { Nullable } from "utils/types";
 
 export const search = (
@@ -16,11 +15,8 @@ export const search = (
     mask: trimmedQuery,
     take: 10
   };
-  if (authService.getAuthArg()) {
-    filters.authorization = authService.getAuthArg();
-  }
 
-  return searchApi.search(filters);
+  return api.search().search(filters);
 };
 
 type RequestFilters = {

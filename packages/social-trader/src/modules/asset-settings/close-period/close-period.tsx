@@ -1,4 +1,5 @@
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import ConfirmClosePeriod from "modules/asset-settings/close-period/confirm-close-period";
@@ -14,14 +15,14 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   ] = useIsOpen();
   return (
     <>
-      <div className="asset-settings__block-wrapper">
+      <Row onlyOffset className="asset-settings__block-wrapper">
         <p className="asset-settings__text">
           {t("program-settings.period-and-closing.text-period")}
         </p>
         <GVButton color="primary" onClick={setClosePeriodOpen}>
           {t("program-details-page.close-period.title")}
         </GVButton>
-      </div>
+      </Row>
       <ConfirmClosePeriod
         open={isClosePeriodOpen}
         onClose={setClosePeriodClose}

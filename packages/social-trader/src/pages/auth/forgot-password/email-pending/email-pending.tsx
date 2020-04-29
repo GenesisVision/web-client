@@ -1,19 +1,20 @@
 import GVButton from "components/gv-button";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-const _EmailPending: React.FC<Props> = ({ onSubmit, t, email }) => (
-  <div className="password-pending__resend">
-    <GVButton variant="text" onClick={() => onSubmit({ email })}>
+const _EmailPending: React.FC<Props> = ({ onSubmit, email }) => {
+  const [t] = useTranslation();
+  return (
+    <GVButton noPadding variant="text" onClick={() => onSubmit({ email })}>
       {t("auth.password-restore.email-pending.email-resend-button-text")}
     </GVButton>
-  </div>
-);
+  );
+};
 
-interface Props extends WithTranslation {
+interface Props {
   onSubmit: (values: { email: string }) => void;
   email: string;
 }
 
-const EmailPending = translate()(React.memo(_EmailPending));
+const EmailPending = React.memo(_EmailPending);
 export default EmailPending;

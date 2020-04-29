@@ -9,15 +9,14 @@
     border-radius: 100%;
     & img {
       width: 100%;
+      border-radius: 100%;
       height: auto;
     }
     &--medium {
-      @include adaptive-margin(right, $padding-xsmall);
       @include width($wallet-item-size);
       @include height($wallet-item-size);
     }
     &--small {
-      @include adaptive-margin(right, $padding-xsmall/$divider-title);
       @include width($wallet-item-size/$divider-title);
       @include height($wallet-item-size/$divider-title);
     }

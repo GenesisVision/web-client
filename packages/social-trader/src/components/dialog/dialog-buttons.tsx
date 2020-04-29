@@ -1,7 +1,12 @@
+import { Row } from "components/row/row";
 import * as React from "react";
 
 export const _DialogButtons: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
-}) => <div className="dialog__buttons">{children}</div>;
+}) => (
+  <Row xlarge className="dialog__buttons">
+    {children}
+  </Row>
+);
 
 export const DialogButtons = React.memo(_DialogButtons);

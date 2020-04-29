@@ -1,6 +1,7 @@
 import "./downloads-section.scss";
 
 import ImageBaseElement from "components/avatar/image-base.element";
+import { useTranslation } from "i18n";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
 
@@ -13,59 +14,64 @@ const MetatraderAndroidLink =
 const MetatraderLoginLink = "https://genesis.vision/trade/mt5";
 
 const DownloadsSection: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className="downloads-section">
       <article className="internal__article" id="pc">
-        <h1>Genesis Vision Downloads</h1>
-        <h2>MetaTrader 5 for PC</h2>
+        <h1>{t("downloads.title")}</h1>
+        <h2>{t("downloads.subtitle-1")}</h2>
         <p>
-          One of the most technically advanced and popular in the world of
-          terminals for exchange trading with direct access to the order books
-          and other new features.
+          {t("downloads.text-1")}
           <br />
-          <a title={"Download Metatrader for PC"} href={MetatraderPCLink}>
-            Download for PC
+          <a
+            title={t("downloads.link-1")}
+            href={MetatraderPCLink}
+          >
+            {t("downloads.link-1")}
             <br />
-            <ImageBaseElement src={MetatraderLogo} alt="metatrader logo" />
+            <ImageBaseElement
+              src={MetatraderLogo}
+              alt={t("downloads.link-1")}
+            />
           </a>
         </p>
       </article>
       <article className="internal__article" id="mobile">
-        <h2>Mobile terminal</h2>
+        <h2>{t("downloads.subtitle-2")}</h2>
         <p>
-          The application provides advanced mobile trading through your
-          favourite gadget. It supports all of the basic functionality of
-          MetaTrader 5, user alerts for events on transactions, and is easy to
-          connect and install.
+          {t("downloads.text-2")}
           <br />
           <a
-            title={"Download Metatrader for IOS"}
+            title={t("downloads.link-2")}
             href={MetatraderIOSLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Version for IOS
+            {t("downloads.link-2")}
           </a>
           <br />
           <a
-            title={"Download Metatrader for Android"}
+            title={t("downloads.link-3")}
             href={MetatraderAndroidLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Version for Android
+            {t("downloads.link-3")}
           </a>
         </p>
       </article>
       <article className="internal__article" id="web">
-        <h2>Web platform</h2>
+        <h2>{t("downloads.subtitle-3")}</h2>
         <p>
-          All the advanced functionality of the MetaTrader 5 platform right in
-          your browser. No need to download and install. Compatible with any
-          operating system (Windows, Mac OS, Linux).
+          {t("downloads.text-3")}
           <br />
-          <a title={"Login to MetaTrader platform"} href={MetatraderLoginLink}>
-            Login to platform
+          <a
+            title={t("downloads.link-4")}
+            href={MetatraderLoginLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("downloads.link-4")}
           </a>
         </p>
       </article>

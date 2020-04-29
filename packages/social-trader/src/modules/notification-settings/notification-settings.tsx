@@ -1,5 +1,4 @@
-import "./notification-settings.scss";
-
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import { NotificationSettingList } from "gv-api-web";
@@ -10,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";
+import "./notification-settings.scss";
 
 const _NotificationSettings: React.FC<Props> = ({
   onSuccess,
@@ -27,27 +27,35 @@ const _NotificationSettings: React.FC<Props> = ({
     }
   ];
   return (
-    <div>
-      <AssetNotificationsGeneral
-        onSuccess={onSuccess}
-        notifications={notificationsGeneral}
-        settings={settingsGeneral}
-      />
-      <NotificationAssets
-        condition={!!settingsProgram.length}
-        settings={settingsProgram}
-        asset={ASSET.PROGRAM}
-      />
-      <NotificationAssets
-        condition={!!settingsFund.length}
-        settings={settingsFund}
-        asset={ASSET.FUND}
-      />
-      <NotificationManagers
-        condition={settingsManager.length > 0}
-        settings={settingsManager}
-      />
-    </div>
+    <>
+      <Row>
+        <AssetNotificationsGeneral
+          onSuccess={onSuccess}
+          notifications={notificationsGeneral}
+          settings={settingsGeneral}
+        />
+      </Row>
+      <Row large>
+        <NotificationAssets
+          condition={!!settingsProgram.length}
+          settings={settingsProgram}
+          asset={ASSET.PROGRAM}
+        />
+      </Row>
+      <Row large>
+        <NotificationAssets
+          condition={!!settingsFund.length}
+          settings={settingsFund}
+          asset={ASSET.FUND}
+        />
+      </Row>
+      <Row large>
+        <NotificationManagers
+          condition={settingsManager.length > 0}
+          settings={settingsManager}
+        />
+      </Row>
+    </>
   );
 };
 

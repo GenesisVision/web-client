@@ -15,6 +15,9 @@ import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
 import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import Token from "services/api-client/token";
+
+export type AnyObjectType = { [keys: string]: any };
 
 export type ReduxDispatch = ThunkDispatch<RootState, any, Action>;
 
@@ -52,7 +55,9 @@ export interface MiddlewareDispatch {
   <A extends ApiAction = ApiAction>(apiAction: A): ApiActionResponse<
     UnpackApiAction<A>
   >;
+
   <A extends ActionType = ActionType>(action: A): A;
+
   <R, S>(asyncAction: RootThunk<R, S>): R;
 }
 
@@ -90,7 +95,11 @@ export interface RootStore<S = any, A extends Action = AnyAction>
   dispatch: MiddlewareDispatch;
 }
 
-export interface NextPageWithReduxContext extends NextPageContext {
+export interface NextPageWithTokenContext extends NextPageContext {
+  token: Token;
+}
+
+export interface NextPageWithReduxContext extends NextPageWithTokenContext {
   // @ts-ignore
   reduxStore: RootStore<AuthRootState, RootThunkAction>; //TODO error
 }
@@ -98,6 +107,12 @@ export interface NextPageWithReduxContext extends NextPageContext {
 export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
 }
+
+export type NextPageWithToken<P = void, IP = P> = NextComponentType<
+  NextPageWithTokenContext,
+  IP,
+  P
+>;
 
 export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
   NextPageWithReduxContext,
@@ -108,6 +123,7 @@ export type NextPageWithRedux<P = void, IP = P> = NextComponentType<
 export type PlatformAssetFull = PlatformAsset & FundAssetPart;
 
 export type FeesType = {
+  managementFeePersonal?: number;
   entryFee?: number;
   entryFeeSelected?: number;
   entryFeeCurrent?: number;

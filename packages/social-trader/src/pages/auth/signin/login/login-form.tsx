@@ -2,6 +2,7 @@ import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -29,7 +30,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.email]: "",
       [FIELDS.password]: ""
     },
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 
@@ -45,24 +46,31 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         autoComplete="email"
         component={SimpleTextField}
       />
-      <GVHookFormField
-        type="password"
-        name={FIELDS.password}
-        label={t("auth.login.placeholder.password")}
-        autoComplete="current-password"
-        component={SimpleTextField}
-      />
+      <Row onlyOffset>
+        <GVHookFormField
+          wide
+          type="password"
+          name={FIELDS.password}
+          label={t("auth.login.placeholder.password")}
+          autoComplete="current-password"
+          component={SimpleTextField}
+        />
+      </Row>
 
-      <div className="login-form__forgot">
+      <Row large className="login-form__forgot">
         <Link to={FORGOT_PASSWORD_ROUTE}>
           <GVButton noPadding variant="text">
             {t("auth.login.forgot")}
           </GVButton>
         </Link>
-      </div>
-      <FormError error={errorMessage} />
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
 
-      <div className="login__submit-block">
+      <Row large>
         <SubmitButton
           checkValid={false}
           checkDirty={false}
@@ -74,7 +82,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         >
           {t("auth.login.confirm-button-text")}
         </SubmitButton>
-      </div>
+      </Row>
     </HookForm>
   );
 };

@@ -30,8 +30,9 @@ export const getInRequestsData = (): TDashboardRequest => ({
     successFee: 0,
     exitFee: 0,
     withdrawPercent: 0,
+    managementFee: getRandomInteger(),
     id: "",
-    logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -102,10 +103,10 @@ export const getTradingStatisticLoaderData = (): TDashboardTradingStatistic => (
 });
 
 const getEventLoaderData = (): TDashboardEvent => ({
-  icon: "",
+  logoUrl: "",
   assetDetails: {
     id: "",
-    logo: "",
+    logoUrl: "",
     color: "",
     title: "",
     url: "",
@@ -164,7 +165,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
       drawdown: getRandomInteger(-10000, 10000)
     },
     id: "",
-    logo: "",
+    logoUrl: "",
     title: getRandomWords(7),
     url: "",
     color: getRandomColor()
@@ -172,6 +173,11 @@ export const getRecommendationLoaderData = (): TRecommendation => {
 };
 
 export const getTotalLoaderData = (): TDashboardTotal => ({
+  limitWithoutKyc: {
+    limit: 0,
+    currency: "GVT",
+    invested: 0
+  },
   total: getRandomInteger(1, 10000),
   trading: getRandomInteger(-10000, 10000),
   invested: getRandomInteger(-10000, 10000),

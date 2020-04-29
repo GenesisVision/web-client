@@ -1,10 +1,10 @@
-import "./events-list.scss";
-
 import classNames from "classnames";
 import { PlatformEvent } from "gv-api-web";
 import EventItem from "pages/landing-page/components/events-list/event-item";
 import EventLastItem from "pages/landing-page/components/events-list/event-last-item";
 import React, { useCallback, useEffect, useState } from "react";
+
+import "./events-list.scss";
 
 const TIME_DELAY = 5000;
 const COUNT_SHOWING_ITEMS = 5;

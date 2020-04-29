@@ -1,5 +1,3 @@
-import "./wallet-title-block.scss";
-
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -8,13 +6,14 @@ import {
   WithBlurLoaderProps
 } from "decorators/with-blur-loader";
 import { WalletSummary } from "gv-api-web";
+import WalletSettingsContainer from "pages/wallet/components/wallet-settings/wallet-settings-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
 
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
-import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
+import "./wallet-title-block.scss";
 
 const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
@@ -26,7 +25,11 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
             <h1>{t("wallet-page.title")}</h1>
           </RowItem>
           <RowItem>
-            <WalletSettingsContainer isPayFeesWithGvt={wallet.payFeesWithGvt} />
+            <WalletSettingsContainer
+              genesisMarketsDiscountPercent={
+                wallet.genesisMarketsDiscountPercent
+              }
+            />
           </RowItem>
         </Row>
         <WalletBalanceElements

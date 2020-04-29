@@ -1,0 +1,10 @@
+{
+  "table-header": {
+    "name": "Name",
+    "age": "Age",
+    "aum": "AUM",
+    "investors": "Investors",
+    "followers": "Followers",
+    "profit": "Profit"
+  }
+}

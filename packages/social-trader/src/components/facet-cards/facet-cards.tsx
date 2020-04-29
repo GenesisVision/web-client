@@ -1,5 +1,3 @@
-import "./facet-cards.scss";
-
 import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
 import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
 import { RowItem } from "components/row-item/row-item";
@@ -10,6 +8,7 @@ import * as React from "react";
 import { useCallback } from "react";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
+import "./facet-cards.scss";
 
 const _FacetCards: React.FC<Props> = ({
   data,
@@ -36,11 +35,10 @@ const _FacetCards: React.FC<Props> = ({
           onScroll={handleScroll}
         >
           {data.map(facet => (
-            <RowItem large>
+            <RowItem large key={facet.id}>
               <FacetCard
                 title={title}
                 fileRoute={fileRoute}
-                key={facet.id}
                 facet={facet}
                 composeFacetUrl={composeFacetUrl}
               />

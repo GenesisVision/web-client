@@ -16,17 +16,15 @@ const DAILY = "daily";
 
 const generateSitemap = dev => {
   if (dev) {
-    console.info("dev");
     /*return async ({ res }) => {
       return res.status(500).end();
     };*/
   }
   return cacheableResponse({
     get: async () => {
-      console.log("generate simemap.xml");
       try {
         const hostname = process.env.HOSTNAME;
-        console.info(hostname);
+
         if (hostname === undefined || typeof hostname !== "string")
           throw Error("process.env.HOSTNAME is not defined");
 

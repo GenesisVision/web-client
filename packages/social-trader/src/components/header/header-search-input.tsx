@@ -1,17 +1,17 @@
-import { globalSearchInputAction } from "components/global-search/actions/global-search.action";
 import { SearchInputField } from "components/global-search/components/global-search-result/global-search-input";
-import { globalSearchInputSelector } from "components/global-search/reducers/global-search.reducer";
+import {
+  GlobalSearchContext,
+  GlobalSearchInitialState
+} from "components/global-search/global-search-context";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useContext, useEffect } from "react";
 
 const _HeaderSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
-  const dispatch = useDispatch();
   const [cancelSearch, setSearchIsCancel, setSearchIsNotCancel] = useIsOpen();
-  const searchValue = useSelector(globalSearchInputSelector);
+  const { searchValue, setSearchValue } = useContext(GlobalSearchContext);
   const handleSearchInput = useCallback(
     ({ target: { value } }: React.ChangeEvent<any>) => {
-      dispatch(globalSearchInputAction(value));
+      setSearchValue(value);
       setSearchIsNotCancel();
     },
     []
@@ -20,7 +20,7 @@ const _HeaderSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
     if (!searchValue) setSearchIsClose();
   }, [searchValue]);
   const handleSearchCancel = useCallback(() => {
-    dispatch(globalSearchInputAction(""));
+    setSearchValue(GlobalSearchInitialState);
     setSearchIsCancel();
   }, []);
 

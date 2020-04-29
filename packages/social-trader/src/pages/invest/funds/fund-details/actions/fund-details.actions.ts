@@ -8,10 +8,11 @@ import { FilteringType } from "components/table/components/filtering/filter.type
 import {
   FundBalanceChart,
   FundDetailsFull,
-  ItemsViewModelReallocationModel
+  ReallocationModelItemsViewModel
 } from "gv-api-web";
 import { FundAbsoluteProfitChartDataType } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";
-import fundsApi from "services/api-client/funds-api";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
@@ -33,7 +34,7 @@ export const fetchFundProfitChartAction = (
   currencies: CurrencyEnum[]
 ): ApiAction<FundProfitChartDataType> => ({
   type: FETCH_FUND_PROFIT_CHART,
-  payload: fundsApi.getFundProfitPercentCharts(id, {
+  payload: api.funds().getFundProfitPercentCharts(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currencies
@@ -46,7 +47,7 @@ export const fetchFundAbsoluteProfitChartAction = (
   currency: CurrencyEnum
 ): ApiAction<FundAbsoluteProfitChartDataType> => ({
   type: FETCH_FUND_ABSOLUTE_PROFIT_CHART,
-  payload: fundsApi.getFundAbsoluteProfitChart(id, {
+  payload: api.funds().getFundAbsoluteProfitChart(id, {
     dateFrom: period.start,
     dateTo: period.end,
     currency
@@ -59,7 +60,7 @@ export const fetchFundBalanceChartAction = (
   currency: CurrencyEnum
 ): ApiAction<FundBalanceChart> => ({
   type: FETCH_FUND_BALANCE_CHART,
-  payload: fundsApi.getFundBalanceChart(id, {
+  payload: api.funds().getFundBalanceChart(id, {
     currency,
     dateFrom: period.start,
     dateTo: period.end,
@@ -69,11 +70,11 @@ export const fetchFundBalanceChartAction = (
 
 export const fetchFundDescriptionAction = (
   id: string,
-  authorization: string,
+  token: Token,
   currency: CurrencyEnum
 ): ApiAction<FundDetailsFull> => ({
   type: FETCH_FUND_DESCRIPTION,
-  payload: fundsApi.getFundDetails(id, { authorization, currency }) // TODO auth
+  payload: api.funds(token).getFundDetails(id, { currency }) // TODO auth
 });
 
 export const statisticCurrencyAction = (
@@ -93,9 +94,9 @@ export const statisticPeriodAction = (
 export const fundReallocateHistoryAction = (
   id: string,
   filters?: FilteringType
-): ApiAction<ItemsViewModelReallocationModel> => ({
+): ApiAction<ReallocationModelItemsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
-  payload: fundsApi.getReallocatingHistory(id, filters)
+  payload: api.funds().getReallocatingHistory(id, filters)
 });
 
 export const setFundIdAction = (id: string): SetFundIdAction => ({

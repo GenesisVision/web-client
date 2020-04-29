@@ -6,14 +6,14 @@ import {
 import { composeRequestValueFunc } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { composeFilters } from "components/table/helpers/filtering.helpers";
 import { calculateSkipAndTake } from "components/table/helpers/paging.helpers";
-import { IDataModel } from "constants/constants";
+import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
+import { NextPageContext } from "next";
 import * as qs from "qs";
 import { FAVORITES_TAB_NAME } from "routes/invest.routes";
-import programApi from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { NextPageWithReduxContext } from "utils/types";
 
-import { FetchProgramsFiltersType } from "../actions/programs-table.actions";
 import {
   DEFAULT_PROGRAM_TABLE_FILTERS,
   PROGRAMS_TABLE_FILTERS,
@@ -23,18 +23,16 @@ import {
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
 export const fetchPrograms = (
-  filters: any //FetchProgramsFiltersType TODO
-): Promise<IDataModel> => {
-  return programApi.getPrograms({
-    ...filters,
-    authorization: authService.getAuthArg()
-  });
+  filters: any, //FetchProgramsFiltersType TODO
+  token?: Token
+): Promise<ProgramDetailsListItemItemsViewModel> => {
+  return api.programs(token).getPrograms(filters);
 };
 
 export const getFiltersFromContext = ({
   asPath = "",
   pathname
-}: NextPageWithReduxContext): FetchProgramsFiltersType => {
+}: NextPageWithReduxContext | NextPageContext) => {
   const showFavorites = pathname.includes(FAVORITES_TAB_NAME);
   const {
     page,
@@ -59,5 +57,5 @@ export const getFiltersFromContext = ({
     ...dateRangeValues,
     sorting,
     showFavorites
-  } as FetchProgramsFiltersType;
+  };
 };

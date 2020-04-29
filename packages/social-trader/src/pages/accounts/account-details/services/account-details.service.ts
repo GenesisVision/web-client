@@ -1,15 +1,20 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
-import { TradesSignalViewModel, TradesViewModel } from "gv-api-web";
-import { NextPageContext } from "next";
+import {
+  SignalTradingEventItemsViewModel,
+  TradesSignalViewModel,
+  TradesViewModel
+} from "gv-api-web";
 import { AccountSubscriptionsType } from "pages/accounts/account-details/services/account-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
-import accountsApi from "services/api-client/accounts-api";
-import followApi from "services/api-client/follow-api";
-import authService from "services/auth-service";
-import { ActionType, MiddlewareDispatch } from "utils/types";
+import { api } from "services/api-client/swagger-custom-client";
+import {
+  ActionType,
+  MiddlewareDispatch,
+  NextPageWithReduxContext
+} from "utils/types";
 
 import {
   fetchAccountAbsoluteProfitChartAction,
@@ -18,53 +23,61 @@ import {
   fetchAccountProfitChartAction,
   fetchOpenPositionsAction,
   fetchTradesAction,
+  fetchTradingLogAction,
   setAccountIdAction
 } from "../actions/account-details.actions";
-import { tradesTableSelector } from "../reducers/account-history.reducer";
+import {
+  tradesTableSelector,
+  tradingLogTableSelector
+} from "../reducers/account-history.reducer";
 
 export const fetchAccountSubscriptions = (
   id: string
 ): Promise<AccountSubscriptionsType> => {
-  return followApi
-    .getFollowSubscriptionsForOwnAccount(id, authService.getAuthArg(), {
+  return api
+    .follows()
+    .getFollowSubscriptionsForOwnAccount(id, {
       onlyActive: true
     })
     .then(({ items }) => items);
 };
 
-export const fetchAccountDescriptionCtx = (id: string, ctx?: NextPageContext) =>
-  accountsApi.getTradingAccountDetails(id, authService.getAuthArg(ctx));
+export const fetchAccountDescriptionCtx = (
+  id: string,
+  ctx?: NextPageWithReduxContext
+) => api.accounts(ctx?.token).getTradingAccountDetails(id);
 
 export const dispatchAccountDescription = (id: string) => (
-  ctx?: NextPageContext
+  ctx?: NextPageWithReduxContext
 ) => async (dispatch: MiddlewareDispatch) => {
-  return await dispatch(
-    fetchAccountDescriptionAction(id, authService.getAuthArg(ctx))
-  );
+  return await dispatch(fetchAccountDescriptionAction(id, ctx?.token));
 };
 
 export const dispatchAccountId = (id: string) => async (
   dispatch: MiddlewareDispatch
 ) => await dispatch(setAccountIdAction(id));
 
+export const getTradingLog = (id: string) => (
+  filters: ComposeFiltersAllType
+): ActionType<Promise<SignalTradingEventItemsViewModel>> => {
+  return fetchTradingLogAction(id, filters);
+};
+
 export const getOpenPositions = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchOpenPositionsAction(id, filters, authorization);
+  return fetchOpenPositionsAction(id, filters);
 };
 
 export const getTrades = (id: string) => (
   filters: ComposeFiltersAllType
 ): ActionType<Promise<TradesSignalViewModel>> => {
-  const authorization = authService.getAuthArg();
-  return fetchTradesAction(id, filters, authorization);
+  return fetchTradesAction(id, filters);
 };
 
-export const getAccountHistoryCounts = (id: string) => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
+export const getAccountHistoryCounts = (hasTradingLog: boolean) => (
+  id: string
+) => (dispatch: Dispatch, getState: () => RootState) => {
   const commonFiltering = { take: 0 };
 
   const tradesFilters = composeRequestFiltersByTableState(
@@ -76,6 +89,17 @@ export const getAccountHistoryCounts = (id: string) => (
       ...commonFiltering
     })
   );
+  if (hasTradingLog) {
+    const tradingLogFilters = composeRequestFiltersByTableState(
+      tradingLogTableSelector(getState())
+    );
+    dispatch(
+      getTradingLog(id)({
+        ...tradingLogFilters,
+        ...commonFiltering
+      })
+    );
+  }
 };
 
 export const getProfitChart: TGetChartFunc = ({

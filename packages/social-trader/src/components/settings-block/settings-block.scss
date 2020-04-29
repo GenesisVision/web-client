@@ -7,6 +7,10 @@
   box-sizing: border-box;
   display: flex;
 
+  &--with-number {
+    @include adaptive-margin(bottom, $padding-xsmall);
+  }
+
   &--hidden {
     display: none;
   }
@@ -44,14 +48,6 @@
   &__title {
     @include adaptive-padding(right, $padding-xsmall);
     padding-bottom: $padding-xsmall;
-    display: flex;
-    align-items: center;
-    height: 30px;
-  }
-
-  &__status {
-    padding-bottom: $padding-xsmall;
-    padding-left: $padding-xsmall;
   }
 
   &__wrapper {

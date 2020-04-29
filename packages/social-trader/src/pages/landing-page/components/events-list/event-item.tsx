@@ -3,6 +3,7 @@ import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-def
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
+import { useTranslation } from "i18n";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
@@ -74,7 +75,7 @@ const _EventItem: React.FC<Props> = ({
   countShowingItems,
   title,
   text,
-  icon,
+  logoUrl,
   assetUrl,
   userUrl,
   color,
@@ -84,6 +85,7 @@ const _EventItem: React.FC<Props> = ({
   minHeight,
   updateMinHeight
 }) => {
+  const { t } = useTranslation();
   const { contextTitle } = useToLink();
   const [currentHeight, setCurrentHeight] = useState(0);
   const [transformElement, setTransformElement] = useState(
@@ -132,7 +134,7 @@ const _EventItem: React.FC<Props> = ({
       ref={itemRef}
     >
       <Link
-        title={`Go to ${title} details page`}
+        title={t("landing-page:links.title", { title, page: "details" })}
         className="events-list__item-link"
         to={linkAsset}
       >
@@ -143,13 +145,16 @@ const _EventItem: React.FC<Props> = ({
             alt={title}
             color={color}
             className="events-list__item-image"
-            src={icon}
+            src={logoUrl}
           />
         </div>
       </Link>
       <div className="events-list__item-info">
         <Link
-          title={`Go to ${userUrl} user page`}
+          title={t("landing-page:links.title", {
+            title: userUrl,
+            page: "user"
+          })}
           className="events-list__item-link"
           to={linkUser}
         >

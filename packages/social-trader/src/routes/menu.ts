@@ -17,6 +17,12 @@ import {
 } from "components/profile/profile.constants";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
+import {
+  MY_PROFILE_ROUTE,
+  NEWS_ROUTE,
+  SOCIAL_ROUTE,
+  USERS_ROUTE
+} from "routes/social.routes";
 
 import { HOME_ROUTE } from "./app.routes";
 import {
@@ -34,11 +40,14 @@ import {
 import { META_TRADER_5_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
+  isBeta?: boolean;
   route?: string;
   Icon: React.ComponentType<any>;
   label?: string;
   children?: TMenuItem[];
 };
+
+export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
 const advancedMobileMenuItems: TMenuItem[] = [
   {
@@ -76,6 +85,29 @@ const mainMenuItemsUnion = [
         route: FINANCIAL_STATISTIC_ROUTE,
         label: "navigation.financial-statistic"
       }*/
+    ]
+  },
+  {
+    isBeta: true,
+    Icon: TradeIcon,
+    label: "navigation.social",
+    route: SOCIAL_ROUTE,
+    children: [
+      {
+        Icon: TradeIcon,
+        route: NEWS_ROUTE,
+        label: "navigation.news"
+      },
+      {
+        Icon: TradeIcon,
+        route: MY_PROFILE_ROUTE,
+        label: "navigation.my-profile"
+      },
+      {
+        Icon: TradeIcon,
+        route: USERS_ROUTE,
+        label: "navigation.users"
+      }
     ]
   },
   {

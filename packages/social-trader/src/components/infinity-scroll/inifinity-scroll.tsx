@@ -1,6 +1,24 @@
+import React, { useCallback, useRef } from "react";
+
 import "./infinity-scroll.scss";
 
-import React, { useCallback, useRef } from "react";
+export const loadOnScroll = ({
+  scroll,
+  container,
+  hasMore,
+  loadMore
+}: {
+  scroll: HTMLDivElement;
+  container: HTMLDivElement;
+  hasMore?: boolean;
+  loadMore: () => void;
+}) => {
+  const scrollTop = scroll.scrollTop;
+  const clientHeight = window.innerHeight;
+  const scrollHeight = container.getBoundingClientRect().height;
+  const offsetBottom = scrollHeight - scrollTop - clientHeight;
+  if (offsetBottom < 100 && hasMore) loadMore();
+};
 
 const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
   const scroll: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -10,12 +28,12 @@ const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
 
   const handleScroll = useCallback(() => {
     if (scroll.current && container.current) {
-      const scrollCurrent = scroll.current;
-      const scrollTop = scrollCurrent.scrollTop;
-      const clientHeight = window.innerHeight;
-      const scrollHeight = container.current.getBoundingClientRect().height;
-      const offsetBottom = scrollHeight - scrollTop - clientHeight;
-      if (offsetBottom < 100 && hasMore) loadMore();
+      loadOnScroll({
+        scroll: scroll.current,
+        container: container.current,
+        hasMore,
+        loadMore
+      });
     }
   }, [hasMore, window.innerHeight, loadMore]);
 

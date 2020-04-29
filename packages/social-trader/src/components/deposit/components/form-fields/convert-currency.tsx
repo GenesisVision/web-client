@@ -1,4 +1,4 @@
-import withLoader from "decorators/with-loader";
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { convertFromCurrency } from "utils/currency-converter";
@@ -10,13 +10,13 @@ const _ConvertCurrency: React.FC<{
   currency: CurrencyEnum;
   rate: number;
 }> = ({ rate, amount, currency }) => (
-  <div className="invest-popup__currency">
+  <MutedText>
     <NumberFormat
       value={formatCurrencyValue(convertFromCurrency(amount, rate), currency)}
       prefix="≈ "
       suffix={` ${currency}`}
       displayType="text"
     />
-  </div>
+  </MutedText>
 );
-export const ConvertCurrency = withLoader(React.memo(_ConvertCurrency));
+export const ConvertCurrency = React.memo(_ConvertCurrency);

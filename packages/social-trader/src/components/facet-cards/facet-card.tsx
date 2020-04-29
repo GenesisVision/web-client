@@ -2,6 +2,7 @@ import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { Row } from "components/row/row";
 import Surface from "components/surface/surface";
 import { AssetFacet } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -30,7 +31,7 @@ const _FacetCard: React.FC<Props> = ({
           <div className="facet__logo-wrapper">
             <ImageBase
               quality={"Medium"}
-              src={facet.logo}
+              src={facet.logoUrl}
               alt={facet.title}
               defaultImage={facetImg}
               className="facet__logo"
@@ -38,7 +39,9 @@ const _FacetCard: React.FC<Props> = ({
           </div>
           <div className="facet__info">
             <h2 className="facet__title">{facet.title}</h2>
-            <div className="facet__description">{facet.description}</div>
+            <Row small className="facet__description">
+              {facet.description}
+            </Row>
           </div>
         </div>
       </Link>

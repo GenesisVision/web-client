@@ -19,7 +19,7 @@ const _MultiProfitChart: React.FC<Props> = ({ charts }) => {
 };
 
 interface Props {
-  charts: DashboardAssetChart[];
+  charts?: DashboardAssetChart[];
   colors?: TChartCurrency[];
 }
 

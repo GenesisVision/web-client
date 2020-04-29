@@ -54,11 +54,3 @@
     }
   }
 }
-
-.pie-statistics-item {
-  display: flex;
-  align-items: center;
-  &__pie-block {
-    @include adaptive-margin(right, $padding-xsmall);
-  }
-}

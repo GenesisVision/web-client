@@ -2,6 +2,7 @@ import "./tab-controls.scss";
 
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
+import { useTranslation } from "i18n";
 import React from "react";
 
 export type TTabsItem = {
@@ -26,6 +27,7 @@ const _TabControls: React.FC<Props> = ({
   onChange,
   className
 }) => {
+  const { t } = useTranslation();
   return (
     <ul className={classNames("tab-controls", className)}>
       {tabsItems.map((tab, index) => (
@@ -40,7 +42,7 @@ const _TabControls: React.FC<Props> = ({
             type="button"
             className="tab-controls__item-btn"
           >
-            {tab.text && tab.text}
+            {tab.text && t(tab.text)}
             {tab.image && (
               <ImageBaseElement
                 className="tab-controls__item-img"

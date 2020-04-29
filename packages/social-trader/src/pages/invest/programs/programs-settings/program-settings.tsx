@@ -1,5 +1,3 @@
-import "./program-settings.scss";
-
 import { ASSET } from "constants/constants";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import {
@@ -19,6 +17,7 @@ import ChangeBroker from "./change-broker/change-broker";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
+import "./program-settings.scss";
 import SignalingEdit from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TradesUpdating from "./trades-updating";
@@ -27,7 +26,7 @@ import TwoFactorConfirm from "./two-factor-confirm";
 const _ProgramSettings: React.FC<Props> = ({
   editError,
   updateDescription,
-  createProgramInfo: { maxSuccessFee, maxEntryFee },
+  createProgramInfo: { maxSuccessFee, maxManagementFee },
   description,
   editProgram,
   closeProgram
@@ -88,8 +87,8 @@ const _ProgramSettings: React.FC<Props> = ({
             editError={editError}
             asset={ASSET.PROGRAM}
             maxSuccessFee={maxSuccessFee}
-            maxEntryFee={maxEntryFee}
-            entryFee={programDetails.entryFeeSelected}
+            maxEntryFee={maxManagementFee} //TODO check it
+            entryFee={programDetails.managementFeeSelected}
             successFee={programDetails.successFeeSelected}
             onSubmit={editProgram}
           />
@@ -115,7 +114,7 @@ const _ProgramSettings: React.FC<Props> = ({
       <AssetEdit
         editError={editError}
         title={description.publicInfo.title}
-        logo={{ src: description.publicInfo.logo }}
+        logo={{ src: description.publicInfo.logoUrl }}
         description={description.publicInfo.description}
         onSubmit={editProgram}
       />

@@ -5,7 +5,7 @@ import tableReducerFactory, {
 } from "components/table/reducers/table.reducer";
 import {
   FundInvestingDetailsList,
-  ItemsViewModelFundInvestingDetailsList
+  FundInvestingDetailsListItemsViewModel
 } from "gv-api-web";
 import {
   DASHBOARD_INVESTMENTS_DEFAULT_FILTERS,
@@ -17,7 +17,7 @@ import { ApiAction } from "utils/types";
 export const DASHBOARD_INVESTMENTS_FUNDS = "DASHBOARD_INVESTMENTS_FUNDS";
 
 export type TInvestmentsFundsItems = FundInvestingDetailsList;
-export type TInvestmentsFundsStateData = ItemsViewModelFundInvestingDetailsList;
+export type TInvestmentsFundsStateData = FundInvestingDetailsListItemsViewModel;
 export type TInvestmentsFundsState = ITableState<TInvestmentsFundsStateData>;
 export type TInvestmentsFundsAction = ApiAction<TInvestmentsFundsStateData>;
 

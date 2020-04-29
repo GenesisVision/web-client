@@ -1,5 +1,3 @@
-import "./programs.scss";
-
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
 import { ProgramDetailsListItem } from "gv-api-web";
@@ -12,6 +10,7 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import "./programs.scss";
 
 interface IProgramsTableProps extends ITableProps {
   currencies?: string[];
@@ -20,6 +19,7 @@ interface IProgramsTableProps extends ITableProps {
 }
 
 const _ProgramsTable: React.FC<IProgramsTableProps> = ({
+  outerView,
   renderMappings,
   disableTitle,
   columns,
@@ -37,6 +37,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
 }) => {
   return (
     <Table
+      outerView={outerView}
       asLinkPagination={asLinkPagination}
       loaderData={programListLoaderData}
       renderMappings={renderMappings}
@@ -66,7 +67,7 @@ const _ProgramsTable: React.FC<IProgramsTableProps> = ({
       )}
       renderBodyRow={useCallback(
         (program: ProgramDetailsListItem) => (
-          <ProgramTableRowShort withDispatch program={program} />
+          <ProgramTableRowShort program={program} />
         ),
         []
       )}

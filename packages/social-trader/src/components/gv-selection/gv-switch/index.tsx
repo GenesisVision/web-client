@@ -1,8 +1,10 @@
-import "./style.scss";
-
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
 import React from "react";
+
+import "./style.scss";
 
 class GVSwitch extends React.PureComponent<GVSwitchProps> {
   static propTypes: any;
@@ -29,7 +31,11 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
 
-    return <span className="gv-switch__error">{error}</span>;
+    return (
+      <RowItem>
+        <span className="gv-switch__error">{error}</span>
+      </RowItem>
+    );
   };
 
   render() {
@@ -44,38 +50,44 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
       ...other
     } = this.props;
     return (
-      <span className="gv-switch-wrapper">
+      <Center className="gv-switch-wrapper">
         {label && (
-          <span className="gv-switch__label" onClick={this.handleClick}>
+          <RowItem
+            small
+            className="gv-switch__label"
+            onClick={this.handleClick}
+          >
             <MutedText big>{label}</MutedText>
-          </span>
+          </RowItem>
         )}
-        <span
-          className={classNames("gv-switch", className, {
-            "gv-switch--checked": value,
-            "gv-switch--primary": color === "primary",
-            "gv-switch--secondary": color === "secondary",
-            "gv-switch--disabled": disabled
-          })}
-          onClick={this.handleClick}
-        >
-          <span className="gv-switch__input-wrapper">
-            <span className="gv-switch__handler" />
-            <input
-              ref={this.checkbox}
-              type="checkbox"
-              name={name}
-              className="gv-switch__input"
-              checked={value}
-              onClick={this.handleInputClick}
-              disabled={disabled}
-              {...other}
-            />
+        <RowItem>
+          <span
+            className={classNames("gv-switch", className, {
+              "gv-switch--checked": value,
+              "gv-switch--primary": color === "primary",
+              "gv-switch--secondary": color === "secondary",
+              "gv-switch--disabled": disabled
+            })}
+            onClick={this.handleClick}
+          >
+            <span className="gv-switch__input-wrapper">
+              <span className="gv-switch__handler" />
+              <input
+                ref={this.checkbox}
+                type="checkbox"
+                name={name}
+                className="gv-switch__input"
+                checked={value}
+                onClick={this.handleInputClick}
+                disabled={disabled}
+                {...other}
+              />
+            </span>
+            <span className="gv-switch__track" />
           </span>
-          <span className="gv-switch__track" />
-        </span>
+        </RowItem>
         {this.renderError()}
-      </span>
+      </Center>
     );
   }
 }

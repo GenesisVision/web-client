@@ -2,16 +2,15 @@
 @import "~shared/styles/_sizes";
 
 .row {
-  display: flex;
-  flex-direction: row;
+  &--flex {
+    display: flex;
+    box-sizing: border-box;
+  }
+  &--wide {
+    width: 100%;
+  }
   &--hidden {
     display: none;
-  }
-  &--wrap {
-    flex-wrap: wrap;
-  }
-  &--center {
-    align-items: center;
   }
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);
@@ -21,5 +20,8 @@
   }
   &--large:not(:first-child) {
     @include adaptive-margin(top, $padding-small);
+  }
+  &--xlarge:not(:first-child) {
+    @include adaptive-margin(top, $padding-medium);
   }
 }

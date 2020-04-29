@@ -1,5 +1,6 @@
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
+import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ import { CurrencyEnum } from "utils/types";
 import { TFees } from "../deposit.types";
 
 const _InvestorFees: React.FC<Props> = ({
+  asset,
   fees: { gvCommission, entryFee = 0 },
   amount,
   rate,
@@ -21,10 +23,11 @@ const _InvestorFees: React.FC<Props> = ({
   currency,
   walletCurrency
 }) => {
+  const isProgram = asset === ASSET.PROGRAM;
   const gvCommissionValue = calculatePercentage(amount, gvCommission);
   const entryFeeValue = calculatePercentage(
     amount - gvCommissionValue,
-    entryFee
+    isProgram ? 0 : entryFee
   );
   const investAmount =
     amount - gvCommissionValue - entryFeeValue * +hasEntryFee;
@@ -32,17 +35,27 @@ const _InvestorFees: React.FC<Props> = ({
   return (
     <DialogList>
       {hasEntryFee && (
-        <DialogListItem label={t("deposit-asset.entry-fee")}>
+        <DialogListItem
+          label={
+            isProgram
+              ? t("deposit-asset.management-fee")
+              : t("deposit-asset.entry-fee")
+          }
+        >
           {entryFee} %
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(entryFeeValue, rate),
-              currency
-            )}
-            prefix=" ("
-            suffix={` ${currency})`}
-            displayType="text"
-          />
+          {isProgram ? (
+            " (annual)"
+          ) : (
+            <NumberFormat
+              value={formatCurrencyValue(
+                convertFromCurrency(entryFeeValue, rate),
+                currency
+              )}
+              prefix=" ("
+              suffix={` ${currency})`}
+              displayType="text"
+            />
+          )}
         </DialogListItem>
       )}
       <DialogListItem label={t("deposit-asset.gv-commission")}>
@@ -70,6 +83,7 @@ const _InvestorFees: React.FC<Props> = ({
 };
 
 interface Props {
+  asset: ASSET;
   fees: TFees;
   hasEntryFee: boolean;
   amount: number;

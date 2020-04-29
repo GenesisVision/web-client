@@ -1,8 +1,10 @@
+import { Center } from "components/center/center";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT
 } from "components/profitability/profitability.helper";
+import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue, roundPercents } from "utils/formatter";
@@ -14,8 +16,8 @@ const _ProfitabilityValuePercent: React.FC<Props> = ({
   percent
 }) => {
   return (
-    <div className="profitability-value-percent">
-      <div className="profitability-value-percent__value">
+    <Center className="profitability-value-percent">
+      <RowItem small>
         <Profitability
           value={formatCurrencyValue(value, currency)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -27,11 +29,11 @@ const _ProfitabilityValuePercent: React.FC<Props> = ({
             displayType="text"
           />
         </Profitability>
-      </div>
+      </RowItem>
       <Profitability value={`${percent}`} variant={PROFITABILITY_VARIANT.CHIPS}>
         {roundPercents(percent)}
       </Profitability>
-    </div>
+    </Center>
   );
 };
 

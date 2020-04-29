@@ -12,7 +12,6 @@ import {
 } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React, { useCallback, useEffect, useState } from "react";
-import NumberFormat from "react-number-format";
 import { PlatformAssetFull } from "utils/types";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
@@ -66,7 +65,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
           bottomOffset
           className="fund-asset fund-asset--remainder"
         >
-          <NumberFormat value={remainder} suffix="%" displayType="text" />
+          {remainder} %
         </RowItem>
       )}
     </Row>

@@ -1,5 +1,6 @@
 import ChipButton from "components/chip/chip-button";
 import Dialog from "components/dialog/dialog";
+import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
@@ -28,7 +29,12 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
       return addNotificationMethod({ ...values, type: "ProgramCondition" });
     },
     successMessage: "notifications-page.custom.create-alert",
-    middleware: [postponeCallback(setClosePopup), onSuccess]
+    middleware: [
+      postponeCallback(() => {
+        setClosePopup();
+        onSuccess();
+      })
+    ]
   });
 
   const handleSubmit = useCallback(
@@ -40,22 +46,28 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
     [asset]
   );
   return (
-    <div className="notification-settings custom-notifications">
-      <h3 className="notification-settings__subtitle">
-        {t("notifications-page.custom.title")}
-      </h3>
+    <div className="notification-settings">
+      <Row>
+        <h3 className="notification-settings__subtitle">
+          {t("notifications-page.custom.title")}
+        </h3>
+      </Row>
       {asset.settingsCustom.map(settings => (
-        <CustomNotification
-          onSuccess={onSuccess}
-          settings={settings}
-          key={settings.id}
-        />
+        <Row>
+          <CustomNotification
+            onSuccess={onSuccess}
+            settings={settings}
+            key={settings.id}
+          />
+        </Row>
       ))}
-      <ChipButton
-        onClick={setOpenPopup}
-        label={t("notifications-page.create.title")}
-        chipLabel={"+"}
-      />
+      <Row>
+        <ChipButton
+          onClick={setOpenPopup}
+          label={t("notifications-page.create.title")}
+          chipLabel={"+"}
+        />
+      </Row>
       <Dialog open={isOpenPopup} onClose={setClosePopup}>
         <CustomNotificationCreateForm
           asset={asset}

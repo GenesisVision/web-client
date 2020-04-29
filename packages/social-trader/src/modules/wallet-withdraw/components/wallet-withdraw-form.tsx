@@ -1,15 +1,13 @@
-import "./wallet-withdraw-form.scss";
-
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
-import { DialogField } from "components/dialog/dialog-field";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { DialogTop } from "components/dialog/dialog-top";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
@@ -27,6 +25,8 @@ import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+
+import "./wallet-withdraw-form.scss";
 
 const _WalletWithdrawForm: React.FC<Props> = ({
   onSubmit,
@@ -99,22 +99,17 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw.title")}>
-        <WalletSelect
-          name={WALLET_WITHDRAW_FIELDS.id}
-          label={t("wallet-withdraw.select-currency")}
-          wallets={wallets}
-          onChange={onChangeCurrency}
-        />
+        <Row large>
+          <WalletSelect
+            name={WALLET_WITHDRAW_FIELDS.id}
+            label={t("wallet-withdraw.select-currency")}
+            wallets={wallets}
+            onChange={onChangeCurrency}
+          />
+        </Row>
       </DialogTop>
       <DialogBottom>
-        <InputAmountField
-          name={WALLET_WITHDRAW_FIELDS.amount}
-          label={t("wallet-withdraw.amount")}
-          currency={currency}
-          isAllowed={isAllow}
-          setMax={setMaxAmount}
-        />
-        <DialogField>
+        <Row>
           <GVHookFormField
             wide
             name={WALLET_WITHDRAW_FIELDS.address}
@@ -122,9 +117,16 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             component={SimpleTextField}
             autoComplete="off"
           />
-        </DialogField>
+        </Row>
+        <InputAmountField
+          name={WALLET_WITHDRAW_FIELDS.amount}
+          label={t("wallet-withdraw.amount")}
+          currency={currency}
+          isAllowed={isAllow}
+          setMax={setMaxAmount}
+        />
         {twoFactorEnabled && (
-          <DialogField>
+          <Row>
             <GVHookFormField
               wide
               type="text"
@@ -133,7 +135,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
               autoComplete="off"
               component={SimpleTextField}
             />
-          </DialogField>
+          </Row>
         )}
         <DialogList>
           <DialogListItem label={t("wallet-withdraw.will-get")}>
@@ -151,7 +153,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             />
           </DialogListItem>
         </DialogList>
-        <DialogError error={errorMessage} />
+        {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}

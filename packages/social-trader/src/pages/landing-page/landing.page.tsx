@@ -1,13 +1,11 @@
-import "./styles/index.scss";
-import "./styles/home.scss";
-
 import {
-  ItemsViewModelFollowDetailsListItem,
-  ItemsViewModelFundDetailsListItem,
-  ItemsViewModelProgramDetailsListItem,
+  FollowDetailsListItemItemsViewModel,
+  FundDetailsListItemItemsViewModel,
   PlatformEvent,
-  PlatformNews
+  PlatformNews,
+  ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
+import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -26,6 +24,9 @@ import {
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
+import "./styles/home.scss";
+import "./styles/index.scss";
+
 const _LandingPage: React.FC<Props> = ({
   programs,
   funds,
@@ -33,11 +34,12 @@ const _LandingPage: React.FC<Props> = ({
   events,
   news
 }) => {
+  const { t } = useTranslation();
   useUtm();
   return (
     <Layout
-      description="Join the global market, trade Crypto, Forex, Metals, Stocks, Indices ans Commodities, create and manage own funds, invest and follow best trading strategies."
-      title="Genesis Vision - The Next Generation Social Trading Platform"
+      description={t("landing-page:description")}
+      title={t("landing-page:title")}
     >
       <main className="home">
         <FirstScreen news={news} />
@@ -73,7 +75,7 @@ const _LandingPage: React.FC<Props> = ({
             <BrokersContainer
               brokersInfo={brokersInfo}
               brokersTabs={brokersTabs}
-              title="Brokers and Exhanges"
+              title={t("landing-page:brokers.title")}
             />
           </div>
         </section>
@@ -89,9 +91,9 @@ const _LandingPage: React.FC<Props> = ({
 
 interface Props {
   refLink?: string;
-  programs: ItemsViewModelProgramDetailsListItem;
-  funds: ItemsViewModelFundDetailsListItem;
-  follows: ItemsViewModelFollowDetailsListItem;
+  programs: ProgramDetailsListItemItemsViewModel;
+  funds: FundDetailsListItemItemsViewModel;
+  follows: FollowDetailsListItemItemsViewModel;
   events: Array<PlatformEvent>;
   news: Array<PlatformNews>;
 }

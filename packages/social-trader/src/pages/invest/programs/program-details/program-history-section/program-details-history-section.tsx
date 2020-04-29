@@ -1,13 +1,12 @@
-import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
-
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
+import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import GVTab from "components/gv-tabs/gv-tab";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { CREATE_ASSET } from "constants/constants";
+import { TRADE_ASSET_TYPE } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
@@ -32,16 +31,22 @@ const ProgramSubscriptions = dynamic(() =>
   import("./program-subscriptions/program-subscriptions")
 );
 const ProgramTrades = dynamic(() => import("./program-trades/program-trades"));
+const ProgramTradingLog = dynamic(() =>
+  import("./program-trading-log/program-trading-log")
+);
 
 const nullSelector = () => ({
   itemsData: { data: { total: 0 } }
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  isFollower,
+  canCloseOpenPositions,
   assetType,
   haveDelay = true,
   getHistoryCounts,
   tablesData: {
+    tradingLog,
     financialStatistic,
     openPositions,
     periodHistory,
@@ -61,6 +66,9 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_POSITIONS);
   const dispatch = useDispatch();
+  const tradingLogCount = useSelector(
+    tradingLog ? tradingLog.dataSelector : nullSelector
+  ).itemsData.data.total;
   const openPositionsCount = useSelector(openPositions.dataSelector).itemsData
     .data.total;
   const periodHistoryCount = useSelector(
@@ -79,7 +87,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
   }, [dispatch, programId]);
 
   return (
-    <DetailsBlock table>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           value={TABS.OPEN_POSITIONS}
@@ -109,7 +117,19 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={financialStatisticCount}
           visible={isAuthenticated && isOwnProgram && !!financialStatistic}
         />
+        <GVTab
+          value={TABS.TRADING_LOG}
+          label={t("program-details-page.history.tabs.trading-log")}
+          count={tradingLogCount}
+          visible={!!isAuthenticated && !!isFollower && !!tradingLog}
+        />
       </DetailsBlockTabs>
+      {tab === TABS.TRADING_LOG && tradingLog && (
+        <ProgramTradingLog
+          getItems={tradingLog.getItems(programId)}
+          dataSelector={tradingLog.dataSelector}
+        />
+      )}
       {tab === TABS.TRADES && (
         <ProgramTrades
           itemSelector={trades.itemSelector!}
@@ -125,6 +145,8 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          assetType={assetType}
+          canCloseOpenPositions={canCloseOpenPositions}
           itemSelector={openPositions.itemSelector!}
           getItems={openPositions.getItems(programId)}
           dataSelector={openPositions.dataSelector}
@@ -158,11 +180,12 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           currency={programCurrency}
         />
       )}
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 
 enum TABS {
+  TRADING_LOG = "tradingLog",
   TRADES = "trades",
   OPEN_POSITIONS = "openPositions",
   SUBSCRIBERS = "subscribers",
@@ -171,7 +194,9 @@ enum TABS {
 }
 
 interface Props {
-  assetType?: CREATE_ASSET;
+  isFollower?: boolean;
+  canCloseOpenPositions?: boolean;
+  assetType: TRADE_ASSET_TYPE;
   haveDelay?: boolean;
   getHistoryCounts: (
     id: string
@@ -193,6 +218,7 @@ export type TProgramTableReduxData = {
 };
 
 export type TProgramTablesData = {
+  tradingLog?: TProgramTableReduxData;
   trades: TProgramTableReduxData;
   openPositions: TProgramTableReduxData;
   subscriptions?: TProgramTableReduxData;

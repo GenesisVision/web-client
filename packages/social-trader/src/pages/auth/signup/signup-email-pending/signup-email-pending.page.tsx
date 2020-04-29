@@ -5,8 +5,6 @@ import SignupEmailPendingContainer from "pages/auth/signup/signup-email-pending/
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import "./signup-email-pending.scss";
-
 const _EmailPending: React.FC = () => {
   const [t] = useTranslation();
   const { getEmailPendingState } = useEmailPendingState();

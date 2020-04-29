@@ -1,5 +1,6 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
+import { DialogListItem } from "components/dialog/dialog-list-item";
 import GVButton from "components/gv-button";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
@@ -79,10 +80,9 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <div className="dialog-list__item">
-        {t("withdraw-fund.withdrawing")}
-        <span className="dialog-list__value">{formatValue(percent, 2)} %</span>
-      </div>
+      <DialogListItem label={t("withdraw-fund.withdrawing")}>
+        {formatValue(percent, 2)} %
+      </DialogListItem>
       <FundWithdrawResult
         availableToWithdraw={availableToWithdraw}
         percent={percent}

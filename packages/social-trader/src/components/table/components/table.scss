@@ -9,6 +9,12 @@ $view-svg-size: 15px;
   width: 100%;
   border-spacing: 0;
 
+  &__sorting-filter {
+    margin-right: auto;
+  }
+  &__mapping {
+    margin-right: auto;
+  }
   &__scroll {
     width: 100%;
     overflow-x: auto;
@@ -113,7 +119,7 @@ $view-svg-size: 15px;
   font-weight: 600;
 }
 
-.message {
+.table-message {
   padding: $padding-small;
   text-align: center;
   width: 100%;

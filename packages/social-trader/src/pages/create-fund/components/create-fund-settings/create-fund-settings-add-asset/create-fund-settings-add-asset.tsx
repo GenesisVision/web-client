@@ -1,5 +1,3 @@
-import "./create-fund-settings-add-asset.scss";
-
 import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import GVTextField from "components/gv-text-field";
@@ -13,6 +11,8 @@ import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
+
+import "./create-fund-settings-add-asset.scss";
 
 const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   remainder,
@@ -97,7 +97,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
       <td>
         <CurrencyItem
           url={asset.url}
-          logo={asset.icon}
+          logo={asset.logoUrl}
           small
           name={asset.name}
           symbol={asset.name}

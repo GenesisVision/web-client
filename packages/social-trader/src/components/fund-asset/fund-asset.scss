@@ -34,10 +34,6 @@ $remove-button-color: #293842;
   @include height($asset-height);
   @include font-size($font-size-small);
   @include line-height($font-size-small);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   @include adaptive-full-padding($padding-xxsmall);
   @include adaptive-border-radius($border-radius-middle);
   font-weight: 400;
@@ -53,6 +49,9 @@ $remove-button-color: #293842;
     color: $text-light-color;
   }
   &--remainder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: rgba(59, 205, 189, 0.1);
     color: #14beb4;
   }
@@ -98,10 +97,6 @@ $remove-button-color: #293842;
     flex-direction: row;
     align-items: center;
     width: 100%;
-  }
-
-  &__currency {
-    @include adaptive-padding(right, $padding-xxsmall);
   }
 
   &__currency-full {

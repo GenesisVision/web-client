@@ -13,9 +13,10 @@ import {
 } from "reducers/platform-reducer";
 import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
+import { CurrencyEnum } from "utils/types";
 
 const _FacetContainer: React.FC<Props> = props => {
-  const { TableContainer, getItems, title } = props;
+  const { initCurrency, TableContainer, getItems, title } = props;
   const facets = useSelector((state: RootState) =>
     facetsSelector(state, props)
   );
@@ -31,6 +32,7 @@ const _FacetContainer: React.FC<Props> = props => {
   const { sorting, timeframe } = facet!;
   return (
     <TableContainer
+      initCurrency={initCurrency}
       title={title}
       sorting={sorting}
       timeframe={timeframe}
@@ -71,6 +73,7 @@ const facetSelector = createSelector<
 );
 
 interface Props {
+  initCurrency?: CurrencyEnum;
   title?: string;
   id: string;
   asset: FACET_ASSET;

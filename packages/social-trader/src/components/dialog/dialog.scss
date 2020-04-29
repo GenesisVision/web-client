@@ -24,7 +24,6 @@
   }
 
   &__info {
-    @include adaptive-margin(top, $padding-upper-medium);
     line-height: 1.64;
     text-align: center;
   }
@@ -33,9 +32,11 @@
     @include adaptive-margin(bottom, 16px);
   }
 
-  &__close {
+  button.dialog__close {
     position: absolute;
     @include adaptive-full-padding($padding-xxsmall);
+  }
+  &__close {
     z-index: 2;
 
     .icon {
@@ -79,9 +80,6 @@
 
   &__header {
     @include adaptive-margin(top, $padding-xsmall);
-    &:not(:last-child) {
-      @include adaptive-padding(bottom, $padding-small);
-    }
   }
 
   &__subtitle {
@@ -91,20 +89,7 @@
     color: #e8eff3;
   }
 
-  &__field {
-    &:not(:last-child) {
-      @include adaptive-margin(bottom, $padding-xsmall);
-    }
-    &--hidden {
-      display: none;
-    }
-
-    font-weight: 300;
-  }
-
   &__buttons {
-    display: flex;
-    @include adaptive-margin(top, $padding-small);
     justify-content: space-between;
   }
 
@@ -127,31 +112,15 @@
 }
 
 .dialog-list {
-  list-style-type: none;
-  padding: 0;
-  &:not(:first-child) {
-    @include adaptive-margin(top, $padding-small);
-  }
+  width: 100%;
 
   &__item {
     @include font-size($font-size-paragraph);
     font-weight: 300;
-    margin-bottom: $padding-xsmall;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    letter-spacing: 0.5px;
-
-    &:last-child {
-      @include adaptive-margin(bottom, $padding-medium);
-    }
   }
 
   &__title {
     opacity: 0.5;
-  }
-
-  &__value {
-    opacity: 1;
   }
 }
