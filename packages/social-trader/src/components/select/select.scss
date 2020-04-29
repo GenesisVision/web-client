@@ -6,12 +6,31 @@
   min-width: 150px;
   @include height(22px);
 
+  &--small {
+    .select__value {
+      @include font-size($font-size-xsmall);
+    }
+
+    .select__text {
+      @include font-size($font-size-common);
+    }
+  }
+
+  &--middle {
+    .select__value {
+      @include font-size($font-size-small);
+    }
+
+    .select__text {
+      @include font-size($font-size-h4);
+    }
+  }
+
   &__value {
     width: 100%;
     justify-content: space-between;
     padding: 0;
     letter-spacing: 0.4px;
-    @include font-size($font-size-small);
     font-weight: 400;
     border: none;
     outline: none;
@@ -22,7 +41,6 @@
   }
 
   &__text {
-    @include font-size($font-size-h4);
     display: inline-flex;
     align-items: center;
     text-overflow: ellipsis;

@@ -7,11 +7,13 @@ import FilterArrowIcon from "components/table/components/filtering/filter-arrow-
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback, useEffect, useRef } from "react";
+import { SizesType } from "utils/types";
 
 import SelectItem from "./select-item";
 import "./select.scss";
 
 const Select: React.FC<Props> = ({
+  size = "middle",
   fixedVertical,
   className,
   name,
@@ -116,6 +118,8 @@ const Select: React.FC<Props> = ({
   return (
     <div
       className={classNames("select", className, {
+        "select--middle": size === "middle",
+        "select--small": size === "small",
         "select--disabled": isDisabled
       })}
     >
@@ -168,6 +172,7 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface Props {
+  size?: SizesType;
   fixedVertical?: boolean;
   value: string;
   name: string;
