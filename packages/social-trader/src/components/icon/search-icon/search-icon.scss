@@ -2,6 +2,10 @@
 
 .search-icon {
   stroke: white;
+  &--small {
+    width: 10px;
+    height: 10px;
+  }
   &--primary {
     stroke: $primary-color;
   }
