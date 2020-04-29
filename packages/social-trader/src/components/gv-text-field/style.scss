@@ -5,19 +5,26 @@
   order: 1;
   color: $text-light-color;
   font-family: Montserrat, sans-serif;
-  font-size: $font-size-h4;
   font-weight: normal;
-  line-height: 1.38;
   letter-spacing: 0.2px;
   border: 0;
   margin: 0;
-  padding: 6px 0 7px;
   display: block;
   min-width: 0;
   flex-grow: 1;
   box-sizing: content-box;
   background: none;
   -webkit-tap-highlight-color: transparent;
+  &--middle {
+    font-size: $font-size-h4;
+    line-height: 1.38;
+    padding: 6px 0 7px;
+  }
+  &--small {
+    font-size: $font-size-common;
+    line-height: 1;
+    padding: 3px 0;
+  }
   &:focus {
     outline: none;
   }

@@ -3,12 +3,14 @@ import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { NumberFormatValues } from "react-number-format";
+import { SizesType } from "utils/types";
 
 import GVTextArea from "./gv-text-area";
 import "./style.scss";
 
 const _GVTextField: React.FC<GVTextFieldProps> = props => {
   const {
+    size = "middle",
     onFocus,
     adornmentPosition = "end",
     onBlur,
@@ -52,7 +54,10 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
         {...props}
         ref={input}
         type={type}
-        className={classNames("gv-text-field", inputClassName)}
+        className={classNames("gv-text-field", inputClassName, {
+          "gv-text-field--small": size === "small",
+          "gv-text-field--middle": size === "middle"
+        })}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
@@ -70,6 +75,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 };
 
 export interface GVTextFieldProps extends IPropsGvInput {
+  size?: SizesType;
   fixedVertical?: boolean;
   children?: ReactNode;
   name: string;
