@@ -142,7 +142,7 @@ export const postBuy = ({
       symbol,
       type,
       price: String(price),
-      quantity: formatValue(quantity, 3),
+      quantity: String(quantity),
       timeInForce: TimeInForce.GTC,
       side: "BUY"
     },
@@ -161,7 +161,7 @@ export const postSell = ({
       symbol,
       type,
       price: String(price),
-      quantity: formatValue(quantity, 3),
+      quantity: String(quantity),
       timeInForce: TimeInForce.GTC,
       side: "SELL"
     },
