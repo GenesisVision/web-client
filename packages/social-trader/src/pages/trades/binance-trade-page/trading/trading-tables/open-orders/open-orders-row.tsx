@@ -2,7 +2,10 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import {
+  TradeAuthDataType,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { cancelOrder } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
@@ -31,13 +34,19 @@ const _OpenOrdersRow: React.FC<Props> = ({
   filled,
   total
 }) => {
-  const { sendRequest, isPending } = useApiRequest({
-    request: () => cancelOrder({ symbol, orderId: String(orderId) }, authData)
-  });
   const { authData } = useTradeAuth();
+  const { sendRequest, isPending } = useApiRequest({
+    request: ({
+      options,
+      authData
+    }: {
+      options: { symbol: string; orderId: string; useServerTime?: boolean };
+      authData: TradeAuthDataType;
+    }) => cancelOrder(options, authData)
+  });
   const handleCancel = useCallback(() => {
-    sendRequest();
-  }, []);
+    sendRequest({ options: { symbol, orderId: String(orderId) }, authData });
+  }, [symbol, orderId, authData]);
   return (
     <TableRow>
       <TableCell>{formatDate(time)}</TableCell>
