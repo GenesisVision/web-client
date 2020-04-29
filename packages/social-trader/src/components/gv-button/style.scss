@@ -157,21 +157,25 @@ $default-padding: $padding-xxsmall $padding-small;
     border-radius: 2em;
 
     &.gv-btn--danger {
+      border-color: $negative-color;
       background-color: $negative-color;
       @include box-shadow(rgba(darken($negative-color, 50%), 0.2));
     }
 
     &.gv-btn--primary {
+      border-color: $primary-color;
       background-color: $primary-color;
       @include box-shadow(rgba(darken($primary-color, 50%), 0.2));
     }
 
     &.gv-btn--secondary {
+      border-color: $text-color;
       background-color: $secondary-color;
       @include box-shadow(rgba(darken($secondary-color, 50%), 0.2));
     }
 
     &.gv-btn--primary-dark {
+      border-color: $primary-color;
       background-color: rgba($primary-color, 0.2);
       color: $primary-color;
     }
