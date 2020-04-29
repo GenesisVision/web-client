@@ -51,6 +51,7 @@ const _Trade: React.FC<Props> = () => {
     [authData, baseAsset, quoteAsset]
   );
 
+  const walletAsset = side === "BUY" ? baseAsset : quoteAsset;
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
@@ -85,10 +86,10 @@ const _Trade: React.FC<Props> = () => {
           {
             safeGetElemFromArray(
               accountInfo?.balances,
-              ({ asset }) => asset === baseAsset
+              ({ asset }) => asset === walletAsset
             ).free
           }{" "}
-          {baseAsset}
+          {walletAsset}
         </Row>
       )}
       <Row>
