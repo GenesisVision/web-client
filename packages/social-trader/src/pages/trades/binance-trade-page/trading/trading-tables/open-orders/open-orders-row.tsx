@@ -8,7 +8,7 @@ import React, { useCallback } from "react";
 import { formatDate } from "utils/dates";
 
 interface Props {
-  clientOrderId: string;
+  orderId: number;
   time: number;
   symbol: string;
   type: string;
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const _OpenOrdersRow: React.FC<Props> = ({
-  clientOrderId,
+  orderId,
   time,
   symbol,
   type,
@@ -32,8 +32,8 @@ const _OpenOrdersRow: React.FC<Props> = ({
 }) => {
   const { authData } = useTradeAuth();
   const handleCancel = useCallback(() => {
-    cancelOrder({ symbol, orderId: clientOrderId }, authData);
-  }, [symbol, clientOrderId, authData]);
+    cancelOrder({ symbol, orderId: String(orderId) }, authData);
+  }, [symbol, orderId, authData]);
   return (
     <TableRow>
       <TableCell>{formatDate(time)}</TableCell>

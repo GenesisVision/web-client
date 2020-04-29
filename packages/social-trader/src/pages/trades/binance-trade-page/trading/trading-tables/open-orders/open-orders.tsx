@@ -20,7 +20,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
       renderBodyRow={({
         executedQty,
         origQty,
-        clientOrderId,
+        orderId,
         time,
         symbol,
         type,
@@ -28,7 +28,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         price
       }: QueryOrderResult) => (
         <OpenOrdersRow
-          clientOrderId={clientOrderId}
+          orderId={orderId}
           time={time}
           symbol={symbol}
           type={type}
