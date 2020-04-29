@@ -58,12 +58,19 @@ const _Trade: React.FC<Props> = () => {
       </Row>
       <Row>
         <DoubleButton
-          firstEnable={side !== "BUY"}
-          firstHandleClick={() => setSide("BUY")}
-          firstLabel={"BUY"}
-          secondEnable={side !== "SELL"}
-          secondHandleClick={() => setSide("SELL")}
-          secondLabel={"SELL"}
+          first={{
+            selected: side === "BUY",
+            enable: side !== "BUY",
+            handleClick: () => setSide("BUY"),
+            label: "BUY"
+          }}
+          second={{
+            color: "danger",
+            selected: side === "SELL",
+            enable: side !== "SELL",
+            handleClick: () => setSide("SELL"),
+            label: "SELL"
+          }}
         />
       </Row>
       <Row>

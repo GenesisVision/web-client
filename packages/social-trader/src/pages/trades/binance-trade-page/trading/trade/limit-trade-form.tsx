@@ -120,7 +120,7 @@ const _LimitTradeForm: React.FC<Props> = ({
         />
       </Row>
       <DialogButtons>
-        <SubmitButton wide>
+        <SubmitButton color={direction === "SELL" ? "danger" : "primary"} wide>
           <>
             {direction} {baseAsset}
           </>
