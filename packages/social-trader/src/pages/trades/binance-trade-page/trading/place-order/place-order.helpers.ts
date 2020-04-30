@@ -104,6 +104,7 @@ export const usePlaceOrderAutoFill = ({
 };
 
 export const usePlaceOrderFormReset = ({
+  stepSize,
   outerPrice,
   reset,
   watch,
@@ -115,6 +116,7 @@ export const usePlaceOrderFormReset = ({
   totalName,
   quantityName
 }: {
+  stepSize: string;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
   outerPrice: number;
@@ -128,6 +130,7 @@ export const usePlaceOrderFormReset = ({
 }) => {
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
+    stepSize,
     baseAsset,
     quoteAsset,
     side,
@@ -198,6 +201,7 @@ export const usePlaceOrderInfo = ({
 };
 
 export const useTradeSlider = ({
+  stepSize,
   setValue,
   side,
   balances,
@@ -206,6 +210,7 @@ export const useTradeSlider = ({
   totalName,
   quantityName
 }: {
+  stepSize: string;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
   baseAsset: TradeCurrency;
@@ -224,7 +229,10 @@ export const useTradeSlider = ({
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(balances, baseAsset);
-      const newQuantity = calculatePercentage(walletAvailable, percentValue);
+      const newQuantity = +formatValueWithTick(
+        calculatePercentage(walletAvailable, percentValue),
+        stepSize
+      );
       setValue(quantityName, newQuantity, true);
     }
   }, [sliderValue]);

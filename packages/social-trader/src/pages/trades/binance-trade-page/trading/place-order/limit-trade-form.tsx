@@ -85,6 +85,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+    stepSize,
     outerPrice,
     watch,
     reset,
