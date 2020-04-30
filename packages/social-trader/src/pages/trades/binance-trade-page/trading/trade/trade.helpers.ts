@@ -8,8 +8,8 @@ import {
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { NumberFormatValues } from "react-number-format";
-import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
+import { formatCurrencyValue } from "utils/formatter";
+import { modulo, safeGetElemFromArray } from "utils/helpers";
 import { number, object } from "yup";
 
 export enum LIMIT_FORM_FIELDS {
@@ -81,6 +81,7 @@ export const limitValidationSchema = ({
   t,
   baseAsset,
   quoteAsset,
+  stepSize,
   tickSize,
   maxTotal,
   maxPrice,
@@ -92,6 +93,7 @@ export const limitValidationSchema = ({
   t: TFunction;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
+  stepSize: number;
   tickSize: number;
   maxTotal: number;
   maxPrice: number;
@@ -122,11 +124,11 @@ export const limitValidationSchema = ({
           )}`,
           { maxPrice }
         )
-      ),
-    /*.test({
-        message: `Must be multiply of ${formatValue(tickSize)}`,
-        test: value => (value - minPrice) % tickSize === 0
-      })*/
+      )
+      .test({
+        message: `Must be multiply of ${tickSize}`,
+        test: value => modulo(value, tickSize) === 0
+      }),
     [LIMIT_FORM_FIELDS.quantity]: number()
       .required(t("Field is required"))
       .min(
@@ -148,11 +150,11 @@ export const limitValidationSchema = ({
           )}`,
           { maxQuantity }
         )
-      ),
-    /*.test({
-        message: `Must be multiply of ${formatValue(tickSize)}`,
-        test: value => (value - minQuantity) % tickSize === 0
-      })*/
+      )
+      .test({
+        message: `Must be multiply of ${stepSize}`,
+        test: value => modulo(value, stepSize) === 0
+      }),
     [LIMIT_FORM_FIELDS.total]: number()
       .min(
         minNotional,

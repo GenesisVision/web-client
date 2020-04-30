@@ -12,7 +12,10 @@ import {
   LIMIT_FORM_FIELDS,
   limitValidationSchema
 } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  formatValueWithTick,
+  getSymbol
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
@@ -22,7 +25,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
@@ -54,7 +56,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
   ).filters;
   const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
-  const { minQty, maxQty } = getLotSizeFilter(filters);
+  const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
   const maxQuantityWithWallet =
@@ -72,6 +74,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       t,
       quoteAsset,
       baseAsset,
+      stepSize: +stepSize,
       tickSize: +tickSize,
       maxTotal: maxTotalWithWallet,
       maxPrice: +maxPrice,
@@ -92,9 +95,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
 
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatCurrencyValue(
+      const value = (formatValueWithTick(
         total / price,
-        "BTC"
+        stepSize
       ) as unknown) as number;
       if (value > 0) {
         setValue(LIMIT_FORM_FIELDS.quantity, value, true);
@@ -104,9 +107,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   }, [total]);
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatCurrencyValue(
+      const value = (formatValueWithTick(
         quantity * price,
-        "BTC"
+        tickSize
       ) as unknown) as number;
       if (value > 0) {
         setValue(LIMIT_FORM_FIELDS.total, value, true);
@@ -119,7 +122,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       if (quantity) {
         setValue(
           LIMIT_FORM_FIELDS.total,
-          (formatCurrencyValue(quantity * price, "BTC") as unknown) as number,
+          (formatValueWithTick(
+            quantity * price,
+            tickSize
+          ) as unknown) as number,
           true
         );
         setAutoFill(true);
