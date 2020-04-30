@@ -13,6 +13,8 @@ import { modulo, safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { number, object } from "yup";
 
+export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
+
 export enum LIMIT_FORM_FIELDS {
   price = "price",
   quantity = "quantity",
