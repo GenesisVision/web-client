@@ -14,6 +14,7 @@ import {
   TableCardActionsItem,
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { Currency, FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
@@ -38,7 +39,14 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
     <>
       <TableCardTable wrap>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.size")}
+                labelText={t("funds-page.funds-header.balance")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(amount, currency)}
               suffix={` ${currency}`}
@@ -47,7 +55,16 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page.tooltips.investing.investors"
+                )}
+                labelText={t("funds-page.funds-header.investors")}
+              />
+            }
+          >
             <NumberFormat
               value={investorsCount}
               displayType="text"
@@ -56,7 +73,14 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                labelText={t("funds-page.funds-header.drawdown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"

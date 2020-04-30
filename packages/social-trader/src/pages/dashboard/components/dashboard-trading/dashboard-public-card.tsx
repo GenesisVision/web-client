@@ -9,6 +9,7 @@ import TableCard, {
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   ASSET,
   DECIMAL_SCALE_BIG_VALUE,
@@ -95,7 +96,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
+          <StatisticItemInner
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.equity")}
+                labelText={t("programs-page.programs-header.equity")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,
@@ -107,13 +115,27 @@ const _DashboardPublicCard: React.FC<Props> = ({
             />
           </StatisticItemInner>
           {asset.broker && (
-            <StatisticItemInner label={t("dashboard-page.trading.broker")}>
+            <StatisticItemInner
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page.tooltips.investing.broker")}
+                  labelText={t("dashboard-page.trading.broker")}
+                />
+              }
+            >
               {asset.broker.name}
             </StatisticItemInner>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.ddown")}>
+          <StatisticItemInner
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                labelText={t("dashboard-page.trading.ddown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
@@ -132,7 +154,16 @@ const _DashboardPublicCard: React.FC<Props> = ({
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.age")}>
+          <StatisticItemInner
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page.tooltips.investing.age-program"
+                )}
+                labelText={t("dashboard-page.trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
