@@ -4,7 +4,7 @@ import { AnyObjectType } from "utils/types";
 
 export const normalizeOpenOrdersList = (list: QueryOrderResult[]) => {
   const initObject: AnyObjectType = {};
-  list.forEach(item => (initObject[item.clientOrderId] = item));
+  list.forEach(item => (initObject[item.orderId] = item));
   return initObject;
 };
 

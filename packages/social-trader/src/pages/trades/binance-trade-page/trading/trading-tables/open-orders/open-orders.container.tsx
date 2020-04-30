@@ -1,7 +1,6 @@
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getOpenOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { filterOrderEventsStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
-import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
@@ -10,7 +9,6 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
-import { useSockets } from "services/websocket.service";
 
 import { OpenOrders } from "./open-orders";
 import { normalizeOpenOrdersList } from "./open-orders.helpers";
@@ -19,9 +17,9 @@ interface Props {}
 
 export const OpenOrdersContainer: React.FC<Props> = () => {
   const { authData } = useTradeAuth();
-  const { connectSocket } = useSockets();
 
   const {
+    userStream,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
@@ -31,7 +29,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
   const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
 
   useEffect(() => {
-    if (!authData.publicKey) return;
+    if (!authData.publicKey || !userStream) return;
     const openOrders = getOpenOrders(
       getSymbol(baseAsset, quoteAsset),
       authData
@@ -39,13 +37,11 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
     });
-    const openOrdersStream = filterOrderEventsStream(
-      getUserStreamSocket(connectSocket, authData)
-    );
+    const openOrdersStream = filterOrderEventsStream(userStream);
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [authData, baseAsset, quoteAsset]);
+  }, [authData, baseAsset, quoteAsset, userStream]);
 
   useEffect(() => {
     if (!socketData) return;

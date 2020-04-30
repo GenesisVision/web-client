@@ -12,6 +12,7 @@ import {
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { createContext, useEffect, useMemo, useState } from "react";
+import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 export type SymbolState = {
@@ -20,6 +21,7 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
+  userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
   accountInfo?: Account;
@@ -49,19 +51,20 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
     fetchOnMount: true
   });
 
+  const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [symbol, setSymbol] = useState<SymbolState>(SymbolInitialState);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
   useEffect(() => {
     if (!authData.publicKey) return;
-    const accountInfoSocket = getAccountInformation(authData);
-    accountInfoSocket.subscribe(data => {
+    const accountInfo = getAccountInformation(authData);
+    accountInfo.subscribe(data => {
       setAccountInfo(data);
     });
-    const accountInfoStream = filterOutboundAccountInfoStream(
-      getUserStreamSocket(connectSocket, authData)
-    );
+    const userStream = getUserStreamSocket(connectSocket, authData);
+    setUserStream(userStream);
+    const accountInfoStream = filterOutboundAccountInfoStream(userStream);
     accountInfoStream.subscribe(data => {
       setSocketData(data);
     });
@@ -74,13 +77,8 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   const value = useMemo(
-    () => ({
-      setSymbol,
-      symbol,
-      accountInfo,
-      exchangeInfo
-    }),
-    [setSymbol, symbol, accountInfo, exchangeInfo]
+    () => ({ userStream, setSymbol, symbol, accountInfo, exchangeInfo }),
+    [userStream, setSymbol, symbol, accountInfo, exchangeInfo]
   );
 
   return (
