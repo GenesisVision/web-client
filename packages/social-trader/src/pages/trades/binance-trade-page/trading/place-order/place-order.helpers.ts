@@ -10,6 +10,7 @@ import {
 import { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 import { modulo, safeGetElemFromArray } from "utils/helpers";
+import { minMaxNumberShape } from "utils/validators/validators";
 import { number, object } from "yup";
 
 export enum LIMIT_FORM_FIELDS {
@@ -77,6 +78,28 @@ export const isTradeFieldAllow = (min: number, max: number, tick: number) => (
   );
 };
 
+const tradeNumberShape = ({
+  t,
+  min,
+  max,
+  currency,
+  divider
+}: {
+  t: TFunction;
+  min: number;
+  max: number;
+  currency: TradeCurrency;
+  divider: number;
+}) =>
+  minMaxNumberShape({
+    t,
+    min,
+    max
+  }).test({
+    message: `Must be multiply of ${divider}`,
+    test: value => true //modulo(value, divider) === 0
+  });
+
 export const limitValidationSchema = ({
   t,
   baseAsset,
@@ -103,58 +126,20 @@ export const limitValidationSchema = ({
   minNotional: number;
 }) =>
   object().shape({
-    [LIMIT_FORM_FIELDS.price]: number()
-      .required(t("Field is required"))
-      .min(
-        minPrice,
-        t(
-          `Must be more or equal than ${formatCurrencyValue(
-            minPrice,
-            quoteAsset
-          )}`,
-          { minPrice }
-        )
-      )
-      .max(
-        maxPrice,
-        t(
-          `Must be less or equal than ${formatCurrencyValue(
-            maxPrice,
-            quoteAsset
-          )}`,
-          { maxPrice }
-        )
-      )
-      .test({
-        message: `Must be multiply of ${tickSize}`,
-        test: value => modulo(value, tickSize) === 0
-      }),
-    [LIMIT_FORM_FIELDS.quantity]: number()
-      .required(t("Field is required"))
-      .min(
-        minQuantity,
-        t(
-          `Must be more or equal than ${formatCurrencyValue(
-            minQuantity,
-            baseAsset
-          )}`,
-          { minQuantity }
-        )
-      )
-      .max(
-        maxQuantity,
-        t(
-          `Must be less or equal than ${formatCurrencyValue(
-            maxQuantity,
-            baseAsset
-          )}`,
-          { maxQuantity }
-        )
-      )
-      .test({
-        message: `Must be multiply of ${stepSize}`,
-        test: value => modulo(value, stepSize) === 0
-      }),
+    [LIMIT_FORM_FIELDS.price]: tradeNumberShape({
+      t,
+      min: minPrice,
+      max: maxPrice,
+      divider: tickSize,
+      currency: quoteAsset
+    }),
+    [LIMIT_FORM_FIELDS.quantity]: tradeNumberShape({
+      t,
+      min: minQuantity,
+      max: maxQuantity,
+      divider: stepSize,
+      currency: baseAsset
+    }),
     [LIMIT_FORM_FIELDS.total]: number()
       .min(
         minNotional,
