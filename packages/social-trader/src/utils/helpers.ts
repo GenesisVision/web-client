@@ -2,7 +2,7 @@ import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
 export const modulo = (dividend: number, divider: number): number => {
-  return dividend - Math.trunc(dividend / divider) * divider;
+  return dividend - Math.floor(dividend / divider) * divider;
 };
 
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
