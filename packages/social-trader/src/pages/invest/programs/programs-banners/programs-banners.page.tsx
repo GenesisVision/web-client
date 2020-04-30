@@ -20,12 +20,12 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   if (!origin) return null;
 
   const title = `Banners for program: ${program.publicInfo.title}`;
-  const banner250png = `${origin}/api/programs/${program.publicInfo.url}/250x250.png`;
-  const banner250svg = `${origin}/api/programs/${program.publicInfo.url}/250x250.svg`;
-  const banner728png = `${origin}/api/programs/${program.publicInfo.url}/728x89.png`;
-  const banner728svg = `${origin}/api/programs/${program.publicInfo.url}/728x89.svg`;
-  const banner240png = `${origin}/api/programs/${program.publicInfo.url}/240x400.png`;
-  const banner240svg = `${origin}/api/programs/${program.publicInfo.url}/240x400.svg`;
+  const banner250png = `${origin}/banners/programs/${program.publicInfo.url}/250x250.png`;
+  const banner250svg = `${origin}/banners/programs/${program.publicInfo.url}/250x250.svg`;
+  const banner728png = `${origin}/banners/programs/${program.publicInfo.url}/728x89.png`;
+  const banner728svg = `${origin}/banners/programs/${program.publicInfo.url}/728x89.svg`;
+  const banner240png = `${origin}/banners/programs/${program.publicInfo.url}/240x400.png`;
+  const banner240svg = `${origin}/banners/programs/${program.publicInfo.url}/240x400.svg`;
 
   return (
     <Page description={title} title={title}>

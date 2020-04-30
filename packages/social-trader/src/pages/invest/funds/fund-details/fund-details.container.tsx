@@ -15,6 +15,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
+  composeFundBannerUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
 } from "utils/compose-url";
@@ -44,7 +45,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page.title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={description.publicInfo.logoUrl}
+      previewImage={composeFundBannerUrl(description.publicInfo.url)}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
