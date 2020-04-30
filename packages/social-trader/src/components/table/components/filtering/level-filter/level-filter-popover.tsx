@@ -1,9 +1,9 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
+import { Range } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { Range } from "rc-slider";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
@@ -26,7 +26,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
   return (
     <PopoverContent className="level-filter">
       <PopoverContentCardBlock>
-        <div className="level-filter__slider">
+        <Row>
           <Range
             dots
             min={1}
@@ -36,7 +36,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
             onChange={handleChange}
             pushable={false}
           />
-        </div>
+        </Row>
         <Row>
           <RowItem>
             <GVButton
