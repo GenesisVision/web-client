@@ -1,87 +1,59 @@
+import * as React from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  FocusEvent,
+  FocusEventHandler,
+  useCallback
+} from "react";
+
 import "./gv-datepicker.scss";
 
-import * as React from "react";
-import { RefObject } from "react";
-import { formatDate } from "utils/dates";
-
-class GVDatePicker extends React.PureComponent<Props, State> {
-  state: State = {
-    anchorEl: undefined
-  };
-
-  input: RefObject<HTMLButtonElement> = React.createRef();
-
-  handleChange = (date: Date | Date[]) => {
-    if (this.props.onChange) {
-      const newDate = Array.isArray(date) ? date[0] : date;
-      this.props.onChange({
-        persist: () => {},
-        target: {
-          value: newDate && formatDate(newDate),
-          name: this.props.name
-        }
-      });
-      this.handleClose();
-    }
-  };
-
-  handleBlur = (): void => {
-    const { disabled, onBlur, name } = this.props;
-    if (disabled || this.state.anchorEl) return;
-    if (onBlur) {
-      onBlur({
-        target: {
-          name
-        }
-      });
-    }
-  };
-
-  handleOpen = (anchorEl: EventTarget) => {
-    this.setState({ anchorEl });
-  };
-
-  handleClose = (): void => {
-    this.setState({ anchorEl: undefined }, this.handleBlur);
-  };
-
-  handleFocus = (
-    event:
-      | React.FocusEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
-    const { disabled, onFocus } = this.props;
-    if (disabled) return;
-    if (onFocus) {
-      onFocus(event);
-    }
-  };
-
-  handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void => {
-    this.handleOpen(event.target);
-    this.handleFocus(event);
-  };
-
-  render() {
-    const {
+const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
       value,
       minDate,
       maxDate,
       name,
       disabled,
       className,
-      onChange
-    } = this.props;
+      onChange,
+      onBlur,
+      onFocus
+    },
+    ref
+  ) => {
+    const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange(event);
+      }
+    }, []);
+
+    const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
+      if (disabled) return;
+      if (onBlur) {
+        onBlur(event);
+      }
+    }, []);
+
+    const handleFocus = useCallback((event: FocusEvent<HTMLInputElement>) => {
+      if (disabled) return;
+      if (onFocus) {
+        onFocus(event);
+      }
+    }, []);
     return (
       <div className="gv-datepicker">
         <input
+          ref={ref}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           type="date"
           min={minDate}
           max={maxDate}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           name={name}
           disabled={disabled}
           className={className}
@@ -89,37 +61,20 @@ class GVDatePicker extends React.PureComponent<Props, State> {
       </div>
     );
   }
-}
+);
 
+const GVDatePicker = React.memo(_GVDatePicker);
 export default GVDatePicker;
 
 interface Props {
   value?: string;
-  onChange(event: {
-    persist(): void;
-    target: {
-      value: string;
-      name: string;
-    };
-  }): void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   minDate?: string;
   maxDate?: string;
   disabled: boolean;
-  onFocus(
-    event:
-      | React.FocusEvent<HTMLButtonElement>
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void;
-  onBlur(target: {
-    target: {
-      name: string;
-    };
-  }): void;
+  onFocus: FocusEventHandler<HTMLInputElement>;
+  onBlur: FocusEventHandler<HTMLInputElement>;
   name: string;
   lng: string;
   className?: string;
-}
-
-interface State {
-  anchorEl?: EventTarget;
 }

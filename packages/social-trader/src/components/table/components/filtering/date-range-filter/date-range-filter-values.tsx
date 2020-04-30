@@ -1,7 +1,7 @@
 import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import GVTextField from "components/gv-text-field";
 import { RowItem } from "components/row-item/row-item";
-import React, { useCallback } from "react";
+import React, { FocusEvent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { localizedDate, subtractDate } from "utils/dates";
 
@@ -17,10 +17,18 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
   const { type, startLabel, onChange } = props;
   const [t] = useTranslation();
   const handleOnChange = useCallback(
-    (type: keyof IDataRangeFilterValue) => (e: React.ChangeEvent<any>) =>
-      onChange(type, e.target.value),
+    (type: keyof IDataRangeFilterValue) => (e: React.ChangeEvent<any>) => {
+      onChange(type, e.target.value);
+    },
     [onChange]
   );
+
+  const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
+    const type = event.target.name as keyof IDataRangeFilterValue;
+    if (event.target.value.length === 0) {
+      onChange(type, props[type]!);
+    }
+  }, []);
 
   switch (type) {
     case DATA_RANGE_FILTER_TYPES.ALL:
@@ -54,6 +62,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
         <>
           <RowItem>
             <GVTextField
+              onBlur={handleBlur}
               wrapperClassName="date-range-filter__date-input"
               type="text"
               name={DATE_RANGE_MIN_FILTER_NAME}
