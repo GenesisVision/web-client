@@ -1,5 +1,3 @@
-import classNames from "classnames";
-import { Center } from "components/center/center";
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
@@ -27,39 +25,28 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
     if (symbol) setSymbol(symbol);
   }, [symbol]);
   return (
-    <Center className={styles["trading__main-block"]}>
-      <div className={styles["trading__left-group"]}>
-        <Center className={styles["trading__top-group"]}>
-          <MarketWatchBlock />
-          <ChartBlock />
-        </Center>
-        <div className={styles["trading__bottom-group"]}>
-          <TradingTables />
+    <div className={styles["trading-grid"]}>
+      <div className={styles["market-watch-grid-elem"]}>
+        <MarketWatchBlock />
+      </div>
+      <div className={styles["chart-grid-elem"]}>
+        <ChartBlock />
+      </div>
+      <div className={styles["tables-grid-elem"]}>
+        <TradingTables />
+      </div>
+      <div className={styles["order-book-grid-elem"]}>
+        <OrderBookBlock />
+      </div>
+      <TradingPriceContextProvider>
+        <div className={styles["trades-grid-elem"]}>
+          <TradesBlock />
         </div>
-      </div>
-      <div className={styles["trading__right-group"]}>
-        <TradingPriceContextProvider>
-          <Center className={styles["trading__right-group-item"]}>
-            <div
-              className={classNames(
-                styles["trading__right-group-item"],
-                styles["trading__right-list-block"]
-              )}
-            >
-              <div className={styles["trading__top-group"]}>
-                <OrderBookBlock />
-              </div>
-              <div className={styles["trading__bottom-group"]}>
-                <TradesBlock />
-              </div>
-            </div>
-            <div className={styles["trading__right-group-item"]}>
-              <PlaceOrder />
-            </div>
-          </Center>
-        </TradingPriceContextProvider>
-      </div>
-    </Center>
+        <div className={styles["place-orders-grid-elem"]}>
+          <PlaceOrder />
+        </div>
+      </TradingPriceContextProvider>
+    </div>
   );
 };
 
