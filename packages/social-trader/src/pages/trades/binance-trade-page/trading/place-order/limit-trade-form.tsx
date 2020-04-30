@@ -29,7 +29,8 @@ import {
   ILimitTradeFormValues,
   LIMIT_FORM_FIELDS,
   limitValidationSchema,
-  RANGE_MARKS
+  RANGE_MARKS,
+  useTradeSlider
 } from "./place-order.helpers";
 
 export interface ILimitTradeFormProps {
@@ -53,7 +54,6 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   direction
 }) => {
   const [t] = useTranslation();
-  const [sliderValue, setSliderValue] = useState<number>(0);
   const [autoFill, setAutoFill] = useState<boolean>(false);
 
   const filters = safeGetElemFromArray(
@@ -102,19 +102,16 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     setValue(LIMIT_FORM_FIELDS.total, total, true);
   }, [direction]);
 
-  useEffect(() => {
-    const percentValue = parseInt(RANGE_MARKS[sliderValue]);
-    if (direction === "BUY") {
-      const walletAvailable = +getBalance(accountInfo.balances, quoteAsset);
-      const newTotal = calculatePercentage(walletAvailable, percentValue);
-      setValue(LIMIT_FORM_FIELDS.total, newTotal, true);
-    }
-    if (direction === "SELL") {
-      const walletAvailable = +getBalance(accountInfo.balances, baseAsset);
-      const newQuantity = calculatePercentage(walletAvailable, percentValue);
-      setValue(LIMIT_FORM_FIELDS.quantity, newQuantity, true);
-    }
-  }, [sliderValue]);
+  const { sliderValue, setSliderValue } = useTradeSlider({
+    baseAsset,
+    quoteAsset,
+    side: direction,
+    setValue,
+    balances: accountInfo.balances,
+    quantityName: LIMIT_FORM_FIELDS.quantity,
+    totalName: LIMIT_FORM_FIELDS.total
+  });
+
   useEffect(() => {
     if (!autoFill) {
       const value = (formatValueWithTick(

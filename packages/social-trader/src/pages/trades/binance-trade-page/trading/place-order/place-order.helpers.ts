@@ -1,13 +1,16 @@
 import { TFunction } from "i18next";
 import {
   AssetBalance,
+  OrderSide,
   SymbolFilter,
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
   SymbolPriceFilter,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import { useEffect, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
+import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { modulo, safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
@@ -26,6 +29,40 @@ export interface ILimitTradeFormValues {
   [LIMIT_FORM_FIELDS.quantity]: number;
   [LIMIT_FORM_FIELDS.total]: number;
 }
+
+export const useTradeSlider = ({
+  setValue,
+  side,
+  balances,
+  quoteAsset,
+  baseAsset,
+  totalName,
+  quantityName
+}: {
+  setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
+  side: OrderSide;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  balances: AssetBalance[];
+  totalName: string;
+  quantityName: string;
+}) => {
+  const [sliderValue, setSliderValue] = useState<number>(0);
+  useEffect(() => {
+    const percentValue = parseInt(RANGE_MARKS[sliderValue]);
+    if (side === "BUY") {
+      const walletAvailable = +getBalance(balances, quoteAsset);
+      const newTotal = calculatePercentage(walletAvailable, percentValue);
+      setValue(totalName, newTotal, true);
+    }
+    if (side === "SELL") {
+      const walletAvailable = +getBalance(balances, baseAsset);
+      const newQuantity = calculatePercentage(walletAvailable, percentValue);
+      setValue(quantityName, newQuantity, true);
+    }
+  }, [sliderValue]);
+  return { sliderValue, setSliderValue };
+};
 
 export const getBalance = (balances: AssetBalance[], currency: TradeCurrency) =>
   safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
