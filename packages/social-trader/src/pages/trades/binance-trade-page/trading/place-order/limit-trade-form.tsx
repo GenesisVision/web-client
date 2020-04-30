@@ -89,10 +89,6 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     reset({ price: outerPrice, quantity, total });
   }, [outerPrice]);
 
-  useEffect(() => {
-    setValue(LIMIT_FORM_FIELDS.total, total, true);
-  }, [direction]);
-
   const { sliderValue, setSliderValue } = useTradeSlider({
     baseAsset,
     quoteAsset,
@@ -102,6 +98,18 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     quantityName: LIMIT_FORM_FIELDS.quantity,
     totalName: LIMIT_FORM_FIELDS.total
   });
+
+  const [prevFormState, setPrevFormState] = useState<
+    (ILimitTradeFormValues & { sliderValue: number }) | undefined
+  >();
+
+  useEffect(() => {
+    setPrevFormState({ ...watch(), sliderValue });
+    if (prevFormState) {
+      reset(prevFormState);
+      setSliderValue(prevFormState.sliderValue);
+    }
+  }, [direction]);
 
   useEffect(() => {
     if (!autoFill) {
