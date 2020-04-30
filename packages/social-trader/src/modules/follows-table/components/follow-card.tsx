@@ -12,6 +12,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/invest/follows/follow-details/follow-button";
@@ -80,7 +81,16 @@ const _FollowCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("follows-page.header.subscribers")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page.tooltips.trading.subscribers"
+                )}
+                labelText={t("follows-page.header.subscribers")}
+              />
+            }
+          >
             <NumberFormat
               value={subscribersCount}
               displayType="text"
@@ -89,7 +99,14 @@ const _FollowCard: React.FC<Props> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("follows-page.header.trades")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.trading.trades")}
+                labelText={t("follows-page.header.trades")}
+              />
+            }
+          >
             <NumberFormat
               value={tradesCount}
               displayType="text"
@@ -98,7 +115,14 @@ const _FollowCard: React.FC<Props> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                labelText={t("programs-page.programs-header.drawdown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"
