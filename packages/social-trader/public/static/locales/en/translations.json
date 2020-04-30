@@ -1,4 +1,9 @@
 {
+  "validations": {
+    "required": "Field is required",
+    "min": "Must be more or equal than {{min}}",
+    "max": "Must be less or equal than {{max}}"
+  },
   "news-page": {
     "title": "News",
     "tabs": {
