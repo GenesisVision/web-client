@@ -25,9 +25,6 @@ export interface TradeRequest {
   type: string;
 }
 
-// export const BINANCE_HTTP_API = "https://www.binance.com/api";
-export const BINANCE_HTTP_API = "/api";
-
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   requestService.get(
     {
@@ -65,7 +62,7 @@ export const getAllOrders = (
 
 export const getUserStreamKey = (
   authData: TradeAuthDataType
-): Observable<any[]> =>
+): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
     url: "/api/v3/userDataStream",

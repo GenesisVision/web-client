@@ -1,4 +1,3 @@
-import { ORDER_STATUSES } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
 import {
   Account,
   Depth,

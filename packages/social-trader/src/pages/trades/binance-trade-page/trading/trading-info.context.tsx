@@ -2,7 +2,8 @@ import useApiRequest from "hooks/api-request.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   getAccountInformation,
-  getExchangeInfo
+  getExchangeInfo,
+  getUserStreamKey
 } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { filterOutboundAccountInfoStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
@@ -51,6 +52,7 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
     fetchOnMount: true
   });
 
+  const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [symbol, setSymbol] = useState<SymbolState>(SymbolInitialState);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
@@ -62,13 +64,20 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
     accountInfo.subscribe(data => {
       setAccountInfo(data);
     });
-    const userStream = getUserStreamSocket(connectSocket, authData);
+    getUserStreamKey(authData).subscribe(({ listenKey }) =>
+      setUserStreamKey(listenKey)
+    );
+  }, [authData]);
+
+  useEffect(() => {
+    if (!userStreamKey) return;
+    const userStream = getUserStreamSocket(connectSocket, userStreamKey);
     setUserStream(userStream);
     const accountInfoStream = filterOutboundAccountInfoStream(userStream);
     accountInfoStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [authData]);
+  }, [userStreamKey]);
 
   useEffect(() => {
     if (!socketData) return;

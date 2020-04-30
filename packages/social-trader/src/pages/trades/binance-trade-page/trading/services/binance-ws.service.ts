@@ -1,16 +1,13 @@
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   Depth,
-  QueryOrderResult,
   Ticker,
   Trade,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
-import { filter, map, switchMap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
-import { getUserStreamKey } from "./binance-http.service";
 import {
   depthTransform,
   tickerTransform,
@@ -66,56 +63,9 @@ export const marketTicketsSocket = (
 
 export const getUserStreamSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  authData: TradeAuthDataType
+  listenKey: string
 ) => {
   const socketName = "accountInformation";
-  return getUserStreamKey(authData).pipe(
-    switchMap((key: any) => {
-      const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${key.listenKey}`;
-      return connectSocketMethod(socketName, url);
-    })
-  );
-};
-
-export const getAccountInformationSocket = (
-  connectSocketMethod: ConnectSocketMethodType,
-  authData: TradeAuthDataType
-) => {
-  return getUserStreamSocket(connectSocketMethod, authData).pipe(
-    filter(info => info.e === "outboundAccountInfo"),
-    map(info => {
-      return { ...info, balances: info.B };
-    })
-  );
-};
-
-export const getOpenOrdersSocket = (
-  connectSocketMethod: ConnectSocketMethodType,
-  authData: TradeAuthDataType
-): Observable<QueryOrderResult[]> => {
-  return getUserStreamSocket(connectSocketMethod, authData).pipe(
-    filter(info => info.e === "executionReport"),
-    filter(
-      item =>
-        item.X !== ORDER_STATUSES.FILLED &&
-        item.X !== ORDER_STATUSES.PARTIALLY_FILLED &&
-        item.X !== ORDER_STATUSES.REJECTED
-    )
-  );
-};
-
-export const getAllOrdersSocket = (
-  symbol: string,
-  connectSocketMethod: ConnectSocketMethodType,
-  authData: TradeAuthDataType
-) => {
-  return getUserStreamSocket(connectSocketMethod, authData).pipe(
-    filter(info => info.e === "executionReport"),
-    filter(
-      item =>
-        item.X === ORDER_STATUSES.FILLED ||
-        item.X === ORDER_STATUSES.PARTIALLY_FILLED
-    ),
-    filter(info => info.s === symbol.toUpperCase())
-  );
+  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${listenKey}`;
+  return connectSocketMethod(socketName, url);
 };
