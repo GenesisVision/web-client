@@ -1,6 +1,7 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -16,6 +17,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { calculatePercentage } from "utils/currency-converter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
@@ -26,7 +28,8 @@ import {
   getSymbolPriceFilter,
   ILimitTradeFormValues,
   LIMIT_FORM_FIELDS,
-  limitValidationSchema
+  limitValidationSchema,
+  RANGE_MARKS
 } from "./place-order.helpers";
 
 export interface ILimitTradeFormProps {
@@ -50,6 +53,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   direction
 }) => {
   const [t] = useTranslation();
+  const [sliderValue, setSliderValue] = useState<number>(0);
   const [autoFill, setAutoFill] = useState<boolean>(false);
 
   const filters = safeGetElemFromArray(
@@ -94,6 +98,23 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     reset({ price: outerPrice, quantity, total });
   }, [outerPrice]);
 
+  useEffect(() => {
+    setValue(LIMIT_FORM_FIELDS.total, total, true);
+  }, [direction]);
+
+  useEffect(() => {
+    const percentValue = parseInt(RANGE_MARKS[sliderValue]);
+    if (direction === "BUY") {
+      const walletAvailable = +getBalance(accountInfo.balances, quoteAsset);
+      const newTotal = calculatePercentage(walletAvailable, percentValue);
+      setValue(LIMIT_FORM_FIELDS.total, newTotal, true);
+    }
+    if (direction === "SELL") {
+      const walletAvailable = +getBalance(accountInfo.balances, baseAsset);
+      const newQuantity = calculatePercentage(walletAvailable, percentValue);
+      setValue(LIMIT_FORM_FIELDS.quantity, newQuantity, true);
+    }
+  }, [sliderValue]);
   useEffect(() => {
     if (!autoFill) {
       const value = (formatValueWithTick(
@@ -148,6 +169,16 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           label={t("Amount")}
           currency={baseAsset}
           name={LIMIT_FORM_FIELDS.quantity}
+        />
+      </Row>
+      <Row wide onlyOffset>
+        <Slider
+          dots
+          min={0}
+          max={RANGE_MARKS.length - 1}
+          marks={RANGE_MARKS}
+          value={sliderValue}
+          onChange={setSliderValue}
         />
       </Row>
       <Row>
