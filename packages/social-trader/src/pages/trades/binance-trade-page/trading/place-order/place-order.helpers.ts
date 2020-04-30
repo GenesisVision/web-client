@@ -1,6 +1,8 @@
 import { TFunction } from "i18next";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   AssetBalance,
+  ExchangeInfo,
   OrderSide,
   SymbolFilter,
   SymbolLotSizeFilter,
@@ -12,7 +14,7 @@ import { useEffect, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
-import { modulo, safeGetElemFromArray } from "utils/helpers";
+import { safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { number, object } from "yup";
 
@@ -29,6 +31,48 @@ export interface ILimitTradeFormValues {
   [LIMIT_FORM_FIELDS.quantity]: number;
   [LIMIT_FORM_FIELDS.total]: number;
 }
+
+export const usePlaceOrderInfo = ({
+  exchangeInfo,
+  baseAsset,
+  quoteAsset,
+  balances,
+  side
+}: {
+  exchangeInfo: ExchangeInfo;
+  side: OrderSide;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  balances: AssetBalance[];
+}) => {
+  const filters = safeGetElemFromArray(
+    exchangeInfo.symbols,
+    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
+  ).filters;
+  const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
+  const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
+  const { minNotional } = getMinNotionalFilter(filters);
+
+  const maxQuantityWithWallet =
+    side === "BUY"
+      ? +maxQty
+      : Math.min(+maxQty, +getBalance(balances, baseAsset));
+
+  const maxTotalWithWallet =
+    side === "BUY"
+      ? +getBalance(balances, quoteAsset)
+      : Number.MAX_SAFE_INTEGER;
+  return {
+    minPrice,
+    maxPrice,
+    tickSize,
+    minQty,
+    stepSize,
+    minNotional,
+    maxQuantityWithWallet,
+    maxTotalWithWallet
+  };
+};
 
 export const useTradeSlider = ({
   setValue,

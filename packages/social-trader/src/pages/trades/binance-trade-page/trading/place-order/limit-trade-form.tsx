@@ -4,10 +4,7 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
-import {
-  formatValueWithTick,
-  getSymbol
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { formatValueWithTick } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
@@ -17,19 +14,14 @@ import {
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { calculatePercentage } from "utils/currency-converter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import {
-  getBalance,
-  getLotSizeFilter,
-  getMinNotionalFilter,
-  getSymbolPriceFilter,
   ILimitTradeFormValues,
   LIMIT_FORM_FIELDS,
   limitValidationSchema,
   RANGE_MARKS,
+  usePlaceOrderInfo,
   useTradeSlider
 } from "./place-order.helpers";
 
@@ -56,23 +48,22 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const [t] = useTranslation();
   const [autoFill, setAutoFill] = useState<boolean>(false);
 
-  const filters = safeGetElemFromArray(
-    exchangeInfo.symbols,
-    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
-  ).filters;
-  const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
-  const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
-  const { minNotional } = getMinNotionalFilter(filters);
-
-  const maxQuantityWithWallet =
-    direction === "BUY"
-      ? +maxQty
-      : Math.min(+maxQty, +getBalance(accountInfo.balances, baseAsset));
-
-  const maxTotalWithWallet =
-    direction === "BUY"
-      ? +getBalance(accountInfo.balances, quoteAsset)
-      : Number.MAX_SAFE_INTEGER;
+  const {
+    minPrice,
+    maxPrice,
+    tickSize,
+    minQty,
+    stepSize,
+    minNotional,
+    maxQuantityWithWallet,
+    maxTotalWithWallet
+  } = usePlaceOrderInfo({
+    balances: accountInfo.balances,
+    side: direction,
+    quoteAsset,
+    baseAsset,
+    exchangeInfo
+  });
 
   const form = useForm<ILimitTradeFormValues>({
     validationSchema: limitValidationSchema({
