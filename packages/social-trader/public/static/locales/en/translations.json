@@ -2101,6 +2101,44 @@
     }
   },
   "dashboard-page": {
+    "tooltips": {
+      "total": {
+        "total-balance": "Current market value of your assets on the platform.",
+        "invested": "Current market value of your investments in programs, funds, taking into account the profit/loss of open positions and including pending requests.",
+        "trading": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+        "wallet": "Funds available in your wallet",
+        "performance": "The change of your profit on the platform: day, week, and month."
+      },
+      "trading": {
+        "your-equity": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+        "aum": "Assets under management (AUM) is the total market value of the investments that you currently have under managment in programs and funds from investors.",
+        "total": "Current market value of your investments in your programs, funds and trading accounts, and assets under management (AUM)",
+        "login": "Login from the trading account for the program.",
+        "equity-value": "Current market value of your assets in this fund.",
+        "age-fund": "Age of the fund.",
+        "leverage": "Set leverage of the trading account. Trading with leverage allows the trader to open positions larger than their own capital.",
+        "age": "Age of the trading account.",
+        "subscribers": "Number of subscribers",
+        "trades": "Number of trades the manager has executed during the selected date range."
+      },
+      "investing": {
+        "balance": "Current market value of your investments in programs and funds, taking into account the profit/loss of open positions and including pending requests.",
+        "programs": "Number of programs you have invested in.",
+        "funds": "Number of funds you have invested in.",
+        "size": "Current market value of your assets in the fund",
+        "investors": "Number of investors in the fund",
+        "ddown": "Maximum drawdown of the program during the selected date range.",
+        "profit": "Profit or loss resulting from the manager trading. This is calculated according to your share of investment in the program.",
+        "value": "Current market value of your investment in the program, taking into account the profit/loss of open positions.",
+        "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+        "age-program": "Age of the program",
+        "broker": "Current broker of the program"
+      },
+      "others": {
+        "loss": "Loss in the program",
+        "refund": "Amount of funds that have been returned to your wallet."
+      }
+    },
     "investing": {
       "most-profitable": "The most profitable programs and funds",
       "title": "Investments",
