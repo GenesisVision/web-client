@@ -1,5 +1,8 @@
 import { TFunction } from "i18next";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  formatValueWithTick,
+  getSymbol
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   AssetBalance,
   ExchangeInfo,
@@ -19,7 +22,11 @@ import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { number, object } from "yup";
 
-export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
+type PlaceOrderFormSetValueType = (
+  name: string,
+  value?: number,
+  shouldValidate?: boolean
+) => void;
 
 export enum LIMIT_FORM_FIELDS {
   price = "price",
@@ -32,6 +39,69 @@ export interface ILimitTradeFormValues {
   [LIMIT_FORM_FIELDS.quantity]: number;
   [LIMIT_FORM_FIELDS.total]: number;
 }
+
+export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
+
+export const usePlaceOrderAutoFill = ({
+  setValue,
+  total,
+  price,
+  stepSize,
+  quantity,
+  tickSize,
+  totalName,
+  quantityName
+}: {
+  total: number;
+  price: number;
+  quantity: number;
+  tickSize: string;
+  stepSize: string;
+  setValue: PlaceOrderFormSetValueType;
+  totalName: string;
+  quantityName: string;
+}) => {
+  const [autoFill, setAutoFill] = useState<boolean>(false);
+  useEffect(() => {
+    if (!autoFill) {
+      const value = (formatValueWithTick(
+        total / price,
+        stepSize
+      ) as unknown) as number;
+      if (value > 0) {
+        setValue(quantityName, value, true);
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [total]);
+  useEffect(() => {
+    if (!autoFill) {
+      const value = (formatValueWithTick(
+        quantity * price,
+        tickSize
+      ) as unknown) as number;
+      if (value > 0) {
+        setValue(totalName, value, true);
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [quantity]);
+  useEffect(() => {
+    if (!autoFill) {
+      if (quantity) {
+        setValue(
+          totalName,
+          (formatValueWithTick(
+            quantity * price,
+            tickSize
+          ) as unknown) as number,
+          true
+        );
+        setAutoFill(true);
+      }
+    } else setAutoFill(false);
+  }, [price]);
+};
 
 export const usePlaceOrderFormReset = ({
   outerPrice,

@@ -4,14 +4,13 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
-import { formatValueWithTick } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -21,9 +20,9 @@ import {
   LIMIT_FORM_FIELDS,
   limitValidationSchema,
   RANGE_MARKS,
+  usePlaceOrderAutoFill,
   usePlaceOrderFormReset,
-  usePlaceOrderInfo,
-  useTradeSlider
+  usePlaceOrderInfo
 } from "./place-order.helpers";
 
 export interface ILimitTradeFormProps {
@@ -47,7 +46,6 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   direction
 }) => {
   const [t] = useTranslation();
-  const [autoFill, setAutoFill] = useState<boolean>(false);
 
   const {
     minPrice,
@@ -99,45 +97,16 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     totalName: LIMIT_FORM_FIELDS.total
   });
 
-  useEffect(() => {
-    if (!autoFill) {
-      const value = (formatValueWithTick(
-        total / price,
-        stepSize
-      ) as unknown) as number;
-      if (value > 0) {
-        setValue(LIMIT_FORM_FIELDS.quantity, value, true);
-        setAutoFill(true);
-      }
-    } else setAutoFill(false);
-  }, [total]);
-  useEffect(() => {
-    if (!autoFill) {
-      const value = (formatValueWithTick(
-        quantity * price,
-        tickSize
-      ) as unknown) as number;
-      if (value > 0) {
-        setValue(LIMIT_FORM_FIELDS.total, value, true);
-        setAutoFill(true);
-      }
-    } else setAutoFill(false);
-  }, [quantity]);
-  useEffect(() => {
-    if (!autoFill) {
-      if (quantity) {
-        setValue(
-          LIMIT_FORM_FIELDS.total,
-          (formatValueWithTick(
-            quantity * price,
-            tickSize
-          ) as unknown) as number,
-          true
-        );
-        setAutoFill(true);
-      }
-    } else setAutoFill(false);
-  }, [price]);
+  usePlaceOrderAutoFill({
+    totalName: LIMIT_FORM_FIELDS.total,
+    quantityName: LIMIT_FORM_FIELDS.quantity,
+    setValue,
+    tickSize,
+    price,
+    quantity,
+    stepSize,
+    total
+  });
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
