@@ -99,7 +99,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
           <StatisticItemInner
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.equity")}
+                tooltipContent={
+                  fundDetails
+                    ? t("dashboard-page.tooltips.trading.equity-fund")
+                    : t("dashboard-page.tooltips.investing.equity")
+                }
                 labelText={t("programs-page.programs-header.equity")}
               />
             }
@@ -131,7 +135,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
           <StatisticItemInner
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                tooltipContent={
+                  fundDetails
+                    ? t("dashboard-page.tooltips.trading.ddown-fund")
+                    : t("dashboard-page.tooltips.investing.ddown")
+                }
                 labelText={t("dashboard-page.trading.ddown")}
               />
             }
@@ -157,9 +165,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
           <StatisticItemInner
             label={
               <TooltipLabel
-                tooltipContent={t(
-                  "dashboard-page.tooltips.investing.age-program"
-                )}
+                tooltipContent={
+                  fundDetails
+                    ? t("dashboard-page.tooltips.trading.age-fund")
+                    : t("dashboard-page.tooltips.investing.age-program")
+                }
                 labelText={t("dashboard-page.trading.age")}
               />
             }
@@ -169,7 +179,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
             )}
           </StatisticItemInner>
           {asset.accountInfo && asset.accountInfo.login && (
-            <StatisticItemInner label={t("dashboard-page.trading.login")}>
+            <StatisticItemInner
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page.tooltips.trading.login")}
+                  labelText={t("dashboard-page.trading.login")}
+                />
+              }
+            >
               {asset.accountInfo.login}
             </StatisticItemInner>
           )}

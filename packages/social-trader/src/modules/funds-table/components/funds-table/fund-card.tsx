@@ -76,7 +76,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                tooltipContent={t("dashboard-page.tooltips.trading.ddown-fund")}
                 labelText={t("funds-page.funds-header.drawdown")}
               />
             }
