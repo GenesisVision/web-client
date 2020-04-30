@@ -57,6 +57,9 @@ function create(path) {
       [
         sass,
         {
+          typescript: {
+            ignoreDevErrors: true
+          },
           cssModules: true,
           cssLoaderOptions: {
             importLoaders: 1,
