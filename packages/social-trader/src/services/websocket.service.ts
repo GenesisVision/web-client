@@ -37,7 +37,7 @@ export const useSockets = () => {
         socket.disconnect()
       );
     };
-  }, []);
+  }, [sockets]);
   return { connectSocket };
 };
 
