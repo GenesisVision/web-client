@@ -8,11 +8,6 @@ import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { tradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { LimitTradeFormContainer } from "pages/trades/binance-trade-page/trading/trade/limit-trade-form.container";
-import {
-  getBalance,
-  ILimitTradeFormValues
-} from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -22,9 +17,12 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useState } from "react";
 
+import { LimitTradeFormContainer } from "./limit-trade-form.container";
+import { getBalance, ILimitTradeFormValues } from "./place-order.helpers";
+
 interface Props {}
 
-const _Trade: React.FC<Props> = () => {
+const _PlaceOrder: React.FC<Props> = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
@@ -102,4 +100,4 @@ const _Trade: React.FC<Props> = () => {
   );
 };
 
-export const Trade = React.memo(_Trade);
+export const PlaceOrder = React.memo(_PlaceOrder);

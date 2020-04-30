@@ -4,15 +4,6 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
-  getBalance,
-  getLotSizeFilter,
-  getMinNotionalFilter,
-  getSymbolPriceFilter,
-  ILimitTradeFormValues,
-  LIMIT_FORM_FIELDS,
-  limitValidationSchema
-} from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
-import {
   formatValueWithTick,
   getSymbol
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -27,6 +18,16 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
+
+import {
+  getBalance,
+  getLotSizeFilter,
+  getMinNotionalFilter,
+  getSymbolPriceFilter,
+  ILimitTradeFormValues,
+  LIMIT_FORM_FIELDS,
+  limitValidationSchema
+} from "./place-order.helpers";
 
 export interface ILimitTradeFormProps {
   outerPrice: number;

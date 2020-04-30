@@ -1,9 +1,7 @@
-import {
-  ILimitTradeFormProps,
-  LimitTradeForm
-} from "pages/trades/binance-trade-page/trading/trade/limit-trade-form";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
+
+import { ILimitTradeFormProps, LimitTradeForm } from "./limit-trade-form";
 
 const _LimitTradeFormContainer: React.FC<ILimitTradeFormProps> = props => {
   const { exchangeInfo, accountInfo } = useContext(TradingInfoContext);

@@ -4,7 +4,7 @@ import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade
 import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
-import { Trade } from "pages/trades/binance-trade-page/trading/trade/trade";
+import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/place-order";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolState,
@@ -54,7 +54,7 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
               </div>
             </div>
             <div className={styles["trading__right-group-item"]}>
-              <Trade />
+              <PlaceOrder />
             </div>
           </Center>
         </TradingPriceContextProvider>

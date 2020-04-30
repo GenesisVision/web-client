@@ -1,5 +1,5 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/trade/trade.helpers";
+import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
