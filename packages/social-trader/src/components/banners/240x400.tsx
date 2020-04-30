@@ -1,4 +1,5 @@
 import React from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 import BannerChart from "./components/banner-chart";
 import GvLogo from "./components/gv-logo";
@@ -69,7 +70,10 @@ export const Banner: BannerComponent = props => {
       <Title y={92}>Monthly Profit</Title>
       <Value y={92}>{`${statistic.profitPercent}%`}</Value>
       <Title y={122}>Equity</Title>
-      <Value y={122}>{`${points.currency}${statistic.balance}`}</Value>
+      <Value y={122}>{`${formatCurrencyValue(
+        statistic.balance,
+        points.currency
+      )} ${points.currency}`}</Value>
       <BannerChart {...chartProps} />
     </svg>
   );
