@@ -15,6 +15,7 @@ import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { number, object } from "yup";
 
@@ -31,6 +32,58 @@ export interface ILimitTradeFormValues {
   [LIMIT_FORM_FIELDS.quantity]: number;
   [LIMIT_FORM_FIELDS.total]: number;
 }
+
+export const usePlaceOrderFormReset = ({
+  outerPrice,
+  reset,
+  watch,
+  setValue,
+  side,
+  baseAsset,
+  quoteAsset,
+  balances,
+  totalName,
+  quantityName
+}: {
+  watch: () => AnyObjectType;
+  reset: (values: any) => void;
+  outerPrice: number;
+  setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
+  side: OrderSide;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  balances: AssetBalance[];
+  totalName: string;
+  quantityName: string;
+}) => {
+  const { quantity, total } = watch();
+  const { sliderValue, setSliderValue } = useTradeSlider({
+    baseAsset,
+    quoteAsset,
+    side,
+    setValue,
+    balances,
+    quantityName,
+    totalName
+  });
+
+  useEffect(() => {
+    reset({ price: outerPrice, quantity, total });
+  }, [outerPrice]);
+
+  const [prevFormState, setPrevFormState] = useState<
+    (AnyObjectType & { sliderValue: number }) | undefined
+  >();
+
+  useEffect(() => {
+    setPrevFormState({ ...watch(), sliderValue });
+    if (prevFormState) {
+      setSliderValue(prevFormState.sliderValue);
+      reset(prevFormState);
+    }
+  }, [side]);
+  return { sliderValue, setSliderValue };
+};
 
 export const usePlaceOrderInfo = ({
   exchangeInfo,

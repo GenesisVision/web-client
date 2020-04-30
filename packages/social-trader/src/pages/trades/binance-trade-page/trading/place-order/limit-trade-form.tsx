@@ -21,6 +21,7 @@ import {
   LIMIT_FORM_FIELDS,
   limitValidationSchema,
   RANGE_MARKS,
+  usePlaceOrderFormReset,
   usePlaceOrderInfo,
   useTradeSlider
 } from "./place-order.helpers";
@@ -85,11 +86,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
-  useEffect(() => {
-    reset({ price: outerPrice, quantity, total });
-  }, [outerPrice]);
-
-  const { sliderValue, setSliderValue } = useTradeSlider({
+  const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+    outerPrice,
+    watch,
+    reset,
     baseAsset,
     quoteAsset,
     side: direction,
@@ -98,18 +98,6 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     quantityName: LIMIT_FORM_FIELDS.quantity,
     totalName: LIMIT_FORM_FIELDS.total
   });
-
-  const [prevFormState, setPrevFormState] = useState<
-    (ILimitTradeFormValues & { sliderValue: number }) | undefined
-  >();
-
-  useEffect(() => {
-    setPrevFormState({ ...watch(), sliderValue });
-    if (prevFormState) {
-      reset(prevFormState);
-      setSliderValue(prevFormState.sliderValue);
-    }
-  }, [direction]);
 
   useEffect(() => {
     if (!autoFill) {
