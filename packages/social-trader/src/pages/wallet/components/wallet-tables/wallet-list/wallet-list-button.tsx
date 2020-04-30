@@ -1,7 +1,16 @@
+import Link from "components/link/link";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { WalletData } from "gv-api-web";
 import LineTransferButton from "pages/wallet/components/wallet-tables/buttons/line-transfer-button";
+import {
+  composeWalletCurrencyUrl,
+  WALLET_CURRENCY_FOLDER_ROUTE
+} from "pages/wallet/wallet.paths";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,14 +29,23 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
     <Row className="wallet-list__buttons">
       {depositUrlCoindirect && (
         <RowItem>
-          <a
-            title={t("wallet-page.list.buy-with-card")}
-            href={depositUrlCoindirect}
-            target={"_blank"}
-            rel="noopener noreferrer"
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            render={() => (
+              <TooltipContent>
+                {t("wallet-page.tooltip.buy-with-card")}
+              </TooltipContent>
+            )}
           >
-            {t("wallet-page.list.buy-with-card")}
-          </a>
+            <a
+              title={t("wallet-page.list.buy-with-card")}
+              href={depositUrlCoindirect}
+              target={"_blank"}
+              rel="noopener noreferrer"
+            >
+              {t("wallet-page.list.buy-with-card")}
+            </a>
+          </Tooltip>
         </RowItem>
       )}
       <LineTransferButton wallet={wallet} />

@@ -1501,7 +1501,11 @@
       "transactions": "Operation of funds transferring to/from or between wallets.",
       "deposit": "A transaction involving a transfer of funds to another party.",
       "withdrawals": "A transaction of taking funds out of the account.",
-      "transfer": "A transaction between accounts."
+      "transfer": "A transaction between accounts.",
+      "deposit-button": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+      "withdrawal-button": "Send cryptocurrency from your GV Wallet address to an external wallet address.",
+      "transfer-button": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
+      "buy-with-card": "Purchase cryptocurrencies with a credit card and deposit them directly to your GVT Wallet. The following cryptocurrencies are supported: BTC, ETH and USDT."
     },
     "tabs": {
       "wallets": "My wallets",
