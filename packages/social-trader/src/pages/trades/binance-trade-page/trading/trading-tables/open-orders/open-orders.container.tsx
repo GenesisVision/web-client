@@ -1,6 +1,6 @@
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getOpenOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { filterOpenOrdersStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
+import { filterOrderEventsStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -39,7 +39,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
     });
-    const openOrdersStream = filterOpenOrdersStream(
+    const openOrdersStream = filterOrderEventsStream(
       getUserStreamSocket(connectSocket, authData)
     );
     openOrdersStream.subscribe(data => {

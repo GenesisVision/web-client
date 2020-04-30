@@ -102,7 +102,7 @@ export const filterOutboundAccountInfoStream = (
     map(transformOutboundAccountInfo)
   );
 
-export const filterOpenOrdersStream = (
+export const filterOrderEventsStream = (
   userStream: Observable<any>
 ): Observable<ExecutionReport> =>
   userStream.pipe(
