@@ -30,8 +30,8 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
     <Center className={styles["trading__main-block"]}>
       <div className={styles["trading__left-group"]}>
         <Center className={styles["trading__top-group"]}>
-          {/*<MarketWatchBlock />*/}
-          {/*<ChartBlock />*/}
+          <MarketWatchBlock />
+          <ChartBlock />
         </Center>
         <div className={styles["trading__bottom-group"]}>
           <TradingTables />
@@ -47,10 +47,10 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
               )}
             >
               <div className={styles["trading__top-group"]}>
-                {/*<OrderBookBlock />*/}
+                <OrderBookBlock />
               </div>
               <div className={styles["trading__bottom-group"]}>
-                {/*<TradesBlock />*/}
+                <TradesBlock />
               </div>
             </div>
             <div className={styles["trading__right-group-item"]}>
