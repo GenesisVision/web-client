@@ -1,0 +1,9 @@
+.symbol-summary {
+  &__line {
+    justify-content: space-between;
+  }
+  &__label {
+    width: 100px;
+    text-align: right;
+  }
+}
