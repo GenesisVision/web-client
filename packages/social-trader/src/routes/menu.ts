@@ -51,6 +51,8 @@ export type TMenuItem = {
   children?: TMenuItem[];
 };
 
+export const rootMenuItem = { Icon: GVLogo, route: HOME_ROUTE };
+
 export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
 const advancedMobileMenuItems: TMenuItem[] = [
@@ -154,10 +156,7 @@ const mainMenuItemsUnion = [
     ]
   }
 ];
-export const topMenuItems: TMenuItem[] = [
-  { Icon: GVLogo, route: HOME_ROUTE },
-  ...mainMenuItemsUnion
-];
+export const topMenuItems: TMenuItem[] = [rootMenuItem, ...mainMenuItemsUnion];
 
 export const mobileMenuItems: TMenuItem[] = [
   ...mainMenuItemsUnion,
