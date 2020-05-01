@@ -35,10 +35,10 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
       <div className={styles["tables-grid-elem"]}>
         <TradingTables />
       </div>
-      <div className={styles["order-book-grid-elem"]}>
-        <OrderBookBlock />
-      </div>
       <TradingPriceContextProvider>
+        <div className={styles["order-book-grid-elem"]}>
+          <OrderBookBlock />
+        </div>
         <div className={styles["trades-grid-elem"]}>
           <TradesBlock />
         </div>
