@@ -1,3 +1,4 @@
+import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
@@ -27,7 +28,11 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
   return (
     <div className={styles["trading-grid"]}>
       <div className={styles["market-watch-grid-elem"]}>
-        <MarketWatchBlock />
+        <ResponsiveContainer
+          enabledScreens={["landscape-phone", "phone", "large-desktop"]}
+        >
+          <MarketWatchBlock />
+        </ResponsiveContainer>
       </div>
       <div className={styles["chart-grid-elem"]}>
         <ChartBlock />
@@ -37,10 +42,28 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
       </div>
       <TradingPriceContextProvider>
         <div className={styles["order-book-grid-elem"]}>
-          <OrderBookBlock />
+          <ResponsiveContainer
+            enabledScreens={[
+              "tablet",
+              "landscape-tablet",
+              "desktop",
+              "large-desktop"
+            ]}
+          >
+            <OrderBookBlock />
+          </ResponsiveContainer>
         </div>
         <div className={styles["trades-grid-elem"]}>
-          <TradesBlock />
+          <ResponsiveContainer
+            enabledScreens={[
+              "tablet",
+              "landscape-tablet",
+              "desktop",
+              "large-desktop"
+            ]}
+          >
+            <TradesBlock />
+          </ResponsiveContainer>
         </div>
         <div className={styles["place-orders-grid-elem"]}>
           <PlaceOrder />
