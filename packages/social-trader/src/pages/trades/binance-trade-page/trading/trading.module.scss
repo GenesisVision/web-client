@@ -90,6 +90,7 @@ $place-order-width: 250px;
 
 .tables-grid-elem {
   grid-area: tables;
+  overflow-x: auto;
 }
 
 .place-orders-grid-elem {
