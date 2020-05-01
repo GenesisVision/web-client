@@ -1,5 +1,6 @@
 const path = require("path");
 const dotenv = require("dotenv");
+const fonts = require("nextjs-fonts");
 const sass = require("@zeit/next-sass");
 const css = require("@zeit/next-css");
 const withPlugins = require("next-compose-plugins");
@@ -67,6 +68,7 @@ function create(path) {
           }
         }
       ],
+      fonts,
       css,
       images,
       [
