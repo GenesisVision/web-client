@@ -1,9 +1,8 @@
 import { Center } from "components/center/center";
-import { ColoredText } from "components/colored-text/colored-text";
 import { RowItem } from "components/row-item/row-item";
-import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import styles from "./order-book.module.scss";
 
@@ -22,19 +21,10 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
   equivalent,
   equivalentCurrency
 }) => {
-  const [prevLastPrice, setPrevLastPrice] = useState(price);
-  const [currentLastPrice, setCurrentLastPrice] = useState(price);
-  useEffect(() => {
-    setPrevLastPrice(currentLastPrice);
-    setCurrentLastPrice(price);
-  }, [tradeId]);
-
   return (
     <Center className={styles["order-book__current-price"]}>
       <RowItem large>
-        <ColoredText color={getTextColor(+price - +prevLastPrice)}>
-          {price}
-        </ColoredText>
+        <TradeStatefulValue value={price} trigger={tradeId} />
       </RowItem>
       <RowItem>
         {equivalent} {equivalentCurrency}
