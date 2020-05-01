@@ -21,6 +21,14 @@ interface Props {
   data: MergedTickerSymbolType;
 }
 
+export const SymbolSummarySmallBlock: React.FC = () => {
+  return (
+    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+      <SymbolSummarySmallContainer />
+    </DefaultBlock>
+  );
+};
+
 export const SymbolSummarySmallContainer: React.FC = () => {
   const { symbolData, divider } = useSymbolData();
   return (
@@ -47,59 +55,57 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   }
 }) => {
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
-      <Center>
-        <RowItem large>
-          <h3>
-            {baseAsset}/{quoteAsset}
-          </h3>
-        </RowItem>
-        <RowItem>
-          <Row>
-            <h4>
-              <MonoText>
-                <TradeStatefulValue
-                  value={(+lastPrice).toFixed(divider)}
-                  trigger={eventTime}
-                />
-              </MonoText>
-            </h4>
-          </Row>
-          <Row small>
-            <MutedText>
-              <MonoText>{(+lastPrice).toFixed(divider)}</MonoText>
-            </MutedText>
-          </Row>
-        </RowItem>
-        <RowItem>
-          <StatisticItemInner label={"24 Change"}>
+    <Center>
+      <RowItem large>
+        <h3>
+          {baseAsset}/{quoteAsset}
+        </h3>
+      </RowItem>
+      <RowItem>
+        <Row>
+          <h4>
             <MonoText>
-              <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
-                {(+priceChange).toFixed(divider)}{" "}
-                {(+priceChangePercent).toFixed(divider)} %
-              </ColoredText>
+              <TradeStatefulValue
+                value={(+lastPrice).toFixed(divider)}
+                trigger={eventTime}
+              />
             </MonoText>
-          </StatisticItemInner>
-        </RowItem>
-        <RowItem>
-          <StatisticItemInner isPending={!high} label={"24 High"}>
-            <MonoText>{(+high).toFixed(divider)}</MonoText>
-          </StatisticItemInner>
-        </RowItem>
-        <RowItem>
-          <StatisticItemInner isPending={!low} label={"24 Low"}>
-            <MonoText>{(+low).toFixed(divider)}</MonoText>
-          </StatisticItemInner>
-        </RowItem>
-        <RowItem>
-          <StatisticItemInner label={"24 Volume"}>
-            <MonoText>
-              {(+volume).toFixed(divider)} {quoteAsset}
-            </MonoText>
-          </StatisticItemInner>
-        </RowItem>
-      </Center>
-    </DefaultBlock>
+          </h4>
+        </Row>
+        <Row small>
+          <MutedText>
+            <MonoText>{(+lastPrice).toFixed(divider)}</MonoText>
+          </MutedText>
+        </Row>
+      </RowItem>
+      <RowItem>
+        <StatisticItemInner label={"24 Change"}>
+          <MonoText>
+            <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
+              {(+priceChange).toFixed(divider)}{" "}
+              {(+priceChangePercent).toFixed(divider)} %
+            </ColoredText>
+          </MonoText>
+        </StatisticItemInner>
+      </RowItem>
+      <RowItem>
+        <StatisticItemInner isPending={!high} label={"24 High"}>
+          <MonoText>{(+high).toFixed(divider)}</MonoText>
+        </StatisticItemInner>
+      </RowItem>
+      <RowItem>
+        <StatisticItemInner isPending={!low} label={"24 Low"}>
+          <MonoText>{(+low).toFixed(divider)}</MonoText>
+        </StatisticItemInner>
+      </RowItem>
+      <RowItem>
+        <StatisticItemInner label={"24 Volume"}>
+          <MonoText>
+            {(+volume).toFixed(divider)} {quoteAsset}
+          </MonoText>
+        </StatisticItemInner>
+      </RowItem>
+    </Center>
   );
 };
 export const SymbolSummarySmallView = withBlurLoader(
