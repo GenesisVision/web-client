@@ -4,6 +4,8 @@ import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
 import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/place-order";
+import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
+import { SymbolSummarySmallContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolState,
@@ -29,6 +31,14 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
   return (
     <div className={styles["trading-grid"]}>
       <TradingTickerContextProvider>
+        <div className={styles["symbol-summary-grid-elem"]}>
+          <ResponsiveContainer enabledScreens={["tablet", "landscape-tablet"]}>
+            <SymbolSummarySmallContainer />
+          </ResponsiveContainer>
+          <ResponsiveContainer enabledScreens={["phone", "landscape-phone"]}>
+            <SymbolSummaryContainer />
+          </ResponsiveContainer>
+        </div>
         <div className={styles["market-watch-grid-elem"]}>
           <ResponsiveContainer enabledScreens={["large-desktop"]}>
             <MarketWatchBlock />
