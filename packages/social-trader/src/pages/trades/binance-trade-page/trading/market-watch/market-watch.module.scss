@@ -9,27 +9,40 @@
 
   &__table {
     width: 100%;
+    font-family: "DIN Pro Regular", sans-serif;
   }
+
   &__items-container {
     overflow-y: auto;
   }
+
   &__th {
     text-align: left;
     cursor: pointer;
+
     &--asc,
     &--desc {
       span {
         opacity: 1;
       }
+
       position: relative;
+
       &::before {
         @include transition(width);
         @extend %sortable-border-icon;
         height: 4px;
       }
+
       &::after {
         @include transition(width);
         @extend %sortable-border-icon;
+      }
+    }
+
+    &--right {
+      &.market-watch__th {
+        text-align: right;
       }
     }
 
@@ -37,21 +50,27 @@
       &::before {
         width: 10px;
       }
+
       &::after {
         width: 5px;
       }
     }
+
     &--asc {
       &::before {
         width: 5px;
       }
+
       &::after {
         width: 10px;
       }
     }
   }
-  &__table {
+
+  &__table-value {
+    text-align: right;
   }
+
   &__name {
     cursor: pointer;
   }

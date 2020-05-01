@@ -9,6 +9,7 @@ $order-book-row-height: 16px;
   flex-direction: column;
 
   &__current-price {
+    font-family: "DIN Pro Regular", sans-serif;
     font-size: $font-size-xsmall;
   }
 
@@ -37,6 +38,7 @@ $order-book-row-height: 16px;
   }
 
   &__table {
+    font-family: "DIN Pro Regular", sans-serif;
     @include trade-table();
     width: 100%;
     border-spacing: 0;

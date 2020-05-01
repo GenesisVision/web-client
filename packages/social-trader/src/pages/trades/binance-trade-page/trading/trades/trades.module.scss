@@ -13,6 +13,7 @@
     overflow-y: auto;
   }
   &__table {
+    font-family: "DIN Pro Regular", sans-serif;
     @include trade-table();
     width: 100%;
     & th,
