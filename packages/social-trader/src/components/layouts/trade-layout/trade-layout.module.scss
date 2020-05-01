@@ -10,14 +10,8 @@ $header-height: 44px + $padding-xxsmall * 2;
     display: flex;
     flex-direction: column;
   }
-  &__header {
-    box-sizing: border-box;
-    height: $header-height;
-    @include horizontal-paddings($padding-xsmall);
-    @include vertical-paddings($padding-xxsmall);
-  }
   &__main {
     box-sizing: border-box;
-    height: calc(100% - #{$header-height});
+    height: 100%;
   }
 }
