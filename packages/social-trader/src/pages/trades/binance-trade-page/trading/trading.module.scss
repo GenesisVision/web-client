@@ -1,6 +1,7 @@
 @import "~shared/styles/_sizes";
 @import "./din-pro-font.scss";
 
+$header-height: 44px + $padding-xxsmall * 2;
 $market-watch-mobile-height: 300px;
 $chart-mobile-height: 300px;
 $tables-mobile-height: 300px;
@@ -14,40 +15,56 @@ $place-order-width: 250px;
   height: 100%;
   display: grid;
   grid-template-areas:
+    "header"
     "symbol-summary"
     "chart"
     "tables"
     "place-orders";
   grid-template-rows:
     auto
+    auto
     $chart-mobile-height
     $tables-mobile-height 1fr;
   grid-template-columns: 1fr;
   @include media-breakpoint-tablet() {
     grid-template-areas:
+      "header header header"
       "symbol-summary symbol-summary symbol-summary"
       "chart chart place-orders"
       "order-book trades place-orders"
       "tables tables place-orders";
-    grid-template-rows: auto 1fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr $place-order-width;
   }
   @include media-breakpoint-desktop() {
     grid-template-areas:
+      "header header header header"
       "chart chart order-book place-orders"
       "tables tables trades place-orders";
-    grid-template-rows: calc(100% - #{$bottom-block-height}) $bottom-block-height;
+    grid-template-rows:
+      $header-height calc(100% - #{$bottom-block-height+$header-height})
+      $bottom-block-height;
     grid-template-columns: 1fr 1fr $trades-width $place-order-width;
   }
   @include media-breakpoint-large-desktop() {
     grid-template-areas:
+      "header header header header"
       "market-watch chart order-book place-orders"
       "tables tables trades place-orders";
-    grid-template-rows: calc(100% - #{$bottom-block-height}) $bottom-block-height;
+    grid-template-rows:
+      $header-height calc(100% - #{$bottom-block-height+$header-height})
+      $bottom-block-height;
     grid-template-columns: $market-watch-width 1fr $trades-width $place-order-width;
   }
   @include media-breakpoint-tablet() {
   }
+}
+
+.header-grid-elem {
+  grid-area: header;
+  height: $header-height;
+  @include horizontal-paddings($padding-xsmall);
+  @include vertical-paddings($padding-xxsmall);
 }
 
 .symbol-summary-grid-elem {
