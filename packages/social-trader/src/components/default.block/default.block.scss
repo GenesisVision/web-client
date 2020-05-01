@@ -22,7 +22,7 @@
     &.default-block--rounded-border {
       @include adaptive-border-radius($border-radius);
     }
-    @include default-block-offsets($padding-xxsmall);
+    padding: $padding-xxsmall;
   }
 
   &--middle {
