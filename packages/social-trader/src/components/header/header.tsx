@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import HeaderIcon from "components/header/header-icon";
+import { useMenuItems } from "components/header/header.service";
 import { SearchIcon } from "components/icon/search-icon";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
@@ -11,11 +12,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import {
-  betaTesterSelector,
-  isSocialBetaTester
-} from "reducers/header-reducer";
-import { filterBeta, mobileMenuItems, topMenuItems } from "routes/menu";
 
 import "./header.scss";
 
@@ -30,14 +26,7 @@ const HeaderLeft: React.FC<{
   profileHeader?: ProfileHeaderViewModel;
 }> = React.memo(({ backPath, profileHeader }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const betaTester = useSelector(betaTesterSelector);
-  const isBetaTester = isSocialBetaTester(betaTester);
-  const showedMobileMenuItems = isBetaTester
-    ? mobileMenuItems
-    : mobileMenuItems.filter(filterBeta);
-  const showedTopMenuItems = isBetaTester
-    ? topMenuItems
-    : topMenuItems.filter(filterBeta);
+  const { showedMobileMenuItems, showedTopMenuItems } = useMenuItems();
 
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   return (
