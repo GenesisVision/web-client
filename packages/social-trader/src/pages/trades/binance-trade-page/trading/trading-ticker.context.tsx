@@ -19,9 +19,9 @@ import React, {
 import { map } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
 
-type TradingTickerContextState = MergedTickerSymbolType[];
+type TradingTickerContextState = MergedTickerSymbolType[] | undefined;
 
-export const TradingTickerInitialState: TradingTickerContextState = [];
+export const TradingTickerInitialState: TradingTickerContextState = undefined;
 
 export const TradingTickerContext = createContext<TradingTickerContextState>(
   TradingTickerInitialState
@@ -71,7 +71,9 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   const items = useMemo(() => Object.values(list), [list]);
 
   return (
-    <TradingTickerContext.Provider value={items}>
+    <TradingTickerContext.Provider
+      value={Object.values(socketData).length ? items : undefined}
+    >
       {children}
     </TradingTickerContext.Provider>
   );
