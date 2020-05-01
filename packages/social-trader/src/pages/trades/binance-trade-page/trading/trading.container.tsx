@@ -11,6 +11,7 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
+import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import React, { useContext, useEffect } from "react";
 
 import styles from "./trading.module.scss";
@@ -27,13 +28,13 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
   }, [symbol]);
   return (
     <div className={styles["trading-grid"]}>
-      <div className={styles["market-watch-grid-elem"]}>
-        <ResponsiveContainer
-          enabledScreens={["landscape-phone", "phone", "large-desktop"]}
-        >
-          <MarketWatchBlock />
-        </ResponsiveContainer>
-      </div>
+      <TradingTickerContextProvider>
+        <div className={styles["market-watch-grid-elem"]}>
+          <ResponsiveContainer enabledScreens={["large-desktop"]}>
+            <MarketWatchBlock />
+          </ResponsiveContainer>
+        </div>
+      </TradingTickerContextProvider>
       <div className={styles["chart-grid-elem"]}>
         <ChartBlock />
       </div>
