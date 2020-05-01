@@ -627,6 +627,15 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart"
+    },
+    "tooltips": {
+      "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+      "subscribers": "Number of subscribers",
+      "trades": "Number of trades executed during the selected date range.",
+      "name": "Name of the program",
+      "age": "Age of the trading account",
+      "drawdown": "Maximum drawdown of the program during the selected date range.",
+      "profit": "Profit during the selected date range."
     }
   },
   "funds-page": {
