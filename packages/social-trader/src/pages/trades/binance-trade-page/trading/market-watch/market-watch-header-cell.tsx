@@ -8,6 +8,7 @@ import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/
 import React, { useCallback } from "react";
 
 interface Props {
+  right?: boolean;
   dataType: "number" | "string";
   setSorting: (sorting: SortingType) => void;
   field: keyof MergedTickerSymbolType;
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
-  ({ dataType, field, sorting, children, setSorting }) => {
+  ({ right, dataType, field, sorting, children, setSorting }) => {
     const handleChangeSorting = useCallback(
       (field: keyof MergedTickerSymbolType) => () => {
         const direction =
@@ -28,7 +29,12 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     );
     const isSelected = field === sorting.field;
     return (
-      <th className="market-watch__th" onClick={handleChangeSorting(field)}>
+      <th
+        className={classNames("market-watch__th", {
+          "market-watch__th--right": right
+        })}
+        onClick={handleChangeSorting(field)}
+      >
         <span
           className={classNames({
             "market-watch__th--asc":

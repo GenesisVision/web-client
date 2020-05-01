@@ -1,13 +1,15 @@
 import { ColoredText } from "components/colored-text/colored-text";
 import { MutedText } from "components/muted-text/muted-text";
+import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { CHANGE_COLUMN } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
+  eventTime: number;
   quoteAsset: TradeCurrency;
   baseAsset: TradeCurrency;
   column: string;
@@ -20,6 +22,7 @@ interface Props {
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({
+    eventTime,
     quoteAsset,
     baseAsset,
     column,
@@ -29,11 +32,6 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     priceChange,
     priceChangePercent
   }) => {
-    const [firstLastPrice, setPrevLastPrice] = useState(lastPrice);
-    useEffect(() => {
-      if (!firstLastPrice) setPrevLastPrice(lastPrice);
-    }, [lastPrice]);
-
     const { setSymbol } = useContext(TradingInfoContext);
 
     const handleClick = useCallback(() => {
@@ -46,11 +44,12 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
           <MutedText small>{symbol}</MutedText>
         </td>
         <td className="market-watch__name">
-          <ColoredText color={getTextColor(+firstLastPrice - +lastPrice)}>
-            {formatCurrencyValue(+lastPrice, quoteAsset)}
-          </ColoredText>
+          <TradeStatefulValue
+            value={formatCurrencyValue(+lastPrice, quoteAsset)}
+            trigger={eventTime}
+          />
         </td>
-        <td className="market-watch__name">
+        <td className="market-watch__table-value">
           {column === CHANGE_COLUMN ? (
             <ColoredText color={getTextColor(+priceChangePercent)}>
               {priceChangePercent} %

@@ -134,6 +134,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
             </MarketWatchHeaderCell>
             {column === CHANGE_COLUMN ? (
               <MarketWatchHeaderCell
+                right
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -143,6 +144,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
+                right
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -159,6 +161,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               .sort(sortMarketWatchItems(sorting))
               .map(
                 ({
+                  eventTime,
                   quoteAsset,
                   baseAsset,
                   volume,
@@ -168,6 +171,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   priceChangePercent
                 }) => (
                   <MarketWatchRow
+                    eventTime={eventTime}
                     quoteAsset={quoteAsset}
                     baseAsset={baseAsset}
                     column={column}

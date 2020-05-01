@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 
 const _MarketWatchContainer: React.FC = () => {
   const items = useContext(TradingTickerContext);
-  return items.length ? <MarketWatch items={items} /> : null;
+  return items?.length ? <MarketWatch items={items} /> : null;
 };
 
 export const MarketWatchContainer = React.memo(_MarketWatchContainer);
