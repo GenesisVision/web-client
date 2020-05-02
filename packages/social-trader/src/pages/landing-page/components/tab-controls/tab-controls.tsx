@@ -18,18 +18,22 @@ interface Props {
   currentTabId: number;
   tabsItems: TTabsItem[];
   onChange: (id: number) => void;
-  className?: string;
+  variant?: string;
 }
 
 const _TabControls: React.FC<Props> = ({
   currentTabId,
   tabsItems,
   onChange,
-  className
+  variant
 }) => {
   const { t } = useTranslation();
   return (
-    <ul className={classNames("tab-controls", className)}>
+    <ul
+      className={classNames(styles["tab-controls"], {
+        [styles["tab-controls--info"]]: variant === "info"
+      })}
+    >
       {tabsItems.map((tab, index) => (
         <li
           key={index}

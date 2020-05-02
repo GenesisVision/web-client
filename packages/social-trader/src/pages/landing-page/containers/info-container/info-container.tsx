@@ -44,7 +44,7 @@ const InfoContainer: React.FC = () => {
           currentTabId={currentTabId}
           tabsItems={infoTabs}
           onChange={handleChange}
-          className={styles["info-container__controls"]}
+          variant={"info"}
         />
       </div>
       {renderInfoTabs()}

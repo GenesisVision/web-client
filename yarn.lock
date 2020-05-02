@@ -6449,6 +6449,14 @@ file-loader@4.3.0:
     loader-utils "^1.2.3"
     schema-utils "^2.5.0"
 
+file-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-2.0.0.tgz#39749c82f020b9e85901dcff98e8004e6401cfde"
+  integrity sha512-YCsBfd1ZGCyonOKLxPiKPdu+8ld9HAaMEvJewzz+b2eTF7uL5Zm/HdBF6FjCrpCMRq25Mi0U1gl4pwn2TlH7hQ==
+  dependencies:
+    loader-utils "^1.0.2"
+    schema-utils "^1.0.0"
+
 file-loader@^5.0.2:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-5.1.0.tgz#cb56c070efc0e40666424309bd0d9e45ac6f2bb8"
@@ -10117,6 +10125,14 @@ next@../../next-9.3.5.tgz:
     watchpack "2.0.0-beta.13"
     webpack "4.42.1"
     webpack-sources "1.4.3"
+
+nextjs-fonts@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/nextjs-fonts/-/nextjs-fonts-0.22.0.tgz#8c2c7c8571d0875284d1744d071d5231500c28e4"
+  integrity sha512-Y9jL+OstyHOrIV6nqdzNHZX7/oXzqP6gxdhNb/Ya8v4lJJ4vUNDtzDsbuVbf1YrfA04CGdRoVK4WAKfkNuSTFQ==
+  dependencies:
+    file-loader "^2.0.0"
+    url-loader "^1.1.1"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -14838,6 +14854,15 @@ url-loader@2.3.0:
     loader-utils "^1.2.3"
     mime "^2.4.4"
     schema-utils "^2.5.0"
+
+url-loader@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-1.1.2.tgz#b971d191b83af693c5e3fea4064be9e1f2d7f8d8"
+  integrity sha512-dXHkKmw8FhPqu8asTc1puBfe3TehOCo2+RmOOev5suNCIYBcT626kxiWg1NBVkwc4rO8BGa7gP70W7VXuqHrjg==
+  dependencies:
+    loader-utils "^1.1.0"
+    mime "^2.0.3"
+    schema-utils "^1.0.0"
 
 url-loader@^3.0.0:
   version "3.0.0"
