@@ -7,6 +7,8 @@ import { Row } from "components/row/row";
 import React, { useCallback, useState } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
+import styles from "./level-filter.module.scss";
+
 const _LevelFilterPopover: React.FC<Props> = ({
   t,
   cancel,
@@ -24,7 +26,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
     changeFilter
   ]);
   return (
-    <PopoverContent className="level-filter">
+    <PopoverContent className={styles["level-filter"]}>
       <PopoverContentCardBlock>
         <Row>
           <Range

@@ -13,36 +13,36 @@ import { HOME_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 
-import "./lp-header.scss";
+import styles from "./lp-header.module.scss";
 
 const LPHeader: React.FC = () => {
   const { t } = useTranslation();
   const isAuthenticated = authService.isAuthenticated();
   return (
-    <header className="lp-header">
-      <div className="lp-header__container">
-        <div className="lp-header__row">
-          <div className="lp-header__burger">
+    <header className={styles["lp-header"]}>
+      <div className={styles["lp-header__container"]}>
+        <div className={styles["lp-header__row"]}>
+          <div className={styles["lp-header__burger"]}>
             <MobileNav navHeader={navHeader} navFooter={navFooter} />
           </div>
-          <div className="lp-header__logo">
+          <div className={styles["lp-header__logo"]}>
             <Link
               title={"Go to home page"}
-              className="lp-header__logo-link"
+              className={styles["lp-header__logo-link"]}
               to={{
                 pathname: HOME_ROUTE
               }}
             >
-              <div className="lp-header__combo-logo">
+              <div className={styles["lp-header__combo-logo"]}>
                 <ImageBaseElement src={logo} />
-                <h1 className="lp-header__text-logo">
+                <h1 className={styles["lp-header__text-logo"]}>
                   {t("landing-page:genesis-vision")}
                 </h1>
               </div>
             </Link>
           </div>
-          <NavList menuItems={navHeader} className="lp-header__nav" />
-          <div className="lp-header__start-btn">
+          <NavList menuItems={navHeader} className={styles["lp-header__nav"]} />
+          <div className={styles["lp-header__start-btn"]}>
             {isAuthenticated ? (
               <JoinButton
                 eventLabel={t("landing-page:buttons.dashboard")}

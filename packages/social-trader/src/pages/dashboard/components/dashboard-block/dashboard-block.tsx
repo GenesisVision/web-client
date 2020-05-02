@@ -1,10 +1,10 @@
-import "./dashboard-block.scss";
-
 import classNames from "classnames";
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
 import React from "react";
+
+import styles from "./dashboard-block.module.scss";
 
 const DashboardBlock: React.FC<Props> = ({
   landscapeTablet,
@@ -19,15 +19,15 @@ const DashboardBlock: React.FC<Props> = ({
       landscapeTablet={landscapeTablet}
       tablet={tablet}
       table
-      className={classNames("dashboard-block__container", className)}
+      className={classNames(styles["dashboard-block__container"], className)}
     >
       {(label || all) && (
         <DetailsBlockTitleBox>
-          <div className="dashboard-block__header">
+          <div className={styles["dashboard-block__header"]}>
             {label && <h3>{label}</h3>}
             {all && (
-              <div className="dashboard-block__see-all">
-                <Link className="dashboard-block__link" to={all}>
+              <div className={styles["dashboard-block__see-all"]}>
+                <Link className={styles["dashboard-block__link"]} to={all}>
                   &rsaquo;
                 </Link>
               </div>

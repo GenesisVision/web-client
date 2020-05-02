@@ -1,9 +1,9 @@
-import "./downloads-section.scss";
-
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
+
+import styles from "./downloads-section.module.scss";
 
 const MetatraderPCLink =
   "https://download.mql5.com/cdn/web/15879/mt5/genesismarketsltd5setup.exe";
@@ -16,17 +16,14 @@ const MetatraderLoginLink = "https://genesis.vision/trade/mt5";
 const DownloadsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="downloads-section">
-      <article className="internal__article" id="pc">
+    <section className={styles["downloads-section"]}>
+      <article className={"internal__article"} id="pc">
         <h1>{t("downloads.title")}</h1>
         <h2>{t("downloads.subtitle-1")}</h2>
         <p>
           {t("downloads.text-1")}
           <br />
-          <a
-            title={t("downloads.link-1")}
-            href={MetatraderPCLink}
-          >
+          <a title={t("downloads.link-1")} href={MetatraderPCLink}>
             {t("downloads.link-1")}
             <br />
             <ImageBaseElement
@@ -36,7 +33,7 @@ const DownloadsSection: React.FC = () => {
           </a>
         </p>
       </article>
-      <article className="internal__article" id="mobile">
+      <article className={"internal__article"} id="mobile">
         <h2>{t("downloads.subtitle-2")}</h2>
         <p>
           {t("downloads.text-2")}
@@ -60,7 +57,7 @@ const DownloadsSection: React.FC = () => {
           </a>
         </p>
       </article>
-      <article className="internal__article" id="web">
+      <article className={"internal__article"} id="web">
         <h2>{t("downloads.subtitle-3")}</h2>
         <p>
           {t("downloads.text-3")}

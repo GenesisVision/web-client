@@ -6,15 +6,15 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-import "./comment.scss";
+import styles from "./comment.module.scss";
 
 const _Comment: React.FC<Props> = ({
   updateData,
   comment: { tags, images, date, text, id, actions, likesCount, author }
 }) => {
   return (
-    <div className="comment">
-      <Row className="comment__message" center={false}>
+    <div className={styles["comment"]}>
+      <Row className={styles["comment__message"]} center={false}>
         <RowItem>
           <Message
             tags={tags}
@@ -30,7 +30,7 @@ const _Comment: React.FC<Props> = ({
           </RowItem>
         )}
       </Row>
-      <Row className="comment__buttons">
+      <Row className={styles["comment__buttons"]}>
         <LikeContainer
           id={id}
           canLike={!!actions}

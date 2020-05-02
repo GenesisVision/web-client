@@ -19,7 +19,7 @@ import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 
-import "./tag-components.scss";
+import styles from "./tag-components.module.scss";
 
 export interface IPlatformAssetTagProps {
   platformAssetDetails: PlatformAsset;
@@ -62,7 +62,7 @@ const _RepostTagComponent: React.FC<IRepostTagProps> = ({
   post: { tags, id, images, date, text, author }
 }) => {
   return (
-    <div className="repost-tag-container">
+    <div className={styles["repost-tag-container"]}>
       <Message
         row={false}
         tags={tags}

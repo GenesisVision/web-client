@@ -13,7 +13,7 @@ import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import "./transfer.button.scss";
+import styles from "./transfer.button.module.scss";
 
 const _TransferButton: React.FC<Props> = ({
   successMessage,
@@ -105,7 +105,7 @@ const FullButton: React.FC<{
           {withIcon && (
             <RowItem small>
               <ImageBaseElement
-                className="transfer-button__full-button-icon"
+                className={styles["transfer-button__full-button-icon"]}
                 src={ConvertIcon}
                 alt={labelText}
               />

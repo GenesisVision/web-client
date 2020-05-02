@@ -15,7 +15,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import AboutLevelsComponent from "./about-levels/about-levels";
-import "./investment-limits-popover.scss";
+import styles from "./investment-limits-popover.module.scss";
 
 const _InvestmentLimitsPopover: React.FC<Props> = ({
   level,
@@ -33,8 +33,8 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
   }, [currency]);
   return (
     <>
-      <PopoverContent className="popover-levels">
-        <PopoverContentCardBlock className="popover-levels__block">
+      <PopoverContent className={styles["popover-levels"]}>
+        <PopoverContentCardBlock className={styles["popover-levels__block"]}>
           <Row>
             <h4>
               {t("program-details-page.popover.genesis-level")} {level}
@@ -61,7 +61,10 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
             </StatisticItemInner>
           </Row>
         </PopoverContentCardBlock>
-        <PopoverContentCardBlock dark className="popover-levels__block">
+        <PopoverContentCardBlock
+          dark
+          className={styles["popover-levels__block"]}
+        >
           <Row>
             <MutedText noWrap={false}>
               {t("program-details-page.popover.text")}

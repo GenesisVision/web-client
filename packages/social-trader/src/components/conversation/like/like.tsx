@@ -3,7 +3,7 @@ import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 
-import "./like.scss";
+import styles from "./like.module.scss";
 
 export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   const clickHandle = useCallback(() => {
@@ -13,14 +13,14 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   return (
     <Center
       onClick={clickHandle}
-      className={classNames("like", {
-        "like--disable": disable
+      className={classNames(styles["like"], {
+        [styles["like--disable"]]: disable
       })}
     >
       <RowItem small>
         <div
-          className={classNames("like__icon", {
-            "like__icon--liked": liked
+          className={classNames(styles["like__icon"], {
+            [styles["like__icon--liked"]]: liked
           })}
         >
           ♥

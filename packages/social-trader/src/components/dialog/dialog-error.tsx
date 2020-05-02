@@ -4,8 +4,10 @@ import FormError, {
 import { Row } from "components/row/row";
 import * as React from "react";
 
+import styles from "./dialog.module.scss";
+
 export const _DialogError: React.FC<IFormErrorProps> = ({ error }) => (
-  <Row className="dialog__error">
+  <Row className={styles["dialog__error"]}>
     <FormError error={error} />
   </Row>
 );

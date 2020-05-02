@@ -1,9 +1,9 @@
-import "./funds-list.scss";
-
 import classNames from "classnames";
 import { FundDetailsListItem } from "gv-api-web";
 import FundCard from "modules/funds-table/components/funds-table/fund-card";
 import React, { useCallback, useRef, useState } from "react";
+
+import styles from "./funds-list.module.scss";
 
 interface Props {
   className?: string;
@@ -28,8 +28,8 @@ const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
   }, [list.current]);
   return (
     <div
-      className={classNames("funds-list", className, {
-        "funds-list--active": true
+      className={classNames(styles["funds-list"], className, {
+        [styles["funds-list--active"]]: true
       })}
       onScroll={handleScroll}
       ref={list}

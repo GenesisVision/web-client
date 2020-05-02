@@ -4,9 +4,11 @@ import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
 import React from "react";
 
+import styles from "./dashboard-statistic.module.scss";
+
 const _DashboardNewUserBlock: React.FC<Props> = ({ leftField, rightField }) => {
   return (
-    <div className="dashboard-new-user-block">
+    <div className={styles["dashboard-new-user-block"]}>
       <DashboardNewUserBlockField field={leftField} />
       <DashboardNewUserBlockField field={rightField} />
     </div>

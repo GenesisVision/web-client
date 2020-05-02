@@ -6,22 +6,22 @@ import { advantagesItems } from "pages/landing-page/static-data/advantages";
 import React from "react";
 import { TRADE_ROUTE } from "routes/trade.routes";
 
-import "./advantages-section.scss";
+import styles from "./advantages-section.module.scss";
 
 export const AdvantagesListContainer: React.FC<{
   animation?: boolean;
 }> = ({ animation }) => {
   const { t } = useTranslation();
   return (
-    <div className="home__container">
-      <div className="advantages-section">
-        <h2 className="advantages-section__title">
+    <div className={styles["home__container"]}>
+      <div className={styles["advantages-section"]}>
+        <h2 className={styles["advantages-section__title"]}>
           {t("landing-page:advantages.title")}
         </h2>
         <AdvantagesList
           advantagesItems={advantagesItems}
-          className={classNames("advantages-section__list", {
-            "advantages-section__list--animation": animation
+          className={classNames(styles["advantages-section__list"], {
+            [styles["advantages-section__list--animation"]]: animation
           })}
           lastItem={
             <JoinButton href={TRADE_ROUTE}>

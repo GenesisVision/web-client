@@ -9,7 +9,7 @@ import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import * as React from "react";
 
-import "./text-with-question.scss";
+import styles from "./text-with-question.module.scss";
 
 const _SwitchWithQuestion: React.FC<Props> = ({
   tooltipContent,
@@ -21,14 +21,14 @@ const _SwitchWithQuestion: React.FC<Props> = ({
       <RowItem small>
         <HelpContainer tooltipContent={tooltipContent}>
           <HelpButton
-            className={classNames("text-with-question__question", {
-              "text-with-question__question-button": !!tooltipContent
+            className={classNames(styles["text-with-question__question"], {
+              [styles["text-with-question__question-button"]]: !!tooltipContent
             })}
             onClick={onClickHelp}
           />
         </HelpContainer>
       </RowItem>
-      <RowItem small className="text-with-question__label">
+      <RowItem small className={styles["text-with-question__label"]}>
         {label}
       </RowItem>
     </Center>

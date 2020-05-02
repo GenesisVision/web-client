@@ -5,11 +5,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 
+import styles from "./header.module.scss";
+
 const UnauthLinks: React.FC<Props> = ({ backPath }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <div className="header__buttons">
+    <div className={styles["header__buttons"]}>
       <Link
         to={{
           pathname: LOGIN_ROUTE,

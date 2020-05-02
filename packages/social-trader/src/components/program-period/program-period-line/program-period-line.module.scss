@@ -3,7 +3,6 @@
 .program-period-line {
   &__description {
     justify-content: space-between;
-    font-size: 12px;
-    letter-spacing: 0.3px;
+    font-size: $font-size-small;
   }
 }

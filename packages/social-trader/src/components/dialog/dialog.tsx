@@ -1,10 +1,10 @@
-import "./dialog.scss";
-
 import classNames from "classnames";
 import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import React, { ReactNode, useCallback, useState } from "react";
+
+import styles from "./dialog.module.scss";
 
 export const Dialog: React.FC<IDialogProps> = ({
   top,
@@ -31,18 +31,23 @@ export const Dialog: React.FC<IDialogProps> = ({
   return (
     <Modal open={open} fixed onClose={onClose}>
       <div
-        className="dialog-wrapper"
+        className={styles["dialog-wrapper"]}
         onClick={handleBackdropClick}
         onMouseDown={handleMouseDown}
       >
         <BodyFix />
         <div
-          className={classNames("dialog", className, { "dialog--top": top })}
+          className={classNames(styles["dialog"], className, {
+            [styles["dialog--top"]]: top
+          })}
         >
           <GVButton
             variant="text"
             color="secondary"
-            className="dialog__close dialog__close--inside"
+            className={classNames(
+              styles["dialog__close"],
+              styles["dialog__close--inside"]
+            )}
             onClick={onClose}
           >
             <CloseIcon />

@@ -1,9 +1,9 @@
-import "./news-list.scss";
-
 import classNames from "classnames";
 import { PlatformNews } from "gv-api-web";
 import NewsItem from "pages/landing-page/components/news/news-item";
 import React from "react";
+
+import styles from "./news-list.module.scss";
 
 interface Props {
   className?: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const _NewsList: React.FC<Props> = ({ className, newsItems }) => (
-  <ul className={classNames("news-list", className)}>
+  <ul className={classNames(styles["news-list"], className)}>
     {newsItems.map((item, index) => (
       <NewsItem key={index} {...item} />
     ))}

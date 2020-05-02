@@ -10,7 +10,7 @@ import * as React from "react";
 import { CurrencyEnum } from "utils/types";
 
 import AddCurrencyButton from "./add-currency-button";
-import "./chart-currency-selector.scss";
+import styles from "./chart-currency-selector.module.scss";
 
 const _ChartCurrencySelector: React.FC<Props> = ({
   fullSelectCurrencies,
@@ -22,7 +22,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
   onChange
 }) => {
   return (
-    <Row className="chart-currency-selector__container">
+    <Row className={styles["chart-currency-selector__container"]}>
       {chartCurrencies.map(({ name, color }, i) => (
         <TileFilterItem
           removable={i > 0}
@@ -33,7 +33,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
           <TagBubble
             color={color}
             content={
-              <Center className="chart-currency-selector__item">
+              <Center className={styles["chart-currency-selector__item"]}>
                 <RowItem small>
                   <TagCircle backgroundColor={color} />
                 </RowItem>

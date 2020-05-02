@@ -7,7 +7,7 @@ import {
   normalizeUrlString,
   pushHistoryState
 } from "./link.helper";
-import "./link.scss";
+import styles from "./link.module.scss";
 
 const Link: React.FC<LinkProps> = ({
   white,
@@ -50,7 +50,7 @@ const Link: React.FC<LinkProps> = ({
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a
-        className={white ? "link--white" : ""}
+        className={white ? styles["link--white"] : ""}
         title={linkTitle}
         onClick={handleClick}
         {...other}

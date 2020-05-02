@@ -14,7 +14,7 @@ import { JoinButton } from "pages/landing-page/components/join-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 
-import "./first-slider.scss";
+import styles from "./first-slider.module.scss";
 
 interface Props {
   className?: string;
@@ -36,13 +36,13 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
   return (
     <SliderMainWrapper className={className}>
       <SliderImgWrapper>
-        <div className="slider__img-animate">
+        <div className={styles["slider__img-animate"]}>
           <SliderImg item={slidesItems[index]} />
         </div>
       </SliderImgWrapper>
       <SliderInfoWrapper>
         <SliderInfo>
-          <div className="slider__info-animate">
+          <div className={styles["slider__info-animate"]}>
             <SliderTitle>{t(slidesItems[index].title)}</SliderTitle>
             <SliderText>{t(slidesItems[index].text)}</SliderText>
           </div>

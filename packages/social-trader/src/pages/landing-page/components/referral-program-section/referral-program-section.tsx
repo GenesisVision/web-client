@@ -4,36 +4,39 @@ import AdvantagesList from "pages/landing-page/components/advantages-list/advant
 import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
-import "./referral-program-section.scss";
+import advantagesStyles from "../advantages-section/advantages-section.module.scss";
+import styles from "./referral-program-section.module.scss";
 
 const renderLastItem = (t: TFunction) => (
-  <p className="advantages-section__text">{t("referral-program.text-4")}</p>
+  <p className={advantagesStyles["advantages-section__text"]}>
+    {t("referral-program.text-4")}
+  </p>
 );
 
 const ReferralProgramSection: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="referral-program-section">
+    <section className={styles["referral-program-section"]}>
       <div className="internal__container">
-        <h1 className="referral-program-section__title">
+        <h1 className={styles["referral-program-section__title"]}>
           {t("referral-program.title")}
         </h1>
-        <h2 className="referral-program-section__subtitle">
+        <h2 className={styles["referral-program-section__subtitle"]}>
           {t("referral-program.subtitle-1")}
         </h2>
         <AdvantagesList
           advantagesItems={refProgItems}
-          className="referral-program-section__adv-list"
+          className={styles["referral-program-section__adv-list"]}
           lastItem={renderLastItem(t)}
         />
-        <h2 className="referral-program-section__subtitle">
+        <h2 className={styles["referral-program-section__subtitle"]}>
           {t("referral-program.subtitle-2")}
         </h2>
-        <div className="referral-program-section__img" />
+        <div className={styles["referral-program-section__img"]} />
       </div>
-      <div className="referral-program-section__wrapper">
+      <div className={styles["referral-program-section__wrapper"]}>
         <div className="internal__container">
-          <div className="referral-program-section__list">
+          <div className={styles["referral-program-section__list"]}>
             <h3>{t("referral-program.title-list-1")}</h3>
             <ul className="internal__list">
               <li className="internal__list-item">
@@ -56,7 +59,7 @@ const ReferralProgramSection: React.FC = () => {
               </li>
             </ul>
           </div>
-          <div className="referral-program-section__list">
+          <div className={styles["referral-program-section__list"]}>
             <h3>{t("referral-program.title-list-2")}</h3>
             <ul className="internal__list">
               <li className="internal__list-item">

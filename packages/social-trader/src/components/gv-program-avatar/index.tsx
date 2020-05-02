@@ -5,7 +5,7 @@ import PieContainer from "components/pie-container/pie-container";
 import React from "react";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
-import "./style.scss";
+import styles from "./style.module.scss";
 
 const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   url,
@@ -24,15 +24,16 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   const haveLevel = level !== undefined && level !== 0;
   return (
     <div
-      className={classNames("program-avatar__container", className, {
-        "program-avatar__container--with-level": haveLevel && size === "small"
+      className={classNames(styles["program-avatar__container"], className, {
+        [styles["program-avatar__container--with-level"]]:
+          haveLevel && size === "small"
       })}
     >
       <div
-        className={classNames("program-avatar", className, {
-          "program-avatar--small": size === "small",
-          "program-avatar--medium": size === "medium",
-          "program-avatar--big": size === "big"
+        className={classNames(styles["program-avatar"], className, {
+          [styles["program-avatar--small"]]: size === "small",
+          [styles["program-avatar--medium"]]: size === "medium",
+          [styles["program-avatar--big"]]: size === "big"
         })}
       >
         <ImageBase
@@ -40,7 +41,10 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
           color={color}
-          className={classNames("program-avatar__image", imageClassName)}
+          className={classNames(
+            styles["program-avatar__image"],
+            imageClassName
+          )}
           alt={alt}
         />
         {haveLevel && (
@@ -49,7 +53,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
             onMouseEnter={onMouseEnterLevel}
             onMouseLeave={onMouseLeaveLevel}
             onClick={onClickLevel}
-            className={"program-avatar__level"}
+            className={styles["program-avatar__level"]}
           >
             <PieContainer
               small

@@ -5,17 +5,25 @@ import { TransactionAssetDetails } from "gv-api-web";
 import * as React from "react";
 import { getAssetLink } from "utils/compose-url";
 
+import styles from "../transaction-details.module.scss";
+
 const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
   const { contextTitle } = useToLink();
   const programLinkProps = getAssetLink(data.url, data.assetType, contextTitle);
   return (
-    <div className={`transaction-asset--${data.assetType.toLowerCase()}`}>
+    <div
+      className={styles[`transaction-asset--${data.assetType.toLowerCase()}`]}
+    >
       <Link to={programLinkProps}>
         <AssetAvatarWithName
           name={
             <>
-              <div className="transaction-asset__title">{data.title}</div>
-              <div className="transaction-asset__trader">{data.manager}</div>
+              <div className={styles["transaction-asset__title"]}>
+                {data.title}
+              </div>
+              <div className={styles["transaction-asset__trader"]}>
+                {data.manager}
+              </div>
             </>
           }
           url={url}

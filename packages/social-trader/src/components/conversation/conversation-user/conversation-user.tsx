@@ -10,7 +10,7 @@ import { managerToPathCreator } from "routes/manager.routes";
 import { postToPathCreator } from "routes/social.routes";
 import { formatDate } from "utils/dates";
 
-import "./conversation-user.scss";
+import styles from "./conversation-user.module.scss";
 
 const _ConversationUser: React.FC<Props> = ({
   postId,
@@ -31,7 +31,9 @@ const _ConversationUser: React.FC<Props> = ({
         <>
           <Row>
             <Link to={managerToPathCreator(url, contextTitle)}>
-              <RowItem className="conversation-user__name">{username}</RowItem>
+              <RowItem className={styles["conversation-user__name"]}>
+                {username}
+              </RowItem>
             </Link>
           </Row>
           <Row small>

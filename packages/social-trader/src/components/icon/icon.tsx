@@ -1,7 +1,7 @@
-import "./icon.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+
+import styles from "./icon.module.scss";
 
 export interface IIconProps {
   type?: string;
@@ -25,12 +25,17 @@ export const Icon: React.FC<IIconProps> = ({
 }) => {
   return (
     <span
-      className={classNames("icon", `icon--${type}`, className, {
-        "icon--primary": primary,
-        "icon--secondary": secondary,
-        "icon--rotate": rotate,
-        "icon--selected": selected
-      })}
+      className={classNames(
+        styles["icon"],
+        styles[`icon--${type}`],
+        className,
+        {
+          [styles["icon--primary"]]: primary,
+          [styles["icon--secondary"]]: secondary,
+          [styles["icon--rotate"]]: rotate,
+          [styles["icon--selected"]]: selected
+        }
+      )}
       onClick={onClick}
     >
       {children}

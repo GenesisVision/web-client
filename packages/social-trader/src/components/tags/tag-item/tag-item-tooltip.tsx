@@ -6,6 +6,7 @@ import { Tag } from "gv-api-web";
 import * as React from "react";
 
 import TagItem from "./tag-item";
+import styles from "./tag-item.module.scss";
 
 interface Props {
   tags: Tag[];
@@ -15,7 +16,7 @@ interface Props {
 const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
   return (
     <TooltipContent>
-      <Row wrap className={classNames("tag-item-tooltip", className)}>
+      <Row wrap className={classNames(styles["tag-item-tooltip"], className)}>
         {tags
           .filter((tag, idx) => idx > 0)
           .map((tag, idx) => (

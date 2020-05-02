@@ -1,5 +1,3 @@
-import "./chart-period.scss";
-
 import classNames from "classnames";
 import GVButton from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
@@ -18,6 +16,7 @@ import {
   getPeriodStartDate,
   TChartPeriod
 } from "./chart-period.helpers";
+import styles from "./chart-period.module.scss";
 
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   const { type, start } = period;
@@ -30,7 +29,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
     []
   );
   return (
-    <Row className="chart-period">
+    <Row className={styles["chart-period"]}>
       <MutedText>
         <Row>
           {ChartPeriodTypeValues.map(period => (
@@ -39,8 +38,8 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
                 noPadding
                 key={period}
-                className={classNames("chart-period__period-item", {
-                  "chart-period__period-item--active": type === period
+                className={classNames(styles["chart-period__period-item"], {
+                  [styles["chart-period__period-item--active"]]: type === period
                 })}
                 onClick={handleChangePeriod(period)}
                 variant="text"

@@ -4,20 +4,24 @@ import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 
+import styles from "./tooltip-label.module.scss";
+
 export const TooltipLabel: React.FC<{
+  pointer?: boolean;
   tooltipContent: string | JSX.Element;
   labelText?: string;
   className?: string;
-}> = React.memo(({ tooltipContent, labelText, className }) => (
+}> = React.memo(({ pointer, tooltipContent, labelText, className }) => (
   <Tooltip
     horizontal={HORIZONTAL_POPOVER_POS.LEFT}
     render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
   >
     <span
       className={classNames(
-        "tooltip__label",
+        styles["tooltip__label"],
         {
-          "tooltip__label--question": !labelText
+          [styles["tooltip__label--cursor-pointer"]]: pointer,
+          [styles["tooltip__label--question"]]: !labelText
         },
         className
       )}

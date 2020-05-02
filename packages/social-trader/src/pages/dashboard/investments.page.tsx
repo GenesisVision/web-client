@@ -1,5 +1,3 @@
-import "./dashboard.scss";
-
 import Page from "components/page/page";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
 import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";

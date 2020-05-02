@@ -12,6 +12,7 @@ import {
   TDashboardInvestingStatistic,
   TDashboardTradingStatistic
 } from "../../dashboard.types";
+import styles from "./dashboard-statistic.module.scss";
 
 const _DashboardStatistic: React.FC<Props> = ({
   EmptyBlock,
@@ -32,7 +33,7 @@ const _DashboardStatistic: React.FC<Props> = ({
   return (
     <>
       <div>
-        <div className="dashboard-statistic__values">
+        <div className={styles["dashboard-statistic__values"]}>
           {renderValues(data)}
           <DashboardStatisticPeriods
             withProfitability
@@ -42,7 +43,7 @@ const _DashboardStatistic: React.FC<Props> = ({
         </div>
         <DashboardStatisticTable data={events.items} />
       </div>
-      <div className="dashboard-statistic__see-all">
+      <div className={styles["dashboard-statistic__see-all"]}>
         <Link to={linkCreator(EVENTS_ROUTE)}>
           {t("dashboard-page.statistic.see-all")}
         </Link>

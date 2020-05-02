@@ -13,7 +13,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-import "./header.scss";
+import styles from "./header.module.scss";
 
 const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
 const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
@@ -39,21 +39,21 @@ const HeaderLeft: React.FC<{
       />
       <Navigation
         menuItems={showedTopMenuItems}
-        className={classNames("header__navigation", {
-          "header__navigation--search": openSearch
+        className={classNames(styles["header__navigation"], {
+          [styles["header__navigation--search"]]: openSearch
         })}
       />
       <div
         onClick={setSearchIsOpen}
-        className={classNames("header__search-container", {
-          "header__search-container--search": openSearch
+        className={classNames(styles["header__search-container"], {
+          [styles["header__search-container--search"]]: openSearch
         })}
       >
         <HeaderIcon>
           {openSearch ? (
             <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
           ) : (
-            <div className="header__search-button">
+            <div className={styles["header__search-button"]}>
               <SearchIcon />
             </div>
           )}

@@ -17,7 +17,7 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
-import "./program-short.scss";
+import styles from "./program-short.module.scss";
 
 interface Props {
   program: ProgramDetailsListItem;
@@ -31,7 +31,7 @@ const _ProgramShort: React.FC<Props> = ({ program }) => {
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   return (
-    <div className="program-short">
+    <div className={styles["program-short"]}>
       <TableCardAvatar
         logo={program.logoUrl}
         hasAvatar
@@ -41,12 +41,12 @@ const _ProgramShort: React.FC<Props> = ({ program }) => {
         levelProgress={program.levelProgress}
         url={linkProps}
       />
-      <div className="program-short__period">
+      <div className={styles["program-short__period"]}>
         {distanceDate(program.periodStarts, program.periodEnds)}
       </div>
       <TableCardTitle url={linkProps}>{program.title}</TableCardTitle>
       <StatisticItem
-        className="program-short__balance"
+        className={styles["program-short__balance"]}
         label={t("programs-page.programs-header.equity")}
       >
         <NumberFormat

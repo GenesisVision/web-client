@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { normalizeLinkFrom } from "../link/link.helper";
+import styles from "./navigation.module.scss";
 
 interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
@@ -21,7 +22,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
   <GVButton className="navigation__button" variant="text" onClick={onClick}>
     <>
       <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
-      <span className="navigation__link">{children}</span>
+      <span className={styles["navigation__link"]}>{children}</span>
     </>
   </GVButton>
 );
@@ -44,21 +45,23 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   const renderIconWithName = () => (
     <>
       <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
-      <span className="navigation__link">{children}</span>
+      <span className={styles["navigation__link"]}>{children}</span>
     </>
   );
   return (
     (!!href && (
       <Link
         to={href}
-        className={classNames("navigation__item", {
-          "navigation__item--active": route.startsWith(normalizeLinkFrom(href))
+        className={classNames(styles["navigation__item"], {
+          [styles["navigation__item--active"]]: route.startsWith(
+            normalizeLinkFrom(href)
+          )
         })}
       >
         {renderIconWithName()}
       </Link>
     )) || (
-      <div className="navigation__item" onClick={onClick}>
+      <div className={styles["navigation__item"]} onClick={onClick}>
         {renderIconWithName()}
       </div>
     )

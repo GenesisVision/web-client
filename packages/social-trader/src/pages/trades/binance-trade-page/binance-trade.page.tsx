@@ -2,8 +2,6 @@ import { BinanceTradeContainer } from "pages/trades/binance-trade-page/binance-t
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React from "react";
 
-import "../trades.scss";
-
 interface Props {
   symbol?: SymbolState;
 }

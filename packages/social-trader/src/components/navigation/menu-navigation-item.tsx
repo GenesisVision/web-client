@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
 
 import NavigationItem from "./navigation-item";
+import styles from "./navigation.module.scss";
 
 export const MenuNavigationItem: React.FC<Props> = ({
   item: { Icon, route = "", label, children },
@@ -35,7 +36,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
         </NavigationItem>
       </MenuNavigationTooltipItem>
       {haveSecondLevel && (
-        <div className="navigation__second-level">
+        <div className={styles["navigation__second-level"]}>
           {children!.map(renderNavigationItem)}
         </div>
       )}

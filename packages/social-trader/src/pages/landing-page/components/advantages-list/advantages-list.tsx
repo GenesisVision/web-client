@@ -1,10 +1,9 @@
-import "./advantages-list.scss";
-
 import classNames from "classnames";
 import { TAdvantages } from "pages/landing-page/static-data/advantages";
 import React from "react";
 
 import AdvantageItem from "./advantage-item";
+import styles from "./advantages-list.module.scss";
 
 interface Props {
   className?: string;
@@ -17,7 +16,7 @@ const _AdvantagesList: React.FC<Props> = ({
   advantagesItems,
   lastItem
 }) => (
-  <ul className={classNames("advantages-list", className)}>
+  <ul className={classNames(styles["advantages-list"], className)}>
     {advantagesItems.map((item, index) => (
       <AdvantageItem
         key={index}
@@ -27,7 +26,12 @@ const _AdvantagesList: React.FC<Props> = ({
       />
     ))}
     {lastItem && (
-      <li className="advantages-list__item advantages-list__item--last">
+      <li
+        className={classNames(
+          styles["advantages-list__item"],
+          styles["advantages-list__item--last"]
+        )}
+      >
         {lastItem}
       </li>
     )}

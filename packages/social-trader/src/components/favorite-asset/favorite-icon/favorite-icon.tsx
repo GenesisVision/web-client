@@ -1,8 +1,6 @@
 import { Icon } from "components/icon/icon";
 import * as React from "react";
 
-import "./favorite-icon.scss";
-
 const FavoriteIcon: React.FC<Props> = React.memo(({ selected, className }) => {
   return (
     <Icon

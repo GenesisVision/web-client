@@ -1,11 +1,11 @@
-import "./calculator-slider.scss";
-
 import classNames from "classnames";
 import GVTextField from "components/gv-text-field";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Slider from "rc-slider";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+
+import styles from "./calculator-slider.module.scss";
 
 class _CalculatorSlider extends React.PureComponent<Props> {
   marks = {
@@ -63,17 +63,19 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       editableValue = false
     } = this.props;
     return (
-      <div className={classNames("calculator-slider", className)}>
+      <div className={classNames(styles["calculator-slider"], className)}>
         <div
-          className={classNames("calculator-slider__heading", {
-            "calculator-slider__heading--editable-value": editableValue
+          className={classNames(styles["calculator-slider__heading"], {
+            [styles[
+              "calculator-slider__heading--editable-value"
+            ]]: editableValue
           })}
         >
-          <div className="calculator-slider__title">
+          <div className={styles["calculator-slider__title"]}>
             <span>{title}</span>
             {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
           </div>
-          <div className="calculator-slider__value">
+          <div className={styles["calculator-slider__value"]}>
             {editableValue ? (
               <GVTextField
                 name={name}
@@ -83,11 +85,13 @@ class _CalculatorSlider extends React.PureComponent<Props> {
                 adornment={valueAdornment}
                 adornmentPosition="end"
                 wrapperClassName={classNames(
-                  "calculator-slider__editable-value-wrapper",
+                  styles["calculator-slider__editable-value-wrapper"],
                   valueClassName
                 )}
-                className="calculator-slider__editable-value"
-                inputClassName="calculator-slider__editable-value-input"
+                className={styles["calculator-slider__editable-value"]}
+                inputClassName={
+                  styles["calculator-slider__editable-value-input"]
+                }
                 InputComponent={NumberFormat}
               />
             ) : (

@@ -2,7 +2,7 @@ import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { getAccept, setAccept } from "./cookie-message.helpers";
-import "./cookie-message.scss";
+import styles from "./cookie-message.module.scss";
 
 const CookieMessage: React.FC = () => {
   const [hasAcceptance, setAcceptance] = useState(true);
@@ -16,9 +16,9 @@ const CookieMessage: React.FC = () => {
   }, []);
   if (hasAcceptance) return null;
   return (
-    <div className="cookie-message">
-      <div className="cookie-message__container">
-        <p className="cookie-message__text">
+    <div className={styles["cookie-message"]}>
+      <div className={styles["cookie-message__container"]}>
+        <p className={styles["cookie-message__text"]}>
           This website uses cookies. By continuing to use this website, you
           consent to our use of these cookies.{" "}
           <a

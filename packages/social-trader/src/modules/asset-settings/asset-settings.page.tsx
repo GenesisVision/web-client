@@ -6,7 +6,6 @@ import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/prog
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import "./asset-settings.scss";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 

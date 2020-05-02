@@ -1,5 +1,3 @@
-import "./alert-message-list.scss";
-
 import GVButton from "components/gv-button";
 import AlertMessage from "modules/alert-message/components/alert-message-list/alert-message";
 import Router from "next/router";
@@ -13,6 +11,7 @@ import { ActionType } from "utils/types";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";
+import styles from "./alert-message-list.module.scss";
 
 export const CLEAR_ALL_ALERTS_ID = "CLEAR_ALL_ALERTS_ID";
 
@@ -46,7 +45,7 @@ const _AlertMessageList: React.FC<Props> = props => {
     );
   }
 
-  return <div className="alert-message-list">{children}</div>;
+  return <div className={styles["alert-message-list"]}>{children}</div>;
 };
 
 const mapStateToProps = (state: RootState): StateProps => {

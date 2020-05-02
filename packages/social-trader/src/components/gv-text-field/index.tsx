@@ -6,7 +6,7 @@ import { NumberFormatValues } from "react-number-format";
 import { SizesType } from "utils/types";
 
 import GVTextArea from "./gv-text-area";
-import "./style.scss";
+import styles from "./style.module.scss";
 
 const _GVTextField: React.FC<GVTextFieldProps> = props => {
   const {
@@ -54,9 +54,9 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
         {...props}
         ref={input}
         type={type}
-        className={classNames("gv-text-field", inputClassName, {
-          "gv-text-field--small": size === "small",
-          "gv-text-field--middle": size === "middle"
+        className={classNames(styles["gv-text-field"], inputClassName, {
+          [styles["gv-text-field--small"]]: size === "small",
+          [styles["gv-text-field--middle"]]: size === "middle"
         })}
         onFocus={handleFocus}
         onBlur={handleBlur}

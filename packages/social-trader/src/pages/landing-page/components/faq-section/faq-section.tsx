@@ -1,5 +1,3 @@
-import "./faq-section.scss";
-
 import AccordionContainer from "pages/landing-page/containers/accordion-container/accordion-container";
 import {
   faqFollow,
@@ -11,11 +9,13 @@ import {
 } from "pages/landing-page/static-data/faq";
 import React from "react";
 
+import styles from "./faq-section.module.scss";
+
 const FaqSection: React.FC = () => {
   return (
-    <section className="faq-section">
+    <section className={styles["faq-section"]}>
       <div className="internal__container">
-        <h1 className="faq-section__title">FAQ</h1>
+        <h1 className={styles["faq-section__title"]}>FAQ</h1>
         <article className="internal__article">
           <h2>General Questions</h2>
           <AccordionContainer accordions={faqGeneral} />

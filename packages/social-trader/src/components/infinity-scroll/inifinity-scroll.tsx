@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 
-import "./infinity-scroll.scss";
+import styles from "./infinity-scroll.module.scss";
 
 export const loadOnScroll = ({
   scroll,
@@ -38,8 +38,12 @@ const _InfinityScroll: React.FC<Props> = ({ hasMore, loadMore, children }) => {
   }, [hasMore, window.innerHeight, loadMore]);
 
   return (
-    <div className="infinity-scroll" ref={scroll} onScroll={handleScroll}>
-      <div className="infinity-scroll__container" ref={container}>
+    <div
+      className={styles["infinity-scroll"]}
+      ref={scroll}
+      onScroll={handleScroll}
+    >
+      <div className={styles["infinity-scroll__container"]} ref={container}>
         {children}
       </div>
     </div>

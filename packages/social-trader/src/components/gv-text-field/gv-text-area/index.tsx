@@ -2,7 +2,7 @@ import classNames from "classnames";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import "./style.scss";
+import styles from "./style.module.scss";
 
 export type TextareaChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
@@ -110,9 +110,9 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   }, []);
 
   return (
-    <div className={classNames("gv-text-area", textAreaClassName)}>
+    <div className={classNames(styles["gv-text-area"], textAreaClassName)}>
       <textarea
-        className={classNames("gv-text-area__hidden", className)}
+        className={classNames(styles["gv-text-area__hidden"], className)}
         readOnly
         ref={shadowRef}
         rows={rows}

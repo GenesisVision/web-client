@@ -1,8 +1,8 @@
-import "./nav-list.scss";
-
 import NavItem from "pages/landing-page/components/nav/nav-item";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
+
+import styles from "./nav-list.module.scss";
 
 const _NavList: React.FC<Props> = ({
   menuItems,
@@ -11,7 +11,7 @@ const _NavList: React.FC<Props> = ({
   subNavOpen
 }) => (
   <nav className={className}>
-    <ul className="nav-list">
+    <ul className={styles["nav-list"]}>
       {menuItems.map((item, index) => (
         <NavItem
           key={index}

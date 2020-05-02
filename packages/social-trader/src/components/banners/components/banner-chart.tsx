@@ -7,8 +7,6 @@ import { SimpleChartPoint } from "gv-api-web";
 import { JSDOM } from "jsdom";
 import React from "react";
 
-import "../../program-simple-chart/program-simple-chart.scss";
-
 const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {

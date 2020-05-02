@@ -8,6 +8,8 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
 
+import styles from "../transaction-details.module.scss";
+
 const _AmountItem: React.FC<Props> = ({
   amount: { amount, currency, color }
 }) => {
@@ -33,9 +35,9 @@ const ColoredAmount: React.FC<{ color: Color } & React.HTMLAttributes<
   return (
     <div
       className={classNames({
-        "amount-item__amount--white": color === "White",
-        "amount-item__amount--red": color === "Red",
-        "amount-item__amount--green": color === "Green"
+        [styles["amount-item__amount--white"]]: color === "White",
+        [styles["amount-item__amount--red"]]: color === "Red",
+        [styles["amount-item__amount--green"]]: color === "Green"
       })}
     >
       {children}

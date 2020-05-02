@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import {
   ChartPeriodType,
   TChartPeriod
 } from "components/chart/chart-period/chart-period.helpers";
-import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
+import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +20,10 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
         <h5>{t("program-details-page.statistics.current")}</h5>
         <Row
           wrap
-          className="details-statistics__particular-information details-statistics__particular-information--current"
+          className={classNames(
+            styles["details-statistics__particular-information"],
+            styles["details-statistics__particular-information--current"]
+          )}
         >
           <Current />
         </Row>
@@ -29,7 +33,10 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
           {t("program-details-page.statistics.for")}{" "}
           {t(`chart-period.${ChartPeriodType[periodType]}`)}
         </h5>
-        <Row wrap className="details-statistics__particular-information">
+        <Row
+          wrap
+          className={styles["details-statistics__particular-information"]}
+        >
           <Particular />
         </Row>
       </Row>

@@ -1,5 +1,3 @@
-import "./wallet-transactions.scss";
-
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,

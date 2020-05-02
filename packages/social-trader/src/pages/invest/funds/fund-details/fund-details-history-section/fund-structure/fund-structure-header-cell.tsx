@@ -8,10 +8,7 @@ export const _FundStructureHeaderCell: React.FC<WithTranslation & {
 }> = ({ t, column }) => (
   <span
     className={classNames(
-      `details-structure__head-cell fund-details-structure__cell--${column.name}`,
-      {
-        tooltip__label: column.tooltip
-      }
+      `details-structure__head-cell fund-details-structure__cell--${column.name}`
     )}
   >
     {t(`fund-details-page.history.structure.${column.name}`)}

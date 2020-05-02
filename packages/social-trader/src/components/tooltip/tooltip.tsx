@@ -6,8 +6,6 @@ import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
 
-import "./tooltip.scss";
-
 const Tooltip: React.FC<Props> = ({
   onClick,
   onMouseEnter,

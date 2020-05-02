@@ -1,6 +1,3 @@
-import "rc-slider/assets/index.css";
-import "./filter.scss";
-
 import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -8,11 +5,13 @@ import Popover, {
 } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import useAnchor from "hooks/anchor.hook";
+import "rc-slider/assets/index.css";
 import * as React from "react";
 import { useCallback } from "react";
 
 import { UpdateFilterFunc } from "../table.types";
 import FilterArrowIcon from "./filter-arrow-icon";
+import styles from "./filter.module.scss";
 
 const _Filter: React.FC<Props> = ({
   label,
@@ -37,9 +36,9 @@ const _Filter: React.FC<Props> = ({
   });
   return (
     <RowItem>
-      <div className="filter" onClick={setAnchor}>
+      <div className={styles["filter"]} onClick={setAnchor}>
         <MutedText>{label}</MutedText>
-        <div className="filter__value">{renderValueText(value)}</div>
+        <div className={styles["filter__value"]}>{renderValueText(value)}</div>
         <FilterArrowIcon isOpen={anchor !== undefined} />
       </div>
       <Popover

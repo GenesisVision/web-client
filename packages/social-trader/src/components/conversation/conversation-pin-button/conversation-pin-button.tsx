@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeFunc } from "utils/hook-form.helpers";
 
-import "./conversation-pin-button.scss";
+import styles from "./conversation-pin-button.module.scss";
 
 const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   const [t] = useTranslation();
@@ -29,7 +29,7 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   return (
     <Center>
       {isChanged && (
-        <RowItem className="conversation-pin-button">
+        <RowItem className={styles["conversation-pin-button"]}>
           <Center>
             <MutedText small>
               {innerPinned ? t("pinned") : t("unpinned")}
@@ -37,7 +37,7 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
           </Center>
         </RowItem>
       )}
-      <RowItem className="conversation-pin-button">
+      <RowItem className={styles["conversation-pin-button"]}>
         <Center>
           <GVButton
             onClick={sendRequest}

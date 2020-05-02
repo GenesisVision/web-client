@@ -22,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import { HookForm, postponeFunc } from "utils/hook-form.helpers";
 import { object } from "yup";
 
-import "./post-input.scss";
+import styles from "./post-input.module.scss";
 
 const MAX_IMAGES = 10;
 
@@ -110,15 +110,19 @@ const _PostInput: React.FC<Props> = ({
     isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm form={form} onSubmit={onSubmit} className="post-input__form">
+    <HookForm
+      form={form}
+      onSubmit={onSubmit}
+      className={styles["post-input__form"]}
+    >
       <HookFormInputImages
         maxImages={MAX_IMAGES}
         disabled={disabledImages}
-        className="post-input__container"
+        className={styles["post-input__container"]}
         name={FORM_FIELDS.images}
         content={open => (
           <>
-            <Center className="post-input__input-container">
+            <Center className={styles["post-input__input-container"]}>
               <ConversationInput
                 disabled={isSubmitted}
                 outerCaret={fixedCaretPosition}
@@ -139,8 +143,8 @@ const _PostInput: React.FC<Props> = ({
                     searchResult={searchResult}
                   />
                 )}
-                <Center className="post-input__edit-panel-container">
-                  <RowItem className="post-input__add-buttons">
+                <Center className={styles["post-input__edit-panel-container"]}>
+                  <RowItem className={styles["post-input__add-buttons"]}>
                     <Center wrap>
                       {images &&
                         images.map(image => (
@@ -153,10 +157,10 @@ const _PostInput: React.FC<Props> = ({
                         ))}
                     </Center>
                   </RowItem>
-                  <RowItem className="post-input__errors">
+                  <RowItem className={styles["post-input__errors"]}>
                     {errorText && <ErrorMessage error={errorText} />}
                   </RowItem>
-                  <RowItem className="post-input__send-buttons">
+                  <RowItem className={styles["post-input__send-buttons"]}>
                     <SubmitButton
                       isSuccessful={isSuccessful}
                       checkDirty={false}

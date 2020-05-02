@@ -1,7 +1,7 @@
-import "./statistic-item.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import styles from "./statistic-item.module.scss";
 
 export const StatisticItemContainerBlock: React.FC<IStatisticItemContainerBlockProps> = ({
   bottomContent,
@@ -14,9 +14,9 @@ export const StatisticItemContainerBlock: React.FC<IStatisticItemContainerBlockP
     <div
       className={classNames(
         {
-          "statistics-item-container--bottom-content": bottomContent,
-          "statistics-item-container--with-padding": withPadding,
-          "statistics-item-container--half": half
+          [styles["statistics-item-container--bottom-content"]]: bottomContent,
+          [styles["statistics-item-container--with-padding"]]: withPadding,
+          [styles["statistics-item-container--half"]]: half
         },
         className
       )}

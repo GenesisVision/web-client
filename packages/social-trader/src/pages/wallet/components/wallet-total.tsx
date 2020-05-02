@@ -13,15 +13,15 @@ import { compose } from "redux";
 
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
-import "./wallet-title-block.scss";
+import styles from "./wallet-title-block.module.scss";
 
 const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
     <Page title={t("wallet-page.title")}>
-      <div className="wallet-title-block">
+      <div className={styles["wallet-title-block"]}>
         <Row wrap>
-          <RowItem className="wallet-title-block__title">
+          <RowItem className={styles["wallet-title-block__title"]}>
             <h1>{t("wallet-page.title")}</h1>
           </RowItem>
           <RowItem>

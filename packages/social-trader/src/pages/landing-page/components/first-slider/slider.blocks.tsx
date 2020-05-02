@@ -5,6 +5,8 @@ import { TSlide } from "pages/landing-page/static-data/slides";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "./first-slider.module.scss";
+
 const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
   const { t } = useTranslation();
   return animation ? (
@@ -14,7 +16,10 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
           src={item.imageBg}
           alt={t(item.title)}
           title={t(item.title)}
-          className="slider__img slider__img--animation-bg"
+          className={classNames(
+            styles["slider__img"],
+            styles["slider__img--animation-bg"]
+          )}
         />
       )}
       {item.images.map((image, index) => (
@@ -24,7 +29,10 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
           alt={t(item.title)}
           title={t(item.title)}
           style={{ animationDelay: `${500 * index + 500}ms` }}
-          className="slider__img slider__img--animation"
+          className={classNames(
+            styles["slider__img"],
+            styles["slider__img--animation"]
+          )}
         />
       ))}
     </>
@@ -33,7 +41,7 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
       src={item.imageOptimization}
       alt={t(item.title)}
       title={t(item.title)}
-      className="slider__img"
+      className={styles["slider__img"]}
     />
   );
 };
@@ -49,23 +57,23 @@ export const SliderTitle: React.FC = React.memo(({ children }) => {
 });
 
 export const SliderText: React.FC = React.memo(({ children }) => {
-  return <p className="slider__text">{children}</p>;
+  return <p className={styles["slider__text"]}>{children}</p>;
 });
 
 export const SliderImgWrapper: React.FC = ({ children }) => {
-  return <div className="slider__img-wrapper">{children}</div>;
+  return <div className={styles["slider__img-wrapper"]}>{children}</div>;
 };
 
 export const SliderInfoWrapper: React.FC = ({ children }) => {
-  return <div className="slider__info-wrapper">{children}</div>;
+  return <div className={styles["slider__info-wrapper"]}>{children}</div>;
 };
 
 export const SliderInfo: React.FC = ({ children }) => {
-  return <div className="slider__info">{children}</div>;
+  return <div className={styles["slider__info"]}>{children}</div>;
 };
 
 export const SliderControlsWrapper: React.FC = ({ children }) => {
-  return <div className="slider__controls-wrapper">{children}</div>;
+  return <div className={styles["slider__controls-wrapper"]}>{children}</div>;
 };
 
 export const SliderControls: React.FC<{
@@ -73,11 +81,14 @@ export const SliderControls: React.FC<{
   onClickRight: VoidFunction;
 }> = ({ onClickLeft, onClickRight }) => {
   return (
-    <div className="slider__controls">
+    <div className={styles["slider__controls"]}>
       <button
         aria-label="Left"
         type="button"
-        className="slider__arrow  slider__arrow--left"
+        className={classNames(
+          styles["slider__arrow"],
+          styles["slider__arrow--left"]
+        )}
         onClick={onClickLeft}
       >
         <Arrow />
@@ -85,7 +96,7 @@ export const SliderControls: React.FC<{
       <button
         aria-label="Right"
         type="button"
-        className="slider__arrow"
+        className={styles["slider__arrow"]}
         onClick={onClickRight}
       >
         <Arrow />
@@ -97,5 +108,7 @@ export const SliderControls: React.FC<{
 export const SliderMainWrapper: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
-  return <div className={classNames("slider", className)}>{children}</div>;
+  return (
+    <div className={classNames(styles["slider"], className)}>{children}</div>
+  );
 };

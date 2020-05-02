@@ -1,11 +1,10 @@
-import "./pager.scss";
-
 import SeoPagination from "components/pager/seo";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useCallback } from "react";
 
 import PagerButton from "./pager-button";
+import styles from "./pager.module.scss";
 
 const _Pager: React.FC<Props> = ({
   total,
@@ -75,7 +74,7 @@ const _Pager: React.FC<Props> = ({
 };
 
 export const PagerSeparator: React.FC = () => (
-  <RowItem small className="pager__separator">
+  <RowItem small className={styles["pager__separator"]}>
     ...
   </RowItem>
 );

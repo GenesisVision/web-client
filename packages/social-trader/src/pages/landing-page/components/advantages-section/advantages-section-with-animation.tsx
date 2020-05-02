@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useTranslation } from "i18n";
 import { AdvantagesListContainer } from "pages/landing-page/components/advantages-section/advantages.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
@@ -5,7 +6,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { animated, useTrail } from "react-spring";
 import { TRADE_ROUTE } from "routes/trade.routes";
 
-import "./advantages-section.scss";
+import styles from "./advantages-section.module.scss";
 
 const translate = (x: number, y: number) => `translate3d(${x}px,${y}px,0)`;
 const config = { tension: 1200, friction: 40 };
@@ -40,7 +41,10 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
   );
   return (
     <section
-      className="home__section home__section--bg-white"
+      className={classNames(
+        styles["home__section"],
+        styles["home__section--bg-white"]
+      )}
       onMouseMove={handleMouseMove}
       ref={section}
     >
@@ -48,7 +52,7 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
         {trail.map((props, index) => (
           <animated.div
             key={index}
-            className="advantages-section__sticky-button"
+            className={styles["advantages-section__sticky-button"]}
             //@ts-ignore
             style={{ transform: props.xy.interpolate(translate) }}
           >

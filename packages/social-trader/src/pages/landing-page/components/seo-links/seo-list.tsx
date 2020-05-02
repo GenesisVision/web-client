@@ -1,12 +1,12 @@
-import "./seo-list.scss";
-
 import classNames from "classnames";
 import SeoItem from "pages/landing-page/components/seo-links/seo-item";
 import { TNavFooter } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
+import styles from "./seo-list.module.scss";
+
 const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
-  <ul className={classNames("seo-list", className)}>
+  <ul className={classNames(styles["seo-list"], className)}>
     {seoItems.map((item: any, index: number) => (
       <SeoItem
         key={index}

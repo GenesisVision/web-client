@@ -1,5 +1,3 @@
-import "./wallet-widget.scss";
-
 import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
@@ -15,6 +13,8 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
+import styles from "./wallet-widget.module.scss";
+
 const WalletWidgetPopoverContent = dynamic(() =>
   import("components/wallet-widget/wallet-widget-popover-content")
 );
@@ -27,14 +27,13 @@ const _WalletWidget: React.FC<Props> = ({
     <>
       <Row>
         <RowItem>
-          <Row className="wallet-widget__wallet" onClick={setAnchor}>
+          <Row className={styles["wallet-widget__wallet"]} onClick={setAnchor}>
             <HeaderIcon>
               <WalletIcon primary={anchor !== undefined} />
             </HeaderIcon>
-            <div className="wallet-widget__amount">{`${formatCurrencyValue(
-              available,
-              currency
-            )} ${currency}`}</div>
+            <div
+              className={styles["wallet-widget__amount"]}
+            >{`${formatCurrencyValue(available, currency)} ${currency}`}</div>
           </Row>
         </RowItem>
         <RowItem>
