@@ -1014,7 +1014,7 @@
         "trades": "Trades",
         "events": "My history",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions",
+        "subscriptions": "Subscribers",
         "financial-statistic": "Financial statistic",
         "period-history": "Period History"
       },
@@ -1224,7 +1224,7 @@
         "trades": "Trades",
         "events": "My history",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions",
+        "subscriptions": "Subscribers",
         "financial-statistic": "Financial statistic",
         "period-history": "Period History"
       },
@@ -1246,7 +1246,15 @@
         "profit": "Profit",
         "price": "Price",
         "entry": "Entry",
-        "date": "Date"
+        "date": "Date",
+        "tooltips": {
+          "direction-entry": "Trade direction",
+          "commission": "Sum of all fees paid for the trade",
+          "symbol": "Trading instrument",
+          "volume": "Total quantity traded",
+          "profit": "Trade profit (excluding commission)",
+          "price": "Trade price"
+        }
       },
       "open-positions": {
         "delay": "delay",
@@ -1258,7 +1266,16 @@
         "price": "Price Open",
         "priceCurrent": "Price",
         "profit": "Profit",
-        "profitPercent": "Profit %"
+        "profitPercent": "Profit %",
+        "tooltips": {
+          "date": "Time the trade was opened",
+          "symbol": "Trading instrument",
+          "direction": "Position direction (Buy/Long and Sell/Short)",
+          "volume": "Total quantity traded",
+          "price": "Weighted average trade price",
+          "priceCurrent": "Current price",
+          "profit": "Current floating profit"
+        }
       },
       "subscriptions": {
         "number": "Number",
@@ -1268,7 +1285,15 @@
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
         "commission": "Commission",
-        "status": "Status"
+        "status": "Status",
+        "tooltips": {
+          "number": "Subscriber number",
+          "trades": "Number of copied trades",
+          "profit": "Subscriber profit",
+          "volume": "Total traded volume by the subscriber",
+          "commission": "Amount of all fees paid by the subscriber to the trader",
+          "status": "Subscription status (active or ended)"
+        }
       },
       "financial-statistic": {
         "period": "Period",
