@@ -33,12 +33,12 @@
   &__list {
     .nav-list__item {
       opacity: 0;
-      animation: 1s appear forwards;
+      //animation: 1s appear forwards;
     }
 
     .nav-list__link {
       transform: translateX(-2%);
-      animation: 0.5s slideIn forwards;
+      //animation: 0.5s slideIn forwards;
 
       @include media-breakpoint-tablet() {
         padding-top: 0;
@@ -58,12 +58,12 @@
 
     .seo-list__item {
       opacity: 0;
-      animation: 1s appear forwards;
+      //animation: 1s appear forwards;
     }
 
     .seo-list__link {
       transform: translateX(-2%);
-      animation: 0.5s slideIn forwards;
+      //animation: 0.5s slideIn forwards;
       color: rgba($main-color, 0.5);
 
       @include media-breakpoint-tablet() {

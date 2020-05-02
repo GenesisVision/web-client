@@ -55,7 +55,7 @@ $default-padding: $padding-xxsmall $padding-small;
   }
 
   &--pending {
-    animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    //animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
     filter: grayscale(50%);
   }
 

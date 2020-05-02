@@ -74,12 +74,12 @@
     &--animation {
       transform: translate3d(-30%, -50%, 0);
       opacity: 0;
-      animation: 0.5s slideLeft forwards;
+      //animation: 0.5s slideLeft forwards;
     }
 
     &--animation-bg {
       opacity: 0;
-      animation: 0.5s appear forwards 0.7s;
+      //animation: 0.5s appear forwards 0.7s;
     }
   }
 
