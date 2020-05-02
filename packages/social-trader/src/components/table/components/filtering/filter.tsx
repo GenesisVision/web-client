@@ -5,7 +5,6 @@ import Popover, {
 } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import useAnchor from "hooks/anchor.hook";
-import "rc-slider/assets/index.css";
 import * as React from "react";
 import { useCallback } from "react";
 

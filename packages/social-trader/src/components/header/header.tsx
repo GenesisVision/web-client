@@ -30,7 +30,7 @@ const HeaderLeft: React.FC<{
 
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   return (
-    <div className="header__left">
+    <div className={styles["header__left"]}>
       <NavigationMobileButton
         mobileMenuItems={showedMobileMenuItems}
         backPath={backPath}
@@ -68,9 +68,9 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
-    <Center className="header">
+    <Center className={styles["header"]}>
       <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
-      <div className="header__right">
+      <div className={styles["header__right"]}>
         {isAuthenticated ? (
           <AuthWidgets profileHeader={profileHeader} />
         ) : (

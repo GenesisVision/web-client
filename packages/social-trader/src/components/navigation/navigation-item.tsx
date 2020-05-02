@@ -19,7 +19,11 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
   children,
   onClick
 }) => (
-  <GVButton className="navigation__button" variant="text" onClick={onClick}>
+  <GVButton
+    className={styles["navigation__button"]}
+    variant="text"
+    onClick={onClick}
+  >
     <>
       <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
       <span className={styles["navigation__link"]}>{children}</span>
