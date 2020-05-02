@@ -11,6 +11,7 @@ import {
   SliderTitle
 } from "pages/landing-page/components/first-slider/slider.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
+import { SignupButton } from "pages/landing-page/components/signup-button/signup-button";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
@@ -92,9 +93,18 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
         <SliderControlsWrapper>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div key={key} style={rest as any}>
-              <JoinButton href={item.link}>
-                {t("landing-page:buttons.join")}
-              </JoinButton>
+              {item.link ? (
+                <JoinButton href={item.link}>
+                  {t("landing-page:buttons.join")}
+                </JoinButton>
+              ) : (
+                <SignupButton
+                  color="primary"
+                  eventLabel={t("landing-page:buttons.join")}
+                >
+                  {t("landing-page:buttons.join")}
+                </SignupButton>
+              )}
             </animated.div>
           ))}
           <SliderControls

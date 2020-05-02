@@ -12,6 +12,7 @@
   &__img-wrapper {
     position: relative;
     height: 250px;
+    overflow: hidden;
 
     @include media-breakpoint-tablet() {
       height: 360px;
@@ -27,12 +28,12 @@
     }
 
     @include media-breakpoint-desktop() {
-      height: 400px;
-      grid-column: 7/12;
+      height: 450px;
+      grid-column: 6/13;
     }
 
     @include media-breakpoint-large-desktop() {
-      height: 460px;
+      height: 600px;
     }
   }
 
@@ -54,11 +55,11 @@
     }
 
     @include media-breakpoint-desktop() {
-      height: 400px;
+      height: 450px;
     }
 
     @include media-breakpoint-large-desktop() {
-      height: 460px;
+      height: 600px;
     }
   }
   &__img {

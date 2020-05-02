@@ -9,6 +9,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { LOGIN_ROUTE } from "routes/app.routes";
+import { TRADE_ROUTE } from "routes/trade.routes";
 
 import BrokerAdvantage from "./broker-advantage";
 import styles from "./broker-info.module.scss";
@@ -33,7 +34,7 @@ const _BrokerInfo: React.FC<Props> = ({
     ? type === "Attach"
       ? composeAttachAccountRouteWithBroker(title)
       : composeCreateAccountRouteWithBroker(title)
-    : LOGIN_ROUTE;
+    : `${LOGIN_ROUTE}?from=${TRADE_ROUTE}`;
   return (
     <div
       className={classNames(styles["broker-info"], className, {
@@ -44,7 +45,10 @@ const _BrokerInfo: React.FC<Props> = ({
       {description && (
         <p className={styles["broker-info__description"]}>{t(description)}</p>
       )}
-      <JoinButton eventLabel={"Start trading"} href={linkCreator(tradingLink)}>
+      <JoinButton
+        eventLabel={"Start trading"}
+        href={linkCreator(tradingLink, tradingLink)}
+      >
         {t("landing-page:buttons.start-trading")}
       </JoinButton>
       <ul className={styles["broker-info__list-advantages"]}>
