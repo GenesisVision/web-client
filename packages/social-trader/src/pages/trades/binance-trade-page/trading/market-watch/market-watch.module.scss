@@ -7,9 +7,12 @@
   display: flex;
   flex-direction: column;
 
+  &__row {
+    font-family: "DIN Pro Regular", sans-serif;
+  }
+
   &__table {
     width: 100%;
-    font-family: "DIN Pro Regular", sans-serif;
   }
 
   &__items-container {
@@ -71,7 +74,7 @@
     text-align: right;
   }
 
-  &__name {
+  &__cell {
     cursor: pointer;
   }
 }

@@ -8,6 +8,8 @@ import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.t
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
+import styles from "./market-watch.module.scss";
+
 interface Props {
   eventTime: number;
   quoteAsset: TradeCurrency;
@@ -39,17 +41,21 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     }, [quoteAsset, baseAsset]);
 
     return (
-      <tr key={symbol} onClick={handleClick}>
-        <td className="market-watch__name">
+      <tr
+        className={styles["market-watch__row"]}
+        key={symbol}
+        onClick={handleClick}
+      >
+        <td className={styles["market-watch__cell"]}>
           <MutedText small>{symbol}</MutedText>
         </td>
-        <td className="market-watch__name">
+        <td className={styles["market-watch__cell"]}>
           <TradeStatefulValue
             value={formatCurrencyValue(+lastPrice, quoteAsset)}
             trigger={eventTime}
           />
         </td>
-        <td className="market-watch__table-value">
+        <td className={styles["market-watch__table-value"]}>
           {column === CHANGE_COLUMN ? (
             <ColoredText color={getTextColor(+priceChangePercent)}>
               {priceChangePercent} %
