@@ -56,20 +56,13 @@ function create(path) {
     [
       analyzer,
       [
-        sass,
         {
           typescript: {
             ignoreDevErrors: true
-          },
-          cssModules: true,
-          cssLoaderOptions: {
-            importLoaders: 1,
-            localIdentName: "[local]"
           }
         }
       ],
       fonts,
-      css,
       images,
       [
         workers,
