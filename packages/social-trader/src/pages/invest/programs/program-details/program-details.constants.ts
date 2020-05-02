@@ -48,27 +48,33 @@ export const PROGRAM_TRADING_LOG_COLUMNS: SortingColumn[] = [
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry",
-    sortingName: "ByDirection"
+    sortingName: "ByDirection",
+    tooltip: true
   },
   {
     name: "symbol",
-    sortingName: "BySymbol"
+    sortingName: "BySymbol",
+    tooltip: true
   },
   {
     name: "volume",
-    sortingName: "ByVolume"
+    sortingName: "ByVolume",
+    tooltip: true
   },
   {
     name: "price",
-    sortingName: "ByPrice"
+    sortingName: "ByPrice",
+    tooltip: true
   },
   {
     name: "profit",
-    sortingName: "ByProfit"
+    sortingName: "ByProfit",
+    tooltip: true
   },
   {
     name: "commission",
-    sortingName: "ByCommission"
+    sortingName: "ByCommission",
+    tooltip: true
   },
   {
     name: "swap",
@@ -123,19 +129,24 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
 
 export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   {
-    name: "number"
+    name: "number",
+    tooltip: true
   },
   {
-    name: "trades"
+    name: "trades",
+    tooltip: true
   },
   {
-    name: "profit"
+    name: "profit",
+    tooltip: true
   },
   {
-    name: "commission"
+    name: "commission",
+    tooltip: true
   },
   {
-    name: "volume"
+    name: "volume",
+    tooltip: true
   },
   {
     name: "subscriptionDate"
@@ -144,7 +155,8 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
     name: "unsubscriptionDate"
   },
   {
-    name: "status"
+    name: "status",
+    tooltip: true
   }
 ];
 
