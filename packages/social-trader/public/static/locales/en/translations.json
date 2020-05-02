@@ -656,6 +656,14 @@
       "profit": "Profit",
       "chart": "Chart",
       "value": "Value"
+    },
+    "tooltips": {
+      "balance": "Current market value of all assets in the fund",
+      "assets": "Assets included in the fund",
+      "investors": "Number of investors in the fund.",
+      "age": "Age of the fund",
+      "drawdown": "Maximum drawdown of the fund during the selected date range.",
+      "profit": "Profit of the fund during the selected date range"
     }
   },
   "about-levels-page": {
@@ -834,8 +842,12 @@
       "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
       "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
       "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
-      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
-      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+      "target": "Target asset allocation percentage",
+      "current": "Current asset allocation percentage",
+      "asset": "Asset name",
+      "symbol": "Ticker code",
+      "date": "Reallocation date",
+      "reallocate-fund": "New structure of the fund after reallocation"
     },
     "history": {
       "heading": "History",

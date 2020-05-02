@@ -1,7 +1,7 @@
 import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
-
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -12,6 +12,8 @@ import TableCell from "components/table/components/table-cell";
 import TableContainer from "components/table/components/table-container";
 import TableRow from "components/table/components/table-row";
 import { UpdateFilterFunc } from "components/table/components/table.types";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { ReallocationModel } from "gv-api-web";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";
@@ -41,9 +43,24 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
           startLabel={t("filters.date-range.fund-start")}
         />
       )}
-      renderHeader={(column: SortingColumn) => (
-        <FundStructureHeaderCell column={column} />
-      )}
+      renderHeader={(column: SortingColumn) => {
+        return column.tooltip ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.CENTER}
+            render={() => (
+              <TooltipContent>
+                {t(`fund-details-page.tooltip.${column.name}`)}
+              </TooltipContent>
+            )}
+          >
+            <span>
+              <FundStructureHeaderCell column={column} />
+            </span>
+          </Tooltip>
+        ) : (
+          <FundStructureHeaderCell column={column} />
+        );
+      }}
       renderBodyRow={(item: ReallocationModel) => (
         <TableRow stripy>
           <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
