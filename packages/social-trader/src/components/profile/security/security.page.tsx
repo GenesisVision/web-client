@@ -1,7 +1,6 @@
-import "./security.scss";
-
 import ProfileLayout from "components/profile/profile-layout";
 import LogoutButtonContainer from "components/profile/settings/logout-button/logout-button-container";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import TwoFactorAuthContainer from "modules/2fa/2fa-container";
 import PasswordChange from "modules/password-change/password-change";
@@ -18,10 +17,12 @@ const _SecurityPage: React.FC = () => {
         <TwoFactorAuthContainer />
       </SettingsBlock>
       <SettingsBlock>
-        <div>
+        <Row>
           <PasswordChange />
+        </Row>
+        <Row>
           <LogoutButtonContainer />
-        </div>
+        </Row>
       </SettingsBlock>
     </ProfileLayout>
   );
