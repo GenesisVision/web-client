@@ -11,7 +11,7 @@ import styles from "./trading-tables.module.scss";
 
 enum TABS {
   OPEN_ORDERS = "OPEN_ORDERS",
-  ORDERS_HISTORY = "ORDERS_HISTORY",
+  ORDER_HISTORY = "ORDER_HISTORY",
   TRADE_HISTORY = "TRADE_HISTORY",
   FUNDS = "FUNDS"
 }
@@ -32,7 +32,7 @@ const _TradingTables: React.FC<Props> = () => {
       <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
-          <GVTab value={TABS.ORDERS_HISTORY} label={t("Orders history")} />
+          <GVTab value={TABS.ORDER_HISTORY} label={t("Order history")} />
           <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
           <GVTab value={TABS.FUNDS} label={t("Funds")} />
         </GVTabs>
