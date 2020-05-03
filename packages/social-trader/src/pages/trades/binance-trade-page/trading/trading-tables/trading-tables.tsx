@@ -4,6 +4,7 @@ import GVTab from "components/gv-tabs/gv-tab";
 import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
+import { OrderHistoryContainer } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +38,10 @@ const _TradingTables: React.FC<Props> = () => {
           <GVTab value={TABS.FUNDS} label={t("Funds")} />
         </GVTabs>
       </DefaultBlock>
-      {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
+      <div className={styles["trading-tables__tables-container"]}>
+        {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
+        {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
+      </div>
     </DefaultBlock>
   );
 };
