@@ -58,12 +58,10 @@ $view-svg-size: 15px;
     @include transition(background-color);
 
     &--clickable {
+      cursor: pointer;
       background-color: $background-chip-positive !important;
       &:hover {
         background-color: $background-pretender-level-hover !important;
-      }
-      & .table__cell {
-        cursor: pointer;
       }
     }
     &:not(.table__row--head):hover {
