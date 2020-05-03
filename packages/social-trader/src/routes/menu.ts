@@ -5,6 +5,7 @@ import { FollowIcon } from "components/icon/follow-icon";
 import { FundsIcon } from "components/icon/funds-icon";
 import { HistoryIcon } from "components/icon/history-icon";
 import { InvestIcon } from "components/icon/invest-icon";
+import { LogoIcon } from "components/icon/logo-icon";
 import { Mt5Icon } from "components/icon/mt5-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
@@ -51,7 +52,7 @@ export type TMenuItem = {
   children?: TMenuItem[];
 };
 
-export const rootMenuItem = { Icon: GVLogo, route: HOME_ROUTE };
+export const rootMenuItem = { Icon: LogoIcon, route: HOME_ROUTE };
 
 export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
