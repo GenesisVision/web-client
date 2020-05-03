@@ -1,7 +1,6 @@
 import { DepositTopOwnProps } from "components/deposit/components/deposit-top";
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 
@@ -10,7 +9,8 @@ const _InvestmentUnauthButton: React.FC<Props> = ({
   message,
   label,
   title,
-  currency
+  currency,
+  asset
 }) => {
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   return (
@@ -21,7 +21,7 @@ const _InvestmentUnauthButton: React.FC<Props> = ({
       <InvestmentUnauthPopup
         header={header}
         message={message}
-        asset={ASSET.PROGRAM}
+        asset={asset}
         title={title}
         currency={currency}
         open={isOpenUnAuth}

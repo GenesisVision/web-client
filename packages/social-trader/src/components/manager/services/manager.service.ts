@@ -75,16 +75,22 @@ export const fetchManagerFunds = (
   });
 };
 
-export const fetchManagerAssetsCount = (
-  ownerId: string
-): Promise<IAssetsCountModel> => {
+export const fetchManagerAssetsCount = ({
+  ownerId,
+  isBetaTester
+}: {
+  ownerId: string;
+  isBetaTester: boolean;
+}): Promise<IAssetsCountModel> => {
   const options = {
     ownerId,
     take: 0,
     includeWithInvestments: true
   };
   return Promise.all([
-    api.social().getFeed({ ...options, userId: ownerId }),
+    isBetaTester
+      ? api.social().getFeed({ ...options, userId: ownerId })
+      : Promise.resolve({ items: [], total: 0 }),
     api.follows().getFollowAssets(options),
     api.programs().getPrograms(options),
     api.funds().getFunds(options)

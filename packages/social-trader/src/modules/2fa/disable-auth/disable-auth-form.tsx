@@ -41,12 +41,22 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
     validationSchema: object().shape({
       [FIELDS.recoveryCode]:
         tab === TAB.RECOVERY
-          ? number().required(t("2fa-page.code-required"))
-          : number(),
+          ? string()
+              .matches(
+                /^\d{6}$/,
+                t("auth.login.two-factor.validation.two-factor-6digits")
+              )
+              .required(t("2fa-page.code-required"))
+          : string(),
       [FIELDS.twoFactorCode]:
         tab === TAB.TFA
-          ? number().required(t("2fa-page.code-required"))
-          : number(),
+          ? string()
+              .matches(
+                /^\d{6}$/,
+                t("auth.login.two-factor.validation.two-factor-6digits")
+              )
+              .required(t("2fa-page.code-required"))
+          : string(),
       [FIELDS.password]: string().required(t("2fa-page.password-required"))
     }),
     mode: "onChange"
