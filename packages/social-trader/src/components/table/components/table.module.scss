@@ -78,7 +78,12 @@ $view-svg-size: 15px;
   }
 
   &__cell {
-    @include vertical-paddings($padding-xsmall);
+    &--low {
+      @include vertical-paddings($padding-xxsmall);
+    }
+    &--medium {
+      @include vertical-paddings($padding-xsmall);
+    }
     @include font-size($font-size-common);
     @include adaptive-padding(right, $padding-xsmall, 2);
     text-align: left;
