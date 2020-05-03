@@ -8,6 +8,7 @@ import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
 import styles from "./style.module.scss";
 
 const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
+  levelColor = "#1c2730",
   url,
   alt,
   level,
@@ -49,6 +50,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
         />
         {haveLevel && (
           <div
+            style={{ background: levelColor }}
             onMouseOver={onMouseOverLevel}
             onMouseEnter={onMouseEnterLevel}
             onMouseLeave={onMouseLeaveLevel}
@@ -69,6 +71,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
 };
 
 export interface GVProgramAvatarProps {
+  levelColor?: string;
   url?: string;
   alt: string;
   level?: number;
