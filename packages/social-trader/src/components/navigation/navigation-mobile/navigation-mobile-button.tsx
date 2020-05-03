@@ -8,6 +8,8 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
 
+import "../navigation.scss";
+
 const _NavigationMobileButton: React.FC<Props> = ({
   mobileMenuItems,
   isAuthenticated,
