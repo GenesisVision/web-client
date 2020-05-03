@@ -8,7 +8,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
 .details-description {
   &__section {
-    @include background-with-avatar-level($background-color);
+    background: $background-color;
   }
 
   &__main {
