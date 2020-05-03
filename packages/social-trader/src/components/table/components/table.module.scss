@@ -41,10 +41,8 @@ $view-svg-size: 15px;
   &__toggle-icon {
     cursor: pointer;
     line-height: 0;
-    .icon {
-      width: $view-svg-size/1.2;
-      height: 18px;
-    }
+    width: $view-svg-size/1.2;
+    height: 18px;
     &:not(:last-child) {
       @include adaptive-margin(right, $view-svg-size * 2);
     }
