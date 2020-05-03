@@ -10,22 +10,6 @@
 
   &__popover {
     padding: $padding-small/2;
-    & .navigation__item {
-      display: flex;
-      align-items: center;
-      padding-bottom: $padding-xsmall;
-      margin: 0;
-      & .icon {
-        width: $font-size-small;
-        height: $font-size-small;
-      }
-      & .navigation__link {
-        font-size: $font-size-small;
-      }
-      &:last-child {
-        padding-bottom: 0;
-      }
-    }
   }
 
   &__second-level {
