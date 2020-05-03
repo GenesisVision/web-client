@@ -4,10 +4,6 @@
 @import "~shared/styles/_constants";
 
 .programs-table__cell {
-  &.table__cell {
-    @include vertical-paddings($padding-xxsmall);
-  }
-
   &--link {
     margin-bottom: 3px;
     word-break: break-all;

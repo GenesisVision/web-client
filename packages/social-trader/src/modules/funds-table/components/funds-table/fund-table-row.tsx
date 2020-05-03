@@ -38,7 +38,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   }, []);
   return (
     <TableRow>
-      <TableCell className={styles["funds-table__cell"]}>
+      <TableCell height={"small"} className={styles["funds-table__cell"]}>
         <Link to={link}>
           <AssetAvatarWithName
             url={fund.logoUrl}
@@ -99,6 +99,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
         </Profitability>
       </TableCell>
       <TableCell
+        height={"small"}
         className={classNames(
           styles["funds-table__cell"],
           styles["funds-table__cell--chart"]
