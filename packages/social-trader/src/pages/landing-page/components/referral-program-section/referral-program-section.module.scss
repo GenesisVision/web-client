@@ -10,7 +10,9 @@
     padding-top: 140px;
   }
 
-  .internal__container {
+  &__container {
+    @include container();
+
     @include media-breakpoint-tablet() {
       @include grid();
     }
@@ -78,7 +80,7 @@
     }
   }
 
-  &__adv-list.advantages-list {
+  &__adv-list {
     grid-column: 2/12;
     padding-bottom: 100px;
 

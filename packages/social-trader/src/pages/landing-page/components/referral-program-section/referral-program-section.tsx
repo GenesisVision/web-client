@@ -17,7 +17,7 @@ const ReferralProgramSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className={styles["referral-program-section"]}>
-      <div className="internal__container">
+      <div className={styles["referral-program-section__container"]}>
         <h1 className={styles["referral-program-section__title"]}>
           {t("referral-program.title")}
         </h1>
@@ -35,7 +35,7 @@ const ReferralProgramSection: React.FC = () => {
         <div className={styles["referral-program-section__img"]} />
       </div>
       <div className={styles["referral-program-section__wrapper"]}>
-        <div className="internal__container">
+        <div className={styles["referral-program-section__container"]}>
           <div className={styles["referral-program-section__list"]}>
             <h3>{t("referral-program.title-list-1")}</h3>
             <ul className="internal__list">
