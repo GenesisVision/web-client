@@ -79,4 +79,34 @@
       }
     }
   }
+
+  &--brokers {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    padding-bottom: 40px;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    @include media-breakpoint-tablet() {
+      padding-bottom: 50px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      display: block;
+      top: 150px;
+      position: sticky;
+    }
+
+    .tab-controls__item {
+      min-width: 160px;
+    }
+  }
 }

@@ -18,7 +18,7 @@ interface Props {
   currentTabId: number;
   tabsItems: TTabsItem[];
   onChange: (id: number) => void;
-  variant?: string;
+  variant?: "brokers" | "info";
 }
 
 const _TabControls: React.FC<Props> = ({
@@ -31,7 +31,8 @@ const _TabControls: React.FC<Props> = ({
   return (
     <ul
       className={classNames(styles["tab-controls"], {
-        [styles["tab-controls--info"]]: variant === "info"
+        [styles["tab-controls--info"]]: variant === "info",
+        [styles["tab-controls--brokers"]]: variant === "brokers"
       })}
     >
       {tabsItems.map((tab, index) => (

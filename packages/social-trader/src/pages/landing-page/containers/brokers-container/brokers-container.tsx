@@ -76,7 +76,7 @@ const _BrokersContainer: React.FC<Props> = ({
           currentTabId={currentTabId}
           tabsItems={brokersTabs}
           onChange={handleChange}
-          className={styles["brokers-container__controls"]}
+          variant={"brokers"}
         />
       </div>
       {renderBrokersInfo()}

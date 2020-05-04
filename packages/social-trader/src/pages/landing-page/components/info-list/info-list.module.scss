@@ -115,7 +115,7 @@
     margin-top: 20px;
 
     @include media-breakpoint-tablet() {
-      .lp-button {
+      a {
         width: 100%;
       }
     }
