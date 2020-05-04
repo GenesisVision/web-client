@@ -1,14 +1,7 @@
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
-import {
-  IRenderActionsArgs,
-  TableCardActions,
-  TableCardActionsItem,
-  TableCardFavoriteActionItem
-} from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
-import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
 import LPTableCard, {
@@ -16,7 +9,6 @@ import LPTableCard, {
   LPTableCardTableColumn
 } from "pages/landing-page/components/lp-table-card/lp-table-card";
 import * as React from "react";
-import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
@@ -33,7 +25,6 @@ const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
 const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
-  const [programState, setProgramState] = useState(program);
   const { t } = useTranslation();
   const { linkCreator, contextTitle } = useToLink();
   const linkProps = linkCreator(
@@ -41,27 +32,6 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const requestCurrency = program.balance.currency;
-
-  const handleUpdateRow = useCallback(program => {
-    setProgramState(program);
-  }, []);
-
-  const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
-    <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
-      </TableCardActionsItem>
-      {program.personalDetails && (
-        <TableCardFavoriteActionItem
-          updateRow={handleUpdateRow}
-          asset={programState}
-          assetType={ASSET.PROGRAM}
-          id={program.id}
-          isFavorite={programState.personalDetails.isFavorite}
-        />
-      )}
-    </TableCardActions>
-  );
   return (
     <LPTableCard
       level={program.level}
@@ -70,13 +40,11 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
       profit={program.statistic.profit}
       chart={program.statistic.chart}
       color={program.color}
-      hasAvatar
       title={program.title}
       subTitle={program.owner.username}
       logo={program.logoUrl}
       managerUrl={managerToPathCreator(program.owner.url, contextTitle)}
       detailsUrl={linkProps}
-      renderActions={renderActions}
       extraBlock={program.tags && <TagProgramContainer tags={program.tags} />}
       className={className}
     >

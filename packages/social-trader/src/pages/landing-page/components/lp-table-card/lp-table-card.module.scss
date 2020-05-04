@@ -8,8 +8,6 @@ $chart-width: 160px;
 $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
-$action-size: 30px;
-$action-offset-size: 5px;
 
 .lp-table-card {
   display: flex;
@@ -18,7 +16,6 @@ $action-offset-size: 5px;
   width: 100%;
   padding: $padding-xsmall $padding-xsmall 10px;
   flex-grow: 1;
-  //@include height($card-height, 1.2);
   background-color: $landing-item-bg;
   color: $main-color;
   margin: 0;
@@ -29,23 +26,16 @@ $action-offset-size: 5px;
 
   @include media-breakpoint-landscape-phone() {
     border-radius: $border-radius-middle;
-    //min-width: $card-width;
-    //width: calc(50% - #{$padding-small}/ 2);
     padding: $padding-small $padding-xsmall;
     min-width: 360px;
   }
+
   @include media-breakpoint-tablet() {
     flex-grow: 0;
     min-width: 410px;
     min-height: 440px;
     padding: 35px 35px 20px;
   }
-  //@media (min-width: 1075px) {
-  //  width: calc(33.33% - #{$padding-small}/ 2);
-  //}
-  //@media (min-width: 1400px) {
-  //  width: $card-width;
-  //}
 
   @include media-breakpoint-landscape-tablet() {
     width: auto;
@@ -57,13 +47,6 @@ $action-offset-size: 5px;
   @include media-breakpoint-large-desktop() {
     border-radius: 20px;
   }
-
-  //&--with-offset {
-  //  margin-bottom: $padding-small/2;
-  //  @include media-breakpoint-landscape-phone() {
-  //    margin-right: $padding-small/2;
-  //  }
-  //}
 
   &__buttons {
     justify-content: center;
@@ -170,21 +153,8 @@ $action-offset-size: 5px;
     flex-wrap: wrap;
     justify-content: space-between;
     flex-grow: 1;
-    //margin-left: 0;
   }
-  &__actions {
-    position: absolute;
-    right: 0;
-    top: 0;
-    cursor: pointer;
-    display: none;
 
-    & .icon,
-    & .icon svg {
-      width: $action-size;
-      height: $action-size;
-    }
-  }
   &__table {
     display: flex;
     justify-content: space-between;

@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { Center } from "components/center/center";
-import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
 import { MutedText } from "components/muted-text/muted-text";
@@ -14,7 +13,6 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SimpleChartPoint } from "gv-api-web";
-import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
@@ -22,7 +20,6 @@ import { formatValue } from "utils/formatter";
 import styles from "./lp-table-card.module.scss";
 
 export interface ITableCardContainer {
-  withOffset?: boolean;
   className?: string;
 }
 
@@ -37,15 +34,10 @@ const LpTableCard: React.FC<ITableCardProps & ITableCardContainer> = props => {
 };
 
 export const LPTableCardContainer: React.FC<ITableCardContainer> = ({
-  withOffset = true,
   children,
   className
 }) => (
-  <div
-    className={classNames(styles["lp-table-card"], className, {
-      [styles["lp-table-card--with-offset"]]: withOffset
-    })}
-  >
+  <div className={classNames(styles["lp-table-card"], className)}>
     {children}
   </div>
 );
@@ -161,13 +153,11 @@ export const LPTableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo
     logo,
     managerUrl,
     detailsUrl,
-    renderActions,
     extraBlock,
     title,
     subTitle,
     color
   }) => {
-    const { anchor, setAnchor, clearAnchor } = useAnchor();
     return (
       <LPTableCardRow>
         <RowItem>
@@ -192,12 +182,6 @@ export const LPTableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo
             )}
             <Row small>{extraBlock}</Row>
           </div>
-          {renderActions && (
-            <div className={styles["lp-table-card__actions"]}>
-              <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
-              {renderActions({ clearAnchor, anchor })}
-            </div>
-          )}
         </RowItem>
       </LPTableCardRow>
     );
@@ -251,7 +235,6 @@ interface ITableCardChartBlockProps {
 interface ITableCardTopBlockProps {
   level?: number;
   levelProgress?: number;
-  hasAvatar?: boolean;
   logo: string;
   subTitle?: string;
   title?: string;
@@ -259,10 +242,6 @@ interface ITableCardTopBlockProps {
   extraBlock?: JSX.Element;
   managerUrl?: ToType | string;
   detailsUrl?: ToType | string;
-  renderActions?: (props: {
-    clearAnchor: VoidFunction;
-    anchor: TAnchor;
-  }) => JSX.Element;
 }
 
 interface ITableCardProps
