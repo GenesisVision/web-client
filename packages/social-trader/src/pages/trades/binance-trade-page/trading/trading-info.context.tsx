@@ -7,6 +7,7 @@ import {
 } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { filterOutboundAccountInfoStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
+import { updateAccountInfo } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
@@ -80,8 +81,8 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
   }, [userStreamKey]);
 
   useEffect(() => {
-    if (!socketData) return;
-    const updatedData = { ...accountInfo, ...socketData };
+    if (!socketData || !accountInfo) return;
+    const updatedData = updateAccountInfo(accountInfo, socketData);
     setAccountInfo(updatedData);
   }, [socketData]);
 
