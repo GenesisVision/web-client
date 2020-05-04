@@ -73,6 +73,12 @@
         text-align: center;
       }
     }
+
+    &--last-is-hided {
+      @include media-breakpoint-desktop() {
+        display: none;
+      }
+    }
   }
 
   &__item-image {

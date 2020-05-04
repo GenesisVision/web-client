@@ -27,7 +27,7 @@ const ReferralProgramSection: React.FC = () => {
         <AdvantagesList
           advantagesItems={refProgItems}
           className={styles["referral-program-section__adv-list"]}
-          lastItem={renderLastItem(t)}
+          lastItem={{ element: renderLastItem(t) }}
         />
         <h2 className={styles["referral-program-section__subtitle"]}>
           {t("referral-program.subtitle-2")}

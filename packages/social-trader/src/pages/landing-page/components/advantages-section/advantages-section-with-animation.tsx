@@ -41,10 +41,7 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
   );
   return (
     <section
-      className={classNames(
-        styles["home__section"],
-        styles["home__section--bg-white"]
-      )}
+      className="home__section home__section--bg-white"
       onMouseMove={handleMouseMove}
       ref={section}
     >
@@ -56,7 +53,7 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
             //@ts-ignore
             style={{ transform: props.xy.interpolate(translate) }}
           >
-            <JoinButton href={TRADE_ROUTE}>
+            <JoinButton href={TRADE_ROUTE} circle>
               {t("landing-page:buttons.join")}
             </JoinButton>
           </animated.div>

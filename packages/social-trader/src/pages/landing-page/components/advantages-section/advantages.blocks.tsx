@@ -13,7 +13,7 @@ export const AdvantagesListContainer: React.FC<{
 }> = ({ animation }) => {
   const { t } = useTranslation();
   return (
-    <div className={styles["home__container"]}>
+    <div className="home__container">
       <div className={styles["advantages-section"]}>
         <h2 className={styles["advantages-section__title"]}>
           {t("landing-page:advantages.title")}
@@ -23,11 +23,14 @@ export const AdvantagesListContainer: React.FC<{
           className={classNames(styles["advantages-section__list"], {
             [styles["advantages-section__list--animation"]]: animation
           })}
-          lastItem={
-            <JoinButton href={TRADE_ROUTE}>
-              {t("landing-page:buttons.join")}
-            </JoinButton>
-          }
+          lastItem={{
+            element: (
+              <JoinButton href={TRADE_ROUTE}>
+                {t("landing-page:buttons.join")}
+              </JoinButton>
+            ),
+            isHided: animation
+          }}
         />
       </div>
     </div>

@@ -85,4 +85,12 @@ $pink-color-hover: lighten(#cf2877, 10%);
       text-transform: none;
     }
   }
+
+  &--circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 0;
+    line-height: 100px;
+  }
 }
