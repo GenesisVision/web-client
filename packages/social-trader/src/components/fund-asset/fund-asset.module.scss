@@ -50,8 +50,8 @@ $remove-button-color: #293842;
   }
   &--light {
     background-color: $landing-bg-gray;
-    color: $font-color;
     font-weight: 600;
+    color: $landing-item-bg;
   }
   &--remainder {
     display: flex;
