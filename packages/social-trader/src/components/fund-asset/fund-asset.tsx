@@ -12,7 +12,8 @@ export enum FUND_ASSET_TYPE {
   LARGE = "large",
   MIDDLE = "middle",
   SHORT = "short",
-  TEXT = "text"
+  TEXT = "text",
+  LIGHT = "light"
 }
 
 const _FundAsset: React.FC<Props> = ({
@@ -60,7 +61,8 @@ const _FundAsset: React.FC<Props> = ({
               styles["fund-asset--default"],
               className,
               {
-                [styles["fund-asset--large"]]: type === FUND_ASSET_TYPE.LARGE
+                [styles["fund-asset--large"]]: type === FUND_ASSET_TYPE.LARGE,
+                [styles["fund-asset--light"]]: type === FUND_ASSET_TYPE.LIGHT
               }
             )}
           >

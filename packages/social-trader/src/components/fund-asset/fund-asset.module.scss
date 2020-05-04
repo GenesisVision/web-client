@@ -48,6 +48,11 @@ $remove-button-color: #293842;
     background: rgba(255, 255, 255, 0.02);
     color: $text-light-color;
   }
+  &--light {
+    background-color: $landing-bg-gray;
+    color: $font-color;
+    font-weight: 600;
+  }
   &--remainder {
     display: flex;
     align-items: center;
