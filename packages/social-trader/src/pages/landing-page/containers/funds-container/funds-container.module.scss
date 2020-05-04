@@ -30,12 +30,16 @@
       animation-fill-mode: forwards;
 
       &--hide {
-        animation-name: hide;
+        :local {
+          animation-name: hide;
+        }
       }
 
       &--show {
         opacity: 0;
-        animation-name: show;
+        :local {
+          animation-name: show;
+        }
       }
     }
 
@@ -102,22 +106,24 @@
   }
 }
 
-@keyframes hide {
-  0% {
-    opacity: 1;
+:local {
+  @keyframes hide {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
   }
 
-  100% {
-    opacity: 0;
-  }
-}
+  @keyframes show {
+    0% {
+      opacity: 0;
+    }
 
-@keyframes show {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
+    100% {
+      opacity: 1;
+    }
   }
 }

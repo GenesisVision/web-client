@@ -27,4 +27,51 @@
       padding-top: 0;
     }
   }
+
+  &--is-mobile {
+    .seo-list__item {
+      opacity: 0;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+
+      :local {
+        animation-name: appear;
+      }
+    }
+
+    .seo-list__link {
+      transform: translateX(-2%);
+      color: rgba($main-color, 0.5);
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+
+      :local {
+        animation-name: slideIn;
+      }
+
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+:local {
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-2%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }

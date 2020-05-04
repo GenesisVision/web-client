@@ -5,8 +5,12 @@ import React from "react";
 
 import styles from "./seo-list.module.scss";
 
-const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
-  <ul className={classNames(styles["seo-list"], className)}>
+const _SeoList: React.FC<Props> = ({ seoItems, className, isMobile }) => (
+  <ul
+    className={classNames(styles["seo-list"], className, {
+      [styles["seo-list--is-mobile"]]: isMobile
+    })}
+  >
     {seoItems.map((item: any, index: number) => (
       <SeoItem
         key={index}
@@ -21,6 +25,7 @@ const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
 export interface Props {
   seoItems: TNavFooter[];
   className?: string;
+  isMobile?: boolean;
 }
 
 const SeoList = React.memo(_SeoList);

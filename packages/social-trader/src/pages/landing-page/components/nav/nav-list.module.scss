@@ -97,7 +97,12 @@
       @include media-breakpoint-desktop() {
         margin-right: 0;
         opacity: 0;
-        animation: 0.5s appear forwards;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+
+        :local {
+          animation-name: appear;
+        }
       }
     }
 
@@ -128,13 +133,51 @@
   &--sub-open {
     height: auto;
   }
+
+  &--is-mobile {
+    .nav-list__item {
+      opacity: 0;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+
+      :local {
+        animation-name: appear;
+      }
+    }
+
+    .nav-list__link {
+      transform: translateX(-2%);
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+
+      :local {
+        animation-name: slideIn;
+      }
+
+      @include media-breakpoint-tablet() {
+        padding-top: 0;
+        padding-bottom: 36px;
+      }
+    }
+  }
 }
 
-@keyframes appear {
-  0% {
-    opacity: 0;
+:local {
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
-  100% {
-    opacity: 1;
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-2%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 }
