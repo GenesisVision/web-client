@@ -1,0 +1,16 @@
+@import "~shared/styles/_sizes";
+
+.funds {
+  &__table {
+    width: 100%;
+    & th {
+      text-align: left;
+      @include adaptive-full-padding($padding-xxsmall);
+      font-weight: normal;
+    }
+    & td {
+      @include adaptive-full-padding($padding-xxsmall);
+      font-family: "DIN Pro Regular", sans-serif;
+    }
+  }
+}
