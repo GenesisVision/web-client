@@ -9,12 +9,19 @@ interface Props {
   items: TIconLinks[];
   className?: string;
   lightTheme?: boolean;
+  socialTheme?: boolean;
 }
 
-const _IconList: React.FC<Props> = ({ items, className, lightTheme }) => (
+const _IconList: React.FC<Props> = ({
+  items,
+  className,
+  lightTheme,
+  socialTheme
+}) => (
   <ul
     className={classNames(styles["icon-list"], className, {
-      [styles["icon-list--color-gray"]]: lightTheme
+      [styles["icon-list--color-gray"]]: lightTheme,
+      [styles["icon-list--social"]]: socialTheme
     })}
   >
     {items.map((item: any, index: number) => (
