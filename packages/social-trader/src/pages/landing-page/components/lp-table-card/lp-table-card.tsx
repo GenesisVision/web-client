@@ -21,6 +21,7 @@ import styles from "./lp-table-card.module.scss";
 
 export interface ITableCardContainer {
   className?: string;
+  whiteTheme?: boolean;
 }
 
 const LpTableCard: React.FC<ITableCardProps & ITableCardContainer> = props => {
@@ -35,9 +36,14 @@ const LpTableCard: React.FC<ITableCardProps & ITableCardContainer> = props => {
 
 export const LPTableCardContainer: React.FC<ITableCardContainer> = ({
   children,
+  whiteTheme,
   className
 }) => (
-  <div className={classNames(styles["lp-table-card"], className)}>
+  <div
+    className={classNames(styles["lp-table-card"], className, {
+      [styles["lp-table-card--white"]]: whiteTheme
+    })}
+  >
     {children}
   </div>
 );

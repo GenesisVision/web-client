@@ -8,6 +8,7 @@ $chart-width: 160px;
 $card-width: 312px;
 $card-height: 372px;
 $card-avatar-size: 80px;
+$font-color: #100e3b;
 
 .lp-table-card {
   display: flex;
@@ -202,7 +203,6 @@ $card-avatar-size: 80px;
 
     @include media-breakpoint-tablet() {
       width: $chart-width;
-      flex-grow: 1;
     }
   }
 
@@ -228,5 +228,44 @@ $card-avatar-size: 80px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  &--white {
+    background-color: $main-color;
+    color: $font-color;
+
+    @include media-breakpoint-tablet() {
+      padding-bottom: 35px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      min-width: 385px;
+      min-height: 415px;
+    }
+
+    @include media-breakpoint-desktop() {
+      min-width: 420px;
+      min-height: 450px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      border-radius: 20px;
+      min-width: 440px;
+      min-height: 500px;
+    }
+
+    .lp-table-card__avatar {
+      @include media-breakpoint-tablet() {
+        margin-bottom: 30px;
+      }
+    }
+
+    .lp-table-card__title {
+      color: $font-color;
+    }
+
+    .lp-table-card__name {
+      color: rgba($row-color, 0.5);
+    }
   }
 }
