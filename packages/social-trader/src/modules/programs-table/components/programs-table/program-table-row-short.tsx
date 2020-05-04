@@ -60,7 +60,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   }, []);
   return (
     <TableRow>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell height={"small"} className={styles["programs-table__cell"]}>
         <Link to={programLinkProps}>
           <AssetAvatarWithName
             url={logoUrl}
@@ -163,6 +163,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell
+        height={"small"}
         className={classNames(
           styles["programs-table__cell"],
           styles["programs-table__cell--chart"]

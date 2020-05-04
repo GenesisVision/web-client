@@ -16,6 +16,7 @@ const _TransactionAsset: React.FC<Props> = ({ data, url }) => {
     >
       <Link to={programLinkProps}>
         <AssetAvatarWithName
+          levelColor={"#1f2b36"}
           name={
             <>
               <div className={styles["transaction-asset__title"]}>

@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
 import { InputImageCropper } from "components/form/input-image/input-image-cropper";
-import "cropperjs/dist/cropper.css";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";

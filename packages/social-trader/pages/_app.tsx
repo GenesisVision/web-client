@@ -1,3 +1,4 @@
+import "cropperjs/dist/cropper.css";
 import withHistoryProvider from "decorators/history-provider/with-history-provider";
 import withReduxStore from "decorators/with-redux-store";
 import { appWithTranslation } from "i18n";

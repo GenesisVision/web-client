@@ -133,6 +133,7 @@ export const TableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
   ({ logo, hasAvatar, url, levelProgress, level, alt, color }) => {
     const Avatar = hasAvatar ? (
       <AssetAvatar
+        levelColor={"#212c34"}
         url={logo}
         levelProgress={levelProgress}
         level={level}

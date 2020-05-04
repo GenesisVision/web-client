@@ -10,8 +10,6 @@
 }
 
 .transaction-asset {
-  @include background-with-avatar-level($secondary-background-color);
-
   &__title {
     font-size: $font-size-h4;
   }

@@ -19,7 +19,7 @@ $action-offset-size: 5px;
   padding: $padding-xsmall;
   flex-grow: 1;
   @include height($card-height, 1.2);
-  @include background-with-avatar-level($row-color);
+  background: $row-color;
   @include media-breakpoint-landscape-phone() {
     border-radius: $border-radius-middle;
     min-width: $card-width;

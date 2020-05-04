@@ -9,9 +9,6 @@ $multiplier: 1.5;
 $chart-width: 160px;
 
 .funds-table__cell {
-  &.table__cell {
-    @include vertical-paddings($padding-xxsmall);
-  }
   &--amount {
     white-space: nowrap;
   }

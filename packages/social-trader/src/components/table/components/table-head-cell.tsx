@@ -23,6 +23,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
     <th
       className={classNames(
         styles["table__cell"],
+        styles["table__cell--medium"],
         styles["table__cell--head"],
         className
       )}
