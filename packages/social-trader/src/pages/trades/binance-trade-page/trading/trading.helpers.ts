@@ -1,12 +1,37 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  Account,
+  AssetBalance,
+  TradeCurrency
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import { formatValue } from "utils/formatter";
+import { AnyObjectType } from "utils/types";
 
 export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
+};
+
+const normalizeBalanceList = (
+  list: AssetBalance[]
+): { [keys: string]: AssetBalance } => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => (initObject[item.asset] = item));
+  return initObject;
+};
+
+export const updateAccountInfo = (currentData: Account, updates: Account) => {
+  const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
+  const normalizedUpdatesBalances = normalizeBalanceList(
+    updates.balances || []
+  );
+  const balances = Object.values({
+    ...normalizedCurrentBalances,
+    ...normalizedUpdatesBalances
+  });
+  return { ...currentData, ...updates, balances };
 };
 
 export const parseSymbolFromUrlParam = (param: string): SymbolState => {
@@ -25,7 +50,7 @@ export const getTextColor = (value: number): ColoredTextColor | undefined => {
 export const getSymbolFromState = ({
   quoteAsset,
   baseAsset
-}: SymbolState): string => baseAsset + quoteAsset;
+}: SymbolState): string => getSymbol(baseAsset, quoteAsset);
 
 export const getSymbol = (base: TradeCurrency, quote: TradeCurrency): string =>
   base + quote;
