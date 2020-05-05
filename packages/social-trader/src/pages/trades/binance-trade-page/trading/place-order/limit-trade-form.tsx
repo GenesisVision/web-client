@@ -4,6 +4,7 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
 import {
   Account,
   ExchangeInfo,
@@ -146,13 +147,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      <DialogButtons>
-        <SubmitButton color={direction === "SELL" ? "danger" : "primary"} wide>
-          <>
-            {direction} {baseAsset}
-          </>
-        </SubmitButton>
-      </DialogButtons>
+      <PlaceOrderSubmitButton side={direction} asset={baseAsset} />
     </HookForm>
   );
 };
