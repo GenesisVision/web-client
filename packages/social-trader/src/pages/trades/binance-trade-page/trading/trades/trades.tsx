@@ -1,4 +1,4 @@
-import { DefaultBlock } from "components/default.block/default.block";
+import { MutedText } from "components/muted-text/muted-text";
 import { TradesRow } from "pages/trades/binance-trade-page/trading/trades/trades-row";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -16,13 +16,21 @@ const _Trades: React.FC<Props> = ({ items }) => {
   } = useContext(TradingInfoContext);
   return (
     <div className={styles["trades__container"]}>
-      <table className={styles["trades__table"]}>
-        <thead>
-          <th>Price ({baseAsset})</th>
-          <th>Amount ({quoteAsset})</th>
-          <th>Time</th>
-        </thead>
-      </table>
+      <div className={styles["trades__header-container"]}>
+        <table className={styles["trades__table"]}>
+          <thead>
+            <th>
+              <MutedText small>Price ({baseAsset})</MutedText>
+            </th>
+            <th>
+              <MutedText small>Amount ({quoteAsset})</MutedText>
+            </th>
+            <th>
+              <MutedText small>Time</MutedText>
+            </th>
+          </thead>
+        </table>
+      </div>
       <div className={styles["trades__items-container"]}>
         <table className={styles["trades__table"]}>
           <tbody>

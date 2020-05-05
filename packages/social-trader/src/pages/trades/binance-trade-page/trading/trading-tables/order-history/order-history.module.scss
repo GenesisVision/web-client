@@ -1,8 +1,7 @@
-@import "~shared/styles/_constants";
-
+$COLUMNS_COUNT: 8;
 $column-width: 100px;
 
-.open-orders {
+.order-history {
   &__table {
     & th,
     & td {

@@ -3,7 +3,9 @@ import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
+import { FundsContainer } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.container";
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
+import { OrderHistoryContainer } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +13,7 @@ import styles from "./trading-tables.module.scss";
 
 enum TABS {
   OPEN_ORDERS = "OPEN_ORDERS",
-  ORDERS_HISTORY = "ORDERS_HISTORY",
+  ORDER_HISTORY = "ORDER_HISTORY",
   TRADE_HISTORY = "TRADE_HISTORY",
   FUNDS = "FUNDS"
 }
@@ -32,12 +34,16 @@ const _TradingTables: React.FC<Props> = () => {
       <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
-          <GVTab value={TABS.ORDERS_HISTORY} label={t("Orders history")} />
+          <GVTab value={TABS.ORDER_HISTORY} label={t("Order history")} />
           <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
           <GVTab value={TABS.FUNDS} label={t("Funds")} />
         </GVTabs>
       </DefaultBlock>
-      {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
+      <div className={styles["trading-tables__tables-container"]}>
+        {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
+        {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
+        {tab === TABS.FUNDS && <FundsContainer />}
+      </div>
     </DefaultBlock>
   );
 };

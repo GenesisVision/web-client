@@ -7,18 +7,25 @@
   &__container {
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__header-container {
+    width: calc(100% - 5px);
   }
   &__items-container {
     height: 100%;
     overflow-y: auto;
   }
   &__table {
-    font-family: "DIN Pro Regular", sans-serif;
-    @include trade-table();
-    width: 100%;
+    @include terminal-table(small);
     & th,
-    td {
+    & td {
       width: 33.3%;
+    }
+    & th:last-child,
+    & td:last-child {
+      text-align: right;
     }
   }
 }

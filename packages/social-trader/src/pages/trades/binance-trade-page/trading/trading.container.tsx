@@ -49,12 +49,12 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
             <MarketWatchBlock />
           </ResponsiveContainer>
         </div>
+        <div className={styles["tables-grid-elem"]}>
+          <TradingTables />
+        </div>
       </TradingTickerContextProvider>
       <div className={styles["chart-grid-elem"]}>
         <ChartBlock />
-      </div>
-      <div className={styles["tables-grid-elem"]}>
-        <TradingTables />
       </div>
       <TradingPriceContextProvider>
         <div className={styles["order-book-grid-elem"]}>

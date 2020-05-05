@@ -199,14 +199,26 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
-@mixin trade-table() {
+@mixin terminal-table($size) {
+  width: 100%;
+  border-spacing: 0;
   & th {
     text-align: left;
-    font-size: $font-size-xxsmall;
-    font-weight: 300;
+    font-weight: normal;
+    @if $size == middle {
+      font-size: $font-size-xsmall;
+    }
+    @if $size == small {
+      font-size: $font-size-xxsmall;
+    }
   }
-  & td,
-  & .muted-text {
-    font-size: $font-size-xsmall;
+  & td {
+    font-family: "DIN Pro Regular", sans-serif;
+    @if $size == middle {
+      font-size: $font-size-small;
+    }
+    @if $size == small {
+      font-size: $font-size-xsmall;
+    }
   }
 }

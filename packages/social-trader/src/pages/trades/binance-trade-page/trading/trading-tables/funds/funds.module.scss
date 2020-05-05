@@ -1,8 +1,8 @@
-@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
 
 $column-width: 100px;
 
-.open-orders {
+.funds {
   &__table {
     & th,
     & td {

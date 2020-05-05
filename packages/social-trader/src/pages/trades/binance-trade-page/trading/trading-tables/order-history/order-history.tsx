@@ -1,23 +1,23 @@
 import { MutedText } from "components/muted-text/muted-text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { OrderHistoryRow } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history-row";
+import { ORDER_HISTORY_TABLE_COLUMNS } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { OpenOrdersRow } from "./open-orders-row";
-import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
-import styles from "./open-orders.module.scss";
+import styles from "./order-history.module.scss";
 
 interface Props {
-  items?: QueryOrderResult[];
+  items: QueryOrderResult[];
 }
 
-export const OpenOrders: React.FC<Props> = ({ items }) => {
+export const OrderHistory: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
   return (
     <TradeTable
-      className={styles["open-orders__table"]}
-      columns={OPEN_ORDERS_TABLE_COLUMNS}
+      className={styles["order-history__table"]}
+      columns={ORDER_HISTORY_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={column => (
         <th>
@@ -34,7 +34,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         side,
         price
       }: QueryOrderResult) => (
-        <OpenOrdersRow
+        <OrderHistoryRow
           orderId={orderId}
           time={time}
           symbol={symbol}

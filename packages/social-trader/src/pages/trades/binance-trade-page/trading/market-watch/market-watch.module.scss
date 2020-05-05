@@ -2,33 +2,42 @@
 @import "~shared/styles/_constants";
 
 .market-watch {
-  @include trade-table();
+  @include terminal-table(small);
   height: 100%;
   display: flex;
   flex-direction: column;
 
-  &__row {
-    font-family: "DIN Pro Regular", sans-serif;
+  &__table-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
-  &__table {
-    width: 100%;
+  &__header-container {
+    width: calc(100% - 5px);
   }
 
   &__items-container {
+    height: 100%;
     overflow-y: auto;
   }
 
-  &__th {
-    text-align: left;
-    cursor: pointer;
+  &__table {
+    @include terminal-table(small);
+    & th,
+    & td {
+      width: 33.3%;
+    }
+    & th:last-child,
+    & td:last-child {
+      text-align: right;
+    }
+  }
 
+  &__th {
+    cursor: pointer;
     &--asc,
     &--desc {
-      span {
-        opacity: 1;
-      }
-
       position: relative;
 
       &::before {
@@ -40,12 +49,6 @@
       &::after {
         @include transition(width);
         @extend %sortable-border-icon;
-      }
-    }
-
-    &--right {
-      &.market-watch__th {
-        text-align: right;
       }
     }
 

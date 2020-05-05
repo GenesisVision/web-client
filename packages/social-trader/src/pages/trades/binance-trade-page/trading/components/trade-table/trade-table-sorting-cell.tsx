@@ -1,24 +1,26 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
 import {
   SORTING_DIRECTION,
   switchDirection
 } from "components/table/helpers/sorting.helpers";
-import { SortingType } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
+import { AnyObjectType } from "utils/types";
+
+import { TradeTableSortingType } from "./table-trade.helpers";
+import styles from "./trade-table.module.scss";
 
 interface Props {
+  right?: boolean;
   dataType: "number" | "string";
-  setSorting: (sorting: SortingType) => void;
-  field: keyof MergedTickerSymbolType;
-  sorting: SortingType;
+  setSorting: (sorting: TradeTableSortingType) => void;
+  field: keyof AnyObjectType;
+  sorting: TradeTableSortingType;
 }
 
-export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
-  ({ dataType, field, sorting, children, setSorting }) => {
+export const TradeTableHeaderCell: React.FC<Props> = React.memo(
+  ({ right, dataType, field, sorting, children, setSorting }) => {
     const handleChangeSorting = useCallback(
-      (field: keyof MergedTickerSymbolType) => () => {
+      (field: keyof AnyObjectType) => () => {
         const direction =
           field !== sorting.field
             ? sorting.direction
@@ -30,18 +32,20 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames("market-watch__th")}
+        className={classNames({
+          [styles["trading-table-sorting-cell--right"]]: right
+        })}
         onClick={handleChangeSorting(field)}
       >
         <span
           className={classNames({
-            "market-watch__th--asc":
+            [styles["trading-table-sorting-cell--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
-            "market-watch__th--desc":
+            [styles["trading-table-sorting-cell--desc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.DESC
           })}
         >
-          <MutedText small> {children}</MutedText>
+          {children}
         </span>
       </th>
     );

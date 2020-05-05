@@ -22,6 +22,8 @@ import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpe
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useMemo, useState } from "react";
 
+import styles from "./market-watch.module.scss";
+
 interface Props {
   items: MergedTickerSymbolType[];
 }
@@ -113,8 +115,8 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           ))}
         </Select>
       </Row>
-      <Row small onlyOffset className="market-watch__items-container">
-        <table className="market-watch__table">
+      <Row small className={styles["market-watch__header-container"]}>
+        <table className={styles["market-watch__table"]}>
           <thead>
             <MarketWatchHeaderCell
               dataType={"string"}
@@ -134,7 +136,6 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
             </MarketWatchHeaderCell>
             {column === CHANGE_COLUMN ? (
               <MarketWatchHeaderCell
-                right
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -144,7 +145,6 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
-                right
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -154,6 +154,10 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               </MarketWatchHeaderCell>
             )}
           </thead>
+        </table>
+      </Row>
+      <div className={styles["market-watch__items-container"]}>
+        <table className={styles["market-watch__table"]}>
           <tbody>
             {items
               .filter(filteringFunction)
@@ -185,7 +189,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               )}
           </tbody>
         </table>
-      </Row>
+      </div>
     </>
   );
 };
