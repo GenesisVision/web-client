@@ -13,6 +13,7 @@ const TableCell: React.FC<Props> = ({
   return (
     <td
       className={classNames(styles["table__cell"], className, {
+        [styles["table__cell--medium"]]: height === "medium",
         [styles["table__cell--low"]]: height === "small"
       })}
     >
