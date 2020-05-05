@@ -7,6 +7,7 @@ import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { MarketTradeFormContainer } from "pages/trades/binance-trade-page/trading/place-order/market-trade-form.container";
 import { tradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
@@ -47,7 +48,7 @@ const _PlaceOrder: React.FC<Props> = () => {
         authData
       });
     },
-    [authData, baseAsset, quoteAsset, side]
+    [authData, baseAsset, quoteAsset, side, tab]
   );
 
   const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
@@ -88,6 +89,15 @@ const _PlaceOrder: React.FC<Props> = () => {
       <Row>
         {tab === "LIMIT" && (
           <LimitTradeFormContainer
+            outerPrice={+price}
+            onSubmit={handleSubmit}
+            direction={side}
+            baseAsset={baseAsset}
+            quoteAsset={quoteAsset}
+          />
+        )}
+        {tab === "MARKET" && (
+          <MarketTradeFormContainer
             outerPrice={+price}
             onSubmit={handleSubmit}
             direction={side}
