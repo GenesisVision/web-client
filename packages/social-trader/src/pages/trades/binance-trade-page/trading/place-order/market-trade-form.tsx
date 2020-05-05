@@ -1,9 +1,8 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
-import { DialogButtons } from "components/dialog/dialog-buttons";
+import FormError from "components/form/form-error/form-error";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
-import { SubmitButton } from "components/submit-button/submit-button";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
 import {
   Account,
@@ -26,7 +25,7 @@ import {
   usePlaceOrderInfo
 } from "./place-order.helpers";
 
-export interface ILimitTradeFormProps {
+export interface IMarketTradeFormProps {
   outerPrice: number;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -34,7 +33,7 @@ export interface ILimitTradeFormProps {
   onSubmit: (values: ITradeFormValues) => any;
 }
 
-const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
+const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
 }> = ({
@@ -79,10 +78,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       minQuantity: +minQty,
       minNotional: +minNotional
     }),
-    defaultValues: { price: outerPrice },
     mode: "onChange"
   });
-  const { watch, setValue, reset } = form;
+  const { watch, setValue, reset, errors } = form;
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
@@ -112,7 +110,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <Row>
+      <Row hide>
         <HookFormAmountField
           autoFocus={false}
           label={t("Price")}
@@ -120,6 +118,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.price}
         />
       </Row>
+      <StatisticItemInner label={t("Price")}>
+        {t("Market watch")}
+      </StatisticItemInner>
       <Row>
         <HookFormAmountField
           autoFocus={false}
@@ -128,28 +129,26 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.quantity}
         />
       </Row>
-      <Row wide onlyOffset>
-        <Slider
-          dots
-          min={0}
-          max={RANGE_MARKS.length - 1}
-          marks={RANGE_MARKS}
-          value={sliderValue}
-          onChange={setSliderValue}
-        />
-      </Row>
-      <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={t("Total")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-        />
-      </Row>
+      {errors.total?.message && (
+        <Row>
+          <FormError error={errors.total.message} />
+        </Row>
+      )}
+      {direction === "SELL" && (
+        <Row wide onlyOffset>
+          <Slider
+            dots
+            min={0}
+            max={RANGE_MARKS.length - 1}
+            marks={RANGE_MARKS}
+            value={sliderValue}
+            onChange={setSliderValue}
+          />
+        </Row>
+      )}
       <PlaceOrderSubmitButton side={direction} asset={baseAsset} />
     </HookForm>
   );
 };
 
-export const LimitTradeForm = React.memo(_LimitTradeForm);
+export const MarketTradeForm = React.memo(_MarketTradeForm);
