@@ -5,9 +5,11 @@ import {
   Depth,
   ExchangeInfo,
   OrderSide,
+  OrderType,
   QueryOrderResult,
   Ticker,
-  Trade
+  Trade,
+  TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import {
@@ -16,13 +18,12 @@ import {
   requestService,
   TimeInForce
 } from "services/request.service";
-import { formatValue } from "utils/formatter";
 
 export interface TradeRequest {
-  symbol: string;
+  symbol: TradeCurrency;
   price: number;
   quantity: number;
-  type: string;
+  type: OrderType;
 }
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
@@ -141,9 +142,9 @@ export const postBuy = ({
     {
       symbol,
       type,
-      price: String(price),
+      price: type === "LIMIT" ? String(price) : undefined,
       quantity: String(quantity),
-      timeInForce: TimeInForce.GTC,
+      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
       side: "BUY"
     },
     authData
@@ -160,9 +161,9 @@ export const postSell = ({
     {
       symbol,
       type,
-      price: String(price),
+      price: type === "LIMIT" ? String(price) : undefined,
       quantity: String(quantity),
-      timeInForce: TimeInForce.GTC,
+      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
       side: "SELL"
     },
     authData
