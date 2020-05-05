@@ -86,29 +86,36 @@ export const PROGRAMS_COLUMNS: SortingColumn[] = [
   },
   {
     name: "equity",
-    sortingName: "ByEquity"
+    sortingName: "ByEquity",
+    tooltip: true
   },
   {
     name: "investors",
-    sortingName: "ByInvestors"
+    sortingName: "ByInvestors",
+    tooltip: true
   },
   {
-    name: "available-to-invest"
+    name: "available-to-invest",
+    tooltip: true
   },
   {
     name: "period",
-    sortingName: " ByPeriod"
+    sortingName: " ByPeriod",
+    tooltip: true
   },
   {
-    name: "age"
+    name: "age",
+    tooltip: true
   },
   {
     name: "drawdown",
-    sortingName: "ByDrawdown"
+    sortingName: "ByDrawdown",
+    tooltip: true
   },
   {
     name: "profit",
-    sortingName: "ByProfit"
+    sortingName: "ByProfit",
+    tooltip: true
   },
   {
     name: "chart"
