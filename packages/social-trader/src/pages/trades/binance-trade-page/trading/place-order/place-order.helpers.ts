@@ -28,16 +28,16 @@ type PlaceOrderFormSetValueType = (
   shouldValidate?: boolean
 ) => void;
 
-export enum LIMIT_FORM_FIELDS {
+export enum TRADE_FORM_FIELDS {
   price = "price",
   quantity = "quantity",
   total = "total"
 }
 
-export interface ILimitTradeFormValues {
-  [LIMIT_FORM_FIELDS.price]: number;
-  [LIMIT_FORM_FIELDS.quantity]: number;
-  [LIMIT_FORM_FIELDS.total]: number;
+export interface ITradeFormValues {
+  [TRADE_FORM_FIELDS.price]: number;
+  [TRADE_FORM_FIELDS.quantity]: number;
+  [TRADE_FORM_FIELDS.total]: number;
 }
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
@@ -340,21 +340,21 @@ export const limitValidationSchema = ({
   minNotional: number;
 }) =>
   object().shape({
-    [LIMIT_FORM_FIELDS.price]: tradeNumberShape({
+    [TRADE_FORM_FIELDS.price]: tradeNumberShape({
       t,
       min: minPrice,
       max: maxPrice,
       divider: tickSize,
       currency: quoteAsset
     }),
-    [LIMIT_FORM_FIELDS.quantity]: tradeNumberShape({
+    [TRADE_FORM_FIELDS.quantity]: tradeNumberShape({
       t,
       min: minQuantity,
       max: maxQuantity,
       divider: stepSize,
       currency: baseAsset
     }),
-    [LIMIT_FORM_FIELDS.total]: number()
+    [TRADE_FORM_FIELDS.total]: number()
       .min(
         minNotional,
         t(

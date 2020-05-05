@@ -16,10 +16,10 @@ import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
 import {
-  ILimitTradeFormValues,
-  LIMIT_FORM_FIELDS,
+  ITradeFormValues,
   limitValidationSchema,
   RANGE_MARKS,
+  TRADE_FORM_FIELDS,
   usePlaceOrderAutoFill,
   usePlaceOrderFormReset,
   usePlaceOrderInfo
@@ -30,7 +30,7 @@ export interface ILimitTradeFormProps {
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
   direction: OrderSide;
-  onSubmit: (values: ILimitTradeFormValues) => any;
+  onSubmit: (values: ITradeFormValues) => any;
 }
 
 const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
@@ -64,7 +64,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     exchangeInfo
   });
 
-  const form = useForm<ILimitTradeFormValues>({
+  const form = useForm<ITradeFormValues>({
     validationSchema: limitValidationSchema({
       t,
       quoteAsset,
@@ -94,13 +94,13 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     side: direction,
     setValue,
     balances: accountInfo.balances,
-    quantityName: LIMIT_FORM_FIELDS.quantity,
-    totalName: LIMIT_FORM_FIELDS.total
+    quantityName: TRADE_FORM_FIELDS.quantity,
+    totalName: TRADE_FORM_FIELDS.total
   });
 
   usePlaceOrderAutoFill({
-    totalName: LIMIT_FORM_FIELDS.total,
-    quantityName: LIMIT_FORM_FIELDS.quantity,
+    totalName: TRADE_FORM_FIELDS.total,
+    quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,
     tickSize,
     price,
@@ -116,7 +116,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           autoFocus={false}
           label={t("Price")}
           currency={quoteAsset}
-          name={LIMIT_FORM_FIELDS.price}
+          name={TRADE_FORM_FIELDS.price}
         />
       </Row>
       <Row>
@@ -124,7 +124,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           autoFocus={false}
           label={t("Amount")}
           currency={baseAsset}
-          name={LIMIT_FORM_FIELDS.quantity}
+          name={TRADE_FORM_FIELDS.quantity}
         />
       </Row>
       <Row wide onlyOffset>
@@ -143,7 +143,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           isAllowed={isAllow("BTC")}
           label={t("Total")}
           currency={quoteAsset}
-          name={LIMIT_FORM_FIELDS.total}
+          name={TRADE_FORM_FIELDS.total}
         />
       </Row>
       <DialogButtons>
