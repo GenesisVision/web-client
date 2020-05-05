@@ -38,14 +38,15 @@ $order-book-row-height: 16px;
   }
 
   &__table {
-    font-family: "DIN Pro Regular", sans-serif;
-    @include trade-table();
-    width: 100%;
-    border-spacing: 0;
+    @include terminal-table(small);
 
     & td,
     th {
       width: 33.3%;
+    }
+    & th:last-child,
+    & td:last-child {
+      text-align: right;
     }
   }
 

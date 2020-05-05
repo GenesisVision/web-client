@@ -1,23 +1,30 @@
-import Table from "components/table/components/table";
+import { MutedText } from "components/muted-text/muted-text";
+import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { OpenOrdersRow } from "./open-orders-row";
 import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
+import styles from "./open-orders.module.scss";
 
 interface Props {
-  items: QueryOrderResult[];
+  items?: QueryOrderResult[];
 }
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
   return (
-    <Table
+    <TradeTable
+      className={styles["open-orders__table"]}
       columns={OPEN_ORDERS_TABLE_COLUMNS}
       items={items}
-      renderHeader={column => <span>{t(`${column.name}`)}</span>}
-      renderBodyRow={({
+      renderHeaderCell={column => (
+        <th>
+          <MutedText>{t(`${column.name}`)}</MutedText>
+        </th>
+      )}
+      renderRow={({
         executedQty,
         origQty,
         orderId,

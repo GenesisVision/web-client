@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
@@ -158,9 +159,15 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       <Row small>
         <table className={styles["order-book__table"]}>
           <thead>
-            <th>Price ({baseAsset})</th>
-            <th>Amount ({quoteAsset})</th>
-            <th>Total</th>
+            <th>
+              <MutedText small>Price ({baseAsset})</MutedText>
+            </th>
+            <th>
+              <MutedText small>Amount ({quoteAsset})</MutedText>
+            </th>
+            <th>
+              <MutedText small>Total</MutedText>
+            </th>
           </thead>
         </table>
       </Row>

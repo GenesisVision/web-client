@@ -1,9 +1,12 @@
-import Table from "components/table/components/table";
+import { MutedText } from "components/muted-text/muted-text";
+import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { OrderHistoryRow } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history-row";
 import { ORDER_HISTORY_TABLE_COLUMNS } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import styles from "./order-history.module.scss";
 
 interface Props {
   items: QueryOrderResult[];
@@ -12,11 +15,16 @@ interface Props {
 export const OrderHistory: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
   return (
-    <Table
+    <TradeTable
+      className={styles["order-history__table"]}
       columns={ORDER_HISTORY_TABLE_COLUMNS}
       items={items}
-      renderHeader={column => <span>{t(`${column.name}`)}</span>}
-      renderBodyRow={({
+      renderHeaderCell={column => (
+        <th>
+          <MutedText>{t(`${column.name}`)}</MutedText>
+        </th>
+      )}
+      renderRow={({
         executedQty,
         origQty,
         orderId,

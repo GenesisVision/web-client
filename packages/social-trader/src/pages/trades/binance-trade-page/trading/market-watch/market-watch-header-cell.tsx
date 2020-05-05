@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { MutedText } from "components/muted-text/muted-text";
 import {
   SORTING_DIRECTION,
   switchDirection
@@ -8,7 +9,6 @@ import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/
 import React, { useCallback } from "react";
 
 interface Props {
-  right?: boolean;
   dataType: "number" | "string";
   setSorting: (sorting: SortingType) => void;
   field: keyof MergedTickerSymbolType;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
-  ({ right, dataType, field, sorting, children, setSorting }) => {
+  ({ dataType, field, sorting, children, setSorting }) => {
     const handleChangeSorting = useCallback(
       (field: keyof MergedTickerSymbolType) => () => {
         const direction =
@@ -30,9 +30,7 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames("market-watch__th", {
-          "market-watch__th--right": right
-        })}
+        className={classNames("market-watch__th")}
         onClick={handleChangeSorting(field)}
       >
         <span
@@ -43,7 +41,7 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
               isSelected && sorting.direction === SORTING_DIRECTION.DESC
           })}
         >
-          {children}
+          <MutedText small> {children}</MutedText>
         </span>
       </th>
     );

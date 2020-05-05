@@ -1,5 +1,7 @@
 import { MutedText } from "components/muted-text/muted-text";
+import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { FundsRow } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds-row";
+import { FUNDS_TABLE_COLUMNS } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.helpers";
 import { AssetBalance } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,30 +15,19 @@ interface Props {
 const _Funds: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
   return (
-    <table className={styles["funds__table"]}>
-      <thead>
+    <TradeTable
+      className={styles["funds__table"]}
+      items={items}
+      columns={FUNDS_TABLE_COLUMNS}
+      renderHeaderCell={({ name }) => (
         <th>
-          <MutedText>{t("coin")}</MutedText>
+          <MutedText>{t(name)}</MutedText>
         </th>
-        <th>
-          <MutedText>{t("total")}</MutedText>
-        </th>
-        <th>
-          <MutedText>{t("available")}</MutedText>
-        </th>
-        <th>
-          <MutedText>{t("in-order")}</MutedText>
-        </th>
-        <th>
-          <MutedText>{t("btc-value")}</MutedText>
-        </th>
-      </thead>
-      <tbody>
-        {items.map(({ asset, free, locked }: AssetBalance) => (
-          <FundsRow asset={asset} available={free} locked={locked} />
-        ))}
-      </tbody>
-    </table>
+      )}
+      renderRow={({ asset, free, locked }: AssetBalance) => (
+        <FundsRow asset={asset} available={free} locked={locked} />
+      )}
+    />
   );
 };
 

@@ -5,11 +5,9 @@
   display: flex;
   flex-direction: column;
   &__tables-container {
-    height: 100%;
-    overflow-y: scroll;
-  }
-
-  & .table__cell {
-    padding: $padding-xxsmall !important;
+    height: calc(100% - 45px);
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
   }
 }
