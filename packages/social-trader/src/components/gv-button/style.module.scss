@@ -55,7 +55,13 @@ $default-padding: $padding-xxsmall $padding-small;
   }
 
   &--pending {
-    //animation: 2s pending cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    :local {
+      animation-name: pending;
+    }
     filter: grayscale(50%);
   }
 
@@ -236,11 +242,13 @@ $default-padding: $padding-xxsmall $padding-small;
   }
 }
 
-@keyframes pending {
-  0% {
-    color: rgba(255, 255, 255, 8);
-  }
-  50% {
-    color: rgba(255, 255, 255, 0.3);
+:local {
+  @keyframes pending {
+    0% {
+      color: rgba(255, 255, 255, 8);
+    }
+    50% {
+      color: rgba(255, 255, 255, 0.3);
+    }
   }
 }

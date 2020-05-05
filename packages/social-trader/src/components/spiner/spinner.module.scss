@@ -19,7 +19,13 @@
     height: 5px;
     background: #fff;
     border-radius: 50%;
-    //animation: gv-spinner 1.2s linear infinite;
+    animation-iteration-count: infinite;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+
+    :local {
+      animation-name: gv-spinner;
+    }
   }
   div:nth-child(1) {
     animation-delay: 0s;
@@ -83,14 +89,16 @@
   }
 }
 
-@keyframes gv-spinner {
-  0%,
-  20%,
-  80%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
+:local {
+  @keyframes gv-spinner {
+    0%,
+    20%,
+    80%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
   }
 }
