@@ -24,24 +24,9 @@ const _FundStructure: React.FC = () => {
     <Table
       items={items}
       columns={FUND_STRUCTURE_COLUMNS}
-      renderHeader={(column: SortingColumn) => {
-        return column.tooltip ? (
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.CENTER}
-            render={() => (
-              <TooltipContent>
-                {t(`fund-details-page.tooltip.${column.name}`)}
-              </TooltipContent>
-            )}
-          >
-            <span>
-              <FundStructureHeaderCell column={column} />
-            </span>
-          </Tooltip>
-        ) : (
-          <FundStructureHeaderCell column={column} />
-        );
-      }}
+      renderHeader={(column: SortingColumn) => (
+        <FundStructureHeaderCell column={column} />
+      )}
       renderBodyRow={(item: FundAssetInfo) => (
         <TableRow stripy>
           <TableCell className="details-structure__cell fund-details-structure__cell">
