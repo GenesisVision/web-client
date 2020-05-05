@@ -113,6 +113,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
         <HookFormAmountField
+          autoFocus={false}
           label={t("Price")}
           currency={quoteAsset}
           name={LIMIT_FORM_FIELDS.price}
@@ -120,6 +121,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <Row>
         <HookFormAmountField
+          autoFocus={false}
           label={t("Amount")}
           currency={baseAsset}
           name={LIMIT_FORM_FIELDS.quantity}
@@ -137,6 +139,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <Row>
         <HookFormAmountField
+          autoFocus={false}
           isAllowed={isAllow("BTC")}
           label={t("Total")}
           currency={quoteAsset}

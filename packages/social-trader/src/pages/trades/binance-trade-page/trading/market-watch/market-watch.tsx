@@ -61,6 +61,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         </RowItem>
         <RowItem>
           <GlobalSearchInput
+            autoFocus={false}
             size={"small"}
             query={search}
             onChange={setSearch}
