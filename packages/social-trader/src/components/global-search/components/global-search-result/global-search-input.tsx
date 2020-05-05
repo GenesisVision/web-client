@@ -8,13 +8,22 @@ import React, { useCallback } from "react";
 import { SizesType } from "utils/types";
 
 export const SearchInputField: React.FC<{
+  autoFocus?: boolean;
   size?: SizesType;
   canClose?: boolean;
   onBlur?: VoidFunction;
   value: string;
   onCancel?: VoidFunction;
   onChange: (event: React.ChangeEvent<any>) => void;
-}> = ({ size, canClose = true, value, onChange, onCancel, onBlur }) => {
+}> = ({
+  autoFocus = true,
+  size,
+  canClose = true,
+  value,
+  onChange,
+  onCancel,
+  onBlur
+}) => {
   return (
     <Row wide>
       <RowItem wide>
@@ -30,7 +39,7 @@ export const SearchInputField: React.FC<{
           adornmentPosition="start"
           value={value}
           onChange={onChange}
-          autoFocus
+          autoFocus={autoFocus}
         />
       </RowItem>
       {canClose && (
@@ -49,7 +58,7 @@ export const SearchInputField: React.FC<{
 };
 
 const GlobalSearchInput: React.FC<Props> = React.memo(
-  ({ size, canClose, query, onChange }) => {
+  ({ autoFocus, size, canClose, query, onChange }) => {
     const handleOnChange = useCallback(
       (event: React.ChangeEvent<any>) => onChange(event.target.value),
       [onChange]
@@ -60,6 +69,7 @@ const GlobalSearchInput: React.FC<Props> = React.memo(
         {/*
       //@ts-ignore TODO сделать фикс GVTextField*/}
         <SearchInputField
+          autoFocus={autoFocus}
           size={size}
           canClose={canClose}
           value={query}
@@ -71,11 +81,10 @@ const GlobalSearchInput: React.FC<Props> = React.memo(
 );
 
 interface Props {
+  autoFocus?: boolean;
   size?: SizesType;
   canClose?: boolean;
-
   onChange(value: string): void;
-
   query: string;
 }
 
