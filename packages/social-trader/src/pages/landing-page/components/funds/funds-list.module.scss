@@ -23,8 +23,6 @@ $chart-width: 160px;
   }
 
   &--active {
-    z-index: 1;
-
     .funds-list__item {
       opacity: 1;
     }
