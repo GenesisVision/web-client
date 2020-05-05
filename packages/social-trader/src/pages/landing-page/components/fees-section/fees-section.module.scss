@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -11,7 +11,9 @@
     padding-top: 140px;
   }
 
-  .internal__container {
+  &__container {
+    @include container();
+
     @include media-breakpoint-tablet() {
       @include grid();
     }
@@ -29,34 +31,6 @@
 
     @include media-breakpoint-desktop() {
       grid-column: 4/10;
-    }
-  }
-
-  &__controls {
-    &.tab-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .tab-controls__item-btn {
-      @include transition(background-color, color);
-      font-size: 12px;
-      border-radius: 12px;
-      padding: 4px 25px;
-      background-color: transparent;
-
-      @include media-breakpoint-tablet() {
-        font-size: 16px;
-        padding: 18px 40px;
-      }
-    }
-
-    .tab-controls__item--active {
-      .tab-controls__item-btn {
-        background-color: $primary-color;
-        color: $main-color;
-      }
     }
   }
 

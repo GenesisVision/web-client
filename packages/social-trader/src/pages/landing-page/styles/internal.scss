@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "mixins";
 @import "grid";
 
@@ -7,14 +7,6 @@
   background-color: $main-color;
   color: $row-color;
   line-height: 2;
-
-  h1 {
-    margin-bottom: 50px;
-  }
-
-  h2 {
-    margin-bottom: 40px;
-  }
 
   h3,
   h4 {

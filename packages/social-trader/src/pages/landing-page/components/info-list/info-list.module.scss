@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -115,7 +115,7 @@
     margin-top: 20px;
 
     @include media-breakpoint-tablet() {
-      .lp-button {
+      a {
         width: 100%;
       }
     }

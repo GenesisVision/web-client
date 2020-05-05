@@ -19,15 +19,15 @@ const FeesSection: React.FC = () => {
   );
   return (
     <section className={styles["fees-section"]}>
-      <div className="internal__container">
+      <div className={styles["fees-section__container"]}>
         <div className={styles["fees-section__wrapper-controls"]}>
-          <h1 className="internal__title">{t("fees.fees")}</h1>
+          <h1>{t("fees.fees")}</h1>
           <p className={styles["fees-section__text"]}>{t("fees.text-1")}</p>
           <TabControls
             currentTabId={currentTabId}
             tabsItems={feesTabs}
             onChange={handleChange}
-            className={styles["fees-section__controls"]}
+            variant={"fees"}
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -71,6 +71,12 @@
       @include media-breakpoint-landscape-tablet() {
         grid-column: 1/4;
         text-align: center;
+      }
+    }
+
+    &--last-is-hided {
+      @include media-breakpoint-desktop() {
+        display: none;
       }
     }
   }

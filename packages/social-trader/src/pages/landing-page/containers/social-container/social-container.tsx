@@ -13,10 +13,7 @@ const SocialContainer: React.FC = () => {
         <h2 className={styles["social-container__title"]}>
           {t("landing-page:social.title")}
         </h2>
-        <IconList
-          items={socialLinks}
-          className={styles["social-container__list"]}
-        />
+        <IconList items={socialLinks} socialTheme />
       </div>
     </div>
   );

@@ -23,15 +23,20 @@ const _FeesTrading: React.FC<Props> = () => {
   return (
     <div className={styles["fees-info"]}>
       <div className={styles["fees-info__section"]}>
-        <div className="internal__container">
+        <div className={styles["fees-info__container"]}>
           <div className={styles["fees-info__wrapper"]}>
             <h2 className={styles["fees-info__title"]}>{t("fees.crypto")}</h2>
           </div>
-          <div className="fees-info__table-wrapper">
+          <div className={styles["fees-info__table-wrapper"]}>
             <table className={styles["fees-table"]}>
-              <thead className={styles["fees-info__head"]}>
+              <thead className={styles["fees-table__head"]}>
                 <tr className={styles["fees-table__row"]}>
-                  <th className="fees-table__cell fees-table__cell--width-bg">
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--width-bg"]
+                    )}
+                  >
                     {t("fees.amount")}
                   </th>
                   <th className={styles["fees-table__cell"]}>
@@ -100,13 +105,13 @@ const _FeesTrading: React.FC<Props> = () => {
               </tbody>
             </table>
           </div>
-          <div className={styles["fees-table__notes"]}>
+          <div className={styles["fees-info__notes"]}>
             <h3>{t("fees.commission")}</h3>
-            <ul className={styles["fees-table__list-notes"]}>
+            <ul className={styles["fees-info__list-notes"]}>
               {t("fees.list-2")
                 .split("\n")
                 .map((line, index) => (
-                  <li key={index} className={styles["fees-table__note-item"]}>
+                  <li key={index} className={styles["fees-info__note-item"]}>
                     {line}
                   </li>
                 ))}
@@ -114,8 +119,13 @@ const _FeesTrading: React.FC<Props> = () => {
           </div>
         </div>
       </div>
-      <div className="fees-info__section fees-info__section--bg-gray">
-        <div className="internal__container">
+      <div
+        className={classNames(
+          styles["fees-info__section"],
+          styles["fees-info__section--bg-gray"]
+        )}
+      >
+        <div className={styles["fees-info__container"]}>
           <div className={styles["fees-info__wrapper"]}>
             <h2 className={styles["fees-info__title"]}>{t("fees.global")}</h2>
           </div>
@@ -126,7 +136,7 @@ const _FeesTrading: React.FC<Props> = () => {
             )}
           >
             <table className={styles["fees-table"]}>
-              <thead className={styles["fees-info__head"]}>
+              <thead className={styles["fees-table__head"]}>
                 <tr className={styles["fees-table__row"]}>
                   {t("fees.global-table-head-1")
                     .split("\t")
@@ -465,13 +475,13 @@ const _FeesTrading: React.FC<Props> = () => {
               </tbody>
             </table>
           </div>
-          <div className={styles["fees-table__notes"]}>
+          <div className={styles["fees-info__notes"]}>
             <h3>{t("fees.commission")}</h3>
-            <ul className={styles["fees-table__list-notes"]}>
+            <ul className={styles["fees-info__list-notes"]}>
               {t("fees.list-3")
                 .split("\n")
                 .map((line, index) => (
-                  <li key={index} className={styles["fees-table__note-item"]}>
+                  <li key={index} className={styles["fees-info__note-item"]}>
                     {line}
                   </li>
                 ))}

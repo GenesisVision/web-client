@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 
 .icon-list {
@@ -76,6 +76,29 @@
 
       &:hover {
         fill: $primary-color;
+      }
+    }
+  }
+
+  &--social {
+    margin-right: -20px;
+    margin-left: -20px;
+
+    .icon-list__item {
+      margin: 0 15px 20px;
+
+      @include media-breakpoint-tablet() {
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        margin: 0 15px 30px;
+      }
+
+      @include media-breakpoint-large-desktop() {
+        margin-right: 17px;
+        margin-left: 17px;
       }
     }
   }

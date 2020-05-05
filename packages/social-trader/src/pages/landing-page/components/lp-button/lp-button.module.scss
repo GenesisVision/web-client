@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 
 $pink-color: #cf2877;
@@ -84,5 +84,13 @@ $pink-color-hover: lighten(#cf2877, 10%);
     @include media-breakpoint-desktop() {
       text-transform: none;
     }
+  }
+
+  &--circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 0;
+    line-height: 100px;
   }
 }

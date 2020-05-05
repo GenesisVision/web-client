@@ -1,10 +1,9 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
 $chart-width: 160px;
-$font-color: #100e3b;
 
 .funds-list {
   display: grid;
@@ -18,175 +17,13 @@ $font-color: #100e3b;
   @include media-breakpoint-tablet() {
     grid-column-gap: 40px;
   }
-  .profitability--positive {
-    color: #00804f;
-  }
 
-  .muted-text {
-    color: #6d767e;
-  }
-
-  .table-card {
-    background-color: $main-color;
-    color: $font-color;
-    margin: 0;
-    min-width: 260px;
+  &__item:not(:first-child) {
     opacity: 0.5;
-    border-radius: 18px;
-    height: auto;
-    min-height: 310px;
-
-    &:first-child {
-      opacity: 1;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      min-width: 360px;
-    }
-
-    @include media-breakpoint-tablet() {
-      min-width: 410px;
-      min-height: 440px;
-      padding: 35px;
-    }
-
-    @include media-breakpoint-landscape-tablet() {
-      min-width: 385px;
-      min-height: 415px;
-    }
-
-    @include media-breakpoint-desktop() {
-      min-width: 420px;
-      min-height: 450px;
-    }
-
-    @include media-breakpoint-large-desktop() {
-      border-radius: 20px;
-      min-width: 440px;
-      min-height: 500px;
-    }
-
-    &__row {
-      margin-bottom: 10px;
-
-      &:first-child {
-        margin-left: 0;
-        margin-right: 0;
-
-        @include media-breakpoint-tablet() {
-          display: block;
-        }
-      }
-    }
-
-    &__avatar {
-      padding-left: 0;
-      height: auto;
-
-      @include media-breakpoint-tablet() {
-        margin-bottom: 30px;
-      }
-    }
-
-    &__main-info {
-      margin-left: 0;
-    }
-
-    &__title-wrapper {
-      padding-right: 0;
-      max-width: none;
-    }
-
-    &__title {
-      color: $font-color;
-      font-weight: 600;
-      font-size: 11px;
-
-      &:hover {
-        color: $primary-color;
-      }
-
-      @include media-breakpoint-tablet() {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-
-      @include media-breakpoint-landscape-tablet() {
-        font-size: 16px;
-      }
-
-      @include media-breakpoint-desktop() {
-        font-size: 19px;
-      }
-
-      @include media-breakpoint-large-desktop() {
-        font-size: 22px;
-      }
-    }
-
-    &__name {
-      color: rgba($row-color, 0.5);
-      font-size: 10px;
-
-      @include media-breakpoint-tablet() {
-        font-size: 14px;
-      }
-
-      @include media-breakpoint-desktop() {
-        font-size: 15px;
-      }
-
-      @include media-breakpoint-large-desktop() {
-        font-size: 16px;
-      }
-    }
-
-    &__actions {
-      display: none;
-    }
-
-    &__chart {
-      width: $chart-width/1.5;
-
-      @include media-breakpoint-tablet() {
-        width: $chart-width;
-        flex-grow: 1;
-      }
-    }
-
-    &__chart-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  .fund-asset {
-    background-color: $landing-bg-gray;
-    color: $font-color;
-    font-weight: 600;
-  }
-
-  .program-avatar--medium {
-    width: 70px;
-    height: 70px;
-
-    @include media-breakpoint-desktop() {
-      width: 75px;
-      height: 75px;
-    }
-
-    @include media-breakpoint-large-desktop() {
-      width: 100px;
-      height: 100px;
-    }
   }
 
   &--active {
-    z-index: 1;
-
-    .table-card {
+    .funds-list__item {
       opacity: 1;
     }
   }

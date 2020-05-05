@@ -21,11 +21,7 @@ const DownloadContainer: React.FC = () => {
         <p className={styles["download-container__text"]}>
           {t("landing-page:download.text")}
         </p>
-        <IconList
-          items={appLinks}
-          lightTheme
-          className={styles["download-container__app-links"]}
-        />
+        <IconList items={appLinks} lightTheme />
       </div>
       <div className={styles["download-container__img-wrapper"]}>
         <ImageBaseElement

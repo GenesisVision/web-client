@@ -8,6 +8,7 @@ interface LPButtonProps {
   id?: string;
   type?: "button" | "submit";
   color?: "primary" | "secondary" | "pink";
+  circle?: boolean;
   className?: string;
   disabled?: boolean;
   onClick?: (
@@ -20,6 +21,7 @@ interface LPButtonProps {
 const _LPButton: React.FC<LPButtonProps> = ({
   id,
   color,
+  circle,
   className,
   type,
   disabled,
@@ -30,7 +32,8 @@ const _LPButton: React.FC<LPButtonProps> = ({
   const classname = classNames(styles["lp-button"], className, {
     [styles["lp-button--pink"]]: color === "pink",
     [styles["lp-button--primary"]]: color === "primary",
-    [styles["lp-button--secondary"]]: color === "secondary"
+    [styles["lp-button--secondary"]]: color === "secondary",
+    [styles["lp-button--circle"]]: circle
   });
   const title = typeof children === "string" ? children : String(href);
   switch (true) {

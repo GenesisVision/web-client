@@ -28,7 +28,11 @@ const LPFooter: React.FC = () => {
             >
               {t("landing-page:footer.email-support")}
             </a>
-            <LPButton color="secondary" href={EMAIL_ROUTE}>
+            <LPButton
+              className={styles["lp-footer__btn"]}
+              color="secondary"
+              href={EMAIL_ROUTE}
+            >
               {t("landing-page:buttons.send")}
             </LPButton>
           </div>

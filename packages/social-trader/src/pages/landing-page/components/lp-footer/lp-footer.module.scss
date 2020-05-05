@@ -74,13 +74,13 @@
       grid-column: 6/12;
       justify-self: end;
     }
+  }
 
-    .lp-button {
-      display: none;
+  &__btn {
+    display: none;
 
-      @include media-breakpoint-tablet() {
-        display: block;
-      }
+    @include media-breakpoint-tablet() {
+      display: block;
     }
   }
 

@@ -1,13 +1,13 @@
 import { useToLink } from "components/link/link.helper";
 import MenuTooltip from "components/menu-tooltip/menu-tooltip";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
 
 import NavigationItem from "./navigation-item";
 import styles from "./navigation.module.scss";
-import { Row } from "components/row/row";
 
 export const MenuNavigationItem: React.FC<Props> = ({
   item: { Icon, route = "", label, children },

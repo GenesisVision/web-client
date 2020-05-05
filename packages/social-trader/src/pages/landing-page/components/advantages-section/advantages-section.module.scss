@@ -1,4 +1,4 @@
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -56,14 +56,6 @@
       margin-left: -50px;
       margin-top: -50px;
       will-change: transform;
-
-      .lp-button {
-        width: 100px;
-        height: 100px;
-        border-radius: 100%;
-        padding: 0;
-        line-height: 100px;
-      }
     }
   }
 

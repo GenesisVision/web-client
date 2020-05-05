@@ -47,14 +47,15 @@ class MobileNav extends React.Component<Props, States> {
             <>
               <BodyFix />
               <NavList
-                className={styles["mobile-nav__list"]}
                 onClick={this.handleLinkClick}
                 menuItems={navHeader}
                 subNavOpen
+                isMobile
               />
               <SeoList
                 seoItems={navFooter}
                 className={styles["mobile-nav__seo-list"]}
+                isMobile
               />
             </>
           ) : null}

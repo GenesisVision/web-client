@@ -7,10 +7,10 @@ import "pages/landing-page/styles/home.scss";
 import "pages/landing-page/styles/index.scss";
 import "pages/landing-page/styles/internal.scss";
 import "rc-slider/assets/index.css";
-import "shared/styles/index.scss";
 import React from "react";
 import { Provider } from "react-redux";
 import { compose, Store } from "redux";
+import "shared/styles/index.scss";
 import { initializeStore } from "store";
 
 class CustomApp extends App<Props> {

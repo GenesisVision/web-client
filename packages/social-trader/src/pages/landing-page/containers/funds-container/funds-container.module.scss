@@ -1,4 +1,4 @@
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "~shared/styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
@@ -23,19 +23,23 @@
       grid-column: 2/6;
       margin-bottom: 0;
       position: absolute;
-      z-index: 2;
+      z-index: 1;
       padding-bottom: 60px;
       opacity: 1;
       animation-duration: 0.2s;
       animation-fill-mode: forwards;
 
       &--hide {
-        animation-name: hide;
+        :local {
+          animation-name: hide;
+        }
       }
 
       &--show {
         opacity: 0;
-        animation-name: show;
+        :local {
+          animation-name: show;
+        }
       }
     }
 
@@ -102,22 +106,24 @@
   }
 }
 
-@keyframes hide {
-  0% {
-    opacity: 1;
+:local {
+  @keyframes hide {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
   }
 
-  100% {
-    opacity: 0;
-  }
-}
+  @keyframes show {
+    0% {
+      opacity: 0;
+    }
 
-@keyframes show {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
+    100% {
+      opacity: 1;
+    }
   }
 }

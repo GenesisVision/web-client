@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { FundDetailsListItem } from "gv-api-web";
-import FundCard from "modules/funds-table/components/funds-table/fund-card";
 import React, { useCallback, useRef, useState } from "react";
 
+import LPFundCard from "../lp-fund-card/lp-fund-card";
 import styles from "./funds-list.module.scss";
 
 interface Props {
@@ -27,17 +27,19 @@ const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
     }
   }, [list.current]);
   return (
-    <div
+    <ul
       className={classNames(styles["funds-list"], className, {
-        [styles["funds-list--active"]]: true
+        [styles["funds-list--active"]]: activeScroll
       })}
       onScroll={handleScroll}
       ref={list}
     >
       {funds.map(fund => (
-        <FundCard key={fund.id} fund={fund} />
+        <li className={styles["funds-list__item"]} key={fund.id}>
+          <LPFundCard fund={fund} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

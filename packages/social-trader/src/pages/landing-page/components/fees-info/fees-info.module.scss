@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
+@import "../../styles/grid";
 
 .fees-info {
   &__wrapper {
@@ -13,6 +14,14 @@
 
     &--bg-gray {
       background-color: $landing-bg-gray;
+    }
+  }
+
+  &__container {
+    @include container();
+
+    @include media-breakpoint-tablet() {
+      @include grid();
     }
   }
 

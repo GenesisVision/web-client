@@ -6,12 +6,7 @@ import styles from "./advantages-section.module.scss";
 
 const AdvantagesSection: React.FC = () => {
   return (
-    <section
-      className={classNames(
-        styles["home__section"],
-        styles["home__section--bg-white"]
-      )}
-    >
+    <section className="home__section home__section--bg-white">
       <AdvantagesListContainer />
     </section>
   );

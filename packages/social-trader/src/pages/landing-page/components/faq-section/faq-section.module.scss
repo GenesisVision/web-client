@@ -1,5 +1,5 @@
 @import "~shared/styles/_colors";
-@import "~shared/styles/breakpoint";
+@import "~shared/styles/_breakpoint";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -11,13 +11,17 @@
     padding-top: 140px;
   }
 
-  .internal__container {
+  &__container {
+    @include container();
+
     @include media-breakpoint-tablet() {
       @include grid();
     }
   }
 
-  .internal__article {
+  &__article {
+    composes: internal__article from global;
+
     @include media-breakpoint-tablet() {
       grid-column: 2/12;
     }

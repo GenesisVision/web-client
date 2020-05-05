@@ -8,7 +8,10 @@ import styles from "./advantages-list.module.scss";
 interface Props {
   className?: string;
   advantagesItems: TAdvantages[];
-  lastItem?: JSX.Element;
+  lastItem?: {
+    element: JSX.Element;
+    isHided?: boolean;
+  };
 }
 
 const _AdvantagesList: React.FC<Props> = ({
@@ -29,10 +32,11 @@ const _AdvantagesList: React.FC<Props> = ({
       <li
         className={classNames(
           styles["advantages-list__item"],
-          styles["advantages-list__item--last"]
+          styles["advantages-list__item--last"],
+          { [styles["advantages-list__item--last-is-hided"]]: lastItem.isHided }
         )}
       >
-        {lastItem}
+        {lastItem.element}
       </li>
     )}
   </ul>
