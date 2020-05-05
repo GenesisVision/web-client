@@ -1,11 +1,8 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import Tooltip from "components/tooltip/tooltip";
-import { TooltipContent } from "components/tooltip/tooltip-content";
 import { FundAssetInfo } from "gv-api-web";
 import { FUND_STRUCTURE_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";

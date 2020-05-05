@@ -28,7 +28,16 @@ const _PerformanceData: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <StatisticItemList className="asset-details-description__performance-data">
-      <StatisticItem label={t("program-details-page.description.broker")}>
+      <StatisticItem
+        label={
+          <TooltipLabel
+            tooltipContent={t(
+              "program-details-page.description.tooltips.broker"
+            )}
+            labelText={t("program-details-page.description.broker")}
+          />
+        }
+      >
         <ImageBase
           alt={brokerDetails.name}
           className={"asset-details-description__broker"}
@@ -36,18 +45,45 @@ const _PerformanceData: React.FC<Props> = ({
         />
       </StatisticItem>
       {currency && (
-        <StatisticItem label={t("program-details-page.description.currency")}>
+        <StatisticItem
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "program-details-page.description.tooltips.currency"
+              )}
+              labelText={t("program-details-page.description.currency")}
+            />
+          }
+        >
           {currency}
         </StatisticItem>
       )}
       {!!leverageMin && !!leverageMax && (
-        <StatisticItem label={t("program-details-page.description.leverage")}>
+        <StatisticItem
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "program-details-page.description.tooltips.leverage"
+              )}
+              labelText={t("program-details-page.description.leverage")}
+            />
+          }
+        >
           <Leverage min={leverageMin} max={leverageMax} />
         </StatisticItem>
       )}
       {programDetails && (
         <>
-          <StatisticItem label={t("program-details-page.description.period")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "program-details-page.description.tooltips.period"
+                )}
+                labelText={t("program-details-page.description.period")}
+              />
+            }
+          >
             <ProgramPeriodPie
               condition={status !== STATUS.CLOSED}
               loader={t("program-period.program-closed")}
@@ -55,7 +91,16 @@ const _PerformanceData: React.FC<Props> = ({
               end={programDetails.periodEnds}
             />
           </StatisticItem>
-          <StatisticItem label={t("program-details-page.description.age")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "program-details-page.description.tooltips.age"
+                )}
+                labelText={t("program-details-page.description.age")}
+              />
+            }
+          >
             <PieContainerSmall
               end={levelsParameters.programAgeMax}
               value={programDetails.ageDays}

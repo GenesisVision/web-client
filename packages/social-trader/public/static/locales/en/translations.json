@@ -1177,7 +1177,14 @@
       "requests-completed": "All requests completed successfully",
       "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
       "unauth-follow-popup": "To Follow trades in the selected program please login as an investor or create a new investor account.",
-      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
+      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account.",
+      "tooltips": {
+        "currency": "Base currency of the program",
+        "broker": "Current broker of the program",
+        "leverage": "Set leverage of the program. Trading with leverage allows the trader to open positions larger than their own capital",
+        "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
+        "age": "Age of the program"
+      }
     },
     "statistics": {
       "heading": "Statistics",
@@ -1275,7 +1282,10 @@
           "symbol": "Trading instrument",
           "volume": "Total quantity traded",
           "profit": "Trade profit (excluding commission)",
-          "price": "Trade price"
+          "price": "Trade price",
+          "date": "Time the trade was executed",
+          "swap": "Fee for transferring open positions to the next day",
+          "ticket": "Ticket reference"
         }
       },
       "open-positions": {
@@ -1326,7 +1336,17 @@
         "management-fee": "Management fee",
         "entry-fee": "Entry fee",
         "deposit-withdraw": "Deposit/Withdraw",
-        "commission-rebate": "GV commission rebate"
+        "commission-rebate": "GV commission rebate",
+        "tooltips": {
+          "period": "Program period number",
+          "date-start": "Program period start date",
+          "balance": "Manager balance at the beginning of the period",
+          "profit": "Program profit for the period (including commissions)",
+          "success-fee": "Total amount of success fees that the manager received in this period",
+          "management-fee": "Total amount of management fees that the manager received in this period",
+          "deposit-withdraw": "Total amount of funds invested or withdrawn by the manager in this period",
+          "commission-rebate": "Amount of the compensated commission (Trading Fee) paid from the GVT wallet"
+        }
       },
       "period-history": {
         "investors-deposit": "Investors Invest",
@@ -1341,7 +1361,15 @@
         "period-length": "Period length",
         "balance": "Program balance",
         "profit": "Profit",
-        "investors": "Investors"
+        "investors": "Investors",
+        "tooltips": {
+          "period": "Program period number",
+          "date-start": "Program period start date",
+          "period-length": "Program period duration",
+          "balance": "Program balance at the end of the period",
+          "profit": "Program profit for the period (including commissions)",
+          "investors": "Number of investors in the program"
+        }
       }
     },
     "chart": {

@@ -12,8 +12,6 @@ import TableCell from "components/table/components/table-cell";
 import TableContainer from "components/table/components/table-container";
 import TableRow from "components/table/components/table-row";
 import { UpdateFilterFunc } from "components/table/components/table.types";
-import Tooltip from "components/tooltip/tooltip";
-import { TooltipContent } from "components/tooltip/tooltip-content";
 import { ReallocationModel } from "gv-api-web";
 import { FUND_REALLOCATE_HISTORY_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";
