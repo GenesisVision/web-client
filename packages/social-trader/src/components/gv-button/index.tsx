@@ -1,7 +1,7 @@
-import "./style.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import "./style.scss";
 
 export enum GV_BTN_SIZE {
   SMALL = "SMALL",
@@ -25,7 +25,6 @@ export interface GVButtonProps {
   className?: string;
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  children?: string | JSX.Element;
   name?: string;
   noPadding?: boolean;
 }
