@@ -60,6 +60,6 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
     setList(updatedList);
   }, [socketData]);
 
-  const items = useMemo(() => Object.values(list), [list]);
+  const items = useMemo(() => Object.values(list).reverse(), [list]);
   return <OrderHistory items={items} />;
 };
