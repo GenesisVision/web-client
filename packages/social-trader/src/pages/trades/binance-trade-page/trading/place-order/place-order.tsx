@@ -7,6 +7,7 @@ import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import { tradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
@@ -100,6 +101,17 @@ const _PlaceOrder: React.FC = () => {
           )}
           {tab === "MARKET" && (
             <MarketTradeForm
+              exchangeInfo={exchangeInfo}
+              accountInfo={accountInfo}
+              outerPrice={+price}
+              onSubmit={handleSubmit}
+              direction={side}
+              baseAsset={baseAsset}
+              quoteAsset={quoteAsset}
+            />
+          )}
+          {tab === "STOP_LOSS_LIMIT" && (
+            <StopLimitTradeForm
               exchangeInfo={exchangeInfo}
               accountInfo={accountInfo}
               outerPrice={+price}
