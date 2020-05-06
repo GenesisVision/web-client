@@ -15,6 +15,7 @@ import {
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
+import { formatValue } from "utils/formatter";
 
 interface Props {
   divider: number;
@@ -31,6 +32,7 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 
 export const SymbolSummarySmallContainer: React.FC = () => {
   const { symbolData, divider } = useSymbolData();
+  console.log(symbolData);
   return (
     <SymbolSummarySmallView
       divider={divider!}
@@ -66,7 +68,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
           <h4>
             <MonoText>
               <TradeStatefulValue
-                value={(+lastPrice).toFixed(divider)}
+                value={formatValue(+lastPrice, divider)}
                 trigger={eventTime}
               />
             </MonoText>
@@ -74,7 +76,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </Row>
         <Row small>
           <MutedText>
-            <MonoText>{(+lastPrice).toFixed(divider)}</MonoText>
+            <MonoText>{formatValue(+lastPrice, divider)}</MonoText>
           </MutedText>
         </Row>
       </RowItem>
@@ -82,26 +84,26 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <StatisticItemInner label={"24 Change"}>
           <MonoText>
             <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
-              {(+priceChange).toFixed(divider)}{" "}
-              {(+priceChangePercent).toFixed(divider)} %
+              {formatValue(+priceChange, divider)}{" "}
+              {formatValue(+priceChangePercent, divider)} %
             </ColoredText>
           </MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner isPending={!high} label={"24 High"}>
-          <MonoText>{(+high).toFixed(divider)}</MonoText>
+          <MonoText>{formatValue(+high, divider)}</MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner isPending={!low} label={"24 Low"}>
-          <MonoText>{(+low).toFixed(divider)}</MonoText>
+          <MonoText>{formatValue(+low, divider)}</MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner label={"24 Volume"}>
           <MonoText>
-            {(+volume).toFixed(divider)} {quoteAsset}
+            {formatValue(+volume, divider)} {quoteAsset}
           </MonoText>
         </StatisticItemInner>
       </RowItem>
