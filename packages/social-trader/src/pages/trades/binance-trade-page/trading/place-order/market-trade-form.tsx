@@ -1,6 +1,7 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import FormError from "components/form/form-error/form-error";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
@@ -120,7 +121,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       <StatisticItemInner label={t("Price")}>
-        {t("Market price")}
+        {t("Market price")} <MutedText>(≈ {outerPrice})</MutedText>
       </StatisticItemInner>
       <Row>
         <HookFormAmountField
