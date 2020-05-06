@@ -2,6 +2,7 @@ import { Center } from "components/center/center";
 import { ColoredText } from "components/colored-text/colored-text";
 import { DefaultBlock } from "components/default.block/default.block";
 import { MutedText } from "components/muted-text/muted-text";
+import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
@@ -9,6 +10,7 @@ import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { MarketWatchTooltipButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
   getTickerSymbolLoaderData,
   useSymbolData
@@ -58,9 +60,19 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   return (
     <Center>
       <RowItem large>
-        <h3>
-          {baseAsset}/{quoteAsset}
-        </h3>
+        <ResponsiveContainer
+          enabledScreens={["tablet", "landscape-tablet", "desktop"]}
+        >
+          <MarketWatchTooltipButton
+            baseAsset={baseAsset}
+            quoteAsset={quoteAsset}
+          />
+        </ResponsiveContainer>
+        <ResponsiveContainer enabledScreens={["large-desktop"]}>
+          <h3>
+            {baseAsset}/{quoteAsset}
+          </h3>
+        </ResponsiveContainer>
       </RowItem>
       <RowItem>
         <Row>
