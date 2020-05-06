@@ -57,21 +57,21 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     volume
   }
 }) => {
+  const renderSymbol = () => (
+    <h3>
+      {baseAsset}/{quoteAsset}
+    </h3>
+  );
   return (
     <Center>
       <RowItem large>
         <ResponsiveContainer
           enabledScreens={["tablet", "landscape-tablet", "desktop"]}
         >
-          <MarketWatchTooltipButton
-            baseAsset={baseAsset}
-            quoteAsset={quoteAsset}
-          />
+          <MarketWatchTooltipButton>{renderSymbol()}</MarketWatchTooltipButton>
         </ResponsiveContainer>
         <ResponsiveContainer enabledScreens={["large-desktop"]}>
-          <h3>
-            {baseAsset}/{quoteAsset}
-          </h3>
+          {renderSymbol()}
         </ResponsiveContainer>
       </RowItem>
       <RowItem>

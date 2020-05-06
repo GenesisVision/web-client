@@ -10,30 +10,17 @@ import { RowItem } from "components/row-item/row-item";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import useAnchor from "hooks/anchor.hook";
 import { MarketWatchContainer } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.container";
-import { TradeCurrency } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 
 import styles from "./market-watch.module.scss";
 
-interface Props {
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
-}
-
-export const _MarketWatchTooltipButton: React.FC<Props> = ({
-  baseAsset,
-  quoteAsset
-}) => {
+export const _MarketWatchTooltipButton: React.FC = ({ children }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
     <>
       <GVButton variant={"text"} noPadding onClick={setAnchor}>
         <Center>
-          <RowItem small>
-            <h3>
-              {baseAsset}/{quoteAsset}
-            </h3>
-          </RowItem>
+          <RowItem small>{children}</RowItem>
           <RowItem>
             <Center>
               <FilterArrowIcon isOpen={anchor !== undefined} />
@@ -61,4 +48,6 @@ export const _MarketWatchTooltipButton: React.FC<Props> = ({
   );
 };
 
-export const MarketWatchTooltipButton = React.memo(_MarketWatchTooltipButton);
+export const MarketWatchTooltipButton = React.memo<React.FC>(
+  _MarketWatchTooltipButton
+);

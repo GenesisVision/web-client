@@ -65,10 +65,11 @@ const _SymbolSummaryView: React.FC<Props> = ({
       <Row center={false}>
         <RowItem>
           <Row>
-            <MarketWatchTooltipButton
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
-            />
+            <MarketWatchTooltipButton>
+              <h3>
+                {baseAsset}/{quoteAsset}
+              </h3>
+            </MarketWatchTooltipButton>
           </Row>
           <Row>
             <h4>
