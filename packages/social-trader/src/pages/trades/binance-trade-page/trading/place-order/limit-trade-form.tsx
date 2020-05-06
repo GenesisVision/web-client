@@ -140,6 +140,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <Row>
         <HookFormAmountField
+          externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
           label={t("Total")}
