@@ -18,8 +18,8 @@ import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
 import {
-  ITradeFormValues,
-  limitValidationSchema,
+  IPlaceOrderFormValues,
+  placeOrderDefaultValidationSchema,
   RANGE_MARKS,
   TRADE_FORM_FIELDS,
   usePlaceOrderAutoFill,
@@ -32,7 +32,7 @@ export interface IMarketTradeFormProps {
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
   direction: OrderSide;
-  onSubmit: (values: ITradeFormValues) => any;
+  onSubmit: (values: IPlaceOrderFormValues) => any;
 }
 
 const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
@@ -66,8 +66,8 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     exchangeInfo
   });
 
-  const form = useForm<ITradeFormValues>({
-    validationSchema: limitValidationSchema({
+  const form = useForm<IPlaceOrderFormValues>({
+    validationSchema: placeOrderDefaultValidationSchema({
       t,
       quoteAsset,
       baseAsset,

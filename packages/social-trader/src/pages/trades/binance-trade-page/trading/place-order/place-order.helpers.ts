@@ -34,10 +34,13 @@ export enum TRADE_FORM_FIELDS {
   total = "total"
 }
 
-export interface ITradeFormValues {
-  [TRADE_FORM_FIELDS.price]: number;
+export interface IPlaceOrderDefaultFormValues {
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
+}
+
+export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.price]: number;
 }
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
@@ -293,6 +296,41 @@ export const isTradeFieldAllow = (min: number, max: number, tick: number) => (
   );
 };
 
+const placeOrderTotalShape = ({
+  t,
+  maxTotal,
+  minNotional,
+  quoteAsset,
+  maxQuantity
+}: {
+  t: TFunction;
+  quoteAsset: TradeCurrency;
+  maxTotal: number;
+  maxQuantity: number;
+  minNotional: number;
+}) =>
+  number()
+    .min(
+      minNotional,
+      t(
+        `Must be more or equal than ${formatCurrencyValue(
+          minNotional,
+          quoteAsset
+        )}`,
+        { minNotional }
+      )
+    )
+    .max(
+      maxTotal,
+      t(
+        `Must be less or equal than ${formatCurrencyValue(
+          maxTotal,
+          quoteAsset
+        )}`,
+        { maxQuantity }
+      )
+    );
+
 const tradeNumberShape = ({
   t,
   min,
@@ -315,7 +353,7 @@ const tradeNumberShape = ({
     test: value => true //modulo(value, divider) === 0
   });
 
-export const limitValidationSchema = ({
+export const placeOrderDefaultValidationSchema = ({
   t,
   baseAsset,
   quoteAsset,
@@ -355,25 +393,11 @@ export const limitValidationSchema = ({
       divider: stepSize,
       currency: baseAsset
     }),
-    [TRADE_FORM_FIELDS.total]: number()
-      .min(
-        minNotional,
-        t(
-          `Must be more or equal than ${formatCurrencyValue(
-            minNotional,
-            quoteAsset
-          )}`,
-          { minNotional }
-        )
-      )
-      .max(
-        maxTotal,
-        t(
-          `Must be less or equal than ${formatCurrencyValue(
-            maxTotal,
-            quoteAsset
-          )}`,
-          { maxQuantity }
-        )
-      )
+    [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
+      t,
+      maxTotal,
+      minNotional,
+      quoteAsset,
+      maxQuantity
+    })
   });

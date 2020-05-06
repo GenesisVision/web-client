@@ -19,7 +19,7 @@ import {
 import React, { useCallback, useContext, useState } from "react";
 
 import { LimitTradeFormContainer } from "./limit-trade-form.container";
-import { getBalance, ITradeFormValues } from "./place-order.helpers";
+import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
 
 interface Props {}
 
@@ -39,7 +39,7 @@ const _PlaceOrder: React.FC<Props> = () => {
   const { sendRequest } = useApiRequest({ request: tradeRequest });
 
   const handleSubmit = useCallback(
-    (values: ITradeFormValues) => {
+    (values: IPlaceOrderFormValues) => {
       return sendRequest({
         ...values,
         side,
