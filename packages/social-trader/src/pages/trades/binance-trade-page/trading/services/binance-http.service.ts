@@ -20,6 +20,7 @@ import {
 } from "services/request.service";
 
 export interface TradeRequest {
+  stopPrice?: number;
   symbol: TradeCurrency;
   price: number;
   quantity: number;
@@ -132,6 +133,7 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  stopPrice,
   authData,
   symbol,
   price,
@@ -140,17 +142,25 @@ export const postBuy = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
   newOrder(
     {
+      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
-      price: type === "LIMIT" ? String(price) : undefined,
+      price:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? String(price)
+          : undefined,
       quantity: String(quantity),
-      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
+      timeInForce:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? TimeInForce.GTC
+          : undefined,
       side: "BUY"
     },
     authData
   );
 
 export const postSell = ({
+  stopPrice,
   authData,
   symbol,
   price,
@@ -159,11 +169,18 @@ export const postSell = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
   newOrder(
     {
+      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
-      price: type === "LIMIT" ? String(price) : undefined,
+      price:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? String(price)
+          : undefined,
       quantity: String(quantity),
-      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
+      timeInForce:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? TimeInForce.GTC
+          : undefined,
       side: "SELL"
     },
     authData
