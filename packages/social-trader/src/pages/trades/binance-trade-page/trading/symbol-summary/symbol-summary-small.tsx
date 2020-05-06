@@ -32,7 +32,6 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 
 export const SymbolSummarySmallContainer: React.FC = () => {
   const { symbolData, divider } = useSymbolData();
-  console.log(symbolData);
   return (
     <SymbolSummarySmallView
       divider={divider!}
