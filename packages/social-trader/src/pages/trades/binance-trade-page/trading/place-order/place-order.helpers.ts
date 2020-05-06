@@ -88,7 +88,7 @@ export const usePlaceOrderAutoFill = ({
   }, [quantity]);
   useEffect(() => {
     if (!autoFill) {
-      if (quantity) {
+      if (quantity && price) {
         setValue(
           totalName,
           (formatValueWithTick(
@@ -145,7 +145,7 @@ export const usePlaceOrderFormReset = ({
   }, [outerPrice]);
 
   const [prevFormState, setPrevFormState] = useState<
-    (AnyObjectType & { sliderValue: number }) | undefined
+    (AnyObjectType & { sliderValue?: number }) | undefined
   >();
 
   useEffect(() => {
@@ -219,8 +219,9 @@ export const useTradeSlider = ({
   totalName: string;
   quantityName: string;
 }) => {
-  const [sliderValue, setSliderValue] = useState<number>(0);
+  const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
+    if (sliderValue === undefined) return;
     const percentValue = parseInt(RANGE_MARKS[sliderValue]);
     if (side === "BUY") {
       const walletAvailable = +getBalance(balances, quoteAsset);
