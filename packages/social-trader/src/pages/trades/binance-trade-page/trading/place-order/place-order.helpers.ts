@@ -29,6 +29,7 @@ type PlaceOrderFormSetValueType = (
 ) => void;
 
 export enum TRADE_FORM_FIELDS {
+  stopPrice = "stopPrice",
   price = "price",
   quantity = "quantity",
   total = "total"
@@ -37,11 +38,14 @@ export enum TRADE_FORM_FIELDS {
 export interface IPlaceOrderDefaultFormValues {
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
-}
-
-export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {
   [TRADE_FORM_FIELDS.price]: number;
 }
+
+export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.stopPrice]: number;
+}
+
+export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
 
@@ -144,7 +148,12 @@ export const usePlaceOrderFormReset = ({
   });
 
   useEffect(() => {
-    reset({ price: outerPrice, quantity, total });
+    reset({
+      stopPrice: outerPrice,
+      price: outerPrice,
+      quantity,
+      total
+    });
   }, [outerPrice]);
 
   const [prevFormState, setPrevFormState] = useState<
@@ -351,6 +360,62 @@ const tradeNumberShape = ({
   }).test({
     message: `Must be multiply of ${divider}`,
     test: value => true //modulo(value, divider) === 0
+  });
+
+export const placeOrderStopLimitValidationSchema = ({
+  t,
+  baseAsset,
+  quoteAsset,
+  stepSize,
+  tickSize,
+  maxTotal,
+  maxPrice,
+  minPrice,
+  maxQuantity,
+  minQuantity,
+  minNotional
+}: {
+  t: TFunction;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  stepSize: number;
+  tickSize: number;
+  maxTotal: number;
+  maxPrice: number;
+  minPrice: number;
+  maxQuantity: number;
+  minQuantity: number;
+  minNotional: number;
+}) =>
+  object().shape({
+    [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
+      t,
+      min: minPrice,
+      max: maxPrice,
+      divider: tickSize,
+      currency: quoteAsset
+    }),
+    [TRADE_FORM_FIELDS.price]: tradeNumberShape({
+      t,
+      min: minPrice,
+      max: maxPrice,
+      divider: tickSize,
+      currency: quoteAsset
+    }),
+    [TRADE_FORM_FIELDS.quantity]: tradeNumberShape({
+      t,
+      min: minQuantity,
+      max: maxQuantity,
+      divider: stepSize,
+      currency: baseAsset
+    }),
+    [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
+      t,
+      maxTotal,
+      minNotional,
+      quoteAsset,
+      maxQuantity
+    })
   });
 
 export const placeOrderDefaultValidationSchema = ({
