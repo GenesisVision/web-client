@@ -1,3 +1,4 @@
+import { isAllow } from "components/deposit/components/deposit.helpers";
 import FormError from "components/form/form-error/form-error";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
@@ -80,7 +81,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     }),
     mode: "onChange"
   });
-  const { watch, setValue, reset, errors } = form;
+  const { watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
@@ -119,7 +120,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       <StatisticItemInner label={t("Price")}>
-        {t("Market watch")}
+        {t("Market price")}
       </StatisticItemInner>
       <Row>
         <HookFormAmountField
@@ -129,11 +130,17 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.quantity}
         />
       </Row>
-      {errors.total?.message && (
-        <Row>
-          <FormError error={errors.total.message} />
-        </Row>
-      )}
+      <Row>
+        <HookFormAmountField
+          disabled={true}
+          externalDirty={true}
+          autoFocus={false}
+          isAllowed={isAllow("BTC")}
+          label={t("Total")}
+          currency={quoteAsset}
+          name={TRADE_FORM_FIELDS.total}
+        />
+      </Row>
       {direction === "SELL" && (
         <Row wide onlyOffset>
           <Slider
