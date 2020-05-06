@@ -20,7 +20,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
-import { number, object } from "yup";
+import { lazy, number, object } from "yup";
 
 type PlaceOrderFormSetValueType = (
   name: string,
@@ -363,6 +363,7 @@ const tradeNumberShape = ({
   });
 
 export const placeOrderStopLimitValidationSchema = ({
+  side,
   t,
   baseAsset,
   quoteAsset,
@@ -375,6 +376,7 @@ export const placeOrderStopLimitValidationSchema = ({
   minQuantity,
   minNotional
 }: {
+  side: OrderSide;
   t: TFunction;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -387,35 +389,45 @@ export const placeOrderStopLimitValidationSchema = ({
   minQuantity: number;
   minNotional: number;
 }) =>
-  object().shape({
-    [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
-      t,
-      min: minPrice,
-      max: maxPrice,
-      divider: tickSize,
-      currency: quoteAsset
-    }),
-    [TRADE_FORM_FIELDS.price]: tradeNumberShape({
-      t,
-      min: minPrice,
-      max: maxPrice,
-      divider: tickSize,
-      currency: quoteAsset
-    }),
-    [TRADE_FORM_FIELDS.quantity]: tradeNumberShape({
-      t,
-      min: minQuantity,
-      max: maxQuantity,
-      divider: stepSize,
-      currency: baseAsset
-    }),
-    [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
-      t,
-      maxTotal,
-      minNotional,
-      quoteAsset,
-      maxQuantity
-    })
+  lazy((values: IStopLimitFormValues) => {
+    const minPriceValue =
+      side === "BUY"
+        ? Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        : minPrice;
+    const maxPriceValue =
+      side === "SELL"
+        ? Math.min(maxPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        : maxPrice;
+    return object().shape({
+      [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
+        t,
+        min: minPrice,
+        max: maxPrice,
+        divider: tickSize,
+        currency: quoteAsset
+      }),
+      [TRADE_FORM_FIELDS.price]: tradeNumberShape({
+        t,
+        min: minPriceValue,
+        max: maxPriceValue,
+        divider: tickSize,
+        currency: quoteAsset
+      }),
+      [TRADE_FORM_FIELDS.quantity]: tradeNumberShape({
+        t,
+        min: minQuantity,
+        max: maxQuantity,
+        divider: stepSize,
+        currency: baseAsset
+      }),
+      [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
+        t,
+        maxTotal,
+        minNotional,
+        quoteAsset,
+        maxQuantity
+      })
+    });
   });
 
 export const placeOrderDefaultValidationSchema = ({

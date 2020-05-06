@@ -65,6 +65,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
 
   const form = useForm<IStopLimitFormValues>({
     validationSchema: placeOrderStopLimitValidationSchema({
+      side: direction,
       t,
       quoteAsset,
       baseAsset,
