@@ -20,7 +20,7 @@ interface Props {
   quoteAsset: TradeCurrency;
 }
 
-export const MarketWatchTooltipButton: React.FC<Props> = ({
+export const _MarketWatchTooltipButton: React.FC<Props> = ({
   baseAsset,
   quoteAsset
 }) => {
@@ -30,14 +30,14 @@ export const MarketWatchTooltipButton: React.FC<Props> = ({
       <GVButton variant={"text"} noPadding onClick={setAnchor}>
         <Center>
           <RowItem small>
-            <Center>
-              <FilterArrowIcon isOpen={anchor !== undefined} />
-            </Center>
-          </RowItem>
-          <RowItem>
             <h3>
               {baseAsset}/{quoteAsset}
             </h3>
+          </RowItem>
+          <RowItem>
+            <Center>
+              <FilterArrowIcon isOpen={anchor !== undefined} />
+            </Center>
           </RowItem>
         </Center>
       </GVButton>
@@ -60,3 +60,5 @@ export const MarketWatchTooltipButton: React.FC<Props> = ({
     </>
   );
 };
+
+export const MarketWatchTooltipButton = React.memo(_MarketWatchTooltipButton);
