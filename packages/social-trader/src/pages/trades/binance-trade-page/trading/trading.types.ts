@@ -156,26 +156,26 @@ export interface IChartData {
     onResetCacheNeededCallback: () => void
   ) => void;
   unsubscribeBars: (subscriberUID: SubscriberUIDType) => void;
-  calculateHistoryDepth: (
+  calculateHistoryDepth?: (
     resolution: string,
     resolutionBack: string,
     intervalBack: number
   ) => { resolutionBack: string; intervalBack: number };
-  getMarks: (
+  getMarks?: (
     symbolInfo: IChartSymbolFull,
     from: number,
     to: number,
     onDataCallback: (marks: IChartMark[]) => void,
     resolution: string
   ) => void;
-  getTimescaleMarks: (
+  getTimescaleMarks?: (
     symbolInfo: IChartSymbolFull,
     from: number,
     to: number,
     onDataCallback: (marks: IChartTimeScaleMark[]) => void,
     resolution: string
   ) => void;
-  getServerTime: (time: number) => void;
+  getServerTime?: (time: number) => void;
   getQuotes: (
     symbols: string[],
     onDataCallback: (data: IChartSymbolQuoteData[]) => void,
