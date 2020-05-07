@@ -1,7 +1,16 @@
+import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
+import useApiRequest from "hooks/api-request.hook";
+import {
+  TradeAuthDataType,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { cancelAllOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { OpenOrdersRow } from "./open-orders-row";
@@ -14,14 +23,49 @@ interface Props {
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
+  const { symbol } = useContext(TradingInfoContext);
+  const { authData } = useTradeAuth();
+  const { sendRequest, isPending } = useApiRequest({
+    request: ({
+      options,
+      authData
+    }: {
+      options: { symbol: string; useServerTime?: boolean };
+      authData: TradeAuthDataType;
+    }) => cancelAllOrders(options, authData)
+  });
+  const handleCancel = useCallback(() => {
+    return sendRequest({
+      options: { symbol: getSymbolFromState(symbol) },
+      authData
+    });
+  }, [symbol, authData]);
   return (
     <TradeTable
       className={styles["open-orders__table"]}
       columns={OPEN_ORDERS_TABLE_COLUMNS}
       items={items}
-      renderHeaderCell={column => (
+      renderHeaderCell={({ name }) => (
         <th>
-          <MutedText>{t(`${column.name}`)}</MutedText>
+          {name === "cancel-all" ? (
+            items?.length ? (
+              <GVButton
+                noPadding
+                variant={"text"}
+                disabled={isPending}
+                isPending={isPending}
+                size={GV_BTN_SIZE.SMALL}
+                color={"danger"}
+                onClick={handleCancel}
+              >
+                {t("Cancel all")}
+              </GVButton>
+            ) : (
+              ""
+            )
+          ) : (
+            <MutedText>{t(`${name}`)}</MutedText>
+          )}
         </th>
       )}
       renderRow={({
