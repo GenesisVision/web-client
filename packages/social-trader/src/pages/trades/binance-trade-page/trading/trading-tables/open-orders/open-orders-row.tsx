@@ -59,6 +59,8 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>{total}</TableCell>
       <TableCell>
         <GVButton
+          noPadding
+          variant={"text"}
           disabled={isPending}
           isPending={isPending}
           size={GV_BTN_SIZE.SMALL}
