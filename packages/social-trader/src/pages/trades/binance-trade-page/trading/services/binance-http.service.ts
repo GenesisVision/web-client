@@ -118,6 +118,20 @@ export const newOrder = (
     value => value
   );
 
+export const cancelAllOrders = (
+  options: { symbol: string; useServerTime?: boolean },
+  authData: TradeAuthDataType
+): Promise<CancelOrderResult> =>
+  requestService.deleteRequest(
+    {
+      ...authData,
+      url: "/api/v3/openOrders",
+      params: options,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
   authData: TradeAuthDataType
