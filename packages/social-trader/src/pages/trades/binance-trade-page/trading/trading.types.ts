@@ -1,3 +1,200 @@
+import { AnyObjectType } from "utils/types";
+
+export interface IConfigurationData {
+  exchanges?: { value: string; name: string; desc: string }[];
+  symbols_types?: { name: string; value: string }[];
+  supported_resolutions?: string[];
+  supports_marks?: boolean;
+  supports_timescale_marks?: boolean;
+  supports_time?: boolean;
+  futures_regex?: string;
+}
+export type ChartSymbolTypeType =
+  | "stock"
+  | "index"
+  | "forex"
+  | "futures"
+  | "bitcoin"
+  | "expression"
+  | "spread"
+  | "cfd"
+  | string;
+
+export interface IChartSymbolShort {
+  symbol: string;
+  full_name: string;
+  description: string;
+  exchange: string;
+  ticker?: string;
+  type: ChartSymbolTypeType;
+}
+
+export interface IChartSymbolFull {
+  symbol: string;
+  full_name: string;
+  description: string;
+  exchange: string;
+  ticker?: string;
+  type: ChartSymbolTypeType;
+  session: number;
+  listed_exchange: string;
+  timezone: string;
+  minmov: any;
+  pricescale: any;
+  minmove2: any;
+  fractional: any;
+  has_intraday: boolean;
+  supported_resolutions: string[];
+  intraday_multipliers: string[];
+  has_seconds: boolean;
+  seconds_multipliers: string[];
+  has_daily: boolean;
+  has_weekly_and_monthly: boolean;
+  has_empty_bars: boolean;
+  force_session_rebuild: boolean;
+  has_no_volume: boolean;
+  volume_precision: number;
+  data_status: "streaming" | "endofday" | "pulsed" | "delayed_streaming";
+  expired: boolean;
+  expiration_date: number;
+  sector: any;
+  industry: any;
+  currency_code: string;
+}
+
+export interface IChartBar {
+  time: number;
+  close: string;
+  open: string;
+  high: string;
+  low: string;
+  volume: string;
+}
+
+export type SubscriberUIDType = AnyObjectType | string;
+
+export interface IChartMark {
+  id: string;
+  time: number;
+  color:
+    | "red"
+    | "green"
+    | "blue"
+    | "yellow"
+    | { border: string; background: string };
+  text: string;
+  label: string;
+  labelFontColor: string;
+  minSize: number;
+}
+
+export interface IChartTimeScaleMark {
+  id: string;
+  time: number;
+  color: "red" | "green" | "blue" | "yellow" | string;
+  tooltip: string;
+  label: string;
+}
+
+export interface IChartSymbolQuoteData {
+  s: "ok" | "error";
+  n: string;
+  v: {
+    ch: string;
+    chp: string;
+    short_name: string;
+    exchange: string;
+    description: string;
+    lp: string;
+    ask: string;
+    bid: string;
+    spread: string;
+    open_price: string;
+    high_price: string;
+    low_price: string;
+    prev_close_price: string;
+    volume: string;
+  };
+}
+
+export interface IChartDepth {
+  snapshot: boolean;
+  asks: { price: string; volume: string }[];
+  bids: { price: string; volume: string }[];
+}
+
+export interface IChartData {
+  onReady: (callback: () => IConfigurationData) => void;
+  searchSymbols: (
+    userInput: string,
+    exchange: string,
+    symbolType: string,
+    onResultReadyCallback: (symbols: IChartSymbolShort[]) => void
+  ) => void;
+  resolveSymbol: (
+    symbolName: string,
+    onSymbolResolvedCallback: (symbol: IChartSymbolFull) => void,
+    onResolveErrorCallback: (reason: string) => void
+  ) => void;
+  getBars: (
+    symbolInfo: IChartSymbolFull,
+    resolution: string,
+    from: number,
+    to: number,
+    onHistoryCallback: (
+      bars: IChartBar,
+      meta: { noData: boolean; nextTime: number }
+    ) => void,
+    onErrorCallback: (reason: string) => void,
+    firstDataRequest: boolean
+  ) => void;
+  subscribeBars: (
+    symbolInfo: IChartSymbolFull,
+    resolution: string,
+    onRealtimeCallback: (bar: IChartBar) => void,
+    subscriberUID: SubscriberUIDType,
+    onResetCacheNeededCallback: () => void
+  ) => void;
+  unsubscribeBars: (subscriberUID: SubscriberUIDType) => void;
+  calculateHistoryDepth: (
+    resolution: string,
+    resolutionBack: string,
+    intervalBack: number
+  ) => { resolutionBack: string; intervalBack: number };
+  getMarks: (
+    symbolInfo: IChartSymbolFull,
+    from: number,
+    to: number,
+    onDataCallback: (marks: IChartMark[]) => void,
+    resolution: string
+  ) => void;
+  getTimescaleMarks: (
+    symbolInfo: IChartSymbolFull,
+    from: number,
+    to: number,
+    onDataCallback: (marks: IChartTimeScaleMark[]) => void,
+    resolution: string
+  ) => void;
+  getServerTime: (time: number) => void;
+  getQuotes: (
+    symbols: string[],
+    onDataCallback: (data: IChartSymbolQuoteData[]) => void,
+    onErrorCallback: (reason: string) => void
+  ) => void;
+  subscribeQuotes: (
+    symbols: string[],
+    fastSymbols: string[],
+    onRealtimeCallback: (data: IChartSymbolQuoteData[]) => void,
+    listenerGUID: SubscriberUIDType
+  ) => void;
+  unsubscribeQuotes: (listenerGUID: SubscriberUIDType) => string;
+  subscribeDepth: (
+    symbolInfo: IChartSymbolFull,
+    callback: (depth: IChartDepth) => void
+  ) => SubscriberUIDType;
+  unsubscribeDepth: (subscriberUID: SubscriberUIDType) => void;
+}
+
 export type TradeCurrency = string;
 
 export type MergedTickerSymbolType = Ticker & Symbol;
