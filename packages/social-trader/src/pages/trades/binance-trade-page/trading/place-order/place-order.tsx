@@ -36,7 +36,9 @@ const _PlaceOrder: React.FC = () => {
 
   const { authData } = useTradeAuth();
 
-  const { sendRequest } = useApiRequest({ request: tradeRequest });
+  const { sendRequest, status } = useApiRequest({
+    request: tradeRequest
+  });
 
   const handleSubmit = useCallback(
     (values: IPlaceOrderFormValues) => {
@@ -52,6 +54,9 @@ const _PlaceOrder: React.FC = () => {
   );
 
   const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
+  const balance = accountInfo
+    ? getBalance(accountInfo.balances, walletAsset)
+    : undefined;
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
@@ -83,13 +88,14 @@ const _PlaceOrder: React.FC = () => {
       </Row>
       {accountInfo && (
         <Row>
-          {getBalance(accountInfo?.balances, walletAsset)} {walletAsset}
+          {balance} {walletAsset}
         </Row>
       )}
       {exchangeInfo && accountInfo && (
         <Row>
           {tab === "LIMIT" && (
             <LimitTradeForm
+              status={status}
               exchangeInfo={exchangeInfo}
               accountInfo={accountInfo}
               outerPrice={+price}
@@ -101,6 +107,7 @@ const _PlaceOrder: React.FC = () => {
           )}
           {tab === "MARKET" && (
             <MarketTradeForm
+              status={status}
               exchangeInfo={exchangeInfo}
               accountInfo={accountInfo}
               outerPrice={+price}
@@ -112,6 +119,7 @@ const _PlaceOrder: React.FC = () => {
           )}
           {tab === "STOP_LOSS_LIMIT" && (
             <StopLimitTradeForm
+              status={status}
               exchangeInfo={exchangeInfo}
               accountInfo={accountInfo}
               outerPrice={+price}

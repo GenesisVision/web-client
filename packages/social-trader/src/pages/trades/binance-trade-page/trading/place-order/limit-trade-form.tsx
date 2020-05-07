@@ -1,9 +1,8 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
-import { DialogButtons } from "components/dialog/dialog-buttons";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
-import { SubmitButton } from "components/submit-button/submit-button";
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
 import {
   Account,
@@ -27,6 +26,7 @@ import {
 } from "./place-order.helpers";
 
 export interface ILimitTradeFormProps {
+  status: API_REQUEST_STATUS;
   outerPrice: number;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -38,6 +38,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
 }> = ({
+  status,
   accountInfo,
   exchangeInfo,
   outerPrice,
@@ -82,10 +83,12 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     defaultValues: { price: outerPrice },
     mode: "onChange"
   });
-  const { watch, setValue, reset } = form;
+  const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+    status,
+    triggerValidation,
     stepSize,
     outerPrice,
     watch,
@@ -148,7 +151,11 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      <PlaceOrderSubmitButton side={direction} asset={baseAsset} />
+      <PlaceOrderSubmitButton
+        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+        side={direction}
+        asset={baseAsset}
+      />
     </HookForm>
   );
 };

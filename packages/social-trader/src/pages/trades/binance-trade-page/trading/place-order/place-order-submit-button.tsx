@@ -7,14 +7,24 @@ import {
 import React from "react";
 
 interface Props {
+  isSuccessful?: boolean;
   side: OrderSide;
   asset: TradeCurrency;
 }
 
-const _PlaceOrderSubmitButton: React.FC<Props> = ({ side, asset }) => {
+const _PlaceOrderSubmitButton: React.FC<Props> = ({
+  isSuccessful,
+  side,
+  asset
+}) => {
   return (
     <DialogButtons>
-      <SubmitButton color={side === "SELL" ? "danger" : "primary"} wide>
+      <SubmitButton
+        checkDirty={false}
+        isSuccessful={isSuccessful}
+        color={side === "SELL" ? "danger" : "primary"}
+        wide
+      >
         <>
           {side} {asset}
         </>

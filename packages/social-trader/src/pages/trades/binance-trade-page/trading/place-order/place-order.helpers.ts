@@ -1,3 +1,4 @@
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
 import {
   formatValueWithTick,
@@ -13,11 +14,12 @@ import {
   SymbolPriceFilter,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { lazy, number, object } from "yup";
@@ -111,6 +113,8 @@ export const usePlaceOrderAutoFill = ({
 };
 
 export const usePlaceOrderFormReset = ({
+  status,
+  triggerValidation,
   stepSize,
   outerPrice,
   reset,
@@ -123,6 +127,8 @@ export const usePlaceOrderFormReset = ({
   totalName,
   quantityName
 }: {
+  status: API_REQUEST_STATUS;
+  triggerValidation: VoidFunction;
   stepSize: string;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
@@ -146,6 +152,20 @@ export const usePlaceOrderFormReset = ({
     quantityName,
     totalName
   });
+  const [isReset, setReset] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    if (status === API_REQUEST_STATUS.SUCCESS)
+      postponeFunc(() => setReset(true));
+  }, [status]);
+
+  useEffect(() => {
+    if (isReset) {
+      reset(watch());
+      setReset(false);
+    }
+    if (isReset === false) triggerValidation();
+  }, [isReset]);
 
   useEffect(() => {
     reset({
@@ -191,15 +211,17 @@ export const usePlaceOrderInfo = ({
   const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
-  const maxQuantityWithWallet =
-    side === "BUY"
+  const maxQuantityWithWallet = useMemo(() => {
+    return side === "BUY"
       ? +maxQty
       : Math.min(+maxQty, +getBalance(balances, baseAsset));
+  }, [side, maxQty, balances, baseAsset]);
 
-  const maxTotalWithWallet =
-    side === "BUY"
+  const maxTotalWithWallet = useMemo(() => {
+    return side === "BUY"
       ? +getBalance(balances, quoteAsset)
       : Number.MAX_SAFE_INTEGER;
+  }, [side, balances, quoteAsset]);
   return {
     minPrice,
     maxPrice,

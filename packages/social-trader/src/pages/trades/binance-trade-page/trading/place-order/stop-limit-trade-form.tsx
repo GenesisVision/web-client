@@ -2,6 +2,7 @@ import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
 import {
   Account,
@@ -25,6 +26,7 @@ import {
 } from "./place-order.helpers";
 
 export interface IStopLimitTradeFormProps {
+  status: API_REQUEST_STATUS;
   outerPrice: number;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -36,6 +38,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
 }> = ({
+  status,
   accountInfo,
   exchangeInfo,
   outerPrice,
@@ -81,10 +84,12 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     defaultValues: { stopPrice: outerPrice, price: outerPrice },
     mode: "onChange"
   });
-  const { watch, setValue, reset } = form;
+  const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+    status,
+    triggerValidation,
     stepSize,
     outerPrice,
     watch,
@@ -110,7 +115,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   });
 
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       <Row>
         <HookFormAmountField
           autoFocus={false}
@@ -155,7 +160,11 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      <PlaceOrderSubmitButton side={direction} asset={baseAsset} />
+      <PlaceOrderSubmitButton
+        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+        side={direction}
+        asset={baseAsset}
+      />
     </HookForm>
   );
 };

@@ -1,10 +1,10 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
-import FormError from "components/form/form-error/form-error";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
 import {
   Account,
@@ -28,6 +28,7 @@ import {
 } from "./place-order.helpers";
 
 export interface IMarketTradeFormProps {
+  status: API_REQUEST_STATUS;
   outerPrice: number;
   baseAsset: TradeCurrency;
   quoteAsset: TradeCurrency;
@@ -39,6 +40,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
 }> = ({
+  status,
   accountInfo,
   exchangeInfo,
   outerPrice,
@@ -82,10 +84,12 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     }),
     mode: "onChange"
   });
-  const { watch, setValue, reset } = form;
+  const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+    status,
+    triggerValidation,
     stepSize,
     outerPrice,
     watch,
@@ -154,7 +158,11 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           />
         </Row>
       )}
-      <PlaceOrderSubmitButton side={direction} asset={baseAsset} />
+      <PlaceOrderSubmitButton
+        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+        side={direction}
+        asset={baseAsset}
+      />
     </HookForm>
   );
 };
