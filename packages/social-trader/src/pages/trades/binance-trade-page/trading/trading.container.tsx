@@ -52,39 +52,39 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
         <div className={styles["tables-grid-elem"]}>
           <TradingTables />
         </div>
+        <div className={styles["chart-grid-elem"]}>
+          <ChartBlock />
+        </div>
+        <TradingPriceContextProvider>
+          <div className={styles["order-book-grid-elem"]}>
+            <ResponsiveContainer
+              enabledScreens={[
+                "tablet",
+                "landscape-tablet",
+                "desktop",
+                "large-desktop"
+              ]}
+            >
+              <OrderBookBlock />
+            </ResponsiveContainer>
+          </div>
+          <div className={styles["trades-grid-elem"]}>
+            <ResponsiveContainer
+              enabledScreens={[
+                "tablet",
+                "landscape-tablet",
+                "desktop",
+                "large-desktop"
+              ]}
+            >
+              <TradesBlock />
+            </ResponsiveContainer>
+          </div>
+          <div className={styles["place-orders-grid-elem"]}>
+            <PlaceOrder />
+          </div>
+        </TradingPriceContextProvider>
       </TradingTickerContextProvider>
-      <div className={styles["chart-grid-elem"]}>
-        <ChartBlock />
-      </div>
-      <TradingPriceContextProvider>
-        <div className={styles["order-book-grid-elem"]}>
-          <ResponsiveContainer
-            enabledScreens={[
-              "tablet",
-              "landscape-tablet",
-              "desktop",
-              "large-desktop"
-            ]}
-          >
-            <OrderBookBlock />
-          </ResponsiveContainer>
-        </div>
-        <div className={styles["trades-grid-elem"]}>
-          <ResponsiveContainer
-            enabledScreens={[
-              "tablet",
-              "landscape-tablet",
-              "desktop",
-              "large-desktop"
-            ]}
-          >
-            <TradesBlock />
-          </ResponsiveContainer>
-        </div>
-        <div className={styles["place-orders-grid-elem"]}>
-          <PlaceOrder />
-        </div>
-      </TradingPriceContextProvider>
     </div>
   );
 };
