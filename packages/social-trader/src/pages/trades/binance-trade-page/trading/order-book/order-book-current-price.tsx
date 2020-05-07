@@ -9,15 +9,13 @@ import styles from "./order-book.module.scss";
 interface Props {
   tradeId?: number;
   price: string;
-  currency: TradeCurrency;
-  equivalent: string;
+  equivalent?: string;
   equivalentCurrency: TradeCurrency;
 }
 
 const _OrderBookCurrentPrice: React.FC<Props> = ({
   tradeId,
   price,
-  currency,
   equivalent,
   equivalentCurrency
 }) => {
@@ -26,9 +24,11 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
       <RowItem large>
         <TradeStatefulValue value={price} trigger={tradeId} />
       </RowItem>
-      <RowItem>
-        {equivalent} {equivalentCurrency}
-      </RowItem>
+      {equivalent && (
+        <RowItem>
+          {equivalent} {equivalentCurrency}
+        </RowItem>
+      )}
     </Center>
   );
 };
