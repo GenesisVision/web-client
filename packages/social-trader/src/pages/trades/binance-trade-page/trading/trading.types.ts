@@ -1,8 +1,14 @@
-import { TradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { Observable } from "rxjs";
-import { OrderRequest } from "services/request.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
+
+export interface TradeRequest {
+  stopPrice?: number;
+  symbol: TradeCurrency;
+  price: number;
+  quantity: number;
+  type: OrderType;
+}
 
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
@@ -926,14 +932,14 @@ export type Balances = Balance[];
 
 export interface OutboundAccountInfo extends Message {
   balances: Balances;
-  makerCommissionRate: number;
-  takerCommissionRate: number;
-  buyerCommissionRate: number;
-  sellerCommissionRate: number;
+  makerCommission: number;
+  takerCommission: number;
+  buyerCommission: number;
+  sellerCommission: number;
   canTrade: boolean;
   canWithdraw: boolean;
   canDeposit: boolean;
-  lastAccountUpdate: number;
+  updateTime: number;
 }
 
 export interface ExecutionReport extends Message {

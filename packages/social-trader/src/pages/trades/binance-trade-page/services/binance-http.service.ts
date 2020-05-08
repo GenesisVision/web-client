@@ -4,12 +4,11 @@ import {
   Depth,
   ExchangeInfo,
   OrderSide,
-  OrderType,
   QueryOrderResult,
   Ticker,
   Trade,
   TradeAuthDataType,
-  TradeCurrency
+  TradeRequest
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import {
@@ -18,14 +17,6 @@ import {
   requestService,
   TimeInForce
 } from "services/request.service";
-
-export interface TradeRequest {
-  stopPrice?: number;
-  symbol: TradeCurrency;
-  price: number;
-  quantity: number;
-  type: OrderType;
-}
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   requestService.get(

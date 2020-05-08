@@ -10,13 +10,13 @@ import {
   getTrades,
   getUserStreamKey,
   tradeRequest
-} from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+} from "pages/trades/binance-trade-page/services/binance-http.service";
 import {
   depthSocket,
   getUserStreamSocket,
   marketTicketsSocket,
   tradeSocket
-} from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
+} from "pages/trades/binance-trade-page/services/binance-ws.service";
 import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
 
 export const BinanceTerminalMethods: ITerminalMethods = {

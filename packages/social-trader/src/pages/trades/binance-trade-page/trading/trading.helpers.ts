@@ -1,10 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { useCookieState } from "hooks/cookie-state";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
-import {
-  transformExecutionReport,
-  transformOutboundAccountInfo
-} from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
@@ -15,7 +11,7 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { useEffect, useState } from "react";
 import { Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import { filter } from "rxjs/operators";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
@@ -47,18 +43,12 @@ export const useTradeAuth = () => {
 export const filterOutboundAccountInfoStream = (
   userStream: Observable<any>
 ): Observable<Account> =>
-  userStream.pipe(
-    filter(info => info.e === "outboundAccountInfo"),
-    map(transformOutboundAccountInfo)
-  );
+  userStream.pipe(filter(info => info.eventType === "outboundAccountInfo"));
 
 export const filterOrderEventsStream = (
   userStream: Observable<any>
 ): Observable<ExecutionReport> =>
-  userStream.pipe(
-    filter(info => info.e === "executionReport"),
-    map(transformExecutionReport)
-  );
+  userStream.pipe(filter(info => info.eventType === "executionReport"));
 
 const normalizeBalanceList = (
   list: AssetBalance[]

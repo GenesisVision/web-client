@@ -2,6 +2,7 @@ import {
   Account,
   Depth,
   ExecutionReport,
+  OutboundAccountInfo,
   Ticker,
   TickerWS,
   Trade
@@ -46,7 +47,9 @@ export const depthTransform = ({ e, E, s, U, u, b, a }: any): Depth => {
     asks: a
   };
 };
-export const transformOutboundAccountInfo = (m: any): Account => ({
+export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
+  eventType: "outboundAccountInfo",
+  eventTime: m.E,
   makerCommission: m.m,
   takerCommission: m.t,
   buyerCommission: m.b,
