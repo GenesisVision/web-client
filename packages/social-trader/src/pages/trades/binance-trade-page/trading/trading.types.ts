@@ -1,4 +1,65 @@
+import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { TradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { Observable } from "rxjs";
+import { OrderRequest } from "services/request.service";
+import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
+
+export interface ITerminalMethods {
+  getExchangeInfo: () => Promise<ExchangeInfo>;
+  getOpenOrders: (
+    symbol: string,
+    authData: TradeAuthDataType
+  ) => Observable<QueryOrderResult[]>;
+  getAllOrders: (
+    symbol: string,
+    authData: TradeAuthDataType
+  ) => Observable<QueryOrderResult[]>;
+  getUserStreamKey: (
+    authData: TradeAuthDataType
+  ) => Observable<{ listenKey: string }>;
+  getAccountInformation: (authData: TradeAuthDataType) => Observable<Account>;
+  getBinanceTrades: (symbol: string, limit: number) => Observable<Trade[]>;
+  getTickers: (symbol?: string) => Observable<Ticker[]>;
+  getDepth: (symbol: string, limit: number) => Observable<Depth>;
+  newOrder: (
+    options: OrderRequest,
+    authData: TradeAuthDataType
+  ) => Promise<any>;
+  cancelAllOrders: (
+    options: { symbol: string; useServerTime?: boolean },
+    authData: TradeAuthDataType
+  ) => Promise<CancelOrderResult>;
+  cancelOrder: (
+    options: { symbol: string; orderId: string; useServerTime?: boolean },
+    authData: TradeAuthDataType
+  ) => Promise<CancelOrderResult>;
+  tradeRequest: ({
+    side,
+    ...options
+  }: TradeRequest & {
+    authData: TradeAuthDataType;
+    side: OrderSide;
+  }) => Promise<QueryOrderResult>;
+
+  // Sockets
+
+  tradeSocket: (
+    connectSocketMethod: ConnectSocketMethodType,
+    symbol: TradeCurrency
+  ) => Observable<Trade>;
+  depthSocket: (
+    connectSocketMethod: ConnectSocketMethodType,
+    symbol: TradeCurrency
+  ) => Observable<Depth>;
+  marketTicketsSocket: (
+    connectSocketMethod: ConnectSocketMethodType
+  ) => Observable<Ticker[]>;
+  getUserStreamSocket: (
+    connectSocketMethod: ConnectSocketMethodType,
+    listenKey: string
+  ) => Observable<any>;
+}
 
 export interface IConfigurationData {
   exchanges?: { value: string; name: string; desc: string }[];
