@@ -54,7 +54,7 @@ export const getOpenOrders = (
 export const getAllOrders = (
   symbol: string,
   authData: TradeAuthDataType
-): Observable<any[]> =>
+): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
     url: "/api/v3/allOrders",
@@ -153,7 +153,7 @@ export const postBuy = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
@@ -180,7 +180,7 @@ export const postSell = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
