@@ -1,5 +1,9 @@
 import { BinanceTradeLogin } from "pages/trades/binance-trade-page/binance-trade-login";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import {
+  BinanceTerminalMethods,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingContainerWithInfo } from "pages/trades/binance-trade-page/trading/trading.container";
 import React from "react";
@@ -14,7 +18,9 @@ export const BinanceTradeContainer: React.FC<Props> = ({ symbol }) => {
   return (
     <>
       {privateKey && publicKey ? (
-        <TradingContainerWithInfo symbol={symbol} authData={authData} />
+        <TerminalMethodsContextProvider methods={BinanceTerminalMethods}>
+          <TradingContainerWithInfo symbol={symbol} authData={authData} />
+        </TerminalMethodsContextProvider>
       ) : (
         <BinanceTradeLogin onSubmit={set} />
       )}
