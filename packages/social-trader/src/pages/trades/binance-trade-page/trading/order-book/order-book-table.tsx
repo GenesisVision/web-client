@@ -14,7 +14,7 @@ interface Props {
   color: ColoredTextColor;
 }
 
-const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
+const _OrderBookTable: React.FC<Props> = ({ reverse, color, items = [] }) => {
   const [hoveredRow, setHoveredRow] = useState<number | undefined>();
   const [levelSum, setLevelSum] = useState<LevelsSum>({
     avgPrice: 0,
@@ -67,4 +67,4 @@ const _OrderBook: React.FC<Props> = ({ reverse, color, items = [] }) => {
   );
 };
 
-export const OrderBook = React.memo(_OrderBook);
+export const OrderBookTable = React.memo(_OrderBookTable);

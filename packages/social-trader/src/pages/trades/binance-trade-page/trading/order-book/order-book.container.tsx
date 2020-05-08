@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
-import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import {
@@ -26,6 +25,7 @@ import { timer } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
 
+import { OrderBookTable } from "./order-book-table";
 import styles from "./order-book.module.scss";
 
 interface Props {}
@@ -180,13 +180,13 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
               styles["order-book__table-block--reverse"]
             )}
           >
-            <OrderBook reverse color={"red"} items={asks} />
+            <OrderBookTable reverse color={"red"} items={asks} />
           </Row>
           <Row small>
             <OrderBookCurrentPriceContainer />
           </Row>
           <Row wide small className={styles["order-book__table-block"]}>
-            <OrderBook color={"green"} items={bids} />
+            <OrderBookTable color={"green"} items={bids} />
           </Row>
         </div>
       </Row>
