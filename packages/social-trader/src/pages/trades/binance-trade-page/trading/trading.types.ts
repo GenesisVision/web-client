@@ -20,13 +20,9 @@ export interface ITerminalMethods {
     authData: TradeAuthDataType
   ) => Observable<{ listenKey: string }>;
   getAccountInformation: (authData: TradeAuthDataType) => Observable<Account>;
-  getBinanceTrades: (symbol: string, limit: number) => Observable<Trade[]>;
+  getTrades: (symbol: string, limit?: number) => Observable<Trade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
-  getDepth: (symbol: string, limit: number) => Observable<Depth>;
-  newOrder: (
-    options: OrderRequest,
-    authData: TradeAuthDataType
-  ) => Promise<any>;
+  getDepth: (symbol: string, limit?: number) => Observable<Depth>;
   cancelAllOrders: (
     options: { symbol: string; useServerTime?: boolean },
     authData: TradeAuthDataType

@@ -80,7 +80,7 @@ export const getAccountInformation = (
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const getBinanceTrades = (
+export const getTrades = (
   symbol: string,
   limit: number = 50
 ): Observable<Trade[]> =>
