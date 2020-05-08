@@ -1,11 +1,9 @@
 import { BinanceTradeLogin } from "pages/trades/binance-trade-page/binance-trade-login";
-import {
-  BinanceTerminalMethods,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { BinanceTerminalMethods } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingContainerWithInfo } from "pages/trades/binance-trade-page/trading/trading.container";
+import { useTradeAuth } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React from "react";
 
 interface Props {

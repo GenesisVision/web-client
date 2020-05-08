@@ -1,9 +1,9 @@
 import useApiRequest from "hooks/api-request.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
-  updateAccountInfo
+  updateAccountInfo,
+  useTradeAuth
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,

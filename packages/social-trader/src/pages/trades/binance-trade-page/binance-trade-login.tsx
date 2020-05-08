@@ -1,7 +1,6 @@
 import GVButton from "components/gv-button";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import React, { useState } from "react";
 
 export const BinanceTradeLogin: React.FC<{

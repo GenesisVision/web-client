@@ -2,8 +2,8 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { useTradeAuth } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   OrderSide,
   TradeAuthDataType

@@ -6,12 +6,14 @@ import { Row } from "components/row/row";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  getSymbol,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   OrderSide,
   OrderType

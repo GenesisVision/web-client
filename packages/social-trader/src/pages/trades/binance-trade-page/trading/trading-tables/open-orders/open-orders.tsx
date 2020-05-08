@@ -1,11 +1,13 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
 import useApiRequest from "hooks/api-request.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  getSymbolFromState,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   QueryOrderResult,
   TradeAuthDataType

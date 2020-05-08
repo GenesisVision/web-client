@@ -1,9 +1,9 @@
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   filterOrderEventsStream,
-  getSymbol
+  getSymbol,
+  useTradeAuth
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExecutionReport,
