@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
 import { TradeHeaderContainer } from "pages/trades/binance-trade-page/trading/components/trade-header/trade-header";
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
@@ -16,6 +15,7 @@ import {
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
+import { TradeAuthDataType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useEffect } from "react";
 
 import styles from "./trading.module.scss";

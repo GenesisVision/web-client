@@ -1,9 +1,10 @@
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { Observable } from "rxjs";
 import { OrderRequest } from "services/request.service";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
+
+export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
   getExchangeInfo: () => Promise<ExchangeInfo>;

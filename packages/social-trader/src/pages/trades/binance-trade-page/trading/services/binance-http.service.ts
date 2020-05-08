@@ -1,4 +1,3 @@
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   Account,
   CancelOrderResult,
@@ -9,6 +8,7 @@ import {
   QueryOrderResult,
   Ticker,
   Trade,
+  TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";

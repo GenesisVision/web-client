@@ -2,12 +2,12 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
-import {
-  TradeAuthDataType,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { cancelOrder } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  OrderSide,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
 import { formatDate } from "utils/dates";
 

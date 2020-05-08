@@ -1,7 +1,6 @@
 import { useCookieState } from "hooks/cookie-state";
+import { TradeAuthDataType } from "pages/trades/binance-trade-page/trading/trading.types";
 import { useEffect, useState } from "react";
-
-export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
