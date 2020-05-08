@@ -1,13 +1,8 @@
-import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
-import { Row } from "components/row/row";
-import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
-import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
+import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import {
   collapseItems,
   getDividerParts,
   normalizeDepthList,
-  ORDER_BOOK_COLUMNS,
   updateDepthList,
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
@@ -24,9 +19,6 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { timer } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
-
-import { OrderBookTable } from "./order-book-table";
-import styles from "./order-book.module.scss";
 
 interface Props {}
 
@@ -153,43 +145,13 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   return (
     <>
-      <Row small>
-        <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
-      </Row>
-      <Row small>
-        <table className={styles["order-book__table"]}>
-          <thead>
-            <th>
-              <MutedText small>Price ({baseAsset})</MutedText>
-            </th>
-            <th>
-              <MutedText small>Amount ({quoteAsset})</MutedText>
-            </th>
-            <th>
-              <MutedText small>Total</MutedText>
-            </th>
-          </thead>
-        </table>
-      </Row>
-      <Row small className={styles["order-book__tables-row"]}>
-        <div ref={ref} className={styles["order-book__tables-block"]}>
-          <Row
-            wide
-            className={classNames(
-              styles["order-book__table-block"],
-              styles["order-book__table-block--reverse"]
-            )}
-          >
-            <OrderBookTable reverse color={"red"} items={asks} />
-          </Row>
-          <Row small>
-            <OrderBookCurrentPriceContainer />
-          </Row>
-          <Row wide small className={styles["order-book__table-block"]}>
-            <OrderBookTable color={"green"} items={bids} />
-          </Row>
-        </div>
-      </Row>
+      <OrderBook
+        tickValue={tickValue}
+        setTickValue={setTickValue}
+        tablesBlockRef={ref}
+        asks={asks}
+        bids={bids}
+      />
     </>
   );
 };
