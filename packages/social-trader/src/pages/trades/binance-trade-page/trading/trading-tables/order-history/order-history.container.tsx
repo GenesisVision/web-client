@@ -1,9 +1,11 @@
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { filterOrderEventsStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  filterOrderEventsStream,
+  getSymbol
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExecutionReport,
   QueryOrderResult

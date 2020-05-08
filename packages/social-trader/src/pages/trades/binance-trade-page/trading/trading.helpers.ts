@@ -1,11 +1,18 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
+import {
+  transformExecutionReport,
+  transformOutboundAccountInfo
+} from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   AssetBalance,
+  ExecutionReport,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import { Observable } from "rxjs";
+import { filter, map } from "rxjs/operators";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
@@ -13,6 +20,22 @@ export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
 };
+
+export const filterOutboundAccountInfoStream = (
+  userStream: Observable<any>
+): Observable<Account> =>
+  userStream.pipe(
+    filter(info => info.e === "outboundAccountInfo"),
+    map(transformOutboundAccountInfo)
+  );
+
+export const filterOrderEventsStream = (
+  userStream: Observable<any>
+): Observable<ExecutionReport> =>
+  userStream.pipe(
+    filter(info => info.e === "executionReport"),
+    map(transformExecutionReport)
+  );
 
 const normalizeBalanceList = (
   list: AssetBalance[]
