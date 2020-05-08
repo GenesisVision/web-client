@@ -3,7 +3,7 @@ import { MutedText } from "components/muted-text/muted-text";
 import useApiRequest from "hooks/api-request.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
-import { cancelAllOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
+  const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
   const { symbol } = useContext(TradingInfoContext);
   const { authData } = useTradeAuth();

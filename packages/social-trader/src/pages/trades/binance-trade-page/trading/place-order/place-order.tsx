@@ -8,7 +8,7 @@ import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
-import { tradeRequest } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -23,6 +23,7 @@ import { MarketTradeForm } from "./market-trade-form";
 import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
 
 const _PlaceOrder: React.FC = () => {
+  const { tradeRequest } = useContext(TerminalMethodsContext);
   const { price } = useContext(TradingPriceContext);
 
   const {

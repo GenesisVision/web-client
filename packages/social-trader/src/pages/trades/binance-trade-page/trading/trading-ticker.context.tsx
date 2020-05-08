@@ -2,8 +2,7 @@ import {
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { getTickers } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { marketTicketsSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   MergedTickerSymbolType,
@@ -29,6 +28,9 @@ export const TradingTickerContext = createContext<TradingTickerContextState>(
 );
 
 export const TradingTickerContextProvider: React.FC = ({ children }) => {
+  const { getTickers, marketTicketsSocket } = useContext(
+    TerminalMethodsContext
+  );
   const [requestData, setRequestData] = useState<{
     [key: string]: Ticker;
   }>({});

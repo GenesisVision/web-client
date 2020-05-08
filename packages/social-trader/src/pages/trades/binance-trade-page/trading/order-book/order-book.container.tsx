@@ -7,8 +7,7 @@ import {
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
-import { getDepth } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { depthSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
@@ -25,6 +24,7 @@ interface Props {}
 const ROW_HEIGHT = 16;
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
+  const { depthSocket, getDepth } = useContext(TerminalMethodsContext);
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState<number>(0);
 

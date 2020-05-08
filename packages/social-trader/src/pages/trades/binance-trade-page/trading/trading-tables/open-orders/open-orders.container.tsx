@@ -1,6 +1,6 @@
 import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { getOpenOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
 import { filterOrderEventsStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
@@ -16,6 +16,7 @@ import { normalizeOpenOrdersList } from "./open-orders.helpers";
 interface Props {}
 
 export const OpenOrdersContainer: React.FC<Props> = () => {
+  const { getOpenOrders } = useContext(TerminalMethodsContext);
   const { authData } = useTradeAuth();
 
   const {
