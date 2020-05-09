@@ -1,6 +1,7 @@
 import { Center } from "components/center/center";
 import { togglePin } from "components/conversation/conversation.service";
-import GVButton from "components/gv-button";
+import { PinIcon } from "components/conversation/icons/pin.icon";
+import { UnpinIcon } from "components/conversation/icons/unpin.icon";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import useApiRequest from "hooks/api-request.hook";
@@ -19,7 +20,7 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
     setChanged();
     postponeFunc(setNotChanged);
   };
-  const { sendRequest, isPending } = useApiRequest({
+  const { sendRequest } = useApiRequest({
     request: () => {
       setInnerPinned(!innerPinned);
       return togglePin({ id, value });
@@ -28,8 +29,8 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   });
   return (
     <Center>
-      {isChanged && (
-        <RowItem className="conversation-pin-button">
+      {false && (
+        <RowItem>
           <Center>
             <MutedText small>
               {innerPinned ? t("pinned") : t("unpinned")}
@@ -37,17 +38,11 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
           </Center>
         </RowItem>
       )}
-      <RowItem className="conversation-pin-button">
+      <RowItem>
         <Center>
-          <GVButton
-            onClick={sendRequest}
-            noPadding
-            variant="text"
-            color="secondary"
-            disabled={isPending}
-          >
-            {innerPinned ? "unpin" : "pin"}
-          </GVButton>
+          <div className="conversation-pin-button" onClick={sendRequest}>
+            {innerPinned ? <UnpinIcon /> : <PinIcon />}
+          </div>
         </Center>
       </RowItem>
     </Center>
