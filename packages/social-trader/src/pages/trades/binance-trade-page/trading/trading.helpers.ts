@@ -1,11 +1,17 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
+import { useCookieState } from "hooks/cookie-state";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   AssetBalance,
+  ExecutionReport,
+  TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import { useEffect, useState } from "react";
+import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
@@ -13,6 +19,36 @@ export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
 };
+const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
+const initialState = { publicKey: "", privateKey: "" };
+
+export const useTradeAuth = () => {
+  const [authData, setAuthData] = useState(initialState);
+  const { set, get } = useCookieState({
+    key: TRADE_AUTH_DATA_KEY,
+    initialState
+  });
+  useEffect(() => {
+    setAuthData(get());
+  }, []);
+  return {
+    set: (values: TradeAuthDataType) => {
+      setAuthData(values);
+      set(values);
+    },
+    authData
+  };
+};
+
+export const filterOutboundAccountInfoStream = (
+  userStream: Observable<any>
+): Observable<Account> =>
+  userStream.pipe(filter(info => info.eventType === "outboundAccountInfo"));
+
+export const filterOrderEventsStream = (
+  userStream: Observable<any>
+): Observable<ExecutionReport> =>
+  userStream.pipe(filter(info => info.eventType === "executionReport"));
 
 const normalizeBalanceList = (
   list: AssetBalance[]

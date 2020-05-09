@@ -2,7 +2,7 @@ import {
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { getTickersStream } from "pages/trades/binance-trade-page/trading/services/binance-stream.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   MergedTickerSymbolType,
@@ -28,6 +28,12 @@ export const TradingTickerContext = createContext<TradingTickerContextState>(
 );
 
 export const TradingTickerContextProvider: React.FC = ({ children }) => {
+  const { getTickers, marketTicketsSocket } = useContext(
+    TerminalMethodsContext
+  );
+  const [requestData, setRequestData] = useState<{
+    [key: string]: Ticker;
+  }>({});
   const [normalizedSymbols, setNormalizedSymbols] = useState<{
     [key: string]: Symbol;
   }>({});
@@ -47,12 +53,12 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   }, [exchangeInfo]);
 
   useEffect(() => {
-    const marketTickets = getTickersStream(connectSocket).pipe(
-      map(items => normalizeMarketList(items))
+    const requestData = getTickers().pipe(map(normalizeMarketList));
+    requestData.subscribe(setRequestData);
+    const ticketsSocket = marketTicketsSocket(connectSocket).pipe(
+      map(normalizeMarketList)
     );
-    marketTickets.subscribe(data => {
-      setSocketData(data);
-    });
+    ticketsSocket.subscribe(setSocketData);
   }, []);
   useEffect(() => {
     const updatedList = { ...list };
@@ -68,11 +74,17 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
     });
     setList(updatedList);
   }, [normalizedSymbols]);
+  useEffect(() => {
+    const updatedList = { ...list };
+    Object.keys(requestData).forEach(name => {
+      updatedList[name] = { ...updatedList[name], ...requestData[name] };
+    });
+    setList(updatedList);
+  }, [requestData]);
   const items = useMemo(() => Object.values(list), [list]);
-
   return (
     <TradingTickerContext.Provider
-      value={Object.values(socketData).length ? items : undefined}
+      value={Object.values(requestData).length ? items : undefined}
     >
       {children}
     </TradingTickerContext.Provider>

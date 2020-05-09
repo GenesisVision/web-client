@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { Center } from "components/center/center";
+import { LikeButtonIcon } from "components/conversation/like/like-button-icon/like-button-icon";
 import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 
@@ -11,19 +11,10 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   }, [disable, onClick]);
 
   return (
-    <Center
-      onClick={clickHandle}
-      className={classNames(styles["like"], {
-        [styles["like--disable"]]: disable
-      })}
-    >
+    <Center onClick={clickHandle}>
       <RowItem small>
-        <div
-          className={classNames(styles["like__icon"], {
-            [styles["like__icon--liked"]]: liked
-          })}
-        >
-          ♥
+        <div className={styles("like__icon")}>
+          <LikeButtonIcon liked={!!liked} disabled={disable} />
         </div>
       </RowItem>
       {count > 0 && <RowItem>{count}</RowItem>}

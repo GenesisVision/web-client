@@ -7,6 +7,19 @@
   display: flex;
   flex-direction: column;
 
+  &__tooltip-data {
+    height: 100%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tooltip {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  }
+
   &__table-container {
     flex-grow: 1;
     display: flex;

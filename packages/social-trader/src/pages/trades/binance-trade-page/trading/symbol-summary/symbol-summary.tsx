@@ -7,6 +7,7 @@ import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { MarketWatchTooltipButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
   getTickerSymbolLoaderData,
   useSymbolData
@@ -64,9 +65,11 @@ const _SymbolSummaryView: React.FC<Props> = ({
       <Row center={false}>
         <RowItem>
           <Row>
-            <h3>
-              {baseAsset}/{quoteAsset}
-            </h3>
+            <MarketWatchTooltipButton>
+              <h3>
+                {baseAsset}/{quoteAsset}
+              </h3>
+            </MarketWatchTooltipButton>
           </Row>
           <Row>
             <h4>

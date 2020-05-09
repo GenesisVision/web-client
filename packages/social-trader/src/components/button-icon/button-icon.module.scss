@@ -1,0 +1,44 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.button-icon {
+  &,
+  & svg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: block;
+  }
+
+  svg [stroke] {
+    @include transition(stroke);
+    stroke: white;
+  }
+
+  svg [fill] {
+    @include transition(fill);
+    fill: white;
+  }
+
+  &:hover {
+    svg [stroke] {
+      stroke: $label-color;
+    }
+    svg [fill] {
+      fill: $label-color;
+    }
+  }
+
+  &--disabled {
+    &,
+    & svg {
+      cursor: default;
+    }
+    svg [stroke] {
+      stroke: $label-color;
+    }
+    svg [fill] {
+      fill: $label-color;
+    }
+  }
+}

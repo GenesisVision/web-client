@@ -1,9 +1,11 @@
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { getAllOrders } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { filterOrderEventsStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import {
+  filterOrderEventsStream,
+  getSymbol,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExecutionReport,
   QueryOrderResult
@@ -16,6 +18,7 @@ import { OrderHistory } from "./order-history";
 interface Props {}
 
 export const OrderHistoryContainer: React.FC<Props> = () => {
+  const { getAllOrders } = useContext(TerminalMethodsContext);
   const { authData } = useTradeAuth();
 
   const {
@@ -60,6 +63,6 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
     setList(updatedList);
   }, [socketData]);
 
-  const items = useMemo(() => Object.values(list), [list]);
+  const items = useMemo(() => Object.values(list).reverse(), [list]);
   return <OrderHistory items={items} />;
 };

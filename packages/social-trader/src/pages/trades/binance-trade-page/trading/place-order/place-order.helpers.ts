@@ -1,3 +1,4 @@
+import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
 import {
   formatValueWithTick,
@@ -13,14 +14,15 @@ import {
   SymbolPriceFilter,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
-import { number, object } from "yup";
+import { lazy, number, object } from "yup";
 
 type PlaceOrderFormSetValueType = (
   name: string,
@@ -29,16 +31,23 @@ type PlaceOrderFormSetValueType = (
 ) => void;
 
 export enum TRADE_FORM_FIELDS {
+  stopPrice = "stopPrice",
   price = "price",
   quantity = "quantity",
   total = "total"
 }
 
-export interface ITradeFormValues {
-  [TRADE_FORM_FIELDS.price]: number;
+export interface IPlaceOrderDefaultFormValues {
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
+  [TRADE_FORM_FIELDS.price]: number;
 }
+
+export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.stopPrice]: number;
+}
+
+export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
 
@@ -88,7 +97,7 @@ export const usePlaceOrderAutoFill = ({
   }, [quantity]);
   useEffect(() => {
     if (!autoFill) {
-      if (quantity) {
+      if (quantity && price) {
         setValue(
           totalName,
           (formatValueWithTick(
@@ -104,6 +113,8 @@ export const usePlaceOrderAutoFill = ({
 };
 
 export const usePlaceOrderFormReset = ({
+  status,
+  triggerValidation,
   stepSize,
   outerPrice,
   reset,
@@ -116,6 +127,8 @@ export const usePlaceOrderFormReset = ({
   totalName,
   quantityName
 }: {
+  status: API_REQUEST_STATUS;
+  triggerValidation: VoidFunction;
   stepSize: string;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
@@ -139,13 +152,32 @@ export const usePlaceOrderFormReset = ({
     quantityName,
     totalName
   });
+  const [isReset, setReset] = useState<boolean | undefined>();
 
   useEffect(() => {
-    reset({ price: outerPrice, quantity, total });
+    if (status === API_REQUEST_STATUS.SUCCESS)
+      postponeFunc(() => setReset(true));
+  }, [status]);
+
+  useEffect(() => {
+    if (isReset) {
+      reset(watch());
+      setReset(false);
+    }
+    if (isReset === false) triggerValidation();
+  }, [isReset]);
+
+  useEffect(() => {
+    reset({
+      stopPrice: outerPrice,
+      price: outerPrice,
+      quantity,
+      total
+    });
   }, [outerPrice]);
 
   const [prevFormState, setPrevFormState] = useState<
-    (AnyObjectType & { sliderValue: number }) | undefined
+    (AnyObjectType & { sliderValue?: number }) | undefined
   >();
 
   useEffect(() => {
@@ -179,15 +211,17 @@ export const usePlaceOrderInfo = ({
   const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
-  const maxQuantityWithWallet =
-    side === "BUY"
+  const maxQuantityWithWallet = useMemo(() => {
+    return side === "BUY"
       ? +maxQty
       : Math.min(+maxQty, +getBalance(balances, baseAsset));
+  }, [side, maxQty, balances, baseAsset]);
 
-  const maxTotalWithWallet =
-    side === "BUY"
+  const maxTotalWithWallet = useMemo(() => {
+    return side === "BUY"
       ? +getBalance(balances, quoteAsset)
       : Number.MAX_SAFE_INTEGER;
+  }, [side, balances, quoteAsset]);
   return {
     minPrice,
     maxPrice,
@@ -219,8 +253,9 @@ export const useTradeSlider = ({
   totalName: string;
   quantityName: string;
 }) => {
-  const [sliderValue, setSliderValue] = useState<number>(0);
+  const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
+    if (sliderValue === undefined) return;
     const percentValue = parseInt(RANGE_MARKS[sliderValue]);
     if (side === "BUY") {
       const walletAvailable = +getBalance(balances, quoteAsset);
@@ -292,6 +327,41 @@ export const isTradeFieldAllow = (min: number, max: number, tick: number) => (
   );
 };
 
+const placeOrderTotalShape = ({
+  t,
+  maxTotal,
+  minNotional,
+  quoteAsset,
+  maxQuantity
+}: {
+  t: TFunction;
+  quoteAsset: TradeCurrency;
+  maxTotal: number;
+  maxQuantity: number;
+  minNotional: number;
+}) =>
+  number()
+    .min(
+      minNotional,
+      t(
+        `Must be more or equal than ${formatCurrencyValue(
+          minNotional,
+          quoteAsset
+        )}`,
+        { minNotional }
+      )
+    )
+    .max(
+      maxTotal,
+      t(
+        `Must be less or equal than ${formatCurrencyValue(
+          maxTotal,
+          quoteAsset
+        )}`,
+        { maxQuantity }
+      )
+    );
+
 const tradeNumberShape = ({
   t,
   min,
@@ -314,7 +384,75 @@ const tradeNumberShape = ({
     test: value => true //modulo(value, divider) === 0
   });
 
-export const limitValidationSchema = ({
+export const placeOrderStopLimitValidationSchema = ({
+  side,
+  t,
+  baseAsset,
+  quoteAsset,
+  stepSize,
+  tickSize,
+  maxTotal,
+  maxPrice,
+  minPrice,
+  maxQuantity,
+  minQuantity,
+  minNotional
+}: {
+  side: OrderSide;
+  t: TFunction;
+  baseAsset: TradeCurrency;
+  quoteAsset: TradeCurrency;
+  stepSize: number;
+  tickSize: number;
+  maxTotal: number;
+  maxPrice: number;
+  minPrice: number;
+  maxQuantity: number;
+  minQuantity: number;
+  minNotional: number;
+}) =>
+  lazy((values: IStopLimitFormValues) => {
+    const minPriceValue =
+      side === "BUY"
+        ? Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        : minPrice;
+    const maxPriceValue =
+      side === "SELL"
+        ? Math.min(maxPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        : maxPrice;
+    return object().shape({
+      [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
+        t,
+        min: minPrice,
+        max: maxPrice,
+        divider: tickSize,
+        currency: quoteAsset
+      }),
+      [TRADE_FORM_FIELDS.price]: tradeNumberShape({
+        t,
+        min: minPriceValue,
+        max: maxPriceValue,
+        divider: tickSize,
+        currency: quoteAsset
+      }),
+      [TRADE_FORM_FIELDS.quantity]: tradeNumberShape({
+        t,
+        min: minQuantity,
+        max: maxQuantity,
+        divider: stepSize,
+        currency: baseAsset
+      }),
+      [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
+        t,
+        maxTotal,
+        minNotional,
+        quoteAsset,
+        maxQuantity
+      })
+    });
+  });
+
+export const placeOrderDefaultValidationSchema = ({
   t,
   baseAsset,
   quoteAsset,
@@ -354,25 +492,11 @@ export const limitValidationSchema = ({
       divider: stepSize,
       currency: baseAsset
     }),
-    [TRADE_FORM_FIELDS.total]: number()
-      .min(
-        minNotional,
-        t(
-          `Must be more or equal than ${formatCurrencyValue(
-            minNotional,
-            quoteAsset
-          )}`,
-          { minNotional }
-        )
-      )
-      .max(
-        maxTotal,
-        t(
-          `Must be less or equal than ${formatCurrencyValue(
-            maxTotal,
-            quoteAsset
-          )}`,
-          { maxQuantity }
-        )
-      )
+    [TRADE_FORM_FIELDS.total]: placeOrderTotalShape({
+      t,
+      maxTotal,
+      minNotional,
+      quoteAsset,
+      maxQuantity
+    })
   });

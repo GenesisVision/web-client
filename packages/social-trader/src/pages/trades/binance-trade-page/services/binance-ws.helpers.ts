@@ -2,12 +2,11 @@ import {
   Account,
   Depth,
   ExecutionReport,
+  OutboundAccountInfo,
   Ticker,
   TickerWS,
   Trade
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
 
 export const tradeTransform = ({
   e,
@@ -48,7 +47,9 @@ export const depthTransform = ({ e, E, s, U, u, b, a }: any): Depth => {
     asks: a
   };
 };
-export const transformOutboundAccountInfo = (m: any): Account => ({
+export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
+  eventType: "outboundAccountInfo",
+  eventTime: m.E,
   makerCommission: m.m,
   takerCommission: m.t,
   buyerCommission: m.b,
@@ -92,22 +93,6 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   orderCreationTime: m.O,
   totalQuoteTradeQuantity: m.Z
 });
-
-export const filterOutboundAccountInfoStream = (
-  userStream: Observable<any>
-): Observable<Account> =>
-  userStream.pipe(
-    filter(info => info.e === "outboundAccountInfo"),
-    map(transformOutboundAccountInfo)
-  );
-
-export const filterOrderEventsStream = (
-  userStream: Observable<any>
-): Observable<ExecutionReport> =>
-  userStream.pipe(
-    filter(info => info.e === "executionReport"),
-    map(transformExecutionReport)
-  );
 
 export const userTransforms = {
   outboundAccountInfo: (m: any) => ({

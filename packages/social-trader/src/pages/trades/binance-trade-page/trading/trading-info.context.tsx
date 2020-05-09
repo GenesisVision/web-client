@@ -1,19 +1,22 @@
 import useApiRequest from "hooks/api-request.hook";
-import { useTradeAuth } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
-  getAccountInformation,
-  getExchangeInfo,
-  getUserStreamKey
-} from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { filterOutboundAccountInfoStream } from "pages/trades/binance-trade-page/trading/services/binance-ws.helpers";
-import { getUserStreamSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
-import { updateAccountInfo } from "pages/trades/binance-trade-page/trading/trading.helpers";
+  filterOutboundAccountInfoStream,
+  updateAccountInfo,
+  useTradeAuth
+} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -45,6 +48,12 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC = ({ children }) => {
+  const {
+    getExchangeInfo,
+    getAccountInformation,
+    getUserStreamKey,
+    getUserStreamSocket
+  } = useContext(TerminalMethodsContext);
   const { authData } = useTradeAuth();
   const { connectSocket } = useSockets();
 

@@ -1,15 +1,14 @@
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   Account,
   CancelOrderResult,
   Depth,
   ExchangeInfo,
   OrderSide,
-  OrderType,
   QueryOrderResult,
   Ticker,
   Trade,
-  TradeCurrency
+  TradeAuthDataType,
+  TradeRequest
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import {
@@ -18,13 +17,6 @@ import {
   requestService,
   TimeInForce
 } from "services/request.service";
-
-export interface TradeRequest {
-  symbol: TradeCurrency;
-  price: number;
-  quantity: number;
-  type: OrderType;
-}
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   requestService.get(
@@ -53,7 +45,7 @@ export const getOpenOrders = (
 export const getAllOrders = (
   symbol: string,
   authData: TradeAuthDataType
-): Observable<any[]> =>
+): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
     url: "/api/v3/allOrders",
@@ -79,7 +71,7 @@ export const getAccountInformation = (
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const getBinanceTrades = (
+export const getTrades = (
   symbol: string,
   limit: number = 50
 ): Observable<Trade[]> =>
@@ -117,6 +109,20 @@ export const newOrder = (
     value => value
   );
 
+export const cancelAllOrders = (
+  options: { symbol: string; useServerTime?: boolean },
+  authData: TradeAuthDataType
+): Promise<CancelOrderResult> =>
+  requestService.deleteRequest(
+    {
+      ...authData,
+      url: "/api/v3/openOrders",
+      params: options,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
   authData: TradeAuthDataType
@@ -132,38 +138,54 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  stopPrice,
   authData,
   symbol,
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
-      price: type === "LIMIT" ? String(price) : undefined,
+      price:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? String(price)
+          : undefined,
       quantity: String(quantity),
-      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
+      timeInForce:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? TimeInForce.GTC
+          : undefined,
       side: "BUY"
     },
     authData
   );
 
 export const postSell = ({
+  stopPrice,
   authData,
   symbol,
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<any> =>
+}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
-      price: type === "LIMIT" ? String(price) : undefined,
+      price:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? String(price)
+          : undefined,
       quantity: String(quantity),
-      timeInForce: type === "LIMIT" ? TimeInForce.GTC : undefined,
+      timeInForce:
+        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+          ? TimeInForce.GTC
+          : undefined,
       side: "SELL"
     },
     authData

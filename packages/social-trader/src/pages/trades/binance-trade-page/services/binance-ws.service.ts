@@ -11,7 +11,9 @@ import { ConnectSocketMethodType } from "services/websocket.service";
 import {
   depthTransform,
   tickerTransform,
-  tradeTransform
+  tradeTransform,
+  transformExecutionReport,
+  transformOutboundAccountInfo
 } from "./binance-ws.helpers";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
@@ -67,5 +69,12 @@ export const getUserStreamSocket = (
 ) => {
   const socketName = "accountInformation";
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${listenKey}`;
-  return connectSocketMethod(socketName, url);
+  return connectSocketMethod(socketName, url).pipe(
+    map(item => {
+      if (item.e === "outboundAccountInfo")
+        return transformOutboundAccountInfo(item);
+      if (item.e === "executionReport") return transformExecutionReport(item);
+      return item;
+    })
+  );
 };

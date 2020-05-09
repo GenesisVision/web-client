@@ -1,5 +1,4 @@
-import { getBinanceTrades } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { tradeSocket } from "pages/trades/binance-trade-page/trading/services/binance-ws.service";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -32,6 +31,7 @@ export const TradingPriceContext = createContext<TradingPriceState>(
 
 export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const TRADE_LIST_SIZE = 50;
+  const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
@@ -51,7 +51,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
     socket.subscribe(data => {
       setSocketData(data);
     });
-    const trade = getBinanceTrades(symbol);
+    const trade = getTrades(symbol);
     trade.subscribe(data => {
       const updatedData = [...socketDataBuffer, ...data];
       setList(updatedData);

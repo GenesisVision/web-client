@@ -33,7 +33,7 @@ $place-order-width: 250px;
       "chart chart place-orders"
       "order-book trades place-orders"
       "tables tables place-orders";
-    grid-template-rows: auto auto 1fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr 1fr $bottom-block-height;
     grid-template-columns: 1fr 1fr $place-order-width;
   }
   @include media-breakpoint-desktop() {

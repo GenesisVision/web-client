@@ -2,13 +2,13 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { useTradeAuth } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
-  TradeAuthDataType,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { cancelOrder } from "pages/trades/binance-trade-page/trading/services/binance-http.service";
-import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useCallback } from "react";
+  OrderSide,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/trading.types";
+import React, { useCallback, useContext } from "react";
 import { formatDate } from "utils/dates";
 
 interface Props {
@@ -34,6 +34,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   filled,
   total
 }) => {
+  const { cancelOrder } = useContext(TerminalMethodsContext);
   const { authData } = useTradeAuth();
   const { sendRequest, isPending } = useApiRequest({
     request: ({
@@ -59,6 +60,8 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>{total}</TableCell>
       <TableCell>
         <GVButton
+          noPadding
+          variant={"text"}
           disabled={isPending}
           isPending={isPending}
           size={GV_BTN_SIZE.SMALL}

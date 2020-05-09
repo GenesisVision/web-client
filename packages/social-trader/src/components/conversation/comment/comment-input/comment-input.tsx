@@ -7,6 +7,7 @@ import {
   postMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
+import { SendIcon } from "components/conversation/icons/send.icon";
 import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
 import { SearchPanel } from "components/conversation/search-panel/search-panel";
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
@@ -180,7 +181,10 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                   [styles["comment-input__send-button--disable"]]: disabled
                 })}
               >
-                >
+                <SendIcon
+                  className={classNames("comment-input__send-button-icon")}
+                  disabled={disabled}
+                />
               </button>
             </RowItem>
           </Row>

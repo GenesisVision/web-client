@@ -42,6 +42,26 @@ export enum HTTP_METHODS {
 
 export const BINANCE_API_KEY_HEADER = "x-mbx-apikey";
 
+export const handleErrors = async (response: Response) => {
+  if (response.ok) {
+    return response;
+  }
+  try {
+    const body = await response.json();
+    console.log(body);
+    return Promise.reject({
+      body,
+      errorMessage: body.msg,
+      statusCode: response.status
+    });
+  } catch (e) {
+    return Promise.reject({
+      body: response.statusText,
+      statusCode: response.status
+    });
+  }
+};
+
 const parseOptions = (options: OrderRequest) =>
   Object.entries(options)
     .map(([name, value]) => `${name}=${String(value).toUpperCase()}`)
@@ -82,7 +102,9 @@ export const sendRequest = ({
         : undefined
   };
   const fetchUrl = method !== HTTP_METHODS.POST ? `${url}?${getParams}` : url;
-  return fetch(fetchUrl, options).then(response => response.json());
+  return fetch(fetchUrl, options)
+    .then(handleErrors)
+    .then(response => response.json());
 };
 
 const deleteRequest = (

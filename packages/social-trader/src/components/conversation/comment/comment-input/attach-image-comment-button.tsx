@@ -1,5 +1,5 @@
-import ImageBaseElement from "components/avatar/image-base.element";
 import { CommentInputButton } from "components/conversation/comment/comment-input/comment-input-button";
+import { MediaIcon } from "components/conversation/icons/media.icon";
 import React, { useCallback } from "react";
 
 const _AttachImageCommentButton: React.FC<Props> = ({ onClick }) => {
@@ -9,11 +9,7 @@ const _AttachImageCommentButton: React.FC<Props> = ({ onClick }) => {
 
   return (
     <CommentInputButton onClick={handleClick}>
-      <ImageBaseElement
-        src={
-          "https://s1.iconbird.com/ico/2013/9/452/w512h4641380476740clip.png"
-        }
-      />
+      <MediaIcon />
     </CommentInputButton>
   );
 };

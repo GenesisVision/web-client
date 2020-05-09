@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
+import { ShareIcon } from "components/conversation/icons/share.icon";
 import { RePostDialog } from "components/conversation/repost/repost.dialog";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
@@ -16,13 +17,10 @@ export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
 
   return (
     <>
-      <Center
-        onClick={setIsOpen}
-        className={classNames(styles["share"], {
-          [styles["share--disable"]]: disable
-        })}
-      >
-        <RowItem small>Share</RowItem>
+      <Center onClick={setIsOpen}>
+        <RowItem className={styles["share__icon"]} small>
+          <ShareIcon />
+        </RowItem>
         {count > 0 && <RowItem>{count}</RowItem>}
       </Center>
       <RePostDialog
