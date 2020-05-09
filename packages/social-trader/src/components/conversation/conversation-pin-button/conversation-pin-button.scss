@@ -1,3 +1,6 @@
+$pin-button-size: 12px;
+
 .conversation-pin-button {
-  height: 20px;
+  height: $pin-button-size;
+  width: $pin-button-size;
 }
