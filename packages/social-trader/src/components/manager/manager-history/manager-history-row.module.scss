@@ -1,0 +1,15 @@
+@import "~shared/styles/_breakpoint";
+
+.manager-history-row {
+  &__data {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include media-breakpoint-landscape-tablet() {
+      flex-wrap: nowrap;
+    }
+  }
+  &__chart {
+    max-width: 136px;
+    width: 136px;
+  }
+}

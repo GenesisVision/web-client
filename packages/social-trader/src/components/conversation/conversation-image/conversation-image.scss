@@ -52,6 +52,7 @@ $image-full-button-size: 30px;
   max-height: $image-height-full;
   max-width: $image-width-full;
   &__button {
+    padding: $image-full-button-size/4;
     cursor: pointer;
     position: absolute;
     top: calc(50% - #{$image-full-button-size}/ 2);

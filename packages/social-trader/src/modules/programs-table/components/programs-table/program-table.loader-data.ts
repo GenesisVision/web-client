@@ -52,6 +52,11 @@ export const programDetailsLoaderDataCreator = (): ProgramDetailsListItem => ({
   }
 });
 
+export const userProgramListLoaderData = tableLoaderCreator(
+  programDetailsLoaderDataCreator,
+  4
+);
+
 export const programListLoaderData = tableLoaderCreator(
   //: ProgramDetailsOld[]
   programDetailsLoaderDataCreator
