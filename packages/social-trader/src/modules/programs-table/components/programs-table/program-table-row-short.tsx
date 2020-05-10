@@ -1,5 +1,4 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
-import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -13,9 +12,8 @@ import TagProgramContainer from "components/tags/tag-program-container/tag-progr
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
-import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
+import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import * as React from "react";
-import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -27,7 +25,6 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   program
 }) => {
-  const [programState, setProgramState] = useState(program);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
@@ -52,9 +49,6 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const { currency, amount } = balance;
-  const handleUpdateRow = useCallback(program => {
-    setProgramState(program);
-  }, []);
   return (
     <TableRow>
       <TableCell className="programs-table__cell">
@@ -134,15 +128,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className="programs-table__cell programs-table__cell--favorite">
-          <ToggleAssetFavoriteButton
-            asset={programState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.PROGRAM}
-            id={id}
-            isFavorite={programState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={programState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+          <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
         </TableCell>
       )}
     </TableRow>
