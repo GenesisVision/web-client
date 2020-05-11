@@ -24,7 +24,7 @@ interface IManagerHistoryRowProps {
 export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
   ({ label, children }) => {
     return (
-      <RowItem bottomOffset>
+      <RowItem large bottomOffset>
         <StatisticItemInner label={label}>{children}</StatisticItemInner>
       </RowItem>
     );
@@ -48,7 +48,7 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
           size={SIZES.LARGE}
         >
           <Row />
-          <Row>
+          <Row large>
             <RowItem>{avatarBlock}</RowItem>
             <RowItem wide>{tileBlock}</RowItem>
             <RowItem>
