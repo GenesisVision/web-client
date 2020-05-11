@@ -1,73 +1,30 @@
-import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
-import { makeApiRequest, generateSymbol, parseFullSymbol } from "./helpers.ts";
+import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
 import {
   IDatafeedChartApi,
   LibrarySymbolInfo,
   SeriesFormat,
   Timezone
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
-import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
+import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
+
+import { generateSymbol, makeApiRequest, parseFullSymbol } from "./helpers.ts";
 
 const configurationData = {
   supported_resolutions: ["1D", "1W", "1M"],
   exchanges: [
     {
-      value: "Bitfinex",
-      name: "Bitfinex",
-      desc: "Bitfinex"
-    },
-    {
-      // `exchange` argument for the `searchSymbols` method, if a user selects this exchange
-      value: "Kraken",
-
-      // filter name
-      name: "Kraken",
-
-      // full exchange name displayed in the filter popup
-      desc: "Kraken bitcoin exchange"
+      value: "Binance",
+      name: "Binance",
+      desc: "Binance"
     }
   ],
   symbols_types: [
     {
       name: "crypto",
-
-      // `symbolType` argument for the `searchSymbols` method, if a user selects this symbol type
       value: "crypto"
     }
-    // ...
   ]
 };
-
-async function getAllSymbols() {
-  const data = await makeApiRequest("data/v3/all/exchanges");
-  let allSymbols = [];
-
-  for (const exchange of configurationData.exchanges) {
-    const pairs = data.Data[exchange.value].pairs;
-
-    for (const leftPairPart of Object.keys(pairs)) {
-      const symbols = pairs[leftPairPart].map(rightPairPart => {
-        const symbol = generateSymbol(
-          exchange.value,
-          leftPairPart,
-          rightPairPart
-        );
-        return {
-          symbol: symbol.short,
-          full_name: symbol.full,
-          description: symbol.short,
-          exchange: exchange.value,
-          type: "crypto"
-        };
-      });
-      allSymbols = [...allSymbols, ...symbols];
-    }
-  }
-  return allSymbols;
-}
-
-// async function getKlines() {}
-
 export default ({ symbols }: { symbols: Symbol[] }): IDatafeedChartApi => ({
   onReady: callback => {
     // console.log("[onReady]: Method call");
