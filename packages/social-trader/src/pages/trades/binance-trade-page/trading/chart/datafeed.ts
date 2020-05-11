@@ -1,7 +1,7 @@
 import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
+import { IBasicDataFeed } from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
 import {
   Bar,
-  IDatafeedChartApi,
   LibrarySymbolInfo,
   SeriesFormat,
   Timezone
@@ -24,7 +24,8 @@ const configurationData = {
     }
   ]
 };
-export default ({ symbols }: { symbols: Symbol[] }): IDatafeedChartApi => ({
+export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
+  //@ts-ignore
   onReady: callback => {
     // console.log("[onReady]: Method call");
     setTimeout(() => callback(configurationData));
@@ -50,6 +51,7 @@ export default ({ symbols }: { symbols: Symbol[] }): IDatafeedChartApi => ({
     }
     const symbolInfo: LibrarySymbolInfo = {
       name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
+      //@ts-ignore
       base_name: [symbolItem.baseAsset, symbolItem.quoteAsset],
       description: `Binance:${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
       type: "crypto",
