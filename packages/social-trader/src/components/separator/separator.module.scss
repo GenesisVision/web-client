@@ -1,0 +1,14 @@
+@import "~shared/styles/_colors";
+
+$separator-border-color: rgba(255, 255, 255, 0.1);
+
+.separator {
+  &--horizontal {
+    width: 100%;
+    border-bottom: 1px solid $separator-border-color;
+  }
+  &--vertical {
+    height: 100%;
+    border-left: 1px solid $separator-border-color;
+  }
+}
