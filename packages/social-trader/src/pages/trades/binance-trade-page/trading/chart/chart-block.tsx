@@ -28,7 +28,7 @@ export const ChartBlock: React.FC = () => {
         library_path: "/static/charting_library/"
       });
     });
-  }, [Object.values(symbol)]);
+  }, [Object.values(symbol), exchangeInfo?.symbols]);
   return (
     <DefaultBlock
       size={SIZES.SMALL}
