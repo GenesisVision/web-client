@@ -1,3 +1,13 @@
+import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
+import { makeApiRequest, generateSymbol, parseFullSymbol } from "./helpers.ts";
+import {
+  IDatafeedChartApi,
+  LibrarySymbolInfo,
+  SeriesFormat,
+  Timezone
+} from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
+
 const configurationData = {
   supported_resolutions: ["1D", "1W", "1M"],
   exchanges: [
@@ -28,22 +38,85 @@ const configurationData = {
   ]
 };
 
-export default {
+async function getAllSymbols() {
+  const data = await makeApiRequest("data/v3/all/exchanges");
+  let allSymbols = [];
+
+  for (const exchange of configurationData.exchanges) {
+    const pairs = data.Data[exchange.value].pairs;
+
+    for (const leftPairPart of Object.keys(pairs)) {
+      const symbols = pairs[leftPairPart].map(rightPairPart => {
+        const symbol = generateSymbol(
+          exchange.value,
+          leftPairPart,
+          rightPairPart
+        );
+        return {
+          symbol: symbol.short,
+          full_name: symbol.full,
+          description: symbol.short,
+          exchange: exchange.value,
+          type: "crypto"
+        };
+      });
+      allSymbols = [...allSymbols, ...symbols];
+    }
+  }
+  return allSymbols;
+}
+
+// async function getKlines() {}
+
+export default ({ symbols }: { symbols: Symbol[] }): IDatafeedChartApi => ({
   onReady: callback => {
-    console.log("[onReady]: Method call");
+    // console.log("[onReady]: Method call");
     setTimeout(() => callback(configurationData));
   },
   searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
-    console.log("[searchSymbols]: Method call");
+    // console.info(userInput, exchange, symbolType, onResultReadyCallback);
+    // console.info(symbols);
+    return symbols.filter(sym => sym.baseAsset === userInput);
   },
-  resolveSymbol: (
+  resolveSymbol: async (
     symbolName,
     onSymbolResolvedCallback,
     onResolveErrorCallback
   ) => {
-    console.log("[resolveSymbol]: Method call", symbolName);
+    // console.log("[resolveSymbol]: Method call", symbolName);
+    // const symbols = await getAllSymbols();
+    const symbolItem = symbols.find(({ symbol }) => symbol === symbolName);
+    // console.info(symbols, symbolName);
+    if (!symbolItem) {
+      // console.log("[resolveSymbol]: Cannot resolve symbol", symbolName);
+      onResolveErrorCallback("cannot resolve symbol");
+      return;
+    }
+    const symbolInfo: LibrarySymbolInfo = {
+      name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
+      base_name: [symbolItem.baseAsset, symbolItem.quoteAsset],
+      description: `Binance:${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
+      type: "crypto",
+      session: "24x7",
+      timezone: "Etc/UTC" as Timezone,
+      exchange: "crypto",
+      minmov: 1,
+      pricescale: 100,
+      has_intraday: false,
+      has_no_volume: true,
+      has_weekly_and_monthly: false,
+      supported_resolutions: configurationData.supported_resolutions,
+      volume_precision: 2,
+      data_status: symbolItem.status as any,
+      full_name: symbolName,
+      listed_exchange: "",
+      format: "price" as SeriesFormat
+    };
+    //
+    // console.log("[resolveSymbol]: Symbol resolved", symbolName);
+    onSymbolResolvedCallback(symbolInfo);
   },
-  getBars: (
+  getBars: async (
     symbolInfo,
     resolution,
     from,
@@ -52,7 +125,37 @@ export default {
     onErrorCallback,
     firstDataRequest
   ) => {
-    console.log("[getBars]: Method call", symbolInfo);
+    const fromms = from * 1000;
+    const toms = to * 1000;
+    const urlParameters = {
+      symbol: symbolInfo.full_name,
+      interval: resolution.toLowerCase(),
+      startTime: fromms,
+      endTime: toms
+    };
+    try {
+      const data = await getKlines(urlParameters);
+
+      let bars = [];
+      data.forEach(bar => {
+        if (bar[0] >= fromms && bar[0] < toms) {
+          bars = [
+            ...bars,
+            {
+              time: bar[0],
+              open: bar[1],
+              high: bar[2],
+              low: bar[3],
+              close: bar[4]
+            }
+          ];
+        }
+      });
+      onHistoryCallback(bars, { noData: false });
+    } catch (error) {
+      console.log("[getBars]: Get error", error);
+      onErrorCallback(error);
+    }
   },
   subscribeBars: (
     symbolInfo,
@@ -72,4 +175,4 @@ export default {
       subscriberUID
     );
   }
-};
+});

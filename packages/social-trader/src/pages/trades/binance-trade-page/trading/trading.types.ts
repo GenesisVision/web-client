@@ -126,6 +126,21 @@ export interface IChartSymbolFull {
   currency_code: string;
 }
 
+export interface IKline {
+  open_time: number;
+  open: number; // Open
+  high: number; //"0.80000000",       // High
+  low: number; // Low
+  close: number; // Close
+  volume: number; // Volume
+  close_time: number; // Close time
+  quote_asset_volume: number; // Quote asset volume
+  number_of_trades: number; // Number of trades
+  taker_by_base_asset_volume: number; // Taker buy base asset volume
+  taker_by_quote_asset_volume: number; // Taker buy quote asset volume
+  ignore: number; // Ignore.
+}
+
 export interface IChartBar {
   time: number;
   close: string;

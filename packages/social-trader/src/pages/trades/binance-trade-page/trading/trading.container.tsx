@@ -62,38 +62,38 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
           </ResponsiveContainer>
         </div>
         <div className={styles["tables-grid-elem"]}>
-          {/*<TradingTables />*/}
+          <TradingTables />
         </div>
         <div className={styles["chart-grid-elem"]}>
           <ChartBlock />
         </div>
         <TradingPriceContextProvider>
           <div className={styles["order-book-grid-elem"]}>
-            {/*<ResponsiveContainer*/}
-            {/*  enabledScreens={[*/}
-            {/*    "tablet",*/}
-            {/*    "landscape-tablet",*/}
-            {/*    "desktop",*/}
-            {/*    "large-desktop"*/}
-            {/*  ]}*/}
-            {/*>*/}
-            {/*  <OrderBookBlock />*/}
-            {/*</ResponsiveContainer>*/}
+            <ResponsiveContainer
+              enabledScreens={[
+                "tablet",
+                "landscape-tablet",
+                "desktop",
+                "large-desktop"
+              ]}
+            >
+              <OrderBookBlock />
+            </ResponsiveContainer>
           </div>
           <div className={styles["trades-grid-elem"]}>
-            {/*<ResponsiveContainer*/}
-            {/*  enabledScreens={[*/}
-            {/*    "tablet",*/}
-            {/*    "landscape-tablet",*/}
-            {/*    "desktop",*/}
-            {/*    "large-desktop"*/}
-            {/*  ]}*/}
-            {/*>*/}
-            {/*  <TradesBlock />*/}
-            {/*</ResponsiveContainer>*/}
+            <ResponsiveContainer
+              enabledScreens={[
+                "tablet",
+                "landscape-tablet",
+                "desktop",
+                "large-desktop"
+              ]}
+            >
+              <TradesBlock />
+            </ResponsiveContainer>
           </div>
           <div className={styles["place-orders-grid-elem"]}>
-            {/*<PlaceOrder />*/}
+            <PlaceOrder />
           </div>
         </TradingPriceContextProvider>
       </TradingTickerContextProvider>

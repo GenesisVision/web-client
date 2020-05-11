@@ -19,17 +19,20 @@ import Datafeed from "./datafeed";
 export const ChartBlock: React.FC = () => {
   const [t, options] = useTranslation();
   const TradingInfo = React.useContext(TradingInfoContext);
-  console.info(TradingInfo);
-  const { symbol } = TradingInfo;
+  // console.info(TradingInfo);
+  const { symbol, exchangeInfo } = TradingInfo;
   React.useEffect(() => {
-    console.info(options.language);
+    // console.info(options.language);
     import("./charting_library/charting_library.min").then(TradingView => {
       new TradingView.widget({
-        symbol: `${symbol.baseAsset}/${symbol.quoteAsset}`,
-        interval: "1D", // default interval
-        fullscreen: true, // displays the chart in the fullscreen mode
+        symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
+        interval: "1d", // default interval
+        fullscreen: false, // displays the chart in the fullscreen mode
         container_id: "tv_chart_container",
-        datafeed: Datafeed,
+        theme: "Dark",
+        datafeed: Datafeed({
+          symbols: exchangeInfo?.symbols || []
+        }),
         locale: options.language as LanguageCode,
         library_path: "/static/charting_library/"
       });

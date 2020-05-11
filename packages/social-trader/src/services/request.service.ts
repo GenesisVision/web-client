@@ -25,7 +25,10 @@ export interface OrderRequest extends AnyObjectType {
   side?: string;
   type?: string;
   timestamp?: string;
-  limit?: string;
+  interval?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number;
 }
 
 export enum TimeInForce {

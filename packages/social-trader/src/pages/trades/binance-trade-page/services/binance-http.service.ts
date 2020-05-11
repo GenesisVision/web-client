@@ -26,6 +26,21 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
     value => value
   );
 
+export const getKlines = (params: {
+  symbol: string;
+  interval: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number;
+}): Promise<ExchangeInfo> =>
+  requestService.get(
+    {
+      url: "/api/v3/klines",
+      params
+    },
+    value => value
+  );
+
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: "/api/v3/ping"
