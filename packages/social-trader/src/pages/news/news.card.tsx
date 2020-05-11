@@ -9,6 +9,7 @@ import { MutedText } from "components/muted-text/muted-text";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Separator } from "components/separator/separator";
 import React from "react";
 
 interface Props {
@@ -52,11 +53,7 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
           />
         </Row>
       </DefaultBlock>
-      <DefaultBlock
-        bordered
-        horizontalOffsets={false}
-        verticalOffsets={false}
-      />
+      <Separator />
       <DefaultBlock>
         <Center>
           <RowItem wide>
