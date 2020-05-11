@@ -3,12 +3,10 @@
 @import "~shared/styles/_constants";
 
 $input-height: 43px;
-$comment-input-button-size: 30px;
+$comment-input-button-size: 20px;
+$send-button-size: 16px;
 
 .comment-input {
-  &__form {
-    width: 100%;
-  }
   &__input-and-panel-container {
     border-radius: $input-height/2;
     background-color: $border-color;
@@ -35,14 +33,14 @@ $comment-input-button-size: 30px;
     }
   }
   &__send-text-container {
-    @include adaptive-margin(top, $padding-xxsmall);
+    @include adaptive-margin(top, $padding-xxxsmall);
     padding-left: $padding-xsmall;
     position: absolute;
   }
   &__send-button {
+    padding: 0;
     outline: none;
     border: 0;
-    color: $text-light-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,12 +49,12 @@ $comment-input-button-size: 30px;
     border-radius: 50%;
     background: $separator-color;
     cursor: pointer;
-    font-weight: 600;
-    @include transition(color);
     &--disable {
       cursor: default;
-      color: $label-color;
     }
+  }
+  &__send-button-icon {
+    padding: ($input-height - $send-button-size) / 2;
   }
   &__send-text {
     @include transition(opacity);
@@ -77,7 +75,7 @@ $comment-input-button-size: 30px;
   }
   &__input-container {
     background: $panel-background-color;
-    padding: 4px $padding-xxsmall 4px $padding-xsmall;
+    padding: 4px $padding-xsmall;
     border-radius: $input-height/2;
     border: 1px solid $border-color;
   }

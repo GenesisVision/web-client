@@ -6,10 +6,14 @@ import { FundsIcon } from "components/icon/funds-icon";
 import { HistoryIcon } from "components/icon/history-icon";
 import { InvestIcon } from "components/icon/invest-icon";
 import { Mt5Icon } from "components/icon/mt5-icon";
+import { MyProfileIcon } from "components/icon/my-profile-icon";
+import { NewsIcon } from "components/icon/news-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
+import { SocialIcon } from "components/icon/social-icon";
 import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
 import { TradeIcon } from "components/icon/trade-icon";
+import { UsersIcon } from "components/icon/users-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import {
   PROFILE_ROUTE,
@@ -95,22 +99,22 @@ const mainMenuItemsUnion = [
   },
   {
     isBeta: true,
-    Icon: TradeIcon,
+    Icon: SocialIcon,
     label: "navigation.social",
     route: SOCIAL_ROUTE,
     children: [
       {
-        Icon: TradeIcon,
+        Icon: NewsIcon,
         route: NEWS_ROUTE,
         label: "navigation.news"
       },
       {
-        Icon: TradeIcon,
+        Icon: MyProfileIcon,
         route: MY_PROFILE_ROUTE,
         label: "navigation.my-profile"
       },
       {
-        Icon: TradeIcon,
+        Icon: UsersIcon,
         route: USERS_ROUTE,
         label: "navigation.users"
       }
