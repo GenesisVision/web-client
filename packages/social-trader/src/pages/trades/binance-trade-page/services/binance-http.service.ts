@@ -32,7 +32,7 @@ export const getKlines = (params: {
   startTime?: number;
   endTime?: number;
   limit?: number;
-}): Promise<ExchangeInfo> =>
+}): Promise<number[][]> =>
   requestService.get(
     {
       url: "/api/v3/klines",

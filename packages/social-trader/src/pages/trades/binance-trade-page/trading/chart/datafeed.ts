@@ -1,13 +1,12 @@
 import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
 import {
+  Bar,
   IDatafeedChartApi,
   LibrarySymbolInfo,
   SeriesFormat,
   Timezone
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
-
-import { generateSymbol, makeApiRequest, parseFullSymbol } from "./helpers.ts";
 
 const configurationData = {
   supported_resolutions: ["1D", "1W", "1M"],
@@ -93,7 +92,7 @@ export default ({ symbols }: { symbols: Symbol[] }): IDatafeedChartApi => ({
     try {
       const data = await getKlines(urlParameters);
 
-      let bars = [];
+      let bars: Bar[] = [];
       data.forEach(bar => {
         if (bar[0] >= fromms && bar[0] < toms) {
           bars = [
