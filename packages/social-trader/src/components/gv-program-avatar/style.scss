@@ -2,6 +2,7 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_sizes";
 
+$avatar-xsmall-size: 24px;
 $avatar-small-size: 40px;
 $avatar-small-level-size: 32px;
 $avatar-medium-size: 80px;
@@ -20,6 +21,16 @@ $level-border: ($avatar-small-level-size - 24.5px)/2;
   &__container {
     &--with-level {
       @include adaptive-padding(right, $avatar-small-shift - $level-border);
+    }
+  }
+
+  &--xsmall {
+    @include height($avatar-xsmall-size);
+    @include width($avatar-xsmall-size);
+    .program-avatar__level {
+      @include right(-$avatar-small-shift);
+      @include height($avatar-small-level-size);
+      @include width($avatar-small-level-size);
     }
   }
 
