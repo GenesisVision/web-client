@@ -2,6 +2,8 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
 
+export type TerminalType = "spot" | "futures";
+
 export interface TradeRequest {
   stopPrice?: number;
   symbol: TradeCurrency;
