@@ -11,6 +11,7 @@ export const RowItem: React.FC<Props> = ({
   className,
   xsmall,
   small,
+  xlarge,
   large,
   children
 }) => {
@@ -23,6 +24,7 @@ export const RowItem: React.FC<Props> = ({
         "row-item--xsmall": xsmall,
         "row-item--small": small,
         "row-item--middle": middle && !(small || large),
+        "row-item--xlarge": xlarge,
         "row-item--large": large
       })}
     >
@@ -39,5 +41,6 @@ interface Props {
   xsmall?: boolean;
   small?: boolean;
   middle?: boolean;
+  xlarge?: boolean;
   large?: boolean;
 }
