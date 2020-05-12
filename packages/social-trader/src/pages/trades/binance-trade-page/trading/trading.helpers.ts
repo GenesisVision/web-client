@@ -15,6 +15,8 @@ import { filter } from "rxjs/operators";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
+export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
+
 export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
@@ -70,8 +72,14 @@ export const updateAccountInfo = (currentData: Account, updates: Account) => {
   return { ...currentData, ...updates, balances };
 };
 
+export const stringifySymbolFromToParam = (symbol: SymbolState): string => {
+  return [symbol.baseAsset, symbol.quoteAsset].join(
+    TERMINAL_ROUTE_SYMBOL_SEPARATOR
+  );
+};
+
 export const parseSymbolFromUrlParam = (param: string): SymbolState => {
-  const splittedValue = param.split("_");
+  const splittedValue = param.split(TERMINAL_ROUTE_SYMBOL_SEPARATOR);
   return splittedValue.length > 1
     ? { baseAsset: splittedValue[0], quoteAsset: splittedValue[1] }
     : DEFAULT_SYMBOL;
