@@ -18,17 +18,23 @@ import {
   TimeInForce
 } from "services/request.service";
 
+const dev = process.env.NODE_ENV !== "production";
+
+const API_ROOT_ROUTE = "https://api.binance.com";
+const API_PATH = "/api/v3";
+const API_ROUTE = dev ? API_PATH : `${API_ROOT_ROUTE}${API_PATH}`;
+
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   requestService.get(
     {
-      url: "/api/v3/exchangeInfo"
+      url: `${API_ROUTE}/exchangeInfo`
     },
     value => value
   );
 
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
-    url: "/api/v3/ping"
+    url: `${API_ROUTE}/ping`
   });
 
 export const getOpenOrders = (
@@ -37,7 +43,7 @@ export const getOpenOrders = (
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
-    url: "/api/v3/openOrders",
+    url: `${API_ROUTE}/openOrders`,
     params: { symbol: symbol },
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
@@ -48,7 +54,7 @@ export const getAllOrders = (
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
-    url: "/api/v3/allOrders",
+    url: `${API_ROUTE}/allOrders`,
     params: { symbol: symbol.toUpperCase() },
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
@@ -58,7 +64,7 @@ export const getUserStreamKey = (
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
-    url: "/api/v3/userDataStream",
+    url: `${API_ROUTE}/userDataStream`,
     type: [REQUEST_TYPE.AUTHORIZED]
   });
 
@@ -67,7 +73,7 @@ export const getAccountInformation = (
 ): Observable<Account> =>
   requestService.get({
     ...authData,
-    url: "/api/v3/account",
+    url: `${API_ROUTE}/account`,
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
@@ -76,13 +82,13 @@ export const getTrades = (
   limit: number = 50
 ): Observable<Trade[]> =>
   requestService.get({
-    url: "/api/v3/trades",
+    url: `${API_ROUTE}/trades`,
     params: { symbol: symbol.toUpperCase(), limit: String(limit) }
   });
 
 export const getTickers = (symbol?: string): Observable<Ticker[]> =>
   requestService.get({
-    url: "/api/v3/ticker/24hr",
+    url: `${API_ROUTE}/ticker/24hr`,
     params: symbol ? { symbol: symbol.toUpperCase() } : {}
   });
 
@@ -91,7 +97,7 @@ export const getDepth = (
   limit: number = 1000
 ): Observable<Depth> =>
   requestService.get({
-    url: "/api/v3/depth",
+    url: `${API_ROUTE}/depth`,
     params: { symbol, limit: String(limit) }
   });
 
@@ -102,7 +108,7 @@ export const newOrder = (
   requestService.post(
     {
       ...authData,
-      url: "/api/v3/order",
+      url: `${API_ROUTE}/order`,
       params: options,
       type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
     },
@@ -116,7 +122,7 @@ export const cancelAllOrders = (
   requestService.deleteRequest(
     {
       ...authData,
-      url: "/api/v3/openOrders",
+      url: `${API_ROUTE}/openOrders`,
       params: options,
       type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
     },
@@ -130,7 +136,7 @@ export const cancelOrder = (
   requestService.deleteRequest(
     {
       ...authData,
-      url: "/api/v3/order",
+      url: `${API_ROUTE}/order`,
       params: options,
       type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
     },
