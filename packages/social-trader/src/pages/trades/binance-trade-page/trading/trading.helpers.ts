@@ -1,5 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { useCookieState } from "hooks/cookie-state";
+import { NextPageContext } from "next";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
@@ -12,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
@@ -24,12 +26,19 @@ export const DEFAULT_SYMBOL: SymbolState = {
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
 
+export const authCookieService = (ctx?: NextPageContext) =>
+  cookieServiceCreator({
+    ctx,
+    key: TRADE_AUTH_DATA_KEY,
+    initialState,
+    parse: true
+  });
+
+export const useAuthCookieState = () => authCookieService();
+
 export const useTradeAuth = () => {
   const [authData, setAuthData] = useState(initialState);
-  const { set, get } = useCookieState({
-    key: TRADE_AUTH_DATA_KEY,
-    initialState
-  });
+  const { set, get } = useAuthCookieState();
   useEffect(() => {
     setAuthData(get());
   }, []);
