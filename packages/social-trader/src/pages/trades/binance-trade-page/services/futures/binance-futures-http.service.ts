@@ -18,7 +18,7 @@ import {
   TimeInForce
 } from "services/request.service";
 
-const dev = true; //process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== "production";
 
 const API_ROOT_ROUTE = "https://fapi.binance.com";
 const API_PATH = "/fapi/v1";

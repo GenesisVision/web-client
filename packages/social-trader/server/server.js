@@ -25,8 +25,7 @@ module.exports = async app => {
 
   const server = express();
 
-  if (true) {
-    //(dev) {
+  if (dev) {
     server.use(
       createProxyMiddleware("/api/v3", {
         target: "https://api.binance.com",
