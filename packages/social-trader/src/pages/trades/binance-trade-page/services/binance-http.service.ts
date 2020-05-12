@@ -22,7 +22,7 @@ const dev = process.env.NODE_ENV !== "production";
 
 const API_ROOT_ROUTE = "https://api.binance.com";
 const API_PATH = "/api/v3";
-const API_ROUTE = dev ? API_PATH : `${API_ROOT_ROUTE}${API_PATH}`;
+const API_ROUTE = API_PATH;
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   requestService.get(

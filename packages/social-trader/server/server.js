@@ -25,20 +25,18 @@ module.exports = async app => {
 
   const server = express();
 
-  if (dev) {
-    server.use(
-      createProxyMiddleware("/api/v3", {
-        target: "https://api.binance.com",
-        changeOrigin: true
-      })
-    );
-    server.use(
-      createProxyMiddleware("/fapi/v1", {
-        target: "https://fapi.binance.com",
-        changeOrigin: true
-      })
-    );
-  }
+  server.use(
+    createProxyMiddleware("/api/v3", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+  server.use(
+    createProxyMiddleware("/fapi/v1", {
+      target: "https://fapi.binance.com",
+      changeOrigin: true
+    })
+  );
 
   server.use(
     createProxyMiddleware("/banners", {
