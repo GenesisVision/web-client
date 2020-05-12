@@ -4,17 +4,25 @@ import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingContainerWithInfo } from "pages/trades/binance-trade-page/trading/trading.container";
 import { useTradeAuth } from "pages/trades/binance-trade-page/trading/trading.helpers";
-import { TerminalType } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  TerminalType,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 
 interface Props {
+  authData: TradeAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
 
-export const BinanceTradeContainer: React.FC<Props> = ({ type, symbol }) => {
+export const BinanceTradeContainer: React.FC<Props> = ({
+  authData,
+  type,
+  symbol
+}) => {
   const terminalMethods = getBinanceTerminalApiMethods(type);
-  const { authData, set } = useTradeAuth();
+  const { set } = useTradeAuth();
   const { privateKey, publicKey } = authData;
   return (
     <>
