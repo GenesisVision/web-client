@@ -1,5 +1,7 @@
 import classNames from "classnames";
+import AuthWidgets from "components/header/auth-widgets";
 import HeaderIcon from "components/header/header-icon";
+import UnauthLinks from "components/header/unauth-links";
 import { SearchIcon } from "components/icon/search-icon";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
@@ -19,8 +21,6 @@ import { filterBeta, mobileMenuItems, topMenuItems } from "routes/menu";
 
 import "./header.scss";
 
-const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
-const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
 const HeaderSearchInput = dynamic(() =>
   import("components/header/header-search-input")
 );
