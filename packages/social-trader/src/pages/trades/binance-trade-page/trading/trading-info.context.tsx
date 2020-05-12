@@ -8,6 +8,7 @@ import {
 import {
   Account,
   ExchangeInfo,
+  TerminalType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, {
@@ -20,12 +21,17 @@ import React, {
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
+interface Props {
+  type?: TerminalType;
+}
+
 export type SymbolState = {
   quoteAsset: TradeCurrency;
   baseAsset: TradeCurrency;
 };
 
 type TradingAccountInfoState = {
+  terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
@@ -39,6 +45,7 @@ const SymbolInitialState: SymbolState = {
 };
 
 export const TradingAccountInfoInitialState: TradingAccountInfoState = {
+  terminalType: "spot",
   setSymbol: () => {},
   symbol: SymbolInitialState
 };
@@ -47,7 +54,13 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
   TradingAccountInfoInitialState
 );
 
-export const TradingInfoContextProvider: React.FC = ({ children }) => {
+export const TradingInfoContextProvider: React.FC<Props> = ({
+  type,
+  children
+}) => {
+  const [terminalType, setTerminalType] = useState<TerminalType>(
+    type || "spot"
+  );
   const {
     getExchangeInfo,
     getAccountInformation,
@@ -67,6 +80,10 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
   const [symbol, setSymbol] = useState<SymbolState>(SymbolInitialState);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  useEffect(() => {
+    if (type) setTerminalType(type);
+  }, [type]);
 
   useEffect(() => {
     if (!authData.publicKey) return;
@@ -96,8 +113,15 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   const value = useMemo(
-    () => ({ userStream, setSymbol, symbol, accountInfo, exchangeInfo }),
-    [userStream, setSymbol, symbol, accountInfo, exchangeInfo]
+    () => ({
+      terminalType,
+      userStream,
+      setSymbol,
+      symbol,
+      accountInfo,
+      exchangeInfo
+    }),
+    [terminalType, userStream, setSymbol, symbol, accountInfo, exchangeInfo]
   );
 
   return (
