@@ -2,6 +2,8 @@ import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IConversationImage } from "components/conversation/conversation.types";
+import { GalleryLeftIcon } from "components/conversation/icons/gallery-left.icon";
+import { GalleryRightIcon } from "components/conversation/icons/gallery-right.icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
@@ -97,7 +99,7 @@ const ConversationImagesFullContent: React.FC<{
             }
           )}
         >
-          {"<"}
+          <GalleryLeftIcon />
         </div>
         <div
           onClick={handleNext}
@@ -108,7 +110,7 @@ const ConversationImagesFullContent: React.FC<{
             { [styles["conversation-image-full__button--show"]]: isButtonsShow }
           )}
         >
-          {">"}
+          <GalleryRightIcon />
         </div>
       </div>
     </EventListener>

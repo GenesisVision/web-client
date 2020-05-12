@@ -12,6 +12,15 @@
       width: 30%;
     }
   }
+  &__info-row {
+    flex-direction: column;
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-landscape-tablet() {
+      flex-direction: column;
+    }
+  }
   &__data {
     width: 100%;
     @include media-breakpoint-landscape-tablet() {
