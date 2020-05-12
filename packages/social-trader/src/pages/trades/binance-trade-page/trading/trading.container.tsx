@@ -16,22 +16,27 @@ import {
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
-import { TradeAuthDataType } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  TerminalType,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useEffect } from "react";
 
 import styles from "./trading.module.scss";
 
 interface Props {
+  type?: TerminalType;
   authData: TradeAuthDataType;
   symbol?: SymbolState;
 }
 
 export const TradingContainerWithInfo: React.FC<Props> = ({
+  type,
   authData,
   symbol
 }) => {
   return (
-    <TradingInfoContextProvider>
+    <TradingInfoContextProvider type={type}>
       <TradingContainer symbol={symbol} authData={authData} />
     </TradingInfoContextProvider>
   );
