@@ -47,4 +47,10 @@
       @include row-item-bottom-offset($padding-small);
     }
   }
+  &--xlarge {
+    @include row-item-side-offset($padding-medium);
+    &.row-item--bottom-offset {
+      @include row-item-bottom-offset($padding-medium);
+    }
+  }
 }

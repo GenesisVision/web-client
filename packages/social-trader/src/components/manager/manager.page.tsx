@@ -23,7 +23,9 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
     >
       <Row className="manager-page__container" center={false} wide>
         <RowItem className="manager-page__info" bottomOffset>
-          <ManagerInfo profile={profile} />
+          <Row className="manager-page__info-row" center={false}>
+            <ManagerInfo profile={profile} />
+          </Row>
         </RowItem>
         <RowItem className="manager-page__data" bottomOffset>
           <ManagerData id={profile.id} />
