@@ -1,4 +1,7 @@
 .symbol-summary {
+  &__type-switcher {
+    min-width: 130px;
+  }
   &__line {
     justify-content: space-between;
   }
