@@ -64,7 +64,7 @@ export const getUserStreamKey = (
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
-    url: `${API_ROUTE}/userDataStream`,
+    url: `${API_ROUTE}/listenKey`,
     type: [REQUEST_TYPE.AUTHORIZED]
   });
 
