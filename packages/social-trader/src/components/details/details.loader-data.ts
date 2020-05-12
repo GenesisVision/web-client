@@ -12,6 +12,7 @@ export const managerLoaderData: ProfilePublic = {
 };
 
 export const ownerLoaderData: ProfilePublicShort = {
+  logoUrl: "",
   id: "",
   username: "Manager name",
   url: ""

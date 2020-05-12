@@ -145,6 +145,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
       isFavorite: false
     },
     owner: {
+      logoUrl: "",
       id: "",
       username: "",
       url: ""
