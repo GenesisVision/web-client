@@ -7,6 +7,7 @@ import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { NewsList } from "pages/news/news-list/news-list";
 import React, { useCallback, useEffect, useState } from "react";
+import { postponeFunc } from "utils/hook-form.helpers";
 
 export interface INewsListContainerProps {
   reset?: boolean;
@@ -35,6 +36,18 @@ const _NewsListContainer: React.FC<INewsListContainerProps> = ({
   const { data, sendRequest, status } = useApiRequest({
     request: values => fetchMethod(values)
   });
+  const hasMore = data ? data.total > options.skip : false;
+  const [canLoadMore, setCanLoadMore] = useState(
+    hasMore && status !== API_REQUEST_STATUS.PENDING
+  );
+
+  useEffect(() => {
+    const changeCanLoadMoreFunc = () =>
+      setCanLoadMore(hasMore && status !== API_REQUEST_STATUS.PENDING);
+    if (status === API_REQUEST_STATUS.SUCCESS)
+      postponeFunc(changeCanLoadMoreFunc);
+    else changeCanLoadMoreFunc();
+  }, [hasMore, status]);
 
   useEffect(() => {
     sendRequest(options);
@@ -56,15 +69,12 @@ const _NewsListContainer: React.FC<INewsListContainerProps> = ({
     updatePage();
   }, []);
 
-  const hasMore = data ? data.total > options.skip : false;
-  const canLoadMore = hasMore && status !== API_REQUEST_STATUS.PENDING;
-
+  if (!data) return null;
   return (
     <NewsList
       skip={options.skip}
       hasMore={canLoadMore}
-      loaderData={[]}
-      data={data!?.items}
+      data={data.items}
       onScroll={handleScroll}
     />
   );

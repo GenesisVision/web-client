@@ -1,7 +1,9 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
+import AuthWidgets from "components/header/auth-widgets";
 import HeaderIcon from "components/header/header-icon";
 import { useMenuItems } from "components/header/header.service";
+import UnauthLinks from "components/header/unauth-links";
 import { SearchIcon } from "components/icon/search-icon";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
@@ -15,8 +17,6 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import "./header.scss";
 
-const AuthWidgets = dynamic(() => import("components/header/auth-widgets"));
-const UnauthLinks = dynamic(() => import("components/header/unauth-links"));
 const HeaderSearchInput = dynamic(() =>
   import("components/header/header-search-input")
 );
