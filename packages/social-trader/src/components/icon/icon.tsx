@@ -24,7 +24,7 @@ export const Icon: React.FC<IIconProps> = ({
   selected
 }) => {
   return (
-    <span
+    <div
       className={classNames(
         styles["icon"],
         styles[`icon--${type}`],
@@ -39,6 +39,6 @@ export const Icon: React.FC<IIconProps> = ({
       onClick={onClick}
     >
       {children}
-    </span>
+    </div>
   );
 };

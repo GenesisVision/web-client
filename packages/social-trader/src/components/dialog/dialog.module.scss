@@ -35,16 +35,10 @@
   &__close {
     z-index: 2;
 
-    .icon {
-      @include transition(opacity);
-    }
-
+    @include transition(opacity);
     &:hover {
-      .icon {
-        opacity: 0.4;
-      }
+      opacity: 0.4;
     }
-
     &--inside {
       right: 10px;
       top: 15px;

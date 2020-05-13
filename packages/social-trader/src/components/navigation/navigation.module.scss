@@ -100,26 +100,19 @@
   }
 
   &__icon {
-    @include media-breakpoint-landscape-tablet() {
-      margin-right: $padding-xxsmall;
+    &--medium {
+      width: 20px;
+      height: 20px;
     }
-    @include media-breakpoint-large-desktop() {
-      margin-right: $padding-xsmall;
+    &--small {
+      width: 12px;
+      height: 12px;
     }
   }
 }
 
 .mobile {
   width: 100%;
-
-  .navigation__icon {
-    margin-right: 24px;
-  }
-
-  .navigation__item {
-    padding: $padding-small/2 $padding-small;
-    margin-right: 0;
-  }
 
   &__top {
     padding: 10px 0;
@@ -145,4 +138,9 @@
     letter-spacing: 0.4px;
     font-size: $font-size-paragraph;
   }
+}
+
+.gv-root-item {
+  display: flex;
+  align-items: center;
 }

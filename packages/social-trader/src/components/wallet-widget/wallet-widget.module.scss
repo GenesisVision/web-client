@@ -3,6 +3,11 @@
 @import "~shared/styles/_sizes";
 
 .wallet-widget {
+  &__icon {
+    height: 20px;
+    width: 20px;
+  }
+
   &__amount {
     white-space: nowrap;
   }

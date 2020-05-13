@@ -5,7 +5,7 @@
 .icon {
   height: 100%;
   width: 100%;
-  display: inline-flex;
+  display: flex;
   background-repeat: no-repeat;
   background-size: contain;
 
@@ -86,10 +86,6 @@
     height: 15px;
     width: 16px;
     background-image: url("../../media/menu.svg");
-  }
-
-  &--funds {
-    height: 18px;
   }
 
   &--favorite {
@@ -185,9 +181,5 @@
         fill: white;
       }
     }
-  }
-
-  &--trade {
-    width: 22px;
   }
 }

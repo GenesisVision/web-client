@@ -205,7 +205,9 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
           </div>
           {renderActions && (
             <div className={styles["table-card__actions"]}>
-              <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
+              <div className={styles["table-card__actions-icon"]}>
+                <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
+              </div>
               {renderActions({ clearAnchor, anchor })}
             </div>
           )}

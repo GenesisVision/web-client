@@ -21,7 +21,9 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
             className={styles["tile-filter-item__button-remove"]}
             onClick={() => removeTile!(id)}
           >
-            <CloseIcon />
+            <div className={styles["tile-filter-item__icon"]}>
+              <CloseIcon />
+            </div>
           </div>
         )}
       </Row>
@@ -36,6 +38,8 @@ export interface ITileFilterItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
   removable?: boolean;
   id: string;
+
   removeTile?(id: string): void;
+
   mandatory?: boolean;
 }

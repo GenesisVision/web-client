@@ -31,6 +31,7 @@
   }
   &__icon {
     width: 20px;
+    height: 20px;
     @include media-breakpoint-landscape-phone() {
       max-width: 17px;
       max-height: 17px;

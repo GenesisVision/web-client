@@ -22,18 +22,16 @@
 
   &__item {
     min-width: 200px;
+  }
 
-    .icon {
-      opacity: 0.2;
-      background-position: center;
-      height: 13px;
-      width: 13px;
-    }
+  &__item-icon {
+    opacity: 0.2;
+    background-position: center;
+    height: 13px;
+    width: 13px;
 
     &:hover {
-      .icon {
-        opacity: 0.5;
-      }
+      opacity: 0.5;
     }
   }
 

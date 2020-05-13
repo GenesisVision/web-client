@@ -1,3 +1,4 @@
+import { GvRootItem } from "components/navigation/gv-root-item";
 import * as React from "react";
 import { TMenuItem } from "routes/menu";
 
@@ -12,6 +13,7 @@ interface INavigationProps {
 const _Navigation: React.FC<INavigationProps> = ({ menuItems, className }) => {
   return (
     <div className={className}>
+      <GvRootItem />
       <div className={styles["navigation"]}>
         {menuItems.map(item => (
           <MenuNavigationItem

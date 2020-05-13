@@ -112,7 +112,11 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   return (
     <div className={classNames(styles["gv-text-area"], textAreaClassName)}>
       <textarea
-        className={classNames(styles["gv-text-area__hidden"], className)}
+        className={classNames(
+          styles["gv-text-area__hidden"],
+          styles["gv-text-area__gv-text-field"],
+          className
+        )}
         readOnly
         ref={shadowRef}
         rows={rows}
@@ -122,7 +126,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
       <textarea
         onClick={handleClick}
         rows={rows}
-        className={className}
+        className={classNames(styles["gv-text-area__gv-text-field"], className)}
         value={value}
         ref={textareaRef}
         style={{ height }}

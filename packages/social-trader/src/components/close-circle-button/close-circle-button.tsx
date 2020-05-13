@@ -6,7 +6,9 @@ import styles from "./close-circle-button.module.scss";
 const _CloseCircleButton: React.FC<Props> = ({ onClick }) => {
   return (
     <div className={styles["close-circle-button"]} onClick={onClick}>
-      <CloseIcon />
+      <div className={styles["close-circle-button__icon"]}>
+        <CloseIcon />
+      </div>
     </div>
   );
 };

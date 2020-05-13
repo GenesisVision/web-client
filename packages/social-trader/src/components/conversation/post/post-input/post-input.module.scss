@@ -36,10 +36,10 @@ $post-input-image-preview-size: 40px;
     &:hover:not(:disabled) {
       background-color: darken($popover-background, 3);
     }
-    .icon {
-      height: 6px;
-      width: 6px;
-    }
+  }
+  &__image-preview-remove-icon {
+    height: 6px;
+    width: 6px;
   }
   &__image-preview {
     display: block;

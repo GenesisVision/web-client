@@ -11,6 +11,7 @@ import styles from "./navigation.module.scss";
 interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: JSX.Element;
   title?: string;
+
   onClick(): void;
 }
 
@@ -25,7 +26,11 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
     onClick={onClick}
   >
     <>
-      <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
+      <HeaderIcon>
+        <div className={styles["navigation__icon--medium"]}>
+          {<icon.type {...icon.props} />}
+        </div>
+      </HeaderIcon>
       <span className={styles["navigation__link"]}>{children}</span>
     </>
   </GVButton>
@@ -33,6 +38,7 @@ const _NavigationButton: React.FC<INavigationButtonProps> = ({
 export const NavigationButton = React.memo(_NavigationButton);
 
 interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
+  small?: boolean;
   href: string | ToType;
   icon: JSX.Element;
   exact?: boolean;
@@ -40,6 +46,7 @@ interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
 }
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  small,
   onClick,
   href,
   icon,
@@ -48,7 +55,16 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   const { route } = useRouter();
   const renderIconWithName = () => (
     <>
-      <HeaderIcon>{<icon.type {...icon.props} />}</HeaderIcon>
+      <HeaderIcon>
+        <div
+          className={classNames({
+            [styles["navigation__icon--medium"]]: !small,
+            [styles["navigation__icon--small"]]: small
+          })}
+        >
+          {<icon.type {...icon.props} />}
+        </div>
+      </HeaderIcon>
       <span className={styles["navigation__link"]}>{children}</span>
     </>
   );

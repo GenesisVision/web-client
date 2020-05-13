@@ -14,8 +14,8 @@
     white-space: pre-wrap;
   }
 
-  .gv-text-field {
-    box-sizing: border-box;
+  &__gv-text-field {
+    box-sizing: border-box !important;
     resize: none;
     width: 100%;
   }

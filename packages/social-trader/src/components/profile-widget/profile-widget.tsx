@@ -41,9 +41,9 @@ const ProfileMenuItem: React.FC<{
   const renderLabel = () => (
     <Row>
       <RowItem>
-        <Row>
+        <Center className={styles["profile-menu__item-icon"]}>
           <Icon />
-        </Row>
+        </Center>
       </RowItem>
       <RowItem className={styles["profile-menu__item-label"]}>{label}</RowItem>
     </Row>

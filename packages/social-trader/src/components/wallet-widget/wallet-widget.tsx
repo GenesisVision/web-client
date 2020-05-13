@@ -29,7 +29,9 @@ const _WalletWidget: React.FC<Props> = ({
         <RowItem>
           <Row className={styles["wallet-widget__wallet"]} onClick={setAnchor}>
             <HeaderIcon>
-              <WalletIcon primary={anchor !== undefined} />
+              <div className={styles["wallet-widget__icon"]}>
+                <WalletIcon primary={anchor !== undefined} />
+              </div>
             </HeaderIcon>
             <div
               className={styles["wallet-widget__amount"]}
