@@ -15,6 +15,26 @@ export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
 export type MarginType = "CROSSED";
 
+export interface FuturesTickerSymbol {
+  symbol: TradeCurrency;
+  priceChange: string;
+  priceChangePercent: string;
+  weightedAvgPrice: string;
+  prevClosePrice: string;
+  lastPrice: string;
+  lastQty: string;
+  openPrice: string;
+  highPrice: string;
+  lowPrice: string;
+  volume: string;
+  quoteVolume: string;
+  openTime: number;
+  closeTime: number;
+  firstId: number; // First tradeId
+  lastId: number; // Last tradeId
+  count: number; // Trade count
+}
+
 export interface FuturesAsset {
   asset: TradeCurrency;
   initialMargin: string;
