@@ -8,6 +8,8 @@ import {
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
+export type FilteringVariant = "margin" | "symbol" | undefined;
+
 export type SortingType = {
   dataType: "number" | "string";
   field: keyof MergedTickerSymbolType;
@@ -88,7 +90,7 @@ export const filterMarketWatchItemsForMargin = (
 };
 
 export const getFilteringFunction = (
-  filteringType: "margin" | "symbol",
+  filteringType: FilteringVariant,
   filtering: FilteringType
 ): ((item: MergedTickerSymbolType) => boolean) => {
   switch (filteringType) {
@@ -96,6 +98,8 @@ export const getFilteringFunction = (
       return filterMarketWatchItemsForMargin;
     case "symbol":
       return filterForSymbol(filtering.value);
+    default:
+      return () => true;
   }
 };
 
