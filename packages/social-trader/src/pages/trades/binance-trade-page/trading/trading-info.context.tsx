@@ -22,6 +22,7 @@ import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 interface Props {
+  outerSymbol?: SymbolState;
   type?: TerminalType;
 }
 
@@ -55,6 +56,7 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
+  outerSymbol = SymbolInitialState,
   type,
   children
 }) => {
@@ -77,7 +79,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
 
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
-  const [symbol, setSymbol] = useState<SymbolState>(SymbolInitialState);
+  const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 

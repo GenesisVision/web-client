@@ -10,43 +10,30 @@ import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolState,
-  TradingInfoContext,
   TradingInfoContextProvider
 } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
-import {
-  TerminalType,
-  TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useContext, useEffect } from "react";
+import { TerminalType } from "pages/trades/binance-trade-page/trading/trading.types";
+import React from "react";
 
 import styles from "./trading.module.scss";
 
 interface Props {
   type?: TerminalType;
-  authData: TradeAuthDataType;
   symbol?: SymbolState;
 }
 
-export const TradingContainerWithInfo: React.FC<Props> = ({
-  type,
-  authData,
-  symbol
-}) => {
+export const TradingContainerWithInfo: React.FC<Props> = ({ type, symbol }) => {
   return (
-    <TradingInfoContextProvider type={type}>
-      <TradingContainer symbol={symbol} authData={authData} />
+    <TradingInfoContextProvider outerSymbol={symbol} type={type}>
+      <TradingContainer />
     </TradingInfoContextProvider>
   );
 };
 
-const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
-  const { setSymbol } = useContext(TradingInfoContext);
-  useEffect(() => {
-    if (symbol) setSymbol(symbol);
-  }, [symbol]);
+const _TradingContainer: React.FC = () => {
   return (
     <div className={styles["trading-grid"]}>
       <TradingTickerContextProvider>

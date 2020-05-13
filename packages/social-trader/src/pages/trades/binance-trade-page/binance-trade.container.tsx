@@ -28,11 +28,7 @@ export const BinanceTradeContainer: React.FC<Props> = ({
     <>
       {privateKey && publicKey ? (
         <TerminalMethodsContextProvider methods={terminalMethods}>
-          <TradingContainerWithInfo
-            type={type}
-            symbol={symbol}
-            authData={authData}
-          />
+          <TradingContainerWithInfo type={type} symbol={symbol} />
         </TerminalMethodsContextProvider>
       ) : (
         <BinanceTradeLogin onSubmit={set} />
