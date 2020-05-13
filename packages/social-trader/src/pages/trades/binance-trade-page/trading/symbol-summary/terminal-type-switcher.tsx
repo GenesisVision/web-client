@@ -30,13 +30,13 @@ export const TerminalTypeSwitcher: React.FC = () => {
         size={GV_BTN_SIZE.SMALL}
         first={{
           selected: terminalType === "spot",
-          enable: true,
+          enable: terminalType !== "spot",
           handleClick: handleSelectType("spot"),
           label: t("Spot")
         }}
         second={{
           selected: terminalType === "futures",
-          enable: true,
+          enable: terminalType !== "futures",
           handleClick: handleSelectType("futures"),
           label: t("Futures")
         }}
