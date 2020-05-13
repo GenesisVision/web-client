@@ -1,4 +1,7 @@
-import { transformFuturesAccount } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
+import {
+  transformFuturesAccount,
+  transformFuturesTickerSymbol
+} from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Account,
   CancelOrderResult,
@@ -91,10 +94,12 @@ export const getTrades = (
   });
 
 export const getTickers = (symbol?: string): Observable<Ticker[]> =>
-  requestService.get({
-    url: `${API_ROUTE}/ticker/24hr`,
-    params: symbol ? { symbol: symbol.toUpperCase() } : {}
-  });
+  requestService
+    .get({
+      url: `${API_ROUTE}/ticker/24hr`,
+      params: symbol ? { symbol: symbol.toUpperCase() } : {}
+    })
+    .pipe(map(transformFuturesTickerSymbol));
 
 export const getDepth = (
   symbol: string,

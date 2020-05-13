@@ -1,7 +1,8 @@
 import {
   futuresAccountUpdateEventTransform,
   futuresMarginCallEventTransform,
-  futuresTradeOrderUpdateEventTransform
+  futuresTradeOrderUpdateEventTransform,
+  transformFuturesTickerSymbolWS
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Depth,
@@ -62,7 +63,7 @@ export const marketTicketsSocket = (
   const socketName = `!ticker@${socketType}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketType, url).pipe(
-    map(items => items.map(tickerTransform))
+    map(items => items.map(transformFuturesTickerSymbolWS))
   );
 };
 
