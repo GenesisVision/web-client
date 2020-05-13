@@ -5,13 +5,71 @@ import {
   FuturesAccountUpdateEvent,
   FuturesAsset,
   FuturesMarginCallEvent,
+  FuturesTickerSymbol,
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
   Account,
-  AssetBalance
+  AssetBalance,
+  Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
+
+export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
+  eventType: m.e,
+  eventTime: m.E,
+  symbol: m.s,
+  priceChange: m.p,
+  priceChangePercent: m.P,
+  weightedAvgPrice: m.w,
+  prevClosePrice: m.x,
+  lastPrice: m.c,
+  lastQty: m.Q,
+  bestBid: m.b,
+  bestBidQnt: m.B,
+  bestAsk: m.a,
+  bestAskQnt: m.A,
+  open: m.o,
+  high: m.h,
+  low: m.l,
+  volume: m.v,
+  volumeQuote: m.q,
+  openTime: m.O,
+  closeTime: m.C,
+  firstTradeId: m.F,
+  lastTradeId: m.L,
+  totalTrades: m.n
+});
+
+export const transformFuturesTickerSymbol = (
+  futuresSymbol: FuturesTickerSymbol
+): Ticker => {
+  return {
+    eventType: "",
+    eventTime: 0,
+    symbol: futuresSymbol.symbol,
+    priceChange: futuresSymbol.priceChange,
+    priceChangePercent: futuresSymbol.priceChangePercent,
+    weightedAvgPrice: futuresSymbol.weightedAvgPrice,
+    prevClosePrice: futuresSymbol.prevClosePrice,
+    lastPrice: futuresSymbol.lastPrice,
+    lastQty: futuresSymbol.lastQty,
+    bestBid: "",
+    bestBidQnt: "",
+    bestAsk: "",
+    bestAskQnt: "",
+    open: futuresSymbol.highPrice,
+    high: futuresSymbol.lowPrice,
+    low: futuresSymbol.volume,
+    volume: futuresSymbol.volume,
+    volumeQuote: futuresSymbol.quoteVolume,
+    openTime: futuresSymbol.openTime,
+    closeTime: futuresSymbol.closeTime,
+    firstTradeId: futuresSymbol.firstId,
+    lastTradeId: futuresSymbol.lastId,
+    totalTrades: futuresSymbol.count
+  };
+};
 
 export const transformFuturesBalance = (
   futuresAsset: FuturesAsset
