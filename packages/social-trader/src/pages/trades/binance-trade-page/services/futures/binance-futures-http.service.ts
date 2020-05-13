@@ -2,6 +2,7 @@ import {
   transformFuturesAccount,
   transformFuturesTickerSymbol
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
+import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
   Account,
   CancelOrderResult,
@@ -99,7 +100,11 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
       url: `${API_ROUTE}/ticker/24hr`,
       params: symbol ? { symbol: symbol.toUpperCase() } : {}
     })
-    .pipe(map(transformFuturesTickerSymbol));
+    .pipe(
+      map((items: FuturesTickerSymbol[]) =>
+        items.map(transformFuturesTickerSymbol)
+      )
+    );
 
 export const getDepth = (
   symbol: string,
