@@ -1,3 +1,4 @@
+import { transformFuturesAccount } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Account,
   CancelOrderResult,
@@ -11,6 +12,7 @@ import {
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import {
   OrderRequest,
   REQUEST_TYPE,
@@ -71,11 +73,13 @@ export const getUserStreamKey = (
 export const getAccountInformation = (
   authData: TradeAuthDataType
 ): Observable<Account> =>
-  requestService.get({
-    ...authData,
-    url: `${API_ROUTE}/account`,
-    type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
-  });
+  requestService
+    .get({
+      ...authData,
+      url: `${API_ROUTE}/account`,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    })
+    .pipe(map(transformFuturesAccount));
 
 export const getTrades = (
   symbol: string,
