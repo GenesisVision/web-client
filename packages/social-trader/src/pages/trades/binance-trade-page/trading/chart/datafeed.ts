@@ -1,4 +1,8 @@
 import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
+import {
+  BINANCE_WS_API_TYPE,
+  BINANCE_WS_API_URL
+} from "pages/trades/binance-trade-page/services/binance-ws.service";
 import { IBasicDataFeed } from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
 import {
   Bar,
@@ -6,7 +10,12 @@ import {
   SeriesFormat,
   Timezone
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import {
+  subscribeOnStream,
+  unsubscribeFromStream
+} from "pages/trades/binance-trade-page/trading/chart/streaming.js";
 import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
+import { Socket } from "services/websocket.service";
 
 const configurationData = {
   supported_resolutions: ["1D", "1W", "1M"],
@@ -126,11 +135,30 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
       "[subscribeBars]: Method call with subscribeUID:",
       subscribeUID
     );
+
+    const { full_name } = symbolInfo;
+
+    const socketName = `${full_name.toLowerCase()}@kline_${resolution.toLowerCase()}`;
+    const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+    const socket = new Socket(url);
+
+    const stream = socket.subscribe().subscribe(data => {
+      onRealtimeCallback({
+        time: data.k.t,
+        open: data.k.o,
+        high: data.k.h,
+        low: data.k.l,
+        close: data.k.c
+      });
+      console.info(data);
+    });
   },
   unsubscribeBars: subscriberUID => {
     console.log(
       "[unsubscribeBars]: Method call with subscriberUID:",
       subscriberUID
     );
+
+    unsubscribeFromStream(subscriberUID);
   }
 });

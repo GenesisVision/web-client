@@ -41,7 +41,7 @@ export const useSockets = () => {
   return { connectSocket };
 };
 
-class Socket implements SocketInterface {
+export class Socket implements SocketInterface {
   private websocket?: WebSocketSubject<any>;
   private wsMessages?: Subject<any>;
   readonly reconnectInterval = 5000;

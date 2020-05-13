@@ -46,23 +46,23 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
     <div className={styles["trading-grid"]}>
       <TradingTickerContextProvider>
         <Center className={styles["header-grid-elem"]}>
-          <TradeHeaderContainer />
+          {/*<TradeHeaderContainer />*/}
         </Center>
         <div className={styles["symbol-summary-grid-elem"]}>
           <ResponsiveContainer enabledScreens={["tablet", "landscape-tablet"]}>
-            <SymbolSummarySmallBlock />
+            {/*<SymbolSummarySmallBlock />*/}
           </ResponsiveContainer>
           <ResponsiveContainer enabledScreens={["phone", "landscape-phone"]}>
-            <SymbolSummaryContainer />
+            {/*<SymbolSummaryContainer />*/}
           </ResponsiveContainer>
         </div>
         <div className={styles["market-watch-grid-elem"]}>
           <ResponsiveContainer enabledScreens={["large-desktop"]}>
-            <MarketWatchBlock />
+            {/*<MarketWatchBlock />*/}
           </ResponsiveContainer>
         </div>
         <div className={styles["tables-grid-elem"]}>
-          <TradingTables />
+          {/*<TradingTables />*/}
         </div>
         <div className={styles["chart-grid-elem"]}>
           <ChartBlock />
@@ -77,7 +77,7 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
                 "large-desktop"
               ]}
             >
-              <OrderBookBlock />
+              {/*<OrderBookBlock />*/}
             </ResponsiveContainer>
           </div>
           <div className={styles["trades-grid-elem"]}>
@@ -89,11 +89,11 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
                 "large-desktop"
               ]}
             >
-              <TradesBlock />
+              {/*<TradesBlock />*/}
             </ResponsiveContainer>
           </div>
           <div className={styles["place-orders-grid-elem"]}>
-            <PlaceOrder />
+            {/*<PlaceOrder />*/}
           </div>
         </TradingPriceContextProvider>
       </TradingTickerContextProvider>

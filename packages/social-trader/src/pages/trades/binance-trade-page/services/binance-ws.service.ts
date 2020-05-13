@@ -78,3 +78,9 @@ export const getUserStreamSocket = (
     })
   );
 };
+
+export const klineSocket = (symbol: string, interval: string) => {
+  const socketName = `${symbol}@kline_${interval}`;
+  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  // return connectSocketMethod(socketType, url).pipe(map(depthTransform));
+};
