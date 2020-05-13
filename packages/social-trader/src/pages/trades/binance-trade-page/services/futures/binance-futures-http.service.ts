@@ -1,4 +1,9 @@
 import {
+  transformFuturesAccount,
+  transformFuturesTickerSymbol
+} from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
+import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import {
   Account,
   CancelOrderResult,
   Depth,
@@ -11,6 +16,7 @@ import {
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import {
   OrderRequest,
   REQUEST_TYPE,
@@ -20,8 +26,8 @@ import {
 
 const dev = process.env.NODE_ENV !== "production";
 
-const API_ROOT_ROUTE = "https://api.binance.com";
-const API_PATH = "/api/v3";
+const API_ROOT_ROUTE = "https://fapi.binance.com";
+const API_PATH = "/fapi/v1";
 const API_ROUTE = API_PATH;
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
@@ -64,18 +70,20 @@ export const getUserStreamKey = (
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
-    url: `${API_ROUTE}/userDataStream`,
+    url: `${API_ROUTE}/listenKey`,
     type: [REQUEST_TYPE.AUTHORIZED]
   });
 
 export const getAccountInformation = (
   authData: TradeAuthDataType
 ): Observable<Account> =>
-  requestService.get({
-    ...authData,
-    url: `${API_ROUTE}/account`,
-    type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
-  });
+  requestService
+    .get({
+      ...authData,
+      url: `${API_ROUTE}/account`,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    })
+    .pipe(map(transformFuturesAccount));
 
 export const getTrades = (
   symbol: string,
@@ -87,10 +95,16 @@ export const getTrades = (
   });
 
 export const getTickers = (symbol?: string): Observable<Ticker[]> =>
-  requestService.get({
-    url: `${API_ROUTE}/ticker/24hr`,
-    params: symbol ? { symbol: symbol.toUpperCase() } : {}
-  });
+  requestService
+    .get({
+      url: `${API_ROUTE}/ticker/24hr`,
+      params: symbol ? { symbol: symbol.toUpperCase() } : {}
+    })
+    .pipe(
+      map((items: FuturesTickerSymbol[]) =>
+        items.map(transformFuturesTickerSymbol)
+      )
+    );
 
 export const getDepth = (
   symbol: string,

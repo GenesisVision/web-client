@@ -12,6 +12,7 @@ import {
   getTickerSymbolLoaderData,
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
+import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 
@@ -62,6 +63,9 @@ const _SymbolSummaryView: React.FC<Props> = ({
 }) => {
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+      <Row>
+        <TerminalTypeSwitcher />
+      </Row>
       <Row center={false}>
         <RowItem>
           <Row>
