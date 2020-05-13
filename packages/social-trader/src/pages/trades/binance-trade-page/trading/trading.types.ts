@@ -1,3 +1,4 @@
+import { FuturesAccountEventType } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
@@ -805,7 +806,9 @@ export type ExecutionType =
   | "TRADE"
   | "EXPIRED";
 
-export type EventType = "executionReport" | "account" | "outboundAccountInfo";
+export type EventType =
+  | ("executionReport" | "account" | "outboundAccountInfo")
+  | FuturesAccountEventType;
 
 export interface DepthMain {
   eventType: string;
