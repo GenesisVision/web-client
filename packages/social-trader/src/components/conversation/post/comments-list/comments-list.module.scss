@@ -1,0 +1,10 @@
+@import "~shared/styles/_colors";
+
+.post {
+  &__view-all-button-container {
+    justify-content: center;
+  }
+  &__comments {
+    width: 100%;
+  }
+}

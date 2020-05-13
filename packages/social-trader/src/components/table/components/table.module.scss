@@ -1,0 +1,170 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+$view-svg-size: 15px;
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+
+  &__sorting-filter {
+    margin-right: auto;
+  }
+  &__mapping {
+    margin-right: auto;
+  }
+  &__scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  &__footer {
+    @include horizontal-paddings($padding-small);
+  }
+  &__paging {
+    margin-left: auto;
+  }
+  &__toolbar {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-between;
+    @include horizontal-paddings($padding-small);
+  }
+
+  &__toggle {
+    justify-content: space-between;
+  }
+
+  &__toggle-icon {
+    cursor: pointer;
+    line-height: 0;
+    width: $view-svg-size/1.2;
+    height: 18px;
+    &:not(:last-child) {
+      @include adaptive-margin(right, $view-svg-size * 2);
+    }
+  }
+
+  &__title {
+    padding: 0;
+    justify-self: flex-start;
+    white-space: nowrap;
+  }
+
+  &__row {
+    @include transition(background-color);
+
+    &--clickable {
+      cursor: pointer;
+      background-color: $background-chip-positive !important;
+      &:hover {
+        background-color: $background-pretender-level-hover !important;
+      }
+    }
+    &:not(.table__row--head):hover {
+      background: $row-color;
+    }
+
+    &--stripy:nth-child(2n + 1) {
+      background: $table-background-subcolor;
+    }
+  }
+
+  &__cell {
+    &--low {
+      @include vertical-paddings($padding-xxsmall);
+    }
+    &--medium {
+      @include vertical-paddings($padding-xsmall);
+    }
+    @include font-size($font-size-common);
+    @include adaptive-padding(right, $padding-xsmall, 2);
+    text-align: left;
+    cursor: default;
+    box-sizing: border-box;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-weight: normal;
+    white-space: nowrap;
+
+    &:first-child {
+      @include adaptive-padding(left, $padding-small);
+    }
+    &:last-child {
+      @include adaptive-padding(right, $padding-small);
+    }
+
+    &#{&} {
+      &--head {
+        @include adaptive-padding(right, $padding-small/2);
+
+        &:last-child {
+          @include adaptive-padding(right, $padding-small);
+        }
+      }
+      &--sortable {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+.toolbar-button {
+  @include font-size($font-size-paragraph);
+  font-weight: 600;
+}
+
+.table-message {
+  padding: $padding-small;
+  text-align: center;
+  width: 100%;
+  @include font-size($font-size-common);
+  box-sizing: border-box;
+}
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 3px;
+  content: "";
+  border-top: 1px solid white;
+}
+
+.sortable-asc,
+.sortable-desc {
+  span {
+    opacity: 1;
+  }
+  position: relative;
+  &::before {
+    @include transition(width);
+    @extend %sortable-border-icon;
+    height: 4px;
+  }
+  &::after {
+    @include transition(width);
+    @extend %sortable-border-icon;
+  }
+}
+.sortable-desc {
+  &::before {
+    width: 10px;
+  }
+  &::after {
+    width: 5px;
+  }
+}
+.sortable-asc {
+  &::before {
+    width: 5px;
+  }
+  &::after {
+    width: 10px;
+  }
+}

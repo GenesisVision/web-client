@@ -1,0 +1,19 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.info-list-wrapper {
+  max-width: 100%;
+
+  @include media-breakpoint-tablet() {
+    grid-column: 2/12;
+    grid-row: 2/3;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    grid-column: 6/12;
+    grid-row: 1/2;
+    width: 100%;
+  }
+}

@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
 
-import "../navigation.scss";
+import styles from "../navigation.module.scss";
 
 const _NavigationMobileButton: React.FC<Props> = ({
   mobileMenuItems,
@@ -21,7 +21,7 @@ const _NavigationMobileButton: React.FC<Props> = ({
   const handlerLogout = useCallback(() => dispatch(logout), []);
   return (
     <>
-      <div className="navigation__menu" onClick={setOpen}>
+      <div className={styles["navigation__menu"]} onClick={setOpen}>
         <Icon type="menu" />
       </div>
       <NavigationMobileContainer

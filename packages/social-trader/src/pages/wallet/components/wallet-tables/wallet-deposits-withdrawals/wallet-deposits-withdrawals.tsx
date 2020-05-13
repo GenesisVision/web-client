@@ -1,5 +1,3 @@
-import "./wallet-deposits-withdrawals.scss";
-
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -57,7 +55,6 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   const { walletExternalTransactions } = platformData.filters;
   return (
     <TableModule
-      className="wallet-deposits-withdrawals"
       loaderData={walletTransactionsLoaderData}
       timestamp={new Date(timestamp || 0).getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}

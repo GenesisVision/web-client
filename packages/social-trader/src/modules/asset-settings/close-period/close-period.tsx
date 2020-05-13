@@ -8,6 +8,8 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 
+import styles from "../asset-settings.module.scss";
+
 const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   const [
     isClosePeriodOpen,
@@ -16,7 +18,7 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   ] = useIsOpen();
   return (
     <>
-      <Row onlyOffset className="asset-settings__block-wrapper">
+      <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
         <FormTextField>
           {t("program-settings.period-and-closing.text-period")}
         </FormTextField>

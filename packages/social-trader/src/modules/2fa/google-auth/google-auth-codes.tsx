@@ -8,15 +8,17 @@ import CopyButton from "modules/copy-button/copy-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "./google-auth.module.scss";
+
 const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
-  <div className="codes__item" key={code}>
+  <div className={styles["codes__item"]} key={code}>
     {code}
   </div>
 ));
 
 const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
   ({ codes }) => (
-    <div className="codes__list">
+    <div className={styles["codes__list"]}>
       {codes.map(code => (
         <CodeItem code={code.code} />
       ))}
@@ -30,7 +32,7 @@ const getCodesString = (codes: RecoveryCode[]): string =>
 const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
   const [t] = useTranslation();
   return (
-    <div className="recovery-codes-container">
+    <div className={styles["recovery-codes-container"]}>
       <DialogTop title={t("2fa-page.codes.title")} />
       <DialogBottom>
         <Row>{t("2fa-page.codes.recovery_codes")}</Row>

@@ -5,23 +5,25 @@ import { JoinButton } from "pages/landing-page/components/join-button";
 import { TInfoItem } from "pages/landing-page/static-data/info";
 import React from "react";
 
+import styles from "./info-list.module.scss";
+
 const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => {
   const { t } = useTranslation();
   return (
     <li
-      className={classNames("info-list__item", {
-        "info-list__item--bg-transparent": image
+      className={classNames(styles["info-list__item"], {
+        [styles["info-list__item--bg-transparent"]]: image
       })}
     >
       {image && (
         <ImageBaseElement
           src={image}
           alt={t("landing-page:links.trade")}
-          className="info-list__item-image"
+          className={styles["info-list__item-image"]}
         />
       )}
       {texts && (
-        <div className="info-list__item-text">
+        <div className={styles["info-list__item-text"]}>
           {texts.map((item, index) =>
             item.bold ? (
               <b key={index}>{t(item.text)}</b>
@@ -32,7 +34,7 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => {
         </div>
       )}
       {button && (
-        <div className="info-list__item-btn">
+        <div className={styles["info-list__item-btn"]}>
           <JoinButton href={button.link}>{t(button.text)}</JoinButton>
         </div>
       )}

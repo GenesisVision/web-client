@@ -16,7 +16,7 @@ import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React from "react";
 
-import "./message.scss";
+import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
   row = true,
@@ -29,8 +29,12 @@ const _Message: React.FC<IMessageProps> = ({
 }) => {
   return (
     <div>
-      <div className={classNames("message", { "message--row": row })}>
-        <RowItem className="message__user">
+      <div
+        className={classNames(styles["message"], {
+          [styles["message--row"]]: row
+        })}
+      >
+        <RowItem className={styles["message__user"]}>
           <ConversationUser
             postId={postId}
             url={url}
@@ -39,7 +43,7 @@ const _Message: React.FC<IMessageProps> = ({
             date={date}
           />
         </RowItem>
-        <RowItem className="message__text">
+        <RowItem className={styles["message__text"]}>
           {text && (
             <Row>
               <div>
@@ -52,7 +56,7 @@ const _Message: React.FC<IMessageProps> = ({
             </Row>
           )}
           {!!images.length && (
-            <Row wrap small className="message__images">
+            <Row wrap small className={styles["message__images"]}>
               {images.map((image, index) => (
                 <RowItem bottomOffset key={index}>
                   <ConversationImage

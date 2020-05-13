@@ -7,7 +7,6 @@ import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import "./2fa.scss";
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
@@ -26,7 +25,7 @@ const _TwoFactor: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="two-factor">
+    <div>
       <GVTextField
         name="2fa"
         label={t("2fa-page.type")}

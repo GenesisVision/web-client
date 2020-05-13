@@ -10,7 +10,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import { assetTitleShape } from "utils/validators/validators";
 import { object } from "yup";
 
-import "./public-info.scss";
+import styles from "./public-info.module.scss";
 
 enum FIELDS {
   userName = "userName",
@@ -38,7 +38,12 @@ const _PublicInfoForm: React.FC<Props> = ({
   const { about } = watch();
 
   return (
-    <HookForm resetOnSuccess form={form} className="about" onSubmit={onSubmit}>
+    <HookForm
+      resetOnSuccess
+      form={form}
+      className={styles["about"]}
+      onSubmit={onSubmit}
+    >
       <UserNameField name={FIELDS.userName} />
       <AboutField description={about} name={FIELDS.about} />
       <FormError error={errorMessage} />

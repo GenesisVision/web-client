@@ -1,5 +1,3 @@
-import "./menu-tooltip.scss";
-
 import classNames from "classnames";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -10,6 +8,8 @@ import useAnchor from "hooks/anchor.hook";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
+
+import styles from "./menu-tooltip.module.scss";
 
 const MenuTooltip: React.FC<Props> = ({
   render,
@@ -50,7 +50,7 @@ const MenuTooltip: React.FC<Props> = ({
     <div
       onMouseEnter={handleLabelMouseEnter}
       onMouseLeave={handleLabelMouseLeave}
-      className="menu-tooltip__label"
+      className={styles["menu-tooltip__label"]}
     >
       <child.type
         {...child.props}
@@ -58,7 +58,7 @@ const MenuTooltip: React.FC<Props> = ({
         onTouchStart={handleButtonMouseEnter}
         onTouchEnd={clearAnchor}
         onClick={clearAnchor}
-        className="menu-tooltip__label-child"
+        className={styles["menu-tooltip__label-child"]}
       />
       <Popover
         fixedHorizontal
@@ -67,7 +67,7 @@ const MenuTooltip: React.FC<Props> = ({
         noAbsolute
         noPadding
         anchorEl={anchor}
-        className={classNames("menu-tooltip__popover", className)}
+        className={classNames(styles["menu-tooltip__popover"], className)}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         horizontal={HORIZONTAL_POPOVER_POS.CENTER}
         orientation={ORIENTATION_POPOVER.CENTER}

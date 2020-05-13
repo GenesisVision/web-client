@@ -14,7 +14,7 @@ import {
   getLeverageDescription
 } from "../asset.helpers";
 import BrokerCard from "./broker-card/broker-card";
-import "./broker-select.scss";
+import styles from "./broker-select.module.scss";
 import NavigateToSettings from "./navigate-to-settings";
 
 const _BrokerSelectBroker: React.FC<Props> = ({
@@ -27,9 +27,9 @@ const _BrokerSelectBroker: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Row className="broker-select">
+    <Row className={styles["broker-select"]}>
       <RowItem>
-        <Row wrap wide className="broker-select__list">
+        <Row wrap wide className={styles["broker-select__list"]}>
           {data.map((broker, i) => (
             <RowItem bottomOffset key={i}>
               <BrokerCard
@@ -47,7 +47,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
             </RowItem>
           ))}
         </Row>
-        <Row className="broker-select__navigation">
+        <Row className={styles["broker-select__navigation"]}>
           <NavigateToSettings
             isForex={selectedBroker.isKycRequired}
             isKycConfirmed={isKycConfirmed}
@@ -59,7 +59,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
         size={SIZES.LARGE}
         solid
         wide
-        className="broker-select__description"
+        className={styles["broker-select__description"]}
       >
         <Row>
           <h3>{selectedBroker.name}</h3>

@@ -8,6 +8,7 @@ import { AssetFacet } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 
+import styles from "./facet-cards.module.scss";
 import facetImg from "./facet.png";
 
 const _FacetCard: React.FC<Props> = ({
@@ -23,15 +24,15 @@ const _FacetCard: React.FC<Props> = ({
       solid
       horizontalOffsets={false}
       verticalOffsets={false}
-      className={classNames("facet", {
-        "facet--hovered": isHovered
+      className={classNames(styles["facet"], {
+        [styles["facet--hovered"]]: isHovered
       })}
       onMouseEnter={setHovered}
       onMouseLeave={setNotHovered}
     >
       <Link to={linkCreator(composeFacetUrl(facet.url), fileRoute, title)}>
-        <div className="facet__facet-container">
-          <div className="facet__logo-wrapper">
+        <div className={styles["facet__facet-container"]}>
+          <div className={styles["facet__logo-wrapper"]}>
             <ImageBase
               quality={"Medium"}
               src={facet.logoUrl}
@@ -40,9 +41,9 @@ const _FacetCard: React.FC<Props> = ({
               className="facet__logo"
             />
           </div>
-          <div className="facet__info">
-            <h2 className="facet__title">{facet.title}</h2>
-            <Row small className="facet__description">
+          <div className={styles["facet__info"]}>
+            <h2 className={styles["facet__title"]}>{facet.title}</h2>
+            <Row small className={styles["facet__description"]}>
               {facet.description}
             </Row>
           </div>

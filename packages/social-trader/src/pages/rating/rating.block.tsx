@@ -8,7 +8,7 @@ import { Row } from "components/row/row";
 import { UserDetailsList } from "gv-api-web";
 import React from "react";
 
-import "./rating.scss";
+import styles from "./rating.module.scss";
 
 type RatingValueType = string | number | JSX.Element;
 
@@ -34,13 +34,19 @@ const _RatingBlockRow: React.FC<IPropsRatingBlockRow> = ({
   return (
     <Row>
       <RowItem>
-        {winner ? <h1 className="rating__winner">{number}</h1> : <>{number}</>}
+        {winner ? (
+          <h1 className={styles["rating__winner"]}>{number}</h1>
+        ) : (
+          <>{number}</>
+        )}
       </RowItem>
       <RowItem>
         <AvatarWithName
           avatar={
             <ProfileAvatar
-              className={classNames({ "rating__winner-avatar": winner })}
+              className={classNames({
+                [styles["rating__winner-avatar"]]: winner
+              })}
               big={winner}
               middle={!winner}
               url={logoUrl}

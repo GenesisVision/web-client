@@ -10,7 +10,6 @@ import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-au
 import * as twoFactorServices from "../services/2fa.service";
 import { fetchTFAData } from "../services/2fa.service";
 import { IGoogleActivateStepFormValues } from "./google-auth-steps/google-auth-activate-step";
-import "./google-auth.scss";
 
 const _GoogleAuthContainerForm: React.FC<{
   onSubmit: (values: IGoogleActivateStepFormValues) => any;

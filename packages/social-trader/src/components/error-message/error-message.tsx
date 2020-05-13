@@ -1,7 +1,7 @@
-import "./error-message.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+
+import styles from "./error-message.module.scss";
 
 export enum MESSAGE_TYPES {
   DEFAULT = "DEFAULT",
@@ -14,8 +14,8 @@ interface IErrorMessage {
 }
 const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
   <span
-    className={classNames("error-message", className, {
-      "error-message--over": type === MESSAGE_TYPES.OVER
+    className={classNames(styles["error-message"], className, {
+      [styles["error-message--over"]]: type === MESSAGE_TYPES.OVER
     })}
   >
     {error}

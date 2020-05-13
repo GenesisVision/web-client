@@ -40,7 +40,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
             <TooltipLabel
               tooltipContent={t("fund-details-page.tooltip.structure")}
               labelText={t("fund-details-page.history.tabs.structure")}
-              className="tooltip__label--cursor-pointer"
+              pointer
             />
           }
         />

@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-import "./notify-button.scss";
+import styles from "./notify-button.module.scss";
 
 const _NotifyButton: React.FC<Props> = ({
   broker,
@@ -51,7 +51,7 @@ const _NotifyButton: React.FC<Props> = ({
           </TooltipContent>
         )}
       >
-        <div className="notify-button__hint">?</div>
+        <div className={styles["notify-button__hint"]}>?</div>
       </Tooltip>
     </Center>
   );

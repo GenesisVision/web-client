@@ -7,6 +7,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 import TileFilterPopover from "../tile-filter-popover";
+import styles from "./fund-asset-filter.module.scss";
 
 const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
   const [t] = useTranslation();
@@ -22,11 +23,11 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
       changeFilter={changeFilter!}
     >
       {(filteredAssets, handleClick) => (
-        <Row onlyOffset className="fund-asset-filter__assets-block">
+        <Row onlyOffset className={styles["fund-asset-filter__assets-block"]}>
           {filteredAssets.map((asset, idx) => (
             <Row
               small
-              className="fund-asset-filter__asset-item"
+              className={styles["fund-asset-filter__asset-item"]}
               key={idx}
               onClick={() => handleClick(asset.asset)}
             >

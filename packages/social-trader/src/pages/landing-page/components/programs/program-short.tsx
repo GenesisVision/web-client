@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import {
@@ -10,6 +11,7 @@ import {
 } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
+import { LPTableCardAvatar } from "pages/landing-page/components/lp-table-card/lp-table-card";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
@@ -17,13 +19,14 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 
-import "./program-short.scss";
+import styles from "./program-short.module.scss";
 
 interface Props {
   program: ProgramDetailsListItem;
+  className?: string;
 }
 
-const _ProgramShort: React.FC<Props> = ({ program }) => {
+const _ProgramShort: React.FC<Props> = ({ program, className }) => {
   const { t } = useTranslation();
   const { linkCreator } = useToLink();
   const linkProps = linkCreator(
@@ -31,22 +34,22 @@ const _ProgramShort: React.FC<Props> = ({ program }) => {
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   return (
-    <div className="program-short">
-      <TableCardAvatar
+    <div className={classNames(styles["program-short"], className)}>
+      <LPTableCardAvatar
         logo={program.logoUrl}
-        hasAvatar
         alt={program.title}
         color={program.color}
         level={program.level}
         levelProgress={program.levelProgress}
         url={linkProps}
+        contentCenter
       />
-      <div className="program-short__period">
+      <div className={styles["program-short__period"]}>
         {distanceDate(program.periodStarts, program.periodEnds)}
       </div>
       <TableCardTitle url={linkProps}>{program.title}</TableCardTitle>
       <StatisticItem
-        className="program-short__balance"
+        className={styles["program-short__balance"]}
         label={t("programs-page.programs-header.equity")}
       >
         <NumberFormat

@@ -1,8 +1,8 @@
-import "./avatar-with-name.scss";
-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
+
+import styles from "./avatar-with-name.module.scss";
 
 const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
   return (
@@ -12,7 +12,7 @@ const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
           <Row>{avatar}</Row>
         </RowItem>
       )}
-      <RowItem className="avatar-with-name__name">{name}</RowItem>
+      <RowItem className={styles["avatar-with-name__name"]}>{name}</RowItem>
     </Row>
   );
 };

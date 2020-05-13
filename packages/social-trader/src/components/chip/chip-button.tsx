@@ -3,6 +3,8 @@ import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
 
+import styles from "./chip.module.scss";
+
 const ChipButton: React.FC<Props> = React.memo(
   ({
     stretch,
@@ -19,8 +21,8 @@ const ChipButton: React.FC<Props> = React.memo(
   }) => (
     <div
       onClick={onClick}
-      className={classNames("chip-button", {
-        "chip-button--reversed": reverseOrder
+      className={classNames(styles["chip-button"], {
+        [styles["chip-button--reversed"]]: reverseOrder
       })}
     >
       <Chip
@@ -32,7 +34,7 @@ const ChipButton: React.FC<Props> = React.memo(
       >
         {chipLabel}
       </Chip>
-      {label && <div className="chip-button__label">{label}</div>}
+      {label && <div className={styles["chip-button__label"]}>{label}</div>}
     </div>
   )
 );

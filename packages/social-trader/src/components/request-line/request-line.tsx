@@ -11,7 +11,7 @@ import NumberFormat from "react-number-format";
 import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
-import "./request-line.scss";
+import styles from "./request-line.module.scss";
 
 const _RequestLine: React.FC<Props> = ({
   request: { assetDetails, type, amount, currency, date, canCancelRequest, id },
@@ -27,12 +27,12 @@ const _RequestLine: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <Center className="request-line">
+    <Center className={styles["request-line"]}>
       <RowItem small>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </RowItem>
       <RowItem large>
-        <StatisticItemList className="request-line__values">
+        <StatisticItemList className={styles["request-line__values"]}>
           <StatisticItem label={title} invert accent>
             {type}
           </StatisticItem>

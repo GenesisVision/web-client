@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeFunc } from "utils/hook-form.helpers";
 
-import "./conversation-pin-button.scss";
+import styles from "./conversation-pin-button.module.scss";
 
 const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   const [t] = useTranslation();
@@ -40,7 +40,10 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
       )}
       <RowItem>
         <Center>
-          <div className="conversation-pin-button" onClick={sendRequest}>
+          <div
+            className={styles["conversation-pin-button"]}
+            onClick={sendRequest}
+          >
             {innerPinned ? <UnpinIcon /> : <PinIcon />}
           </div>
         </Center>

@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import { Table } from "components/table/components";
 import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import FollowTableRowShort from "modules/follows-table/components/follow-table-row-short";
 import { FOLLOW_COLUMNS } from "modules/follows-table/components/follows.constants";
-import "modules/programs-table/components/programs-table/programs.scss";
+import styles from "modules/programs-table/components/programs-table/programs-table.module.scss";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,7 +19,10 @@ const _FollowsTable: React.FC<SearchTableProps<
       items={data.items}
       renderHeader={column => (
         <span
-          className={`programs-table__cell programs-table__cell--${column.name}`}
+          className={classNames(
+            styles[`programs-table__cell`],
+            styles[`programs-table__cell--${column.name}`]
+          )}
         >
           {t(`follows-page.header.${column.name}`)}
         </span>

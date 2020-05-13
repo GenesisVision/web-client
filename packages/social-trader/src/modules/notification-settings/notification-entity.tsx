@@ -5,6 +5,8 @@ import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "./notification-settings.module.scss";
+
 const _NotificationEntity: React.FC<Props> = ({
   levelProgress,
   href,
@@ -18,9 +20,10 @@ const _NotificationEntity: React.FC<Props> = ({
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
   return (
-    <Row className="notification-entity" wide>
+    <Row className={styles["notification-entity"]} wide>
       <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
         <AssetAvatarWithName
+          levelColor={"#131e26"}
           levelProgress={levelProgress}
           name={title}
           url={logo}

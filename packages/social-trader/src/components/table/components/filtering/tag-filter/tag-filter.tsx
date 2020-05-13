@@ -1,5 +1,3 @@
-import "./tag-filter.scss";
-
 import TagItem from "components/tags/tag-item/tag-item";
 import { Tag } from "gv-api-web";
 import * as React from "react";

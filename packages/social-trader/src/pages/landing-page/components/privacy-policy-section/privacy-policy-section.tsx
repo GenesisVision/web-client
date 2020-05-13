@@ -1,10 +1,16 @@
-import "./privacy-policy-section.scss";
-
+import classNames from "classnames";
 import React from "react";
+
+import styles from "./privacy-policy-section.module.scss";
 
 const PrivacyPolicySection: React.FC = () => {
   return (
-    <section className="privacy-policy-section internal--font-small">
+    <section
+      className={classNames(
+        styles["privacy-policy-section"],
+        "internal--font-small"
+      )}
+    >
       <h1>PRIVACY POLICY</h1>
       <article className="internal__article">
         <p>

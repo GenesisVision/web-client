@@ -8,7 +8,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 
-import "./input-image.scss";
+import styles from "./input-image.module.scss";
 
 type FileWithPreview = any;
 
@@ -57,23 +57,26 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
   return (
     <div
       {...getRootProps({
-        className: classNames("input-image__dropzone-container", className)
+        className: classNames(
+          styles["input-image__dropzone-container"],
+          className
+        )
       })}
     >
       {showIndicator && (
         <div
-          className="input-image__indicator"
+          className={styles["input-image__indicator"]}
           style={{ width: `${indicatorValue}%` }}
         />
       )}
       <input {...getInputProps()} />
       {isDragAccept && (
-        <div className="input-image__dropzone-helper">
+        <div className={styles["input-image__dropzone-helper"]}>
           {t("input-image.drop-files")}
         </div>
       )}
       {isDragReject && (
-        <div className="input-image__dropzone-helper">
+        <div className={styles["input-image__dropzone-helper"]}>
           {t("Some files will be rejected")}
         </div>
       )}

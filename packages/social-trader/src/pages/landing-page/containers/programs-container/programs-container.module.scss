@@ -1,0 +1,86 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.programs-container {
+  @include grid();
+  @include horizontal-padding();
+
+  &__info {
+    margin-bottom: 60px;
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 3/11;
+      margin-bottom: 100px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 4/10;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      grid-column: 5/9;
+      margin-bottom: 150px;
+    }
+  }
+
+  &__list {
+    @include reset-list();
+    grid-column: 1/13;
+    padding: 0 20px 40px;
+    margin-right: -20px;
+    margin-left: -20px;
+
+    @include media-breakpoint-tablet() {
+      padding-bottom: 100px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 3/11;
+      margin: 0;
+      padding: 0;
+    }
+
+    @include media-breakpoint-desktop() {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  &__img {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+
+    @include media-breakpoint-tablet() {
+      width: 80px;
+      height: 70px;
+    }
+
+    @include media-breakpoint-desktop() {
+      width: 100px;
+      height: 87px;
+    }
+  }
+
+  &__text {
+    color: rgba($main-color, 0.5);
+    margin-bottom: 20px;
+
+    @include media-breakpoint-tablet() {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 2/7;
+    }
+  }
+}

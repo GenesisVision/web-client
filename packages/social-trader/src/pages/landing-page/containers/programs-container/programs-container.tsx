@@ -7,7 +7,7 @@ import ProgramIcon from "pages/landing-page/images/common/program-icon.svg";
 import React from "react";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 
-import "./programs-container.scss";
+import styles from "./programs-container.module.scss";
 
 interface Props {
   programs: ProgramDetailsListItem[];
@@ -17,17 +17,17 @@ const _ProgramsContainer: React.FC<Props> = ({ programs }) => {
   const { t } = useTranslation();
   if (!programs.length) return null;
   return (
-    <div className="programs-container">
-      <div className="programs-container__info">
+    <div className={styles["programs-container"]}>
+      <div className={styles["programs-container__info"]}>
         <ImageBaseElement
           src={ProgramIcon}
           alt={t("landing-page:programs.title")}
-          className="programs-container__img"
+          className={styles["programs-container__img"]}
         />
-        <h2 className="programs-container__title">
+        <h2 className={styles["programs-container__title"]}>
           {t("landing-page:programs.title")}
         </h2>
-        <p className="programs-container__text">
+        <p className={styles["programs-container__text"]}>
           {t("landing-page:programs.text")}
         </p>
         <JoinButton
@@ -37,7 +37,10 @@ const _ProgramsContainer: React.FC<Props> = ({ programs }) => {
           {t("landing-page:buttons.discover")}
         </JoinButton>
       </div>
-      <ProgramsList className="programs-container__list" programs={programs} />
+      <ProgramsList
+        className={styles["programs-container__list"]}
+        programs={programs}
+      />
     </div>
   );
 };

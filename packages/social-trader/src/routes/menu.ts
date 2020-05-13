@@ -160,7 +160,7 @@ const mainMenuItemsUnion = [
     ]
   }
 ];
-export const topMenuItems: TMenuItem[] = [rootMenuItem, ...mainMenuItemsUnion];
+export const topMenuItems: TMenuItem[] = mainMenuItemsUnion;
 
 export const mobileMenuItems: TMenuItem[] = [
   ...mainMenuItemsUnion,

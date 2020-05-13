@@ -15,7 +15,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-import "./header.scss";
+import styles from "./header.module.scss";
 
 const HeaderSearchInput = dynamic(() =>
   import("components/header/header-search-input")
@@ -30,7 +30,7 @@ const HeaderLeft: React.FC<{
 
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   return (
-    <div className="header__left">
+    <div className={styles["header__left"]}>
       <NavigationMobileButton
         mobileMenuItems={showedMobileMenuItems}
         backPath={backPath}
@@ -39,21 +39,21 @@ const HeaderLeft: React.FC<{
       />
       <Navigation
         menuItems={showedTopMenuItems}
-        className={classNames("header__navigation", {
-          "header__navigation--search": openSearch
+        className={classNames(styles["header__navigation"], {
+          [styles["header__navigation--search"]]: openSearch
         })}
       />
       <div
         onClick={setSearchIsOpen}
-        className={classNames("header__search-container", {
-          "header__search-container--search": openSearch
+        className={classNames(styles["header__search-container"], {
+          [styles["header__search-container--search"]]: openSearch
         })}
       >
         <HeaderIcon>
           {openSearch ? (
             <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
           ) : (
-            <div className="header__search-button">
+            <div className={styles["header__search-button"]}>
               <SearchIcon />
             </div>
           )}
@@ -68,9 +68,9 @@ const _Header: React.FC<Props> = ({ profileHeader }) => {
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   return (
-    <Center className="header">
+    <Center className={styles["header"]}>
       <HeaderLeft backPath={backPath} profileHeader={profileHeader} />
-      <div className="header__right">
+      <div className={styles["header__right"]}>
         {isAuthenticated ? (
           <AuthWidgets profileHeader={profileHeader} />
         ) : (

@@ -1,9 +1,9 @@
-import "./popover.scss";
-
 import classNames from "classnames";
 import Modal from "components/modal/modal";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
+
+import styles from "./popover.module.scss";
 
 export enum VERTICAL_POPOVER_POS {
   TOP = "top",
@@ -161,8 +161,8 @@ const Popover: React.FC<Props> = props => {
       <div
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={classNames("popover", className, {
-          "popover--no-padding": noPadding
+        className={classNames(styles["popover"], className, {
+          [styles["popover--no-padding"]]: noPadding
         })}
         ref={popover}
       >

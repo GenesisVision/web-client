@@ -13,6 +13,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
   assetsLength,
   type,
   removable,
+  lightTheme,
   removeHandle,
   hoveringAsset
 }) => {
@@ -37,6 +38,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
         type={type}
         last={idx === assetsLength - 1}
         removable={removable}
+        lightTheme={lightTheme}
         removeHandle={removeHandle}
         className={
           hoveringAsset === asset.asset ? "fund-asset--hover" : undefined

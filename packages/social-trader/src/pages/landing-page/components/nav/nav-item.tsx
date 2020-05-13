@@ -6,6 +6,8 @@ import NavSubList from "pages/landing-page/components/nav/nav-sublist";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React, { useCallback, useState } from "react";
 
+import styles from "./nav-list.module.scss";
+
 interface INavItemProps extends TNavHeader {
   subNavOpen?: boolean;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
@@ -39,17 +41,19 @@ const _NavItem: React.FC<INavItemProps> = ({
   );
   return (
     <li
-      className={classNames("nav-list__item", {
-        "nav-list__item--hide-mobile": hideMobile,
-        "nav-list__item--sub-open": subOpen
+      className={classNames(styles["nav-list__item"], {
+        [styles["nav-list__item--hide-mobile"]]: hideMobile,
+        [styles["nav-list__item--sub-open"]]: subOpen
       })}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <>
         {href && href.includes("http") ? (
-          <a title={name} href={href} className="nav-list__link">
-            {icon && <span className="nav-list__link-icon">{icon}</span>}
+          <a title={name} href={href} className={styles["nav-list__link"]}>
+            {icon && (
+              <span className={styles["nav-list__link-icon"]}>{icon}</span>
+            )}
             {t(name)}
           </a>
         ) : (
@@ -57,9 +61,11 @@ const _NavItem: React.FC<INavItemProps> = ({
             title={t(name)}
             onClick={onClick}
             to={{ pathname: href as string, state }}
-            className="nav-list__link"
+            className={styles["nav-list__link"]}
           >
-            {icon && <span className="nav-list__link-icon">{icon}</span>}
+            {icon && (
+              <span className={styles["nav-list__link-icon"]}>{icon}</span>
+            )}
             {t(name)}
           </Link>
         )}

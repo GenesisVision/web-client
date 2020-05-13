@@ -12,6 +12,7 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 import { dateToInput } from "./date-range-filter.helpers";
+import styles from "./date-range-filter.module.scss";
 
 const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
   const { type, startLabel, onChange } = props;
@@ -63,7 +64,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
           <RowItem>
             <GVTextField
               onBlur={handleBlur}
-              wrapperClassName="date-range-filter__date-input"
+              wrapperClassName={styles["date-range-filter__date-input"]}
               type="text"
               name={DATE_RANGE_MIN_FILTER_NAME}
               label={t("filters.date-range.start")}
@@ -78,7 +79,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
           </RowItem>
           <RowItem>
             <GVTextField
-              wrapperClassName="date-range-filter__date-input"
+              wrapperClassName={styles["date-range-filter__date-input"]}
               type="text"
               name={DATE_RANGE_MAX_FILTER_NAME}
               label={t("filters.date-range.end")}
@@ -103,7 +104,7 @@ const _FirstInput: React.FC<{ value: string }> = ({ value }) => {
     //@ts-ignore TODO сделать фикс GVTextField
     <RowItem>
       <GVTextField
-        wrapperClassName="date-range-filter__date-input"
+        wrapperClassName={styles["date-range-filter__date-input"]}
         type="text"
         name="startDate"
         label={t("filters.date-range.start")}
@@ -120,7 +121,7 @@ const _SecondInput: React.FC = () => {
   return (
     <RowItem>
       <GVTextField
-        wrapperClassName="date-range-filter__date-input"
+        wrapperClassName={styles["date-range-filter__date-input"]}
         type="text"
         name="endDate"
         label={t("filters.date-range.end")}

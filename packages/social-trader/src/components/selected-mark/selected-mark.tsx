@@ -1,13 +1,13 @@
-import "./selected-mark.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import styles from "./selected-mark.module.scss";
 
 const _SelectedMark: React.FC<Props> = ({ selected, className }) => {
   return (
     <div
-      className={classNames("selected-mark", className, {
-        "selected-mark--selected": selected
+      className={classNames(styles["selected-mark"], className, {
+        [styles["selected-mark--selected"]]: selected
       })}
     >
       &#10004;

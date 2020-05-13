@@ -12,7 +12,7 @@ import { getRandomInteger } from "utils/helpers";
 import { InviteBlock, inviteBlockLoaderData } from "./invite-block";
 import { ReferralFriendsTable } from "./referral-friends-table";
 import { ReferralHistoryTable } from "./referral-history-table";
-import "./referral-program.scss";
+import styles from "./referral-program.module.scss";
 import { ReferralRewardsBlock } from "./referral-reward-block";
 import {
   getProfile,
@@ -46,7 +46,7 @@ const _ReferralProgramPage: React.FC = () => {
           currency={currency}
         />
       </SettingsBlock>
-      <Row large className="referral-program__tables">
+      <Row large className={styles["referral-program__tables"]}>
         <DetailsBlock table>
           <ReferralFriendsTable />
         </DetailsBlock>

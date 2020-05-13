@@ -6,8 +6,6 @@ import {
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 
-import "../trades.scss";
-
 interface Props {
   authData: TradeAuthDataType;
   type?: TerminalType;

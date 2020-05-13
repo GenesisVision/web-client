@@ -6,6 +6,7 @@ import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "../asset-settings.module.scss";
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
 const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
@@ -13,7 +14,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
   const [isCloseAssetOpen, setCloseAssetOpen, setCloseAssetClose] = useIsOpen();
   return (
     <>
-      <Row onlyOffset className="asset-settings__block-wrapper">
+      <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
         <FormTextField>
           {t(`asset-settings.period-and-closing.text-${asset.toLowerCase()}`)}
         </FormTextField>

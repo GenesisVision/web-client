@@ -8,6 +8,7 @@ import { PersonalDetailsType } from "../../details.types";
 import DetailsFavorite from "./controls/details-favorite";
 import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
+import styles from "./details-description.module.scss";
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
   isOwnAsset,
@@ -19,7 +20,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="asset-details-description__settings">
+    <div className={styles["asset-details-description__settings"]}>
       {personalDetails && (
         <Row>
           <DetailsFavorite

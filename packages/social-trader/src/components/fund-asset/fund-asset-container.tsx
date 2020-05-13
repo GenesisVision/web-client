@@ -26,6 +26,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   size: sizeProp,
   hasPopoverList,
   removable,
+  lightTheme,
   removeHandle,
   hoveringAsset
 }) => {
@@ -41,6 +42,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
           type,
           removable,
           removeHandle,
+          lightTheme,
           hoveringAsset,
           assetsLength: assets.length
         })
@@ -150,11 +152,13 @@ const renderFundAsset = ({
   type,
   removable,
   removeHandle,
+  lightTheme,
   assetsLength
 }: {
   bottomOffset?: boolean;
   type: FUND_ASSET_TYPE;
   removable?: boolean;
+  lightTheme?: boolean;
   removeHandle?: FundAssetRemoveType;
   hoveringAsset?: string;
   assetsLength: number;
@@ -167,6 +171,7 @@ const renderFundAsset = ({
     assetsLength={assetsLength}
     type={type}
     removable={removable}
+    lightTheme={lightTheme}
     removeHandle={removeHandle}
   />
 );
@@ -182,6 +187,7 @@ export interface IFundAssetContainerProps {
   size?: number;
   length?: number;
   removable?: boolean;
+  lightTheme?: boolean;
   removeHandle?: FundAssetRemoveType;
   remainder?: number;
   hoveringAsset?: string;

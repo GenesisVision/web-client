@@ -6,10 +6,12 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import React from "react";
 import { getRandomInteger } from "utils/helpers";
 
+import styles from "./header.module.scss";
+
 const AuthWidgets: React.FC<Props> = ({ profileHeader }) => {
   return (
     <>
-      <div className="header__wallet">
+      <div className={styles["header__wallet"]}>
         <WalletWidgetContainer />
       </div>
       <NotificationsWidget
@@ -18,9 +20,9 @@ const AuthWidgets: React.FC<Props> = ({ profileHeader }) => {
       />
       <ProfileWidget
         condition={!!profileHeader}
-        loader={<ProfileWidgetLoader className="header__profile" />}
+        loader={<ProfileWidgetLoader className={styles["header__profile"]} />}
         profileHeader={profileHeader!}
-        className="header__profile"
+        className={styles["header__profile"]}
       />
     </>
   );

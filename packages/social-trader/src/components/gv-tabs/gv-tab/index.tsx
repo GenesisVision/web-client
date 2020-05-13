@@ -1,8 +1,8 @@
-import "./style.scss";
-
 import classNames from "classnames";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
+
+import styles from "./style.module.scss";
 
 export interface GVTabProps {
   label: React.ReactNode;
@@ -39,7 +39,7 @@ const GVTab: React.FC<GVTabProps> = ({
   const renderCount = () => {
     if (count === undefined) return null;
     return (
-      <span className={classNames(countClassName, "gv-tab__count")}>
+      <span className={classNames(countClassName, styles["gv-tab__count"])}>
         {count}
       </span>
     );
@@ -52,8 +52,8 @@ const GVTab: React.FC<GVTabProps> = ({
   return (
     <RowItem>
       <div
-        className={classNames(className, "gv-tab", {
-          "gv-tab--active": selected
+        className={classNames(className, styles["gv-tab"], {
+          [styles["gv-tab--active"]]: selected
         })}
         data-test-id={label}
         onClick={handleChange}

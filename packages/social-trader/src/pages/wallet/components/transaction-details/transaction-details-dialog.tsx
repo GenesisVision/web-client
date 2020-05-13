@@ -1,5 +1,3 @@
-import "./transaction-details.scss";
-
 import useApiRequest from "hooks/api-request.hook";
 import CommonTransactionDetails from "pages/wallet/components/transaction-details/transactions/common-transation-details";
 import { MultiWalletTransaction } from "pages/wallet/wallet.types";

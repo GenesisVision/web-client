@@ -2,8 +2,6 @@
   "private": true,
   "workspaces": ["packages/*"],
   "dependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "@zeit/next-sass": "^1.0.1",
     "@zeit/next-workers": "^1.0.1-canary.1",
     "browser-image-compression": "^1.0.8",
     "cacheable-response": "^1.10.0",
@@ -29,7 +27,7 @@
     "next-cookies": "^1.1.2",
     "nextjs-fonts": "^0.22.0",
     "next-i18next": "4.2.1",
-    "next-images": "^1.1.2",
+    "next-images": "^1.4.0",
     "next-transpile-modules": "^3.1.0",
     "node-sass": "^4.13.1",
     "qrcode.react": "^0.9.3",

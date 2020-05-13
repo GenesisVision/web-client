@@ -1,6 +1,7 @@
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
+import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { GV_BTN_SIZE } from "components/gv-button";
 import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
@@ -23,7 +24,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
   return (
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentFundInfo fundDescription={fundDescription} />
-      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
+      <DetailsStatisticContainer>
         <DepositButton
           disabled={!canInvest}
           title={fundDescription.publicInfo.title}
@@ -34,7 +35,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
           type={ASSET.FUND}
           id={fundDescription.id}
         />
-      </div>
+      </DetailsStatisticContainer>
     </DetailsBlock>
   );
 };

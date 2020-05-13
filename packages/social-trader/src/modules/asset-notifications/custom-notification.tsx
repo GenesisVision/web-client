@@ -12,7 +12,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-import "./custom-notification.scss";
+import styles from "./custom-notification.module.scss";
 
 const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
   const [t] = useTranslation();
@@ -64,7 +64,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
         />
       </Row>
       <Row>
-        <div className="custom-notification__offset">
+        <div className={styles["custom-notification__offset"]}>
           <GVTextField
             name="conditionAmount"
             value={settings.conditionAmount.toString()}

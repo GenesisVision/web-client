@@ -2,7 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 import { SizesType } from "utils/types";
 
-import "./search-icon.scss";
+import styles from "./search-icon.module.scss";
 
 const SearchIcon: React.FC<{ size?: SizesType; primary: boolean }> = ({
   size,
@@ -15,9 +15,9 @@ const SearchIcon: React.FC<{ size?: SizesType; primary: boolean }> = ({
       height="18"
       viewBox="0 0 18 18"
       fill="none"
-      className={classNames("search-icon", {
-        "search-icon--small": size === "small",
-        "search-icon--primary": primary
+      className={classNames(styles["search-icon"], {
+        [styles["search-icon--small"]]: size === "small",
+        [styles["search-icon--primary"]]: primary
       })}
     >
       <path

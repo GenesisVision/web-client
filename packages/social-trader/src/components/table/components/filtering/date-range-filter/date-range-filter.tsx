@@ -1,5 +1,3 @@
-import "./date-range-filter.scss";
-
 import React, { useCallback } from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 

@@ -5,7 +5,7 @@ import { JoinButton } from "pages/landing-page/components/join-button";
 import React from "react";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 
-import "./follows-container.scss";
+import styles from "./follows-container.module.scss";
 
 interface Props {
   follows: FollowDetailsListItem[];
@@ -15,13 +15,13 @@ const _FollowsContainer: React.FC<Props> = ({ follows }) => {
   const { t } = useTranslation();
   if (!follows.length) return null;
   return (
-    <div className="follows-container">
-      <div className="follows-container__info">
-        <div className="follows-container__wrapper-fixed">
-          <h2 className="follows-container__title">
+    <div className={styles["follows-container"]}>
+      <div className={styles["follows-container__info"]}>
+        <div className={styles["follows-container__wrapper-fixed"]}>
+          <h2 className={styles["follows-container__title"]}>
             {t("landing-page:follows.title")}
           </h2>
-          <p className="follows-container__text">
+          <p className={styles["follows-container__text"]}>
             {t("landing-page:follows.text")}
           </p>
           <JoinButton
@@ -32,7 +32,10 @@ const _FollowsContainer: React.FC<Props> = ({ follows }) => {
           </JoinButton>
         </div>
       </div>
-      <FollowsList follows={follows} className="follows-container__list" />
+      <FollowsList
+        follows={follows}
+        className={styles["follows-container__list"]}
+      />
     </div>
   );
 };

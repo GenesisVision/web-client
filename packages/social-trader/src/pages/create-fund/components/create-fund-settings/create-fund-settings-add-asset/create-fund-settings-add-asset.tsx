@@ -14,7 +14,7 @@ import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
 
-import "./create-fund-settings-add-asset.scss";
+import styles from "./create-fund-settings-add-asset.module.scss";
 
 const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   remainder,
@@ -55,7 +55,7 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
         onClose={handleCloseDropdown}
       >
         <PopoverContent>
-          <div className="add-fund-asset-popover__search">
+          <div className={styles["add-fund-asset-popover__search"]}>
             <GVTextField
               noMargin
               name="queryValue"
@@ -67,7 +67,7 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
               value={searchValue}
             />
           </div>
-          <div className="add-fund-asset-popover__assets">
+          <div className={styles["add-fund-asset-popover__assets"]}>
             <table>
               <tbody>
                 {filteredAssets.map(asset => (

@@ -1,5 +1,4 @@
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
-import "components/details/details-description-section/details-description/details-description.scss";
 import {
   DETAILS_TYPE,
   PersonalDetailsType
@@ -10,6 +9,8 @@ import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
+
+import styles from "./details-description.module.scss";
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
   descriptionTitle,
@@ -34,7 +35,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   Controls
 }) => {
   return (
-    <div className="details-description__section">
+    <div className={styles["details-description__section"]}>
       <DetailsDescription
         descriptionTitle={descriptionTitle}
         detailsType={detailsType}
@@ -65,7 +66,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
           center={false}
           xlarge
           wrap
-          className="asset-details-description__controls"
+          className={styles["asset-details-description__controls"]}
         >
           <Controls />
         </Row>

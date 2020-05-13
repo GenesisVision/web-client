@@ -1,5 +1,4 @@
-import "./fees-info.scss";
-
+import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import FeesTradingDiscount from "pages/landing-page/components/fees-info/fees-trading-discount";
@@ -13,6 +12,8 @@ import JPFlag from "pages/landing-page/images/flags/jp.png";
 import NLFlag from "pages/landing-page/images/flags/nl.png";
 import React from "react";
 
+import styles from "./fees-info.module.scss";
+
 interface Props {
   className?: string;
 }
@@ -20,74 +21,83 @@ interface Props {
 const _FeesTrading: React.FC<Props> = () => {
   const { t } = useTranslation();
   return (
-    <div className="fees-info">
-      <div className="fees-info__section">
-        <div className="internal__container">
-          <div className="fees-info__wrapper">
-            <h2 className="fees-info__title">{t("fees.crypto")}</h2>
+    <div className={styles["fees-info"]}>
+      <div className={styles["fees-info__section"]}>
+        <div className={styles["fees-info__container"]}>
+          <div className={styles["fees-info__wrapper"]}>
+            <h2 className={styles["fees-info__title"]}>{t("fees.crypto")}</h2>
           </div>
-          <div className="fees-info__table-wrapper">
-            <table className="fees-table ">
-              <thead className="fees-table__head">
-                <tr className="fees-table__row">
-                  <th className="fees-table__cell fees-table__cell--width-bg">
+          <div className={styles["fees-info__table-wrapper"]}>
+            <table className={styles["fees-table"]}>
+              <thead className={styles["fees-table__head"]}>
+                <tr className={styles["fees-table__row"]}>
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--width-bg"]
+                    )}
+                  >
                     {t("fees.amount")}
                   </th>
-                  <th className="fees-table__cell">{t("fees.discount")}</th>
-                  <th className="fees-table__cell">{t("fees.fees")}</th>
+                  <th className={styles["fees-table__cell"]}>
+                    {t("fees.discount")}
+                  </th>
+                  <th className={styles["fees-table__cell"]}>
+                    {t("fees.fees")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-1")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-2")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-3")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-4")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-5")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.crypto-table-row-6")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
@@ -95,13 +105,13 @@ const _FeesTrading: React.FC<Props> = () => {
               </tbody>
             </table>
           </div>
-          <div className="fees-info__notes">
+          <div className={styles["fees-info__notes"]}>
             <h3>{t("fees.commission")}</h3>
-            <ul className="fees-info__list-notes">
+            <ul className={styles["fees-info__list-notes"]}>
               {t("fees.list-2")
                 .split("\n")
                 .map((line, index) => (
-                  <li key={index} className="fees-info__note-item">
+                  <li key={index} className={styles["fees-info__note-item"]}>
                     {line}
                   </li>
                 ))}
@@ -109,39 +119,80 @@ const _FeesTrading: React.FC<Props> = () => {
           </div>
         </div>
       </div>
-      <div className="fees-info__section fees-info__section--bg-gray">
-        <div className="internal__container">
-          <div className="fees-info__wrapper">
-            <h2 className="fees-info__title">{t("fees.global")}</h2>
+      <div
+        className={classNames(
+          styles["fees-info__section"],
+          styles["fees-info__section--bg-gray"]
+        )}
+      >
+        <div className={styles["fees-info__container"]}>
+          <div className={styles["fees-info__wrapper"]}>
+            <h2 className={styles["fees-info__title"]}>{t("fees.global")}</h2>
           </div>
-          <div className="fees-info__table-wrapper fees-info__table-wrapper--bg-white">
-            <table className="fees-table ">
-              <thead className="fees-table__head">
-                <tr className="fees-table__row">
+          <div
+            className={classNames(
+              styles["fees-info__table-wrapper"],
+              styles["fees-info__table-wrapper--bg-white"]
+            )}
+          >
+            <table className={styles["fees-table"]}>
+              <thead className={styles["fees-table__head"]}>
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.global-table-head-1")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <th className="fees-table__cell fees-table__cell--white" />
-                  <th className="fees-table__cell fees-table__cell--white" />
+                <tr className={styles["fees-table__row"]}>
                   <th
-                    className="fees-table__cell fees-table__cell--colspan"
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--white"]
+                    )}
+                  />
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--white"]
+                    )}
+                  />
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--colspan"]
+                    )}
                     colSpan={7}
                   >
                     {t("fees.global-table-head-2")}
                   </th>
                 </tr>
-                <tr className="fees-table__row">
-                  <th className="fees-table__cell fees-table__cell--white" />
-                  <th className="fees-table__cell fees-table__cell--white" />
-                  <th className="fees-table__cell fees-table__cell--white" />
+                <tr className={styles["fees-table__row"]}>
                   <th
-                    className="fees-table__cell fees-table__cell--colspan"
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--white"]
+                    )}
+                  />
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--white"]
+                    )}
+                  />
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--white"]
+                    )}
+                  />
+                  <th
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--colspan"]
+                    )}
                     colSpan={6}
                   >
                     {t("fees.global-table-head-3")}
@@ -149,86 +200,117 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     {t("fees.forex")}
                   </td>
                   {t("fees.global-table-row-1")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell" rowSpan={4}>
+                      <td
+                        key={index}
+                        className={styles["fees-table__cell"]}
+                        rowSpan={4}
+                      >
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     {t("fees.spot-metals")}
                   </td>
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     {t("fees.index")}
                   </td>
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell">
+                <tr className={styles["fees-table__row"]}>
+                  <td className={styles["fees-table__cell"]}>
                     {t("fees.spot-commodities")}
                   </td>
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.global-table-row-2")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.global-table-row-3")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell">{t("fees.shares-eu")}</td>
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
+                <tr className={styles["fees-table__row"]}>
+                  <td className={styles["fees-table__cell"]}>
+                    {t("fees.shares-eu")}
+                  </td>
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={GBFlag}
                       alt={t("fees.uk")}
                     />{" "}
                     {t("fees.uk")}
                   </td>
-                  <td className="fees-table__cell" rowSpan={6}>
+                  <td className={styles["fees-table__cell"]} rowSpan={6}>
                     {t("fees.order-volume")}
                   </td>
                   {t("fees.global-table-row-4")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={GEFlag}
                       alt={t("fees.germane")}
                     />{" "}
@@ -237,15 +319,20 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-5")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={CHFlag}
                       alt={t("fees.switzerland")}
                     />{" "}
@@ -254,15 +341,20 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-6")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={FRFlag}
                       alt={t("fees.france")}
                     />{" "}
@@ -271,15 +363,20 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-7")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={ESFlag}
                       alt={t("fees.spain")}
                     />{" "}
@@ -288,16 +385,16 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-8")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell">
+                <tr className={styles["fees-table__row"]}>
+                  <td className={styles["fees-table__cell"]}>
                     {" "}
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={NLFlag}
                       alt={t("fees.netherlands")}
                     />{" "}
@@ -306,55 +403,62 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-9")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
+                <tr className={styles["fees-table__row"]}>
                   {t("fees.global-table-row-10")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell">{t("fees.shares-asia")}</td>
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
-                  <td className="fees-table__cell" />
+                <tr className={styles["fees-table__row"]}>
+                  <td className={styles["fees-table__cell"]}>
+                    {t("fees.shares-asia")}
+                  </td>
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
+                  <td className={styles["fees-table__cell"]} />
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell fees-table__cell--without-border">
+                <tr className={styles["fees-table__row"]}>
+                  <td
+                    className={classNames(
+                      styles["fees-table__cell"],
+                      styles["fees-table__cell--without-border"]
+                    )}
+                  >
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={HKFlag}
                       alt={t("fees.hong-kong")}
                     />{" "}
                     {t("fees.hong-kong")}
                   </td>
-                  <td className="fees-table__cell" rowSpan={6}>
+                  <td className={styles["fees-table__cell"]} rowSpan={6}>
                     {t("fees.order-volume")}
                   </td>
                   {t("fees.global-table-row-11")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
                 </tr>
-                <tr className="fees-table__row">
-                  <td className="fees-table__cell">
+                <tr className={styles["fees-table__row"]}>
+                  <td className={styles["fees-table__cell"]}>
                     <ImageBaseElement
-                      className="fees-table__flag-img"
+                      className={styles["fees-table__flag-img"]}
                       src={JPFlag}
                       alt={t("fees.japan")}
                     />{" "}
@@ -363,7 +467,7 @@ const _FeesTrading: React.FC<Props> = () => {
                   {t("fees.global-table-row-12")
                     .split("\t")
                     .map((line, index) => (
-                      <td key={index} className="fees-table__cell">
+                      <td key={index} className={styles["fees-table__cell"]}>
                         {line}
                       </td>
                     ))}
@@ -371,13 +475,13 @@ const _FeesTrading: React.FC<Props> = () => {
               </tbody>
             </table>
           </div>
-          <div className="fees-info__notes">
+          <div className={styles["fees-info__notes"]}>
             <h3>{t("fees.commission")}</h3>
-            <ul className="fees-info__list-notes">
+            <ul className={styles["fees-info__list-notes"]}>
               {t("fees.list-3")
                 .split("\n")
                 .map((line, index) => (
-                  <li key={index} className="fees-info__note-item">
+                  <li key={index} className={styles["fees-info__note-item"]}>
                     {line}
                   </li>
                 ))}

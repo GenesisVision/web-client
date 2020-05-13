@@ -1,17 +1,23 @@
-import "./nav-list.scss";
-
+import classNames from "classnames";
 import NavItem from "pages/landing-page/components/nav/nav-item";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
+
+import styles from "./nav-list.module.scss";
 
 const _NavList: React.FC<Props> = ({
   menuItems,
   className,
   onClick,
-  subNavOpen
+  subNavOpen,
+  isMobile
 }) => (
   <nav className={className}>
-    <ul className="nav-list">
+    <ul
+      className={classNames(styles["nav-list"], {
+        [styles["nav-list--is-mobile"]]: isMobile
+      })}
+    >
       {menuItems.map((item, index) => (
         <NavItem
           key={index}
@@ -32,6 +38,7 @@ export interface Props {
   menuItems: TNavHeader[];
   className?: string;
   subNavOpen?: boolean;
+  isMobile?: boolean;
   onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
 }
 

@@ -20,6 +20,8 @@ import {
   composeProgramDetailsUrl
 } from "utils/compose-url";
 
+import styles from "../notifications.module.scss";
+
 enum TYPE {
   PROFILE = "profile",
   PLATFORM = "platform"
@@ -54,7 +56,11 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
       )
     : null;
   return (
-    <Tag to={to} onClick={closeNotifications} className="notification__icon">
+    <Tag
+      to={to}
+      onClick={closeNotifications}
+      className={styles["notification__icon"]}
+    >
       <AssetAvatar url={logoUrl} alt={type} color={color} />
     </Tag>
   );
@@ -74,16 +80,16 @@ const _Notification: React.FC<INotificationProps> = props => {
     <Row
       center={false}
       className={classNames(
-        "notification",
-        `notification--type-${type.toLowerCase()}`,
+        styles["notification"],
+        styles[`notification--type-${type.toLowerCase()}`],
         {
-          "notification--is-unread": isUnread
+          [styles["notification--is-unread"]]: isUnread
         }
       )}
     >
       <RowItem>
         {staticIconUrl ? (
-          <div className="notification__icon">
+          <div className={styles["notification__icon"]}>
             <ImageBaseElement src={staticIconUrl} alt={type} />
           </div>
         ) : (
@@ -92,9 +98,9 @@ const _Notification: React.FC<INotificationProps> = props => {
       </RowItem>
 
       <RowItem>
-        <div className="notification__content">
-          <Row className="notification__description">{text}</Row>
-          <Row className="notification__date">
+        <div className={styles["notification__content"]}>
+          <Row className={styles["notification__description"]}>{text}</Row>
+          <Row className={styles["notification__date"]}>
             <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
           </Row>
         </div>

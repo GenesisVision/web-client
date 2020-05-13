@@ -1,4 +1,5 @@
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -40,7 +41,10 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       columns={getOpenPositionsColumns(data)}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+          className={classNames(
+            styles["details-trades__head-cell"],
+            styles[`program-details-trades__cell--${column.name}`]
+          )}
         >
           {t(`program-details-page.history.open-positions.${column.name}`)}
         </span>
