@@ -1,4 +1,9 @@
 import {
+  futuresAccountUpdateEventTransform,
+  futuresMarginCallEventTransform,
+  futuresTradeOrderUpdateEventTransform
+} from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
+import {
   Depth,
   Ticker,
   Trade,
@@ -11,9 +16,7 @@ import { ConnectSocketMethodType } from "services/websocket.service";
 import {
   depthTransform,
   tickerTransform,
-  tradeTransform,
-  transformExecutionReport,
-  transformOutboundAccountInfo
+  tradeTransform
 } from "../binance-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
@@ -71,9 +74,12 @@ export const getUserStreamSocket = (
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${listenKey}`;
   return connectSocketMethod(socketName, url).pipe(
     map(item => {
-      if (item.e === "outboundAccountInfo")
-        return transformOutboundAccountInfo(item);
-      if (item.e === "executionReport") return transformExecutionReport(item);
+      if (item.e === "MARGIN_CALL")
+        return futuresMarginCallEventTransform(item);
+      if (item.e === "ACCOUNT_UPDATE")
+        return futuresAccountUpdateEventTransform(item);
+      if (item.e === "ORDER_TRADE_UPDATE")
+        return futuresTradeOrderUpdateEventTransform(item);
       return item;
     })
   );
