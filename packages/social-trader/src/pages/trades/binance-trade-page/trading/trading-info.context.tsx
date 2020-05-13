@@ -1,7 +1,10 @@
 import useApiRequest from "hooks/api-request.hook";
+import Router from "next/router";
+import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
+  stringifySymbolFromToParam,
   updateAccountInfo,
   useTradeAuth
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -11,13 +14,16 @@ import {
   TerminalType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import * as qs from "qs";
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState
 } from "react";
+import { BINANCE_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -114,16 +120,36 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     setAccountInfo(updatedData);
   }, [socketData]);
 
+  const handleSetSymbol = useCallback(
+    (newSymbol: SymbolState) => {
+      setSymbol(newSymbol);
+      const symbolPath = stringifySymbolFromToParam(newSymbol);
+      const terminalTypeParam = qs.stringify({
+        [TYPE_PARAM_NAME]: terminalType
+      });
+      const route = `${BINANCE_ROUTE}/${symbolPath}?${terminalTypeParam}`;
+      Router.replace(route);
+    },
+    [setSymbol, terminalType]
+  );
+
   const value = useMemo(
     () => ({
       terminalType,
       userStream,
-      setSymbol,
+      setSymbol: handleSetSymbol,
       symbol,
       accountInfo,
       exchangeInfo
     }),
-    [terminalType, userStream, setSymbol, symbol, accountInfo, exchangeInfo]
+    [
+      terminalType,
+      userStream,
+      handleSetSymbol,
+      symbol,
+      accountInfo,
+      exchangeInfo
+    ]
   );
 
   return (
