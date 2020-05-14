@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
   GlobalSearchContext,
   GlobalSearchContextProvider
@@ -27,7 +28,7 @@ const PageContent: React.FC = ({ children }) => {
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   return (
     <GlobalSearchContextProvider>
-      <div className={styles["app__wrapper root"]}>
+      <div className={classNames(styles["app__wrapper"], "root")}>
         <div className={styles["app"]}>
           <div className={styles["app__header"]}>
             <HeaderContainer />
