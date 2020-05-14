@@ -51,10 +51,9 @@ export const updateOrderBookFromSocketLogger = ({
   const bid = Object.values(bids).sort(
     ([priceA], [priceB]) => +priceB - +priceA
   )[0];
-  if (ask && bid) {
-    if (+ask[0] < +bid[0])
-      console.log("Update: ask is less than bid", ask[0], bid[0]);
-  }
+  if (ask && bid && +ask[0] < +bid[0])
+    console.log("Update: ask is less than bid", ask[0], bid[0]);
+
   if (depthSocketData.firstUpdateId !== list.lastUpdateId + 1) {
     console.log(
       `new event id failed`,

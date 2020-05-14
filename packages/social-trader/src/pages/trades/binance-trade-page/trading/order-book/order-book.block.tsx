@@ -5,9 +5,7 @@ import React from "react";
 
 import styles from "./order-book.module.scss";
 
-interface Props {}
-
-export const OrderBookBlock: React.FC<Props> = () => {
+export const OrderBookBlock: React.FC = () => {
   return (
     <DefaultBlock
       size={SIZES.SMALL}
