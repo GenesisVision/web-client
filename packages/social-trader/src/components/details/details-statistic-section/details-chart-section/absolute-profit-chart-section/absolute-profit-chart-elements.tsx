@@ -8,12 +8,13 @@ import {
 import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import ChartCurrencySelector, {
+import ChartCurrencySelector from "modules/chart-currency-selector/chart-currency-selector";
+import {
   TAddChartCurrency,
   TChangeChartCurrency,
   TChartCurrency,
   TRemoveChartCurrency
-} from "modules/chart-currency-selector/chart-currency-selector";
+} from "modules/chart-currency-selector/chart-currency-selector.types";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";

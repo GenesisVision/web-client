@@ -3,14 +3,13 @@
 
 .tile-filter-item {
   position: relative;
-  padding-bottom: $padding-xxsmall;
   &__button-remove {
+    padding: $close-button-size/4;
     cursor: pointer;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
     position: absolute;
     width: $close-button-size;
     height: $close-button-size;

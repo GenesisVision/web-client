@@ -36,8 +36,8 @@
     &:active:not(:disabled) {
       border-color: $main-color;
       background-color: $main-color;
-      color: $panel-background-color;
-      .select__text {
+      &,
+      & span {
         color: $panel-background-color;
       }
     }

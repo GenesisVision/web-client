@@ -1,6 +1,6 @@
 import { mockDate } from "components/details/details.loader-data";
 import { LevelsParamsInfo } from "gv-api-web";
-import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import { getRandomInteger } from "utils/helpers";
 
 export const selectedCurrenciesLoaderData: TChartCurrency[] = [

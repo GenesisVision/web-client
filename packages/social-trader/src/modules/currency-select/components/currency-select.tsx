@@ -1,31 +1,36 @@
-import classNames from "classnames";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
-import { CurrencyEnum } from "utils/types";
+import { CurrencyEnum, SizesType } from "utils/types";
 
 const _CurrencySelect: React.FC<Props> = ({
+  size,
   value,
   onChange,
   className,
   currencyValues
-}) => (
-  <Select
-    data-test-id={value}
-    name="currency"
-    className={classNames("currency-select", className)}
-    value={value}
-    onChange={onChange}
-  >
-    {currencyValues.map(currency => (
-      <option value={currency} key={currency}>
-        {currency}
-      </option>
-    ))}
-  </Select>
-);
+}) => {
+  console.log(currencyValues);
+  return (
+    <Select
+      size={size}
+      data-test-id={value}
+      name="currency"
+      className={className}
+      value={value}
+      onChange={onChange}
+    >
+      {currencyValues.map(currency => (
+        <option value={currency} key={currency}>
+          {currency}
+        </option>
+      ))}
+    </Select>
+  );
+};
 
 interface Props {
+  size?: SizesType;
   value: CurrencyEnum | string;
   onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   currencyValues: CurrencyEnum[];

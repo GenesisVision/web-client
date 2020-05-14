@@ -11,12 +11,13 @@ import {
   FundBalanceChart as FundBalanceChartType,
   ProgramBalanceChart as ProgramBalanceChartType
 } from "gv-api-web";
-import ChartCurrencySelector, {
+import ChartCurrencySelector from "modules/chart-currency-selector/chart-currency-selector";
+import {
   TAddChartCurrency,
   TChangeChartCurrency,
   TChartCurrency,
   TRemoveChartCurrency
-} from "modules/chart-currency-selector/chart-currency-selector";
+} from "modules/chart-currency-selector/chart-currency-selector.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";

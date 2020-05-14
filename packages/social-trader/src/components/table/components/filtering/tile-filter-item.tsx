@@ -3,9 +3,10 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
 
-import styles from "./tile-filter.module.scss";
+import styles from "./tile-filter-item.module.scss";
 
 const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
+  bottomOffset = true,
   removable = true,
   mandatory,
   id,
@@ -13,7 +14,7 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
   children
 }) => {
   return (
-    <RowItem>
+    <RowItem bottomOffset={bottomOffset}>
       <Row className={styles["tile-filter-item"]}>
         {children}
         {!mandatory && removable && (
@@ -36,10 +37,9 @@ export default TileFilterItem;
 
 export interface ITileFilterItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  bottomOffset?: boolean;
   removable?: boolean;
   id: string;
-
   removeTile?(id: string): void;
-
   mandatory?: boolean;
 }

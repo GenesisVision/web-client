@@ -25,7 +25,7 @@ import {
   TChangeChartCurrency,
   TChartCurrency,
   TRemoveChartCurrency
-} from "modules/chart-currency-selector/chart-currency-selector";
+} from "modules/chart-currency-selector/chart-currency-selector.types";
 import { FundBalanceChartDataType } from "pages/invest/funds/fund-details/reducers/balance-chart.reducer";
 import { ProgramBalanceChartDataType } from "pages/invest/programs/program-details/program-details.types";
 import { RootState } from "reducers/root-reducer";
