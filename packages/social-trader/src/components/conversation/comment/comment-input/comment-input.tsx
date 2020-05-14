@@ -182,7 +182,9 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                 })}
               >
                 <SendIcon
-                  className={classNames("comment-input__send-button-icon")}
+                  className={classNames(
+                    styles["comment-input__send-button-icon"]
+                  )}
                   disabled={disabled}
                 />
               </button>
