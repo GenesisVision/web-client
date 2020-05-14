@@ -91,9 +91,8 @@ const ConversationImagesFullContent: React.FC<{
         <div
           onClick={handlePrev}
           className={classNames(
-            styles[
-              "conversation-image-full__button conversation-image-full__button--left"
-            ],
+            styles["conversation-image-full__button--left"],
+            styles["conversation-image-full__button"],
             {
               [styles["conversation-image-full__button--show"]]: isButtonsShow
             }
@@ -104,9 +103,8 @@ const ConversationImagesFullContent: React.FC<{
         <div
           onClick={handleNext}
           className={classNames(
-            styles[
-              "conversation-image-full__button conversation-image-full__button--right"
-            ],
+            styles["conversation-image-full__button--right"],
+            styles["conversation-image-full__button"],
             { [styles["conversation-image-full__button--show"]]: isButtonsShow }
           )}
         >
