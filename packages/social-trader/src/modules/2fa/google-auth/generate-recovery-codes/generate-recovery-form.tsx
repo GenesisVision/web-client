@@ -43,11 +43,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           />
           {errorMessage && <DialogError error={errorMessage} />}
           <DialogButtons>
-            <SubmitButton
-              wide
-              className="google-auth__button"
-              isSuccessful={!errorMessage}
-            >
+            <SubmitButton wide isSuccessful={!errorMessage}>
               {t("buttons.generate")}
             </SubmitButton>
           </DialogButtons>

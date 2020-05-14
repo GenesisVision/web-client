@@ -37,7 +37,7 @@ const _SearchPanel: React.FC<{
   onClick: (values: AssetSearchResult) => void;
 }> = ({ isSearchPending, searchResult, onClick }) => {
   return (
-    <div className="search-panel">
+    <div className={styles["search-panel"]}>
       {!!searchResult?.length &&
         searchResult?.map(asset => (
           <SearchResultRow
@@ -49,7 +49,7 @@ const _SearchPanel: React.FC<{
       {isSearchPending && (
         <Row>
           <ImageBaseElement
-            className="search-panel__spinner"
+            className={styles["search-panel__spinner"]}
             src={
               "https://thumbs.gfycat.com/TediousCookedFunnelweaverspider-max-1mb.gif"
             }

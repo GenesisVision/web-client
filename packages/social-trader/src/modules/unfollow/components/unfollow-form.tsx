@@ -56,12 +56,7 @@ const _UnfollowForm: React.FC<Props> = ({
           ))}
         </GVHookFormField>
         <DialogButtons>
-          <SubmitButton
-            wide
-            checkDirty={false}
-            className="invest-form__submit-button"
-            isSuccessful={!errorMessage}
-          >
+          <SubmitButton wide checkDirty={false} isSuccessful={!errorMessage}>
             {t("unfollow-program.submit")}
           </SubmitButton>
         </DialogButtons>

@@ -12,10 +12,6 @@
   &__hint {
     width: 100%;
 
-    &.hint {
-      cursor: pointer;
-    }
-
     &-tooltip-content {
       width: 248px;
       @include font-size($font-size-small);

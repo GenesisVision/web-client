@@ -27,7 +27,7 @@ export const GoogleStep1: React.FC<WithTranslation> = ({ t }) => (
     <a
       title={"link to app store"}
       href={AuthIosLink}
-      className="google-auth__link"
+      className={styles["google-auth__link"]}
     >
       <ImageBaseElement src={AppStore} alt={"link to app store"} />
     </a>

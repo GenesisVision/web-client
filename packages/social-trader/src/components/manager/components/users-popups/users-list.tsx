@@ -55,7 +55,7 @@ const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
 
 const _UsersList: React.FC<IUsersListProps> = ({ loadMode, hasMore, data }) => {
   return (
-    <div className="users-list">
+    <div className={styles["users-list"]}>
       <InfiniteScroll useWindow={false} loadMore={loadMode} hasMore={hasMore}>
         {data.map(user => (
           <UsersListItem user={user} />

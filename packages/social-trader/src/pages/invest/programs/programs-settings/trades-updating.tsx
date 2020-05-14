@@ -30,10 +30,7 @@ const _TradesUpdating: React.FC<Props> = ({
       <HookForm form={form} onSubmit={onSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
         <Row large>
-          <SubmitButton
-            className="invest-form__submit-button"
-            isSuccessful={!editError}
-          >
+          <SubmitButton isSuccessful={!editError}>
             {t("program-settings.buttons.save")}
           </SubmitButton>
         </Row>

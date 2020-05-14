@@ -24,6 +24,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
+import styles from "../details-chart-section.module.scss";
 
 export const PROFIT_CHART_TEST_ID = "PROFIT_CHART_TEST_ID";
 
@@ -71,7 +72,7 @@ const _ProfitChartElements: React.FC<Props> = ({
       />
       <div
         data-test-id={PROFIT_CHART_TEST_ID}
-        className="details-chart__profit"
+        className={styles["details-chart__profit"]}
       >
         {charts.length &&
           renderProfitChart({

@@ -17,7 +17,6 @@ const _Unfollow: React.FC<IProgramUnfollowProps> = ({
       header={t("unfollow-program.title")}
       body={t("unfollow-program.text")}
       applyButtonText={t("buttons.confirm")}
-      className="dialog--wider"
     />
   );
 };

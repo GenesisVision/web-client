@@ -114,7 +114,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
               onClick={clearAnchor}
               label={t("profile-page.tabs.referral-program")}
             />
-            <div className="profile-menu__separator" />
+            <div className={styles["profile-menu__separator"]} />
             <ProfileMenuItem
               Icon={LogoutIcon}
               onClick={handlerLogout}

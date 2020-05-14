@@ -38,7 +38,7 @@ const _FacetCard: React.FC<Props> = ({
               src={facet.logoUrl}
               alt={facet.title}
               defaultImage={facetImg}
-              className="facet__logo"
+              className={styles["facet__logo"]}
             />
           </div>
           <div className={styles["facet__info"]}>

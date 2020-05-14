@@ -33,7 +33,7 @@ const _ProgramSubscriptionsRow: React.FC<Props> = ({
         />
       </Profitability>
     </TableCell>
-    <TableCell className="subscription-fees">
+    <TableCell>
       <SubscriptionsFeesTooltip subscription={subscription}>
         <span
           className={classNames({

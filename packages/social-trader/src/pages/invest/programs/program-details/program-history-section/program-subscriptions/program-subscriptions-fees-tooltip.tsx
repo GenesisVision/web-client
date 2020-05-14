@@ -1,4 +1,5 @@
 import FeeCommission from "components/fee-commission/fee-commission";
+import styles from "components/fee-commission/fee-commission.module.scss";
 import FeesTooltip from "components/fees-tooltip/fees-tooltip";
 import { Row } from "components/row/row";
 import { SignalSubscriber } from "gv-api-web";
@@ -14,14 +15,14 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
     header={
       <>
         <FeeCommission
-          className="fee-commission--green-value"
+          className={styles["fee-commission--green-value"]}
           title={t(`copytrading-tables.fees.SuccessFee`)}
           value={subscription.totalSuccessFeeAmount}
           currency={subscription.totalSuccessFeeCurrency}
         />
         <Row small>
           <FeeCommission
-            className="fee-commission--green-value"
+            className={styles["fee-commission--green-value"]}
             title={t(`copytrading-tables.fees.ManagerSignalMasterVolumeFee`)}
             value={subscription.totalVolumeFeeAmount}
             currency={subscription.totalVolumeFeeCurrency}
@@ -31,7 +32,7 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
     }
     footer={
       <FeeCommission
-        className="fee-commission--green-value"
+        className={styles["fee-commission--green-value"]}
         title={t(`copytrading-tables.fees.total`)}
         value={subscription.totalCommissionAmount}
         currency={subscription.totalCommissionCurrency}

@@ -136,11 +136,7 @@ const _DepositForm: React.FC<Props> = ({
         )}
         {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
-          <SubmitButton
-            isSuccessful={!errorMessage}
-            wide
-            className="invest-form__submit-button"
-          >
+          <SubmitButton isSuccessful={!errorMessage} wide>
             {t("deposit-asset.confirm")}
           </SubmitButton>
         </DialogButtons>

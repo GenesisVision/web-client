@@ -8,6 +8,8 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import replaceParams from "utils/replace-params";
 
+import styles from "./navigation-tabs.module.scss";
+
 const _NavigationTabs: React.FC<Props> = ({
   exploreTabName,
   tabRoute,
@@ -20,7 +22,7 @@ const _NavigationTabs: React.FC<Props> = ({
     ? favoritesTabName
     : exploreTabName;
   return (
-    <div className="facets-tabs">
+    <div className={styles["navigation-tabs"]}>
       <GVTabs value={tab}>
         <GVTab
           value={exploreTabName}

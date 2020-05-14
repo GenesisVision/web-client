@@ -16,7 +16,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   const [t] = useTranslation();
   if (extendedInfo.length === 0) return null;
   return (
-    <div className="portfolio-event-details">
+    <div>
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
         {t("program-details-page.history.my-history.details")}
       </GVButton>

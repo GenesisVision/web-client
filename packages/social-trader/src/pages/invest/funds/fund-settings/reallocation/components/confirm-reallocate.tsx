@@ -30,7 +30,6 @@ const _ConfirmReallocate: React.FC<Props> = ({
         </>
       }
       applyButtonText={t("buttons.confirm")}
-      className="dialog--wider"
     />
   );
 };

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -15,6 +16,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
+import styles from "./fund-asset.module.scss";
 import HidedAssetsLabel from "./hided-assets-label";
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
@@ -35,7 +37,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     if (hasPopoverList) setSize(sizeProp);
   });
   return (
-    <Row wrap={!noWrap} className="fund-assets">
+    <Row wrap={!noWrap} className={styles["fund-assets"]}>
       {assets.filter(getVisibleAssets(size || assets.length)).map(
         renderFundAsset({
           bottomOffset: !noWrap,
@@ -65,7 +67,10 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         <RowItem
           small
           bottomOffset
-          className="fund-asset fund-asset--remainder"
+          className={classNames(
+            styles["fund-asset"],
+            styles["fund-asset--remainder"]
+          )}
         >
           {remainder} %
         </RowItem>
@@ -108,7 +113,7 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
           noPadding
           onClose={clearAnchor}
         >
-          <div className="fund-assets__container">
+          <div className={styles["fund-assets__container"]}>
             {assets.filter(getHidedAssets(size)).map(
               renderFundAsset({
                 bottomOffset,

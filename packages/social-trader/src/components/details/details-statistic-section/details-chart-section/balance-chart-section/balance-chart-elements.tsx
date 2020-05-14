@@ -24,6 +24,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
+import styles from "../details-chart-section.module.scss";
 
 export const BALANCE_CHART_TEST_ID = "BALANCE_CHART_TEST_ID";
 
@@ -67,7 +68,7 @@ const _BalanceChartElements: React.FC<Props> = ({
       />
       <div
         data-test-id={BALANCE_CHART_TEST_ID}
-        className="details-chart__profit"
+        className={styles["details-chart__profit"]}
       >
         {chart.length &&
           renderBalanceChart({

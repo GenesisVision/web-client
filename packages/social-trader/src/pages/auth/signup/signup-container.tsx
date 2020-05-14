@@ -37,21 +37,19 @@ const _SignupContainer: React.FC<ISignupContainerProps> = ({
     [referralCode, utmSource]
   );
   return (
-    <div className="signup">
-      <CaptchaContainer
-        request={requestHandle}
-        renderForm={handle => (
-          <SignUpForm
-            showLogin={showLogin}
-            referer={referrer}
-            urlParams={utmSource}
-            refCode={referralCode}
-            onSubmit={handle}
-            error={errorMessage}
-          />
-        )}
-      />
-    </div>
+    <CaptchaContainer
+      request={requestHandle}
+      renderForm={handle => (
+        <SignUpForm
+          showLogin={showLogin}
+          referer={referrer}
+          urlParams={utmSource}
+          refCode={referralCode}
+          onSubmit={handle}
+          error={errorMessage}
+        />
+      )}
+    />
   );
 };
 

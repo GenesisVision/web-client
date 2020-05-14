@@ -20,9 +20,9 @@ const DashboardNewUserBlockField: React.FC<{
 }> = React.memo(({ field: { linkLabel, link, text } }) => {
   const { linkCreator } = useToLink();
   return (
-    <div className="dashboard-new-user-block__field">
-      <div className="dashboard-new-user-block__text">{text}</div>
-      <Row className="dashboard-new-user-block__button">
+    <div className={styles["dashboard-new-user-block__field"]}>
+      <div className={styles["dashboard-new-user-block__text"]}>{text}</div>
+      <Row className={styles["dashboard-new-user-block__button"]}>
         <Link to={linkCreator(link)}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
             {linkLabel}

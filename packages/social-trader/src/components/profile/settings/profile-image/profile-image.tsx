@@ -29,7 +29,7 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
 
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-      <div className="profile-image">
+      <div>
         <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
         <SubmitButton isSuccessful={!errorMessage}>
           {t("profile-page.settings.save-photo")}

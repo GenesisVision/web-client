@@ -94,7 +94,7 @@ export default CreateFundSettingsAddAsset;
 
 const AssetLine: React.FC<AssetLineProps> = React.memo(
   ({ remainder, asset, handleDown, handleUp, handlePercentChange }) => (
-    <tr className="add-fund-asset-popover__asset">
+    <tr>
       <td>
         <CurrencyItem
           url={asset.url}
@@ -115,14 +115,19 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
           handleDown={handleDown(asset)}
           handleUp={handleUp(asset)}
         >
-          <Center className="add-fund-asset-popover__regulator-indicator">
+          <Center
+            className={styles["add-fund-asset-popover__regulator-indicator"]}
+          >
             <input
               value={asset.percent}
               onChange={handlePercentChange(asset)}
-              className={classNames("add-fund-asset-popover__regulator-input", {
-                "add-fund-asset-popover__regulator-input--mute":
-                  asset.percent === 0
-              })}
+              className={classNames(
+                styles["add-fund-asset-popover__regulator-input"],
+                {
+                  [styles["add-fund-asset-popover__regulator-input--mute"]]:
+                    asset.percent === 0
+                }
+              )}
             />
             %
           </Center>

@@ -14,16 +14,6 @@ const _InvestmentsPage: React.FC = () => {
       <div>
         <DashboardInvestingTotalContainer />
       </div>
-      {/*<div>
-        <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
-          <div className="dashboard__public-page-block">
-            <div className="dashboard__public-page-select">
-              <PublicSelect />
-            </div>
-            <PublicPageLink />
-          </div>
-        </DetailsBlock>
-      </div>*/}
       <div>
         <DashboardInvestingFunds />
       </div>

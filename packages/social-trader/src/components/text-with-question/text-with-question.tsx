@@ -46,7 +46,7 @@ const HelpContainer: React.FC<{
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           render={() => tooltipContent}
         >
-          <div className="text-with-question__question-container">
+          <div className={styles["text-with-question__question-container"]}>
             {children}
           </div>
         </Tooltip>

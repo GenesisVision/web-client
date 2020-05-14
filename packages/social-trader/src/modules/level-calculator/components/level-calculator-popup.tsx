@@ -273,7 +273,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             <MutedText small>{t("level-calculator.kyc-disclaimer")}</MutedText>
           </div>
           <Link
-            className="level-calculator-popup__btn-verify"
+            className={styles["level-calculator-popup__btn-verify"]}
             to={linkCreator(KYC_ROUTE, title)}
           >
             <GVButton color="primary" variant="outlined">

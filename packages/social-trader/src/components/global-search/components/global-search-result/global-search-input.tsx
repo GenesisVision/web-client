@@ -43,13 +43,7 @@ export const SearchInputField: React.FC<{
         />
       </RowItem>
       {canClose && (
-        <GVButton
-          noPadding
-          variant="text"
-          color="secondary"
-          className="global-search__cancel-button"
-          onClick={onCancel}
-        >
+        <GVButton noPadding variant="text" color="secondary" onClick={onCancel}>
           <CloseIcon />
         </GVButton>
       )}
@@ -65,7 +59,7 @@ const GlobalSearchInput: React.FC<Props> = React.memo(
     );
 
     return (
-      <div className="global-search-input">
+      <div>
         {/*
       //@ts-ignore TODO сделать фикс GVTextField*/}
         <SearchInputField

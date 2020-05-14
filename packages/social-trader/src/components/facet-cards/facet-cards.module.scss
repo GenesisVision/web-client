@@ -100,7 +100,3 @@ $facet-height: 280px;
     cursor: pointer;
   }
 }
-
-.facets-tabs {
-  @include adaptive-padding(bottom, $padding-small - $translate-size);
-}

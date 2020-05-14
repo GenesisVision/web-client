@@ -1,3 +1,4 @@
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { MutedText } from "components/muted-text/muted-text";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
@@ -33,7 +34,7 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
               </TooltipContent>
             )}
           >
-            <div className="details-trades__delay-question">?</div>
+            <div className={styles["details-trades__delay-question"]}>?</div>
           </Tooltip>
         </Row>
       </MutedText>
