@@ -4,6 +4,7 @@ import { ConversationUser } from "components/conversation/conversation-user/conv
 import { ConversationPost } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Share } from "components/conversation/share/share";
+import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
 import { DefaultBlock } from "components/default.block/default.block";
 import { MutedText } from "components/muted-text/muted-text";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
@@ -20,6 +21,7 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
   const hasTags = !!post.tags;
   const hasImages = !!post.images.length;
   const TitleTag = hasImages ? "h3" : "h2";
+  const rePostTag = post.tags?.find(({ type }) => type === "Post");
   return (
     <div>
       <DefaultBlock>
@@ -29,6 +31,13 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
         {!!post.text?.length && (
           <Row>
             <MutedText noWrap={false}>{post.text}</MutedText>
+          </Row>
+        )}
+        {rePostTag && (
+          <Row>
+            <RepostTagContainer>
+              <MutedText noWrap={false}>{rePostTag.post.text}</MutedText>
+            </RepostTagContainer>
           </Row>
         )}
         {hasTags && (
