@@ -816,6 +816,7 @@ export interface DepthMain {
   symbol: string;
   firstUpdateId: number;
   lastUpdateId: number;
+  prevLastUpdateId?: number;
 }
 
 export type NormalizedDepthList = { [keys: string]: StringBidDepth };
