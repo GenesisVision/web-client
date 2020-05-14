@@ -31,6 +31,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const { connectSocket } = useSockets();
 
   const {
+    terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
@@ -109,7 +110,13 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       } else if (list) {
         const asks = updateDepthList(list.asks, depthSocketData.asks);
         const bids = updateDepthList(list.bids, depthSocketData.bids);
-        updateOrderBookFromSocketLogger({ depthSocketData, list, asks, bids });
+        updateOrderBookFromSocketLogger({
+          terminalType,
+          depthSocketData,
+          list,
+          asks,
+          bids
+        });
         setList({
           ...list,
           asks,

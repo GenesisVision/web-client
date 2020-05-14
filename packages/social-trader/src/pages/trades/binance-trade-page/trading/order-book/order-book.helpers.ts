@@ -6,7 +6,8 @@ import {
   Depth,
   NormalizedDepth,
   NormalizedDepthList,
-  StringBidDepth
+  StringBidDepth,
+  TerminalType
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { useContext } from "react";
 import { formatValue } from "utils/formatter";
@@ -35,11 +36,13 @@ export const updateOrderBookFromBufferLogger = ({
 };
 
 export const updateOrderBookFromSocketLogger = ({
+  terminalType,
   list,
   depthSocketData,
   asks,
   bids
 }: {
+  terminalType: TerminalType;
   list: NormalizedDepth;
   depthSocketData: Depth;
   bids: NormalizedDepthList;
@@ -54,10 +57,25 @@ export const updateOrderBookFromSocketLogger = ({
   if (ask && bid && +ask[0] < +bid[0])
     console.log("Update: ask is less than bid", ask[0], bid[0]);
 
-  if (depthSocketData.firstUpdateId !== list.lastUpdateId + 1) {
+  if (
+    terminalType === "spot" &&
+    depthSocketData.firstUpdateId !== list.lastUpdateId + 1
+  ) {
     console.log(
       `new event id failed`,
       depthSocketData.firstUpdateId,
+      list.lastUpdateId
+    );
+    // return;
+  }
+  if (
+    terminalType === "futures" &&
+    depthSocketData.prevLastUpdateId &&
+    depthSocketData.prevLastUpdateId !== list.lastUpdateId
+  ) {
+    console.log(
+      `new event id failed`,
+      depthSocketData.prevLastUpdateId,
       list.lastUpdateId
     );
     // return;
