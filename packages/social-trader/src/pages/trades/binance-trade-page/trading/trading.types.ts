@@ -10,6 +10,19 @@ export type MarginModeType = "ISOLATED" | "CROSSED";
 
 export type TerminalType = "spot" | "futures";
 
+export interface LeverageBracket {
+  bracket: number; // Notianl bracket
+  initialLeverage: number; // Max initial leverge for this bracket
+  notionalCap: number; // Cap notional of this bracket
+  notionalFloor: number; // Notionl threshold of this bracket
+  maintMarginRatio: number; // Maintenance ratio for this bracket
+}
+
+export interface SymbolLeverageBrackets {
+  symbol: string;
+  brackets: LeverageBracket[];
+}
+
 export interface TradeRequest {
   stopPrice?: number;
   symbol: TradeCurrency;
@@ -21,6 +34,15 @@ export interface TradeRequest {
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
+  getLeverageBrackets?: (options: {
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<SymbolLeverageBrackets[]>;
+  changeLeverage?: (options: {
+    leverage: number;
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<ChangeLeverageResponse>;
   changeMarginMode?: (options: {
     mode: MarginModeType;
     symbol: string;
@@ -533,6 +555,12 @@ export interface Binance {
     startTime?: number;
     endTime?: number;
   }): Promise<DepositHistoryResponse>;
+}
+
+export interface ChangeLeverageResponse {
+  leverage: number;
+  maxNotionalValue: string;
+  symbol: string;
 }
 
 export interface HttpResponse {
