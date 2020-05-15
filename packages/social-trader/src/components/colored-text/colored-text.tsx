@@ -3,7 +3,7 @@ import React from "react";
 
 import styles from "./colored-text.module.scss";
 
-export type ColoredTextColor = "red" | "green";
+export type ColoredTextColor = "red" | "green" | "yellow";
 
 interface Props {
   color?: ColoredTextColor;
