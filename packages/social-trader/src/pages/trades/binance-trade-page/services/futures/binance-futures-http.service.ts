@@ -6,12 +6,14 @@ import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/fu
 import {
   Account,
   CancelOrderResult,
+  ChangeLeverageResponse,
   Depth,
   ExchangeInfo,
   HttpResponse,
   MarginModeType,
   OrderSide,
   QueryOrderResult,
+  SymbolLeverageBrackets,
   Ticker,
   Trade,
   TradeAuthDataType,
@@ -44,6 +46,46 @@ export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
   });
+
+export const getLeverageBrackets = ({
+  symbol,
+  authData
+}: {
+  symbol: string;
+  authData: TradeAuthDataType;
+}): Promise<SymbolLeverageBrackets[]> =>
+  requestService
+    .get(
+      {
+        ...authData,
+        url: `${API_ROUTE}/leverageBracket`,
+        params: { symbol },
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then((data: SymbolLeverageBrackets[] | SymbolLeverageBrackets) =>
+      Array.isArray(data) ? data : [data]
+    );
+
+export const changeLeverage = ({
+  leverage,
+  symbol,
+  authData
+}: {
+  leverage: number;
+  symbol: string;
+  authData: TradeAuthDataType;
+}): Promise<ChangeLeverageResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: `${API_ROUTE}/leverage`,
+      params: { symbol, leverage },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
 
 export const changeMarginMode = ({
   mode,
