@@ -19,8 +19,7 @@ $place-order-width: 250px;
     "symbol-summary"
     "chart"
     "tables"
-    "place-orders"
-    "margin-ratio";
+    "place-orders";
   grid-template-rows:
     auto
     auto
@@ -33,7 +32,7 @@ $place-order-width: 250px;
       "symbol-summary symbol-summary symbol-summary"
       "chart chart place-orders"
       "order-book trades place-orders"
-      "tables tables margin-ratio";
+      "tables tables place-orders";
     grid-template-rows: auto auto 1fr 1fr $bottom-block-height;
     grid-template-columns: 1fr 1fr $place-order-width;
   }
@@ -41,7 +40,7 @@ $place-order-width: 250px;
     grid-template-areas:
       "header header header header"
       "chart chart order-book place-orders"
-      "tables tables trades margin-ratio";
+      "tables tables trades place-orders";
     grid-template-rows:
       $header-height calc(100% - #{$bottom-block-height+$header-height})
       $bottom-block-height;
@@ -51,7 +50,7 @@ $place-order-width: 250px;
     grid-template-areas:
       "header header header header"
       "market-watch chart order-book place-orders"
-      "tables tables trades margin-ratio";
+      "tables tables trades place-orders";
     grid-template-rows:
       $header-height calc(100% - #{$bottom-block-height+$header-height})
       $bottom-block-height;
@@ -59,10 +58,6 @@ $place-order-width: 250px;
   }
   @include media-breakpoint-tablet() {
   }
-}
-
-.margin-ratio-grid-elem {
-  grid-area: margin-ratio;
 }
 
 .header-grid-elem {

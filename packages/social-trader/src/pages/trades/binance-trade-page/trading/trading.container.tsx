@@ -34,9 +34,6 @@ const _TradingContainer: React.FC<Props> = ({ type, symbol }) => {
           <Center className={styles["header-grid-elem"]}>
             <TradeHeaderContainer />
           </Center>
-          <div className={styles["margin-ratio-grid-elem"]}>
-            {type === "futures" && <MarginRatioContainer />}
-          </div>
           <div className={styles["symbol-summary-grid-elem"]}>
             <ResponsiveContainer
               enabledScreens={["tablet", "landscape-tablet"]}
@@ -85,6 +82,7 @@ const _TradingContainer: React.FC<Props> = ({ type, symbol }) => {
             </div>
             <div className={styles["place-orders-grid-elem"]}>
               <PlaceOrder />
+              {type === "futures" && <MarginRatioContainer />}
             </div>
           </TradingPriceContextProvider>
         </TradingTickerContextProvider>
