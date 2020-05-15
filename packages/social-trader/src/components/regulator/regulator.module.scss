@@ -7,45 +7,63 @@ $regulator-height: 25px;
 $regulator-button-font-size: 28px;
 
 .regulator {
-  padding: 0 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 3.6px;
   background-color: #2d373f;
-  min-width: $regulator-width/$divider-text;
-  height: $regulator-height/1.2;
-  @include media-breakpoint-landscape-phone() {
-    min-width: $regulator-width;
-    height: $regulator-height;
-  }
   &,
   & div {
     box-sizing: border-box;
+  }
+
+  &--small {
+    padding: 0 5px;
+    min-width: $regulator-width/$divider-text;
+    height: $regulator-height/1.2;
+    @include media-breakpoint-landscape-phone() {
+      min-width: $regulator-width;
+      height: $regulator-height;
+    }
+  }
+
+  &--middle {
+    padding: 0 10px;
+    min-width: $regulator-width;
+    height: $regulator-height * 1.5;
+    @include media-breakpoint-landscape-phone() {
+      min-width: $regulator-width * 2;
+      height: $regulator-height * 2;
+    }
   }
   &--mute {
     background-color: #202b34;
     color: rgba(255, 255, 255, 0.3);
   }
   &__button {
-    padding: 0 7px;
     color: #14beb4;
-    font-size: $regulator-button-font-size/$divider-text;
     font-weight: 200;
     user-select: none;
     cursor: pointer;
+    &--small {
+      padding: 0 7px;
+      @include font-size($regulator-button-font-size);
+    }
+    &--middle {
+      padding: 0 14px;
+      @include font-size(38px);
+    }
     &--mute {
       cursor: default;
       color: rgba(255, 255, 255, 0.3);
     }
-    @include media-breakpoint-landscape-phone() {
-      font-size: $regulator-button-font-size;
-    }
   }
   &__indicator {
-    font-size: $font-size-paragraph-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
+    &--small {
+      @include font-size($font-size-paragraph);
+    }
+    &--middle {
+      @include font-size($font-size-h4);
     }
   }
 }

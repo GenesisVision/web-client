@@ -1,10 +1,12 @@
 import classNames from "classnames";
 import * as React from "react";
-import { PlatformAssetFull } from "utils/types";
+import { useCallback } from "react";
+import { PlatformAssetFull, SizesType } from "utils/types";
 
 import styles from "./regulator.module.scss";
 
 const Regulator: React.FC<Props> = ({
+  size = "small",
   remainder,
   minValue = 0,
   value,
@@ -12,9 +14,23 @@ const Regulator: React.FC<Props> = ({
   handleDown,
   children
 }) => {
+  const handleClickMinus = useCallback(
+    (event: React.SyntheticEvent<HTMLElement>) => {
+      if (value - 1 >= minValue) handleDown(event);
+    },
+    [value, minValue]
+  );
+  const handleClickPlus = useCallback(
+    (event: React.SyntheticEvent<HTMLElement>) => {
+      if (remainder !== 0) handleUp(event);
+    },
+    [value, minValue]
+  );
   return (
     <div
       className={classNames(styles["regulator"], {
+        [styles["regulator--small"]]: size === "small",
+        [styles["regulator--middle"]]: size === "middle",
         [styles["regulator--mute"]]: value <= minValue
       })}
     >
@@ -23,23 +39,34 @@ const Regulator: React.FC<Props> = ({
           styles["regulator__button"],
           styles["regulator__button--minus"],
           {
+            [styles["regulator__button--small"]]: size === "small",
+            [styles["regulator__button--middle"]]: size === "middle",
             [styles["regulator__button--mute"]]: value <= minValue
           }
         )}
-        onClick={handleDown}
+        onClick={handleClickMinus}
       >
         &minus;
       </div>
-      <div className={styles["regulator__indicator"]}>{children}</div>
+      <div
+        className={classNames(styles["regulator__indicator"], {
+          [styles["regulator__indicator--small"]]: size === "small",
+          [styles["regulator__indicator--middle"]]: size === "middle"
+        })}
+      >
+        {children}
+      </div>
       <div
         className={classNames(
           styles["regulator__button"],
           styles["regulator__button--plus"],
           {
+            [styles["regulator__button--small"]]: size === "small",
+            [styles["regulator__button--middle"]]: size === "middle",
             [styles["regulator__button--mute"]]: remainder <= 0
           }
         )}
-        onClick={handleUp}
+        onClick={handleClickPlus}
       >
         +
       </div>
@@ -48,6 +75,7 @@ const Regulator: React.FC<Props> = ({
 };
 
 interface Props {
+  size?: SizesType;
   remainder: number;
   minValue?: number;
   value: number;
