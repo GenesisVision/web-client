@@ -3,11 +3,13 @@ import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/tradin
 import {
   cancelAllOrders,
   cancelOrder,
+  changeLeverage,
   changeMarginMode,
   getAccountInformation,
   getAllOrders,
   getDepth,
   getExchangeInfo,
+  getLeverageBrackets,
   getOpenOrders,
   getTickers,
   getTrades,
@@ -22,6 +24,8 @@ import {
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  getLeverageBrackets,
+  changeLeverage,
   changeMarginMode,
   getExchangeInfo,
   getOpenOrders,
