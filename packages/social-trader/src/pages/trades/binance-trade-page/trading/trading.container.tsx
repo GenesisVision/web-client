@@ -6,6 +6,7 @@ import { MarginRatioContainer } from "pages/trades/binance-trade-page/trading/ma
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
 import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/place-order";
+import { PlaceOrderSettingsContainer } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
@@ -81,6 +82,7 @@ const _TradingContainer: React.FC<Props> = ({ type, symbol }) => {
               </ResponsiveContainer>
             </div>
             <div className={styles["place-orders-grid-elem"]}>
+              {type === "futures" && <PlaceOrderSettingsContainer />}
               <PlaceOrder />
               {type === "futures" && <MarginRatioContainer />}
             </div>
