@@ -9,10 +9,10 @@ import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const USERS_TABLE_COLUMNS: SortingColumn[] = [
   { name: "name", sortingName: "byName" },
+  { name: "followers", sortingName: "byFollowers" },
   { name: "age", sortingName: "byAge" },
   { name: "aum", sortingName: "byAum" },
   { name: "investors", sortingName: "byInvestors" },
-  { name: "followers", sortingName: "byFollowers" },
   { name: "profit", sortingName: "byProfit" }
 ];
 
