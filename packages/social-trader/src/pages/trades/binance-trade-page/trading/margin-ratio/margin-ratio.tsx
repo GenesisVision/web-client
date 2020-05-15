@@ -53,7 +53,7 @@ const _MarginRatio: React.FC<Props> = ({
           label={t("Margin balance")}
           value={
             <>
-              {maintMargin} {MARGIN_INFO_ASSET}
+              {(+maintMargin).toFixed(2)} {MARGIN_INFO_ASSET}
             </>
           }
         />
@@ -61,7 +61,7 @@ const _MarginRatio: React.FC<Props> = ({
           label={t("Maintenance margin")}
           value={
             <>
-              {marginBalance} {MARGIN_INFO_ASSET}
+              {(+marginBalance).toFixed(2)} {MARGIN_INFO_ASSET}
             </>
           }
         />
