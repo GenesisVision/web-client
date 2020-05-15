@@ -1,4 +1,7 @@
-import { FuturesAccountEventType } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import {
+  FuturesAccountEventType,
+  FuturesAsset
+} from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
@@ -345,6 +348,7 @@ export interface AggregatedTrade {
 }
 
 export interface AssetBalance {
+  futuresAsset?: FuturesAsset;
   asset: string;
   free: string;
   locked: string;

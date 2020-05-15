@@ -75,6 +75,7 @@ export const transformFuturesBalance = (
   futuresAsset: FuturesAsset
 ): AssetBalance => {
   return {
+    futuresAsset,
     asset: futuresAsset.asset,
     free: futuresAsset.walletBalance,
     locked: "0"
