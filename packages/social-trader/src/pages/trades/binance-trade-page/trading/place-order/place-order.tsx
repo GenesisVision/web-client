@@ -28,6 +28,7 @@ import React, { useCallback, useContext, useState } from "react";
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
 import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
+import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
@@ -95,7 +96,7 @@ const _PlaceOrder: React.FC = () => {
       {accountInfo && (
         <Row>
           <RowItem small>
-            <Center>
+            <Center className={styles["place-order__wallet-icon"]}>
               <WalletIcon />
             </Center>
           </RowItem>
