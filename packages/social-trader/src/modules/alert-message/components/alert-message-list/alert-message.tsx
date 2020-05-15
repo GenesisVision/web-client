@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ALERT_MESSAGE } from "modules/alert-message/actions/alert-message-actions.constants";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -27,8 +28,16 @@ const _AlertMessage: React.FC<Props> = ({ message, onClick }) => {
   );
 
   return (
-    <div className={classNames(styles["alert-message"], message.className)}>
-      <div className={ALERT_TEXT_CLASS}>{getMessageText(message)}</div>
+    <div
+      className={classNames(styles["alert-message"], {
+        [styles["alert-message--success"]]:
+          message.type === ALERT_MESSAGE.SUCCESS,
+        [styles["alert-message--error"]]: message.type === ALERT_MESSAGE.ERROR,
+        [styles["alert-message--warning"]]:
+          message.type === ALERT_MESSAGE.WARNING
+      })}
+    >
+      <div className={styles[ALERT_TEXT_CLASS]}>{getMessageText(message)}</div>
       <div
         className={styles["alert-message-list__close"]}
         onClick={handleClick}
