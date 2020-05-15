@@ -8,6 +8,8 @@ import {
   CancelOrderResult,
   Depth,
   ExchangeInfo,
+  HttpResponse,
+  MarginModeType,
   OrderSide,
   QueryOrderResult,
   Ticker,
@@ -42,6 +44,25 @@ export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
   });
+
+export const changeMarginMode = ({
+  mode,
+  symbol,
+  authData
+}: {
+  mode: MarginModeType;
+  symbol: string;
+  authData: TradeAuthDataType;
+}): Promise<HttpResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: `${API_ROUTE}/marginType`,
+      params: { symbol, marginType: mode },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
 
 export const getOpenOrders = (
   symbol: string,
