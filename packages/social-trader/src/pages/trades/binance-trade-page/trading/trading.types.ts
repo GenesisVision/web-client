@@ -6,6 +6,8 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
 
+export type MarginModeType = "ISOLATED" | "CROSSED";
+
 export type TerminalType = "spot" | "futures";
 
 export interface TradeRequest {
@@ -19,6 +21,11 @@ export interface TradeRequest {
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
+  changeMarginMode?: (options: {
+    mode: MarginModeType;
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<HttpResponse>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
     symbol: string,
@@ -79,6 +86,7 @@ export interface IConfigurationData {
   supports_time?: boolean;
   futures_regex?: string;
 }
+
 export type ChartSymbolTypeType =
   | "stock"
   | "index"
@@ -525,6 +533,11 @@ export interface Binance {
     startTime?: number;
     endTime?: number;
   }): Promise<DepositHistoryResponse>;
+}
+
+export interface HttpResponse {
+  code: number;
+  msg: string;
 }
 
 export interface HttpError extends Error {
