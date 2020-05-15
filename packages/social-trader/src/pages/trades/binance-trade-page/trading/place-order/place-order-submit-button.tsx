@@ -1,4 +1,5 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
   OrderSide,
@@ -18,7 +19,7 @@ const _PlaceOrderSubmitButton: React.FC<Props> = ({
   asset
 }) => {
   return (
-    <DialogButtons>
+    <Row>
       <SubmitButton
         checkDirty={false}
         isSuccessful={isSuccessful}
@@ -29,7 +30,7 @@ const _PlaceOrderSubmitButton: React.FC<Props> = ({
           {side} {asset}
         </>
       </SubmitButton>
-    </DialogButtons>
+    </Row>
   );
 };
 

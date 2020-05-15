@@ -1,7 +1,12 @@
+import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DoubleButton } from "components/double-button/double-button";
+import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { WalletIcon } from "components/icon/wallet-icon";
+import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
@@ -63,10 +68,8 @@ const _PlaceOrder: React.FC = () => {
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
-        <h3>Place order</h3>
-      </Row>
-      <Row>
         <DoubleButton
+          size={GV_BTN_SIZE.SMALL}
           first={{
             selected: side === "BUY",
             enable: side !== "BUY",
@@ -91,7 +94,16 @@ const _PlaceOrder: React.FC = () => {
       </Row>
       {accountInfo && (
         <Row>
-          {balance} {walletAsset}
+          <RowItem small>
+            <Center>
+              <WalletIcon />
+            </Center>
+          </RowItem>
+          <RowItem>
+            <MutedText>
+              {balance} {walletAsset}
+            </MutedText>
+          </RowItem>
         </Row>
       )}
       {exchangeInfo && accountInfo && (

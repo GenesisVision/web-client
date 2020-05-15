@@ -131,7 +131,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.quantity}
         />
       </Row>
-      <Row wide onlyOffset>
+      <Row small wide onlyOffset>
         <Slider
           dots
           min={0}
@@ -141,7 +141,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           onChange={setSliderValue}
         />
       </Row>
-      <Row>
+      <Row small>
         <HookFormAmountField
           externalDirty={true}
           autoFocus={false}
