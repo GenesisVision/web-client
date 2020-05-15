@@ -1,6 +1,9 @@
+@import "~shared/styles/_sizes";
+
 .margin-ratio {
   &__value {
     white-space: nowrap;
     text-align: right;
+    @include font-size($font-size-xsmall);
   }
 }
