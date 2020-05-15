@@ -1,4 +1,5 @@
 import {
+  MarginModeType,
   OrderSide,
   OrderType,
   TimeInForce,
@@ -13,7 +14,7 @@ export type FuturesAccountEventType =
 
 export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
-export type MarginType = "CROSSED";
+export type MarginType = MarginModeType;
 
 export interface FuturesTickerSymbol {
   symbol: TradeCurrency;
