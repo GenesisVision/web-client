@@ -34,14 +34,12 @@
   }
   &__close {
     z-index: 2;
+    right: 10px;
+    top: 15px;
 
     @include transition(opacity);
     &:hover {
       opacity: 0.4;
-    }
-    &--inside {
-      right: 10px;
-      top: 15px;
     }
 
     &--wider {

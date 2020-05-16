@@ -44,10 +44,7 @@ export const Dialog: React.FC<IDialogProps> = ({
           <GVButton
             variant="text"
             color="secondary"
-            className={classNames(
-              styles["dialog__close"],
-              styles["dialog__close--inside"]
-            )}
+            className={styles["dialog__close"]}
             onClick={onClose}
           >
             <CloseIcon />
@@ -66,6 +63,7 @@ export interface IDialogProps extends IDialogOuterProps {
   className?: string;
   top?: boolean;
 }
+
 export interface IDialogOuterProps {
   open: boolean;
   onClose: (param?: any) => void;
