@@ -28,6 +28,9 @@
   &__notes {
     grid-column: 2/12;
     margin-top: 100px;
+    &--withoutOffset {
+      margin-top: 0;
+    }
 
     @include media-breakpoint-landscape-tablet() {
       grid-column: 4/10;

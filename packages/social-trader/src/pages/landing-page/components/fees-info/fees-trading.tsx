@@ -1,7 +1,10 @@
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
-import FeesTradingDiscount from "pages/landing-page/components/fees-info/fees-trading-discount";
+import {
+  FeesTradingDiscountInfo,
+  FeesTradingDiscountTable
+} from "pages/landing-page/components/fees-info/fees-trading-discount";
 import CHFlag from "pages/landing-page/images/flags/ch.png";
 import ESFlag from "pages/landing-page/images/flags/es.png";
 import FRFlag from "pages/landing-page/images/flags/fr.png";
@@ -487,7 +490,8 @@ const _FeesTrading: React.FC<Props> = () => {
                 ))}
             </ul>
           </div>
-          <FeesTradingDiscount white />
+          <FeesTradingDiscountInfo white />
+          <FeesTradingDiscountTable white />
         </div>
       </div>
     </div>
