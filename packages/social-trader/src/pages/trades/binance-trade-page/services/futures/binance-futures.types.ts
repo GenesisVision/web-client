@@ -1,7 +1,9 @@
 import {
+  FuturesPosition,
   MarginModeType,
   OrderSide,
   OrderType,
+  PositionSideType,
   TimeInForce,
   Trade,
   TradeCurrency
@@ -11,8 +13,6 @@ export type FuturesAccountEventType =
   | "ACCOUNT_UPDATE"
   | "MARGIN_CALL"
   | "ORDER_TRADE_UPDATE";
-
-export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
 export type MarginType = MarginModeType;
 
@@ -48,18 +48,6 @@ export interface FuturesAsset {
   walletBalance: string;
 }
 
-export interface FuturesPosition {
-  isolated: boolean;
-  leverage: string;
-  initialMargin: string;
-  maintMargin: string;
-  openOrderInitialMargin: string;
-  positionInitialMargin: string;
-  symbol: TradeCurrency;
-  unrealizedProfit: string;
-  positionSide: PositionSideType; // BOTH means that it is the position of One-way Mode
-}
-
 export interface FuturesAccount {
   assets: FuturesAsset[];
   canDeposit: boolean;
@@ -78,7 +66,7 @@ export interface FuturesAccount {
   updateTime: 0;
 }
 
-export interface FuturesAccountEventPosition {
+export interface FuturesMarginCallEventPosition {
   symbol: TradeCurrency; // Symbol
   positionSide: PositionSideType; // Position Side
   positionAmount: string; // Position Amount
@@ -87,6 +75,17 @@ export interface FuturesAccountEventPosition {
   markPrice: string; // Mark Price
   unrealizedPnL: string; // Unrealized PnL
   maintenanceMarginRequired: string; // Maintenance Margin Required
+}
+
+export interface FuturesAccountEventPosition {
+  symbol: string; // Symbol
+  positionAmt: string; // Position Amount
+  entryPrice: string; // Entry Price
+  accumulatedRealized: string; // (Pre-fee) Accumulated Realized
+  unrealizedProfit: string; // Unrealized PnL
+  marginType: MarginType; // Margin Type
+  isolatedWallet: string; // Isolated Wallet (if isolated position)
+  positionSide: PositionSideType; // Position Side
 }
 
 export interface FuturesAccountEventBalance {
@@ -132,7 +131,7 @@ export interface FuturesMarginCallEvent {
   eventType: FuturesAccountEventType; // Event Type
   eventTime: number; // Event Time
   crossWalletBalance: string; // Cross Wallet Balance. Only pushed with crossed position margin call
-  positions: FuturesAccountEventPosition[];
+  positions: FuturesMarginCallEventPosition[];
 }
 
 export interface FuturesAccountUpdateEvent {

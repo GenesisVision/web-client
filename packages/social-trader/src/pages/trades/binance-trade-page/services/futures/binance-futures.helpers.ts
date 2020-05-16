@@ -5,6 +5,7 @@ import {
   FuturesAccountUpdateEvent,
   FuturesAsset,
   FuturesMarginCallEvent,
+  FuturesMarginCallEventPosition,
   FuturesTickerSymbol,
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
@@ -12,8 +13,11 @@ import {
 import {
   Account,
   AssetBalance,
+  ExecutionReport,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
   eventType: m.e,
@@ -98,9 +102,24 @@ export const transformFuturesAccount = (
   };
 };
 
-export const futuresEventPositionTransform = (
+export const futuresAccountEventPositionTransform = (
   socketData: any
 ): FuturesAccountEventPosition => {
+  return {
+    symbol: socketData.s,
+    positionAmt: socketData.pa,
+    entryPrice: socketData.ep,
+    accumulatedRealized: socketData.cr,
+    unrealizedProfit: socketData.up,
+    marginType: socketData.mt,
+    isolatedWallet: socketData.iw,
+    positionSide: socketData.ps
+  };
+};
+
+export const futuresMarginCallEventPositionTransform = (
+  socketData: any
+): FuturesMarginCallEventPosition => {
   return {
     symbol: socketData.s,
     positionSide: socketData.ps,
@@ -164,7 +183,7 @@ export const futuresMarginCallEventTransform = (
     eventType: socketData.e,
     eventTime: socketData.E,
     crossWalletBalance: socketData.cw,
-    positions: (socketData.p || []).map(futuresEventPositionTransform)
+    positions: (socketData.p || []).map(futuresMarginCallEventPositionTransform)
   };
 };
 
@@ -177,7 +196,9 @@ export const futuresAccountUpdateEventTransform = (
     transactionTime: socketData.T,
     accountUpdate: {
       balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
-      positions: (socketData.a?.P || []).map(futuresEventPositionTransform)
+      positions: (socketData.a?.P || []).map(
+        futuresAccountEventPositionTransform
+      )
     }
   };
 };
@@ -192,3 +213,8 @@ export const futuresTradeOrderUpdateEventTransform = (
     order: futuresEventTradeOrderTransform(socketData.o)
   };
 };
+
+export const filterPositionEventsStream = (
+  userStream: Observable<any>
+): Observable<FuturesAccountUpdateEvent> =>
+  userStream.pipe(filter(info => info.eventType === "ACCOUNT_UPDATE"));

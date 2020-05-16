@@ -10,6 +10,35 @@ export type MarginModeType = "ISOLATED" | "CROSSED";
 
 export type TerminalType = "spot" | "futures";
 
+export type PositionSideType = "BOTH" | "LONG" | "SHORT";
+
+export interface FuturesPositionInformation {
+  entryPrice: string;
+  marginType: MarginModeType;
+  isAutoAddMargin: string;
+  isolatedMargin: string;
+  leverage: string;
+  liquidationPrice: string;
+  markPrice: string;
+  maxNotionalValue: string;
+  positionAmt: string;
+  symbol: string;
+  unRealizedProfit: string;
+  positionSide: PositionSideType;
+}
+
+export interface FuturesPosition {
+  isolated: boolean;
+  leverage: string;
+  initialMargin: string;
+  maintMargin: string;
+  openOrderInitialMargin: string;
+  positionInitialMargin: string;
+  symbol: string;
+  unrealizedProfit: string;
+  positionSide: PositionSideType; // BOTH means that it is the position of One-way Mode
+}
+
 export interface LeverageBracket {
   bracket: number; // Notianl bracket
   initialLeverage: number; // Max initial leverge for this bracket
@@ -34,6 +63,9 @@ export interface TradeRequest {
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
+  getPositionInformation?: (options: {
+    authData: TradeAuthDataType;
+  }) => Observable<FuturesPositionInformation[]>;
   getLeverageBrackets?: (options: {
     symbol: string;
     authData: TradeAuthDataType;
@@ -343,6 +375,7 @@ export enum ErrorCodes {
 }
 
 export interface Account {
+  positions?: FuturesPosition[];
   balances: AssetBalance[];
   buyerCommission: number;
   canDeposit: boolean;

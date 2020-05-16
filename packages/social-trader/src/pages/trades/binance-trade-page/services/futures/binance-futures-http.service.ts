@@ -9,6 +9,7 @@ import {
   ChangeLeverageResponse,
   Depth,
   ExchangeInfo,
+  FuturesPositionInformation,
   HttpResponse,
   MarginModeType,
   OrderSide,
@@ -45,6 +46,17 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
+  });
+
+export const getPositionInformation = ({
+  authData
+}: {
+  authData: TradeAuthDataType;
+}): Observable<FuturesPositionInformation[]> =>
+  requestService.get({
+    ...authData,
+    url: `${API_ROUTE}/positionRisk`,
+    type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
 export const getLeverageBrackets = ({
