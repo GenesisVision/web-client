@@ -18,7 +18,6 @@ const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
   return (
     <StatisticItemList>
       <StatisticItem
-        className={"details-description__short-statistic-item"}
         label={
           <TooltipLabel
             tooltipContent={t("fund-details-page.tooltip.entry-fee")}
@@ -40,7 +39,6 @@ const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
             labelText={t("fund-details-page.description.exitFee")}
           />
         }
-        className={"details-description__short-statistic-item"}
         accent
       >
         <NumberFormat

@@ -39,13 +39,7 @@ const _TwoFactor: React.FC<Props> = ({
       <Row>
         <GenerateRecoveryCode disabled={twoFactorEnabled} />
       </Row>
-      <Dialog
-        className={classNames({
-          "dialog--width-auto": !twoFactorEnabled
-        })}
-        open={Boolean(type)}
-        onClose={handleClose}
-      >
+      <Dialog open={Boolean(type)} onClose={handleClose}>
         {type && type === TYPE_2FA.GOOGLE ? (
           <GoogleAuthContainer onSubmit={handleSubmit} />
         ) : (
