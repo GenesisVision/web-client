@@ -74,6 +74,11 @@ $view-svg-size: 15px;
   }
 
   &__cell {
+    &--first-offset {
+      &:first-child {
+        @include adaptive-padding(left, $padding-small);
+      }
+    }
     &--low {
       @include vertical-paddings($padding-xxsmall);
     }
@@ -92,9 +97,6 @@ $view-svg-size: 15px;
     font-weight: normal;
     white-space: nowrap;
 
-    &:first-child {
-      @include adaptive-padding(left, $padding-small);
-    }
     &:last-child {
       @include adaptive-padding(right, $padding-small);
     }
