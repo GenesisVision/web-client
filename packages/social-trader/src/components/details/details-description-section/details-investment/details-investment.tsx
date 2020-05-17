@@ -1,6 +1,7 @@
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { Row } from "components/row/row";
 import { TableSelectorType } from "components/table/components/table.types";
 import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
 import { ASSET } from "constants/constants";
@@ -136,15 +137,17 @@ const _DetailsInvestment: React.FC<Props> = ({
         />
       )}
       {tab === TABS.INVESTMENT && showInvestment && (
-        <Investment
-          isOwnAsset={isOwnAsset}
-          fees={fees}
-          updateDescription={dispatchDescription}
-          id={id}
-          assetCurrency={currency}
-          asset={asset}
-          personalDetails={investmentDetails as InvestmentType}
-        />
+        <Row onlyOffset>
+          <Investment
+            isOwnAsset={isOwnAsset}
+            fees={fees}
+            updateDescription={dispatchDescription}
+            id={id}
+            assetCurrency={currency}
+            asset={asset}
+            personalDetails={investmentDetails as InvestmentType}
+          />
+        </Row>
       )}
       {tab === TABS.EVENTS && haveEvents && (
         <PortfolioEventsTableContainer
