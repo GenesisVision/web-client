@@ -15,10 +15,7 @@ import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/plac
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import {
-  getSymbol,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   OrderSide,
   OrderType
@@ -35,6 +32,7 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
+    authData,
     exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
@@ -42,8 +40,6 @@ const _PlaceOrder: React.FC = () => {
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const { tab, setTab } = useTab<OrderType>("LIMIT");
-
-  const { authData } = useTradeAuth();
 
   const { sendRequest, status } = useApiRequest({
     request: tradeRequest

@@ -17,19 +17,27 @@ import {
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
-import { TerminalType } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  TerminalType,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 
 import styles from "./trading.module.scss";
 
 interface Props {
+  authData: TradeAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
 
-const _TradingContainer: React.FC<Props> = ({ type, symbol }) => {
+const _TradingContainer: React.FC<Props> = ({ authData, type, symbol }) => {
   return (
-    <TradingInfoContextProvider outerSymbol={symbol} type={type}>
+    <TradingInfoContextProvider
+      authData={authData}
+      outerSymbol={symbol}
+      type={type}
+    >
       <div className={styles["trading-grid"]}>
         <TradingTickerContextProvider>
           <Center className={styles["header-grid-elem"]}>

@@ -5,13 +5,13 @@ import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/
 import {
   filterOutboundAccountInfoStream,
   stringifySymbolFromToParam,
-  updateAccountInfo,
-  useTradeAuth
+  updateAccountInfo
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
   TerminalType,
+  TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import * as qs from "qs";
@@ -28,6 +28,7 @@ import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 interface Props {
+  authData: TradeAuthDataType;
   outerSymbol?: SymbolState;
   type?: TerminalType;
 }
@@ -38,6 +39,7 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
+  authData: TradeAuthDataType;
   terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
@@ -52,6 +54,10 @@ const SymbolInitialState: SymbolState = {
 };
 
 export const TradingAccountInfoInitialState: TradingAccountInfoState = {
+  authData: {
+    publicKey: "",
+    privateKey: ""
+  },
   terminalType: "spot",
   setSymbol: () => {},
   symbol: SymbolInitialState
@@ -62,6 +68,7 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
+  authData: authDataProp,
   outerSymbol = SymbolInitialState,
   type,
   children
@@ -75,7 +82,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     getUserStreamKey,
     getUserStreamSocket
   } = useContext(TerminalMethodsContext);
-  const { authData } = useTradeAuth();
+  const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
   const { data: exchangeInfo } = useApiRequest<ExchangeInfo>({
@@ -135,6 +142,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
 
   const value = useMemo(
     () => ({
+      authData,
       terminalType,
       userStream,
       setSymbol: handleSetSymbol,
@@ -143,6 +151,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       exchangeInfo
     }),
     [
+      authData,
       terminalType,
       userStream,
       handleSetSymbol,

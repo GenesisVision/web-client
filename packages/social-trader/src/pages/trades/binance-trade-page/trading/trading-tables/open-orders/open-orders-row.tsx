@@ -3,7 +3,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { useTradeAuth } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   OrderSide,
   TradeAuthDataType
@@ -35,7 +35,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   total
 }) => {
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const { authData } = useTradeAuth();
+  const { authData } = useContext(TradingInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
