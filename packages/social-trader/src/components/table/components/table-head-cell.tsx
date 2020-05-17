@@ -22,6 +22,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   return (
     <th
       className={classNames(
+        styles["table__cell--first-offset"],
         styles["table__cell"],
         styles["table__cell--medium"],
         styles["table__cell--head"],
