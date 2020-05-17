@@ -6,7 +6,6 @@ import App from "next/app";
 import "pages/landing-page/styles/home.scss";
 import "pages/landing-page/styles/index.scss";
 import "pages/landing-page/styles/internal.scss";
-import "rc-slider/assets/index.css";
 import React from "react";
 import { Provider } from "react-redux";
 import { compose, Store } from "redux";
