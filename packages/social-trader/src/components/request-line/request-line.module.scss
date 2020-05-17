@@ -2,16 +2,10 @@
 @import "~shared/styles/_sizes";
 
 .request-line {
+  padding: $padding-xxsmall 0;
   color: $text-accent-color;
-
-  .portfolio-event-logo__photo {
-    border-color: #273642;
-  }
 
   &:not(:last-of-type) {
     border-bottom: 1px solid $border-color;
-  }
-  &__values {
-    padding-top: $padding-xsmall;
   }
 }
