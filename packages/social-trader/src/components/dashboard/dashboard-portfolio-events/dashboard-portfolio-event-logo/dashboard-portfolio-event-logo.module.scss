@@ -6,6 +6,7 @@ $transition-size: $type-size/$divider-text;
 
 .portfolio-event-logo {
   position: relative;
+
   &--with-asset {
     width: $small-avatar-size;
     height: $small-avatar-size;
@@ -15,10 +16,12 @@ $transition-size: $type-size/$divider-text;
     box-sizing: border-box;
     border-radius: 50%;
     text-align: center;
+
     & img {
       @include height(28px);
       @include width(28px);
     }
+
     &--with-asset {
       position: absolute;
       top: $transition-size;
@@ -55,10 +58,8 @@ $transition-size: $type-size/$divider-text;
   }
 
   &__logo {
-    &.program-avatar {
-      @include height(28px);
-      @include width(28px);
-    }
+    @include height(28px);
+    @include width(28px);
   }
 
   &--positive {
