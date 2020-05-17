@@ -18,11 +18,11 @@ const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
 
 const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
   ({ codes }) => (
-    <div className={styles["codes__list"]}>
+    <Row wrap className={styles["codes__list"]}>
       {codes.map(code => (
         <CodeItem code={code.code} />
       ))}
-    </div>
+    </Row>
   )
 );
 
@@ -37,9 +37,7 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
       <DialogBottom>
         <Row>{t("2fa-page.codes.recovery_codes")}</Row>
         <Row>{t("2fa-page.codes.successfully")}</Row>
-        <Row>
-          <CodeList codes={codes} />
-        </Row>
+        <CodeList codes={codes} />
         <DialogButtons>
           <CopyButton wide value={getCodesString(codes)} />
         </DialogButtons>
