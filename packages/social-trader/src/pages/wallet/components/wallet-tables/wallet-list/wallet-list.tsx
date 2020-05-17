@@ -31,9 +31,7 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
         items={wallets}
         columns={WALLET_LIST_COLUMNS}
         renderHeader={column => (
-          <span className={` --${column.name}`}>
-            {t(`wallet-page.list.${column.name}`)}
-          </span>
+          <span>{t(`wallet-page.list.${column.name}`)}</span>
         )}
         renderBodyRow={(wallet: WalletData) => (
           <TableRow key={wallet.id}>

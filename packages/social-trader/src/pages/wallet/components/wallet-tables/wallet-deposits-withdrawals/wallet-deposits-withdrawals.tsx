@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -24,6 +25,7 @@ import { RootState } from "reducers/root-reducer";
 
 import { fetchMultiTransactionsExternal } from "../../../services/wallet.services";
 import { walletTransactionsLoaderData } from "../wallet-transactions/wallet-transactions.loader-data";
+import styles from "./wallet-deposits-withdrawals.module.scss";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -84,7 +86,10 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${column.name}`}
+          className={classNames(
+            styles["wallet-deposits-withdrawals__cell"],
+            styles[`wallet-deposits-withdrawals__cell--${column.name}`]
+          )}
         >
           {t(`wallet-page.deposits-withdrawals.${column.name}`)}
         </span>

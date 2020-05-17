@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -24,6 +25,7 @@ import { CurrencyEnum } from "utils/types";
 
 import { fetchMultiTransactions } from "../../../services/wallet.services";
 import { walletTransactionsLoaderData } from "./wallet-transactions.loader-data";
+import styles from "./wallet-transactions.module.scss";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -88,7 +90,10 @@ const _WalletTransactions: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`wallet-transactions__cell wallet-transactions__cell--${column.name}`}
+          className={classNames(
+            styles["wallet-transactions__cell"],
+            styles[` wallet-transactions__cell--${column.name}`]
+          )}
         >
           {t(`wallet-page.transactions.${column.name}`)}
         </span>
