@@ -46,7 +46,7 @@ const _ReferralProgramPage: React.FC = () => {
           currency={currency}
         />
       </SettingsBlock>
-      <Row large className={styles["referral-program__tables"]}>
+      <Row center={false} large className={styles["referral-program__tables"]}>
         <DetailsBlock table>
           <ReferralFriendsTable />
         </DetailsBlock>
