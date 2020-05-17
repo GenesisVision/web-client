@@ -18,10 +18,10 @@ export const TooltipLabel: React.FC<{
   >
     <span
       className={classNames(
-        styles["tooltip__label"],
+        styles["tooltip-label"],
         {
-          [styles["tooltip__label--cursor-pointer"]]: pointer,
-          [styles["tooltip__label--question"]]: !labelText
+          [styles["tooltip-label--cursor-pointer"]]: pointer,
+          [styles["tooltip-label--question"]]: !labelText
         },
         className
       )}
