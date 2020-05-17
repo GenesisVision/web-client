@@ -84,19 +84,23 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         )}
         {showProgramFields && (
-          <AssetFields>
-            <Currency
-              hide={!showCurrency}
-              name={CONVERT_ASSET_FIELDS.currency}
-              accountCurrencies={["GVT", "BTC", "ETH"]}
-            />
-            <PeriodLength
-              periods={periods}
-              name={CONVERT_ASSET_FIELDS.periodLength}
-            />
-            <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-            <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
-          </AssetFields>
+          <Row large>
+            <AssetFields>
+              <Currency
+                hide={!showCurrency}
+                name={CONVERT_ASSET_FIELDS.currency}
+                accountCurrencies={["GVT", "BTC", "ETH"]}
+              />
+              <PeriodLength
+                periods={periods}
+                name={CONVERT_ASSET_FIELDS.periodLength}
+              />
+              <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+              <Row onlyOffset>
+                <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
+              </Row>
+            </AssetFields>
+          </Row>
         )}
       </SettingsBlock>
       {showProgramFields && (
