@@ -33,6 +33,7 @@
     @include adaptive-full-padding($padding-xxsmall);
   }
   &__close {
+    width: 30px;
     z-index: 2;
     right: 10px;
     top: 15px;
