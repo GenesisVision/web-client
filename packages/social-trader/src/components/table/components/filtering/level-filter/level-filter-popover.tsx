@@ -28,7 +28,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
   return (
     <PopoverContent className={styles["level-filter"]}>
       <PopoverContentCardBlock>
-        <Row>
+        <Row onlyOffset>
           <Range
             dots
             min={1}
