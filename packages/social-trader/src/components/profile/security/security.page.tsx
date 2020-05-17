@@ -17,12 +17,14 @@ const _SecurityPage: React.FC = () => {
         <TwoFactorAuthContainer />
       </SettingsBlock>
       <SettingsBlock>
-        <Row>
-          <PasswordChange />
-        </Row>
-        <Row>
-          <LogoutButtonContainer />
-        </Row>
+        <div>
+          <Row>
+            <PasswordChange />
+          </Row>
+          <Row>
+            <LogoutButtonContainer />
+          </Row>
+        </div>
       </SettingsBlock>
     </ProfileLayout>
   );
