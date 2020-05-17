@@ -1,6 +1,7 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import imageValidationSchema from "components/form/input-image/input-image.validation";
 import LogoField from "components/logo-field/logo-field";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import UserIcon from "media/user-avatar.svg";
 import * as React from "react";
@@ -30,10 +31,14 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       <div>
-        <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
-        <SubmitButton isSuccessful={!errorMessage}>
-          {t("profile-page.settings.save-photo")}
-        </SubmitButton>
+        <Row onlyOffset>
+          <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
+        </Row>
+        <Row large>
+          <SubmitButton isSuccessful={!errorMessage}>
+            {t("profile-page.settings.save-photo")}
+          </SubmitButton>
+        </Row>
       </div>
     </HookForm>
   );

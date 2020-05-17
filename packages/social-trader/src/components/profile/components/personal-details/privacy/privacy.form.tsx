@@ -88,10 +88,12 @@ const _PublicInfoForm: React.FC<Props> = ({
           name={PRIVACY_FORM_VALUES.whoCanPostToMayWall}
         />
       </Row>
-      <Row>
-        <FormError error={errorMessage} />
-      </Row>
-      <Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row large>
         <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
           {t("buttons.save")}
         </SubmitButton>
