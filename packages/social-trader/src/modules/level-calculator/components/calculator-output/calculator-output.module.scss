@@ -4,8 +4,6 @@
 .calculator-output {
   &__label {
     @include font-size($font-size-small);
-    display: flex;
-    align-items: center;
     color: #e6edf1;
   }
 

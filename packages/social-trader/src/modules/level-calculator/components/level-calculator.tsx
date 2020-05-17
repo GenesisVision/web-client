@@ -2,15 +2,12 @@ import Dialog from "components/dialog/dialog";
 import { CalculatorIcon } from "components/icon/calculator-icon";
 import Crashable from "decorators/crashable";
 import useIsOpen from "hooks/is-open.hook";
+import LevelCalculatorPopupContainer from "modules/level-calculator/components/level-calculator-popup.container";
 import dynamic from "next/dynamic";
 import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 
 import styles from "./level-calculator.module.scss";
-
-const LevelCalculatorPopupContainer = dynamic(() =>
-  import("./level-calculator-popup.container")
-);
 
 const _LevelCalculator: React.FC<ILevelCalculatorProps> = ({
   id,
@@ -27,6 +24,7 @@ const _LevelCalculator: React.FC<ILevelCalculatorProps> = ({
       </div>
 
       <Dialog
+        showClose={false}
         className={styles["level-calculator-popup"]}
         open={isOpen}
         onClose={setClose}

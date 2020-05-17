@@ -11,14 +11,10 @@
   @include horizontal-paddings($padding-small);
 
   @include media-breakpoint-landscape-phone() {
-    max-width: 640px - $padding-small * 2;
+    max-width: 690px - $padding-small * 2;
   }
 
   background-color: $popover-background;
-
-  & .dialog__close {
-    display: none;
-  }
 
   &__header {
     justify-content: space-between;
@@ -71,6 +67,7 @@
 
   &__statistic-item {
     min-width: 260px;
+    margin-bottom: $padding-small;
   }
 
   &__statistic-item-label {

@@ -1,5 +1,7 @@
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import GVTextField from "components/gv-text-field";
+import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Slider from "rc-slider";
 import * as React from "react";
@@ -71,10 +73,14 @@ class _CalculatorSlider extends React.PureComponent<Props> {
             ]]: editableValue
           })}
         >
-          <div className={styles["calculator-slider__title"]}>
-            <span>{title}</span>
-            {tooltipContent && <TooltipLabel tooltipContent={tooltipContent} />}
-          </div>
+          <Center className={styles["calculator-slider__title"]}>
+            <RowItem small>{title}</RowItem>
+            {tooltipContent && (
+              <RowItem>
+                <TooltipLabel tooltipContent={tooltipContent} />
+              </RowItem>
+            )}
+          </Center>
           <div className={styles["calculator-slider__value"]}>
             {editableValue ? (
               <GVTextField
@@ -105,6 +111,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
           </div>
         </div>
         <Slider
+          className={"calculator-slider__slider-element"}
           min={min}
           max={max}
           marks={this.marks}
@@ -132,7 +139,9 @@ interface Props {
   className?: string;
   valueClassName?: string;
   tooltipContent?: string;
+
   onChange(name: string, value: number): void;
+
   onChangeValue?(name: string, value: number): void;
 }
 

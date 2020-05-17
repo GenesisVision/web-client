@@ -8,58 +8,12 @@
     max-width: 255px;
   }
 
-  .rc-slider {
-    margin-bottom: $padding-xsmall;
-  }
-
-  .rc-slider-track {
-    background-color: $primary-color;
-    height: 3px;
-  }
-
-  .rc-slider-rail {
-    height: 1px;
-    background-color: rgba($main-color, 0.1);
-    margin-top: 1px;
-  }
-
-  .rc-slider-dot {
-    display: none;
-  }
-
-  .rc-slider-handle {
-    background-color: $popover-background;
-    width: 17px;
-    height: 17px;
-    margin-left: -8.5px;
-    margin-top: -6px;
-    border: solid 3px $primary-color;
-
-    &:hover {
-      border-color: $primary-color;
-      box-shadow: 0 0 5px $primary-color;
-    }
-
-    &:active,
-    &:focus {
-      border-color: $primary-color;
-      background-color: $popover-background;
-      box-shadow: 0 0 5px $primary-color;
-    }
-  }
-
-  .rc-slider-mark-text,
-  .rc-slider-mark-text-active {
-    @include font-size($font-size-small);
-    color: $text-color;
-    white-space: nowrap;
-  }
-
   &__heading {
     margin-bottom: $padding-xxsmall;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &--editable-value {
       margin-bottom: $padding-xxsmall/2;
     }
@@ -70,8 +24,6 @@
     cursor: default;
     white-space: nowrap;
     color: $calculator-label-color;
-    display: flex;
-    align-items: center;
   }
 
   &__value {
