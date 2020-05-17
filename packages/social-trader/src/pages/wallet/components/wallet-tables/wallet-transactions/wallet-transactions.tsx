@@ -92,7 +92,7 @@ const _WalletTransactions: React.FC<Props> = ({
         <span
           className={classNames(
             styles["wallet-transactions__cell"],
-            styles[` wallet-transactions__cell--${column.name}`]
+            styles[`wallet-transactions__cell--${column.name}`]
           )}
         >
           {t(`wallet-page.transactions.${column.name}`)}
