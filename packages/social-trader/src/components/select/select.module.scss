@@ -3,7 +3,6 @@
 
 .select {
   display: flex;
-  min-width: 150px;
   @include height(22px);
 
   &--small {
@@ -17,6 +16,7 @@
   }
 
   &--middle {
+    min-width: 150px;
     .select__value {
       @include font-size($font-size-small);
     }
