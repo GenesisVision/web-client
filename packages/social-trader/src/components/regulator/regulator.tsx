@@ -18,13 +18,13 @@ const Regulator: React.FC<Props> = ({
     (event: React.SyntheticEvent<HTMLElement>) => {
       if (value - 1 >= minValue) handleDown(event);
     },
-    [value, minValue]
+    [value, minValue, handleDown]
   );
   const handleClickPlus = useCallback(
     (event: React.SyntheticEvent<HTMLElement>) => {
       if (remainder !== 0) handleUp(event);
     },
-    [value, minValue]
+    [value, remainder, handleUp]
   );
   return (
     <div
