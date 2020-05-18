@@ -26,7 +26,7 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
     <HookForm form={form} onSubmit={onApply}>
       <DialogTop title={header} />
       <DialogBottom>
-        <Row>{body}</Row>
+        <Row onlyOffset>{body}</Row>
         <DialogButtons>
           <SubmitButton
             checkDirty={false}
