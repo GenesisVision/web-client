@@ -49,6 +49,7 @@ const _ChartCurrencySelectorItem: React.FC<Props> = ({
             <RowItem>
               {selectCurrencies.length || i === 0 ? (
                 <CurrencySelect
+                  bottomLine={false}
                   size={"small"}
                   className={styles["chart-currency-selector__select"]}
                   value={name}

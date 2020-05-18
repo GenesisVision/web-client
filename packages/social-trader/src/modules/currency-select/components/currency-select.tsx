@@ -4,6 +4,7 @@ import * as React from "react";
 import { CurrencyEnum, SizesType } from "utils/types";
 
 const _CurrencySelect: React.FC<Props> = ({
+  bottomLine = true,
   size,
   value,
   onChange,
@@ -13,6 +14,7 @@ const _CurrencySelect: React.FC<Props> = ({
   console.log(currencyValues);
   return (
     <Select
+      bottomLine={bottomLine}
       size={size}
       data-test-id={value}
       name="currency"
@@ -30,6 +32,7 @@ const _CurrencySelect: React.FC<Props> = ({
 };
 
 interface Props {
+  bottomLine?: boolean;
   size?: SizesType;
   value: CurrencyEnum | string;
   onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;

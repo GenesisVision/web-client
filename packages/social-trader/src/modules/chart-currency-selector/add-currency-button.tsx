@@ -14,6 +14,7 @@ const _AddCurrencyButton: React.FC<Props> = ({ onAdd, currencies }) => {
     <TileFilterButton
       title={
         <CurrencySelect
+          bottomLine={false}
           size={"small"}
           className={styles["chart-currency-selector__select"]}
           value={"ADD"}
