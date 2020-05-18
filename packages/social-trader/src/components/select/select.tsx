@@ -13,6 +13,7 @@ import SelectItem from "./select-item";
 import styles from "./select.module.scss";
 
 const Select: React.FC<Props> = ({
+  bottomLine,
   size = "middle",
   fixedVertical,
   className,
@@ -126,7 +127,9 @@ const Select: React.FC<Props> = ({
       <button
         name={name}
         onClick={handleClick}
-        className={styles["select__value"]}
+        className={classNames(styles["select__value"], {
+          [styles["select__value--bottom-line"]]: bottomLine
+        })}
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={input}
@@ -172,6 +175,7 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface Props {
+  bottomLine?: boolean;
   size?: SizesType;
   fixedVertical?: boolean;
   value: string;
