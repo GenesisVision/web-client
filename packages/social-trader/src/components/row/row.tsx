@@ -26,7 +26,7 @@ export const Row: React.FC<Props> = ({
         [styles["row--wide"]]: wide,
         [styles["row--hidden"]]: hide,
         [styles["row--small"]]: small,
-        [styles["row--middle"]]: middle && !(small || large),
+        [styles["row--middle"]]: middle && !(small || large || xlarge),
         [styles["row--xlarge"]]: xlarge,
         [styles["row--large"]]: large
       })}
