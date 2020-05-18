@@ -8,6 +8,8 @@ import { SortingType } from "pages/trades/binance-trade-page/trading/market-watc
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
 
+import styles from "./market-watch.module.scss";
+
 interface Props {
   dataType: "number" | "string";
   setSorting: (sorting: SortingType) => void;
@@ -30,14 +32,14 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames("market-watch__th")}
+        className={classNames(styles["market-watch__th"])}
         onClick={handleChangeSorting(field)}
       >
         <span
           className={classNames({
-            "market-watch__th--asc":
+            [styles["market-watch__th--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
-            "market-watch__th--desc":
+            [styles["market-watch__th--desc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.DESC
           })}
         >

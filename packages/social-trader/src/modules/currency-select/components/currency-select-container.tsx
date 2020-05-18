@@ -36,7 +36,7 @@ const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
   return (
     <CurrencySelect
       condition={!!currency && !!currencyValues}
-      className={classNames("currency-select", className)}
+      className={className}
       value={currency}
       onChange={handleChange}
       currencyValues={currencyValues as CurrencyEnum[]}

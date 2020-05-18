@@ -68,7 +68,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className={classNames("profile-widget", className)}>
+    <div className={classNames(styles["profile-widget"], className)}>
       <Center className={styles["profile-widget__content"]} onClick={setAnchor}>
         <RowItem small>
           <ProfileAvatar

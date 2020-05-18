@@ -54,7 +54,9 @@ const _RatingBlockRow: React.FC<IPropsRatingBlockRow> = ({
             />
           }
           name={
-            <Center className={classNames({ rating__winner: winner })}>
+            <Center
+              className={classNames({ [styles["rating__winner"]]: winner })}
+            >
               <RowItem>
                 <b>{username}</b>
               </RowItem>
