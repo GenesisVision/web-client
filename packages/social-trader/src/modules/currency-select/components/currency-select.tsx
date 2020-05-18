@@ -11,9 +11,9 @@ const _CurrencySelect: React.FC<Props> = ({
   className,
   currencyValues
 }) => {
-  console.log(currencyValues);
   return (
     <Select
+      fixedWidth={false}
       bottomLine={bottomLine}
       size={size}
       data-test-id={value}
