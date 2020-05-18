@@ -13,6 +13,7 @@ import SelectItem from "./select-item";
 import styles from "./select.module.scss";
 
 const Select: React.FC<Props> = ({
+  fixedWidth = true,
   bottomLine,
   size = "middle",
   fixedVertical,
@@ -119,6 +120,7 @@ const Select: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles["select"], className, {
+        [styles["select--fixed-width"]]: fixedWidth,
         [styles["select--middle"]]: size === "middle",
         [styles["select--small"]]: size === "small",
         [styles["select--disabled"]]: isDisabled
@@ -175,6 +177,7 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface Props {
+  fixedWidth?: boolean;
   bottomLine?: boolean;
   size?: SizesType;
   fixedVertical?: boolean;
