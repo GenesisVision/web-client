@@ -65,7 +65,6 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     [destinationType, sourceType]
   );
   useEffect(() => {
-    console.log(singleCurrentItemContainer, outerCurrentItemContainerItems);
     if (
       !singleCurrentItemContainer &&
       !outerCurrentItemContainerItems &&
