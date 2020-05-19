@@ -9,33 +9,14 @@ import {
 } from "./link.helper";
 import styles from "./link.module.scss";
 
-const Link: React.FC<LinkProps> = ({
-  white,
-  title,
-  to,
-  onClick,
-  children,
-  ...other
-}) => {
-  if (!to) {
-    return <>{children}</>;
-  }
+const WrappedLink: React.FC<LinkProps & {
+  to: ToType | string;
+}> = ({ white, title, to, onClick, children, ...other }) => {
   const normalizedTo = normalizeTo(to);
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       e.stopPropagation();
-
-      const { asPath, route } = Router;
-
-      const prevent = normalizedTo.as
-        ? normalizedTo.as === route
-        : normalizedTo.pathname === route && normalizedTo.pathname === asPath;
-
-      if (prevent) {
-        e.preventDefault();
-        return;
-      }
 
       if (onClick) {
         onClick(e);
@@ -50,7 +31,7 @@ const Link: React.FC<LinkProps> = ({
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a
-        className={white ? styles["link--white"] : ""}
+        className={white ? styles.link__white : ""}
         title={linkTitle}
         onClick={handleClick}
         {...other}
@@ -58,6 +39,17 @@ const Link: React.FC<LinkProps> = ({
         {children}
       </a>
     </NextLink>
+  );
+};
+
+const Link: React.FC<LinkProps> = ({ children, to, ...other }) => {
+  if (!to) {
+    return <>{children}</>;
+  }
+  return (
+    <WrappedLink to={to} {...other}>
+      {children}
+    </WrappedLink>
   );
 };
 
