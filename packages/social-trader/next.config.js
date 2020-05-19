@@ -26,6 +26,10 @@ function create(path) {
         "/invest/programs/favorites": {
           page: "/invest/programs",
           query: { favorites: true }
+        },
+        "/invest/funds/favorites": {
+          page: "/invest/funds",
+          query: { favorites: true }
         }
       };
     },

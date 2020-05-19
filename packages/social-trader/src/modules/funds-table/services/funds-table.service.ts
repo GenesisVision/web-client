@@ -43,8 +43,8 @@ export const fetchFunds: FetchFundsType = (filters, token) => {
 };
 
 export const getFiltersFromContext = (ctx: NextPageWithReduxContext) => {
-  const showFavorites = ctx.pathname.includes(FAVORITES_TAB_NAME);
-  const { asPath = "", pathname } = ctx;
+  const { asPath = "", pathname, query } = ctx;
+  const showFavorites = query[FAVORITES_TAB_NAME];
   const {
     page,
     sorting = SORTING_FILTER_VALUE,
