@@ -25,7 +25,7 @@ import {
 } from "../transfer.types";
 import TransferForm from "./transfer-form";
 
-const _TransferContainer: React.FC<Props> = ({
+const _TransferContainer: React.FC<TransferContainerProps> = ({
   successMessage,
   singleCurrentItemContainer,
   onApply,
@@ -112,15 +112,16 @@ const _TransferContainer: React.FC<Props> = ({
   );
 };
 
-interface Props {
+export interface TransferContainerProps {
+  outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
-  singleCurrentItemContainer: boolean;
-  onApply: VoidFunction;
+  singleCurrentItemContainer?: boolean;
+  onApply?: VoidFunction;
   currentItem: WalletItemType;
-  onClose: VoidFunction;
+  onClose?: VoidFunction;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
-  title: string;
+  title?: string;
   currentItemContainer: TRANSFER_CONTAINER;
 }
 
