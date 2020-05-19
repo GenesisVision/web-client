@@ -17,10 +17,9 @@ const _NavigationTabs: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
-  const { pathname } = useRouter();
-  const tab = pathname.includes(favoritesTabName)
-    ? favoritesTabName
-    : exploreTabName;
+  const { query } = useRouter();
+  const tab = query[favoritesTabName] ? favoritesTabName : exploreTabName;
+
   return (
     <div className={styles["navigation-tabs"]}>
       <GVTabs value={tab}>
@@ -45,6 +44,9 @@ const _NavigationTabs: React.FC<Props> = ({
               to={linkCreator(
                 replaceParams(tabRoute, {
                   ":tab": favoritesTabName
+                }),
+                replaceParams(tabRoute, {
+                  "/:tab": `?${favoritesTabName}=true`
                 })
               )}
             >
