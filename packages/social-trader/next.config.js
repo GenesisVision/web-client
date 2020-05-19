@@ -30,6 +30,10 @@ function create(path) {
         "/invest/funds/favorites": {
           page: "/invest/funds",
           query: { favorites: true }
+        },
+        "/invest/follow/favorites": {
+          page: "/invest/follow",
+          query: { favorites: true }
         }
       };
     },
