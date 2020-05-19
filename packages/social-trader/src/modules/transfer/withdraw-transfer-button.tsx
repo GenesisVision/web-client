@@ -35,6 +35,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
 };
 
 interface Props {
+  accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
   size?: GV_BTN_SIZE;
   currentItem: WalletItemType;

@@ -10,6 +10,7 @@ const TransferContainer = dynamic(() =>
 );
 
 const _TransferPopup: React.FC<Props> = ({
+  accountId,
   outerCurrentItemContainerItems,
   successMessage = "",
   singleCurrentItemContainer,
@@ -24,6 +25,7 @@ const _TransferPopup: React.FC<Props> = ({
 }) => (
   <Dialog open={open} onClose={onClose!}>
     <TransferContainer
+      accountId={accountId}
       outerCurrentItemContainerItems={outerCurrentItemContainerItems}
       successMessage={successMessage}
       singleCurrentItemContainer={singleCurrentItemContainer}

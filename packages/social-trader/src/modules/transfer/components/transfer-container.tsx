@@ -1,5 +1,4 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import Crashable from "decorators/crashable";
 import {
   InternalTransferRequest,
   InternalTransferRequestType
@@ -26,6 +25,7 @@ import {
 import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<TransferContainerProps> = ({
+  accountId,
   outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer,
@@ -61,8 +61,14 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     request: transferRequest
   });
   const handleSubmit = useCallback(
-    (values: InternalTransferRequest) => sendTransferRequest(values),
-    [destinationType, sourceType]
+    (values: InternalTransferRequest) => {
+      const destinationId =
+        destinationType === "ExchangeAccount"
+          ? accountId
+          : values.destinationId;
+      return sendTransferRequest({ ...values, destinationId });
+    },
+    [destinationType, sourceType, destinationType, accountId]
   );
   useEffect(() => {
     if (
@@ -115,6 +121,7 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
 };
 
 export interface TransferContainerProps {
+  accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
   singleCurrentItemContainer?: boolean;
