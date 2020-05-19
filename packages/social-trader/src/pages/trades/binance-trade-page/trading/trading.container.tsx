@@ -46,7 +46,7 @@ const _TradingContainer: React.FC<Props> = ({ authData, symbol }) => {
     <div className={styles["trading-grid"]}>
       <TradingTickerContextProvider>
         <Center className={styles["header-grid-elem"]}>
-          {/*<TradeHeaderContainer />*/}
+          <TradeHeaderContainer />
         </Center>
         <div className={styles["symbol-summary-grid-elem"]}>
           <ResponsiveContainer enabledScreens={["tablet", "landscape-tablet"]}>

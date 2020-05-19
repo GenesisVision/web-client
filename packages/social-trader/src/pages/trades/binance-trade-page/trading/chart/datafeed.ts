@@ -1,8 +1,4 @@
 import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
-import {
-  BINANCE_WS_API_TYPE,
-  BINANCE_WS_API_URL
-} from "pages/trades/binance-trade-page/services/binance-ws.service";
 import { IBasicDataFeed } from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
 import {
   Bar,
@@ -15,10 +11,33 @@ import {
   unsubscribeFromStream
 } from "pages/trades/binance-trade-page/trading/chart/streaming.js";
 import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
-import { Socket } from "services/websocket.service";
+
+const formatTimeResolution = (resolution: string) => {
+  if (resolution.match("M")) return resolution;
+  if (resolution.match("D|W")) return resolution.toLowerCase();
+  if (parseInt(resolution) >= 60) {
+    return `${parseInt(resolution) / 60}h`;
+  }
+  return `${resolution}m`;
+};
 
 const configurationData = {
-  supported_resolutions: ["1D", "1W", "1M"],
+  supported_resolutions: [
+    "1",
+    "3",
+    "5",
+    "15",
+    "30",
+    "60",
+    "120",
+    "240",
+    "360",
+    "480",
+    "720",
+    "1D",
+    "1W",
+    "1M"
+  ],
   exchanges: [
     {
       value: "Binance",
@@ -33,15 +52,13 @@ const configurationData = {
     }
   ]
 };
+
 export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
   //@ts-ignore
   onReady: callback => {
-    // console.log("[onReady]: Method call");
     setTimeout(() => callback(configurationData));
   },
   searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
-    // console.info(userInput, exchange, symbolType, onResultReadyCallback);
-    // console.info(symbols);
     return symbols.filter(sym => sym.baseAsset === userInput);
   },
   resolveSymbol: async (
@@ -49,12 +66,8 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
     onSymbolResolvedCallback,
     onResolveErrorCallback
   ) => {
-    // console.log("[resolveSymbol]: Method call", symbolName);
-    // const symbols = await getAllSymbols();
     const symbolItem = symbols.find(({ symbol }) => symbol === symbolName);
-    // console.info(symbols, symbolName);
     if (!symbolItem) {
-      // console.log("[resolveSymbol]: Cannot resolve symbol", symbolName);
       onResolveErrorCallback("cannot resolve symbol");
       return;
     }
@@ -69,9 +82,10 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
       exchange: "crypto",
       minmov: 1,
       pricescale: 100,
-      has_intraday: false,
+      has_intraday: true,
       has_no_volume: true,
-      has_weekly_and_monthly: false,
+      has_daily: true,
+      has_weekly_and_monthly: true,
       supported_resolutions: configurationData.supported_resolutions,
       volume_precision: 2,
       data_status: symbolItem.status as any,
@@ -79,8 +93,6 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
       listed_exchange: "",
       format: "price" as SeriesFormat
     };
-    //
-    // console.log("[resolveSymbol]: Symbol resolved", symbolName);
     onSymbolResolvedCallback(symbolInfo);
   },
   getBars: async (
@@ -96,7 +108,7 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
     const toms = to * 1000;
     const urlParameters = {
       symbol: symbolInfo.full_name,
-      interval: resolution.toLowerCase(),
+      interval: formatTimeResolution(resolution),
       startTime: fromms,
       endTime: toms
     };
@@ -120,7 +132,6 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
       });
       onHistoryCallback(bars, { noData: false });
     } catch (error) {
-      console.log("[getBars]: Get error", error);
       onErrorCallback(error);
     }
   },
@@ -131,34 +142,16 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
     subscribeUID,
     onResetCacheNeededCallback
   ) => {
-    console.log(
-      "[subscribeBars]: Method call with subscribeUID:",
-      subscribeUID
-    );
-
     const { full_name } = symbolInfo;
 
-    const socketName = `${full_name.toLowerCase()}@kline_${resolution.toLowerCase()}`;
-    const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-    const socket = new Socket(url);
-
-    const stream = socket.subscribe().subscribe(data => {
-      onRealtimeCallback({
-        time: data.k.t,
-        open: data.k.o,
-        high: data.k.h,
-        low: data.k.l,
-        close: data.k.c
-      });
-      console.info(data);
-    });
+    subscribeOnStream(
+      subscribeUID,
+      full_name.toLowerCase(),
+      formatTimeResolution(resolution),
+      onRealtimeCallback
+    );
   },
   unsubscribeBars: subscriberUID => {
-    console.log(
-      "[unsubscribeBars]: Method call with subscriberUID:",
-      subscriberUID
-    );
-
     unsubscribeFromStream(subscriberUID);
   }
 });
