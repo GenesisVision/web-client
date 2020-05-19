@@ -15,12 +15,13 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
   asset,
   updateItems
 }) => {
-  const currentItemContainerItems =
-    asset.accountInfo.type === "ExchangeAccount"
-      ? asset.accountInfo.balances.map(
-          transformAmountWithCurrencyToTransferItem
-        )
-      : undefined;
+  const isExchangeAccount = asset.accountInfo.type === "ExchangeAccount";
+  const currentItemContainerItems = isExchangeAccount
+    ? asset.accountInfo.balances.map(transformAmountWithCurrencyToTransferItem)
+    : undefined;
+  const currentItem = isExchangeAccount
+    ? transformAmountWithCurrencyToTransferItem(asset.accountInfo.balances[0])
+    : mapAccountToTransferItemType(asset);
   return (
     <>
       {asset.actions.canTransferMoney && (
@@ -28,13 +29,13 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
           <DepositTransferButton
             outerCurrentItemContainerItems={currentItemContainerItems}
             onApply={updateItems}
-            currentItem={mapAccountToTransferItemType(asset)}
+            currentItem={currentItem}
             accountType={asset.accountInfo.type}
           />
           <WithdrawTransferButton
             outerCurrentItemContainerItems={currentItemContainerItems}
             onApply={updateItems}
-            currentItem={mapAccountToTransferItemType(asset)}
+            currentItem={currentItem}
             accountType={asset.accountInfo.type}
           />
         </>
