@@ -11,13 +11,17 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _DepositTransferButton: React.FC<Props> = props => {
-  const { accountType, size = GV_BTN_SIZE.MIDDLE } = props;
+  const {
+    outerCurrentItemContainerItems,
+    accountType,
+    size = GV_BTN_SIZE.MIDDLE
+  } = props;
   const [t] = useTranslation();
   return (
     <TransferButton
       {...props}
       successMessage={"transfer.confirmation.deposit-success"}
-      singleCurrentItemContainer
+      singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}
       color={"primary"}
       variant={"contained"}
@@ -33,6 +37,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
 };
 
 interface Props {
+  outerCurrentItemContainerItems?: WalletItemType[];
   size?: GV_BTN_SIZE;
   currentItem: WalletItemType;
   onApply: VoidFunction;

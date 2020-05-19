@@ -26,6 +26,7 @@ import {
 import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<TransferContainerProps> = ({
+  outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer,
   onApply,
@@ -64,8 +65,10 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     [destinationType, sourceType]
   );
   useEffect(() => {
+    console.log(singleCurrentItemContainer, outerCurrentItemContainerItems);
     if (
       !singleCurrentItemContainer &&
+      !outerCurrentItemContainerItems &&
       ((currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
         sourceType !== "Wallet") ||
         (currentItemContainer === TRANSFER_CONTAINER.DESTINATION &&
@@ -73,10 +76,10 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     )
       getTradingAccounts(currency);
   }, []);
-  const currentItemContainerItems = useMemo(
-    () => (singleCurrentItemContainer ? [currentItem] : undefined),
-    [currentItem]
-  );
+  const currentItemContainerItems = useMemo(() => {
+    if (outerCurrentItemContainerItems) return outerCurrentItemContainerItems;
+    if (singleCurrentItemContainer) return [currentItem];
+  }, [currentItem]);
   const sourceItems =
     currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
     currentItemContainerItems
@@ -125,5 +128,5 @@ export interface TransferContainerProps {
   currentItemContainer: TRANSFER_CONTAINER;
 }
 
-const TransferContainer = React.memo(Crashable(_TransferContainer));
+const TransferContainer = React.memo(_TransferContainer);
 export default TransferContainer;

@@ -11,13 +11,17 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _WithdrawTransferButton: React.FC<Props> = props => {
-  const { accountType, size = GV_BTN_SIZE.MIDDLE } = props;
+  const {
+    outerCurrentItemContainerItems,
+    accountType,
+    size = GV_BTN_SIZE.MIDDLE
+  } = props;
   const [t] = useTranslation();
   return (
     <TransferButton
       {...props}
       successMessage={"transfer.confirmation.withdraw-success"}
-      singleCurrentItemContainer
+      singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}
       label={t("buttons.withdraw")}
       title={t("transfer.withdraw-from", {
@@ -31,6 +35,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
 };
 
 interface Props {
+  outerCurrentItemContainerItems?: WalletItemType[];
   size?: GV_BTN_SIZE;
   currentItem: WalletItemType;
   onApply: VoidFunction;

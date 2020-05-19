@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./transfer.button.module.scss";
 
 const _TransferButton: React.FC<Props> = ({
+  outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer = false,
   size = GV_BTN_SIZE.LARGE,
@@ -45,6 +46,7 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        outerCurrentItemContainerItems={outerCurrentItemContainerItems}
         successMessage={successMessage}
         singleCurrentItemContainer={singleCurrentItemContainer}
         currentItem={currentItem}
