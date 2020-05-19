@@ -1,0 +1,47 @@
+import { DashboardTradingAsset } from "gv-api-web";
+import { DemoDepositButton } from "modules/demo-deposit/demo-deposit.button";
+import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
+import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-button";
+import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import React from "react";
+
+interface Props {
+  updateItems: VoidFunction;
+  asset: DashboardTradingAsset;
+}
+
+const _DashboardPrivateCardTransfer: React.FC<Props> = ({
+  asset,
+  updateItems
+}) => {
+  return (
+    <>
+      {asset.actions.canTransferMoney && (
+        <>
+          <DepositTransferButton
+            onApply={updateItems}
+            currentItem={mapAccountToTransferItemType(asset)}
+            accountType={asset.accountInfo.type}
+          />
+          <WithdrawTransferButton
+            onApply={updateItems}
+            currentItem={mapAccountToTransferItemType(asset)}
+            accountType={asset.accountInfo.type}
+          />
+        </>
+      )}
+      {asset.actions.canMakeDemoDeposit && (
+        <DemoDepositButton
+          currentDeposit={asset.accountInfo.balance}
+          onApply={updateItems}
+          currency={asset.accountInfo.currency}
+          id={asset.id}
+        />
+      )}
+    </>
+  );
+};
+
+export const DashboardPrivateCardTransfer = React.memo(
+  _DashboardPrivateCardTransfer
+);
