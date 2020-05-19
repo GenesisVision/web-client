@@ -21,6 +21,14 @@ function create(path) {
   dotenv.config({ path: ".env" });
 
   const nextConfig = {
+    exportPathMap: async function() {
+      return {
+        "/invest/programs/favorites": {
+          page: "/invest/programs",
+          query: { favorites: true }
+        }
+      };
+    },
     serverRuntimeConfig: {
       apiUrl: process.env.SERVER_API_URL
     },

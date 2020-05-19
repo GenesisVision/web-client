@@ -31,9 +31,10 @@ export const fetchPrograms = (
 
 export const getFiltersFromContext = ({
   asPath = "",
-  pathname
+  pathname,
+  query
 }: NextPageWithReduxContext | NextPageContext) => {
-  const showFavorites = pathname.includes(FAVORITES_TAB_NAME);
+  const showFavorites = Boolean(query[FAVORITES_TAB_NAME]);
   const {
     page,
     sorting = SORTING_FILTER_VALUE,
