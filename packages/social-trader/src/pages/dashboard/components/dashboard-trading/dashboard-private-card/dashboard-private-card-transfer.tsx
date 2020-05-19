@@ -27,6 +27,7 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
       {asset.actions.canTransferMoney && (
         <>
           <DepositTransferButton
+            fixedSelects={isExchangeAccount}
             accountId={asset.id}
             outerCurrentItemContainerItems={currentItemContainerItems}
             onApply={updateItems}
@@ -34,6 +35,7 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
             accountType={asset.accountInfo.type}
           />
           <WithdrawTransferButton
+            fixedSelects={isExchangeAccount}
             accountId={asset.id}
             outerCurrentItemContainerItems={currentItemContainerItems}
             onApply={updateItems}

@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./transfer.button.module.scss";
 
 const _TransferButton: React.FC<Props> = ({
+  fixedSelects,
   accountId,
   outerCurrentItemContainerItems,
   successMessage,
@@ -47,6 +48,7 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        fixedSelects={fixedSelects}
         accountId={accountId}
         outerCurrentItemContainerItems={outerCurrentItemContainerItems}
         successMessage={successMessage}

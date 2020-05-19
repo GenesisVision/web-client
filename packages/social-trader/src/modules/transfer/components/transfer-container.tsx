@@ -25,6 +25,7 @@ import {
 import TransferForm from "./transfer-form";
 
 const _TransferContainer: React.FC<TransferContainerProps> = ({
+  fixedSelects,
   accountId,
   outerCurrentItemContainerItems,
   successMessage,
@@ -105,10 +106,11 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     }
   }, [sourceItems, destinationItems]);
 
+  if (!items) return null;
   return (
     <TransferForm
-      loaderData={getTransferFormLoaderData(currentItem, wallets)}
-      data={items!}
+      fixedSelects={fixedSelects}
+      data={items}
       sourceType={sourceType}
       destinationType={destinationType}
       title={title}
@@ -121,6 +123,7 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
 };
 
 export interface TransferContainerProps {
+  fixedSelects?: boolean;
   accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;

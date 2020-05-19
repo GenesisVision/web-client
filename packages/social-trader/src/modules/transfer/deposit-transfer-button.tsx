@@ -37,6 +37,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
 };
 
 interface Props {
+  fixedSelects?: boolean;
   accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
   size?: GV_BTN_SIZE;
