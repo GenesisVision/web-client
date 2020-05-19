@@ -1,5 +1,8 @@
 import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
-import { IBasicDataFeed } from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
+import {
+  IBasicDataFeed,
+  SearchSymbolResultItem
+} from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
 import {
   Bar,
   LibrarySymbolInfo,
@@ -22,6 +25,7 @@ const formatTimeResolution = (resolution: string) => {
 };
 
 const configurationData = {
+  supports_search: false,
   supported_resolutions: [
     "1",
     "3",
@@ -58,8 +62,18 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
   onReady: callback => {
     setTimeout(() => callback(configurationData));
   },
-  searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
-    return symbols.filter(sym => sym.baseAsset === userInput);
+  searchSymbols: (userInput, exchange, type, onResultReadyCallback) => {
+    const items: SearchSymbolResultItem[] = symbols
+      .filter(sym => sym.baseAsset === userInput)
+      .map(symbolItem => ({
+        symbol: symbolItem.symbol,
+        full_name: symbolItem.symbol,
+        description: `Binance:${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
+        exchange,
+        type,
+        ticker: symbolItem.symbol
+      }));
+    onResultReadyCallback(items);
   },
   resolveSymbol: async (
     symbolName,

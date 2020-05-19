@@ -16,8 +16,7 @@ export const ChartBlock: React.FC = () => {
     import("./charting_library/charting_library.min").then(TradingView => {
       new TradingView.widget({
         symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
-        interval: "1D", // default interval
-        // fullscreen: true,
+        interval: "1D",
         autosize: true,
         container_id: "tv_chart_container",
         theme: "Dark",
