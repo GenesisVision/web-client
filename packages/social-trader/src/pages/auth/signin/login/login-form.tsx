@@ -37,7 +37,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
   const requestStatus = useContext(CaptchaStatusContext);
 
   return (
-    <HookForm className="login-form" form={form} onSubmit={onSubmit}>
+    <HookForm form={form} onSubmit={onSubmit}>
       <GVHookFormField
         wide
         autoFocus

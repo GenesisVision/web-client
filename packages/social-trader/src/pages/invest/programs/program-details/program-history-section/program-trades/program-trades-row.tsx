@@ -1,3 +1,4 @@
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
@@ -22,7 +23,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
   const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
   return (
     <TableRow stripy>
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         <BaseProfitability
           isPositive={trade.direction === "Buy"}
           isNegative={trade.direction === "Sell"}
@@ -31,8 +32,10 @@ const _ProgramTradesRow: React.FC<Props> = ({
         </BaseProfitability>
         {` / ${trade.entry}`}
       </TableCell>
-      <TableCell className="details-trades__cell">{trade.symbol}</TableCell>
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
+        {trade.symbol}
+      </TableCell>
+      <TableCell className={styles["details-trades__cell"]}>
         <Tooltip
           disable={trade.volume >= volume}
           render={() => <TooltipContent>{trade.volume}</TooltipContent>}
@@ -40,14 +43,14 @@ const _ProgramTradesRow: React.FC<Props> = ({
           <span>{trade.volume < volume ? `< ${volume}` : volume}</span>
         </Tooltip>
       </TableCell>
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         <NumberFormat
           value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
           thousandSeparator=" "
         />
       </TableCell>
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         <Profitability
           value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -60,19 +63,23 @@ const _ProgramTradesRow: React.FC<Props> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         <TradesHistoryFeesTooltipWithOwner trade={trade} />
       </TableCell>
       {showSwaps && (
-        <TableCell className="details-trades__cell">{trade.swap}</TableCell>
+        <TableCell className={styles["details-trades__cell"]}>
+          {trade.swap}
+        </TableCell>
       )}
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         {formatDate(trade.date)}
       </TableCell>
       {showTickets && (
-        <TableCell className="details-trades__cell">{trade.ticket}</TableCell>
+        <TableCell className={styles["details-trades__cell"]}>
+          {trade.ticket}
+        </TableCell>
       )}
-      <TableCell className="details-trades__cell">
+      <TableCell className={styles["details-trades__cell"]}>
         {!!trade.providers.length && (
           <ProvidersButton providers={trade.providers} />
         )}

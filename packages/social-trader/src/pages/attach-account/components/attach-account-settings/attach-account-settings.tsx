@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
-import "./attach-account-settings.scss";
+import styles from "./attach-account-settings.module.scss";
 import {
   attachAccountSettingsMapPropsToValues,
   attachAccountSettingsValidationSchema
@@ -123,7 +123,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           <GVHookFormField
             showCorrect
             wide
-            className="attach-account-settings__api-field"
+            className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.key}
             label={t("attach-account-page.settings.fields.api-key")}
@@ -135,7 +135,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           <GVHookFormField
             showCorrect
             wide
-            className="attach-account-settings__api-field"
+            className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.secret}
             label={t("attach-account-page.settings.fields.api-secret")}

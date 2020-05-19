@@ -3,6 +3,8 @@ import { TInfoList } from "pages/landing-page/static-data/info";
 import React from "react";
 import { animated, config, useTransition } from "react-spring";
 
+import styles from "./info-list-wrapper.module.scss";
+
 interface Props {
   currentInfoList: TInfoList;
 }
@@ -20,7 +22,7 @@ const _InfoListWrapperWithAnimation: React.FC<Props> = ({
     <>
       {transitions.map(({ item, props, key }) => (
         <animated.div
-          className="info-container__tab-info info-container__tab-info--animation"
+          className={styles["info-list-wrapper"]}
           key={key}
           style={props as any}
         >

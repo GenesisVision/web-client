@@ -18,7 +18,7 @@ import { formatCurrencyValue } from "utils/formatter";
 
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
-import "./wallet-list.scss";
+import styles from "./wallet-list.module.scss";
 
 const _WalletList: React.FC<Props> = ({ wallets }) => {
   const [t] = useTranslation();
@@ -31,9 +31,7 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
         items={wallets}
         columns={WALLET_LIST_COLUMNS}
         renderHeader={column => (
-          <span className={` --${column.name}`}>
-            {t(`wallet-page.list.${column.name}`)}
-          </span>
+          <span>{t(`wallet-page.list.${column.name}`)}</span>
         )}
         renderBodyRow={(wallet: WalletData) => (
           <TableRow key={wallet.id}>
@@ -88,7 +86,7 @@ const _WalletList: React.FC<Props> = ({ wallets }) => {
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="wallet-list__cell--buttons">
+            <TableCell className={styles["wallet-list__cell--buttons"]}>
               <WalletListButton wallet={wallet} />
             </TableCell>
           </TableRow>

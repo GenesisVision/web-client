@@ -6,7 +6,7 @@ import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 
-import "./share.scss";
+import styles from "./share.module.scss";
 
 export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
@@ -18,7 +18,7 @@ export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
   return (
     <>
       <Center onClick={setIsOpen}>
-        <RowItem className={"share__icon"} small>
+        <RowItem className={styles["share__icon"]} small>
           <ShareIcon />
         </RowItem>
         {count > 0 && <RowItem>{count}</RowItem>}

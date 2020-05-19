@@ -2,6 +2,8 @@ import Link from "components/link/link";
 import { useTranslation } from "i18n";
 import React from "react";
 
+import styles from "./seo-list.module.scss";
+
 interface ISeoItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   state?: string;
   name: string;
@@ -14,9 +16,9 @@ const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => {
   const { t } = useTranslation();
   const title = t(name);
   return (
-    <li className="seo-list__item">
+    <li className={styles["seo-list__item"]}>
       {href.includes("http") ? (
-        <a title={title} href={href} className="seo-list__link">
+        <a title={title} href={href} className={styles["seo-list__link"]}>
           {title}
         </a>
       ) : (
@@ -24,7 +26,7 @@ const _SeoItem: React.FC<ISeoItemProps> = ({ href, name, state, onClick }) => {
           title={title}
           onClick={onClick}
           to={{ pathname: href as string, state }}
-          className="seo-list__link"
+          className={styles["seo-list__link"]}
         >
           {title}
         </Link>

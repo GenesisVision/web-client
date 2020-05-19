@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
@@ -64,24 +65,26 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
         />
       </Row>
       <Row>
-        <GVHookFormField
-          className={className}
-          component={SimpleTextField}
-          label={t("auth.password-change.password")}
-          type="password"
-          name={PASSWORD_CHANGE_FORM_FIELDS.password}
-          autoComplete="new-password"
-        />
-      </Row>
-      <Row>
-        <GVHookFormField
-          className={className}
-          component={SimpleTextField}
-          label={t("auth.password-change.confirm-password")}
-          type="password"
-          name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
-          autoComplete="new-password"
-        />
+        <RowItem>
+          <GVHookFormField
+            className={className}
+            component={SimpleTextField}
+            label={t("auth.password-change.password")}
+            type="password"
+            name={PASSWORD_CHANGE_FORM_FIELDS.password}
+            autoComplete="new-password"
+          />
+        </RowItem>
+        <RowItem>
+          <GVHookFormField
+            className={className}
+            component={SimpleTextField}
+            label={t("auth.password-change.confirm-password")}
+            type="password"
+            name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
+            autoComplete="new-password"
+          />
+        </RowItem>
       </Row>
       {errorMessage && (
         <Row>

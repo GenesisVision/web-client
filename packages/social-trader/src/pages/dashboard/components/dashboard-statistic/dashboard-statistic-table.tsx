@@ -15,6 +15,8 @@ import NumberFormat from "react-number-format";
 import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
+import styles from "./dashboard-statistic.module.scss";
+
 const DASHBOARD_STATISTIC_COLUMNS = [
   {
     name: "date"
@@ -26,11 +28,10 @@ const DASHBOARD_STATISTIC_COLUMNS = [
     name: "amount"
   }
 ];
-
 const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
   return (
-    <div className="dashboard-statistic__table-block">
+    <div className={styles["dashboard-statistic__table-block"]}>
       <Table
         hideToolbar
         columns={DASHBOARD_STATISTIC_COLUMNS}
@@ -46,7 +47,9 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
               <TableCell>
                 {humanizedDate ? <>{humanizedDate} ago</> : "Less minute ago"}
               </TableCell>
-              <TableCell className="dashboard-statistic__event-description">
+              <TableCell
+                className={styles["dashboard-statistic__event-description"]}
+              >
                 <Center>
                   {event.assetDetails && (
                     <RowItem>

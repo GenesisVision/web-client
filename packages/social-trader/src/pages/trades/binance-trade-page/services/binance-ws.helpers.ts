@@ -36,8 +36,9 @@ export const tradeTransform = ({
   };
 };
 
-export const depthTransform = ({ e, E, s, U, u, b, a }: any): Depth => {
+export const depthTransform = ({ pu, e, E, s, U, u, b, a }: any): Depth => {
   return {
+    prevLastUpdateId: pu,
     eventType: e,
     eventTime: E,
     symbol: s,

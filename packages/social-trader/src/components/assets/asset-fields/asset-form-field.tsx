@@ -9,7 +9,7 @@ import { Row } from "components/row/row";
 import { TextInputValues } from "components/text-input-component/text-input-component";
 import * as React from "react";
 
-import "./asset-form-field.scss";
+import styles from "./asset-form-field.module.scss";
 
 export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({
@@ -44,7 +44,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
         disabled={disabled}
       />
       {caption && (
-        <Row className="asset-form-field__caption">
+        <Row className={styles["asset-form-field__caption"]}>
           <MutedText small>{caption}</MutedText>
           {trimmedLength > 0 && (
             <Center>
@@ -66,7 +66,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
           <MutedText small noWrap={false}>
             <Hint
               content={hintContent}
-              className="asset-form-field__hint"
+              className={styles["asset-form-field__hint"]}
               vertical={VERTICAL_POPOVER_POS.BOTTOM}
               tooltipContent={hintTooltipContent}
             />

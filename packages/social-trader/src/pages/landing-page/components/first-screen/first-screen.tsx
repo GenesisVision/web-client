@@ -1,5 +1,3 @@
-import "pages/landing-page/styles/home.scss";
-
 import { PlatformNews } from "gv-api-web";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";

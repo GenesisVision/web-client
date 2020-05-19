@@ -6,7 +6,7 @@ import {
 } from "components/details/details-statistic-section/details.chart.types";
 import { ISelectChangeEvent } from "components/select/select";
 import { PlatformCurrencyInfo } from "gv-api-web";
-import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { platformCurrenciesSelector } from "reducers/platform-reducer";

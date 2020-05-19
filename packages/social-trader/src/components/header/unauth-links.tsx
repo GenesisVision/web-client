@@ -7,11 +7,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 
+import styles from "./header.module.scss";
+
 const UnauthLinks: React.FC<Props> = ({ backPath }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <Center className="header__buttons">
+    <Center className={styles["header__buttons"]}>
       <RowItem>
         <Link
           to={{
@@ -25,7 +27,6 @@ const UnauthLinks: React.FC<Props> = ({ backPath }) => {
         </Link>
       </RowItem>
       <RowItem>
-        {" "}
         <Link to={linkCreator(SIGNUP_ROUTE)}>
           <GVButton variant="contained" color="primary">
             {t("auth.signup.title")}

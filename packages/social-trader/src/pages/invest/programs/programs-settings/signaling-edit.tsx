@@ -22,7 +22,6 @@ const _SignalingEdit: React.FC<Props> = ({
         {!isSignalProgram && canMakeSignal && (
           <GVSwitch
             touched={false}
-            className="notification-setting__switch"
             name={"isSignal"}
             value={isSignal}
             color="primary"

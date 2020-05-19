@@ -45,6 +45,7 @@ const _SignalingEdit: React.FC<Props> = ({
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       {showFields && (
         <SignalsFeeFormPartial
+          inDialog={inDialog}
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
         />

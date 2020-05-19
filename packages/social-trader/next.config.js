@@ -1,8 +1,6 @@
 const path = require("path");
 const dotenv = require("dotenv");
 const fonts = require("nextjs-fonts");
-const sass = require("@zeit/next-sass");
-const css = require("@zeit/next-css");
 const withPlugins = require("next-compose-plugins");
 const images = require("next-images");
 const workers = require("@zeit/next-workers");
@@ -56,20 +54,13 @@ function create(path) {
     [
       analyzer,
       [
-        sass,
         {
           typescript: {
             ignoreDevErrors: true
-          },
-          cssModules: true,
-          cssLoaderOptions: {
-            importLoaders: 1,
-            localIdentName: "[local]"
           }
         }
       ],
       fonts,
-      css,
       images,
       [
         workers,

@@ -1,5 +1,3 @@
-import "./statistic-item.scss";
-
 import {
   IStatisticItemContainerBlockProps,
   StatisticItemContainerBlock

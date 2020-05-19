@@ -1,24 +1,37 @@
 import useApiRequest from "hooks/api-request.hook";
+import Router from "next/router";
+import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
-  updateAccountInfo,
-  useTradeAuth
+  stringifySymbolFromToParam,
+  updateAccountInfo
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   ExchangeInfo,
+  TerminalType,
+  TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import * as qs from "qs";
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState
 } from "react";
+import { BINANCE_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
+
+interface Props {
+  authData: TradeAuthDataType;
+  outerSymbol?: SymbolState;
+  type?: TerminalType;
+}
 
 export type SymbolState = {
   quoteAsset: TradeCurrency;
@@ -26,6 +39,8 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
+  authData: TradeAuthDataType;
+  terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
@@ -39,6 +54,11 @@ const SymbolInitialState: SymbolState = {
 };
 
 export const TradingAccountInfoInitialState: TradingAccountInfoState = {
+  authData: {
+    publicKey: "",
+    privateKey: ""
+  },
+  terminalType: "spot",
   setSymbol: () => {},
   symbol: SymbolInitialState
 };
@@ -47,14 +67,22 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
   TradingAccountInfoInitialState
 );
 
-export const TradingInfoContextProvider: React.FC = ({ children }) => {
+export const TradingInfoContextProvider: React.FC<Props> = ({
+  authData: authDataProp,
+  outerSymbol = SymbolInitialState,
+  type,
+  children
+}) => {
+  const [terminalType, setTerminalType] = useState<TerminalType>(
+    type || "spot"
+  );
   const {
     getExchangeInfo,
     getAccountInformation,
     getUserStreamKey,
     getUserStreamSocket
   } = useContext(TerminalMethodsContext);
-  const { authData } = useTradeAuth();
+  const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
   const { data: exchangeInfo } = useApiRequest<ExchangeInfo>({
@@ -64,9 +92,13 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
 
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
-  const [symbol, setSymbol] = useState<SymbolState>(SymbolInitialState);
+  const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  useEffect(() => {
+    if (type) setTerminalType(type);
+  }, [type]);
 
   useEffect(() => {
     if (!authData.publicKey) return;
@@ -95,9 +127,38 @@ export const TradingInfoContextProvider: React.FC = ({ children }) => {
     setAccountInfo(updatedData);
   }, [socketData]);
 
+  const handleSetSymbol = useCallback(
+    (newSymbol: SymbolState) => {
+      setSymbol(newSymbol);
+      const symbolPath = stringifySymbolFromToParam(newSymbol);
+      const terminalTypeParam = qs.stringify({
+        [TYPE_PARAM_NAME]: terminalType
+      });
+      const route = `${BINANCE_ROUTE}/${symbolPath}?${terminalTypeParam}`;
+      Router.replace(route);
+    },
+    [setSymbol, terminalType]
+  );
+
   const value = useMemo(
-    () => ({ userStream, setSymbol, symbol, accountInfo, exchangeInfo }),
-    [userStream, setSymbol, symbol, accountInfo, exchangeInfo]
+    () => ({
+      authData,
+      terminalType,
+      userStream,
+      setSymbol: handleSetSymbol,
+      symbol,
+      accountInfo,
+      exchangeInfo
+    }),
+    [
+      authData,
+      terminalType,
+      userStream,
+      handleSetSymbol,
+      symbol,
+      accountInfo,
+      exchangeInfo
+    ]
   );
 
   return (

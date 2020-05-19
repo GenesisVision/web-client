@@ -7,7 +7,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { distanceDate } from "utils/dates";
 
-import "./program-period-line.scss";
+import styles from "./program-period-line.module.scss";
 
 const _ProgramPeriodLine: React.FC<Props> = ({
   start,
@@ -19,14 +19,14 @@ const _ProgramPeriodLine: React.FC<Props> = ({
   const duration = distanceDate(start, end);
   const timeLeft = distanceDate(end);
   return (
-    <div className={classNames("program-period-line", className)}>
+    <div className={classNames(styles["program-period-line"], className)}>
       <GVProgramPeriod
         start={start}
         end={end}
         value={new Date()}
         variant="line"
       />
-      <Row small className="program-period-line__description">
+      <Row small className={styles["program-period-line__description"]}>
         <div>
           <b>{duration}</b>
         </div>

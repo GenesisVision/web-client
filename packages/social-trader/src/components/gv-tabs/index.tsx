@@ -1,10 +1,9 @@
-import "./style.scss";
-
 import classNames from "classnames";
 import { Row } from "components/row/row";
 import React from "react";
 
 import { GVTabProps } from "./gv-tab";
+import styles from "./style.module.scss";
 
 export interface GVTabsProps {
   value: string;
@@ -31,8 +30,8 @@ const GVTabs: React.FC<GVTabsProps> = ({
   const visibleTabs = children.filter(child => child.props.visible).length;
   return (
     <Row
-      className={classNames(className, "gv-tabs", {
-        "gv-tabs--title": visibleTabs === 1
+      className={classNames(className, styles["gv-tabs"], {
+        [styles["gv-tabs--title"]]: visibleTabs === 1
       })}
     >
       {tabs}

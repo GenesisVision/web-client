@@ -1,6 +1,5 @@
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
@@ -13,12 +12,12 @@ import {
   filterForSearch,
   FILTERING_CURRENCIES,
   FilteringType,
+  FilteringVariant,
   getFilteringFunction,
   SortingType,
   sortMarketWatchItems
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useMemo, useState } from "react";
 
@@ -29,14 +28,12 @@ interface Props {
 }
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {
-  const {
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
-
+  const { terminalType } = useContext(TradingInfoContext);
   const [column, setColumn] = useState<string>(CHANGE_COLUMN);
   const [search, setSearch] = useState<string>("");
-  const [filteringType, setFilteringType] = useState<"margin" | "symbol">(
-    "margin"
+  const initFiltering = terminalType === "spot" ? "margin" : undefined;
+  const [filteringType, setFilteringType] = useState<FilteringVariant>(
+    initFiltering
   );
   const [sorting, setSorting] = useState<SortingType>({
     dataType: "string",
@@ -56,52 +53,49 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
   return (
     <>
       <Row small>
-        <RowItem>
-          <MutedText>{getSymbol(baseAsset, quoteAsset)}</MutedText>
-        </RowItem>
-        <RowItem>
-          <GlobalSearchInput
-            autoFocus={false}
-            size={"small"}
-            query={search}
-            onChange={setSearch}
-            canClose={false}
-          />
-        </RowItem>
+        <GlobalSearchInput
+          autoFocus={false}
+          size={"small"}
+          query={search}
+          onChange={setSearch}
+          canClose={false}
+        />
       </Row>
-      <Row small>
-        <RowItem>
-          <GVButton
-            noPadding
-            disabled={filteringType === "margin"}
-            variant={"text"}
-            size={GV_BTN_SIZE.SMALL}
-            onClick={() => {
-              setFilteringType("margin");
-            }}
-          >
-            Margin
-          </GVButton>
-        </RowItem>
-        {FILTERING_CURRENCIES.map(currency => (
+      {terminalType === "spot" && (
+        <Row small>
           <RowItem>
             <GVButton
               noPadding
-              disabled={
-                filteringType === "symbol" && filtering.value === currency
-              }
+              disabled={filteringType === "margin"}
               variant={"text"}
               size={GV_BTN_SIZE.SMALL}
               onClick={() => {
-                setFilteringType("symbol");
-                setFiltering({ value: currency });
+                setFilteringType("margin");
               }}
             >
-              {currency}
+              Margin
             </GVButton>
           </RowItem>
-        ))}
-      </Row>
+          {FILTERING_CURRENCIES.map(currency => (
+            <RowItem>
+              <GVButton
+                noPadding
+                disabled={
+                  filteringType === "symbol" && filtering.value === currency
+                }
+                variant={"text"}
+                size={GV_BTN_SIZE.SMALL}
+                onClick={() => {
+                  setFilteringType("symbol");
+                  setFiltering({ value: currency });
+                }}
+              >
+                {currency}
+              </GVButton>
+            </RowItem>
+          ))}
+        </Row>
+      )}
       <Row small>
         <Select
           size={"small"}

@@ -1,3 +1,4 @@
+import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -24,7 +25,7 @@ interface IManagerHistoryRowProps {
 export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
   ({ label, children }) => {
     return (
-      <RowItem large bottomOffset>
+      <RowItem xlarge bottomOffset>
         <StatisticItemInner label={label}>{children}</StatisticItemInner>
       </RowItem>
     );
@@ -39,18 +40,17 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   assetType
 }) => {
   return (
-    <tr>
+    <tr className={styles["manager-history-row"]}>
       <td>
-        <DefaultBlock
-          verticalOffsets={false}
-          solid
-          hoverable
-          size={SIZES.LARGE}
-        >
+        <DefaultBlock verticalOffsets={false} size={SIZES.LARGE}>
           <Row />
-          <Row large>
-            <RowItem>{avatarBlock}</RowItem>
-            <RowItem wide>{tileBlock}</RowItem>
+          <Row large center={false}>
+            <RowItem wide bottomOffset>
+              <Center wrap>
+                <RowItem>{avatarBlock}</RowItem>
+                <RowItem>{tileBlock}</RowItem>
+              </Center>
+            </RowItem>
             <RowItem>
               <IconFavoriteButton asset={asset} assetType={assetType} />
             </RowItem>

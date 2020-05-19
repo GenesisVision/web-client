@@ -31,6 +31,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const { connectSocket } = useSockets();
 
   const {
+    terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
@@ -109,7 +110,13 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       } else if (list) {
         const asks = updateDepthList(list.asks, depthSocketData.asks);
         const bids = updateDepthList(list.bids, depthSocketData.bids);
-        updateOrderBookFromSocketLogger({ depthSocketData, list, asks, bids });
+        updateOrderBookFromSocketLogger({
+          terminalType,
+          depthSocketData,
+          list,
+          asks,
+          bids
+        });
         setList({
           ...list,
           asks,
@@ -135,24 +142,20 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         collapseItems(list ? list.bids : {}, dividerParts, {
           enable: !tickValue?.default
         })
-      )
-        .sort(([priceA], [priceB]) => +priceB - +priceA)
-        .slice(0, count)
+      ).slice(0, count)
     }),
-    [list, dividerParts]
+    [list, dividerParts, tickValue]
   );
   const { asks, bids } = listForRender;
 
   return (
-    <>
-      <OrderBook
-        tickValue={tickValue}
-        setTickValue={setTickValue}
-        tablesBlockRef={ref}
-        asks={asks}
-        bids={bids}
-      />
-    </>
+    <OrderBook
+      tickValue={tickValue}
+      setTickValue={setTickValue}
+      tablesBlockRef={ref}
+      asks={asks}
+      bids={bids}
+    />
   );
 };
 

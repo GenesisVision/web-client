@@ -7,7 +7,7 @@ import {
   useCallback
 } from "react";
 
-import "./gv-datepicker.scss";
+import styles from "./gv-datepicker.module.scss";
 
 const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
   (
@@ -44,7 +44,7 @@ const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
       }
     }, []);
     return (
-      <div className="gv-datepicker">
+      <div className={styles["gv-datepicker"]}>
         <input
           ref={ref}
           onBlur={handleBlur}

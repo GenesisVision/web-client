@@ -10,9 +10,11 @@ import { useCallback, useEffect, useRef } from "react";
 import { SizesType } from "utils/types";
 
 import SelectItem from "./select-item";
-import "./select.scss";
+import styles from "./select.module.scss";
 
 const Select: React.FC<Props> = ({
+  fixedWidth = true,
+  bottomLine,
   size = "middle",
   fixedVertical,
   className,
@@ -117,16 +119,19 @@ const Select: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames("select", className, {
-        "select--middle": size === "middle",
-        "select--small": size === "small",
-        "select--disabled": isDisabled
+      className={classNames(styles["select"], className, {
+        [styles["select--fixed-width"]]: fixedWidth,
+        [styles["select--middle"]]: size === "middle",
+        [styles["select--small"]]: size === "small",
+        [styles["select--disabled"]]: isDisabled
       })}
     >
       <button
         name={name}
         onClick={handleClick}
-        className="select__value"
+        className={classNames(styles["select__value"], {
+          [styles["select__value--bottom-line"]]: bottomLine
+        })}
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={input}
@@ -135,10 +140,10 @@ const Select: React.FC<Props> = ({
         <Center>
           {displayValue && (
             <RowItem small>
-              <span className="select__text">{displayValue}</span>
+              <span className={styles["select__text"]}>{displayValue}</span>
             </RowItem>
           )}
-          <RowItem className="select__icon">
+          <RowItem className={styles["select__icon"]}>
             {!isDisabled && <FilterArrowIcon isOpen={Boolean(anchor)} />}
           </RowItem>
         </Center>
@@ -172,6 +177,8 @@ interface ChildOwnProps {
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface Props {
+  fixedWidth?: boolean;
+  bottomLine?: boolean;
   size?: SizesType;
   fixedVertical?: boolean;
   value: string;

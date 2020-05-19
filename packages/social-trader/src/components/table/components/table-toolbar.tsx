@@ -7,6 +7,7 @@ import React, { useCallback } from "react";
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import styles from "./table.module.scss";
 import {
   RenderFiltersFuncType,
   RenderSortingFuncType,
@@ -46,19 +47,19 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
   const showMappings = renderMappings && updateFilter && filtering;
   const showSortingFilter = view === LIST_VIEW.CARDS && sorting !== undefined;
   return (
-    <Row className="table__toolbar">
+    <Row className={styles["table__toolbar"]}>
       {!showTitle && !showMappings && !showSortingFilter && <div />}
       {showTitle && (
         <RowItem>
-          <h3 className="table__title">{title}</h3>
+          <h3 className={styles["table__title"]}>{title}</h3>
         </RowItem>
       )}
       {showMappings && (
-        <div className="table__mapping">
+        <div className={styles["table__mapping"]}>
           <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
         </div>
       )}
-      <div className="table__sorting-filter">
+      <div className={styles["table__sorting-filter"]}>
         {showSortingFilter && (
           <SortingFilter
             sorting={sorting}
@@ -82,15 +83,15 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
           </RowItem>
           {isViewSwitchEnabled && (
             <RowItem>
-              <Row className="table__toggle">
+              <Row className={styles["table__toggle"]}>
                 <div
-                  className="table__toggle-icon"
+                  className={styles["table__toggle-icon"]}
                   onClick={handleIconClick(LIST_VIEW.CARDS)}
                 >
                   <CardsIcon primary={view === LIST_VIEW.CARDS} />
                 </div>
                 <div
-                  className="table__toggle-icon"
+                  className={styles["table__toggle-icon"]}
                   onClick={handleIconClick(LIST_VIEW.TABLE)}
                 >
                   <TableIcon primary={view === LIST_VIEW.TABLE} />

@@ -1,0 +1,50 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.fees-section {
+  padding-top: 100px;
+  line-height: 1.6;
+
+  @include media-breakpoint-large-desktop() {
+    padding-top: 140px;
+  }
+
+  &__container {
+    @include container();
+
+    @include media-breakpoint-tablet() {
+      @include grid();
+    }
+  }
+
+  p.fees-section__text {
+    margin-bottom: 40px;
+  }
+
+  &__wrapper-controls {
+    text-align: center;
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 4/10;
+    }
+  }
+
+  &__tab-info {
+    @include media-breakpoint-tablet() {
+      grid-column: 2/12;
+    }
+  }
+
+  &__title {
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      text-align: left;
+    }
+  }
+}

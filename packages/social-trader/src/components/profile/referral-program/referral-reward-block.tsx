@@ -1,7 +1,5 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { PartnershipDetails } from "gv-api-web";

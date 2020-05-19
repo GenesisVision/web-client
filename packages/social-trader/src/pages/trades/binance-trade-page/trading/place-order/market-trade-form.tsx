@@ -147,7 +147,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       {direction === "SELL" && (
-        <Row wide onlyOffset>
+        <Row small wide onlyOffset>
           <Slider
             dots
             min={0}

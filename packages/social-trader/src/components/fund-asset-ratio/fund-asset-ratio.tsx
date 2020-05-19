@@ -3,7 +3,7 @@ import { Row } from "components/row/row";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
 
-import "./fund-assets-ratio.scss";
+import styles from "./fund-assets-ratio.module.scss";
 
 const _FundAssetRatio: React.FC<Props> = ({
   showBounds = true,
@@ -15,7 +15,12 @@ const _FundAssetRatio: React.FC<Props> = ({
   let newLevel = 0;
   return (
     <>
-      <div className="fund-asset-ratio fund-asset-ratio--line">
+      <div
+        className={classNames(
+          styles["fund-asset-ratio"],
+          styles["fund-asset-ratio--line"]
+        )}
+      >
         {values.map((item: FundAssetPartWithIcon) => {
           newLevel += item.percent;
           ZIndex--;
@@ -32,11 +37,11 @@ const _FundAssetRatio: React.FC<Props> = ({
         })}
       </div>
       {showBounds && (
-        <Row small className="fund-asset-ratio__values">
-          <div className="fund-asset-ratio__value">0%</div>
+        <Row small className={styles["fund-asset-ratio__values"]}>
+          <div className={styles["fund-asset-ratio__value"]}>0%</div>
           <div
-            className={classNames("fund-asset-ratio__value", {
-              "fund-asset-ratio__value--full":
+            className={classNames(styles["fund-asset-ratio__value"], {
+              [styles["fund-asset-ratio__value--full"]]:
                 values.reduce(
                   (sum: number, item: FundAssetPartWithIcon): number =>
                     sum + item.percent,
@@ -55,7 +60,7 @@ const _FundAssetRatio: React.FC<Props> = ({
 const RatioField: React.FC<IRatioFieldProps> = React.memo(
   ({ handleHover, item, handleLeave, newLevel, ZIndex }) => (
     <div
-      className="fund-asset-ratio--item-line"
+      className={styles["fund-asset-ratio--item-line"]}
       onMouseOver={handleHover && handleHover(item.asset)}
       onMouseLeave={handleLeave && handleLeave}
       style={{

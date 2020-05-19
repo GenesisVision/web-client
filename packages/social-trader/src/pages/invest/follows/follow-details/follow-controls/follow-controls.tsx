@@ -1,4 +1,5 @@
 import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
+import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import {
@@ -33,7 +34,7 @@ const _FollowControls: React.FC<Props> = ({
         successFee={signalSettings.signalSuccessFee}
         volumeFee={signalSettings.signalVolumeFee}
       />
-      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
+      <DetailsStatisticContainer>
         {isAuthenticated ? (
           !isOwnAsset && (
             <SignalProviderButtons
@@ -55,7 +56,7 @@ const _FollowControls: React.FC<Props> = ({
             title={title}
           />
         )}
-      </div>
+      </DetailsStatisticContainer>
     </SignalProviderControls>
   );
 };

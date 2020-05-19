@@ -5,13 +5,11 @@ import SliderPlugin, {
 } from "rc-slider";
 import React from "react";
 
-import styles from "./range.module.scss";
-
 interface IRangeProps extends RangeProps {}
 
 const _Range: React.FC<IRangeProps> = props => {
   return (
-    <div className={styles.range}>
+    <div className={"range"}>
       <RangePlugin {...props} />
     </div>
   );
@@ -23,7 +21,7 @@ interface ISliderProps extends SliderProps {}
 
 const _Slider: React.FC<ISliderProps> = props => {
   return (
-    <div className={styles.range}>
+    <div className={"range"}>
       <SliderPlugin {...props} />
     </div>
   );

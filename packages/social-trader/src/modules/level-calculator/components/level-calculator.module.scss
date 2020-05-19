@@ -1,0 +1,86 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.level-calculator {
+  cursor: pointer;
+}
+
+.level-calculator-popup {
+  @include vertical-paddings($padding-small);
+  @include horizontal-paddings($padding-small);
+
+  @include media-breakpoint-landscape-phone() {
+    max-width: 690px - $padding-small * 2;
+  }
+
+  background-color: $popover-background;
+
+  &__header {
+    justify-content: space-between;
+  }
+
+  &__heading {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  &__close-button {
+    width: auto;
+  }
+
+  &__reset-button-text {
+    color: rgba($text-light-color, 0.5);
+  }
+
+  &__program-name {
+    @include adaptive-margin("top", $padding-small - $padding-xxsmall);
+    @include adaptive-margin("bottom", $padding-xxlarge / 2);
+  }
+
+  &__program-label {
+    opacity: 0.5;
+    letter-spacing: 0.4px;
+    font-size: $font-size-small;
+    @include adaptive-margin("bottom", $padding-xxsmall/2);
+  }
+
+  &__program-title {
+    font-size: $font-size-h4;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include adaptive-margin("bottom", $padding-xsmall);
+  }
+
+  &__calculator-slider {
+    @include adaptive-margin("bottom", $padding-small);
+    .level-calculator-popup__calculator-slider-value {
+      max-width: 70px;
+    }
+  }
+
+  &__statistic-item {
+    min-width: 260px;
+    margin-bottom: $padding-small;
+  }
+
+  &__statistic-item-label {
+    @include font-size($font-size-small);
+    color: $calculator-label-color;
+  }
+
+  &__kyc-disclaimer {
+    @include vertical-paddings($padding-xsmall);
+  }
+
+  &__btn-verify {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -42,42 +42,40 @@ const _ManagerInfo: React.FC<Props> = ({
     regDate
   )}`;
   return (
-    <div>
-      <Row>
-        <DefaultBlock solid wide size={SIZES.LARGE}>
+    <>
+      <DefaultBlock solid size={SIZES.LARGE}>
+        <Row>
+          <ProfileAvatar url={logoUrl} big />
+        </Row>
+        <Row onlyOffset large>
           <Row>
-            <ProfileAvatar url={logoUrl} big />
+            <h2>{username}</h2>
           </Row>
-          <Row onlyOffset large>
-            <Row>
-              <h2>{username}</h2>
-            </Row>
-            <Row small>
-              <MutedText>
-                <b>{memberSince}</b>
-              </MutedText>
-            </Row>
+          <Row small>
+            <MutedText>
+              <b>{memberSince}</b>
+            </MutedText>
           </Row>
-          {isBetaTester && (
-            <>
-              {isOwnPage === false && (
-                <Row onlyOffset large>
-                  <FollowUserButton id={id} value={isFollow} />
-                </Row>
-              )}
-              <Row large>
-                <RowItem>
-                  <FollowersCountItem id={id} count={followers} />
-                </RowItem>
-                <RowItem>
-                  <FollowingCountItem id={id} count={following} />
-                </RowItem>
+        </Row>
+        {isBetaTester && (
+          <>
+            {isOwnPage === false && (
+              <Row onlyOffset large>
+                <FollowUserButton id={id} value={isFollow} />
               </Row>
-            </>
-          )}
-        </DefaultBlock>
-      </Row>
-      <Row>
+            )}
+            <Row large>
+              <RowItem>
+                <FollowersCountItem id={id} count={followers} />
+              </RowItem>
+              <RowItem>
+                <FollowingCountItem id={id} count={following} />
+              </RowItem>
+            </Row>
+          </>
+        )}
+      </DefaultBlock>
+      <Row wide center={false}>
         <DefaultBlock>
           {!!socialLinks?.length && (
             <Row large onlyOffset>
@@ -99,7 +97,7 @@ const _ManagerInfo: React.FC<Props> = ({
           )}
         </DefaultBlock>
       </Row>
-    </div>
+    </>
   );
 };
 

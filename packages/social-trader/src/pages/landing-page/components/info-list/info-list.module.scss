@@ -1,0 +1,123 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.info-list {
+  @include reset-list();
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: -20px;
+  margin-left: -20px;
+  padding-bottom: 40px;
+  align-items: start;
+
+  @include media-breakpoint-tablet() {
+    grid-template-rows: 240px auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 40px;
+    grid-auto-flow: row;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    grid-template-rows: 265px auto;
+  }
+
+  &__item {
+    background: $landing-bg-gray;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+    min-width: 280px;
+    min-height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include media-breakpoint-tablet() {
+      min-height: 200px;
+      width: auto;
+
+      &:nth-child(odd) {
+        margin-bottom: 40px;
+      }
+
+      &:nth-child(even) {
+        margin-top: 40px;
+      }
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      min-width: 200px;
+    }
+
+    @include media-breakpoint-desktop() {
+      padding: 40px;
+    }
+
+    @include media-breakpoint-large-desktop() {
+      font-size: 22px;
+      min-height: 225px;
+    }
+
+    &--bg-transparent {
+      background-color: transparent;
+      padding: 0;
+      min-width: 210px;
+      min-height: 250px;
+      order: -1;
+
+      @include media-breakpoint-tablet() {
+        order: 0;
+        margin-bottom: 0;
+        padding-left: 30px;
+        padding-right: 40px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        padding-right: 30px;
+      }
+
+      @include media-breakpoint-desktop() {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+  }
+
+  &__item-image {
+    display: inline-block;
+    height: auto;
+    max-width: 160px;
+  }
+
+  &__item-text {
+    max-width: 155px;
+
+    @include media-breakpoint-large-desktop() {
+      max-width: 240px;
+    }
+  }
+
+  &__item-btn {
+    width: 100%;
+    margin-top: 20px;
+
+    @include media-breakpoint-tablet() {
+      a {
+        width: 100%;
+      }
+    }
+  }
+}

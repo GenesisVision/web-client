@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { SIZES } from "constants/constants";
 import * as React from "react";
 
-import "./default.block.scss";
+import styles from "./default.block.module.scss";
 
 export interface IDefaultBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -32,19 +32,19 @@ export const DefaultBlock: React.FC<IDefaultBlockProps> = ({
   className
 }) => (
   <div
-    className={classNames("default-block", className, {
-      "default-block--rounded-border": roundedBorder,
-      "default-block--hoverable": hoverable,
-      "default-block--wide": wide,
-      "default-block--solid": solid,
-      "default-block--bordered": bordered,
-      "default-block--horizontal-offsets": horizontalOffsets,
-      "default-block--vertical-offsets": verticalOffsets,
-      "default-block--small": size === SIZES.SMALL,
-      "default-block--middle": size === SIZES.MIDDLE,
-      "default-block--large": size === SIZES.LARGE,
-      "default-block--xlarge": size === SIZES.XLARGE,
-      "default-block--table": table
+    className={classNames(styles["default-block"], className, {
+      [styles["default-block--rounded-border"]]: roundedBorder,
+      [styles["default-block--hoverable"]]: hoverable,
+      [styles["default-block--wide"]]: wide,
+      [styles["default-block--solid"]]: solid,
+      [styles["default-block--bordered"]]: bordered,
+      [styles["default-block--horizontal-offsets"]]: horizontalOffsets,
+      [styles["default-block--vertical-offsets"]]: verticalOffsets,
+      [styles["default-block--small"]]: size === SIZES.SMALL,
+      [styles["default-block--middle"]]: size === SIZES.MIDDLE,
+      [styles["default-block--large"]]: size === SIZES.LARGE,
+      [styles["default-block--xlarge"]]: size === SIZES.XLARGE,
+      [styles["default-block--table"]]: table
     })}
   >
     {children}

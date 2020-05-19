@@ -8,7 +8,9 @@ export const JoinButton: React.FC<Props> = ({
   children,
   href,
   eventLabel,
-  color
+  color,
+  circle,
+  className
 }) => {
   const clickHandle = useCallback(() => {
     onClick && onClick();
@@ -20,7 +22,13 @@ export const JoinButton: React.FC<Props> = ({
   }, [eventLabel]);
 
   return (
-    <LPButton color={color} href={href} onClick={clickHandle}>
+    <LPButton
+      className={className}
+      color={color}
+      href={href}
+      onClick={clickHandle}
+      circle={circle}
+    >
       {children}
     </LPButton>
   );
@@ -32,4 +40,6 @@ interface Props {
   eventLabel?: string;
   children: string | JSX.Element;
   href?: string | ToType;
+  className?: string;
+  circle?: boolean;
 }

@@ -73,7 +73,7 @@ const _ReallocateForm: React.FC<Props> = ({
 
   const [isOpenConfirm, setIsOpenConfirm, setIsCloseConfirm] = useIsOpen();
   return (
-    <HookForm className="reallocate-container" resetOnSuccess form={form}>
+    <HookForm resetOnSuccess form={form}>
       <FormTextField>
         {t("fund-settings.reallocation.text-1")}
         {availableReallocationPercents}%

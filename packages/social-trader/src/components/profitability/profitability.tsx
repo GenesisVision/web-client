@@ -1,5 +1,3 @@
-import "./profitability.scss";
-
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 

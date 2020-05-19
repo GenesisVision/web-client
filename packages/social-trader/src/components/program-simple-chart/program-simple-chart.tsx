@@ -1,5 +1,3 @@
-import "./program-simple-chart.scss";
-
 import ResponsiveContainer from "components/chart/responsive-container";
 import SimpleChart from "components/chart/simple-chart";
 import { SimpleChartPoint } from "gv-api-web";

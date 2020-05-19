@@ -1,6 +1,56 @@
+import {
+  FuturesAccountEventType,
+  FuturesAsset
+} from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
+
+export type MarginModeType = "ISOLATED" | "CROSSED";
+
+export type TerminalType = "spot" | "futures";
+
+export type PositionSideType = "BOTH" | "LONG" | "SHORT";
+
+export interface FuturesPositionInformation {
+  entryPrice: string;
+  marginType: MarginModeType;
+  isAutoAddMargin: string;
+  isolatedMargin: string;
+  leverage: string;
+  liquidationPrice: string;
+  markPrice: string;
+  maxNotionalValue: string;
+  positionAmt: string;
+  symbol: string;
+  unRealizedProfit: string;
+  positionSide: PositionSideType;
+}
+
+export interface FuturesPosition {
+  isolated: boolean;
+  leverage: string;
+  initialMargin: string;
+  maintMargin: string;
+  openOrderInitialMargin: string;
+  positionInitialMargin: string;
+  symbol: string;
+  unrealizedProfit: string;
+  positionSide: PositionSideType; // BOTH means that it is the position of One-way Mode
+}
+
+export interface LeverageBracket {
+  bracket: number; // Notianl bracket
+  initialLeverage: number; // Max initial leverge for this bracket
+  notionalCap: number; // Cap notional of this bracket
+  notionalFloor: number; // Notionl threshold of this bracket
+  maintMarginRatio: number; // Maintenance ratio for this bracket
+}
+
+export interface SymbolLeverageBrackets {
+  symbol: string;
+  brackets: LeverageBracket[];
+}
 
 export interface TradeRequest {
   stopPrice?: number;
@@ -13,6 +63,23 @@ export interface TradeRequest {
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
+  getPositionInformation?: (options: {
+    authData: TradeAuthDataType;
+  }) => Observable<FuturesPositionInformation[]>;
+  getLeverageBrackets?: (options: {
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<SymbolLeverageBrackets[]>;
+  changeLeverage?: (options: {
+    leverage: number;
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<ChangeLeverageResponse>;
+  changeMarginMode?: (options: {
+    mode: MarginModeType;
+    symbol: string;
+    authData: TradeAuthDataType;
+  }) => Promise<HttpResponse>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
     symbol: string,
@@ -73,6 +140,7 @@ export interface IConfigurationData {
   supports_time?: boolean;
   futures_regex?: string;
 }
+
 export type ChartSymbolTypeType =
   | "stock"
   | "index"
@@ -307,6 +375,7 @@ export enum ErrorCodes {
 }
 
 export interface Account {
+  positions?: FuturesPosition[];
   balances: AssetBalance[];
   buyerCommission: number;
   canDeposit: boolean;
@@ -342,6 +411,7 @@ export interface AggregatedTrade {
 }
 
 export interface AssetBalance {
+  futuresAsset?: FuturesAsset;
   asset: string;
   free: string;
   locked: string;
@@ -518,6 +588,17 @@ export interface Binance {
     startTime?: number;
     endTime?: number;
   }): Promise<DepositHistoryResponse>;
+}
+
+export interface ChangeLeverageResponse {
+  leverage: number;
+  maxNotionalValue: string;
+  symbol: string;
+}
+
+export interface HttpResponse {
+  code: number;
+  msg: string;
 }
 
 export interface HttpError extends Error {
@@ -803,7 +884,9 @@ export type ExecutionType =
   | "TRADE"
   | "EXPIRED";
 
-export type EventType = "executionReport" | "account" | "outboundAccountInfo";
+export type EventType =
+  | ("executionReport" | "account" | "outboundAccountInfo")
+  | FuturesAccountEventType;
 
 export interface DepthMain {
   eventType: string;
@@ -811,6 +894,7 @@ export interface DepthMain {
   symbol: string;
   firstUpdateId: number;
   lastUpdateId: number;
+  prevLastUpdateId?: number;
 }
 
 export type NormalizedDepthList = { [keys: string]: StringBidDepth };

@@ -31,6 +31,12 @@ module.exports = async app => {
       changeOrigin: true
     })
   );
+  server.use(
+    createProxyMiddleware("/fapi/v1", {
+      target: "https://fapi.binance.com",
+      changeOrigin: true
+    })
+  );
 
   server.use(
     createProxyMiddleware("/banners", {

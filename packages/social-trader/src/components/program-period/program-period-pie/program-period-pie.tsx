@@ -7,7 +7,7 @@ import * as React from "react";
 import { convertDateToShortFormat, distanceDate } from "utils/dates";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
-import "./program-period-pie.scss";
+import styles from "./program-period-pie.module.scss";
 
 const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
   return (
@@ -21,7 +21,7 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
             variant="pie"
           />
         </RowItem>
-        <RowItem className="program-period-pie__text">
+        <RowItem className={styles["program-period-pie__text"]}>
           {convertDateToShortFormat(distanceDate(start, end))}
         </RowItem>
       </Center>

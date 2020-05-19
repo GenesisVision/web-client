@@ -6,7 +6,7 @@ import VerificationStatus, {
 } from "components/verification-status/verification-status";
 import React from "react";
 
-import "./settings-block.scss";
+import styles from "./settings-block.module.scss";
 
 const SettingsBlock: React.FC<Props> = ({
   hide,
@@ -21,17 +21,17 @@ const SettingsBlock: React.FC<Props> = ({
     xlarge={!blockNumber}
     center={false}
     hide={hide}
-    className="asset-settings-block"
+    className={styles["asset-settings-block"]}
   >
-    <div className="asset-settings-block__line-block">
+    <div className={styles["asset-settings-block__line-block"]}>
       {blockNumber && <h3>{blockNumber}</h3>}
       <Row
-        className={classNames("asset-settings-block__line", {
-          "asset-settings-block__line--bordered": withBorder
+        className={classNames(styles["asset-settings-block__line"], {
+          [styles["asset-settings-block__line--bordered"]]: withBorder
         })}
       />
     </div>
-    <div className="asset-settings-block__content-block">
+    <div className={styles["asset-settings-block__content-block"]}>
       {(label || verificationStatus) && (
         <Row>
           {label && (
@@ -49,7 +49,7 @@ const SettingsBlock: React.FC<Props> = ({
           )}
         </Row>
       )}
-      <Row large wrap wide className="asset-settings-block__wrapper">
+      <Row large wrap wide className={styles["asset-settings-block__wrapper"]}>
         {children}
       </Row>
     </div>

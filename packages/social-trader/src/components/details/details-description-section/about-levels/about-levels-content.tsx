@@ -10,6 +10,8 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+import styles from "./about-level.module.scss";
+
 interface ILimitsProps {
   investmentsLimits: LevelInfo[];
   currency: CURRENCIES;
@@ -45,12 +47,12 @@ const _AboutLevelsContent: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="about-levels__container">
+    <div className={styles["about-levels__container"]}>
       <Row>
         <h1>{t("about-levels-page.titles.main")}</h1>
       </Row>
-      <Row className="about-levels__content">
-        <RowItem className="about-levels__left-block">
+      <Row className={styles["about-levels__content"]}>
+        <RowItem className={styles["about-levels__left-block"]}>
           <Row small>{t("about-levels-page.section.text-1")}</Row>
           <Row small>{t("about-levels-page.section.text-2")}</Row>
           <Row small>{t("about-levels-page.section.text-3")}</Row>
@@ -59,24 +61,24 @@ const _AboutLevelsContent: React.FC<Props> = ({
             <h4>{t("about-levels-page.section.formula")}</h4>
           </Row>
           <Row small>{t("about-levels-page.list.subtitle")}</Row>
-          <div className="about-levels__list">
-            <h4 className="about-levels__list-item">
+          <div className={styles["about-levels__list"]}>
+            <h4 className={styles["about-levels__list-item"]}>
               {t("about-levels-page.list.list-item-1")}
             </h4>
-            <h4 className="about-levels__list-item">
+            <h4 className={styles["about-levels__list-item"]}>
               {t("about-levels-page.list.list-item-2")}
             </h4>
             <p>{t("about-levels-page.section.text-5")}</p>
-            <h4 className="about-levels__list-item">
+            <h4 className={styles["about-levels__list-item"]}>
               {t("about-levels-page.list.list-item-3")}
             </h4>
             <p>{t("about-levels-page.section.text-6")}</p>
             <p>{t("about-levels-page.section.text-7")}</p>
             <p>{t("about-levels-page.section.text-8")}</p>
-            <h4 className="about-levels__notes">
+            <h4 className={styles["about-levels__notes"]}>
               {t("about-levels-page.notes.title")}
             </h4>
-            <ul className="about-levels__ul">
+            <ul className={styles["about-levels__ul"]}>
               <li>
                 <p>{t("about-levels-page.notes.note-1")}</p>
               </li>
@@ -97,7 +99,7 @@ const _AboutLevelsContent: React.FC<Props> = ({
             </p>
           </div>
         </RowItem>
-        <RowItem className="about-levels__right-block">
+        <RowItem className={styles["about-levels__right-block"]}>
           <Row>
             <h4>{t("about-levels-page.titles.limits")}</h4>
           </Row>

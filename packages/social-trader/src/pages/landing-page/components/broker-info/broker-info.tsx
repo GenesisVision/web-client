@@ -12,7 +12,7 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import { TRADE_ROUTE } from "routes/trade.routes";
 
 import BrokerAdvantage from "./broker-advantage";
-import "./broker-info.scss";
+import styles from "./broker-info.module.scss";
 
 interface Props extends TBrokerInfo {
   className?: string;
@@ -37,13 +37,13 @@ const _BrokerInfo: React.FC<Props> = ({
     : `${LOGIN_ROUTE}?from=${TRADE_ROUTE}`;
   return (
     <div
-      className={classNames("broker-info", className, {
-        "broker-info--dark": darkTheme
+      className={classNames(styles["broker-info"], className, {
+        [styles["broker-info--dark"]]: darkTheme
       })}
     >
-      <h3 className="broker-info__subtitle">{t(title)}</h3>
+      <h3 className={styles["broker-info__subtitle"]}>{t(title)}</h3>
       {description && (
-        <p className="broker-info__description">{t(description)}</p>
+        <p className={styles["broker-info__description"]}>{t(description)}</p>
       )}
       <JoinButton
         eventLabel={"Start trading"}
@@ -51,7 +51,7 @@ const _BrokerInfo: React.FC<Props> = ({
       >
         {t("landing-page:buttons.start-trading")}
       </JoinButton>
-      <ul className="broker-info__list-advantages">
+      <ul className={styles["broker-info__list-advantages"]}>
         {listItems.map((item, index) => (
           <BrokerAdvantage
             key={index}

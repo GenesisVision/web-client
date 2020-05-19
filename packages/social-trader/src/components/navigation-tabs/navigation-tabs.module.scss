@@ -1,0 +1,9 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+@import "~shared/styles/_sizes";
+
+$translate-size: 10px;
+
+.navigation-tabs {
+  @include adaptive-padding(bottom, $padding-small - $translate-size);
+}

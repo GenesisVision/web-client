@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
   GlobalSearchContext,
   GlobalSearchContextProvider
@@ -7,7 +8,7 @@ import AlertMessageList from "modules/alert-message/components/alert-message-lis
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { ComponentType, useContext } from "react";
 
-import "./app-layout.scss";
+import styles from "./app-layout.module.scss";
 
 const GlobalSearchResultContainer = dynamic(() =>
   import(
@@ -27,12 +28,12 @@ const PageContent: React.FC = ({ children }) => {
 const _AppLayout: ComponentType<Props> = ({ children }) => {
   return (
     <GlobalSearchContextProvider>
-      <div className="app__wrapper root">
-        <div className="app">
-          <div className="app__header">
+      <div className={classNames(styles["app__wrapper"], "root")}>
+        <div className={styles["app"]}>
+          <div className={styles["app__header"]}>
             <HeaderContainer />
           </div>
-          <div className="app__main">
+          <div className={styles["app__main"]}>
             <PageContent>{children}</PageContent>
           </div>
           <AlertMessageList />

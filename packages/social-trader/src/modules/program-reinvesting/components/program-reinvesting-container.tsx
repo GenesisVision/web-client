@@ -35,7 +35,7 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
           <TooltipLabel
             tooltipContent={t("program-details-page.tooltip.reinvest")}
             labelText={t("program-details-page.description.reinvest")}
-            className="tooltip__label--cursor-pointer"
+            pointer
           />
         }
         disabled={isPending}

@@ -9,6 +9,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
+import styles from "./broker-card.module.scss";
 
 const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
   t,
@@ -16,7 +17,7 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
 }) => {
   const [isOpenPopup, setIsOpen] = React.useState(false);
   return (
-    <div className="broker-card__adornment-text">
+    <div className={styles["broker-card__adornment-text"]}>
       <MutedText small>
         <Row>
           <RowItem small>

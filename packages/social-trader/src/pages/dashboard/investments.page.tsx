@@ -1,5 +1,3 @@
-import "./dashboard.scss";
-
 import Page from "components/page/page";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
 import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";
@@ -16,16 +14,6 @@ const _InvestmentsPage: React.FC = () => {
       <div>
         <DashboardInvestingTotalContainer />
       </div>
-      {/*<div>
-        <DetailsBlock type={DETAILS_BLOCK_TYPE.TRANSPARENT}>
-          <div className="dashboard__public-page-block">
-            <div className="dashboard__public-page-select">
-              <PublicSelect />
-            </div>
-            <PublicPageLink />
-          </div>
-        </DetailsBlock>
-      </div>*/}
       <div>
         <DashboardInvestingFunds />
       </div>

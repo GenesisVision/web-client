@@ -2,6 +2,7 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Message } from "components/conversation/message/message";
+import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
 import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
@@ -18,8 +19,6 @@ import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-tradin
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
-
-import "./tag-components.scss";
 
 export interface IPlatformAssetTagProps {
   platformAssetDetails: PlatformAsset;
@@ -62,7 +61,7 @@ const _RepostTagComponent: React.FC<IRepostTagProps> = ({
   post: { tags, id, images, date, text, author }
 }) => {
   return (
-    <div className="repost-tag-container">
+    <RepostTagContainer>
       <Message
         row={false}
         tags={tags}
@@ -72,7 +71,7 @@ const _RepostTagComponent: React.FC<IRepostTagProps> = ({
         text={text}
         author={author}
       />
-    </div>
+    </RepostTagContainer>
   );
 };
 export const RepostTagComponent = React.memo(_RepostTagComponent);

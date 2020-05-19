@@ -10,14 +10,13 @@ import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import FeeCommission from "../fee-commission/fee-commission";
-import "./portfolio-events-table.scss";
 
 const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const [t] = useTranslation();
   if (extendedInfo.length === 0) return null;
   return (
-    <div className="portfolio-event-details">
+    <div>
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
         {t("program-details-page.history.my-history.details")}
       </GVButton>

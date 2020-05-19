@@ -1,0 +1,66 @@
+@import "~rc-slider/assets/index.css";
+
+.range {
+  padding: 0 7px $padding-xsmall;
+  .rc-slider-track {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      border-color: $primary-color;
+    }
+    &:active,
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px $primary-color;
+    }
+  }
+  .rc-slider-dot-active {
+    border-color: $primary-color;
+  }
+}
+
+.calculator-slider__slider-element {
+  margin-bottom: $padding-xsmall;
+
+  .rc-slider-track {
+    background-color: $primary-color;
+    height: 3px;
+  }
+
+  .rc-slider-rail {
+    height: 1px;
+    background-color: rgba($main-color, 0.1);
+    margin-top: 1px;
+  }
+
+  .rc-slider-dot {
+    display: none;
+  }
+
+  .rc-slider-handle {
+    background-color: $popover-background;
+    width: 17px;
+    height: 17px;
+    margin-top: -6px;
+    border: solid 3px $primary-color;
+
+    &:hover {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px $primary-color;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $primary-color;
+      background-color: $popover-background;
+      box-shadow: 0 0 5px $primary-color;
+    }
+  }
+
+  .rc-slider-mark-text,
+  .rc-slider-mark-text-active {
+    @include font-size($font-size-small);
+    color: $text-color;
+    white-space: nowrap;
+  }
+}

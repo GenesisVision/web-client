@@ -4,10 +4,7 @@ import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import {
-  getSymbolFromState,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   QueryOrderResult,
   TradeAuthDataType
@@ -26,8 +23,7 @@ interface Props {
 export const OpenOrders: React.FC<Props> = ({ items }) => {
   const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
-  const { symbol } = useContext(TradingInfoContext);
-  const { authData } = useTradeAuth();
+  const { authData, symbol } = useContext(TradingInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,

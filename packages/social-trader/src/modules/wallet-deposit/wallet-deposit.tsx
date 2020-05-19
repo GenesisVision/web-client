@@ -9,7 +9,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
-import "./wallet-deposit.scss";
+import styles from "./wallet-deposit.module.scss";
 
 const _WalletDeposit: React.FC<Props> = ({
   type,
@@ -45,7 +45,7 @@ const FullButton: React.FC<{
       onClick={onClick}
     >
       <Center>
-        <RowItem small className="wallet-deposit__full-button-icon">
+        <RowItem small className={styles["wallet-deposit__full-button-icon"]}>
           +
         </RowItem>
         <RowItem>{label}</RowItem>

@@ -2,8 +2,7 @@ import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   filterOrderEventsStream,
-  getSymbol,
-  useTradeAuth
+  getSymbol
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExecutionReport,
@@ -19,9 +18,9 @@ interface Props {}
 
 export const OpenOrdersContainer: React.FC<Props> = () => {
   const { getOpenOrders } = useContext(TerminalMethodsContext);
-  const { authData } = useTradeAuth();
 
   const {
+    authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);

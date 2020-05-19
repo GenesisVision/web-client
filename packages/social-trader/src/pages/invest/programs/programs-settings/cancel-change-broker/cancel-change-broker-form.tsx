@@ -1,5 +1,6 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import styles from "components/assets/broker-select/broker-card/broker-card.module.scss";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
@@ -71,7 +72,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             </StatisticItem>
           </Row>
         </RowItem>
-        <RowItem className="broker-card__next-arrow">&rarr;</RowItem>
+        <RowItem className={styles["broker-card__next-arrow"]}>&rarr;</RowItem>
         <RowItem>
           <BrokerCard
             logo={brokerTo.logoUrl}

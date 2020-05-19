@@ -30,7 +30,6 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
         <MutedText small>
           <Hint
             content={t("create-program-page.settings.hints.trades-delay")}
-            className="asset-form-field__hint"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t("program-settings.trades-update.text")}
           />

@@ -33,7 +33,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
-import "./transfer-form.scss";
+import styles from "./transfer-form.module.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
   currentItem,
@@ -126,7 +126,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
 
   return (
     <HookForm
-      className="transfer-popup"
+      className={styles["transfer-popup"]}
       form={form}
       onSubmit={setValuesFromPropsAndSubmit}
     >

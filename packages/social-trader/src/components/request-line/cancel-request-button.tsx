@@ -38,7 +38,6 @@ const _CancelRequestButton: React.FC<{
         header={t("request-line.cancel-header")}
         body={t("request-line.cancel-body")}
         applyButtonText={t("buttons.confirm")}
-        className="dialog--wider"
         disabled={disabled}
       />
     </>

@@ -1,13 +1,13 @@
-import "./help-button.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+
+import styles from "./help-button.module.scss";
 
 const HelpButton: React.FC<OwnProps> = ({ muted, className, onClick }) => {
   return (
     <div
-      className={classNames("help-button", className, {
-        "help-button--muted": muted
+      className={classNames(styles["help-button"], className, {
+        [styles["help-button--muted"]]: muted
       })}
       onClick={onClick}
     >

@@ -20,12 +20,12 @@ import React from "react";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 
-import "./providers-button.scss";
+import styles from "./providers-button.module.scss";
 
 const _ProvidersButton: React.FC<Props> = ({ providers }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <Center className="providers-button__container">
+    <Center className={styles["providers-button__container"]}>
       <Popover
         anchorEl={anchor}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -43,7 +43,9 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
         size={CHIP_SIZE.SMALL}
         chipLabel={<CopyIcon />}
       />
-      <div className="providers-button__count">{providers.length}</div>
+      <div className={styles["providers-button__count"]}>
+        {providers.length}
+      </div>
     </Center>
   );
 };

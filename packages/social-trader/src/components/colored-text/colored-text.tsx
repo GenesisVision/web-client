@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import "./colored-text.scss";
+import styles from "./colored-text.module.scss";
 
-export type ColoredTextColor = "red" | "green";
+export type ColoredTextColor = "red" | "green" | "yellow";
 
 interface Props {
   color?: ColoredTextColor;
@@ -12,9 +12,9 @@ interface Props {
 export const ColoredText: React.FC<Props> = ({ color, children }) => {
   return (
     <span
-      className={classNames("colored-text", {
-        "colored-text--green": color === "green",
-        "colored-text--red": color === "red"
+      className={classNames(styles["colored-text"], {
+        [styles["colored-text--green"]]: color === "green",
+        [styles["colored-text--red"]]: color === "red"
       })}
     >
       {children}

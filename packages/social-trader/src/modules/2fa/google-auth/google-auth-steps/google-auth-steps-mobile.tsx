@@ -1,9 +1,11 @@
+import classNames from "classnames";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "../google-auth.module.scss";
 import GoogleActivateStep from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";
 import GoogleDownloadStep from "./google-auth-download-step";
@@ -18,12 +20,17 @@ const GoogleAuth: React.FC<Props> = props => {
   const isPrevDisabled = () => step === 0;
   const isNextDisabled = () => step === 2;
   return (
-    <div className="google-auth google-auth--mobile">
+    <div
+      className={classNames(
+        styles["google-auth"],
+        styles["google-auth--mobile"]
+      )}
+    >
       {step === 0 && <GoogleDownloadStep />}
       {step === 1 && <GoogleCodeStep {...props} />}
       {step === 2 && <GoogleActivateStep {...props} />}
       <DialogButtons>
-        <div className="google-auth__buttons">
+        <div className={styles["google-auth__buttons"]}>
           <GVButton
             disabled={isPrevDisabled()}
             onClick={handlePrev}

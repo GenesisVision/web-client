@@ -48,7 +48,7 @@ const _ProgramAutoJoin: React.FC<Props> = ({
           <TooltipLabel
             tooltipContent={<ProgramAutoJoinTooltip />}
             labelText={t("program-details-page.description.auto-join")}
-            className="tooltip__label--cursor-pointer"
+            pointer
           />
         }
         disabled={isPending}

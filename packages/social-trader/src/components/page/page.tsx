@@ -9,8 +9,6 @@ import { useRefLink } from "hooks/ref-link";
 import * as React from "react";
 import { PropsWithChildren } from "react";
 
-import "./page.scss";
-
 const Page = ({
   showTitle,
   title,

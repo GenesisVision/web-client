@@ -11,12 +11,13 @@ import {
   FundBalanceChart as FundBalanceChartType,
   ProgramBalanceChart as ProgramBalanceChartType
 } from "gv-api-web";
-import ChartCurrencySelector, {
+import ChartCurrencySelector from "modules/chart-currency-selector/chart-currency-selector";
+import {
   TAddChartCurrency,
   TChangeChartCurrency,
   TChartCurrency,
   TRemoveChartCurrency
-} from "modules/chart-currency-selector/chart-currency-selector";
+} from "modules/chart-currency-selector/chart-currency-selector.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -24,6 +25,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
+import styles from "../details-chart-section.module.scss";
 
 export const BALANCE_CHART_TEST_ID = "BALANCE_CHART_TEST_ID";
 
@@ -67,7 +69,7 @@ const _BalanceChartElements: React.FC<Props> = ({
       />
       <div
         data-test-id={BALANCE_CHART_TEST_ID}
-        className="details-chart__profit"
+        className={styles["details-chart__profit"]}
       >
         {chart.length &&
           renderBalanceChart({

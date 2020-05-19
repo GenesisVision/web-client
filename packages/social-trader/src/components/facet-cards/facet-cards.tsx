@@ -8,7 +8,7 @@ import * as React from "react";
 import { useCallback } from "react";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
-import "./facet-cards.scss";
+import styles from "./facet-cards.module.scss";
 
 const _FacetCards: React.FC<Props> = ({
   data,
@@ -26,10 +26,10 @@ const _FacetCards: React.FC<Props> = ({
     }
   }, [load]);
   return (
-    <div className="facets__wrapper">
+    <div className={styles["facets__wrapper"]}>
       <HorizontalListShadowContainer darkShadow scrollData={scrollData}>
         <div
-          className="facets__carousel"
+          className={styles["facets__carousel"]}
           ref={ref}
           onLoad={handleLoad}
           onScroll={handleScroll}

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { Center } from "components/center/center";
 import * as React from "react";
 
-import "./statistic-item-list.scss";
+import styles from "./statistic-item-list.module.scss";
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
@@ -12,8 +12,8 @@ export const StatisticItemList: React.FC<Props &
 }) => (
   <Center
     wrap
-    className={classNames("statistics-item-list", className, {
-      "statistics-item-list--vertical": vertical
+    className={classNames(styles["statistics-item-list"], className, {
+      [styles["statistics-item-list--vertical"]]: vertical
     })}
   >
     {children}

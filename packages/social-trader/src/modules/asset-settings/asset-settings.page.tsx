@@ -6,7 +6,6 @@ import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/prog
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import "./asset-settings.scss";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
@@ -65,9 +64,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   const title = t("asset-settings.title");
   return (
     <Page showTitle title={title}>
-      <div className="asset-settings">
-        {settingsBlocks(editAssetCallback, applyCloseAsset, errorMessage)}
-      </div>
+      {settingsBlocks(editAssetCallback, applyCloseAsset, errorMessage)}
     </Page>
   );
 };

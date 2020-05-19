@@ -1,6 +1,6 @@
 import ProfitChart from "components/chart/profit-chart";
 import { ChartsDataType } from "components/details/details-statistic-section/details.chart.types";
-import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import * as React from "react";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";

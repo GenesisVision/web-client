@@ -1,15 +1,17 @@
-import "./advantages-list.scss";
-
 import classNames from "classnames";
 import { TAdvantages } from "pages/landing-page/static-data/advantages";
 import React from "react";
 
 import AdvantageItem from "./advantage-item";
+import styles from "./advantages-list.module.scss";
 
 interface Props {
   className?: string;
   advantagesItems: TAdvantages[];
-  lastItem?: JSX.Element;
+  lastItem?: {
+    element: JSX.Element;
+    isHided?: boolean;
+  };
 }
 
 const _AdvantagesList: React.FC<Props> = ({
@@ -17,7 +19,7 @@ const _AdvantagesList: React.FC<Props> = ({
   advantagesItems,
   lastItem
 }) => (
-  <ul className={classNames("advantages-list", className)}>
+  <ul className={classNames(styles["advantages-list"], className)}>
     {advantagesItems.map((item, index) => (
       <AdvantageItem
         key={index}
@@ -27,8 +29,14 @@ const _AdvantagesList: React.FC<Props> = ({
       />
     ))}
     {lastItem && (
-      <li className="advantages-list__item advantages-list__item--last">
-        {lastItem}
+      <li
+        className={classNames(
+          styles["advantages-list__item"],
+          styles["advantages-list__item--last"],
+          { [styles["advantages-list__item--last-is-hided"]]: lastItem.isHided }
+        )}
+      >
+        {lastItem.element}
       </li>
     )}
   </ul>

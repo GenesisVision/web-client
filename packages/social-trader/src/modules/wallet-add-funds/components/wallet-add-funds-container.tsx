@@ -1,5 +1,3 @@
-import "./wallet-add-funds-form.scss";
-
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import * as React from "react";
 import { useSelector } from "react-redux";

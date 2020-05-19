@@ -1,6 +1,10 @@
 @import "~shared/styles/_breakpoint";
+@import "~shared/styles/_colors";
 
 .manager-history-row {
+  &:nth-child(2n + 1) {
+    background: $table-background-subcolor;
+  }
   &__data {
     justify-content: space-between;
     flex-wrap: wrap;

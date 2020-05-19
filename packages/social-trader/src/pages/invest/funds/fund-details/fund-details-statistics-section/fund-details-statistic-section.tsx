@@ -1,5 +1,3 @@
-import "components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
-
 import DetailsStatisticSection from "components/details/details-statistic-section/details-statistic-section";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import { fundAbsoluteProfitChartSelector } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";

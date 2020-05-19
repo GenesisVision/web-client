@@ -20,7 +20,7 @@ const _LogoField: React.FC<Props> = ({
           {t("create-program-page.settings.fields.upload-logo-rules")}
         </MutedText>
       </Row>
-      <Row wide large className="logo-field">
+      <Row wide large>
         <GVHookFormField
           name={name}
           component={InputImageWrapper}

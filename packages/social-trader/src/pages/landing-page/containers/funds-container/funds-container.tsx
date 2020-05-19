@@ -8,7 +8,7 @@ import FundsIcon from "pages/landing-page/images/common/funds-icon.svg";
 import React, { useCallback, useRef, useState } from "react";
 import { FUNDS_ROUTE } from "routes/funds.routes";
 
-import "./funds-container.scss";
+import styles from "./funds-container.module.scss";
 
 interface Props {
   funds: FundDetailsListItem[];
@@ -31,23 +31,25 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
 
   if (!funds.length) return null;
   return (
-    <div className="funds-container">
+    <div className={styles["funds-container"]}>
       <div
-        className={classNames("funds-container__info", {
-          "funds-container__info--hide": hide,
-          "funds-container__info--show": !hide
+        className={classNames(styles["funds-container__info"], {
+          [styles["funds-container__info--hide"]]: hide,
+          [styles["funds-container__info--show"]]: !hide
         })}
         ref={animate}
       >
         <ImageBaseElement
           src={FundsIcon}
           alt={t("landing-page:funds.title")}
-          className="funds-container__img"
+          className={styles["funds-container__img"]}
         />
-        <h2 className="funds-container__title">
+        <h2 className={styles["funds-container__title"]}>
           {t("landing-page:funds.title")}
         </h2>
-        <p className="funds-container__text">{t("landing-page:funds.text")}</p>
+        <p className={styles["funds-container__text"]}>
+          {t("landing-page:funds.text")}
+        </p>
         <JoinButton
           eventLabel={t("landing-page:buttons.discover")}
           href={FUNDS_ROUTE}
@@ -57,7 +59,7 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
       </div>
       <FundsList
         funds={funds}
-        className="funds-container__list"
+        className={styles["funds-container__list"]}
         onScroll={handleScroll}
       />
     </div>

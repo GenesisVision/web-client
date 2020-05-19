@@ -25,7 +25,7 @@ import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
 
-import "./comment-input.scss";
+import styles from "./comment-input.module.scss";
 
 const MAX_IMAGES = 1;
 
@@ -107,26 +107,34 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   const isOpenPanel = !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm form={form} onSubmit={formSubmit} className="comment-input__form">
+    <HookForm
+      form={form}
+      onSubmit={formSubmit}
+      className={styles["comment-input__form"]}
+    >
       <HookFormInputImages
         showIndicator={false}
         noDrag
         maxImages={MAX_IMAGES}
         disabled={disabledImages}
-        className="comment-input__drop-zone"
+        className={styles["comment-input__drop-zone"]}
         name={FORM_FIELDS.images}
         content={open => (
-          <Row className="comment-input__block" center={false}>
-            <RowItem className="comment-input__input-container-row-item">
+          <Row className={styles["comment-input__block"]} center={false}>
+            <RowItem
+              className={styles["comment-input__input-container-row-item"]}
+            >
               <div
                 className={classNames(
-                  "comment-input__input-and-panel-container",
+                  styles["comment-input__input-and-panel-container"],
                   {
-                    "comment-input__input-and-panel-container--open": isOpenPanel
+                    [styles[
+                      "comment-input__input-and-panel-container--open"
+                    ]]: isOpenPanel
                   }
                 )}
               >
-                <Center className="comment-input__input-container">
+                <Center className={styles["comment-input__input-container"]}>
                   <ConversationInput
                     outerCaret={fixedCaretPosition}
                     onChangeCaret={onChangeCaret}
@@ -147,7 +155,10 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                       />
                     )}
                     {!!images?.length && (
-                      <Center wrap className="comment-input__panel-container">
+                      <Center
+                        wrap
+                        className={styles["comment-input__panel-container"]}
+                      >
                         {images.map(image => (
                           <RowItem key={image.id}>
                             <PostInputImagePreview
@@ -166,12 +177,14 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
               <button
                 type="submit"
                 disabled={disabled}
-                className={classNames("comment-input__send-button", {
-                  "comment-input__send-button--disable": disabled
+                className={classNames(styles["comment-input__send-button"], {
+                  [styles["comment-input__send-button--disable"]]: disabled
                 })}
               >
                 <SendIcon
-                  className={classNames("comment-input__send-button-icon")}
+                  className={classNames(
+                    styles["comment-input__send-button-icon"]
+                  )}
                   disabled={disabled}
                 />
               </button>
@@ -194,10 +207,10 @@ const CommentInputMessage: React.FC<{ disable: boolean }> = ({
   disable
 }) => {
   return (
-    <div className="comment-input__send-text-container">
+    <div className={styles["comment-input__send-text-container"]}>
       <Center
-        className={classNames("comment-input__send-text", {
-          "comment-input__send-text--disable": disable
+        className={classNames(styles["comment-input__send-text"], {
+          [styles["comment-input__send-text--disable"]]: disable
         })}
       >
         {children}

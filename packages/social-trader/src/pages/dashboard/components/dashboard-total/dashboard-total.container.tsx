@@ -7,8 +7,6 @@ import { TDashboardTotal } from "pages/dashboard/dashboard.types";
 import { getTotal } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 
-import "./dashboard-total.scss";
-
 const _DashboardTotalContainer: React.FC<Props> = ({ label }) => {
   const currency = useAccountCurrency();
   const { data } = useApiRequest<TDashboardTotal>({

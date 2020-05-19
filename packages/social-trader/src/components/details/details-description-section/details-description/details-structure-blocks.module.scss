@@ -1,0 +1,42 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$avatar-big-size: 120px;
+$padding-info-left: $padding-upper-medium;
+$padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
+
+.details-statistic-container {
+  display: inline-flex;
+  box-sizing: border-box;
+  flex-grow: 1;
+
+  min-width: 100%;
+
+  @include media-breakpoint-desktop() {
+    min-width: auto;
+  }
+}
+
+.performance-data {
+  padding-left: 0;
+
+  @include media-breakpoint-tablet() {
+    padding-left: $padding-small;
+    margin-left: $padding-controls-left;
+  }
+}
+
+.details-broker {
+  height: 20px;
+}
+
+.details-description-text {
+  line-height: $font-size-paragraph-mobile * 2;
+  word-break: break-word;
+  white-space: pre-wrap;
+  @include font-size($font-size-paragraph);
+  @include media-breakpoint-landscape-phone() {
+    line-height: $font-size-paragraph * 2;
+  }
+}

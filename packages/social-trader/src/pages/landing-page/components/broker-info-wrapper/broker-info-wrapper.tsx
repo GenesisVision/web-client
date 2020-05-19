@@ -2,6 +2,8 @@ import BrokerInfo from "pages/landing-page/components/broker-info/broker-info";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React from "react";
 
+import styles from "./brokers-info-wrapper.module.scss";
+
 interface Props {
   darkTheme?: boolean;
   currentBrokersInfo: TBrokerInfo;
@@ -12,7 +14,7 @@ const _BrokerInfoWrapper: React.FC<Props> = ({
   currentBrokersInfo
 }) => {
   return (
-    <div className="brokers-container__tab-info">
+    <div className={styles["brokers-info-wrapper"]}>
       <BrokerInfo
         type={currentBrokersInfo.type}
         darkTheme={darkTheme}

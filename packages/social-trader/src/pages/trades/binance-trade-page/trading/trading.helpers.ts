@@ -1,5 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { useCookieState } from "hooks/cookie-state";
+import { NextPageContext } from "next";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
@@ -12,8 +13,11 @@ import {
 import { useEffect, useState } from "react";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
+
+export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
 export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
@@ -22,12 +26,19 @@ export const DEFAULT_SYMBOL: SymbolState = {
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
 
+export const authCookieService = (ctx?: NextPageContext) =>
+  cookieServiceCreator({
+    ctx,
+    key: TRADE_AUTH_DATA_KEY,
+    initialState,
+    parse: true
+  });
+
+export const useAuthCookieState = () => authCookieService();
+
 export const useTradeAuth = () => {
   const [authData, setAuthData] = useState(initialState);
-  const { set, get } = useCookieState({
-    key: TRADE_AUTH_DATA_KEY,
-    initialState
-  });
+  const { set, get } = useAuthCookieState();
   useEffect(() => {
     setAuthData(get());
   }, []);
@@ -70,8 +81,14 @@ export const updateAccountInfo = (currentData: Account, updates: Account) => {
   return { ...currentData, ...updates, balances };
 };
 
+export const stringifySymbolFromToParam = (symbol: SymbolState): string => {
+  return [symbol.baseAsset, symbol.quoteAsset].join(
+    TERMINAL_ROUTE_SYMBOL_SEPARATOR
+  );
+};
+
 export const parseSymbolFromUrlParam = (param: string): SymbolState => {
-  const splittedValue = param.split("_");
+  const splittedValue = param.split(TERMINAL_ROUTE_SYMBOL_SEPARATOR);
   return splittedValue.length > 1
     ? { baseAsset: splittedValue[0], quoteAsset: splittedValue[1] }
     : DEFAULT_SYMBOL;

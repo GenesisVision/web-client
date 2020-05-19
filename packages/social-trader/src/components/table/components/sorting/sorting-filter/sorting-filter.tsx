@@ -13,7 +13,7 @@ import {
   TFilter
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
-import "./sorting-filter.scss";
+import styles from "./sorting-filter.module.scss";
 
 export const SORTING_FILTER_NAME = "sorting";
 
@@ -66,7 +66,7 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
       <GVButton
         variant="text"
         color="secondary"
-        className="sorting-filter__btn"
+        className={styles["sorting-filter__btn"]}
         onClick={handleOnDirectionChange(!isAsc())}
       >
         {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}

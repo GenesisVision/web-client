@@ -3,8 +3,7 @@ import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trad
 import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import {
   filterOrderEventsStream,
-  getSymbol,
-  useTradeAuth
+  getSymbol
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExecutionReport,
@@ -19,9 +18,9 @@ interface Props {}
 
 export const OrderHistoryContainer: React.FC<Props> = () => {
   const { getAllOrders } = useContext(TerminalMethodsContext);
-  const { authData } = useTradeAuth();
 
   const {
+    authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);

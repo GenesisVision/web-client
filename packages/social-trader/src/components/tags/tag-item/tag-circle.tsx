@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import styles from "./tag-item.module.scss";
+
 const _TagCircle: React.FC<Props> = ({ backgroundColor }) => (
-  <div className="tag-circle" style={{ backgroundColor }} />
+  <div className={styles["tag-circle"]} style={{ backgroundColor }} />
 );
 
 interface Props {

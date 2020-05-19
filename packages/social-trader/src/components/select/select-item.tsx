@@ -3,6 +3,8 @@ import GVButton from "components/gv-button";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
 
+import styles from "./select.module.scss";
+
 export const getSelectItemSelector = (value: string) => `select-item-${value}`;
 
 const SelectItem: React.FC<Props> = React.memo(
@@ -17,8 +19,8 @@ const SelectItem: React.FC<Props> = React.memo(
         variant="text"
         color="secondary"
         noPadding
-        className={classNames("select__option", className, {
-          "select__option--selected": isSelected
+        className={classNames(styles["select__option"], className, {
+          [styles["select__option--selected"]]: isSelected
         })}
         onClick={handleClick}
         name={name}

@@ -18,7 +18,7 @@ const _FeesSettings: React.FC<Props> = ({
   secondFeeDescription
 }) => {
   return (
-    <>
+    <div>
       {title && (
         <Row>
           <h3>{title}</h3>
@@ -50,7 +50,7 @@ const _FeesSettings: React.FC<Props> = ({
           />
         </RowItem>
       </AssetRow>
-    </>
+    </div>
   );
 };
 

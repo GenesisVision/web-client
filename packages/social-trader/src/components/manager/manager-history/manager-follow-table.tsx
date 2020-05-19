@@ -1,6 +1,4 @@
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 import { ManagerFollowHistoryRow } from "components/manager/manager-history/manager-follow-history-row";
-import { ManagerProgramHistoryRow } from "components/manager/manager-history/manager-program-history-row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "components/table/components/table-module";

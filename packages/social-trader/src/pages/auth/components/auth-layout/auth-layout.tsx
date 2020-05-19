@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { HOME_ROUTE } from "routes/app.routes";
 
 import { ILoginFooterProps } from "../login-footer/login-footer";
-import "./auth-layout.scss";
+import styles from "./auth-layout.module.scss";
 
 const _AuthLayout: NextPage<Props> = ({
   quoteNo,
@@ -23,9 +23,9 @@ const _AuthLayout: NextPage<Props> = ({
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <div className="auth">
-      <div className="auth__left">
-        <Link className="auth__logo" to={linkCreator(HOME_ROUTE)}>
+    <div className={styles["auth"]}>
+      <div className={styles["auth__left"]}>
+        <Link className={styles["auth__logo"]} to={linkCreator(HOME_ROUTE)}>
           <Center>
             <RowItem small>
               <GvLogo />
@@ -35,25 +35,25 @@ const _AuthLayout: NextPage<Props> = ({
             </RowItem>
           </Center>
         </Link>
-        <blockquote className="auth__quote">
+        <blockquote className={styles["auth__quote"]}>
           {t(`auth-quotes.${quoteNo}.quote`)}
-          <footer className="auth__quote-footer">
+          <footer className={styles["auth__quote-footer"]}>
             —{" "}
-            <cite className="auth__quote-author">
+            <cite className={styles["auth__quote-author"]}>
               {t(`auth-quotes.${quoteNo}.author`)}
             </cite>
           </footer>
         </blockquote>
       </div>
-      <div className="auth__right">
-        <div className="auth__content">
+      <div className={styles["auth__right"]}>
+        <div className={styles["auth__content"]}>
           {titleKey && <h1>{t(titleKey)}</h1>}
           <Row large onlyOffset>
             {children}
           </Row>
         </div>
         {Footer && (
-          <Center className="auth__footer">
+          <Center className={styles["auth__footer"]}>
             <Footer ROUTE={footerAuthRoute} />
           </Center>
         )}

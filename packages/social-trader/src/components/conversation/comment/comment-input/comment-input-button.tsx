@@ -1,8 +1,10 @@
 import React from "react";
 
+import styles from "./comment-input.module.scss";
+
 const _CommentInputButton: React.FC<Props> = ({ children, onClick }) => {
   return (
-    <div className="comment-input__button" onClick={onClick}>
+    <div className={styles["comment-input__button"]} onClick={onClick}>
       {children}
     </div>
   );

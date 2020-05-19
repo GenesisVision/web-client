@@ -16,6 +16,7 @@ import {
   DATE_RANGE_MIN_FILTER_NAME,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
+import styles from "./date-range-filter.module.scss";
 
 const subtract: { [keys: string]: "month" | "week" } = {
   [DATA_RANGE_FILTER_TYPES.LAST_MONTH]: "month",
@@ -30,7 +31,7 @@ const DateRangeItem: React.FC<{
   return (
     <Row>
       <GVButton
-        className="date-range-filter__type-btn"
+        className={styles["date-range-filter__type-btn"]}
         noPadding
         variant="text"
         color="secondary"
@@ -96,8 +97,11 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
     const { type } = this.state;
     const { t, startLabel, cancel } = this.props;
     return (
-      <PopoverContent className="date-range-filter">
-        <PopoverContentCardBlock dark className="date-range-filter__type">
+      <PopoverContent className={styles["date-range-filter"]}>
+        <PopoverContentCardBlock
+          dark
+          className={styles["date-range-filter__type"]}
+        >
           <DateRangeItem
             onClick={this.handleChangeType(DATA_RANGE_FILTER_TYPES.ALL)}
             disabled={type === DATA_RANGE_FILTER_TYPES.ALL}
@@ -119,9 +123,9 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
             label={t("filters.date-range.custom")}
           />
         </PopoverContentCardBlock>
-        <PopoverContentCardBlock className="date-range-filter__dates">
+        <PopoverContentCardBlock className={styles["date-range-filter__dates"]}>
           <FilterTitle>{t("filters.date-range.label")}</FilterTitle>
-          <Center className="date-range-filter__values">
+          <Center className={styles["date-range-filter__values"]}>
             <DateRangeFilterValues
               {...this.state}
               onChange={this.handleChangeDate}

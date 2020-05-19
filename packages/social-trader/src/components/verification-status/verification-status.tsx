@@ -1,9 +1,9 @@
-import "./verification-status.scss";
-
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { UserVerificationStatus } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+
+import styles from "./verification-status.module.scss";
 
 export enum VERIFICATION_STATUS {
   NOT_VERIFIED = "NotVerified",
@@ -46,7 +46,7 @@ const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
   }
 
   return (
-    <Chip type={type} className={`verification verification--${type}`}>
+    <Chip type={type} className={styles[`verification verification--${type}`]}>
       {value}
     </Chip>
   );

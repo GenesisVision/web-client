@@ -1,7 +1,12 @@
+import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DoubleButton } from "components/double-button/double-button";
+import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { WalletIcon } from "components/icon/wallet-icon";
+import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
@@ -10,10 +15,7 @@ import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/plac
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import {
-  getSymbol,
-  useTradeAuth
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   OrderSide,
   OrderType
@@ -23,12 +25,14 @@ import React, { useCallback, useContext, useState } from "react";
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
 import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
+import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { price } = useContext(TradingPriceContext);
 
   const {
+    authData,
     exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
@@ -36,8 +40,6 @@ const _PlaceOrder: React.FC = () => {
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const { tab, setTab } = useTab<OrderType>("LIMIT");
-
-  const { authData } = useTradeAuth();
 
   const { sendRequest, status } = useApiRequest({
     request: tradeRequest
@@ -63,10 +65,8 @@ const _PlaceOrder: React.FC = () => {
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
-        <h3>Place order</h3>
-      </Row>
-      <Row>
         <DoubleButton
+          size={GV_BTN_SIZE.SMALL}
           first={{
             selected: side === "BUY",
             enable: side !== "BUY",
@@ -91,7 +91,16 @@ const _PlaceOrder: React.FC = () => {
       </Row>
       {accountInfo && (
         <Row>
-          {balance} {walletAsset}
+          <RowItem small>
+            <Center className={styles["place-order__wallet-icon"]}>
+              <WalletIcon />
+            </Center>
+          </RowItem>
+          <RowItem>
+            <MutedText>
+              {balance} {walletAsset}
+            </MutedText>
+          </RowItem>
         </Row>
       )}
       {exchangeInfo && accountInfo && (

@@ -2,7 +2,7 @@ import { Center } from "components/center/center";
 import AuthWidgets from "components/header/auth-widgets";
 import { useHeaderInfo, useMenuItems } from "components/header/header.service";
 import UnauthLinks from "components/header/unauth-links";
-import { MenuNavigationItem } from "components/navigation/menu-navigation-item";
+import { GvRootItem } from "components/navigation/gv-root-item";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -11,7 +11,6 @@ import { SymbolSummarySmallContainer } from "pages/trades/binance-trade-page/tra
 import React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { rootMenuItem } from "routes/menu";
 
 import styles from "./trade-header.module.scss";
 
@@ -38,7 +37,7 @@ const _TradeHeader: React.FC<Props> = ({ profileHeader }) => {
         isAuthenticated={isAuthenticated}
       />
       <div className={styles["trade-header__root-menu-item"]}>
-        <MenuNavigationItem item={rootMenuItem} popover />
+        <GvRootItem />
       </div>
       <ResponsiveContainer enabledScreens={["desktop", "large-desktop"]}>
         <SymbolSummarySmallContainer />
