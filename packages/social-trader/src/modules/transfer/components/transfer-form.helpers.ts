@@ -17,6 +17,8 @@ import {
 } from "modules/transfer/transfer.types";
 import { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
 import { lazy, number, object, Schema } from "yup";
 
 export enum TRANSFER_FORM_FIELDS {
@@ -27,6 +29,20 @@ export enum TRANSFER_FORM_FIELDS {
   amount = "amount",
   transferAll = "transferAll"
 }
+
+export const getIdByCurrencyInWalletItem = (
+  items: ItemsType,
+  currency: CurrencyEnum
+): string => {
+  return safeGetElemFromArray(items, item => item.currency === currency).id;
+};
+
+export const getCurrencyByIdInWalletItem = (
+  items: ItemsType,
+  id: string
+): CurrencyEnum => {
+  return safeGetElemFromArray(items, item => item.id === id).currency;
+};
 
 export const isAmountAllow = (sourceItems: any[], id: string) => ({
   floatValue,
@@ -66,11 +82,13 @@ export const transferFormValidationSchema = ({
 };
 
 export const transferFormMapPropsToValues = ({
+  fixedSelects,
   sourceItems,
   destinationItems,
   currentItem,
   currentItemContainer
 }: {
+  fixedSelects?: boolean;
   sourceItems: ItemsType;
   destinationItems: ItemsType;
   currentItem: WalletItemType;
@@ -88,6 +106,13 @@ export const transferFormMapPropsToValues = ({
       sourceId
     );
     destinationId = destinationItemWithoutCurrent[0].id;
+  }
+  if (fixedSelects) {
+    const sourceCurrency = getCurrencyByIdInWalletItem(sourceItems, sourceId);
+    destinationId = getIdByCurrencyInWalletItem(
+      destinationItems,
+      sourceCurrency
+    );
   }
   return {
     [TRANSFER_FORM_FIELDS.amount]: "",
@@ -113,6 +138,7 @@ export const getTransferFormLoaderData = (
 };
 
 export interface ITransferFormProps {
+  fixedSelects?: boolean;
   data: TransferFormItemsType;
   onSubmit: (values: InternalTransferRequest) => void;
   currentItem: WalletItemType;
