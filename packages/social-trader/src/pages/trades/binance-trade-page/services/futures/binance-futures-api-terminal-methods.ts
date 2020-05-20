@@ -1,5 +1,3 @@
-import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
-import { klineSocket } from "pages/trades/binance-trade-page/services/binance-ws.service";
 import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
 
 import {
@@ -11,6 +9,7 @@ import {
   getAllOrders,
   getDepth,
   getExchangeInfo,
+  getKlines,
   getLeverageBrackets,
   getOpenOrders,
   getPositionInformation,
@@ -22,6 +21,7 @@ import {
 import {
   depthSocket,
   getUserStreamSocket,
+  klineSocket,
   marketTicketsSocket,
   tradeSocket
 } from "./binance-futures-ws.service";

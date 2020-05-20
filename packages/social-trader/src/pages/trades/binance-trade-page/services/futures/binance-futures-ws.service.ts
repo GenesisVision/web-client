@@ -14,11 +14,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
-import {
-  depthTransform,
-  tickerTransform,
-  tradeTransform
-} from "../binance-ws.helpers";
+import { depthTransform, tradeTransform } from "../binance-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
 
@@ -82,6 +78,25 @@ export const getUserStreamSocket = (
       if (item.e === "ORDER_TRADE_UPDATE")
         return futuresTradeOrderUpdateEventTransform(item);
       return item;
+    })
+  );
+};
+
+export const klineSocket = (connectSocketMethod: ConnectSocketMethodType) => (
+  symbol: string,
+  interval: string
+) => {
+  const socketName = `${symbol}@kline_${interval}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketName, url).pipe(
+    map(data => {
+      return {
+        time: data.k.t,
+        open: data.k.o,
+        high: data.k.h,
+        low: data.k.l,
+        close: data.k.c
+      };
     })
   );
 };

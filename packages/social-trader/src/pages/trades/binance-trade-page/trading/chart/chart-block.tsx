@@ -84,7 +84,7 @@ export const ChartBlock: React.FC = () => {
       });
       setWidget(widget);
     });
-  }, [exchangeInfo?.symbols]);
+  }, [exchangeInfo?.symbols, methods]);
 
   React.useEffect(() => {
     if (!widget) return;
@@ -97,7 +97,7 @@ export const ChartBlock: React.FC = () => {
         emptyCallback
       );
     });
-  }, [widget, Object.values(symbol), emptyCallback]);
+  }, [widget, symbol.quoteAsset, symbol.baseAsset, emptyCallback]);
 
   return (
     <DefaultBlock
