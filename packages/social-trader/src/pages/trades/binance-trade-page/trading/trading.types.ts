@@ -63,6 +63,7 @@ export interface TradeRequest {
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
 export interface ITerminalMethods {
+  getKlines: (params: KlineParams) => Promise<number[][]>;
   getPositionInformation?: (options: {
     authData: TradeAuthDataType;
   }) => Observable<FuturesPositionInformation[]>;
@@ -129,6 +130,18 @@ export interface ITerminalMethods {
     connectSocketMethod: ConnectSocketMethodType,
     listenKey: string
   ) => Observable<any>;
+  klineSocket: (
+    connectSocketMethod: ConnectSocketMethodType
+  ) => (
+    symbol: string,
+    interval: string
+  ) => Observable<{
+    time: number;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  }>;
 }
 
 export interface IConfigurationData {
@@ -767,6 +780,14 @@ export interface ExchangeInfo {
   rateLimits: ExchangeInfoRateLimit[];
   exchangeFilters: ExchangeFilter[];
   symbols: Symbol[];
+}
+
+export interface KlineParams {
+  symbol: string;
+  interval: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number;
 }
 
 export interface OrderBook {
