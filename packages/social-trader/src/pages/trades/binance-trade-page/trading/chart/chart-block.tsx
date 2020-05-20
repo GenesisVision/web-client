@@ -6,21 +6,29 @@ import {
   $textAccentColor
 } from "components/gv-styles/gv-colors/gv-colors";
 import { SIZES } from "constants/constants";
-import { LanguageCode } from "pages/trades/binance-trade-page/trading/chart/charting_library/charting_library.min";
+import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useSockets } from "services/websocket.service";
 
 import styles from "./chart.module.scss";
+import TradingView from "./charting_library/charting_library.min";
 import Datafeed from "./datafeed";
 
 export const ChartBlock: React.FC = () => {
-  const [t, options] = useTranslation();
   const TradingInfo = React.useContext(TradingInfoContext);
+  const [widget, setWidget] = React.useState<
+    TradingView.IChartingLibraryWidget
+  >();
+  const { connectSocket } = useSockets();
+  const methods = React.useContext(TerminalMethodsContext);
   const { symbol, exchangeInfo } = TradingInfo;
+
+  const emptyCallback = React.useCallback(() => {}, []);
+
   React.useEffect(() => {
     import("./charting_library/charting_library.min").then(TradingView => {
-      new TradingView.widget({
+      const widget = new TradingView.widget({
         custom_css_url: "/static/charting_library/style.css",
         symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
         interval: "1D",
@@ -29,9 +37,11 @@ export const ChartBlock: React.FC = () => {
         theme: "Dark",
         toolbar_bg: $backgroundColor,
         datafeed: Datafeed({
-          symbols: exchangeInfo?.symbols || []
+          symbols: exchangeInfo?.symbols || [],
+          getKlines: methods.getKlines,
+          klineSocket: methods.klineSocket(connectSocket)
         }),
-        locale: options.language as LanguageCode,
+        locale: "en",
         library_path: "/static/charting_library/",
         disabled_features: [
           "header_symbol_search",
@@ -72,8 +82,23 @@ export const ChartBlock: React.FC = () => {
           "mainSeriesProperties.baselineStyle.bottomLineColor": $negativeColor
         }
       });
+      setWidget(widget);
     });
-  }, [Object.values(symbol), exchangeInfo?.symbols]);
+  }, [exchangeInfo?.symbols]);
+
+  React.useEffect(() => {
+    if (!widget) return;
+
+    widget.onChartReady(() => {
+      const { interval } = widget.symbolInterval();
+      widget.setSymbol(
+        `${symbol.baseAsset}${symbol.quoteAsset}`,
+        interval,
+        emptyCallback
+      );
+    });
+  }, [widget, Object.values(symbol), emptyCallback]);
+
   return (
     <DefaultBlock
       size={SIZES.SMALL}

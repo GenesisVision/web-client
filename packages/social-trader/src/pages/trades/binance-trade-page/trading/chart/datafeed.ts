@@ -1,4 +1,3 @@
-import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
 import {
   IBasicDataFeed,
   SearchSymbolResultItem
@@ -10,10 +9,10 @@ import {
   Timezone
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
-  subscribeOnStream,
-  unsubscribeFromStream
-} from "pages/trades/binance-trade-page/trading/chart/streaming.js";
-import { Symbol } from "pages/trades/binance-trade-page/trading/trading.types";
+  KlineParams,
+  Symbol
+} from "pages/trades/binance-trade-page/trading/trading.types";
+import { Observable } from "rxjs";
 
 const formatTimeResolution = (resolution: string) => {
   if (resolution.match("M")) return resolution;
@@ -57,7 +56,26 @@ const configurationData = {
   ]
 };
 
-export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
+type Params = {
+  symbols: Symbol[];
+  getKlines: (params: KlineParams) => Promise<number[][]>;
+  klineSocket: (
+    symbol: string,
+    interval: string
+  ) => Observable<{
+    time: number;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+  }>;
+};
+
+export default ({
+  symbols,
+  getKlines,
+  klineSocket
+}: Params): IBasicDataFeed => ({
   //@ts-ignore
   onReady: callback => {
     setTimeout(() => callback(configurationData));
@@ -149,23 +167,14 @@ export default ({ symbols }: { symbols: Symbol[] }): IBasicDataFeed => ({
       onErrorCallback(error);
     }
   },
-  subscribeBars: (
-    symbolInfo,
-    resolution,
-    onRealtimeCallback,
-    subscribeUID,
-    onResetCacheNeededCallback
-  ) => {
+  subscribeBars: (symbolInfo, resolution, onRealtimeCallback) => {
     const { full_name } = symbolInfo;
-
-    subscribeOnStream(
-      subscribeUID,
+    klineSocket(
       full_name.toLowerCase(),
-      formatTimeResolution(resolution),
-      onRealtimeCallback
-    );
+      formatTimeResolution(resolution)
+    ).subscribe(data => {
+      onRealtimeCallback(data);
+    });
   },
-  unsubscribeBars: subscriberUID => {
-    unsubscribeFromStream(subscriberUID);
-  }
+  unsubscribeBars: () => {}
 });
