@@ -1,10 +1,10 @@
+import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
-import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,6 +16,15 @@ import {
 import BrokerCard from "./broker-card/broker-card";
 import styles from "./broker-select.module.scss";
 import NavigateToSettings from "./navigate-to-settings";
+
+interface Props {
+  data: BrokerCardType[];
+  selectedBroker: BrokerCardType;
+  selectBrokerHandle: (broker: string) => VoidFunction;
+  isForexAllowed?: boolean;
+  isKycConfirmed?: boolean;
+  navigateToSettings: VoidFunction;
+}
 
 const _BrokerSelectBroker: React.FC<Props> = ({
   data,
@@ -105,15 +114,6 @@ const _BrokerSelectBroker: React.FC<Props> = ({
     </Row>
   );
 };
-
-interface Props {
-  data: Broker[];
-  selectedBroker: Broker;
-  selectBrokerHandle: (broker: string) => () => void;
-  isForexAllowed?: boolean;
-  isKycConfirmed?: boolean;
-  navigateToSettings: () => void;
-}
 
 const BrokerSelect = withBlurLoader(React.memo(_BrokerSelectBroker));
 export default BrokerSelect;

@@ -9,6 +9,15 @@ import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
 import { slugBrokerName } from "./broker-card.helpers";
 import styles from "./broker-card.module.scss";
 
+interface Props {
+  logo: string;
+  brokerName: string;
+  onSelect?: (brokerName: string) => () => void;
+  cardState: BROKER_CARD_EXTRA_STATE;
+  tags?: Tag[];
+  isSelected?: boolean;
+}
+
 const _BrokerCard: React.FC<Props> = ({
   logo,
   brokerName,
@@ -39,10 +48,9 @@ const _BrokerCard: React.FC<Props> = ({
       {isSelected && (
         <div className={styles["broker-card__selected-mark"]}> &#10004;</div>
       )}
-      <BrokerCardAdornment
-        condition={cardState !== BROKER_CARD_EXTRA_STATE.NONE}
-        cardState={cardState}
-      />
+      {cardState !== BROKER_CARD_EXTRA_STATE.NONE && (
+        <BrokerCardAdornment cardState={cardState} />
+      )}
       <ImageBase className={logoClassName} src={logo} alt={brokerName} />
       <TagBrokerContainer
         tags={tags!}
@@ -55,12 +63,3 @@ const _BrokerCard: React.FC<Props> = ({
 
 const BrokerCard = React.memo(_BrokerCard);
 export default BrokerCard;
-
-interface Props {
-  logo: string;
-  brokerName: string;
-  onSelect?(brokerName: string): () => void;
-  cardState: BROKER_CARD_EXTRA_STATE;
-  tags?: Tag[];
-  isSelected?: boolean;
-}
