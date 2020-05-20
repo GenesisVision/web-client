@@ -1,3 +1,5 @@
+import { getKlines } from "pages/trades/binance-trade-page/services/binance-http.service";
+import { klineSocket } from "pages/trades/binance-trade-page/services/binance-ws.service";
 import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
 
 import {
@@ -33,6 +35,8 @@ export const BinanceFuturesTerminalMethods: ITerminalMethods = {
   getOpenOrders,
   getAllOrders,
   getUserStreamKey,
+  getKlines,
+  klineSocket,
   getAccountInformation,
   getTrades,
   getTickers,

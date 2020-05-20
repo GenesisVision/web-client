@@ -3,6 +3,7 @@ import {
   CancelOrderResult,
   Depth,
   ExchangeInfo,
+  KlineParams,
   OrderSide,
   QueryOrderResult,
   Ticker,
@@ -32,20 +33,15 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
     value => value
   );
 
-export const getKlines = (params: {
-  symbol: string;
-  interval: string;
-  startTime?: number;
-  endTime?: number;
-  limit?: number;
-}): Promise<number[][]> =>
-  requestService.get(
+export const getKlines = (params: KlineParams): Promise<number[][]> => {
+  return requestService.get(
     {
       url: "/api/v3/klines",
       params
     },
     value => value
   );
+};
 
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({

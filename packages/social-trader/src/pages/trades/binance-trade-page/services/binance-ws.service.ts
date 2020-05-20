@@ -79,8 +79,21 @@ export const getUserStreamSocket = (
   );
 };
 
-export const klineSocket = (symbol: string, interval: string) => {
+export const klineSocket = (connectSocketMethod: ConnectSocketMethodType) => (
+  symbol: string,
+  interval: string
+) => {
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  // return connectSocketMethod(socketType, url).pipe(map(depthTransform));
+  return connectSocketMethod(socketName, url).pipe(
+    map(data => {
+      return {
+        time: data.k.t,
+        open: data.k.o,
+        high: data.k.h,
+        low: data.k.l,
+        close: data.k.c
+      };
+    })
+  );
 };

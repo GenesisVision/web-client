@@ -5,6 +5,7 @@ import {
   getAllOrders,
   getDepth,
   getExchangeInfo,
+  getKlines,
   getOpenOrders,
   getTickers,
   getTrades,
@@ -14,6 +15,7 @@ import {
 import {
   depthSocket,
   getUserStreamSocket,
+  klineSocket,
   marketTicketsSocket,
   tradeSocket
 } from "pages/trades/binance-trade-page/services/binance-ws.service";
@@ -26,6 +28,8 @@ export const BinanceSpotTerminalMethods: ITerminalMethods = {
   getUserStreamKey,
   getAccountInformation,
   getTrades,
+  getKlines,
+  klineSocket,
   getTickers,
   getDepth,
   cancelAllOrders,
