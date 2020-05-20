@@ -5,12 +5,14 @@ import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { BrokerAccountType } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
-  getAccountTypes,
+  getBrokerAccountTypes,
   getBrokerState,
+  getExchangeAccountTypes,
   getLeverageDescription
 } from "../asset.helpers";
 import BrokerCard from "./broker-card/broker-card";
@@ -83,7 +85,11 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           <StatisticItem
             label={t("create-program-page.broker-info.account-type")}
           >
-            {getAccountTypes(selectedBroker.accountTypes)}
+            {"leverageMin" in selectedBroker
+              ? getBrokerAccountTypes(
+                  selectedBroker.accountTypes as BrokerAccountType[]
+                )
+              : getExchangeAccountTypes(selectedBroker.accountTypes)}
           </StatisticItem>
           <StatisticItem
             label={t("create-program-page.broker-info.trading-platform")}
@@ -100,12 +106,16 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               {t("create-program-page.broker-info.read-terms")}
             </a>
           </StatisticItem>
-          <StatisticItem label={t("create-program-page.broker-info.leverage")}>
-            {getLeverageDescription(
-              selectedBroker.leverageMin,
-              selectedBroker.leverageMax
-            )}
-          </StatisticItem>
+          {"leverageMin" in selectedBroker && (
+            <StatisticItem
+              label={t("create-program-page.broker-info.leverage")}
+            >
+              {getLeverageDescription(
+                selectedBroker.leverageMin,
+                selectedBroker.leverageMax
+              )}
+            </StatisticItem>
+          )}
           <StatisticItem label={t("create-program-page.broker-info.assets")}>
             {selectedBroker.assets}
           </StatisticItem>

@@ -1,3 +1,3 @@
-import { Broker } from "gv-api-web";
+import { Broker, ExchangeInfo } from "gv-api-web";
 
-export type BrokerCardType = Broker;
+export type BrokerCardType = Broker | ExchangeInfo;
