@@ -11,11 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js"
-);
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
-importScripts("bundles/precache-manifest.60144109bbe17651b1eb050c29e4f6f4.js");
+importScripts(
+  "bundles/precache-manifest.60144109bbe17651b1eb050c29e4f6f4.js"
+);
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -26,8 +26,4 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(
-  /chart\/.*/,
-  workbox.strategies.networkFirst({ cacheName: "network-first", plugins: [] }),
-  "GET"
-);
+workbox.routing.registerRoute(/chart\/.*/, workbox.strategies.networkFirst({ "cacheName":"network-first", plugins: [] }), 'GET');
