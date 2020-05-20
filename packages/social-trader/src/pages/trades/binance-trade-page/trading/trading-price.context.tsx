@@ -31,7 +31,7 @@ export const TradingPriceContext = createContext<TradingPriceState>(
 
 export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const TRADE_LIST_SIZE = 50;
-  const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
+  const terminalMethods = useContext(TerminalMethodsContext);
   const {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
@@ -47,17 +47,17 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
     setList([]);
     setSocketData(undefined);
     const symbol = getSymbol(baseAsset, quoteAsset);
-    const socket = tradeSocket(connectSocket, symbol);
+    const socket = terminalMethods.tradeSocket(connectSocket, symbol);
     socket.subscribe(data => {
       setSocketData(data);
     });
-    const trade = getTrades(symbol);
+    const trade = terminalMethods.getTrades(symbol);
     trade.subscribe(data => {
       const updatedData = [...socketDataBuffer, ...data];
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [baseAsset, quoteAsset]);
+  }, [baseAsset, quoteAsset, terminalMethods]);
 
   useEffect(() => {
     if (!socketData && !list) return;

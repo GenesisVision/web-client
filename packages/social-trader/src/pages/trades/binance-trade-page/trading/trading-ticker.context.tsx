@@ -28,9 +28,7 @@ export const TradingTickerContext = createContext<TradingTickerContextState>(
 );
 
 export const TradingTickerContextProvider: React.FC = ({ children }) => {
-  const { getTickers, marketTicketsSocket } = useContext(
-    TerminalMethodsContext
-  );
+  const terminalMethods = useContext(TerminalMethodsContext);
   const [requestData, setRequestData] = useState<{
     [key: string]: Ticker;
   }>({});
@@ -53,13 +51,14 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   }, [exchangeInfo]);
 
   useEffect(() => {
+    const { getTickers, marketTicketsSocket } = terminalMethods;
     const requestData = getTickers().pipe(map(normalizeMarketList));
     requestData.subscribe(setRequestData);
     const ticketsSocket = marketTicketsSocket(connectSocket).pipe(
       map(normalizeMarketList)
     );
     ticketsSocket.subscribe(setSocketData);
-  }, []);
+  }, [terminalMethods]);
   useEffect(() => {
     const updatedList = { ...list };
     Object.keys(socketData).forEach(name => {
