@@ -7,7 +7,7 @@ import { TerminalType } from "pages/trades/binance-trade-page/trading/trading.ty
 import * as qs from "qs";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { BINANCE_ROUTE } from "routes/trade.routes";
+import { BINANCE_FOLDER_ROUTE, BINANCE_ROUTE } from "routes/trade.routes";
 
 import styles from "./symbol-summary.module.scss";
 
@@ -20,7 +20,7 @@ export const TerminalTypeSwitcher: React.FC = () => {
     (type: TerminalType) => () => {
       const terminalTypeParam = qs.stringify({ type });
       const route = `${BINANCE_ROUTE}/${symbolPath}?${terminalTypeParam}`;
-      Push(route);
+      Push(BINANCE_FOLDER_ROUTE, route);
     },
     [symbolPath]
   );

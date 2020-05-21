@@ -59,7 +59,7 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
       map(normalizeMarketList)
     );
     ticketsSocket.subscribe(setSocketData);
-  }, []);
+  }, [getTickers, marketTicketsSocket]);
   useEffect(() => {
     const updatedList = { ...list };
     Object.keys(socketData).forEach(name => {

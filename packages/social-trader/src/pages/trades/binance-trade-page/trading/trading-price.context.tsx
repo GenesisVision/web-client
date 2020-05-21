@@ -57,7 +57,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [baseAsset, quoteAsset]);
+  }, [getTrades, tradeSocket, baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketData && !list) return;

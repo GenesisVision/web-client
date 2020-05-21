@@ -12,6 +12,5 @@ export const MarginRatioContainer: React.FC = () => {
   if (!accountInfo?.balances) return null;
 
   const marginInfo = getMarginInfo(accountInfo.balances, MARGIN_INFO_ASSET);
-
   return <MarginRatio marginInfo={marginInfo} />;
 };

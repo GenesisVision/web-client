@@ -6,6 +6,9 @@ import {
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Depth,
+  IBinanceKline,
+  IKline,
+  KlineSocketType,
   Ticker,
   Trade,
   TradeCurrency
@@ -16,8 +19,8 @@ import { ConnectSocketMethodType } from "services/websocket.service";
 
 import {
   depthTransform,
-  tickerTransform,
-  tradeTransform
+  tradeTransform,
+  transformKline
 } from "../binance-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
@@ -83,5 +86,15 @@ export const getUserStreamSocket = (
         return futuresTradeOrderUpdateEventTransform(item);
       return item;
     })
+  );
+};
+
+export const klineSocket = (
+  connectSocketMethod: ConnectSocketMethodType
+): KlineSocketType => (symbol: string, interval: string) => {
+  const socketName = `${symbol}@kline_${interval}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketName, url).pipe(
+    map<IBinanceKline, IKline>(transformKline)
   );
 };

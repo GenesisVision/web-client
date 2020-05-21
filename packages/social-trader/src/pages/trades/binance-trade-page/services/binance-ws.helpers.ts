@@ -2,6 +2,8 @@ import {
   Account,
   Depth,
   ExecutionReport,
+  IBinanceKline,
+  IKline,
   OutboundAccountInfo,
   Ticker,
   TickerWS,
@@ -48,6 +50,15 @@ export const depthTransform = ({ pu, e, E, s, U, u, b, a }: any): Depth => {
     asks: a
   };
 };
+
+export const transformKline = (data: IBinanceKline): IKline => ({
+  time: data.k.t,
+  open: parseFloat(data.k.o),
+  high: parseFloat(data.k.h),
+  low: parseFloat(data.k.l),
+  close: parseFloat(data.k.c)
+});
+
 export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
   eventType: "outboundAccountInfo",
   eventTime: m.E,

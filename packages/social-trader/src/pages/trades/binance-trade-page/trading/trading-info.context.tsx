@@ -29,7 +29,7 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { BINANCE_ROUTE } from "routes/trade.routes";
+import { BINANCE_FOLDER_ROUTE, BINANCE_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -79,7 +79,7 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
   authData: authDataProp,
-  outerSymbol = SymbolInitialState,
+  outerSymbol: symbol = SymbolInitialState,
   type,
   children
 }) => {
@@ -95,18 +95,20 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
-  const { data: exchangeInfo } = useApiRequest<ExchangeInfo>({
-    request: getExchangeInfo,
-    fetchOnMount: true
+  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+    request: getExchangeInfo
   });
 
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
-  const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  useEffect(() => {
+    sendRequest();
+  }, [getExchangeInfo]);
 
   useEffect(() => {
     if (type) setTerminalType(type);
@@ -121,7 +123,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     getUserStreamKey(authData).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
-  }, [authData]);
+  }, [authData, getAccountInformation, getUserStreamKey]);
 
   useEffect(() => {
     if (!userStreamKey) return;
@@ -131,7 +133,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     accountInfoStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [userStreamKey]);
+  }, [userStreamKey, getUserStreamSocket]);
 
   useEffect(() => {
     if (!socketData || !accountInfo) return;
@@ -154,15 +156,14 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
 
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
-      setSymbol(newSymbol);
       const symbolPath = stringifySymbolFromToParam(newSymbol);
       const terminalTypeParam = qs.stringify({
         [TYPE_PARAM_NAME]: terminalType
       });
       const route = `${BINANCE_ROUTE}/${symbolPath}?${terminalTypeParam}`;
-      Router.replace(route);
+      Router.push(BINANCE_FOLDER_ROUTE, route);
     },
-    [setSymbol, terminalType]
+    [terminalType]
   );
 
   const value = useMemo(

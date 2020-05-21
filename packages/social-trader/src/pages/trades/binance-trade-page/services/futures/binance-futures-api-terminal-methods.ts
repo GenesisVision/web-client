@@ -9,6 +9,7 @@ import {
   getAllOrders,
   getDepth,
   getExchangeInfo,
+  getKlines,
   getLeverageBrackets,
   getOpenOrders,
   getPositionInformation,
@@ -20,6 +21,7 @@ import {
 import {
   depthSocket,
   getUserStreamSocket,
+  klineSocket,
   marketTicketsSocket,
   tradeSocket
 } from "./binance-futures-ws.service";
@@ -33,6 +35,8 @@ export const BinanceFuturesTerminalMethods: ITerminalMethods = {
   getOpenOrders,
   getAllOrders,
   getUserStreamKey,
+  getKlines,
+  klineSocket,
   getAccountInformation,
   getTrades,
   getTickers,

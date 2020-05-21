@@ -11,6 +11,7 @@ import {
   ExchangeInfo,
   FuturesPositionInformation,
   HttpResponse,
+  KlineParams,
   MarginModeType,
   OrderSide,
   QueryOrderResult,
@@ -58,6 +59,16 @@ export const getPositionInformation = ({
     url: `${API_ROUTE}/positionRisk`,
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
+
+export const getKlines = (params: KlineParams): Promise<number[][]> => {
+  return requestService.get(
+    {
+      url: `${API_ROUTE}/klines`,
+      params
+    },
+    value => value
+  );
+};
 
 export const getLeverageBrackets = ({
   symbol,
