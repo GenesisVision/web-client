@@ -36,7 +36,7 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
 export const getKlines = (params: KlineParams): Promise<number[][]> => {
   return requestService.get(
     {
-      url: "/api/v3/klines",
+      url: `${API_ROUTE}/klines`,
       params
     },
     value => value

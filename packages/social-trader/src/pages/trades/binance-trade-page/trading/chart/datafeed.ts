@@ -10,9 +10,9 @@ import {
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
   KlineParams,
+  KlineSocketType,
   Symbol
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { Observable } from "rxjs";
 
 const formatTimeResolution = (resolution: string) => {
   if (resolution.match("M")) return resolution;
@@ -59,16 +59,7 @@ const configurationData = {
 type Params = {
   symbols: Symbol[];
   getKlines: (params: KlineParams) => Promise<number[][]>;
-  klineSocket: (
-    symbol: string,
-    interval: string
-  ) => Observable<{
-    time: number;
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-  }>;
+  klineSocket: KlineSocketType;
 };
 
 export default ({

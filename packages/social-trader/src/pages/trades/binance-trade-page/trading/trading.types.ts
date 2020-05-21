@@ -62,6 +62,44 @@ export interface TradeRequest {
 
 export type TradeAuthDataType = { publicKey: string; privateKey: string };
 
+export type KlineSocketType = (
+  symbol: string,
+  interval: string
+) => Observable<IKline>;
+
+export interface IKline {
+  time: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+}
+
+export interface IBinanceKline {
+  e: string; // Event type
+  E: number; // Event time
+  s: string; // Symbol
+  k: {
+    t: number; // Kline start time
+    T: number; // Kline close time
+    s: string; // Symbol
+    i: string; // Interva\
+    f: number; // First trade ID
+    L: number; // Last trade ID
+    o: string; // Open price
+    c: string; // Close price
+    h: string; // High price
+    l: string; // Low price
+    v: string; // Base asset volume
+    n: number; // Number of trades
+    x: boolean; // Is this kline closed?
+    q: string; // Quote asset volume
+    V: string; // Taker buy base asset volume
+    Q: string; // Taker buy quote asset volume
+    B: string; // Ignore
+  };
+}
+
 export interface ITerminalMethods {
   getKlines: (params: KlineParams) => Promise<number[][]>;
   getPositionInformation?: (options: {
@@ -132,16 +170,7 @@ export interface ITerminalMethods {
   ) => Observable<any>;
   klineSocket: (
     connectSocketMethod: ConnectSocketMethodType
-  ) => (
-    symbol: string,
-    interval: string
-  ) => Observable<{
-    time: number;
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-  }>;
+  ) => KlineSocketType;
 }
 
 export interface IConfigurationData {

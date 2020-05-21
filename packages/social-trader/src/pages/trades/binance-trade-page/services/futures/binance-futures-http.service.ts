@@ -63,7 +63,7 @@ export const getPositionInformation = ({
 export const getKlines = (params: KlineParams): Promise<number[][]> => {
   return requestService.get(
     {
-      url: "/fapi/v1/klines",
+      url: `${API_ROUTE}/klines`,
       params
     },
     value => value

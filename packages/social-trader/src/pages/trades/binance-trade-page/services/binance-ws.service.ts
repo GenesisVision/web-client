@@ -1,5 +1,8 @@
 import {
   Depth,
+  IBinanceKline,
+  IKline,
+  KlineSocketType,
   Ticker,
   Trade,
   TradeCurrency
@@ -13,6 +16,7 @@ import {
   tickerTransform,
   tradeTransform,
   transformExecutionReport,
+  transformKline,
   transformOutboundAccountInfo
 } from "./binance-ws.helpers";
 
@@ -79,21 +83,15 @@ export const getUserStreamSocket = (
   );
 };
 
-export const klineSocket = (connectSocketMethod: ConnectSocketMethodType) => (
-  symbol: string,
-  interval: string
-) => {
+export const klineSocket = (
+  connectSocketMethod: ConnectSocketMethodType
+): KlineSocketType => (symbol: string, interval: string) => {
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketName, url).pipe(
-    map(data => {
-      return {
-        time: data.k.t,
-        open: data.k.o,
-        high: data.k.h,
-        low: data.k.l,
-        close: data.k.c
-      };
-    })
+    map<IBinanceKline, IKline>(transformKline)
   );
 };
+
+type KlineSocket = ReturnType<typeof klineSocket>;
+let r: KlineSocket;
