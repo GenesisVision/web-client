@@ -6,7 +6,9 @@ import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-inf
 import {
   Account,
   AssetBalance,
+  ExchangeInfo,
   ExecutionReport,
+  SymbolFilter,
   TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -15,6 +17,7 @@ import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
@@ -25,6 +28,16 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const getSymbolFilters = (
+  exchangeInfo: ExchangeInfo,
+  symbol: string
+): SymbolFilter[] => {
+  return safeGetElemFromArray(
+    exchangeInfo.symbols,
+    item => item.symbol === symbol
+  ).filters;
+};
 
 export const authCookieService = (ctx?: NextPageContext) =>
   cookieServiceCreator({
@@ -108,7 +121,10 @@ export const getSymbolFromState = ({
 export const getSymbol = (base: TradeCurrency, quote: TradeCurrency): string =>
   base + quote;
 
+export const getDecimalScale = (tick: string): number =>
+  getDividerParts(tick).fracLength || 0;
+
 export const formatValueWithTick = (value: any, tick: string): string => {
-  const decimalScale = getDividerParts(formatValue(tick)).fracLength;
-  return formatValue(value, decimalScale);
+  const decimalScale = getDecimalScale(formatValue(tick));
+  return formatValue(value, decimalScale, false, { cleanNulls: false });
 };
