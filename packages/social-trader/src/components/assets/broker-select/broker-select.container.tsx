@@ -1,6 +1,6 @@
 import { BrokerSelectLoaderData } from "components/assets/asset.helpers";
+import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import Crashable from "decorators/crashable";
-import { Broker } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -11,6 +11,13 @@ import {
 import { safeGetElemFromArray } from "utils/helpers";
 
 import BrokerSelect from "./broker-select";
+
+interface Props {
+  brokers: BrokerCardType[];
+  navigateToSettings: () => void;
+  setSelectedBroker: (broker: BrokerCardType) => void;
+  selectedBroker: BrokerCardType;
+}
 
 const _BrokerSelectBrokerContainer: React.FC<Props> = ({
   brokers,
@@ -42,13 +49,6 @@ const _BrokerSelectBrokerContainer: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  brokers: Broker[];
-  navigateToSettings: () => void;
-  setSelectedBroker: (broker: Broker) => void;
-  selectedBroker: Broker;
-}
 
 const BrokerSelectContainer = React.memo(
   Crashable(_BrokerSelectBrokerContainer)

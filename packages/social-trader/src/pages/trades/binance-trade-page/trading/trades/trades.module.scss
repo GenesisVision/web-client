@@ -23,8 +23,8 @@
     & td {
       width: 33.3%;
     }
-    & th:last-child,
-    & td:last-child {
+    & th:not(:first-child),
+    & td:not(:first-child) {
       text-align: right;
     }
   }

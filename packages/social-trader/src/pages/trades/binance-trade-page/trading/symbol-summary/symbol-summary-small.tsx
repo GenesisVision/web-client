@@ -9,6 +9,7 @@ import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { MarketWatchTooltipButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
@@ -16,12 +17,11 @@ import {
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
-import { formatValue } from "utils/formatter";
+import React, { useContext } from "react";
 
 interface Props {
-  divider: number;
   data: MergedTickerSymbolType;
 }
 
@@ -34,10 +34,9 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 };
 
 export const SymbolSummarySmallContainer: React.FC = () => {
-  const { symbolData, divider } = useSymbolData();
+  const { symbolData } = useSymbolData();
   return (
     <SymbolSummarySmallView
-      divider={divider!}
       data={symbolData!}
       loaderData={getTickerSymbolLoaderData()}
     />
@@ -45,7 +44,6 @@ export const SymbolSummarySmallContainer: React.FC = () => {
 };
 
 const _SymbolSummarySmallView: React.FC<Props> = ({
-  divider,
   data: {
     eventTime,
     lastPrice,
@@ -58,6 +56,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     volume
   }
 }) => {
+  const { stepSize, tickSize } = useContext(TradingInfoContext);
   const renderSymbol = () => (
     <h3>
       {baseAsset}/{quoteAsset}
@@ -80,7 +79,10 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
           <h4>
             <MonoText>
               <TradeStatefulValue
-                value={formatValue(+lastPrice, divider)}
+                value={terminalMoneyFormat({
+                  amount: lastPrice,
+                  tickSize
+                })}
                 trigger={eventTime}
               />
             </MonoText>
@@ -88,7 +90,9 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </Row>
         <Row small>
           <MutedText>
-            <MonoText>{formatValue(+lastPrice, divider)}</MonoText>
+            <MonoText>
+              {terminalMoneyFormat({ amount: lastPrice, tickSize })}
+            </MonoText>
           </MutedText>
         </Row>
       </RowItem>
@@ -96,26 +100,31 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <StatisticItemInner label={"24 Change"}>
           <MonoText>
             <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
-              {formatValue(+priceChange, divider)}{" "}
-              {formatValue(+priceChangePercent, divider)} %
+              {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
+              {terminalMoneyFormat({
+                amount: priceChangePercent,
+                digits: 2
+              })}{" "}
+              %
             </ColoredText>
           </MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner isPending={!high} label={"24 High"}>
-          <MonoText>{formatValue(+high, divider)}</MonoText>
+          <MonoText>{terminalMoneyFormat({ amount: high, tickSize })}</MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner isPending={!low} label={"24 Low"}>
-          <MonoText>{formatValue(+low, divider)}</MonoText>
+          <MonoText>{terminalMoneyFormat({ amount: low, tickSize })}</MonoText>
         </StatisticItemInner>
       </RowItem>
       <RowItem>
         <StatisticItemInner label={"24 Volume"}>
           <MonoText>
-            {formatValue(+volume, divider)} {quoteAsset}
+            {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
+            {quoteAsset}
           </MonoText>
         </StatisticItemInner>
       </RowItem>

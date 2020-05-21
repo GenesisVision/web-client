@@ -1,9 +1,15 @@
 import useApiRequest from "hooks/api-request.hook";
 import Router from "next/router";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
+import {
+  getLotSizeFilter,
+  getSymbolPriceFilter
+} from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
+  getSymbolFilters,
+  getSymbolFromState,
   stringifySymbolFromToParam,
   updateAccountInfo
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -39,6 +45,8 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
+  stepSize: string;
+  tickSize: string;
   authData: TradeAuthDataType;
   terminalType: TerminalType;
   userStream?: Observable<any>;
@@ -54,6 +62,8 @@ const SymbolInitialState: SymbolState = {
 };
 
 export const TradingAccountInfoInitialState: TradingAccountInfoState = {
+  stepSize: "0.01",
+  tickSize: "0.01",
   authData: {
     publicKey: "",
     privateKey: ""
@@ -89,6 +99,8 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     request: getExchangeInfo
   });
 
+  const [tickSize, setTickSize] = useState<string>("0.01");
+  const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
@@ -129,6 +141,19 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     setAccountInfo(updatedData);
   }, [socketData]);
 
+  useEffect(() => {
+    if (exchangeInfo) {
+      const symbolFilters = getSymbolFilters(
+        exchangeInfo,
+        getSymbolFromState(symbol)
+      );
+      const { tickSize } = getSymbolPriceFilter(symbolFilters);
+      const { stepSize } = getLotSizeFilter(symbolFilters);
+      setTickSize(tickSize);
+      setStepSize(stepSize);
+    }
+  }, [exchangeInfo, symbol]);
+
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
@@ -143,6 +168,8 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
 
   const value = useMemo(
     () => ({
+      tickSize,
+      stepSize,
       authData,
       terminalType,
       userStream,
@@ -152,6 +179,8 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       exchangeInfo
     }),
     [
+      tickSize,
+      stepSize,
       authData,
       terminalType,
       userStream,

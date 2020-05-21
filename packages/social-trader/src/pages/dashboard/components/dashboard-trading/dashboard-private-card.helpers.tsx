@@ -5,15 +5,29 @@ import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
-import { BrokerTradeServerType, ProgramMinInvestAmount } from "gv-api-web";
+import {
+  AmountWithCurrency,
+  BrokerTradeServerType,
+  ProgramMinInvestAmount
+} from "gv-api-web";
 import { TEvent } from "hooks/anchor.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
 import ConfirmContainer from "modules/confirm/confirm-container";
+import { TransferItemType } from "modules/transfer/transfer.types";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
+
+export const transformAmountWithCurrencyToTransferItem = ({
+  amount,
+  currency
+}: AmountWithCurrency): TransferItemType => ({
+  id: currency,
+  currency,
+  available: amount
+});
 
 export const MakeProgramButton: React.FC<{
   makeProgramLink?: string | ToType;

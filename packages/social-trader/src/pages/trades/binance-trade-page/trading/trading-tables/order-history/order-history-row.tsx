@@ -1,7 +1,9 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
 
 interface Props {
@@ -27,16 +29,21 @@ const _OrderHistoryRow: React.FC<Props> = ({
   filled,
   total
 }) => {
+  const { tickSize, stepSize } = useContext(TradingInfoContext);
   return (
     <TableRow>
       <TableCell>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>
-      <TableCell>{price}</TableCell>
-      <TableCell>{origQty}</TableCell>
+      <TableCell>{terminalMoneyFormat({ amount: price, tickSize })}</TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: origQty, tickSize: stepSize })}
+      </TableCell>
       <TableCell>{filled}</TableCell>
-      <TableCell>{total}</TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: total, tickSize: stepSize })}
+      </TableCell>
     </TableRow>
   );
 };

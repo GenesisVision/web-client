@@ -6,6 +6,7 @@ import { Row } from "components/row/row";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { MarketWatchTooltipButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
@@ -13,21 +14,20 @@ import {
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 
 import styles from "./symbol-summary.module.scss";
 
 interface Props {
-  divider: number;
   data: MergedTickerSymbolType;
 }
 
 export const SymbolSummaryContainer: React.FC = () => {
-  const { symbolData, divider } = useSymbolData();
+  const { symbolData } = useSymbolData();
   return (
     <SymbolSummaryView
-      divider={divider!}
       data={symbolData!}
       loaderData={getTickerSymbolLoaderData()}
     />
@@ -48,7 +48,6 @@ const SymbolSummaryLine: React.FC<{ label: string }> = React.memo(
 );
 
 const _SymbolSummaryView: React.FC<Props> = ({
-  divider,
   data: {
     eventTime,
     lastPrice,
@@ -61,6 +60,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     volume
   }
 }) => {
+  const { stepSize, tickSize } = useContext(TradingInfoContext);
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
@@ -79,7 +79,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
             <h4>
               <MonoText>
                 <TradeStatefulValue
-                  value={(+lastPrice).toFixed(divider)}
+                  value={terminalMoneyFormat({ amount: lastPrice, tickSize })}
                   trigger={eventTime}
                 />
               </MonoText>
@@ -87,7 +87,9 @@ const _SymbolSummaryView: React.FC<Props> = ({
           </Row>
           <Row>
             <MutedText>
-              <MonoText>{(+lastPrice).toFixed(divider)}</MonoText>
+              <MonoText>
+                {terminalMoneyFormat({ amount: lastPrice, tickSize })}
+              </MonoText>
             </MutedText>
           </Row>
         </RowItem>
@@ -95,20 +97,26 @@ const _SymbolSummaryView: React.FC<Props> = ({
           <SymbolSummaryLine label={"24 Change"}>
             <MonoText>
               <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
-                {(+priceChange).toFixed(divider)}{" "}
-                {(+priceChangePercent).toFixed(divider)} %
+                {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
+                {terminalMoneyFormat({ amount: priceChangePercent, digits: 2 })}{" "}
+                %
               </ColoredText>
             </MonoText>
           </SymbolSummaryLine>
           <SymbolSummaryLine label={"24 High"}>
-            <MonoText>{high ? (+high).toFixed(divider) : 0}</MonoText>
+            <MonoText>
+              {high ? terminalMoneyFormat({ amount: high, tickSize }) : 0}
+            </MonoText>
           </SymbolSummaryLine>
           <SymbolSummaryLine label={"24 Low"}>
-            <MonoText>{low ? (+low).toFixed(divider) : 0}</MonoText>
+            <MonoText>
+              {low ? terminalMoneyFormat({ amount: low, tickSize }) : 0}
+            </MonoText>
           </SymbolSummaryLine>
           <SymbolSummaryLine label={"24 Volume"}>
             <MonoText>
-              {(+volume).toFixed(divider)} {quoteAsset}
+              {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
+              {quoteAsset}
             </MonoText>
           </SymbolSummaryLine>
         </RowItem>

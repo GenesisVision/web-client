@@ -3,18 +3,18 @@ import HelpButton from "components/help-button/help-button";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import { BROKER_CARD_EXTRA_STATE } from "./broker-card.constants";
 import styles from "./broker-card.module.scss";
 
-const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
-  t,
-  cardState
-}) => {
+interface Props {
+  cardState: BROKER_CARD_EXTRA_STATE;
+}
+
+const _BrokerCardAdornment: React.FC<Props> = ({ cardState }) => {
+  const [t] = useTranslation();
   const [isOpenPopup, setIsOpen] = React.useState(false);
   return (
     <div className={styles["broker-card__adornment-text"]}>
@@ -45,16 +45,5 @@ const _BrokerCardAdornment: React.FC<OwnProps & WithTranslation> = ({
   );
 };
 
-const BrokerCardAdornment = compose<
-  React.ComponentType<OwnProps & WithLoaderProps>
->(
-  translate(),
-  withLoader,
-  React.memo
-)(_BrokerCardAdornment);
-
+const BrokerCardAdornment = React.memo(_BrokerCardAdornment);
 export default BrokerCardAdornment;
-
-interface OwnProps {
-  cardState: BROKER_CARD_EXTRA_STATE;
-}

@@ -1,10 +1,17 @@
-import { Broker } from "gv-api-web";
-import brokersApi from "services/api-client/brokers-api";
+import { Broker, ExchangeInfo } from "gv-api-web";
+import { api } from "services/api-client/swagger-custom-client";
 
 const GM_BROKER_NAME = "Genesis Markets";
 
+export const fetchExchanges = (): Promise<ExchangeInfo[]> =>
+  api
+    .exchanges()
+    .getExchanges()
+    .then(({ items }) => items);
+
 export const fetchBrokers = (): Promise<Broker[]> =>
-  brokersApi
+  api
+    .brokers()
     .getBrokers()
     .then(data =>
       data.brokers.sort(

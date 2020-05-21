@@ -7,10 +7,10 @@ import { DialogListItem } from "components/dialog/dialog-list-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
-import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import styles from "./order-book.module.scss";
 
@@ -47,8 +47,34 @@ const _OrderBookRow: React.FC<Props> = ({
 }) => {
   const { setPrice } = useContext(TradingPriceContext);
   const {
+    stepSize,
+    tickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
+  const formattedPrice = terminalMoneyFormat({
+    amount: price,
+    tickSize: tickSize
+  });
+  const formattedAmount = terminalMoneyFormat({
+    amount: amount,
+    tickSize: stepSize
+  });
+  const formattedTotal = terminalMoneyFormat({
+    amount: total,
+    tickSize: stepSize
+  });
+  const formattedAvgPrice = terminalMoneyFormat({
+    amount: avgPrice,
+    tickSize: tickSize
+  });
+  const formattedBaseSum = terminalMoneyFormat({
+    amount: baseSum,
+    tickSize: stepSize
+  });
+  const formattedQuoteSum = terminalMoneyFormat({
+    amount: quoteSum,
+    tickSize: tickSize
+  });
   return (
     <Tooltip
       onMouseEnter={() => setHoveredRow(index)}
@@ -57,10 +83,14 @@ const _OrderBookRow: React.FC<Props> = ({
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
       render={() => (
         <TooltipContent fixed={false}>
-          <DialogListItem label={"Avg.Price"}>{avgPrice}</DialogListItem>
-          <DialogListItem label={`sum ${baseAsset}`}>{baseSum}</DialogListItem>
+          <DialogListItem label={"Avg.Price"}>
+            {formattedAvgPrice}
+          </DialogListItem>
+          <DialogListItem label={`sum ${baseAsset}`}>
+            {formattedBaseSum}
+          </DialogListItem>
           <DialogListItem label={`sum ${quoteAsset}`}>
-            {quoteSum}
+            {formattedQuoteSum}
           </DialogListItem>
         </TooltipContent>
       )}
@@ -71,10 +101,10 @@ const _OrderBookRow: React.FC<Props> = ({
         })}
       >
         <td>
-          <ColoredText color={color}>{formatValue(price)}</ColoredText>
+          <ColoredText color={color}>{formattedPrice}</ColoredText>
         </td>
-        <td>{formatCurrencyValue(+amount, baseAsset)}</td>
-        <td>{formatCurrencyValue(+total, quoteAsset)}</td>
+        <td>{formattedAmount}</td>
+        <td>{formattedTotal}</td>
       </tr>
     </Tooltip>
   );

@@ -1,7 +1,3 @@
-import {
-  getDividerParts,
-  useSymbolTick
-} from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -12,16 +8,13 @@ import { safeGetElemFromArray } from "utils/helpers";
 export const useSymbolData = () => {
   const items = useContext(TradingTickerContext);
   const { symbol } = useContext(TradingInfoContext);
-  const tickSize = useSymbolTick();
-  const divider = getDividerParts(tickSize ? String(+tickSize) : undefined)
-    .fracLength;
   const symbolData = items
     ? safeGetElemFromArray(
         items,
         item => item.symbol === getSymbolFromState(symbol)
       )
     : undefined;
-  return { symbolData, divider };
+  return { symbolData };
 };
 
 export const getTickerSymbolLoaderData = (): MergedTickerSymbolType => {

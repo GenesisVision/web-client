@@ -4,6 +4,8 @@
 $header-height: 44px + $padding-xxsmall * 2;
 $market-watch-mobile-height: 300px;
 $chart-mobile-height: 300px;
+$chart-tablet-height: 300px;
+$order-book-tablet-height: 200px;
 $tables-mobile-height: 300px;
 $bottom-block-height: 300px;
 $market-watch-width: 250px;
@@ -24,7 +26,8 @@ $place-order-width: 250px;
     auto
     auto
     $chart-mobile-height
-    $tables-mobile-height 1fr;
+    $tables-mobile-height
+    1fr;
   grid-template-columns: 1fr;
   @include media-breakpoint-tablet() {
     grid-template-areas:
@@ -33,7 +36,7 @@ $place-order-width: 250px;
       "chart chart place-orders"
       "order-book trades place-orders"
       "tables tables place-orders";
-    grid-template-rows: auto auto 1fr 1fr $bottom-block-height;
+    grid-template-rows: auto auto $chart-tablet-height $order-book-tablet-height 1fr;
     grid-template-columns: 1fr 1fr $place-order-width;
   }
   @include media-breakpoint-desktop() {

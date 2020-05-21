@@ -5,6 +5,7 @@ import {
   BrokersApi,
   DashboardApi,
   EventsApi,
+  ExchangesApi,
   FileApi,
   FollowApi,
   FundsApi,
@@ -65,6 +66,9 @@ const client = new ApiClient(apiUrl);
 export default client;
 
 export class Api {
+  exchanges = (token?: Token): ExchangesApi =>
+    withApiProxy(new ExchangesApi(Client.create(token)));
+
   auth = (token?: Token): AuthApi =>
     withApiProxy(new AuthApi(Client.create(token)));
 

@@ -1,8 +1,9 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import {
-  formatValueWithTick,
-  getSymbol
+  getSymbol,
+  getSymbolFilters
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   AssetBalance,
@@ -73,39 +74,35 @@ export const usePlaceOrderAutoFill = ({
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatValueWithTick(
-        total / price,
-        stepSize
-      ) as unknown) as number;
-      if (value > 0) {
-        setValue(quantityName, value, true);
-        setAutoFill(true);
-      }
+      const value = +terminalMoneyFormat({
+        amount: total / price,
+        tickSize: stepSize
+      });
+      if (isNaN(value)) return;
+      if (value > 0) setValue(quantityName, value, true);
+      setAutoFill(true);
     } else setAutoFill(false);
   }, [total]);
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatValueWithTick(
-        quantity * price,
-        tickSize
-      ) as unknown) as number;
-      if (value > 0) {
-        setValue(totalName, value, true);
-        setAutoFill(true);
-      }
+      const value = +terminalMoneyFormat({
+        amount: quantity * price,
+        tickSize: tickSize
+      });
+      if (isNaN(value)) return;
+      if (value > 0) setValue(totalName, value, true);
+      setAutoFill(true);
     } else setAutoFill(false);
   }, [quantity]);
   useEffect(() => {
     if (!autoFill) {
       if (quantity && price) {
-        setValue(
-          totalName,
-          (formatValueWithTick(
-            quantity * price,
-            tickSize
-          ) as unknown) as number,
-          true
-        );
+        const value = +terminalMoneyFormat({
+          amount: quantity * price,
+          tickSize: tickSize
+        });
+        if (isNaN(value)) return;
+        setValue(totalName, value, true);
         setAutoFill(true);
       }
     } else setAutoFill(false);
@@ -203,10 +200,10 @@ export const usePlaceOrderInfo = ({
   quoteAsset: TradeCurrency;
   balances: AssetBalance[];
 }) => {
-  const filters = safeGetElemFromArray(
-    exchangeInfo.symbols,
-    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
-  ).filters;
+  const filters = getSymbolFilters(
+    exchangeInfo,
+    getSymbol(baseAsset, quoteAsset)
+  );
   const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
   const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
@@ -260,14 +257,18 @@ export const useTradeSlider = ({
     if (side === "BUY") {
       const walletAvailable = +getBalance(balances, quoteAsset);
       const newTotal = calculatePercentage(walletAvailable, percentValue);
-      setValue(totalName, newTotal, true);
+      const formattedNewTotal = +terminalMoneyFormat({
+        amount: newTotal,
+        tickSize: stepSize
+      });
+      setValue(totalName, formattedNewTotal, true);
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(balances, baseAsset);
-      const newQuantity = +formatValueWithTick(
-        calculatePercentage(walletAvailable, percentValue),
-        stepSize
-      );
+      const newQuantity = +terminalMoneyFormat({
+        amount: calculatePercentage(walletAvailable, percentValue),
+        tickSize: stepSize
+      });
       setValue(quantityName, newQuantity, true);
     }
   }, [sliderValue]);

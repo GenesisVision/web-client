@@ -1,16 +1,25 @@
 import { CREATE_ASSET } from "constants/constants";
-import { NewFundRequest, NewTradingAccountRequest } from "gv-api-web";
+import {
+  NewExchangeAccountRequest,
+  NewFundRequest,
+  NewTradingAccountRequest
+} from "gv-api-web";
 import { ICreateAccountSettingsFormValues } from "pages/create-account/components/create-account-settings/create-account-settings";
+import { ICreateExchangeAccountSettingsFormValues } from "pages/create-account/components/create-exchange-account-settings/create-exchange-account-settings";
 import { ICreateFundSettingsFormValues } from "pages/create-fund/components/create-fund-settings/create-fund-settings";
 import { api } from "services/api-client/swagger-custom-client";
 import filesService from "services/file-service";
 import { sendEventToGA } from "utils/ga";
 
 export type ICreateAssetSettingsFormValues =
+  | ICreateExchangeAccountSettingsFormValues
   | ICreateFundSettingsFormValues
   | ICreateAccountSettingsFormValues;
 
-export type NewAssetRequest = NewFundRequest | NewTradingAccountRequest;
+export type NewAssetRequest =
+  | NewExchangeAccountRequest
+  | NewFundRequest
+  | NewTradingAccountRequest;
 
 export const createAsset = ({
   data,
@@ -52,6 +61,11 @@ const getCreateMethod = (
 ): ((request: NewAssetRequest) => Promise<any>) => {
   const assetsApi = api.assets();
   switch (asset) {
+    case CREATE_ASSET.EXCHANGE_ACCOUNT:
+      return (request: NewAssetRequest) =>
+        assetsApi.createExchangeAccount({
+          body: request as NewExchangeAccountRequest
+        });
     case CREATE_ASSET.ACCOUNT:
       return (request: NewAssetRequest) =>
         assetsApi.createTradingAccount({

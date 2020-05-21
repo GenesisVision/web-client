@@ -1,15 +1,18 @@
 import BrokerSelectContainer from "components/assets/broker-select/broker-select.container";
+import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
-import { Broker } from "gv-api-web";
+import { Broker, ExchangeInfo } from "gv-api-web";
 import useTab from "hooks/tab.hook";
+import CreateExchangeAccountSettingsSection from "pages/create-account/components/create-exchange-account-settings/create-exchange-account-settings-section";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import CreateAccountSettingsSection from "./create-account-settings/create-account-settings-section";
 
 const _CreateAccountContainer: React.FC<Props> = ({
+  exchanges,
   brokers,
   requestBrokerName = ""
 }) => {
@@ -18,7 +21,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
   const broker = brokers.find(
     ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
   );
-  const [selectedBroker, setSelectedBroker] = useState<Broker>(
+  const [selectedBroker, setSelectedBroker] = useState<BrokerCardType>(
     broker || brokers[0]
   );
 
@@ -31,6 +34,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
     setTab(null, TAB.SETTINGS);
   }, []);
 
+  const isBroker = "leverageMin" in selectedBroker;
   return (
     <div>
       <GVTabs value={tab}>
@@ -47,14 +51,19 @@ const _CreateAccountContainer: React.FC<Props> = ({
       <Row large>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
-            brokers={brokers}
+            brokers={[...brokers, ...exchanges]}
             setSelectedBroker={setSelectedBroker}
             navigateToSettings={navigateToSettings}
             selectedBroker={selectedBroker}
           />
         )}
-        {tab === TAB.SETTINGS && (
-          <CreateAccountSettingsSection broker={selectedBroker} />
+        {tab === TAB.SETTINGS && isBroker && (
+          <CreateAccountSettingsSection broker={selectedBroker as Broker} />
+        )}
+        {tab === TAB.SETTINGS && !isBroker && (
+          <CreateExchangeAccountSettingsSection
+            exchange={selectedBroker as ExchangeInfo}
+          />
         )}
       </Row>
     </div>
@@ -67,6 +76,7 @@ enum TAB {
 }
 
 interface Props {
+  exchanges: ExchangeInfo[];
   requestBrokerName?: string;
   brokers: Broker[];
 }

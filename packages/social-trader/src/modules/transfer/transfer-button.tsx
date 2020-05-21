@@ -4,18 +4,19 @@ import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
-import { WalletItemType } from "components/wallet-select/wallet-select";
-import { InternalTransferRequestType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import ConvertIcon from "media/convert.svg";
+import { TransferContainerProps } from "modules/transfer/components/transfer-container";
 import TransferPopup from "modules/transfer/transfer-popup";
-import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./transfer.button.module.scss";
 
 const _TransferButton: React.FC<Props> = ({
+  fixedSelects,
+  accountId,
+  outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer = false,
   size = GV_BTN_SIZE.LARGE,
@@ -47,6 +48,9 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        fixedSelects={fixedSelects}
+        accountId={accountId}
+        outerCurrentItemContainerItems={outerCurrentItemContainerItems}
         successMessage={successMessage}
         singleCurrentItemContainer={singleCurrentItemContainer}
         currentItem={currentItem}
@@ -62,9 +66,7 @@ const _TransferButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  successMessage?: string;
-  singleCurrentItemContainer?: boolean;
+interface Props extends TransferContainerProps {
   size?: GV_BTN_SIZE;
   withIcon?: boolean;
   type?: WALLET_BUTTON_TYPE;
@@ -72,12 +74,6 @@ interface Props {
   variant?: "text" | "outlined" | "contained";
   label?: string;
   disabled?: boolean;
-  onApply: VoidFunction;
-  currentItem: WalletItemType;
-  sourceType: InternalTransferRequestType;
-  destinationType: InternalTransferRequestType;
-  title?: string;
-  currentItemContainer: TRANSFER_CONTAINER;
 }
 
 const FullButton: React.FC<{

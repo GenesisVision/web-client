@@ -1,8 +1,9 @@
 import Select, { ISelectChangeEvent } from "components/select/select";
-import React, { useEffect } from "react";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import React, { useContext, useEffect } from "react";
 import { formatValue } from "utils/formatter";
 
-import { getTickValues, useSymbolTick } from "./order-book.helpers";
+import { getTickValues } from "./order-book.helpers";
 
 interface Props {
   value?: { value: string; default: boolean };
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const _OrderBookTickSizeSelect: React.FC<Props> = ({ value, setValue }) => {
-  const tickSize = useSymbolTick();
+  const { tickSize } = useContext(TradingInfoContext);
   useEffect(() => {
     if (tickSize) setValue({ value: formatValue(tickSize), default: true });
   }, [tickSize]);
@@ -18,6 +19,7 @@ const _OrderBookTickSizeSelect: React.FC<Props> = ({ value, setValue }) => {
   const tickValues = getTickValues(+tickSize);
   return (
     <Select
+      fixedWidth={false}
       size={"small"}
       name="column"
       value={value.value}
