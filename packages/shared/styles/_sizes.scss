@@ -206,10 +206,16 @@ $avatar-size-mobile: $avatar-size/$divider-title;
     text-align: left;
     font-weight: normal;
     @if $size == middle {
-      font-size: $font-size-xsmall;
+      &,
+      & span {
+        font-size: $font-size-xsmall;
+      }
     }
     @if $size == small {
-      font-size: $font-size-xxsmall;
+      &,
+      & span {
+        font-size: $font-size-xxsmall;
+      }
     }
   }
   & td {
