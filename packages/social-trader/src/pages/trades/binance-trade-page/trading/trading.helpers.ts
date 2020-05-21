@@ -103,7 +103,10 @@ export const stringifySymbolFromToParam = (symbol: SymbolState): string => {
 export const parseSymbolFromUrlParam = (param: string): SymbolState => {
   const splittedValue = param.split(TERMINAL_ROUTE_SYMBOL_SEPARATOR);
   return splittedValue.length > 1
-    ? { baseAsset: splittedValue[0], quoteAsset: splittedValue[1] }
+    ? {
+        baseAsset: splittedValue[0].toUpperCase(),
+        quoteAsset: splittedValue[1].toUpperCase()
+      }
     : DEFAULT_SYMBOL;
 };
 
