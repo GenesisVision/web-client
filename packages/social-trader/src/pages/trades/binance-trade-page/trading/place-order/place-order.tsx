@@ -11,7 +11,6 @@ import { Row } from "components/row/row";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
-import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
@@ -33,7 +32,6 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
-    tickSize,
     authData,
     exchangeInfo,
     accountInfo,
@@ -63,12 +61,6 @@ const _PlaceOrder: React.FC = () => {
   const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
-    : undefined;
-  const formattedBalance = balance
-    ? terminalMoneyFormat({
-        amount: balance,
-        tickSize
-      })
     : undefined;
 
   return (
@@ -107,7 +99,7 @@ const _PlaceOrder: React.FC = () => {
           </RowItem>
           <RowItem>
             <MutedText>
-              {formattedBalance} {walletAsset}
+              {balance} {walletAsset}
             </MutedText>
           </RowItem>
         </Row>
