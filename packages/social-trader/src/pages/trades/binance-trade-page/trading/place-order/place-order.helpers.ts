@@ -2,7 +2,8 @@ import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
 import {
   formatValueWithTick,
-  getSymbol
+  getSymbol,
+  getSymbolFilters
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   AssetBalance,
@@ -203,10 +204,10 @@ export const usePlaceOrderInfo = ({
   quoteAsset: TradeCurrency;
   balances: AssetBalance[];
 }) => {
-  const filters = safeGetElemFromArray(
-    exchangeInfo.symbols,
-    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
-  ).filters;
+  const filters = getSymbolFilters(
+    exchangeInfo,
+    getSymbol(baseAsset, quoteAsset)
+  );
   const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
   const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);

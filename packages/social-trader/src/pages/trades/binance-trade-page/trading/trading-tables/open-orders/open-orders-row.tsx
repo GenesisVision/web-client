@@ -2,6 +2,7 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
@@ -35,7 +36,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   total
 }) => {
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const { authData } = useContext(TradingInfoContext);
+  const { authData, tickSize, stepSize } = useContext(TradingInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
@@ -54,10 +55,14 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>
-      <TableCell>{price}</TableCell>
-      <TableCell>{origQty}</TableCell>
+      <TableCell>{terminalMoneyFormat({ amount: price, tickSize })}</TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: origQty, tickSize: stepSize })}
+      </TableCell>
       <TableCell>{filled}</TableCell>
-      <TableCell>{total}</TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: total, tickSize: stepSize })}
+      </TableCell>
       <TableCell>
         <GVButton
           noPadding
