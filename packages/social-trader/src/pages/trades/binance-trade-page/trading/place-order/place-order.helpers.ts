@@ -79,8 +79,10 @@ export const usePlaceOrderAutoFill = ({
         tickSize: stepSize
       });
       if (isNaN(value)) return;
-      if (value > 0) setValue(quantityName, value, true);
-      setAutoFill(true);
+      if (value > 0 || String(total) === "0") {
+        setValue(quantityName, value, true);
+        setAutoFill(true);
+      }
     } else setAutoFill(false);
   }, [total]);
   useEffect(() => {
@@ -90,7 +92,8 @@ export const usePlaceOrderAutoFill = ({
         tickSize: tickSize
       });
       if (isNaN(value)) return;
-      if (value > 0) setValue(totalName, value, true);
+      if (value > 0 || String(quantity) === "0")
+        setValue(totalName, value, true);
       setAutoFill(true);
     } else setAutoFill(false);
   }, [quantity]);
