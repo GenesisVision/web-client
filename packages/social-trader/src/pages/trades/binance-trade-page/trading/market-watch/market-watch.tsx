@@ -98,6 +98,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
       )}
       <Row small>
         <Select
+          fixedWidth={false}
           size={"small"}
           name="column"
           value={column}

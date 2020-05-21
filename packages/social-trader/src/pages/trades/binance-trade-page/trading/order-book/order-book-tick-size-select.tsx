@@ -19,6 +19,7 @@ const _OrderBookTickSizeSelect: React.FC<Props> = ({ value, setValue }) => {
   const tickValues = getTickValues(+tickSize);
   return (
     <Select
+      fixedWidth={false}
       size={"small"}
       name="column"
       value={value.value}
