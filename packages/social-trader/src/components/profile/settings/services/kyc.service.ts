@@ -2,7 +2,7 @@ import { api } from "services/api-client/swagger-custom-client";
 
 export const loadKycIFrame = (externalUserId: string) => {
   const $script = require("scriptjs");
-  $script(process.env.REACT_APP_IDENSIC_SRC, function() {
+  $script(process.env.NEXT_PUBLIC_IDENSIC_SRC, function() {
     if (!(window as any).idensic.init) return;
     api
       .profile()
