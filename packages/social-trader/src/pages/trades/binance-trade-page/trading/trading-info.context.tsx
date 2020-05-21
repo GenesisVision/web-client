@@ -85,15 +85,18 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
-  const { data: exchangeInfo } = useApiRequest<ExchangeInfo>({
-    request: getExchangeInfo,
-    fetchOnMount: true
+  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+    request: getExchangeInfo
   });
 
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  useEffect(() => {
+    sendRequest();
+  }, [getExchangeInfo]);
 
   useEffect(() => {
     if (type) setTerminalType(type);
@@ -108,7 +111,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     getUserStreamKey(authData).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
-  }, [authData]);
+  }, [authData, getAccountInformation, getUserStreamKey]);
 
   useEffect(() => {
     if (!userStreamKey) return;
@@ -118,7 +121,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
     accountInfoStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [userStreamKey]);
+  }, [userStreamKey, getUserStreamSocket]);
 
   useEffect(() => {
     if (!socketData || !accountInfo) return;
