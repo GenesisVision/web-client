@@ -126,5 +126,5 @@ export const getDecimalScale = (tick: string): number =>
 
 export const formatValueWithTick = (value: any, tick: string): string => {
   const decimalScale = getDecimalScale(formatValue(tick));
-  return formatValue(value, decimalScale, false, { cleanNulls: false });
+  return formatValue(value, decimalScale);
 };
