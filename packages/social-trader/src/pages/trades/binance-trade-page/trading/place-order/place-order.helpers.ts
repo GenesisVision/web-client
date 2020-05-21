@@ -1,7 +1,7 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
+import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import {
-  formatValueWithTick,
   getSymbol,
   getSymbolFilters
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -74,10 +74,10 @@ export const usePlaceOrderAutoFill = ({
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatValueWithTick(
-        total / price,
-        stepSize
-      ) as unknown) as number;
+      const value = +terminalMoneyFormat({
+        amount: total / price,
+        tickSize: stepSize
+      });
       if (isNaN(value)) return;
       if (value > 0) setValue(quantityName, value, true);
       setAutoFill(true);
@@ -85,10 +85,10 @@ export const usePlaceOrderAutoFill = ({
   }, [total]);
   useEffect(() => {
     if (!autoFill) {
-      const value = (formatValueWithTick(
-        quantity * price,
-        tickSize
-      ) as unknown) as number;
+      const value = +terminalMoneyFormat({
+        amount: quantity * price,
+        tickSize: tickSize
+      });
       if (isNaN(value)) return;
       if (value > 0) setValue(totalName, value, true);
       setAutoFill(true);
@@ -97,10 +97,10 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       if (quantity && price) {
-        const value = (formatValueWithTick(
-          quantity * price,
-          tickSize
-        ) as unknown) as number;
+        const value = +terminalMoneyFormat({
+          amount: quantity * price,
+          tickSize: tickSize
+        });
         if (isNaN(value)) return;
         setValue(totalName, value, true);
         setAutoFill(true);
@@ -257,14 +257,18 @@ export const useTradeSlider = ({
     if (side === "BUY") {
       const walletAvailable = +getBalance(balances, quoteAsset);
       const newTotal = calculatePercentage(walletAvailable, percentValue);
-      setValue(totalName, newTotal, true);
+      const formattedNewTotal = +terminalMoneyFormat({
+        amount: newTotal,
+        tickSize: stepSize
+      });
+      setValue(totalName, formattedNewTotal, true);
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(balances, baseAsset);
-      const newQuantity = +formatValueWithTick(
-        calculatePercentage(walletAvailable, percentValue),
-        stepSize
-      );
+      const newQuantity = +terminalMoneyFormat({
+        amount: calculatePercentage(walletAvailable, percentValue),
+        tickSize: stepSize
+      });
       setValue(quantityName, newQuantity, true);
     }
   }, [sliderValue]);
