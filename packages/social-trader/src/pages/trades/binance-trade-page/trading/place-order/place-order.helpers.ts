@@ -78,10 +78,9 @@ export const usePlaceOrderAutoFill = ({
         total / price,
         stepSize
       ) as unknown) as number;
-      if (value > 0) {
-        setValue(quantityName, value, true);
-        setAutoFill(true);
-      }
+      if (isNaN(value)) return;
+      if (value > 0) setValue(quantityName, value, true);
+      setAutoFill(true);
     } else setAutoFill(false);
   }, [total]);
   useEffect(() => {
@@ -90,23 +89,20 @@ export const usePlaceOrderAutoFill = ({
         quantity * price,
         tickSize
       ) as unknown) as number;
-      if (value > 0) {
-        setValue(totalName, value, true);
-        setAutoFill(true);
-      }
+      if (isNaN(value)) return;
+      if (value > 0) setValue(totalName, value, true);
+      setAutoFill(true);
     } else setAutoFill(false);
   }, [quantity]);
   useEffect(() => {
     if (!autoFill) {
       if (quantity && price) {
-        setValue(
-          totalName,
-          (formatValueWithTick(
-            quantity * price,
-            tickSize
-          ) as unknown) as number,
-          true
-        );
+        const value = (formatValueWithTick(
+          quantity * price,
+          tickSize
+        ) as unknown) as number;
+        if (isNaN(value)) return;
+        setValue(totalName, value, true);
         setAutoFill(true);
       }
     } else setAutoFill(false);
