@@ -5,6 +5,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { SIZES } from "constants/constants";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { FuturesAsset } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
   getMarginRatioColor,
@@ -16,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./margin-ratio.module.scss";
 
 interface Props {
-  marginInfo: FuturesAsset;
+  data: FuturesAsset;
 }
 
 const MarginRatioItem: React.FC<{
@@ -34,7 +35,7 @@ const MarginRatioItem: React.FC<{
 });
 
 const _MarginRatio: React.FC<Props> = ({
-  marginInfo: { maintMargin, marginBalance }
+  data: { maintMargin, marginBalance }
 }) => {
   const [t] = useTranslation();
   const marginRatio =
@@ -70,4 +71,4 @@ const _MarginRatio: React.FC<Props> = ({
   );
 };
 
-export const MarginRatio = React.memo(_MarginRatio);
+export const MarginRatio = withBlurLoader(React.memo(_MarginRatio));
