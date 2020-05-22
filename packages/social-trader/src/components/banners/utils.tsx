@@ -167,7 +167,7 @@ export default function createBannerApi(
 
       res.statusCode = 200;
       res.setHeader("Content-Type", `image/${logoOptions ? "png" : "svg+xml"}`);
-      // res.setHeader("Cache-Control", `max-age=86400`);
+      res.setHeader("Cache-Control", `max-age=86400`);
       res.send(banner);
     } catch (e) {
       console.error("error 2: ", e);
