@@ -1,0 +1,254 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+$default-padding: $padding-xxsmall $padding-small;
+
+@mixin box-shadow($color) {
+  box-shadow: 0 0.2em 0.5em 0 $color;
+}
+
+.gv-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border: 0;
+  outline: none;
+  padding: $default-padding;
+  @include transition(
+    filter,
+    background-color,
+    box-shadow,
+    color,
+    opacity,
+    padding
+  );
+  color: $text-accent-color;
+  background-color: transparent;
+  [stroke] {
+    @include transition(stroke);
+  }
+
+  &__label {
+    @include transition(opacity);
+    position: relative;
+    &--success {
+      opacity: 0;
+    }
+  }
+  &__success-symbol {
+    @include transition(opacity);
+    opacity: 0;
+    position: absolute;
+    &--success {
+      opacity: 1;
+    }
+  }
+
+  &--successful {
+    &.gv-btn.gv-btn--contained {
+      opacity: 1;
+      background-color: $positive-color;
+    }
+  }
+
+  &--pending {
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    :local {
+      animation-name: pending;
+    }
+    filter: grayscale(50%);
+  }
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &--wide {
+    width: 100%;
+  }
+
+  &--large {
+    font-weight: 600;
+    @include font-size($font-size-common);
+    &:not(.gv-btn--no-padding) {
+      @include height(50px);
+      @include horizontal-paddings($padding-small);
+      @include vertical-paddings($padding-xxsmall);
+    }
+  }
+
+  &--big {
+    align-self: flex-end;
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    box-sizing: border-box;
+    &:not(.gv-btn--no-padding) {
+      @include height($btn-height);
+    }
+  }
+
+  &--small {
+    @include font-size($font-size-common);
+    &:not(.gv-btn--no-padding) {
+      @include width($btn-width-small);
+      @include height($btn-height-small);
+    }
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  &--no-padding {
+    padding: 0;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:not(:disabled):active {
+    background-image: none;
+  }
+
+  &--text {
+    &.gv-btn--primary {
+      color: $primary-color;
+    }
+
+    &:hover:not(:disabled) {
+      &.gv-btn--danger {
+        background-color: transparent;
+        color: rgba(darken($negative-color, 10%), 0.9);
+        & [stroke] {
+          stroke: rgba(darken($negative-color, 10%), 0.9) !important ;
+        }
+      }
+
+      &.gv-btn--primary {
+        background-color: transparent;
+        color: rgba(darken($primary-color, 10%), 0.9);
+        & [stroke] {
+          stroke: rgba(darken($primary-color, 10%), 0.9) !important ;
+        }
+      }
+
+      &.gv-btn--secondary {
+        background-color: transparent;
+        color: rgba(darken($text-color, 10%), 0.9);
+        & [stroke] {
+          stroke: rgba(darken($text-color, 10%), 0.9) !important ;
+        }
+      }
+    }
+  }
+
+  &--contained {
+    border-radius: 2em;
+
+    &.gv-btn--danger {
+      border-color: $negative-color;
+      background-color: $negative-color;
+      @include box-shadow(rgba(darken($negative-color, 50%), 0.2));
+    }
+
+    &.gv-btn--primary {
+      border-color: $primary-color;
+      background-color: $primary-color;
+      @include box-shadow(rgba(darken($primary-color, 50%), 0.2));
+    }
+
+    &.gv-btn--secondary {
+      border-color: $text-color;
+      background-color: $secondary-color;
+      @include box-shadow(rgba(darken($secondary-color, 50%), 0.2));
+    }
+
+    &.gv-btn--primary-dark {
+      border-color: $primary-color;
+      background-color: rgba($primary-color, 0.2);
+      color: $primary-color;
+    }
+
+    &:not(:disabled):active {
+      &.gv-btn--danger {
+        background-color: darken($negative-color, 10%);
+      }
+
+      &.gv-btn--primary {
+        background-color: darken($primary-color, 10%);
+      }
+
+      &.gv-btn--secondary {
+        background-color: darken($secondary-color, 10%);
+      }
+
+      &.gv-btn--primary-dark {
+        background-color: darken(rgba($primary-color, 0.2), 10%);
+      }
+    }
+
+    &:hover:not(:disabled):not(.gv-btn--successful) {
+      &.gv-btn--danger {
+        background-color: darken($negative-color, 10%);
+      }
+
+      &.gv-btn--primary {
+        background-color: darken($primary-color, 10%);
+      }
+
+      &.gv-btn--secondary {
+        background-color: darken($secondary-color, 10%);
+      }
+
+      &.gv-btn--primary-dark {
+        background-color: darken(rgba($primary-color, 0.2), 10%);
+      }
+    }
+  }
+
+  &--outlined {
+    border-radius: 2em;
+    border-width: 0.1em;
+    border-style: solid;
+
+    &.gv-btn--danger {
+      border-color: $negative-color;
+    }
+
+    &.gv-btn--primary {
+      border-color: $primary-color;
+    }
+
+    &.gv-btn--secondary {
+      border-color: $secondary-color;
+    }
+  }
+}
+
+:local {
+  @keyframes pending {
+    0% {
+      color: rgba(255, 255, 255, 8);
+    }
+    50% {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

@@ -1,6 +1,5 @@
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
+import { useAlerts } from "hooks/alert.hook";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { MiddlewareType, setPromiseMiddleware } from "utils/promise-middleware";
 import { ResponseError } from "utils/types";
 
@@ -48,7 +47,7 @@ const useApiRequest = <T extends any>({
   defaultData,
   catchCallback
 }: TUseApiRequestProps<T>): TUseApiRequestOutput<T> => {
-  const dispatch = useDispatch();
+  const { successAlert, errorAlert } = useAlerts();
   const [status, setStatus] = useState<API_REQUEST_STATUS>(
     API_REQUEST_STATUS.WAIT
   );
@@ -61,8 +60,7 @@ const useApiRequest = <T extends any>({
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
 
   const sendSuccessMessage = (res: any) => {
-    successMessage &&
-      dispatch(alertMessageActions.success(successMessage, true));
+    successMessage && successAlert(successMessage);
     setStatus(API_REQUEST_STATUS.SUCCESS);
     return res;
   };
@@ -84,7 +82,7 @@ const useApiRequest = <T extends any>({
       .catch((errorMessage: ResponseError) => {
         setStatus(API_REQUEST_STATUS.FAIL);
         setErrorMessage(errorMessage);
-        dispatch(alertMessageActions.error(errorMessage.errorMessage));
+        errorAlert(errorMessage.errorMessage);
         catchCallback && catchCallback(errorMessage);
       })
       .finally(() => {

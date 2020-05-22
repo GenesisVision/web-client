@@ -1,26 +1,29 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
-import AssetField from "../asset-fields/asset-field";
-
 interface ISignalsFeeFormPartialProps {
+  inDialog?: boolean;
   volumeFeeFieldName: string;
   successFeeFieldName: string;
   hasSubscriptionFeeAutofocus?: boolean;
 }
 
 const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
+  inDialog,
   successFeeFieldName,
   volumeFeeFieldName
 }) => {
   const [t] = useTranslation();
+  const ContainerElem = inDialog ? Row : RowItem;
   return (
     <AssetRow>
-      <AssetField>
+      <ContainerElem onlyOffset wide={inDialog}>
         <AssetFormField
           wide
           name={volumeFeeFieldName}
@@ -35,8 +38,8 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-program-page.settings.hints.signal-volume-fee"
           )}
         />
-      </AssetField>
-      <AssetField>
+      </ContainerElem>
+      <ContainerElem onlyOffset wide={inDialog}>
         <AssetFormField
           wide
           name={successFeeFieldName}
@@ -51,7 +54,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-program-page.settings.hints.signal-success-fee"
           )}
         />
-      </AssetField>
+      </ContainerElem>
     </AssetRow>
   );
 };

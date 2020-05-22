@@ -1,0 +1,39 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.tag-item {
+  display: inline-block;
+  position: relative;
+  cursor: default;
+}
+
+.tag-item-tooltip {
+  padding: $padding-xxsmall/2 0;
+}
+
+.tag-button {
+  @include font-size($font-size-xsmall);
+  @include adaptive-border-radius(19.5px);
+  @include height(18px);
+  @include line-height(18px);
+  @include horizontal-paddings($padding-xxsmall);
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--remainder {
+    color: $positive-color;
+    background-color: rgba($positive-color, 0.1);
+  }
+}
+
+.tag-circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}

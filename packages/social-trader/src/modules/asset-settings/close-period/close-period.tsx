@@ -1,3 +1,4 @@
+import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
@@ -7,6 +8,8 @@ import React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { compose } from "redux";
 
+import styles from "../asset-settings.module.scss";
+
 const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   const [
     isClosePeriodOpen,
@@ -15,13 +18,15 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   ] = useIsOpen();
   return (
     <>
-      <Row onlyOffset className="asset-settings__block-wrapper">
-        <p className="asset-settings__text">
+      <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
+        <FormTextField>
           {t("program-settings.period-and-closing.text-period")}
-        </p>
-        <GVButton color="primary" onClick={setClosePeriodOpen}>
-          {t("program-details-page.close-period.title")}
-        </GVButton>
+        </FormTextField>
+        <Row large>
+          <GVButton color="primary" onClick={setClosePeriodOpen}>
+            {t("program-details-page.close-period.title")}
+          </GVButton>
+        </Row>
       </Row>
       <ConfirmClosePeriod
         open={isClosePeriodOpen}

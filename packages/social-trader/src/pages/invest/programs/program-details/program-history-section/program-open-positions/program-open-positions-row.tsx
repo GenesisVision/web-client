@@ -1,5 +1,6 @@
+import classNames from "classnames";
 import { CurrencyItem } from "components/currency-item/currency-item";
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
@@ -25,11 +26,21 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
 }) => (
   <TableRow stripy>
     {showDate && (
-      <TableCell className="details-trades__cell program-details-trades__cell--date">
+      <TableCell
+        className={classNames(
+          styles["details-trades__cell"],
+          styles["program-details-trades__cell--date"]
+        )}
+      >
         {formatDate(position.date)}
       </TableCell>
     )}
-    <TableCell className="details-trades__cell program-details-trades__cell--symbol">
+    <TableCell
+      className={classNames(
+        styles["details-trades__cell"],
+        styles["program-details-trades__cell--symbol"]
+      )}
+    >
       <CurrencyItem
         clickable={position.assetData ? position.assetData.hasAssetInfo : false}
         url={position.assetData ? position.assetData.url : ""}
@@ -75,7 +86,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     {showProfit && (
-      <TableCell className="details-trades__cell--profit">
+      <TableCell className={styles["details-trades__cell--profit"]}>
         <Profitability
           value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}

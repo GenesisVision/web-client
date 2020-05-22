@@ -9,8 +9,6 @@ import { useRefLink } from "hooks/ref-link";
 import * as React from "react";
 import { PropsWithChildren } from "react";
 
-import "./page.scss";
-
 const Page = ({
   showTitle,
   title,
@@ -34,9 +32,9 @@ const Page = ({
           <BackButton />
         </div>
         {showTitle && (
-          <div className="page__title">
+          <Row xlarge>
             <h1>{title}</h1>
-          </div>
+          </Row>
         )}
         <Row onlyOffset large>
           {children}

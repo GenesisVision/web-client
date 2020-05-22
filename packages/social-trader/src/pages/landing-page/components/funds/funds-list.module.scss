@@ -1,0 +1,30 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+$chart-width: 160px;
+
+.funds-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+
+  @include media-breakpoint-tablet() {
+    grid-column-gap: 40px;
+  }
+
+  &__item:not(:first-child) {
+    opacity: 0.5;
+  }
+
+  &--active {
+    .funds-list__item {
+      opacity: 1;
+    }
+  }
+}

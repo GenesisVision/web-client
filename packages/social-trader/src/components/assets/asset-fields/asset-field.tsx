@@ -1,30 +1,35 @@
-import "./asset-field.scss";
-
-import classNames from "classnames";
+import { Center } from "components/center/center";
+import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 
+import styles from "./asset-field.module.scss";
+
 export const AssetField: React.FC<React.HTMLAttributes<HTMLDivElement> &
-  Props> = ({ children, wide, hide, className }) => {
+  Props> = ({ children, wide, hide }) => {
   return (
-    <div
-      className={classNames("asset-field", className, {
-        "asset-field--hidden": hide,
-        "asset-field--wider": wide
-      })}
+    <RowItem
+      large
+      hide={hide}
+      wide={wide}
+      bottomOffset
+      className={styles["asset-field"]}
     >
       {children}
-    </div>
+    </RowItem>
   );
 };
 
 interface Props {
   hide?: boolean;
   wide?: boolean;
-  className?: string;
 }
 
 export const AssetFields: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
-}) => <div className="asset-fields">{children}</div>;
+}) => (
+  <Center wrap className={styles["asset-fields"]}>
+    {children}
+  </Center>
+);
 
 export default AssetField;

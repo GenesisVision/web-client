@@ -1,0 +1,11 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.chart-currency-selector {
+  &__select {
+    min-width: auto;
+    height: auto;
+    display: block;
+    border-bottom: 0;
+  }
+}

@@ -1,0 +1,97 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.trade-table {
+  @include terminal-table(middle);
+
+  &--items {
+  }
+
+  &--middle {
+    & th {
+      font-size: $font-size-xsmall;
+      @include adaptive-full-padding($padding-xxsmall);
+    }
+    & td {
+      font-size: $font-size-small;
+      @include adaptive-full-padding($padding-xxsmall);
+    }
+  }
+
+  &__header-container {
+    //width: calc(100% - 5px);
+  }
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__items-container {
+    height: 100%;
+    width: 100%;
+    //overflow-y: auto;
+    //overflow-x: visible;
+  }
+
+  &__empty-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: $padding-medium;
+  }
+}
+
+.trading-table-sorting-cell {
+  &--asc,
+  &--desc {
+    position: relative;
+
+    &::before {
+      @include transition(width);
+      @extend %sortable-border-icon;
+      height: 4px;
+    }
+
+    &::after {
+      @include transition(width);
+      @extend %sortable-border-icon;
+    }
+  }
+
+  &--right {
+    text-align: right;
+  }
+
+  &--desc {
+    &::before {
+      width: 10px;
+    }
+
+    &::after {
+      width: 5px;
+    }
+  }
+
+  &--asc {
+    &::before {
+      width: 5px;
+    }
+
+    &::after {
+      width: 10px;
+    }
+  }
+}
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 5px;
+  content: "";
+  border-top: 1px solid white;
+}

@@ -3,8 +3,6 @@ import { PostListWithInput } from "components/conversation/post-list/post-list-w
 import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import React, { useCallback } from "react";
 
-import "../post-list/post-list.scss";
-
 interface Props {
   id: string;
 }

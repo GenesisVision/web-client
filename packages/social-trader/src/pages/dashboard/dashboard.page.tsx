@@ -1,5 +1,4 @@
-import "./dashboard.scss";
-
+import classNames from "classnames";
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -14,6 +13,7 @@ import { useSelector } from "react-redux";
 import { isNewUserSelector } from "reducers/header-reducer";
 
 import DashboardTradingStatistic from "./components/dashboard-statistic/dashboard-trading-statistic";
+import styles from "./dashboard.module.scss";
 import { getRequestsCount } from "./services/dashboard.service";
 
 const DashboardInRequestsContainer = dynamic(() =>
@@ -38,12 +38,22 @@ const _DashboardPage: React.FC = () => {
           <DashboardInRequestsContainer />
         </div>
       )}
-      <div className="dashboard__statistic-block dashboard__statistic-block--landscape-tablet">
+      <div
+        className={classNames(
+          styles["dashboard__statistic-block"],
+          styles["dashboard__statistic-block--landscape-tablet"]
+        )}
+      >
         <DashboardTradingStatistic landscapeTablet />
         <DashboardInvestingStatistic landscapeTablet />
       </div>
       {notNewUser && (
-        <div className="dashboard__statistic-block dashboard__statistic-block--tablet">
+        <div
+          className={classNames(
+            styles["dashboard__statistic-block"],
+            styles["dashboard__statistic-block--tablet"]
+          )}
+        >
           <DashboardPortfolio tablet />
           <DashboardAssets tablet />
         </div>

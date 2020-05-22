@@ -1,6 +1,7 @@
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
+import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
 import { ASSET } from "constants/constants";
@@ -36,10 +37,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       programDetails.personalDetails.canInvest
     : true;
   return (
-    <DetailsBlock
-      type={DETAILS_BLOCK_TYPE.BORDERED}
-      className="details-description__control-elements-block"
-    >
+    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentProgramInfo
         id={id}
         currency={tradingAccountInfo.currency}
@@ -48,7 +46,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         isOwnProgram={isOwnProgram}
         levelsParameters={levelsParameters}
       />
-      <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
+      <DetailsStatisticContainer>
         {programDetails.availableInvestmentBase === 0 &&
         isAuthenticated &&
         !isOwnProgram ? (
@@ -73,7 +71,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             currency={tradingAccountInfo.currency}
           />
         )}
-      </div>
+      </DetailsStatisticContainer>
     </DetailsBlock>
   );
 };

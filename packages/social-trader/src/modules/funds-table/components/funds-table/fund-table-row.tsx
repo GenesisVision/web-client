@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
@@ -22,6 +23,8 @@ import { composeFundsDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
+import styles from "./funds-table.module.scss";
+
 const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   const [fundState, setFundState] = useState(fund);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -35,7 +38,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   }, []);
   return (
     <TableRow>
-      <TableCell className="funds-table__cell">
+      <TableCell height={"small"} className={styles["funds-table__cell"]}>
         <Link to={link}>
           <AssetAvatarWithName
             url={fund.logoUrl}
@@ -45,7 +48,12 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           />
         </Link>
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--amount">
+      <TableCell
+        className={classNames(
+          styles["funds-table__cell"],
+          styles["funds-table__cell--amount"]
+        )}
+      >
         <NumberFormat
           value={formatCurrencyValue(
             fund.balance.amount,
@@ -55,7 +63,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           displayType="text"
         />
       </TableCell>
-      <TableCell className="funds-table__cell">
+      <TableCell className={styles["funds-table__cell"]}>
         <FundAssetContainer
           noWrap
           assets={fund.topFundAssets}
@@ -64,18 +72,20 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           length={fund.totalAssetsCount}
         />
       </TableCell>
-      <TableCell className="funds-table__cell">{fund.investorsCount}</TableCell>
-      <TableCell className="programs-table__cell">
+      <TableCell className={styles["funds-table__cell"]}>
+        {fund.investorsCount}
+      </TableCell>
+      <TableCell className={styles["programs-table__cell"]}>
         {distanceDate(fund.creationDate)}
       </TableCell>
-      <TableCell className="funds-table__cell">
+      <TableCell className={styles["funds-table__cell"]}>
         <NumberFormat
           value={formatValue(fund.statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className="funds-table__cell">
+      <TableCell className={styles["funds-table__cell"]}>
         <Profitability
           value={formatValue(fund.statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -88,11 +98,17 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           />
         </Profitability>
       </TableCell>
-      <TableCell className="funds-table__cell funds-table__cell--chart">
+      <TableCell
+        height={"small"}
+        className={classNames(
+          styles["funds-table__cell"],
+          styles["funds-table__cell--chart"]
+        )}
+      >
         <ProgramSimpleChart data={fund?.statistic?.chart} />
       </TableCell>
       {isAuthenticated && fund.personalDetails && (
-        <TableCell className="funds-table__cell">
+        <TableCell className={styles["funds-table__cell"]}>
           <ToggleAssetFavoriteButton
             asset={fundState}
             updateRow={handleUpdateRow}

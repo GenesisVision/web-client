@@ -15,18 +15,8 @@
   }
   &__chart_container {
     height: 300px;
-    .theme-dark {
-      background: red !important;
-    }
-  }
-  &__block {
-    @include adaptive-padding(bottom, $padding-small);
-    & > div {
-      padding-top: 0;
-    }
   }
   &__title {
-    @include adaptive-padding(bottom, $padding-xsmall);
     text-transform: uppercase;
     color: $primary-color;
     @include font-size($font-size-paragraph);

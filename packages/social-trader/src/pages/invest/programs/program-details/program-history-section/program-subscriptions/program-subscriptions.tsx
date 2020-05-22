@@ -1,4 +1,6 @@
+import classNames from "classnames";
 import { ACTION_STATUS_FILTER_VALUES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
@@ -45,7 +47,10 @@ const _ProgramSubscriptions: React.FC<Props> = ({
       )}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+          className={classNames(
+            styles["details-trades__head-cell"],
+            styles[`program-details-trades__cell--${column.name}`]
+          )}
         >
           {t(`program-details-page.history.subscriptions.${column.name}`)}
         </span>

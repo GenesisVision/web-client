@@ -7,9 +7,7 @@ const _SignUpFooter: React.FC<Props> = ({ ROUTE }) => {
   const [t] = useTranslation();
   return (
     <>
-      <span className="signup-footer__desc">
-        {t("auth.signup.footer-text")}
-      </span>
+      <span>{t("auth.signup.footer-text")}</span>
       <Link to={ROUTE}>
         <GVButton variant="outlined" color="secondary">
           {t("auth.login.title")}

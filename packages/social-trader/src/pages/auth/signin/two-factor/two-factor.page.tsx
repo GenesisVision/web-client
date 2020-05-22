@@ -8,7 +8,6 @@ const _TwoFactorPage: React.FC<Props> = ({ redirectFrom }) => (
   <SignInContainer
     redirectFrom={redirectFrom}
     type={CODE_TYPE.TWO_FACTOR}
-    className="login-two-factor-page"
     renderForm={({ handle, email, errorMessage, password }) => (
       <TwoFactorCodeForm
         onSubmit={handle}

@@ -1,3 +1,5 @@
+import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import { useEmailPendingState } from "pages/auth/auth.service";
 import CaptchaContainer from "pages/auth/captcha-container";
 import { sendConfirmationLink } from "pages/auth/signup/services/signup-email-pending.service";
@@ -10,19 +12,23 @@ const _EmailPending: React.FC = () => {
   const { getEmailPendingState } = useEmailPendingState();
   const { email } = getEmailPendingState();
   return (
-    <div className="signup-email">
-      <h1>{t("auth.signup.email-confirm-title")}</h1>
-      <p className="signup-email-pending__text">
-        {t("auth.signup-email-pending.text-section")}
-      </p>
-      <CaptchaContainer
-        request={sendConfirmationLink(email)}
-        renderForm={handle => (
-          <SignupEmailPendingContainer
-            sendConfirmationLink={() => handle({ email })}
-          />
-        )}
-      />
+    <div>
+      <h3>{t("auth.signup.email-confirm-title")}</h3>
+      <Row>
+        <MutedText noWrap={false}>
+          {t("auth.signup-email-pending.text-section")}
+        </MutedText>
+      </Row>
+      <Row>
+        <CaptchaContainer
+          request={sendConfirmationLink(email)}
+          renderForm={handle => (
+            <SignupEmailPendingContainer
+              sendConfirmationLink={() => handle({ email })}
+            />
+          )}
+        />
+      </Row>
     </div>
   );
 };

@@ -1,17 +1,15 @@
 import { Push } from "components/link/link";
 import { normalizeUrlString } from "components/link/link.helper";
 import { NextPage, NextPageContext } from "next";
-import nextCookie from "next-cookies";
 import qs from "qs";
 import React, { Component } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
-import { getTokenName } from "utils/get-token-name";
+import { getToken } from "services/auth-service";
 
 const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
   class extends Component {
     static async getInitialProps(ctx: NextPageContext) {
-      const tokenName = getTokenName();
-      const token = nextCookie(ctx)[tokenName];
+      const token = getToken(ctx);
       if (ctx.req && ctx.res && !token) {
         const redirectUrl = `${LOGIN_ROUTE}?from=${qs.stringify(
           ctx.req.url || HOME_ROUTE

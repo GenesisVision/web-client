@@ -7,7 +7,7 @@ import {
 import puppeteer, { Page } from "puppeteer";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
-import { getTokenName } from "utils/get-token-name";
+import { GV_TOKEN_KEY } from "utils/get-token-name";
 
 import translates from "../../public/static/locales/en/translations.json";
 
@@ -53,8 +53,7 @@ export const useTestHelpers = (page: Page) => {
   const waitForSelector = (selector: string) => page.waitForSelector(selector);
   const getAuth = async () => {
     const cookies = await page.cookies();
-    const tokenName = getTokenName();
-    const tokenCookie = cookies.find(cookie => cookie.name === tokenName);
+    const tokenCookie = cookies.find(cookie => cookie.name === GV_TOKEN_KEY);
     return String(
       tokenCookie ? authService.generateTokenString(tokenCookie.value) : ""
     );

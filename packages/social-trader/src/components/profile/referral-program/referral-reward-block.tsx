@@ -1,5 +1,6 @@
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { PartnershipDetails } from "gv-api-web";
 import * as React from "react";
@@ -12,26 +13,32 @@ const _ReferralRewardsBlock: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList>
-      <StatisticItem
-        big
-        label={t("profile-page.referral-program.referral-friends-1lvl")}
-      >
-        {totalReferralsL1}
-      </StatisticItem>
-      <StatisticItem
-        big
-        label={t("profile-page.referral-program.referral-friends-2lvl")}
-      >
-        {totalReferralsL2}
-      </StatisticItem>
-      <StatisticItem
-        big
-        label={t("profile-page.referral-program.total-rewards")}
-      >
-        {totalAmount} {currency}
-      </StatisticItem>
-    </StatisticItemList>
+    <Row>
+      <RowItem large>
+        <StatisticItemInner
+          big
+          label={t("profile-page.referral-program.referral-friends-1lvl")}
+        >
+          {totalReferralsL1}
+        </StatisticItemInner>
+      </RowItem>
+      <RowItem large>
+        <StatisticItemInner
+          big
+          label={t("profile-page.referral-program.referral-friends-2lvl")}
+        >
+          {totalReferralsL2}
+        </StatisticItemInner>
+      </RowItem>
+      <RowItem large>
+        <StatisticItemInner
+          big
+          label={t("profile-page.referral-program.total-rewards")}
+        >
+          {totalAmount} {currency}
+        </StatisticItemInner>
+      </RowItem>
+    </Row>
   );
 };
 

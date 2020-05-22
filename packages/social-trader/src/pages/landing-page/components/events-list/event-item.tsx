@@ -8,6 +8,8 @@ import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
+import styles from "./events-list.module.scss";
+
 const timeConversion = (date: Date) => {
   const MS_IN_ONE_SEC = 1000;
   const MS_IN_ONE_MIN = 1000 * 60;
@@ -124,7 +126,7 @@ const _EventItem: React.FC<Props> = ({
   }, [currentHeight, currentIndex]);
   return (
     <li
-      className="events-list__item"
+      className={styles["events-list__item"]}
       style={{
         transition: `transform 0.5s, opacity 0.5s`,
         opacity: isShow ? "1" : "0",
@@ -135,37 +137,41 @@ const _EventItem: React.FC<Props> = ({
     >
       <Link
         title={t("landing-page:links.title", { title, page: "details" })}
-        className="events-list__item-link"
+        className={styles["events-list__item-link"]}
         to={linkAsset}
       >
-        <div className="events-list__item-avatar">
+        <div className={styles["events-list__item-avatar"]}>
           <ImageBase
             DefaultImageComponent={GVProgramDefaultAvatar}
-            defaultImageClassName="events-list__item-image--default"
+            defaultImageClassName={styles["events-list__item-image--default"]}
             alt={title}
             color={color}
-            className="events-list__item-image"
+            className={styles["events-list__item-image"]}
             src={logoUrl}
           />
         </div>
       </Link>
-      <div className="events-list__item-info">
+      <div className={styles["events-list__item-info"]}>
         <Link
           title={t("landing-page:links.title", {
             title: userUrl,
             page: "user"
           })}
-          className="events-list__item-link"
+          className={styles["events-list__item-link"]}
           to={linkUser}
         >
-          <div className="events-list__item-title">{title}</div>
+          <div className={styles["events-list__item-title"]}>{title}</div>
         </Link>
-        <div className="events-list__item-text">{text}</div>
+        <div className={styles["events-list__item-text"]}>{text}</div>
       </div>
-      <div className="events-list__item-values">
-        {value && <div className="events-list__item-number">{value}</div>}
+      <div className={styles["events-list__item-values"]}>
+        {value && (
+          <div className={styles["events-list__item-number"]}>{value}</div>
+        )}
         {date && (
-          <div className="events-list__item-date">{timeConversion(date)}</div>
+          <div className={styles["events-list__item-date"]}>
+            {timeConversion(date)}
+          </div>
         )}
       </div>
     </li>

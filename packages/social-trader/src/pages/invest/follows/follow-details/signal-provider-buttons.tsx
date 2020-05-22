@@ -1,3 +1,4 @@
+import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import Crashable from "decorators/crashable";
 import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
 import * as React from "react";
@@ -25,7 +26,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
 
   const isExternal = !!canSubscribeToExternalSignalPrivateAccount;
   return (
-    <div className="asset-details-description__statistic-container asset-details-description__statistic-container--btn">
+    <DetailsStatisticContainer>
       <FollowButton
         canFollow={
           canSubscribeToExternalSignalCommonAccount ||
@@ -40,7 +41,7 @@ const _SignalProviderButtons: React.FC<Props> = ({
         id={id}
         currency={currency}
       />
-    </div>
+    </DetailsStatisticContainer>
   );
 };
 

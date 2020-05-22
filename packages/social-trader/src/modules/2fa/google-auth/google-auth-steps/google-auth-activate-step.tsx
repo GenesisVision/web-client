@@ -11,6 +11,8 @@ import NumberFormat from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
+import styles from "../google-auth.module.scss";
+
 enum FIELDS {
   code = "code",
   password = "password"
@@ -44,9 +46,11 @@ export const GoogleStep3: React.FC<Props> = ({
   });
 
   return (
-    <div className="google-auth__step">
-      <div className="google-auth__count">03</div>
-      <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
+    <div className={styles["google-auth__step"]}>
+      <div className={styles["google-auth__count"]}>03</div>
+      <div className={styles["google-auth__title"]}>
+        {t("2fa-page.enter-code")}
+      </div>
       <HookForm form={form} onSubmit={onSubmit}>
         <Row>
           <GVHookFormField

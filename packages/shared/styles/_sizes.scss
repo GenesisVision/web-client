@@ -25,6 +25,7 @@ $font-size-paragraph: 14px;
 $font-size-common: 13px;
 $font-size-small: 12px;
 $font-size-xsmall: 11px;
+$font-size-xxsmall: 9px;
 $font-size-xxxxsmall: 7.5px;
 
 //others
@@ -195,5 +196,35 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   border-radius: $size/$divider-text;
   @include media-breakpoint-landscape-phone() {
     border-radius: $size;
+  }
+}
+
+@mixin terminal-table($size) {
+  width: 100%;
+  border-spacing: 0;
+  & th {
+    text-align: left;
+    font-weight: normal;
+    @if $size == middle {
+      &,
+      & span {
+        font-size: $font-size-xsmall;
+      }
+    }
+    @if $size == small {
+      &,
+      & span {
+        font-size: $font-size-xxsmall;
+      }
+    }
+  }
+  & td {
+    font-family: "DIN Pro Regular", sans-serif;
+    @if $size == middle {
+      font-size: $font-size-small;
+    }
+    @if $size == small {
+      font-size: $font-size-xsmall;
+    }
   }
 }

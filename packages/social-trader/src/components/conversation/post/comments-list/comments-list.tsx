@@ -6,6 +6,8 @@ import { Post } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 
+import styles from "./comments-list.module.scss";
+
 interface Props {
   comments: Array<Post>;
   updateData: VoidFunction;
@@ -21,9 +23,9 @@ const _CommentsList: React.FC<Props> = ({ comments, updateData }) => {
     ? comments
     : comments.slice(comments.length - VISIBLE_COMMENTS_COUNT);
   return (
-    <div className="post__comments">
+    <div className={styles["comments-list__comments"]}>
       {!isViewAll && (
-        <Row className="post__view-all-button-container">
+        <Row className={styles["comments-list__view-all-button-container"]}>
           <GVButton
             noPadding
             variant={"text"}

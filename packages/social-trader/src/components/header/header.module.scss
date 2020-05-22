@@ -1,0 +1,82 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_hide";
+@import "~shared/styles/_constants";
+
+.header {
+  &,
+  & * {
+    box-sizing: border-box;
+  }
+  width: 100%;
+
+  &__icon {
+    margin-right: $padding-small/2;
+  }
+
+  &__buttons,
+  &__navigation,
+  &__profile,
+  &__wallet {
+    @include hide-on-landscape-tablet(flex);
+  }
+
+  &__right,
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__navigation {
+    overflow: hidden;
+    @include transition();
+    width: 100%;
+    &--search {
+      width: 0;
+    }
+  }
+
+  &__search-container {
+    width: 40px;
+    @include transition();
+    &--search {
+      width: 100%;
+    }
+  }
+
+  &__search-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    justify-content: flex-end;
+    width: 40%;
+  }
+
+  &__left {
+    width: 60%;
+    justify-content: space-between;
+    padding-right: $padding-medium;
+    @include transition();
+  }
+
+  &__buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    &__right {
+      justify-content: space-between;
+    }
+    &__menu {
+      display: flex;
+    }
+    &__search {
+      margin-right: 0;
+    }
+  }
+}

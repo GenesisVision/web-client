@@ -13,6 +13,10 @@ export const localizedDate = (date: Date | number | string): string => {
   return dayjs(date).format("ll");
 };
 
+export const formatTime = (date: Date | number | string): string => {
+  return dayjs(date).format("HH:mm:ss");
+};
+
 export const formatDate = (date: Date | number | string): string => {
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
 };

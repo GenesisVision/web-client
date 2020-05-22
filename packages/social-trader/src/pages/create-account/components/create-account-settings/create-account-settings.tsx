@@ -131,7 +131,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
             setFieldValue={setValue}
             assetCurrency={currency as CurrencyEnum}
           />
-          <Row>
+          <Row large>
             <CreateAssetNavigation
               asset={"ACCOUNT"}
               isSuccessful={!errorMessage}

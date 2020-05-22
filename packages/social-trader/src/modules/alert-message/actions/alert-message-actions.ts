@@ -5,18 +5,26 @@ import { ALERT_MESSAGE } from "./alert-message-actions.constants";
 
 const success: AlertActionCreator = (text, isUseLocalization = false) => ({
   type: ALERT_MESSAGE.SUCCESS,
-  payload: { className: "alert-message--success", text, isUseLocalization }
+  payload: {
+    type: ALERT_MESSAGE.SUCCESS,
+    text,
+    isUseLocalization
+  }
 });
 
 const warning: AlertActionCreator = (text, isUseLocalization = false) => ({
   type: ALERT_MESSAGE.WARNING,
-  payload: { className: "alert-message--warning", text, isUseLocalization }
+  payload: {
+    type: ALERT_MESSAGE.WARNING,
+    text,
+    isUseLocalization
+  }
 });
 
 const error: AlertActionCreator = (text, isUseLocalization = false) => ({
   type: ALERT_MESSAGE.ERROR,
   payload: {
-    className: "alert-message--danger",
+    type: ALERT_MESSAGE.ERROR,
     text,
     isUseLocalization
   }

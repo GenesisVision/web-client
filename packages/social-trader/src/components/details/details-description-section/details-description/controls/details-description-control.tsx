@@ -1,10 +1,10 @@
-import "./details-description-control.scss";
-
 import classNames from "classnames";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
+
+import styles from "./details-description-control.module.scss";
 
 interface IDetailsDescriptionControlProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -22,12 +22,17 @@ const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
 }) => {
   return (
     <Link
-      className={classNames("details-description-control--button", className)}
+      className={classNames(
+        styles["details-description-control--button"],
+        className
+      )}
       onClick={onClick}
       to={to}
     >
-      <Row className="details-description-control">
-        <RowItem className="details-description-control__text">{text}</RowItem>
+      <Row className={styles["details-description-control"]}>
+        <RowItem className={styles["details-description-control__text"]}>
+          {text}
+        </RowItem>
         {children}
       </Row>
     </Link>

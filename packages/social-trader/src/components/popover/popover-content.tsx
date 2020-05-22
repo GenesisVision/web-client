@@ -1,7 +1,7 @@
-import "./popover-content.scss";
-
 import classNames from "classnames";
 import React from "react";
+
+import styles from "./popover-content.module.scss";
 
 export const PopoverContent: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
@@ -12,9 +12,9 @@ export const PopoverContent: React.FC<Props &
 }) => {
   return (
     <div
-      className={classNames("popover-content", className, {
-        "popover-content__list--left-align": leftAlign,
-        "popover-content__list": type === "list"
+      className={classNames(styles["popover-content"], className, {
+        [styles["popover-content__list--left-align"]]: leftAlign,
+        [styles["popover-content__list"]]: type === "list"
       })}
     >
       {children}
@@ -29,5 +29,5 @@ interface Props {
 }
 
 export const PopoverContentListItem: React.FC = ({ children }) => {
-  return <div className="popover-content__list-item">{children}</div>;
+  return <div className={styles["popover-content__list-item"]}>{children}</div>;
 };

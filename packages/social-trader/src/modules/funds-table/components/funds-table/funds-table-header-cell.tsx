@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
+import styles from "./funds-table.module.scss";
+
 interface Props {
   column: SortingColumn;
 }
@@ -13,7 +15,7 @@ const _FundsTableHeaderCell: React.FC<Props> = ({ column }) => {
   const { t } = useTranslation();
   if (!isAuthenticated && column.name === "favorite") return null;
   return (
-    <span className="funds-table__cell">
+    <span className={styles["funds-table__cell"]}>
       {t(`funds-page.funds-header.${column.name}`)}
     </span>
   );

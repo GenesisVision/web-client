@@ -104,7 +104,6 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         <SubmitButton
           wide
           id="programWithdrawAmountFormSubmit"
-          className="invest-form__submit-button"
           disabled={!amount && !withdrawAll}
         >
           {t("withdraw-program.next")}

@@ -4,7 +4,7 @@ import { Row } from "components/row/row";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
-import "./social-links-block.scss";
+import styles from "./social-links-block.module.scss";
 
 const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
   return (
@@ -19,7 +19,7 @@ const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
               href={socialLink.url + value}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-links-block__social-link"
+              className={styles["social-links-block__social-link"]}
             >
               <SocialLinkImage url={socialLink.logoUrl} alt={socialLink.name} />
             </a>

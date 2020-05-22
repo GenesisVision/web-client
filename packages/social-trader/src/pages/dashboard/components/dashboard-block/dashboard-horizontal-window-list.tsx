@@ -1,8 +1,8 @@
-import "./dashboard-block.scss";
-
 import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
 import React, { useCallback, useRef, useState } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+
+import styles from "./dashboard-block.module.scss";
 
 const DashboardHorizontalWindowList: React.FC<Props> = ({
   itemWidth,
@@ -21,7 +21,7 @@ const DashboardHorizontalWindowList: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className="dashboard-horizontal-list__shadow-wrapper">
+    <div className={styles["dashboard-horizontal-list__shadow-wrapper"]}>
       <HorizontalListShadowContainer
         scrollData={{
           endOfList,
@@ -32,7 +32,7 @@ const DashboardHorizontalWindowList: React.FC<Props> = ({
         <FixedSizeList
           ref={ref}
           onScroll={handleScroll}
-          className="dashboard-horizontal-window-list"
+          className={styles["dashboard-horizontal-window-list"]}
           itemData={items}
           height={height}
           itemCount={items.length}

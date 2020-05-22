@@ -8,7 +8,7 @@ import { SIZES } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 
-import "./conversation-image.scss";
+import styles from "./conversation-image.module.scss";
 
 const EmptyImage: React.FC<{ imageClassName: string }> = ({
   imageClassName
@@ -28,11 +28,11 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
       <ImageBaseElement
         onClick={setOpen}
         DefaultImageComponent={EmptyImage}
-        defaultImageClassName={"conversation-image__empty"}
-        className={classNames("conversation-image", {
-          "conversation-image--small": size === SIZES.SMALL,
-          "conversation-image--middle": size === SIZES.MIDDLE,
-          "conversation-image--large": size === SIZES.LARGE
+        defaultImageClassName={styles["conversation-image__empty"]}
+        className={classNames(styles["conversation-image"], {
+          [styles["conversation-image--small"]]: size === SIZES.SMALL,
+          [styles["conversation-image--middle"]]: size === SIZES.MIDDLE,
+          [styles["conversation-image--large"]]: size === SIZES.LARGE
         })}
         src={getImageUrlBySize(images[index], size)}
       />

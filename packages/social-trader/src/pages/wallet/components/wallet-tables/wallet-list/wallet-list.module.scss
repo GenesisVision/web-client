@@ -1,0 +1,18 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.wallet-list {
+  &__buttons {
+    justify-content: flex-end;
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--buttons {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}

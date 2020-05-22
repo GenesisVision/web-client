@@ -1,6 +1,8 @@
+import classNames from "classnames";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "../google-auth.module.scss";
 import GoogleActivateStep, {
   IGoogleActivateStepFormValues
 } from "./google-auth-activate-step";
@@ -16,16 +18,21 @@ const GoogleAuth: React.FC<IGoogleAuthProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="google-auth google-auth--desktop">
-      <div className="google-auth__header">
+    <div
+      className={classNames(
+        styles["google-auth"],
+        styles["google-auth--desktop"]
+      )}
+    >
+      <div className={styles["google-auth__header"]}>
         <h2>{t("2fa-page.title")}</h2>
         <p>{t("2fa-page.google")}</p>
       </div>
 
-      <div className="google-auth__steps">
+      <div className={styles["google-auth__steps"]}>
         <GoogleDownloadStep />
         <GoogleCodeStep
-          className="google-auth__step--alt-color"
+          className={styles["google-auth__step--alt-color"]}
           authenticatorUri={authenticatorUri}
           sharedKey={sharedKey}
         />

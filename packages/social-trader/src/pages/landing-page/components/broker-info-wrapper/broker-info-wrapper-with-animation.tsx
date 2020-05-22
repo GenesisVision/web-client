@@ -3,6 +3,8 @@ import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React from "react";
 import { animated, config, useTransition } from "react-spring";
 
+import styles from "./brokers-info-wrapper.module.scss";
+
 interface Props {
   darkTheme?: boolean;
   currentBrokersInfo: TBrokerInfo;
@@ -22,7 +24,7 @@ const _BrokerInfoWrapperWithAnimation: React.FC<Props> = ({
     <>
       {transitions.map(({ item, props, key }) => (
         <animated.div
-          className="brokers-container__tab-info brokers-container__tab-info--animation"
+          className={styles["brokers-info-wrapper"]}
           key={key}
           style={props as any}
         >

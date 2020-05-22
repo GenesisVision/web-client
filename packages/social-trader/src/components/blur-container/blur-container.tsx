@@ -1,8 +1,8 @@
-import "./blur-container.scss";
-
 import classNames from "classnames";
 import React from "react";
 import { TagType } from "utils/types";
+
+import styles from "./blur-container.module.scss";
 
 const _BlurContainer: React.FC<Props> = ({
   children,
@@ -11,8 +11,9 @@ const _BlurContainer: React.FC<Props> = ({
   tag: Tag = "div"
 }) => (
   <Tag
-    className={classNames("blur-container", className, {
-      "blur-container--loaded": !blur
+    className={classNames(styles["blur-container"], className, {
+      [styles["blur-container--loading"]]: blur,
+      [styles["blur-container--loaded"]]: !blur
     })}
     style={{
       filter: `blur(${blur ? 7 : 0}px)`

@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import { Row } from "components/row/row";
 import * as React from "react";
 
 import { FUND_ASSET_TYPE } from "./fund-asset";
+import styles from "./fund-asset.module.scss";
 
 const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {
   switch (type) {
@@ -10,10 +12,17 @@ const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {
     default:
       return (
         <div
-          className="fund-asset__container--others-count"
+          className={styles["fund-asset__container--others-count"]}
           onClick={handleOpen}
         >
-          <Row className="fund-asset fund-asset--others-count">+{count}</Row>
+          <Row
+            className={classNames(
+              styles["fund-asset"],
+              styles["fund-asset--others-count"]
+            )}
+          >
+            +{count}
+          </Row>
         </div>
       );
   }

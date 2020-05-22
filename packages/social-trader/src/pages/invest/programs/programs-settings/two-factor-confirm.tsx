@@ -1,5 +1,6 @@
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
@@ -22,9 +23,11 @@ const _TwoFactorConfirm: React.FC<Props> = ({ id }) => {
       <FormTextField>
         {t("program-settings.two-factor-confirm.text")}
       </FormTextField>
-      <GVButton color="primary" onClick={setOpen}>
-        {t("program-settings.buttons.two-factor-confirm")}
-      </GVButton>
+      <Row large wide>
+        <GVButton color="primary" onClick={setOpen}>
+          {t("program-settings.buttons.two-factor-confirm")}
+        </GVButton>
+      </Row>
       <ConfirmContainer
         open={isOpen}
         onClose={setClose}

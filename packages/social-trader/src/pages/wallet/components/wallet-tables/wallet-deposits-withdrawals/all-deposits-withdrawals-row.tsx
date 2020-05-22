@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -9,6 +10,7 @@ import { formatDate } from "utils/dates";
 import { MultiWalletTransaction } from "../../../wallet.types";
 import TransactionDetailsPopup from "../../transaction-details/transaction-details-popup";
 import AmountItem from "../../transaction-details/transactions/amount-item";
+import styles from "./wallet-deposits-withdrawals.module.scss";
 
 const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
   transaction,
@@ -32,7 +34,12 @@ const _AllDepositsWithdrawalsRow: React.FC<Props> = ({
         <TableCell>
           <Status withText status={transaction.status} />
         </TableCell>
-        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
+        <TableCell
+          className={classNames(
+            styles["wallet-deposits-withdrawals__cell"],
+            styles["wallet-deposits-withdrawals__cell--amount"]
+          )}
+        >
           <AmountItem amount={transaction.amount.first} />
         </TableCell>
       </TableRow>

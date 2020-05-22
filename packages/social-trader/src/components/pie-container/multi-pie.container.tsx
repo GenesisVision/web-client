@@ -1,9 +1,8 @@
-import "./pie-container.scss";
-
 import classNames from "classnames";
 import React, { useCallback } from "react";
 
 import { MultiPie } from "./pie";
+import styles from "./pie-container.module.scss";
 
 const _MultiPieContainer: React.FC<Props> = ({ data, over, setOverItem }) => {
   const handleOver = useCallback(
@@ -22,8 +21,8 @@ const _MultiPieContainer: React.FC<Props> = ({ data, over, setOverItem }) => {
     return { ...item, begin, end: 100 };
   });
   return (
-    <div className="multi-pie-container">
-      <div className={classNames("multi-pie-container__chart")}>
+    <div className={styles["multi-pie-container"]}>
+      <div className={classNames(styles["multi-pie-container__chart"])}>
         <MultiPie
           over={over}
           circles={dataWithBegin}

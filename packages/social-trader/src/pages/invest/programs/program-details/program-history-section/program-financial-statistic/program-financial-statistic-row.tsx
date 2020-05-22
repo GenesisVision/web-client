@@ -1,5 +1,3 @@
-import "./program-financial-statistic.scss";
-
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { TableCell, TableRow } from "components/table/components";
@@ -45,21 +43,21 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="program-financial-statistic__cell--sm-size">
+      <TableCell>
         <NumberFormat
           value={successFee}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="program-financial-statistic__cell--sm-size">
+      <TableCell>
         <NumberFormat
           value={entryFee}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="program-financial-statistic__cell--sm-size">
+      <TableCell>
         {managerWithdraw ? (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
@@ -87,7 +85,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         )}
       </TableCell>
       {showCommissionRebateSometime && (
-        <TableCell className="program-financial-statistic__cell--sm-size">
+        <TableCell>
           <NumberFormat
             value={formatCurrencyValue(managerCommissionRebate, currency)}
             displayType="text"

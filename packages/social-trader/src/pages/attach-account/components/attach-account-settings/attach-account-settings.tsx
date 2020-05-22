@@ -1,12 +1,10 @@
-import "./attach-account-settings.scss";
-
-import AssetField, {
-  AssetFields
-} from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import { Center } from "components/center/center";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -19,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
+import styles from "./attach-account-settings.module.scss";
 import {
   attachAccountSettingsMapPropsToValues,
   attachAccountSettingsValidationSchema
@@ -80,8 +79,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
         label={t("attach-account-page.settings.exchange")}
         blockNumber={"01"}
       >
-        <AssetFields>
-          <AssetField>
+        <Center>
+          <RowItem>
             <GVHookFormField
               wide
               onChange={brokerNameChangeHandle}
@@ -97,8 +96,8 @@ const _AttachAccountSettings: React.FC<Props> = ({
                 </option>
               ))}
             </GVHookFormField>
-          </AssetField>
-          <AssetField hide={!broker || broker.accountTypes.length < 2}>
+          </RowItem>
+          <RowItem hide={!broker || broker.accountTypes.length < 2}>
             <GVHookFormField
               wide
               name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
@@ -113,45 +112,45 @@ const _AttachAccountSettings: React.FC<Props> = ({
                 </option>
               ))}
             </GVHookFormField>
-          </AssetField>
-        </AssetFields>
+          </RowItem>
+        </Center>
       </SettingsBlock>
       <SettingsBlock
         label={t("attach-account-page.settings.api")}
         blockNumber={"02"}
       >
-        <AssetFields>
-          <AssetField wide>
-            <GVHookFormField
-              showCorrect
-              wide
-              className="attach-account-settings__api-field"
-              type="text"
-              name={ATTACH_ACCOUNT_FIELDS.key}
-              label={t("attach-account-page.settings.fields.api-key")}
-              autoComplete="off"
-              component={SimpleTextField}
-            />
-          </AssetField>
-          <AssetField wide>
-            <GVHookFormField
-              showCorrect
-              wide
-              className="attach-account-settings__api-field"
-              type="text"
-              name={ATTACH_ACCOUNT_FIELDS.secret}
-              label={t("attach-account-page.settings.fields.api-secret")}
-              autoComplete="off"
-              component={SimpleTextField}
-            />
-          </AssetField>
-        </AssetFields>
+        <Row wide>
+          <GVHookFormField
+            showCorrect
+            wide
+            className={styles["attach-account-settings__api-field"]}
+            type="text"
+            name={ATTACH_ACCOUNT_FIELDS.key}
+            label={t("attach-account-page.settings.fields.api-key")}
+            autoComplete="off"
+            component={SimpleTextField}
+          />
+        </Row>
+        <Row wide>
+          <GVHookFormField
+            showCorrect
+            wide
+            className={styles["attach-account-settings__api-field"]}
+            type="text"
+            name={ATTACH_ACCOUNT_FIELDS.secret}
+            label={t("attach-account-page.settings.fields.api-secret")}
+            autoComplete="off"
+            component={SimpleTextField}
+          />
+        </Row>
       </SettingsBlock>
-      <CreateAssetNavigation
-        asset={"attach-external-account"}
-        isSuccessful={isSuccessful}
-        isSubmitting={isPending}
-      />
+      <Row large>
+        <CreateAssetNavigation
+          asset={"attach-external-account"}
+          isSuccessful={isSuccessful}
+          isSubmitting={isPending}
+        />
+      </Row>
     </HookForm>
   );
 };

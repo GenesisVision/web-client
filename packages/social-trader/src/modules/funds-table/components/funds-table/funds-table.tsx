@@ -11,7 +11,6 @@ import FundTableSortingValue from "./fund-table-sorting";
 import { fundListLoaderDataWithCount } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
-import "./funds-table.scss";
 
 interface Props extends ITableProps {
   withDispatch?: boolean;

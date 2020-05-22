@@ -1,7 +1,6 @@
-import "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
-
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
+import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -39,7 +38,7 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
       )}
       Particular={() => (
         <>
-          <div className="details-statistics__column">
+          <div className={styles["details-statistics__column"]}>
             <StatisticItem
               label={
                 <TooltipLabel
@@ -123,7 +122,7 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               />
             </StatisticItem>
           </div>
-          <div className="details-statistics__column">
+          <div className={styles["details-statistics__column"]}>
             <StatisticItem
               label={
                 <TooltipLabel

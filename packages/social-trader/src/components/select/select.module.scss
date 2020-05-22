@@ -1,0 +1,78 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.select {
+  display: flex;
+  @include height(22px);
+
+  &--fixed-width {
+    min-width: 150px;
+  }
+
+  &--small {
+    .select__value {
+      @include font-size($font-size-xsmall);
+    }
+
+    .select__text {
+      @include font-size($font-size-xsmall);
+    }
+  }
+
+  &--middle {
+    .select__value {
+      @include font-size($font-size-small);
+    }
+
+    .select__text {
+      @include font-size($font-size-h4);
+    }
+  }
+
+  &__value {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0;
+    letter-spacing: 0.4px;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    color: $main-color;
+    cursor: pointer;
+
+    &--bottom-line {
+      border-bottom: 1px dotted $text-color;
+    }
+  }
+
+  &__text {
+    display: inline-flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  &__option {
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &--selected {
+      color: $primary-color;
+    }
+  }
+
+  &--disabled {
+    .select__value {
+      cursor: default;
+      color: $text-dark-color;
+    }
+  }
+}

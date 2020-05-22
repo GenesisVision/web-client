@@ -3,7 +3,7 @@ import { Row } from "components/row/row";
 import * as React from "react";
 import { SizesType } from "utils/types";
 
-import "./avatar-with-name.scss";
+import styles from "./avatar-with-name.module.scss";
 
 const _AvatarWithName: React.FC<Props> = ({ size, avatar, name }) => {
   return (
@@ -13,7 +13,7 @@ const _AvatarWithName: React.FC<Props> = ({ size, avatar, name }) => {
           <Row>{avatar}</Row>
         </RowItem>
       )}
-      <RowItem className="avatar-with-name__name">{name}</RowItem>
+      <RowItem className={styles["avatar-with-name__name"]}>{name}</RowItem>
     </Row>
   );
 };

@@ -1,5 +1,3 @@
-import "./currency-item.scss";
-
 import classNames from "classnames";
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
@@ -9,6 +7,8 @@ import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { CurrencyEnum } from "utils/types";
+
+import styles from "./currency-item.module.scss";
 
 const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   url,
@@ -36,9 +36,9 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
         {logo && (
           <RowItem
             small={small}
-            className={classNames("currency-item__icon", {
-              "currency-item__icon--medium": !small,
-              "currency-item__icon--small": small
+            className={classNames(styles["currency-item__icon"], {
+              [styles["currency-item__icon--medium"]]: !small,
+              [styles["currency-item__icon--small"]]: small
             })}
           >
             <WalletImage url={logo} alt={name || symbol} />
@@ -47,15 +47,24 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
         {name && (
           <RowItem>
             {big ? (
-              <h1 className={classNames("currency-item__name--big", className)}>
+              <h1
+                className={classNames(
+                  styles["currency-item__name--big"],
+                  className
+                )}
+              >
                 {name}
               </h1>
             ) : (
-              <div className={classNames("currency-item__name", className)}>
+              <div
+                className={classNames(styles["currency-item__name"], className)}
+              >
                 {name}
               </div>
             )}
-            {rate && <div className="currency-item__rate">{rateString}</div>}
+            {rate && (
+              <div className={styles["currency-item__rate"]}>{rateString}</div>
+            )}
           </RowItem>
         )}
       </Row>

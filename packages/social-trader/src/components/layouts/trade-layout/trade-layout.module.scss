@@ -1,0 +1,17 @@
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$header-height: 44px + $padding-xxsmall * 2;
+
+.trade-layout {
+  &__wrapper {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__main {
+    box-sizing: border-box;
+    height: 100%;
+  }
+}

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -9,6 +10,7 @@ import { formatDate } from "utils/dates";
 import { MultiWalletTransaction } from "../../../wallet.types";
 import TransactionDetailsPopup from "../../transaction-details/transaction-details-popup";
 import AmountItem from "../../transaction-details/transactions/amount-item";
+import styles from "./wallet-deposits-withdrawals.module.scss";
 
 const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
@@ -25,13 +27,18 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
         onAction={handleAction}
       />
       <TableRow stripy onClick={setOpenPopup}>
-        <TableCell className="wallet-deposits-withdrawals__cell">
+        <TableCell className={styles["wallet-deposits-withdrawals__cell"]}>
           {formatDate(transaction.date)}
         </TableCell>
-        <TableCell className="wallet-deposits-withdrawals__cell">
+        <TableCell className={styles["wallet-deposits-withdrawals__cell"]}>
           <Status withText status={transaction.status} />
         </TableCell>
-        <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
+        <TableCell
+          className={classNames(
+            styles["wallet-deposits-withdrawals__cell"],
+            styles["wallet-deposits-withdrawals__cell--amount"]
+          )}
+        >
           <AmountItem amount={transaction.amount.first} />
         </TableCell>
       </TableRow>

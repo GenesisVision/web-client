@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import "./row-item.scss";
+import styles from "./row-item.module.scss";
 
 export const RowItem: React.FC<Props> = ({
+  hide,
   wide,
   onClick,
   middle = true,
@@ -18,14 +19,15 @@ export const RowItem: React.FC<Props> = ({
   return (
     <div
       onClick={onClick}
-      className={classNames("row-item", className, {
-        "row-item--wide": wide,
-        "row-item--bottom-offset": bottomOffset,
-        "row-item--xsmall": xsmall,
-        "row-item--small": small,
-        "row-item--middle": middle && !(small || large),
-        "row-item--xlarge": xlarge,
-        "row-item--large": large
+      className={classNames(styles["row-item"], className, {
+        [styles["row-item--hide"]]: hide,
+        [styles["row-item--wide"]]: wide,
+        [styles["row-item--bottom-offset"]]: bottomOffset,
+        [styles["row-item--xsmall"]]: xsmall,
+        [styles["row-item--small"]]: small,
+        [styles["row-item--middle"]]: middle && !(small || large),
+        [styles["row-item--xlarge"]]: xlarge,
+        [styles["row-item--large"]]: large
       })}
     >
       {children}
@@ -34,6 +36,7 @@ export const RowItem: React.FC<Props> = ({
 };
 
 interface Props {
+  hide?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   wide?: boolean;
   bottomOffset?: boolean;

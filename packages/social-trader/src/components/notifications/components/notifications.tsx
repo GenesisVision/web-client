@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
@@ -20,7 +21,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
-import "./notifications.scss";
+import styles from "./notifications.module.scss";
 
 const _Notifications: React.FC<Props> = ({
   isPending,
@@ -48,29 +49,30 @@ const _Notifications: React.FC<Props> = ({
   const renderGroups = (groups: NotificationGroups) => (
     group: string
   ): React.ReactNode => (
-    <NotificationsGroup
-      key={group}
-      title={parseDate(
-        parseInt(group),
-        t("notifications-aside.today"),
-        t("notifications-aside.yesterday")
-      )}
-      notifications={groups[parseInt(group)]}
-      closeNotifications={closeNotifications}
-    />
+    <Row onlyOffset key={group}>
+      <NotificationsGroup
+        title={parseDate(
+          parseInt(group),
+          t("notifications-aside.today"),
+          t("notifications-aside.yesterday")
+        )}
+        notifications={groups[parseInt(group)]}
+        closeNotifications={closeNotifications}
+      />
+    </Row>
   );
   const groups = getGroups(mergedNotifications);
   const hasMore = total > mergedNotifications.length;
   const hasNotifications = count > 0;
   return (
-    <div className="notifications">
+    <div className={styles["notifications"]}>
       <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-        <Row className="notifications__header">
-          <RowItem className="notifications__ring">
+        <Row className={styles["notifications__header"]}>
+          <RowItem className={styles["notifications__ring"]}>
             <RingIcon />
           </RowItem>
-          <RowItem className="notifications__header-title">
-            {t("notifications-aside.header")}
+          <RowItem>
+            <h4>{t("notifications-aside.header")}</h4>
           </RowItem>
           <RowItem>
             <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
@@ -84,12 +86,17 @@ const _Notifications: React.FC<Props> = ({
             to={linkCreator(NOTIFICATIONS_ROUTE)}
             onClick={closeNotifications}
           >
-            <div className="profile-avatar notifications__link">
+            <div
+              className={classNames(
+                styles["profile-avatar"],
+                styles["notifications__link"]
+              )}
+            >
               <Icon type={"controls"} />
             </div>
           </Link>
         </Row>
-        <div className="notifications__content">
+        <div className={styles["notifications__content"]}>
           {Object.keys(groups)
             .sort(sortGroups)
             .map<React.ReactNode>(renderGroups(groups))}

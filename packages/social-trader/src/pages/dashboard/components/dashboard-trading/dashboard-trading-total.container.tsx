@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
 import DashboardTradingTotal from "./dashboard-trading-total";
-import "./dashboard-trading.scss";
 
 const _DashboardTradingTotalContainer: React.FC = () => {
   const dispatch = useDispatch();

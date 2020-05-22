@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 
 import NotificationAssets from "./notification-assets";
 import NotificationManagers from "./notification-managers";
-import "./notification-settings.scss";
 
 const _NotificationSettings: React.FC<Props> = ({
   onSuccess,

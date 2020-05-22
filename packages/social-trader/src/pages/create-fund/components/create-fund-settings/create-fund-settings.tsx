@@ -117,7 +117,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         setFieldValue={setValue}
         assetCurrency={FUND_CURRENCY}
       />
-      <Row>
+      <Row large>
         <CreateAssetNavigation
           asset={ASSET.FUND}
           isSuccessful={!errorMessage}

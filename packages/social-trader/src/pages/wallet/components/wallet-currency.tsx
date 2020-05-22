@@ -10,23 +10,27 @@ import { useTranslation } from "react-i18next";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletTables from "./wallet-tables/wallet-tables";
-import "./wallet-title-block.scss";
+import styles from "./wallet-title-block.module.scss";
 
 const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
   const [t] = useTranslation();
   return (
     <Page title={info.title}>
-      <div className="wallet-title-block">
+      <div className={styles["wallet-title-block"]}>
         <Row wrap>
-          <RowItem className="wallet-title-block__title">
+          <RowItem>
             <Row>
-              <h1>
-                {info.title}
-                <span>&nbsp;{t("wallet-page.wallet")}</span>
-              </h1>
+              <RowItem>
+                <h1>
+                  {info.title}
+                  <span className={styles["wallet-title-block__title-wallet"]}>
+                    &nbsp;{t("wallet-page.wallet")}
+                  </span>
+                </h1>
+              </RowItem>
               <WalletImage
                 url={info.logoUrl}
-                imageClassName="wallet-title-block__title-icon"
+                imageClassName={styles["wallet-title-block__title-icon"]}
                 alt={info.currency}
               />
             </Row>

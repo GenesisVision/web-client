@@ -1,7 +1,6 @@
 const path = require("path");
 const dotenv = require("dotenv");
-const sass = require("@zeit/next-sass");
-const css = require("@zeit/next-css");
+const fonts = require("nextjs-fonts");
 const withPlugins = require("next-compose-plugins");
 const images = require("next-images");
 const workers = require("@zeit/next-workers");
@@ -28,7 +27,7 @@ function create(path) {
     publicRuntimeConfig: {
       apiUrl: process.env.REACT_APP_API_URL
     },
-    webpack(config, { dev, webpack }) {
+    webpack(config) {
       config.devtool = false;
       for (const r of config.module.rules) {
         if (r.loader === "babel-loader") {
@@ -47,7 +46,6 @@ function create(path) {
       }
 
       config.resolve.modules.push(path);
-      config.plugins.push(new webpack.EnvironmentPlugin(process.env));
       return config;
     }
   };
@@ -55,16 +53,13 @@ function create(path) {
     [
       analyzer,
       [
-        sass,
         {
-          cssModules: true,
-          cssLoaderOptions: {
-            importLoaders: 1,
-            localIdentName: "[local]"
+          typescript: {
+            ignoreDevErrors: true
           }
         }
       ],
-      css,
+      fonts,
       images,
       [
         workers,

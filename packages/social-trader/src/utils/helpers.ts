@@ -1,6 +1,10 @@
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const modulo = (dividend: number, divider: number): number => {
+  return dividend - Math.floor(dividend / divider) * divider;
+};
+
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 export const getRandomChar = () => {
@@ -144,10 +148,11 @@ export const getRandomWords = (length: number = getRandomInteger(3, 8)) =>
 export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
-export const getRandomColorNumber = () => getRandomInteger(0, 255).toString(16);
+export const getRandomColorNumber = () =>
+  getRandomInteger(150, 255).toString(16);
 
 const getRandomColor = () =>
-  `#${getRandomColorNumber}${getRandomColorNumber}${getRandomColorNumber}`;
+  `#${getRandomColorNumber()}${getRandomColorNumber()}${getRandomColorNumber()}`;
 
 export const tableLoaderCreator = (
   itemCreator: (...args: any) => any,

@@ -8,8 +8,6 @@ import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useState } from "react";
 
-import "./post-list.scss";
-
 export interface IPostListContainerProps {
   reset?: boolean;
   fetchMethod: (values: Object) => Promise<any>;

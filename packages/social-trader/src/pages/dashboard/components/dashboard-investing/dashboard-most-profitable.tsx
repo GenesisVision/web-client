@@ -1,3 +1,4 @@
+import { RowItem } from "components/row-item/row-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { DashboardTradingAsset } from "gv-api-web";
 import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
@@ -11,12 +12,15 @@ const _DashboardInvestingMostProfitable: React.FC<Props> = ({
   return (
     <DashboardHorizontalList>
       {data.map((asset: DashboardTradingAsset) => (
-        <DashboardPublicCard
-          showWithdraw={false}
-          showActions={false}
-          updateItems={onApply}
-          asset={asset}
-        />
+        <RowItem>
+          <DashboardPublicCard
+            withOffset={false}
+            showWithdraw={false}
+            showActions={false}
+            updateItems={onApply}
+            asset={asset}
+          />
+        </RowItem>
       ))}
     </DashboardHorizontalList>
   );

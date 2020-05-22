@@ -1,0 +1,105 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+$chart-width: 160px;
+
+.programs-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+
+  @include media-breakpoint-tablet() {
+    grid-column-gap: 40px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, minmax(220px, 1fr));
+    grid-gap: 40px;
+    overflow: visible;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    grid-template-rows: repeat(4, minmax(200px, 1fr));
+  }
+
+  @include media-breakpoint-large-desktop() {
+    grid-template-rows: repeat(4, minmax(280px, 1fr));
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      &:first-child {
+        grid-column: 1 / span 5;
+        grid-row: 1 / span 2;
+      }
+      &:nth-child(2) {
+        grid-column: 4 / span 5;
+        grid-row: 3 / span 2;
+      }
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        grid-column: 6 / span 3;
+      }
+
+      &:nth-child(5),
+      &:nth-child(6) {
+        grid-column: 1 / span 3;
+      }
+    }
+
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+      .programs-list__card-short {
+        display: none;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        .programs-list__card-bg {
+          display: none;
+        }
+
+        .programs-list__card-short {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .program-avatar--medium {
+    width: 70px;
+    height: 70px;
+
+    @include media-breakpoint-landscape-tablet() {
+      transform: scale(0.9);
+    }
+
+    @include media-breakpoint-desktop() {
+      transform: scale(1);
+    }
+
+    @include media-breakpoint-large-desktop() {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .program-avatar__level,
+  .program-avatar--medium .program-avatar__level {
+    color: $main-color;
+    font-size: 12px;
+    width: 25px;
+    height: 25px;
+    top: -2px;
+    right: -2px;
+  }
+}

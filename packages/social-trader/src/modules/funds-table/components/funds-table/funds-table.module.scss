@@ -1,0 +1,23 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$description-block-width: 250px;
+$program-width: 312px;
+$program-height: 312px;
+$multiplier: 1.5;
+$chart-width: 160px;
+
+.funds-table__cell {
+  &--amount {
+    white-space: nowrap;
+  }
+  &--chart {
+    min-width: 50px;
+    max-width: 100px;
+    @include media-breakpoint-landscape-phone() {
+      min-width: 100px;
+      max-width: 200px;
+    }
+  }
+}

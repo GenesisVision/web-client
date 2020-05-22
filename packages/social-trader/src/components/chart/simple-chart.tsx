@@ -5,8 +5,6 @@ import { line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 
-import "../program-simple-chart/program-simple-chart.scss";
-
 const DEFAULT_WIDTH = 100;
 const DEFAULT_HEIGHT = 50;
 const OFFSET = 0;

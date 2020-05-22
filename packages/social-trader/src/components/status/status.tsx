@@ -1,5 +1,3 @@
-import "./status.scss";
-
 import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { RowItem } from "components/row-item/row-item";
@@ -8,6 +6,8 @@ import Error from "media/transactions/error.svg";
 import Pending from "media/transactions/pending.svg";
 import Success from "media/transactions/success.svg";
 import * as React from "react";
+
+import styles from "./status.module.scss";
 
 const statuses = {
   Done: Success,
@@ -28,7 +28,7 @@ const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
       <RowItem small>
         <Row>
           <ImageBaseElement
-            className={classNames("status__image", className)}
+            className={classNames(styles["status__image"], className)}
             src={statuses[status]}
             alt={`status ${status}`}
           />

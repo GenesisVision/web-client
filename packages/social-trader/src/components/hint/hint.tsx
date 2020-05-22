@@ -1,10 +1,10 @@
-import "./hint.scss";
-
 import classNames from "classnames";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
+
+import styles from "./hint.module.scss";
 
 const _Hint: React.FC<Props> = ({
   content,
@@ -13,12 +13,12 @@ const _Hint: React.FC<Props> = ({
   vertical
 }) => {
   return (
-    <div className={classNames("hint", className)}>
+    <div className={classNames(styles["hint"], className)}>
       <Tooltip
         vertical={vertical}
         render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
       >
-        <div className="hint__content">{content}</div>
+        <div className={styles["hint__content"]}>{content}</div>
       </Tooltip>
     </div>
   );

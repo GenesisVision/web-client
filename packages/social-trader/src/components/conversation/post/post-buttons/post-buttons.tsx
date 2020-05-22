@@ -1,5 +1,3 @@
-import "./post-buttons.scss";
-
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Share } from "components/conversation/share/share";
 import { RowItem } from "components/row-item/row-item";

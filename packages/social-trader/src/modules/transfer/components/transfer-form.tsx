@@ -7,11 +7,12 @@ import InputAmountField from "components/input-amount-field/hook-form-amount-fie
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { withBlurLoader } from "decorators/with-blur-loader";
 import { useGetRate } from "hooks/get-rate.hook";
 import { TransferSelectField } from "modules/transfer/components/transfer-form-select-field";
 import {
   formatWalletItemValue,
+  getCurrencyByIdInWalletItem,
+  getIdByCurrencyInWalletItem,
   isAmountAllow,
   ITransferFormProps,
   TRANSFER_FORM_FIELDS,
@@ -27,15 +28,13 @@ import {
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { minTransferAmountsSelector } from "reducers/platform-reducer";
 import { formatCurrencyValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
-import "./transfer-form.scss";
+import styles from "./transfer-form.module.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
+  fixedSelects,
   currentItem,
   currentItemContainer,
   onSubmit,
@@ -49,6 +48,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
 
   const form = useForm<TransferFormValues>({
     defaultValues: transferFormMapPropsToValues({
+      fixedSelects,
       sourceItems,
       destinationItems,
       currentItem,
@@ -85,21 +85,25 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     });
   }, [selectedDestinationItem.currency, selectedSourceItem.currency]);
 
-  const minAmounts = useSelector(minTransferAmountsSelector);
-  const minAmountInCur = formatCurrencyValue(
-    safeGetElemFromArray(
-      minAmounts,
-      amount => amount.name === selectedSourceItem.currency
-    ).minConvertAmount,
-    selectedSourceItem.currency
-  );
-
   const setMax = useCallback(() => {
     setValue(TRANSFER_FORM_FIELDS.amount, +formattedAvailableSourceItem, true);
   }, [formattedAvailableSourceItem]);
 
   const onChangeSourceId = useCallback(
     ({ id }: WalletItemType) => {
+      if (fixedSelects) {
+        const sourceCurrency = getCurrencyByIdInWalletItem(sourceItems, id);
+        const destinationId = getIdByCurrencyInWalletItem(
+          destinationItems,
+          sourceCurrency
+        );
+        reset({
+          [TRANSFER_FORM_FIELDS.destinationId]: destinationId,
+          [TRANSFER_FORM_FIELDS.amount]: "",
+          [TRANSFER_FORM_FIELDS.sourceId]: id
+        });
+        return;
+      }
       reset({
         [TRANSFER_FORM_FIELDS.destinationId]:
           id === destinationId ? sourceId : destinationId,
@@ -107,12 +111,36 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         [TRANSFER_FORM_FIELDS.sourceId]: id
       });
     },
-    [reset, destinationId, sourceId]
+    [
+      sourceItems,
+      destinationItems,
+      fixedSelects,
+      reset,
+      destinationId,
+      sourceId
+    ]
   );
   const onChangeDestinationId = useCallback(
-    ({ id }: WalletItemType) =>
-      setValue(TRANSFER_FORM_FIELDS.destinationId, id, true),
-    [setValue]
+    ({ id }: WalletItemType) => {
+      if (fixedSelects) {
+        const destinationCurrency = getCurrencyByIdInWalletItem(
+          destinationItems,
+          id
+        );
+        const sourceId = getIdByCurrencyInWalletItem(
+          sourceItems,
+          destinationCurrency
+        );
+        reset({
+          [TRANSFER_FORM_FIELDS.destinationId]: id,
+          [TRANSFER_FORM_FIELDS.amount]: "",
+          [TRANSFER_FORM_FIELDS.sourceId]: sourceId
+        });
+        return;
+      }
+      setValue(TRANSFER_FORM_FIELDS.destinationId, id, true);
+    },
+    [sourceItems, destinationItems, fixedSelects, fixedSelects, setValue]
   );
 
   const setValuesFromPropsAndSubmit = useCallback(
@@ -126,7 +154,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
 
   return (
     <HookForm
-      className="transfer-popup"
+      className={styles["transfer-popup"]}
       form={form}
       onSubmit={setValuesFromPropsAndSubmit}
     >
@@ -181,5 +209,5 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
   );
 };
 
-const TransferForm = withBlurLoader(React.memo(_TransferForm));
+const TransferForm = React.memo(_TransferForm);
 export default TransferForm;

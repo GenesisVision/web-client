@@ -47,7 +47,6 @@ const _ClosePositionButton: React.FC<Props> = ({
           volume
         })}
         applyButtonText={t("buttons.confirm")}
-        className="dialog--wider"
         disabled={disabled}
       />
     </>
