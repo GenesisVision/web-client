@@ -3,6 +3,7 @@ import {
   collapseItems,
   getDividerParts,
   normalizeDepthList,
+  sortDepthList,
   updateDepthList,
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
@@ -142,7 +143,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         collapseItems(list ? list.bids : {}, dividerParts, {
           enable: !tickValue?.default
         })
-      ).slice(0, count)
+      )
+        .sort(sortDepthList())
+        .slice(0, count)
     }),
     [list, dividerParts, tickValue]
   );
