@@ -16,11 +16,11 @@ import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
 
-export const sortDepthList = (opts?: { asc?: boolean }) => (
+export const sortDepthList = (
   [priceA]: StringBidDepth,
   [priceB]: StringBidDepth
 ): number => {
-  return opts?.asc ? +priceA - +priceB : +priceB - +priceA;
+  return +priceB - +priceA;
 };
 
 export const updateOrderBookFromBufferLogger = ({
