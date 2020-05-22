@@ -1,3 +1,4 @@
+import withBetaTesting from "decorators/with-beta-testing";
 import withTradeLayout from "decorators/with-trade-layout";
 import { NextPage } from "next";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
@@ -36,4 +37,4 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default withTradeLayout(Page);
+export default withBetaTesting("None")(withTradeLayout(Page));
