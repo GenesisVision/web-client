@@ -31,7 +31,7 @@ const _AssetsEditPage: React.FC<Props> = ({
       const investmentLimit =
         values.investmentLimit !== undefined
           ? values.investmentLimit
-          : description.programDetails.availableInvestmentLimit;
+          : description.programDetails?.availableInvestmentLimit;
       const logo =
         values.logo?.image?.cropped !== undefined
           ? values.logo

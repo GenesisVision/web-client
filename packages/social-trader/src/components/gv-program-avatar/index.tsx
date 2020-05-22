@@ -32,6 +32,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     >
       <div
         className={classNames(styles["program-avatar"], className, {
+          [styles["program-avatar--xsmall"]]: size === "xsmall",
           [styles["program-avatar--small"]]: size === "small",
           [styles["program-avatar--medium"]]: size === "medium",
           [styles["program-avatar--big"]]: size === "big"
@@ -76,7 +77,7 @@ export interface GVProgramAvatarProps {
   alt: string;
   level?: number;
   levelProgress?: number;
-  size?: "small" | "medium" | "big";
+  size?: "xsmall" | "small" | "medium" | "big";
   className?: string;
   color?: string;
   imageClassName?: string;

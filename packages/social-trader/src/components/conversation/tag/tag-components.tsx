@@ -7,6 +7,7 @@ import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { MutedText } from "components/muted-text/muted-text";
 import Crashable from "decorators/crashable";
 import {
   AssetDetails,
@@ -105,12 +106,17 @@ const _ProgramTagCard: React.FC<IAssetTagProps> = ({
   return (
     <TagBlock>
       <AvatarWithName
+        size={"small"}
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logoUrl} alt={title} />
+            <AssetAvatar size={"xsmall"} url={logoUrl} alt={title} />
           </Link>
         }
-        name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
+        name={
+          <Link to={managerToPathCreator(url, contextTitle)}>
+            <MutedText>{title}</MutedText>
+          </Link>
+        }
       />
     </TagBlock>
   );
