@@ -25,7 +25,8 @@ export const RowItem: React.FC<Props> = ({
         [styles["row-item--bottom-offset"]]: bottomOffset,
         [styles["row-item--xsmall"]]: xsmall,
         [styles["row-item--small"]]: small,
-        [styles["row-item--middle"]]: middle && !(small || large),
+        [styles["row-item--middle"]]:
+          middle && !(xlarge || xsmall || small || large),
         [styles["row-item--xlarge"]]: xlarge,
         [styles["row-item--large"]]: large
       })}

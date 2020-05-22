@@ -1,14 +1,15 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./avatar-with-name.module.scss";
 
-const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
+const _AvatarWithName: React.FC<Props> = ({ size, avatar, name }) => {
   return (
     <Row>
       {avatar && (
-        <RowItem>
+        <RowItem small={size === "small"} large={size === "large"}>
           <Row>{avatar}</Row>
         </RowItem>
       )}
@@ -18,6 +19,7 @@ const _AvatarWithName: React.FC<Props> = ({ avatar, name }) => {
 };
 
 interface Props {
+  size?: SizesType;
   avatar?: React.ReactNode;
   name: string | JSX.Element | React.ReactNode;
 }

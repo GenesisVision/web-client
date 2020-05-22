@@ -18,7 +18,7 @@ export const OrderBookCurrentPriceContainer: React.FC = () => {
   const accountCurrencySymbolPrice = useMemo(() => {
     const rateBaseAsset = quoteAsset;
     const rateQuoteAsset = accountCurrency === "USD" ? "USDT" : accountCurrency;
-    if (!tickerItems || !rateQuoteAsset) return;
+    if (!tickerItems?.length || !rateQuoteAsset) return;
     if (rateBaseAsset === rateQuoteAsset) return 1;
     const accountCurrencySymbol = `${rateBaseAsset}${rateQuoteAsset}`.toUpperCase();
     return safeGetElemFromArray(

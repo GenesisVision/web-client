@@ -40,6 +40,10 @@ const getTagLoaderData = (): PostTag => ({
   },
   number: 0,
   assetDetails: {
+    priceCurrency: "GVT",
+    price: 0,
+    changeState: "NotChanged",
+    change24Percent: 0,
     url: getRandomWord(),
     assetType: "Program",
     title: getRandomWord(),

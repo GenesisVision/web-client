@@ -16,6 +16,13 @@ import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
 
+export const sortDepthList = (
+  [priceA]: StringBidDepth,
+  [priceB]: StringBidDepth
+): number => {
+  return +priceB - +priceA;
+};
+
 export const updateOrderBookFromBufferLogger = ({
   list,
   event
@@ -101,7 +108,10 @@ const getNewPriceWithDivider = (
   if (fracLength) {
     const value = `${int}.${frac.slice(0, fracLength)}`;
     return add
-      ? formatValue(+value, fracLength, undefined, { up: true })
+      ? formatValue(+value, fracLength, undefined, {
+          breakZero: true,
+          up: +value !== 0
+        })
       : value;
   }
   if (intLength) {

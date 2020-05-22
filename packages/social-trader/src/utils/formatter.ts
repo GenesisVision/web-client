@@ -59,11 +59,15 @@ const formatValue = (
   value: any,
   decimalScale?: number,
   abs?: boolean,
-  options?: { up?: boolean }
+  options?: { breakZero?: boolean; up?: boolean }
 ): string => {
   value = typeof value !== "number" ? +value : value;
   value = abs ? Math.abs(value) : value;
-  if (value === undefined || isNaN(value) || value.toFixed(0) == value)
+  if (
+    value === undefined ||
+    isNaN(value) ||
+    (!options?.breakZero && value.toFixed(0) == value)
+  )
     return String(value);
 
   return [value.toFixed(10).split(".")]

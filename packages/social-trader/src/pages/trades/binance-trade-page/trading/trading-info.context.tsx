@@ -29,7 +29,7 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { BINANCE_FOLDER_ROUTE, BINANCE_ROUTE } from "routes/trade.routes";
+import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -160,8 +160,8 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       const terminalTypeParam = qs.stringify({
         [TYPE_PARAM_NAME]: terminalType
       });
-      const route = `${BINANCE_ROUTE}/${symbolPath}?${terminalTypeParam}`;
-      Router.push(BINANCE_FOLDER_ROUTE, route);
+      const route = `${TERMINAL_ROUTE}/${symbolPath}?${terminalTypeParam}`;
+      Router.push(TERMINAL_FOLDER_ROUTE, route);
     },
     [terminalType]
   );

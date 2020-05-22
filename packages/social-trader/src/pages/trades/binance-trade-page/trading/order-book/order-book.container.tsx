@@ -3,6 +3,7 @@ import {
   collapseItems,
   getDividerParts,
   normalizeDepthList,
+  sortDepthList,
   updateDepthList,
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
@@ -136,13 +137,15 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
           enable: !tickValue?.default
         })
       )
-        .sort(([priceA], [priceB]) => +priceB - +priceA)
+        .sort(sortDepthList)
         .slice(-count),
       bids: Object.values(
         collapseItems(list ? list.bids : {}, dividerParts, {
           enable: !tickValue?.default
         })
-      ).slice(0, count)
+      )
+        .sort(sortDepthList)
+        .slice(0, count)
     }),
     [list, dividerParts, tickValue]
   );

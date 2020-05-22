@@ -264,7 +264,10 @@ export const useTradeSlider = ({
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(balances, baseAsset);
-      const newQuantity = calculatePercentage(walletAvailable, percentValue);
+      const newQuantity = +terminalMoneyFormat({
+        amount: calculatePercentage(walletAvailable, percentValue),
+        tickSize: stepSize
+      });
       setValue(quantityName, newQuantity, true);
     }
   }, [sliderValue]);

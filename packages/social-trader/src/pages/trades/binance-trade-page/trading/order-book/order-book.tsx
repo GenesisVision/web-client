@@ -60,13 +60,22 @@ const _OrderBook: React.FC<Props> = ({
               styles["order-book__table-block--reverse"]
             )}
           >
-            <OrderBookTable reverse color={"red"} items={asks} />
+            <OrderBookTable
+              tableTickSize={tickValue?.value}
+              reverse
+              color={"red"}
+              items={asks}
+            />
           </Row>
           <Row small>
             <OrderBookCurrentPriceContainer />
           </Row>
           <Row wide small className={styles["order-book__table-block"]}>
-            <OrderBookTable color={"green"} items={bids} />
+            <OrderBookTable
+              tableTickSize={tickValue?.value}
+              color={"green"}
+              items={bids}
+            />
           </Row>
         </div>
       </Row>

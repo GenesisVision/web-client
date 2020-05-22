@@ -9,12 +9,18 @@ import React, { useEffect, useState } from "react";
 import styles from "./order-book.module.scss";
 
 interface Props {
+  tableTickSize?: string;
   reverse?: boolean;
   items?: StringBidDepth[];
   color: ColoredTextColor;
 }
 
-const _OrderBookTable: React.FC<Props> = ({ reverse, color, items = [] }) => {
+const _OrderBookTable: React.FC<Props> = ({
+  tableTickSize,
+  reverse,
+  color,
+  items = []
+}) => {
   const [hoveredRow, setHoveredRow] = useState<number | undefined>();
   const [levelSum, setLevelSum] = useState<LevelsSum>({
     avgPrice: 0,
@@ -48,6 +54,7 @@ const _OrderBookTable: React.FC<Props> = ({ reverse, color, items = [] }) => {
         {items.map(([price, amount], i) => {
           return (
             <OrderBookRow
+              tableTickSize={tableTickSize}
               hovered={
                 hoveredRow !== undefined &&
                 (reverse ? i >= hoveredRow : i <= hoveredRow)

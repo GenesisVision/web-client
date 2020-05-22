@@ -41,11 +41,7 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import {
-  BINANCE_ROUTE,
-  META_TRADER_5_ROUTE,
-  TRADE_ROUTE
-} from "./trade.routes";
+import { META_TRADER_5_ROUTE, TERMINAL_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -149,8 +145,8 @@ const mainMenuItemsUnion = [
     children: [
       {
         Icon: Mt5Icon,
-        route: BINANCE_ROUTE,
-        label: "navigation.binance"
+        route: TERMINAL_ROUTE,
+        label: "navigation.terminal"
       },
       {
         Icon: Mt5Icon,

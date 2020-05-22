@@ -51,9 +51,11 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
                 <RowItem>{tileBlock}</RowItem>
               </Center>
             </RowItem>
-            <RowItem>
-              <IconFavoriteButton asset={asset} assetType={assetType} />
-            </RowItem>
+            {asset.personalDetails && (
+              <RowItem>
+                <IconFavoriteButton asset={asset} assetType={assetType} />
+              </RowItem>
+            )}
           </Row>
           <Row className={styles["manager-history-row__data"]}>{dataBlock}</Row>
         </DefaultBlock>

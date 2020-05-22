@@ -21,6 +21,7 @@ export interface LevelsSum {
 }
 
 interface Props {
+  tableTickSize?: string;
   hovered: boolean;
   levelSum?: LevelsSum;
   index: number;
@@ -32,6 +33,7 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  tableTickSize,
   hovered,
   levelSum: { avgPrice, baseSum, quoteSum } = {
     avgPrice: 0,
@@ -53,7 +55,7 @@ const _OrderBookRow: React.FC<Props> = ({
   } = useContext(TradingInfoContext);
   const formattedPrice = terminalMoneyFormat({
     amount: price,
-    tickSize: tickSize
+    tickSize: tableTickSize || tickSize
   });
   const formattedAmount = terminalMoneyFormat({
     amount: amount,
@@ -65,7 +67,7 @@ const _OrderBookRow: React.FC<Props> = ({
   });
   const formattedAvgPrice = terminalMoneyFormat({
     amount: avgPrice,
-    tickSize: tickSize
+    tickSize: tableTickSize || tickSize
   });
   const formattedBaseSum = terminalMoneyFormat({
     amount: baseSum,
@@ -73,7 +75,7 @@ const _OrderBookRow: React.FC<Props> = ({
   });
   const formattedQuoteSum = terminalMoneyFormat({
     amount: quoteSum,
-    tickSize: tickSize
+    tickSize: tableTickSize || tickSize
   });
   return (
     <Tooltip

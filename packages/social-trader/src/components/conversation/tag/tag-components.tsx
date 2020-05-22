@@ -1,17 +1,27 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { Center } from "components/center/center";
+import {
+  ColoredText,
+  ColoredTextColor
+} from "components/colored-text/colored-text";
 import { Message } from "components/conversation/message/message";
 import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
+import styles from "components/conversation/tag/tag-components.module.scss";
 import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
-import Link from "components/link/link";
+import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import {
-  AssetDetails,
+  ChangeState,
   PlatformAsset,
   Post as PostType,
+  PostAssetDetailsWithPrices,
   ProfilePublic,
   SocialPostTagType
 } from "gv-api-web";
@@ -29,7 +39,7 @@ export interface IUserTagProps {
 }
 
 export interface IAssetTagProps {
-  assetDetails: AssetDetails;
+  assetDetails: PostAssetDetailsWithPrices;
 }
 
 export interface IAnyTagProps {
@@ -44,6 +54,17 @@ export interface IRepostTagProps {
 export type TagToComponentType = {
   tagType: SocialPostTagType;
   Component: React.FC<any>;
+};
+
+const getAssetTagTextColor = (
+  changeState: ChangeState
+): ColoredTextColor | undefined => {
+  switch (changeState) {
+    case "Decreased":
+      return "red";
+    case "Increased":
+      return "green";
+  }
 };
 
 const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
@@ -98,21 +119,57 @@ const _ProgramLink: React.FC<IAssetTagProps> = ({
 };
 export const ProgramLink = React.memo(_ProgramLink);
 
-const _ProgramTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl, title, url }
+const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
+  url,
+  assetDetails: { changeState, price, change24Percent, logoUrl, title }
 }) => {
-  const { contextTitle } = useToLink();
+  const color = getAssetTagTextColor(changeState);
   return (
     <TagBlock>
       <AvatarWithName
+        size={"small"}
         avatar={
-          <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logoUrl} alt={title} />
+          <Link to={url}>
+            <AssetAvatar size={"xsmall"} url={logoUrl} alt={title} />
           </Link>
         }
-        name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
+        name={
+          <Link to={url}>
+            <MutedText className={styles["asset-tag"]}>{title}</MutedText>
+          </Link>
+        }
       />
+      <Row small className={styles["asset-tag"]}>
+        <RowItem wide>$ {price} </RowItem>
+        <RowItem>
+          <ColoredText color={color}>
+            <Row>
+              <RowItem xsmall>{change24Percent}% </RowItem>
+              {changeState !== "NotChanged" && (
+                <RowItem className={styles["asset-tag__arrow"]}>
+                  <div>
+                    {changeState === "Increased" ? <>&uarr;</> : <>&uarr;</>}
+                  </div>
+                </RowItem>
+              )}
+            </Row>
+          </ColoredText>
+        </RowItem>
+      </Row>
     </TagBlock>
+  );
+};
+export const AssetTagCard = React.memo(Crashable(_AssetTagCard));
+
+const _ProgramTagCard: React.FC<IAssetTagProps> = ({ assetDetails }) => {
+  const { linkCreator, contextTitle } = useToLink();
+  const route = composeAssetDetailsUrl("Program", assetDetails.url);
+  const folderRoute = getAssetFolderRoute("Program");
+  return (
+    <AssetTagCard
+      assetDetails={assetDetails}
+      url={linkCreator(route, folderRoute, contextTitle)}
+    />
   );
 };
 export const ProgramTagCard = React.memo(Crashable(_ProgramTagCard));
@@ -129,21 +186,15 @@ const _FundLink: React.FC<IAssetTagProps> = ({
 };
 export const FundLink = React.memo(_FundLink);
 
-const _FundTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl, title, url }
-}) => {
-  const { contextTitle } = useToLink();
+const _FundTagCard: React.FC<IAssetTagProps> = ({ assetDetails }) => {
+  const { linkCreator, contextTitle } = useToLink();
+  const route = composeAssetDetailsUrl("Fund", assetDetails.url);
+  const folderRoute = getAssetFolderRoute("Fund");
   return (
-    <TagBlock>
-      <AvatarWithName
-        avatar={
-          <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logoUrl} alt={title} />
-          </Link>
-        }
-        name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
-      />
-    </TagBlock>
+    <AssetTagCard
+      assetDetails={assetDetails}
+      url={linkCreator(route, folderRoute, contextTitle)}
+    />
   );
 };
 export const FundTagCard = React.memo(Crashable(_FundTagCard));
@@ -160,21 +211,15 @@ const _FollowLink: React.FC<IAssetTagProps> = ({
 };
 export const FollowLink = React.memo(_FollowLink);
 
-const _FollowTagCard: React.FC<IAssetTagProps> = ({
-  assetDetails: { logoUrl, title, url }
-}) => {
-  const { contextTitle } = useToLink();
+const _FollowTagCard: React.FC<IAssetTagProps> = ({ assetDetails }) => {
+  const { linkCreator, contextTitle } = useToLink();
+  const route = composeAssetDetailsUrl("Fund", assetDetails.url);
+  const folderRoute = getAssetFolderRoute("Fund");
   return (
-    <TagBlock>
-      <AvatarWithName
-        avatar={
-          <Link to={managerToPathCreator(url, contextTitle)}>
-            <AssetAvatar url={logoUrl} alt={title} />
-          </Link>
-        }
-        name={<Link to={managerToPathCreator(url, contextTitle)}>{title}</Link>}
-      />
-    </TagBlock>
+    <AssetTagCard
+      assetDetails={assetDetails}
+      url={linkCreator(route, folderRoute, contextTitle)}
+    />
   );
 };
 export const FollowTagCard = React.memo(Crashable(_FollowTagCard));
@@ -195,13 +240,16 @@ const _UserTagCard: React.FC<IUserTagProps> = ({
   return (
     <TagBlock>
       <AvatarWithName
+        size={"small"}
         avatar={
           <Link to={managerToPathCreator(url, contextTitle)}>
             <ProfileAvatar url={logoUrl} alt={username} />
           </Link>
         }
         name={
-          <Link to={managerToPathCreator(url, contextTitle)}>{username}</Link>
+          <Link to={managerToPathCreator(url, contextTitle)}>
+            <MutedText className={styles["asset-tag"]}>{username}</MutedText>
+          </Link>
         }
       />
     </TagBlock>
