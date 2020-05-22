@@ -29,6 +29,12 @@ export interface BannerApiContext extends NextApiRequest {
   query: { id: string };
 }
 
+const CURRENCY = "USD";
+
+export const formatEquity = (balance: number) => {
+  return `$${Math.round(balance)}`;
+};
+
 export type BannerProps = {
   chart: ProgramProfitPercentCharts | FundProfitPercentCharts;
   details: ProgramFollowDetailsFull | FundDetailsFull;
@@ -118,7 +124,7 @@ async function createBanner(
 export async function fetchFundData(id: string) {
   const details = await api.funds().getFundDetails(id as string);
   const chart = await api.funds().getFundProfitPercentCharts(details.id, {
-    currencies: ["USDT"]
+    currencies: [CURRENCY]
   });
 
   return { details, chart };
@@ -126,7 +132,9 @@ export async function fetchFundData(id: string) {
 
 export async function fetchProgramData(id: string) {
   const details = await api.programs().getProgramDetails(id as string);
-  const chart = await api.programs().getProgramProfitPercentCharts(details.id);
+  const chart = await api.programs().getProgramProfitPercentCharts(details.id, {
+    currency: CURRENCY
+  });
 
   return { details, chart };
 }
@@ -159,7 +167,7 @@ export default function createBannerApi(
 
       res.statusCode = 200;
       res.setHeader("Content-Type", `image/${logoOptions ? "png" : "svg+xml"}`);
-      res.setHeader("Cache-Control", `max-age=86400`);
+      // res.setHeader("Cache-Control", `max-age=86400`);
       res.send(banner);
     } catch (e) {
       console.error("error 2: ", e);
