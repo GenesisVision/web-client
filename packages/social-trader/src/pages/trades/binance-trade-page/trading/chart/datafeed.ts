@@ -6,6 +6,7 @@ import {
   Bar,
   LibrarySymbolInfo,
   SeriesFormat,
+  ServerTimeCallback,
   Timezone
 } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
@@ -24,7 +25,6 @@ const formatTimeResolution = (resolution: string) => {
 };
 
 const configurationData = {
-  supports_search: false,
   supported_resolutions: [
     "1",
     "3",
@@ -57,21 +57,26 @@ const configurationData = {
 };
 
 type Params = {
+  servertime: number;
   symbols: Symbol[];
   getKlines: (params: KlineParams) => Promise<number[][]>;
   klineSocket: KlineSocketType;
 };
 
 export default ({
+  servertime,
   symbols,
   getKlines,
   klineSocket
 }: Params): IBasicDataFeed => ({
+  getServerTime(callback: ServerTimeCallback): void {
+    callback(servertime);
+  },
   //@ts-ignore
   onReady: callback => {
     setTimeout(() => callback(configurationData));
   },
-  searchSymbols: (userInput, exchange, type, onResultReadyCallback) => {
+  searchSymbols: async (userInput, exchange, type, onResultReadyCallback) => {
     const items: SearchSymbolResultItem[] = symbols
       .filter(sym => sym.baseAsset === userInput)
       .map(symbolItem => ({
@@ -82,7 +87,7 @@ export default ({
         type,
         ticker: symbolItem.symbol
       }));
-    onResultReadyCallback(items);
+    setTimeout(() => onResultReadyCallback(items));
   },
   resolveSymbol: async (
     symbolName,
@@ -102,16 +107,16 @@ export default ({
       type: "crypto",
       session: "24x7",
       timezone: "Etc/UTC" as Timezone,
-      exchange: "crypto",
+      exchange: "Binance",
       minmov: 1,
-      pricescale: 100,
+      pricescale: 10 ** symbolItem.baseAssetPrecision,
       has_intraday: true,
       has_no_volume: true,
       has_daily: true,
       has_weekly_and_monthly: true,
       supported_resolutions: configurationData.supported_resolutions,
       volume_precision: 2,
-      data_status: symbolItem.status as any,
+      data_status: "streaming",
       full_name: symbolName,
       listed_exchange: "",
       format: "price" as SeriesFormat
@@ -129,6 +134,7 @@ export default ({
   ) => {
     const fromms = from * 1000;
     const toms = to * 1000;
+
     const urlParameters = {
       symbol: symbolInfo.full_name,
       interval: formatTimeResolution(resolution),
@@ -140,18 +146,17 @@ export default ({
 
       let bars: Bar[] = [];
       data.forEach(bar => {
-        if (bar[0] >= fromms && bar[0] < toms) {
-          bars = [
-            ...bars,
-            {
-              time: bar[0],
-              open: bar[1],
-              high: bar[2],
-              low: bar[3],
-              close: bar[4]
-            }
-          ];
-        }
+        bars = [
+          ...bars,
+          {
+            time: bar[0],
+            close: bar[4],
+            open: bar[1],
+            high: bar[2],
+            low: bar[3],
+            volume: bar[5]
+          }
+        ];
       });
       onHistoryCallback(bars, { noData: false });
     } catch (error) {

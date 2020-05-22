@@ -28,6 +28,7 @@ export const ChartBlock: React.FC = () => {
 
   React.useEffect(() => {
     import("./charting_library/charting_library.min").then(TradingView => {
+      if (!exchangeInfo) return;
       const widget = new TradingView.widget({
         custom_css_url: "/static/charting_library/style.css",
         symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
@@ -37,6 +38,7 @@ export const ChartBlock: React.FC = () => {
         theme: "Dark",
         toolbar_bg: $backgroundColor,
         datafeed: Datafeed({
+          servertime: exchangeInfo?.serverTime,
           symbols: exchangeInfo?.symbols || [],
           getKlines: methods.getKlines,
           klineSocket: methods.klineSocket(connectSocket)
