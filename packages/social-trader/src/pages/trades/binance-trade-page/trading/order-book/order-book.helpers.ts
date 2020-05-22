@@ -108,7 +108,10 @@ const getNewPriceWithDivider = (
   if (fracLength) {
     const value = `${int}.${frac.slice(0, fracLength)}`;
     return add
-      ? formatValue(+value, fracLength, undefined, { up: true })
+      ? formatValue(+value, fracLength, undefined, {
+          breakZero: true,
+          up: +value !== 0
+        })
       : value;
   }
   if (intLength) {
