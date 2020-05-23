@@ -109,7 +109,7 @@ const _Post: React.FC<Props> = ({
           <CommentsList comments={comments} updateData={updateData} />
         </Row>
       )}
-      {actions && (
+      {actions && actions.canComment && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>

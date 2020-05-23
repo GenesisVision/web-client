@@ -10,8 +10,14 @@ import { api } from "services/api-client/swagger-custom-client";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
-export const rePost = (body: RePost) => {
-  return api.social().rePost({ body });
+export const rePost = (values: {
+  id: string;
+  text: string;
+  images?: IImageValue[];
+}) => {
+  return uploadImages(values.images).then(images => {
+    api.social().rePost({ body: { ...values, images } });
+  });
 };
 
 export const pinPost = (id: string) => {

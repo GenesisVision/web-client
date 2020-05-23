@@ -69,9 +69,14 @@ const _NewsListContainer: React.FC<INewsListContainerProps> = ({
     updatePage();
   }, []);
 
+  const handleUpdateItems = useCallback(() => {
+    sendRequest(options);
+  }, [options]);
+
   if (!data) return null;
   return (
     <NewsList
+      updateItems={handleUpdateItems}
       skip={options.skip}
       hasMore={canLoadMore}
       data={data.items}

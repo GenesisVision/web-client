@@ -10,6 +10,7 @@ import { DESKTOP, TABLET } from "utils/breakpoints";
 import "./react-stack-grid.d.ts";
 
 interface Props {
+  updateItems: VoidFunction;
   skip: number;
   reset?: boolean;
   hasMore?: boolean;
@@ -27,9 +28,10 @@ const getColumnSize = (size?: number): string => {
 const OFFSET_HEIGHT = 20;
 
 const _PlateNewsList: React.FC<{
+  updateItems: VoidFunction;
   size?: { height: number; width: number };
   data: ConversationPost[];
-}> = ({ data, size }) => {
+}> = ({ updateItems, data, size }) => {
   const columnSize = getColumnSize(size?.width);
   return (
     <StackGrid
@@ -38,7 +40,7 @@ const _PlateNewsList: React.FC<{
       gutterHeight={OFFSET_HEIGHT}
     >
       {data.map(post => (
-        <NewsCard key={post.id} post={post} />
+        <NewsCard updateItems={updateItems} key={post.id} post={post} />
       ))}
     </StackGrid>
   );
@@ -47,13 +49,14 @@ const _PlateNewsList: React.FC<{
 const PlateNewsList = sizeMe()(React.memo(_PlateNewsList));
 
 const _InfiniteScrollNewsList: React.FC<{
+  updateItems: VoidFunction;
   hasMore?: boolean;
   loadMore: VoidFunction;
   data: ConversationPost[];
-}> = ({ hasMore, loadMore, data }) => {
+}> = ({ updateItems, hasMore, loadMore, data }) => {
   return data.length ? (
     <InfiniteScroll hasMore={hasMore} loadMore={loadMore}>
-      <PlateNewsList data={data} />
+      <PlateNewsList updateItems={updateItems} data={data} />
     </InfiniteScroll>
   ) : (
     <DefaultBlock solid wide>
@@ -63,7 +66,13 @@ const _InfiniteScrollNewsList: React.FC<{
 };
 const InfiniteScrollNewsList = React.memo(_InfiniteScrollNewsList);
 
-const _NewsList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
+const _NewsList: React.FC<Props> = ({
+  updateItems,
+  skip,
+  hasMore,
+  data,
+  onScroll
+}) => {
   const [mergedPosts, setMergedPosts] = useState<ConversationPost[]>([]);
 
   useEffect(() => {
@@ -72,6 +81,7 @@ const _NewsList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
 
   return (
     <InfiniteScrollNewsList
+      updateItems={updateItems}
       data={mergedPosts}
       loadMore={onScroll}
       hasMore={hasMore}
