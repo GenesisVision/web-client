@@ -51,18 +51,6 @@ const NewsCardContent: React.FC<Props> = React.memo(({ updateItems, post }) => {
             </RepostTagContainer>
           </Row>
         )}
-        {hasTags && (
-          <Row wrap>
-            {post.tags
-              .filter(({ title }) => title !== "<RePost>")
-              .map(({ title }) => title)
-              .map(tagTitle => (
-                <RowItem key={tagTitle}>
-                  <MutedText>#{tagTitle}</MutedText>
-                </RowItem>
-              ))}
-          </Row>
-        )}
         <Row>
           <ConversationUser
             postId={post.id}
