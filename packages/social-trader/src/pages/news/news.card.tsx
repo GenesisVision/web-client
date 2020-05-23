@@ -4,6 +4,10 @@ import { ConversationUser } from "components/conversation/conversation-user/conv
 import { ConversationPost } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Share } from "components/conversation/share/share";
+import {
+  inTextComponentsMap,
+  parseToTsx
+} from "components/conversation/tag/parse-to-tsx";
 import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
 import { DefaultBlock } from "components/default.block/default.block";
 import { MutedText } from "components/muted-text/muted-text";
@@ -30,7 +34,13 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
         </Row>*/}
         {!!post.text?.length && (
           <Row>
-            <MutedText noWrap={false}>{post.text}</MutedText>
+            <MutedText noWrap={false}>
+              {parseToTsx({
+                tags: post.tags,
+                text: post.text,
+                map: inTextComponentsMap
+              })}
+            </MutedText>
           </Row>
         )}
         {rePostTag && (
