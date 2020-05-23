@@ -18,9 +18,7 @@ const _PostInputImagePreview: React.FC<Props> = ({ image, onRemove }) => {
         className={styles["post-input__image-preview-remove"]}
         onClick={() => onRemove(image.id)}
       >
-        <div className={styles["post-input__image-preview-remove-icon"]}>
-          <CloseIcon />
-        </div>
+        <CloseIcon />
       </div>
     </div>
   );

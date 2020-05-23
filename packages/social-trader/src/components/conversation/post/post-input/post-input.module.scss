@@ -37,14 +37,9 @@ $post-input-image-preview-size: 40px;
       background-color: darken($popover-background, 3);
     }
   }
-  &__image-preview-remove-icon {
-    height: 6px;
-    width: 6px;
-  }
   &__image-preview {
     display: block;
     height: $post-input-image-preview-size;
-    //@include adaptive-border-radius($border-radius);
   }
   &__container,
   &__input-container,
