@@ -18,10 +18,11 @@ import { Separator } from "components/separator/separator";
 import React from "react";
 
 interface Props {
+  updateItems: VoidFunction;
   post: ConversationPost;
 }
 
-const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
+const NewsCardContent: React.FC<Props> = React.memo(({ updateItems, post }) => {
   const hasTags = !!post.tags;
   const hasImages = !!post.images.length;
   const TitleTag = hasImages ? "h3" : "h2";
@@ -84,7 +85,11 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
             />
           </RowItem>
           <RowItem>
-            <Share onApply={() => {}} id={post.id} count={post.rePostsCount} />
+            <Share
+              onApply={updateItems}
+              id={post.id}
+              count={post.rePostsCount}
+            />
           </RowItem>
         </Center>
       </DefaultBlock>
@@ -92,14 +97,14 @@ const NewsCardContent: React.FC<Props> = React.memo(({ post }) => {
   );
 });
 
-const _NewsCard: React.FC<Props> = ({ post }) => {
+const _NewsCard: React.FC<Props> = ({ updateItems, post }) => {
   const cardImage = post.images.length
     ? getImageUrlByQuality(post.images[0].resizes, "High")
     : undefined;
   return (
     <PlateFeedCard
       imageSrc={cardImage}
-      content={<NewsCardContent post={post} />}
+      content={<NewsCardContent updateItems={updateItems} post={post} />}
     />
   );
 };
