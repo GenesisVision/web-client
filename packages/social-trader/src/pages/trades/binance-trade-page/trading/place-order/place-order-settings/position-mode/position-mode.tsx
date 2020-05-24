@@ -1,6 +1,6 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import useIsOpen from "hooks/is-open.hook";
+import { PlaceOrderSettingsButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings-button";
 import { PositionModeDialog } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/position-mode/position-mode.dialog";
 import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
@@ -24,13 +24,9 @@ const _PositionMode: React.FC<Props> = ({ data, onChange }) => {
   );
   return (
     <>
-      <GVButton
-        size={GV_BTN_SIZE.SMALL}
-        variant={"outlined"}
-        onClick={setIsOpen}
-      >
+      <PlaceOrderSettingsButton onClick={setIsOpen}>
         {getPositionModeName(data)}
-      </GVButton>
+      </PlaceOrderSettingsButton>
       <PositionModeDialog
         onChange={handleOnChange}
         mode={data}
