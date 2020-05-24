@@ -10,13 +10,13 @@ interface Props {}
 const _PlaceOrderSettings: React.FC<Props> = () => {
   return (
     <Center>
-      <RowItem>
+      <RowItem small>
         <MarginModeContainer />
       </RowItem>
-      <RowItem>
+      <RowItem small>
         <ChangeLeverageContainer />
       </RowItem>
-      <RowItem>
+      <RowItem small>
         <PositionModeContainer />
       </RowItem>
     </Center>
