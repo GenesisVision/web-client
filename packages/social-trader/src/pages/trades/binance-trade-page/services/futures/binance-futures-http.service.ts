@@ -14,6 +14,8 @@ import {
   KlineParams,
   MarginModeType,
   OrderSide,
+  PositionModeResponse,
+  PositionModeType,
   QueryOrderResult,
   SymbolLeverageBrackets,
   Ticker,
@@ -48,6 +50,37 @@ export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
   });
+
+export const changePositionMode = ({
+  dualSidePosition,
+  authData
+}: {
+  dualSidePosition: PositionModeType;
+  authData: TradeAuthDataType;
+}): Promise<HttpResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: `${API_ROUTE}/positionSide/dual`,
+      params: { dualSidePosition },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
+export const getPositionMode = ({
+  authData
+}: {
+  authData: TradeAuthDataType;
+}): Promise<PositionModeResponse> =>
+  requestService.get(
+    {
+      ...authData,
+      url: `${API_ROUTE}/positionSide/dual`,
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
 
 export const getPositionInformation = ({
   authData

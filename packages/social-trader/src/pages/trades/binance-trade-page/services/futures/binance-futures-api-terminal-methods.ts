@@ -5,6 +5,7 @@ import {
   cancelOrder,
   changeLeverage,
   changeMarginMode,
+  changePositionMode,
   getAccountInformation,
   getAllOrders,
   getDepth,
@@ -13,6 +14,7 @@ import {
   getLeverageBrackets,
   getOpenOrders,
   getPositionInformation,
+  getPositionMode,
   getTickers,
   getTrades,
   getUserStreamKey,
@@ -27,6 +29,8 @@ import {
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  changePositionMode,
+  getPositionMode,
   getPositionInformation,
   getLeverageBrackets,
   changeLeverage,
