@@ -7,7 +7,7 @@ export interface RequestOptions {
   privateKey?: string;
   publicKey?: string;
   url: string;
-  params?: OrderRequest;
+  params?: AnyObjectType;
   type?: REQUEST_TYPE[];
   method?: HTTP_METHODS;
 }
