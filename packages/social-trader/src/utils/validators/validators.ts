@@ -3,11 +3,11 @@ import { number, string } from "yup";
 
 export const minMaxNumberShape = ({
   t,
-  min,
+  min = 0,
   max
 }: {
   t: TFunction;
-  min: number;
+  min?: number;
   max: number;
 }) =>
   number()
