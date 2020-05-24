@@ -8,6 +8,7 @@ import {
   changePositionMode,
   getAccountInformation,
   getAllOrders,
+  getBalancesForTransfer,
   getDepth,
   getExchangeInfo,
   getKlines,
@@ -18,6 +19,7 @@ import {
   getTickers,
   getTrades,
   getUserStreamKey,
+  newFutureAccountTransfer,
   tradeRequest
 } from "./binance-futures-http.service";
 import {
@@ -29,6 +31,8 @@ import {
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  getBalancesForTransfer,
+  newFutureAccountTransfer,
   changePositionMode,
   getPositionMode,
   getPositionInformation,

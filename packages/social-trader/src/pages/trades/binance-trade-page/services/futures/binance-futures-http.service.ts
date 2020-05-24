@@ -1,10 +1,12 @@
 import {
+  transformAccountToBalanceForTransfer,
   transformFuturesAccount,
   transformFuturesTickerSymbol
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
   Account,
+  BalancesForTransfer,
   CancelOrderResult,
   ChangeLeverageResponse,
   Depth,
@@ -21,6 +23,7 @@ import {
   Ticker,
   Trade,
   TradeAuthDataType,
+  TradeCurrency,
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
@@ -50,6 +53,63 @@ export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
   });
+
+export const getBalancesForTransfer = ({
+  authData
+}: {
+  authData: TradeAuthDataType;
+}): Promise<BalancesForTransfer> => {
+  const futuresAccountRequest = requestService
+    .get(
+      {
+        ...authData,
+        url: `${API_ROUTE}/account`,
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(transformFuturesAccount)
+    .then(transformAccountToBalanceForTransfer);
+  const spotAccountRequest = requestService
+    .get(
+      {
+        ...authData,
+        url: "/api/v3/account",
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(transformAccountToBalanceForTransfer);
+  return Promise.all([
+    futuresAccountRequest,
+    spotAccountRequest
+  ]).then(([futures, spot]) => ({ futures, spot }));
+};
+
+export const newFutureAccountTransfer = ({
+  asset,
+  amount,
+  type,
+  authData
+}: {
+  asset: TradeCurrency;
+  amount: number;
+  type: number; // 1 | 2
+  authData: TradeAuthDataType;
+}): Promise<HttpResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: "/sapi/v1/futures/transfer",
+      params: {
+        asset,
+        amount,
+        type
+      },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
 
 export const changePositionMode = ({
   dualSidePosition,

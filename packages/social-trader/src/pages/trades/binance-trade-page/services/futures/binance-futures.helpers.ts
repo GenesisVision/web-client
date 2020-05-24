@@ -13,11 +13,17 @@ import {
 import {
   Account,
   AssetBalance,
-  ExecutionReport,
+  BalanceForTransfer,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+
+export const transformAccountToBalanceForTransfer = ({
+  balances
+}: Account): BalanceForTransfer[] => {
+  return balances.map(({ asset, free }) => ({ asset, free }));
+};
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
   eventType: m.e,
@@ -81,7 +87,7 @@ export const transformFuturesBalance = (
   return {
     futuresAsset,
     asset: futuresAsset.asset,
-    free: futuresAsset.walletBalance,
+    free: futuresAsset.maxWithdrawAmount,
     locked: "0"
   };
 };
