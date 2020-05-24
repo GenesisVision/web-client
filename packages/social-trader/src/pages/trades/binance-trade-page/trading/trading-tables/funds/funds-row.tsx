@@ -5,6 +5,7 @@ import {
   formatValueWithTick,
   getSymbol
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TransferButton } from "pages/trades/binance-trade-page/trading/transfer/transfer.button";
 import React, { useContext } from "react";
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 
 const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
   const ticker = useContext(TradingTickerContext);
-  const { tickSize } = useContext(TradingInfoContext);
+  const { tickSize, terminalType } = useContext(TradingInfoContext);
   const symbol = getSymbol(asset, "BTC");
   const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
   const total = formatValueWithTick(+available + +locked, "0.00000001");
@@ -27,6 +28,11 @@ const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
       <td>{available}</td>
       <td>{locked}</td>
       <td>{btcValue}</td>
+      {terminalType === "futures" && (
+        <td>
+          <TransferButton asset={asset} />
+        </td>
+      )}
     </tr>
   );
 };

@@ -17,3 +17,8 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
     name: "btc-value"
   }
 ];
+
+export const FUTURES_FUNDS_TABLE_COLUMNS: SortingColumn[] = [
+  ...FUNDS_TABLE_COLUMNS,
+  { name: "" }
+];
