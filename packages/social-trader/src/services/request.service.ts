@@ -67,7 +67,7 @@ export const handleErrors = async (response: Response) => {
 
 const parseOptions = (options: OrderRequest) =>
   Object.entries(options)
-    .map(([name, value]) => `${name}=${String(value).toUpperCase()}`)
+    .map(([name, value]) => `${name}=${String(value)}`)
     .join("&");
 
 const signOptions = (options: OrderRequest, privateKey?: string): string =>
@@ -85,7 +85,8 @@ export const sendRequest = ({
   const body: AnyObjectType = {};
 
   if (params)
-    for (const param in params) if (params[param]) body[param] = params[param];
+    for (const param in params)
+      if (params[param] !== undefined) body[param] = params[param];
 
   if (type && type.includes(REQUEST_TYPE.AUTHORIZED)) {
     headers[BINANCE_API_KEY_HEADER] = publicKey;
