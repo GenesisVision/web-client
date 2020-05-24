@@ -14,6 +14,18 @@ export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
 export type PositionModeType = boolean;
 
+export type BalancesItemName = "spot" | "futures";
+
+export interface BalanceForTransfer {
+  asset: TradeCurrency;
+  free: string;
+}
+
+export interface BalancesForTransfer {
+  spot: BalanceForTransfer[];
+  futures: BalanceForTransfer[];
+}
+
 export interface PositionModeResponse {
   dualSidePosition: PositionModeType;
 }
@@ -107,6 +119,15 @@ export interface IBinanceKline {
 }
 
 export interface ITerminalMethods {
+  getBalancesForTransfer?: (options: {
+    authData: TradeAuthDataType;
+  }) => Promise<BalancesForTransfer>;
+  newFutureAccountTransfer?: (options: {
+    asset: TradeCurrency;
+    amount: number;
+    type: number; // 1 | 2
+    authData: TradeAuthDataType;
+  }) => Promise<HttpResponse>;
   getPositionMode?: (options: {
     authData: TradeAuthDataType;
   }) => Promise<PositionModeResponse>;
