@@ -12,6 +12,12 @@ export type TerminalType = "spot" | "futures";
 
 export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
+export type PositionModeType = boolean;
+
+export interface PositionModeResponse {
+  dualSidePosition: PositionModeType;
+}
+
 export interface FuturesPositionInformation {
   entryPrice: string;
   marginType: MarginModeType;
@@ -101,6 +107,13 @@ export interface IBinanceKline {
 }
 
 export interface ITerminalMethods {
+  getPositionMode?: (options: {
+    authData: TradeAuthDataType;
+  }) => Promise<PositionModeResponse>;
+  changePositionMode?: (options: {
+    dualSidePosition: PositionModeType;
+    authData: TradeAuthDataType;
+  }) => Promise<HttpResponse>;
   getKlines: (params: KlineParams) => Promise<number[][]>;
   getPositionInformation?: (options: {
     authData: TradeAuthDataType;
