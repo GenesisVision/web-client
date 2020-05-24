@@ -26,6 +26,12 @@ module.exports = async app => {
   const server = express();
 
   server.use(
+    createProxyMiddleware("/sapi/v1", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+  server.use(
     createProxyMiddleware("/api/v3", {
       target: "https://api.binance.com",
       changeOrigin: true
