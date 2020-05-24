@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./style.module.scss";
 
 export enum GV_BTN_SIZE {
+  XSMALL = "XSMALL",
   SMALL = "SMALL",
   LARGE = "LARGE",
   BIG = "BIG",
@@ -56,6 +57,7 @@ const GVButton: React.FC<GVButtonProps> = ({
     [styles["gv-btn--large"]]: size === GV_BTN_SIZE.LARGE,
     [styles["gv-btn--big"]]: size === GV_BTN_SIZE.BIG,
     [styles["gv-btn--small"]]: size === GV_BTN_SIZE.SMALL,
+    [styles["gv-btn--xsmall"]]: size === GV_BTN_SIZE.XSMALL,
     [styles["gv-btn--danger"]]: color === "danger",
     [styles["gv-btn--primary"]]: color === "primary",
     [styles["gv-btn--secondary"]]: color === "secondary",

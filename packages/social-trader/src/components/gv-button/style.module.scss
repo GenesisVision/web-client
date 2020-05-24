@@ -106,6 +106,19 @@ $default-padding: $padding-xxsmall $padding-small;
     padding: 0;
   }
 
+  &--xsmall {
+    @include font-size($font-size-xxsmall);
+    &:not(.gv-btn--no-padding) {
+      width: auto;
+      @include height($btn-height-xsmall);
+      padding: 0;
+      @include horizontal-paddings($padding-xxsmall);
+    }
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    box-sizing: border-box;
+  }
+
   &--no-padding {
     padding: 0;
   }
