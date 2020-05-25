@@ -90,6 +90,7 @@ export interface FuturesAccountEventPosition {
 
 export interface FuturesAccountEventBalance {
   asset: TradeCurrency; // Asset
+  free: string; // Wallet Balance
   walletBalance: string; // Wallet Balance
   crossWalletBalance: string; // Cross Wallet Balance
 }

@@ -143,6 +143,7 @@ export const futuresEventBalanceTransform = (
 ): FuturesAccountEventBalance => {
   return {
     asset: socketData.a,
+    free: socketData.wb,
     walletBalance: socketData.wb,
     crossWalletBalance: socketData.cw
   };
