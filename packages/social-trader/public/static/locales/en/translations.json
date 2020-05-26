@@ -195,7 +195,15 @@
     "tag": {
       "add": "Tag",
       "popover-header": "Add tag",
-      "popover-search-placeholder": "Search for tags"
+      "popover-search-placeholder": "Search for tags",
+      "gm": "Genesis Markets",
+      "high-risk": "Program stop out level is from 31 to 100%",
+      "medium-risk": "Program stop out level is from 11 to 30%",
+      "low-risk": "Program stop out level is 10%",
+      "crypto": "Cryptocurrencies",
+      "binance": "Binance Exchange",
+      "forex": "Forex,",
+      "signal": "You can copy trades from this program using GV Follow"
     },
     "fund-asset": {
       "add": "Asset",
@@ -1245,7 +1253,9 @@
     },
     "history": {
       "my-history": {
-        "details": "Details"
+        "details": "Details",
+        "loss": "Loss in the program",
+        "refund": "Amount of funds that have been returned to your wallet."
       },
       "heading": "History",
       "tabs": {
