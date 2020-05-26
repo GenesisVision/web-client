@@ -90,11 +90,20 @@ export const getGlobalFeed = (values?: Object): Promise<ConversationFeed> => {
   return getFeedMethod(values);
 };
 
-export const searchInFeed = (values: {
+export const getTopPosts = (values: Object): Promise<ConversationFeed> => {
+  return getFeedMethod({ ...values, showTop: true });
+};
+
+export interface SearchInFeedValues {
+  tagContentId?: string;
   hashTags?: Array<string>;
   mask?: string;
-}): Promise<ConversationFeed> => {
-  return getFeedMethod(values);
+}
+
+export const searchInFeed = (searchValues: SearchInFeedValues) => (
+  values: Object
+): Promise<ConversationFeed> => {
+  return getFeedMethod({ ...searchValues, ...values });
 };
 
 export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {
