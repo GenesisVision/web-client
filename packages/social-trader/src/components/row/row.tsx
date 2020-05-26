@@ -22,6 +22,7 @@ export const Row: React.FC<Props> = ({
       {...otherProps}
       center={center && !onlyOffset}
       className={classNames(styles["row"], className, {
+        [styles["row--pointer"]]: !!otherProps.onClick,
         [styles["row--flex"]]: !onlyOffset,
         [styles["row--wide"]]: wide,
         [styles["row--hidden"]]: hide,

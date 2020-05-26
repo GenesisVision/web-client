@@ -53,9 +53,9 @@ const HeaderLeft: React.FC<{
           {openSearch ? (
             <HeaderSearchInput setSearchIsClose={setSearchIsClose} />
           ) : (
-            <div className={styles["header__search-button"]}>
+            <Center className={styles["header__search-button"]}>
               <SearchIcon />
-            </div>
+            </Center>
           )}
         </HeaderIcon>
       </div>

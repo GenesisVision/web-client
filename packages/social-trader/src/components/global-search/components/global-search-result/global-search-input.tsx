@@ -12,7 +12,7 @@ export const SearchInputField: React.FC<{
   size?: SizesType;
   canClose?: boolean;
   onBlur?: VoidFunction;
-  value: string;
+  value?: string;
   onCancel?: VoidFunction;
   onChange: (event: React.ChangeEvent<any>) => void;
 }> = ({

@@ -17,6 +17,9 @@
 
 .row-item {
   box-sizing: border-box;
+  &--pointer {
+    cursor: pointer;
+  }
   &--hide {
     display: none;
   }

@@ -4,7 +4,8 @@ import {
 } from "components/conversation/post-list/post-list.container";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useEffect } from "react";
+import { debounce } from "lodash";
+import React, { useCallback, useEffect } from "react";
 
 interface Props extends IPostListContainerProps {
   showInput?: boolean;
@@ -16,6 +17,15 @@ const _PostListWithInput: React.FC<Props> = ({
   fetchMethod
 }) => {
   const [isReset, setReset, setNotReset] = useIsOpen();
+
+  const updateDebounced = useCallback(
+    debounce(() => setReset(), 300),
+    []
+  );
+
+  useEffect(() => {
+    updateDebounced();
+  }, [fetchMethod]);
 
   useEffect(() => {
     if (isReset) setNotReset();

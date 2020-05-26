@@ -1,0 +1,32 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+
+.social-page {
+  &__sticky {
+    position: sticky;
+    top: $padding-xsmall;
+  }
+
+  &__search-button {
+    cursor: pointer;
+  }
+
+  &__tabs-container {
+    overflow: hidden;
+    @include transition();
+    width: 100%;
+    &--search {
+      width: 0;
+    }
+  }
+
+  &__search-container {
+    height: 34px;
+    width: 40px;
+    @include transition();
+    &--search {
+      width: 100%;
+    }
+  }
+}

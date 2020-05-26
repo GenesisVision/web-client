@@ -2,6 +2,9 @@
 @import "~shared/styles/_sizes";
 
 .row {
+  &--pointer {
+    cursor: pointer;
+  }
   &--flex {
     display: flex;
     box-sizing: border-box;

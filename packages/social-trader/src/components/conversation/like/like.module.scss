@@ -1,9 +1,14 @@
+@import "~shared/styles/_sizes";
 @import "~shared/styles/_colors";
 @import "~shared/styles/_constants";
 
 $like-icon-size: 15px;
 
 .like {
+  &__count {
+    font-size: $font-size-common;
+    line-height: $font-size-common;
+  }
   &__icon {
     width: $like-icon-size;
     height: $like-icon-size;

@@ -4,6 +4,10 @@
 $share-icon-size: 18px;
 
 .share {
+  &__count {
+    font-size: $font-size-common;
+    line-height: $font-size-common;
+  }
   &__icon {
     width: $share-icon-size;
     height: $share-icon-size;
