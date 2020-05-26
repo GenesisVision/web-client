@@ -24,7 +24,6 @@ import * as React from "react";
 import {
   MEDIA_ROUTE,
   MY_PROFILE_ROUTE,
-  NEWS_ROUTE,
   SOCIAL_ROUTE,
   USERS_ROUTE
 } from "routes/social.routes";
