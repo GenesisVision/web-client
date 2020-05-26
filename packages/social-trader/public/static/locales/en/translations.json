@@ -257,6 +257,7 @@
     }
   },
   "navigation": {
+    "media": "Media",
     "users": "Users",
     "social": "Social",
     "news": "News",

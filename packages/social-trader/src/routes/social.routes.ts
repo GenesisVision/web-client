@@ -15,6 +15,9 @@ export const RATING_ROUTE = `${SOCIAL_ROUTE}/${RATING}`;
 export const MY_PROFILE = "my-profile";
 export const MY_PROFILE_ROUTE = `${SOCIAL_ROUTE}/${MY_PROFILE}`;
 
+export const MEDIA = "media";
+export const MEDIA_ROUTE = `${SOCIAL_ROUTE}/${MEDIA}`;
+
 export const NEWS = "news";
 export const NEWS_ROUTE = `${SOCIAL_ROUTE}/${NEWS}`;
 

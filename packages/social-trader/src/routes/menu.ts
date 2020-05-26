@@ -22,8 +22,8 @@ import {
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
 import {
+  MEDIA_ROUTE,
   MY_PROFILE_ROUTE,
-  NEWS_ROUTE,
   SOCIAL_ROUTE,
   USERS_ROUTE
 } from "routes/social.routes";
@@ -101,8 +101,8 @@ const mainMenuItemsUnion = [
     children: [
       {
         Icon: NewsIcon,
-        route: NEWS_ROUTE,
-        label: "navigation.news"
+        route: MEDIA_ROUTE,
+        label: "navigation.media"
       },
       {
         Icon: MyProfileIcon,

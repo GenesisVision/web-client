@@ -10,6 +10,10 @@ import { api } from "services/api-client/swagger-custom-client";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
+export const getSocialMedia = (values?: Object) => {
+  return api.social().getSocialMedia(values);
+};
+
 export const rePost = (values: {
   id: string;
   text: string;
@@ -146,7 +150,7 @@ export const searchAsset = (text: string): Promise<AssetSearchResult[]> => {
   };
   return api
     .search()
-    .search(filters)
+    .search({ ...filters, skipStatistic: true })
     .then(({ programs, funds, follows, managers }) => {
       const programsNames: AssetSearchResult[] = programs.items.map(
         getAssetSearchResult(SEARCH_ASSET_TYPE.program)
