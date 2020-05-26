@@ -150,7 +150,7 @@ export const searchAsset = (text: string): Promise<AssetSearchResult[]> => {
   };
   return api
     .search()
-    .search(filters)
+    .search({ ...filters, skipStatistic: true })
     .then(({ programs, funds, follows, managers }) => {
       const programsNames: AssetSearchResult[] = programs.items.map(
         getAssetSearchResult(SEARCH_ASSET_TYPE.program)
