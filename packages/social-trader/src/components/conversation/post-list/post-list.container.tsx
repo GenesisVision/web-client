@@ -6,6 +6,7 @@ import {
 } from "components/notifications/components/notifications.helpers";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 
 export interface IPostListContainerProps {
@@ -36,9 +37,14 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
     request: values => fetchMethod(values)
   });
 
+  const updateDebounced = useCallback(
+    debounce((options: any, sendRequest: any) => sendRequest(options), 300),
+    []
+  );
+
   useEffect(() => {
-    sendRequest(options);
-  }, [id, options]);
+    updateDebounced(options, sendRequest);
+  }, [id, options, fetchMethod]);
 
   useEffect(() => {
     if (reset) setOptions({ ...initialOptions });
