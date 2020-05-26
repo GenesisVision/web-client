@@ -3,12 +3,13 @@ import { PostListWithInput } from "components/conversation/post-list/post-list-w
 import React from "react";
 
 const _TagsContainer: React.FC<Props> = ({ hashTags }) => {
-  return (
-    <PostListWithInput
-      fetchMethod={() => searchInFeed({ hashTags })}
-      showInput={!hashTags}
-    />
-  );
+  return null;
+  // return (
+  //   <PostListWithInput
+  //     fetchMethod={() => searchInFeed({ hashTags })}
+  //     showInput={!hashTags}
+  //   />
+  // );
 };
 
 interface Props {
