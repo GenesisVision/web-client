@@ -20,6 +20,7 @@ export const RowItem: React.FC<Props> = ({
     <div
       onClick={onClick}
       className={classNames(styles["row-item"], className, {
+        [styles["row-item--pointer"]]: !!onClick,
         [styles["row-item--hide"]]: hide,
         [styles["row-item--wide"]]: wide,
         [styles["row-item--bottom-offset"]]: bottomOffset,
