@@ -1,6 +1,9 @@
+import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
+import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
+import styles from "components/conversation/conversation-user/conversation-user.module.scss";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Share } from "components/conversation/share/share";
@@ -10,89 +13,98 @@ import {
 } from "components/conversation/tag/parse-to-tsx";
 import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
 import { DefaultBlock } from "components/default.block/default.block";
+import Link from "components/link/link";
 import { MutedText } from "components/muted-text/muted-text";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
+import { MediaPost } from "gv-api-web";
 import React from "react";
+import { managerToPathCreator } from "routes/manager.routes";
+import { postToPathCreator } from "routes/social.routes";
+import { formatDate } from "utils/dates";
 
 interface Props {
+  hasImage?: boolean;
   updateItems: VoidFunction;
-  post: ConversationPost;
+  post: MediaPost;
 }
 
-const NewsCardContent: React.FC<Props> = React.memo(({ updateItems, post }) => {
-  const hasTags = !!post.tags;
-  const hasImages = !!post.images.length;
-  const TitleTag = hasImages ? "h3" : "h2";
-  const rePostTag = post.tags?.find(({ type }) => type === "Post");
-  return (
-    <div>
-      <DefaultBlock>
-        {/*<Row>
-          <TitleTag>Title</TitleTag>
-        </Row>*/}
-        {!!post.text?.length && (
+const NewsCardContent: React.FC<Props> = React.memo(
+  ({ hasImage, updateItems, post }) => {
+    const TitleTag = hasImage ? "h3" : "h2";
+    return (
+      <div>
+        <DefaultBlock>
           <Row>
-            <MutedText noWrap={false}>
-              {parseToTsx({
-                tags: post.tags,
-                text: post.text,
-                map: inTextComponentsMap
-              })}
-            </MutedText>
+            <TitleTag>Title</TitleTag>
           </Row>
-        )}
-        {rePostTag && (
+          {!!post.text?.length && (
+            <Row>
+              <MutedText noWrap={false}>{post.text}</MutedText>
+            </Row>
+          )}
           <Row>
-            <RepostTagContainer>
-              <MutedText noWrap={false}>{rePostTag.post.text}</MutedText>
-            </RepostTagContainer>
+            <AvatarWithName
+              avatar={
+                <ProfileAvatar url={post.authorLogoUrl} alt={post.author} />
+              }
+              name={
+                <>
+                  <Row>
+                    <RowItem className={styles["conversation-user__name"]}>
+                      {post.author}
+                    </RowItem>
+                  </Row>
+                  <Row small>
+                    <MutedText>{formatDate(post.date)}</MutedText>
+                  </Row>
+                </>
+              }
+            />
           </Row>
-        )}
-        <Row>
-          <ConversationUser
-            postId={post.id}
-            url={post.author.url}
-            avatar={post.author.logoUrl}
-            username={post.author.username}
-            date={post.date}
-          />
-        </Row>
-      </DefaultBlock>
-      <Separator />
-      <DefaultBlock>
-        <Center>
-          <RowItem wide>
-            <LikeContainer
-              id={post.id}
-              canLike={!!post.actions}
-              count={post.likesCount}
-              liked={post.actions?.isLiked}
-            />
-          </RowItem>
-          <RowItem>
-            <Share
-              onApply={updateItems}
-              id={post.id}
-              count={post.rePostsCount}
-            />
-          </RowItem>
-        </Center>
-      </DefaultBlock>
-    </div>
-  );
-});
+        </DefaultBlock>
+        <Separator />
+        <DefaultBlock>
+          <Center>
+            <RowItem wide>
+              <LikeContainer
+                id={post.id}
+                canLike={false}
+                count={post.likesCount}
+                liked={false}
+              />
+            </RowItem>
+            <RowItem>
+              <Share
+                onApply={updateItems}
+                id={post.id}
+                count={post.rePostsCount}
+              />
+            </RowItem>
+          </Center>
+        </DefaultBlock>
+      </div>
+    );
+  }
+);
 
 const _NewsCard: React.FC<Props> = ({ updateItems, post }) => {
-  const cardImage = post.images.length
-    ? getImageUrlByQuality(post.images[0].resizes, "High")
+  const cardImage = post.image
+    ? getImageUrlByQuality(post.image.resizes, "High")
     : undefined;
   return (
     <PlateFeedCard
+      url={post.url}
       imageSrc={cardImage}
-      content={<NewsCardContent updateItems={updateItems} post={post} />}
+      content={
+        <NewsCardContent
+          hasImage={!!cardImage}
+          updateItems={updateItems}
+          post={post}
+        />
+      }
     />
   );
 };

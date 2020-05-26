@@ -1,5 +1,6 @@
 import { ConversationPost } from "components/conversation/conversation.types";
 import { DefaultBlock } from "components/default.block/default.block";
+import { MediaPost } from "gv-api-web";
 import { NewsCard } from "pages/news/news.card";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
@@ -15,7 +16,7 @@ interface Props {
   reset?: boolean;
   hasMore?: boolean;
   onScroll: VoidFunction;
-  data: ConversationPost[];
+  data: MediaPost[];
 }
 
 const getColumnSize = (size?: number): string => {
@@ -30,7 +31,7 @@ const OFFSET_HEIGHT = 20;
 const _PlateNewsList: React.FC<{
   updateItems: VoidFunction;
   size?: { height: number; width: number };
-  data: ConversationPost[];
+  data: MediaPost[];
 }> = ({ updateItems, data, size }) => {
   const columnSize = getColumnSize(size?.width);
   return (
@@ -52,7 +53,7 @@ const _InfiniteScrollNewsList: React.FC<{
   updateItems: VoidFunction;
   hasMore?: boolean;
   loadMore: VoidFunction;
-  data: ConversationPost[];
+  data: MediaPost[];
 }> = ({ updateItems, hasMore, loadMore, data }) => {
   return data.length ? (
     <InfiniteScroll hasMore={hasMore} loadMore={loadMore}>
@@ -73,7 +74,7 @@ const _NewsList: React.FC<Props> = ({
   data,
   onScroll
 }) => {
-  const [mergedPosts, setMergedPosts] = useState<ConversationPost[]>([]);
+  const [mergedPosts, setMergedPosts] = useState<MediaPost[]>([]);
 
   useEffect(() => {
     setMergedPosts([...(skip ? mergedPosts : []), ...data]);
