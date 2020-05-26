@@ -5,9 +5,15 @@ import { SizesType } from "utils/types";
 
 import styles from "./avatar-with-name.module.scss";
 
-const _AvatarWithName: React.FC<Props> = ({ size, avatar, name }) => {
+const _AvatarWithName: React.FC<Props> = ({
+  className,
+  onClick,
+  size,
+  avatar,
+  name
+}) => {
   return (
-    <Row>
+    <Row className={className} onClick={onClick}>
       {avatar && (
         <RowItem small={size === "small"} large={size === "large"}>
           <Row>{avatar}</Row>
@@ -19,6 +25,8 @@ const _AvatarWithName: React.FC<Props> = ({ size, avatar, name }) => {
 };
 
 interface Props {
+  className?: string;
+  onClick?: VoidFunction;
   size?: SizesType;
   avatar?: React.ReactNode;
   name: string | JSX.Element | React.ReactNode;
