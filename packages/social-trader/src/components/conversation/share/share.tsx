@@ -20,7 +20,9 @@ export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
         <RowItem className={styles["share__icon"]} small>
           <ShareIcon />
         </RowItem>
-        {count > 0 && <RowItem>{count}</RowItem>}
+        {count > 0 && (
+          <RowItem className={styles["share__count"]}>{count}</RowItem>
+        )}
       </Center>
       <RePostDialog
         open={isOpen}
