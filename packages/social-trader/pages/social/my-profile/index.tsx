@@ -19,7 +19,7 @@ const Page: NextPageWithRedux<Props> = ({ profile }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = await getHeader(ctx.token);
-  const profile = await api.users().getManagerProfile(id as string);
+  const profile = await api.users().getUserProfile(id as string);
   return {
     profile
   };
