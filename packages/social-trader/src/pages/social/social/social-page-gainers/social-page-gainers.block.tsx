@@ -1,7 +1,7 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
-import { PlatformAsset } from "gv-api-web";
+import { PlatformAsset, SocialPostPlatformAsset } from "gv-api-web";
 import { SocialPageGainersItem } from "pages/social/social/social-page-gainers/social-page-gainers-item";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./social-page-gainers.module.scss";
 
 interface Props {
-  assets: PlatformAsset[];
+  assets: SocialPostPlatformAsset[];
 }
 
 const _SocialPageGainersBlock: React.FC<Props> = ({ assets }) => {
@@ -20,10 +20,14 @@ const _SocialPageGainersBlock: React.FC<Props> = ({ assets }) => {
         <h2>{t("Gainers")}</h2>
       </Row>
       <Row large onlyOffset className={styles["social-page-gainers"]}>
-        {assets.map(({ asset }) => (
+        {assets.map(({ asset, price, change24Percent }) => (
           <>
             <Row>
-              <SocialPageGainersItem title={asset} price={100} change={100} />
+              <SocialPageGainersItem
+                title={asset}
+                price={price}
+                change={change24Percent}
+              />
             </Row>
             <Row>
               <Separator />
