@@ -1,6 +1,6 @@
 import { IDataModel } from "constants/constants";
-import { ProfilePublic } from "gv-api-web";
+import { ProfilePublicShort } from "gv-api-web";
 
-export type UsersListItemType = ProfilePublic;
+export type UsersListItemType = ProfilePublicShort;
 
 export type UsersListDataType = IDataModel<UsersListItemType[]>;

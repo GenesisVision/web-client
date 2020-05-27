@@ -1,32 +1,29 @@
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
-import { IUsersListContainerOuterProps } from "components/manager/components/users-popups/users-list.container";
-import { getFollowing } from "components/manager/services/manager.service";
-import dynamic from "next/dist/next-server/lib/dynamic";
+import SimpleUserList, {
+  ISimpleUserListProps
+} from "components/manager/components/users-popups/simple-users-list";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./users-popups.module.scss";
 
-const UsersListContainer = dynamic(() => import("./users-list.container"));
-
-export const FollowingDialog: React.FC<IFollowingDialogProps> = props => {
+export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
+  items,
+  open,
+  onClose
+}) => {
   const [t] = useTranslation();
-  const { open, onClose } = props;
   return (
     <Dialog
       className={styles["users-list__dialog"]}
       open={open}
       onClose={onClose}
     >
-      <UsersListContainer
-        title={t("manager-page.following")}
-        request={getFollowing}
-        {...props}
-      />
+      <SimpleUserList title={t("manager-page.following")} items={items} />
     </Dialog>
   );
 };
 
 export interface IFollowingDialogProps
   extends IDialogOuterProps,
-    IUsersListContainerOuterProps {}
+    ISimpleUserListProps {}

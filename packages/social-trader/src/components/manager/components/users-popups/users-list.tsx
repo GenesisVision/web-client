@@ -17,14 +17,23 @@ import styles from "./users-popups.module.scss";
 interface IUsersListItemProps {
   user: UsersListItemType;
 }
+
 interface IUsersListProps {
   loadMode: VoidFunction;
   hasMore: boolean;
   data: UsersListItemType[];
 }
 
-const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
-  ({ user: { logoUrl, username, url, id } }) => {
+export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
+  ({
+    user: {
+      logoUrl,
+      username,
+      url,
+      id,
+      personalDetails: { canFollow, isFollow }
+    }
+  }) => {
     const { contextTitle } = useToLink();
     const link = managerToPathCreator(url, contextTitle);
     return (
@@ -41,13 +50,15 @@ const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
             </Center>
           </Link>
         </RowItem>
-        <RowItem>
-          <FollowUserButton
-            size={GV_BTN_SIZE.SMALL}
-            id={id}
-            value={getRandomBoolean()}
-          />
-        </RowItem>
+        {true && (
+          <RowItem>
+            <FollowUserButton
+              size={GV_BTN_SIZE.SMALL}
+              id={id}
+              value={isFollow}
+            />
+          </RowItem>
+        )}
       </Row>
     );
   }
