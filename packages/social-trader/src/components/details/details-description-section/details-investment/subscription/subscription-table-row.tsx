@@ -83,7 +83,6 @@ const _SubscriptionTableRow: React.FC<Props> = ({
           labelText={subscriptionInfo.mode}
         />
       </TableCell>
-      <TableCell>{subscriptionInfo.openTolerancePercent} %</TableCell>
       <TableCell>
         {subscriptionInfo.percent && <>{subscriptionInfo.percent} %</>}
         {subscriptionInfo.fixedVolume && (
@@ -94,6 +93,7 @@ const _SubscriptionTableRow: React.FC<Props> = ({
         {subscriptionInfo.percent === null &&
           subscriptionInfo.fixedVolume === null && <> - </>}
       </TableCell>
+      <TableCell>{subscriptionInfo.openTolerancePercent} %</TableCell>
       <TableCell>
         {subscriptionInfo.volumeFeePersonal !== undefined &&
           subscriptionInfo.volumeFeePersonal !== null && (
