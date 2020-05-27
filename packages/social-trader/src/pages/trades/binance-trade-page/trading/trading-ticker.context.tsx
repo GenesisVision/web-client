@@ -48,18 +48,28 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   const { exchangeInfo } = useContext(TradingInfoContext);
 
   useEffect(() => {
-    if (exchangeInfo)
-      setNormalizedSymbols(normalizeSymbolsList(exchangeInfo.symbols));
+    if (exchangeInfo) {
+      const normalizedSymbols = normalizeSymbolsList(exchangeInfo.symbols);
+      setNormalizedSymbols(normalizedSymbols);
+      setList(
+        normalizedSymbols as {
+          [key: string]: MergedTickerSymbolType;
+        }
+      );
+      setRequestData({});
+      setSocketData({});
+    }
   }, [exchangeInfo]);
 
   useEffect(() => {
+    if (!normalizedSymbols) return;
     const requestData = getTickers().pipe(map(normalizeMarketList));
     requestData.subscribe(setRequestData);
     const ticketsSocket = marketTicketsSocket(connectSocket).pipe(
       map(normalizeMarketList)
     );
     ticketsSocket.subscribe(setSocketData);
-  }, [getTickers, marketTicketsSocket]);
+  }, [normalizedSymbols]);
   useEffect(() => {
     const updatedList = { ...list };
     Object.keys(socketData).forEach(name => {
@@ -67,13 +77,7 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
     });
     setList(updatedList);
   }, [socketData]);
-  useEffect(() => {
-    const updatedList = { ...list };
-    Object.keys(normalizedSymbols).forEach(name => {
-      updatedList[name] = { ...updatedList[name], ...normalizedSymbols[name] };
-    });
-    setList(updatedList);
-  }, [normalizedSymbols]);
+
   useEffect(() => {
     const updatedList = { ...list };
     Object.keys(requestData).forEach(name => {
