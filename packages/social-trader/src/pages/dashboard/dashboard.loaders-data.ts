@@ -1,3 +1,4 @@
+import { ownerLoaderData } from "components/details/details.loader-data";
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSET } from "constants/constants";
 import { AssetType, MoneyLocation } from "gv-api-web";
@@ -144,12 +145,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
       isOwnAsset: false,
       isFavorite: false
     },
-    owner: {
-      logoUrl: "",
-      id: "",
-      username: "",
-      url: ""
-    },
+    owner: ownerLoaderData,
     status: "",
     tradesCount: 0,
     subscribersCount: 0,
