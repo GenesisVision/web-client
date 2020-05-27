@@ -1,4 +1,5 @@
 import useApiRequest from "hooks/api-request.hook";
+import { useParams } from "hooks/location";
 import Router from "next/router";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
@@ -83,6 +84,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   type,
   children
 }) => {
+  const params = useParams();
   const [terminalType, setTerminalType] = useState<TerminalType>(
     type || "spot"
   );
@@ -157,13 +159,10 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
-      const terminalTypeParam = qs.stringify({
-        [TYPE_PARAM_NAME]: terminalType
-      });
-      const route = `${TERMINAL_ROUTE}/${symbolPath}?${terminalTypeParam}`;
+      const route = `${TERMINAL_ROUTE}/${symbolPath}?${params}`;
       Router.push(TERMINAL_FOLDER_ROUTE, route);
     },
-    [terminalType]
+    [params, terminalType]
   );
 
   const value = useMemo(
