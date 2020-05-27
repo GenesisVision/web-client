@@ -39,7 +39,9 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.SIGNAL
   });
-  const terminalLink = linkCreator(getTerminalLink(asset.broker.type));
+  const terminalLink = linkCreator(
+    getTerminalLink(asset.broker.type, asset.id)
+  );
   const makeSignalAccountLink = linkCreator(makeSignalLinkMethod(asset.id));
   const makeProgramExternalLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.EXTERNAL_ACCOUNT,
