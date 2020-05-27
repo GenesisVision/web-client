@@ -33,7 +33,6 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const TRADE_LIST_SIZE = 50;
   const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
-    isCorrectSymbol,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
 
@@ -44,7 +43,6 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const [socketDataBuffer, setSocketDataBuffer] = useState<Trade[]>([]);
 
   useEffect(() => {
-    if (!isCorrectSymbol) return;
     setPrice(PriceInitialState);
     setList([]);
     setSocketData(undefined);
@@ -59,7 +57,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [isCorrectSymbol, baseAsset, quoteAsset]);
+  }, [getTrades, tradeSocket, baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketData && !list) return;

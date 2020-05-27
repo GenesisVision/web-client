@@ -1,4 +1,7 @@
 import useApiRequest from "hooks/api-request.hook";
+import { useParams } from "hooks/location";
+import Router from "next/router";
+import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   getLotSizeFilter,
   getSymbolPriceFilter
@@ -9,8 +12,7 @@ import {
   getSymbolFilters,
   getSymbolFromState,
   stringifySymbolFromToParam,
-  updateAccountInfo,
-  useUpdateTerminalUrlParams
+  updateAccountInfo
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
@@ -19,6 +21,7 @@ import {
   TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import * as qs from "qs";
 import React, {
   createContext,
   useCallback,
@@ -27,7 +30,7 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { TERMINAL_ROUTE } from "routes/trade.routes";
+import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -43,7 +46,6 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
-  isCorrectSymbol?: boolean;
   stepSize: string;
   tickSize: string;
   authData: TradeAuthDataType;
@@ -55,7 +57,7 @@ type TradingAccountInfoState = {
   exchangeInfo?: ExchangeInfo;
 };
 
-export const SymbolInitialState: SymbolState = {
+const SymbolInitialState: SymbolState = {
   quoteAsset: "USDT",
   baseAsset: "BTC"
 };
@@ -77,14 +79,12 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
-  // exchangeInfo,
   authData: authDataProp,
   outerSymbol: symbol = SymbolInitialState,
   type,
   children
 }) => {
-  const updateUrl = useUpdateTerminalUrlParams();
-  const [isCorrectSymbol, setSymbolCorrect] = useState<boolean | undefined>();
+  const params = useParams();
   const [terminalType, setTerminalType] = useState<TerminalType>(
     type || "spot"
   );
@@ -107,18 +107,6 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
-
-  useEffect(() => {
-    setSymbolCorrect(undefined);
-  }, [getExchangeInfo]);
-
-  useEffect(() => {
-    if (!exchangeInfo) return;
-    const isCorrect = !!exchangeInfo.symbols.find(
-      item => item.symbol === getSymbolFromState(symbol)
-    );
-    setSymbolCorrect(isCorrect);
-  }, [exchangeInfo, symbol]);
 
   useEffect(() => {
     sendRequest();
@@ -171,19 +159,14 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
-      const route = `${TERMINAL_ROUTE}/${symbolPath}`;
-      updateUrl(route, { type: terminalType });
+      const route = `${TERMINAL_ROUTE}/${symbolPath}?${params}`;
+      Router.push(TERMINAL_FOLDER_ROUTE, route);
     },
-    [updateUrl, terminalType]
+    [params, terminalType]
   );
-
-  useEffect(() => {
-    if (isCorrectSymbol === false) handleSetSymbol(SymbolInitialState);
-  }, [isCorrectSymbol, handleSetSymbol]);
 
   const value = useMemo(
     () => ({
-      isCorrectSymbol,
       tickSize,
       stepSize,
       authData,
@@ -195,7 +178,6 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       exchangeInfo
     }),
     [
-      isCorrectSymbol,
       tickSize,
       stepSize,
       authData,
