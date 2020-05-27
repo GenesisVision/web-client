@@ -2211,7 +2211,7 @@
     },
     "total": {
       "performance": "Performance",
-      "available": "Wallets",
+      "wallet": "Wallet",
       "invested": "Invested",
       "pending": "Trading",
       "profits": "Profits",
