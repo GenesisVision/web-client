@@ -1,5 +1,7 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
+import { Push } from "components/link/link";
 import { useCookieState } from "hooks/cookie-state";
+import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
@@ -12,7 +14,9 @@ import {
   TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
+import qs from "qs";
 import { useEffect, useState } from "react";
+import { TERMINAL_FOLDER_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
@@ -28,6 +32,18 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const useUpdateTerminalUrlParams = () => {
+  const params = useParams();
+  const parsedParams = qs.parse(params || "");
+  return (url: string, updates?: Object) => {
+    const updatedParams = qs.stringify({ ...parsedParams, ...updates });
+    const ulrWithParams = `${url}${
+      updatedParams.length ? `?${updatedParams}` : ""
+    }`;
+    Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+  };
+};
 
 export const getSymbolFilters = (
   exchangeInfo: ExchangeInfo,
