@@ -110,7 +110,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     setSymbolCorrect(undefined);
-  }, [getExchangeInfo]);
+  }, [getExchangeInfo, symbol]);
 
   useEffect(() => {
     if (!exchangeInfo) return;
@@ -118,7 +118,7 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       item => item.symbol === getSymbolFromState(symbol)
     );
     setSymbolCorrect(isCorrect);
-  }, [exchangeInfo, symbol]);
+  }, [isCorrectSymbol, exchangeInfo, symbol]);
 
   useEffect(() => {
     sendRequest();

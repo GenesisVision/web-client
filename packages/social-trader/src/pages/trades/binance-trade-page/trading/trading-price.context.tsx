@@ -59,7 +59,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [isCorrectSymbol, baseAsset, quoteAsset]);
+  }, [isCorrectSymbol]);
 
   useEffect(() => {
     if (!socketData && !list) return;
