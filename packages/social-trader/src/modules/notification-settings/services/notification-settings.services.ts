@@ -41,7 +41,7 @@ export const getAssetNotifications = (assetType: ASSETS_TYPES) => {
       return getNotificationsProgramSettings;
     case ASSETS_TYPES.Fund:
       return getNotificationsFundSettings;
-    case ASSETS_TYPES.Follow:
+    default:
       return getNotificationsFollowSettings;
   }
 };
