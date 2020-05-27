@@ -9,7 +9,7 @@ export enum SIZES {
 
 export enum ASSETS_TYPES {
   All = "All",
-  Signal = "Signal",
+  Follow = "Follow",
   Program = "Program",
   Fund = "Fund"
 }

@@ -1688,6 +1688,10 @@
         "enabled-alert": "Enabled news and updates notifications",
         "disabled-alert": "Disabled news and updates notifications"
       },
+      "FollowNewsAndUpdates": {
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
+      },
       "PlatformEmergency": {
         "enabled-alert": "Enabled emergency notifications",
         "disabled-alert": "Disabled emergency notifications"
