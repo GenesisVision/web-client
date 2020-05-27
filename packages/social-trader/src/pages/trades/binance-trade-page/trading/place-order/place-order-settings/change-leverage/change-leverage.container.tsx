@@ -11,7 +11,7 @@ const _ChangeLeverageContainer: React.FC = () => {
     changeLeverage: changeLeverageMethod,
     getLeverageBrackets: getLeverageBracketsMethod
   } = useContext(TerminalMethodsContext);
-  const { authData, symbol } = useContext(TradingInfoContext);
+  const { isCorrectSymbol, authData, symbol } = useContext(TradingInfoContext);
   const [leverage, setLeverage] = useState<number>(20);
 
   const {
@@ -25,9 +25,9 @@ const _ChangeLeverageContainer: React.FC = () => {
   });
 
   useEffect(() => {
-    if (authData.privateKey)
+    if (authData.privateKey && isCorrectSymbol)
       getLeverageBrackets({ authData, symbol: getSymbolFromState(symbol) });
-  }, [authData]);
+  }, [isCorrectSymbol]);
 
   const handleOnChange = useCallback(
     (leverage: number) => {

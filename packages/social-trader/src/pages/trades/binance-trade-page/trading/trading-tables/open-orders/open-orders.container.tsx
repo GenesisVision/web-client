@@ -20,6 +20,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
   const { getOpenOrders } = useContext(TerminalMethodsContext);
 
   const {
+    isCorrectSymbol,
     authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
@@ -31,7 +32,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
   const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
 
   useEffect(() => {
-    if (!authData.publicKey || !userStream) return;
+    if (!authData.publicKey || !userStream || !isCorrectSymbol) return;
     const openOrders = getOpenOrders(
       getSymbol(baseAsset, quoteAsset),
       authData
@@ -43,7 +44,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [authData, baseAsset, quoteAsset, userStream]);
+  }, [isCorrectSymbol]);
 
   useEffect(() => {
     if (!socketData) return;

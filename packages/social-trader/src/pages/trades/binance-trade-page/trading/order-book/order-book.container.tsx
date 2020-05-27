@@ -32,6 +32,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const { connectSocket } = useSockets();
 
   const {
+    isCorrectSymbol,
     terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TradingInfoContext);
@@ -53,6 +54,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   }, [ref.current?.clientHeight]);
 
   useEffect(() => {
+    if (!isCorrectSymbol) return;
     setList(undefined);
     setDepthSocketData(undefined);
     setDepthSocketDataBuffer([]);
@@ -76,7 +78,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
           bids: normalizeDepthList(data.bids)
         });
       });
-  }, [baseAsset, quoteAsset]);
+  }, [isCorrectSymbol]);
 
   useEffect(() => {
     if (list && depthSocketDataBuffer?.length) {
