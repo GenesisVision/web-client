@@ -1,4 +1,4 @@
-@import "~shared/styles/_breakpoint";
+@import "styles/_breakpoint";
 
 @mixin hide-on-landscape-tablet($display: block) {
   display: none;

@@ -9,8 +9,8 @@ import "pages/landing-page/styles/internal.scss";
 import React from "react";
 import { Provider } from "react-redux";
 import { compose, Store } from "redux";
-import "shared/styles/index.scss";
 import { initializeStore } from "store";
+import "styles/index.scss";
 
 class CustomApp extends App<Props> {
   render() {
