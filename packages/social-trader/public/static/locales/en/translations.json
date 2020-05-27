@@ -1505,7 +1505,7 @@
       "total-balance": "The total value your funds on the platform.",
       "available": "Your funds that are currently available for investment.",
       "invested": "The funds that are currently invested in programs and / or funds. Invested GVT shows investment in funds. Invested USDT includes Forex.",
-      "pending": "Funds that are still being processed.",
+      "trading": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
       "transactions": "Operation of funds transferring to/from or between wallets.",
       "deposit": "A transaction involving a transfer of funds to another party.",
       "withdrawals": "A transaction of taking funds out of the account.",
