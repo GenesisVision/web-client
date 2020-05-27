@@ -2124,6 +2124,7 @@
         "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
       },
       "asset-types": {
+        "ExchangeAccount": "Exchange account",
         "Fund": "Fund",
         "Program": "Program",
         "SignalProgram": "Signal Program",
