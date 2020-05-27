@@ -46,28 +46,3 @@ a {
 .app {
   color: white;
 }
-
-$scroll-background: transparent;
-$scroll-thumb-color: $text-dark-color;
-::-webkit-scrollbar {
-  width: $scroll-width;
-  height: $scroll-width;
-}
-
-::-webkit-scrollbar-track {
-  background: $scroll-background;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $scroll-thumb-color;
-  border-radius: $scroll-width / 2;
-}
-
-::-webkit-scrollbar-corner {
-  background: $scroll-background;
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: $scroll-thumb-color $scroll-background;
-}
