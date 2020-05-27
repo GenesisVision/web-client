@@ -12,7 +12,8 @@ import {
   getSymbolFilters,
   getSymbolFromState,
   stringifySymbolFromToParam,
-  updateAccountInfo
+  updateAccountInfo,
+  useUpdateTerminalUrlParams
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
@@ -35,6 +36,7 @@ import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 interface Props {
+  exchangeInfo: ExchangeInfo;
   authData: TradeAuthDataType;
   outerSymbol?: SymbolState;
   type?: TerminalType;
@@ -57,7 +59,7 @@ type TradingAccountInfoState = {
   exchangeInfo?: ExchangeInfo;
 };
 
-const SymbolInitialState: SymbolState = {
+export const SymbolInitialState: SymbolState = {
   quoteAsset: "USDT",
   baseAsset: "BTC"
 };
@@ -79,17 +81,18 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
+  exchangeInfo,
   authData: authDataProp,
   outerSymbol: symbol = SymbolInitialState,
   type,
   children
 }) => {
-  const params = useParams();
+  const updateUrl = useUpdateTerminalUrlParams();
   const [terminalType, setTerminalType] = useState<TerminalType>(
     type || "spot"
   );
   const {
-    getExchangeInfo,
+    // getExchangeInfo,
     getAccountInformation,
     getUserStreamKey,
     getUserStreamSocket
@@ -97,9 +100,9 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
-  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
-    request: getExchangeInfo
-  });
+  // const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+  //   request: getExchangeInfo
+  // });
 
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
@@ -108,9 +111,9 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
-  useEffect(() => {
-    sendRequest();
-  }, [getExchangeInfo]);
+  // useEffect(() => {
+  //   sendRequest();
+  // }, [getExchangeInfo]);
 
   useEffect(() => {
     if (type) setTerminalType(type);
@@ -159,10 +162,10 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
-      const route = `${TERMINAL_ROUTE}/${symbolPath}?${params}`;
-      Router.push(TERMINAL_FOLDER_ROUTE, route);
+      const route = `${TERMINAL_ROUTE}/${symbolPath}`;
+      updateUrl(route, { type: terminalType });
     },
-    [params, terminalType]
+    [terminalType]
   );
 
   const value = useMemo(
