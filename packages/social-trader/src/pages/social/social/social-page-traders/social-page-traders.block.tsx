@@ -21,10 +21,11 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
       </Row>
       <Row large onlyOffset className={styles["social-page-traders"]}>
         {assets.map(
-          ({ investorsCount, profitPercent, url, logoUrl, title }) => (
+          ({ id, investorsCount, profitPercent, url, logoUrl, title }) => (
             <>
               <Row>
                 <SocialPageTradersItem
+                  id={id}
                   investorsCount={investorsCount}
                   profit={profitPercent}
                   url={url}

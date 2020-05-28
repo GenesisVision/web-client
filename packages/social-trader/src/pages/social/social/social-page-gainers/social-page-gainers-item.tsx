@@ -12,11 +12,18 @@ interface Props {
 }
 
 const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    setSearchValue({ mask: title });
-  }, [title]);
+    const hashTag = `#${title.toLowerCase()}`;
+    const hashTags = searchValue.hashTags.includes(hashTag)
+      ? searchValue.hashTags
+      : [...searchValue.hashTags, hashTag];
+    setSearchValue({
+      ...searchValue,
+      hashTags
+    });
+  }, [searchValue, title]);
   return (
     <div>
       <Row onClick={handleClick}>{title}</Row>

@@ -27,9 +27,10 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
           <Link
             wide
             white
-            to={
-              "https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
-            }
+            to={{
+              pathname:
+                "https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
+            }}
           >
             <DefaultBlock className={styles["social-page-downloads__item"]}>
               <Center>
@@ -52,9 +53,10 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
           <Link
             wide
             white
-            to={
-              "https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
-            }
+            to={{
+              pathname:
+                "https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
+            }}
           >
             <DefaultBlock className={styles["social-page-downloads__item"]}>
               <Center>
