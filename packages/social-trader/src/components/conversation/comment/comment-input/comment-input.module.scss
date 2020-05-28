@@ -7,6 +7,10 @@ $comment-input-button-size: 20px;
 $send-button-size: 16px;
 
 .comment-input {
+  &__search-panel {
+    @include vertical-paddings($padding-xsmall);
+    @include horizontal-paddings($padding-small);
+  }
   &__input-and-panel-container {
     border-radius: $input-height/2;
     background-color: $border-color;

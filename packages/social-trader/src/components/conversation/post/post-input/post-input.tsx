@@ -137,11 +137,13 @@ const _PostInput: React.FC<Props> = ({
             {isOpenEditPanel && (
               <div>
                 {isOpenSearchPanel && (
-                  <SearchPanel
-                    isSearchPending={isSearchPending}
-                    onClick={handleSearchItemSelect}
-                    searchResult={searchResult}
-                  />
+                  <div className={styles["post-input__search-panel"]}>
+                    <SearchPanel
+                      isSearchPending={isSearchPending}
+                      onClick={handleSearchItemSelect}
+                      searchResult={searchResult}
+                    />
+                  </div>
                 )}
                 <Center className={styles["post-input__edit-panel-container"]}>
                   <RowItem className={styles["post-input__add-buttons"]}>

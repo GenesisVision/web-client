@@ -8,8 +8,9 @@ $post-input-button-size: 30px;
 $post-input-image-preview-size: 40px;
 
 .post-input {
-  &__form {
-    width: 100%;
+  &__search-panel {
+    @include vertical-paddings($padding-xsmall);
+    @include horizontal-paddings($padding-small);
   }
   &__image-preview-container {
     position: relative;
