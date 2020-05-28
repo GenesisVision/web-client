@@ -8,11 +8,12 @@ import useTab from "hooks/tab.hook";
 import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
 import { SocialSearchContext } from "pages/social/social/social-page.context";
 import styles from "pages/social/social/social-page.module.scss";
-import SocialSearchInput from "pages/social/social/social-search-input";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+
+import SocialSearchInput from "./social-search-input";
 
 enum TABS {
   FEED = "FEED",
