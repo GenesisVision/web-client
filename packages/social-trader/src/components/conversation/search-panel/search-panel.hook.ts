@@ -10,9 +10,11 @@ export const generateTagName = (name: string, type: string): string =>
   `${name} (${type})`;
 
 export const useSearchPanel = ({
+  submitOnSelect,
   text,
   setValue
 }: {
+  submitOnSelect?: (value: AssetSearchResult) => void;
   text: string;
   setValue: (value: string) => void;
 }) => {
@@ -54,13 +56,16 @@ export const useSearchPanel = ({
   );
 
   const handleSearchItemSelect = useCallback(
-    ({ name, type }: AssetSearchResult) => {
+    (result: AssetSearchResult) => {
+      const { name, type } = result;
       const fullTagName = generateTagName(name, type);
       const tagIndex = text.lastIndexOf(`@${tag}`, caretPosition) + 1;
       const replacedTag = text.slice(0, tagIndex) + fullTagName;
       const newText = replacedTag + text.slice(tagIndex + tag.length);
-      if (replacedTag !== text.slice(0, tagIndex + fullTagName.length))
-        setValue(newText);
+      if (replacedTag !== text.slice(0, tagIndex + fullTagName.length)) {
+        if (submitOnSelect) submitOnSelect(result);
+        else setValue(newText);
+      }
       setFixedCaretPosition(tagIndex + fullTagName.length);
     },
     [
