@@ -19,11 +19,17 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
   discussCount
 }) => {
   const [t] = useTranslation();
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    setSearchValue({ mask: hashTag });
-  }, [hashTag]);
+    const hashTags = searchValue.hashTags.includes(hashTag)
+      ? searchValue.hashTags
+      : [...searchValue.hashTags, hashTag];
+    setSearchValue({
+      ...searchValue,
+      hashTags
+    });
+  }, [searchValue, hashTag]);
   return (
     <div className={styles["social-page-topics__item"]}>
       <Row onClick={handleClick}>{hashTag}</Row>

@@ -7,6 +7,7 @@ import {
 import React, { useCallback } from "react";
 
 interface Props {
+  bottomLine?: boolean;
   setFocused?: (value: boolean) => void;
   submitType?: CONVERSATION_SUBMIT_TYPE;
   submitForm: VoidFunction;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const ConversationInputComponent: React.FC<Props> = ({
+  bottomLine = false,
   setFocused,
   submitType = CONVERSATION_SUBMIT_TYPE.ENTER,
   submitForm,
@@ -67,7 +69,7 @@ export const ConversationInputComponent: React.FC<Props> = ({
       value={value}
       onChange={handleOnChange}
       onKeyDown={handleKeyDown}
-      bottomLine={false}
+      bottomLine={bottomLine}
       wide
       noMargin
       name={name}

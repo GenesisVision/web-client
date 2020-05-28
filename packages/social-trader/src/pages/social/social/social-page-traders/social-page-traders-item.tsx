@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./social-page-traders.module.scss";
 
 interface Props {
+  id: string;
   investorsCount: number;
   profit: number;
   url: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const _SocialPageTradersItem: React.FC<Props> = ({
+  id,
   investorsCount,
   profit,
   url,
@@ -25,11 +27,11 @@ const _SocialPageTradersItem: React.FC<Props> = ({
   title
 }) => {
   const [t] = useTranslation();
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    setSearchValue({ mask: url });
-  }, [url]);
+    setSearchValue({ ...searchValue, tagContent: { id, name: title } });
+  }, [searchValue, url]);
   return (
     <div className={styles["social-page-traders__item"]}>
       <Row>

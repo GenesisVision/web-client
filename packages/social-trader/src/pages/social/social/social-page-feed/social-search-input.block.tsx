@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { SearchIcon } from "components/icon/search-icon";
-import SocialSearchInput from "pages/social/social/social-search-input";
 import React from "react";
 
-import styles from "./social-page.module.scss";
+import styles from "../social-page.module.scss";
+import SocialSearchInput from "./social-search-input";
 
 interface Props {
   setSearchIsOpen: VoidFunction;

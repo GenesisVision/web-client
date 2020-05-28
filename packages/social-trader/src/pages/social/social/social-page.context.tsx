@@ -3,7 +3,7 @@ import React, { createContext, useMemo, useState } from "react";
 
 type SocialSearchState = SearchInFeedValues;
 
-export const SocialSearchInitialState: SocialSearchState = {};
+export const SocialSearchInitialState: SocialSearchState = { hashTags: [] };
 
 export const SocialSearchContext = createContext<{
   searchValue: SocialSearchState;
