@@ -22,6 +22,7 @@ import { filter } from "rxjs/operators";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
@@ -32,6 +33,16 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const updateTerminalUrl = (url: string, updates?: Object) => {
+  const params = getLocation().search.slice(1);
+  const parsedParams = qs.parse(params || "");
+  const updatedParams = qs.stringify({ ...parsedParams, ...updates });
+  const ulrWithParams = `${url}${
+    updatedParams.length ? `?${updatedParams}` : ""
+  }`;
+  Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+};
 
 export const useUpdateTerminalUrlParams = () => {
   const params = useParams();

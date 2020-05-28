@@ -1,4 +1,3 @@
-import useApiRequest from "hooks/api-request.hook";
 import {
   getLotSizeFilter,
   getSymbolPriceFilter
@@ -32,9 +31,10 @@ import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 interface Props {
+  exchangeInfo: ExchangeInfo;
   authData: TradeAuthDataType;
   outerSymbol?: SymbolState;
-  type?: TerminalType;
+  terminalType: TerminalType;
 }
 
 export type SymbolState = {
@@ -43,7 +43,6 @@ export type SymbolState = {
 };
 
 type TradingAccountInfoState = {
-  isCorrectSymbol?: boolean;
   stepSize: string;
   tickSize: string;
   authData: TradeAuthDataType;
@@ -54,6 +53,8 @@ type TradingAccountInfoState = {
   accountInfo?: Account;
   exchangeInfo?: ExchangeInfo;
 };
+
+export const TerminalTypeInitialState: TerminalType = "spot";
 
 export const SymbolInitialState: SymbolState = {
   quoteAsset: "USDT",
@@ -67,7 +68,7 @@ export const TradingAccountInfoInitialState: TradingAccountInfoState = {
     publicKey: "",
     privateKey: ""
   },
-  terminalType: "spot",
+  terminalType: TerminalTypeInitialState,
   setSymbol: () => {},
   symbol: SymbolInitialState
 };
@@ -77,19 +78,15 @@ export const TradingInfoContext = createContext<TradingAccountInfoState>(
 );
 
 export const TradingInfoContextProvider: React.FC<Props> = ({
-  // exchangeInfo,
+  exchangeInfo,
   authData: authDataProp,
   outerSymbol: symbol = SymbolInitialState,
-  type,
+  terminalType,
   children
 }) => {
   const updateUrl = useUpdateTerminalUrlParams();
-  const [isCorrectSymbol, setSymbolCorrect] = useState<boolean | undefined>();
-  const [terminalType, setTerminalType] = useState<TerminalType>(
-    type || "spot"
-  );
+
   const {
-    getExchangeInfo,
     getAccountInformation,
     getUserStreamKey,
     getUserStreamSocket
@@ -97,36 +94,12 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
-  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
-    request: getExchangeInfo
-  });
-
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
-
-  useEffect(() => {
-    setSymbolCorrect(undefined);
-  }, [getExchangeInfo, symbol]);
-
-  useEffect(() => {
-    if (!exchangeInfo) return;
-    const isCorrect = !!exchangeInfo.symbols.find(
-      item => item.symbol === getSymbolFromState(symbol)
-    );
-    setSymbolCorrect(isCorrect);
-  }, [isCorrectSymbol, exchangeInfo, symbol]);
-
-  useEffect(() => {
-    sendRequest();
-  }, [getExchangeInfo]);
-
-  useEffect(() => {
-    if (type) setTerminalType(type);
-  }, [type]);
 
   useEffect(() => {
     if (!authData.publicKey) return;
@@ -174,16 +147,11 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       const route = `${TERMINAL_ROUTE}/${symbolPath}`;
       updateUrl(route, { type: terminalType });
     },
-    [updateUrl, terminalType]
+    [terminalType]
   );
-
-  useEffect(() => {
-    if (isCorrectSymbol === false) handleSetSymbol(SymbolInitialState);
-  }, [isCorrectSymbol, handleSetSymbol]);
 
   const value = useMemo(
     () => ({
-      isCorrectSymbol,
       tickSize,
       stepSize,
       authData,
@@ -195,7 +163,6 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
       exchangeInfo
     }),
     [
-      isCorrectSymbol,
       tickSize,
       stepSize,
       authData,
