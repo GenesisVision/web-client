@@ -1,7 +1,11 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
-import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import {
+  terminalMoneyFormat,
+  truncated
+} from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import {
+  getDecimalScale,
   getSymbol,
   getSymbolFilters
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -18,7 +22,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
@@ -143,6 +147,7 @@ export const usePlaceOrderFormReset = ({
 }) => {
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
+    watch,
     stepSize,
     baseAsset,
     quoteAsset,
@@ -235,6 +240,7 @@ export const usePlaceOrderInfo = ({
 };
 
 export const useTradeSlider = ({
+  watch,
   stepSize,
   setValue,
   side,
@@ -244,6 +250,7 @@ export const useTradeSlider = ({
   totalName,
   quantityName
 }: {
+  watch: () => AnyObjectType;
   stepSize: string;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
@@ -258,14 +265,25 @@ export const useTradeSlider = ({
     if (sliderValue === undefined) return;
     const percentValue = parseInt(RANGE_MARKS[sliderValue]);
     if (side === "BUY") {
+      const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
-      const newTotal = calculatePercentage(walletAvailable, percentValue);
+      const fullTotal = calculatePercentage(walletAvailable, percentValue);
+      const newAmount = +terminalMoneyFormat({
+        amount: fullTotal / price,
+        tickSize: stepSize
+      });
+      const newTotal = +formatValue(newAmount * price, 8);
       setValue(totalName, newTotal, true);
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(balances, baseAsset);
+      const percentAmount = calculatePercentage(walletAvailable, percentValue);
+      if (
+        truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
+      )
+        return;
       const newQuantity = +terminalMoneyFormat({
-        amount: calculatePercentage(walletAvailable, percentValue),
+        amount: percentAmount,
         tickSize: stepSize
       });
       setValue(quantityName, newQuantity, true);
