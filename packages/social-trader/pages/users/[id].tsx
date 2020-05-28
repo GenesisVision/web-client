@@ -11,7 +11,7 @@ const Page: NextPage<Props> = ({ profile }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const profile = await api.users().getManagerProfile(id as string);
+  const profile = await api.users().getUserProfile(id as string);
   return {
     profile
   };

@@ -26,7 +26,6 @@ export const getFollowers = (args: {
   take: number;
   count: number;
 }): Promise<UsersListDataType> => {
-  console.log(args);
   return getMockUsersPromise();
 };
 

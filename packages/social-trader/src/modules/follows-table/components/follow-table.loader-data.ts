@@ -1,6 +1,7 @@
 import {
   managerLoaderData,
-  mockDate
+  mockDate,
+  ownerLoaderData
 } from "components/details/details.loader-data";
 import { FollowDetailsListItem } from "gv-api-web";
 import {
@@ -40,7 +41,7 @@ export const followDetailsLoaderDataCreator = (): FollowDetailsListItem => ({
   description: "",
   status: "None",
   creationDate: mockDate,
-  owner: managerLoaderData
+  owner: ownerLoaderData
 });
 
 export const userFollowListLoaderData = tableLoaderCreator(
