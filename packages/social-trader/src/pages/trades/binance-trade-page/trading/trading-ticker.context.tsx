@@ -57,12 +57,11 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
         }
       );
       setRequestData({});
-      setSocketData({});
     }
   }, [exchangeInfo]);
 
   useEffect(() => {
-    if (!normalizedSymbols) return;
+    if (!Object.values(normalizedSymbols).length) return;
     const requestData = getTickers().pipe(map(normalizeMarketList));
     requestData.subscribe(setRequestData);
     const ticketsSocket = marketTicketsSocket(connectSocket).pipe(
@@ -71,6 +70,7 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
     ticketsSocket.subscribe(setSocketData);
   }, [normalizedSymbols]);
   useEffect(() => {
+    if (!Object.values(socketData).length) return;
     const updatedList = { ...list };
     Object.keys(socketData).forEach(name => {
       updatedList[name] = { ...updatedList[name], ...socketData[name] };
@@ -79,6 +79,7 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   useEffect(() => {
+    if (!Object.values(requestData).length) return;
     const updatedList = { ...list };
     Object.keys(requestData).forEach(name => {
       updatedList[name] = { ...updatedList[name], ...requestData[name] };
