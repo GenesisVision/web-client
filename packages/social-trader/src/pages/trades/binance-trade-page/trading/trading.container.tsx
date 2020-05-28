@@ -1,39 +1,23 @@
-import { Center } from "components/center/center";
-import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import useApiRequest from "hooks/api-request.hook";
-import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
-import { TradeHeaderContainer } from "pages/trades/binance-trade-page/trading/components/trade-header/trade-header";
-import { MarginRatioContainer } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.container";
-import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
-import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
-import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/place-order";
-import { PlaceOrderSettingsContainer } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
-import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
-import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
+import { Terminal } from "pages/trades/binance-trade-page/trading/terminal";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolInitialState,
   SymbolState,
-  TradingInfoContextProvider
+  TerminalTypeInitialState
 } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
-import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import {
   getSymbolFromState,
   stringifySymbolFromToParam,
-  useUpdateTerminalUrlParams
+  updateTerminalUrl
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   ExchangeInfo,
   TerminalType,
   TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
-
-import styles from "./trading.module.scss";
 
 interface Props {
   authData: TradeAuthDataType;
@@ -42,98 +26,67 @@ interface Props {
 }
 
 const _TradingContainer: React.FC<Props> = ({ authData, type, symbol }) => {
-  const updateUrl = useUpdateTerminalUrlParams();
   const { getExchangeInfo } = useContext(TerminalMethodsContext);
 
-  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+  const [innerType, setInnerType] = useState<TerminalType | undefined>();
+  const [isSymbolCorrect, setIsSymbolCorrect] = useState<boolean | undefined>();
+  const [exchangeInfo, setExchangeInfo] = useState<ExchangeInfo | undefined>();
+
+  const { sendRequest } = useApiRequest<ExchangeInfo>({
     request: getExchangeInfo
   });
 
   useEffect(() => {
-    sendRequest();
-  }, [getExchangeInfo]);
+    setExchangeInfo(undefined);
+    setIsSymbolCorrect(undefined);
+    setInnerType(undefined);
+  }, [type]);
 
-  if (!exchangeInfo) return null;
-  const isSymbolCorrect =
-    symbol &&
-    !!exchangeInfo.symbols.find(
-      item => item.symbol === getSymbolFromState(symbol)
-    );
-  const outerSymbol = isSymbolCorrect ? symbol : SymbolInitialState;
-  if (!isSymbolCorrect) {
-    const route = `${TERMINAL_ROUTE}/${stringifySymbolFromToParam(
-      SymbolInitialState
-    )}`;
-    updateUrl(route);
-  }
+  useEffect(() => {
+    if (exchangeInfo) {
+      const isSymbolCorrect =
+        !!symbol &&
+        !!exchangeInfo.symbols.find(
+          item => item.symbol === getSymbolFromState(symbol)
+        );
+      setIsSymbolCorrect(isSymbolCorrect);
+    } else {
+      sendRequest()
+        .then(setExchangeInfo)
+        .then(() => setInnerType(type || TerminalTypeInitialState));
+    }
+  }, [symbol, exchangeInfo]);
+
+  useEffect(() => {
+    if (isSymbolCorrect === false) {
+      const route = `${TERMINAL_ROUTE}/${stringifySymbolFromToParam(
+        SymbolInitialState
+      )}`;
+      updateTerminalUrl(route);
+    }
+  }, [isSymbolCorrect]);
+
+  const exchangeInfoProp = useMemo(() => exchangeInfo, [
+    exchangeInfo?.serverTime
+  ]);
+  const authDataProp = useMemo(() => authData, [
+    authData.publicKey,
+    authData.privateKey
+  ]);
+  const symbolProp = useMemo(() => symbol, [
+    symbol?.quoteAsset,
+    symbol?.baseAsset
+  ]);
+
+  if (!exchangeInfoProp || !isSymbolCorrect || !innerType) return null;
 
   return (
-    <TradingInfoContextProvider
-      exchangeInfo={exchangeInfo}
-      authData={authData}
-      outerSymbol={outerSymbol}
-      type={type}
-    >
-      <div className={styles["trading-grid"]}>
-        <TradingTickerContextProvider>
-          <Center className={styles["header-grid-elem"]}>
-            <TradeHeaderContainer />
-          </Center>
-          <div className={styles["symbol-summary-grid-elem"]}>
-            <ResponsiveContainer
-              enabledScreens={["tablet", "landscape-tablet"]}
-            >
-              <SymbolSummarySmallBlock />
-            </ResponsiveContainer>
-            <ResponsiveContainer enabledScreens={["phone", "landscape-phone"]}>
-              <SymbolSummaryContainer />
-            </ResponsiveContainer>
-          </div>
-          <div className={styles["market-watch-grid-elem"]}>
-            <ResponsiveContainer enabledScreens={["large-desktop"]}>
-              <MarketWatchBlock />
-            </ResponsiveContainer>
-          </div>
-          <div className={styles["tables-grid-elem"]}>
-            <TradingTables />
-          </div>
-          <div className={styles["chart-grid-elem"]}>
-            <ChartBlock />
-          </div>
-          <TradingPriceContextProvider>
-            <div className={styles["order-book-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                <OrderBookBlock />
-              </ResponsiveContainer>
-            </div>
-            <div className={styles["trades-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                <TradesBlock />
-              </ResponsiveContainer>
-            </div>
-            <div className={styles["place-orders-grid-elem"]}>
-              {type === "futures" && <PlaceOrderSettingsContainer />}
-              <PlaceOrder />
-              {type === "futures" && <MarginRatioContainer />}
-            </div>
-          </TradingPriceContextProvider>
-        </TradingTickerContextProvider>
-      </div>
-    </TradingInfoContextProvider>
+    <Terminal
+      exchangeInfo={exchangeInfoProp}
+      authData={authDataProp}
+      symbol={symbolProp}
+      terminalType={innerType}
+    />
   );
 };
 

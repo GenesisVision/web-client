@@ -76,7 +76,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
           bids: normalizeDepthList(data.bids)
         });
       });
-  }, [baseAsset, quoteAsset]);
+  }, [baseAsset, quoteAsset, terminalType]);
 
   useEffect(() => {
     if (list && depthSocketDataBuffer?.length) {

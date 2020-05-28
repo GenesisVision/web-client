@@ -22,7 +22,7 @@ export const ChartBlock: React.FC = () => {
   >();
   const { connectSocket } = useSockets();
   const methods = React.useContext(TerminalMethodsContext);
-  const { symbol, exchangeInfo } = TradingInfo;
+  const { symbol, exchangeInfo, terminalType } = TradingInfo;
 
   const emptyCallback = React.useCallback(() => {}, []);
 
@@ -86,7 +86,7 @@ export const ChartBlock: React.FC = () => {
       });
       setWidget(widget);
     });
-  }, [exchangeInfo?.symbols, methods]);
+  }, [exchangeInfo?.symbols, terminalType]);
 
   React.useEffect(() => {
     if (!widget) return;

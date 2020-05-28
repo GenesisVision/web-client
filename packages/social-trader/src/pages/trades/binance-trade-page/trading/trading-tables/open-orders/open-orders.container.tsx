@@ -20,6 +20,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
   const { getOpenOrders } = useContext(TerminalMethodsContext);
 
   const {
+    terminalType,
     authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
@@ -43,7 +44,7 @@ export const OpenOrdersContainer: React.FC<Props> = () => {
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [authData, baseAsset, quoteAsset, userStream]);
+  }, [authData, baseAsset, quoteAsset, terminalType, userStream]);
 
   useEffect(() => {
     if (!socketData) return;

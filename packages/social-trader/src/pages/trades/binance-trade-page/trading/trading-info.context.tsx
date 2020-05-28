@@ -1,7 +1,3 @@
-import useApiRequest from "hooks/api-request.hook";
-import { useParams } from "hooks/location";
-import Router from "next/router";
-import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import {
   getLotSizeFilter,
   getSymbolPriceFilter
@@ -22,7 +18,6 @@ import {
   TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import * as qs from "qs";
 import React, {
   createContext,
   useCallback,
@@ -31,7 +26,7 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
+import { TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -39,7 +34,7 @@ interface Props {
   exchangeInfo: ExchangeInfo;
   authData: TradeAuthDataType;
   outerSymbol?: SymbolState;
-  type?: TerminalType;
+  terminalType: TerminalType;
 }
 
 export type SymbolState = {
@@ -59,6 +54,8 @@ type TradingAccountInfoState = {
   exchangeInfo?: ExchangeInfo;
 };
 
+export const TerminalTypeInitialState: TerminalType = "spot";
+
 export const SymbolInitialState: SymbolState = {
   quoteAsset: "USDT",
   baseAsset: "BTC"
@@ -71,7 +68,7 @@ export const TradingAccountInfoInitialState: TradingAccountInfoState = {
     publicKey: "",
     privateKey: ""
   },
-  terminalType: "spot",
+  terminalType: TerminalTypeInitialState,
   setSymbol: () => {},
   symbol: SymbolInitialState
 };
@@ -84,15 +81,12 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   exchangeInfo,
   authData: authDataProp,
   outerSymbol: symbol = SymbolInitialState,
-  type,
+  terminalType,
   children
 }) => {
   const updateUrl = useUpdateTerminalUrlParams();
-  const [terminalType, setTerminalType] = useState<TerminalType>(
-    type || "spot"
-  );
+
   const {
-    // getExchangeInfo,
     getAccountInformation,
     getUserStreamKey,
     getUserStreamSocket
@@ -100,24 +94,12 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   const [authData] = useState<TradeAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
-  // const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
-  //   request: getExchangeInfo
-  // });
-
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
-
-  // useEffect(() => {
-  //   sendRequest();
-  // }, [getExchangeInfo]);
-
-  useEffect(() => {
-    if (type) setTerminalType(type);
-  }, [type]);
 
   useEffect(() => {
     if (!authData.publicKey) return;
