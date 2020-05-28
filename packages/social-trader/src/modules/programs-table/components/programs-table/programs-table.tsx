@@ -10,7 +10,6 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-import "./programs.scss";
 
 interface IProgramsTableProps extends ITableProps {
   currencies?: string[];

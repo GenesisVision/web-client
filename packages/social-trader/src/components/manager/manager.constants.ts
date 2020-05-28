@@ -1,9 +1,9 @@
 import {
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE,
-  SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME,
-  SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
@@ -14,8 +14,8 @@ import {
 export const MANAGER_TABLE_DATE_RANGE_FILTER = {
   ...composeDefaultDateRangeFilter({
     composeApiRequestValue: composeRequestValueFunc(
-      SERVER_STATISTIC_DATE_RANGE_MIN_FILTER_NAME,
-      SERVER_STATISTIC_DATE_RANGE_MAX_FILTER_NAME
+      DATE_RANGE_MIN_FILTER_NAME,
+      DATE_RANGE_MAX_FILTER_NAME
     )
   }),
   validate: validateDateRange

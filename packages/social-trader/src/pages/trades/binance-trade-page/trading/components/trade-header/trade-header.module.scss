@@ -1,0 +1,9 @@
+@import "~shared/styles/_hide";
+
+.trade-header {
+  justify-content: space-between !important;
+  width: 100%;
+  &__root-menu-item {
+    @include hide-on-landscape-tablet(flex);
+  }
+}

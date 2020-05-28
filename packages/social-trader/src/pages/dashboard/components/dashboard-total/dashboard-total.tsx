@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
+import styles from "./dashboard-total.module.scss";
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
@@ -29,7 +30,7 @@ const _DashboardTotal: React.FC<Props> = ({
       .map(({ profit }) => profit)
       .reduce((prev, cur) => prev + cur, 0) !== 0;
   return (
-    <div className="dashboard-total__values">
+    <div className={styles["dashboard-total__values"]}>
       <StatisticItemList>
         <DashboardValueItem
           big

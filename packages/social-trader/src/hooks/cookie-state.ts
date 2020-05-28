@@ -1,7 +1,5 @@
 import { NextPageContext } from "next";
-import { getCookie, setCookie } from "utils/cookie";
-
-const defaultEmptyCookie = "";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
 
 export type UseCookieStateInputType<T> = {
   ctx?: NextPageContext;
@@ -19,18 +17,10 @@ export const useCookieState = <T>({
   ctx,
   key
 }: UseCookieStateInputType<T>): UseCookieStateOutputType<T> => {
-  const clear = () => {
-    setCookie(key, JSON.stringify(initialState) || defaultEmptyCookie);
-  };
-
-  const set = (state: T) => {
-    const JSONState = JSON.stringify(state);
-    setCookie(key, JSONState);
-  };
-
-  const get = (): T => {
-    const JSONState = getCookie(key, ctx);
-    return JSONState ? JSON.parse(JSONState) : initialState;
-  };
-  return { clear, set, get };
+  return cookieServiceCreator({
+    initialState,
+    ctx,
+    key,
+    parse: true
+  });
 };

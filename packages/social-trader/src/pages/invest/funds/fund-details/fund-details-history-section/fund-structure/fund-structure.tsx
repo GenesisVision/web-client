@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { formatValue } from "utils/formatter";
 
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
+import styles from "../fund-reallocate-history/fund-reallocate-history.module.scss";
 import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 const _FundStructure: React.FC = () => {
@@ -26,10 +27,10 @@ const _FundStructure: React.FC = () => {
       )}
       renderBodyRow={(item: FundAssetInfo) => (
         <TableRow stripy>
-          <TableCell className="details-structure__cell fund-details-structure__cell">
+          <TableCell className={styles["details-structure__cell"]}>
             {item.asset}
           </TableCell>
-          <TableCell className="details-structure__cell">
+          <TableCell className={styles["details-structure__cell"]}>
             <CurrencyItem
               url={item.url}
               logo={item.logoUrl}
@@ -37,14 +38,14 @@ const _FundStructure: React.FC = () => {
               small
             />
           </TableCell>
-          <TableCell className="details-structure__cell fund-details-structure__cell">
+          <TableCell className={styles["details-structure__cell"]}>
             <NumberFormat
               value={formatValue(item.target)}
               suffix={"%"}
               displayType="text"
             />
           </TableCell>
-          <TableCell className="details-structure__cell fund-details-structure__cell">
+          <TableCell className={styles["details-structure__cell"]}>
             <NumberFormat
               value={formatValue(item.current, 2)}
               suffix={"%"}

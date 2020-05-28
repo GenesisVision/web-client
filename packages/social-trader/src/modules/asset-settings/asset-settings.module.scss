@@ -1,0 +1,13 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+
+.asset-settings {
+  &__block-wrapper {
+    width: 100%;
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 765px;
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import "./aml-manual-section.scss";
-
 import React from "react";
 
+import styles from "./aml-manual-section.module.scss";
+
 const AmlManualSection: React.FC = () => (
-  <section className="aml-manual">
+  <section className={styles["aml-manual"]}>
     <h1>
       ANTI-MONEY LAUNDERING AND COUNTER TERRORISM FINANCING PROCEDURE MANUAL FOR
       GENESIS VISION LP.

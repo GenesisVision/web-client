@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -21,7 +23,10 @@ const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
       columns={PROGRAM_TRADING_LOG_COLUMNS}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+          className={classNames(
+            styles["details-trades__head-cell"],
+            styles[`program-details-trades__cell--${column.name}`]
+          )}
         >
           {t(`program-details-page.history.trading-log.${column.name}`)}
         </span>

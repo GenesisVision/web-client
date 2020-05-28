@@ -1,5 +1,4 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import Crashable from "decorators/crashable";
 import {
   InternalTransferRequest,
   InternalTransferRequestType
@@ -25,7 +24,10 @@ import {
 } from "../transfer.types";
 import TransferForm from "./transfer-form";
 
-const _TransferContainer: React.FC<Props> = ({
+const _TransferContainer: React.FC<TransferContainerProps> = ({
+  fixedSelects,
+  accountId,
+  outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer,
   onApply,
@@ -60,12 +62,19 @@ const _TransferContainer: React.FC<Props> = ({
     request: transferRequest
   });
   const handleSubmit = useCallback(
-    (values: InternalTransferRequest) => sendTransferRequest(values),
-    [destinationType, sourceType]
+    (values: InternalTransferRequest) => {
+      const destinationId =
+        destinationType === "ExchangeAccount"
+          ? accountId
+          : values.destinationId;
+      return sendTransferRequest({ ...values, destinationId });
+    },
+    [destinationType, sourceType, destinationType, accountId]
   );
   useEffect(() => {
     if (
       !singleCurrentItemContainer &&
+      !outerCurrentItemContainerItems &&
       ((currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
         sourceType !== "Wallet") ||
         (currentItemContainer === TRANSFER_CONTAINER.DESTINATION &&
@@ -73,10 +82,10 @@ const _TransferContainer: React.FC<Props> = ({
     )
       getTradingAccounts(currency);
   }, []);
-  const currentItemContainerItems = useMemo(
-    () => (singleCurrentItemContainer ? [currentItem] : undefined),
-    [currentItem]
-  );
+  const currentItemContainerItems = useMemo(() => {
+    if (outerCurrentItemContainerItems) return outerCurrentItemContainerItems;
+    if (singleCurrentItemContainer) return [currentItem];
+  }, [currentItem]);
   const sourceItems =
     currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
     currentItemContainerItems
@@ -97,10 +106,11 @@ const _TransferContainer: React.FC<Props> = ({
     }
   }, [sourceItems, destinationItems]);
 
+  if (!items) return null;
   return (
     <TransferForm
-      loaderData={getTransferFormLoaderData(currentItem, wallets)}
-      data={items!}
+      fixedSelects={fixedSelects}
+      data={items}
       sourceType={sourceType}
       destinationType={destinationType}
       title={title}
@@ -112,17 +122,20 @@ const _TransferContainer: React.FC<Props> = ({
   );
 };
 
-interface Props {
+export interface TransferContainerProps {
+  fixedSelects?: boolean;
+  accountId?: string;
+  outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
-  singleCurrentItemContainer: boolean;
-  onApply: VoidFunction;
+  singleCurrentItemContainer?: boolean;
+  onApply?: VoidFunction;
   currentItem: WalletItemType;
-  onClose: VoidFunction;
+  onClose?: VoidFunction;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
-  title: string;
+  title?: string;
   currentItemContainer: TRANSFER_CONTAINER;
 }
 
-const TransferContainer = React.memo(Crashable(_TransferContainer));
+const TransferContainer = React.memo(_TransferContainer);
 export default TransferContainer;

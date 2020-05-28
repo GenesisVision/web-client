@@ -29,7 +29,7 @@
 }
 
 @mixin media-breakpoint-large-desktop() {
-  @media (min-width: 1920px) {
+  @media (min-width: 1440px) {
     @content;
   }
 }

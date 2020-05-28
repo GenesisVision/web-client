@@ -4,7 +4,7 @@ import EventItem from "pages/landing-page/components/events-list/event-item";
 import EventLastItem from "pages/landing-page/components/events-list/event-last-item";
 import React, { useCallback, useEffect, useState } from "react";
 
-import "./events-list.scss";
+import styles from "./events-list.module.scss";
 
 const TIME_DELAY = 5000;
 const COUNT_SHOWING_ITEMS = 5;
@@ -42,7 +42,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
 
   return (
     <ul
-      className={classNames("events-list", className)}
+      className={classNames(styles["events-list"], className)}
       style={{ height: `${heightList}px` }}
     >
       {events.map((event, index) => (

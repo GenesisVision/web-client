@@ -17,6 +17,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  composeProgramBannerUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -120,6 +121,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     }
   };
 
+  const banner = composeProgramBannerUrl(url);
+
   return (
     <Page
       title={`${
@@ -128,7 +131,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           : t("programs-page.title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
-      previewImage={description.publicInfo.logoUrl}
+      previewImage={banner}
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection

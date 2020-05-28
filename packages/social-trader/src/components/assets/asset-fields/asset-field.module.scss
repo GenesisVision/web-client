@@ -1,0 +1,11 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.asset-fields {
+  max-width: 700px;
+}
+.asset-field {
+  position: relative;
+  min-width: 230px;
+}

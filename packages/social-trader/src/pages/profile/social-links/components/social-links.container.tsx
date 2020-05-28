@@ -11,7 +11,6 @@ import {
   updateSocialLink
 } from "../services/social-links.service";
 import SocialLinkForm from "./social-link/social-link-form";
-import "./social-links.scss";
 
 const _Links: React.FC<ILinksProps> = ({
   socialLinks,

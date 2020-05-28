@@ -2,24 +2,27 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { DialogTop } from "components/dialog/dialog-top";
+import { Row } from "components/row/row";
 import { RecoveryCode } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "./google-auth.module.scss";
+
 const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
-  <div className="codes__item" key={code}>
+  <div className={styles["codes__item"]} key={code}>
     {code}
   </div>
 ));
 
 const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
   ({ codes }) => (
-    <div className="codes__list">
+    <Row wrap className={styles["codes__list"]}>
       {codes.map(code => (
         <CodeItem code={code.code} />
       ))}
-    </div>
+    </Row>
   )
 );
 
@@ -29,13 +32,11 @@ const getCodesString = (codes: RecoveryCode[]): string =>
 const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
   const [t] = useTranslation();
   return (
-    <div className="recovery-codes-container">
+    <div className={styles["recovery-codes-container"]}>
       <DialogTop title={t("2fa-page.codes.title")} />
       <DialogBottom>
-        <div className="dialog__text">
-          <p>{t("2fa-page.codes.successfully")}</p>
-          <p>{t("2fa-page.codes.recovery_codes")}</p>
-        </div>
+        <Row>{t("2fa-page.codes.recovery_codes")}</Row>
+        <Row>{t("2fa-page.codes.successfully")}</Row>
         <CodeList codes={codes} />
         <DialogButtons>
           <CopyButton wide value={getCodesString(codes)} />

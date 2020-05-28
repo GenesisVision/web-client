@@ -1,5 +1,6 @@
-import "./fund-asset-tooltip.scss";
-
+import { Center } from "components/center/center";
+import { MutedText } from "components/muted-text/muted-text";
+import { RowItem } from "components/row-item/row-item";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
@@ -14,10 +15,10 @@ const _FundAssetTooltip: React.FC<IFundAssetTooltipProps> = ({
   currency
 }) => (
   <TooltipContent fixed={false}>
-    <div className="fund-asset-tooltip__content">
-      <div className="fund-asset-tooltip__name"> {name}</div>
-      <div className="fund-asset__currency-short">{currency}</div>
-    </div>
+    <Center>
+      <RowItem small>{name}</RowItem>
+      <MutedText>{currency}</MutedText>
+    </Center>
   </TooltipContent>
 );
 

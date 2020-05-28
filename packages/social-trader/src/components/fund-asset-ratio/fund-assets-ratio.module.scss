@@ -1,0 +1,37 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+
+.fund-asset-ratio {
+  display: block;
+  position: relative;
+
+  &__values {
+    justify-content: space-between;
+  }
+
+  &__value {
+    @include font-size($font-size-small-mobile);
+    opacity: 0.4;
+
+    &--full {
+      opacity: 1;
+    }
+  }
+
+  &--pie {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--line {
+    height: 2px;
+    background-color: #2a353f;
+    width: 100%;
+  }
+
+  &--item-line {
+    height: 3px;
+    position: absolute;
+  }
+}

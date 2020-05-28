@@ -1,11 +1,11 @@
-import "./accordion.scss";
-
 import classNames from "classnames";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import React, { useCallback, useState } from "react";
+
+import styles from "./accordion.module.scss";
 
 const AccordionContentWithAnimation = dynamic(() =>
   import(
@@ -47,16 +47,16 @@ const _Accordion: React.FC<Props> = ({ accordion, className }) => {
   }, [effectiveConnectionType, isVisible]);
 
   return (
-    <div className="accordion" id={String(accordion.id)}>
-      <header className="accordion__header" onClick={handleClick}>
+    <div className={styles["accordion"]} id={String(accordion.id)}>
+      <header className={styles["accordion__header"]} onClick={handleClick}>
         <span
-          className={classNames("accordion__arrow", {
-            "accordion__arrow--up": isVisible
+          className={classNames(styles["accordion__arrow"], {
+            [styles["accordion__arrow--up"]]: isVisible
           })}
         >
           <Arrow />
         </span>
-        <span className="accordion__title">{accordion.title}</span>
+        <span className={styles["accordion__title"]}>{accordion.title}</span>
       </header>
       {renderAccordionContent()}
     </div>

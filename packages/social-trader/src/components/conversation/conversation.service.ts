@@ -10,8 +10,18 @@ import { api } from "services/api-client/swagger-custom-client";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
-export const rePost = (body: RePost) => {
-  return api.social().rePost({ body });
+export const getSocialMedia = (values?: Object) => {
+  return api.social().getSocialMedia(values);
+};
+
+export const rePost = (values: {
+  id: string;
+  text: string;
+  images?: IImageValue[];
+}) => {
+  return uploadImages(values.images).then(images => {
+    api.social().rePost({ body: { ...values, images } });
+  });
 };
 
 export const pinPost = (id: string) => {
@@ -84,11 +94,20 @@ export const getGlobalFeed = (values?: Object): Promise<ConversationFeed> => {
   return getFeedMethod(values);
 };
 
-export const searchInFeed = (values: {
+export const getTopPosts = (values: Object): Promise<ConversationFeed> => {
+  return getFeedMethod({ ...values, showTop: true });
+};
+
+export interface SearchInFeedValues {
+  tagContentId?: string;
   hashTags?: Array<string>;
   mask?: string;
-}): Promise<ConversationFeed> => {
-  return getFeedMethod(values);
+}
+
+export const searchInFeed = (searchValues: SearchInFeedValues) => (
+  values: Object
+): Promise<ConversationFeed> => {
+  return getFeedMethod({ ...searchValues, ...values });
 };
 
 export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {
@@ -131,7 +150,7 @@ export const searchAsset = (text: string): Promise<AssetSearchResult[]> => {
   };
   return api
     .search()
-    .search(filters)
+    .search({ ...filters, skipStatistic: true })
     .then(({ programs, funds, follows, managers }) => {
       const programsNames: AssetSearchResult[] = programs.items.map(
         getAssetSearchResult(SEARCH_ASSET_TYPE.program)

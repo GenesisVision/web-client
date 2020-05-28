@@ -1,5 +1,3 @@
-import "./currency-item.scss";
-
 import {
   CurrencyItem,
   ICurrencyItemProps
@@ -9,6 +7,8 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
+import styles from "./currency-item-with-amount.module.scss";
+
 const _CurrencyItemWithAmount: React.FC<Props> = ({
   available,
   symbol,
@@ -17,7 +17,7 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
 }) => {
   return (
     <Row>
-      <RowItem className="currency-item-with-amount__name">
+      <RowItem className={styles["currency-item-with-amount__name"]}>
         <CurrencyItem
           {...props}
           symbol={symbol}

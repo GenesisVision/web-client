@@ -36,7 +36,6 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
           }
         />
         <GVTab
-          className={"gv-tab"}
           value={TABS.TRANSACTIONS_TAB} //TODO add disable prop
           label={
             <Tooltip
@@ -58,7 +57,6 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
           }
         />
         <GVTab
-          className={"gv-tab"}
           value={TABS.EXTERNAL_TAB}
           label={
             <>

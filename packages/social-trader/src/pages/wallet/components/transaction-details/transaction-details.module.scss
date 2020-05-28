@@ -1,0 +1,39 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.transaction-details {
+  &__details-list-statistic-item-value {
+    &--long {
+      font-size: $font-size-xxxxsmall;
+    }
+  }
+}
+
+.transaction-asset {
+  &__title {
+    font-size: $font-size-h4;
+  }
+  &__trader {
+    font-size: $font-size-small;
+  }
+}
+
+.external-transaction {
+  &__actions {
+    justify-content: stretch;
+  }
+}
+
+.amount-item {
+  &__amount {
+    &--red {
+      color: $negative-color;
+    }
+    &--white {
+      color: $text-light-color;
+    }
+    &--green {
+      color: $positive-color;
+    }
+  }
+}

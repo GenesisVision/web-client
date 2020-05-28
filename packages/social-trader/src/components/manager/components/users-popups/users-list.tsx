@@ -12,42 +12,53 @@ import InfiniteScroll from "react-infinite-scroller";
 import { managerToPathCreator } from "routes/manager.routes";
 import { getRandomBoolean } from "utils/helpers";
 
-import "./users-popups.scss";
+import styles from "./users-popups.module.scss";
 
 interface IUsersListItemProps {
   user: UsersListItemType;
 }
+
 interface IUsersListProps {
   loadMode: VoidFunction;
   hasMore: boolean;
   data: UsersListItemType[];
 }
 
-const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
-  ({ user: { logoUrl, username, url, id } }) => {
+export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
+  ({
+    user: {
+      logoUrl,
+      username,
+      url,
+      id,
+      personalDetails: { canFollow, isFollow }
+    }
+  }) => {
     const { contextTitle } = useToLink();
     const link = managerToPathCreator(url, contextTitle);
     return (
-      <Row wide className="users-list__item">
+      <Row wide className={styles["users-list__item"]}>
         <RowItem wide>
           <Link white to={link}>
             <Center>
               <RowItem>
                 <ProfileAvatar url={logoUrl} />
               </RowItem>
-              <RowItem wide className="users-list__name">
+              <RowItem wide className={styles["users-list__name"]}>
                 {username}
               </RowItem>
             </Center>
           </Link>
         </RowItem>
-        <RowItem>
-          <FollowUserButton
-            size={GV_BTN_SIZE.SMALL}
-            id={id}
-            value={getRandomBoolean()}
-          />
-        </RowItem>
+        {true && (
+          <RowItem>
+            <FollowUserButton
+              size={GV_BTN_SIZE.SMALL}
+              id={id}
+              value={isFollow}
+            />
+          </RowItem>
+        )}
       </Row>
     );
   }
@@ -55,7 +66,7 @@ const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
 
 const _UsersList: React.FC<IUsersListProps> = ({ loadMode, hasMore, data }) => {
   return (
-    <div className="users-list">
+    <div className={styles["users-list"]}>
       <InfiniteScroll useWindow={false} loadMore={loadMode} hasMore={hasMore}>
         {data.map(user => (
           <UsersListItem user={user} />

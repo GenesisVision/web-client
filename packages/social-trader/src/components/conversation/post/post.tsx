@@ -17,8 +17,6 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import "./post.scss";
-
 const DeletedPost: React.FC<{
   id: string;
   setNotDeleted: VoidFunction;
@@ -65,7 +63,7 @@ const _Post: React.FC<Props> = ({
   const [isDeleted, setDeleted, setNotDeleted] = useIsOpen();
   if (isDeleted) return <DeletedPost id={id} setNotDeleted={setNotDeleted} />;
   return (
-    <DefaultBlock solid wide className="post">
+    <DefaultBlock solid wide>
       <Row center={false}>
         <RowItem wide>
           <Message
@@ -111,7 +109,7 @@ const _Post: React.FC<Props> = ({
           <CommentsList comments={comments} updateData={updateData} />
         </Row>
       )}
-      {actions && (
+      {actions && actions.canComment && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>

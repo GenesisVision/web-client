@@ -35,19 +35,16 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       <DialogBottom>
         <HookForm form={form} onSubmit={onSubmit}>
           <GVHookFormField
+            wide
             name={FIELDS.password}
             type="password"
             label={t("2fa-page.password")}
             component={SimpleTextField}
             autoComplete="new-password"
           />
-          <DialogError error={errorMessage} />
+          {errorMessage && <DialogError error={errorMessage} />}
           <DialogButtons>
-            <SubmitButton
-              wide
-              className="google-auth__button"
-              isSuccessful={!errorMessage}
-            >
+            <SubmitButton wide isSuccessful={!errorMessage}>
               {t("buttons.generate")}
             </SubmitButton>
           </DialogButtons>

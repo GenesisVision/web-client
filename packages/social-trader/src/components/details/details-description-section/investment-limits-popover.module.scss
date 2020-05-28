@@ -1,0 +1,9 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.popover-levels {
+  max-width: 200px;
+  &__block {
+    width: 100%;
+  }
+}

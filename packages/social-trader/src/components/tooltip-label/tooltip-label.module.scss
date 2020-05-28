@@ -1,0 +1,24 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+
+.tooltip-label {
+  cursor: help;
+
+  &--cursor-pointer {
+    cursor: pointer;
+  }
+
+  &--question {
+    box-sizing: border-box;
+    border: 1px solid $text-color;
+    border-radius: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    font-size: 8px;
+    line-height: 15px;
+    color: $text-color;
+  }
+}

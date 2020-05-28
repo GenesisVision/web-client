@@ -1,5 +1,3 @@
-import "./about-level.scss";
-
 import Dialog from "components/dialog/dialog";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { LevelInfo } from "gv-api-web";
@@ -7,6 +5,8 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import { compose } from "redux";
 import { CurrencyEnum } from "utils/types";
+
+import styles from "./about-level.module.scss";
 
 const AboutLevelsContent = dynamic(() =>
   import(
@@ -21,7 +21,12 @@ const _AboutLevelsComponent: React.FC<Props> = ({
   currency
 }) => {
   return (
-    <Dialog open={open} onClose={onClose} className="about-levels" top>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className={styles["about-levels"]}
+      top
+    >
       <AboutLevelsContent
         currency={currency}
         investmentsLimits={investmentsLimits}

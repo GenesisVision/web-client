@@ -1,0 +1,105 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+
+.icon-list {
+  @include reset-list();
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include media-breakpoint-landscape-tablet() {
+    justify-content: start;
+  }
+
+  &__item {
+    margin-right: 20px;
+
+    @include media-breakpoint-landscape-tablet() {
+      margin-right: 30px;
+    }
+  }
+
+  &__link {
+    @include transition(fill, stroke, background-color);
+    @include reset-link();
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: $main-color;
+    stroke: $landing-color-icon;
+    background-color: $landing-color-icon;
+    mix-blend-mode: normal;
+    border: 1px solid $landing-color-icon;
+
+    svg {
+      width: 19px;
+      height: 22px;
+    }
+
+    &:hover {
+      fill: $landing-link-hover;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 14px;
+        height: 17px;
+      }
+    }
+
+    @include media-breakpoint-large-desktop() {
+      width: 50px;
+      height: 50px;
+
+      svg {
+        width: 19px;
+        height: 22px;
+      }
+    }
+  }
+
+  &--color-gray {
+    .icon-list__link {
+      fill: $panel-background-color;
+      stroke: $landing-bg-gray;
+      background-color: $landing-bg-gray;
+      mix-blend-mode: normal;
+      border: 1px solid rgba($panel-background-color, 0.1);
+
+      &:hover {
+        fill: $primary-color;
+      }
+    }
+  }
+
+  &--social {
+    margin-right: -20px;
+    margin-left: -20px;
+
+    .icon-list__item {
+      margin: 0 15px 20px;
+
+      @include media-breakpoint-tablet() {
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+
+      @include media-breakpoint-landscape-tablet() {
+        margin: 0 15px 30px;
+      }
+
+      @include media-breakpoint-large-desktop() {
+        margin-right: 17px;
+        margin-left: 17px;
+      }
+    }
+  }
+}

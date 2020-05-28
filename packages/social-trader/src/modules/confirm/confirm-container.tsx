@@ -40,7 +40,7 @@ const _ConfirmContainer: React.FC<Props> = ({
   );
   if (!data) return null;
   return (
-    <Dialog className={"dialog--width-auto"} open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose}>
       <GoogleAuthStepsContainer
         authenticatorUri={data.authenticatorUri}
         sharedKey={data.sharedKey}

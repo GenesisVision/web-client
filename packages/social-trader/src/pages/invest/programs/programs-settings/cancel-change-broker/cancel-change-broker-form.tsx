@@ -1,5 +1,6 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
+import styles from "components/assets/broker-select/broker-card/broker-card.module.scss";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
@@ -44,54 +45,54 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
   return (
     <div>
       <Row wrap center={false}>
-        <RowItem className="program-settings__broker-info">
-          <div className="program-settings__broker">
-            <BrokerCard
-              logo={brokerFrom.logoUrl}
-              key={brokerFrom.name}
-              brokerName={brokerFrom.name}
-              cardState={BROKER_CARD_EXTRA_STATE.NONE}
-              tags={brokerFrom.tags}
-            />
-          </div>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.account-type")}
-          >
-            {
-              safeGetElemFromArray(
-                brokerFrom.accountTypes,
-                (account: BrokerAccountType) =>
-                  account.id === currentAccountTypeId
-              ).name
-            }
-          </StatisticItem>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.brokers-leverage")}
-          >
-            {leverage}
-          </StatisticItem>
+        <RowItem>
+          <BrokerCard
+            logo={brokerFrom.logoUrl}
+            key={brokerFrom.name}
+            brokerName={brokerFrom.name}
+            cardState={BROKER_CARD_EXTRA_STATE.NONE}
+            tags={brokerFrom.tags}
+          />
+          <Row onlyOffset>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.account-type")}
+            >
+              {
+                safeGetElemFromArray(
+                  brokerFrom.accountTypes,
+                  (account: BrokerAccountType) =>
+                    account.id === currentAccountTypeId
+                ).name
+              }
+            </StatisticItem>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.brokers-leverage")}
+            >
+              {leverage}
+            </StatisticItem>
+          </Row>
         </RowItem>
-        <RowItem className="broker-card__next-arrow">&rarr;</RowItem>
-        <RowItem className="program-settings__broker-info">
-          <div className="program-settings__broker">
-            <BrokerCard
-              logo={brokerTo.logoUrl}
-              key={brokerTo.name}
-              brokerName={brokerTo.name}
-              cardState={BROKER_CARD_EXTRA_STATE.NONE}
-              tags={brokerTo.tags}
-            />
-          </div>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.account-type")}
-          >
-            {brokerTo.accountTypes[0].name}
-          </StatisticItem>
-          <StatisticItem
-            label={t("create-program-page.settings.fields.brokers-leverage")}
-          >
-            {newLeverage}
-          </StatisticItem>
+        <RowItem className={styles["broker-card__next-arrow"]}>&rarr;</RowItem>
+        <RowItem>
+          <BrokerCard
+            logo={brokerTo.logoUrl}
+            key={brokerTo.name}
+            brokerName={brokerTo.name}
+            cardState={BROKER_CARD_EXTRA_STATE.NONE}
+            tags={brokerTo.tags}
+          />
+          <Row onlyOffset>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.account-type")}
+            >
+              {brokerTo.accountTypes[0].name}
+            </StatisticItem>
+            <StatisticItem
+              label={t("create-program-page.settings.fields.brokers-leverage")}
+            >
+              {newLeverage}
+            </StatisticItem>
+          </Row>
         </RowItem>
       </Row>
       <HuobiWarning
@@ -99,19 +100,19 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         to={brokerTo.name}
         isSignalProgram={isSignalProgram}
       />
-      <FormTextField topPadding>
-        {t("program-settings.broker.text-cancel", {
-          brokerFrom: brokerFrom.name,
-          brokerTo: brokerTo.name
-        })}
-      </FormTextField>
-      <GVButton
-        color="primary"
-        className="invest-form__submit-button"
-        onClick={setCancelChangeBrokerOpen}
-      >
-        {t("program-settings.buttons.cancel-broker")}
-      </GVButton>
+      <Row>
+        <FormTextField>
+          {t("program-settings.broker.text-cancel", {
+            brokerFrom: brokerFrom.name,
+            brokerTo: brokerTo.name
+          })}
+        </FormTextField>
+      </Row>
+      <Row large>
+        <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
+          {t("program-settings.buttons.cancel-broker")}
+        </GVButton>
+      </Row>
       <ConfirmCancelChangeBroker
         errorMessage={errorMessage}
         open={isCancelChangeBrokerOpen}

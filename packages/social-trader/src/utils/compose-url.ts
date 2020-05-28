@@ -15,6 +15,7 @@ import {
 } from "routes/accounts.routes";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
 import {
+  FUND_BANNER_ROUTE,
   FUND_DETAILS_FOLDER_ROUTE,
   FUND_DETAILS_ROUTE,
   FUND_SETTINGS,
@@ -34,6 +35,7 @@ import {
   MANAGER_SLUG_URL_PARAM_NAME
 } from "routes/manager.routes";
 import {
+  PROGRAM_BANNER_ROUTE,
   PROGRAM_BANNERS_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
@@ -79,6 +81,16 @@ export const composeFollowDetailsUrl = (slugUrl: string): string =>
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const composeProgramBannerUrl = (slugUrl: string): string =>
+  replaceParams(PROGRAM_BANNER_ROUTE, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const composeFundBannerUrl = (slugUrl: string): string =>
+  replaceParams(FUND_BANNER_ROUTE, {
+    [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeProgramBannersUrl = (slugUrl: string): string =>

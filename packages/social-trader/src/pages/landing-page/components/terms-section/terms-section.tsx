@@ -1,9 +1,12 @@
-import "./terms-section.scss";
-
+import classNames from "classnames";
 import React from "react";
 
+import styles from "./terms-section.module.scss";
+
 const TermsSection: React.FC = () => (
-  <section className="terms-section internal--font-small">
+  <section
+    className={classNames(styles["terms-section"], "internal--font-small")}
+  >
     <h1>TERMS AND CONDITIONS</h1>
     <article className="internal__article">
       <p>1. DEFINITIONS</p>

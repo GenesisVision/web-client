@@ -1,11 +1,11 @@
-import "./info-container.scss";
-
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import InfoListWrapper from "pages/landing-page/components/info-list-wrapper/info-list-wrapper";
 import TabControls from "pages/landing-page/components/tab-controls/tab-controls";
 import { infoList, infoTabs } from "pages/landing-page/static-data/info";
 import React, { useCallback, useState } from "react";
+
+import styles from "./info-container.module.scss";
 
 const InfoListWrapperWithAnimation = dynamic(() =>
   import(
@@ -38,13 +38,13 @@ const InfoContainer: React.FC = () => {
   }, [effectiveConnectionType, currentTabId]);
 
   return (
-    <div className="info-container">
-      <div className="info-container__wrapper-controls">
+    <div className={styles["info-container"]}>
+      <div className={styles["info-container__wrapper-controls"]}>
         <TabControls
           currentTabId={currentTabId}
           tabsItems={infoTabs}
           onChange={handleChange}
-          className="info-container__controls"
+          variant={"info"}
         />
       </div>
       {renderInfoTabs()}

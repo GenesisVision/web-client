@@ -1,4 +1,5 @@
 import FeesSettings from "components/assets/fields/fees-settings";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
@@ -101,12 +102,11 @@ const _InvestmentFees: React.FC<Props> = ({
             )}
           />
         )}
-        <SubmitButton
-          className="invest-form__submit-button"
-          isSuccessful={!editError}
-        >
-          {t("program-settings.buttons.save")}
-        </SubmitButton>
+        <Row large>
+          <SubmitButton isSuccessful={!editError}>
+            {t("program-settings.buttons.save")}
+          </SubmitButton>
+        </Row>
       </HookForm>
     </SettingsBlock>
   );

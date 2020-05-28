@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -36,7 +38,10 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const [t] = useTranslation();
   const renderCell = (name: string) => (
     <span
-      className={`details-trades__head-cell program-details-trades__cell--${name}`}
+      className={classNames(
+        styles["details-trades__head-cell"],
+        styles[`program-details-trades__cell--${column.name}`]
+      )}
     >
       {t(`program-details-page.history.financial-statistic.${name}`)}
     </span>

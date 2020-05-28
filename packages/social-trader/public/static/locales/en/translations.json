@@ -1,4 +1,9 @@
 {
+  "validations": {
+    "required": "Field is required",
+    "min": "Must be more or equal than {{min}}",
+    "max": "Must be less or equal than {{max}}"
+  },
   "news-page": {
     "title": "News",
     "tabs": {
@@ -186,6 +191,7 @@
       "last-week": "Last week",
       "custom": "Custom",
       "account-creation": "Account creation",
+      "follow-start": "Follow start",
       "fund-start": "Fund start",
       "program-start": "Program start",
       "start": "Start",
@@ -259,6 +265,7 @@
     }
   },
   "navigation": {
+    "media": "Media",
     "users": "Users",
     "social": "Social",
     "news": "News",
@@ -274,6 +281,7 @@
     "gv-funds": "Funds",
     "gv-programs": "Programs",
     "trade": "Trade",
+    "terminal": "Trading terminal",
     "mt4": "MetaTrader 4 Terminal",
     "mt5": "MetaTrader 5 Terminal",
     "coming-soon": "Coming soon",
@@ -2253,6 +2261,7 @@
         "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
       },
       "asset-types": {
+        "ExchangeAccount": "Exchange account",
         "Fund": "Fund",
         "Program": "Program",
         "SignalProgram": "Signal Program",

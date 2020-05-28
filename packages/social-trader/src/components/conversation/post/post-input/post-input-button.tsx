@@ -1,8 +1,10 @@
 import React from "react";
 
+import styles from "./post-input.module.scss";
+
 const _PostInputButton: React.FC<Props> = ({ children, onClick }) => {
   return (
-    <div className="post-input__button" onClick={onClick}>
+    <div className={styles["post-input__button"]} onClick={onClick}>
       {children}
     </div>
   );

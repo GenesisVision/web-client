@@ -7,7 +7,6 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row-short";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-import "./programs.scss";
 
 const _ProgramTableModule: React.FC<Props> = ({
   renderMappings,

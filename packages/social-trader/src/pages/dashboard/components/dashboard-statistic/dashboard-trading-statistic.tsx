@@ -1,3 +1,4 @@
+import { MutedText } from "components/muted-text/muted-text";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { useAccountCurrency } from "hooks/account-currency.hook";
@@ -70,11 +71,11 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
         text: (
           <>
             {t("dashboard-page.statistic.get-started.trading.left-field.text")}{" "}
-            <span className="dashboard-new-user-block__text--muted">
+            <MutedText>
               {t(
                 "dashboard-page.statistic.get-started.trading.left-field.text-2"
               )}
-            </span>
+            </MutedText>
           </>
         )
       }}

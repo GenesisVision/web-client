@@ -23,7 +23,11 @@ export const HookForm: React.FC<{
 
   return (
     <FormContext {...form}>
-      <form className={className} onSubmit={handleSubmit}>
+      <form
+        style={{ width: "100%" }}
+        className={className}
+        onSubmit={handleSubmit}
+      >
         {children}
       </form>
     </FormContext>

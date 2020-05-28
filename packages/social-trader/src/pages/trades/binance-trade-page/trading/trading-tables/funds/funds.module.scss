@@ -1,0 +1,15 @@
+@import "~shared/styles/_sizes";
+
+$column-width: 100px;
+
+.funds {
+  &__table {
+    & th,
+    & td {
+      width: $column-width;
+      min-width: $column-width;
+      max-width: $column-width;
+      box-sizing: border-box;
+    }
+  }
+}

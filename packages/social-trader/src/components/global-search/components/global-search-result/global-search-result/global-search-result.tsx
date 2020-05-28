@@ -13,7 +13,6 @@ import { FollowsTable } from "./follows-table";
 import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
-import SearchResultTable from "./search-result-table";
 
 export enum SEARCH_TABS {
   FOLLOWS = "follows",
@@ -67,29 +66,13 @@ interface ITabProps {
 const Tab: React.FC<ITabProps> = React.memo(({ data, tab }) => {
   switch (tab) {
     case SEARCH_TABS.MANAGERS:
-      return (
-        <SearchResultTable data={Boolean(data.managers)}>
-          <ManagersTable data={data.managers} />
-        </SearchResultTable>
-      );
+      return <ManagersTable data={data.managers} />;
     case SEARCH_TABS.FUNDS:
-      return (
-        <SearchResultTable data={Boolean(data.funds)}>
-          <FundsTable data={data.funds} />
-        </SearchResultTable>
-      );
+      return <FundsTable data={data.funds} />;
     case SEARCH_TABS.PROGRAMS:
-      return (
-        <SearchResultTable data={Boolean(data.programs)}>
-          <ProgramsTable data={data.programs} />
-        </SearchResultTable>
-      );
+      return <ProgramsTable data={data.programs} />;
     case SEARCH_TABS.FOLLOWS:
-      return (
-        <SearchResultTable data={Boolean(data.follows)}>
-          <FollowsTable data={data.follows} />
-        </SearchResultTable>
-      );
+      return <FollowsTable data={data.follows} />;
     default:
       return null;
   }

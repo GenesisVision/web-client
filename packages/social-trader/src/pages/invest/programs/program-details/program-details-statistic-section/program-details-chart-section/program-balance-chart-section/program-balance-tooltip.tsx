@@ -1,4 +1,5 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
+import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -52,7 +53,7 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className="details-tooltip"
+      className={styles["details-tooltip"]}
     />
   );
 };

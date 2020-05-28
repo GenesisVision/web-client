@@ -1,5 +1,3 @@
-import "./dashboard-statistic.scss";
-
 import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
@@ -11,6 +9,7 @@ import {
   TDashboardTradingStatistic
 } from "../../dashboard.types";
 import DashboardStatistic from "./dashboard-statistic";
+import styles from "./dashboard-statistic.module.scss";
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
   landscapeTablet,
@@ -35,10 +34,10 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
       tablet={tablet}
       label={label}
       all={all}
-      className="dashboard-statistic__container"
+      className={styles["dashboard-statistic__container"]}
     >
       <DashboardStatistic
-        className="dashboard-statistic__data"
+        className={styles["dashboard-statistic__data"]}
         EmptyBlock={EmptyBlock}
         currency={currency}
         renderValues={renderValues}

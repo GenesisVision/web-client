@@ -1,6 +1,5 @@
 import Dialog from "components/dialog/dialog";
-import { WalletItemType } from "components/wallet-select/wallet-select";
-import { InternalTransferRequestType } from "gv-api-web";
+import { TransferContainerProps } from "modules/transfer/components/transfer-container";
 import dynamic from "next/dynamic";
 import * as React from "react";
 
@@ -11,6 +10,9 @@ const TransferContainer = dynamic(() =>
 );
 
 const _TransferPopup: React.FC<Props> = ({
+  fixedSelects,
+  accountId,
+  outerCurrentItemContainerItems,
   successMessage = "",
   singleCurrentItemContainer,
   onApply,
@@ -22,8 +24,11 @@ const _TransferPopup: React.FC<Props> = ({
   onClose,
   open
 }) => (
-  <Dialog open={open} onClose={onClose}>
+  <Dialog open={open} onClose={onClose!}>
     <TransferContainer
+      fixedSelects={fixedSelects}
+      accountId={accountId}
+      outerCurrentItemContainerItems={outerCurrentItemContainerItems}
       successMessage={successMessage}
       singleCurrentItemContainer={singleCurrentItemContainer}
       onApply={onApply}
@@ -37,17 +42,8 @@ const _TransferPopup: React.FC<Props> = ({
   </Dialog>
 );
 
-interface Props {
-  successMessage?: string;
-  singleCurrentItemContainer: boolean;
-  onApply: VoidFunction;
-  currentItem: WalletItemType;
-  onClose: () => void;
+interface Props extends TransferContainerProps {
   open: boolean;
-  sourceType: InternalTransferRequestType;
-  destinationType: InternalTransferRequestType;
-  title: string;
-  currentItemContainer: TRANSFER_CONTAINER;
 }
 
 const TransferPopup = React.memo(_TransferPopup);

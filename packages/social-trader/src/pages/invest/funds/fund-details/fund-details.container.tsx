@@ -5,6 +5,7 @@ import { DETAILS_TYPE } from "components/details/details.types";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
+import { Row } from "components/row/row";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
@@ -14,6 +15,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
+  composeFundBannerUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
 } from "utils/compose-url";
@@ -43,7 +45,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page.title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={description.publicInfo.logoUrl}
+      previewImage={composeFundBannerUrl(description.publicInfo.url)}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
@@ -73,19 +75,19 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         }
         AssetDetailsExtraBlock={() => (
           <>
-            <h4 className="details-description__subheading">
+            <h4>
               <TooltipLabel
                 tooltipContent={t("fund-details-page.tooltip.assets")}
                 labelText={t("fund-details-page.description.assets")}
               />
             </h4>
-            <div>
+            <Row>
               <FundAssetContainer
                 type={FUND_ASSET_TYPE.LARGE}
                 assets={description.assetsStructure}
                 size={7}
               />
-            </div>
+            </Row>
           </>
         )}
         Controls={() => (

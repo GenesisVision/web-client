@@ -1,0 +1,82 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+
+.dialog-wrapper {
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog {
+  position: relative;
+  background-color: $secondary-background-color;
+  z-index: 1300;
+  margin: $padding-small auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 100%;
+  @include media-breakpoint-landscape-phone() {
+    min-width: $modal-width;
+    border-radius: 8px;
+  }
+
+  &__info {
+    line-height: 1.64;
+    text-align: center;
+  }
+
+  button.dialog__close {
+    position: absolute;
+    @include adaptive-full-padding($padding-xxsmall);
+  }
+  &__close {
+    width: 30px;
+    z-index: 2;
+    right: 10px;
+    top: 15px;
+
+    @include transition(opacity);
+    &:hover {
+      opacity: 0.4;
+    }
+
+    &--wider {
+      @include media-breakpoint-tablet() {
+        display: none;
+      }
+      @media (min-width: 1600px) {
+        display: inherit;
+      }
+    }
+  }
+
+  &__header {
+    @include adaptive-padding(top, $padding-xsmall);
+  }
+
+  &__subtitle {
+    @include font-size($font-size-common);
+    font-weight: 300;
+    letter-spacing: 0.4px;
+    color: #e8eff3;
+  }
+
+  &__buttons {
+    justify-content: space-between;
+  }
+
+  &__error {
+    @include font-size($font-size-common);
+  }
+}
+
+.dialog-list {
+  &__item {
+    @include font-size($font-size-paragraph);
+    font-weight: 300;
+    justify-content: space-between;
+  }
+}

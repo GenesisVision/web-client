@@ -1,0 +1,20 @@
+@import "~shared/styles/_colors";
+
+.social-page-downloads {
+  &__title {
+    white-space: nowrap;
+  }
+  &__item {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  &__icon {
+    width: 30px;
+    height: 30px;
+    svg {
+      height: 100%;
+      width: 100%;
+      fill: white;
+      stroke: $separator-color;
+    }
+  }
+}

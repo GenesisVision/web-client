@@ -9,7 +9,7 @@ import { PublicProfile } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import "./manager.page.scss";
+import styles from "./manager.page.module.scss";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
   const [t] = useTranslation();
@@ -21,11 +21,13 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
       description={profile.about || title}
       previewImage={profile.logoUrl}
     >
-      <Row className="manager-page__container" center={false} wide>
-        <RowItem className="manager-page__info" bottomOffset>
-          <ManagerInfo profile={profile} />
+      <Row className={styles["manager-page__container"]} center={false} wide>
+        <RowItem className={styles["manager-page__info"]} bottomOffset>
+          <Row className={styles["manager-page__info-row"]} center={false}>
+            <ManagerInfo profile={profile} />
+          </Row>
         </RowItem>
-        <RowItem className="manager-page__data" bottomOffset>
+        <RowItem className={styles["manager-page__data"]} bottomOffset>
           <ManagerData id={profile.id} />
         </RowItem>
       </Row>

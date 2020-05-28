@@ -1,7 +1,6 @@
 import TableModule, {
   ITableModuleProps
 } from "components/table/components/table-module";
-import "modules/programs-table/components/programs-table/programs.scss";
 import * as React from "react";
 
 import FollowTableHeaderCell from "./follow-table-header-cell";

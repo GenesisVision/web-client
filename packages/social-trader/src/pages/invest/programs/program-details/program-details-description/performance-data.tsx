@@ -1,8 +1,11 @@
 import ImageBase from "components/avatar/image-base";
+import {
+  DetailsBroker,
+  DetailsPerformanceData
+} from "components/details/details-description-section/details-description/details-structure-blocks";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { STATUS } from "constants/constants";
@@ -27,7 +30,7 @@ const _PerformanceData: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList className="asset-details-description__performance-data">
+    <DetailsPerformanceData>
       <StatisticItem
         label={
           <TooltipLabel
@@ -38,10 +41,9 @@ const _PerformanceData: React.FC<Props> = ({
           />
         }
       >
-        <ImageBase
-          alt={brokerDetails.name}
-          className={"asset-details-description__broker"}
-          src={brokerDetails.logoUrl}
+        <DetailsBroker
+          name={brokerDetails.name}
+          logoUrl={brokerDetails.logoUrl}
         />
       </StatisticItem>
       {currency && (
@@ -155,7 +157,7 @@ const _PerformanceData: React.FC<Props> = ({
           </StatisticItem>
         </>
       )}
-    </StatisticItemList>
+    </DetailsPerformanceData>
   );
 };
 

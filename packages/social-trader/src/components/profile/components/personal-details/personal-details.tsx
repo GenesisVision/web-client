@@ -24,10 +24,7 @@ const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
         verificationStatus={info.verificationStatus}
       >
         {info.verificationStatus === "NotVerified" && (
-          <Link
-            className="level-calculator-popup__btn-verify"
-            to={linkCreator(KYC_ROUTE)}
-          >
+          <Link to={linkCreator(KYC_ROUTE)}>
             <GVButton color="primary" variant="outlined">
               {t("buttons.verify")}
             </GVButton>

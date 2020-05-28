@@ -6,10 +6,14 @@ import { FundsIcon } from "components/icon/funds-icon";
 import { HistoryIcon } from "components/icon/history-icon";
 import { InvestIcon } from "components/icon/invest-icon";
 import { Mt5Icon } from "components/icon/mt5-icon";
+import { MyProfileIcon } from "components/icon/my-profile-icon";
+import { NewsIcon } from "components/icon/news-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
+import { SocialIcon } from "components/icon/social-icon";
 import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
 import { TradeIcon } from "components/icon/trade-icon";
+import { UsersIcon } from "components/icon/users-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import {
   PROFILE_ROUTE,
@@ -18,8 +22,8 @@ import {
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
 import {
+  MEDIA_ROUTE,
   MY_PROFILE_ROUTE,
-  NEWS_ROUTE,
   SOCIAL_ROUTE,
   USERS_ROUTE
 } from "routes/social.routes";
@@ -37,7 +41,11 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import { META_TRADER_5_ROUTE, TRADE_ROUTE } from "./trade.routes";
+import {
+  META_TRADER_5_ROUTE,
+  TERMINAL_ROUTE,
+  TRADE_ROUTE
+} from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -46,6 +54,8 @@ export type TMenuItem = {
   label?: string;
   children?: TMenuItem[];
 };
+
+export const rootMenuItem = { Icon: GVLogo, route: HOME_ROUTE };
 
 export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
@@ -89,22 +99,22 @@ const mainMenuItemsUnion = [
   },
   {
     isBeta: true,
-    Icon: TradeIcon,
+    Icon: SocialIcon,
     label: "navigation.social",
     route: SOCIAL_ROUTE,
     children: [
       {
-        Icon: TradeIcon,
-        route: NEWS_ROUTE,
-        label: "navigation.news"
+        Icon: NewsIcon,
+        route: MEDIA_ROUTE,
+        label: "navigation.media"
       },
       {
-        Icon: TradeIcon,
+        Icon: MyProfileIcon,
         route: MY_PROFILE_ROUTE,
         label: "navigation.my-profile"
       },
       {
-        Icon: TradeIcon,
+        Icon: UsersIcon,
         route: USERS_ROUTE,
         label: "navigation.users"
       }
@@ -139,16 +149,18 @@ const mainMenuItemsUnion = [
     children: [
       {
         Icon: Mt5Icon,
+        route: TERMINAL_ROUTE,
+        label: "navigation.terminal"
+      },
+      {
+        Icon: Mt5Icon,
         route: META_TRADER_5_ROUTE,
         label: "navigation.mt5"
       }
     ]
   }
 ];
-export const topMenuItems: TMenuItem[] = [
-  { Icon: GVLogo, route: HOME_ROUTE },
-  ...mainMenuItemsUnion
-];
+export const topMenuItems: TMenuItem[] = mainMenuItemsUnion;
 
 export const mobileMenuItems: TMenuItem[] = [
   ...mainMenuItemsUnion,

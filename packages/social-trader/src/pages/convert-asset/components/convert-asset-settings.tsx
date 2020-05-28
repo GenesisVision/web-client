@@ -9,6 +9,7 @@ import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.par
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
@@ -83,19 +84,23 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         )}
         {showProgramFields && (
-          <AssetFields>
-            <Currency
-              hide={!showCurrency}
-              name={CONVERT_ASSET_FIELDS.currency}
-              accountCurrencies={["GVT", "BTC", "ETH"]}
-            />
-            <PeriodLength
-              periods={periods}
-              name={CONVERT_ASSET_FIELDS.periodLength}
-            />
-            <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-            <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
-          </AssetFields>
+          <Row large>
+            <AssetFields>
+              <Currency
+                hide={!showCurrency}
+                name={CONVERT_ASSET_FIELDS.currency}
+                accountCurrencies={["GVT", "BTC", "ETH"]}
+              />
+              <PeriodLength
+                periods={periods}
+                name={CONVERT_ASSET_FIELDS.periodLength}
+              />
+              <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+              <Row onlyOffset>
+                <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
+              </Row>
+            </AssetFields>
+          </Row>
         )}
       </SettingsBlock>
       {showProgramFields && (
@@ -153,7 +158,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         </SettingsBlock>
       )}
-      <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
+      <Row large>
+        <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
+      </Row>
     </HookForm>
   );
 };

@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 
 import LineDepositButton from "../buttons/line-deposit-button";
 import LineWithdrawButton from "../buttons/line-withdraw-button";
+import styles from "./wallet-list.module.scss";
 
 const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
   const {
@@ -26,7 +27,7 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
   } = wallet;
   const [t] = useTranslation();
   return (
-    <Row className="wallet-list__buttons">
+    <Row className={styles["wallet-list__buttons"]}>
       {depositUrlCoindirect && (
         <RowItem>
           <Tooltip

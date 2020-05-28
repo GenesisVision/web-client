@@ -62,7 +62,7 @@ const _Subscription: React.FC<Props> = ({
                 </TooltipContent>
               )}
             >
-              <div className="tooltip__label">{subscriptionInfo.mode}</div>
+              {subscriptionInfo.mode}
             </Tooltip>
           </StatisticItem>
           <StatisticItem

@@ -1,3 +1,4 @@
+import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import { ManagerNotificationSettingList } from "gv-api-web";
 import * as React from "react";
@@ -9,7 +10,7 @@ import NotificationEntity from "./notification-entity";
 const _NotificationManagers: React.FC<Props> = ({ t, settings }) => (
   <div>
     <h3>{t("notifications-page.managers")}</h3>
-    <div className="program-notification__list">
+    <Row wide onlyOffset>
       {settings.map(setting => (
         <NotificationEntity
           pathname={""}
@@ -22,7 +23,7 @@ const _NotificationManagers: React.FC<Props> = ({ t, settings }) => (
           count={setting.settingsGeneral.length}
         />
       ))}
-    </div>
+    </Row>
   </div>
 );
 

@@ -1,0 +1,31 @@
+@import "~shared/styles/_sizes";
+
+.trades {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__header-container {
+    width: calc(100% - 5px);
+  }
+  &__items-container {
+    height: 100%;
+    overflow-y: auto;
+  }
+  &__table {
+    @include terminal-table(small);
+    & th,
+    & td {
+      width: 33.3%;
+    }
+    & th:not(:first-child),
+    & td:not(:first-child) {
+      text-align: right;
+    }
+  }
+}

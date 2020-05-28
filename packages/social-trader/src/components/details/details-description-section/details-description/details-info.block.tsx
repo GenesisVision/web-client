@@ -1,10 +1,11 @@
+import { DetailsStrategy } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 
-import { DetailsStrategy } from "./details-strategy.block";
+import styles from "./details-description.module.scss";
 import { DetailsSubtitle } from "./details-subtitle.block";
 
 const _DetailsInfo: React.FC<Props> = ({
@@ -17,8 +18,8 @@ const _DetailsInfo: React.FC<Props> = ({
   children
 }) => {
   return (
-    <div className="details-description__info">
-      <h1 className="details-description__heading">{title}</h1>
+    <div className={styles["details-description__info"]}>
+      <h1>{title}</h1>
       {subtitle && (
         <Row>
           <DetailsSubtitle to={subtitleUrl} text={subtitle} />
@@ -29,11 +30,11 @@ const _DetailsInfo: React.FC<Props> = ({
           <SocialLinksBlock socialLinks={socialLinks} />
         </Row>
       )}
-      {children && (
-        <div className="details-description__info-block">{children}</div>
-      )}
+      {children && <Row onlyOffset>{children}</Row>}
       {description && (
-        <DetailsStrategy title={descriptionTitle} description={description} />
+        <Row xlarge onlyOffset>
+          <DetailsStrategy title={descriptionTitle} description={description} />
+        </Row>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
+import classNames from "classnames";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
-import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -13,9 +13,8 @@ import TagProgramContainer from "components/tags/tag-program-container/tag-progr
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
-import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
+import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import * as React from "react";
-import { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -24,10 +23,11 @@ import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
+import styles from "./programs-table.module.scss";
+
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   program
 }) => {
-  const [programState, setProgramState] = useState(program);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { linkCreator } = useToLink();
   const { t } = useTranslation();
@@ -52,12 +52,9 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   const { currency, amount } = balance;
-  const handleUpdateRow = useCallback(program => {
-    setProgramState(program);
-  }, []);
   return (
     <TableRow>
-      <TableCell className="programs-table__cell">
+      <TableCell height={"small"} className={styles["programs-table__cell"]}>
         <Link to={programLinkProps}>
           <AssetAvatarWithName
             url={logoUrl}
@@ -68,7 +65,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             name={
               <>
-                <div className="programs-table__cell--link">
+                <div className={styles["programs-table__cell--link"]}>
                   {program.title}
                 </div>
                 <div>
@@ -79,24 +76,39 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Link>
       </TableCell>
-      <TableCell className="programs-table__cell">
+      <TableCell className={styles["programs-table__cell"]}>
         <NumberFormat
           value={formatCurrencyValue(amount, currency)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--investors">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--investors"]
+        )}
+      >
         {investorsCount}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--available-to-invest"]
+        )}
+      >
         <NumberFormat
           value={formatCurrencyValue(availableToInvest, currency)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--period">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--period"]
+        )}
+      >
         {periodStarts && (
           <ProgramPeriodPie
             condition={status !== STATUS.CLOSED}
@@ -106,17 +118,32 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         )}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--trades">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--trades"]
+        )}
+      >
         {distanceDate(program.creationDate)}
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--drawdown">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--drawdown"]
+        )}
+      >
         <NumberFormat
           value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--profit">
+      <TableCell
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--profit"]
+        )}
+      >
         <Profitability
           value={formatValue(statistic.profit, 2)} /*statistic.profitPercent*/
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -129,20 +156,23 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--chart">
+      <TableCell
+        height={"small"}
+        className={classNames(
+          styles["programs-table__cell"],
+          styles["programs-table__cell--chart"]
+        )}
+      >
         <ProgramSimpleChart data={statistic?.chart} />
       </TableCell>
       {isAuthenticated && personalDetails && (
-        <TableCell className="programs-table__cell programs-table__cell--favorite">
-          <ToggleAssetFavoriteButton
-            asset={programState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.PROGRAM}
-            id={id}
-            isFavorite={programState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={programState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+        <TableCell
+          className={classNames(
+            styles["programs-table__cell"],
+            styles["programs-table__cell--favorite"]
+          )}
+        >
+          <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
         </TableCell>
       )}
     </TableRow>

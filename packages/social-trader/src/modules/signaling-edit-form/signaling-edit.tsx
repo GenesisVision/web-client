@@ -1,5 +1,6 @@
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { FollowCreateAssetPlatformInfo } from "gv-api-web";
 import React from "react";
@@ -34,14 +35,17 @@ const _SignalingEdit: React.FC<Props> = ({
   });
 
   const renderButton = () => (
-    <SubmitButton wide={inDialog} isSuccessful={!editError}>
-      {t("buttons.save")}
-    </SubmitButton>
+    <Row large>
+      <SubmitButton wide={inDialog} isSuccessful={!editError}>
+        {t("buttons.save")}
+      </SubmitButton>
+    </Row>
   );
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
       {showFields && (
         <SignalsFeeFormPartial
+          inDialog={inDialog}
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
         />

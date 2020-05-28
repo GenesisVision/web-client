@@ -1,0 +1,11 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.request-line {
+  padding: $padding-xxsmall 0;
+  color: $text-accent-color;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $border-color;
+  }
+}

@@ -26,8 +26,6 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
-import "./wallet-withdraw-form.scss";
-
 const _WalletWithdrawForm: React.FC<Props> = ({
   onSubmit,
   twoFactorEnabled,

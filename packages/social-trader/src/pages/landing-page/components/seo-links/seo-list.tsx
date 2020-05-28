@@ -1,12 +1,16 @@
-import "./seo-list.scss";
-
 import classNames from "classnames";
 import SeoItem from "pages/landing-page/components/seo-links/seo-item";
 import { TNavFooter } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
-const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
-  <ul className={classNames("seo-list", className)}>
+import styles from "./seo-list.module.scss";
+
+const _SeoList: React.FC<Props> = ({ seoItems, className, isMobile }) => (
+  <ul
+    className={classNames(styles["seo-list"], className, {
+      [styles["seo-list--is-mobile"]]: isMobile
+    })}
+  >
     {seoItems.map((item: any, index: number) => (
       <SeoItem
         key={index}
@@ -21,6 +25,7 @@ const _SeoList: React.FC<Props> = ({ seoItems, className }) => (
 export interface Props {
   seoItems: TNavFooter[];
   className?: string;
+  isMobile?: boolean;
 }
 
 const SeoList = React.memo(_SeoList);

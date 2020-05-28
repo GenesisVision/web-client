@@ -17,7 +17,6 @@ import ChangeBroker from "./change-broker/change-broker";
 import ChangePassword from "./change-password/change-password";
 import InvestmentLimit from "./investment-limit";
 import { TUpdateProgramFunc } from "./program-settings.page";
-import "./program-settings.scss";
 import SignalingEdit from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TradesUpdating from "./trades-updating";

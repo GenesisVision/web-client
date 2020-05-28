@@ -1,0 +1,28 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+
+.dashboard {
+  &__statistic-block {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    & > div {
+      margin-right: 0;
+      width: 100%;
+    }
+    &--landscape-tablet {
+      & > div {
+        @include media-breakpoint-landscape-tablet() {
+          width: calc(50% - #{$padding-xsmall}/ 2);
+        }
+      }
+    }
+    &--tablet {
+      & > div {
+        @include media-breakpoint-tablet() {
+          width: calc(50% - #{$padding-xsmall}/ 2);
+        }
+      }
+    }
+  }
+}

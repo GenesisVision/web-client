@@ -3,7 +3,7 @@ import UserIcon from "media/user-avatar.svg";
 import * as React from "react";
 
 import ImageBase, { IImageProps } from "../image-base";
-import "./profile-avatar.scss";
+import styles from "./profile-avatar.module.scss";
 
 const _ProfileAvatar: React.FC<Props> = ({
   url,
@@ -14,17 +14,17 @@ const _ProfileAvatar: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames("profile-avatar", className, {
-        "profile-avatar--middle": middle,
-        "profile-avatar--big": big
+      className={classNames(styles["profile-avatar"], className, {
+        [styles["profile-avatar--middle"]]: middle,
+        [styles["profile-avatar--big"]]: big
       })}
     >
       <ImageBase
         src={url}
         alt={alt}
         defaultImage={UserIcon}
-        className="profile-avatar__image"
-        defaultImageClassName="profile-avatar__image--default"
+        className={styles["profile-avatar__image"]}
+        defaultImageClassName={styles["profile-avatar__image--default"]}
       />
     </div>
   );

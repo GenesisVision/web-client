@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { UpdateFilterFunc } from "../../table.types";
 import TileFilter from "../tile-filter";
 import TileFilterItem from "../tile-filter-item";
-import "./fund-asset-filter.scss";
+import styles from "./fund-asset-filter.module.scss";
 import FundAssetPopover from "./fund-asset-popover";
 
 const _FundAssetFilter: React.FC<Props> = ({
@@ -21,7 +21,7 @@ const _FundAssetFilter: React.FC<Props> = ({
     .map(asset => (
       <TileFilterItem key={asset.id} id={asset.asset}>
         <CurrencyItem
-          className="fund-asset-filter__asset-name"
+          className={styles["fund-asset-filter__asset-name"]}
           logo={asset.logoUrl}
           name={asset.asset}
           small

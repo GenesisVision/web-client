@@ -1,0 +1,9 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.glossary-section {
+  @include horizontal-padding();
+  line-height: 2;
+}

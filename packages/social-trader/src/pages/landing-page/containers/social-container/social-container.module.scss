@@ -1,0 +1,30 @@
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.social-container {
+  @include media-breakpoint-landscape-tablet() {
+    @include grid();
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+
+    @include media-breakpoint-landscape-tablet() {
+      text-align: left;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__item {
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+    }
+
+    @include media-breakpoint-desktop() {
+      grid-column: 2/7;
+    }
+  }
+}

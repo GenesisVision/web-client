@@ -1,11 +1,19 @@
 import jwt_decode from "jwt-decode";
 import { NextPageContext } from "next";
-import { getCookie, removeCookie, setCookie } from "utils/cookie";
-import { getTokenName } from "utils/get-token-name";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
+import { GV_TOKEN_KEY } from "utils/get-token-name";
 
 export type TokenDto = {
   exp: number;
 };
+
+export const {
+  get: getToken,
+  set: setToken,
+  clear: clearToken
+} = cookieServiceCreator({
+  key: GV_TOKEN_KEY
+});
 
 const canParseToken = (token: string): boolean => {
   try {
@@ -22,8 +30,7 @@ const decodeToken = (token: string): TokenDto | null => {
 };
 
 const storeToken = (token: string): void => {
-  const tokenName = getTokenName();
-  setCookie(tokenName, token);
+  setToken(token);
 };
 
 const getTokenData = (ctx?: NextPageContext) => decodeToken(getAuthArg(ctx));
@@ -31,8 +38,7 @@ const getTokenData = (ctx?: NextPageContext) => decodeToken(getAuthArg(ctx));
 const generateTokenString = (token: string): string => `Bearer ${token}`;
 
 const getAuthArg = (ctx?: NextPageContext): string => {
-  const tokenName = getTokenName();
-  const token = getCookie(tokenName, ctx);
+  const token = getToken(ctx);
   if (!token) {
     return "";
   }
@@ -51,8 +57,7 @@ const isAuthenticated = (
 };
 
 const removeToken = (): void => {
-  const tokenName = getTokenName();
-  removeCookie(tokenName);
+  clearToken();
 };
 
 const authService = {

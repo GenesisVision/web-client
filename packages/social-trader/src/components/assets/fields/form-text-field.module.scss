@@ -1,0 +1,17 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.form-text-field {
+  &__text {
+    width: 100%;
+    line-height: 24px;
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 500px;
+    }
+    &--color-accent {
+      color: $primary-color;
+    }
+  }
+}

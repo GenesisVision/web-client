@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTradingStatistic } from "../../dashboard.types";
+import styles from "./dashboard-trading.module.scss";
 
 const _DashboardTradingTotal: React.FC<Props> = ({
   currency,
@@ -16,7 +17,7 @@ const _DashboardTradingTotal: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="dashboard-trading__values">
+    <div className={styles["dashboard-trading__values"]}>
       <StatisticItemList>
         <DashboardValueItem
           label={

@@ -4,8 +4,8 @@ import React from "react";
 
 export const TagBlock: React.FC = ({ children }) => {
   return (
-    <DefaultBlock bordered size={SIZES.SMALL}>
-      {children}
+    <DefaultBlock bordered horizontalOffsets={false} verticalOffsets={false}>
+      <DefaultBlock size={SIZES.SMALL}>{children}</DefaultBlock>
     </DefaultBlock>
   );
 };

@@ -2,12 +2,14 @@ import classNames from "classnames";
 import ImageBase from "components/avatar/image-base";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IConversationImage } from "components/conversation/conversation.types";
+import { GalleryLeftIcon } from "components/conversation/icons/gallery-left.icon";
+import { GalleryRightIcon } from "components/conversation/icons/gallery-right.icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import EventListener from "react-event-listener";
 
-import "./conversation-image.scss";
+import styles from "./conversation-image.module.scss";
 
 const _ConversationImagesFull: React.FC<Props> = ({
   initIndex,
@@ -35,10 +37,10 @@ const _ConversationImagesFull: React.FC<Props> = ({
       <div
         onClick={handleBackdropClick}
         onMouseDown={handleMouseDown}
-        className="conversation-images-full__wrapper"
+        className={styles["conversation-images-full__wrapper"]}
       >
         <BodyFix />
-        <div className="conversation-image-full__wrapper">
+        <div className={styles["conversation-image-full__wrapper"]}>
           <ConversationImagesFullContent
             initIndex={initIndex}
             images={images}
@@ -83,28 +85,30 @@ const ConversationImagesFullContent: React.FC<{
         <ImageBase
           onClick={handleNext}
           quality={"High"}
-          className="conversation-image-full"
+          className={styles["conversation-image-full"]}
           src={getImageUrlByQuality(images[currentImageIndex].resizes, "High")}
         />
         <div
           onClick={handlePrev}
           className={classNames(
-            "conversation-image-full__button conversation-image-full__button--left",
+            styles["conversation-image-full__button--left"],
+            styles["conversation-image-full__button"],
             {
-              "conversation-image-full__button--show": isButtonsShow
+              [styles["conversation-image-full__button--show"]]: isButtonsShow
             }
           )}
         >
-          {"<"}
+          <GalleryLeftIcon />
         </div>
         <div
           onClick={handleNext}
           className={classNames(
-            "conversation-image-full__button conversation-image-full__button--right",
-            { "conversation-image-full__button--show": isButtonsShow }
+            styles["conversation-image-full__button--right"],
+            styles["conversation-image-full__button"],
+            { [styles["conversation-image-full__button--show"]]: isButtonsShow }
           )}
         >
-          {">"}
+          <GalleryRightIcon />
         </div>
       </div>
     </EventListener>

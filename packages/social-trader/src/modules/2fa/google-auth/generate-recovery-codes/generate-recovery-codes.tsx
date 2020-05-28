@@ -22,7 +22,7 @@ const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
   );
   if (!disabled) return null;
   return (
-    <div className="generate-recovery-codes">
+    <div>
       <GVButton noPadding variant="text" type="button" onClick={setOpenPopup}>
         {t("2fa-page.codes.generate-recovery-codes")}
       </GVButton>

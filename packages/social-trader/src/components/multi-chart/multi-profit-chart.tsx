@@ -1,6 +1,6 @@
 import ProfitChart from "components/chart/profit-chart";
 import { DashboardAssetChart } from "gv-api-web";
-import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import ProgramProfitTooltip from "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-tooltip";
 import * as React from "react";
 

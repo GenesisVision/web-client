@@ -1,7 +1,6 @@
-import "components/details/details-description-section/details-statistic-section/details-history/structure.scss";
+import classNames from "classnames";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
@@ -21,6 +20,7 @@ import { formatDate } from "utils/dates";
 import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
 import { getFundReallocateHistory } from "../../services/fund-details.service";
 import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
+import styles from "./fund-reallocate-history.module.scss";
 
 const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
@@ -46,11 +46,21 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
       )}
       renderBodyRow={(item: ReallocationModel) => (
         <TableRow stripy>
-          <TableCell className="details-structure__cell details-structure__cell--reallocate-date">
+          <TableCell
+            className={classNames(
+              styles["details-structure__cell"],
+              styles["details-structure__cell--reallocate-date"]
+            )}
+          >
             {formatDate(item.date)}
           </TableCell>
-          <TableCell className="details-structure__cell details-structure__cell--reallocate-funds">
-            <div className="details-structure__funds-asset">
+          <TableCell
+            className={classNames(
+              styles["details-structure__cell"],
+              styles["details-structure__cell--reallocate-funds"]
+            )}
+          >
+            <div className={styles["details-structure__funds-asset"]}>
               <FundAssetContainer
                 noWrap
                 assets={item.parts}

@@ -2,6 +2,8 @@ import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
 
+import styles from "../accordion/accordion.module.scss";
+
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
 
@@ -47,7 +49,7 @@ const _AccordionContent: React.FC<Props> = ({
   return transitions.map(({ item, props, key }) => {
     return item ? (
       <animated.div ref={containerRef} key={key} style={props}>
-        <div ref={innerRef} className="accordion__content">
+        <div ref={innerRef} className={styles["accordion__content"]}>
           {content}
         </div>
       </animated.div>

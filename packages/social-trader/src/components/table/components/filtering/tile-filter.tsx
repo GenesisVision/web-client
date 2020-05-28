@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
 import { ITileFilterItemProps } from "./tile-filter-item";
-import "./tile-filter.scss";
+import styles from "./tile-filter.module.scss";
 
 const TileFilter: React.FC<Props> = ({
   selectedTiles,
@@ -52,7 +52,7 @@ const TileFilter: React.FC<Props> = ({
     <RowItem>
       <Row>
         <RowItem large>
-          <Row className="tile-filter__items">{selectedItems}</Row>
+          <Row className={styles["tile-filter__items"]}>{selectedItems}</Row>
         </RowItem>
         <RowItem>
           <TileFilterButton

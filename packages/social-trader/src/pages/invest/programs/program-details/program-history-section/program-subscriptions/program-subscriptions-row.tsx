@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import AssetStatusLabel from "components/asset-status/asset-status-label";
+import styles from "components/fee-commission/fee-commission.module.scss";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { TableCell, TableRow } from "components/table/components";
@@ -33,11 +34,12 @@ const _ProgramSubscriptionsRow: React.FC<Props> = ({
         />
       </Profitability>
     </TableCell>
-    <TableCell className="subscription-fees">
+    <TableCell>
       <SubscriptionsFeesTooltip subscription={subscription}>
         <span
           className={classNames({
-            "fee-commission__value": subscription.totalCommissionAmount > 0
+            [styles["fee-commission__value"]]:
+              subscription.totalCommissionAmount > 0
           })}
         >
           {formatValue(

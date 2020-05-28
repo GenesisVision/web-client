@@ -1,4 +1,5 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
+import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
 import StatisticItem from "components/statistic-item/statistic-item";
 import { statisticCurrencySelector } from "pages/invest/funds/fund-details/reducers/statistic-currency.reducer";
 import * as React from "react";
@@ -57,7 +58,7 @@ const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className="details-tooltip"
+      className={styles["details-tooltip"]}
     />
   );
 };

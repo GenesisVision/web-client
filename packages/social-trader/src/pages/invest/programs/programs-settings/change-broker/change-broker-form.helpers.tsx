@@ -27,7 +27,7 @@ export const HuobiWarning: React.FC<IHuobiWarningProps> = ({
   const [t] = useTranslation();
   return from === "Genesis Markets" && to === "Huobi" && isSignalProgram ? (
     <Row>
-      <FormTextField topPadding accent>
+      <FormTextField accent>
         {t("program-settings.broker.text-warning")}
       </FormTextField>
     </Row>

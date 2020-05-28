@@ -3,24 +3,20 @@ import { SimpleNumberField } from "components/simple-fields/simple-number-field"
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import AssetField from "../asset-fields/asset-field";
-
 const _StopOutField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
-    <AssetField>
-      <AssetFormField
-        wide
-        name={name}
-        label={t("create-program-page.settings.fields.stop-out-level")}
-        adornment="%"
-        component={SimpleNumberField}
-        hintTooltipContent={t(
-          "create-program-page.settings.hints.stop-out-level-description"
-        )}
-        hintContent={t("create-program-page.settings.hints.stop-out-level")}
-      />
-    </AssetField>
+    <AssetFormField
+      wide
+      name={name}
+      label={t("create-program-page.settings.fields.stop-out-level")}
+      adornment="%"
+      component={SimpleNumberField}
+      hintTooltipContent={t(
+        "create-program-page.settings.hints.stop-out-level-description"
+      )}
+      hintContent={t("create-program-page.settings.hints.stop-out-level")}
+    />
   );
 };
 

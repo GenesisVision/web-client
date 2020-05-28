@@ -27,6 +27,7 @@ const _DetailsAssetAvatar: React.FC<Props> = ({
   return (
     <>
       <AssetAvatar
+        levelColor={"#131e26"}
         url={logo}
         level={level}
         levelProgress={levelProgress}

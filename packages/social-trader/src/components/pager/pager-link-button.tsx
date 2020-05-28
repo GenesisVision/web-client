@@ -1,5 +1,3 @@
-import "./pager.scss";
-
 import Link from "components/link/link";
 import { useRouter } from "next/router";
 import * as querystring from "querystring";

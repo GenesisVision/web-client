@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { Row } from "components/row/row";
@@ -44,7 +46,10 @@ const _ProgramTrades: React.FC<Props> = ({
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
   const renderCell = (name: string) => (
     <span
-      className={`details-trades__head-cell program-details-trades__cell--${name}`}
+      className={classNames(
+        styles[`details-trades__head-cell`],
+        styles[`program-details-trades__cell--${column.name}`]
+      )}
     >
       {t(`program-details-page.history.trades.${name}`)}
     </span>

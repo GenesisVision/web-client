@@ -1,9 +1,13 @@
-import "./search-icon.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+import { SizesType } from "utils/types";
 
-const SearchIcon: React.FC<{ primary: boolean }> = ({ primary }) => {
+import styles from "./search-icon.module.scss";
+
+const SearchIcon: React.FC<{ size?: SizesType; primary: boolean }> = ({
+  size,
+  primary
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +15,10 @@ const SearchIcon: React.FC<{ primary: boolean }> = ({ primary }) => {
       height="18"
       viewBox="0 0 18 18"
       fill="none"
-      className={classNames("search-icon", { "search-icon--primary": primary })}
+      className={classNames(styles["search-icon"], {
+        [styles["search-icon--small"]]: size === "small",
+        [styles["search-icon--primary"]]: primary
+      })}
     >
       <path
         fillRule="evenodd"

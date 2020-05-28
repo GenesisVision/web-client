@@ -1,0 +1,15 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.asset-tag {
+  font-size: $font-size-small;
+  &__arrow {
+    font-size: 18px;
+    line-height: $font-size-small;
+  }
+}
+
+.repost-tag-container {
+  padding-left: $padding-xsmall;
+  border-left: 1px solid $border-color;
+}

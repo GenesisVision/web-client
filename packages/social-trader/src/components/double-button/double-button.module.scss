@@ -1,0 +1,23 @@
+@import "~shared/styles/_colors";
+
+.double-button {
+  width: 100%;
+  &--first,
+  &--second {
+    border-width: 0.1em !important; // TODO
+    border-style: solid !important;
+    opacity: 1 !important;
+    width: 50% !important;
+  }
+  &--first {
+    border-right-width: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  &--second {
+    border-left-width: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
+}

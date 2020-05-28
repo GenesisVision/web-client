@@ -1,9 +1,10 @@
-import "./style.scss";
-
 import classNames from "classnames";
 import React from "react";
 
+import styles from "./style.module.scss";
+
 export enum GV_BTN_SIZE {
+  XSMALL = "XSMALL",
   SMALL = "SMALL",
   LARGE = "LARGE",
   BIG = "BIG",
@@ -25,7 +26,6 @@ export interface GVButtonProps {
   className?: string;
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  children?: string | JSX.Element;
   name?: string;
   noPadding?: boolean;
 }
@@ -49,22 +49,23 @@ const GVButton: React.FC<GVButtonProps> = ({
   name,
   noPadding
 }) => {
-  const classname = classNames("gv-btn", className, {
-    "gv-btn--successful": isSuccessful,
-    "gv-btn--pending": isPending,
-    "gv-btn--bold": bold,
-    "gv-btn--wide": wide,
-    "gv-btn--large": size === GV_BTN_SIZE.LARGE,
-    "gv-btn--big": size === GV_BTN_SIZE.BIG,
-    "gv-btn--small": size === GV_BTN_SIZE.SMALL,
-    "gv-btn--danger": color === "danger",
-    "gv-btn--primary": color === "primary",
-    "gv-btn--secondary": color === "secondary",
-    "gv-btn--primary-dark": color === "primary-dark",
-    "gv-btn--text": variant === "text",
-    "gv-btn--outlined": variant === "outlined",
-    "gv-btn--contained": variant === "contained",
-    "gv-btn--no-padding": noPadding
+  const classname = classNames(styles["gv-btn"], className, {
+    [styles["gv-btn--successful"]]: isSuccessful,
+    [styles["gv-btn--pending"]]: isPending,
+    [styles["gv-btn--bold"]]: bold,
+    [styles["gv-btn--wide"]]: wide,
+    [styles["gv-btn--large"]]: size === GV_BTN_SIZE.LARGE,
+    [styles["gv-btn--big"]]: size === GV_BTN_SIZE.BIG,
+    [styles["gv-btn--small"]]: size === GV_BTN_SIZE.SMALL,
+    [styles["gv-btn--xsmall"]]: size === GV_BTN_SIZE.XSMALL,
+    [styles["gv-btn--danger"]]: color === "danger",
+    [styles["gv-btn--primary"]]: color === "primary",
+    [styles["gv-btn--secondary"]]: color === "secondary",
+    [styles["gv-btn--primary-dark"]]: color === "primary-dark",
+    [styles["gv-btn--text"]]: variant === "text",
+    [styles["gv-btn--outlined"]]: variant === "outlined",
+    [styles["gv-btn--contained"]]: variant === "contained",
+    [styles["gv-btn--no-padding"]]: noPadding
   });
   return (
     <button
@@ -78,15 +79,15 @@ const GVButton: React.FC<GVButtonProps> = ({
       name={name}
     >
       <span
-        className={classNames("gv-btn__label", {
-          "gv-btn__label--success": isSuccessful
+        className={classNames(styles["gv-btn__label"], {
+          [styles["gv-btn__label--success"]]: isSuccessful
         })}
       >
         {children}
       </span>
       <span
-        className={classNames("gv-btn__success-symbol", {
-          "gv-btn__success-symbol--success": isSuccessful
+        className={classNames(styles["gv-btn__success-symbol"], {
+          [styles["gv-btn__success-symbol--success"]]: isSuccessful
         })}
       >
         ✔

@@ -1,9 +1,10 @@
-import "./muted-text.scss";
-
 import classNames from "classnames";
 import React from "react";
 
+import styles from "./muted-text.module.scss";
+
 export const MutedText: React.FC<Props> = ({
+  className,
   small,
   big,
   children,
@@ -12,12 +13,16 @@ export const MutedText: React.FC<Props> = ({
 }) => {
   return (
     <span
-      className={classNames("muted-text", {
-        "muted-text--small": small,
-        "muted-text--big": big,
-        "muted-text--bold": bold,
-        "muted-text--no-wrap": noWrap
-      })}
+      className={classNames(
+        styles["muted-text"],
+        {
+          [styles["muted-text--small"]]: small,
+          [styles["muted-text--big"]]: big,
+          [styles["muted-text--bold"]]: bold,
+          [styles["muted-text--no-wrap"]]: noWrap
+        },
+        className
+      )}
     >
       {children}
     </span>
@@ -25,6 +30,7 @@ export const MutedText: React.FC<Props> = ({
 };
 
 interface Props {
+  className?: string;
   small?: boolean;
   big?: boolean;
   noWrap?: boolean;

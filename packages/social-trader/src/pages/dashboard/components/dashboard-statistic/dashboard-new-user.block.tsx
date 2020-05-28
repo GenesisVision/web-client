@@ -1,11 +1,14 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { Row } from "components/row/row";
 import React from "react";
+
+import styles from "./dashboard-statistic.module.scss";
 
 const _DashboardNewUserBlock: React.FC<Props> = ({ leftField, rightField }) => {
   return (
-    <div className="dashboard-new-user-block">
+    <div className={styles["dashboard-new-user-block"]}>
       <DashboardNewUserBlockField field={leftField} />
       <DashboardNewUserBlockField field={rightField} />
     </div>
@@ -17,15 +20,15 @@ const DashboardNewUserBlockField: React.FC<{
 }> = React.memo(({ field: { linkLabel, link, text } }) => {
   const { linkCreator } = useToLink();
   return (
-    <div className="dashboard-new-user-block__field">
-      <div className="dashboard-new-user-block__text">{text}</div>
-      <div className="dashboard-new-user-block__button">
+    <div className={styles["dashboard-new-user-block__field"]}>
+      <div className={styles["dashboard-new-user-block__text"]}>{text}</div>
+      <Row className={styles["dashboard-new-user-block__button"]}>
         <Link to={linkCreator(link)}>
           <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
             {linkLabel}
           </GVButton>
         </Link>
-      </div>
+      </Row>
     </div>
   );
 });

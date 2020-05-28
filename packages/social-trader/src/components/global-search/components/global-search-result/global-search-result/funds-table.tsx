@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import { Table } from "components/table/components";
 import { FundDetailsListItemItemsViewModel } from "gv-api-web";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/components/funds-table/funds-table.constants";
+import styles from "modules/funds-table/components/funds-table/funds-table.module.scss";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
@@ -14,7 +16,12 @@ const FundsTable: React.FC<SearchTableProps<FundDetailsListItemItemsViewModel> &
       columns={FUNDS_TABLE_COLUMNS}
       items={data.items}
       renderHeader={column => (
-        <span className={`funds-table__cell funds-table__cell--${column.name}`}>
+        <span
+          className={classNames(
+            styles["funds-table__cell"],
+            styles[`funds-table__cell--${column.name}`]
+          )}
+        >
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}

@@ -1,6 +1,5 @@
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
-import { SortingColumn } from "components/table/components/filtering/filter.type";
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -37,7 +36,10 @@ const _ProgramOpenPositions: React.FC<Props> = ({
   if (!programId) return null;
   const renderCell = (name: string) => (
     <span
-      className={`details-trades__head-cell program-details-trades__cell--${name}`}
+      className={classNames(
+        styles["details-trades__head-cell"],
+        styles[`program-details-trades__cell--${column.name}`]
+      )}
     >
       {t(`program-details-page.history.open-positions.${name}`)}
     </span>
