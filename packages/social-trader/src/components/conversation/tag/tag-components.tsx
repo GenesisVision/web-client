@@ -108,6 +108,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
   data: { title, amount, currency, percent, changeState }
 }) => {
   const [t] = useTranslation();
+  const color = getAssetTagTextColor(changeState);
   return (
     <div>
       <Row>
@@ -116,7 +117,9 @@ const _EventTag: React.FC<IEventTagProps> = ({
       <Row>
         <RowItem>
           <StatisticItemInner label={t("Amount")}>
-            {amount} {currency}
+            <ColoredText color={color}>
+              {amount} {currency}
+            </ColoredText>
           </StatisticItemInner>
         </RowItem>
       </Row>

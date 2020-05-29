@@ -17,6 +17,13 @@ import uuid from "uuid";
 
 const getTagLoaderData = (): PostTag => ({
   title: "",
+  event: {
+    amount: 0,
+    changeState: "NotChanged",
+    currency: "GVT",
+    percent: 0,
+    title: ""
+  },
   post: {
     isDeleted: false,
     impressionsCount: 0,
