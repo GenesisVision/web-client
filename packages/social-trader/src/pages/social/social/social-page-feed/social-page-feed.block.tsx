@@ -38,7 +38,7 @@ const _SocialPageFeedBlock: React.FC<Props> = () => {
   const isSearch =
     !!searchValue.hashTags.length ||
     !!searchValue.mask ||
-    !!searchValue.tagContent;
+    !!searchValue.tagContent.length;
   return (
     <>
       <Row>

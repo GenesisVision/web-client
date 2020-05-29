@@ -33,7 +33,10 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
 
   const handleSelectTag = useCallback(
     ({ id, name }: AssetSearchResult) => {
-      setSearchValue({ ...searchValue, tagContent: { id, name } });
+      setSearchValue({
+        ...searchValue,
+        tagContent: [...searchValue.tagContent, { id, name }]
+      });
       clearAnchor();
     },
     [searchValue, setSearchValue]

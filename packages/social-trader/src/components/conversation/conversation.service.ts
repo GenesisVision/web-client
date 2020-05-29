@@ -99,7 +99,7 @@ export const getTopPosts = (values: Object): Promise<ConversationFeed> => {
 };
 
 export interface SearchInFeedValues {
-  tagContent?: { id: string; name: string };
+  tagContent: { id: string; name: string }[];
   hashTags: Array<string>;
   mask?: string;
 }
@@ -109,7 +109,7 @@ export const searchInFeed = (searchValues: SearchInFeedValues) => (
 ): Promise<ConversationFeed> => {
   return getFeedMethod({
     ...searchValues,
-    tagContentId: searchValues.tagContent?.id,
+    tagContentIds: searchValues.tagContent.map(({ id }) => id),
     ...values
   });
 };
