@@ -39,7 +39,7 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
             {impressionsCount}
           </StatisticItemInner>
         </RowItem>
-        <RowItem>
+        <RowItem wide>
           <StatisticItemInner label={t("Discuss")}>
             {discussCount}
           </StatisticItemInner>
