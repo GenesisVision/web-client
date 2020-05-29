@@ -1402,6 +1402,10 @@
       }
     },
     "settings": {
+      "social-beta-select": {
+        "label": "Participate in beta testing",
+        "text": "You can take part in beta testing of our new social product. With this special early access, you will be among the first who get access to new social features of our platform. Your participation doesn't require any special skills and will help us to roll out site improvements and new features."
+      },
       "public": {
         "label": "Public investor's profile",
         "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Investors Rating."
