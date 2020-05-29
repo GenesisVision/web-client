@@ -1,6 +1,11 @@
 @import "styles/_colors";
 @import "styles/_sizes";
 
+.event-tag {
+  display: flex;
+  align-items: flex-end;
+}
+
 .asset-tag {
   font-size: $font-size-small;
   &__arrow {

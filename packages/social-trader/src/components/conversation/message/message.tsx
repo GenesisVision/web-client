@@ -27,6 +27,7 @@ const _Message: React.FC<IMessageProps> = ({
   date,
   author: { username, url, logoUrl }
 }) => {
+  const tagsUnderText = tags?.filter(({ type }) => type !== "Event");
   return (
     <div>
       <div
@@ -70,9 +71,9 @@ const _Message: React.FC<IMessageProps> = ({
           )}
         </RowItem>
       </div>
-      {!!tags?.length && (
+      {!!tagsUnderText?.length && (
         <Row wrap small>
-          {generateTagsComponents(tags)}
+          {generateTagsComponents(tagsUnderText)}
         </Row>
       )}
     </div>
