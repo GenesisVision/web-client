@@ -50,11 +50,14 @@ Page.getInitialProps = async ctx => {
     brokerType = "Binance";
   }
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
+  const type = params[TYPE_PARAM_NAME]
+    ? params[TYPE_PARAM_NAME].toLowerCase()
+    : undefined;
   return {
     brokerType,
     authData,
     symbol,
-    type: (params[TYPE_PARAM_NAME] || "").toLowerCase()
+    type
   };
 };
 
