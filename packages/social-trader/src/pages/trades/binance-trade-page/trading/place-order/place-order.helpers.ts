@@ -4,6 +4,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   getDecimalScale,
   getSymbol,
@@ -17,9 +18,10 @@ import {
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
   SymbolPriceFilter,
+  TimeInForce,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
@@ -36,6 +38,7 @@ type PlaceOrderFormSetValueType = (
 ) => void;
 
 export enum TRADE_FORM_FIELDS {
+  timeInForce = "timeInForce",
   stopPrice = "stopPrice",
   price = "price",
   quantity = "quantity",
@@ -43,6 +46,7 @@ export enum TRADE_FORM_FIELDS {
 }
 
 export interface IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.timeInForce]?: TimeInForce;
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
   [TRADE_FORM_FIELDS.price]: number;
@@ -145,6 +149,7 @@ export const usePlaceOrderFormReset = ({
   totalName: string;
   quantityName: string;
 }) => {
+  const { terminalType } = useContext(TradingInfoContext);
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
@@ -174,12 +179,13 @@ export const usePlaceOrderFormReset = ({
 
   useEffect(() => {
     reset({
+      timeInForce: watch().timeInForce,
       stopPrice: outerPrice,
       price: outerPrice,
       quantity,
       total
     });
-  }, [outerPrice]);
+  }, [terminalType, outerPrice]);
 
   const [prevFormState, setPrevFormState] = useState<
     (AnyObjectType & { sliderValue?: number }) | undefined
