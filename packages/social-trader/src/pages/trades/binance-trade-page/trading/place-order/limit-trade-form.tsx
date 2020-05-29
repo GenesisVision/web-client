@@ -3,14 +3,19 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { Slider } from "components/range/range";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import {
+  TIME_IN_FORCE_VALUES,
+  TimeInForceField
+} from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -49,6 +54,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
 }) => {
   const [t] = useTranslation();
 
+  const { terminalType } = useContext(TradingInfoContext);
+  const isFutures = terminalType === "futures";
+
   const {
     minPrice,
     maxPrice,
@@ -80,7 +88,12 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       minQuantity: +minQty,
       minNotional: +minNotional
     }),
-    defaultValues: { price: outerPrice },
+    defaultValues: {
+      [TRADE_FORM_FIELDS.timeInForce]: isFutures
+        ? TIME_IN_FORCE_VALUES[0]
+        : undefined,
+      [TRADE_FORM_FIELDS.price]: outerPrice
+    },
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
@@ -156,6 +169,11 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
+      {isFutures && (
+        <Row>
+          <TimeInForceField orderType={"LIMIT"} />
+        </Row>
+      )}
     </HookForm>
   );
 };

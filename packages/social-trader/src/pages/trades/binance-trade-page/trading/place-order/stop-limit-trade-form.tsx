@@ -1,16 +1,22 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import {
+  TIME_IN_FORCE_VALUES,
+  TimeInForceField
+} from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -49,6 +55,9 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
 }) => {
   const [t] = useTranslation();
 
+  const { terminalType } = useContext(TradingInfoContext);
+  const isFutures = terminalType === "futures";
+
   const {
     minPrice,
     maxPrice,
@@ -81,7 +90,13 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       minQuantity: +minQty,
       minNotional: +minNotional
     }),
-    defaultValues: { stopPrice: outerPrice, price: outerPrice },
+    defaultValues: {
+      [TRADE_FORM_FIELDS.timeInForce]: isFutures
+        ? TIME_IN_FORCE_VALUES[0]
+        : undefined,
+      [TRADE_FORM_FIELDS.stopPrice]: outerPrice,
+      [TRADE_FORM_FIELDS.price]: outerPrice
+    },
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
@@ -165,6 +180,13 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
+      {isFutures && (
+        <Row>
+          <RowItem>
+            <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
+          </RowItem>
+        </Row>
+      )}
     </HookForm>
   );
 };
