@@ -10,9 +10,15 @@ interface Props {}
 
 const _HashTagsBlock: React.FC<Props> = () => {
   const { setSearchValue, searchValue } = useContext(SocialSearchContext);
-  const handleRemoveContentId = useCallback(() => {
-    setSearchValue({ ...searchValue, tagContent: undefined });
-  }, [searchValue, setSearchValue]);
+  const handleRemoveContentId = useCallback(
+    (name: string) => {
+      const tagContent = searchValue.tagContent?.filter(
+        tag => tag.name !== name
+      );
+      setSearchValue({ ...searchValue, tagContent });
+    },
+    [searchValue, setSearchValue]
+  );
   const handleHashTag = useCallback(
     (name: string) => {
       const hashTags = searchValue.hashTags?.filter(tag => tag !== name);
@@ -22,12 +28,18 @@ const _HashTagsBlock: React.FC<Props> = () => {
   );
   return (
     <Center>
-      {searchValue.tagContent && (
-        <HashTag
-          color={"#74ffeb"}
-          onRemove={handleRemoveContentId}
-          name={searchValue.tagContent.name}
-        />
+      {!!searchValue.tagContent.length && (
+        <RowItem>
+          <Center>
+            {searchValue.tagContent.map(({ name }) => (
+              <HashTag
+                color={getRandomColor()}
+                onRemove={handleRemoveContentId}
+                name={name}
+              />
+            ))}
+          </Center>
+        </RowItem>
       )}
       {!!searchValue.hashTags.length && (
         <RowItem>

@@ -30,7 +30,10 @@ const _SocialPageTradersItem: React.FC<Props> = ({
   const { searchValue, setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    setSearchValue({ ...searchValue, tagContent: { id, name: title } });
+    setSearchValue({
+      ...searchValue,
+      tagContent: [...searchValue.tagContent, { id, name: title }]
+    });
   }, [searchValue, url]);
   return (
     <div className={styles["social-page-traders__item"]}>
