@@ -958,7 +958,7 @@ export type ContingencyType = "OCO";
 
 export type NewOrderRespType = "ACK" | "RESULT" | "FULL";
 
-export type TimeInForce = "GTC" | "IOC" | "FOK";
+export type TimeInForce = "GTX" | "GTC" | "IOC" | "FOK";
 
 export type ExecutionType =
   | "NEW"
