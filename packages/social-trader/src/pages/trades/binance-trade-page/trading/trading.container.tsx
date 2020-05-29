@@ -25,37 +25,56 @@ interface Props {
   symbol?: SymbolState;
 }
 
-const _TradingContainer: React.FC<Props> = ({ authData, type, symbol }) => {
+interface ITerminalPropsData {
+  exchangeInfo?: ExchangeInfo;
+  authData?: TradeAuthDataType;
+  terminalType?: TerminalType;
+  symbol?: SymbolState;
+}
+
+const _TradingContainer: React.FC<Props> = ({
+  authData,
+  type = TerminalTypeInitialState,
+  symbol
+}) => {
   const { getExchangeInfo } = useContext(TerminalMethodsContext);
 
-  const [innerType, setInnerType] = useState<TerminalType | undefined>();
   const [isSymbolCorrect, setIsSymbolCorrect] = useState<boolean | undefined>();
   const [exchangeInfo, setExchangeInfo] = useState<ExchangeInfo | undefined>();
+
+  const [checkInfo, setCheckInfo] = useState(false);
+  const [updateExchangeInfo, setUpdateExchangeInfo] = useState(false);
+  const [terminalPropsData, setTerminalPropsData] = useState<
+    ITerminalPropsData
+  >({});
 
   const { sendRequest } = useApiRequest<ExchangeInfo>({
     request: getExchangeInfo
   });
 
   useEffect(() => {
-    setExchangeInfo(undefined);
-    setIsSymbolCorrect(undefined);
-    setInnerType(undefined);
-  }, [type]);
+    setCheckInfo(true);
+  }, [type, symbol]);
 
   useEffect(() => {
-    if (exchangeInfo) {
-      const isSymbolCorrect =
-        !!symbol &&
-        !!exchangeInfo.symbols.find(
-          item => item.symbol === getSymbolFromState(symbol)
-        );
-      setIsSymbolCorrect(isSymbolCorrect);
-    } else {
-      sendRequest()
-        .then(setExchangeInfo)
-        .then(() => setInnerType(type || TerminalTypeInitialState));
-    }
-  }, [symbol, exchangeInfo]);
+    if (checkInfo) setUpdateExchangeInfo(true);
+    else setIsSymbolCorrect(undefined);
+  }, [checkInfo]);
+
+  useEffect(() => {
+    if (updateExchangeInfo) sendRequest().then(setExchangeInfo);
+  }, [updateExchangeInfo]);
+
+  useEffect(() => {
+    if (!updateExchangeInfo || !exchangeInfo) return;
+    const isSymbolCorrect =
+      !!symbol &&
+      !!exchangeInfo.symbols.find(
+        item => item.symbol === getSymbolFromState(symbol)
+      );
+    setIsSymbolCorrect(isSymbolCorrect);
+    setUpdateExchangeInfo(false);
+  }, [exchangeInfo]);
 
   useEffect(() => {
     if (isSymbolCorrect === false) {
@@ -63,29 +82,41 @@ const _TradingContainer: React.FC<Props> = ({ authData, type, symbol }) => {
         SymbolInitialState
       )}`;
       updateTerminalUrl(route);
+      setCheckInfo(false);
+    } else if (isSymbolCorrect === true) {
+      if (exchangeInfo) {
+        setTerminalPropsData({
+          authData,
+          symbol,
+          exchangeInfo,
+          terminalType: type
+        });
+        setCheckInfo(false);
+      }
     }
-  }, [isSymbolCorrect]);
+  }, [isSymbolCorrect, exchangeInfo]);
 
-  const exchangeInfoProp = useMemo(() => exchangeInfo, [
-    exchangeInfo?.serverTime
+  const exchangeInfoProp = useMemo(() => terminalPropsData.exchangeInfo, [
+    terminalPropsData
   ]);
-  const authDataProp = useMemo(() => authData, [
-    authData.publicKey,
-    authData.privateKey
+  const authDataProp = useMemo(() => terminalPropsData.authData, [
+    terminalPropsData
   ]);
-  const symbolProp = useMemo(() => symbol, [
-    symbol?.quoteAsset,
-    symbol?.baseAsset
+  const symbolProp = useMemo(() => terminalPropsData.symbol, [
+    terminalPropsData
+  ]);
+  const terminalTypeProp = useMemo(() => terminalPropsData.terminalType, [
+    terminalPropsData
   ]);
 
-  if (!exchangeInfoProp || !isSymbolCorrect || !innerType) return null;
+  if (!authDataProp || !exchangeInfoProp || !terminalTypeProp) return null;
 
   return (
     <Terminal
       exchangeInfo={exchangeInfoProp}
       authData={authDataProp}
       symbol={symbolProp}
-      terminalType={innerType}
+      terminalType={terminalTypeProp}
     />
   );
 };
