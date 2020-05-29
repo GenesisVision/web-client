@@ -51,7 +51,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
             {profit} %
           </StatisticItemInner>
         </RowItem>
-        <RowItem>
+        <RowItem wide>
           <StatisticItemInner label={t("Investors")}>
             {investorsCount}
           </StatisticItemInner>
