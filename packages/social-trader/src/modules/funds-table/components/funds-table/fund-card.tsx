@@ -31,14 +31,17 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
   currency,
   investorsCount,
   drawdown,
-  topFundAssets
+  topFundAssets,
+  amountTitle
 }) => {
   const [t] = useTranslation();
   return (
     <>
       <TableCardTable wrap>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
+          <StatisticItem
+            label={amountTitle || t("funds-page.funds-header.balance")}
+          >
             <NumberFormat
               value={formatCurrencyValue(amount, currency)}
               suffix={` ${currency}`}
@@ -141,6 +144,7 @@ interface IFundCardTableProps {
   totalAssetsCount: number;
   drawdown: number;
   topFundAssets: Array<FundAssetPercent>;
+  amountTitle?: string;
 }
 
 interface Props {

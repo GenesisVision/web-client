@@ -29,13 +29,19 @@ export const toggleNotificationMethod = ({
   enabled: boolean;
 }) => api.notifications().toggleNotificationSettings(id, enabled);
 
-export const getFundNotifications = (id: string) =>
-  api.notifications().getNotificationsFundSettings(id);
+export const getAssetNotifications = (assetType: ASSETS_TYPES) => {
+  const {
+    getNotificationsFundSettings,
+    getNotificationsProgramSettings,
+    getNotificationsFollowSettings
+  } = api.notifications();
 
-export const getProgramNotifications = (id: string) =>
-  api.notifications().getNotificationsProgramSettings(id);
-
-export const getAssetNotifications = (assetType: ASSETS_TYPES) =>
-  assetType === ASSETS_TYPES.Fund
-    ? getFundNotifications
-    : getProgramNotifications;
+  switch (assetType) {
+    case ASSETS_TYPES.Program:
+      return getNotificationsProgramSettings;
+    case ASSETS_TYPES.Fund:
+      return getNotificationsFundSettings;
+    default:
+      return getNotificationsFollowSettings;
+  }
+};

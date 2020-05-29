@@ -80,6 +80,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const { programDetails, fundDetails } = asset.publicInfo;
   const topFundAssets = fundDetails && fundDetails.topFundAssets;
   const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
+  const amountTitle =
+    asset.assetType === "Fund"
+      ? t("funds-page.funds-header.value")
+      : t("programs-page.programs-header.equity");
+
   return (
     <TableCard
       withOffset={withOffset}
@@ -98,7 +103,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
+          <StatisticItemInner label={amountTitle}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,

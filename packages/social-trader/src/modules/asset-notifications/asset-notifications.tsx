@@ -1,6 +1,7 @@
 import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
+  FollowNotificationSettingList,
   FundNotificationSettingList,
   ProgramNotificationSettingList
 } from "gv-api-web";
@@ -43,7 +44,10 @@ const _AssetNotifications: React.FC<Props> = ({
 };
 
 interface Props {
-  data: ProgramNotificationSettingList | FundNotificationSettingList;
+  data:
+    | ProgramNotificationSettingList
+    | FundNotificationSettingList
+    | FollowNotificationSettingList;
   onSuccess: VoidFunction;
   notifications: NotificationsList;
 }

@@ -54,7 +54,7 @@ const _DashboardTotal: React.FC<Props> = ({
         <PieStatisticItem
           suffix={currency}
           color={$pieAvailableColor}
-          label={t("dashboard-page.total.available")}
+          label={t("dashboard-page.total.wallet")}
           value={wallets}
           total={total}
         />

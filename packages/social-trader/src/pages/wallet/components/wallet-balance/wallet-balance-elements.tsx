@@ -70,7 +70,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
           label={t("wallet-page.trading")}
           suffix={currency}
           color={$piePendingColor}
-          tooltipContentLabel={t("wallet-page.tooltip.pending")}
+          tooltipContentLabel={t("wallet-page.tooltip.trading")}
         />
       </StatisticItemList>
     </Row>
