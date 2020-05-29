@@ -1,11 +1,11 @@
 import withTradeLayout from "decorators/with-trade-layout";
+import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { BinanceTrade } from "pages/trades/binance-trade-page/binance-trade.page";
+import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
+import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import {
-  authCookieService,
-  parseSymbolFromUrlParam
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TradingContainer } from "pages/trades/binance-trade-page/trading/trading.container";
+import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   TerminalType,
   TradeAuthDataType
@@ -16,48 +16,53 @@ import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
 
 interface Props {
+  brokerType?: BrokerTradeServerType;
   authData: TradeAuthDataType;
-  type?: TerminalType;
+  terminalType?: TerminalType;
   symbol?: SymbolState;
 }
 
-const Page: NextPageWithRedux<Props> = ({ authData, type, symbol }) => {
-  return <BinanceTrade authData={authData} type={type} symbol={symbol} />;
+const Page: NextPageWithRedux<Props> = ({
+  brokerType,
+  authData,
+  terminalType,
+  symbol
+}) => {
+  const terminalMethods = getTerminalApiMethods(brokerType, terminalType);
+  return (
+    <TerminalMethodsContextProvider methods={terminalMethods}>
+      <TradingContainer
+        authData={authData}
+        type={terminalType}
+        symbol={symbol}
+      />
+    </TerminalMethodsContextProvider>
+  );
 };
 
 Page.getInitialProps = async ctx => {
-  const { get } = authCookieService(ctx);
-  let authData;
-  let brokerType;
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
   const exchangeAccountId = params["id"];
-  if (exchangeAccountId) {
-    const credentialsData = await api
-      .dashboard(ctx.token)
-      .getExchangeAccountCredentials({ exchangeAccountId });
-    const {
-      credentials: { apiKey, apiSecret },
-      broker: { type }
-    } = credentialsData;
-    authData = {
-      publicKey: apiKey,
-      privateKey: apiSecret
-    };
-    brokerType = type;
-  } else {
-    authData = get();
-    brokerType = "Binance";
-  }
+  const credentialsData = await api
+    .dashboard(ctx.token)
+    .getExchangeAccountCredentials({ exchangeAccountId });
+  const {
+    credentials: { apiKey, apiSecret },
+    broker: { type }
+  } = credentialsData;
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
-  const type = params[TYPE_PARAM_NAME]
+  const terminalType = params[TYPE_PARAM_NAME]
     ? params[TYPE_PARAM_NAME].toLowerCase()
     : undefined;
   return {
-    brokerType,
-    authData,
+    brokerType: type as BrokerTradeServerType,
+    authData: {
+      publicKey: apiKey,
+      privateKey: apiSecret
+    },
     symbol,
-    type
+    terminalType
   };
 };
 
