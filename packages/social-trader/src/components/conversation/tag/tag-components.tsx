@@ -16,19 +16,26 @@ import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
   PlatformAsset,
   Post as PostType,
   PostAssetDetailsWithPrices,
+  PostEvent,
   ProfilePublic,
   SocialPostTagType
 } from "gv-api-web";
 import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
+
+export interface IEventTagProps {
+  data: PostEvent;
+}
 
 export interface IPlatformAssetTagProps {
   platformAssetDetails: PlatformAsset;
@@ -96,6 +103,27 @@ const _RepostTagComponent: React.FC<IRepostTagProps> = ({
   );
 };
 export const RepostTagComponent = React.memo(_RepostTagComponent);
+
+const _EventTag: React.FC<IEventTagProps> = ({
+  data: { title, amount, currency, percent, changeState }
+}) => {
+  const [t] = useTranslation();
+  return (
+    <div>
+      <Row>
+        <RowItem>{title}</RowItem>
+      </Row>
+      <Row>
+        <RowItem>
+          <StatisticItemInner label={t("Amount")}>
+            {amount} {currency}
+          </StatisticItemInner>
+        </RowItem>
+      </Row>
+    </div>
+  );
+};
+export const EventTag = React.memo(_EventTag);
 
 const _AnyTag: React.FC<IAnyTagProps> = ({ name }) => {
   return <>{name}</>;
