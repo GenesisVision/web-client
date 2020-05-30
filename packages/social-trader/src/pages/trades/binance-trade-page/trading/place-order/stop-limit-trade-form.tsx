@@ -60,6 +60,8 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   const { terminalType } = useContext(TradingInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
+  const isFutures = terminalType === "futures";
+
   const {
     minPrice,
     maxPrice,
@@ -170,7 +172,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={t("Total")}
+          label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -184,7 +186,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
         <RowItem wide>
           <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
         </RowItem>
-        {terminalType === "futures" && currentPositionMode === false && (
+        {isFutures && currentPositionMode === false && (
           <RowItem wide>
             <ReduceOnlyField />
           </RowItem>

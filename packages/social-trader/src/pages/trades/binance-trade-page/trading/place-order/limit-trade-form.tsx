@@ -60,6 +60,8 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { terminalType } = useContext(TradingInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
+  const isFutures = terminalType === "futures";
+
   const {
     minPrice,
     maxPrice,
@@ -160,7 +162,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={t("Total")}
+          label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -174,7 +176,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         <RowItem wide>
           <TimeInForceField orderType={"LIMIT"} />
         </RowItem>
-        {terminalType === "futures" && currentPositionMode === false && (
+        {isFutures && currentPositionMode === false && (
           <RowItem wide>
             <ReduceOnlyField />
           </RowItem>

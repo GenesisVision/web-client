@@ -58,6 +58,8 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   const { terminalType } = useContext(TradingInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
+  const isFutures = terminalType === "futures";
+
   const {
     minPrice,
     maxPrice,
@@ -148,7 +150,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={t("Total")}
+          label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -170,7 +172,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
-      {terminalType === "futures" && currentPositionMode === false && (
+      {isFutures && currentPositionMode === false && (
         <Row small>
           <RowItem>
             <ReduceOnlyField />
