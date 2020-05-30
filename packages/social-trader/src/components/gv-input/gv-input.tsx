@@ -44,6 +44,7 @@ const _GvInput: React.FC<Props> = ({
       )}
       <div
         className={classNames(styles["gv-input"], className, {
+          [styles["gv-input--top-offset"]]: !!label,
           [styles["gv-input--bottom-line"]]: bottomLine,
           [styles["gv-input--correct"]]: correct,
           [styles["gv-input--disabled"]]: disabled,

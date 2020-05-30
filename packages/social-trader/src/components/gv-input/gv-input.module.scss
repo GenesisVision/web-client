@@ -2,9 +2,12 @@
 @import "styles/_colors";
 
 .gv-input {
-  margin-top: $padding-small/2;
   display: inline-flex;
   position: relative;
+
+  &--top-offset {
+    margin-top: $padding-small/2;
+  }
 
   &--bottom-line {
     &::before,
