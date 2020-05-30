@@ -36,8 +36,6 @@ import {
 export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   direction: OrderSide;
   onSubmit: (values: IStopLimitFormValues) => any;
 }
@@ -51,13 +49,14 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   exchangeInfo,
   outerPrice,
   onSubmit,
-  quoteAsset,
-  baseAsset,
   direction
 }) => {
   const [t] = useTranslation();
 
-  const { terminalType } = useContext(TradingInfoContext);
+  const {
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const isFutures = terminalType === "futures";

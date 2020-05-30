@@ -13,8 +13,7 @@ import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trad
 import {
   Account,
   ExchangeInfo,
-  OrderSide,
-  TradeCurrency
+  OrderSide
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -34,8 +33,6 @@ import {
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   direction: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
@@ -49,13 +46,14 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   exchangeInfo,
   outerPrice,
   onSubmit,
-  quoteAsset,
-  baseAsset,
   direction
 }) => {
   const [t] = useTranslation();
 
-  const { terminalType } = useContext(TradingInfoContext);
+  const {
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const isFutures = terminalType === "futures";
