@@ -15,8 +15,7 @@ import { Observable } from "rxjs";
 import {
   OrderRequest,
   REQUEST_TYPE,
-  requestService,
-  TimeInForce
+  requestService
 } from "services/request.service";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -155,6 +154,7 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  timeInForce,
   stopPrice,
   authData,
   symbol,
@@ -172,16 +172,14 @@ export const postBuy = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "BUY"
     },
     authData
   );
 
 export const postSell = ({
+  timeInForce,
   stopPrice,
   authData,
   symbol,
@@ -199,10 +197,7 @@ export const postSell = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "SELL"
     },
     authData

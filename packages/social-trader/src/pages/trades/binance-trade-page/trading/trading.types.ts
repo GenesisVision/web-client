@@ -71,6 +71,7 @@ export interface SymbolLeverageBrackets {
 }
 
 export interface TradeRequest {
+  timeInForce?: TimeInForce;
   stopPrice?: number;
   symbol: TradeCurrency;
   price: number;

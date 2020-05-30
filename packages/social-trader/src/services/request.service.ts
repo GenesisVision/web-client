@@ -1,5 +1,6 @@
 import * as crypto from "crypto-js";
 import fetch from "isomorphic-unfetch";
+import { TimeInForce } from "pages/trades/binance-trade-page/trading/trading.types";
 import { from } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
@@ -29,12 +30,6 @@ export interface OrderRequest extends AnyObjectType {
   startTime?: number;
   endTime?: number;
   limit?: number | string;
-}
-
-export enum TimeInForce {
-  GTC = "GTC",
-  IOC = "IOC",
-  FOK = "FOK"
 }
 
 export enum HTTP_METHODS {
