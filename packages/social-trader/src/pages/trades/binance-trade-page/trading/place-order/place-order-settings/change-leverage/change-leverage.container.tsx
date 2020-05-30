@@ -1,9 +1,10 @@
 import useApiRequest from "hooks/api-request.hook";
 import { ChangeLeverage } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
 const _ChangeLeverageContainer: React.FC = () => {
@@ -12,7 +13,7 @@ const _ChangeLeverageContainer: React.FC = () => {
     getLeverageBrackets: getLeverageBracketsMethod
   } = useContext(TerminalMethodsContext);
   const { authData, symbol } = useContext(TradingInfoContext);
-  const [leverage, setLeverage] = useState<number>(20);
+  const { leverage, setLeverage } = useContext(TerminalPlaceOrderContext);
 
   const {
     sendRequest: getLeverageBrackets,
@@ -21,6 +22,7 @@ const _ChangeLeverageContainer: React.FC = () => {
     request: getLeverageBracketsMethod!
   });
   const { sendRequest: changeLeverage } = useApiRequest({
+    middleware: [setLeverage],
     request: changeLeverageMethod!
   });
 
@@ -35,8 +37,6 @@ const _ChangeLeverageContainer: React.FC = () => {
         symbol: getSymbolFromState(symbol),
         authData,
         leverage
-      }).then(() => {
-        setLeverage(leverage);
       });
     },
     [symbol, authData]
