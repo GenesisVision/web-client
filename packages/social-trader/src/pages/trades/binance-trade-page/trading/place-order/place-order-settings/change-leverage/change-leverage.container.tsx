@@ -4,6 +4,7 @@ import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { ChangeLeverageResponse } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useEffect } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
@@ -22,7 +23,9 @@ const _ChangeLeverageContainer: React.FC = () => {
     request: getLeverageBracketsMethod!
   });
   const { sendRequest: changeLeverage } = useApiRequest({
-    middleware: [setLeverage],
+    middleware: [
+      ({ leverage }: ChangeLeverageResponse) => setLeverage(leverage)
+    ],
     request: changeLeverageMethod!
   });
 
