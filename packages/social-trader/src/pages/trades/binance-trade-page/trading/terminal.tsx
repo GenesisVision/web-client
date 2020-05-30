@@ -24,6 +24,7 @@ import {
   TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
+import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
@@ -97,9 +98,11 @@ const _Terminal: React.FC<Props> = ({
               </ResponsiveContainer>
             </div>
             <div className={styles["place-orders-grid-elem"]}>
-              {terminalType === "futures" && <PlaceOrderSettingsContainer />}
-              <PlaceOrder />
-              {terminalType === "futures" && <MarginRatioContainer />}
+              <TerminalPlaceOrderContextProvider>
+                {terminalType === "futures" && <PlaceOrderSettingsContainer />}
+                <PlaceOrder />
+                {terminalType === "futures" && <MarginRatioContainer />}
+              </TerminalPlaceOrderContextProvider>
             </div>
           </TradingPriceContextProvider>
         </TradingTickerContextProvider>

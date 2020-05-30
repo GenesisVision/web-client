@@ -4,25 +4,21 @@ import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 
 const _PositionModeContainer: React.FC = () => {
-  const { changePositionMode, getPositionMode } = useContext(
-    TerminalMethodsContext
+  const { currentPositionMode, updatePositionMode } = useContext(
+    TerminalPlaceOrderContext
   );
+  const { changePositionMode } = useContext(TerminalMethodsContext);
   const { authData, symbol } = useContext(TradingInfoContext);
   const { sendRequest: changePosition } = useApiRequest({
     request: changePositionMode!
   });
-  const { data: currentPositionMode } = useApiRequest({
-    request: getPositionMode!,
-    fetchOnMount: true,
-    fetchOnMountData: { authData }
-  });
   const [mode, setMode] = useState<PositionModeType | undefined>(undefined);
 
   useEffect(() => {
-    if (currentPositionMode?.dualSidePosition !== undefined)
-      setMode(currentPositionMode?.dualSidePosition);
+    if (currentPositionMode !== undefined) setMode(currentPositionMode);
   }, [currentPositionMode]);
 
   const handleOnChange = useCallback(
@@ -32,6 +28,7 @@ const _PositionModeContainer: React.FC = () => {
         dualSidePosition
       }).then(() => {
         setMode(dualSidePosition);
+        updatePositionMode();
       });
     },
     [symbol, authData]
