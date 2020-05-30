@@ -1,6 +1,9 @@
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  LeverageBracket,
+  PositionModeType
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React, {
   createContext,
   useCallback,
@@ -13,6 +16,8 @@ import React, {
 const InitialTerminalLeverageState = 1;
 
 type TradingAccountInfoState = {
+  bracket?: LeverageBracket;
+  setBracket: (bracket?: LeverageBracket) => void;
   leverage: number;
   setLeverage: (leverage: number) => void;
   currentPositionMode?: PositionModeType;
@@ -21,6 +26,7 @@ type TradingAccountInfoState = {
 
 export const TerminalPlaceOrderInitialState: TradingAccountInfoState = {
   leverage: InitialTerminalLeverageState,
+  setBracket: () => {},
   setLeverage: () => {},
   updatePositionMode: () => {}
 };
@@ -33,6 +39,7 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
   const { authData } = useContext(TradingInfoContext);
   const { getPositionMode } = useContext(TerminalMethodsContext);
 
+  const [bracket, setBracket] = useState<LeverageBracket | undefined>();
   const [leverage, setLeverage] = useState(InitialTerminalLeverageState);
   const [currentPositionMode, setCurrentPositionMode] = useState<
     PositionModeType | undefined
@@ -49,8 +56,22 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
   }, [getPositionMode, authData]);
 
   const value = useMemo(
-    () => ({ leverage, setLeverage, updatePositionMode, currentPositionMode }),
-    [leverage, setLeverage, updatePositionMode, currentPositionMode]
+    () => ({
+      bracket,
+      setBracket,
+      leverage,
+      setLeverage,
+      updatePositionMode,
+      currentPositionMode
+    }),
+    [
+      bracket,
+      setBracket,
+      leverage,
+      setLeverage,
+      updatePositionMode,
+      currentPositionMode
+    ]
   );
 
   return (
