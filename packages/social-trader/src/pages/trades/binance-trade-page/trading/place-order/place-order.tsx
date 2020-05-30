@@ -32,6 +32,7 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
+    terminalType,
     authData,
     exchangeInfo,
     accountInfo,
@@ -58,7 +59,8 @@ const _PlaceOrder: React.FC = () => {
     [sendRequest, tradeRequest, authData, baseAsset, quoteAsset, side, tab]
   );
 
-  const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
+  const walletAsset =
+    side === "BUY" || terminalType === "futures" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : undefined;
