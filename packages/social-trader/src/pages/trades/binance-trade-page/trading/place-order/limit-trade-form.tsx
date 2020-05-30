@@ -1,20 +1,24 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import {
   TIME_IN_FORCE_VALUES,
   TimeInForceField
 } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -52,6 +56,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   direction
 }) => {
   const [t] = useTranslation();
+
+  const { terminalType } = useContext(TradingInfoContext);
+  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const {
     minPrice,
@@ -164,7 +171,14 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         asset={baseAsset}
       />
       <Row>
-        <TimeInForceField orderType={"LIMIT"} />
+        <RowItem wide>
+          <TimeInForceField orderType={"LIMIT"} />
+        </RowItem>
+        {terminalType === "futures" && currentPositionMode === false && (
+          <RowItem wide>
+            <ReduceOnlyField />
+          </RowItem>
+        )}
       </Row>
     </HookForm>
   );

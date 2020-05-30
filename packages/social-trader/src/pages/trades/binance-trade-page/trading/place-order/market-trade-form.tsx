@@ -2,17 +2,21 @@ import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -50,6 +54,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   direction
 }) => {
   const [t] = useTranslation();
+
+  const { terminalType } = useContext(TradingInfoContext);
+  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const {
     minPrice,
@@ -163,6 +170,13 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
+      {terminalType === "futures" && currentPositionMode === false && (
+        <Row>
+          <RowItem>
+            <ReduceOnlyField />
+          </RowItem>
+        </Row>
+      )}
     </HookForm>
   );
 };

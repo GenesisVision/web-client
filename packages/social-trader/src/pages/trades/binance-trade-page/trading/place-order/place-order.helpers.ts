@@ -38,6 +38,7 @@ type PlaceOrderFormSetValueType = (
 ) => void;
 
 export enum TRADE_FORM_FIELDS {
+  reduceOnly = "reduceOnly",
   timeInForce = "timeInForce",
   stopPrice = "stopPrice",
   price = "price",
@@ -46,6 +47,7 @@ export enum TRADE_FORM_FIELDS {
 }
 
 export interface IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.reduceOnly]?: boolean;
   [TRADE_FORM_FIELDS.timeInForce]?: TimeInForce;
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
