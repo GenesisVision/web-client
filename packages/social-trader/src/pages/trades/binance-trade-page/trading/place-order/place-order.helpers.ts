@@ -219,6 +219,7 @@ export const usePlaceOrderInfo = ({
   quoteAsset: TradeCurrency;
   balances: AssetBalance[];
 }) => {
+  const { terminalType } = useContext(TradingInfoContext);
   const filters = getSymbolFilters(
     exchangeInfo,
     getSymbol(baseAsset, quoteAsset)
@@ -230,7 +231,13 @@ export const usePlaceOrderInfo = ({
   const maxQuantityWithWallet = useMemo(() => {
     return side === "BUY"
       ? +maxQty
-      : Math.min(+maxQty, +getBalance(balances, baseAsset));
+      : Math.min(
+          +maxQty,
+          +getBalance(
+            balances,
+            terminalType === "futures" ? quoteAsset : baseAsset
+          )
+        );
   }, [side, maxQty, balances, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
@@ -271,6 +278,7 @@ export const useTradeSlider = ({
   totalName: string;
   quantityName: string;
 }) => {
+  const { terminalType } = useContext(TradingInfoContext);
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
@@ -288,7 +296,10 @@ export const useTradeSlider = ({
       setValue(totalName, newTotal, true);
     }
     if (side === "SELL") {
-      const walletAvailable = +getBalance(balances, baseAsset);
+      const walletAvailable = +getBalance(
+        balances,
+        terminalType === "futures" ? quoteAsset : baseAsset
+      );
       const percentAmount = calculatePercentage(walletAvailable, percentValue);
       if (
         truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
