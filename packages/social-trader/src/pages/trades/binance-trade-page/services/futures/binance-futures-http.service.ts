@@ -338,6 +338,7 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  reduceOnly,
   timeInForce,
   stopPrice,
   authData,
@@ -348,6 +349,7 @@ export const postBuy = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
