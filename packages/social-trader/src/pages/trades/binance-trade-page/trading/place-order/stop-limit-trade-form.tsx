@@ -9,14 +9,13 @@ import {
   TimeInForceField
 } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -55,9 +54,6 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
 }) => {
   const [t] = useTranslation();
 
-  const { terminalType } = useContext(TradingInfoContext);
-  const isFutures = terminalType === "futures";
-
   const {
     minPrice,
     maxPrice,
@@ -91,9 +87,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       minNotional: +minNotional
     }),
     defaultValues: {
-      [TRADE_FORM_FIELDS.timeInForce]: isFutures
-        ? TIME_IN_FORCE_VALUES[0]
-        : undefined,
+      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0],
       [TRADE_FORM_FIELDS.stopPrice]: outerPrice,
       [TRADE_FORM_FIELDS.price]: outerPrice
     },
@@ -180,13 +174,11 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
-      {isFutures && (
-        <Row>
-          <RowItem>
-            <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
-          </RowItem>
-        </Row>
-      )}
+      <Row>
+        <RowItem>
+          <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
+        </RowItem>
+      </Row>
     </HookForm>
   );
 };
