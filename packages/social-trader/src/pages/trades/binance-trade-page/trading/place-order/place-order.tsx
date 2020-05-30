@@ -55,7 +55,7 @@ const _PlaceOrder: React.FC = () => {
         authData
       });
     },
-    [authData, baseAsset, quoteAsset, side, tab]
+    [sendRequest, tradeRequest, authData, baseAsset, quoteAsset, side, tab]
   );
 
   const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
