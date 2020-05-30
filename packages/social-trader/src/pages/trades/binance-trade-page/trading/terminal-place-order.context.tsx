@@ -13,7 +13,8 @@ import React, {
   useState
 } from "react";
 
-const InitialTerminalLeverageState = 1;
+const InitialSpotTerminalLeverageState = 1;
+const InitialFuturesTerminalLeverageState = 20;
 
 type TradingAccountInfoState = {
   bracket?: LeverageBracket;
@@ -25,7 +26,7 @@ type TradingAccountInfoState = {
 };
 
 export const TerminalPlaceOrderInitialState: TradingAccountInfoState = {
-  leverage: InitialTerminalLeverageState,
+  leverage: InitialSpotTerminalLeverageState,
   setBracket: () => {},
   setLeverage: () => {},
   updatePositionMode: () => {}
@@ -36,14 +37,26 @@ export const TerminalPlaceOrderContext = createContext<TradingAccountInfoState>(
 );
 
 export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
-  const { authData } = useContext(TradingInfoContext);
+  const { authData, terminalType } = useContext(TradingInfoContext);
   const { getPositionMode } = useContext(TerminalMethodsContext);
 
   const [bracket, setBracket] = useState<LeverageBracket | undefined>();
-  const [leverage, setLeverage] = useState(InitialTerminalLeverageState);
+  const [leverage, setLeverage] = useState(
+    terminalType === "futures"
+      ? InitialFuturesTerminalLeverageState
+      : InitialSpotTerminalLeverageState
+  );
   const [currentPositionMode, setCurrentPositionMode] = useState<
     PositionModeType | undefined
   >();
+
+  useEffect(() => {
+    setLeverage(
+      terminalType === "futures"
+        ? InitialFuturesTerminalLeverageState
+        : InitialSpotTerminalLeverageState
+    );
+  }, [terminalType]);
 
   useEffect(() => {
     if (getPositionMode)
