@@ -177,7 +177,16 @@ export const usePlaceOrderFormReset = ({
       quantity,
       total
     });
-  }, [terminalType, outerPrice]);
+  }, [outerPrice]);
+
+  useEffect(() => {
+    setSliderValue(0);
+    reset({
+      timeInForce: watch().timeInForce,
+      stopPrice: outerPrice,
+      price: outerPrice
+    });
+  }, [terminalType]);
 
   const [prevFormState, setPrevFormState] = useState<
     (AnyObjectType & { sliderValue?: number }) | undefined
