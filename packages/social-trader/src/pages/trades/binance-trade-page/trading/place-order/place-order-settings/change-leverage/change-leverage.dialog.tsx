@@ -6,12 +6,15 @@ import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
 import Regulator from "components/regulator/regulator";
 import { Row } from "components/row/row";
-import React, { useCallback, useState } from "react";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { LeverageBracket } from "pages/trades/binance-trade-page/trading/trading.types";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./change-leverage.module.scss";
 
 interface Props {
+  leverageBrackets: LeverageBracket[];
   maxLeverage: number;
   onClose?: VoidFunction;
   onChange: (leverage: number) => void;
@@ -47,6 +50,7 @@ export const ChangeLeverageDialog: React.FC<Props &
 };
 
 const ChangeLeverageDialogContent: React.FC<Props> = ({
+  leverageBrackets,
   maxLeverage,
   onClose,
   leverage: leverageProp,
@@ -55,6 +59,18 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
   const [t] = useTranslation();
   const RANGE_MARKS = generateLeverageMarks(maxLeverage);
   const [leverage, setLeverage] = useState<number>(leverageProp);
+
+  const { bracket, setBracket } = useContext(TerminalPlaceOrderContext);
+
+  useEffect(() => {
+    const bracket = [...leverageBrackets]
+      .reverse()
+      .find(({ initialLeverage }) => {
+        return leverage <= initialLeverage;
+      });
+    setBracket(bracket);
+  }, [leverage]);
+
   const handleClickRegulator = useCallback(
     (value: number) => () => {
       setLeverage(leverage + value);
@@ -100,7 +116,10 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
         </Row>
         <Row>
           <MutedText noWrap={false}>
-            {t(`Maximum position at current leverage ${maxLeverage} USDT`)}
+            {t(
+              `Maximum position at current leverage ${bracket?.notionalCap ||
+                0} USDT`
+            )}
           </MutedText>
         </Row>
         <Row>

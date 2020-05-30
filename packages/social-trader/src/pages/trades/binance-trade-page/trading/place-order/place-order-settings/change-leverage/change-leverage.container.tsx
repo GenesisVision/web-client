@@ -42,16 +42,22 @@ const _ChangeLeverageContainer: React.FC = () => {
     [symbol, authData]
   );
 
-  const maxLeverage = leverageBrackets
+  const symbolBrackets = leverageBrackets
     ? safeGetElemFromArray(
         leverageBrackets,
         brackets => brackets.symbol === getSymbolFromState(symbol)
       ).brackets.sort((a, b) => {
         return b.initialLeverage - a.initialLeverage;
-      })[0].initialLeverage
-    : 100;
+      })
+    : undefined;
+
+  if (!symbolBrackets) return null;
+
+  const maxLeverage = symbolBrackets[0].initialLeverage;
+
   return (
     <ChangeLeverage
+      leverageBrackets={symbolBrackets}
       maxLeverage={maxLeverage}
       leverage={leverage}
       onChange={handleOnChange}
