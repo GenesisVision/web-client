@@ -46,7 +46,9 @@ const _ChangeLeverageContainer: React.FC = () => {
     ? safeGetElemFromArray(
         leverageBrackets,
         brackets => brackets.symbol === getSymbolFromState(symbol)
-      ).brackets[0].initialLeverage
+      ).brackets.sort((a, b) => {
+        return b.initialLeverage - a.initialLeverage;
+      })[0].initialLeverage
     : 100;
   return (
     <ChangeLeverage
