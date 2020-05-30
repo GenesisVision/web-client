@@ -27,7 +27,7 @@ const _ChangeLeverageContainer: React.FC = () => {
   useEffect(() => {
     if (authData.privateKey)
       getLeverageBrackets({ authData, symbol: getSymbolFromState(symbol) });
-  }, [authData]);
+  }, [authData, symbol]);
 
   const handleOnChange = useCallback(
     (leverage: number) => {
