@@ -131,15 +131,17 @@ export const getPositionMode = ({
   authData
 }: {
   authData: TradeAuthDataType;
-}): Promise<PositionModeResponse> =>
-  requestService.get(
-    {
-      ...authData,
-      url: `${API_ROUTE}/positionSide/dual`,
-      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
-    },
-    value => value
-  );
+}): Promise<PositionModeType> =>
+  requestService
+    .get(
+      {
+        ...authData,
+        url: `${API_ROUTE}/positionSide/dual`,
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(({ dualSidePosition }: PositionModeResponse) => dualSidePosition);
 
 export const getPositionInformation = ({
   authData
@@ -361,6 +363,7 @@ export const postBuy = ({
   );
 
 export const postSell = ({
+  reduceOnly,
   timeInForce,
   stopPrice,
   authData,
@@ -371,6 +374,7 @@ export const postSell = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,

@@ -131,7 +131,7 @@ export interface ITerminalMethods {
   }) => Promise<HttpResponse>;
   getPositionMode?: (options: {
     authData: TradeAuthDataType;
-  }) => Promise<PositionModeResponse>;
+  }) => Promise<PositionModeType>;
   changePositionMode?: (options: {
     dualSidePosition: PositionModeType;
     authData: TradeAuthDataType;
