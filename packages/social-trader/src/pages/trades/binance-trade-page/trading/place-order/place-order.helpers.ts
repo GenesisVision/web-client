@@ -307,11 +307,14 @@ export const useTradeSlider = ({
 export const getBalance = (balances: AssetBalance[], currency: TradeCurrency) =>
   safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
 
-export const getMinNotionalFilter = (filters: SymbolFilter[]) =>
-  safeGetElemFromArray(
-    filters,
-    ({ filterType }) => filterType === "MIN_NOTIONAL"
-  ) as SymbolMinNotionalFilter;
+export const getMinNotionalFilter = (filters: SymbolFilter[]) => {
+  return (filters.find(({ filterType }) => filterType === "MIN_NOTIONAL") || {
+    applyToMarket: false,
+    avgPriceMins: 0,
+    filterType: "MIN_NOTIONAL",
+    minNotional: 0
+  }) as SymbolMinNotionalFilter;
+};
 
 export const getSymbolPriceFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(
