@@ -10,7 +10,7 @@ const _ReduceOnlyField: React.FC = () => {
     <GVHookFormField
       size={"small"}
       type="checkbox"
-      name={TRADE_FORM_FIELDS.timeInForce}
+      name={TRADE_FORM_FIELDS.reduceOnly}
       label={t("Reduce only")}
       component={GVCheckbox}
     />
