@@ -18,7 +18,8 @@ const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
   const ticker = useContext(TradingTickerContext);
   const { tickSize, terminalType } = useContext(TradingInfoContext);
   const symbol = getSymbol(asset, "BTC");
-  const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
+  // const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
+  const price = "0";
   const total = formatValueWithTick(+available + +locked, "0.00000001");
   const btcValue = formatValueWithTick(+total * +price, tickSize);
   return (
