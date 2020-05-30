@@ -67,21 +67,18 @@ export const usePlaceOrderAutoFill = ({
   setValue,
   total,
   price,
-  stepSize,
   quantity,
-  tickSize,
   totalName,
   quantityName
 }: {
   total: number;
   price: number;
   quantity: number;
-  tickSize: string;
-  stepSize: string;
   setValue: PlaceOrderFormSetValueType;
   totalName: string;
   quantityName: string;
 }) => {
+  const { stepSize, tickSize } = useContext(TradingInfoContext);
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
@@ -127,28 +124,22 @@ export const usePlaceOrderAutoFill = ({
 export const usePlaceOrderFormReset = ({
   status,
   triggerValidation,
-  stepSize,
   outerPrice,
   reset,
   watch,
   setValue,
   side,
-  baseAsset,
-  quoteAsset,
   balances,
   totalName,
   quantityName
 }: {
   status: API_REQUEST_STATUS;
   triggerValidation: VoidFunction;
-  stepSize: string;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
   outerPrice: number;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
   totalName: string;
   quantityName: string;
@@ -157,9 +148,6 @@ export const usePlaceOrderFormReset = ({
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
-    stepSize,
-    baseAsset,
-    quoteAsset,
     side,
     setValue,
     balances,
@@ -208,24 +196,23 @@ export const usePlaceOrderFormReset = ({
 
 export const usePlaceOrderInfo = ({
   exchangeInfo,
-  baseAsset,
-  quoteAsset,
   balances,
   side
 }: {
   exchangeInfo: ExchangeInfo;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
 }) => {
-  const { terminalType } = useContext(TradingInfoContext);
+  const {
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
   const filters = getSymbolFilters(
     exchangeInfo,
     getSymbol(baseAsset, quoteAsset)
   );
-  const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
-  const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
+  const { minPrice, maxPrice } = getSymbolPriceFilter(filters);
+  const { minQty, maxQty } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
   const maxQuantityWithWallet = useMemo(() => {
@@ -248,9 +235,7 @@ export const usePlaceOrderInfo = ({
   return {
     minPrice,
     maxPrice,
-    tickSize,
     minQty,
-    stepSize,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -259,26 +244,24 @@ export const usePlaceOrderInfo = ({
 
 export const useTradeSlider = ({
   watch,
-  stepSize,
   setValue,
   side,
   balances,
-  quoteAsset,
-  baseAsset,
   totalName,
   quantityName
 }: {
   watch: () => AnyObjectType;
-  stepSize: string;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
   totalName: string;
   quantityName: string;
 }) => {
-  const { terminalType } = useContext(TradingInfoContext);
+  const {
+    symbol: { quoteAsset, baseAsset },
+    stepSize,
+    terminalType
+  } = useContext(TradingInfoContext);
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {

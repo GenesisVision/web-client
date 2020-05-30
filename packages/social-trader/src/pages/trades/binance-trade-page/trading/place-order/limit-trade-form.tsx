@@ -53,6 +53,8 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const [t] = useTranslation();
 
   const {
+    tickSize,
+    stepSize,
     symbol: { baseAsset, quoteAsset },
     terminalType
   } = useContext(TradingInfoContext);
@@ -63,17 +65,13 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const {
     minPrice,
     maxPrice,
-    tickSize,
     minQty,
-    stepSize,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
     side: direction,
-    quoteAsset,
-    baseAsset,
     exchangeInfo
   });
 
@@ -103,12 +101,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
     status,
     triggerValidation,
-    stepSize,
     outerPrice,
     watch,
     reset,
-    baseAsset,
-    quoteAsset,
     side: direction,
     setValue,
     balances: accountInfo.balances,
@@ -120,10 +115,8 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,
-    tickSize,
     price,
     quantity,
-    stepSize,
     total
   });
 
