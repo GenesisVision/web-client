@@ -180,7 +180,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
-      <Row>
+      <Row small>
         <RowItem wide>
           <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
         </RowItem>

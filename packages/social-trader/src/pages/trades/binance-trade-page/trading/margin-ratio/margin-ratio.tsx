@@ -43,11 +43,14 @@ const _MarginRatio: React.FC<Props> = ({
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
-        <StatisticItemInner big accent label={t("Margin ratio")}>
-          <ColoredText color={getMarginRatioColor(+marginRatio)}>
-            {marginRatio.toFixed(2)} %
-          </ColoredText>
-        </StatisticItemInner>
+        <MarginRatioItem
+          label={t("Margin ratio")}
+          value={
+            <ColoredText color={getMarginRatioColor(+marginRatio)}>
+              <h4>{marginRatio.toFixed(2)} %</h4>
+            </ColoredText>
+          }
+        />
       </Row>
       <Row onlyOffset>
         <MarginRatioItem

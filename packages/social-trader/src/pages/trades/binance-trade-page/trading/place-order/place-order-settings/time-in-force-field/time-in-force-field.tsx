@@ -29,7 +29,6 @@ const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
       size={"small"}
       name={TRADE_FORM_FIELDS.timeInForce}
       component={SimpleTextField}
-      label={t("TIF")}
       InputComponent={Select}
     >
       {values.map(value => (

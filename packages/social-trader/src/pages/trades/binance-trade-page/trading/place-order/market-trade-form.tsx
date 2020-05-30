@@ -171,7 +171,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         asset={baseAsset}
       />
       {terminalType === "futures" && currentPositionMode === false && (
-        <Row>
+        <Row small>
           <RowItem>
             <ReduceOnlyField />
           </RowItem>

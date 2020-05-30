@@ -170,7 +170,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
-      <Row>
+      <Row small>
         <RowItem wide>
           <TimeInForceField orderType={"LIMIT"} />
         </RowItem>
