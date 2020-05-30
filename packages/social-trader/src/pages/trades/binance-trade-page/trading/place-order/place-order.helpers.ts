@@ -4,6 +4,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   getDecimalScale,
@@ -81,6 +82,7 @@ export const usePlaceOrderAutoFill = ({
   totalName: string;
   quantityName: string;
 }) => {
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
     if (!autoFill) {
@@ -98,7 +100,7 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: quantity * price,
+        amount: leverage * quantity * price,
         tickSize: tickSize
       });
       if (isNaN(value)) return;
@@ -111,7 +113,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       if (quantity && price) {
         const value = +terminalMoneyFormat({
-          amount: quantity * price,
+          amount: leverage * quantity * price,
           tickSize: tickSize
         });
         if (isNaN(value)) return;
@@ -269,6 +271,7 @@ export const useTradeSlider = ({
   totalName: string;
   quantityName: string;
 }) => {
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
     if (sliderValue === undefined) return;
@@ -281,7 +284,7 @@ export const useTradeSlider = ({
         amount: fullTotal / price,
         tickSize: stepSize
       });
-      const newTotal = +formatValue(newAmount * price, 8);
+      const newTotal = +formatValue(leverage * newAmount * price, 8);
       setValue(totalName, newTotal, true);
     }
     if (side === "SELL") {
