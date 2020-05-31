@@ -1,6 +1,9 @@
+import classNames from "classnames";
+import ImageBase from "components/avatar/image-base";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select from "components/select/select";
@@ -79,25 +82,64 @@ const _TransferForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <Row className={styles["transfer__type-block"]}>
-        <RowItem>
-          <StatisticItemInner label={t("From")}>
-            {fromSource} wallet
-          </StatisticItemInner>
-        </RowItem>
-        <RowItem className={styles["transfer__type-turn"]} onClick={handleTurn}>
-          turn
-        </RowItem>
+        <div className={styles["transfer__type-item"]}>
+          <Row>
+            <StatisticItemInner label={t("From")}>
+              <span className={styles["transfer__wallet-name"]}>
+                {fromSource}
+              </span>
+              &nbsp; wallet
+            </StatisticItemInner>
+          </Row>
+          <Row small>
+            <MutedText>
+              {getMaxValueForFuturesTransfer({ type, asset, balances: data })}{" "}
+              {asset}
+            </MutedText>
+          </Row>
+        </div>
+        <div
+          className={classNames(
+            styles["transfer__type-item"],
+            styles["transfer__type-turn-block"]
+          )}
+        >
+          <div className={styles["transfer__type-turn"]} onClick={handleTurn}>
+            <ImageBase
+              className={styles["transfer__type-turn-img"]}
+              src={
+                "https://toppng.com/public/uploads/thumbnail/ampersand-svg-png-icon-free-download-two-curved-arrows-ico-115632580090xnuxgjr2d.png"
+              }
+            />
+          </div>
+        </div>
         <RowItem hide>
           <GVHookFormField
             component={SimpleTextField}
             name={TRANSFER_FORM_FIELDS.type}
           />
         </RowItem>
-        <RowItem>
-          <StatisticItemInner label={t("To")}>
-            {toSource} wallet
-          </StatisticItemInner>
-        </RowItem>
+        <div className={styles["transfer__type-item"]}>
+          <Row>
+            <StatisticItemInner label={t("To")}>
+              <span className={styles["transfer__wallet-name"]}>
+                {toSource}
+              </span>
+              &nbsp; wallet
+            </StatisticItemInner>
+          </Row>
+          <Row small>
+            <MutedText>
+              {" "}
+              {getMaxValueForFuturesTransfer({
+                type: type === 1 ? 2 : 1,
+                asset,
+                balances: data
+              })}{" "}
+              {asset}
+            </MutedText>
+          </Row>
+        </div>
       </Row>
       <Row>
         <GVHookFormField

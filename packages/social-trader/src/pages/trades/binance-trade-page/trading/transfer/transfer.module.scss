@@ -1,8 +1,38 @@
+@import "styles/_constants";
+@import "styles/_sizes";
+
 .transfer {
+  &__type-item {
+    width: 33.3%;
+  }
+
+  &__wallet-name {
+    text-transform: capitalize;
+  }
+
   &__type-block {
     justify-content: space-between;
   }
+
+  &__type-turn-block {
+    display: flex;
+    justify-content: center;
+  }
+
   &__type-turn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $padding-xxsmall;
+    border-radius: 50%;
+    box-shadow: $box-shadow-2;
+    user-select: none;
     cursor: pointer;
+  }
+
+  &__type-turn-img {
+    filter: invert(100%);
+    width: 20px;
+    height: 20px;
   }
 }
