@@ -21,7 +21,7 @@ import {
   depthTransform,
   tradeTransform,
   transformKline
-} from "../binance-ws.helpers";
+} from "../spot/binance-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
 
