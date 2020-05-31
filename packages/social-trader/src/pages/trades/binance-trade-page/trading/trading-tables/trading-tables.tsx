@@ -25,6 +25,7 @@ interface Props {}
 
 const _TradingTables: React.FC<Props> = () => {
   const { terminalType } = useContext(TradingInfoContext);
+  const isFutures = terminalType === "futures";
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_ORDERS);
   return (
@@ -39,7 +40,7 @@ const _TradingTables: React.FC<Props> = () => {
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
           <GVTab
-            visible={terminalType === "futures"}
+            visible={isFutures}
             value={TABS.POSITIONS}
             label={t("Positions")}
           />
@@ -49,7 +50,7 @@ const _TradingTables: React.FC<Props> = () => {
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>
-        {tab === TABS.POSITIONS && <PositionsContainer />}
+        {tab === TABS.POSITIONS && isFutures && <PositionsContainer />}
         {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
         {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
         {tab === TABS.FUNDS && <FundsContainer />}
