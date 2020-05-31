@@ -32,7 +32,7 @@ const _OrderHistoryRow: React.FC<Props> = ({
   const { tickSize, stepSize } = useContext(TradingInfoContext);
   return (
     <TableRow>
-      <TableCell>{formatDate(time)}</TableCell>
+      <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>
