@@ -10,6 +10,7 @@ import {
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   AssetBalance,
@@ -198,15 +199,11 @@ export const futuresAccountUpdateEventTransform = (
   socketData: any
 ): FuturesAccountUpdateEvent => {
   return {
-    eventType: socketData.e,
+    eventType: USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE,
     eventTime: socketData.E,
     transactionTime: socketData.T,
-    accountUpdate: {
-      balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
-      positions: (socketData.a?.P || []).map(
-        futuresAccountEventPositionTransform
-      )
-    }
+    balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
+    positions: (socketData.a?.P || []).map(futuresAccountEventPositionTransform)
   };
 };
 
@@ -224,4 +221,6 @@ export const futuresTradeOrderUpdateEventTransform = (
 export const filterPositionEventsStream = (
   userStream: Observable<any>
 ): Observable<FuturesAccountUpdateEvent> =>
-  userStream.pipe(filter(info => info.eventType === "ACCOUNT_UPDATE"));
+  userStream.pipe(
+    filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
+  );

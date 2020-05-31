@@ -32,7 +32,7 @@ export const FundsContainer: React.FC = () => {
   useEffect(() => {
     if (!socketData) return;
     const updatedList = { ...list };
-    const socketDataBalances = socketData.accountUpdate.balances;
+    const socketDataBalances = socketData.balances;
     socketDataBalances.forEach(({ asset, free }) => {
       updatedList[asset] = { ...updatedList[asset], free };
     });
